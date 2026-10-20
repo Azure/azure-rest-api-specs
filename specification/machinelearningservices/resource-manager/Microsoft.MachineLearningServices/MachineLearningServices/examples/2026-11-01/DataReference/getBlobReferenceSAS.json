@@ -1,25 +1,25 @@
 {
   "parameters": {
-    "name": "string",
+    "name": "sample-data-reference",
     "api-version": "2026-11-01",
     "body": {
-      "assetId": "string",
-      "blobUri": "https://www.contoso.com/example"
+      "assetId": "azureml://registries/registryName/data/sample-data/versions/1",
+      "blobUri": "https://examplestorage.blob.core.windows.net/datasets/sample.csv"
     },
     "registryName": "registryName",
     "resourceGroupName": "test-rg",
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "version": "string"
+    "version": "1"
   },
   "responses": {
     "200": {
       "body": {
         "blobReferenceForConsumption": {
-          "blobUri": "https://www.contoso.com/example",
+          "blobUri": "https://examplestorage.blob.core.windows.net/datasets/sample.csv",
           "credential": {
             "credentialType": "NoCredentials"
           },
-          "storageAccountArmId": "string"
+          "storageAccountArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/examplestorage"
         }
       },
       "headers": {}

@@ -26,6 +26,7 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model RaiBlocklistPropertiesBasicResource is Azure.ResourceManager.ProxyResource<
@@ -52,6 +53,7 @@ model RaiBlocklistPropertiesBasicResource is Azure.ResourceManager.ProxyResource
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
 @armResourceOperations
 interface RaiBlocklistPropertiesBasicResources {
@@ -109,6 +111,7 @@ interface RaiBlocklistPropertiesBasicResources {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @removed(Versions.v2026_11_01)
   @summary("Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.")
   @action("addRaiBlocklistItems")
@@ -127,6 +130,7 @@ interface RaiBlocklistPropertiesBasicResources {
       @removed(Versions.v2026_07_01)
       @added(Versions.v2026_07_15_preview)
       @removed(Versions.v2026_09_01)
+      @added(Versions.v2026_09_15_preview)
       @removed(Versions.v2026_11_01)
       _?: RaiBlocklistItemPropertiesBasicResource[];
     },

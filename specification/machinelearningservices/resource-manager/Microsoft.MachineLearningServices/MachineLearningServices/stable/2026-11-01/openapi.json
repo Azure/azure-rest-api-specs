@@ -5506,6 +5506,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/capabilityHosts": {
+      "get": {
+        "operationId": "CapabilityHosts_List",
+        "tags": [
+          "CapabilityHosts"
+        ],
+        "summary": "List capability hosts in the workspace.",
+        "description": "Lists the capability hosts associated with the specified workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Azure Machine Learning Workspace Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityHostListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List capability hosts in the workspace.": {
+            "$ref": "./examples/CapabilityHost/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/capabilityHosts/{name}": {
       "get": {
         "operationId": "CapabilityHosts_Get",
@@ -16289,8 +16340,10 @@
       "properties": {
         "key": {
           "type": "string",
+          "format": "password",
           "description": "Storage account key.",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-secret": true
         }
       },
       "allOf": [
@@ -16317,11 +16370,15 @@
       "properties": {
         "userKubeConfig": {
           "type": "string",
-          "description": "Content of kubeconfig file that can be used to connect to the Kubernetes cluster."
+          "format": "password",
+          "description": "Content of kubeconfig file that can be used to connect to the Kubernetes cluster.",
+          "x-ms-secret": true
         },
         "adminKubeConfig": {
           "type": "string",
-          "description": "Content of kubeconfig file that can be used to connect to the Kubernetes cluster."
+          "format": "password",
+          "description": "Content of kubeconfig file that can be used to connect to the Kubernetes cluster.",
+          "x-ms-secret": true
         },
         "imagePullSecretName": {
           "type": "string",
@@ -16808,7 +16865,8 @@
             "value": "Deleting"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "AssetReferenceBase": {
       "type": "object",
@@ -18051,6 +18109,27 @@
         }
       ]
     },
+    "CapabilityHostListResult": {
+      "type": "object",
+      "description": "The response of a CapabilityHost list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CapabilityHost items on this page",
+          "items": {
+            "$ref": "#/definitions/CapabilityHost"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "CapabilityHostProperties": {
       "type": "object",
       "properties": {
@@ -18178,7 +18257,8 @@
             "value": "Deleting"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "CategoricalDataDriftMetric": {
       "type": "string",
@@ -18391,8 +18471,10 @@
       "properties": {
         "certificate": {
           "type": "string",
+          "format": "password",
           "description": "Service principal certificate.",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-secret": true
         }
       },
       "allOf": [
@@ -22380,7 +22462,8 @@
             "value": "Canceled"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "DeploymentResourceConfiguration": {
       "type": "object",
@@ -23151,7 +23234,8 @@
             "value": "Canceled"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "EndpointScheduleAction": {
       "type": "object",
@@ -27842,7 +27926,8 @@
             "value": "Canceled"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "MarketplaceSubscriptionResourceArmPaginatedResult": {
       "type": "object",
@@ -30243,7 +30328,8 @@
             "value": "Unknown"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "PendingUploadCredentialDto": {
       "type": "object",
@@ -30604,7 +30690,8 @@
             "value": "Failed"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "PrivateEndpointDestination": {
       "type": "object",
@@ -30837,7 +30924,8 @@
             "value": "Canceled"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ProvisioningStatus": {
       "type": "string",
@@ -31230,8 +31318,10 @@
         },
         "keyValue": {
           "type": "string",
+          "format": "password",
           "description": "The value the key is set to.",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -31351,11 +31441,49 @@
           "x-nullable": true
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/RegistryPrivateEndpointConnectionProvisioningState",
           "description": "One of null, \"Succeeded\", \"Provisioning\", \"Failed\". While not approved, it's null.",
-          "x-nullable": true
+          "x-nullable": true,
+          "readOnly": true
         }
       }
+    },
+    "RegistryPrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of a registry private endpoint connection.",
+      "enum": [
+        "Succeeded",
+        "Provisioning",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "RegistryPrivateEndpointConnectionProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The connection was provisioned successfully."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The connection is being provisioned."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Provisioning failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Provisioning was canceled."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "RegistryPrivateLinkServiceConnectionState": {
       "type": "object",
@@ -32025,9 +32153,10 @@
       "properties": {
         "sasUri": {
           "type": "string",
-          "format": "uri",
+          "format": "password",
           "description": "Full SAS Uri, including the storage, container/blob path and SAS token",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-secret": true
         }
       },
       "allOf": [
@@ -32126,8 +32255,10 @@
       "properties": {
         "sasToken": {
           "type": "string",
+          "format": "password",
           "description": "Storage container SAS token.",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-secret": true
         }
       },
       "allOf": [
@@ -32396,7 +32527,8 @@
             "value": "Canceled"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ScheduleResourceArmPaginatedResult": {
       "type": "object",
@@ -32857,8 +32989,10 @@
       "properties": {
         "clientSecret": {
           "type": "string",
+          "format": "password",
           "description": "Service principal secret.",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-secret": true
         }
       },
       "allOf": [
