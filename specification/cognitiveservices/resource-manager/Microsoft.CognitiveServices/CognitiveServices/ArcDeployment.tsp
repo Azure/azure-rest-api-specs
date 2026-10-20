@@ -192,6 +192,14 @@ interface ArcDeployments {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ArcDeployment,
+    Parameters = {
+      /**
+       * Whether to delete the Arc deployment even when its associated extension is disconnected. Defaults to false.
+       */
+      @added(Versions.v2026_11_15_preview)
+      @query("force")
+      force?: boolean = false;
+    },
     LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void>,
     Response =
       | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<
