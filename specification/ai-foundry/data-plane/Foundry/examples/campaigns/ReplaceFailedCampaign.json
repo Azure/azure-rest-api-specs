@@ -8,23 +8,21 @@
     "agent_name": "contoso-reminder-agent",
     "campaign_name": "recipient-reminders",
     "Operation-Id": "af4b47b9-760c-41ac-85ea-16e99b2f0602",
-    "body": {
-      "inputs": {
-        "connection_name": "contoso-phone-provider",
-        "source": {
-          "type": "phone_number",
-          "value": "+14255550100"
-        },
-        "schedule": {
-          "type": "recipient"
-        },
-        "recipient_dataset": {
-          "name": "reminder-recipients",
-          "version": "2"
-        }
+    "If-Match": "\"control-reminders-instance1-failed\"",
+    "campaign": {
+      "connection_name": "contoso-phone-provider",
+      "source": {
+        "type": "phone_number",
+        "value": "+14255550100"
+      },
+      "schedule": {
+        "type": "recipient"
+      },
+      "recipient_dataset": {
+        "name": "reminder-recipients",
+        "version": "2"
       }
-    },
-    "If-Match": "\"control-reminders-instance1-failed\""
+    }
   },
   "responses": {
     "200": {
@@ -37,20 +35,6 @@
       "body": {
         "name": "recipient-reminders",
         "status": "validating",
-        "inputs": {
-          "connection_name": "contoso-phone-provider",
-          "source": {
-            "type": "phone_number",
-            "value": "+14255550100"
-          },
-          "schedule": {
-            "type": "recipient"
-          },
-          "recipient_dataset": {
-            "name": "reminder-recipients",
-            "version": "2"
-          }
-        },
         "etag": "\"control-reminders-instance1-round2-validating\"",
         "operation_id": "af4b47b9-760c-41ac-85ea-16e99b2f0602",
         "created_at": 1790071200,
@@ -62,6 +46,18 @@
           "failed": 0,
           "cancelled": 0,
           "expired": 0
+        },
+        "connection_name": "contoso-phone-provider",
+        "source": {
+          "type": "phone_number",
+          "value": "+14255550100"
+        },
+        "schedule": {
+          "type": "recipient"
+        },
+        "recipient_dataset": {
+          "name": "reminder-recipients",
+          "version": "2"
         }
       }
     }

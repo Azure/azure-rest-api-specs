@@ -29,7 +29,7 @@ union TelephonyCampaignInputValue {
 
 /** One recipient in an inline campaign input. Each input position is a separate intended call, including repeated destinations. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignRecipient {
+model TelephonyRecipient {
   /** Recipient destination address. Initial provider support accepts phone_number; non-phone variants can be introduced without replacing this field. Unsupported destination types fail preparation. */
   destination: TelephonyAddress;
 
@@ -68,13 +68,13 @@ model TelephonyCampaignSchedule {
 
 /** Dispatch automatically as soon as preparation succeeds and capacity permits. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model ImmediateTelephonyCampaignSchedule extends TelephonyCampaignSchedule {
+model ImmediateSchedule extends TelephonyCampaignSchedule {
   type: TelephonyCampaignScheduleType.immediate;
 }
 
 /** Apply the same earliest dispatch time to every recipient. A past time is valid and makes work eligible after preparation succeeds. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model ScheduledTelephonyCampaignSchedule extends TelephonyCampaignSchedule {
+model AtTimeSchedule extends TelephonyCampaignSchedule {
   type: TelephonyCampaignScheduleType.scheduled;
 
   /** Common earliest dispatch time; successful preparation is required. */
@@ -83,13 +83,12 @@ model ScheduledTelephonyCampaignSchedule extends TelephonyCampaignSchedule {
 
 /** Read every recipient's earliest dispatch time from the fixed scheduled_at field. Dataset CSV/JSON/JSONL values use RFC 3339 with an explicit offset or Z; inline values use FoundryTimestamp. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model RecipientTelephonyCampaignSchedule extends TelephonyCampaignSchedule {
+model PerRecipientSchedule extends TelephonyCampaignSchedule {
   type: TelephonyCampaignScheduleType.recipient;
 }
 
-/** Complete Campaign configuration supplied on creation or replacement of failed preparation. Inputs stay fixed throughout a validation round and subsequent execution. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignInputs {
+/** Complete writable configuration shared by Campaign creation, replacement and reads. */
+alias TelephonyCampaignConfiguration = {
   /** Human-readable name of the provider connection in the current project. */
   @minLength(1)
   @maxLength(256)
@@ -101,7 +100,8 @@ model TelephonyCampaignInputs {
   /** Inline recipients, mutually exclusive with recipient_dataset. Exactly one source is required; neither, both or an empty array returns 400. Reads omit this array; retain the original submission for row correlation. Creation body limit: 1 MiB decoded UTF-8. */
   @minItems(1)
   @maxItems(100)
-  recipients?: TelephonyCampaignRecipient[];
+  @visibility(Lifecycle.Create)
+  recipients?: TelephonyRecipient[];
 
   /**
    * Generic same-project Dataset reference, mutually exclusive with recipients. Exactly one source is required.
@@ -129,24 +129,7 @@ model TelephonyCampaignInputs {
 
   /** Per-recipient provider retries. Omit for one initial attempt with no retry. Generated CallJobs return fixed_interval with max_attempts=1 and interval=0 seconds for an omitted policy. */
   retry_policy?: TelephonyOutboundRetryPolicy;
-}
-
-/** Inputs accepted when creating the name-addressed Campaign. Server state and the path name cannot be supplied in the body. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@Azure.ClientGenerator.Core.clientName(
-  "CreateTelephonyCampaignContent",
-  "csharp"
-)
-model CreateTelephonyCampaignRequest {
-  /** Complete configuration and recipient source for a new validation round; omitted optional fields use defaults rather than preserving previous values. */
-  inputs: TelephonyCampaignInputs;
-}
-
-/** Readable configuration. Inline arrays are omitted. recipient_dataset is present only for Dataset input and reports the concrete version once resolved. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignInputSummary {
-  ...OmitProperties<TelephonyCampaignInputs, "recipients">;
-}
+};
 
 /** Batch size and mutually exclusive execution counts per recipient intent. Counts are zero until preparation succeeds and all CallJobs are generated, then sum to total_recipients. Validation is reported through Campaign status and validation_errors. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -203,6 +186,8 @@ union TelephonyCampaignStatus {
 /** An Agent-owned Campaign. Creation and replacement of failed preparation authorize execution after validation; cancel and delete control its lifecycle. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaign {
+  ...TelephonyCampaignConfiguration;
+
   /** Business execution state. Each asynchronous action has its own retained operation monitor. */
   @visibility(Lifecycle.Read)
   status: TelephonyCampaignStatus;
@@ -214,10 +199,6 @@ model TelephonyCampaign {
   /** Immutable customer-chosen name, unique within the project and Agent. */
   @visibility(Lifecycle.Read)
   name: TelephonyCampaignName;
-
-  /** Configuration of the current validation round. A failed round permits full replacement by PUT. Reads omit inline recipient arrays; validation errors and CallJobs belong to the current round. */
-  @visibility(Lifecycle.Read)
-  inputs: TelephonyCampaignInputSummary;
 
   /** Creation time. */
   @visibility(Lifecycle.Read) created_at: FoundryTimestamp;
@@ -483,7 +464,7 @@ interface TelephonyCampaigns {
       @header("If-Match") if_match?: Azure.Core.eTag;
 
       /** Complete Campaign configuration for creation or failed-state replacement. */
-      @body body: CreateTelephonyCampaignRequest;
+      @body campaign: TelephonyCampaign;
     },
     | TelephonyCampaignCreatedResponse<201>
     | TelephonyCampaignCreatedResponse<200>

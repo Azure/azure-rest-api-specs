@@ -89,11 +89,6 @@ using Azure.AI.Projects;
   "RealtimeServerErrorDetails",
   "java"
 );
-@@clientName(
-  PSTNTelephonyTransferDestination,
-  "PstnTelephonyTransferDestination",
-  "java"
-);
 
 // The imported realtime item hierarchy has a second role discriminator below `type: message`.
 // Mark each message leaf and content shape explicitly so Java emits constructors usable by session clients.
@@ -211,18 +206,6 @@ using Azure.AI.Projects;
   "CreateAgentVersionFromManifestInput"
 );
 @@clientName(UpdateToolboxRequest, "UpdateToolboxInput");
-
-// Java names operation request-body models as inputs.
-@@clientName(
-  CreateTeamsPhoneExtensibilityTelephonyBindingRequest,
-  "CreateTeamsPhoneExtensibilityTelephonyBindingInput"
-);
-@@clientName(CreateTelephonyBindingRequest, "CreateTelephonyBindingInput");
-@@clientName(CreateTelephonyCallJobRequest, "CreateTelephonyCallJobInput");
-@@clientName(
-  CreateTwilioTelephonyBindingRequest,
-  "CreateTwilioTelephonyBindingInput"
-);
 
 // Replace OpenAPI schema-derived names with domain-oriented names.
 @@clientName(

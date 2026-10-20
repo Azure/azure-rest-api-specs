@@ -8,19 +8,17 @@
     "agent_name": "contoso-reminder-agent",
     "campaign_name": "recipient-reminders",
     "Operation-Id": "e17c2d94-132f-4cef-8fc2-61841468326a",
-    "body": {
-      "inputs": {
-        "connection_name": "contoso-phone-provider",
-        "source": {
-          "type": "phone_number",
-          "value": "+14255550100"
-        },
-        "schedule": {
-          "type": "recipient"
-        },
-        "recipient_dataset": {
-          "name": "reminder-recipients"
-        }
+    "campaign": {
+      "connection_name": "contoso-phone-provider",
+      "source": {
+        "type": "phone_number",
+        "value": "+14255550100"
+      },
+      "schedule": {
+        "type": "recipient"
+      },
+      "recipient_dataset": {
+        "name": "reminder-recipients"
       }
     }
   },
@@ -35,19 +33,6 @@
       "body": {
         "name": "recipient-reminders",
         "status": "validating",
-        "inputs": {
-          "connection_name": "contoso-phone-provider",
-          "source": {
-            "type": "phone_number",
-            "value": "+14255550100"
-          },
-          "schedule": {
-            "type": "recipient"
-          },
-          "recipient_dataset": {
-            "name": "reminder-recipients"
-          }
-        },
         "etag": "\"control-reminders-instance1-v1\"",
         "operation_id": "e17c2d94-132f-4cef-8fc2-61841468326a",
         "created_at": 1790071200,
@@ -60,7 +45,18 @@
           "cancelled": 0,
           "expired": 0
         },
-        "locked_agent_version": "12"
+        "locked_agent_version": "12",
+        "connection_name": "contoso-phone-provider",
+        "source": {
+          "type": "phone_number",
+          "value": "+14255550100"
+        },
+        "schedule": {
+          "type": "recipient"
+        },
+        "recipient_dataset": {
+          "name": "reminder-recipients"
+        }
       }
     }
   }

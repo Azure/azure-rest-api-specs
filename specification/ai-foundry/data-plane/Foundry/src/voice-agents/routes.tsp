@@ -483,6 +483,7 @@ alias TelephonyCallListTimeQueryParameters = {
 interface AgentTelephony {
   /** Creates a telephony binding for the voice agent named in the path. */
   @summary("Create an agent telephony binding")
+  @parameterVisibility(Lifecycle.Create)
   @post
   @route("/agents/{agent_name}/telephony/bindings")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -495,7 +496,7 @@ interface AgentTelephony {
       ...Azure.Core.RepeatabilityRequestHeaders;
 
       /** The provider-specific binding to create. */
-      @body telephony_binding: CreateTelephonyBindingRequest;
+      @body binding: TelephonyBinding;
     },
     TelephonyBindingCreatedResponse
   >;
@@ -694,6 +695,7 @@ interface AgentTelephony {
 
   /** Creates one durable direct outbound call job. Each attempt resolves the owning Agent's endpoint execution version before validation and uses that concrete version for its voice session. */
   @summary("Create an outbound telephony call job")
+  @parameterVisibility(Lifecycle.Create)
   @post
   @route("/agents/{agent_name}/telephony/call_jobs")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -710,7 +712,7 @@ interface AgentTelephony {
       idempotency_key: string;
 
       /** The direct outbound call to create. */
-      @body body: CreateTelephonyCallJobRequest;
+      @body job: TelephonyCallJob;
     },
     TelephonyCallJobAcceptedResponse
   >;
