@@ -6542,7 +6542,7 @@
         },
         "matchers": {
           "type": "array",
-          "description": "Action-specific target matching criteria evaluated during execution. When provided,\nthe collection must contain either `logicalZone` and `region`, or `physicalZone`.\nMatcher names must be unique, the two modes cannot be combined, and the service\nenforces the cross-item combination at runtime.",
+          "description": "Action-specific target matching criteria evaluated during execution. When provided,\nthe collection must contain either `logicalZone` and `location`, or `physicalZone`.\nMatcher names must be unique, the two modes cannot be combined, and the service\nenforces the cross-item combination at runtime.",
           "minItems": 1,
           "maxItems": 2,
           "items": {
@@ -6585,7 +6585,7 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/ScenarioActionMatcherName",
-          "description": "The matcher name, such as `logicalZone`, `physicalZone`, or `region`."
+          "description": "The matcher name, such as `logicalZone`, `physicalZone`, or `location`."
         },
         "value": {
           "type": "string",
@@ -6603,7 +6603,7 @@
       "enum": [
         "logicalZone",
         "physicalZone",
-        "region"
+        "location"
       ],
       "x-ms-enum": {
         "name": "ScenarioActionMatcherName",
@@ -6620,9 +6620,9 @@
             "description": "Match targets by physical availability zone."
           },
           {
-            "name": "Region",
-            "value": "region",
-            "description": "Match targets by Azure region."
+            "name": "Location",
+            "value": "location",
+            "description": "Match targets by Azure location."
           }
         ]
       }
@@ -7268,12 +7268,12 @@
           {
             "name": "NotApplicable",
             "value": "NotApplicable",
-            "description": "The action does not apply to the target."
+            "description": "Evaluation determined that the action cannot apply because the target lacks required\nproperties or capabilities, or does not satisfy the action criteria. For example,\na SQL server without failover configured."
           },
           {
             "name": "Skipped",
             "value": "Skipped",
-            "description": "The action was skipped for the target."
+            "description": "The action applies, but execution intentionally made no change because the target is\nalready in the desired state or the change would not be safely recoverable. For example,\na virtual machine that is already shut down."
           },
           {
             "name": "Failed",
