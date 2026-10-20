@@ -6540,6 +6540,18 @@
             "key"
           ]
         },
+        "matchers": {
+          "type": "array",
+          "description": "Action-specific target matching criteria evaluated during execution. When provided,\nthe collection must contain either `logicalZone` and `region`, or `physicalZone`.\nMatcher names must be unique, the two modes cannot be combined, and the service\nenforces the cross-item combination at runtime.",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/definitions/ScenarioActionMatcher"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
         "runAfter": {
           "$ref": "#/definitions/RunAfter",
           "description": "Action dependencies that control when this action starts."
@@ -6566,6 +6578,54 @@
         "actionId",
         "duration"
       ]
+    },
+    "ScenarioActionMatcher": {
+      "type": "object",
+      "description": "Model that represents an action-specific target matching criterion.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/ScenarioActionMatcherName",
+          "description": "The matcher name, such as `logicalZone`, `physicalZone`, or `region`."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value that targets must match. Supports template macro syntax."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "ScenarioActionMatcherName": {
+      "type": "string",
+      "description": "Enum of the supported action matcher names.",
+      "enum": [
+        "logicalZone",
+        "physicalZone",
+        "region"
+      ],
+      "x-ms-enum": {
+        "name": "ScenarioActionMatcherName",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "LogicalZone",
+            "value": "logicalZone",
+            "description": "Match targets by logical availability zone."
+          },
+          {
+            "name": "PhysicalZone",
+            "value": "physicalZone",
+            "description": "Match targets by physical availability zone."
+          },
+          {
+            "name": "Region",
+            "value": "region",
+            "description": "Match targets by Azure region."
+          }
+        ]
+      }
     },
     "ScenarioConfiguration": {
       "type": "object",
@@ -6819,6 +6879,38 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "ScenarioRunEffectiveTarget": {
+      "type": "object",
+      "description": "Model that represents the outcome for a concrete action target.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The target resource ID.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/ScenarioRunTargetState",
+          "description": "The target execution state.",
+          "readOnly": true
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When target processing started.",
+          "readOnly": true
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When target processing completed.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "state"
       ]
     },
     "ScenarioRunListResult": {
@@ -7082,9 +7174,9 @@
       "properties": {
         "resources": {
           "type": "array",
-          "description": "The resources associated with the specified action.",
+          "description": "The resources associated with the specified action, including the concrete targets\nevaluated during execution.",
           "items": {
-            "$ref": "#/definitions/ScenarioRunResource"
+            "$ref": "#/definitions/ScenarioRunSummaryResource"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -7129,6 +7221,68 @@
         "actionUrn",
         "state"
       ]
+    },
+    "ScenarioRunSummaryResource": {
+      "type": "object",
+      "description": "Model that represents a resource associated with a scenario run action.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource ID.",
+          "readOnly": true
+        },
+        "affectedResources": {
+          "type": "array",
+          "description": "The resources affected during action execution.",
+          "items": {
+            "$ref": "#/definitions/ScenarioRunEffectiveTarget"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ScenarioRunTargetState": {
+      "type": "string",
+      "description": "Enum of the execution states for a concrete action target.",
+      "enum": [
+        "Succeeded",
+        "NotApplicable",
+        "Skipped",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ScenarioRunTargetState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The action completed successfully for the target."
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The action does not apply to the target."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "The action was skipped for the target."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Evaluation, authorization, lookup, mutation, or cleanup failed for the target."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "ScenarioRunWarning": {
       "type": "object",

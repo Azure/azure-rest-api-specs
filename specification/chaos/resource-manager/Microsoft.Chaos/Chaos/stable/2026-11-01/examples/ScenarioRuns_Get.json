@@ -21,10 +21,7 @@
           "status": "PartiallySucceeded",
           "resources": [
             {
-              "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1"
-            },
-            {
-              "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2"
+              "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachineScaleSets/exampleVMSS"
             }
           ],
           "excludedResources": [
@@ -41,10 +38,27 @@
               "completedAt": "2025-01-20T14:40:00.000Z",
               "resources": [
                 {
-                  "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1"
-                },
-                {
-                  "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2"
+                  "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachineScaleSets/exampleVMSS",
+                  "affectedResources": [
+                    {
+                      "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachineScaleSets/exampleVMSS/virtualMachines/0",
+                      "state": "Succeeded",
+                      "startedAt": "2025-01-20T14:30:05.000Z",
+                      "completedAt": "2025-01-20T14:40:00.000Z"
+                    },
+                    {
+                      "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachineScaleSets/exampleVMSS/virtualMachines/1",
+                      "state": "NotApplicable",
+                      "startedAt": "2025-01-20T14:30:05.000Z",
+                      "completedAt": "2025-01-20T14:30:06.000Z"
+                    },
+                    {
+                      "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachineScaleSets/exampleVMSS/virtualMachines/2",
+                      "state": "Skipped",
+                      "startedAt": "2025-01-20T14:30:05.000Z",
+                      "completedAt": "2025-01-20T14:30:06.000Z"
+                    }
+                  ]
                 }
               ]
             },

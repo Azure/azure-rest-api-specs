@@ -267,6 +267,18 @@ model ScenarioAction {
   parameters?: KeyValuePair[];
 
   /**
+   * Action-specific target matching criteria evaluated during execution. When provided,
+   * the collection must contain either `logicalZone` and `region`, or `physicalZone`.
+   * Matcher names must be unique, the two modes cannot be combined, and the service
+   * enforces the cross-item combination at runtime.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @minItems(1)
+  @maxItems(2)
+  @identifiers(#["name"])
+  matchers?: ScenarioActionMatcher[];
+
+  /**
    * Action dependencies that control when this action starts.
    */
   runAfter?: RunAfter;
@@ -293,6 +305,44 @@ model ScenarioAction {
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   failureBehavior?: FailureBehavior;
+}
+
+/**
+ * Model that represents an action-specific target matching criterion.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ScenarioActionMatcher {
+  /**
+   * The matcher name, such as `logicalZone`, `physicalZone`, or `region`.
+   */
+  name: ScenarioActionMatcherName;
+
+  /**
+   * The value that targets must match. Supports template macro syntax.
+   */
+  value: string;
+}
+
+/**
+ * Enum of the supported action matcher names.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "The matcher name set is intentionally fixed and non-extensible."
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+enum ScenarioActionMatcherName {
+  /**
+   * Match targets by logical availability zone.
+   */
+  LogicalZone: "logicalZone",
+
+  /**
+   * Match targets by physical availability zone.
+   */
+  PhysicalZone: "physicalZone",
+
+  /**
+   * Match targets by Azure region.
+   */
+  Region: "region",
 }
 
 /**
