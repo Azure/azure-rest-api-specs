@@ -22326,6 +22326,56 @@
         }
       ]
     },
+    "RaiPolicyAssignmentStatus": {
+      "type": "object",
+      "description": "Sanitized identity, eligibility and native outcome of one assignment member.",
+      "properties": {
+        "assignmentId": {
+          "type": "string",
+          "description": "Native Azure Policy assignment identifier."
+        },
+        "definitionId": {
+          "type": "string",
+          "description": "Native policy definition identifier."
+        },
+        "initiativeReferenceId": {
+          "type": "string",
+          "description": "Policy definition reference within an initiative, when applicable."
+        },
+        "assignmentRevision": {
+          "type": "string",
+          "description": "Assignment revision recorded in the complete observation."
+        },
+        "effect": {
+          "type": "string",
+          "description": "Effective native policy effect."
+        },
+        "enforcementMode": {
+          "type": "string",
+          "description": "Normalized assignment enforcement mode."
+        },
+        "enrollmentStatus": {
+          "type": "string",
+          "description": "Assignment enrollment status."
+        },
+        "exemptionStatus": {
+          "type": "string",
+          "description": "Exemption status at observation time."
+        },
+        "outcome": {
+          "type": "string",
+          "description": "Native final-candidate finding, including explicit NotApplicable when returned."
+        }
+      },
+      "required": [
+        "assignmentId",
+        "definitionId",
+        "effect",
+        "enforcementMode",
+        "enrollmentStatus",
+        "exemptionStatus"
+      ]
+    },
     "RaiPolicyContentFilter": {
       "type": "object",
       "description": "Azure OpenAI Content Filter.",
@@ -22426,6 +22476,34 @@
         "source"
       ]
     },
+    "RaiPolicyFailureStatus": {
+      "type": "object",
+      "description": "Durable failed reconciliation, reported separately from accepted configuration.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Sanitized failure code."
+        },
+        "operationId": {
+          "type": "string",
+          "description": "Original durable reconciliation operation identity."
+        },
+        "recordedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time the failure was durably recorded."
+        },
+        "observation": {
+          "$ref": "#/definitions/RaiPolicyObservationStatus",
+          "description": "Assignment observation associated with the failure, if available."
+        }
+      },
+      "required": [
+        "code",
+        "operationId",
+        "recordedAt"
+      ]
+    },
     "RaiPolicyFormat": {
       "type": "string",
       "description": "The public representation used by a RAI policy body.",
@@ -22449,6 +22527,86 @@
           }
         ]
       }
+    },
+    "RaiPolicyGovernanceStatus": {
+      "type": "object",
+      "description": "Accepted identity and observation status, separate from current runtime behavior.",
+      "properties": {
+        "contractVersion": {
+          "type": "number",
+          "description": "Version of the source/effective governance view.",
+          "enum": [
+            1
+          ]
+        },
+        "state": {
+          "type": "string",
+          "description": "Latest configuration or work state, such as Accepted, Pending, Denied or EvaluationFailed."
+        },
+        "sourceStatus": {
+          "type": "string",
+          "description": "Whether original source is Retained or OriginalSourceUnavailable."
+        },
+        "isLastKnownGood": {
+          "type": "boolean",
+          "description": "Whether the previous accepted effective configuration is retained during pending or failed work."
+        },
+        "incarnation": {
+          "type": "string",
+          "description": "Incarnation of the accepted policy, replaced on delete and recreate."
+        },
+        "acceptedRevision": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Monotonic accepted revision within the policy incarnation."
+        },
+        "sourceRevision": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Revision of the retained customer source."
+        },
+        "resourceETag": {
+          "type": "string",
+          "description": "Original quoted strong resource ETag for the accepted configuration.",
+          "x-ms-client-name": "resourceEtag"
+        },
+        "semanticDigest": {
+          "type": "string",
+          "description": "Digest of accepted effective executable semantics."
+        },
+        "dependencyDigest": {
+          "type": "string",
+          "description": "Digest of the accepted frozen dependency closure."
+        },
+        "workRevision": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Revision of the most recently reserved work, including failed work."
+        },
+        "operationId": {
+          "type": "string",
+          "description": "Durable operation identity, distinct from a request correlation ID."
+        },
+        "workStatus": {
+          "type": "string",
+          "description": "Durable work status, such as Prepared, Accepted or Failed."
+        },
+        "acceptedObservation": {
+          "$ref": "#/definitions/RaiPolicyObservationStatus",
+          "description": "Observation under which the effective configuration was accepted."
+        },
+        "observedFailure": {
+          "$ref": "#/definitions/RaiPolicyFailureStatus",
+          "description": "Separately recorded failed reconciliation, without replacing accepted source or effective state."
+        }
+      },
+      "required": [
+        "contractVersion",
+        "state",
+        "sourceStatus",
+        "isLastKnownGood",
+        "workRevision"
+      ]
     },
     "RaiPolicyListResult": {
       "type": "object",
@@ -22502,10 +22660,73 @@
         ]
       }
     },
+    "RaiPolicyObservationStatus": {
+      "type": "object",
+      "description": "Bounded assignment observation for accepted configuration or a failed reconciliation.",
+      "properties": {
+        "snapshotId": {
+          "type": "string",
+          "description": "Opaque complete-assignment observation identity."
+        },
+        "sourceWatermark": {
+          "type": "string",
+          "description": "Assignment-source watermark for this observation."
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time the applicable assignments were observed."
+        },
+        "validUntil": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End of this observation's bounded validity interval."
+        },
+        "expired": {
+          "type": "boolean",
+          "description": "Whether the observation expired. Expiry alone does not revoke the last-known-good configuration."
+        },
+        "evaluationOutcome": {
+          "type": "string",
+          "description": "Aggregate final-candidate outcome, such as Compliant, Audit or Deny."
+        },
+        "provenanceStatus": {
+          "type": "string",
+          "description": "Whether complete recorded assignment provenance is available."
+        },
+        "assignments": {
+          "type": "array",
+          "description": "Sanitized assignment findings. Omitted from collection response summaries.",
+          "maxItems": 256,
+          "items": {
+            "$ref": "#/definitions/RaiPolicyAssignmentStatus"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "snapshotId",
+        "sourceWatermark",
+        "observedAt",
+        "validUntil",
+        "expired",
+        "provenanceStatus"
+      ]
+    },
     "RaiPolicyProperties": {
       "type": "object",
       "description": "Azure OpenAI Content Filters properties.",
       "properties": {
+        "sourceProperties": {
+          "$ref": "#/definitions/RaiPolicySourceProperties",
+          "description": "Retained customer-authored ACS properties. Ordinary policy properties remain the accepted\neffective configuration. To edit source, submit these fields as ordinary properties in a\nfull PUT. A full PUT of effective authoring properties explicitly adopts them as source.\nOmitted when original source is unavailable and on collection responses.",
+          "readOnly": true
+        },
+        "governanceStatus": {
+          "$ref": "#/definitions/RaiPolicyGovernanceStatus",
+          "description": "Accepted configuration and later observed work. This is not runtime enforcement evidence.",
+          "readOnly": true
+        },
         "format": {
           "$ref": "#/definitions/RaiPolicyFormat",
           "description": "The policy representation. Omission selects ContentFilters when creating a policy. ACS policy\ncreation and replacement require ACS.",
@@ -22584,6 +22805,62 @@
           "description": "Egress (outbound network) policy controlling which external endpoints sandboxed\nagents can reach. Includes rules with Allow/Deny/Transform/Rewrite actions."
         }
       }
+    },
+    "RaiPolicySourceProperties": {
+      "type": "object",
+      "description": "Complete retained writable properties of the supported ACS profile, excluding resource tags.",
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "The retained policy representation.",
+          "enum": [
+            "ACS"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "acs": {
+          "$ref": "#/definitions/RaiAcsManifest",
+          "description": "Customer-authored ACS manifest before applicable automatic requirements are composed."
+        },
+        "acsRegos": {
+          "type": "array",
+          "description": "Same-account Rego references in the retained source.",
+          "items": {
+            "$ref": "#/definitions/RaiRegoReference"
+          },
+          "x-ms-identifiers": [
+            "regoName"
+          ]
+        },
+        "customBlocklists": {
+          "type": "array",
+          "description": "Customer-authored blocklist relationships.",
+          "items": {
+            "$ref": "#/definitions/CustomBlocklistConfig"
+          },
+          "x-ms-identifiers": [
+            "blocklistName",
+            "source"
+          ]
+        },
+        "customExternalSafetyProviders": {
+          "type": "array",
+          "description": "Customer-authored provider relationships, without provider credentials or configuration.",
+          "items": {
+            "$ref": "#/definitions/RaiPolicyCustomExternalSafetyProviderReference"
+          },
+          "x-ms-identifiers": [
+            "externalSafetyProviderName",
+            "source"
+          ]
+        }
+      },
+      "required": [
+        "format",
+        "acs"
+      ]
     },
     "RaiPolicyType": {
       "type": "string",
