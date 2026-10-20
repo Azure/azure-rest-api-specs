@@ -30,4 +30,27 @@
   reason: Brownfield service not ready to migrate
 - tool: TypeSpecRequirement
   path: ./stable/2023-06-01/*.json
-  reason: Brownfield service not ready to migrate  
+  reason: Brownfield service not ready to migrate
+- tool: SwaggerAvocado
+  paths:
+    - ./*.tsp
+    - ./readme.md
+    - ./service.yaml
+    - ./suppressions.yaml
+    - ./tspconfig.yaml
+    - ./examples/2026-12-01/**
+    - ./stable/2026-12-01/**
+  reason: >-
+    MISSING_APIS_IN_DEFAULT_TAG reports intentionally retired routes, not missing
+    2026-12-01 APIs. Creator collection and resource routes are excluded because
+    Azure Maps Creator retired on September 30, 2025
+    (https://azure.microsoft.com/updates?id=azure-maps-creator-services-retirement-on-30-september-2025);
+    the retirement and breaking-change justification are documented in
+    https://github.com/Azure/azure-rest-api-specs/pull/46659.
+    The subscription-scoped Maps_ListSubscriptionOperations route was removed in
+    https://github.com/Azure/azure-rest-api-specs/pull/26945; the ARM-compliant
+    tenant-scoped operations route remains. The older moveResources route is
+    owned by ARM and was removed from Maps versions after 2018-05-01.
+    Existing API versions are unchanged. Avocado only filters changed files and
+    does not support rule-level suppressions, so all changed files for this
+    release must be covered to avoid requiring retired routes in the default tag.
