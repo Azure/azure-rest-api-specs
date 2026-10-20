@@ -41,7 +41,7 @@ export function parseSignoffDispatchInputs(inputs: Record<string, unknown> | nul
     typeof headSha !== "string" ||
     !isFullGitSha(headSha)
   ) {
-    throw new Error("Universal dispatch requires a positive PR number and full head SHA");
+    throw new Error("Signoff dispatch requires a positive PR number and full head SHA");
   }
   return { issue_number: issueNumber, head_sha: headSha };
 }

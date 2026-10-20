@@ -24,7 +24,7 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
     types: [completed]
 
 permissions:
-  actions: read
+  actions: write # read artifacts, and dispatch Summarize Checks after a dispatched run
   contents: read
   pull-requests: write
   statuses: read # revalidate ARM approval against current-head statuses before applying artifacts
@@ -68,3 +68,26 @@ jobs:
         with:
           name: issue-number
           value: ${{ steps.update-labels.outputs.issue_number }}
+
+      # Only the dispatch route needs this. A run created with GITHUB_TOKEN does not fire the
+      # Summarize Checks workflow_run trigger, while a workflow_run-route run still does, so
+      # dispatching there as well would evaluate twice.
+      - if: |
+          github.event_name == 'workflow_dispatch' &&
+          steps.update-labels.outputs.head_sha &&
+          steps.update-labels.outputs.issue_number
+        name: Dispatch Summarize Checks
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          PR_NUMBER: ${{ steps.update-labels.outputs.issue_number }}
+          HEAD_SHA: ${{ steps.update-labels.outputs.head_sha }}
+        with:
+          script: |
+            const ref = context.payload.repository?.default_branch;
+            if (!ref) throw new Error("Summarize Checks dispatch requires the default branch");
+            await github.rest.actions.createWorkflowDispatch({
+              ...context.repo,
+              workflow_id: "summarize-checks.yaml",
+              ref,
+              inputs: { pr_number: process.env.PR_NUMBER, head_sha: process.env.HEAD_SHA },
+            });

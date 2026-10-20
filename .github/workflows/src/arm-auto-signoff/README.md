@@ -90,7 +90,8 @@ arm-universal-auto-signoff     re-check the PR is open at the evaluated head, re
                                newest status per context on that SHA, decide the label actions
                                upload actions/correlation, explicitly dispatch Update Labels
 update-labels                  re-evaluate ARM policy/status/head/ownership, apply current actions
-                               (then Summarize Checks runs)
+                               (workflow_run route: Summarize Checks runs on completion;
+                               dispatch route: explicitly dispatch Summarize Checks)
 ```
 
 Update Labels reuses Universal's policy when applying ARM artifacts, rather than
@@ -111,6 +112,13 @@ The Update Labels dispatch validates that its source run is the trusted Universa
 workflow (never a `pull_request` run), then reads its uploaded correlation and
 label artifacts. The Universal run can still be finishing when the dispatched
 consumer starts; all required artifacts are uploaded before dispatch.
+
+Labels written with `GITHUB_TOKEN` fire no `labeled` events, and a run created by a dispatch does
+not fire `workflow_run` consumers. So a dispatched Update Labels run dispatches Summarize Checks
+itself, with only the PR number and evaluated head SHA, after applying the labels; this removes
+`WaitForARMFeedback` once `ARMSignedOff` is present and refreshes the comment and merge status.
+A `workflow_run`-route Update Labels run does not dispatch, because Summarize Checks already runs
+on its completion. Summarize Checks skips a dispatched head that is no longer current.
 
 Dispatch errors fail the handoff step, without changing a valid semantic result.
 Retry a missed signoff evaluation by manually dispatching Universal with the

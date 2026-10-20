@@ -12,6 +12,7 @@ import {
   summarizeChecksImpl,
   updateLabels,
 } from "../../src/summarize-checks/summarize-checks.ts";
+import summarizeChecks from "../../src/summarize-checks/summarize-checks.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
 import { fullGitSha } from "../../../shared/test/examples.ts";
 
@@ -175,6 +176,60 @@ describe("ARM review label handoff", () => {
       expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
       expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
       expect(core.setOutput).not.toHaveBeenCalledWith("arm_review_ready", true);
+    });
+  });
+
+  describe("workflow_dispatch from Update Labels", () => {
+    function dispatchContext(inputs: Record<string, string>) {
+      return {
+        eventName: "workflow_dispatch",
+        runId: 1,
+        repo: { owner: "Azure", repo: "azure-rest-api-specs" },
+        payload: {
+          inputs,
+          repository: { owner: { login: "Azure" }, name: "azure-rest-api-specs" },
+        },
+      } as unknown as Parameters<typeof summarizeChecks>[0]["context"];
+    }
+
+    it("evaluates the PR and head identified by the inputs", async () => {
+      const github = createMockGithub();
+      const core = createMockCore();
+      core.summary.addLink = vi.fn().mockReturnValue(core.summary);
+      github.rest.pulls.get.mockResolvedValue({
+        data: { state: "open", head: { sha: "b".repeat(40) }, labels: [] },
+      });
+
+      await summarizeChecks({
+        github,
+        core,
+        context: dispatchContext({ pr_number: "123", head_sha: fullGitSha }),
+      });
+
+      expect(core.setOutput).toHaveBeenCalledWith("issue_number", 123);
+      expect(core.setOutput).toHaveBeenCalledWith("head_sha", fullGitSha);
+      expect(github.rest.pulls.get).toHaveBeenCalledWith({
+        owner: "Azure",
+        repo: "azure-rest-api-specs",
+        pull_number: 123,
+      });
+      // A head that moved on after the dispatch is skipped without touching labels.
+      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+    });
+
+    it("rejects malformed inputs", async () => {
+      const github = createMockGithub();
+      const core = createMockCore();
+
+      await expect(
+        summarizeChecks({
+          github,
+          core,
+          context: dispatchContext({ pr_number: "abc", head_sha: "short" }),
+        }),
+      ).rejects.toThrow("positive PR number and full head SHA");
+      expect(github.rest.pulls.get).not.toHaveBeenCalled();
     });
   });
 });

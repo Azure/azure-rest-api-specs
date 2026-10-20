@@ -471,4 +471,21 @@ describe("ARM Universal Auto SignOff workflow", () => {
     expect(updateLabels).toContain('"ARM Universal Auto SignOff"');
     expect(updateLabels).not.toContain("ARM Auto SignOff - Set Status");
   });
+
+  it("dispatches Summarize Checks only from the dispatch route of Update Labels", async () => {
+    const updateLabels = await readWorkflow("update-labels.yaml");
+    const summarize = await readWorkflow("summarize-checks.yaml");
+    const step = updateLabels.slice(updateLabels.indexOf("name: Dispatch Summarize Checks"));
+
+    expect(updateLabels).toContain("actions: write");
+    expect(updateLabels.lastIndexOf("github.event_name == 'workflow_dispatch'")).toBeLessThan(
+      updateLabels.indexOf("name: Dispatch Summarize Checks"),
+    );
+    expect(step).toContain('workflow_id: "summarize-checks.yaml"');
+    expect(step).toContain("pr_number: process.env.PR_NUMBER, head_sha: process.env.HEAD_SHA");
+    expect(summarize).toMatch(/workflow_dispatch:\s+inputs:\s+pr_number:[\s\S]+head_sha:/);
+    expect(summarize).toContain("github.event_name == 'workflow_dispatch' ||");
+    // The workflow_run fallback stays, so a dispatch must not be added for that route.
+    expect(summarize).toContain('- "Update Labels"');
+  });
 });
