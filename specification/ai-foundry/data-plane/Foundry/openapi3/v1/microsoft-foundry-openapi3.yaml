@@ -28454,7 +28454,7 @@ paths:
                       - type: 'null'
                   model:
                     type: string
-                    description: The model deployment used for this response. For a Model Router final result, this is the model that served the selected client-output-producing inference turn, not the router deployment.
+                    description: The model deployment to use for the creation of this response.
                   background:
                     anyOf:
                       - type: boolean
@@ -57337,7 +57337,7 @@ components:
           description: The Unix timestamp (in seconds) of when the chat completion was created.
         model:
           type: string
-          description: The model deployment used for this chat completion. For Model Router results, this is the model that served the completion, not the router deployment.
+          description: The model deployment used for the creation of this chat completion.
         metadata:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.Metadata'
@@ -74484,7 +74484,7 @@ components:
             - type: 'null'
         model:
           type: string
-          description: The model deployment used for this response. For a Model Router final result, this is the model that served the selected client-output-producing inference turn, not the router deployment.
+          description: The model deployment to use for the creation of this response.
         background:
           anyOf:
             - type: boolean

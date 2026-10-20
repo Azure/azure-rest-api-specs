@@ -28,7 +28,7 @@ namespace Azure.AI.Projects {
   );
   @@doc(
     OpenAI.Response.`model`,
-    "The model deployment used for this response. For a Model Router final result, this is the model that served the selected client-output-producing inference turn, not the router deployment."
+    "The model deployment to use for the creation of this response."
   );
   @@doc(
     OpenAI.CompactResponseMethodPublicBody.`model`,

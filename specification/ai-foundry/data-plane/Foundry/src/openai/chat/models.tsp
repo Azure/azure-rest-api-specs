@@ -15,7 +15,7 @@ namespace Azure.AI.Projects {
   );
   @@doc(
     OpenAI.CreateChatCompletionResponse.`model`,
-    "The model deployment used for this chat completion. For Model Router results, this is the model that served the completion, not the router deployment."
+    "The model deployment used for the creation of this chat completion."
   );
   @@changePropertyType(OpenAI.Response.`model`, string);
   @@withoutOmittedProperties(
