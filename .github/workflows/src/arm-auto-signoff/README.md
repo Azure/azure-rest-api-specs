@@ -1,196 +1,111 @@
-# ARM Semantic Review and Universal Auto-Signoff
+# ARM Review and PR State Reconciliation
 
-The ARM API Reviewer is an AI agent, so auto-signoff does not trust it directly. Its verdict is
-turned into one commit status, `ARM Semantic Review`, on the reviewed SHA. Universal Auto-Signoff
-reads that status alongside `Swagger LintDiff` and `Swagger Avocado`.
-
-Universal is the production auto-signoff path. It owns `ARMSignedOff` only while the
-`ARMAutoSignedOff` marker is present.
-
-## Flow
-
-After Summarize Checks successfully evaluates readiness, a separate PR-scoped,
-non-cancelling job explicitly dispatches the initial reviewer when
-`WaitForARMFeedback` is present. Label writes using `GITHUB_TOKEN` do not trigger
-label-event workflows. Already-present queue labels are supported so a later
-summary can request an initial review even if the label was added by an earlier run.
-Summary evaluation reads the live PR and rechecks its head, draft state, and label
-snapshot before applying label actions; a changed snapshot is left for the next
-evaluation instead of applying an obsolete decision.
-
-The handoff checks the live PR/head, draft and hold labels, and the durable
-`ARMInitialReviewRequested` marker returned by the same PR lookup. If the marker is present,
-no automatic review is requested, even after new commits. This marker is not approval
-evidence and is never automatically removed. Explicit reviews also record it in the
-trusted pre-activation job, so they prevent a subsequent automatic initial review.
-Existing current-head semantic statuses backfill missing markers without rerunning AI.
-No reviewer workflow history is listed.
-
-For an unmarked PR, the dispatcher reads current-head statuses, rechecks readiness and
-marker absence, then adds the marker before writing pending and dispatching.
-Repeated dispatch jobs are serialized. The reviewer validates the expected head,
-queue/marker labels, and the dispatcher's pending-status URL before
-starting. Reviewer requests use non-cancelling PR concurrency; reruns wait for the
-active review instead of interrupting it. Old publishers cannot replace a newer attempt's
-pending/result status once ownership has changed.
-
-The reviewer does not run directly on PR opens, pushes, or ready-for-review events.
-Repeated Summarize Checks runs, pushes, and automatic queue-label re-additions do
-not request another review after a reviewer request exists. To explicitly review
-again (on the same or a newer SHA),
-remove and re-add `WaitForARMFeedback`, comment `/arm-review`, or manually dispatch
-the reviewer with the PR number and no expected SHA. Existing authorization gates
-remain in force. Explicit label/comment/manual requests bypass the initial-only
-marker gate; leave the marker in place when explicitly retrying.
-
-A dispatch failure is logged, fails the job, and changes its own queued reservation
-to an error if no reviewer has taken ownership. The marker remains because a
-failed HTTP response may still have created a reviewer run. Use an explicit retry
-after dispatch failure instead of automatically risking a duplicate. Review failures, cancellations,
-and incomplete results require an explicit retry; they cannot create an AI loop.
-If publishing pending fails after marker reservation, the same recovery guidance
-is logged and no reviewer is dispatched. Failure status descriptions point to
-`/arm-review`. Before retrying, check the Actions page or reviewer status link
-for a queued/running review: a timed-out dispatch may have been accepted.
-If another review is needed, use `/arm-review`, remove and re-add
-`WaitForARMFeedback`, or manually dispatch with the PR number and no `head_sha`.
-Keep `ARMInitialReviewRequested` in place; rerunning Summarize Checks is not a
-review retry.
-If a runner is lost after reserving but before dispatch, or activation rejects a
-stale head, use an explicit retry. There is no atomic GitHub transaction spanning
-status reservation, workflow dispatch, and label reads. A concurrent explicit
-request may cause an automatic activation to fail safely. GitHub concurrency keeps
-only one pending run per group, so rapid requests may coalesce; the latest pending
-request replaces an earlier pending request, not the running review.
-Deleting the marker deliberately resets initial-request tracking; do not remove it
-as routine label cleanup. Existing PRs reviewed only on older SHAs before rollout
-need the marker backfilled during rollout or may receive one initial automatic review.
-Signoff still requires a passing review of the current head: a push does not reuse
-an old approval, even though it does not automatically request another AI review.
-
-Request costs: an ineligible or already-marked dispatch uses one PR lookup, with
-no status or history query. An unmarked initial request additionally reads current-head
-statuses, rechecks the PR, writes the marker and pending status, and dispatches.
-Failure cleanup reads status ownership before writing an error. Automatic activation
-checks the queued reservation using current-head statuses, not workflow history.
-Explicit activation writes the marker once per request.
-Summary reuses PR labels from its live PR read
-and rechecks the snapshot before label writes.
+The ARM reviewer produces evidence for a particular commit. Shared reconciliation owns the
+automation's ARM labels, the next-steps comment, and the aggregate merge status. These outputs
+are calculated together; an approval does not need another workflow to consume label artifacts
+or notice that the labels changed.
 
 ```text
-summarize-checks               reconcile WaitForARMFeedback -> serialized initial-review dispatch
-arm-api-review (reviewer)
-  pre_activation               post status PENDING, upload one head-sha=<sha>;issue-number=<n> artifact
-  agent                        review the PR, request record_arm_semantic_review
-  record_arm_semantic_review   validate the result, post SUCCESS / FAILURE / ERROR
-  conclusion                   if no result was posted, turn this run's PENDING into ERROR
-                               explicitly dispatch Universal using trusted PR/SHA artifacts
+PR events / validation completions
+  -> Summarize Checks
+       read current PR, checks, impact assessment, and latest status per context
+       evaluate intake + ARM policy -> one desired label set
+       recheck PR/head/draft/labels
+       apply label difference, render next steps, publish merge status
+       request the initial ARM review only when eligible and not already requested
 
-arm-universal-auto-signoff     re-check the PR is open at the evaluated head, read labels and the
-                               newest status per context on that SHA, decide the label actions
-                               upload actions/correlation, explicitly dispatch Update Labels
-update-labels                  re-evaluate ARM policy/status/head/ownership, apply current actions
-                               (workflow_run route: Summarize Checks runs on completion;
-                               dispatch route: explicitly dispatch Summarize Checks)
+ARM reviewer
+  -> publish the validated, head-bound ARM Semantic Review result
+  -> trusted conclusion finalizes an unpublished result if necessary
+  -> call the same reconciliation directly, using this run's trusted PR/SHA artifact
 ```
 
-Update Labels reuses Universal's policy when applying ARM artifacts, rather than
-blindly applying an earlier decision. Stale-head artifacts, a pending same-head
-re-review, and an intervening unmarked human approval cannot authorize obsolete
-ARM label actions at that revalidation. Other producers' label behavior is
-unchanged. Revalidation adds the same PR, label, and (unless held or human-approved)
-status reads as a Universal evaluation. GitHub does not support atomic
-compare-and-set for labels, so changes after the final read and partial API writes
-are still possible; a subsequent evaluation reconciles automation-owned labels.
+The reviewer conclusion reconciles every trigger type and every terminal outcome. It does not
+dispatch a signoff workflow, Update Labels, or another Summarize Checks run. A failed
+reconciliation fails that step without changing the semantic verdict.
 
-The explicit Reviewer -> Universal -> Update Labels handoffs do not depend on
-GitHub delivering more `workflow_run` events after a long upstream chain. Both
-dispatches use `GITHUB_TOKEN`, the trusted default branch, and minimal identity
-inputs; no App credentials are needed. Existing completion/event triggers remain
-fallbacks. Duplicate evaluations are expected and revalidate the current state.
-The Update Labels dispatch validates that its source run is the trusted Universal
-workflow (never a `pull_request` run), then reads its uploaded correlation and
-label artifacts. The Universal run can still be finishing when the dispatched
-consumer starts; all required artifacts are uploaded before dispatch.
+Other validation workflows remain independent. Update Labels still handles unrelated producers,
+such as modeling review and SDK labels; it has no ARM auto-signoff dispatch or policy branch.
+The next-steps comment and merge status use the desired label set from the same evaluation,
+including newly granted or revoked approval and the corresponding queue-label change.
 
-Labels written with `GITHUB_TOKEN` fire no `labeled` events, and a run created by a dispatch does
-not fire `workflow_run` consumers. So a dispatched Update Labels run dispatches Summarize Checks
-itself, with only the PR number and evaluated head SHA, after applying the labels; this removes
-`WaitForARMFeedback` once `ARMSignedOff` is present and refreshes the comment and merge status.
-A `workflow_run`-route Update Labels run does not dispatch, because Summarize Checks already runs
-on its completion. Summarize Checks skips a dispatched head that is no longer current.
+## Initial review and explicit retries
 
-Every explicit handoff is gated on the current run being a `workflow_dispatch` run (the reviewer
-dispatching Universal, Universal dispatching Update Labels, Update Labels dispatching Summarize
-Checks). Those are the runs `GITHUB_TOKEN` creates, so their completion fires no `workflow_run`
-consumer. Runs from user events already chain through `workflow_run`, and dispatching there too
-would evaluate and apply labels twice. A person manually dispatching a run can still get one
-duplicate, which revalidates and is harmless. The Summarize Checks dispatch is its own job, so
-only it holds `actions: write` in Update Labels.
+Summarize Checks can request the first eligible review even when `WaitForARMFeedback` was
+already present. It checks known holds and `ARMInitialReviewRequested` before scheduling a
+dispatch job. That short job is serialized per PR and rechecks the live PR before reserving
+the request. There is no extra dispatch runner for an already-marked PR.
 
-Dispatch errors fail the handoff step, without changing a valid semantic result.
-Retry a missed signoff evaluation by manually dispatching Universal with the
-reviewed PR number and SHA, rather than re-running AI. Update Labels can be
-manually dispatched with that Universal run's `source_run_id`. End-to-end fork
-validation must demonstrate automatic review -> Universal -> approval labels
-without an unrelated PR/check event; local tests do not establish GitHub's mixed
-workflow-chain delivery behavior.
+The initial reviewer dispatch remains the one asynchronous handoff. Labels written using
+`GITHUB_TOKEN` do not trigger label-event workflows. The dispatch uses the trusted default
+branch, reviewed head SHA, and a pending-status reservation URL. Activation validates that
+reservation before starting the agent. The reviewer never executes code from a fork.
 
-The reviewer never adds or removes signoff labels. Starting a re-review does not itself revoke
-auto-signoff. Universal re-evaluates after trusted review finalization or another configured event;
-if it evaluates while required statuses are pending or missing, it requests revocation.
+`ARMInitialReviewRequested` is durable, PR-scoped request tracking, not approval evidence.
+It is also recorded for explicit reviews and is not automatically removed. New commits revoke
+an obsolete automatic approval but do not request another automatic review. A review must
+pass for the current head to authorize signoff.
 
-The model proposes; trusted code validates and publishes. Any doubt ends as "not Passed".
+To explicitly review again, comment `/arm-review`, remove and re-add `WaitForARMFeedback`, or
+manually dispatch the reviewer with the PR number and no expected head SHA. Existing
+authorization gates apply. Keep the marker when retrying; do not delete it as routine cleanup.
+Check for a queued or running review before retrying an ambiguous dispatch failure.
 
-## Signoff policy
+The marker is reserved before status publication and dispatch. Failures are logged and leave
+the marker in place because an HTTP timeout may still have created a run. Pending-status
+cleanup only changes the dispatcher's own reservation. Failures and incomplete reviews require
+an explicit retry, not an automatic AI loop.
 
-```text
-ARM Semantic Review passed for the current PR head
-AND Swagger LintDiff and Swagger Avocado passed for the current PR head
-AND ARMReview present, NotReadyForARMReview absent
-AND no ARMChangesRequested, ARMManualSignoffRequired, or unapproved SuppressionReviewRequired
-= add ARMSignedOff + ARMAutoSignedOff
-```
+## Signoff policy and ownership
 
-Otherwise an automation-owned `ARMSignedOff` and its marker are removed.
+Automatic approval requires all of:
 
-## Ownership
+- A passing `ARM Semantic Review` result for the current head.
+- Successful `Swagger LintDiff` and `Swagger Avocado` statuses for that head.
+- `ARMReview` present and `NotReadyForARMReview` absent.
+- No `ARMChangesRequested`, `ARMManualSignoffRequired`, or unapproved
+  `SuppressionReviewRequired` hold after intake reconciliation.
 
-| Labels                              | Owner      | Universal does                                          |
-| ----------------------------------- | ---------- | ------------------------------------------------------- |
-| `ARMSignedOff` + `ARMAutoSignedOff` | Automation | Keeps or revokes it on every evaluation                 |
-| `ARMAutoSignedOff` only             | Automation | Re-adds `ARMSignedOff` if eligible, else cleans up      |
-| `ARMSignedOff` + a legacy marker    | Automation | Replaces the marker with `ARMAutoSignedOff`, or revokes |
-| `ARMSignedOff` without a marker     | Human      | Nothing (does not read statuses)                        |
+`ARMSignedOff` with `ARMAutoSignedOff` is automation-owned and is revoked when those conditions
+do not hold. The legacy `ARMAutoSignedOff-IncrementalTSP` and `ARMAutoSignedOff-Trivial` markers
+also identify automatic approval and are replaced or removed on evaluation. An orphaned current
+marker can self-heal `ARMSignedOff` when the evidence still passes.
 
-Legacy markers are `ARMAutoSignedOff-IncrementalTSP` and `ARMAutoSignedOff-Trivial`, from the
-retired workflow. They are always removed.
+An unmarked `ARMSignedOff` is human approval: the automatic signoff policy neither adopts nor
+revokes it. Existing intake rules still govern which review labels apply, including signed-off
+precedence over `ARMChangesRequested`. Use `ARMManualSignoffRequired` to block automatic
+approval; removing only `ARMSignedOff` allows an eligible automatic approval to self-heal.
 
-- **Take over an auto-signoff:** remove `ARMAutoSignedOff` and keep `ARMSignedOff`.
-- **Revoke an auto-signoff:** add `ARMManualSignoffRequired`. (`ARMChangesRequested` does not
-  work here: Summarize Checks removes it while `ARMSignedOff` is present.)
-- Removing only `ARMSignedOff` is not a revocation: Universal re-adds it while the PR is eligible.
+| Semantic status | Description starts with    | Effect on automatic approval                 |
+| --------------- | -------------------------- | -------------------------------------------- |
+| `pending`       | `ARM API semantic review`  | Withheld                                     |
+| `success`       | `Passed:`                  | Allowed if the remaining conditions pass     |
+| `failure`       | `Changes requested:`       | Withheld                                     |
+| `error`         | `Manual review required: ` | Withheld; add the sticky manual-signoff hold |
+| `error`         | `Review incomplete: `      | Withheld; explicit retry can recover         |
 
-## Status contract
+Trusted code validates the model's output, independently checks claimed full coverage, and
+publishes the verdict for its reviewed SHA and run attempt. An old publisher cannot replace a
+newer attempt's reservation.
 
-| State     | Description starts with    | Adds `ARMManualSignoffRequired`  |
-| --------- | -------------------------- | -------------------------------- |
-| `pending` | `ARM API semantic review`  | No                               |
-| `success` | `Passed:`                  | No                               |
-| `failure` | `Changes requested:`       | No                               |
-| `error`   | `Manual review required: ` | Yes (scoped or oversized PR)     |
-| `error`   | `Review incomplete: `      | No (transient, a re-run can fix) |
+## Freshness and rollout
 
-Only `success` can lead to signoff. A status is bound to its SHA, so a result for a commit that is
-no longer the PR head is never read for the new head.
+Reconciliation reuses labels from its required PR lookup and one latest-status read for ARM
+policy and check summarization. Before applying the plan it rechecks the PR's head, open state,
+draft state, and label snapshot. A changed snapshot causes no writes. A reviewer completion for
+an old SHA never substitutes the live head or applies that old result to a newer commit.
 
-## Files
+This is a shared writer implementation, not a cross-workflow transaction or lock. Initial
+review requests are serialized, but independent state evaluations may overlap. GitHub does not
+provide atomic compare-and-set for labels; mutations after the freshness check and partial API
+failures remain possible. Subsequent evaluations repair derived state.
 
-| File                                                                     | Role                                                                 |
-| ------------------------------------------------------------------------ | -------------------------------------------------------------------- |
-| [arm-semantic-review.ts](./arm-semantic-review.ts)                       | Pure policy: validate the result, map it to a status, read statuses  |
-| [arm-semantic-review-workflow.ts](./arm-semantic-review-workflow.ts)     | Publish the status; resolve an unpublished one                       |
-| [arm-signoff-dispatch.ts](./arm-signoff-dispatch.ts)                     | Explicit reviewer-to-Universal handoff and validated dispatch inputs |
-| [arm-universal-auto-signoff.ts](./arm-universal-auto-signoff.ts)         | Read statuses and labels, decide label actions                       |
-| [arm-api-review.md](../../arm-api-review.md)                             | Reviewer workflow source (the `.lock.yml` is generated from it)      |
-| [arm-universal-auto-signoff.yaml](../../arm-universal-auto-signoff.yaml) | Universal workflow                                                   |
+Drain the retired Universal signoff and its queued Update Labels runs before cutover, then
+reevaluate affected open PRs. Use the existing PR/check events to reevaluate state; rerun the
+reviewer conclusion when its reconciliation failed. Preserve human approvals and backfill
+initial-request markers for pre-rollout reviews where needed.
+
+Before rollout, validate an actual fork PR through automatic review, approval, queue removal,
+next-steps rendering, and merge-status refresh without an unrelated event. Exercise a stale head
+and failed reviewer too. Local tests and workflow compilation cannot establish GitHub's live
+execution and permission behavior.

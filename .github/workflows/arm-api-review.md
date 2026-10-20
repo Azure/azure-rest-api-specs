@@ -208,8 +208,11 @@ jobs:
   # keeps a failure here from blocking gh-aw's own failure reporting.
   conclusion:
     permissions:
-      actions: write
+      actions: read
       contents: read
+      checks: read
+      issues: write
+      pull-requests: write
       statuses: write
     pre-steps:
       - uses: actions/checkout@v7
@@ -229,14 +232,17 @@ jobs:
             const { finalizeUnpublishedArmSemanticReview } =
               await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-semantic-review-workflow.ts');
             return await finalizeUnpublishedArmSemanticReview({ github, context, core });
-      - name: Dispatch Universal ARM signoff
-        if: always() && github.event_name == 'workflow_dispatch'
+      - name: Install dependencies for PR reconciliation
+        if: always()
+        uses: ./.github/actions/install-deps-github-script
+      - name: Reconcile PR state
+        if: always()
         uses: actions/github-script@v9.0.0
         with:
           script: |
-            const { dispatchUniversalSignoff } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-signoff-dispatch.ts');
-            await dispatchUniversalSignoff({ github, context, core });
+            const { reconcileReviewedPr } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/reconcile-reviewed-pr.ts');
+            await reconcileReviewedPr({ github, context, core });
 # Gate at the trigger level so the expensive agent job never starts for
 # ineligible events. Label / draft / comment gating that used to live in a
 # custom github-script step is expressed here declaratively; the remaining

@@ -1,11 +1,4 @@
-import type {
-  CheckRuns,
-  CommitStatuses,
-  Core,
-  GitHub,
-  GitHubScriptArgs,
-  WebhookEvent,
-} from "../github.ts";
+import type { CheckRuns, Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts";
 /*
   This file is a github script. It will be called directly from a github-script action. This code is a simplified
   amalgamation of logic that previously resided in the `PR Summary` check and various events within the `pipelinebot`.
@@ -27,9 +20,9 @@ import type {
 // #region imports/constants
 import { execFile } from "../../../shared/src/exec.ts";
 import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.ts";
-import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
-import { parseSignoffDispatchInputs } from "../arm-auto-signoff/arm-signoff-dispatch.ts";
+import { getLatestCommitStatuses } from "../commit-statuses.ts";
+import type { LatestCommitStatus } from "../commit-statuses.ts";
 import { commentOrUpdate } from "../comment.ts";
 import { extractInputs } from "../context.ts";
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
@@ -37,9 +30,9 @@ import {
   ImpactAssessmentSchema,
   brChRevApproval,
   getViolatedRequiredLabelsRules,
-  processImpactAssessment,
   verRevApproval,
 } from "./labelling.ts";
+import { evaluatePrState, projectImpactLabels } from "./pr-state.ts";
 
 import {
   brchTsg,
@@ -99,7 +92,7 @@ export type CheckRunResult = {
   target_url?: string;
 };
 
-export type CommitStatus = CommitStatuses[0];
+export type CommitStatus = LatestCommitStatus;
 
 export type CheckRun = CheckRuns[0];
 
@@ -277,17 +270,7 @@ export default async function summarizeChecks({
   context,
   core,
 }: GitHubScriptArgs): Promise<void> {
-  const extracted = await extractInputs(github, context, core);
-  const { owner, repo } = extracted;
-  let { issue_number, head_sha } = extracted;
-
-  // Dispatched by Update Labels, which has no PR payload. The inputs only identify the PR; a
-  // head that no longer matches is skipped as stale by summarizeChecksImpl.
-  if (context.eventName === "workflow_dispatch") {
-    ({ issue_number, head_sha } = parseSignoffDispatchInputs(
-      (context.payload as WebhookEvent<"workflow-dispatch">).inputs,
-    ));
-  }
+  const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
 
   if (!issue_number) {
     core.warning(`No issue number found for this event. Exiting summarize-checks.js early.`);
@@ -377,7 +360,7 @@ export async function summarizeChecksImpl(
   }
   let labelNames = pull.labels.map((label) => label.name);
 
-  const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
+  const [requiredCheckRuns, fyiCheckRuns, impactAssessment, statuses] = await getCheckRunTuple(
     github,
     core,
     owner,
@@ -396,11 +379,11 @@ export async function summarizeChecksImpl(
   } else {
     core.info(
       `No impact assessment found for ${owner}/${repo}#${issue_number}. ` +
-        `No labels will be added or removed in this run, and only "pending" status check will be set.`,
+        `Intake labels will be left unchanged and the merge status will remain pending.`,
     );
   }
 
-  const labelContext = updateLabels(labelNames, impactAssessment);
+  const plan = evaluatePrState(labelNames, impactAssessment, statuses);
 
   const { data: currentPull } = await github.rest.pulls.get({
     owner,
@@ -420,12 +403,12 @@ export async function summarizeChecksImpl(
 
   core.info(
     `Summarize checks label actions against ${owner}/${repo}#${issue_number}: \n` +
-      `The following labels were present: [${Array.from(labelContext.present).join(", ")}]` +
-      `Removing labels [${Array.from(labelContext.toRemove).join(", ")}] then \n` +
-      `Adding labels [${Array.from(labelContext.toAdd).join(", ")}]`,
+      `The following labels were present: [${labelNames.join(", ")}]` +
+      `Removing labels [${plan.labelsToRemove.join(", ")}] then \n` +
+      `Adding labels [${plan.labelsToAdd.join(", ")}]`,
   );
 
-  for (const label of labelContext.toRemove) {
+  for (const label of plan.labelsToRemove) {
     core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
     await github.rest.issues.removeLabel({
       owner: owner,
@@ -435,25 +418,17 @@ export async function summarizeChecksImpl(
     });
   }
 
-  if (labelContext.toAdd.size > 0) {
-    core.info(
-      `Adding labels: ${Array.from(labelContext.toAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
-    );
+  if (plan.labelsToAdd.length > 0) {
+    core.info(`Adding labels: ${plan.labelsToAdd.join(", ")} to ${owner}/${repo}#${issue_number}.`);
     await github.rest.issues.addLabels({
       owner: owner,
       repo: repo,
       issue_number: issue_number,
-      labels: Array.from(labelContext.toAdd),
+      labels: plan.labelsToAdd,
     });
   }
 
-  // adjust labelNames based on labelsToAdd/labelsToRemove
-  labelNames = labelNames.filter((name) => !labelContext.toRemove.has(name));
-  for (const label of labelContext.toAdd) {
-    if (!labelNames.includes(label)) {
-      labelNames.push(label);
-    }
-  }
+  labelNames = plan.labels;
 
   const [commentBody, automatedChecksMet] = createNextStepsComment(
     core,
@@ -495,10 +470,7 @@ export async function summarizeChecksImpl(
   core.summary.addCodeBlock(JSON.stringify(automatedChecksMet, null, 2));
   await core.summary.write();
 
-  core.setOutput(
-    "arm_review_ready",
-    impactAssessment !== undefined && !pull.draft && labelNames.includes("WaitForARMFeedback"),
-  );
+  core.setOutput("arm_review_ready", plan.requestInitialArmReview);
 }
 
 /**
@@ -560,40 +532,11 @@ export async function getExistingLabels(
 // #endregion
 // #region label update
 
-function warnIfLabelSetsIntersect(labelsToAdd: Set<string>, labelsToRemove: Set<string>) {
-  const intersection = [...intersect(labelsToAdd, labelsToRemove)];
-  if (intersection.length > 0) {
-    console.warn(
-      "ASSERTION VIOLATION! The intersection of labelsToRemove and labelsToAdd is non-empty! " +
-        `labelsToAdd: [${[...labelsToAdd].join(", ")}]. ` +
-        `labelsToRemove: [${[...labelsToRemove].join(", ")}]. ` +
-        `intersection: [${intersection.join(", ")}].`,
-    );
-  }
-}
-
 export function updateLabels(
   existingLabels: string[],
   impactAssessment: import("./labelling.ts").ImpactAssessment | undefined,
 ): import("./labelling.ts").LabelContext {
-  // logic for this function originally present in:
-  //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
-  //  - public/rest-api-specs-scripts/src/prSummary.ts
-  // it has since been simplified and moved here to handle all label addition and subtraction given a PR context
-
-  const labelContext: import("./labelling.ts").LabelContext = {
-    present: new Set(existingLabels),
-    toAdd: new Set(),
-    toRemove: new Set(),
-  };
-
-  if (impactAssessment) {
-    // will further update the label context if necessary
-    processImpactAssessment(labelContext, impactAssessment);
-  }
-
-  warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove);
-  return labelContext;
+  return projectImpactLabels(existingLabels, impactAssessment);
 }
 
 // #endregion
@@ -635,7 +578,12 @@ export async function getCheckRunTuple(
   prNumber: number,
   excludedCheckNames: string[],
 ): Promise<
-  [CheckRunData[], CheckRunData[], import("./labelling.ts").ImpactAssessment | undefined]
+  [
+    CheckRunData[],
+    CheckRunData[],
+    import("./labelling.ts").ImpactAssessment | undefined,
+    CommitStatus[],
+  ]
 > {
   // This function was originally a version of getRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns
   // but has been simplified for clarity and purpose.
@@ -653,12 +601,49 @@ export async function getCheckRunTuple(
     per_page: PER_PAGE_MAX,
   });
 
-  const allCommitStatuses = await github.paginate(github.rest.repos.listCommitStatusesForRef, {
-    owner: owner,
-    repo: repo,
-    ref: head_sha,
-    per_page: PER_PAGE_MAX,
-  });
+  const impactCheck = allCheckRuns
+    .filter((check) => check.name === IMPACT_CHECK_NAME)
+    .sort(invert(byDate((check) => check.completed_at || check.started_at || "1970")))[0];
+  if (impactCheck?.status === "completed" && impactCheck.conclusion === "success") {
+    const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
+      owner,
+      repo,
+      head_sha,
+      check_suite_id: impactCheck.check_suite?.id,
+      per_page: PER_PAGE_MAX,
+    });
+    if (workflowRuns.length === 0) {
+      core.warning(`No workflow runs found for check suite ID: ${impactCheck.check_suite?.id}`);
+    } else {
+      impactAssessmentWorkflowRun = workflowRuns.sort(
+        (a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
+      )[0].id;
+    }
+  }
+
+  if (impactAssessmentWorkflowRun) {
+    impactAssessment = await getImpactAssessment(
+      github,
+      core,
+      owner,
+      repo,
+      impactAssessmentWorkflowRun,
+    );
+    const branchRules = await github.rest.repos.getBranchRules({
+      owner,
+      repo,
+      branch: impactAssessment.targetBranch,
+    });
+    requiredCheckNames = getRequiredChecksFromBranchRuleOutput(branchRules).filter(
+      // The aggregate cannot depend on the status it publishes itself.
+      (checkName) => checkName !== AUTOMATED_CHECK_NAME,
+    );
+  } else {
+    requiredCheckNames = [IMPACT_CHECK_NAME];
+  }
+
+  // Read mutable approval evidence after artifact downloads, close to plan application.
+  const allCommitStatuses = await getLatestCommitStatuses(github, owner, repo, head_sha);
 
   // Process allCheckRuns and allCommitStatuses into unified CheckRunData array
   // all checks will be considered as "FYI" until we have an impact assessment, so we can
@@ -751,37 +736,6 @@ export async function getCheckRunTuple(
 
     const latestCheck = sortedChecks[0];
 
-    if (
-      latestCheck.name === IMPACT_CHECK_NAME &&
-      latestCheck.status === "completed" &&
-      latestCheck.conclusion === "success"
-    ) {
-      const originalData = latestCheck._originalData as CheckRun;
-      const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
-        owner,
-        repo,
-        head_sha: head_sha,
-        check_suite_id: originalData.check_suite?.id,
-        per_page: PER_PAGE_MAX,
-      });
-
-      if (workflowRuns.length === 0) {
-        core.warning(`No workflow runs found for check suite ID: ${originalData.check_suite?.id}`);
-      } else {
-        // Sort by updated_at to get the most recent run
-        const sortedRuns = workflowRuns.sort(
-          (a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
-        );
-        impactAssessmentWorkflowRun = sortedRuns[0].id;
-
-        if (workflowRuns.length > 1) {
-          core.info(
-            `Found ${workflowRuns.length} workflow runs for check suite ID: ${originalData.check_suite?.id}, using most recent: ${sortedRuns[0].id}`,
-          );
-        }
-      }
-    }
-
     // Create clean CheckRunData without temporary properties
     unifiedCheckRuns.push({
       name: latestCheck.name,
@@ -795,36 +749,6 @@ export async function getCheckRunTuple(
     `Processed ${allCheckRuns.length} check runs and ${allCommitStatuses.length} commit statuses into ${unifiedCheckRuns.length} unified checks`,
   );
 
-  if (impactAssessmentWorkflowRun) {
-    core.info(
-      `Impact Assessment Workflow Run ID is present: ${impactAssessmentWorkflowRun}. Downloading job summary artifact`,
-    );
-    impactAssessment = await getImpactAssessment(
-      github,
-      core,
-      owner,
-      repo,
-      impactAssessmentWorkflowRun,
-    );
-
-    const branchRules = await github.rest.repos.getBranchRules({
-      owner: owner,
-      repo: repo,
-      branch: impactAssessment.targetBranch,
-    });
-
-    if (branchRules) {
-      requiredCheckNames = getRequiredChecksFromBranchRuleOutput(branchRules).filter(
-        // "Automated merging requirements met" may be required in repo settings, to ensure PRs cannot be merged unless
-        // it's passing.  However, it must be excluded from our list of requiredCheckNames, since it's status is set
-        // by our own workflow.  If this check isn't excluded, it creates a deadlock where it can never be set.
-        (checkName) => checkName !== AUTOMATED_CHECK_NAME,
-      );
-    }
-  } else {
-    requiredCheckNames = [IMPACT_CHECK_NAME];
-  }
-
   const filteredReqCheckRuns = unifiedCheckRuns.filter(
     (checkRun) =>
       !excludedCheckNames.includes(checkRun.name) && requiredCheckNames.includes(checkRun.name),
@@ -836,7 +760,7 @@ export async function getCheckRunTuple(
       FYI_CHECK_NAMES.includes(checkRun.name),
   );
 
-  return [filteredReqCheckRuns, filteredFyiCheckRuns, impactAssessment];
+  return [filteredReqCheckRuns, filteredFyiCheckRuns, impactAssessment, allCommitStatuses];
 }
 
 export function checkRunIsSuccessful(checkRun: CheckRunData): boolean | undefined {
