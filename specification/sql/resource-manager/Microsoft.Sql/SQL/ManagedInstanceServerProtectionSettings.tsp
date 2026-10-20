@@ -100,6 +100,36 @@ model ServerProtectionSettingsAcceptedResult {
   @body body: ServerProtectionSettingsOperationMetadata;
 }
 
+/** Parent instance identifier for protection-settings operations. */
+alias ServerProtectionSettingsRequestParameters = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+
+  /** The provider namespace for the resource. */
+  @path
+  @segment("providers")
+  provider: "Microsoft.Sql";
+
+  /** The name of the managed instance. */
+  @path
+  @segment("managedInstances")
+  @pattern("^[A-Za-z0-9]+(-*[A-Za-z0-9]+)*$")
+  @minLength(1)
+  @maxLength(63)
+  managedInstanceName: string;
+};
+
+/** Path parameters for the protection-settings singleton. */
+alias ServerProtectionSettingsInstanceParameters = {
+  ...ServerProtectionSettingsRequestParameters;
+
+  /** The protection settings name. Only default is supported. */
+  @path
+  @segment("serverProtectionSettings")
+  serverProtectionSettingsName: ServerProtectionSettingsName;
+};
+
 /** Read, list, and update the default protection settings of a managed instance. */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "These settings always exist with the managed instance and cannot be deleted; enabling protection is irreversible."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This SQL project requires legacy-feature-files output splitting for operation registration."
@@ -110,12 +140,29 @@ model ServerProtectionSettingsAcceptedResult {
 )
 interface ManagedInstanceServerProtectionSettings {
   /** Gets a managed instance's server protection settings. */
-  get is ArmResourceRead<ServerProtectionSettings>;
+  @get
+  @autoRoute
+  @armResourceRead(ServerProtectionSettings)
+  get is Azure.ResourceManager.Foundations.ArmReadOperation<
+    ServerProtectionSettingsInstanceParameters,
+    ArmResponse<ServerProtectionSettings>,
+    ErrorResponse
+  >;
 
   /**
    * Lists the managed instance's server protection settings. The collection contains the default resource.
    */
-  listByManagedInstance is ArmResourceListByParent<ServerProtectionSettings>;
+  @get
+  @autoRoute
+  @list
+  @listsResource(ServerProtectionSettings)
+  @segmentOf(ServerProtectionSettings)
+  @armResourceList(ServerProtectionSettings)
+  listByManagedInstance is Azure.ResourceManager.Foundations.ArmReadOperation<
+    ServerProtectionSettingsRequestParameters,
+    ArmResponse<ResourceListResult<ServerProtectionSettings>>,
+    ErrorResponse
+  >;
 
   /**
    * Updates managed instance server protection setting. Returns HTTP 202 with
@@ -125,11 +172,16 @@ interface ManagedInstanceServerProtectionSettings {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "This existing singleton returns 202 while updating and 200 on completion; PUT never creates a new resource."
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The SQL RP returns operation metadata for pending 202 responses and the resource only for completed 200 responses."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The SQL RP pending 202 response contains the operation name and start time."
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  @put
+  @autoRoute
+  @armResourceCreateOrUpdate(ServerProtectionSettings)
+  @Azure.Core.useFinalStateVia("location")
+  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ServerProtectionSettingsInstanceParameters,
     ServerProtectionSettings,
-    Response =
-      | ArmResponse<ServerProtectionSettings>
-      | ServerProtectionSettingsAcceptedResult
+    | ArmResponse<ServerProtectionSettings>
+    | ServerProtectionSettingsAcceptedResult,
+    ErrorResponse
   >;
 }
 
