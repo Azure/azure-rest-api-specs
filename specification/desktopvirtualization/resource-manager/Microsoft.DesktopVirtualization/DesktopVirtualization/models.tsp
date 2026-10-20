@@ -2964,7 +2964,6 @@ model ScalingSchedule {
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
    * @Introduced in 2024-11-01-preview
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @added(Versions.vLatestPreview)
   createDelete?: CreateDeleteProperties | null;
 
@@ -3066,14 +3065,12 @@ model CreateDeleteProperties {
   /**
    * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @minValue(0)
   rampUpMaximumHostPoolSize?: int32 | null;
 
   /**
    * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @minValue(0)
   @maxValue(59)
   rampUpMinimumHostPoolSize?: int32 | null;
@@ -3081,14 +3078,12 @@ model CreateDeleteProperties {
   /**
    * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @minValue(0)
   rampDownMaximumHostPoolSize?: int32 | null;
 
   /**
    * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @minValue(0)
   @maxValue(59)
   rampDownMinimumHostPoolSize?: int32 | null;
@@ -3706,7 +3701,6 @@ model HostPoolPatch extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * The managed service identities assigned to this resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @added(Versions.vLatestPreview)
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity | null;
 }
@@ -4810,7 +4804,6 @@ model ScalingPlanPooledScheduleProperties {
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
    * @Introduced in 2024-11-01-preview
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @added(Versions.vLatestPreview)
   createDelete?: CreateDeleteProperties | null;
 
@@ -4932,7 +4925,6 @@ model ScalingPlanPooledSchedulePatchProperties {
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
    * @Introduced in 2024-11-01-preview
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @added(Versions.vLatestPreview)
   createDelete?: CreateDeleteProperties | null;
 
