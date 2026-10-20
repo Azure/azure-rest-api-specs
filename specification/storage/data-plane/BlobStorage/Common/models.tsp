@@ -246,6 +246,10 @@ union StorageErrorCode {
   /** Feature version mismatch. */
   FeatureVersionMismatch: "FeatureVersionMismatch",
 
+  /** Feature is not enabled. */
+  @added(Versions.v2026_12_06)
+  FeatureNotEnabled: "FeatureNotEnabled",
+
   /** Incremental copy blob mismatch. */
   IncrementalCopyBlobMismatch: "IncrementalCopyBlobMismatch",
 
@@ -494,7 +498,7 @@ model CreateSessionResponse {
   @Xml.name("Id") id?: string;
 
   /** The time when the session will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API" Expand annotationCheck warning on line R497
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Expiration")
   expiration?: utcDateTime;
@@ -948,10 +952,6 @@ union AccessTier {
   /** The Cold access tier. */
   Cold: "Cold",
 
-  /** The Smart access tier. */
-  @added(Versions.v2026_06_06)
-  Smart: "Smart",
-
   /** Extensible. */
   string,
 }
@@ -966,10 +966,6 @@ union ArchiveStatus {
 
   /** The archive status is rehydrating pending to Cold. */
   RehydratePendingToCold: "rehydrate-pending-to-cold",
-
-  /** The archive status is rehydrating pending to Smart. */
-  @added(Versions.v2026_06_06)
-  RehydratePendingToSmart: "rehydrate-pending-to-smart",
 
   /** Extensible. */
   string,
@@ -1130,11 +1126,6 @@ model BlobProperties {
 
   /** The archive status of the blob. */
   @Xml.name("ArchiveStatus") archiveStatus?: ArchiveStatus;
-
-  /** The smart access tier of the blob. */
-  @added(Versions.v2026_06_06)
-  @Xml.name("SmartAccessTier")
-  smartAccessTier?: AccessTier;
 
   /** The SHA-256 hash of the blob's encryption key, if provided. */
   @Xml.name("CustomerProvidedKeySha256") customerProvidedKeySha256?: string;
@@ -1566,17 +1557,13 @@ alias BlobLayoutResponseHeaders = {
   @header("x-ms-access-tier-inferred")
   accessTierInferred?: boolean;
 
-  /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
-  @header("x-ms-smart-access-tier")
-  smartAccessTier?: string;
-
   /** Included if the blob rehydrate operation is pending. Indicates the destination tier. */
   @header("x-ms-archive-status")
   @alternateType(string, "go")
   archiveStatus?: ArchiveStatus;
 
   /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API" Expand annotationCheck warning on line R1579
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-access-tier-change-time")
   accessTierChangeTime?: utcDateTime;
@@ -2329,7 +2316,7 @@ alias CreationTimeResponseHeader = {
 /** The blob creation time response header. */
 alias BlobCreationTimeResponseHeader = {
   /** The date-time the blob was created. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API" Expand annotationCheck warning on line R2305
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-blob-creation-time")
   blobCreationTime?: utcDateTime;

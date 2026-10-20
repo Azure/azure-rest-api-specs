@@ -225,6 +225,11 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@access(Storage.Blob.ListBlobsHierarchicalResponse, Access.public, "rust");
 @@access(Storage.Blob.ListBlobsIncludeItem, Access.public, "rust");
 
+@@access(Storage.Blob.Container.createSession, Access.internal, "rust");
+@@access(CreateSessionConfiguration, Access.internal, "rust");
+@@access(CreateSessionResponse, Access.internal, "rust");
+@@access(SessionCredentials, Access.internal, "rust");
+@@access(AuthenticationType, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.abortCopyFromUrl, "abortCopy", "rust");
 @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
@@ -246,6 +251,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option" ""
 @@clientOption(Storage.Blob.Blob.getLayout, "forcePageIterator", true, "rust");
+@@clientName(Storage.Blob.Blob.getLayout, "getLayout", "rust");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Storage.Blob.Blob.getLayout,
@@ -563,11 +569,6 @@ model BlobPropertiesGo {
 
   /** The archive status of the blob. */
   @Xml.name("ArchiveStatus") archiveStatus?: ArchiveStatus;
-
-  /** The smart access tier of the blob. */
-  @added(Versions.v2026_06_06)
-  @Xml.name("SmartAccessTier")
-  smartAccessTier?: AccessTier;
 
   /** Customer provided key sha256 */
   @Xml.name("CustomerProvidedKeySha256") customerProvidedKeySha256?: string;
