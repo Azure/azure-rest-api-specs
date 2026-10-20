@@ -145,6 +145,7 @@ jobs:
             const { mitigateSdkBreakingChanges } =
               await import('${{ github.workspace }}/repositories/workflow-repository/.github/workflows/src/sdk-breaking-change/mitigate-sdk-breaking-changes.ts');
             await mitigateSdkBreakingChanges({
+              core,
               analysisResultPath: process.env.ANALYSIS_RESULT_PATH,
               mitigationResultPath: process.env.MITIGATION_RESULT_PATH,
               mitigationWorkflowUrl: process.env.MITIGATION_WORKFLOW_URL,

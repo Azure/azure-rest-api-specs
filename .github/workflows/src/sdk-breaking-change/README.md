@@ -398,15 +398,15 @@ The example above produces the following comment:
 
 **SDK package:** armwidget
 
-**Resolved Breaking Changes:**
+**Breaking Changes:**
 
-None
+<details open><summary>View breaking changes</summary>
 
-**Unresolved Breaking Changes:**
+| Resolved | ID                                                                                                 | Breaking change        | Resolution                    | TypeSpec changes |
+| -------- | -------------------------------------------------------------------------------------------------- | ---------------------- | ----------------------------- | ---------------- |
+| ❌       | [example-change](https://github.com/Azure/azure-rest-api-specs/actions/runs/456 "How to suppress") | Model property removed | Restore the removed property. |                  |
 
-| Breaking change        | Suggested resolution          |
-| ---------------------- | ----------------------------- |
-| Model property removed | Restore the removed property. |
+</details>
 
 **Customization Code:**
 
@@ -419,10 +419,12 @@ No mitigation changes were produced.
 
 Comment behavior:
 
-- **Current successful result:** groups changes into resolved and unresolved tables for each project.
-  The resolved table uses `Breaking change`, `Resolution`, and `TypeSpec changes` columns; only the
-  first `typespecChangesSummary` entry is shown. Empty groups display `None`.
-  Nonempty resolved tables appear in a details block that is expanded by default.
+- **Current successful result:** displays one table per project with `Resolved`, `ID`,
+  `Breaking change`, `Resolution`, and `TypeSpec changes` columns. The first column shows ✔️ for
+  resolved changes and ❌ for unresolved changes; only the first `typespecChangesSummary` entry
+  is shown. Projects without changes display `None`.
+  Each change ID links to the workflow summary with a `How to suppress` hover hint.
+  Nonempty tables appear in a details block that is expanded by default.
   The report also includes **Customization Code** as a fenced diff in a collapsed-by-default
   details block when edits exist, or the
   no-changes message above otherwise. The comment includes the full trimmed diff without

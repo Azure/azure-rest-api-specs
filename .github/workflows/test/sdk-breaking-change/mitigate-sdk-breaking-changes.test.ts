@@ -15,13 +15,16 @@ import {
   MitigationResultSchema,
 } from "../../src/sdk-breaking-change/types.ts";
 import { mitigateSdkBreakingChanges } from "../../src/sdk-breaking-change/mitigate-sdk-breaking-changes.ts";
+import { createMockCore } from "../mocks.ts";
 
 let temporaryDirectory: string;
 let analysisResultPath: string;
 let mitigationResultPath: string;
 let specificationRepositoryPath: string;
+let core: ReturnType<typeof createMockCore>;
 
 beforeEach(async () => {
+  core = createMockCore();
   temporaryDirectory = join(import.meta.dirname, `mitigation-${crypto.randomUUID()}`);
   analysisResultPath = join(temporaryDirectory, "sdk-breaking-change-analysis.json");
   mitigationResultPath = join(temporaryDirectory, "results", "sdk-breaking-change-mitigation.json");
@@ -50,6 +53,7 @@ beforeEach(async () => {
               breakingChange: "Model changed",
               category: "spec change",
               suggestedFix: "Restore compatibility",
+              originBreaks: ["- Model property removed", "- Method signature changed"],
             },
           ],
         },
@@ -87,6 +91,7 @@ describe("mitigateSdkBreakingChanges", () => {
       await writeFile(analysisResultPath, JSON.stringify(analysis));
 
       await mitigateSdkBreakingChanges({
+        core,
         analysisResultPath,
         mitigationResultPath,
         mitigationWorkflowUrl: "https://github.com/owner/repo/actions/runs/456",
@@ -108,6 +113,7 @@ describe("mitigateSdkBreakingChanges", () => {
 
   it("runs customization and writes a cleaned mitigation result", async () => {
     await mitigateSdkBreakingChanges({
+      core,
       analysisResultPath,
       mitigationResultPath,
       mitigationWorkflowUrl: "https://github.com/owner/repo/actions/runs/456",
@@ -135,6 +141,17 @@ describe("mitigateSdkBreakingChanges", () => {
     expect(args).toContain("customized-update");
     expect(args?.[(args?.indexOf("--customization-request") ?? -2) + 1]).toContain("Model changed");
     expect(options).toBeUndefined();
+    expect(core.summary.addRaw).toHaveBeenCalledExactlyOnceWith(
+      [
+        "## SDK breaking-change mitigation",
+        `**Analyzed commit:** \`${"a".repeat(40)}\``,
+        '<a name="breaking-change-model-change-breaking-change"></a>',
+        "## Breaking Change model-change",
+        "### Suppression",
+        "Follow the [suppression guideline](https://github.com/Azure/azure-rest-api-specs/wiki/SDK-Breaking-Changes#how-to-suppress-the-sdk-breaking-changes) to add follow breaking change items to sdk-suppression.yaml.\n\n```yaml\n- Model property removed\n- Method signature changed\n```",
+      ].join("\n\n"),
+    );
+    expect(core.summary.write).toHaveBeenCalledOnce();
   });
 
   it("logs command errors and continues", async () => {
@@ -143,6 +160,7 @@ describe("mitigateSdkBreakingChanges", () => {
     const consoleErrorMock = vi.spyOn(console, "error").mockImplementation(() => {});
 
     await mitigateSdkBreakingChanges({
+      core,
       analysisResultPath,
       mitigationResultPath,
       mitigationWorkflowUrl: "https://github.com/owner/repo/actions/runs/456",
@@ -166,6 +184,10 @@ describe("mitigateSdkBreakingChanges", () => {
         isResolved: false,
       },
     ]);
+    expect(core.summary.addRaw).toHaveBeenCalledWith(
+      expect.stringContaining("```yaml\n- Model property removed\n- Method signature changed\n```"),
+    );
+    expect(core.summary.write).toHaveBeenCalledOnce();
   });
 
   it("marks the change unresolved when customization does not succeed", async () => {
@@ -175,6 +197,7 @@ describe("mitigateSdkBreakingChanges", () => {
     });
 
     await mitigateSdkBreakingChanges({
+      core,
       analysisResultPath,
       mitigationResultPath,
       mitigationWorkflowUrl: "https://github.com/owner/repo/actions/runs/456",
@@ -218,6 +241,7 @@ describe("mitigateSdkBreakingChanges", () => {
                 breakingChange: "Model changed",
                 category: "spec change",
                 suggestedFix: "Restore compatibility",
+                originBreaks: ["- Model property removed"],
               },
             ],
           },
@@ -227,6 +251,7 @@ describe("mitigateSdkBreakingChanges", () => {
     const consoleErrorMock = vi.spyOn(console, "error").mockImplementation(() => {});
 
     await mitigateSdkBreakingChanges({
+      core,
       analysisResultPath,
       mitigationResultPath,
       mitigationWorkflowUrl: "https://github.com/owner/repo/actions/runs/456",
@@ -244,5 +269,38 @@ describe("mitigateSdkBreakingChanges", () => {
       "SDK breaking-change mitigation failed.",
       expect.any(Error),
     );
+    expect(core.summary.addRaw).toHaveBeenCalledExactlyOnceWith(
+      `## SDK breaking-change mitigation\n\n**Analyzed commit:** \`${"a".repeat(40)}\``,
+    );
+    expect(core.summary.write).toHaveBeenCalledOnce();
+  });
+
+  it("writes a summary without suppression sections when there are no breaking changes", async () => {
+    const analysis = AnalysisResultSchema.parse(
+      JSON.parse(await readFile(analysisResultPath, "utf8")),
+    );
+    analysis.projects[0].breakingChanges = [];
+    await writeFile(analysisResultPath, JSON.stringify(analysis));
+
+    await mitigateSdkBreakingChanges({
+      core,
+      analysisResultPath,
+      mitigationResultPath,
+      mitigationWorkflowUrl: "https://github.com/owner/repo/actions/runs/456",
+      specificationRepositoryPath,
+      resultDirPath: temporaryDirectory,
+      azureSdkCliPath: join(temporaryDirectory, "azsdk"),
+    });
+
+    expect(execFileMock).not.toHaveBeenCalled();
+    expect(core.summary.addRaw).toHaveBeenCalledExactlyOnceWith(
+      `## SDK breaking-change mitigation\n\n**Analyzed commit:** \`${"a".repeat(40)}\``,
+    );
+    expect(core.summary.write).toHaveBeenCalledOnce();
+    const result = MitigationResultSchema.parse(
+      JSON.parse(await readFile(mitigationResultPath, "utf8")),
+    );
+    expect(result.status).toBe("success");
+    expect(result.projects[0].breakingChanges).toEqual([]);
   });
 });

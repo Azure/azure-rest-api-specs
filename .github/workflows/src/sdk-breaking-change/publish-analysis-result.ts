@@ -35,7 +35,10 @@ export async function buildAnalysisReport(resultsPath: string): Promise<{
       "#",
       `${project.sdkPackage}-${MarkdownHeadingId.BreakingChange}`,
     ].join("");
-    projectReport.push("", `[SDK breaking change analysis details](${breakingChangeSummaryUrl})`);
+    projectReport.push(
+      "",
+      `[View SDK Breaking Change Analysis Details](${breakingChangeSummaryUrl})`,
+    );
     return projectReport;
   });
 

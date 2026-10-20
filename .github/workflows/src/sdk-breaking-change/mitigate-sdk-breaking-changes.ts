@@ -7,7 +7,16 @@ import {
   MitigationResultSchema,
   type MitigationResult,
   type MitigatedChange,
+  MarkdownHeadingId,
+  SUPPRESSION_GUIDE_URL,
 } from "./types.ts";
+import type { Core } from "../github.ts";
+import {
+  escapeMarkdown,
+  inlineCode,
+  renderMarkdownDoc,
+  section,
+} from "@azure-tools/specs-shared/markdown";
 
 export interface AzsdkCustomizedCodeUpdateResponse {
   success: boolean;
@@ -57,19 +66,26 @@ function BuildMigratedBreakingChange(
 }
 
 export async function mitigateSdkBreakingChanges({
+  core,
   analysisResultPath,
   mitigationResultPath,
   mitigationWorkflowUrl,
   specificationRepositoryPath: unresolvedSpecificationRepositoryPath,
   resultDirPath,
   azureSdkCliPath,
-}: MitigateSdkBreakingChangesOptions): Promise<void> {
+}: { core: Core } & MitigateSdkBreakingChangesOptions): Promise<void> {
   const analysisResult = AnalysisResultSchema.parse(
     JSON.parse(await readFile(analysisResultPath, "utf8")),
   );
   const analyzedProjects = analysisResult.projects.filter(
     (project) => project.analysisStatus === "success",
   );
+  const blocks = [
+    "## SDK breaking-change mitigation",
+    analysisResult.headSha
+      ? `**Analyzed commit:** ${inlineCode(analysisResult.headSha)}`
+      : undefined,
+  ];
   try {
     const specificationRepositoryPath = await realpath(unresolvedSpecificationRepositoryPath);
     const specificationRoot = await realpath(join(specificationRepositoryPath, "specification"));
@@ -168,6 +184,16 @@ export async function mitigateSdkBreakingChanges({
           };
         }
         mitigationResult.projects[projectIndex].breakingChanges.push(mitigatedChange);
+        const suppresionSection = section(
+          "Suppression",
+          `Follow the [suppression guideline](${SUPPRESSION_GUIDE_URL}) to add follow breaking change items to sdk-suppression.yaml.\n\n\`\`\`yaml\n${change.originBreaks.join("\n")}\n\`\`\``,
+        );
+        const breakingChangeSection = section(
+          `Breaking Change ${change.id}`,
+          suppresionSection,
+          `breaking-change-${escapeMarkdown(change.id)}-${MarkdownHeadingId.BreakingChange}`,
+        );
+        blocks.push(renderMarkdownDoc(breakingChangeSection, 2));
       }
     }
     await writeResult(mitigationResultPath, mitigationResult);
@@ -186,4 +212,7 @@ export async function mitigateSdkBreakingChanges({
     };
     await writeResult(mitigationResultPath, failureResult);
   }
+
+  // summary of the mitigation
+  await core.summary.addRaw(blocks.filter((block) => block !== undefined).join("\n\n")).write();
 }

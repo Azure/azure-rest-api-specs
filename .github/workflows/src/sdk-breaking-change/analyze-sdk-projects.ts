@@ -222,6 +222,25 @@ export async function analyzeSdkProjects({
         });
         continue;
       }
+      const breakingChanges =
+        breakingChangesResponse.result?.breakingChanges?.map((change) => {
+          const typedChange = change as {
+            breakingChange: string;
+            category: string;
+            resolution?: string;
+            originBreaks: string[];
+          };
+          return {
+            id: toEightDigitId(typedChange.breakingChange),
+            breakingChange: typedChange.breakingChange,
+            category: typedChange.category,
+            suggestedFix: typedChange.resolution ?? "",
+            originBreaks: typedChange.originBreaks,
+          };
+        }) ?? [];
+      if (breakingChangesResponse.result) {
+        breakingChangesResponse.result.breakingChanges = breakingChanges;
+      }
       blocks.push(`**Analysis succeeded:**`);
       const breakingChangeSection = section(
         "Breaking Changes",
@@ -234,20 +253,7 @@ export async function analyzeSdkProjects({
         typespecProject: typeSpecProjectPath,
         sdkPackage: packageName,
         analysisStatus: "success",
-        breakingChanges:
-          breakingChangesResponse.result?.breakingChanges?.map((change) => {
-            const typedChange = change as {
-              breakingChange: string;
-              category: string;
-              resolution?: string;
-            };
-            return {
-              id: toEightDigitId(typedChange.breakingChange),
-              breakingChange: typedChange.breakingChange,
-              category: typedChange.category,
-              suggestedFix: typedChange.resolution ?? "",
-            };
-          }) ?? [],
+        breakingChanges: breakingChanges,
       });
     }
     await writeFile(resultFilePath, `${JSON.stringify(analyzeResult, null, 2)}\n`);

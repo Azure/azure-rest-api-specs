@@ -34,12 +34,14 @@ beforeEach(async () => {
             breakingChange: "Model changed",
             category: "spec change",
             suggestedFix: "Restore the old shape",
+            originBreaks: ["model-change"],
           },
           {
             id: "property-change",
             breakingChange: "Property changed",
             category: "spec change",
             suggestedFix: "",
+            originBreaks: ["property-change"],
           },
         ],
       },
@@ -98,7 +100,7 @@ describe("buildAnalysisReport", () => {
     expect(result.command).toBe("/azsdk sdk-breaking-analysis Go");
     expect(result.report).toContain(`**Analyzed commit:** \`${analyzedSha}\``);
     expect(result.report).toContain(
-      `[SDK breaking change analysis details](${analysisWorkflowUrl}#armwidget-breaking-change)`,
+      `[View SDK Breaking Change Analysis Details](${analysisWorkflowUrl}#armwidget-breaking-change)`,
     );
     expect(result.report).toContain("| ID | Breaking change | Category | Suggested fix |");
     expect(result.report).toContain(

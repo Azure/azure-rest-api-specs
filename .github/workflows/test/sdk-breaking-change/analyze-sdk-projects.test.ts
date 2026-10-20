@@ -135,6 +135,9 @@ describe("analyzeSdkProjects", () => {
       expect(core.summary.addRaw).toHaveBeenCalledWith(expect.stringContaining(section));
     }
     expect(core.summary.write).toHaveBeenCalledOnce();
+    expect(core.summary.addRaw).toHaveBeenCalledWith(
+      expect.stringContaining('<a name="armwidget-breaking-change"></a>\n\n## Breaking Changes'),
+    );
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(execFileMock).toHaveBeenCalledTimes(3);
     const azureSdkCli = join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk");
@@ -152,6 +155,97 @@ describe("analyzeSdkProjects", () => {
     expect(generateTypeSpecMetadataMock).toHaveBeenCalledWith(
       join(specificationRepositoryPath, "specification", "service", "Widget.Service"),
     );
+  });
+
+  it("includes deterministic change IDs and the normalized detection JSON in the anchored summary", async () => {
+    execFileMock
+      .mockResolvedValueOnce({ stdout: JSON.stringify({ result: "succeeded" }), stderr: "" })
+      .mockResolvedValueOnce({ stdout: JSON.stringify({ result: "succeeded" }), stderr: "" })
+      .mockResolvedValueOnce({
+        stdout: JSON.stringify({
+          result: {
+            hasBreakingChange: true,
+            breakingChanges: [
+              {
+                breakingChange: "Model changed",
+                category: "spec change",
+                resolution: "Restore old_model",
+                originBreaks: ["- Model property removed", "- Model constructor changed"],
+              },
+              {
+                breakingChange: "Property removed",
+                category: "spec change",
+                originBreaks: ["- Property removed"],
+              },
+              {
+                breakingChange: "Model changed",
+                category: "other",
+                resolution: "",
+                originBreaks: ["- Model type changed"],
+              },
+            ],
+          },
+        }),
+        stderr: "",
+      });
+
+    await analyzeSdkProjects({
+      core,
+      localSdkRepositoryPath: sdkRepositoryPath,
+      specificationRepositoryPath,
+      typeSpecConfigPaths: ["specification/service/Widget.Service/tspconfig.yaml"],
+      pullNumber: 42,
+      sdkLanguage: "Go",
+      sdkRepoName: "azure-sdk-for-go",
+      analyzedSha: "a".repeat(40),
+      workflowUrl: "https://github.com/owner/repo/actions/runs/123",
+      resultFilePath,
+      azureSdkCliPath,
+    });
+
+    const artifact = AnalysisResultSchema.parse(JSON.parse(await readFile(resultFilePath, "utf8")));
+    const changes = [
+      {
+        id: "89118517",
+        breakingChange: "Model changed",
+        category: "spec change",
+        suggestedFix: "Restore old_model",
+        originBreaks: ["- Model property removed", "- Model constructor changed"],
+      },
+      {
+        id: "83349090",
+        breakingChange: "Property removed",
+        category: "spec change",
+        suggestedFix: "",
+        originBreaks: ["- Property removed"],
+      },
+      {
+        id: "89118517",
+        breakingChange: "Model changed",
+        category: "other",
+        suggestedFix: "",
+        originBreaks: ["- Model type changed"],
+      },
+    ];
+    expect(artifact.projects[0].breakingChanges).toEqual(changes);
+    expect(core.summary.addRaw).toHaveBeenCalledWith(
+      expect.stringContaining(
+        [
+          '<a name="armwidget-breaking-change"></a>',
+          "",
+          "## Breaking Changes",
+          "",
+          "```",
+          JSON.stringify(
+            { result: { hasBreakingChange: true, breakingChanges: changes } },
+            null,
+            2,
+          ),
+          "```",
+        ].join("\n"),
+      ),
+    );
+    expect(core.setFailed).not.toHaveBeenCalled();
   });
 
   it("records skipped projects without the requested SDK language", async () => {

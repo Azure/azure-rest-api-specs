@@ -7,7 +7,7 @@ import {
   section,
   table,
 } from "@azure-tools/specs-shared/markdown";
-import { type MitigationResult, MitigationResultSchema } from "./types.ts";
+import { MarkdownHeadingId, type MitigationResult, MitigationResultSchema } from "./types.ts";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
 
 export async function buildMitigationReport({
@@ -38,43 +38,29 @@ export async function buildMitigationReport({
     return { report: `⚠️ ${staleMessage}`, result };
   }
   const projectSections = result.projects.flatMap((project) => {
-    const resolvedChanges: string[][] = project.breakingChanges
-      .filter((change) => change.isResolved)
-      .map((change) => [
-        escapeMarkdown(change.id),
-        escapeMarkdown(change.breakingChange),
-        change.suggestedFix ? escapeMarkdown(change.suggestedFix) : "",
-        change.typespecChangesSummary?.[0] ? escapeMarkdown(change.typespecChangesSummary[0]) : "",
-      ]);
-    const unresolvedChanges: string[][] = project.breakingChanges
-      .filter((change) => !change.isResolved)
-      .map((change) => [
-        escapeMarkdown(change.id),
-        escapeMarkdown(change.breakingChange),
-        change.suggestedFix ? escapeMarkdown(change.suggestedFix) : "",
-      ]);
+    const changes: string[][] = project.breakingChanges.map((change) => [
+      change.isResolved ? "✔️" : "❌",
+      `[${escapeMarkdown(change.id)}](${workflowSummaryUrl}#breaking-change-${escapeMarkdown(change.id)}-${MarkdownHeadingId.BreakingChange} "How to Suppress")`,
+      escapeMarkdown(change.breakingChange),
+      change.suggestedFix ? escapeMarkdown(change.suggestedFix) : "",
+      change.typespecChangesSummary?.[0] ? escapeMarkdown(change.typespecChangesSummary[0]) : "",
+    ]);
     return [
       `**TypeSpec project:** ${project.typespecProject}`,
       "",
       `**SDK package:** ${project.sdkPackage}`,
       "",
-      "**Resolved Breaking Changes:**",
+      "**Breaking Changes:**",
       "",
-      resolvedChanges.length > 0
+      changes.length > 0
         ? details(
-            "View resolved breaking changes",
+            "View breaking changes",
             table([
-              ["ID", "Breaking change", "Resolution", "TypeSpec changes"],
-              ...resolvedChanges,
+              ["Resolvable", "ID", "Breaking change", "Resolution", "TypeSpec changes"],
+              ...changes,
             ]),
             true,
           )
-        : "None",
-      "",
-      "**Unresolved Breaking Changes:**",
-      "",
-      unresolvedChanges.length > 0
-        ? table([["ID", "Breaking change", "Suggested resolution"], ...unresolvedChanges])
         : "None",
       "",
     ];
@@ -84,6 +70,10 @@ export async function buildMitigationReport({
   const sdkBreakingChangeMitigationSection = section(
     `SDK Breaking Change Mitigation for ${result.sdkLanguage}`,
     "",
+  );
+  const nextStep = section(
+    "Next Steps",
+    `<p>💡 Apply Mitigation: Apply the customization code to mitigate the breaking changes.</p>\n\n<p>💡 Suppress Breaking Changes: For accepted breaking changes, click the breaking change ID link to view suppression instructions and follow the suppression process.</p>`,
   );
   return {
     report: [
@@ -97,11 +87,10 @@ export async function buildMitigationReport({
       changedCode
         ? details("View customization Code", ["````diff", changedCode, "````"].join("\n"))
         : "No mitigation changes were produced.",
+      "",
       `[View customization code in the workflow summary](${workflowSummaryUrl})`,
       "",
-      "<p>💡 Apply the customization code to mitigate the breaking changes.</p>",
-      "",
-      "<p>💡 For accepted breaking changes, follow the <a href=\"https://github.com/Azure/azure-rest-api-specs/wiki/SDK-Breaking-Changes#how-to-suppress-the-sdk-breaking-changes\">suppression process</a> to suppress them.</p>",
+      renderMarkdownDoc(nextStep, 2),
     ].join("\n"),
     result,
   };

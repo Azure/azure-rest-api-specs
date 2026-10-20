@@ -40,6 +40,7 @@ export const AnalysisResultSchema = z.object({
             breakingChange: z.string(),
             category: z.string(),
             suggestedFix: z.string(),
+            originBreaks: z.array(z.string()).min(1),
           }),
         ),
       })
@@ -88,3 +89,6 @@ export const MarkdownHeadingId = Object.freeze({
 } as const);
 
 export type MarkdownHeadingId = (typeof MarkdownHeadingId)[keyof typeof MarkdownHeadingId];
+
+export const SUPPRESSION_GUIDE_URL =
+  "https://github.com/Azure/azure-rest-api-specs/wiki/SDK-Breaking-Changes#how-to-suppress-the-sdk-breaking-changes";
