@@ -5795,7 +5795,7 @@
       "description": "The background job details.",
       "properties": {
         "state": {
-          "$ref": "#/definitions/BackgroundJobState",
+          "$ref": "#/definitions/State",
           "description": "The state of the background job."
         },
         "executionState": {
@@ -5826,54 +5826,6 @@
           "format": "date-time",
           "description": "The next execution time of the background job in ISO 8601 date-time format."
         }
-      }
-    },
-    "BackgroundJobState": {
-      "type": "string",
-      "description": "The state of the background job.",
-      "enum": [
-        "Enabled",
-        "Disabled",
-        "Deleted",
-        "Completed",
-        "Faulted",
-        "Suspended"
-      ],
-      "x-ms-enum": {
-        "name": "BackgroundJobState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disabled"
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "Deleted"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "Completed"
-          },
-          {
-            "name": "Faulted",
-            "value": "Faulted",
-            "description": "Faulted"
-          },
-          {
-            "name": "Suspended",
-            "value": "Suspended",
-            "description": "Suspended"
-          }
-        ]
       }
     },
     "BackupPolicy": {
@@ -10056,36 +10008,6 @@
         }
       ]
     },
-    "SqlServerEsuLicenseActivationState": {
-      "type": "string",
-      "description": "The activation state of the license.",
-      "enum": [
-        "Inactive",
-        "Active",
-        "Terminated"
-      ],
-      "x-ms-enum": {
-        "name": "SqlServerEsuLicenseActivationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Inactive",
-            "value": "Inactive",
-            "description": "Inactive"
-          },
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "Active"
-          },
-          {
-            "name": "Terminated",
-            "value": "Terminated",
-            "description": "Terminated"
-          }
-        ]
-      }
-    },
     "SqlServerEsuLicenseListResult": {
       "type": "object",
       "description": "A list of SQL Server ESU licenses.",
@@ -10131,7 +10053,7 @@
           "minimum": 16
         },
         "activationState": {
-          "$ref": "#/definitions/SqlServerEsuLicenseActivationState",
+          "$ref": "#/definitions/State",
           "description": "The activation state of the license."
         },
         "scopeType": {
@@ -10206,7 +10128,7 @@
           "minimum": 16
         },
         "activationState": {
-          "$ref": "#/definitions/SqlServerEsuLicenseActivationState",
+          "$ref": "#/definitions/State",
           "description": "The activation state of the license."
         },
         "scopeType": {
@@ -11858,6 +11780,72 @@
             "name": "SQLServer2025",
             "value": "SQL Server 2025",
             "description": "SQL Server 2025"
+          }
+        ]
+      }
+    },
+    "State": {
+      "type": "string",
+      "description": "The activation state of the license.",
+      "enum": [
+        "Inactive",
+        "Active",
+        "Terminated",
+        "Enabled",
+        "Disabled",
+        "Deleted",
+        "Completed",
+        "Faulted",
+        "Suspended"
+      ],
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Inactive"
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active"
+          },
+          {
+            "name": "Terminated",
+            "value": "Terminated",
+            "description": "Terminated"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed"
+          },
+          {
+            "name": "Faulted",
+            "value": "Faulted",
+            "description": "Faulted"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "Suspended"
           }
         ]
       }

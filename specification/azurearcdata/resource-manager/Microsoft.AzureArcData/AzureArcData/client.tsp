@@ -7,6 +7,58 @@ using Microsoft.AzureArcData;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
+// SDK-only state types keep the wire contract's shared State union unchanged.
+namespace Microsoft.AzureArcData {
+  /** The activation state of the license. */
+  union SqlServerEsuLicenseActivationState {
+    string,
+
+    /** Inactive. */
+    Inactive: "Inactive",
+
+    /** Active. */
+    Active: "Active",
+
+    /** Terminated. */
+    Terminated: "Terminated",
+  }
+
+  /** The state of the background job. */
+  union BackgroundJobState {
+    string,
+
+    /** Enabled. */
+    Enabled: "Enabled",
+
+    /** Disabled. */
+    Disabled: "Disabled",
+
+    /** Deleted. */
+    Deleted: "Deleted",
+
+    /** Completed. */
+    Completed: "Completed",
+
+    /** Faulted. */
+    Faulted: "Faulted",
+
+    /** Suspended. */
+    Suspended: "Suspended",
+  }
+}
+
+@@alternateType(BackgroundJob.state, BackgroundJobState, "csharp");
+@@alternateType(
+  SqlServerEsuLicenseProperties.activationState,
+  SqlServerEsuLicenseActivationState,
+  "csharp"
+);
+@@alternateType(
+  SqlServerEsuLicenseUpdateProperties.activationState,
+  SqlServerEsuLicenseActivationState,
+  "csharp"
+);
+
 @@clientName(
   FailoverGroupSpec.partnerMirroringURL,
   "partnerMirroringUrl",
