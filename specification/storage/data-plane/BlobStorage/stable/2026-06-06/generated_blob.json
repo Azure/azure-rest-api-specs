@@ -1034,8 +1034,7 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold",
-              "Smart"
+              "Cold"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -1120,11 +1119,6 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
-                },
-                {
-                  "name": "Smart",
-                  "value": "Smart",
-                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -1844,8 +1838,7 @@
                 "enum": [
                   "rehydrate-pending-to-hot",
                   "rehydrate-pending-to-cool",
-                  "rehydrate-pending-to-cold",
-                  "rehydrate-pending-to-smart"
+                  "rehydrate-pending-to-cold"
                 ],
                 "x-ms-enum": {
                   "name": "ArchiveStatus",
@@ -1865,11 +1858,6 @@
                       "name": "RehydratePendingToCold",
                       "value": "rehydrate-pending-to-cold",
                       "description": "The archive status is rehydrating pending to Cold."
-                    },
-                    {
-                      "name": "RehydratePendingToSmart",
-                      "value": "rehydrate-pending-to-smart",
-                      "description": "The archive status is rehydrating pending to Smart."
                     }
                   ]
                 }
@@ -2188,10 +2176,6 @@
               "x-ms-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
-              },
-              "x-ms-smart-access-tier": {
-                "type": "string",
-                "description": "The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier."
               },
               "x-ms-tag-count": {
                 "type": "integer",
@@ -3879,8 +3863,7 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold",
-              "Smart"
+              "Cold"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -3965,11 +3948,6 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
-                },
-                {
-                  "name": "Smart",
-                  "value": "Smart",
-                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -10398,8 +10376,7 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold",
-              "Smart"
+              "Cold"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -10484,11 +10461,6 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
-                },
-                {
-                  "name": "Smart",
-                  "value": "Smart",
-                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -11212,7 +11184,7 @@
     "?restype=container&_overload=delete": {
       "delete": {
         "operationId": "Container_Delete",
-        "description": "Deletes the specified container.",
+        "description": "Deletes the specified container.\n\nWhen a container is deleted, a container with the same name can't be created for at least 30 seconds. The container might not be available for more than 30 seconds if the service is still processing the request. While the container is being deleted, attempts to create a container of the same name fail with status code 409 (Conflict). The service indicates that the container is being deleted. Operations on blobs within the container, including reads and writes, may continue to succeed for up to 30 seconds after the delete request is accepted. After this period, all operations on the container and its blobs fail with status code 404 (Not Found).",
         "parameters": [
           {
             "name": "x-ms-version",
@@ -13179,8 +13151,7 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold",
-              "Smart"
+              "Cold"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -13265,11 +13236,6 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
-                },
-                {
-                  "name": "Smart",
-                  "value": "Smart",
-                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -14139,8 +14105,7 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold",
-              "Smart"
+              "Cold"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -14225,11 +14190,6 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
-                },
-                {
-                  "name": "Smart",
-                  "value": "Smart",
-                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -14648,8 +14608,7 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold",
-              "Smart"
+              "Cold"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -14734,11 +14693,6 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
-                },
-                {
-                  "name": "Smart",
-                  "value": "Smart",
-                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -15106,8 +15060,7 @@
         "Cool",
         "Archive",
         "Premium",
-        "Cold",
-        "Smart"
+        "Cold"
       ],
       "x-ms-enum": {
         "name": "AccessTier",
@@ -15192,11 +15145,6 @@
             "name": "Cold",
             "value": "Cold",
             "description": "The Cold access tier."
-          },
-          {
-            "name": "Smart",
-            "value": "Smart",
-            "description": "The Smart access tier."
           }
         ]
       }
@@ -15249,8 +15197,7 @@
       "enum": [
         "rehydrate-pending-to-hot",
         "rehydrate-pending-to-cool",
-        "rehydrate-pending-to-cold",
-        "rehydrate-pending-to-smart"
+        "rehydrate-pending-to-cold"
       ],
       "x-ms-enum": {
         "name": "ArchiveStatus",
@@ -15270,11 +15217,6 @@
             "name": "RehydratePendingToCold",
             "value": "rehydrate-pending-to-cold",
             "description": "The archive status is rehydrating pending to Cold."
-          },
-          {
-            "name": "RehydratePendingToSmart",
-            "value": "rehydrate-pending-to-smart",
-            "description": "The archive status is rehydrating pending to Smart."
           }
         ]
       }
@@ -15730,11 +15672,6 @@
           "$ref": "#/definitions/ArchiveStatus",
           "description": "The archive status of the blob.",
           "x-ms-client-name": "archiveStatus"
-        },
-        "SmartAccessTier": {
-          "$ref": "#/definitions/AccessTier",
-          "description": "The smart access tier of the blob.",
-          "x-ms-client-name": "smartAccessTier"
         },
         "CustomerProvidedKeySha256": {
           "type": "string",
