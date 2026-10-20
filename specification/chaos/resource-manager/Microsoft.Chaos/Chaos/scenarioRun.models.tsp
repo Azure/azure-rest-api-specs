@@ -458,11 +458,11 @@ model ScenarioRunSummaryResource {
   id: string;
 
   /**
-   * The concrete targets evaluated for this resource during action execution.
+   * The resources affected during action execution.
    */
   @visibility(Lifecycle.Read)
   @identifiers(#["id"])
-  effectiveTargets?: ScenarioRunEffectiveTarget[];
+  affectedResources?: ScenarioRunEffectiveTarget[];
 }
 
 /**
