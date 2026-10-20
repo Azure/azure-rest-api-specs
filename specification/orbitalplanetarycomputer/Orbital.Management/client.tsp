@@ -18,9 +18,4 @@ using Microsoft.Spatio;
 );
 @@clientName(CatalogTier, "PlanetaryComputerGeoCatalogTier", "csharp");
 @@clientName(ProvisioningState, "PlanetaryComputerProvisioningState", "csharp");
-@@alternateType(
-  GeoCatalogUpdate.identity,
-  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
-  "csharp"
-);
 @@alternateType(GeoCatalogProperties.catalogUri, url, "csharp");
