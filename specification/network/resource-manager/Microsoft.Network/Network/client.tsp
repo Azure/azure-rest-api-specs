@@ -23,6 +23,11 @@ using Common;
 @@clientName(Microsoft.Network.VirtualWanSecurityProvider.type, "ProviderType", "csharp");
 @@clientName(Microsoft.Network.EffectiveNetworkSecurityGroup.tagMap, "TagToIPAddresses", "csharp");
 
+// Preserve the released C# names without SDK-side type-renaming customizations.
+@@clientName(Microsoft.Network.IsRollback, "UndoReservationType", "csharp");
+@@clientName(Microsoft.Network.RoutingConfiguration, "RoutingConfigurationNfv", "csharp");
+@@clientName(Microsoft.Network.PropagatedRouteTable, "PropagatedRouteTableNfv", "csharp");
+
 // Preserve the naming requirements used by the released C# provisioning library.
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve C# provisioning resource naming compatibility."
 @@clientOption(
@@ -3269,6 +3274,11 @@ union ProvisioningStateUnion {
 @@clientName(
   Microsoft.Network.VpnGatewayTunnelingProtocol.OpenVPN,
   Azure.ClientGenerator.Core.exact("OpenVpn"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.VpnAuthenticationType.AAD,
+  Azure.ClientGenerator.Core.exact("Aad"),
   "csharp"
 );
 @@clientName(
@@ -7303,11 +7313,6 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 @@clientName(
   Common.LoadBalancerBackendAddressPropertiesFormat.loadBalancerFrontendIPConfiguration,
   "LoadBalancerFrontendIPConfiguration",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Network.NvaInterfaceConfigurationsProperties.type,
-  "PropertiesType",
   "csharp"
 );
 @@clientName(
