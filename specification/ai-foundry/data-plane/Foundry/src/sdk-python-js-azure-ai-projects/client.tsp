@@ -305,17 +305,52 @@ using Azure.AI.Projects;
 );
 
 // --------------------------------------------------------------------------------
-// Beta Voice Agent Realtime sub-client
+// Voice Agent WebSocket transports
 // --------------------------------------------------------------------------------
 
 // A generated HTTP client cannot keep the socket alive past the 101 response, and each language
 // needs its own WebSocket transport to speak the realtime protocol afterward. Exclude this
 // operation entirely from the emitted SDK; it remains in the spec for raw REST documentation only.
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!(python, javascript)");
+@@scope(VoiceAgentLiveWebSocket.connectLiveVoiceAgent, "!(python, javascript)");
 
 // Keep VoiceAgentTransport reachable even though the WebSocket operation that references it is excluded.
 @@usage(VoiceAgentTransport, Usage.input | Usage.json);
 @@access(VoiceAgentTransport, Access.public);
+
+// JavaScript needs a discriminated SDK model to invoke variant serializers.
+// Spread the original fields without changing the native protocol hierarchy.
+namespace Azure.AI.Projects {
+  @doc("JavaScript delegation options selected by type.")
+  @discriminator("type")
+  model VoiceAgentLiveDelegationOptions {
+    type: OpenAI.DelegationType | "foundry_managed_agent";
+  }
+
+  @doc("Client delegation options.")
+  model VoiceAgentLiveClientDelegationOptions
+    extends VoiceAgentLiveDelegationOptions {
+    ...OpenAI.LiveClientDelegationParam;
+  }
+
+  @doc("Responses delegation options.")
+  model VoiceAgentLiveResponsesDelegationOptions
+    extends VoiceAgentLiveDelegationOptions {
+    ...OpenAI.LiveResponsesDelegationParam;
+  }
+
+  @doc("Foundry managed-agent delegation options.")
+  model VoiceAgentLiveManagedAgentDelegationOptions
+    extends VoiceAgentLiveDelegationOptions {
+    ...VoiceAgentLiveManagedAgentDelegation;
+  }
+}
+
+@@alternateType(
+  VoiceAgentLiveDelegation,
+  VoiceAgentLiveDelegationOptions,
+  "javascript"
+);
 
 // --------------------------------------------------------------------------------
 // Beta Voice Agent Conversations sub-client
@@ -360,6 +395,41 @@ using Azure.AI.Projects;
 @@clientName(AgentEndpointConversations.getAgentConversationAudio, "getAudio");
 @@clientName(
   AgentEndpointConversations.getAgentConversationAudioContent,
+  "downloadAudio"
+);
+
+// --------------------------------------------------------------------------------
+// Beta Voice Agent Live Conversations sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(AgentEndpointLiveConversations.listLiveAgentConversations, "list");
+@@clientName(AgentEndpointLiveConversations.getLiveAgentConversation, "get");
+@@clientName(
+  AgentEndpointLiveConversations.deleteLiveAgentConversation,
+  "delete"
+);
+@@clientName(
+  AgentEndpointLiveConversations.listLiveAgentConversationItems,
+  "listItems"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationItem,
+  "getItem"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioItem,
+  "getAudioItem"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioItemContent,
+  "downloadAudioItem"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudio,
+  "getAudio"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioContent,
   "downloadAudio"
 );
 

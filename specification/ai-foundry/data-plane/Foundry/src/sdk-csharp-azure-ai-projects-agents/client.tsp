@@ -31,6 +31,12 @@ namespace Azure.AI.Projects {
   @@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!csharp");
   @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!csharp");
 
+  // Keep selectors on concrete C# definitions; narrowing the base enum produces
+  // incompatible constructors and backing fields in the current emitter.
+  @@scope(VoiceAgentBaseDefinition.sub_protocol, "!csharp");
+
+  @@clientName(OpenAI.delegation, "LiveDelegation", "csharp");
+
   // --------------------------------------------------------------------------------
   // Fix the xref.
   // --------------------------------------------------------------------------------
@@ -158,6 +164,7 @@ namespace Azure.AI.Projects {
 
   // WebSocket protocol upgrades are not representable by the C# HTTP client generator.
   @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!csharp");
+  @@scope(VoiceAgentLiveWebSocket.connectLiveVoiceAgent, "!csharp");
 
   // Keep VoiceAgentTransport reachable even though the WebSocket operation that references it is excluded.
   @@usage(VoiceAgentTransport, Usage.input | Usage.json);
