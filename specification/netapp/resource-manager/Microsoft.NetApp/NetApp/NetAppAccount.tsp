@@ -71,6 +71,8 @@ model AccountProperties {
   @added(Versions.v2026_06_15_preview)
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
   entraIdConfig?: EntraIdConfig;
 
   /**
@@ -252,6 +254,8 @@ model AccountPropertiesPatch is PatchModel<
   @added(Versions.v2026_06_15_preview)
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
   entraIdConfig?: EntraIdConfigPatch;
 
   /**
@@ -287,6 +291,8 @@ model AccountPropertiesPatch is PatchModel<
 @added(Versions.v2026_06_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_08_01)
+@added(Versions.v2026_08_15_preview)
 model EntraIdConfigPatch is PatchModel<EntraIdConfig, "entraIdAkvConfig"> {
   /**
    * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
@@ -310,6 +316,8 @@ model EntraIdConfigPatch is PatchModel<EntraIdConfig, "entraIdAkvConfig"> {
 @added(Versions.v2026_06_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_08_01)
+@added(Versions.v2026_08_15_preview)
 model EntraIdAkvConfigPatch is PatchModel<EntraIdAkvConfig>;
 
 /**
@@ -393,6 +401,8 @@ model AccountEncryptionPatch is PatchModel<
 @added(Versions.v2026_06_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_08_01)
+@added(Versions.v2026_08_15_preview)
 model EntraIdConfig {
   /**
    * ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.
@@ -439,6 +449,8 @@ model EntraIdConfig {
 @added(Versions.v2026_06_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_08_01)
+@added(Versions.v2026_08_15_preview)
 model EntraIdAkvConfig {
   /**
    * The Azure Key Vault URI where the Entra ID credentials are stored.
