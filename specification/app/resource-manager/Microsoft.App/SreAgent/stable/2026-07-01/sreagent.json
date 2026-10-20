@@ -261,9 +261,6 @@
           },
           "Agents_Get_Vnet": {
             "$ref": "./examples/Agents_Get_Vnet.json"
-          },
-          "Agents_Get_WithoutNetworkConfiguration": {
-            "$ref": "./examples/Agents_Get_WithoutNetworkConfiguration.json"
           }
         }
       },
@@ -338,9 +335,6 @@
           },
           "Agents_CreateOrUpdate_FullNetworkConfiguration": {
             "$ref": "./examples/Agents_CreateOrUpdate_FullNetworkConfiguration.json"
-          },
-          "Agents_CreateOrUpdate_Minimum": {
-            "$ref": "./examples/Agents_CreateOrUpdate_Minimum.json"
           },
           "Agents_CreateOrUpdate_Vnet": {
             "$ref": "./examples/Agents_CreateOrUpdate_Vnet.json"
@@ -428,9 +422,6 @@
           },
           "Agents_Update_NetworkSettings": {
             "$ref": "./examples/Agents_Update_NetworkSettings.json"
-          },
-          "Agents_Update_PreserveNetworkConfiguration": {
-            "$ref": "./examples/Agents_Update_PreserveNetworkConfiguration.json"
           },
           "Agents_Update_ReplaceSubnet": {
             "$ref": "./examples/Agents_Update_ReplaceSubnet.json"
@@ -1727,42 +1718,6 @@
       "maxLength": 253,
       "pattern": "^(\\*\\.(?=[^.]+\\.))?[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$"
     },
-    "SandboxCodeRepository": {
-      "type": "string",
-      "description": "Code repository providers that can be allowed on the managed network path.",
-      "enum": [
-        "Github",
-        "GithubEnterprise",
-        "AzureDevOps",
-        "GitLab"
-      ],
-      "x-ms-enum": {
-        "name": "SandboxCodeRepository",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Github",
-            "value": "Github",
-            "description": "Repositories hosted on GitHub.com."
-          },
-          {
-            "name": "GithubEnterprise",
-            "value": "GithubEnterprise",
-            "description": "Repositories hosted on GitHub Enterprise."
-          },
-          {
-            "name": "AzureDevOps",
-            "value": "AzureDevOps",
-            "description": "Repositories hosted in Azure DevOps."
-          },
-          {
-            "name": "GitLab",
-            "value": "GitLab",
-            "description": "Repositories hosted on GitLab."
-          }
-        ]
-      }
-    },
     "SandboxConfiguration": {
       "type": "object",
       "description": "Desired configuration for the agent's sandbox.",
@@ -1807,16 +1762,16 @@
         },
         "allowedRegistries": {
           "type": "array",
-          "description": "Package registry identifiers allowed on the managed network path. Values are matched without regard to case.\nIn PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.",
+          "description": "Package registry identifiers allowed on the managed network path. Values are matched without regard to case.\nKnown values are 'pypi', 'npmjs', 'nuget-org' and 'ubuntu'. The service validates the values.\nIn PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.",
           "items": {
-            "$ref": "#/definitions/SandboxRegistry"
+            "type": "string"
           }
         },
         "allowedCodeRepositories": {
           "type": "array",
-          "description": "Code repository provider identifiers allowed on the managed network path. Values are matched case-sensitively.\nIn PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.",
+          "description": "Code repository provider identifiers allowed on the managed network path. Values are matched case-sensitively.\nKnown values are 'Github', 'GithubEnterprise', 'AzureDevOps' and 'GitLab'. The service validates the values.\nIn PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.",
           "items": {
-            "$ref": "#/definitions/SandboxCodeRepository"
+            "type": "string"
           }
         },
         "httpProxy": {
@@ -1880,10 +1835,8 @@
     },
     "SandboxNoProxyEntry": {
       "type": "string",
-      "description": "A destination that bypasses the forward proxy.\nThe value is an exact IPv4 address, a DNS hostname, or a DNS suffix prefixed with '.' or '*.'.",
-      "minLength": 1,
-      "maxLength": 253,
-      "pattern": "^(?:(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}|(?:\\*\\.|\\.)?(?=.{1,253}$)(?=.*[A-Za-z_])(?:[A-Za-z0-9_](?:[A-Za-z0-9_-]{0,61}[A-Za-z0-9_])?)(?:\\.(?:[A-Za-z0-9_](?:[A-Za-z0-9_-]{0,61}[A-Za-z0-9_])?))*)$"
+      "description": "A destination that bypasses the forward proxy.\nThe value is an exact IPv4 address, a DNS hostname, or a DNS suffix prefixed with '.' or '*.'.\nThe service validates the format.",
+      "minLength": 1
     },
     "SandboxPackageManager": {
       "type": "string",
@@ -1942,42 +1895,6 @@
         "name",
         "packageManager"
       ]
-    },
-    "SandboxRegistry": {
-      "type": "string",
-      "description": "Package registries that can be allowed on the managed network path.",
-      "enum": [
-        "pypi",
-        "npmjs",
-        "nuget-org",
-        "ubuntu"
-      ],
-      "x-ms-enum": {
-        "name": "SandboxRegistry",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pypi",
-            "value": "pypi",
-            "description": "The Python Package Index."
-          },
-          {
-            "name": "Npmjs",
-            "value": "npmjs",
-            "description": "The public npm registry."
-          },
-          {
-            "name": "NugetOrg",
-            "value": "nuget-org",
-            "description": "The public NuGet gallery."
-          },
-          {
-            "name": "Ubuntu",
-            "value": "ubuntu",
-            "description": "Ubuntu package archives."
-          }
-        ]
-      }
     },
     "SupportedAgentModel": {
       "type": "object",

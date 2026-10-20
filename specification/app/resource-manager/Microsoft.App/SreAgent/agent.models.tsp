@@ -189,15 +189,17 @@ model SandboxEgressConfiguration {
 
   /**
    * Package registry identifiers allowed on the managed network path. Values are matched without regard to case.
+   * Known values are 'pypi', 'npmjs', 'nuget-org' and 'ubuntu'. The service validates the values.
    * In PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.
    */
-  allowedRegistries?: SandboxRegistry[];
+  allowedRegistries?: string[];
 
   /**
    * Code repository provider identifiers allowed on the managed network path. Values are matched case-sensitively.
+   * Known values are 'Github', 'GithubEnterprise', 'AzureDevOps' and 'GitLab'. The service validates the values.
    * In PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.
    */
-  allowedCodeRepositories?: SandboxCodeRepository[];
+  allowedCodeRepositories?: string[];
 
   /**
    * Forward-proxy configuration for sandbox outbound requests.
@@ -219,11 +221,10 @@ scalar SandboxAllowedHost extends string;
 /**
  * A destination that bypasses the forward proxy.
  * The value is an exact IPv4 address, a DNS hostname, or a DNS suffix prefixed with '.' or '*.'.
+ * The service validates the format.
  */
 @added(Versions.v2026_07_01)
 @minLength(1)
-@maxLength(253)
-@pattern("^(?:(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}|(?:\\*\\.|\\.)?(?=.{1,253}$)(?=.*[A-Za-z_])(?:[A-Za-z0-9_](?:[A-Za-z0-9_-]{0,61}[A-Za-z0-9_])?)(?:\\.(?:[A-Za-z0-9_](?:[A-Za-z0-9_-]{0,61}[A-Za-z0-9_])?))*)$")
 scalar SandboxNoProxyEntry extends string;
 
 /** Forward-proxy endpoints and additional destinations that bypass the proxy. */
@@ -289,42 +290,6 @@ union SandboxPackageManager {
 
   /** .NET tools installed from NuGet. */
   Nuget: "nuget",
-}
-
-/** Package registries that can be allowed on the managed network path. */
-@added(Versions.v2026_07_01)
-union SandboxRegistry {
-  string,
-
-  /** The Python Package Index. */
-  Pypi: "pypi",
-
-  /** The public npm registry. */
-  Npmjs: "npmjs",
-
-  /** The public NuGet gallery. */
-  NugetOrg: "nuget-org",
-
-  /** Ubuntu package archives. */
-  Ubuntu: "ubuntu",
-}
-
-/** Code repository providers that can be allowed on the managed network path. */
-@added(Versions.v2026_07_01)
-union SandboxCodeRepository {
-  string,
-
-  /** Repositories hosted on GitHub.com. */
-  Github: "Github",
-
-  /** Repositories hosted on GitHub Enterprise. */
-  GithubEnterprise: "GithubEnterprise",
-
-  /** Repositories hosted in Azure DevOps. */
-  AzureDevOps: "AzureDevOps",
-
-  /** Repositories hosted on GitLab. */
-  GitLab: "GitLab",
 }
 
 /** Supported modes for outbound network access from the agent's sandbox. */
