@@ -357,7 +357,7 @@ model AgentInsightMonitor {
   @visibility(Lifecycle.Read)
   overview: AgentInsightsOverview | null;
 
-  /** Category selection and analysis guidance. Omitted when priorities are unconfigured or cleared. */
+  /** Category selection and analysis guidance. Omitted when priorities are not configured or have been cleared. */
   @visibility(Lifecycle.Read)
   priorities?: AgentInsightPriorities;
 
