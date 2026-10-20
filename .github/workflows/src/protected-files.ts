@@ -4,7 +4,36 @@ import { inlineCode } from "../../shared/src/markdown.ts";
 import { CoreLogger } from "./core-logger.ts";
 import type { GitHubScriptArgs, WebhookEvent } from "./github.ts";
 
-const ALLOWED_AUTHORS = new Set(["azure-sdk", "azure-sdk-automation[bot]"]);
+// Maintainer entries are based on Azure/azure-rest-api-specs-maintainers; keep access up to date.
+const ALLOWED_AUTHORS = new Set(
+  [
+    "azure-sdk",
+    "azure-sdk-automation[bot]",
+    "dependabot[bot]",
+
+    "AkhilaIlla",
+    "Bubbles4096",
+    "MaryGao",
+    "MSEvanhi",
+    "catalinaperalta",
+    "gary-x-li",
+    "iscai-msft",
+    "lmazuel",
+    "markcowl",
+    "nikhgup",
+    "pshao25",
+    "qiaozha",
+    "raosuhas",
+    "ravimeda",
+    "samvaity",
+    "tejaswiMinnu",
+    "timotheeguerin",
+    "tjprescott",
+    "vidapour",
+    "vikeshi26",
+    "xirzec",
+  ].map((author) => author.toLowerCase()),
+);
 const PROTECTED_PATHS = [
   ".gitignore",
   "cspell.json",
@@ -54,7 +83,7 @@ export async function checkProtectedFiles({
     core.info(`Account '${author}' is allowed to update protected files`);
     return {
       conclusion: "success",
-      title: "Trusted automation author",
+      title: "Allowed maintainer or automation author",
       summary: `Account ${inlineCode(author)} is allowed to update protected files.`,
     };
   }
@@ -79,43 +108,21 @@ export async function checkProtectedFiles({
     };
   }
 
-  if (!changedFiles.some((file) => matchesAny(file, ["specification", "specification/**"]))) {
-    const message =
-      "Repository maintenance PR; normal CODEOWNERS review and other merge requirements still apply.";
-    core.info(message);
-    const syncedFiles = protectedFiles.filter((file) => matchesAny(file, SYNCED_PATHS));
-    for (const file of syncedFiles) {
-      core.warning(
-        `File '${file}' is synced from Azure/azure-sdk-tools. Make source changes in that repository rather than editing synchronized copies.`,
-        { file },
-      );
-    }
-    return {
-      conclusion: "success",
-      title: "Repository maintenance PR",
-      summary:
-        `${protectedFiles.map((file) => `- ${inlineCode(file)}`).join("\n")}\n\n${message}` +
-        (syncedFiles.length
-          ? "\n\nSynchronized files come from [Azure/azure-sdk-tools](https://github.com/Azure/azure-sdk-tools); make source changes there."
-          : ""),
-    };
-  }
-
   const messages: string[] = [];
   for (const file of protectedFiles) {
     const message = matchesAny(file, SYNCED_PATHS)
       ? `File '${file}' is synced from Azure/azure-sdk-tools. Remove this change from your PR and make the change in Azure/azure-sdk-tools instead.`
-      : `File '${file}' is repository-managed and outside the scope of a specification contribution. Remove this change from your PR. If a tooling change is needed, open an issue for the repository maintainers.`;
+      : `File '${file}' is repository-managed and can only be changed by allowed repository maintainers. Remove this change from your PR. If a tooling change is needed, open an issue for the repository maintainers.`;
     core.error(message, { file });
     const summary = `- ${inlineCode(file)}: ${
       matchesAny(file, SYNCED_PATHS)
         ? "Synced from Azure/azure-sdk-tools; make the change in that repository."
-        : "Repository-managed file; remove this change from your specification PR."
+        : "Repository-managed file; only allowed repository maintainers may change it."
     }`;
     messages.push(summary);
   }
   core.setFailed(
-    "Remove changes to protected files from your specification PR. See https://aka.ms/ci-fix#protected-files.",
+    "Only allowed repository maintainers may change protected files. See https://aka.ms/ci-fix#protected-files.",
   );
   return {
     conclusion: "failure",
@@ -123,6 +130,6 @@ export async function checkProtectedFiles({
     summary:
       `${messages.join("\n")}\n\n` +
       "See the [Protected Files guide](https://aka.ms/ci-fix#protected-files). " +
-      "Keep repository maintenance separate from specification contributions.",
+      "Only allowlisted PR authors may change protected files, even in maintenance-only PRs.",
   };
 }
