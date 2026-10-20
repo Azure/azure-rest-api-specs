@@ -1,5 +1,6 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "./client-cpp.mjs";
 
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
@@ -364,3 +365,33 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.Queues, "omitSlashFromEmptyRoute", true, "csharp");
+
+// C++ customizations
+@@alternateType(MetadataHeaders.metadata, Record<string>, "cpp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "C++ prefix header collection support."
+@@clientOption(
+  MetadataHeaders.metadata,
+  "collectionHeaderPrefix",
+  "x-ms-meta-",
+  "cpp"
+);
+@@alternateType(KeyInfo.start, string, "cpp");
+@@alternateType(KeyInfo.expiry, string, "cpp");
+@@alternateType(GeoReplication.lastSyncTime, utcDateTime | null, "cpp");
+// The compiler's ::parameters selector does not expose these template-expanded properties.
+extern dec alternateCppParameterType(
+  target: TypeSpec.Reflection.Operation,
+  parameter: valueof string,
+  type: unknown
+);
+@@alternateCppParameterType(Queue.receiveMessages, "numberOfMessages", int64);
+@@alternateCppParameterType(Queue.peekMessages, "numberOfMessages", int64);
+
+/** Statistics returned to the C++ queue protocol client. */
+@TypeSpec.Xml.name("StorageServiceStats")
+@clientName("QueueServiceStats", "cpp")
+model QueueServiceStatsCpp {
+  ...QueueServiceStats;
+}
+
+@@alternateType(QueueServiceStats, QueueServiceStatsCpp, "cpp");

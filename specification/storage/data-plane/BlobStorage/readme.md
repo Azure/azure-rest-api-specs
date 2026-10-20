@@ -16,6 +16,13 @@ To see additional help and options, run:
 
 > `tsp --help`
 
+### C++ client customizations
+
+`client.tsp` imports `Cpp/client.tsp` for C++-scoped protocol customizations.
+The raw listing operations preserve streaming responses for the SDK's handwritten
+XML and Apache Arrow readers. Batch request construction and subresponse parsing
+remain handwritten in the C++ SDK; generated batch operations are excluded for C++.
+
 ---
 
 ## Configuration
