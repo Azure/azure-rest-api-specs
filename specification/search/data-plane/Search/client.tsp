@@ -122,11 +122,8 @@ namespace SearchIndexClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op listIndexes is Search.Indexes.list;
 
-  // Offset-paging list op (Search.Indexes.listOffsetPaged is @removed at
-  // v2026_08_01_preview, while the server-driven Search.Indexes.list is @added at the same
-  // version). The two service ops are version-disjoint, so binding both here and emitting
-  // them under the same client method name ("listIndexes") keeps a single `GetIndexes`
-  // method in every SDK version and avoids a customer breaking change.
+  // Offset-paging and server-driven operations are version-disjoint. C# keeps
+  // their existing shared SDK name for compatibility.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op listIndexesOffsetPaged is Search.LegacyIndexes.list;
@@ -135,8 +132,7 @@ namespace SearchIndexClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op listIndexesWithSelectedProperties is Search.Indexes.listWithSelectedProperties;
 
-  // Offset-paging counterpart of `listIndexesWithSelectedProperties`; same
-  // version-disjoint unification as `listIndexesOffsetPaged` above.
+  // Preserve the selected-properties variant of the legacy offset-paging API.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op listIndexesWithSelectedPropertiesOffsetPaged is Search.LegacyIndexes.listWithSelectedProperties;
@@ -684,38 +680,18 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchClient.suggestPost, "suggest", "java");
 @@access(SearchClient.index, Access.internal);
 @@access(SearchIndexerClient.listDataSources, Access.public, "csharp");
-@@clientName(
-  SearchIndexerClient.listDataSources,
-  "GetDataSourceConnectionsWithSelectedProperties",
-  "csharp"
-);
 @@access(SearchIndexerClient.createOrUpdateDataSource, Access.internal);
 @@access(SearchIndexerClient.deleteDataSource, Access.internal, "python");
 @@access(SearchIndexerClient.listIndexers, Access.public, "csharp");
-@@clientName(
-  SearchIndexerClient.listIndexers,
-  "GetIndexersWithSelectedProperties",
-  "csharp"
-);
 @@access(SearchIndexerClient.createOrUpdateIndexer, Access.internal);
 @@access(SearchIndexerClient.resetDocs, Access.internal, "python");
 @@access(SearchIndexerClient.deleteIndexer, Access.internal, "python");
 @@access(SearchIndexerClient.resync, Access.internal, "python");
 @@access(SearchIndexerClient.listSkillsets, Access.public, "csharp");
-@@clientName(
-  SearchIndexerClient.listSkillsets,
-  "GetSkillsetsWithSelectedProperties",
-  "csharp"
-);
 @@access(SearchIndexerClient.createOrUpdateSkillset, Access.internal);
 @@access(SearchIndexerClient.deleteSkillset, Access.internal, "python");
 @@access(SearchIndexerClient.resetSkills, Access.internal, "python");
 @@access(SearchIndexClient.listSynonymMaps, Access.public, "csharp");
-@@clientName(
-  SearchIndexClient.listSynonymMaps,
-  "GetSynonymMapsWithSelectedProperties",
-  "csharp"
-);
 @@access(SearchIndexClient.createOrUpdateSynonymMap, Access.internal);
 @@access(SearchIndexClient.deleteSynonymMap, Access.internal, "python");
 @@access(SearchIndexClient.createOrUpdateIndex, Access.internal);
@@ -3819,9 +3795,9 @@ namespace KnowledgeBaseRetrievalClient {
 
 @@clientName(SearchClient.count, "getDocumentCount", "!autorest");
 @@clientName(SearchClient.get, "getDocument", "!autorest");
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops are unified under one C# method name (see listIndexesOffsetPaged comment above)."
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops retain their shared C# SDK name."
 @@clientName(SearchIndexClient.listIndexes, "listIndexes", "!autorest");
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops are unified under one C# method name (see listIndexesOffsetPaged comment above)."
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops retain their shared C# SDK name."
 @@clientName(
   SearchIndexClient.listIndexesWithSelectedProperties,
   "listIndexesWithSelectedProperties",
@@ -3841,7 +3817,7 @@ namespace KnowledgeBaseRetrievalClient {
   "!autorest"
 );
 @@clientName(SearchIndexClient.analyze, "analyzeText", "!autorest");
-@@clientName(SearchIndexClient.listSynonymMaps, "getSynonymMaps", "!autorest");
+@@clientName(SearchIndexClient.listSynonymMaps, "listSynonymMaps", "!autorest");
 @@clientName(SearchIndexClient.getSynonymMap, "getSynonymMap", "!autorest");
 @@clientName(
   SearchIndexClient.deleteSynonymMap,
@@ -3923,6 +3899,11 @@ namespace KnowledgeBaseRetrievalClient {
   "!autorest"
 );
 @@clientName(
+  SearchIndexClient.listKnowledgeSourceFiles,
+  "listKnowledgeSourceFiles",
+  "!autorest"
+);
+@@clientName(
   SearchIndexClient.getKnowledgeSourceStatus,
   "getKnowledgeSourceStatus",
   "!autorest"
@@ -3935,7 +3916,7 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(SearchIndexerClient.deleteIndexer, "deleteIndexer", "!autorest");
 @@clientName(SearchIndexerClient.getIndexer, "getIndexer", "!autorest");
-@@clientName(SearchIndexerClient.listIndexers, "getIndexers", "!autorest");
+@@clientName(SearchIndexerClient.listIndexers, "listIndexers", "!autorest");
 @@clientName(SearchIndexerClient.runIndexer, "runIndexer", "!autorest");
 @@clientName(SearchIndexerClient.resetIndexer, "resetIndexer", "!autorest");
 @@clientName(SearchIndexerClient.resetDocs, "resetDocuments", "!autorest");
@@ -3962,7 +3943,7 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(
   SearchIndexerClient.listDataSources,
-  "getDataSourceConnections",
+  "listDataSourceConnections",
   "!autorest"
 );
 @@clientName(
@@ -3977,8 +3958,36 @@ namespace KnowledgeBaseRetrievalClient {
   "!autorest"
 );
 @@clientName(SearchIndexerClient.getSkillset, "getSkillset", "!autorest");
-@@clientName(SearchIndexerClient.listSkillsets, "getSkillsets", "!autorest");
+@@clientName(SearchIndexerClient.listSkillsets, "listSkillsets", "!autorest");
 @@clientName(SearchIndexerClient.deleteSkillset, "deleteSkillset", "!autorest");
+
+// Existing pageable APIs retain their names; only new paging APIs use GetAll.
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops retain their shared C# SDK name."
+@@clientName(SearchIndexClient.listIndexes, "listIndexes", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops retain their shared C# SDK name."
+@@clientName(
+  SearchIndexClient.listIndexesWithSelectedProperties,
+  "listIndexesWithSelectedProperties",
+  "csharp"
+);
+@@clientName(SearchIndexClient.listSynonymMaps, "GetAllSynonymMaps", "csharp");
+@@clientName(
+  SearchIndexClient.getIndexStatsSummary,
+  "GetAllIndexStatsSummary",
+  "csharp"
+);
+@@clientName(
+  SearchIndexClient.listKnowledgeSourceFiles,
+  "GetAllKnowledgeSourceFiles",
+  "csharp"
+);
+@@clientName(SearchIndexerClient.listIndexers, "GetAllIndexers", "csharp");
+@@clientName(
+  SearchIndexerClient.listDataSources,
+  "GetAllDataSourceConnections",
+  "csharp"
+);
+@@clientName(SearchIndexerClient.listSkillsets, "GetAllSkillsets", "csharp");
 
 @@clientName(VectorQuery.k, "kNearestNeighbors", "!autorest");
 @@clientName(VectorQuery.k, "kNearestNeighborsCount", "csharp,javascript");
@@ -3991,16 +4000,10 @@ namespace KnowledgeBaseRetrievalClient {
   "NextLink",
   "!autorest"
 );
-// Unify offset-paging list ops with their server-driven counterparts so the
-// C# SDK exposes a single `listIndexes` / `listIndexesWithSelectedProperties` method
-// in every api-version. Scoped to csharp: the underlying service ops are
-// version-disjoint (listOffsetPaged is @removed and list is @added at
-// v2026_08_01_preview), which the C# generator handles (it emits a per-version
-// method), so the duplicate name is only a warning there. Other language scopes
-// treat a duplicate client name as a hard error and keep the distinct op names.
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops unified under one C# method name (see comment above)."
+// Legacy offset-paging methods share the server-driven names in C# only.
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops retain their shared C# SDK name."
 @@clientName(SearchIndexClient.listIndexesOffsetPaged, "listIndexes", "csharp");
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops unified under one C# method name (see comment above)."
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops retain their shared C# SDK name."
 @@clientName(
   SearchIndexClient.listIndexesWithSelectedPropertiesOffsetPaged,
   "listIndexesWithSelectedProperties",
