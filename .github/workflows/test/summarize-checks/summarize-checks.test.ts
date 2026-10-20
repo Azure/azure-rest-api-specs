@@ -99,18 +99,16 @@ describe("ARM review label handoff", () => {
         expect.arrayContaining(["WaitForARMFeedback"]),
       );
       expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", true);
-      expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
       expect(github.rest.repos.createCommitStatus.mock.invocationCallOrder[0]).toBeLessThan(
         core.setOutput.mock.invocationCallOrder.at(-1) ?? 0,
       );
     });
 
     it("allows the dispatch job to recover an already-present queue label", async () => {
-      const { github, core, run } = createSummary(["ARMReview", "WaitForARMFeedback"]);
+      const { core, run } = createSummary(["ARMReview", "WaitForARMFeedback"]);
 
       await run();
 
-      expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
       expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", true);
     });
 
@@ -128,12 +126,11 @@ describe("ARM review label handoff", () => {
       );
     });
 
-    it("does not dispatch when adding the queue label fails", async () => {
+    it("does not signal readiness when adding the queue label fails", async () => {
       const { github, core, run } = createSummary();
       github.rest.issues.addLabels.mockRejectedValue(new Error("Label write failed"));
 
       await expect(run()).rejects.toThrow("Label write failed");
-      expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
       expect(core.setOutput).not.toHaveBeenCalledWith("arm_review_ready", true);
     });
   });

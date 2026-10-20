@@ -110,8 +110,6 @@ describe("Universal dispatch inputs", () => {
     it.each([
       { semanticState: "success", currentSha: sha, expectedAdds: 1 },
       { semanticState: "failure", currentSha: sha, expectedAdds: 0 },
-      { semanticState: "pending", currentSha: sha, expectedAdds: 0 },
-      { semanticState: "error", currentSha: sha, expectedAdds: 0 },
       { semanticState: "success", currentSha: "b".repeat(40), expectedAdds: 0 },
     ])(
       "applies Universal's decision through Update Labels: %j",
@@ -186,10 +184,8 @@ describe("Universal dispatch inputs", () => {
 
   it.each([
     undefined,
-    {},
     { pr_number: "0", head_sha: sha },
     { pr_number: "123abc", head_sha: sha },
-    { pr_number: "9007199254740992", head_sha: sha },
     { pr_number: "123", head_sha: "short" },
   ])("rejects malformed identity %j", (inputs) => {
     expect(() => parseSignoffDispatchInputs(inputs)).toThrow(

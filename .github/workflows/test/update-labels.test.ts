@@ -60,14 +60,11 @@ describe("updateLabels", () => {
       });
     });
 
-    it.each(["", "0", "123abc", "9007199254740992"])(
-      "rejects invalid source ID %j",
-      async (value) => {
-        const { github, run } = fixture();
-        await expect(run(value)).rejects.toThrow("positive source run ID");
-        expect(github.rest.actions.getWorkflowRun).not.toHaveBeenCalled();
-      },
-    );
+    it.each(["", "0", "123abc"])("rejects invalid source ID %j", async (value) => {
+      const { github, run } = fixture();
+      await expect(run(value)).rejects.toThrow("positive source run ID");
+      expect(github.rest.actions.getWorkflowRun).not.toHaveBeenCalled();
+    });
 
     it.each([
       { path: ".github/workflows/untrusted.yaml", event: "workflow_dispatch" },

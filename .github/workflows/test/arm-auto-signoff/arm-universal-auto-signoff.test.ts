@@ -454,14 +454,18 @@ describe("ARM Universal Auto SignOff workflow", () => {
     }
   });
 
-  it("publishes correlation artifacts for every event before explicitly dispatching Update Labels", async () => {
+  it("publishes correlation artifacts before dispatching Update Labels, only from a dispatched run", async () => {
     const workflow = await readWorkflow("arm-universal-auto-signoff.yaml");
     const headArtifact = workflow.indexOf("name: Upload artifact with head SHA");
     const issueArtifact = workflow.indexOf("name: Upload artifact with issue number");
+    const step = workflow.slice(workflow.indexOf("name: Dispatch Update Labels"));
 
     expect(headArtifact).toBeGreaterThan(-1);
     expect(issueArtifact).toBeGreaterThan(headArtifact);
     expect(workflow.indexOf("name: Dispatch Update Labels")).toBeGreaterThan(issueArtifact);
+    expect(step.slice(0, step.indexOf("uses:"))).toContain(
+      "github.event_name == 'workflow_dispatch'",
+    );
     expect(workflow).toContain("await dispatchUpdateLabels({ github, context, core });");
   });
 
@@ -490,14 +494,5 @@ describe("ARM Universal Auto SignOff workflow", () => {
     expect(summarize).toContain("github.event_name == 'workflow_dispatch' ||");
     // The workflow_run fallback stays, so a dispatch must not be added for that route.
     expect(summarize).toContain('- "Update Labels"');
-  });
-
-  it("dispatches Update Labels only from a dispatched Universal run", async () => {
-    const workflow = await readWorkflow("arm-universal-auto-signoff.yaml");
-    const step = workflow.slice(workflow.indexOf("name: Dispatch Update Labels"));
-
-    expect(step.slice(0, step.indexOf("uses:"))).toContain(
-      "github.event_name == 'workflow_dispatch'",
-    );
   });
 });

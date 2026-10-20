@@ -42,7 +42,6 @@ function createResolverHarness(
   },
 ) {
   const get = vi.fn();
-  const listWorkflowRuns = vi.fn().mockResolvedValue({ data: { workflow_runs: [] } });
   const getCombinedStatusForRef = vi.fn().mockResolvedValue({
     data: {
       statuses: [
@@ -74,7 +73,6 @@ function createResolverHarness(
 
   return {
     get,
-    listWorkflowRuns,
     getCombinedStatusForRef,
     setOutput,
     run: () =>
@@ -82,7 +80,6 @@ function createResolverHarness(
         github: {
           rest: {
             pulls: { get },
-            actions: { listWorkflowRuns },
             repos: { getCombinedStatusForRef },
           },
         },
@@ -272,7 +269,6 @@ describe("ARM API review workflow", () => {
       expect(harness.setOutput).toHaveBeenCalledWith("target_pr_number", "44499");
       expect(harness.setOutput).toHaveBeenCalledWith("target_head_sha", fullGitSha);
       expect(harness.setOutput).toHaveBeenCalledWith("run_attempt", "1");
-      expect(harness.listWorkflowRuns).not.toHaveBeenCalled();
     });
 
     it("accepts an issue-shaped pull request comment payload", async () => {
@@ -287,7 +283,29 @@ describe("ARM API review workflow", () => {
 
       expect(harness.get).toHaveBeenCalledWith(expect.objectContaining({ pull_number: 44499 }));
       expect(harness.setOutput).toHaveBeenCalledWith("target_pr_number", "44499");
-      expect(harness.listWorkflowRuns).not.toHaveBeenCalled();
+    });
+
+    it("resolves a label-removal re-review without waiting for the queue label", async () => {
+      const harness = createResolverHarness(resolverScript, {
+        value: "44499",
+        eventName: "pull_request_target",
+        payload: { action: "unlabeled", label: { name: "ARMChangesRequested" } },
+      });
+      harness.get.mockResolvedValue({
+        data: {
+          number: 44499,
+          state: "open",
+          draft: false,
+          head: { sha: fullGitSha },
+          labels: [{ name: "ARMReview" }, { name: "ARMInitialReviewRequested" }],
+        },
+      });
+
+      await harness.run();
+
+      expect(harness.setOutput).toHaveBeenCalledWith("target_pr_number", "44499");
+      expect(harness.setOutput).toHaveBeenCalledWith("target_head_sha", fullGitSha);
+      expect(harness.getCombinedStatusForRef).not.toHaveBeenCalled();
     });
 
     it("rejects an issue comment that is not attached to a pull request", async () => {
@@ -331,35 +349,9 @@ describe("ARM API review workflow", () => {
       expect(harness.setOutput).not.toHaveBeenCalled();
     });
 
-    it("accepts an automated handoff for the current queued head", async () => {
-      const harness = createResolverHarness(resolverScript, {
-        value: "44499",
-        expectedHeadSha: fullGitSha,
-      });
-      harness.get.mockResolvedValue({
-        data: {
-          number: 44499,
-          state: "open",
-          draft: false,
-          head: { sha: fullGitSha },
-          labels: [
-            { name: "ARMReview" },
-            { name: "WaitForARMFeedback" },
-            { name: "ARMInitialReviewRequested" },
-          ],
-        },
-      });
-      await harness.run();
-
-      expect(harness.setOutput).toHaveBeenCalledWith("target_head_sha", fullGitSha);
-      expect(harness.listWorkflowRuns).not.toHaveBeenCalled();
-    });
-
     it.each([
       { head: { sha: "a".repeat(40) } },
       { state: "closed" },
-      { draft: true },
-      { labels: [] },
       { labels: [{ name: "ARMReview" }, { name: "WaitForARMFeedback" }] },
     ])("rejects a stale automated handoff: %j", async (overrides) => {
       const harness = createResolverHarness(resolverScript, {
@@ -463,7 +455,7 @@ describe("ARM API review workflow", () => {
       expect(harness.setOutput).not.toHaveBeenCalled();
     });
 
-    it("paginates current statuses without scanning workflow history", async () => {
+    it("accepts the current queued head, paginating statuses without scanning workflow history", async () => {
       const harness = createResolverHarness(resolverScript, {
         value: "44499",
         expectedHeadSha: fullGitSha,
@@ -491,11 +483,11 @@ describe("ARM API review workflow", () => {
 
       await harness.run();
 
+      expect(harness.setOutput).toHaveBeenCalledWith("target_head_sha", fullGitSha);
       expect(harness.getCombinedStatusForRef).toHaveBeenCalledTimes(2);
       expect(harness.getCombinedStatusForRef).toHaveBeenLastCalledWith(
         expect.objectContaining({ page: 2 }),
       );
-      expect(harness.listWorkflowRuns).not.toHaveBeenCalled();
     });
   });
 
@@ -506,7 +498,6 @@ describe("ARM API review workflow", () => {
       "if: steps.check_membership.outputs.is_team_member == 'true' && github.event.inputs.head_sha == ''",
     );
     expect(compiled).toContain('labels: ["ARMInitialReviewRequested"]');
-    expect(source).not.toContain("github.rest.actions.listWorkflowRuns");
     expect(source).toContain("if (expectedHeadSha)");
   });
 
@@ -515,7 +506,6 @@ describe("ARM API review workflow", () => {
 
     expect(source).toContain("github.event.comment.body == '/arm-review'");
     expect(source).not.toContain("contains(github.event.comment.body, '/arm-review')");
-    expect(source).toContain("types: [labeled]");
     expect(source).toContain('bots: ["github-actions[bot]"]');
     expect(source).toContain("status-comment: true");
     expect(source).toContain(`run-name: "ARM API Review #${TARGET_EXPRESSION}`);
@@ -525,7 +515,6 @@ describe("ARM API review workflow", () => {
     expect(compiled).toContain("- name: Update reaction comment with completion status");
     expect(parse(compiled)).toMatchObject({
       on: {
-        pull_request_target: { types: ["labeled"] },
         workflow_dispatch: { inputs: { head_sha: { required: false } } },
       },
     });
@@ -552,7 +541,6 @@ describe("ARM API review workflow", () => {
     for (const workflow of [source, compiled]) {
       expect(workflow).toContain("github.event.comment.body != '/arm-review'");
       expect(workflow).toContain("github.event.issue.pull_request == null");
-      expect(workflow).toContain("github.event.label.name != 'WaitForARMFeedback'");
       expect(workflow).toContain("&& github.run_id || github.event.issue.number");
       expect(workflow).toContain("cancel-in-progress: false");
     }

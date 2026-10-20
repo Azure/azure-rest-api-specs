@@ -3,14 +3,15 @@ description: >
   Automatically review Azure REST API specification pull requests for
   conformance to ARM RPC rules and Azure REST API Guidelines. Triggers
   initially after Summarize Checks establishes WaitForARMFeedback, or when that label is
-  explicitly added; on demand via the /arm-review comment command.
+  explicitly added; re-reviews when ARMChangesRequested is removed;
+  on demand via the /arm-review comment command.
 run-name: "ARM API Review #${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }} (${{ github.event_name }})"
 timeout-minutes: 30
 # Concurrency is evaluated before the job-level `if` gate. Give unrelated
 # comments and non-queue label events run-scoped groups so they cannot cancel
 # an active review for the same PR before being skipped.
 concurrency:
-  group: "gh-aw-${{ github.workflow }}-${{ ((github.event_name == 'issue_comment' && (github.event.comment.body != '/arm-review' || github.event.issue.pull_request == null)) || (github.event_name == 'pull_request_target' && github.event.action == 'labeled' && github.event.label.name != 'WaitForARMFeedback')) && github.run_id || github.event.issue.number || github.event.pull_request.number || github.event.inputs.pr_number || github.run_id }}"
+  group: "gh-aw-${{ github.workflow }}-${{ ((github.event_name == 'issue_comment' && (github.event.comment.body != '/arm-review' || github.event.issue.pull_request == null)) || (github.event_name == 'pull_request_target' && !((github.event.action == 'labeled' && github.event.label.name == 'WaitForARMFeedback') || (github.event.action == 'unlabeled' && github.event.label.name == 'ARMChangesRequested')))) && github.run_id || github.event.issue.number || github.event.pull_request.number || github.event.inputs.pr_number || github.run_id }}"
   cancel-in-progress: false
 on:
   # Fork PRs ARE supported (`forks: ["*"]`), matching every other PR workflow in
@@ -21,7 +22,7 @@ on:
   # triggers to write-access users; trusted repository automation can dispatch
   # a review after adding WaitForARMFeedback.
   pull_request_target:
-    types: [labeled]
+    types: [labeled, unlabeled]
     forks: ["*"]
   issue_comment:
     types: [created]
@@ -245,9 +246,11 @@ jobs:
 if: >
   github.event_name == 'workflow_dispatch' ||
   (github.event_name == 'pull_request_target' &&
-   github.event.action == 'labeled' &&
    github.event.pull_request.draft == false &&
-   github.event.label.name == 'WaitForARMFeedback') ||
+   ((github.event.action == 'labeled' &&
+     github.event.label.name == 'WaitForARMFeedback') ||
+    (github.event.action == 'unlabeled' &&
+     github.event.label.name == 'ARMChangesRequested'))) ||
   (github.event_name == 'issue_comment' &&
    github.event.action == 'created' &&
    github.event.issue.pull_request != null &&
@@ -574,7 +577,10 @@ already guaranteed, before this agent starts, that:
   This replaces any manual collaborator check. Do **not** re-verify
   permissions.
 - The event is eligible: a `labeled` run only fires when `WaitForARMFeedback`
-  is added to a non-draft PR; an
+  is added to a non-draft PR; an `unlabeled` run only fires when
+  `ARMChangesRequested` is removed from a non-draft PR. This removal is an
+  explicit re-review request and does not require `WaitForARMFeedback`;
+  Summarize Checks reconciles the queue labels independently. An
   `issue_comment` run only fires for a PR comment whose body is exactly
   `/arm-review`;
   `workflow_dispatch` supports explicit runs and the trusted Summarize Checks
@@ -587,7 +593,7 @@ already guaranteed, before this agent starts, that:
   spec files only through the read-only GitHub MCP toolset
   (`min-integrity: approved`), and writes only through gh-aw `safe-outputs`. The
   `roles` gate requires either a write-access user (via the
-  `WaitForARMFeedback` label or `/arm-review`) or the allowlisted repository
+  `WaitForARMFeedback` label, removal of `ARMChangesRequested`, or `/arm-review`) or the allowlisted repository
   automation's dispatch after the queue label is added.
 
 ## Trigger Validation
