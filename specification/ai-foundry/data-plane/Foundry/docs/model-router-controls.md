@@ -2,7 +2,7 @@
 
 <!-- cspell:ignore xhigh chatcmpl -->
 
-This reference describes the public request and response shape for the Model Router preview on `POST /openai/v1/responses` and `POST /openai/v1/chat/completions`. Send `Foundry-Features: ModelRouterControls=V1Preview` on create requests using these controls. The preview header is an opt-in, not a new API version; without it, existing endpoint behavior applies and the new controls are not guaranteed to be enforced. These examples use raw HTTP. Public SDK support and the qualified model/revision, region, route, tool, and execution-mode matrix must be verified separately before advertising a particular combination.
+This reference describes the public request and response shape for the Model Router preview on the Foundry **project endpoint**: `https://{ai-services-account-name}.services.ai.azure.com/api/projects/{project-name}`. The raw HTTP examples use `sample-project` as the project name and target its Responses and Chat Completions routes. They do not establish support for account-level routes. Send `Foundry-Features: ModelRouterControls=V1Preview` on create requests using these controls. The preview header is an opt-in, not a new API version; without it, existing endpoint behavior applies and the new controls are not guaranteed to be enforced. Public SDK support and the qualified model/revision, region, route, tool, and execution-mode matrix must be verified separately before advertising a particular combination.
 
 ## Requests
 
@@ -24,7 +24,7 @@ Every effective native tool is a hard capability requirement for preview-enabled
 ### Responses request: native effort and tool
 
 ```http
-POST /openai/v1/responses HTTP/1.1
+POST /api/projects/sample-project/openai/v1/responses HTTP/1.1
 Host: example.services.ai.azure.com
 Authorization: Bearer <token>
 Content-Type: application/json
@@ -53,7 +53,7 @@ Foundry-Features: ModelRouterControls=V1Preview
 ### Chat Completions request: native effort and tool
 
 ```http
-POST /openai/v1/chat/completions HTTP/1.1
+POST /api/projects/sample-project/openai/v1/chat/completions HTTP/1.1
 Host: example.services.ai.azure.com
 Authorization: Bearer <token>
 Content-Type: application/json
@@ -86,7 +86,7 @@ For **routing effort** on either API, remove the native effort property and use 
 ### Routing-effort requests: no native effort
 
 ```http
-POST /openai/v1/responses HTTP/1.1
+POST /api/projects/sample-project/openai/v1/responses HTTP/1.1
 Host: example.services.ai.azure.com
 Authorization: Bearer <token>
 Content-Type: application/json
@@ -96,7 +96,7 @@ Foundry-Features: ModelRouterControls=V1Preview
 ```
 
 ```http
-POST /openai/v1/chat/completions HTTP/1.1
+POST /api/projects/sample-project/openai/v1/chat/completions HTTP/1.1
 Host: example.services.ai.azure.com
 Authorization: Bearer <token>
 Content-Type: application/json
@@ -184,11 +184,11 @@ data: {"type":"response.completed","sequence_number":8,"response":{"id":"resp_42
 GET/list, GET-stream, old records, and `store: false` share response schemas but **do not guarantee persistence or replay of the new effort/decision fields**. They may omit these ephemeral create/final-stream additions even when an earlier final event included them. Existing stored fields are not removed. Queued background acceptance is not a final routed result and does not promise a later delivery channel.
 
 ```http
-GET /openai/v1/responses/resp_42 HTTP/1.1
+GET /api/projects/sample-project/openai/v1/responses/resp_42 HTTP/1.1
 Host: example.services.ai.azure.com
 Authorization: Bearer <token>
 
-GET /openai/v1/responses HTTP/1.1
+GET /api/projects/sample-project/openai/v1/responses HTTP/1.1
 Host: example.services.ai.azure.com
 Authorization: Bearer <token>
 ```
