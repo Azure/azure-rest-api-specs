@@ -6,6 +6,15 @@ import { createMockCore, createMockGithub as createMockGithubBase } from "../moc
 
 const core = createMockCore();
 
+function mockCombinedStatus(
+  github: ReturnType<typeof createMockGithubBase>,
+  response: { data: { context: string; state: string; updated_at?: string }[] },
+) {
+  github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+    data: { statuses: response.data, total_count: response.data.length },
+  });
+}
+
 const managedLabels = Object.freeze({
   armSignedOff: "ARMSignedOff",
   autoSignedOffIncrementalTsp: "ARMAutoSignedOff-IncrementalTSP",
@@ -310,7 +319,7 @@ describe("getLabelActionImpl", () => {
     ).resolves.toEqual(createRemoveManagedLabelsResult("abc123", 123));
   });
 
-  it.each(["Swagger Avocado", "Swagger LintDiff"])(
+  it.each(["Swagger Avocado", "Swagger LintDiff", "swagger avocado", "SWAGGER LINTDIFF"])(
     "removes label if check %s failed",
     async (check) => {
       const github = createMockGithub({ incrementalTypeSpec: true });
@@ -318,7 +327,7 @@ describe("getLabelActionImpl", () => {
       github.rest.issues.listLabelsOnIssue.mockResolvedValue({
         data: [{ name: "ARMAutoSignedOff-IncrementalTSP" }, { name: "ARMReview" }],
       });
-      github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+      mockCombinedStatus(github, {
         data: [
           {
             context: check,
@@ -362,46 +371,52 @@ describe("getLabelActionImpl", () => {
         isTrivial: false,
       }),
     ],
-  ])("uses latest status if multiple (%o)", async (state, labels, expectedResult) => {
-    const github = createMockGithub({ incrementalTypeSpec: true });
+  ])(
+    "uses the latest status returned for each context (%o)",
+    async (state, labels, expectedResult) => {
+      const github = createMockGithub({ incrementalTypeSpec: true });
 
-    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
-      data: labels.map((l) => ({
-        name: l,
-      })),
-    });
+      github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+        data: labels.map((l) => ({
+          name: l,
+        })),
+      });
 
-    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
-      data: [
-        {
-          context: "Swagger Avocado",
-          state: CommitStatusState.SUCCESS,
-          updated_at: "2025-01-01",
-        },
-        {
-          context: "Swagger LintDiff",
-          state: CommitStatusState.PENDING,
-          updated_at: "2025-01-01",
-        },
-        {
-          context: "Swagger LintDiff",
-          state,
-          updated_at: "2025-01-02",
-        },
-      ],
-    });
+      mockCombinedStatus(github, {
+        data: [
+          {
+            context: "Swagger Avocado",
+            state: CommitStatusState.SUCCESS,
+            updated_at: "2025-01-01",
+          },
+          {
+            context: "Swagger LintDiff",
+            state,
+            updated_at: "2025-01-02",
+          },
+        ],
+      });
 
-    await expect(
-      getLabelActionImpl({
+      await expect(
+        getLabelActionImpl({
+          owner: "TestOwner",
+          repo: "TestRepo",
+          issue_number: 123,
+          head_sha: "abc123",
+          github: github,
+          core: core,
+        }),
+      ).resolves.toEqual(expectedResult);
+      expect(github.rest.repos.getCombinedStatusForRef).toHaveBeenCalledExactlyOnceWith({
         owner: "TestOwner",
         repo: "TestRepo",
-        issue_number: 123,
-        head_sha: "abc123",
-        github: github,
-        core: core,
-      }),
-    ).resolves.toEqual(expectedResult);
-  });
+        ref: "abc123",
+        per_page: 100,
+        page: 1,
+      });
+      expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
+    },
+  );
 
   it("no-ops if check not found or not completed", async () => {
     const github = createMockGithub({ incrementalTypeSpec: true });
@@ -410,7 +425,7 @@ describe("getLabelActionImpl", () => {
       data: [{ name: "ARMReview" }],
     });
 
-    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+    mockCombinedStatus(github, {
       data: [],
     });
     await expect(
@@ -424,7 +439,7 @@ describe("getLabelActionImpl", () => {
       }),
     ).resolves.toEqual(createNoneResult("abc123", 123));
 
-    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+    mockCombinedStatus(github, {
       data: [{ context: "Swagger LintDiff", state: CommitStatusState.PENDING }],
     });
     await expect(
@@ -445,7 +460,7 @@ describe("getLabelActionImpl", () => {
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
       data: [{ name: "ARMReview" }],
     });
-    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+    mockCombinedStatus(github, {
       data: [
         {
           context: "Swagger LintDiff",
@@ -484,7 +499,7 @@ describe("getLabelActionImpl", () => {
       data: [{ name: "ARMReview" }],
     });
 
-    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+    mockCombinedStatus(github, {
       data: [
         {
           context: "Swagger LintDiff",
@@ -551,7 +566,7 @@ describe("getLabelActionImpl", () => {
     });
 
     // All required checks pass
-    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+    mockCombinedStatus(github, {
       data: [
         {
           context: "Swagger LintDiff",
@@ -646,7 +661,7 @@ describe("getLabelActionImpl", () => {
       data: [{ name: managedLabels.autoSignedOffTrivial }, { name: "ARMReview" }],
     });
 
-    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+    mockCombinedStatus(github, {
       data: [
         { context: "Swagger LintDiff", state: CommitStatusState.SUCCESS },
         { context: "Swagger Avocado", state: CommitStatusState.SUCCESS },
@@ -681,7 +696,7 @@ describe("getLabelActionImpl", () => {
       ],
     });
 
-    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+    mockCombinedStatus(github, {
       data: [
         { context: "Swagger LintDiff", state: CommitStatusState.SUCCESS },
         { context: "Swagger Avocado", state: CommitStatusState.SUCCESS },
@@ -712,7 +727,7 @@ describe("getLabelActionImpl", () => {
       data: [{ name: "ARMReview" }],
     });
 
-    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+    mockCombinedStatus(github, {
       data: [
         { context: "Swagger LintDiff", state: CommitStatusState.SUCCESS },
         { context: "Swagger Avocado", state: CommitStatusState.SUCCESS },
