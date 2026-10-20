@@ -1,0 +1,21 @@
+{
+  "title": "Clear all telephony transfer targets",
+  "operationId": "AgentTelephony_replaceTelephonyTransferTargets",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V1Preview",
+    "agent_name": "support-agent",
+    "If-Match": "\"targets-etag-2\"",
+    "transfer_targets": []
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"targets-etag-3\""
+      },
+      "body": {
+        "transfer_targets": []
+      }
+    }
+  }
+}
