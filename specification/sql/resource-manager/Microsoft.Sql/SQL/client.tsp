@@ -20,6 +20,12 @@ using Microsoft.Sql;
 
 @@clientName(Microsoft.Sql, "SqlManagementClient", "java,javascript,python");
 
+@@clientName(ServerProtectionSettingsOperations, "ServerProtectionSettings");
+@@clientName(
+  ServerProtectionSettingsOperations.createOrUpdate::parameters.resource,
+  "parameters"
+);
+
 @@clientName(SyncAgentLinkedDatabaseProperties.userName, "username", "java");
 @@clientName(SyncMemberProperties.userName, "username", "java");
 @@clientName(

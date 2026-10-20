@@ -6950,6 +6950,61 @@
         ]
       }
     },
+    "ServerProtectionSettingsBlockDrop": {
+      "type": "string",
+      "description": "The irreversible opt-in state for logical server deletion protection.",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ServerProtectionSettingsBlockDrop",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "enabled",
+            "description": "Protection is enabled and cannot be disabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "disabled",
+            "description": "Protection has not been enabled."
+          }
+        ]
+      }
+    },
+    "ServerProtectionSettingsName": {
+      "type": "string",
+      "description": "The supported logical server protection settings resource name.",
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "ServerProtectionSettingsName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "default",
+            "description": "The only supported resource name, matched case-insensitively."
+          }
+        ]
+      }
+    },
+    "ServerProtectionSettingsProperties": {
+      "type": "object",
+      "description": "Settings that protect a logical server from deletion while immutable PITR backups remain in retention.",
+      "properties": {
+        "blockDropWhenImmutablePitrBackupInRetention": {
+          "$ref": "#/definitions/ServerProtectionSettingsBlockDrop",
+          "description": "Whether to block logical server deletion while immutable point-in-time restore\nbackups remain within retention. Supported request values are enabled and\ndisabled, matched case-insensitively. Protection is disabled by default.\nEnabling protection is irreversible; requesting disabled after opt-in is\nrejected. Repeating the persisted value succeeds without changing it, using\nthe same asynchronous workflow. GET and LIST always return the persisted\nvalue, including during an update; use the polling endpoints to determine\nwhether an update succeeded. After opt-in, delete all databases and wait for\ntheir immutable backups to leave retention before deleting the logical server."
+        }
+      },
+      "required": [
+        "blockDropWhenImmutablePitrBackupInRetention"
+      ]
+    },
     "ServerPublicNetworkAccessFlag": {
       "type": "string",
       "description": "Whether or not public endpoint access is allowed for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled' or 'SecuredByPerimeter'",

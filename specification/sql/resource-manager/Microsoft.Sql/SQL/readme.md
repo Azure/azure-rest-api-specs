@@ -4023,6 +4023,14 @@ directive:
 
 ``` yaml
 suppressions:
+  - code: PutResponseCodes
+    from: preview/2026-11-01-preview/servers.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serverProtectionSettings/{serverProtectionSettingsName}"].put
+    reason: Assumes an ARM exception for this proxy resource to return bodyless HTTP 202 for every accepted PUT, including repeated values. Operation status and the final resource are obtained through polling.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: preview/2026-11-01-preview/servers.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serverProtectionSettings/{serverProtectionSettingsName}"].put
+    reason: Assumes an ARM exception to omit durable provisioningState from this always-existing proxy resource. GET returns the persisted flag; operation status is available through polling endpoints.
   - code: MissingSegmentsInNestedResourceListOperation
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies"]
