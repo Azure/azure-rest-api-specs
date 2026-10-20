@@ -1,0 +1,114 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "versioning"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 001010-version-model-property-removed-trigger
+    tags:
+      suite: "versioning"
+      mode: "trigger"
+    prompt: |
+      In the TypeSpec project at `./Microsoft.Widget/Widget/`, remove the `department` property from EmployeeProperties only for version `2025-05-04-preview`.
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/001-share-version-new-feature/employee.tsp
+          dest: Microsoft.Widget/Widget/employee.tsp
+        - src: ../fixtures/001-share-version-new-feature/main.tsp
+          dest: Microsoft.Widget/Widget/main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/001-share-version-new-feature/readme.md
+          dest: Microsoft.Widget/Widget/readme.md
+        - src: ../fixtures/001-share-version-new-feature/shared.tsp
+          dest: Microsoft.Widget/Widget/shared.tsp
+        - src: ../fixtures/001-share-version-new-feature/tspconfig.yaml
+          dest: Microsoft.Widget/Widget/tspconfig.yaml
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 001010-version-model-property-removed-forced
+    tags:
+      suite: "versioning"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author In the TypeSpec project at `./Microsoft.Widget/Widget/`, remove the `department` property from EmployeeProperties only for version `2025-05-04-preview`.
+    environment: *shared_environment
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          sub_path: "Microsoft.Widget/Widget"
+          expected_exit_code: 0
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: "v2025_05_04_preview"
+          path: "Microsoft.Widget/Widget/main.tsp"
+      - &file_matches_removed_property
+        type: "file-matches"
+        name: "file-matches-removed-property"
+        config:
+          pattern: '@removed\((?:Microsoft\.Widget\.)?Versions\.v2025_05_04_preview\)'
+          path: "Microsoft.Widget/Widget/employee.tsp"
+      - &file_matches_property
+        type: "file-matches"
+        name: "file-matches-property"
+        config:
+          pattern: 'department\?: string;'
+          path: "Microsoft.Widget/Widget/employee.tsp"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 001010-version-model-property-removed-no-skill
+    tags:
+      suite: "versioning"
+      mode: "no-skill"
+    prompt: "In the TypeSpec project at `./Microsoft.Widget/Widget/`, remove the `department` property from EmployeeProperties only for version `2025-05-04-preview`."
+    environment: *shared_environment
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - *file_matches
+      - *file_matches_removed_property
+      - *file_matches_property
+    constraints:
+      max_turns: 6
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.2
+    run-command: 0.2
+    skill-invocation: 0.2
+    file-matches: 0.4
+  threshold: 1
