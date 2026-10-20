@@ -706,7 +706,9 @@ interpretation, review process, and supporting repository workflows.
 5. With push access, when Copilot is assignable and the draft is
    implementation-ready, the skill proposes assigning Copilot. Assignment starts
    Copilot cloud agent work toward a pull request that still needs human review.
-   Copilot sees the issue title and body at assignment time, not later comments.
+   Copilot sees the issue title, description, and existing comments at assignment
+   time, not comments added later. Put follow-up information on the pull request,
+   as described in [GitHub's assignment guidance](https://docs.github.com/en/copilot/how-tos/copilot-on-github/use-copilot-agents/kick-off-a-task).
    Remove the assignee before approving if you do not want that.
 6. After publication, the skill verifies the issue and returns its URL. Labels
    or comments added by repository automation, such as Issue Triage, are reported

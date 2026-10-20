@@ -71,7 +71,7 @@ catalog, grader types, running instructions, and contribution guide.
 ### Quick start
 
 ```bash
-# Prerequisites: Node.js >= 20, npm >= 11.11.1
+# Prerequisites: Node.js >= 22.14.0, npm >= 11.11.1
 # Clone and build vally
 git clone https://github.com/microsoft/vally.git
 cd vally && npm install && npm run build && cd -

@@ -13,6 +13,23 @@
    model is available, and use `--model` only for deliberate comparisons.
    Shared repository configuration is not changed.
 
+## Windows PowerShell command smoke test
+
+Run this command from the repository root on Windows with Node.js, GitHub CLI,
+Windows PowerShell 5.1 (`powershell.exe`), and PowerShell 7 (`pwsh.exe`) on `PATH`:
+
+```powershell
+node --test .github\skills\arm-api-reviewer-issue\evals\powershell-command.test.ts
+```
+
+The test extracts the documented Copilot availability command and runs real
+`gh.exe` in both shells. Only the API endpoint is replaced with a loopback HTTP
+fixture, and credentials are replaced with dummy values. It checks the exact
+GraphQL request, temporary paths containing spaces, API failure propagation,
+and query-file cleanup after success and failure. It makes no external requests
+or GitHub writes and requires no authentication. Non-Windows runs are skipped.
+This test is separate from the model sessions and their read-only tool allowlist.
+
 ## Safe model execution
 
 1. These are offline conversational tests, not live GitHub integration tests.

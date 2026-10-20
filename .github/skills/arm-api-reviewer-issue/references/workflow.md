@@ -164,8 +164,9 @@ actionable next step. Do not assume that a reported symptom establishes a cause.
    gh api repos/Azure/azure-rest-api-specs --jq .permissions.push
    ```
 
-   GitHub silently drops labels and assignees on a new issue when the author
-   lacks push access. Always request the mandatory label at creation, but say
+   GitHub's [create-issue API](https://docs.github.com/en/rest/issues/issues#create-an-issue)
+   silently drops labels and assignees when the author lacks push access.
+   Always request the mandatory label at creation, but say
    in the preview whether it will be applied. Without confirmed push access,
    state that a maintainer needs to add the label and that the
    `ARM API Reviewer agent:` title prefix keeps the issue discoverable.
@@ -174,8 +175,30 @@ actionable next step. Do not assume that a reported symptom establishes a cause.
    1. The account has confirmed push access.
    2. Copilot is an assignable actor in the repository:
 
-      ```text
-      gh api graphql -f query="query { repository(owner: \"Azure\", name: \"azure-rest-api-specs\") { suggestedActors(capabilities: [CAN_BE_ASSIGNED], first: 10, query: \"copilot\") { nodes { login } } } }"
+      Use a UTF-8 query file to preserve GraphQL quotes in PowerShell:
+
+      ```powershell
+      $query = @'
+      query {
+        repository(owner: "Azure", name: "azure-rest-api-specs") {
+          suggestedActors(capabilities: [CAN_BE_ASSIGNED], first: 10, query: "copilot") {
+            nodes { login }
+          }
+        }
+      }
+      '@
+      $queryPath = Join-Path ([IO.Path]::GetTempPath()) ([guid]::NewGuid().ToString() + ".graphql")
+      try {
+          [IO.File]::WriteAllText($queryPath, $query, [Text.UTF8Encoding]::new($false))
+          gh api graphql -F "query=@$queryPath"
+          if ($LASTEXITCODE -ne 0) {
+              throw "Copilot availability query failed."
+          }
+      } finally {
+          if (Test-Path -LiteralPath $queryPath) {
+              Remove-Item -LiteralPath $queryPath -ErrorAction Stop
+          }
+      }
       ```
 
       The result must include `copilot-swe-agent`.
@@ -187,9 +210,10 @@ actionable next step. Do not assume that a reported symptom establishes a cause.
    assign anyone other than Copilot.
 4. When proposing Copilot, explain in the preview that assignment immediately
    starts Copilot cloud agent work toward a pull request that requires human
-   review. Copilot receives the issue title and body at assignment time and
-   does not see later issue comments. The user can remove the assignment
-   before approval.
+   review. As described in [GitHub's assignment guidance](https://docs.github.com/en/copilot/how-tos/copilot-on-github/use-copilot-agents/kick-off-a-task),
+   Copilot receives the issue title, description, and existing comments at
+   assignment time, but not comments added later. Follow-up information belongs
+   on the pull request. The user can remove the assignment before approval.
 
 ## 5. Obtain approval of the complete draft
 
