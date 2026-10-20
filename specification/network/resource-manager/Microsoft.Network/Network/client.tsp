@@ -4751,18 +4751,6 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 );
 
 @@clientName(
-  Common.DdosSettingsProtectionMode,
-  "DdosSettingsProtectionCoverage",
-  "csharp"
-);
-
-@@clientName(
-  Microsoft.Network.DdosTrafficType,
-  "DdosCustomPolicyProtocol",
-  "csharp"
-);
-
-@@clientName(
   Microsoft.Network.DisassociateCloudServicePublicIpRequest,
   "DisassociateCloudServicePublicIPContent",
   "csharp"
