@@ -5249,9 +5249,11 @@ suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: databases.json
     where: $.definitions.QueryStatisticsDatabaseListResult
+    reason: Returns query metric records rather than ARM resources; resource identity fields are not part of this response contract.
   - code: RequiredPropertiesMissingInResourceModel
     from: databases.json
     where: $.definitions.TopQueriesDatabaseListResult
+    reason: Returns top-query metric summaries rather than ARM resources; resource identity fields are not part of this response contract.
   - code: RequiredReadOnlySystemData
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"].get

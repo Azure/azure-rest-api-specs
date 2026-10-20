@@ -13402,13 +13402,12 @@ model TopQueriesDatabaseListResult is Azure.Core.Page<TopQueriesDatabase>;
 /**
  * Top resource consuming queries on database.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy database query responses included resource identity fields such as name, type, and id. The current service models this response as a ProxyResource, so inheritance is retained to preserve that contract."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
 @added(Versions.v2026_11_01_preview)
 @Azure.ResourceManager.Legacy.feature(Features.Databases)
 model TopQueriesDatabase {
   /**
-   * Requested number of top queries.
+   * The Azure resource type reported for the top queries results.
    */
   @visibility(Lifecycle.Read)
   type?: string;
@@ -13553,7 +13552,6 @@ model QueryStatisticsDatabaseListResult
 /**
  * A query execution statistics.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy database query responses included resource identity fields such as name, type, and id. The current service models this response as a ProxyResource, so inheritance is retained to preserve that contract."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
 @added(Versions.v2026_11_01_preview)
 @Azure.ResourceManager.Legacy.feature(Features.Databases)
