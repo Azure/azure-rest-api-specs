@@ -5998,6 +5998,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity"
         }
       },
       "required": [
@@ -6091,6 +6095,10 @@
       "type": "object",
       "description": "Parameters for creating or updating a vault",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity"
+        },
         "location": {
           "type": "string",
           "description": "The supported Azure location where the key vault should be created."
@@ -6137,6 +6145,10 @@
       "type": "object",
       "description": "Parameters for creating or updating a vault",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity"
+        },
         "tags": {
           "type": "object",
           "description": "The tags that will be assigned to the key vault.",
