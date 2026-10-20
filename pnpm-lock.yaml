@@ -177,8 +177,8 @@ catalogs:
       specifier: 0.11.14
       version: 0.11.14
     '@azure-tools/openai-typespec':
-      specifier: 1.28.0
-      version: 1.28.0
+      specifier: 1.32.0
+      version: 1.32.0
     '@azure-tools/openapi-tools-common':
       specifier: ^1.2.2
       version: 1.2.2
@@ -203,8 +203,8 @@ catalogs:
     '@azure-tools/typespec-azure-resource-manager':
       specifier: 0.73.0
       version: 0.73.0
-    '@azure-tools/typespec-azure-rulesets':
-      specifier: 0.73.0
+    '@azure-tools/typespec-azure-rulesets-original':
+      specifier: npm:@azure-tools/typespec-azure-rulesets@0.73.0
       version: 0.73.0
     '@azure-tools/typespec-client-generator-cli':
       specifier: 0.33.1
@@ -435,13 +435,16 @@ importers:
         version: link:eng/tools/oav-runner
       '@azure-tools/openai-typespec':
         specifier: 'catalog:'
-        version: 1.28.0(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))))(@typespec/openapi@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3)))))
+        version: 1.32.0(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))))(@typespec/openapi@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3)))))
       '@azure-tools/openapi-diff-runner':
         specifier: workspace:*
         version: link:eng/tools/openapi-diff-runner
       '@azure-tools/release-plan':
         specifier: workspace:*
         version: link:eng/tools/release-plan
+      '@azure-tools/spec-change-policies':
+        specifier: workspace:*
+        version: link:eng/tools/spec-change-policies
       '@azure-tools/spec-gen-sdk':
         specifier: 'catalog:'
         version: 0.9.8
@@ -470,8 +473,11 @@ importers:
         specifier: 'catalog:'
         version: 0.73.0(7f327fbcf017dd6acead538a3c60488b)
       '@azure-tools/typespec-azure-rulesets':
+        specifier: workspace:*
+        version: link:eng/typespec-rulesets
+      '@azure-tools/typespec-azure-rulesets-original':
         specifier: 'catalog:'
-        version: 0.73.0(@azure-tools/typespec-azure-core@0.73.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))))(@typespec/rest@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))))))(@azure-tools/typespec-azure-resource-manager@0.73.0(7f327fbcf017dd6acead538a3c60488b))(@azure-tools/typespec-client-generator-core@0.73.0(92ef1a4b707fdf3547641bd00a0f6725))(@typespec/compiler@1.17.0(@types/node@26.6.3))
+        version: '@azure-tools/typespec-azure-rulesets@0.73.0(@azure-tools/typespec-azure-core@0.73.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))))(@typespec/rest@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))))))(@azure-tools/typespec-azure-resource-manager@0.73.0(7f327fbcf017dd6acead538a3c60488b))(@azure-tools/typespec-client-generator-core@0.73.0(92ef1a4b707fdf3547641bd00a0f6725))(@typespec/compiler@1.17.0(@types/node@26.6.3))'
       '@azure-tools/typespec-client-generator-cli':
         specifier: 'catalog:'
         version: 0.33.1(54cd34c8d3bc04d86b006e96f7188d2b)
@@ -908,6 +914,12 @@ importers:
       '@azure-tools/suppressions':
         specifier: workspace:*
         version: link:../suppressions
+      pathe:
+        specifier: 'catalog:'
+        version: 2.0.3
+      simple-git:
+        specifier: 'catalog:'
+        version: 4.0.2
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -1059,9 +1071,28 @@ importers:
         specifier: 'catalog:'
         version: 4.6.5
     devDependencies:
+      '@azure-tools/typespec-azure-rulesets':
+        specifier: workspace:*
+        version: link:../../typespec-rulesets
       '@types/debug':
         specifier: 'catalog:'
         version: 4.1.13
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.3
+      '@typespec/compiler':
+        specifier: 'catalog:'
+        version: 1.17.0(@types/node@26.6.3)
+
+  eng/typespec-rulesets:
+    dependencies:
+      '@azure-tools/typespec-azure-rulesets-original':
+        specifier: 'catalog:'
+        version: '@azure-tools/typespec-azure-rulesets@0.73.0(@azure-tools/typespec-azure-core@0.73.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))))(@typespec/rest@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))))))(@azure-tools/typespec-azure-resource-manager@0.73.0(7f327fbcf017dd6acead538a3c60488b))(@azure-tools/typespec-client-generator-core@0.73.0(92ef1a4b707fdf3547641bd00a0f6725))(@typespec/compiler@1.17.0(@types/node@26.6.3))'
+      '@typespec/compiler':
+        specifier: 'catalog:'
+        version: 1.17.0(@types/node@26.6.3)
+    devDependencies:
       '@types/node':
         specifier: 'catalog:'
         version: 26.6.3
@@ -1168,8 +1199,8 @@ packages:
     resolution: {integrity: sha512-P4KnJzZJjCATcn3nRcF5MPja2wrPdP48Us643+0eqGtNBL4O20CFVEm6WFeFeR8JhvNCsZfeayHiE6VOspe1rg==}
     engines: {node: '>=12.0.0'}
 
-  '@azure-tools/openai-typespec@1.28.0':
-    resolution: {integrity: sha512-UQVeOjinhjO2ogLk1uwnpvi8sUjSf/utb0voD6LlMcRjCE4gc4U97w0kMlEci5prWRySq1RmhP8BOF//gE2jGw==}
+  '@azure-tools/openai-typespec@1.32.0':
+    resolution: {integrity: sha512-jLREAF3X/WLnOJdBbsP3gldPBCumhdFwpUc+kmo/l3MGxd/7CugsojaWOnYxqhaQ0LMfwIAzR/GYa4rBx/foTQ==}
     peerDependencies:
       '@typespec/http': ^1.14.0
       '@typespec/openapi': ^1.14.0
@@ -4508,7 +4539,7 @@ snapshots:
 
   '@azure-tools/jsonschema@1.3.1': {}
 
-  '@azure-tools/openai-typespec@1.28.0(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))))(@typespec/openapi@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3)))))':
+  '@azure-tools/openai-typespec@1.32.0(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))))(@typespec/openapi@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3)))))':
     dependencies:
       '@typespec/http': 1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3)))
       '@typespec/openapi': 1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/http@1.17.0(@typespec/compiler@1.17.0(@types/node@26.6.3))(@typespec/streams@0.87.0(@typespec/compiler@1.17.0(@types/node@26.6.3))))
