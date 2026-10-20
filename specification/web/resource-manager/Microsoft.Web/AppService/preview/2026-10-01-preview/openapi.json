@@ -46642,11 +46642,16 @@
         "type": {
           "$ref": "#/definitions/FunctionAppVersionArtifactType",
           "description": "The artifact type."
+        },
+        "reference": {
+          "type": "string",
+          "description": "For zipPackage, the referenceId returned by SCM artifact upload for the same\nFunction App incarnation, not a URL or package path. For containerImage, the\ncontainer image reference. Read operations preserve the supplied value."
         }
       },
       "discriminator": "type",
       "required": [
-        "type"
+        "type",
+        "reference"
       ]
     },
     "FunctionAppVersionArtifactType": {
@@ -46702,15 +46707,6 @@
     "FunctionAppVersionContainerImageArtifact": {
       "type": "object",
       "description": "A container image resolved to an immutable manifest digest during version creation.",
-      "properties": {
-        "reference": {
-          "type": "string",
-          "description": "The container image reference to resolve during creation."
-        }
-      },
-      "required": [
-        "reference"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/FunctionAppVersionArtifact"
@@ -46848,19 +46844,12 @@
       "type": "object",
       "description": "A reusable ZIP artifact previously uploaded through the SCM artifact API.",
       "properties": {
-        "artifactId": {
-          "type": "string",
-          "description": "The service-generated artifact identifier, scoped to this Function App incarnation."
-        },
         "remoteBuild": {
           "type": "boolean",
           "description": "Whether to remotely build the source ZIP before binding and validating the version.",
           "default": false
         }
       },
-      "required": [
-        "artifactId"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/FunctionAppVersionArtifact"

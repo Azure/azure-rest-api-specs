@@ -102,6 +102,13 @@ union FunctionAppVersionArtifactType {
 model FunctionAppVersionArtifact {
   /** The artifact type. */
   type: FunctionAppVersionArtifactType;
+
+  /**
+   * For zipPackage, the referenceId returned by SCM artifact upload for the same
+   * Function App incarnation, not a URL or package path. For containerImage, the
+   * container image reference. Read operations preserve the supplied value.
+   */
+  reference: string;
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -109,9 +116,6 @@ model FunctionAppVersionArtifact {
 model FunctionAppVersionZipPackageArtifact extends FunctionAppVersionArtifact {
   /** The artifact type. */
   type: "zipPackage";
-
-  /** The service-generated artifact identifier, scoped to this Function App incarnation. */
-  artifactId: string;
 
   /** Whether to remotely build the source ZIP before binding and validating the version. */
   remoteBuild?: boolean = false;
@@ -123,9 +127,6 @@ model FunctionAppVersionContainerImageArtifact
   extends FunctionAppVersionArtifact {
   /** The artifact type. */
   type: "containerImage";
-
-  /** The container image reference to resolve during creation. */
-  reference: string;
 }
 
 @added(Versions.v2026_10_01_preview)
