@@ -43249,6 +43249,10 @@ components:
             - type: 'null'
           description: The effective overview, or null before an overview is available.
           readOnly: true
+        priorities:
+          $ref: '#/components/schemas/AgentInsightPriorities'
+          description: Category selection and analysis guidance. Omitted when priorities are unconfigured or cleared.
+          readOnly: true
         updated_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when this monitor was last updated.
@@ -43280,6 +43284,9 @@ components:
         model_deployment_name:
           type: string
           description: The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
+        priorities:
+          $ref: '#/components/schemas/AgentInsightPriorities'
+          description: Category selection and analysis guidance. Omit to create the monitor without priorities. Explicit null is not allowed.
       description: Fields accepted when creating an Agent Insights monitor for an agent.
       x-ms-foundry-meta:
         required_previews:
@@ -43332,6 +43339,10 @@ components:
             - type: 'null'
           description: Why the system suspended scheduled generation. Null when the monitor is not suspended.
           readOnly: true
+        priorities:
+          $ref: '#/components/schemas/AgentInsightPriorities'
+          description: Category selection and analysis guidance. Omitted when priorities are unconfigured or cleared.
+          readOnly: true
         updated_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when this monitor was last updated.
@@ -43355,6 +43366,15 @@ components:
         model_deployment_name:
           type: string
           description: The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
+        priorities:
+          anyOf:
+            - $ref: '#/components/schemas/AgentInsightPriorities'
+            - type: 'null'
+          description: |-
+            Replaces the complete priorities object. Omission leaves priorities unchanged; explicit
+            null clears them. Include categories even when changing only instructions. Omitted, null,
+            or blank instructions in a replacement clear earlier guidance. Responses omit cleared
+            priorities. This field, including explicit null, cannot be combined with overview_override.
         overview_override:
           anyOf:
             - $ref: '#/components/schemas/AgentInsightsOverviewOverride'
@@ -43363,6 +43383,12 @@ components:
             Sets the effective user overview, or clears it when explicitly set to null. Omission leaves
             the overview unchanged. This field cannot be combined with other monitor updates.
       description: Fields that can be updated on an Agent Insights monitor.
+      examples:
+        - priorities: null
+        - priorities:
+            categories:
+              - latency
+            instructions: null
       x-ms-foundry-meta:
         required_previews:
           - AgentInsights=V1Preview
@@ -43374,6 +43400,46 @@ components:
             - generated
             - user_override
       description: Identifies where an Agent Insights overview came from.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
+    AgentInsightPriorities:
+      type: object
+      required:
+        - categories
+      properties:
+        categories:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: |-
+            Built-in or custom category identifiers. Built-in identifiers are tool_call_failures,
+            hallucinations, cost_tokens, latency, reliability_errors, output_quality, context_memory,
+            and security_risk. Custom identifiers are also accepted.
+
+            The service trims and lowercases identifiers, drops blank entries, maps safety_guardrails
+            to security_risk, removes duplicates, and sorts the result in ordinal order. Select 1 to 20
+            distinct nonblank categories after normalization. Each normalized identifier must be valid
+            UTF-8, contain no control characters, and use at most 128 UTF-8 bytes.
+        instructions:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: |-
+            Optional trace-grounded guidance for the monitor's analysis. The service trims the edges
+            and preserves case and internal formatting. Omitted, null, or blank instructions clear
+            earlier guidance when a priorities object is supplied.
+
+            After trimming, instructions must be valid UTF-8 and use at most 2,000 UTF-8 bytes.
+            Carriage returns, line feeds, and tabs are allowed; other control characters are rejected.
+            Responses omit this property when there is no guidance.
+      description: Category selection and trace-grounded analysis guidance for an Agent Insights monitor.
+      examples:
+        - categories:
+            - cost_tokens
+            - latency
+          instructions: Prioritize customer-facing latency and token waste supported by trace evidence.
       x-ms-foundry-meta:
         required_previews:
           - AgentInsights=V1Preview
