@@ -454,6 +454,21 @@ model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
   max_traces?: int32 = 100;
 }
 
+/** Proposed explicit trace-ID selection. Service support and detailed lookup behavior are TBD; this contract does not establish runtime availability. */
+model AgentOptimizationTraceIdsTraceWindow
+  extends AgentOptimizationTraceWindow {
+  @doc("Explicit trace-ID selection discriminator. Service support is TBD.")
+  type: "trace_ids";
+
+  @doc("Explicit trace identifiers to look up within the configured telemetry source. Service support, list-size limits, duplicate handling, and missing-ID behavior are TBD.")
+  @minItems(1)
+  trace_ids: string[];
+
+  @doc("Requested telemetry lookup horizon in hours. Service support, the lookback anchor, and maximum supported horizon are TBD.")
+  @minValue(1)
+  lookback_hours: int32;
+}
+
 /** Trace evidence for skill optimization, selected independently of feedback availability. */
 model AgentTracesOptimizationContext extends OptimizationContext {
   @doc("Agent trace context discriminator.")
@@ -462,7 +477,7 @@ model AgentTracesOptimizationContext extends OptimizationContext {
   @doc("Explicit telemetry selection. Required without a target agent. When omitted with a target, use its project-linked telemetry. Not accepted on steering_prompt context.")
   trace_connection_configuration?: AgentOptimizationTraceConnectionConfiguration;
 
-  @doc("Fixed half-open trace selection window.")
+  @doc("Trace selection: a fixed half-open window, or proposed explicit trace_ids selection whose service support is TBD.")
   trace_window: AgentOptimizationTraceWindow;
 }
 
