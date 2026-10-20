@@ -33,7 +33,7 @@ union MetadataSnapshotRefreshFrequency {
   Hourly: "Hourly",
 
   /** Metadata snapshots are refreshed every six hours. */
-  SixHourly: "6-Hourly",
+  SixHourly: "SixHourly",
 
   /** Metadata snapshots are refreshed daily. */
   Daily: "Daily",
@@ -66,11 +66,12 @@ model MetadataSnapshotPolicy {
 }
 
 /** The properties of a storage account metadata policy. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "MetadataPolicy uses synchronous create-or-replace and delete operations and has no asynchronous provisioning lifecycle; exposing provisioningState would not represent service behavior."
 @added(Versions.v2026_12_01)
 model MetadataPolicyProperties {
   /** The date and time when the metadata policy was last modified. */
   @visibility(Lifecycle.Read)
-  lastModifiedTime?: utcDateTime;
+  lastModifiedAt?: utcDateTime;
 
   /** The metadata snapshot policy for the storage account. */
   snapshotPolicy: MetadataSnapshotPolicy;
