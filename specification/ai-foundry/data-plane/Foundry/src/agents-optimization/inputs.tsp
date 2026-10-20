@@ -318,7 +318,7 @@ union AgentOptimizationConfigurationType {
   @doc("One-shot prompt optimization.")
   prompt_optimization: "prompt_optimization",
 
-  @doc("Creates or updates versioned skills from trace evidence without comparative candidate evaluation.")
+  @doc("Creates or updates versioned skills from trace evidence, with optional reporting-only before/after evaluation.")
   skill_optimization: "skill_optimization",
 }
 
@@ -374,8 +374,9 @@ model SteeringPromptOptimizationContext extends OptimizationContext {
   @doc("Optimization context type discriminator.")
   type: OptimizationContextType.steering_prompt;
 
-  @doc("Developer guidance describing the desired changes.")
+  @doc("Developer guidance describing the desired changes. Maximum UTF-8 encoded size is 100 KiB (102,400 bytes), enforced by the service. The character limit is an additional bound, not a substitute for UTF-8 byte-size validation.")
   @minLength(1)
+  @maxLength(102400)
   prompt: string;
 }
 
@@ -434,7 +435,7 @@ model AgentOptimizationTraceWindow {
   type: string;
 }
 
-/** Selects all matching trace conversations in a fixed half-open interval, without count limits or sampling. */
+/** Selects recent trace conversations in a fixed half-open interval, preferring traces with annotations or evaluation results. */
 model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
   @doc("Fixed-window discriminator.")
   type: "fixed";
@@ -446,6 +447,11 @@ model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Trace selection preserves the caller's explicit UTC offset."
   @doc("Exclusive ISO 8601 timestamp with an explicit UTC offset. Future values are queried unchanged against available traces; the job does not wait for this time.")
   end_time: offsetDateTime;
+
+  @doc("Maximum number of trace conversations to select. Defaults to 100. Select the latest matching traces, giving preference to those with human annotations, evaluation results, or both. Traces without feedback remain eligible.")
+  @minValue(1)
+  @maxValue(100)
+  max_traces?: int32 = 100;
 }
 
 /** Trace evidence for skill optimization, selected independently of feedback availability. */
@@ -460,6 +466,39 @@ model AgentTracesOptimizationContext extends OptimizationContext {
   trace_window: AgentOptimizationTraceWindow;
 }
 
+/** Base configuration for service-generated skill evaluators. */
+@discriminator("type")
+model SkillOptimizationEvaluatorGenerationConfiguration {
+  @doc("Evaluator generation source discriminator.")
+  type: string;
+}
+
+/** Generates evaluators from the job's selected trace evidence. */
+model SkillOptimizationTraceEvaluatorGenerationConfiguration
+  extends SkillOptimizationEvaluatorGenerationConfiguration {
+  @doc("Generate evaluators from the agent_traces context.")
+  type: "agent_traces";
+}
+
+/** Reuses agent optimization evaluator, model, and concurrency inputs with a required validation set for reporting-only skill comparisons. */
+model SkillOptimizationEvaluationConfiguration {
+  ...OmitProperties<
+    AgentOptimizationEvaluationConfiguration,
+    "evaluators" | "training_set" | "validation_set"
+  >;
+
+  @doc("Required validation set used unchanged for both before and after runs. Limited to 500 inline cases. Training sets are not accepted because evaluation does not guide skill generation.")
+  validation_set: AgentOptimizationEvaluationSet;
+
+  @doc("Existing evaluator references. At least one reference or evaluator_generation_configuration is required. When both are supplied, use their combined evaluator set.")
+  @minItems(1)
+  @maxItems(20)
+  evaluators?: AgentOptimizationEvaluator[];
+
+  @doc("Opt-in creation of evaluators during this job. Generated evaluator references and exact versions are returned with the comparison. Omitted when only existing evaluators are used.")
+  evaluator_generation_configuration?: SkillOptimizationEvaluatorGenerationConfiguration;
+}
+
 /** Configuration for generating versioned skill packages from trace evidence. */
 model SkillOptimizationConfiguration
   extends AgentOptimizationConfigurationBase {
@@ -472,6 +511,9 @@ model SkillOptimizationConfiguration
 
   @doc("Exact skill versions unioned with skills discovered from Prompt or Managed targets, including toolboxes. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. References are deduplicated.")
   additional_skills?: AgentOptimizationFoundrySkillReference[];
+
+  @doc("Optional before/after evaluation using a required validation_set and shared agent optimization model, evaluator, and concurrency inputs. Requires target_configuration. Training sets are not accepted. Evaluate the same pinned target with baseline skills and proposed skills using the same validation set and resolved evaluator versions. Scores do not guide generation, ranking, selection, or publication. Omitted to skip performance evaluation.")
+  evaluation_configuration?: SkillOptimizationEvaluationConfiguration;
 }
 
 @doc("Inputs for estimating an agent-optimization job.")

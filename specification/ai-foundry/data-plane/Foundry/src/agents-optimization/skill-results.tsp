@@ -89,7 +89,7 @@ union AgentOptimizationSkillValidationId {
   evidence_provenance: "evidence_provenance",
 }
 
-/** Base validation category; comparative performance evaluation is not currently supported. */
+/** Base validation category; reporting-only performance scores are exposed separately in evaluation_comparison. */
 @discriminator("type")
 model AgentOptimizationSkillValidation {
   @doc("Validation category discriminator.")
@@ -132,7 +132,7 @@ model AgentOptimizationSkillResult {
   @doc("Intended identity for every result. A confirmed version appears only with status created; no_change retains the baseline version only in input_skill.")
   output_skill: AgentOptimizationFoundrySkillOutputReference;
 
-  @doc("Artifact checks, including rejections. Absence does not imply success. Comparative performance evaluations are not supported.")
+  @doc("Artifact checks, including rejections. Absence does not imply success. Reporting-only before/after evaluation is separate from artifact validation.")
   validations?: AgentOptimizationSkillValidation[];
 
   @doc("Primary failure, rejection, or uncertain-publication reason. Detailed findings remain in validations. Omitted when there is no error.")
