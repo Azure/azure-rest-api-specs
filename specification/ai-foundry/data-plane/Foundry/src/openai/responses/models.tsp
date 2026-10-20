@@ -269,10 +269,6 @@ namespace Azure.AI.Projects {
     /** Known effort selected from an explicit routing allowed set for the final client-output-producing inference. Omitted for native or default effort. */
     reasoning_effort?: ModelRouterReasoningEffort;
 
-    /** Opaque nonempty identifier of the selected logical routing decision, including its fallback attempts. Omitted when unavailable. */
-    @minLength(1)
-    decision_id?: string;
-
     /** Session affinity metadata for the routing decision. Omitted when affinity metadata is unavailable or the preview feature is not enabled. */
     session_affinity?: SessionAffinityDetails;
 

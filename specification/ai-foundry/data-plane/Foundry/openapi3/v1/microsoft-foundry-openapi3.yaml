@@ -52206,10 +52206,6 @@ components:
         reasoning_effort:
           $ref: '#/components/schemas/ModelRouterReasoningEffort'
           description: Known effort selected from an explicit routing allowed set for the final client-output-producing inference. Omitted for native or default effort.
-        decision_id:
-          type: string
-          minLength: 1
-          description: Opaque nonempty identifier of the selected logical routing decision, including its fallback attempts. Omitted when unavailable.
         session_affinity:
           $ref: '#/components/schemas/SessionAffinityDetails'
           description: Session affinity metadata for the routing decision. Omitted when affinity metadata is unavailable or the preview feature is not enabled.

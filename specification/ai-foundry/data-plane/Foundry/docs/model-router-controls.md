@@ -124,7 +124,7 @@ Only qualified foreground routes can promise pre-acceptance validation and a fin
 
 ## Results and streams
 
-Successful routed results retain their native Chat/Responses output, usage, tools, status, and error fields. When truthful final routing information is available, `model` is the **actual serving model** and `model_selection_details.model_router_details` contains the existing required applied `mode` and ordered `routing_trace`. Optional `reasoning_effort` is only a known selected value from an explicit routing allowed set, never a native or injected default; optional nonempty `decision_id` names the selected logical routing decision including fallback attempts. Existing optional `session_affinity` reports the actual mode, source, and model-based initialize/retain/switch outcome; a change of effort on the same associated model is retain. These scalars describe the last client-output-producing inference in established execution order, not a later internal call. Do not infer a default from an omitted field.
+Successful routed results retain their native Chat/Responses output, usage, tools, status, and error fields. When truthful final routing information is available, `model` is the **actual serving model** and `model_selection_details.model_router_details` contains the existing required applied `mode` and ordered `routing_trace`. Optional `reasoning_effort` is only a known selected value from an explicit routing allowed set, never a native or injected default. Existing optional `session_affinity` reports the actual mode, source, and model-based initialize/retain/switch outcome; a change of effort on the same associated model is retain. These scalars describe the last client-output-producing inference in established execution order, not a later internal call. Do not infer a default from an omitted field.
 
 An illustrative fragment in either native JSON result is:
 
@@ -135,7 +135,6 @@ An illustrative fragment in either native JSON result is:
     "model_router_details": {
       "mode": "balanced",
       "reasoning_effort": "medium",
-      "decision_id": "decision-42",
       "session_affinity": {
         "mode": "sticky",
         "source": "session_id_payload",
@@ -159,7 +158,7 @@ data: {"id":"chatcmpl_42","object":"chat.completion.chunk","created":1792497600,
 
 data: {"id":"chatcmpl_42","object":"chat.completion.chunk","created":1792497600,"model":"gpt-5","choices":[{"index":1,"delta":{},"finish_reason":"length"}],"usage":null}
 
-data: {"id":"chatcmpl_42","object":"chat.completion.chunk","created":1792497600,"model":"gpt-5","choices":[],"usage":{"prompt_tokens":10,"completion_tokens":8,"total_tokens":18},"model_selection_details":{"model_router_details":{"mode":"balanced","reasoning_effort":"medium","decision_id":"decision-42","routing_trace":[{"latency_ms":12,"attempts":[{"model":"gpt-5","result":{"status":200}}]}]}}}
+data: {"id":"chatcmpl_42","object":"chat.completion.chunk","created":1792497600,"model":"gpt-5","choices":[],"usage":{"prompt_tokens":10,"completion_tokens":8,"total_tokens":18},"model_selection_details":{"model_router_details":{"mode":"balanced","reasoning_effort":"medium","routing_trace":[{"latency_ms":12,"attempts":[{"model":"gpt-5","result":{"status":200}}]}]}}}
 
 data: [DONE]
 ```
@@ -169,7 +168,7 @@ Without usage, the last **all-choice** finishing chunk itself contains the wrapp
 ```text
 data: {"id":"chatcmpl_43","object":"chat.completion.chunk","created":1792497600,"model":"gpt-5","choices":[{"index":0,"delta":{},"finish_reason":"stop"}]}
 
-data: {"id":"chatcmpl_43","object":"chat.completion.chunk","created":1792497600,"model":"gpt-5","choices":[{"index":1,"delta":{},"finish_reason":"stop"}],"model_selection_details":{"model_router_details":{"mode":"balanced","reasoning_effort":"medium","decision_id":"decision-43","routing_trace":[{"latency_ms":12,"attempts":[{"model":"gpt-5","result":{"status":200}}]}]}}}
+data: {"id":"chatcmpl_43","object":"chat.completion.chunk","created":1792497600,"model":"gpt-5","choices":[{"index":1,"delta":{},"finish_reason":"stop"}],"model_selection_details":{"model_router_details":{"mode":"balanced","reasoning_effort":"medium","routing_trace":[{"latency_ms":12,"attempts":[{"model":"gpt-5","result":{"status":200}}]}]}}}
 
 data: [DONE]
 ```
@@ -178,10 +177,10 @@ For Responses SSE, existing `response.created` and `response.in_progress` snapsh
 
 ```text
 event: response.completed
-data: {"type":"response.completed","sequence_number":8,"response":{"id":"resp_42","object":"response","created_at":1792497600,"status":"completed","model":"gpt-5","error":null,"incomplete_details":null,"output":[{"id":"msg_42","type":"message","role":"assistant","status":"completed","content":[{"type":"output_text","text":"Hello.","annotations":[]}]}],"instructions":null,"parallel_tool_calls":true,"agent_reference":null,"model_selection_details":{"model_router_details":{"mode":"balanced","reasoning_effort":"medium","decision_id":"decision-42","routing_trace":[{"output_id":"msg_42","latency_ms":12,"attempts":[{"model":"gpt-5","result":{"status":200}}]}]}}}}
+data: {"type":"response.completed","sequence_number":8,"response":{"id":"resp_42","object":"response","created_at":1792497600,"status":"completed","model":"gpt-5","error":null,"incomplete_details":null,"output":[{"id":"msg_42","type":"message","role":"assistant","status":"completed","content":[{"type":"output_text","text":"Hello.","annotations":[]}]}],"instructions":null,"parallel_tool_calls":true,"agent_reference":null,"model_selection_details":{"model_router_details":{"mode":"balanced","reasoning_effort":"medium","routing_trace":[{"output_id":"msg_42","latency_ms":12,"attempts":[{"model":"gpt-5","result":{"status":200}}]}]}}}}
 ```
 
-GET/list, GET-stream, old records, and `store: false` share response schemas but **do not guarantee persistence or replay of the new effort/decision fields**. They may omit these ephemeral create/final-stream additions even when an earlier final event included them. Existing stored fields are not removed. Queued background acceptance is not a final routed result and does not promise a later delivery channel.
+GET/list, GET-stream, old records, and `store: false` share response schemas but **do not guarantee persistence or replay of the new routing-effort field**. They may omit that ephemeral create/final-stream field even when an earlier final event included it. Existing stored fields are not removed. Queued background acceptance is not a final routed result and does not promise a later delivery channel.
 
 ```http
 GET /api/projects/sample-project/openai/v1/responses/resp_42 HTTP/1.1
