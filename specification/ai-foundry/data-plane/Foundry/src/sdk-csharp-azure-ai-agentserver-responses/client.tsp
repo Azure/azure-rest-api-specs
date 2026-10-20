@@ -24,24 +24,19 @@ namespace Azure.AI.Projects {
   // ResponseHandler implementations.
   // ============================================================================
 
-  // --- CreateResponse ---
-  // CreateResponse is alt-typed to the OpenAI SDK, but this usage still has to be
-  // declared: it is what marks the request-side types reachable only through it
-  // (session affinity, routing, moderation, ...) as inputs. Dropping it leaves
-  // those types without Input usage.
-  @@usage(OpenAI.CreateResponse, Usage.input | Usage.output);
-
   // --- API envelope types (server needs to construct these) ---
   @@usage(Azure.AI.Projects.DeleteResponseResult, Usage.input | Usage.output);
 
   // --- OpenAI OutputItem subtypes that lead to locally emitted types ---
-  // The OutputItem base is alt-typed to OpenAI.Responses.ResponseItem, so these subtypes are
-  // not emitted themselves. The usage is still needed because it propagates to their property
-  // types, and some of those have no OpenAI SDK mapping below and are emitted locally (apply-patch
-  // operations, shell actions and outcomes, web-search actions, message and reasoning content,
-  // MCP list-tools entries, ...). Without Input usage those types would get internal constructors.
-  // OutputItem subtypes whose property types are all mapped to OpenAI (function call, MCP tool call,
-  // image generation, compaction, ...) are deliberately not listed: a usage on them changes nothing.
+  // These subtypes are not emitted themselves: operations carry the OpenAI ResponseItem (the
+  // OutputItem base is alt-typed to it), so nothing references them and the generator drops them
+  // as unreferenced. Their usage still propagates to their property types, and some of those have
+  // no OpenAI SDK mapping below and are emitted locally (apply-patch operations, shell actions and
+  // outcomes, web-search actions, message and reasoning content, MCP list-tools entries, ...).
+  // Without Input usage those types get internal constructors and read-only properties.
+  // Other OutputItem subtypes are not listed: their property types are mapped to OpenAI, already
+  // covered here, or (ComputerScreenshotImage, ToolCallCallerParam) exposed only by output-only
+  // ItemField* models.
   @@usage(OpenAI.OutputItemApplyPatchToolCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemCodeInterpreterToolCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemComputerToolCall, Usage.input | Usage.output);
@@ -53,6 +48,9 @@ namespace Azure.AI.Projects {
   @@usage(OpenAI.OutputItemMessage, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemReasoningItem, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemWebSearchToolCall, Usage.input | Usage.output);
+
+  // FunctionAndCustomToolCallOutput (text, image and file content of tool call outputs) has no
+  // OpenAI SDK mapping and is emitted locally; the usage gives it public constructors and setters.
   @@usage(OpenAI.FunctionAndCustomToolCallOutput, Usage.input | Usage.output);
 
   // ---------------------------------------------------------------------
