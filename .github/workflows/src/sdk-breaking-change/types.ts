@@ -36,6 +36,7 @@ export const AnalysisResultSchema = z.object({
         analysisStatus: z.enum(["success", "failure", "skipped"]),
         breakingChanges: z.array(
           z.object({
+            id: z.string().min(1),
             breakingChange: z.string(),
             category: z.string(),
             suggestedFix: z.string(),
@@ -52,6 +53,7 @@ export const AnalysisResultSchema = z.object({
 export type AnalysisResult = z.infer<typeof AnalysisResultSchema>;
 
 const MitigatedChangeSchema = z.object({
+  id: z.string().min(1),
   breakingChange: z.string(),
   suggestedFix: z.string(),
   isResolved: z.boolean(),

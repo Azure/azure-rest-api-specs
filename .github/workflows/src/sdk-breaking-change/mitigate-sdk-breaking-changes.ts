@@ -41,10 +41,12 @@ async function writeResult(path: string, result: MitigationResult): Promise<void
 
 function BuildMigratedBreakingChange(
   customizedUpdateResult: AzsdkCustomizedCodeUpdateResponse,
+  id: string,
   breakingChange: string,
   suggestedFix: string,
 ): MitigatedChange {
   return {
+    id,
     breakingChange,
     suggestedFix,
     isResolved: customizedUpdateResult.success,
@@ -110,6 +112,7 @@ export async function mitigateSdkBreakingChanges({
         );
         const commandResultPath = join(resultDirPath, `sdk-mitigation-result-${changeIndex}.json`);
         let mitigatedChange: MitigatedChange = {
+          id: change.id,
           breakingChange: change.breakingChange,
           suggestedFix: change.suggestedFix,
           isResolved: false,
@@ -140,11 +143,13 @@ export async function mitigateSdkBreakingChanges({
           try {
             mitigatedChange = BuildMigratedBreakingChange(
               parseAzsdkResponse<AzsdkCustomizedCodeUpdateResponse>(stdout),
+              change.id,
               change.breakingChange,
               change.suggestedFix,
             );
           } catch {
             mitigatedChange = {
+              id: change.id,
               breakingChange: change.breakingChange,
               suggestedFix: change.suggestedFix,
               isResolved: false,
@@ -156,6 +161,7 @@ export async function mitigateSdkBreakingChanges({
             error,
           );
           mitigatedChange = {
+            id: change.id,
             breakingChange: change.breakingChange,
             suggestedFix: change.suggestedFix,
             isResolved: false,

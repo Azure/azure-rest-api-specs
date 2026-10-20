@@ -250,4 +250,11 @@ describe("tables, lists and details", () => {
     `);
     expect(details("Empty", "")).toBe("<details><summary>Empty</summary>\n\n\n</details>");
   });
+
+  it("supports expanded details without changing the default collapsed behavior", () => {
+    expect(details("<Changes>", "Body", true)).toBe(
+      "<details open><summary>&lt;Changes&gt;</summary>\n\nBody\n\n</details>",
+    );
+    expect(details("Changes", "Body", false)).toBe(details("Changes", "Body"));
+  });
 });

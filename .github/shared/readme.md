@@ -172,7 +172,8 @@ function main() {
 - `link(label, url)` — create a link from trusted inline Markdown and a trusted destination.
 - `table([header, ...rows])` — render equal-width GFM rows, escaping pipes and preserving line breaks.
 - `unorderedList(items)` — render Markdown list items, indenting continuation lines.
-- `details(summary, body)` — create a collapsible block with a plain-text summary and Markdown body.
+- `details(summary, body, open = false)` — create a collapsible block with a plain-text summary
+  and Markdown body; pass `true` to expand it by default.
 
 Like [TypeSpec's Markdown helpers](https://github.com/microsoft/typespec/blob/main/packages/tspd/src/ref-doc/utils/markdown.ts),
 callers describe the document structure rather than hand-joining every line. Strings are trusted

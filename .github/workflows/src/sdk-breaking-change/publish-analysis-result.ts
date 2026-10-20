@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { escapeMarkdown, table } from "@azure-tools/specs-shared/markdown";
-import { AnalysisResultSchema, type AnalysisResult } from "./types.ts";
+import { AnalysisResultSchema, MarkdownHeadingId, type AnalysisResult } from "./types.ts";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
 import type { GitHubScriptArgs } from "../github.ts";
 
@@ -15,8 +15,8 @@ export async function buildAnalysisReport(resultsPath: string): Promise<{
   );
   const projectReports = result.projects.map((project) => {
     const tableRows: string[][] = project.breakingChanges.length
-      ? project.breakingChanges.map((change, index) => [
-          `${index + 1}`,
+      ? project.breakingChanges.map((change) => [
+          escapeMarkdown(change.id),
           escapeMarkdown(change.breakingChange),
           escapeMarkdown(change.category),
           escapeMarkdown(change.suggestedFix),
@@ -28,9 +28,14 @@ export async function buildAnalysisReport(resultsPath: string): Promise<{
       "",
       `**SDK Package:** ${project.sdkPackage}`,
       "",
-      table([["#", "Breaking change", "Category", "Suggested fix"], ...tableRows]),
+      table([["ID", "Breaking change", "Category", "Suggested fix"], ...tableRows]),
     ];
-    projectReport.push("", `[SDK breaking change analysis details](${result.analysisWorkflowUrl})`);
+    const breakingChangeSummaryUrl = [
+      result.analysisWorkflowUrl,
+      "#",
+      `${project.sdkPackage}-${MarkdownHeadingId.BreakingChange}`,
+    ].join("");
+    projectReport.push("", `[SDK breaking change analysis details](${breakingChangeSummaryUrl})`);
     return projectReport;
   });
 

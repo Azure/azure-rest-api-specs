@@ -1,10 +1,14 @@
 import type { GitHubScriptArgs } from "../github.ts";
 import { readFile } from "node:fs/promises";
-import { escapeMarkdown, table } from "@azure-tools/specs-shared/markdown";
+import {
+  details,
+  escapeMarkdown,
+  renderMarkdownDoc,
+  section,
+  table,
+} from "@azure-tools/specs-shared/markdown";
 import { type MitigationResult, MitigationResultSchema } from "./types.ts";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
-
-const MAX_CHANGED_CODE_LENGTH = 12_000;
 
 export async function buildMitigationReport({
   github,
@@ -37,6 +41,7 @@ export async function buildMitigationReport({
     const resolvedChanges: string[][] = project.breakingChanges
       .filter((change) => change.isResolved)
       .map((change) => [
+        escapeMarkdown(change.id),
         escapeMarkdown(change.breakingChange),
         change.suggestedFix ? escapeMarkdown(change.suggestedFix) : "",
         change.typespecChangesSummary?.[0] ? escapeMarkdown(change.typespecChangesSummary[0]) : "",
@@ -44,6 +49,7 @@ export async function buildMitigationReport({
     const unresolvedChanges: string[][] = project.breakingChanges
       .filter((change) => !change.isResolved)
       .map((change) => [
+        escapeMarkdown(change.id),
         escapeMarkdown(change.breakingChange),
         change.suggestedFix ? escapeMarkdown(change.suggestedFix) : "",
       ]);
@@ -55,26 +61,33 @@ export async function buildMitigationReport({
       "**Resolved Breaking Changes:**",
       "",
       resolvedChanges.length > 0
-        ? table([["Breaking change", "Resolution", "TypeSpec changes"], ...resolvedChanges])
+        ? details(
+            "View resolved breaking changes",
+            table([
+              ["ID", "Breaking change", "Resolution", "TypeSpec changes"],
+              ...resolvedChanges,
+            ]),
+            true,
+          )
         : "None",
       "",
       "**Unresolved Breaking Changes:**",
       "",
       unresolvedChanges.length > 0
-        ? table([["Breaking change", "Suggested resolution"], ...unresolvedChanges])
+        ? table([["ID", "Breaking change", "Suggested resolution"], ...unresolvedChanges])
         : "None",
       "",
     ];
   });
 
-  const fullChangedCode = result.customizationCode.trim();
-  const changedCode =
-    fullChangedCode.length > MAX_CHANGED_CODE_LENGTH
-      ? `${fullChangedCode.slice(0, MAX_CHANGED_CODE_LENGTH)}\n... diff truncated.`
-      : fullChangedCode;
+  const changedCode = result.customizationCode.trim();
+  const sdkBreakingChangeMitigationSection = section(
+    `SDK Breaking Change Mitigation for ${result.sdkLanguage}`,
+    "",
+  );
   return {
     report: [
-      `## SDK breaking-change mitigation for ${result.sdkLanguage}`,
+      `${renderMarkdownDoc(sdkBreakingChangeMitigationSection, 2)}`,
       "",
       `**Mitigation upon commit:** \`${result.headSha}\``,
       "",
@@ -82,9 +95,13 @@ export async function buildMitigationReport({
       "**Customization Code:**",
       "",
       changedCode
-        ? ["````diff", changedCode, "````"].join("\n")
+        ? details("View customization Code", ["````diff", changedCode, "````"].join("\n"))
         : "No mitigation changes were produced.",
       `[View customization code in the workflow summary](${workflowSummaryUrl})`,
+      "",
+      "<p>💡 Apply the customization code to mitigate the breaking changes.</p>",
+      "",
+      "<p>💡 For accepted breaking changes, follow the <a href=\"https://github.com/Azure/azure-rest-api-specs/wiki/SDK-Breaking-Changes#how-to-suppress-the-sdk-breaking-changes\">suppression process</a> to suppress them.</p>",
     ].join("\n"),
     result,
   };

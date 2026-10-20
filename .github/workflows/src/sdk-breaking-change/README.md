@@ -422,10 +422,11 @@ Comment behavior:
 - **Current successful result:** groups changes into resolved and unresolved tables for each project.
   The resolved table uses `Breaking change`, `Resolution`, and `TypeSpec changes` columns; only the
   first `typespecChangesSummary` entry is shown. Empty groups display `None`.
-  The report also includes **Customization Code** as a fenced diff when edits exist, or the
-  no-changes message above otherwise. The comment displays at most 12,000 characters of the trimmed
-  diff, followed by a truncation notice when needed, and links to the job summary for the full
-  captured code.
+  Nonempty resolved tables appear in a details block that is expanded by default.
+  The report also includes **Customization Code** as a fenced diff in a collapsed-by-default
+  details block when edits exist, or the
+  no-changes message above otherwise. The comment includes the full trimmed diff without
+  truncation and also links to the job summary.
 - **Failed result:** posts an error message prefixed with a cross mark, optional failure details,
   and the mitigation workflow link instead of the change tables. This path does not check freshness.
 - **Stale successful result:** posts a warning containing the analyzed SHA and current PR head SHA

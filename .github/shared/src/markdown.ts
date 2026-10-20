@@ -119,9 +119,9 @@ export function unorderedList(items: readonly string[]): string {
 }
 
 /** Wraps a Markdown block in a GitHub details element with a plain-text summary. */
-export function details(summary: string, body: string): string {
+export function details(summary: string, body: string, open = false): string {
   return [
-    `<details><summary>${escapeHtml(summary)}</summary>`,
+    `<details${open ? " open" : ""}><summary>${escapeHtml(summary)}</summary>`,
     "",
     ...(body ? [body] : []),
     "",

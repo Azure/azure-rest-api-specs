@@ -75,7 +75,9 @@ describe("SDK breaking-change summary", () => {
     expect(summary).not.toContain(`href="${prUrl}#issuecomment-1"`);
     expect(summary).not.toContain(`href="${prUrl}#issuecomment-2"`);
     expect(summary).toContain(`href="${prUrl}#issuecomment-3"`);
-    expect(summary).toContain("<code>BreakingChange-Python-Sdk-Approved</code>");
+    expect(summary).toContain(
+      "[suppression process](https://github.com/Azure/azure-rest-api-specs/wiki/SDK-Breaking-Changes#how-to-suppress-the-sdk-breaking-changes)",
+    );
     expect(summary).toContain("Review the analysis and mitigation guidance.");
     expect(summary).not.toContain("| Java |");
   });
@@ -132,10 +134,15 @@ describe("SDK breaking-change summary", () => {
     expect(summary).toContain("#issuecomment-2");
     expect(summary).toContain("| Go | Breaking changes detected |");
     expect(summary).toContain(
-      "For accepted breaking changes, request <code>BreakingChange-Go-Sdk-Approved</code> from an authorized reviewer.",
+      "For accepted breaking changes, follow the [suppression process](https://github.com/Azure/azure-rest-api-specs/wiki/SDK-Breaking-Changes#how-to-suppress-the-sdk-breaking-changes) to suppress them.",
     );
     expect(summary).toContain("apply any proposed customizations, then rerun SDK validation");
-    expect(summary).toContain("do not mean those changes have been applied or validated");
+    expect(summary).toContain(
+      "<p>💡 Mitigation reports contain proposed changes; they do not mean those changes have been applied or validated.</p>",
+    );
+    expect(summary).toContain(
+      "<p>💡 When suppressing breaking changes, ensure to use the original breaking changes.</p>",
+    );
   });
 
   it("includes the table even when higher-priority blockers are displayed, without changing merge gates", () => {
@@ -217,7 +224,7 @@ describe("SDK breaking-change summary", () => {
       };
       expect(comment_id).toBe(99);
       if (detected) {
-        expect(body).toContain("<h3>SDK Breaking Change detection and mitigation</h3>");
+        expect(body).toContain("<h3>SDK Breaking Change Detection and Mitigation</h3>");
         expect(body).toContain(`href="${prUrl}#issuecomment-1"`);
       } else {
         expect(body).not.toContain("<table>");
@@ -268,7 +275,7 @@ describe("SDK breaking-change summary", () => {
     });
     const { body } = github.rest.issues.updateComment.mock.calls[0][0] as { body: string };
     expect(body).toContain("<h2>Next Steps to Merge</h2>");
-    expect(body).not.toContain("SDK Breaking Change detection and mitigation");
+    expect(body).not.toContain("SDK Breaking Change Detection and Mitigation");
     expect(body).not.toContain("#issuecomment-1");
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
       expect.objectContaining({ sha: headSha }),

@@ -46,6 +46,7 @@ beforeEach(async () => {
           analysisStatus: "success",
           breakingChanges: [
             {
+              id: "model-change",
               breakingChange: "Model changed",
               category: "spec change",
               suggestedFix: "Restore compatibility",
@@ -120,6 +121,7 @@ describe("mitigateSdkBreakingChanges", () => {
     );
     expect(result.projects[0].breakingChanges).toEqual([
       {
+        id: "model-change",
         breakingChange: "Model changed",
         suggestedFix: "Restore compatibility",
         isResolved: true,
@@ -153,6 +155,17 @@ describe("mitigateSdkBreakingChanges", () => {
       "Failed to mitigate SDK breaking change 1 for specification/service/Widget.Service:",
       error,
     );
+    const result = MitigationResultSchema.parse(
+      JSON.parse(await readFile(mitigationResultPath, "utf8")),
+    );
+    expect(result.projects[0].breakingChanges).toEqual([
+      {
+        id: "model-change",
+        breakingChange: "Model changed",
+        suggestedFix: "Restore compatibility",
+        isResolved: false,
+      },
+    ]);
   });
 
   it("marks the change unresolved when customization does not succeed", async () => {
@@ -175,6 +188,7 @@ describe("mitigateSdkBreakingChanges", () => {
     );
     expect(result.projects[0].breakingChanges).toEqual([
       {
+        id: "model-change",
         breakingChange: "Model changed",
         suggestedFix: "Restore compatibility",
         isResolved: false,
@@ -200,6 +214,7 @@ describe("mitigateSdkBreakingChanges", () => {
             analysisStatus: "success",
             breakingChanges: [
               {
+                id: "model-change",
                 breakingChange: "Model changed",
                 category: "spec change",
                 suggestedFix: "Restore compatibility",

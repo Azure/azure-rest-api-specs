@@ -40,7 +40,9 @@ export function buildSdkBreakingChangesSummary(
           comment.body.includes(`<!-- ${command} -->`) &&
           comment.body.includes(`<!-- sdk-breaking-change-head-sha: ${headSha} -->`),
       );
-      return report ? `<a href="${prUrl}#issuecomment-${report.id}">View Results</a>` : undefined;
+      return report
+        ? `<a href="${prUrl}#issuecomment-${report.id}">View ${stage} Results</a>`
+        : undefined;
     };
 
     const analysis = reportLink("analysis");
@@ -51,7 +53,7 @@ export function buildSdkBreakingChangesSummary(
         : analysis
           ? "Review the analysis and mitigation guidance. "
           : "Check the SDK validation results; analysis is not yet available for this commit. ") +
-      `For accepted breaking changes, request <code>${repoLabels.breakingChangeApproved}</code> from an authorized reviewer.`;
+      `For accepted breaking changes, follow the [suppression process](https://github.com/Azure/azure-rest-api-specs/wiki/SDK-Breaking-Changes#how-to-suppress-the-sdk-breaking-changes) to suppress them.`;
     rows.push([
       language === "DotNet" ? ".NET" : language,
       "Breaking changes detected",
@@ -65,9 +67,10 @@ export function buildSdkBreakingChangesSummary(
   }
   return [
     "",
-    "<h3>SDK Breaking Change detection and mitigation</h3>",
+    "<h3>SDK Breaking Change Detection and Mitigation</h3>",
     table([["Language", "Status", "Analysis", "Mitigation", "Next action"], ...rows]),
-    "<p>Mitigation reports contain proposed changes; they do not mean those changes have been applied or validated.</p>",
+    "<p>💡 Mitigation reports contain proposed changes; they do not mean those changes have been applied or validated.</p>",
+    "<p>💡 When suppressing breaking changes, ensure to use the original breaking changes.</p>",
     "",
   ].join("\n\n");
 }

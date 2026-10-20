@@ -22,6 +22,7 @@ import {
   renderMarkdownDoc,
   section,
 } from "@azure-tools/specs-shared/markdown";
+import { createHash } from "node:crypto";
 
 export interface AnalyzeSdkProjectsOptions {
   localSdkRepositoryPath: string;
@@ -227,7 +228,7 @@ export async function analyzeSdkProjects({
         `\`\`\`\n${JSON.stringify(breakingChangesResponse, null, 2)}\n\`\`\``,
         `${packageName}-${MarkdownHeadingId.BreakingChange}`,
       );
-      blocks.push(renderMarkdownDoc(breakingChangeSection));
+      blocks.push(renderMarkdownDoc(breakingChangeSection, 2));
 
       analyzeResult.projects.push({
         typespecProject: typeSpecProjectPath,
@@ -241,6 +242,7 @@ export async function analyzeSdkProjects({
               resolution?: string;
             };
             return {
+              id: toEightDigitId(typedChange.breakingChange),
               breakingChange: typedChange.breakingChange,
               category: typedChange.category,
               suggestedFix: typedChange.resolution ?? "",
@@ -259,4 +261,9 @@ export async function analyzeSdkProjects({
 
   // summary of the analysis results
   await core.summary.addRaw(blocks.filter((block) => block !== undefined).join("\n\n")).write();
+}
+
+function toEightDigitId(value: string): string {
+  const hash = createHash("sha256").update(value).digest();
+  return (hash.readUInt32BE(0) % 100_000_000).toString().padStart(8, "0");
 }
