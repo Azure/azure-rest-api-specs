@@ -1,8 +1,9 @@
 name: "Summarize Checks"
 
 on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
-  # Dispatched by Update Labels after it applies ARM signoff labels from a dispatched run. Runs
-  # created with GITHUB_TOKEN do not fire the "Update Labels" workflow_run trigger below.
+  # ARM signoff only: Universal dispatches Update Labels, and a run started by a GITHUB_TOKEN
+  # dispatch does not fire the "Update Labels" workflow_run trigger below when it completes. That
+  # Update Labels run dispatches this one instead. All other routes are unchanged.
   workflow_dispatch:
     inputs:
       pr_number:

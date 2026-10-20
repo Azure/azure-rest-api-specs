@@ -1,56 +1,45 @@
 import { isFullGitSha } from "../../shared/src/git.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { extractInputs, getWorkflowRunArtifactInputs } from "../src/context.ts";
-import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "./github.ts";
+import type { Context, Core, GitHub, GitHubScriptArgs, WebhookEvent } from "./github.ts";
 import { ArmAutoSignoffLabel } from "./arm-auto-signoff/arm-auto-signoff-labels.ts";
-import { getLabelActionImpl } from "./arm-auto-signoff/arm-universal-auto-signoff.ts";
-import { LabelAction } from "./label.ts";
 
 export default async function updateLabels({ github, context, core }: GitHubScriptArgs) {
-  if (context.eventName === "workflow_dispatch") {
-    const value: unknown = (context.payload as WebhookEvent<"workflow-dispatch">).inputs
-      ?.source_run_id;
-    const runId = Number(value);
-    if (typeof value !== "string" || !/^[1-9]\d*$/.test(value) || !Number.isSafeInteger(runId)) {
-      throw new Error("Update Labels dispatch requires a positive source run ID");
-    }
-    const { owner, repo } = context.repo;
-    const { data: run } = await github.rest.actions.getWorkflowRun({ owner, repo, run_id: runId });
-    // Never accept artifacts produced by pull_request code or an arbitrary workflow.
-    if (
-      run.path !== ".github/workflows/arm-universal-auto-signoff.yaml" ||
-      !["workflow_dispatch", "workflow_run", "pull_request_target"].includes(run.event) ||
-      (run.status === "completed" && run.conclusion !== "success")
-    ) {
-      throw new Error("Update Labels dispatch source must be a trusted Universal signoff run");
-    }
-    const { headSha, issueNumber } = await getWorkflowRunArtifactInputs({
-      github,
-      core,
-      owner,
-      repo,
-      runId,
-    });
-    if (!isFullGitSha(headSha) || !Number.isSafeInteger(issueNumber) || issueNumber <= 0) {
-      throw new Error("Universal signoff run is missing trusted PR/head correlation");
-    }
-    await updateLabelsImpl({
-      owner,
-      repo,
-      head_sha: headSha,
-      issue_number: issueNumber,
-      run_id: runId,
-      github,
-      core,
-    });
-    return;
-  }
-  const { owner, repo, head_sha, issue_number, run_id } = await extractInputs(
-    github,
-    context,
-    core,
-  );
+  const { owner, repo, head_sha, issue_number, run_id } =
+    context.eventName === "workflow_dispatch"
+      ? await getUniversalSourceRunInputs(github, context, core)
+      : await extractInputs(github, context, core);
   await updateLabelsImpl({ owner, repo, head_sha, issue_number, run_id, github, core });
+}
+
+/**
+ * Reads the PR and head SHA for a dispatched run from its `source_run_id`. Only a Universal
+ * signoff run is accepted, never pull_request code or an arbitrary workflow.
+ */
+async function getUniversalSourceRunInputs(github: GitHub, context: Context, core: Core) {
+  const runId = Number(
+    (context.payload as WebhookEvent<"workflow-dispatch">).inputs?.source_run_id,
+  );
+  if (!Number.isSafeInteger(runId) || runId <= 0) {
+    throw new Error("Update Labels dispatch requires a positive source run ID");
+  }
+  const { owner, repo } = context.repo;
+  const { data: run } = await github.rest.actions.getWorkflowRun({ owner, repo, run_id: runId });
+  // A pull_request run can execute a PR-modified copy of this file, so its artifacts are untrusted.
+  if (
+    run.path !== ".github/workflows/arm-universal-auto-signoff.yaml" ||
+    !["workflow_dispatch", "workflow_run", "pull_request_target"].includes(run.event)
+  ) {
+    throw new Error("Update Labels dispatch source must be a Universal signoff run");
+  }
+  const { headSha, issueNumber } = await getWorkflowRunArtifactInputs({
+    github,
+    core,
+    owner,
+    repo,
+    runId,
+  });
+  return { owner, repo, head_sha: headSha, issue_number: issueNumber, run_id: runId };
 }
 
 export async function updateLabelsImpl({
@@ -100,9 +89,9 @@ export async function updateLabelsImpl({
 
   core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
-  let labelsToAdd: string[] = [];
+  const labelsToAdd: string[] = [];
 
-  let labelsToRemove: string[] = [];
+  const labelsToRemove: string[] = [];
 
   for (const artifactName of artifactNames) {
     // If artifactName has format "label-name=true|false", add or remove the label
@@ -145,29 +134,6 @@ export async function updateLabelsImpl({
   const pullRequestUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;
   core.info(`pull request url: ${pullRequestUrl}`);
 
-  const managedArmLabels = new Set<string>(Object.values(ArmAutoSignoffLabel));
-  if ([...labelsToAdd, ...labelsToRemove].some((name) => managedArmLabels.has(name))) {
-    if (!isFullGitSha(head_sha)) {
-      throw new Error("ARM signoff label actions require a full evaluated head SHA");
-    }
-    // Artifacts can wait in the queue while the head, review result, or human approval changes.
-    const { labelActions } = await getLabelActionImpl({
-      owner,
-      repo,
-      head_sha,
-      issue_number,
-      github,
-      core,
-    });
-    labelsToAdd = labelsToAdd.filter((name) => !managedArmLabels.has(name));
-    labelsToRemove = labelsToRemove.filter((name) => !managedArmLabels.has(name));
-    for (const [name, action] of Object.entries(labelActions)) {
-      if (action === LabelAction.Add) labelsToAdd.push(name);
-      if (action === LabelAction.Remove) labelsToRemove.push(name);
-    }
-    core.info(`Revalidated ARM label actions at application: ${JSON.stringify(labelActions)}`);
-  }
-
   if (labelsToAdd.length > 0) {
     await github.rest.issues.addLabels({
       owner: owner,
@@ -178,6 +144,13 @@ export async function updateLabelsImpl({
   }
 
   if (labelsToRemove.length > 0) {
+    // Remove ARMSignedOff before its auto-signoff markers. If a later removal fails, a lone marker
+    // is harmless, whereas a lone ARMSignedOff would look like a human approval.
+    labelsToRemove.sort(
+      (a, b) =>
+        Number(b === ArmAutoSignoffLabel.ArmSignedOff) -
+        Number(a === ArmAutoSignoffLabel.ArmSignedOff),
+    );
     // Must loop over labelsToRemove ourselves, since GitHub doesn't expose a REST API to remove in bulk.
     for (const name of labelsToRemove) {
       try {

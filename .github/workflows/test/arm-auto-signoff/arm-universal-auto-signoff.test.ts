@@ -462,7 +462,7 @@ describe("ARM Universal Auto SignOff workflow", () => {
     expect(headArtifact).toBeGreaterThan(-1);
     expect(issueArtifact).toBeGreaterThan(headArtifact);
     expect(workflow.indexOf("name: Dispatch Update Labels")).toBeGreaterThan(issueArtifact);
-    expect(workflow).toContain("inputs: { source_run_id: String(context.runId) }");
+    expect(workflow).toContain("await dispatchUpdateLabels({ github, context, core });");
   });
 
   it("is applied by Update Labels, and the legacy workflow is gone", async () => {
@@ -484,10 +484,8 @@ describe("ARM Universal Auto SignOff workflow", () => {
     expect(dispatchJob).toContain("needs: update-labels");
     expect(dispatchJob).toContain("github.event_name == 'workflow_dispatch'");
     expect(dispatchJob).toContain("actions: write");
-    expect(dispatchJob).toContain('workflow_id: "summarize-checks.yaml"');
-    expect(dispatchJob).toContain(
-      "pr_number: process.env.PR_NUMBER, head_sha: process.env.HEAD_SHA",
-    );
+    expect(dispatchJob).toContain("dispatchSummarizeChecks(");
+    expect(dispatchJob).toContain("prNumber: process.env.PR_NUMBER, headSha: process.env.HEAD_SHA");
     expect(summarize).toMatch(/workflow_dispatch:\s+inputs:\s+pr_number:[\s\S]+head_sha:/);
     expect(summarize).toContain("github.event_name == 'workflow_dispatch' ||");
     // The workflow_run fallback stays, so a dispatch must not be added for that route.

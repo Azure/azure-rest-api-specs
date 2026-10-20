@@ -89,25 +89,21 @@ arm-api-review (reviewer)
 arm-universal-auto-signoff     re-check the PR is open at the evaluated head, read labels and the
                                newest status per context on that SHA, decide the label actions
                                upload actions/correlation, explicitly dispatch Update Labels
-update-labels                  re-evaluate ARM policy/status/head/ownership, apply current actions
+update-labels                  apply Universal's label artifacts
                                (workflow_run route: Summarize Checks runs on completion;
                                dispatch route: explicitly dispatch Summarize Checks)
 ```
 
-Update Labels reuses Universal's policy when applying ARM artifacts, rather than
-blindly applying an earlier decision. Stale-head artifacts, a pending same-head
-re-review, and an intervening unmarked human approval cannot authorize obsolete
-ARM label actions at that revalidation. Other producers' label behavior is
-unchanged. Revalidation adds the same PR, label, and (unless held or human-approved)
-status reads as a Universal evaluation. GitHub does not support atomic
-compare-and-set for labels, so changes after the final read and partial API writes
-are still possible; a subsequent evaluation reconciles automation-owned labels.
+Update Labels applies Universal's label artifacts as-is. Universal re-evaluates on every relevant
+change (push, review result, label), so a newer evaluation reconciles any label written from an
+older one. GitHub does not support atomic compare-and-set for labels, so a short window where
+labels reflect a slightly older evaluation is expected.
 
 The explicit Reviewer -> Universal -> Update Labels handoffs do not depend on
 GitHub delivering more `workflow_run` events after a long upstream chain. Both
 dispatches use `GITHUB_TOKEN`, the trusted default branch, and minimal identity
 inputs; no App credentials are needed. Existing completion/event triggers remain
-fallbacks. Duplicate evaluations are expected and revalidate the current state.
+fallbacks. Duplicate evaluations are expected and re-evaluate the current state.
 The Update Labels dispatch validates that its source run is the trusted Universal
 workflow (never a `pull_request` run), then reads its uploaded correlation and
 label artifacts. The Universal run can still be finishing when the dispatched
@@ -118,14 +114,14 @@ not fire `workflow_run` consumers. So a dispatched Update Labels run dispatches 
 itself, with only the PR number and evaluated head SHA, after applying the labels; this removes
 `WaitForARMFeedback` once `ARMSignedOff` is present and refreshes the comment and merge status.
 A `workflow_run`-route Update Labels run does not dispatch, because Summarize Checks already runs
-on its completion. Summarize Checks skips a dispatched head that is no longer current.
+on its completion.
 
 Every explicit handoff is gated on the current run being a `workflow_dispatch` run (the reviewer
 dispatching Universal, Universal dispatching Update Labels, Update Labels dispatching Summarize
 Checks). Those are the runs `GITHUB_TOKEN` creates, so their completion fires no `workflow_run`
 consumer. Runs from user events already chain through `workflow_run`, and dispatching there too
 would evaluate and apply labels twice. A person manually dispatching a run can still get one
-duplicate, which revalidates and is harmless. The Summarize Checks dispatch is its own job, so
+duplicate, which applies the same labels and is harmless. The Summarize Checks dispatch is its own job, so
 only it holds `actions: write` in Update Labels.
 
 Dispatch errors fail the handoff step, without changing a valid semantic result.
@@ -186,11 +182,11 @@ no longer the PR head is never read for the new head.
 
 ## Files
 
-| File                                                                     | Role                                                                 |
-| ------------------------------------------------------------------------ | -------------------------------------------------------------------- |
-| [arm-semantic-review.ts](./arm-semantic-review.ts)                       | Pure policy: validate the result, map it to a status, read statuses  |
-| [arm-semantic-review-workflow.ts](./arm-semantic-review-workflow.ts)     | Publish the status; resolve an unpublished one                       |
-| [arm-signoff-dispatch.ts](./arm-signoff-dispatch.ts)                     | Explicit reviewer-to-Universal handoff and validated dispatch inputs |
-| [arm-universal-auto-signoff.ts](./arm-universal-auto-signoff.ts)         | Read statuses and labels, decide label actions                       |
-| [arm-api-review.md](../../arm-api-review.md)                             | Reviewer workflow source (the `.lock.yml` is generated from it)      |
-| [arm-universal-auto-signoff.yaml](../../arm-universal-auto-signoff.yaml) | Universal workflow                                                   |
+| File                                                                     | Role                                                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| [arm-semantic-review.ts](./arm-semantic-review.ts)                       | Pure policy: validate the result, map it to a status, read statuses                               |
+| [arm-semantic-review-workflow.ts](./arm-semantic-review-workflow.ts)     | Publish the status; resolve an unpublished one                                                    |
+| [arm-signoff-dispatch.ts](./arm-signoff-dispatch.ts)                     | Explicit reviewer-to-Universal and Universal-to-Update-Labels handoffs, validated dispatch inputs |
+| [arm-universal-auto-signoff.ts](./arm-universal-auto-signoff.ts)         | Read statuses and labels, decide label actions                                                    |
+| [arm-api-review.md](../../arm-api-review.md)                             | Reviewer workflow source (the `.lock.yml` is generated from it)                                   |
+| [arm-universal-auto-signoff.yaml](../../arm-universal-auto-signoff.yaml) | Universal workflow                                                                                |

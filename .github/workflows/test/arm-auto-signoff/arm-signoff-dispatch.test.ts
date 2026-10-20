@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   dispatchUniversalSignoff,
+  dispatchUpdateLabels,
   parseSignoffDispatchInputs,
 } from "../../src/arm-auto-signoff/arm-signoff-dispatch.ts";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
@@ -70,6 +71,33 @@ describe("reviewer to Universal dispatch", () => {
   });
 });
 
+describe("Universal to Update Labels dispatch", () => {
+  it("dispatches Update Labels on the default branch with this run as the source", async () => {
+    const { github, core, context } = fixture();
+    await dispatchUpdateLabels({ github, context, core });
+    expect(github.rest.actions.createWorkflowDispatch).toHaveBeenCalledExactlyOnceWith({
+      owner: "Azure",
+      repo: "azure-rest-api-specs",
+      workflow_id: "update-labels.yaml",
+      ref: "main",
+      inputs: { source_run_id: "456" },
+    });
+  });
+
+  it("refuses to dispatch without the default branch", async () => {
+    const { github, core } = fixture();
+    const context = Object.assign(createMockContext(), {
+      runId: 456,
+      repo: { owner: "Azure", repo: "azure-rest-api-specs" },
+      payload: {},
+    });
+    await expect(dispatchUpdateLabels({ github, context, core })).rejects.toThrow(
+      "requires the repository default branch",
+    );
+    expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
+  });
+});
+
 describe("Universal dispatch inputs", () => {
   it("preserves the reviewed SHA instead of substituting the live PR head", () => {
     expect(parseSignoffDispatchInputs({ pr_number: "123", head_sha: sha })).toEqual({
@@ -86,7 +114,7 @@ describe("Universal dispatch inputs", () => {
       { semanticState: "error", currentSha: sha, expectedAdds: 0 },
       { semanticState: "success", currentSha: "b".repeat(40), expectedAdds: 0 },
     ])(
-      "revalidates at Universal and Update Labels: %j",
+      "applies Universal's decision through Update Labels: %j",
       async ({ semanticState, currentSha, expectedAdds }) => {
         const { github, core, context } = fixture();
         github.rest.pulls.get.mockResolvedValue({

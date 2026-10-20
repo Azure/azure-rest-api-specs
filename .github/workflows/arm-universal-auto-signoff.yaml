@@ -37,7 +37,8 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
 permissions:
   # actions.listWorkflowRunsForRepo
   # actions.listWorkflowRunArtifacts
-  actions: write # read correlation artifacts and dispatch Update Labels
+  # actions.createWorkflowDispatch
+  actions: write
   # default
   contents: read
   # issues.listLabelsOnIssue
@@ -154,8 +155,12 @@ jobs:
           name: "issue-number"
           value: "${{ fromJson(steps.get-label-action.outputs.result).issueNumber }}"
 
-      # Only a workflow_dispatch run (created by GITHUB_TOKEN) fails to fire Update Labels through
-      # workflow_run; other routes already do, and dispatching there too would apply labels twice.
+      # Why dispatch explicitly: the reviewer dispatches this run with GITHUB_TOKEN, and GitHub does
+      # not fire workflow_run for runs started that way. Update Labels' workflow_run trigger would
+      # never see this run, so the label artifacts above would not be applied.
+      # Why only workflow_dispatch: pull_request_target and workflow_run runs already trigger
+      # Update Labels through workflow_run. Dispatching for them too would apply labels twice.
+      # Skipped when there are no label changes to apply.
       - name: Dispatch Update Labels
         if: |
           github.event_name == 'workflow_dispatch' &&
@@ -164,11 +169,6 @@ jobs:
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
-            const ref = context.payload.repository?.default_branch;
-            if (!ref) throw new Error("Update Labels dispatch requires the default branch");
-            await github.rest.actions.createWorkflowDispatch({
-              ...context.repo,
-              workflow_id: "update-labels.yaml",
-              ref,
-              inputs: { source_run_id: String(context.runId) },
-            });
+            const { dispatchUpdateLabels } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-signoff-dispatch.ts');
+            await dispatchUpdateLabels({ github, context, core });

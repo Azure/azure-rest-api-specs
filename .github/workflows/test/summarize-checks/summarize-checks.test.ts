@@ -32,14 +32,6 @@ describe("ARM review label handoff", () => {
       github.rest.issues.listLabelsOnIssue.mockResolvedValue({
         data: existingLabels.map((name) => ({ name })),
       });
-      github.rest.pulls.get.mockResolvedValue({
-        data: {
-          state: "open",
-          draft: false,
-          head: { sha: fullGitSha },
-          labels: existingLabels.map((name) => ({ name })),
-        },
-      });
       github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });
       github.rest.checks.listForRef.mockResolvedValue({
         data: {
@@ -144,39 +136,6 @@ describe("ARM review label handoff", () => {
       expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
       expect(core.setOutput).not.toHaveBeenCalledWith("arm_review_ready", true);
     });
-
-    it.each([
-      { state: "closed" },
-      { head: { sha: "a".repeat(40) } },
-      { draft: true },
-      { labels: [{ name: "ARMReview" }, { name: "ARMManualSignoffRequired" }] },
-    ])("does not apply labels when the PR changes during evaluation: %j", async (change) => {
-      const { github, core, run } = createSummary();
-      github.rest.pulls.get
-        .mockResolvedValueOnce({
-          data: {
-            state: "open",
-            draft: false,
-            head: { sha: fullGitSha },
-            labels: [{ name: "ARMReview" }],
-          },
-        })
-        .mockResolvedValue({
-          data: {
-            state: "open",
-            draft: false,
-            head: { sha: fullGitSha },
-            labels: [{ name: "ARMReview" }],
-            ...change,
-          },
-        });
-
-      await run();
-
-      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
-      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
-      expect(core.setOutput).not.toHaveBeenCalledWith("arm_review_ready", true);
-    });
   });
 
   describe("workflow_dispatch from Update Labels", () => {
@@ -196,9 +155,11 @@ describe("ARM review label handoff", () => {
       const github = createMockGithub();
       const core = createMockCore();
       core.summary.addLink = vi.fn().mockReturnValue(core.summary);
-      github.rest.pulls.get.mockResolvedValue({
-        data: { state: "open", head: { sha: "b".repeat(40) }, labels: [] },
-      });
+      core.summary.addHeading = vi.fn().mockReturnValue(core.summary);
+      core.summary.addCodeBlock = vi.fn().mockReturnValue(core.summary);
+      github.rest.issues.listLabelsOnIssue.mockResolvedValue({ data: [] });
+      github.rest.checks.listForRef.mockResolvedValue({ data: { check_runs: [] } });
+      github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });
 
       await summarizeChecks({
         github,
@@ -208,14 +169,6 @@ describe("ARM review label handoff", () => {
 
       expect(core.setOutput).toHaveBeenCalledWith("issue_number", 123);
       expect(core.setOutput).toHaveBeenCalledWith("head_sha", fullGitSha);
-      expect(github.rest.pulls.get).toHaveBeenCalledWith({
-        owner: "Azure",
-        repo: "azure-rest-api-specs",
-        pull_number: 123,
-      });
-      // A head that moved on after the dispatch is skipped without touching labels.
-      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
-      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
     });
 
     it("rejects malformed inputs", async () => {

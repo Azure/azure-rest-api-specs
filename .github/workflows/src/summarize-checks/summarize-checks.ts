@@ -281,8 +281,7 @@ export default async function summarizeChecks({
   const { owner, repo } = extracted;
   let { issue_number, head_sha } = extracted;
 
-  // Dispatched by Update Labels, which has no PR payload. The inputs only identify the PR; a
-  // head that no longer matches is skipped as stale by summarizeChecksImpl.
+  // Dispatched by Update Labels, which has no PR payload.
   if (context.eventName === "workflow_dispatch") {
     ({ issue_number, head_sha } = parseSignoffDispatchInputs(
       (context.payload as WebhookEvent<"workflow-dispatch">).inputs,
@@ -366,16 +365,7 @@ export async function summarizeChecksImpl(
   await core.summary.write();
   core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 
-  const { data: pull } = await github.rest.pulls.get({
-    owner,
-    repo,
-    pull_number: issue_number,
-  });
-  if (pull.state !== "open" || pull.head.sha !== head_sha) {
-    core.info("Skipping summary for a stale head or closed PR");
-    return;
-  }
-  let labelNames = pull.labels.map((label) => label.name);
+  let labelNames = await getExistingLabels(github, owner, repo, issue_number);
 
   const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
     github,
@@ -390,7 +380,6 @@ export async function summarizeChecksImpl(
   outputRunDetails(core, requiredCheckRuns, fyiCheckRuns);
 
   if (impactAssessment) {
-    impactAssessment.isDraft = pull.draft ?? false;
     core.info(`ImpactAssessment: ${JSON.stringify(impactAssessment)}`);
     targetBranch = impactAssessment.targetBranch;
   } else {
@@ -401,22 +390,6 @@ export async function summarizeChecksImpl(
   }
 
   const labelContext = updateLabels(labelNames, impactAssessment);
-
-  const { data: currentPull } = await github.rest.pulls.get({
-    owner,
-    repo,
-    pull_number: issue_number,
-  });
-  if (
-    currentPull.state !== "open" ||
-    currentPull.head.sha !== head_sha ||
-    currentPull.draft !== pull.draft ||
-    JSON.stringify(currentPull.labels.map((label) => label.name).sort()) !==
-      JSON.stringify([...labelNames].sort())
-  ) {
-    core.info("PR changed during summary evaluation; not applying stale label actions");
-    return;
-  }
 
   core.info(
     `Summarize checks label actions against ${owner}/${repo}#${issue_number}: \n` +
@@ -497,7 +470,9 @@ export async function summarizeChecksImpl(
 
   core.setOutput(
     "arm_review_ready",
-    impactAssessment !== undefined && !pull.draft && labelNames.includes("WaitForARMFeedback"),
+    impactAssessment !== undefined &&
+      !impactAssessment.isDraft &&
+      labelNames.includes("WaitForARMFeedback"),
   );
 }
 
