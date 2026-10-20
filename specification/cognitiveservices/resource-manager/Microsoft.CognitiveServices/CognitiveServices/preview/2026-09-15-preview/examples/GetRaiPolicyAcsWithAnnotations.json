@@ -1,0 +1,149 @@
+{
+  "operationId": "RaiPolicies_Get",
+  "parameters": {
+    "accountName": "safety-account",
+    "api-version": "2026-09-15-preview",
+    "raiPolicyName": "annotated-agent-guard",
+    "resourceGroupName": "resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Get an ACS policy with optional annotators and eight intervention points",
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000006\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiPolicies/annotated-agent-guard",
+        "name": "annotated-agent-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiPolicies",
+        "etag": "\"00000000-0000-0000-0000-000000000006\"",
+        "properties": {
+          "type": "UserManaged",
+          "format": "ACS",
+          "acs": {
+            "agent_control_specification_version": "0.4.0-alpha.1",
+            "metadata": {
+              "description": "Illustrative annotation authoring; supported annotators and configuration depend on the evaluation host."
+            },
+            "policies": {
+              "agent-guard": {
+                "type": "rego",
+                "query": "data.agent_guard.verdict"
+              }
+            },
+            "annotators": {
+              "safety": {
+                "type": "classifier",
+                "classifier": "content_safety",
+                "categories": [
+                  "Hate",
+                  "Violence"
+                ]
+              },
+              "judge": {
+                "type": "llm",
+                "provider": "azure_openai",
+                "endpoint": "https://judge-resource.openai.azure.com",
+                "deployment": "safety-judge",
+                "system_prompt": "Return a JSON object with a safety label.",
+                "timeout_ms": 1000,
+                "provider_config": {
+                  "response_format": {
+                    "type": "json_object"
+                  }
+                }
+              },
+              "externalClassifier": {
+                "type": "endpoint",
+                "endpoint": "https://classifier.example.com/evaluate",
+                "timeout_ms": 1000
+              }
+            },
+            "intervention_points": {
+              "agent_startup": {
+                "policy_target": "$snap.agent_init",
+                "policy_target_kind": "agent_init",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              },
+              "input": {
+                "policy_target": "$snap.input",
+                "policy_target_kind": "user_input",
+                "policy": {
+                  "id": "agent-guard"
+                },
+                "annotations": {
+                  "safety": {
+                    "from": "$snap.input.content"
+                  },
+                  "externalClassifier": {
+                    "from": "$snap.input.content"
+                  }
+                }
+              },
+              "pre_model_call": {
+                "policy_target": "$snap.messages",
+                "policy_target_kind": "messages",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              },
+              "post_model_call": {
+                "policy_target": "$snap.response",
+                "policy_target_kind": "model_response",
+                "policy": {
+                  "id": "agent-guard"
+                },
+                "annotations": {
+                  "judge": {
+                    "from": "$snap.response"
+                  }
+                }
+              },
+              "pre_tool_call": {
+                "policy_target": "$snap.tool_call.args",
+                "policy_target_kind": "tool_args",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              },
+              "post_tool_call": {
+                "policy_target": "$snap.tool_result.value",
+                "policy_target_kind": "tool_result",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              },
+              "output": {
+                "policy_target": "$snap.output",
+                "policy_target_kind": "assistant_output",
+                "policy": {
+                  "id": "agent-guard"
+                },
+                "annotations": {
+                  "safety": {
+                    "from": "$snap.output.content"
+                  }
+                }
+              },
+              "agent_shutdown": {
+                "policy_target": "$snap.summary",
+                "policy_target_kind": "agent_summary",
+                "policy": {
+                  "id": "agent-guard"
+                }
+              }
+            }
+          },
+          "acsRegos": [
+            {
+              "regoName": "agent-guard"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
