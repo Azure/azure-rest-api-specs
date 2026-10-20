@@ -137,7 +137,9 @@ using TypeSpec.Versioning;
 /**
  * The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.
  */
-@Azure.ResourceManager.Legacy.features(Features)
+@Azure.ResourceManager.Legacy.features(
+  Microsoft.SqlFeatureRegistration.Features
+)
 @armProviderNamespace
 @service(#{ title: "SqlManagementClient" })
 @versioned(Versions)
@@ -316,16 +318,6 @@ enum Features {
   ManagedInstancePrivateLinkResources,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedInstances,
-
-  /** Read, list, and update the singleton managed instance protection settings. */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The project uses legacy-feature-files output splitting; preserve the requested server protection settings specification filename."
-  @Azure.ResourceManager.Legacy.featureOptions(#{
-    featureName: "ManagedInstanceServerProtectionSettings",
-    fileName: "ManagedInstanceServerProtectionSettings",
-    description: "Read and update managed instance protection settings for retained immutable backups.",
-  })
-  ManagedInstanceServerProtectionSettings,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedInstanceTdeCertificates,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

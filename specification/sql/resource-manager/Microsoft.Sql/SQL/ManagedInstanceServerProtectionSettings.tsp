@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./ManagedInstance.tsp";
+import "./ServerProtectionSettingsFeatureRegistration.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -19,7 +20,7 @@ namespace Microsoft.Sql;
 @added(Versions.v2026_11_01_preview)
 @parentResource(ManagedInstance)
 @Azure.ResourceManager.Legacy.feature(
-  Features.ManagedInstanceServerProtectionSettings
+  Microsoft.SqlFeatureRegistration.Features.ManagedInstanceServerProtectionSettings
 )
 model ServerProtectionSettings is ProxyResource<
   ServerProtectionSettingsProperties,
@@ -136,7 +137,7 @@ alias ServerProtectionSettingsInstanceParameters = {
 @added(Versions.v2026_11_01_preview)
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(
-  Features.ManagedInstanceServerProtectionSettings
+  Microsoft.SqlFeatureRegistration.Features.ManagedInstanceServerProtectionSettings
 )
 interface ManagedInstanceServerProtectionSettings {
   /** Gets a managed instance's server protection settings. */
