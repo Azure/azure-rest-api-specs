@@ -265,7 +265,6 @@ model ItemDetailsQueryFilter extends QueryFilter {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is a pagination token, not a secret"
   @doc("Pagination token for fetching the next page of data. This token is nullable and will be returned in the previous response if additional data pages are available.")
-  @continuationToken
   skipToken?: string;
 }
 
@@ -357,7 +356,6 @@ model BillingAccountItemDetailsReportQueryFilter
 
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is a pagination token, not a secret"
   @doc("Pagination token for fetching the next page of data. Optional.")
-  @continuationToken
   skipToken?: string;
 
   @doc("The column name to order the results by. See supported values in BillingAccountOrderByColumnEnum.")
@@ -633,7 +631,6 @@ model CarbonEmissionDataListResult {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is a pagination token, not a secret"
   @doc("The pagination token to fetch next page data, it's null or empty if it doesn't have next page data")
-  @continuationToken
   skipToken?: string;
 
   @doc("The access decision list for each input subscription ")
