@@ -484,19 +484,81 @@ model VoiceAgentCollectSmsStartArguments {
   from_phone_number: string;
 }
 
-@doc("How this keypad collection completes, selected by the model at start. Unknown or provider-unsupported modes are rejected before receiver preparation rather than silently falling back.")
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Model-generated keypad completion selects one typed object, not a new client-ingress union."
+@doc("One typed keypad completion policy. Each variant owns its parameters; unknown types, mixed-mode fields and legacy string values are rejected before receiver preparation.")
+@oneOf
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentDtmfCompletionMode {
-  string,
+  fixed_length: VoiceAgentDtmfFixedLengthCompletionMode,
+  terminator: VoiceAgentDtmfTerminatorCompletionMode,
+  inter_digit_silence: VoiceAgentDtmfInterDigitSilenceCompletionMode,
+}
 
-  @doc("Complete at the requested fixed length. min_length and max_length must be equal; terminator must be omitted.")
-  fixed_length: "fixed_length",
+@doc("The wait after each received digit, scoped to the selected completion policy.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentDtmfCompletionTiming {
+  @doc("Integer seconds after a digit, reset on each new digit. Defaults to five. Expiry fails fixed-length/terminator modes; in silence mode it completes only a value within bounds. Not a debounce: repeated digits are preserved.")
+  @minValue(1)
+  @maxValue(300)
+  inter_digit_timeout_seconds?: int32 = 5;
+}
 
-  @doc("Complete only after the requested terminator. Length bounds are optional: omitted min_length is 1 and omitted max_length is 64. The terminator is excluded from the value, and reaching the length limit alone never succeeds.")
-  terminator: "terminator",
+@doc("Complete immediately after exactly length digits. Other modes' fields are not accepted.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentDtmfFixedLengthCompletionMode {
+  ...Record<never>;
+  ...VoiceAgentDtmfCompletionTiming;
 
-  @doc("Complete after at least one digit and the inter-digit timeout when the accumulated length is valid. Reaching max_length alone does not complete. Terminator must be omitted. Total deadline expiry takes precedence over simultaneous silence completion.")
-  inter_digit_silence: "inter_digit_silence",
+  @doc("Select fixed-length completion.")
+  type: "fixed_length";
+
+  @doc("The number of digits to collect; defaults to six. There is no terminator or separate minimum/maximum pair.")
+  @minValue(1)
+  @maxValue(64)
+  length?: int32 = 6;
+}
+
+@doc("Complete only when the configured end key follows a value within bounds. Length bounds are optional; maximum length alone never completes collection.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentDtmfTerminatorCompletionMode {
+  ...Record<never>;
+  ...VoiceAgentDtmfCompletionTiming;
+
+  @doc("Select confirmation-key completion.")
+  type: "terminator";
+
+  @doc("Required confirmation key; excluded from the collected value.")
+  terminator: VoiceAgentDtmfTerminator;
+
+  @doc("Optional minimum digits; defaults to one. Must not exceed max_length; empty input fails.")
+  @minValue(1)
+  @maxValue(64)
+  min_length?: int32 = 1;
+
+  @doc("Optional maximum digits; defaults to the service limit of 64. Explicit bounds remain enforced.")
+  @minValue(1)
+  @maxValue(64)
+  max_length?: int32 = 64;
+}
+
+@doc("Complete after at least one digit and the inter-digit pause, with a valid digit count. Maximum length alone does not complete. Total deadline expiry takes precedence over simultaneous silence completion.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentDtmfInterDigitSilenceCompletionMode {
+  ...Record<never>;
+  ...VoiceAgentDtmfCompletionTiming;
+
+  @doc("Select silence completion.")
+  type: "inter_digit_silence";
+
+  @doc("Optional minimum digits; defaults to six. Must not exceed max_length.")
+  @minValue(1)
+  @maxValue(64)
+  min_length?: int32 = 6;
+
+  @doc("Optional maximum digits; defaults to six. No confirmation key is accepted.")
+  @minValue(1)
+  @maxValue(64)
+  max_length?: int32 = 6;
 }
 
 @doc("The two non-numeric keypad keys permitted as confirmation terminators.")
@@ -509,7 +571,7 @@ union VoiceAgentDtmfTerminator {
   asterisk: "*",
 }
 
-@doc("Decoded model-generated collect_dtmf start arguments. The model selects length, completion mode, terminator and timers for this operation; actual digits cannot be submitted. The service applies defaults, validates the complete policy against its hard limits and provider capabilities, and locks it before preparing a receiver.")
+@doc("Decoded model-generated collect_dtmf arguments. completion_mode is one typed object containing that mode's length/key/pause parameters. Only total and first-digit timeouts remain top-level. Flat legacy mode fields and model-submitted digits are rejected. The service validates and locks the policy before preparing a receiver.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectDtmfStartArguments {
@@ -519,31 +581,13 @@ model VoiceAgentCollectDtmfStartArguments {
     "min_length" | "max_length"
   >;
 
-  @doc("Optional minimum ASCII digits. Defaults to 1 in terminator mode and 6 in other modes. Must not exceed max_length. Explicit bounds remain enforced; an empty entry is never accepted.")
-  @minValue(1)
-  @maxValue(64)
-  min_length?: int32;
-
-  @doc("Optional maximum ASCII digits. Defaults to 64 in terminator mode and 6 in other modes. Reaching this limit alone does not complete terminator or silence mode; the service always enforces the 64-digit hard limit.")
-  @minValue(1)
-  @maxValue(64)
-  max_length?: int32;
-
-  @doc("The required completion policy, selected for this operation. Exactly one policy applies.")
+  @doc("Required typed object selecting one completion policy and its parameters, not an array of simultaneous rules.")
   completion_mode: VoiceAgentDtmfCompletionMode;
-
-  @doc("The confirmation key, required in terminator mode and forbidden in other modes. The key is not included in the collected value.")
-  terminator?: VoiceAgentDtmfTerminator;
 
   @doc("The maximum wait for the first digit in integer seconds, starting at receiver readiness and bounded by the remaining total deadline. Omit for fifteen seconds.")
   @minValue(1)
   @maxValue(300)
   first_digit_timeout_seconds?: int32 = 15;
-
-  @doc("The wait after a received digit in integer seconds. In silence mode it completes a valid value; otherwise expiry fails without success. Omit for five seconds. This is not a debounce and never removes repeated digits.")
-  @minValue(1)
-  @maxValue(300)
-  inter_digit_timeout_seconds?: int32 = 5;
 }
 
 @doc("An asynchronous collection or phone-operation outcome, separate from argument-generation completion. A collection invocation immediately returns accepted, which neither arms a receiver nor resumes a success turn. Listening permits the service to schedule the input prompt. Completed/expired/cancelled/failed results, or a rejected busy invocation, provide safe feedback and schedule one follow-up when the conversation is idle, without a client function_call_output or response.create. Cancellation is service lifecycle cleanup on transfer, native ending or disconnect, not an action on the collection tool. Stale/duplicate events do not resume another turn; closing/disconnected sessions do not resume. Expiry/cancellation/failure/busy allocate no variable. A completed private result commits before its name is reported. Provider acceptance is not SMS delivery, IVR recognition or authentication.")

@@ -100264,7 +100264,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Enables ASCII decimal keypad collection on the active call, preserving repeats and leading zeros. Each invocation starts collection without an action parameter; cancellation is service lifecycle cleanup. Length, completion mode, terminator, timers, Boolean secret and output_variable_name are model-call arguments, not Agent settings. Completion modes are fixed_length, terminator and inter_digit_silence, subject to receiver support. The service validates and locks each operation's effective settings before preparing its receiver. The model never submits input digits; voice collection is unsupported.",
+        "description": "Enables ASCII decimal keypad collection on the active call, preserving repeats and leading zeros. Each invocation starts collection without an action parameter; cancellation is service lifecycle cleanup. Model-call arguments include required Boolean secret and a typed completion_mode object, plus optional output_variable_name and operation timeouts. completion_mode.type selects fixed_length, terminator or inter_digit_silence; each object contains only that mode's length/key/pause settings. These are not Agent settings. The service validates and locks the policy before preparing a receiver. The model never submits input digits; voice collection is unsupported.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
