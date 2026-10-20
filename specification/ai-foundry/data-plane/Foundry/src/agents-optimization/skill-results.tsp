@@ -18,20 +18,6 @@ model AgentOptimizationFoundrySkillOutputReference {
   version?: string;
 }
 
-/** Planned change to a versioned skill. */
-union AgentOptimizationSkillChangeType {
-  string,
-
-  /** Create a new skill. */
-  create: "create",
-
-  /** Update an exact existing skill baseline. */
-  update: "update",
-
-  /** Keep an existing skill unchanged. */
-  no_op: "no_op",
-}
-
 /** Publication or validation outcome for one skill, independent of whole-job status. */
 union AgentOptimizationSkillResultStatus {
   string,
@@ -137,13 +123,10 @@ model AgentOptimizationSkillArtifactValidation
 
 /** One independent skill outcome with its input baseline and intended or confirmed output. */
 model AgentOptimizationSkillResult {
-  @doc("Intended change.")
-  change_type: AgentOptimizationSkillChangeType;
-
   @doc("Validation or publication outcome.")
   status: AgentOptimizationSkillResultStatus;
 
-  @doc("Exact input baseline for update or no_op, with the same name as output_skill. Omitted for create.")
+  @doc("Exact input baseline when updating or retaining an existing skill, with the same name as output_skill. Omitted when creating a new skill.")
   input_skill?: AgentOptimizationFoundrySkillReference;
 
   @doc("Intended identity for every result. A confirmed version appears only with status created; no_change retains the baseline version only in input_skill.")
