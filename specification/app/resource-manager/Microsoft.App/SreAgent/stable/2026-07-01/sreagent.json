@@ -1718,42 +1718,6 @@
       "maxLength": 253,
       "pattern": "^(\\*\\.(?=[^.]+\\.))?[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$"
     },
-    "SandboxCodeRepository": {
-      "type": "string",
-      "description": "Code repository providers that can be allowed on the managed network path.",
-      "enum": [
-        "Github",
-        "GithubEnterprise",
-        "AzureDevOps",
-        "GitLab"
-      ],
-      "x-ms-enum": {
-        "name": "SandboxCodeRepository",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Github",
-            "value": "Github",
-            "description": "Repositories hosted on GitHub.com."
-          },
-          {
-            "name": "GithubEnterprise",
-            "value": "GithubEnterprise",
-            "description": "Repositories hosted on GitHub Enterprise."
-          },
-          {
-            "name": "AzureDevOps",
-            "value": "AzureDevOps",
-            "description": "Repositories hosted in Azure DevOps."
-          },
-          {
-            "name": "GitLab",
-            "value": "GitLab",
-            "description": "Repositories hosted on GitLab."
-          }
-        ]
-      }
-    },
     "SandboxConfiguration": {
       "type": "object",
       "description": "Desired configuration for the agent's sandbox.",
@@ -1798,16 +1762,16 @@
         },
         "allowedRegistries": {
           "type": "array",
-          "description": "Package registry identifiers allowed on the managed network path. Values are matched without regard to case.\nIn PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.",
+          "description": "Package registry identifiers allowed on the managed network path. Values are matched without regard to case.\nKnown values are 'pypi', 'npmjs', 'nuget-org' and 'ubuntu'. The service validates the values.\nIn PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.",
           "items": {
-            "$ref": "#/definitions/SandboxRegistry"
+            "type": "string"
           }
         },
         "allowedCodeRepositories": {
           "type": "array",
-          "description": "Code repository provider identifiers allowed on the managed network path. Values are matched case-sensitively.\nIn PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.",
+          "description": "Code repository provider identifiers allowed on the managed network path. Values are matched case-sensitively.\nKnown values are 'Github', 'GithubEnterprise', 'AzureDevOps' and 'GitLab'. The service validates the values.\nIn PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.",
           "items": {
-            "$ref": "#/definitions/SandboxCodeRepository"
+            "type": "string"
           }
         },
         "httpProxy": {
@@ -1931,42 +1895,6 @@
         "name",
         "packageManager"
       ]
-    },
-    "SandboxRegistry": {
-      "type": "string",
-      "description": "Package registries that can be allowed on the managed network path.",
-      "enum": [
-        "pypi",
-        "npmjs",
-        "nuget-org",
-        "ubuntu"
-      ],
-      "x-ms-enum": {
-        "name": "SandboxRegistry",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pypi",
-            "value": "pypi",
-            "description": "The Python Package Index."
-          },
-          {
-            "name": "Npmjs",
-            "value": "npmjs",
-            "description": "The public npm registry."
-          },
-          {
-            "name": "NugetOrg",
-            "value": "nuget-org",
-            "description": "The public NuGet gallery."
-          },
-          {
-            "name": "Ubuntu",
-            "value": "ubuntu",
-            "description": "Ubuntu package archives."
-          }
-        ]
-      }
     },
     "SupportedAgentModel": {
       "type": "object",

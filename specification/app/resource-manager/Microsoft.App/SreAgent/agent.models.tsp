@@ -189,15 +189,17 @@ model SandboxEgressConfiguration {
 
   /**
    * Package registry identifiers allowed on the managed network path. Values are matched without regard to case.
+   * Known values are 'pypi', 'npmjs', 'nuget-org' and 'ubuntu'. The service validates the values.
    * In PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.
    */
-  allowedRegistries?: SandboxRegistry[];
+  allowedRegistries?: string[];
 
   /**
    * Code repository provider identifiers allowed on the managed network path. Values are matched case-sensitively.
+   * Known values are 'Github', 'GithubEnterprise', 'AzureDevOps' and 'GitLab'. The service validates the values.
    * In PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.
    */
-  allowedCodeRepositories?: SandboxCodeRepository[];
+  allowedCodeRepositories?: string[];
 
   /**
    * Forward-proxy configuration for sandbox outbound requests.
@@ -288,42 +290,6 @@ union SandboxPackageManager {
 
   /** .NET tools installed from NuGet. */
   Nuget: "nuget",
-}
-
-/** Package registries that can be allowed on the managed network path. */
-@added(Versions.v2026_07_01)
-union SandboxRegistry {
-  string,
-
-  /** The Python Package Index. */
-  Pypi: "pypi",
-
-  /** The public npm registry. */
-  Npmjs: "npmjs",
-
-  /** The public NuGet gallery. */
-  NugetOrg: "nuget-org",
-
-  /** Ubuntu package archives. */
-  Ubuntu: "ubuntu",
-}
-
-/** Code repository providers that can be allowed on the managed network path. */
-@added(Versions.v2026_07_01)
-union SandboxCodeRepository {
-  string,
-
-  /** Repositories hosted on GitHub.com. */
-  Github: "Github",
-
-  /** Repositories hosted on GitHub Enterprise. */
-  GithubEnterprise: "GithubEnterprise",
-
-  /** Repositories hosted in Azure DevOps. */
-  AzureDevOps: "AzureDevOps",
-
-  /** Repositories hosted on GitLab. */
-  GitLab: "GitLab",
 }
 
 /** Supported modes for outbound network access from the agent's sandbox. */
