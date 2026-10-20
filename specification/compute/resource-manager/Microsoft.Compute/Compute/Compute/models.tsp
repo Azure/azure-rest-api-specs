@@ -1018,7 +1018,7 @@ union PatchOperationStatus {
 }
 
 /**
- * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
+ * Specifies the policy for the resource's placement in an availability zone. Use **Auto** (available starting with API version 2025-04-01) for Virtual Machines and Virtual Machine Scale Sets to let the system automatically select an availability zone during resource creation. **Any** remains supported for Virtual Machines for backward compatibility.
  */
 union ZonePlacementPolicyType {
   string,
@@ -1026,7 +1026,7 @@ union ZonePlacementPolicyType {
   Any: "Any",
 
   /**
-   * Automatic zone placement in a Virtual Machine Scale Set.
+   * Automatic zone placement for Virtual Machines and Virtual Machine Scale Sets.
    */
   @added(Versions.v2025_04_01)
   Auto: "Auto",
@@ -7129,7 +7129,7 @@ model LastPatchInstallationSummary {
  */
 model Placement {
   /**
-   * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
+   * Specifies the policy for the resource's placement in an availability zone. Use **Auto** (available starting with API version 2025-04-01) for Virtual Machines and Virtual Machine Scale Sets to let the system automatically select an availability zone during resource creation. **Any** remains supported for Virtual Machines for backward compatibility.
    */
   zonePlacementPolicy?: ZonePlacementPolicyType;
 
