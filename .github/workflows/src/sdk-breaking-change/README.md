@@ -12,56 +12,40 @@ and apply.
 
 ### Architecture
 
-There are four workflows:
+There are two workflows:
 
-- `SDK Breaking Change Analysis - Analyze`
-- `SDK Breaking Change Analysis - Publish Results`
+- `SDK Breaking Change Analysis`
 - `SDK Breaking Change Mitigation`
-- `SDK Breaking Change Mitigation - Publish Results`
 
 **Flow**:
 
 ```mermaid
 flowchart TD
   L([SDK Breaking Change Labels succeeds])
-  D([Manual dispatch])
 
-  subgraph A["Analysis workflow — no PR write permissions"]
+  subgraph A["SDK Breaking Change Analysis"]
     AG["Resolve analysis trigger<br/>1. Validate the trigger and eligibility<br/>2. Publish analysis status"]
     AC["Analyze SDK breaking changes<br/>1. Check out specifications and analyze affected SDK projects<br/>2. Upload analysis results"]
+    AP["Publish results job<br/>1. Download this run's analysis results<br/>2. Validate result freshness and post a PR comment<br/>3. Upload PR identity artifacts"]
     AG -->|"eligible"| AC
+    AC -->|"job succeeds"| AP
   end
 
   L --> AG
-  D --> AG
   AG -->|"not eligible"| AD([Analysis workflow completes])
-  AC --> AD
+  AP --> AD
 
-  subgraph AP["Trusted analysis publisher workflow"]
-    APR["Validate analysis status<br/>Confirm that results should be published"]
-    APP["Publish analysis results<br/>1. Validate result freshness<br/>2. Post a pull request comment"]
-    APR -->|"eligible"| APP
-  end
-
-  AD --> APR
-
-  subgraph M["Mitigation workflow — no PR write permissions"]
+  subgraph M["SDK Breaking Change Mitigation"]
     MG["Resolve mitigation trigger<br/>Read analysis artifacts, validate freshness, and publish mitigation status"]
     MC["Mitigate successful project analyses<br/>Capture diff and upload mitigation result"]
+    MP["Publish results job<br/>1. Download this run's mitigation results<br/>2. Validate result freshness and post a PR comment<br/>3. Upload PR identity artifacts"]
     MG -->|"eligible"| MC
+    MC -->|"job succeeds"| MP
   end
 
   AD -->|"successful run"| MG
   MG -->|"not eligible"| MD([Mitigation workflow completes])
-  MC --> MD
-
-  subgraph MPP["Trusted mitigation publisher workflow"]
-    MPR["Read mitigation eligibility status<br/>Confirm that results should be published"]
-    MPU["Publish mitigation results<br/>1. Validate result freshness<br/>2. Post a pull request comment"]
-    MPR -->|"eligible"| MPU
-  end
-
-  MD --> MPR
+  MP --> MD
 ```
 
 ## Developer implementation contract
@@ -73,12 +57,10 @@ result schemas, and PR comment behavior.
 
 ### Workflow permissions and contracts
 
-| Workflow                                                                         | Permissions                                                                                                                    | Contract                                                                                                                                                       |
-| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Analysis - Analyze](../../sdk-breaking-change-analysis.yaml)                    | Resolver: `actions: read`, `contents: read`, `pull-requests: read`. Analysis job: `contents: read`, `copilot-requests: write`. | Resolve one PR/language, analyze affected projects, and publish eligibility and analysis artifacts without PR writes.                                          |
-| [Analysis - Publish Results](../../sdk-breaking-change-analysis-status.yaml)     | Eligibility job: `actions: read`. Publisher job: `actions: read`, `contents: read`, `issues: write`, `pull-requests: write`.   | Read the triggering run's artifacts, validate the result, check successful-result freshness, and publish the analysis comment.                                 |
-| [Mitigation](../../sdk-breaking-change-mitigate.yaml)                            | Resolver: `actions: read`, `contents: read`. Mitigation job: `contents: read`, `copilot-requests: write`.                      | Consume analysis artifacts, validate mitigation eligibility and freshness, capture the specification diff, and publish mitigation artifacts without PR writes. |
-| [Mitigation - Publish Results](../../sdk-breaking-change-mitigation-status.yaml) | Eligibility job: `actions: read`. Publisher job: `actions: read`, `contents: read`, `issues: write`, `pull-requests: write`.   | Read the mitigation run's eligibility and result artifacts, validate the result, check successful-result freshness, and publish the mitigation comment.        |
+| Workflow                                              | Permissions                                                                                                                                                                                                                 | Contract                                                                                                                                                                                           |
+| ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Analysis](../../sdk-breaking-change-analysis.yaml)   | `resolve`: `actions: read`, `contents: read`, `pull-requests: read`. `analyze`: `contents: read`, `copilot-requests: write`. `publish-results`: `actions: read`, `contents: read`, `issues: write`, `pull-requests: write`. | Resolve one PR/language, analyze affected projects, upload results, and publish the analysis comment in a separate job within the same run.                                                        |
+| [Mitigation](../../sdk-breaking-change-mitigate.yaml) | `resolve-trigger`: `actions: read`, `contents: read`. `mitigate`: `contents: read`, `copilot-requests: write`. `publish-results`: `actions: read`, `contents: read`, `issues: write`, `pull-requests: write`.               | Consume upstream analysis artifacts, validate eligibility and freshness, capture the specification diff, upload results, and publish the mitigation comment in a separate job within the same run. |
 
 ### Trust boundaries and workflow-chain constraints
 
@@ -91,11 +73,15 @@ result schemas, and PR comment behavior.
 - Only the publisher jobs receive `issues: write` and `pull-requests: write`. They consume JSON and
   status data, not executable code from result artifacts. Never execute or apply the downloaded
   `customizationCode` diff in a publisher.
-- Download artifacts using `github.event.workflow_run.id`, not a latest-run lookup or artifacts
-  with the same name from another run. Schema validity alone does not establish artifact provenance.
-- Preserve the exact upstream workflow names in `workflow_run.workflows`. Publishers handle
-  `success` and `failure` conclusions, then require eligibility `true`; canceled or skipped runs
-  do not enter the publishing jobs.
+- Within each workflow, `publish-results` downloads artifacts from the current run; omit `run-id`.
+  The mitigation resolver and execution job consume analysis artifacts from the exact upstream run
+  identified by `github.event.workflow_run.id`. Do not use a latest-run lookup. Schema validity
+  alone does not establish artifact provenance.
+- Preserve the exact upstream workflow names in `workflow_run.workflows`. Mitigation starts only
+  after `SDK Breaking Change Analysis` concludes successfully, including its publishing job.
+- Each `publish-results` job depends on its execution job (`analyze` or `mitigate`) and uses the
+  default success condition. Failed, canceled, or skipped execution jobs skip publishing, even if
+  an upload step produced an artifact. Publishers do not separately read eligibility artifacts.
 
 ### Artifact ownership and compatibility
 
@@ -104,13 +90,13 @@ both currently require `schemaVersion: 1`. Producers and consumers must agree on
 field names, language identities, and status meanings. An incompatible change requires coordinated
 schema-version and consumer updates; changing an artifact's display name alone does not version it.
 
-| Artifact                                     | Producer                                         | Consumer                                   | File and invariant                                                                                                                                                                                       |
-| -------------------------------------------- | ------------------------------------------------ | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sdk-breaking-change-analysis-status`        | Analysis workflow: `resolve` job                 | Analysis publisher and mitigation resolver | `run`: unversioned plain-text `true` or `false` plus newline. The publisher trims and validates the value; mitigation proceeds only for `true`. This is analysis eligibility, not completion or success. |
-| `sdk-breaking-change-results`                | Analysis workflow: `analyze` job                 | Analysis publisher and mitigation workflow | `sdk-breaking-change-analysis.json`: `AnalysisResultSchema`, version 1.                                                                                                                                  |
-| `sdk-breaking-change-mitigate`               | Mitigation workflow: `resolve-trigger` job       | Mitigation publisher                       | `run`: unversioned plain-text `true` or `false` plus newline. Indicates mitigation eligibility, not whether every change was resolved.                                                                   |
-| `sdk-breaking-change-mitigation-results`     | Mitigation workflow: `mitigate` job              | Mitigation publisher                       | `sdk-breaking-change-mitigation.json`: `MitigationResultSchema`, version 1.                                                                                                                              |
-| `issue-number=<number>` and `head-sha=<sha>` | Both publishing workflows: `publish-results` job | Downstream PR status workflows             | Values are encoded in artifact names, not JSON; preserve those prefixes.                                                                                                                                 |
+| Artifact                                     | Producer                                                 | Consumer                                                                  | File and invariant                                                                                                                                          |
+| -------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sdk-breaking-change-analysis-status`        | Analysis workflow: `resolve` job                         | Mitigation resolver                                                       | `run`: unversioned plain-text `true` or `false` plus newline. Mitigation proceeds only for `true`. This is analysis eligibility, not completion or success. |
+| `sdk-breaking-change-analysis-results`       | Analysis workflow: `analyze` job                         | Same-run analysis publisher and upstream-artifact consumers in mitigation | `sdk-breaking-change-analysis.json`: `AnalysisResultSchema`, version 1.                                                                                     |
+| `sdk-breaking-change-mitigate`               | Mitigation workflow: `resolve-trigger` job               | Diagnostic artifact; execution is gated by resolver outputs               | `run`: unversioned plain-text `true` or `false` plus newline. Indicates mitigation eligibility, not whether every change was resolved.                      |
+| `sdk-breaking-change-mitigation-results`     | Mitigation workflow: `mitigate` job                      | Mitigation publisher                                                      | `sdk-breaking-change-mitigation.json`: `MitigationResultSchema`, version 1.                                                                                 |
+| `issue-number=<number>` and `head-sha=<sha>` | Analysis and mitigation workflows: `publish-results` job | Downstream PR status workflows                                            | Values are encoded in artifact names, not JSON; preserve those prefixes.                                                                                    |
 
 ### Freshness and status invariants
 
@@ -134,7 +120,7 @@ schema-version and consumer updates; changing an artifact's display name alone d
    eligibility file does not guarantee that a result file was produced: setup or analysis can fail
    first. Keep missing-artifact failures distinct from valid failure-result JSON.
 
-### `SDK Breaking Change Analysis - Analyze`
+### `SDK Breaking Change Analysis` workflow
 
 The [analysis workflow](../../sdk-breaking-change-analysis.yaml) detects and analyzes SDK breaking
 changes and produces an artifact and a GitHub Actions job summary.
@@ -158,7 +144,11 @@ The resolver exposes the PR number, head repository and SHA, SDK language and re
 4. Reads each project's language metadata and output directory, then runs SDK generation, build,
    and breaking-change detection. Python skips the build step.
 5. Writes the result JSON and a job summary containing generation, build, and detection details.
-6. Uploads the result artifact whenever the file is available, even if the analysis step fails.
+6. Attempts to upload the result artifact with `if: always()`; a missing file produces a warning.
+
+After `analyze` succeeds, the same workflow's `publish-results` job downloads the analysis artifact,
+publishes the PR comment, and uploads PR identity artifacts. There is no separate publisher workflow
+or eligibility-check job.
 
 #### Concurrency control
 
@@ -166,16 +156,16 @@ The `analyze` job uses the concurrency group `sdk-breaking-analysis-<pr-number>-
 with `cancel-in-progress: true`. A new analysis job cancels any in-progress analysis job for the
 same PR and SDK language, whether triggered manually or by the labels workflow. Jobs for different
 PRs or SDK languages use separate groups and can run concurrently. This control applies to the
-analysis job, not the resolver or downstream publishing and mitigation workflows.
+analysis job, not the resolver, the same-run publishing job, or the downstream mitigation workflow.
 
 #### Output artifacts and schema
 
 Both artifacts have a seven-day retention period:
 
-| Artifact                              | File                                | Purpose                                                                                                                        |
-| ------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `sdk-breaking-change-analysis-status` | `run`                               | Plain-text `true` or `false`, followed by a newline. Indicates whether analysis was eligible to run, not whether it succeeded. |
-| `sdk-breaking-change-results`         | `sdk-breaking-change-analysis.json` | Versioned analysis result consumed by the publisher and mitigation workflow.                                                   |
+| Artifact                               | File                                | Purpose                                                                                                                        |
+| -------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `sdk-breaking-change-analysis-status`  | `run`                               | Plain-text `true` or `false`, followed by a newline. Indicates whether analysis was eligible to run, not whether it succeeded. |
+| `sdk-breaking-change-analysis-results` | `sdk-breaking-change-analysis.json` | Versioned analysis result consumed by the same-run publisher and the downstream mitigation workflow.                           |
 
 The result contract is defined by [AnalysisResultSchema](./types.ts). The publisher validates the
 downloaded JSON against this schema before using it.
@@ -231,7 +221,9 @@ Example of a successful result containing a detected breaking change:
 
 #### Publish result in PR comment
 
-The publisher runs after a successful or failed analysis workflow.
+The `publish-results` job runs after `analyze` succeeds and downloads results from the same run.
+It does not run after a failed, canceled, or skipped analysis job. A JSON result with
+`status: "failure"` can still be published if the execution job itself succeeds.
 
 For a successful result, the publisher compares the PR's current head SHA with `headSha` before
 posting the report. The comment starts with a language-specific command, followed by the analyzed
@@ -278,12 +270,12 @@ for downstream PR status processing.
 ### `SDK Breaking Change Mitigation` workflow
 
 The [SDK Breaking Change Mitigation workflow](../../sdk-breaking-change-mitigate.yaml) consumes
-results from `SDK Breaking Change Analysis - Analyze` and proposes mitigations for the detected
+results from `SDK Breaking Change Analysis` and proposes mitigations for the detected
 SDK breaking changes.
 
 #### Triggers and execution
 
-- `workflow_run`: listens for completion of `SDK Breaking Change Analysis - Analyze`. The
+- `workflow_run`: listens for completion of `SDK Breaking Change Analysis`. The
   `resolve-trigger` job runs only when that analysis workflow concludes successfully.
 - [resolveMitigationTrigger](./resolve-mitigation-inputs.ts) downloads the eligibility and result
   artifacts from the triggering analysis run. Mitigation proceeds only if the analysis `run` flag
@@ -305,19 +297,20 @@ The resolver exposes the following step outputs, which are forwarded as `resolve
 
 #### Concurrency control
 
-The mitigation concurrency group is `sdk-breaking-mitigate-<analysis-workflow-run-id>`, with
-`cancel-in-progress: true`. It is scoped to the triggering analysis run, not to a PR/language pair.
+The `mitigate` job uses the concurrency group `sdk-breaking-mitigate-<analysis-workflow-run-id>`,
+with `cancel-in-progress: true`. It is scoped to the triggering analysis run, not to a PR/language
+pair, and does not cover the resolver or same-run publishing job.
 
 #### Output artifacts and schema
 
 The mitigation workflow consumes `sdk-breaking-change-analysis-status` and
-`sdk-breaking-change-results` from the triggering analysis run. It publishes two artifacts, each
+`sdk-breaking-change-analysis-results` from the triggering analysis run. It publishes two artifacts, each
 retained for seven days:
 
-| Artifact                                 | File                                  | Purpose                                                                                                                               |
-| ---------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `sdk-breaking-change-mitigate`           | `run`                                 | Separate mitigation eligibility flag: plain-text `true` or `false` plus newline. Its publisher validates this flag before publishing. |
-| `sdk-breaking-change-mitigation-results` | `sdk-breaking-change-mitigation.json` | Mitigation results and the captured specification diff consumed by the mitigation publisher.                                          |
+| Artifact                                 | File                                  | Purpose                                                                                                                                                                     |
+| ---------------------------------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sdk-breaking-change-mitigate`           | `run`                                 | Diagnostic mitigation eligibility flag: plain-text `true` or `false` plus newline. The `mitigate` job is gated by resolver outputs, not by the publisher reading this file. |
+| `sdk-breaking-change-mitigation-results` | `sdk-breaking-change-mitigation.json` | Mitigation results and the captured specification diff consumed by the mitigation publisher.                                                                                |
 
 The analysis schema is described above. The mitigation module validates its output against
 [MitigationResultSchema](./types.ts), and the publisher validates the downloaded result again.
@@ -380,9 +373,10 @@ step runs with `if: always()` but fails if the mitigation file is missing.
 
 #### Publish result in PR comment
 
-The mitigation publisher handles successful and failed `SDK Breaking Change Mitigation` runs,
-requires the `sdk-breaking-change-mitigate` eligibility artifact to contain `true`, and downloads
-the mitigation result artifact from that exact run.
+The `publish-results` job runs after `mitigate` succeeds and downloads the mitigation result artifact
+from the same workflow run. It does not read the mitigation eligibility artifact or run after a
+failed, canceled, or skipped mitigation job. A JSON result with `status: "failure"` can still be
+published if the execution job itself succeeds.
 For successful results, it compares the current PR head SHA with `headSha` before rendering the report.
 
 The example above produces the following comment:

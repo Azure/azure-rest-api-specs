@@ -22,49 +22,45 @@ downstream SDK repositories, avoid back-and-forth across repos and stages
 - Publishes artifacts identifying the pull request, commit, and SDK breaking-change label action.
 
 3. When the `SDK Breaking Change Labels` workflow completes successfully, the
-   `SDK breaking change analysis - Analyze` workflow:
+   `SDK breaking change analysis` workflow:
 
 - Analyzes the detected SDK breaking changes.
 - Publishes the analysis result artifact.
-
-4. When the analysis workflow completes successfully, the
-   `SDK Breaking Change - Publish Results` workflow posts the analysis to the pull request, as
-   shown in the following example:
+- posts the analysis to the pull request, as
+  shown in the following example:
 
 ```markdown
 ## SDK Breaking changes for Go
 
-**Analyzed commit:** `6e9fca19c6df9cf66be7e753255d79251f1d4a91`
+**Analyzed commit:** `00850ca596599f280dc140fa4cc14dc613e9192b`
 
 **Typespec Project:** specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService
 
 **SDK Package:** armwebpubsub
 
-| #   | Breaking change                                                                                                                  | Category                | Suggested fix                                                                                                     |
-| --- | -------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| 1   | Model WebPubSubResource: SDK struct ResourceInfo was renamed to Resource, changing operation parameter and response field types. | conversion-need resolve | Add @@clientName(WebPubSubResource, "ResourceInfo", "go") to replay the legacy Go rename-model directive.         |
-| 2   | Model WebPubSubResourceList: SDK struct ResourceInfoList was renamed to ResourceList, changing list response fields.             | conversion-need resolve | Add @@clientName(WebPubSubResourceList, "ResourceInfoList", "go") to replay the legacy Go rename-model directive. |
-| 3   | Model ResourceSku versioned property set changed the SDK fields Family and Tier to FamiliyNew and TierNew.                       | spec change             | -                                                                                                                 |
+| ID       | Breaking change                                                                                                                                                                                                                                                     | Category                | Suggested fix                                                                                                                                                                |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 82589366 | \[Model WebPubSubResource renamed\] SDK struct ResourceInfo renamed to Resource, changing the parameters of Client.BeginCreateOrUpdate and Client.BeginUpdate and the embedded fields of ClientCreateOrUpdateResponse, ClientGetResponse, and ClientUpdateResponse. | conversion-need resolve | Restore the legacy readme.go.md rename-model directive in client.tsp with &#64;&#64;clientName\(Microsoft.SignalRService.WebPubSubResource, "ResourceInfo", "go"\);.         |
+| 00974410 | \[Model WebPubSubResourceList renamed\] SDK struct ResourceInfoList renamed to ResourceList, changing the embedded fields of ClientListByResourceGroupResponse and ClientListBySubscriptionResponse.                                                                | conversion-need resolve | Restore the legacy readme.go.md rename-model directive in client.tsp with &#64;&#64;clientName\(Microsoft.SignalRService.WebPubSubResourceList, "ResourceInfoList", "go"\);. |
+| 57811240 | Field &#96;Family&#96;, &#96;Tier&#96; of struct &#96;ResourceSKU&#96; has been removed                                                                                                                                                                             | spec change             |                                                                                                                                                                              |
 
-[SDK breaking change analysis details](https://github.com/azure/azure-rest-api-specs/actions/runs/35322886769)
+[View SDK Breaking Change Analysis Details](https://github.com/azure/azure-rest-api-specs/actions/runs/39435734973#armwebpubsub-breaking-change)
 ```
 
 ### Mitigation
 
-1. Completion of the `SDK Breaking Change Analysis - Analyze` workflow automatically
+1. Completion of the `SDK Breaking Change Analysis` workflow automatically
    triggers the `SDK Breaking Change Mitigation` workflow.
 
 The `SDK breaking change mitigation` workflow then:
 
 - Applies TypeSpec client customizations for breaking changes that can be mitigated.
 - Publishes the mitigation result artifact.
-
-2. When mitigation completes successfully, the
-   `SDK Breaking Change Mitigation - Publish Results` workflow posts the mitigation results to the
-   pull request, as shown in the following example:
+- posts the mitigation results to the
+  pull request, as shown in the following example:
 
 ````markdown
-## SDK breaking-change mitigation for Go
+## SDK Breaking Change Mitigation for Go
 
 **Mitigation upon commit:** `00850ca596599f280dc140fa4cc14dc613e9192b`
 
@@ -72,31 +68,49 @@ The `SDK breaking change mitigation` workflow then:
 
 **SDK package:** armwebpubsub
 
-**Resolved Breaking Changes:**
+**Breaking Changes:**
 
-- **Typespec Project:** specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService
+<details open><summary>View breaking changes</summary>
 
-| Breaking change                                                                                                                                             | Resolution                                                                                                          |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Struct ResourceInfo for TypeSpec model WebPubSubResource was renamed to Resource, changing the model used by create, update, get, and their response types. | Add @@clientName(WebPubSubResource, "ResourceInfo", "go") to client.tsp to preserve the legacy Go SDK name.         |
-| Struct ResourceInfoList for TypeSpec model WebPubSubResourceList was renamed to ResourceList, changing the embedded list result in list responses.          | Add @@clientName(WebPubSubResourceList, "ResourceInfoList", "go") to client.tsp to preserve the legacy Go SDK name. |
+| Resolvable | ID                                                                                                                                            | Breaking change                                                                                                                                                                                                                                                     | Resolution                                                                                                                                                                   | TypeSpec changes                                                                                                                                                                                      |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ✔️         | [82589366](https://github.com/azure/azure-rest-api-specs/actions/runs/39435734973#breaking-change-82589366-breaking-change "How to Suppress") | \[Model WebPubSubResource renamed\] SDK struct ResourceInfo renamed to Resource, changing the parameters of Client.BeginCreateOrUpdate and Client.BeginUpdate and the embedded fields of ClientCreateOrUpdateResponse, ClientGetResponse, and ClientUpdateResponse. | Restore the legacy readme.go.md rename-model directive in client.tsp with &#64;&#64;clientName\(Microsoft.SignalRService.WebPubSubResource, "ResourceInfo", "go"\);.         | Added &#64;&#64;clientName\(Microsoft.SignalRService.WebPubSubResource, "ResourceInfo", "go"\); to client.tsp, restoring the legacy Go model name without affecting other languages.                  |
+| ✔️         | [00974410](https://github.com/azure/azure-rest-api-specs/actions/runs/39435734973#breaking-change-00974410-breaking-change "How to Suppress") | \[Model WebPubSubResourceList renamed\] SDK struct ResourceInfoList renamed to ResourceList, changing the embedded fields of ClientListByResourceGroupResponse and ClientListBySubscriptionResponse.                                                                | Restore the legacy readme.go.md rename-model directive in client.tsp with &#64;&#64;clientName\(Microsoft.SignalRService.WebPubSubResourceList, "ResourceInfoList", "go"\);. | Added Go-only &#64;&#64;clientName\(Microsoft.SignalRService.WebPubSubResourceList, "ResourceInfoList", "go"\) in client.tsp to restore the legacy list-model name without affecting other languages. |
+| ❌         | [57811240](https://github.com/azure/azure-rest-api-specs/actions/runs/39435734973#breaking-change-57811240-breaking-change "How to Suppress") | Field &#96;Family&#96;, &#96;Tier&#96; of struct &#96;ResourceSKU&#96; has been removed                                                                                                                                                                             |                                                                                                                                                                              |                                                                                                                                                                                                       |
+
+</details>
+
+**Customization Code:**
+
+<details><summary>View customization Code</summary>
 
 ```diff
 diff --git a/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/client.tsp b/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/client.tsp
-index 7048e05f8c..6e20b2f172 100644
+index 7048e05f8c..d414f06b52 100644
 --- a/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/client.tsp
 +++ b/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/client.tsp
-@@ -13,6 +13,9 @@ using Http;
-   "javascript,python"
- );
+@@ -7,6 +7,9 @@ using Azure.Core;
+ using Microsoft.SignalRService;
+ using Http;
 
-+@@clientName(WebPubSubResource, "ResourceInfo", "go");
-+@@clientName(WebPubSubResourceList, "ResourceInfoList", "go");
++@@clientName(Microsoft.SignalRService.WebPubSubResource, "ResourceInfo", "go");
++@@clientName(Microsoft.SignalRService.WebPubSubResourceList, "ResourceInfoList", "go");
 +
- @@clientDoc(
-   Microsoft.SignalRService.EventHandler.urlTemplate,
-   """
+ @@clientName(
+   Microsoft.SignalRService,
+   "WebPubSubManagementClient",
 ```
+````
+
+</details>
+
+[View customization code in the workflow summary](https://github.com/azure/azure-rest-api-specs/actions/runs/39435734973)
+
+## Next Steps
+
+<p>💡 Apply Mitigation: Apply the customization code to mitigate the breaking changes.</p>
+
+<p>💡 Suppress Breaking Changes: For accepted breaking changes, click the breaking change ID link to view suppression instructions and follow the suppression process.</p>
 ````
 
 [View customization code in the workflow summary](https://github.com/azure/azure-rest-api-specs/actions/runs/35964045609)
@@ -109,18 +123,19 @@ index 7048e05f8c..6e20b2f172 100644
 ### Next Steps to Merge
 
 When SDK breaking-change labels are present, the **Next Steps to Merge** comment includes
-one summary row per affected language: detection and approval status, links to analysis and
+one summary row per affected language: detection status, links to analysis and
 mitigation reports for the PR's current commit, and the next action.
 
-The summary refreshes after detection labels and report publication workflows complete.
+The summary refreshes after `SDK breaking changes labels` workflow, `SDK Breaking Change Analysis` workflow and `SDK Breaking Change Mitigation` workflow complete.
 Reports from older commits are not linked as current results. If a current report is not
 available, the table says so; inspect the corresponding workflow for pending or failed runs.
 Mitigation reports propose customizations for the PR owner to review and apply. They do not
 indicate that the PR has been fixed or revalidated, and do not replace required approvals.
 
-### Approval
+#### Mitigation and Suppression
 
-An authorized SDK reviewer applies the `BreakingChange-<language>-Sdk-Approved` label to
-approve breaking changes for that language. The language's row is removed from the
-**Next Steps to Merge** summary when it next refreshes.
+The SDK owner reviews and applies the proposed customization code to mitigate breaking changes,
+or suppresses accepted breaking changes for the affected language. Once all breaking changes for
+that language have been mitigated or suppressed and the checks confirm that none remain, the
+language's row is removed from the **Next Steps to Merge** summary on its next refresh.
 ```
