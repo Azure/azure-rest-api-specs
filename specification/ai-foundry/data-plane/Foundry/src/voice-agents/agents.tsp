@@ -431,12 +431,12 @@ model VoiceAgentSessionSecret {
   initial_value_from?: string;
 }
 
-@doc("A session-local output variable name, such as `verification_code`, without a namespace prefix or template syntax. Output bindings specify a preferred name; collection feedback returns the actual allocated name. Tool inputs use `{{name}}` to read it.")
+@doc("A session-local output variable name, such as `verification_code`, without a namespace prefix or template syntax. The model supplies a preferred name in `output_variable_name`; collection feedback returns the actual allocated name in `output_ref`. Tool inputs use `{{name}}` to read it.")
 @pattern("^[A-Za-z_][A-Za-z0-9_]*$")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar VoiceAgentOutputReference extends string;
 
-@doc("Enables collection of one complete numeric SMS on the Agent's SMS-capable number. Length, timeout, explicit E.164 sender, Boolean secret and any output binding are model-call arguments, not Agent settings. Prompts follow listening; this does not create an SMS chat. Initially supported on Twilio.")
+@doc("Enables collection of one complete numeric SMS on the Agent's SMS-capable number. Length, timeout, explicit E.164 sender, Boolean secret and output_variable_name are model-call arguments, not Agent settings. Prompts follow listening; this does not create an SMS chat. Initially supported on Twilio.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
   ...Record<never>;
@@ -445,7 +445,7 @@ model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
   name: "collect_sms";
 }
 
-@doc("Enables ASCII decimal keypad collection on the active call, preserving repeats and leading zeros. Length, completion mode, terminator, timers, Boolean secret and any output binding are model-call arguments, not Agent settings. The service validates and locks each operation's effective settings before preparing its receiver. The model never submits input digits; voice collection is unsupported.")
+@doc("Enables ASCII decimal keypad collection on the active call, preserving repeats and leading zeros. Length, completion mode, terminator, timers, Boolean secret and output_variable_name are model-call arguments, not Agent settings. The service validates and locks each operation's effective settings before preparing its receiver. The model never submits input digits; voice collection is unsupported.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectDtmfSystemTool extends VoiceAgentSystemTool {
   ...Record<never>;

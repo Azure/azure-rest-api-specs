@@ -446,17 +446,7 @@ model VoiceAgentServerEventSystemToolArgumentsDone
   arguments: string;
 }
 
-@doc("Output binding selected by the model in a collect tool's start arguments, not stored in Agent configuration. It is required for `secret: true` and omitted for `secret: false`.")
-@usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentCollectionOutputBindings {
-  ...Record<never>;
-
-  @doc("The preferred bare variable name, such as `verification_code`. Successful private collection creates the variable; names used by ordinary session inputs, initialized private variables or earlier private collections are occupied. An occupied name receives a unique suffix, such as `_2`, without overwriting existing values. Completion reports the actual name through `output_ref`. Cancellation, timeout, failure and non-private collection do not create a variable.")
-  variable_name: VoiceAgentOutputReference;
-}
-
-@doc("Common model-generated collection start arguments. The service requires output_bindings exactly when secret is true. It applies defaults, validates bounds and provider capabilities, then locks all effective arguments for the operation before preparing a receiver. Duplicate commands cannot change settings or extend the deadline. These are decoded intent arguments, not a new client ingress or Agent settings object. Collection is not authentication.")
+@doc("Common model-generated collection start arguments. The service requires output_variable_name exactly when secret is true. It applies defaults, validates bounds and provider capabilities, then locks all effective arguments for the operation before preparing a receiver. Duplicate commands cannot change settings or extend the deadline. These are decoded intent arguments, not a new client ingress or Agent settings object. Collection is not authentication.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectionStartArguments {
@@ -465,8 +455,8 @@ model VoiceAgentCollectionStartArguments {
   @doc("Required model-selected visibility for the future result. There is no default. False returns ordinary input to the model; true stores it privately and returns only the allocated name. Later commands cannot downgrade a private operation.")
   secret: boolean;
 
-  @doc("Model-selected output destination, required for secret true and forbidden for false. No prior declaration is needed. This choice cannot be changed by duplicate or later commands for the same operation.")
-  output_bindings?: VoiceAgentCollectionOutputBindings;
+  @doc("The preferred bare output variable name, such as verification_code, selected by the model. Required for secret true and forbidden for false; it is not Agent configuration. Successful private collection creates the variable without prior declaration. Names occupied by ordinary inputs, initialized private variables or earlier private collections receive a unique suffix without overwriting values. Completion reports the actual name through output_ref. The name is locked for the operation; cancellation, timeout, failure and non-private collection create no variable.")
+  output_variable_name?: VoiceAgentOutputReference;
 
   @doc("The minimum number of ASCII decimal digits for this operation. Leading zeros are preserved. Must not exceed max_length; defaults to six when omitted.")
   @minValue(1)
