@@ -85,10 +85,10 @@
         },
         "x-ms-examples": {
           "List managed instance server protection settings": {
-            "$ref": "./examples/ListServerProtectionSettings.json"
+            "$ref": "./examples/ManagedServerProtectionSettingsList.json"
           },
           "List settings before opting in": {
-            "$ref": "./examples/ListServerProtectionSettingsDisabled.json"
+            "$ref": "./examples/ManagedServerProtectionSettingsListDisabled.json"
           }
         },
         "x-ms-pageable": {
@@ -158,10 +158,10 @@
         },
         "x-ms-examples": {
           "Get managed instance server protection settings": {
-            "$ref": "./examples/GetServerProtectionSettings.json"
+            "$ref": "./examples/ManagedServerProtectionSettingsGet.json"
           },
           "Get settings before opting in": {
-            "$ref": "./examples/GetServerProtectionSettingsDisabled.json"
+            "$ref": "./examples/ManagedServerProtectionSettingsGetDisabled.json"
           }
         }
       },
@@ -170,7 +170,7 @@
         "tags": [
           "ManagedInstanceServerProtectionSettings"
         ],
-        "description": "Updates managed instance server protection setting. Returns HTTP 200 with\nthe resource. While provisioningState is Updating, follow the polling\nheaders to track completion and retrieve the final resource result.",
+        "description": "Updates managed instance server protection setting. Returns HTTP 202 with\noperation metadata and polling headers while the update is in progress,\nor HTTP 200 with the resource when the update has completed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -221,9 +221,15 @@
         ],
         "responses": {
           "200": {
-            "description": "The settings update was accepted or completed. Follow the polling headers while provisioningState is Updating.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ServerProtectionSettings"
+            }
+          },
+          "202": {
+            "description": "The update is in progress. Follow the polling headers to retrieve its result.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ServerProtectionSettingsOperationMetadata"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -251,7 +257,7 @@
         },
         "x-ms-examples": {
           "Opt in block server drop": {
-            "$ref": "./examples/CreateOrUpdateServerProtectionSettingsOptInBlockServerDrop.json"
+            "$ref": "./examples/ManagedServerProtectionSettingsCreateOrUpdateOptInBlockServerDrop.json"
           }
         },
         "x-ms-long-running-operation-options": {
