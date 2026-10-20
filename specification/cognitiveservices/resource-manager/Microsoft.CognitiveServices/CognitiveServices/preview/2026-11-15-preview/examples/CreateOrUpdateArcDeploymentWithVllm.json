@@ -1,11 +1,11 @@
 {
   "operationId": "ArcDeployments_CreateOrUpdate",
-  "title": "CreateOrUpdateArcDeploymentWithTemplate",
+  "title": "CreateOrUpdateArcDeploymentWithVllm",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resourceGroupName",
     "accountName": "accountName",
-    "deploymentName": "qwen-template-arc",
+    "deploymentName": "gpt-oss-vllm-arc",
     "api-version": "2026-11-15-preview",
     "resource": {
       "properties": {
@@ -21,8 +21,7 @@
         },
         "nodeSelector": {
           "agentpool": "a100"
-        },
-        "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/vllm-qwen--qwen3-5-0-8b/versions/1"
+        }
       },
       "sku": {
         "name": "Arc"
@@ -32,8 +31,8 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/qwen-template-arc",
-        "name": "qwen-template-arc",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/gpt-oss-vllm-arc",
+        "name": "gpt-oss-vllm-arc",
         "type": "Microsoft.CognitiveServices/accounts/arcDeployments",
         "properties": {
           "model": {
@@ -54,7 +53,6 @@
           "nodeSelector": {
             "agentpool": "a100"
           },
-          "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/vllm-qwen--qwen3-5-0-8b/versions/1",
           "vllmParameters": {
             "tensorParallelSize": 2,
             "maxModelLen": 8192,
@@ -76,8 +74,8 @@
         "location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000011?operationResultResponseType=Location&api-version=2026-11-15-preview"
       },
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/qwen-template-arc",
-        "name": "qwen-template-arc",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/gpt-oss-vllm-arc",
+        "name": "gpt-oss-vllm-arc",
         "type": "Microsoft.CognitiveServices/accounts/arcDeployments",
         "properties": {
           "model": {
@@ -98,7 +96,6 @@
           "nodeSelector": {
             "agentpool": "a100"
           },
-          "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/vllm-qwen--qwen3-5-0-8b/versions/1",
           "vllmParameters": {
             "tensorParallelSize": 2,
             "maxModelLen": 8192,

@@ -5,25 +5,25 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resourceGroupName",
     "accountName": "accountName",
-    "deploymentName": "qwen-template-arc",
+    "deploymentName": "phi-3-gpu-arc",
     "api-version": "2026-11-15-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/qwen-template-arc",
-        "name": "qwen-template-arc",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/phi-3-gpu-arc",
+        "name": "phi-3-gpu-arc",
         "type": "Microsoft.CognitiveServices/accounts/arcDeployments",
         "etag": "\"0x8D...\"",
         "properties": {
           "model": {
             "format": "OpenAI",
-            "name": "openai-gpt-oss-20b",
-            "version": "1",
-            "assetId": "azureml://registries/azure-foundrylocalonazurelocal/models/openai-gpt-oss-20b/versions/1"
+            "name": "Phi-3-mini-128k-instruct-cuda-gpu",
+            "version": "2",
+            "assetId": "azureml://registries/azureml/models/Phi-3-mini-128k-instruct-cuda-gpu/versions/2"
           },
           "extensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
-          "runtime": "vllm",
+          "runtime": "onnx-genai",
           "compute": "gpu",
           "replicas": 2,
           "resources": {
@@ -33,13 +33,6 @@
           },
           "nodeSelector": {
             "agentpool": "a100"
-          },
-          "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/vllm-qwen--qwen3-5-0-8b/versions/1",
-          "vllmParameters": {
-            "tensorParallelSize": 2,
-            "maxModelLen": 8192,
-            "gpuMemoryUtilization": 0.9,
-            "enforceEager": false
           },
           "provisioningState": "Succeeded",
           "provisioningDetails": {
