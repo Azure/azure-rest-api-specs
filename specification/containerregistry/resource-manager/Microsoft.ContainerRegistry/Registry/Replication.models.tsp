@@ -67,5 +67,6 @@ model ReplicationListResult {
    * The URI that can be used to request the next list of replications.
    */
   @nextLink
-  nextLink?: string;
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
 }

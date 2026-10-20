@@ -37,5 +37,6 @@ model PrivateLinkResourceListResult {
    * The URI that can be used to request the next list of private link resources.
    */
   @nextLink
-  nextLink?: string;
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
 }

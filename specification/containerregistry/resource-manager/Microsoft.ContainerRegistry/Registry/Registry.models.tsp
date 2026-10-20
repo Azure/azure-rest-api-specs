@@ -820,7 +820,8 @@ model RegistryListResult {
    * The URI that can be used to request the next list of container registries.
    */
   @nextLink
-  nextLink?: string;
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
 }
 
 /**
@@ -986,5 +987,6 @@ model ImportSourceCredentials {
   /**
    * The password used to authenticate with the source registry.
    */
+  @secret
   password: string;
 }

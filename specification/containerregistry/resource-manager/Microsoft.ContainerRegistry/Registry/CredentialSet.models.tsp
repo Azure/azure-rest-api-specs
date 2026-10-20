@@ -141,5 +141,6 @@ model CredentialSetListResult {
    * The URI that can be used to request the next list of credential sets.
    */
   @nextLink
-  nextLink?: string;
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
 }

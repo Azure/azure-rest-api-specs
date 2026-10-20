@@ -183,7 +183,8 @@ model EventListResult {
    * The URI that can be used to request the next list of events.
    */
   @nextLink
-  nextLink?: string;
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
 }
 
 /**
@@ -441,5 +442,6 @@ model WebhookListResult {
    * The URI that can be used to request the next list of webhooks.
    */
   @nextLink
-  nextLink?: string;
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
 }

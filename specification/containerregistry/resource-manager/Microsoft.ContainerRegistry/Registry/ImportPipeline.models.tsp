@@ -115,5 +115,6 @@ model ImportPipelineListResult {
    * The URI that can be used to request the next list of import pipelines.
    */
   @nextLink
-  nextLink?: string;
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
 }

@@ -125,8 +125,10 @@ model TokenPassword {
   name?: TokenPasswordName;
 
   /**
-   * The password value.
+   * The password value, returned only by the GenerateCredentials operation.
+   * Omitted from GET, PUT, and PATCH responses.
    */
+  @secret
   @visibility(Lifecycle.Read)
   value?: string;
 }
@@ -214,5 +216,6 @@ model TokenListResult {
    * The URI that can be used to request the next list of tokens.
    */
   @nextLink
-  nextLink?: string;
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
 }

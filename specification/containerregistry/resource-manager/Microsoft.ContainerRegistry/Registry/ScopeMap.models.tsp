@@ -80,5 +80,6 @@ model ScopeMapListResult {
    * The URI that can be used to request the next list of scope maps.
    */
   @nextLink
-  nextLink?: string;
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
 }

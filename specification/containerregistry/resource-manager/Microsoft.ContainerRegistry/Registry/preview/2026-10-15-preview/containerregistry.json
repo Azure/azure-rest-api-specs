@@ -5781,7 +5781,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of archives."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of archives.",
+          "readOnly": true
         }
       }
     },
@@ -5875,7 +5877,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of archive versions."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of archive versions.",
+          "readOnly": true
         }
       }
     },
@@ -6065,7 +6069,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of cache rules."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of cache rules.",
+          "readOnly": true
         }
       }
     },
@@ -6139,7 +6145,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of connected registries."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of connected registries.",
+          "readOnly": true
         }
       }
     },
@@ -6472,7 +6480,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of credential sets."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of credential sets.",
+          "readOnly": true
         }
       }
     },
@@ -6775,7 +6785,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of events."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of events.",
+          "readOnly": true
         }
       }
     },
@@ -6874,7 +6886,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of export pipelines."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of export pipelines.",
+          "readOnly": true
         }
       }
     },
@@ -7209,7 +7223,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of import pipelines."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of import pipelines.",
+          "readOnly": true
         }
       }
     },
@@ -7332,7 +7348,9 @@
         },
         "password": {
           "type": "string",
-          "description": "The password used to authenticate with the source registry."
+          "format": "password",
+          "description": "The password used to authenticate with the source registry.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -7561,7 +7579,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of container registry operations."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of container registry operations.",
+          "readOnly": true
         }
       }
     },
@@ -7756,7 +7776,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of pipeline runs."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of pipeline runs.",
+          "readOnly": true
         }
       }
     },
@@ -8052,7 +8074,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of private endpoint connections."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of private endpoint connections.",
+          "readOnly": true
         }
       }
     },
@@ -8088,7 +8112,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of private link resources."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of private link resources.",
+          "readOnly": true
         }
       }
     },
@@ -8308,7 +8334,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of container registries."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of container registries.",
+          "readOnly": true
         }
       }
     },
@@ -8933,7 +8961,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of replications."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of replications.",
+          "readOnly": true
         }
       }
     },
@@ -9140,7 +9170,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of scope maps."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of scope maps.",
+          "readOnly": true
         }
       }
     },
@@ -9753,7 +9785,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of tokens."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of tokens.",
+          "readOnly": true
         }
       }
     },
@@ -9777,8 +9811,10 @@
         },
         "value": {
           "type": "string",
-          "description": "The password value.",
-          "readOnly": true
+          "format": "password",
+          "description": "The password value, returned only by the GenerateCredentials operation.\nOmitted from GET, PUT, and PATCH responses.",
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
@@ -10075,7 +10111,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next list of webhooks."
+          "format": "uri",
+          "description": "The URI that can be used to request the next list of webhooks.",
+          "readOnly": true
         }
       }
     },

@@ -278,7 +278,8 @@ model OperationListResult {
    * The URI that can be used to request the next list of container registry operations.
    */
   @nextLink
-  nextLink?: string;
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
 }
 
 /**
