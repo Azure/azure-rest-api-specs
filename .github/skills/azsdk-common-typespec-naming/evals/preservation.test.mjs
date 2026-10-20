@@ -22,7 +22,7 @@ for (const file of [
   assert.ok(pattern, `Missing preservation assertion in ${file}`);
   const matches = new RegExp(pattern.replace("(?sm)", ""), "sm");
 
-  test(`${file.pathname}: accepts insertions without requiring contiguous originals`, () => {
+  await test(`${file.pathname}: accepts insertions without requiring contiguous originals`, () => {
     for (
       let position = lines.indexOf("namespace Widget;") + 1;
       position <= lines.length;
@@ -38,7 +38,7 @@ for (const file of [
     }
   });
 
-  test(`${file.pathname}: rejects deleted, changed, or commented-out originals`, () => {
+  await test(`${file.pathname}: rejects deleted, changed, or commented-out originals`, () => {
     for (let position = 0; position < lines.length; position++) {
       if (!lines[position].trim()) continue;
       for (const replacement of [
