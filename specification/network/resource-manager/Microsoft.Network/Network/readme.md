@@ -69,7 +69,8 @@ input-file:
   - stable/2026-03-01/virtualNetwork.json
   - stable/2026-03-01/virtualNetworkAppliance.json
   - stable/2026-03-01/virtualWan.json
-  - stable/2018-10-01/vmssNetwork.json
+  - stable/2026-03-01/vmssNetworkConfiguration.json
+  - stable/2026-03-01/vmssPublicIpAddress.json
 suppressions:
   # --- stable/2018-10-01/vmssNetwork.json ---
   # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
@@ -386,7 +387,8 @@ input-file:
   - stable/2026-01-01/virtualNetwork.json
   - stable/2026-01-01/virtualNetworkAppliance.json
   - stable/2026-01-01/virtualWan.json
-  - stable/2018-10-01/vmssNetwork.json
+  - stable/2026-01-01/vmssNetworkConfiguration.json
+  - stable/2026-01-01/vmssPublicIpAddress.json
 suppressions:
   # --- stable/2018-10-01/vmssNetwork.json ---
   # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
@@ -692,7 +694,8 @@ input-file:
   - stable/2025-09-01/virtualNetwork.json
   - stable/2025-09-01/virtualNetworkAppliance.json
   - stable/2025-09-01/virtualWan.json
-  - stable/2018-10-01/vmssNetwork.json
+  - stable/2025-09-01/vmssNetworkConfiguration.json
+  - stable/2025-09-01/vmssPublicIpAddress.json
 suppressions:
   # --- stable/2018-10-01/vmssNetwork.json ---
   # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
@@ -922,7 +925,8 @@ input-file:
   - stable/2025-07-01/virtualNetwork.json
   - stable/2025-07-01/virtualNetworkAppliance.json
   - stable/2025-07-01/virtualWan.json
-  - stable/2018-10-01/vmssNetwork.json
+  - stable/2025-07-01/vmssNetworkConfiguration.json
+  - stable/2025-07-01/vmssPublicIpAddress.json
 suppressions:
   # --- stable/2018-10-01/vmssNetwork.json ---
   # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
@@ -1063,7 +1067,8 @@ input-file:
   - stable/2025-05-01/virtualNetwork.json
   - stable/2025-05-01/virtualNetworkAppliance.json
   - stable/2025-05-01/virtualWan.json
-  - stable/2018-10-01/vmssNetwork.json
+  - stable/2025-05-01/vmssNetworkConfiguration.json
+  - stable/2025-05-01/vmssPublicIpAddress.json
 suppressions:
   # --- stable/2018-10-01/vmssNetwork.json ---
   # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
