@@ -436,86 +436,22 @@ model VoiceAgentSessionSecret {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar VoiceAgentOutputReference extends string;
 
-@doc("Shared Agent configuration for SMS/keypad collection. Each model start supplies a locked Boolean `secret` and, when private, `output_bindings`; neither is Agent configuration. The model cannot override length/timer settings or submit input values. Collection is not authentication.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentInputCollectionSettings {
-  @doc("The minimum number of ASCII decimal digits. Leading zeros are preserved. Must not exceed `max_length`.")
-  @minValue(1)
-  @maxValue(64)
-  min_length?: int32 = 6;
-
-  @doc("The maximum number of ASCII decimal digits. Reaching the maximum is not confirmation in terminator mode.")
-  @minValue(1)
-  @maxValue(64)
-  max_length?: int32 = 6;
-
-  @doc("The total operation deadline in integer seconds, including receiver preparation. Duplicate commands do not extend it.")
-  @minValue(1)
-  @maxValue(300)
-  timeout_seconds?: int32 = 60;
-}
-
-@doc("Collects one complete numeric SMS on the Agent's SMS-capable number. Start requires E.164 `from_phone_number` and Boolean `secret`, without Caller ID fallback. Prompts follow `listening`; this does not create an SMS chat. Initially supported on Twilio.")
+@doc("Enables collection of one complete numeric SMS on the Agent's SMS-capable number. Length, timeout, explicit E.164 sender, Boolean secret and any output binding are model-call arguments, not Agent settings. Prompts follow listening; this does not create an SMS chat. Initially supported on Twilio.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
   ...Record<never>;
 
   @doc("The built-in capability. Always `collect_sms`.")
   name: "collect_sms";
-
-  ...VoiceAgentInputCollectionSettings;
 }
 
-@doc("How keypad collection completes. Unknown modes require service and provider support.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceAgentDtmfCompletionMode {
-  string,
-
-  @doc("Complete at the configured fixed length. `min_length` and `max_length` must be equal.")
-  fixed_length: "fixed_length",
-
-  @doc("Complete only after the configured terminator. The terminator is excluded from the value, and reaching the length limit alone never succeeds.")
-  terminator: "terminator",
-
-  @doc("Complete after the inter-digit timeout when the accumulated length is valid.")
-  inter_digit_silence: "inter_digit_silence",
-}
-
-@doc("The two non-numeric keypad keys permitted as confirmation terminators.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceAgentDtmfTerminator {
-  @doc("The number-sign confirmation key.")
-  number_sign: "#",
-
-  @doc("The asterisk confirmation key.")
-  asterisk: "*",
-}
-
-@doc("Collects ASCII decimal keypad digits on the active call, preserving repeats and leading zeros. Start requires Boolean `secret`, not input digits. Completion and timeouts follow the configured policy; voice collection is unsupported.")
+@doc("Enables ASCII decimal keypad collection on the active call, preserving repeats and leading zeros. Length, completion mode, terminator, timers, Boolean secret and any output binding are model-call arguments, not Agent settings. The service validates and locks each operation's effective settings before preparing its receiver. The model never submits input digits; voice collection is unsupported.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectDtmfSystemTool extends VoiceAgentSystemTool {
   ...Record<never>;
 
   @doc("The built-in capability. Always `collect_dtmf`.")
   name: "collect_dtmf";
-
-  ...VoiceAgentInputCollectionSettings;
-
-  @doc("The required completion policy. Exactly one policy applies to an operation.")
-  completion_mode: VoiceAgentDtmfCompletionMode;
-
-  @doc("The confirmation key, required only in terminator mode. The two non-numeric keypad keys are the only supported terminators.")
-  terminator?: VoiceAgentDtmfTerminator;
-
-  @doc("The maximum wait for the first digit, in integer seconds, bounded by the total deadline.")
-  @minValue(1)
-  @maxValue(300)
-  first_digit_timeout_seconds?: int32 = 15;
-
-  @doc("The wait after a received digit, in integer seconds. In silence mode it may complete a valid value; other modes time out without success. This is not a debounce and never removes repeated digits.")
-  @minValue(1)
-  @maxValue(300)
-  inter_digit_timeout_seconds?: int32 = 5;
 }
 
 @doc("Per-invocation transfer routing. Unsupported strategies are rejected before provider execution; schema membership does not imply support by every provider.")

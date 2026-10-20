@@ -456,7 +456,7 @@ model VoiceAgentCollectionOutputBindings {
   variable_name: VoiceAgentOutputReference;
 }
 
-@doc("Common model-generated collection start arguments. The service requires output_bindings exactly when secret is true, then locks both choices for the operation. These are the decoded intent arguments, not a new client ingress or Agent settings object.")
+@doc("Common model-generated collection start arguments. The service requires output_bindings exactly when secret is true. It applies defaults, validates bounds and provider capabilities, then locks all effective arguments for the operation before preparing a receiver. Duplicate commands cannot change settings or extend the deadline. These are decoded intent arguments, not a new client ingress or Agent settings object. Collection is not authentication.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectionStartArguments {
@@ -467,6 +467,21 @@ model VoiceAgentCollectionStartArguments {
 
   @doc("Model-selected output destination, required for secret true and forbidden for false. No prior declaration is needed. This choice cannot be changed by duplicate or later commands for the same operation.")
   output_bindings?: VoiceAgentCollectionOutputBindings;
+
+  @doc("The minimum number of ASCII decimal digits for this operation. Leading zeros are preserved. Must not exceed max_length; defaults to six when omitted.")
+  @minValue(1)
+  @maxValue(64)
+  min_length?: int32 = 6;
+
+  @doc("The maximum number of ASCII decimal digits for this operation. A complete SMS is validated as one message; reaching this count alone does not confirm DTMF terminator or silence modes.")
+  @minValue(1)
+  @maxValue(64)
+  max_length?: int32 = 6;
+
+  @doc("The total operation deadline in integer seconds, including receiver preparation. Omit for sixty seconds; duplicate commands do not restart it.")
+  @minValue(1)
+  @maxValue(300)
+  timeout_seconds?: int32 = 60;
 }
 
 @doc("Decoded model-generated collect_sms start arguments. The service validates the complete invocation before preparing a receiver; the model never submits the SMS value.")
@@ -481,12 +496,53 @@ model VoiceAgentCollectSmsStartArguments {
   from_phone_number: string;
 }
 
-@doc("Decoded model-generated collect_dtmf start arguments. Length, completion mode and timeouts come from Agent configuration; actual digits cannot be submitted by the model.")
+@doc("How this keypad collection completes, selected by the model at start. Unknown or provider-unsupported modes are rejected before receiver preparation rather than silently falling back.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentDtmfCompletionMode {
+  string,
+
+  @doc("Complete at the requested fixed length. min_length and max_length must be equal; terminator must be omitted.")
+  fixed_length: "fixed_length",
+
+  @doc("Complete only after the requested terminator. The terminator is excluded from the value, and reaching the length limit alone never succeeds.")
+  terminator: "terminator",
+
+  @doc("Complete after the inter-digit timeout when the accumulated length is valid. Terminator must be omitted.")
+  inter_digit_silence: "inter_digit_silence",
+}
+
+@doc("The two non-numeric keypad keys permitted as confirmation terminators.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentDtmfTerminator {
+  @doc("The number-sign confirmation key.")
+  number_sign: "#",
+
+  @doc("The asterisk confirmation key.")
+  asterisk: "*",
+}
+
+@doc("Decoded model-generated collect_dtmf start arguments. The model selects length, completion mode, terminator and timers for this operation; actual digits cannot be submitted. The service applies defaults, validates the complete policy against its hard limits and provider capabilities, and locks it before preparing a receiver.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectDtmfStartArguments {
   ...Record<never>;
   ...VoiceAgentCollectionStartArguments;
+
+  @doc("The required completion policy, selected for this operation. Exactly one policy applies.")
+  completion_mode: VoiceAgentDtmfCompletionMode;
+
+  @doc("The confirmation key, required in terminator mode and forbidden in other modes. The key is not included in the collected value.")
+  terminator?: VoiceAgentDtmfTerminator;
+
+  @doc("The maximum wait for the first digit in integer seconds, starting at receiver readiness and bounded by the remaining total deadline. Omit for fifteen seconds.")
+  @minValue(1)
+  @maxValue(300)
+  first_digit_timeout_seconds?: int32 = 15;
+
+  @doc("The wait after a received digit in integer seconds. In silence mode it completes a valid value; otherwise expiry fails without success. Omit for five seconds. This is not a debounce and never removes repeated digits.")
+  @minValue(1)
+  @maxValue(300)
+  inter_digit_timeout_seconds?: int32 = 5;
 }
 
 @doc("Decoded cancel arguments for either collection tool. The named active collection must belong to that tool and session. Cancellation discards partial input and returns no new output_ref; it cannot change visibility or reveal an existing value.")
