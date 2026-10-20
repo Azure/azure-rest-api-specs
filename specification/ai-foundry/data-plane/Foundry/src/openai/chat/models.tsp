@@ -18,10 +18,6 @@ namespace Azure.AI.Projects {
     "The model deployment used for the creation of this chat completion."
   );
   @@changePropertyType(OpenAI.Response.`model`, string);
-  @@withoutOmittedProperties(
-    OpenAI.CreateChatCompletionStreamResponse,
-    "usage"
-  );
 
   @@copyProperties(
     OpenAI.CreateChatCompletionRequest,
@@ -48,25 +44,6 @@ namespace Azure.AI.Projects {
     OpenAI.CreateChatCompletionResponse,
     {
       /** Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router. */
-      @extension(
-        "x-ms-foundry-meta",
-        #{
-          conditional_previews: #[
-            FoundryFeaturesOptInKeys.model_router_controls_v1_preview
-          ],
-        }
-      )
-      model_selection_details?: ModelSelectionDetails,
-    }
-  );
-
-  @@copyProperties(
-    OpenAI.CreateChatCompletionStreamResponse,
-    {
-      /** With include_usage, null on intermediate chunks and token counts on the final usage chunk; omitted when usage is not requested. */
-      usage?: OpenAI.CompletionUsage | null,
-
-      /** Final routing metadata for the selected serving turn. When usage is requested, present only on the final usage chunk; otherwise on the existing chunk completing all choices. Earlier or interrupted chunks omit it. */
       @extension(
         "x-ms-foundry-meta",
         #{

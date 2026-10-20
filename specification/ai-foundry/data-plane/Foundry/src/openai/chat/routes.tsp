@@ -29,7 +29,6 @@ interface Chat {
 
       ...SessionAffinityRequestHeader;
     },
-    | OpenAI.CreateChatCompletionResponse
-    | SseResponseOf<OpenAI.CreateChatCompletionStreamingResponse>
+    OpenAI.CreateChatCompletionResponse
   >;
 }

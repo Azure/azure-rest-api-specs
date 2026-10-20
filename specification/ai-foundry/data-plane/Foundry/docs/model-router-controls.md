@@ -1,6 +1,6 @@
 # Model Router controls (V1Preview)
 
-<!-- cspell:ignore xhigh chatcmpl -->
+<!-- cspell:ignore xhigh -->
 
 This reference describes the public request and response shape for the Model Router preview on the Foundry **project endpoint**: `https://{ai-services-account-name}.services.ai.azure.com/api/projects/{project-name}`. The raw HTTP examples use `sample-project` as the project name and target its Responses and Chat Completions routes. They do not establish support for account-level routes. Send `Foundry-Features: ModelRouterControls=V1Preview` on create requests using these controls. The preview header is an opt-in, not a new API version; without it, existing endpoint behavior applies and the new controls are not guaranteed to be enforced. Public SDK support and the qualified model/revision, region, route, tool, and execution-mode matrix must be verified separately before advertising a particular combination.
 
@@ -120,9 +120,9 @@ Content-Type: application/json
 
 For Chat the equivalent conflicting input is `"reasoning_effort": "medium"` together with `"routing_config": {"reasoning_effort": ["medium"]}`; equality does not remove the conflict. `error.param` remains the routing effort path, while the safe message names Chat's native `reasoning_effort` path.
 
-Only qualified foreground routes can promise pre-acceptance validation and a final result. Preview-enabled Model Router requests with an explicitly present new control **or** nonempty effective tools need execution-mode admission; a header alone, empty config, affinity alone, or native effort alone does not add this new restriction. Unsupported background, continuation, or concurrent combinations must not accept and ignore hard requirements. No qualification or deployed runtime enforcement is implied by these schemas.
+Only qualified foreground JSON routes can promise pre-acceptance validation and a final result. Preview-enabled Model Router requests with an explicitly present new control **or** nonempty effective tools need execution-mode admission; a header alone, empty config, affinity alone, or native effort alone does not add this new restriction. Unsupported background, continuation, or concurrent combinations must not accept and ignore hard requirements. No qualification or deployed runtime enforcement is implied by these schemas.
 
-## Results and streams
+## Results and retrieval
 
 Successful routed results retain their native Chat/Responses output, usage, tools, status, and error fields. When truthful final routing information is available, `model` is the **actual serving model** and `model_selection_details.model_router_details` contains the existing required applied `mode` and ordered `routing_trace`. Optional `reasoning_effort` is only a known selected value from an explicit routing allowed set, never a native or injected default. Existing optional `session_affinity` reports the actual mode, source, and model-based initialize/retain/switch outcome; a change of effort on the same associated model is retain. These scalars describe the last client-output-producing inference in established execution order, not a later internal call. Do not infer a default from an omitted field.
 
@@ -151,36 +151,9 @@ An illustrative fragment in either native JSON result is:
 }
 ```
 
-For Chat SSE, `stream: true` retains native chunks, all choices (`n > 1` included), deltas, finish reasons and `[DONE]`. Without `stream_options.include_usage`, final metadata is on the existing chunk that completes **all** requested choices. With usage requested, earlier chunks may carry `"usage": null`; the existing final usage chunk has `choices: []`, the usage object, and final metadata. No new chunk or event is introduced:
+Streaming behavior and delivery of routing metadata in streams are deferred to separate work; existing stream operations are unchanged.
 
-```text
-data: {"id":"chatcmpl_42","object":"chat.completion.chunk","created":1792497600,"model":"gpt-5","choices":[{"index":0,"delta":{},"finish_reason":"stop"}],"usage":null}
-
-data: {"id":"chatcmpl_42","object":"chat.completion.chunk","created":1792497600,"model":"gpt-5","choices":[{"index":1,"delta":{},"finish_reason":"length"}],"usage":null}
-
-data: {"id":"chatcmpl_42","object":"chat.completion.chunk","created":1792497600,"model":"gpt-5","choices":[],"usage":{"prompt_tokens":10,"completion_tokens":8,"total_tokens":18},"model_selection_details":{"model_router_details":{"mode":"balanced","reasoning_effort":"medium","routing_trace":[{"latency_ms":12,"attempts":[{"model":"gpt-5","result":{"status":200}}]}]}}}
-
-data: [DONE]
-```
-
-Without usage, the last **all-choice** finishing chunk itself contains the wrapper, without an extra usage frame:
-
-```text
-data: {"id":"chatcmpl_43","object":"chat.completion.chunk","created":1792497600,"model":"gpt-5","choices":[{"index":0,"delta":{},"finish_reason":"stop"}]}
-
-data: {"id":"chatcmpl_43","object":"chat.completion.chunk","created":1792497600,"model":"gpt-5","choices":[{"index":1,"delta":{},"finish_reason":"stop"}],"model_selection_details":{"model_router_details":{"mode":"balanced","reasoning_effort":"medium","routing_trace":[{"latency_ms":12,"attempts":[{"model":"gpt-5","result":{"status":200}}]}]}}}
-
-data: [DONE]
-```
-
-For Responses SSE, existing `response.created` and `response.in_progress` snapshots may omit final routing information; the native `response.completed` event's `response` carries the final wrapper when available. Interim item/content/tool events remain unchanged. An interrupted stream may lack terminal metadata; after SSE commitment an HTTP 400 cannot be sent retroactively. Native stream failures still apply.
-
-```text
-event: response.completed
-data: {"type":"response.completed","sequence_number":8,"response":{"id":"resp_42","object":"response","created_at":1792497600,"status":"completed","model":"gpt-5","error":null,"incomplete_details":null,"output":[{"id":"msg_42","type":"message","role":"assistant","status":"completed","content":[{"type":"output_text","text":"Hello.","annotations":[]}]}],"instructions":null,"parallel_tool_calls":true,"agent_reference":null,"model_selection_details":{"model_router_details":{"mode":"balanced","reasoning_effort":"medium","routing_trace":[{"output_id":"msg_42","latency_ms":12,"attempts":[{"model":"gpt-5","result":{"status":200}}]}]}}}}
-```
-
-GET/list, GET-stream, old records, and `store: false` share response schemas but **do not guarantee persistence or replay of the new routing-effort field**. They may omit that ephemeral create/final-stream field even when an earlier final event included it. Existing stored fields are not removed. Queued background acceptance is not a final routed result and does not promise a later delivery channel.
+GET/list, old records, and `store: false` share response schemas but **do not guarantee persistence of the new routing-effort field**. They may omit it even when the initial JSON result included it. Existing stored fields are not removed. Queued background acceptance is not a final routed result and does not promise a later delivery channel.
 
 ```http
 GET /api/projects/sample-project/openai/v1/responses/resp_42 HTTP/1.1
