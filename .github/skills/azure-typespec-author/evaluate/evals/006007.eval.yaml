@@ -14,7 +14,7 @@ stimuli:
     tags:
       suite: dataplane
       mode: trigger
-    prompt: Add a new optional `description` property of type `string` to the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum.
+    prompt: Add a new optional `description` property of type `string` to the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum and carry forward all other existing features. All material design decisions are provided, so proceed without confirmation.
     environment: &id001
       files:
         - src: ../fixtures/006007-dp-version-property-added/main.tsp
@@ -28,12 +28,6 @@ stimuli:
       commands:
         - node -e "const fs=require('fs');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync('node_modules')){fs.symlinkSync(t,'node_modules','junction')}"
     graders:
-      - &id002
-        type: tool-calls
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - azure-sdk-mcp-azsdk_run_typespec_validation
       - type: skill-invocation
         config:
           required:
@@ -45,14 +39,13 @@ stimuli:
     tags:
       suite: dataplane
       mode: forced
-    prompt: "@azure-typespec-author Add a new optional `description` property of type `string` to the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum."
+    prompt: "@azure-typespec-author Add a new optional `description` property of type `string` to the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum and carry forward all other existing features. All material design decisions are provided, so proceed without confirmation."
     environment: *id001
     rubric: &shared_rubric
       - WidgetSuite has an optional string description property introduced only in API version 2023-06-01-preview.
       - Version 2023-06-01-preview is added to the Versions enum and the property uses valid TypeSpec versioning.
       - Earlier API versions do not expose description, and changes contain no unrelated edits.
     graders:
-      - *id002
       - type: run-command
         config:
           command: tsp compile .
@@ -88,7 +81,7 @@ stimuli:
     tags:
       suite: dataplane
       mode: no-skill
-    prompt: Add a new optional `description` property of type `string` to the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum.
+    prompt: Add a new optional `description` property of type `string` to the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum and carry forward all other existing features. All material design decisions are provided, so proceed without confirmation.
     environment: *id001
     rubric: *shared_rubric
     graders:

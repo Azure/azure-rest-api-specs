@@ -676,6 +676,8 @@ interface CarbonService {
   @doc("API for Carbon Emissions Reports scoped to a billing account.")
   @added(Versions.v2026_05_01_preview)
   @post
+  @list
+  @armResourceCollectionAction
   @route("/{+scope}/providers/Microsoft.Carbon/carbonEmissionReports")
   queryCarbonEmissionReportsByBillingAccount(
     ...ApiVersionParameter,

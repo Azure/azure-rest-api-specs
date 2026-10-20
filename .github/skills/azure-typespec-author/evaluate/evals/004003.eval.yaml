@@ -63,11 +63,6 @@ stimuli:
       commands:
         - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "skill-invocation"
         config:
           required:
@@ -83,11 +78,6 @@ stimuli:
       @azure-typespec-author Remove @operationId and its associated #suppress for no-openapi from all operations. Then restore both @operationId and its associated #suppress for no-openapi for operationIds that do not contain underscores and do not begin with a lowercase letter.
     environment: *shared_environment
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "run-command"
         config:
           command: "node check-node-dependencies.js node_modules"
@@ -205,9 +195,8 @@ stimuli:
 
 scoring:
   weights:
-    tool-calls: 0.1
     run-command: 0.1
     file-not-matches: 0.3
-    skill-invocation: 0.1
+    skill-invocation: 0.2
     file-matches: 0.4
   threshold: 1

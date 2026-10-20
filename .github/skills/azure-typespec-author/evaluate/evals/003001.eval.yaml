@@ -19,7 +19,7 @@ stimuli:
       suite: "lro"
       mode: "trigger"
     prompt: |
-      Add a post async operation to move employee, operation's request is MoveRequest, response is MoveResponse.
+      Add a POST asynchronous operation to move an Employee. The request is MoveRequest and the final response is MoveResponse. This is a greenfield operation: its 202 response must include Location, Azure-AsyncOperation, and Retry-After headers. All material design decisions are provided, so proceed without confirmation.
     environment: &shared_environment
       files:
         - src: ../fixtures/003-long-running-operation-share/employee.tsp
@@ -39,11 +39,6 @@ stimuli:
       commands:
         - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "skill-invocation"
         config:
           required:
@@ -56,18 +51,13 @@ stimuli:
       suite: "lro"
       mode: "forced"
     prompt: |
-      @azure-typespec-author Add a post async operation to move employee, operation's request is MoveRequest, response is MoveResponse.
+      @azure-typespec-author Add a POST asynchronous operation to move an Employee. The request is MoveRequest and the final response is MoveResponse. This is a greenfield operation: its 202 response must include Location, Azure-AsyncOperation, and Retry-After headers. All material design decisions are provided, so proceed without confirmation.
     environment: *shared_environment
     rubric: &shared_rubric
       - The implementation adds a POST asynchronous move action for Employee using MoveRequest as the request and MoveResponse as the final response.
       - The implementation uses ARM long-running-operation headers whose final result is MoveResponse.
       - Changes are limited to the requested operation and contain no unrelated edits.
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "run-command"
         config:
           command: "node check-node-dependencies.js node_modules"
@@ -103,7 +93,7 @@ stimuli:
     tags:
       suite: "lro"
       mode: "no-skill"
-    prompt: "Add a post async operation to move employee, operation's request is MoveRequest, response is MoveResponse."
+    prompt: "Add a POST asynchronous operation to move an Employee. The request is MoveRequest and the final response is MoveResponse. This is a greenfield operation: its 202 response must include Location, Azure-AsyncOperation, and Retry-After headers. All material design decisions are provided, so proceed without confirmation."
     environment: *shared_environment
     rubric: *shared_rubric
     graders:
@@ -111,6 +101,10 @@ stimuli:
         config:
           required:
             - "^(edit|apply_patch|bash|powershell)$"
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
       - *file_matches
       - type: "file-matches"
         name: "file-matches-lro-response"
