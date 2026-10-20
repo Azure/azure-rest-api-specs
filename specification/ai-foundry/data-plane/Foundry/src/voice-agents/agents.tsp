@@ -549,16 +549,16 @@ union VoiceAgentAudioTimestampType {
 
 @doc("""
   Input audio noise reduction configuration. `azure_deep_noise_suppression_headset` and
-  `azure_personal_noise_suppression` are preview modes for local voice activity detection that
+  `azure_personal_noise_suppression` are modes for local voice activity detection that
   enhance detection audio without changing the audio used for recognition.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentNoiseReduction {
   @doc("""
-    The noise reduction mode. `azure_deep_noise_suppression_headset` (Preview) provides
+    The noise reduction mode. `azure_deep_noise_suppression_headset` provides
     headset-optimized noise suppression for local voice activity detection, optimized for
     low-sample-rate audio including 8 kHz telephony audio without changing recognition audio (not
-    restricted to headset devices). `azure_personal_noise_suppression` (Preview) starts with headset
+    restricted to headset devices). `azure_personal_noise_suppression` starts with headset
     suppression for local voice activity detection and personalizes detection after automatic speaker
     enrollment while keeping recognition audio unchanged and keeping headset suppression active when
     personalization is unavailable.
@@ -568,8 +568,8 @@ model VoiceAgentNoiseReduction {
 
 @doc("""
   The input audio noise reduction mode.
-  - `azure_deep_noise_suppression_headset` (Preview): Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.
-  - `azure_personal_noise_suppression` (Preview): Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.
+  - `azure_deep_noise_suppression_headset`: Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.
+  - `azure_personal_noise_suppression`: Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentNoiseReductionType {
@@ -580,10 +580,10 @@ union VoiceAgentNoiseReductionType {
   @doc("Azure deep noise suppression.")
   azure_deep_noise_suppression: "azure_deep_noise_suppression",
 
-  @doc("Preview: Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.")
+  @doc("Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.")
   azure_deep_noise_suppression_headset: "azure_deep_noise_suppression_headset",
 
-  @doc("Preview: Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.")
+  @doc("Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.")
   azure_personal_noise_suppression: "azure_personal_noise_suppression",
 }
 
