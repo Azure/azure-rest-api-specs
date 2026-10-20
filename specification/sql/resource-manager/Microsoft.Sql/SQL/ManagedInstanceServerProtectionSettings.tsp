@@ -44,37 +44,18 @@ union ServerProtectionSettingsName {
 }
 
 /** Settings that control protection against deletion of a managed instance. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The API-review exception for this singleton permits operation polling instead of resource provisioningState."
 @added(Versions.v2026_11_01_preview)
 model ServerProtectionSettingsProperties {
-  /**
-   * Status of the active or latest retained protection-settings update. If no
-   * operation history is retained, Succeeded describes the persisted setting
-   * rather than a past operation outcome. Failed and Canceled outcomes are not
-   * preserved after their operation history is removed.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ServerProtectionSettingsProvisioningState;
-
   /**
    * Block managed instance deletion while any live or dropped user database has
    * immutable PITR backups within retention. Supported request values are enabled
    * and disabled, compared case-insensitively. Setting enabled is an
    * irreversible opt-in. Setting disabled before opt-in is a no-op; changing from
-   * enabled to disabled is rejected. While provisioningState is Updating, the
-   * value describes the accepted request and does not confirm that protection is
-   * effective. Otherwise, GET and LIST return the persisted setting. Use the
-   * update operation's polling endpoints to track completion.
+   * enabled to disabled is rejected. GET and LIST return the persisted setting.
+   * Use the update operation's polling endpoints to track completion.
    */
   blockDropWhenImmutablePitrBackupInRetention: BlockDropWhenImmutablePitrBackupInRetention;
-}
-
-/** Status of the active or latest retained protection-settings update. */
-@added(Versions.v2026_11_01_preview)
-union ServerProtectionSettingsProvisioningState {
-  ResourceProvisioningState,
-
-  /** The protection-settings update is in progress. */
-  Updating: "Updating",
 }
 
 /**
@@ -98,12 +79,25 @@ union BlockDropWhenImmutablePitrBackupInRetention {
   Disabled: "disabled",
 }
 
-/** The settings update was accepted or completed. Follow the polling headers while provisioningState is Updating. */
+/** Metadata for an accepted protection-settings update. */
 @added(Versions.v2026_11_01_preview)
-model ServerProtectionSettingsUpdateResult
-  is ArmResponse<ServerProtectionSettings> {
+model ServerProtectionSettingsOperationMetadata {
+  /** Name of the accepted management operation. */
+  operation: string;
+
+  /** Time when the management operation started. */
+  startTime: utcDateTime;
+}
+
+/** The update is in progress. Follow the polling headers to retrieve its result. */
+@added(Versions.v2026_11_01_preview)
+model ServerProtectionSettingsAcceptedResult {
+  ...AcceptedResponse;
   ...ArmCombinedLroHeaders<FinalResult = ServerProtectionSettings>;
   ...Azure.Core.Foundations.RetryAfterHeader;
+
+  /** Metadata for the accepted update. */
+  @body body: ServerProtectionSettingsOperationMetadata;
 }
 
 /** Read, list, and update the default protection settings of a managed instance. */
@@ -124,14 +118,18 @@ interface ManagedInstanceServerProtectionSettings {
   listByManagedInstance is ArmResourceListByParent<ServerProtectionSettings>;
 
   /**
-   * Updates managed instance server protection setting. Returns HTTP 200 with
-   * the resource. While provisioningState is Updating, follow the polling
-   * headers to track completion and retrieve the final resource result.
+   * Updates managed instance server protection setting. Returns HTTP 202 with
+   * operation metadata and polling headers while the update is in progress,
+   * or HTTP 200 with the resource when the update has completed.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The singleton always exists with its managed instance, so PUT replaces the existing resource and returns 200, never a creation response."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "This existing singleton returns 202 while updating and 200 on completion; PUT never creates a new resource."
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The SQL RP returns operation metadata for pending 202 responses and the resource only for completed 200 responses."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The SQL RP pending 202 response contains the operation name and start time."
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerProtectionSettings,
-    Response = ServerProtectionSettingsUpdateResult
+    Response =
+      | ArmResponse<ServerProtectionSettings>
+      | ServerProtectionSettingsAcceptedResult
   >;
 }
 
