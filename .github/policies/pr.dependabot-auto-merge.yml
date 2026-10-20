@@ -15,6 +15,7 @@ configuration:
               action: Opened
           - targetsBranch:
               branch: main
+          # Do not add issueAuthor: it also matches non-Dependabot PR openers.
           - isActivitySender:
               user: dependabot[bot]
         then:
