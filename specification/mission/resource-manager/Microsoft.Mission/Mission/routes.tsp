@@ -273,6 +273,16 @@ interface CommunityEndpoints {
     ApprovalDeletionCallbackRequest,
     ApprovalActionResponse
   >;
+
+  @doc("Triggers a manual re-sync of community endpoint connections to all configured sync destinations.")
+  @armResourceAction(CommunityEndpointResource)
+  @post
+  @added(Microsoft.Mission.Versions.v2026_10_01_preview)
+  sync is ArmResourceActionAsync<
+    CommunityEndpointResource,
+    void,
+    CommunityEndpointResource
+  >;
 }
 
 @doc("DedicatedHub Interface")
@@ -294,6 +304,27 @@ interface DedicatedHub {
   delete is ArmResourceDeleteWithoutOkAsync<DedicatedHubResource>;
   listByCommunityResource is ArmResourceListByParent<DedicatedHubResource>;
   listBySubscription is ArmListBySubscription<DedicatedHubResource>;
+}
+
+@doc("ServiceCatalog Interface")
+@added(Microsoft.Mission.Versions.v2026_10_01_preview)
+@armResourceOperations
+interface ServiceCatalog {
+  get is ArmResourceRead<ServiceCatalogResource>;
+  @useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ServiceCatalogResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmAsyncOperationHeader
+  >;
+  @patch
+  update is ArmCustomPatchAsync<
+    ServiceCatalogResource,
+    PatchModel = ServiceCatalogPatchModel
+  >;
+  delete is ArmResourceDeleteWithoutOkAsync<ServiceCatalogResource>;
+  listByResourceGroup is ArmResourceListByParent<ServiceCatalogResource>;
+  listBySubscription is ArmListBySubscription<ServiceCatalogResource>;
 }
 
 @doc("Approval Interface")
