@@ -3,27 +3,51 @@ import { pathToFileURL } from "node:url";
 
 const toolName = "azsdk_customized_code_update";
 
-function handleRequest(request) {
+/**
+ * @param {unknown} value
+ * @returns {value is Record<string, unknown>}
+ */
+function isRecord(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+/** @param {unknown} request */
+export function handleRequest(request) {
+  if (!isRecord(request)) {
+    throw new TypeError("Fixture request must be an object.");
+  }
   if (request.id === undefined) return null;
+  /** @template T @param {T} result */
   const reply = (result) => ({ jsonrpc: "2.0", id: request.id, result });
+  /** @param {number} code @param {string} message */
   const error = (code, message) => ({
     jsonrpc: "2.0",
     id: request.id,
     error: { code, message },
   });
+  const params = isRecord(request.params) ? request.params : {};
 
   switch (request.method) {
     case "initialize":
+      if (typeof params.protocolVersion !== "string") {
+        return error(
+          -32602,
+          "Fixture initialization requires protocolVersion.",
+        );
+      }
       return reply({
-        protocolVersion: request.params.protocolVersion,
+        protocolVersion: params.protocolVersion,
         capabilities: { tools: {} },
         serverInfo: {
           name: "generic-customization-eval-fixture",
           version: "1.0.0",
         },
       });
-    case "ping":
-      return reply({});
+    case "ping": {
+      /** @type {Record<string, never>} */
+      const result = {};
+      return reply(result);
+    }
     case "tools/list":
       return reply({
         tools: [
@@ -50,13 +74,15 @@ function handleRequest(request) {
         ],
       });
     case "tools/call": {
-      if (request.params.name !== toolName) {
+      if (params.name !== toolName) {
         return error(-32602, "Unknown fixture tool");
       }
 
-      const args = request.params.arguments ?? {};
+      const args = isRecord(params.arguments) ? params.arguments : {};
       if (
+        typeof args.customizationRequest !== "string" ||
         !args.customizationRequest ||
+        typeof args.packagePath !== "string" ||
         !args.packagePath ||
         args.editScope === "SpecInputs"
       ) {
@@ -85,7 +111,10 @@ function handleRequest(request) {
       });
     }
     default:
-      return error(-32601, `Unsupported fixture method: ${request.method}`);
+      return error(
+        -32601,
+        `Unsupported fixture method: ${String(request.method)}`,
+      );
   }
 }
 
@@ -99,7 +128,9 @@ if (
       const result = handleRequest(JSON.parse(line));
       if (result) process.stdout.write(`${JSON.stringify(result)}\n`);
     } catch (error) {
-      process.stderr.write(`Invalid fixture request: ${error.message}\n`);
+      process.stderr.write(
+        `Invalid fixture request: ${error instanceof Error ? error.message : String(error)}\n`,
+      );
       process.exitCode = 1;
       input.close();
     }
