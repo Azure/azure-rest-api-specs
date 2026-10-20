@@ -446,12 +446,10 @@ model VoiceAgentServerEventSystemToolArgumentsDone
   arguments: string;
 }
 
-@doc("Common model-generated collection start arguments. The service requires output_variable_name exactly when secret is true. It applies defaults, validates bounds and provider capabilities, then locks all effective arguments for the operation before preparing a receiver. Duplicate commands cannot change settings or extend the deadline. These are decoded intent arguments, not a new client ingress or Agent settings object. Collection is not authentication.")
+@doc("Common model-generated collection arguments. Each invocation starts collection; there is no action parameter or model-call cancellation variant. The service requires output_variable_name exactly when secret is true. It applies defaults, validates bounds and provider capabilities, then locks all effective arguments for the operation before preparing a receiver. Duplicate invocations cannot change settings or extend the deadline. These are decoded intent arguments, not a new client ingress or Agent settings object. Collection is not authentication.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectionStartArguments {
-  action: "start";
-
   @doc("Required model-selected visibility for the future result. There is no default. False returns ordinary input to the model; true stores it privately and returns only the allocated name. Later commands cannot downgrade a private operation.")
   secret: boolean;
 
@@ -497,7 +495,7 @@ union VoiceAgentDtmfCompletionMode {
   @doc("Complete only after the requested terminator. The terminator is excluded from the value, and reaching the length limit alone never succeeds.")
   terminator: "terminator",
 
-  @doc("Complete after the inter-digit timeout when the accumulated length is valid. Terminator must be omitted.")
+  @doc("Complete after at least one digit and the inter-digit timeout when the accumulated length is valid. Reaching max_length alone does not complete. Terminator must be omitted. Total deadline expiry takes precedence over simultaneous silence completion.")
   inter_digit_silence: "inter_digit_silence",
 }
 
@@ -535,18 +533,7 @@ model VoiceAgentCollectDtmfStartArguments {
   inter_digit_timeout_seconds?: int32 = 5;
 }
 
-@doc("Decoded cancel arguments for either collection tool. The named active collection must belong to that tool and session. Cancellation discards partial input and returns no new output_ref; it cannot change visibility or reveal an existing value.")
-@usage(VoiceAgentServerEventUsage)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentCollectionCancelArguments {
-  ...Record<never>;
-  action: "cancel";
-
-  @minLength(1)
-  collection_id: string;
-}
-
-@doc("An asynchronous collection or phone-operation outcome, separate from argument-generation completion. Start immediately returns accepted, which neither arms a receiver nor resumes a success turn. Listening permits the service to schedule the input prompt. Completed/expired/cancelled/failed results, or a rejected busy start, provide safe feedback and schedule one follow-up when the conversation is idle, without a client function_call_output or response.create. Stale/duplicate events do not resume another turn; closing/disconnected sessions do not resume. Expiry/cancellation/failure/busy allocate no variable. A completed private result commits before its name is reported. Provider acceptance is not SMS delivery, IVR recognition or authentication.")
+@doc("An asynchronous collection or phone-operation outcome, separate from argument-generation completion. A collection invocation immediately returns accepted, which neither arms a receiver nor resumes a success turn. Listening permits the service to schedule the input prompt. Completed/expired/cancelled/failed results, or a rejected busy invocation, provide safe feedback and schedule one follow-up when the conversation is idle, without a client function_call_output or response.create. Cancellation is service lifecycle cleanup on transfer, native ending or disconnect, not an action on the collection tool. Stale/duplicate events do not resume another turn; closing/disconnected sessions do not resume. Expiry/cancellation/failure/busy allocate no variable. A completed private result commits before its name is reported. Provider acceptance is not SMS delivery, IVR recognition or authentication.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventInputCollectionStatus
