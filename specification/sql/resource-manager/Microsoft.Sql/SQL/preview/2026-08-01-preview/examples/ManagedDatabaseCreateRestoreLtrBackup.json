@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "databaseName": "managedDatabase",
+    "managedInstanceName": "managedInstance",
+    "parameters": {
+      "location": "EastAsia",
+      "properties": {
+        "createMode": "RestoreLongTermRetentionBackup",
+        "longTermRetentionBackupResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-EastAsia/providers/Microsoft.Sql/locations/EastAsia/longTermRetentionManagedInstances/managedInstance/longTermRetentionDatabases/managedDatabase/longTermRetentionManagedInstanceBackups/66349b17-1afa-47af-af39-82d2118bbab8;134269634640000000;Hot"
+      }
+    },
+    "resourceGroupName": "Default-SQL-EastAsia",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testdb1",
+        "type": "Microsoft.Sql/managedInstances/databases",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-EastAsia/providers/Microsoft.Sql/managedInstances/testsvr/databases/testdb1",
+        "location": "EastAsia",
+        "properties": {
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "creationDate": "2026-08-01T12:27:58.79Z",
+          "defaultSecondaryLocation": "Southeast Asia",
+          "isLedgerOn": false,
+          "status": "Online"
+        },
+        "tags": {
+          "tagKey1": "TagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testdb2",
+        "type": "Microsoft.Sql/managedInstances/databases",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-EastAsia/providers/Microsoft.Sql/managedInstances/testsvr/databases/testdb2",
+        "location": "EastAsia",
+        "properties": {
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "creationDate": "2026-08-01T12:27:58.79Z",
+          "defaultSecondaryLocation": "Southeast Asia",
+          "isLedgerOn": false,
+          "status": "Online"
+        },
+        "tags": {
+          "tagKey1": "TagValue1"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "ManagedDatabases_CreateOrUpdate",
+  "title": "Creates a new managed database from restoring a long term retention backup"
+}

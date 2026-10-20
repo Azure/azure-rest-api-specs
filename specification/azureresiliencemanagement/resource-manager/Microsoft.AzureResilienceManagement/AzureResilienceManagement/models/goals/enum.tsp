@@ -16,10 +16,10 @@ namespace Microsoft.AzureResilienceManagement;
 union ExclusionState {
   string,
 
-  @doc("Resource is not included in the goals.")
+  @doc("The resource is excluded from the goals.")
   Excluded: "Excluded",
 
-  @doc("Resource is excluded from the goals.")
+  @doc("The resource is included in the goals.")
   Included: "Included",
 }
 
@@ -35,6 +35,7 @@ union AttestationState {
 }
 
 @doc("Enum for the requirement status of the resource in the goal.")
+@removed(Versions.v2026_09_30_preview)
 union RequirementSelected {
   string,
 
@@ -46,6 +47,7 @@ union RequirementSelected {
 }
 
 @doc("Supported type of goal assignment.")
+@removed(Versions.v2026_09_30_preview)
 union GoalAssignmentType {
   string,
 
@@ -54,6 +56,7 @@ union GoalAssignmentType {
 }
 
 @doc("Supported type of goal.")
+@removed(Versions.v2026_09_30_preview)
 union GoalType {
   string,
 

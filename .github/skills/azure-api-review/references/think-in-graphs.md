@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-05-29
+     Upstream alignment: 2026-08-15
      Derived from:
        - Patterns observed across multi-year ARM API review history
        - Reviewer Step 3.5 deliverables (resource / operation / sensitive-data-flow / version-delta graphs)

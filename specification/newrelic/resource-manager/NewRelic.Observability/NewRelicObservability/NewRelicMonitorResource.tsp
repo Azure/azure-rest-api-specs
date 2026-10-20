@@ -197,9 +197,9 @@ interface NewRelicMonitorResources {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("A long-running resource action.")
+  @doc("Resubscribes the New Relic organization associated with the monitor resource so that billing resumes through Azure Marketplace.")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @summary("Resubscribes the New Relic Organization of the underline Monitor Resource to be billed by Azure Marketplace")
+  @summary("Resubscribes the New Relic Organization of the underlying Monitor Resource to be billed by Azure Marketplace.")
   resubscribe is ArmResourceActionAsync<
     NewRelicMonitorResource,
     ResubscribeProperties,

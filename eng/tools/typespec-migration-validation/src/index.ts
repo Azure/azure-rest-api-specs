@@ -1,6 +1,6 @@
 import { sortOpenAPIDocument } from "@azure-tools/typespec-autorest";
-import fs from "fs";
-import { writeFile } from "fs/promises";
+import fs from "node:fs";
+import { writeFile } from "node:fs/promises";
 import { diff } from "json-diff";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";

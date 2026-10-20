@@ -311,6 +311,41 @@ interface DependencyOfRelationships {
   listByParent is ArmResourceListByParent<DependencyOfRelationship>;
 }
 
+/*
+ * Service-group-scoped dependencyOf operations were already available on the
+ * internal preview branch for 2026-03-01-preview but were missed when that
+ * version was initially published. Introduce them from 2026-03-01-preview and
+ * carry them forward into 2026-08-01; 2023-09-01-preview remains unchanged.
+ * Uses Extension.ExternalResource to define explicit tenant-level ServiceGroup paths
+ * (/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Relationships/dependencyOf[/{name}]),
+ * which satisfies ARM validation that requires explicitly-routed tenant-level
+ * URIs rather than the generic {resourceUri} wildcard used in
+ * DependencyOfRelationships.
+ */
+alias ServiceGroup = Extension.ExternalResource<
+  TargetNamespace = "Microsoft.Management",
+  ResourceType = "serviceGroups",
+  ResourceParameterName = "serviceGroupName",
+  NamePattern = "^[a-zA-Z0-9\\-_().~]{1,90}$",
+  Description = "The name of the service group.",
+  ParentType = "Tenant"
+>;
+
+@armResourceOperations
+@added(Versions.`2026-03-01-preview`)
+interface DependencyOfRelationshipsByServiceGroup {
+  get is Extension.Read<ServiceGroup, DependencyOfRelationship>;
+  createOrUpdate is Extension.CreateOrReplaceAsync<
+    ServiceGroup,
+    DependencyOfRelationship
+  >;
+  delete is Extension.DeleteWithoutOkAsync<
+    ServiceGroup,
+    DependencyOfRelationship
+  >;
+  list is Extension.ListByTarget<ServiceGroup, DependencyOfRelationship>;
+}
+
 @armResourceOperations
 interface ServiceGroupMemberRelationships {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ServiceGroupMemberRelationship>;
@@ -322,6 +357,8 @@ interface ServiceGroupMemberRelationships {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "ContainsRelationships only has list operations — @armResourceOperations would apply @autoRoute which corrupts the manually specified route for the resource group scoped endpoint"
 @added(Versions.`2026-03-01-preview`)
+// `$top` is intentionally omitted from these collection GET operations to align
+// with RPC-Get-V1-15; only `api-version` and OData `$filter` are supported.
 interface ContainsRelationships {
   @doc("List ContainsRelationship resources by subscription ID")
   listBySubscription is ArmListBySubscription<

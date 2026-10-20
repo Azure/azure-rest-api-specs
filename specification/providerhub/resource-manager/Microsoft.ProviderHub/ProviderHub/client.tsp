@@ -4,6 +4,23 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ProviderHub;
 
+@@clientName(
+  EndpointRegistrations.createOrUpdate::parameters.resource,
+  "properties"
+);
+@@clientName(
+  EndpointRegistrations.createOrUpdateNestedResourceTypeFirst::parameters.resource,
+  "properties"
+);
+@@clientName(
+  EndpointRegistrations.createOrUpdateNestedResourceTypeSecond::parameters.resource,
+  "properties"
+);
+@@clientName(
+  EndpointRegistrations.createOrUpdateNestedResourceTypeThird::parameters.resource,
+  "properties"
+);
+
 @@clientName(Microsoft.ProviderHub, "ProviderHubMgmtClient", "python");
 
 @@clientLocation(ProviderRegistrations.checkinManifest, "Client", "go");
@@ -40,6 +57,11 @@ using Microsoft.ProviderHub;
   "csharp"
 );
 @@clientName(ApiProfile, "ResourceTypeRegistrationApiProfile", "csharp");
+@@clientName(
+  ApplicationDataAuthorization.excludeApplicationIdFromManifest,
+  "IsApplicationIdExcludedFromManifest",
+  "csharp"
+);
 @@clientName(AuthenticationScheme, "ProviderAuthenticationScheme", "csharp");
 @@clientName(AuthorizedApplication, "ProviderAuthorizedApplication", "csharp");
 @@clientName(
@@ -124,7 +146,6 @@ using Microsoft.ProviderHub;
   "ResourceTypeRegistrationDeleteDependency",
   "csharp"
 );
-@@clientName(DstsConfiguration, "ProviderDstsConfiguration", "csharp");
 @@clientName(EndpointInformation, "ProviderEndpointInformation", "csharp");
 @@clientName(EndpointType, "ProviderEndpointType", "csharp");
 @@clientName(
@@ -148,16 +169,11 @@ using Microsoft.ProviderHub;
 @@clientName(FeaturesRule, "ProviderFeaturesRule", "csharp");
 @@clientName(FilterOption, "ProviderResourceQueryFilterOption", "csharp");
 @@clientName(FilterRule, "ProviderFilterRule", "csharp");
-@@clientName(FrontloadPayload, "ProviderFrontloadPayload", "csharp");
-@@clientName(
-  FrontloadPayloadProperties,
-  "ProviderFrontloadPayloadProperties",
-  "csharp"
-);
 @@clientName(Intent, "AllowedUnauthorizedActionIntent", "csharp");
 @@clientName(Intent.LOW_PRIVILEGE, "LowPrivilege", "csharp");
 @@clientName(Intent.NOT_SPECIFIED, "NotSpecified", "csharp");
 @@clientName(LegacyOperation, "ProviderLegacyOperation", "csharp");
+@@clientName(LinkedAccessCheckOptions, "LinkedAccessCheckOption", "csharp");
 @@clientName(LocationQuotaRule, "ProviderLocationQuotaRule", "csharp");
 @@alternateType(LocationQuotaRule.location, Azure.Core.azureLocation, "csharp");
 @@clientName(LoggingHiddenPropertyPath, "LoggingHiddenPropertyPaths", "csharp");
@@ -197,7 +213,6 @@ using Microsoft.ProviderHub;
 );
 @@clientName(QuotaPolicy, "ProviderQuotaPolicy", "csharp");
 @@clientName(QuotaRule, "ProviderQuotaRule", "csharp");
-@@clientName(Readiness, "ServiceTreeReadiness", "csharp");
 @@clientName(Regionality, "ResourceTypeRegistrationRegionality", "csharp");
 @@clientName(ReRegisterSubscriptionMetadata.enabled, "IsEnabled", "csharp");
 @@clientName(RequestHeaderOptions, "ProviderRequestHeaderOptions", "csharp");
@@ -305,6 +320,11 @@ using Microsoft.ProviderHub;
 @@clientName(
   ResourceTypeRegistrationProperties.enableThirdPartyS2S,
   "IsThirdPartyS2SEnabled",
+  "csharp"
+);
+@@clientName(
+  ResourceTypeRegistrationProperties.superScaleEnabled,
+  "IsSuperScaleEnabled",
   "csharp"
 );
 @@clientName(
@@ -417,7 +437,6 @@ using Microsoft.ProviderHub;
 @@alternateType(ResourceTypeEndpoint.endpointUri, url, "csharp");
 @@alternateType(ResourceTypeExtension.endpointUri, url, "csharp");
 @@alternateType(SwaggerSpecification.swaggerSpecFolderUri, url, "csharp");
-@@alternateType(ResourceTypeEndpointBase.endpointUri, url, "csharp");
 @@clientName(
   ExtendedLocationOptions,
   "ProviderHubExtendedLocationOptions",
@@ -509,15 +528,8 @@ using Microsoft.ProviderHub;
 @@clientName(Skus, "NestedResourceTypeFirstSku", "csharp");
 @@clientName(SkuResourceOperations, "NestedResourceTypeSecondSku", "csharp");
 @@clientName(SkuResourceOperationGroup, "NestedResourceTypeThirdSku", "csharp");
-@@clientName(
-  NewRegionFrontloadRelease,
-  "RegistrationNewRegionFrontloadReleases",
-  "csharp"
-);
 
 @@alternateType(AuthorizedApplication.name, Azure.Core.uuid, "csharp");
-
-@@access(ManifestLevelPropertyBag, Access.public, "csharp");
 
 @@alternateType(SkuLocationInfo.location, Azure.Core.azureLocation, "csharp");
 
@@ -530,11 +542,6 @@ using Microsoft.ProviderHub;
 @@clientName(
   ProviderRegistrations.deleteResources,
   "DeleteResourcesResourceAction",
-  "csharp"
-);
-@@clientName(
-  ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest,
-  "GenerateManifestNewRegionFrontloadRelease",
   "csharp"
 );
 
@@ -671,11 +678,6 @@ using Microsoft.ProviderHub;
   TemplateDeploymentPolicy,
   "csharp"
 );
-@@alternateType(
-  ResourceTypeRegistrationPropertiesDstsConfiguration,
-  DstsConfiguration,
-  "csharp"
-);
 
 @@alternateType(
   LoggingRuleHiddenPropertyPaths,
@@ -743,23 +745,8 @@ using Microsoft.ProviderHub;
   TemplateDeploymentOptions,
   "csharp"
 );
-@@alternateType(
-  ResourceProviderManifestPropertiesDstsConfiguration,
-  DstsConfiguration,
-  "csharp"
-);
 @@alternateType(ResourceProviderEndpointFeaturesRule, FeaturesRule, "csharp");
-@@alternateType(
-  FanoutLinkedNotificationRuleDstsConfiguration,
-  DstsConfiguration,
-  "csharp"
-);
 @@alternateType(ResourceTypeEndpointFeaturesRule, FeaturesRule, "csharp");
-@@alternateType(
-  ResourceTypeEndpointDstsConfiguration,
-  DstsConfiguration,
-  "csharp"
-);
 @@alternateType(
   ResourceTypeExtensionOptionsResourceCreationBegin,
   ExtensionOptions,
@@ -905,19 +892,3 @@ using Microsoft.ProviderHub;
 );
 @@alternateType(SkuResourceProperties, ResourceTypeSku, "csharp");
 @@alternateType(SkuSettingCapacity, SkuCapacity, "csharp");
-@@alternateType(
-  FrontloadPayloadPropertiesOverrideManifestLevelFields,
-  ManifestLevelPropertyBag,
-  "csharp"
-);
-@@alternateType(
-  FrontloadPayloadPropertiesOverrideEndpointLevelFields,
-  ResourceTypeEndpointBase,
-  "csharp"
-);
-@@alternateType(ResourceTypeEndpointBaseFeaturesRule, FeaturesRule, "csharp");
-@@alternateType(
-  ResourceTypeEndpointBaseDstsConfiguration,
-  DstsConfiguration,
-  "csharp"
-);
