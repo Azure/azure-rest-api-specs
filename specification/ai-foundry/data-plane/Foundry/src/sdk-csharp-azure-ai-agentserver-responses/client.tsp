@@ -24,8 +24,7 @@ namespace Azure.AI.Projects {
   // ResponseHandler implementations.
   // ============================================================================
 
-  // --- Error and CreateResponse ---
-  @@usage(OpenAI.Error, Usage.input | Usage.output);
+  // --- CreateResponse ---
   // CreateResponse is alt-typed to the OpenAI SDK, but this usage still has to be
   // declared: it is what marks the request-side types reachable only through it
   // (session affinity, routing, moderation, ...) as inputs. Dropping it leaves
@@ -35,64 +34,35 @@ namespace Azure.AI.Projects {
   // --- API envelope types (server needs to construct these) ---
   @@usage(Azure.AI.Projects.DeleteResponseResult, Usage.input | Usage.output);
 
-  // --- OpenAI OutputItem subtypes (24 concrete types) ---
+  // --- OpenAI OutputItem subtypes that lead to locally emitted types ---
+  // The OutputItem base is alt-typed to OpenAI.Responses.ResponseItem, so these subtypes are
+  // not emitted themselves. The usage is still needed because it propagates to their property
+  // types, and some of those have no OpenAI SDK mapping below and are emitted locally (apply-patch
+  // operations, shell actions and outcomes, web-search actions, message and reasoning content,
+  // MCP list-tools entries, ...). Without Input usage those types would get internal constructors.
+  // OutputItem subtypes whose property types are all mapped to OpenAI (function call, MCP tool call,
+  // image generation, compaction, ...) are deliberately not listed: a usage on them changes nothing.
   @@usage(OpenAI.OutputItemApplyPatchToolCall, Usage.input | Usage.output);
-  @@usage(
-    OpenAI.OutputItemApplyPatchToolCallOutput,
-    Usage.input | Usage.output
-  );
   @@usage(OpenAI.OutputItemCodeInterpreterToolCall, Usage.input | Usage.output);
-  @@usage(OpenAI.OutputItemCompactionBody, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemComputerToolCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemFileSearchToolCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemFunctionShellCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemFunctionShellCallOutput, Usage.input | Usage.output);
-  @@usage(OpenAI.OutputItemFunctionToolCall, Usage.input | Usage.output);
-  @@usage(OpenAI.OutputItemImageGenToolCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemLocalShellToolCall, Usage.input | Usage.output);
-  @@usage(
-    OpenAI.OutputItemLocalShellToolCallOutput,
-    Usage.input | Usage.output
-  );
-  @@usage(OpenAI.OutputItemMcpApprovalRequest, Usage.input | Usage.output);
-  @@usage(
-    OpenAI.OutputItemMcpApprovalResponseResource,
-    Usage.input | Usage.output
-  );
   @@usage(OpenAI.OutputItemMcpListTools, Usage.input | Usage.output);
-  @@usage(OpenAI.OutputItemMcpToolCall, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemMessage, Usage.input | Usage.output);
-  @@usage(OpenAI.OutputItemOutputMessage, Usage.input | Usage.output);
-  @@access(OpenAI.OutputItemOutputMessage, Access.internal);
   @@usage(OpenAI.OutputItemReasoningItem, Usage.input | Usage.output);
   @@usage(OpenAI.OutputItemWebSearchToolCall, Usage.input | Usage.output);
   @@usage(OpenAI.FunctionAndCustomToolCallOutput, Usage.input | Usage.output);
-
-  // --- OutputContent subtypes (3 concrete types) ---
-  @@usage(OpenAI.OutputContentOutputTextContent, Usage.input | Usage.output);
-  @@usage(OpenAI.OutputContentReasoningTextContent, Usage.input | Usage.output);
-  @@usage(OpenAI.OutputContentRefusalContent, Usage.input | Usage.output);
-
-  // --- OutputMessageContent subtypes (internal — use MessageContent instead) ---
-  @@usage(
-    OpenAI.OutputMessageContentOutputTextContent,
-    Usage.input | Usage.output
-  );
-  @@access(OpenAI.OutputMessageContentOutputTextContent, Access.internal);
-  @@usage(
-    OpenAI.OutputMessageContentRefusalContent,
-    Usage.input | Usage.output
-  );
-  @@access(OpenAI.OutputMessageContentRefusalContent, Access.internal);
-  @@access(OpenAI.OutputMessageContent, Access.internal);
 
   // ---------------------------------------------------------------------
   // Shared-type ownership: consume concrete models from their owning
   // packages rather than re-emitting duplicates.
   //   OpenAI SDK                -> official Responses/Containers models
   //   Azure.AI.Extensions.OpenAI -> Azure-specific Foundry tool models
-  // Types with no upstream owner (local_shell / function_shell /
-  // compaction) remain AgentServer-emitted.
+  // Types with no upstream owner (for example apply_patch, shell, web-search
+  // actions, message content, moderation, content filter results and prompt
+  // cache diagnostics) remain AgentServer-emitted.
   // ---------------------------------------------------------------------
 
   @@alternateType(
@@ -141,27 +111,9 @@ namespace Azure.AI.Projects {
     "csharp"
   );
   @@alternateType(
-    OpenAI.OutputMessage,
-    {
-      identity: "OpenAI.Responses.MessageResponseItem",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
     OpenAI.Tool,
     {
       identity: "OpenAI.Responses.ResponseTool",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.Message,
-    {
-      identity: "OpenAI.Responses.MessageResponseItem",
       package: "OpenAI",
       minVersion: "2.12.0",
     },
