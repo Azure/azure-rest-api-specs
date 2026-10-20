@@ -238,6 +238,8 @@ model SmbSettings {
    * Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol cache
    */
   @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
   smbOplocks?: SmbOplocks;
 }
 
