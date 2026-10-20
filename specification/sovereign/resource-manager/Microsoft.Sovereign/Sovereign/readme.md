@@ -43,6 +43,12 @@ suppressions:
     from: sovereign.json
     where: $.definitions.SovereignViewPolicyInitiativeDetail.properties.assignmentParameters
     reason: Parameters vary based on the selected policy initiatives.
+  - code: GuidUsage
+    from: sovereign.json
+    where:
+      - $.definitions["SovereignViewSubscriptionScope"].properties.id.format
+      - $.definitions["Azure.Core.uuid"].format
+    reason: Subscription Ids are uuids.
 ```
 
 ---
