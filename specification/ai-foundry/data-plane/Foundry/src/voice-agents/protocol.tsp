@@ -492,7 +492,7 @@ union VoiceAgentDtmfCompletionMode {
   @doc("Complete at the requested fixed length. min_length and max_length must be equal; terminator must be omitted.")
   fixed_length: "fixed_length",
 
-  @doc("Complete only after the requested terminator. The terminator is excluded from the value, and reaching the length limit alone never succeeds.")
+  @doc("Complete only after the requested terminator. Length bounds are optional: omitted min_length is 1 and omitted max_length is 64. The terminator is excluded from the value, and reaching the length limit alone never succeeds.")
   terminator: "terminator",
 
   @doc("Complete after at least one digit and the inter-digit timeout when the accumulated length is valid. Reaching max_length alone does not complete. Terminator must be omitted. Total deadline expiry takes precedence over simultaneous silence completion.")
@@ -514,7 +514,20 @@ union VoiceAgentDtmfTerminator {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectDtmfStartArguments {
   ...Record<never>;
-  ...VoiceAgentCollectionStartArguments;
+  ...OmitProperties<
+    VoiceAgentCollectionStartArguments,
+    "min_length" | "max_length"
+  >;
+
+  @doc("Optional minimum ASCII digits. Defaults to 1 in terminator mode and 6 in other modes. Must not exceed max_length. Explicit bounds remain enforced; an empty entry is never accepted.")
+  @minValue(1)
+  @maxValue(64)
+  min_length?: int32;
+
+  @doc("Optional maximum ASCII digits. Defaults to 64 in terminator mode and 6 in other modes. Reaching this limit alone does not complete terminator or silence mode; the service always enforces the 64-digit hard limit.")
+  @minValue(1)
+  @maxValue(64)
+  max_length?: int32;
 
   @doc("The required completion policy, selected for this operation. Exactly one policy applies.")
   completion_mode: VoiceAgentDtmfCompletionMode;
