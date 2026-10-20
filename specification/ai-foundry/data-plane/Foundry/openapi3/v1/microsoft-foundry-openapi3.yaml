@@ -4391,13 +4391,6 @@ paths:
           schema:
             $ref: '#/components/schemas/TelephonyProvider'
           explode: false
-        - name: status
-          in: query
-          required: false
-          description: Filters bindings by lifecycle status.
-          schema:
-            $ref: '#/components/schemas/TelephonyBindingStatus'
-          explode: false
         - name: limit
           in: query
           required: false
@@ -47152,7 +47145,7 @@ components:
           description: Up to 64 exact canonical E.164 numbers or restricted, fully anchored E.164 patterns, each up to 256 characters. Patterns are matched against the entire normalized E.164 caller number; see SipAllowedCallingNumber for the supported syntax. Omission or an empty array indicates no caller-number restriction.
       allOf:
         - $ref: '#/components/schemas/CreateTelephonyBindingRequest'
-      description: The request to create an inbound SIP binding. New SIP bindings are active. The referenced SipInbound project connection uses connection authType CustomKeys. Its optional, case-insensitive metadata.sip_auth_type selects digest or ip_acl and defaults to digest when omitted. Digest requires credentials.keys.username and credentials.keys.password. IP ACL requires the credentials.keys.source_cidrs key as a comma-separated string; an empty value allows all source IP addresses. Extra credential keys do not select the SIP authentication type and are not rejected solely because they belong to the other mode. These connection settings are not binding fields.
+      description: 'The request to create an inbound SIP binding. There is no binding status field or lifecycle control. The referenced same-project SipInbound connection uses authType CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl; missing, null, blank, or empty-object values default to digest. Nonempty objects and other non-string values are invalid. Digest requires nonblank credentials.keys.username and credentials.keys.password. IP ACL requires the non-null credentials.keys.source_cidrs string: at most 4096 original characters before trimming or splitting, and at most 64 entries before deduplication. The empty string allows all source IPs; whitespace-only strings and empty entries are invalid. Entries are canonical IPv4 or native IPv6 addresses or CIDRs (prefixes 0-32 or 0-128); scoped addresses and IPv4-mapped IPv6, including hexadecimal forms, are unsupported. Extra credential keys do not select the mode and are not rejected solely because they belong to the other mode. Connection PATCH may omit/null credentials only when the effective mode is unchanged; supplied credentials must contain all mode-required keys. These settings are connection fields, not binding fields; metadata or binding CIDR fallbacks are not public inputs.'
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -47234,7 +47227,7 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SipOutbound. A SipOutbound connection uses connection authType CustomKeys. Its optional, case-insensitive metadata.sip_auth_type selects digest or ip_acl and defaults to digest when omitted. Digest requires credentials.keys.username and credentials.keys.password. IP ACL requires the credentials.keys.source_cidrs key as a comma-separated string; an empty value allows all source IP addresses. Extra credential keys do not select the SIP authentication type and are not rejected solely because they belong to the other mode. Optional metadata.enabled_codecs is an ordered, case-insensitive comma-separated list limited to g722, pcmu, pcma, opus, and amr-wb; omission or a blank value uses g722,pcmu,pcma without writing the default to connection metadata. The call job does not carry these settings. No inbound telephony binding is required.
+          description: 'The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SipOutbound. SipOutbound uses authType CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl; missing, null, blank, or empty-object values default to digest. Other non-string values are invalid. Digest requires nonblank credentials.keys.username and credentials.keys.password. IP ACL requires non-null credentials.keys.source_cidrs: a comma-separated string of at most 4096 original characters before trimming/splitting and 64 entries before deduplication. Empty string allows all source IPs; whitespace-only strings and empty entries are invalid. Use canonical IPv4 or native IPv6 addresses or CIDRs (prefixes 0-32 or 0-128); scoped and IPv4-mapped IPv6, including hexadecimal forms, are unsupported. No public metadata or binding CIDR fallback is supported. Extra credential keys from the other mode are allowed. Connection PATCH may omit/null credentials when the effective mode is unchanged; supplied credentials must contain all mode-required keys and persist by key-wise merge. Optional metadata.enabled_codecs is an ordered, case-insensitive comma-separated list of g722, pcmu, pcma, opus, or amr-wb, without duplicates or empty entries. Missing, null, blank, or empty-object values use g722,pcmu,pcma without writing the default. Other non-string values are invalid. Public metadata.custom_headers is an object of string values, not a JSON-encoded string. Missing, null, blank-string, or empty-object values mean no headers. At most 32 headers are allowed; names use token characters, start with X-, and are at most 256 characters. Under X-MS- only X-MS-Custom- is allowed. Names must be unique case-insensitively. Values are at most 4096 characters, contain no control characters, and are preserved exactly, including empty strings. Metadata PATCH merges top-level keys; null removes a key and a supplied header object replaces the whole object. AccountRP retains broad target storage validation; saving a connection is not an execution guarantee. At use time Agents requires target <dns-host>[:<port>], with port 1-65535 and no schemes, IP literals, whitespace, user info, paths, queries, fragments, or SIP parameters. An invalid target fails the Job/Attempt with actionable target-redacted diagnostics before MG origination, not ambiguous-provider reconciliation. DNS, TLS, network, and carrier failures remain execution failures with existing provider diagnostics. CustomKeys PATCH should explicitly include the current target to avoid the existing client-default overwrite. The call job does not carry connection settings. No inbound telephony binding is required.'
         source:
           $ref: '#/components/schemas/TelephonyOutboundSource'
           minLength: 1
@@ -83656,7 +83649,7 @@ components:
       type: string
       maxLength: 256
       pattern: ^(?:\+[1-9][0-9]{1,14}|\^\\\+(?:[1-9]|\[1-9\])(?:(?:[0-9]|\[[0-9](?:-[0-9])?\])(?:\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\})?)+\$)$
-      description: An exact canonical E.164 number or a restricted pattern for E.164 caller numbers, up to 256 characters. Patterns must start with ^ followed by an escaped plus sign, a nonzero first digit or [1-9], ASCII digit literals or ranges, bounded {n} or {n,m} quantifiers, and a final $. Other regex constructs, including Unicode digit shortcuts, groups, alternation, lookahead or lookbehind assertions, backreferences, and unbounded repetition, are not supported. The service validates that every number the pattern can match has 2 to 15 ASCII digits after the plus sign, starts with a nonzero digit, and matches the entire normalized E.164 caller number.
+      description: An exact canonical E.164 number or a restricted pattern for E.164 caller numbers, up to 256 characters after trimming. Patterns must start with ^ followed by an escaped plus sign, a nonzero first digit or [1-9], then ASCII digit literals or single-digit classes/ranges with optional bounded {n} or {n,m} quantifiers, and a final $. Each bound is 1 to 15. Other regex constructs, including Unicode digit shortcuts, groups, alternation, lookahead or lookbehind assertions, backreferences, and unbounded repetition, are not supported. The schema pattern is a lexical filter; the service additionally rejects descending digit ranges and reversed quantifier bounds and verifies that every possible match has 2 to 15 ASCII digits after the plus sign. Matching covers the entire normalized canonical E.164 caller number. Supply trimmed values. Previously accepted arbitrary regexes must be replaced; they are not silently rewritten.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -84414,7 +84407,6 @@ components:
         - id
         - provider
         - connection_name
-        - status
         - incoming_call_url
       properties:
         id:
@@ -84432,9 +84424,6 @@ components:
           type: string
           maxLength: 128
           description: The optional display label for the binding.
-        status:
-          $ref: '#/components/schemas/TelephonyBindingStatus'
-          description: The lifecycle status.
         incoming_call_url:
           type: string
           format: uri
@@ -84463,7 +84452,6 @@ components:
         - id
         - provider
         - connection_name
-        - status
         - incoming_call_url
         - etag
       properties:
@@ -84482,9 +84470,6 @@ components:
           type: string
           maxLength: 128
           description: The optional display label for the binding.
-        status:
-          $ref: '#/components/schemas/TelephonyBindingStatus'
-          description: The lifecycle status.
         incoming_call_url:
           type: string
           format: uri
@@ -84500,17 +84485,6 @@ components:
           twilio: '#/components/schemas/TwilioTelephonyBindingListItem'
           sip: '#/components/schemas/SipTelephonyBindingListItem'
       description: A telephony binding returned in a list, including its entity tag.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    TelephonyBindingStatus:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - active
-            - suspended
-      description: The lifecycle status of a telephony binding.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -84595,7 +84569,7 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SipOutbound. A SipOutbound connection uses connection authType CustomKeys. Its optional, case-insensitive metadata.sip_auth_type selects digest or ip_acl and defaults to digest when omitted. Digest requires credentials.keys.username and credentials.keys.password. IP ACL requires the credentials.keys.source_cidrs key as a comma-separated string; an empty value allows all source IP addresses. Extra credential keys do not select the SIP authentication type and are not rejected solely because they belong to the other mode. Optional metadata.enabled_codecs is an ordered, case-insensitive comma-separated list limited to g722, pcmu, pcma, opus, and amr-wb; omission or a blank value uses g722,pcmu,pcma without writing the default to connection metadata. The call job does not carry these settings. No inbound telephony binding is required.
+          description: 'The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SipOutbound. SipOutbound uses authType CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl; missing, null, blank, or empty-object values default to digest. Other non-string values are invalid. Digest requires nonblank credentials.keys.username and credentials.keys.password. IP ACL requires non-null credentials.keys.source_cidrs: a comma-separated string of at most 4096 original characters before trimming/splitting and 64 entries before deduplication. Empty string allows all source IPs; whitespace-only strings and empty entries are invalid. Use canonical IPv4 or native IPv6 addresses or CIDRs (prefixes 0-32 or 0-128); scoped and IPv4-mapped IPv6, including hexadecimal forms, are unsupported. No public metadata or binding CIDR fallback is supported. Extra credential keys from the other mode are allowed. Connection PATCH may omit/null credentials when the effective mode is unchanged; supplied credentials must contain all mode-required keys and persist by key-wise merge. Optional metadata.enabled_codecs is an ordered, case-insensitive comma-separated list of g722, pcmu, pcma, opus, or amr-wb, without duplicates or empty entries. Missing, null, blank, or empty-object values use g722,pcmu,pcma without writing the default. Other non-string values are invalid. Public metadata.custom_headers is an object of string values, not a JSON-encoded string. Missing, null, blank-string, or empty-object values mean no headers. At most 32 headers are allowed; names use token characters, start with X-, and are at most 256 characters. Under X-MS- only X-MS-Custom- is allowed. Names must be unique case-insensitively. Values are at most 4096 characters, contain no control characters, and are preserved exactly, including empty strings. Metadata PATCH merges top-level keys; null removes a key and a supplied header object replaces the whole object. AccountRP retains broad target storage validation; saving a connection is not an execution guarantee. At use time Agents requires target <dns-host>[:<port>], with port 1-65535 and no schemes, IP literals, whitespace, user info, paths, queries, fragments, or SIP parameters. An invalid target fails the Job/Attempt with actionable target-redacted diagnostics before MG origination, not ambiguous-provider reconciliation. DNS, TLS, network, and carrier failures remain execution failures with existing provider diagnostics. CustomKeys PATCH should explicitly include the current target to avoid the existing client-default overwrite. The call job does not carry connection settings. No inbound telephony binding is required.'
         source:
           $ref: '#/components/schemas/TelephonyOutboundSource'
           minLength: 1
@@ -86237,26 +86211,23 @@ components:
     UpdateTelephonyBindingRequest:
       type: object
       properties:
-        status:
-          $ref: '#/components/schemas/TelephonyBindingStatus'
-          description: The new lifecycle status.
         label:
           anyOf:
             - type: string
             - type: 'null'
           maxLength: 128
-          description: The replacement display label. Omit it to preserve the current value; use null to clear it.
+          description: The replacement display label. Omit to preserve it; null, empty, or whitespace-only clears it. Nonblank values are trimmed before enforcing the 128-character limit.
         connection_name:
           type: string
           minLength: 1
           maxLength: 256
-          description: The replacement Foundry connection name. This property is valid for Teams Phone extensibility and SIP bindings; a Twilio binding's connection is immutable.
+          description: The replacement Foundry connection name. Omit to preserve it; an explicitly supplied null, empty, or whitespace-only value is invalid. A SIP replacement must reference a same-project SipInbound connection. This property is valid for Teams Phone extensibility and SIP bindings; a Twilio binding's connection is immutable.
         phone_number:
           anyOf:
             - type: string
             - type: 'null'
           maxLength: 64
-          description: The replacement Teams Phone extensibility or SIP display phone number. Omit it to preserve the current value; use null to clear it. Not supported for Twilio.
+          description: The replacement Teams Phone extensibility or SIP display phone number, not a SIP routing key. Omit to preserve it; null, empty, or whitespace-only clears it. Nonblank values are trimmed before enforcing the 64-character limit. Not supported for Twilio.
         allowed_calling_numbers:
           type: array
           items:
