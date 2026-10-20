@@ -390,7 +390,7 @@
         "tags": [
           "ScheduledActionOperationStatus"
         ],
-        "description": "Gets the status of the specified recurring bulk action operation.",
+        "description": "Gets the status of the specified recurring bulk action operation from its Azure-AsyncOperation URL. HTTP 200 means the status was retrieved, not that the operation succeeded; inspect status for NotStarted, Running, Succeeded, Failed, or Canceled. Per-resource operations include failures only. The separate Location URL returns 202 with no body while pending, then the final operation result or 204 for successful no-content actions. Follow polling URLs unchanged, including their query parameters.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1902,7 +1902,7 @@
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Creates or updates a recurring bulk action.",
+        "description": "Creates or replaces a recurring bulk action. Returns 201 for a new resource or 200 for a replacement, with an Azure-AsyncOperation polling URL. A replacement can report provisioningState Updating while existing occurrences are reconciled. Poll until the operation reaches a terminal state, then GET the resource. Creating the resource can complete immediately and does not wait for its scheduled operations to run.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1933,13 +1933,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ScheduledAction' update operation succeeded",
+            "description": "The replacement request was accepted. Poll Azure-AsyncOperation until the operation reaches a terminal state. The resource can report Updating while schedule reconciliation is pending.",
             "schema": {
               "$ref": "#/definitions/ScheduledAction"
             }
           },
           "201": {
-            "description": "Resource 'ScheduledAction' create operation succeeded",
+            "description": "The recurring bulk action was created. Poll Azure-AsyncOperation for operation status. Creation can complete immediately with provisioningState Succeeded; this does not mean its occurrences have run.",
             "schema": {
               "$ref": "#/definitions/ScheduledAction"
             },
@@ -1980,7 +1980,7 @@
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Updates the specified recurring bulk action.",
+        "description": "Updates the specified recurring bulk action asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final result. The final 200 response contains the updated resource, not a synchronous scheduling response.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2060,7 +2060,7 @@
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Deletes the specified recurring bulk action.",
+        "description": "Deletes the specified recurring bulk action asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status; the Location polling URL returns 204 No Content when deletion completes. Deleting a resource that does not exist returns 204 No Content immediately.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2127,7 +2127,7 @@
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Adds resources to the specified recurring bulk action.",
+        "description": "Adds resources to the specified recurring bulk action asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final 200 result. Completion covers resource reconciliation, not execution of the scheduled virtual machine operations.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2158,7 +2158,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The resources were added successfully.",
+            "description": "The final result from the Location polling URL. Only failed or canceled resources appear in resourcesStatuses; an empty array means all targeted resources succeeded. A 200 result can contain per-resource failures; check Azure-AsyncOperation for the overall operation status.",
             "schema": {
               "$ref": "#/definitions/ResourceOperationResponse"
             }
@@ -2212,7 +2212,7 @@
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Cancels the next occurrence of the specified recurring bulk action.",
+        "description": "Requests cancellation of the next occurrence of the specified recurring bulk action asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final 200 result. Cancellation is best effort for operations that might already have been activated.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2243,7 +2243,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The next occurrence was canceled successfully.",
+            "description": "The final cancellation result from the Location polling URL. Only failed or canceled operation entries appear in resourcesStatuses with status Failed; successfully canceled resources are omitted. A 200 result can contain per-resource failures; check Azure-AsyncOperation for the overall operation status.",
             "schema": {
               "$ref": "#/definitions/ResourceOperationResponse"
             }
@@ -2297,7 +2297,7 @@
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Removes resources from the specified recurring bulk action.",
+        "description": "Removes resources from the specified recurring bulk action asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final 200 result.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2328,7 +2328,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The resources were removed successfully.",
+            "description": "The final result from the Location polling URL. Only failed or canceled resources appear in resourcesStatuses; an empty array means all targeted resources succeeded. A 200 result can contain per-resource failures; check Azure-AsyncOperation for the overall operation status.",
             "schema": {
               "$ref": "#/definitions/ResourceOperationResponse"
             }
@@ -2379,7 +2379,7 @@
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Disables the specified recurring bulk action so future occurrences do not run.",
+        "description": "Disables the specified recurring bulk action asynchronously and requests best-effort cancellation of active occurrences. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status; the Location polling URL returns 204 No Content on successful completion. Already activated virtual machine operations might not be canceled.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2443,7 +2443,7 @@
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Enables the specified recurring bulk action so new occurrences run.",
+        "description": "Enables the specified recurring bulk action asynchronously so new occurrences can be scheduled. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status; the Location polling URL returns 204 No Content on successful completion. Completion does not mean the scheduled virtual machine operations have run.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2618,7 +2618,7 @@
         "tags": [
           "Occurrences"
         ],
-        "description": "Cancels the specified occurrence for the specified resource IDs.",
+        "description": "Requests cancellation of the specified occurrence for the specified resource IDs asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final 200 result. Cancellation is best effort for operations that might already have been activated.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2657,7 +2657,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The occurrence cancellation completed successfully.",
+            "description": "The final cancellation result from the Location polling URL. Only failed or canceled operation entries appear in resourcesStatuses with status Failed; successfully canceled resources are omitted. A 200 result can contain per-resource failures; check Azure-AsyncOperation for the overall operation status.",
             "schema": {
               "$ref": "#/definitions/ResourceOperationResponse"
             }
@@ -2711,7 +2711,7 @@
         "tags": [
           "Occurrences"
         ],
-        "description": "Delays the specified occurrence for the specified resource IDs.",
+        "description": "Delays the specified occurrence for the specified resource IDs asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final 200 result. Completion means the requested rescheduling was processed, not that the virtual machine operations have executed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2750,7 +2750,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The occurrence delay completed successfully.",
+            "description": "The final delay result from the Location polling URL. Only failed or canceled operation entries appear in resourcesStatuses with status Failed; successfully delayed resources are omitted. A 200 result can contain per-resource failures; check Azure-AsyncOperation for the overall operation status.",
             "schema": {
               "$ref": "#/definitions/ResourceOperationResponse"
             }
@@ -2865,7 +2865,7 @@
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Updates resource-specific settings for the specified recurring bulk action.",
+        "description": "Updates resource-specific notification settings synchronously without rescheduling occurrences. Returns 200 with per-resource validation results; this operation is not a long-running scheduling operation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2896,7 +2896,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource settings were updated successfully.",
+            "description": "The resource-settings update completed. The response includes per-resource results and any validation failures.",
             "schema": {
               "$ref": "#/definitions/ResourceOperationResponse"
             }
@@ -2977,7 +2977,7 @@
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Runs the specified recurring bulk action immediately.",
+        "description": "Creates a manual occurrence of the specified recurring bulk action for immediate execution through a long-running operation. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final 200 occurrence. The operation can complete immediately after creating the occurrence, before its resources are scheduled or executed. Read the occurrence and its resources to track execution.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2999,7 +2999,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The manual occurrence was started successfully.",
+            "description": "The newly created occurrence returned by the Location polling URL. Its provisioningState can be Created; completion of this operation does not mean the virtual machine operations have run.",
             "schema": {
               "$ref": "#/definitions/Occurrence"
             }
@@ -5777,7 +5777,7 @@
         },
         "resultSummary": {
           "$ref": "#/definitions/OccurrenceResultSummary",
-          "description": "Read-only. The result summary after the occurrence reaches a final state.",
+          "description": "Read-only. The total resource count and terminal results available so far. Resources that have not reached a terminal state are omitted from the summary statuses.",
           "readOnly": true
         },
         "provisioningState": {
@@ -6692,7 +6692,7 @@
         },
         "resourcesStatuses": {
           "type": "array",
-          "description": "The operation result for each resource.",
+          "description": "Per-resource results. For asynchronous attach, detach, cancel, and delay operations, only failed or canceled resources are returned, with status Failed; success is implicit from totalResources minus the number of returned failures. Synchronous resource-settings updates can also return Succeeded entries.",
           "items": {
             "$ref": "#/definitions/ResourceStatus"
           },
@@ -7343,7 +7343,7 @@
     },
     "ScheduledActionsProvisioningState": {
       "type": "string",
-      "description": "The provisioning state of the recurring bulk action.",
+      "description": "The provisioning state of the latest create, update, or delete operation on the recurring bulk action. Other actions have their own operation status and do not change this value.",
       "enum": [
         "Succeeded",
         "Failed",

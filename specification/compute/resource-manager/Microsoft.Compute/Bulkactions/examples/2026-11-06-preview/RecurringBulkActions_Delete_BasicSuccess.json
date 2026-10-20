@@ -1,6 +1,6 @@
 {
   "title": "Delete a recurring bulk action",
-  "description": "Deletes a recurring bulk action and returns asynchronous operation headers.",
+  "description": "Deletes a recurring bulk action asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for status; the Location polling URL returns 204 No Content when deletion completes. An initial 204 response is also valid when the resource does not exist.",
   "operationId": "RecurringBulkActions_Delete",
   "parameters": {
     "api-version": "2026-11-06-preview",

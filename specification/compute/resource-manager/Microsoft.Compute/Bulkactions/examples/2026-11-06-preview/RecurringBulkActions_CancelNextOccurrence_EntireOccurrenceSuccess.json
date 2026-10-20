@@ -1,6 +1,6 @@
 {
   "title": "02 - Cancel all operations in the next recurring bulk action occurrence",
-  "description": "Cancels the operations for all resources in the next occurrence. The empty resourceIds array targets every resource in the occurrence; this occurrence contains two virtual machines.",
+  "description": "Cancels the operations for all resources in the next occurrence. The empty resourceIds array targets every resource in the occurrence; this occurrence contains two virtual machines. The initial response is 202 Accepted with no body; the 200 response shows the final result from the Location polling URL. An empty resourcesStatuses array means all targeted resources were successfully canceled.",
   "operationId": "RecurringBulkActions_CancelNextOccurrence",
   "parameters": {
     "api-version": "2026-11-06-preview",

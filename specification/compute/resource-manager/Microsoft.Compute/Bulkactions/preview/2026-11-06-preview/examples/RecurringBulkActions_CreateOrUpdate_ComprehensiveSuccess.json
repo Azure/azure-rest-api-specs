@@ -1,6 +1,6 @@
 {
   "title": "02 - Create a recurring bulk action with comprehensive settings",
-  "description": "Creates a recurring bulk action that runs on the first and the fifteenth of each month, with calendar filters, notifications, and tags.",
+  "description": "Creates or replaces a recurring bulk action that runs on the first and the fifteenth of each month, with calendar filters, notifications, and tags. The initial 201 response creates a new resource and can already report Succeeded. The initial 200 response replaces an existing resource and shows Updating while schedule reconciliation is pending. Poll Azure-AsyncOperation for completion, then GET the resource; neither initial response means the scheduled virtual machine operations have run.",
   "operationId": "RecurringBulkActions_CreateOrUpdate",
   "parameters": {
     "api-version": "2026-11-06-preview",
@@ -45,6 +45,9 @@
   },
   "responses": {
     "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-11-06-preview"
+      },
       "body": {
         "properties": {
           "resourceType": "VirtualMachine",
@@ -74,7 +77,7 @@
             }
           ],
           "disabled": false,
-          "provisioningState": "Succeeded"
+          "provisioningState": "Updating"
         },
         "tags": {
           "environment": "production"

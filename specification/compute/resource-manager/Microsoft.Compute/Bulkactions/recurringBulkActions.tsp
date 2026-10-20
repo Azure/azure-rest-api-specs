@@ -226,7 +226,7 @@ union ResourceOperationStatus {
   Versions.`2026-08-06-preview`,
   "RecurringScheduledActionsProvisioningState"
 )
-@doc("The provisioning state of the recurring bulk action.")
+@doc("The provisioning state of the latest create, update, or delete operation on the recurring bulk action. Other actions have their own operation status and do not change this value.")
 @lroStatus
 union ScheduledActionsProvisioningState {
   ResourceProvisioningState,
@@ -502,7 +502,7 @@ model ResourceOperationResponse {
   @doc("The number of resources included in the operation.")
   totalResources: int32;
 
-  @doc("The operation result for each resource.")
+  @doc("Per-resource results. For asynchronous attach, detach, cancel, and delay operations, only failed or canceled resources are returned, with status Failed; success is implicit from totalResources minus the number of returned failures. Synchronous resource-settings updates can also return Succeeded entries.")
   @Azure.ResourceManager.identifiers(#["resourceId"])
   resourcesStatuses: Array<ResourceStatus>;
 }
@@ -643,7 +643,7 @@ model OccurrenceProperties {
   @visibility(Lifecycle.Read)
   scheduledTime: utcDateTime;
 
-  @doc("Read-only. The result summary after the occurrence reaches a final state.")
+  @doc("Read-only. The total resource count and terminal results available so far. Resources that have not reached a terminal state are omitted from the summary statuses.")
   @visibility(Lifecycle.Read)
   resultSummary: OccurrenceResultSummary;
 
@@ -748,6 +748,26 @@ model OccurrenceExtensionResource
 // ------------------ Recurring bulk action operations ------------------
 
 @added(Versions.`2026-07-06-preview`)
+@doc("The replacement request was accepted. Poll Azure-AsyncOperation until the operation reaches a terminal state. The resource can report Updating while schedule reconciliation is pending.")
+model ScheduledActionReplaceResponse {
+  ...ArmResourceUpdatedResponse<ScheduledAction>;
+  ...ArmAsyncOperationHeader<FinalResult = ScheduledAction>;
+}
+
+@@added(
+  ScheduledActionReplaceResponse.azureAsyncOperation,
+  Versions.`2026-11-06-preview`
+);
+
+@added(Versions.`2026-07-06-preview`)
+@doc("The recurring bulk action was created. Poll Azure-AsyncOperation for operation status. Creation can complete immediately with provisioningState Succeeded; this does not mean its occurrences have run.")
+model ScheduledActionCreateResponse is ArmResourceCreatedResponse<
+  ScheduledAction,
+  ArmAsyncOperationHeader<FinalResult = ScheduledAction> &
+    Azure.Core.Foundations.RetryAfterHeader
+>;
+
+@added(Versions.`2026-07-06-preview`)
 @renamedFrom(Versions.`2026-11-06-preview`, "ScheduledActions")
 @armResourceOperations
 interface RecurringBulkActions {
@@ -755,11 +775,15 @@ interface RecurringBulkActions {
   @errorsDoc("The request failed. The response contains error details.")
   get is ArmResourceRead<ScheduledAction>;
 
-  @doc("Creates or updates a recurring bulk action.")
+  @doc("Creates or replaces a recurring bulk action. Returns 201 for a new resource or 200 for a replacement, with an Azure-AsyncOperation polling URL. A replacement can report provisioningState Updating while existing occurrences are reconciled. Poll until the operation reaches a terminal state, then GET the resource. Creating the resource can complete immediately and does not wait for its scheduled operations to run.")
   @errorsDoc("The request failed. The response contains error details.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ScheduledAction>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ScheduledAction,
+    Response = ScheduledActionReplaceResponse | ScheduledActionCreateResponse
+  >;
 
-  @doc("Updates the specified recurring bulk action.")
+  @doc("Updates the specified recurring bulk action asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final result. The final 200 response contains the updated resource, not a synchronous scheduling response.")
+  @returnsDoc("The update completed. The updated resource is returned by the Location polling URL.")
   @errorsDoc("The request failed. The response contains error details.")
   update is ArmCustomPatchAsync<
     ScheduledAction,
@@ -770,7 +794,7 @@ interface RecurringBulkActions {
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @doc("Deletes the specified recurring bulk action.")
+  @doc("Deletes the specified recurring bulk action asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status; the Location polling URL returns 204 No Content when deletion completes. Deleting a resource that does not exist returns 204 No Content immediately.")
   @errorsDoc("The request failed. The response contains error details.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ScheduledAction,
@@ -797,8 +821,8 @@ interface RecurringBulkActions {
     | ErrorResponse;
 
   /** Attach resources to the recurring bulk action so they are included in future occurrences. */
-  @doc("Adds resources to the specified recurring bulk action.")
-  @returnsDoc("The resources were added successfully.")
+  @doc("Adds resources to the specified recurring bulk action asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final 200 result. Completion covers resource reconciliation, not execution of the scheduled virtual machine operations.")
+  @returnsDoc("The final result from the Location polling URL. Only failed or canceled resources appear in resourcesStatuses; an empty array means all targeted resources succeeded. A 200 result can contain per-resource failures; check Azure-AsyncOperation for the overall operation status.")
   @errorsDoc("The request failed. The response contains error details.")
   attachResources is ArmResourceActionAsync<
     ScheduledAction,
@@ -809,8 +833,8 @@ interface RecurringBulkActions {
   >;
 
   /** Detach resources from the recurring bulk action so they are excluded from future occurrences. */
-  @doc("Removes resources from the specified recurring bulk action.")
-  @returnsDoc("The resources were removed successfully.")
+  @doc("Removes resources from the specified recurring bulk action asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final 200 result.")
+  @returnsDoc("The final result from the Location polling URL. Only failed or canceled resources appear in resourcesStatuses; an empty array means all targeted resources succeeded. A 200 result can contain per-resource failures; check Azure-AsyncOperation for the overall operation status.")
   @errorsDoc("The request failed. The response contains error details.")
   detachResources is ArmResourceActionAsync<
     ScheduledAction,
@@ -820,8 +844,8 @@ interface RecurringBulkActions {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @doc("Updates resource-specific settings for the specified recurring bulk action.")
-  @returnsDoc("The resource settings were updated successfully.")
+  @doc("Updates resource-specific notification settings synchronously without rescheduling occurrences. Returns 200 with per-resource validation results; this operation is not a long-running scheduling operation.")
+  @returnsDoc("The resource-settings update completed. The response includes per-resource results and any validation failures.")
   @errorsDoc("The request failed. The response contains error details.")
   patchResources is ArmResourceActionSync<
     ScheduledAction,
@@ -830,7 +854,7 @@ interface RecurringBulkActions {
   >;
 
   /** Disable the recurring bulk action so its future occurrences do not run. */
-  @doc("Disables the specified recurring bulk action so future occurrences do not run.")
+  @doc("Disables the specified recurring bulk action asynchronously and requests best-effort cancellation of active occurrences. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status; the Location polling URL returns 204 No Content on successful completion. Already activated virtual machine operations might not be canceled.")
   @errorsDoc("The request failed. The response contains error details.")
   disable is ArmResourceActionNoResponseContentAsync<
     ScheduledAction,
@@ -839,7 +863,7 @@ interface RecurringBulkActions {
   >;
 
   /** Enable a previously disabled recurring bulk action so its future occurrences run. */
-  @doc("Enables the specified recurring bulk action so new occurrences run.")
+  @doc("Enables the specified recurring bulk action asynchronously so new occurrences can be scheduled. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status; the Location polling URL returns 204 No Content on successful completion. Completion does not mean the scheduled virtual machine operations have run.")
   @errorsDoc("The request failed. The response contains error details.")
   enable is ArmResourceActionNoResponseContentAsync<
     ScheduledAction,
@@ -848,8 +872,8 @@ interface RecurringBulkActions {
   >;
 
   /** Cancel the next scheduled occurrence of the recurring bulk action. */
-  @doc("Cancels the next occurrence of the specified recurring bulk action.")
-  @returnsDoc("The next occurrence was canceled successfully.")
+  @doc("Requests cancellation of the next occurrence of the specified recurring bulk action asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final 200 result. Cancellation is best effort for operations that might already have been activated.")
+  @returnsDoc("The final cancellation result from the Location polling URL. Only failed or canceled operation entries appear in resourcesStatuses with status Failed; successfully canceled resources are omitted. A 200 result can contain per-resource failures; check Azure-AsyncOperation for the overall operation status.")
   @errorsDoc("The request failed. The response contains error details.")
   cancelNextOccurrence is ArmResourceActionAsync<
     ScheduledAction,
@@ -860,8 +884,8 @@ interface RecurringBulkActions {
   >;
 
   /** Trigger a manual occurrence of the recurring bulk action immediately, outside its normal schedule. */
-  @doc("Runs the specified recurring bulk action immediately.")
-  @returnsDoc("The manual occurrence was started successfully.")
+  @doc("Creates a manual occurrence of the specified recurring bulk action for immediate execution through a long-running operation. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final 200 occurrence. The operation can complete immediately after creating the occurrence, before its resources are scheduled or executed. Read the occurrence and its resources to track execution.")
+  @returnsDoc("The newly created occurrence returned by the Location polling URL. Its provisioningState can be Created; completion of this operation does not mean the virtual machine operations have run.")
   @errorsDoc("The request failed. The response contains error details.")
   triggerManualOccurrence is ArmResourceActionAsync<
     ScheduledAction,
@@ -885,7 +909,7 @@ interface RecurringBulkActionExtension {
 @renamedFrom(Versions.`2026-11-06-preview`, "ScheduledActionOperationStatus")
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface RecurringBulkActionOperationStatus {
-  @doc("Gets the status of the specified recurring bulk action operation.")
+  @doc("Gets the status of the specified recurring bulk action operation from its Azure-AsyncOperation URL. HTTP 200 means the status was retrieved, not that the operation succeeded; inspect status for NotStarted, Running, Succeeded, Failed, or Canceled. Per-resource operations include failures only. The separate Location URL returns 202 with no body while pending, then the final operation result or 204 for successful no-content actions. Follow polling URLs unchanged, including their query parameters.")
   @get
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/scheduledActionsOperationStatuses/{operationId}")
   @errorsDoc("The request failed. The response contains error details.")
@@ -932,8 +956,8 @@ interface Occurrences {
     | ErrorResponse;
 
   /** Cancel the occurrence so its pending operations do not run. */
-  @doc("Cancels the specified occurrence for the specified resource IDs.")
-  @returnsDoc("The occurrence cancellation completed successfully.")
+  @doc("Requests cancellation of the specified occurrence for the specified resource IDs asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final 200 result. Cancellation is best effort for operations that might already have been activated.")
+  @returnsDoc("The final cancellation result from the Location polling URL. Only failed or canceled operation entries appear in resourcesStatuses with status Failed; successfully canceled resources are omitted. A 200 result can contain per-resource failures; check Azure-AsyncOperation for the overall operation status.")
   @errorsDoc("The request failed. The response contains error details.")
   cancel is ArmResourceActionAsync<
     Occurrence,
@@ -944,8 +968,8 @@ interface Occurrences {
   >;
 
   /** Delay the occurrence to a later time. */
-  @doc("Delays the specified occurrence for the specified resource IDs.")
-  @returnsDoc("The occurrence delay completed successfully.")
+  @doc("Delays the specified occurrence for the specified resource IDs asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final 200 result. Completion means the requested rescheduling was processed, not that the virtual machine operations have executed.")
+  @returnsDoc("The final delay result from the Location polling URL. Only failed or canceled operation entries appear in resourcesStatuses with status Failed; successfully delayed resources are omitted. A 200 result can contain per-resource failures; check Azure-AsyncOperation for the overall operation status.")
   @errorsDoc("The request failed. The response contains error details.")
   delay is ArmResourceActionAsync<
     Occurrence,

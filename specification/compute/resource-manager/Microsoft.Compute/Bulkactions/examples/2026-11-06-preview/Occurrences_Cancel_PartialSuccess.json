@@ -1,6 +1,6 @@
 {
   "title": "03 - Response with partial results when canceling resources in a recurring bulk action occurrence",
-  "description": "Cancels one pending virtual machine operation and reports that the other operation already ran and cannot be canceled.",
+  "description": "Cancels one pending virtual machine operation and reports that the other operation already ran and cannot be canceled. The initial response is 202 Accepted with no body; the 200 response shows the final result from the Location polling URL, including only the failed resource. The Azure-AsyncOperation status is Failed despite the final result's HTTP 200.",
   "operationId": "Occurrences_Cancel",
   "parameters": {
     "api-version": "2026-11-06-preview",

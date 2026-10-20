@@ -1,6 +1,6 @@
 {
   "title": "Disable a recurring bulk action",
-  "description": "Disables a recurring bulk action so that no future occurrences run.  If the recurring bulk action has a scheduled occurrence it will be cancelled with best effort.",
+  "description": "Disables a recurring bulk action and requests best-effort cancellation of active occurrences. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for status; the Location polling URL returns 204 No Content on successful completion. Virtual machine operations that have already been activated might not be canceled.",
   "operationId": "RecurringBulkActions_Disable",
   "parameters": {
     "api-version": "2026-11-06-preview",

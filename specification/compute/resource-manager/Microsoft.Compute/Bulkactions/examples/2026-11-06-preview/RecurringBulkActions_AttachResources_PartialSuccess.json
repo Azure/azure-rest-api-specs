@@ -1,6 +1,6 @@
 {
   "title": "03 - Response with partial results when attaching resources to a recurring bulk action",
-  "description": "Attaches one resource to a recurring bulk action and rejects a second resource from a different subscription.",
+  "description": "Attaches one resource to a recurring bulk action and rejects a second resource from a different subscription. The initial response is 202 Accepted with no body; the 200 response shows the final result from the Location polling URL, including only the failed resource. The Azure-AsyncOperation status is Failed despite the final result's HTTP 200.",
   "operationId": "RecurringBulkActions_AttachResources",
   "parameters": {
     "api-version": "2026-11-06-preview",

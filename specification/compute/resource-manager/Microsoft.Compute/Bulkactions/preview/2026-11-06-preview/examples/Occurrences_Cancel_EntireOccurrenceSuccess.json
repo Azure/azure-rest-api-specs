@@ -1,6 +1,6 @@
 {
   "title": "02 - Cancel all operations in a recurring bulk action occurrence",
-  "description": "Cancels the pending operations for every resource in the occurrence. An empty resourceIds array targets all resources in the occurrence.",
+  "description": "Cancels the pending operations for every resource in the occurrence. An empty resourceIds array targets all resources in the occurrence. The initial response is 202 Accepted with no body; the 200 response shows the final result from the Location polling URL. An empty resourcesStatuses array means all targeted resources were successfully canceled.",
   "operationId": "Occurrences_Cancel",
   "parameters": {
     "api-version": "2026-11-06-preview",
