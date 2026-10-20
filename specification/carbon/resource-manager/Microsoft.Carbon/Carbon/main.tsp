@@ -629,7 +629,6 @@ model ResourceGroupCarbonEmissionItemDetailData extends CarbonEmissionData {
 model CarbonEmissionDataListResult {
   @doc("The CarbonEmissionData items on this page")
   @Azure.ResourceManager.identifiers(#[])
-  @pageItems
   value: CarbonEmissionData[];
 
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is a pagination token, not a secret"
@@ -658,8 +657,6 @@ model CarbonEmissionDataAvailableDateRange {
 interface CarbonService {
   @doc("API for Carbon Emissions Reports")
   @post
-  @list
-  @armResourceCollectionAction
   @route("/providers/Microsoft.Carbon/carbonEmissionReports")
   queryCarbonEmissionReports(
     ...ApiVersionParameter,
@@ -679,8 +676,6 @@ interface CarbonService {
   @doc("API for Carbon Emissions Reports scoped to a billing account.")
   @added(Versions.v2026_05_01_preview)
   @post
-  @list
-  @armResourceCollectionAction
   @route("/{+scope}/providers/Microsoft.Carbon/carbonEmissionReports")
   queryCarbonEmissionReportsByBillingAccount(
     ...ApiVersionParameter,
