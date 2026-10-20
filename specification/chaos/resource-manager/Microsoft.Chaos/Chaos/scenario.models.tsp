@@ -268,7 +268,7 @@ model ScenarioAction {
 
   /**
    * Action-specific target matching criteria evaluated during execution. When provided,
-   * the collection must contain either `logicalZone` and `region`, or `physicalZone`.
+   * the collection must contain either `logicalZone` and `location`, or `physicalZone`.
    * Matcher names must be unique, the two modes cannot be combined, and the service
    * enforces the cross-item combination at runtime.
    */
@@ -313,7 +313,7 @@ model ScenarioAction {
 @added(Microsoft.Chaos.Versions.v2026_11_01)
 model ScenarioActionMatcher {
   /**
-   * The matcher name, such as `logicalZone`, `physicalZone`, or `region`.
+   * The matcher name, such as `logicalZone`, `physicalZone`, or `location`.
    */
   name: ScenarioActionMatcherName;
 
@@ -340,9 +340,9 @@ enum ScenarioActionMatcherName {
   PhysicalZone: "physicalZone",
 
   /**
-   * Match targets by Azure region.
+   * Match targets by Azure location.
    */
-  Region: "region",
+  Location: "location",
 }
 
 /**

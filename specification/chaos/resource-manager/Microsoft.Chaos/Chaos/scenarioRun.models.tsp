@@ -509,12 +509,16 @@ union ScenarioRunTargetState {
   Succeeded: "Succeeded",
 
   /**
-   * The action does not apply to the target.
+   * Evaluation determined that the action cannot apply because the target lacks required
+   * properties or capabilities, or does not satisfy the action criteria. For example,
+   * a SQL server without failover configured.
    */
   NotApplicable: "NotApplicable",
 
   /**
-   * The action was skipped for the target.
+   * The action applies, but execution intentionally made no change because the target is
+   * already in the desired state or the change would not be safely recoverable. For example,
+   * a virtual machine that is already shut down.
    */
   Skipped: "Skipped",
 
