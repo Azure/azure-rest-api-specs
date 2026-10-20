@@ -39,12 +39,24 @@ input-file:
   - preview/2026-01-15-preview/managednetworkfabric.json
 suppressions:
   - code: ArmResourcePropertiesBag
-    reason: Suppressing errors to conform to the existing published API
+    reason: >-
+      InternetGateway.properties.type is an existing GatewayType field in the
+      published 2025-07-15 stable API. The InternetGateway and
+      InternetGatewayProperties definitions are unchanged in this preview.
+      Although properties.type repeats the ARM envelope property name, removing
+      or renaming it would introduce an additional breaking change for clients
+      adopting this version. Retained to preserve the published contract.
     from: managednetworkfabric.json
     where: $.definitions["InternetGateway"]
   - code: ArmResourcePropertiesBag
     from: managednetworkfabric.json
-    reason: Suppressing errors to conform to the existing published API
+    reason: >-
+      NetworkFabricSku.properties.type is an existing read-only FabricSkuType
+      field in the published 2025-07-15 stable API. The NetworkFabricSku and
+      NetworkFabricSkuProperties definitions are unchanged in this preview.
+      Although properties.type repeats the ARM envelope property name, removing
+      or renaming it would change the published response contract and client
+      models. Retained to preserve the published contract.
     where: $.definitions["NetworkFabricSku"]
 ```
 
