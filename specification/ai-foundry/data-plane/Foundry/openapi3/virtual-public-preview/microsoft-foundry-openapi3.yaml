@@ -8319,15 +8319,15 @@ paths:
     get:
       operationId: EvaluationRules_list
       summary: List evaluation rules
-      description: Returns the evaluation rules configured for the project, optionally filtered by action type, agent name, or enabled state.
+      description: Returns existing event rules by default. Use actionType=all for the combined collection, or trace_evaluation or dataset_evaluation for scheduled evaluations of that type. Agent and enabled filters still apply, and results remain paginated.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: actionType
           in: query
           required: false
-          description: Filter by the type of evaluation rule.
+          description: Select an action type, or all to include existing event rules and supported schedules. When omitted, return only existing event-rule types. trace_evaluation and dataset_evaluation select their scheduled evaluations explicitly; existing action filters retain their behavior.
           schema:
-            $ref: '#/components/schemas/EvaluationRuleActionType'
+            $ref: '#/components/schemas/EvaluationRuleActionTypeFilter'
           explode: false
         - name: agentName
           in: query
@@ -47739,6 +47739,35 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
+    AgentTraceSource:
+      type: object
+      required:
+        - type
+        - agent_name
+      properties:
+        type:
+          type: string
+          enum:
+            - agent_traces
+          description: Identifies the agent-trace input configuration.
+        agent_name:
+          type: string
+          minLength: 1
+          description: Name of the agent whose traces are selected.
+        agent_version:
+          type: string
+          description: Optional exact agent version used to filter traces.
+        lookback_hours:
+          type: integer
+          format: int32
+          minimum: 1
+          description: Trace-query lookback in hours. When omitted, use the scheduler's existing behavior.
+        max_traces:
+          type: integer
+          format: int32
+          minimum: 1
+          description: Maximum number of traces sampled for an evaluation run.
+      description: Selects an agent's traces using the existing scheduled trace-query behavior.
     AgentVersionObject:
       type: object
       required:
@@ -50706,6 +50735,29 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOutput'
       description: Dataset output for a data generation job.
+    DatasetEvaluationRuleAction:
+      type: object
+      required:
+        - type
+        - eval_id
+        - source
+      properties:
+        type:
+          type: string
+          enum:
+            - dataset_evaluation
+        eval_id:
+          type: string
+          description: Identifier of the evaluation used to score the dataset.
+        source:
+          $ref: '#/components/schemas/DatasetSource'
+          description: Dataset inputs selected for each scheduled occurrence.
+        target:
+          $ref: '#/components/schemas/FoundryEvaluationTarget'
+          description: Optional existing evaluation target used to generate responses before scoring.
+      allOf:
+        - $ref: '#/components/schemas/EvaluationRuleAction'
+      description: Configures a scheduled evaluation of dataset inputs.
     DatasetEvaluationSuiteJobSource:
       type: object
       required:
@@ -50768,6 +50820,27 @@ components:
           type: string
           description: Dataset version.
       description: Reference to a versioned Foundry Dataset.
+    DatasetSource:
+      type: object
+      required:
+        - type
+        - dataset_name
+        - dataset_version
+      properties:
+        type:
+          type: string
+          enum:
+            - dataset
+          description: Identifies a versioned dataset input.
+        dataset_name:
+          type: string
+          minLength: 1
+          description: Name of the dataset containing evaluation inputs.
+        dataset_version:
+          type: string
+          minLength: 1
+          description: Exact immutable dataset version; mutable aliases such as latest are not supported.
+      description: References an exact version of a dataset for scheduled evaluation.
     DatasetType:
       anyOf:
         - type: string
@@ -52298,6 +52371,9 @@ components:
         eventType:
           $ref: '#/components/schemas/EvaluationRuleEventType'
           description: Event type that the evaluation rule applies to.
+        schedule:
+          $ref: '#/components/schemas/Trigger'
+          description: Timing for time_trigger rules. Required for time_trigger and forbidden for other events. Reuses existing Cron, Recurrence, and OneTime triggers.
         enabled:
           type: boolean
           description: Indicates whether the evaluation rule is enabled. Default is true.
@@ -52320,6 +52396,8 @@ components:
         propertyName: type
         mapping:
           continuousEvaluation: '#/components/schemas/ContinuousEvaluationRuleAction'
+          trace_evaluation: '#/components/schemas/TraceEvaluationRuleAction'
+          dataset_evaluation: '#/components/schemas/DatasetEvaluationRuleAction'
           humanEvaluation: '#/components/schemas/HumanEvaluationRuleAction'
           humanEvaluationPreview: '#/components/schemas/HumanEvaluationPreviewRuleAction'
       description: Evaluation action model.
@@ -52331,7 +52409,16 @@ components:
             - continuousEvaluation
             - humanEvaluation
             - humanEvaluationPreview
+            - trace_evaluation
+            - dataset_evaluation
       description: Type of the evaluation action.
+    EvaluationRuleActionTypeFilter:
+      anyOf:
+        - $ref: '#/components/schemas/EvaluationRuleActionType'
+        - type: string
+          enum:
+            - all
+      description: Selects action types for List without changing the existing unfiltered results.
     EvaluationRuleEventType:
       anyOf:
         - type: string
@@ -52339,6 +52426,7 @@ components:
           enum:
             - responseCompleted
             - manual
+            - time_trigger
       description: Type of the evaluation rule event.
     EvaluationRuleFilter:
       type: object
@@ -89734,6 +89822,26 @@ components:
           $ref: '#/components/schemas/ToolboxVersionObject'
           description: The latest version of the toolbox.
       description: The versions associated with a toolbox.
+    TraceEvaluationRuleAction:
+      type: object
+      required:
+        - type
+        - eval_id
+        - source
+      properties:
+        type:
+          type: string
+          enum:
+            - trace_evaluation
+        eval_id:
+          type: string
+          description: Identifier of the evaluation used to score the selected traces.
+        source:
+          $ref: '#/components/schemas/AgentTraceSource'
+          description: Agent selection and query settings for each scheduled occurrence.
+      allOf:
+        - $ref: '#/components/schemas/EvaluationRuleAction'
+      description: Configures a scheduled evaluation of observed agent traces.
     TraceIdTraceSource:
       type: object
       required:
