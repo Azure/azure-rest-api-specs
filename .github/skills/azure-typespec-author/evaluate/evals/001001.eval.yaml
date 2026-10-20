@@ -1,0 +1,125 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "versioning"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 001001-version-spread-property-trigger
+    tags:
+      suite: "versioning"
+      mode: "trigger"
+    prompt: "I added `...Azure.ResourceManager.ManagedServiceIdentityProperty;` which updates all my existing API versions and introduces a breaking change. I want to introduce the properties of the spread model '...ManagedServiceIdentityProperty' in API version 2025-05-04-preview only."
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/001-share-version-new-feature/employee.tsp
+          dest: employee.tsp
+        - src: ../fixtures/001-share-version-new-feature/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/001-share-version-new-feature/readme.md
+          dest: readme.md
+        - src: ../fixtures/001-share-version-new-feature/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/001-share-version-new-feature/tspconfig.yaml
+          dest: tspconfig.yaml
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 001001-version-spread-property-forced
+    tags:
+      suite: "versioning"
+      mode: "forced"
+    prompt: "@azure-typespec-author I added `...Azure.ResourceManager.ManagedServiceIdentityProperty;` which updates all my existing API versions and introduces a breaking change. I want to introduce the properties of the spread model '...ManagedServiceIdentityProperty' in API version 2025-05-04-preview only."
+    environment: *shared_environment
+    rubric: &shared_rubric
+      - The ManagedServiceIdentityProperty spread is retained and Employee.identity is introduced only in API version 2025-05-04-preview.
+      - Earlier API versions, including 2021-11-01, do not expose the identity property.
+      - The solution uses valid TypeSpec versioning rather than suppressing validation and contains no unrelated edits.
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: "2025-05-04-preview"
+          path: "main.tsp"
+      - &file_matches_managed_identity
+        type: "file-matches"
+        name: "file-matches-managed-identity"
+        config:
+          pattern: '\.\.\.ManagedServiceIdentityProperty;'
+          path: "employee.tsp"
+      - &file_matches_identity_added
+        type: "file-matches"
+        name: "file-matches-identity-added"
+        config:
+          pattern: '@@added\(Employee\.identity, (Microsoft\.Widget\.)?Versions\.(v2025_05_04_preview|`2025-05-04-preview`)\);'
+          path: "employee.tsp"
+      - &prompt
+        type: "prompt"
+        config:
+          prompt: 'Verify the identity property is cleanly version-scoped to 2025-05-04-preview only, with changes limited to this task. Using `#suppress` to bypass TypeSpec or ARM validation is NOT an acceptable solution: if any suppression is present, fail regardless of how the agent justifies it as "appropriate". If a compiled swagger is present, also confirm the Employee identity is a valid ARM envelope property that appears only in the 2025-05-04-preview spec and is absent from the 2021-11-01 stable spec.'
+          model: "gpt-5.6-sol"
+          threshold: 0.77
+          scoring: "scale_1_10"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 001001-version-spread-property-no-skill
+    tags:
+      suite: "versioning"
+      mode: "no-skill"
+    prompt: "I added `...Azure.ResourceManager.ManagedServiceIdentityProperty;` which updates all my existing API versions and introduces a breaking change. I want to introduce the properties of the spread model '...ManagedServiceIdentityProperty' in API version 2025-05-04-preview only."
+    environment: *shared_environment
+    rubric: *shared_rubric
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - *file_matches
+      - *file_matches_managed_identity
+      - *file_matches_identity_added
+      - *prompt
+    constraints:
+      max_turns: 5
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.125
+    prompt: 0.125
+    run-command: 0.125
+    skill-invocation: 0.125
+    file-matches: 0.5
+  threshold: 0.97

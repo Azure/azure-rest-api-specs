@@ -49,6 +49,7 @@ import {
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
   typeSpecSuppressionsTsg,
+  specChangePoliciesTsg,
 } from "./tsgs.ts";
 
 import fs from "node:fs/promises";
@@ -114,6 +115,12 @@ const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
 const MAX_IMPACT_ASSESSMENT_BYTES = 16 * 1024 * 1024;
 
 const CHECK_METADATA: CheckMetadata[] = [
+  {
+    precedence: 0,
+    name: "Spec Change Policies",
+    suppressionLabels: [],
+    troubleshootingGuide: specChangePoliciesTsg,
+  },
   {
     precedence: 0,
     name: "TypeSpec Requirement (resource-manager)",
