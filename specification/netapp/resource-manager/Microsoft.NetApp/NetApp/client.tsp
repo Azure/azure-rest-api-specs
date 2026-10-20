@@ -105,7 +105,7 @@ using Microsoft.NetApp;
 
 @@clientName(
   Microsoft.NetApp.ReplicationSchedule._10minutely,
-  exact("\"10Minutely\""),
+  exact("10Minutely"),
   "javascript"
 );
 

@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoNetAppRg",
+    "externalClusterName": "contoso-external-cluster",
+    "peerId": "peerA",
+    "api-version": "2026-08-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contoso-external-cluster/clusterPeers/peerA",
+        "name": "peerA",
+        "type": "Microsoft.NetApp/externalClusters/clusterPeers",
+        "properties": {
+          "anfClusterName": "contoso-anf-cluster",
+          "ontapClusterName": "contoso-ontap-cluster",
+          "ontapVersion": "9.15.1",
+          "status": "Active",
+          "hybridReplicationResourceIds": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/hybridReplications/contosoHybridReplication"
+          ],
+          "command": "cluster peer create -peer-addrs 10.0.2.100,10.0.2.101",
+          "networkInterfaces": [
+            {
+              "networkInterfaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.Network/networkInterfaces/contosoNic1",
+              "peerIpAddress": "10.0.2.100"
+            },
+            {
+              "networkInterfaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.Network/networkInterfaces/contosoNic2",
+              "peerIpAddress": "10.0.2.101"
+            }
+          ],
+          "clusterPeerSubnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.Network/virtualNetworks/contosoVnet/subnets/contosoSubnet"
+        }
+      }
+    }
+  },
+  "operationId": "ClusterPeers_Get",
+  "title": "ClusterPeers_Get"
+}
