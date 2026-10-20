@@ -1,4 +1,6 @@
 import "../common/models.tsp";
+import "../openai/evaluations/common.tsp";
+import "../schedules/models.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
@@ -23,6 +25,21 @@ union EvaluationRuleActionType {
 
   @doc("Human evaluation preview.")
   humanEvaluationPreview: "humanEvaluationPreview",
+
+  /** Evaluate agent traces using a configured schedule. */
+  traceEvaluation: "trace_evaluation",
+
+  /** Evaluate dataset inputs using a configured schedule. */
+  datasetEvaluation: "dataset_evaluation",
+}
+
+/** Selects action types for List without changing the existing unfiltered results. */
+union EvaluationRuleActionTypeFilter {
+  /** Return rules matching the specified action type. */
+  actionType: EvaluationRuleActionType,
+
+  /** Return existing event rules and supported scheduled evaluations. This selector is not a rule action. */
+  all: "all",
 }
 
 @doc("Evaluation action model.")
@@ -46,6 +63,74 @@ model ContinuousEvaluationRuleAction extends EvaluationRuleAction {
   @minValueExclusive(0)
   @maxValue(100)
   samplingRate?: float64 = 100;
+}
+
+/** Configures a scheduled evaluation of observed agent traces. */
+model TraceEvaluationRuleAction extends EvaluationRuleAction {
+  type: EvaluationRuleActionType.traceEvaluation;
+
+  /** Identifier of the evaluation used to score the selected traces. */
+  @encodedName("application/json", "eval_id")
+  evalId: string;
+
+  /** Agent selection and query settings for each scheduled occurrence. */
+  source: AgentTraceSource;
+}
+
+/** Configures a scheduled evaluation of dataset inputs. */
+model DatasetEvaluationRuleAction extends EvaluationRuleAction {
+  type: EvaluationRuleActionType.datasetEvaluation;
+
+  /** Identifier of the evaluation used to score the dataset. */
+  @encodedName("application/json", "eval_id")
+  evalId: string;
+
+  /** Dataset inputs selected for each scheduled occurrence. */
+  source: DatasetSource;
+
+  /** Optional existing evaluation target used to generate responses before scoring. */
+  target?: FoundryEvaluationTarget;
+}
+
+/** Selects an agent's traces using the existing scheduled trace-query behavior. */
+model AgentTraceSource {
+  /** Identifies the agent-trace input configuration. */
+  type: "agent_traces";
+
+  /** Name of the agent whose traces are selected. */
+  @encodedName("application/json", "agent_name")
+  @minLength(1)
+  agentName: string;
+
+  /** Optional exact agent version used to filter traces. */
+  @encodedName("application/json", "agent_version")
+  agentVersion?: string;
+
+  /** Trace-query lookback in hours. When omitted, use the scheduler's existing behavior. */
+  @encodedName("application/json", "lookback_hours")
+  @minValue(1)
+  lookbackHours?: int32;
+
+  /** Maximum number of traces sampled for an evaluation run. */
+  @encodedName("application/json", "max_traces")
+  @minValue(1)
+  maxTraces?: int32;
+}
+
+/** References an exact version of a dataset for scheduled evaluation. */
+model DatasetSource {
+  /** Identifies a versioned dataset input. */
+  type: "dataset";
+
+  /** Name of the dataset containing evaluation inputs. */
+  @encodedName("application/json", "dataset_name")
+  @minLength(1)
+  datasetName: string;
+
+  /** Exact immutable dataset version; mutable aliases such as latest are not supported. */
+  @encodedName("application/json", "dataset_version")
+  @minLength(1)
+  datasetVersion: string;
 }
 
 @doc("Evaluation rule action for human evaluation.")
@@ -84,6 +169,9 @@ union EvaluationRuleEventType {
 
   @doc("Manual trigger.")
   manual: "manual",
+
+  /** Execute the evaluation using the rule's configured schedule. */
+  timeTrigger: "time_trigger",
 }
 
 @doc("Evaluation rule model.")
@@ -109,6 +197,9 @@ model EvaluationRule {
 
   @doc("Event type that the evaluation rule applies to.")
   eventType: EvaluationRuleEventType;
+
+  /** Timing for time_trigger rules. Required for time_trigger and forbidden for other events. Reuses existing Cron, Recurrence, and OneTime triggers. */
+  schedule?: Trigger;
 
   @doc("Indicates whether the evaluation rule is enabled. Default is true.")
   enabled: boolean;
