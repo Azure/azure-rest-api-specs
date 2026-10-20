@@ -471,6 +471,18 @@ union TelephonyProvider {
   sip: "sip",
 }
 
+@doc("The lifecycle status of a telephony binding.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyBindingStatus {
+  string,
+
+  @doc("The binding accepts new inbound calls.")
+  active: "active",
+
+  @doc("The binding remains configured but rejects new inbound calls.")
+  suspended: "suspended",
+}
+
 @doc("The kind of telephony transfer destination. Known values are stable; additional values may be added over time.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyTransferDestinationKind {
@@ -618,7 +630,7 @@ model CreateTwilioTelephonyBindingRequest
   ...TwilioTelephonyBindingProperties;
 }
 
-@doc("The request to create an inbound SIP binding. There is no binding status field or lifecycle control. The referenced same-project SipInbound connection uses authType CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl; missing, null, blank, or empty-object values default to digest. Nonempty objects and other non-string values are invalid. Digest requires nonblank credentials.keys.username and credentials.keys.password. IP ACL requires the non-null credentials.keys.source_cidrs string: at most 4096 original characters before trimming or splitting, and at most 64 entries before deduplication. The empty string allows all source IPs; whitespace-only strings and empty entries are invalid. Entries are canonical IPv4 or native IPv6 addresses or CIDRs (prefixes 0-32 or 0-128); scoped addresses and IPv4-mapped IPv6, including hexadecimal forms, are unsupported. Extra credential keys do not select the mode and are not rejected solely because they belong to the other mode. Connection PATCH may omit/null credentials only when the effective mode is unchanged; supplied credentials must contain all mode-required keys. These settings are connection fields, not binding fields; metadata or binding CIDR fallbacks are not public inputs.")
+@doc("The request to create an inbound SIP binding. New SIP bindings are active. The referenced same-project SipInbound connection uses authType CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl; missing, null, blank, or empty-object values default to digest. Nonempty objects and other non-string values are invalid. Digest requires nonblank credentials.keys.username and credentials.keys.password. IP ACL requires the non-null credentials.keys.source_cidrs string: at most 4096 original characters before trimming or splitting, and at most 64 entries before deduplication. The empty string allows all source IPs; whitespace-only strings and empty entries are invalid. Entries are canonical IPv4 or native IPv6 addresses or CIDRs (prefixes 0-32 or 0-128); scoped addresses and IPv4-mapped IPv6, including hexadecimal forms, are unsupported. Extra credential keys do not select the mode and are not rejected solely because they belong to the other mode. Connection PATCH may omit/null credentials only when the effective mode is unchanged; supplied credentials must contain all mode-required keys. These settings are connection fields, not binding fields; metadata or binding CIDR fallbacks are not public inputs.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("CreateSipTelephonyBindingContent", "csharp")
 model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
@@ -629,6 +641,9 @@ model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("UpdateTelephonyBindingContent", "csharp")
 model UpdateTelephonyBindingRequest {
+  @doc("The new lifecycle status.")
+  status?: TelephonyBindingStatus;
+
   @doc("The replacement display label. Omit to preserve it; null, empty, or whitespace-only clears it. Nonblank values are trimmed before enforcing the 128-character limit.")
   @maxLength(128)
   label?: string | null;
@@ -664,6 +679,9 @@ model TelephonyBindingProperties {
   @doc("The optional display label for the binding.")
   @maxLength(128)
   label?: string;
+
+  @doc("The lifecycle status.")
+  status: TelephonyBindingStatus;
 
   @doc("The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP.")
   incoming_call_url: url;
