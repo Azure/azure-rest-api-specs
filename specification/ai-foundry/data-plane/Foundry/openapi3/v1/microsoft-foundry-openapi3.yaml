@@ -49560,7 +49560,6 @@ components:
       type: object
       required:
         - sources
-        - model
         - evaluator_name
       properties:
         sources:
@@ -49570,13 +49569,13 @@ components:
           description: Source materials for generation. Safety generation requires a nonempty prompt source for the objective and at least one agent or trace source for application context. An arbitrary dataset cannot replace safety application context. Ordinary generation keeps its existing supported sources.
         category:
           $ref: '#/components/schemas/EvaluatorGenerationCategory'
-          description: Generation intent. Omission preserves the existing quality path. Explicitly select safety for safety generation and regeneration; this does not change the execution profile of an existing incompatible evaluator. Safety output uses Boolean scoring, permissible classifications, and two named violation metrics.
+          description: Generation intent. Omission preserves the existing quality path. Explicitly select safety for safety generation and regeneration. Safety output uses Boolean scoring, permissible classifications, and two named violation metrics.
           x-ms-foundry-meta:
             required_previews:
               - Evaluations=V1Preview
         model:
           type: string
-          description: The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.
+          description: The caller's model for quality rubric generation (e.g., 'gpt-4o'). Required by the service when category is quality or omitted. Safety generation and regeneration use centrally managed red teaming simulation capacity, ignore this field when supplied, and do not fall back to caller capacity. Safety rubric scoring separately uses centrally managed red teaming evaluator capacity.
         evaluator_name:
           type: string
           minLength: 1

@@ -419,7 +419,7 @@ model EvaluatorGenerationInputs {
   @doc("Source materials for generation. Safety generation requires a nonempty prompt source for the objective and at least one agent or trace source for application context. An arbitrary dataset cannot replace safety application context. Ordinary generation keeps its existing supported sources.")
   sources: EvaluatorGenerationJobSource[];
 
-  @doc("Generation intent. Omission preserves the existing quality path. Explicitly select safety for safety generation and regeneration; this does not change the execution profile of an existing incompatible evaluator. Safety output uses Boolean scoring, permissible classifications, and two named violation metrics.")
+  @doc("Generation intent. Omission preserves the existing quality path. Explicitly select safety for safety generation and regeneration. Safety output uses Boolean scoring, permissible classifications, and two named violation metrics.")
   @added(Versions.v1)
   @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
   category?: EvaluatorGenerationCategory;
