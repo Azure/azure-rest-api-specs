@@ -398,7 +398,15 @@ model NetworkFabricPatchProperties {
 @doc("Network Fabric updatable properties.")
 model NetworkFabricPatchableProperties {
   @doc("Number of compute racks associated to Network Fabric.")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "rackCount")
   @maxValue(8)
+  @minValue(1)
+  rackCountDeprecated?: int32;
+
+  @doc("Number of compute racks associated to Network Fabric.")
+  @added(Versions.v2026_01_15_preview)
+  @maxValue(16)
   @minValue(1)
   rackCount?: int32;
 
