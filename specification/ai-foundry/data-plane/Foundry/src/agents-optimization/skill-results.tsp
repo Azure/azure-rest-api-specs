@@ -174,81 +174,6 @@ union AgentOptimizationSkillExecutionStepStatus {
   cancelled: "cancelled",
 }
 
-/** Measured facts for one step. Unknown values are omitted, never zero-filled. Trace counts refer to distinct conversations, not telemetry rows. */
-model AgentOptimizationSkillExecutionStepDetails {
-  @doc("Distinct references discovered from the target agent.")
-  @minValue(0)
-  discovered_skills_count?: int32;
-
-  @doc("Distinct explicit references; these may overlap discovered references.")
-  @minValue(0)
-  additional_skills_count?: int32;
-
-  @doc("Distinct references in the deduplicated effective baseline inventory.")
-  @minValue(0)
-  effective_skills_count?: int32;
-
-  @doc("Selected trace conversations.")
-  @minValue(0)
-  selected_traces_count?: int32;
-
-  @doc("Selected trace conversations with at least one matched human annotation.")
-  @minValue(0)
-  traces_with_human_annotations_count?: int32;
-
-  @doc("Selected trace conversations with at least one matched evaluation result.")
-  @minValue(0)
-  traces_with_evaluation_results_count?: int32;
-
-  @doc("Selected trace conversations with either feedback kind; overlap counts once.")
-  @minValue(0)
-  traces_with_feedback_count?: int32;
-
-  @doc("Trace conversations retained after evidence preparation.")
-  @minValue(0)
-  prepared_traces_count?: int32;
-
-  @doc("Trace conversations excluded at this step.")
-  @minValue(0)
-  excluded_traces_count?: int32;
-
-  @doc("Trace conversations classified as successful.")
-  @minValue(0)
-  good_traces_count?: int32;
-
-  @doc("Trace conversations classified as unsuccessful.")
-  @minValue(0)
-  bad_traces_count?: int32;
-
-  @doc("Grounded learnings retained by this step.")
-  @minValue(0)
-  learnings_count?: int32;
-
-  @doc("New skills selected by change planning.")
-  @minValue(0)
-  planned_creates_count?: int32;
-
-  @doc("Existing skills selected for updates.")
-  @minValue(0)
-  planned_updates_count?: int32;
-
-  @doc("Artifacts passing required package validation, not all optional checks.")
-  @minValue(0)
-  validated_skills_count?: int32;
-
-  @doc("Artifacts rejected by validation.")
-  @minValue(0)
-  rejected_skills_count?: int32;
-
-  @doc("Validated artifacts byte-identical to their exact baselines.")
-  @minValue(0)
-  no_change_skills_count?: int32;
-
-  @doc("Versions confirmed created, not planned or uncertain writes.")
-  @minValue(0)
-  published_skills_count?: int32;
-}
-
 /** Latest recorded state of one logical step in the persisted execution snapshot. */
 model AgentOptimizationSkillExecutionStep {
   @doc("Logical step name, unique within the snapshot.")
@@ -261,8 +186,8 @@ model AgentOptimizationSkillExecutionStep {
   @maxLength(1024)
   summary?: string;
 
-  @doc("Measured details for this step. Omitted when unavailable.")
-  step_details?: AgentOptimizationSkillExecutionStepDetails;
+  @doc("Step-specific JSON key/value details, with arbitrary JSON values rather than a fixed property schema. Omitted when unavailable. Never include sensitive trace or model content.")
+  step_details?: Record<unknown>;
 
   @doc("Safe failure or cancellation code, cleared when a retry starts or succeeds.")
   error_code?: string;
