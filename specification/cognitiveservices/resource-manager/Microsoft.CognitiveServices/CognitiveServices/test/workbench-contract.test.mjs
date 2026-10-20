@@ -398,6 +398,9 @@ test("C# review customizations preserve wire names and other language scopes", a
     ["ClusterComputeProperties", "subnetArmId", "armResourceIdentifier"],
     ["ManagedComputeDeploymentInfo", "deploymentId", "armResourceIdentifier"],
     ["ManagedComputeDeploymentInfo", "projectId", "armResourceIdentifier"],
+    ["Identity", "tenantId", "uuid"],
+    ["Identity", "principalId", "uuid"],
+    ["Usage", "type", "armResourceType"],
   ];
   for (const language of ["csharp", "java", "python", "ts", "go"]) {
     const context = await createSdkContext(
