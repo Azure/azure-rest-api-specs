@@ -53,88 +53,6 @@ alias ArcDeploymentCreateLroHeaders = ArmCombinedLroHeaders<
   ArcDeployment
 >;
 
-/**
- * The content used to create or replace an Arc deployment.
- */
-@added(Versions.v2026_11_15_preview)
-model ArcDeploymentCreateOrUpdateContent {
-  /**
-   * Properties used to create or replace an Arc deployment.
-   */
-  properties: ArcDeploymentCreateOrUpdateProperties;
-
-  /**
-   * The Arc deployment SKU. Only the SKU name is required for Arc deployments.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc defines its own SKU envelope for deployment resources."
-  sku: ArcDeploymentSku;
-}
-
-/**
- * Properties used to create or replace an Arc deployment.
- */
-@added(Versions.v2026_11_15_preview)
-model ArcDeploymentCreateOrUpdateProperties {
-  /**
-   * Model asset reference. Required on creation and immutable after creation.
-   */
-  `model`: ArcDeploymentModelReference;
-
-  /**
-   * Full Azure resource ID of the Foundry inference extension on the target Arc-enabled Kubernetes cluster. Required on creation and immutable after creation.
-   */
-  extensionId: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.KubernetesConfiguration/extensions";
-    }
-  ]>;
-
-  /**
-   * Optional deployment template identifier for advanced vLLM tuning. Allowed only when runtime is vllm.
-   * Example: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}
-   */
-  deploymentTemplate?: string;
-
-  /**
-   * Physical replica count on the Arc cluster.
-   */
-  @minValue(1)
-  @maxValue(100)
-  replicas: int32;
-
-  /**
-   * Per-replica Kubernetes resource requests and limits.
-   */
-  resources: ArcDeploymentKubernetesResources;
-
-  /**
-   * Kubernetes node selector key-value map used to schedule pods onto nodes with matching labels.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<nodeSelector> type is used because Kubernetes node label keys are user-defined."
-  nodeSelector?: Record<string>;
-
-  /**
-   * The deployment state.
-   */
-  deploymentState?: DeploymentState;
-
-  /**
-   * The name of RAI policy.
-   */
-  raiPolicyName?: string;
-}
-
-/**
- * Model asset reference. Required on creation and immutable after creation.
- */
-@added(Versions.v2026_11_15_preview)
-model ArcDeploymentModelReference {
-  /**
-   * AzureML Registry model asset URI.
-   */
-  assetId: string;
-}
-
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
@@ -150,25 +68,8 @@ interface ArcDeployments {
   /**
    * Creates or updates an Arc deployment associated with the Cognitive Services account.
    */
-  @added(Versions.v2026_07_15_preview)
-  @removed(Versions.v2026_09_01)
-  @added(Versions.v2026_09_15_preview)
-  @removed(Versions.v2026_11_01)
-  @renamedFrom(Versions.v2026_11_15_preview, "createOrUpdate")
-  @sharedRoute
-  createOrUpdateLegacy is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ArcDeployment,
-    LroHeaders = ArcDeploymentCreateLroHeaders
-  >;
-
-  /**
-   * Creates or updates an Arc deployment associated with the Cognitive Services account.
-   */
-  @added(Versions.v2026_11_15_preview)
-  @sharedRoute
-  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
-    ArcDeployment,
-    Request = ArcDeploymentCreateOrUpdateContent,
     LroHeaders = ArcDeploymentCreateLroHeaders
   >;
 
@@ -246,13 +147,37 @@ model ArcDeploymentProperties {
   /**
    * Inference runtime. Required on creation and immutable after creation.
    */
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @renamedFrom(Versions.v2026_11_15_preview, "runtime")
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  legacyRuntime: ArcDeploymentRuntime;
+
+  /**
+   * Read-only. Inference runtime resolved from the model asset.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
   runtime: ArcDeploymentRuntime;
 
   /**
    * Compute type for the deployment. Required on creation and immutable after creation.
    */
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @renamedFrom(Versions.v2026_11_15_preview, "compute")
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  legacyCompute: ArcDeploymentComputeType;
+
+  /**
+   * Read-only. Compute type resolved from the model asset.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
   compute: ArcDeploymentComputeType;
 
   /**
@@ -378,17 +303,42 @@ model ArcDeploymentModel {
   /**
    * Deployment model format.
    */
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @renamedFrom(Versions.v2026_11_15_preview, "format")
+  legacyFormat: string;
+
+  /**
+   * Read-only. Deployment model format resolved from the model asset.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
   format: string;
 
   /**
    * Deployment model name.
    */
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @renamedFrom(Versions.v2026_11_15_preview, "name")
+  legacyName: string;
+
+  /**
+   * Read-only. Deployment model name resolved from the model asset.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
   name: string;
 
   /**
-   * Deployment model version.
+   * Read-only. Deployment model version resolved from the model asset.
    */
   @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
   version: string;
 
   /**
@@ -668,10 +618,6 @@ model ArcDeploymentVllmParameters {
 );
 @@doc(
   ArcDeployments.createOrUpdate::parameters.resource,
-  "The Arc deployment properties."
-);
-@@doc(
-  ArcDeployments.createOrUpdateLegacy::parameters.resource,
   "The Arc deployment properties."
 );
 @@doc(

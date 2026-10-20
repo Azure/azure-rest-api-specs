@@ -195,7 +195,6 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: nodeSelector and capabilities are dynamic string maps with keys that are not predefined by the service. nodeSelector holds user-defined Kubernetes node label keys used for pod scheduling; capabilities is a read-only map of model/runtime capability flags resolved at runtime. Both are backed by a Dictionary of string, matching the existing ManagedComputeDeploymentProperties.capabilities pattern and the arm-no-record suppressions in the TypeSpec source.
     where:
-      - $.definitions.ArcDeploymentCreateOrUpdateProperties.properties.nodeSelector
       - $.definitions.ArcDeploymentProperties.properties.nodeSelector
       - $.definitions.ArcDeploymentProperties.properties.capabilities
       - $.definitions.ArcDeploymentUpdateProperties.properties.nodeSelector
