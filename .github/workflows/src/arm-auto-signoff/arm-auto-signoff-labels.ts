@@ -1,6 +1,8 @@
 /**
  * ARM auto-signoff label names.
  */
+export const ARM_INITIAL_REVIEW_REQUESTED_LABEL = "ARMInitialReviewRequested";
+
 export const ArmAutoSignoffLabel = Object.freeze({
   ArmSignedOff: "ARMSignedOff",
   ArmManualSignoffRequired: "ARMManualSignoffRequired",

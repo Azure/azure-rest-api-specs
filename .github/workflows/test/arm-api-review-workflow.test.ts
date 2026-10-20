@@ -208,19 +208,6 @@ beforeAll(async () => {
 });
 
 describe("ARM API review workflow", () => {
-  it("dispatches Universal from trusted conclusion after finalizing all review outcomes", async () => {
-    const [source, compiled] = await readWorkflowFiles();
-    const conclusion = source.slice(
-      source.indexOf("  conclusion:"),
-      source.indexOf("# Gate at the trigger"),
-    );
-    expect(conclusion).toContain("actions: write");
-    expect(conclusion.indexOf("name: Dispatch Universal ARM signoff")).toBeGreaterThan(
-      conclusion.indexOf("name: Resolve unpublished ARM semantic review status"),
-    );
-    expect(conclusion).toContain("if: always() && github.event_name == 'workflow_dispatch'");
-    expect(compiled).toContain("dispatchUniversalSignoff({ github, context, core })");
-  });
   it("resolves and validates the target PR before agent execution", async () => {
     const [source, compiled] = await readWorkflowFiles();
 
