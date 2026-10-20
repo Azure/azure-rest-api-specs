@@ -21,9 +21,9 @@ using OpenAPI;
     description: "Agent Invocations (WebSocket)",
   },
   #{
-    name: "Agent Conversation Engine",
+    name: "Agent Voice Bridge",
     parent: "Agents Root",
-    description: "Hosted conversation-engine connections for Voice Live",
+    description: "Hosted Voice Live Bridge connections",
   },
   #{ name: "Agent Sessions", parent: "Agents Root" },
   #{ name: "Agent Session Files", parent: "Agents Root" },

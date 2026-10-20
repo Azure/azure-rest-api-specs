@@ -305,8 +305,8 @@ union AgentEndpointProtocol {
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
   invocations_ws: "invocations_ws",
 
-  @doc("Text conversation protocol for a hosted conversational engine used by Voice Live. Declare version `1.0.0`; audio transport remains outside this protocol.")
-  conversation_engine: "conversation_engine",
+  @doc("Text conversation protocol for a hosted agent used by Voice Live Bridge. Declare version `1.0.0`; audio transport remains outside this protocol.")
+  voice_bridge: "voice_bridge",
 }
 
 union AgentKind {

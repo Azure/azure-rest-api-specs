@@ -5,19 +5,19 @@ using TypeSpec.Http;
 namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "A WebSocket upgrade is not a standard resource operation."
-@tag("Agent Conversation Engine")
-interface AgentConversationEngine {
+@tag("Agent Voice Bridge")
+interface AgentVoiceBridge {
   /**
-   * Establishes a WebSocket connection to a hosted conversational engine. The client must send an HTTP GET
-   * with `Upgrade: websocket` headers. The target hosted agent must declare `conversation_engine` version
+   * Establishes a WebSocket connection to a hosted voice bridge. The client must send an HTTP GET
+   * with `Upgrade: websocket` headers. The target hosted agent must declare `voice_bridge` version
    * `1.0.0`. An `invocations_ws` declaration is neither required nor a fallback. Both protocols may be
-   * declared independently during migration; this operation always selects `conversation_engine`.
+   * declared independently during migration; this operation always selects `voice_bridge`.
    *
    * The service resolves or creates a hosted session and forwards the connection to
-   * `ws://container:8088/conversation_engine` without rewriting the protocol path. The AgentServer SDK
-   * exposes that container endpoint only when a Conversation Engine handler is registered.
+   * `ws://container:8088/voice_bridge` without rewriting the protocol path. The AgentServer SDK
+   * exposes that container endpoint only when a Voice Bridge handler is registered.
    *
-   * The declared `conversation_engine` version `1.0.0` identifies the Bridge conversation-engine
+   * The declared `voice_bridge` version `1.0.0` identifies the Voice Live Bridge
    * protocol. Its container protocol version is independent of Bridge message version `1.0` and
    * Hosted Agents API version `v1`.
    *
@@ -40,16 +40,13 @@ interface AgentConversationEngine {
    * is abandoned, not replayed; there is no sequence acknowledgement or cursor-based recovery.
    * Audio transport is outside this contract. The service relays frames without changing their message
    * semantics; WebSocket close codes and ping/pong are preserved. Authorization, throttling, metrics,
-   * and tracing are applied to the selected CE protocol.
+   * and tracing are applied to the selected voice-bridge protocol.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "A successful WebSocket 101 upgrade has no HTTP entity body; messages follow as WebSocket frames."
-  @summary("Connect to a hosted conversation engine")
+  @summary("Connect to a hosted voice bridge")
   @opExample(
     #{
-      parameters: #{
-        apiVersion: "v1",
-        agent_name: "support-conversation-engine",
-      },
+      parameters: #{ apiVersion: "v1", agent_name: "support-voice-bridge" },
       returnType: #{ status_code: 101, session_id: "session_support_01" },
     },
     #{
@@ -61,7 +58,7 @@ interface AgentConversationEngine {
     #{
       parameters: #{
         apiVersion: "v1",
-        agent_name: "support-conversation-engine",
+        agent_name: "support-voice-bridge",
         agent_session_id: "session_support_01",
       },
       returnType: #{ status_code: 101, session_id: "session_support_01" },
@@ -72,10 +69,10 @@ interface AgentConversationEngine {
     }
   )
   @get
-  @route("/agents/{agent_name}/endpoint/protocols/conversation_engine")
-  connectEndpointConversationEngine is FoundryDataPlaneOperation<
+  @route("/agents/{agent_name}/endpoint/protocols/voice_bridge")
+  connectEndpointVoiceBridge is FoundryDataPlaneOperation<
     {
-      /** The name of the target hosted conversational engine in the current project. */
+      /** The name of the target hosted voice bridge in the current project. */
       @path agent_name: string;
 
       /** Optional hosted session ID. Supply the same ID to reconnect to an existing session; omit it to create a session with an automatically generated ID. */
