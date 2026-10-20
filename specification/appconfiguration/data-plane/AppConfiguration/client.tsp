@@ -7,6 +7,20 @@ using AzureAppConfiguration;
 
 namespace SdkCustomizations;
 
+// C++ specific customizations
+/** Parameters that preserve the required C++ PutKeyValue entity. */
+model CppPutKeyValueParameters {
+  /** The key-value entity to set. */
+  @TypeSpec.Http.body
+  entity: KeyValue;
+}
+
+@@override(
+  putKeyValue,
+  replaceParameter(putKeyValue, "entity", CppPutKeyValueParameters.entity),
+  "cpp"
+);
+
 // Java specific customizations
 @@clientName(AzureAppConfiguration, "AzureAppConfiguration", "java");
 @@clientName(Azure.Core.Foundations.Error, "CommonError", "java");
