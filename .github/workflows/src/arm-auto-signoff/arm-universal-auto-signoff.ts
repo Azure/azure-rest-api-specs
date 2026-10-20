@@ -4,6 +4,7 @@ import { getLatestCommitStatuses } from "../commit-statuses.ts";
 import { extractInputs } from "../context.ts";
 import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import { LabelAction } from "../label.ts";
+import { parseSignoffDispatchInputs } from "./arm-signoff-dispatch.ts";
 import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.ts";
 import {
   getLatestSemanticReviewStatus,
@@ -65,7 +66,15 @@ export default async function getLabelAction({ github, context, core }: GitHubSc
         : undefined,
     })}`,
   );
-  const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
+  const { owner, repo, head_sha, issue_number } =
+    context.eventName === "workflow_dispatch"
+      ? {
+          ...context.repo,
+          ...parseSignoffDispatchInputs(
+            (context.payload as WebhookEvent<"workflow-dispatch">).inputs,
+          ),
+        }
+      : await extractInputs(github, context, core);
   core.info(
     `Universal auto-signoff correlation: ${JSON.stringify({
       owner,
