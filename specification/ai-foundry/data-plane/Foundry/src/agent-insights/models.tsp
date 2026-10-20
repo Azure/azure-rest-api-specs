@@ -273,6 +273,38 @@ model AgentInsightsOverviewOverride {
   content: string;
 }
 
+/** Category selection and trace-grounded analysis guidance for an Agent Insights monitor. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+@example(#{
+  categories: #["cost_tokens", "latency"],
+  instructions: "Prioritize customer-facing latency and token waste supported by trace evidence.",
+})
+model AgentInsightPriorities {
+  /**
+   * Built-in or custom category identifiers. Built-in identifiers are tool_call_failures,
+   * hallucinations, cost_tokens, latency, reliability_errors, output_quality, context_memory,
+   * and security_risk. Custom identifiers are also accepted.
+   *
+   * The service trims and lowercases identifiers, drops blank entries, maps safety_guardrails
+   * to security_risk, removes duplicates, and sorts the result in ordinal order. Select 1 to 20
+   * distinct nonblank categories after normalization. Each normalized identifier must be valid
+   * UTF-8, contain no control characters, and use at most 128 UTF-8 bytes.
+   */
+  @minItems(1)
+  categories: string[];
+
+  /**
+   * Optional trace-grounded guidance for the monitor's analysis. The service trims the edges
+   * and preserves case and internal formatting. Omitted, null, or blank instructions clear
+   * earlier guidance when a priorities object is supplied.
+   *
+   * After trimming, instructions must be valid UTF-8 and use at most 2,000 UTF-8 bytes.
+   * Carriage returns, line feeds, and tabs are allowed; other control characters are rejected.
+   * Responses omit this property when there is no guidance.
+   */
+  instructions?: string | null;
+}
+
 /** Estimated Agent Insights cost. */
 @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightEstimatedCost {
@@ -325,6 +357,10 @@ model AgentInsightMonitor {
   @visibility(Lifecycle.Read)
   overview: AgentInsightsOverview | null;
 
+  /** Category selection and analysis guidance. Omitted when priorities are unconfigured or cleared. */
+  @visibility(Lifecycle.Read)
+  priorities?: AgentInsightPriorities;
+
   /** The time when this monitor was last updated. */
   @visibility(Lifecycle.Read)
   updated_at: FoundryTimestamp;
@@ -353,10 +389,15 @@ model AgentInsightMonitorCreate {
 
   /** The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'. */
   model_deployment_name: string;
+
+  /** Category selection and analysis guidance. Omit to create the monitor without priorities. Explicit null is not allowed. */
+  priorities?: AgentInsightPriorities;
 }
 
 /** Fields that can be updated on an Agent Insights monitor. */
 @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+@example(#{ priorities: #{ categories: #["latency"], instructions: null } })
+@example(#{ priorities: null })
 model AgentInsightMonitorUpdate {
   /** Whether scheduled insight generation is armed for the monitor. */
   enabled?: boolean;
@@ -368,6 +409,14 @@ model AgentInsightMonitorUpdate {
 
   /** The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'. */
   model_deployment_name?: string;
+
+  /**
+   * Replaces the complete priorities object. Omission leaves priorities unchanged; explicit
+   * null clears them. Include categories even when changing only instructions. Omitted, null,
+   * or blank instructions in a replacement clear earlier guidance. Responses omit cleared
+   * priorities. This field, including explicit null, cannot be combined with overview_override.
+   */
+  priorities?: AgentInsightPriorities | null;
 
   /**
    * Sets the effective user overview, or clears it when explicitly set to null. Omission leaves
