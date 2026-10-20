@@ -43,7 +43,7 @@ union EvaluationGraderType {
 @discriminator("type")
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvaluationGrader {
-  /** The grader name, unique among graders applicable to the same task. */
+  /** Unique across the combined job and Task graders applicable to a Task. */
   name: string;
 
   /** The grader type. */
@@ -307,7 +307,7 @@ model Task {
   /** Reference values visible to graders but not to the agent. */
   expected?: Record<unknown>;
 
-  /** When present, replaces all job-level graders for this task; an empty list is not runnable. */
+  /** Additional checks alongside job graders; an empty list adds none, but every runnable Task needs at least one check. */
   graders?: InlineEvaluationGrader[];
 
   /** Per-attempt deadline including invocation and grading. */

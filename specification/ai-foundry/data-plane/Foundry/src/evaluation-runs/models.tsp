@@ -408,10 +408,10 @@ model EvaluationTaskRunObserved {
 /** Where an effective grader was selected. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 union EvaluationGraderSource {
-  /** Inherited from the published job. */
+  /** Defined on the published job version. */
   job: "job",
 
-  /** Replaced by this Task's own grader list. */
+  /** Defined on the Dataset Task. */
   task: "task",
 }
 
@@ -424,7 +424,7 @@ model EvaluationEffectiveGrader {
   /** Type of check to apply. */
   type: EvaluationGraderType;
 
-  /** Job default or Task-specific replacement. */
+  /** Job or Task scope that defined this check. */
   source: EvaluationGraderSource;
 
   /** Pinned catalog version when the grader uses a Foundry Evaluator. */
@@ -518,7 +518,7 @@ model EvalTaskRun {
   /** Retry counts, checkpoints, and retained diagnostic logs. */
   diagnostics?: EvaluationTaskRunDiagnostics;
 
-  /** Selected checks, exposed even before they run or when invocation fails. */
+  /** All job and Task checks, exposed before grading and retained after invocation failure. */
   effective_graders: EvaluationEffectiveGrader[];
 
   /** Outcomes from attempted effective graders. */

@@ -148,7 +148,7 @@ model EvalJobDefinition {
   /** Human-readable description of the evaluation. */
   description?: string;
 
-  /** Default graders for Tasks without their own grader list. */
+  /** Graders run for every Task alongside its Task-specific graders. */
   graders?: InlineEvaluationGrader[];
 
   /** Validated Task content at an exact Dataset version. */

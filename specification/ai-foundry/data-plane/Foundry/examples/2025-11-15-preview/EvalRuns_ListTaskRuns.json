@@ -21,20 +21,14 @@
             "status": "succeeded",
             "grader_results": [
               {
-                "grader": "policy_citation",
-                "status": "completed",
-                "passed": false,
-                "explanation": "The response did not cite the expected policy section."
-              },
-              {
-                "grader": "answer_quality",
+                "grader": "response_safety",
                 "status": "completed",
                 "passed": true,
                 "score": 1,
-                "explanation": "The explanation is coherent.",
+                "explanation": "The response meets the safety requirements.",
                 "criteria": [
                   {
-                    "id": "clear_explanation",
+                    "id": "safe_response",
                     "passed": true,
                     "score": 5
                   }
@@ -44,6 +38,12 @@
                   "input_tokens": 640,
                   "output_tokens": 120
                 }
+              },
+              {
+                "grader": "policy_citation",
+                "status": "completed",
+                "passed": false,
+                "explanation": "The response did not cite the expected policy section."
               }
             ],
             "overall_result": "fail",
@@ -105,13 +105,13 @@
             ],
             "effective_graders": [
               {
-                "name": "policy_citation",
-                "type": "substring_match",
-                "source": "task"
+                "name": "response_safety",
+                "type": "rubric",
+                "source": "job"
               },
               {
-                "name": "answer_quality",
-                "type": "rubric",
+                "name": "policy_citation",
+                "type": "substring_match",
                 "source": "task"
               }
             ]

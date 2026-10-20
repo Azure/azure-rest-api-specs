@@ -52878,7 +52878,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InlineEvaluationGrader'
-          description: Default graders for Tasks without their own grader list.
+          description: Graders run for every Task alongside its Task-specific graders.
         dataset:
           $ref: '#/components/schemas/EvaluationDatasetVersionReference'
           description: Validated Task content at an exact Dataset version.
@@ -52952,7 +52952,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InlineEvaluationGrader'
-          description: Default graders for Tasks without their own grader list.
+          description: Graders run for every Task alongside its Task-specific graders.
         dataset:
           $ref: '#/components/schemas/EvaluationDatasetVersionReference'
           description: Validated Task content at an exact Dataset version.
@@ -53790,7 +53790,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EvaluationEffectiveGrader'
-          description: Selected checks, exposed even before they run or when invocation fails.
+          description: All job and Task checks, exposed before grading and retained after invocation failure.
         grader_results:
           type: array
           items:
@@ -54111,7 +54111,7 @@ components:
           description: Type of check to apply.
         source:
           $ref: '#/components/schemas/EvaluationGraderSource'
-          description: Job default or Task-specific replacement.
+          description: Job or Task scope that defined this check.
         evaluator:
           $ref: '#/components/schemas/FoundryEvaluatorReference'
           description: Pinned catalog version when the grader uses a Foundry Evaluator.
@@ -54127,7 +54127,7 @@ components:
       properties:
         name:
           type: string
-          description: The grader name, unique among graders applicable to the same task.
+          description: Unique across the combined job and Task graders applicable to a Task.
         type:
           $ref: '#/components/schemas/EvaluationGraderType'
           description: The grader type.
