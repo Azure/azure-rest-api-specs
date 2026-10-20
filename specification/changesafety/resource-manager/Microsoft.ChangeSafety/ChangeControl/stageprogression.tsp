@@ -1,0 +1,176 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "./commonmodels.tsp";
+import "./main.tsp";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+
+namespace Microsoft.ChangeSafety;
+
+@doc("Defines the progression of a change using these child resources, with ChangeState parent resource.")
+@parentResource(ChangeState)
+model StageProgression is ProxyResource<StageProgressionProperties> {
+  @doc("name of the stageProgression")
+  @key("stageProgressionName")
+  @segment("stageProgressions")
+  @pattern("^[a-zA-Z0-9-|]{3,100}$")
+  @minLength(3)
+  @maxLength(100)
+  @path
+  name: string;
+}
+
+@doc("Detailed properties of the StageProgression resource.")
+model StageProgressionProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("Stage name relevant to hierarchical StageMap.")
+  @minLength(3)
+  @maxLength(200)
+  stageReference: string;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("StageProgression resource status.")
+  status: StageProgressionState;
+
+  @visibility(Lifecycle.Read)
+  @doc("The sequence of the stage within the ChangeStage parent resource.")
+  @minValue(1)
+  sequence?: int32;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Stage specific key value pairs of parameter names & their values, which can be any type"
+  @doc("Variables to apply on the change of that stage. Key value pairs supporting any JSON values.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  stageVariables?: Record<unknown>;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("Comments about the update to the resource.")
+  @maxLength(2000)
+  comments?: string;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("Collection of related links for the change.")
+  links?: Link[];
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Defines a flexible placeholder for stage specific meta data for diverse orchestration and change scenarios."
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("Additional metadata for the stageProgression resource.")
+  additionalData?: {};
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Key value pairs of parameter names & their values for the current Stage.Value can be any type, hence using Unknown type."
+  @doc("Stage specific key value pairs of parameter names & their values for the current Stage, If any.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  parameters?: Record<unknown>;
+}
+
+@doc("Indicates the current status of the progression of the change within the stage.")
+union StageProgressionState {
+  string,
+
+  @doc("Change is initialized to be applied within the stage.")
+  Initialized: "Initialized",
+
+  @doc("Change is being applied within the stage.")
+  InProgress: "InProgress",
+
+  @doc("Change has successfully been applied to the stage.")
+  Completed: "Completed",
+
+  @doc("Change apply operation was cancelled.")
+  Cancelled: "Cancelled",
+
+  @doc("Change apply operation was paused.")
+  Paused: "Paused",
+
+  @doc("Change apply operation was failed.")
+  Failed: "Failed",
+
+  @doc("Change is not applied to the stage.")
+  Skipped: "Skipped",
+}
+
+@doc("Azure resource Id of a ChangeState.")
+scalar StageProgressionResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ChangeSafety/changeStates/stageProgressions",
+    }
+  ]>;
+
+@armResourceOperations
+@doc("The operations of the stageProgression resource.")
+interface StageProgressions {
+  get is ArmResourceRead<StageProgression>;
+
+  getAtSubscriptionLevel is ArmResourceRead<
+    StageProgression,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+
+  createOrUpdate is ArmResourceCreateOrReplaceSync<StageProgression>;
+  createOrUpdateAtSubscriptionLevel is ArmResourceCreateOrReplaceSync<
+    StageProgression,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+
+  delete is ArmResourceDeleteSync<StageProgression>;
+  deleteAtSubscriptionLevel is ArmResourceDeleteSync<
+    StageProgression,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+
+  update is ArmResourcePatchSync<StageProgression, StageProgressionProperties>;
+  updateAtSubscriptionLevel is ArmResourcePatchSync<
+    StageProgression,
+    StageProgressionProperties,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+
+  listByParent is ArmResourceListByParent<StageProgression>;
+  listByParentAtSubscriptionLevel is ArmResourceListByParent<
+    StageProgression,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+
+  @doc("Retrieve the audit trail action, for a StageProgression.")
+  @action("retrieveAuditTrail")
+  retrieveAuditTrail is ArmResourceActionSync<
+    StageProgression,
+    void,
+    RetrieveAuditTrailResponse
+  >;
+
+  @doc("Retrieve the audit trail action, for a StageProgression at subscription level.")
+  @action("retrieveAuditTrail")
+  retrieveAuditTrailAtSubscriptionLevel is ArmResourceActionSync<
+    StageProgression,
+    void,
+    RetrieveAuditTrailResponse,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+}

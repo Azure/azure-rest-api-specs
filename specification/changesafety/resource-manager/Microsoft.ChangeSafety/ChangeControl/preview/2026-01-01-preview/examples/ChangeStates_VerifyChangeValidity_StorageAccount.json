@@ -1,0 +1,39 @@
+{
+  "title": "ChangeStates_VerifyChangeValidity_StorageAccount",
+  "operationId": "ChangeStates_VerifyChangeValidity",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeStateName": "storageAccountChangeState",
+    "body": {
+      "operation": {
+        "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.Storage/storageAccounts/storageaccount?api-version=2023-05-01",
+        "httpMethod": "PUT",
+        "body": {
+          "location": "eastus",
+          "sku": {
+            "name": "Standard_LRS"
+          },
+          "kind": "StorageV2",
+          "tags": {
+            "environment": "test"
+          },
+          "properties": {
+            "supportsHttpsTrafficOnly": true,
+            "allowBlobPublicAccess": false
+          }
+        }
+      },
+      "changeSafetyReferenceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/storageAccountChangeState"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "outcome": "Succeeded",
+        "message": "The resource operation is part of a valid ChangeState."
+      }
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "title": "ChangeStates_Update",
+  "operationId": "ChangeStates_Update",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeStateName": "databaseUpdateChangeState",
+    "properties": {
+      "properties": {
+        "comments": "Database update deployment progressing with schema migration and data validation enabled.",
+        "links": [
+          {
+            "name": "workTrackingItem",
+            "uri": "https://dev.azure.com/contoso/DatabaseProject/_workitems/edit/12373",
+            "description": "Work item for database update deployment with schema migration"
+          },
+          {
+            "name": "approvalRequest",
+            "uri": "https://approval.contoso.com/requests/67916",
+            "description": "Database update deployment approval with DBA review"
+          },
+          {
+            "name": "supportIncident",
+            "uri": "https://support.contoso.com/incidents/INC001260",
+            "description": "Support incident for database update coordination"
+          }
+        ],
+        "additionalData": {
+          "migrationRequired": true,
+          "backupCompleted": true,
+          "validationEnabled": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "InProgress",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "description": "Database update deployment to production environment with schema migration and data validation. This deployment includes performance improvements, index optimizations, and security enhancements for the core database platform.",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/databaseUpdateStageMap"
+          },
+          "status": "InProgress",
+          "comments": "Database update deployment progressing with schema migration and data validation enabled.",
+          "changeDefinition": {
+            "name": "databaseUpdateDeployment",
+            "kind": "ApiOperation",
+            "details": {
+              "operations": [
+                {
+                  "httpMethod": "PUT",
+                  "uri": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.Sql/servers/myserver/databases/mydatabase?api-version=2023-01-01",
+                  "body": {
+                    "properties": {
+                      "collation": "SQL_Latin1_General_CP1_CI_AS",
+                      "maxSizeBytes": 2147483648,
+                      "sampleName": "AdventureWorksLT"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "releaseLabel": "Release-5.2.3-Database",
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T12:30:17.815Z",
+          "orchestrationTool": "Azure DevOps",
+          "links": [
+            {
+              "name": "workTrackingItem",
+              "uri": "https://dev.azure.com/contoso/DatabaseProject/_workitems/edit/12373",
+              "description": "Work item for database update deployment with schema migration"
+            },
+            {
+              "name": "approvalRequest",
+              "uri": "https://approval.contoso.com/requests/67916",
+              "description": "Database update deployment approval with DBA review"
+            },
+            {
+              "name": "supportIncident",
+              "uri": "https://support.contoso.com/incidents/INC001260",
+              "description": "Support incident for database update coordination"
+            }
+          ],
+          "additionalData": {
+            "migrationRequired": true,
+            "backupCompleted": true,
+            "validationEnabled": true,
+            "performanceOptimization": "enabled"
+          },
+          "stageMapSnapshot": [
+            {
+              "stageName": "backup",
+              "status": "completed"
+            },
+            {
+              "stageName": "migration",
+              "status": "in-progress"
+            },
+            {
+              "stageName": "validation",
+              "status": "pending"
+            }
+          ]
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/databaseUpdateChangeState",
+        "name": "databaseUpdateChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
+        "systemData": {
+          "createdBy": "database@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "database@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}
