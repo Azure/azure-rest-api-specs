@@ -1,5 +1,7 @@
 # Model Router controls (V1Preview)
 
+<!-- cspell:ignore xhigh chatcmpl -->
+
 This reference describes the public request and response shape for the Model Router preview on `POST /openai/v1/responses` and `POST /openai/v1/chat/completions`. Send `Foundry-Features: ModelRouterControls=V1Preview` on create requests using these controls. The preview header is an opt-in, not a new API version; without it, existing endpoint behavior applies and the new controls are not guaranteed to be enforced. These examples use raw HTTP. Public SDK support and the qualified model/revision, region, route, tool, and execution-mode matrix must be verified separately before advertising a particular combination.
 
 ## Requests
