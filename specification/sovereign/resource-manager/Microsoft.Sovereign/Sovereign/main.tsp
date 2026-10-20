@@ -29,9 +29,9 @@ interface Operations extends Azure.ResourceManager.Operations {
   checkNameAvailabilityLocal is checkLocalNameAvailability;
 }
 
+/** The Sovereign View resource type. */
 @added(Versions.Preview20261031)
 @resource("sovereignViews")
-/** The Sovereign View resource type. */
 model SovereignViewResource
   is TrackedResource<SovereignViewResourceProperties> {
   /** The name of the Sovereign View resource. */
@@ -64,8 +64,8 @@ interface SovereignViewOperations {
   /** Lists the Sovereign View resources within a subscription. */
   listBySubscription is ArmListBySubscription<SovereignViewResource>;
 
-  @action("complianceSummary")
   /** Gets the compliance summary for the Sovereign View resource. */
+  @action("complianceSummary")
   @armResourceAction(SovereignViewResource)
   complianceSummary is ArmResourceActionSync<
     SovereignViewResource,
@@ -73,8 +73,8 @@ interface SovereignViewOperations {
     SovereignViewComplianceSummaryResult
   >;
 
-  @action("complianceDetails")
   /** Gets compliance details for the Sovereign View resource. */
+  @action("complianceDetails")
   @armResourceAction(SovereignViewResource)
   complianceDetails is ArmResourceActionSync<
     SovereignViewResource,
@@ -82,8 +82,8 @@ interface SovereignViewOperations {
     SovereignViewComplianceDetailsResult
   >;
 
-  @action("filterValues")
   /** Gets filter values for the Sovereign View resource. */
+  @action("filterValues")
   @armResourceAction(SovereignViewResource)
   filterValues is ArmResourceActionSync<
     SovereignViewResource,
@@ -91,8 +91,8 @@ interface SovereignViewOperations {
     SovereignViewFilterValuesResult
   >;
 
-  @action("operationalStatus")
   /** Gets the operational status for the Sovereign View resource. */
+  @action("operationalStatus")
   @armResourceAction(SovereignViewResource)
   operationalStatus is ArmResourceActionSync<
     SovereignViewResource,
@@ -100,8 +100,8 @@ interface SovereignViewOperations {
     SovereignViewOperationalStatusResult
   >;
 
-  @action("complianceResourceDetails")
   /** Gets the compliance reasoning for given resource and dimension, including the reasoning for its linked and replica resources. */
+  @action("complianceResourceDetails")
   @armResourceAction(SovereignViewResource)
   complianceResourceDetails is ArmResourceActionSync<
     SovereignViewResource,
@@ -109,8 +109,8 @@ interface SovereignViewOperations {
     SovereignViewComplianceResourceDetailsResult
   >;
 
-  @action("Remediate")
   /** Remediates the Sovereign View resource for the given Azure Resource Manager resource IDs. */
+  @action("Remediate")
   @armResourceAction(SovereignViewResource)
   remediate is ArmResourceActionAsync<
     SovereignViewResource,
@@ -118,8 +118,8 @@ interface SovereignViewOperations {
     SovereignViewRemediateResult
   >;
 
-  @action("remediationResult")
   /** Fetches the result of a previously triggered remediation. */
+  @action("remediationResult")
   @armResourceAction(SovereignViewResource)
   remediationResult is ArmResourceActionSync<
     SovereignViewResource,

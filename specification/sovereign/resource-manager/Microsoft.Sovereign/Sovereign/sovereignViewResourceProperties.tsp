@@ -4,15 +4,15 @@ using Azure.Core;
 
 namespace Microsoft.Sovereign;
 
-@added(Versions.Preview20261031)
 /** The patch model for the sovereign view resource type. */
+@added(Versions.Preview20261031)
 model SovereignViewResourcePatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
   ...ManagedSystemAssignedIdentityProperty;
 }
 
-@added(Versions.Preview20261031)
 /** The properties of the sovereign view resource type. */
+@added(Versions.Preview20261031)
 model SovereignViewResourceProperties {
   /** The scope to apply for configuration. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -23,12 +23,12 @@ model SovereignViewResourceProperties {
   @identifiers(#["policyInitiativeId"])
   policyInitiatives: SovereignViewPolicyInitiativeDetail[];
 
-  @visibility(Lifecycle.Create, Lifecycle.Read)
   /** Stable regulatory-document key selected when this Sovereign View was created. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   regulatoryDocumentName?: SovereignViewRegulatoryDocumentName;
 
-  @visibility(Lifecycle.Read)
   /** The status of a user-initiated, control-plane operation on the sovereign view resource type. */
+  @visibility(Lifecycle.Read)
   provisioningState?: provisioningState;
 
   /** Optional per-dimension evaluation settings. */
@@ -40,8 +40,8 @@ model SovereignViewResourceProperties {
   isWorkload?: boolean;
 }
 
-@added(Versions.Preview20261031)
 /** Stable regulatory-document keys recognized by the Portal. */
+@added(Versions.Preview20261031)
 union SovereignViewRegulatoryDocumentName {
   /** The Azure Cloud Sovereign Baseline document selected by default in the Portal. */
   SovereignControlBaseline: "SovereignControlBaseline",
@@ -49,15 +49,15 @@ union SovereignViewRegulatoryDocumentName {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** Per-dimension evaluation settings for the sovereign view. */
+@added(Versions.Preview20261031)
 model SovereignViewDimensionSettings {
   /** Settings for the Data Residency dimension. */
   dataResidency?: SovereignViewDataResidencyDimensionSettings;
 }
 
-@added(Versions.Preview20261031)
 /** Evaluation settings for the Data Residency dimension. */
+@added(Versions.Preview20261031)
 model SovereignViewDataResidencyDimensionSettings {
   /** The resource scope evaluated for the Data Residency dimension. */
   resourceEvaluationScope: DataResidencyResourceEvaluationScope;
@@ -66,8 +66,8 @@ model SovereignViewDataResidencyDimensionSettings {
   parameters: SovereignViewDataResidencyParameters;
 }
 
-@added(Versions.Preview20261031)
 /** The resource scope evaluated for the Data Residency dimension. */
+@added(Versions.Preview20261031)
 union DataResidencyResourceEvaluationScope {
   /** Evaluate the resource together with the resources linked to it. */
   Residency360: "Residency360",
@@ -78,15 +78,15 @@ union DataResidencyResourceEvaluationScope {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** Parameters used by the Data Residency evaluation. */
+@added(Versions.Preview20261031)
 model SovereignViewDataResidencyParameters {
   /** Azure regions in which the resource and its linked resources are allowed to reside. */
   allowedLocations: string[];
 }
 
-@added(Versions.Preview20261031)
 /** The scope for the sovereign view in terms of the resources it would evaluate. */
+@added(Versions.Preview20261031)
 model SovereignViewScope {
   /** The management groups in scope. */
   managementGroups?: SovereignViewManagementGroupScope[];
@@ -95,8 +95,8 @@ model SovereignViewScope {
   subscriptions?: SovereignViewSubscriptionScope[];
 }
 
-@added(Versions.Preview20261031)
 /** A management group scope item for the sovereign view. */
+@added(Versions.Preview20261031)
 model SovereignViewManagementGroupScope {
   /** The resource identifier of the management group. */
   id: armResourceIdentifier<[
@@ -109,8 +109,8 @@ model SovereignViewManagementGroupScope {
   name?: string;
 }
 
-@added(Versions.Preview20261031)
 /** A subscription scope item for the sovereign view. */
+@added(Versions.Preview20261031)
 model SovereignViewSubscriptionScope {
   /** The subscription id. */
   id: uuid;
@@ -119,8 +119,8 @@ model SovereignViewSubscriptionScope {
   name?: string;
 }
 
-@added(Versions.Preview20261031)
 /** The policy initiative details for the sovereign view. */
+@added(Versions.Preview20261031)
 model SovereignViewPolicyInitiativeDetail {
   /** The fully qualified id of the policy initiative. */
   policyInitiativeId: armResourceIdentifier<[
@@ -132,8 +132,8 @@ model SovereignViewPolicyInitiativeDetail {
   /** The compliance dimension associated with the policy initiative. */
   dimension: ComplianceDimension;
 
-  @visibility(Lifecycle.Read)
   /** The policy assignment Ids generated during assignment of the policy initiative to a scope. */
+  @visibility(Lifecycle.Read)
   policyAssignmentIds?: armResourceIdentifier<[
     {
       type: "Microsoft.Authorization/policyAssignments";
@@ -143,20 +143,20 @@ model SovereignViewPolicyInitiativeDetail {
   /** The version of the policy initiative. */
   policyVersion: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameters vary based on the selected policy initiatives."
   /** The parameters for the assignment of policy initiatives. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameters vary based on the selected policy initiatives."
   assignmentParameters: Record<ParameterValuesValue>;
 }
 
 /** The value of a parameter for the assignment of a policy initiative. */
 model ParameterValuesValue {
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Parameter values can be of any type, depending on the selected policy initiative."
   /** The value of the parameter. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Parameter values can be of any type, depending on the selected policy initiative."
   value?: unknown;
 }
 
-@added(Versions.Preview20261031)
 /** The compliance dimension to be associated with the policy initiative. */
+@added(Versions.Preview20261031)
 union ComplianceDimension {
   /** Data residency compliance dimension. */
   DataResidency: "DataResidency",
@@ -179,8 +179,8 @@ union ComplianceDimension {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** The state of the report data. */
+@added(Versions.Preview20261031)
 union DataState {
   /** The data is still being processed and is not yet available. */
   Processing: "Processing",
@@ -194,8 +194,8 @@ union DataState {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** The compliance report generation state. */
+@added(Versions.Preview20261031)
 union ReportState {
   /** The compliance report is being generated for the first time. */
   Generating: "Generating",
@@ -221,8 +221,8 @@ union ReportState {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** The compliance report generation status, including the current state and the next attempt time. */
+@added(Versions.Preview20261031)
 model ReportStatus {
   /** The current compliance report generation state. */
   state: ReportState;
@@ -231,8 +231,8 @@ model ReportStatus {
   nextAttempt?: utcDateTime;
 }
 
-@added(Versions.Preview20261031)
 /** The response for the sovereign view compliance summary action. */
+@added(Versions.Preview20261031)
 model SovereignViewComplianceSummaryResult {
   /** State indicating whether the data is processed or still being processed. */
   reportStatus: ReportStatus;
@@ -258,8 +258,8 @@ model SovereignViewComplianceSummaryResult {
   dimensionSummaries?: SovereignViewComplianceDimensionSummary[];
 }
 
-@added(Versions.Preview20261031)
 /** The overall compliance summary in the sovereign view compliance summary action. */
+@added(Versions.Preview20261031)
 model SovereignViewComplianceOverallSummary {
   /** Total number of management groups for the sovereign view. */
   @minValue(0)
@@ -306,8 +306,8 @@ model SovereignViewComplianceOverallSummary {
   othersCount: int32;
 }
 
-@added(Versions.Preview20261031)
 /** The compliance summary for a specific dimension in the sovereign view compliance summary action. */
+@added(Versions.Preview20261031)
 model SovereignViewComplianceDimensionSummary {
   /** The dimension representing this summary. */
   dimension: ComplianceDimension;
@@ -345,8 +345,8 @@ model SovereignViewComplianceDimensionSummary {
   othersCount: int32;
 }
 
-@added(Versions.Preview20261031)
 /** The request for the sovereign view compliance details action. */
+@added(Versions.Preview20261031)
 model SovereignViewComplianceDetailsContent {
   /** The maximum number of resources to return. Used for pagination. */
   @minValue(1)
@@ -372,8 +372,8 @@ model SovereignViewComplianceDetailsContent {
   search?: SovereignViewComplianceDetailsSearch;
 }
 
-@added(Versions.Preview20261031)
 /** The filter for compliance details based on compliance dimensions and their states. */
+@added(Versions.Preview20261031)
 model SovereignViewComplianceDetailsDimensionFilter {
   /** The compliance dimension to filter on. */
   dimension: ComplianceDimension;
@@ -382,8 +382,8 @@ model SovereignViewComplianceDetailsDimensionFilter {
   states: PolicyComplianceState[];
 }
 
-@added(Versions.Preview20261031)
 /** Supported compliance states for the policy initiatives. */
+@added(Versions.Preview20261031)
 union PolicyComplianceState {
   /** The resource is compliant with respect to the given policy. */
   Compliant: "Compliant",
@@ -409,8 +409,8 @@ union PolicyComplianceState {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** The filters to apply when querying for compliance details. */
+@added(Versions.Preview20261031)
 model SovereignViewComplianceDetailsFilters {
   /** The field to filter on. */
   field: SovereignViewFilterField;
@@ -422,8 +422,8 @@ model SovereignViewComplianceDetailsFilters {
   value: string[];
 }
 
-@added(Versions.Preview20261031)
 /** Supported filter fields for Sovereign View compliance details. */
+@added(Versions.Preview20261031)
 union SovereignViewFilterField {
   /** Filter by subscription. */
   subscription: "Subscription",
@@ -464,8 +464,8 @@ union SovereignViewFilterField {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** Supported filter operators for Sovereign View Compliance details. */
+@added(Versions.Preview20261031)
 union SovereignViewComplianceDetailsFilterOperators {
   /** In filter operator. Returns results where the field value is in the provided list of values. */
   In: "In",
@@ -473,8 +473,8 @@ union SovereignViewComplianceDetailsFilterOperators {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** The sorting for compliance details. */
+@added(Versions.Preview20261031)
 model SovereignViewComplianceDetailsSort {
   /** The field to sort on. */
   field: string;
@@ -486,8 +486,8 @@ model SovereignViewComplianceDetailsSort {
   sortingOrder?: PolicyComplianceState[];
 }
 
-@added(Versions.Preview20261031)
 /** Supported sort directions for Sovereign View Compliance details. */
+@added(Versions.Preview20261031)
 union SovereignViewComplianceDetailsSortDirections {
   /** Ascending sort direction. */
   Asc: "asc",
@@ -498,8 +498,8 @@ union SovereignViewComplianceDetailsSortDirections {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** Search field and query for Sovereign View Compliance details. */
+@added(Versions.Preview20261031)
 model SovereignViewComplianceDetailsSearch {
   /** The field to search on. */
   field: string;
@@ -508,8 +508,8 @@ model SovereignViewComplianceDetailsSearch {
   value: string;
 }
 
-@added(Versions.Preview20261031)
 /** The response for the sovereign view compliance details action. */
+@added(Versions.Preview20261031)
 model SovereignViewComplianceDetailsResult {
   /** State indicating whether the data is processed or still being processed. */
   reportStatus: ReportStatus;
@@ -529,8 +529,8 @@ model SovereignViewComplianceDetailsResult {
   resources?: SovereignViewComplianceDetailResource[];
 }
 
-@added(Versions.Preview20261031)
 /** A compliance detail item for a resource. */
+@added(Versions.Preview20261031)
 model SovereignViewComplianceDetailResource {
   /** The resource identifier. */
   resourceId: armResourceIdentifier;
@@ -546,8 +546,8 @@ model SovereignViewComplianceDetailResource {
   dimensionDetails: SovereignViewDimensionDetail[];
 }
 
-@added(Versions.Preview20261031)
 /** A compliance detail item for a resource in the sovereign view compliance details action. */
+@added(Versions.Preview20261031)
 model SovereignViewDimensionDetail {
   /** The compliance dimension for the compliance detail. */
   dimension: ComplianceDimension;
@@ -566,8 +566,8 @@ model SovereignViewDimensionDetail {
   sources: SovereignViewResourceEvaluationSource[];
 }
 
-@added(Versions.Preview20261031)
 /** The evaluation source that produced a compliance state for a resource and dimension. */
+@added(Versions.Preview20261031)
 union SovereignViewResourceEvaluationSource {
   /** The evaluation was produced by Azure Policy. */
   Policy: "Policy",
@@ -578,8 +578,8 @@ union SovereignViewResourceEvaluationSource {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** A compliance detail item for a resource in the sovereign view compliance details action. */
+@added(Versions.Preview20261031)
 model SovereignViewComplianceDetail {
   /** The fully qualified id of the policy initiative associated with the compliance detail. */
   policyInitiativeId: armResourceIdentifier<[
@@ -599,8 +599,8 @@ model SovereignViewComplianceDetail {
   evaluatedAt?: utcDateTime;
 }
 
-@added(Versions.Preview20261031)
 /** The request for the sovereign view filter values action. */
+@added(Versions.Preview20261031)
 model SovereignViewFilterValuesContent {
   /** The filter field for which values are requested. */
   requestedFilter: SovereignViewFilterField;
@@ -613,8 +613,8 @@ model SovereignViewFilterValuesContent {
   searchTerm?: string;
 }
 
-@added(Versions.Preview20261031)
 /** The response for the sovereign view filter values action. */
+@added(Versions.Preview20261031)
 model SovereignViewFilterValuesResult {
   /** State indicating whether the data is processed or still being processed. */
   dataState: DataState;
@@ -634,8 +634,8 @@ model SovereignViewFilterValuesResult {
   values?: SovereignViewFilterValueItem[];
 }
 
-@added(Versions.Preview20261031)
 /** A filter value item with the associated count. */
+@added(Versions.Preview20261031)
 model SovereignViewFilterValueItem {
   /** The value for the filter. */
   value: string;
@@ -648,8 +648,8 @@ model SovereignViewFilterValueItem {
   count: int32;
 }
 
-@added(Versions.Preview20261031)
 /** The request for the sovereign view operational status action. */
+@added(Versions.Preview20261031)
 model SovereignViewOperationalStatusContent {
   /** The level of detail to return in the operational status response. Defaults to Detailed. */
   mode?: OperationalStatusRequestMode;
@@ -658,8 +658,8 @@ model SovereignViewOperationalStatusContent {
   evaluationParameters?: OperationalStatusEvaluationParameter[];
 }
 
-@added(Versions.Preview20261031)
 /** The response for the sovereign view operational status action. */
+@added(Versions.Preview20261031)
 model SovereignViewOperationalStatusResult {
   /** The name of the sovereign view. */
   name: string;
@@ -672,8 +672,8 @@ model SovereignViewOperationalStatusResult {
   details?: SovereignViewOperationalStatusDetails[];
 }
 
-@added(Versions.Preview20261031)
 /** An operational status detail item describing an issue impacting the operability of the sovereign view. */
+@added(Versions.Preview20261031)
 model SovereignViewOperationalStatusDetails {
   /** The reason the sovereign view is unhealthy. */
   reason: OperationalStatusUnhealthyReason;
@@ -683,8 +683,8 @@ model SovereignViewOperationalStatusDetails {
   affectedScopes?: SovereignViewAffectedScopes[];
 }
 
-@added(Versions.Preview20261031)
 /** An affected scope in a sovereign view operational status detail. */
+@added(Versions.Preview20261031)
 model SovereignViewAffectedScopes {
   /** The name of the management group or subscription affected. */
   name: string;
@@ -702,8 +702,8 @@ model SovereignViewAffectedScopes {
   actionRequired?: string;
 }
 
-@added(Versions.Preview20261031)
 /** The level of detail to return in the sovereign view operational status response. */
+@added(Versions.Preview20261031)
 union OperationalStatusRequestMode {
   /** Returns a high-level operational status suitable for quickly determining overall view health. */
   Summary: "Summary",
@@ -714,8 +714,8 @@ union OperationalStatusRequestMode {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** An evaluation parameter that controls which checks are performed when determining operational status. */
+@added(Versions.Preview20261031)
 union OperationalStatusEvaluationParameter {
   /** Evaluate managed identity permissions on the scopes in the sovereign view. */
   PermissionsEvaluation: "PermissionsEvaluation",
@@ -726,8 +726,8 @@ union OperationalStatusEvaluationParameter {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** The overall operational status states for a sovereign view. */
+@added(Versions.Preview20261031)
 union OperationalStatusStates {
   /** The sovereign view is healthy and fully operational. */
   Healthy: "Healthy",
@@ -741,8 +741,8 @@ union OperationalStatusStates {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** The operational status states for an individual scope within a sovereign view. */
+@added(Versions.Preview20261031)
 union ScopeLevelOperationalStatusStates {
   /** The scope is unhealthy and its operability is impacted. */
   Unhealthy: "Unhealthy",
@@ -756,8 +756,8 @@ union ScopeLevelOperationalStatusStates {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** The reasons a sovereign view or an individual scope is unhealthy. */
+@added(Versions.Preview20261031)
 union OperationalStatusUnhealthyReason {
   /** The managed identity is missing. */
   MIMissing: "MIMissing",
@@ -771,8 +771,8 @@ union OperationalStatusUnhealthyReason {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** The type of scope in a sovereign view. */
+@added(Versions.Preview20261031)
 union SovereignViewScopeType {
   /** A management group scope. */
   ManagementGroup: "ManagementGroup",
@@ -783,8 +783,8 @@ union SovereignViewScopeType {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** The request for the compliance reasoning of one resource and dimension. */
+@added(Versions.Preview20261031)
 model SovereignViewComplianceResourceDetailsContent {
   /** The full Azure Resource Manager resource identifier of the resource for which compliance reasoning is requested. */
   resourceId: armResourceIdentifier;
@@ -796,8 +796,8 @@ model SovereignViewComplianceResourceDetailsContent {
   evaluatedAt?: utcDateTime;
 }
 
-@added(Versions.Preview20261031)
 /** The compliance reasoning for given resource and dimension, including the reasoning for its linked and replica resources. */
+@added(Versions.Preview20261031)
 model SovereignViewComplianceResourceDetailsResult {
   /** The evaluated resource Azure Resource Manager identifier. */
   resourceId: armResourceIdentifier;
@@ -816,8 +816,8 @@ model SovereignViewComplianceResourceDetailsResult {
   evaluations: SovereignViewDataEvaluation[];
 }
 
-@added(Versions.Preview20261031)
 /** A linked or replica resource evaluation contributing to the compliance reasoning. */
+@added(Versions.Preview20261031)
 model SovereignViewDataEvaluation {
   /** The stable identifier of the query that produced this evaluation. */
   evaluationSourceId: string;
@@ -833,8 +833,8 @@ model SovereignViewDataEvaluation {
   evaluationOutcomes: SovereignViewDataEvaluationOutcome[];
 }
 
-@added(Versions.Preview20261031)
 /** What an evaluation query was run to find. */
+@added(Versions.Preview20261031)
 union SovereignViewEvaluationIntent {
   /** Resources linked to the evaluated resource. */
   LinkedResources: "LinkedResources",
@@ -848,8 +848,8 @@ union SovereignViewEvaluationIntent {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** The source that produced a linked or replica resource evaluation. */
+@added(Versions.Preview20261031)
 union SovereignViewLinkedResourceEvaluationSource {
   /** Azure Resource Graph. */
   ARG: "ARG",
@@ -863,8 +863,8 @@ union SovereignViewLinkedResourceEvaluationSource {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** The compliance reasoning outcome produced by an evaluation query for a single resource. */
+@added(Versions.Preview20261031)
 model SovereignViewDataEvaluationOutcome {
   /** The Azure Resource Manager identifier of the linked or replica resource associated with the outcome. */
   resourceId?: armResourceIdentifier;
@@ -891,8 +891,8 @@ model SovereignViewDataEvaluationOutcome {
   additionalInfoCodeId?: string;
 }
 
-@added(Versions.Preview20261031)
 /** The request for the sovereign view remediate action. */
+@added(Versions.Preview20261031)
 model SovereignViewRemediateContent {
   /** The remediation dimension being addressed. Only "DataResidency" is currently supported for remediation. */
   dimensionType: ComplianceDimension;
@@ -901,8 +901,8 @@ model SovereignViewRemediateContent {
   residencyRemediationRequest: SovereignViewResidencyRemediationContent;
 }
 
-@added(Versions.Preview20261031)
 /** The residency remediation request payload. */
+@added(Versions.Preview20261031)
 model SovereignViewResidencyRemediationContent {
   /** The residency remediation configuration. */
   configuration: SovereignViewResidencyRemediationConfiguration;
@@ -912,8 +912,8 @@ model SovereignViewResidencyRemediationContent {
   resources: SovereignViewResidencyRemediationResource[];
 }
 
-@added(Versions.Preview20261031)
 /** The configuration for a residency remediation request. */
+@added(Versions.Preview20261031)
 model SovereignViewResidencyRemediationConfiguration {
   /** The target region resources should be remediated into. */
   targetRegion: string;
@@ -922,8 +922,8 @@ model SovereignViewResidencyRemediationConfiguration {
   targetResourceGroupName?: string;
 }
 
-@added(Versions.Preview20261031)
 /** A single resource targeted by a residency remediation request. */
+@added(Versions.Preview20261031)
 model SovereignViewResidencyRemediationResource {
   /** The Azure Resource Manager resource ID of the resource to remediate. */
   id: armResourceIdentifier;
@@ -932,8 +932,8 @@ model SovereignViewResidencyRemediationResource {
   configuration: SovereignViewResidencyRemediationResourceConfiguration;
 }
 
-@added(Versions.Preview20261031)
 /** The per-resource configuration for a residency remediation request. */
+@added(Versions.Preview20261031)
 model SovereignViewResidencyRemediationResourceConfiguration {
   /** The current region of the resource. */
   sourceRegion: string;
@@ -942,8 +942,8 @@ model SovereignViewResidencyRemediationResourceConfiguration {
   targetResourceGroupName?: string;
 }
 
-@added(Versions.Preview20261031)
 /** The response for the sovereign view remediate action. */
+@added(Versions.Preview20261031)
 model SovereignViewRemediateResult {
   /** The identifier used to fetch the remediation result via the remediationResult action. */
   remediationId: string;
@@ -952,15 +952,15 @@ model SovereignViewRemediateResult {
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
-@added(Versions.Preview20261031)
 /** The request for the sovereign view remediationResult action. */
+@added(Versions.Preview20261031)
 model SovereignViewRemediationResultContent {
   /** The remediation identifier returned by the remediate action. */
   remediationId: string;
 }
 
-@added(Versions.Preview20261031)
 /** The status of a sovereign view remediation. */
+@added(Versions.Preview20261031)
 union SovereignViewRemediationStatus {
   /** The remediation completed successfully. */
   Succeeded: "Succeeded",
@@ -971,8 +971,8 @@ union SovereignViewRemediationStatus {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** The response for the sovereign view remediationResult action. */
+@added(Versions.Preview20261031)
 model SovereignViewRemediationResult {
   /** The remediation identifier this result corresponds to. */
   remediationId: string;
@@ -997,8 +997,8 @@ model SovereignViewRemediationResult {
   expiresAt?: utcDateTime;
 }
 
-@added(Versions.Preview20261031)
 /** The type of remediation payload returned in a remediation result item. */
+@added(Versions.Preview20261031)
 union SovereignViewRemediationPayloadType {
   /** The remediation payload is an Azure Resource Manager template bundle. */
   ArmTemplateBundle: "ArmTemplateBundle",
@@ -1006,8 +1006,8 @@ union SovereignViewRemediationPayloadType {
   string,
 }
 
-@added(Versions.Preview20261031)
 /** A single remediation result item. */
+@added(Versions.Preview20261031)
 model SovereignViewRemediationResultItem {
   /** The Azure Resource Manager resource IDs this result item applies to. */
   resourceIds: armResourceIdentifier[];
@@ -1019,8 +1019,8 @@ model SovereignViewRemediationResultItem {
   result: SovereignViewArmTemplateBundle;
 }
 
-@added(Versions.Preview20261031)
 /** An Azure Resource Manager template bundle produced by a remediation. */
+@added(Versions.Preview20261031)
 model SovereignViewArmTemplateBundle {
   /** The Azure Resource Manager template, serialized as a JSON string. */
   template: string;
