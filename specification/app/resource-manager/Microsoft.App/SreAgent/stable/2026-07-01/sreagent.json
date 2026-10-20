@@ -1871,10 +1871,8 @@
     },
     "SandboxNoProxyEntry": {
       "type": "string",
-      "description": "A destination that bypasses the forward proxy.\nThe value is an exact IPv4 address, a DNS hostname, or a DNS suffix prefixed with '.' or '*.'.",
-      "minLength": 1,
-      "maxLength": 253,
-      "pattern": "^(?:(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}|(?:\\*\\.|\\.)?(?=.{1,253}$)(?=.*[A-Za-z_])(?:[A-Za-z0-9_](?:[A-Za-z0-9_-]{0,61}[A-Za-z0-9_])?)(?:\\.(?:[A-Za-z0-9_](?:[A-Za-z0-9_-]{0,61}[A-Za-z0-9_])?))*)$"
+      "description": "A destination that bypasses the forward proxy.\nThe value is an exact IPv4 address, a DNS hostname, or a DNS suffix prefixed with '.' or '*.'.\nThe service validates the format.",
+      "minLength": 1
     },
     "SandboxPackageManager": {
       "type": "string",

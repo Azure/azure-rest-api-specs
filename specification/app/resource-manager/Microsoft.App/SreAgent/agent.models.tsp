@@ -219,11 +219,10 @@ scalar SandboxAllowedHost extends string;
 /**
  * A destination that bypasses the forward proxy.
  * The value is an exact IPv4 address, a DNS hostname, or a DNS suffix prefixed with '.' or '*.'.
+ * The service validates the format.
  */
 @added(Versions.v2026_07_01)
 @minLength(1)
-@maxLength(253)
-@pattern("^(?:(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}|(?:\\*\\.|\\.)?(?=.{1,253}$)(?=.*[A-Za-z_])(?:[A-Za-z0-9_](?:[A-Za-z0-9_-]{0,61}[A-Za-z0-9_])?)(?:\\.(?:[A-Za-z0-9_](?:[A-Za-z0-9_-]{0,61}[A-Za-z0-9_])?))*)$")
 scalar SandboxNoProxyEntry extends string;
 
 /** Forward-proxy endpoints and additional destinations that bypass the proxy. */
