@@ -1,5 +1,5 @@
 import "../common/models.tsp";
-import "../openai/evaluations/common.tsp";
+import "../openai/evaluations/models.tsp";
 import "../schedules/models.tsp";
 
 using TypeSpec.OpenAPI;
@@ -65,6 +65,15 @@ model ContinuousEvaluationRuleAction extends EvaluationRuleAction {
   samplingRate?: float64 = 100;
 }
 
+/** Existing trace-evaluation inputs supported by scheduled rules. */
+union TraceEvaluationSource {
+  /** Trace-query inputs with lookback and ingestion-delay settings. */
+  traces: TracesEvalRunDataSource,
+
+  /** Trace inputs selected through an existing TraceSource variant. */
+  traceDataSource: AzureAITraceDataSourceEvalRunDataSource,
+}
+
 /** Configures a scheduled evaluation of observed agent traces. */
 model TraceEvaluationRuleAction extends EvaluationRuleAction {
   type: EvaluationRuleActionType.traceEvaluation;
@@ -73,8 +82,8 @@ model TraceEvaluationRuleAction extends EvaluationRuleAction {
   @encodedName("application/json", "eval_id")
   evalId: string;
 
-  /** Agent selection and query settings for each scheduled occurrence. */
-  source: AgentTraceSource;
+  /** Existing trace inputs for each scheduled occurrence. Preserve the selected variant's query-window and sampling behavior. */
+  source: TraceEvaluationSource;
 }
 
 /** Configures a scheduled evaluation of dataset inputs. */
@@ -90,31 +99,6 @@ model DatasetEvaluationRuleAction extends EvaluationRuleAction {
 
   /** Optional existing evaluation target used to generate responses before scoring. */
   target?: FoundryEvaluationTarget;
-}
-
-/** Selects an agent's traces using the existing scheduled trace-query behavior. */
-model AgentTraceSource {
-  /** Identifies the agent-trace input configuration. */
-  type: "agent_traces";
-
-  /** Name of the agent whose traces are selected. */
-  @encodedName("application/json", "agent_name")
-  @minLength(1)
-  agentName: string;
-
-  /** Optional exact agent version used to filter traces. */
-  @encodedName("application/json", "agent_version")
-  agentVersion?: string;
-
-  /** Trace-query lookback in hours. When omitted, use the scheduler's existing behavior. */
-  @encodedName("application/json", "lookback_hours")
-  @minValue(1)
-  lookbackHours?: int32;
-
-  /** Maximum number of traces sampled for an evaluation run. */
-  @encodedName("application/json", "max_traces")
-  @minValue(1)
-  maxTraces?: int32;
 }
 
 /** References an exact version of a dataset for scheduled evaluation. */

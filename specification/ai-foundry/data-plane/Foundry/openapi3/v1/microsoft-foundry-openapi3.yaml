@@ -44851,35 +44851,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    AgentTraceSource:
-      type: object
-      required:
-        - type
-        - agent_name
-      properties:
-        type:
-          type: string
-          enum:
-            - agent_traces
-          description: Identifies the agent-trace input configuration.
-        agent_name:
-          type: string
-          minLength: 1
-          description: Name of the agent whose traces are selected.
-        agent_version:
-          type: string
-          description: Optional exact agent version used to filter traces.
-        lookback_hours:
-          type: integer
-          format: int32
-          minimum: 1
-          description: Trace-query lookback in hours. When omitted, use the scheduler's existing behavior.
-        max_traces:
-          type: integer
-          format: int32
-          minimum: 1
-          description: Maximum number of traces sampled for an evaluation run.
-      description: Selects an agent's traces using the existing scheduled trace-query behavior.
     AgentVersionObject:
       type: object
       required:
@@ -48672,7 +48643,6 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          azure_ai_traces: '#/components/schemas/TracesEvalRunDataSource'
           azure_ai_synthetic_data_gen: '#/components/schemas/SyntheticDataGenerationEvalRunDataSource'
           azure_ai_synthetic_data_generation_with_simulation: '#/components/schemas/SyntheticDataGenerationWithSimulationEvalRunDataSource'
           azure_ai_responses: '#/components/schemas/AzureAIResponsesEvalRunDataSource'
@@ -48682,6 +48652,7 @@ components:
           azure_ai_trace_data_source: '#/components/schemas/AzureAITraceDataSourceEvalRunDataSource'
           azure_ai_benchmark_preview: '#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource'
           azure_ai_user_conversation_simulation: '#/components/schemas/UserConversationSimulationEvalRunDataSource'
+          azure_ai_traces: '#/components/schemas/TracesEvalRunDataSource'
       description: Base class for run data sources with discriminator support.
     EvalRunLatency:
       type: object
@@ -85965,11 +85936,16 @@ components:
           type: string
           description: Identifier of the evaluation used to score the selected traces.
         source:
-          $ref: '#/components/schemas/AgentTraceSource'
-          description: Agent selection and query settings for each scheduled occurrence.
+          $ref: '#/components/schemas/TraceEvaluationSource'
+          description: Existing trace inputs for each scheduled occurrence. Preserve the selected variant's query-window and sampling behavior.
       allOf:
         - $ref: '#/components/schemas/EvaluationRuleAction'
       description: Configures a scheduled evaluation of observed agent traces.
+    TraceEvaluationSource:
+      anyOf:
+        - $ref: '#/components/schemas/TracesEvalRunDataSource'
+        - $ref: '#/components/schemas/AzureAITraceDataSourceEvalRunDataSource'
+      description: Existing trace-evaluation inputs supported by scheduled rules.
     TraceIdTraceSource:
       type: object
       required:
