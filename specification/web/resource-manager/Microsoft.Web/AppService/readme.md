@@ -134,14 +134,11 @@ directive:
     where:
       - $.definitions.EgressConfig
     reason: >-
-      egress is a Microsoft.Web sites/config singleton and has no lifetime independent of the parent site: it is
-      created implicitly with the site and removed only when the site is deleted, so it cannot be made to not exist
-      while the site exists. Cleared state is expressed by writing an empty configuration with PUT, which is the
-      established contract for every sibling singleton. No sites/config singleton exposes DELETE - authsettingsV2,
-      authsettings, appsettings, connectionstrings, pushsettings and azurestorageaccounts are all GET/PUT or PUT/list
-      only, and the only DELETE operations under config are item-level deletes within a collection such as
-      appsettings/{key} and connectionstrings/{name}. A DELETE on the singleton would carry no semantic distinct from
-      PUT with an empty body.
+      The service exposes GET and PUT, but no DELETE route, for the site and deployment-slot egress configuration.
+      PUT replaces the stored connections in full; omitting properties.connections or supplying an empty object
+      for properties.connections deletes the stored egress configuration. GET returns an empty configuration when
+      none is stored. The specification retains this PUT-clear contract rather than advertising an unsupported
+      DELETE operation. This exception is limited to EgressConfig and requires ARM suppression approval.
 ```
 
 ### Tag: package-2026-09

@@ -10103,6 +10103,32 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "API Management with subscription key injection": {
+            "$ref": "./examples/EgressConfig_CreateOrUpdate_ApimKey.json"
+          },
+          "Configure Redis and Storage with Managed Identity": {
+            "$ref": "./examples/EgressConfig_CreateOrUpdate_MultiHttp.json"
+          },
+          "Configure SQL with Managed Identity": {
+            "$ref": "./examples/EgressConfig_CreateOrUpdate_SqlManagedIdentity.json"
+          },
+          "Configure third-party API with credential injection": {
+            "$ref": "./examples/EgressConfig_CreateOrUpdate_ThirdPartyApi.json"
+          },
+          "Create or replace egress configuration": {
+            "$ref": "./examples/EgressConfig_CreateOrUpdate.json"
+          },
+          "Disable Virtual Connections": {
+            "$ref": "./examples/EgressConfig_Disable.json"
+          },
+          "Storage SAS URL upgraded to Managed Identity": {
+            "$ref": "./examples/EgressConfig_CreateOrUpdate_SasToManagedIdentity.json"
+          },
+          "Storage SAS URL with credential passthrough (secret hidden from app)": {
+            "$ref": "./examples/EgressConfig_CreateOrUpdate_SasPassthrough.json"
+          }
         }
       }
     },
@@ -22859,6 +22885,14 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Configure Virtual Connections on a deployment slot": {
+            "$ref": "./examples/SlotEgressConfig_CreateOrUpdate_SourceScenario.json"
+          },
+          "Create or replace egress configuration for a slot": {
+            "$ref": "./examples/SlotEgressConfig_CreateOrUpdate.json"
           }
         }
       }
