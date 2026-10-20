@@ -446,7 +446,61 @@ model VoiceAgentServerEventSystemToolArgumentsDone
   arguments: string;
 }
 
-@doc("An asynchronous collection or phone-operation outcome. Provider acceptance is not SMS delivery, IVR recognition or authentication.")
+@doc("Output binding selected by the model in a collect tool's start arguments, not stored in Agent configuration. It is required for `secret: true` and omitted for `secret: false`.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentCollectionOutputBindings {
+  ...Record<never>;
+
+  @doc("The preferred bare variable name, such as `verification_code`. Successful private collection creates the variable; names used by ordinary session inputs, initialized private variables or earlier private collections are occupied. An occupied name receives a unique suffix, such as `_2`, without overwriting existing values. Completion reports the actual name through `output_ref`. Cancellation, timeout, failure and non-private collection do not create a variable.")
+  variable_name: VoiceAgentOutputReference;
+}
+
+@doc("Common model-generated collection start arguments. The service requires output_bindings exactly when secret is true, then locks both choices for the operation. These are the decoded intent arguments, not a new client ingress or Agent settings object.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentCollectionStartArguments {
+  action: "start";
+
+  @doc("Required model-selected visibility for the future result. There is no default. False returns ordinary input to the model; true stores it privately and returns only the allocated name. Later commands cannot downgrade a private operation.")
+  secret: boolean;
+
+  @doc("Model-selected output destination, required for secret true and forbidden for false. No prior declaration is needed. This choice cannot be changed by duplicate or later commands for the same operation.")
+  output_bindings?: VoiceAgentCollectionOutputBindings;
+}
+
+@doc("Decoded model-generated collect_sms start arguments. The service validates the complete invocation before preparing a receiver; the model never submits the SMS value.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentCollectSmsStartArguments {
+  ...Record<never>;
+  ...VoiceAgentCollectionStartArguments;
+
+  @doc("The expected SMS sender in canonical E.164 form, explicitly selected at start without Caller ID fallback. This is routing, not authenticated identity.")
+  @pattern("^\\+[1-9][0-9]{1,14}$")
+  from_phone_number: string;
+}
+
+@doc("Decoded model-generated collect_dtmf start arguments. Length, completion mode and timeouts come from Agent configuration; actual digits cannot be submitted by the model.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentCollectDtmfStartArguments {
+  ...Record<never>;
+  ...VoiceAgentCollectionStartArguments;
+}
+
+@doc("Decoded cancel arguments for either collection tool. The named active collection must belong to that tool and session. Cancellation discards partial input and returns no new output_ref; it cannot change visibility or reveal an existing value.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentCollectionCancelArguments {
+  ...Record<never>;
+  action: "cancel";
+
+  @minLength(1)
+  collection_id: string;
+}
+
+@doc("An asynchronous collection or phone-operation outcome, separate from argument-generation completion. Start immediately returns accepted, which neither arms a receiver nor resumes a success turn. Listening permits the service to schedule the input prompt. Completed/expired/cancelled/failed results, or a rejected busy start, provide safe feedback and schedule one follow-up when the conversation is idle, without a client function_call_output or response.create. Stale/duplicate events do not resume another turn; closing/disconnected sessions do not resume. Expiry/cancellation/failure/busy allocate no variable. A completed private result commits before its name is reported. Provider acceptance is not SMS delivery, IVR recognition or authentication.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventInputCollectionStatus
@@ -505,6 +559,8 @@ union VoiceAgentInputCollectionStatus {
   transfer_not_answered: "transfer_not_answered",
   provider_failed_or_unsupported: "provider_failed_or_unsupported",
   provider_result_uncertain: "provider_result_uncertain",
+
+  @doc("The operation was rejected before any provider side effect, including a known unavailable executor. Unlike an uncertain post-dispatch failure, this confirms that nothing was sent or dialed for this invocation.")
   provider_not_executed: "provider_not_executed",
 }
 

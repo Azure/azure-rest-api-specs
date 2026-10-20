@@ -368,7 +368,7 @@ union VoiceAgentToolResponseScheduling {
   skip_if_busy: "skip_if_busy",
 }
 
-@doc("An MCP tool available to a voice agent. Server endpoints use `server_url`; connector and tunnel identifiers are not supported.")
+@doc("An MCP tool available to a voice agent. Server endpoints use `server_url`; connector and tunnel identifiers are not supported. In the proposed parameter-binding contract, `{{name}}` references in string arguments are resolved in a separate execution copy before MCP argument validation and tools/call. Missing, ambiguous, malformed or non-string references fail without invoking the server. The model/history retain the original references. The configured MCP receives concrete values and must not echo private inputs in its result; binding does not scrub arbitrary MCP responses or control the recipient's storage.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentMcpTool extends VoiceAgentTool {
   ...OmitProperties<OpenAI.MCPTool, "type" | "connector_id" | "tunnel_id">;
@@ -436,14 +436,7 @@ model VoiceAgentSessionSecret {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar VoiceAgentOutputReference extends string;
 
-@doc("Creates a session-local private variable for a successful collection result.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentCollectionOutputBindings {
-  @doc("The preferred bare variable name, such as `verification_code`. Successful private collection creates the variable; names used by ordinary session inputs, initialized private variables or earlier private collections are occupied. An occupied name receives a unique suffix, such as `_2`, without overwriting existing values. Completion reports the actual name through `output_ref`. Cancellation, timeout, failure and non-private collection do not create a variable.")
-  variable_name: VoiceAgentOutputReference;
-}
-
-@doc("Shared SMS/keypad collection settings. Each start requires a locked Boolean `secret`: private results use `output_bindings`; non-private results may return to the model. The model cannot override settings or submit input values. Collection is not authentication.")
+@doc("Shared Agent configuration for SMS/keypad collection. Each model start supplies a locked Boolean `secret` and, when private, `output_bindings`; neither is Agent configuration. The model cannot override length/timer settings or submit input values. Collection is not authentication.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentInputCollectionSettings {
   @doc("The minimum number of ASCII decimal digits. Leading zeros are preserved. Must not exceed `max_length`.")
@@ -460,14 +453,13 @@ model VoiceAgentInputCollectionSettings {
   @minValue(1)
   @maxValue(300)
   timeout_seconds?: int32 = 60;
-
-  @doc("The preferred destination for a private result, required when collection starts with `secret: true`. Binding creates the variable automatically; no `secrets` declaration is required.")
-  output_bindings?: VoiceAgentCollectionOutputBindings;
 }
 
 @doc("Collects one complete numeric SMS on the Agent's SMS-capable number. Start requires E.164 `from_phone_number` and Boolean `secret`, without Caller ID fallback. Prompts follow `listening`; this does not create an SMS chat. Initially supported on Twilio.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
+  ...Record<never>;
+
   @doc("The built-in capability. Always `collect_sms`.")
   name: "collect_sms";
 
@@ -502,6 +494,8 @@ union VoiceAgentDtmfTerminator {
 @doc("Collects ASCII decimal keypad digits on the active call, preserving repeats and leading zeros. Start requires Boolean `secret`, not input digits. Completion and timeouts follow the configured policy; voice collection is unsupported.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectDtmfSystemTool extends VoiceAgentSystemTool {
+  ...Record<never>;
+
   @doc("The built-in capability. Always `collect_dtmf`.")
   name: "collect_dtmf";
 

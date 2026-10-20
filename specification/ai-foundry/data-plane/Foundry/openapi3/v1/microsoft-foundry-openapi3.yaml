@@ -87005,9 +87005,6 @@ components:
           maximum: 300
           description: The total operation deadline in integer seconds, including receiver preparation. Duplicate commands do not extend it.
           default: 60
-        output_bindings:
-          $ref: '#/components/schemas/VoiceAgentCollectionOutputBindings'
-          description: 'The preferred destination for a private result, required when collection starts with `secret: true`. Binding creates the variable automatically; no `secrets` declaration is required.'
         completion_mode:
           $ref: '#/components/schemas/VoiceAgentDtmfCompletionMode'
           description: The required completion policy. Exactly one policy applies to an operation.
@@ -87028,6 +87025,8 @@ components:
           maximum: 300
           description: The wait after a received digit, in integer seconds. In silence mode it may complete a valid value; other modes time out without success. This is not a debounce and never removes repeated digits.
           default: 5
+      unevaluatedProperties:
+        not: {}
       allOf:
         - $ref: '#/components/schemas/VoiceAgentSystemTool'
       description: Collects ASCII decimal keypad digits on the active call, preserving repeats and leading zeros. Start requires Boolean `secret`, not input digits. Completion and timeouts follow the configured policy; voice collection is unsupported.
@@ -87065,24 +87064,11 @@ components:
           maximum: 300
           description: The total operation deadline in integer seconds, including receiver preparation. Duplicate commands do not extend it.
           default: 60
-        output_bindings:
-          $ref: '#/components/schemas/VoiceAgentCollectionOutputBindings'
-          description: 'The preferred destination for a private result, required when collection starts with `secret: true`. Binding creates the variable automatically; no `secrets` declaration is required.'
+      unevaluatedProperties:
+        not: {}
       allOf:
         - $ref: '#/components/schemas/VoiceAgentSystemTool'
       description: Collects one complete numeric SMS on the Agent's SMS-capable number. Start requires E.164 `from_phone_number` and Boolean `secret`, without Caller ID fallback. Prompts follow `listening`; this does not create an SMS chat. Initially supported on Twilio.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentCollectionOutputBindings:
-      type: object
-      required:
-        - variable_name
-      properties:
-        variable_name:
-          $ref: '#/components/schemas/VoiceAgentOutputReference'
-          description: The preferred bare variable name, such as `verification_code`. Successful private collection creates the variable; names used by ordinary session inputs, initialized private variables or earlier private collections are occupied. An occupied name receives a unique suffix, such as `_2`, without overwriting existing values. Completion reports the actual name through `output_ref`. Cancellation, timeout, failure and non-private collection do not create a variable.
-      description: Creates a session-local private variable for a successful collection result.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -87608,7 +87594,7 @@ components:
           default: when_idle
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTool'
-      description: An MCP tool available to a voice agent. Server endpoints use `server_url`; connector and tunnel identifiers are not supported.
+      description: An MCP tool available to a voice agent. Server endpoints use `server_url`; connector and tunnel identifiers are not supported. In the proposed parameter-binding contract, `{{name}}` references in string arguments are resolved in a separate execution copy before MCP argument validation and tools/call. Missing, ambiguous, malformed or non-string references fail without invoking the server. The model/history retain the original references. The configured MCP receives concrete values and must not echo private inputs in its result; binding does not scrub arbitrary MCP responses or control the recipient's storage.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -87633,13 +87619,6 @@ components:
             - far_field
             - azure_deep_noise_suppression
       description: The input audio noise reduction mode.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentOutputReference:
-      type: string
-      pattern: ^[A-Za-z_][A-Za-z0-9_]*$
-      description: A session-local output variable name, such as `verification_code`, without a namespace prefix or template syntax. Output bindings specify a preferred name; collection feedback returns the actual allocated name. Tool inputs use `{{name}}` to read it.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
