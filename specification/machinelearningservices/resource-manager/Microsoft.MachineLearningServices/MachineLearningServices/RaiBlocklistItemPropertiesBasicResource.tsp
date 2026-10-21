@@ -28,6 +28,7 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @parentResource(RaiBlocklistPropertiesBasicResource)
 model RaiBlocklistItemPropertiesBasicResource is Azure.ResourceManager.ProxyResource<
   RaiBlocklistItemProperties,
@@ -55,6 +56,7 @@ model RaiBlocklistItemPropertiesBasicResource is Azure.ResourceManager.ProxyReso
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface RaiBlocklistItemPropertiesBasicResources {
   /**
