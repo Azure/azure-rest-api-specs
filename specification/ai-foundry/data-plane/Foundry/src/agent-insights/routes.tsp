@@ -138,7 +138,7 @@ interface AgentInsightMonitors {
     OkResponse & AgentInsightMonitor
   >;
 
-  /** Reset an Agent Insights monitor's overview, checkpoint, and active insight state. */
+  /** Reset an Agent Insights monitor's generated summary, overview, checkpoint, and active insight state. */
   @post
   @route("/agent_insight_monitors/{monitor_id}:reset")
   @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
