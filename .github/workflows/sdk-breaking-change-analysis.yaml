@@ -172,6 +172,7 @@ jobs:
             --languages "$SDK_LANGUAGE" \
             --package-path "$SDK_REPOSITORY_PATH" \
             --yes
+      # Use the PR checkout only for TypeSpec specifications; run all actions and scripts from the trusted workflow checkout.
       - name: Checkout specification PR head
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
