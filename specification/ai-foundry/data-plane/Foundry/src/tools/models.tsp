@@ -23,6 +23,9 @@ namespace Azure.AI.Projects {
     toolbox_search_preview: "toolbox_search_preview",
     web_iq_preview: "web_iq_preview",
     github_copilot_toolset_preview: "github_copilot_toolset_preview",
+
+    @added(Versions.PuPr)
+    cloud_computer_use_preview: "cloud_computer_use_preview",
   }
 
   // General availability tools:
