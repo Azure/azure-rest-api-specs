@@ -1,0 +1,36 @@
+{
+  "operationId": "ManagedComputeCapacities_List",
+  "title": "List Managed Compute Capacities For Deployment With Matching Account Location",
+  "parameters": {
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "api-version": "2026-11-15-preview",
+    "offer": "MaaP",
+    "acceleratorType": "Azure.H100",
+    "deploymentId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/deploymentName",
+    "location": "eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/Microsoft.CognitiveServices/managedComputeCapacities/Azure.H100",
+            "name": "Azure.H100",
+            "type": "Microsoft.CognitiveServices/managedComputeCapacities",
+            "properties": {
+              "acceleratorType": "Azure.H100",
+              "availableAccelerators": 16,
+              "deploymentSizeCapacities": [
+                {
+                  "modelInstanceAcceleratorCount": 1,
+                  "totalAvailableCapacity": 16,
+                  "largestDeploymentCapacity": 8
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

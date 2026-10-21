@@ -76,6 +76,19 @@ interface ManagedComputeCapacities {
        */
       @query("deploymentId")
       deploymentId?: string;
+
+      /**
+       * Optional Azure location used to select a DataZone scope. Without a deployment ID,
+       * omitted or blank location returns Global and both US and EU DataZone capacities.
+       * A supported location returns Global and the matching DataZone capacities; an
+       * unsupported location returns Global capacity only. With a deployment ID, a
+       * nonblank location must match the parent account location, ignoring case and
+       * surrounding whitespace, or the request returns HTTP 400. Capacity is still
+       * returned for the deployment's backend region.
+       */
+      @added(Versions.v2026_11_15_preview)
+      @query("location")
+      location?: string;
     },
     Response = ManagedComputeCapacityListResult
   >;

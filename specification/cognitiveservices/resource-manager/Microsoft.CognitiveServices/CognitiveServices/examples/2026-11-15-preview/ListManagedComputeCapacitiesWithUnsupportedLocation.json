@@ -1,0 +1,38 @@
+{
+  "operationId": "ManagedComputeCapacities_List",
+  "title": "List Managed Compute Capacities With Unsupported DataZone Location",
+  "parameters": {
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "api-version": "2026-11-15-preview",
+    "offer": "MaaP",
+    "acceleratorType": "Azure.H100",
+    "location": "japaneast"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/Microsoft.CognitiveServices/managedComputeCapacities/Azure.H100.Global",
+            "name": "Azure.H100.Global",
+            "type": "Microsoft.CognitiveServices/managedComputeCapacities",
+            "properties": {
+              "acceleratorType": "Azure.H100",
+              "offerScope": "Global",
+              "scopeId": "",
+              "availableAccelerators": 16,
+              "totalAvailableAccelerators": 32,
+              "deploymentSizeCapacities": [
+                {
+                  "modelInstanceAcceleratorCount": 1,
+                  "totalAvailableCapacity": 16,
+                  "largestDeploymentCapacity": 8
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
