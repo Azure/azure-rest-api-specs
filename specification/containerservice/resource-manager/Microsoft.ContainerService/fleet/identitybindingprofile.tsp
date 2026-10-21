@@ -16,7 +16,7 @@ namespace Microsoft.ContainerService;
 model IdentityBindingProfile
   is Azure.ResourceManager.ProxyResource<IdentityBindingProfileProperties> {
   @doc("The name of the IdentityBindingProfile resource.")
-  @pattern("^[a-z][a-z0-9]{0,63}$")
+  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   @minLength(1)
   @maxLength(63)
   @path
