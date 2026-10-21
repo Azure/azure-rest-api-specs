@@ -267,16 +267,16 @@ model ScenarioAction {
   parameters?: KeyValuePair[];
 
   /**
-   * Action-specific target matching criteria evaluated during execution. When provided,
+   * Action-specific target selectors evaluated during execution. When provided,
    * the collection must contain either `logicalZone` and `location`, or `physicalZone`.
-   * Matcher names must be unique, the two modes cannot be combined, and the service
+   * Selector names must be unique, the two modes cannot be combined, and the service
    * enforces the cross-item combination at runtime.
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   @minItems(1)
   @maxItems(2)
   @identifiers(#["name"])
-  matchers?: ScenarioActionMatcher[];
+  selectors?: ScenarioActionSelector[];
 
   /**
    * Action dependencies that control when this action starts.
@@ -308,14 +308,14 @@ model ScenarioAction {
 }
 
 /**
- * Model that represents an action-specific target matching criterion.
+ * Model that represents an action-specific target selector.
  */
 @added(Microsoft.Chaos.Versions.v2026_11_01)
-model ScenarioActionMatcher {
+model ScenarioActionSelector {
   /**
-   * The matcher name, such as `logicalZone`, `physicalZone`, or `location`.
+   * The selector name, such as `logicalZone`, `physicalZone`, or `location`.
    */
-  name: ScenarioActionMatcherName;
+  name: ScenarioActionSelectorName;
 
   /**
    * The value that targets must match. Supports template macro syntax.
@@ -324,23 +324,23 @@ model ScenarioActionMatcher {
 }
 
 /**
- * Enum of the supported action matcher names.
+ * Enum of the supported action selector names.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "The matcher name set is intentionally fixed and non-extensible."
+#suppress "@azure-tools/typespec-azure-core/no-enum" "The selector name set is intentionally fixed and non-extensible."
 @added(Microsoft.Chaos.Versions.v2026_11_01)
-enum ScenarioActionMatcherName {
+enum ScenarioActionSelectorName {
   /**
-   * Match targets by logical availability zone.
+   * Select targets by logical availability zone.
    */
   LogicalZone: "logicalZone",
 
   /**
-   * Match targets by physical availability zone.
+   * Select targets by physical availability zone.
    */
   PhysicalZone: "physicalZone",
 
   /**
-   * Match targets by Azure location.
+   * Select targets by Azure location.
    */
   Location: "location",
 }

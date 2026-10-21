@@ -6540,13 +6540,13 @@
             "key"
           ]
         },
-        "matchers": {
+        "selectors": {
           "type": "array",
-          "description": "Action-specific target matching criteria evaluated during execution. When provided,\nthe collection must contain either `logicalZone` and `location`, or `physicalZone`.\nMatcher names must be unique, the two modes cannot be combined, and the service\nenforces the cross-item combination at runtime.",
+          "description": "Action-specific target selectors evaluated during execution. When provided,\nthe collection must contain either `logicalZone` and `location`, or `physicalZone`.\nSelector names must be unique, the two modes cannot be combined, and the service\nenforces the cross-item combination at runtime.",
           "minItems": 1,
           "maxItems": 2,
           "items": {
-            "$ref": "#/definitions/ScenarioActionMatcher"
+            "$ref": "#/definitions/ScenarioActionSelector"
           },
           "x-ms-identifiers": [
             "name"
@@ -6579,13 +6579,13 @@
         "duration"
       ]
     },
-    "ScenarioActionMatcher": {
+    "ScenarioActionSelector": {
       "type": "object",
-      "description": "Model that represents an action-specific target matching criterion.",
+      "description": "Model that represents an action-specific target selector.",
       "properties": {
         "name": {
-          "$ref": "#/definitions/ScenarioActionMatcherName",
-          "description": "The matcher name, such as `logicalZone`, `physicalZone`, or `location`."
+          "$ref": "#/definitions/ScenarioActionSelectorName",
+          "description": "The selector name, such as `logicalZone`, `physicalZone`, or `location`."
         },
         "value": {
           "type": "string",
@@ -6597,32 +6597,32 @@
         "value"
       ]
     },
-    "ScenarioActionMatcherName": {
+    "ScenarioActionSelectorName": {
       "type": "string",
-      "description": "Enum of the supported action matcher names.",
+      "description": "Enum of the supported action selector names.",
       "enum": [
         "logicalZone",
         "physicalZone",
         "location"
       ],
       "x-ms-enum": {
-        "name": "ScenarioActionMatcherName",
+        "name": "ScenarioActionSelectorName",
         "modelAsString": false,
         "values": [
           {
             "name": "LogicalZone",
             "value": "logicalZone",
-            "description": "Match targets by logical availability zone."
+            "description": "Select targets by logical availability zone."
           },
           {
             "name": "PhysicalZone",
             "value": "physicalZone",
-            "description": "Match targets by physical availability zone."
+            "description": "Select targets by physical availability zone."
           },
           {
             "name": "Location",
             "value": "location",
-            "description": "Match targets by Azure location."
+            "description": "Select targets by Azure location."
           }
         ]
       }
