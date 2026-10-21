@@ -297,10 +297,10 @@ model StorageProperties {
 union StorageType {
   string,
 
-  /** Premium SSD for high performance workloads. */
+  /** Premium SSD storage. Premium SSD v2 is recommended for better performance. */
   "PremiumSSD",
 
-  /** Premium SSD v2 for very IO-intensive workloads. This is a preview option and has additional limitations. */
+  /** Premium SSD v2 storage. Recommended for better performance. */
   "PremiumSSDv2",
 }
 
