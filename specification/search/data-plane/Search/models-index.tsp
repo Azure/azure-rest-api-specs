@@ -225,11 +225,11 @@ model GraphQueryDiagnostic {
   /** Stable machine-readable diagnostic identifier. */
   code?: string;
 
-  /** Diagnostic importance, such as error, warning, or info. */
-  severity?: string;
+  /** The diagnostic's importance. */
+  severity?: GraphQueryDiagnosticSeverity;
 
-  /** Stage that produced the diagnostic, such as Bind, Planning, or Execution. */
-  phase?: string;
+  /** The stage that produced the diagnostic. */
+  phase?: GraphQueryDiagnosticPhase;
 
   /** Human-readable explanation; applications should use code rather than parse this text. */
   message?: string;
@@ -240,6 +240,42 @@ model GraphQueryDiagnostic {
 
   /** Suggested corrections or alternatives. */
   suggestions?: string[];
+}
+
+/** The importance of a graph query diagnostic. */
+@added(Versions.v2026_11_01_preview)
+union GraphQueryDiagnosticSeverity {
+  string,
+
+  /** The query was rejected or could not be evaluated successfully. */
+  Error: "error",
+
+  /** Execution returned a result with a caveat, such as an execution or provenance limit. */
+  Warning: "warning",
+
+  /** Informational diagnostics, such as an optional execution summary. */
+  Info: "info",
+}
+
+/** The stage that produced a graph query diagnostic. */
+@added(Versions.v2026_11_01_preview)
+union GraphQueryDiagnosticPhase {
+  string,
+
+  /** Query syntax and parsing. */
+  Parse: "parse",
+
+  /** Variable, parameter, function, and semantic binding. */
+  Bind: "bind",
+
+  /** Request-option validation. */
+  Validation: "validation",
+
+  /** Query planning, including unsupported query shapes and query-breadth restrictions. */
+  Planning: "planning",
+
+  /** Runtime evaluation, execution-limit warnings, and execution summaries. */
+  Execution: "execution",
 }
 
 /** Assertion evidence supporting one projected graph row. */

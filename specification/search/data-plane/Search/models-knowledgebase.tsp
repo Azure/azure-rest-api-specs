@@ -2004,7 +2004,7 @@ model KnowledgeSourceGraphOntology {
 @added(Versions.v2026_11_01_preview)
 model KnowledgeSourceGraphGrounding {
   /** The source kind. If omitted, searchIndex is assumed. Other kinds are rejected. */
-  kind?: KnowledgeSourceGraphGroundingSourceKind;
+  kind?: KnowledgeSourceGraphGroundingSourceKind = KnowledgeSourceGraphGroundingSourceKind.SearchIndex;
 
   /** The same-service search index used for grounding. Required for searchIndex sources. */
   index?: KnowledgeSourceGraphGroundingIndex;

@@ -9907,12 +9907,12 @@
           "description": "Stable machine-readable diagnostic identifier."
         },
         "severity": {
-          "type": "string",
-          "description": "Diagnostic importance, such as error, warning, or info."
+          "$ref": "#/definitions/GraphQueryDiagnosticSeverity",
+          "description": "The diagnostic's importance."
         },
         "phase": {
-          "type": "string",
-          "description": "Stage that produced the diagnostic, such as Bind, Planning, or Execution."
+          "$ref": "#/definitions/GraphQueryDiagnosticPhase",
+          "description": "The stage that produced the diagnostic."
         },
         "message": {
           "type": "string",
@@ -9930,6 +9930,78 @@
             "type": "string"
           }
         }
+      }
+    },
+    "GraphQueryDiagnosticPhase": {
+      "type": "string",
+      "description": "The stage that produced a graph query diagnostic.",
+      "enum": [
+        "parse",
+        "bind",
+        "validation",
+        "planning",
+        "execution"
+      ],
+      "x-ms-enum": {
+        "name": "GraphQueryDiagnosticPhase",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Parse",
+            "value": "parse",
+            "description": "Query syntax and parsing."
+          },
+          {
+            "name": "Bind",
+            "value": "bind",
+            "description": "Variable, parameter, function, and semantic binding."
+          },
+          {
+            "name": "Validation",
+            "value": "validation",
+            "description": "Request-option validation."
+          },
+          {
+            "name": "Planning",
+            "value": "planning",
+            "description": "Query planning, including unsupported query shapes and query-breadth restrictions."
+          },
+          {
+            "name": "Execution",
+            "value": "execution",
+            "description": "Runtime evaluation, execution-limit warnings, and execution summaries."
+          }
+        ]
+      }
+    },
+    "GraphQueryDiagnosticSeverity": {
+      "type": "string",
+      "description": "The importance of a graph query diagnostic.",
+      "enum": [
+        "error",
+        "warning",
+        "info"
+      ],
+      "x-ms-enum": {
+        "name": "GraphQueryDiagnosticSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Error",
+            "value": "error",
+            "description": "The query was rejected or could not be evaluated successfully."
+          },
+          {
+            "name": "Warning",
+            "value": "warning",
+            "description": "Execution returned a result with a caveat, such as an execution or provenance limit."
+          },
+          {
+            "name": "Info",
+            "value": "info",
+            "description": "Informational diagnostics, such as an optional execution summary."
+          }
+        ]
       }
     },
     "GraphQueryError": {
@@ -15061,8 +15133,23 @@
       "description": "A grounding source for graph extraction. Only same-service search indexes are supported.",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/KnowledgeSourceGraphGroundingSourceKind",
-          "description": "The source kind. If omitted, searchIndex is assumed. Other kinds are rejected."
+          "type": "string",
+          "description": "The source kind. If omitted, searchIndex is assumed. Other kinds are rejected.",
+          "default": "searchIndex",
+          "enum": [
+            "searchIndex"
+          ],
+          "x-ms-enum": {
+            "name": "KnowledgeSourceGraphGroundingSourceKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "SearchIndex",
+                "value": "searchIndex",
+                "description": "A search index in the same search service."
+              }
+            ]
+          }
         },
         "index": {
           "$ref": "#/definitions/KnowledgeSourceGraphGroundingIndex",

@@ -40,6 +40,11 @@ namespace Customizations;
 );
 @@clientNamespace(Search.GraphQueryStatistics, "Azure.Search.Documents");
 @@clientNamespace(Search.GraphQueryDiagnostic, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.GraphQueryDiagnosticSeverity,
+  "Azure.Search.Documents"
+);
+@@clientNamespace(Search.GraphQueryDiagnosticPhase, "Azure.Search.Documents");
 @@clientNamespace(Search.GraphQueryRowProvenance, "Azure.Search.Documents");
 @@clientNamespace(Search.GraphQueryEvidenceCount, "Azure.Search.Documents");
 @@clientNamespace(
@@ -142,6 +147,16 @@ namespace Customizations;
 );
 @@clientNamespace(
   Search.GraphQueryDiagnostic,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryDiagnosticSeverity,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryDiagnosticPhase,
   "com.azure.search.documents",
   "java"
 );
@@ -1181,6 +1196,18 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.SearchRequest, "com.azure.search.documents", "java");
 @@clientNamespace(Search.VectorQuery, "Azure.Search.Documents");
 @@clientNamespace(Search.VectorQuery, "com.azure.search.documents", "java");
+@@clientNamespace(Search.VectorQueryTopicGraph, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.VectorQueryTopicGraph,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(Search.VectorQueryTopicGraphKind, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.VectorQueryTopicGraphKind,
+  "com.azure.search.documents",
+  "java"
+);
 @@clientNamespace(Search.VectorThreshold, "Azure.Search.Documents");
 @@clientNamespace(Search.VectorThreshold, "com.azure.search.documents", "java");
 @@clientNamespace(Search.HybridSearch, "Azure.Search.Documents");
@@ -2454,6 +2481,60 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientNamespace(
+  Search.KnowledgeSourceGraphExtractionParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphExtractionParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphOntologySourceKind,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphOntologySourceKind,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphGroundingSourceKind,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphGroundingSourceKind,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphOntology,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphOntology,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphGrounding,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphGrounding,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphGroundingIndex,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphGroundingIndex,
+  "com.azure.search.documents.indexes",
+  "java"
+);
 
 @@clientName(
   Search.AzureBlobKnowledgeSourceParameters.isADLSGen2,
@@ -3034,6 +3115,15 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.VectorSearchProfile, "Azure.Search.Documents.Indexes");
 @@clientNamespace(
   Search.VectorSearchProfile,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.VectorSearchTopicGraphProfile,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.VectorSearchTopicGraphProfile,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -5437,6 +5527,15 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.KnowledgeSourceCache,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceCache,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
   Search.KnowledgeSourceNetworkAccessMode,
   "Azure.Search.Documents.KnowledgeBases"
 );
@@ -5456,6 +5555,15 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(
   Search.KnowledgeSourceStatistics,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphStatistics,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceGraphStatistics,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
