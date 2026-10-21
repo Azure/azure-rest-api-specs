@@ -30,7 +30,7 @@ tags:
   - name: Agent Invocations WebSocket
     parent: Agents Root
     description: Agent Invocations (WebSocket)
-  - name: Agent Voice Bridge
+  - name: Agent Voice Conversation Engine
     parent: Agents Root
     description: Hosted Voice Live Bridge connections
   - name: Agent Sessions
@@ -3562,21 +3562,21 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice_bridge:
+  /agents/{agent_name}/endpoint/protocols/voice_conversation_engine:
     get:
-      operationId: AgentVoiceBridge_connectEndpointVoiceBridge
-      summary: Connect to a hosted voice bridge
+      operationId: AgentVoiceConversationEngine_connectEndpointVoiceConversationEngine
+      summary: Connect to a hosted voice conversation engine
       description: |-
-        Establishes a WebSocket connection to a hosted voice bridge. The client must send an HTTP GET
-        with `Upgrade: websocket` headers. The target hosted agent must declare `voice_bridge` version
+        Establishes a WebSocket connection to a hosted voice conversation engine. The client must send an HTTP GET
+        with `Upgrade: websocket` headers. The target hosted agent must declare `voice_conversation_engine` version
         `1.0.0`. An `invocations_ws` declaration is neither required nor a fallback. Both protocols may be
-        declared independently during migration; this operation always selects `voice_bridge`.
+        declared independently during migration; this operation always selects `voice_conversation_engine`.
 
         The service resolves or creates a hosted session and forwards the connection to
-        `ws://container:8088/voice_bridge` without rewriting the protocol path. The AgentServer SDK
+        `ws://container:8088/voice_conversation_engine` without rewriting the protocol path. The AgentServer SDK
         exposes that container endpoint only when a Voice Bridge handler is registered.
 
-        The declared `voice_bridge` version `1.0.0` identifies the Voice Live Bridge
+        The declared `voice_conversation_engine` version `1.0.0` identifies the Voice Live Bridge
         protocol. Its container protocol version is independent of Bridge message version `1.0` and
         Hosted Agents API version `v1`.
 
@@ -3599,12 +3599,12 @@ paths:
         is abandoned, not replayed; there is no sequence acknowledgement or cursor-based recovery.
         Audio transport is outside this contract. The service relays frames without changing their message
         semantics; WebSocket close codes and ping/pong are preserved. Authorization, throttling, metrics,
-        and tracing are applied to the selected voice-bridge protocol.
+        and tracing are applied to the selected voice-conversation-engine protocol.
       parameters:
         - name: agent_name
           in: path
           required: true
-          description: The name of the target hosted voice bridge in the current project.
+          description: The name of the target hosted voice conversation engine in the current project.
           schema:
             type: string
         - name: agent_session_id
@@ -3643,7 +3643,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agent Voice Bridge
+        - Agent Voice Conversation Engine
   /agents/{agent_name}/endpoint/sessions:
     post:
       operationId: Agents_createSession
@@ -43012,7 +43012,7 @@ components:
             - invocations
             - voice
             - invocations_ws
-            - voice_bridge
+            - voice_conversation_engine
     AgentEvaluatorGenerationJobSource:
       type: object
       required:
@@ -88187,7 +88187,7 @@ components:
         not: {}
       allOf:
         - $ref: '#/components/schemas/VoiceConversationEngine'
-      description: A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must declare `voice_bridge` version `1.0.0`. Voice Live connects through the dedicated voice-bridge endpoint using the existing Bridge Protocol 1.0 wire semantics; the Bridge message version is independent of the container protocol version and the Hosted Agents API version `v1`. Declaring `invocations_ws` is optional and does not substitute for `voice_bridge`.
+      description: A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must declare `voice_conversation_engine` version `1.0.0`. Voice Live connects through the dedicated voice-conversation-engine endpoint using the existing Bridge Protocol 1.0 wire semantics; the Bridge message version is independent of the container protocol version and the Hosted Agents API version `v1`. Declaring `invocations_ws` is optional and does not substitute for `voice_conversation_engine`.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
