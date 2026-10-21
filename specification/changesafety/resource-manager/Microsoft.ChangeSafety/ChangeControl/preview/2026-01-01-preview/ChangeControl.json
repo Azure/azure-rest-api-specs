@@ -4385,6 +4385,7 @@
         },
         "targetResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "ID of the resource targeted by the operation associated with this activity."
         },
         "externalReferenceId": {
@@ -6127,7 +6128,7 @@
       "description": "Nested stage map reference.",
       "properties": {
         "resourceId": {
-          "type": "string",
+          "$ref": "#/definitions/StageMapResourceId",
           "description": "ARM resource ID for the nested stagemap resource.",
           "x-ms-mutability": [
             "read",
@@ -6236,6 +6237,7 @@
           "items": {
             "type": "object"
           },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "update",
@@ -6269,6 +6271,7 @@
           "items": {
             "type": "object"
           },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "update",

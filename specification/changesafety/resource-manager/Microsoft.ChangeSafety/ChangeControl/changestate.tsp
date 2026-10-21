@@ -49,8 +49,8 @@ model ChangeStateProperties {
   @maxLength(2000)
   comments?: string;
 
-  #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need to have a strong type for the stagemap snapshot. So need to provide all the supported types which are string & StageMap for now."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Suppressing warning: We need to have a strong type for the stagemap snapshot. So need to provide all the supported types which are string & StageMap for now."
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "The wire snapshot contains resource ID strings and StageMap objects. The Swagger 2 emitter emits untyped items for this union; retain the existing representation for compatibility pending ARM review."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "The wire snapshot contains resource ID strings and StageMap objects. The Swagger 2 emitter emits untyped items for this union; retain the existing representation for compatibility pending ARM review."
   @doc("Referenced stagemap snapshot.")
   @visibility(Lifecycle.Read)
   stageMapSnapshot?: Array<string | StageMap>;
@@ -59,7 +59,7 @@ model ChangeStateProperties {
   @doc("Reference to the StageMap, defining progression.")
   stageMap?: NestedStageMap;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning of operation parameters should not be of type Record as per ARM."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameter names are customer-defined; ChangeSafety cannot enumerate the keys. Values use the typed Parameter schema."
   @doc("Schema of parameters that will be provided for each stageProgression.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   parameters?: Record<Parameter>;

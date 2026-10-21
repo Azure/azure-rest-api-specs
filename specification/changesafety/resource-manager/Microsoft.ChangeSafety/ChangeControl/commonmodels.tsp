@@ -121,10 +121,10 @@ model ObjectParameter extends Parameter {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   defaultValue?: {};
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Allowed values are arbitrary JSON objects without a stable identifier property."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Suppressing no-empty-model: Empty object literal required to generate OpenAPI schema with additionalProperties:true for flexible object parameter constraint validation."
   @doc("Allowed list of the values for the parameter.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @Azure.ResourceManager.identifiers(#[])
   allowedValues?: Array<{}>;
 }
 
@@ -132,7 +132,7 @@ model ObjectParameter extends Parameter {
 model NestedStageMap {
   @doc("ARM resource ID for the nested stagemap resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  resourceId?: string;
+  resourceId?: StageMapResourceId;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Key value pairs of parameter names & their values for the stagemap.Value can be any type, hence using Unknown type."
   @doc("Key value pairs of parameter names & their values for the stageMap referenced by the resourceId field.")

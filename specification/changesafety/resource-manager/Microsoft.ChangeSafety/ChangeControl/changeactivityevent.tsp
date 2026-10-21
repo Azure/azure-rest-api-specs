@@ -40,7 +40,7 @@ model ChangeActivityEventProperties {
   activityType: ActivityType;
 
   @doc("ID of the resource targeted by the operation associated with this activity.")
-  targetResourceId?: string;
+  targetResourceId?: Azure.Core.armResourceIdentifier;
 
   @doc("Identifier in an external system.")
   externalReferenceId?: string;

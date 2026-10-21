@@ -33,7 +33,7 @@ model StageMapProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   stages: Stage[];
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning of operation parameters should not be of type Record as per ARM."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameter names are customer-defined; ChangeSafety cannot enumerate the keys. Values use the typed Parameter schema."
   @doc("StageMap parameters schema for each stage.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   parameters?: Record<Parameter>;
