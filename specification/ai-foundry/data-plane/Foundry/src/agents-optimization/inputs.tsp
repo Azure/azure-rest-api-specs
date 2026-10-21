@@ -448,7 +448,12 @@ model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
   @doc("Exclusive ISO 8601 timestamp with an explicit UTC offset. Future values are queried unchanged against available traces; the job does not wait for this time.")
   end_time: offsetDateTime;
 
-  @doc("Optional telemetry operation IDs to select within the fixed window. Omitted, null, or empty selects the latest 100 readable matching traces independently of feedback availability. A nonempty list must contain at most 1,000 unique, nonempty IDs. Every requested ID must resolve unambiguously to a readable, authorized trace in the window; the service fails instead of substituting or silently truncating traces.")
+  @doc("Maximum number of latest readable matching trace conversations to select when trace_ids is omitted, null, or empty. Defaults to 100. Must be omitted when selecting explicit trace IDs because explicit selection is never truncated or substituted.")
+  @minValue(1)
+  @maxValue(100)
+  max_traces?: int32 = 100;
+
+  @doc("Optional telemetry operation IDs to select within the fixed window. Omitted, null, or empty selects the latest readable matching traces up to max_traces, independently of feedback availability. A nonempty list must contain at most 1,000 unique, nonempty IDs. Every requested ID must resolve unambiguously to a readable, authorized trace in the window; the service fails instead of substituting or silently truncating traces.")
   @maxItems(1000)
   trace_ids?: string[] | null;
 }
