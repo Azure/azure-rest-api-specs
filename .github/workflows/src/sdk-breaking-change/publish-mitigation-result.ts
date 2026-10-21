@@ -37,10 +37,10 @@ export async function buildMitigationReport({
     core.warning(staleMessage);
     return { report: `⚠️ ${staleMessage}`, result };
   }
-  const projectSections = result.projects.flatMap((project) => {
+  const projectMitigations = result.projects.flatMap((project) => {
     const changes: string[][] = project.breakingChanges.map((change) => [
       change.isResolved ? "✔️" : "❌",
-      `[${escapeMarkdown(change.id)}](${workflowSummaryUrl}#breaking-change-${escapeMarkdown(change.id)}-${MarkdownHeadingId.BreakingChange} "How to Suppress")`,
+      `[${escapeMarkdown(change.id)}](${workflowSummaryUrl}#breaking-change-${escapeMarkdown(change.id)}-${MarkdownHeadingId.Mitigation} "How to Suppress")`,
       escapeMarkdown(change.breakingChange),
       change.suggestedFix ? escapeMarkdown(change.suggestedFix) : "",
       change.typespecChangesSummary?.[0] ? escapeMarkdown(change.typespecChangesSummary[0]) : "",
@@ -66,10 +66,17 @@ export async function buildMitigationReport({
     ];
   });
 
-  const changedCode = result.customizationCode.trim();
   const sdkBreakingChangeMitigationSection = section(
     `SDK Breaking Change Mitigation for ${result.sdkLanguage}`,
-    "",
+    `**Mitigation upon commit:** \`${result.headSha}\``,
+  );
+  const projectSection = section("Breaking Change Mitigation", projectMitigations.join("\n\n"));
+  const changedCode = result.customizationCode.trim();
+  const customizedCodeSection = section(
+    "Customization Code",
+    changedCode
+      ? details("View customization Code", ["````diff", changedCode, "````"].join("\n"))
+      : "No mitigation changes were produced.",
   );
   const nextStep = section(
     "Next Steps",
@@ -79,18 +86,12 @@ export async function buildMitigationReport({
     report: [
       `${renderMarkdownDoc(sdkBreakingChangeMitigationSection, 2)}`,
       "",
-      `**Mitigation upon commit:** \`${result.headSha}\``,
-      "",
-      ...projectSections,
-      "**Customization Code:**",
-      "",
-      changedCode
-        ? details("View customization Code", ["````diff", changedCode, "````"].join("\n"))
-        : "No mitigation changes were produced.",
+      renderMarkdownDoc(projectSection, 3),
+      renderMarkdownDoc(customizedCodeSection, 3),
       "",
       `[View customization code in the workflow summary](${workflowSummaryUrl})`,
       "",
-      renderMarkdownDoc(nextStep, 2),
+      renderMarkdownDoc(nextStep, 3),
     ].join("\n"),
     result,
   };

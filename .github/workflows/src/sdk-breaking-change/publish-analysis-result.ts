@@ -1,6 +1,11 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { escapeMarkdown, table } from "@azure-tools/specs-shared/markdown";
+import {
+  escapeMarkdown,
+  renderMarkdownDoc,
+  section,
+  table,
+} from "@azure-tools/specs-shared/markdown";
 import { AnalysisResultSchema, MarkdownHeadingId, type AnalysisResult } from "./types.ts";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
 import type { GitHubScriptArgs } from "../github.ts";
@@ -42,12 +47,14 @@ export async function buildAnalysisReport(resultsPath: string): Promise<{
     return projectReport;
   });
 
+  const analyseSection = section(
+    `SDK Breaking Change Analysis for ${result.sdkLanguage}`,
+    `**Analyzed commit:** \`${result.headSha}\``,
+  );
   return {
     command: `/azsdk sdk-breaking-analysis ${result.sdkLanguage}`,
     report: [
-      `## SDK Breaking changes for ${result.sdkLanguage}`,
-      "",
-      `**Analyzed commit:** \`${result.headSha}\``,
+      renderMarkdownDoc(analyseSection, 2),
       "",
       ...projectReports.flatMap((projectReport) => [...projectReport, ""]),
     ].join("\n"),

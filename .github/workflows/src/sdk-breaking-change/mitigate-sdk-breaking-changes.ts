@@ -191,7 +191,7 @@ export async function mitigateSdkBreakingChanges({
         const breakingChangeSection = section(
           `Breaking Change ${change.id}`,
           suppresionSection,
-          `breaking-change-${escapeMarkdown(change.id)}-${MarkdownHeadingId.BreakingChange}`,
+          `breaking-change-${escapeMarkdown(change.id)}-${MarkdownHeadingId.Mitigation}`,
         );
         blocks.push(renderMarkdownDoc(breakingChangeSection, 2));
       }

@@ -234,7 +234,7 @@ jobs:
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           MITIGATION_RESULT_PATH: ${{ runner.temp }}/sdk-breaking-change-mitigation-results/sdk-breaking-change-mitigation.json
-          WORKFLOW_SUMMARY_URL: ${{ github.event.workflow_run.html_url }}
+          WORKFLOW_SUMMARY_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         with:
           github-token: ${{ github.token }}
           script: |

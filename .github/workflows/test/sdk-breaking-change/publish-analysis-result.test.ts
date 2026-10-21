@@ -98,6 +98,11 @@ describe("buildAnalysisReport", () => {
     const result = await buildAnalysisReport(resultsPath);
 
     expect(result.command).toBe("/azsdk sdk-breaking-analysis Go");
+    expect(
+      result.report.startsWith(
+        `## SDK Breaking Change Analysis for Go\n\n**Analyzed commit:** \`${analyzedSha}\``,
+      ),
+    ).toBe(true);
     expect(result.report).toContain(`**Analyzed commit:** \`${analyzedSha}\``);
     expect(result.report).toContain(
       `[View SDK Breaking Change Analysis Details](${analysisWorkflowUrl}#armwidget-breaking-change)`,
@@ -129,6 +134,9 @@ describe("publishAnalysisResult", () => {
     };
     expect(comment.issue_number).toBe(42);
     expect(comment.body).toMatch(/^\/azsdk sdk-breaking-analysis Go\n\n/);
+    expect(comment.body).toContain(
+      `## SDK Breaking Change Analysis for Go\n\n**Analyzed commit:** \`${analyzedSha}\``,
+    );
     expect(comment.body).toContain(`<!-- sdk-breaking-change-head-sha: ${analyzedSha} -->`);
     expect(core.setOutput).toHaveBeenCalledWith("issue_number", 42);
     expect(core.setOutput).toHaveBeenCalledWith("head_sha", analyzedSha);

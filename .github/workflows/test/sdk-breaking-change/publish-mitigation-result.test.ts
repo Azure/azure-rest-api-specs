@@ -76,10 +76,10 @@ describe("buildMitigationReport", () => {
     expect(report).toContain("## SDK Breaking Change Mitigation for Java");
     expect(report).toContain("**TypeSpec project:** specification/service/Widget.Service");
     expect(report).toContain(
-      `| ✔️ | [model-change](${workflowSummaryUrl}#breaking-change-model-change-breaking-change "How to Suppress") | Model changed | Restored compatibility | Added client customization |`,
+      `| ✔️ | [model-change](${workflowSummaryUrl}#breaking-change-model-change-mitigation "How to Suppress") | Model changed | Restored compatibility | Added client customization |`,
     );
     expect(report).toContain(
-      `| ❌ | [property-change](${workflowSummaryUrl}#breaking-change-property-change-breaking-change "How to Suppress") | Property changed | Restore the old property |  |`,
+      `| ❌ | [property-change](${workflowSummaryUrl}#breaking-change-property-change-mitigation "How to Suppress") | Property changed | Restore the old property |  |`,
     );
     expect(report).toContain("````diff\n+customization\n````");
     expect(report).toContain(
@@ -91,15 +91,18 @@ describe("buildMitigationReport", () => {
     expect(report.match(/\| Resolvable \| ID \|/g)).toHaveLength(1);
     for (const id of ["model-change", "property-change"]) {
       expect(marked.parse(report)).toContain(
-        `<a href="${workflowSummaryUrl}#breaking-change-${id}-breaking-change" title="How to Suppress">${id}</a>`,
+        `<a href="${workflowSummaryUrl}#breaking-change-${id}-mitigation" title="How to Suppress">${id}</a>`,
       );
     }
     expect(report).not.toContain("**Resolved Breaking Changes:**");
     expect(report).not.toContain("**Unresolved Breaking Changes:**");
     expect(report).toContain(
-      `[View customization code in the workflow summary](https://github.com/owner/repo/actions/runs/456)\n\n## Next Steps\n\n${applyGuidance}\n\n${suppressionGuidance}`,
+      `[View customization code in the workflow summary](https://github.com/owner/repo/actions/runs/456)\n\n### Next Steps\n\n${applyGuidance}\n\n${suppressionGuidance}`,
     );
-    expect(marked.parse(report)).toContain("<h2>Next Steps</h2>");
+    const html = marked.parse(report);
+    for (const heading of ["Breaking Change Mitigation", "Customization Code", "Next Steps"]) {
+      expect(html).toContain(`<h3>${heading}</h3>`);
+    }
     expect(report).toContain("</details>\n\n[View customization code in the workflow summary]");
     expect(marked.parse(report)).toContain(
       '<a href="https://github.com/owner/repo/actions/runs/456">View customization code in the workflow summary</a>',
@@ -128,7 +131,7 @@ describe("buildMitigationReport", () => {
 
     expect(report).toContain("No mitigation changes were produced.");
     expect(report).not.toContain("<details>");
-    expect(report).toContain(`## Next Steps\n\n${applyGuidance}\n\n${suppressionGuidance}`);
+    expect(report).toContain(`### Next Steps\n\n${applyGuidance}\n\n${suppressionGuidance}`);
     expect(report).toContain(applyGuidance);
     expect(report).toContain(suppressionGuidance);
   });
@@ -160,9 +163,9 @@ describe("buildMitigationReport", () => {
       });
 
       expect(report).toContain(kind === "failure" ? "Customization failed" : "is stale;");
-      expect(report).not.toContain("**Customization Code:**");
+      expect(report).not.toContain("### Customization Code");
       expect(report).not.toContain("<details");
-      expect(report).not.toContain("## Next Steps");
+      expect(report).not.toContain("### Next Steps");
       expect(report).not.toContain(applyGuidance);
       expect(report).not.toContain(suppressionGuidance);
       expect(core.warning).toHaveBeenCalledOnce();
@@ -213,7 +216,7 @@ describe("buildMitigationReport", () => {
     });
 
     expect(report).toContain(
-      `| ✔️ | [model-change](${workflowSummaryUrl}#breaking-change-model-change-breaking-change "How to Suppress") |`,
+      `| ✔️ | [model-change](${workflowSummaryUrl}#breaking-change-model-change-mitigation "How to Suppress") |`,
     );
     expect(report).not.toContain("| ❌ |");
   });
@@ -238,7 +241,7 @@ describe("buildMitigationReport", () => {
     });
 
     expect(report).toContain(
-      `| ❌ | [property-change](${workflowSummaryUrl}#breaking-change-property-change-breaking-change "How to Suppress") |`,
+      `| ❌ | [property-change](${workflowSummaryUrl}#breaking-change-property-change-mitigation "How to Suppress") |`,
     );
     expect(report).not.toContain("| ✔️ |");
   });
@@ -258,7 +261,7 @@ describe("buildMitigationReport", () => {
       mitigationResultPath,
       workflowSummaryUrl: "https://github.com/owner/repo/actions/runs/456",
     });
-    expect(report).toContain("**Breaking Changes:**\n\nNone");
+    expect(report).toMatch(/\*\*Breaking Changes:\*\*\s+None/);
     expect(report).not.toContain("| Resolvable |");
     expect(report).not.toContain("<details open>");
   });
@@ -289,9 +292,9 @@ describe("publishMitigationResult", () => {
     expect(comment.body).toContain("<!-- /azsdk sdk-breaking-mitigate Java -->");
     expect(comment.body).toContain(applyGuidance);
     expect(comment.body).toContain(suppressionGuidance);
-    expect(comment.body).toContain(`## Next Steps\n\n${applyGuidance}\n\n${suppressionGuidance}`);
+    expect(comment.body).toContain(`### Next Steps\n\n${applyGuidance}\n\n${suppressionGuidance}`);
     expect(comment.body).toContain(
-      `[model-change](${workflowSummaryUrl}#breaking-change-model-change-breaking-change "How to Suppress")`,
+      `[model-change](${workflowSummaryUrl}#breaking-change-model-change-mitigation "How to Suppress")`,
     );
     expect(core.setOutput).toHaveBeenCalledWith("issue_number", 42);
     expect(core.setOutput).toHaveBeenCalledWith("head_sha", "a".repeat(40));
