@@ -51,7 +51,7 @@ model PlaywrightWorkspaceProperties {
 
   @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The ARM resource ID of the virtual network subnet to inject the workspace into for private network connectivity. This is of the form '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}'. This value cannot be changed after the workspace is created.")
+  @doc("The ARM resource ID of the virtual network subnet to use for private network connectivity. Ensure the subnet meets the virtual network prerequisites (https://aka.ms/pww/docs/vnet) before creating the workspace. The resource ID must be in the following format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}. This value can't be changed after the workspace is created.")
   subnetId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
