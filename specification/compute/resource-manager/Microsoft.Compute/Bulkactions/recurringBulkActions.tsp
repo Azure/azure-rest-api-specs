@@ -597,7 +597,11 @@ model ScheduledActionResourceOperationResponse {
 @added(Versions.`2026-07-06-preview`)
 @doc("A recurring bulk action that operates on specified compute resources.")
 model ScheduledAction is TrackedResource<ScheduledActionProperties> {
-  ...ResourceNameParameter<ScheduledAction>;
+  ...ResourceNameParameter<
+    ScheduledAction,
+    KeyName = "recurringBulkActionName",
+    SegmentName = "scheduledActions"
+  >;
 }
 
 @added(Versions.`2026-07-06-preview`)
