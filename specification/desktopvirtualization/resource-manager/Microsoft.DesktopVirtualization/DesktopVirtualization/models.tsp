@@ -4050,6 +4050,7 @@ model RegistrationTokenList {
    * List of RegistrationToken definitions.
    */
   @Azure.ResourceManager.identifiers(#[])
+  @pageItems
   value?: RegistrationTokenMinimal[];
 
   /**

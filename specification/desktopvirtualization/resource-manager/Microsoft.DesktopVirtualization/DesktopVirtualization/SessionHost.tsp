@@ -125,6 +125,7 @@ interface SessionHosts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SessionHosts_ListSingleRegistrationTokens")
   @added(Versions.vLatestPreview)
+  @list
   listSingleSessionHostRegistrationTokens is ArmResourceActionSync<
     SessionHost,
     ScopedRegistrationTokenProperties,
