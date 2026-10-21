@@ -91552,19 +91552,25 @@ components:
       type: object
       required:
         - id
+        - interface
         - description
-        - config
+        - source
       properties:
         id:
           $ref: '#/components/schemas/VoiceAgentHandoffNodeReference'
           description: The subagent identifier. `$entrypoint` may appear once as the first subagent; other values use the normal handoff ID grammar.
+        interface:
+          type: string
+          enum:
+            - voice
+          description: The subagent interaction interface. This phase supports only `voice`; text delegation is deferred.
         description:
           type: string
           minLength: 1
           description: A display-only description of the specialist behavior. This value is not provided to the model.
-        config:
-          $ref: '#/components/schemas/VoiceAgentInlinedSubagentConfig'
-          description: The behavior activated when this inlined subagent becomes active.
+        source:
+          $ref: '#/components/schemas/VoiceAgentInlinedSubagentSource'
+          description: The inline source of this subagent. Referenced sources are not supported in this phase.
       description: One inlined voice subagent owned and versioned with its parent Voice Agent, not a separate Agent resource.
       x-ms-foundry-meta:
         required_previews:
@@ -91634,6 +91640,24 @@ components:
           description: Whether this node may call customer tools in parallel. Nodes with outgoing handoff edges must use `false`.
           default: false
       description: Behavior activated when an inlined voice subagent becomes active after a handoff.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentInlinedSubagentSource:
+      type: object
+      required:
+        - type
+        - config
+      properties:
+        type:
+          type: string
+          enum:
+            - inline
+          description: The source type. This phase supports only `inline`; referenced Agent resources are deferred.
+        config:
+          $ref: '#/components/schemas/VoiceAgentInlinedSubagentConfig'
+          description: The behavior activated when this inlined subagent becomes active.
+      description: The inline source for a subagent behavior owned and versioned with its parent Voice Agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

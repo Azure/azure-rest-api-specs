@@ -104,19 +104,32 @@ model VoiceAgentInlinedSubagentConfig {
   parallel_tool_calls?: boolean = false;
 }
 
+@doc("The inline source for a subagent behavior owned and versioned with its parent Voice Agent.")
+@extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
+model VoiceAgentInlinedSubagentSource {
+  @doc("The source type. This phase supports only `inline`; referenced Agent resources are deferred.")
+  type: "inline";
+
+  @doc("The behavior activated when this inlined subagent becomes active.")
+  config: VoiceAgentInlinedSubagentConfig;
+}
+
 @doc("One inlined voice subagent owned and versioned with its parent Voice Agent, not a separate Agent resource.")
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
 model VoiceAgentInlinedSubagent {
   @doc("The subagent identifier. `$entrypoint` may appear once as the first subagent; other values use the normal handoff ID grammar.")
   id: VoiceAgentHandoffNodeReference;
 
+  @doc("The subagent interaction interface. This phase supports only `voice`; text delegation is deferred.")
+  `interface`: "voice";
+
   @doc("A display-only description of the specialist behavior. This value is not provided to the model.")
   @encodedName("application/json", "description")
   @minLength(1)
   display_description: string;
 
-  @doc("The behavior activated when this inlined subagent becomes active.")
-  config: VoiceAgentInlinedSubagentConfig;
+  @doc("The inline source of this subagent. Referenced sources are not supported in this phase.")
+  source: VoiceAgentInlinedSubagentSource;
 }
 
 @doc("One allowed directed handoff between inlined voice subagents or `$entrypoint`.")
