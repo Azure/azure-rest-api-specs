@@ -471,10 +471,11 @@ model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
   name: "collect_sms";
 
   @doc("Default total collection deadline in integer seconds, including receiver preparation. An explicit model-call timeout_seconds overrides this value. Duplicate commands do not restart the deadline.")
-  @encode(DurationKnownEncoding.seconds, int32)
-  @minValue(duration.fromISO("PT1S"))
-  @maxValue(duration.fromISO("PT5M"))
-  timeout_seconds?: duration = duration.fromISO("PT60S");
+  // TypeSpec 1.16 cannot version-project custom scalar values in min/max decorators.
+  // Preserve the encoded-second bounds in OpenAPI while reusing the shared duration.
+  @extension("minimum", 1)
+  @extension("maximum", 300)
+  timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
 }
 
 @doc("Enables ASCII decimal keypad collection on the active call, preserving repeats and leading zeros. Agent configuration may set a description and default timeout. Each invocation starts collection with required Boolean secret and a typed completion_mode object, plus optional output_variable_name and timeouts. An invocation timeout overrides the configured default. completion_mode.type selects fixed_length, terminator or inter_digit_silence; mode settings remain model-call arguments. The service validates and locks the policy before preparing a receiver. The model never submits input digits; voice collection is unsupported.")
@@ -486,10 +487,9 @@ model VoiceAgentCollectDtmfSystemTool extends VoiceAgentSystemTool {
   name: "collect_dtmf";
 
   @doc("Default total collection deadline in integer seconds, including receiver preparation. An explicit model-call timeout_seconds overrides this value. First-digit and inter-digit timers cannot extend the effective deadline.")
-  @encode(DurationKnownEncoding.seconds, int32)
-  @minValue(duration.fromISO("PT1S"))
-  @maxValue(duration.fromISO("PT5M"))
-  timeout_seconds?: duration = duration.fromISO("PT60S");
+  @extension("minimum", 1)
+  @extension("maximum", 300)
+  timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
 }
 
 @doc("Per-invocation transfer routing. Unsupported strategies are rejected before provider execution; schema membership does not imply support by every provider.")
@@ -567,10 +567,9 @@ model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {
   name: "send_dtmf";
 
   @doc("Total send deadline in integer seconds from invocation acceptance, including binding, dispatch and waiting for provider acknowledgement. Not a model-call argument. Expiry before dispatch returns provider_not_executed; after dispatch without a confirmed result it returns provider_result_uncertain, without automatic retry. Acceptance does not confirm IVR recognition.")
-  @encode(DurationKnownEncoding.seconds, int32)
-  @minValue(duration.fromISO("PT1S"))
-  @maxValue(duration.fromISO("PT5M"))
-  timeout_seconds?: duration = duration.fromISO("PT60S");
+  @extension("minimum", 1)
+  @extension("maximum", 300)
+  timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
 }
 
 @doc("""
@@ -585,10 +584,9 @@ model VoiceAgentSendSmsSystemTool extends VoiceAgentSystemTool {
   name: "send_sms";
 
   @doc("Total send deadline in integer seconds from invocation acceptance, including binding, dispatch and waiting for provider acknowledgement. Not a model-call argument. Expiry before dispatch returns provider_not_executed; after dispatch without a confirmed result it returns provider_result_uncertain, without automatic retry. This is not an SMS delivery deadline.")
-  @encode(DurationKnownEncoding.seconds, int32)
-  @minValue(duration.fromISO("PT1S"))
-  @maxValue(duration.fromISO("PT5M"))
-  timeout_seconds?: duration = duration.fromISO("PT60S");
+  @extension("minimum", 1)
+  @extension("maximum", 300)
+  timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
 }
 
 @doc("A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.")

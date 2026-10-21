@@ -86984,11 +86984,10 @@ components:
             - collect_dtmf
           description: The built-in capability. Always `collect_dtmf`.
         timeout_seconds:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 300
+          $ref: '#/components/schemas/FoundryDurationSeconds'
           description: Default total collection deadline in integer seconds, including receiver preparation. An explicit model-call timeout_seconds overrides this value. First-digit and inter-digit timers cannot extend the effective deadline.
+          maximum: 300
+          minimum: 1
           default: 60
       unevaluatedProperties:
         not: {}
@@ -87009,11 +87008,10 @@ components:
             - collect_sms
           description: The built-in capability. Always `collect_sms`.
         timeout_seconds:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 300
+          $ref: '#/components/schemas/FoundryDurationSeconds'
           description: Default total collection deadline in integer seconds, including receiver preparation. An explicit model-call timeout_seconds overrides this value. Duplicate commands do not restart the deadline.
+          maximum: 300
+          minimum: 1
           default: 60
       unevaluatedProperties:
         not: {}
@@ -87630,11 +87628,10 @@ components:
             - send_dtmf
           description: The built-in capability. Always `send_dtmf`.
         timeout_seconds:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 300
+          $ref: '#/components/schemas/FoundryDurationSeconds'
           description: Total send deadline in integer seconds from invocation acceptance, including binding, dispatch and waiting for provider acknowledgement. Not a model-call argument. Expiry before dispatch returns provider_not_executed; after dispatch without a confirmed result it returns provider_result_uncertain, without automatic retry. Acceptance does not confirm IVR recognition.
+          maximum: 300
+          minimum: 1
           default: 60
       unevaluatedProperties:
         not: {}
@@ -87657,11 +87654,10 @@ components:
             - send_sms
           description: The built-in capability. Always `send_sms`.
         timeout_seconds:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 300
+          $ref: '#/components/schemas/FoundryDurationSeconds'
           description: Total send deadline in integer seconds from invocation acceptance, including binding, dispatch and waiting for provider acknowledgement. Not a model-call argument. Expiry before dispatch returns provider_not_executed; after dispatch without a confirmed result it returns provider_result_uncertain, without automatic retry. This is not an SMS delivery deadline.
+          maximum: 300
+          minimum: 1
           default: 60
       unevaluatedProperties:
         not: {}
