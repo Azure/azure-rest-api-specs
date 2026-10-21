@@ -28,6 +28,8 @@ stimuli:
           dest: package.json
         - src: ../scripts/check-node-dependencies.js
           dest: check-node-dependencies.js
+        - src: ../scripts/check-employee-service.mjs
+          dest: check-employee-service.mjs
         - src: ../fixtures/Microsoft.Widget/Widget/readme.md
           dest: readme.md
         - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
@@ -68,17 +70,17 @@ stimuli:
         config:
           command: "tsp compile ."
           expected_exit_code: 0
+      - &compiled_employee
+        type: "run-command"
+        name: "compiled-employee-service"
+        config:
+          command: "node check-employee-service.mjs"
+          expected_exit_code: 0
       - &file_matches
         type: "file-matches"
         config:
           pattern: "model Employee is TrackedResource<EmployeeProperties>"
           path: "*.tsp"
-      - &file_matches_import
-        type: "file-matches"
-        name: "file-matches-import"
-        config:
-          pattern: "import\\s+\"\\./[^\"]+\\.tsp\";"
-          path: "main.tsp"
       - &file_matches_age_property
         type: "file-matches"
         name: "file-matches-age-property"
@@ -143,8 +145,8 @@ stimuli:
         config:
           command: "tsp compile ."
           expected_exit_code: 0
+      - *compiled_employee
       - *file_matches
-      - *file_matches_import
       - *file_matches_age_property
       - *file_matches_visibility
       - *file_matches_provisioning_state
