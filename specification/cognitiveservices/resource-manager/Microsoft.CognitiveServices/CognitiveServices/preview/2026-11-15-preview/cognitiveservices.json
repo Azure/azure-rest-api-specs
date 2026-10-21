@@ -1012,6 +1012,13 @@
             "description": "Optional deployment resource ID. When provided, returns capacity for the specific region\nwhere the deployment is hosted rather than the best available region.",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "description": "Optional Azure location used to select a DataZone scope. Without a deployment ID,\nomitted or blank location returns Global and both US and EU DataZone capacities.\nA supported location returns Global and the matching DataZone capacities; an\nunsupported location returns Global capacity only. With a deployment ID, a\nnonblank location must match the parent account location, ignoring case and\nsurrounding whitespace, or the request returns HTTP 400. Capacity is still\nreturned for the deployment's backend region.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1031,6 +1038,15 @@
         "x-ms-examples": {
           "List Managed Compute Capacities": {
             "$ref": "./examples/ListManagedComputeCapacities.json"
+          },
+          "List Managed Compute Capacities For Deployment With Matching Account Location": {
+            "$ref": "./examples/ListManagedComputeCapacitiesWithDeployment.json"
+          },
+          "List Managed Compute Capacities With Location": {
+            "$ref": "./examples/ListManagedComputeCapacitiesWithLocation.json"
+          },
+          "List Managed Compute Capacities With Unsupported DataZone Location": {
+            "$ref": "./examples/ListManagedComputeCapacitiesWithUnsupportedLocation.json"
           }
         },
         "x-ms-pageable": {
@@ -18922,10 +18938,26 @@
           "description": "The type of accelerator (e.g., Azure.A100, Azure.H100).",
           "readOnly": true
         },
+        "offerScope": {
+          "type": "string",
+          "description": "The capacity offer scope: Global or DataZone. Omitted for deployment-scoped results.",
+          "readOnly": true
+        },
+        "scopeId": {
+          "type": "string",
+          "description": "The identifier within the offer scope: an empty string for Global, or US or EU\nfor DataZone. Omitted for deployment-scoped results.",
+          "readOnly": true
+        },
         "availableAccelerators": {
           "type": "integer",
           "format": "int32",
           "description": "The number of available accelerators in the region.",
+          "readOnly": true
+        },
+        "totalAvailableAccelerators": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of available accelerators summed across regions within the scope.\nOmitted for deployment-scoped results.",
           "readOnly": true
         },
         "deploymentSizeCapacities": {

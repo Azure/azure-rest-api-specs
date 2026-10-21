@@ -7943,6 +7943,21 @@ model ManagedComputeCapacityProperties {
   acceleratorType?: string;
 
   /**
+   * The capacity offer scope: Global or DataZone. Omitted for deployment-scoped results.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
+  offerScope?: string;
+
+  /**
+   * The identifier within the offer scope: an empty string for Global, or US or EU
+   * for DataZone. Omitted for deployment-scoped results.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
+  scopeId?: string;
+
+  /**
    * The Azure region where the capacity is available.
    */
   @removed(Versions.v2026_05_01)
@@ -7954,6 +7969,14 @@ model ManagedComputeCapacityProperties {
    */
   @visibility(Lifecycle.Read)
   availableAccelerators?: int32;
+
+  /**
+   * The total number of available accelerators summed across regions within the scope.
+   * Omitted for deployment-scoped results.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
+  totalAvailableAccelerators?: int32;
 
   /**
    * Capacity information broken down by deployment size.
