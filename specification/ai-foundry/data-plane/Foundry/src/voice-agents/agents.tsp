@@ -801,7 +801,7 @@ union VoiceAgentProfanityFilterMode {
   @doc("Masks recognized profanity in the transcript.")
   masked: "masked",
 
-  @doc("Requests recognized profanity without optional masking or removal. Mandatory service masking policies still apply.")
+  @doc("Includes recognized profanity in the transcript, subject to mandatory service masking policies.")
   unfiltered: "unfiltered",
 
   @doc("Removes recognized profanity from the transcript.")
@@ -809,8 +809,8 @@ union VoiceAgentProfanityFilterMode {
 }
 
 @doc("""
-  Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
-  options with the Azure and MAI transcription models, custom speech models, and phrase hints.
+  Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
+  and phrase hints.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentInputTranscription {
@@ -826,21 +826,15 @@ model VoiceAgentInputTranscription {
   phrase_list?: string[];
 
   @doc("""
-    Initialization-only profanity filtering for input transcripts. Supported only by the managed
-    Azure Speech (`azure-speech`) model, including Custom Speech. Using
-    `custom_speech` with this setting requires a cascaded model, not an audio-native realtime model's
-    side transcriber. Explicit settings, including null, bypass automatic native routing; unsupported
-    providers reject them.
-    Omit this property to retain provider defaults when initializing a session and preserve the initialized
-    setting on subsequent session updates. Explicit null requests `unfiltered`, not provider defaults,
-    and is acknowledged as `unfiltered` in session events. After initialization, updates may repeat the
-    same mode but cannot change it, disable transcription while an explicit mode is set, or switch the
-    transcription model. Repeating null and `unfiltered` is equivalent.
-    Filtering applies to transcript events and cascaded model context. Input audio, voice activity
-    detection, and assistant speech are unchanged; audio-native models still receive the original audio.
-    Mandatory service masking policies still apply, including when `unfiltered` is requested.
+    Controls how profanity is handled in input transcripts. Supported only with managed Azure Speech
+    (`azure-speech`), including Custom Speech.
+    Set this property before the session starts. If omitted, the transcription provider's default applies.
+    You cannot change the mode during a session.
+    Filtering affects transcript events and the text sent to cascaded models. It does not change input
+    audio, voice activity detection, or assistant speech; audio-native models still receive the original
+    audio. Mandatory service masking policies apply even when you select `unfiltered`.
     """)
-  profanity_filter?: VoiceAgentProfanityFilterMode | null;
+  profanity_filter?: VoiceAgentProfanityFilterMode;
 }
 
 @doc("The avatar video resolution.")

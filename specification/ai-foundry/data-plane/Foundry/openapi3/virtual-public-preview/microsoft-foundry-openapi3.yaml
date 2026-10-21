@@ -91183,26 +91183,18 @@ components:
             type: string
           description: Optional phrase hints that bias recognition toward domain terms.
         profanity_filter:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentProfanityFilterMode'
-            - type: 'null'
+          $ref: '#/components/schemas/VoiceAgentProfanityFilterMode'
           description: |-
-            Initialization-only profanity filtering for input transcripts. Supported only by the managed
-            Azure Speech (`azure-speech`) model, including Custom Speech. Using
-            `custom_speech` with this setting requires a cascaded model, not an audio-native realtime model's
-            side transcriber. Explicit settings, including null, bypass automatic native routing; unsupported
-            providers reject them.
-            Omit this property to retain provider defaults when initializing a session and preserve the initialized
-            setting on subsequent session updates. Explicit null requests `unfiltered`, not provider defaults,
-            and is acknowledged as `unfiltered` in session events. After initialization, updates may repeat the
-            same mode but cannot change it, disable transcription while an explicit mode is set, or switch the
-            transcription model. Repeating null and `unfiltered` is equivalent.
-            Filtering applies to transcript events and cascaded model context. Input audio, voice activity
-            detection, and assistant speech are unchanged; audio-native models still receive the original audio.
-            Mandatory service masking policies still apply, including when `unfiltered` is requested.
+            Controls how profanity is handled in input transcripts. Supported only with managed Azure Speech
+            (`azure-speech`), including Custom Speech.
+            Set this property before the session starts. If omitted, the transcription provider's default applies.
+            You cannot change the mode during a session.
+            Filtering affects transcript events and the text sent to cascaded models. It does not change input
+            audio, voice activity detection, or assistant speech; audio-native models still receive the original
+            audio. Mandatory service masking policies apply even when you select `unfiltered`.
       description: |-
-        Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
-        options with the Azure and MAI transcription models, custom speech models, and phrase hints.
+        Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
+        and phrase hints.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
