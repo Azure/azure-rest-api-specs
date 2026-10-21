@@ -6950,6 +6950,19 @@
         ]
       }
     },
+    "ServerProtectionSettingsAcceptedResult": {
+      "type": "object",
+      "description": "The update is in progress. Follow the polling headers to retrieve its result.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/ServerProtectionSettingsOperationMetadata",
+          "description": "Metadata for the accepted update."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
     "ServerProtectionSettingsBlockDrop": {
       "type": "string",
       "description": "The irreversible opt-in state for logical server deletion protection.",
@@ -6992,13 +7005,32 @@
         ]
       }
     },
+    "ServerProtectionSettingsOperationMetadata": {
+      "type": "object",
+      "description": "Metadata for an accepted logical server protection settings update.",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "Name of the accepted management operation."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when the management operation started."
+        }
+      },
+      "required": [
+        "operation",
+        "startTime"
+      ]
+    },
     "ServerProtectionSettingsProperties": {
       "type": "object",
       "description": "Settings that protect a logical server from deletion while immutable PITR backups remain in retention.",
       "properties": {
         "blockDropWhenImmutablePitrBackupInRetention": {
           "$ref": "#/definitions/ServerProtectionSettingsBlockDrop",
-          "description": "Whether to block logical server deletion while immutable point-in-time restore\nbackups remain within retention. Supported request values are enabled and\ndisabled, matched case-insensitively. Protection is disabled by default.\nEnabling protection is irreversible; requesting disabled after opt-in is\nrejected. Repeating the persisted value succeeds without changing it, using\nthe same asynchronous workflow. GET and LIST always return the persisted\nvalue, including during an update; use the polling endpoints to determine\nwhether an update succeeded. After opt-in, delete all databases and wait for\ntheir immutable backups to leave retention before deleting the logical server."
+          "description": "Whether to block logical server deletion while immutable point-in-time restore\nbackups remain within retention. Supported request values are enabled and\ndisabled, matched case-insensitively. Protection is disabled by default.\nEnabling protection is irreversible; requesting disabled after opt-in is\nrejected. Repeating the persisted value succeeds without changing it.\nPUT returns the resource if complete or operation metadata if still pending.\nGET and LIST always return the persisted\nvalue, including during an update; use the polling endpoints to determine\nwhether an update succeeded. After opt-in, delete all databases and wait for\ntheir immutable backups to leave retention before deleting the logical server."
         }
       },
       "required": [

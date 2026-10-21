@@ -4026,7 +4026,7 @@ suppressions:
   - code: PutResponseCodes
     from: preview/2026-11-01-preview/servers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serverProtectionSettings/{serverProtectionSettingsName}"].put
-    reason: Assumes an ARM exception for this proxy resource to return bodyless HTTP 202 for every accepted PUT, including repeated values. Operation status and the final resource are obtained through polling.
+    reason: This always-existing singleton follows the MI contract, returning HTTP 200 with the resource on completion or HTTP 202 with operation metadata and polling headers while pending. PUT never creates a new resource.
   - code: ProvisioningStateSpecifiedForLROPut
     from: preview/2026-11-01-preview/servers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serverProtectionSettings/{serverProtectionSettingsName}"].put

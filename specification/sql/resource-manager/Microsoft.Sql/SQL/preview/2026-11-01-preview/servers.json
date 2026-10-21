@@ -664,10 +664,10 @@
         },
         "x-ms-examples": {
           "List the logical server's singleton protection settings after opt-in": {
-            "$ref": "./examples/ServerProtectionSettingsListByServer.json"
+            "$ref": "./examples/ListServerProtectionSettings.json"
           },
           "List the persisted disabled flag before opt-in is persisted": {
-            "$ref": "./examples/ServerProtectionSettingsListByServerDisabled.json"
+            "$ref": "./examples/ListServerProtectionSettingsDisabled.json"
           }
         },
         "x-ms-pageable": {
@@ -738,13 +738,10 @@
         },
         "x-ms-examples": {
           "Get logical server protection settings after opt-in has completed": {
-            "$ref": "./examples/ServerProtectionSettingsGet.json"
+            "$ref": "./examples/GetServerProtectionSettings.json"
           },
           "Get the always-existing logical server protection settings before opt-in": {
-            "$ref": "./examples/ServerProtectionSettingsGetDisabled.json"
-          },
-          "Get the persisted disabled flag while opt-in is pending and has not been persisted": {
-            "$ref": "./examples/ServerProtectionSettingsGetWhileUpdatePending.json"
+            "$ref": "./examples/GetServerProtectionSettingsDisabled.json"
           }
         }
       },
@@ -753,7 +750,7 @@
         "tags": [
           "ServerProtectionSettings"
         ],
-        "description": "Updates logical server protection settings. Every accepted request, including\na repeated value, returns HTTP 202 without a resource body. Follow\nAzure-AsyncOperation for operation status: HTTP 200 with status InProgress,\nSucceeded, Failed, or Canceled and error details on failure. The Location\nendpoint returns HTTP 202 while pending, HTTP 200 with the complete settings\nresource on success, or an appropriate HTTP error with the standard error\nbody on failure. Resource GET and LIST return HTTP 200 with the persisted\nflag while the operation is pending. Requests to disable protection after opt-in are\nrejected. This proxy resource does not expose provisioningState; update status\nis available only through the operation polling endpoints.",
+        "description": "Updates logical server protection settings. Returns HTTP 200 with the resource\nif the update has completed, or HTTP 202 with operation metadata and polling\nheaders while it is pending. The same response contract applies to repeated\nvalues. Follow\nAzure-AsyncOperation for operation status: HTTP 200 with status InProgress,\nSucceeded, Failed, or Canceled and error details on failure. The Location\nendpoint returns HTTP 202 while pending, HTTP 200 with the complete settings\nresource on success, or an appropriate HTTP error with the standard error\nbody on failure. Resource GET and LIST return HTTP 200 with the persisted\nflag while the operation is pending. Requests to disable protection after opt-in are\nrejected. This proxy resource does not expose provisioningState; update status\nis available only through the operation polling endpoints.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -804,8 +801,17 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerProtectionSettings"
+            }
+          },
           "202": {
-            "description": "The protection settings update was accepted. Poll the operation for completion.",
+            "description": "The update is in progress. Follow the polling headers to retrieve its result.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ServerProtectionSettingsOperationMetadata"
+            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -831,14 +837,11 @@
           }
         },
         "x-ms-examples": {
-          "Opt in to irreversible logical server protection asynchronously": {
-            "$ref": "./examples/ServerProtectionSettingsCreateOrUpdateOptIn.json"
+          "Disable logical server protection before opt-in": {
+            "$ref": "./examples/CreateOrUpdateServerProtectionSettingsDisable.json"
           },
-          "Repeat disabled before opt-in using the same asynchronous workflow": {
-            "$ref": "./examples/ServerProtectionSettingsCreateOrUpdateAlreadyDisabled.json"
-          },
-          "Repeat enabled on an already-enabled server using the same asynchronous workflow": {
-            "$ref": "./examples/ServerProtectionSettingsCreateOrUpdateAlreadyEnabled.json"
+          "Opt in to irreversible logical server protection": {
+            "$ref": "./examples/CreateOrUpdateServerProtectionSettingsEnable.json"
           }
         },
         "x-ms-long-running-operation-options": {

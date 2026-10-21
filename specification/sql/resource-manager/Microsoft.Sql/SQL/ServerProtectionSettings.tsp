@@ -5,6 +5,7 @@ import "@typespec/versioning";
 import "./Server.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
@@ -46,8 +47,9 @@ model ServerProtectionSettingsProperties {
    * backups remain within retention. Supported request values are enabled and
    * disabled, matched case-insensitively. Protection is disabled by default.
    * Enabling protection is irreversible; requesting disabled after opt-in is
-   * rejected. Repeating the persisted value succeeds without changing it, using
-   * the same asynchronous workflow. GET and LIST always return the persisted
+   * rejected. Repeating the persisted value succeeds without changing it.
+   * PUT returns the resource if complete or operation metadata if still pending.
+   * GET and LIST always return the persisted
    * value, including during an update; use the polling endpoints to determine
    * whether an update succeeded. After opt-in, delete all databases and wait for
    * their immutable backups to leave retention before deleting the logical server.
@@ -67,6 +69,27 @@ union ServerProtectionSettingsBlockDrop {
   Disabled: "disabled",
 }
 
+/** Metadata for an accepted logical server protection settings update. */
+@added(Versions.v2026_11_01_preview)
+model ServerProtectionSettingsOperationMetadata {
+  /** Name of the accepted management operation. */
+  operation: string;
+
+  /** Time when the management operation started. */
+  startTime: utcDateTime;
+}
+
+/** The update is in progress. Follow the polling headers to retrieve its result. */
+@added(Versions.v2026_11_01_preview)
+model ServerProtectionSettingsAcceptedResult {
+  ...AcceptedResponse;
+  ...ArmCombinedLroHeaders<FinalResult = ServerProtectionSettings>;
+  ...Azure.Core.Foundations.RetryAfterHeader;
+
+  /** Metadata for the accepted update. */
+  @body body: ServerProtectionSettingsOperationMetadata;
+}
+
 /** Read, list, and update the default logical server protection settings. */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The settings always exist with the logical server; irreversible protection cannot be removed by deleting the settings."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "SQL uses legacy feature files to register operations."
@@ -83,8 +106,10 @@ interface ServerProtectionSettingsOperations {
   listByServer is ArmResourceListByParent<ServerProtectionSettings>;
 
   /**
-   * Updates logical server protection settings. Every accepted request, including
-   * a repeated value, returns HTTP 202 without a resource body. Follow
+   * Updates logical server protection settings. Returns HTTP 200 with the resource
+   * if the update has completed, or HTTP 202 with operation metadata and polling
+   * headers while it is pending. The same response contract applies to repeated
+   * values. Follow
    * Azure-AsyncOperation for operation status: HTTP 200 with status InProgress,
    * Succeeded, Failed, or Canceled and error details on failure. The Location
    * endpoint returns HTTP 202 while pending, HTTP 200 with the complete settings
@@ -94,15 +119,15 @@ interface ServerProtectionSettingsOperations {
    * rejected. This proxy resource does not expose provisioningState; update status
    * is available only through the operation polling endpoints.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Exception assumed for this proxy resource: accepted PUT requests return 202 and expose operation status only through polling endpoints."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "This existing singleton returns 202 while updating and 200 on completion; PUT never creates a new resource."
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The SQL RP returns operation metadata for pending 202 responses and the resource only for completed 200 responses, following the MI contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The SQL RP pending 202 response contains the operation name and start time, following the MI contract."
   @tag("ServerProtectionSettings")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerProtectionSettings,
-    Response = ArmAcceptedLroResponse<
-      "The protection settings update was accepted. Poll the operation for completion.",
-      LroHeaders = ArmCombinedLroHeaders<FinalResult = ServerProtectionSettings> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<ServerProtectionSettings>
+      | ServerProtectionSettingsAcceptedResult
   >;
 }
 
