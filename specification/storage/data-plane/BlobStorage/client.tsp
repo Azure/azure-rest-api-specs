@@ -1364,7 +1364,7 @@ scalar HttpRange extends string;
 @@clientNamespace(ArchiveStatusRust, "Azure.Storage.Blobs", "rust");
 @@scope(BlobProperties.smartAccessTier, "!rust");
 
-/** The access tiers exposed by the Rust SDK. */
+/** The access tiers. */
 union AccessTierRust {
   /** The P4 access tier. */
   P4: "P4",
@@ -1418,7 +1418,7 @@ union AccessTierRust {
   string,
 }
 
-/** The archive statuses exposed by the Rust SDK. */
+/** The archive status. */
 union ArchiveStatusRust {
   /** The archive status is rehydrating pending to Hot. */
   RehydratePendingToHot: "rehydrate-pending-to-hot",
@@ -1433,7 +1433,7 @@ union ArchiveStatusRust {
   string,
 }
 
-/** The download response headers exposed by the Rust SDK. */
+/** The download response headers. */
 alias BlobDownloadResponseHeadersRust = {
   /** The content type of the body of the response. */
   @header("Content-Type")
