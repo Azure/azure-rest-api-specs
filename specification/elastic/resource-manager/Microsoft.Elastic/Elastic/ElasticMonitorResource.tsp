@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Elastic;
 /**
@@ -132,6 +133,14 @@ interface ElasticMonitorResources {
       | ArmDeletedResponse
       | ArmDeleteAcceptedLroResponse
       | ArmDeletedNoContentResponse,
+    Parameters = {
+      /**
+       * Indicates whether to perform a soft delete. When set to true, the Azure resource (Liftr integration) only is deleted and not the Partner Cloud resource. When set to false (default), the resource is permanently deleted from both Azure and the Partner Cloud.
+       */
+      @added(Versions.v2026_03_15_preview)
+      @query("softDelete")
+      softDelete?: boolean = false;
+    },
     Error = ResourceProviderDefaultErrorResponse
   >;
 

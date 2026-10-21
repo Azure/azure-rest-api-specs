@@ -7,6 +7,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 /** Error response for API failures. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ApiErrorResponse {
   error: ApiError;
@@ -40,6 +41,24 @@ alias UserDelegationHeader = {
   @header("x-ms-user-identity") user_identity?: string;
 };
 
+/**
+ * Optional request header carrying an application-owned conversation identifier for Model Router session affinity.
+ * Used when the request body does not supply a valid session ID.
+ */
+alias SessionAffinityRequestHeader = {
+  /** An opaque, application-owned conversation identifier. The value is not returned in the response and must not contain secrets or personally identifiable information. */
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[
+        FoundryFeaturesOptInKeys.model_router_controls_v1_preview
+      ],
+    }
+  )
+  @header("x-ms-session-id")
+  session_id?: string;
+};
+
 // NOTE: Platform-internal headers (x-agent-foundry-call-id, x-foundry-foundation-token)
 // are NOT part of the public API spec. They are injected by the platform and resolved
 // server-side. If needed for contracts, they should be added in the contracts entry point.
@@ -47,6 +66,7 @@ alias UserDelegationHeader = {
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "OpenAI Response schemas can be intentionally combined for documentation clarity"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
 op OpenAIOperation<
   Params extends Reflection.Model,
   Response,
@@ -198,4 +218,21 @@ model DatasetJobSource {
 
   @doc("The version of the dataset. If not specified, the latest version is used.")
   version?: string;
+}
+
+/**
+ * User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
+ */
+model AzureUserSecurityContext {
+  /** The name of the application. Sensitive personal information should not be included in this field. */
+  application_name?: string;
+
+  /** This identifier is the Microsoft Entra ID (formerly Azure Active Directory) user object ID used to authenticate end-users within the generative AI application. Sensitive personal information should not be included in this field. */
+  end_user_id?: string;
+
+  /** The Microsoft 365 tenant ID the end user belongs to. It's required when the generative AI application is multitenant. */
+  end_user_tenant_id?: string;
+
+  /** Captures the original client's IP address. */
+  source_ip?: string;
 }

@@ -67,6 +67,8 @@ model FleetMemberProperties {
   status?: FleetMemberStatus;
 
   @added(Versions.v2026_03_02_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_02_preview)
   @visibility(Lifecycle.Read)
   @doc("The Mesh Member Properties associated with this Fleet Member.")
   meshProperties?: MeshProperties;
@@ -132,10 +134,7 @@ interface FleetMembers {
   @sharedRoute
   @added(Versions.v2023_06_15_preview)
   @operationId("FleetMembers_Update")
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "original-uri" }
-  )
+  @Azure.Core.useFinalStateVia("original-uri")
   updateAsync is ArmCustomPatchAsync<
     FleetMember,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

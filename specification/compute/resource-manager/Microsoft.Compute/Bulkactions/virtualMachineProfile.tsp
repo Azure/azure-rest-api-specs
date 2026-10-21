@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Compute;
 @doc("Describes the properties of a Virtual Machine for bulk create.")
@@ -20,6 +22,7 @@ model BulkactionVMProperties {
   @doc("Specifies additional capabilities enabled or disabled on the virtual machine.")
   additionalCapabilities?: AdditionalCapabilities;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned.")
   osProfile?: OSProfile;
 
@@ -52,6 +55,25 @@ model BulkactionVMProperties {
 
   @doc("Virtual Machine Extensions Array to be applied to the Virtual Machines.")
   vmExtensions?: BulkactionVMExtension[];
+
+  @added(Versions.`2026-10-06-preview`)
+  @doc("Specifies the priority for the virtual machines. Mirrors the priority property on Microsoft.Compute/virtualMachines.")
+  priority?: PriorityType;
+
+  @added(Versions.`2026-10-06-preview`)
+  @doc("Specifies the billing related details of the Azure Spot virtual machines. Mirrors the billingProfile property on Microsoft.Compute/virtualMachines. Only applies when priority is Spot.")
+  billingProfile?: BillingProfile;
+
+  @added(Versions.`2026-10-06-preview`)
+  @doc("Specifies the eviction policy for the Azure Spot virtual machines. Both Deallocate and Delete are supported. Mirrors the evictionPolicy property on Microsoft.Compute/virtualMachines. Only applies when priority is Spot.")
+  evictionPolicy?: EvictionPolicy;
+}
+
+@added(Versions.`2026-10-06-preview`)
+@doc("Specifies the billing related details of the Azure Spot virtual machines.")
+model BillingProfile {
+  @doc("Specifies the maximum price, in US Dollars, you are willing to pay per hour for each Azure Spot virtual machine. This price is compared with the current Azure Spot price for the virtual machine size at create time, and the operation only succeeds if maxPrice is greater than the current Azure Spot price. It is also used to evict a virtual machine if the current Azure Spot price rises above it after creation. Possible values are any decimal value greater than zero, or -1 to indicate the default price is up-to on-demand and the virtual machine should not be evicted for price reasons. The default is -1 when not provided.")
+  maxPrice?: float64;
 }
 
 @doc("Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations.")
@@ -107,6 +129,7 @@ model StorageProfile {
   @doc("Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations.")
   imageReference?: ImageReference;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Specifies information about the operating system disk used by the virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).")
   osDisk?: OSDisk;
 
@@ -164,6 +187,7 @@ model ImageReference extends SubResource {
 
 @doc("Specifies information about the operating system disk used by the virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).")
 model OSDisk {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
 
@@ -499,6 +523,7 @@ model OSProfile {
 
   @doc("Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)")
   @secret
+  @visibility(Lifecycle.Create)
   adminPassword?: string;
 
   /**
@@ -954,6 +979,7 @@ model VirtualMachineNetworkInterfaceConfigurationProperties {
   @doc("The dns settings to be applied on the network interfaces.")
   dnsSettings?: VirtualMachineNetworkInterfaceDnsSettingsConfiguration;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Specifies the IP configurations of the network interface.")
   @identifiers(#["name"])
   ipConfigurations: VirtualMachineNetworkInterfaceIPConfiguration[];
@@ -1040,6 +1066,7 @@ model VirtualMachinePublicIPAddressConfigurationProperties {
   @doc("The dns settings to be applied on the publicIP addresses .")
   dnsSettings?: VirtualMachinePublicIPAddressDnsSettingsConfiguration;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The list of IP tags associated with the public IP address.")
   @identifiers(#[])
   ipTags?: VirtualMachineIpTag[];
@@ -1067,8 +1094,10 @@ model VirtualMachinePublicIPAddressDnsSettingsConfiguration {
   domainNameLabelScope?: DomainNameLabelScopeTypes;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("Contains the IP tag associated with the public IP address.")
 model VirtualMachineIpTag {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP tag type. Example: FirstPartyUsage.")
   ipTagType?: string;
 
@@ -1253,6 +1282,7 @@ model ScheduledEventsProfile {
   @doc("Specifies Terminate Scheduled Event related configurations.")
   terminateNotificationProfile?: TerminateNotificationProfile;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Specifies OS Image Scheduled Event related configurations.")
   osImageNotificationProfile?: OSImageNotificationProfile;
 }

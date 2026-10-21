@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "api-version": "2026-06-01",
+    "localRulestackName": "lrs1",
+    "resourceGroupName": "firewall-rg",
+    "subscriptionId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c27"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/rgopenapi/providers/PaloAltoNetworks.Cloudngfw/localRulestacks/lrs1/localRules?api-version=2026-06-01&$skiptoken=xyz",
+        "value": [
+          {
+            "name": "default",
+            "type": "a",
+            "id": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/firewall-rg/providers/PaloAltoNetworks.Cloudngfw/localRulestacks/lrs1/localRules/default",
+            "properties": {
+              "description": "Sample rule for demonstration purposes.",
+              "actionType": "Allow",
+              "applications": [
+                "web-browsing"
+              ],
+              "auditComment": "Reviewed and approved by the network security team.",
+              "category": {
+                "feeds": [
+                  "threat-intel-feed"
+                ],
+                "urlCustom": [
+                  "www.contoso.com"
+                ]
+              },
+              "decryptionRuleType": "SSLOutboundInspection",
+              "destination": {
+                "cidrs": [
+                  "10.0.0.0/24"
+                ],
+                "countries": [
+                  "US"
+                ],
+                "feeds": [
+                  "threat-intel-feed"
+                ],
+                "fqdnLists": [
+                  "allowed-fqdn-list"
+                ],
+                "prefixLists": [
+                  "corp-prefix-list"
+                ]
+              },
+              "enableLogging": "DISABLED",
+              "etag": "a3f5c9e1b7d2",
+              "inboundInspectionCertificate": "inbound-inspection-cert",
+              "negateDestination": "TRUE",
+              "negateSource": "TRUE",
+              "priority": 24,
+              "protocolPortList": [
+                "tcp/443"
+              ],
+              "provisioningState": "Accepted",
+              "ruleName": "allow-outbound-web",
+              "ruleState": "DISABLED",
+              "source": {
+                "cidrs": [
+                  "10.0.0.0/24"
+                ],
+                "countries": [
+                  "US"
+                ],
+                "feeds": [
+                  "threat-intel-feed"
+                ],
+                "prefixLists": [
+                  "corp-prefix-list"
+                ]
+              },
+              "tags": [
+                {
+                  "key": "keyName",
+                  "value": "value"
+                }
+              ],
+              "protocol": "TCP"
+            },
+            "systemData": {
+              "createdAt": "2022-09-09T05:08:24.229Z",
+              "createdBy": "praval",
+              "createdByType": "User",
+              "lastModifiedAt": "2022-09-09T05:08:24.229Z",
+              "lastModifiedBy": "praval",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "LocalRules_ListByLocalRulestacks",
+  "title": "LocalRules_ListByLocalRulestacks_MaximumSet_Gen"
+}

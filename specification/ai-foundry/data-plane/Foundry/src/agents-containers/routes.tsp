@@ -206,8 +206,13 @@ interface AgentContainers {
       tail?: int32;
     },
     Stream<{
+      /** The content type of the request body. */
       @header("content-type") contentType: "text/plain; charset=utf-8";
+
+      /** The transfer encoding response header. */
       @header("transfer-encoding") transferEncoding: "chunked";
+
+      /** The streamed log response body. */
       @body body: string;
     }>
   >;

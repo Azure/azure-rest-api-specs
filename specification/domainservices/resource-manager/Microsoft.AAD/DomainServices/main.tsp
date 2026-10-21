@@ -38,9 +38,10 @@ namespace Microsoft.AAD;
  */
 enum Versions {
   /**
-   * The 2025-10-01-preview API version.
+   * The 2026-08-31-preview API version.
    */
-  v2025_10_01_preview: "2025-10-01-preview",
+  @Azure.Core.previewVersion
+  v2026_08_31_preview: "2026-08-31-preview",
 }
 
 @tag("DomainServices")

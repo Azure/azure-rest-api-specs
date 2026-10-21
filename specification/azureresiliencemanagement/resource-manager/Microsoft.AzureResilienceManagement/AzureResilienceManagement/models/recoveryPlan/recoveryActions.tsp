@@ -80,6 +80,12 @@ model OperationQualificationDetails {
 
   @doc("Reasons for resource not qualified for the operation.")
   notQualifiedReasons?: string[];
+
+  @added(Versions.v2026_08_31_preview)
+  @doc("Advisory resource feasibility reviews. Absent when no review was evaluated for this resource.")
+  @identifiers(#["feasibilityType", "resourceType"])
+  @maxItems(10)
+  resourceFeasibilityReviews?: ResourceFeasibilityReview[];
 }
 
 @doc("Details of resource and its qualification for an operation")
@@ -118,4 +124,91 @@ model RecoveryActionRequest {
   @doc("User-provided input for the action.")
   @maxLength(100)
   description?: string;
+}
+
+@added(Versions.v2026_08_31_preview)
+@doc("The resource feasibility review category for a recovery resource.")
+union ResourceFeasibilityReviewType {
+  @added(Versions.v2026_08_31_preview)
+  @doc("SKU capacity availability check in the target region or zone.")
+  SkuCapacity: "SkuCapacity",
+
+  string,
+}
+
+@added(Versions.v2026_08_31_preview)
+@doc("Outcome of a resource feasibility review for a recovery resource.")
+union ResourceFeasibilityReviewStatus {
+  @added(Versions.v2026_08_31_preview)
+  @doc("The review could not complete. Advisory only; it never blocks failover.")
+  Unavailable: "Unavailable",
+
+  @added(Versions.v2026_08_31_preview)
+  @doc("The review identified no risk.")
+  Passed: "Passed",
+
+  @added(Versions.v2026_08_31_preview)
+  @doc("The review identified a risk the operator should consider.")
+  Flagged: "Flagged",
+
+  @added(Versions.v2026_08_31_preview)
+  @doc("The review did not apply to this resource and was skipped.")
+  NotApplicable: "NotApplicable",
+
+  string,
+}
+
+@added(Versions.v2026_08_31_preview)
+@doc("SKU details for a resource feasibility review, used for both the current target SKU and the recommended alternate SKUs.")
+model SkuDetails {
+  @added(Versions.v2026_08_31_preview)
+  @doc("The Azure SKU name.")
+  sku: string;
+
+  @added(Versions.v2026_08_31_preview)
+  @doc("Number of virtual CPUs for the SKU. Absent when SKU specifications are unavailable.")
+  vCpu?: int32;
+
+  @added(Versions.v2026_08_31_preview)
+  @doc("Memory in GiB for the SKU. Absent when SKU specifications are unavailable.")
+  ram?: int32;
+
+  @added(Versions.v2026_08_31_preview)
+  @doc("Estimated monthly price. Absent when pricing is unavailable.")
+  monthlyPrice?: float64;
+
+  @added(Versions.v2026_08_31_preview)
+  @doc("ISO 4217 currency code for `monthlyPrice`.")
+  currency?: string;
+
+  @added(Versions.v2026_08_31_preview)
+  @doc("Identifier of the Azure offering used to estimate `monthlyPrice`.")
+  offeringId?: string;
+}
+
+@added(Versions.v2026_08_31_preview)
+@doc("Result of a single feasibility review performed against one resource in a recovery plan.")
+model ResourceFeasibilityReview {
+  @added(Versions.v2026_08_31_preview)
+  @doc("The resource feasibility review type.")
+  feasibilityType: ResourceFeasibilityReviewType;
+
+  @added(Versions.v2026_08_31_preview)
+  @doc("Fully qualified ARM resource type evaluated, e.g. `Microsoft.Compute/virtualMachines`.")
+  @pattern("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+(/[a-zA-Z0-9]+)+$")
+  resourceType: string;
+
+  @added(Versions.v2026_08_31_preview)
+  @doc("The SKU the resource is currently configured to recover into, enriched for comparison against the recommendations. Absent when it could not be resolved, and always absent on `Passed` and `NotApplicable` reviews.")
+  currentTargetSku?: SkuDetails;
+
+  @added(Versions.v2026_08_31_preview)
+  @doc("Outcome of this feasibility review.")
+  status: ResourceFeasibilityReviewStatus;
+
+  @added(Versions.v2026_08_31_preview)
+  @doc("Alternative SKUs surfaced for this review. Absent or empty means a `Flagged` review has no alternatives, an `Unavailable` review has no applicable recommendations to surface, or the review has a minimal `Passed` / `NotApplicable` outcome. Callers should treat an absent array and an empty array identically.")
+  @identifiers(#["sku"])
+  @maxItems(5)
+  recommendedTargetSkus?: SkuDetails[];
 }

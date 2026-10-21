@@ -299,6 +299,56 @@ union AfdCipherSuiteSetType {
   TLS12_2023: "TLS12_2023",
 }
 
+/**
+ * Server TLS group policy that will be used for Https. Standard and Enhanced are service-managed sets; Custom allows specifying serverTlsGroups explicitly.
+ */
+@added(Versions.v2026_07_01)
+union AfdServerTlsGroupPolicy {
+  string,
+
+  /** Uses the standard service-managed set of server TLS groups. */
+  Standard: "Standard",
+
+  /** Uses the enhanced service-managed set of server TLS groups. */
+  Enhanced: "Enhanced",
+
+  /** Uses the server TLS groups specified by serverTlsGroups. */
+  Custom: "Custom",
+}
+
+/**
+ * Supported key-exchange groups and curves. The ML-KEM groups are hybrid post-quantum groups.
+ */
+@added(Versions.v2026_07_01)
+union AfdServerTlsGroup {
+  string,
+
+  /** Hybrid post-quantum group combining secp256r1 with ML-KEM-768. */
+  SecP256r1MLKEM768: "SecP256r1MLKEM768",
+
+  /** Hybrid post-quantum group combining secp384r1 with ML-KEM-1024. */
+  SecP384r1MLKEM1024: "SecP384r1MLKEM1024",
+
+  /** Hybrid post-quantum group combining X25519 with ML-KEM-768. */
+  X25519MLKEM768: "X25519MLKEM768",
+
+  /** The prime256v1 elliptic curve group. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The service-defined TLS group name intentionally uses this exact casing."
+  prime256v1: "prime256v1",
+
+  /** The X25519 elliptic curve group. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The service-defined TLS group name intentionally uses this exact casing."
+  X25519: "X25519",
+
+  /** The secp384r1 elliptic curve group. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The service-defined TLS group name intentionally uses this exact casing."
+  secp384r1: "secp384r1",
+
+  /** The secp521r1 elliptic curve group. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The service-defined TLS group name intentionally uses this exact casing."
+  secp521r1: "secp521r1",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AfdCustomizedCipherSuiteForTls12 {
   string,
@@ -425,6 +475,23 @@ union OriginAuthenticationTokenDestinationHeader {
 }
 
 /**
+ * The validation mode for certificate name check at origin level. Only applicable when enforceCertificateNameCheck is true.
+ */
+@added(Versions.v2026_07_01)
+union CertificateNameCheckValidationMode {
+  string,
+
+  /** Validate the certificate against the origin hostname. */
+  OriginHostname: "OriginHostname",
+
+  /** Validate the certificate against custom certificate subjects. */
+  CustomCertificateSubject: "CustomCertificateSubject",
+
+  /** Validate the certificate against the incoming host header. */
+  IncomingHostHeader: "IncomingHostHeader",
+}
+
+/**
  * Supported protocols for the customer's endpoint.
  */
 union AFDEndpointProtocols {
@@ -490,6 +557,7 @@ union HttpsRedirect {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_08_01_preview)
 union AFDRouteGrpcState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1128,6 +1196,7 @@ union PolicyMode {
 /**
  * If the action type is block, this field defines the default customer overridable http response status code.
  */
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union PolicySettingsDefaultCustomBlockResponseStatusCode {
   int32,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2123,6 +2192,12 @@ union InvocationPoint {
   ClientRequest: "ClientRequest",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OriginRequest: "OriginRequest",
+
+  /**
+   * Invoked at the client response stage, before the response is returned to the client. Currently only supported for edge actions.
+   */
+  @added(Versions.v2026_09_01_preview)
+  ClientResponse: "ClientResponse",
 }
 
 /**
@@ -2274,6 +2349,7 @@ enum ProbeProtocol {
 
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_08_01_preview)
   Grpc,
 }
 
@@ -2750,6 +2826,18 @@ model AFDDomainHttpsParameters {
   customizedCipherSuiteSet?: AFDDomainHttpsCustomizedCipherSuiteSet;
 
   /**
+   * Server TLS group policy that will be used for Https.
+   */
+  @added(Versions.v2026_07_01)
+  serverTlsGroupPolicy?: AfdServerTlsGroupPolicy;
+
+  /**
+   * Server TLS groups that will be used for Https when serverTlsGroupPolicy is Custom.
+   */
+  @added(Versions.v2026_07_01)
+  serverTlsGroups?: AfdServerTlsGroup[];
+
+  /**
    * Resource reference to the secret. ie. subs/rg/profile/secret
    */
   secret?: ResourceReference;
@@ -2995,6 +3083,48 @@ model LoadBalancingSettingsParameters {
    * The additional latency in milliseconds for probes to fall into the lowest latency bucket
    */
   additionalLatencyInMilliseconds?: int32;
+
+  /**
+   * Capacity based round-robin load balancing settings
+   */
+  @added(Versions.v2026_08_01_preview)
+  capacityDistributionSettings?: CapacityDistributionSettingsParameters;
+}
+
+/**
+ * Capacity based round-robin load balancing settings for a backend pool
+ */
+@added(Versions.v2026_08_01_preview)
+model CapacityDistributionSettingsParameters {
+  /**
+   * Threshold at which additional backends are added for capacity based load balancing. Default is 80 percent.
+   */
+  @maxValue(100)
+  @minValue(20)
+  capacityConsciousThreshold?: int32;
+
+  /**
+   * Type of distribution used in capacity based load balancing.
+   */
+  distributionType?: DistributionType;
+}
+
+/**
+ * Type of distribution used in capacity based load balancing.
+ */
+@added(Versions.v2026_08_01_preview)
+union DistributionType {
+  string,
+
+  /**
+   * Uses static backend weights for load balancing.
+   */
+  StaticWeights: "StaticWeights",
+
+  /**
+   * Dynamically adjusts weights based on backend capacity.
+   */
+  DynamicWeights: "DynamicWeights",
 }
 
 /**
@@ -3148,6 +3278,20 @@ model AFDOriginUpdatePropertiesParameters {
    * Whether to enable certificate name check at origin level
    */
   enforceCertificateNameCheck?: boolean = true;
+
+  /**
+   * The validation mode for certificate name check. Only applicable when enforceCertificateNameCheck is true.
+   */
+  @added(Versions.v2026_07_01)
+  certificateNameCheckValidationMode?: CertificateNameCheckValidationMode;
+
+  /**
+   * The list of custom certificate subjects to validate against. Only applicable when certificateNameCheckValidationMode is 'CustomCertificateSubject'. Must contain 1 or 2 entries.
+   */
+  @added(Versions.v2026_07_01)
+  @minItems(1)
+  @maxItems(2)
+  customCertificateSubjects?: string[];
 }
 
 /**
@@ -3304,6 +3448,7 @@ model RouteUpdatePropertiesParameters {
    */
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_08_01_preview)
   grpcState?: AFDRouteGrpcState;
 }
 
@@ -3321,6 +3466,229 @@ model ActivatedResourceReference {
    */
   @visibility(Lifecycle.Read)
   isActive?: boolean;
+}
+
+/**
+ * Properties of the authorization policy.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The service contract composes writable authorization policy properties with Azure Front Door state properties."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The existing Azure Front Door state model defines the service's provisioning state contract."
+@added(Versions.v2026_09_01_preview)
+model AuthPolicyProperties extends AFDStateProperties {
+  /**
+   * Authorization configurations for the policy.
+   */
+  @identifiers(#[])
+  @minItems(1)
+  authConfigs: AuthPolicyConfig[];
+
+  /**
+   * Resource associations for the authorization policy.
+   */
+  associations: AuthPolicyAssociation;
+
+  /**
+   * Action to apply when authorization fails.
+   */
+  action?: AuthPolicyAction = AuthPolicyAction.Block;
+
+  /**
+   * Whether to forward the authentication token to the origin. Defaults to true.
+   */
+  forwardTokenToOrigin?: boolean = true;
+}
+
+/**
+ * Parameters for updating an authorization policy.
+ */
+@added(Versions.v2026_09_01_preview)
+model AuthPolicyUpdateParameters {
+  /**
+   * Properties to update on the authorization policy.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The existing Swagger contract flattens the properties payload for SDK compatibility."
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  properties?: AuthPolicyUpdatePropertiesParameters;
+}
+
+/**
+ * Writable properties of an authorization policy.
+ */
+@added(Versions.v2026_09_01_preview)
+model AuthPolicyUpdatePropertiesParameters {
+  /**
+   * Authorization configurations for the policy.
+   */
+  @identifiers(#[])
+  @minItems(1)
+  authConfigs?: AuthPolicyConfig[];
+
+  /**
+   * Resource associations for the authorization policy.
+   */
+  associations?: AuthPolicyAssociation;
+
+  /**
+   * Action to apply when authorization fails.
+   */
+  action?: AuthPolicyAction;
+
+  /**
+   * Whether to forward the authentication token to the origin. When omitted, the existing value is unchanged.
+   */
+  forwardTokenToOrigin?: boolean;
+}
+
+/**
+ * Reference to a domain associated with an authorization policy.
+ */
+@added(Versions.v2026_09_01_preview)
+model AuthPolicyDomainReference {
+  /**
+   * Resource ID of the custom domain or Azure Front Door endpoint.
+   */
+  id: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Cdn/profiles/customDomains";
+    },
+    {
+      type: "Microsoft.Cdn/profiles/afdEndpoints";
+    }
+  ]>;
+
+  /**
+   * Whether the resource is active or inactive.
+   */
+  @visibility(Lifecycle.Read)
+  isActive?: boolean;
+}
+
+/**
+ * Reference to a route associated with an authorization policy.
+ */
+@added(Versions.v2026_09_01_preview)
+model AuthPolicyRouteReference {
+  /**
+   * Resource ID of the Azure Front Door route.
+   */
+  id: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Cdn/profiles/afdEndpoints/routes";
+    }
+  ]>;
+}
+
+/**
+ * Resource associations for an authorization policy.
+ */
+@added(Versions.v2026_09_01_preview)
+model AuthPolicyAssociation {
+  /**
+   * Indicates whether the policy is associated at the profile level. When omitted during creation, the service defaults this value to false.
+   */
+  isProfileLevel?: boolean;
+
+  /**
+   * Domains associated with the authorization policy.
+   */
+  @identifiers(#["id"])
+  @maxItems(15)
+  domains?: AuthPolicyDomainReference[];
+
+  /**
+   * Routes associated with the authorization policy.
+   */
+  @identifiers(#["id"])
+  @maxItems(15)
+  routes?: AuthPolicyRouteReference[];
+}
+
+/**
+ * Authorization configuration parameters.
+ */
+@added(Versions.v2026_09_01_preview)
+@discriminator("identityProvider")
+model AuthPolicyConfig {
+  /**
+   * Identity provider used by the authorization configuration.
+   */
+  identityProvider: AuthPolicyConfigIdentityProvider;
+}
+
+/**
+ * Identity provider used by an authorization configuration.
+ */
+@added(Versions.v2026_09_01_preview)
+union AuthPolicyConfigIdentityProvider {
+  string,
+
+  /**
+   * Microsoft Entra ID.
+   */
+  EntraID: "EntraID",
+}
+
+/**
+ * Microsoft Entra ID authorization policy configuration.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserve the established API and SDK spelling of Entra ID."
+@added(Versions.v2026_09_01_preview)
+model AuthPolicyEntraIDConfig extends AuthPolicyConfig {
+  /**
+   * Identity provider used by the authorization configuration.
+   */
+  identityProvider: "EntraID";
+
+  /**
+   * Issuer or authority for the identity provider to validate.
+   */
+  issuer: string;
+
+  /**
+   * Audiences to validate.
+   */
+  @minItems(1)
+  audiences: string[];
+
+  /**
+   * Location of the authorization value in the HTTP request. Only Header is supported.
+   */
+  authLocation?: AuthLocation = AuthLocation.Header;
+
+  /**
+   * Selector within the authorization location used to find the identity.
+   */
+  authLocationSelector?: string;
+}
+
+/**
+ * Supported location of the authorization value in an HTTP request.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Authorization policies only support Header; arbitrary locations, query strings, and cookies must not be accepted."
+@added(Versions.v2026_09_01_preview)
+union AuthLocation {
+  /**
+   * The authorization value is in an HTTP request header.
+   */
+  Header: "Header",
+}
+
+/**
+ * Action applied when authorization fails.
+ */
+@added(Versions.v2026_09_01_preview)
+union AuthPolicyAction {
+  string,
+
+  /**
+   * Block the request.
+   */
+  Block: "Block",
+
+  /**
+   * Log the authorization failure and allow the request to continue.
+   */
+  Log: "Log",
 }
 
 /**
@@ -3711,6 +4079,7 @@ model DeploymentVersionChange {
 /**
  * Metrics Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MetricsResponse {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3765,6 +4134,7 @@ model Components1Gs0LlpSchemasMetricsresponsePropertiesSeriesItemsPropertiesData
 /**
  * Rankings Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RankingsResponse {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3812,6 +4182,7 @@ model RankingsResponseTablesPropertiesItemsMetricsItem {
 /**
  * Continents Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ContinentsResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   continents?: ContinentsResponseContinentsItem[];
@@ -3836,6 +4207,7 @@ model ContinentsResponseCountryOrRegionsItem {
 /**
  * Resources Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourcesResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endpoints?: ResourcesResponseEndpointsItem[];
@@ -3882,6 +4254,7 @@ model ResourcesResponseCustomDomainsItem {
 /**
  * Waf Metrics Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model WafMetricsResponse {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3936,6 +4309,7 @@ model Components18OrqelSchemasWafmetricsresponsePropertiesSeriesItemsPropertiesD
 /**
  * Waf Rankings Response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model WafRankingsResponse {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -48,6 +48,23 @@ model PlaywrightWorkspaceProperties {
   @added(Versions.v2026_01_01_preview)
   @doc("The URI of the Azure storage account used to store workspace artifacts, test results, and reports.")
   storageUri?: url;
+
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The ARM resource ID of the virtual network subnet to inject the workspace into for private network connectivity. This is of the form '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}'. This value cannot be changed after the workspace is created.")
+  subnetId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Enables session artifact recording for the workspace.")
+  sessionArtifacts?: EnablementStatus = EnablementStatus.Disabled;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The managed identity used to manage session artifacts in the storage account.")
+  storageIdentity?: ManagedIdentity;
 }
 
 @doc("The status of the last resource operation.")
@@ -74,4 +91,30 @@ union EnablementStatus {
 
   @doc("The feature is disabled.")
   Disabled: "Disabled",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The managed identity used to manage session artifacts in the storage account.")
+model ManagedIdentity {
+  @doc("The type of managed identity used to access a resource.")
+  type?: IdentityType;
+
+  @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The type of managed identity used to access a resource.")
+union IdentityType {
+  string,
+
+  @doc("Use the workspace system-assigned managed identity.")
+  SystemAssigned: "SystemAssigned",
+
+  @doc("Use a user-assigned managed identity.")
+  UserAssigned: "UserAssigned",
 }

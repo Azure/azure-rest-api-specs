@@ -51,6 +51,18 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
   @useDependency(LiftrBase.Versions.v1_preview)
   v8_preview: "2026-07-03-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v3_preview")
+  @useDependency(LiftrBase.Versions.v3_preview)
+  v9_preview: "2026-08-01-preview",
+
+  @doc("The 2026-09-30 stable API version, dependent on LiftrBase.Versions.v3_preview.")
+  @useDependency(LiftrBase.Versions.v3_preview)
+  v2026_09_30: "2026-09-30",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v3_preview")
+  @useDependency(LiftrBase.Versions.v3_preview)
+  v10_preview: "2026-10-15-preview",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -78,15 +90,73 @@ model SaaSData {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("SaaS guid for Activate and Validate SaaS Resource")
 @added(Versions.v6_preview)
 model ActivateSaaSParameterRequest {
   @doc("SaaS guid for Activate and Validate SaaS Resource")
+  @removed(Versions.v9_preview)
   saaSGuid: string;
+
+  @doc("SaaS guid for Activate and Validate SaaS Resource")
+  @added(Versions.v9_preview)
+  saasGuid: string;
+
+  @doc("Optional publisher identifier")
+  @added(Versions.v9_preview)
+  publisherId?: string;
+
+  @doc("Optional activation request parameters containing user and company details")
+  @added(Versions.v9_preview)
+  activateSaaSRequestParam?: ActivateSaaSRequestParam;
+}
+
+@doc("Optional company profile information")
+@added(Versions.v9_preview)
+model CompanyProfile {
+  @doc("Job title")
+  jobTitle?: string;
+
+  @doc("Company name")
+  companyName?: string;
+
+  @doc("Company website")
+  website?: string;
+
+  @doc("Street address")
+  street?: string;
+
+  @doc("City of the company address.")
+  city?: string;
+
+  @doc("Country of the company address.")
+  country?: string;
+
+  @doc("Postal code")
+  postalCode?: string;
+
+  @doc("State or province of the company address.")
+  state?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
+@doc("Optional activate SaaS request parameters")
+@added(Versions.v9_preview)
+model ActivateSaaSRequestParam {
+  @doc("Optional Marketplace SaaS resource identifier")
+  @added(Versions.v9_preview)
+  saasResourceId?: string;
+
+  @doc("Optional user details")
+  user?: UserDetails;
+
+  @doc("Optional company details")
+  company?: CompanyProfile;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "SaaS response model"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Marketplace SaaS resource details.")
 @added(Versions.v6_preview)
 model SaaSResourceDetailsResponse
@@ -96,6 +166,7 @@ model SaaSResourceDetailsResponse
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response of get latest linked SaaS resource operation")
 @added(Versions.v6_preview)
 model LatestLinkedSaaSResponse {
@@ -111,15 +182,14 @@ model LatestLinkedSaaSResponse {
 interface CloudAccounts {
   get is ArmResourceRead<CloudAccount>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudAccount>;
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
-  @patch(#{ implicitOptionality: true })
-  update is ArmCustomPatchAsync<
-    CloudAccount,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      CloudAccount,
-      CloudAccountProperties
-    >
-  >;
+  @removed(Versions.v10_preview)
+  @renamedFrom(Versions.v10_preview, "update")
+  @sharedRoute
+  updateV1 is ArmResourcePatchAsync<CloudAccount, CloudAccountProperties>;
+
+  @added(Versions.v10_preview)
+  @sharedRoute
+  update is ArmCustomPatchAsync<CloudAccount, CloudAccountUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<CloudAccount>;
   listByResourceGroup is ArmResourceListByParent<CloudAccount>;
   listBySubscription is ArmListBySubscription<CloudAccount>;
@@ -146,6 +216,85 @@ interface CloudAccounts {
   >;
 }
 
+// An alias keeps this out of the emitted Swagger; ResourceUpdateModel names the PATCH schema.
+alias CloudAccountPatchProperties = {
+  ...OmitProperties<CloudAccountProperties, "marketplace" | "user">;
+
+  @doc("Marketplace details of the resource.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  marketplace?: CloudAccountMarketplaceUpdate;
+
+  @doc("Details of the user.")
+  user?: CloudAccountUserUpdate;
+};
+
+@doc("Managed service identity (system assigned and/or user assigned identities)")
+@added(Versions.v10_preview)
+model CloudAccountIdentityUpdate {
+  ...OptionalProperties<UpdateableProperties<Azure.ResourceManager.CommonTypes.ManagedServiceIdentity>>;
+}
+
+// Identity is replaced so a PATCH can omit identity.type, as the previous contract allowed.
+@doc("The type used for update operations of the CloudAccount.")
+@added(Versions.v10_preview)
+model CloudAccountUpdate {
+  ...OmitProperties<
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      CloudAccount,
+      CloudAccountPatchProperties
+    >,
+    "identity"
+  >;
+
+  @doc("The managed service identities assigned to this resource.")
+  identity?: CloudAccountIdentityUpdate;
+}
+
+@doc("Marketplace details that can be updated on a Commvault Cloud Account.")
+@added(Versions.v10_preview)
+model CloudAccountMarketplaceUpdate {
+  ...OptionalProperties<UpdateableProperties<OmitProperties<
+    LiftrBase.MarketplaceDetails,
+    "subscriptionId" | "offerDetails"
+  >>>;
+
+  @doc("Azure subscription id for the the marketplace offer is purchased from")
+  subscriptionId?: string;
+
+  @doc("Offer details for the marketplace that is selected by the user")
+  offerDetails?: CloudAccountOfferDetailsUpdate;
+}
+
+@doc("Marketplace offer details that can be updated on a Commvault Cloud Account.")
+@added(Versions.v10_preview)
+model CloudAccountOfferDetailsUpdate {
+  ...OptionalProperties<UpdateableProperties<OmitProperties<
+    LiftrBase.OfferDetails,
+    "planId"
+  >>>;
+
+  @doc("Plan Id for the marketplace offer")
+  planId?: string;
+}
+
+@doc("User details that can be updated on a Commvault Cloud Account.")
+@added(Versions.v10_preview)
+model CloudAccountUserUpdate {
+  ...OptionalProperties<UpdateableProperties<OmitProperties<
+    LiftrBase.UserDetails,
+    "firstName" | "lastName" | "emailAddress"
+  >>>;
+
+  @doc("First name of the user")
+  firstName?: string;
+
+  @doc("Last name of the user")
+  lastName?: string;
+
+  @doc("Email address of the user")
+  emailAddress?: LiftrBase.email;
+}
+
 @doc("Properties specific to Commvault Cloud Account resource")
 model CloudAccountProperties is BaseResourceProperties {
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
@@ -153,15 +302,15 @@ model CloudAccountProperties is BaseResourceProperties {
   @visibility(Lifecycle.Read)
   ssoUrl?: string;
 
-  @doc("The backup administrator principal provided during CCA create. Required on create (enforced by backend), ignored on update.")
-  @added(Versions.v8_preview)
-  @visibility(Lifecycle.Create)
-  backupAdminOnCcaCreate?: EntityInfo;
+  @doc("Optional company details for the cloud account")
+  @added(Versions.v9_preview)
+  company?: CompanyProfile;
 
-  @doc("The multi-person authorization (MPA) administrator principal provided during CCA create. Required on create (enforced by backend), ignored on update.")
+  @doc("Role assignments to provision during CCA creation. Each entry maps a Commvault role to its assigned Entra principals.")
   @added(Versions.v8_preview)
   @visibility(Lifecycle.Create)
-  multiPersonAuthorizationOnCcaCreate?: EntityInfo;
+  @Azure.ResourceManager.identifiers(#["roleName"])
+  roleAssignmentsOnCcaCreate?: RoleAssignment[];
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "SaaS operation group"
@@ -212,12 +361,32 @@ model StorageProperties {
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
+
+  @doc("The compliance lock status of the storage.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v8_preview)
+  complianceLockStatus?: ComplianceLockStatus;
 }
 
 @doc("Storage Type of Commvault Storage")
 union StorageType {
   @doc("Air Gap Protect")
   AirGapProtect: "Air_Gap_Protect",
+
+  string,
+}
+
+@doc("Compliance lock status of a Commvault Storage.")
+@added(Versions.v8_preview)
+union ComplianceLockStatus {
+  @doc("Compliance lock is enabled — storage is protected.")
+  Enabled: "Enabled",
+
+  @doc("Disablement is pending multi-person authorization (MPA) approval. Status transitions to 'Disabled' once approved.")
+  DisablementPending: "DisablementPending",
+
+  @doc("Compliance lock is disabled.")
+  Disabled: "Disabled",
 
   string,
 }
@@ -247,6 +416,33 @@ interface Storages {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Storage>;
   delete is ArmResourceDeleteWithoutOkAsync<Storage>;
   listByCloudAccount is ArmResourceListByParent<Storage>;
+
+  @doc("Enable compliance lock on the storage. Synchronous operation.")
+  @armResourceAction(Storage)
+  @action("enableComplianceLock")
+  @post
+  @added(Versions.v8_preview)
+  enableComplianceLock(...ResourceInstanceParameters<Storage>):
+    | ArmResponse<Storage>
+    | ErrorResponse;
+
+  @doc("Disable compliance lock on the storage. Initiates an out-of-band multi-person authorization (MPA) email approval workflow on the partner side. The storage compliance lock status transitions to 'DisablementPending' immediately; once the MPA approval completes, the status becomes 'Disabled' (observable via the refresh action).")
+  @armResourceAction(Storage)
+  @action("disableComplianceLock")
+  @post
+  @added(Versions.v8_preview)
+  disableComplianceLock(...ResourceInstanceParameters<Storage>):
+    | ArmResponse<Storage>
+    | ErrorResponse;
+
+  @doc("Refresh storage state from partner. Fetches latest compliance lock status from Commvault and updates the ARM resource.")
+  @armResourceAction(Storage)
+  @action("refresh")
+  @post
+  @added(Versions.v8_preview)
+  refresh(...ResourceInstanceParameters<Storage>):
+    | ArmResponse<Storage>
+    | ErrorResponse;
 }
 
 @parentResource(CloudAccount)
@@ -637,15 +833,15 @@ model ProtectionGroupProperties {
 
   @doc("The protection group schedule")
   @visibility(Lifecycle.Read)
-  protectionStatus?: ProtectionStatus; //Check what values can it have
+  protectionStatus: ProtectionStatus; //Check what values can it have
 
   @doc("The number of ProtectedItems under the Protection Group")
   @visibility(Lifecycle.Read)
-  numberOfProtectedItems?: int32;
+  numberOfProtectedItems: int32;
 
   @doc("The Commvault Protection Group backup time")
   @visibility(Lifecycle.Read)
-  lastBackUpTime?: int64;
+  lastBackUpTime: int64;
 
   @doc("The backup activity status indicating if backup is enabled or not on the protection group")
   @visibility(Lifecycle.Read)
@@ -685,6 +881,7 @@ model ProtectionGroupResources {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   manual?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Rules to match resources")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   matchRules?: {
@@ -771,6 +968,7 @@ union Operator {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The properties of StopBackupProtectionGroupRequest")
 model StopBackupProtectionGroupRequest {
   @doc("The reason for stopping the backup")
@@ -782,6 +980,7 @@ model StopBackupProtectionGroupRequest {
   comment?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The properties of BackupProtectionGroupRequest")
 model BackupProtectionGroupRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "identifiers not applicable across version type change"
@@ -796,6 +995,7 @@ model BackupProtectionGroupRequest {
   backupOptions: BackupOptions;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Backup job response for a Protection Group")
 model BackupProtectionGroupResponse {
   @doc("The Commvault response for taskId")
@@ -834,6 +1034,7 @@ model VmGuid {
   id: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The backup options for the VM backup")
 model BackupOptions {
   @doc("Indicates whether to stop backup or not for the VM")
@@ -865,19 +1066,15 @@ interface ProtectionGroups {
   createOrupdate is ArmResourceCreateOrUpdateAsync<ProtectionGroup>;
   delete is ArmResourceDeleteWithoutOkAsync<ProtectionGroup>;
   listByCloudAccount is ArmResourceListByParent<ProtectionGroup>;
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "stopBackup is a long-running operation that returns 204 with no content on completion"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "stopBackup is a long-running operation that returns 204 with no content on completion."
   @doc("Stop Backup for a Protection Group")
-  @armResourceAction(ProtectionGroup)
-  @post
-  @OpenAPI.extension("x-ms-long-running-operation", true)
-  stopBackup(
-    ...ResourceInstanceParameters<ProtectionGroup>,
-
-    @bodyRoot
-    @doc("The body type of the operation request.")
-    request: StopBackupProtectionGroupRequest,
-  ): ArmAcceptedLroResponse | ArmNoContentResponse | ErrorResponse;
+  stopBackup is ArmResourceActionAsync<
+    ProtectionGroup,
+    StopBackupProtectionGroupRequest,
+    ArmNoContentResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Restore resource for a protected items in given protection group.")
   @armResourceAction(ProtectionGroup)
@@ -1038,6 +1235,7 @@ model VmDestinationInfo {
   vmInfoList: VmInfo[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The properties of RestoreProtectionItemRequest")
 model RestoreProtectionItemRequest {
   @doc("Check whether inplace or out of place restore.")
@@ -1057,6 +1255,7 @@ model RestoreProtectionItemRequest {
   vmDestinationInfo: VmDestinationInfo;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response for count protected items operation.")
 @added(Versions.v7_preview)
 model CountProtectedItemsResponse {
@@ -1064,6 +1263,7 @@ model CountProtectedItemsResponse {
   count: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request to count protected items for the provided CCA resource IDs across subscriptions.")
 @added(Versions.v7_preview)
 model CountProtectedItemsRequest {
@@ -1124,6 +1324,7 @@ model RestorePoints {
   restoreTimes: int64[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Restore resource response for a Protected Item")
 model RestoreProtectionItemResponse {
   @doc("The Commvault response for taskId")
@@ -1197,18 +1398,7 @@ model RoleMappingProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@doc("A role assignment mapping a Commvault role to one or more Entra entities (users or groups)")
-@added(Versions.v8_preview)
-model RoleAssignment {
-  @doc("The name of the Commvault role")
-  roleName?: RoleName;
-
-  @doc("The Entra entities (users or groups) assigned to this role")
-  @Azure.ResourceManager.identifiers(#[])
-  entities?: EntityInfo[];
-}
-
-@doc("Supported Commvault role names")
+@doc("Supported Commvault role names. Extensible enum — additional roles may be added in future versions without a breaking change.")
 @added(Versions.v8_preview)
 union RoleName {
   @doc("Backup Administrator - full access to all resources")
@@ -1227,6 +1417,18 @@ union RoleName {
   MultiPersonAuthorization: "MultiPersonAuthorization",
 
   string,
+}
+
+@doc("A role assignment mapping a Commvault role to one or more Entra entities (users or groups)")
+@added(Versions.v8_preview)
+model RoleAssignment {
+  @doc("The name of the Commvault role")
+  roleName: RoleName;
+
+  @doc("The Entra entities (users or groups) assigned to this role")
+  @minItems(1)
+  @Azure.ResourceManager.identifiers(#[])
+  entities: EntityInfo[];
 }
 
 @armResourceOperations
