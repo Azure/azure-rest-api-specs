@@ -59,7 +59,8 @@ alias ServerAzureAdAdministratorActionResponse<Description extends valueof strin
   | ArmResponse<ServerAzureADAdministrator>
   | ArmAcceptedLroResponse<
       Description = Description,
-      LroHeaders = ArmLroLocationHeader<FinalResult = ServerAzureADAdministrator>
+      LroHeaders = ArmLroLocationHeader<FinalResult = ServerAzureADAdministrator> &
+        Azure.Core.Foundations.RetryAfterHeader
     >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
