@@ -12834,7 +12834,7 @@ model ManagedInstanceProperties {
   fullyQualifiedDomainName?: string;
 
   /**
-   * Whether or not this is a GPv2 variant of General Purpose edition.
+   * Whether or not this is a GPv2 variant of General Purpose edition. Starting with API version 2026-11-01, this property cannot be used to create a GPv1 instance or change an existing instance to GPv1.
    */
   isGeneralPurposeV2?: boolean;
 
