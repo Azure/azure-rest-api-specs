@@ -453,8 +453,8 @@ model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
   @maxValue(100)
   max_traces?: int32 = 100;
 
-  @doc("Optional telemetry operation IDs to select within the fixed window. Omitted, null, or empty selects the latest readable matching traces up to max_traces, independently of feedback availability. A nonempty list must contain at most 1,000 unique, nonempty IDs. Every requested ID must resolve unambiguously to a readable, authorized trace in the window; the service fails instead of substituting or silently truncating traces.")
-  @maxItems(1000)
+  @doc("Optional telemetry operation IDs to select within the fixed window. Omitted, null, or empty selects the latest readable matching traces up to max_traces, independently of feedback availability. A nonempty list must contain at most 1,00 unique, nonempty IDs. Every requested ID must resolve unambiguously to a readable, authorized trace in the window; the service fails instead of substituting or silently truncating traces.")
+  @maxItems(100)
   trace_ids?: string[] | null;
 }
 
