@@ -93,6 +93,14 @@ interface ArcDeployments {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ArcDeployment,
+    Parameters = {
+      /**
+       * Whether to delete the Arc deployment even when its associated extension is disconnected. Defaults to false.
+       */
+      @added(Versions.v2026_11_15_preview)
+      @query("force")
+      force?: boolean = false;
+    },
     LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void>,
     Response =
       | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<
@@ -139,13 +147,37 @@ model ArcDeploymentProperties {
   /**
    * Inference runtime. Required on creation and immutable after creation.
    */
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @renamedFrom(Versions.v2026_11_15_preview, "runtime")
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  legacyRuntime: ArcDeploymentRuntime;
+
+  /**
+   * Read-only. Inference runtime resolved from the model asset.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
   runtime: ArcDeploymentRuntime;
 
   /**
    * Compute type for the deployment. Required on creation and immutable after creation.
    */
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @renamedFrom(Versions.v2026_11_15_preview, "compute")
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  legacyCompute: ArcDeploymentComputeType;
+
+  /**
+   * Read-only. Compute type resolved from the model asset.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
   compute: ArcDeploymentComputeType;
 
   /**
@@ -271,12 +303,49 @@ model ArcDeploymentModel {
   /**
    * Deployment model format.
    */
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @renamedFrom(Versions.v2026_11_15_preview, "format")
+  legacyFormat: string;
+
+  /**
+   * Read-only. Deployment model format resolved from the model asset.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
   format: string;
 
   /**
    * Deployment model name.
    */
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @renamedFrom(Versions.v2026_11_15_preview, "name")
+  legacyName: string;
+
+  /**
+   * Read-only. Deployment model name resolved from the model asset.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
   name: string;
+
+  /**
+   * Read-only. Deployment model version resolved from the model asset.
+   */
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
+  version: string;
+
+  /**
+   * AzureML Registry model asset URI.
+   */
+  @added(Versions.v2026_11_15_preview)
+  assetId: string;
 }
 
 /**

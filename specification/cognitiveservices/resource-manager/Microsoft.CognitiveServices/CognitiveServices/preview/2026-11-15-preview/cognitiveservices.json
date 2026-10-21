@@ -2543,8 +2543,11 @@
           "CreateOrUpdateArcDeployment": {
             "$ref": "./examples/CreateOrUpdateArcDeployment.json"
           },
-          "CreateOrUpdateArcDeploymentWithTemplate": {
-            "$ref": "./examples/CreateOrUpdateArcDeploymentWithTemplate.json"
+          "CreateOrUpdateArcDeploymentWithGpu": {
+            "$ref": "./examples/CreateOrUpdateArcDeploymentWithGpu.json"
+          },
+          "CreateOrUpdateArcDeploymentWithVllm": {
+            "$ref": "./examples/CreateOrUpdateArcDeploymentWithVllm.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2668,6 +2671,14 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?$"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "description": "Whether to delete the Arc deployment even when its associated extension is disconnected. Defaults to false.",
+            "required": false,
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -2698,6 +2709,9 @@
         "x-ms-examples": {
           "DeleteArcDeployment": {
             "$ref": "./examples/DeleteArcDeployment.json"
+          },
+          "DeleteArcDeploymentWithForce": {
+            "$ref": "./examples/DeleteArcDeploymentWithForce.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -14392,16 +14406,29 @@
       "properties": {
         "format": {
           "type": "string",
-          "description": "Deployment model format."
+          "description": "Read-only. Deployment model format resolved from the model asset.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "Deployment model name."
+          "description": "Read-only. Deployment model name resolved from the model asset.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Read-only. Deployment model version resolved from the model asset.",
+          "readOnly": true
+        },
+        "assetId": {
+          "type": "string",
+          "description": "AzureML Registry model asset URI."
         }
       },
       "required": [
         "format",
-        "name"
+        "name",
+        "version",
+        "assetId"
       ]
     },
     "ArcDeploymentPatchCpuMemoryResourceRequirements": {
@@ -14462,19 +14489,13 @@
         },
         "runtime": {
           "$ref": "#/definitions/ArcDeploymentRuntime",
-          "description": "Inference runtime. Required on creation and immutable after creation.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Read-only. Inference runtime resolved from the model asset.",
+          "readOnly": true
         },
         "compute": {
           "$ref": "#/definitions/ArcDeploymentComputeType",
-          "description": "Compute type for the deployment. Required on creation and immutable after creation.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Read-only. Compute type resolved from the model asset.",
+          "readOnly": true
         },
         "deploymentTemplate": {
           "type": "string",
