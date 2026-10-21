@@ -1138,13 +1138,11 @@ describe("Summarize Checks Unit Tests", () => {
       const modelingReviewIndex = comment.indexOf(
         "This PR has <code>ARMModelingReviewRequired</code>",
       );
-      const notReadyReviewIndex = comment.indexOf(
-        "This PR is not ready for ARM review",
-      );
+      const notReadyReviewIndex = comment.indexOf("This PR is not ready for ARM review");
       expect(modelingReviewIndex).toBeGreaterThan(-1);
       expect(modelingReviewIndex).toBeLessThan(notReadyReviewIndex);
       expect(comment).toContain(
-        `<li><b>Required Doc:</b> Please use the <a href="https://aka.ms/rpagent">RP Agent</a> and run ` +
+        `<li><b>Required Doc:</b> Please use the <a href="https://aka.ms/rpagent">RP Agent</a> and run the ` +
           `<code>/model-rp-contract</code> skill.`,
       );
       expect(comment).toContain(
@@ -1159,13 +1157,9 @@ describe("Summarize Checks Unit Tests", () => {
       expect(comment).toContain(
         "<li><b>When:</b> Every Tuesday and Thursday, 9:30\u201310:30 AM PST</li>",
       );
-      expect(comment).toContain(
-        `<a href="https://aka.ms/apimodelingreview">Join via Teams</a>`,
-      );
+      expect(comment).toContain(`<a href="https://aka.ms/apimodelingreview">Join via Teams</a>`);
       expect(comment).toContain("<code>/rp-agent-feedback</code>");
-      expect(comment).toContain(
-        `<a href="https://aka.ms/rpagent/feedback">RP Agent Feedback</a>`,
-      );
+      expect(comment).toContain(`<a href="https://aka.ms/rpagent/feedback">RP Agent Feedback</a>`);
       expect(comment).toContain(
         `<a href="https://armwiki.azurewebsites.net/rp_onboarding/process/api_review.html#arm-api-modeling-review-office-hours">API Review Workflow | ARM Wiki</a>`,
       );
