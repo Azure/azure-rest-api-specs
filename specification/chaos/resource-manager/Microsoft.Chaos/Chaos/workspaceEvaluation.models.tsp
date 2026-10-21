@@ -46,7 +46,7 @@ model WorkspaceEvaluation is ProxyResource<WorkspaceEvaluationProperties> {
 /**
  * Model that represents the properties of the workspace evaluation.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only evaluation result with operation status, not a resource provisioning lifecycle"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only singleton resource representing latest evaluation status"
 model WorkspaceEvaluationProperties {
   /**
    * The evaluation status.

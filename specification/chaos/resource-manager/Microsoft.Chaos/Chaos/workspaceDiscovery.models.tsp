@@ -45,7 +45,7 @@ model WorkspaceDiscovery is ProxyResource<WorkspaceDiscoveryProperties> {
 /**
  * Model that represents the properties of the workspace discovery.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only discovery result with operation status, not a resource provisioning lifecycle"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only singleton resource representing latest discovery status"
 model WorkspaceDiscoveryProperties {
   /**
    * The discovery status.

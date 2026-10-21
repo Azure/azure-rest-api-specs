@@ -324,11 +324,12 @@ model ScenarioActionSelector {
 }
 
 /**
- * Enum of the supported action selector names.
+ * The supported action selector names.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "The selector name set is intentionally fixed and non-extensible."
 @added(Microsoft.Chaos.Versions.v2026_11_01)
-enum ScenarioActionSelectorName {
+union ScenarioActionSelectorName {
+  string,
+
   /**
    * Select targets by logical availability zone.
    */
