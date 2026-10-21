@@ -119,7 +119,7 @@ model DefenderForStorageSettingProperties {
    */
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  managedBy?: ManagedByType;
+  managedBy: ManagedByType;
 }
 
 /**
