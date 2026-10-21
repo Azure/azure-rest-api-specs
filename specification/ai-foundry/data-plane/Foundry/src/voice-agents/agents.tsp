@@ -228,28 +228,37 @@ model VoiceAgentPostCall {
   ];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "A closed destination union is required; union extends requires an experimental compiler feature not enabled by this project."
 @doc("""
-  A post-call destination selected by its type. Only Event Grid and Routine destinations are supported;
-  each variant is a closed object with a same-project bare name.
+  The type of a post-call destination. Only Event Grid and Routine destinations are supported; the service rejects
+  any other value.
   """)
-@discriminated(#{ envelope: "none", discriminatorPropertyName: "type" })
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceAgentPostCallDestination {
+union VoiceAgentPostCallDestinationType {
+  string,
+
   @doc("An Event Grid connection destination.")
-  event_grid: VoiceAgentEventGridPostCallDestination,
+  event_grid: "event_grid",
 
   @doc("A Routine destination.")
-  routine: VoiceAgentRoutinePostCallDestination,
+  routine: "routine",
+}
+
+@doc("""
+  A post-call destination selected by its type. Each destination references a same-project resource by bare name.
+  """)
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentPostCallDestination {
+  @doc("The destination type.")
+  type: VoiceAgentPostCallDestinationType;
 }
 
 @doc("An Event Grid connection in the same project that receives post-call events.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentEventGridPostCallDestination {
-  ...Record<never>;
-
+model VoiceAgentEventGridPostCallDestination
+  extends VoiceAgentPostCallDestination {
   @doc("Selects an Event Grid connection destination.")
-  type: "event_grid";
+  type: VoiceAgentPostCallDestinationType.event_grid;
 
   @doc("""
     The nonblank bare name of the Event Grid connection in the same project. The connection stores the endpoint
@@ -262,16 +271,16 @@ model VoiceAgentEventGridPostCallDestination {
 
 @doc("A Routine in the same project, resolved from the versioned Routine definitions at post-call dispatch. This reference does not pin a Routine version or override its input.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentRoutinePostCallDestination {
-  ...Record<never>;
-
+model VoiceAgentRoutinePostCallDestination
+  extends VoiceAgentPostCallDestination {
   @doc("Selects a Routine destination.")
-  type: "routine";
+  type: VoiceAgentPostCallDestinationType.routine;
 
   @doc("""
     The nonempty bare Routine name, limited to 128 characters. Names use ordinal, case-sensitive comparison.
-    The service rejects whitespace, URLs, resource paths, the names "." and "..", and the characters /, \\, :, ?,
-    #, and %. Unicode names are allowed. Only the name is stored, not a version, endpoint, or credentials.
+    The service rejects whitespace, URLs, resource paths, the names "." and "..", and the forward slash,
+    backslash, colon, question mark, number sign, and percent sign characters. Unicode names are allowed. Only the
+    name is stored, not a version, endpoint, or credentials.
     """)
   @minLength(1)
   @maxLength(128)

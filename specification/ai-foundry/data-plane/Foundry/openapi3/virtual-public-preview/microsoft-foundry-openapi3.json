@@ -97637,9 +97637,11 @@
             ]
           }
         },
-        "unevaluatedProperties": {
-          "not": {}
-        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentPostCallDestination"
+          }
+        ],
         "description": "An Event Grid connection in the same project that receives post-call events.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -98162,14 +98164,15 @@
       },
       "VoiceAgentPostCallDestination": {
         "type": "object",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/VoiceAgentEventGridPostCallDestination"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentRoutinePostCallDestination"
-          }
+        "required": [
+          "type"
         ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VoiceAgentPostCallDestinationType",
+            "description": "The destination type."
+          }
+        },
         "discriminator": {
           "propertyName": "type",
           "mapping": {
@@ -98177,7 +98180,27 @@
             "routine": "#/components/schemas/VoiceAgentRoutinePostCallDestination"
           }
         },
-        "description": "A post-call destination selected by its type. Only Event Grid and Routine destinations are supported;\neach variant is a closed object with a same-project bare name.",
+        "description": "A post-call destination selected by its type. Each destination references a same-project resource by bare name.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentPostCallDestinationType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "event_grid",
+              "routine"
+            ]
+          }
+        ],
+        "description": "The type of a post-call destination. Only Event Grid and Routine destinations are supported; the service rejects\nany other value.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -98215,15 +98238,17 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "description": "The nonempty bare Routine name, limited to 128 characters. Names use ordinal, case-sensitive comparison.\nThe service rejects whitespace, URLs, resource paths, the names \".\" and \"..\", and the characters /, \\, :, ?,\n#, and %. Unicode names are allowed. Only the name is stored, not a version, endpoint, or credentials.",
+            "description": "The nonempty bare Routine name, limited to 128 characters. Names use ordinal, case-sensitive comparison.\nThe service rejects whitespace, URLs, resource paths, the names \".\" and \"..\", and the forward slash,\nbackslash, colon, question mark, number sign, and percent sign characters. Unicode names are allowed. Only the\nname is stored, not a version, endpoint, or credentials.",
             "examples": [
               "archive"
             ]
           }
         },
-        "unevaluatedProperties": {
-          "not": {}
-        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentPostCallDestination"
+          }
+        ],
         "description": "A Routine in the same project, resolved from the versioned Routine definitions at post-call dispatch. This reference does not pin a Routine version or override its input.",
         "x-ms-foundry-meta": {
           "required_previews": [

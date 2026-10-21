@@ -85190,8 +85190,8 @@ components:
             and authentication settings. The service rejects whitespace, URLs, and resource paths.
           examples:
             - post-call-events
-      unevaluatedProperties:
-        not: {}
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentPostCallDestination'
       description: An Event Grid connection in the same project that receives post-call events.
       x-ms-foundry-meta:
         required_previews:
@@ -85570,17 +85570,31 @@ components:
           - VoiceAgents=V1Preview
     VoiceAgentPostCallDestination:
       type: object
-      oneOf:
-        - $ref: '#/components/schemas/VoiceAgentEventGridPostCallDestination'
-        - $ref: '#/components/schemas/VoiceAgentRoutinePostCallDestination'
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/VoiceAgentPostCallDestinationType'
+          description: The destination type.
       discriminator:
         propertyName: type
         mapping:
           event_grid: '#/components/schemas/VoiceAgentEventGridPostCallDestination'
           routine: '#/components/schemas/VoiceAgentRoutinePostCallDestination'
+      description: A post-call destination selected by its type. Each destination references a same-project resource by bare name.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentPostCallDestinationType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - event_grid
+            - routine
       description: |-
-        A post-call destination selected by its type. Only Event Grid and Routine destinations are supported;
-        each variant is a closed object with a same-project bare name.
+        The type of a post-call destination. Only Event Grid and Routine destinations are supported; the service rejects
+        any other value.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -85610,12 +85624,13 @@ components:
           maxLength: 128
           description: |-
             The nonempty bare Routine name, limited to 128 characters. Names use ordinal, case-sensitive comparison.
-            The service rejects whitespace, URLs, resource paths, the names "." and "..", and the characters /, \, :, ?,
-            #, and %. Unicode names are allowed. Only the name is stored, not a version, endpoint, or credentials.
+            The service rejects whitespace, URLs, resource paths, the names "." and "..", and the forward slash,
+            backslash, colon, question mark, number sign, and percent sign characters. Unicode names are allowed. Only the
+            name is stored, not a version, endpoint, or credentials.
           examples:
             - archive
-      unevaluatedProperties:
-        not: {}
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentPostCallDestination'
       description: A Routine in the same project, resolved from the versioned Routine definitions at post-call dispatch. This reference does not pin a Routine version or override its input.
       x-ms-foundry-meta:
         required_previews:
