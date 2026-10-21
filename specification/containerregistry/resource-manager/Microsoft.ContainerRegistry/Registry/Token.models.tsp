@@ -1,6 +1,7 @@
 namespace Microsoft.ContainerRegistry;
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union TokenCertificateName {
@@ -216,6 +217,6 @@ model TokenListResult {
    * The URI that can be used to request the next list of tokens.
    */
   @nextLink
-  @visibility(Lifecycle.Read)
+  @typeChangedFrom(Versions.vLatestPreview, string)
   nextLink?: url;
 }

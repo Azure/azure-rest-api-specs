@@ -34,6 +34,6 @@ model ArchiveVersionListResult {
    * The URI that can be used to request the next list of archive versions.
    */
   @nextLink
-  @visibility(Lifecycle.Read)
+  @typeChangedFrom(Versions.vLatestPreview, string)
   nextLink?: url;
 }

@@ -220,6 +220,6 @@ model PipelineRunListResult {
    * The URI that can be used to request the next list of pipeline runs.
    */
   @nextLink
-  @visibility(Lifecycle.Read)
+  @typeChangedFrom(Versions.vLatestPreview, string)
   nextLink?: url;
 }

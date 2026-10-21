@@ -133,6 +133,6 @@ model ArchiveListResult {
    * The URI that can be used to request the next list of archives.
    */
   @nextLink
-  @visibility(Lifecycle.Read)
+  @typeChangedFrom(Versions.vLatestPreview, string)
   nextLink?: url;
 }

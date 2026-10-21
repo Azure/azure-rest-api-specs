@@ -1,4 +1,5 @@
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerRegistry;
 
@@ -37,6 +38,6 @@ model PrivateLinkResourceListResult {
    * The URI that can be used to request the next list of private link resources.
    */
   @nextLink
-  @visibility(Lifecycle.Read)
+  @typeChangedFrom(Versions.vLatestPreview, string)
   nextLink?: url;
 }

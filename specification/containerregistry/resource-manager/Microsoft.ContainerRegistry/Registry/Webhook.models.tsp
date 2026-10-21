@@ -1,3 +1,5 @@
+using TypeSpec.Versioning;
+
 namespace Microsoft.ContainerRegistry;
 
 /**
@@ -183,7 +185,7 @@ model EventListResult {
    * The URI that can be used to request the next list of events.
    */
   @nextLink
-  @visibility(Lifecycle.Read)
+  @typeChangedFrom(Versions.vLatestPreview, string)
   nextLink?: url;
 }
 
@@ -442,6 +444,6 @@ model WebhookListResult {
    * The URI that can be used to request the next list of webhooks.
    */
   @nextLink
-  @visibility(Lifecycle.Read)
+  @typeChangedFrom(Versions.vLatestPreview, string)
   nextLink?: url;
 }

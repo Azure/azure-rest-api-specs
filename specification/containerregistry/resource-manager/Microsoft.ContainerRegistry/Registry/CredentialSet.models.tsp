@@ -1,4 +1,5 @@
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerRegistry;
 
@@ -141,6 +142,6 @@ model CredentialSetListResult {
    * The URI that can be used to request the next list of credential sets.
    */
   @nextLink
-  @visibility(Lifecycle.Read)
+  @typeChangedFrom(Versions.vLatestPreview, string)
   nextLink?: url;
 }
