@@ -4723,12 +4723,6 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 );
 
 @@clientName(
-  Microsoft.Network.ConnectionMonitorParameters,
-  "ConnectionMonitorCreateOrUpdateContent",
-  "csharp"
-);
-
-@@clientName(
   Microsoft.Network.EndpointType,
   "ConnectionMonitorEndpointType",
   "csharp"
@@ -8114,7 +8108,7 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 
 @@clientName(
   Microsoft.Network.ConnectionMonitor,
-  "ConnectionMonitorContent",
+  "ConnectionMonitorInput",
   "csharp"
 );
 
