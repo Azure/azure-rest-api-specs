@@ -202,22 +202,45 @@ describe("getLabelActionImpl", () => {
       expect(workflow).not.toContain("ARM Semantic Review - Set Status");
     });
 
-    it("publishes correlation artifacts only for workflow_run triggers", async () => {
+    it("publishes correlation artifacts before dispatching Update Labels, only from a dispatched run", async () => {
       const workflow = await readFile(
         join(GITHUB_ROOT, "workflows", "arm-universal-auto-signoff.yaml"),
         "utf8",
       );
       const headArtifact = workflow.indexOf("name: Upload artifact with head SHA");
       const issueArtifact = workflow.indexOf("name: Upload artifact with issue number");
+      const step = workflow.slice(workflow.indexOf("name: Dispatch Update Labels"));
 
       expect(headArtifact).toBeGreaterThan(-1);
       expect(issueArtifact).toBeGreaterThan(headArtifact);
-      expect(workflow.slice(headArtifact - 180, headArtifact)).toContain(
-        "github.event_name == 'workflow_run'",
+      expect(workflow.indexOf("name: Dispatch Update Labels")).toBeGreaterThan(issueArtifact);
+      expect(step.slice(0, step.indexOf("uses:"))).toContain(
+        "github.event_name == 'workflow_dispatch'",
       );
-      expect(workflow.slice(issueArtifact - 180, issueArtifact)).toContain(
-        "github.event_name == 'workflow_run'",
+      expect(workflow).toContain("await dispatchUpdateLabels({ github, context, core });");
+    });
+
+    it("dispatches Summarize Checks only from the dispatch route, in its own job", async () => {
+      const readWorkflow = (name: string) => readFile(join(GITHUB_ROOT, "workflows", name), "utf8");
+      const updateLabels = await readWorkflow("update-labels.yaml");
+      const summarize = await readWorkflow("summarize-checks.yaml");
+      const dispatchJob = updateLabels.slice(updateLabels.indexOf("  dispatch-summarize-checks:"));
+
+      // Only the dispatching job may write actions; the job that applies labels stays read-only.
+      expect(
+        updateLabels.slice(0, updateLabels.indexOf("  dispatch-summarize-checks:")),
+      ).not.toContain("actions: write");
+      expect(dispatchJob).toContain("needs: update-labels");
+      expect(dispatchJob).toContain("github.event_name == 'workflow_dispatch'");
+      expect(dispatchJob).toContain("actions: write");
+      expect(dispatchJob).toContain("dispatchSummarizeChecks(");
+      expect(dispatchJob).toContain(
+        "prNumber: process.env.PR_NUMBER, headSha: process.env.HEAD_SHA",
       );
+      expect(summarize).toMatch(/workflow_dispatch:\s+inputs:\s+pr_number:[\s\S]+head_sha:/);
+      expect(summarize).toContain("github.event_name == 'workflow_dispatch' ||");
+      // The workflow_run fallback stays, so a dispatch must not be added for that route.
+      expect(summarize).toContain('- "Update Labels"');
     });
   });
 

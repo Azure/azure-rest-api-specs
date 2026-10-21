@@ -14,8 +14,8 @@ stimuli:
     tags:
       suite: dataplane
       mode: trigger
-    prompt: Rename the `color` property to `widgetColor` in the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum.
-    environment: &id001
+    prompt: Rename the `color` property to `widgetColor` in the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum and carry forward all other existing features. All material design decisions are provided, so proceed without confirmation.
+    environment: &shared_environment
       files:
         - src: ../fixtures/006009-dp-version-property-renamed/main.tsp
           dest: main.tsp
@@ -28,12 +28,6 @@ stimuli:
       commands:
         - node -e "const fs=require('fs');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync('node_modules')){fs.symlinkSync(t,'node_modules','junction')}"
     graders:
-      - &id002
-        type: tool-calls
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - azure-sdk-mcp-azsdk_run_typespec_validation
       - type: skill-invocation
         config:
           required:
@@ -45,36 +39,35 @@ stimuli:
     tags:
       suite: dataplane
       mode: forced
-    prompt: "@azure-typespec-author Rename the `color` property to `widgetColor` in the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum."
-    environment: *id001
+    prompt: "@azure-typespec-author Rename the `color` property to `widgetColor` in the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum and carry forward all other existing features. All material design decisions are provided, so proceed without confirmation."
+    environment: *shared_environment
     rubric: &shared_rubric
       - WidgetSuite.color is renamed to widgetColor only in API version 2023-06-01-preview using valid TypeSpec versioning.
       - Version 2023-06-01-preview is added to the Versions enum and the prior property name is preserved for earlier versions.
       - Changes are limited to the requested versioned rename and contain no unrelated edits.
     graders:
-      - *id002
       - type: run-command
         config:
           command: tsp compile .
           expected_exit_code: 0
-      - &id003
+      - &file_matches
         type: file-matches
         config:
           path: main.tsp
           pattern: v2023_06_01_Preview
-      - &id004
+      - &file_matches_renamed_property
         type: file-matches
         name: file-matches-renamed-property
         config:
           path: main.tsp
           pattern: '@renamedFrom\(Versions\.v2023_06_01_Preview,\s*"color"\)'
-      - &id005
+      - &file_matches_widget_color_property
         type: file-matches
         name: file-matches-widget-color-property
         config:
           path: main.tsp
           pattern: widgetColor
-      - &id006
+      - &prompt
         type: prompt
         config:
           prompt:
@@ -90,18 +83,22 @@ stimuli:
     tags:
       suite: dataplane
       mode: no-skill
-    prompt: Rename the `color` property to `widgetColor` in the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum.
-    environment: *id001
+    prompt: Rename the `color` property to `widgetColor` in the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum and carry forward all other existing features. All material design decisions are provided, so proceed without confirmation.
+    environment: *shared_environment
     rubric: *shared_rubric
     graders:
       - type: tool-calls
         config:
           required:
             - "^(edit|apply_patch|bash|powershell)$"
-      - *id003
-      - *id004
-      - *id005
-      - *id006
+      - type: run-command
+        config:
+          command: tsp compile .
+          expected_exit_code: 0
+      - *file_matches
+      - *file_matches_renamed_property
+      - *file_matches_widget_color_property
+      - *prompt
     constraints:
       max_turns: 5
       max_tokens: 100000

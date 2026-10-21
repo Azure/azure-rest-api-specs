@@ -24,21 +24,25 @@ describe("Protected Files", () => {
     vi.mocked(getChangedFiles).mockResolvedValue([]);
   });
 
-  it.each(["azure-sdk", "azure-sdk-automation[bot]", "Azure-SDK", "timotheeguerin", "marygao"])(
-    "passes for trusted PR author %s without reading changed files",
-    async (author) => {
-      const { core, context, run } = setup(author);
-      context.actor = "spec-author";
-      expect((await run()).conclusion).toBe("success");
-      expect(core.info).toHaveBeenCalledWith(
-        `Account '${author}' is allowed to update protected files`,
-      );
-      expect(getChangedFiles).not.toHaveBeenCalled();
-      expect(core.setFailed).not.toHaveBeenCalled();
-    },
-  );
+  it.each([
+    "azure-sdk",
+    "azure-sdk-automation[bot]",
+    "dependabot[bot]",
+    "Azure-SDK",
+    "timotheeguerin",
+    "marygao",
+  ])("passes for trusted PR author %s without reading changed files", async (author) => {
+    const { core, context, run } = setup(author);
+    context.actor = "spec-author";
+    expect((await run()).conclusion).toBe("success");
+    expect(core.info).toHaveBeenCalledWith(
+      `Account '${author}' is allowed to update protected files`,
+    );
+    expect(getChangedFiles).not.toHaveBeenCalled();
+    expect(core.setFailed).not.toHaveBeenCalled();
+  });
 
-  it.each(["spec-author", "dependabot[bot]", "azure-sdk-other"])(
+  it.each(["spec-author", "dependabot-other[bot]", "azure-sdk-other"])(
     "does not exempt author %s when a trusted account triggers the run",
     async (author) => {
       const { core, context, run } = setup(author);
