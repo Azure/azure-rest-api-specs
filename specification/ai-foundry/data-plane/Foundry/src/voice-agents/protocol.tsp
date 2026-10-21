@@ -456,10 +456,10 @@ model VoiceAgentCollectionStartArguments {
   @doc("The preferred bare output variable name, such as verification_code, selected by the model. Required for secret true and forbidden for false; it is not Agent configuration. Successful private collection creates the variable without prior declaration. Names occupied by ordinary inputs, initialized private variables or earlier private collections receive a unique suffix without overwriting values. Completion reports the actual name through output_ref. The name is locked for the operation; cancellation, timeout, failure and non-private collection create no variable.")
   output_variable_name?: VoiceAgentOutputReference;
 
-  @doc("The total operation deadline in integer seconds, including receiver preparation. Omit for sixty seconds; duplicate commands do not restart it.")
+  @doc("Optional total collection deadline in integer seconds, including receiver preparation. When present, overrides the tool's Agent-configured timeout_seconds; when omitted, uses that configuration, or sixty seconds if neither specifies a value. Duplicate commands do not restart it.")
   @minValue(1)
   @maxValue(300)
-  timeout_seconds?: int32 = 60;
+  timeout_seconds?: int32;
 }
 
 @doc("Decoded model-generated collect_sms start arguments. The service validates the complete invocation before preparing a receiver; the model never submits the SMS value.")
