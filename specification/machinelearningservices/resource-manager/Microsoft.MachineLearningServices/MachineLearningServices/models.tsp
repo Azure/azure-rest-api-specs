@@ -7959,37 +7959,7 @@ model RegistryPrivateEndpointConnectionProperties {
    * One of null, "Succeeded", "Provisioning", "Failed". While not approved, it's null.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  @renamedFrom(Versions.v2026_11_01, "provisioningState")
-  @removed(Versions.v2026_11_01)
-  provisioningStateLegacy?: string | null;
-
-  /**
-   * One of null, "Succeeded", "Provisioning", "Failed". While not approved, it's null.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  @added(Versions.v2026_11_01)
-  @visibility(Lifecycle.Read)
-  provisioningState?: RegistryPrivateEndpointConnectionProvisioningState | null;
-}
-
-/**
- * Provisioning state of a registry private endpoint connection.
- */
-@added(Versions.v2026_11_01)
-union RegistryPrivateEndpointConnectionProvisioningState {
-  string,
-
-  /** The connection was provisioned successfully. */
-  Succeeded: "Succeeded",
-
-  /** The connection is being provisioned. */
-  Provisioning: "Provisioning",
-
-  /** Provisioning failed. */
-  Failed: "Failed",
-
-  /** Provisioning was canceled. */
-  Canceled: "Canceled",
+  provisioningState?: string | null;
 }
 
 /**
