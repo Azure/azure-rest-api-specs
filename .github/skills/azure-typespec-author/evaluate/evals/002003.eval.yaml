@@ -1,0 +1,107 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "armtemplate"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 002003-ARM-define-full-update-operation-trigger
+    tags:
+      suite: "armtemplate"
+      mode: "trigger"
+    prompt: |
+      Update the existing Employee ARM resource operation so clients can synchronously update its tags and mutable Employee properties. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/002003-ARM-define-full-update-operation/employee.tsp
+          dest: employee.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+          dest: readme.md
+        - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+          dest: tspconfig.yaml
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 002003-ARM-define-full-update-operation-forced
+    tags:
+      suite: "armtemplate"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author Update the existing Employee ARM resource operation so clients can synchronously update its tags and mutable Employee properties. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
+    environment: *shared_environment
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: 'update\s+is\s+ArmCustomPatchSync\s*<'
+          path: "*.tsp"
+      - &file_not_matches
+        type: "file-not-matches"
+        config:
+          pattern: 'update\s+is\s+ArmResourcePatch(?:Sync|Async)\s*<'
+          path: "*.tsp"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 002003-ARM-define-full-update-operation-no-skill
+    tags:
+      suite: "armtemplate"
+      mode: "no-skill"
+    prompt: |
+      Update the existing Employee ARM resource operation so clients can synchronously update its tags and mutable Employee properties. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
+    environment: *shared_environment
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - *file_matches
+      - *file_not_matches
+    constraints:
+      max_turns: 6
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.2
+    run-command: 0.3
+    skill-invocation: 0.2
+    file-matches: 0.15
+    file-not-matches: 0.15
+  threshold: 1
