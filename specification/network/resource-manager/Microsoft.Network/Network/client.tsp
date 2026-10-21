@@ -25,8 +25,6 @@ using Common;
 
 // Preserve the released C# names without SDK-side type-renaming customizations.
 @@clientName(Microsoft.Network.IsRollback, "UndoReservationType", "csharp");
-@@clientName(Microsoft.Network.RoutingConfiguration, "RoutingConfigurationNfv", "csharp");
-@@clientName(Microsoft.Network.PropagatedRouteTable, "PropagatedRouteTableNfv", "csharp");
 
 // Preserve the naming requirements used by the released C# provisioning library.
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve C# provisioning resource naming compatibility."
