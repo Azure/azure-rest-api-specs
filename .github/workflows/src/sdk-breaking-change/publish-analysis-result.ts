@@ -33,7 +33,9 @@ export async function buildAnalysisReport(resultsPath: string): Promise<{
       "",
       `**SDK Package:** ${project.sdkPackage}`,
       "",
-      table([["ID", "Breaking change", "Category", "Suggested fix"], ...tableRows]),
+      project.analysisStatus === "success"
+        ? table([["ID", "Breaking change", "Category", "Suggested fix"], ...tableRows])
+        : `Analysis skipped or failed. Analysis status: ${project.analysisStatus}`,
     ];
     const breakingChangeSummaryUrl = [
       result.analysisWorkflowUrl,

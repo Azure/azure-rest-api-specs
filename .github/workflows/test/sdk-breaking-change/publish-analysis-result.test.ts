@@ -61,7 +61,7 @@ afterEach(async () => {
 
 describe("buildAnalysisReport", () => {
   it.each(["skipped", "failure"] as const)(
-    "preserves a project with analysis status %s and no generated package",
+    "reports analysis status %s without implying no breaking changes were detected",
     async (analysisStatus) => {
       analysisResult.projects = [
         {
@@ -76,11 +76,28 @@ describe("buildAnalysisReport", () => {
         JSON.stringify(analysisResult),
       );
 
-      const { result } = await buildAnalysisReport(resultsPath);
+      const { result, report } = await buildAnalysisReport(resultsPath);
 
       expect(result.projects).toEqual(analysisResult.projects);
+      expect(report).toContain(`Analysis skipped or failed. Analysis status: ${analysisStatus}`);
+      expect(report).not.toContain("No SDK breaking changes detected.");
+      expect(report).not.toContain("| ID | Breaking change | Category | Suggested fix |");
     },
   );
+
+  it("shows the no-breaking-changes row for a successfully analyzed project", async () => {
+    analysisResult.projects[0].breakingChanges = [];
+    await writeFile(
+      join(resultsPath, "sdk-breaking-change-analysis.json"),
+      JSON.stringify(analysisResult),
+    );
+
+    const { report } = await buildAnalysisReport(resultsPath);
+
+    expect(report).toContain("| ID | Breaking change | Category | Suggested fix |");
+    expect(report).toContain("| - | No SDK breaking changes detected. | - | - |");
+    expect(report).not.toContain("Analysis skipped or failed.");
+  });
 
   it("rejects a successful analysis project without a package name", async () => {
     analysisResult.projects[0].sdkPackage = "";
