@@ -1,0 +1,142 @@
+{
+  "operationId": "Accounts_Create",
+  "parameters": {
+    "account": {
+      "kind": "AIServices",
+      "location": "westus",
+      "properties": {
+        "allowProjectManagement": true,
+        "toolControls": {
+          "defaultAction": "Deny",
+          "allowedTools": [
+            {
+              "type": "code_interpreter"
+            },
+            {
+              "type": "mcp",
+              "serverUrl": "https://*.contoso.com/mcp"
+            },
+            {
+              "type": "mcp",
+              "connectorId": "contoso-mcp-connector"
+            }
+          ]
+        }
+      },
+      "sku": {
+        "name": "S0"
+      }
+    },
+    "accountName": "myAccount",
+    "api-version": "2026-09-15-preview",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "title": "Create a Foundry account with tool controls",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myAccount",
+        "type": "Microsoft.CognitiveServices/accounts",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount",
+        "kind": "AIServices",
+        "location": "westus",
+        "properties": {
+          "allowProjectManagement": true,
+          "provisioningState": "Succeeded",
+          "toolControls": {
+            "defaultAction": "Deny",
+            "allowedTools": [
+              {
+                "type": "code_interpreter"
+              },
+              {
+                "type": "mcp",
+                "serverUrl": "https://*.contoso.com/mcp"
+              },
+              {
+                "type": "mcp",
+                "connectorId": "contoso-mcp-connector"
+              }
+            ]
+          }
+        },
+        "sku": {
+          "name": "S0"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myAccount",
+        "type": "Microsoft.CognitiveServices/accounts",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount",
+        "kind": "AIServices",
+        "location": "westus",
+        "properties": {
+          "allowProjectManagement": true,
+          "provisioningState": "Creating",
+          "toolControls": {
+            "defaultAction": "Deny",
+            "allowedTools": [
+              {
+                "type": "code_interpreter"
+              },
+              {
+                "type": "mcp",
+                "serverUrl": "https://*.contoso.com/mcp"
+              },
+              {
+                "type": "mcp",
+                "connectorId": "contoso-mcp-connector"
+              }
+            ]
+          }
+        },
+        "sku": {
+          "name": "S0"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/westus/operationResults/00000000-1111-2222-3333-555555555555?api-version=2026-09-15-preview",
+        "Retry-After": "10"
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myAccount",
+        "type": "Microsoft.CognitiveServices/accounts",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount",
+        "kind": "AIServices",
+        "location": "westus",
+        "properties": {
+          "allowProjectManagement": true,
+          "provisioningState": "Accepted",
+          "toolControls": {
+            "defaultAction": "Deny",
+            "allowedTools": [
+              {
+                "type": "code_interpreter"
+              },
+              {
+                "type": "mcp",
+                "serverUrl": "https://*.contoso.com/mcp"
+              },
+              {
+                "type": "mcp",
+                "connectorId": "contoso-mcp-connector"
+              }
+            ]
+          }
+        },
+        "sku": {
+          "name": "S0"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/westus/operationResults/00000000-1111-2222-3333-555555555555?api-version=2026-09-15-preview",
+        "Retry-After": "10"
+      }
+    }
+  }
+}

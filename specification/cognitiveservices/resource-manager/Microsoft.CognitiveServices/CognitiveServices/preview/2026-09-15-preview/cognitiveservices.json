@@ -1875,6 +1875,9 @@
           },
           "Create a Foundry account with customer-owned AKS hosting": {
             "$ref": "./examples/CreateAccountWithAgentHostingConfiguration.json"
+          },
+          "Create a Foundry account with tool controls": {
+            "$ref": "./examples/CreateAccountWithToolControls.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1953,6 +1956,9 @@
         "x-ms-examples": {
           "Update Account": {
             "$ref": "./examples/UpdateAccount.json"
+          },
+          "Update a Foundry account to deny all tools": {
+            "$ref": "./examples/UpdateAccountWithToolControls.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7457,6 +7463,9 @@
           },
           "Create Project Min": {
             "$ref": "./examples/CreateProjectMin.json"
+          },
+          "Create a Foundry project with tool controls": {
+            "$ref": "./examples/CreateProjectWithToolControls.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7540,6 +7549,9 @@
         "x-ms-examples": {
           "Update Project": {
             "$ref": "./examples/UpdateProjects.json"
+          },
+          "Update a Foundry project with no explicitly allowed tools": {
+            "$ref": "./examples/UpdateProjectWithToolControls.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -13320,6 +13332,10 @@
         "capabilitySettings": {
           "$ref": "#/definitions/CapabilitySettings",
           "description": "Reusable default agent capability settings inherited by child projects."
+        },
+        "toolControls": {
+          "$ref": "#/definitions/ToolControls",
+          "description": "The account-level tool access policy. Supported only for AIServices accounts with allowProjectManagement enabled. Omitting this property in a PUT request clears the policy. In PATCH requests, omission preserves the policy and an explicit null clears it. Responses omit this property when no policy is configured."
         },
         "agentHostingConfigurations": {
           "type": "array",
@@ -20715,6 +20731,10 @@
             "read",
             "create"
           ]
+        },
+        "toolControls": {
+          "$ref": "#/definitions/ToolControls",
+          "description": "The project-level tool access policy. Omitting this property in a PUT request clears the policy. In PATCH requests, omission preserves the policy and an explicit null clears it. Responses omit this property when no policy is configured."
         }
       }
     },
@@ -23803,6 +23823,250 @@
           {
             "name": "NoAutoUpgrade",
             "value": "NoAutoUpgrade"
+          }
+        ]
+      }
+    },
+    "ToolControlEntry": {
+      "type": "object",
+      "description": "Identifies a tool by its canonical type and optional MCP server URL or connector.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ToolControlType",
+          "description": "The canonical tool type. For type mcp, exactly one of serverUrl or connectorId must be specified. Other tool types must omit both properties."
+        },
+        "serverUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The absolute HTTPS URL of an MCP server. A single wildcard in the leftmost host label, such as https://*.contoso.com/mcp, is supported. The URL must not contain user information. Applies only to type mcp and cannot be specified together with connectorId."
+        },
+        "connectorId": {
+          "type": "string",
+          "description": "The opaque MCP connector catalog identifier, not an Azure resource ID. Applies only to type mcp and cannot be specified together with serverUrl."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ToolControlType": {
+      "type": "string",
+      "description": "The canonical tool type supported by Foundry agents. Additional tool types may be specified as strings.",
+      "enum": [
+        "a2a",
+        "azure_ai_search",
+        "azure_function",
+        "bing_grounding",
+        "browser_automation",
+        "capture_structured_outputs",
+        "openapi",
+        "function",
+        "file_search",
+        "computer_use_preview",
+        "web_search",
+        "mcp",
+        "code_interpreter",
+        "image_generation",
+        "local_shell",
+        "shell",
+        "custom",
+        "web_search_preview",
+        "apply_patch",
+        "a2a_preview",
+        "bing_custom_search_preview",
+        "browser_automation_preview",
+        "fabric_dataagent_preview",
+        "sharepoint_grounding_preview",
+        "memory_search_preview",
+        "work_iq_preview",
+        "fabric_iq_preview",
+        "toolbox_search_preview",
+        "web_iq_preview"
+      ],
+      "x-ms-enum": {
+        "name": "ToolControlType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "a2a",
+            "value": "a2a",
+            "description": "Agent-to-agent tool."
+          },
+          {
+            "name": "azure_ai_search",
+            "value": "azure_ai_search",
+            "description": "Azure AI Search tool."
+          },
+          {
+            "name": "azure_function",
+            "value": "azure_function",
+            "description": "Azure Function tool."
+          },
+          {
+            "name": "bing_grounding",
+            "value": "bing_grounding",
+            "description": "Grounding with Bing Search tool."
+          },
+          {
+            "name": "browser_automation",
+            "value": "browser_automation",
+            "description": "Browser automation tool."
+          },
+          {
+            "name": "capture_structured_outputs",
+            "value": "capture_structured_outputs",
+            "description": "Capture structured outputs tool."
+          },
+          {
+            "name": "openapi",
+            "value": "openapi",
+            "description": "OpenAPI tool."
+          },
+          {
+            "name": "function",
+            "value": "function",
+            "description": "Function tool."
+          },
+          {
+            "name": "file_search",
+            "value": "file_search",
+            "description": "File search tool."
+          },
+          {
+            "name": "computer_use_preview",
+            "value": "computer_use_preview",
+            "description": "Computer use tool."
+          },
+          {
+            "name": "web_search",
+            "value": "web_search",
+            "description": "Web search tool."
+          },
+          {
+            "name": "mcp",
+            "value": "mcp",
+            "description": "Model Context Protocol (MCP) tool."
+          },
+          {
+            "name": "code_interpreter",
+            "value": "code_interpreter",
+            "description": "Code interpreter tool."
+          },
+          {
+            "name": "image_generation",
+            "value": "image_generation",
+            "description": "Image generation tool."
+          },
+          {
+            "name": "local_shell",
+            "value": "local_shell",
+            "description": "Local shell tool."
+          },
+          {
+            "name": "shell",
+            "value": "shell",
+            "description": "Shell tool."
+          },
+          {
+            "name": "custom",
+            "value": "custom",
+            "description": "Custom tool."
+          },
+          {
+            "name": "web_search_preview",
+            "value": "web_search_preview",
+            "description": "Web search preview tool."
+          },
+          {
+            "name": "apply_patch",
+            "value": "apply_patch",
+            "description": "Apply patch tool."
+          },
+          {
+            "name": "a2a_preview",
+            "value": "a2a_preview",
+            "description": "Agent-to-agent preview tool."
+          },
+          {
+            "name": "bing_custom_search_preview",
+            "value": "bing_custom_search_preview",
+            "description": "Grounding with Bing Custom Search preview tool."
+          },
+          {
+            "name": "browser_automation_preview",
+            "value": "browser_automation_preview",
+            "description": "Browser automation preview tool."
+          },
+          {
+            "name": "fabric_dataagent_preview",
+            "value": "fabric_dataagent_preview",
+            "description": "Fabric data agent preview tool."
+          },
+          {
+            "name": "sharepoint_grounding_preview",
+            "value": "sharepoint_grounding_preview",
+            "description": "SharePoint grounding preview tool."
+          },
+          {
+            "name": "memory_search_preview",
+            "value": "memory_search_preview",
+            "description": "Memory search preview tool."
+          },
+          {
+            "name": "work_iq_preview",
+            "value": "work_iq_preview",
+            "description": "Work IQ preview tool."
+          },
+          {
+            "name": "fabric_iq_preview",
+            "value": "fabric_iq_preview",
+            "description": "Fabric IQ preview tool."
+          },
+          {
+            "name": "toolbox_search_preview",
+            "value": "toolbox_search_preview",
+            "description": "Toolbox search preview tool."
+          },
+          {
+            "name": "web_iq_preview",
+            "value": "web_iq_preview",
+            "description": "Web IQ preview tool."
+          }
+        ]
+      }
+    },
+    "ToolControls": {
+      "type": "object",
+      "description": "Defines the default and per-tool access policy for a Foundry account or project.",
+      "properties": {
+        "defaultAction": {
+          "$ref": "#/definitions/ToolControlsDefaultAction",
+          "description": "The action applied when a tool is not listed explicitly. Only Deny is currently supported."
+        },
+        "allowedTools": {
+          "type": "array",
+          "description": "The tools explicitly allowed by the policy. Omission or an empty array specifies no explicitly allowed tools.",
+          "items": {
+            "$ref": "#/definitions/ToolControlEntry"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ToolControlsDefaultAction": {
+      "type": "string",
+      "description": "Specifies the default action for a tool that is not listed explicitly.",
+      "enum": [
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "ToolControlsDefaultAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Tools that are not listed explicitly are denied."
           }
         ]
       }

@@ -2082,6 +2082,12 @@ model AccountProperties {
   capabilitySettings?: CapabilitySettings;
 
   /**
+   * The account-level tool access policy. Supported only for AIServices accounts with allowProjectManagement enabled. Omitting this property in a PUT request clears the policy. In PATCH requests, omission preserves the policy and an explicit null clears it. Responses omit this property when no policy is configured.
+   */
+  @added(Versions.v2026_09_15_preview)
+  toolControls?: ToolControls;
+
+  /**
    * Customer-owned AKS hosting configurations for Foundry agents. This property can only be specified when the account is created; an existing account without a hosting configuration cannot add one later. This API version supports exactly one configuration, while the array shape is reserved for future API versions that may support multiple configurations. Once set, the configuration cannot be changed, removed, or reordered. Account update requests should omit this property or send the complete existing value unchanged. Responses only include hosting configuration types defined by the requested API version.
    */
   @added(Versions.v2026_07_15_preview)
@@ -4794,6 +4800,157 @@ model ProjectProperties {
   @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   capabilitySettings?: CapabilitySettings;
+
+  /**
+   * The project-level tool access policy. Omitting this property in a PUT request clears the policy. In PATCH requests, omission preserves the policy and an explicit null clears it. Responses omit this property when no policy is configured.
+   */
+  @added(Versions.v2026_09_15_preview)
+  toolControls?: ToolControls;
+}
+
+/**
+ * Defines the default and per-tool access policy for a Foundry account or project.
+ */
+@added(Versions.v2026_09_15_preview)
+model ToolControls {
+  /**
+   * The action applied when a tool is not listed explicitly. Only Deny is currently supported.
+   */
+  defaultAction?: ToolControlsDefaultAction;
+
+  /**
+   * The tools explicitly allowed by the policy. Omission or an empty array specifies no explicitly allowed tools.
+   */
+  @identifiers(#[])
+  allowedTools?: ToolControlEntry[];
+}
+
+/**
+ * Identifies a tool by its canonical type and optional MCP server URL or connector.
+ */
+@added(Versions.v2026_09_15_preview)
+model ToolControlEntry {
+  /**
+   * The canonical tool type. For type mcp, exactly one of serverUrl or connectorId must be specified. Other tool types must omit both properties.
+   */
+  type: ToolControlType;
+
+  /**
+   * The absolute HTTPS URL of an MCP server. A single wildcard in the leftmost host label, such as https://*.contoso.com/mcp, is supported. The URL must not contain user information. Applies only to type mcp and cannot be specified together with connectorId.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "The serverUrl name matches the service-side JSON contract."
+  serverUrl?: url;
+
+  /**
+   * The opaque MCP connector catalog identifier, not an Azure resource ID. Applies only to type mcp and cannot be specified together with serverUrl.
+   */
+  connectorId?: string;
+}
+
+/**
+ * Specifies the default action for a tool that is not listed explicitly.
+ */
+@added(Versions.v2026_09_15_preview)
+union ToolControlsDefaultAction {
+  string,
+
+  /** Tools that are not listed explicitly are denied. */
+  Deny: "Deny",
+}
+
+/**
+ * The canonical tool type supported by Foundry agents. Additional tool types may be specified as strings.
+ */
+@added(Versions.v2026_09_15_preview)
+union ToolControlType {
+  string,
+
+  /** Agent-to-agent tool. */
+  a2a: "a2a",
+
+  /** Azure AI Search tool. */
+  azure_ai_search: "azure_ai_search",
+
+  /** Azure Function tool. */
+  azure_function: "azure_function",
+
+  /** Grounding with Bing Search tool. */
+  bing_grounding: "bing_grounding",
+
+  /** Browser automation tool. */
+  browser_automation: "browser_automation",
+
+  /** Capture structured outputs tool. */
+  capture_structured_outputs: "capture_structured_outputs",
+
+  /** OpenAPI tool. */
+  openapi: "openapi",
+
+  /** Function tool. */
+  function: "function",
+
+  /** File search tool. */
+  file_search: "file_search",
+
+  /** Computer use tool. */
+  computer_use_preview: "computer_use_preview",
+
+  /** Web search tool. */
+  web_search: "web_search",
+
+  /** Model Context Protocol (MCP) tool. */
+  mcp: "mcp",
+
+  /** Code interpreter tool. */
+  code_interpreter: "code_interpreter",
+
+  /** Image generation tool. */
+  image_generation: "image_generation",
+
+  /** Local shell tool. */
+  local_shell: "local_shell",
+
+  /** Shell tool. */
+  shell: "shell",
+
+  /** Custom tool. */
+  custom: "custom",
+
+  /** Web search preview tool. */
+  web_search_preview: "web_search_preview",
+
+  /** Apply patch tool. */
+  apply_patch: "apply_patch",
+
+  /** Agent-to-agent preview tool. */
+  a2a_preview: "a2a_preview",
+
+  /** Grounding with Bing Custom Search preview tool. */
+  bing_custom_search_preview: "bing_custom_search_preview",
+
+  /** Browser automation preview tool. */
+  browser_automation_preview: "browser_automation_preview",
+
+  /** Fabric data agent preview tool. */
+  fabric_dataagent_preview: "fabric_dataagent_preview",
+
+  /** SharePoint grounding preview tool. */
+  sharepoint_grounding_preview: "sharepoint_grounding_preview",
+
+  /** Memory search preview tool. */
+  memory_search_preview: "memory_search_preview",
+
+  /** Work IQ preview tool. */
+  work_iq_preview: "work_iq_preview",
+
+  /** Fabric IQ preview tool. */
+  fabric_iq_preview: "fabric_iq_preview",
+
+  /** Toolbox search preview tool. */
+  toolbox_search_preview: "toolbox_search_preview",
+
+  /** Web IQ preview tool. */
+  web_iq_preview: "web_iq_preview",
 }
 
 /**
