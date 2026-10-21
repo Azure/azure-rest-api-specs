@@ -22,9 +22,9 @@ evaluation instead of applying an obsolete decision.
 The handoff checks the live PR/head, draft and hold labels, and the durable
 `ARMInitialReviewRequested` marker returned by the same PR lookup. If the marker is present,
 no automatic review is requested, even after new commits. This marker is not approval
-evidence and is never automatically removed. Explicit reviews also record it in the
-trusted pre-activation job, so they prevent a subsequent automatic initial review.
-Existing current-head semantic statuses backfill missing markers without rerunning AI.
+evidence and is never automatically removed. Only the dispatcher writes it. If an explicit
+review already published an `ARM Semantic Review` status on the current head, the dispatcher
+backfills the missing marker without rerunning AI.
 No reviewer workflow history is listed.
 
 For an unmarked PR, the dispatcher reads current-head statuses, rechecks readiness and
