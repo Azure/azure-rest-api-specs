@@ -59,15 +59,21 @@ export function handleRequest(request) {
               type: "object",
               properties: {
                 customizationRequest: { type: "string" },
-                packagePath: { type: "string" },
-                tspProjectPath: { type: "string" },
+                packagePath: {
+                  type: "string",
+                  description: "Required for CustomCode and All scopes.",
+                },
+                tspProjectPath: {
+                  type: "string",
+                  description: "Required for SpecInputs and All scopes.",
+                },
                 editScope: {
                   type: "string",
                   enum: ["SpecInputs", "CustomCode", "All"],
                   default: "All",
                 },
               },
-              required: ["customizationRequest", "packagePath"],
+              required: ["customizationRequest"],
               additionalProperties: false,
             },
           },
@@ -79,19 +85,25 @@ export function handleRequest(request) {
       }
 
       const args = isRecord(params.arguments) ? params.arguments : {};
+      const editScope = args.editScope === undefined ? "All" : args.editScope;
       if (
         typeof args.customizationRequest !== "string" ||
-        !args.customizationRequest ||
-        typeof args.packagePath !== "string" ||
-        !args.packagePath ||
-        args.editScope === "SpecInputs"
+        !args.customizationRequest.trim() ||
+        (editScope !== "SpecInputs" &&
+          editScope !== "CustomCode" &&
+          editScope !== "All") ||
+        (editScope !== "CustomCode" &&
+          (typeof args.tspProjectPath !== "string" ||
+            !args.tspProjectPath.trim())) ||
+        (editScope !== "SpecInputs" &&
+          (typeof args.packagePath !== "string" || !args.packagePath.trim()))
       ) {
         return reply({
           isError: true,
           content: [
             {
               type: "text",
-              text: "Fixture requires a generic SDK customization request, packagePath, and All or CustomCode scope.",
+              text: "Fixture requires a nonempty customizationRequest and a SpecInputs, CustomCode, or All scope (default All when omitted). tspProjectPath is required for SpecInputs/All; packagePath is required for CustomCode/All.",
             },
           ],
         });

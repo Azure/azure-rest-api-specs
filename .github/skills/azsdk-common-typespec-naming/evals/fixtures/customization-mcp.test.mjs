@@ -171,32 +171,106 @@ await test("fixtures reject malformed requests and argument types explicitly", (
   assert.equal(callTool(request).isError, true);
 });
 
-await test("generic fixture preserves SDK customization routing", () => {
-  const request = {
+/**
+ * @param {Record<string, unknown>} args
+ * @returns {{ content: { type: string, text: string }[], isError?: boolean }}
+ */
+function genericCustomizationCall(args) {
+  const response = handleGenericRequest({
     id: 1,
     method: "tools/call",
     params: {
       name: "azsdk_customized_code_update",
-      arguments: {
-        customizationRequest: "Update the SDK retry policy",
-        packagePath: "/fixtures/sdk",
-        editScope: "CustomCode",
-      },
+      arguments: args,
     },
+  });
+  assert.ok(response && "result" in response && "content" in response.result);
+  return {
+    content: response.result.content,
+    isError: "isError" in response.result ? response.result.isError : undefined,
   };
-  const success = handleGenericRequest(request);
-  assert.ok(success && "result" in success && "content" in success.result);
-  assert.match(success.result.content[0].text, /"Success":true/);
+}
+
+await test("generic fixture advertises production customization scopes and optional paths", () => {
+  const response = handleGenericRequest({ id: 1, method: "tools/list" });
+  assert.ok(response && "result" in response && "tools" in response.result);
+  const schema = response.result.tools[0].inputSchema;
+  assert.deepEqual(schema.required, ["customizationRequest"]);
+  assert.deepEqual(schema.properties.editScope.enum, [
+    "SpecInputs",
+    "CustomCode",
+    "All",
+  ]);
+  assert.equal(schema.properties.editScope.default, "All");
+  assert.match(schema.properties.packagePath.description, /CustomCode and All/);
+  assert.match(
+    schema.properties.tspProjectPath.description,
+    /SpecInputs and All/,
+  );
+});
+
+await test("generic fixture accepts every scope with its required paths", () => {
   for (const args of [
-    { ...request.params.arguments, customizationRequest: 42 },
-    { ...request.params.arguments, packagePath: 42 },
-    { ...request.params.arguments, editScope: "SpecInputs" },
+    { editScope: "CustomCode", packagePath: "/fixtures/sdk" },
+    { editScope: "SpecInputs", tspProjectPath: "/fixtures/Widget" },
+    {
+      editScope: "All",
+      packagePath: "/fixtures/sdk",
+      tspProjectPath: "/fixtures/Widget",
+    },
+    { packagePath: "/fixtures/sdk", tspProjectPath: "/fixtures/Widget" },
   ]) {
-    const response = handleGenericRequest({
-      ...request,
-      params: { ...request.params, arguments: args },
+    const result = genericCustomizationCall({
+      customizationRequest: "Update SDK customization",
+      ...args,
     });
-    assert.ok(response && "result" in response && "isError" in response.result);
-    assert.equal(response.result.isError, true);
+    assert.equal(result.isError, undefined);
+    assert.match(result.content[0].text, /"Success":true/);
+  }
+});
+
+await test("generic fixture rejects invalid scopes even when both paths are supplied", () => {
+  for (const editScope of [42, null, "NotAScope", "", " ", [], {}]) {
+    const result = genericCustomizationCall({
+      customizationRequest: "Update SDK customization",
+      packagePath: "/fixtures/sdk",
+      tspProjectPath: "/fixtures/Widget",
+      editScope,
+    });
+    assert.ok("isError" in result && result.isError);
+    assert.match(result.content[0].text, /SpecInputs, CustomCode, or All/);
+  }
+});
+
+await test("generic fixture enforces nonempty requests and scope-specific paths", () => {
+  for (const invalid of [undefined, null, 42, "", " "]) {
+    const invalidRequest = genericCustomizationCall({
+      customizationRequest: invalid,
+      packagePath: "/fixtures/sdk",
+      tspProjectPath: "/fixtures/Widget",
+    });
+    assert.ok("isError" in invalidRequest && invalidRequest.isError);
+    for (const editScope of ["SpecInputs", "CustomCode", "All", undefined]) {
+      const requiredPaths =
+        editScope === "SpecInputs"
+          ? ["tspProjectPath"]
+          : editScope === "CustomCode"
+            ? ["packagePath"]
+            : ["tspProjectPath", "packagePath"];
+      for (const requiredPath of requiredPaths) {
+        const result = genericCustomizationCall({
+          customizationRequest: "Update SDK customization",
+          packagePath: "/fixtures/sdk",
+          tspProjectPath: "/fixtures/Widget",
+          ...(editScope === undefined ? {} : { editScope }),
+          [requiredPath]: invalid,
+        });
+        assert.ok(
+          "isError" in result && result.isError,
+          `${String(editScope)} requires a valid ${requiredPath}`,
+        );
+        assert.match(result.content[0].text, /tspProjectPath.*packagePath/);
+      }
+    }
   }
 });
