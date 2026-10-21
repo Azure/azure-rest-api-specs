@@ -20,8 +20,12 @@ assert.ok(
   }),
   "Employee must belong to the compiled service.",
 );
-/** @type {readonly ["createOrUpdate", "read", "update", "delete"]} */
-const lifecycleOperations = ["createOrUpdate", "read", "update", "delete"];
+const lifecycleOperations: readonly ["createOrUpdate", "read", "update", "delete"] = [
+  "createOrUpdate",
+  "read",
+  "update",
+  "delete",
+];
 for (const operation of lifecycleOperations) {
   assert.ok(employee.operations.lifecycle[operation], `Employee must expose ${operation}.`);
 }
