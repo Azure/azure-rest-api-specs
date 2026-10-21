@@ -387,6 +387,9 @@ model VoiceAgentSystemTool extends VoiceAgentTool {
 
   @doc("The built-in capability name. Known values are stable; additional values may be added over time.")
   name: VoiceAgentSystemToolName;
+
+  @doc("Optional model-facing guidance about when to use this capability. When omitted, the service uses that capability's built-in description. An override does not change the parameter schema, supported capabilities, or mandatory lifecycle and private-data handling rules.")
+  description?: string;
 }
 
 @doc("A service-managed control that ends the active conversation.")
@@ -398,7 +401,7 @@ model VoiceAgentEndConversationSystemTool extends VoiceAgentSystemTool {
   name: "end_conversation";
 }
 
-@doc("Switches supported conversation language settings when the model identifies a user language preference. The model supplies language (ISO 639-1) and reason; descriptions are service-defined.")
+@doc("Switches supported conversation language settings when the model identifies a user language preference. The model supplies language (ISO 639-1) and reason.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLanguageDetectionSystemTool extends VoiceAgentSystemTool {
   ...Record<never>;
@@ -467,9 +470,6 @@ model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
   @doc("The built-in capability. Always `collect_sms`.")
   name: "collect_sms";
 
-  @doc("Optional model-facing tool description. When omitted, the service uses its built-in description. Does not change the tool's arguments or execution behavior.")
-  description?: string;
-
   @doc("Default total collection deadline in integer seconds, including receiver preparation. An explicit model-call timeout_seconds overrides this value. Duplicate commands do not restart the deadline.")
   @encode(DurationKnownEncoding.seconds, int32)
   @minValue(duration.fromISO("PT1S"))
@@ -484,9 +484,6 @@ model VoiceAgentCollectDtmfSystemTool extends VoiceAgentSystemTool {
 
   @doc("The built-in capability. Always `collect_dtmf`.")
   name: "collect_dtmf";
-
-  @doc("Optional model-facing tool description. When omitted, the service uses its built-in description. Does not change the tool's arguments or execution behavior.")
-  description?: string;
 
   @doc("Default total collection deadline in integer seconds, including receiver preparation. An explicit model-call timeout_seconds overrides this value. First-digit and inter-digit timers cannot extend the effective deadline.")
   @encode(DurationKnownEncoding.seconds, int32)
@@ -569,9 +566,6 @@ model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {
   @doc("The built-in capability. Always `send_dtmf`.")
   name: "send_dtmf";
 
-  @doc("Optional model-facing tool description. When omitted, the service uses its built-in description. Does not change the tool's arguments or execution behavior.")
-  description?: string;
-
   @doc("Total send deadline in integer seconds from invocation acceptance, including binding, dispatch and waiting for provider acknowledgement. Not a model-call argument. Expiry before dispatch returns provider_not_executed; after dispatch without a confirmed result it returns provider_result_uncertain, without automatic retry. Acceptance does not confirm IVR recognition.")
   @encode(DurationKnownEncoding.seconds, int32)
   @minValue(duration.fromISO("PT1S"))
@@ -589,9 +583,6 @@ model VoiceAgentSendSmsSystemTool extends VoiceAgentSystemTool {
 
   @doc("The built-in capability. Always `send_sms`.")
   name: "send_sms";
-
-  @doc("Optional model-facing tool description. When omitted, the service uses its built-in description. Does not change the tool's arguments or execution behavior.")
-  description?: string;
 
   @doc("Total send deadline in integer seconds from invocation acceptance, including binding, dispatch and waiting for provider acknowledgement. Not a model-call argument. Expiry before dispatch returns provider_not_executed; after dispatch without a confirmed result it returns provider_result_uncertain, without automatic retry. This is not an SMS delivery deadline.")
   @encode(DurationKnownEncoding.seconds, int32)

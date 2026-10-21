@@ -94554,10 +94554,6 @@
             ],
             "description": "The built-in capability. Always `collect_dtmf`."
           },
-          "description": {
-            "type": "string",
-            "description": "Optional model-facing tool description. When omitted, the service uses its built-in description. Does not change the tool's arguments or execution behavior."
-          },
           "timeout_seconds": {
             "type": "integer",
             "format": "int32",
@@ -94594,10 +94590,6 @@
               "collect_sms"
             ],
             "description": "The built-in capability. Always `collect_sms`."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional model-facing tool description. When omitted, the service uses its built-in description. Does not change the tool's arguments or execution behavior."
           },
           "timeout_seconds": {
             "type": "integer",
@@ -95156,7 +95148,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Switches supported conversation language settings when the model identifies a user language preference. The model supplies language (ISO 639-1) and reason; descriptions are service-defined.",
+        "description": "Switches supported conversation language settings when the model identifies a user language preference. The model supplies language (ISO 639-1) and reason.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -95478,10 +95470,6 @@
             ],
             "description": "The built-in capability. Always `send_dtmf`."
           },
-          "description": {
-            "type": "string",
-            "description": "Optional model-facing tool description. When omitted, the service uses its built-in description. Does not change the tool's arguments or execution behavior."
-          },
           "timeout_seconds": {
             "type": "integer",
             "format": "int32",
@@ -95518,10 +95506,6 @@
               "send_sms"
             ],
             "description": "The built-in capability. Always `send_sms`."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional model-facing tool description. When omitted, the service uses its built-in description. Does not change the tool's arguments or execution behavior."
           },
           "timeout_seconds": {
             "type": "integer",
@@ -95828,6 +95812,10 @@
           "name": {
             "$ref": "#/components/schemas/VoiceAgentSystemToolName",
             "description": "The built-in capability name. Known values are stable; additional values may be added over time."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional model-facing guidance about when to use this capability. When omitted, the service uses that capability's built-in description. An override does not change the parameter schema, supported capabilities, or mandatory lifecycle and private-data handling rules."
           }
         },
         "discriminator": {
