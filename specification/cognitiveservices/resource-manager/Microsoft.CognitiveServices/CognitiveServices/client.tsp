@@ -645,7 +645,11 @@ op regenerateKeyCustom(
   "ServiceAccountUsage",
   "csharp"
 );
-@@alternateType(Microsoft.CognitiveServices.Usage.type, armResourceType, "csharp");
+@@alternateType(
+  Microsoft.CognitiveServices.Usage.type,
+  armResourceType,
+  "csharp"
+);
 @@clientName(UserOwnedStorage, "ServiceAccountUserOwnedStorage", "csharp");
 @@alternateType(UserOwnedStorage.resourceId, armResourceIdentifier, "csharp");
 @@alternateType(UserOwnedStorage.identityClientId, uuid, "csharp");
