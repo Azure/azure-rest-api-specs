@@ -13,37 +13,37 @@ namespace WebPubSubChat.PythonCustomizations {
     input: TypeSpec.Reflection.Model
   );
 
-  /** Properties supplied when creating a role. */
-  model ChatRoleCreate {
+  /** Properties supplied when creating or replacing a role. */
+  model ChatRoleCreateOrReplace {
     ...Create<{
       ...WebPubSubChat.ChatRole;
     }>;
   }
 
-  /** Properties supplied when creating a room. */
-  model ChatRoomCreate {
+  /** Properties supplied when creating or replacing a room. */
+  model ChatRoomCreateOrReplace {
     ...Create<{
       ...WebPubSubChat.ChatRoom;
     }>;
   }
 
-  /** Properties supplied when creating a room member. */
-  model ChatRoomMemberCreate {
+  /** Properties supplied when creating or replacing a room member. */
+  model ChatRoomMemberCreateOrReplace {
     ...Create<{
       ...WebPubSubChat.ChatRoomMember;
     }>;
   }
 
-  /** Properties supplied when creating a user. */
+  /** Properties supplied when creating or replacing a user. */
   @discriminator("kind")
-  model ChatUserCreate {
+  model ChatUserCreateOrReplace {
     ...Create<{
       ...WebPubSubChat.ChatUser;
     }>;
   }
 
-  /** Properties supplied when creating a human user. */
-  model HumanChatUserCreate extends ChatUserCreate {
+  /** Properties supplied when creating or replacing a human user. */
+  model HumanChatUserCreateOrReplace extends ChatUserCreateOrReplace {
     ...Create<{
       ...WebPubSubChat.HumanChatUser;
     }>;
@@ -207,18 +207,18 @@ namespace Customizations {
   );
   @@WebPubSubChat.PythonCustomizations.pythonRequestModel(
     WebPubSubChatServiceClient.createOrReplaceRole,
-    WebPubSubChat.PythonCustomizations.ChatRoleCreate
+    WebPubSubChat.PythonCustomizations.ChatRoleCreateOrReplace
   );
   @@WebPubSubChat.PythonCustomizations.pythonRequestModel(
     WebPubSubChatServiceClient.createOrReplaceRoom,
-    WebPubSubChat.PythonCustomizations.ChatRoomCreate
+    WebPubSubChat.PythonCustomizations.ChatRoomCreateOrReplace
   );
   @@WebPubSubChat.PythonCustomizations.pythonRequestModel(
     WebPubSubChatServiceClient.createOrReplaceRoomMember,
-    WebPubSubChat.PythonCustomizations.ChatRoomMemberCreate
+    WebPubSubChat.PythonCustomizations.ChatRoomMemberCreateOrReplace
   );
   @@WebPubSubChat.PythonCustomizations.pythonRequestModel(
     WebPubSubChatServiceClient.createOrReplaceUser,
-    WebPubSubChat.PythonCustomizations.ChatUserCreate
+    WebPubSubChat.PythonCustomizations.ChatUserCreateOrReplace
   );
 }
