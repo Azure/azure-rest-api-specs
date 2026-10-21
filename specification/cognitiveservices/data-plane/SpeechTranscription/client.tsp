@@ -28,6 +28,7 @@ namespace Azure.Ai.Speech.Transcription;
 @@clientName(EnhancedModeProperties, "EnhancedModeOptions", "javascript");
 @@clientName(EnhancedModeProperties.prompt, "prompts", "java");
 @@access(EnhancedModeProperties.enabled, Access.internal);
+@@clientName(EnhancedModeModelOptions, "EnhancedModeModelConfig", "csharp");
 @@clientName(PhraseListProperties, "PhraseListOptions", "java");
 @@clientName(PhraseListProperties, "PhraseListOptions", "javascript");
 @@clientName(TranscriptionResult.durationMilliseconds, "duration", "java");
