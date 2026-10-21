@@ -51,7 +51,7 @@ suppressions:
       subscription ID, a canonical UUID consistent with common-types v6.
       The earlier TypeSpec discussion is linked at
       https://github.com/Azure/azure-rest-api-specs/pull/46782#discussion_r4251063221.
-      Retaining uuid was confirmed by @ravimeda at
+      Retaining uuid was confirmed in the review at
       https://github.com/Azure/azure-rest-api-specs/pull/46782#discussion_r4319215608.
 ```
 
