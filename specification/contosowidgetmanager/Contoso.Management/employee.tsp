@@ -35,16 +35,18 @@ model EmployeeProperties {
 
   /** Administrator password used to sign in to the employee's workstation. */
   @added(Versions.v2026_10_01_preview)
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Value is returned to callers that need it."
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   adminPassword?: string;
 
   /** Badge code printed on the employee's access card. */
   @added(Versions.v2026_10_01_preview)
-  @pattern("^[^<>%&:\\\\?/]+$")
+  @pattern("^[A-Za-z0-9-]+$")
   badgeCode?: string;
 
   /** Timestamp when the service last modified the employee record. This value is computed by the service. */
   @added(Versions.v2026_10_01_preview)
+  @visibility(Lifecycle.Read)
   lastModifiedByService?: utcDateTime;
 }
 
