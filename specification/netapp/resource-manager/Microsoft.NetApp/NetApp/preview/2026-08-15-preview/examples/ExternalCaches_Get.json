@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoNetAppRg",
+    "externalClusterName": "contosoExternalCluster",
+    "externalSvmName": "contosoExternalSvm",
+    "externalCacheResourceName": "contosoCache_AB12",
+    "api-version": "2026-08-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contosoExternalCluster/externalSvms/contosoExternalSvm/externalCaches/contosoCache_AB12",
+        "name": "contosoCache_AB12",
+        "type": "Microsoft.NetApp/externalClusters/externalSvms/externalCaches",
+        "properties": {
+          "externalCacheName": "contosoCache",
+          "originVolumeResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/netAppAccounts/contosoAccount/capacityPools/contosoPool/volumes/contosoVolume",
+          "originVolumeName": "contosoVolume",
+          "originSvmName": "anfSvm",
+          "sizeInBytes": 107374182400,
+          "state": "online",
+          "connectionStatus": "Connected",
+          "createCommand": "volume flexcache create -vserver contosoExternalSvm -volume contosoCache -origin-vserver anfSvm -origin-volume contosoVolume"
+        }
+      }
+    }
+  },
+  "operationId": "ExternalCaches_Get",
+  "title": "ExternalCaches_Get"
+}
