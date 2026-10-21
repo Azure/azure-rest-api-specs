@@ -13,24 +13,24 @@ options:
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.AzureServiceConnectionController"
+    namespace: "Azure.ResourceManager.ServiceConnectionController"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-java":
     flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-azureserviceconnectioncontroller"
-    namespace: com.azure.resourcemanager.azureserviceconnectioncontroller
-    service-name: "AzureServiceConnectionController" # human-readable service name, whitespace allowed
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-serviceconnectioncontroller"
+    namespace: com.azure.resourcemanager.serviceconnectioncontroller
+    service-name: "Azure ServiceConnectionController" # human-readable service name, whitespace allowed
   "@azure-tools/typespec-ts":
     flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-azureserviceconnectioncontroller"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-serviceconnectioncontroller"
     experimental-extensible-enums: true
     package-details:
-      name: "@azure/arm-azureserviceconnectioncontroller"
+      name: "@azure/arm-serviceconnectioncontroller"
   "@azure-tools/typespec-go":
     flavor: azure
-    service-dir: "sdk/resourcemanager/azureserviceconnectioncontroller"
-    emitter-output-dir: "{output-dir}/{service-dir}/armazureserviceconnectioncontroller"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armazureserviceconnectioncontroller"
+    service-dir: "sdk/resourcemanager/serviceconnectioncontroller"
+    emitter-output-dir: "{output-dir}/{service-dir}/armserviceconnectioncontroller"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armserviceconnectioncontroller"
     fix-const-stuttering: true
     generate-samples: true
     generate-fakes: true
