@@ -95283,7 +95283,7 @@
           },
           "cancel_on_interruption": {
             "type": "boolean",
-            "description": "Whether user interruption before commit cancels the pending handoff.",
+            "description": "Whether user interruption before commit cancels the pending handoff. If omitted, the service defaults to false.",
             "default": false
           },
           "delay_ms": {
@@ -95291,7 +95291,7 @@
             "format": "int32",
             "minimum": 0,
             "maximum": 10000,
-            "description": "The minimum delay before target activation, in milliseconds.",
+            "description": "The minimum delay before target activation, in milliseconds, from 0 through 10000. If omitted, the service defaults to 0.",
             "default": 0
           },
           "transfer_message": {
@@ -95304,11 +95304,11 @@
               }
             ],
             "maxLength": 500,
-            "description": "Optional deterministic source-voice announcement played before target activation. Supported by cascaded\npipelines and realtime pipelines using local Azure TTS; model-native realtime voice requires omission or null."
+            "description": "Optional deterministic source-voice announcement played before target activation. Supported by cascaded\npipelines and realtime pipelines using local Azure TTS; model-native realtime voice requires omission or null.\nAt most 500 characters. If omitted or null, no announcement is played."
           },
           "target_response": {
             "$ref": "#/components/schemas/VoiceAgentHandoffTargetResponse",
-            "description": "Whether Voice Live automatically starts a response after target activation.",
+            "description": "Whether Voice Live automatically starts a response after target activation. If omitted, the service defaults to `auto`.",
             "default": "auto"
           }
         },
@@ -96616,7 +96616,7 @@
         ],
         "properties": {
           "type": {
-            "type": "string",
+            "$ref": "#/components/schemas/VoiceType",
             "description": "The voice implementation. Additional values may be added over time."
           }
         },

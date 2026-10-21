@@ -149,10 +149,10 @@ model VoiceAgentHandoffCondition {
   @maxLength(500)
   condition: string;
 
-  @doc("Whether user interruption before commit cancels the pending handoff.")
+  @doc("Whether user interruption before commit cancels the pending handoff. If omitted, the service defaults to false.")
   cancel_on_interruption?: boolean = false;
 
-  @doc("The minimum delay before target activation, in milliseconds.")
+  @doc("The minimum delay before target activation, in milliseconds, from 0 through 10000. If omitted, the service defaults to 0.")
   @minValue(0)
   @maxValue(10000)
   delay_ms?: int32 = 0;
@@ -160,11 +160,12 @@ model VoiceAgentHandoffCondition {
   @doc("""
     Optional deterministic source-voice announcement played before target activation. Supported by cascaded
     pipelines and realtime pipelines using local Azure TTS; model-native realtime voice requires omission or null.
+    At most 500 characters. If omitted or null, no announcement is played.
     """)
   @maxLength(500)
   transfer_message?: string | null;
 
-  @doc("Whether Voice Live automatically starts a response after target activation.")
+  @doc("Whether Voice Live automatically starts a response after target activation. If omitted, the service defaults to `auto`.")
   target_response?: VoiceAgentHandoffTargetResponse = VoiceAgentHandoffTargetResponse.auto;
 }
 
@@ -187,13 +188,13 @@ model VoiceAgentHandoffPolicy {
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
 model VoiceAgentVoice {
   @doc("The voice implementation. Additional values may be added over time.")
-  type: string;
+  type: VoiceType;
 }
 
 @doc("An OpenAI built-in voice used by a handoff node.")
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
 model OpenAIVoice extends VoiceAgentVoice {
-  type: "openai";
+  type: VoiceType.openai;
 
   @doc("The OpenAI built-in voice name.")
   @minLength(1)
@@ -236,7 +237,7 @@ model VoiceAgentAzureVoiceProperties {
 @doc("An Azure standard neural voice used by a handoff node.")
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
 model AzureStandardVoice extends VoiceAgentVoice {
-  type: "azure-standard";
+  type: VoiceType.azure_standard;
   ...VoiceAgentAzureVoiceProperties;
 
   @doc("The Azure neural voice name.")
@@ -250,7 +251,7 @@ model AzureStandardVoice extends VoiceAgentVoice {
 @doc("An Azure custom neural voice used by a handoff node.")
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
 model AzureCustomVoice extends VoiceAgentVoice {
-  type: "azure-custom";
+  type: VoiceType.azure_custom;
   ...VoiceAgentAzureVoiceProperties;
 
   @doc("The custom voice name.")
@@ -265,7 +266,7 @@ model AzureCustomVoice extends VoiceAgentVoice {
 @doc("An Azure personal voice used by a handoff node.")
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
 model AzurePersonalVoice extends VoiceAgentVoice {
-  type: "azure-personal";
+  type: VoiceType.azure_personal;
   ...VoiceAgentAzureVoiceProperties;
 
   @doc("The personal voice name.")
@@ -280,7 +281,7 @@ model AzurePersonalVoice extends VoiceAgentVoice {
 @doc("An Azure avatar voice-synchronization configuration used by a handoff node.")
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
 model AzureAvatarVoiceSyncVoice extends VoiceAgentVoice {
-  type: "avatar-voice-sync";
+  type: VoiceType.avatar_voice_sync;
   ...VoiceAgentAzureVoiceProperties;
 
   @doc("The neural model used to synthesize the avatar voice.")
@@ -291,7 +292,7 @@ model AzureAvatarVoiceSyncVoice extends VoiceAgentVoice {
 @doc("An Azure realtime-native voice used by a handoff node.")
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
 model AzureRealtimeNativeVoice extends VoiceAgentVoice {
-  type: "azure-realtime-native";
+  type: VoiceType.azure_realtime_native;
 
   @doc("The Azure realtime-native voice name.")
   @minLength(1)

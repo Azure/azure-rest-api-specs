@@ -29,9 +29,6 @@ union VoiceAgentServerEventTypeExtension {
   session_subagent_started: "session.subagent.started",
   session_subagent_completed: "session.subagent.completed",
   session_subagent_aborted: "session.subagent.aborted",
-  session_handoff_started: "session.handoff.started",
-  session_handoff_completed: "session.handoff.completed",
-  session_handoff_aborted: "session.handoff.aborted",
   session_avatar_connecting: "session.avatar.connecting",
   session_avatar_switch_to_speaking: "session.avatar.switch_to_speaking",
   session_avatar_switch_to_idle: "session.avatar.switch_to_idle",
@@ -44,6 +41,9 @@ union VoiceAgentServerEventTypeExtension {
   response_animation_viseme_delta: "response.animation_viseme.delta",
   response_animation_viseme_done: "response.animation_viseme.done",
   response_video_delta: "response.video.delta",
+  session_handoff_started: "session.handoff.started",
+  session_handoff_completed: "session.handoff.completed",
+  session_handoff_aborted: "session.handoff.aborted",
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Registering Voice-only literals in the imported OpenAI discriminator union preserves a single polymorphic hierarchy."
@@ -157,9 +157,6 @@ union VoiceAgentServerEvent {
   session_subagent_started: VoiceAgentServerEventSessionSubagentStarted,
   session_subagent_completed: VoiceAgentServerEventSessionSubagentCompleted,
   session_subagent_aborted: VoiceAgentServerEventSessionSubagentAborted,
-  session_handoff_started: VoiceAgentServerEventSessionHandoffStarted,
-  session_handoff_completed: VoiceAgentServerEventSessionHandoffCompleted,
-  session_handoff_aborted: VoiceAgentServerEventSessionHandoffAborted,
   session_updated: OpenAI.RealtimeServerEventSessionUpdated,
   error: OpenAI.RealtimeServerEventError,
   warning: VoiceAgentServerEventWarning,
@@ -175,6 +172,9 @@ union VoiceAgentServerEvent {
   response_animation_viseme_delta: VoiceAgentServerEventResponseAnimationVisemeDelta,
   response_animation_viseme_done: VoiceAgentServerEventResponseAnimationVisemeDone,
   response_video_delta: VoiceAgentServerEventResponseVideoDelta,
+  session_handoff_started: VoiceAgentServerEventSessionHandoffStarted,
+  session_handoff_completed: VoiceAgentServerEventSessionHandoffCompleted,
+  session_handoff_aborted: VoiceAgentServerEventSessionHandoffAborted,
 }
 
 @doc("An animation output produced by a voice-agent session.")
