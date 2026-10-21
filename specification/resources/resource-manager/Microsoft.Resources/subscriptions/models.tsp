@@ -223,7 +223,7 @@ model OperationDisplay {
 /**
  * An error response for a resource management request.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the published CloudError envelope and common-types error details across existing subscription API versions."
 @error
 @Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
@@ -231,6 +231,26 @@ model CloudError {
    * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
    */
   error?: Azure.ResourceManager.CommonTypes.ErrorResponse;
+}
+
+/**
+ * Location list operation response.
+ */
+// Version the response model to avoid duplicate paging annotations on one model.
+@renamedFrom(Versions.v2026_10_01, "LocationListResult")
+@removed(Versions.v2026_10_01)
+model LocationListResultLegacy {
+  /**
+   * An array of locations.
+   */
+  @pageItems
+  value?: Location[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -247,7 +267,8 @@ model LocationListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  nextLink?: string;
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
 }
 
 /**

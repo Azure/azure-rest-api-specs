@@ -28,6 +28,12 @@ removed. Extended locations, including edge zones returned with
 `includeExtendedLocations=true`, are outside this evaluation scope and remain
 unchanged without policy annotations.
 
+The query option deliberately requests enrichment rather than filtering. It lets
+callers opt into policy evaluation while preserving the existing location list
+and the response when the option is omitted. Using `$filter` would change these
+semantics; a separate policy-restrictions collection would require callers to
+correlate its results with location discovery.
+
 Evaluation considers only enforced system-policy deny rules that apply at the
 subscription scope and depend only on location, including applicable inherited
 system policies. Non-system policies and rules requiring resource type, resource

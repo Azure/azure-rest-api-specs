@@ -23,6 +23,10 @@ interface Subscriptions {
   @route("/subscriptions/{subscriptionId}/locations")
   @list
   @tag("Subscriptions")
+  @returnTypeChangedFrom(
+    Versions.v2026_10_01,
+    ArmResponse<LocationListResultLegacy> | CloudError
+  )
   listLocations(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -52,9 +56,7 @@ interface Subscriptions {
   /**
    * Gets details about a specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "Preserve the published subscription GET route and custom response rather than converting it to a standard ARM resource operation template."
   @tag("Subscriptions")
   @route("/subscriptions/{subscriptionId}")
   @get
