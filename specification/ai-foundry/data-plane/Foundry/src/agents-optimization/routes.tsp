@@ -115,7 +115,7 @@ interface AgentOptimizationJobCandidates {
   >;
 
   /**
-   * Promotes an agent or prompt optimization candidate to the Foundry agent stored in the parent job's target configuration. Promotion is unavailable when the job omitted target_configuration or uses skill_optimization: skill publication creates versions but does not attach them to an agent. Prompt-agent promotion creates a new agent version. Hosted-agent promotion currently records promotion metadata without deploying a new hosted-agent version.
+   * Promotes a supported completed candidate to the Foundry agent stored in the parent job's target configuration. A skill-optimization candidate must be the evaluated learned candidate for a supported Prompt or Managed target; baseline, unevaluated, agentless, and unsupported-runtime skill candidates cannot be promoted. Skill promotion releases the exact evaluated candidate configuration without regenerating skills. Prompt-agent promotion creates a new agent version. Hosted-agent promotion currently records promotion metadata without deploying a new hosted-agent version.
    */
   @summary("Promote a candidate for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote")

@@ -318,7 +318,7 @@ union AgentOptimizationConfigurationType {
   @doc("One-shot prompt optimization.")
   prompt_optimization: "prompt_optimization",
 
-  @doc("Creates or updates versioned skills from trace evidence, with optional reporting-only before/after evaluation.")
+  @doc("Creates or updates versioned skills from trace evidence, with optional reporting-only evaluation recorded on baseline and learned candidates.")
   skill_optimization: "skill_optimization",
 }
 
@@ -435,7 +435,7 @@ model AgentOptimizationTraceWindow {
   type: string;
 }
 
-/** Selects recent trace conversations in a fixed half-open interval, preferring traces with annotations or evaluation results. */
+/** Selects trace conversations in a fixed half-open interval. */
 model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
   @doc("Fixed-window discriminator.")
   type: "fixed";
@@ -448,25 +448,9 @@ model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
   @doc("Exclusive ISO 8601 timestamp with an explicit UTC offset. Future values are queried unchanged against available traces; the job does not wait for this time.")
   end_time: offsetDateTime;
 
-  @doc("Maximum number of trace conversations to select. Defaults to 100. Select the latest matching traces, giving preference to those with human annotations, evaluation results, or both. Traces without feedback remain eligible.")
-  @minValue(1)
-  @maxValue(100)
-  max_traces?: int32 = 100;
-}
-
-/** Proposed explicit trace-ID selection. Service support and detailed lookup behavior are TBD; this contract does not establish runtime availability. */
-model AgentOptimizationTraceIdsTraceWindow
-  extends AgentOptimizationTraceWindow {
-  @doc("Explicit trace-ID selection discriminator. Service support is TBD.")
-  type: "trace_ids";
-
-  @doc("Explicit trace identifiers to look up within the configured telemetry source. Service support, list-size limits, duplicate handling, and missing-ID behavior are TBD.")
-  @minItems(1)
-  trace_ids: string[];
-
-  @doc("Requested telemetry lookup horizon in hours. Service support, the lookback anchor, and maximum supported horizon are TBD.")
-  @minValue(1)
-  lookback_hours: int32;
+  @doc("Optional telemetry operation IDs to select within the fixed window. Omitted, null, or empty selects the latest 100 readable matching traces independently of feedback availability. A nonempty list must contain at most 1,000 unique, nonempty IDs. Every requested ID must resolve unambiguously to a readable, authorized trace in the window; the service fails instead of substituting or silently truncating traces.")
+  @maxItems(1000)
+  trace_ids?: string[] | null;
 }
 
 /** Trace evidence for skill optimization, selected independently of feedback availability. */
@@ -477,7 +461,7 @@ model AgentTracesOptimizationContext extends OptimizationContext {
   @doc("Explicit telemetry selection. Required without a target agent. When omitted with a target, use its project-linked telemetry. Not accepted on steering_prompt context.")
   trace_connection_configuration?: AgentOptimizationTraceConnectionConfiguration;
 
-  @doc("Trace selection: a fixed half-open window, or proposed explicit trace_ids selection whose service support is TBD.")
+  @doc("Fixed half-open trace window with optional exact operation-ID selection.")
   trace_window: AgentOptimizationTraceWindow;
 }
 
@@ -495,23 +479,23 @@ model SkillOptimizationTraceEvaluatorGenerationConfiguration
   type: "agent_traces";
 }
 
-/** Reuses agent optimization evaluator, model, and concurrency inputs with a required validation set for reporting-only skill comparisons. */
+/** Service-prepared inputs for reporting-only baseline and learned-candidate evaluation. */
 model SkillOptimizationEvaluationConfiguration {
   ...OmitProperties<
     AgentOptimizationEvaluationConfiguration,
     "evaluators" | "training_set" | "validation_set"
   >;
 
-  @doc("Required validation set used unchanged for both before and after runs. Limited to 500 inline cases. Training sets are not accepted because evaluation does not guide skill generation.")
-  validation_set: AgentOptimizationEvaluationSet;
+  @doc("Evaluation set used unchanged for the baseline and learned candidate. When omitted on create, the service generates a trace-derived target-completion dataset and returns its exact dataset reference after preparation. Inline sets are limited to 500 cases. Training sets are not accepted because evaluation does not guide skill generation.")
+  validation_set?: AgentOptimizationEvaluationSet;
 
-  @doc("Existing evaluator references. At least one reference or evaluator_generation_configuration is required. When both are supplied, use their combined evaluator set.")
+  @doc("Existing evaluator references supplied by the caller, or the resolved exact references returned after evaluator generation. At least one evaluator or evaluator_generation_configuration is required. When both are supplied, the resolved configuration contains their combined evaluator set.")
   @minItems(1)
   @maxItems(20)
   evaluators?: AgentOptimizationEvaluator[];
 
-  @doc("Opt-in creation of evaluators during this job. Generated evaluator references and exact versions are returned with the comparison. Omitted when only existing evaluators are used.")
-  evaluator_generation_configuration?: SkillOptimizationEvaluatorGenerationConfiguration;
+  @doc("Optional creation-time configuration for generating evaluators from the selected trace evidence. Null or omitted uses only caller-supplied evaluators. Generated exact references are returned in evaluators after preparation.")
+  evaluator_generation_configuration?: SkillOptimizationEvaluatorGenerationConfiguration | null;
 }
 
 /** Configuration for generating versioned skill packages from trace evidence. */
@@ -527,7 +511,7 @@ model SkillOptimizationConfiguration
   @doc("Exact skill versions unioned with skills discovered from Prompt or Managed targets, including toolboxes. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. References are deduplicated.")
   additional_skills?: AgentOptimizationFoundrySkillReference[];
 
-  @doc("Optional before/after evaluation using a required validation_set and shared agent optimization model, evaluator, and concurrency inputs. Requires target_configuration. Training sets are not accepted. Evaluate the same pinned target with baseline skills and proposed skills using the same validation set and resolved evaluator versions. Scores do not guide generation, ranking, selection, or publication. Omitted to skip performance evaluation.")
+  @doc("Optional reporting-only evaluation of the same pinned target before and after applying proposed skills. Requires target_configuration. The service generates a validation set when one is not supplied and can generate evaluators from the selected traces when requested, then returns the exact dataset and resolved evaluator references in this configuration. The baseline and learned candidates use those same resolved inputs. Training sets are not accepted, and evaluation does not guide skill generation, ranking, selection, or publication. Omitted to skip performance evaluation.")
   evaluation_configuration?: SkillOptimizationEvaluationConfiguration;
 }
 
