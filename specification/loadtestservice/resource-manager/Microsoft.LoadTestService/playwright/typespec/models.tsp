@@ -25,13 +25,13 @@ model PlaywrightWorkspaceProperties {
   provisioningState?: ProvisioningState;
 
   @visibility(Lifecycle.Read)
-  @doc("The workspace data plane service API URI.")
+  @doc("The API endpoint for workspace data plane operations.")
   dataplaneUri?: url;
 
-  @doc("Controls the connection region for client workers to cloud-hosted browsers. When enabled, workers connect to browsers in the closest Azure region for lower latency. When disabled, workers connect to browsers in the Azure region where the workspace was created.")
+  @doc("Specifies where client workers connect to cloud-hosted browsers. When Enabled, workers connect to browsers in the nearest Azure region to reduce latency. When Disabled, workers connect to browsers in the workspace's Azure region.")
   regionalAffinity?: EnablementStatus = EnablementStatus.Enabled;
 
-  @doc("Enables the workspace to use local authentication through service access tokens for operations.")
+  @doc("Specifies whether service access tokens can be used to authenticate workspace operations.")
   localAuth?: EnablementStatus = EnablementStatus.Disabled;
 
   @visibility(Lifecycle.Read)
@@ -42,16 +42,16 @@ model PlaywrightWorkspaceProperties {
   workspaceId?: string;
 
   @added(Versions.v2026_02_01_preview)
-  @doc("Indicates whether reporting is enabled for the workspace. When set to true, reports will be generated and available for the workspace.")
+  @doc("Specifies whether test reporting is enabled for the workspace.")
   reporting?: EnablementStatus = EnablementStatus.Disabled;
 
   @added(Versions.v2026_01_01_preview)
-  @doc("The URI of the Azure storage account used to store workspace artifacts, test results, and reports.")
+  @doc("The URI of the Azure Storage account used to store workspace artifacts, test results, and reports.")
   storageUri?: url;
 
   @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The ARM resource ID of the virtual network subnet to use for private network connectivity. Ensure the subnet meets the virtual network prerequisites (https://aka.ms/pww/docs/vnet) before creating the workspace. The resource ID must be in the following format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}. This value can't be changed after the workspace is created.")
+  @doc("The Azure Resource Manager resource ID of the subnet used for private network connectivity. Before creating the workspace, ensure the subnet meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}. This value cannot be changed after workspace creation.")
   subnetId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
@@ -59,7 +59,7 @@ model PlaywrightWorkspaceProperties {
   ]>;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("Enables session artifact recording for the workspace.")
+  @doc("Specifies whether session artifact recording is enabled for the workspace.")
   sessionArtifacts?: EnablementStatus = EnablementStatus.Disabled;
 
   @added(Versions.v2026_10_01_preview)
@@ -67,11 +67,11 @@ model PlaywrightWorkspaceProperties {
   storageIdentity?: ManagedIdentity;
 
   @added(Versions.v2026_11_01_preview)
-  @doc("Indicates whether browser proxy is enabled for the workspace. When set to true, browser proxy can be used for the workspace.")
+  @doc("Specifies whether the browser proxy is enabled for the workspace.")
   browserProxy?: EnablementStatus = EnablementStatus.Disabled;
 
   @added(Versions.v2026_11_01_preview)
-  @doc("Indicates whether browser proxy is enabled for the workspace. When set to true, browser proxy can be used for the workspace.")
+  @doc("The Azure Key Vault linked to the workspace and the managed identity used to access it.")
   linkedKeyVault?: LinkedKeyVaultProperties;
 }
 
@@ -103,19 +103,19 @@ union EnablementStatus {
 
 @doc("Linked Key Vault properties for the Playwright workspace.")
 model LinkedKeyVaultProperties {
-  @doc("The URI of the linked Key Vault.")
+  @doc("The URI of the linked Azure Key Vault.")
   vaultUri?: url;
 
-  @doc("The identity used to access the linked Key Vault.")
+  @doc("The managed identity used to access the linked Azure Key Vault.")
   vaultIdentity?: ManagedIdentity;
 }
 
 @doc("Managed identity properties for accessing Azure resources.")
 model ManagedIdentity {
-  @doc("The type of the managed identity, either SystemAssigned or UserAssigned.")
+  @doc("The managed identity type: SystemAssigned or UserAssigned.")
   type?: IdentityType;
 
-  @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
+  @doc("The Azure Resource Manager resource ID of the user-assigned managed identity. Required when type is UserAssigned. Omit when type is SystemAssigned.")
   resourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
@@ -123,7 +123,7 @@ model ManagedIdentity {
   ]>;
 }
 
-@doc("The type of the managed identity.")
+@doc("The type of managed identity used to access Azure resources.")
 union IdentityType {
   string,
 
