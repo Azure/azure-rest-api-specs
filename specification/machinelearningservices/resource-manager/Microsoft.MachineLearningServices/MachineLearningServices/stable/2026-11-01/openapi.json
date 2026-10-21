@@ -31441,11 +31441,49 @@
           "x-nullable": true
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/RegistryPrivateEndpointConnectionProvisioningState",
           "description": "One of null, \"Succeeded\", \"Provisioning\", \"Failed\". While not approved, it's null.",
-          "x-nullable": true
+          "x-nullable": true,
+          "readOnly": true
         }
       }
+    },
+    "RegistryPrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of a registry private endpoint connection.",
+      "enum": [
+        "Succeeded",
+        "Provisioning",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "RegistryPrivateEndpointConnectionProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The connection was provisioned successfully."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The connection is being provisioned."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Provisioning failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Provisioning was canceled."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "RegistryPrivateLinkServiceConnectionState": {
       "type": "object",
