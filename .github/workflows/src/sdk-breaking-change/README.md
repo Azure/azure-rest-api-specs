@@ -28,7 +28,7 @@ flowchart TD
     AC["Analyze SDK breaking changes<br/>1. Check out specifications and analyze affected SDK projects<br/>2. Upload analysis results"]
     AP["Publish results job<br/>1. Download this run's analysis results<br/>2. Validate result freshness and post a PR comment<br/>3. Upload PR identity artifacts"]
     AG -->|"eligible"| AC
-    AC -->|"job succeeds"| AP
+    AC -->|"job succeeds or fails"| AP
   end
 
   L --> AG
@@ -79,9 +79,12 @@ result schemas, and PR comment behavior.
   alone does not establish artifact provenance.
 - Preserve the exact upstream workflow names in `workflow_run.workflows`. Mitigation starts only
   after `SDK Breaking Change Analysis` concludes successfully, including its publishing job.
-- Each `publish-results` job depends on its execution job (`analyze` or `mitigate`) and uses the
-  default success condition. Failed, canceled, or skipped execution jobs skip publishing, even if
-  an upload step produced an artifact. Publishers do not separately read eligibility artifacts.
+- The analysis `publish-results` job depends on `analyze` and runs after success or failure,
+  but not when `analyze` was canceled or skipped. If no result artifact was uploaded, the download
+  step fails rather than publishing a report.
+- The mitigation `publish-results` job depends on `mitigate` and uses the default success
+  condition. Failed, canceled, or skipped mitigation jobs skip publishing. Neither publisher
+  separately reads eligibility artifacts.
 
 ### Artifact ownership and compatibility
 
@@ -138,17 +141,12 @@ changes and produces an artifact and a GitHub Actions job summary.
 The resolver exposes the PR number, head repository and SHA, SDK language and repository, and
 `should-run` as job outputs. When eligible, the analysis job:
 
-1. Checks out the SDK repository's `main` branch and the specification PR's resolved head SHA.
-2. Installs the Azure SDK CLI, Copilot CLI, and language-specific development tools.
-3. Identifies affected TypeSpec projects from the files changed in the PR.
-4. Reads each project's language metadata and output directory, then runs SDK generation, build,
-   and breaking-change detection. Python skips the build step.
-5. Writes the result JSON and a job summary containing generation, build, and detection details.
-6. Attempts to upload the result artifact with `if: always()`; a missing file produces a warning.
+1. Identifies affected TypeSpec projects from the files changed in the PR.
+2. For each project, runs SDK generation, build, and breaking-change detection. Python skips the build step.
+3. Writes the result JSON and a job summary containing generation, build, and detection details.
+4. upload the result artifact.
 
-After `analyze` succeeds, the same workflow's `publish-results` job downloads the analysis artifact,
-publishes the PR comment, and uploads PR identity artifacts. There is no separate publisher workflow
-or eligibility-check job.
+After `analyze` job completed, the same workflow's `publish-results` job publishes the PR comment.
 
 #### Concurrency control
 
@@ -221,9 +219,11 @@ Example of a successful result containing a detected breaking change:
 
 #### Publish result in PR comment
 
-The `publish-results` job runs after `analyze` succeeds and downloads results from the same run.
-It does not run after a failed, canceled, or skipped analysis job. A JSON result with
-`status: "failure"` can still be published if the execution job itself succeeds.
+The `publish-results` job uses
+`always() && (needs.analyze.result == 'success' || needs.analyze.result == 'failure')` to download
+results from the same run after analysis succeeds or fails. It skips publication when analysis
+was canceled or skipped. Publishing still requires a valid result artifact; if analysis did not
+produce one, the download step fails.
 
 For a successful result, the publisher compares the PR's current head SHA with `headSha` before
 posting the report. The comment starts with a language-specific command, followed by the analyzed
@@ -252,10 +252,7 @@ commit and one table per project:
 
 Comment behavior:
 
-- **Current successful result:** posts the report shown above. Row numbering starts at one for
-  each project. Empty change arrays use a `No SDK breaking changes detected.` placeholder row. The
-  comment renderer does not display `analysisStatus`, so this placeholder alone does not establish
-  that a failed or skipped project was successfully analyzed; check the artifact or job summary.
+- **Current successful result:** posts the report shown above.
 - **Failed result:** posts an error message prefixed with a cross mark, the optional `errorMessage`,
   and a workflow-run link instead of the project tables. This path does not perform a freshness check.
 - **Stale successful result:** posts a warning containing both the analyzed SHA and the current PR head
@@ -285,15 +282,16 @@ SDK breaking changes.
   resolver records mitigation eligibility as `false`. Missing artifacts and invalid results cause
   resolution to fail.
 
-The resolver exposes the following step outputs, which are forwarded as `resolve-trigger` job outputs:
+The resolver exposes the PR number, head repository and SHA, SDK language and repository, and
+`should-run` as job outputs.
+When eligible, the mitigation job:
 
-- `pr-number`: specification PR number from the validated analysis result.
-- `sdk-language`: SDK language from the analysis result.
-- `sdk-repository`: SDK repository name mapped from `sdk-language`.
-- `head-repository`: full specification PR head repository name (`owner/repository`).
-- `head-branch`: specification PR head branch name.
-- `head-sha`: current PR head SHA, verified to match the analyzed commit.
-- `should-run`: string `"true"` when mitigation is eligible; otherwise `"false"`.
+1. Identifies succeedfully analyized TypeSpec projects from the analysis results.
+2. For each project, runs breaking change mitigation with customization tool.
+3. Writes the result JSON and a job summary.
+4. upload the result artifact.
+
+After `mitigation` job completed, the same workflow's `publish-results` job publishes the PR comment.
 
 #### Concurrency control
 
@@ -415,14 +413,12 @@ Comment behavior:
 
 - **Current successful result:** displays one table per project with `Resolved`, `ID`,
   `Breaking change`, `Resolution`, and `TypeSpec changes` columns. The first column shows ✔️ for
-  resolved changes and ❌ for unresolved changes; only the first `typespecChangesSummary` entry
-  is shown. Projects without changes display `None`.
+  resolved changes and ❌ for unresolved changes; show `typespecChangesSummary`.
   Each change ID links to the workflow summary with a `How to suppress` hover hint.
   Nonempty tables appear in a details block that is expanded by default.
   The report also includes **Customization Code** as a fenced diff in a collapsed-by-default
   details block when edits exist, or the
-  no-changes message above otherwise. The comment includes the full trimmed diff without
-  truncation and also links to the job summary.
+  no-changes message above otherwise.
 - **Failed result:** posts an error message prefixed with a cross mark, optional failure details,
   and the mitigation workflow link instead of the change tables. This path does not check freshness.
 - **Stale successful result:** posts a warning containing the analyzed SHA and current PR head SHA

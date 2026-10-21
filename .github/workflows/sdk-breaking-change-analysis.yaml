@@ -245,6 +245,7 @@ jobs:
           retention-days: 7
   publish-results:
     needs: analyze
+    if: always() && (needs.analyze.result == 'success' || needs.analyze.result == 'failure')
     runs-on: ubuntu-slim
     permissions:
       actions: read

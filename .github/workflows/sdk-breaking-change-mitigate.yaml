@@ -206,6 +206,7 @@ jobs:
             });
   publish-results:
     needs: mitigate
+    if: always() && (needs.mitigate.result == 'success' || needs.mitigate.result == 'failure')
     runs-on: ubuntu-slim
     permissions:
       actions: read
