@@ -488,7 +488,8 @@
         },
         "udr": {
           "$ref": "#/definitions/UDR",
-          "description": "The reference to the effective UDR (User Defined Route) applied to the Azure Service Connection Controller."
+          "description": "The resource ID of the effective UDR (User Defined Route) selected by the service and applied to the Azure Service Connection Controller.",
+          "readOnly": true
         }
       }
     },
@@ -582,17 +583,11 @@
         },
         "ipConfiguration": {
           "$ref": "#/definitions/IpConfiguration",
-          "description": "The IP configuration parameters for the provider connection.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
+          "description": "The persisted IP configuration parameters for the provider connection, returned when the resource is read."
         },
-        "privateEndpointResourceGroupName": {
-          "type": "string",
-          "description": "The name of the resource group in which the private endpoint for the provider connection is created. The resource group must be in the same subscription as the Azure Service Connection Controller. The name is case insensitive and cannot be changed after creation.",
-          "minLength": 1,
-          "maxLength": 90,
+        "privateEndpointResourceGroup": {
+          "$ref": "#/definitions/ResourceGroupId",
+          "description": "The fully qualified Azure Resource Manager resource ID of the resource group in which the private endpoint for the provider connection is created. The resource group must be in the same subscription as the Azure Service Connection Controller. The resource ID is case insensitive and cannot be changed after creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -611,6 +606,18 @@
             ]
           }
         }
+      }
+    },
+    "ResourceGroupId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A fully qualified ARM resource ID referencing a resource group.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Resources/resourceGroups"
+          }
+        ]
       }
     },
     "SubnetId": {

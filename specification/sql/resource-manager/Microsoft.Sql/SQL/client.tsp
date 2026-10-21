@@ -1908,6 +1908,7 @@ namespace Azure.ResourceManager.Models {
 /**
  * The name of the blob auditing policy.
  */
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing extensible union representation."
 union BlobAuditingPolicyNameType {
   BlobAuditingPolicyName,
   string,
