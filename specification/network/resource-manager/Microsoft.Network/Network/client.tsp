@@ -8108,7 +8108,13 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 
 @@clientName(
   Microsoft.Network.ConnectionMonitor,
-  "ConnectionMonitorInput",
+  "ConnectionMonitorCreateOrUpdateContent",
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.ConnectionMonitor.location,
+  Azure.Core.azureLocation,
   "csharp"
 );
 
