@@ -6646,16 +6646,6 @@
             "explode": false
           },
           {
-            "name": "status",
-            "in": "query",
-            "required": false,
-            "description": "Filters bindings by lifecycle status.",
-            "schema": {
-              "$ref": "#/components/schemas/TelephonyBindingStatus"
-            },
-            "explode": false
-          },
-          {
             "name": "limit",
             "in": "query",
             "required": false,
@@ -43947,7 +43937,7 @@
             "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
           }
         ],
-        "description": "The request to create an inbound SIP binding. New SIP bindings are active. The referenced same-project SipInbound connection uses authType CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl; missing, null, blank, or empty-object values default to digest. Nonempty objects and other non-string values are invalid. Digest requires nonblank credentials.keys.username and credentials.keys.password. IP ACL requires the non-null credentials.keys.source_cidrs string: at most 4096 original characters before trimming or splitting, and at most 64 entries before deduplication. The empty string allows all source IPs; whitespace-only strings and empty entries are invalid. Entries are canonical IPv4 or native IPv6 addresses or CIDRs (prefixes 0-32 or 0-128); scoped addresses and IPv4-mapped IPv6, including hexadecimal forms, are unsupported. Extra credential keys do not select the mode and are not rejected solely because they belong to the other mode. Connection PATCH may omit/null credentials only when the effective mode is unchanged; supplied credentials must contain all mode-required keys. These settings are connection fields, not binding fields; metadata or binding CIDR fallbacks are not public inputs.",
+        "description": "The request to create an inbound SIP binding. The referenced same-project SipInbound connection uses authType CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl; missing, null, blank, or empty-object values default to digest. Nonempty objects and other non-string values are invalid. Digest requires nonblank credentials.keys.username and credentials.keys.password. IP ACL requires the non-null credentials.keys.source_cidrs string: at most 4096 original characters before trimming or splitting, and at most 64 entries before deduplication. The empty string allows all source IPs; whitespace-only strings and empty entries are invalid. Entries are canonical IPv4 or native IPv6 addresses or CIDRs (prefixes 0-32 or 0-128); scoped addresses and IPv4-mapped IPv6, including hexadecimal forms, are unsupported. Extra credential keys do not select the mode and are not rejected solely because they belong to the other mode. Connection PATCH may omit/null credentials only when the effective mode is unchanged; supplied credentials must contain all mode-required keys. These settings are connection fields, not binding fields; metadata or binding CIDR fallbacks are not public inputs.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -96627,7 +96617,6 @@
           "id",
           "provider",
           "connection_name",
-          "status",
           "incoming_call_url"
         ],
         "properties": {
@@ -96649,10 +96638,6 @@
             "type": "string",
             "maxLength": 128,
             "description": "The optional display label for the binding."
-          },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status."
           },
           "incoming_call_url": {
             "type": "string",
@@ -96692,7 +96677,6 @@
           "id",
           "provider",
           "connection_name",
-          "status",
           "incoming_call_url",
           "etag"
         ],
@@ -96716,10 +96700,6 @@
             "maxLength": 128,
             "description": "The optional display label for the binding."
           },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status."
-          },
           "incoming_call_url": {
             "type": "string",
             "format": "uri",
@@ -96740,26 +96720,6 @@
           }
         },
         "description": "A telephony binding returned in a list, including its entity tag.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "TelephonyBindingStatus": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "active",
-              "suspended"
-            ]
-          }
-        ],
-        "description": "The lifecycle status of a telephony binding.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -99184,10 +99144,6 @@
       "UpdateTelephonyBindingRequest": {
         "type": "object",
         "properties": {
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The new lifecycle status."
-          },
           "label": {
             "anyOf": [
               {
