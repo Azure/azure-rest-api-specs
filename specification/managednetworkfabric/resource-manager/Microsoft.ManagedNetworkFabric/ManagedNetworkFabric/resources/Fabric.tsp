@@ -7,12 +7,9 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending TrackedResource base type for proper ARM resource modeling"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Represents a physical network deployment hosting infrastructure network configuration.")
-@Http.Private.includeInapplicableMetadataInPayload(false)
 @added(Versions.v2026_01_15_preview)
-model Fabric extends Azure.ResourceManager.Foundations.TrackedResource {
+model Fabric is Azure.ResourceManager.TrackedResource<FabricProperties, false> {
   @doc("Name of the Fabric.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -20,10 +17,9 @@ model Fabric extends Azure.ResourceManager.Foundations.TrackedResource {
   @segment("fabrics")
   @visibility(Lifecycle.Read)
   name: string;
-
-  @doc("Fabric properties.")
-  properties: FabricProperties;
 }
+
+@@doc(Fabric.properties, "Fabric properties.");
 
 @armResourceOperations
 @added(Versions.v2026_01_15_preview)
