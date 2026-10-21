@@ -71,7 +71,20 @@ interface BlobContainerClient extends Storage.Blob.Container {}
   },
   "rust,go"
 )
-interface BlobClient extends Storage.Blob.Blob {}
+
+// Rust-Scoped Smart Tier Removal
+interface BlobClient extends Storage.Blob.Blob {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @scope("rust")
+  downloadNoSmartTier is Customizations.downloadNoSmartTier;
+
+  @scope("rust")
+  getPropertiesNoSmartTier is Customizations.getPropertiesNoSmartTier;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @scope("rust")
+  getLayoutNoSmartTier is Customizations.getLayoutNoSmartTier;
+}
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
@@ -569,6 +582,11 @@ model BlobPropertiesGo {
 
   /** The archive status of the blob. */
   @Xml.name("ArchiveStatus") archiveStatus?: ArchiveStatus;
+
+  /** The smart access tier of the blob. */
+  @added(Versions.v2026_06_06)
+  @Xml.name("SmartAccessTier")
+  smartAccessTier?: AccessTier;
 
   /** Customer provided key sha256 */
   @Xml.name("CustomerProvidedKeySha256") customerProvidedKeySha256?: string;
@@ -1310,3 +1328,319 @@ op uploadPagesNoStructuredMessage is StorageOperationRequestBody<
   "rust"
 )
 scalar HttpRange extends string;
+
+// Rust-Scoped Smart Tier Removal
+
+// Prevents Generating
+@@scope(BlobClient.download, "!rust");
+@@scope(BlobClient.getProperties, "!rust");
+@@scope(BlobClient.getLayout, "!rust");
+// Prevents TypeSpec Validator Name Collision Check
+@@clientName(BlobClient.download, "downloadExcluded", "rust");
+@@clientName(BlobClient.getProperties, "getPropertiesExcluded", "rust");
+@@clientName(BlobClient.getLayout, "getLayoutExcluded", "rust");
+@@clientName(BlobClient.downloadNoSmartTier, "download_internal", "rust");
+@@access(BlobClient.downloadNoSmartTier, Access.internal, "rust");
+@@clientName(BlobClient.getPropertiesNoSmartTier, "getProperties", "rust");
+@@clientName(BlobClient.getLayoutNoSmartTier, "getLayout", "rust");
+@@alternateType(
+  BlobClient.downloadNoSmartTier::parameters.range,
+  HttpRange,
+  "rust"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" ""
+@@clientOption(
+  BlobClient.getLayoutNoSmartTier,
+  "forcePageIterator",
+  true,
+  "rust"
+);
+
+@@alternateType(AccessTier, AccessTierRust, "rust");
+@@alternateType(ArchiveStatus, ArchiveStatusRust, "rust");
+@@clientName(AccessTierRust, "AccessTier", "rust");
+@@clientName(ArchiveStatusRust, "ArchiveStatus", "rust");
+@@clientNamespace(AccessTierRust, "Azure.Storage.Blobs", "rust");
+@@clientNamespace(ArchiveStatusRust, "Azure.Storage.Blobs", "rust");
+@@scope(BlobProperties.smartAccessTier, "!rust");
+
+/** The access tiers exposed by the Rust SDK. */
+union AccessTierRust {
+  /** The P4 access tier. */
+  P4: "P4",
+
+  /** The P6 access tier. */
+  P6: "P6",
+
+  /** The P10 access tier. */
+  P10: "P10",
+
+  /** The P15 access tier. */
+  P15: "P15",
+
+  /** The P20 access tier. */
+  P20: "P20",
+
+  /** The P30 access tier. */
+  P30: "P30",
+
+  /** The P40 access tier. */
+  P40: "P40",
+
+  /** The P50 access tier. */
+  P50: "P50",
+
+  /** The P60 access tier. */
+  P60: "P60",
+
+  /** The P70 access tier. */
+  P70: "P70",
+
+  /** The P80 access tier. */
+  P80: "P80",
+
+  /** The Hot access tier. */
+  Hot: "Hot",
+
+  /** The Cool access tier. */
+  Cool: "Cool",
+
+  /** The Archive access tier. */
+  Archive: "Archive",
+
+  /** The Premium access tier. */
+  Premium: "Premium",
+
+  /** The Cold access tier. */
+  Cold: "Cold",
+
+  /** Extensible. */
+  string,
+}
+
+/** The archive statuses exposed by the Rust SDK. */
+union ArchiveStatusRust {
+  /** The archive status is rehydrating pending to Hot. */
+  RehydratePendingToHot: "rehydrate-pending-to-hot",
+
+  /** The archive status is rehydrating pending to Cool. */
+  RehydratePendingToCool: "rehydrate-pending-to-cool",
+
+  /** The archive status is rehydrating pending to Cold. */
+  RehydratePendingToCold: "rehydrate-pending-to-cold",
+
+  /** Extensible. */
+  string,
+}
+
+/** The download response headers exposed by the Rust SDK. */
+alias BlobDownloadResponseHeadersRust = {
+  /** The content type of the body of the response. */
+  @header("Content-Type")
+  contentType: "application/octet-stream";
+
+  ...Storage.Blob.RequestIdResponseHeader;
+  ...Storage.Blob.ClientRequestIdHeader;
+  ...MetadataHeaders;
+  ...ObjectReplicationHeaders;
+  ...LastModifiedResponseHeader;
+  ...CreationTimeResponseHeader;
+  ...ObjectReplicationPolicyIdResponseHeader;
+  ...ContentLengthResponseHeader;
+  ...ContentRangeResponseHeader;
+  ...EtagResponseHeader;
+  ...ContentMd5ResponseHeader;
+  ...ContentEncodingResponseParameter;
+  ...CacheControlResponseHeader;
+  ...ContentDispositionResponseHeader;
+  ...ContentLanguageResponseHeader;
+  ...BlobSequenceNumberResponseHeader;
+  ...BlobTypeResponseHeader;
+  ...CopyCompletionTimeResponseHeader;
+  ...CopyStatusDescriptionResponseHeader;
+  ...CopyIdResponseHeader;
+  ...CopyProgressResponseHeader;
+  ...CopyStatusResponseHeader;
+  ...CopySourceResponseHeader;
+  ...LeaseDurationResponseHeader;
+  ...LeaseStateResponseHeader;
+  ...LeaseStatusResponseHeader;
+  ...VersionIdResponseHeader;
+  ...IsCurrentVersionResponseHeader;
+  ...AcceptRangesResponseHeaderPrivate;
+  ...DateResponseHeaderPrivate;
+  ...BlobCommittedBlockCountResponseHeader;
+  ...ServerEncryptedResponseHeader;
+  ...EncryptionKeySha256ResponseHeader;
+  ...EncryptionScopeResponseHeader;
+  ...BlobContentMd5ResponseHeader;
+  ...TagCountResponseHeader;
+  ...IsSealedResponseHeader;
+  ...LastAccessedResponseHeader;
+  ...ImmutabilityPolicyExpiresOnResponseHeader;
+  ...ImmutabilityPolicyModeResponseHeader;
+  ...LegalHoldOptionalResponseHeader;
+  ...StructuredBodyTypeResponseHeader;
+  ...StructuredContentLengthResponseHeader;
+
+  /** The access tier of the blob. */
+  @added(Versions.v2026_10_06)
+  @header("x-ms-access-tier")
+  accessTier?: string;
+
+  /** Included if the access tier is inferred. */
+  @added(Versions.v2026_10_06)
+  @header("x-ms-access-tier-inferred")
+  accessTierInferred?: boolean;
+
+  ...AccessTierChangeTimeResponseHeaderV2026_10_06;
+  ...DownloadHintResponseHeader;
+  ...ApiVersionHeader;
+};
+
+/** Downloads the specified blob. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+@get
+op downloadNoSmartTier(...Storage.Blob.Blob.download::parameters):
+  | (BodyParameter &
+      BlobDownloadResponseHeadersRust &
+      ContentCrc64ResponseHeaderV2026_10_06)
+  | (BodyParameter &
+      BlobDownloadResponseHeadersRust &
+      ContentCrc64ResponseHeader & {
+        #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
+        @statusCode statusCode: 206;
+      })
+  | Error;
+
+/** Returns all user-defined metadata, standard HTTP properties, and system properties for the specified blob. It does not return the content of the blob. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+@head
+op getPropertiesNoSmartTier is StorageOperationNoBody<
+  {
+    ...SnapshotParameter;
+    ...VersionIdParameter;
+    ...TimeoutParameter;
+    ...LeaseIdOptionalParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
+    ...IfNoneMatchParameter;
+    ...IfMatchParameter;
+    ...IfTagsParameter;
+  },
+  {
+    /** Content-type. */
+    #suppress "@typespec/http/content-type-ignored" "This is a HEAD operation, so content-type header can be returned."
+    @header("Content-Type")
+    contentType?: string;
+
+    ...MetadataHeaders;
+    ...ObjectReplicationHeaders;
+    ...LastModifiedResponseHeader;
+    ...CreationTimeResponseHeader;
+    ...ObjectReplicationPolicyIdResponseHeader;
+    ...BlobTypeResponseHeader;
+    ...CopyCompletionTimeResponseHeader;
+    ...CopyStatusDescriptionResponseHeader;
+    ...CopyIdResponseHeader;
+    ...CopyProgressResponseHeader;
+    ...CopyStatusResponseHeader;
+    ...CopySourceResponseHeader;
+
+    /** Included if the blob is incremental copy blob. */
+    @header("x-ms-incremental-copy")
+    isIncrementalCopy?: boolean;
+
+    /** Included if the blob is incremental copy blob or incremental copy snapshot, if x-ms-copy-status is success. */
+    @header("x-ms-copy-destination-snapshot")
+    destinationSnapshot?: string;
+
+    ...LeaseDurationResponseHeader;
+    ...LeaseStateResponseHeader;
+    ...LeaseStatusResponseHeader;
+    ...ContentLengthResponseHeader;
+    ...EtagResponseHeader;
+    ...ContentMd5ResponseHeader;
+    ...ContentEncodingResponseParameter;
+    ...ContentDispositionResponseHeader;
+    ...ContentLanguageResponseHeader;
+    ...CacheControlResponseHeader;
+    ...BlobSequenceNumberResponseHeader;
+    ...AcceptRangesResponseHeaderPrivate;
+    ...BlobCommittedBlockCountResponseHeader;
+    ...ServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+
+    /** The access tier of the blob. */
+    @header("x-ms-access-tier")
+    accessTier?: string;
+
+    /** Included if the access tier is inferred. */
+    @header("x-ms-access-tier-inferred")
+    accessTierInferred?: boolean;
+
+    /** Included if the blob rehydrate operation is pending. Indicates the destination tier. */
+    @header("x-ms-archive-status")
+    archiveStatus?: ArchiveStatus;
+
+    ...AccessTierChangeTimeResponseHeader;
+    ...VersionIdResponseHeader;
+    ...IsCurrentVersionResponseHeader;
+    ...TagCountResponseHeader;
+    ...ExpiryTimeResponseHeader;
+    ...IsSealedResponseHeader;
+    ...RehydratePriorityResponseHeader;
+    ...LastAccessedResponseHeader;
+    ...ImmutabilityPolicyExpiresOnResponseHeader;
+    ...ImmutabilityPolicyModeResponseHeader;
+    ...LegalHoldOptionalResponseHeader;
+  }
+>;
+
+/** The Get Blob Layout operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob.  In addition, it may optionally return the layout of the blob. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+@added(Versions.v2026_10_06)
+@list
+@get
+@route("?comp=layout")
+op getLayoutNoSmartTier(...Storage.Blob.Blob.getLayout::parameters):
+  | {
+      /** The content type of the body of the response. */
+      @header("Content-Type")
+      contentType: "application/xml";
+
+      ...OmitProperties<BlobLayoutResponseHeaders, "smartAccessTier">;
+      ...Storage.Blob.ClientRequestIdHeader;
+      ...Storage.Blob.RequestIdResponseHeader;
+      ...ApiVersionHeader;
+      ...DateResponseHeaderPrivate;
+
+      /** The layout of the blob. */
+      @body
+      blobLayout: BlobLayout;
+    }
+  | {
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
+      @statusCode statusCode: 204;
+
+      /** Content-type. */
+      #suppress "@typespec/http/content-type-ignored" "There is no response body, so the content-type header can be returned."
+      @header("Content-Type")
+      contentType?: string;
+
+      ...OmitProperties<BlobLayoutResponseHeaders, "smartAccessTier">;
+      ...Storage.Blob.ClientRequestIdHeader;
+      ...Storage.Blob.RequestIdResponseHeader;
+      ...ApiVersionHeader;
+      ...DateResponseHeaderPrivate;
+    }
+  | Error;
