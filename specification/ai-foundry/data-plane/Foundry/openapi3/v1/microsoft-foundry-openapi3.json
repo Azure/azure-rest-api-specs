@@ -96423,7 +96423,7 @@
           },
           "arguments": {
             "type": "string",
-            "description": "The model's JSON-encoded arguments with references unexpanded. Actual collected values and bound private values are excluded."
+            "description": "The model's original JSON-encoded arguments. Literals, including values from non-private collection, remain visible; references stay unexpanded. Privately collected values and binding-expanded execution values are never copied back into these arguments."
           },
           "created_at": {
             "$ref": "#/components/schemas/FoundryTimestamp",

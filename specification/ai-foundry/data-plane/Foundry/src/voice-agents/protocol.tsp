@@ -343,7 +343,7 @@ model VoiceAgentRealtimeResponse {
   audio?: VoiceResponseAudio;
 }
 
-@doc("A generated system-tool intent, not a provider outcome. Private values and concrete execution parameters are excluded. Clients do not complete it with `function_call_output`.")
+@doc("A generated system-tool intent, not a provider outcome. Original literal arguments remain visible and references stay unexpanded. Privately collected values, binding-expanded execution copies and executor-only settings are excluded. Clients do not complete it with `function_call_output`.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSystemToolItem {
@@ -365,7 +365,7 @@ model VoiceAgentSystemToolItem {
   @doc("The invocation identifier used for correlation and duplicate suppression.")
   call_id: string;
 
-  @doc("The model's JSON-encoded arguments with references unexpanded. Actual collected values and bound private values are excluded.")
+  @doc("The model's original JSON-encoded arguments. Literals, including values from non-private collection, remain visible; references stay unexpanded. Privately collected values and binding-expanded execution values are never copied back into these arguments.")
   arguments: string;
 }
 
