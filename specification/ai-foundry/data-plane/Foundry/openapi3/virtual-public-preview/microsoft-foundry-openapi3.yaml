@@ -999,7 +999,7 @@ paths:
   /agent_insight_monitors/{monitor_id}:reset:
     post:
       operationId: AgentInsightMonitors_reset
-      description: Reset an Agent Insights monitor's overview, checkpoint, and active insight state.
+      description: Reset an Agent Insights monitor's generated summary, overview, checkpoint, and active insight state.
       parameters:
         - name: Foundry-Features
           in: header
@@ -45923,6 +45923,7 @@ components:
         - run_interval_hours
         - model_deployment_name
         - suspension
+        - agent_summary
         - overview
         - updated_at
       properties:
@@ -45963,11 +45964,19 @@ components:
             - type: 'null'
           description: Why the system suspended scheduled generation. Null when the monitor is not suspended.
           readOnly: true
+        agent_summary:
+          anyOf:
+            - $ref: '#/components/schemas/AgentInsightSummary'
+            - type: 'null'
+          description: The service-generated briefing for this agent, or null before a summary is available.
+          readOnly: true
         overview:
           anyOf:
             - $ref: '#/components/schemas/AgentInsightsOverview'
             - type: 'null'
-          description: The effective overview, or null before an overview is available.
+          description: |-
+            The compatibility overview, or null before an overview is available. A historical user
+            override takes precedence over generated content here, but never affects agent_summary.
           readOnly: true
         priorities:
           $ref: '#/components/schemas/AgentInsightPriorities'
@@ -46067,7 +46076,7 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when this monitor was last updated.
           readOnly: true
-      description: An Agent Insights monitor summary returned by list operations.
+      description: An Agent Insights monitor returned by list operations, without agent_summary or overview.
       x-ms-foundry-meta:
         required_previews:
           - AgentInsights=V1Preview
@@ -46094,16 +46103,22 @@ components:
             Replaces the complete priorities object. Omission leaves priorities unchanged; explicit
             null clears them. Include categories even when changing only instructions. Omitted, null,
             or blank instructions in a replacement clear earlier guidance. Responses omit cleared
-            priorities. This field, including explicit null, cannot be combined with overview_override.
+            priorities.
         overview_override:
           anyOf:
             - $ref: '#/components/schemas/AgentInsightsOverviewOverride'
             - type: 'null'
           description: |-
-            Sets the effective user overview, or clears it when explicitly set to null. Omission leaves
-            the overview unchanged. This field cannot be combined with other monitor updates.
+            Legacy input accepted for compatibility and ignored after request validation. Supplying a
+            value or null does not change or clear an overview or agent_summary. Other fields in the
+            same update are validated and applied as usual. An update with only this field leaves
+            the monitor unchanged.
+          deprecated: true
       description: Fields that can be updated on an Agent Insights monitor.
       examples:
+        - enabled: true
+          overview_override:
+            content: Ignored legacy overview.
         - priorities: null
         - priorities:
             categories:
@@ -46414,6 +46429,24 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - AgentInsights=V1Preview
+    AgentInsightSummary:
+      type: object
+      required:
+        - markdown
+      properties:
+        markdown:
+          type: string
+          description: The service-generated agent summary in Markdown.
+          readOnly: true
+      description: A service-generated briefing for the monitored agent.
+      examples:
+        - markdown: |-
+            # Agent summary
+
+            This agent answers support questions from product documentation.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentInsights=V1Preview
     AgentInsightSuspension:
       type: object
       required:
@@ -46491,7 +46524,7 @@ components:
         updated_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The time when this overview was last updated.
-      description: The effective overview for an Agent Insights monitor.
+      description: A compatibility overview for an Agent Insights monitor. Historical user overrides take precedence over generated content.
       x-ms-foundry-meta:
         required_previews:
           - AgentInsights=V1Preview
@@ -46502,8 +46535,8 @@ components:
       properties:
         content:
           type: string
-          description: The nonblank overview content, limited to 64 KiB when encoded as UTF-8.
-      description: A user-provided overview that becomes effective immediately and seeds the next generation.
+          description: The legacy overview content. The service ignores this value.
+      description: Legacy overview input accepted for compatibility and ignored.
       x-ms-foundry-meta:
         required_previews:
           - AgentInsights=V1Preview
