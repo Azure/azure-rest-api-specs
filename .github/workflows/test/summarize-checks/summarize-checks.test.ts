@@ -1157,7 +1157,7 @@ describe("Summarize Checks Unit Tests", () => {
           "session (no booking required):",
       );
       expect(comment).toContain(
-        "<li><b>When:</b> Every Tuesday and Thursday, 9:30?10:30 AM PST</li>",
+        "<li><b>When:</b> Every Tuesday and Thursday, 9:30\u201310:30 AM PST</li>",
       );
       expect(comment).toContain(
         `<a href="https://aka.ms/apimodelingreview">Join via Teams</a>`,
