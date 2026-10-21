@@ -1,5 +1,3 @@
-using TypeSpec.Versioning;
-
 namespace Microsoft.ContainerRegistry;
 
 /**
@@ -69,6 +67,5 @@ model ReplicationListResult {
    * The URI that can be used to request the next list of replications.
    */
   @nextLink
-  @typeChangedFrom(Versions.vLatestPreview, string)
-  nextLink?: url;
+  nextLink?: string;
 }

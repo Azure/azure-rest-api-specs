@@ -1,5 +1,3 @@
-using TypeSpec.Versioning;
-
 namespace Microsoft.ContainerRegistry;
 
 /**
@@ -82,6 +80,5 @@ model ScopeMapListResult {
    * The URI that can be used to request the next list of scope maps.
    */
   @nextLink
-  @typeChangedFrom(Versions.vLatestPreview, string)
-  nextLink?: url;
+  nextLink?: string;
 }

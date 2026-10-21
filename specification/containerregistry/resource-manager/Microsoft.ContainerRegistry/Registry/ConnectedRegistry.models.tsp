@@ -586,6 +586,5 @@ model ConnectedRegistryListResult {
    * The URI that can be used to request the next list of connected registries.
    */
   @nextLink
-  @typeChangedFrom(Versions.vLatestPreview, string)
-  nextLink?: url;
+  nextLink?: string;
 }

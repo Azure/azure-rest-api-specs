@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/versioning";
 
 using Azure.ResourceManager;
-using TypeSpec.Versioning;
 namespace Microsoft.ContainerRegistry;
 
 /**
@@ -279,8 +278,7 @@ model OperationListResult {
    * The URI that can be used to request the next list of container registry operations.
    */
   @nextLink
-  @typeChangedFrom(Versions.vLatestPreview, string)
-  nextLink?: url;
+  nextLink?: string;
 }
 
 /**

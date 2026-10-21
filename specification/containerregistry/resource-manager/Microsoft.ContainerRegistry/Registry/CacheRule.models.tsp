@@ -242,6 +242,5 @@ model CacheRulesListResult {
    * The URI that can be used to request the next list of cache rules.
    */
   @nextLink
-  @typeChangedFrom(Versions.vLatestPreview, string)
-  nextLink?: url;
+  nextLink?: string;
 }

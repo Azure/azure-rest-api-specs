@@ -1,5 +1,3 @@
-using TypeSpec.Versioning;
-
 namespace Microsoft.ContainerRegistry;
 
 /**
@@ -93,6 +91,5 @@ model PrivateEndpointConnectionListResult {
    * The URI that can be used to request the next list of private endpoint connections.
    */
   @nextLink
-  @typeChangedFrom(Versions.vLatestPreview, string)
-  nextLink?: url;
+  nextLink?: string;
 }
