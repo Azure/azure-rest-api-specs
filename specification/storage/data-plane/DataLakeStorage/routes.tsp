@@ -280,6 +280,7 @@ interface Path {
       @query mode?: PathRenameMode;
 
       ...ContinuationParameter;
+      ...BlobTypeParameter;
       ...CacheControlParameter;
       ...ContentEncodingParameter;
       ...ContentLanguageParameter;
@@ -673,6 +674,31 @@ interface Path {
       ...EncryptionKeySha256ResponseHeader;
       ...LeaseRenewedResponseHeader;
       ...StructuredBodyTypeResponseHeader;
+    },
+    "application/octet-stream"
+  >;
+
+  /** Appends data to the file. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "New API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "New API"
+  #suppress "@azure-tools/typespec-azure-core/byos" "New API"
+  @patch(#{ implicitOptionality: true })
+  @route("?action=concurrentAppend")
+  concurrentAppend is DataLakeOperationRequestBody<
+    {
+      ...AppendModeParameter;
+      ...BodyParameter;
+      ...ContentLengthParameter;
+      ...TransactionalContentMD5Parameter;
+      ...FastPathSessionDataParameter;
+      ...ConditionalAppendPositionParameter;
+      ...TimeoutParameter;
+    },
+    {
+      @statusCode statusCode: 202;
+      ...CommittedBlockCountResponseHeader;
+      ...FastPathSessionDataResponseHeader;
+      ...FastPathSessionDataExpiryResponseHeader;
     },
     "application/octet-stream"
   >;
