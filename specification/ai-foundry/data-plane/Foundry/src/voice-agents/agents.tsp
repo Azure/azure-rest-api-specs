@@ -173,7 +173,7 @@ model VoiceAgentDefinition extends AgentDefinition {
 
   @doc("""
     Optional post-call destinations and content selection stored with this immutable agent version. Omit this
-    property or set it to null when creating or replacing a complete definition to leave that version unconfigured;
+    property or set it to null when creating or replacing a complete definition to leave that version without post-call configuration;
     earlier versions are unchanged.
     Saving the configuration does not send events or dispatch routines. The service validates that the selected
     voice-agent definition and requested content are supported; unsupported content requests fail explicitly.
