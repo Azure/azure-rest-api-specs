@@ -22,6 +22,7 @@ import "./workspace.tsp";
 import "./workspaceDiscovery.tsp";
 import "./workspaceEvaluation.tsp";
 import "./discoveredResource.tsp";
+import "./subscriber.tsp";
 import "./scenario.tsp";
 import "./scenarioTemplate.tsp";
 import "./scenarioConfiguration.tsp";

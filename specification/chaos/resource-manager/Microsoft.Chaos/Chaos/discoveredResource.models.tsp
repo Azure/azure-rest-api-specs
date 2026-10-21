@@ -69,6 +69,14 @@ model DiscoveredResourceProperties {
   scope: string;
 
   /**
+   * The subscribers (agents) registered on this discovered resource, as
+   * `.../workspaces/{workspaceName}/subscribers/{subscriberName}` identifiers.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  subscribers?: Azure.Core.armResourceIdentifier[];
+
+  /**
    * The Azure region of the discovered resource.
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
