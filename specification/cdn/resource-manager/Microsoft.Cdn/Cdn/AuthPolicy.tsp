@@ -17,7 +17,7 @@ namespace Microsoft.Cdn;
 /**
  * An authorization policy that maps authorization configurations to profile, domain, or route associations.
  */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.preview)
 @parentResource(Profile)
 model AuthPolicy is Azure.ResourceManager.ProxyResource<AuthPolicyProperties> {
   ...ResourceNameParameter<
@@ -29,7 +29,7 @@ model AuthPolicy is Azure.ResourceManager.ProxyResource<AuthPolicyProperties> {
 }
 
 /** Operations for authorization policies associated with a profile. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.preview)
 @armResourceOperations
 interface AuthPolicies {
   /**
