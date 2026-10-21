@@ -18,7 +18,6 @@ import "./resourcetypes/dedicatedHub/dedicatedHub.tsp";
 import "./resourcetypes/transitHub/transitHub.tsp";
 import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
 import "./resourcetypes/workload/workload.tsp";
-import "./resourcetypes/serviceCatalog/serviceCatalog.tsp";
 
 import "./resourcetypes/shared/endpointrulebase.tsp";
 import "./resourcetypes/shared/governedserviceitem.tsp";
@@ -265,17 +264,6 @@ model DedicatedHubResource is TrackedResource<DedicatedHubProperties> {
   @path
   @pattern("^[a-zA-Z][a-zA-Z0-9-_]*[a-zA-Z0-9]$")
   @doc("The name of the Dedicated Hub Resource")
-  name: string;
-}
-
-@added(Microsoft.Mission.Versions.v2026_10_01_preview)
-@doc("ServiceCatalog Model Resource")
-model ServiceCatalogResource is TrackedResource<ServiceCatalogProperties> {
-  @key("serviceCatalogName")
-  @segment("serviceCatalogs")
-  @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
-  @path
-  @doc("The name of the ServiceCatalog Resource")
   name: string;
 }
 
