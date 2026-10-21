@@ -11,6 +11,29 @@ using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.CognitiveServices;
 using Azure.ResourceManager;
 
+@TypeSpec.Versioning.versioned(Microsoft.CognitiveServices.Versions)
+namespace CognitiveServicesClientCustomizations {
+  /**
+   * Writable Arc deployment content for the JavaScript SDK.
+   */
+  @TypeSpec.Versioning.added(Versions.v2026_07_15_preview)
+  @TypeSpec.Versioning.removed(Versions.v2026_09_01)
+  @TypeSpec.Versioning.added(Versions.v2026_09_15_preview)
+  @TypeSpec.Versioning.removed(Versions.v2026_11_01)
+  @TypeSpec.Versioning.added(Versions.v2026_11_15_preview)
+  model ArcDeploymentCreateOrUpdateContent {
+    /**
+     * Properties used to create or replace an Arc deployment.
+     */
+    properties: TypeSpec.CreateOrUpdate<ArcDeploymentProperties>;
+
+    /**
+     * The Arc deployment SKU.
+     */
+    sku: ArcDeploymentSku;
+  }
+}
+
 @@clientName(
   Microsoft.CognitiveServices,
   "CognitiveServicesManagementClient",
@@ -98,6 +121,13 @@ op calculateModelCapacityCustom(
 ): CalculateModelCapacityResult;
 
 @@override(calculateModelCapacity, calculateModelCapacityCustom, "javascript");
+
+// Exclude read-only response fields recursively from the JavaScript PUT input.
+@@alternateType(
+  ArcDeployments.createOrUpdate::parameters.resource,
+  CognitiveServicesClientCustomizations.ArcDeploymentCreateOrUpdateContent,
+  "javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"

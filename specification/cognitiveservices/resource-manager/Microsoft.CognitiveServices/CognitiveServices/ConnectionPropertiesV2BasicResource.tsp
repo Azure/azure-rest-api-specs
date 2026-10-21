@@ -50,7 +50,8 @@ model ConnectionPropertiesV2BasicResource is Azure.ResourceManager.ProxyResource
   @path
   @typeChangedFrom(Versions.v2026_09_15_preview, LegacyConnectionName)
   @typeChangedFrom(Versions.v2026_11_01, ConnectionName)
-  name: LegacyConnectionName;
+  @typeChangedFrom(Versions.v2026_11_15_preview, LegacyConnectionName)
+  name: ConnectionName;
 }
 
 @armResourceOperations
@@ -78,7 +79,8 @@ interface ConnectionPropertiesV2BasicResourceOps
         @key
         @typeChangedFrom(Versions.v2026_09_15_preview, LegacyConnectionName)
         @typeChangedFrom(Versions.v2026_11_01, ConnectionName)
-        connectionName: LegacyConnectionName,
+        @typeChangedFrom(Versions.v2026_11_15_preview, LegacyConnectionName)
+        connectionName: ConnectionName,
       },
       ResourceName = "CognitiveServicesConnection"
     > {}
@@ -163,7 +165,8 @@ interface ProjectConnectionOps
         @key
         @typeChangedFrom(Versions.v2026_09_15_preview, LegacyConnectionName)
         @typeChangedFrom(Versions.v2026_11_01, ConnectionName)
-        connectionName: LegacyConnectionName,
+        @typeChangedFrom(Versions.v2026_11_15_preview, LegacyConnectionName)
+        connectionName: ConnectionName,
       },
       ResourceName = "CognitiveServicesProjectConnection"
     > {}
