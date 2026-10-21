@@ -188,7 +188,7 @@ union CreateMode {
   GeoRestore: "GeoRestore",
 
   /** Rename an existing server. */
-  @added(Versions.v2025_12_30)
+  @added(Versions.v2026_03_01)
   Rename: "Rename",
 }
 
@@ -1023,7 +1023,7 @@ model ServerProperties {
   /**
    * The fully qualified Azure resource ID of the subnet used for private outbound connectivity. Specify this property when creating or restoring a server, or to enable private outbound connectivity on an existing server. Once set, the subnet cannot be changed or removed. Multiple servers can share the subnet. This property cannot be used with network.delegatedSubnetResourceId.
    */
-  @added(Versions.v2025_12_30)
+  @added(Versions.v2026_03_01)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   privateOutboundSubnetResourceId?: string;
 }
@@ -1334,7 +1334,7 @@ model ServerPropertiesForUpdate {
   /**
    * The fully qualified Azure resource ID of the subnet used for private outbound connectivity. Specify this property to enable private outbound connectivity on an existing server. Omitting it during an update preserves the existing subnet. Once set, the subnet cannot be changed or removed. Multiple servers can share the subnet. This property cannot be used with network.delegatedSubnetResourceId.
    */
-  @added(Versions.v2025_12_30)
+  @added(Versions.v2026_03_01)
   privateOutboundSubnetResourceId?: string;
 }
 

@@ -28,16 +28,16 @@ These are the global settings for the MySql API.
 title: MySQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.
 openapi-type: arm
-tag: package-flexibleserver-2025-12-30
+tag: package-flexibleserver-2026-03-01
 ```
 
-### Tag: package-flexibleserver-2025-12-30
+### Tag: package-flexibleserver-2026-03-01
 
-These settings apply only when `--tag=package-flexibleserver-2025-12-30` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2026-03-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2025-12-30'
+``` yaml $(tag) == 'package-flexibleserver-2026-03-01'
 input-file:
-  - stable/2025-12-30/openapi.json
+  - stable/2026-03-01/openapi.json
 suppressions:
   - code: ProvisioningStateMustBeReadOnly
     from: openapi.json
@@ -58,7 +58,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/maintenances"].get.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/maintenances/{maintenanceName}"].get.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/maintenances/{maintenanceName}"].patch.responses["200"].schema
-    reason: "provisioningState/status are read-only via @visibility(Lifecycle.Read), but the autorest emitter renders this as `readOnly: true` placed as a sibling of `$ref`, which JSON Reference resolution discards before this resolved-schema rule evaluates (verified against @stoplight/json-ref-resolver). Both emitter-level fixes rewrite already-released API versions: `use-read-only-status-schema` is project-global and regenerates the GA stable 2024-12-30 spec (triggering 1029/ReadonlyPropertyChanged breaking-change errors), and inlining the shared AdvancedThreatProtection/Maintenance/ServerBackup status enums likewise modifies prior versions. Scoped to package-flexibleserver-2025-12-30 only."
+    reason: "provisioningState/status are read-only via @visibility(Lifecycle.Read), but the autorest emitter renders this as `readOnly: true` placed as a sibling of `$ref`, which JSON Reference resolution discards before this resolved-schema rule evaluates (verified against @stoplight/json-ref-resolver). Both emitter-level fixes rewrite already-released API versions: `use-read-only-status-schema` is project-global and regenerates the GA stable 2024-12-30 spec (triggering 1029/ReadonlyPropertyChanged breaking-change errors), and inlining the shared AdvancedThreatProtection/Maintenance/ServerBackup status enums likewise modifies prior versions. Scoped to package-flexibleserver-2026-03-01 only."
 ```
 
 ### Tag: package-flexibleserver-2025-12-01-preview
