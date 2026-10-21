@@ -26,6 +26,15 @@ using Microsoft.Sql;
   "parameters"
 );
 
+@@clientName(
+  ManagedInstanceServerProtectionSettingsOperations,
+  "ManagedInstanceServerProtectionSettings"
+);
+@@clientName(
+  ManagedInstanceServerProtectionSettingsOperations.createOrUpdate::parameters.resource,
+  "parameters"
+);
+
 @@clientName(SyncAgentLinkedDatabaseProperties.userName, "username", "java");
 @@clientName(SyncMemberProperties.userName, "username", "java");
 @@clientName(

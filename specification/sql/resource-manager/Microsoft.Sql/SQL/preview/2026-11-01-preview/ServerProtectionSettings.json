@@ -1,0 +1,312 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2026-11-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ServerProtectionSettings"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serverProtectionSettings": {
+      "get": {
+        "operationId": "ServerProtectionSettings_ListByServer",
+        "tags": [
+          "ServerProtectionSettings"
+        ],
+        "description": "Lists the logical server's persisted protection settings. The collection contains the default resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerProtectionSettingsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the logical server's singleton protection settings after opt-in": {
+            "$ref": "./examples/ListServerProtectionSettings.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serverProtectionSettings/{serverProtectionSettingsName}": {
+      "get": {
+        "operationId": "ServerProtectionSettings_Get",
+        "tags": [
+          "ServerProtectionSettings"
+        ],
+        "description": "Gets the logical server's persisted protection settings, independently of pending updates.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverProtectionSettingsName",
+            "in": "path",
+            "description": "The protection settings name. Only default is supported.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[dD][eE][fF][aA][uU][lL][tT]$",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ServerProtectionSettingsName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "default",
+                  "description": "The only supported protection settings resource, matched case-insensitively."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerProtectionSettings"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get logical server protection settings after opt-in has completed": {
+            "$ref": "./examples/GetServerProtectionSettings.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ServerProtectionSettings_CreateOrUpdate",
+        "tags": [
+          "ServerProtectionSettings"
+        ],
+        "description": "Updates logical server protection settings. Returns HTTP 200 with the resource\nif the update has completed, or HTTP 202 with operation metadata and polling\nheaders while it is pending. The same response contract applies to repeated\nvalues. Follow\nAzure-AsyncOperation for operation status: HTTP 200 with status InProgress,\nSucceeded, Failed, or Canceled and error details on failure. The Location\nendpoint returns HTTP 202 while pending, HTTP 200 with the complete settings\nresource on success, or an appropriate HTTP error with the standard error\nbody on failure. Resource GET and LIST return HTTP 200 with the persisted\nflag while the operation is pending. Requests to disable protection after opt-in are\nrejected. This proxy resource does not expose provisioningState; update status\nis available only through the operation polling endpoints.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverProtectionSettingsName",
+            "in": "path",
+            "description": "The protection settings name. Only default is supported.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[dD][eE][fF][aA][uU][lL][tT]$",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ServerProtectionSettingsName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "default",
+                  "description": "The only supported protection settings resource, matched case-insensitively."
+                }
+              ]
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The logical server protection settings to apply.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerProtectionSettings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerProtectionSettings"
+            }
+          },
+          "202": {
+            "description": "The update is in progress. Follow the polling headers to retrieve its result.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ServerProtectionSettingsOperationMetadata"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Disable logical server protection before opt-in": {
+            "$ref": "./examples/CreateOrUpdateServerProtectionSettingsDisable.json"
+          },
+          "Opt in to irreversible logical server protection": {
+            "$ref": "./examples/CreateOrUpdateServerProtectionSettingsEnable.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ServerProtectionSettings"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ServerProtectionSettings": {
+      "type": "object",
+      "description": "The protection settings that always exist for a logical server under the name default.",
+      "properties": {
+        "properties": {
+          "$ref": "./common.json#/definitions/ServerProtectionSettingsProperties",
+          "description": "The required logical server protection settings."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServerProtectionSettingsListResult": {
+      "type": "object",
+      "description": "The response of a ServerProtectionSettings list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServerProtectionSettings items on this page",
+          "items": {
+            "$ref": "#/definitions/ServerProtectionSettings"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {}
+}

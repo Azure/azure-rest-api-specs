@@ -870,6 +870,30 @@
         ]
       }
     },
+    "BlockDropWhenImmutablePitrBackupInRetention": {
+      "type": "string",
+      "description": "Opt-in state for protecting a logical server or managed instance from deletion\nwhile immutable point-in-time restore backups remain within retention.",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "name": "BlockDropWhenImmutablePitrBackupInRetention",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "enabled",
+            "description": "Deletion protection is enabled. Once enabled, it cannot be disabled.\nDeletion of the logical server or managed instance is blocked while\nimmutable point-in-time restore backups remain within retention."
+          },
+          {
+            "name": "Disabled",
+            "value": "disabled",
+            "description": "Deletion protection has not been enabled. Requesting disabled before\nopt-in leaves the setting unchanged."
+          }
+        ]
+      }
+    },
     "CapabilityGroup": {
       "type": "string",
       "enum": [
@@ -4347,6 +4371,19 @@
         ]
       }
     },
+    "ManagedInstanceServerProtectionSettingsAcceptedResult": {
+      "type": "object",
+      "description": "The update is in progress. Follow the polling headers to retrieve its result.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/ServerProtectionSettingsOperationMetadata",
+          "description": "Metadata for the accepted update."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
     "ManagedLedgerDigestUploadsName": {
       "type": "string",
       "enum": [
@@ -6963,33 +7000,9 @@
         "body"
       ]
     },
-    "ServerProtectionSettingsBlockDrop": {
-      "type": "string",
-      "description": "The irreversible opt-in state for logical server deletion protection.",
-      "enum": [
-        "enabled",
-        "disabled"
-      ],
-      "x-ms-enum": {
-        "name": "ServerProtectionSettingsBlockDrop",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "enabled",
-            "description": "Protection is enabled and cannot be disabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "disabled",
-            "description": "Protection has not been enabled."
-          }
-        ]
-      }
-    },
     "ServerProtectionSettingsName": {
       "type": "string",
-      "description": "The supported logical server protection settings resource name.",
+      "description": "The singleton name for logical server or managed instance protection settings.",
       "enum": [
         "default"
       ],
@@ -7000,14 +7013,14 @@
           {
             "name": "Default",
             "value": "default",
-            "description": "The only supported resource name, matched case-insensitively."
+            "description": "The only supported protection settings resource, matched case-insensitively."
           }
         ]
       }
     },
     "ServerProtectionSettingsOperationMetadata": {
       "type": "object",
-      "description": "Metadata for an accepted logical server protection settings update.",
+      "description": "Metadata for an accepted protection-settings update.",
       "properties": {
         "operation": {
           "type": "string",
@@ -7026,11 +7039,11 @@
     },
     "ServerProtectionSettingsProperties": {
       "type": "object",
-      "description": "Settings that protect a logical server from deletion while immutable PITR backups remain in retention.",
+      "description": "Deletion protection settings for a logical server or managed instance.",
       "properties": {
         "blockDropWhenImmutablePitrBackupInRetention": {
-          "$ref": "#/definitions/ServerProtectionSettingsBlockDrop",
-          "description": "Whether to block logical server deletion while immutable point-in-time restore\nbackups remain within retention. Supported request values are enabled and\ndisabled, matched case-insensitively. Protection is disabled by default.\nEnabling protection is irreversible; requesting disabled after opt-in is\nrejected. Repeating the persisted value succeeds without changing it.\nPUT returns the resource if complete or operation metadata if still pending.\nGET and LIST always return the persisted\nvalue, including during an update; use the polling endpoints to determine\nwhether an update succeeded. After opt-in, delete all databases and wait for\ntheir immutable backups to leave retention before deleting the logical server."
+          "$ref": "#/definitions/BlockDropWhenImmutablePitrBackupInRetention",
+          "description": "Whether to block deletion of the logical server or managed instance while\nimmutable point-in-time restore backups for its live or dropped user\ndatabases remain within retention. Supported request values are enabled\nand disabled, matched case-insensitively. Protection is disabled by default.\nEnabling protection is irreversible. Requesting disabled before opt-in is\na no-op; requesting disabled after opt-in is rejected.\nGET and LIST return the persisted setting, including during an update.\nUse the update operation's polling endpoints to track completion."
         }
       },
       "required": [

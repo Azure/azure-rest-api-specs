@@ -3,6 +3,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./Server.tsp";
+import "./ServerProtectionSettingsFeatureRegistration.tsp";
+import "./ServerProtectionSettingsModels.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -15,7 +17,9 @@ namespace Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "SQL uses legacy feature files to split its OpenAPI output."
 @added(Versions.v2026_11_01_preview)
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(Features.Servers)
+@Azure.ResourceManager.Legacy.feature(
+  Microsoft.SqlFeatureRegistration.Features.ServerProtectionSettings
+)
 model ServerProtectionSettings is ProxyResource<
   ServerProtectionSettingsProperties,
   PropertiesOptional = false
@@ -27,56 +31,6 @@ model ServerProtectionSettings is ProxyResource<
     NamePattern = "^[dD][eE][fF][aA][uU][lL][tT]$",
     Type = ServerProtectionSettingsName
   >;
-}
-
-/** The supported logical server protection settings resource name. */
-@added(Versions.v2026_11_01_preview)
-union ServerProtectionSettingsName {
-  string,
-
-  /** The only supported resource name, matched case-insensitively. */
-  Default: "default",
-}
-
-/** Settings that protect a logical server from deletion while immutable PITR backups remain in retention. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Exception assumed for this proxy resource: operation status is available through polling endpoints, not retained in the resource."
-@added(Versions.v2026_11_01_preview)
-model ServerProtectionSettingsProperties {
-  /**
-   * Whether to block logical server deletion while immutable point-in-time restore
-   * backups remain within retention. Supported request values are enabled and
-   * disabled, matched case-insensitively. Protection is disabled by default.
-   * Enabling protection is irreversible; requesting disabled after opt-in is
-   * rejected. Repeating the persisted value succeeds without changing it.
-   * PUT returns the resource if complete or operation metadata if still pending.
-   * GET and LIST always return the persisted
-   * value, including during an update; use the polling endpoints to determine
-   * whether an update succeeded. After opt-in, delete all databases and wait for
-   * their immutable backups to leave retention before deleting the logical server.
-   */
-  blockDropWhenImmutablePitrBackupInRetention: ServerProtectionSettingsBlockDrop;
-}
-
-/** The irreversible opt-in state for logical server deletion protection. */
-@added(Versions.v2026_11_01_preview)
-union ServerProtectionSettingsBlockDrop {
-  string,
-
-  /** Protection is enabled and cannot be disabled. */
-  Enabled: "enabled",
-
-  /** Protection has not been enabled. */
-  Disabled: "disabled",
-}
-
-/** Metadata for an accepted logical server protection settings update. */
-@added(Versions.v2026_11_01_preview)
-model ServerProtectionSettingsOperationMetadata {
-  /** Name of the accepted management operation. */
-  operation: string;
-
-  /** Time when the management operation started. */
-  startTime: utcDateTime;
 }
 
 /** The update is in progress. Follow the polling headers to retrieve its result. */
@@ -95,7 +49,9 @@ model ServerProtectionSettingsAcceptedResult {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "SQL uses legacy feature files to register operations."
 @added(Versions.v2026_11_01_preview)
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(Features.Servers)
+@Azure.ResourceManager.Legacy.feature(
+  Microsoft.SqlFeatureRegistration.Features.ServerProtectionSettings
+)
 interface ServerProtectionSettingsOperations {
   /** Gets the logical server's persisted protection settings, independently of pending updates. */
   @tag("ServerProtectionSettings")
