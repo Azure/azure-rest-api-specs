@@ -6,7 +6,7 @@ import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vite
 
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strictEqual } from "node:assert";
-import { join } from "node:path";
+import { join } from "pathe";
 import { stringify } from "yaml";
 import {
   SdkTspConfigValidationRule,

@@ -1,7 +1,7 @@
 import { execFile } from "node:child_process";
-import { mkdir, mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
 import { promisify, stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
@@ -13,7 +13,7 @@ const project = "specification/service/data-plane/Project";
 let root: string;
 
 beforeEach(async () => {
-  root = await realpath(await mkdtemp(join(tmpdir(), "tsv-command-cli-")));
+  root = resolve(await realpath(await mkdtemp(join(tmpdir(), "tsv-command-cli-"))));
   await writeFile(join(root, ".gitattributes"), "* text=auto eol=lf\n");
   vi.stubEnv("DEBUG", "");
   vi.stubEnv("GITHUB_ACTIONS", "false");
@@ -83,10 +83,11 @@ it("prints only a final summary by default and compact rule statuses with --verb
   }`);
   const quiet = await run(project);
   expect(quiet.code).toBe(0);
-  expect(quiet.stdout).toBe("8 passed | 3 skipped | 1 suppressed\n");
+  expect(quiet.stdout).toBe("8 passed | 1 skipped | 1 suppressed\n");
   expect(quiet.stderr).toBe("");
   const verbose = await run(project, "--verbose");
   expect(verbose.code).toBe(quiet.code);
+  expect(verbose.stderr).toContain("simple-git");
   expect(verbose.stdout.match(/TypeSpec compiler v1.16.0/g)).toHaveLength(1);
   expect(verbose.stdout).toContain("Compilation completed successfully.");
   expect(verbose.stdout).toContain("1 unchanged");
@@ -110,12 +111,57 @@ it("prints only a final summary by default and compact rule statuses with --verb
     "\u2714 Compile",
     "\u2714 Format",
     "- SdkTspConfigValidation (suppressed)",
-    "- MultipleNewApiVersions (skipped)",
-    "- StaleApiVersionPin (skipped)",
   ]);
   expect(verbose.stdout).toContain(
-    "- StaleApiVersionPin (skipped)\n\n8 passed | 3 skipped | 1 suppressed",
+    "- SdkTspConfigValidation (suppressed)\n\n8 passed | 1 skipped | 1 suppressed",
   );
+});
+
+it.each([false, true])("compiles one entrypoint with main present=%s", async (mainExists) => {
+  const folder = join(root, project);
+  await writeFile(join(folder, "client.tsp"), "");
+  if (mainExists) {
+    await writeFile(join(folder, "main.tsp"), 'import "./client.tsp";\n');
+  } else {
+    await rm(join(folder, "main.tsp"));
+  }
+  await simpleGit(root).add(project).commit("Set entrypoints");
+
+  const invocations = join(root, "compiler-invocations.jsonl");
+  await writeFile(invocations, "");
+  await compiler(`if (process.argv[2] === "compile") {
+    require("node:fs").appendFileSync(
+      ${JSON.stringify(invocations)},
+      JSON.stringify(process.argv.slice(2)) + "\\n"
+    );
+  }`);
+
+  const result = await run(project);
+
+  expect(result.code).toBe(0);
+  expect(result.stderr).toBe("");
+  const args = (await readFile(invocations, "utf8"))
+    .trim()
+    .split("\n")
+    .map((line): unknown => JSON.parse(line));
+  expect(args).toEqual([
+    mainExists
+      ? ["compile", "--list-files", "--warn-as-error", resolve(folder)]
+      : ["compile", "--no-emit", "--warn-as-error", join(folder, "client.tsp")],
+  ]);
+});
+
+it("rejects a missing client import before running the compiler", async () => {
+  await writeFile(join(root, project, "client.tsp"), "");
+  await simpleGit(root).add(project).commit("Add client without import");
+  await compiler('throw new Error("Compiler must not run");');
+
+  const result = await run(project);
+
+  expect(result.code).toBe(1);
+  expect(result.stderr).toContain("error tsv/client-tsp-import:");
+  expect(result.stderr).not.toContain("Compiler must not run");
+  expect(result.stdout).not.toContain("Compiler must not run");
 });
 
 it.each([
@@ -180,12 +226,12 @@ it.each([
     expect(result.stderr).toContain("> 3 | invalid");
     expect(stripVTControlCharacters(result.stdout).includes("\u00d7 Compile")).toBe(verbose);
     expect(stripVTControlCharacters(result.stdout)).toContain(
-      "6 passed | 1 failed | 1 skipped | 4 not run",
+      "6 passed | 1 failed | 1 skipped | 2 not run",
     );
     expect(stripVTControlCharacters(result.stdout)).not.toContain("\u2714 Format");
     if (!verbose) {
       expect(stripVTControlCharacters(result.stdout)).toBe(
-        "\n6 passed | 1 failed | 1 skipped | 4 not run\n",
+        "\n6 passed | 1 failed | 1 skipped | 2 not run\n",
       );
     }
   },
@@ -198,8 +244,13 @@ it("retains per-project CI annotations and native diagnostics in batch mode", as
   );
   const result = await run("--all");
   expect(result.code).toBe(1);
-  expect(result.stdout).toContain(`::group::Validating ${project}`);
+  const groupStart = result.stdout.indexOf(`::group::fail ${project}`);
+  const nativeDiagnostic = result.stdout.indexOf("native failure");
+  const groupEnd = result.stdout.indexOf("::endgroup::", groupStart);
+  expect(groupStart).toBeGreaterThanOrEqual(0);
+  expect(nativeDiagnostic).toBeGreaterThan(groupStart);
+  expect(groupEnd).toBeGreaterThan(nativeDiagnostic);
   expect(result.stdout).toContain(`::error::TypeSpec Validation failed for project ${project}`);
-  expect(result.stdout).toContain("::endgroup::");
-  expect(result.stderr.match(/native failure/g)).toHaveLength(1);
+  expect(result.stdout.match(/native failure/g)).toHaveLength(1);
+  expect(result.stderr).not.toContain("native failure");
 });

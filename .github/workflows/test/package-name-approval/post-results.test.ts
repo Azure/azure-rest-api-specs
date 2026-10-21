@@ -1,10 +1,13 @@
 import { describe, expect, it, vi } from "vitest";
 import {
+  buildCommentBody,
   getApprovers,
   parseCommentTable,
+  resolveResetApprovers,
   shouldRemoveStaleMgmtLabel,
 } from "../../src/package-name-approval/post-results.ts";
 import { createApproversConfig } from "../../src/package-name-approval/approvers.ts";
+import { createMockGithub } from "../mocks.ts";
 
 // Import only the pure functions we can test without heavy mocking
 // buildCommentBody and getApprovers are the key testable units
@@ -49,6 +52,7 @@ describe("post-results", () => {
           "data-plane": ["dp-approver"],
         },
       },
+      tier1: {},
     });
 
     it("returns 'unprotected' for a data-plane plane opted out (no throw)", () => {
@@ -339,6 +343,96 @@ describe("post-results", () => {
   });
 
   describe("comment body generation", () => {
+    const options: Parameters<typeof buildCommentBody>[0] = {
+      approversConfig: {
+        "data-plane": { java: ["java-approver"], dotnet: ["dotnet-approver"] },
+        "management-plane": { all: ["mgmt-approver"] },
+        unprotected: { "data-plane": ["python"] },
+      },
+      namespacesFound: { java: "azure-messaging-example" },
+      namespaces: { java: "com.azure.messaging.example" },
+      allConfiguredPackageNames: { dotnet: "Azure.Messaging.Example" },
+      allConfiguredNamespaces: { dotnet: "Azure.Messaging.Example" },
+      formatResults: [{ language: "java", namespace: "com.azure.messaging.example", valid: true }],
+      isMgmt: false,
+      baseRef: "main",
+      allLanguages: ["java", "dotnet", "python"],
+    };
+
+    it("renders guidance and references around changed, unchanged and missing package names", () => {
+      expect(buildCommentBody(options)).toMatchInlineSnapshot(`
+        "## Package Name Review Required
+
+        **Plane:** Data Plane
+
+        | Language | Package Name | Namespace | Format | Status | Approvers |
+        |----------|--------------|-----------|--------|--------|----------|
+        | java | \`azure-messaging-example\` | \`com.azure.messaging.example\` | ✅ | ⏳ Pending | @java-approver |
+        | dotnet | \`Azure.Messaging.Example\` | \`Azure.Messaging.Example\` | — | ⏳ Pending _(unchanged)_ | @dotnet-approver |
+        | python | _(not yet configured)_ | — | — | ⏳ Pending | _anyone_ |
+
+        **How to approve:**
+        - Per language: apply \`package-name-<language>-approved\` label
+        - All at once: apply \`package-name-approved-all\` label (shortcut for mgmt plane)
+
+        Merge is blocked until all languages are approved.
+
+        _Approver list: [.github/protected-labels.yml](../blob/main/.github/protected-labels.yml)_
+        _Process: [.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md](../blob/main/.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md)_
+        _Package names extracted via tsp compile with typespec-metadata emitter_"
+      `);
+    });
+
+    it("separates format issues and reset warnings without changing multiline diagnostics", () => {
+      expect(
+        buildCommentBody({
+          ...options,
+          isMgmt: true,
+          baseRef: "release/example",
+          formatResults: [
+            {
+              language: "java",
+              namespace: "com.azure.messaging.example",
+              valid: false,
+              error: "Invalid package name.\n    Preserve this indentation.",
+            },
+          ],
+          resetLanguages: ["java"],
+          preservedApprovals: new Map([
+            ["java", { namespace: "azure-messaging-example", status: "✅ Approved by @reviewer" }],
+          ]),
+        }),
+      ).toMatchInlineSnapshot(`
+        "## Package Name Review Required
+
+        **Plane:** Management Plane
+
+        | Language | Package Name | Namespace | Format | Status | Approvers |
+        |----------|--------------|-----------|--------|--------|----------|
+        | java | \`azure-messaging-example\` | \`com.azure.messaging.example\` | ⚠️ Invalid | ✅ Approved by @reviewer | @mgmt-approver |
+        | dotnet | \`Azure.Messaging.Example\` | \`Azure.Messaging.Example\` | — | ⏳ Pending _(unchanged)_ | @mgmt-approver |
+        | python | _(not yet configured)_ | — | — | ⏳ Pending | @mgmt-approver |
+
+        > **⚠️ Format issues detected:**
+        > - **java:** Invalid package name.
+            Preserve this indentation.
+        >
+        > _Format validation does not block approval but should be reviewed._
+
+        **How to approve:**
+        - Per language: apply \`package-name-<language>-approved\` label
+        - All at once: apply \`package-name-approved-all\` label (shortcut for mgmt plane)
+
+        Merge is blocked until all languages are approved.
+
+        > ⚠️ **Package name changed** -- approvals for java have been reset.
+
+        _Approver list: [.github/protected-labels.yml](../blob/release/example/.github/protected-labels.yml)_
+        _Process: [.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md](../blob/release/example/.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md)_
+        _Package names extracted via tsp compile with typespec-metadata emitter_"
+      `);
+    });
+
     it("should generate a 6-column table that matches validate-approval regex", () => {
       const body = [
         "## Package Name Review Required",
@@ -537,6 +631,69 @@ describe("post-results", () => {
 
     it("is a no-op when Mgmt is not present", () => {
       expect(shouldRemoveStaleMgmtLabel(false, ["data-plane"])).toBe(false);
+    });
+  });
+
+  describe("resolveResetApprovers (#46786)", () => {
+    const labeled = (labelName: string, login: string) => ({
+      event: "labeled",
+      label: { name: labelName },
+      actor: { login },
+    });
+
+    it("returns [] when there are no reset languages", async () => {
+      const github = createMockGithub();
+      const approvers = await resolveResetApprovers(github, "Azure", "repo", 1, []);
+      expect(approvers).toEqual([]);
+      expect(github.rest.issues.listEvents).not.toHaveBeenCalled();
+    });
+
+    it("resolves the approver login for each reset language from labeled events", async () => {
+      const github = createMockGithub();
+      github.rest.issues.listEvents.mockResolvedValue({
+        data: [
+          labeled("package-name-go-approved", "alice"),
+          labeled("package-name-python-approved", "bob"),
+        ],
+      });
+      const approvers = await resolveResetApprovers(github, "Azure", "repo", 1, ["go", "python"]);
+      expect(approvers.sort()).toEqual(["alice", "bob"]);
+    });
+
+    it("keeps only the latest approver per label", async () => {
+      const github = createMockGithub();
+      github.rest.issues.listEvents.mockResolvedValue({
+        data: [
+          labeled("package-name-go-approved", "alice"),
+          labeled("package-name-go-approved", "carol"),
+        ],
+      });
+      const approvers = await resolveResetApprovers(github, "Azure", "repo", 1, ["go"]);
+      expect(approvers).toEqual(["carol"]);
+    });
+
+    it("de-duplicates the same approver across labels", async () => {
+      const github = createMockGithub();
+      github.rest.issues.listEvents.mockResolvedValue({
+        data: [
+          labeled("package-name-go-approved", "alice"),
+          labeled("package-name-python-approved", "alice"),
+        ],
+      });
+      const approvers = await resolveResetApprovers(github, "Azure", "repo", 1, ["go", "python"]);
+      expect(approvers).toEqual(["alice"]);
+    });
+
+    it("excludes trusted bots and ignores non-reset labels", async () => {
+      const github = createMockGithub();
+      github.rest.issues.listEvents.mockResolvedValue({
+        data: [
+          labeled("package-name-go-approved", "github-actions[bot]"),
+          labeled("package-name-java-approved", "dave"),
+        ],
+      });
+      const approvers = await resolveResetApprovers(github, "Azure", "repo", 1, ["go"]);
+      expect(approvers).toEqual([]);
     });
   });
 });
