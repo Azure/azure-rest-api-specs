@@ -95,6 +95,31 @@ model MigrationEntityProperties is AzureResourceProperties {
 
   @doc("Assessed Entity ARM Id")
   assessedEntityArmId?: string;
+
+  @doc("Migration status reported by the migration tool.")
+  @added(ApiVersions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  toolReportedMigrationStatus?: string;
+}
+
+@doc("Properties that can be updated on a migration entity.")
+@added(ApiVersions.v2026_08_01_preview)
+model MigrationEntityPatchProperties {
+  @doc("Execution stage of the migration entity.")
+  executionStage?: string;
+
+  @doc("Execution status of the migration entity.")
+  executionStatus?: string;
+
+  @doc("Migration status reported by the migration tool.")
+  toolReportedMigrationStatus?: string;
+}
+
+@doc("Patch request for a migration entity.")
+@added(ApiVersions.v2026_08_01_preview)
+model MigrationEntityPatch {
+  @doc("Properties to update on the migration entity.")
+  properties?: MigrationEntityPatchProperties;
 }
 
 @doc("The base Migration Specific Properties model.")
