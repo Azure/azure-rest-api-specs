@@ -14,7 +14,7 @@ using TypeSpec.OpenAPI;
 
 using Microsoft.Network;
 
-namespace Microsoft.Compute;
+namespace Microsoft.Network;
 
 alias NetworkInterfaceIPConfigurationOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
@@ -32,11 +32,13 @@ alias NetworkInterfaceIPConfigurationOps = Azure.ResourceManager.Legacy.RoutedOp
 @featureFile(Features.vmssNetworkConfiguration)
 @Azure.Core.Legacy.overrideApiVersion("2018-10-01")
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
-interface NetworkInterfaceIPConfigurations {
+interface VmssNetworkInterfaceIPConfigurations {
   /**
    * Get the specified network interface ip configuration in a virtual machine scale set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the released VMSS OpenAPI operation ID after consolidating the Microsoft.Compute service into Microsoft.Network."
   @featureFile(Features.vmssNetworkConfiguration)
+  @operationId("NetworkInterfaces_GetVirtualMachineScaleSetIpConfiguration")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations/{ipConfigurationName}")
   @tag("NetworkInterfaces")
@@ -78,7 +80,9 @@ interface NetworkInterfaceIPConfigurations {
   /**
    * Get the specified network interface ip configuration in a virtual machine scale set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the released VMSS OpenAPI operation ID after consolidating the Microsoft.Compute service into Microsoft.Network."
   @featureFile(Features.vmssNetworkConfiguration)
+  @operationId("NetworkInterfaces_ListVirtualMachineScaleSetIpConfigurations")
   @get
   @list
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations")

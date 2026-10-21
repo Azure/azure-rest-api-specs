@@ -46,7 +46,9 @@ interface VmssPublicIPAddressesOperationGroup {
    * Gets information about all public IP addresses on a virtual machine scale set level.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the released VMSS OpenAPI operation ID after consolidating the Microsoft.Compute service into Microsoft.Network."
   @featureFile(Features.vmssPublicIPAddress)
+  @operationId("PublicIPAddresses_ListVirtualMachineScaleSetPublicIPAddresses")
   @get
   @list
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/publicipaddresses")
@@ -75,7 +77,9 @@ interface VmssPublicIPAddresses {
    * Get the specified public IP address in a virtual machine scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the released VMSS OpenAPI operation ID after consolidating the Microsoft.Compute service into Microsoft.Network."
   @featureFile(Features.vmssPublicIPAddress)
+  @operationId("PublicIPAddresses_GetVirtualMachineScaleSetPublicIPAddress")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses/{publicIpAddressName}")
   getVirtualMachineScaleSetPublicIPAddress is VmssPublicIPAddressOps.ActionSync<
@@ -123,7 +127,9 @@ interface VmssPublicIPAddresses {
    * Gets information about all public IP addresses in a virtual machine IP configuration in a virtual machine scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the released VMSS OpenAPI operation ID after consolidating the Microsoft.Compute service into Microsoft.Network."
   @featureFile(Features.vmssPublicIPAddress)
+  @operationId("PublicIPAddresses_ListVirtualMachineScaleSetVMPublicIPAddresses")
   @get
   @list
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses")

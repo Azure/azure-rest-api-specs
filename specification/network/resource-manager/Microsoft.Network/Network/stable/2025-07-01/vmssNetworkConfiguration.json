@@ -49,7 +49,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/networkInterfaces": {
       "get": {
-        "operationId": "VmssNetworkInterfacesOperationGroup_ListVirtualMachineScaleSetNetworkInterfaces",
+        "operationId": "NetworkInterfaces_ListVirtualMachineScaleSetNetworkInterfaces",
         "tags": [
           "NetworkInterfaces"
         ],
@@ -86,6 +86,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List virtual machine scale set network interfaces": {
+            "$ref": "./examples/VmssNetworkInterfaceListForvmssNetwork.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -93,7 +98,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces": {
       "get": {
-        "operationId": "VmssNetworkInterfaces_ListVirtualMachineScaleSetVMNetworkInterfaces",
+        "operationId": "NetworkInterfaces_ListVirtualMachineScaleSetVMNetworkInterfaces",
         "tags": [
           "VmssNetworkInterfaces"
         ],
@@ -135,6 +140,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List virtual machine scale set vm network interfaces": {
+            "$ref": "./examples/VmssVmNetworkInterfaceListForvmssNetwork.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -142,7 +152,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}": {
       "get": {
-        "operationId": "VmssNetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface",
+        "operationId": "NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface",
         "tags": [
           "VmssNetworkInterfaces"
         ],
@@ -196,6 +206,148 @@
               "$ref": "./common.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get virtual machine scale set network interface": {
+            "$ref": "./examples/VmssNetworkInterfaceGetForvmssNetwork.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations/{ipConfigurationName}": {
+      "get": {
+        "operationId": "NetworkInterfaces_GetVirtualMachineScaleSetIpConfiguration",
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "description": "Get the specified network interface ip configuration in a virtual machine scale set.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualMachineScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualmachineIndex",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkInterfaceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ipConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expands referenced resources.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get virtual machine scale set network interface": {
+            "$ref": "./examples/VmssNetworkInterfaceIpConfigGetForvmssNetwork.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations": {
+      "get": {
+        "operationId": "NetworkInterfaces_ListVirtualMachineScaleSetIpConfigurations",
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "description": "Get the specified network interface ip configuration in a virtual machine scale set.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualMachineScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualmachineIndex",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkInterfaceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expands referenced resources.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List virtual machine scale set network interface ip configurations": {
+            "$ref": "./examples/VmssNetworkInterfaceIpConfigListForvmssNetwork.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }

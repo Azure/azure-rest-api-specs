@@ -10,7 +10,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.Core;
 using Microsoft.Network;
-using Microsoft.Compute;
 
 // Preserve the naming requirements used by the released C# provisioning library.
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve C# provisioning resource naming compatibility."
@@ -67,37 +66,16 @@ using Microsoft.Compute;
   "csharp"
 );
 
-// This empty namespace is the merged SDK client target used by later client
+// This empty namespace is the SDK client target used by later client
 // customizations such as @@clientName and @@clientLocation.
-#suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "CombineClient intentionally merges the Microsoft.Network and Microsoft.Compute (VMSS) services into a single SDK client surface via autoMergeService; the resulting multiple-service dependency is by design for this combined client target."
 @client({
   name: "CombineClient",
-  service: [Microsoft.Network, Microsoft.Compute],
+  service: Microsoft.Network,
   autoMergeService: true,
 })
 namespace CombineClient {
 
 }
-
-// Keep the optional API version in the JavaScript client options when multiple
-// services are merged; the emitter otherwise references an undeclared value.
-/**
- * Optional parameters for the client.
- */
-model NetworkClientInitialization {
-  /**
-   * The API version to use for this operation.
-   */
-  apiVersion?: string;
-}
-
-@@clientInitialization(
-  CombineClient,
-  {
-    parameters: NetworkClientInitialization,
-  },
-  "javascript"
-);
 
 // Define WritableSubResource in the ARM namespace for C# collection compatibility.
 namespace Azure.ResourceManager.Models {
@@ -107,13 +85,13 @@ namespace Azure.ResourceManager.Models {
 }
 
 @@clientLocation(
-  Microsoft.Compute.NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
+  Microsoft.Network.VmssNetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
   Microsoft.Network.NetworkInterfaces,
   "java,javascript,python,go"
 );
 
 @@clientLocation(
-  Microsoft.Compute.NetworkInterfaceIPConfigurations.listVirtualMachineScaleSetIpConfigurations,
+  Microsoft.Network.VmssNetworkInterfaceIPConfigurations.listVirtualMachineScaleSetIpConfigurations,
   Microsoft.Network.NetworkInterfaces,
   "java,javascript,python,go"
 );
@@ -7543,7 +7521,7 @@ op replaceprivateDnsZoneGroupsList(
 );
 
 @@clientName(
-  Microsoft.Compute.NetworkInterfaceIPConfigurations,
+  Microsoft.Network.VmssNetworkInterfaceIPConfigurations,
   "VirtualMachineScaleSetNetworkInterfaceIPConfigurations",
   "csharp"
 );
