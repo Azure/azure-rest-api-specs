@@ -2851,9 +2851,6 @@ union VirtualNetworkTapType {
   /** Basic virtual network tap. */
   Basic: "Basic",
 
-  /** Managed virtual network tap. */
-  ManagedVtap: "ManagedVtap",
-
   string,
 }
 
