@@ -87313,11 +87313,6 @@ components:
         subagent_config:
           $ref: '#/components/schemas/VoiceAgentSubagentConfig'
           description: Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.
-        handoff:
-          $ref: '#/components/schemas/VoiceAgentHandoffGraph'
-          description: |-
-            Optional directed graph of specialist behaviors that may become active during one voice session. The top-level
-            voice-agent definition is the implicit `$entrypoint`; configured nodes contain only additional behaviors.
         store:
           type: boolean
           description: |-
@@ -87328,6 +87323,30 @@ components:
             time-to-first-audio, inter-token latency, interruption) is observability-only (customer trace / App Insights) and
             is not part of the persisted conversation content.
           default: false
+        subagents:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentInlinedSubagent'
+          minItems: 1
+          maxItems: 32
+          description: |-
+            Inlined voice subagents owned and versioned with this Voice Agent. Configure together with `handoff_conditions`.
+            The top-level definition is the implicit `$entrypoint`; an explicit `$entrypoint` may appear once as the first
+            subagent. At most 31 additional subagents are supported, or 32 entries including an explicit `$entrypoint`.
+            Referenced agents and delegations are not supported by this property.
+        handoff_conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentHandoffCondition'
+          minItems: 1
+          maxItems: 128
+          description: |-
+            Allowed directed handoffs between inlined voice subagents and `$entrypoint`. Configure together with `subagents`.
+            At least one condition must originate from `$entrypoint`. A condition guides the model; it is not an executable
+            Boolean expression. The service validates identifiers, reachability, and source-to-target relations.
+        handoff_policy:
+          $ref: '#/components/schemas/VoiceAgentHandoffPolicy'
+          description: Session-wide handoff limits. Requires `subagents` and `handoff_conditions`. When omitted, the service permits up to 16 completed and 16 attempted handoffs.
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: |-
@@ -87477,28 +87496,28 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceAgentHandoffEdge:
+    VoiceAgentHandoffCondition:
       type: object
       required:
         - id
         - source
         - target
-        - description
+        - condition
       properties:
         id:
           $ref: '#/components/schemas/VoiceAgentHandoffId'
-          description: The edge identifier.
+          description: The handoff condition identifier.
         source:
           $ref: '#/components/schemas/VoiceAgentHandoffNodeReference'
           description: The source node identifier or `$entrypoint`.
         target:
           $ref: '#/components/schemas/VoiceAgentHandoffNodeReference'
           description: The target node identifier or `$entrypoint`.
-        description:
+        condition:
           type: string
           minLength: 1
           maxLength: 500
-          description: A model-facing route condition supplied alongside the active node instructions.
+          description: Natural-language routing guidance supplied alongside the active subagent instructions. This is not an executable Boolean predicate.
         cancel_on_interruption:
           type: boolean
           description: Whether user interruption before commit cancels the pending handoff.
@@ -87522,53 +87541,14 @@ components:
           $ref: '#/components/schemas/VoiceAgentHandoffTargetResponse'
           description: Whether Voice Live automatically starts a response after target activation.
           default: auto
-      description: One directed transition in a voice-agent handoff graph.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentHandoffGraph:
-      type: object
-      required:
-        - nodes
-        - edges
-      properties:
-        max_transfers:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 100
-          description: The maximum number of successfully completed handoffs in one session.
-          default: 16
-        max_attempts:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 100
-          description: The maximum number of attempted handoffs. When omitted, the service uses `max_transfers`.
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoiceAgentHandoffNode'
-          maxItems: 32
-          description: The graph behaviors. At most 31 may be additional nodes; an optional explicit `$entrypoint` must be first, allowing at most 32 authored nodes total.
-        edges:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoiceAgentHandoffEdge'
-          minItems: 1
-          maxItems: 128
-          description: The allowed directed transitions. At least one edge must originate from `$entrypoint`.
-      description: |-
-        A directed graph of voice-agent behaviors. The top-level definition is the implicit `$entrypoint` when omitted
-        from `nodes`. To layer entrypoint-only behavior over shared top-level instructions, declare `$entrypoint` once as
-        the first node.
+      description: One allowed directed handoff between inlined voice subagents or `$entrypoint`.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
     VoiceAgentHandoffId:
       type: string
       pattern: ^[a-z][a-z0-9_-]{0,63}$
-      description: A case-sensitive identifier for a configured handoff node or edge.
+      description: A case-sensitive identifier for an inlined subagent or handoff condition.
     VoiceAgentHandoffMaxOutputTokenCount:
       type: integer
       format: int32
@@ -87584,7 +87564,67 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceAgentHandoffNode:
+    VoiceAgentHandoffNodeReference:
+      type: string
+      pattern: ^(?:\$entrypoint|[a-z][a-z0-9_-]{0,63})$
+      description: 'A handoff node reference: either `$entrypoint` or a configured node identifier.'
+    VoiceAgentHandoffPolicy:
+      type: object
+      properties:
+        max_transfers:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          description: The maximum number of successfully completed handoffs in one session, from 1 through 100. If omitted, the service defaults to 16.
+          default: 16
+        max_attempts:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          description: The maximum number of attempted handoffs, from 1 through 100. If omitted, the service uses `max_transfers`. The service requires this value to be greater than or equal to `max_transfers`.
+      description: Session-wide limits shared by all handoff conditions in one Voice Agent session.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentHandoffReasoningEffort:
+      type: string
+      enum:
+        - none
+        - minimal
+        - low
+        - medium
+        - high
+        - xhigh
+      description: Reasoning effort applied by a compatible handoff-node model.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentHandoffTargetResponse:
+      type: string
+      enum:
+        - auto
+        - none
+      description: Whether Voice Live automatically starts a response after a handoff target becomes active.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentHandoffVoiceAdaptation:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - auto
+          description: The adaptation strategy. Currently only `auto` is supported.
+      description: Voice-optimized instruction adaptation applied while a handoff node is active.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentInlinedSubagent:
       type: object
       required:
         - id
@@ -87593,19 +87633,19 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/VoiceAgentHandoffNodeReference'
-          description: The node identifier. `$entrypoint` may appear once as the first node; other values use the normal handoff ID grammar.
+          description: The subagent identifier. `$entrypoint` may appear once as the first subagent; other values use the normal handoff ID grammar.
         description:
           type: string
           minLength: 1
           description: A display-only description of the specialist behavior. This value is not provided to the model.
         config:
-          $ref: '#/components/schemas/VoiceAgentHandoffNodeConfig'
-          description: The behavior activated when this node becomes active.
-      description: One explicitly configured behavior in a voice-agent handoff graph.
+          $ref: '#/components/schemas/VoiceAgentInlinedSubagentConfig'
+          description: The behavior activated when this inlined subagent becomes active.
+      description: One inlined voice subagent owned and versioned with its parent Voice Agent, not a separate Agent resource.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceAgentHandoffNodeConfig:
+    VoiceAgentInlinedSubagentConfig:
       type: object
       properties:
         model:
@@ -87669,47 +87709,7 @@ components:
           type: boolean
           description: Whether this node may call customer tools in parallel. Nodes with outgoing handoff edges must use `false`.
           default: false
-      description: Node-scoped behavior that defines the active voice-agent behavior after a handoff.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentHandoffNodeReference:
-      type: string
-      pattern: ^(?:\$entrypoint|[a-z][a-z0-9_-]{0,63})$
-      description: 'A handoff node reference: either `$entrypoint` or a configured node identifier.'
-    VoiceAgentHandoffReasoningEffort:
-      type: string
-      enum:
-        - none
-        - minimal
-        - low
-        - medium
-        - high
-        - xhigh
-      description: Reasoning effort applied by a compatible handoff-node model.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentHandoffTargetResponse:
-      type: string
-      enum:
-        - auto
-        - none
-      description: Whether Voice Live automatically starts a response after a handoff target becomes active.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentHandoffVoiceAdaptation:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - auto
-          description: The adaptation strategy. Currently only `auto` is supported.
-      description: Voice-optimized instruction adaptation applied while a handoff node is active.
+      description: Behavior activated when an inlined voice subagent becomes active after a handoff.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

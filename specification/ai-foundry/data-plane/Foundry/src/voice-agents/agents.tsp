@@ -5,6 +5,7 @@ import "@azure-tools/openai-typespec/models/realtime";
 import "../common/servicepatterns.tsp";
 import "../agents/models.tsp";
 import "../openai/responses/models.tsp";
+import "./handoff.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -171,12 +172,6 @@ model VoiceAgentDefinition extends AgentDefinition {
   subagent_config?: VoiceAgentSubagentConfig;
 
   @doc("""
-    Optional directed graph of specialist behaviors that may become active during one voice session. The top-level
-    voice-agent definition is the implicit `$entrypoint`; configured nodes contain only additional behaviors.
-    """)
-  handoff?: VoiceAgentHandoffGraph;
-
-  @doc("""
     Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
     `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
     timeline and raw audio. When `false`, nothing is persisted and no conversation is surfaced. There is no separate
@@ -185,6 +180,28 @@ model VoiceAgentDefinition extends AgentDefinition {
     is not part of the persisted conversation content.
     """)
   store?: boolean = false;
+
+  @doc("""
+    Inlined voice subagents owned and versioned with this Voice Agent. Configure together with `handoff_conditions`.
+    The top-level definition is the implicit `$entrypoint`; an explicit `$entrypoint` may appear once as the first
+    subagent. At most 31 additional subagents are supported, or 32 entries including an explicit `$entrypoint`.
+    Referenced agents and delegations are not supported by this property.
+    """)
+  @minItems(1)
+  @maxItems(32)
+  subagents?: VoiceAgentInlinedSubagent[];
+
+  @doc("""
+    Allowed directed handoffs between inlined voice subagents and `$entrypoint`. Configure together with `subagents`.
+    At least one condition must originate from `$entrypoint`. A condition guides the model; it is not an executable
+    Boolean expression. The service validates identifiers, reachability, and source-to-target relations.
+    """)
+  @minItems(1)
+  @maxItems(128)
+  handoff_conditions?: VoiceAgentHandoffCondition[];
+
+  @doc("Session-wide handoff limits. Requires `subagents` and `handoff_conditions`. When omitted, the service permits up to 16 completed and 16 attempted handoffs.")
+  handoff_policy?: VoiceAgentHandoffPolicy;
 }
 
 @doc("Configuration for sibling Foundry text agents that a voice agent may consult.")

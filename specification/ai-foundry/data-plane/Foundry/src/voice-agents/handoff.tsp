@@ -18,7 +18,7 @@ const VoiceAgentHandoffRequiredPreview = #{
 
 alias VoiceAgentHandoffServerEventUsage = Usage.output | Usage.json;
 
-@doc("A case-sensitive identifier for a configured handoff node or edge.")
+@doc("A case-sensitive identifier for an inlined subagent or handoff condition.")
 @pattern("^[a-z][a-z0-9_-]{0,63}$")
 scalar VoiceAgentHandoffId extends string;
 
@@ -62,9 +62,9 @@ model VoiceAgentHandoffVoiceAdaptation {
   type: "auto";
 }
 
-@doc("Node-scoped behavior that defines the active voice-agent behavior after a handoff.")
+@doc("Behavior activated when an inlined voice subagent becomes active after a handoff.")
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
-model VoiceAgentHandoffNodeConfig {
+model VoiceAgentInlinedSubagentConfig {
   @doc("The target model for a cascaded graph. Realtime graphs reject this property and retain the connection model.")
   `model`?: string;
 
@@ -104,10 +104,10 @@ model VoiceAgentHandoffNodeConfig {
   parallel_tool_calls?: boolean = false;
 }
 
-@doc("One explicitly configured behavior in a voice-agent handoff graph.")
+@doc("One inlined voice subagent owned and versioned with its parent Voice Agent, not a separate Agent resource.")
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
-model VoiceAgentHandoffNode {
-  @doc("The node identifier. `$entrypoint` may appear once as the first node; other values use the normal handoff ID grammar.")
+model VoiceAgentInlinedSubagent {
+  @doc("The subagent identifier. `$entrypoint` may appear once as the first subagent; other values use the normal handoff ID grammar.")
   id: VoiceAgentHandoffNodeReference;
 
   @doc("A display-only description of the specialist behavior. This value is not provided to the model.")
@@ -115,14 +115,14 @@ model VoiceAgentHandoffNode {
   @minLength(1)
   display_description: string;
 
-  @doc("The behavior activated when this node becomes active.")
-  config: VoiceAgentHandoffNodeConfig;
+  @doc("The behavior activated when this inlined subagent becomes active.")
+  config: VoiceAgentInlinedSubagentConfig;
 }
 
-@doc("One directed transition in a voice-agent handoff graph.")
+@doc("One allowed directed handoff between inlined voice subagents or `$entrypoint`.")
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
-model VoiceAgentHandoffEdge {
-  @doc("The edge identifier.")
+model VoiceAgentHandoffCondition {
+  @doc("The handoff condition identifier.")
   id: VoiceAgentHandoffId;
 
   @doc("The source node identifier or `$entrypoint`.")
@@ -131,10 +131,10 @@ model VoiceAgentHandoffEdge {
   @doc("The target node identifier or `$entrypoint`.")
   target: VoiceAgentHandoffNodeReference;
 
-  @doc("A model-facing route condition supplied alongside the active node instructions.")
+  @doc("Natural-language routing guidance supplied alongside the active subagent instructions. This is not an executable Boolean predicate.")
   @minLength(1)
   @maxLength(500)
-  description: string;
+  condition: string;
 
   @doc("Whether user interruption before commit cancels the pending handoff.")
   cancel_on_interruption?: boolean = false;
@@ -155,31 +155,18 @@ model VoiceAgentHandoffEdge {
   target_response?: VoiceAgentHandoffTargetResponse = VoiceAgentHandoffTargetResponse.auto;
 }
 
-@doc("""
-  A directed graph of voice-agent behaviors. The top-level definition is the implicit `$entrypoint` when omitted
-  from `nodes`. To layer entrypoint-only behavior over shared top-level instructions, declare `$entrypoint` once as
-  the first node.
-  """)
+@doc("Session-wide limits shared by all handoff conditions in one Voice Agent session.")
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
-model VoiceAgentHandoffGraph {
-  @doc("The maximum number of successfully completed handoffs in one session.")
+model VoiceAgentHandoffPolicy {
+  @doc("The maximum number of successfully completed handoffs in one session, from 1 through 100. If omitted, the service defaults to 16.")
   @minValue(1)
   @maxValue(100)
   max_transfers?: int32 = 16;
 
-  @doc("The maximum number of attempted handoffs. When omitted, the service uses `max_transfers`.")
+  @doc("The maximum number of attempted handoffs, from 1 through 100. If omitted, the service uses `max_transfers`. The service requires this value to be greater than or equal to `max_transfers`.")
   @minValue(1)
   @maxValue(100)
   max_attempts?: int32;
-
-  @doc("The graph behaviors. At most 31 may be additional nodes; an optional explicit `$entrypoint` must be first, allowing at most 32 authored nodes total.")
-  @maxItems(32)
-  nodes: VoiceAgentHandoffNode[];
-
-  @doc("The allowed directed transitions. At least one edge must originate from `$entrypoint`.")
-  @minItems(1)
-  @maxItems(128)
-  edges: VoiceAgentHandoffEdge[];
 }
 
 @doc("A typed voice configuration used by a voice-agent handoff node.")
