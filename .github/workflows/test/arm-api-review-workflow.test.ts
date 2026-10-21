@@ -491,13 +491,9 @@ describe("ARM API review workflow", () => {
     });
   });
 
-  it("records explicit requests in trusted pre-activation without adding a marker gate to reruns", async () => {
-    const [source, compiled] = await readWorkflowFiles();
-    expect(source).toContain("name: Record explicit ARM review request");
-    expect(source).toContain(
-      "if: steps.check_membership.outputs.is_team_member == 'true' && github.event.inputs.head_sha == ''",
-    );
-    expect(compiled).toContain('labels: ["ARMInitialReviewRequested"]');
+  it("checks the marker only for automatic requests, never for explicit reruns", async () => {
+    const [source] = await readWorkflowFiles();
+    expect(source).not.toContain("name: Record explicit ARM review request");
     expect(source).toContain("if (expectedHeadSha)");
   });
 
@@ -697,7 +693,7 @@ describe("ARM API review workflow", () => {
     const collapsed = collapseWhitespace(source);
 
     expect(source).toContain(
-      "permissions:\n    pull-requests: write\n    statuses: write\n  steps:",
+      "permissions:\n    pull-requests: read\n    statuses: write\n  steps:",
     );
     expect(source).toContain(
       "**The review is full and complete, and at least one verified, currently",
@@ -732,7 +728,8 @@ describe("ARM API review workflow", () => {
     expect(agentJob).toContain("pull-requests: read");
     expect(agentJob).not.toContain("issues: write");
     expect(agentJob).not.toContain("pull-requests: write");
-    expect(preActivationJob).toContain("pull-requests: write");
+    expect(preActivationJob).toContain("pull-requests: read");
+    expect(preActivationJob).not.toContain("pull-requests: write");
     expect(preActivationJob).toContain("statuses: write");
     expect(preActivationJob).not.toContain("issues: write");
     expect(safeOutputsJob).toContain("issues: write");

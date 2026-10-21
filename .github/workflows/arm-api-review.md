@@ -7,9 +7,13 @@ description: >
   on demand via the /arm-review comment command.
 run-name: "ARM API Review #${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }} (${{ github.event_name }})"
 timeout-minutes: 30
-# Concurrency is evaluated before the job-level `if` gate. Give unrelated
-# comments and non-queue label events run-scoped groups so they cannot cancel
-# an active review for the same PR before being skipped.
+# Concurrency is evaluated before the job-level `if` gate. Real review requests
+# share one group per PR; unrelated comments and label events get run-scoped
+# groups so they cannot replace a queued review for the same PR before being
+# skipped. cancel-in-progress is false so a newer request waits instead of
+# killing an active review, which would waste the AI run and leave partial
+# output and a stale Pending/Error status. A finished older review is harmless
+# because its result is bound to its own head SHA.
 concurrency:
   group: "gh-aw-${{ github.workflow }}-${{ ((github.event_name == 'issue_comment' && (github.event.comment.body != '/arm-review' || github.event.issue.pull_request == null)) || (github.event_name == 'pull_request_target' && !((github.event.action == 'labeled' && github.event.label.name == 'WaitForARMFeedback') || (github.event.action == 'unlabeled' && github.event.label.name == 'ARMChangesRequested')))) && github.run_id || github.event.issue.number || github.event.pull_request.number || github.event.inputs.pr_number || github.run_id }}"
   cancel-in-progress: false
@@ -41,7 +45,7 @@ on:
         required: false
         type: string
   permissions:
-    pull-requests: write
+    pull-requests: read
     statuses: write
   steps:
     - name: Resolve target pull request
@@ -126,18 +130,6 @@ on:
           core.setOutput("target_pr_number", String(pull.number));
           core.setOutput("target_head_sha", pull.head.sha);
           core.setOutput("run_attempt", runAttempt);
-    - name: Record explicit ARM review request
-      if: steps.check_membership.outputs.is_team_member == 'true' && github.event.inputs.head_sha == ''
-      uses: actions/github-script@v9
-      env:
-        TARGET_PR_NUMBER: ${{ steps.resolve_target_pr.outputs.target_pr_number }}
-      with:
-        script: |
-          await github.rest.issues.addLabels({
-            ...context.repo,
-            issue_number: Number(process.env.TARGET_PR_NUMBER),
-            labels: ["ARMInitialReviewRequested"],
-          });
     - name: Prepare ARM semantic review correlation artifact
       if: steps.check_membership.outputs.is_team_member == 'true'
       shell: bash
