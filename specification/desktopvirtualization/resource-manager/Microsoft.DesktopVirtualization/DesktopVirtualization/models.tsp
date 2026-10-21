@@ -2965,7 +2965,7 @@ model ScalingSchedule {
    * @Introduced in 2024-11-01-preview
    */
   @added(Versions.vLatestPreview)
-  createDelete?: CreateDeleteProperties | null;
+  createDelete?: CreateDeleteProperties;
 
   /**
    * Starting time for ramp up period.
@@ -3065,12 +3065,14 @@ model CreateDeleteProperties {
   /**
    * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Preserve nullable capacity values in the existing API contract for backward compatibility."
   @minValue(0)
   rampUpMaximumHostPoolSize?: int32 | null;
 
   /**
    * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Preserve nullable capacity values in the existing API contract for backward compatibility."
   @minValue(0)
   @maxValue(59)
   rampUpMinimumHostPoolSize?: int32 | null;
@@ -3078,12 +3080,14 @@ model CreateDeleteProperties {
   /**
    * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Preserve nullable capacity values in the existing API contract for backward compatibility."
   @minValue(0)
   rampDownMaximumHostPoolSize?: int32 | null;
 
   /**
    * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Preserve nullable capacity values in the existing API contract for backward compatibility."
   @minValue(0)
   @maxValue(59)
   rampDownMinimumHostPoolSize?: int32 | null;
@@ -3702,7 +3706,7 @@ model HostPoolPatch extends Azure.ResourceManager.CommonTypes.Resource {
    * The managed service identities assigned to this resource.
    */
   @added(Versions.vLatestPreview)
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity | null;
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 /**
@@ -4805,7 +4809,7 @@ model ScalingPlanPooledScheduleProperties {
    * @Introduced in 2024-11-01-preview
    */
   @added(Versions.vLatestPreview)
-  createDelete?: CreateDeleteProperties | null;
+  createDelete?: CreateDeleteProperties;
 
   /**
    * Starting time for ramp up period.
@@ -4926,7 +4930,7 @@ model ScalingPlanPooledSchedulePatchProperties {
    * @Introduced in 2024-11-01-preview
    */
   @added(Versions.vLatestPreview)
-  createDelete?: CreateDeleteProperties | null;
+  createDelete?: CreateDeleteProperties;
 
   /**
    * Starting time for ramp up period.
