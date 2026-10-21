@@ -43,6 +43,11 @@ namespace Azure.AI.Projects {
     microsoft_copilot_toolset_preview: "microsoft_copilot_toolset_preview",
   }
 
+  union _CloudComputerUsePreviewAgentToolType {
+    @added(Versions.PuPr)
+    cloud_computer_use_preview: "cloud_computer_use_preview",
+  }
+
   const PreviewTool = #{ required_previews: #["preview_tool"] };
 
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._PreviewAgentToolType);
@@ -50,6 +55,10 @@ namespace Azure.AI.Projects {
   @@copyVariants(
     OpenAI.ToolType,
     Azure.AI.Projects._MicrosoftCopilotAgentToolType
+  );
+  @@copyVariants(
+    OpenAI.ToolType,
+    Azure.AI.Projects._CloudComputerUsePreviewAgentToolType
   );
 
   union _AgentIncludable {
@@ -518,6 +527,18 @@ namespace Azure.AI.Projects {
      * The Browser Automation Tool parameters.
      */
     browser_automation_preview: BrowserAutomationToolParameters;
+  }
+
+  /**
+   * The input definition information for a cloud computer use tool, as used to configure an agent.
+   */
+  @added(Versions.PuPr)
+  @extension("x-ms-foundry-meta", PreviewTool)
+  model CloudComputerUsePreviewTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always `cloud_computer_use_preview`.
+     */
+    type: "cloud_computer_use_preview";
   }
 
   /**
