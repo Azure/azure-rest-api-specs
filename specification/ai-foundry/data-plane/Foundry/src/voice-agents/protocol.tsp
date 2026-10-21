@@ -446,7 +446,7 @@ model VoiceAgentServerEventSystemToolArgumentsDone
   arguments: string;
 }
 
-@doc("Common model-generated collection arguments. Each invocation starts collection; there is no action parameter or model-call cancellation variant. The service requires output_variable_name exactly when secret is true. It applies defaults, validates bounds and provider capabilities, then locks all effective arguments for the operation before preparing a receiver. Duplicate invocations cannot change settings or extend the deadline. These are decoded intent arguments, not a new client ingress or Agent settings object. Collection is not authentication.")
+@doc("Common model-generated collection arguments. Each invocation starts collection; there is no action parameter or model-call cancellation variant. The service requires output_variable_name exactly when secret is true. It applies timeouts and service input limits, validates provider capabilities, then locks effective arguments before preparing a receiver. Duplicate invocations cannot change settings or extend the deadline. These are decoded intent arguments, not a new client ingress or Agent settings object. Collection is not authentication.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectionStartArguments {
@@ -455,16 +455,6 @@ model VoiceAgentCollectionStartArguments {
 
   @doc("The preferred bare output variable name, such as verification_code, selected by the model. Required for secret true and forbidden for false; it is not Agent configuration. Successful private collection creates the variable without prior declaration. Names occupied by ordinary inputs, initialized private variables or earlier private collections receive a unique suffix without overwriting values. Completion reports the actual name through output_ref. The name is locked for the operation; cancellation, timeout, failure and non-private collection create no variable.")
   output_variable_name?: VoiceAgentOutputReference;
-
-  @doc("The minimum number of ASCII decimal digits for this operation. Leading zeros are preserved. Must not exceed max_length; defaults to six when omitted.")
-  @minValue(1)
-  @maxValue(64)
-  min_length?: int32 = 6;
-
-  @doc("The maximum number of ASCII decimal digits for this operation. A complete SMS is validated as one message; reaching this count alone does not confirm DTMF terminator or silence modes.")
-  @minValue(1)
-  @maxValue(64)
-  max_length?: int32 = 6;
 
   @doc("The total operation deadline in integer seconds, including receiver preparation. Omit for sixty seconds; duplicate commands do not restart it.")
   @minValue(1)
@@ -497,7 +487,7 @@ union VoiceAgentDtmfCompletionMode {
 @doc("The wait after each received digit, scoped to the selected completion policy.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDtmfCompletionTiming {
-  @doc("Integer seconds after a digit, reset on each new digit. Defaults to five. Expiry fails fixed-length/terminator modes; in silence mode it completes only a value within bounds. Not a debounce: repeated digits are preserved.")
+  @doc("Integer seconds after a digit, reset on each new digit. Defaults to five. Expiry fails fixed-length/terminator modes; in silence mode it completes a non-empty digit string within service input limits. Not a debounce: repeated digits are preserved.")
   @minValue(1)
   @maxValue(300)
   inter_digit_timeout_seconds?: int32 = 5;
@@ -518,7 +508,7 @@ model VoiceAgentDtmfFixedLengthCompletionMode {
   length?: int32 = 6;
 }
 
-@doc("Complete only when the configured end key follows a value within bounds. Length bounds are optional; maximum length alone never completes collection.")
+@doc("Complete only when the configured end key follows a non-empty digit string within service input limits. There is no required digit count or length-bound argument.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDtmfTerminatorCompletionMode {
   ...Record<never>;
@@ -529,19 +519,9 @@ model VoiceAgentDtmfTerminatorCompletionMode {
 
   @doc("Required confirmation key; excluded from the collected value.")
   terminator: VoiceAgentDtmfTerminator;
-
-  @doc("Optional minimum digits; defaults to one. Must not exceed max_length; empty input fails.")
-  @minValue(1)
-  @maxValue(64)
-  min_length?: int32 = 1;
-
-  @doc("Optional maximum digits; defaults to the service limit of 64. Explicit bounds remain enforced.")
-  @minValue(1)
-  @maxValue(64)
-  max_length?: int32 = 64;
 }
 
-@doc("Complete after at least one digit and the inter-digit pause, with a valid digit count. Maximum length alone does not complete. Total deadline expiry takes precedence over simultaneous silence completion.")
+@doc("Complete after at least one digit and the inter-digit pause, within service input limits. No confirmation key or digit count is configured. Total deadline expiry takes precedence over simultaneous silence completion.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDtmfInterDigitSilenceCompletionMode {
   ...Record<never>;
@@ -549,16 +529,6 @@ model VoiceAgentDtmfInterDigitSilenceCompletionMode {
 
   @doc("Select silence completion.")
   type: "inter_digit_silence";
-
-  @doc("Optional minimum digits; defaults to six. Must not exceed max_length.")
-  @minValue(1)
-  @maxValue(64)
-  min_length?: int32 = 6;
-
-  @doc("Optional maximum digits; defaults to six. No confirmation key is accepted.")
-  @minValue(1)
-  @maxValue(64)
-  max_length?: int32 = 6;
 }
 
 @doc("The two non-numeric keypad keys permitted as confirmation terminators.")
@@ -576,10 +546,7 @@ union VoiceAgentDtmfTerminator {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectDtmfStartArguments {
   ...Record<never>;
-  ...OmitProperties<
-    VoiceAgentCollectionStartArguments,
-    "min_length" | "max_length"
-  >;
+  ...VoiceAgentCollectionStartArguments;
 
   @doc("Required typed object selecting one completion policy and its parameters, not an array of simultaneous rules.")
   completion_mode: VoiceAgentDtmfCompletionMode;
@@ -590,7 +557,7 @@ model VoiceAgentCollectDtmfStartArguments {
   first_digit_timeout_seconds?: int32 = 15;
 }
 
-@doc("An asynchronous collection or phone-operation outcome, separate from argument-generation completion. A collection invocation immediately returns accepted, which neither arms a receiver nor resumes a success turn. Listening permits the service to schedule the input prompt. Completed/expired/cancelled/failed results, or a rejected busy invocation, provide safe feedback and schedule one follow-up when the conversation is idle, without a client function_call_output or response.create. Cancellation is service lifecycle cleanup on transfer, native ending or disconnect, not an action on the collection tool. Stale/duplicate events do not resume another turn; closing/disconnected sessions do not resume. Expiry/cancellation/failure/busy allocate no variable. A completed private result commits before its name is reported. Provider acceptance is not SMS delivery, IVR recognition or authentication.")
+@doc("An asynchronous collection or telephony-operation outcome, separate from argument-generation completion. A collection invocation immediately returns accepted, which neither arms a receiver nor resumes a success turn. Listening permits the service to schedule the input prompt. Completed/expired/cancelled/failed results, or a rejected busy invocation, provide safe feedback and schedule one follow-up when the conversation is idle, without a client function_call_output or response.create. Cancellation is service lifecycle cleanup on transfer, native ending or disconnect, not an action on the collection tool. Stale/duplicate events do not resume another turn; closing/disconnected sessions do not resume. Expiry/cancellation/failure/busy allocate no variable. A completed private result commits before its name is reported. Provider acceptance is not SMS delivery, IVR recognition or authentication.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventInputCollectionStatus
@@ -609,13 +576,13 @@ model VoiceAgentServerEventInputCollectionStatus
   @doc("The current receiver request identifier, when applicable.")
   request_id?: string;
 
-  @doc("The collection receiver, omitted for phone-operation feedback.")
+  @doc("The collection receiver, omitted for telephony-operation feedback.")
   channel?: VoiceAgentInputCollectionChannel;
 
   @doc("The reported outcome. Generation completion of a system-tool item is separate.")
   status: VoiceAgentInputCollectionStatus;
 
-  @doc("The exact completed ASCII digit string, preserving leading zeros, only when collection started with `secret: false`. Never present for private collection or phone-operation feedback.")
+  @doc("The exact completed ASCII digit string, preserving leading zeros, only when collection started with `secret: false`. Never present for private collection or telephony-operation feedback.")
   value?: string;
 
   @doc("The actual variable name allocated for a completed private collection instead of its value. It may differ from the preferred name after a collision. The model uses this bare name in later `{{name}}` tool arguments.")
@@ -629,7 +596,7 @@ union VoiceAgentInputCollectionChannel {
   dtmf: "dtmf",
 }
 
-@doc("Collection lifecycle and value-free phone-operation outcomes. Additional outcomes may be introduced over time.")
+@doc("Collection lifecycle and value-free telephony-operation outcomes. Additional outcomes may be introduced over time.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentInputCollectionStatus {
   string,

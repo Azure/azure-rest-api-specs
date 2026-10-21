@@ -387,16 +387,33 @@ model VoiceAgentSystemTool extends VoiceAgentTool {
 
   @doc("The built-in capability name. Known values are stable; additional values may be added over time.")
   name: VoiceAgentSystemToolName;
-
-  @doc("An optional description of the system tool.")
-  description?: string;
 }
 
 @doc("A service-managed control that ends the active conversation.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentEndConversationSystemTool extends VoiceAgentSystemTool {
+  ...Record<never>;
+
   @doc("The service-managed control action. Always `end_conversation`.")
   name: "end_conversation";
+}
+
+@doc("Switches supported conversation language settings when the model identifies a user language preference. The model supplies language (ISO 639-1) and reason; descriptions are service-defined.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLanguageDetectionSystemTool extends VoiceAgentSystemTool {
+  ...Record<never>;
+
+  @doc("The built-in capability. Always `language_detection`.")
+  name: "language_detection";
+}
+
+@doc("Retrieves the last user audio turn's unchanged recognition transcript with no model-call arguments. Requires a speech-to-speech model, input transcription, Azure Semantic VAD and mono audio. The transcript is model-visible, not extracted digits or a private collection result.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentDigitRecognitionSystemTool extends VoiceAgentSystemTool {
+  ...Record<never>;
+
+  @doc("The built-in capability. Always `digit_recognition`.")
+  name: "digit_recognition";
 }
 
 @doc("A built-in voice-session capability name. Known values are stable; additional values may be added over time.")
@@ -406,6 +423,12 @@ union VoiceAgentSystemToolName {
 
   @doc("Ends the active conversation.")
   end_conversation: "end_conversation",
+
+  @doc("Switches supported conversation language settings.")
+  language_detection: "language_detection",
+
+  @doc("Retrieves the unchanged transcript of the last user audio turn.")
+  digit_recognition: "digit_recognition",
 
   @doc("Requests a transfer to an explicitly configured logical target.")
   transfer: "transfer",
@@ -436,7 +459,7 @@ model VoiceAgentSessionSecret {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar VoiceAgentOutputReference extends string;
 
-@doc("Enables collection of one complete numeric SMS on the Agent's SMS-capable number. Each invocation starts collection without an action parameter; cancellation is service lifecycle cleanup. Length, timeout, explicit E.164 sender, Boolean secret and output_variable_name are model-call arguments, not Agent settings. Prompts follow listening; this does not create an SMS chat. Initially supported on Twilio.")
+@doc("Enables collection of one complete numeric SMS on the Agent's SMS-capable number. Each invocation starts collection without an action parameter; cancellation is service lifecycle cleanup. Timeout, explicit E.164 sender, Boolean secret and output_variable_name are model-call arguments, not Agent settings. Non-empty ASCII digit strings are accepted within service input limits; there are no length-bound arguments. Prompts follow listening; this does not create an SMS chat. Initially supported on Twilio.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
   ...Record<never>;
@@ -507,6 +530,8 @@ model VoiceAgentTransferTarget {
 @doc("Requests transfer to a configured logical target. The model supplies only target and reason; the service resolves destinations from this definition. An explicit declaration is required. On confirmed no-answer, the original conversation continues with failure feedback. An uncertain provider result is not automatically redialed. Current native Telephony transfer is ACS-only; existing Twilio management transfer is a separate capability.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTransferSystemTool extends VoiceAgentSystemTool {
+  ...Record<never>;
+
   @doc("The built-in capability. Always `transfer`.")
   name: "transfer";
 
@@ -521,6 +546,8 @@ model VoiceAgentTransferSystemTool extends VoiceAgentSystemTool {
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {
+  ...Record<never>;
+
   @doc("The built-in capability. Always `send_dtmf`.")
   name: "send_dtmf";
 }
@@ -531,6 +558,8 @@ model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSendSmsSystemTool extends VoiceAgentSystemTool {
+  ...Record<never>;
+
   @doc("The built-in capability. Always `send_sms`.")
   name: "send_sms";
 }
