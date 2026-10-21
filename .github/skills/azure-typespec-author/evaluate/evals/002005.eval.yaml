@@ -28,8 +28,8 @@ stimuli:
           dest: package.json
         - src: ../scripts/check-node-dependencies.js
           dest: check-node-dependencies.js
-        - src: ../scripts/check-employee-service.mjs
-          dest: check-employee-service.mjs
+        - src: ../scripts/check-employee-service.ts
+          dest: check-employee-service.ts
         - src: ../fixtures/Microsoft.Widget/Widget/readme.md
           dest: readme.md
         - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
@@ -74,7 +74,7 @@ stimuli:
         type: "run-command"
         name: "compiled-employee-service"
         config:
-          command: "node check-employee-service.mjs"
+          command: "node check-employee-service.ts"
           expected_exit_code: 0
       - &file_matches
         type: "file-matches"

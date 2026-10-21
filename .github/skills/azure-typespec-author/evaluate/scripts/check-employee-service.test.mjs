@@ -31,8 +31,8 @@ function check(t, variant) {
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   fs.symlinkSync(modules, path.join(root, "node_modules"), "junction");
   fs.copyFileSync(
-    new URL("check-employee-service.mjs", import.meta.url),
-    path.join(root, "check.mjs"),
+    new URL("check-employee-service.ts", import.meta.url),
+    path.join(root, "check.ts"),
   );
   fs.writeFileSync(path.join(root, "package.json"), '{"type":"module"}');
   let entrypoint = main;
@@ -46,7 +46,7 @@ function check(t, variant) {
     if (variant !== "unreachable") entrypoint = 'import "./employee.tsp";\n' + entrypoint;
   }
   fs.writeFileSync(path.join(root, "main.tsp"), entrypoint);
-  return spawnSync(process.execPath, ["check.mjs"], { cwd: root, encoding: "utf8" });
+  return spawnSync(process.execPath, ["check.ts"], { cwd: root, encoding: "utf8" });
 }
 
 /** @type {readonly ["inline", "imported"]} */
