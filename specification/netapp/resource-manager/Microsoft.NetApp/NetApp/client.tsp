@@ -24,7 +24,17 @@ using Microsoft.NetApp;
   "nfsV4IdDomain",
   "java"
 );
+@@clientName(
+  Microsoft.NetApp.AccountPropertiesPatch.nfsV4IDDomain,
+  "nfsV4IdDomain",
+  "java"
+);
 
+@@alternateType(
+  Microsoft.NetApp.ActiveDirectoryPatch,
+  Microsoft.NetApp.ActiveDirectory,
+  "java"
+);
 @@clientName(Microsoft.NetApp.ActiveDirectory.kdcIP, "kdcIp", "java");
 @@clientName(Microsoft.NetApp.ActiveDirectoryPatch.kdcIP, "kdcIp", "java");
 @@clientName(
@@ -105,7 +115,7 @@ using Microsoft.NetApp;
 
 @@clientName(
   Microsoft.NetApp.ReplicationSchedule._10minutely,
-  exact("\"10Minutely\""),
+  exact("10Minutely"),
   "javascript"
 );
 
