@@ -2742,14 +2742,12 @@ model FirstPartyExtensionAutoUpdateSettings {
    * Whether automatic updates are enabled for the Microsoft Multimedia Redirection extension.
    * @Introduced in 2026-08-01-preview
    */
-  @encodedName("application/json", "MicrosoftMultimediaRedirection")
   microsoftMultimediaRedirection?: boolean;
 
   /**
    * Whether automatic updates are enabled for the Teams Media Optimization extension.
    * @Introduced in 2026-08-01-preview
    */
-  @encodedName("application/json", "TeamsMediaOptimization")
   teamsMediaOptimization?: boolean;
 }
 
@@ -2964,8 +2962,9 @@ model ScalingSchedule {
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
    * @Introduced in 2024-11-01-preview
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Retains the existing nullable wire contract using the native '| null' union; this is a compatibility exception, not a pending migration."
   @added(Versions.vLatestPreview)
-  createDelete?: CreateDeleteProperties;
+  createDelete?: CreateDeleteProperties | null;
 
   /**
    * Starting time for ramp up period.
@@ -3705,8 +3704,9 @@ model HostPoolPatch extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * The managed service identities assigned to this resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Retains the existing nullable wire contract using the native '| null' union; this is a compatibility exception, not a pending migration."
   @added(Versions.vLatestPreview)
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity | null;
 }
 
 /**
@@ -4809,8 +4809,9 @@ model ScalingPlanPooledScheduleProperties {
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
    * @Introduced in 2024-11-01-preview
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Retains the existing nullable wire contract using the native '| null' union; this is a compatibility exception, not a pending migration."
   @added(Versions.vLatestPreview)
-  createDelete?: CreateDeleteProperties;
+  createDelete?: CreateDeleteProperties | null;
 
   /**
    * Starting time for ramp up period.
@@ -4930,8 +4931,9 @@ model ScalingPlanPooledSchedulePatchProperties {
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
    * @Introduced in 2024-11-01-preview
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Retains the existing nullable wire contract using the native '| null' union; this is a compatibility exception, not a pending migration."
   @added(Versions.vLatestPreview)
-  createDelete?: CreateDeleteProperties;
+  createDelete?: CreateDeleteProperties | null;
 
   /**
    * Starting time for ramp up period.

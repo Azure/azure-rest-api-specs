@@ -7632,15 +7632,13 @@
       "type": "object",
       "description": "The automatic update settings for supported first-party extensions.",
       "properties": {
-        "MicrosoftMultimediaRedirection": {
+        "microsoftMultimediaRedirection": {
           "type": "boolean",
-          "description": "Whether automatic updates are enabled for the Microsoft Multimedia Redirection extension.",
-          "x-ms-client-name": "microsoftMultimediaRedirection"
+          "description": "Whether automatic updates are enabled for the Microsoft Multimedia Redirection extension."
         },
-        "TeamsMediaOptimization": {
+        "teamsMediaOptimization": {
           "type": "boolean",
-          "description": "Whether automatic updates are enabled for the Teams Media Optimization extension.",
-          "x-ms-client-name": "teamsMediaOptimization"
+          "description": "Whether automatic updates are enabled for the Teams Media Optimization extension."
         }
       }
     },
@@ -7845,7 +7843,8 @@
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "The managed service identities assigned to this resource.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -10277,7 +10276,8 @@
         },
         "createDelete": {
           "$ref": "#/definitions/CreateDeleteProperties",
-          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.",
+          "x-nullable": true
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
@@ -10401,7 +10401,8 @@
         },
         "createDelete": {
           "$ref": "#/definitions/CreateDeleteProperties",
-          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.",
+          "x-nullable": true
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
@@ -10599,7 +10600,8 @@
         },
         "createDelete": {
           "$ref": "#/definitions/CreateDeleteProperties",
-          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.",
+          "x-nullable": true
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
