@@ -188,7 +188,7 @@ union CreateMode {
   GeoRestore: "GeoRestore",
 
   /** Rename an existing server. */
-  @added(Versions.v2026_03_01)
+  @added(Versions.v2025_12_01_preview)
   Rename: "Rename",
 }
 
