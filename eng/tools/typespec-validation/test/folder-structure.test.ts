@@ -6,7 +6,7 @@ import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strict as assert } from "node:assert";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
-import * as nativeGlob from "../src/glob.ts";
+import * as nativeGlob from "@azure-tools/specs-shared/glob";
 import { FolderStructureRule } from "../src/rules/folder-structure.ts";
 
 import * as utils from "../src/utils.ts";

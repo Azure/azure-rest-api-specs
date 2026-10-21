@@ -29,6 +29,7 @@ import { execFile } from "../../../shared/src/exec.ts";
 import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
+import { parseSignoffDispatchInputs } from "../arm-auto-signoff/arm-signoff-dispatch.ts";
 import { commentOrUpdate } from "../comment.ts";
 import { extractInputs } from "../context.ts";
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
@@ -49,6 +50,7 @@ import {
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
   typeSpecSuppressionsTsg,
+  specChangePoliciesTsg,
 } from "./tsgs.ts";
 
 import fs from "node:fs/promises";
@@ -114,6 +116,12 @@ const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
 const MAX_IMPACT_ASSESSMENT_BYTES = 16 * 1024 * 1024;
 
 const CHECK_METADATA: CheckMetadata[] = [
+  {
+    precedence: 0,
+    name: "Spec Change Policies",
+    suppressionLabels: [],
+    troubleshootingGuide: specChangePoliciesTsg,
+  },
   {
     precedence: 0,
     name: "TypeSpec Requirement (resource-manager)",
@@ -269,7 +277,16 @@ export default async function summarizeChecks({
   context,
   core,
 }: GitHubScriptArgs): Promise<void> {
-  const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
+  const extracted = await extractInputs(github, context, core);
+  const { owner, repo } = extracted;
+  let { issue_number, head_sha } = extracted;
+
+  // Dispatched by Update Labels, which has no PR payload.
+  if (context.eventName === "workflow_dispatch") {
+    ({ issue_number, head_sha } = parseSignoffDispatchInputs(
+      (context.payload as WebhookEvent<"workflow-dispatch">).inputs,
+    ));
+  }
 
   if (!issue_number) {
     core.warning(`No issue number found for this event. Exiting summarize-checks.js early.`);
@@ -450,6 +467,13 @@ export async function summarizeChecksImpl(
   core.summary.addHeading("Automated Checks Met", 2);
   core.summary.addCodeBlock(JSON.stringify(automatedChecksMet, null, 2));
   await core.summary.write();
+
+  core.setOutput(
+    "arm_review_ready",
+    impactAssessment !== undefined &&
+      !impactAssessment.isDraft &&
+      labelNames.includes("WaitForARMFeedback"),
+  );
 }
 
 /**
