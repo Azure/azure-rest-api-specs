@@ -28,6 +28,7 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @parentResource(Workspace)
 model ManagedNetworkSettingsPropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<ManagedNetworkSettingsProperties> {
@@ -54,6 +55,7 @@ model ManagedNetworkSettingsPropertiesBasicResource
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
