@@ -9,8 +9,10 @@ namespace Microsoft.ManagedNetworkFabric;
 
 @doc("EdgeConnector represents the mechanism by which a collection of on-prem infrastructure (Fabric) is connected to Azure.")
 @added(Versions.v2026_01_15_preview)
-model EdgeConnector
-  is Azure.ResourceManager.TrackedResource<EdgeConnectorProperties, false> {
+model EdgeConnector is Azure.ResourceManager.TrackedResource<
+  EdgeConnectorProperties,
+  false
+> {
   @doc("Name of the EdgeConnector.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
