@@ -49,6 +49,8 @@ namespace ContainerAppsSandbox {
   }
 
   // Client initialization
+  @@clientName(SecretValueReferenceSource.keyVaultUrl, "keyVaultUri", "csharp");
+
   @@clientInitialization(
     ContainerAppsSandbox,
     {

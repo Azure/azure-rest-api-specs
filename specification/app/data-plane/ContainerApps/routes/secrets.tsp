@@ -2,6 +2,7 @@ using Http;
 using Rest;
 using Azure.Core;
 using Azure.Core.Traits;
+using Versioning;
 
 namespace ContainerAppsSandbox;
 
@@ -22,12 +23,22 @@ alias ListSecretTraits = QueryParametersTrait<
   {
     /** Continuation token for paginated results. */
     @query @continuationToken skipToken?: string;
+
+    /** Number of secrets per page, from 1 to 100. Defaults to 25 when skipToken is absent; when provided with skipToken, it must match the token's page size. */
+    @added(ApiVersions.v2026_10_01_preview)
+    @minValue(1)
+    @maxValue(100)
+    @query
+    pageSize?: int32;
   },
   TraitContext.List
 >;
 
 /** Error responses for the listSecrets operation. */
-alias ListSecretsErrors = UnauthorizedErrorResult | InternalServerErrorResult;
+alias ListSecretsErrors =
+  | BadRequestErrorResult
+  | UnauthorizedErrorResult
+  | InternalServerErrorResult;
 
 /** Shared operation traits for listing secrets. */
 alias SecretListOperations = ResourceOperations<
@@ -63,7 +74,8 @@ model PostSecretPeekResult {
 alias PostSecretPeekErrors =
   | UnauthorizedErrorResult
   | NotFoundErrorResult
-  | InternalServerErrorResult;
+  | InternalServerErrorResult
+  | ServiceUnavailableErrorResult;
 
 /** Shared operation traits for peeking secrets. */
 alias SecretPeekOperations = ResourceOperations<
@@ -92,11 +104,28 @@ model PutSecretResult201 {
 /** Successful responses for the putSecret operation. */
 alias PutSecretResult = PutSecretResult200 | PutSecretResult201;
 
+/**
+ * An error envelope instantiated only in versions that return its status code.
+ * @template StatusCode The HTTP error status code.
+ */
+@error
+model SecretErrorResult<StatusCode extends int32> {
+  /** The HTTP error status code. */
+  @statusCode statusCode: StatusCode;
+
+  ...Foundations.ErrorResponse;
+}
+
 /** Error responses for the putSecret operation. */
 alias PutSecretErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
-  | InternalServerErrorResult;
+  | SecretErrorResult<403>
+  | NotFoundErrorResult
+  | ConflictErrorResult
+  | TooManyRequestsErrorResult
+  | InternalServerErrorResult
+  | ServiceUnavailableErrorResult;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The controller exposes /keys and /peek subroutes, while PUT may return either 200 or 201."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation names mirror the implemented /keys, /peek, and PUT secret endpoints."
@@ -108,6 +137,16 @@ interface SecretsOperations {
 
   /** Lists all secrets in the sandbox group. */
   @summary("Lists all secrets in the sandbox group.")
+  @returnTypeChangedFrom(
+    ApiVersions.v2026_10_01_preview,
+
+      | Foundations.CustomPage<
+          Secret,
+          DataPlaneStandardTraits & ListSecretTraits
+        >
+      | UnauthorizedErrorResult
+      | InternalServerErrorResult
+  )
   listSecrets is SecretListOperations.ResourceList<Secret, ListSecretTraits>;
 
   /** Lists key names of a secret (values are not returned). */
@@ -130,6 +169,14 @@ interface SecretsOperations {
   @summary("Peeks (retrieves) all secret values.")
   @action("peek")
   @actionSeparator("/")
+  @returnTypeChangedFrom(
+    ApiVersions.v2026_10_01_preview,
+
+      | (PostSecretPeekResult & {})
+      | UnauthorizedErrorResult
+      | NotFoundErrorResult
+      | InternalServerErrorResult
+  )
   postSecretPeek is SecretPeekOperations.ResourceAction<
     Secret,
     {},
@@ -140,6 +187,14 @@ interface SecretsOperations {
   @summary("Upserts key-value pairs in a secret.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/secrets/{secretId}")
   @put
+  @returnTypeChangedFrom(
+    ApiVersions.v2026_10_01_preview,
+
+      | PutSecretResult
+      | BadRequestErrorResult
+      | UnauthorizedErrorResult
+      | InternalServerErrorResult
+  )
   putSecret is Foundations.Operation<
     {
       ...AzureResourceScope;
