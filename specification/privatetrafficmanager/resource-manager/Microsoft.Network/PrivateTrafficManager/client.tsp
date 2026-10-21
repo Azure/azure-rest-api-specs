@@ -4,6 +4,11 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.Network, "PrivateTrafficManagerMgmtClient", "python");
+@@clientName(
+  Microsoft.Network,
+  "PrivateTrafficManagerManagementClient",
+  "javascript"
+);
 
 // C# naming
 @@clientName(
@@ -23,10 +28,14 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.Network.AdministrativeStatus,
-  "EndpointAdministrativeStatus",
+  "PrivateTrafficManagerEndpointStatus",
   "csharp"
 );
-@@clientName(Microsoft.Network.AlwaysServe, "EndpointAlwaysServe", "csharp");
+@@clientName(
+  Microsoft.Network.AlwaysServe,
+  "PrivateTrafficManagerEndpointAlwaysServeStatus",
+  "csharp"
+);
 @@clientName(Microsoft.Network.Site, "TopologyMapSite", "csharp");
 @@clientName(
   Microsoft.Network.SiteProperties,
@@ -44,7 +53,11 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(Microsoft.Network.DnsConfig.ttl, "TimeToLiveInSeconds", "csharp");
-@@clientName(Microsoft.Network.RecordType, "DnsRecordType", "csharp");
+@@clientName(
+  Microsoft.Network.RecordType,
+  "PrivateTrafficManagerDnsRecordType",
+  "csharp"
+);
 @@clientName(
   Microsoft.Network.ProfileProperties,
   "PrivateTrafficManagerProfileProperties",
@@ -53,6 +66,16 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   Microsoft.Network.ProfileStatus,
   "PrivateTrafficManagerProfileStatus",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ProfileEndpoint,
+  "PrivateTrafficManagerProfileEndpoint",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ProvisioningState,
+  "PrivateTrafficManagerProvisioningState",
   "csharp"
 );
 // Internal envelope name drives the flattened property name (CatchAllSiteName).
