@@ -186,7 +186,7 @@ export async function mitigateSdkBreakingChanges({
         mitigationResult.projects[projectIndex].breakingChanges.push(mitigatedChange);
         const suppresionSection = section(
           "Suppression",
-          `Follow the [suppression guideline](${SUPPRESSION_GUIDE_URL}) to add follow breaking change items to sdk-suppression.yaml.\n\n\`\`\`yaml\n${change.originBreaks.join("\n")}\n\`\`\``,
+          `Follow the [suppression guideline](${SUPPRESSION_GUIDE_URL}) to add follow breaking change items to sdk-suppressions.yaml.\n\n\`\`\`yaml\n${change.originBreaks.join("\n")}\n\`\`\``,
         );
         const breakingChangeSection = section(
           `Breaking Change ${change.id}`,

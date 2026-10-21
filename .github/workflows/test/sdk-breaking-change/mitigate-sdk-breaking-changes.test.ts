@@ -148,7 +148,7 @@ describe("mitigateSdkBreakingChanges", () => {
         '<a name="breaking-change-model-change-mitigation"></a>',
         "## Breaking Change model-change",
         "### Suppression",
-        "Follow the [suppression guideline](https://github.com/Azure/azure-rest-api-specs/wiki/SDK-Breaking-Changes#how-to-suppress-the-sdk-breaking-changes) to add follow breaking change items to sdk-suppression.yaml.\n\n```yaml\n- Model property removed\n- Method signature changed\n```",
+        "Follow the [suppression guideline](https://github.com/Azure/azure-rest-api-specs/wiki/SDK-Breaking-Changes#how-to-suppress-the-sdk-breaking-changes) to add follow breaking change items to sdk-suppressions.yaml.\n\n```yaml\n- Model property removed\n- Method signature changed\n```",
       ].join("\n\n"),
     );
     expect(core.summary.write).toHaveBeenCalledOnce();
