@@ -80,7 +80,7 @@ satisfy all five:
      suppression only after the first LintDiff run, using the exact
      `jsonpath` it reports.
 5. **The per-comment telemetry marker carries `downstream-rule:
-<rule-id>`** (e.g., `downstream-rule: R3017`). The Critic uses this
+   <rule-id>`** (e.g., `downstream-rule: R3017`). The Critic uses this
    field to identify in-scope findings.
 
 ## Failure modes (Critic FAILs)

@@ -1,0 +1,117 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "decorators"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 004001-decorate-mgmt-resource-name-parameter-trigger
+    tags:
+      suite: "decorators"
+      mode: "trigger"
+    prompt: |
+      add minLength decorator to set the minLength 1 for resource name parameter of Employee resource
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+          dest: employee.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+          dest: readme.md
+        - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+          dest: tspconfig.yaml
+        - src: ../fixtures/Microsoft.Widget/Widget/preview/2024-10-01-preview/widget.json
+          dest: preview/2024-10-01-preview/widget.json
+        - src: ../fixtures/Microsoft.Widget/Widget/stable/2021-11-01/widget.json
+          dest: stable/2021-11-01/widget.json
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 004001-decorate-mgmt-resource-name-parameter-forced
+    tags:
+      suite: "decorators"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author add minLength decorator to set the minLength 1 for resource name parameter of Employee resource
+    environment: *shared_environment
+    rubric: &shared_rubric
+      - The Employee resource name parameter has a minLength constraint of 1.
+      - The constraint is applied to Employee.name using a valid TypeSpec decorator pattern.
+      - Changes are limited to the requested constraint and contain no unrelated edits.
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: '@@minLength\(Employee\.name,\s*1\)'
+          path: "*.tsp"
+      - &prompt
+        type: "prompt"
+        config:
+          threshold: 0.88
+          model: "gpt-5.6-sol"
+          scoring: "scale_1_10"
+          prompt: "Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent."
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 004001-decorate-mgmt-resource-name-parameter-no-skill
+    tags:
+      suite: "decorators"
+      mode: "no-skill"
+    prompt: "add minLength decorator to set the minLength 1 for resource name parameter of Employee resource"
+    environment: *shared_environment
+    rubric: *shared_rubric
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - *file_matches
+      - *prompt
+    constraints:
+      max_turns: 10
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.15
+    prompt: 0.15
+    run-command: 0.15
+    skill-invocation: 0.15
+    file-matches: 0.4
+  threshold: 0.96

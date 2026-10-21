@@ -566,7 +566,7 @@ export function processImpactAssessment(
 }
 
 function isReleaseBranch(branchName: string): boolean {
-  const branchRegex = [/main/, /RPSaaSMaster/, /release*/, /ARMCoreRPDev/];
+  const branchRegex = [/^main$/, /^RPSaaSMaster$/, /^release.*$/, /^ARMCoreRPDev$/];
   return branchRegex.some((b) => b.test(branchName));
 }
 
