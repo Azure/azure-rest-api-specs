@@ -353,10 +353,19 @@ interface ChangeRecords {
     }
   >;
 
-  update is ArmResourcePatchSync<ChangeRecord, ChangeRecordProperties>;
-  updateAtSubscriptionLevel is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     ChangeRecord,
-    ChangeRecordProperties,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ChangeRecord,
+      ChangeDefinitionPatchProperties<ChangeRecordProperties>
+    >
+  >;
+  updateAtSubscriptionLevel is ArmCustomPatchSync<
+    ChangeRecord,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ChangeRecord,
+      ChangeDefinitionPatchProperties<ChangeRecordProperties>
+    >,
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;

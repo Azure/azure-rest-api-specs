@@ -108,19 +108,31 @@ interface StageMaps {
     }
   >;
 
-  update is ArmResourcePatchSync<StageMap, StageMapProperties>;
-  updateAtSubscriptionLevel is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     StageMap,
-    StageMapProperties,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      StageMap,
+      ParameterPatchProperties<StageMapProperties>
+    >
+  >;
+  updateAtSubscriptionLevel is ArmCustomPatchSync<
+    StageMap,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      StageMap,
+      ParameterPatchProperties<StageMapProperties>
+    >,
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
     }
   >;
 
-  updateAtManagementGroupLevel is ArmResourcePatchSync<
+  updateAtManagementGroupLevel is ArmCustomPatchSync<
     StageMap,
-    StageMapProperties,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      StageMap,
+      ParameterPatchProperties<StageMapProperties>
+    >,
     {
       ...ApiVersionParameter;
       ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;

@@ -98,6 +98,20 @@ model ChangeStateProperties {
   additionalData?: {};
 }
 
+@doc("Partial change definition supplied by a PATCH request.")
+model ChangeDefinitionPatch {
+  ...OptionalProperties<ChangeDefinition>;
+}
+
+@doc("Resource properties for PATCH requests with partial parameter and change definitions.")
+model ChangeDefinitionPatchProperties<Properties extends TypeSpec.Reflection.Model> {
+  ...OmitProperties<ParameterPatchProperties<Properties>, "changeDefinition">;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("Change request body and/or resource selection criteria used to identify the targeted resources.")
+  changeDefinition?: ChangeDefinitionPatch;
+}
+
 @doc("RetrieveNextStages POST Action response.")
 model RetrieveNextStagesResponse {
   @doc("ChangeState resource Id.")
@@ -330,10 +344,19 @@ interface ChangeStates {
     }
   >;
 
-  update is ArmResourcePatchSync<ChangeState, ChangeStateProperties>;
-  updateAtSubscriptionLevel is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     ChangeState,
-    ChangeStateProperties,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ChangeState,
+      ChangeDefinitionPatchProperties<ChangeStateProperties>
+    >
+  >;
+  updateAtSubscriptionLevel is ArmCustomPatchSync<
+    ChangeState,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ChangeState,
+      ChangeDefinitionPatchProperties<ChangeStateProperties>
+    >,
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;

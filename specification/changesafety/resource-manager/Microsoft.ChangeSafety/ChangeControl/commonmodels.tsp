@@ -128,6 +128,28 @@ model ObjectParameter extends Parameter {
   allowedValues?: Array<{}>;
 }
 
+@doc("Partial parameter definition for PATCH requests. Omitted fields are not supplied by the request.")
+model ParameterPatch {
+  ...OptionalProperties<Parameter>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "PATCH may omit the type discriminator while updating a customer-provided string, number, array, or object default value. A fixed-kind schema would exclude supported parameter kinds."
+  @doc("Default value for the parameter. The value must match the supplied or existing parameter type.")
+  defaultValue?: unknown;
+
+  @doc("Allowed values for the parameter. Values must match the supplied or existing parameter type.")
+  allowedValues?: unknown[];
+}
+
+@doc("Resource properties for PATCH requests with partial parameter definitions.")
+model ParameterPatchProperties<Properties extends TypeSpec.Reflection.Model> {
+  ...OmitProperties<Properties, "parameters">;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameter names are customer-defined; ChangeSafety cannot enumerate the keys. Values use the partial ParameterPatch schema."
+  @doc("Parameter definitions supplied by the PATCH request.")
+  @visibility(Lifecycle.Update)
+  parameters?: Record<ParameterPatch>;
+}
+
 @doc("Nested stage map reference.")
 model NestedStageMap {
   @doc("ARM resource ID for the nested stagemap resource.")

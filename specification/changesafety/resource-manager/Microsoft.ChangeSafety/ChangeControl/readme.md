@@ -56,17 +56,13 @@ directive:
     from: ChangeControl.json
     where:
       - $.definitions.Parameter.properties.metadata
-      - $.definitions.ParameterUpdate.properties.metadata
       - $.definitions.StageMapProperties.properties.parameters
-      - $.definitions.StageMapPropertiesUpdate.properties.parameters
       - $.definitions.OperationContent.properties.properties
       - $.definitions.ChangeStateProperties.properties.parameters
-      - $.definitions.ChangeStatePropertiesUpdate.properties.parameters
       - $.definitions.StageProgressionProperties.properties.stageVariables
       - $.definitions.StageProgressionPropertiesUpdate.properties.stageVariables
       - $.definitions.RetrieveNextStagesResponseItem.properties.stageVariables
       - $.definitions.ChangeStateProperties.properties.additionalData
-      - $.definitions.ChangeStatePropertiesUpdate.properties.additionalData
       - $.definitions.StageProgressionProperties.properties.additionalData
       - $.definitions.StageProgressionPropertiesUpdate.properties.additionalData
       - $.definitions.RetrieveNextStagesResponseItem.properties.additionalData
@@ -77,9 +73,7 @@ directive:
       - $.definitions.StageProgressionPropertiesUpdate.properties.parameters
       - $.definitions.NestedStageMap.properties.parameters
       - $.definitions.ChangeRecordProperties.properties.parameters
-      - $.definitions.ChangeRecordPropertiesUpdate.properties.parameters
       - $.definitions.ChangeRecordProperties.properties.additionalData
-      - $.definitions.ChangeRecordPropertiesUpdate.properties.additionalData
       - $.definitions.ChangeRecordStageProgressionProperties.properties.stageVariables
       - $.definitions.ChangeRecordStageProgressionPropertiesUpdate.properties.stageVariables
       - $.definitions.ChangeRecordStageProgressionProperties.properties.additionalData
@@ -91,6 +85,18 @@ directive:
       - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.parameters
       - $.definitions.ChangeRecordRetrieveAllStagesResponseItemProperties.properties.stageVariables
       - $.definitions.ChangeRecordRetrieveAllStagesResponseItemProperties.properties.parameters
+  - suppress: AvoidAdditionalProperties
+    reason: |
+      PATCH parameter names and metadata keys are customer-defined. Change-definition and orchestration metadata retain their existing flexible JSON shapes. These PATCH-only selectors require current ARM review and are not covered automatically by historical approval labels.
+    from: ChangeControl.json
+    where:
+      - $.definitions.ChangeDefinitionPatch.properties.details
+      - $.definitions.ChangeRecordUpdateProperties.properties.additionalData
+      - $.definitions.ChangeRecordUpdateProperties.properties.parameters
+      - $.definitions.ChangeStateUpdateProperties.properties.additionalData
+      - $.definitions.ChangeStateUpdateProperties.properties.parameters
+      - $.definitions.ParameterPatch.properties.metadata
+      - $.definitions.StageMapUpdateProperties.properties.parameters
 ```
 
 ---

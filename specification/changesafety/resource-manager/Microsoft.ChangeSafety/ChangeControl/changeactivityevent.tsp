@@ -126,6 +126,9 @@ scalar ChangeActivityEventResourceId
 @armResourceOperations
 @doc("The operations of the ChangeActivityEvent resource.")
 interface ChangeActivityEvents {
+  @doc("Get a ChangeActivityEvent by name under its parent resource.")
+  get is ArmResourceRead<ChangeActivityEvent>;
+
   @doc("List ChangeActivityEvents by parent resource ID. The parent resource should be a Microsoft.ChangeSafety resource (e.g., ChangeRecords, StageProgressions).")
   listByParent is ArmResourceListByParent<ChangeActivityEvent>;
 }
