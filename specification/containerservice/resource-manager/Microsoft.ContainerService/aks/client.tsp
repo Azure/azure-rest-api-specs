@@ -89,6 +89,16 @@ using Microsoft.ContainerService;
   "ManagedClusterHttpProxyConfig",
   "java"
 );
+@@clientName(
+  ClusterAPIConnectivityProfile,
+  "ClusterApiConnectivityProfile",
+  "java"
+);
+@@clientName(
+  ContainerServiceNetworkProfile.clusterAPIConnectivityProfile,
+  "clusterApiConnectivityProfile",
+  "java"
+);
 @@clientName(ManagedClusterIngressProfile.gatewayAPI, "gatewayApi", "java");
 @@clientName(
   ManagedClusterWebAppRoutingGatewayAPIImplementations,

@@ -47,7 +47,9 @@ function createMockGithub({
   github.rest.issues.listLabelsOnIssue.mockResolvedValue({
     data: labelNames.map((name) => ({ name })),
   });
-  github.rest.repos.listCommitStatusesForRef.mockResolvedValue({ data: statuses });
+  github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+    data: { statuses, total_count: statuses.length },
+  });
   return github;
 }
 
@@ -63,6 +65,33 @@ function run(github: ReturnType<typeof createMockGithub>) {
 }
 
 describe("getLabelActionImpl", () => {
+  it("matches required status contexts regardless of returned casing", async () => {
+    const github = createMockGithub({
+      labelNames: ["ARMReview"],
+      statuses: successfulStatuses.map((status) => ({
+        ...status,
+        context: status.context.toUpperCase(),
+      })),
+    });
+
+    const result = await run(github);
+    expect(result.labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest]).toBe(LabelAction.Add);
+  });
+
+  it("ignores failures in unrelated status contexts", async () => {
+    const github = createMockGithub({ labelNames: ["ARMReview"] });
+    github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+      data: {
+        state: "failure",
+        statuses: [...successfulStatuses, { context: "Unrelated", state: "failure" }],
+        total_count: 4,
+      },
+    });
+
+    const result = await run(github);
+    expect(result.labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest]).toBe(LabelAction.Add);
+  });
+
   it("logs a no-op when an indirect trigger has no PR correlation", async () => {
     const loggingCore = createMockCore();
     const github = createMockGithub();
@@ -102,6 +131,14 @@ describe("getLabelActionImpl", () => {
         [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
       },
     });
+    expect(github.rest.repos.getCombinedStatusForRef).toHaveBeenCalledExactlyOnceWith({
+      owner,
+      repo,
+      ref: headSha,
+      per_page: 100,
+      page: 1,
+    });
+    expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
   });
 
   it("does not emit a redundant add when the pilot label already exists", async () => {
@@ -126,7 +163,7 @@ describe("getLabelActionImpl", () => {
       [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.Remove,
       [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
     });
-    expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
+    expect(github.rest.repos.getCombinedStatusForRef).not.toHaveBeenCalled();
   });
 
   it("takes no action when the PR is not ready and has no pilot label", async () => {
@@ -165,22 +202,45 @@ describe("getLabelActionImpl", () => {
       expect(workflow).not.toContain("ARM Semantic Review - Set Status");
     });
 
-    it("publishes correlation artifacts only for workflow_run triggers", async () => {
+    it("publishes correlation artifacts before dispatching Update Labels, only from a dispatched run", async () => {
       const workflow = await readFile(
         join(GITHUB_ROOT, "workflows", "arm-universal-auto-signoff.yaml"),
         "utf8",
       );
       const headArtifact = workflow.indexOf("name: Upload artifact with head SHA");
       const issueArtifact = workflow.indexOf("name: Upload artifact with issue number");
+      const step = workflow.slice(workflow.indexOf("name: Dispatch Update Labels"));
 
       expect(headArtifact).toBeGreaterThan(-1);
       expect(issueArtifact).toBeGreaterThan(headArtifact);
-      expect(workflow.slice(headArtifact - 180, headArtifact)).toContain(
-        "github.event_name == 'workflow_run'",
+      expect(workflow.indexOf("name: Dispatch Update Labels")).toBeGreaterThan(issueArtifact);
+      expect(step.slice(0, step.indexOf("uses:"))).toContain(
+        "github.event_name == 'workflow_dispatch'",
       );
-      expect(workflow.slice(issueArtifact - 180, issueArtifact)).toContain(
-        "github.event_name == 'workflow_run'",
+      expect(workflow).toContain("await dispatchUpdateLabels({ github, context, core });");
+    });
+
+    it("dispatches Summarize Checks only from the dispatch route, in its own job", async () => {
+      const readWorkflow = (name: string) => readFile(join(GITHUB_ROOT, "workflows", name), "utf8");
+      const updateLabels = await readWorkflow("update-labels.yaml");
+      const summarize = await readWorkflow("summarize-checks.yaml");
+      const dispatchJob = updateLabels.slice(updateLabels.indexOf("  dispatch-summarize-checks:"));
+
+      // Only the dispatching job may write actions; the job that applies labels stays read-only.
+      expect(
+        updateLabels.slice(0, updateLabels.indexOf("  dispatch-summarize-checks:")),
+      ).not.toContain("actions: write");
+      expect(dispatchJob).toContain("needs: update-labels");
+      expect(dispatchJob).toContain("github.event_name == 'workflow_dispatch'");
+      expect(dispatchJob).toContain("actions: write");
+      expect(dispatchJob).toContain("dispatchSummarizeChecks(");
+      expect(dispatchJob).toContain(
+        "prNumber: process.env.PR_NUMBER, headSha: process.env.HEAD_SHA",
       );
+      expect(summarize).toMatch(/workflow_dispatch:\s+inputs:\s+pr_number:[\s\S]+head_sha:/);
+      expect(summarize).toContain("github.event_name == 'workflow_dispatch' ||");
+      // The workflow_run fallback stays, so a dispatch must not be added for that route.
+      expect(summarize).toContain('- "Update Labels"');
     });
   });
 
@@ -451,6 +511,6 @@ describe("getLabelActionImpl", () => {
 
     const result = await run(github);
     expect(result.labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest]).toBe(LabelAction.None);
-    expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
+    expect(github.rest.repos.getCombinedStatusForRef).not.toHaveBeenCalled();
   });
 });

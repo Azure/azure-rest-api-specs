@@ -1,0 +1,181 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "versioning"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 001006-version-add-preview-after-stable-trigger
+    tags:
+      suite: "versioning"
+      mode: "trigger"
+    prompt: |
+      Add a new preview version `2025-05-04-preview` to my service widget resource manager. Carry over all the features from the latest stable version
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/001006-version-add-preview-after-stable/employee.tsp
+          dest: employee.tsp
+        - src: ../fixtures/001006-version-add-preview-after-stable/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/001006-version-add-preview-after-stable/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/001006-version-add-preview-after-stable/tspconfig.yaml
+          dest: tspconfig.yaml
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2021-10-01/Employees_CreateOrUpdate_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_CreateOrUpdate_MaximumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2021-10-01/Employees_Delete_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_Delete_MaximumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2021-10-01/Employees_Get_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_Get_MaximumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2021-10-01/Employees_ListByResourceGroup_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_ListByResourceGroup_MaximumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2021-10-01/Employees_ListBySubscription_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_ListBySubscription_MaximumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2021-10-01/Employees_Update_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_Update_MaximumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2021-10-01/Operations_List_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Operations_List_MaximumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2021-10-01/Operations_List_MinimumSet_Gen.json
+          dest: examples/2021-10-01/Operations_List_MinimumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2024-10-01/Employees_CreateOrUpdate_MaximumSet_Gen.json
+          dest: examples/2024-10-01/Employees_CreateOrUpdate_MaximumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2024-10-01/Employees_Delete_MaximumSet_Gen.json
+          dest: examples/2024-10-01/Employees_Delete_MaximumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2024-10-01/Employees_Get_MaximumSet_Gen.json
+          dest: examples/2024-10-01/Employees_Get_MaximumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2024-10-01/Employees_ListByResourceGroup_MaximumSet_Gen.json
+          dest: examples/2024-10-01/Employees_ListByResourceGroup_MaximumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2024-10-01/Employees_ListByResourceGroup_MinimumSet_Gen.json
+          dest: examples/2024-10-01/Employees_ListByResourceGroup_MinimumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2024-10-01/Employees_ListBySubscription_MaximumSet_Gen.json
+          dest: examples/2024-10-01/Employees_ListBySubscription_MaximumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2024-10-01/Employees_ListBySubscription_MinimumSet_Gen.json
+          dest: examples/2024-10-01/Employees_ListBySubscription_MinimumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2024-10-01/Employees_Update_MaximumSet_Gen.json
+          dest: examples/2024-10-01/Employees_Update_MaximumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2024-10-01/Operations_List_MaximumSet_Gen.json
+          dest: examples/2024-10-01/Operations_List_MaximumSet_Gen.json
+        - src: ../fixtures/001006-version-add-preview-after-stable/examples/2024-10-01/Operations_List_MinimumSet_Gen.json
+          dest: examples/2024-10-01/Operations_List_MinimumSet_Gen.json
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+            - "web_fetch"
+            - "azure-sdk-mcp-azsdk_run_typespec_validation"
+          disallowed:
+            - "azure-sdk-mcp-azsdk_typespec_generate_authoring_plan"
+            - azure-sdk-mcp-azsdk_typespec_retrieve_knowledge
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 001006-version-add-preview-after-stable-forced
+    tags:
+      suite: "versioning"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author Add a new preview version `2025-05-04-preview` to my service widget resource manager. Carry over all the features from the latest stable version
+    environment: *shared_environment
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+            - "web_fetch"
+            - "azure-sdk-mcp-azsdk_run_typespec_validation"
+          disallowed:
+            - "azure-sdk-mcp-azsdk_typespec_generate_authoring_plan"
+            - azure-sdk-mcp-azsdk_typespec_retrieve_knowledge
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - &file_exists
+        type: "file-exists"
+        config:
+          path: "examples/2025-05-04-preview/Employees_Get_MaximumSet_Gen.json"
+      - &file_exists_example
+        type: "file-exists"
+        name: "file-exists-example"
+        config:
+          path: "examples/2024-10-01/Employees_Get_MaximumSet_Gen.json"
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: "2025-05-04-preview"
+          path: "main.tsp"
+      - &file_matches_api_version
+        type: "file-matches"
+        name: "file-matches-api-version"
+        config:
+          pattern: "2024-10-01"
+          path: "main.tsp"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 001006-version-add-preview-after-stable-no-skill
+    tags:
+      suite: "versioning"
+      mode: "no-skill"
+    prompt: "Add a new preview version `2025-05-04-preview` to my service widget resource manager. Carry over all the features from the latest stable version"
+    environment: *shared_environment
+    rubric:
+      - API version 2025-05-04-preview is added as a preview version after the latest stable version.
+      - The new preview carries forward all features and examples from the latest stable version without removing existing versions.
+      - Changes are limited to adding and correctly configuring the requested API version.
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - *file_exists
+      - *file_exists_example
+      - *file_matches
+      - *file_matches_api_version
+      - type: "prompt"
+        config:
+          prompt: "Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent."
+          model: "gpt-5.6-sol"
+          scoring: "scale_1_10"
+          threshold: 0.88
+    constraints:
+      max_turns: 6
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.125
+    prompt: 0.125
+    file-exists: 0.25
+    run-command: 0.125
+    skill-invocation: 0.125
+    file-matches: 0.25
+  threshold: 0.97
