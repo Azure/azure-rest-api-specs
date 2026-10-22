@@ -7110,6 +7110,15 @@
     "BalancedVectorQueryTopicGraph": {
       "type": "object",
       "description": "Blends pure vector similarity with diversity-aware retrieval. Recommended default to balance diversity with relevance.",
+      "properties": {
+        "minDiversityPoolSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000 for classic services and 500 for serverless services.",
+          "minimum": 250,
+          "maximum": 10000
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/VectorQueryTopicGraph"
@@ -8463,6 +8472,13 @@
           "description": "The diversity factor used for topic graph diverse retrieval. If omitted, the default configured on the topic graph profile is used.",
           "minimum": 0,
           "maximum": 1
+        },
+        "minDiversityPoolSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000 for classic services and 500 for serverless services.",
+          "minimum": 250,
+          "maximum": 10000
         }
       },
       "allOf": [
@@ -26413,13 +26429,6 @@
         "kind": {
           "$ref": "#/definitions/VectorSearchTopicGraphKind",
           "description": "The kind of topic graph vector search to use."
-        },
-        "minDiversityPoolSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000 for classic services and 500 for serverless services.",
-          "minimum": 250,
-          "maximum": 10000
         }
       },
       "discriminator": "kind",
@@ -26719,14 +26728,14 @@
         "defaultDiversityFactor": {
           "type": "number",
           "format": "float",
-          "description": "Default diversity factor for topic graph vector searches. Default is 0.2.",
+          "description": "Default diversity factor for topic graph vector searches. This property can only be used when `defaultKind` is `diverse`. Default is 0.2.",
           "minimum": 0,
           "maximum": 1
         },
         "defaultMinDiversityPoolSize": {
           "type": "integer",
           "format": "int32",
-          "description": "Default minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000 for classic services and 500 for serverless services.",
+          "description": "Default minimum number of vector candidates to retrieve before topic graph sampling. This property can only be used when `defaultKind` is `diverse` or `balanced`. The default is 1,000 for classic services and 500 for serverless services.",
           "minimum": 250,
           "maximum": 10000
         }

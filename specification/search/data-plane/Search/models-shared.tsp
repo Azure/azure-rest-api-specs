@@ -54,11 +54,6 @@ union ListingSearchType {
 model VectorQueryTopicGraph {
   /** The kind of topic graph vector search to use. */
   kind: VectorSearchTopicGraphKind;
-
-  /** The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000 for classic services and 500 for serverless services. */
-  @minValue(250)
-  @maxValue(10000)
-  minDiversityPoolSize?: int32;
 }
 
 /** Uses normal vector search without topic graph diverse retrieval. */
@@ -78,6 +73,11 @@ model DiverseVectorQueryTopicGraph extends VectorQueryTopicGraph {
   @minValue(0)
   @maxValue(1)
   diversityFactor?: float32;
+
+  /** The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000 for classic services and 500 for serverless services. */
+  @minValue(250)
+  @maxValue(10000)
+  minDiversityPoolSize?: int32;
 }
 
 /** Blends pure vector similarity with diversity-aware retrieval. Recommended default to balance diversity with relevance. */
@@ -85,6 +85,11 @@ model DiverseVectorQueryTopicGraph extends VectorQueryTopicGraph {
 model BalancedVectorQueryTopicGraph extends VectorQueryTopicGraph {
   /** The discriminator value. */
   kind: VectorSearchTopicGraphKind.Balanced;
+
+  /** The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000 for classic services and 500 for serverless services. */
+  @minValue(250)
+  @maxValue(10000)
+  minDiversityPoolSize?: int32;
 }
 
 /** The kind of topic graph vector search to use. */

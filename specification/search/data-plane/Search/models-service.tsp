@@ -4572,12 +4572,12 @@ model VectorSearchTopicGraphProfile {
   /** Default kind of topic graph vector search to use. */
   defaultKind: VectorSearchTopicGraphKind;
 
-  /** Default diversity factor for topic graph vector searches. Default is 0.2. */
+  /** Default diversity factor for topic graph vector searches. This property can only be used when `defaultKind` is `diverse`. Default is 0.2. */
   @minValue(0)
   @maxValue(1)
   defaultDiversityFactor?: float32;
 
-  /** Default minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000 for classic services and 500 for serverless services. */
+  /** Default minimum number of vector candidates to retrieve before topic graph sampling. This property can only be used when `defaultKind` is `diverse` or `balanced`. The default is 1,000 for classic services and 500 for serverless services. */
   @minValue(250)
   @maxValue(10000)
   defaultMinDiversityPoolSize?: int32;
