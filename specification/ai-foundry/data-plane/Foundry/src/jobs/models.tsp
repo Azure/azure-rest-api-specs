@@ -431,6 +431,32 @@ model Job {
   systemData?: SystemData;
 }
 
+// Keep the polymorphic JobProperties envelope so adding this route cannot alter
+// the existing /jobs discriminator map; the PipelineJobs interface enforces the kind.
+@doc("Pipeline Job resource exposed through the dedicated Pipeline Jobs ingress.")
+@Rest.resource("pipeline_jobs")
+model PipelineJobResource {
+  @doc("The name of the Pipeline Job. This is case-sensitive.")
+  @key("name")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("The resource ID.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  @doc("The resource type.")
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  @doc("Properties of the Pipeline Job. The dedicated Pipeline Jobs operations require jobType to be Pipeline.")
+  properties: JobProperties;
+
+  @doc("Metadata pertaining to creation and last modification of the resource.")
+  @visibility(Lifecycle.Read)
+  systemData?: SystemData;
+}
+
 @doc("Response returned when a job delete operation is accepted asynchronously.")
 model JobDeleteAcceptedResponse {
   @statusCode statusCode: 202;

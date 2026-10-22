@@ -29,6 +29,61 @@ alias JobsFilterQueryParams = {
 
 alias JobOperations = FoundryAzureOperations<{}>;
 
+alias PipelineJobsFilterQueryParams = {
+  @doc("Filter Pipeline Jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').")
+  @query
+  tag?: string;
+
+  @doc("Specifies which view type to apply when listing Pipeline Jobs.")
+  @query
+  listViewType?: ListViewType;
+
+  @doc("Comma-separated user property names and optionally values. Example: prop1,prop2=value2.")
+  @query
+  properties?: string;
+};
+
+// APIM owns the public-to-MFE path rewrite. In particular, list must remain
+// Pipeline-only when it reaches the mixed /jobs backend collection.
+@tag("PipelineJobs")
+@doc("Manage Pipeline Jobs through the dedicated public ingress. The gateway forwards these requests to the existing MFE Jobs implementation and must preserve Pipeline-only list semantics when translating to the mixed backend collection. This contract does not add a new MFE Pipeline handler.")
+interface PipelineJobs {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
+  @doc("List Pipeline Jobs. Command Jobs are not returned by this dedicated collection.")
+  @Rest.listsResource(PipelineJobResource)
+  list is Azure.Core.Foundations.ResourceList<
+    PipelineJobResource,
+    PipelineJobsFilterQueryParams & JobsPreviewHeader,
+    Azure.Core.Page<PipelineJobResource>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
+  @doc("Get a Pipeline Job by name.")
+  @get
+  get is Azure.Core.Foundations.ResourceOperation<
+    PipelineJobResource,
+    {
+      ...JobsPreviewHeader;
+    },
+    Azure.Core.Foundations.ResourceOkResponse<PipelineJobResource>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "PUT create-or-update pattern required by the Pipeline Job API wire format"
+  @doc("Create and execute a Pipeline Job. For update, the tags in the submitted definition replace the existing tags.")
+  @put
+  createOrUpdate is Azure.Core.Foundations.ResourceOperation<
+    PipelineJobResource,
+    {
+      ...JobsPreviewHeader;
+
+      @doc("The Pipeline Job to create or update.")
+      @bodyRoot
+      job: PipelineJobResource;
+    },
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<PipelineJobResource>
+  >;
+}
+
 @tag("Jobs")
 interface Jobs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
