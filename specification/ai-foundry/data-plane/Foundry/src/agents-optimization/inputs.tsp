@@ -312,13 +312,13 @@ model AgentOptimizationEvaluationConfiguration {
 union AgentOptimizationConfigurationType {
   string,
 
-  @doc("Comparative agent optimization.")
+  @doc("Comparative agent optimization that can generate multiple candidates within configured search limits.")
   agent_optimization: "agent_optimization",
 
-  @doc("One-shot prompt optimization.")
+  @doc("One-shot prompt optimization that generates a single candidate.")
   prompt_optimization: "prompt_optimization",
 
-  @doc("Creates or updates versioned skills from trace evidence, with optional reporting-only before/after evaluation.")
+  @doc("Generates a single candidate containing zero or more skill outcomes from trace evidence, with optional reporting-only before/after evaluation.")
   skill_optimization: "skill_optimization",
 }
 
@@ -514,7 +514,7 @@ model SkillOptimizationEvaluationConfiguration {
   evaluator_generation_configuration?: SkillOptimizationEvaluatorGenerationConfiguration;
 }
 
-/** Configuration for generating versioned skill packages from trace evidence. */
+/** Configuration for generating a single skill candidate from trace evidence. The candidate can contain zero or more skill outcomes; no new learnings can produce an empty skill_results array without publishing versions. */
 model SkillOptimizationConfiguration
   extends AgentOptimizationConfigurationBase {
   @doc("Skill optimization discriminator.")
