@@ -770,7 +770,9 @@ model VoiceAgentWebSocketUpgradeResponse {
 alias VoiceAgentLiveClientEvent = OpenAI.LiveClientEvent;
 
 /**
- * Native Live events with Foundry conversation correlation; no additional event types.
+ * Native Live events with Foundry conversation correlation and delegation ownership; no additional event types.
+ * For foundry_managed_agent sessions, session delegation reports the pinned Foundry target and delegation
+ * targets report foundry_managed_agent; GPT Live itself runs native client delegation.
  * response.event correlates backend output by delegation_id, preserving IDs, sequence numbers and tags.
  * Lifecycle snapshots omit input and clear instructions, tools and output.
  * Correlate append acknowledgments via client_event_id to record accepted results, not speech or playback.
@@ -789,4 +791,46 @@ alias VoiceAgentLiveServerEvent = OpenAI.LiveServerEvent;
     @doc("Stored conversation ID when effective store is true. Use protocols/voice/live/conversations; this ID differs from session.id.")
     conversation_id?: string,
   }
+);
+
+@doc("Live session resource reported to Foundry clients. GPT Live runs native client delegation for foundry_managed_agent sessions; Foundry reports the effective owner.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveSessionResource {
+  ...OmitProperties<OpenAI.LiveSessionResourceParam, "delegation">;
+
+  @doc("Delegation owner. foundry_managed_agent sessions report the pinned target, including the resolved agent_version.")
+  delegation?: VoiceAgentLiveDelegation | null;
+}
+
+@doc("Live delegation trigger metadata reported to Foundry clients. This object contains metadata, not the task text.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveDelegationItem {
+  ...OmitProperties<OpenAI.LiveDelegationItem, "target">;
+
+  @doc("Where the work is handled. foundry_managed_agent sessions report foundry_managed_agent; GPT Live itself uses client.")
+  target: VoiceAgentLiveDelegationTarget;
+}
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Report the effective Foundry delegation owner without changing native session metadata."
+@@changePropertyType(
+  OpenAI.LiveServerEventLiveSessionStarted.session,
+  VoiceAgentLiveSessionResource
+);
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Report the effective Foundry delegation owner without changing native session metadata."
+@@changePropertyType(
+  OpenAI.LiveServerEventLiveSessionUpdated.session,
+  VoiceAgentLiveSessionResource
+);
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Report the effective Foundry delegation owner without changing native session metadata."
+@@changePropertyType(
+  OpenAI.LiveServerEventLiveSessionClosed.session,
+  VoiceAgentLiveSessionResource
+);
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Report the effective Foundry delegation owner without changing native trigger metadata."
+@@changePropertyType(
+  OpenAI.LiveServerEventLiveDelegationCreated.delegation,
+  VoiceAgentLiveDelegationItem
 );
