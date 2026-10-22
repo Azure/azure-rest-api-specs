@@ -182,6 +182,44 @@ input-file:
   - preview/2026-11-01-preview/virtualNetworkRules.json
   - preview/2026-11-01-preview/workloadClassifiers.json
   - preview/2026-11-01-preview/workloadGroups.json
+
+suppressions:
+  - code: AllTrackedResourcesMustHaveDelete
+    from: restorableDroppedManagedInstancesByLocation.json
+    where: $.definitions.RestorableDroppedManagedInstance
+  - code: TrackedResourcePatchOperation
+    from: restorableDroppedManagedInstancesByLocation.json
+    where: $.definitions.RestorableDroppedManagedInstance
+  - code: TrackedResourcesMustHavePut
+    from: restorableDroppedManagedInstancesByLocation.json
+    where: $.definitions.RestorableDroppedManagedInstance
+  - code: PathForTrackedResourceTypes
+    from: restorableDroppedManagedInstancesByLocation.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}"]
+  - code: ResourceNameRestriction
+    from: restorableDroppedManagedInstancesByLocation.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances"]
+  - code: ResourceNameRestriction
+    from: restorableDroppedManagedInstancesByLocation.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}"]
+  - code: PathForTrackedResourceTypes
+    from: restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}"]
+  - code: ResourceNameRestriction
+    from: restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases"]
+  - code: ResourceNameRestriction
+    from: restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}"]
+  - code: ResourceNameRestriction
+    from: managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies"]
+  - code: ResourceNameRestriction
+    from: managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"]
+  - code: DescriptionMustNotBeNodeName
+    from: managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"].get.parameters..description
 ```
 
 ### Tag: package-preview-2026-08-01-preview
@@ -4027,42 +4065,6 @@ directive:
 
 ``` yaml
 suppressions:
-  - code: AllTrackedResourcesMustHaveDelete
-    from: preview/2026-11-01-preview/restorableDroppedManagedInstancesByLocation.json
-    where: $.definitions.RestorableDroppedManagedInstance
-  - code: TrackedResourcePatchOperation
-    from: preview/2026-11-01-preview/restorableDroppedManagedInstancesByLocation.json
-    where: $.definitions.RestorableDroppedManagedInstance
-  - code: TrackedResourcesMustHavePut
-    from: preview/2026-11-01-preview/restorableDroppedManagedInstancesByLocation.json
-    where: $.definitions.RestorableDroppedManagedInstance
-  - code: PathForTrackedResourceTypes
-    from: preview/2026-11-01-preview/restorableDroppedManagedInstancesByLocation.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}"]
-  - code: ResourceNameRestriction
-    from: preview/2026-11-01-preview/restorableDroppedManagedInstancesByLocation.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances"]
-  - code: ResourceNameRestriction
-    from: preview/2026-11-01-preview/restorableDroppedManagedInstancesByLocation.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}"]
-  - code: PathForTrackedResourceTypes
-    from: preview/2026-11-01-preview/restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}"]
-  - code: ResourceNameRestriction
-    from: preview/2026-11-01-preview/restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases"]
-  - code: ResourceNameRestriction
-    from: preview/2026-11-01-preview/restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}"]
-  - code: ResourceNameRestriction
-    from: preview/2026-11-01-preview/managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies"]
-  - code: ResourceNameRestriction
-    from: preview/2026-11-01-preview/managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"]
-  - code: DescriptionMustNotBeNodeName
-    from: preview/2026-11-01-preview/managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"].get.parameters
   - code: MissingSegmentsInNestedResourceListOperation
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies"]
