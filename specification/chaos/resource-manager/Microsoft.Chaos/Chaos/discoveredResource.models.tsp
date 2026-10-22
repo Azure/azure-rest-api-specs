@@ -69,14 +69,14 @@ model DiscoveredResourceProperties {
   scope: string;
 
   /**
-   * The Azure region of the discovered resource.
+   * The Azure region the discovered resource is deployed to, in lowercase with no spaces. Absent when no single deployment region was captured, including global and multi-region resources.
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   location?: azureLocation;
 
   /**
-   * The availability zones of the discovered resource.
+   * The availability zones the discovered resource occupies. Values are logical zone identifiers, such as `["1", "2"]` for a zone-pinned resource, or the single value `zone-redundant` when redundancy is expressed as a flag or SKU rather than a zone list. Absent, and never empty, when no zone information was captured; a non-zone-aware resource and an unzoned zone-aware resource are not distinguished.
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
