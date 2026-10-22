@@ -11,6 +11,11 @@ pnpm tsv --changed
 pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
 ```
 
+TSV uses `pathe` for path operations and normalizes separators to `/` on every
+platform. Use ordinary relative paths or absolute drive-qualified Windows paths.
+Native Windows UNC, drive-relative, and case-insensitive path-comparison semantics
+are not preserved; backslashes are treated as separators even on POSIX.
+
 Use `--help` (or `-h`) to see all command-line options without running validation.
 For single-project validation, pass the folder and optional JSON context for rules
 and suppressions as positional arguments:
@@ -77,9 +82,9 @@ color output is enabled. `--verbose` also includes Git status.
 TSV still captures `tsp compile --list-files` internally to detect stale generated
 Swagger files. Hiding that inventory in normal output does not disable the check.
 
-A local run without comparison commits skips API-version comparison without a
-warning; `--verbose` shows the reason. An explicitly supplied but incomplete or
-invalid comparison context still produces a warning.
+PR policies, including SDK API-version pin checks, run separately through
+[Spec Change Policies](../spec-change-policies/README.md). TSV validates project
+correctness; it does not enforce policies based on versions added by a PR.
 
 In GitHub Actions, both TSV workflows enable `--verbose` when debug logging is
 enabled. To diagnose a run without changing the normal default, choose
@@ -104,7 +109,7 @@ suppression file trigger all-project validation. ARM lease metadata and
 the fallback. The PR workflow enables the fallback only for PRs targeting `main`
 or `RPSaaSMaster`; other target branches pass `--ignore-core-files`.
 
-Changed-project validation passes the base/head commits to each project's rules.
+Changed-project validation retains the base/head commits in the suppression context.
 `TypeSpecValidationAll` suppressions apply only to `--all` or a core-file fallback,
 not scoped changed-project runs. An empty changed-project selection succeeds;
 an empty all-project selection fails.
@@ -121,3 +126,9 @@ are retained. In a disposable checkout, `--git-clean` restores tracked files and
 removes untracked files and directories across the entire repository after each
 project. It requires an initially clean checkout; ignored files are retained.
 Do not use it while other work is in progress. `--dry-run` disables cleanup.
+
+Cleanup is skipped when the checkout is already clean. Otherwise, tracked files
+are restored from the index and untracked files are cleaned repository-wide.
+Git errors or changes remaining after cleanup stop validation rather than letting
+the next project run in a dirty checkout. Nested repositories are not forcibly deleted.
+Use `--verbose` to include per-command cleanup timings.

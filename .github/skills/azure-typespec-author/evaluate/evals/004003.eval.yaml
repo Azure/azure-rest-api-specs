@@ -1,0 +1,202 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "decorators"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 004003-delete-and-restore-operationId-decorator-trigger
+    tags:
+      suite: "decorators"
+      mode: "trigger"
+    prompt: |
+      Remove @operationId and its associated #suppress for no-openapi from all operations. Then restore both @operationId and its associated #suppress for no-openapi for operationIds that do not contain underscores and do not begin with a lowercase letter.
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/BastionHost.tsp
+          dest: BastionHost.tsp
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/BgpConnection.tsp
+          dest: BgpConnection.tsp
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/ExpressRouteGateway.tsp
+          dest: ExpressRouteGateway.tsp
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/ExpressRoutePort.tsp
+          dest: ExpressRoutePort.tsp
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/ExpressRouteProviderPort.tsp
+          dest: ExpressRouteProviderPort.tsp
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/NetworkInterface.tsp
+          dest: NetworkInterface.tsp
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/P2SVpnGateway.tsp
+          dest: P2SVpnGateway.tsp
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/Route.tsp
+          dest: Route.tsp
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/RouteTable.tsp
+          dest: RouteTable.tsp
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/VirtualHub.tsp
+          dest: VirtualHub.tsp
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/VpnGateway.tsp
+          dest: VpnGateway.tsp
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/VpnServerConfiguration.tsp
+          dest: VpnServerConfiguration.tsp
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/VpnServerConfigurationPolicyGroup.tsp
+          dest: VpnServerConfigurationPolicyGroup.tsp
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/VpnSiteLinkConnection.tsp
+          dest: VpnSiteLinkConnection.tsp
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/models.tsp
+          dest: models.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/004003-delete-and-restore-operationId-decorator/tspconfig.yaml
+          dest: tspconfig.yaml
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 004003-delete-and-restore-operationId-decorator-forced
+    tags:
+      suite: "decorators"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author Remove @operationId and its associated #suppress for no-openapi from all operations. Then restore both @operationId and its associated #suppress for no-openapi for operationIds that do not contain underscores and do not begin with a lowercase letter.
+    environment: *shared_environment
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - &file_not_matches
+        type: "file-not-matches"
+        config:
+          pattern: '@operationId\('
+          path: "BgpConnection.tsp"
+      - &file_not_matches_network_interface_operation_id
+        type: "file-not-matches"
+        name: "file-not-matches-network-interface-operation-id"
+        config:
+          pattern: '@operationId\('
+          path: "NetworkInterface.tsp"
+      - &file_not_matches_express_route_gateway_operation_id
+        type: "file-not-matches"
+        name: "file-not-matches-express-route-gateway-operation-id"
+        config:
+          pattern: '@operationId\('
+          path: "ExpressRouteGateway.tsp"
+      - &file_not_matches_express_route_port_operation_id
+        type: "file-not-matches"
+        name: "file-not-matches-express-route-port-operation-id"
+        config:
+          pattern: '@operationId\('
+          path: "ExpressRoutePort.tsp"
+      - &file_not_matches_network_interface_operation_id_check
+        type: "file-not-matches"
+        name: "file-not-matches-network-interface-operation-id-check"
+        config:
+          pattern: '@operationId\('
+          path: "NetworkInterface.tsp"
+      - &file_not_matches_p2s_vpn_gateway_operation_id
+        type: "file-not-matches"
+        name: "file-not-matches-p2s-vpn-gateway-operation-id"
+        config:
+          pattern: '@operationId\('
+          path: "P2SVpnGateway.tsp"
+      - &file_not_matches_policy_group_operation_id
+        type: "file-not-matches"
+        name: "file-not-matches-policy-group-operation-id"
+        config:
+          pattern: '@operationId\('
+          path: "VpnServerConfigurationPolicyGroup.tsp"
+      - &file_not_matches_site_link_operation_id
+        type: "file-not-matches"
+        name: "file-not-matches-site-link-operation-id"
+        config:
+          pattern: '@operationId\('
+          path: "VpnSiteLinkConnection.tsp"
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: '@operationId\("PutBastionShareableLink"\)'
+          path: "BastionHost.tsp"
+      - &file_matches_active_sessions_operation_id
+        type: "file-matches"
+        name: "file-matches-active-sessions-operation-id"
+        config:
+          pattern: '@operationId\("GetActiveSessions"\)'
+          path: "BastionHost.tsp"
+      - &file_matches_provider_port_operation_id
+        type: "file-matches"
+        name: "file-matches-provider-port-operation-id"
+        config:
+          pattern: '@operationId\("ExpressRouteProviderPort"\)'
+          path: "ExpressRouteProviderPort.tsp"
+      - &file_matches_suppress
+        type: "file-matches"
+        name: "file-matches-suppress"
+        config:
+          pattern: "#suppress.*no-openapi|#suppress.*operationId"
+          path: "BastionHost.tsp"
+      - &file_not_matches_location_list_operation_id
+        type: "file-not-matches"
+        name: "file-not-matches-location-list-operation-id"
+        config:
+          pattern: '@operationId\("ExpressRouteProviderPortsLocation_List"\)'
+          path: "ExpressRouteProviderPort.tsp"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 004003-delete-and-restore-operationId-decorator-no-skill
+    tags:
+      suite: "decorators"
+      mode: "no-skill"
+    prompt: "Remove @operationId and its associated #suppress for no-openapi from all operations. Then restore both @operationId and its associated #suppress for no-openapi for operationIds that do not contain underscores and do not begin with a lowercase letter."
+    environment: *shared_environment
+    graders:
+      - *file_not_matches
+      - *file_not_matches_network_interface_operation_id
+      - *file_not_matches_express_route_gateway_operation_id
+      - *file_not_matches_express_route_port_operation_id
+      - *file_not_matches_network_interface_operation_id_check
+      - *file_not_matches_p2s_vpn_gateway_operation_id
+      - *file_not_matches_policy_group_operation_id
+      - *file_not_matches_site_link_operation_id
+      - *file_matches
+      - *file_matches_active_sessions_operation_id
+      - *file_matches_provider_port_operation_id
+      - *file_matches_suppress
+      - *file_not_matches_location_list_operation_id
+    constraints:
+      max_turns: 10
+      max_tokens: 100000
+
+scoring:
+  weights:
+    run-command: 0.1
+    file-not-matches: 0.3
+    skill-invocation: 0.2
+    file-matches: 0.4
+  threshold: 1

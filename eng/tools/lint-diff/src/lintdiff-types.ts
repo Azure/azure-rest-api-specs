@@ -1,5 +1,5 @@
+import type { ExecError } from "@azure-tools/specs-shared/exec";
 import { Readme } from "@azure-tools/specs-shared/readme";
-import { type ExecException } from "node:child_process";
 
 // TODO: Reduce to minimal set of properties
 export type AutorestRunResult = {
@@ -7,7 +7,7 @@ export type AutorestRunResult = {
   readme: Readme;
   tag: string;
 
-  error: ExecException | null;
+  error: ExecError | null;
   stdout: string;
   stderr: string;
 };
