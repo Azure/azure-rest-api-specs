@@ -22,6 +22,7 @@ export type AzsdkRunner = (args: string[]) => CommandResult;
 export interface ReleasePlanCommandContext {
   prUrl?: string;
   tspProjectPath: string;
+  specCommitSha: string;
   apiReleaseType: ApiReleaseType;
   sdkReleaseType: "beta" | "stable";
   targetMonth: string;
@@ -98,6 +99,7 @@ export interface EnsureReleasePlanResult {
         prUrl: string;
         tspProjectPath: string;
         apiVersion: string;
+        specCommitSha: string;
         apiReleaseType: ApiReleaseType;
         sdkReleaseType: "beta" | "stable";
         targetReleaseMonth: string;
@@ -113,7 +115,6 @@ export interface CommitProjectInfoResult {
 
 export interface CliArguments {
   commitSha?: string;
-  prNumber?: number;
   releasePlanId?: string;
   owner: string;
   repo: string;

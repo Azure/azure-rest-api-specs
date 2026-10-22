@@ -1,0 +1,204 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "versioning"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 001007-version-add-stable-after-preview-trigger
+    tags:
+      suite: "versioning"
+      mode: "trigger"
+    prompt: |
+      I want to add a new stable version `2025-01-01`. Exclude `workLocation` property and `WorkLocation` model. Carry other features.
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/001007-version-add-stable-after-preview/employee.tsp
+          dest: employee.tsp
+        - src: ../fixtures/001007-version-add-stable-after-preview/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/001007-version-add-stable-after-preview/readme.md
+          dest: readme.md
+        - src: ../fixtures/001007-version-add-stable-after-preview/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/001007-version-add-stable-after-preview/tspconfig.yaml
+          dest: tspconfig.yaml
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2021-10-01/Employees_CreateOrUpdate_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_CreateOrUpdate_MaximumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2021-10-01/Employees_Delete_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_Delete_MaximumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2021-10-01/Employees_Get_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_Get_MaximumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2021-10-01/Employees_ListByResourceGroup_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_ListByResourceGroup_MaximumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2021-10-01/Employees_ListByResourceGroup_MinimumSet_Gen.json
+          dest: examples/2021-10-01/Employees_ListByResourceGroup_MinimumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2021-10-01/Employees_ListBySubscription_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_ListBySubscription_MaximumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2021-10-01/Employees_ListBySubscription_MinimumSet_Gen.json
+          dest: examples/2021-10-01/Employees_ListBySubscription_MinimumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2021-10-01/Employees_Update_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_Update_MaximumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2021-10-01/Operations_List_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Operations_List_MaximumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2021-10-01/Operations_List_MinimumSet_Gen.json
+          dest: examples/2021-10-01/Operations_List_MinimumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2024-10-01-preview/Employees_CreateOrUpdate_MaximumSet_Gen.json
+          dest: examples/2024-10-01-preview/Employees_CreateOrUpdate_MaximumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2024-10-01-preview/Employees_Delete_MaximumSet_Gen.json
+          dest: examples/2024-10-01-preview/Employees_Delete_MaximumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2024-10-01-preview/Employees_Get_MaximumSet_Gen.json
+          dest: examples/2024-10-01-preview/Employees_Get_MaximumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2024-10-01-preview/Employees_ListByResourceGroup_MaximumSet_Gen.json
+          dest: examples/2024-10-01-preview/Employees_ListByResourceGroup_MaximumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2024-10-01-preview/Employees_ListByResourceGroup_MinimumSet_Gen.json
+          dest: examples/2024-10-01-preview/Employees_ListByResourceGroup_MinimumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2024-10-01-preview/Employees_ListBySubscription_MaximumSet_Gen.json
+          dest: examples/2024-10-01-preview/Employees_ListBySubscription_MaximumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2024-10-01-preview/Employees_ListBySubscription_MinimumSet_Gen.json
+          dest: examples/2024-10-01-preview/Employees_ListBySubscription_MinimumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2024-10-01-preview/Employees_Update_MaximumSet_Gen.json
+          dest: examples/2024-10-01-preview/Employees_Update_MaximumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2024-10-01-preview/Operations_List_MaximumSet_Gen.json
+          dest: examples/2024-10-01-preview/Operations_List_MaximumSet_Gen.json
+        - src: ../fixtures/001007-version-add-stable-after-preview/examples/2024-10-01-preview/Operations_List_MinimumSet_Gen.json
+          dest: examples/2024-10-01-preview/Operations_List_MinimumSet_Gen.json
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+            - "web_fetch"
+            - "azure-sdk-mcp-azsdk_run_typespec_validation"
+          disallowed:
+            - "azure-sdk-mcp-azsdk_typespec_generate_authoring_plan"
+            - "azure-sdk-mcp-azsdk_typespec_retrieve_knowledge"
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 001007-version-add-stable-after-preview-forced
+    tags:
+      suite: "versioning"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author I want to add a new stable version `2025-01-01`. Exclude `workLocation` property and `WorkLocation` model. Carry other features.
+    environment: *shared_environment
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+            - "web_fetch"
+            - "azure-sdk-mcp-azsdk_run_typespec_validation"
+          disallowed:
+            - "azure-sdk-mcp-azsdk_typespec_generate_authoring_plan"
+            - "azure-sdk-mcp-azsdk_typespec_retrieve_knowledge"
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - &file_exists
+        type: "file-exists"
+        config:
+          path: "examples/2025-01-01/Employees_Get_MaximumSet_Gen.json"
+      - &file_not_exists
+        type: "file-not-exists"
+        config:
+          path: "examples/2024-10-01-preview/Employees_Get_MaximumSet_Gen.json"
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: "2025-01-01"
+          path: "main.tsp"
+      - &file_not_matches
+        type: "file-not-matches"
+        config:
+          pattern: "2024-10-01-preview"
+          path: "main.tsp"
+      - &file_not_matches_removed_property
+        type: "file-not-matches"
+        name: "file-not-matches-removed-property"
+        config:
+          pattern: 'workLocation\?: WorkLocation;'
+          path: "employee.tsp"
+      - &file_matches_renamed_property
+        type: "file-matches"
+        name: "file-matches-renamed-property"
+        config:
+          pattern: '@removed\((?:Microsoft\.Widget\.)?Versions\.v2025_01_01\)\s*@renamedFrom\((?:Microsoft\.Widget\.)?Versions\.v2025_01_01, "age"\)\s*oldAge\?: int32;'
+          path: "employee.tsp"
+      - &file_matches_added_property
+        type: "file-matches"
+        name: "file-matches-added-property"
+        config:
+          pattern: '@added\((?:Microsoft\.Widget\.)?Versions\.v2025_01_01\)\s*age\?: int32 = 21;'
+          path: "employee.tsp"
+      - &file_not_matches_old_version
+        type: "file-not-matches"
+        name: "file-not-matches-old-version"
+        config:
+          pattern: "v2024_10_01_preview"
+          path: "employee.tsp"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 001007-version-add-stable-after-preview-no-skill
+    tags:
+      suite: "versioning"
+      mode: "no-skill"
+    prompt: "I want to add a new stable version `2025-01-01`. Exclude `workLocation` property and `WorkLocation` model. Carry other features."
+    environment: *shared_environment
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - *file_exists
+      - *file_not_exists
+      - *file_matches
+      - *file_not_matches
+      - *file_not_matches_removed_property
+      - *file_matches_renamed_property
+      - *file_matches_added_property
+      - *file_not_matches_old_version
+    constraints:
+      max_turns: 6
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.1
+    file-not-matches: 0.3
+    skill-invocation: 0.1
+    file-exists: 0.1
+    file-matches: 0.2
+    run-command: 0.1
+    file-not-exists: 0.1
+  threshold: 1

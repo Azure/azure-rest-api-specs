@@ -1,0 +1,135 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "versioning"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 001002-version-default-value-trigger
+    tags:
+      suite: "versioning"
+      mode: "trigger"
+    prompt: |
+      add a default value `21` for property age in model EmployeeProperties only for the new api version 2025-11-01
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/001002-version-default-value/employee.tsp
+          dest: employee.tsp
+        - src: ../fixtures/001002-version-default-value/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/001002-version-default-value/readme.md
+          dest: readme.md
+        - src: ../fixtures/001002-version-default-value/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/001002-version-default-value/tspconfig.yaml
+          dest: tspconfig.yaml
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 001002-version-default-value-forced
+    tags:
+      suite: "versioning"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author add a default value `21` for property age in model EmployeeProperties only for the new api version 2025-11-01
+    environment: *shared_environment
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: '@removed\((?:Microsoft\.Widget\.)?Versions\.v2025_11_01\)'
+          path: "employee.tsp"
+      - &file_matches_renamed_property
+        type: "file-matches"
+        name: "file-matches-renamed-property"
+        config:
+          pattern: '@renamedFrom\((?:Microsoft\.Widget\.)?Versions\.v2025_11_01, "age"\)'
+          path: "employee.tsp"
+      - &file_matches_added_property
+        type: "file-matches"
+        name: "file-matches-added-property"
+        config:
+          pattern: '@added\((?:Microsoft\.Widget\.)?Versions\.v2025_11_01\)'
+          path: "employee.tsp"
+      - &file_matches_property_default
+        type: "file-matches"
+        name: "file-matches-property-default"
+        config:
+          pattern: 'age\?: int32 = 21;'
+          path: "employee.tsp"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 001002-version-default-value-no-skill
+    tags:
+      suite: "versioning"
+      mode: "no-skill"
+    prompt: "add a default value `21` for property age in model EmployeeProperties only for the new api version 2025-11-01"
+    environment: *shared_environment
+    rubric:
+      - EmployeeProperties.age has a default value of 21 only in API version 2025-11-01.
+      - The previous age property shape is preserved for earlier versions through valid TypeSpec versioning decorators.
+      - Changes are limited to the requested versioned default-value behavior.
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - *file_matches
+      - *file_matches_renamed_property
+      - *file_matches_added_property
+      - *file_matches_property_default
+      - type: "prompt"
+        config:
+          prompt: "Verify change scope and quality only: add a default value of 21 for the `age` property in `EmployeeProperties` that only applies to the 2025-11-01 API version. The old age renamed and removed for the new version."
+          model: "gpt-5.6-sol"
+          scoring: "scale_1_10"
+          threshold: 0.88
+    constraints:
+      max_turns: 6
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.125
+    prompt: 0.125
+    run-command: 0.125
+    skill-invocation: 0.125
+    file-matches: 0.5
+  threshold: 0.98

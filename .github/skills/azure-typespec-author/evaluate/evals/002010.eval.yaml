@@ -1,0 +1,111 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "armtemplate"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 002010-arm-action-sync-operation-trigger
+    tags:
+      suite: "armtemplate"
+      mode: "trigger"
+    prompt: |
+      In the Widget project, add a synchronous exportData operation for the Employee resource in API version `2024-10-01-preview`. The operation should take no request body and return an optional exported data string. All required decisions are provided; no separate confirmation is needed. Ensure the definition meets TypeSpec Azure guidelines.
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/002010-arm-action-sync-operation/employee.tsp
+          dest: employee.tsp
+        - src: ../fixtures/002010-arm-action-sync-operation/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/002010-arm-action-sync-operation/readme.md
+          dest: readme.md
+        - src: ../fixtures/002010-arm-action-sync-operation/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/002010-arm-action-sync-operation/tspconfig.yaml
+          dest: tspconfig.yaml
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 002010-arm-action-sync-operation-forced
+    tags:
+      suite: "armtemplate"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author In the Widget project, add a synchronous exportData operation for the Employee resource in API version `2024-10-01-preview`. The operation should take no request body and return an optional exported data string. All required decisions are provided; no separate confirmation is needed. Ensure the definition meets TypeSpec Azure guidelines.
+    environment: *shared_environment
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: 'exportData\s+is\s+ArmResourceActionSync'
+          path: "employee.tsp"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 002010-arm-action-sync-operation-no-skill
+    tags:
+      suite: "armtemplate"
+      mode: "no-skill"
+    prompt: |
+      In the Widget project, add a synchronous exportData operation for the Employee resource in API version `2024-10-01-preview`. The operation should take no request body and return an optional exported data string. All required decisions are provided; no separate confirmation is needed. Ensure the definition meets TypeSpec Azure guidelines.
+    environment: *shared_environment
+    rubric:
+      - Employee has a synchronous resource action named exportData in API version 2024-10-01-preview using ArmResourceActionSync.
+      - The operation has no request body and returns a response model containing optional exported string data.
+      - Changes follow TypeSpec Azure guidelines and contain no unrelated edits.
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - *file_matches
+      - type: "prompt"
+        config:
+          prompt: "Verify the exportData operation is correctly defined: (1) uses ArmResourceActionSync template, (2) has a response model that represents exported data with appropriate properties, (3) operation name is exportData. Do not penalize for specific model naming choices. Verify change scope and quality: no unrelated edits, and the result is semantically consistent with the task intent."
+          model: "gpt-5.6-sol"
+          scoring: "scale_1_10"
+          threshold: 0.88
+    constraints:
+      max_turns: 6
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.15
+    prompt: 0.15
+    run-command: 0.15
+    skill-invocation: 0.15
+    file-matches: 0.4
+  threshold: 0.96

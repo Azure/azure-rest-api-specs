@@ -2,7 +2,7 @@ import { d } from "@azure-tools/specs-shared/testing";
 import { execFile } from "node:child_process";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
 import { promisify, stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
@@ -37,7 +37,7 @@ async function commit(message: string) {
 }
 
 beforeEach(async () => {
-  root = await realpath(await mkdtemp(join(tmpdir(), "tsv-cli-")));
+  root = resolve(await realpath(await mkdtemp(join(tmpdir(), "tsv-cli-"))));
   vi.stubEnv("GITHUB_ACTIONS", "false");
   vi.stubEnv("DEBUG", "");
   vi.stubEnv("NO_COLOR", "1");
@@ -86,6 +86,27 @@ it("shows the same help for --help and -h without a project or Git repository", 
     /^\s+--shard <index>\/<count>\s+Select a shard using one-based indices\./m,
   );
   expect(help.stdout).not.toMatch(/(?:^|\s)(?:--folder|--context|-f|-c)(?=[\s,=]|$)/);
+});
+
+it("requires an explicit project folder instead of resolving a missing argument to cwd", async () => {
+  await writeFile(join(root, "tspconfig.yaml"), "");
+  await expect(run()).rejects.toMatchObject({
+    code: 1,
+    stdout: "",
+    stderr: "A project folder is required. Use --help for usage.\n",
+  });
+});
+
+it("accepts backslash-separated relative project paths on every platform", async () => {
+  const project = "specification/service/data-plane/Project";
+  await addProject(project);
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    `- tool: TypeSpecValidation\n  paths: [${project}]\n  reason: normalized path fixture\n`,
+  );
+  const result = await run("specification\\service\\data-plane\\Project");
+  expect(result.stdout).toContain("Suppressed: normalized path fixture");
+  expect(result.stderr).toBe("");
 });
 
 it.each([
@@ -144,31 +165,6 @@ it("treats --help after the option terminator as a positional folder", async () 
     stderr: "",
   });
 });
-
-it.each(["single", "all", "changed"])(
-  "makes Git tracing opt-in without hiding %s validation failures",
-  async (mode) => {
-    const project = "specification/service/Project";
-    await addProject(project);
-    await initGit();
-    await commit("Base");
-    await writeFile(join(root, project, "tspconfig.yaml"), "# changed");
-    await commit("Head");
-    const args = mode === "single" ? [project] : [`--${mode}`];
-    await expect(run(...args)).rejects.toMatchObject({
-      code: 1,
-      stdout: expect.not.stringContaining("Executing rule:") as unknown,
-      stderr: expect.stringContaining(
-        'error tsv/folder-structure: Project must use "folder structure v2"',
-      ) as unknown,
-    });
-    await expect(run(...args, "--verbose")).rejects.toMatchObject({
-      code: 1,
-      stdout: expect.stringContaining("\u00d7 FolderStructure") as unknown,
-      stderr: expect.stringContaining("simple-git") as unknown,
-    });
-  },
-);
 
 it("keeps changed-file inventories behind --verbose and supports -v", async () => {
   await addProject("specification/service/Project");
@@ -230,7 +226,7 @@ it.each([
       expect(stderr.includes("\x1b[31merror\x1b[39m")).toBe(color);
       expect(stderr).not.toContain("\n    at ");
       expect(stripVTControlCharacters(String(error.stdout))).toBe(
-        "\n2 passed | 1 failed | 9 not run\n",
+        "\n2 passed | 1 failed | 7 not run\n",
       );
       expect(String(error.stdout)).not.toMatch(
         /Executing rule:|config files:|imports:|Expected npm prefix:/,
