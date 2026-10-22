@@ -2082,12 +2082,6 @@ model AccountProperties {
   capabilitySettings?: CapabilitySettings;
 
   /**
-   * The account-level tool access policy. Supported only for AIServices accounts with allowProjectManagement enabled. Omitting this property in a PUT request clears the policy. In PATCH requests, omission preserves the policy and an explicit null clears it. Responses omit this property when no policy is configured.
-   */
-  @added(Versions.v2026_09_15_preview)
-  toolControls?: ToolControls;
-
-  /**
    * Customer-owned AKS hosting configurations for Foundry agents. This property can only be specified when the account is created; an existing account without a hosting configuration cannot add one later. This API version supports exactly one configuration, while the array shape is reserved for future API versions that may support multiple configurations. Once set, the configuration cannot be changed, removed, or reordered. Account update requests should omit this property or send the complete existing value unchanged. Responses only include hosting configuration types defined by the requested API version.
    */
   @added(Versions.v2026_07_15_preview)
@@ -4809,7 +4803,7 @@ model ProjectProperties {
 }
 
 /**
- * Defines the default and per-tool access policy for a Foundry account or project.
+ * Defines the default and per-tool access policy for a Foundry project.
  */
 @added(Versions.v2026_09_15_preview)
 model ToolControls {
