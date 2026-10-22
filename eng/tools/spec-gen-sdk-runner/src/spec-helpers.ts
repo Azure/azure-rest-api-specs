@@ -1,5 +1,7 @@
+import fs from "node:fs";
 import path from "node:path";
 import { inspect } from "node:util";
+import { parse as yamlParse } from "yaml";
 import { logMessage } from "./log.ts";
 import { type SpecGenSdkCmdInput } from "./types.ts";
 import {
@@ -133,6 +135,83 @@ export function processTypeSpecProjectsV2FolderStructure(
   return changedSpecs;
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+function searchRelatedTypeSpecProjectsByAdditionalDirectories(
+  files: string[],
+  specRepoFolder: string,
+): Record<string, string[]> {
+  const result: Record<string, string[]> = {};
+  const changedFiles = files.map((file) => ({
+    file,
+    absolutePath: path.resolve(specRepoFolder, file),
+  }));
+  const configPaths = fs.globSync("specification/**/tspconfig.yaml", {
+    cwd: specRepoFolder,
+    exclude: ["**/node_modules/**"],
+  });
+
+  for (const configPath of configPaths.sort()) {
+    let additionalDirectories: unknown;
+    try {
+      additionalDirectories = yamlParse(
+        fs.readFileSync(path.join(specRepoFolder, configPath), "utf8"),
+      );
+    } catch (error) {
+      throw new Error(
+        `Failed to read TypeSpec configuration ${configPath} while discovering additionalDirectories`,
+        { cause: error },
+      );
+    }
+    for (const key of [
+      "options",
+      "@azure-tools/typespec-client-generator-cli",
+      "additionalDirectories",
+    ]) {
+      additionalDirectories = isRecord(additionalDirectories)
+        ? additionalDirectories[key]
+        : undefined;
+    }
+    if (additionalDirectories === undefined) {
+      continue;
+    }
+    if (
+      !Array.isArray(additionalDirectories) ||
+      !additionalDirectories.every(
+        (directory: unknown): directory is string =>
+          typeof directory === "string" && directory.trim().length > 0,
+      )
+    ) {
+      throw new Error(
+        `Invalid additionalDirectories in ${configPath}: expected an array of non-empty strings`,
+      );
+    }
+
+    const directories = additionalDirectories.map((directory) =>
+      path.resolve(specRepoFolder, directory.replaceAll("\\", "/")),
+    );
+    const relatedFiles = changedFiles
+      .filter(({ absolutePath }) =>
+        directories.some((directory) => {
+          const relativePath = path.relative(directory, absolutePath);
+          return (
+            relativePath !== ".." &&
+            !relativePath.startsWith(`..${path.sep}`) &&
+            !path.isAbsolute(relativePath)
+          );
+        }),
+      )
+      .map(({ file }) => file);
+    if (relatedFiles.length > 0) {
+      result[path.dirname(configPath).replaceAll("\\", "/")] = relatedFiles;
+    }
+  }
+
+  return result;
+}
+
 export async function detectChangedSpecConfigFiles(
   commandInput: SpecGenSdkCmdInput,
 ): Promise<ChangedSpecs[]> {
@@ -182,15 +261,18 @@ export async function detectChangedSpecConfigFiles(
     },
   );
 
+  const typespecProjectResultByAdditionalDirectories =
+    searchRelatedTypeSpecProjectsByAdditionalDirectories(fileList, commandInput.localSpecRepoPath);
+
   // Merge typespec project results
-  for (const folderPath of Object.keys(typespecProjectResultSearchedBySharedLibrary)) {
-    if (typespecProjectResult[folderPath]) {
+  for (const relatedProjects of [
+    typespecProjectResultSearchedBySharedLibrary,
+    typespecProjectResultByAdditionalDirectories,
+  ]) {
+    for (const [folderPath, files] of Object.entries(relatedProjects)) {
       typespecProjectResult[folderPath] = [
-        ...typespecProjectResult[folderPath],
-        ...typespecProjectResultSearchedBySharedLibrary[folderPath],
+        ...new Set([...(typespecProjectResult[folderPath] ?? []), ...files]),
       ];
-    } else {
-      typespecProjectResult[folderPath] = typespecProjectResultSearchedBySharedLibrary[folderPath];
     }
   }
 
