@@ -1,0 +1,37 @@
+{
+  "title": "02 - Get the status of a failed operation",
+  "operationId": "VirtualMachineBulkOperations_BulkGetOperationsStatus",
+  "parameters": {
+    "api-version": "2026-09-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "requestBody": {
+      "operationIds": [
+        "e69c80d2-4f31-46ac-9e35-c6a7cb63fe12"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+            "operation": {
+              "operationId": "e69c80d2-4f31-46ac-9e35-c6a7cb63fe12",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+              "opType": "Start",
+              "state": "Failed",
+              "completedAt": "2026-08-31T18:18:00Z",
+              "resourceOperationError": {
+                "errorCode": "AllocationFailed",
+                "errorDetails": "Allocation failed because sufficient capacity was not available for the requested virtual machine size in eastus."
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

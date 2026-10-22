@@ -1,0 +1,110 @@
+name: azure-typespec-author-eval
+description: sdk visible authoring defaults to client configuration
+version: "1.0"
+type: capability
+area: naming
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 007006-sdk-visible-authoring-defaults-to-client-configuration-trigger
+    tags:
+      suite: naming
+      mode: trigger
+    prompt: |
+      Project analysis, intake, grounding, and the TypeSpec source plan are complete for
+      adding a new WidgetProperties.enabled boolean to a new never-shipped C# ARM Widget SDK.
+      The source change is SDK-visible, and the user has not opted out of client configuration
+      analysis. Build the default SDK client configuration plan without asking for
+      confirmation. Return JSON "clientConfigurationStatus", "name", "optOutAvailable", and
+      "clientTspChanged". Do not edit, invoke MCP, compile, or generate.
+    constraints: &a1
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azsdk-common-typespec-naming
+      - &a2
+        type: tool-calls
+        config:
+          required:
+            - name: ^(view|powershell|bash|rg)$
+              pattern: csharp-naming\.md
+              result: (?i)Boolean.*Start with a verb|enabled.*IsEnabled
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - &a3
+        type: output-matches
+        config:
+          pattern: '"clientConfigurationStatus"\s*:\s*"planned"'
+      - &a4
+        type: output-matches
+        config:
+          pattern: '"name"\s*:\s*"IsEnabled"'
+      - &a5
+        type: output-matches
+        config:
+          pattern: '"optOutAvailable"\s*:\s*true'
+      - &a6
+        type: output-matches
+        config:
+          pattern: '"clientTspChanged"\s*:\s*false'
+      - &a7
+        type: output-not-matches
+        config:
+          pattern: (?i)"question"|please confirm|keep client configuration
+  - name: 007006-sdk-visible-authoring-defaults-to-client-configuration-forced
+    tags:
+      suite: naming
+      mode: forced
+    prompt: |
+      @azure-typespec-author Project analysis, intake, grounding, and the TypeSpec source plan are complete for
+      adding a new WidgetProperties.enabled boolean to a new never-shipped C# ARM Widget SDK.
+      The source change is SDK-visible, and the user has not opted out of client configuration
+      analysis. Build the default SDK client configuration plan without asking for
+      confirmation. Return JSON "clientConfigurationStatus", "name", "optOutAvailable", and
+      "clientTspChanged". Do not edit, invoke MCP, compile, or generate.
+    constraints: *a1
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+            - azsdk-common-typespec-naming
+      - *a2
+      - *a3
+      - *a4
+      - *a5
+      - *a6
+      - *a7
+  - name: 007006-sdk-visible-authoring-defaults-to-client-configuration-no-skill
+    tags:
+      suite: naming
+      mode: no-skill
+    prompt: |
+      Project analysis, intake, grounding, and the TypeSpec source plan are complete for
+      adding a new WidgetProperties.enabled boolean to a new never-shipped C# ARM Widget SDK.
+      The source change is SDK-visible, and the user has not opted out of client configuration
+      analysis. Build the default SDK client configuration plan without asking for
+      confirmation. Return JSON "clientConfigurationStatus", "name", "optOutAvailable", and
+      "clientTspChanged". Do not edit, invoke MCP, compile, or generate.
+    constraints: *a1
+    graders:
+      - type: tool-calls
+        config:
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - *a3
+      - *a4
+      - *a5
+      - *a6
+      - *a7

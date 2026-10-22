@@ -188,17 +188,19 @@ read-only inspection"):
   `git checkout` of branches you do not currently have checked out,
   `git tag -d`, anything that mutates the working tree or remote.
 - Any file write (`Set-Content`, `Out-File`, `>` / `>>` redirects,
-`Add-Content`, `New-Item -ItemType File` outside a temp directory used
-purely for ephemeral fetched content). The critic produces output as
-chat text only; it does not write to the workspace.
+  `Add-Content`, `New-Item -ItemType File` outside a temp directory used
+  purely for ephemeral fetched content). The critic produces output as
+  chat text only; it does not write to the workspace.
+
 <!-- cspell:ignore choco -->
+
 - Any installer / package manager (`npm`, `pip`, `winget`, `choco`, etc.),
   `Invoke-WebRequest` to write a downloaded file into the workspace, or
   any command that mounts, modifies, or executes downloaded content.
 - Any command that materializes a new local clone or worktree of any
   repo (`git clone`, `git worktree add`, `git fetch <new-remote>`). The
   Critic re-fetches individual files via `get_file_contents` or `gh api
-.../contents/...` only; full clones are out of scope and risk pulling
+  .../contents/...` only; full clones are out of scope and risk pulling
   in tooling, hooks, or scripts that could mutate state.
 
 If a finding's re-fetch fails via **both** MCP and the `gh` CLI fallback
@@ -244,10 +246,12 @@ and adds Critic-specific behavioral notes that are not in the protocol.
 3. The **full** findings report as produced in Step 6.
 4. The list of files reviewed.
 5. The previous-version path and full base commit SHA used for `[NEW]`/`[EXISTING]`
-classification. Local mode always includes `Repository HEAD:
-<full-40-char-sha>`, previous-version path/hash or `None - new service`, and
-any `head` manifest entries needed for in-place comparison.
+   classification. Local mode always includes `Repository HEAD:
+   <full-40-char-sha>`, previous-version path/hash or `None - new service`, and
+   any `head` manifest entries needed for in-place comparison.
+
 <!-- cspell:ignore REPOST -->
+
 6. **The Step 5.5 reconciliation plan** (verbatim) - all three discussion
    surface counts and pagination status; per-finding actions (POST-NEW /
    SKIP-COVERED / RESOLVE-AND-REPOST / REPLY-LINE-SHIFT /
@@ -752,14 +756,14 @@ guidance do not count as coverage. Then apply the verdict rules below:
   re-verified at session SHA); and (c) the original line in the existing
   comment is genuinely shifted (the violation is **not** at the original
   line in the current file). If any of these is wrong, mark `FAIL:
-shift-misclassified` and recommend the correction (e.g., "existing
+  shift-misclassified` and recommend the correction (e.g., "existing
   comment is human-origin - reclassify as REPLY-LINE-SHIFT" or "violation
   is still at original line - reclassify as SKIP-COVERED").
 - **REPLY-LINE-SHIFT (Scenario C)**: confirm (a) trusted workflow ownership is
   not proven; a marker under any author other than `github-actions[bot]`
   belongs here; (b) the violation is still present at the new
   line; and (c) the original line is genuinely shifted. Same `FAIL:
-shift-misclassified` reasons apply with symmetric corrections.
+  shift-misclassified` reasons apply with symmetric corrections.
 - **CLARIFY-CONFLICT**: confirm (a) the cited prior item has the same semantic
   identity; (b) its guidance materially conflicts with the current finding;
   (c) the clarification states the prior position, current evidence at the
@@ -771,7 +775,7 @@ shift-misclassified` reasons apply with symmetric corrections.
   For top-level comments/review
   bodies, require one consolidated top-level clarification with links to every
   contradicted item. Failures are `FAIL: clarification-unsupported` or `FAIL:
-conflict-unclarified` as applicable.
+  conflict-unclarified` as applicable.
 - **OVERFLOW-NOT-POSTED**: confirm the row has no posting action or existing-item
   anchor, is excluded from the agreed posting set, and is represented only in
   the review-body overflow count and themes. Do not re-verify it as a finding

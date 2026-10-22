@@ -374,6 +374,7 @@ model UserDefinedFunctionExecutionProperties {
 /**
  * JS runtime options for user defined endpoints and functions
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model JsRuntimeOptions {
   /**
    * Whether to log exception details in the runtime.
@@ -458,6 +459,7 @@ model LedgerWriteResult {
 /**
  * The transaction was rolled back before it could be committed.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_07_31_preview)
 @error
 model TransactionRolledBackErrorResponse {

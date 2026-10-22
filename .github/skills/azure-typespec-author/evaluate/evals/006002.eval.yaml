@@ -1,0 +1,99 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability
+area: "dataplane"
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 660s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+stimuli:
+  - name: 006002-dp-add-get-operation-trigger
+    tags:
+      suite: dataplane
+      mode: trigger
+    prompt: Add a synchronous get operation for the WidgetSuite resource to the Widgets interface. The operation should fetch a WidgetSuite resource by its existing name key. All material design decisions are provided, so proceed without confirmation.
+    environment: &id001
+      files:
+        - src: ../fixtures/006002-dp-add-get-operation/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/006002-dp-add-get-operation/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../fixtures/006002-dp-add-get-operation/tspconfig.yaml
+          dest: tspconfig.yaml
+      commands:
+        - node -e "const fs=require('fs');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync('node_modules')){fs.symlinkSync(t,'node_modules','junction')}"
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 006002-dp-add-get-operation-forced
+    tags:
+      suite: dataplane
+      mode: forced
+    prompt: "@azure-typespec-author Add a synchronous get operation for the WidgetSuite resource to the Widgets interface. The operation should fetch a WidgetSuite resource by its existing name key. All material design decisions are provided, so proceed without confirmation."
+    environment: *id001
+    rubric: &shared_rubric
+      - The Widgets interface includes a get/read operation for WidgetSuite using the Azure.Core ResourceRead<WidgetSuite> template.
+      - The operation supports fetching a WidgetSuite resource by name and has a descriptive @doc decorator.
+      - Changes are limited to the requested operation and contain no unrelated edits.
+    graders:
+      - type: run-command
+        config:
+          command: tsp compile .
+          expected_exit_code: 0
+      - &id003
+        type: file-matches
+        config:
+          path: main.tsp
+          pattern: ResourceRead<WidgetSuite>
+      - &id004
+        type: file-matches
+        name: file-matches-documentation
+        config:
+          path: main.tsp
+          pattern: '@doc\('
+      - &id005
+        type: prompt
+        config:
+          prompt: The Widgets interface should include a get/read operation for WidgetSuite using the ResourceRead<WidgetSuite> Azure.Core operation template. The operation should have a descriptive @doc decorator.
+          model: gpt-5.6-sol
+          scoring: scale_1_10
+          threshold: 0.77
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 006002-dp-add-get-operation-no-skill
+    tags:
+      suite: dataplane
+      mode: no-skill
+    prompt: Add a synchronous get operation for the WidgetSuite resource to the Widgets interface. The operation should fetch a WidgetSuite resource by its existing name key. All material design decisions are provided, so proceed without confirmation.
+    environment: *id001
+    rubric: *shared_rubric
+    graders:
+      - type: tool-calls
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - *id003
+      - *id004
+      - *id005
+    constraints:
+      max_turns: 5
+      max_tokens: 100000
+scoring:
+  weights:
+    tool-calls: 0.125
+    skill-invocation: 0.125
+    run-command: 0.125
+    file-matches: 0.375
+    prompt: 0.25
+  threshold: 0.9425

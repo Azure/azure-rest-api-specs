@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -103,11 +103,11 @@ describe("fetch-resource-providers", () => {
 
     it("formats JSON output", () => {
       const output = formatOutput(rpsWithout, "json", false);
-      /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
+      /* oxlint-disable typescript/no-unsafe-assignment, typescript/no-unsafe-member-access */
       const parsed = JSON.parse(output);
       expect(Array.isArray(parsed)).toBe(true);
       expect(parsed[0].rpNamespace).toBe("Microsoft.Test");
-      /* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
+      /* oxlint-enable typescript/no-unsafe-assignment, typescript/no-unsafe-member-access */
     });
 
     it("formats table output", () => {

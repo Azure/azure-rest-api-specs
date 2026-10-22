@@ -84,7 +84,7 @@ model DrillRunProperties extends JobProperties {
   report?: DrillReportSummary;
 
   @doc("Recovery time objective for the drill run.")
-  @added(Versions.v2026_09_30_preview)
+  @added(Versions.v2026_10_31_preview)
   @visibility(Lifecycle.Read)
   recoveryTimeObjective?: IsoDuration;
 }
