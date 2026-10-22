@@ -6,9 +6,9 @@ This is the AutoRest configuration file for Network.
 
 ---
 
-## Note: VMSS `2018-10-01` captured-schema exception
+## Note: VMSS fixed `2018-10-01` captured-schema exception
 
-The `stable/2018-10-01/vmssNetwork.json` spec is an **intentional, long-standing exception** to the "same-version stable API surface must not change" (captured-schema) rule. These VMSS network APIs have always pinned the `2018-10-01` api-version while returning the **latest** `NetworkInterface` and `PublicIPAddress` types. Consequently, additive changes to the shared `Common` types (e.g., new properties such as `firstPartyServiceTagId`) ripple into `2018-10-01` **by design**, and BreakingChange/versioning tooling may flag them (e.g., OAD rule [`1041 AddedPropertyInResponse`](https://github.com/Azure/openapi-diff/blob/main/docs/rules/1041.md)). This is expected and has already been signed off for SDKs, PowerShell, CLI, and Terraform. Do not "fix" this by scoping the property out of `2018-10-01`.
+The VMSS network APIs emitted in `vmssNetworkConfiguration.json` and `vmssPublicIpAddress.json` are an **intentional, long-standing exception** to the "same-version stable API surface must not change" (captured-schema) rule. Although these feature files are emitted into each current Network version directory, the operations retain the fixed `2018-10-01` api-version while returning the **latest** `NetworkInterface` and `PublicIPAddress` types. Consequently, additive changes to the shared `Common` types (e.g., new properties such as `firstPartyServiceTagId`) ripple into the fixed `2018-10-01` VMSS contract **by design**, and BreakingChange/versioning tooling may flag them (e.g., OAD rule [`1041 AddedPropertyInResponse`](https://github.com/Azure/openapi-diff/blob/main/docs/rules/1041.md)). This is expected and has already been signed off for SDKs, PowerShell, CLI, and Terraform. Do not "fix" this by scoping the property out of `2018-10-01`.
 
 Precedent (the latest network types have long been captured under `2018-10-01`):
 
@@ -72,22 +72,33 @@ input-file:
   - stable/2026-03-01/vmssNetworkConfiguration.json
   - stable/2026-03-01/vmssPublicIpAddress.json
 suppressions:
-  # --- stable/2018-10-01/vmssNetwork.json ---
-  # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
-  # exception" at the top of this readme. These are pre-existing traits of the 2018-10-01
-  # contract; every one of them would be a breaking change to "fix".
+  # --- VMSS fixed 2018-10-01 compatibility surface ---
+  # See "Note: VMSS fixed `2018-10-01` captured-schema exception" at the top of this readme.
+  # These are released traits of the VMSS contract and cannot be changed without breaking clients.
   - code: PathResourceProviderMatchNamespace
-    from: vmssNetwork.json
-    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking every existing VMSS network client.
+    from: vmssNetworkConfiguration.json
+    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking existing VMSS network clients.
+  - code: PathResourceProviderMatchNamespace
+    from: vmssPublicIpAddress.json
+    reason: The VMSS public IP APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking existing VMSS network clients.
   - code: ResourceNameRestriction
-    from: vmssNetwork.json
-    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the frozen 2018-10-01 VMSS surface and shipped without a pattern constraint. Adding one now would be a breaking change for existing clients of this stable version.
+    from: vmssNetworkConfiguration.json
+    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the fixed 2018-10-01 VMSS contract and shipped without pattern constraints. Adding constraints now would be a breaking change for existing clients.
+  - code: ResourceNameRestriction
+    from: vmssPublicIpAddress.json
+    reason: virtualMachineScaleSetName, networkInterfaceName, ipConfigurationName and publicIpAddressName are path parameters of the fixed 2018-10-01 VMSS contract and shipped without pattern constraints. Adding constraints now would be a breaking change for existing clients.
   - code: OperationIdNounVerb
-    from: vmssNetwork.json
-    reason: The NetworkInterfaces_* and PublicIPAddresses_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JS, Go, PowerShell, CLI and Terraform. As the rule documentation itself notes, renaming operation IDs after an SDK has shipped is a breaking change.
+    from: vmssNetworkConfiguration.json
+    reason: The NetworkInterfaces_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JavaScript, Go, PowerShell, CLI and Terraform. Renaming these operation IDs would be a breaking change.
   - code: ParametersInPointGet
-    from: vmssNetwork.json
-    reason: The $expand query parameter on NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface shipped in 2018-10-01. Removing it would be a breaking change for existing clients of this stable version.
+    from: vmssNetworkConfiguration.json
+    reason: The $expand query parameter on the VMSS network interface point GET operations shipped in 2018-10-01. Removing it would be a breaking change for existing clients.
+  - code: ParametersInPointGet
+    from: vmssPublicIpAddress.json
+    reason: The $expand query parameter on the VMSS public IP address point GET operation shipped in 2018-10-01. Removing it would be a breaking change for existing clients.
+  - code: PathResourceProviderNamePascalCase
+    from: vmssNetworkConfiguration.json
+    reason: The lowercase microsoft.Compute provider spelling on the VMSS IP configuration list route shipped in 2018-10-01. Normalizing the released route is outside this compatibility-only change.
   # --- stable/2026-03-01/networkGateway.json ---
   - code: ResourceNameRestriction
     from: networkGateway.json
@@ -390,22 +401,32 @@ input-file:
   - stable/2026-01-01/vmssNetworkConfiguration.json
   - stable/2026-01-01/vmssPublicIpAddress.json
 suppressions:
-  # --- stable/2018-10-01/vmssNetwork.json ---
-  # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
-  # exception" at the top of this readme. These are pre-existing traits of the 2018-10-01
-  # contract; every one of them would be a breaking change to "fix".
+  # --- VMSS fixed 2018-10-01 compatibility surface ---
+  # See "Note: VMSS fixed `2018-10-01` captured-schema exception" at the top of this readme.
   - code: PathResourceProviderMatchNamespace
-    from: vmssNetwork.json
-    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking every existing VMSS network client.
+    from: vmssNetworkConfiguration.json
+    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking existing VMSS network clients.
+  - code: PathResourceProviderMatchNamespace
+    from: vmssPublicIpAddress.json
+    reason: The VMSS public IP APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking existing VMSS network clients.
   - code: ResourceNameRestriction
-    from: vmssNetwork.json
-    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the frozen 2018-10-01 VMSS surface and shipped without a pattern constraint. Adding one now would be a breaking change for existing clients of this stable version.
+    from: vmssNetworkConfiguration.json
+    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the fixed 2018-10-01 VMSS contract and shipped without pattern constraints. Adding constraints now would be a breaking change for existing clients.
+  - code: ResourceNameRestriction
+    from: vmssPublicIpAddress.json
+    reason: virtualMachineScaleSetName, networkInterfaceName, ipConfigurationName and publicIpAddressName are path parameters of the fixed 2018-10-01 VMSS contract and shipped without pattern constraints. Adding constraints now would be a breaking change for existing clients.
   - code: OperationIdNounVerb
-    from: vmssNetwork.json
-    reason: The NetworkInterfaces_* and PublicIPAddresses_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JS, Go, PowerShell, CLI and Terraform. As the rule documentation itself notes, renaming operation IDs after an SDK has shipped is a breaking change.
+    from: vmssNetworkConfiguration.json
+    reason: The NetworkInterfaces_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JavaScript, Go, PowerShell, CLI and Terraform. Renaming these operation IDs would be a breaking change.
   - code: ParametersInPointGet
-    from: vmssNetwork.json
-    reason: The $expand query parameter on NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface shipped in 2018-10-01. Removing it would be a breaking change for existing clients of this stable version.
+    from: vmssNetworkConfiguration.json
+    reason: The $expand query parameter on the VMSS network interface point GET operations shipped in 2018-10-01. Removing it would be a breaking change for existing clients.
+  - code: ParametersInPointGet
+    from: vmssPublicIpAddress.json
+    reason: The $expand query parameter on the VMSS public IP address point GET operation shipped in 2018-10-01. Removing it would be a breaking change for existing clients.
+  - code: PathResourceProviderNamePascalCase
+    from: vmssNetworkConfiguration.json
+    reason: The lowercase microsoft.Compute provider spelling on the VMSS IP configuration list route shipped in 2018-10-01. Normalizing the released route is outside this compatibility-only change.
   # --- stable/2026-01-01/networkGateway.json ---
   - code: ResourceNameRestriction
     from: networkGateway.json
@@ -697,22 +718,32 @@ input-file:
   - stable/2025-09-01/vmssNetworkConfiguration.json
   - stable/2025-09-01/vmssPublicIpAddress.json
 suppressions:
-  # --- stable/2018-10-01/vmssNetwork.json ---
-  # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
-  # exception" at the top of this readme. These are pre-existing traits of the 2018-10-01
-  # contract; every one of them would be a breaking change to "fix".
+  # --- VMSS fixed 2018-10-01 compatibility surface ---
+  # See "Note: VMSS fixed `2018-10-01` captured-schema exception" at the top of this readme.
   - code: PathResourceProviderMatchNamespace
-    from: vmssNetwork.json
-    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking every existing VMSS network client.
+    from: vmssNetworkConfiguration.json
+    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking existing VMSS network clients.
+  - code: PathResourceProviderMatchNamespace
+    from: vmssPublicIpAddress.json
+    reason: The VMSS public IP APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking existing VMSS network clients.
   - code: ResourceNameRestriction
-    from: vmssNetwork.json
-    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the frozen 2018-10-01 VMSS surface and shipped without a pattern constraint. Adding one now would be a breaking change for existing clients of this stable version.
+    from: vmssNetworkConfiguration.json
+    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the fixed 2018-10-01 VMSS contract and shipped without pattern constraints. Adding constraints now would be a breaking change for existing clients.
+  - code: ResourceNameRestriction
+    from: vmssPublicIpAddress.json
+    reason: virtualMachineScaleSetName, networkInterfaceName, ipConfigurationName and publicIpAddressName are path parameters of the fixed 2018-10-01 VMSS contract and shipped without pattern constraints. Adding constraints now would be a breaking change for existing clients.
   - code: OperationIdNounVerb
-    from: vmssNetwork.json
-    reason: The NetworkInterfaces_* and PublicIPAddresses_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JS, Go, PowerShell, CLI and Terraform. As the rule documentation itself notes, renaming operation IDs after an SDK has shipped is a breaking change.
+    from: vmssNetworkConfiguration.json
+    reason: The NetworkInterfaces_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JavaScript, Go, PowerShell, CLI and Terraform. Renaming these operation IDs would be a breaking change.
   - code: ParametersInPointGet
-    from: vmssNetwork.json
-    reason: The $expand query parameter on NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface shipped in 2018-10-01. Removing it would be a breaking change for existing clients of this stable version.
+    from: vmssNetworkConfiguration.json
+    reason: The $expand query parameter on the VMSS network interface point GET operations shipped in 2018-10-01. Removing it would be a breaking change for existing clients.
+  - code: ParametersInPointGet
+    from: vmssPublicIpAddress.json
+    reason: The $expand query parameter on the VMSS public IP address point GET operation shipped in 2018-10-01. Removing it would be a breaking change for existing clients.
+  - code: PathResourceProviderNamePascalCase
+    from: vmssNetworkConfiguration.json
+    reason: The lowercase microsoft.Compute provider spelling on the VMSS IP configuration list route shipped in 2018-10-01. Normalizing the released route is outside this compatibility-only change.
   # --- stable/2025-09-01/networkGateway.json ---
   - code: ResourceNameRestriction
     from: networkGateway.json
@@ -928,21 +959,32 @@ input-file:
   - stable/2025-07-01/vmssNetworkConfiguration.json
   - stable/2025-07-01/vmssPublicIpAddress.json
 suppressions:
-  # --- stable/2018-10-01/vmssNetwork.json ---
-  # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
-  # exception" at the top of this readme.
+  # --- VMSS fixed 2018-10-01 compatibility surface ---
+  # See "Note: VMSS fixed `2018-10-01` captured-schema exception" at the top of this readme.
   - code: PathResourceProviderMatchNamespace
-    from: vmssNetwork.json
-    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking every existing VMSS network client.
+    from: vmssNetworkConfiguration.json
+    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking existing VMSS network clients.
+  - code: PathResourceProviderMatchNamespace
+    from: vmssPublicIpAddress.json
+    reason: The VMSS public IP APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking existing VMSS network clients.
   - code: ResourceNameRestriction
-    from: vmssNetwork.json
-    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the frozen 2018-10-01 VMSS surface and shipped without a pattern constraint. Adding one now would be a breaking change for existing clients of this stable version.
+    from: vmssNetworkConfiguration.json
+    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the fixed 2018-10-01 VMSS contract and shipped without pattern constraints. Adding constraints now would be a breaking change for existing clients.
+  - code: ResourceNameRestriction
+    from: vmssPublicIpAddress.json
+    reason: virtualMachineScaleSetName, networkInterfaceName, ipConfigurationName and publicIpAddressName are path parameters of the fixed 2018-10-01 VMSS contract and shipped without pattern constraints. Adding constraints now would be a breaking change for existing clients.
   - code: OperationIdNounVerb
-    from: vmssNetwork.json
-    reason: The NetworkInterfaces_* and PublicIPAddresses_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JS, Go, PowerShell, CLI and Terraform. As the rule documentation itself notes, renaming operation IDs after an SDK has shipped is a breaking change.
+    from: vmssNetworkConfiguration.json
+    reason: The NetworkInterfaces_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JavaScript, Go, PowerShell, CLI and Terraform. Renaming these operation IDs would be a breaking change.
   - code: ParametersInPointGet
-    from: vmssNetwork.json
-    reason: The $expand query parameter on NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface shipped in 2018-10-01. Removing it would be a breaking change for existing clients of this stable version.
+    from: vmssNetworkConfiguration.json
+    reason: The $expand query parameter on the VMSS network interface point GET operations shipped in 2018-10-01. Removing it would be a breaking change for existing clients.
+  - code: ParametersInPointGet
+    from: vmssPublicIpAddress.json
+    reason: The $expand query parameter on the VMSS public IP address point GET operation shipped in 2018-10-01. Removing it would be a breaking change for existing clients.
+  - code: PathResourceProviderNamePascalCase
+    from: vmssNetworkConfiguration.json
+    reason: The lowercase microsoft.Compute provider spelling on the VMSS IP configuration list route shipped in 2018-10-01. Normalizing the released route is outside this compatibility-only change.
   - code: ParametersInPointGet
     from: loadBalancer.json
     where:
@@ -1070,21 +1112,32 @@ input-file:
   - stable/2025-05-01/vmssNetworkConfiguration.json
   - stable/2025-05-01/vmssPublicIpAddress.json
 suppressions:
-  # --- stable/2018-10-01/vmssNetwork.json ---
-  # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
-  # exception" at the top of this readme.
+  # --- VMSS fixed 2018-10-01 compatibility surface ---
+  # See "Note: VMSS fixed `2018-10-01` captured-schema exception" at the top of this readme.
   - code: PathResourceProviderMatchNamespace
-    from: vmssNetwork.json
-    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking every existing VMSS network client.
+    from: vmssNetworkConfiguration.json
+    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking existing VMSS network clients.
+  - code: PathResourceProviderMatchNamespace
+    from: vmssPublicIpAddress.json
+    reason: The VMSS public IP APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking existing VMSS network clients.
   - code: ResourceNameRestriction
-    from: vmssNetwork.json
-    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the frozen 2018-10-01 VMSS surface and shipped without a pattern constraint. Adding one now would be a breaking change for existing clients of this stable version.
+    from: vmssNetworkConfiguration.json
+    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the fixed 2018-10-01 VMSS contract and shipped without pattern constraints. Adding constraints now would be a breaking change for existing clients.
+  - code: ResourceNameRestriction
+    from: vmssPublicIpAddress.json
+    reason: virtualMachineScaleSetName, networkInterfaceName, ipConfigurationName and publicIpAddressName are path parameters of the fixed 2018-10-01 VMSS contract and shipped without pattern constraints. Adding constraints now would be a breaking change for existing clients.
   - code: OperationIdNounVerb
-    from: vmssNetwork.json
-    reason: The NetworkInterfaces_* and PublicIPAddresses_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JS, Go, PowerShell, CLI and Terraform. As the rule documentation itself notes, renaming operation IDs after an SDK has shipped is a breaking change.
+    from: vmssNetworkConfiguration.json
+    reason: The NetworkInterfaces_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JavaScript, Go, PowerShell, CLI and Terraform. Renaming these operation IDs would be a breaking change.
   - code: ParametersInPointGet
-    from: vmssNetwork.json
-    reason: The $expand query parameter on NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface shipped in 2018-10-01. Removing it would be a breaking change for existing clients of this stable version.
+    from: vmssNetworkConfiguration.json
+    reason: The $expand query parameter on the VMSS network interface point GET operations shipped in 2018-10-01. Removing it would be a breaking change for existing clients.
+  - code: ParametersInPointGet
+    from: vmssPublicIpAddress.json
+    reason: The $expand query parameter on the VMSS public IP address point GET operation shipped in 2018-10-01. Removing it would be a breaking change for existing clients.
+  - code: PathResourceProviderNamePascalCase
+    from: vmssNetworkConfiguration.json
+    reason: The lowercase microsoft.Compute provider spelling on the VMSS IP configuration list route shipped in 2018-10-01. Normalizing the released route is outside this compatibility-only change.
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
     where:
