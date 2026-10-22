@@ -1024,7 +1024,7 @@ enum AzureStorageState {
 /**
  * The app startup behavior when a storage mount cannot be established.
  */
-@added(Versions.v2026_07_15)
+@added(Versions.v2026_11_15)
 union StartupMountErrorPolicy {
   string,
 
@@ -2274,7 +2274,7 @@ model SiteProperties {
   /**
    * Configuration for the app's home directory content share.
    */
-  @added(Versions.v2026_07_15)
+  @added(Versions.v2026_11_15)
   homeContentShare?: HomeContentShare;
 
   /**
@@ -2460,7 +2460,7 @@ model SiteProperties {
 /**
  * Configuration for an app's home directory content share.
  */
-@added(Versions.v2026_07_15)
+@added(Versions.v2026_11_15)
 model HomeContentShare {
   /**
    * Identity-based configuration of the remote file share backing the app's home directory.
@@ -2471,7 +2471,7 @@ model HomeContentShare {
 /**
  * Identity-based configuration of a remote Azure Files share.
  */
-@added(Versions.v2026_07_15)
+@added(Versions.v2026_11_15)
 model RemoteShareConfiguration {
   /**
    * The HTTPS file service URI of the Azure Storage account, for example, https://mystorageaccount.file.core.windows.net/.
@@ -3575,13 +3575,13 @@ model AzureStorageInfoValue {
   /**
    * The managed identity used to authenticate to the storage account instead of an access key. Identity-based access is supported only for Azure Files mounts.
    */
-  @added(Versions.v2026_07_15)
+  @added(Versions.v2026_11_15)
   storageAccessIdentity?: DefaultIdentity;
 
   /**
    * The app startup behavior when this storage mount cannot be established.
    */
-  @added(Versions.v2026_07_15)
+  @added(Versions.v2026_11_15)
   startupMountErrorPolicy?: StartupMountErrorPolicy;
 }
 
@@ -9810,7 +9810,7 @@ model SitePatchResourceProperties {
   /**
    * Configuration for the app's home directory content share.
    */
-  @added(Versions.v2026_07_15)
+  @added(Versions.v2026_11_15)
   homeContentShare?: HomeContentShare;
 
   /**

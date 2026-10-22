@@ -6,10 +6,13 @@
       "properties": {
         "account1": {
           "type": "AzureFiles",
-          "accessKey": "26515^%@#*",
           "accountName": "testsa",
           "mountPath": "/mounts/a/files",
-          "shareName": "web"
+          "shareName": "web",
+          "storageAccessIdentity": {
+            "identityType": "SystemAssigned"
+          },
+          "startupMountErrorPolicy": "Fail"
         }
       }
     },
@@ -29,6 +32,10 @@
             "accountName": "testsa",
             "mountPath": "/mounts/a/files",
             "shareName": "web",
+            "storageAccessIdentity": {
+              "identityType": "SystemAssigned"
+            },
+            "startupMountErrorPolicy": "Fail",
             "state": "Ok"
           }
         }

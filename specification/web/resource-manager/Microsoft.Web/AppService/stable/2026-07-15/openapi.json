@@ -41554,14 +41554,6 @@
         "protocol": {
           "$ref": "#/definitions/AzureStorageProtocol",
           "description": "Mounting protocol to use for the storage account."
-        },
-        "storageAccessIdentity": {
-          "$ref": "#/definitions/DefaultIdentity",
-          "description": "The managed identity used to authenticate to the storage account instead of an access key. Identity-based access is supported only for Azure Files mounts."
-        },
-        "startupMountErrorPolicy": {
-          "$ref": "#/definitions/StartupMountErrorPolicy",
-          "description": "The app startup behavior when this storage mount cannot be established."
         }
       }
     },
@@ -46364,16 +46356,6 @@
         }
       }
     },
-    "HomeContentShare": {
-      "type": "object",
-      "description": "Configuration for an app's home directory content share.",
-      "properties": {
-        "remoteShareConfiguration": {
-          "$ref": "#/definitions/RemoteShareConfiguration",
-          "description": "Identity-based configuration of the remote file share backing the app's home directory."
-        }
-      }
-    },
     "HostKeys": {
       "type": "object",
       "description": "Functions host level keys.",
@@ -50902,26 +50884,6 @@
         }
       }
     },
-    "RemoteShareConfiguration": {
-      "type": "object",
-      "description": "Identity-based configuration of a remote Azure Files share.",
-      "properties": {
-        "fileServiceUri": {
-          "type": "string",
-          "description": "The HTTPS file service URI of the Azure Storage account, for example, https://mystorageaccount.file.core.windows.net/."
-        },
-        "shareName": {
-          "type": "string",
-          "description": "The name of the Azure Files share.",
-          "minLength": 3,
-          "maxLength": 63
-        },
-        "storageAccessIdentity": {
-          "$ref": "#/definitions/DefaultIdentity",
-          "description": "The managed identity used to authenticate to the storage account. The identity must be configured on the app."
-        }
-      }
-    },
     "Rendering": {
       "type": "object",
       "description": "Instructions for rendering the data",
@@ -53335,10 +53297,6 @@
           "type": "boolean",
           "description": "<code>true</code> to override client affinity cookie domain with X-Forwarded-Host request header. <code>false</code> to use default domain. Default is <code>false</code>."
         },
-        "homeContentShare": {
-          "$ref": "#/definitions/HomeContentShare",
-          "description": "Configuration for the app's home directory content share."
-        },
         "clientCertEnabled": {
           "type": "boolean",
           "description": "<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>."
@@ -53658,10 +53616,6 @@
         "clientAffinityProxyEnabled": {
           "type": "boolean",
           "description": "<code>true</code> to override client affinity cookie domain with X-Forwarded-Host request header. <code>false</code> to use default domain. Default is <code>false</code>."
-        },
-        "homeContentShare": {
-          "$ref": "#/definitions/HomeContentShare",
-          "description": "Configuration for the app's home directory content share."
         },
         "clientCertEnabled": {
           "type": "boolean",
@@ -54663,30 +54617,6 @@
       "required": [
         "value"
       ]
-    },
-    "StartupMountErrorPolicy": {
-      "type": "string",
-      "description": "The app startup behavior when a storage mount cannot be established.",
-      "enum": [
-        "Fail",
-        "IgnoreAndContinue"
-      ],
-      "x-ms-enum": {
-        "name": "StartupMountErrorPolicy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Fail",
-            "value": "Fail",
-            "description": "Fail app startup when the storage mount cannot be established."
-          },
-          {
-            "name": "IgnoreAndContinue",
-            "value": "IgnoreAndContinue",
-            "description": "Continue app startup when the storage mount cannot be established."
-          }
-        ]
-      }
     },
     "StaticSite": {
       "type": "object",
