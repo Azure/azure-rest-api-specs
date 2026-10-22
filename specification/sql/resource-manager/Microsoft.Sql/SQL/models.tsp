@@ -2026,7 +2026,7 @@ union ManagedShortTermRetentionPolicyName {
   string,
 
   /**
-   * The default short-term retention policy.
+   * default
    */
   default: "default",
 }
@@ -2170,8 +2170,43 @@ union ManagedDatabaseStatus {
 }
 
 /**
+ * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. SourceDatabaseName, SourceManagedInstanceName and PointInTime must be specified. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
+ */
+@removed(Versions.v2026_11_01_preview)
+@renamedFrom(Versions.v2026_11_01_preview, "ManagedDatabaseCreateMode")
+union LegacyManagedDatabaseCreateMode {
+  string,
+
+  /**
+   * Default
+   */
+  Default: "Default",
+
+  /**
+   * RestoreExternalBackup
+   */
+  RestoreExternalBackup: "RestoreExternalBackup",
+
+  /**
+   * PointInTimeRestore
+   */
+  PointInTimeRestore: "PointInTimeRestore",
+
+  /**
+   * Recovery
+   */
+  Recovery: "Recovery",
+
+  /**
+   * RestoreLongTermRetentionBackup
+   */
+  RestoreLongTermRetentionBackup: "RestoreLongTermRetentionBackup",
+}
+
+/**
  * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup. Specify sourceDatabaseId for an existing database or restorableDroppedDatabaseId for a dropped database, and specify restorePointInTime. The dropped database can be on an existing or dropped managed instance. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
  */
+@added(Versions.v2026_11_01_preview)
 union ManagedDatabaseCreateMode {
   string,
 
@@ -11698,8 +11733,17 @@ model ManagedDatabaseProperties {
   catalogCollation?: CatalogCollationType;
 
   /**
+   * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. SourceDatabaseName, SourceManagedInstanceName and PointInTime must be specified. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
+   */
+  @removed(Versions.v2026_11_01_preview)
+  @renamedFrom(Versions.v2026_11_01_preview, "createMode")
+  @visibility(Lifecycle.Create)
+  legacyCreateMode?: LegacyManagedDatabaseCreateMode;
+
+  /**
    * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup. Specify sourceDatabaseId for an existing database or restorableDroppedDatabaseId for a dropped database, and specify restorePointInTime. The dropped database can be on an existing or dropped managed instance. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
    */
+  @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Create)
   createMode?: ManagedDatabaseCreateMode;
 
@@ -11722,8 +11766,17 @@ model ManagedDatabaseProperties {
   crossSubscriptionSourceDatabaseId?: string;
 
   /**
+   * The restorable dropped database resource id to restore when creating this database.
+   */
+  @removed(Versions.v2026_11_01_preview)
+  @renamedFrom(Versions.v2026_11_01_preview, "restorableDroppedDatabaseId")
+  @visibility(Lifecycle.Create)
+  legacyRestorableDroppedDatabaseId?: string;
+
+  /**
    * The restorable dropped database resource id to restore when creating this database. This may identify a database on a dropped managed instance.
    */
+  @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Create)
   restorableDroppedDatabaseId?: string;
 

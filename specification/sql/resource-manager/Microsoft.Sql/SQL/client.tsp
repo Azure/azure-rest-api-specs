@@ -775,6 +775,11 @@ using Microsoft.Sql;
 @@alternateType(ServicePrincipal.clientId, uuid, "csharp");
 @@alternateType(ServicePrincipal.tenantId, uuid, "csharp");
 @@alternateType(
+  ManagedDatabaseProperties.legacyRestorableDroppedDatabaseId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
   ManagedDatabaseProperties.restorableDroppedDatabaseId,
   armResourceIdentifier,
   "csharp"
