@@ -13,6 +13,9 @@ using Microsoft.Network;
 using Microsoft.Compute;
 using Common;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# pageable CloudServiceSwap list contract."
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.Network.SwapResources.list, "csharp");
+
 // Preserve the released C# property names on their original wire fields.
 @@clientName(Microsoft.Network.ApplicationGateway.zones, "AvailabilityZones", "csharp");
 @@clientName(Microsoft.Network.ApplicationGatewayPrivateEndpointConnectionProperties.privateLinkServiceConnectionState, "ConnectionState", "csharp");
