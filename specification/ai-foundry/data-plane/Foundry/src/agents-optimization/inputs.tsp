@@ -536,9 +536,6 @@ model SkillOptimizationConfiguration
   @minItems(1)
   context: OptimizationContext[];
 
-  @doc("Exact skill versions unioned with skills discovered from Prompt or Managed targets, including toolboxes. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. References are deduplicated.")
-  additional_skills?: AgentOptimizationFoundrySkillReference[];
-
   @doc("Optional before/after evaluation using a required validation_set and shared agent optimization model, evaluator, and concurrency inputs. Requires target_configuration. Training sets are not accepted. Evaluate the same pinned target with baseline skills and proposed skills using the same validation set and resolved evaluator versions. Scores do not guide generation, ranking, selection, or publication. Omitted to skip performance evaluation.")
   evaluation_configuration?: SkillOptimizationEvaluationConfiguration;
 }
