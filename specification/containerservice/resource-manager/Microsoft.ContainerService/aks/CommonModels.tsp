@@ -4559,7 +4559,15 @@ model AccessProfile {
   /**
    * Base64-encoded Kubernetes configuration file.
    */
+  @renamedFrom(Versions.v2026_09_01, "kubeConfig")
+  @removed(Versions.v2026_09_01)
+  legacyKubeConfig?: bytes;
+
+  /**
+   * Base64-encoded Kubernetes configuration file.
+   */
   @secret
+  @added(Versions.v2026_09_01)
   kubeConfig?: bytes;
 }
 
@@ -4589,7 +4597,16 @@ model CredentialResult {
    * Base64-encoded Kubernetes configuration file.
    */
   @visibility(Lifecycle.Read)
+  @renamedFrom(Versions.v2026_09_01, "value")
+  @removed(Versions.v2026_09_01)
+  legacyValue?: bytes;
+
+  /**
+   * Base64-encoded Kubernetes configuration file.
+   */
+  @visibility(Lifecycle.Read)
   @secret
+  @added(Versions.v2026_09_01)
   value?: bytes;
 }
 

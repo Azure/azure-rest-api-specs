@@ -1,12 +1,14 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./CommonModels.tsp";
 import "./ManagedCluster.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerService;
 
@@ -191,6 +193,13 @@ model PrivateEndpointConnectionListResult {
    */
   @pageItems
   value?: PrivateEndpointConnection[];
+
+  /**
+   * The link to the next page, if any. Omitted when all results are returned in a single response.
+   */
+  @added(Versions.v2026_09_01)
+  @nextLink
+  nextLink?: string;
 }
 
 /**

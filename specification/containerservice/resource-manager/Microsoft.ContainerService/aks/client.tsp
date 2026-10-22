@@ -6,6 +6,12 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.ContainerService;
 
+// The Java handwritten cluster facade consumes the existing response-envelope methods.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve listWithResponseAsync used by the Java handwritten cluster facade."
+@@disablePageable(PrivateEndpointConnections.list, "java");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve listWithResponseAsync used by the Java handwritten cluster facade."
+@@disablePageable(ManagedClusters.privateLinkResourcesList, "java");
+
 // Fix .NET code generation naming conflict: BootstrapAzureConfig has both an internal
 // BootstrapTokenInfo property and a flattened public string property that both resolve
 // to "BootstrapToken". Renaming the backing property avoids the CS0102 duplicate error.

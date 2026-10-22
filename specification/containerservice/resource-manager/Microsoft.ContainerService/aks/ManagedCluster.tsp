@@ -84,7 +84,15 @@ model RunCommandRequest {
   /**
    * AuthToken issued for AKS AAD Server App.
    */
+  @renamedFrom(Versions.v2026_09_01, "clusterToken")
+  @removed(Versions.v2026_09_01)
+  legacyClusterToken?: string;
+
+  /**
+   * AuthToken issued for AKS AAD Server App.
+   */
   @secret
+  @added(Versions.v2026_09_01)
   clusterToken?: string;
 }
 
@@ -217,6 +225,13 @@ model PrivateLinkResourcesListResult {
    */
   @pageItems
   value?: PrivateLinkResource[];
+
+  /**
+   * The link to the next page, if any. Omitted when all results are returned in a single response.
+   */
+  @added(Versions.v2026_09_01)
+  @nextLink
+  nextLink?: string;
 }
 
 /**
