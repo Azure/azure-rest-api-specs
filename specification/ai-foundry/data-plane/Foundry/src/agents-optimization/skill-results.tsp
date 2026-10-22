@@ -89,7 +89,7 @@ union AgentOptimizationSkillValidationId {
   evidence_provenance: "evidence_provenance",
 }
 
-/** Base validation category; reporting-only performance scores are exposed separately in evaluation_comparison. */
+/** Base validation category; reporting-only performance scores use the baseline and generated candidate evaluation summaries. */
 @discriminator("type")
 model AgentOptimizationSkillValidation {
   @doc("Validation category discriminator.")
@@ -131,6 +131,9 @@ model AgentOptimizationSkillResult {
 
   @doc("Intended identity for every result. A confirmed version appears only with status created; no_change retains the baseline version only in input_skill.")
   output_skill: AgentOptimizationFoundrySkillOutputReference;
+
+  @doc("Safe, human-readable explanation of why this skill was proposed or retained, grounded in the selected evidence. Omitted until available. Must not include sensitive trace excerpts or hidden model reasoning.")
+  rationale?: string;
 
   @doc("Artifact checks, including rejections. Absence does not imply success. Reporting-only before/after evaluation is separate from artifact validation.")
   validations?: AgentOptimizationSkillValidation[];
