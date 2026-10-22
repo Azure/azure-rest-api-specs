@@ -76,7 +76,7 @@ model DiscoveredResourceProperties {
   location?: azureLocation;
 
   /**
-   * The availability zones the discovered resource occupies. Values are logical zone identifiers, such as `["1", "2"]` for a zone-pinned resource, or the single value `zone-redundant` when redundancy is expressed as a flag or SKU rather than a zone list. Absent, and never empty, when no zone information was captured; a non-zone-aware resource and an unzoned zone-aware resource are not distinguished.
+   * The availability zones the discovered resource occupies. Values are logical zone identifiers, such as `["1", "2"]` for a zone-pinned resource, or the single value `zone-redundant` when redundancy is expressed as a flag or SKU rather than a zone list. Absent, and never empty, when no zone information was captured; a non-zone-aware resource and a zone-aware resource without an assigned zone are not distinguished.
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
