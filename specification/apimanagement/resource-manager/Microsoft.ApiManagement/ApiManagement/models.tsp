@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -2335,6 +2337,30 @@ model SubscriptionKeyParameterNamesContract {
    * Subscription key query string parameter name.
    */
   query?: string;
+
+  /**
+   * Whether to accept an API Management subscription key in the Authorization header using the Bearer scheme. Set to 'enabled' to opt in. If omitted, empty, or 'disabled', this behavior is disabled. This setting does not configure OAuth or JWT validation.
+   */
+  @added(Versions.v2026_05_01)
+  bearer?: SubscriptionKeyBearerState;
+}
+
+/**
+ * Whether to accept API Management subscription keys using the Bearer authorization scheme.
+ */
+@added(Versions.v2026_05_01)
+union SubscriptionKeyBearerState {
+  string,
+
+  /**
+   * Subscription keys in the Authorization header using the Bearer scheme are not accepted.
+   */
+  Disabled: "disabled",
+
+  /**
+   * Subscription keys in the Authorization header using the Bearer scheme are accepted.
+   */
+  Enabled: "enabled",
 }
 
 /**

@@ -26,7 +26,16 @@ To see additional help and options, run:
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-preview-2025-09-01-preview
+tag: package-2026-05
+```
+
+### Tag: package-2026-05
+
+These settings apply only when `--tag=package-2026-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05'
+input-file:
+  - stable/2026-05-01/openapi.json
 ```
 
 ### Tag: package-preview-2025-09-01-preview
@@ -1366,4 +1375,3 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: apimworkspacebackends.json
     reasons: This are the object fields which when updated require some data to be present.
-
