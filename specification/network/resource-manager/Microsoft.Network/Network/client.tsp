@@ -4790,7 +4790,7 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 
 @@clientName(
   Microsoft.Network.FirewallPacketCaptureParameters,
-  "FirewallPacketCaptureContent",
+  "FirewallPacketCaptureRequestContent",
   "csharp"
 );
 
@@ -6380,6 +6380,18 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 @@alternateType(
   Microsoft.Network.PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup::parameters.location,
   Azure.Core.azureLocation,
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup,
+  "CheckPrivateLinkServiceVisibility",
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.ApplicationGateways.applicationGatewayPrivateLinkResourcesList,
+  "GetApplicationGatewayPrivateLinkResources",
   "csharp"
 );
 
