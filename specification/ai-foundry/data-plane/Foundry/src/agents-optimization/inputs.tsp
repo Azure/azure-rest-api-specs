@@ -384,6 +384,22 @@ model PromptOptimizationConfiguration
   context?: OptimizationContext[];
 }
 
+@doc("Caller-supplied inputs for an agent optimization job.")
+model AgentOptimizationJobInputs {
+  @doc("Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.")
+  @maxLength(256)
+  display_name?: string;
+
+  @doc("Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent.")
+  target_configuration?: AgentOptimizationTargetConfiguration;
+
+  @doc("Model used to generate candidate changes. An existing deployment name is also accepted.")
+  optimization_model_configuration: AgentOptimizationModelConfiguration;
+
+  @doc("Type-specific optimization configuration.")
+  optimization_configuration: AgentOptimizationConfigurationBase;
+}
+
 @doc("Inputs for estimating an agent-optimization job.")
 model AgentOptimizationEstimateInputs {
   @doc("Foundry agent whose configuration would be optimized. Omitted when the workflow does not target a registered Foundry agent.")

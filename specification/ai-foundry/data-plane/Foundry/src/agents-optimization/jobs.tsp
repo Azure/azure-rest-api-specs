@@ -131,18 +131,7 @@ model AgentOptimizationJobResult {
 
 @doc("Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration.")
 model AgentOptimizationJob is JobLike<AgentOptimizationJobResult, never> {
-  @doc("Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.")
-  @maxLength(256)
-  display_name?: string;
-
-  @doc("Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent.")
-  target_configuration?: AgentOptimizationTargetConfiguration;
-
-  @doc("Model used to generate candidate changes. An existing deployment name is also accepted.")
-  optimization_model_configuration: AgentOptimizationModelConfiguration;
-
-  @doc("Type-specific optimization configuration.")
-  optimization_configuration: AgentOptimizationConfigurationBase;
+  ...AgentOptimizationJobInputs;
 
   @doc("Duration for which the job has been running, in milliseconds.")
   @visibility(Lifecycle.Read)
