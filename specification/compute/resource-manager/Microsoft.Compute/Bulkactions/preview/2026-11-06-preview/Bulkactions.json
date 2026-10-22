@@ -453,6 +453,9 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ScheduledActionFilterParameters"
           }
         ],
         "responses": {
@@ -472,6 +475,9 @@
         "x-ms-examples": {
           "List recurring bulk actions in a subscription": {
             "$ref": "./examples/RecurringBulkActions_ListBySubscription_PagedSuccess.json"
+          },
+          "List recurring bulk actions in a subscription filtered by location": {
+            "$ref": "./examples/RecurringBulkActions_ListBySubscription_FilterSuccess.json"
           }
         },
         "x-ms-pageable": {
@@ -1825,6 +1831,9 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScheduledActionFilterParameters"
           }
         ],
         "responses": {
@@ -1844,6 +1853,9 @@
         "x-ms-examples": {
           "List recurring bulk actions in a resource group": {
             "$ref": "./examples/RecurringBulkActions_ListByResourceGroup_PagedSuccess.json"
+          },
+          "List recurring bulk actions in a resource group filtered by name": {
+            "$ref": "./examples/RecurringBulkActions_ListByResourceGroup_FilterSuccess.json"
           }
         },
         "x-ms-pageable": {
@@ -2839,6 +2851,9 @@
             "required": true,
             "type": "string",
             "pattern": "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}"
+          },
+          {
+            "$ref": "#/parameters/OccurrenceResourceFilterParameters"
           }
         ],
         "responses": {
@@ -2861,6 +2876,9 @@
           },
           "02 - List a page of resources in a recurring bulk action occurrence": {
             "$ref": "./examples/Occurrences_ListResources_PagedSuccess.json"
+          },
+          "03 - List resources in a recurring bulk action occurrence filtered by resource ID": {
+            "$ref": "./examples/Occurrences_ListResources_FilterSuccess.json"
           }
         },
         "x-ms-pageable": {
@@ -2954,6 +2972,9 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "$ref": "#/parameters/ScheduledActionResourceFilterParameters"
           }
         ],
         "responses": {
@@ -2973,6 +2994,9 @@
         "x-ms-examples": {
           "List a page of resources associated with a recurring bulk action": {
             "$ref": "./examples/RecurringBulkActions_ListResources_PagedSuccess.json"
+          },
+          "List resources associated with a recurring bulk action filtered by resource ID": {
+            "$ref": "./examples/RecurringBulkActions_ListResources_FilterSuccess.json"
           }
         },
         "x-ms-pageable": {
@@ -8602,6 +8626,33 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
+    },
+    "OccurrenceResourceFilterParameters": {
+      "name": "$filter",
+      "in": "query",
+      "description": "The OData filter expression to apply to the list operation. Supported fields for OccurrenceResource items are: name, id, type, resourceId, scheduledTime, errorDetails/code, errorDetails/message, and errorDetails/target. Supports OData comparison and logical operators and string functions such as contains and startswith. Enum-typed properties, tags, and the cast function are not supported.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
+    },
+    "ScheduledActionFilterParameters": {
+      "name": "$filter",
+      "in": "query",
+      "description": "The OData filter expression to apply to the list operation. Supported fields for ScheduledAction items are: name, id, type, location, properties/startTime, properties/endTime, properties/disabled, and properties/schedule/timeZone. Supports OData comparison and logical operators and string functions such as contains and startswith. Enum-typed properties, tags, and the cast function are not supported.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
+    },
+    "ScheduledActionResourceFilterParameters": {
+      "name": "$filter",
+      "in": "query",
+      "description": "The OData filter expression to apply to the list operation. Supported fields for ScheduledActionResource items are: name, id, type, and resourceId. Supports OData comparison and logical operators and string functions such as contains and startswith. Enum-typed properties, tags, and the cast function are not supported.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
     }
   }
 }

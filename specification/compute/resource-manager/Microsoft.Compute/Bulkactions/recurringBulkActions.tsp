@@ -771,6 +771,30 @@ model ScheduledActionCreateResponse is ArmResourceCreatedResponse<
     Azure.Core.Foundations.RetryAfterHeader
 >;
 
+@doc("List filter options for recurring bulk action list operations.")
+model ScheduledActionFilterParameters {
+  @added(Versions.`2026-11-06-preview`)
+  @query("$filter")
+  @doc("The OData filter expression to apply to the list operation. Supported fields for ScheduledAction items are: name, id, type, location, properties/startTime, properties/endTime, properties/disabled, and properties/schedule/timeZone. Supports OData comparison and logical operators and string functions such as contains and startswith. Enum-typed properties, tags, and the cast function are not supported.")
+  filter?: string;
+}
+
+@doc("List filter options for recurring bulk action resource list operations.")
+model ScheduledActionResourceFilterParameters {
+  @added(Versions.`2026-11-06-preview`)
+  @query("$filter")
+  @doc("The OData filter expression to apply to the list operation. Supported fields for ScheduledActionResource items are: name, id, type, and resourceId. Supports OData comparison and logical operators and string functions such as contains and startswith. Enum-typed properties, tags, and the cast function are not supported.")
+  filter?: string;
+}
+
+@doc("List filter options for occurrence resource list operations.")
+model OccurrenceResourceFilterParameters {
+  @added(Versions.`2026-11-06-preview`)
+  @query("$filter")
+  @doc("The OData filter expression to apply to the list operation. Supported fields for OccurrenceResource items are: name, id, type, resourceId, scheduledTime, errorDetails/code, errorDetails/message, and errorDetails/target. Supports OData comparison and logical operators and string functions such as contains and startswith. Enum-typed properties, tags, and the cast function are not supported.")
+  filter?: string;
+}
+
 @added(Versions.`2026-07-06-preview`)
 @renamedFrom(Versions.`2026-11-06-preview`, "ScheduledActions")
 @armResourceOperations
@@ -807,11 +831,17 @@ interface RecurringBulkActions {
 
   @doc("Lists recurring bulk actions in the specified resource group.")
   @errorsDoc("The request failed. The response contains error details.")
-  listByResourceGroup is ArmResourceListByParent<ScheduledAction>;
+  listByResourceGroup is ArmResourceListByParent<
+    ScheduledAction,
+    Parameters = ScheduledActionFilterParameters
+  >;
 
   @doc("Lists recurring bulk actions in the specified subscription.")
   @errorsDoc("The request failed. The response contains error details.")
-  listBySubscription is ArmListBySubscription<ScheduledAction>;
+  listBySubscription is ArmListBySubscription<
+    ScheduledAction,
+    Parameters = ScheduledActionFilterParameters
+  >;
 
   @autoRoute
   @listsResource(ScheduledActionResource)
@@ -820,9 +850,10 @@ interface RecurringBulkActions {
   @get
   @doc("Lists resources associated with the specified recurring bulk action.")
   @errorsDoc("The request failed. The response contains error details.")
-  listResources(...ResourceInstanceParameters<ScheduledActionResource>):
-    | ArmResponse<ResourceListResponse>
-    | ErrorResponse;
+  listResources(
+    ...ResourceInstanceParameters<ScheduledActionResource>,
+    ...ScheduledActionResourceFilterParameters,
+  ): ArmResponse<ResourceListResponse> | ErrorResponse;
 
   /** Attach resources to the recurring bulk action so they are included in future occurrences. */
   @doc("Adds resources to the specified recurring bulk action asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final 200 result. Completion covers resource reconciliation, not execution of the scheduled virtual machine operations.")
@@ -955,9 +986,10 @@ interface Occurrences {
   @get
   @doc("Lists resources for the specified occurrence.")
   @errorsDoc("The request failed. The response contains error details.")
-  listResources(...ResourceInstanceParameters<OccurrenceResource>):
-    | ArmResponse<OccurrenceResourceListResponse>
-    | ErrorResponse;
+  listResources(
+    ...ResourceInstanceParameters<OccurrenceResource>,
+    ...OccurrenceResourceFilterParameters,
+  ): ArmResponse<OccurrenceResourceListResponse> | ErrorResponse;
 
   /** Cancel the occurrence so its pending operations do not run. */
   @doc("Requests cancellation of the specified occurrence for the specified resource IDs asynchronously. The initial response is 202 Accepted with no body. Poll Azure-AsyncOperation for operation status and follow the Location URL unchanged for the final 200 result. Cancellation is best effort for operations that might already have been activated.")
