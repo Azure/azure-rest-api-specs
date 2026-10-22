@@ -435,17 +435,17 @@ model AgentOptimizationTraceWindow {
   type: string;
 }
 
-/** Selects recent trace conversations in a fixed half-open interval, preferring traces with annotations or evaluation results. */
+/** Selects recent trace conversations in a completed past half-open interval, preferring traces with annotations or evaluation results. */
 model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
   @doc("Fixed-window discriminator.")
   type: "fixed";
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Trace selection preserves the caller's explicit UTC offset."
-  @doc("Inclusive ISO 8601 timestamp with an explicit UTC offset. Must precede end_time.")
+  @doc("Inclusive ISO 8601 timestamp with an explicit UTC offset. Must precede end_time and be in the past. The service validates the interval at submission.")
   start_time: offsetDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Trace selection preserves the caller's explicit UTC offset."
-  @doc("Exclusive ISO 8601 timestamp with an explicit UTC offset. Future values are queried unchanged against available traces; the job does not wait for this time.")
+  @doc("Exclusive ISO 8601 timestamp with an explicit UTC offset. Must be at or before job submission time, forming a completed past interval. The service rejects future windows rather than waiting or clamping timestamps.")
   end_time: offsetDateTime;
 
   @doc("Maximum number of trace conversations to select. Defaults to 100. Select the latest matching traces, giving preference to those with human annotations, evaluation results, or both. Traces without feedback remain eligible.")
@@ -524,8 +524,8 @@ model SkillOptimizationConfiguration
   @minItems(1)
   context: OptimizationContext[];
 
-  @doc("Exact skill versions unioned with skills discovered from Prompt or Managed targets, including toolboxes. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. References are deduplicated.")
-  additional_skills?: AgentOptimizationFoundrySkillReference[];
+  @doc("Exact baseline skill versions, separate from trace and steering context. Unioned with skills discovered from Prompt or Managed targets, including toolboxes. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. References are deduplicated.")
+  skill_references?: AgentOptimizationFoundrySkillReference[];
 
   @doc("Optional before/after evaluation using a required validation_set and shared agent optimization model, evaluator, and concurrency inputs. Requires target_configuration. Training sets are not accepted. Evaluate the same pinned target with baseline skills and proposed skills using the same validation set and resolved evaluator versions. Scores do not guide generation, ranking, selection, or publication. Omitted to skip performance evaluation.")
   evaluation_configuration?: SkillOptimizationEvaluationConfiguration;
