@@ -6,9 +6,9 @@ For context on this directory, see [Design guidelines for spec repos validation 
 
 ## Spec Change Policies
 
-[Spec Change Policies](tools/spec-change-policies/README.md) checks TypeSpec usage
-policies for committed PR changes. [TypeSpec Validation](tools/typespec-validation/README.md)
-continues to validate TypeSpec project correctness and SDK API-version pins.
+[Spec Change Policies](tools/spec-change-policies/README.md) checks TypeSpec usage and
+SDK API-version policies for committed PR changes. [TypeSpec Validation](tools/typespec-validation/README.md)
+continues to validate TypeSpec project correctness.
 
 The supported PR command is `pnpm spec-change-policies --base=<base> --head=<head>`.
 The former TypeSpec Requirement entry point and its `--check-all-under` audit

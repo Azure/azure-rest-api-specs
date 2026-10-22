@@ -41,7 +41,7 @@ package-name-dotnet-approved:
 # Per-plane opt-out: gate one plane and leave the other open.
 # Here data-plane is restricted to its approvers while management-plane
 # is open to anyone (the label is never removed on management-plane PRs).
-typespec-suppressions-approved:
+some-plane-approved-label:
   data-plane:
     - user3
   management-plane: unprotected
@@ -82,6 +82,29 @@ BreakingChange-Go-Sdk-Approved: &sdk-breaking-change-approvers
 BreakingChange-Go-Sdk-Suppression-Approved: *sdk-breaking-change-approvers
 BreakingChange-Python-Sdk-Approved: *sdk-breaking-change-approvers
 ```
+
+## ARM review labels
+
+On management-plane PRs, members of `arm-api-reviewers` may apply `ARMSignedOff`,
+`Approved-Suppression`, `Approved-LintDiff`, and `typespec-suppressions-approved`.
+Existing global approvers remain authorized.
+
+Members of any of `arm-api-reviewers`, `azure-sdk-team`, or `azure-arm-sdk-reviewers`
+may apply `Approved-ModelValidation`, `Approved-Avocado`, and
+`Approved-SemanticValidation` on management-plane PRs.
+
+Members of `arm-breaking-change-reviewers` may apply the configured
+`BreakingChange-Approved-` and `Versioning-Approved-` labels on both management-plane
+and data-plane PRs. These policies are not plane-scoped.
+Each label is listed explicitly in the configuration; new approval labels must be
+added individually, not as wildcard patterns.
+
+The ARM signoff, suppression, and validation policies leave data-plane behavior unchanged.
+`typespec-suppressions-approved` retains its existing `azure-data-plane-api-reviewers`
+policy on data-plane PRs; the other ARM policies explicitly opt data-plane PRs out.
+`WaitForARMFeedback` and `ARMChangesRequested` remain unprotected.
+
+Protection applies to label application, not removal.
 
 ## Security Model
 

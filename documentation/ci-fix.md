@@ -78,6 +78,7 @@ This restriction also applies to maintenance-only PRs that do not change
 `specification/`. Approvals, labels or reruns by maintainers do not authorize a
 non-allowlisted PR author. The allowlist is maintained in
 [`ALLOWED_AUTHORS`](../.github/workflows/src/protected-files.ts).
+Dependabot (`dependabot[bot]`) is a trusted automation author and may update protected files.
 Normal CODEOWNERS reviews and other merge requirements still apply, including
 to changes to the allowlist.
 

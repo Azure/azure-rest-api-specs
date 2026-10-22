@@ -36,6 +36,8 @@ function createMockGithubImpl() {
     },
     rest: {
       actions: {
+        createWorkflowDispatch: vi.fn(),
+        getWorkflowRun: vi.fn(),
         downloadArtifact: vi.fn().mockResolvedValue({ data: new ArrayBuffer(0) }),
         listJobsForWorkflowRun: vi.fn().mockResolvedValue({ data: [] }),
         listWorkflowRunArtifacts: vi.fn().mockResolvedValue({ data: { artifacts: [] } }),
@@ -61,6 +63,7 @@ function createMockGithubImpl() {
       repos: {
         createCommitStatus: vi.fn(),
         getContent: vi.fn(),
+        getBranchRules: vi.fn().mockResolvedValue({ data: [] }),
         getCombinedStatusForRef: vi.fn().mockResolvedValue({
           data: { statuses: [], total_count: 0 },
         }),

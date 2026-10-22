@@ -1,5 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./agent.tsp";
 import "./agentconnector.models.tsp";
@@ -8,6 +9,7 @@ using Azure.ResourceManager;
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 
@@ -41,15 +43,45 @@ interface AgentsConnectors {
   @action("listSecrets")
   @armResourceAction(AgentConnector)
   @post
-  listSecrets is ArmResourceActionSync<AgentConnector, void, AgentConnector>;
+  @sharedRoute
+  @removed(Versions.v2026_07_01)
+  @renamedFrom(Versions.v2026_07_01, "listSecrets")
+  listSecretsV1 is ArmResourceActionSync<AgentConnector, void, AgentConnector>;
+
+  /** Get a Data Connector with secrets from an Agent. */
+  @action("listSecrets")
+  @armResourceAction(AgentConnector)
+  @post
+  @sharedRoute
+  @added(Versions.v2026_07_01)
+  listSecrets is ArmResourceActionSync<
+    AgentConnector,
+    void,
+    AgentConnectorWithSecrets
+  >;
 
   /** List all Data Connectors with secrets from an Agent */
   @action("listConnectorsWithSecrets")
   @armResourceAction(Agent)
   @post
-  listWithSecretsByAgent is ArmResourceActionSync<
+  @sharedRoute
+  @removed(Versions.v2026_07_01)
+  @renamedFrom(Versions.v2026_07_01, "listWithSecretsByAgent")
+  listWithSecretsByAgentV1 is ArmResourceActionSync<
     Agent,
     void,
     AgentConnectorCollection
+  >;
+
+  /** List all Data Connectors with secrets from an Agent. */
+  @action("listConnectorsWithSecrets")
+  @armResourceAction(Agent)
+  @post
+  @sharedRoute
+  @added(Versions.v2026_07_01)
+  listWithSecretsByAgent is ArmResourceActionSync<
+    Agent,
+    void,
+    AgentConnectorWithSecretsCollection
   >;
 }

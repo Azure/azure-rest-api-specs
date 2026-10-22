@@ -10,29 +10,43 @@ templates.
 - This evaluator package's only dependency is `@microsoft/vally-cli`, pinned to the version CI should evaluate with.
 - `package-lock.json` must be committed so `npm ci` is deterministic.
 - Optional Blob publication is isolated in [publisher](publisher/), with
-  its own package/lock for **fflate only** and CLI/PowerShell tests. Shard evaluator
+  its own pnpm package/lock for **fflate only** and CLI/PowerShell tests. Shard evaluator
   restores do not install it; publication adds no Node Azure SDK dependencies.
 
 ## Complete build results and direct Blob publishing
 
 Shards now retain the newest invocation's raw JSONL, JUnit and a completion marker
 via [shard-results](lib/shard-results.ts), including failed evaluations.
-Summary checks the full Prepare matrix and selects each expected shard's highest
-attempt once for Markdown, the Tests tab and bundling. Missing, interrupted or
+Summary checks the full Prepare matrix and selects the artifact matching each
+shard's latest timeline attempt once for Markdown, the Tests tab and bundling. Missing, interrupted or
 corrupt results remain incomplete; later failed attempts never fall back to older
 successful artifacts. A separate step reads the current-build timeline with
 `System.AccessToken` and three bounded transient retries, saving the latest attempt
 evidence beside the summary. Rendering reads that file and needs no token or network.
-Unverified or ambiguous attempts cannot authorize publication. The legacy JUnit-only
+If that exact attempt has no artifact, older JUnit is not copied or counted.
+Missing or invalid timeline evidence also excludes unverified diagnostics and blocks publication.
+Matching latest-attempt JUnit remains available when its result data is incomplete.
+The legacy JUnit-only
 summary remains supported. No historical build download or reconstruction is involved.
+The bundler accepts exactly one already-selected attempt per expected shard; it
+does not repeat Summary's selection or accept an ambiguous list of attempts.
 
 The [publishing step](../../pipelines/templates/steps/eval-publish-results.yml) restores
-the archive dependency from the **default JavaScript feed**, prepares one saved ZIP
+the archive dependency with **pnpm 12.6.0** from the **default JavaScript feed**, prepares one saved ZIP
 and a checksum/identity descriptor, then runs [Publish-EvalResults.ps1](publisher/Publish-EvalResults.ps1)
 under `AzureCLI@2` using `eval-dashboard-sc`. The script uses `az storage blob upload`,
 not a custom SDK transport. There is no enterprise checkout, dashboard file upload,
 evaluator rerun or container creation. Bundle metadata is passed explicitly by YAML;
 neither bundling nor upload interprets DevOps environment variables or publishing policy.
+Shard/Summary jobs and publisher CI use Node 24; the publisher requires **24.14.1+**,
+matching the specs repository. Its frozen `pnpm-lock.yaml` retains the reviewed
+SHA512 checksum and no private registry URLs. `--ignore-workspace` prevents a
+consumer's workspace from changing the install or pulling in unrelated packages.
+The pipeline uses Node's bundled npm only to bootstrap the exact pnpm version into
+the agent's temporary directory, with lifecycle scripts disabled. The same
+authenticated `.npmrc` is used by both commands; no global tools are changed.
+`--pm-on-fail=ignore` avoids pnpm resolving/downloading itself again after that
+explicit bootstrap, without changing dependency checks or the frozen lock.
 
 | Control | Current use |
 | --- | --- |
@@ -88,14 +102,22 @@ Reader limits are **32 MiB ZIP, 128 MiB expanded, 10,000 entries and 100,000 tri
 Canonical identities, UTC calendar dates, safe entries and counts are validated
 before upload. Blob metadata records schema, SHA-256, hashed publisher identity and
 the original storage time; Azure RBAC remains the authorization boundary.
+Construction checks every required non-empty input, merged byte/trial limits and
+the total entry count, including merged JSONL, before creating the ZIP. The final
+compressed-size cap is checked afterward. Full ZIP decoding remains in contract
+tests rather than reopening the archive in production. JSONL is decoded once and
+parsed directly as text, with byte limits on both source and serialized records.
 
-Uploads use `--auth-mode login --overwrite false --if-none-match '*'` with the **same
+Uploads use `--auth-mode login --overwrite false --if-none-match=*` with the **same
 saved ZIP**; Azure CLI owns transport retries, without another script/task retry loop.
+The condition is one argument so Linux does not expand a standalone `*` into file names.
+`--no-progress` keeps CLI progress out of captured command results. JSON is parsed
+from stdout only; captured native stderr is never mixed into JSON or echoed.
 Request/socket timeouts and the task deadline bound execution. Existing archives must match metadata,
 owner, checksum and size. Changed content needs a new Summary attempt, not an overwrite.
 The publisher never deletes archives; the dashboard's separate identity stays read-only.
-Local storage receipts are replaced atomically before any notification. Later
-notification/status-save failures cannot erase the retained successful storage result.
+The upload is confirmed and logged before notification. No local publication status
+file is written; a failed notification does not change the stored archive or fail upload.
 
 ### Notification and recovery
 
@@ -105,7 +127,7 @@ dashboard URL or API ID is hardcoded in the script. The URL must be a canonical
 HTTPS App Service address ending exactly in `/api/refresh`, with no credentials,
 nondefault port, query or fragment; the resource must be `api://<API-client-ID>`.
 Validation happens before requesting a notification token. Missing or invalid
-configuration preserves the successful storage receipt, sends no token and warns.
+configuration preserves the uploaded archive, sends no token and warns.
 The storage OAuth resource `https://storage.azure.com/` remains a platform constant,
 not a deployment destination. For the values above, Azure CLI requests a token for
 `api://258998df-81ec-460c-bdd7-56a9bdde1e48`; the dashboard
@@ -120,14 +142,29 @@ Do not replace viewer authentication or network restrictions to make a signal su
 
 ### Publisher tests and diagnostics
 
-Run `npm ci --ignore-scripts` and `npm test` from `publisher` (`npm.cmd` on Windows),
-then `npm test` from this directory. Publisher tests require **PowerShell 7.4+ and
-Pester 5**; pipeline upload uses the agent's authenticated Azure CLI. The existing
-common-tests PR pipeline runs all shared/archive Node tests and discovers the tagged
-PowerShell suite under `eng/common-tests/eval`; failures fail the CI job.
+With **Node 24.14.1+ and pnpm 12.6.0**, run `pnpm --ignore-workspace install
+--pm-on-fail=ignore --frozen-lockfile --prod --ignore-scripts` and
+`pnpm --ignore-workspace --pm-on-fail=ignore test` from `publisher`,
+then `node --experimental-strip-types --test` from this directory.
+These shared Node tests do not need Tools-owned CI files, PowerShell tests or
+the consuming repository's redirect settings. A consumer-copy regression runs
+them without Tools files or Git history, with absent and different redirect templates.
+
+In Tools, run `Invoke-Pester -Path eng/common-tests/eval/Publish-EvalResults.Tests.ps1 -CI`
+from the repository root for the **PowerShell 7.4+ / Pester 5 / Azure CLI** tests. That Tools-only
+suite also checks the Tools CI wiring and network policy. The existing common-tests
+PR pipeline runs both the shared/archive Node tests and this tagged PowerShell suite;
+failures fail the CI job. Other repositories do not need to copy this Tools test setup.
+Pipeline upload uses the agent's authenticated Azure CLI.
 CI restores only the locked archive dependency, not the Vally evaluator.
 Regression coverage includes the actual HTTP
-cmdlet against loopback, invalid collision metadata and receipt-path aliases.
+cmdlet against loopback, invalid collision metadata, upload-before-notification
+ordering and publication without local status files.
+One integration test also runs the real Azure CLI against a localhost-only Blob
+fixture with synthetic credentials and an isolated CLI profile. It verifies one
+successful upload does not trigger a fallback read. No production storage is used.
+Construction regressions exercise the exact entry/trial boundaries, aggregate
+expanded bytes, final compressed bytes, required inputs and UTF-8 JSONL limits.
 The loopback fixture selects the first Node application when CI has multiple Node
 installations on `PATH`. Configuration tests use synthetic hosts/resources and
 prove invalid targets cannot request or receive notification tokens.
@@ -135,8 +172,11 @@ Tests use synthetic fixtures and fake Azure transports;
 they do not evaluate models or contact production services. A real-run test remains
 separate from local checks and should use an already approved evaluation run.
 
-The saved result includes a bounded operation/error code/HTTP status, never raw SDK
-requests, tokens or result contents. Token acquisition failures require checking the
+The task logs the stored Blob name and notification outcome. Failures include a
+bounded operation/error code, never raw Azure responses, tokens or result contents.
+CLI failures include the exit code and a fixed known storage error code, when
+available. If the fallback read also fails, the original upload code is retained.
+Token acquisition failures require checking the
 service connection; Blob 403 requires checking its data-role scope; network failures
 require checking approved egress. Preserve the original archive for conflicts, and
 retry the signal or the same saved bytes for outages. Never substitute account keys,
@@ -145,10 +185,10 @@ relax TLS or broaden permissions to hide a failed request.
 ## TypeScript (no build step)
 
 The `*.ts` sources run directly through Node's native type stripping (erasable syntax only —
-no `enum`/`namespace`/parameter properties, no emit). CI pins Node `22.x`, which strips types
-unflagged on `>=22.18`; the pipeline `node` invocations and the `npm test` script pass
-`--experimental-strip-types` so the same sources also run on older local Node (`>=22.6`), which
-prints a harmless `ExperimentalWarning`. Relative imports use explicit `.ts` specifiers, as Node requires.
+no `enum`/`namespace`/parameter properties, no emit). Shard/Summary jobs and publisher
+CI use Node `24.x`; the publisher requires `>=24.14.1`. The older dependency-free
+glue still supports its declared Node 22 minimum, but that is not the publisher's
+runtime requirement. Relative imports use explicit `.ts` specifiers, as Node requires.
 The standalone Blob publisher uses the same execution model; it adds no compiler or TypeScript runtime dependency.
 
 ## Vendored files
