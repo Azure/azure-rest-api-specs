@@ -493,14 +493,11 @@ model AgentTracesOptimizationContext extends OptimizationContext {
   trace_window: AgentOptimizationTraceWindow;
 }
 
-/** Base configuration for service-generated skill evaluators. */
+/** Base configuration for service-generated skill evaluators. Evaluator generation uses the job's optimization_model_configuration; no separate generation model is accepted. */
 @discriminator("type")
 model SkillOptimizationEvaluatorGenerationConfiguration {
   @doc("Evaluator generation source discriminator.")
   type: string;
-
-  @doc("Optional model configuration for evaluator generation, using the same model configuration shape as evaluation_model. Omitted to reuse evaluation_configuration.evaluation_model. This controls evaluator generation, not skill generation or candidate selection.")
-  generation_model_configuration?: EvaluationModelConfiguration;
 }
 
 /** Generates evaluators from the job's selected trace evidence. */
@@ -525,7 +522,7 @@ model SkillOptimizationEvaluationConfiguration {
   @maxItems(20)
   evaluators?: AgentOptimizationEvaluator[];
 
-  @doc("Opt-in creation of evaluators during this job. Resolved exact versions are returned in evaluators after preparation. Omitted when only existing evaluators are used.")
+  @doc("Opt-in creation of evaluators using the job's optimization_model_configuration, not evaluation_model. No separate generation model is accepted. Resolved exact versions are returned in evaluators after preparation. Omitted when only existing evaluators are used.")
   evaluator_generation_configuration?: SkillOptimizationEvaluatorGenerationConfiguration;
 }
 
