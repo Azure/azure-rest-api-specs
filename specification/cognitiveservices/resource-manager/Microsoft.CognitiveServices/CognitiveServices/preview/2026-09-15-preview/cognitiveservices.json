@@ -11047,6 +11047,9 @@
           }
         },
         "x-ms-examples": {
+          "List ACS policies with optional Azure OpenAI judge annotations": {
+            "$ref": "./examples/ListRaiPoliciesAcsWithAnnotations.json"
+          },
           "ListRaiPolicies": {
             "$ref": "./examples/ListRaiPolicies.json"
           }
@@ -11115,6 +11118,9 @@
         "x-ms-examples": {
           "Get an ACS policy": {
             "$ref": "./examples/GetRaiPolicyAcs.json"
+          },
+          "Get an ACS policy with an Azure OpenAI judge and eight intervention points": {
+            "$ref": "./examples/GetRaiPolicyAcsWithAnnotations.json"
           },
           "GetRaiPolicy": {
             "$ref": "./examples/GetRaiPolicy.json"
@@ -11204,6 +11210,9 @@
           }
         },
         "x-ms-examples": {
+          "Create an ACS policy with an Azure OpenAI judge and eight intervention points": {
+            "$ref": "./examples/PutRaiPolicyAcsWithAnnotations.json"
+          },
           "Create an ACS policy with optional policy dependencies": {
             "$ref": "./examples/PutRaiPolicyAcs.json"
           },
@@ -21036,9 +21045,63 @@
         ]
       }
     },
-    "RaiAcsEmptyObject": {
+    "RaiAcsAnnotationBinding": {
       "type": "object",
-      "description": "An object that must contain no properties."
+      "description": "Binds an annotator to a subject at one intervention point. The map key selects its declaration.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "The Agent Control Specification path selecting the subject passed to the annotator."
+        }
+      },
+      "required": [
+        "from"
+      ],
+      "additionalProperties": {}
+    },
+    "RaiAcsAnnotatorDefinition": {
+      "type": "object",
+      "description": "A named Agent Control Specification annotator declaration with host-defined configuration.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RaiAcsAnnotatorType",
+          "description": "The dispatcher kind. Supported configuration is determined by the evaluation host."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": {}
+    },
+    "RaiAcsAnnotatorType": {
+      "type": "string",
+      "description": "Extensible kinds of Agent Control Specification annotator dispatchers.",
+      "enum": [
+        "classifier",
+        "llm",
+        "endpoint"
+      ],
+      "x-ms-enum": {
+        "name": "RaiAcsAnnotatorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Classifier",
+            "value": "classifier",
+            "description": "Obtains annotations from a classifier dispatcher."
+          },
+          {
+            "name": "Llm",
+            "value": "llm",
+            "description": "Obtains annotations from a language-model dispatcher."
+          },
+          {
+            "name": "Endpoint",
+            "value": "endpoint",
+            "description": "Obtains annotations from an external endpoint dispatcher."
+          }
+        ]
+      }
     },
     "RaiAcsHarmCategory": {
       "type": "string",
@@ -21132,8 +21195,11 @@
           "description": "The logical policy evaluated at this intervention point."
         },
         "annotations": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
+          "type": "object",
+          "description": "Optional annotator bindings keyed by declaration name. Results are available to Rego as input.annotations.<name>.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RaiAcsAnnotationBinding"
+          }
         }
       },
       "required": [
@@ -21144,11 +21210,26 @@
     },
     "RaiAcsInterventionPoints": {
       "type": "object",
-      "description": "Intervention points supported by the Azure AI Content Safety Unified Moderate host profile.",
+      "description": "Optional Agent Control Specification bindings for the eight Agent Hooks intervention points.",
       "properties": {
+        "agent_startup": {
+          "$ref": "#/definitions/RaiAcsInterventionPoint",
+          "description": "The policy evaluated when the agent starts.",
+          "x-ms-client-name": "agentStartup"
+        },
         "input": {
           "$ref": "#/definitions/RaiAcsInterventionPoint",
           "description": "The policy evaluated for user input."
+        },
+        "pre_model_call": {
+          "$ref": "#/definitions/RaiAcsInterventionPoint",
+          "description": "The policy evaluated before a model call.",
+          "x-ms-client-name": "preModelCall"
+        },
+        "post_model_call": {
+          "$ref": "#/definitions/RaiAcsInterventionPoint",
+          "description": "The policy evaluated after a model call.",
+          "x-ms-client-name": "postModelCall"
         },
         "pre_tool_call": {
           "$ref": "#/definitions/RaiAcsToolInterventionPoint",
@@ -21163,12 +21244,17 @@
         "output": {
           "$ref": "#/definitions/RaiAcsInterventionPoint",
           "description": "The policy evaluated for final output."
+        },
+        "agent_shutdown": {
+          "$ref": "#/definitions/RaiAcsInterventionPoint",
+          "description": "The policy evaluated when the agent shuts down.",
+          "x-ms-client-name": "agentShutdown"
         }
       }
     },
     "RaiAcsManifest": {
       "type": "object",
-      "description": "The closed Rego-only Agent Control Specification (ACS) profile supported by\nAzure AI Content Safety Unified Moderate.",
+      "description": "An Agent Control Specification manifest with Rego policies and optional annotators.\nSupported manifest versions and configurations are determined by the evaluation host.",
       "properties": {
         "agent_control_specification_version": {
           "type": "string",
@@ -21200,8 +21286,11 @@
           }
         },
         "annotators": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard Agent Control Specification annotator dispatch is disabled; when present, this object must be empty."
+          "type": "object",
+          "description": "Optional annotator declarations keyed by name. Omitted or empty maps request no annotator declarations.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RaiAcsAnnotatorDefinition"
+          }
         }
       },
       "required": [
@@ -21306,19 +21395,38 @@
       "type": "string",
       "description": "Canonical policy targets supported by the Azure AI Content Safety Unified Moderate host profile.",
       "enum": [
+        "$snap.agent_init",
         "$snap.input",
+        "$snap.messages",
+        "$snap.response",
         "$snap.output",
         "$snap.tool_call.args",
-        "$snap.tool_result.value"
+        "$snap.tool_result.value",
+        "$snap.summary"
       ],
       "x-ms-enum": {
         "name": "RaiAcsPolicyTarget",
         "modelAsString": true,
         "values": [
           {
+            "name": "AgentInitialization",
+            "value": "$snap.agent_init",
+            "description": "Selects agent initialization data."
+          },
+          {
             "name": "Input",
             "value": "$snap.input",
             "description": "Selects the incoming user input."
+          },
+          {
+            "name": "Messages",
+            "value": "$snap.messages",
+            "description": "Selects messages sent to the model."
+          },
+          {
+            "name": "ModelResponse",
+            "value": "$snap.response",
+            "description": "Selects the model response."
           },
           {
             "name": "Output",
@@ -21334,6 +21442,11 @@
             "name": "ToolResult",
             "value": "$snap.tool_result.value",
             "description": "Selects a tool result."
+          },
+          {
+            "name": "AgentSummary",
+            "value": "$snap.summary",
+            "description": "Selects the agent session summary."
           }
         ]
       }
@@ -21342,19 +21455,38 @@
       "type": "string",
       "description": "Canonical target kinds supported by the Azure AI Content Safety Unified Moderate host profile.",
       "enum": [
+        "agent_init",
         "user_input",
+        "messages",
+        "model_response",
         "assistant_output",
         "tool_args",
-        "tool_result"
+        "tool_result",
+        "agent_summary"
       ],
       "x-ms-enum": {
         "name": "RaiAcsPolicyTargetKind",
         "modelAsString": true,
         "values": [
           {
+            "name": "AgentInitialization",
+            "value": "agent_init",
+            "description": "The target contains agent initialization data."
+          },
+          {
             "name": "UserInput",
             "value": "user_input",
             "description": "The target contains user input."
+          },
+          {
+            "name": "Messages",
+            "value": "messages",
+            "description": "The target contains messages sent to the model."
+          },
+          {
+            "name": "ModelResponse",
+            "value": "model_response",
+            "description": "The target contains a model response."
           },
           {
             "name": "AssistantOutput",
@@ -21370,6 +21502,11 @@
             "name": "ToolResult",
             "value": "tool_result",
             "description": "The target contains a tool result."
+          },
+          {
+            "name": "AgentSummary",
+            "value": "agent_summary",
+            "description": "The target contains the agent session summary."
           }
         ]
       }
@@ -21446,8 +21583,11 @@
           "description": "The logical policy evaluated at this intervention point."
         },
         "annotations": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
+          "type": "object",
+          "description": "Optional annotator bindings keyed by declaration name. Results are available to Rego as input.annotations.<name>.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RaiAcsAnnotationBinding"
+          }
         },
         "tool_name_from": {
           "$ref": "#/definitions/RaiAcsToolNameSelector",

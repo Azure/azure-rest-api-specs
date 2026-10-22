@@ -637,10 +637,40 @@ model RaiAcsModerationBindingExtension {
   harmConfigs: RaiAcsHarmConfiguration[];
 }
 
-/** An object that must contain no properties. */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "The AACS host profile permits these fields only when they are empty"
+/** Extensible kinds of Agent Control Specification annotator dispatchers. */
 @added(Versions.v2026_09_15_preview)
-model RaiAcsEmptyObject {}
+union RaiAcsAnnotatorType {
+  string,
+
+  /** Obtains annotations from a classifier dispatcher. */
+  Classifier: "classifier",
+
+  /** Obtains annotations from a language-model dispatcher. */
+  Llm: "llm",
+
+  /** Obtains annotations from an external endpoint dispatcher. */
+  Endpoint: "endpoint",
+}
+
+/** A named Agent Control Specification annotator declaration with host-defined configuration. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS annotators permit extensible host-defined configuration"
+@added(Versions.v2026_09_15_preview)
+model RaiAcsAnnotatorDefinition {
+  ...Record<unknown>;
+
+  /** The dispatcher kind. Supported configuration is determined by the evaluation host. */
+  type: RaiAcsAnnotatorType;
+}
+
+/** Binds an annotator to a subject at one intervention point. The map key selects its declaration. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS annotation bindings permit extensible host-defined configuration"
+@added(Versions.v2026_09_15_preview)
+model RaiAcsAnnotationBinding {
+  ...Record<unknown>;
+
+  /** The Agent Control Specification path selecting the subject passed to the annotator. */
+  from: string;
+}
 
 /** Static policy metadata for one Agent Control Specification tool catalog entry. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS tool entries permit extensible policy metadata"
@@ -691,8 +721,17 @@ model RaiAcsPolicyBinding {
 union RaiAcsPolicyTarget {
   string,
 
+  /** Selects agent initialization data. */
+  AgentInitialization: "$snap.agent_init",
+
   /** Selects the incoming user input. */
   Input: "$snap.input",
+
+  /** Selects messages sent to the model. */
+  Messages: "$snap.messages",
+
+  /** Selects the model response. */
+  ModelResponse: "$snap.response",
 
   /** Selects the assistant output. */
   Output: "$snap.output",
@@ -702,6 +741,9 @@ union RaiAcsPolicyTarget {
 
   /** Selects a tool result. */
   ToolResult: "$snap.tool_result.value",
+
+  /** Selects the agent session summary. */
+  AgentSummary: "$snap.summary",
 }
 
 /** Canonical target kinds supported by the Azure AI Content Safety Unified Moderate host profile. */
@@ -709,8 +751,17 @@ union RaiAcsPolicyTarget {
 union RaiAcsPolicyTargetKind {
   string,
 
+  /** The target contains agent initialization data. */
+  AgentInitialization: "agent_init",
+
   /** The target contains user input. */
   UserInput: "user_input",
+
+  /** The target contains messages sent to the model. */
+  Messages: "messages",
+
+  /** The target contains a model response. */
+  ModelResponse: "model_response",
 
   /** The target contains assistant output. */
   AssistantOutput: "assistant_output",
@@ -720,6 +771,9 @@ union RaiAcsPolicyTargetKind {
 
   /** The target contains a tool result. */
   ToolResult: "tool_result",
+
+  /** The target contains the agent session summary. */
+  AgentSummary: "agent_summary",
 }
 
 /**
@@ -753,8 +807,9 @@ model RaiAcsInterventionPoint {
   /** The logical policy evaluated at this intervention point. */
   policy: RaiAcsPolicyBinding;
 
-  /** Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty. */
-  annotations?: RaiAcsEmptyObject;
+  /** Optional annotator bindings keyed by declaration name. Results are available to Rego as input.annotations.<name>. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS defines annotations as a name-keyed map"
+  annotations?: Record<RaiAcsAnnotationBinding>;
 }
 
 /** Binds one logical policy to a tool-call intervention point. */
@@ -767,11 +822,23 @@ model RaiAcsToolInterventionPoint {
   toolNameFrom?: RaiAcsToolNameSelector;
 }
 
-/** Intervention points supported by the Azure AI Content Safety Unified Moderate host profile. */
+/** Optional Agent Control Specification bindings for the eight Agent Hooks intervention points. */
 @added(Versions.v2026_09_15_preview)
 model RaiAcsInterventionPoints {
+  /** The policy evaluated when the agent starts. */
+  @encodedName("application/json", "agent_startup")
+  agentStartup?: RaiAcsInterventionPoint;
+
   /** The policy evaluated for user input. */
   input?: RaiAcsInterventionPoint;
+
+  /** The policy evaluated before a model call. */
+  @encodedName("application/json", "pre_model_call")
+  preModelCall?: RaiAcsInterventionPoint;
+
+  /** The policy evaluated after a model call. */
+  @encodedName("application/json", "post_model_call")
+  postModelCall?: RaiAcsInterventionPoint;
 
   /** The policy evaluated before a tool call. */
   @encodedName("application/json", "pre_tool_call")
@@ -783,11 +850,15 @@ model RaiAcsInterventionPoints {
 
   /** The policy evaluated for final output. */
   output?: RaiAcsInterventionPoint;
+
+  /** The policy evaluated when the agent shuts down. */
+  @encodedName("application/json", "agent_shutdown")
+  agentShutdown?: RaiAcsInterventionPoint;
 }
 
 /**
- * The closed Rego-only Agent Control Specification (ACS) profile supported by
- * Azure AI Content Safety Unified Moderate.
+ * An Agent Control Specification manifest with Rego policies and optional annotators.
+ * Supported manifest versions and configurations are determined by the evaluation host.
  */
 @added(Versions.v2026_09_15_preview)
 model RaiAcsManifest {
@@ -815,8 +886,9 @@ model RaiAcsManifest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS defines tools as a name-keyed extensible map"
   tools?: Record<RaiAcsToolDefinition>;
 
-  /** Standard Agent Control Specification annotator dispatch is disabled; when present, this object must be empty. */
-  annotators?: RaiAcsEmptyObject;
+  /** Optional annotator declarations keyed by name. Omitted or empty maps request no annotator declarations. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS defines annotators as a name-keyed map"
+  annotators?: Record<RaiAcsAnnotatorDefinition>;
 }
 
 /**

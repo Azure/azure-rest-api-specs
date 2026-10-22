@@ -51,8 +51,12 @@ suppressions:
       - $.definitions.RaiAcsToolInterventionPoint.properties.policy_target
       - $.definitions.RaiAcsToolInterventionPoint.properties.policy_target_kind
       - $.definitions.RaiAcsToolInterventionPoint.properties.tool_name_from
+      - $.definitions.RaiAcsInterventionPoints.properties.agent_startup
+      - $.definitions.RaiAcsInterventionPoints.properties.pre_model_call
+      - $.definitions.RaiAcsInterventionPoints.properties.post_model_call
       - $.definitions.RaiAcsInterventionPoints.properties.pre_tool_call
       - $.definitions.RaiAcsInterventionPoints.properties.post_tool_call
+      - $.definitions.RaiAcsInterventionPoints.properties.agent_shutdown
       - $.definitions.RaiAcsManifest.properties.agent_control_specification_version
       - $.definitions.RaiAcsManifest.properties.intervention_points
       - $.definitions.RaiAcsModerationBindingExtension.properties.subject_format
@@ -60,13 +64,18 @@ suppressions:
       - $.definitions.RaiAcsPolicyBinding.properties.aacs_moderation
       - $.definitions.RaiAcsToolDefinition.properties.security_labels
   - code: AvoidAdditionalProperties
-    reason: The canonical ACS manifest defines metadata and tool entries as extensible JSON objects, and policies and tools as name-keyed maps. Replacing these objects with closed properties or arrays would break ACS manifest portability and round-tripping.
+    reason: The canonical ACS manifest defines metadata, tool entries, annotator declarations, and annotation bindings as extensible JSON objects, and policies, tools, annotators, and annotations as name-keyed maps. Replacing these objects with closed properties or arrays would break ACS manifest portability and round-tripping.
     from: cognitiveservices.json
     where:
       - $.definitions.RaiAcsManifest.properties.metadata
       - $.definitions.RaiAcsManifest.properties.policies
       - $.definitions.RaiAcsManifest.properties.tools
+      - $.definitions.RaiAcsManifest.properties.annotators
       - $.definitions.RaiAcsToolDefinition
+      - $.definitions.RaiAcsAnnotatorDefinition
+      - $.definitions.RaiAcsAnnotationBinding
+      - $.definitions.RaiAcsInterventionPoint.properties.annotations
+      - $.definitions.RaiAcsToolInterventionPoint.properties.annotations
   - code: PutResponseCodes
     reason: Compute create is a genuine long-running async operation - the service returns 202 Accepted on success (never 200/201) and 4xx on failure. Modeling 202-only reflects the real backend contract (live-validated). Preview-only bug fix correcting the contract before GA.
     where:
