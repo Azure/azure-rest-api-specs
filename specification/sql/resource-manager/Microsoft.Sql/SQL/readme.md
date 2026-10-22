@@ -184,42 +184,34 @@ input-file:
   - preview/2026-11-01-preview/workloadGroups.json
 
 suppressions:
-  - code: AllTrackedResourcesMustHaveDelete
-    from: restorableDroppedManagedInstancesByLocation.json
-    where: $.definitions.RestorableDroppedManagedInstance
-  - code: TrackedResourcePatchOperation
-    from: restorableDroppedManagedInstancesByLocation.json
-    where: $.definitions.RestorableDroppedManagedInstance
-  - code: TrackedResourcesMustHavePut
-    from: restorableDroppedManagedInstancesByLocation.json
-    where: $.definitions.RestorableDroppedManagedInstance
-  - code: PathForTrackedResourceTypes
-    from: restorableDroppedManagedInstancesByLocation.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}"]
   - code: ResourceNameRestriction
     from: restorableDroppedManagedInstancesByLocation.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances"]
+    reason: locationName uses the shared Azure.Core.azureLocation region selector, not a customer-defined resource name. The service normalizes location names; a resource-name regex could exclude accepted location aliases.
   - code: ResourceNameRestriction
     from: restorableDroppedManagedInstancesByLocation.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}"]
-  - code: PathForTrackedResourceTypes
-    from: restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}"]
+    reason: locationName uses the shared Azure.Core.azureLocation region selector, not a customer-defined resource name. The service normalizes location names; a resource-name regex could exclude accepted location aliases.
   - code: ResourceNameRestriction
     from: restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases"]
+    reason: locationName uses the shared Azure.Core.azureLocation region selector, not a customer-defined resource name. The service normalizes location names; a resource-name regex could exclude accepted location aliases.
   - code: ResourceNameRestriction
     from: restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}"]
+    reason: locationName uses the shared Azure.Core.azureLocation region selector, not a customer-defined resource name. The service normalizes location names; a resource-name regex could exclude accepted location aliases.
   - code: ResourceNameRestriction
     from: managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies"]
+    reason: locationName uses the shared Azure.Core.azureLocation region selector, not a customer-defined resource name. The service normalizes location names; a resource-name regex could exclude accepted location aliases.
   - code: ResourceNameRestriction
     from: managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"]
+    reason: locationName uses the shared Azure.Core.azureLocation region selector, not a customer-defined resource name. The service normalizes location names; a resource-name regex could exclude accepted location aliases.
   - code: DescriptionMustNotBeNodeName
     from: managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"].get.parameters..description
+    reason: The policy supports only default. Its enum metadata is inherited unchanged from ManagedShortTermRetentionPolicyName, which is shared with existing retention APIs.
 ```
 
 ### Tag: package-preview-2026-08-01-preview

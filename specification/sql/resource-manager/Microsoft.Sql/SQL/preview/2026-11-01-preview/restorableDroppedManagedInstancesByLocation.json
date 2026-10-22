@@ -70,7 +70,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RestorableDroppedManagedInstanceListResult"
+              "$ref": "#/definitions/RestorableDroppedManagedInstanceByLocationListResult"
             }
           },
           "default": {
@@ -123,7 +123,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RestorableDroppedManagedInstance"
+              "$ref": "#/definitions/RestorableDroppedManagedInstanceByLocation"
             }
           },
           "default": {
@@ -142,30 +142,31 @@
     }
   },
   "definitions": {
-    "RestorableDroppedManagedInstance": {
+    "RestorableDroppedManagedInstanceByLocation": {
       "type": "object",
-      "description": "A restorable dropped managed instance resource.",
+      "description": "A restorable dropped managed instance in a location.",
       "properties": {
         "properties": {
           "$ref": "./common.json#/definitions/RestorableDroppedManagedInstanceProperties",
-          "description": "Resource properties."
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
-    "RestorableDroppedManagedInstanceListResult": {
+    "RestorableDroppedManagedInstanceByLocationListResult": {
       "type": "object",
-      "description": "The response of a RestorableDroppedManagedInstance list operation.",
+      "description": "The response of a RestorableDroppedManagedInstanceByLocation list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The RestorableDroppedManagedInstance items on this page",
+          "description": "The RestorableDroppedManagedInstanceByLocation items on this page",
           "items": {
-            "$ref": "#/definitions/RestorableDroppedManagedInstance"
+            "$ref": "#/definitions/RestorableDroppedManagedInstanceByLocation"
           }
         },
         "nextLink": {

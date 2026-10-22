@@ -77,7 +77,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./restorableDroppedManagedDatabases.json#/definitions/RestorableDroppedManagedDatabaseListResult"
+              "$ref": "#/definitions/RestorableDroppedManagedDatabaseFromDroppedManagedInstanceListResult"
             }
           },
           "default": {
@@ -137,7 +137,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./restorableDroppedManagedDatabases.json#/definitions/RestorableDroppedManagedDatabase"
+              "$ref": "#/definitions/RestorableDroppedManagedDatabaseFromDroppedManagedInstance"
             }
           },
           "default": {
@@ -155,6 +155,44 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "RestorableDroppedManagedDatabaseFromDroppedManagedInstance": {
+      "type": "object",
+      "description": "A restorable database under a dropped managed instance.",
+      "properties": {
+        "properties": {
+          "$ref": "./restorableDroppedManagedDatabases.json#/definitions/RestorableDroppedManagedDatabaseProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RestorableDroppedManagedDatabaseFromDroppedManagedInstanceListResult": {
+      "type": "object",
+      "description": "The response of a RestorableDroppedManagedDatabaseFromDroppedManagedInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RestorableDroppedManagedDatabaseFromDroppedManagedInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/RestorableDroppedManagedDatabaseFromDroppedManagedInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
   "parameters": {}
 }

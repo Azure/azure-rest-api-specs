@@ -12,7 +12,7 @@ using Azure.ResourceManager;
 namespace Microsoft.Sql;
 
 /**
- * A restorable dropped managed instance resource.
+ * A restorable dropped managed instance in a location.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Feature metadata is required to emit this operation group as a separate Swagger file."
 @added(Versions.v2026_11_01_preview)
@@ -20,10 +20,10 @@ namespace Microsoft.Sql;
 @Azure.ResourceManager.Legacy.feature(
   Microsoft.SqlFeatureRegistration.RestoreFromDroppedManagedInstanceFeatures.RestorableDroppedManagedInstancesByLocation
 )
-model RestorableDroppedManagedInstance
-  is TrackedResource<RestorableDroppedManagedInstanceProperties> {
+model RestorableDroppedManagedInstanceByLocation
+  is ProxyResource<RestorableDroppedManagedInstanceProperties> {
   ...ResourceNameParameter<
-    Resource = RestorableDroppedManagedInstance,
+    Resource = RestorableDroppedManagedInstanceByLocation,
     KeyName = "restorableDroppedManagedInstanceId",
     SegmentName = "restorableDroppedManagedInstances",
     NamePattern = ""
@@ -56,7 +56,7 @@ alias RestorableDroppedManagedInstanceIdParameter = {
 alias RestorableDroppedManagedInstanceByLocationOps = Azure.ResourceManager.Legacy.LegacyOperations<
   RestorableDroppedManagedInstanceLocationParameters,
   RestorableDroppedManagedInstanceIdParameter,
-  ResourceName = "RestorableDroppedManagedInstance"
+  ResourceName = "RestorableDroppedManagedInstanceByLocation"
 >;
 
 /**
@@ -70,14 +70,17 @@ alias RestorableDroppedManagedInstanceByLocationOps = Azure.ResourceManager.Lega
 )
 interface RestorableDroppedManagedInstancesByLocation {
   /** Gets a restorable dropped managed instance in a location. */
-  get is RestorableDroppedManagedInstanceByLocationOps.Read<RestorableDroppedManagedInstance>;
+  get is RestorableDroppedManagedInstanceByLocationOps.Read<RestorableDroppedManagedInstanceByLocation>;
 
   /** Gets a list of restorable dropped managed instances in a location. */
-  listByLocation is RestorableDroppedManagedInstanceByLocationOps.List<RestorableDroppedManagedInstance>;
+  listByLocation is RestorableDroppedManagedInstanceByLocationOps.List<RestorableDroppedManagedInstanceByLocation>;
 }
 
 @@doc(
-  RestorableDroppedManagedInstance.name,
+  RestorableDroppedManagedInstanceByLocation.name,
   "The identifier of the restorable dropped managed instance."
 );
-@@doc(RestorableDroppedManagedInstance.properties, "Resource properties.");
+@@doc(
+  RestorableDroppedManagedInstanceByLocation.properties,
+  "Resource properties."
+);
