@@ -8,6 +8,8 @@ import "../common/servicepatterns.tsp";
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 // ---------------------------------------------------------------------------
@@ -130,7 +132,11 @@ model AgentOptimizationJobResult {
 // ---------------------------------------------------------------------------
 
 @doc("Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration.")
-model AgentOptimizationJob is JobLike<AgentOptimizationJobResult, never> {
+model AgentOptimizationJob is JobLike<
+  ApiError,
+  AgentOptimizationJobResult,
+  never
+> {
   @doc("Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.")
   @maxLength(256)
   display_name?: string;

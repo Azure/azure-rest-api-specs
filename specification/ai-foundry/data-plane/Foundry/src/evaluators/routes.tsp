@@ -6,6 +6,7 @@ namespace Azure.AI.Projects;
 using Http;
 using OpenAPI;
 using Azure.Core;
+using Microsoft.Foundry.Core;
 
 alias ListEvaluatorVersionsParameters = {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."

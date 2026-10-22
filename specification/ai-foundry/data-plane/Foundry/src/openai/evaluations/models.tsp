@@ -8,6 +8,8 @@ import "./user_conversation_simulation.tsp";
 using Azure.Core.Experimental;
 using TypeSpec.Versioning;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 /** The object type for evaluation deletion responses. */

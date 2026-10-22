@@ -5,6 +5,8 @@ import "../responses/models.tsp";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
