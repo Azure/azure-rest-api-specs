@@ -88,6 +88,9 @@
       "name": "McpAuthorizationPolicy"
     },
     {
+      "name": "McpFrontend"
+    },
+    {
       "name": "AioApplicationProfile"
     },
     {
@@ -5813,6 +5816,252 @@
         "x-ms-examples": {
           "McpAuthorizationPolicy_Delete_MaximumSet": {
             "$ref": "./examples/McpAuthorizationPolicy_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/mcpFrontends": {
+      "get": {
+        "operationId": "McpFrontend_ListByInstanceResource",
+        "tags": [
+          "McpFrontend"
+        ],
+        "description": "Lists the frontend configuration belonging to the instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/McpFrontendResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "McpFrontend_ListByInstanceResource": {
+            "$ref": "./examples/McpFrontend_ListByInstanceResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/mcpFrontends/default": {
+      "get": {
+        "operationId": "McpFrontend_Get",
+        "tags": [
+          "McpFrontend"
+        ],
+        "description": "Gets the frontend configuration and its runtime health.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/McpFrontendResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "McpFrontend_Get": {
+            "$ref": "./examples/McpFrontend_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "McpFrontend_CreateOrUpdate",
+        "tags": [
+          "McpFrontend"
+        ],
+        "description": "Creates or replaces the frontend configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/McpFrontendResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'McpFrontendResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/McpFrontendResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'McpFrontendResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/McpFrontendResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "McpFrontend_CreateOrUpdate_Automatic": {
+            "$ref": "./examples/McpFrontend_CreateOrUpdate_Automatic.json"
+          },
+          "McpFrontend_CreateOrUpdate_Manual": {
+            "$ref": "./examples/McpFrontend_CreateOrUpdate_Manual.json"
+          },
+          "McpFrontend_CreateOrUpdate_NoTls": {
+            "$ref": "./examples/McpFrontend_CreateOrUpdate_NoTls.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "McpFrontend_Delete",
+        "tags": [
+          "McpFrontend"
+        ],
+        "description": "Deletes the frontend configuration after the capability is disabled.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "McpFrontend_Delete": {
+            "$ref": "./examples/McpFrontend_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -13625,6 +13874,264 @@
         }
       ],
       "x-ms-discriminator-value": "Role"
+    },
+    "McpFrontendAudience": {
+      "type": "string",
+      "description": "A non-blank incoming token audience of at most 256 characters.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "\\S"
+    },
+    "McpFrontendAuthentication": {
+      "type": "object",
+      "description": "The authentication configuration for clients calling the frontend.",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/ServiceAccountTokenMethod",
+          "description": "The incoming authentication method. Only ServiceAccountToken is supported."
+        },
+        "serviceAccountTokenSettings": {
+          "$ref": "#/definitions/McpFrontendServiceAccountTokenSettings",
+          "description": "The accepted incoming token audiences, independent of outbound backend tokens."
+        }
+      },
+      "required": [
+        "method",
+        "serviceAccountTokenSettings"
+      ]
+    },
+    "McpFrontendAutomaticTls": {
+      "type": "object",
+      "description": "Automatic serving certificate issuance using cert-manager.",
+      "properties": {
+        "certManagerCertificateSpec": {
+          "$ref": "#/definitions/McpFrontendCertificateSpec",
+          "description": "The issuer used for the frontend Service's DNS names. Manual settings are not permitted."
+        }
+      },
+      "required": [
+        "certManagerCertificateSpec"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpFrontendTls"
+        }
+      ],
+      "x-ms-discriminator-value": "Automatic"
+    },
+    "McpFrontendCertificateSpec": {
+      "type": "object",
+      "description": "The certificate issuance settings exposed for the frontend.",
+      "properties": {
+        "issuerRef": {
+          "$ref": "#/definitions/McpFrontendIssuerRef",
+          "description": "The cert-manager issuer; this reference does not distribute CA trust to clients."
+        }
+      },
+      "required": [
+        "issuerRef"
+      ]
+    },
+    "McpFrontendEndpoint": {
+      "type": "object",
+      "description": "The frontend's Service port, incoming authentication, and optional serving certificate.",
+      "properties": {
+        "servicePort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Kubernetes Service port, distinct from the owner-managed container port.",
+          "default": 443,
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "authentication": {
+          "$ref": "#/definitions/McpFrontendAuthentication",
+          "description": "The required authentication for incoming client requests."
+        },
+        "tls": {
+          "$ref": "#/definitions/McpFrontendTls",
+          "description": "The serving TLS configuration. Omit to disable TLS and serve HTTP."
+        }
+      },
+      "required": [
+        "authentication"
+      ]
+    },
+    "McpFrontendIssuerRef": {
+      "type": "object",
+      "description": "A cert-manager issuer reference with an explicit group and non-blank name.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The non-blank name of the issuer.",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "kind": {
+          "$ref": "#/definitions/CertManagerIssuerKind",
+          "description": "The issuer kind. Only Issuer and ClusterIssuer are supported."
+        },
+        "group": {
+          "type": "string",
+          "description": "The API group of the issuer.",
+          "enum": [
+            "cert-manager.io"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "name",
+        "kind",
+        "group"
+      ]
+    },
+    "McpFrontendManualCertificate": {
+      "type": "object",
+      "description": "A same-namespace Kubernetes TLS Secret containing tls.crt and tls.key.",
+      "properties": {
+        "secretRef": {
+          "type": "string",
+          "description": "The non-blank name of the customer-managed serving Secret, not its contents.",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "secretRef"
+      ]
+    },
+    "McpFrontendManualTls": {
+      "type": "object",
+      "description": "A manually managed frontend serving certificate and key.",
+      "properties": {
+        "manual": {
+          "$ref": "#/definitions/McpFrontendManualCertificate",
+          "description": "The serving Secret reference. Automatic issuance settings are not permitted."
+        }
+      },
+      "required": [
+        "manual"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpFrontendTls"
+        }
+      ],
+      "x-ms-discriminator-value": "Manual"
+    },
+    "McpFrontendProperties": {
+      "type": "object",
+      "description": "The desired frontend endpoint and its output-only runtime status.",
+      "properties": {
+        "endpoint": {
+          "$ref": "#/definitions/McpFrontendEndpoint",
+          "description": "The incoming HTTP or HTTPS endpoint. Backend registration and trust remain connection-owned."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last provisioning operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/McpFrontendStatus",
+          "description": "The health of the frontend itself, without aggregating backend health.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "endpoint"
+      ]
+    },
+    "McpFrontendResource": {
+      "type": "object",
+      "description": "The configuration of the instance's client-facing MCP frontend.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/McpFrontendProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The custom location of the frontend's Kubernetes cluster.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "McpFrontendResourceListResult": {
+      "type": "object",
+      "description": "The response of a McpFrontendResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The McpFrontendResource items on this page",
+          "items": {
+            "$ref": "#/definitions/McpFrontendResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "McpFrontendServiceAccountTokenSettings": {
+      "type": "object",
+      "description": "The Kubernetes service account token validation settings for the frontend.",
+      "properties": {
+        "audiences": {
+          "type": "array",
+          "description": "One to sixteen unique, non-blank audiences accepted on incoming requests.",
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/McpFrontendAudience"
+          }
+        }
+      },
+      "required": [
+        "audiences"
+      ]
+    },
+    "McpFrontendStatus": {
+      "type": "object",
+      "description": "The output-only health of the frontend's serving, authentication, and routing subsystems.",
+      "properties": {
+        "healthState": {
+          "$ref": "#/definitions/ResourceHealthStatus",
+          "description": "Frontend runtime health. AIO MCP and other backend health remain on their connections.",
+          "readOnly": true
+        }
+      }
+    },
+    "McpFrontendTls": {
+      "type": "object",
+      "description": "The serving certificate mode. Only the configuration for the selected mode is valid.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/TlsCertMethodMode",
+          "description": "Automatic certificate issuance or a manually managed serving Secret."
+        }
+      },
+      "discriminator": "mode",
+      "required": [
+        "mode"
+      ]
     },
     "McpServerConnectionAuthentication": {
       "type": "object",
