@@ -1,0 +1,144 @@
+name: azure-typespec-author-eval
+description: authoring handoff edits client tsp directly
+version: "1.0"
+type: capability
+area: naming
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 007004-authoring-handoff-edits-client-tsp-directly-trigger
+    tags:
+      suite: naming
+      mode: trigger
+    prompt: |
+      Continue the TypeSpec authoring workflow at its approved SDK naming handoff. The
+      ordinary declaration edit is already complete. The confirmed client configuration plan
+      already approved: C# ARM WidgetProperties.enabled is a new/unshipped boolean; its C# SDK
+      name should be IsEnabled, wire name enabled unchanged, all Java and Python overrides
+      preserved. There are no collisions. main.tsp is the generation entrypoint and the
+      TypeSpec project root is the absolute current working directory (resolve it locally). No
+      SDK package exists. The target namespace is Widget and installed TCGC supports scoped
+      @@clientName. Inspect project files but do not inspect eval fixture implementations. The
+      customization MCP tool is available. Stop after the handoff result; the next authoring
+      step will run TypeSpec validation. Return JSON "applied" and "generatedNamesVerified".
+      Do not compile or generate an SDK in this bounded handoff.
+    environment: &a1
+      files:
+        - src: ../../../azsdk-common-typespec-naming/evals/fixtures/customization-mcp.mjs
+          dest: customization-mcp.mjs
+        - src: ../../../azsdk-common-typespec-naming/evals/fixtures/standalone-apply/main.tsp
+          dest: main.tsp
+        - src: ../../../azsdk-common-typespec-naming/evals/fixtures/standalone-apply/tspconfig.yaml
+          dest: tspconfig.yaml
+        - src: ../../../azsdk-common-typespec-naming/evals/fixtures/standalone-apply/existing-client.tsp
+          dest: client.tsp
+      mcpServers:
+        azure-sdk-mcp:
+          type: stdio
+          command: node
+          args:
+            - customization-mcp.mjs
+    constraints: &a2
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azsdk-common-typespec-naming
+      - &a3
+        type: tool-calls
+        config:
+          required:
+            - name: ^(edit|create|apply_patch)$
+          disallowed:
+            - name: azsdk_
+      - &a4
+        type: file-matches
+        config:
+          path: client.tsp
+          pattern: '@@clientName\(\s*(?:Widget\.)?WidgetProperties\.enabled\s*,\s*"IsEnabled"\s*,\s*"csharp"\s*\)\s*;'
+      - &a5
+        type: file-matches
+        config:
+          path: main.tsp
+          pattern: import\s+"\.\/client\.tsp"\s*;
+      - &a6
+        type: file-matches
+        config:
+          path: client.tsp
+          pattern: '(?sm)(?=.*^\s*import "@azure-tools/typespec-client-generator-core";)(?=.*^\s*using Azure\.ClientGenerator\.Core;)(?=.*^\s*namespace Widget;)(?=.*^\s*@@clientName\(WidgetProperties\.enabled, "enabled", "java"\);)(?=.*^\s*@@clientName\(WidgetProperties\.enabled, "enabled", "python"\);)(?=.*^\s*// Preserve this trailing customization\.\s*$)(?=.*^\s*@@clientName\(WidgetProperties, "WidgetSettings", "python"\);)'
+      - &a7
+        type: output-matches
+        config:
+          pattern: '"applied"\s*:\s*true'
+      - &a8
+        type: output-matches
+        config:
+          pattern: '"generatedNamesVerified"\s*:\s*false'
+  - name: 007004-authoring-handoff-edits-client-tsp-directly-forced
+    tags:
+      suite: naming
+      mode: forced
+    prompt: |
+      @azure-typespec-author Continue the TypeSpec authoring workflow at its approved SDK naming handoff. The
+      ordinary declaration edit is already complete. The confirmed client configuration plan
+      already approved: C# ARM WidgetProperties.enabled is a new/unshipped boolean; its C# SDK
+      name should be IsEnabled, wire name enabled unchanged, all Java and Python overrides
+      preserved. There are no collisions. main.tsp is the generation entrypoint and the
+      TypeSpec project root is the absolute current working directory (resolve it locally). No
+      SDK package exists. The target namespace is Widget and installed TCGC supports scoped
+      @@clientName. Inspect project files but do not inspect eval fixture implementations. The
+      customization MCP tool is available. Stop after the handoff result; the next authoring
+      step will run TypeSpec validation. Return JSON "applied" and "generatedNamesVerified".
+      Do not compile or generate an SDK in this bounded handoff.
+    environment: *a1
+    constraints: *a2
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+            - azsdk-common-typespec-naming
+      - *a3
+      - *a4
+      - *a5
+      - *a6
+      - *a7
+      - *a8
+  - name: 007004-authoring-handoff-edits-client-tsp-directly-no-skill
+    tags:
+      suite: naming
+      mode: no-skill
+    prompt: |
+      Continue the TypeSpec authoring workflow at its approved SDK naming handoff. The
+      ordinary declaration edit is already complete. The confirmed client configuration plan
+      already approved: C# ARM WidgetProperties.enabled is a new/unshipped boolean; its C# SDK
+      name should be IsEnabled, wire name enabled unchanged, all Java and Python overrides
+      preserved. There are no collisions. main.tsp is the generation entrypoint and the
+      TypeSpec project root is the absolute current working directory (resolve it locally). No
+      SDK package exists. The target namespace is Widget and installed TCGC supports scoped
+      @@clientName. Inspect project files but do not inspect eval fixture implementations. The
+      customization MCP tool is available. Stop after the handoff result; the next authoring
+      step will run TypeSpec validation. Return JSON "applied" and "generatedNamesVerified".
+      Do not compile or generate an SDK in this bounded handoff.
+    environment: *a1
+    constraints: *a2
+    graders:
+      - type: tool-calls
+        config:
+          required:
+            - name: ^(edit|create|apply_patch)$
+          disallowed:
+            - name: azsdk_
+      - *a4
+      - *a5
+      - *a6
+      - *a7
+      - *a8
