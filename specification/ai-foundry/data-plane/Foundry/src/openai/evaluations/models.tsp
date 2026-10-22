@@ -44,10 +44,6 @@ model DeleteEvalRunResponse {
 /**
  * An Azure AI evaluator used as a grader.
  *
- * Audio evaluators grade the recording of a completed conversation. Select an
- * audio evaluator and a compatible judge deployment, and provide recording
- * evidence in `conversation_artifacts.audio`. No modality flag is required.
- *
  * See the [built-in evaluators reference](https://learn.microsoft.com/en-us/azure/foundry/concepts/built-in-evaluators).
  */
 model GraderAzureAIEvaluator {
@@ -65,12 +61,6 @@ model GraderAzureAIEvaluator {
    * evaluators use names in the `builtin.<evaluator>` format. Custom evaluators
    * use the registered name assigned to the evaluator.
    *
-   * Audio evaluators include `builtin.task_completion_audio`,
-   * `builtin.coherence_audio`, `builtin.customer_satisfaction_audio`, and
-   * `builtin.groundedness_audio`. Their text counterparts evaluate text;
-   * selecting an audio evaluator evaluates the conversation recording instead.
-   * Availability depends on the evaluator version and registry.
-   *
    * Available evaluator families include [general-purpose evaluators](https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/general-purpose-evaluators),
    * [risk and safety evaluators](https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/risk-safety-evaluators),
    * and [agent evaluators](https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/agent-evaluators).
@@ -84,21 +74,8 @@ model GraderAzureAIEvaluator {
    * Evaluator-specific configuration applied when the evaluator is initialized.
    * Accepted parameters and defaults depend on the selected evaluator and
    * version. AI-assisted evaluators require a judge model setting, such as
-   * `model` or `deployment_name`, that identifies a deployment in the current
-   * project or through a project connection. Text evaluators use a compatible
-   * chat-completion judge with structured outputs.
-   *
-   * Audio evaluators require an Azure OpenAI judge with audio input and
-   * generally available Realtime support. The resolved deployment must have a
-   * model version and use one of these backing models: `gpt-realtime`,
-   * `gpt-realtime-mini`, `gpt-realtime-1.5`, `gpt-realtime-2.1`,
-   * `gpt-realtime-2.1-mini`, `gpt-realtime-2`, or `gpt-realtime-2-mini`.
-   * Model names are matched case-insensitively. A deployment alias, such as
-   * `my-realtime-judge` in the audio evaluation example, must resolve to a
-   * supported backing model; its name alone does not establish compatibility.
-   * An incompatible judge is rejected when the evaluation is created and is
-   * validated again when a run is submitted.
-   *
+   * `model` or `deployment_name`, that identifies a chat-completion deployment
+   * in the current project. The judge model must support structured outputs.
    * Evaluators without required initialization parameters can omit this
    * property and use their documented defaults.
    */
@@ -114,10 +91,6 @@ model GraderAzureAIEvaluator {
    * columns with matching names. Provide a mapping when dataset columns use
    * different names, when a target generates the response at run time, or when
    * the evaluator consumes structured target output.
-   *
-   * Omit this property for audio evaluators. They use the canonical
-   * `conversation_artifacts.audio` recording reference. Nonempty mappings and
-   * an `initialization_parameters.audio_path` override are not supported.
    */
   data_mapping?: Record<string>;
 }
@@ -323,13 +296,6 @@ model Eval is OpenAI.Eval {
     The graders and Azure AI evaluators to run against each evaluation item.
     Each testing criterion has a caller-defined `name` and a type-specific
     configuration. At least one testing criterion is required.
-    
-    Text and audio evaluators can be combined in one evaluation. Give each
-    criterion a distinct name and its own compatible judge configuration.
-    Audio criteria use conversation recording evidence, while text criteria
-    continue to use their mapped or standard text fields. Selecting an audio
-    evaluator does not convert text criteria to audio or enable a transcript
-    fallback for missing recordings.
     """
 );
 
@@ -1089,57 +1055,7 @@ model EvalRun is OpenAI.EvalRun {
 
 @@doc(
   OpenAI.CreateEvalJsonlRunDataSource,
-  """
-    A JSONL dataset used as the input to an evaluation run.
-    See [evaluate datasets](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/cloud-evaluation-datasets?tabs=python).
-    
-    For audio evaluators, each item supplies the recording of a completed
-    conversation in `conversation_artifacts.audio`. Use
-    `evaluation_level: "conversation"` on the run. Include any additional
-    context required by the evaluator, such as `messages` or tool definitions.
-    
-    Two recording reference formats are supported:
-    
-    1. **Self-contained dataset folder.** Register a `uri_folder` dataset with
-       one JSONL file at its root and the recordings beneath that same root.
-       Supply the registered dataset identifier in `source.id` with
-       `source.type: "file_id"`. For example:
-    
-       ```text
-       data.jsonl
-       audio/call.wav
-       ```
-    
-       A row in `data.jsonl` can reference the recording as:
-    
-       ```json
-       {"conversation_artifacts":{"audio":{"path":"audio/call.wav"}}}
-       ```
-    
-       The path resolves relative to the containing authorized dataset folder,
-       not the JSONL file's name or the caller's filesystem. Preserve the
-       literal member name and case, and use forward slashes. Absolute paths,
-       traversal, and arbitrary download URLs are not supported. This relative
-       reference cannot be resolved from inline `file_content` items. Upload
-       the folder contents as a dataset, not as an archive.
-    
-    2. **Registered recording asset.** Existing references to a versioned
-       project dataset remain supported:
-    
-       ```json
-       {"conversation_artifacts":{"audio":{"asset_id":"azureai://accounts/my-account/projects/my-project/datasets/recordings/versions/1","asset_file_path":"recordings/call.wav"}}}
-       ```
-    
-       `asset_file_path` is the literal member path, not a URL-encoded path.
-       This form can be used in JSONL rows or inline `file_content` items.
-       Access to the referenced asset remains subject to project authorization.
-    
-    Provide one recording reference per conversation. Missing, malformed, or
-    ambiguous recording evidence produces errors for the affected items and
-    audio evaluators; text is not silently graded in place of audio. Recordings
-    retrieved from managed voice conversations are service-produced evidence,
-    not arbitrary trace download URLs.
-    """
+  "A JSONL dataset used as the input to an evaluation run. See [evaluate datasets](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/cloud-evaluation-datasets?tabs=python)."
 );
 
 /**
