@@ -32,7 +32,7 @@ model McpFrontendResource is ProxyResource<McpFrontendProperties> {
 /** The desired frontend endpoint and its output-only runtime status. */
 @added(Versions.`2026-11-01-preview`)
 model McpFrontendProperties {
-  /** The incoming HTTP or HTTPS endpoint. Backend registration and trust remain connection-owned. */
+  /** The incoming HTTPS endpoint. Backend registration and trust remain connection-owned. */
   endpoint: McpFrontendEndpoint;
 
   /** The status of the last provisioning operation. */
@@ -44,7 +44,7 @@ model McpFrontendProperties {
   status?: McpFrontendStatus;
 }
 
-/** The frontend's Service port, incoming authentication, and optional serving certificate. */
+/** The frontend's Service port, incoming authentication, and required serving certificate. */
 @added(Versions.`2026-11-01-preview`)
 model McpFrontendEndpoint {
   /** The Kubernetes Service port, distinct from the owner-managed container port. */
@@ -55,8 +55,8 @@ model McpFrontendEndpoint {
   /** The required authentication for incoming client requests. */
   authentication: McpFrontendAuthentication;
 
-  /** The serving TLS configuration. Omit to disable TLS and serve HTTP. */
-  tls?: McpFrontendTls;
+  /** The required serving TLS configuration. */
+  tls: McpFrontendTls;
 }
 
 /** The authentication configuration for clients calling the frontend. */

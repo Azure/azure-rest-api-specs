@@ -5997,9 +5997,6 @@
           },
           "McpFrontend_CreateOrUpdate_Manual": {
             "$ref": "./examples/McpFrontend_CreateOrUpdate_Manual.json"
-          },
-          "McpFrontend_CreateOrUpdate_NoTls": {
-            "$ref": "./examples/McpFrontend_CreateOrUpdate_NoTls.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -13934,7 +13931,7 @@
     },
     "McpFrontendEndpoint": {
       "type": "object",
-      "description": "The frontend's Service port, incoming authentication, and optional serving certificate.",
+      "description": "The frontend's Service port, incoming authentication, and required serving certificate.",
       "properties": {
         "servicePort": {
           "type": "integer",
@@ -13950,11 +13947,12 @@
         },
         "tls": {
           "$ref": "#/definitions/McpFrontendTls",
-          "description": "The serving TLS configuration. Omit to disable TLS and serve HTTP."
+          "description": "The required serving TLS configuration."
         }
       },
       "required": [
-        "authentication"
+        "authentication",
+        "tls"
       ]
     },
     "McpFrontendIssuerRef": {
@@ -14028,7 +14026,7 @@
       "properties": {
         "endpoint": {
           "$ref": "#/definitions/McpFrontendEndpoint",
-          "description": "The incoming HTTP or HTTPS endpoint. Backend registration and trust remain connection-owned."
+          "description": "The incoming HTTPS endpoint. Backend registration and trust remain connection-owned."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
