@@ -6842,7 +6842,10 @@ paths:
     get:
       operationId: DataGenerationJobs_list
       summary: List data generation jobs
-      description: Returns a list of data generation jobs.
+      description: |-
+        Returns a list of data generation jobs.
+        Each trace job includes its effective settings. Conversation jobs preserve
+        `type: conversations`. Listing existing jobs does not require preview opt-in.
       parameters:
         - name: Foundry-Features
           in: header
@@ -6942,7 +6945,20 @@ paths:
     post:
       operationId: DataGenerationJobs_create
       summary: Create a data generation job
-      description: Submits a new data generation job for asynchronous execution.
+      description: |-
+        Submits a new data generation job for asynchronous execution.
+        Requests with `type` set to `conversations` require
+        `Foundry-Features: DataGenerationJobs=V1Preview`; the service rejects
+        conversation requests without this opt-in. Ordinary turn-level trace
+        requests do not require the header.
+        Conversation samples require `scenario` to be `evaluation`.
+        Jobs with `type: conversations` reconstruct existing traced conversations,
+        use sources of type `traces`, and do not support `sample_level`.
+        The conversation-only flags `generate_test_case_description` and
+        `generate_test_case_rubric_preview` require a nonempty `model_options.model`
+        when either is true. Model options must be omitted when neither is enabled.
+        Create, get, and list responses preserve `type: conversations`.
+        The response includes the effective generation settings.
       parameters:
         - name: Foundry-Features
           in: header
@@ -7008,7 +7024,10 @@ paths:
     get:
       operationId: DataGenerationJobs_get
       summary: Get a data generation job
-      description: Retrieves the specified data generation job and its current status.
+      description: |-
+        Retrieves the specified data generation job and its current status.
+        Returns effective generation settings and preserves `type: conversations` for
+        conversation jobs. Reading an existing job does not require preview opt-in.
       parameters:
         - name: Foundry-Features
           in: header
@@ -49783,6 +49802,37 @@ components:
       allOf:
         - $ref: '#/components/schemas/TraceSource'
       description: A trace source that selects traces by conversation IDs.
+    ConversationsDataGenerationJobConfiguration:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - conversations
+          description: The data generation job type, which is Conversations for this model.
+        max_samples:
+          type: integer
+          format: int32
+          description: Maximum number of whole conversations to generate, up to service-defined limits. If omitted, sampling is turned off.
+        redact_private_content:
+          type: boolean
+          description: Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.
+          default: true
+        generate_test_case_description:
+          type: boolean
+          description: Whether to generate an AI-authored test-case description for each reconstructed conversation. This is a preview feature. Defaults to false. When true, requires a nonempty `model_options.model`. Model options must be omitted when neither description nor rubric generation is enabled.
+          default: false
+        generate_test_case_rubric_preview:
+          type: boolean
+          description: Whether to generate test-case rubric dimensions for each reconstructed conversation. This is a preview feature. When true, requires a nonempty `model_options.model`. Model options must be omitted when neither description nor rubric generation is enabled.
+        model_options:
+          $ref: '#/components/schemas/DataGenerationModelOptions'
+          description: The model used to generate test-case descriptions or rubric dimensions. Required with a nonempty `model` when `generate_test_case_description` or `generate_test_case_rubric_preview` is true; must be omitted otherwise.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobConfiguration'
+      description: 'The configuration for reconstructing existing traced conversations for evaluation, not synthetic conversation simulation. This preview requires `scenario` to be `evaluation`, sources of type `traces`, and the `Foundry-Features: DataGenerationJobs=V1Preview` request header. Conversation-level sampling is implicit; `sample_level` is not supported. Existing trace selection, annotations, and output dataset row schemas are unchanged. Create, get, and list responses preserve `type: conversations`. The service enforces the scenario, source, and conditional model-options requirements. Conversation-level output rows contain `test_case_id`, `messages`, `tool_definitions`, and `metadata`. A successful optional description adds `test_case_description`. If description generation fails, the row is retained with safe row-level status and error metadata, without raw provider or model error bodies.'
     CosmosDBIndex:
       type: object
       required:
@@ -50480,7 +50530,7 @@ components:
           description: The sources used for the data generation job.
         generation_configuration:
           $ref: '#/components/schemas/DataGenerationJobConfiguration'
-          description: The generation configuration for the data generation job.
+          description: The effective generation configuration for the data generation job.
         scenario:
           $ref: '#/components/schemas/DataGenerationJobScenario'
           description: The scenario of the data generation job. Either for fine-tuning or evaluation.
@@ -50521,6 +50571,7 @@ components:
         mapping:
           simple_qna: '#/components/schemas/SimpleQnADataGenerationJobConfiguration'
           traces: '#/components/schemas/TracesDataGenerationJobConfiguration'
+          conversations: '#/components/schemas/ConversationsDataGenerationJobConfiguration'
           simulation_seed: '#/components/schemas/SimulationSeedDataGenerationJobConfiguration'
           tool_use: '#/components/schemas/ToolUseFineTuningDataGenerationJobConfiguration'
       description: Configuration for managing data generation jobs.
@@ -50600,6 +50651,11 @@ components:
         token_usage:
           $ref: '#/components/schemas/DataGenerationTokenUsage'
           description: The token usage information for the data generation job.
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataGenerationWarning'
+          description: Nonfatal warnings associated with otherwise usable output. `TestCaseDescriptionGenerationIncomplete` indicates that conversation rows were produced but one or more optional descriptions failed. Warning messages do not expose raw provider or model error bodies.
       description: Result produced by a successful data generation job.
     DataGenerationJobScenario:
       anyOf:
@@ -50646,6 +50702,7 @@ components:
           enum:
             - simple_qna
             - traces
+            - conversations
             - tool_use
             - simulation_seed
       description: The supported data generation job types.
@@ -50656,7 +50713,7 @@ components:
       properties:
         model:
           type: string
-          description: Base model name used to generate data.
+          description: Base model name used to generate data. For conversation jobs, a nonempty value is required when `generate_test_case_description` or `generate_test_case_rubric_preview` is true. Model options must be omitted for conversation reconstruction when neither description nor rubric generation is enabled.
       description: LLM model options for data generation jobs.
     DataGenerationTokenUsage:
       type: object
@@ -50681,6 +50738,18 @@ components:
           description: Total number of tokens used.
           readOnly: true
       description: Token usage information for a data generation job.
+    DataGenerationWarning:
+      type: object
+      required:
+        - message
+      properties:
+        code:
+          type: string
+          description: The warning code.
+        message:
+          type: string
+          description: A safe, human-readable warning message that does not include raw provider or model error bodies.
+      description: A nonfatal warning associated with data generation output.
     DataSourceConfig:
       type: object
       required:
@@ -52181,7 +52250,7 @@ components:
           description: Tags to assign to the output dataset.
         write_mode:
           $ref: '#/components/schemas/DataGenerationJobOutputWriteMode'
-          description: Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows.
+          description: Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows. `merge` combines newly generated rows with the latest existing dataset version and de-duplicates trace rows. Conversation rows follow the same write modes; merging does not union newly observed turns into an existing conversation snapshot.
           default: overwrite
       description: Dataset output configuration for an evaluation data generation job.
     EvaluationDataGenerationType:

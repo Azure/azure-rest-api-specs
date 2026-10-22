@@ -19,6 +19,7 @@ in order to enable preview features on these GA routes.
 | Agents | Update | POST | `/agents/{agent_name}` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview` |
 | Agents | Create Version | POST | `/agents/{agent_name}/versions` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview` |
 | Evaluation Rules | CreateOrUpdate | PUT | `/evaluationrules/{id}` | Optional: `Evaluations=V1Preview` |
+| Data Generation Jobs | Create | POST | `/data_generation_jobs` | Required for `type: conversations` or `type: traces` with `sample_level: conversation`: `DataGenerationJobs=V1Preview`; not required for ordinary turn samples |
 
 Note that only v1 operations are included in the above table. If an operation (or interface) is decorated with `@removed(Versions.v1)` the are not included here.
 
@@ -73,11 +74,6 @@ in order to successfully complete operations using these routes.
 | Skills | List | GET | `/skills` | Required: `Skills=V1Preview` |
 | Skills | Update | POST | `/skills/{name}` | Required: `Skills=V1Preview` |
 | Skills | Delete | DELETE | `/skills/{name}` | Required: `Skills=V1Preview` |
-| Data Generation Jobs | Get | GET | `/data_generation_jobs/{jobId}` | Required: `DataGenerationJobs=V1Preview` |
-| Data Generation Jobs | List | GET | `/data_generation_jobs` | Required: `DataGenerationJobs=V1Preview` |
-| Data Generation Jobs | Create | POST | `/data_generation_jobs` | Required: `DataGenerationJobs=V1Preview` |
-| Data Generation Jobs | Cancel | POST | `/data_generation_jobs/{jobId}:cancel` | Required: `DataGenerationJobs=V1Preview` |
-| Data Generation Jobs | Delete | DELETE | `/data_generation_jobs/{jobId}` | Required: `DataGenerationJobs=V1Preview` |
 | Agent Insight Monitors | List | GET | `/agent_insight_monitors` | Required: `AgentInsights=V1Preview` |
 | Agent Insight Monitors | Create | POST | `/agent_insight_monitors` | Required: `AgentInsights=V1Preview` |
 | Agent Insight Monitors | Get | GET | `/agent_insight_monitors/{monitor_id}` | Required: `AgentInsights=V1Preview` |

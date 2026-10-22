@@ -14,6 +14,8 @@ alias DataGenerationJobsOptionalPreviewHeader = WithConditionalFoundryPreviewHea
 interface DataGenerationJobs {
   /**
    * Retrieves the specified data generation job and its current status.
+   * Returns effective generation settings and preserves `type: conversations` for
+   * conversation jobs. Reading an existing job does not require preview opt-in.
    */
   @summary("Get a data generation job")
   @route("data_generation_jobs/{jobId}")
@@ -30,6 +32,8 @@ interface DataGenerationJobs {
 
   /**
    * Returns a list of data generation jobs.
+   * Each trace job includes its effective settings. Conversation jobs preserve
+   * `type: conversations`. Listing existing jobs does not require preview opt-in.
    */
   @summary("List data generation jobs")
   @route("data_generation_jobs")
@@ -45,6 +49,18 @@ interface DataGenerationJobs {
 
   /**
    * Submits a new data generation job for asynchronous execution.
+   * Requests with `type` set to `conversations` require
+   * `Foundry-Features: DataGenerationJobs=V1Preview`; the service rejects
+   * conversation requests without this opt-in. Ordinary turn-level trace
+   * requests do not require the header.
+   * Conversation samples require `scenario` to be `evaluation`.
+   * Jobs with `type: conversations` reconstruct existing traced conversations,
+   * use sources of type `traces`, and do not support `sample_level`.
+   * The conversation-only flags `generate_test_case_description` and
+   * `generate_test_case_rubric_preview` require a nonempty `model_options.model`
+   * when either is true. Model options must be omitted when neither is enabled.
+   * Create, get, and list responses preserve `type: conversations`.
+   * The response includes the effective generation settings.
    */
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
   @summary("Create a data generation job")

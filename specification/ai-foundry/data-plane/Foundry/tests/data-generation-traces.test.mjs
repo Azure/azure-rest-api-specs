@@ -1,0 +1,209 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { test } from "node:test";
+
+const project = new URL("../", import.meta.url);
+const readme = readFileSync(new URL("README.md", project), "utf8");
+const examples = Object.fromEntries(
+  [
+    ...readme.matchAll(
+      /<!-- trace-generation-example: ([\w-]+) -->\s*```json\s*([\s\S]*?)```/g,
+    ),
+  ].map(([, name, json]) => [name, JSON.parse(json)]),
+);
+
+for (const version of ["v1", "virtual-public-preview"]) {
+  const spec = JSON.parse(
+    readFileSync(
+      new URL(`openapi3/${version}/microsoft-foundry-openapi3.json`, project),
+      "utf8",
+    ),
+  );
+  const schemas = spec.components.schemas;
+  const conversations = schemas.ConversationsDataGenerationJobConfiguration;
+
+  test(`${version}: conversation-only options are absent from other generation configurations`, () => {
+    for (const [name, schema] of Object.entries(schemas)) {
+      if (!name.endsWith("DataGenerationJobConfiguration")) continue;
+      for (const removed of [
+        "sample_level",
+        "generate_test_case_description_preview",
+        "generate_test_case_rubric",
+      ]) {
+        assert(
+          !Object.hasOwn(schema.properties, removed),
+          `${name}.${removed}`,
+        );
+      }
+      if (name === "ConversationsDataGenerationJobConfiguration") continue;
+      for (const flag of [
+        "generate_test_case_description",
+        "generate_test_case_rubric_preview",
+      ]) {
+        assert(!Object.hasOwn(schema.properties, flag), `${name}.${flag}`);
+      }
+    }
+    assert(!Object.hasOwn(schemas, "TraceSampleLevel"));
+    assert.deepEqual(
+      Object.keys(
+        schemas.TracesDataGenerationJobConfiguration.properties,
+      ).sort(),
+      ["max_samples", "redact_private_content", "type"],
+    );
+  });
+
+  test(`${version}: conversation generation supports independent flags and shared model options`, () => {
+    assert.deepEqual(conversations.required, ["type"]);
+    assert.deepEqual(conversations.properties.type.enum, ["conversations"]);
+    for (const flag of [
+      "generate_test_case_description",
+      "generate_test_case_rubric_preview",
+    ]) {
+      assert.equal(conversations.properties[flag].type, "boolean");
+      assert.match(
+        conversations.properties[flag].description,
+        /requires a nonempty `model_options\.model`/,
+      );
+    }
+    assert.equal(
+      conversations.properties.generate_test_case_description.default,
+      false,
+    );
+    assert.deepEqual(
+      conversations.properties.redact_private_content,
+      schemas.TracesDataGenerationJobConfiguration.properties
+        .redact_private_content,
+    );
+    assert.equal(
+      conversations.properties.model_options.$ref,
+      "#/components/schemas/DataGenerationModelOptions",
+    );
+    assert.match(
+      conversations.properties.model_options.description,
+      /generate_test_case_description.*or.*generate_test_case_rubric_preview/,
+    );
+    assert.deepEqual(schemas.DataGenerationModelOptions.required, ["model"]);
+  });
+
+  test(`${version}: examples use conversations for description and rubric generation`, () => {
+    for (const [name, job] of Object.entries(examples)) {
+      const configuration = job.generation_configuration;
+      assert(!Object.hasOwn(configuration, "sample_level"), name);
+      assert(
+        !Object.hasOwn(configuration, "generate_test_case_description_preview"),
+        name,
+      );
+      assert(!Object.hasOwn(configuration, "generate_test_case_rubric"), name);
+      for (const field of Object.keys(configuration)) {
+        const ownProperties =
+          configuration.type === "traces"
+            ? schemas.TracesDataGenerationJobConfiguration.properties
+            : conversations.properties;
+        assert(
+          Object.hasOwn(ownProperties, field) ||
+            Object.hasOwn(
+              schemas.DataGenerationJobConfiguration.properties,
+              field,
+            ),
+          `${name}.${field}`,
+        );
+      }
+      if (name.startsWith("turn-")) {
+        assert.equal(configuration.type, "traces");
+        continue;
+      }
+      assert.equal(configuration.type, "conversations", name);
+      assert.equal(job.scenario, "evaluation", name);
+      assert(
+        job.sources.every((source) => source.type === "traces"),
+        name,
+      );
+      const needsModel =
+        configuration.generate_test_case_description === true ||
+        configuration.generate_test_case_rubric_preview === true;
+      if (needsModel) {
+        assert(configuration.model_options.model.length > 0, name);
+      } else {
+        assert(!Object.hasOwn(configuration, "model_options"), name);
+      }
+    }
+    assert.equal(
+      examples["description-request"].generation_configuration
+        .generate_test_case_description,
+      true,
+    );
+    assert.equal(
+      examples["rubric-request"].generation_configuration
+        .generate_test_case_rubric_preview,
+      true,
+    );
+    assert(
+      !Object.hasOwn(
+        examples["rubric-request"].generation_configuration,
+        "generate_test_case_description",
+      ),
+    );
+    assert.match(conversations.description, /row is retained/);
+  });
+
+  test(`${version}: create/get/list share the conversation configuration without changing other job types`, () => {
+    const collection = spec.paths["/data_generation_jobs"];
+    assert.equal(
+      collection.post.requestBody.content["application/json"].schema.$ref,
+      "#/components/schemas/DataGenerationJobInputs",
+    );
+    for (const [operation, status] of [
+      [collection.post, "201"],
+      [spec.paths["/data_generation_jobs/{jobId}"].get, "200"],
+    ]) {
+      assert.equal(
+        operation.responses[status].content["application/json"].schema.$ref,
+        "#/components/schemas/DataGenerationJob",
+      );
+    }
+    assert.equal(
+      collection.get.responses["200"].content["application/json"].schema
+        .properties.data.items.$ref,
+      "#/components/schemas/DataGenerationJob",
+    );
+    for (const name of ["DataGenerationJobInputs", "DataGenerationJob"]) {
+      assert.equal(
+        schemas[name].properties.generation_configuration.$ref,
+        "#/components/schemas/DataGenerationJobConfiguration",
+      );
+    }
+    assert.deepEqual(
+      schemas.DataGenerationJobConfiguration.discriminator.mapping,
+      {
+        simple_qna:
+          "#/components/schemas/SimpleQnADataGenerationJobConfiguration",
+        traces: "#/components/schemas/TracesDataGenerationJobConfiguration",
+        conversations:
+          "#/components/schemas/ConversationsDataGenerationJobConfiguration",
+        simulation_seed:
+          "#/components/schemas/SimulationSeedDataGenerationJobConfiguration",
+        tool_use:
+          "#/components/schemas/ToolUseFineTuningDataGenerationJobConfiguration",
+      },
+    );
+    const header = collection.post.parameters.find(
+      (parameter) => parameter.name === "Foundry-Features",
+    );
+    assert.equal(header.required, false);
+    assert.deepEqual(header.schema.enum, ["DataGenerationJobs=V1Preview"]);
+  });
+
+  test(`${version}: warning codes are optional unrestricted strings`, () => {
+    const warning = schemas.DataGenerationWarning;
+    assert.equal(warning.properties.code.type, "string");
+    assert(!Object.hasOwn(warning.properties.code, "enum"));
+    assert(!Object.hasOwn(warning.properties.code, "$ref"));
+    assert.deepEqual(warning.required, ["message"]);
+    assert(!Object.hasOwn(schemas, "DataGenerationWarningCode"));
+    assert.equal(
+      schemas.DataGenerationJobResult.properties.warnings.items.$ref,
+      "#/components/schemas/DataGenerationWarning",
+    );
+    assert.equal(examples["warning-response"].status, "succeeded");
+  });
+}
