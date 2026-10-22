@@ -10006,7 +10006,7 @@
       "get": {
         "operationId": "DataGenerationJobs_list",
         "summary": "List data generation jobs",
-        "description": "Returns a list of data generation jobs.\nEach trace job includes its effective settings, including `turn` and false\nfor omitted settings or older stored jobs. Listing existing jobs does not\nrequire preview opt-in.",
+        "description": "Returns a list of data generation jobs.\nEach trace job includes its effective settings. Conversation jobs preserve\n`type: conversations`. Listing existing jobs does not require preview opt-in.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -10138,7 +10138,7 @@
       "post": {
         "operationId": "DataGenerationJobs_create",
         "summary": "Create a data generation job",
-        "description": "Submits a new data generation job for asynchronous execution.\nTrace requests with `sample_level` set to `conversation` require\n`Foundry-Features: DataGenerationJobs=V1Preview`; the service rejects\nconversation requests without this opt-in. Ordinary turn-level trace\nrequests do not require the header.\nConversation samples require `scenario` to be `evaluation`.\nGenerating test-case descriptions also requires `sample_level` to be\n`conversation` and a nonempty `model_options.model`.\nThe response includes the effective trace settings, defaulting to\n`sample_level: turn` and `generate_test_case_description: false`.",
+        "description": "Submits a new data generation job for asynchronous execution.\nRequests with `type` set to `conversations`, or trace requests with\n`sample_level` set to `conversation`, require\n`Foundry-Features: DataGenerationJobs=V1Preview`; the service rejects\nconversation requests without this opt-in. Ordinary turn-level trace\nrequests do not require the header.\nConversation samples require `scenario` to be `evaluation`.\nJobs with `type: conversations` reconstruct existing traced conversations,\nuse sources of type `traces`, and do not support `sample_level`.\nGenerating test-case descriptions requires a nonempty `model_options.model`;\ntrace jobs also require `sample_level` to be `conversation`.\nFor `type: conversations`, `model_options` must be omitted when description\ngeneration is false or omitted. Create, get, and list responses preserve\n`type: conversations`.\nGenerating test-case rubrics with `generate_test_case_rubric_preview` also\nrequires a nonempty `model_options.model`.\nThe response includes the effective trace settings.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -10240,7 +10240,7 @@
       "get": {
         "operationId": "DataGenerationJobs_get",
         "summary": "Get a data generation job",
-        "description": "Retrieves the specified data generation job and its current status.\nReturns effective trace settings, including `turn` and false for omitted\nsettings or older stored jobs. Reading an existing job does not require\npreview opt-in.",
+        "description": "Retrieves the specified data generation job and its current status.\nReturns effective trace settings and preserves `type: conversations` for\nconversation jobs. Reading an existing job does not require preview opt-in.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -43422,6 +43422,46 @@
         ],
         "description": "A trace source that selects traces by conversation IDs."
       },
+      "ConversationsDataGenerationJobConfiguration": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "conversations"
+            ],
+            "description": "The data generation job type, which is Conversations for this model."
+          },
+          "max_samples": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of whole conversations to generate, up to service-defined limits. If omitted, sampling is turned off."
+          },
+          "redact_private_content": {
+            "type": "boolean",
+            "description": "Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.",
+            "default": true
+          },
+          "generate_test_case_description": {
+            "type": "boolean",
+            "description": "Whether to generate an AI-authored test-case description for each reconstructed conversation. Defaults to false. When true, requires a nonempty `model_options.model`. When false or omitted, `model_options` must be omitted.",
+            "default": false
+          },
+          "model_options": {
+            "$ref": "#/components/schemas/DataGenerationModelOptions",
+            "description": "The model used to generate test-case descriptions. Required with a nonempty `model` when `generate_test_case_description` is true; must be omitted otherwise."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobConfiguration"
+          }
+        ],
+        "description": "The configuration for reconstructing existing traced conversations for evaluation, not synthetic conversation simulation. This preview requires `scenario` to be `evaluation`, sources of type `traces`, and the `Foundry-Features: DataGenerationJobs=V1Preview` request header. Conversation-level sampling is implicit; `sample_level` is not supported. Existing trace selection, annotations, and output dataset row schemas are unchanged. Create, get, and list responses preserve `type: conversations`. The service enforces the scenario, source, and conditional model-options requirements."
+      },
       "CosmosDBIndex": {
         "type": "object",
         "required": [
@@ -44325,7 +44365,7 @@
           },
           "generation_configuration": {
             "$ref": "#/components/schemas/DataGenerationJobConfiguration",
-            "description": "The effective generation configuration for the data generation job. For trace jobs, create, get, and list responses include `sample_level` and `generate_test_case_description`, with effective values `turn` and false when omitted in the request or absent from an older stored job."
+            "description": "The effective generation configuration for the data generation job."
           },
           "scenario": {
             "$ref": "#/components/schemas/DataGenerationJobScenario",
@@ -44379,6 +44419,7 @@
           "mapping": {
             "simple_qna": "#/components/schemas/SimpleQnADataGenerationJobConfiguration",
             "traces": "#/components/schemas/TracesDataGenerationJobConfiguration",
+            "conversations": "#/components/schemas/ConversationsDataGenerationJobConfiguration",
             "simulation_seed": "#/components/schemas/SimulationSeedDataGenerationJobConfiguration",
             "tool_use": "#/components/schemas/ToolUseFineTuningDataGenerationJobConfiguration"
           }
@@ -44575,6 +44616,7 @@
             "enum": [
               "simple_qna",
               "traces",
+              "conversations",
               "tool_use",
               "simulation_seed"
             ]
@@ -44590,7 +44632,7 @@
         "properties": {
           "model": {
             "type": "string",
-            "description": "Base model name used to generate data. For trace jobs, a nonempty value is required when `generate_test_case_description` is true; model options can be omitted when descriptions are disabled."
+            "description": "Base model name used to generate data. For trace jobs, a nonempty value is required when `generate_test_case_description` or `generate_test_case_rubric_preview` is true. Model options can be omitted for conversation reconstruction when neither description nor rubric generation is enabled."
           }
         },
         "description": "LLM model options for data generation jobs."
@@ -44728,7 +44770,7 @@
             "$ref": "#/components/schemas/DataGenerationJobOutput"
           }
         ],
-        "description": "Dataset output for a data generation job. Conversation-level trace rows contain `test_case_id`, `messages`, `tool_definitions`, and `metadata`. A successful optional description adds `test_case_description`. If description generation fails, the row is retained with safe row-level status and error metadata, without raw provider or model error bodies."
+        "description": "Dataset output for a data generation job."
       },
       "DatasetEvaluationSuiteJobSource": {
         "type": "object",
@@ -46409,7 +46451,7 @@
           },
           "write_mode": {
             "$ref": "#/components/schemas/DataGenerationJobOutputWriteMode",
-            "description": "Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows. For conversation-level trace samples, `merge` preserves conversation snapshots rather than unioning newly observed turns into an existing snapshot.",
+            "description": "Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows. `merge` combines newly generated rows with the latest existing dataset version and de-duplicates trace rows. Conversation rows follow the same write modes; merging does not union newly observed turns into an existing conversation snapshot.",
             "default": "overwrite"
           }
         },
@@ -98726,8 +98768,12 @@
           },
           "generate_test_case_description": {
             "type": "boolean",
-            "description": "Whether to generate an AI-authored test-case description for each new retained conversation row. Defaults to false. The service rejects true unless `sample_level` is `conversation` and `model_options.model` is nonempty. Model options are not required for conversation reconstruction when descriptions are disabled. Responses return the effective value, including false when omitted or when reading older stored jobs.",
+            "description": "Whether to generate an AI-authored test-case description for each new retained conversation row. Defaults to false. The service rejects true unless `sample_level` is `conversation` and `model_options.model` is nonempty. Model options are not required for conversation reconstruction when neither description nor rubric generation is enabled. Responses return the effective value, including false when omitted or when reading older stored jobs.",
             "default": false
+          },
+          "generate_test_case_rubric_preview": {
+            "type": "boolean",
+            "description": "Whether to generate test-case rubric dimensions. This is a preview feature. When true, requires a nonempty `model_options.model`."
           }
         },
         "allOf": [
@@ -98735,7 +98781,7 @@
             "$ref": "#/components/schemas/DataGenerationJobConfiguration"
           }
         ],
-        "description": "The configuration for a data generation job with Traces type. Existing turn-level requests remain valid and behaviorally unchanged. The service validates cross-property requirements: `conversation` is valid only for the `evaluation` scenario, and generating descriptions requires `conversation` and a nonempty `model_options.model`. Conversation reconstruction does not require model options when descriptions are disabled."
+        "description": "The configuration for a data generation job with Traces type. Existing turn-level requests remain valid and behaviorally unchanged. The service validates cross-property requirements: `conversation` is valid only for the `evaluation` scenario, generating descriptions requires `conversation`, and generating descriptions or rubrics requires a nonempty `model_options.model`. Conversation reconstruction does not require model options when neither is enabled. Conversation-level output rows contain `test_case_id`, `messages`, `tool_definitions`, and `metadata`. A successful optional description adds `test_case_description`. If description generation fails, the row is retained with safe row-level status and error metadata, without raw provider or model error bodies."
       },
       "TracesDataGenerationJobSource": {
         "type": "object",

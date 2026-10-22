@@ -14,9 +14,8 @@ alias DataGenerationJobsOptionalPreviewHeader = WithConditionalFoundryPreviewHea
 interface DataGenerationJobs {
   /**
    * Retrieves the specified data generation job and its current status.
-   * Returns effective trace settings, including `turn` and false for omitted
-   * settings or older stored jobs. Reading an existing job does not require
-   * preview opt-in.
+   * Returns effective trace settings and preserves `type: conversations` for
+   * conversation jobs. Reading an existing job does not require preview opt-in.
    */
   @summary("Get a data generation job")
   @route("data_generation_jobs/{jobId}")
@@ -33,9 +32,8 @@ interface DataGenerationJobs {
 
   /**
    * Returns a list of data generation jobs.
-   * Each trace job includes its effective settings, including `turn` and false
-   * for omitted settings or older stored jobs. Listing existing jobs does not
-   * require preview opt-in.
+   * Each trace job includes its effective settings. Conversation jobs preserve
+   * `type: conversations`. Listing existing jobs does not require preview opt-in.
    */
   @summary("List data generation jobs")
   @route("data_generation_jobs")
@@ -51,15 +49,22 @@ interface DataGenerationJobs {
 
   /**
    * Submits a new data generation job for asynchronous execution.
-   * Trace requests with `sample_level` set to `conversation` require
+   * Requests with `type` set to `conversations`, or trace requests with
+   * `sample_level` set to `conversation`, require
    * `Foundry-Features: DataGenerationJobs=V1Preview`; the service rejects
    * conversation requests without this opt-in. Ordinary turn-level trace
    * requests do not require the header.
    * Conversation samples require `scenario` to be `evaluation`.
-   * Generating test-case descriptions also requires `sample_level` to be
-   * `conversation` and a nonempty `model_options.model`.
-   * The response includes the effective trace settings, defaulting to
-   * `sample_level: turn` and `generate_test_case_description: false`.
+   * Jobs with `type: conversations` reconstruct existing traced conversations,
+   * use sources of type `traces`, and do not support `sample_level`.
+   * Generating test-case descriptions requires a nonempty `model_options.model`;
+   * trace jobs also require `sample_level` to be `conversation`.
+   * For `type: conversations`, `model_options` must be omitted when description
+   * generation is false or omitted. Create, get, and list responses preserve
+   * `type: conversations`.
+   * Generating test-case rubrics with `generate_test_case_rubric_preview` also
+   * requires a nonempty `model_options.model`.
+   * The response includes the effective trace settings.
    */
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
   @summary("Create a data generation job")

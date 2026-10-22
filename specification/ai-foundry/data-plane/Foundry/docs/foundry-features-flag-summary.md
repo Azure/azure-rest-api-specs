@@ -19,7 +19,7 @@ in order to enable preview features on these GA routes.
 | Agents | Update | POST | `/agents/{agent_name}` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview` |
 | Agents | Create Version | POST | `/agents/{agent_name}/versions` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview` |
 | Evaluation Rules | CreateOrUpdate | PUT | `/evaluationrules/{id}` | Optional: `Evaluations=V1Preview` |
-| Data Generation Jobs | Create | POST | `/data_generation_jobs` | Required for conversation samples: `DataGenerationJobs=V1Preview`; not required for ordinary turn samples |
+| Data Generation Jobs | Create | POST | `/data_generation_jobs` | Required for `type: conversations` or `type: traces` with `sample_level: conversation`: `DataGenerationJobs=V1Preview`; not required for ordinary turn samples |
 
 Note that only v1 operations are included in the above table. If an operation (or interface) is decorated with `@removed(Versions.v1)` the are not included here.
 

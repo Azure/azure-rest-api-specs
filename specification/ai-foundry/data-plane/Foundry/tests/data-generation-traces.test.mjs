@@ -22,7 +22,7 @@ for (const version of ["v1", "virtual-public-preview"]) {
   const schemas = spec.components.schemas;
   const traces = schemas.TracesDataGenerationJobConfiguration;
 
-  test(`${version}: trace settings are optional and absent from other generation modes`, () => {
+  test(`${version}: trace settings stay optional and separate from other generation modes`, () => {
     assert.equal(traces.properties.sample_level.default, "turn");
     assert.equal(
       traces.properties.generate_test_case_description.default,
@@ -30,6 +30,11 @@ for (const version of ["v1", "virtual-public-preview"]) {
     );
     assert(!traces.required.includes("sample_level"));
     assert(!traces.required.includes("generate_test_case_description"));
+    assert.equal(
+      traces.properties.generate_test_case_rubric_preview.type,
+      "boolean",
+    );
+    assert(!traces.required.includes("generate_test_case_rubric_preview"));
     assert.deepEqual(
       schemas.TraceSampleLevel.anyOf.flatMap((variant) => variant.enum ?? []),
       ["turn", "conversation"],
@@ -40,8 +45,17 @@ for (const version of ["v1", "virtual-public-preview"]) {
         name !== "TracesDataGenerationJobConfiguration"
       ) {
         assert(!Object.hasOwn(schema.properties, "sample_level"), name);
+        if (name !== "ConversationsDataGenerationJobConfiguration") {
+          assert(
+            !Object.hasOwn(schema.properties, "generate_test_case_description"),
+            name,
+          );
+        }
         assert(
-          !Object.hasOwn(schema.properties, "generate_test_case_description"),
+          !Object.hasOwn(
+            schema.properties,
+            "generate_test_case_rubric_preview",
+          ),
           name,
         );
       }
@@ -56,6 +70,117 @@ for (const version of ["v1", "virtual-public-preview"]) {
         "model_options",
       ),
     );
+  });
+
+  test(`${version}: conversations reconstruct traces with implicit sampling and optional descriptions`, () => {
+    const conversations = schemas.ConversationsDataGenerationJobConfiguration;
+    assert(conversations, "The conversations configuration must be emitted.");
+    assert.deepEqual(conversations.allOf, [
+      { $ref: "#/components/schemas/DataGenerationJobConfiguration" },
+    ]);
+    assert.deepEqual(conversations.properties.type.enum, ["conversations"]);
+    assert(!Object.hasOwn(conversations.properties, "sample_level"));
+    assert(
+      !Object.hasOwn(
+        conversations.properties,
+        "generate_test_case_rubric_preview",
+      ),
+    );
+    assert(
+      !Object.hasOwn(
+        schemas.DataGenerationJobConfiguration.properties,
+        "sample_level",
+      ),
+    );
+    assert.deepEqual(conversations.required, ["type"]);
+    assert.equal(conversations.properties.max_samples.type, "integer");
+    assert.deepEqual(
+      conversations.properties.redact_private_content,
+      traces.properties.redact_private_content,
+    );
+    assert.equal(
+      conversations.properties.generate_test_case_description.default,
+      false,
+    );
+    assert.equal(
+      conversations.properties.model_options.$ref,
+      "#/components/schemas/DataGenerationModelOptions",
+    );
+    assert.match(
+      conversations.properties.model_options.description,
+      /must be omitted otherwise/,
+    );
+
+    const request = examples["conversations-type-request"];
+    const response = examples["conversations-type-response"];
+    const defaults = examples["conversations-type-default-request"];
+    for (const job of [request, response, defaults]) {
+      assert.equal(job.scenario, "evaluation");
+      assert.equal(job.generation_configuration.type, "conversations");
+      assert(!Object.hasOwn(job.generation_configuration, "sample_level"));
+      for (const source of job.sources) {
+        assert.equal(source.type, "traces");
+        for (const field of Object.keys(source)) {
+          assert(
+            Object.hasOwn(
+              schemas.TracesDataGenerationJobSource.properties,
+              field,
+            ),
+            field,
+          );
+        }
+      }
+    }
+    assert.equal(
+      request.generation_configuration.generate_test_case_description,
+      true,
+    );
+    assert(request.generation_configuration.model_options.model.length > 0);
+    assert.deepEqual(
+      response.generation_configuration.model_options,
+      request.generation_configuration.model_options,
+    );
+    assert(!Object.hasOwn(defaults.generation_configuration, "model_options"));
+    assert(
+      !Object.hasOwn(
+        defaults.generation_configuration,
+        "generate_test_case_description",
+      ),
+    );
+    assert(
+      !Object.hasOwn(
+        schemas.DataGenerationJobSource.discriminator.mapping,
+        "conversations",
+      ),
+    );
+  });
+
+  test(`${version}: rubric generation reuses model options independently of descriptions`, () => {
+    const rubric = examples["rubric-request"].generation_configuration;
+    assert.equal(rubric.type, "traces");
+    assert.equal(rubric.generate_test_case_rubric_preview, true);
+    assert(rubric.model_options.model.length > 0);
+    assert(!Object.hasOwn(rubric, "generate_test_case_description"));
+    assert.match(
+      traces.properties.generate_test_case_rubric_preview.description,
+      /requires a nonempty `model_options\.model`/,
+    );
+    assert.match(
+      schemas.DataGenerationModelOptions.properties.model.description,
+      /generate_test_case_rubric_preview/,
+    );
+    for (const name of [
+      "turn-request",
+      "conversation-request",
+      "description-request",
+    ]) {
+      assert(
+        !Object.hasOwn(
+          examples[name].generation_configuration,
+          "generate_test_case_rubric_preview",
+        ),
+      );
+    }
   });
 
   test(`${version}: create/get/list share effective trace settings through existing discriminators`, () => {
@@ -86,9 +211,24 @@ for (const version of ["v1", "virtual-public-preview"]) {
         "#/components/schemas/DataGenerationJobConfiguration",
       );
     }
-    assert.equal(
-      schemas.DataGenerationJobConfiguration.discriminator.mapping.traces,
-      "#/components/schemas/TracesDataGenerationJobConfiguration",
+    assert.deepEqual(
+      schemas.DataGenerationJobConfiguration.discriminator.mapping,
+      {
+        simple_qna:
+          "#/components/schemas/SimpleQnADataGenerationJobConfiguration",
+        traces: "#/components/schemas/TracesDataGenerationJobConfiguration",
+        conversations:
+          "#/components/schemas/ConversationsDataGenerationJobConfiguration",
+        simulation_seed:
+          "#/components/schemas/SimulationSeedDataGenerationJobConfiguration",
+        tool_use:
+          "#/components/schemas/ToolUseFineTuningDataGenerationJobConfiguration",
+      },
+    );
+    assert(
+      schemas.DataGenerationJobType.anyOf.some((variant) =>
+        variant.enum?.includes("conversations"),
+      ),
     );
     const header = collection.post.parameters.find(
       (parameter) => parameter.name === "Foundry-Features",
@@ -155,10 +295,7 @@ for (const version of ["v1", "virtual-public-preview"]) {
       "code",
       "message",
     ]);
-    assert.match(
-      schemas.DatasetDataGenerationJobOutput.description,
-      /row is retained/,
-    );
+    assert.match(traces.description, /row is retained/);
     assert.match(
       traces.properties.max_samples.description,
       /whole conversation candidates/,
