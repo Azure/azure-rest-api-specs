@@ -1,221 +1,250 @@
 # Rollout procedure
 
-## 1. Refresh the inventory and choose a branch
+## 1. Resolve the rule-name list
 
-Use GitHub CLI to enumerate merged migration PRs:
+The only input is a nonempty list of rule names, for example:
 
-```powershell
-gh pr list --repo Azure/typespec-azure --state merged --limit 100 `
-  --search '"[Swagger Linter Migration]" in:title' `
-  --json number,title,mergedAt,url
+```text
+["no-query-in-post", "no-query-in-point-op"]
 ```
 
-Paginate further if the result reaches the limit. Check subsequent reverts and
-replacement implementations. Multiple `(origin)` PRs can implement the same
-rule; two old Swagger checks can also map to one TypeSpec rule. Inspect current
-`$linter.rules`, package exports, upstream `ruleSets`, and the spec repository's
-wrapper rather than counting titles.
+Accept fully qualified rule IDs or unique suffixes, deduplicate, and resolve
+the entire list against installed linter exports and migration sources. Reject
+unknown or ambiguous names explicitly. Infer packages, API planes, profiles,
+project discovery, branch name, and PR metadata; do not turn them into additional
+required inputs. Use the actual repository default branch as the base. Never
+silently omit a rule or substitute another rule.
 
-Read `pnpm-workspace.yaml` and `pnpm-lock.yaml` on the intended spec branch.
-Compare the actual installed `$linter.rules` exports with the candidate IDs,
-and check that the rule is not already inherited or explicitly enabled.
-`npm view <package> dist-tags --json` is publication evidence only: the target
-branch's lockfile and installed export determine whether CI can execute a rule.
-A rule present only in `next` needs a compatible, separately validated dependency
-update or a rollout against `typespec-next`; do not assume a merged TypeSpec PR
-is available on spec `main`. Preserve the upstream package alias.
-
-Check actual remote URLs, permissions, and branch policies. Prefer a new branch
-in `Azure/azure-rest-api-specs` when write access permits; otherwise use an
-authorized fork and disclose the fallback. Never push to the base branch.
-
-## 2. Establish a baseline, then opt in
-
-Use a dedicated worktree at an exact base SHA. Follow the checked-out branch's
-Node and pnpm requirements and setup action. Install its locked dependencies:
+Read the base branch's `pnpm-workspace.yaml`, `pnpm-lock.yaml`, and central
+wrapper. Follow its Node/pnpm requirements and install locked dependencies when
+needed:
 
 ```powershell
 pnpm install --frozen-lockfile
-pnpm --filter @azure-tools/typespec-azure-rulesets build
-pnpm --filter @azure-tools/typespec-validation check
-pnpm exec tsv --all --dry-run specification
 ```
 
-Archive the discovery list, package versions, baseline logs, and exact revision.
-Run baseline validation before enabling the rule, or reuse a completed baseline
-run only if its SHA, dependencies, project set, and target ref match.
+Inspect actual installed `$linter.rules`, upstream profiles, and ordered
+project profile composition. Published `next` packages are not evidence that
+the base branch installs them. If any requested rule requires a dependency
+upgrade or unsupported policy composition, report the prerequisite and do not
+pretend the entire list can be enabled. Do not silently switch to `typespec-next`
+or upgrade packages.
 
-Add one fully qualified rule ID to `enable` in the appropriate
-`$linter.ruleSets` entry in `eng/typespec-rulesets/index.ts`. Merge into existing
-maps; do not replace unrelated policy. For example:
+In particular, upstream `client-sdk` explicitly disables
+`@azure-tools/typespec-client-generator-core/use-create-for-put`. For projects
+extending `resource-manager` followed by `client-sdk`, the latter cancels an
+earlier enable. Do not work around that blocker with mass project-config edits
+or by enabling ARM-only guidance for data-plane.
+
+Already-enabled rules remain enabled and in the requested-list report. If the
+whole list is already enabled and has no work to perform, report a no-op rather
+than manufacture a PR.
+
+## 2. Create the draft PR before enabling rules
+
+Check actual remote URLs, write permissions, and branch restrictions. Prefer a
+new branch in `Azure/azure-rest-api-specs`; use an authorized fork only when
+direct push is unavailable, and disclose that fallback. Never push to the base
+branch. Use a dedicated worktree at an exact base SHA.
+
+GitHub needs a branch difference to open a PR. Bootstrap with a real,
+**policy-neutral** commit: add explicit `false` entries for the requested,
+currently disabled rules in the appropriate central `enable` maps in
+`eng/typespec-rulesets/index.ts`. Do this only after verifying those rules are
+already effectively disabled in the relevant compositions. Preserve all
+existing overrides and never set an already-enabled rule to `false`. These
+staging entries must not enable or disable any additional behavior.
+
+Commit and push that bootstrap, then create **one draft PR for the whole list**:
+
+```powershell
+git push -u <source-remote> <work-branch>
+gh pr create --repo Azure/azure-rest-api-specs --base <default-branch> `
+  --head <work-branch-or-owner:branch> --draft `
+  --title <inferred-title> --body-file <progress-body-path>
+```
+
+Record the returned URL and verify that the draft exists before changing the
+entries to `true`. Initialize its body with the requested/resolved list, base
+SHA, package versions, pending enablement, pending full compilation, and pending
+suppression work. Keep logs and progress artifacts outside tracked source.
+
+## 3. Enable all requested rules in the existing draft
+
+Change the staging entries to `true` in their applicable central profiles.
+Rule IDs belong to the defining package, not the wrapper. For example:
 
 ```ts
-"data-plane": {
-  extends: ["@azure-tools/typespec-azure-rulesets-original/data-plane"],
+"resource-manager": {
+  extends: ["@azure-tools/typespec-azure-rulesets-original/resource-manager"],
   enable: {
-    "@azure-tools/typespec-azure-core/no-boolean": true,
+    "@azure-tools/typespec-azure-resource-manager/no-query-in-post": true,
+    "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op": true,
   },
 },
 ```
 
-Select `data-plane` or `resource-manager` from the rule's intended applicability;
-do not enable a core rule for both planes solely because it is in the core
-package. `client-sdk` is for SDK rules, not a shortcut to reach every project.
+Preserve upstream `extends` and unrelated overrides. Select profiles from each
+rule's actual applicability, not its package name alone. Confirm later profiles
+do not disable selected rules again. Do not edit service `tspconfig.yaml` files
+to bypass composition or change package versions to bypass availability checks.
 
-Check the **complete ordered profile composition** in representative project
-configs. An inherited `disable` in a later profile can remove an earlier
-enable. For example, upstream `client-sdk` explicitly disables
-`@azure-tools/typespec-client-generator-core/use-create-for-put` in stable
-and next. Enabling it in `resource-manager` alone does not work for projects
-that subsequently extend `client-sdk`. A final project-local enable works
-technically but violates this rollout's central-policy/no-mass-config-edit
-boundary. Defer this rule until an ARM-only profile composition or an upstream
-plane-aware rule/policy change is approved and tested; do not remove the
-data-plane safeguard globally.
-
-Build the wrapper again. Start with one representative project and confirm the
-selected rule actually fires. An unknown rule, a missing export, or zero
-diagnostics in a non-violating template does not establish successful opt-in.
-Then scan every applicable project with the candidate override:
+Build, commit, and push enablement to the **same draft PR**:
 
 ```powershell
-pnpm exec tsv --all specification
+pnpm --filter @azure-tools/typespec-azure-rulesets build
+git push
 ```
 
-This full scan can be expensive and can modify generated files and formatting.
-Use the disposable scan checkout, retain complete per-project logs, and compare
-against baseline. Do not commit incidental scan output. A wrapper edit affects
-all projects using that named ruleset, not only projects changed in the PR.
+A matching completed base run can help identify pre-existing failures, but
+baseline harvesting is not a replacement for compilation after enablement.
 
-For parallel execution use the existing three-shard convention, with a distinct
-checkout per shard:
+## 4. Compile every project
+
+Discover all TypeSpec projects under `specification` using repository discovery,
+not only changed folders or a handpicked service. From the repository root:
 
 ```powershell
-pnpm exec tsv --all --shard=1/3 specification
+$projects, $checkedAll = & .\eng\scripts\Get-TypeSpec-Folders.ps1 -CheckAll
 ```
 
-Repeat for `2/3` and `3/3`. Do not run concurrent shards in one checkout.
-The checked-in workflow uses `--git-clean` only in disposable CI checkouts;
-candidate enablement and suppressions must be committed before using that flag.
+Keep the complete discovery manifest, deduplicated project paths, candidate SHA,
+package versions, and per-project results. Cross-check the population using
+`pnpm exec tsv --all --dry-run specification`. An empty or incomplete manifest is
+a failure, not a green result.
 
-## 3. Suppress observed legacy violations
+For each project with `main.tsp`, run its actual configured compile:
 
-Retain exact rule ID, project, file, line, message, and baseline/candidate
-distinction. Exclude pre-existing failures and all diagnostics from other rules.
-Namespaced diagnostics are not automatically safe: confirm the ID is an
-exported **linter rule**, not just a library/compiler diagnostic.
+```powershell
+pnpm exec tsp compile <project-folder> --warn-as-error
+```
 
-Invoke `azure-typespec-author` before production TypeSpec edits. Read the
-declaration and its decorators, templates, and versioning context. For each
-accepted legacy exception, insert:
+For a client-only project use its entry point, consistent with TSV:
+
+```powershell
+pnpm exec tsp compile <project-folder>\client.tsp --no-emit --warn-as-error
+```
+
+Resolve entry points deliberately; a discovered project without a supported
+entry point must be explained, not silently skipped. Record each process exit
+code immediately and retain stdout/stderr with project attribution. Continue
+through the entire population even when earlier projects fail. Compiler
+warnings count as failures because `--warn-as-error` is mandatory.
+
+Compilation can rewrite generated files. Use a dedicated checkout, compare
+against the base, and do not commit incidental generated output. If parallelizing,
+use separate checkouts for workers, then validate the combined candidate.
+
+## 5. Suppress and recompile until all projects pass
+
+For every failing project, collect exact rule IDs, files, locations, messages,
+and whether the failures predate enablement. A namespaced code alone does not
+prove a diagnostic is a suppressible linter rule.
+
+Invoke the repository's `azure-typespec-author` skill before production `.tsp`
+edits and follow its grounding and validation requirements. If it is unavailable,
+report that limitation rather than bypassing the authoring workflow.
+
+Suppress only observed diagnostics belonging to the **requested rule list**
+where retaining an existing API contract is intentional:
 
 ```tsp
 #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing published contract exposes this boolean; preserve wire compatibility during rule enablement."
 legacyFlag?: boolean;
 ```
 
-Use the actual contract-specific reason, not a generic claim that the rule was
-migrated. Insert before the targeted declaration's decorators/doc comments as
-required by the parser and formatter; do not attach it to the previous
-declaration or an unrelated `@@` augment decorator. For templates or shared
-models, validate all consuming projects and demonstrate the chosen scope does
-not mask future unrelated violations.
+Use a contract-specific reason and the narrowest declaration that actually
+suppresses the diagnostic. Inspect decorators, template diagnostic targets, and
+shared declarations. Do not attach directives to the preceding declaration or
+an unrelated `@@` augment decorator, blanket-suppress namespaces/projects, or
+widen suppression scope to hide future violations.
 
-Recompile after edits and inspect which diagnostics remain. A repeated
-diagnostic usually means the directive targets the wrong declaration. Correct
-placement rather than widening scope. A newly revealed diagnostic must pass the
-same selected-rule and legacy-contract checks. Limit this loop to three passes
-per project and report remaining blockers.
+Repeat the following loop:
 
-Do not use `specification/suppressions.yaml` here. It controls TSV checks such as
-`FolderStructure/MustUseV2` and `Compile/ExtraSwagger`, not individual TypeSpec
-linter rules; current TSV's `Compile` rule is not globally suppressible.
+1. Add narrow suppressions for the current, classified selected-rule diagnostics.
+2. Format the edited scope, inspect the diff, and recompile the edited projects.
+3. Investigate repeated diagnostics as possible placement mistakes. Correct
+   placement instead of broadening scope. Classify newly exposed diagnostics
+   before adding any further suppression.
+4. Recompile **every project**, including consumers of changed shared files,
+   with all requested rules still enabled. Record the complete pass results.
+5. If any actionable selected-rule violations remain, repeat. Finish the compile
+   loop only when a complete pass has **zero failed projects**.
 
-## 4. Validate the candidate
+There is **no fixed iteration limit**. Do not stop after an arbitrary number of
+passes or after only touched projects compile. A repeated identical failure
+after attempted corrections, an unavailable authoring prerequisite, a genuine
+API design defect, a rule bug, an unrelated compiler error, or infrastructure
+failure is an explicit blocker, not permission to loop blindly or suppress
+unrelated diagnostics. Continue independent actionable work, record blockers in
+the existing draft, and never claim convergence while they remain.
 
-From each edited project's directory, run the formatter in the same scope TSV
-uses, and inspect all resulting changes:
+Never use `linter.disable`, global disablement, or
+`specification/suppressions.yaml` to make this loop pass. The latter controls TSV
+checks such as `FolderStructure/MustUseV2` and `Compile/ExtraSwagger`, not
+individual linter diagnostics. Do not change API declarations, versions,
+examples, decorators, existing suppressions, or generated Swagger.
+
+## 6. Validate and finalize the same PR
+
+From edited project directories, format the scope TSV uses:
 
 ```powershell
 pnpm exec tsp format "../**/*.tsp" tspconfig.yaml
 ```
 
-From the repository root:
+Run the final full compile pass **after all formatting and suppression edits**.
+Rediscover projects and reconcile the manifest so added or previously missed
+projects cannot escape the final pass. Verify generated API output is unchanged.
+
+Compilation success is the loop's convergence condition, not a replacement for
+the remaining repository checks. From the repository root:
 
 ```powershell
-pnpm exec tsv <project-folder>
+pnpm exec tsv <edited-project-folder>
 pnpm --filter @azure-tools/typespec-azure-rulesets build
 pnpm --filter @azure-tools/typespec-validation check
 ```
 
-TSV compiles with `--warn-as-error`, checks formatting, and compares generated
-files. It can also rewrite files. Review the full diff and reject any API
-contract, generated-output, or unrelated formatting change. Pre-existing
-failures must be documented and separated; they are not permission to add
-unrelated suppressions. Repeat the complete population scan with the final
-suppression set, including consumers of changed shared declarations.
-
-Commit the candidate before revision-based analysis. Compare the PR merge base
-with the candidate commit, not uncommitted working-tree files:
+Review all resulting diffs. Commit and push the final enablement/suppression
+set, then inspect revision-based suppression changes:
 
 ```powershell
 pnpm exec typespec-suppressions --base <merge-base-sha> --head HEAD `
-  --json-output <report-path> <project-folder>
+  --json-output <report-path> <edited-project-folder>
 ```
 
-Include every touched project/consumer as appropriate. Inspect counts and
-structural anchors for unexpectedly broad scope. The workflow also supplies
+Include every touched project and shared consumer as appropriate. Check counts
+and structural anchors for broad scope. CI additionally passes
 `--check-rules-file eng/tools/typespec-suppressions/check-rules.json
---fail-on-approval`; only that curated subset is approval-gated. Do not edit
-the curated list or approval mechanism to bypass review. The unfiltered report
-is still needed for rules outside the list.
+--fail-on-approval`; do not alter that list or approval mechanism to bypass review.
+Inspect the unfiltered report even for rules outside the curated subset.
 
-Require **TypeSpec Validation - All** on the candidate PR head/merge candidate:
-all three Ubuntu and all three Windows shards for its target ref. An
-`eng/typespec-rulesets/index.ts` change matches this workflow's `eng/**` PR
-trigger. Scheduled runs additionally validate `typespec-next`; push and PR runs
-normally cover only their default checkout, so check actual matrix refs.
-A green baseline run does not validate a changed override.
+Require **TypeSpec Validation - All** for the final candidate: all three Ubuntu
+and all three Windows shards for the target ref. Central `eng/**` edits trigger
+this workflow. A green baseline, a partial scan, or an earlier candidate is not
+final validation. Use `tsv --git-clean` only in clean disposable validation
+checkouts containing committed candidate edits; it discards tracked/untracked
+work and must never run in the authoring checkout.
 
-## 5. Open an atomic draft PR
-
-Include central enablement and all required narrow suppressions together.
-Separate dependency upgrades or substantial API fixes when needed; do not land
-enablement before the existing violations are accounted for. A suppression-only
-preparation PR is not completed enablement and needs explicit sequencing and
-fresh validation when the follow-up policy PR is prepared.
-
-The draft PR body should identify:
-
-- Selected rule, Swagger predecessor(s), migration PR, plane, package versions,
-  base revision, and candidate revision.
-- Total applicable projects, scan coverage, projects with violations, number of
-  diagnostics and added suppressions, and why these contracts are grandfathered.
-- Baseline versus candidate failures, generated-output comparison, targeted
-  checks, full matrix run link, suppression report, and review requirements.
-- Every blocked project or incomplete check. Do not mark ready while any
-  applicable project remains unaccounted for.
-
-Create the draft against the intended branch, not automatically `main` for a
-`typespec-next` experiment. Never auto-merge or resolve reviewer threads.
+Update the **existing** draft PR with the requested/resolved list, package
+versions, base/head SHAs, total project coverage, per-pass failure counts, added
+suppressions, final compile outcome, unchanged-output evidence, suppression
+report, CI links, and unresolved blockers. Keep central enablement and all
+required suppressions together; do not create a second PR at the end, merge
+partial enablement, auto-merge, or resolve reviewer threads.
 
 ## Why PR #45589 is not the bootstrap step
 
 At the inspected head, [PR #45589](https://github.com/Azure/azure-rest-api-specs/pull/45589)
-is unmerged. It harvests existing TSV-All logs and opens suppression-only PRs;
-it does not opt disabled migration rules into the central rulesets. Existing
-green runs therefore contain none of their potential violations.
+is unmerged. It harvests existing logs rather than enabling disabled rules.
+Its parser expects `##[group]Validating <folder>`, but current TSV prints
+`pass`/`fail`/`skip` headings. Against a current failing shard it reported zero
+folders and failures. Do not use that empty result as evidence of successful
+compilation.
 
-There is also a concrete compatibility failure: its parser expects
-`##[group]Validating <folder>`, but current TSV prints
-`##[group]pass <folder>`, `fail <folder>`, or `skip <folder>`. Against a current
-failing next-shard log it reported zero folders and zero failures. It must be
-updated and tested against current logs before reuse. Require nonzero expected
-project coverage, all expected shards, successful log downloads, and run/head/
-dependency provenance; never treat missing coverage as a clean run.
-
-Its general ideas remain useful: harvest already-produced **candidate**
-validation logs, preserve exact diagnostic locations, prefer narrow inline
-suppressions, classify infrastructure errors separately, bound iteration, and
-validate both operating systems. Do not copy its broad diagnostic eligibility
-or folder-level suppression policies into this selected-rule rollout.
+Candidate logs can supplement this workflow only after all requested rules are
+enabled and the full project population is proven present. Verify every expected
+log/shard download and candidate/dependency provenance. The direct
+`tsp compile` loop above is the required execution path, not optional harvesting
+of pre-enable CI.

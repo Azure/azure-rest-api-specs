@@ -129,7 +129,9 @@ CI cannot discover violations of disabled rules.
 Start with one of the stable ARM rules such as `no-query-in-post`, after measuring
 its actual diagnostic population; prefer a small, understandable exception set.
 The `no-boolean` smoke test was chosen for deterministic proof, not as evidence
-that it has the smallest production impact. Keep the first rollout to one rule,
-central enablement plus justified existing-contract suppressions, and full target
-ref validation. Leave next-only rules and the SDK profile-composition blocker
-for explicit prerequisite work.
+that it has the smallest production impact. A one-rule list is a useful first
+production trial, but the skill accepts multiple rules and must process the
+complete supplied list in one draft PR. Create that draft before enablement,
+then enable the selected rules and repeat full-population compilation and narrow
+suppressions until every project compiles. Leave next-only rules and the SDK
+profile-composition blocker for explicit prerequisite work.
