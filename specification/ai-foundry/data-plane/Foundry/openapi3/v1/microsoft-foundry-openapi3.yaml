@@ -87001,7 +87001,7 @@ components:
             transcription. These values are session defaults; a client may override supported fields when connecting.
         soundscape:
           $ref: '#/components/schemas/VoiceAgentSoundscapeConfig'
-          description: Optional background ambience and event cues, stored with the agent version and separate from the audio configuration sent to Voice Live. Currently rendered only for telephony calls, not browser WebRTC or direct voice WebSocket sessions. Omit this property to disable all auxiliary audio. Persisted conversation recordings do not include the soundscape mix.
+          description: Optional background ambience and event cues, stored with the agent version and separate from the audio configuration. Currently rendered only for telephony calls, not browser WebRTC or direct voice WebSocket sessions. Omit this property to disable all auxiliary audio. Persisted conversation recordings do not include the soundscape mix.
         output_modalities:
           type: array
           items:
@@ -87656,7 +87656,7 @@ components:
           format: double
           minimum: 0
           maximum: 1
-          description: Linear playback gain from 0 to 1, independent of agent speech volume. Defaults to 1. A value of 0 mutes this track.
+          description: Linear playback gain from 0 to 1, independent of agent speech volume. If omitted, the service defaults to 1. A value of 0 mutes this track.
           default: 1
       description: A soundscape track with its own audio source and playback volume.
       x-ms-foundry-meta:
@@ -87675,14 +87675,14 @@ components:
           format: double
           minimum: 0
           maximum: 1
-          description: Linear playback gain from 0 to 1, independent of agent speech volume. Defaults to 1. A value of 0 mutes this track.
+          description: Linear playback gain from 0 to 1, independent of agent speech volume. If omitted, the service defaults to 1. A value of 0 mutes this track.
           default: 1
         delay_ms:
           type: integer
           format: int32
           minimum: 0
           maximum: 10000
-          description: The delay in milliseconds before working audio starts, from 0 to 10000. Defaults to 1000. This delays only working audio, not tool execution, and is valid only on the working track.
+          description: The delay in milliseconds before working audio starts, from 0 to 10000. If omitted, the service defaults to 1000 milliseconds. This delays only working audio, not tool execution, and is valid only on the working track.
           default: 1000
       description: A working-loop track with a delay measured from the first pending non-call-control tool.
       x-ms-foundry-meta:

@@ -129,7 +129,7 @@ model VoiceAgentDefinition extends AgentDefinition {
     """)
   audio?: VoiceAgentAudioConfig;
 
-  @doc("Optional background ambience and event cues, stored with the agent version and separate from the audio configuration sent to Voice Live. Currently rendered only for telephony calls, not browser WebRTC or direct voice WebSocket sessions. Omit this property to disable all auxiliary audio. Persisted conversation recordings do not include the soundscape mix.")
+  @doc("Optional background ambience and event cues, stored with the agent version and separate from the audio configuration. Currently rendered only for telephony calls, not browser WebRTC or direct voice WebSocket sessions. Omit this property to disable all auxiliary audio. Persisted conversation recordings do not include the soundscape mix.")
   soundscape?: VoiceAgentSoundscapeConfig;
 
   @doc("""
@@ -209,7 +209,7 @@ model VoiceAgentSoundscapeTrackConfig {
   @doc("The required audio source for this track.")
   source: VoiceAgentSoundscapeSourceConfig;
 
-  @doc("Linear playback gain from 0 to 1, independent of agent speech volume. Defaults to 1. A value of 0 mutes this track.")
+  @doc("Linear playback gain from 0 to 1, independent of agent speech volume. If omitted, the service defaults to 1. A value of 0 mutes this track.")
   @minValue(0)
   @maxValue(1)
   gain?: float64 = 1;
@@ -221,7 +221,7 @@ model VoiceAgentSoundscapeWorkingTrackConfig {
   ...VoiceAgentSoundscapeTrackConfig;
 
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "The soundscape wire contract requires an integer-millisecond delay."
-  @doc("The delay in milliseconds before working audio starts, from 0 to 10000. Defaults to 1000. This delays only working audio, not tool execution, and is valid only on the working track.")
+  @doc("The delay in milliseconds before working audio starts, from 0 to 10000. If omitted, the service defaults to 1000 milliseconds. This delays only working audio, not tool execution, and is valid only on the working track.")
   @encode(DurationKnownEncoding.milliseconds, int32)
   @minValue(duration.fromISO("PT0S"))
   @maxValue(duration.fromISO("PT10S"))
