@@ -13886,15 +13886,11 @@
         "method": {
           "$ref": "#/definitions/McpFrontendAuthenticationMethod",
           "description": "The incoming authentication method. Only ServiceAccountToken is supported."
-        },
-        "serviceAccountTokenSettings": {
-          "$ref": "#/definitions/McpFrontendServiceAccountTokenSettings",
-          "description": "The accepted incoming token audiences, independent of outbound backend tokens."
         }
       },
+      "discriminator": "method",
       "required": [
-        "method",
-        "serviceAccountTokenSettings"
+        "method"
       ]
     },
     "McpFrontendAuthenticationMethod": {
@@ -14104,6 +14100,25 @@
       "required": [
         "value"
       ]
+    },
+    "McpFrontendServiceAccountTokenAuthentication": {
+      "type": "object",
+      "description": "Kubernetes service account token authentication for clients calling the frontend.",
+      "properties": {
+        "serviceAccountTokenSettings": {
+          "$ref": "#/definitions/McpFrontendServiceAccountTokenSettings",
+          "description": "The accepted incoming token audiences, independent of outbound backend tokens."
+        }
+      },
+      "required": [
+        "serviceAccountTokenSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpFrontendAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "ServiceAccountToken"
     },
     "McpFrontendServiceAccountTokenSettings": {
       "type": "object",
