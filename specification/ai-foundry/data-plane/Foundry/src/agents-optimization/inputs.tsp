@@ -460,7 +460,7 @@ model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
   @doc("Exclusive ISO 8601 timestamp with an explicit UTC offset. Must be at or before job submission time, forming a completed past interval. The service rejects future windows rather than waiting or clamping timestamps.")
   end_time: offsetDateTime;
 
-  @doc("Maximum number of latest readable matching trace conversations to select when trace_ids is omitted, null, or empty. Defaults to 100. Must be omitted when selecting explicit trace IDs because explicit selection is never truncated or substituted.")
+  @doc("Maximum number of trace conversations to select. Defaults to 100. Select the latest matching traces, giving preference to those with human annotations, evaluation results, or both. Traces without feedback remain eligible.")
   @minValue(1)
   @maxValue(100)
   max_traces?: int32 = 100;
