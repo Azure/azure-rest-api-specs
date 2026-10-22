@@ -42,6 +42,11 @@ than manufacture a PR.
 
 ## 2. Create the draft PR before enabling rules
 
+When the current branch already has the user's requested open draft rollout PR,
+reuse it. Do not create another branch or PR or revert existing enablement just
+to replay the bootstrap. Infer this from the checked-out branch and PR metadata;
+it is not another skill input.
+
 Check actual remote URLs, write permissions, and branch restrictions. Prefer a
 new branch in `Azure/azure-rest-api-specs`; use an authorized fork only when
 direct push is unavailable, and disclose that fallback. Never push to the base
@@ -125,8 +130,11 @@ For a client-only project use its entry point, consistent with TSV:
 pnpm exec tsp compile <project-folder>\client.tsp --no-emit --warn-as-error
 ```
 
-Resolve entry points deliberately; a discovered project without a supported
-entry point must be explained, not silently skipped. Record each process exit
+Resolve entry points deliberately. A config-only parent can group independently
+configured child projects: record it as a grouping config, and verify all its
+child entry points are in the compile manifest rather than compiling a nonexistent
+parent `main.tsp`. A folder with unexplained source entry points remains a
+blocker. Record each process exit
 code immediately and retain stdout/stderr with project attribution. Continue
 through the entire population even when earlier projects fail. Compiler
 warnings count as failures because `--warn-as-error` is mandatory.
@@ -141,9 +149,12 @@ For every failing project, collect exact rule IDs, files, locations, messages,
 and whether the failures predate enablement. A namespaced code alone does not
 prove a diagnostic is a suppressible linter rule.
 
-Invoke the repository's `azure-typespec-author` skill before production `.tsp`
-edits and follow its grounding and validation requirements. If it is unavailable,
-report that limitation rather than bypassing the authoring workflow.
+Load the repository's `azure-typespec-author` skill before production `.tsp`
+edits and follow its grounding and validation requirements. If it is not
+registered with the skill tool, read
+`.github/skills/azure-typespec-author/SKILL.md` and the workflow references
+directly. This is local skill loading, not an exemption from authoring guidance.
+Missing or inaccessible required guidance remains a blocker.
 
 Suppress only observed diagnostics belonging to the **requested rule list**
 where retaining an existing API contract is intentional:

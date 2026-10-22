@@ -36,18 +36,20 @@ drop a requested rule, or enable extra rules.
    central profiles, and ordered profile composition. Report unavailable
    packages or unsupported composition as blockers rather than silently changing
    branches or dependencies. Already-enabled rules remain enabled.
-2. Create a work branch and **one draft PR for the complete list**, using the
-   policy-neutral bootstrap described in the rollout procedure. Do not enable
-   the selected rules before the draft exists.
+2. Reuse the current branch's open draft PR when it is the requested rollout PR.
+   Otherwise create a work branch and **one draft PR for the complete list**,
+   using the policy-neutral bootstrap described in the rollout procedure. Do not
+   enable the selected rules before the draft exists.
 3. Enable every selected rule in `eng/typespec-rulesets/index.ts`, preserve
    inherited profiles, and push the enablement to that same draft PR.
 4. Discover every TypeSpec project under `specification` and run
    `tsp compile --warn-as-error` on every project entry point. Keep per-project
    exit codes and full diagnostics; do not stop the scan at the first failure.
-5. Before editing production `.tsp` files, invoke the repository's
+5. Before editing production `.tsp` files, load the repository's
    `azure-typespec-author` skill and follow its grounding and validation
-   requirements. If the skill is unavailable, report that limitation; do not
-   silently bypass the authoring workflow.
+   requirements. If it is not registered with the skill tool, read its local
+   `SKILL.md` and required references directly. A missing local skill or
+   inaccessible required guidance is a blocker, not permission to bypass it.
 6. Add justified, narrow inline suppressions only for observed diagnostics from
    the requested rules where an existing contract must be preserved. Format and
    recompile edited projects; diagnose repeated failures and classify newly
