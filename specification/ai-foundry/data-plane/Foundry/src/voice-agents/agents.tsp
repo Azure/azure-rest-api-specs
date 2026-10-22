@@ -876,9 +876,24 @@ union VoiceAgentInputTranscriptionModel {
   azure_speech: "azure-speech",
 }
 
+@doc("The supported input-transcript profanity filtering modes.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentProfanityFilterMode {
+  string,
+
+  @doc("Masks recognized profanity in the transcript.")
+  masked: "masked",
+
+  @doc("Includes recognized profanity in the transcript, subject to mandatory service masking policies.")
+  unfiltered: "unfiltered",
+
+  @doc("Removes recognized profanity from the transcript.")
+  removed: "removed",
+}
+
 @doc("""
-  Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
-  options with the Azure and MAI transcription models, custom speech models, and phrase hints.
+  Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
+  and phrase hints.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentInputTranscription {
@@ -892,6 +907,17 @@ model VoiceAgentInputTranscription {
 
   @doc("Optional phrase hints that bias recognition toward domain terms.")
   phrase_list?: string[];
+
+  @doc("""
+    Controls how profanity is handled in input transcripts. Supported only with managed Azure Speech
+    (`azure-speech`), including Custom Speech.
+    Set this property before the session starts. If omitted, the transcription provider's default applies.
+    You cannot change the mode during a session.
+    Filtering affects transcript events and the text sent to cascaded models. It does not change input
+    audio, voice activity detection, or assistant speech; audio-native models still receive the original
+    audio. Mandatory service masking policies apply even when you select `unfiltered`.
+    """)
+  profanity_filter?: VoiceAgentProfanityFilterMode;
 }
 
 @doc("The avatar video resolution.")
