@@ -1,0 +1,99 @@
+{
+  "title": "Evals_createEval_Audio",
+  "operationId": "Evals_createEval",
+  "parameters": {
+    "api-version": "v1",
+    "body": {
+      "name": "recorded-conversation-task-completion",
+      "data_source_config": {
+        "type": "custom",
+        "item_schema": {
+          "type": "object",
+          "properties": {
+            "conversation_artifacts": {
+              "type": "object",
+              "properties": {
+                "audio": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "audio"
+              ]
+            },
+            "messages": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          },
+          "required": [
+            "conversation_artifacts"
+          ]
+        }
+      },
+      "testing_criteria": [
+        {
+          "type": "azure_ai_evaluator",
+          "name": "task_completion_audio",
+          "evaluator_name": "builtin.task_completion_audio",
+          "evaluator_version": "1",
+          "initialization_parameters": {
+            "model": "my-realtime-judge"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "eval",
+        "id": "eval_67e579652b548190aaa83ada4b125f47",
+        "name": "recorded-conversation-task-completion",
+        "created_at": 1743092069,
+        "data_source_config": {
+          "type": "custom",
+          "item_schema": {
+            "type": "object",
+            "properties": {
+              "conversation_artifacts": {
+                "type": "object",
+                "properties": {
+                  "audio": {
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "audio"
+                ]
+              },
+              "messages": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            },
+            "required": [
+              "conversation_artifacts"
+            ]
+          }
+        },
+        "testing_criteria": [
+          {
+            "type": "azure_ai_evaluator",
+            "name": "task_completion_audio",
+            "evaluator_name": "builtin.task_completion_audio",
+            "evaluator_version": "1",
+            "initialization_parameters": {
+              "model": "my-realtime-judge"
+            }
+          }
+        ],
+        "metadata": {}
+      }
+    }
+  }
+}
