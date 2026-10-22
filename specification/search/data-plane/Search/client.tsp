@@ -1178,18 +1178,6 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.SearchRequest, "com.azure.search.documents", "java");
 @@clientNamespace(Search.VectorQuery, "Azure.Search.Documents");
 @@clientNamespace(Search.VectorQuery, "com.azure.search.documents", "java");
-@@clientNamespace(Search.VectorQueryTopicGraph, "Azure.Search.Documents");
-@@clientNamespace(
-  Search.VectorQueryTopicGraph,
-  "com.azure.search.documents",
-  "java"
-);
-@@clientNamespace(Search.VectorSearchTopicGraphKind, "Azure.Search.Documents");
-@@clientNamespace(
-  Search.VectorSearchTopicGraphKind,
-  "com.azure.search.documents",
-  "java"
-);
 @@clientNamespace(Search.VectorThreshold, "Azure.Search.Documents");
 @@clientNamespace(Search.VectorThreshold, "com.azure.search.documents", "java");
 @@clientNamespace(Search.VectorQueryTopicGraph, "Azure.Search.Documents");
