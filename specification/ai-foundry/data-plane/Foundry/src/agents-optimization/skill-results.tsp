@@ -144,7 +144,7 @@ model AgentOptimizationSkillResolvedContext {
   @doc("Complete evidence cohort, including traces that produced no artifact. Omitted before resolution; an empty array means a resolved empty cohort.")
   source_trace_ids?: string[];
 
-  @doc("Deduplicated exact baselines discovered from the agent and its toolboxes. Excludes skills supplied only through additional_skills and does not imply invocation. Omitted before discovery; empty when none were discovered or the job is agentless.")
+  @doc("Deduplicated exact baselines discovered from the agent and its toolboxes. Excludes skills supplied only through skill_references context items and does not imply invocation. Omitted before discovery; empty when none were discovered or the job is agentless.")
   agent_skills?: AgentOptimizationFoundrySkillReference[];
 }
 

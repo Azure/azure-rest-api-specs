@@ -79,7 +79,7 @@ interface AgentOptimizationJobs {
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobCandidates {
   /**
-   * Lists candidates for the given optimization job with cursor pagination, including the original baseline and generated candidates. Each `output.mutations` item identifies a changed attribute by `type`; mutation `value` fields are omitted unless the client passes `expand=mutations`.
+   * Lists candidates for the given optimization job with cursor pagination. Agent optimization can include the original baseline and multiple generated candidates; prompt and skill optimization generate a single candidate. A skill candidate contains zero or more skill outcomes, not one candidate per skill or evaluation run. Each `output.mutations` item identifies a changed attribute by `type`; mutation `value` fields are omitted unless the client passes `expand=mutations`.
    */
   @summary("List candidates for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates")

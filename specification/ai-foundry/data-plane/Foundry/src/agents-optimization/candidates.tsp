@@ -24,7 +24,7 @@ union AgentOptimizationCandidateStatus {
   @doc("The accepted candidate is undergoing full evaluation.")
   evaluating: "evaluating",
 
-  @doc("The candidate completed full evaluation.")
+  @doc("Candidate processing completed, including evaluation when applicable.")
   completed: "completed",
 
   @doc("The optimizer stopped before this candidate completed.")
@@ -59,13 +59,13 @@ model AgentOptimizationPromptCandidateOutput
   mutations?: AgentOptimizationMutation[];
 }
 
-@doc("Independent skill outcomes produced by trace-driven skill optimization. Candidate-level evaluation is reported separately.")
+@doc("Output of the single candidate produced by trace-driven skill optimization. It can contain zero or more independent skill outcomes. Optional before/after evaluation is reporting-only and does not add candidates.")
 model AgentOptimizationSkillCandidateOutput
   extends AgentOptimizationCandidateOutput {
   @doc("Skill optimization output discriminator.")
   type: AgentOptimizationConfigurationType.skill_optimization;
 
-  @doc("Independent skill outcomes. Populated on candidate GET when available and omitted from LIST summaries.")
+  @doc("Independent proposed skill outcomes. A completed empty array means no changes were proposed, for example because there were no new learnings; no new versions are published in that case. Discovered but untouched skills do not require outcomes. Populated on candidate GET when available and omitted from LIST summaries.")
   skill_results?: AgentOptimizationSkillResult[];
 }
 

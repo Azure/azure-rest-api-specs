@@ -312,13 +312,13 @@ model AgentOptimizationEvaluationConfiguration {
 union AgentOptimizationConfigurationType {
   string,
 
-  @doc("Comparative agent optimization.")
+  @doc("Comparative agent optimization that can generate multiple candidates within configured search limits.")
   agent_optimization: "agent_optimization",
 
-  @doc("One-shot prompt optimization.")
+  @doc("One-shot prompt optimization that generates a single candidate.")
   prompt_optimization: "prompt_optimization",
 
-  @doc("Creates or updates versioned skills from trace evidence, with optional reporting-only evaluation recorded on baseline and learned candidates.")
+  @doc("Generates a single candidate containing zero or more skill outcomes from trace evidence, with optional reporting-only evaluation recorded on baseline and learned candidates.")
   skill_optimization: "skill_optimization",
 }
 
@@ -360,6 +360,9 @@ union OptimizationContextType {
 
   @doc("Agent trace evidence selected from project-authorized telemetry.")
   agent_traces: "agent_traces",
+
+  @doc("Exact baseline skill references for skill optimization.")
+  skill_references: "skill_references",
 }
 
 /** Base model for typed optimization context. */
@@ -386,7 +389,7 @@ model PromptOptimizationConfiguration
   @doc("Optimization type discriminator.")
   type: AgentOptimizationConfigurationType.prompt_optimization;
 
-  @doc("Steering context for prompt optimization. Agent trace context is supported only by skill optimization. Omitted when no context is supplied.")
+  @doc("Steering context for prompt optimization. Agent trace and skill reference context are supported only by skill optimization. Omitted when no context is supplied.")
   @minItems(1)
   context?: SteeringPromptOptimizationContext[];
 }
@@ -403,6 +406,15 @@ model AgentOptimizationFoundrySkillReference {
   @doc("Opaque pinned version. The aliases latest and default are not accepted.")
   @minLength(1)
   version: string;
+}
+
+/** Explicit exact-version baselines for skill optimization. */
+model SkillReferencesOptimizationContext extends OptimizationContext {
+  @doc("Skill reference context discriminator.")
+  type: OptimizationContextType.skill_references;
+
+  @doc("Exact skill versions unioned with skills discovered from Prompt or Managed targets, including toolboxes. References across context items and discovered skills are deduplicated. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. An empty list supplies no explicit baselines.")
+  skill_references: AgentOptimizationFoundrySkillReference[];
 }
 
 /** Explicit project-authorized telemetry selection, not an arbitrary endpoint. */
@@ -435,27 +447,38 @@ model AgentOptimizationTraceWindow {
   type: string;
 }
 
-/** Selects trace conversations in a fixed half-open interval. */
+/** Selects trace conversations in a completed past half-open interval. */
 model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
   @doc("Fixed-window discriminator.")
   type: "fixed";
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Trace selection preserves the caller's explicit UTC offset."
-  @doc("Inclusive ISO 8601 timestamp with an explicit UTC offset. Must precede end_time.")
+  @doc("Inclusive ISO 8601 timestamp with an explicit UTC offset. Must precede end_time and be in the past. The service validates the interval at submission.")
   start_time: offsetDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Trace selection preserves the caller's explicit UTC offset."
-  @doc("Exclusive ISO 8601 timestamp with an explicit UTC offset. Future values are queried unchanged against available traces; the job does not wait for this time.")
+  @doc("Exclusive ISO 8601 timestamp with an explicit UTC offset. Must be at or before job submission time, forming a completed past interval. The service rejects future windows rather than waiting or clamping timestamps.")
   end_time: offsetDateTime;
 
   @doc("Maximum number of latest readable matching trace conversations to select when trace_ids is omitted, null, or empty. Defaults to 100. Must be omitted when selecting explicit trace IDs because explicit selection is never truncated or substituted.")
   @minValue(1)
   @maxValue(100)
   max_traces?: int32 = 100;
+}
 
-  @doc("Optional telemetry operation IDs to select within the fixed window. Omitted, null, or empty selects the latest readable matching traces up to max_traces, independently of feedback availability. A nonempty list must contain at most 1,00 unique, nonempty IDs. Every requested ID must resolve unambiguously to a readable, authorized trace in the window; the service fails instead of substituting or silently truncating traces.")
-  @maxItems(100)
-  trace_ids?: string[] | null;
+/** Selects specific trace conversations by ID within a telemetry lookback horizon. */
+model AgentOptimizationTraceIdsTraceWindow
+  extends AgentOptimizationTraceWindow {
+  @doc("Explicit trace-ID selection discriminator.")
+  type: "trace_ids";
+
+  @doc("Explicit trace identifiers to look up within the configured telemetry source and lookback horizon.")
+  @minItems(1)
+  trace_ids: string[];
+
+  @doc("Telemetry lookup horizon in hours.")
+  @minValue(1)
+  lookback_hours: int32;
 }
 
 /** Trace evidence for skill optimization, selected independently of feedback availability. */
@@ -503,20 +526,20 @@ model SkillOptimizationEvaluationConfiguration {
   evaluator_generation_configuration?: SkillOptimizationEvaluatorGenerationConfiguration | null;
 }
 
-/** Configuration for generating versioned skill packages from trace evidence. */
+/** Configuration for generating a single skill candidate from trace evidence. The candidate can contain zero or more skill outcomes; no new learnings can produce an empty skill_results array without publishing versions. */
 model SkillOptimizationConfiguration
   extends AgentOptimizationConfigurationBase {
   @doc("Skill optimization discriminator.")
   type: AgentOptimizationConfigurationType.skill_optimization;
 
-  @doc("Trace evidence and optional steering guidance. Supply agent_traces context; prompt is not accepted on an agent_traces item.")
+  @doc("Trace evidence, optional steering guidance, and optional exact baseline references. Supply agent_traces context; use separate steering_prompt and skill_references items for guidance and baselines.")
   @minItems(1)
   context: OptimizationContext[];
 
   @doc("Exact skill versions unioned with skills discovered from Prompt or Managed targets, including toolboxes. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. References are deduplicated.")
   additional_skills?: AgentOptimizationFoundrySkillReference[];
 
-  @doc("Optional reporting-only evaluation of the same pinned target before and after applying proposed skills. Requires target_configuration. The service generates a validation set when one is not supplied and can generate evaluators from the selected traces when requested, then returns the exact dataset and resolved evaluator references in this configuration. The baseline and learned candidates use those same resolved inputs. Training sets are not accepted, and evaluation does not guide skill generation, ranking, selection, or publication. Omitted to skip performance evaluation.")
+  @doc("Optional before/after evaluation using a required validation_set and shared agent optimization model, evaluator, and concurrency inputs. Requires target_configuration. Training sets are not accepted. Evaluate the same pinned target with baseline skills and proposed skills using the same validation set and resolved evaluator versions. Scores do not guide generation, ranking, selection, or publication. Omitted to skip performance evaluation.")
   evaluation_configuration?: SkillOptimizationEvaluationConfiguration;
 }
 
