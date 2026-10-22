@@ -13,17 +13,6 @@ using TypeSpec.Http;
 namespace Microsoft.ServiceFabric;
 
 /**
- * Parameter for the location used to query cluster code versions.
- */
-model ManagedClusterVersionLocationParameter {
-  /**
-   * The location for the cluster code versions. This is different from cluster location.
-   */
-  @path
-  location: string;
-}
-
-/**
  * Parameter identifying a cluster code version.
  */
 model ClusterVersionParameter {
@@ -85,7 +74,13 @@ interface ManagedClusterVersion {
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-    ...ManagedClusterVersionLocationParameter,
+
+    /**
+     * The location for the cluster code versions. This is different from cluster location.
+     */
+    @path
+    location: string,
+
     ...ClusterVersionParameter,
   ): ArmResponse<ManagedClusterCodeVersionResult> | ErrorResponse;
 
@@ -102,7 +97,12 @@ interface ManagedClusterVersion {
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-    ...ManagedClusterVersionLocationParameter,
+
+    /**
+     * The location for the cluster code versions. This is different from cluster location.
+     */
+    @path
+    location: string,
   ): ArmResponse<ManagedClusterCodeVersionListResult> | ErrorResponse;
 
   /**
@@ -118,7 +118,13 @@ interface ManagedClusterVersion {
   getByEnvironment(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-    ...ManagedClusterVersionLocationParameter,
+
+    /**
+     * The location for the cluster code versions. This is different from cluster location.
+     */
+    @path
+    location: string,
+
     ...ManagedClusterVersionEnvironmentParameter,
     ...ClusterVersionParameter,
   ): ArmResponse<ManagedClusterCodeVersionResult> | ErrorResponse;
@@ -136,7 +142,13 @@ interface ManagedClusterVersion {
   listByEnvironment(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-    ...ManagedClusterVersionLocationParameter,
+
+    /**
+     * The location for the cluster code versions. This is different from cluster location.
+     */
+    @path
+    location: string,
+
     ...ManagedClusterVersionEnvironmentParameter,
   ): ArmResponse<ManagedClusterCodeVersionListResult> | ErrorResponse;
 }
