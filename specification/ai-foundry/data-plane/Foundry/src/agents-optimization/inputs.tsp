@@ -489,7 +489,7 @@ model AgentTracesOptimizationContext extends OptimizationContext {
   @doc("Explicit telemetry selection. Required without a target agent. When omitted with a target, use its project-linked telemetry. Not accepted on steering_prompt context.")
   trace_connection_configuration?: AgentOptimizationTraceConnectionConfiguration;
 
-  @doc("Fixed half-open trace window with optional exact operation-ID selection.")
+  @doc("Trace selection: a fixed half-open window, or proposed explicit trace_ids selection whose service support is TBD.")
   trace_window: AgentOptimizationTraceWindow;
 }
 
