@@ -404,6 +404,10 @@ union StorageClassType {
   @doc("Cold storage class")
   Cool: "COLD",
 
+  @doc("Cool storage class. Accepted as an alias of COLD; the service normalizes it to COLD.")
+  @added(Versions.v10_preview)
+  CoolInfrequent: "COOL",
+
   @doc("Hot storage class")
   Hot: "HOT",
 
