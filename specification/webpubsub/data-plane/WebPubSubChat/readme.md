@@ -4,16 +4,24 @@
 
 This is the AutoRest configuration file for the Azure Web PubSub Chat REST API.
 
-## Python SDK customization
+## Python and JavaScript SDK customization
 
-`client.tsp` defines lifecycle-specific Python request models while retaining the
+`client.tsp` defines lifecycle-specific request models while retaining the
 original resource models for responses. Create models omit service-assigned
 fields; PATCH models have optional updateable fields. The user request models
 retain the `kind` discriminator and human-user subtype.
 
+PUT models use `CreateOrUpdate` projections. Topic PUT requires `title` and
+optionally accepts `state` when replacing an existing topic. PATCH projections
+use `OptionalProperties<Update<...>>` so unchanged fields can be omitted.
+JavaScript uses the same projections with its existing `Input` names and a
+concrete `HumanChatUserInput` requiring `kind: "Human"`, `nickname`, and `roleName`.
+
 `python-customizations.mjs` resolves the `resource` body parameter from each
 instantiated standard operation and applies the client generator core's
-`alternateType` decorator with the `python` scope. This avoids changing the
+`alternateType` decorator with an explicit language scope (defaulting to Python).
+JavaScript bindings opt in explicitly; experimental visibility splitting is not
+enabled. This avoids changing the
 standard resource operations, REST contract, and other language SDKs. Keep this
 module alongside `client.tsp` when generating from local inputs.
 
