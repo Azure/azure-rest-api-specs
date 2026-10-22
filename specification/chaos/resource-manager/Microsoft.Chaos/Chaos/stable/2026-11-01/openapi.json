@@ -5064,12 +5064,12 @@
         },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The Azure region of the discovered resource.",
+          "description": "The Azure region the discovered resource is deployed to, in lowercase with no spaces. Absent when no single deployment region was captured, including global and multi-region resources.",
           "readOnly": true
         },
         "zones": {
           "type": "array",
-          "description": "The availability zones of the discovered resource.",
+          "description": "The availability zones the discovered resource occupies. Values are logical zone identifiers, such as `[\"1\", \"2\"]` for a zone-pinned resource, or the single value `zone-redundant` when redundancy is expressed as a flag or SKU rather than a zone list. Absent, and never empty, when no zone information was captured; a non-zone-aware resource and an unzoned zone-aware resource are not distinguished.",
           "items": {
             "type": "string"
           },
