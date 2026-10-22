@@ -49,6 +49,22 @@ mode**. Mode is determined by execution context, not inferred ad hoc:
 **Default when unsure:** if an Actions/gh-aw context is present, treat
 the run as autonomous; otherwise treat it as interactive.
 
+## Single review-body summary
+
+Every posted ARM review uses exactly one non-empty review body as its public
+header and summary. That body contains the reviewed commit, Critic-verification
+disclosure, scope disclosure when applicable, approval-label inventory, finding
+counts, key themes, and summary telemetry marker. The specific findings follow
+as review comments in the same review; findings that cannot be anchored to the
+PR diff are included in a dedicated subsection of the review body.
+
+Do not post a separate top-level summary comment, including for a clean review.
+When there are no findings, the same review body says `No issues found.` This
+keeps the run visible without publishing a second, redundant summary surface.
+Top-level comments remain available only for content that is not the run
+summary, such as a consolidated contradiction clarification or an actionable
+publication failure diagnostic.
+
 ## Cross-session reconciliation
 
 The reconciliation contract is identical for every review entry point:
