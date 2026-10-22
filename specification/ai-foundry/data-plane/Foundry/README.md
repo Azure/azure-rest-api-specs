@@ -65,35 +65,23 @@ no longer be any diffs to show.
 
 ## Conversation-level trace data generation
 
-Trace jobs use the public `generation_configuration` request shape. This
-TypeSpec project does not define the legacy `inputs.options` shape.
+Data generation jobs use the public `generation_configuration` request shape.
+This TypeSpec project does not define the legacy `inputs.options` shape.
 
-`sample_level` is optional and defaults to `turn` (one sample per eligible
-captured turn). `conversation` reconstructs one evaluation sample per observed
-conversation. `generate_test_case_description` is optional and defaults to
-`false`. When enabled, it generates one AI-authored description for each new
-retained conversation row, using the existing `model_options.model`.
-The optional preview flag `generate_test_case_rubric_preview` controls test-case
-rubric generation and also requires a nonempty `model_options.model` when true.
-Conversation reconstruction without description or rubric generation does not
-require model options.
-Existing turn-level requests remain valid and behaviorally unchanged.
+`type: "traces"` generates samples from captured turns and retains its existing
+options. Conversation reconstruction uses the separate
+`type: "conversations"` configuration. Conversation-only flags are not
+available on `traces`, and neither configuration exposes `sample_level`.
 
-For `type: traces`, the service enforces the following rules at runtime; the
-schema does not express these cross-property or conditional-header requirements:
+The optional `generate_test_case_description` flag defaults to `false`.
+When enabled, it generates one AI-authored description for each reconstructed
+conversation, using the existing `model_options.model`. The optional
+`generate_test_case_rubric_preview` flag controls test-case rubric generation.
+Either flag requires a nonempty `model_options.model` when true. Model options
+must be omitted when neither is enabled.
 
-| Invalid request                                                                                               | Reason for rejection                                   |
-| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| `sample_level: "conversation"` with a scenario other than `evaluation`                                        | Conversation samples are evaluation-only.              |
-| `generate_test_case_description: true` with `sample_level: "turn"` or omitted                                 | Descriptions require conversation samples.             |
-| `generate_test_case_description: true` with missing `model_options` or missing/empty `model_options.model`    | Description generation requires a nonempty model name. |
-| `generate_test_case_rubric_preview: true` with missing `model_options` or missing/empty `model_options.model` | Rubric generation requires a nonempty model name.      |
-| `sample_level: "conversation"` without `Foundry-Features: DataGenerationJobs=V1Preview`                       | Conversation generation requires preview opt-in.       |
-
-The feature header remains optional for ordinary turn-level requests. Reading an
-existing job does not require preview opt-in. Create, get, and list responses
-return effective trace settings, including `turn` and `false` for settings omitted
-from trace requests or absent from older stored trace jobs.
+The feature header remains optional for ordinary turn-level requests. Reading or
+listing an existing job does not require preview opt-in.
 
 Conversation dataset rows contain `test_case_id`, `messages`, `tool_definitions`,
 and `metadata`. A successful optional description adds `test_case_description`.
@@ -117,8 +105,7 @@ node --test tests\data-generation-traces.test.mjs
 
 The additive `generation_configuration.type: "conversations"` variant
 reconstructs existing traced conversations for evaluation. It does not generate
-synthetic conversations or replace `simulation_seed`. The backward-compatible
-`type: "traces"` with `sample_level: "conversation"` remains supported.
+synthetic conversations or replace `simulation_seed`.
 
 Use the existing `/data_generation_jobs?api-version=v1` endpoint and
 `Foundry-Features: DataGenerationJobs=V1Preview` header. Conversation sampling is
@@ -130,16 +117,18 @@ Sources remain `type: "traces"` with the existing agent, time-window, and
 `trace_ids` selectors. This variant does not change trace-selection expansion,
 annotations, dataset rows, or snapshot merge behavior.
 
-The service enforces these cross-property rules for `type: "conversations"`:
+The service enforces these cross-property rules for
+`type: "conversations"`; the schema does not express these conditional
+requirements:
 
-| Invalid request                                                                                            | Reason for rejection                                          |
-| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| A scenario other than `evaluation`                                                                         | Reconstruction is evaluation-only.                            |
-| A source with a type other than `traces`                                                                   | Reconstruction uses existing traced conversations.            |
-| Missing `Foundry-Features: DataGenerationJobs=V1Preview`                                                   | Reconstruction requires the existing preview opt-in.          |
-| `generate_test_case_description: true` with missing `model_options` or missing/empty `model_options.model` | Description generation requires a nonempty model name.        |
-| `model_options` supplied while `generate_test_case_description` is false or omitted                        | Model options must be omitted when descriptions are disabled. |
-| `sample_level` supplied                                                                                    | Conversation-level sampling is implicit.                      |
+| Invalid request                                                                                    | Reason for rejection                                                      |
+| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| A scenario other than `evaluation`                                                                 | Reconstruction is evaluation-only.                                        |
+| A source with a type other than `traces`                                                           | Reconstruction uses existing traced conversations.                        |
+| Missing `Foundry-Features: DataGenerationJobs=V1Preview`                                           | Reconstruction requires the existing preview opt-in.                      |
+| Either generation flag is true with missing `model_options` or missing/empty `model_options.model` | Description and rubric generation require a nonempty model name.          |
+| `model_options` supplied while both generation flags are false or omitted                          | Model options must be omitted when neither generation feature is enabled. |
+| `sample_level` supplied                                                                            | Conversation-level sampling is implicit.                                  |
 
 #### Request with descriptions
 
@@ -281,9 +270,7 @@ Location: https://travel-foundry.services.ai.azure.com/api/projects/travel/data_
   ],
   "generation_configuration": {
     "type": "traces",
-    "max_samples": 25,
-    "sample_level": "turn",
-    "generate_test_case_description": false
+    "max_samples": 25
   },
   "status": "queued",
   "created_at": 1792108800
@@ -312,8 +299,7 @@ Foundry-Features: DataGenerationJobs=V1Preview
     }
   ],
   "generation_configuration": {
-    "type": "traces",
-    "sample_level": "conversation",
+    "type": "conversations",
     "max_samples": 10
   }
 }
@@ -340,8 +326,7 @@ Location: https://travel-foundry.services.ai.azure.com/api/projects/travel/data_
     }
   ],
   "generation_configuration": {
-    "type": "traces",
-    "sample_level": "conversation",
+    "type": "conversations",
     "generate_test_case_description": false,
     "max_samples": 10
   },
@@ -372,8 +357,7 @@ Foundry-Features: DataGenerationJobs=V1Preview
     }
   ],
   "generation_configuration": {
-    "type": "traces",
-    "sample_level": "conversation",
+    "type": "conversations",
     "generate_test_case_description": true,
     "model_options": {
       "model": "gpt-4.1"
@@ -404,8 +388,7 @@ Location: https://travel-foundry.services.ai.azure.com/api/projects/travel/data_
     }
   ],
   "generation_configuration": {
-    "type": "traces",
-    "sample_level": "conversation",
+    "type": "conversations",
     "generate_test_case_description": true,
     "model_options": {
       "model": "gpt-4.1"
@@ -442,8 +425,7 @@ Foundry-Features: DataGenerationJobs=V1Preview
     }
   ],
   "generation_configuration": {
-    "type": "traces",
-    "sample_level": "conversation",
+    "type": "conversations",
     "generate_test_case_rubric_preview": true,
     "model_options": {
       "model": "gpt-4.1"
@@ -478,8 +460,7 @@ HTTP/1.1 200 OK
     }
   ],
   "generation_configuration": {
-    "type": "traces",
-    "sample_level": "conversation",
+    "type": "conversations",
     "generate_test_case_description": true,
     "model_options": {
       "model": "gpt-4.1"
@@ -509,7 +490,8 @@ HTTP/1.1 200 OK
 ```
 
 The warning is nonfatal: usable conversation rows were produced even though some
-optional descriptions failed.
+optional descriptions failed. Warning `code` is an optional string so responses
+can omit it or return new codes without changing the schema.
 
 ## Emitting Python code
 

@@ -18,7 +18,7 @@ union DataGenerationJobType {
   @doc("Simple question and answers between user and agent.")
   simple_qna: "simple_qna",
 
-  @doc("Samples from captured turns or reconstructed conversations in agent traces.")
+  @doc("Samples from captured turns in agent traces.")
   traces: "traces",
 
   @doc("Reconstruction of existing traced conversations for evaluation. This is a preview feature, not synthetic conversation simulation.")
@@ -34,7 +34,7 @@ union DataGenerationJobType {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("LLM model options for data generation jobs.")
 model DataGenerationModelOptions {
-  @doc("Base model name used to generate data. For trace jobs, a nonempty value is required when `generate_test_case_description` or `generate_test_case_rubric_preview` is true. Model options can be omitted for conversation reconstruction when neither description nor rubric generation is enabled.")
+  @doc("Base model name used to generate data. For conversation jobs, a nonempty value is required when `generate_test_case_description` or `generate_test_case_rubric_preview` is true. Model options must be omitted for conversation reconstruction when neither description nor rubric generation is enabled.")
   `model`: string;
 }
 
@@ -155,18 +155,10 @@ model DataGenerationJobResult {
   warnings?: DataGenerationWarning[];
 }
 
-@doc("The supported nonfatal data generation warning codes.")
-union DataGenerationWarningCode {
-  string,
-
-  @doc("Usable conversation rows were produced, but one or more optional test-case descriptions could not be generated.")
-  TestCaseDescriptionGenerationIncomplete: "TestCaseDescriptionGenerationIncomplete",
-}
-
 @doc("A nonfatal warning associated with data generation output.")
 model DataGenerationWarning {
   @doc("The warning code.")
-  code: DataGenerationWarningCode;
+  code?: string;
 
   @doc("A safe, human-readable warning message that does not include raw provider or model error bodies.")
   message: string;
@@ -344,40 +336,20 @@ model SimpleQnADataGenerationJobConfiguration
   question_types?: SimpleQnAFineTuningQuestionType[];
 }
 
-@doc("The supported trace sample levels. The effective default is `turn`.")
-union TraceSampleLevel {
-  string,
-
-  @doc("Generate one sample per eligible captured turn. This is the existing default behavior.")
-  turn: "turn",
-
-  @doc("Reconstruct one evaluation sample per observed conversation. Requires `scenario` to be `evaluation` and the `Foundry-Features: DataGenerationJobs=V1Preview` request header.")
-  conversation: "conversation",
-}
-
-@doc("The configuration for a data generation job with Traces type. Existing turn-level requests remain valid and behaviorally unchanged. The service validates cross-property requirements: `conversation` is valid only for the `evaluation` scenario, generating descriptions requires `conversation`, and generating descriptions or rubrics requires a nonempty `model_options.model`. Conversation reconstruction does not require model options when neither is enabled. Conversation-level output rows contain `test_case_id`, `messages`, `tool_definitions`, and `metadata`. A successful optional description adds `test_case_description`. If description generation fails, the row is retained with safe row-level status and error metadata, without raw provider or model error bodies.")
+@doc("The configuration for a data generation job with Traces type.")
 model TracesDataGenerationJobConfiguration
   extends DataGenerationJobConfiguration {
   @doc("The data generation job type, which is Traces for this model.")
   type: DataGenerationJobType.traces;
 
-  @doc("Maximum number of samples to generate, up to service-defined limits. When `sample_level` is `conversation`, counts whole conversation candidates rather than individual turns. If omitted, sampling is turned off.")
+  @doc("Maximum number of samples to generate, up to service-defined limits. If omitted, sampling is turned off.")
   max_samples?: int32;
 
   @doc("Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.")
   redact_private_content?: boolean = true;
-
-  @doc("Controls whether output rows represent captured turns or reconstructed conversations. Defaults to `turn`. The service rejects `conversation` unless `scenario` is `evaluation` and the request includes `Foundry-Features: DataGenerationJobs=V1Preview`. Ordinary turn-level requests do not require this opt-in. Responses return the effective value, including `turn` when omitted or when reading older stored jobs.")
-  sample_level?: TraceSampleLevel = TraceSampleLevel.turn;
-
-  @doc("Whether to generate an AI-authored test-case description for each new retained conversation row. Defaults to false. The service rejects true unless `sample_level` is `conversation` and `model_options.model` is nonempty. Model options are not required for conversation reconstruction when neither description nor rubric generation is enabled. Responses return the effective value, including false when omitted or when reading older stored jobs.")
-  generate_test_case_description?: boolean = false;
-
-  @doc("Whether to generate test-case rubric dimensions. This is a preview feature. When true, requires a nonempty `model_options.model`.")
-  generate_test_case_rubric_preview?: boolean;
 }
 
-@doc("The configuration for reconstructing existing traced conversations for evaluation, not synthetic conversation simulation. This preview requires `scenario` to be `evaluation`, sources of type `traces`, and the `Foundry-Features: DataGenerationJobs=V1Preview` request header. Conversation-level sampling is implicit; `sample_level` is not supported. Existing trace selection, annotations, and output dataset row schemas are unchanged. Create, get, and list responses preserve `type: conversations`. The service enforces the scenario, source, and conditional model-options requirements.")
+@doc("The configuration for reconstructing existing traced conversations for evaluation, not synthetic conversation simulation. This preview requires `scenario` to be `evaluation`, sources of type `traces`, and the `Foundry-Features: DataGenerationJobs=V1Preview` request header. Conversation-level sampling is implicit; `sample_level` is not supported. Existing trace selection, annotations, and output dataset row schemas are unchanged. Create, get, and list responses preserve `type: conversations`. The service enforces the scenario, source, and conditional model-options requirements. Conversation-level output rows contain `test_case_id`, `messages`, `tool_definitions`, and `metadata`. A successful optional description adds `test_case_description`. If description generation fails, the row is retained with safe row-level status and error metadata, without raw provider or model error bodies.")
 model ConversationsDataGenerationJobConfiguration
   extends DataGenerationJobConfiguration {
   @doc("The data generation job type, which is Conversations for this model.")
@@ -391,10 +363,13 @@ model ConversationsDataGenerationJobConfiguration
     "redact_private_content"
   >;
 
-  @doc("Whether to generate an AI-authored test-case description for each reconstructed conversation. Defaults to false. When true, requires a nonempty `model_options.model`. When false or omitted, `model_options` must be omitted.")
+  @doc("Whether to generate an AI-authored test-case description for each reconstructed conversation. This is a preview feature. Defaults to false. When true, requires a nonempty `model_options.model`. Model options must be omitted when neither description nor rubric generation is enabled.")
   generate_test_case_description?: boolean = false;
 
-  @doc("The model used to generate test-case descriptions. Required with a nonempty `model` when `generate_test_case_description` is true; must be omitted otherwise.")
+  @doc("Whether to generate test-case rubric dimensions for each reconstructed conversation. This is a preview feature. When true, requires a nonempty `model_options.model`. Model options must be omitted when neither description nor rubric generation is enabled.")
+  generate_test_case_rubric_preview?: boolean;
+
+  @doc("The model used to generate test-case descriptions or rubric dimensions. Required with a nonempty `model` when `generate_test_case_description` or `generate_test_case_rubric_preview` is true; must be omitted otherwise.")
   model_options?: DataGenerationModelOptions;
 }
 
