@@ -636,6 +636,11 @@ using Microsoft.NetApp;
 
 // C# property name casing fixes
 @@clientName(AccountProperties.nfsV4IDDomain, "NfsV4IdDomain", "csharp");
+@@clientName(
+  Microsoft.NetApp.AccountPropertiesPatch.nfsV4IDDomain,
+  "NfsV4IdDomain",
+  "csharp"
+);
 @@clientName(QuotaReport, "NetAppVolumeQuotaReport", "csharp");
 @@clientName(QuotaReportFilterRequest, "QuotaReportFilterContent", "csharp");
 
@@ -772,6 +777,16 @@ using Microsoft.NetApp;
 @@alternateType(VolumePatch.location, azureLocation, "csharp");
 
 // C# property type overrides (backward compat with old autorest SDK types)
+@@alternateType(
+  Microsoft.NetApp.ActiveDirectoryPatch,
+  Microsoft.NetApp.ActiveDirectory,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.NetApp.AccountEncryptionPatch,
+  Microsoft.NetApp.AccountEncryption,
+  "csharp"
+);
 @@alternateType(
   ReplicationObject.remoteVolumeResourceId,
   armResourceIdentifier,
