@@ -10,6 +10,9 @@ const pipelineTemplatePath = path.resolve(
 );
 const pipelineTemplate = fs.readFileSync(pipelineTemplatePath, "utf8");
 
-test("passes the emitted build-failed label when creating the SDK pull request", () => {
-  expect(pipelineTemplate).toContain('-PRLabels "$(BuildFailedLabel)"');
+test("combines configured labels before creating the SDK pull request", () => {
+  expect(pipelineTemplate).toContain('"$(BuildFailedLabel)"');
+  expect(pipelineTemplate).toContain('"$(ManagementLabel)"');
+  expect(pipelineTemplate).toContain('$pullRequestLabels = $pullRequestLabels -join ","');
+  expect(pipelineTemplate).toContain('-PRLabels "$(PullRequestLabels)"');
 });
