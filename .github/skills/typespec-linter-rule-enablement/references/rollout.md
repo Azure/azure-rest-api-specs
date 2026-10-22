@@ -52,6 +52,16 @@ new branch in `Azure/azure-rest-api-specs`; use an authorized fork only when
 direct push is unavailable, and disclose that fallback. Never push to the base
 branch. Use a dedicated worktree at an exact base SHA.
 
+Also inspect `.github/workflows/src/protected-files.ts` and the actual PR
+author. Central `eng/**` policy and regression-test changes can require an
+allowlisted maintainer author even when the current account can push a branch.
+Ordinary reviewer approval, a fork, or a successful compile does not change an
+author-based gate. Surface a required maintainer handoff before presenting the
+rollout as merge-ready. An explicitly requested existing draft can retain the
+pilot and its validation evidence, but must remain draft with the policy blocker
+recorded. Never modify the allowlist or checks, impersonate an allowed author,
+or remove required enablement/tests to disguise the restriction.
+
 GitHub needs a branch difference to open a PR. Bootstrap with a real,
 **policy-neutral** commit: add explicit `false` entries for the requested,
 currently disabled rules in the appropriate central `enable` maps in
@@ -274,6 +284,11 @@ suppressions, final compile outcome, unchanged-output evidence, suppression
 report, CI links, and unresolved blockers. Keep central enablement and all
 required suppressions together; do not create a second PR at the end, merge
 partial enablement, auto-merge, or resolve reviewer threads.
+
+Report compile convergence separately from merge readiness. In particular,
+record a failing Protected Files check and its actual maintainer requirement;
+do not characterize it as a compiler failure or claim reviewer approval alone
+will clear an author-based restriction.
 
 ## Why PR #45589 is not the bootstrap step
 

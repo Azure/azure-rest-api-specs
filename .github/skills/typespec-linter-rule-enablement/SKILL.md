@@ -90,6 +90,10 @@ drop a requested rule, or enable extra rules.
   TSV group headings; a zero-result harvest is not evidence of no violations.
 - A local smoke test or one green shard is not repository-wide validation.
   Require all three Ubuntu and all three Windows shards for the target ref.
+- Check the repository's protected-file policy for central `eng/**` changes.
+  Branch push permission does not establish PR-author eligibility. Report a
+  maintainer handoff when required; never change the allowlist, impersonate an
+  allowed author, or treat compilation success as permission to bypass the gate.
 
 ## Completion report
 
