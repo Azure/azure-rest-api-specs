@@ -270,6 +270,14 @@ Mutating runs use the default branch of `Azure/azure-rest-api-specs` or
 synchronizes labels from its own checked-in catalog. PR validation never changes
 GitHub labels.
 
+If the synchronization job fails, a separate job creates a failure-tracking issue
+or updates the existing open bot-created issue in that repository. The issue links
+to the failed run attempt and identifies failed jobs and steps. Reporting does not
+require the synchronization job's dependency installation to succeed. Repeated
+failures update the issue body rather than posting comments. Close the issue once
+the failure is resolved; a later failure creates a new issue. Skipped archives
+that only produce warnings do not open an issue.
+
 The `unconfiguredLabels: archive` policy creates/updates configured labels and
 archives labels absent from the catalog. This applies repository-wide, including
 labels created manually or by other automation. Add legitimate labels through
