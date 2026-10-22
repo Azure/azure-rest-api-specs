@@ -85064,7 +85064,8 @@ components:
             Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
             `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
             timeline and raw audio. When `false`, nothing is persisted and no conversation is surfaced. There is no separate
-            audio-logging control; audio is persisted only as part of this switch. Latency/performance telemetry (e.g.
+            audio-logging control; audio is persisted only as part of this switch, except that a `post_call.include` that
+            requests `audio` persists the conversation even when `false`. Latency/performance telemetry (e.g.
             time-to-first-audio, inter-token latency, interruption) is observability-only (customer trace / App Insights) and
             is not part of the persisted conversation content.
           default: false
@@ -85552,10 +85553,10 @@ components:
             Only "transcript" and "audio" are supported. The service rejects repeated values. List order has no meaning.
             The list selects content, not event types or payload formats. Schema defaults alone do not implement
             service behavior. Delivery must distinguish content not requested from requested content that is unavailable.
-            Transcript uses standard conversation items, including tool calls and results. Audio requests authorized
-            recording URL references, not inline or base64 audio; capture, storage, retrieval, expiry, and privacy controls
-            must be supported under the recording data policy. Unsupported requests fail explicitly. Requesting audio
-            does not override store: false or enable persistence implicitly.
+            Transcript uses standard conversation items, including tool calls and results. Audio requests an authorized
+            URL reference to the call's merged recording, not inline or base64 audio. Requesting audio persists the
+            session's conversation and audio even when store is false, because the recording is served from the stored
+            conversation; it then follows the conversation's retention and deletion.
           default:
             - transcript
       unevaluatedProperties:
