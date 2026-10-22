@@ -41551,6 +41551,10 @@
           "description": "State of the storage account.",
           "readOnly": true
         },
+        "endpoint": {
+          "type": "string",
+          "description": "Endpoint (IP or DNS name) of on-premises file server. Only valid for mounts of type FileShare."
+        },
         "protocol": {
           "$ref": "#/definitions/AzureStorageProtocol",
           "description": "Mounting protocol to use for the storage account."
@@ -41630,7 +41634,8 @@
       "description": "Type of storage.",
       "enum": [
         "AzureFiles",
-        "AzureBlob"
+        "AzureBlob",
+        "FileShare"
       ],
       "x-ms-enum": {
         "name": "AzureStorageType",
