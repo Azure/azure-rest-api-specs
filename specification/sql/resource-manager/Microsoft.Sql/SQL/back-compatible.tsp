@@ -6,12 +6,6 @@ using Microsoft.Sql;
 @@clientName(ReaderEndpoints.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ReaderEndpoints.update::parameters.properties, "parameters");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the flattened properties in the generated reader endpoint resource contract."
-@@Legacy.flattenProperty(ReaderEndpoint.properties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the flattened properties in the generated reader endpoint PATCH contract."
-@@Legacy.flattenProperty(ReaderEndpointUpdate.properties);
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DatabaseExtensions.properties);
 

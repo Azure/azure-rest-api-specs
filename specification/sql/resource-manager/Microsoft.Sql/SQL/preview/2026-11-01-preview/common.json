@@ -5380,6 +5380,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "Link to retrieve the next page of results.",
           "readOnly": true
         }
@@ -5389,10 +5390,10 @@
       "type": "object",
       "description": "Primary server and database of a reader endpoint.",
       "properties": {
-        "primaryDatabase": {
+        "primaryDatabaseId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Primary database of the reader endpoint.",
+          "description": "The ARM resource ID of the primary database.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -5405,10 +5406,10 @@
             ]
           }
         },
-        "primaryServer": {
+        "primaryServerId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Primary server of the reader endpoint.",
+          "description": "The ARM resource ID of the primary server.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -5423,14 +5424,57 @@
         }
       },
       "required": [
-        "primaryDatabase",
-        "primaryServer"
+        "primaryDatabaseId",
+        "primaryServerId"
       ]
     },
     "ReaderEndpointProperties": {
       "type": "object",
       "description": "Properties of a reader endpoint.",
       "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The status of the last operation on the reader endpoint.",
+          "enum": [
+            "Created",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ReaderEndpointProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Created",
+                "value": "Created",
+                "description": "The reader endpoint has been created."
+              },
+              {
+                "name": "InProgress",
+                "value": "InProgress",
+                "description": "An operation on the reader endpoint is in progress."
+              },
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "The last operation on the reader endpoint succeeded."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "The last operation on the reader endpoint failed."
+              },
+              {
+                "name": "Canceled",
+                "value": "Canceled",
+                "description": "The last operation on the reader endpoint was canceled."
+              }
+            ]
+          },
+          "readOnly": true
+        },
         "readerEndpointPrimaryInfo": {
           "$ref": "#/definitions/ReaderEndpointPrimaryInfo",
           "description": "Primary database and server of the reader endpoint.",
@@ -5466,8 +5510,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ReaderEndpointUpdateProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
+          "description": "Resource properties."
         },
         "tags": {
           "type": "object",
@@ -5498,10 +5541,7 @@
             }
           }
         }
-      },
-      "required": [
-        "databases"
-      ]
+      }
     },
     "RecommendedAction": {
       "type": "object",

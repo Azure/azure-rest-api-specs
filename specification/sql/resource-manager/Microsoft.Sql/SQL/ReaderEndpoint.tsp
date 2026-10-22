@@ -13,56 +13,70 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 
-/** A reader endpoint. */
+/** A reader endpoint. Its location must match the location of its parent server. */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The SQL project splits its specifications by legacy feature."
 @added(Versions.v2026_11_01_preview)
 @parentResource(Server)
 @Azure.ResourceManager.Legacy.feature(
   Microsoft.SqlFeatureRegistration.ReaderEndpointFeatures.ReaderEndpoints
 )
-model ReaderEndpoint is ProxyResource<ReaderEndpointProperties> {
+model ReaderEndpoint is TrackedResource<ReaderEndpointProperties> {
   ...ResourceNameParameter<
     Resource = ReaderEndpoint,
     KeyName = "readerEndpointName",
     SegmentName = "readerEndpoints",
-    NamePattern = ""
+    NamePattern = "^[a-z0-9]+(-*[a-z0-9]+)*$"
   >;
-
-  /** Resource location. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The existing reader endpoint proxy resource returns its server location."
-  @visibility(Lifecycle.Read)
-  location?: string;
-
-  /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The existing reader endpoint proxy resource accepts tags."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Resource tags are an existing string dictionary."
-  tags?: Record<string>;
 }
 
 /** Primary server and database of a reader endpoint. */
 @added(Versions.v2026_11_01_preview)
 model ReaderEndpointPrimaryInfo {
-  /** Primary database of the reader endpoint. */
+  /** The ARM resource ID of the primary database. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  primaryDatabase: Azure.Core.armResourceIdentifier<[
+  primaryDatabaseId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Sql/servers/databases";
     }
   ]>;
 
-  /** Primary server of the reader endpoint. */
+  /** The ARM resource ID of the primary server. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  primaryServer: Azure.Core.armResourceIdentifier<[
+  primaryServerId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Sql/servers";
     }
   ]>;
 }
 
+/** The provisioning state of a reader endpoint. */
+@added(Versions.v2026_11_01_preview)
+union ReaderEndpointProvisioningState<T extends string> {
+  T,
+
+  /** The reader endpoint has been created. */
+  Created: "Created",
+
+  /** An operation on the reader endpoint is in progress. */
+  InProgress: "InProgress",
+
+  /** The last operation on the reader endpoint succeeded. */
+  Succeeded: "Succeeded",
+
+  /** The last operation on the reader endpoint failed. */
+  Failed: "Failed",
+
+  /** The last operation on the reader endpoint was canceled. */
+  Canceled: "Canceled",
+}
+
 /** Properties of a reader endpoint. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The existing API exposes completion through Location polling, not a provisioningState property."
 @added(Versions.v2026_11_01_preview)
 model ReaderEndpointProperties {
+  /** The status of the last operation on the reader endpoint. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ReaderEndpointProvisioningState<string>;
+
   /** Primary database and server of the reader endpoint. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   readerEndpointPrimaryInfo: ReaderEndpointPrimaryInfo;
@@ -81,16 +95,14 @@ model ReaderEndpointUpdate {
   /** Resource properties. */
   properties?: ReaderEndpointUpdateProperties;
 
-  /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Resource tags are an existing string dictionary."
-  tags?: Record<string>;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 /** Properties of a reader endpoint patch. */
 @added(Versions.v2026_11_01_preview)
 model ReaderEndpointUpdateProperties {
   /** List of databases in the reader endpoint. */
-  databases: Azure.Core.armResourceIdentifier<[
+  databases?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Sql/servers/databases";
     }
@@ -108,7 +120,7 @@ model ReaderEndpointListResult {
   /** Link to retrieve the next page of results. */
   @visibility(Lifecycle.Read)
   @nextLink
-  nextLink?: string;
+  nextLink?: url;
 }
 
 /** Manage reader endpoints under a server. */
@@ -123,38 +135,48 @@ interface ReaderEndpoints {
   get is ArmResourceRead<ReaderEndpoint>;
 
   /** Creates or updates a reader endpoint. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The existing PUT returns 200 or 201 on completion and 202 with Location while pending."
   @Azure.Core.useFinalStateVia("location")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ReaderEndpoint,
     Response =
-      | ArmResourceUpdatedResponse<ReaderEndpoint>
-      | ArmResourceCreatedSyncResponse<ReaderEndpoint>
-      | ArmAcceptedLroResponse<
-          "Accepted the request",
-          ArmLroLocationHeader<FinalResult = ReaderEndpoint>
+      | (ArmResourceUpdatedResponse<ReaderEndpoint> &
+          ArmCombinedLroHeaders<
+            FinalResult = ReaderEndpoint,
+            FinalUrlValue = url
+          > &
+          Azure.Core.Foundations.RetryAfterHeader)
+      | ArmResourceCreatedResponse<
+          ReaderEndpoint,
+          ArmCombinedLroHeaders<
+            FinalResult = ReaderEndpoint,
+            FinalUrlValue = url
+          > &
+            Azure.Core.Foundations.RetryAfterHeader
         >
   >;
 
   /** Updates a reader endpoint. */
+  @Azure.Core.useFinalStateVia("location")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ReaderEndpoint,
     PatchModel = ReaderEndpointUpdate,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ReaderEndpoint>
+    LroHeaders = ArmCombinedLroHeaders<
+      FinalResult = ReaderEndpoint,
+      FinalUrlValue = url
+    > &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /** Deletes a reader endpoint. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The existing DELETE returns 200, 202 with Location, or 204 when the endpoint does not exist."
+  @Azure.Core.useFinalStateVia("location")
   delete is ArmResourceDeleteWithoutOkAsync<
     ReaderEndpoint,
-    Response =
-      | ArmDeletedResponse
-      | ArmAcceptedLroResponse<
-          "Accepted the request",
-          ArmLroLocationHeader<FinalResult = void>
-        >
-      | ArmDeletedNoContentResponse
+    LroHeaders = ArmCombinedLroHeaders<
+      FinalResult = void,
+      FinalUrlValue = url
+    > &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /** Lists the reader endpoints for a server. */
@@ -187,6 +209,8 @@ interface ReaderEndpointsList {
 }
 
 @@doc(ReaderEndpoint.name, "The name of the reader endpoint.");
+@@minLength(ReaderEndpoint.name, 1);
+@@maxLength(ReaderEndpoint.name, 63);
 @@doc(ReaderEndpoint.properties, "Resource properties.");
 @@doc(
   ReaderEndpoints.createOrUpdate::parameters.resource,
