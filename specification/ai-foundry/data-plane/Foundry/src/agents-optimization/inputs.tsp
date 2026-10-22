@@ -360,6 +360,9 @@ union OptimizationContextType {
 
   @doc("Agent trace evidence selected from project-authorized telemetry.")
   agent_traces: "agent_traces",
+
+  @doc("Exact baseline skill references for skill optimization.")
+  skill_references: "skill_references",
 }
 
 /** Base model for typed optimization context. */
@@ -386,7 +389,7 @@ model PromptOptimizationConfiguration
   @doc("Optimization type discriminator.")
   type: AgentOptimizationConfigurationType.prompt_optimization;
 
-  @doc("Steering context for prompt optimization. Agent trace context is supported only by skill optimization. Omitted when no context is supplied.")
+  @doc("Steering context for prompt optimization. Agent trace and skill reference context are supported only by skill optimization. Omitted when no context is supplied.")
   @minItems(1)
   context?: SteeringPromptOptimizationContext[];
 }
@@ -403,6 +406,15 @@ model AgentOptimizationFoundrySkillReference {
   @doc("Opaque pinned version. The aliases latest and default are not accepted.")
   @minLength(1)
   version: string;
+}
+
+/** Explicit exact-version baselines for skill optimization. */
+model SkillReferencesOptimizationContext extends OptimizationContext {
+  @doc("Skill reference context discriminator.")
+  type: OptimizationContextType.skill_references;
+
+  @doc("Exact skill versions unioned with skills discovered from Prompt or Managed targets, including toolboxes. References across context items and discovered skills are deduplicated. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. An empty list supplies no explicit baselines.")
+  skill_references: AgentOptimizationFoundrySkillReference[];
 }
 
 /** Explicit project-authorized telemetry selection, not an arbitrary endpoint. */
@@ -520,12 +532,9 @@ model SkillOptimizationConfiguration
   @doc("Skill optimization discriminator.")
   type: AgentOptimizationConfigurationType.skill_optimization;
 
-  @doc("Trace evidence and optional steering guidance. Supply agent_traces context; prompt is not accepted on an agent_traces item.")
+  @doc("Trace evidence, optional steering guidance, and optional exact baseline references. Supply agent_traces context; use separate steering_prompt and skill_references items for guidance and baselines.")
   @minItems(1)
   context: OptimizationContext[];
-
-  @doc("Exact baseline skill versions, separate from trace and steering context. Unioned with skills discovered from Prompt or Managed targets, including toolboxes. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. References are deduplicated.")
-  skill_references?: AgentOptimizationFoundrySkillReference[];
 
   @doc("Optional before/after evaluation using a required validation_set and shared agent optimization model, evaluator, and concurrency inputs. Requires target_configuration. Training sets are not accepted. Evaluate the same pinned target with baseline skills and proposed skills using the same validation set and resolved evaluator versions. Scores do not guide generation, ranking, selection, or publication. Omitted to skip performance evaluation.")
   evaluation_configuration?: SkillOptimizationEvaluationConfiguration;
