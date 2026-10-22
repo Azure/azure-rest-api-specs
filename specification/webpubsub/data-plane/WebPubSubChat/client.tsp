@@ -7,10 +7,11 @@ using TypeSpec.Http;
 
 @TypeSpec.Versioning.versioned(WebPubSubChat.Versions)
 namespace WebPubSubChat.PythonCustomizations {
-  /** Substitute the resource request model for Python without changing the REST operation. */
-  extern dec pythonRequestModel(
+  /** Substitute the resource request model for selected SDKs without changing the REST operation. */
+  extern dec requestModel(
     target: TypeSpec.Reflection.Operation,
-    input: TypeSpec.Reflection.Model
+    input: TypeSpec.Reflection.Model,
+    scope?: valueof string
   );
 
   /** Properties supplied when creating or replacing a role. */
@@ -49,6 +50,13 @@ namespace WebPubSubChat.PythonCustomizations {
     }>;
   }
 
+  /** Properties supplied when creating or replacing a human user in JavaScript. */
+  model HumanChatUserInput {
+    ...CreateOrUpdate<{
+      ...WebPubSubChat.HumanChatUser;
+    }>;
+  }
+
   /** Properties supplied when partially updating a message. */
   model ChatMessageUpdate {
     ...OptionalProperties<Update<{
@@ -59,7 +67,7 @@ namespace WebPubSubChat.PythonCustomizations {
   @@alternateType(
     ChatMessageUpdate.content,
     WebPubSubChat.MessageContent,
-    "python"
+    "python,javascript"
   );
 
   /** Properties supplied when creating or replacing a topic. */
@@ -79,6 +87,13 @@ namespace WebPubSubChat.PythonCustomizations {
       ...WebPubSubChat.ChatTopic;
     }>>;
   }
+
+  @@clientNamespace(WebPubSubChat.PythonCustomizations, "WebPubSubChat", "javascript");
+  @@clientName(ChatRoleCreateOrReplace, "ChatRoleInput", "javascript");
+  @@clientName(ChatRoomCreateOrReplace, "ChatRoomInput", "javascript");
+  @@clientName(ChatRoomMemberCreateOrReplace, "ChatRoomMemberInput", "javascript");
+  @@clientName(ChatMessageUpdate, "ChatMessageInput", "javascript");
+  @@clientName(ChatTopicCreateOrReplace, "ChatTopicInput", "javascript");
 }
 
 namespace Customizations {
@@ -195,33 +210,44 @@ namespace Customizations {
     }
   );
 
-  @@WebPubSubChat.PythonCustomizations.pythonRequestModel(
+  @@WebPubSubChat.PythonCustomizations.requestModel(
     WebPubSubChatServiceClient.createOrReplaceTopic,
-    WebPubSubChat.PythonCustomizations.ChatTopicCreateOrReplace
+    WebPubSubChat.PythonCustomizations.ChatTopicCreateOrReplace,
+    "python,javascript"
   );
-  @@WebPubSubChat.PythonCustomizations.pythonRequestModel(
+  @@WebPubSubChat.PythonCustomizations.requestModel(
     WebPubSubChatServiceClient.updateTopic,
-    WebPubSubChat.PythonCustomizations.ChatTopicUpdate
+    WebPubSubChat.PythonCustomizations.ChatTopicUpdate,
+    "python,javascript"
   );
 
-  @@WebPubSubChat.PythonCustomizations.pythonRequestModel(
+  @@WebPubSubChat.PythonCustomizations.requestModel(
     WebPubSubChatServiceClient.updateMessage,
-    WebPubSubChat.PythonCustomizations.ChatMessageUpdate
+    WebPubSubChat.PythonCustomizations.ChatMessageUpdate,
+    "python,javascript"
   );
-  @@WebPubSubChat.PythonCustomizations.pythonRequestModel(
+  @@WebPubSubChat.PythonCustomizations.requestModel(
     WebPubSubChatServiceClient.createOrReplaceRole,
-    WebPubSubChat.PythonCustomizations.ChatRoleCreateOrReplace
+    WebPubSubChat.PythonCustomizations.ChatRoleCreateOrReplace,
+    "python,javascript"
   );
-  @@WebPubSubChat.PythonCustomizations.pythonRequestModel(
+  @@WebPubSubChat.PythonCustomizations.requestModel(
     WebPubSubChatServiceClient.createOrReplaceRoom,
-    WebPubSubChat.PythonCustomizations.ChatRoomCreateOrReplace
+    WebPubSubChat.PythonCustomizations.ChatRoomCreateOrReplace,
+    "python,javascript"
   );
-  @@WebPubSubChat.PythonCustomizations.pythonRequestModel(
+  @@WebPubSubChat.PythonCustomizations.requestModel(
     WebPubSubChatServiceClient.createOrReplaceRoomMember,
-    WebPubSubChat.PythonCustomizations.ChatRoomMemberCreateOrReplace
+    WebPubSubChat.PythonCustomizations.ChatRoomMemberCreateOrReplace,
+    "python,javascript"
   );
-  @@WebPubSubChat.PythonCustomizations.pythonRequestModel(
+  @@WebPubSubChat.PythonCustomizations.requestModel(
     WebPubSubChatServiceClient.createOrReplaceUser,
     WebPubSubChat.PythonCustomizations.ChatUserCreateOrReplace
+  );
+  @@WebPubSubChat.PythonCustomizations.requestModel(
+    WebPubSubChatServiceClient.createOrReplaceUser,
+    WebPubSubChat.PythonCustomizations.HumanChatUserInput,
+    "javascript"
   );
 }

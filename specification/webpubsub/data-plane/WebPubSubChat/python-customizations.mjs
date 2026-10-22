@@ -4,8 +4,9 @@ import { $alternateType } from "@azure-tools/typespec-client-generator-core";
  * @param {import("@typespec/compiler").DecoratorContext} context
  * @param {import("@typespec/compiler").Operation} operation
  * @param {import("@typespec/compiler").Model} input
+ * @param {string} [scope="python"]
  */
-function pythonRequestModel(context, operation, input) {
+function requestModel(context, operation, input, scope = "python") {
   // Resolve the instantiated body; template-expanded parameters cannot be referenced with ::parameters.resource.
   const resource = operation.parameters.properties.get("resource");
   if (!resource) {
@@ -17,9 +18,9 @@ function pythonRequestModel(context, operation, input) {
     });
     return;
   }
-  context.call($alternateType, resource, input, "python");
+  context.call($alternateType, resource, input, scope);
 }
 
 export const $decorators = {
-  "WebPubSubChat.PythonCustomizations": { pythonRequestModel },
+  "WebPubSubChat.PythonCustomizations": { requestModel },
 };
