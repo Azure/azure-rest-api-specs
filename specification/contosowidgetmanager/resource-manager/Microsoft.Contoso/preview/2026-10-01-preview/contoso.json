@@ -474,21 +474,23 @@
           "type": "string",
           "description": "The display name of the employee.",
           "maxLength": 128,
-          "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9 _-]{0,126}[A-Za-z0-9_-])?$"
         },
         "alias": {
           "type": "string",
           "description": "The alias of the employee.",
           "maxLength": 64,
-          "pattern": "^[^<>]{1,64}$"
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
         },
         "connectionString": {
           "type": "string",
-          "description": "The connection string used to access the employee profile store.",
+          "format": "password",
+          "description": "The connection string used to access the employee profile store. This value is write-only and is never returned in responses.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "profile": {
           "type": "string",

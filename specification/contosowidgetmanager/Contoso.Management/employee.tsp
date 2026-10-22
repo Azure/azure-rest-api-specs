@@ -27,18 +27,19 @@ model EmployeeProperties {
 
   /** The display name of the employee. */
   @added(Versions.v2026_10_01_preview)
-  @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+  @pattern("^[A-Za-z0-9](?:[A-Za-z0-9 _-]{0,126}[A-Za-z0-9_-])?$")
   @maxLength(128)
   displayName?: string;
 
   /** The alias of the employee. */
   @added(Versions.v2026_10_01_preview)
-  @pattern("^[^<>]{1,64}$")
+  @pattern("^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$")
   @maxLength(64)
   `alias`?: string;
 
-  /** The connection string used to access the employee profile store. */
+  /** The connection string used to access the employee profile store. This value is write-only and is never returned in responses. */
   @added(Versions.v2026_10_01_preview)
+  @secret
   @visibility(Lifecycle.Create, Lifecycle.Update)
   connectionString?: string;
 
