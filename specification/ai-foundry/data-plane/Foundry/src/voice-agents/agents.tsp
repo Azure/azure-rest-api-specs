@@ -182,25 +182,16 @@ model VoiceAgentDefinition extends AgentDefinition {
   store?: boolean = false;
 
   @doc("""
-    Inlined voice subagents owned and versioned with this Voice Agent. Configure together with `handoff_conditions`.
-    The top-level definition is the implicit `$entrypoint`; an explicit `$entrypoint` may appear once as the first
-    subagent. At most 31 additional subagents are supported, or 32 entries including an explicit `$entrypoint`.
-    Referenced agents and delegations are not supported by this property.
+    Inline voice subagents owned and versioned with this Voice Agent. New Handoff authoring requires `$entrypoint`
+    as the first subagent, followed by at least one specialist and at most 31 additional subagents. Each subagent
+    declares its outgoing `handoff_conditions`; condition identifiers and the 128-condition limit apply across
+    the entire Agent. Referenced agents and delegations are not supported by this property.
     """)
-  @minItems(1)
+  @minItems(2)
   @maxItems(32)
-  subagents?: VoiceAgentInlinedSubagent[];
+  subagents?: InlineVoiceSubagent[];
 
-  @doc("""
-    Allowed directed handoffs between inlined voice subagents and `$entrypoint`. Configure together with `subagents`.
-    At least one condition must originate from `$entrypoint`. A condition guides the model; it is not an executable
-    Boolean expression. The service validates identifiers, reachability, and source-to-target relations.
-    """)
-  @minItems(1)
-  @maxItems(128)
-  handoff_conditions?: VoiceAgentHandoffCondition[];
-
-  @doc("Session-wide handoff limits. Requires `subagents` and `handoff_conditions`. When omitted, the service permits up to 16 completed and 16 attempted handoffs.")
+  @doc("Session-wide handoff limits. Requires `subagents` and at least one outgoing condition from `$entrypoint`. When omitted, the service permits up to 16 completed and 16 attempted handoffs.")
   handoff_policy?: VoiceAgentHandoffPolicy;
 }
 

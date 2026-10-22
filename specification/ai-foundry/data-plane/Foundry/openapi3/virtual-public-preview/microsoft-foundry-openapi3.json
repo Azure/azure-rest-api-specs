@@ -49869,6 +49869,173 @@
         },
         "description": "Run-wide estimated inference cost for the evaluation target.\n\nThe estimate is derived from reported token counts and list prices. It excludes evaluator\nand runtime usage and does not account for negotiated pricing, commitments, or discounts."
       },
+      "InlineVoiceSubagent": {
+        "type": "object",
+        "required": [
+          "id",
+          "source",
+          "interface",
+          "description"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
+            "description": "The subagent identifier. New Handoff authoring requires `$entrypoint` as the first subagent; other values use the normal handoff ID grammar."
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "inline"
+            ],
+            "description": "The definition source. This phase supports only `inline`; referenced Agent resources are deferred."
+          },
+          "interface": {
+            "type": "string",
+            "enum": [
+              "voice"
+            ],
+            "description": "The interaction interface. This phase supports only `voice`; text delegation is deferred."
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "description": "A display-only description of the specialist behavior. This value is not provided to the model."
+          },
+          "model": {
+            "type": "string",
+            "description": "The target model for a cascaded graph. Realtime graphs reject this property and retain the connection model."
+          },
+          "instructions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Subagent-specific instructions. With default inheritance, non-empty instructions follow the original top-level instructions. Omission, null, or an empty string adds nothing after that base. With inheritance disabled, only this value applies."
+          },
+          "inherit_base_instructions": {
+            "type": "boolean",
+            "description": "Whether the subagent inherits the original top-level instructions before applying its own non-empty instructions. Defaults to true; set to false to opt out.",
+            "default": true
+          },
+          "tools": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/VoiceAgentTool"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Customer tools available to this subagent. Omission or null selects an empty customer tool set."
+          },
+          "tool_choice": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentToolChoice"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Tool-selection behavior for this subagent. Omission or null defaults to `auto`."
+          },
+          "voice": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentVoice"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The voice activated for this subagent. Omission inherits the entrypoint voice; null clears it where supported."
+          },
+          "temperature": {
+            "anyOf": [
+              {
+                "type": "number",
+                "format": "float"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minimum": 0,
+            "maximum": 2,
+            "description": "The sampling temperature for a compatible subagent model."
+          },
+          "max_response_output_tokens": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentHandoffMaxOutputTokens"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The maximum output-token count for one response while this subagent is active."
+          },
+          "reasoning_effort": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentHandoffReasoningEffort"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Reasoning effort for a compatible subagent model."
+          },
+          "voice_adaptation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentHandoffVoiceAdaptation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Voice-optimized instruction adaptation for this subagent. Null disables adaptation."
+          },
+          "interim_response": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentInterimResponseConfig"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Interim-response settings for this subagent. Null disables interim responses."
+          },
+          "parallel_tool_calls": {
+            "type": "boolean",
+            "description": "Whether this subagent may call customer tools in parallel. Subagents with outgoing handoff conditions must use `false`.",
+            "default": false
+          },
+          "handoff_conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentHandoffCondition"
+            },
+            "maxItems": 128,
+            "description": "Outgoing handoffs from this subagent. The containing subagent supplies each condition's source. The service permits at most 128 conditions across the entire Agent."
+          }
+        },
+        "description": "One inline voice subagent owned and versioned with its parent Voice Agent, not a separate Agent resource.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "InputData": {
         "type": "object",
         "required": [
@@ -100716,24 +100883,15 @@
           "subagents": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/VoiceAgentInlinedSubagent"
+              "$ref": "#/components/schemas/InlineVoiceSubagent"
             },
-            "minItems": 1,
+            "minItems": 2,
             "maxItems": 32,
-            "description": "Inlined voice subagents owned and versioned with this Voice Agent. Configure together with `handoff_conditions`.\nThe top-level definition is the implicit `$entrypoint`; an explicit `$entrypoint` may appear once as the first\nsubagent. At most 31 additional subagents are supported, or 32 entries including an explicit `$entrypoint`.\nReferenced agents and delegations are not supported by this property."
-          },
-          "handoff_conditions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceAgentHandoffCondition"
-            },
-            "minItems": 1,
-            "maxItems": 128,
-            "description": "Allowed directed handoffs between inlined voice subagents and `$entrypoint`. Configure together with `subagents`.\nAt least one condition must originate from `$entrypoint`. A condition guides the model; it is not an executable\nBoolean expression. The service validates identifiers, reachability, and source-to-target relations."
+            "description": "Inline voice subagents owned and versioned with this Voice Agent. New Handoff authoring requires `$entrypoint`\nas the first subagent, followed by at least one specialist and at most 31 additional subagents. Each subagent\ndeclares its outgoing `handoff_conditions`; condition identifiers and the 128-condition limit apply across\nthe entire Agent. Referenced agents and delegations are not supported by this property."
           },
           "handoff_policy": {
             "$ref": "#/components/schemas/VoiceAgentHandoffPolicy",
-            "description": "Session-wide handoff limits. Requires `subagents` and `handoff_conditions`. When omitted, the service permits up to 16 completed and 16 attempted handoffs."
+            "description": "Session-wide handoff limits. Requires `subagents` and at least one outgoing condition from `$entrypoint`. When omitted, the service permits up to 16 completed and 16 attempted handoffs."
           }
         },
         "allOf": [
@@ -100959,7 +101117,6 @@
         "type": "object",
         "required": [
           "id",
-          "source",
           "target",
           "condition"
         ],
@@ -100968,13 +101125,9 @@
             "$ref": "#/components/schemas/VoiceAgentHandoffId",
             "description": "The handoff condition identifier."
           },
-          "source": {
-            "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
-            "description": "The source node identifier or `$entrypoint`."
-          },
           "target": {
             "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
-            "description": "The target node identifier or `$entrypoint`."
+            "description": "The target subagent identifier or `$entrypoint`. The containing subagent supplies the source."
           },
           "condition": {
             "type": "string",
@@ -101013,7 +101166,7 @@
             "default": "auto"
           }
         },
-        "description": "One allowed directed handoff between inlined voice subagents or `$entrypoint`.",
+        "description": "One allowed outgoing handoff from an inline voice subagent.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -101126,199 +101279,6 @@
           }
         },
         "description": "Voice-optimized instruction adaptation applied while a handoff node is active.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAgentInlinedSubagent": {
-        "type": "object",
-        "required": [
-          "id",
-          "interface",
-          "description",
-          "source"
-        ],
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/VoiceAgentHandoffNodeReference",
-            "description": "The subagent identifier. `$entrypoint` may appear once as the first subagent; other values use the normal handoff ID grammar."
-          },
-          "interface": {
-            "type": "string",
-            "enum": [
-              "voice"
-            ],
-            "description": "The subagent interaction interface. This phase supports only `voice`; text delegation is deferred."
-          },
-          "description": {
-            "type": "string",
-            "minLength": 1,
-            "description": "A display-only description of the specialist behavior. This value is not provided to the model."
-          },
-          "source": {
-            "$ref": "#/components/schemas/VoiceAgentInlinedSubagentSource",
-            "description": "The inline source of this subagent. Referenced sources are not supported in this phase."
-          }
-        },
-        "description": "One inlined voice subagent owned and versioned with its parent Voice Agent, not a separate Agent resource.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAgentInlinedSubagentConfig": {
-        "type": "object",
-        "properties": {
-          "model": {
-            "type": "string",
-            "description": "The target model for a cascaded graph. Realtime graphs reject this property and retain the connection model."
-          },
-          "instructions": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Node-specific instructions. Omission preserves the frozen entrypoint instructions. A supplied value replaces them by default; null or an empty string clears them. When `inherit_from_base_instructions` is true, the frozen entrypoint instructions precede a non-empty value, while null or an empty string adds nothing."
-          },
-          "inherit_from_base_instructions": {
-            "type": "boolean",
-            "description": "Whether this node inherits the frozen entrypoint instructions before applying its own instructions.",
-            "default": false
-          },
-          "tools": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/VoiceAgentTool"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Customer tools available at this node. Omission or null selects an empty customer tool set."
-          },
-          "tool_choice": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceAgentToolChoice"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Tool-selection behavior for this node. Omission or null defaults to `auto`."
-          },
-          "voice": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceAgentVoice"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The voice activated for this node. Omission inherits the entrypoint voice; null clears it where supported."
-          },
-          "temperature": {
-            "anyOf": [
-              {
-                "type": "number",
-                "format": "float"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "minimum": 0,
-            "maximum": 2,
-            "description": "The sampling temperature for a compatible node model."
-          },
-          "max_response_output_tokens": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceAgentHandoffMaxOutputTokens"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The maximum output-token count for one response while this node is active."
-          },
-          "reasoning_effort": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceAgentHandoffReasoningEffort"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Reasoning effort for a compatible node model."
-          },
-          "voice_adaptation": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceAgentHandoffVoiceAdaptation"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Voice-optimized instruction adaptation for this node. Null disables adaptation."
-          },
-          "interim_response": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceAgentInterimResponseConfig"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Interim-response settings for this node. Null disables interim responses."
-          },
-          "parallel_tool_calls": {
-            "type": "boolean",
-            "description": "Whether this node may call customer tools in parallel. Nodes with outgoing handoff edges must use `false`.",
-            "default": false
-          }
-        },
-        "description": "Behavior activated when an inlined voice subagent becomes active after a handoff.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAgentInlinedSubagentSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "config"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "inline"
-            ],
-            "description": "The source type. This phase supports only `inline`; referenced Agent resources are deferred."
-          },
-          "config": {
-            "$ref": "#/components/schemas/VoiceAgentInlinedSubagentConfig",
-            "description": "The behavior activated when this inlined subagent becomes active."
-          }
-        },
-        "description": "The inline source for a subagent behavior owned and versioned with its parent Voice Agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

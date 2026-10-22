@@ -62,86 +62,13 @@ model VoiceAgentHandoffVoiceAdaptation {
   type: "auto";
 }
 
-@doc("Behavior activated when an inlined voice subagent becomes active after a handoff.")
-@extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
-model VoiceAgentInlinedSubagentConfig {
-  @doc("The target model for a cascaded graph. Realtime graphs reject this property and retain the connection model.")
-  `model`?: string;
-
-  @doc("Node-specific instructions. Omission preserves the frozen entrypoint instructions. A supplied value replaces them by default; null or an empty string clears them. When `inherit_from_base_instructions` is true, the frozen entrypoint instructions precede a non-empty value, while null or an empty string adds nothing.")
-  instructions?: string | null;
-
-  @doc("Whether this node inherits the frozen entrypoint instructions before applying its own instructions.")
-  inherit_from_base_instructions?: boolean = false;
-
-  @doc("Customer tools available at this node. Omission or null selects an empty customer tool set.")
-  tools?: VoiceAgentTool[] | null;
-
-  @doc("Tool-selection behavior for this node. Omission or null defaults to `auto`.")
-  tool_choice?: VoiceAgentToolChoice | null;
-
-  @doc("The voice activated for this node. Omission inherits the entrypoint voice; null clears it where supported.")
-  voice?: VoiceAgentVoice | null;
-
-  @doc("The sampling temperature for a compatible node model.")
-  @minValue(0)
-  @maxValue(2)
-  temperature?: float32 | null;
-
-  @doc("The maximum output-token count for one response while this node is active.")
-  max_response_output_tokens?: VoiceAgentHandoffMaxOutputTokens | null;
-
-  @doc("Reasoning effort for a compatible node model.")
-  reasoning_effort?: VoiceAgentHandoffReasoningEffort | null;
-
-  @doc("Voice-optimized instruction adaptation for this node. Null disables adaptation.")
-  voice_adaptation?: VoiceAgentHandoffVoiceAdaptation | null;
-
-  @doc("Interim-response settings for this node. Null disables interim responses.")
-  interim_response?: VoiceAgentInterimResponseConfig | null;
-
-  @doc("Whether this node may call customer tools in parallel. Nodes with outgoing handoff edges must use `false`.")
-  parallel_tool_calls?: boolean = false;
-}
-
-@doc("The inline source for a subagent behavior owned and versioned with its parent Voice Agent.")
-@extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
-model VoiceAgentInlinedSubagentSource {
-  @doc("The source type. This phase supports only `inline`; referenced Agent resources are deferred.")
-  type: "inline";
-
-  @doc("The behavior activated when this inlined subagent becomes active.")
-  config: VoiceAgentInlinedSubagentConfig;
-}
-
-@doc("One inlined voice subagent owned and versioned with its parent Voice Agent, not a separate Agent resource.")
-@extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
-model VoiceAgentInlinedSubagent {
-  @doc("The subagent identifier. `$entrypoint` may appear once as the first subagent; other values use the normal handoff ID grammar.")
-  id: VoiceAgentHandoffNodeReference;
-
-  @doc("The subagent interaction interface. This phase supports only `voice`; text delegation is deferred.")
-  `interface`: "voice";
-
-  @doc("A display-only description of the specialist behavior. This value is not provided to the model.")
-  @encodedName("application/json", "description")
-  @minLength(1)
-  display_description: string;
-
-  @doc("The inline source of this subagent. Referenced sources are not supported in this phase.")
-  source: VoiceAgentInlinedSubagentSource;
-}
-
-@doc("One allowed directed handoff between inlined voice subagents or `$entrypoint`.")
+@doc("One allowed outgoing handoff from an inline voice subagent.")
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
 model VoiceAgentHandoffCondition {
   @doc("The handoff condition identifier.")
   id: VoiceAgentHandoffId;
 
-  @doc("The source node identifier or `$entrypoint`.")
-  source: VoiceAgentHandoffNodeReference;
-
-  @doc("The target node identifier or `$entrypoint`.")
+  @doc("The target subagent identifier or `$entrypoint`. The containing subagent supplies the source.")
   target: VoiceAgentHandoffNodeReference;
 
   @doc("Natural-language routing guidance supplied alongside the active subagent instructions. This is not an executable Boolean predicate.")
@@ -167,6 +94,66 @@ model VoiceAgentHandoffCondition {
 
   @doc("Whether Voice Live automatically starts a response after target activation. If omitted, the service defaults to `auto`.")
   target_response?: VoiceAgentHandoffTargetResponse = VoiceAgentHandoffTargetResponse.auto;
+}
+
+@doc("One inline voice subagent owned and versioned with its parent Voice Agent, not a separate Agent resource.")
+@extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
+model InlineVoiceSubagent {
+  @doc("The subagent identifier. New Handoff authoring requires `$entrypoint` as the first subagent; other values use the normal handoff ID grammar.")
+  id: VoiceAgentHandoffNodeReference;
+
+  @doc("The definition source. This phase supports only `inline`; referenced Agent resources are deferred.")
+  source: "inline";
+
+  @doc("The interaction interface. This phase supports only `voice`; text delegation is deferred.")
+  `interface`: "voice";
+
+  @doc("A display-only description of the specialist behavior. This value is not provided to the model.")
+  @encodedName("application/json", "description")
+  @minLength(1)
+  display_description: string;
+
+  @doc("The target model for a cascaded graph. Realtime graphs reject this property and retain the connection model.")
+  `model`?: string;
+
+  @doc("Subagent-specific instructions. With default inheritance, non-empty instructions follow the original top-level instructions. Omission, null, or an empty string adds nothing after that base. With inheritance disabled, only this value applies.")
+  instructions?: string | null;
+
+  @doc("Whether the subagent inherits the original top-level instructions before applying its own non-empty instructions. Defaults to true; set to false to opt out.")
+  inherit_base_instructions?: boolean = true;
+
+  @doc("Customer tools available to this subagent. Omission or null selects an empty customer tool set.")
+  tools?: VoiceAgentTool[] | null;
+
+  @doc("Tool-selection behavior for this subagent. Omission or null defaults to `auto`.")
+  tool_choice?: VoiceAgentToolChoice | null;
+
+  @doc("The voice activated for this subagent. Omission inherits the entrypoint voice; null clears it where supported.")
+  voice?: VoiceAgentVoice | null;
+
+  @doc("The sampling temperature for a compatible subagent model.")
+  @minValue(0)
+  @maxValue(2)
+  temperature?: float32 | null;
+
+  @doc("The maximum output-token count for one response while this subagent is active.")
+  max_response_output_tokens?: VoiceAgentHandoffMaxOutputTokens | null;
+
+  @doc("Reasoning effort for a compatible subagent model.")
+  reasoning_effort?: VoiceAgentHandoffReasoningEffort | null;
+
+  @doc("Voice-optimized instruction adaptation for this subagent. Null disables adaptation.")
+  voice_adaptation?: VoiceAgentHandoffVoiceAdaptation | null;
+
+  @doc("Interim-response settings for this subagent. Null disables interim responses.")
+  interim_response?: VoiceAgentInterimResponseConfig | null;
+
+  @doc("Whether this subagent may call customer tools in parallel. Subagents with outgoing handoff conditions must use `false`.")
+  parallel_tool_calls?: boolean = false;
+
+  @doc("Outgoing handoffs from this subagent. The containing subagent supplies each condition's source. The service permits at most 128 conditions across the entire Agent.")
+  @maxItems(128)
+  handoff_conditions?: VoiceAgentHandoffCondition[];
 }
 
 @doc("Session-wide limits shared by all handoff conditions in one Voice Agent session.")
