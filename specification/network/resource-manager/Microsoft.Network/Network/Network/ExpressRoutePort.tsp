@@ -3,28 +3,20 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * ExpressRoutePort resource definition.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("ExpressRoute Port")
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRoutePort extends Common.Resource {
-  properties?: ExpressRoutePortPropertiesFormat;
-
+@featureFile(Features.expressRoute)
+model ExpressRoutePort is ResourceInstance<ExpressRoutePortPropertiesFormat> {
   @visibility(Lifecycle.Read)
   @path
   @key("expressRoutePortName")
@@ -40,7 +32,7 @@ model ExpressRoutePort extends Common.Resource {
    * The identity of ExpressRoutePort, if configured.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  identity?: Common.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 }
 
 alias ExpressRouteLinkOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -67,8 +59,7 @@ alias ExpressRouteLinkOps = Azure.ResourceManager.Legacy.RoutedOperations<
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface ExpressRoutePorts {
   /**

@@ -4,18 +4,16 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./PrivateLinkService.tsp";
-import "../Common/PrivateEndpointConnection.tsp";
+import "./PrivateEndpointConnection.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations(#{ omitTags: true })
 interface PrivateEndpointConnections {
   /**
@@ -23,7 +21,7 @@ interface PrivateEndpointConnections {
    */
   @tag("PrivateLinkServices")
   getPrivateEndpointConnection is ArmResourceRead<
-    Common.PrivateEndpointConnection,
+    PrivateEndpointConnection,
     Parameters = {
       /**
        * Expands referenced resources.
@@ -40,8 +38,8 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PrivateLinkServices")
   updatePrivateEndpointConnection is ArmResourceCreateOrReplaceSync<
-    Common.PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<Common.PrivateEndpointConnection>,
+    PrivateEndpointConnection,
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>,
     Error = Error
   >;
 
@@ -51,7 +49,7 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PrivateLinkServices")
   deletePrivateEndpointConnection is ArmResourceDeleteWithoutOkAsync<
-    Common.PrivateEndpointConnection,
+    PrivateEndpointConnection,
     Response =
       | ArmDeletedResponse
       | ArmDeleteAcceptedLroResponse
@@ -64,21 +62,21 @@ interface PrivateEndpointConnections {
    */
   @tag("PrivateLinkServices")
   listPrivateEndpointConnections is ArmResourceListByParent<
-    Common.PrivateEndpointConnection,
+    PrivateEndpointConnection,
     Error = Error
   >;
 }
 
 @@doc(
-  Common.PrivateEndpointConnection.name,
+  PrivateEndpointConnection.name,
   "The name of the private end point connection."
 );
 @@doc(
-  Common.PrivateEndpointConnection.name,
+  PrivateEndpointConnection.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
 @@doc(
-  Common.PrivateEndpointConnection.properties,
+  PrivateEndpointConnection.properties,
   "Properties of the private end point connection."
 );
 @@doc(

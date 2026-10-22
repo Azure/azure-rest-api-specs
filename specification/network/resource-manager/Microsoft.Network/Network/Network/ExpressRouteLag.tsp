@@ -3,31 +3,22 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * ExpressRouteLag resource definition.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "The includeInapplicableMetadataInPayload decorator is currently under Http.Private and is required to keep payload shape aligned with existing Network RP swagger output."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "This tracked resource explicitly defines name/etag/identity envelope fields to preserve existing Network RP contract and generated OpenAPI shape for ExpressRoute LAG."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This resource extends the shared Common.Resource envelope used across Network RP to maintain consistency with existing model composition."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project currently uses Azure.ResourceManager.Legacy feature toggles and operation templates across this API surface; this file must remain consistent with that project pattern."
 @summary("ExpressRoute LAG")
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@Http.Private.includeInapplicableMetadataInPayload(false)
+@featureFile(Features.expressRoute)
 @added(Versions.v2025_09_01)
-model ExpressRouteLag extends Common.Resource {
-  /** ExpressRouteLag properties. */
-  properties?: ExpressRouteLagPropertiesFormat;
-
+model ExpressRouteLag is ResourceInstance<ExpressRouteLagPropertiesFormat> {
   /** The unique identifier of the resource. */
   @visibility(Lifecycle.Read)
   id?: string;
@@ -55,7 +46,7 @@ model ExpressRouteLag extends Common.Resource {
    * The identity of ExpressRouteLag, if configured.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "identity is intentionally exposed at the resource envelope level to align with managed identity behavior of peer ExpressRoute resources."
-  identity?: Common.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 }
 
 alias ExpressRouteLagLinkOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -127,8 +118,7 @@ alias ExpressRouteLagMemberOps = Azure.ResourceManager.Legacy.RoutedOperations<
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The containing service namespace still relies on Azure.ResourceManager.Legacy feature flags and templates; this interface follows the same established project-level pattern."
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 @added(Versions.v2025_09_01)
 interface ExpressRouteLags {

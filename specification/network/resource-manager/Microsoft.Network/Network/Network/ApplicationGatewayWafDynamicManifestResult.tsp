@@ -3,33 +3,22 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * Response for ApplicationGatewayWafDynamicManifest API service call.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
-@Http.Private.includeInapplicableMetadataInPayload(false)
+@featureFile(Features.applicationGateway)
 @singleton("dafault")
 @subscriptionResource
 model ApplicationGatewayWafDynamicManifestResult
-  extends ProxyResourceWithSettableId {
-  /**
-   * Properties of the ApplicationGatewayWafDynamicManifest.
-   */
-  properties?: ApplicationGatewayWafDynamicManifestPropertiesResult;
-
+  is ProxyResourceWithSettableIdInstance<ApplicationGatewayWafDynamicManifestPropertiesResult> {
   /**
    * The name of the resource.
    */
@@ -61,8 +50,7 @@ alias ApplicationGatewayWafDynamicManifestResultOps = Azure.ResourceManager.Lega
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@featureFile(Features.applicationGateway)
 @armResourceOperations(#{ omitTags: true })
 interface ApplicationGatewayWafDynamicManifestResults {
   /**

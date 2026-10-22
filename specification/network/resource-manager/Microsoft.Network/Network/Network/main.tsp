@@ -11,6 +11,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./customizations.tsp";
 import "./models.tsp";
 import "./back-compatible.tsp";
 import "./ApplicationGateway.tsp";
@@ -118,6 +119,9 @@ import "./VirtualNetworkTap.tsp";
 import "./VirtualRouter.tsp";
 import "./VirtualRouterPeering.tsp";
 import "./VirtualWAN.tsp";
+import "./VmssNetworkInterface.tsp";
+import "./VmssNetworkInterfaceIpConfiguration.tsp";
+import "./VmssPublicIPAddress.tsp";
 import "./VpnSite.tsp";
 import "./VpnSiteLink.tsp";
 import "./VpnServerConfiguration.tsp";
@@ -143,7 +147,7 @@ import "./ServiceGateway.tsp";
 import "./InterconnectGroup.tsp";
 import "./FirstPartyServiceTag.tsp";
 import "./AddressPrefixSet.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -151,11 +155,11 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using Common;
 /**
  * APIs to manage Microsoft Azure network resources.
  */
-@Azure.ResourceManager.Legacy.features(Features)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-feature-file-usage-discourage" "Legacy feature-file output splitting is required to preserve the released per-Swagger file layout."
+@featureFiles(Features)
 @armProviderNamespace
 @service(#{ title: "WebApplicationFirewallManagement" })
 @versioned(Versions)
@@ -169,36 +173,96 @@ enum Versions {
   /**
    * The 2025-05-01 API version.
    */
-  @useDependency(Common.Versions.v2025_05_01)
   v2025_05_01: "2025-05-01",
 
   /**
    * The 2025-07-01 API version.
    */
-  @useDependency(Common.Versions.v2025_07_01)
   v2025_07_01: "2025-07-01",
 
   /**
    * The 2025-09-01 API version.
    */
-  @useDependency(Common.Versions.v2025_09_01)
   v2025_09_01: "2025-09-01",
 
   /**
    * The 2026-01-01 API version.
    */
-  @useDependency(Common.Versions.v2026_01_01)
   v2026_01_01: "2026-01-01",
 
   /**
    * The 2026-03-01 API version.
    */
-  @useDependency(Common.Versions.v2026_03_01)
   v2026_03_01: "2026-03-01",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
+/**
+ * Internal identifiers used to route operations and schemas to legacy Swagger output files.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "An enum is required because @featureFiles uses these fixed internal Swagger output identifiers."
+enum Features {
+  /** Routes application gateway operations and schemas to applicationGateway.json. */
+  applicationGateway,
+
+  /** Routes ExpressRoute operations and schemas to expressRoute.json. */
+  expressRoute,
+
+  /** Routes firewall operations and schemas to firewall.json. */
+  firewall,
+
+  /** Routes load balancer operations and schemas to loadBalancer.json. */
+  loadBalancer,
+
+  /** Routes network gateway operations and schemas to networkGateway.json. */
+  networkGateway,
+
+  /** Routes network manager operations and schemas to networkManager.json. */
+  networkManager,
+
+  /** Routes network security perimeter operations and schemas to networkSecurityPerimeter.json. */
+  networkSecurityPerimeter,
+
+  /** Routes network watcher operations and schemas to networkWatcher.json. */
+  networkWatcher,
+
+  /** Routes provider operations and schemas to networkingOperations.json. */
+  networkingOperations,
+
+  /** Routes virtual network operations and schemas to virtualNetwork.json. */
+  virtualNetwork,
+
+  /** Routes virtual WAN operations and schemas to virtualWan.json. */
+  virtualWAN,
+
+  /** Routes firewall policy operations and schemas to firewallPolicy.json. */
+  firewallPolicy,
+
+  /** Routes Azure web category operations and schemas to azureWebCategory.json. */
+  azureWebCategory,
+
+  /** Routes service gateway operations and schemas to serviceGateway.json. */
+  serviceGateway,
+
+  /** Routes virtual network appliance operations and schemas to virtualNetworkAppliance.json. */
+  virtualNetworkAppliance,
+
+  /** Routes interconnect group operations and schemas to interconnectGroup.json. */
+  interconnectGroup,
+
+  /** Routes VMSS network configuration schemas to vmssNetworkConfiguration.json. */
+  vmssNetworkConfiguration,
+
+  /** Routes VMSS public IP address schemas to vmssPublicIpAddress.json. */
+  vmssPublicIPAddress,
+
+  /** Routes first-party service tag schemas to firstPartyServiceTag.json. */
+  firstPartyServiceTag,
+
+  /** Routes authentication policy operations and schemas to authenticationPolicy.json. */
+  authenticationPolicy,
+}
+
+@featureFile(Features.networkingOperations)
 @armResourceOperations(#{ omitTags: true })
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<
