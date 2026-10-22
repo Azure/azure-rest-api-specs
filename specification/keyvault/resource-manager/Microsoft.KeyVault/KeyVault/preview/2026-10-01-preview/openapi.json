@@ -6227,8 +6227,9 @@
         },
         "protectionKeysWrappingKey": {
           "$ref": "#/definitions/WrappingKeyConfiguration",
-          "description": "Configures an external Managed HSM key used to wrap the vault's protection keys.\nThis property is write-only and is not returned in create, update, get, or list responses.\nIt can be supplied when enabling wrapping on an existing vault.\nProtection key wrapping must be enabled for the vault.\nReapplying an equivalent configuration is supported; replacing or removing it is not.\nA versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.\nOmitting this property or supplying null preserves the existing configuration.",
+          "description": "Configures an external Managed HSM key used to wrap the vault's protection keys.\nWhen configured, this property is returned in create, update, get, and list responses.\nResponses contain the persisted key reference and authentication mechanism, not key material or credentials.\nIt can be supplied when enabling wrapping on an existing vault.\nProtection key wrapping must be enabled for the vault.\nReapplying an equivalent configuration is supported; replacing or removing it is not.\nA versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.\nOmitting this property or supplying null preserves the existing configuration.",
           "x-ms-mutability": [
+            "read",
             "update",
             "create"
           ]
@@ -6338,8 +6339,9 @@
         },
         "protectionKeysWrappingKey": {
           "$ref": "#/definitions/WrappingKeyConfiguration",
-          "description": "Configures an external Managed HSM key used to wrap the vault's protection keys.\nThis property is write-only and is not returned in create, update, get, or list responses.\nIt can be supplied when creating a vault or enabling wrapping on an existing vault.\nProtection key wrapping must be enabled for the vault.\nReapplying an equivalent configuration is supported; replacing or removing it is not.\nA versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.\nOmitting this property or supplying null preserves the existing configuration.",
+          "description": "Configures an external Managed HSM key used to wrap the vault's protection keys.\nWhen configured, this property is returned in create, update, get, and list responses.\nResponses contain the persisted key reference and authentication mechanism, not key material or credentials.\nIt can be supplied when creating a vault or enabling wrapping on an existing vault.\nProtection key wrapping must be enabled for the vault.\nReapplying an equivalent configuration is supported; replacing or removing it is not.\nA versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.\nOmitting this property or supplying null preserves the existing configuration.",
           "x-ms-mutability": [
+            "read",
             "update",
             "create"
           ]

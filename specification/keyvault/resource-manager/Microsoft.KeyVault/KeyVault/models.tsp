@@ -1167,7 +1167,8 @@ model VaultProperties {
 
   /**
    * Configures an external Managed HSM key used to wrap the vault's protection keys.
-   * This property is write-only and is not returned in create, update, get, or list responses.
+   * When configured, this property is returned in create, update, get, and list responses.
+   * Responses contain the persisted key reference and authentication mechanism, not key material or credentials.
    * It can be supplied when creating a vault or enabling wrapping on an existing vault.
    * Protection key wrapping must be enabled for the vault.
    * Reapplying an equivalent configuration is supported; replacing or removing it is not.
@@ -1175,7 +1176,7 @@ model VaultProperties {
    * Omitting this property or supplying null preserves the existing configuration.
    */
   @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
-  @visibility(Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   protectionKeysWrappingKey?: WrappingKeyConfiguration;
 }
 
@@ -1551,7 +1552,8 @@ model VaultPatchProperties {
 
   /**
    * Configures an external Managed HSM key used to wrap the vault's protection keys.
-   * This property is write-only and is not returned in create, update, get, or list responses.
+   * When configured, this property is returned in create, update, get, and list responses.
+   * Responses contain the persisted key reference and authentication mechanism, not key material or credentials.
    * It can be supplied when enabling wrapping on an existing vault.
    * Protection key wrapping must be enabled for the vault.
    * Reapplying an equivalent configuration is supported; replacing or removing it is not.
@@ -1559,7 +1561,7 @@ model VaultPatchProperties {
    * Omitting this property or supplying null preserves the existing configuration.
    */
   @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
-  @visibility(Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   protectionKeysWrappingKey?: WrappingKeyConfiguration;
 }
 
