@@ -28,6 +28,10 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 ```
 
+```yaml !$(tag)
+allow-no-input: true
+```
+
 ```yaml
 description: Monitor Management Client
 openapi-type: arm
