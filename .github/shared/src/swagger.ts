@@ -1,7 +1,7 @@
 import $RefParser from "@apidevtools/json-schema-ref-parser";
-import { readFile } from "fs/promises";
-import { dirname, relative } from "path";
-import { inspect } from "util";
+import { readFile } from "node:fs/promises";
+import { dirname, relative } from "node:path";
+import { inspect } from "node:util";
 import { z } from "zod";
 import { mapAsync } from "./array.ts";
 import { KeyedCache } from "./cache.ts";

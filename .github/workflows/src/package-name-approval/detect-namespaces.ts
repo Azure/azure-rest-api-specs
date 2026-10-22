@@ -1,6 +1,6 @@
-import { existsSync } from "fs";
-import { writeFile } from "fs/promises";
-import { dirname, join } from "path";
+import { existsSync } from "node:fs";
+import { writeFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
 import { getChangedFilesStatuses, tspconfig } from "../../../shared/src/changed-files.ts";
 import { generateTypeSpecMetadata } from "../../../shared/src/typespec-metadata.ts";
 import type { Core, GitHubScriptArgs, WebhookEvent } from "../github.ts";

@@ -1,5 +1,5 @@
-import * as fs from "fs";
-import { dirname, join } from "path";
+import * as fs from "node:fs";
+import { dirname, join } from "node:path";
 
 import { parseMarkdown } from "@azure-tools/openapi-tools-common";
 import * as amd from "@azure/openapi-markdown";

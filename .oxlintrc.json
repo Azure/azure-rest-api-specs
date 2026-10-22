@@ -1,7 +1,8 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": [
-    "typescript"
+    "typescript",
+    "unicorn"
   ],
   "categories": {
     "correctness": "off"
@@ -19,8 +20,10 @@
     "!/vitest.config.mts",
     "!/.github/",
     "!/eng/",
+    "!/libs/",
     "/eng/*",
     "!/eng/tools/",
+    "!/eng/typespec-rulesets/",
     "**/coverage/**",
     "**/dist/**",
     "eng/tools/openapi-diff-runner/**",
@@ -91,6 +94,7 @@
     "valid-typeof": "error",
     "no-array-constructor": "error",
     "no-unused-expressions": "error",
+    "unicorn/prefer-node-protocol": "error",
     "typescript/await-thenable": "error",
     "typescript/ban-ts-comment": "error",
     "typescript/no-array-delete": "error",

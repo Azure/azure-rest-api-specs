@@ -438,7 +438,6 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a Browser Automation Tool, as used to configure an Agent.
    */
-  @removed(Versions.v1)
   model BrowserAutomationTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'browser_automation'.
@@ -454,7 +453,6 @@ namespace Azure.AI.Projects {
   /**
    * Definition of input parameters for the Browser Automation Tool.
    */
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolParameters {
     /**
      * The project connection parameters associated with the Browser Automation Tool.
@@ -465,7 +463,6 @@ namespace Azure.AI.Projects {
   /**
    * Definition of input parameters for the connection used by the Browser Automation Tool.
    */
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolConnectionParameters {
     /**
      * The ID of the project connection to your Azure Playwright resource.
@@ -1074,6 +1071,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Output can be multiple types"
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
   @doc("The output content from a tool call, which can be a dictionary, string, or array.")
   union ToolCallOutputContent {
     @doc("A dictionary/object output.")
@@ -1261,7 +1259,6 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("A browser automation tool call.")
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolCall extends OpenAI.OutputItem {
     type: "browser_automation_preview_call";
 
@@ -1276,7 +1273,6 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of a browser automation tool call.")
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolCallOutput extends OpenAI.OutputItem {
     type: "browser_automation_preview_call_output";
 

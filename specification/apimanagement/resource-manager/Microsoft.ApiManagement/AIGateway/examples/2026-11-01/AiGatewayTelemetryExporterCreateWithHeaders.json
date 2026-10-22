@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "aiGatewayName": "example-gateway",
+    "workspaceName": "default",
+    "telemetryExporterName": "otlp-exporter",
+    "resource": {
+      "properties": {
+        "kind": "OpenTelemetry",
+        "payloadCapture": false,
+        "openTelemetry": {
+          "tracesEndpoint": "https://collector.example.com/v1/traces",
+          "credentials": {
+            "headers": {
+              "Authorization": "Bearer example-token"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/telemetryExporters/otlp-exporter",
+        "name": "otlp-exporter",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces/telemetryExporters",
+        "eTag": "W/\"1\"",
+        "properties": {
+          "kind": "OpenTelemetry",
+          "payloadCapture": false,
+          "openTelemetry": {
+            "tracesEndpoint": "https://collector.example.com/v1/traces"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/telemetryExporters/otlp-exporter",
+        "name": "otlp-exporter",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces/telemetryExporters",
+        "eTag": "W/\"1\"",
+        "properties": {
+          "kind": "OpenTelemetry",
+          "payloadCapture": false,
+          "openTelemetry": {
+            "tracesEndpoint": "https://collector.example.com/v1/traces"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "AiGatewayTelemetryExporterResources_CreateOrUpdate",
+  "title": "Create an OpenTelemetry exporter with header authentication"
+}
