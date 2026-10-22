@@ -1,0 +1,27 @@
+name: azure-typespec-author-eval
+description: Authoring boundaries with shared naming available
+version: "1.0"
+type: capability
+area: naming
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 120s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 007011-trigger-modify-typespec-enum-trigger
+    prompt: |
+      Add a value to WidgetState in
+      specification/widget/resource-manager/Microsoft.Widget/models.tsp. For now, identify and
+      invoke the applicable skill, then stop before intake or edits.
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+    tags:
+      suite: naming
+      mode: trigger
