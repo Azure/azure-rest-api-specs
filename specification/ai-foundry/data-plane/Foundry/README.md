@@ -63,6 +63,17 @@ The `npx tsv .` has a console spew that shows the diff between current and stage
 changes. Once you `git add` all the changed files and run `npx tsv .` again, there should
 no longer be any diffs to show.
 
+## Voice agent contract checks
+
+With the repository's Node/pnpm versions and pinned dependencies installed, run:
+
+```sh
+pnpm exec node --test specification/ai-foundry/data-plane/Foundry/tests/voice-agent-contract.test.mjs
+```
+
+Checks both API versions, native Live compatibility, greetings, delegation, persistence,
+Realtime isolation, and SDK metadata. Does not generate SDKs or run service E2E tests.
+
 ## Emitting Python code
 
 Please do not emit SDKs in the public Python repo. SDK originated from TypeSpec that is private should not be pushed into a branch in a public GitHub repo.

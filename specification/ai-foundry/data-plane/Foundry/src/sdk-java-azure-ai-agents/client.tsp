@@ -63,6 +63,11 @@ using Azure.AI.Projects;
 // Azure Core's HTTP pipeline cannot expose the upgraded WebSocket channel.
 // Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!java");
+@@scope(VoiceAgentLiveWebSocket.connectLiveVoiceAgent, "!java");
+
+// Retain both concrete targets for customized Realtime/Live subtype dispatch.
+@@access(VoiceAgentDefinition, Access.public, "java");
+@@access(VoiceAgentLiveDefinition, Access.public, "java");
 
 // Keep the OpenAI realtime discriminator roots reachable even though the WebSocket operation is excluded.
 @@usage(OpenAI.RealtimeClientEvent, Usage.input | Usage.json);
@@ -710,6 +715,29 @@ using Azure.AI.Projects;
   "VoiceAgentSessionResponseConfiguration"
 );
 @@clientName(VoiceAgentSessionResponseConfig.object, "objectType");
+
+union VoiceResponseObjectType {
+  realtime_response: "realtime.response",
+}
+
+@@alternateType(
+  OpenAI.RealtimeResponse.object,
+  VoiceResponseObjectType,
+  "java"
+);
+@@clientName(OpenAI.RealtimeResponse.object, "objectType", "java");
+
+@@alternateType(
+  VoiceAgentDefinition.sub_protocol,
+  VoiceAgentSubProtocol,
+  "java"
+);
+@@alternateType(
+  VoiceAgentLiveDefinition.sub_protocol,
+  VoiceAgentSubProtocol,
+  "java"
+);
+
 @@clientName(
   VoiceAgentSessionUpdateConfig,
   "VoiceAgentSessionUpdateConfiguration"
@@ -993,6 +1021,53 @@ using Azure.AI.Projects;
 );
 @@clientName(
   AgentEndpointConversations.getAgentConversationAudioContent,
+  "downloadAgentConversationAudio",
+  "java"
+);
+
+// Match the Realtime method names on the separate Live conversations client.
+@@clientName(
+  AgentEndpointLiveConversations.listLiveAgentConversations,
+  "listAgentConversations",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversation,
+  "getAgentConversation",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.deleteLiveAgentConversation,
+  "deleteAgentConversation",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.listLiveAgentConversationItems,
+  "listAgentConversationItems",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationItem,
+  "getAgentConversationItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioItem,
+  "getAgentConversationAudioItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioItemContent,
+  "downloadAgentConversationAudioItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudio,
+  "getAgentConversationAudio",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioContent,
   "downloadAgentConversationAudio",
   "java"
 );
