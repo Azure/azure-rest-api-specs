@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -22,6 +24,23 @@ model EmployeeProperties {
 
   /** City of employee */
   city?: string;
+
+  /** The display name of the employee. */
+  @added(Versions.v2026_10_01_preview)
+  @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+  @maxLength(128)
+  displayName?: string;
+
+  /** The alias of the employee. */
+  @added(Versions.v2026_10_01_preview)
+  @pattern("^[^<>]{1,64}$")
+  @maxLength(64)
+  `alias`?: string;
+
+  /** The connection string used to access the employee profile store. */
+  @added(Versions.v2026_10_01_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  connectionString?: string;
 
   /** Profile of employee */
   @encode("base64url")
