@@ -78,18 +78,21 @@ interface LogAnalyticsQueryPacks {
       /**
        * Maximum items returned in page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing search POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       $top?: int64;
 
       /**
        * Flag indicating whether or not to return the body of each applicable query. If false, only return the query information.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing search POST contract uses includeBody in the query; preserve wire compatibility."
       @query("includeBody")
       includeBody?: boolean;
 
       /**
        * Base64 encoded token used to fetch the next page of items. Default is null.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing search POST contract uses $skipToken in the query; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }

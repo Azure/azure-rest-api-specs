@@ -61,6 +61,7 @@ alias StorageAccountListKeysParameters = {
   /**
    * Specifies type of the key to be listed. Possible value is kerb.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using StorageAccountListKeysParameters.$expand retain the $expand query parameter for wire compatibility."
   @query("$expand")
   $expand?: "kerb";
 };
@@ -69,6 +70,7 @@ alias StorageAccountFailoverParameters = {
   /**
    * The parameter is set to 'Planned' to indicate whether a Planned failover is requested.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using StorageAccountFailoverParameters.failoverType retain the failoverType query parameter for wire compatibility."
   @query("failoverType")
   failoverType?: "Planned";
 };
@@ -223,6 +225,7 @@ interface StorageAccounts {
       /**
        * Required. Hierarchical namespace migration type can either be a hierarchical namespace validation request 'HnsOnValidationRequest' or a hydration request 'HnsOnHydrationRequest'. The validation request will validate the migration whereas the hydration request will migrate the account.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing hierarchicalNamespaceMigration POST contract uses requestType in the query; preserve wire compatibility."
       @query("requestType")
       requestType: string;
     },

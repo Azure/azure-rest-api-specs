@@ -37,6 +37,7 @@ alias CertificateNameQuery1 = {
    * Common Name for the certificate.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using CertificateNameQuery1.certificate.name retain the certificate.name query parameter for wire compatibility."
   @query("certificate.name")
   `certificate.name`?: string;
 };
@@ -54,6 +55,7 @@ alias CertificateNameQuery3 = {
   /**
    * Time the certificate is created.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using CertificateNameQuery3.certificateCreated retain the certificate.created query parameter for wire compatibility."
   @query("certificate.created")
   certificateCreated?: utcDateTime;
 };
@@ -62,6 +64,7 @@ alias CertificateNameQuery4 = {
   /**
    * Certificate last updated time.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using CertificateNameQuery4.certificateLastUpdated retain the certificate.lastUpdated query parameter for wire compatibility."
   @query("certificate.lastUpdated")
   certificateLastUpdated?: utcDateTime;
 };
@@ -178,18 +181,21 @@ interface CertificateResponses {
       /**
        * Raw data of certificate.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing generateVerificationCode POST contract uses certificate.rawBytes in the query; preserve wire compatibility."
       @query("certificate.rawBytes")
       certificateRawBytes?: bytes;
 
       /**
        * Indicates if the certificate has been verified by owner of the private key.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing generateVerificationCode POST contract uses certificate.isVerified in the query; preserve wire compatibility."
       @query("certificate.isVerified")
       certificateIsVerified?: boolean;
 
       /**
        * Description mentioning the purpose of the certificate.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing generateVerificationCode POST contract uses certificate.purpose in the query; preserve wire compatibility."
       @query("certificate.purpose")
       certificatePurpose?: CertificatePurpose;
 
@@ -199,12 +205,14 @@ interface CertificateResponses {
       /**
        * Indicates if the certificate contains private key.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing generateVerificationCode POST contract uses certificate.hasPrivateKey in the query; preserve wire compatibility."
       @query("certificate.hasPrivateKey")
       certificateHasPrivateKey?: boolean;
 
       /**
        * Random number generated to indicate Proof of Possession.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing generateVerificationCode POST contract uses certificate.nonce in the query; preserve wire compatibility."
       @query("certificate.nonce")
       certificateNonce?: string;
     },
@@ -231,18 +239,21 @@ interface CertificateResponses {
       /**
        * Raw data of certificate.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing verifyCertificate POST contract uses certificate.rawBytes in the query; preserve wire compatibility."
       @query("certificate.rawBytes")
       certificateRawBytes?: bytes;
 
       /**
        * Indicates if the certificate has been verified by owner of the private key.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing verifyCertificate POST contract uses certificate.isVerified in the query; preserve wire compatibility."
       @query("certificate.isVerified")
       certificateIsVerified?: boolean;
 
       /**
        * Describe the purpose of the certificate.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing verifyCertificate POST contract uses certificate.purpose in the query; preserve wire compatibility."
       @query("certificate.purpose")
       certificatePurpose?: CertificatePurpose;
 
@@ -252,12 +263,14 @@ interface CertificateResponses {
       /**
        * Indicates if the certificate contains private key.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing verifyCertificate POST contract uses certificate.hasPrivateKey in the query; preserve wire compatibility."
       @query("certificate.hasPrivateKey")
       certificateHasPrivateKey?: boolean;
 
       /**
        * Random number generated to indicate Proof of Possession.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing verifyCertificate POST contract uses certificate.nonce in the query; preserve wire compatibility."
       @query("certificate.nonce")
       certificateNonce?: string;
     },

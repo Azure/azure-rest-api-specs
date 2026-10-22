@@ -43,6 +43,7 @@ interface RemediationsOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listDeploymentsAtManagementGroup POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -120,6 +121,7 @@ interface PolicyEventsOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -128,6 +130,7 @@ interface PolicyEventsOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -135,6 +138,7 @@ interface PolicyEventsOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -142,6 +146,7 @@ interface PolicyEventsOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -149,6 +154,7 @@ interface PolicyEventsOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -156,6 +162,7 @@ interface PolicyEventsOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -163,6 +170,7 @@ interface PolicyEventsOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
 
@@ -170,6 +178,7 @@ interface PolicyEventsOperationGroup {
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $skiptoken in the query; preserve wire compatibility."
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyEventsQueryResults | QueryFailure;
@@ -195,6 +204,7 @@ interface PolicyEventsOperationGroup {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -203,6 +213,7 @@ interface PolicyEventsOperationGroup {
        * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $orderby in the query; preserve wire compatibility."
       @query("$orderby")
       OrderBy?: string;
 
@@ -210,6 +221,7 @@ interface PolicyEventsOperationGroup {
        * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $select in the query; preserve wire compatibility."
       @query("$select")
       Select?: string;
 
@@ -217,6 +229,7 @@ interface PolicyEventsOperationGroup {
        * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $from in the query; preserve wire compatibility."
       @query("$from")
       From?: utcDateTime;
 
@@ -224,6 +237,7 @@ interface PolicyEventsOperationGroup {
        * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $to in the query; preserve wire compatibility."
       @query("$to")
       To?: utcDateTime;
 
@@ -231,6 +245,7 @@ interface PolicyEventsOperationGroup {
        * OData filter expression.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       Filter?: string;
 
@@ -238,6 +253,7 @@ interface PolicyEventsOperationGroup {
        * OData apply expression for aggregations.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $apply in the query; preserve wire compatibility."
       @query("$apply")
       Apply?: string;
 
@@ -245,6 +261,7 @@ interface PolicyEventsOperationGroup {
        * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $skiptoken in the query; preserve wire compatibility."
       @query("$skiptoken")
       SkipToken?: string;
     }
@@ -271,6 +288,7 @@ interface PolicyEventsOperationGroup {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -279,6 +297,7 @@ interface PolicyEventsOperationGroup {
        * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $orderby in the query; preserve wire compatibility."
       @query("$orderby")
       OrderBy?: string;
 
@@ -286,6 +305,7 @@ interface PolicyEventsOperationGroup {
        * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $select in the query; preserve wire compatibility."
       @query("$select")
       Select?: string;
 
@@ -293,6 +313,7 @@ interface PolicyEventsOperationGroup {
        * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $from in the query; preserve wire compatibility."
       @query("$from")
       From?: utcDateTime;
 
@@ -300,6 +321,7 @@ interface PolicyEventsOperationGroup {
        * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $to in the query; preserve wire compatibility."
       @query("$to")
       To?: utcDateTime;
 
@@ -307,6 +329,7 @@ interface PolicyEventsOperationGroup {
        * OData filter expression.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       Filter?: string;
 
@@ -314,6 +337,7 @@ interface PolicyEventsOperationGroup {
        * OData apply expression for aggregations.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $apply in the query; preserve wire compatibility."
       @query("$apply")
       Apply?: string;
 
@@ -321,6 +345,7 @@ interface PolicyEventsOperationGroup {
        * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $skiptoken in the query; preserve wire compatibility."
       @query("$skiptoken")
       SkipToken?: string;
     }
@@ -350,6 +375,7 @@ interface PolicyEventsOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -358,6 +384,7 @@ interface PolicyEventsOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -365,6 +392,7 @@ interface PolicyEventsOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -372,6 +400,7 @@ interface PolicyEventsOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -379,6 +408,7 @@ interface PolicyEventsOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -386,6 +416,7 @@ interface PolicyEventsOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -393,6 +424,7 @@ interface PolicyEventsOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
 
@@ -400,6 +432,7 @@ interface PolicyEventsOperationGroup {
      * The $expand query parameter. For example, to expand components use $expand=components
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $expand in the query; preserve wire compatibility."
     @query("$expand")
     Expand?: string,
 
@@ -407,6 +440,7 @@ interface PolicyEventsOperationGroup {
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $skiptoken in the query; preserve wire compatibility."
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyEventsQueryResults | QueryFailure;
@@ -442,6 +476,7 @@ interface PolicyEventsOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -450,6 +485,7 @@ interface PolicyEventsOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -457,6 +493,7 @@ interface PolicyEventsOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -464,6 +501,7 @@ interface PolicyEventsOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -471,6 +509,7 @@ interface PolicyEventsOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -478,6 +517,7 @@ interface PolicyEventsOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -485,6 +525,7 @@ interface PolicyEventsOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
 
@@ -492,6 +533,7 @@ interface PolicyEventsOperationGroup {
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $skiptoken in the query; preserve wire compatibility."
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyEventsQueryResults | QueryFailure;
@@ -527,6 +569,7 @@ interface PolicyEventsOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -535,6 +578,7 @@ interface PolicyEventsOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -542,6 +586,7 @@ interface PolicyEventsOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -549,6 +594,7 @@ interface PolicyEventsOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -556,6 +602,7 @@ interface PolicyEventsOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -563,6 +610,7 @@ interface PolicyEventsOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -570,6 +618,7 @@ interface PolicyEventsOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
 
@@ -577,6 +626,7 @@ interface PolicyEventsOperationGroup {
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $skiptoken in the query; preserve wire compatibility."
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyEventsQueryResults | QueryFailure;
@@ -612,6 +662,7 @@ interface PolicyEventsOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -620,6 +671,7 @@ interface PolicyEventsOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -627,6 +679,7 @@ interface PolicyEventsOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -634,6 +687,7 @@ interface PolicyEventsOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -641,6 +695,7 @@ interface PolicyEventsOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -648,6 +703,7 @@ interface PolicyEventsOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -655,6 +711,7 @@ interface PolicyEventsOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
 
@@ -662,6 +719,7 @@ interface PolicyEventsOperationGroup {
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $skiptoken in the query; preserve wire compatibility."
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyEventsQueryResults | QueryFailure;
@@ -703,6 +761,7 @@ interface PolicyEventsOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -711,6 +770,7 @@ interface PolicyEventsOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -718,6 +778,7 @@ interface PolicyEventsOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -725,6 +786,7 @@ interface PolicyEventsOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -732,6 +794,7 @@ interface PolicyEventsOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -739,6 +802,7 @@ interface PolicyEventsOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -746,6 +810,7 @@ interface PolicyEventsOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
 
@@ -753,6 +818,7 @@ interface PolicyEventsOperationGroup {
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $skiptoken in the query; preserve wire compatibility."
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyEventsQueryResults | QueryFailure;
@@ -815,6 +881,7 @@ interface PolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -823,6 +890,7 @@ interface PolicyStatesOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -830,6 +898,7 @@ interface PolicyStatesOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -837,6 +906,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -844,6 +914,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -851,6 +922,7 @@ interface PolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -858,6 +930,7 @@ interface PolicyStatesOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
 
@@ -865,6 +938,7 @@ interface PolicyStatesOperationGroup {
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForManagementGroup POST contract uses $skiptoken in the query; preserve wire compatibility."
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyStatesQueryResults | QueryFailure;
@@ -898,6 +972,7 @@ interface PolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForManagementGroup POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -906,6 +981,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForManagementGroup POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -913,6 +989,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForManagementGroup POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -920,6 +997,7 @@ interface PolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForManagementGroup POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
   ): SummarizeResults | QueryFailure;
@@ -945,6 +1023,7 @@ interface PolicyStatesOperationGroup {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -953,6 +1032,7 @@ interface PolicyStatesOperationGroup {
        * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $orderby in the query; preserve wire compatibility."
       @query("$orderby")
       OrderBy?: string;
 
@@ -960,6 +1040,7 @@ interface PolicyStatesOperationGroup {
        * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $select in the query; preserve wire compatibility."
       @query("$select")
       Select?: string;
 
@@ -967,6 +1048,7 @@ interface PolicyStatesOperationGroup {
        * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $from in the query; preserve wire compatibility."
       @query("$from")
       From?: utcDateTime;
 
@@ -974,6 +1056,7 @@ interface PolicyStatesOperationGroup {
        * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $to in the query; preserve wire compatibility."
       @query("$to")
       To?: utcDateTime;
 
@@ -981,6 +1064,7 @@ interface PolicyStatesOperationGroup {
        * OData filter expression.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       Filter?: string;
 
@@ -988,6 +1072,7 @@ interface PolicyStatesOperationGroup {
        * OData apply expression for aggregations.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $apply in the query; preserve wire compatibility."
       @query("$apply")
       Apply?: string;
 
@@ -995,6 +1080,7 @@ interface PolicyStatesOperationGroup {
        * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscription POST contract uses $skiptoken in the query; preserve wire compatibility."
       @query("$skiptoken")
       SkipToken?: string;
     }
@@ -1020,6 +1106,7 @@ interface PolicyStatesOperationGroup {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForSubscription POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -1028,6 +1115,7 @@ interface PolicyStatesOperationGroup {
        * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForSubscription POST contract uses $from in the query; preserve wire compatibility."
       @query("$from")
       From?: utcDateTime;
 
@@ -1035,6 +1123,7 @@ interface PolicyStatesOperationGroup {
        * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForSubscription POST contract uses $to in the query; preserve wire compatibility."
       @query("$to")
       To?: utcDateTime;
 
@@ -1042,6 +1131,7 @@ interface PolicyStatesOperationGroup {
        * OData filter expression.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForSubscription POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       Filter?: string;
     }
@@ -1068,6 +1158,7 @@ interface PolicyStatesOperationGroup {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -1076,6 +1167,7 @@ interface PolicyStatesOperationGroup {
        * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $orderby in the query; preserve wire compatibility."
       @query("$orderby")
       OrderBy?: string;
 
@@ -1083,6 +1175,7 @@ interface PolicyStatesOperationGroup {
        * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $select in the query; preserve wire compatibility."
       @query("$select")
       Select?: string;
 
@@ -1090,6 +1183,7 @@ interface PolicyStatesOperationGroup {
        * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $from in the query; preserve wire compatibility."
       @query("$from")
       From?: utcDateTime;
 
@@ -1097,6 +1191,7 @@ interface PolicyStatesOperationGroup {
        * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $to in the query; preserve wire compatibility."
       @query("$to")
       To?: utcDateTime;
 
@@ -1104,6 +1199,7 @@ interface PolicyStatesOperationGroup {
        * OData filter expression.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       Filter?: string;
 
@@ -1111,6 +1207,7 @@ interface PolicyStatesOperationGroup {
        * OData apply expression for aggregations.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $apply in the query; preserve wire compatibility."
       @query("$apply")
       Apply?: string;
 
@@ -1118,6 +1215,7 @@ interface PolicyStatesOperationGroup {
        * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroup POST contract uses $skiptoken in the query; preserve wire compatibility."
       @query("$skiptoken")
       SkipToken?: string;
     }
@@ -1143,6 +1241,7 @@ interface PolicyStatesOperationGroup {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForResourceGroup POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -1151,6 +1250,7 @@ interface PolicyStatesOperationGroup {
        * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForResourceGroup POST contract uses $from in the query; preserve wire compatibility."
       @query("$from")
       From?: utcDateTime;
 
@@ -1158,6 +1258,7 @@ interface PolicyStatesOperationGroup {
        * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForResourceGroup POST contract uses $to in the query; preserve wire compatibility."
       @query("$to")
       To?: utcDateTime;
 
@@ -1165,6 +1266,7 @@ interface PolicyStatesOperationGroup {
        * OData filter expression.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForResourceGroup POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       Filter?: string;
     }
@@ -1194,6 +1296,7 @@ interface PolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1202,6 +1305,7 @@ interface PolicyStatesOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -1209,6 +1313,7 @@ interface PolicyStatesOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -1216,6 +1321,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -1223,6 +1329,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -1230,6 +1337,7 @@ interface PolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -1237,6 +1345,7 @@ interface PolicyStatesOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
 
@@ -1244,6 +1353,7 @@ interface PolicyStatesOperationGroup {
      * The $expand query parameter. For example, to expand components use $expand=components
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $expand in the query; preserve wire compatibility."
     @query("$expand")
     Expand?: string,
 
@@ -1251,6 +1361,7 @@ interface PolicyStatesOperationGroup {
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $skiptoken in the query; preserve wire compatibility."
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyStatesQueryResults | QueryFailure;
@@ -1278,6 +1389,7 @@ interface PolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForResource POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1286,6 +1398,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForResource POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -1293,6 +1406,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForResource POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -1300,6 +1414,7 @@ interface PolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForResource POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
   ): SummarizeResults | QueryFailure;
@@ -1393,6 +1508,7 @@ interface PolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1401,6 +1517,7 @@ interface PolicyStatesOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -1408,6 +1525,7 @@ interface PolicyStatesOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -1415,6 +1533,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -1422,6 +1541,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -1429,6 +1549,7 @@ interface PolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -1436,6 +1557,7 @@ interface PolicyStatesOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
 
@@ -1443,6 +1565,7 @@ interface PolicyStatesOperationGroup {
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicySetDefinition POST contract uses $skiptoken in the query; preserve wire compatibility."
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyStatesQueryResults | QueryFailure;
@@ -1478,6 +1601,7 @@ interface PolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForPolicySetDefinition POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1486,6 +1610,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForPolicySetDefinition POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -1493,6 +1618,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForPolicySetDefinition POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -1500,6 +1626,7 @@ interface PolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForPolicySetDefinition POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
   ): SummarizeResults | QueryFailure;
@@ -1536,6 +1663,7 @@ interface PolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1544,6 +1672,7 @@ interface PolicyStatesOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -1551,6 +1680,7 @@ interface PolicyStatesOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -1558,6 +1688,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -1565,6 +1696,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -1572,6 +1704,7 @@ interface PolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -1579,6 +1712,7 @@ interface PolicyStatesOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
 
@@ -1586,6 +1720,7 @@ interface PolicyStatesOperationGroup {
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $skiptoken in the query; preserve wire compatibility."
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyStatesQueryResults | QueryFailure;
@@ -1621,6 +1756,7 @@ interface PolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForPolicyDefinition POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1629,6 +1765,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForPolicyDefinition POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -1636,6 +1773,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForPolicyDefinition POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -1643,6 +1781,7 @@ interface PolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForPolicyDefinition POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
   ): SummarizeResults | QueryFailure;
@@ -1679,6 +1818,7 @@ interface PolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1687,6 +1827,7 @@ interface PolicyStatesOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -1694,6 +1835,7 @@ interface PolicyStatesOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -1701,6 +1843,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -1708,6 +1851,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -1715,6 +1859,7 @@ interface PolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -1722,6 +1867,7 @@ interface PolicyStatesOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
 
@@ -1729,6 +1875,7 @@ interface PolicyStatesOperationGroup {
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $skiptoken in the query; preserve wire compatibility."
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyStatesQueryResults | QueryFailure;
@@ -1764,6 +1911,7 @@ interface PolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForSubscriptionLevelPolicyAssignment POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1772,6 +1920,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForSubscriptionLevelPolicyAssignment POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -1779,6 +1928,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForSubscriptionLevelPolicyAssignment POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -1786,6 +1936,7 @@ interface PolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForSubscriptionLevelPolicyAssignment POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
   ): SummarizeResults | QueryFailure;
@@ -1828,6 +1979,7 @@ interface PolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1836,6 +1988,7 @@ interface PolicyStatesOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -1843,6 +1996,7 @@ interface PolicyStatesOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -1850,6 +2004,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -1857,6 +2012,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -1864,6 +2020,7 @@ interface PolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -1871,6 +2028,7 @@ interface PolicyStatesOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
 
@@ -1878,6 +2036,7 @@ interface PolicyStatesOperationGroup {
      * Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $skiptoken in the query; preserve wire compatibility."
     @query("$skiptoken")
     SkipToken?: string,
   ): PolicyStatesQueryResults | QueryFailure;
@@ -1919,6 +2078,7 @@ interface PolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForResourceGroupLevelPolicyAssignment POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -1927,6 +2087,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForResourceGroupLevelPolicyAssignment POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -1934,6 +2095,7 @@ interface PolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForResourceGroupLevelPolicyAssignment POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -1941,6 +2103,7 @@ interface PolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing summarizeForResourceGroupLevelPolicyAssignment POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
   ): SummarizeResults | QueryFailure;
@@ -2043,6 +2206,7 @@ alias listQueryResultsParameters = {
    * Maximum number of records to return.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using listQueryResultsParameters.Top retain the $top query parameter for wire compatibility."
   @query("$top")
   @minValue(0)
   Top?: int32;
@@ -2051,6 +2215,7 @@ alias listQueryResultsParameters = {
    * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using listQueryResultsParameters.OrderBy retain the $orderby query parameter for wire compatibility."
   @query("$orderby")
   OrderBy?: string;
 
@@ -2058,6 +2223,7 @@ alias listQueryResultsParameters = {
    * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using listQueryResultsParameters.Select retain the $select query parameter for wire compatibility."
   @query("$select")
   Select?: string;
 
@@ -2065,6 +2231,7 @@ alias listQueryResultsParameters = {
    * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using listQueryResultsParameters.From retain the $from query parameter for wire compatibility."
   @query("$from")
   From?: utcDateTime;
 
@@ -2072,6 +2239,7 @@ alias listQueryResultsParameters = {
    * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using listQueryResultsParameters.To retain the $to query parameter for wire compatibility."
   @query("$to")
   To?: utcDateTime;
 
@@ -2079,6 +2247,7 @@ alias listQueryResultsParameters = {
    * OData filter expression.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using listQueryResultsParameters.Filter retain the $filter query parameter for wire compatibility."
   @query("$filter")
   Filter?: string;
 
@@ -2086,6 +2255,7 @@ alias listQueryResultsParameters = {
    * OData apply expression for aggregations.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using listQueryResultsParameters.Apply retain the $apply query parameter for wire compatibility."
   @query("$apply")
   Apply?: string;
 };
@@ -2137,6 +2307,7 @@ interface ComponentPolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -2145,6 +2316,7 @@ interface ComponentPolicyStatesOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -2152,6 +2324,7 @@ interface ComponentPolicyStatesOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -2159,6 +2332,7 @@ interface ComponentPolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -2166,6 +2340,7 @@ interface ComponentPolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -2173,6 +2348,7 @@ interface ComponentPolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -2180,6 +2356,7 @@ interface ComponentPolicyStatesOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
 
@@ -2187,6 +2364,7 @@ interface ComponentPolicyStatesOperationGroup {
      * The $expand query parameter.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResource POST contract uses $expand in the query; preserve wire compatibility."
     @query("$expand")
     Expand?: string,
   ): ComponentPolicyStatesQueryResults | ErrorResponse;
@@ -2224,6 +2402,7 @@ interface ComponentPolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -2232,6 +2411,7 @@ interface ComponentPolicyStatesOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -2239,6 +2419,7 @@ interface ComponentPolicyStatesOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -2246,6 +2427,7 @@ interface ComponentPolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -2253,6 +2435,7 @@ interface ComponentPolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -2260,6 +2443,7 @@ interface ComponentPolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -2267,6 +2451,7 @@ interface ComponentPolicyStatesOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForPolicyDefinition POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
   ): ComponentPolicyStatesQueryResults | ErrorResponse;
@@ -2304,6 +2489,7 @@ interface ComponentPolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -2312,6 +2498,7 @@ interface ComponentPolicyStatesOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -2319,6 +2506,7 @@ interface ComponentPolicyStatesOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -2326,6 +2514,7 @@ interface ComponentPolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -2333,6 +2522,7 @@ interface ComponentPolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -2340,6 +2530,7 @@ interface ComponentPolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -2347,6 +2538,7 @@ interface ComponentPolicyStatesOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForSubscriptionLevelPolicyAssignment POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
   ): ComponentPolicyStatesQueryResults | ErrorResponse;
@@ -2390,6 +2582,7 @@ interface ComponentPolicyStatesOperationGroup {
      * Maximum number of records to return.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $top in the query; preserve wire compatibility."
     @query("$top")
     @minValue(0)
     Top?: int32,
@@ -2398,6 +2591,7 @@ interface ComponentPolicyStatesOperationGroup {
      * Ordering expression using OData notation. One or more comma-separated column names with an optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $orderby in the query; preserve wire compatibility."
     @query("$orderby")
     OrderBy?: string,
 
@@ -2405,6 +2599,7 @@ interface ComponentPolicyStatesOperationGroup {
      * Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId".
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $select in the query; preserve wire compatibility."
     @query("$select")
     Select?: string,
 
@@ -2412,6 +2607,7 @@ interface ComponentPolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $from in the query; preserve wire compatibility."
     @query("$from")
     From?: utcDateTime,
 
@@ -2419,6 +2615,7 @@ interface ComponentPolicyStatesOperationGroup {
      * ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $to in the query; preserve wire compatibility."
     @query("$to")
     To?: utcDateTime,
 
@@ -2426,6 +2623,7 @@ interface ComponentPolicyStatesOperationGroup {
      * OData filter expression.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     Filter?: string,
 
@@ -2433,6 +2631,7 @@ interface ComponentPolicyStatesOperationGroup {
      * OData apply expression for aggregations.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listQueryResultsForResourceGroupLevelPolicyAssignment POST contract uses $apply in the query; preserve wire compatibility."
     @query("$apply")
     Apply?: string,
   ): ComponentPolicyStatesQueryResults | ErrorResponse;

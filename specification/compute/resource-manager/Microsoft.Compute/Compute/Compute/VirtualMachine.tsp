@@ -250,12 +250,14 @@ interface VirtualMachines {
       /**
        * Optional parameter to hibernate a virtual machine.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing deallocate POST contract uses hibernate in the query; preserve wire compatibility."
       @query("hibernate")
       hibernate?: boolean;
 
       /**
        * Optional parameter to force deallocate a virtual machine. Default is false.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing deallocate POST contract uses forceDeallocate in the query; preserve wire compatibility."
       @added(Versions.v2025_11_01)
       @query("forceDeallocate")
       forceDeallocate?: boolean;
@@ -309,6 +311,7 @@ interface VirtualMachines {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing powerOff POST contract uses skipShutdown in the query; preserve wire compatibility."
       @query("skipShutdown")
       skipShutdown?: boolean;
     },
@@ -368,6 +371,7 @@ interface VirtualMachines {
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing retrieveBootDiagnosticsData POST contract uses sasUriExpirationTimeInMinutes in the query; preserve wire compatibility."
       @query("sasUriExpirationTimeInMinutes")
       sasUriExpirationTimeInMinutes?: int32;
     }

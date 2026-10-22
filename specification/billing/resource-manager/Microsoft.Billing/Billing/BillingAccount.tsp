@@ -131,6 +131,7 @@ interface BillingAccounts {
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listInvoiceSectionsByCreateSubscriptionPermission POST contract uses filter in the query; preserve wire compatibility."
       @query("filter")
       filter?: string;
     }
@@ -464,12 +465,14 @@ alias BillingRoleAssignmentsResolveByBillingAccountParameters = {
   /**
    * Resolves the scope display name for each of the role assignments.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using BillingRoleAssignmentsResolveByBillingAccountParameters.resolveScopeDisplayNames retain the resolveScopeDisplayNames query parameter for wire compatibility."
   @query("resolveScopeDisplayNames")
   resolveScopeDisplayNames?: boolean = false;
 
   /**
    * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using BillingRoleAssignmentsResolveByBillingAccountParameters.filter retain the filter query parameter for wire compatibility."
   @query("filter")
   filter?: string;
 };

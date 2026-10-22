@@ -128,12 +128,14 @@ interface VirtualNetworks {
       /**
        * The max number of ip addresses to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listDdosProtectionStatus POST contract uses top in the query; preserve wire compatibility."
       @query("top")
       top?: int32;
 
       /**
        * The skipToken that is given with nextLink.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listDdosProtectionStatus POST contract uses skipToken in the query; preserve wire compatibility."
       @query("skipToken")
       skipToken?: string;
     },
@@ -179,6 +181,7 @@ interface EffectiveConfigurations {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listNetworkManagerEffectiveConnectivityConfigurations POST contract uses $top in the query; preserve wire compatibility."
       @maxValue(20)
       @minValue(1)
       @query("$top")
@@ -201,6 +204,7 @@ interface EffectiveConfigurations {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listNetworkManagerEffectiveSecurityAdminRules POST contract uses $top in the query; preserve wire compatibility."
       @maxValue(20)
       @minValue(1)
       @query("$top")

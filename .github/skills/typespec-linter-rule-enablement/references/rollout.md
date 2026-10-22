@@ -143,6 +143,19 @@ Compilation can rewrite generated files. Use a dedicated checkout, compare
 against the base, and do not commit incidental generated output. If parallelizing,
 use separate checkouts for workers, then validate the combined candidate.
 
+The existing **TypeSpec Validation - All** workflow can execute a full pass:
+its `Compile` check invokes the same locked `tsp compile --warn-as-error`
+command (and `--no-emit` for client-only entries) in isolated shard checkouts.
+Use only completed runs for the exact enabled candidate and target ref. Fetch
+all three shards per operating system and reconcile their logged project paths
+against the complete manifest, including grouping configs; missing, duplicate,
+skipped, or truncated coverage is not a successful pass. Read the actual
+`pass`/`fail`/`skip` project groups and preserve failing compiler output. A
+failure before `Compile` is not proof that a project compiled. This is direct
+candidate compilation by CI, not harvesting a pre-enable baseline. It avoids
+duplicating a long local full scan when equivalent complete candidate evidence
+already exists. Local targeted compilation remains required after source edits.
+
 ## 5. Suppress and recompile until all projects pass
 
 For every failing project, collect exact rule IDs, files, locations, messages,
@@ -169,6 +182,23 @@ suppresses the diagnostic. Inspect decorators, template diagnostic targets, and
 shared declarations. Do not attach directives to the preceding declaration or
 an unrelated `@@` augment decorator, blanket-suppress namespaces/projects, or
 widen suppression scope to hide future violations.
+
+Repeated parameter names and documentation are common. Match the enclosing
+operation/template argument as well as the property, and inspect the resulting
+diff before compiling. A textual match on `@query` or its doc comment can select
+a GET/DELETE parameter instead of the reported POST parameter; remove any such
+misplaced directive rather than leaving an unreported suppression behind.
+
+For a large diagnostic set, deduplicate by rule, source file, location, and
+message across versions, consuming projects, and operating systems. Use the
+diagnostic revision's source and compiler AST to identify each exact property
+and its enclosing operation or named parameter model. Insert directives
+bottom-up, before that property's decorators, preserving docs and existing
+directives. Never reuse stale line numbers against an already edited file.
+Before applying bulk edits, verify all targets and reasons; afterward, parse
+again and prove removing only the new directives recovers the original source
+byte-for-byte. For shared parameter properties, retain explicit consumer
+coverage in the final full pass and document the shared declaration scope.
 
 Repeat the following loop:
 

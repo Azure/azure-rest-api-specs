@@ -111,18 +111,21 @@ interface LookingGlassOperationGroup {
       /**
        * The command to be executed: ping, traceroute, bgpRoute.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing invoke POST contract uses command in the query; preserve wire compatibility."
       @query("command")
       command: LookingGlassCommand;
 
       /**
        * The type of the source: Edge site or Azure Region.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing invoke POST contract uses sourceType in the query; preserve wire compatibility."
       @query("sourceType")
       sourceType: LookingGlassSourceType;
 
       /**
        * The location of the source.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing invoke POST contract uses sourceLocation in the query; preserve wire compatibility."
       @query("sourceLocation")
       sourceLocation: string;
 
@@ -130,6 +133,7 @@ interface LookingGlassOperationGroup {
        * The IP address of the destination.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing parameter name"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing invoke POST contract uses destinationIP in the query; preserve wire compatibility."
       @query("destinationIP")
       destinationIP: string;
     }

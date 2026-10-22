@@ -105,6 +105,7 @@ interface Appliances {
       /**
        * This sets the type of artifact being returned, when empty no artifact endpoint is returned.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listKeys POST contract uses artifactType in the query; preserve wire compatibility."
       @query("artifactType")
       artifactType?: string;
     }

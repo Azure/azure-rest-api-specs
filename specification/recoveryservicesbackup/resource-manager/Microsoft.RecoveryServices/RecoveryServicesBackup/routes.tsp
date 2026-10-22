@@ -198,6 +198,7 @@ interface Jobs {
     /**
      * OData filter options.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing export POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     $filter?: string,
   ): ArmAcceptedResponse<ExtraHeaders = {}> | ErrorResponse;
@@ -463,6 +464,7 @@ interface ProtectionContainersOperationGroup {
     /**
      * OData filter options.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing refresh POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     $filter?: string,
   ): ArmAcceptedResponse<ExtraHeaders = {}> | ErrorResponse;

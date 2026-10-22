@@ -94,6 +94,7 @@ interface RecommendationRules {
       /**
        * Site name
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing disableRecommendationForHostingEnvironment POST contract uses environmentName in the query; preserve wire compatibility."
       @query("environmentName")
       environmentName: string;
     },

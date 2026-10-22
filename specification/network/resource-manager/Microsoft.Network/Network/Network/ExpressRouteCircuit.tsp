@@ -131,12 +131,14 @@ interface ExpressRouteCircuits {
       /**
        * The type of failover test.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getCircuitLinkFailoverAllTestsDetails POST contract uses failoverTestType in the query; preserve wire compatibility."
       @query("failoverTestType")
       failoverTestType?: string;
 
       /**
        * Fetch only the latest tests.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getCircuitLinkFailoverAllTestsDetails POST contract uses fetchLatest in the query; preserve wire compatibility."
       @query("fetchLatest")
       fetchLatest?: boolean;
     },
@@ -162,18 +164,21 @@ interface ExpressRouteCircuits {
       /**
        * The link type.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getCircuitLinkFailoverSingleTestDetails POST contract uses linkType in the query; preserve wire compatibility."
       @query("linkType")
       linkType: string;
 
       /**
        * The circuit test category.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getCircuitLinkFailoverSingleTestDetails POST contract uses circuitTestCategory in the query; preserve wire compatibility."
       @query("circuitTestCategory")
       circuitTestCategory: string;
 
       /**
        * The unique Guid value which identifies the test.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getCircuitLinkFailoverSingleTestDetails POST contract uses failoverTestId in the query; preserve wire compatibility."
       @query("failoverTestId")
       failoverTestId: string;
     },
@@ -199,12 +204,14 @@ interface ExpressRouteCircuits {
       /**
        * The link type.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing startCircuitLinkFailoverTest POST contract uses linkType in the query; preserve wire compatibility."
       @query("linkType")
       linkType: string;
 
       /**
        * The circuit test category.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing startCircuitLinkFailoverTest POST contract uses circuitTestCategory in the query; preserve wire compatibility."
       @query("circuitTestCategory")
       circuitTestCategory: string;
     },

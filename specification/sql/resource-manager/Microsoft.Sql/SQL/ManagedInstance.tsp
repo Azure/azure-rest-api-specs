@@ -167,6 +167,7 @@ interface ManagedInstances {
       /**
        * The type of replica to be failed over.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing failover POST contract uses replicaType in the query; preserve wire compatibility."
       @query("replicaType")
       replicaType?: ReplicaType;
     }

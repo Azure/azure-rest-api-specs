@@ -111,6 +111,7 @@ interface FirewallResources {
       /**
        * email address on behalf of which this API called
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getSupportInfo POST contract uses email in the query; preserve wire compatibility."
       @query("email")
       email?: string;
     }
