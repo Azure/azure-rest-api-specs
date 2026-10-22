@@ -71,6 +71,16 @@ scalar StageMapResourceId
     }
   ]>;
 
+alias StageMapManagementGroupParameters = {
+  ...ApiVersionParameter;
+  ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
+};
+
+@@segment(
+  StageMapManagementGroupParameters.managementGroupName,
+  "providers/Microsoft.Management/managementGroups"
+);
+
 @armResourceOperations
 @doc("The operations of the StageMap resource.")
 interface StageMaps {
@@ -85,10 +95,7 @@ interface StageMaps {
 
   getAtManagementGroupLevel is ArmResourceRead<
     StageMap,
-    {
-      ...ApiVersionParameter;
-      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
-    }
+    StageMapManagementGroupParameters
   >;
 
   createOrUpdate is ArmResourceCreateOrReplaceSync<StageMap>;
@@ -102,10 +109,7 @@ interface StageMaps {
 
   createOrUpdateAtManagementGroupLevel is ArmResourceCreateOrReplaceSync<
     StageMap,
-    {
-      ...ApiVersionParameter;
-      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
-    }
+    StageMapManagementGroupParameters
   >;
 
   update is ArmCustomPatchSync<
@@ -133,10 +137,7 @@ interface StageMaps {
       StageMap,
       ParameterPatchProperties<StageMapProperties>
     >,
-    {
-      ...ApiVersionParameter;
-      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
-    }
+    StageMapManagementGroupParameters
   >;
 
   delete is ArmResourceDeleteSync<StageMap>;
@@ -150,10 +151,7 @@ interface StageMaps {
 
   deleteAtManagementGroupLevel is ArmResourceDeleteSync<
     StageMap,
-    {
-      ...ApiVersionParameter;
-      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
-    }
+    StageMapManagementGroupParameters
   >;
 
   list is ArmResourceListAtScope<StageMap>;
@@ -161,9 +159,6 @@ interface StageMaps {
 
   listByManagementGroup is ArmResourceListByParent<
     StageMap,
-    {
-      ...ApiVersionParameter;
-      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
-    }
+    StageMapManagementGroupParameters
   >;
 }
