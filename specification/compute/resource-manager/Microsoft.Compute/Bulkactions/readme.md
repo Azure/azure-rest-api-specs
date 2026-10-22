@@ -66,6 +66,28 @@ This GA version excludes scheduled actions, occurrences, and their extension res
 ```yaml $(tag) == 'package-2026-10-06'
 input-file:
   - stable/2026-10-06/Bulkactions.json
+suppressions:
+  - code: PostResponseCodes
+    reason: >
+      BulkCreateCustom cancellation uses the native ArmResourceActionNoResponseContentAsync
+      template, which emits 202 and default responses with no success body. Completion is
+      monitored through the Location URL; there is no final resource payload on this POST.
+    from: Bulkactions.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/{name}/cancel"].post
+  - code: PathForNestedResource
+    reason: >
+      This GET is the Location status-monitor endpoint for BulkCreateCustom, not a nested
+      ARM resource. The asyncOperationId identifies an asynchronous operation, so the
+      bulkCreateCustom collection segment does not require a resource-name segment.
+    from: Bulkactions.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/asyncOperations/{asyncOperationId}"]
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: >
+      ListBulkOperationErrorsResponse is the pageable result of the listBulkOperationErrors
+      action, not an ARM resource. Its value contains per-VM operation results; resource
+      envelope fields id, name, and type do not apply to the paging envelope.
+    from: Bulkactions.json
+    where: $.definitions.ListBulkOperationErrorsResponse
 ```
 
 ### Tag: package-2026-10-06-preview
