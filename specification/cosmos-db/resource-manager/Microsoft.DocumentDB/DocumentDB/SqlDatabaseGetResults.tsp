@@ -79,6 +79,23 @@ interface SqlResources {
     SqlDatabaseGetResults,
     Response = ArmResponse<SqlDatabaseListResult>
   >;
+
+  /**
+   * Merges the partitions of a SQL database
+   */
+  @removed(Versions.v2026_07_15)
+  @added(Versions.v2026_04_01_preview)
+  @action("partitionMerge")
+  sqlDatabasePartitionMerge is ArmResourceActionAsyncBase<
+    SqlDatabaseGetResults,
+    MergeParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SqlDatabaseGetResults>,
+    Response =
+      | ArmResponse<PhysicalPartitionStorageInfoCollection>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection> &
+          Azure.Core.Foundations.RetryAfterHeader>,
+    Error = CloudError
+  >;
 }
 
 @@doc(SqlDatabaseGetResults.name, "Cosmos DB database name.");
@@ -89,6 +106,10 @@ interface SqlResources {
 @@doc(
   SqlResources.createUpdateSqlDatabase::parameters.resource,
   "The parameters to provide for the current SQL database."
+);
+@@doc(
+  SqlResources.sqlDatabasePartitionMerge::parameters.body,
+  "The parameters for the merge operation."
 );
 @@visibility(
   SqlDatabaseGetResults.location,

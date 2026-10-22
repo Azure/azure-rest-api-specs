@@ -84,6 +84,24 @@ interface MongoDBDatabaseGetResultsOperationGroup {
     MongoDBDatabaseGetResults,
     Response = ArmResponse<MongoDBDatabaseListResult>
   >;
+
+  /**
+   * Merges the partitions of a MongoDB database
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_07_15)
+  @added(Versions.v2026_04_01_preview)
+  @action("partitionMerge")
+  mongoDBDatabasePartitionMerge is ArmResourceActionAsyncBase<
+    MongoDBDatabaseGetResults,
+    MergeParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<PhysicalPartitionStorageInfoCollection>,
+    Response =
+      | ArmResponse<PhysicalPartitionStorageInfoCollection>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection> &
+          Azure.Core.Foundations.RetryAfterHeader>,
+    Error = CloudError
+  >;
 }
 
 @@doc(MongoDBDatabaseGetResults.name, "Cosmos DB database name.");
@@ -94,6 +112,10 @@ interface MongoDBDatabaseGetResultsOperationGroup {
 @@doc(
   MongoDBDatabaseGetResultsOperationGroup.createUpdateMongoDBDatabase::parameters.resource,
   "The parameters to provide for the current MongoDB database."
+);
+@@doc(
+  MongoDBDatabaseGetResultsOperationGroup.mongoDBDatabasePartitionMerge::parameters.body,
+  "The parameters for the merge operation."
 );
 @@visibility(
   MongoDBDatabaseGetResults.location,

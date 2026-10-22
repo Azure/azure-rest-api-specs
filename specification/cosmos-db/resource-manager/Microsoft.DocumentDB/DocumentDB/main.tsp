@@ -13,7 +13,10 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
+import "./ChaosFaultResource.tsp";
+import "./CopyJobGetResults.tsp";
 import "./DatabaseAccountGetResults.tsp";
+import "./GraphResourceGetResults.tsp";
 import "./SqlDatabaseGetResults.tsp";
 import "./ThroughputSettingsGetResults.tsp";
 import "./ClientEncryptionKeyGetResults.tsp";
@@ -32,6 +35,7 @@ import "./TableRoleDefinitionResource.tsp";
 import "./TableRoleAssignmentResource.tsp";
 import "./CassandraKeyspaceGetResults.tsp";
 import "./CassandraTableGetResults.tsp";
+import "./CassandraViewGetResults.tsp";
 import "./CassandraRoleDefinitionResource.tsp";
 import "./CassandraRoleAssignmentResource.tsp";
 import "./GremlinDatabaseGetResults.tsp";
@@ -39,18 +43,25 @@ import "./GremlinGraphGetResults.tsp";
 import "./GremlinRoleDefinitionResource.tsp";
 import "./GremlinRoleAssignmentResource.tsp";
 import "./LocationGetResult.tsp";
+import "./DataTransferJobGetResults.tsp";
 import "./ClusterResource.tsp";
+import "./GarnetClusterResource.tsp";
 import "./DataCenterResource.tsp";
+import "./NetworkSecurityPerimeterConfiguration.tsp";
 import "./NotebookWorkspace.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./PrivateLinkResource.tsp";
 import "./RestorableDatabaseAccountGetResult.tsp";
 import "./ServiceResource.tsp";
+import "./ThroughputPoolResource.tsp";
+import "./ThroughputPoolAccountResource.tsp";
 import "./MongoMIRoleDefinitionResource.tsp";
 import "./MongoMIRoleAssignmentResource.tsp";
 import "./FleetResource.tsp";
+import "./FleetAnalyticsResource.tsp";
 import "./FleetspaceResource.tsp";
 import "./FleetspaceAccountResource.tsp";
+import "./SoftDeletedResources.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 
@@ -79,6 +90,13 @@ enum Versions {
    * The 2026-03-15 API version.
    */
   v2026_03_15: "2026-03-15",
+
+  /**
+   * The 2026-04-01-preview API version.
+   */
+  #suppress "@azure-tools/typespec-azure-core/preview-version-last-member" "Retain the published preview contract; preview-only declarations are removed in 2026-07-15 with @removed."
+  @Azure.Core.previewVersion
+  v2026_04_01_preview: "2026-04-01-preview",
 
   /**
    * The 2026-07-15 API version.

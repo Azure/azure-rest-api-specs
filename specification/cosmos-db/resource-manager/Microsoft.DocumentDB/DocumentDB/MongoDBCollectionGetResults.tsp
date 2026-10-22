@@ -85,6 +85,24 @@ interface MongoDBCollectionGetResultsOperationGroup {
   >;
 
   /**
+   * Merges the partitions of a MongoDB Collection
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_07_15)
+  @added(Versions.v2026_04_01_preview)
+  @action("partitionMerge")
+  listMongoDBCollectionPartitionMerge is ArmResourceActionAsyncBase<
+    MongoDBCollectionGetResults,
+    MergeParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MongoDBCollectionGetResults>,
+    Response =
+      | ArmResponse<PhysicalPartitionStorageInfoCollection>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection> &
+          Azure.Core.Foundations.RetryAfterHeader>,
+    Error = CloudError
+  >;
+
+  /**
    * Retrieves continuous backup information for a Mongodb collection.
    */
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
@@ -103,6 +121,10 @@ interface MongoDBCollectionGetResultsOperationGroup {
 @@doc(
   MongoDBCollectionGetResultsOperationGroup.createUpdateMongoDBCollection::parameters.resource,
   "The parameters to provide for the current MongoDB Collection."
+);
+@@doc(
+  MongoDBCollectionGetResultsOperationGroup.listMongoDBCollectionPartitionMerge::parameters.body,
+  "The parameters for the merge operation."
 );
 @@doc(
   MongoDBCollectionGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
