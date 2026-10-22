@@ -122,7 +122,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ScheduledActionResourcesListResult"
+              "$ref": "#/definitions/RecurringBulkActionResourcesListResult"
             }
           },
           "default": {
@@ -456,7 +456,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ScheduledActionListResult"
+              "$ref": "#/definitions/RecurringBulkActionListResult"
             }
           },
           "default": {
@@ -1857,7 +1857,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ScheduledActionListResult"
+              "$ref": "#/definitions/RecurringBulkActionListResult"
             }
           },
           "default": {
@@ -1907,7 +1907,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ScheduledAction"
+              "$ref": "#/definitions/RecurringBulkAction"
             }
           },
           "default": {
@@ -1953,7 +1953,7 @@
             "description": "The recurring bulk action to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ScheduledAction"
+              "$ref": "#/definitions/RecurringBulkAction"
             }
           }
         ],
@@ -1961,13 +1961,13 @@
           "200": {
             "description": "The replacement request was accepted. Poll Azure-AsyncOperation until the operation reaches a terminal state. The resource can report Updating while schedule reconciliation is pending.",
             "schema": {
-              "$ref": "#/definitions/ScheduledAction"
+              "$ref": "#/definitions/RecurringBulkAction"
             }
           },
           "201": {
             "description": "The recurring bulk action was created. Poll Azure-AsyncOperation for operation status. Creation can complete immediately with provisioningState Succeeded; this does not mean its occurrences have run.",
             "schema": {
-              "$ref": "#/definitions/ScheduledAction"
+              "$ref": "#/definitions/RecurringBulkAction"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -2028,7 +2028,7 @@
             "description": "The recurring bulk action properties to update. Omitted properties keep their current values.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ScheduledActionUpdate"
+              "$ref": "#/definitions/RecurringBulkActionUpdate"
             }
           }
         ],
@@ -2036,7 +2036,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ScheduledAction"
+              "$ref": "#/definitions/RecurringBulkAction"
             }
           },
           "202": {
@@ -6556,7 +6556,22 @@
         ]
       }
     },
-    "RecurringScheduledActionsDeadlineType": {
+    "RecurringBulkAction": {
+      "type": "object",
+      "description": "A recurring bulk action that operates on specified compute resources.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecurringBulkActionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "RecurringBulkActionDeadlineType": {
       "type": "string",
       "description": "How the scheduled time is interpreted for the resource operation.",
       "enum": [
@@ -6565,7 +6580,7 @@
         "CompleteBy"
       ],
       "x-ms-enum": {
-        "name": "RecurringScheduledActionsDeadlineType",
+        "name": "RecurringBulkActionDeadlineType",
         "modelAsString": true,
         "values": [
           {
@@ -6586,7 +6601,7 @@
         ]
       }
     },
-    "RecurringScheduledActionsExecutionParameters": {
+    "RecurringBulkActionExecutionParameters": {
       "type": "object",
       "description": "Settings that control how the recurring bulk action operation is executed.",
       "properties": {
@@ -6595,12 +6610,152 @@
           "description": "The preferred optimization goal."
         },
         "retryPolicy": {
-          "$ref": "#/definitions/RecurringScheduledActionsRetryPolicy",
+          "$ref": "#/definitions/RecurringBulkActionRetryPolicy",
           "description": "The retry settings for failed resource operations."
         }
       }
     },
-    "RecurringScheduledActionsProvisioningState": {
+    "RecurringBulkActionExtensionProperties": {
+      "type": "object",
+      "description": "A recurring bulk action associated with a specific compute resource.",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of compute resource targeted by the action."
+        },
+        "actionType": {
+          "$ref": "#/definitions/RecurringBulkActionType",
+          "description": "The operation performed on the targeted resources."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time, including UTC offset, when the schedule becomes active."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time, including UTC offset, after which no new occurrences are scheduled."
+        },
+        "schedule": {
+          "$ref": "#/definitions/RecurringBulkActionSchedule",
+          "description": "The recurring schedule."
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "Notification settings that apply to the recurring bulk action.",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Indicates whether new occurrences are disabled."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/RecurringBulkActionProvisioningState",
+          "description": "Read-only. The provisioning state of the recurring bulk action.",
+          "readOnly": true
+        },
+        "resourceNotificationSettings": {
+          "type": "array",
+          "description": "Read-only. Notification settings that apply only to the specified compute resource.",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        }
+      },
+      "required": [
+        "resourceType",
+        "actionType",
+        "startTime",
+        "schedule",
+        "notificationSettings"
+      ]
+    },
+    "RecurringBulkActionListResult": {
+      "type": "object",
+      "description": "The response of a RecurringBulkAction list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RecurringBulkAction items on this page",
+          "items": {
+            "$ref": "#/definitions/RecurringBulkAction"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RecurringBulkActionProperties": {
+      "type": "object",
+      "description": "Configuration and status of a recurring bulk action.",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of compute resource targeted by the action."
+        },
+        "actionType": {
+          "$ref": "#/definitions/RecurringBulkActionType",
+          "description": "The operation performed on the targeted resources."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time, including UTC offset, when the schedule becomes active."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time, including UTC offset, after which no new occurrences are scheduled."
+        },
+        "schedule": {
+          "$ref": "#/definitions/RecurringBulkActionSchedule",
+          "description": "The recurring schedule."
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "Notification settings that apply to the recurring bulk action.",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Indicates whether new occurrences are disabled."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/RecurringBulkActionProvisioningState",
+          "description": "Read-only. The provisioning state of the recurring bulk action.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceType",
+        "actionType",
+        "startTime",
+        "schedule",
+        "notificationSettings"
+      ]
+    },
+    "RecurringBulkActionProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the latest create, update, or delete operation on the recurring bulk action. Other actions have their own operation status and do not change this value.",
       "enum": [
@@ -6610,7 +6765,7 @@
         "Deleting"
       ],
       "x-ms-enum": {
-        "name": "RecurringScheduledActionsProvisioningState",
+        "name": "RecurringBulkActionProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -6637,7 +6792,71 @@
       },
       "readOnly": true
     },
-    "RecurringScheduledActionsResourceOperationType": {
+    "RecurringBulkActionResource": {
+      "type": "object",
+      "description": "A compute resource associated with a recurring bulk action.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Read-only. The name of the association resource.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Read-only. The Azure resource ID of the association resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Read-only. The Azure resource type of the associated resource.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "$ref": "#/definitions/ValidScheduledActionResourceId",
+          "description": "The Azure resource ID of the targeted virtual machine."
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "Notification settings that apply only to this resource.",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "resourceId"
+      ]
+    },
+    "RecurringBulkActionResourceInput": {
+      "type": "object",
+      "description": "A compute resource to add to or update in a recurring bulk action.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/ValidScheduledActionResourceId",
+          "description": "The Azure resource ID of the targeted virtual machine."
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "Notification settings that apply only to this resource.",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "RecurringBulkActionResourceOperationType": {
       "type": "string",
       "description": "The operation to retry when a recurring bulk action fails.",
       "enum": [
@@ -6649,7 +6868,7 @@
         "Delete"
       ],
       "x-ms-enum": {
-        "name": "RecurringScheduledActionsResourceOperationType",
+        "name": "RecurringBulkActionResourceOperationType",
         "modelAsString": true,
         "values": [
           {
@@ -6685,7 +6904,43 @@
         ]
       }
     },
-    "RecurringScheduledActionsRetryPolicy": {
+    "RecurringBulkActionResources": {
+      "type": "object",
+      "description": "A recurring bulk action associated with a specific compute resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecurringBulkActionExtensionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RecurringBulkActionResourcesListResult": {
+      "type": "object",
+      "description": "The response of a RecurringBulkActionResources list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RecurringBulkActionResources items on this page",
+          "items": {
+            "$ref": "#/definitions/RecurringBulkActionResources"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RecurringBulkActionRetryPolicy": {
       "type": "object",
       "description": "Retry settings for a recurring bulk action operation.",
       "properties": {
@@ -6700,8 +6955,189 @@
           "description": "The time window, in minutes, during which retries can occur."
         },
         "onFailureAction": {
-          "$ref": "#/definitions/RecurringScheduledActionsResourceOperationType",
+          "$ref": "#/definitions/RecurringBulkActionResourceOperationType",
           "description": "The resource operation to retry after a failure."
+        }
+      }
+    },
+    "RecurringBulkActionSchedule": {
+      "type": "object",
+      "description": "The recurring schedule for a recurring bulk action.",
+      "properties": {
+        "scheduledTime": {
+          "type": "string",
+          "format": "time",
+          "description": "The local time of day when the recurring bulk action runs."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone used to interpret the scheduled time."
+        },
+        "requestedWeekDays": {
+          "type": "array",
+          "description": "The days of the week when the action runs. An empty array means every day of the week.",
+          "items": {
+            "$ref": "#/definitions/WeekDay"
+          }
+        },
+        "requestedMonths": {
+          "type": "array",
+          "description": "The months when the action runs. An empty array means every month.",
+          "items": {
+            "$ref": "#/definitions/Month"
+          }
+        },
+        "requestedDaysOfTheMonth": {
+          "type": "array",
+          "description": "The calendar days when the action runs. An empty array means every day of the month.",
+          "items": {
+            "$ref": "#/definitions/DayOfTheMonth"
+          }
+        },
+        "executionParameters": {
+          "$ref": "#/definitions/RecurringBulkActionExecutionParameters",
+          "description": "Settings that control operation execution and retries."
+        },
+        "deadlineType": {
+          "$ref": "#/definitions/RecurringBulkActionDeadlineType",
+          "description": "How the scheduled time is interpreted. The default is `InitiateAt`."
+        }
+      },
+      "required": [
+        "scheduledTime",
+        "timeZone"
+      ]
+    },
+    "RecurringBulkActionScheduleUpdate": {
+      "type": "object",
+      "description": "Schedule changes for a recurring bulk action. Omitted properties keep their current values.",
+      "properties": {
+        "scheduledTime": {
+          "type": "string",
+          "format": "time",
+          "description": "The local time of day when the recurring bulk action runs."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone used to interpret the scheduled time."
+        },
+        "requestedWeekDays": {
+          "type": "array",
+          "description": "The days of the week when the action runs. An empty array means every day of the week.",
+          "items": {
+            "$ref": "#/definitions/WeekDay"
+          }
+        },
+        "requestedMonths": {
+          "type": "array",
+          "description": "The months when the action runs. An empty array means every month.",
+          "items": {
+            "$ref": "#/definitions/Month"
+          }
+        },
+        "requestedDaysOfTheMonth": {
+          "type": "array",
+          "description": "The calendar days when the action runs. An empty array means every day of the month.",
+          "items": {
+            "$ref": "#/definitions/DayOfTheMonth"
+          }
+        },
+        "executionParameters": {
+          "$ref": "#/definitions/RecurringBulkActionExecutionParameters",
+          "description": "Settings that control operation execution and retries."
+        },
+        "deadlineType": {
+          "$ref": "#/definitions/RecurringBulkActionDeadlineType",
+          "description": "How the scheduled time is interpreted. The default is `InitiateAt`."
+        }
+      }
+    },
+    "RecurringBulkActionType": {
+      "type": "string",
+      "description": "The operation performed by the recurring bulk action.",
+      "enum": [
+        "Start",
+        "Deallocate",
+        "Hibernate"
+      ],
+      "x-ms-enum": {
+        "name": "RecurringBulkActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Start",
+            "value": "Start",
+            "description": "Starts the targeted resources."
+          },
+          {
+            "name": "Deallocate",
+            "value": "Deallocate",
+            "description": "Deallocates the targeted resources."
+          },
+          {
+            "name": "Hibernate",
+            "value": "Hibernate",
+            "description": "Hibernates the targeted resources."
+          }
+        ]
+      }
+    },
+    "RecurringBulkActionUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the RecurringBulkAction.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/RecurringBulkActionUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "RecurringBulkActionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the RecurringBulkAction.",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of compute resource targeted by the action."
+        },
+        "actionType": {
+          "$ref": "#/definitions/RecurringBulkActionType",
+          "description": "The operation performed on the targeted resources."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time, including UTC offset, when the schedule becomes active."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time, including UTC offset, after which no new occurrences are scheduled."
+        },
+        "schedule": {
+          "$ref": "#/definitions/RecurringBulkActionScheduleUpdate",
+          "description": "Changes to the recurring schedule."
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "Notification settings that apply to the recurring bulk action.",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Indicates whether new occurrences are disabled."
         }
       }
     },
@@ -6794,7 +7230,7 @@
           "type": "array",
           "description": "The list of resources to attach to the recurring bulk action.",
           "items": {
-            "$ref": "#/definitions/ScheduledActionResourceInput"
+            "$ref": "#/definitions/RecurringBulkActionResourceInput"
           },
           "x-ms-identifiers": [
             "resourceId"
@@ -6843,7 +7279,7 @@
           "type": "array",
           "description": "The compute resources associated with the recurring bulk action.",
           "items": {
-            "$ref": "#/definitions/ScheduledActionResource"
+            "$ref": "#/definitions/RecurringBulkActionResource"
           },
           "x-ms-identifiers": []
         },
@@ -7230,7 +7666,7 @@
           "type": "array",
           "description": "The resources and notification settings to update.",
           "items": {
-            "$ref": "#/definitions/ScheduledActionResourceInput"
+            "$ref": "#/definitions/RecurringBulkActionResourceInput"
           },
           "x-ms-identifiers": [
             "resourceId"
@@ -7469,350 +7905,6 @@
         }
       }
     },
-    "ScheduledAction": {
-      "type": "object",
-      "description": "A recurring bulk action that operates on specified compute resources.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ScheduledActionProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "ScheduledActionListResult": {
-      "type": "object",
-      "description": "The response of a ScheduledAction list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ScheduledAction items on this page",
-          "items": {
-            "$ref": "#/definitions/ScheduledAction"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ScheduledActionProperties": {
-      "type": "object",
-      "description": "Configuration and status of a recurring bulk action.",
-      "properties": {
-        "resourceType": {
-          "$ref": "#/definitions/ResourceType",
-          "description": "The type of compute resource targeted by the action."
-        },
-        "actionType": {
-          "$ref": "#/definitions/ScheduledActionType",
-          "description": "The operation performed on the targeted resources."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time, including UTC offset, when the schedule becomes active."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time, including UTC offset, after which no new occurrences are scheduled."
-        },
-        "schedule": {
-          "$ref": "#/definitions/ScheduledActionsSchedule",
-          "description": "The recurring schedule."
-        },
-        "notificationSettings": {
-          "type": "array",
-          "description": "Notification settings that apply to the recurring bulk action.",
-          "items": {
-            "$ref": "#/definitions/NotificationProperties"
-          },
-          "x-ms-identifiers": [
-            "destination"
-          ]
-        },
-        "disabled": {
-          "type": "boolean",
-          "description": "Indicates whether new occurrences are disabled."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/RecurringScheduledActionsProvisioningState",
-          "description": "Read-only. The provisioning state of the recurring bulk action.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "resourceType",
-        "actionType",
-        "startTime",
-        "schedule",
-        "notificationSettings"
-      ]
-    },
-    "ScheduledActionResource": {
-      "type": "object",
-      "description": "A compute resource associated with a recurring bulk action.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Read-only. The name of the association resource.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Read-only. The Azure resource ID of the association resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Read-only. The Azure resource type of the associated resource.",
-          "readOnly": true
-        },
-        "resourceId": {
-          "$ref": "#/definitions/ValidScheduledActionResourceId",
-          "description": "The Azure resource ID of the targeted virtual machine."
-        },
-        "notificationSettings": {
-          "type": "array",
-          "description": "Notification settings that apply only to this resource.",
-          "items": {
-            "$ref": "#/definitions/NotificationProperties"
-          },
-          "x-ms-identifiers": [
-            "destination"
-          ]
-        }
-      },
-      "required": [
-        "name",
-        "id",
-        "resourceId"
-      ]
-    },
-    "ScheduledActionResourceInput": {
-      "type": "object",
-      "description": "A compute resource to add to or update in a recurring bulk action.",
-      "properties": {
-        "resourceId": {
-          "$ref": "#/definitions/ValidScheduledActionResourceId",
-          "description": "The Azure resource ID of the targeted virtual machine."
-        },
-        "notificationSettings": {
-          "type": "array",
-          "description": "Notification settings that apply only to this resource.",
-          "items": {
-            "$ref": "#/definitions/NotificationProperties"
-          },
-          "x-ms-identifiers": [
-            "destination"
-          ]
-        }
-      },
-      "required": [
-        "resourceId"
-      ]
-    },
-    "ScheduledActionResources": {
-      "type": "object",
-      "description": "A recurring bulk action associated with a specific compute resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ScheduledActionsExtensionProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ScheduledActionResourcesListResult": {
-      "type": "object",
-      "description": "The response of a ScheduledActionResources list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ScheduledActionResources items on this page",
-          "items": {
-            "$ref": "#/definitions/ScheduledActionResources"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ScheduledActionType": {
-      "type": "string",
-      "description": "The operation performed by the recurring bulk action.",
-      "enum": [
-        "Start",
-        "Deallocate",
-        "Hibernate"
-      ],
-      "x-ms-enum": {
-        "name": "ScheduledActionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Start",
-            "value": "Start",
-            "description": "Starts the targeted resources."
-          },
-          {
-            "name": "Deallocate",
-            "value": "Deallocate",
-            "description": "Deallocates the targeted resources."
-          },
-          {
-            "name": "Hibernate",
-            "value": "Hibernate",
-            "description": "Hibernates the targeted resources."
-          }
-        ]
-      }
-    },
-    "ScheduledActionUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the ScheduledAction.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/ScheduledActionUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "ScheduledActionUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the ScheduledAction.",
-      "properties": {
-        "resourceType": {
-          "$ref": "#/definitions/ResourceType",
-          "description": "The type of compute resource targeted by the action."
-        },
-        "actionType": {
-          "$ref": "#/definitions/ScheduledActionType",
-          "description": "The operation performed on the targeted resources."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time, including UTC offset, when the schedule becomes active."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time, including UTC offset, after which no new occurrences are scheduled."
-        },
-        "schedule": {
-          "$ref": "#/definitions/ScheduledActionsScheduleUpdate",
-          "description": "Changes to the recurring schedule."
-        },
-        "notificationSettings": {
-          "type": "array",
-          "description": "Notification settings that apply to the recurring bulk action.",
-          "items": {
-            "$ref": "#/definitions/NotificationProperties"
-          },
-          "x-ms-identifiers": [
-            "destination"
-          ]
-        },
-        "disabled": {
-          "type": "boolean",
-          "description": "Indicates whether new occurrences are disabled."
-        }
-      }
-    },
-    "ScheduledActionsExtensionProperties": {
-      "type": "object",
-      "description": "A recurring bulk action associated with a specific compute resource.",
-      "properties": {
-        "resourceType": {
-          "$ref": "#/definitions/ResourceType",
-          "description": "The type of compute resource targeted by the action."
-        },
-        "actionType": {
-          "$ref": "#/definitions/ScheduledActionType",
-          "description": "The operation performed on the targeted resources."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time, including UTC offset, when the schedule becomes active."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time, including UTC offset, after which no new occurrences are scheduled."
-        },
-        "schedule": {
-          "$ref": "#/definitions/ScheduledActionsSchedule",
-          "description": "The recurring schedule."
-        },
-        "notificationSettings": {
-          "type": "array",
-          "description": "Notification settings that apply to the recurring bulk action.",
-          "items": {
-            "$ref": "#/definitions/NotificationProperties"
-          },
-          "x-ms-identifiers": [
-            "destination"
-          ]
-        },
-        "disabled": {
-          "type": "boolean",
-          "description": "Indicates whether new occurrences are disabled."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/RecurringScheduledActionsProvisioningState",
-          "description": "Read-only. The provisioning state of the recurring bulk action.",
-          "readOnly": true
-        },
-        "resourceNotificationSettings": {
-          "type": "array",
-          "description": "Read-only. Notification settings that apply only to the specified compute resource.",
-          "items": {
-            "$ref": "#/definitions/NotificationProperties"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "destination"
-          ]
-        }
-      },
-      "required": [
-        "resourceType",
-        "actionType",
-        "startTime",
-        "schedule",
-        "notificationSettings"
-      ]
-    },
     "ScheduledActionsId": {
       "type": "string",
       "format": "arm-id",
@@ -7823,98 +7915,6 @@
             "type": "Microsoft.Compute/scheduledActions"
           }
         ]
-      }
-    },
-    "ScheduledActionsSchedule": {
-      "type": "object",
-      "description": "The recurring schedule for a recurring bulk action.",
-      "properties": {
-        "scheduledTime": {
-          "type": "string",
-          "format": "time",
-          "description": "The local time of day when the recurring bulk action runs."
-        },
-        "timeZone": {
-          "type": "string",
-          "description": "The time zone used to interpret the scheduled time."
-        },
-        "requestedWeekDays": {
-          "type": "array",
-          "description": "The days of the week when the action runs. An empty array means every day of the week.",
-          "items": {
-            "$ref": "#/definitions/WeekDay"
-          }
-        },
-        "requestedMonths": {
-          "type": "array",
-          "description": "The months when the action runs. An empty array means every month.",
-          "items": {
-            "$ref": "#/definitions/Month"
-          }
-        },
-        "requestedDaysOfTheMonth": {
-          "type": "array",
-          "description": "The calendar days when the action runs. An empty array means every day of the month.",
-          "items": {
-            "$ref": "#/definitions/DayOfTheMonth"
-          }
-        },
-        "executionParameters": {
-          "$ref": "#/definitions/RecurringScheduledActionsExecutionParameters",
-          "description": "Settings that control operation execution and retries."
-        },
-        "deadlineType": {
-          "$ref": "#/definitions/RecurringScheduledActionsDeadlineType",
-          "description": "How the scheduled time is interpreted. The default is `InitiateAt`."
-        }
-      },
-      "required": [
-        "scheduledTime",
-        "timeZone"
-      ]
-    },
-    "ScheduledActionsScheduleUpdate": {
-      "type": "object",
-      "description": "Schedule changes for a recurring bulk action. Omitted properties keep their current values.",
-      "properties": {
-        "scheduledTime": {
-          "type": "string",
-          "format": "time",
-          "description": "The local time of day when the recurring bulk action runs."
-        },
-        "timeZone": {
-          "type": "string",
-          "description": "The time zone used to interpret the scheduled time."
-        },
-        "requestedWeekDays": {
-          "type": "array",
-          "description": "The days of the week when the action runs. An empty array means every day of the week.",
-          "items": {
-            "$ref": "#/definitions/WeekDay"
-          }
-        },
-        "requestedMonths": {
-          "type": "array",
-          "description": "The months when the action runs. An empty array means every month.",
-          "items": {
-            "$ref": "#/definitions/Month"
-          }
-        },
-        "requestedDaysOfTheMonth": {
-          "type": "array",
-          "description": "The calendar days when the action runs. An empty array means every day of the month.",
-          "items": {
-            "$ref": "#/definitions/DayOfTheMonth"
-          }
-        },
-        "executionParameters": {
-          "$ref": "#/definitions/RecurringScheduledActionsExecutionParameters",
-          "description": "Settings that control operation execution and retries."
-        },
-        "deadlineType": {
-          "$ref": "#/definitions/RecurringScheduledActionsDeadlineType",
-          "description": "How the scheduled time is interpreted. The default is `InitiateAt`."
-        }
       }
     },
     "ScheduledEventsAdditionalPublishingTargets": {
