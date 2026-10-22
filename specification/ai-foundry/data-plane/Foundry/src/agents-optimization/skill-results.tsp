@@ -151,21 +151,6 @@ model AgentOptimizationSkillResolvedContext {
   agent_skills?: AgentOptimizationFoundrySkillReference[];
 }
 
-/** Logical skill pipeline steps, in execution order. */
-union AgentOptimizationSkillExecutionStepName {
-  string,
-  resolve_inputs: "resolve_inputs",
-  collect_traces: "collect_traces",
-  collect_feedback: "collect_feedback",
-  prepare_evidence: "prepare_evidence",
-  classify_traces: "classify_traces",
-  derive_learnings: "derive_learnings",
-  plan_changes: "plan_changes",
-  generate_skills: "generate_skills",
-  validate_skills: "validate_skills",
-  publish_skills: "publish_skills",
-}
-
 /** Latest recorded state of a logical execution step. */
 union AgentOptimizationSkillExecutionStepStatus {
   string,
@@ -179,8 +164,8 @@ union AgentOptimizationSkillExecutionStepStatus {
 
 /** Latest recorded state of one logical step in the persisted execution snapshot. */
 model AgentOptimizationSkillExecutionStep {
-  @doc("Logical step name, unique within the snapshot.")
-  name: AgentOptimizationSkillExecutionStepName;
+  @doc("Service-authored logical step name, unique within the snapshot, for example resolve_inputs, collect_traces, or publish_skills. Consumers must tolerate unfamiliar names.")
+  name: string;
 
   @doc("Recorded step state.")
   status: AgentOptimizationSkillExecutionStepStatus;
