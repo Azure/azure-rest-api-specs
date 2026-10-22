@@ -15,21 +15,21 @@ namespace WebPubSubChat.PythonCustomizations {
 
   /** Properties supplied when creating or replacing a role. */
   model ChatRoleCreateOrReplace {
-    ...Create<{
+    ...CreateOrUpdate<{
       ...WebPubSubChat.ChatRole;
     }>;
   }
 
   /** Properties supplied when creating or replacing a room. */
   model ChatRoomCreateOrReplace {
-    ...Create<{
+    ...CreateOrUpdate<{
       ...WebPubSubChat.ChatRoom;
     }>;
   }
 
   /** Properties supplied when creating or replacing a room member. */
   model ChatRoomMemberCreateOrReplace {
-    ...Create<{
+    ...CreateOrUpdate<{
       ...WebPubSubChat.ChatRoomMember;
     }>;
   }
@@ -37,14 +37,14 @@ namespace WebPubSubChat.PythonCustomizations {
   /** Properties supplied when creating or replacing a user. */
   @discriminator("kind")
   model ChatUserCreateOrReplace {
-    ...Create<{
+    ...CreateOrUpdate<{
       ...WebPubSubChat.ChatUser;
     }>;
   }
 
   /** Properties supplied when creating or replacing a human user. */
   model HumanChatUserCreateOrReplace extends ChatUserCreateOrReplace {
-    ...Create<{
+    ...CreateOrUpdate<{
       ...WebPubSubChat.HumanChatUser;
     }>;
   }
@@ -65,8 +65,10 @@ namespace WebPubSubChat.PythonCustomizations {
   /** Properties supplied when creating or replacing a topic. */
   @TypeSpec.Versioning.added(WebPubSubChat.Versions.v2026_08_01_preview)
   model ChatTopicCreateOrReplace {
-    ...Create<{
-      ...WebPubSubChat.ChatTopic;
+    ...CreateOrUpdate<{
+      ...OmitProperties<WebPubSubChat.ChatTopic, "state">;
+      // State is writable on replacement, but must not be required for creation.
+      ...OptionalProperties<PickProperties<WebPubSubChat.ChatTopic, "state">>;
     }>;
   }
 
