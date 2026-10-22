@@ -468,7 +468,7 @@ and Critic verification remain the same.
    version, not to override this classification.
 6. **Skip PR-only mechanics explicitly.** Step 5.5 input is the literal
    `reconciliation skipped`. The Step 6 summary uses `Local target`, `Repository
-HEAD`, `Local snapshot`, and previous-version source instead of PR metadata.
+   HEAD`, `Local snapshot`, and previous-version source instead of PR metadata.
    Approval labels, comment telemetry, posting, thread resolution, and Step 9
    label changes are `N/A`. Omit approval-context paragraphs, posting actions,
    reconciliation tables, and per-comment telemetry markers from the local
@@ -1347,7 +1347,7 @@ must always be present; missing required fields return
 8. **Considered-and-declined list** -- prior-iteration advisory candidates the Reviewer evaluated and chose not to promote. Defaults to empty.
 9. **Graphs status** -- pass exactly one of: `Graphs: true`;
    `Graphs: false; graph-mode: fast-path`; `Graphs: false; graph-mode:
-size-downgrade`; or `Graphs: false; graph-mode: derivation-failed`. The mode
+   size-downgrade`; or `Graphs: false; graph-mode: derivation-failed`. The mode
    is required whenever graphs are false. `size-downgrade` and
    `derivation-failed` both require the Critic to re-derive the
    sensitive-data-flow view in summary form; only `derivation-failed` requires
@@ -1628,7 +1628,7 @@ Substitution rules:
   failed, use `Critic unavailable; reviewer self-check only`. Never combine
 - `<overflow disclosure>`: when the 20-comment limit excludes candidates, use
   `N additional findings were identified but not individually verified or
-posted. Key themes: [list].` Otherwise omit the line. Never combine
+  posted. Key themes: [list].` Otherwise omit the line. Never combine
   `critic-verified` with an unavailable outcome.
 - `<outcome>`: one of `converged` (Critic returned PASS or WARN with no unresolved corrections), `manual decision` (the report's `Next-step recommendation` was `MANUAL DECISION REQUIRED` and the human approved posting anyway), `override applied` (one or more findings carry a `critic: override` marker), or `unavailable -- reviewer self-check` (all Critic dispatch attempts failed; auto-unavailable fallback fired). Pick the **highest-severity** label that applies; precedence is `unavailable` > `manual decision` > `override applied` > `converged`.
 - `<short-sha>`: the **first 7 characters** of the session SHA pinned in Step 1, used as the link's display text.

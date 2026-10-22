@@ -1,0 +1,124 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "versioning"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 001003-version-required-to-optional-trigger
+    tags:
+      suite: "versioning"
+      mode: "trigger"
+    prompt: |
+      change the property age of EmployeeProperties from required to optional only for api version 2025-05-04-preview
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/001-share-version-new-feature/employee.tsp
+          dest: employee.tsp
+        - src: ../fixtures/001-share-version-new-feature/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/001-share-version-new-feature/readme.md
+          dest: readme.md
+        - src: ../fixtures/001-share-version-new-feature/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/001-share-version-new-feature/tspconfig.yaml
+          dest: tspconfig.yaml
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 001003-version-required-to-optional-forced
+    tags:
+      suite: "versioning"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author change the property age of EmployeeProperties from required to optional only for api version 2025-05-04-preview
+    environment: *shared_environment
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: "2025-05-04-preview"
+          path: "main.tsp"
+      - &file_matches_optional_property
+        type: "file-matches"
+        name: "file-matches-optional-property"
+        config:
+          pattern: "@madeOptional"
+          path: "employee.tsp"
+      - &file_matches_api_version
+        type: "file-matches"
+        name: "file-matches-api-version"
+        config:
+          pattern: "2025-05-04-preview|v2025_05_04_preview"
+          path: "employee.tsp"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 001003-version-required-to-optional-no-skill
+    tags:
+      suite: "versioning"
+      mode: "no-skill"
+    prompt: "change the property age of EmployeeProperties from required to optional only for api version 2025-05-04-preview"
+    environment: *shared_environment
+    rubric:
+      - EmployeeProperties.age becomes optional starting in API version 2025-05-04-preview using valid TypeSpec versioning.
+      - The property remains required in earlier API versions.
+      - Changes are limited to the requested optionality change and contain no unrelated edits.
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - *file_matches
+      - *file_matches_optional_property
+      - *file_matches_api_version
+      - type: "prompt"
+        config:
+          prompt: "Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent."
+          model: "gpt-5.6-sol"
+          scoring: "scale_1_10"
+          threshold: 0.88
+    constraints:
+      max_turns: 6
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.15
+    prompt: 0.15
+    run-command: 0.15
+    skill-invocation: 0.15
+    file-matches: 0.4
+  threshold: 0.96

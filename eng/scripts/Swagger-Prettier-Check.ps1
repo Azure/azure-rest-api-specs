@@ -8,11 +8,12 @@ Set-StrictMode -Version 3
 . $PSScriptRoot/../common/scripts/logging.ps1
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
+$prettierScript = Join-Path $repoPath "node_modules/prettier/bin/prettier.cjs"
 $pathsWithErrors = @()
 
 if ($CheckAll) {
-  LogInfo "pnpm exec prettier --check $repoPath/specification/**/*.json --log-level debug"
-  pnpm exec prettier --check $repoPath/specification/**/*.json --log-level debug
+  LogInfo "node $prettierScript --check $repoPath/specification/**/*.json --log-level debug"
+  node $prettierScript --check "$repoPath/specification/**/*.json" --log-level debug
   if ($LASTEXITCODE) {
     $pathsWithErrors += "$repoPath/specification/**/*.json"
   }
@@ -25,8 +26,8 @@ else
   }
   else {
     foreach ($file in $filesToCheck) {
-      LogInfo "pnpm exec prettier --check $repoPath/$file --log-level debug"
-      pnpm exec prettier --check $repoPath/$file --log-level debug
+      LogInfo "node $prettierScript --check $repoPath/$file --log-level debug"
+      node $prettierScript --check "$repoPath/$file" --log-level debug
       if ($LASTEXITCODE) {
         $pathsWithErrors += $file
       }

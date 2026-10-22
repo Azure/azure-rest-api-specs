@@ -1,8 +1,9 @@
+import type { GitHub } from "../github.ts";
 /**
  * Remove a label from an issue/PR, ignoring 404 (label not present).
  */
 export async function removeLabelIfPresent(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: GitHub,
   owner: string,
   repo: string,
   issueNumber: number,

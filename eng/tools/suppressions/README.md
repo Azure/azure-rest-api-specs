@@ -52,6 +52,24 @@ Example `suppressions.yaml`:
   paths: [Automation.Management]
 ```
 
+Once a service contains TypeSpec-generated Swagger, `TypeSpecRequirement` suppressions cannot
+permit new handwritten API versions. Normally, an API version is new if its directory does not
+exist on `main`. Changes within existing API versions, including newly added Swagger files,
+retain their previous behavior and applicable suppressions.
+
+Folder migrations can retain version-specific suppressions for historical Swagger. A Git-detected
+Swagger rename establishes a relocated API version when it keeps the version identifier within
+the same specification area and API plane. This also permits moves between `preview` and `stable`
+without changing the version identifier. Copies, version changes, and moves across specification
+areas or API planes do not qualify.
+
+Migration is detected across `preview` and `stable` under the directory immediately containing
+those folders, independently of other services and API planes. The check looks for generated
+Swagger in the current checkout.
+
+Services without generated Swagger retain the existing requirement: new handwritten API versions
+require a version-specific suppression. Suppressions for other tools are unaffected.
+
 ### Command line
 
 Build the package (see [contributing](#folder-structure--contributing)), then query suppressions
@@ -165,6 +183,6 @@ Useful scripts (run from `eng/tools/suppressions`):
 | `pnpm test`             | Run tests in watch mode (vitest).                         |
 | `pnpm run test:ci`      | Run tests once with coverage.                             |
 | `pnpm run lint`         | Run oxlint with the repository-root configuration.        |
-| `pnpm run format`       | Auto-format with prettier.                                |
+| `pnpm run format`       | Format with the repository-root Oxfmt configuration.      |
 | `pnpm run format:check` | Check formatting without writing.                         |
 | `pnpm run check`        | Run build, lint, format check, and tests (the full gate). |

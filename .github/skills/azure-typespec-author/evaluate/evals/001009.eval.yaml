@@ -1,0 +1,128 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "versioning"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 001009-version-model-property-required-trigger
+    tags:
+      suite: "versioning"
+      mode: "trigger"
+    prompt: |
+      In the TypeSpec project at `./Microsoft.Widget/Widget/`, make the `email` property required in EmployeeProperties only for version `2025-05-04-preview`.
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/001-share-version-new-feature/employee.tsp
+          dest: Microsoft.Widget/Widget/employee.tsp
+        - src: ../fixtures/001-share-version-new-feature/main.tsp
+          dest: Microsoft.Widget/Widget/main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/001-share-version-new-feature/readme.md
+          dest: Microsoft.Widget/Widget/readme.md
+        - src: ../fixtures/001-share-version-new-feature/shared.tsp
+          dest: Microsoft.Widget/Widget/shared.tsp
+        - src: ../fixtures/001-share-version-new-feature/tspconfig.yaml
+          dest: Microsoft.Widget/Widget/tspconfig.yaml
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 001009-version-model-property-required-forced
+    tags:
+      suite: "versioning"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author In the TypeSpec project at `./Microsoft.Widget/Widget/`, make the `email` property required in EmployeeProperties only for version `2025-05-04-preview`.
+    environment: *shared_environment
+    rubric: &shared_rubric
+      - EmployeeProperties.email becomes required only in API version 2025-05-04-preview using valid TypeSpec versioning.
+      - The email property remains optional in earlier API versions.
+      - The target project compiles and changes are limited to the requested property requirement.
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          sub_path: "Microsoft.Widget/Widget"
+          expected_exit_code: 0
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: "v2025_05_04_preview"
+          path: "Microsoft.Widget/Widget/main.tsp"
+      - &file_matches_required_property
+        type: "file-matches"
+        name: "file-matches-required-property"
+        config:
+          pattern: '@madeRequired\((?:Microsoft\.Widget\.)?Versions\.v2025_05_04_preview\)'
+          path: "Microsoft.Widget/Widget/employee.tsp"
+      - &file_matches_property
+        type: "file-matches"
+        name: "file-matches-property"
+        config:
+          pattern: "email: string;"
+          path: "Microsoft.Widget/Widget/employee.tsp"
+      - &prompt
+        type: "prompt"
+        config:
+          threshold: 0.88
+          model: "gpt-5.6-sol"
+          scoring: "scale_1_10"
+          prompt: "Verify email property made required only in new version, only scoped edits made. Verify compile the project and fix any compilation errors if present."
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 001009-version-model-property-required-no-skill
+    tags:
+      suite: "versioning"
+      mode: "no-skill"
+    prompt: "In the TypeSpec project at `./Microsoft.Widget/Widget/`, make the `email` property required in EmployeeProperties only for version `2025-05-04-preview`."
+    environment: *shared_environment
+    rubric: *shared_rubric
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - *file_matches
+      - *file_matches_required_property
+      - *file_matches_property
+      - *prompt
+    constraints:
+      max_turns: 6
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.125
+    prompt: 0.125
+    run-command: 0.125
+    skill-invocation: 0.125
+    file-matches: 0.5
+  threshold: 0.97

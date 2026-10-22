@@ -3,6 +3,8 @@
  * inside the 'Next Steps to Merge' comment.
  **/
 
+import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
+
 export function checkAndDiagramTsg(step: number): string {
   return defaultTsg + `. In addition, ` + diagramTsg(step);
 }
@@ -29,6 +31,17 @@ export const typeSpecRequirementArmTsg =
   `refer to <a href="https://aka.ms/rphelp">aka.ms/rphelp</a>`;
 
 export const typeSpecRequirementDataPlaneTsg = typeSpecRequirementArmTsg;
+
+export const specChangePoliciesTsg =
+  `Inspect the check's diagnostics for TypeSpec usage requirements and SDK API-version policies. ` +
+  `Run <code>pnpm spec-change-policies --base=&lt;base&gt; --head=&lt;head&gt;</code> using the ` +
+  `comparison commits from the failed check. ` +
+  `See the <a href="https://github.com/Azure/azure-rest-api-specs/tree/main/eng/tools/spec-change-policies">Spec Change Policies guide</a>.`;
+
+export const typeSpecSuppressionsTsg =
+  `This PR introduced TypeSpec suppressions that require review. Inspect the suppression details in the ` +
+  `<b>TypeSpec suppressions requiring review</b> comment on this PR and ask the appropriate reviewer to apply the ` +
+  `<code>${TYPESPEC_SUPPRESSIONS_APPROVED_LABEL}</code> label. ${diagramTsg(1, true)}.`;
 
 export const brchHref = href("aka.ms/brch", "https://aka.ms/brch");
 

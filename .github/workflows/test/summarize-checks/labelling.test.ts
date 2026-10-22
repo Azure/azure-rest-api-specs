@@ -374,6 +374,50 @@ describe("update labels", () => {
       },
     },
     {
+      description: "Shouldn't add SuppressionReviewRequired for a data-plane PR",
+      existingLabels: ["other-label"],
+      expectedLabelsToAdd: ["TypeSpec", "data-plane"],
+      expectedLabelsToRemove: [],
+      impactAssessment: {
+        suppressionReviewRequired: true,
+        rpaasChange: false,
+        newRP: false,
+        rpaasRPMissing: false,
+        rpaasRpNotInPrivateRepo: false,
+        resourceManagerRequired: false,
+        dataPlaneRequired: true,
+        typeSpecChanged: true,
+        isNewApiVersion: false,
+        isDraft: false,
+        targetBranch: "main",
+      },
+    },
+    {
+      description: "Should add SuppressionReviewRequired for a resource-manager PR",
+      existingLabels: ["other-label"],
+      expectedLabelsToAdd: [
+        "ARMReview",
+        "resource-manager",
+        "TypeSpec",
+        "SuppressionReviewRequired",
+        "WaitForARMFeedback",
+      ],
+      expectedLabelsToRemove: [],
+      impactAssessment: {
+        suppressionReviewRequired: true,
+        rpaasChange: false,
+        newRP: false,
+        rpaasRPMissing: false,
+        rpaasRpNotInPrivateRepo: false,
+        resourceManagerRequired: true,
+        dataPlaneRequired: false,
+        typeSpecChanged: true,
+        isNewApiVersion: false,
+        isDraft: false,
+        targetBranch: "main",
+      },
+    },
+    {
       description:
         "Should add data-plane-review-requested even when an (unverified) sign-off label is already present",
       existingLabels: ["other-label", "data-plane-review-signoff"],
@@ -455,6 +499,47 @@ describe("update labels", () => {
       expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
     },
   );
+
+  it.each([
+    { targetBranch: "release-network-2025-03-01", requiresReview: true },
+    { targetBranch: "ARMCoreRPDev", requiresReview: true },
+    { targetBranch: "feature/release-network-2025-03-01", requiresReview: false },
+    { targetBranch: "feature/main", requiresReview: false },
+    { targetBranch: "RPSaaSMaster-feature", requiresReview: false },
+    { targetBranch: "ARMCoreRPDev-feature", requiresReview: false },
+    // cspell:ignore releas
+    { targetBranch: "releas", requiresReview: false },
+  ])(
+    "only adds review labels for release branches: $targetBranch",
+    ({ targetBranch, requiresReview }) => {
+      const labelContext = updateLabels([], {
+        ...testCases[0].impactAssessment,
+        isNewApiVersion: true,
+        targetBranch,
+      });
+
+      expect([...labelContext.toAdd].sort()).toEqual(
+        (requiresReview
+          ? ["ARMReview", "TypeSpec", "WaitForARMFeedback", "new-api-version", "resource-manager"]
+          : ["TypeSpec", "resource-manager"]
+        ).sort(),
+      );
+      expect([...labelContext.toRemove]).toEqual([]);
+    },
+  );
+
+  it("does not request data-plane review for a feature branch containing a release name", () => {
+    const labelContext = updateLabels([], {
+      ...testCases[0].impactAssessment,
+      resourceManagerRequired: false,
+      dataPlaneRequired: true,
+      isNewApiVersion: true,
+      targetBranch: "feature/release-network-2025-03-01",
+    });
+
+    expect([...labelContext.toAdd].sort()).toEqual(["TypeSpec", "data-plane"]);
+    expect([...labelContext.toRemove]).toEqual([]);
+  });
 });
 
 describe("ARM review process labelling", () => {

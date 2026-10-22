@@ -1664,7 +1664,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@clientName(
   MaterializedViewDefinition,
-  "CosmosDBMaterializedViewDefinition",
+  "CosmosDBMaterializedViewConfiguration",
   "csharp"
 );
 @@clientName(
@@ -1692,6 +1692,12 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "csharp"
 );
 @@clientName(CommandAsyncPostBody.readWrite, "isReadWrite", "csharp");
+@@clientName(CosmosDBMongoCollection, "CosmosDBMongoCollectionInfo", "csharp");
+@@clientName(
+  CosmosDBMongoVCoreCollection,
+  "CosmosDBMongoVCoreCollectionInfo",
+  "csharp"
+);
 @@clientName(
   CapacityModeChangeTransitionState.capacityModeTransitionBeginTimestamp,
   "capacityModeTransitionBeganOn",
@@ -1710,6 +1716,12 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 @@clientName(BackupResource.backupStartTimestamp, "backupStartedOn", "csharp");
 @@clientName(BackupResource.backupStopTimestamp, "backupStoppedOn", "csharp");
 @@clientName(BackupResource.backupExpiryTimestamp, "backupExpiresOn", "csharp");
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
 @@responseAsBool(DatabaseAccountsOperationGroup.checkNameExists, "csharp");
 
 @@alternateType(
