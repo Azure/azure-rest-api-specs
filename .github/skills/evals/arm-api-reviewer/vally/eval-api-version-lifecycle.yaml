@@ -2,7 +2,7 @@ name: arm-api-reviewer-eval-api-version-lifecycle
 description: |
   API version lifecycle and branch-placement tests (18xxxx).
   Validates private preview, public preview, in-development branch, promotion,
-  and unknown-branch behavior.
+  unknown-branch behavior, and ARM repository/branch policy.
 
 environment:
   skills:
@@ -168,3 +168,247 @@ stimuli:
     rubric:
       - Does not assume main when the branch is unknown
       - Explains that APIVER-DEV-IN-MAIN requires a known target branch
+
+  - name: private-main-is-a-read-only-mirror
+    prompt: |
+      Read the supplied lifecycle reference and review this ARM PR:
+      - Base repository: Azure/azure-rest-api-specs-pr
+      - Base branch: main
+      - Head branch: release-contoso
+      - Version path: specification/contoso/resource-manager/Microsoft.Contoso/stable/2026-01-01
+      - Release stage: GA, available to all customers without feature gating
+
+      Return the PR-level finding with a linked rule ID, severity, observed
+      target, expected branch/lifecycle, and a concise remediation.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "APIVER-PRIVATE-MAIN"
+      - type: prompt
+    rubric:
+      - Reports APIVER-PRIVATE-MAIN as Blocking because private main is a read-only mirror
+      - Recommends public Azure/azure-rest-api-specs main for GA publication and mirroring, not direct edits to private main
+      - Includes the observed base repo/branch, version path, linked rule ID, and concrete fix without fabricating a JSON path or line
+
+  - name: development-cannot-target-private-publication
+    prompt: |
+      Read the supplied lifecycle reference and review this ARM PR:
+      - Base repository: Azure/azure-rest-api-specs-pr
+      - Base branch: RPSaaSMaster
+      - Version path: specification/contoso/resource-manager/Microsoft.Contoso/preview/2026-01-01-preview
+      - Release stage: in development, no customers
+      Return the branch finding and a concise remediation.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "APIVER-ARM-BRANCH"
+      - type: prompt
+    rubric:
+      - Flags development targeting the private publication branch as Blocking
+      - Recommends private RPSaaSDev for development instead of treating no-customer work as private preview
+
+  - name: development-cannot-target-public-publication
+    prompt: |
+      Read the supplied lifecycle reference and review this ARM PR:
+      - Base repository: Azure/azure-rest-api-specs
+      - Base branch: main
+      - Version path: specification/contoso/resource-manager/Microsoft.Contoso/preview/2026-01-01-preview
+      - Release stage: in development, no customers
+      Return the branch finding and a concise remediation.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "APIVER-DEV-IN-MAIN"
+      - type: prompt
+    rubric:
+      - Flags in-development work targeting public main as Blocking
+      - Recommends public release-* for development rather than publication or calling it private preview
+
+  - name: customer-preview-cannot-use-development-branch
+    prompt: |
+      Read the supplied lifecycle reference and review this ARM PR:
+      - Base repository: Azure/azure-rest-api-specs-pr
+      - Base branch: RPSaaSDev
+      - Version path: specification/contoso/resource-manager/Microsoft.Contoso/preview/2026-01-01-preview
+      - Release stage: private preview, serving selected customers with AFEC gating
+      Return the branch finding and a concise remediation.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "APIVER-ARM-BRANCH"
+      - type: prompt
+    rubric:
+      - Flags customer-facing private preview targeting a development branch
+      - Recommends private RPSaaSMaster with preview folder/suffix and AFEC gating
+
+  - name: customer-preview-is-not-an-internal-contract
+    prompt: |
+      Read the supplied lifecycle reference and review this ARM PR:
+      - Base repository: Azure/azure-rest-api-specs-pr
+      - Base branch: InternalARMContracts
+      - Version path: specification/contoso/resource-manager/Microsoft.Contoso/preview/2026-01-01-preview
+      - Release stage: private preview with customers and AFEC gating, not internal-only
+      Return the branch finding and a concise remediation.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "APIVER-ARM-BRANCH"
+      - type: prompt
+    rubric:
+      - Explains that InternalARMContracts is for internal-only ARM contracts, not customer private previews
+      - Recommends private RPSaaSMaster for the stated private-preview lifecycle
+
+  - name: private-branch-name-in-public-repo-is-not-supported
+    prompt: |
+      Read the supplied lifecycle reference and review this ARM PR:
+      - Base repository: Azure/azure-rest-api-specs
+      - Base branch: RPSaaSMaster
+      - Version path: specification/contoso/resource-manager/Microsoft.Contoso/preview/2026-01-01-preview
+      - Release stage: public preview, all customers, no feature gating
+      Return the branch finding and a concise remediation.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "APIVER-ARM-BRANCH"
+      - type: prompt
+    rubric:
+      - Validates the repository/branch combination rather than accepting a known branch name in any repo
+      - Recommends public main for public-preview publication
+
+  - name: obsolete-branches-need-clarification
+    prompt: |
+      Read the supplied lifecycle reference. Review two independent ARM PRs to
+      Azure/azure-rest-api-specs-pr: one targets dev-contoso and the other
+      targets ARMCoreRPDev. Both change preview/2026-01-01-preview for a version
+      in development with no customers. Return a comment for each target.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "APIVER-OBSOLETE-BRANCH"
+      - type: prompt
+    rubric:
+      - Identifies both dev-contoso and ARMCoreRPDev as obsolete targets
+      - Asks for clarification and recommends the supported development target RPSaaSDev
+      - Links the supported ARM repos/branches guidance rather than suggesting reviving obsolete branches
+
+  - name: unrecognized-target-needs-clarifying-comment
+    prompt: |
+      Read the supplied lifecycle reference and review this ARM PR:
+      - Base repository: Azure/azure-rest-api-specs-pr
+      - Base branch: experimental-contoso
+      - Version path: specification/contoso/resource-manager/Microsoft.Contoso/preview/2026-01-01-preview
+      - Lifecycle: unspecified
+      The internal onboarding wiki cannot be accessed. Return the PR-level comment.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "APIVER-BRANCH-CLARIFY"
+      - type: prompt
+    rubric:
+      - Posts a clarifying comment asking for the intended lifecycle and supported onboarding workflow
+      - Links the supported GitHub repos/branches wiki and discloses that it could not be accessed
+      - Does not invent a Blocking violation, assume main, or silently accept the unknown target
+
+  - name: supported-private-targets-are-not-violations
+    prompt: |
+      Read the supplied lifecycle reference. Review three independent ARM PRs
+      targeting Azure/azure-rest-api-specs-pr:
+      1. RPSaaSMaster, private preview serving selected customers with AFEC gating,
+         preview/2026-01-01-preview.
+      2. RPSaaSDev, development/testing only with no customers,
+         preview/2026-01-01-preview.
+      3. InternalARMContracts, explicitly internal-only ARM contract, no customer
+         publication or private preview claimed.
+      State whether their target repository/branch combinations are compatible.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: prompt
+    rubric:
+      - Accepts all three targets for their stated purposes without a branch-policy finding
+      - Does not require internal-only contracts or private development to publish to public main
+
+  - name: source-branch-is-not-the-target
+    prompt: |
+      Read the supplied lifecycle reference and review this ARM PR:
+      - Base repository: Azure/azure-rest-api-specs
+      - Base branch: main
+      - Head repository: contributor/azure-rest-api-specs
+      - Head branch: dev-contoso
+      - Version path: specification/contoso/resource-manager/Microsoft.Contoso/stable/2026-01-01
+      - Release stage: GA, all customers, no feature gating
+      State whether a branch-policy finding is warranted.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: prompt
+    rubric:
+      - Uses public main as the target and reports no branch-policy violation
+      - Does not apply the obsolete dev-* target policy to a source branch or reject the contributor fork
+
+  - name: declared-version-must-match-folder
+    prompt: |
+      Read the supplied lifecycle reference and review this ARM PR:
+      - Base repository: Azure/azure-rest-api-specs
+      - Base branch: main
+      - Version path: specification/contoso/resource-manager/Microsoft.Contoso/stable/2026-01-01
+      - OpenAPI info.version: 2026-01-01-preview
+      - PR description: GA release
+      Return the lifecycle/version mismatch finding and remediation.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "APIVER-STAGE-MISMATCH"
+      - type: prompt
+    rubric:
+      - Identifies the preview info.version conflicting with the stable folder and GA claim
+      - Asks to reconcile the declared version, folder, and intended lifecycle rather than silently choosing one
+
+  - name: ga-cannot-keep-preview-folder-and-suffix
+    prompt: |
+      Read the supplied lifecycle reference and review this ARM PR:
+      - Base repository: Azure/azure-rest-api-specs
+      - Base branch: main
+      - Version path: specification/contoso/resource-manager/Microsoft.Contoso/preview/2026-01-01-preview
+      - Release stage: GA, all customers, no feature gating
+      Return the folder finding and a concise remediation.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "APIVER-GA-FOLDER"
+      - type: prompt
+    rubric:
+      - Flags the GA folder/suffix mismatch as Blocking
+      - Recommends a stable folder and a version without -preview, or clarification if public preview was intended
