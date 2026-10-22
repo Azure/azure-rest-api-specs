@@ -146,7 +146,7 @@ interface AgentPools {
   @summary("Lists bootstrap data for a FlexNode agent pool.")
   listBootstrapData is ArmResourceActionSync<
     AgentPool,
-    ListBootstrapDataRequest,
+    void,
     ArmResponse<PoolBootstrapData>
   >;
 
@@ -210,7 +210,7 @@ interface AgentPools {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Legacy routing helper consumed by the decorated AgentPools resource interface; it does not expose independent resource operations."
 interface AgentPoolsOps
   extends Azure.ResourceManager.Legacy.RoutedOperations<
       {
