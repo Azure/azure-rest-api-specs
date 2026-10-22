@@ -74,10 +74,8 @@ model GraderAzureAIEvaluator {
    * Evaluator-specific configuration applied when the evaluator is initialized.
    * Accepted parameters and defaults depend on the selected evaluator and
    * version. AI-assisted evaluators require a judge model setting, such as
-   * `model` or `deployment_name`, that identifies a compatible deployment in
-   * the current project. The judge must support the capabilities required by
-   * the evaluator, such as structured outputs or audio input. Acoustic
-   * evaluators require an audio-input judge.
+   * `model` or `deployment_name`, that identifies a chat-completion deployment
+   * in the current project. The judge model must support structured outputs.
    * Evaluators without required initialization parameters can omit this
    * property and use their documented defaults.
    */
@@ -981,16 +979,6 @@ model ModelCost {
   completion_tokens: int64;
 }
 
-/** The supported evidence modalities for an evaluation run. */
-@added(Versions.v1)
-union EvaluationInputModality {
-  /** Evaluate text. This is the default when the request omits the modality. */
-  text: "text",
-
-  /** Evaluate recordings using an audio-capable evaluator and judge. */
-  audio: "audio",
-}
-
 /**
  * An evaluation run and its current processing state and results.
  *
@@ -1015,10 +1003,6 @@ model EvalRun is OpenAI.EvalRun {
 
   /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
   evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
-
-  /** The evidence modality selected for the evaluation run. */
-  @added(Versions.v1)
-  input_modality?: EvaluationInputModality;
 
   /** Datasets produced by the evaluation run. Omitted when no datasets were generated. */
   @visibility(Lifecycle.Read)
@@ -1071,29 +1055,7 @@ model EvalRun is OpenAI.EvalRun {
 
 @@doc(
   OpenAI.CreateEvalJsonlRunDataSource,
-  """
-    A JSONL dataset used as the input to an evaluation run. See [evaluate datasets](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/cloud-evaluation-datasets?tabs=python).
-    
-    For runs with `input_modality` set to `audio`, each dataset item must include
-    a recording reference in `conversation_artifacts.audio`, for example:
-    
-    ```json
-    {
-      "conversation_artifacts": {
-        "audio": {
-          "asset_id": "azureai://accounts/<account>/projects/<project>/datasets/<dataset>/versions/1",
-          "asset_file_path": "recordings/conversation.wav"
-        }
-      }
-    }
-    ```
-    
-    Register recordings through the existing project data and storage workflows.
-    The asset ID identifies a versioned dataset containing the recording, and
-    the file path identifies a member of that asset. Recording format and media
-    requirements depend on the selected evaluator. Transcript fields can also
-    be present; an audio run does not fall back to transcript evaluation.
-    """
+  "A JSONL dataset used as the input to an evaluation run. See [evaluate datasets](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/cloud-evaluation-datasets?tabs=python)."
 );
 
 /**
@@ -1111,15 +1073,6 @@ model CreateEvalRunRequest is OpenAI.CreateEvalRunRequest {
 
   /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
   evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
-
-  /**
-   * The evidence modality to evaluate. Defaults to `text` when omitted.
-   * Use `audio` only when each dataset item provides
-   * `conversation_artifacts.audio` and the evaluator and judge support audio.
-   * The service does not fall back to a different modality.
-   */
-  @added(Versions.v1)
-  input_modality?: EvaluationInputModality = EvaluationInputModality.text;
 }
 
 model UpdateEvalParametersBody is OpenAI.UpdateEvalParametersBody {
