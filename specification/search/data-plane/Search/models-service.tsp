@@ -4569,10 +4569,18 @@ model VectorSearchTopicGraphProfile {
   /** The name of the index that stores the topics for the associated vector field. */
   indexName: string;
 
-  /** Default diversity factor for topic graph vector searches. Default is 0.1. */
+  /** Default kind of topic graph vector search to use. */
+  defaultKind: VectorSearchTopicGraphKind;
+
+  /** Default diversity factor for topic graph vector searches. Default is 0.2. */
   @minValue(0)
   @maxValue(1)
   defaultDiversityFactor?: float32;
+
+  /** Default minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000 for classic services and 500 for serverless services. */
+  @minValue(250)
+  @maxValue(10000)
+  defaultMinDiversityPoolSize?: int32;
 }
 
 /** Defines a combination of configurations to use with vector search. */
@@ -5196,7 +5204,7 @@ model SearchIndexKnowledgeSourceParameters {
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_08_01_preview)
 model SearchIndexKnowledgeSourceQueryHints {
-  /** Filter hints that identify fields and their exhaustive sets of values the query planner can use when constructing filters. */
+  /** Filter hints that identify fields and representative values the query planner can use when constructing filters. */
   filters?: SearchIndexKnowledgeSourceFilterHint[];
 
   /** Boost hints that identify conditions the query planner can use to influence document ranking. */
@@ -5212,12 +5220,30 @@ model SearchIndexKnowledgeSourceFilterHint {
   @minLength(1)
   field: string;
 
-  /** The exhaustive set of values for the field. At most 160 values, with a maximum of 128 characters per value and 2048 characters combined. */
-  @minItems(1)
-  fieldValues: string[];
+  /** The exhaustive set of values for the field. At most 160 values, with a maximum of 128 characters per value and 2048 characters combined. In versions supporting `autoConfiguration`, required unless `autoConfiguration` is specified, and mutually exclusive with it. */
+  @madeOptional(Versions.v2026_11_01_preview)
+  fieldValues?: string[];
+
+  /** Configures the service to resolve grounding values from the field's facets. Its presence enables auto-configuration. The field must be filterable and facetable. Not supported when the target index has document-level permissions or Purview sensitivity labels enabled; this restriction is validated at knowledge source create/update and knowledge base retrieval time. Mutually exclusive with `fieldValues`. Supported only in a knowledge source's stored `queryHints`, not in request-time `queryHintOverrides`. */
+  @added(Versions.v2026_11_01_preview)
+  autoConfiguration?: SearchIndexKnowledgeSourceFilterHintAutoConfiguration;
 
   /** Natural-language instructions that explain when and how to filter on the field. */
   filterInstructions?: string;
+}
+
+/** Configures automatic resolution of a filter hint's grounding values from the target index facets. */
+@added(Versions.v2026_11_01_preview)
+model SearchIndexKnowledgeSourceFilterHintAutoConfiguration {
+  /** The number of seconds resolved facet values are cached. The allowed range is 60 through 3600 on dedicated services and 60 through 900 on serverless services. When omitted, defaults to 3600 seconds on dedicated services and 900 seconds on serverless services. */
+  @minValue(60)
+  @maxValue(3600)
+  cacheTtl?: int32;
+
+  /** The maximum number of facet values to use as grounding. Defaults to 64; allowed range is 1 through 64. Values are selected in descending facet-count order, subject to the same 2048-character combined-length limit and 128-character per-value limit as manually specified filter values. */
+  @minValue(1)
+  @maxValue(64)
+  maxFacetValueCount?: int32;
 }
 
 /** A hint that identifies a condition the query planner can use to influence document ranking. */

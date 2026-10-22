@@ -3811,6 +3811,9 @@
           "SearchServiceCreateKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceWeb.json"
           },
+          "SearchServiceCreateKnowledgeSourceWithFilterAutoConfiguration": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceWithFilterAutoConfiguration.json"
+          },
           "SearchServiceCreateKnowledgeSourceWithTopicGraphs": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceWithTopicGraphs.json"
           },
@@ -7104,6 +7107,16 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.BM25Similarity"
     },
+    "BalancedVectorQueryTopicGraph": {
+      "type": "object",
+      "description": "Blends pure vector similarity with diversity-aware retrieval. Recommended default to balance diversity with relevance.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorQueryTopicGraph"
+        }
+      ],
+      "x-ms-discriminator-value": "balanced"
+    },
     "BinaryQuantizationCompression": {
       "type": "object",
       "description": "Contains configuration options specific to the binary quantization compression method used during indexing and querying.",
@@ -8439,6 +8452,25 @@
         "referencePointParameter",
         "boostingDistance"
       ]
+    },
+    "DiverseVectorQueryTopicGraph": {
+      "type": "object",
+      "description": "Uses topic graph diverse retrieval.",
+      "properties": {
+        "diversityFactor": {
+          "type": "number",
+          "format": "float",
+          "description": "The diversity factor used for topic graph diverse retrieval. If omitted, the default configured on the topic graph profile is used.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorQueryTopicGraph"
+        }
+      ],
+      "x-ms-discriminator-value": "diverse"
     },
     "DocumentDebugInfo": {
       "type": "object",
@@ -18195,6 +18227,16 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.NativeBlobSoftDeleteDeletionDetectionPolicy"
     },
+    "NoneVectorQueryTopicGraph": {
+      "type": "object",
+      "description": "Uses normal vector search without topic graph diverse retrieval.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorQueryTopicGraph"
+        }
+      ],
+      "x-ms-discriminator-value": "none"
+    },
     "OcrLineEnding": {
       "type": "string",
       "description": "Defines the sequence of characters to use between the lines of text recognized by the OCR skill. The default value is \"space\".",
@@ -21711,11 +21753,14 @@
         },
         "fieldValues": {
           "type": "array",
-          "description": "The exhaustive set of values for the field. At most 160 values, with a maximum of 128 characters per value and 2048 characters combined.",
-          "minItems": 1,
+          "description": "The exhaustive set of values for the field. At most 160 values, with a maximum of 128 characters per value and 2048 characters combined. In versions supporting `autoConfiguration`, required unless `autoConfiguration` is specified, and mutually exclusive with it.",
           "items": {
             "type": "string"
           }
+        },
+        "autoConfiguration": {
+          "$ref": "#/definitions/SearchIndexKnowledgeSourceFilterHintAutoConfiguration",
+          "description": "Configures the service to resolve grounding values from the field's facets. Its presence enables auto-configuration. The field must be filterable and facetable. Not supported when the target index has document-level permissions or Purview sensitivity labels enabled; this restriction is validated at knowledge source create/update and knowledge base retrieval time. Mutually exclusive with `fieldValues`. Supported only in a knowledge source's stored `queryHints`, not in request-time `queryHintOverrides`."
         },
         "filterInstructions": {
           "type": "string",
@@ -21723,9 +21768,28 @@
         }
       },
       "required": [
-        "field",
-        "fieldValues"
+        "field"
       ]
+    },
+    "SearchIndexKnowledgeSourceFilterHintAutoConfiguration": {
+      "type": "object",
+      "description": "Configures automatic resolution of a filter hint's grounding values from the target index facets.",
+      "properties": {
+        "cacheTtl": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of seconds resolved facet values are cached. The allowed range is 60 through 3600 on dedicated services and 60 through 900 on serverless services. When omitted, defaults to 3600 seconds on dedicated services and 900 seconds on serverless services.",
+          "minimum": 60,
+          "maximum": 3600
+        },
+        "maxFacetValueCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of facet values to use as grounding. Defaults to 64; allowed range is 1 through 64. Values are selected in descending facet-count order, subject to the same 2048-character combined-length limit and 128-character per-value limit as manually specified filter values.",
+          "minimum": 1,
+          "maximum": 64
+        }
+      }
     },
     "SearchIndexKnowledgeSourceMultiWordExpressionBoost": {
       "type": "object",
@@ -21827,7 +21891,7 @@
       "properties": {
         "filters": {
           "type": "array",
-          "description": "Filter hints that identify fields and their exhaustive sets of values the query planner can use when constructing filters.",
+          "description": "Filter hints that identify fields and representative values the query planner can use when constructing filters.",
           "items": {
             "$ref": "#/definitions/SearchIndexKnowledgeSourceFilterHint"
           }
@@ -26344,47 +26408,24 @@
     },
     "VectorQueryTopicGraph": {
       "type": "object",
-      "description": "Topic graph vector search options.",
+      "description": "Base type for topic graph vector search options.",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/VectorQueryTopicGraphKind",
+          "$ref": "#/definitions/VectorSearchTopicGraphKind",
           "description": "The kind of topic graph vector search to use."
         },
-        "diversityFactor": {
-          "type": "number",
-          "format": "float",
-          "description": "The diversity factor used for topic graph vector search. This property is only allowed when kind is diverse. If omitted, the default configured on the index is used.",
-          "minimum": 0,
-          "maximum": 1
+        "minDiversityPoolSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000 for classic services and 500 for serverless services.",
+          "minimum": 250,
+          "maximum": 10000
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ]
-    },
-    "VectorQueryTopicGraphKind": {
-      "type": "string",
-      "description": "The kind of topic graph vector search to use.",
-      "enum": [
-        "none",
-        "diverse"
-      ],
-      "x-ms-enum": {
-        "name": "VectorQueryTopicGraphKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "none",
-            "value": "none",
-            "description": "Use normal vector search when topic graph diverse retrieval is off."
-          },
-          {
-            "name": "diverse",
-            "value": "diverse",
-            "description": "Use topic graph diverse retrieval."
-          }
-        ]
-      }
     },
     "VectorSearch": {
       "type": "object",
@@ -26629,6 +26670,36 @@
         "algorithm"
       ]
     },
+    "VectorSearchTopicGraphKind": {
+      "type": "string",
+      "description": "The kind of topic graph vector search to use.",
+      "enum": [
+        "none",
+        "diverse",
+        "balanced"
+      ],
+      "x-ms-enum": {
+        "name": "VectorSearchTopicGraphKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "none",
+            "description": "Use normal vector search when topic graph diverse retrieval is off."
+          },
+          {
+            "name": "Diverse",
+            "value": "diverse",
+            "description": "Use topic graph diverse retrieval."
+          },
+          {
+            "name": "Balanced",
+            "value": "balanced",
+            "description": "Blends pure vector similarity with diversity-aware retrieval. Recommended default to balance diversity with relevance."
+          }
+        ]
+      }
+    },
     "VectorSearchTopicGraphProfile": {
       "type": "object",
       "description": "Defines a topic graph profile for a single vector field.",
@@ -26641,17 +26712,29 @@
           "type": "string",
           "description": "The name of the index that stores the topics for the associated vector field."
         },
+        "defaultKind": {
+          "$ref": "#/definitions/VectorSearchTopicGraphKind",
+          "description": "Default kind of topic graph vector search to use."
+        },
         "defaultDiversityFactor": {
           "type": "number",
           "format": "float",
-          "description": "Default diversity factor for topic graph vector searches. Default is 0.1.",
+          "description": "Default diversity factor for topic graph vector searches. Default is 0.2.",
           "minimum": 0,
           "maximum": 1
+        },
+        "defaultMinDiversityPoolSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Default minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000 for classic services and 500 for serverless services.",
+          "minimum": 250,
+          "maximum": 10000
         }
       },
       "required": [
         "name",
-        "indexName"
+        "indexName",
+        "defaultKind"
       ]
     },
     "VectorSearchVectorizer": {

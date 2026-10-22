@@ -1046,6 +1046,12 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents",
   "java"
 );
+@@clientNamespace(Search.VectorSearchTopicGraphKind, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.VectorSearchTopicGraphKind,
+  "com.azure.search.documents",
+  "java"
+);
 @@clientNamespace(Search.VectorFilterMode, "Azure.Search.Documents");
 @@clientNamespace(
   Search.VectorFilterMode,
@@ -1178,14 +1184,20 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents",
   "java"
 );
-@@clientNamespace(Search.VectorQueryTopicGraphKind, "Azure.Search.Documents");
+@@clientNamespace(Search.VectorSearchTopicGraphKind, "Azure.Search.Documents");
 @@clientNamespace(
-  Search.VectorQueryTopicGraphKind,
+  Search.VectorSearchTopicGraphKind,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.VectorThreshold, "Azure.Search.Documents");
 @@clientNamespace(Search.VectorThreshold, "com.azure.search.documents", "java");
+@@clientNamespace(Search.VectorQueryTopicGraph, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.VectorQueryTopicGraph,
+  "com.azure.search.documents",
+  "java"
+);
 @@clientNamespace(Search.HybridSearch, "Azure.Search.Documents");
 @@clientNamespace(Search.HybridSearch, "com.azure.search.documents", "java");
 @@clientNamespace(Search.SearchResult, "Azure.Search.Documents");
@@ -1324,6 +1336,30 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.SearchScoreThreshold, "Azure.Search.Documents");
 @@clientNamespace(
   Search.SearchScoreThreshold,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(Search.NoneVectorQueryTopicGraph, "Azure.Search.Documents");
+@@clientNamespace(
+  Search.NoneVectorQueryTopicGraph,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.DiverseVectorQueryTopicGraph,
+  "Azure.Search.Documents"
+);
+@@clientNamespace(
+  Search.DiverseVectorQueryTopicGraph,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.BalancedVectorQueryTopicGraph,
+  "Azure.Search.Documents"
+);
+@@clientNamespace(
+  Search.BalancedVectorQueryTopicGraph,
   "com.azure.search.documents",
   "java"
 );
@@ -2400,6 +2436,15 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(
   Search.SearchIndexKnowledgeSourceFilterHint,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceFilterHintAutoConfiguration,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceFilterHintAutoConfiguration,
   "com.azure.search.documents.indexes",
   "java"
 );

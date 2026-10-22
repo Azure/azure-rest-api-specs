@@ -35,34 +35,6 @@
           "resultsProcessing": "rerank",
           "kind": "searchIndex",
           "filterAddOn": "foo eq bar",
-          "queryHintOverrides": {
-            "filters": [
-              {
-                "field": "country",
-                "fieldValues": [
-                  "United States",
-                  "Japan",
-                  "France",
-                  "Germany"
-                ],
-                "filterInstructions": "Country associated with the document."
-              }
-            ],
-            "boosts": [
-              {
-                "kind": "fieldValue",
-                "boostInstructions": "Prefer documents matching the user's locale.",
-                "field": "language",
-                "fieldValues": [
-                  "en-US",
-                  "ja-JP",
-                  "fr-FR",
-                  "de-DE"
-                ],
-                "boost": 1.5
-              }
-            ]
-          },
           "topicGraph": {
             "kind": "diverse",
             "diversityFactor": 0.1

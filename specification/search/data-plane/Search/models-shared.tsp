@@ -48,28 +48,58 @@ union ListingSearchType {
   Prefix: "prefix",
 }
 
-/** Topic graph vector search options. */
+/** Base type for topic graph vector search options. */
+@discriminator("kind")
 @added(Versions.v2026_11_01_preview)
 model VectorQueryTopicGraph {
   /** The kind of topic graph vector search to use. */
-  kind: VectorQueryTopicGraphKind;
+  kind: VectorSearchTopicGraphKind;
 
-  /** The diversity factor used for topic graph vector search. This property is only allowed when kind is diverse. If omitted, the default configured on the index is used. */
+  /** The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000 for classic services and 500 for serverless services. */
+  @minValue(250)
+  @maxValue(10000)
+  minDiversityPoolSize?: int32;
+}
+
+/** Uses normal vector search without topic graph diverse retrieval. */
+@added(Versions.v2026_11_01_preview)
+model NoneVectorQueryTopicGraph extends VectorQueryTopicGraph {
+  /** The discriminator value. */
+  kind: VectorSearchTopicGraphKind.None;
+}
+
+/** Uses topic graph diverse retrieval. */
+@added(Versions.v2026_11_01_preview)
+model DiverseVectorQueryTopicGraph extends VectorQueryTopicGraph {
+  /** The discriminator value. */
+  kind: VectorSearchTopicGraphKind.Diverse;
+
+  /** The diversity factor used for topic graph diverse retrieval. If omitted, the default configured on the topic graph profile is used. */
   @minValue(0)
   @maxValue(1)
   diversityFactor?: float32;
 }
 
+/** Blends pure vector similarity with diversity-aware retrieval. Recommended default to balance diversity with relevance. */
+@added(Versions.v2026_11_01_preview)
+model BalancedVectorQueryTopicGraph extends VectorQueryTopicGraph {
+  /** The discriminator value. */
+  kind: VectorSearchTopicGraphKind.Balanced;
+}
+
 /** The kind of topic graph vector search to use. */
 @added(Versions.v2026_11_01_preview)
-union VectorQueryTopicGraphKind {
+union VectorSearchTopicGraphKind {
   string,
 
   /** Use normal vector search when topic graph diverse retrieval is off. */
-  none: "none",
+  None: "none",
 
   /** Use topic graph diverse retrieval. */
-  diverse: "diverse",
+  Diverse: "diverse",
+
+  /** Blends pure vector similarity with diversity-aware retrieval. Recommended default to balance diversity with relevance. */
+  Balanced: "balanced",
 }
 
 /** Reusable server-driven pagination query parameters shared by all listing operations. */

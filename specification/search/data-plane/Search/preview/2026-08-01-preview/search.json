@@ -19364,8 +19364,7 @@
         },
         "fieldValues": {
           "type": "array",
-          "description": "The exhaustive set of values for the field. At most 160 values, with a maximum of 128 characters per value and 2048 characters combined.",
-          "minItems": 1,
+          "description": "The exhaustive set of values for the field. At most 160 values, with a maximum of 128 characters per value and 2048 characters combined. In versions supporting `autoConfiguration`, required unless `autoConfiguration` is specified, and mutually exclusive with it.",
           "items": {
             "type": "string"
           }
@@ -19472,7 +19471,7 @@
       "properties": {
         "filters": {
           "type": "array",
-          "description": "Filter hints that identify fields and their exhaustive sets of values the query planner can use when constructing filters.",
+          "description": "Filter hints that identify fields and representative values the query planner can use when constructing filters.",
           "items": {
             "$ref": "#/definitions/SearchIndexKnowledgeSourceFilterHint"
           }
