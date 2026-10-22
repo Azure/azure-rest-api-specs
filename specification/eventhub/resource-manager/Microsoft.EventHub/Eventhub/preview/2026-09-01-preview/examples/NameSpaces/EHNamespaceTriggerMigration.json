@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "namespaceName": "sdk-Namespace-8980",
+    "resourceGroupName": "ResurceGroupSample",
+    "subscriptionId": "SampleSubscription",
+    "parameters": {
+      "sku": {
+        "name": "Dedicated"
+      },
+      "properties": {
+        "migration": {
+          "locations": [
+            {
+              "locationName": "eastus",
+              "clusterArmId": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/clusters/sampleCluster"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/SampleSubscription/providers/Microsoft.EventHub/locations/eastus/namespaceOperationResults/sampleOperation?api-version=2026-09-01-preview",
+        "location": "https://management.azure.com/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/sdk-Namespace-8980/migration?api-version=2026-09-01-preview"
+      }
+    }
+  },
+  "operationId": "Namespaces_TriggerMigration",
+  "title": "NamespaceTriggerMigration"
+}

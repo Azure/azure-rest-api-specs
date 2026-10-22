@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "namespaceName": "sdk-Namespace-8980",
+    "resourceGroupName": "ResurceGroupSample",
+    "subscriptionId": "SampleSubscription"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/sdk-Namespace-8980/migration/replicationlags",
+        "name": "sdk-Namespace-8980",
+        "type": "Microsoft.EventHub/namespaces/migration/replicationlags",
+        "location": "West US",
+        "properties": {
+          "counterDescriptions": [
+            {
+              "name": "ReplicationLag",
+              "aggregationType": "Max",
+              "description": "Maximum replication lag across replicas"
+            }
+          ],
+          "replicationLags": [
+            {
+              "name": "eastus",
+              "values": [
+                {
+                  "counterName": "ReplicationLag",
+                  "value": 120
+                }
+              ],
+              "breakdowns": [
+                {
+                  "name": "partition-0",
+                  "values": [
+                    {
+                      "counterName": "ReplicationLag",
+                      "value": 120
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "Namespaces_GetMigrationReplicationLags",
+  "title": "NamespaceGetMigrationReplicationLags"
+}
