@@ -1,0 +1,216 @@
+{
+  "title": "Organizations_Create_MaximumSet_Gen",
+  "operationId": "Organizations_Create",
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso-rg",
+    "organizationName": "contoso-org",
+    "resource": {
+      "location": "eastus2euap",
+      "tags": {
+        "environment": "production"
+      },
+      "properties": {
+        "partnerProperties": {
+          "organizationName": "Contoso AI Platform",
+          "billingEmail": "billing@contoso.com",
+          "ownerEmail": "admin@contoso.com",
+          "defaultWorkspace": {
+            "name": "my first workspace",
+            "product": "aiforwork",
+            "marketplaceDetails": [
+              {
+                "offerDetails": {
+                  "offerId": "kore-ai-platform",
+                  "planId": "business-monthly",
+                  "publisherId": "kore-ai",
+                  "planName": "Business Monthly",
+                  "termId": "1m",
+                  "termUnit": "P1M"
+                },
+                "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.SaaS/resources/kore-ai-saas",
+                "subscriptionStatus": "Subscribed"
+              }
+            ]
+          }
+        },
+        "user": {
+          "firstName": "Jane",
+          "lastName": "Doe",
+          "emailAddress": "jane.doe@contoso.com",
+          "upn": "jane.doe@contoso.onmicrosoft.com",
+          "phoneNumber": "+1-425-555-0100",
+          "alternateEmail": "jane.alternate@contoso.com",
+          "address": "1 Microsoft Way, Redmond, WA 98052"
+        },
+        "companyDetails": {
+          "companyName": "Contoso Ltd.",
+          "country": "US",
+          "domain": "contoso.com",
+          "businessType": "Technology",
+          "numberOfEmployees": 500,
+          "officeAddress": "1 Microsoft Way, Redmond, WA 98052"
+        },
+        "singleSignOn": {
+          "type": "Saml",
+          "state": "Enable",
+          "enterpriseAppId": "00000000-0000-0000-0000-000000000000",
+          "url": "https://sso.kore.ai/contoso",
+          "aadDomains": [
+            "contoso.com"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "eastus2euap",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "partnerProperties": {
+            "organizationName": "Contoso AI Platform",
+            "billingEmail": "billing@contoso.com",
+            "ownerEmail": "admin@contoso.com",
+            "defaultWorkspace": {
+              "name": "my first workspace",
+              "product": "aiforwork",
+              "marketplaceDetails": [
+                {
+                  "offerDetails": {
+                    "offerId": "kore-ai-platform",
+                    "planId": "business-monthly",
+                    "publisherId": "kore-ai",
+                    "planName": "Business Monthly",
+                    "termId": "1m",
+                    "termUnit": "P1M"
+                  },
+                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.SaaS/resources/kore-ai-saas",
+                  "subscriptionStatus": "Subscribed"
+                }
+              ]
+            },
+            "partnerResourceId": "org_01JK2MXYZ9ABCDEF123456"
+          },
+          "user": {
+            "firstName": "Jane",
+            "lastName": "Doe",
+            "emailAddress": "jane.doe@contoso.com",
+            "upn": "jane.doe@contoso.onmicrosoft.com",
+            "phoneNumber": "+1-425-555-0100",
+            "alternateEmail": "jane.alternate@contoso.com",
+            "address": "1 Microsoft Way, Redmond, WA 98052"
+          },
+          "companyDetails": {
+            "companyName": "Contoso Ltd.",
+            "country": "US",
+            "domain": "contoso.com",
+            "businessType": "Technology",
+            "numberOfEmployees": 500,
+            "officeAddress": "1 Microsoft Way, Redmond, WA 98052"
+          },
+          "singleSignOn": {
+            "type": "Saml",
+            "state": "Enable",
+            "enterpriseAppId": "00000000-0000-0000-0000-000000000000",
+            "url": "https://sso.kore.ai/contoso",
+            "aadDomains": [
+              "contoso.com"
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Kore.AgentPlatform/organizations/contoso-org",
+        "name": "contoso-org",
+        "type": "Kore.AgentPlatform/organizations",
+        "systemData": {
+          "createdBy": "jane.doe@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-05-25T05:38:33.975Z",
+          "lastModifiedBy": "jane.doe@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-05-25T05:38:33.975Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "location": "eastus2euap",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "partnerProperties": {
+            "organizationName": "Contoso AI Platform",
+            "billingEmail": "billing@contoso.com",
+            "ownerEmail": "admin@contoso.com",
+            "defaultWorkspace": {
+              "name": "my first workspace",
+              "product": "aiforwork",
+              "marketplaceDetails": [
+                {
+                  "offerDetails": {
+                    "offerId": "kore-ai-platform",
+                    "planId": "business-monthly",
+                    "publisherId": "kore-ai",
+                    "planName": "Business Monthly",
+                    "termId": "1m",
+                    "termUnit": "P1M"
+                  },
+                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.SaaS/resources/kore-ai-saas",
+                  "subscriptionStatus": "Subscribed"
+                }
+              ]
+            },
+            "partnerResourceId": "org_01JK2MXYZ9ABCDEF123456"
+          },
+          "user": {
+            "firstName": "Jane",
+            "lastName": "Doe",
+            "emailAddress": "jane.doe@contoso.com",
+            "upn": "jane.doe@contoso.onmicrosoft.com",
+            "phoneNumber": "+1-425-555-0100",
+            "alternateEmail": "jane.alternate@contoso.com",
+            "address": "1 Microsoft Way, Redmond, WA 98052"
+          },
+          "companyDetails": {
+            "companyName": "Contoso Ltd.",
+            "country": "US",
+            "domain": "contoso.com",
+            "businessType": "Technology",
+            "numberOfEmployees": 500,
+            "officeAddress": "1 Microsoft Way, Redmond, WA 98052"
+          },
+          "singleSignOn": {
+            "type": "Saml",
+            "state": "Enable",
+            "enterpriseAppId": "00000000-0000-0000-0000-000000000000",
+            "url": "https://sso.kore.ai/contoso",
+            "aadDomains": [
+              "contoso.com"
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Kore.AgentPlatform/organizations/contoso-org",
+        "name": "contoso-org",
+        "type": "Kore.AgentPlatform/organizations",
+        "systemData": {
+          "createdBy": "jane.doe@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-05-25T05:38:33.975Z",
+          "lastModifiedBy": "jane.doe@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-05-25T05:38:33.975Z"
+        }
+      }
+    }
+  }
+}

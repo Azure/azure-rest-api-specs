@@ -25,16 +25,50 @@ global-approvers:
 data-plane-review-signoff: &data-plane-reviewers
   team: azure-data-plane-api-reviewers
 
-# TypeSpec lint-suppression approval (data-plane stewardship review).
-# `typespec-suppressions-approved` clears the suppression review on a data-plane spec PR.
-# Only the data-plane stewardship reviewers may apply it, mirroring the azure-data-plane-api-reviewers
-# team (same pool as `data-plane-review-signoff`); the alias keeps the two rosters in sync.
-# Management-plane is left `unprotected`: ARM runs its own suppression review process, and
-# this preserves today's behavior (the label was previously unprotected on all planes).
+# TypeSpec lint-suppression approval uses each plane's API reviewers.
+# Data-plane shares its team with `data-plane-review-signoff`; management-plane
+# shares its ARM reviewer team with the ARM signoff and validation labels below.
 # See the stewardship board member guide (aka.ms/azsdk/architect-guidance).
 typespec-suppressions-approved:
   data-plane: *data-plane-reviewers
-  management-plane: unprotected
+  management-plane: &arm-api-reviewers
+    team: arm-api-reviewers
+
+# ARM signoff and validation approval labels. Data-plane behavior remains unchanged.
+ARMSignedOff: &arm-api-review-policy
+  management-plane: *arm-api-reviewers
+  data-plane: unprotected
+Approved-Suppression: *arm-api-review-policy
+Approved-LintDiff: *arm-api-review-policy
+
+# ARM validation approvals are shared by API and SDK reviewers.
+Approved-ModelValidation: &arm-validation-review-policy
+  management-plane:
+    teams:
+      - arm-api-reviewers
+      - azure-sdk-team
+      - azure-arm-sdk-reviewers
+  data-plane: unprotected
+Approved-Avocado: *arm-validation-review-policy
+Approved-SemanticValidation: *arm-validation-review-policy
+
+# REST breaking-change and versioning approvals on both API planes.
+# Enumerate existing labels explicitly; policy keys are not wildcard patterns.
+BreakingChange-Approved-Benign: &arm-breaking-change-policy
+  team: arm-breaking-change-reviewers
+BreakingChange-Approved-BugFix: *arm-breaking-change-policy
+BreakingChange-Approved-UserImpact: *arm-breaking-change-policy
+BreakingChange-Approved-BranchPolicyException: *arm-breaking-change-policy
+BreakingChange-Approved-Previously: *arm-breaking-change-policy
+BreakingChange-Approved-Security: *arm-breaking-change-policy
+BreakingChange-Approved-Retired: *arm-breaking-change-policy
+Versioning-Approved-Benign: *arm-breaking-change-policy
+Versioning-Approved-BugFix: *arm-breaking-change-policy
+Versioning-Approved-PrivatePreview: *arm-breaking-change-policy
+Versioning-Approved-BranchPolicyException: *arm-breaking-change-policy
+Versioning-Approved-Previously: *arm-breaking-change-policy
+Versioning-Approved-Retired: *arm-breaking-change-policy
+Versioning-Approved-NotReleased: *arm-breaking-change-policy
 
 # Package name approval labels (plane-aware)
 package-name-dotnet-approved:

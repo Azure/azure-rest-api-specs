@@ -130,6 +130,7 @@ interface ComputeResources {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @action("customServices")
   updateCustomServices is ArmResourceActionSync<
     ComputeResource,
@@ -170,6 +171,7 @@ interface ComputeResources {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @summary("Update Data Mounts of a Machine Learning compute.")
   updateDataMounts is ArmResourceActionSync<
     ComputeResource,
@@ -221,6 +223,7 @@ interface ComputeResources {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   updateIdleShutdownSetting is ArmResourceActionSync<
     ComputeResource,
     IdleShutdownSetting,
@@ -242,6 +245,7 @@ interface ComputeResources {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @operationId("Compute_getAllowedResizeSizes")
   @action("getAllowedVmSizesForResize")
   getAllowedResizeSizes is ArmResourceActionSync<
@@ -262,6 +266,7 @@ interface ComputeResources {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   resize is ArmResourceActionAsyncBase<
     ComputeResource,
     ResizeSchema,

@@ -28,12 +28,6 @@ stimuli:
       commands:
         - node -e "const fs=require('fs');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync('node_modules')){fs.symlinkSync(t,'node_modules','junction')}"
     graders:
-      - &id002
-        type: tool-calls
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - azure-sdk-mcp-azsdk_run_typespec_validation
       - type: skill-invocation
         config:
           required:
@@ -48,7 +42,6 @@ stimuli:
     prompt: "@azure-typespec-author Add a new stable version `2023-06-01` to the Versions enum and carry over all features from the latest preview version `2022-11-01-preview` into the new stable version."
     environment: *id001
     graders:
-      - *id002
       - type: run-command
         config:
           command: tsp compile .

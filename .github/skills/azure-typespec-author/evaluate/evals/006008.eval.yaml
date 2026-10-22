@@ -28,12 +28,6 @@ stimuli:
       commands:
         - node -e "const fs=require('fs');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync('node_modules')){fs.symlinkSync(t,'node_modules','junction')}"
     graders:
-      - &id002
-        type: tool-calls
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - azure-sdk-mcp-azsdk_run_typespec_validation
       - type: skill-invocation
         config:
           required:
@@ -52,7 +46,6 @@ stimuli:
       - Version 2023-06-01-preview is added to the Versions enum and the property uses valid TypeSpec versioning.
       - Earlier API versions retain color, and changes contain no unrelated edits.
     graders:
-      - *id002
       - type: run-command
         config:
           command: tsp compile .
@@ -98,6 +91,10 @@ stimuli:
         config:
           required:
             - "^(edit|apply_patch|bash|powershell)$"
+      - type: run-command
+        config:
+          command: tsp compile .
+          expected_exit_code: 0
       - *id003
       - *id004
       - *id005

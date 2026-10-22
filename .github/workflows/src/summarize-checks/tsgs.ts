@@ -33,7 +33,7 @@ export const typeSpecRequirementArmTsg =
 export const typeSpecRequirementDataPlaneTsg = typeSpecRequirementArmTsg;
 
 export const specChangePoliciesTsg =
-  `Inspect the check's diagnostics for TypeSpec usage requirements. ` +
+  `Inspect the check's diagnostics for TypeSpec usage requirements and SDK API-version policies. ` +
   `Run <code>pnpm spec-change-policies --base=&lt;base&gt; --head=&lt;head&gt;</code> using the ` +
   `comparison commits from the failed check. ` +
   `See the <a href="https://github.com/Azure/azure-rest-api-specs/tree/main/eng/tools/spec-change-policies">Spec Change Policies guide</a>.`;

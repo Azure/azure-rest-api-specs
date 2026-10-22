@@ -9,6 +9,7 @@ const ALLOWED_AUTHORS = new Set(
   [
     "azure-sdk",
     "azure-sdk-automation[bot]",
+    "dependabot[bot]",
 
     "AkhilaIlla",
     "Bubbles4096",
