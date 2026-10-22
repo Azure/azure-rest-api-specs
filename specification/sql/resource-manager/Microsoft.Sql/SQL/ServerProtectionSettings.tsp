@@ -44,6 +44,37 @@ model ServerProtectionSettingsAcceptedResult {
   @body body: ServerProtectionSettingsOperationMetadata;
 }
 
+/** Parent logical server identifier for protection-settings operations. */
+alias LogicalServerProtectionSettingsRequestParameters = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+
+  /** The provider namespace for the resource. */
+  @path
+  @segment("providers")
+  provider: "Microsoft.Sql";
+
+  /** The name of the server. */
+  @path
+  @segment("servers")
+  @pattern("^[a-z0-9]+(-*[a-z0-9]+)*$")
+  @minLength(1)
+  @maxLength(63)
+  serverName: string;
+};
+
+/** Path parameters for the logical server protection-settings singleton. */
+alias LogicalServerProtectionSettingsInstanceParameters = {
+  ...LogicalServerProtectionSettingsRequestParameters;
+
+  /** The protection settings name. Only default is supported. */
+  @path
+  @segment("serverProtectionSettings")
+  @pattern("^[dD][eE][fF][aA][uU][lL][tT]$")
+  serverProtectionSettingsName: ServerProtectionSettingsName;
+};
+
 /** Read, list, and update the default logical server protection settings. */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The settings always exist with the logical server; irreversible protection cannot be removed by deleting the settings."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "SQL uses legacy feature files to register operations."
@@ -54,12 +85,29 @@ model ServerProtectionSettingsAcceptedResult {
 )
 interface ServerProtectionSettingsOperations {
   /** Gets the logical server's persisted protection settings, independently of pending updates. */
+  @get
+  @autoRoute
   @tag("ServerProtectionSettings")
-  get is ArmResourceRead<ServerProtectionSettings>;
+  @armResourceRead(ServerProtectionSettings)
+  get is Azure.ResourceManager.Foundations.ArmReadOperation<
+    LogicalServerProtectionSettingsInstanceParameters,
+    ArmResponse<ServerProtectionSettings>,
+    ErrorResponse
+  >;
 
   /** Lists the logical server's persisted protection settings. The collection contains the default resource. */
+  @get
+  @autoRoute
+  @list
   @tag("ServerProtectionSettings")
-  listByServer is ArmResourceListByParent<ServerProtectionSettings>;
+  @listsResource(ServerProtectionSettings)
+  @segmentOf(ServerProtectionSettings)
+  @armResourceList(ServerProtectionSettings)
+  listByServer is Azure.ResourceManager.Foundations.ArmReadOperation<
+    LogicalServerProtectionSettingsRequestParameters,
+    ArmResponse<ResourceListResult<ServerProtectionSettings>>,
+    ErrorResponse
+  >;
 
   /**
    * Updates logical server protection settings. Returns HTTP 200 with the resource
@@ -79,11 +127,16 @@ interface ServerProtectionSettingsOperations {
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The SQL RP returns operation metadata for pending 202 responses and the resource only for completed 200 responses, following the MI contract."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The SQL RP pending 202 response contains the operation name and start time, following the MI contract."
   @tag("ServerProtectionSettings")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  @put
+  @autoRoute
+  @armResourceCreateOrUpdate(ServerProtectionSettings)
+  @Azure.Core.useFinalStateVia("location")
+  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    LogicalServerProtectionSettingsInstanceParameters,
     ServerProtectionSettings,
-    Response =
-      | ArmResponse<ServerProtectionSettings>
-      | ServerProtectionSettingsAcceptedResult
+    | ArmResponse<ServerProtectionSettings>
+    | ServerProtectionSettingsAcceptedResult,
+    ErrorResponse
   >;
 }
 

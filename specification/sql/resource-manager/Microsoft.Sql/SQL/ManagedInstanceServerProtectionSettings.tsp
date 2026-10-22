@@ -31,7 +31,7 @@ model ManagedInstanceServerProtectionSettings is ProxyResource<
     Resource = ManagedInstanceServerProtectionSettings,
     KeyName = "serverProtectionSettingsName",
     SegmentName = "serverProtectionSettings",
-    NamePattern = "",
+    NamePattern = "^[dD][eE][fF][aA][uU][lL][tT]$",
     Type = ServerProtectionSettingsName
   >;
 }
@@ -74,6 +74,7 @@ alias ServerProtectionSettingsInstanceParameters = {
   /** The protection settings name. Only default is supported. */
   @path
   @segment("serverProtectionSettings")
+  @pattern("^[dD][eE][fF][aA][uU][lL][tT]$")
   serverProtectionSettingsName: ServerProtectionSettingsName;
 };
 
