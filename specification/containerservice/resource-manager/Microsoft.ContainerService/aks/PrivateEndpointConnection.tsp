@@ -67,6 +67,7 @@ interface PrivateEndpointConnections {
    * To learn more about private clusters, see: https://docs.microsoft.com/azure/aks/private-clusters
    */
   @summary("Gets a list of private endpoint connections in the specified managed cluster.")
+  @list
   list is PrivateEndpointConnectionsOps.ListSinglePage<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionListResult>

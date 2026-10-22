@@ -4559,6 +4559,7 @@ model AccessProfile {
   /**
    * Base64-encoded Kubernetes configuration file.
    */
+  @secret
   kubeConfig?: bytes;
 }
 
@@ -4588,6 +4589,7 @@ model CredentialResult {
    * Base64-encoded Kubernetes configuration file.
    */
   @visibility(Lifecycle.Read)
+  @secret
   value?: bytes;
 }
 

@@ -15,15 +15,6 @@ using Microsoft.ContainerService;
   "csharp"
 );
 
-// .NET SDK naming: "Request" suffix is reserved for HTTP pipeline types; add the
-// AgentPool owner prefix so the request pairs symmetrically with its response
-// (PoolBootstrapData -> AgentPoolBootstrapInfo).
-@@clientName(
-  ListBootstrapDataRequest,
-  "AgentPoolBootstrapDataContent",
-  "csharp"
-);
-
 // .NET SDK naming: "Data" suffix is reserved for ResourceData/TrackedResourceData types.
 @@clientName(PoolBootstrapData, "AgentPoolBootstrapInfo", "csharp");
 
@@ -1371,11 +1362,6 @@ using Microsoft.ContainerService;
   "GetManagedClusterKubernetesVersions",
   "csharp"
 );
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
-@@markAsPageable(PrivateEndpointConnections.list, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
-@@markAsPageable(ManagedClusters.privateLinkResourcesList, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(

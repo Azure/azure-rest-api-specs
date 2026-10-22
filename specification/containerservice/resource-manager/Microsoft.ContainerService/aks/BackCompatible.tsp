@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
+import "@typespec/openapi";
 import "./ManagedCluster.tsp";
 import "./AgentPoolModels.tsp";
 
@@ -10,6 +11,24 @@ using Azure.ResourceManager;
 using TypeSpec.Rest;
 
 namespace Microsoft.ContainerService;
+
+// AutoRest 0.73.1 omits pageable metadata for @list operations without a next link.
+// Preserve the service's single-page response instead of inventing a continuation field.
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "The pinned AutoRest emitter needs explicit metadata for this native single-page list."
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "A null nextLinkName documents the existing single-page wire response without changing its schema."
+@@TypeSpec.OpenAPI.extension(
+  PrivateEndpointConnections.list,
+  "x-ms-pageable",
+  #{ nextLinkName: null }
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "The pinned AutoRest emitter needs explicit metadata for this native single-page list."
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "A null nextLinkName documents the existing single-page wire response without changing its schema."
+@@TypeSpec.OpenAPI.extension(
+  ManagedClusters.privateLinkResourcesList,
+  "x-ms-pageable",
+  #{ nextLinkName: null }
+);
 
 /**
  * Properties for the container service agent pool profile.

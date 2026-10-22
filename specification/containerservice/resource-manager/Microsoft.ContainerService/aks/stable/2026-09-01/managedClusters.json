@@ -3169,6 +3169,9 @@
           "List Private Endpoint Connections by Managed Cluster": {
             "$ref": "./examples/PrivateEndpointConnectionsList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -3414,6 +3417,9 @@
           "List Private Link Resources by Managed Cluster": {
             "$ref": "./examples/PrivateLinkResourcesList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -4574,8 +4580,9 @@
       "properties": {
         "kubeConfig": {
           "type": "string",
-          "format": "byte",
-          "description": "Base64-encoded Kubernetes configuration file."
+          "format": "password",
+          "description": "Base64-encoded Kubernetes configuration file.",
+          "x-ms-secret": true
         }
       }
     },
@@ -5607,9 +5614,10 @@
         },
         "value": {
           "type": "string",
-          "format": "byte",
+          "format": "password",
           "description": "Base64-encoded Kubernetes configuration file.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
@@ -10647,7 +10655,9 @@
         },
         "clusterToken": {
           "type": "string",
-          "description": "AuthToken issued for AKS AAD Server App."
+          "format": "password",
+          "description": "AuthToken issued for AKS AAD Server App.",
+          "x-ms-secret": true
         }
       },
       "required": [

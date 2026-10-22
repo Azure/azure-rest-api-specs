@@ -84,6 +84,7 @@ model RunCommandRequest {
   /**
    * AuthToken issued for AKS AAD Server App.
    */
+  @secret
   clusterToken?: string;
 }
 
@@ -601,6 +602,7 @@ interface ManagedClusters {
   @get
   @action("privateLinkResources")
   @summary("Gets a list of private link resources in the specified managed cluster.")
+  @list
   privateLinkResourcesList is ArmResourceActionSync<
     ManagedCluster,
     void,
@@ -654,7 +656,7 @@ interface ManagedClusters {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Legacy routing helper consumed by the decorated ManagedClusters resource interface; it does not expose independent resource operations."
 interface ManagedClusterOps
   extends Azure.ResourceManager.Legacy.RoutedOperations<
       {
