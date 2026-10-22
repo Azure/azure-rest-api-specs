@@ -11,28 +11,6 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.ServiceFabric;
 
 /**
- * Parameter for the location used to query unsupported VM sizes.
- */
-model ManagedUnsupportedVmSizeLocationParameter {
-  /**
-   * The location for the unsupported VM sizes. This is different from cluster location.
-   */
-  @path
-  location: string;
-}
-
-/**
- * Parameter identifying a VM size.
- */
-model VmSizeParameter {
-  /**
-   * VM Size name.
-   */
-  @path
-  vmSize: string;
-}
-
-/**
  * Describes a VM Sizes.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well-known abbreviation"
@@ -79,8 +57,18 @@ interface ManagedUnsupportedVMSizes {
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-    ...ManagedUnsupportedVmSizeLocationParameter,
-    ...VmSizeParameter,
+
+    /**
+     * The location for the unsupported VM sizes. This is different from cluster location.
+     */
+    @path
+    location: string,
+
+    /**
+     * VM Size name.
+     */
+    @path
+    vmSize: string,
   ): ArmResponse<ManagedVMSize> | ErrorResponse;
 
   /**
@@ -98,7 +86,12 @@ interface ManagedUnsupportedVMSizes {
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-    ...ManagedUnsupportedVmSizeLocationParameter,
+
+    /**
+     * The location for the unsupported VM sizes. This is different from cluster location.
+     */
+    @path
+    location: string,
   ): ArmResponse<ManagedVMSizesResult> | ErrorResponse;
 }
 

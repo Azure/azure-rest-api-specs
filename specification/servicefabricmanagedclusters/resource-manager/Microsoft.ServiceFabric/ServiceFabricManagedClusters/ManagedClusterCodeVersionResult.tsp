@@ -13,28 +13,6 @@ using TypeSpec.Http;
 namespace Microsoft.ServiceFabric;
 
 /**
- * Parameter identifying a cluster code version.
- */
-model ClusterVersionParameter {
-  /**
-   * The cluster code version.
-   */
-  @path
-  clusterVersion: string;
-}
-
-/**
- * Parameter identifying the operating system environment for cluster code versions.
- */
-model ManagedClusterVersionEnvironmentParameter {
-  /**
-   * The operating system of the cluster.
-   */
-  @path
-  environment: ManagedClusterVersionEnvironment;
-}
-
-/**
  * The result of the Service Fabric runtime versions
  */
 model ManagedClusterCodeVersionResult {
@@ -81,7 +59,11 @@ interface ManagedClusterVersion {
     @path
     location: string,
 
-    ...ClusterVersionParameter,
+    /**
+     * The cluster code version.
+     */
+    @path
+    clusterVersion: string,
   ): ArmResponse<ManagedClusterCodeVersionResult> | ErrorResponse;
 
   /**
@@ -125,8 +107,17 @@ interface ManagedClusterVersion {
     @path
     location: string,
 
-    ...ManagedClusterVersionEnvironmentParameter,
-    ...ClusterVersionParameter,
+    /**
+     * The operating system of the cluster.
+     */
+    @path
+    environment: ManagedClusterVersionEnvironment,
+
+    /**
+     * The cluster code version.
+     */
+    @path
+    clusterVersion: string,
   ): ArmResponse<ManagedClusterCodeVersionResult> | ErrorResponse;
 
   /**
@@ -149,7 +140,11 @@ interface ManagedClusterVersion {
     @path
     location: string,
 
-    ...ManagedClusterVersionEnvironmentParameter,
+    /**
+     * The operating system of the cluster.
+     */
+    @path
+    environment: ManagedClusterVersionEnvironment,
   ): ArmResponse<ManagedClusterCodeVersionListResult> | ErrorResponse;
 }
 

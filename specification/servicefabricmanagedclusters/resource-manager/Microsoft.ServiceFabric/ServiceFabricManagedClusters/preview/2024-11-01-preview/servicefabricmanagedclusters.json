@@ -143,7 +143,25 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ManagedClusterVersionEnvironmentParameter"
+            "name": "environment",
+            "in": "path",
+            "description": "The operating system of the cluster.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Windows"
+            ],
+            "x-ms-enum": {
+              "name": "ManagedClusterVersionEnvironment",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Windows",
+                  "value": "Windows",
+                  "description": "Indicates os is Windows."
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -193,10 +211,32 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ManagedClusterVersionEnvironmentParameter"
+            "name": "environment",
+            "in": "path",
+            "description": "The operating system of the cluster.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Windows"
+            ],
+            "x-ms-enum": {
+              "name": "ManagedClusterVersionEnvironment",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Windows",
+                  "value": "Windows",
+                  "description": "Indicates os is Windows."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/ClusterVersionParameter"
+            "name": "clusterVersion",
+            "in": "path",
+            "description": "The cluster code version.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -236,7 +276,11 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdParameter"
+            "name": "operationId",
+            "in": "path",
+            "description": "operation identifier.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -285,7 +329,11 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdParameter"
+            "name": "operationId",
+            "in": "path",
+            "description": "operation identifier.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -382,7 +430,11 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ClusterVersionParameter"
+            "name": "clusterVersion",
+            "in": "path",
+            "description": "The cluster code version.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -421,7 +473,11 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ManagedUnsupportedVmSizeLocationParameter"
+            "name": "location",
+            "in": "path",
+            "description": "The location for the unsupported VM sizes. This is different from cluster location.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -463,10 +519,18 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ManagedUnsupportedVmSizeLocationParameter"
+            "name": "location",
+            "in": "path",
+            "description": "The location for the unsupported VM sizes. This is different from cluster location.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/VmSizeParameter"
+            "name": "vmSize",
+            "in": "path",
+            "description": "VM Size name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -8737,60 +8801,5 @@
       "x-ms-discriminator-value": "Zone"
     }
   },
-  "parameters": {
-    "ClusterVersionParameter": {
-      "name": "clusterVersion",
-      "in": "path",
-      "description": "The cluster code version.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ManagedClusterVersionEnvironmentParameter": {
-      "name": "environment",
-      "in": "path",
-      "description": "The operating system of the cluster.",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "Windows"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedClusterVersionEnvironment",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Windows",
-            "value": "Windows",
-            "description": "Indicates os is Windows."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "ManagedUnsupportedVmSizeLocationParameter": {
-      "name": "location",
-      "in": "path",
-      "description": "The location for the unsupported VM sizes. This is different from cluster location.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "OperationIdParameter": {
-      "name": "operationId",
-      "in": "path",
-      "description": "operation identifier.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "VmSizeParameter": {
-      "name": "vmSize",
-      "in": "path",
-      "description": "VM Size name.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

@@ -8,17 +8,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.ServiceFabric;
 
-/**
- * Parameter identifying a long-running operation.
- */
-model OperationIdParameter {
-  /**
-   * operation identifier.
-   */
-  @path
-  operationId: string;
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Needed to avoid autoroute"
 interface OperationResults {
   /**
@@ -35,7 +24,12 @@ interface OperationResults {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...LocationResourceParameter,
-    ...OperationIdParameter,
+
+    /**
+     * operation identifier.
+     */
+    @path
+    operationId: string,
   ):
     | OkResponse
     | (AcceptedResponse & LocationHeader)
@@ -58,6 +52,11 @@ interface OperationStatus {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...LocationResourceParameter,
-    ...OperationIdParameter,
+
+    /**
+     * operation identifier.
+     */
+    @path
+    operationId: string,
   ): ArmResponse<LongRunningOperationResult> | ErrorResponse;
 }
