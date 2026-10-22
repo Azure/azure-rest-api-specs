@@ -1568,35 +1568,7 @@ See configuration in [readme.java.md](./readme.java.md)
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: managedClusters.json
-    where: $.definitions.ManagedClusterProperties.properties.enableRBAC
     reason: Name change of "enableRBAC" property would break compatibility
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: managedClusters.json
-    where:
-      - $.definitions.AgentPoolGPUProfile.properties.installGPUDriver
-      - $.definitions.AgentPoolSecurityProfile.properties.enableVTPM
-      - $.definitions.BootstrapKubeletConfig.properties.clusterFQDN
-      - $.definitions.ContainerServiceNetworkProfile.properties.clusterAPIConnectivityProfile
-      - $.definitions.LocalDNSProfile.properties.kubeDNSOverrides
-      - $.definitions.LocalDNSProfile.properties.vnetDNSOverrides
-      - $.definitions.MachineOSProfile.properties.enableFIPS
-      - $.definitions.MachineProperties.properties.localDNSProfile
-      - $.definitions.MachineSecurityProfile.properties.enableVTPM
-      - $.definitions.ManagedClusterAADProfile.properties.enableAzureRBAC
-      - $.definitions.ManagedClusterAPIServerAccessProfile.properties.enablePrivateClusterPublicFQDN
-      - $.definitions.ManagedClusterAPIServerAccessProfile.properties.privateDNSZone
-      - $.definitions.ManagedClusterAgentPoolProfileProperties.properties.enableFIPS
-      - $.definitions.ManagedClusterAgentPoolProfileProperties.properties.localDNSProfile
-      - $.definitions.ManagedClusterIngressProfileWebAppRouting.properties.gatewayAPIImplementations
-      - $.definitions.ManagedClusterProperties.properties.azurePortalFQDN
-      - $.definitions.ManagedClusterProperties.properties.enableFIPS
-      - $.definitions.ManagedClusterProperties.properties.privateFQDN
-      - $.definitions.ManagedClusterStorageProfile.properties.blobCSIDriver
-      - $.definitions.ManagedClusterStorageProfile.properties.diskCSIDriver
-      - $.definitions.ManagedClusterStorageProfile.properties.fileCSIDriver
-      - $.definitions.ManagedClusterWindowsProfile.properties.enableCSIProxy
-      - $.definitions.SnapshotProperties.properties.enableFIPS
-    reason: These published GPU, security, DNS/FQDN, storage CSI, and gateway API acronym spellings must remain wire-compatible. This exception applies only to the enumerated existing properties, not new properties.
   - suppress: TrackedResourcePatchOperation
     from: containerService.json
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
