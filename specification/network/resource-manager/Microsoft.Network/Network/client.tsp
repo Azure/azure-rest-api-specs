@@ -13,6 +13,24 @@ using Microsoft.Network;
 using Microsoft.Compute;
 using Common;
 
+// Preserve the released C# property names on their original wire fields.
+@@clientName(Microsoft.Network.ApplicationGateway.zones, "AvailabilityZones", "csharp");
+@@clientName(Microsoft.Network.ApplicationGatewayPrivateEndpointConnectionProperties.privateLinkServiceConnectionState, "ConnectionState", "csharp");
+@@clientName(Microsoft.Network.SwapResourceProperties.slotType, "CloudServiceSwapSlotType", "csharp");
+@@clientName(Microsoft.Network.ApplicationGatewayOnDemandProbe.enableProbeProxyProtocolHeader, "IsProbeProxyProtocolHeaderEnabled", "csharp");
+@@clientName(Microsoft.Network.ConnectivityInformation.connectionStatus, "NetworkConnectionStatus", "csharp");
+@@clientName(Microsoft.Network.NetworkManagerDeploymentStatus.deploymentStatus, "DeploymentState", "csharp");
+@@clientName(Common.PrivateLinkServiceConnectionProperties.privateLinkServiceConnectionState, "ConnectionState", "csharp");
+@@clientName(Microsoft.Network.NvaInterfaceConfigurationsProperties.type, "PropertiesType", "csharp");
+@@clientName(Microsoft.Network.TunnelConnectionHealth.lastConnectionEstablishedUtcTime, "LastConnectionEstablishedOn", "csharp");
+
+// Keep the native connection routing field distinct from the released custom NFV compatibility member.
+@@clientName(
+  Microsoft.Network.NetworkVirtualApplianceConnectionProperties.routingConfiguration,
+  "ConnectionRoutingConfiguration",
+  "csharp"
+);
+
 // Restore the released C# native date contracts and original security-provider name.
 @@alternateType(Microsoft.Network.ExpressRouteFailoverConnectionResourceDetails.lastUpdatedTime, utcDateTime, "csharp");
 @@clientName(Microsoft.Network.ExpressRouteFailoverConnectionResourceDetails.lastUpdatedTime, "LastUpdatedOn", "csharp");
