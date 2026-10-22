@@ -7,7 +7,7 @@
     "resourceGroupName": "resource-group",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
-  "title": "Get an ACS policy with optional annotators and eight intervention points",
+  "title": "Get an ACS policy with an Azure OpenAI judge and eight intervention points",
   "responses": {
     "200": {
       "headers": {
@@ -33,31 +33,14 @@
               }
             },
             "annotators": {
-              "safety": {
-                "type": "classifier",
-                "classifier": "content_safety",
-                "categories": [
-                  "Hate",
-                  "Violence"
-                ]
-              },
-              "judge": {
+              "risk": {
                 "type": "llm",
                 "provider": "azure_openai",
-                "endpoint": "https://judge-resource.openai.azure.com",
-                "deployment": "safety-judge",
-                "system_prompt": "Return a JSON object with a safety label.",
-                "timeout_ms": 1000,
-                "provider_config": {
-                  "response_format": {
-                    "type": "json_object"
-                  }
-                }
-              },
-              "externalClassifier": {
-                "type": "endpoint",
-                "endpoint": "https://classifier.example.com/evaluate",
-                "timeout_ms": 1000
+                "endpoint": "https://synthetic-judge.openai.azure.com/",
+                "deployment": "judge",
+                "api_version": "2024-10-21",
+                "system_prompt": "Classify the complete subject.",
+                "timeout_ms": 10000
               }
             },
             "intervention_points": {
@@ -75,11 +58,8 @@
                   "id": "agent-guard"
                 },
                 "annotations": {
-                  "safety": {
-                    "from": "$snap.input.content"
-                  },
-                  "externalClassifier": {
-                    "from": "$snap.input.content"
+                  "risk": {
+                    "from": "$target.content"
                   }
                 }
               },
@@ -95,11 +75,6 @@
                 "policy_target_kind": "model_response",
                 "policy": {
                   "id": "agent-guard"
-                },
-                "annotations": {
-                  "judge": {
-                    "from": "$snap.response"
-                  }
                 }
               },
               "pre_tool_call": {
@@ -123,8 +98,8 @@
                   "id": "agent-guard"
                 },
                 "annotations": {
-                  "safety": {
-                    "from": "$snap.output.content"
+                  "risk": {
+                    "from": "$target.content"
                   }
                 }
               },
