@@ -4,6 +4,9 @@ parameters:
 emit:
   - "@azure-tools/typespec-autorest"
 options:
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.StorageActions"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
     omit-unreachable-types: true
