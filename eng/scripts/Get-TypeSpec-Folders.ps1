@@ -3,19 +3,21 @@ param (
   [switch]$IgnoreCoreFiles = $false,
   [switch]$CheckAll = $false,
   [string]$BaseCommitish = "HEAD^",
-  [string]$HeadCommitish = "HEAD"
+  [string]$HeadCommitish = "HEAD",
+  [string]$RepoPath = "$PSScriptRoot/../.."
 )
 Set-StrictMode -Version 3
 
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 
-$repoPath = Resolve-Path "$PSScriptRoot/../.."
+$repoPath = (Resolve-Path $RepoPath).Path
 
-$checkAllPath = ((Get-ChildItem "specification" -Directory).Name -replace '^', 'specification/') -replace '$', '/'
 $checkedAll = $false
 
 if ($CheckAll) {
-  $changedFiles = $checkAllPath
+  $typespecFolders = Get-ChildItem -Path "$repoPath/specification" tspconfig.* -Recurse |
+    ForEach-Object { [IO.Path]::GetRelativePath($repoPath, $_.Directory.FullName) -replace '\\', '/' } |
+    Sort-Object -Unique
   $checkedAll = $true
 }
 else {
@@ -24,36 +26,35 @@ else {
 
   if ($coreChangedFiles -and !$IgnoreCoreFiles) {
     Write-Verbose "Found changes to core eng or root files so checking all specs."
-    $changedFiles = $checkAllPath
+    $searchPaths = @("specification/")
     $checkedAll = $true
   }
   else {
     $changedFiles = Get-ChangedFilesUnderSpecification $changedFiles
-  }
-}
-
-$typespecFolders = @()
-$skippedTypespecFolders = @()
-foreach ($file in $changedFiles) {
-  if ($file -match 'specification(\/[^\/]+\/)+') {
-    $path = "$repoPath/$($matches[0])"
-    if (Test-Path $path) {
-      Write-Verbose "Checking for tspconfig files under $path"
-      $typespecFolder = Get-ChildItem -path $path tspconfig.* -Recurse
-      if ($typespecFolder) {
-        $typespecFolders += $typespecFolder.Directory.FullName
+    $searchPaths = @(
+      $changedFiles | ForEach-Object {
+        if ($_ -match 'specification(\/[^\/]+\/)+') {
+          $matches[0]
+        }
       }
-    } else {
-      $skippedTypespecFolders += $path
-    } 
+    ) | Sort-Object -Unique
   }
-}
-foreach ($skippedTypespecFolder in $skippedTypespecFolders | Select-Object -Unique) {
-  Write-Host "Cannot find directory $skippedTypespecFolder"
-}
 
-if ($typespecFolders.Length) {
-  $typespecFolders = $typespecFolders | ForEach-Object { [IO.Path]::GetRelativePath($repoPath, $_) -replace '\\', '/' } | Sort-Object -Unique
+  $typespecFolders = @(
+    foreach ($revision in @($BaseCommitish, $HeadCommitish)) {
+      if ($searchPaths.Count -eq 0) {
+        continue
+      }
+
+      $revisionFiles = & git -C $repoPath -c core.quotepath=off ls-tree -r --name-only $revision -- @searchPaths
+      if ($LASTEXITCODE -ne 0) {
+        throw "Failed to list TypeSpec projects in revision '$revision'."
+      }
+
+      $revisionFiles | Where-Object { $_ -match '(^|/)tspconfig\.[^/]+$' } |
+        ForEach-Object { $_ -replace '/tspconfig\.[^/]+$', '' }
+    }
+  ) | Sort-Object -Unique
 }
 
 return @($typespecFolders, $checkedAll)
