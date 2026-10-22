@@ -257,8 +257,9 @@ pnpm --dir .github labels --preview
 
 Validation is offline. Preview reads upstream labels without changing anything;
 set `GITHUB_TOKEN` to authenticate if needed. It lists proposed creates, metadata
-updates (including unarchiving), archives, expired archives to delete, and
-unconfigured labels and alias migrations. It does not enumerate affected items.
+updates (including unarchiving), archives, skipped archives with their reasons,
+expired archives to delete, and unconfigured labels and alias migrations.
+It does not enumerate affected items.
 
 [Sync repository labels](../.github/workflows/sync-repo-labels.yaml) runs after
 relevant changes on `main`, when repository label definitions change, and daily.
@@ -306,13 +307,17 @@ mode. The synchronizer recognizes the prefix together with the exact warning;
 it does not create a duplicate. This cancels its deletion.
 Removing it again starts a new grace period on the next archive.
 
-Name collisions stop synchronization for manual resolution, including when both
-the original and managed archived name already exist. Prefixing a name longer
-than 40 characters exceeds GitHub's 50-character limit and also fails explicitly:
-rename it deliberately before removing it from the catalog. Names are never
-silently truncated. Earlier managed archives without the prefix acquire it on
-the next archive-mode run without resetting their timestamp, unless already
-eligible for deletion.
+Labels that cannot be safely renamed for archival are skipped with an actionable
+workflow warning and recorded in the pre-change audit. This includes names longer
+than 40 characters (the prefix would exceed GitHub's 50-character limit),
+unmanaged active labels using the reserved prefix, and occupied archive target
+names. Rename these labels deliberately or resolve the collision; names are never
+silently truncated. Other labels still synchronize, including deletion of expired
+archives. Ambiguous identities, including when both the original and managed
+archived name already exist, still stop synchronization for manual resolution.
+Audit validation, stale-state checks, and API failures also remain blocking.
+Earlier managed archives without the prefix acquire it on the next archive-mode
+run without resetting their timestamp, unless already eligible for deletion.
 
 After the grace period, the archived label is deleted without adding a generic
 replacement label. Its existing assignments remain intact until deletion;
