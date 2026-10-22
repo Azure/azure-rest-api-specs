@@ -13,19 +13,6 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Support;
 
-/**
- * Parameter identifying the Azure service for problem classification.
- */
-model ProblemServiceNameParameter {
-  /**
-   * Name of the Azure service for which the problem classifications need to be retrieved.
-   */
-  @pattern("^[0-9a-zA-Z_\\-. ]+$")
-  @path
-  @segment("services")
-  problemServiceName: string;
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("ProblemClassifications")
 @added(Versions.v2025_06_01_preview)
@@ -40,7 +27,15 @@ interface ClassifyProblems {
     Request = ProblemClassificationsClassificationInput,
     Response = ProblemClassificationsClassificationOutput,
     Scope = SubscriptionActionScope,
-    Parameters = ProblemServiceNameParameter
+    Parameters = {
+      /**
+       * Name of the Azure service for which the problem classifications need to be retrieved.
+       */
+      @pattern("^[0-9a-zA-Z_\\-. ]+$")
+      @path
+      @segment("services")
+      problemServiceName: string;
+    }
   >;
 }
 
@@ -57,7 +52,15 @@ interface ClassifyProblemsNoSubscription {
   classifyProblems is ArmProviderActionSync<
     Request = ProblemClassificationsClassificationInput,
     Response = ProblemClassificationsClassificationOutput,
-    Parameters = ProblemServiceNameParameter
+    Parameters = {
+      /**
+       * Name of the Azure service for which the problem classifications need to be retrieved.
+       */
+      @pattern("^[0-9a-zA-Z_\\-. ]+$")
+      @path
+      @segment("services")
+      problemServiceName: string;
+    }
   >;
 }
 
