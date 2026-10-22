@@ -1,4 +1,4 @@
-# Build Authoring Plan
+# Build TypeSpec Source Plan
 
 > Prerequisite: Steps 1 (Analyze Project) and 2 (Intake) must be complete.
 
@@ -24,9 +24,14 @@ Never call `azsdk_typespec_generate_authoring_plan`. Reuse the Step 2 grounding
 record when writing the plan and later citations; do not perform a second lookup only
 to plan or cite it.
 
+The plan produced here covers ordinary TypeSpec source declarations only. Do not
+mix `client.tsp` customizations into it. Continue to the separate
+[client configuration step](client-configuration.md) after this plan is complete;
+SDK-visible changes include that analysis by default unless the user opts out.
+
 ---
 
-## 3.2 Case-Specific Authoring Plan
+## 3.2 Case-Specific TypeSpec Source Plan
 
 ### API Versioning
 
