@@ -22,7 +22,7 @@ interface AgentSessionExec {
    * checks complete before the service returns `101 Switching Protocols`.
    *
    * The caller must have endpoint action access and the
-   * `Microsoft.CognitiveServices/accounts/AIServices/agents/sessions/exec/action` data action.
+   * `Microsoft.CognitiveServices/accounts/AIServices/agents/session/exec/action` data action.
    * Non-browser clients authenticate with a Microsoft Entra bearer token. Browser clients
    * supply the bearer token as an additional `authorization.bearer.<token>` WebSocket
    * subprotocol; the service negotiates only `exec.v1`. Query-string bearer credentials
