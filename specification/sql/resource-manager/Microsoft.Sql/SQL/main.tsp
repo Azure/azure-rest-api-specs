@@ -101,6 +101,7 @@ import "./RestorableDroppedDatabase.tsp";
 import "./RestorableDroppedManagedDatabase.tsp";
 import "./RestorableDroppedManagedDatabasesFromDroppedManagedInstance.tsp";
 import "./RestorableDroppedManagedInstancesByLocation.tsp";
+import "./RestoreFromDroppedManagedInstanceFeatureRegistration.tsp";
 import "./RestorePoint.tsp";
 import "./ServerAdvancedThreatProtection.tsp";
 import "./ServerAutomaticTuning.tsp";
@@ -141,7 +142,7 @@ using TypeSpec.Versioning;
  * The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.
  */
 @Azure.ResourceManager.Legacy.features(
-  Microsoft.SqlFeatureRegistration.Features
+  Microsoft.SqlFeatureRegistration.RestoreFromDroppedManagedInstanceFeatures
 )
 @armProviderNamespace
 @service(#{ title: "SqlManagementClient" })
@@ -273,12 +274,6 @@ enum Features {
   ManagedDatabaseAdvancedThreatProtectionSettings,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedDatabaseColumns,
-
-  /**
-   * Short-term retention policies for databases under dropped managed instances.
-   */
-  ManagedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedDatabaseMoveOperations,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -359,17 +354,6 @@ enum Features {
   RestorableDroppedDatabases,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   RestorableDroppedManagedDatabases,
-
-  /**
-   * Restorable databases under dropped managed instances.
-   */
-  RestorableDroppedManagedDatabasesFromDroppedManagedInstance,
-
-  /**
-   * Restorable dropped managed instances discovered by location.
-   */
-  RestorableDroppedManagedInstancesByLocation,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   RestorePoints,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

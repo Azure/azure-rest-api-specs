@@ -35,7 +35,7 @@ alias ManagedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicyOps
 @added(Versions.v2026_11_01_preview)
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(
-  Features.ManagedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies
+  Microsoft.SqlFeatureRegistration.RestoreFromDroppedManagedInstanceFeatures.ManagedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies
 )
 interface ManagedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies {
   /** Gets the short-term retention policy for a database under a dropped managed instance. */

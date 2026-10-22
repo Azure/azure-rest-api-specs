@@ -2026,7 +2026,7 @@ union ManagedShortTermRetentionPolicyName {
   string,
 
   /**
-   * default
+   * The default short-term retention policy.
    */
   default: "default",
 }
@@ -2170,7 +2170,7 @@ union ManagedDatabaseStatus {
 }
 
 /**
- * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. SourceDatabaseName, SourceManagedInstanceName and PointInTime must be specified. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
+ * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup. Specify sourceDatabaseId for an existing database or restorableDroppedDatabaseId for a dropped database, and specify restorePointInTime. The dropped database can be on an existing or dropped managed instance. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
  */
 union ManagedDatabaseCreateMode {
   string,
@@ -11698,7 +11698,7 @@ model ManagedDatabaseProperties {
   catalogCollation?: CatalogCollationType;
 
   /**
-   * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. SourceDatabaseName, SourceManagedInstanceName and PointInTime must be specified. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
+   * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup. Specify sourceDatabaseId for an existing database or restorableDroppedDatabaseId for a dropped database, and specify restorePointInTime. The dropped database can be on an existing or dropped managed instance. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
    */
   @visibility(Lifecycle.Create)
   createMode?: ManagedDatabaseCreateMode;
@@ -11722,7 +11722,7 @@ model ManagedDatabaseProperties {
   crossSubscriptionSourceDatabaseId?: string;
 
   /**
-   * The restorable dropped database resource id to restore when creating this database.
+   * The restorable dropped database resource id to restore when creating this database. This may identify a database on a dropped managed instance.
    */
   @visibility(Lifecycle.Create)
   restorableDroppedDatabaseId?: string;
@@ -14016,10 +14016,7 @@ model RestorableDroppedDatabaseProperties {
   keys?: Record<DatabaseKey>;
 }
 
-/**
- * Metadata retained for a dropped managed instance. This read-only resource
- * describes a deleted instance and has no provisioning lifecycle.
- */
+/** Metadata retained for a dropped managed instance. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This read-only recovery resource describes a deleted instance and has no provisioning lifecycle."
 @added(Versions.v2026_11_01_preview)
 model RestorableDroppedManagedInstanceProperties {

@@ -18,7 +18,7 @@ namespace Microsoft.Sql;
 @added(Versions.v2026_11_01_preview)
 @subscriptionResource
 @Azure.ResourceManager.Legacy.feature(
-  Features.RestorableDroppedManagedInstancesByLocation
+  Microsoft.SqlFeatureRegistration.RestoreFromDroppedManagedInstanceFeatures.RestorableDroppedManagedInstancesByLocation
 )
 model RestorableDroppedManagedInstance
   is TrackedResource<RestorableDroppedManagedInstanceProperties> {
@@ -39,7 +39,7 @@ alias RestorableDroppedManagedInstanceLocationParameters = {
   @path
   @segment("locations")
   @key
-  locationName: string;
+  locationName: Azure.Core.azureLocation;
 };
 
 alias RestorableDroppedManagedInstanceIdParameter = {
@@ -66,7 +66,7 @@ alias RestorableDroppedManagedInstanceByLocationOps = Azure.ResourceManager.Lega
 @added(Versions.v2026_11_01_preview)
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(
-  Features.RestorableDroppedManagedInstancesByLocation
+  Microsoft.SqlFeatureRegistration.RestoreFromDroppedManagedInstanceFeatures.RestorableDroppedManagedInstancesByLocation
 )
 interface RestorableDroppedManagedInstancesByLocation {
   /** Gets a restorable dropped managed instance in a location. */

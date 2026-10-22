@@ -39,7 +39,7 @@ alias RestorableDroppedManagedDatabaseFromDroppedManagedInstanceOps = Azure.Reso
 @added(Versions.v2026_11_01_preview)
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(
-  Features.RestorableDroppedManagedDatabasesFromDroppedManagedInstance
+  Microsoft.SqlFeatureRegistration.RestoreFromDroppedManagedInstanceFeatures.RestorableDroppedManagedDatabasesFromDroppedManagedInstance
 )
 interface RestorableDroppedManagedDatabasesFromDroppedManagedInstance {
   /** Gets a restorable database under a dropped managed instance. */
