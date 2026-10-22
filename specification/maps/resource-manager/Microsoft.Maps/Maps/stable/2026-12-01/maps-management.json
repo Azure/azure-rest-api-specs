@@ -1480,9 +1480,70 @@
           "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "properties": {
-          "$ref": "#/definitions/MapsAccountProperties",
+          "$ref": "#/definitions/MapsAccountUpdateProperties",
           "description": "The map account properties.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MapsAccountUpdateProperties": {
+      "type": "object",
+      "description": "Maps account properties that can be updated without applying creation defaults.",
+      "properties": {
+        "uniqueId": {
+          "type": "string",
+          "description": "A unique identifier for the Maps Account",
+          "readOnly": true
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "Allows toggle functionality on Azure Policy to disable Azure Maps local authentication support. This will disable Shared Keys and Shared Access Signature Token authentication from any usage."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the Maps account resource, Account updates can only be performed on terminal states. Terminal states: `Succeeded` and `Failed`",
+          "readOnly": true
+        },
+        "linkedResources": {
+          "type": "array",
+          "description": "The array of associated resources to the Maps account. Linked resource in the array cannot individually update, you must update all linked resources in the array together. These resources may be used on operations on the Azure Maps REST API. Access is controlled by the Maps Account Managed Identity(s) permissions to those resource(s).",
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/LinkedResource"
+          }
+        },
+        "cors": {
+          "$ref": "#/definitions/CorsRules",
+          "description": "Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Blob service."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "All encryption configuration for a resource."
+        },
+        "locations": {
+          "type": "array",
+          "description": "List of additional data processing regions for the Maps Account, which may result in requests being processed in another geography. Some features or results may be restricted to specific regions. By default, Maps REST APIs process requests according to the account location or the [geographic scope](https://learn.microsoft.com/azure/azure-maps/geographic-scope).",
+          "items": {
+            "$ref": "#/definitions/LocationsItem"
+          },
+          "x-ms-identifiers": [
+            "locationName"
+          ]
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "List of private endpoint connections associated with the Maps Account.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "properties/privateEndpoint/id"
+          ]
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Property to specify whether the Maps Account will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked."
         }
       }
     },

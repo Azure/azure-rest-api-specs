@@ -177,6 +177,15 @@ model MapsAccountProperties {
 }
 
 /**
+ * Maps account properties that can be updated without applying creation defaults.
+ */
+@added(Versions.v2026_12_01)
+@withoutDefaultValues
+model MapsAccountUpdateProperties {
+  ...MapsAccountProperties;
+}
+
+/**
  * Linked resource is reference to a resource deployed in an Azure subscription, add the linked resource `uniqueName` value as an optional parameter for operations on Azure Maps Geospatial REST APIs.
  */
 model LinkedResource {
@@ -281,7 +290,7 @@ model MapsAccountUpdateParameters {
   /**
    * The map account properties.
    */
-  properties?: MapsAccountProperties;
+  properties?: MapsAccountUpdateProperties;
 }
 
 @@doc(
