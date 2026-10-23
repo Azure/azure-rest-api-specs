@@ -436,6 +436,15 @@ namespace Azure.AI.Projects;
   "csharp"
 );
 @@alternateType(
+  Azure.AI.Projects.BrowserAutomationPreviewTool,
+  {
+    identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationPreviewTool",
+    package: "Azure.AI.Extensions.OpenAI",
+    minVersion: "3.0.0-alpha.20260908.3",
+  },
+  "csharp"
+);
+@@alternateType(
   Azure.AI.Projects.BrowserAutomationToolConnectionParameters,
   {
     identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationToolConnectionParameters",
