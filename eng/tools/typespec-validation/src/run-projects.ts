@@ -8,7 +8,18 @@ import { relative, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
 import pc from "picocolors";
 import { simpleGit } from "simple-git";
-import { formatRuleSummary, supportsColor, type RuleCounts } from "./diagnostics.ts";
+import {
+  BatchFormatter,
+  batchFormatEnvironment,
+  batchFormatRequest,
+  type BatchFormatResponse,
+} from "./batch-format.ts";
+import {
+  exceptionDiagnostic,
+  formatRuleSummary,
+  supportsColor,
+  type RuleCounts,
+} from "./diagnostics.ts";
 import { findChangedProjects, type ChangedProjectsOptions } from "./find-projects.ts";
 import { cleanWorktree } from "./git-cleanup.ts";
 
@@ -68,7 +79,7 @@ export async function runAll(
     console.log(`Shard ${options.shard}: ${projects.length} of ${total} TypeSpec projects`);
   }
 
-  return runProjects(root, projects, { checkingAllSpecs: true }, options);
+  return runProjects(root, projects, { checkingAllSpecs: true }, options, new BatchFormatter());
 }
 
 export async function runChanged(
@@ -99,6 +110,7 @@ async function runProjects(
   projects: string[],
   context: RunContext,
   options: RunOptions,
+  formatter?: BatchFormatter,
 ): Promise<boolean> {
   const git = simpleGit(root);
   const logger = new ConsoleLogger(options.verbose);
@@ -143,7 +155,12 @@ async function runProjects(
     }
 
     try {
-      const { success, segments } = await validateProject(project, context, options.verbose);
+      const { success, segments } = await validateProject(
+        project,
+        context,
+        options.verbose,
+        formatter,
+      );
       if (success) {
         counts.PASS++;
         printProjectGroup(githubActions, "pass", name, segments);
@@ -301,9 +318,12 @@ function validateProject(
   folder: string,
   context: RunContext,
   verbose = false,
+  formatter?: BatchFormatter,
 ): Promise<{ success: boolean; segments: OutputSegment[] }> {
   return new Promise((resolvePromise, reject) => {
     const env = { ...process.env };
+    delete env[batchFormatEnvironment];
+    if (formatter) env[batchFormatEnvironment] = "1";
     if (supportsColor()) {
       delete env.NO_COLOR;
       env.FORCE_COLOR = "1";
@@ -339,8 +359,33 @@ function validateProject(
         JSON.stringify(context),
         ...(verbose ? ["--verbose"] : []),
       ],
-      { stdio: ["ignore", "pipe", "pipe"], env },
+      { stdio: formatter ? ["ignore", "pipe", "pipe", "ipc"] : ["ignore", "pipe", "pipe"], env },
     );
+    if (formatter) {
+      const respond = async () => {
+        let result;
+        try {
+          result = await formatter.check(folder, {
+            debug: (message) => {
+              if (verbose) capture("stdout", Buffer.from(`${message}\n`));
+            },
+          });
+        } catch (error) {
+          if (verbose && error instanceof Error) {
+            capture("stdout", Buffer.from(`${error.stack ?? error.message}\n`));
+          }
+          result = { success: false, diagnostics: [exceptionDiagnostic(error, folder)] };
+        }
+        if (!child.connected) return;
+        const response: BatchFormatResponse = { type: "tsv-format-result", result };
+        child.send(response, (error) => {
+          if (error) reject(error);
+        });
+      };
+      child.on("message", (message: unknown) => {
+        if (message === batchFormatRequest) void respond().catch(reject);
+      });
+    }
     child.stdout?.on("data", (chunk: Buffer) => capture("stdout", chunk));
     child.stderr?.on("data", (chunk: Buffer) => capture("stderr", chunk));
     child.once("error", reject);

@@ -116,7 +116,7 @@ it("discovers sorted, unique project folders, including invalid config extension
   expect(spawn).toHaveBeenCalledWith(
     process.execPath,
     [expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/), first, '{"checkingAllSpecs":true}'],
-    { stdio: ["ignore", "pipe", "pipe"], env: expect.any(Object) as unknown },
+    { stdio: ["ignore", "pipe", "pipe", "ipc"], env: expect.any(Object) as unknown },
   );
   expect(console.error).not.toHaveBeenCalled();
 });
