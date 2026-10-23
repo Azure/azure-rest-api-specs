@@ -1,0 +1,74 @@
+{
+  "title": "Update a scenario only when present, or return 412 when it does not exist",
+  "operationId": "Scenarios_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG",
+    "workspaceName": "exampleWorkspace",
+    "scenarioName": "exampleScenario",
+    "If-Match": "*",
+    "resource": {
+      "properties": {
+        "parameters": [],
+        "actions": [
+          {
+            "name": "restart",
+            "actionId": "microsoft-compute-shutdown/2.0",
+            "duration": "PT5M",
+            "selectors": [
+              {
+                "name": "logicalZone",
+                "value": "1"
+              },
+              {
+                "name": "location",
+                "value": "eastus"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/exampleScenario",
+        "name": "exampleScenario",
+        "type": "Microsoft.Chaos/workspaces/scenarios",
+        "properties": {
+          "version": "1.0",
+          "parameters": [],
+          "actions": [
+            {
+              "name": "restart",
+              "actionId": "microsoft-compute-shutdown/2.0",
+              "duration": "PT5M",
+              "selectors": [
+                {
+                  "name": "logicalZone",
+                  "value": "1"
+                },
+                {
+                  "name": "location",
+                  "value": "eastus"
+                }
+              ]
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "PreconditionFailed",
+          "message": "The scenario does not exist. The update-only precondition failed.",
+          "target": "If-Match"
+        }
+      }
+    }
+  }
+}
