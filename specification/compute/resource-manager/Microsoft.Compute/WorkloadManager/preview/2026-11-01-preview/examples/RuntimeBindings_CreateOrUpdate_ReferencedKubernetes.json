@@ -8,9 +8,8 @@
     "bindingName": "customer-aks",
     "api-version": "2026-11-01-preview",
     "resource": {
-      "location": "eastus2",
-      "kind": "Kubernetes",
       "properties": {
+        "kind": "Kubernetes",
         "provisioningMode": "Referenced",
         "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aks-rg/providers/Microsoft.ContainerService/managedClusters/aks-prod"
       }
@@ -22,12 +21,15 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/customer-aks",
         "name": "customer-aks",
         "type": "Microsoft.Compute/workloadSpaces/runtimeBindings",
-        "location": "eastus2",
-        "kind": "Kubernetes",
         "properties": {
+          "kind": "Kubernetes",
           "provisioningMode": "Referenced",
           "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aks-rg/providers/Microsoft.ContainerService/managedClusters/aks-prod",
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "state": "Ready",
+          "ownership": "Referenced",
+          "providerResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aks-rg/providers/Microsoft.ContainerService/managedClusters/aks-prod",
+          "message": "The provider resource reference is registered. Availability is checked by dependent operations."
         }
       }
     },
@@ -40,12 +42,13 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/customer-aks",
         "name": "customer-aks",
         "type": "Microsoft.Compute/workloadSpaces/runtimeBindings",
-        "location": "eastus2",
-        "kind": "Kubernetes",
         "properties": {
+          "kind": "Kubernetes",
           "provisioningMode": "Referenced",
           "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aks-rg/providers/Microsoft.ContainerService/managedClusters/aks-prod",
-          "provisioningState": "Provisioning"
+          "provisioningState": "Accepted",
+          "state": "Pending",
+          "ownership": "Referenced"
         }
       }
     }

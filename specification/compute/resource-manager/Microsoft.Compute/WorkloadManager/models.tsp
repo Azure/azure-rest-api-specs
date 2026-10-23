@@ -60,6 +60,9 @@ union CapabilityKind {
 
   /** Enables isolated agent sandbox execution. */
   AgentSandbox: "AgentSandbox",
+
+  /** Enables workload pod snapshot and restore. */
+  PodSnapshotRestore: "PodSnapshotRestore",
 }
 
 /** The provisioning mode for an execution identity. */
@@ -85,8 +88,70 @@ union ExecutionIdentityScope {
 union EgressMode {
   string,
 
+  /** Workload Manager supplies and manages the egress configuration. */
+  ServiceManaged: "ServiceManaged",
+
   /** The customer supplies and manages the egress configuration. */
   CustomerManaged: "CustomerManaged",
+}
+
+/** The customer-visible readiness of a workload space. */
+union WorkloadSpaceState {
+  string,
+
+  /** The space needs runtime configuration. */
+  PendingConfiguration: "PendingConfiguration",
+
+  /** The composed runtime environment is ready. */
+  Ready: "Ready",
+
+  /** The space or one of its dependencies failed. */
+  Failed: "Failed",
+
+  /** The space is being deleted. */
+  Deleting: "Deleting",
+}
+
+/** The readiness of a runtime binding or link, separate from provisioning state. */
+union RuntimeState {
+  string,
+
+  /** Runtime configuration is pending. */
+  Pending: "Pending",
+
+  /** The runtime is being provisioned. */
+  Provisioning: "Provisioning",
+
+  /** Resource registration or readiness checks succeeded; this is not a live provider health signal. */
+  Ready: "Ready",
+
+  /** The runtime failed. */
+  Failed: "Failed",
+}
+
+/** The readiness of a capability. */
+union CapabilityState {
+  string,
+
+  /** Capability configuration is pending. */
+  Pending: "Pending",
+
+  /** The provider capability profile is enabled; workload runtime readiness is not verified. */
+  Ready: "Ready",
+
+  /** The capability failed. */
+  Failed: "Failed",
+}
+
+/** The ownership of the provider resource associated with a runtime binding. */
+union RuntimeOwnership {
+  string,
+
+  /** Workload Manager created the provider resource. */
+  Created: "Created",
+
+  /** The provider resource is customer-owned. */
+  Referenced: "Referenced",
 }
 
 /** Properties of a workload space. */
@@ -94,6 +159,15 @@ model WorkloadSpaceProperties {
   /** The provisioning state of the workload space. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /** The readiness of the composed runtime environment. */
+  @visibility(Lifecycle.Read)
+  state: WorkloadSpaceState;
+
+  /** Aggregate status across children and dependencies. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Aggregate status is an extensible read-only diagnostic object."
+  @visibility(Lifecycle.Read)
+  operationStatus?: Record<unknown>;
 }
 
 /** A regional governance and lifecycle boundary for composed runtimes. */
@@ -104,6 +178,7 @@ model WorkloadSpace is TrackedResource<WorkloadSpaceProperties> {
     SegmentName = "workloadSpaces",
     NamePattern = "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
   >;
+  ...ManagedSystemAssignedIdentityProperty;
 }
 
 /** Customer-selected configuration for a service-managed runtime. */
@@ -157,7 +232,7 @@ model ServiceManagedExecutionIdentity extends ExecutionIdentity {
 /** Identity configuration for a managed runtime. */
 model RuntimeIdentityProfile {
   /** The identity made available to the execution runtime. */
-  executionIdentity?: ExecutionIdentity;
+  executionIdentity: ExecutionIdentity;
 }
 
 /** Network configuration for a managed runtime. */
@@ -170,7 +245,7 @@ model RuntimeNetworkProfile {
   ]>;
 
   /** Indicates who manages runtime egress. */
-  egressMode?: EgressMode;
+  egressMode?: EgressMode = EgressMode.ServiceManaged;
 }
 
 /** Read-only status shared by runtime binding variants. */
@@ -182,12 +257,28 @@ model RuntimeBindingReadOnlyProperties {
   /** The provider resource created or referenced by the binding. */
   @visibility(Lifecycle.Read)
   providerResourceId?: armResourceIdentifier;
+
+  /** Runtime readiness, independent of the most recent write operation. */
+  @visibility(Lifecycle.Read)
+  state: RuntimeState;
+
+  /** The ownership of the provider resource. */
+  @visibility(Lifecycle.Read)
+  ownership: RuntimeOwnership;
+
+  /** Actionable detail when the binding is not ready. */
+  @visibility(Lifecycle.Read)
+  message?: string;
 }
 
 /** Common properties of managed and referenced runtime bindings. */
 @discriminator("provisioningMode")
 model RuntimeBindingProperties {
   ...RuntimeBindingReadOnlyProperties;
+
+  /** The runtime technology, fixed when the binding is created. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  kind: RuntimeBindingKind;
 
   /** Indicates whether Workload Manager owns or references the runtime. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -221,14 +312,13 @@ model ReferencedRuntimeBindingProperties extends RuntimeBindingProperties {
 
 /** A runtime participant in a workload space. */
 @parentResource(WorkloadSpace)
-model RuntimeBinding is TrackedResource<RuntimeBindingProperties> {
+model RuntimeBinding is ProxyResource<RuntimeBindingProperties, false> {
   ...ResourceNameParameter<
     Resource = RuntimeBinding,
     KeyName = "bindingName",
     SegmentName = "runtimeBindings",
     NamePattern = "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
   >;
-  ...ResourceKindProperty<RuntimeBindingKind>;
 }
 
 /** Identity configuration used to integrate runtime bindings. */
@@ -271,11 +361,19 @@ model RuntimeLinkProperties {
     }
   ]>;
 
+  /** The dedicated managed virtual node pool subnet in the bindings' shared virtual network. Required for customer networks; otherwise uses the space-owned subnet. Immutable after creation. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  subnetResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
+
   /** The provider integration identity configuration. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
   integrationProfile?: RuntimeLinkIntegrationProfile;
 
-  /** The mutable capacity policy for the runtime composition. */
+  /** Accepted capacity intent only. */
   capacityProfile?: CapacityProfile;
 
   /** The provisioning state of the runtime link. */
@@ -285,11 +383,19 @@ model RuntimeLinkProperties {
   /** The provider resource that realizes the runtime composition. */
   @visibility(Lifecycle.Read)
   providerResourceId?: armResourceIdentifier;
+
+  /** Runtime-link readiness, independent of provisioning success. */
+  @visibility(Lifecycle.Read)
+  state: RuntimeState;
+
+  /** Actionable detail when the link is not ready. */
+  @visibility(Lifecycle.Read)
+  message?: string;
 }
 
 /** A relationship between an orchestrator runtime and an optional execution runtime. */
 @parentResource(WorkloadSpace)
-model RuntimeLink is TrackedResource<RuntimeLinkProperties> {
+model RuntimeLink is ProxyResource<RuntimeLinkProperties, false> {
   ...ResourceNameParameter<
     Resource = RuntimeLink,
     KeyName = "linkName",
@@ -300,28 +406,39 @@ model RuntimeLink is TrackedResource<RuntimeLinkProperties> {
 
 /** Properties of a capability enabled for a workload space. */
 model CapabilityProperties {
-  /** The version selection policy for the capability. */
-  versionPolicy: VersionPolicy;
+  /** The capability to enable, fixed when the capability is created. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  kind: CapabilityKind;
 
-  /** The effective capability version selected by the service. */
-  @visibility(Lifecycle.Read)
-  effectiveVersion?: string;
+  /** The version selection policy for the capability. */
+  versionPolicy?: VersionPolicy = VersionPolicy.ServiceManaged;
+
+  /** Capability-specific settings. The implemented AKS core capability profiles require an empty object. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Capability settings use an opaque provider-specific configuration object."
+  settings?: Record<unknown>;
 
   /** The provisioning state of the capability. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /** Capability readiness, independent of the most recent write operation. */
+  @visibility(Lifecycle.Read)
+  state: CapabilityState;
+
+  /** Actionable detail when the capability is not ready. */
+  @visibility(Lifecycle.Read)
+  message?: string;
 }
 
 /** A capability enabled for a workload space. */
 @parentResource(WorkloadSpace)
-model Capability is TrackedResource<CapabilityProperties> {
+model Capability is ProxyResource<CapabilityProperties, false> {
   ...ResourceNameParameter<
     Resource = Capability,
     KeyName = "capabilityName",
     SegmentName = "capabilities",
     NamePattern = "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
   >;
-  ...ResourceKindProperty<CapabilityKind>;
 }
 
 /** Mutable properties of a workload space. */
@@ -390,4 +507,8 @@ model CapabilityUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
 model CapabilityMutableProperties {
   /** The version selection policy for the capability. */
   versionPolicy?: VersionPolicy;
+
+  /** Capability-specific settings. The implemented AKS core capability profiles require an empty object. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Capability settings use an opaque provider-specific configuration object."
+  settings?: Record<unknown>;
 }

@@ -568,6 +568,9 @@
         "x-ms-examples": {
           "Enable the Agent Sandbox capability": {
             "$ref": "./examples/Capabilities_CreateOrUpdate_AgentSandbox.json"
+          },
+          "Enable the Pod Snapshot Restore capability with the default version policy": {
+            "$ref": "./examples/Capabilities_CreateOrUpdate_PodSnapshotRestore.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -991,7 +994,7 @@
           }
         },
         "x-ms-examples": {
-          "Update mutable runtime binding network configuration": {
+          "Update runtime binding network configuration (contract example; PATCH is not implemented by the service)": {
             "$ref": "./examples/RuntimeBindings_Update.json"
           }
         },
@@ -1246,11 +1249,11 @@
           }
         },
         "x-ms-examples": {
-          "Create a Kubernetes-only runtime link": {
-            "$ref": "./examples/RuntimeLinks_CreateOrUpdate_AksOnly.json"
-          },
           "Create a runtime link between Kubernetes and serverless containers": {
             "$ref": "./examples/RuntimeLinks_CreateOrUpdate_AksAci.json"
+          },
+          "Create a runtime link without capacity intent": {
+            "$ref": "./examples/RuntimeLinks_CreateOrUpdate_WithoutCapacity.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1331,7 +1334,7 @@
           }
         },
         "x-ms-examples": {
-          "Update runtime link capacity": {
+          "Update runtime link capacity intent": {
             "$ref": "./examples/RuntimeLinks_Update.json"
           }
         },
@@ -1417,20 +1420,14 @@
         "properties": {
           "$ref": "#/definitions/CapabilityProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "kind": {
-          "$ref": "#/definitions/CapabilityKind",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1438,7 +1435,8 @@
       "type": "string",
       "description": "The capability enabled for a workload space.",
       "enum": [
-        "AgentSandbox"
+        "AgentSandbox",
+        "PodSnapshotRestore"
       ],
       "x-ms-enum": {
         "name": "CapabilityKind",
@@ -1448,6 +1446,11 @@
             "name": "AgentSandbox",
             "value": "AgentSandbox",
             "description": "Enables isolated agent sandbox execution."
+          },
+          {
+            "name": "PodSnapshotRestore",
+            "value": "PodSnapshotRestore",
+            "description": "Enables workload pod snapshot and restore."
           }
         ]
       }
@@ -1477,36 +1480,93 @@
       "type": "object",
       "description": "Properties of a capability enabled for a workload space.",
       "properties": {
-        "versionPolicy": {
-          "$ref": "#/definitions/VersionPolicy",
-          "description": "The version selection policy for the capability."
+        "kind": {
+          "$ref": "#/definitions/CapabilityKind",
+          "description": "The capability to enable, fixed when the capability is created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
-        "effectiveVersion": {
+        "versionPolicy": {
           "type": "string",
-          "description": "The effective capability version selected by the service.",
-          "readOnly": true
+          "description": "The version selection policy for the capability.",
+          "default": "ServiceManaged",
+          "enum": [
+            "ServiceManaged"
+          ],
+          "x-ms-enum": {
+            "name": "VersionPolicy",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ServiceManaged",
+                "value": "ServiceManaged",
+                "description": "Workload Manager selects and upgrades the capability version."
+              }
+            ]
+          }
+        },
+        "settings": {
+          "type": "object",
+          "description": "Capability-specific settings. The implemented AKS core capability profiles require an empty object.",
+          "additionalProperties": {}
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the capability.",
           "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/CapabilityState",
+          "description": "Capability readiness, independent of the most recent write operation.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Actionable detail when the capability is not ready.",
+          "readOnly": true
         }
       },
       "required": [
-        "versionPolicy"
+        "kind",
+        "state"
       ]
+    },
+    "CapabilityState": {
+      "type": "string",
+      "description": "The readiness of a capability.",
+      "enum": [
+        "Pending",
+        "Ready",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CapabilityState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Capability configuration is pending."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The provider capability profile is enabled; workload runtime readiness is not verified."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The capability failed."
+          }
+        ]
+      }
     },
     "CapabilityUpdate": {
       "type": "object",
       "description": "Mutable properties of a capability.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/CapabilityUpdateProperties",
           "description": "The resource-specific properties for this resource."
@@ -1520,6 +1580,11 @@
         "versionPolicy": {
           "$ref": "#/definitions/VersionPolicy",
           "description": "The version selection policy for the capability."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Capability-specific settings. The implemented AKS core capability profiles require an empty object.",
+          "additionalProperties": {}
         }
       }
     },
@@ -1561,24 +1626,6 @@
           "description": "The maximum number of execution nodes.",
           "minimum": 0
         }
-      }
-    },
-    "EgressMode": {
-      "type": "string",
-      "description": "The egress ownership mode for a managed runtime.",
-      "enum": [
-        "CustomerManaged"
-      ],
-      "x-ms-enum": {
-        "name": "EgressMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "CustomerManaged",
-            "value": "CustomerManaged",
-            "description": "The customer supplies and manages the egress configuration."
-          }
-        ]
       }
     },
     "ExecutionIdentity": {
@@ -1806,20 +1853,14 @@
         "properties": {
           "$ref": "#/definitions/RuntimeBindingProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "kind": {
-          "$ref": "#/definitions/RuntimeBindingKind",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1883,6 +1924,29 @@
           "description": "The provider resource created or referenced by the binding.",
           "readOnly": true
         },
+        "state": {
+          "$ref": "#/definitions/RuntimeState",
+          "description": "Runtime readiness, independent of the most recent write operation.",
+          "readOnly": true
+        },
+        "ownership": {
+          "$ref": "#/definitions/RuntimeOwnership",
+          "description": "The ownership of the provider resource.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Actionable detail when the binding is not ready.",
+          "readOnly": true
+        },
+        "kind": {
+          "$ref": "#/definitions/RuntimeBindingKind",
+          "description": "The runtime technology, fixed when the binding is created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "provisioningMode": {
           "$ref": "#/definitions/RuntimeBindingProvisioningMode",
           "description": "Indicates whether Workload Manager owns or references the runtime.",
@@ -1902,6 +1966,9 @@
       },
       "discriminator": "provisioningMode",
       "required": [
+        "state",
+        "ownership",
+        "kind",
         "provisioningMode"
       ]
     },
@@ -1933,13 +2000,6 @@
       "type": "object",
       "description": "Mutable properties of a runtime binding.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/RuntimeBindingUpdateProperties",
           "description": "The resource-specific properties for this resource."
@@ -1968,7 +2028,10 @@
           "$ref": "#/definitions/ExecutionIdentity",
           "description": "The identity made available to the execution runtime."
         }
-      }
+      },
+      "required": [
+        "executionIdentity"
+      ]
     },
     "RuntimeIdentityProfileUpdate": {
       "type": "object",
@@ -1989,9 +2052,12 @@
           "description": "The resource-specific properties for this resource."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2074,6 +2140,22 @@
             ]
           }
         },
+        "subnetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The dedicated managed virtual node pool subnet in the bindings' shared virtual network. Required for customer networks; otherwise uses the space-owned subnet. Immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        },
         "integrationProfile": {
           "$ref": "#/definitions/RuntimeLinkIntegrationProfile",
           "description": "The provider integration identity configuration.",
@@ -2084,7 +2166,7 @@
         },
         "capacityProfile": {
           "$ref": "#/definitions/CapacityProfile",
-          "description": "The mutable capacity policy for the runtime composition."
+          "description": "Accepted capacity intent only."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -2096,23 +2178,27 @@
           "format": "arm-id",
           "description": "The provider resource that realizes the runtime composition.",
           "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/RuntimeState",
+          "description": "Runtime-link readiness, independent of provisioning success.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Actionable detail when the link is not ready.",
+          "readOnly": true
         }
       },
       "required": [
-        "orchestratorBindingResourceId"
+        "orchestratorBindingResourceId",
+        "state"
       ]
     },
     "RuntimeLinkUpdate": {
       "type": "object",
       "description": "Mutable properties of a runtime link.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/RuntimeLinkUpdateProperties",
           "description": "The resource-specific properties for this resource."
@@ -2146,9 +2232,90 @@
           }
         },
         "egressMode": {
-          "$ref": "#/definitions/EgressMode",
-          "description": "Indicates who manages runtime egress."
+          "type": "string",
+          "description": "Indicates who manages runtime egress.",
+          "default": "ServiceManaged",
+          "enum": [
+            "ServiceManaged",
+            "CustomerManaged"
+          ],
+          "x-ms-enum": {
+            "name": "EgressMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ServiceManaged",
+                "value": "ServiceManaged",
+                "description": "Workload Manager supplies and manages the egress configuration."
+              },
+              {
+                "name": "CustomerManaged",
+                "value": "CustomerManaged",
+                "description": "The customer supplies and manages the egress configuration."
+              }
+            ]
+          }
         }
+      }
+    },
+    "RuntimeOwnership": {
+      "type": "string",
+      "description": "The ownership of the provider resource associated with a runtime binding.",
+      "enum": [
+        "Created",
+        "Referenced"
+      ],
+      "x-ms-enum": {
+        "name": "RuntimeOwnership",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "Workload Manager created the provider resource."
+          },
+          {
+            "name": "Referenced",
+            "value": "Referenced",
+            "description": "The provider resource is customer-owned."
+          }
+        ]
+      }
+    },
+    "RuntimeState": {
+      "type": "string",
+      "description": "The readiness of a runtime binding or link, separate from provisioning state.",
+      "enum": [
+        "Pending",
+        "Provisioning",
+        "Ready",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "RuntimeState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Runtime configuration is pending."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The runtime is being provisioned."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "Resource registration or readiness checks succeeded; this is not a live provider health signal."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The runtime failed."
+          }
+        ]
       }
     },
     "ServiceManagedExecutionIdentity": {
@@ -2201,6 +2368,10 @@
         "properties": {
           "$ref": "#/definitions/WorkloadSpaceProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -2238,13 +2409,67 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the workload space.",
           "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/WorkloadSpaceState",
+          "description": "The readiness of the composed runtime environment.",
+          "readOnly": true
+        },
+        "operationStatus": {
+          "type": "object",
+          "description": "Aggregate status across children and dependencies.",
+          "additionalProperties": {},
+          "readOnly": true
         }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "WorkloadSpaceState": {
+      "type": "string",
+      "description": "The customer-visible readiness of a workload space.",
+      "enum": [
+        "PendingConfiguration",
+        "Ready",
+        "Failed",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadSpaceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PendingConfiguration",
+            "value": "PendingConfiguration",
+            "description": "The space needs runtime configuration."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The composed runtime environment is ready."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The space or one of its dependencies failed."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The space is being deleted."
+          }
+        ]
       }
     },
     "WorkloadSpaceUpdate": {
       "type": "object",
       "description": "Mutable properties of a workload space.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
