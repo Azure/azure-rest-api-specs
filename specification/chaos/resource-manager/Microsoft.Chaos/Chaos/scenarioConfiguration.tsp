@@ -31,11 +31,9 @@ interface ScenarioConfigurations {
   /**
    * Create or update a scenario definition.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Conditional PUT explicitly returns HTTP 412 as required for failed preconditions; 200, 201 and default responses remain unchanged."
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ScenarioConfiguration,
-    Parameters = PutPreconditionHeaders,
-    Error = PutPreconditionError
+    Parameters = PutPreconditionHeaders
   >;
 
   /**

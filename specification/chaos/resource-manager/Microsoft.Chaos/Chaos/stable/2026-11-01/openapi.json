@@ -2294,13 +2294,6 @@
               }
             }
           },
-          "412": {
-            "description": "An effective request precondition failed or could not be verified. No resource change or asynchronous operation is started.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3387,13 +3380,6 @@
               "$ref": "#/definitions/Scenario"
             }
           },
-          "412": {
-            "description": "An effective request precondition failed or could not be verified. No resource change or asynchronous operation is started.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3682,13 +3668,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "412": {
-            "description": "An effective request precondition failed or could not be verified. No resource change or asynchronous operation is started.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
@@ -9064,7 +9043,7 @@
     "PutPreconditionHeaders.ifMatch": {
       "name": "If-Match",
       "in": "header",
-      "description": "Use '*' to update the resource only if it exists. If the resource does not exist, the request fails with 412 Precondition Failed without creating it. Omit both condition headers for an unconditional create or update. Other effective conditions must be honored if supported or rejected with 412 if they cannot be verified; they must not be silently ignored. This contract does not introduce entity-tag matching.",
+      "description": "Use '*' to update the resource only if it exists. If the resource does not exist, the request fails with HTTP 412 and error code PreconditionFailed in the standard Azure error body. A failed condition starts no resource change or asynchronous operation. Omit both condition headers for an unconditional create or update. Other effective conditions must be honored if supported or rejected with 412 if they cannot be verified; they must not be silently ignored. This contract does not introduce entity-tag matching.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
@@ -9073,7 +9052,7 @@
     "PutPreconditionHeaders.ifNoneMatch": {
       "name": "If-None-Match",
       "in": "header",
-      "description": "Use '*' to create the resource only if it does not exist. If the resource exists, the request fails with 412 Precondition Failed without changing it. Omit both condition headers for an unconditional create or update. Other effective conditions must be honored if supported or rejected with 412 if they cannot be verified; they must not be silently ignored. This contract does not introduce entity-tag matching.",
+      "description": "Use '*' to create the resource only if it does not exist. If the resource exists, the request fails with HTTP 412 and error code PreconditionFailed in the standard Azure error body. A failed condition starts no resource change or asynchronous operation. Omit both condition headers for an unconditional create or update. Other effective conditions must be honored if supported or rejected with 412 if they cannot be verified; they must not be silently ignored. This contract does not introduce entity-tag matching.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
