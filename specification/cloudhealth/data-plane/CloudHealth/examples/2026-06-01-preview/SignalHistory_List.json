@@ -1,0 +1,56 @@
+{
+  "operationId": "SignalHistory_List",
+  "title": "List entity signal history",
+  "parameters": {
+    "endpoint": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com",
+    "api-version": "2026-06-01-preview",
+    "entityName": "frontend-web-app",
+    "signalName": "request-latency-p95",
+    "startAt": "2026-06-01T00:00:00Z",
+    "endAt": "2026-06-07T00:00:00Z",
+    "maxpagesize": 1000
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "occurredAt": "2026-06-05T12:00:00Z",
+            "value": 180.5,
+            "healthState": "Healthy",
+            "additionalContext": "p95 latency within the healthy threshold of 200ms."
+          },
+          {
+            "occurredAt": "2026-06-03T08:30:00Z",
+            "value": 240,
+            "healthState": "Degraded",
+            "additionalContext": "p95 latency exceeded the 200ms degraded threshold."
+          }
+        ],
+        "nextLink": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com/api/entities/frontend-web-app/signals/request-latency-p95/history?api-version=2026-06-01-preview&nextMarker=eyJwYWdlIjoyfQ"
+      }
+    },
+    "400": {
+      "headers": {
+        "x-ms-error-code": "InvalidQuery"
+      },
+      "body": {
+        "error": {
+          "code": "InvalidQuery",
+          "message": "The requested time range is invalid."
+        }
+      }
+    },
+    "404": {
+      "headers": {
+        "x-ms-error-code": "HealthModelNotFound"
+      },
+      "body": {
+        "error": {
+          "code": "HealthModelNotFound",
+          "message": "The requested health model was not found."
+        }
+      }
+    }
+  }
+}
