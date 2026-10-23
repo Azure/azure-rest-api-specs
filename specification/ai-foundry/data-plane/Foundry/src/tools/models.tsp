@@ -507,7 +507,7 @@ namespace Azure.AI.Projects {
 
   /**
    * The input definition information for a Browser Automation Tool, as used to configure an Agent.
-   * BrowserAutomationPreviewTool is deprecated.
+   * BrowserAutomationPreviewTool is deprecated and will be removed in the next releases.
    * Please use BrowserAutomationTool instead.
    * See https://aka.ms/bat/docs for more information on Browser automation tool.
    */
