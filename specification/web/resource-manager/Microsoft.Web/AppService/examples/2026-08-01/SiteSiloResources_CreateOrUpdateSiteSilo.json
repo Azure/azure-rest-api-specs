@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "name": "sitef6141",
+    "siloName": "silo1",
+    "api-version": "2026-08-01",
+    "resource": {
+      "properties": {
+        "primarySiteName": "sitef6141",
+        "primaryLocation": "East US",
+        "siloLocation": "West US 2",
+        "endpointStatus": "Enabled",
+        "trafficMode": "Active",
+        "networkingOverride": {
+          "vnetIntegrationOverride": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/silo-subnet"
+        },
+        "followLastKnownGood": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141/silos/silo1",
+        "name": "silo1",
+        "type": "Microsoft.Web/sites/silos",
+        "properties": {
+          "siloLocation": "West US 2",
+          "primarySiteName": "sitef6141",
+          "primaryLocation": "East US",
+          "endpointStatus": "Enabled",
+          "trafficMode": "Active",
+          "networkingOverride": {
+            "vnetIntegrationOverride": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/silo-subnet"
+          },
+          "provisioningState": "Succeeded",
+          "followLastKnownGood": false,
+          "defaultHostName": "sitef6141-silo1.azurewebsites.net",
+          "globalHostName": "sitef6141.azurewebsites.net",
+          "monitorStatus": "Online",
+          "createdTime": "2026-08-01T12:00:00.0000000Z",
+          "lastModifiedTime": "2026-08-01T12:30:00.0000000Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141/silos/silo1",
+        "name": "silo1",
+        "type": "Microsoft.Web/sites/silos",
+        "properties": {
+          "siloLocation": "West US 2",
+          "primarySiteName": "sitef6141",
+          "primaryLocation": "East US",
+          "endpointStatus": "Enabled",
+          "trafficMode": "Active",
+          "networkingOverride": {
+            "vnetIntegrationOverride": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/silo-subnet"
+          },
+          "provisioningState": "InProgress",
+          "followLastKnownGood": false
+        }
+      }
+    }
+  },
+  "operationId": "SiteSiloResources_CreateOrUpdateSiteSilo",
+  "title": "Create or update a silo of a web app"
+}
