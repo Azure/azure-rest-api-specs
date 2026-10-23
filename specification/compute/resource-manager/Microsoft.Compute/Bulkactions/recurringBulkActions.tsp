@@ -753,7 +753,7 @@ model RecurringBulkActionCreateResponse is ArmResourceCreatedResponse<
 model RecurringBulkActionFilterParameters {
   @added(Versions.`2026-11-06-preview`)
   @query("$filter")
-  @doc("The OData filter expression to apply to the list operation. Supported fields for recurring bulk action items are: name, id, type, location, properties/startTime, properties/endTime, properties/disabled, and properties/schedule/timeZone. Supports OData comparison and logical operators and string functions such as contains and startswith. Enum-typed properties, tags, and the cast function are not supported.")
+  @doc("The OData filter expression to apply to the list operation. Supported fields for recurring bulk action items are: name, id, type, location, properties/startTime, properties/endTime, properties/disabled, and properties/schedule/timeZone. Supports OData comparison and logical operators and string functions such as contains and startswith. Enum-typed properties, tags, and the cast and matchesPattern functions are not supported.")
   filter?: string;
 }
 
@@ -761,7 +761,7 @@ model RecurringBulkActionFilterParameters {
 model RecurringBulkActionResourceFilterParameters {
   @added(Versions.`2026-11-06-preview`)
   @query("$filter")
-  @doc("The OData filter expression to apply to the list operation. Supported fields for recurring bulk action resource items are: name, id, type, and resourceId. Supports OData comparison and logical operators and string functions such as contains and startswith. Enum-typed properties, tags, and the cast function are not supported.")
+  @doc("The OData filter expression to apply to the list operation. Supported fields for recurring bulk action resource items are: name, id, type, and resourceId. Supports OData comparison and logical operators and string functions such as contains and startswith. Enum-typed properties, tags, and the cast and matchesPattern functions are not supported.")
   filter?: string;
 }
 
@@ -769,7 +769,7 @@ model RecurringBulkActionResourceFilterParameters {
 model OccurrenceResourceFilterParameters {
   @added(Versions.`2026-11-06-preview`)
   @query("$filter")
-  @doc("The OData filter expression to apply to the list operation. Supported fields for OccurrenceResource items are: name, id, type, resourceId, scheduledTime, errorDetails/code, errorDetails/message, and errorDetails/target. Supports OData comparison and logical operators and string functions such as contains and startswith. Enum-typed properties, tags, and the cast function are not supported.")
+  @doc("The OData filter expression to apply to the list operation. Supported fields for OccurrenceResource items are: name, id, type, resourceId, scheduledTime, errorDetails/code, errorDetails/message, and errorDetails/target. Supports OData comparison and logical operators and string functions such as contains and startswith. Enum-typed properties, tags, and the cast and matchesPattern functions are not supported.")
   filter?: string;
 }
 
