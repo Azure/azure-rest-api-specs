@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Gallery.tsp";
@@ -8,7 +7,6 @@ import "./Gallery.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Common;
 
 namespace ComputeGallery;
@@ -31,15 +29,11 @@ interface GalleryInVMAccessControlProfiles {
   /**
    * Retrieves information about a gallery inVMAccessControlProfile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GalleryInVMAccessControlProfiles_Get")
   get is ComputeResourceRead<GalleryInVMAccessControlProfile>;
 
   /**
    * Create or update a gallery inVMAccessControlProfile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GalleryInVMAccessControlProfiles_CreateOrUpdate")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     GalleryInVMAccessControlProfile,
     LroHeaders = ArmLroLocationHeader<FinalResult = GalleryInVMAccessControlProfile> &
@@ -49,9 +43,7 @@ interface GalleryInVMAccessControlProfiles {
   /**
    * Update a gallery inVMAccessControlProfile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("GalleryInVMAccessControlProfiles_Update")
   update is ComputeCustomPatchAsync<
     GalleryInVMAccessControlProfile,
     PatchModel = GalleryInVMAccessControlProfileUpdate,
@@ -63,9 +55,7 @@ interface GalleryInVMAccessControlProfiles {
   /**
    * Delete a gallery inVMAccessControlProfile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("GalleryInVMAccessControlProfiles_Delete")
   delete is ComputeResourceDeleteAsync<
     GalleryInVMAccessControlProfile,
     Response =
@@ -77,8 +67,6 @@ interface GalleryInVMAccessControlProfiles {
   /**
    * List gallery inVMAccessControlProfiles in a gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GalleryInVMAccessControlProfiles_ListByGallery")
   listByGallery is ComputeResourceListByParent<
     GalleryInVMAccessControlProfile,
     Response = ArmResponse<GalleryInVMAccessControlProfileList>

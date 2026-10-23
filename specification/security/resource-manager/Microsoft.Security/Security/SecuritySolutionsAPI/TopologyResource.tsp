@@ -32,15 +32,12 @@ model TopologyResource
   location: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @tag("Topology")
 interface TopologyResources {
   /**
    * Gets a specific topology component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve existing stable swagger operationId."
-  @operationId("Topology_Get")
   @OpenAPI.extension(
     "x-ms-examples",
     #{
@@ -64,8 +61,6 @@ interface TopologyResources {
   /**
    * Gets a list that allows to build a topology view of a subscription and location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve existing stable swagger operationId."
-  @operationId("Topology_ListByHomeRegion")
   @OpenAPI.extension(
     "x-ms-examples",
     #{

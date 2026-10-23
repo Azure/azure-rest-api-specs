@@ -4,7 +4,6 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
 
 using TypeSpec.Http;
 using Azure.ResourceManager;

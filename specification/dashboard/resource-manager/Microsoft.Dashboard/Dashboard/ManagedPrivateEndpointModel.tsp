@@ -30,16 +30,12 @@ interface ManagedPrivateEndpointModels {
   /**
    * Get a specific managed private endpoint of a grafana resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ManagedPrivateEndpoints_Get")
   get is ArmResourceRead<ManagedPrivateEndpointModel>;
 
   /**
    * Create or update a managed private endpoint for a grafana resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("original-uri")
-  @operationId("ManagedPrivateEndpoints_Create")
   create is ArmResourceCreateOrReplaceAsync<
     ManagedPrivateEndpointModel,
     Response =
@@ -55,10 +51,8 @@ interface ManagedPrivateEndpointModels {
    * Update a managed private endpoint for an existing grafana resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("ManagedPrivateEndpoints_Update")
   update is ArmCustomPatchAsync<
     ManagedPrivateEndpointModel,
     PatchModel = ManagedPrivateEndpointUpdateParameters,
@@ -74,10 +68,8 @@ interface ManagedPrivateEndpointModels {
   /**
    * Delete a managed private endpoint for a grafana resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ManagedPrivateEndpoints_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedPrivateEndpointModel,
     Response =
@@ -90,8 +82,6 @@ interface ManagedPrivateEndpointModels {
   /**
    * List all managed private endpoints of a grafana resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ManagedPrivateEndpoints_List")
   list is ArmResourceListByParent<
     ManagedPrivateEndpointModel,
     Response = ArmResponse<ManagedPrivateEndpointModelListResponse>

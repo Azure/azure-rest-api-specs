@@ -25,6 +25,7 @@ import "./models/akri/aioApplicationConfiguration.tsp";
 import "./models/ai/mcpServerConnection.tsp";
 import "./models/ai/mcpAuthorizationPolicy.tsp";
 import "./client.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -138,8 +139,6 @@ interface Dataflow {
   get is ArmResourceRead<DataflowResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataflowResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DataflowResource>;
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Dataflow_ListByProfileResource")
   listByResourceGroup is ArmResourceListByParent<DataflowResource>;
 }
 

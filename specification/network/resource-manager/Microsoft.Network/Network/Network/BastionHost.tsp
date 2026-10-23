@@ -131,8 +131,6 @@ interface BastionHosts {
   /**
    * Creates a Bastion Shareable Links for all the VMs specified in the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PutBastionShareableLink")
   @tag("BastionHosts")
   @tag("BastionShareableLink")
   @list
@@ -147,8 +145,6 @@ interface BastionHosts {
   /**
    * Deletes the Bastion Shareable Links for all the VMs specified in the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DeleteBastionShareableLink")
   @tag("BastionHosts")
   @tag("BastionShareableLink")
   @action("deleteShareableLinks")
@@ -166,8 +162,6 @@ interface BastionHosts {
   /**
    * Deletes the Bastion Shareable Links for all the tokens specified in the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DeleteBastionShareableLinkByToken")
   @tag("BastionHosts")
   @tag("BastionShareableLink")
   @action("deleteShareableLinksByToken")
@@ -182,8 +176,6 @@ interface BastionHosts {
   /**
    * Return the Bastion Shareable Links for all the VMs specified in the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GetBastionShareableLink")
   @tag("BastionHosts")
   @tag("BastionShareableLink")
   @list
@@ -198,8 +190,6 @@ interface BastionHosts {
   /**
    * Returns the list of currently active sessions on the Bastion.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GetActiveSessions")
   @list
   getActiveSessions is ArmResourceActionAsync<
     BastionHost,
@@ -211,8 +201,6 @@ interface BastionHosts {
   /**
    * Returns the list of currently active sessions on the Bastion.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DisconnectActiveSessions")
   @list
   disconnectActiveSessions is ArmResourceActionSync<
     BastionHost,

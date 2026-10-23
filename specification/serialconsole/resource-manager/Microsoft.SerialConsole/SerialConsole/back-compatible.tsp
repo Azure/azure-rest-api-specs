@@ -10,3 +10,13 @@ using Microsoft.SerialConsole;
 @@doc(Operations.list, "Gets a list of Serial Console API operations.");
 @@clientName(Operations.list, "ListOperations");
 @@clientLocation(Operations.list, Microsoft.SerialConsole);
+@@clientLocation(
+  SerialConsoleOperationGroup.disableConsole,
+  Microsoft.SerialConsole,
+  "autorest"
+);
+@@clientLocation(
+  SerialConsoleOperationGroup.enableConsole,
+  Microsoft.SerialConsole,
+  "autorest"
+);

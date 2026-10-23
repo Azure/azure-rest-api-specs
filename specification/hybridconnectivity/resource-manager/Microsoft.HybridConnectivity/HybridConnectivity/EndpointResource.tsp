@@ -63,8 +63,6 @@ interface EndpointResources {
   /**
    * Gets the endpoint to the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Endpoints_Get")
   get is ArmResourceRead<
     EndpointResource,
     Azure.ResourceManager.Foundations.ExtensionBaseParameters
@@ -73,9 +71,7 @@ interface EndpointResources {
   /**
    * Create or update the endpoint to the target resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes"
-  @operationId("Endpoints_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     EndpointResource,
     Azure.ResourceManager.Foundations.ExtensionBaseParameters,
@@ -85,9 +81,7 @@ interface EndpointResources {
   /**
    * Update the endpoint to the target resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("Endpoints_Update")
   update is ArmCustomPatchSync<
     EndpointResource,
     EndpointResource,
@@ -97,9 +91,6 @@ interface EndpointResources {
   /**
    * Deletes the endpoint access to the target resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  @operationId("Endpoints_Delete")
   delete is ArmResourceDeleteSync<
     EndpointResource,
     Azure.ResourceManager.Foundations.ExtensionBaseParameters
@@ -108,8 +99,6 @@ interface EndpointResources {
   /**
    * List of endpoints to the target resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Endpoints_List")
   list is ArmResourceListByParent<
     EndpointResource,
     Azure.ResourceManager.Foundations.ExtensionBaseParameters,
@@ -119,9 +108,7 @@ interface EndpointResources {
   /**
    * Gets the endpoint access credentials to the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The name of the body starts with a capital letter"
-  @operationId("Endpoints_ListCredentials")
   listCredentials is ArmResourceActionSync<
     EndpointResource,
     ListCredentialsRequest,
@@ -147,9 +134,7 @@ interface EndpointResources {
   /**
    * Gets the ingress gateway endpoint credentials
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The name of the body starts with a capital letter"
-  @operationId("Endpoints_ListIngressGatewayCredentials")
   listIngressGatewayCredentials is ArmResourceActionSync<
     EndpointResource,
     ListIngressGatewayCredentialsRequest,
@@ -176,8 +161,6 @@ interface EndpointResources {
   /**
    * Fetches the managed proxy details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Endpoints_ListManagedProxyDetails")
   listManagedProxyDetails is Azure.ResourceManager.ArmResourceActionSync<
     EndpointResource,
     ManagedProxyRequest,

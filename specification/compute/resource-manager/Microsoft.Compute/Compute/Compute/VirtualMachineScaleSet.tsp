@@ -1,14 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/versioning";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Versioning;
 using Common;
 
@@ -296,11 +294,9 @@ interface VirtualMachineScaleSets {
   /**
    * Gets list of OS upgrades on a VM scale set instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @tag("VirtualMachineScaleSets")
   @get
-  @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
   @action("osUpgradeHistory")
   @list
   getOSUpgradeHistory is ComputeResourceActionSync<
@@ -448,10 +444,8 @@ interface VirtualMachineScaleSets {
   /**
    * Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("VirtualMachineScaleSetRollingUpgrades")
   @action("extensionRollingUpgrade")
-  @operationId("VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade")
   startExtensionUpgrade is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     void,
@@ -462,10 +456,8 @@ interface VirtualMachineScaleSets {
   /**
    * Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("VirtualMachineScaleSetRollingUpgrades")
   @action("osRollingUpgrade")
-  @operationId("VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade")
   startOSUpgrade is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     void,
@@ -476,10 +468,8 @@ interface VirtualMachineScaleSets {
   /**
    * Cancels the current virtual machine scale set rolling upgrade.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("VirtualMachineScaleSetRollingUpgrades")
   @action("rollingUpgrades/cancel")
-  @operationId("VirtualMachineScaleSetRollingUpgrades_Cancel")
   cancel is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     void,

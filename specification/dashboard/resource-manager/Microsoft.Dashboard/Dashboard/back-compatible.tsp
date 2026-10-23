@@ -109,3 +109,7 @@ using Azure.Core;
   "ManagedPrivateEndpoints",
   "!csharp"
 );
+
+@@clientLocation(ManagedDashboards.get, "Dashboards");
+@@clientLocation(ManagedDashboards.list, "Dashboards");
+@@clientLocation(ManagedDashboards.listBySubscription, "Dashboards");

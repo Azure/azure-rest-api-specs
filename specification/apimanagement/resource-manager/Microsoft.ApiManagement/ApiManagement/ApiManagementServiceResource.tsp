@@ -256,9 +256,7 @@ interface ApiManagementServiceResources {
   /**
    * Performs a connectivity check between the API Management service and a given destination, and returns metrics for the connection, as well as errors encountered while trying to establish it.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("connectivityCheck")
-  @operationId("PerformConnectivityCheckAsync")
   performConnectivityCheckAsync is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ConnectivityCheckRequest,

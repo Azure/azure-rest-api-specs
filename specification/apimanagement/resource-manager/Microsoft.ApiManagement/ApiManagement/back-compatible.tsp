@@ -866,7 +866,8 @@ using Microsoft.ApiManagement;
 @@clientLocation(ApiManagementServiceResources.listByTags, "Api");
 @@clientLocation(
   ApiManagementServiceResources.performConnectivityCheckAsync,
-  ""
+  Microsoft.ApiManagement,
+  "autorest"
 );
 @@clientName(
   ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
