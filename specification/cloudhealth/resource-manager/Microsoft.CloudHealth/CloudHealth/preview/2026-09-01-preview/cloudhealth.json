@@ -1533,7 +1533,7 @@
         "tags": [
           "Entities"
         ],
-        "description": "Ingest a health report for a signal on an existing entity. A later report replaces the signal's current observation while previous values and health states remain available in signal history.",
+        "description": "Ingest a health report for a specific signal on an entity (the entity must already exist)",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -3242,11 +3242,11 @@
     },
     "ExternalSignal": {
       "type": "object",
-      "description": "An externally submitted signal instance assigned to an entity. Its current observation comes from the most recently accepted health report.",
+      "description": "An externally submitted signal instance assigned to an entity.",
       "properties": {
         "evaluationRules": {
           "$ref": "#/definitions/EvaluationRule",
-          "description": "Optional provenance snapshot of the evaluation rules supplied with the most recently accepted health report. These rules do not modify a signal definition."
+          "description": "Evaluation rules for the external signal as submitted."
         }
       },
       "allOf": [
@@ -3487,15 +3487,15 @@
     },
     "HealthReportRequest": {
       "type": "object",
-      "description": "Current health observation submitted for a specific signal.",
+      "description": "Health report that's submitted for a specific signal",
       "properties": {
         "signalName": {
           "$ref": "#/definitions/signalName",
-          "description": "Name of the entity signal to report health for. An unknown name creates an external signal instance."
+          "description": "Name of the entity signal to report health for"
         },
         "healthState": {
           "$ref": "#/definitions/HealthState",
-          "description": "Authoritative health state reported by the submitter. The service does not recalculate it from the reported value or evaluation rules."
+          "description": "Health state to report for the signal"
         },
         "value": {
           "type": "number",
@@ -3504,7 +3504,7 @@
         },
         "evaluationRules": {
           "$ref": "#/definitions/HealthReportEvaluationRule",
-          "description": "Optional snapshot of the evaluation rules used by the submitter to determine the reported health state. These rules are provenance and do not modify configured signal rules."
+          "description": "Evaluation rules that were used to determine the reported health state"
         },
         "expiresInMinutes": {
           "type": "integer",
