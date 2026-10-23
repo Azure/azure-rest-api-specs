@@ -5639,11 +5639,6 @@ model StorageProfile {
   diskControllerType?: DiskControllerTypes;
 
   /**
-   * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
-   */
-  alignRegionalDisksToVMZone?: boolean;
-
-  /**
    * Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-03-02").
    */
   @added(Versions.v2026_04_01)
