@@ -2172,6 +2172,41 @@ union ManagedDatabaseStatus {
 /**
  * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. SourceDatabaseName, SourceManagedInstanceName and PointInTime must be specified. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
  */
+@removed(Versions.v2026_11_01_preview)
+@renamedFrom(Versions.v2026_11_01_preview, "ManagedDatabaseCreateMode")
+union LegacyManagedDatabaseCreateMode {
+  string,
+
+  /**
+   * Default
+   */
+  Default: "Default",
+
+  /**
+   * RestoreExternalBackup
+   */
+  RestoreExternalBackup: "RestoreExternalBackup",
+
+  /**
+   * PointInTimeRestore
+   */
+  PointInTimeRestore: "PointInTimeRestore",
+
+  /**
+   * Recovery
+   */
+  Recovery: "Recovery",
+
+  /**
+   * RestoreLongTermRetentionBackup
+   */
+  RestoreLongTermRetentionBackup: "RestoreLongTermRetentionBackup",
+}
+
+/**
+ * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup. Specify sourceDatabaseId for an existing database or restorableDroppedDatabaseId for a dropped database, and specify restorePointInTime. The dropped database can be on an existing or dropped managed instance. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
+ */
+@added(Versions.v2026_11_01_preview)
 union ManagedDatabaseCreateMode {
   string,
 
@@ -11718,6 +11753,15 @@ model ManagedDatabaseProperties {
   /**
    * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. SourceDatabaseName, SourceManagedInstanceName and PointInTime must be specified. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
    */
+  @removed(Versions.v2026_11_01_preview)
+  @renamedFrom(Versions.v2026_11_01_preview, "createMode")
+  @visibility(Lifecycle.Create)
+  legacyCreateMode?: LegacyManagedDatabaseCreateMode;
+
+  /**
+   * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup. Specify sourceDatabaseId for an existing database or restorableDroppedDatabaseId for a dropped database, and specify restorePointInTime. The dropped database can be on an existing or dropped managed instance. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
+   */
+  @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Create)
   createMode?: ManagedDatabaseCreateMode;
 
@@ -11742,6 +11786,15 @@ model ManagedDatabaseProperties {
   /**
    * The restorable dropped database resource id to restore when creating this database.
    */
+  @removed(Versions.v2026_11_01_preview)
+  @renamedFrom(Versions.v2026_11_01_preview, "restorableDroppedDatabaseId")
+  @visibility(Lifecycle.Create)
+  legacyRestorableDroppedDatabaseId?: string;
+
+  /**
+   * The restorable dropped database resource id to restore when creating this database. This may identify a database on a dropped managed instance.
+   */
+  @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Create)
   restorableDroppedDatabaseId?: string;
 
@@ -14042,6 +14095,64 @@ model RestorableDroppedDatabaseProperties {
   keys?: Record<DatabaseKey>;
 }
 
+/** Metadata retained for a dropped managed instance. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This read-only recovery resource describes a deleted instance and has no provisioning lifecycle."
+@added(Versions.v2026_11_01_preview)
+model RestorableDroppedManagedInstanceProperties {
+  /** The name of the managed instance. */
+  @visibility(Lifecycle.Read)
+  managedInstanceName?: string;
+
+  /** The creation time of the managed instance (ISO8601 format). */
+  @visibility(Lifecycle.Read)
+  creationTime?: utcDateTime;
+
+  /** The deletion time of the managed instance (ISO8601 format). */
+  @visibility(Lifecycle.Read)
+  deletionTime?: utcDateTime;
+
+  /** The SLO of the managed instance. */
+  @visibility(Lifecycle.Read)
+  serviceLevelObjective?: string;
+
+  /** The reserved storage size of the managed instance in gigabytes. */
+  @encodedName("application/json", "reservedStorageSizeGB")
+  @visibility(Lifecycle.Read)
+  reservedStorageSizeGb?: int32;
+
+  /** The name of the resource group that contained the managed instance. */
+  @visibility(Lifecycle.Read)
+  resourceGroupName?: string;
+
+  /** The edition of the managed instance. */
+  @visibility(Lifecycle.Read)
+  edition?: string;
+
+  /** The number of virtual cores provisioned for the managed instance. */
+  @visibility(Lifecycle.Read)
+  vCores?: int32;
+
+  /** The DNS zone of the managed instance. */
+  @visibility(Lifecycle.Read)
+  dnsZone?: string;
+
+  /** Whether the managed instance used zone redundancy. */
+  @visibility(Lifecycle.Read)
+  zoneRedundant?: boolean;
+
+  /** The backup storage redundancy used by the managed instance. */
+  @visibility(Lifecycle.Read)
+  backupStorageAccountType?: string;
+
+  /** The SQL engine version edition of the managed instance. */
+  @visibility(Lifecycle.Read)
+  versionEdition?: string;
+
+  /** The customer-visible state of the dropped managed instance. */
+  @visibility(Lifecycle.Read)
+  state?: string;
+}
+
 /**
  * The restorable dropped managed database's properties.
  */
@@ -14077,6 +14188,13 @@ model RestorableDroppedManagedDatabaseProperties {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   earliestRestoreDate?: utcDateTime;
+
+  /**
+   * The name of the resource group that contained the source managed instance.
+   */
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  resourceGroupName?: string;
 }
 
 /**

@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "locationName": "eastus",
+    "api-version": "2026-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/eastus/restorableDroppedManagedInstances/dropped-mi,134300610000000000",
+            "name": "dropped-mi,134300610000000000",
+            "type": "Microsoft.Sql/locations/restorableDroppedManagedInstances",
+            "properties": {
+              "managedInstanceName": "dropped-mi",
+              "creationTime": "2025-01-15T10:00:00Z",
+              "deletionTime": "2026-08-01T12:30:00Z",
+              "serviceLevelObjective": "GP_Gen5_8",
+              "reservedStorageSizeGB": 512,
+              "resourceGroupName": "source-rg",
+              "edition": "GeneralPurpose",
+              "vCores": 8,
+              "dnsZone": "1b4e2caff2530",
+              "zoneRedundant": true,
+              "backupStorageAccountType": "Standard_RAGRS",
+              "versionEdition": "SQL22",
+              "state": "Deleted"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RestorableDroppedManagedInstancesByLocation_ListByLocation",
+  "title": "Lists restorable dropped managed instances in a location."
+}
