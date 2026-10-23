@@ -13911,6 +13911,25 @@
         ]
       }
     },
+    "McpFrontendAutomaticTls": {
+      "type": "object",
+      "description": "Automatic frontend serving certificate issuance with cert-manager.",
+      "properties": {
+        "certManagerCertificateSpec": {
+          "$ref": "#/definitions/McpFrontendCertificateSpec",
+          "description": "Automatic TLS server certificate management with cert-manager."
+        }
+      },
+      "required": [
+        "certManagerCertificateSpec"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpFrontendTls"
+        }
+      ],
+      "x-ms-discriminator-value": "Automatic"
+    },
     "McpFrontendCertificateSan": {
       "type": "object",
       "description": "Additional Subject Alternative Names (SANs) for the frontend certificate.",
@@ -14055,6 +14074,25 @@
       "required": [
         "secretRef"
       ]
+    },
+    "McpFrontendManualTls": {
+      "type": "object",
+      "description": "A manually managed frontend serving certificate.",
+      "properties": {
+        "manual": {
+          "$ref": "#/definitions/McpFrontendManualCertificate",
+          "description": "Manual TLS server certificate management through a referenced Secret."
+        }
+      },
+      "required": [
+        "manual"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpFrontendTls"
+        }
+      ],
+      "x-ms-discriminator-value": "Manual"
     },
     "McpFrontendPrivateKey": {
       "type": "object",
@@ -14275,16 +14313,9 @@
         "mode": {
           "$ref": "#/definitions/McpFrontendTlsMode",
           "description": "The mode of TLS server certificate management."
-        },
-        "certManagerCertificateSpec": {
-          "$ref": "#/definitions/McpFrontendCertificateSpec",
-          "description": "Automatic TLS server certificate management with cert-manager."
-        },
-        "manual": {
-          "$ref": "#/definitions/McpFrontendManualCertificate",
-          "description": "Manual TLS server certificate management through a referenced Secret."
         }
       },
+      "discriminator": "mode",
       "required": [
         "mode"
       ]

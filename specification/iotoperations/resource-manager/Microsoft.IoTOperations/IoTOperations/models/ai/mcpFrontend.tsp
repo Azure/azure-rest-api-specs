@@ -106,15 +106,30 @@ scalar McpFrontendAudience extends string;
 
 /** The frontend's serving certificate configuration. Only the selected mode's settings apply. */
 @added(Versions.`2026-11-01-preview`)
+@discriminator("mode")
 model McpFrontendTls {
   /** The mode of TLS server certificate management. */
   mode: McpFrontendTlsMode;
+}
+
+/** Automatic frontend serving certificate issuance with cert-manager. */
+@added(Versions.`2026-11-01-preview`)
+model McpFrontendAutomaticTls extends McpFrontendTls {
+  /** Selects automatic certificate issuance. */
+  mode: "Automatic";
 
   /** Automatic TLS server certificate management with cert-manager. */
-  certManagerCertificateSpec?: McpFrontendCertificateSpec;
+  certManagerCertificateSpec: McpFrontendCertificateSpec;
+}
+
+/** A manually managed frontend serving certificate. */
+@added(Versions.`2026-11-01-preview`)
+model McpFrontendManualTls extends McpFrontendTls {
+  /** Selects a manually managed serving certificate. */
+  mode: "Manual";
 
   /** Manual TLS server certificate management through a referenced Secret. */
-  manual?: McpFrontendManualCertificate;
+  manual: McpFrontendManualCertificate;
 }
 
 /** The frontend's TLS server certificate management modes. */
