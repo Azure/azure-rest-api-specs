@@ -51,7 +51,7 @@ using Microsoft.CloudHealth;
 @@clientName(HealthState, "EntityHealthState", "csharp");
 @@clientName(AggregationType, "HealthStateAggregationType", "csharp");
 @@clientName(AggregationUnit, "HealthStateAggregationUnit", "csharp");
-@@clientName(ThresholdRule, "EntitySignalThresholdRule", "csharp");
+@@clientName(ThresholdRule, "EntitySignalThresholdRuleV1", "csharp");
 @@clientName(IconDefinition, "EntityIcon", "csharp");
 @@clientName(RefreshInterval, "EntitySignalRefreshInterval", "csharp");
 @@clientName(SignalAssignment, "EntitySignalAssignment", "csharp");
@@ -93,7 +93,24 @@ using Microsoft.CloudHealth;
   "csharp"
 );
 @@clientName(HealthReportRequest, "EntityHealthReportContent", "csharp");
-@@clientName(ThresholdRuleV2, "EntitySignalThresholdRuleV2", "csharp");
+@@clientName(
+  MetricAggregationType,
+  "CloudHealthMetricAggregationType",
+  "csharp"
+);
+@@clientName(SignalConfiguration, "CloudHealthSignalConfiguration", "csharp");
+@@alternateType(
+  SignalConfiguration.applicableResourceTypes,
+  Azure.Core.armResourceType[],
+  "csharp"
+);
+@@clientName(
+  SignalInstanceProperties,
+  "CloudHealthSignalInstanceProperties",
+  "csharp"
+);
+@@clientName(SignalStatus, "CloudHealthSignalStatus", "csharp");
+@@clientName(ThresholdRuleV2, "EntitySignalThresholdRule", "csharp");
 @@clientName(ThresholdRuleV2.operator, "SignalOperator", "csharp");
 @@clientName(SignalGroups, "EntitySignalGroups", "csharp");
 @@clientName(AzureResourceSignal, "ResourceSignal", "csharp");
@@ -110,6 +127,8 @@ using Microsoft.CloudHealth;
   "shouldIgnoreUnknown",
   "csharp"
 );
+@@clientName(DependenciesSignalGroup, "DependenciesSignalGroupV1", "csharp");
+@@clientName(DependenciesSignalGroupV2, "DependenciesSignalGroup", "csharp");
 @@clientName(
   DependenciesSignalGroupV2.ignoreUnknown,
   "shouldIgnoreUnknown",

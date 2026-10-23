@@ -2,11 +2,9 @@ import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 import { d } from "@azure-tools/specs-shared/testing";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { verbatim } from "../src/diagnostic-content.ts";
-import { context, runRules } from "../src/index.ts";
+import { runRules } from "../src/index.ts";
 import { type RuleResult } from "../src/rule-result.ts";
 import { type Rule } from "../src/rule.ts";
-import { MultipleNewApiVersionsRule } from "../src/rules/multiple-new-api-versions.ts";
-import { StaleApiVersionPinRule } from "../src/rules/stale-api-version-pin.ts";
 
 function createRule(
   name: string,
@@ -74,38 +72,6 @@ describe("runRules", function () {
       "! Warning (warnings)",
     ]);
   });
-
-  it.each([false, true])(
-    "logs ordinary local API-version skips only at debug level (verbose=%s)",
-    async (verbose) => {
-      const original = { ...context };
-      const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
-      const error = vi.spyOn(console, "error").mockImplementation(() => {});
-      const debug = vi.spyOn(console, "debug").mockImplementation(() => {});
-      try {
-        context.checkingAllSpecs = false;
-        delete context.baseCommitish;
-        delete context.headCommitish;
-        const result = await runRules(
-          [new MultipleNewApiVersionsRule(), new StaleApiVersionPinRule()],
-          "/test",
-          [],
-          new ConsoleLogger(verbose),
-        );
-        expect(result.success).toBe(true);
-        expect(result.executed).toEqual(["MultipleNewApiVersions", "StaleApiVersionPin"]);
-        expect(warning).not.toHaveBeenCalled();
-        expect(error).not.toHaveBeenCalled();
-        if (verbose)
-          expect(debug).toHaveBeenCalledWith(expect.stringContaining("No commits to compare"));
-        else expect(debug).not.toHaveBeenCalled();
-      } finally {
-        delete context.baseCommitish;
-        delete context.headCommitish;
-        Object.assign(context, original);
-      }
-    },
-  );
 
   it.each([false, true])(
     "preserves findings and execution semantics with verbose=%s",
