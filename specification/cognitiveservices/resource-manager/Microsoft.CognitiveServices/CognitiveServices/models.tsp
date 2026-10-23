@@ -4229,6 +4229,25 @@ model EncryptionScopeProperties extends Encryption {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state for 'RaiPolicyProperties' includes custom states beyond ARM standard values"
 model RaiPolicyProperties {
   /**
+   * Retained customer-authored ACS properties. Ordinary policy properties remain the accepted
+   * effective configuration. To edit source, submit these fields as ordinary properties in a
+   * full PUT. A full PUT of effective authoring properties explicitly adopts them as source.
+   * Omitted when original source is unavailable and on collection responses.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
+  sourceProperties?: RaiPolicySourceProperties;
+
+  /** Accepted configuration and later observed work. This is not runtime enforcement evidence. */
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
+  governanceStatus?: RaiPolicyGovernanceStatus;
+
+  /**
    * The policy representation. Omission selects ContentFilters when creating a policy. ACS policy
    * creation and replacement require ACS.
    */
@@ -4310,6 +4329,165 @@ model RaiPolicyProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   egressPolicy?: RaiEgressPolicyConfig;
+}
+
+/** Complete retained writable properties of the supported ACS profile, excluding resource tags. */
+@added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
+model RaiPolicySourceProperties {
+  /** The retained policy representation. */
+  format: "ACS";
+
+  /** Customer-authored ACS manifest before applicable automatic requirements are composed. */
+  acs: RaiAcsManifest;
+
+  /** Same-account Rego references in the retained source. */
+  @identifiers(#["regoName"])
+  acsRegos?: RaiRegoReference[];
+
+  /** Customer-authored blocklist relationships. */
+  @identifiers(#["blocklistName", "source"])
+  customBlocklists?: CustomBlocklistConfig[];
+
+  /** Customer-authored provider relationships, without provider credentials or configuration. */
+  @identifiers(#["externalSafetyProviderName", "source"])
+  customExternalSafetyProviders?: RaiPolicyCustomExternalSafetyProviderReference[];
+}
+
+/** Accepted identity and observation status, separate from current runtime behavior. */
+@added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
+model RaiPolicyGovernanceStatus {
+  /** Version of the source/effective governance view. */
+  contractVersion: 1;
+
+  /** Latest configuration or work state, such as Accepted, Pending, Denied or EvaluationFailed. */
+  state: string;
+
+  /** Whether original source is Retained or OriginalSourceUnavailable. */
+  sourceStatus: string;
+
+  /** Whether the previous accepted effective configuration is retained during pending or failed work. */
+  isLastKnownGood: boolean;
+
+  /** Incarnation of the accepted policy, replaced on delete and recreate. */
+  incarnation?: string;
+
+  /** Monotonic accepted revision within the policy incarnation. */
+  acceptedRevision?: int64;
+
+  /** Revision of the retained customer source. */
+  sourceRevision?: int64;
+
+  /** Original quoted strong resource ETag for the accepted configuration. */
+  @encodedName("application/json", "resourceETag")
+  resourceEtag?: string;
+
+  /** Digest of accepted effective executable semantics. */
+  semanticDigest?: string;
+
+  /** Digest of the accepted frozen dependency closure. */
+  dependencyDigest?: string;
+
+  /** Revision of the most recently reserved work, including failed work. */
+  workRevision: int64;
+
+  /** Durable operation identity, distinct from a request correlation ID. */
+  operationId?: string;
+
+  /** Durable work status, such as Prepared, Accepted or Failed. */
+  workStatus?: string;
+
+  /** Observation under which the effective configuration was accepted. */
+  acceptedObservation?: RaiPolicyObservationStatus;
+
+  /** Separately recorded failed reconciliation, without replacing accepted source or effective state. */
+  observedFailure?: RaiPolicyFailureStatus;
+}
+
+/** Bounded assignment observation for accepted configuration or a failed reconciliation. */
+@added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
+model RaiPolicyObservationStatus {
+  /** Opaque complete-assignment observation identity. */
+  snapshotId: string;
+
+  /** Assignment-source watermark for this observation. */
+  sourceWatermark: string;
+
+  /** Time the applicable assignments were observed. */
+  observedAt: utcDateTime;
+
+  /** End of this observation's bounded validity interval. */
+  validUntil: utcDateTime;
+
+  /** Whether the observation expired. Expiry alone does not revoke the last-known-good configuration. */
+  expired: boolean;
+
+  /** Aggregate final-candidate outcome, such as Compliant, Audit or Deny. */
+  evaluationOutcome?: string;
+
+  /** Whether complete recorded assignment provenance is available. */
+  provenanceStatus: string;
+
+  /** Sanitized assignment findings. Omitted from collection response summaries. */
+  @identifiers(#[])
+  @maxItems(256)
+  assignments?: RaiPolicyAssignmentStatus[];
+}
+
+/** Sanitized identity, eligibility and native outcome of one assignment member. */
+@added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
+model RaiPolicyAssignmentStatus {
+  /** Native Azure Policy assignment identifier. */
+  assignmentId: string;
+
+  /** Native policy definition identifier. */
+  definitionId: string;
+
+  /** Policy definition reference within an initiative, when applicable. */
+  initiativeReferenceId?: string;
+
+  /** Assignment revision recorded in the complete observation. */
+  assignmentRevision?: string;
+
+  /** Effective native policy effect. */
+  effect: string;
+
+  /** Normalized assignment enforcement mode. */
+  enforcementMode: string;
+
+  /** Assignment enrollment status. */
+  enrollmentStatus: string;
+
+  /** Exemption status at observation time. */
+  exemptionStatus: string;
+
+  /** Native final-candidate finding, including explicit NotApplicable when returned. */
+  outcome?: string;
+}
+
+/** Durable failed reconciliation, reported separately from accepted configuration. */
+@added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
+model RaiPolicyFailureStatus {
+  /** Sanitized failure code. */
+  code: string;
+
+  /** Original durable reconciliation operation identity. */
+  operationId: string;
+
+  /** Time the failure was durably recorded. */
+  recordedAt: utcDateTime;
+
+  /** Assignment observation associated with the failure, if available. */
+  observation?: RaiPolicyObservationStatus;
 }
 
 /**
