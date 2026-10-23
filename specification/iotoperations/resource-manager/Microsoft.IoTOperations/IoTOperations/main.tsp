@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./models/base.tsp";
 import "./models/common/aliases.tsp";
+import "./models/common/tls.tsp";
 import "./models/instance.tsp";
 import "./models/broker/brokers.tsp";
 import "./models/broker/authentications.tsp";

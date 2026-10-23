@@ -172,30 +172,6 @@ model LocalKubernetesReference {
   name: string;
 }
 
-@doc("Cert-Manager issuerRef properties")
-model CertManagerIssuerRef {
-  @doc("group of issuer.")
-  @madeOptional(Versions.`2026-10-01`)
-  group?: string = "cert-manager.io";
-
-  @doc("kind of issuer (Issuer or ClusterIssuer).")
-  kind: CertManagerIssuerKind;
-
-  @doc("name of issuer.")
-  name: string;
-}
-
-@doc("CertManagerIssuerKind properties")
-union CertManagerIssuerKind {
-  string,
-
-  @doc("Issuer kind.")
-  Issuer: "Issuer",
-
-  @doc("ClusterIssuer kind.")
-  ClusterIssuer: "ClusterIssuer",
-}
-
 @doc("Managed Identity Method")
 union ManagedIdentityMethod {
   string,

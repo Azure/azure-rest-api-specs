@@ -105,12 +105,6 @@ model BrokerAuthenticatorCustomAuth {
   x509: X509ManualCertificate;
 }
 
-@doc("X509 Certificate Authentication properties.")
-model X509ManualCertificate {
-  @doc("Kubernetes secret containing an X.509 client certificate. This is a reference to the secret through an identifying name, not the secret itself.")
-  secretRef: string;
-}
-
 @doc("X509 for BrokerAuthentication.")
 model BrokerAuthenticatorMethodX509 {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
