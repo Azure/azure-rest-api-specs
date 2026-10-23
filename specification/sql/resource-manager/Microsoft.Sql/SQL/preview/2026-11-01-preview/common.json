@@ -7043,7 +7043,7 @@
       "properties": {
         "blockDropWhenImmutablePitrBackupInRetention": {
           "$ref": "#/definitions/BlockDropWhenImmutablePitrBackupInRetention",
-          "description": "Whether to block deletion of the logical server or managed instance while\nimmutable point-in-time restore backups for its live or dropped user\ndatabases remain within retention. Supported request values are enabled\nand disabled, matched case-insensitively. Protection is disabled by default.\nEnabling protection is irreversible. Requesting disabled before opt-in is\na no-op; requesting disabled after opt-in is rejected.\nGET and LIST return the persisted setting, including during an update.\nUse the update operation's polling endpoints to track completion."
+          "description": "Block server deletion while any live or dropped user database has immutable\npoint-in-time restore backups within retention."
         }
       },
       "required": [

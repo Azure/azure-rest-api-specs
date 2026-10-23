@@ -110,7 +110,7 @@ interface ServerProtectionSettingsOperations {
   >;
 
   /**
-   * Updates logical server protection settings. Returns HTTP 200 with the resource
+   * Updates a server's protection settings. Returns HTTP 200 with the resource
    * if the update has completed, or HTTP 202 with operation metadata and polling
    * headers while it is pending. The same response contract applies to repeated
    * values. Follow

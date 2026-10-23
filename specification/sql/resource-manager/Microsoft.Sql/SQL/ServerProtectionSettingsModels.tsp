@@ -19,14 +19,8 @@ union ServerProtectionSettingsName {
 @added(Versions.v2026_11_01_preview)
 model ServerProtectionSettingsProperties {
   /**
-   * Whether to block deletion of the logical server or managed instance while
-   * immutable point-in-time restore backups for its live or dropped user
-   * databases remain within retention. Supported request values are enabled
-   * and disabled, matched case-insensitively. Protection is disabled by default.
-   * Enabling protection is irreversible. Requesting disabled before opt-in is
-   * a no-op; requesting disabled after opt-in is rejected.
-   * GET and LIST return the persisted setting, including during an update.
-   * Use the update operation's polling endpoints to track completion.
+   * Block server deletion while any live or dropped user database has immutable
+   * point-in-time restore backups within retention.
    */
   blockDropWhenImmutablePitrBackupInRetention: BlockDropWhenImmutablePitrBackupInRetention;
 }
