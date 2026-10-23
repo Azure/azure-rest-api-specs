@@ -340,10 +340,6 @@ model VirtualEnclavePatchProperties
   @added(Microsoft.Mission.Versions.v2026_03_01_preview)
   @doc("Virtual Enclave Monitoring Settings for diagnostic and virtual network flow logs")
   monitoringSettings?: MonitoringSettingsPatchModel;
-
-  @added(Microsoft.Mission.Versions.v2026_10_01_preview)
-  @doc("Whether subnets within the enclave can communicate with each other.")
-  allowSubnetCommunication?: boolean;
 }
 
 @doc("Virtual Enclave Patch Model")
