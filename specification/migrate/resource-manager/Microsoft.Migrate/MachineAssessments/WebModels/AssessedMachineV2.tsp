@@ -143,4 +143,25 @@ model MachineAssessmentRecommendation is Recommendations<
   @doc("Recommended security type for the VM.")
   @visibility(Lifecycle.Read)
   recommendedVmSecurityType?: AzureVmSecurityType;
+
+  @added(MachineApiVersions.v2025_09_09_preview)
+  @doc("Recommended target operating system, when an operating system transition is available.")
+  @visibility(Lifecycle.Read)
+  targetOsRecommendation?: TargetOsRecommendation;
+}
+
+@added(MachineApiVersions.v2025_09_09_preview)
+@doc("Recommended target operating system.")
+model TargetOsRecommendation {
+  @doc("Target operating system type.")
+  @visibility(Lifecycle.Read)
+  operatingSystemType?: string;
+
+  @doc("Target operating system family or product name.")
+  @visibility(Lifecycle.Read)
+  operatingSystemName?: string;
+
+  @doc("Target operating system version.")
+  @visibility(Lifecycle.Read)
+  operatingSystemVersion?: string;
 }
