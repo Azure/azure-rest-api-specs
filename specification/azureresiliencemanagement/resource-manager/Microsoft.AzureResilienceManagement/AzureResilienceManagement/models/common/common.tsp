@@ -224,6 +224,10 @@ union ActionTask {
   @doc("Post-action task.")
   PostActionTask: "PostActionTask",
 
+  @added(Versions.v2026_11_30_preview)
+  @doc("Infrastructure creation task.")
+  InfrastructureActionTask: "InfrastructureActionTask",
+
   string,
 }
 
@@ -247,12 +251,36 @@ union UserConsent {
   string,
 }
 
+@added(Versions.v2026_11_30_preview)
+@doc("Specifies how execution proceeds when a recovery group fails.")
+union GroupFailurePolicy {
+  @added(Versions.v2026_11_30_preview)
+  @doc("Continues execution after a recovery group failure.")
+  Continue: "Continue",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Stops execution after a recovery group failure.")
+  Stop: "Stop",
+
+  string,
+}
+
 @added(Versions.v2026_03_01_preview)
 @doc("Execution configurations for recovery action.")
 model ExecutionConfigurations {
   @added(Versions.v2026_03_01_preview)
   @doc("User consent for performing recovery action.")
   userConsent: UserConsent;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The execution policy applied when a recovery group fails.")
+  groupFailurePolicy?: GroupFailurePolicy;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The maximum number of restore operations that can run in parallel per recovery group.")
+  @minValue(1)
+  @maxValue(500)
+  maxParallelRestoresPerGroup?: int32;
 }
 
 @doc("Additional properties for Failover.")
@@ -330,6 +358,14 @@ union ResourceProtectionSolutionType {
   @added(Versions.v2026_10_31_preview)
   @doc("Resource is protected with Azure Cosmos DB multiregion replication using customer-managed failover, where recovery promotes a secondary region to the write region.")
   AzureCosmosDB: "AzureCosmosDB",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Resource is protected by Azure Backup using a Recovery Services vault (Microsoft.RecoveryServices/vaults).")
+  AzureBackupRecoveryServices: "AzureBackupRecoveryServices",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Resource is protected by Azure Backup using a Data Protection backup vault (Microsoft.DataProtection/backupVaults).")
+  AzureBackupDataProtection: "AzureBackupDataProtection",
 
   string,
 }

@@ -1,5 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 import "../../main.tsp";
@@ -9,6 +10,7 @@ import "../../recoveryPlans.tsp";
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
 
@@ -99,6 +101,40 @@ model RecoveryGroupProperties {
   @identifiers(#[])
   @maxItems(10)
   postActions?: RecoveryGroupBaseAction[];
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Resiliency-specific properties for the recovery orchestration group.")
+  resiliencyGroupProperties?: RecoveryGroupResiliencyProperties;
+}
+
+@added(Versions.v2026_11_30_preview)
+@discriminator("resiliencyType")
+@doc("Resiliency-specific properties for a recovery orchestration group.")
+model RecoveryGroupResiliencyProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Infrastructure resiliency properties for a recovery orchestration group.")
+model InfrastructureResiliencyGroupProperties extends RecoveryGroupResiliencyProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType.InfraResiliency;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Cyber resiliency properties for a recovery orchestration group.")
+model CyberResiliencyGroupProperties extends RecoveryGroupResiliencyProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType.CyberResiliency;
+
+  @added(Versions.v2026_11_30_preview)
+  @identifiers(#["workloadType"])
+  @doc("Recovery configuration profiles associated by workload type.")
+  recoveryConfigProfileAssociations?: RecoveryConfigProfileAssociation[];
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
@@ -123,4 +159,20 @@ model RecoveryGroupsSetting {
   @identifiers(#[])
   @maxItems(14)
   additionalGroups?: RecoveryGroup[];
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Associates a workload type with a plan-scoped recovery configuration profile.")
+model RecoveryConfigProfileAssociation {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The workload type configured by the profile.")
+  workloadType: WorkloadType;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifier of the plan-scoped recovery configuration profile.")
+  recoveryConfigProfileId: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryConfigProfiles";
+    }
+  ]>;
 }
