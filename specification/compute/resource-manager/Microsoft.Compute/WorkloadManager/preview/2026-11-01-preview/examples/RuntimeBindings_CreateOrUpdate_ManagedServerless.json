@@ -8,18 +8,14 @@
     "bindingName": "serverless-default",
     "api-version": "2026-11-01-preview",
     "resource": {
-      "location": "eastus2",
-      "kind": "ServerlessContainers",
       "properties": {
+        "kind": "ServerlessContainers",
         "provisioningMode": "Managed",
         "managedProfile": {
           "provider": "ACI"
         },
-        "identityProfile": {
-          "executionIdentity": {
-            "provisioningMode": "ServiceManaged",
-            "scope": "SandboxGroup"
-          }
+        "networkProfile": {
+          "egressMode": "ServiceManaged"
         }
       }
     }
@@ -30,14 +26,18 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
         "name": "serverless-default",
         "type": "Microsoft.Compute/workloadSpaces/runtimeBindings",
-        "location": "eastus2",
-        "kind": "ServerlessContainers",
         "properties": {
+          "kind": "ServerlessContainers",
           "provisioningMode": "Managed",
           "managedProfile": {
             "provider": "ACI"
           },
-          "provisioningState": "Succeeded"
+          "networkProfile": {
+            "egressMode": "ServiceManaged"
+          },
+          "provisioningState": "Succeeded",
+          "state": "Ready",
+          "ownership": "Created"
         }
       }
     },
@@ -50,14 +50,18 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
         "name": "serverless-default",
         "type": "Microsoft.Compute/workloadSpaces/runtimeBindings",
-        "location": "eastus2",
-        "kind": "ServerlessContainers",
         "properties": {
+          "kind": "ServerlessContainers",
           "provisioningMode": "Managed",
           "managedProfile": {
             "provider": "ACI"
           },
-          "provisioningState": "Provisioning"
+          "networkProfile": {
+            "egressMode": "ServiceManaged"
+          },
+          "provisioningState": "Accepted",
+          "state": "Pending",
+          "ownership": "Created"
         }
       }
     }

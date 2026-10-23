@@ -21,8 +21,23 @@
         "name": "managed-agents-prod",
         "type": "Microsoft.Compute/workloadSpaces",
         "location": "eastus2",
+        "tags": {
+          "environment": "Production"
+        },
         "properties": {
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "state": "PendingConfiguration",
+          "operationStatus": {
+            "kubernetesBinding": {
+              "state": "NotRequested"
+            },
+            "serverlessBinding": {
+              "state": "NotRequested"
+            },
+            "runtimeLink": {
+              "state": "NotRequested"
+            }
+          }
         }
       }
     },
@@ -36,8 +51,23 @@
         "name": "managed-agents-prod",
         "type": "Microsoft.Compute/workloadSpaces",
         "location": "eastus2",
+        "tags": {
+          "environment": "Production"
+        },
         "properties": {
-          "provisioningState": "Provisioning"
+          "provisioningState": "Accepted",
+          "state": "PendingConfiguration",
+          "operationStatus": {
+            "kubernetesBinding": {
+              "state": "NotRequested"
+            },
+            "serverlessBinding": {
+              "state": "NotRequested"
+            },
+            "runtimeLink": {
+              "state": "NotRequested"
+            }
+          }
         }
       }
     }
