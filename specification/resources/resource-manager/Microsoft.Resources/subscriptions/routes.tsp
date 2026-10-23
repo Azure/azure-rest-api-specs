@@ -8,6 +8,7 @@ import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
@@ -22,6 +23,10 @@ interface Subscriptions {
   @route("/subscriptions/{subscriptionId}/locations")
   @list
   @tag("Subscriptions")
+  @returnTypeChangedFrom(
+    Versions.v2026_10_01,
+    ArmResponse<LocationListResultLegacy> | CloudError
+  )
   listLocations(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -31,14 +36,27 @@ interface Subscriptions {
      */
     @query("includeExtendedLocations")
     includeExtendedLocations?: boolean,
+
+    /**
+     * Whether to include system-policy restrictions for standard locations. Supported starting in API version 2026-10-01.
+     * When true, evaluates enforced system-policy deny rules that apply at the subscription scope and depend only on location,
+     * and adds policyRestrictions to each standard location without removing locations from the list.
+     * Non-system policies and rules requiring resource type, resource group, or other resource data are not evaluated.
+     * When omitted or false, the response is unchanged and policyRestrictions is not returned.
+     * Extended locations, including edge zones, remain unchanged and are not annotated.
+     * If policy evaluation fails, times out, is unavailable, or cannot determine a result, successful location retrieval
+     * still returns HTTP 200 with status set to Unknown and reason set to EvaluationUnavailable for affected standard locations.
+     * Errors retrieving the location list are returned normally.
+     */
+    @query("policyAware")
+    @added(Versions.v2026_10_01)
+    policyAware?: boolean,
   ): ArmResponse<LocationListResult> | CloudError;
 
   /**
    * Gets details about a specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "Preserve the published subscription GET route and custom response rather than converting it to a standard ARM resource operation template."
   @tag("Subscriptions")
   @route("/subscriptions/{subscriptionId}")
   @get
