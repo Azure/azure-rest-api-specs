@@ -86,6 +86,20 @@ namespace Azure.AI.Projects {
    * Returns a 400 (Bad Request) error when the target is not a Model Router endpoint.
    */
   model RoutingConfiguration {
+    /** Routing mode to apply. Omission preserves the configured mode; unsupported request values are rejected. */
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    mode?: ModelRouterMode;
+
+    /** Unordered allowed set of serving model names within the Model Router deployment. Every name must be eligible; omission preserves the configured pool. */
+    @minItems(1)
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    models?: string[];
+
+    /** Unordered allowed set of routing efforts. Only none, low, medium, high, and xhigh are supported in requests; none selects a qualified non-reasoning model. Do not combine with an effective authored native reasoning effort. */
+    @minItems(1)
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    reasoning_effort?: ModelRouterReasoningEffort[];
+
     /**
      * Session affinity configuration for reusing an eligible model across requests in the same conversation.
      * If omitted, sticky affinity is used when a supported conversation identifier is available.
@@ -167,6 +181,27 @@ namespace Azure.AI.Projects {
     quality: "quality",
   }
 
+  /** Extensible routing-effort values. Requests support only the named values; native reasoning-effort values are independent. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  union ModelRouterReasoningEffort {
+    string,
+
+    /** Selects a qualified non-reasoning model. */
+    none: "none",
+
+    /** Selects a model qualified for low reasoning effort. */
+    low: "low",
+
+    /** Selects a model qualified for medium reasoning effort. */
+    medium: "medium",
+
+    /** Selects a model qualified for high reasoning effort. */
+    high: "high",
+
+    /** Selects a model qualified for xhigh reasoning effort. */
+    xhigh: "xhigh",
+  }
+
   /** A value returned in a response header from a model routing attempt. */
   @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
   union ModelRouterResponseHeaderValue {
@@ -228,8 +263,11 @@ namespace Azure.AI.Projects {
   /** Routing decision metadata from Model Router. */
   @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
   model ModelRouterDetails {
-    /** The routing mode for the request. */
+    /** The routing mode actually applied to the selected inference turn. */
     mode: ModelRouterMode;
+
+    /** Known effort selected from an explicit routing allowed set for the final client-output-producing inference. Omitted for native or default effort. */
+    reasoning_effort?: ModelRouterReasoningEffort;
 
     /** Session affinity metadata for the routing decision. Omitted when affinity metadata is unavailable or the preview feature is not enabled. */
     session_affinity?: SessionAffinityDetails;

@@ -51778,7 +51778,11 @@
         "properties": {
           "mode": {
             "$ref": "#/components/schemas/ModelRouterMode",
-            "description": "The routing mode for the request."
+            "description": "The routing mode actually applied to the selected inference turn."
+          },
+          "reasoning_effort": {
+            "$ref": "#/components/schemas/ModelRouterReasoningEffort",
+            "description": "Known effort selected from an explicit routing allowed set for the final client-output-producing inference. Omitted for native or default effort."
           },
           "session_affinity": {
             "$ref": "#/components/schemas/SessionAffinityDetails",
@@ -51814,6 +51818,29 @@
           }
         ],
         "description": "The routing mode used by Model Router for the request.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ModelRouterControls=V1Preview"
+          ]
+        }
+      },
+      "ModelRouterReasoningEffort": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh"
+            ]
+          }
+        ],
+        "description": "Extensible routing-effort values. Requests support only the named values; native reasoning-effort values are independent.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "ModelRouterControls=V1Preview"
@@ -93287,6 +93314,41 @@
       "RoutingConfiguration": {
         "type": "object",
         "properties": {
+          "mode": {
+            "$ref": "#/components/schemas/ModelRouterMode",
+            "description": "Routing mode to apply. Omission preserves the configured mode; unsupported request values are rejected.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "ModelRouterControls=V1Preview"
+              ]
+            }
+          },
+          "models": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "Unordered allowed set of serving model names within the Model Router deployment. Every name must be eligible; omission preserves the configured pool.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "ModelRouterControls=V1Preview"
+              ]
+            }
+          },
+          "reasoning_effort": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelRouterReasoningEffort"
+            },
+            "minItems": 1,
+            "description": "Unordered allowed set of routing efforts. Only none, low, medium, high, and xhigh are supported in requests; none selects a qualified non-reasoning model. Do not combine with an effective authored native reasoning effort.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "ModelRouterControls=V1Preview"
+              ]
+            }
+          },
           "session_affinity": {
             "$ref": "#/components/schemas/SessionAffinityConfiguration",
             "description": "Session affinity configuration for reusing an eligible model across requests in the same conversation.\nIf omitted, sticky affinity is used when a supported conversation identifier is available.",
