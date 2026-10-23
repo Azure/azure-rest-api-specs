@@ -4,11 +4,11 @@
 
 This is the AutoRest configuration file for chaos.
 
-## Conditional PUT proposal for 2026-11-01
+## Conditional PUT in 2026-11-01
 
 Only `Workspaces_CreateOrUpdate`, `Scenarios_CreateOrUpdate`, and
-`ScenarioConfigurations_CreateOrUpdate` add optional `If-None-Match` and
-`If-Match` request headers in the upcoming 2026-11-01 contract.
+`ScenarioConfigurations_CreateOrUpdate` support optional `If-None-Match` and
+`If-Match` request headers in the 2026-11-01 contract.
 `If-None-Match: *` is create-only: an existing resource returns 412.
 `If-Match: *` is update-only: a missing resource returns 412.
 A failed precondition returns the standard Azure error body before any resource
@@ -29,10 +29,10 @@ request fails with 412. Preserve already supported validators; other effective
 conditions must be honored or rejected with 412 when they cannot be verified,
 never silently ignored. The RFC-required exceptions still apply:
 `If-Unmodified-Since` is ignored when `If-Match` is present, its date is invalid,
-or no modification date is available. This proposal adds no date-validator
+or no modification date is available. These conditional headers add no date-validator
 parameter, entity-tag matching platform, response ETag, or `etag` body property.
 
-This is a spec-only contract proposal, not evidence of runtime implementation
+This section specifies the API contract; it does not establish runtime rollout
 or API approval. It does not change retained API versions, Connections, V1
 resources, DELETE, SDKs, Portal/CLI defaults, or resource ownership.
 The design follows the
