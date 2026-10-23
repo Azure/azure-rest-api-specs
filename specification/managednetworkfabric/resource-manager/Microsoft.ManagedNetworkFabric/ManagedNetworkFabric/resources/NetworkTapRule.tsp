@@ -1,7 +1,7 @@
 import "../models/common.tsp";
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;

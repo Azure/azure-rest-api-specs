@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "resourceGroupName": "example-rg",
+    "fabricName": "example-fabric",
+    "delegationName": "example-delegation",
+    "api-version": "2026-07-15-preview",
+    "properties": {
+      "properties": {
+        "routingDomainBudget": 20,
+        "administrativeState": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/fabrics/example-fabric/delegations/example-delegation",
+        "name": "example-delegation",
+        "type": "Microsoft.ManagedNetworkFabric/fabrics/delegations",
+        "location": "eastus",
+        "properties": {
+          "customerSubscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+          "customerTenantId": "11111111-2222-3333-4444-555555555555",
+          "customerResourceGroupName": "customer-rg",
+          "routingDomainBudget": 10,
+          "defaultRoutingDomainLimits": {
+            "vlanBudget": 16,
+            "publicIpAllowance": 4,
+            "managedNatEnabled": "True",
+            "maxSnatPorts": 1024
+          },
+          "addressPrefixes": [
+            "10.0.0.0/8"
+          ],
+          "allowedEgressNetworks": [
+            "InternetDefault"
+          ],
+          "administrativeState": "Enabled",
+          "provisioningState": "Succeeded",
+          "authorizationState": "Active"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/providers/Microsoft.ManagedNetworkFabric/locations/eastus/operationStatuses/3fa85f64-5717-4562-b3fc-2c963f66afa6?api-version=2026-07-15-preview",
+        "Retry-After": 10
+      }
+    }
+  },
+  "title": "FabricDelegations_Update",
+  "operationId": "FabricDelegations_Update"
+}

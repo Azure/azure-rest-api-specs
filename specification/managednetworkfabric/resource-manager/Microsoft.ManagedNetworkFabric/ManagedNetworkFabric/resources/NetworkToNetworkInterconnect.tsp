@@ -3,9 +3,9 @@ import "../models/common.tsp";
 import "../models/NetworkToNetworkInterconnect.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
-using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
 

@@ -1,8 +1,8 @@
 import "../models/common.tsp";
 import "../models/RoutePolicy.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
