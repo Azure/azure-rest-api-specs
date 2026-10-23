@@ -12836,6 +12836,14 @@ model ManagedInstanceProperties {
   /**
    * Whether or not this is a GPv2 variant of General Purpose edition.
    */
+  @removed(Versions.v2026_11_01_preview)
+  @renamedFrom(Versions.v2026_11_01_preview, "isGeneralPurposeV2")
+  isGeneralPurposeV2Before20261101?: boolean;
+
+  /**
+   * Whether or not this is a GPv2 variant of General Purpose edition. Starting with API version 2026-11-01, this property cannot be used to create a GPv1 instance or change an existing instance to GPv1.
+   */
+  @added(Versions.v2026_11_01_preview)
   isGeneralPurposeV2?: boolean;
 
   /**
