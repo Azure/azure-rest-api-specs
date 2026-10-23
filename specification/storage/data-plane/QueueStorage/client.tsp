@@ -1,6 +1,5 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
-import "./client-cpp.mjs";
 
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
@@ -378,14 +377,6 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 @@alternateType(KeyInfo.start, string, "cpp");
 @@alternateType(KeyInfo.expiry, string, "cpp");
 @@alternateType(GeoReplication.lastSyncTime, utcDateTime | null, "cpp");
-// The compiler's ::parameters selector does not expose these template-expanded properties.
-extern dec alternateCppParameterType(
-  target: TypeSpec.Reflection.Operation,
-  parameter: valueof string,
-  type: unknown
-);
-@@alternateCppParameterType(Queue.receiveMessages, "numberOfMessages", int64);
-@@alternateCppParameterType(Queue.peekMessages, "numberOfMessages", int64);
 
 /** Statistics returned to the C++ queue protocol client. */
 @TypeSpec.Xml.name("StorageServiceStats")
