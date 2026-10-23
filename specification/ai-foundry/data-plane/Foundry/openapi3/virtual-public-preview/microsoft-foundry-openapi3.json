@@ -38018,7 +38018,7 @@
                 "type": "null"
               }
             ],
-            "description": "The service-generated briefing for this agent, or null before a summary is available.",
+            "description": "Generated summary, or null when unavailable.",
             "readOnly": true
           },
           "overview": {
@@ -38030,12 +38030,12 @@
                 "type": "null"
               }
             ],
-            "description": "The compatibility overview, or null before an overview is available. A historical user\noverride takes precedence over generated content here, but never affects agent_summary.",
+            "description": "Compatibility overview, or null when unavailable.",
             "readOnly": true
           },
           "priorities": {
             "$ref": "#/components/schemas/AgentInsightPriorities",
-            "description": "Category selection and analysis guidance. Omitted when priorities are not configured or have been cleared.",
+            "description": "Analysis priorities. Omitted when not configured.",
             "readOnly": true
           },
           "updated_at": {
@@ -38081,7 +38081,7 @@
           },
           "priorities": {
             "$ref": "#/components/schemas/AgentInsightPriorities",
-            "description": "Category selection and analysis guidance. Omit to create the monitor without priorities. Explicit null is not allowed."
+            "description": "Analysis priorities for the monitor."
           }
         },
         "description": "Fields accepted when creating an Agent Insights monitor for an agent.",
@@ -38155,7 +38155,7 @@
           },
           "priorities": {
             "$ref": "#/components/schemas/AgentInsightPriorities",
-            "description": "Category selection and analysis guidance. Omitted when priorities are not configured or have been cleared.",
+            "description": "Analysis priorities. Omitted when not configured.",
             "readOnly": true
           },
           "updated_at": {
@@ -38164,7 +38164,7 @@
             "readOnly": true
           }
         },
-        "description": "An Agent Insights monitor returned by list operations, without agent_summary or overview.",
+        "description": "Monitor list item without the summary or overview.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentInsights=V1Preview"
@@ -38198,7 +38198,7 @@
                 "type": "null"
               }
             ],
-            "description": "Replaces the complete priorities object. Omission leaves priorities unchanged; explicit\nnull clears them. Include categories even when changing only instructions. Omitted, null,\nor blank instructions in a replacement clear earlier guidance. Responses omit cleared\npriorities."
+            "description": "Replaces all priorities. Omit to preserve them; null clears them."
           },
           "overview_override": {
             "anyOf": [
@@ -38209,16 +38209,15 @@
                 "type": "null"
               }
             ],
-            "description": "Legacy input accepted for compatibility and ignored after request validation. Supplying a\nvalue or null does not change or clear an overview or agent_summary. Other fields in the\nsame update are validated and applied as usual. An update with only this field leaves\nthe monitor unchanged.",
+            "description": "Ignored legacy input. Other updates still apply.",
             "deprecated": true
           }
         },
         "description": "Fields that can be updated on an Agent Insights monitor.",
         "examples": [
           {
-            "enabled": true,
-            "overview_override": {
-              "content": "Ignored legacy overview."
+            "priorities": {
+              "categories": []
             }
           },
           {
@@ -38270,8 +38269,8 @@
             "items": {
               "type": "string"
             },
-            "minItems": 1,
-            "description": "Built-in or custom category identifiers. Built-in identifiers are tool_call_failures,\nhallucinations, cost_tokens, latency, reliability_errors, output_quality, context_memory,\nand security_risk. Custom identifiers are also accepted.\n\nThe service trims and lowercases identifiers, drops blank entries, maps safety_guardrails\nto security_risk, removes duplicates, and sorts the result in ordinal order. Select 1 to 20\ndistinct nonblank categories after normalization. Each normalized identifier must be valid\nUTF-8, contain no control characters, and use at most 128 UTF-8 bytes."
+            "minItems": 0,
+            "description": "Up to 20 distinct normalized category identifiers (128 UTF-8 bytes each). Empty uses defaults."
           },
           "instructions": {
             "anyOf": [
@@ -38282,17 +38281,17 @@
                 "type": "null"
               }
             ],
-            "description": "Optional trace-grounded guidance for the monitor's analysis. The service trims the edges\nand preserves case and internal formatting. Omitted, null, or blank instructions clear\nearlier guidance when a priorities object is supplied.\n\nAfter trimming, instructions must be valid UTF-8 and use at most 2,000 UTF-8 bytes.\nCarriage returns, line feeds, and tabs are allowed; other control characters are rejected.\nResponses omit this property when there is no guidance."
+            "description": "Analysis guidance, up to 2,000 UTF-8 bytes after trimming. Null or blank removes guidance."
           }
         },
-        "description": "Category selection and trace-grounded analysis guidance for an Agent Insights monitor.",
+        "description": "Monitor analysis priorities.",
         "examples": [
           {
             "categories": [
               "cost_tokens",
               "latency"
             ],
-            "instructions": "Prioritize customer-facing latency and token waste supported by trace evidence."
+            "instructions": "Focus on latency and token waste."
           }
         ],
         "x-ms-foundry-meta": {
@@ -38673,11 +38672,11 @@
         "properties": {
           "markdown": {
             "type": "string",
-            "description": "The service-generated agent summary in Markdown.",
+            "description": "Summary in Markdown.",
             "readOnly": true
           }
         },
-        "description": "A service-generated briefing for the monitored agent.",
+        "description": "Service-generated agent summary.",
         "examples": [
           {
             "markdown": "# Agent summary\n\nThis agent answers support questions from product documentation."
@@ -38794,7 +38793,7 @@
             "description": "The time when this overview was last updated."
           }
         },
-        "description": "A compatibility overview for an Agent Insights monitor. Historical user overrides take precedence over generated content.",
+        "description": "Compatibility overview, including historical user overrides.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentInsights=V1Preview"
@@ -38809,10 +38808,10 @@
         "properties": {
           "content": {
             "type": "string",
-            "description": "The legacy overview content. The service ignores this value."
+            "description": "Ignored legacy content."
           }
         },
-        "description": "Legacy overview input accepted for compatibility and ignored.",
+        "description": "Ignored legacy overview input.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentInsights=V1Preview"
