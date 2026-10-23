@@ -5,6 +5,7 @@ import "@azure-tools/openai-typespec/models/realtime";
 import "../common/servicepatterns.tsp";
 import "../agents/models.tsp";
 import "../openai/responses/models.tsp";
+import "./handoff.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -179,6 +180,19 @@ model VoiceAgentDefinition extends AgentDefinition {
     is not part of the persisted conversation content.
     """)
   store?: boolean = false;
+
+  @doc("""
+    Inline voice subagents owned and versioned with this Voice Agent. New Handoff authoring requires `$entrypoint`
+    as the first subagent, followed by at least one specialist and at most 31 additional subagents. Each subagent
+    declares its outgoing `handoff_conditions`; condition identifiers and the 128-condition limit apply across
+    the entire Agent. Referenced agents and delegations are not supported by this property.
+    """)
+  @minItems(2)
+  @maxItems(32)
+  subagents?: InlineVoiceSubagent[];
+
+  @doc("Session-wide handoff limits. Requires `subagents` and at least one outgoing condition from `$entrypoint`. When omitted, the service permits up to 16 completed and 16 attempted handoffs.")
+  handoff_policy?: VoiceAgentHandoffPolicy;
 }
 
 @doc("Configuration for sibling Foundry text agents that a voice agent may consult.")
