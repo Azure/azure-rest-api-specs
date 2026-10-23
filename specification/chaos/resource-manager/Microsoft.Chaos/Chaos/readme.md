@@ -4,6 +4,43 @@
 
 This is the AutoRest configuration file for chaos.
 
+## Conditional PUT in 2026-11-01
+
+Only `Workspaces_CreateOrUpdate`, `Scenarios_CreateOrUpdate`, and
+`ScenarioConfigurations_CreateOrUpdate` support optional `If-None-Match` and
+`If-Match` request headers in the 2026-11-01 contract.
+`If-None-Match: *` is create-only: an existing resource returns 412.
+`If-Match: *` is update-only: a missing resource returns 412.
+A failed precondition returns the standard Azure error body before any resource
+change or asynchronous operation starts, with error code `PreconditionFailed`.
+The public ARM response map remains `200`, `201`, and `default`; actual HTTP 412
+failures use the existing `default` error schema, not a success response.
+The conditional examples use `responses.default` for those HTTP 412 failures,
+identified by their titles and `PreconditionFailed` error code. Regression tests
+also validate their error bodies with actual status 412 through OAV.
+Successful requests retain the existing 200/201 responses and polling contract.
+Omitting both headers preserves
+unconditional create-or-update behavior.
+
+Evaluate applicable conditions in
+[HTTP precondition order](https://www.rfc-editor.org/rfc/rfc9110.html#section-13.2.2).
+If both wildcard headers are supplied, no resource state satisfies both and the
+request fails with 412. Preserve already supported validators; other effective
+conditions must be honored or rejected with 412 when they cannot be verified,
+never silently ignored. The RFC-required exceptions still apply:
+`If-Unmodified-Since` is ignored when `If-Match` is present, its date is invalid,
+or no modification date is available. These conditional headers add no date-validator
+parameter, entity-tag matching platform, response ETag, or `etag` body property.
+
+This section specifies the API contract; it does not establish runtime rollout
+or API approval. It does not change retained API versions, Connections, V1
+resources, DELETE, SDKs, Portal/CLI defaults, or resource ownership.
+The design follows the
+[Azure conditional request guidance](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#conditional-requests)
+and uses
+[versioned parameters](https://azure.github.io/typespec-azure/docs/howtos/versioning/06-evolving-apis/)
+on the existing ARM operation templates.
+
 ## Workspace customer-managed keys in 2026-11-01
 
 Workspace PUT, PATCH, GET, and list responses support `properties.encryption`.
@@ -1308,6 +1345,31 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ```yaml
 directive:
+  # Locked OAV matches literal path suffixes; both forms keep Windows and POSIX scoped to November.
+  - suppress: RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE
+    from:
+      - stable/2026-11-01/openapi.json
+      - stable\2026-11-01\openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}"].put.responses["200"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}"].put.responses["201"]
+    reason: Each conditional example must show only outcomes possible for its request. Create-only cannot return 200 and update-only cannot return 201. The CreateOnly and UpdateOnly examples collectively cover 200, 201 and actual HTTP 412 through the default error schema; put-preconditions.test.mjs verifies their wiring and coverage. Only per-example success-status completeness is suppressed, not request or response validation.
+  - suppress: RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE
+    from:
+      - stable/2026-11-01/openapi.json
+      - stable\2026-11-01\openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}"].put.responses["200"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}"].put.responses["201"]
+    reason: Each conditional example must show only outcomes possible for its request. Create-only cannot return 200 and update-only cannot return 201. The CreateOnly and UpdateOnly examples collectively cover 200, 201 and actual HTTP 412 through the default error schema; put-preconditions.test.mjs verifies their wiring and coverage. Only per-example success-status completeness is suppressed, not request or response validation.
+  - suppress: RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE
+    from:
+      - stable/2026-11-01/openapi.json
+      - stable\2026-11-01\openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/configurations/{scenarioConfigurationName}"].put.responses["200"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/configurations/{scenarioConfigurationName}"].put.responses["201"]
+    reason: Each conditional example must show only outcomes possible for its request. Create-only cannot return 200 and update-only cannot return 201. The CreateOnly and UpdateOnly examples collectively cover 200, 201 and actual HTTP 412 through the default error schema; put-preconditions.test.mjs verifies their wiring and coverage. Only per-example success-status completeness is suppressed, not request or response validation.
   - suppress: TopLevelResourcesListBySubscription
     where: $.definitions.target
     from: targets.json

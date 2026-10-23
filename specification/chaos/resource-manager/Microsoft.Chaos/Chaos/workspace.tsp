@@ -6,6 +6,7 @@ import "./workspace.models.tsp";
 import "./workspaceEvaluation.models.tsp";
 import "./workspaceDiscovery.models.tsp";
 import "./lro-helpers.tsp";
+import "./put-preconditions.tsp";
 
 using Azure.ResourceManager;
 using Azure.Core;
@@ -26,7 +27,10 @@ interface Workspaces {
   /**
    * Create or update a Workspace resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Workspace>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Workspace,
+    Parameters = PutPreconditionHeaders
+  >;
 
   /**
    * Update a Workspace.
