@@ -1,105 +1,143 @@
 ---
 name: typespec-linter-rule-enablement
-description: "Accept a list of migrated TypeSpec linter rule names, create one draft PR, enable those rules centrally, and iterate compilation and narrow legacy-contract suppressions until every TypeSpec project compiles. Not for implementing rules in typespec-azure, suppressing arbitrary CI failures, or changing API contracts."
+description: "Enable a list of migrated TypeSpec linter rules in one draft PR and iterate full compilation and narrow legacy-contract suppressions until every project passes. Not for implementing rules, changing API contracts, or suppressing unrelated failures."
 ---
 
 # Enable migrated TypeSpec linter rules
 
-Accept only a **rule-name list**. Create one draft PR for that list **before
-enabling the rules**, then enable them centrally and repeat
-**compile all projects → suppress observed legacy violations → recompile**
-until every project passes `tsp compile` with warnings treated as errors.
-Preserve existing API contracts; new unsuppressed violations must still fail.
-
-Read [the rollout procedure](references/rollout.md) before executing. The
-[initial investigation](references/initial-inventory.md) is a dated starting
-point, not a permanent allowlist.
-
-## Input contract
-
-Example invocation:
+Accept only a nonempty **rule-name list**:
 
 ```text
 typespec-linter-rule-enablement ["no-query-in-post", "no-query-in-point-op"]
 ```
 
-Accept nonempty lists of fully qualified rule IDs or uniquely resolvable rule
-suffixes; deduplicate them. Do not require a package, plane, branch, project list,
-PR URL, iteration count, or execution mode as another input. Infer these from
-repository metadata and installed rules, using the repository default branch as
-the base. Reject unknown or ambiguous names explicitly; never guess, silently
-drop a requested rule, or enable extra rules.
+Resolve fully qualified IDs or unique suffixes and deduplicate. Infer packages,
+profiles, projects, and PR context from the repository; require no other inputs.
+Reject unknown or ambiguous names, and never omit or add requested rules.
 
-## Execution order
+## 1. Resolve prerequisites and create one draft PR
 
-1. Resolve the entire list, installed exports, current defaults, applicable
-   central profiles, and ordered profile composition. Report unavailable
-   packages or unsupported composition as blockers rather than silently changing
-   branches or dependencies. Already-enabled rules remain enabled.
-2. Reuse the current branch's open draft PR when it is the requested rollout PR.
-   Otherwise create a work branch and **one draft PR for the complete list**,
-   using the policy-neutral bootstrap described in the rollout procedure. Do not
-   enable the selected rules before the draft exists.
-3. Enable every selected rule in `eng/typespec-rulesets/index.ts`, preserve
-   inherited profiles, and push the enablement to that same draft PR.
-4. Discover every TypeSpec project under `specification` and run
-   `tsp compile --warn-as-error` on every project entry point. Keep per-project
-   exit codes and full diagnostics; do not stop the scan at the first failure.
-5. Before editing production `.tsp` files, load the repository's
-   `azure-typespec-author` skill and follow its grounding and validation
-   requirements. If it is not registered with the skill tool, read its local
-   `SKILL.md` and required references directly. A missing local skill or
-   inaccessible required guidance is a blocker, not permission to bypass it.
-6. Add justified, narrow inline suppressions only for observed diagnostics from
-   the requested rules where an existing contract must be preserved. Format and
-   recompile edited projects; diagnose repeated failures and classify newly
-   exposed diagnostics. Continue this loop without an arbitrary pass limit.
-7. After each suppression batch, rerun compilation across **all projects**,
-   including consumers of shared declarations. Repeat until a complete pass has
-   zero failed projects. A genuine blocker or demonstrable lack of progress
-   leaves the PR draft and the rollout incomplete; never suppress unrelated
-   failures just to terminate the loop.
-8. Verify unchanged generated APIs, run TSV and suppression review checks,
-   commit/push the final changes, and update the existing PR body and progress.
-   Do not create another PR at the end or declare readiness before final CI.
+- Inspect installed linter exports, package versions, defaults, and ordered
+  profile composition. Later profiles can cancel an enable. Report unavailable
+  rules or incompatible composition; do not silently upgrade dependencies or
+  switch branches. Keep already-enabled rules enabled; report a no-op when
+  there is no work.
+- Audit project profile references, including inheritance. Record configurations
+  outside the central profiles rather than mass-editing them. Choose profiles
+  from actual rule applicability, not the defining package alone.
+- Reuse the requested rollout's existing draft PR. Otherwise use a dedicated
+  work branch at the repository default branch's exact SHA and create **one
+  draft PR for the entire list before enabling rules**. Prefer an authorized
+  organization-repository branch; disclose a necessary fork fallback.
+- If a new PR needs a branch difference, bootstrap with explicit `false` entries
+  only for requested rules proven effectively disabled in those profiles.
+  Commit/push this policy-neutral change, create and verify the draft, then
+  enable the rules. Never temporarily disable an already-enabled rule.
+- Check protected-file author eligibility separately from push permission.
+  Record required maintainer action; never bypass allowlists or approvals.
 
-## Guardrails
+## 2. Enable, compile, suppress, and repeat
 
-- Preserve upstream `extends` entries and existing overrides in the wrapper.
-  Rule IDs belong to the defining linter package, not the wrapper package.
-- Verify the final composed profiles, not just one wrapper entry. A later
-  profile can disable an earlier enable. In particular, `client-sdk` disables
-  `use-create-for-put`; defer its rollout until an ARM-only composition is
-  agreed and verified. Do not enable it for data-plane projects to work around
-  that conflict.
-- Do not mass-edit service `tspconfig.yaml` files, introduce `linter.disable`,
-  disable the rule globally again, or use `specification/suppressions.yaml` to
-  hide individual linter diagnostics.
-- Do not change declarations, decorators, versions, examples, generated Swagger,
-  or existing suppressions to make the rollout green.
-- Never blanket-suppress a namespace, file, project, or generic template to
-  silence unrelated diagnostics. Inspect template diagnostic targets and shared
-  declarations explicitly.
-- Newly revealed diagnostics must be observed and classified, not predicted or
-  suppressed speculatively. Keep processing actionable failures until all
-  projects compile; report genuine blockers and stalled diagnostics explicitly.
-- Use disposable worktrees for shard validation. `tsv --git-clean` deletes
-  untracked work and restores tracked files; never run it in the authoring
-  worktree or before committing the candidate changes in a disposable checkout.
-- Do not depend on unmerged PR #45589. Its inspected harvester misses current
-  TSV group headings; a zero-result harvest is not evidence of no violations.
-- A local smoke test or one green shard is not repository-wide validation.
-  Require all three Ubuntu and all three Windows shards for the target ref.
-- Check the repository's protected-file policy for central `eng/**` changes.
-  Branch push permission does not establish PR-author eligibility. Report a
-  maintainer handoff when required; never change the allowlist, impersonate an
-  allowed author, or treat compilation success as permission to bypass the gate.
+Enable the resolved IDs in the applicable profiles in
+`eng/typespec-rulesets/index.ts`. Preserve upstream `extends` and unrelated
+overrides. Build the wrapper and add/update regression coverage proving the
+selected rules apply in composed profiles and a narrow suppression does not
+hide another violation. Commit/push enablement to the same draft.
 
-## Completion report
+Discover all configurations, not just edited services:
 
-Provide the supplied list and resolved rule IDs, PR link, base/head revisions,
-package versions, total discovered projects, per-pass compile failures, added
-suppression counts, final all-project compile result, generated-output
-comparison, final validation run links, and any blockers. Distinguish local
-compile convergence from final CI readiness. Never mark the rollout complete
-with skipped or failing projects, omitted requested rules, or unpublished edits.
+```powershell
+$projects, $checkedAll = & .\eng\scripts\Get-TypeSpec-Folders.ps1 -CheckAll
+pnpm exec tsv --all --dry-run specification
+```
+
+Retain the reconciled manifest, source revision, versions, per-project exit
+codes, and full diagnostics. Compile configured `main.tsp` projects with
+`pnpm exec tsp compile <project> --warn-as-error`; use
+`pnpm exec tsp compile <project>\client.tsp --no-emit --warn-as-error` for
+client-only projects. Account for grouping configurations through all their
+configured child entry points. Continue the scan after failures.
+Treat unresolved entry points as blockers, not silent omissions.
+
+For each pass:
+
+1. Analyze failures before editing. Classify diagnostics by rule, source target,
+   and cause; suppress only observed requested-rule violations where preserving
+   an existing API or SDK contract is intentional.
+2. Before production `.tsp` edits, follow the repository's `azure-typespec-author`
+   skill. If unregistered, read its local `SKILL.md` and required references.
+   Inaccessible required guidance is a blocker.
+3. Apply justified suppressions at the exact reported property or operation.
+   Format the edited scope, inspect the diff, and recompile affected projects.
+4. Run another complete all-project pass, including shared consumers, with all
+   requested rules still enabled. Repeat until there are **zero failed or
+   skipped projects**, with no arbitrary iteration limit.
+
+Investigate recurring diagnostics as possible placement errors instead of
+broadening scope. Rule bugs, unrelated errors, infrastructure failures, or
+demonstrable lack of progress are explicit blockers, not suppressible shortcuts.
+Keep the PR draft and report incomplete work.
+
+### Exact-source compilation evidence
+
+Complete **TypeSpec Validation - All** runs can supply a full compile pass
+instead of duplicating it locally; targeted recompilation remains required
+after source edits. Require all three Ubuntu and three Windows shards for the
+candidate and target ref. Reconcile every logged `pass`/`fail`/`skip` project
+against discovery: no missing, duplicate, skipped, or truncated coverage.
+A failure before the compile check does not establish compilation.
+
+Verify the actual checkout SHA across shards, not just workflow `head_sha`:
+PR jobs can use a newer-base merge snapshot. Align authoring source with that
+immutable snapshot before using diagnostic coordinates; refresh discovery if
+the base changed. Preserve raw logs and repair only verified diagnostic
+fragments interrupted by progress counters. Require matching located
+diagnostics across operating systems; an empty harvest is not proof of success.
+
+Use clean disposable checkouts for validation that rewrites generated files.
+Never run `tsv --git-clean` in the authoring worktree; it discards tracked and
+untracked work. Disposable checkouts must contain committed candidate changes.
+
+### Narrow suppression editing
+
+Deduplicate observations across versions/projects/OS, then insert one directive
+per **rule and exact AST declaration**. Match identifiers and enclosing owners,
+not repeated names or documentation text. Interface generic-argument properties
+are valid property anchors, not permission to suppress the whole interface.
+Library, inline, or other unsupported targets require explicit placement review.
+
+Preflight the entire batch before writes. Insert bottom-up before decorators,
+preserving documentation and existing directives. Reparse and prove that
+removing only new directives recovers the original source byte-for-byte.
+Use contract-specific justifications and retain shared-consumer coverage.
+
+Do not blanket-suppress namespaces, groups, projects, or templates. Do not
+change API declarations, decorators, versions, examples, existing suppressions,
+or generated Swagger. Never use global disablement, `linter.disable`, service
+configuration edits, or `specification/suppressions.yaml` to hide violations.
+
+## 3. Validate and publish
+
+After all edits and formatting, rediscover projects and require successful
+exact-candidate evidence for:
+
+- **TypeSpec Validation - All:** complete six-shard coverage as above, with zero
+  failed/skipped projects or remaining diagnostics.
+- **TypeSpec Validation:** the normal PR validation path.
+- **TypeSpec Suppressions:** analysis and aggregate status, including the
+  repository's approval policy; inspect new counts and structural anchors.
+- Relevant wrapper/tooling build, typecheck, and regression tests when changed.
+
+Verify generated API output is unchanged. **Do not wait for SDK generation,
+SDK breaking-change, or APIView pipelines** for this contract-preserving rollout.
+Keep merge-policy gates separate from TSV convergence; never alter approval
+rules or claim a blocked PR is merge-ready.
+
+Commit/push to the same PR, keeping enablement and required suppressions atomic.
+Validate the final published candidate, not an earlier local revision.
+Update PR metadata sparingly: title/body edits can retrigger impacted scans.
+Do not auto-merge or create a replacement PR.
+
+Report the PR link, supplied/resolved rules and profiles, package versions,
+base/head and actual CI checkout revisions, project coverage, per-pass failures,
+suppression counts, unchanged-output evidence, final CI links, and blockers.
