@@ -2379,7 +2379,7 @@ paths:
           schema:
             type: boolean
           explode: false
-        - name: structured_input
+        - name: structured_inputs
           in: query
           required: false
           description: |-
@@ -91269,7 +91269,7 @@ components:
               Only supported with `gpt-realtime-whisper` in GA Realtime sessions.
         model:
           $ref: '#/components/schemas/VoiceAgentInputTranscriptionModel'
-          description: The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` is for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech` and `phrase_list`.
+          description: The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` is for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.
         custom_speech:
           type: object
           unevaluatedProperties:
@@ -91280,12 +91280,23 @@ components:
           items:
             type: string
           description: Optional phrase hints that bias recognition toward domain terms.
+        profanity_filter:
+          $ref: '#/components/schemas/VoiceAgentProfanityFilterMode'
+          description: |-
+            Controls how profanity is handled in input transcripts. Supported only with managed Azure Speech
+            (`azure-speech` and `azure-speech-streaming`), including Custom Speech.
+            Set this property before the session starts. If omitted, the transcription provider's default applies.
+            You cannot change the mode during a session.
+            Filtering affects transcript events and the text sent to cascaded models. It does not change input
+            audio, voice activity detection, or assistant speech; audio-native models still receive the original
+            audio. Mandatory service masking policies apply even when you select `unfiltered`.
       description: |-
-        Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
-        options with the Azure and MAI transcription models, custom speech models, and phrase hints.
+        Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
+        and phrase hints.
         When `model` is `azure-speech-streaming`, transcription is supported for cascaded text-model
         conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as
-        `en-US` (comma-separated locales are supported), and supports `custom_speech` and `phrase_list`.
+        `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and
+        `profanity_filter`.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -91307,7 +91318,7 @@ components:
       description: |-
         The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed
         voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
-        `azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech` and `phrase_list`.
+        `azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.
         Additional values may be added over time.
       x-ms-foundry-meta:
         required_previews:
@@ -91528,6 +91539,18 @@ components:
         The input audio noise reduction mode.
         - `azure_deep_noise_suppression_headset`: Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.
         - `azure_personal_noise_suppression`: Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentProfanityFilterMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - masked
+            - unfiltered
+            - removed
+      description: The supported input-transcript profanity filtering modes.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

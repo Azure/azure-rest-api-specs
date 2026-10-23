@@ -775,7 +775,7 @@ model VoiceAgentEchoCancellation {
 @doc("""
   The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed
   voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
-  `azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech` and `phrase_list`.
+  `azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.
   Additional values may be added over time.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -809,16 +809,32 @@ union VoiceAgentInputTranscriptionModel {
   @doc("Azure AI Speech to text.")
   azure_speech: "azure-speech",
 
-  @doc("Azure AI Speech streaming transcription for cascaded text-model conversations only. Requires a nonempty `language`, such as `en-US`; comma-separated locales are supported. Supports `custom_speech` and `phrase_list`. Not supported with realtime speech-to-speech models.")
+  @doc("Azure AI Speech streaming transcription for cascaded text-model conversations only. Requires a nonempty `language`, such as `en-US`; comma-separated locales are supported. Supports `custom_speech`, `phrase_list`, and `profanity_filter`. Not supported with realtime speech-to-speech models.")
   azure_speech_streaming: "azure-speech-streaming",
 }
 
+@doc("The supported input-transcript profanity filtering modes.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentProfanityFilterMode {
+  string,
+
+  @doc("Masks recognized profanity in the transcript.")
+  masked: "masked",
+
+  @doc("Includes recognized profanity in the transcript, subject to mandatory service masking policies.")
+  unfiltered: "unfiltered",
+
+  @doc("Removes recognized profanity from the transcript.")
+  removed: "removed",
+}
+
 @doc("""
-  Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
-  options with the Azure and MAI transcription models, custom speech models, and phrase hints.
+  Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
+  and phrase hints.
   When `model` is `azure-speech-streaming`, transcription is supported for cascaded text-model
   conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as
-  `en-US` (comma-separated locales are supported), and supports `custom_speech` and `phrase_list`.
+  `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and
+  `profanity_filter`.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentInputTranscription {
@@ -833,7 +849,7 @@ model VoiceAgentInputTranscription {
 
   ...OmitProperties<OpenAI.AudioTranscription, "model" | "language">;
 
-  @doc("The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` is for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech` and `phrase_list`.")
+  @doc("The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` is for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.")
   `model`: VoiceAgentInputTranscriptionModel;
 
   @doc("Optional customer custom speech deployment configuration, keyed by locale.")
@@ -841,6 +857,17 @@ model VoiceAgentInputTranscription {
 
   @doc("Optional phrase hints that bias recognition toward domain terms.")
   phrase_list?: string[];
+
+  @doc("""
+    Controls how profanity is handled in input transcripts. Supported only with managed Azure Speech
+    (`azure-speech` and `azure-speech-streaming`), including Custom Speech.
+    Set this property before the session starts. If omitted, the transcription provider's default applies.
+    You cannot change the mode during a session.
+    Filtering affects transcript events and the text sent to cascaded models. It does not change input
+    audio, voice activity detection, or assistant speech; audio-native models still receive the original
+    audio. Mandatory service masking policies apply even when you select `unfiltered`.
+    """)
+  profanity_filter?: VoiceAgentProfanityFilterMode;
 }
 
 @doc("The avatar video resolution.")
