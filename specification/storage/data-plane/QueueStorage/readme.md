@@ -16,13 +16,6 @@ To see additional help and options, run:
 
 > `tsp --help`
 
-### C++ client customizations
-
-`client.tsp` contains C++-scoped protocol customizations. Keep `client-cpp.mjs`
-alongside it: the helper applies `alternateType` to template-expanded receive and
-peek parameters that the compiler's `::parameters` selector does not expose.
-It does not change the shared operation parameters or other language projections.
-
 ---
 
 
