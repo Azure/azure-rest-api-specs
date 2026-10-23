@@ -2377,7 +2377,7 @@ paths:
           schema:
             type: boolean
           explode: false
-        - name: structured_input
+        - name: structured_inputs
           in: query
           required: false
           description: |-
@@ -46322,7 +46322,12 @@ components:
           description: The Browser Automation Tool parameters.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
-      description: The input definition information for a Browser Automation Tool, as used to configure an Agent.
+      description: |-
+        The input definition information for a Browser Automation Tool, as used to configure an Agent.
+        BrowserAutomationPreviewTool is deprecated.
+        Please use BrowserAutomationTool instead.
+        See https://aka.ms/bat/docs for more information on Browser automation tool.
+      deprecated: true
       x-ms-foundry-meta:
         required_previews:
           - preview_tool
@@ -46341,7 +46346,12 @@ components:
           description: The Browser Automation Tool parameters.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
-      description: A browser automation tool stored in a toolbox.
+      description: |-
+        A browser automation tool stored in a toolbox.
+        BrowserAutomationPreviewToolboxTool is deprecated.
+        Please use BrowserAutomationToolboxTool instead.
+        See https://aka.ms/bat/docs for more information on Browser automation tool.
+      deprecated: true
       x-ms-foundry-meta:
         required_previews:
           - preview_tool
@@ -46513,37 +46523,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - MemoryStores=V1Preview
-    CloudComputerUsePreviewTool:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - cloud_computer_use_preview
-          description: The object type, which is always `cloud_computer_use_preview`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: The input definition information for a cloud computer use tool, as used to configure an agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - preview_tool
-    CloudComputerUsePreviewToolboxTool:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - cloud_computer_use_preview
-      allOf:
-        - $ref: '#/components/schemas/ToolboxTool'
-      description: A cloud computer use tool stored in a toolbox.
-      x-ms-foundry-meta:
-        required_previews:
-          - preview_tool
     ClusterInsightResult:
       type: object
       required:
@@ -78851,7 +78830,6 @@ components:
           openapi: '#/components/schemas/OpenApiTool'
           bing_custom_search_preview: '#/components/schemas/BingCustomSearchPreviewTool'
           browser_automation_preview: '#/components/schemas/BrowserAutomationPreviewTool'
-          cloud_computer_use_preview: '#/components/schemas/CloudComputerUsePreviewTool'
           browser_automation: '#/components/schemas/BrowserAutomationTool'
           azure_function: '#/components/schemas/AzureFunctionTool'
           capture_structured_outputs: '#/components/schemas/CaptureStructuredOutputsTool'
@@ -79266,7 +79244,6 @@ components:
             - capture_structured_outputs
             - openapi
             - microsoft_copilot_toolset_preview
-            - cloud_computer_use_preview
     OpenAI.ToolsArray:
       type: array
       items:
@@ -85900,7 +85877,6 @@ components:
           a2a: '#/components/schemas/A2AToolboxTool'
           a2a_preview: '#/components/schemas/A2APreviewToolboxTool'
           browser_automation_preview: '#/components/schemas/BrowserAutomationPreviewToolboxTool'
-          cloud_computer_use_preview: '#/components/schemas/CloudComputerUsePreviewToolboxTool'
           browser_automation: '#/components/schemas/BrowserAutomationToolboxTool'
           reminder_preview: '#/components/schemas/ReminderPreviewToolboxTool'
           work_iq_preview: '#/components/schemas/WorkIQPreviewToolboxTool'
@@ -85929,7 +85905,6 @@ components:
         - shell
         - web_iq_preview
         - browser_automation
-        - cloud_computer_use_preview
       description: Supported tool types for tools stored in a toolbox.
     ToolboxVersionObject:
       type: object
@@ -87488,9 +87463,19 @@ components:
           items:
             type: string
           description: Optional phrase hints that bias recognition toward domain terms.
+        profanity_filter:
+          $ref: '#/components/schemas/VoiceAgentProfanityFilterMode'
+          description: |-
+            Controls how profanity is handled in input transcripts. Supported only with managed Azure Speech
+            (`azure-speech`), including Custom Speech.
+            Set this property before the session starts. If omitted, the transcription provider's default applies.
+            You cannot change the mode during a session.
+            Filtering affects transcript events and the text sent to cascaded models. It does not change input
+            audio, voice activity detection, or assistant speech; audio-native models still receive the original
+            audio. Mandatory service masking policies apply even when you select `unfiltered`.
       description: |-
-        Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
-        options with the Azure and MAI transcription models, custom speech models, and phrase hints.
+        Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
+        and phrase hints.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -87716,6 +87701,18 @@ components:
             - far_field
             - azure_deep_noise_suppression
       description: The input audio noise reduction mode.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentProfanityFilterMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - masked
+            - unfiltered
+            - removed
+      description: The supported input-transcript profanity filtering modes.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
