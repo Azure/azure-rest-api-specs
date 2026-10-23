@@ -94,7 +94,13 @@ From the repository root:
 
 ```powershell
 node .github\skills\storage-rp-to-typespec\scripts\validate-manifest.ts "<yaml-path>"
-pnpm exec vitest run --project storage-rp-to-typespec
+```
+
+Run the standalone checks from `.github\skills\storage-rp-to-typespec`, as with
+the other skill-local Vitest suites:
+
+```powershell
+node ..\..\..\node_modules\vitest\vitest.mjs run --config vitest.config.ts
 ```
 
 The checker validates YAML syntax, schema shape, version-scoped change
