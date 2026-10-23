@@ -13884,7 +13884,7 @@
       "description": "The authentication configuration for clients calling the frontend.",
       "properties": {
         "method": {
-          "$ref": "#/definitions/McpFrontendAuthenticationMethod",
+          "$ref": "#/definitions/ServiceAccountTokenMethod",
           "description": "The incoming authentication method. Only ServiceAccountToken is supported."
         }
       },
@@ -13892,24 +13892,6 @@
       "required": [
         "method"
       ]
-    },
-    "McpFrontendAuthenticationMethod": {
-      "type": "string",
-      "description": "The authentication methods for clients calling the frontend.",
-      "enum": [
-        "ServiceAccountToken"
-      ],
-      "x-ms-enum": {
-        "name": "McpFrontendAuthenticationMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ServiceAccountToken",
-            "value": "ServiceAccountToken",
-            "description": "Kubernetes service account token authentication."
-          }
-        ]
-      }
     },
     "McpFrontendEndpoint": {
       "type": "object",

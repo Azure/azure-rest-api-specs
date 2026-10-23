@@ -64,7 +64,7 @@ model McpFrontendEndpoint {
 @discriminator("method")
 model McpFrontendAuthentication {
   /** The incoming authentication method. Only ServiceAccountToken is supported. */
-  method: McpFrontendAuthenticationMethod;
+  method: ServiceAccountTokenMethod;
 }
 
 /** Kubernetes service account token authentication for clients calling the frontend. */
@@ -76,15 +76,6 @@ model McpFrontendServiceAccountTokenAuthentication
 
   /** The accepted incoming token audiences, independent of outbound backend tokens. */
   serviceAccountTokenSettings: McpFrontendServiceAccountTokenSettings;
-}
-
-/** The authentication methods for clients calling the frontend. */
-@added(Versions.`2026-11-01-preview`)
-union McpFrontendAuthenticationMethod {
-  string,
-
-  /** Kubernetes service account token authentication. */
-  ServiceAccountToken: "ServiceAccountToken",
 }
 
 /** The Kubernetes service account token validation settings for the frontend. */
