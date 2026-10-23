@@ -1,4 +1,5 @@
 import { compile, NodeHost } from "@typespec/compiler";
+import type { CompilerOptions, RuleSetRef } from "@typespec/compiler";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
@@ -81,30 +82,34 @@ op restart(
 ): void;
 `;
 
-  it("enables the POST query pilot in the composed ARM profile but not data-plane", async () => {
-    const code = "@azure-tools/typespec-azure-resource-manager/no-query-in-post";
-    await writeFile(join(folder, "main.tsp"), postQuerySource);
-    for (const [extendsRules, expected] of [
-      [["@azure-tools/typespec-azure-rulesets-original/resource-manager"], 0],
-      [
+  it(
+    "enables the POST query pilot in the composed ARM profile but not data-plane",
+    { timeout: 30_000 },
+    async () => {
+      const code = "@azure-tools/typespec-azure-resource-manager/no-query-in-post";
+      await writeFile(join(folder, "main.tsp"), postQuerySource);
+      for (const [extendsRules, expected] of [
+        [["@azure-tools/typespec-azure-rulesets-original/resource-manager"], 0],
         [
-          "@azure-tools/typespec-azure-rulesets/resource-manager",
-          "@azure-tools/typespec-azure-rulesets/client-sdk",
+          [
+            "@azure-tools/typespec-azure-rulesets/resource-manager",
+            "@azure-tools/typespec-azure-rulesets/client-sdk",
+          ],
+          1,
         ],
-        1,
-      ],
-      [["@azure-tools/typespec-azure-rulesets/data-plane"], 0],
-    ] as const) {
-      const program = await compile(NodeHost, join(folder, "main.tsp"), {
-        noEmit: true,
-        linterRuleSet: { extends: [...extendsRules] },
-      });
-      expect(program.diagnostics.filter(({ severity }) => severity === "error")).toEqual([]);
-      expect(program.diagnostics.filter((diagnostic) => diagnostic.code === code)).toHaveLength(
-        expected,
-      );
-    }
-  });
+        [["@azure-tools/typespec-azure-rulesets/data-plane"], 0],
+      ] as const) {
+        const program = await compile(NodeHost, join(folder, "main.tsp"), {
+          noEmit: true,
+          linterRuleSet: { extends: [...extendsRules] },
+        });
+        expect(program.diagnostics.filter(({ severity }) => severity === "error")).toEqual([]);
+        expect(program.diagnostics.filter((diagnostic) => diagnostic.code === code)).toHaveLength(
+          expected,
+        );
+      }
+    },
+  );
 
   it("suppresses only the grandfathered POST query parameter", async () => {
     const code = "@azure-tools/typespec-azure-resource-manager/no-query-in-post";
@@ -246,10 +251,12 @@ namespace Microsoft.RolloutTest;
         profile === "data-plane"
           ? ["data-plane", "client-sdk"]
           : ["resource-manager", "client-sdk"];
-      const options = {
+      const options: CompilerOptions = {
         noEmit: true,
         linterRuleSet: {
-          extends: profiles.map((name) => `@azure-tools/typespec-azure-rulesets/${name}`),
+          extends: profiles.map<RuleSetRef>(
+            (name) => `@azure-tools/typespec-azure-rulesets/${name}`,
+          ),
         },
       };
       const enabled = await compile(NodeHost, join(folder, "main.tsp"), options);

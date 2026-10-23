@@ -104,6 +104,13 @@ rule's actual applicability, not its package name alone. Confirm later profiles
 do not disable selected rules again. Do not edit service `tspconfig.yaml` files
 to bypass composition or change package versions to bypass availability checks.
 
+Audit the discovered configurations' actual profile references and inheritance.
+An internal or legacy configuration with no central profile is not affected by
+the wrapper. Record these exceptions explicitly; full compilation coverage alone
+does not prove central-rule coverage, and is not permission to mass-edit configs.
+Rules spanning ARM and data-plane belong in both applicable plane profiles;
+SDK-name rules belong in the composed client-sdk profile.
+
 Build, commit, and push enablement to the **same draft PR**:
 
 ```powershell
@@ -201,14 +208,22 @@ misplaced directive rather than leaving an unreported suppression behind.
 
 For a large diagnostic set, deduplicate by rule, source file, location, and
 message across versions, consuming projects, and operating systems. Use the
-diagnostic revision's source and compiler AST to identify each exact property
-and its enclosing operation or named parameter model. Insert directives
-bottom-up, before that property's decorators, preserving docs and existing
-directives. Never reuse stale line numbers against an already edited file.
-Before applying bulk edits, verify all targets and reasons; afterward, parse
-again and prove removing only the new directives recovers the original source
-byte-for-byte. For shared parameter properties, retain explicit consumer
-coverage in the final full pass and document the shared declaration scope.
+diagnostic revision's source and compiler AST to identify each exact reported
+property or operation and its enclosing declaration. Not every rule reports on
+a property: paging, tenant-scope, SDK-name, and boolean-return diagnostics can
+report on operations. Do not widen a property diagnostic to an operation merely
+to simplify the batch. An interface, namespace, library-source, or inline target
+requires explicit placement analysis, not a blanket fallback.
+
+Insert directives bottom-up, before the target's decorators, preserving docs
+and existing directives. When multiple selected rules report on one declaration,
+keep one directive per rule; do not deduplicate different rules together.
+Never reuse stale line numbers against an already edited file. Before writing
+any files in a bulk batch, verify all targets and rule-specific compatibility
+reasons. Afterward, parse again and prove removing only the newly inserted
+directives recovers the original source byte-for-byte, including pre-existing
+suppressions. For shared properties, retain explicit consumer coverage in the
+final full pass and document the shared declaration scope.
 
 Repeat the following loop:
 
@@ -289,6 +304,11 @@ Report compile convergence separately from merge readiness. In particular,
 record a failing Protected Files check and its actual maintainer requirement;
 do not characterize it as a compiler failure or claim reviewer approval alone
 will clear an author-based restriction.
+
+Update PR metadata at meaningful milestones, not on every polling interval.
+The impacted TypeSpec workflow also runs on PR `edited` events; repeatedly
+editing the body can start redundant full-population scans while core files
+are changed.
 
 ## Why PR #45589 is not the bootstrap step
 
