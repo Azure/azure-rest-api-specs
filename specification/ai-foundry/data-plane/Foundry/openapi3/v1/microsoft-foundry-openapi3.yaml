@@ -46223,7 +46223,11 @@ components:
           description: The Browser Automation Tool parameters.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
-      description: The input definition information for a Browser Automation Tool, as used to configure an Agent.
+      description: |-
+        The input definition information for a Browser Automation Tool, as used to configure an Agent.
+        BrowserAutomationPreviewTool is deprecated.
+        Please use BrowserAutomationTool instead.
+        See https://aka.ms/bat/docs for more information on Browser automation tool.
       deprecated: true
       x-ms-foundry-meta:
         required_previews:
@@ -46243,7 +46247,11 @@ components:
           description: The Browser Automation Tool parameters.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
-      description: A browser automation tool stored in a toolbox.
+      description: |-
+        A browser automation tool stored in a toolbox.
+        BrowserAutomationPreviewToolboxTool is deprecated.
+        Please use BrowserAutomationToolboxTool instead.
+        See https://aka.ms/bat/docs for more information on Browser automation tool.
       deprecated: true
       x-ms-foundry-meta:
         required_previews:
