@@ -5882,6 +5882,14 @@ suppressions:
   - code: AvoidAdditionalProperties
     from: Databases.json
     where: $.definitions.DatabaseProperties.properties.keys
+  - code: ResourceNameRestriction
+    from: databases.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{topQueryName}/queryText"]
+    reason: serverName and databaseName are ancestor resource name parameters.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: databases.json
+    where: $.definitions.QueryTextResult
+    reason: Returns top-query text rather than ARM resources; resource identity fields are not part of this response contract.
   - code: AvoidAdditionalProperties
     from: Databases.json
     where: $.definitions.DatabaseUpdateProperties.properties.keys
