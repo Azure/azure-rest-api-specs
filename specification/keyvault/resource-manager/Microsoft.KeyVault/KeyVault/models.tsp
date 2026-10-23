@@ -1170,10 +1170,12 @@ model VaultProperties {
    * When configured, this property is returned in create, update, get, and list responses.
    * Responses contain the persisted key reference and authentication mechanism, not key material or credentials.
    * It can be supplied when creating a vault or enabling wrapping on an existing vault.
-   * Protection key wrapping must be enabled for the vault.
+   * This property is available starting with API version 2026-10-01-preview, when the protection-key wrapping capability is available for the target vault.
    * Reapplying an equivalent configuration is supported; replacing or removing it is not.
    * A versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.
-   * Omitting this property or supplying null preserves the existing configuration.
+   * After configuration, vault availability depends on the persisted Managed HSM key version remaining usable and accessible to the service.
+   * Disabling or deleting that key version, or revoking the service's access, can make the vault unavailable.
+   * Omitting this property preserves the existing configuration.
    */
   @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -1555,10 +1557,12 @@ model VaultPatchProperties {
    * When configured, this property is returned in create, update, get, and list responses.
    * Responses contain the persisted key reference and authentication mechanism, not key material or credentials.
    * It can be supplied when enabling wrapping on an existing vault.
-   * Protection key wrapping must be enabled for the vault.
+   * This property is available starting with API version 2026-10-01-preview, when the protection-key wrapping capability is available for the target vault.
    * Reapplying an equivalent configuration is supported; replacing or removing it is not.
    * A versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.
-   * Omitting this property or supplying null preserves the existing configuration.
+   * After configuration, vault availability depends on the persisted Managed HSM key version remaining usable and accessible to the service.
+   * Disabling or deleting that key version, or revoking the service's access, can make the vault unavailable.
+   * Omitting this property preserves the existing configuration.
    */
   @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)

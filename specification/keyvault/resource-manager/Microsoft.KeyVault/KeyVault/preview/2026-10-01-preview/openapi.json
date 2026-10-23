@@ -1757,7 +1757,7 @@
           }
         },
         "x-ms-examples": {
-          "Enable protection key wrapping on an existing vault": {
+          "Configure protection key wrapping on an existing vault": {
             "$ref": "./examples/updateVaultWithProtectionKeyWrapping.json"
           },
           "Update an existing vault": {
@@ -6227,7 +6227,7 @@
         },
         "protectionKeysWrappingKey": {
           "$ref": "#/definitions/WrappingKeyConfiguration",
-          "description": "Configures an external Managed HSM key used to wrap the vault's protection keys.\nWhen configured, this property is returned in create, update, get, and list responses.\nResponses contain the persisted key reference and authentication mechanism, not key material or credentials.\nIt can be supplied when enabling wrapping on an existing vault.\nProtection key wrapping must be enabled for the vault.\nReapplying an equivalent configuration is supported; replacing or removing it is not.\nA versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.\nOmitting this property or supplying null preserves the existing configuration.",
+          "description": "Configures an external Managed HSM key used to wrap the vault's protection keys.\nWhen configured, this property is returned in create, update, get, and list responses.\nResponses contain the persisted key reference and authentication mechanism, not key material or credentials.\nIt can be supplied when enabling wrapping on an existing vault.\nThis property is available starting with API version 2026-10-01-preview, when the protection-key wrapping capability is available for the target vault.\nReapplying an equivalent configuration is supported; replacing or removing it is not.\nA versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.\nAfter configuration, vault availability depends on the persisted Managed HSM key version remaining usable and accessible to the service.\nDisabling or deleting that key version, or revoking the service's access, can make the vault unavailable.\nOmitting this property preserves the existing configuration.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -6339,7 +6339,7 @@
         },
         "protectionKeysWrappingKey": {
           "$ref": "#/definitions/WrappingKeyConfiguration",
-          "description": "Configures an external Managed HSM key used to wrap the vault's protection keys.\nWhen configured, this property is returned in create, update, get, and list responses.\nResponses contain the persisted key reference and authentication mechanism, not key material or credentials.\nIt can be supplied when creating a vault or enabling wrapping on an existing vault.\nProtection key wrapping must be enabled for the vault.\nReapplying an equivalent configuration is supported; replacing or removing it is not.\nA versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.\nOmitting this property or supplying null preserves the existing configuration.",
+          "description": "Configures an external Managed HSM key used to wrap the vault's protection keys.\nWhen configured, this property is returned in create, update, get, and list responses.\nResponses contain the persisted key reference and authentication mechanism, not key material or credentials.\nIt can be supplied when creating a vault or enabling wrapping on an existing vault.\nThis property is available starting with API version 2026-10-01-preview, when the protection-key wrapping capability is available for the target vault.\nReapplying an equivalent configuration is supported; replacing or removing it is not.\nA versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.\nAfter configuration, vault availability depends on the persisted Managed HSM key version remaining usable and accessible to the service.\nDisabling or deleting that key version, or revoking the service's access, can make the vault unavailable.\nOmitting this property preserves the existing configuration.",
           "x-ms-mutability": [
             "read",
             "update",
