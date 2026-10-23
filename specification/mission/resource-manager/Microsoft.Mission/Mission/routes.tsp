@@ -273,6 +273,16 @@ interface CommunityEndpoints {
     ApprovalDeletionCallbackRequest,
     ApprovalActionResponse
   >;
+
+  @doc("Triggers a manual re-sync of community endpoint connections to all configured sync destinations.")
+  @armResourceAction(CommunityEndpointResource)
+  @post
+  @added(Microsoft.Mission.Versions.v2026_10_01_preview)
+  sync is ArmResourceActionAsync<
+    CommunityEndpointResource,
+    void,
+    CommunityEndpointResource
+  >;
 }
 
 @doc("DedicatedHub Interface")
