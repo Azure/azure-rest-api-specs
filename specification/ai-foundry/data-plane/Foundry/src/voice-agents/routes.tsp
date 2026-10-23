@@ -2,6 +2,7 @@ import "../common/models.tsp";
 import "../agents/models.tsp";
 import "./models.tsp";
 import "./protocol.tsp";
+import "./campaign-jobs.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -482,6 +483,7 @@ alias TelephonyCallListTimeQueryParameters = {
 interface AgentTelephony {
   /** Creates a telephony binding for the voice agent named in the path. */
   @summary("Create an agent telephony binding")
+  @parameterVisibility(Lifecycle.Create)
   @post
   @route("/agents/{agent_name}/telephony/bindings")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -494,7 +496,7 @@ interface AgentTelephony {
       ...Azure.Core.RepeatabilityRequestHeaders;
 
       /** The provider-specific binding to create. */
-      @body telephony_binding: CreateTelephonyBindingRequest;
+      @body binding: TelephonyBinding;
     },
     TelephonyBindingCreatedResponse
   >;
@@ -691,8 +693,9 @@ interface AgentTelephony {
     TelephonyTransferTargetsResponse
   >;
 
-  /** Creates one durable direct outbound call job. The latest agent definition is resolved when each attempt executes. */
+  /** Creates one durable direct outbound call job. Each attempt resolves the owning Agent's endpoint execution version before validation and uses that concrete version for its voice session. */
   @summary("Create an outbound telephony call job")
+  @parameterVisibility(Lifecycle.Create)
   @post
   @route("/agents/{agent_name}/telephony/call_jobs")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -709,9 +712,59 @@ interface AgentTelephony {
       idempotency_key: string;
 
       /** The direct outbound call to create. */
-      @body body: CreateTelephonyCallJobRequest;
+      @body job: TelephonyCallJob;
     },
     TelephonyCallJobAcceptedResponse
+  >;
+
+  /**
+   * Lists direct and campaign-created call jobs owned by the route Agent. Deleted and superseded-round
+   * jobs are omitted. Status-filtered pages are live views, not a snapshot across requests.
+   * For campaign_name-filtered traversal, after/before CallJob IDs retain their original Campaign
+   * incarnation and internal execution_generation association for the cursor lifetime, including after task
+   * deletion. Validate that association before reading the current round. Replacement or name reuse
+   * returns 400 invalid_cursor, never silently continues in a new round. Discard the traversal and
+   * restart SDK iteration. Cancellation updates Campaign.operation_id without changing round identity
+   * or invalidating the cursor. Unknown/expired/mismatched boundaries also return 400 invalid_cursor.
+   * A first page resolves the current round; deleting Campaigns return an empty page.
+   */
+  @summary("List outbound telephony call jobs")
+  @get
+  @list
+  @route("/agents/{agent_name}/telephony/call_jobs")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  listTelephonyCallJobs is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The owning voice agent. Authorization is applied before pagination. */
+      @path agent_name: string;
+
+      ...CommonPageQueryParameters;
+
+      /** Optional lifecycle filter. */
+      @query status?: TelephonyCallJobStatus;
+
+      /** Restrict results to the current incarnation and validation round of the named Campaign. A missing Campaign returns 404; a deleting Campaign returns an empty page. Continuation across round replacement or name reuse returns 400 invalid_cursor. Omit to include direct and retained current-round Campaign jobs. Deleting/deleted instances and superseded rounds are excluded. */
+      @query campaign_name?: TelephonyCampaignName;
+    },
+    AgentsPagedResult<TelephonyCallJob>
+  >;
+
+  /** Deletes a terminal, fully reconciled call-job record. Nonterminal jobs or unresolved provider attempts return 409. Does not cancel a call or remove Campaign outcomes, conversations, recordings, or deduplication safeguards. A deleted job returns 404 on subsequent reads; repeated deletion returns 204. A retained creation replay key returns 409 call_job_deleted rather than originating a replacement call. */
+  @summary("Delete an outbound telephony call job")
+  @delete
+  @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  deleteTelephonyCallJob is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The owning voice agent. */
+      @path agent_name: string;
+
+      /** The call-job identifier. */
+      @path call_job_id: TelephonyCallJobId;
+    },
+    NoContentResponse
   >;
 
   /** Retrieves a durable direct or campaign-created outbound call job. */
@@ -728,7 +781,7 @@ interface AgentTelephony {
     TelephonyCallJobResponse
   >;
 
-  /** Requests cancellation of a durable outbound call job. A connected call is allowed to finish. */
+  /** Requests cancellation of a durable outbound call job using If-Match. Prevents future attempts and may complete asynchronously. A new cancellation request after the call has connected returns 409; the connected call is allowed to finish naturally. */
   @summary("Cancel an outbound telephony call job")
   @post
   @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}:cancel")
