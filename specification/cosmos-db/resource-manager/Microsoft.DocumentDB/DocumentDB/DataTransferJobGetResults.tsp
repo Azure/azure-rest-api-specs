@@ -16,6 +16,7 @@ namespace Microsoft.DocumentDB;
 /**
  * A Cosmos DB Data Transfer Job
  */
+@removed(Versions.v2026_07_15)
 @parentResource(DatabaseAccountGetResults)
 @added(Versions.v2026_04_01_preview)
 model DataTransferJobGetResults
@@ -29,6 +30,7 @@ model DataTransferJobGetResults
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })
 interface DataTransferJobs {
