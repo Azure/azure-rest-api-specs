@@ -1,0 +1,127 @@
+name: azure-typespec-author-eval
+description: preserve shipped name in authoring plan
+version: "1.0"
+type: capability
+area: naming
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 007002-preserve-shipped-name-in-authoring-plan-trigger
+    tags:
+      suite: naming
+      mode: trigger
+    prompt: |
+      Continue TypeSpec source authoring with SDK client configuration planning only;
+      analysis, intake and general grounding are complete, and the user kept the recommended
+      default. The Widget ARM service targets C#, Java and Python.
+      Azure.ResourceManager.Widget 1.0.0 exposes the boolean WidgetProperties.Enabled;
+      client.tsp preserves that shipped C# name. The authorized TypeSpec addition is ttl:
+      int32, documented in minutes, to WidgetProperties in
+      specification/widget/resource-manager/Microsoft.Widget. Its SDK name is unshipped. No
+      cleanup or breaking rename is authorized. Use only this evidence and available naming
+      guidance. No network, tools that mutate, compilation or generation. Return JSON with a
+      top-level "names" object mapping enabled and ttl directly to planned C# name strings,
+      not nested objects. Also include top-level "otherLanguagesChanged", "applied", and
+      "generatedNamesVerified".
+    constraints: &a1
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azsdk-common-typespec-naming
+      - &a2
+        type: tool-calls
+        config:
+          required:
+            - name: ^(view|powershell|bash|rg)$
+              pattern: csharp-naming\.md
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - &a3
+        type: output-matches
+        config:
+          pattern: '"enabled"\s*:\s*"Enabled"'
+      - &a4
+        type: output-matches
+        config:
+          pattern: '"ttl"\s*:\s*"TimeToLiveInMinutes"'
+      - &a5
+        type: output-matches
+        config:
+          pattern: '"otherLanguagesChanged"\s*:\s*false'
+      - &a6
+        type: output-matches
+        config:
+          pattern: '"applied"\s*:\s*false'
+      - &a7
+        type: output-matches
+        config:
+          pattern: '"generatedNamesVerified"\s*:\s*false'
+  - name: 007002-preserve-shipped-name-in-authoring-plan-forced
+    tags:
+      suite: naming
+      mode: forced
+    prompt: |
+      @azure-typespec-author Continue TypeSpec source authoring with SDK client configuration planning only;
+      analysis, intake and general grounding are complete, and the user kept the recommended
+      default. The Widget ARM service targets C#, Java and Python.
+      Azure.ResourceManager.Widget 1.0.0 exposes the boolean WidgetProperties.Enabled;
+      client.tsp preserves that shipped C# name. The authorized TypeSpec addition is ttl:
+      int32, documented in minutes, to WidgetProperties in
+      specification/widget/resource-manager/Microsoft.Widget. Its SDK name is unshipped. No
+      cleanup or breaking rename is authorized. Use only this evidence and available naming
+      guidance. No network, tools that mutate, compilation or generation. Return JSON with a
+      top-level "names" object mapping enabled and ttl directly to planned C# name strings,
+      not nested objects. Also include top-level "otherLanguagesChanged", "applied", and
+      "generatedNamesVerified".
+    constraints: *a1
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+            - azsdk-common-typespec-naming
+      - *a2
+      - *a3
+      - *a4
+      - *a5
+      - *a6
+      - *a7
+  - name: 007002-preserve-shipped-name-in-authoring-plan-no-skill
+    tags:
+      suite: naming
+      mode: no-skill
+    prompt: |
+      Continue TypeSpec source authoring with SDK client configuration planning only;
+      analysis, intake and general grounding are complete, and the user kept the recommended
+      default. The Widget ARM service targets C#, Java and Python.
+      Azure.ResourceManager.Widget 1.0.0 exposes the boolean WidgetProperties.Enabled;
+      client.tsp preserves that shipped C# name. The authorized TypeSpec addition is ttl:
+      int32, documented in minutes, to WidgetProperties in
+      specification/widget/resource-manager/Microsoft.Widget. Its SDK name is unshipped. No
+      cleanup or breaking rename is authorized. Use only this evidence and available naming
+      guidance. No network, tools that mutate, compilation or generation. Return JSON with a
+      top-level "names" object mapping enabled and ttl directly to planned C# name strings,
+      not nested objects. Also include top-level "otherLanguagesChanged", "applied", and
+      "generatedNamesVerified".
+    constraints: *a1
+    graders:
+      - type: tool-calls
+        config:
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - *a3
+      - *a4
+      - *a5
+      - *a6
+      - *a7
