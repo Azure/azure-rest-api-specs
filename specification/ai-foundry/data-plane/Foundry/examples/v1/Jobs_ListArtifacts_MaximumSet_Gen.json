@@ -1,0 +1,29 @@
+{
+  "title": "Jobs_ListArtifacts_MaximumSet",
+  "operationId": "Jobs_listArtifacts",
+  "parameters": {
+    "api-version": "v1",
+    "name": "my_training_job_01",
+    "path": "user_logs",
+    "maxpagesize": 50,
+    "$skipToken": "opaque+/=&%25token",
+    "Foundry-Features": "Jobs=V1Preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "path": "user_logs/std_log.txt",
+            "contentLength": 4294967296
+          },
+          {
+            "path": "user_logs/std_err.txt",
+            "contentLength": 0
+          }
+        ],
+        "nextLink": "https://sample-account.services.ai.azure.com/api/projects/sample-project/training_jobs/my_training_job_01/artifacts?api-version=v1&path=user_logs&maxpagesize=50&%24skipToken=next%2B%2F%3D%26%25token"
+      }
+    }
+  }
+}
