@@ -1038,18 +1038,18 @@ model VaultIdentity {
   /** The type of managed identity assigned to the vault. */
   type: VaultIdentityType;
 
-  /** User-assigned identities keyed by their Azure resource IDs. Values can be empty objects in requests and cannot be null. */
+  /** User-assigned identities keyed by their Azure resource IDs. This dictionary can be omitted when type is UserAssigned. When type is None, this dictionary must be omitted or empty; nonempty entries are rejected. Values can be empty objects in requests and cannot be null. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-assigned identities use the standard ARM dictionary keyed by identity resource IDs."
   userAssignedIdentities?: Record<CommonTypes.UserAssignedIdentity>;
 }
 
-/** Managed identity settings for updating a vault, including removal of individual user-assigned identities. */
+/** Managed identity settings for updating a vault using JSON merge patch semantics. Existing user-assigned identities omitted from the request remain unchanged. Included identities are added or retained, and entries set to null are removed. */
 @Versioning.added(Versions.v2026_10_01_preview)
 model VaultPatchIdentity {
   /** The type of managed identity assigned to the vault. */
   type: VaultIdentityType;
 
-  /** User-assigned identities keyed by their Azure resource IDs. Values can be empty objects to assign an identity or null to remove an identity. */
+  /** User-assigned identities keyed by their Azure resource IDs. When type is UserAssigned, this dictionary can be omitted to retain existing identities. When type is None, this dictionary must be omitted or empty; nonempty entries are rejected. Empty objects add or retain identities without removing other existing identities. Null entries remove only the specified identities. Existing identities omitted from the dictionary remain unchanged when type is UserAssigned. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-assigned identities use the standard ARM dictionary keyed by identity resource IDs."
   userAssignedIdentities?: Record<CommonTypes.UserAssignedIdentity | null>;
 }
@@ -1069,7 +1069,7 @@ union VaultIdentityType {
  * Parameters for creating or updating a vault
  */
 model VaultCreateOrUpdateParameters {
-  /** Managed identity settings. When provided, the user-assigned identity set is fully replaced. When omitted for an existing vault, the current identities are preserved. Setting type to None removes all user-assigned identities and their certificates. */
+  /** Managed identity settings. PUT replaces the user-assigned identity set: identities included in the request are retained or added, and existing identities not included are removed. To retain all existing identities, include the complete identity set. Omitting identity or setting type to None removes all user-assigned identities. */
   @Versioning.added(Versions.v2026_10_01_preview)
   identity?: VaultIdentity;
 
@@ -1442,7 +1442,7 @@ model CloudErrorBody {
  * Parameters for creating or updating a vault
  */
 model VaultPatchParameters {
-  /** Managed identity settings. When omitted, identities are unchanged. Dictionary entries containing empty objects add or retain identities; null entries remove only the specified identities. Setting type to None removes all user-assigned identities and their certificates. */
+  /** Managed identity settings using JSON merge patch semantics. When omitted, identities are unchanged. Dictionary entries containing empty objects add or retain identities; null entries remove only the specified identities. Existing identities omitted from the dictionary remain unchanged. Setting type to None removes all user-assigned identities. */
   @Versioning.added(Versions.v2026_10_01_preview)
   identity?: VaultPatchIdentity;
 

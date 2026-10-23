@@ -1696,9 +1696,6 @@
           "Create or update a vault with network acls": {
             "$ref": "./examples/createVaultWithNetworkAcls.json"
           },
-          "Preserve existing user-assigned identities by omitting identity from PUT": {
-            "$ref": "./examples/createVaultPreservingIdentity.json"
-          },
           "Remove all user-assigned identities and their certificates from a vault using PUT": {
             "$ref": "./examples/createVaultWithoutIdentity.json"
           }
@@ -6118,7 +6115,7 @@
       "properties": {
         "identity": {
           "$ref": "#/definitions/VaultIdentity",
-          "description": "Managed identity settings. When provided, the user-assigned identity set is fully replaced. When omitted for an existing vault, the current identities are preserved. Setting type to None removes all user-assigned identities and their certificates."
+          "description": "Managed identity settings. PUT replaces the user-assigned identity set: identities included in the request are retained or added, and existing identities not included are removed. To retain all existing identities, include the complete identity set. Omitting identity or setting type to None removes all user-assigned identities."
         },
         "location": {
           "type": "string",
@@ -6151,7 +6148,7 @@
         },
         "userAssignedIdentities": {
           "type": "object",
-          "description": "User-assigned identities keyed by their Azure resource IDs. Values can be empty objects in requests and cannot be null.",
+          "description": "User-assigned identities keyed by their Azure resource IDs. This dictionary can be omitted when type is UserAssigned. When type is None, this dictionary must be omitted or empty; nonempty entries are rejected. Values can be empty objects in requests and cannot be null.",
           "additionalProperties": {
             "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
           }
@@ -6208,7 +6205,7 @@
     },
     "VaultPatchIdentity": {
       "type": "object",
-      "description": "Managed identity settings for updating a vault, including removal of individual user-assigned identities.",
+      "description": "Managed identity settings for updating a vault using JSON merge patch semantics. Existing user-assigned identities omitted from the request remain unchanged. Included identities are added or retained, and entries set to null are removed.",
       "properties": {
         "type": {
           "$ref": "#/definitions/VaultIdentityType",
@@ -6216,7 +6213,7 @@
         },
         "userAssignedIdentities": {
           "type": "object",
-          "description": "User-assigned identities keyed by their Azure resource IDs. Values can be empty objects to assign an identity or null to remove an identity.",
+          "description": "User-assigned identities keyed by their Azure resource IDs. When type is UserAssigned, this dictionary can be omitted to retain existing identities. When type is None, this dictionary must be omitted or empty; nonempty entries are rejected. Empty objects add or retain identities without removing other existing identities. Null entries remove only the specified identities. Existing identities omitted from the dictionary remain unchanged when type is UserAssigned.",
           "additionalProperties": {
             "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
             "x-nullable": true
@@ -6233,7 +6230,7 @@
       "properties": {
         "identity": {
           "$ref": "#/definitions/VaultPatchIdentity",
-          "description": "Managed identity settings. When omitted, identities are unchanged. Dictionary entries containing empty objects add or retain identities; null entries remove only the specified identities. Setting type to None removes all user-assigned identities and their certificates."
+          "description": "Managed identity settings using JSON merge patch semantics. When omitted, identities are unchanged. Dictionary entries containing empty objects add or retain identities; null entries remove only the specified identities. Existing identities omitted from the dictionary remain unchanged. Setting type to None removes all user-assigned identities."
         },
         "tags": {
           "type": "object",
