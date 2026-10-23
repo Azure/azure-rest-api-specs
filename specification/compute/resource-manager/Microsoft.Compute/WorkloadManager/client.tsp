@@ -5,6 +5,18 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Compute.WorkloadManager;
 
 @@clientName(ProvisioningState, "WorkloadManagerProvisioningState", "csharp");
+@@clientName(
+  AggregateOperationStatus,
+  "WorkloadSpaceAggregateOperationStatus",
+  "csharp"
+);
+@@clientName(DependencyStatus, "WorkloadSpaceDependencyStatus", "csharp");
+@@clientName(DependencyState, "WorkloadSpaceDependencyState", "csharp");
+@@clientName(
+  CapabilityDependencyStatus,
+  "WorkloadSpaceCapabilityDependencyStatus",
+  "csharp"
+);
 @@clientName(VersionPolicy, "WorkloadCapabilityVersionPolicy", "csharp");
 @@clientName(CapabilityKind, "WorkloadCapabilityKind", "csharp");
 @@clientName(EgressMode, "RuntimeEgressMode", "csharp");

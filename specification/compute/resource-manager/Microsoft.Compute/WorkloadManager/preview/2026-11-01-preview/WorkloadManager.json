@@ -1413,6 +1413,38 @@
     }
   },
   "definitions": {
+    "AggregateOperationStatus": {
+      "type": "object",
+      "description": "Aggregate status across workload-space dependencies.",
+      "properties": {
+        "kubernetesBinding": {
+          "$ref": "#/definitions/DependencyStatus",
+          "description": "The summarized status of Kubernetes runtime bindings.",
+          "readOnly": true
+        },
+        "serverlessBinding": {
+          "$ref": "#/definitions/DependencyStatus",
+          "description": "The summarized status of serverless container runtime bindings.",
+          "readOnly": true
+        },
+        "runtimeLink": {
+          "$ref": "#/definitions/DependencyStatus",
+          "description": "The summarized status of runtime links.",
+          "readOnly": true
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "Dependency status for each capability, identified by its resource name.",
+          "items": {
+            "$ref": "#/definitions/CapabilityDependencyStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "Capability": {
       "type": "object",
       "description": "A capability enabled for a workload space.",
@@ -1429,6 +1461,31 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "CapabilityDependencyStatus": {
+      "type": "object",
+      "description": "The status of an individual capability within a workload space.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The capability resource name.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/DependencyState",
+          "description": "The current dependency state.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Actionable detail when the dependency is not ready.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "state"
       ]
     },
     "CapabilityKind": {
@@ -1507,11 +1564,6 @@
             ]
           }
         },
-        "settings": {
-          "type": "object",
-          "description": "Capability-specific settings. The implemented AKS core capability profiles require an empty object.",
-          "additionalProperties": {}
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the capability.",
@@ -1580,11 +1632,6 @@
         "versionPolicy": {
           "$ref": "#/definitions/VersionPolicy",
           "description": "The version selection policy for the capability."
-        },
-        "settings": {
-          "type": "object",
-          "description": "Capability-specific settings. The implemented AKS core capability profiles require an empty object.",
-          "additionalProperties": {}
         }
       }
     },
@@ -1627,6 +1674,74 @@
           "minimum": 0
         }
       }
+    },
+    "DependencyState": {
+      "type": "string",
+      "description": "The state of a dependency involved in composing a workload space.",
+      "enum": [
+        "NotRequested",
+        "Pending",
+        "InProgress",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DependencyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotRequested",
+            "value": "NotRequested",
+            "description": "The dependency was not requested."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The dependency is pending."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Work on the dependency is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The dependency is ready."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The dependency failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "DependencyStatus": {
+      "type": "object",
+      "description": "The provisioning and readiness status of a workload-space dependency.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/DependencyState",
+          "description": "The current dependency state.",
+          "readOnly": true
+        },
+        "providerResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The provider resource realizing the dependency.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Actionable detail when the dependency is not ready.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
     },
     "ExecutionIdentity": {
       "type": "object",
@@ -2416,9 +2531,8 @@
           "readOnly": true
         },
         "operationStatus": {
-          "type": "object",
+          "$ref": "#/definitions/AggregateOperationStatus",
           "description": "Aggregate status across children and dependencies.",
-          "additionalProperties": {},
           "readOnly": true
         }
       },

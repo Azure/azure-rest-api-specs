@@ -154,6 +154,76 @@ union RuntimeOwnership {
   Referenced: "Referenced",
 }
 
+/** The state of a dependency involved in composing a workload space. */
+union DependencyState {
+  string,
+
+  /** The dependency was not requested. */
+  NotRequested: "NotRequested",
+
+  /** The dependency is pending. */
+  Pending: "Pending",
+
+  /** Work on the dependency is in progress. */
+  InProgress: "InProgress",
+
+  /** The dependency is ready. */
+  Succeeded: "Succeeded",
+
+  /** The dependency failed. */
+  Failed: "Failed",
+}
+
+/** The provisioning and readiness status of a workload-space dependency. */
+model DependencyStatus {
+  /** The current dependency state. */
+  @visibility(Lifecycle.Read)
+  state: DependencyState;
+
+  /** The provider resource realizing the dependency. */
+  @visibility(Lifecycle.Read)
+  providerResourceId?: armResourceIdentifier;
+
+  /** Actionable detail when the dependency is not ready. */
+  @visibility(Lifecycle.Read)
+  message?: string;
+}
+
+/** The status of an individual capability within a workload space. */
+model CapabilityDependencyStatus {
+  /** The capability resource name. */
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  /** The current dependency state. */
+  @visibility(Lifecycle.Read)
+  state: DependencyState;
+
+  /** Actionable detail when the dependency is not ready. */
+  @visibility(Lifecycle.Read)
+  message?: string;
+}
+
+/** Aggregate status across workload-space dependencies. */
+model AggregateOperationStatus {
+  /** The summarized status of Kubernetes runtime bindings. */
+  @visibility(Lifecycle.Read)
+  kubernetesBinding?: DependencyStatus;
+
+  /** The summarized status of serverless container runtime bindings. */
+  @visibility(Lifecycle.Read)
+  serverlessBinding?: DependencyStatus;
+
+  /** The summarized status of runtime links. */
+  @visibility(Lifecycle.Read)
+  runtimeLink?: DependencyStatus;
+
+  /** Dependency status for each capability, identified by its resource name. */
+  @identifiers(#["name"])
+  @visibility(Lifecycle.Read)
+  capabilities?: CapabilityDependencyStatus[];
+}
+
 /** Properties of a workload space. */
 model WorkloadSpaceProperties {
   /** The provisioning state of the workload space. */
@@ -165,9 +235,8 @@ model WorkloadSpaceProperties {
   state: WorkloadSpaceState;
 
   /** Aggregate status across children and dependencies. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Aggregate status is an extensible read-only diagnostic object."
   @visibility(Lifecycle.Read)
-  operationStatus?: Record<unknown>;
+  operationStatus?: AggregateOperationStatus;
 }
 
 /** A regional governance and lifecycle boundary for composed runtimes. */
@@ -413,10 +482,6 @@ model CapabilityProperties {
   /** The version selection policy for the capability. */
   versionPolicy?: VersionPolicy = VersionPolicy.ServiceManaged;
 
-  /** Capability-specific settings. The implemented AKS core capability profiles require an empty object. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Capability settings use an opaque provider-specific configuration object."
-  settings?: Record<unknown>;
-
   /** The provisioning state of the capability. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -507,8 +572,4 @@ model CapabilityUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
 model CapabilityMutableProperties {
   /** The version selection policy for the capability. */
   versionPolicy?: VersionPolicy;
-
-  /** Capability-specific settings. The implemented AKS core capability profiles require an empty object. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Capability settings use an opaque provider-specific configuration object."
-  settings?: Record<unknown>;
 }
