@@ -1,6 +1,7 @@
 namespace Microsoft.ContainerRegistry;
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union TokenCertificateName {
@@ -125,10 +126,12 @@ model TokenPassword {
   name?: TokenPasswordName;
 
   /**
-   * The password value.
+   * The password value, returned only by the GenerateCredentials operation.
+   * Omitted from GET, PUT, and PATCH responses.
    */
+  @typeChangedFrom(Versions.vLatestPreview, string)
   @visibility(Lifecycle.Read)
-  value?: string;
+  value?: SecretString;
 }
 
 /**

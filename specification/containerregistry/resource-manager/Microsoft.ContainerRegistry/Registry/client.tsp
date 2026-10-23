@@ -289,6 +289,16 @@ namespace Microsoft.ContainerRegistry {
   "csharp"
 );
 @@clientName(
+  EcrAuthenticationProperties,
+  "AwsElasticContainerRegistryCacheAuthentication",
+  "csharp"
+);
+@@clientName(
+  EntraFederatedIdentityCredentialAuthenticationProperties,
+  "EntraFederatedIdentityCredentialCacheAuthentication",
+  "csharp"
+);
+@@clientName(
   GenerateCredentialsParameters,
   "ContainerRegistryGenerateCredentialsContent",
   "csharp"
