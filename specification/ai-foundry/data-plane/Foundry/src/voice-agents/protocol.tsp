@@ -86,6 +86,7 @@ union VoiceAgentWebSocketMessage {
 @doc("A stable v1 message sent by a client over a voice-agent WebSocket.")
 @usage(VoiceAgentClientEventUsage)
 @oneOf
+@extension("x-foundry-event-direction", "client")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentClientEvent {
   conversation_item_create: OpenAI.RealtimeClientEventConversationItemCreate,
@@ -107,6 +108,7 @@ union VoiceAgentClientEvent {
 @doc("A stable v1 message sent by the service over a voice-agent WebSocket.")
 @usage(VoiceAgentServerEventUsage)
 @oneOf
+@extension("x-foundry-event-direction", "server")
 // `conversation.created` is replaced by `session.created.conversation_id`, the canonical persisted-conversation id.
 // `input_audio_buffer.dtmf_event_received` is telephony-only and excluded with the rest of the telephony call-control surface.
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
