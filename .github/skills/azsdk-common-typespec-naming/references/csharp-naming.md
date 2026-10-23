@@ -8,6 +8,14 @@ Additional context: [naming review rules](https://github.com/Azure/azure-sdk-for
 from [Azure/azure-sdk-for-net#62615](https://github.com/Azure/azure-sdk-for-net/pull/62615).
 Apply these checks to the effective public SDK surface, not private implementation names.
 
+## Emitter Defaults Before Overrides
+
+Read the [C# HTTP client emitter automatic naming conversions](https://github.com/microsoft/typespec/blob/513df299fd621346e37d8a57b78d162432c0b24d/website/src/content/docs/docs/emitters/clients/http-client-csharp/naming-conventions.md) before reasoning about generated C# names or proposing `@clientName` overrides. Use that reference for built-in conversions and exceptions rather than treating the style rules below as transformations the emitter always performs.
+
+Check applicability to the project's emitter version and generator/plugins; the reference describes the built-in `ScmCodeModelGenerator`. Account for existing handwritten customizations and the released contract. If applicable defaults already produce the intended name, do not add a redundant override. Automatic conversions do not replace semantic ARM naming checks.
+
+An ordinary `@clientName` supplies an SDK name but does not disable subsequent C# conversions. If an exact spelling is required, consult the reference's exact-name limits and confirm installed TCGC support before recommending `exact(...)`. Exact names do not control every synthesized name, collision suffix, or derived declaration. Without generated API evidence, keep the effective name unverified.
+
 ## Properties and Parameters
 
 | Applies to                | Guidance                                                                                      | Guardrails                                                                                                                                                       |
