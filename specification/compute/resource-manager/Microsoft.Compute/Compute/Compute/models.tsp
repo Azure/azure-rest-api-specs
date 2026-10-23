@@ -1018,7 +1018,7 @@ union PatchOperationStatus {
 }
 
 /**
- * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
+ * Specifies the policy for the resource's placement in an availability zone. Use **Auto** for Virtual Machines and Virtual Machine Scale Sets to let the system automatically select an availability zone during resource creation. **Any** remains supported for Virtual Machines for backward compatibility.
  */
 union ZonePlacementPolicyType {
   string,
@@ -1026,7 +1026,7 @@ union ZonePlacementPolicyType {
   Any: "Any",
 
   /**
-   * Automatic zone placement in a Virtual Machine Scale Set.
+   * Automatic zone placement for Virtual Machines and Virtual Machine Scale Sets.
    */
   @added(Versions.v2025_04_01)
   Auto: "Auto",
@@ -5639,11 +5639,6 @@ model StorageProfile {
   diskControllerType?: DiskControllerTypes;
 
   /**
-   * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
-   */
-  alignRegionalDisksToVMZone?: boolean;
-
-  /**
    * Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., "2026-03-02").
    */
   @added(Versions.v2026_04_01)
@@ -7129,7 +7124,7 @@ model LastPatchInstallationSummary {
  */
 model Placement {
   /**
-   * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
+   * Specifies the policy for the resource's placement in an availability zone. Use **Auto** for Virtual Machines and Virtual Machine Scale Sets to let the system automatically select an availability zone during resource creation. **Any** remains supported for Virtual Machines for backward compatibility.
    */
   zonePlacementPolicy?: ZonePlacementPolicyType;
 
