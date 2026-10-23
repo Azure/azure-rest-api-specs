@@ -1,15 +1,33 @@
-﻿import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-core";
 import "@typespec/versioning";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models-index.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Search;
 
 interface Documents {
+  /** Executes a graph query over an index with an edge-list graph profile. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Graph queries use the existing document action routing convention."
+  @added(Versions.v2026_11_01_preview)
+  @route("/indexes('{indexName}')/docs/search.graph")
+  @post
+  graph is SearchIndexOperation<
+    {
+      ...acceptHeaderNone;
+      ...querySourceAuthorizationHeader;
+      ...enableElevatedReadHeader;
+      ...GraphQueryRequest;
+    },
+    GraphQueryResult,
+    {},
+    GraphQueryError
+  >;
+
   /** Queries the number of documents in the index. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
