@@ -13911,38 +13911,6 @@
         ]
       }
     },
-    "McpFrontendAutomaticTls": {
-      "type": "object",
-      "description": "Automatic serving certificate issuance using cert-manager.",
-      "properties": {
-        "certManagerCertificateSpec": {
-          "$ref": "#/definitions/McpFrontendCertificateSpec",
-          "description": "The issuer used for the frontend Service's DNS names. Manual settings are not permitted."
-        }
-      },
-      "required": [
-        "certManagerCertificateSpec"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/McpFrontendTls"
-        }
-      ],
-      "x-ms-discriminator-value": "Automatic"
-    },
-    "McpFrontendCertificateSpec": {
-      "type": "object",
-      "description": "The certificate issuance settings exposed for the frontend.",
-      "properties": {
-        "issuerRef": {
-          "$ref": "#/definitions/McpFrontendIssuerRef",
-          "description": "The cert-manager issuer; this reference does not distribute CA trust to clients."
-        }
-      },
-      "required": [
-        "issuerRef"
-      ]
-    },
     "McpFrontendEndpoint": {
       "type": "object",
       "description": "The frontend's Service port, incoming authentication, and required serving certificate.",
@@ -13960,79 +13928,14 @@
           "description": "The required authentication for incoming client requests."
         },
         "tls": {
-          "$ref": "#/definitions/McpFrontendTls",
-          "description": "The required serving TLS configuration."
+          "$ref": "#/definitions/TlsCertMethod",
+          "description": "The required serving TLS configuration, using the same certificate settings as BrokerListener."
         }
       },
       "required": [
         "authentication",
         "tls"
       ]
-    },
-    "McpFrontendIssuerRef": {
-      "type": "object",
-      "description": "A cert-manager issuer reference with an explicit group and non-blank name.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The non-blank name of the issuer.",
-          "minLength": 1,
-          "pattern": "\\S"
-        },
-        "kind": {
-          "$ref": "#/definitions/CertManagerIssuerKind",
-          "description": "The issuer kind. Only Issuer and ClusterIssuer are supported."
-        },
-        "group": {
-          "type": "string",
-          "description": "The API group of the issuer.",
-          "enum": [
-            "cert-manager.io"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "name",
-        "kind",
-        "group"
-      ]
-    },
-    "McpFrontendManualCertificate": {
-      "type": "object",
-      "description": "A same-namespace Kubernetes TLS Secret containing tls.crt and tls.key.",
-      "properties": {
-        "secretRef": {
-          "type": "string",
-          "description": "The non-blank name of the customer-managed serving Secret, not its contents.",
-          "minLength": 1,
-          "pattern": "\\S"
-        }
-      },
-      "required": [
-        "secretRef"
-      ]
-    },
-    "McpFrontendManualTls": {
-      "type": "object",
-      "description": "A manually managed frontend serving certificate and key.",
-      "properties": {
-        "manual": {
-          "$ref": "#/definitions/McpFrontendManualCertificate",
-          "description": "The serving Secret reference. Automatic issuance settings are not permitted."
-        }
-      },
-      "required": [
-        "manual"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/McpFrontendTls"
-        }
-      ],
-      "x-ms-discriminator-value": "Manual"
     },
     "McpFrontendProperties": {
       "type": "object",
@@ -14149,20 +14052,6 @@
           "readOnly": true
         }
       }
-    },
-    "McpFrontendTls": {
-      "type": "object",
-      "description": "The serving certificate mode. Only the configuration for the selected mode is valid.",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/TlsCertMethodMode",
-          "description": "Automatic certificate issuance or a manually managed serving Secret."
-        }
-      },
-      "discriminator": "mode",
-      "required": [
-        "mode"
-      ]
     },
     "McpServerConnectionAuthentication": {
       "type": "object",

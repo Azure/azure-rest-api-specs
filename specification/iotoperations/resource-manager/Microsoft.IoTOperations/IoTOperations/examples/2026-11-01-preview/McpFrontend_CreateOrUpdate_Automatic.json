@@ -20,10 +20,22 @@
           "tls": {
             "mode": "Automatic",
             "certManagerCertificateSpec": {
+              "duration": "720h",
+              "secretName": "customer-frontend-tls",
+              "renewBefore": "240h",
+              "privateKey": {
+                "algorithm": "Ec256",
+                "rotationPolicy": "Always"
+              },
+              "san": {
+                "dns": [
+                  "mcp.example.com"
+                ],
+                "ip": []
+              },
               "issuerRef": {
                 "name": "customer-issuer",
-                "kind": "Issuer",
-                "group": "cert-manager.io"
+                "kind": "Issuer"
               }
             }
           }
@@ -51,6 +63,19 @@
             "tls": {
               "mode": "Automatic",
               "certManagerCertificateSpec": {
+                "duration": "720h",
+                "secretName": "customer-frontend-tls",
+                "renewBefore": "240h",
+                "privateKey": {
+                  "algorithm": "Ec256",
+                  "rotationPolicy": "Always"
+                },
+                "san": {
+                  "dns": [
+                    "mcp.example.com"
+                  ],
+                  "ip": []
+                },
                 "issuerRef": {
                   "name": "customer-issuer",
                   "kind": "Issuer",
@@ -95,6 +120,19 @@
             "tls": {
               "mode": "Automatic",
               "certManagerCertificateSpec": {
+                "duration": "720h",
+                "secretName": "customer-frontend-tls",
+                "renewBefore": "240h",
+                "privateKey": {
+                  "algorithm": "Ec256",
+                  "rotationPolicy": "Always"
+                },
+                "san": {
+                  "dns": [
+                    "mcp.example.com"
+                  ],
+                  "ip": []
+                },
                 "issuerRef": {
                   "name": "customer-issuer",
                   "kind": "Issuer",

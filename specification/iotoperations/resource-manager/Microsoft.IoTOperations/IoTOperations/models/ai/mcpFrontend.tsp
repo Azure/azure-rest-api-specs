@@ -55,8 +55,8 @@ model McpFrontendEndpoint {
   /** The required authentication for incoming client requests. */
   authentication: McpFrontendAuthentication;
 
-  /** The required serving TLS configuration. */
-  tls: McpFrontendTls;
+  /** The required serving TLS configuration, using the same certificate settings as BrokerListener. */
+  tls: TlsCertMethod;
 }
 
 /** The authentication configuration for clients calling the frontend. */
@@ -103,65 +103,6 @@ model McpFrontendServiceAccountTokenSettings {
 @maxLength(256)
 @pattern("\\S")
 scalar McpFrontendAudience extends string;
-
-/** The serving certificate mode. Only the configuration for the selected mode is valid. */
-@added(Versions.`2026-11-01-preview`)
-@discriminator("mode")
-model McpFrontendTls {
-  /** Automatic certificate issuance or a manually managed serving Secret. */
-  mode: TlsCertMethodMode;
-}
-
-/** Automatic serving certificate issuance using cert-manager. */
-@added(Versions.`2026-11-01-preview`)
-model McpFrontendAutomaticTls extends McpFrontendTls {
-  /** Selects automatic certificate issuance. */
-  mode: "Automatic";
-
-  /** The issuer used for the frontend Service's DNS names. Manual settings are not permitted. */
-  certManagerCertificateSpec: McpFrontendCertificateSpec;
-}
-
-/** The certificate issuance settings exposed for the frontend. */
-@added(Versions.`2026-11-01-preview`)
-model McpFrontendCertificateSpec {
-  /** The cert-manager issuer; this reference does not distribute CA trust to clients. */
-  issuerRef: McpFrontendIssuerRef;
-}
-
-/** A cert-manager issuer reference with an explicit group and non-blank name. */
-@added(Versions.`2026-11-01-preview`)
-model McpFrontendIssuerRef {
-  /** The non-blank name of the issuer. */
-  @minLength(1)
-  @pattern("\\S")
-  name: string;
-
-  /** The issuer kind. Only Issuer and ClusterIssuer are supported. */
-  kind: CertManagerIssuerKind;
-
-  /** The API group of the issuer. */
-  group: "cert-manager.io";
-}
-
-/** A manually managed frontend serving certificate and key. */
-@added(Versions.`2026-11-01-preview`)
-model McpFrontendManualTls extends McpFrontendTls {
-  /** Selects a manually managed certificate. */
-  mode: "Manual";
-
-  /** The serving Secret reference. Automatic issuance settings are not permitted. */
-  manual: McpFrontendManualCertificate;
-}
-
-/** A same-namespace Kubernetes TLS Secret containing tls.crt and tls.key. */
-@added(Versions.`2026-11-01-preview`)
-model McpFrontendManualCertificate {
-  /** The non-blank name of the customer-managed serving Secret, not its contents. */
-  @minLength(1)
-  @pattern("\\S")
-  secretRef: string;
-}
 
 /** The output-only health of the frontend's serving, authentication, and routing subsystems. */
 @added(Versions.`2026-11-01-preview`)
