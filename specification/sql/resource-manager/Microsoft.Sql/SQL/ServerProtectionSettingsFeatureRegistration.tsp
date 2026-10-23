@@ -15,4 +15,22 @@ enum Features {
     description: "Read and update managed instance protection settings for retained immutable backups.",
   })
   ManagedInstanceServerProtectionSettings,
+
+  /** Manage reader endpoints under a server. */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The SQL project splits its specifications by legacy feature."
+  @Azure.ResourceManager.Legacy.featureOptions(#{
+    featureName: "ReaderEndpoints",
+    fileName: "ReaderEndpoints",
+    description: "Manage reader endpoints under a server.",
+  })
+  ReaderEndpoints,
+
+  /** List reader endpoints associated with a primary database. */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The SQL project splits its specifications by legacy feature."
+  @Azure.ResourceManager.Legacy.featureOptions(#{
+    featureName: "ReaderEndpointsList",
+    fileName: "ReaderEndpointsList",
+    description: "List reader endpoints associated with a primary database.",
+  })
+  ReaderEndpointsList,
 }

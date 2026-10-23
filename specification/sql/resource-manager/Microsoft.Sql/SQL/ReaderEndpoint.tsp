@@ -4,7 +4,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./Server.tsp";
 import "./Database.tsp";
-import "./ReaderEndpointFeatureRegistration.tsp";
+import "./ServerProtectionSettingsFeatureRegistration.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -18,7 +18,7 @@ namespace Microsoft.Sql;
 @added(Versions.v2026_11_01_preview)
 @parentResource(Server)
 @Azure.ResourceManager.Legacy.feature(
-  Microsoft.SqlFeatureRegistration.ReaderEndpointFeatures.ReaderEndpoints
+  Microsoft.SqlFeatureRegistration.Features.ReaderEndpoints
 )
 model ReaderEndpoint is TrackedResource<ReaderEndpointProperties> {
   ...ResourceNameParameter<
@@ -148,7 +148,7 @@ model ReaderEndpointPathParameters<Resource extends {}> {
 @added(Versions.v2026_11_01_preview)
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(
-  Microsoft.SqlFeatureRegistration.ReaderEndpointFeatures.ReaderEndpoints
+  Microsoft.SqlFeatureRegistration.Features.ReaderEndpoints
 )
 interface ReaderEndpoints {
   /** Gets a reader endpoint. */
@@ -209,11 +209,13 @@ interface ReaderEndpoints {
   >;
 
   /** Deletes a reader endpoint. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Preserve the SQL RP deletion contract: completed deletion of an existing resource returns 200, pending deletion returns 202, and an absent resource returns 204. ARM exception approval is required."
   @delete
   @autoRoute
   @armResourceDelete(ReaderEndpoint)
   @Azure.Core.useFinalStateVia("location")
   delete(...ReaderEndpointPathParameters<ReaderEndpoint>):
+    | ArmDeletedResponse
     | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<
         FinalResult = void,
         FinalUrlValue = url
@@ -241,7 +243,7 @@ interface ReaderEndpoints {
 @added(Versions.v2026_11_01_preview)
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(
-  Microsoft.SqlFeatureRegistration.ReaderEndpointFeatures.ReaderEndpointsList
+  Microsoft.SqlFeatureRegistration.Features.ReaderEndpointsList
 )
 interface ReaderEndpointsList {
   /** Lists the reader endpoints for a database. */

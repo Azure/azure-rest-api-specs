@@ -4026,6 +4026,10 @@ directive:
 
 ``` yaml
 suppressions:
+  - code: DeleteResponseCodes
+    from: ReaderEndpoints.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/readerEndpoints/{readerEndpointName}"].delete
+    reason: "Preserve the SQL RP deletion contract: completed deletion of an existing resource returns 200, pending deletion returns 202, and an absent resource returns 204. ARM exception approval is required."
   - code: MissingSegmentsInNestedResourceListOperation
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies"]
