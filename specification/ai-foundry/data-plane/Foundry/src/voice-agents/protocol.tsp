@@ -41,6 +41,9 @@ union VoiceAgentServerEventTypeExtension {
   response_animation_viseme_delta: "response.animation_viseme.delta",
   response_animation_viseme_done: "response.animation_viseme.done",
   response_video_delta: "response.video.delta",
+  response_system_tool_arguments_delta: "response.system_tool_arguments.delta",
+  response_system_tool_arguments_done: "response.system_tool_arguments.done",
+  input_collection_status: "input_collection.status",
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Registering Voice-only literals in the imported OpenAI discriminator union preserves a single polymorphic hierarchy."
@@ -141,6 +144,9 @@ union VoiceAgentServerEvent {
   response_done: OpenAI.RealtimeServerEventResponseDone,
   response_function_call_arguments_delta: OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDelta,
   response_function_call_arguments_done: OpenAI.RealtimeServerEventResponseFunctionCallArgumentsDone,
+  response_system_tool_arguments_delta: VoiceAgentServerEventSystemToolArgumentsDelta,
+  response_system_tool_arguments_done: VoiceAgentServerEventSystemToolArgumentsDone,
+  input_collection_status: VoiceAgentServerEventInputCollectionStatus,
   response_mcp_call_arguments_delta: OpenAI.RealtimeServerEventResponseMCPCallArgumentsDelta,
   response_mcp_call_arguments_done: OpenAI.RealtimeServerEventResponseMCPCallArgumentsDone,
   response_mcp_call_completed: OpenAI.RealtimeServerEventResponseMCPCallCompleted,
@@ -328,10 +334,291 @@ model VoiceAgentResponseCreateParams {
 @doc("A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentRealtimeResponse {
-  ...OmitProperties<OpenAI.RealtimeResponse, "audio">;
+  ...OmitProperties<OpenAI.RealtimeResponse, "audio" | "output">;
+
+  @doc("Generated output items, including service-managed system-tool intent.")
+  output?: VoiceAgentResponseOutputItem[];
 
   @doc("The audio configuration used by the live response, including flat voice provider, locale, and format fields under `output`.")
   audio?: VoiceResponseAudio;
+}
+
+@doc("A generated system-tool intent, not a provider outcome. Original literal arguments remain visible and references stay unexpanded. Privately collected values, binding-expanded execution copies and executor-only settings are excluded. Clients do not complete it with `function_call_output`.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSystemToolItem {
+  @doc("The output-item kind. Always `system_tool`.")
+  type: "system_tool";
+
+  @doc("The identifier of the generated item.")
+  id?: string;
+
+  @doc("The realtime item marker.")
+  object?: "realtime.item";
+
+  @doc("The generation status of the item, not the provider execution outcome.")
+  status: VoiceAgentSystemToolItemStatus;
+
+  @doc("The built-in capability invoked by the model.")
+  name: VoiceAgentSystemToolName;
+
+  @doc("The invocation identifier used for correlation and duplicate suppression.")
+  call_id: string;
+
+  @doc("The model's original JSON-encoded arguments. Literals, including values from non-private collection, remain visible; references stay unexpanded. Privately collected values and binding-expanded execution values are never copied back into these arguments.")
+  arguments: string;
+}
+
+@doc("The generation status of a system-tool item. It does not indicate provider success.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentSystemToolItemStatus {
+  string,
+
+  @doc("The item is still being generated.")
+  in_progress: "in_progress",
+
+  @doc("The item finished generation.")
+  completed: "completed",
+
+  @doc("The item did not finish generation.")
+  incomplete: "incomplete",
+}
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Voice output adds a server-only system-tool item without widening client-created conversation items."
+@doc("A standard realtime item or a service-managed system-tool intent. The system-tool variant is output-only.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentResponseOutputItem {
+  standard: OpenAI.RealtimeConversationItem,
+  system_tool: VoiceAgentSystemToolItem,
+}
+
+@doc("An incremental model-argument fragment for a service-managed system tool.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentServerEventSystemToolArgumentsDelta
+  extends OpenAI.RealtimeServerEvent {
+  type: "response.system_tool_arguments.delta";
+  event_id: string;
+
+  @doc("The response containing the tool invocation.")
+  response_id: string;
+
+  @doc("The generated tool item's identifier.")
+  item_id: string;
+
+  @doc("The item's zero-based position in the response output.")
+  output_index: int32;
+
+  @doc("The invocation identifier.")
+  call_id: string;
+
+  @doc("An incremental JSON fragment of the intent arguments.")
+  delta: string;
+
+  @doc("Optional padding metadata with no application semantics.")
+  obfuscation?: string;
+}
+
+@doc("The completed intent arguments for a system tool, not provider success or a request for a customer function result.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentServerEventSystemToolArgumentsDone
+  extends OpenAI.RealtimeServerEvent {
+  type: "response.system_tool_arguments.done";
+  event_id: string;
+
+  @doc("The response containing the tool invocation.")
+  response_id: string;
+
+  @doc("The generated tool item's identifier.")
+  item_id: string;
+
+  @doc("The item's zero-based position in the response output.")
+  output_index: int32;
+
+  @doc("The invocation identifier.")
+  call_id: string;
+
+  @doc("The invoked built-in capability.")
+  name: VoiceAgentSystemToolName;
+
+  @doc("The complete, unexpanded model arguments as a JSON string.")
+  arguments: string;
+}
+
+@doc("Common model-generated collection arguments. Each invocation starts collection; there is no action parameter or model-call cancellation variant. The service requires output_variable_name exactly when secret is true. It applies timeouts and service input limits, validates provider capabilities, then locks effective arguments before preparing a receiver. Duplicate invocations cannot change settings or extend the deadline. These are decoded intent arguments, not a new client ingress or Agent settings object. Collection is not authentication.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentCollectionStartArguments {
+  @doc("Required model-selected visibility for the future result. There is no default. False returns ordinary input to the model; true stores it privately and returns only the allocated name. Later commands cannot downgrade a private operation.")
+  secret: boolean;
+
+  @doc("The preferred bare output variable name, such as verification_code, selected by the model. Required for secret true and forbidden for false; it is not Agent configuration. Successful private collection creates the variable without prior declaration. Names occupied by ordinary inputs, initialized private variables or earlier private collections receive a unique suffix without overwriting values. Completion reports the actual name through output_ref. The name is locked for the operation; cancellation, timeout, failure and non-private collection create no variable.")
+  output_variable_name?: VoiceAgentOutputReference;
+
+  @doc("Optional total collection deadline in integer seconds, including receiver preparation. When present, overrides the tool's Agent-configured timeout_seconds; when omitted, uses that configuration, or sixty seconds if neither specifies a value. Duplicate commands do not restart it.")
+  @minValue(1)
+  @maxValue(300)
+  timeout_seconds?: int32;
+}
+
+@doc("Decoded model-generated collect_sms start arguments. The service validates the complete invocation before preparing a receiver; the model never submits the SMS value.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentCollectSmsStartArguments {
+  ...Record<never>;
+  ...VoiceAgentCollectionStartArguments;
+
+  @doc("The expected SMS sender in canonical E.164 form, explicitly selected at start without Caller ID fallback. This is routing, not authenticated identity.")
+  @pattern("^\\+[1-9][0-9]{1,14}$")
+  from_phone_number: string;
+}
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Model-generated keypad completion selects one typed object, not a new client-ingress union."
+@doc("One typed keypad completion policy. Each variant owns its parameters; unknown types, mixed-mode fields and legacy string values are rejected before receiver preparation.")
+@oneOf
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentDtmfCompletionMode {
+  fixed_length: VoiceAgentDtmfFixedLengthCompletionMode,
+  terminator: VoiceAgentDtmfTerminatorCompletionMode,
+  inter_digit_silence: VoiceAgentDtmfInterDigitSilenceCompletionMode,
+}
+
+@doc("The wait after each received digit, scoped to the selected completion policy.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentDtmfCompletionTiming {
+  @doc("Integer seconds after a digit, reset on each new digit. Defaults to five. Expiry fails fixed-length/terminator modes; in silence mode it completes a non-empty digit string within service input limits. Not a debounce: repeated digits are preserved.")
+  @minValue(1)
+  @maxValue(300)
+  inter_digit_timeout_seconds?: int32 = 5;
+}
+
+@doc("Complete immediately after exactly length digits. Other modes' fields are not accepted.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentDtmfFixedLengthCompletionMode {
+  ...Record<never>;
+  ...VoiceAgentDtmfCompletionTiming;
+
+  @doc("Select fixed-length completion.")
+  type: "fixed_length";
+
+  @doc("The number of digits to collect; defaults to six. There is no terminator or separate minimum/maximum pair.")
+  @minValue(1)
+  @maxValue(64)
+  length?: int32 = 6;
+}
+
+@doc("Complete only when the configured end key follows a non-empty digit string within service input limits. There is no required digit count or length-bound argument.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentDtmfTerminatorCompletionMode {
+  ...Record<never>;
+  ...VoiceAgentDtmfCompletionTiming;
+
+  @doc("Select confirmation-key completion.")
+  type: "terminator";
+
+  @doc("Required confirmation key; excluded from the collected value.")
+  terminator: VoiceAgentDtmfTerminator;
+}
+
+@doc("Complete after at least one digit and the inter-digit pause, within service input limits. No confirmation key or digit count is configured. Total deadline expiry takes precedence over simultaneous silence completion.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentDtmfInterDigitSilenceCompletionMode {
+  ...Record<never>;
+  ...VoiceAgentDtmfCompletionTiming;
+
+  @doc("Select silence completion.")
+  type: "inter_digit_silence";
+}
+
+@doc("The two non-numeric keypad keys permitted as confirmation terminators.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentDtmfTerminator {
+  @doc("The number-sign confirmation key.")
+  number_sign: "#",
+
+  @doc("The asterisk confirmation key.")
+  asterisk: "*",
+}
+
+@doc("Decoded model-generated collect_dtmf arguments. completion_mode is one typed object containing that mode's length/key/pause parameters. Only total and first-digit timeouts remain top-level. Flat legacy mode fields and model-submitted digits are rejected. The service validates and locks the policy before preparing a receiver.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentCollectDtmfStartArguments {
+  ...Record<never>;
+  ...VoiceAgentCollectionStartArguments;
+
+  @doc("Required typed object selecting one completion policy and its parameters, not an array of simultaneous rules.")
+  completion_mode: VoiceAgentDtmfCompletionMode;
+
+  @doc("The maximum wait for the first digit in integer seconds, starting at receiver readiness and bounded by the remaining total deadline. Omit for fifteen seconds.")
+  @minValue(1)
+  @maxValue(300)
+  first_digit_timeout_seconds?: int32 = 15;
+}
+
+@doc("An asynchronous collection or telephony-operation outcome, separate from argument-generation completion. A collection invocation immediately returns accepted, which neither arms a receiver nor resumes a success turn. Listening permits the service to schedule the input prompt. Completed/expired/cancelled/failed results, or a rejected busy invocation, provide safe feedback and schedule one follow-up when the conversation is idle, without a client function_call_output or response.create. Cancellation is service lifecycle cleanup on transfer, native ending or disconnect, not an action on the collection tool. Stale/duplicate events do not resume another turn; closing/disconnected sessions do not resume. Expiry/cancellation/failure/busy allocate no variable. A completed private result commits before its name is reported. Provider acceptance is not SMS delivery, IVR recognition or authentication.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentServerEventInputCollectionStatus
+  extends OpenAI.RealtimeServerEvent {
+  type: "input_collection.status";
+
+  @doc("An optional event identifier.")
+  event_id?: string;
+
+  @doc("The originating system-tool invocation.")
+  call_id: string;
+
+  @doc("The collection operation identifier, when this outcome concerns a collection.")
+  collection_id?: string;
+
+  @doc("The current receiver request identifier, when applicable.")
+  request_id?: string;
+
+  @doc("The collection receiver, omitted for telephony-operation feedback.")
+  channel?: VoiceAgentInputCollectionChannel;
+
+  @doc("The reported outcome. Generation completion of a system-tool item is separate.")
+  status: VoiceAgentInputCollectionStatus;
+
+  @doc("The exact completed ASCII digit string, preserving leading zeros, only when collection started with `secret: false`. Never present for private collection or telephony-operation feedback.")
+  value?: string;
+
+  @doc("The actual variable name allocated for a completed private collection instead of its value. It may differ from the preferred name after a collision. The model uses this bare name in later `{{name}}` tool arguments.")
+  output_ref?: VoiceAgentOutputReference;
+}
+
+@doc("The receiver used by an input collection. Voice collection is not supported.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentInputCollectionChannel {
+  sms: "sms",
+  dtmf: "dtmf",
+}
+
+@doc("Collection lifecycle and value-free telephony-operation outcomes. Additional outcomes may be introduced over time.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentInputCollectionStatus {
+  string,
+  accepted: "accepted",
+  listening: "listening",
+  completed: "completed",
+  expired: "expired",
+  cancelled: "cancelled",
+  failed: "failed",
+  busy: "busy",
+  invalid_input: "invalid_input",
+  invalid_arguments: "invalid_arguments",
+  stale_collection: "stale_collection",
+  unsupported_channel: "unsupported_channel",
+  dispatch_failed: "dispatch_failed",
+  provider_accepted: "provider_accepted",
+  transfer_not_answered: "transfer_not_answered",
+  provider_failed_or_unsupported: "provider_failed_or_unsupported",
+  provider_result_uncertain: "provider_result_uncertain",
+
+  @doc("The operation was rejected before any provider side effect, including a known unavailable executor. Unlike an uncertain post-dispatch failure, this confirms that nothing was sent or dialed for this invocation.")
+  provider_not_executed: "provider_not_executed",
 }
 
 @doc("A time-stamped word in an input-audio transcription.")
@@ -413,6 +700,18 @@ model VoiceAgentClientEventSessionUpdate {
 @@changePropertyType(
   OpenAI.RealtimeServerEventResponseDone.response,
   VoiceAgentRealtimeResponse
+);
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Voice output items include server-owned system-tool intent without changing client item creation."
+@@changePropertyType(
+  OpenAI.RealtimeServerEventResponseOutputItemAdded.item,
+  VoiceAgentResponseOutputItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Voice output items include server-owned system-tool intent without changing client item creation."
+@@changePropertyType(
+  OpenAI.RealtimeServerEventResponseOutputItemDone.item,
+  VoiceAgentResponseOutputItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
