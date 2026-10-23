@@ -493,7 +493,7 @@ model AgentTracesOptimizationContext extends OptimizationContext {
   trace_window: AgentOptimizationTraceWindow;
 }
 
-/** Base configuration for service-generated skill evaluators. */
+/** Base configuration for service-generated skill evaluators. Evaluator generation uses the job's optimization_model_configuration; no separate generation model is accepted. */
 @discriminator("type")
 model SkillOptimizationEvaluatorGenerationConfiguration {
   @doc("Evaluator generation source discriminator.")
@@ -517,16 +517,16 @@ model SkillOptimizationEvaluationConfiguration {
   @doc("Evaluation set used unchanged for the baseline and learned candidate. When omitted on create, the service generates a trace-derived target-completion dataset and returns its exact dataset reference after preparation. Inline sets are limited to 500 cases. Training sets are not accepted because evaluation does not guide skill generation.")
   validation_set?: AgentOptimizationEvaluationSet;
 
-  @doc("Existing evaluator references supplied by the caller, or the resolved exact references returned after evaluator generation. At least one evaluator or evaluator_generation_configuration is required. When both are supplied, the resolved configuration contains their combined evaluator set.")
+  @doc("Existing evaluator references on create. At least one reference or evaluator_generation_configuration is required. On job GET after preparation, contains the resolved exact versions used unchanged for baseline and generated-candidate evaluation, including generated evaluators when requested. When both are supplied, use their combined evaluator set.")
   @minItems(1)
   @maxItems(20)
   evaluators?: AgentOptimizationEvaluator[];
 
-  @doc("Optional creation-time configuration for generating evaluators from the selected trace evidence. Null or omitted uses only caller-supplied evaluators. Generated exact references are returned in evaluators after preparation.")
-  evaluator_generation_configuration?: SkillOptimizationEvaluatorGenerationConfiguration | null;
+  @doc("Opt-in creation of evaluators using the job's optimization_model_configuration, not evaluation_model. No separate generation model is accepted. Resolved exact versions are returned in evaluators after preparation. Omitted when only existing evaluators are used.")
+  evaluator_generation_configuration?: SkillOptimizationEvaluatorGenerationConfiguration;
 }
 
-/** Configuration for generating a single skill candidate from trace evidence. The candidate can contain zero or more skill outcomes; no new learnings can produce an empty skill_results array without publishing versions. */
+/** Configuration for generating a single skill candidate from trace evidence. The candidate can contain zero or more skill outcomes; no new learnings can produce an empty skill_results array without publishing versions. Optional evaluation reuses a non-generated baseline candidate. */
 model SkillOptimizationConfiguration
   extends AgentOptimizationConfigurationBase {
   @doc("Skill optimization discriminator.")

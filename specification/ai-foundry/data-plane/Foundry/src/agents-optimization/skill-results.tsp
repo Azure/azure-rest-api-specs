@@ -89,7 +89,7 @@ union AgentOptimizationSkillValidationId {
   evidence_provenance: "evidence_provenance",
 }
 
-/** Base validation category; candidate performance measurements are exposed through AgentOptimizationCandidate.evaluation. */
+/** Base validation category; reporting-only performance scores use the baseline and generated candidate evaluation summaries. */
 @discriminator("type")
 model AgentOptimizationSkillValidation {
   @doc("Validation category discriminator.")
@@ -132,6 +132,9 @@ model AgentOptimizationSkillResult {
   @doc("Intended identity for every result. A confirmed version appears only with status created; no_change retains the baseline version only in input_skill.")
   output_skill: AgentOptimizationFoundrySkillOutputReference;
 
+  @doc("Safe, human-readable explanation of why this skill was proposed or retained, grounded in the selected evidence. Omitted until available. Must not include sensitive trace excerpts or hidden model reasoning.")
+  rationale?: string;
+
   @doc("Artifact checks, including rejections. Absence does not imply success. Candidate evaluation is reported through AgentOptimizationCandidate.evaluation and is not included in per-skill validations.")
   validations?: AgentOptimizationSkillValidation[];
 
@@ -148,21 +151,6 @@ model AgentOptimizationSkillResolvedContext {
   agent_skills?: AgentOptimizationFoundrySkillReference[];
 }
 
-/** Logical skill pipeline steps, in execution order. */
-union AgentOptimizationSkillExecutionStepName {
-  string,
-  resolve_inputs: "resolve_inputs",
-  collect_traces: "collect_traces",
-  collect_feedback: "collect_feedback",
-  prepare_evidence: "prepare_evidence",
-  classify_traces: "classify_traces",
-  derive_learnings: "derive_learnings",
-  plan_changes: "plan_changes",
-  generate_skills: "generate_skills",
-  validate_skills: "validate_skills",
-  publish_skills: "publish_skills",
-}
-
 /** Latest recorded state of a logical execution step. */
 union AgentOptimizationSkillExecutionStepStatus {
   string,
@@ -176,8 +164,8 @@ union AgentOptimizationSkillExecutionStepStatus {
 
 /** Latest recorded state of one logical step in the persisted execution snapshot. */
 model AgentOptimizationSkillExecutionStep {
-  @doc("Logical step name, unique within the snapshot.")
-  name: AgentOptimizationSkillExecutionStepName;
+  @doc("Service-authored logical step name, unique within the snapshot, for example resolve_inputs, collect_traces, or publish_skills. Consumers must tolerate unfamiliar names.")
+  name: string;
 
   @doc("Recorded step state.")
   status: AgentOptimizationSkillExecutionStepStatus;
