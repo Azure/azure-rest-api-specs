@@ -46,8 +46,7 @@ op listBlobsRaw(
   @TypeSpec.Http.query("endBefore") endBefore?: string,
 ): {
   @TypeSpec.Http.statusCode statusCode: 200;
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "C++ raw streaming response."
-  @TypeSpec.Http.body @encode("bytes") body: bytes;
+  @TypeSpec.Http.body body: bytes;
 };
 
 /** Returns the hierarchical listing stream for the handwritten C++ XML/Arrow reader. */
@@ -79,8 +78,7 @@ op listBlobsHierarchyRaw(
   @TypeSpec.Http.query("showonly") showOnly?: string,
 ): {
   @TypeSpec.Http.statusCode statusCode: 200;
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "C++ raw streaming response."
-  @TypeSpec.Http.body @encode("bytes") body: bytes;
+  @TypeSpec.Http.body body: bytes;
 };
 
 // These values are already encoded in the retained Storage protocol contracts.
