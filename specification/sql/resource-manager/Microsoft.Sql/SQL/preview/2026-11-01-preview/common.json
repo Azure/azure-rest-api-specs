@@ -872,7 +872,7 @@
     },
     "BlockDropWhenImmutablePitrBackupInRetention": {
       "type": "string",
-      "description": "Opt-in state for managed instance deletion protection while immutable backups\nare retained.",
+      "description": "Opt-in state for protecting a logical server or managed instance from deletion\nwhile immutable point-in-time restore backups remain within retention.",
       "enum": [
         "enabled",
         "disabled"
@@ -884,12 +884,12 @@
           {
             "name": "Enabled",
             "value": "enabled",
-            "description": "Permanent protection is requested. Once applied, instance deletion is blocked\nwhile any live or dropped user database has immutable PITR backups in retention."
+            "description": "Deletion protection is enabled. Once enabled, it cannot be disabled.\nDeletion of the logical server or managed instance is blocked while\nimmutable point-in-time restore backups remain within retention."
           },
           {
             "name": "Disabled",
             "value": "disabled",
-            "description": "Deletion protection has not been enabled. Requesting this state before opt-in\nleaves the settings unchanged."
+            "description": "Deletion protection has not been enabled. Requesting disabled before\nopt-in leaves the setting unchanged."
           }
         ]
       }
@@ -4371,6 +4371,19 @@
         ]
       }
     },
+    "ManagedInstanceServerProtectionSettingsAcceptedResult": {
+      "type": "object",
+      "description": "The update is in progress. Follow the polling headers to retrieve its result.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/ServerProtectionSettingsOperationMetadata",
+          "description": "Metadata for the accepted update."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
     "ManagedLedgerDigestUploadsName": {
       "type": "string",
       "enum": [
@@ -6989,7 +7002,7 @@
     },
     "ServerProtectionSettingsName": {
       "type": "string",
-      "description": "The singleton name for managed instance protection settings.",
+      "description": "The singleton name for logical server or managed instance protection settings.",
       "enum": [
         "default"
       ],
@@ -7026,11 +7039,11 @@
     },
     "ServerProtectionSettingsProperties": {
       "type": "object",
-      "description": "Settings that control protection against deletion of a managed instance.",
+      "description": "Deletion protection settings for a logical server or managed instance.",
       "properties": {
         "blockDropWhenImmutablePitrBackupInRetention": {
           "$ref": "#/definitions/BlockDropWhenImmutablePitrBackupInRetention",
-          "description": "Block managed instance deletion while any live or dropped user database has\nimmutable PITR backups within retention. Supported request values are enabled\nand disabled, compared case-insensitively. Setting enabled is an\nirreversible opt-in. Setting disabled before opt-in is a no-op; changing from\nenabled to disabled is rejected. GET and LIST return the persisted setting.\nUse the update operation's polling endpoints to track completion."
+          "description": "Block server deletion while any live or dropped user database has immutable\npoint-in-time restore backups within retention."
         }
       },
       "required": [

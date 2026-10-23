@@ -7,6 +7,15 @@ namespace Microsoft.SqlFeatureRegistration;
 enum Features {
   ...Microsoft.Sql.Features,
 
+  /** Read, list, and update the singleton logical server protection settings. */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The project uses legacy-feature-files output splitting."
+  @Azure.ResourceManager.Legacy.featureOptions(#{
+    featureName: "ServerProtectionSettings",
+    fileName: "ServerProtectionSettings",
+    description: "Read and update logical server protection settings for retained immutable backups.",
+  })
+  ServerProtectionSettings,
+
   /** Read, list, and update the singleton managed instance protection settings. */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The project uses legacy-feature-files output splitting; preserve the requested server protection settings specification filename."
   @Azure.ResourceManager.Legacy.featureOptions(#{

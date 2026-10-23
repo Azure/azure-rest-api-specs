@@ -153,6 +153,7 @@ input-file:
   - preview/2026-11-01-preview/serverKeys.json
   - preview/2026-11-01-preview/serverOperations.json
   - preview/2026-11-01-preview/servers.json
+  - preview/2026-11-01-preview/ServerProtectionSettings.json
   - preview/2026-11-01-preview/serverSecurityAlertPolicies.json
   - preview/2026-11-01-preview/serverTrustCertificates.json
   - preview/2026-11-01-preview/serverTrustGroups.json
@@ -4024,6 +4025,14 @@ directive:
 
 ``` yaml
 suppressions:
+  - code: PutResponseCodes
+    from: preview/2026-11-01-preview/ServerProtectionSettings.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serverProtectionSettings/{serverProtectionSettingsName}"].put
+    reason: This always-existing singleton follows the MI contract, returning HTTP 200 with the resource on completion or HTTP 202 with operation metadata and polling headers while pending. PUT never creates a new resource.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: preview/2026-11-01-preview/ServerProtectionSettings.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serverProtectionSettings/{serverProtectionSettingsName}"].put
+    reason: Assumes an ARM exception to omit durable provisioningState from this always-existing proxy resource. GET returns the persisted flag; operation status is available through polling endpoints.
   - code: MissingSegmentsInNestedResourceListOperation
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies"]
