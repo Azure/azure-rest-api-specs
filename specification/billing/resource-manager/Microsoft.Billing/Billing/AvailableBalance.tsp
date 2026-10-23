@@ -1,14 +1,10 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
 import "./models.tsp";
 import "./BillingAccount.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Billing;
 
@@ -38,7 +34,8 @@ model AvailableBalance extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Preserves the existing ARM tags shape as a free-form string dictionary for SDK compatibility."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
   tags?: Record<string>;
 }
 
@@ -47,8 +44,6 @@ interface AvailableBalances {
   /**
    * The Available Credit or Payment on Account Balance for a billing account. The credit balance can be used to settle due or past due invoices and is supported for billing accounts with agreement type Microsoft Customer Agreement. The payment on account balance is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Online Services Program.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserves the singleton request-path-is-non-resource GET used to maintain GA SDK method shape."
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("AvailableBalance")
   @get
   @route("/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/availableBalance/default")
@@ -57,7 +52,7 @@ interface AvailableBalances {
 
     /** The ID that uniquely identifies a billing account. */
     @path
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string,
   ):
     | ArmResponse<AvailableBalance>
@@ -69,8 +64,6 @@ interface AvailableBalanceOperationGroup {
   /**
    * The Available Credit or Payment on Account Balance for a billing profile. The credit balance can be used to settle due or past due invoices and is supported for billing accounts with agreement type Microsoft Customer Agreement. The payment on account balance is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserves the singleton request-path-is-non-resource GET used to maintain GA SDK method shape."
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("AvailableBalance")
   @get
   @route("/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/availableBalance/default")
@@ -79,12 +72,12 @@ interface AvailableBalanceOperationGroup {
 
     /** The ID that uniquely identifies a billing account. */
     @path
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string,
 
     /** The ID that uniquely identifies a billing profile. */
     @path
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     billingProfileName: string,
   ):
     | ArmResponse<AvailableBalance>
