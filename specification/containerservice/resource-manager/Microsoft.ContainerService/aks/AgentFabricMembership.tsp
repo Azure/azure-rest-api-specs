@@ -19,7 +19,7 @@ namespace Microsoft.ContainerService;
  * The AgentFabric membership of a managed cluster. A cluster may belong to at most one AgentFabric, so this resource always has the name 'default'. See https://aka.ms/aks/agentfabric-membership.
  */
 @parentResource(ManagedCluster)
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model AgentFabricMembership
   is Azure.ResourceManager.ProxyResource<AgentFabricMembershipProperties> {
   ...ResourceNameParameter<
@@ -42,7 +42,7 @@ model AgentFabricMembership
 }
 
 @armResourceOperations
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 interface AgentFabricMemberships {
   /**
    * Gets the AgentFabric membership of a managed cluster.
@@ -76,7 +76,7 @@ interface AgentFabricMemberships {
  * The current provisioning state of the AgentFabric membership.
  */
 @Azure.Core.lroStatus
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 union AgentFabricMembershipProvisioningState {
   string,
 
@@ -114,7 +114,7 @@ union AgentFabricMembershipProvisioningState {
 /**
  * The SKU of the AgentFabric membership. The SKU determines which AgentFabric components are deployed to the cluster.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 union AgentFabricMembershipSkuName {
   string,
 
@@ -132,7 +132,7 @@ union AgentFabricMembershipSkuName {
 /**
  * Properties of the AgentFabric membership of a managed cluster.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model AgentFabricMembershipProperties {
   /**
    * The current provisioning state of the AgentFabric membership.
@@ -149,7 +149,7 @@ model AgentFabricMembershipProperties {
 /**
  * The result of a request to list the AgentFabric memberships of a managed cluster.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model AgentFabricMembershipsListResult {
   /**
    * The list of AgentFabric memberships.
