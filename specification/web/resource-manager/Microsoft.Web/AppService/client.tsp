@@ -10,6 +10,19 @@ using Azure.Core;
 
 namespace Customizations;
 
+@@clientLocation(EgressConfigs.createOrUpdateEgressConfig, WebApps, "!csharp");
+@@clientLocation(EgressConfigs.getEgressConfig, WebApps, "!csharp");
+@@clientLocation(
+  EgressConfigSlotConfigs.createOrUpdateEgressConfigSlot,
+  WebApps,
+  "!csharp"
+);
+@@clientLocation(
+  EgressConfigSlotConfigs.getEgressConfigSlot,
+  WebApps,
+  "!csharp"
+);
+
 // python
 @@clientName(Microsoft.Web, "WebSiteManagementClient", "python, javascript");
 @@clientName(WebApps.swapSlotSlot, "swapSlot", "python,go,javascript");
