@@ -91,6 +91,7 @@ model DbSystemShapeProperties {
   @doc("The compute model of the Exadata Infrastructure")
   computeModel?: ComputeModel;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DbSystemShapeProperties.areServerTypesSupported has a boolean wire value; preserve the published property contract."
   @added(Versions.v20250101_preview)
   @doc("Indicates if the shape supports database and storage server types")
   areServerTypesSupported?: boolean;
@@ -113,10 +114,12 @@ model DbSystemShapeProperties {
 @added(Versions.v20241201_preview)
 @doc("Provides GiMinorVersion query parameter for list operations.")
 model DbSystemShapeFilter {
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing DbSystemShapeFilter.zone retains the zone query parameter; preserve wire compatibility."
   @query
   @doc("Filters the result for the given Azure Availability Zone")
   zone?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing DbSystemShapeFilter.shapeAttribute retains the shapeAttribute query parameter; preserve wire compatibility."
   @added(Versions.v20250801_preview)
   @query
   @doc("Filters the result for the given Shape Attribute, such as BLOCK_STORAGE or SMART_STORAGE.")

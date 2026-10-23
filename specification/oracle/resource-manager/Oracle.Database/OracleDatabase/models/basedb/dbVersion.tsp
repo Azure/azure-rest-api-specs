@@ -38,16 +38,20 @@ model DbVersionProperties {
   @maxLength(255)
   version: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DbVersionProperties.isLatestForMajorVersion has a boolean wire value; preserve the published property contract."
   @doc("True if this version of the Oracle Database software is the latest version for a release.")
   isLatestForMajorVersion?: boolean;
 
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DbVersionProperties.isPreviewDbVersion has a boolean wire value; preserve the published property contract."
   @doc("True if this version of the Oracle Database software is the preview version.")
   isPreviewDbVersion?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DbVersionProperties.isUpgradeSupported has a boolean wire value; preserve the published property contract."
   @doc("True if this version of the Oracle Database software is supported for Upgrade.")
   isUpgradeSupported?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DbVersionProperties.supportsPdb has a boolean wire value; preserve the published property contract."
   @doc("True if this version of the Oracle Database software supports pluggable databases.")
   supportsPdb?: boolean;
 }
@@ -57,6 +61,7 @@ model DbVersionProperties {
 @doc("Provides DbVersion query parameter for list operations.")
 model DbVersionFilter {
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing DbVersionFilter.dbSystemShape retains the dbSystemShape query parameter; preserve wire compatibility."
   @query
   @doc("If provided, filters the results to the set of database versions which are supported for the given shape. e.g., VM.Standard.E5.Flex")
   @minLength(1)
@@ -64,22 +69,29 @@ model DbVersionFilter {
   dbSystemShape?: BaseDbSystemShapes;
 
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing DbVersionFilter.dbSystemId retains the dbSystemId query parameter; preserve wire compatibility."
   @query
   @doc("The DB system AzureId. If provided, filters the results to the set of database versions which are supported for the DB system.")
   dbSystemId?: DbSystemResourceId;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing DbVersionFilter.storageManagement retains the storageManagement query parameter; preserve wire compatibility."
   @query
   @doc("The DB system storage management option. Used to list database versions available for that storage manager. Valid values are ASM and LVM.")
   storageManagement?: StorageManagementType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DbVersionFilter.isUpgradeSupported has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing DbVersionFilter.isUpgradeSupported retains the isUpgradeSupported query parameter; preserve wire compatibility."
   @query
   @doc("If true, filters the results to the set of database versions which are supported for Upgrade.")
   isUpgradeSupported?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DbVersionFilter.isDatabaseSoftwareImageSupported has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing DbVersionFilter.isDatabaseSoftwareImageSupported retains the isDatabaseSoftwareImageSupported query parameter; preserve wire compatibility."
   @query
   @doc("If true, filters the results to the set of Oracle Database versions that are supported for the database software images.")
   isDatabaseSoftwareImageSupported?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing DbVersionFilter.shapeFamily retains the shapeFamily query parameter; preserve wire compatibility."
   @query
   @doc("If provided, filters the results to the set of database versions which are supported for the given shape family.")
   shapeFamily?: ShapeFamilyType;

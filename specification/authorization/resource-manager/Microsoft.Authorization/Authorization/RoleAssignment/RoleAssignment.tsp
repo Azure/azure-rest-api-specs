@@ -79,6 +79,7 @@ alias RoleAssignmentQuerysOps = Azure.ResourceManager.Legacy.ExtensionOperations
     /**
      * Tenant ID for cross-tenant request
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing RoleAssignmentQuerysOps.tenantId retains the tenantId query parameter; preserve wire compatibility."
     @query("tenantId")
     tenantId?: string;
 
@@ -187,12 +188,14 @@ interface RoleAssignments {
       /**
        * Tenant ID for cross-tenant request
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listForScope.tenantId retains the tenantId query parameter; preserve wire compatibility."
       @query("tenantId")
       tenantId?: string;
 
       /**
        * The skipToken to apply on the operation. Use $skipToken={skiptoken} to return paged role assignments following the skipToken passed. Only supported on provider level calls.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listForScope.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },
@@ -214,6 +217,7 @@ interface RoleAssignments {
       /**
        * Tenant ID for cross-tenant request
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listForSubscription.tenantId retains the tenantId query parameter; preserve wire compatibility."
       @query("tenantId")
       tenantId?: string;
     },
@@ -236,6 +240,7 @@ interface RoleAssignments {
       /**
        * Tenant ID for cross-tenant request
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listForResourceGroup.tenantId retains the tenantId query parameter; preserve wire compatibility."
       @query("tenantId")
       tenantId?: string;
     },
@@ -257,6 +262,7 @@ interface RoleAssignments {
       /**
        * Tenant ID for cross-tenant request
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listForResource.tenantId retains the tenantId query parameter; preserve wire compatibility."
       @query("tenantId")
       tenantId?: string;
     },

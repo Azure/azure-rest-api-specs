@@ -593,6 +593,7 @@ model StacQueryable {
   /**
    * Whether to create a database index for this field.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StacQueryable.createIndex has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "create_index")
   createIndex?: boolean;
 
@@ -930,6 +931,7 @@ model StacLink {
    * This is only valid when the server is responding to a POST request.
    * Default: false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StacLink.merge has a boolean wire value; preserve the published property contract."
   merge?: boolean = false;
 }
 

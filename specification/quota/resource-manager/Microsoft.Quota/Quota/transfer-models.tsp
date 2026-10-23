@@ -216,6 +216,7 @@ model QuotaTransferProperties {
    * `transferStatus`: `Completed` means the auto path committed; `Pending` means it did
    * not (e.g. cross-tenant, missing RBAC, cap exceeded) and the recipient must approve.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing QuotaTransferProperties.autoApprove has a boolean wire value; preserve the published property contract."
   autoApprove?: boolean = false;
 
   /**

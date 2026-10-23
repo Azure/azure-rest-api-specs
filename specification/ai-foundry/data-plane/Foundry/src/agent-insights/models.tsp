@@ -296,6 +296,7 @@ model AgentInsightMonitor {
   agent_name: string;
 
   /** Whether scheduled insight generation is armed for the monitor. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AgentInsightMonitor.enabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   enabled: boolean;
 
@@ -344,6 +345,7 @@ model AgentInsightMonitorCreate {
   agent_name: string;
 
   /** Whether scheduled insight generation should be armed. Defaults to false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AgentInsightMonitorCreate.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean = false;
 
   /** Interval between scheduled insight runs, in hours. Defaults to 6. */
@@ -359,6 +361,7 @@ model AgentInsightMonitorCreate {
 @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightMonitorUpdate {
   /** Whether scheduled insight generation is armed for the monitor. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AgentInsightMonitorUpdate.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /** Interval between scheduled insight runs, in hours. */

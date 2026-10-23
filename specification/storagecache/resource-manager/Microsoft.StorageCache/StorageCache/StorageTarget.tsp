@@ -66,6 +66,7 @@ interface StorageTargets {
       /**
        * Boolean value requesting the force delete operation for a storage target. Force delete discards unwritten-data in the cache instead of flushing it to back-end storage.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.force retains the force query parameter; preserve wire compatibility."
       @query("force")
       force?: string;
     },

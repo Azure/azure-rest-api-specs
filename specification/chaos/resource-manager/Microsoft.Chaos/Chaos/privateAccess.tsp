@@ -46,6 +46,7 @@ interface PrivateAccesses {
       /**
        * String that sets the continuation token.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.continuationToken retains the continuationToken query parameter; preserve wire compatibility."
       @query("continuationToken")
       continuationToken?: string;
     },
@@ -61,6 +62,7 @@ interface PrivateAccesses {
       /**
        * String that sets the continuation token.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAll.continuationToken retains the continuationToken query parameter; preserve wire compatibility."
       @query("continuationToken")
       continuationToken?: string;
     },
@@ -72,6 +74,7 @@ interface PrivateAccesses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for Swagger LintDiff validation - x-ms-pageable extension must be specified for LIST APIs"
   #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-pageable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core paging operations."
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing privateLinkResources retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("privateLinkResources")
   @OpenAPI.extension("x-ms-pageable", #{ nextLinkName: "nextLink" })

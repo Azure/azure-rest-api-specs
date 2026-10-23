@@ -682,21 +682,25 @@ model RepositoryChangeableAttributes {
   /**
    * Delete enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RepositoryChangeableAttributes.deleteEnabled has a boolean wire value; preserve the published property contract."
   deleteEnabled?: boolean;
 
   /**
    * Write enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RepositoryChangeableAttributes.writeEnabled has a boolean wire value; preserve the published property contract."
   writeEnabled?: boolean;
 
   /**
    * List enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RepositoryChangeableAttributes.listEnabled has a boolean wire value; preserve the published property contract."
   listEnabled?: boolean;
 
   /**
    * Read enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RepositoryChangeableAttributes.readEnabled has a boolean wire value; preserve the published property contract."
   readEnabled?: boolean;
 }
 
@@ -778,6 +782,7 @@ model TagAttributesBase {
   /**
    * Is signed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TagAttributesBase.signed has a boolean wire value; preserve the published property contract."
   signed?: boolean;
 
   /**
@@ -793,21 +798,25 @@ model TagChangeableAttributes {
   /**
    * Delete enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TagChangeableAttributes.deleteEnabled has a boolean wire value; preserve the published property contract."
   deleteEnabled?: boolean;
 
   /**
    * Write enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TagChangeableAttributes.writeEnabled has a boolean wire value; preserve the published property contract."
   writeEnabled?: boolean;
 
   /**
    * List enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TagChangeableAttributes.listEnabled has a boolean wire value; preserve the published property contract."
   listEnabled?: boolean;
 
   /**
    * Read enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TagChangeableAttributes.readEnabled has a boolean wire value; preserve the published property contract."
   readEnabled?: boolean;
 }
 
@@ -960,21 +969,25 @@ model ManifestChangeableAttributes {
   /**
    * Delete enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManifestChangeableAttributes.deleteEnabled has a boolean wire value; preserve the published property contract."
   deleteEnabled?: boolean;
 
   /**
    * Write enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManifestChangeableAttributes.writeEnabled has a boolean wire value; preserve the published property contract."
   writeEnabled?: boolean;
 
   /**
    * List enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManifestChangeableAttributes.listEnabled has a boolean wire value; preserve the published property contract."
   listEnabled?: boolean;
 
   /**
    * Read enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManifestChangeableAttributes.readEnabled has a boolean wire value; preserve the published property contract."
   readEnabled?: boolean;
 }
 

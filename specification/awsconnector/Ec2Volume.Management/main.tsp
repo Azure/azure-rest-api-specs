@@ -65,12 +65,14 @@ model Ec2VolumeProperties {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2Volume")
 model AwsEc2VolumeProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsEc2VolumeProperties.autoEnableIO has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the volume is auto-enabled for I/O operations. By default, Amazon EBS disables I/O to the volume from attached EC2 instances when it determines that a volume's data is potentially inconsistent. If the consistency of the volume is not a concern, and you prefer that the volume be made available immediately if it's impaired, you can configure the volume to automatically enable I/O.")
   autoEnableIO?: boolean;
 
   @doc("The ID of the Availability Zone in which to create the volume. For example, ``us-east-1a``.")
   availabilityZone?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsEc2VolumeProperties.encrypted has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the volume should be encrypted. The effect of setting the encryption state to ``true`` depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see [Encryption by default](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default) in the *Amazon Elastic Compute Cloud User Guide*. Encrypted Amazon EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see [Supported instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).")
   encrypted?: boolean;
 
@@ -80,6 +82,7 @@ model AwsEc2VolumeProperties {
   @doc("The identifier of the kms-key-long to use for Amazon EBS encryption. If ``KmsKeyId`` is specified, the encrypted state must be ``true``. If you omit this property and your account is enabled for encryption by default, or *Encrypted* is set to ``true``, then the volume is encrypted using the default key specified for your account. If your account does not have a default key, then the volume is encrypted using the aws-managed-key. Alternatively, if you want to specify a different key, you can specify one of the following:  +  Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.  +  Key alias. Specify the alias for the key, prefixed with ``alias/``. For example, for a key with the alias ``my_cmk``, use ``alias/my_cmk``. Or to specify the aws-managed-key, use ``alias/aws/ebs``.  +  Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.  +  Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.")
   kmsKeyId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsEc2VolumeProperties.multiAttachEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether Amazon EBS Multi-Attach is enabled. CFNlong does not currently support updating a single-attach volume to be multi-attach enabled, updating a multi-attach enabled volume to be single-attach, or updating the size or number of I/O operations per second (IOPS) of a multi-attach enabled volume.")
   multiAttachEnabled?: boolean;
 

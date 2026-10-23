@@ -54,6 +54,7 @@ interface NetworkConnections {
   listByResourceGroup is ArmResourceListByParent<
     NetworkConnection,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.$top retains the $top query parameter; preserve wire compatibility."
       @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
@@ -65,6 +66,7 @@ interface NetworkConnections {
   listBySubscription is ArmListBySubscription<
     NetworkConnection,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.$top retains the $top query parameter; preserve wire compatibility."
       @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
@@ -89,6 +91,7 @@ interface NetworkConnections {
     void,
     ArmResponse<OutboundEnvironmentEndpointCollection>,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listOutboundNetworkDependenciesEndpoints.$top retains the $top query parameter; preserve wire compatibility."
       @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;

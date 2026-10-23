@@ -1250,6 +1250,7 @@ model ChildConfigurationProperties {
   /**
    * Flag to indicate if the child configuration is part of the base configuration, which means the customer need not pass this configuration in OptInAdditionalConfigurations while placing an order, it will be shipped by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ChildConfigurationProperties.isPartOfBaseConfiguration has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPartOfBaseConfiguration?: boolean;
 
@@ -2200,6 +2201,7 @@ model NotificationPreference {
   /**
    * Notification is required or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NotificationPreference.sendNotification has a boolean wire value; preserve the published property contract."
   sendNotification: boolean;
 }
 
@@ -2547,6 +2549,7 @@ model ReturnOrderItemDetails {
   /**
    * Shipping Box required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ReturnOrderItemDetails.shippingBoxRequired has a boolean wire value; preserve the published property contract."
   shippingBoxRequired?: boolean = false;
 }
 

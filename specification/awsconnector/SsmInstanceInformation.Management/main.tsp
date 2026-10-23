@@ -90,6 +90,7 @@ model AwsSsmInstanceInformationProperties {
   @doc("<p>The managed node ID. </p>")
   instanceId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsSsmInstanceInformationProperties.isLatestVersion has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether the latest version of SSM Agent is running on your Linux managed node. This field doesn't indicate whether or not the latest version is installed on Windows managed nodes, because some older versions of Windows Server use the EC2Config service to process Systems Manager requests.</p>")
   isLatestVersion?: boolean;
 

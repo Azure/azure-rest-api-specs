@@ -240,6 +240,7 @@ model ApplicationUpgradePolicy {
   /**
    * If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationUpgradePolicy.forceRestart has a boolean wire value; preserve the published property contract."
   forceRestart?: boolean = false;
 
   /**
@@ -265,6 +266,7 @@ model ApplicationUpgradePolicy {
   /**
    * Determines whether the application should be recreated on update. If value=true, the rest of the upgrade policy parameters are not allowed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationUpgradePolicy.recreateApplication has a boolean wire value; preserve the published property contract."
   recreateApplication?: boolean;
 }
 
@@ -321,6 +323,7 @@ model ApplicationHealthPolicy {
   /**
    * Indicates whether warnings are treated with the same severity as errors.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationHealthPolicy.considerWarningAsError has a boolean wire value; preserve the published property contract."
   considerWarningAsError: boolean;
 
   /**
@@ -480,6 +483,7 @@ model RuntimeRollingUpgradeUpdateMonitoringPolicy {
   /**
    * If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RuntimeRollingUpgradeUpdateMonitoringPolicy.forceRestart has a boolean wire value; preserve the published property contract."
   forceRestart?: boolean;
 
   /**
@@ -597,6 +601,7 @@ model RuntimeApplicationHealthPolicy {
   /**
    * Indicates whether warnings are treated with the same severity as errors.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RuntimeApplicationHealthPolicy.considerWarningAsError has a boolean wire value; preserve the published property contract."
   considerWarningAsError: boolean;
 
   /**
@@ -745,6 +750,7 @@ model ApplicationFetchHealthRequest {
   /**
    * Indicates whether the health statistics should be returned as part of the query result. False by default. The statistics show the number of children entities in health state Ok, Warning, and Error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationFetchHealthRequest.excludeHealthStatistics has a boolean wire value; preserve the published property contract."
   excludeHealthStatistics?: boolean = false;
 
   /**

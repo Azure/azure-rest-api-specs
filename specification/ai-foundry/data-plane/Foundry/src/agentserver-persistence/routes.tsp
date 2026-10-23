@@ -79,6 +79,7 @@ alias DeleteAgentServerTaskRequest = {
   ...AgentServerTaskIfMatchHeader;
 
   /** Force deletion of a non-terminal task and release any active lease. Defaults to false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeleteAgentServerTaskRequest.force has a boolean wire value; preserve the published property contract."
   @query force?: boolean = false;
 };
 
@@ -98,9 +99,11 @@ alias ListAgentServerTasksRequest = {
   @query status?: AgentServerTaskStatus;
 
   /** Filter by whether the task has a recorded error. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ListAgentServerTasksRequest.has_error has a boolean wire value; preserve the published property contract."
   @query has_error?: boolean;
 
   /** Filter by whether the current lease is expired. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ListAgentServerTasksRequest.lease_expired has a boolean wire value; preserve the published property contract."
   @query lease_expired?: boolean;
 
   /** Filter by lease owner. */
@@ -122,6 +125,7 @@ alias ListAgentServerTasksRequest = {
   @query order?: AgentServerTaskListOrder = AgentServerTaskListOrder.descent;
 
   /** When true, omit attachment values from returned task records. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ListAgentServerTasksRequest.omit_attachment_values has a boolean wire value; preserve the published property contract."
   @query omit_attachment_values?: boolean = false;
 };
 

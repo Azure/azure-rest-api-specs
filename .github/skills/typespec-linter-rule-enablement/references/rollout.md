@@ -173,6 +173,21 @@ candidate compilation by CI, not harvesting a pre-enable baseline. It avoids
 duplicating a long local full scan when equivalent complete candidate evidence
 already exists. Local targeted compilation remains required after source edits.
 
+PR workflows normally check out a synthetic merge commit, not the PR head
+alone. Read the actual checkout SHA from every shard and require the same source
+revision across all six. Before using diagnostic coordinates, compare the
+authoring source against that immutable merge snapshot. If the base has
+advanced, integrate the pinned base safely and refresh discovery; a matching
+workflow `head_sha` alone does not prove matching source lines. Preserve the
+actual merge revision in the diagnostic and suppression evidence.
+
+The validation runner's progress counters can interrupt a compiler diagnostic
+mid-path or mid-message. Preserve raw logs, remove only recognized progress
+summary blocks, and reconstruct the adjacent diagnostic fragments before
+harvesting. Record each repair and require identical located rule diagnostics
+on Ubuntu and Windows; do not discard fragments or deduplicate truncated
+messages as separate violations.
+
 ## 5. Suppress and recompile until all projects pass
 
 For every failing project, collect exact rule IDs, files, locations, messages,
@@ -214,6 +229,9 @@ a property: paging, tenant-scope, SDK-name, and boolean-return diagnostics can
 report on operations. Do not widen a property diagnostic to an operation merely
 to simplify the batch. An interface, namespace, library-source, or inline target
 requires explicit placement analysis, not a blanket fallback.
+Properties inside anonymous generic arguments of an interface are still valid
+property-level anchors. The interface may identify their enclosing owner in
+the justification; it must not become the suppression target.
 
 Insert directives bottom-up, before the target's decorators, preserving docs
 and existing directives. When multiple selected rules report on one declaration,

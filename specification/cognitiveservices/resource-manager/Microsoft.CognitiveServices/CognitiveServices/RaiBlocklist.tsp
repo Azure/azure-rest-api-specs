@@ -65,6 +65,7 @@ interface RaiBlocklists {
   /**
    * Batch operation to add blocklist items.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing batchAdd retains its request-body shape; preserve wire compatibility."
   @action("addRaiBlocklistItems")
   batchAdd is ArmResourceActionSync<
     RaiBlocklist,
@@ -75,6 +76,7 @@ interface RaiBlocklists {
   /**
    * Batch operation to delete blocklist items.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing batchDelete retains its request-body shape; preserve wire compatibility."
   @action("deleteRaiBlocklistItems")
   batchDelete is ArmResourceActionSync<
     RaiBlocklist,

@@ -35,12 +35,14 @@ alias NotificationHubResourcesListParameters = {
   /**
    * Continuation token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing NotificationHubResourcesListParameters.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
   @query("$skipToken")
   $skipToken?: string;
 
   /**
    * Page size.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing NotificationHubResourcesListParameters.$top retains the $top query parameter; preserve wire compatibility."
   @query("$top")
   $top?: int32 = 100;
 };

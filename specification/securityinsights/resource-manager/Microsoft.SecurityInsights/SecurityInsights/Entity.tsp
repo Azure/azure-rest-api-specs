@@ -82,6 +82,7 @@ interface Entities {
   /**
    * Get Insights and Activities for an entity.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing queries SDK method name; renaming it would break client compatibility."
   @get
   @list
   @tag("Entities")
@@ -95,6 +96,7 @@ interface Entities {
       /**
        * The Kind parameter for queries
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing queries.kind retains the kind query parameter; preserve wire compatibility."
       @query("kind")
       kind: EntityItemQueryKind;
     },

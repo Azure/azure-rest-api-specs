@@ -71,6 +71,7 @@ interface ClusterVersionsOperationGroup {
   /**
    * Gets all available code versions for Service Fabric cluster resources by location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ClusterVersion")
   @summary("Gets the list of Service Fabric cluster code versions available for the specified location.")
   @get
@@ -84,6 +85,7 @@ interface ClusterVersionsOperationGroup {
   /**
    * Gets all available code versions for Service Fabric cluster resources by environment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByEnvironment retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ClusterVersion")
   @summary("Gets the list of Service Fabric cluster code versions available for the specified environment.")
   @get

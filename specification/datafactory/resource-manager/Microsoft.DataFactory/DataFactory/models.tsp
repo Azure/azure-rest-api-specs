@@ -3482,6 +3482,7 @@ model OperationMetricDimension {
   /**
    * Whether the dimension should be exported to Azure Monitor.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OperationMetricDimension.toBeExportedForShoebox has a boolean wire value; preserve the published property contract."
   toBeExportedForShoebox?: boolean;
 }
 
@@ -3659,6 +3660,7 @@ model FactoryRepoConfiguration {
   /**
    * Disable manual publish operation in ADF studio to favor automated publish.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FactoryRepoConfiguration.disablePublish has a boolean wire value; preserve the published property contract."
   disablePublish?: boolean;
 }
 
@@ -4126,6 +4128,7 @@ model IntegrationRuntimeConnectionInfo {
   /**
    * Whether the identity certificate is expired.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IntegrationRuntimeConnectionInfo.isIdentityCertExprired has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isIdentityCertExprired?: boolean;
 }
@@ -4435,6 +4438,7 @@ model SelfHostedIntegrationRuntimeNode {
   /**
    * Indicates whether this node is the active dispatcher for integration runtime requests.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SelfHostedIntegrationRuntimeNode.isActiveDispatcher has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isActiveDispatcher?: boolean;
 
@@ -4959,6 +4963,7 @@ model PipelineRun {
   /**
    * Indicates if the recovered pipeline run is the latest in its group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PipelineRun.isLatest has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isLatest?: boolean;
 
@@ -5784,6 +5789,7 @@ model ManagedPrivateEndpoint {
   /**
    * Denotes whether the managed private endpoint is reserved
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedPrivateEndpoint.isReserved has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isReserved?: boolean;
 
@@ -6036,6 +6042,7 @@ model ChangeDataCapture {
    * A boolean to determine if the vnet configuration needs to be overwritten.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ChangeDataCapture.allowVNetOverride has a boolean wire value; preserve the published property contract."
   allowVNetOverride?: boolean;
 
   /**
@@ -6155,6 +6162,7 @@ model MapperConnection {
   /**
    * A boolean indicating whether linked service is of type inline dataset. Currently only inline datasets are supported.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MapperConnection.isInlineDataset has a boolean wire value; preserve the published property contract."
   isInlineDataset?: boolean;
 
   /**
@@ -10361,6 +10369,7 @@ model IntegrationRuntimeDataFlowProperties {
   /**
    * Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Default is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IntegrationRuntimeDataFlowProperties.cleanup has a boolean wire value; preserve the published property contract."
   cleanup?: boolean;
 
   /**
@@ -10792,6 +10801,7 @@ model SelfHostedIntegrationRuntimeTypeProperties {
   /**
    * An alternative option to ensure interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SelfHostedIntegrationRuntimeTypeProperties.selfContainedInteractiveAuthoringEnabled has a boolean wire value; preserve the published property contract."
   selfContainedInteractiveAuthoringEnabled?: boolean;
 }
 
@@ -11115,6 +11125,7 @@ model SelfHostedIntegrationRuntimeStatusTypeProperties {
   /**
    * An alternative option to ensure interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SelfHostedIntegrationRuntimeStatusTypeProperties.selfContainedInteractiveAuthoringEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   selfContainedInteractiveAuthoringEnabled?: boolean;
 }
@@ -11247,11 +11258,13 @@ model SsisParameter {
   /**
    * Whether parameter is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SsisParameter.required has a boolean wire value; preserve the published property contract."
   required?: boolean;
 
   /**
    * Whether parameter is sensitive.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SsisParameter.sensitive has a boolean wire value; preserve the published property contract."
   sensitive?: boolean;
 
   /**
@@ -11277,6 +11290,7 @@ model SsisParameter {
   /**
    * Parameter value set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SsisParameter.valueSet has a boolean wire value; preserve the published property contract."
   valueSet?: boolean;
 
   /**
@@ -11362,6 +11376,7 @@ model SsisVariable {
   /**
    * Whether variable is sensitive.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SsisVariable.sensitive has a boolean wire value; preserve the published property contract."
   sensitive?: boolean;
 
   /**
@@ -19417,11 +19432,13 @@ model ActivityPolicy {
   /**
    * When set to true, Input from activity is considered as secure and will not be logged to monitoring.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActivityPolicy.secureInput has a boolean wire value; preserve the published property contract."
   secureInput?: boolean;
 
   /**
    * When set to true, Output from activity is considered as secure and will not be logged to monitoring.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActivityPolicy.secureOutput has a boolean wire value; preserve the published property contract."
   secureOutput?: boolean;
 }
 
@@ -25901,6 +25918,7 @@ model SSISPropertyOverride {
   /**
    * Whether SSIS package property override value is sensitive data. Value will be encrypted in SSISDB if it is true
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SSISPropertyOverride.isSensitive has a boolean wire value; preserve the published property contract."
   isSensitive?: boolean;
 }
 
@@ -26084,6 +26102,7 @@ model ExecutePipelineActivityPolicy {
   /**
    * When set to true, Input from activity is considered as secure and will not be logged to monitoring.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExecutePipelineActivityPolicy.secureInput has a boolean wire value; preserve the published property contract."
   secureInput?: boolean;
 }
 
@@ -26105,6 +26124,7 @@ model ExecutePipelineActivityTypeProperties {
   /**
    * Defines whether activity execution will wait for the dependent pipeline execution to finish. Default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExecutePipelineActivityTypeProperties.waitOnCompletion has a boolean wire value; preserve the published property contract."
   waitOnCompletion?: boolean;
 }
 
@@ -26293,6 +26313,7 @@ model WebActivityTypeProperties {
   /**
    * When set to true, Certificate validation will be disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebActivityTypeProperties.disableCertValidation has a boolean wire value; preserve the published property contract."
   disableCertValidation?: boolean;
 
   /**
@@ -26303,6 +26324,7 @@ model WebActivityTypeProperties {
   /**
    * Option to disable invoking HTTP GET on location given in response header of a HTTP 202 Response. If set true, it stops invoking HTTP GET on http location given in response header. If set false then continues to invoke HTTP GET call on location given in http response headers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebActivityTypeProperties.turnOffAsync has a boolean wire value; preserve the published property contract."
   turnOffAsync?: boolean;
 
   /**
@@ -26526,6 +26548,7 @@ model ForEachActivityTypeProperties {
   /**
    * Should the loop be executed in sequence or in parallel (max 50)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ForEachActivityTypeProperties.isSequential has a boolean wire value; preserve the published property contract."
   isSequential?: boolean;
 
   /**
@@ -27147,6 +27170,7 @@ model SetVariableActivityTypeProperties {
   /**
    * If set to true, it sets the pipeline run return value.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SetVariableActivityTypeProperties.setSystemVariable has a boolean wire value; preserve the published property contract."
   setSystemVariable?: boolean;
 }
 
@@ -27157,11 +27181,13 @@ model SecureInputOutputPolicy {
   /**
    * When set to true, Input from activity is considered as secure and will not be logged to monitoring.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecureInputOutputPolicy.secureInput has a boolean wire value; preserve the published property contract."
   secureInput?: boolean;
 
   /**
    * When set to true, Output from activity is considered as secure and will not be logged to monitoring.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecureInputOutputPolicy.secureOutput has a boolean wire value; preserve the published property contract."
   secureOutput?: boolean;
 }
 
@@ -28241,6 +28267,7 @@ model BlobEventsTriggerTypeProperties {
   /**
    * If set to true, blobs with zero bytes will be ignored.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BlobEventsTriggerTypeProperties.ignoreEmptyBlobs has a boolean wire value; preserve the published property contract."
   ignoreEmptyBlobs?: boolean;
 
   /**

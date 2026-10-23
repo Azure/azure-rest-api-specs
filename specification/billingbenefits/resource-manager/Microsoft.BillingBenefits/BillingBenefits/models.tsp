@@ -776,6 +776,7 @@ model SavingsPlanOrderAliasProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SavingsPlanOrderAliasProperties.renew has a boolean wire value; preserve the published property contract."
   renew?: boolean = false;
 }
 
@@ -1172,6 +1173,7 @@ model SavingsPlanModelProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SavingsPlanModelProperties.renew has a boolean wire value; preserve the published property contract."
   renew?: boolean = false;
 
   /**
@@ -1304,6 +1306,7 @@ model PurchaseRequestProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PurchaseRequestProperties.renew has a boolean wire value; preserve the published property contract."
   renew?: boolean = false;
 
   /**
@@ -1425,6 +1428,7 @@ model SavingsPlanUpdateRequestProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SavingsPlanUpdateRequestProperties.renew has a boolean wire value; preserve the published property contract."
   renew?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1458,6 +1462,7 @@ model SavingsPlanValidResponseProperty {
   /**
    * Indicates if the provided input was valid
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SavingsPlanValidResponseProperty.valid has a boolean wire value; preserve the published property contract."
   valid?: boolean;
 
   /**
@@ -1542,6 +1547,7 @@ model ReservationOrderAliasRequestProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ReservationOrderAliasRequestProperties.renew has a boolean wire value; preserve the published property contract."
   renew?: boolean = false;
 
   /**
@@ -1635,6 +1641,7 @@ model ReservationOrderAliasResponseProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ReservationOrderAliasResponseProperties.renew has a boolean wire value; preserve the published property contract."
   renew?: boolean = false;
 
   /**
@@ -2455,6 +2462,7 @@ model MaccModelProperties {
   /**
    * Setting this to true means multi-entity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MaccModelProperties.allowContributors has a boolean wire value; preserve the published property contract."
   allowContributors?: boolean = false;
 
   /**
@@ -2509,6 +2517,7 @@ model MaccPatchRequestProperties {
   /**
    * Setting this to true means multi-entity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MaccPatchRequestProperties.allowContributors has a boolean wire value; preserve the published property contract."
   allowContributors?: boolean = false;
 
   /**
@@ -2619,11 +2628,13 @@ model SellerResourceListRequestProperties {
   /**
    * Setting it to true will return the list of contributors associated with the MACC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SellerResourceListRequestProperties.contributors has a boolean wire value; preserve the published property contract."
   contributors?: boolean;
 
   /**
    * Setting it to true will return the list of milestones associated with the MACC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SellerResourceListRequestProperties.milestones has a boolean wire value; preserve the published property contract."
   milestones?: boolean;
 
   /**
@@ -3451,6 +3462,7 @@ model BenefitValidateResponseProperty {
   /**
    * Indicates if the provided input was valid
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BenefitValidateResponseProperty.valid has a boolean wire value; preserve the published property contract."
   valid?: boolean;
 
   /**

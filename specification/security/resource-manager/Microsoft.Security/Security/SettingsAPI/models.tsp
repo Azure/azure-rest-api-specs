@@ -73,6 +73,7 @@ model DataExportSettingProperties {
   /**
    * Is the data export setting enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataExportSettingProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 }
 
@@ -98,5 +99,6 @@ model AlertSyncSettingProperties {
   /**
    * Is the alert sync setting enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AlertSyncSettingProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 }

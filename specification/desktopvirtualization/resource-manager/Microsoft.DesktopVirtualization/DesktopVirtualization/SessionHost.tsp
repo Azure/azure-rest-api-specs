@@ -47,6 +47,8 @@ interface SessionHosts {
       /**
        * Force flag to update assign, unassign or reassign personal desktop.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing update.force has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing update.force retains the force query parameter; preserve wire compatibility."
       @query("force")
       force?: boolean;
     }
@@ -61,6 +63,8 @@ interface SessionHosts {
       /**
        * Force flag to force sessionHost deletion even when userSession exists.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.force has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.force retains the force query parameter; preserve wire compatibility."
       @query("force")
       force?: boolean;
     }
@@ -75,18 +79,22 @@ interface SessionHosts {
       /**
        * Number of items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @query("pageSize")
       pageSize?: int32;
 
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.isDescending has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.isDescending retains the isDescending query parameter; preserve wire compatibility."
       @query("isDescending")
       isDescending?: boolean;
 
       /**
        * Initial number of items to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.initialSkip retains the initialSkip query parameter; preserve wire compatibility."
       @query("initialSkip")
       initialSkip?: int32;
 
@@ -94,6 +102,7 @@ interface SessionHosts {
        * The path to the VM.
        * @Introduced in 2026-01-01-preview
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.vmPath retains the vmPath query parameter; preserve wire compatibility."
       @added(Versions.vLatestPreview)
       @query("vmPath")
       @maxLength(1092)

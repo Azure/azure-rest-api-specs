@@ -50,6 +50,7 @@ interface QueueServices {
   /**
    * List all queue services for the storage account
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     QueueServiceProperties,
     Response = ArmResponse<ListQueueServices>,
@@ -70,6 +71,7 @@ interface QueueServices {
       /**
        * Optional, a maximum number of queues that should be included in a list queue response
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing queueList.$maxpagesize retains the $maxpagesize query parameter; preserve wire compatibility."
       @query("$maxpagesize")
       $maxpagesize?: string;
 

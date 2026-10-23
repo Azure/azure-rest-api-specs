@@ -81,6 +81,7 @@ interface Secrets {
       /**
        * Maximum number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },

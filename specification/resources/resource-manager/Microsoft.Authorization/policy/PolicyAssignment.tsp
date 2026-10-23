@@ -47,12 +47,14 @@ alias PolicyAssignmentListParameters = {
   /**
    * Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing PolicyAssignmentListParameters.$expand retains the $expand query parameter; preserve wire compatibility."
   @query("$expand")
   $expand?: string;
 
   /**
    * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing PolicyAssignmentListParameters.$top retains the $top query parameter; preserve wire compatibility."
   @maxValue(1000)
   @minValue(1)
   @query("$top")
@@ -115,6 +117,7 @@ interface PolicyAssignments {
       /**
        * Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }

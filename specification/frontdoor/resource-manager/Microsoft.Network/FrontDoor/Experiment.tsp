@@ -111,6 +111,7 @@ interface Experiments {
   /**
    * Gets a Latency Scorecard for a given Experiment
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getLatencyScorecards retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("LatencyScorecard")
   @summary("Gets a Latency Scorecard for a given Experiment")
@@ -126,6 +127,7 @@ interface Experiments {
   /**
    * Gets a Timeseries for a given Experiment
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getTimeseries retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets a Timeseries for a given Experiment")
   @get
   @action("Timeseries")

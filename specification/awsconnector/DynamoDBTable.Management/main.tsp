@@ -79,6 +79,7 @@ model AwsDynamoDBTableProperties {
   @doc("The settings used to enable or disable CloudWatch Contributor Insights for the specified table. The settings used to enable or disable CloudWatch Contributor Insights.")
   contributorInsightsSpecification?: ContributorInsightsSpecification;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsDynamoDBTableProperties.deletionProtectionEnabled has a boolean wire value; preserve the published property contract."
   @doc("Determines if a table is protected from deletion. When enabled, the table cannot be deleted by any user or process. This setting is disabled by default. For more information, see [Using deletion protection](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.Basics.html#WorkingWithTables.Basics.DeletionProtection) in the *Developer Guide*.")
   deletionProtectionEnabled?: boolean;
 
@@ -151,6 +152,7 @@ model AttributeDefinition {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ContributorInsightsSpecification")
 model ContributorInsightsSpecification {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContributorInsightsSpecification.enabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).")
   enabled?: boolean;
 }
@@ -257,6 +259,7 @@ model LocalSecondaryIndex {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PointInTimeRecoverySpecification")
 model PointInTimeRecoverySpecification {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PointInTimeRecoverySpecification.pointInTimeRecoveryEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether point in time recovery is enabled (true) or disabled (false) on the table.")
   pointInTimeRecoveryEnabled?: boolean;
 }
@@ -293,6 +296,7 @@ model SSESpecification {
   @doc("The KMS key that should be used for the KMS encryption. To specify a key, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB key ``alias/aws/dynamodb``.")
   kmsMasterKeyId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SSESpecification.sseEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether server-side encryption is done using an AWS managed key or an AWS owned key. If enabled (true), server-side encryption type is set to ``KMS`` and an AWS managed key is used (KMS charges apply). If disabled (false) or not specified, server-side encryption is set to AWS owned key.")
   sseEnabled?: boolean;
 
@@ -335,6 +339,7 @@ model TimeToLiveSpecification {
   @doc("The name of the TTL attribute used to store the expiration time for items in the table.   +  The ``AttributeName`` property is required when enabling the TTL, or when TTL is already enabled.  +  To update this property, you must first disable TTL and then enable TTL with the new attribute name.")
   attributeName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TimeToLiveSpecification.enabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether TTL is to be enabled (true) or disabled (false) on the table.")
   enabled?: boolean;
 }

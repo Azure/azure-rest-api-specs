@@ -96,6 +96,7 @@ interface MSDeployStatuses {
    * Description for Get the MSDeploy Log for the last MSDeploy operation.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getMSDeployLog retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get the MSDeploy Log for the last MSDeploy operation.")
   @get
   @action("log")
@@ -175,6 +176,7 @@ interface MSDeployStatusOperationGroup {
    * Description for Get the MSDeploy Log for the last MSDeploy operation.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getInstanceMSDeployLog retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get the MSDeploy Log for the last MSDeploy operation.")
   @get
   @action("log")
@@ -252,6 +254,7 @@ interface MSDeployStatusSlotOperationGroup {
   /**
    * Description for Get the MSDeploy Log for the last MSDeploy operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getMSDeployLogSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get the MSDeploy Log for the last MSDeploy operation.")
   @get
   @action("log")
@@ -338,6 +341,7 @@ interface InstanceMSDeployStatusOperationGroup {
    * Description for Get the MSDeploy Log for the last MSDeploy operation.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getInstanceMSDeployLogSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get the MSDeploy Log for the last MSDeploy operation.")
   @get
   @action("log")

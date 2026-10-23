@@ -687,6 +687,7 @@ model TopologySingleResource {
   /**
    * Indicates if the resource has security recommendations
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TopologySingleResource.recommendationsExist has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   recommendationsExist?: boolean;
 

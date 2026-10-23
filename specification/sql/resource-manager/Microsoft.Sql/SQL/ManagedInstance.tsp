@@ -52,6 +52,7 @@ interface ManagedInstances {
       /**
        * The child resources to include in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -115,6 +116,7 @@ interface ManagedInstances {
       /**
        * The child resources to include in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -132,6 +134,7 @@ interface ManagedInstances {
       /**
        * The child resources to include in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -255,42 +258,49 @@ interface ManagedInstances {
       /**
        * How many 'top queries' to return. Default is 5.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByManagedInstance.numberOfQueries retains the numberOfQueries query parameter; preserve wire compatibility."
       @query("numberOfQueries")
       numberOfQueries?: int32;
 
       /**
        * Comma separated list of databases to be included into search. All DB's are included if this parameter is not specified.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByManagedInstance.databases retains the databases query parameter; preserve wire compatibility."
       @query("databases")
       databases?: string;
 
       /**
        * Start time for observed period.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByManagedInstance.startTime retains the startTime query parameter; preserve wire compatibility."
       @query("startTime")
       startTime?: string;
 
       /**
        * End time for observed period.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByManagedInstance.endTime retains the endTime query parameter; preserve wire compatibility."
       @query("endTime")
       endTime?: string;
 
       /**
        * The time step to be used to summarize the metric values. Default value is PT1H
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByManagedInstance.interval retains the interval query parameter; preserve wire compatibility."
       @query("interval")
       interval?: QueryTimeGrainType;
 
       /**
        * Aggregation function to be used, default value is 'sum'
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByManagedInstance.aggregationFunction retains the aggregationFunction query parameter; preserve wire compatibility."
       @query("aggregationFunction")
       aggregationFunction?: AggregationFunctionType;
 
       /**
        * Metric to be used for ranking top queries. Default is 'cpu'
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByManagedInstance.observationMetric retains the observationMetric query parameter; preserve wire compatibility."
       @query("observationMetric")
       observationMetric?: MetricType;
     }

@@ -87,9 +87,11 @@ model AwsRdsDBSnapshotProperties {
   @doc("<p>The identifier for the source DB instance, which can't be changed and which is unique to an Amazon Web Services Region.</p>")
   dbiResourceId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBSnapshotProperties.dedicatedLogVolume has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>")
   dedicatedLogVolume?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBSnapshotProperties.encrypted has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether the DB snapshot is encrypted.</p>")
   encrypted?: boolean;
 
@@ -99,6 +101,7 @@ model AwsRdsDBSnapshotProperties {
   @doc("<p>Specifies the version of the database engine.</p>")
   engineVersion?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBSnapshotProperties.iamDatabaseAuthenticationEnabled has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts is enabled.</p>")
   iamDatabaseAuthenticationEnabled?: boolean;
 
@@ -117,6 +120,7 @@ model AwsRdsDBSnapshotProperties {
   @doc("<p>Provides the master username for the DB snapshot.</p>")
   masterUsername?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBSnapshotProperties.multiTenant has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether the snapshot is of a DB instance using the multi-tenant configuration (TRUE) or the single-tenant configuration (FALSE).</p>")
   multiTenant?: boolean;
 

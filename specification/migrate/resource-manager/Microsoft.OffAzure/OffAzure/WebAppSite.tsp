@@ -135,24 +135,28 @@ interface WebAppSites {
       /**
        * filter query
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByWebAppSite.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
 
       /**
        * page size  query
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByWebAppSite.top retains the top query parameter; preserve wire compatibility."
       @query("top")
       top?: string;
 
       /**
        * Optional parameter for continuation token.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByWebAppSite.continuationToken retains the continuationToken query parameter; preserve wire compatibility."
       @query("continuationToken")
       continuationToken?: string;
 
       /**
        * Total count of machines in the given site.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByWebAppSite.totalRecordCount retains the totalRecordCount query parameter; preserve wire compatibility."
       @query("totalRecordCount")
       totalRecordCount?: int32;
     }
@@ -173,24 +177,28 @@ interface WebAppSites {
       /**
        * filter query
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing webServersControllerListByWebAppSite.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
 
       /**
        * page size  query
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing webServersControllerListByWebAppSite.top retains the top query parameter; preserve wire compatibility."
       @query("top")
       top?: string;
 
       /**
        * Optional parameter for continuation token.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing webServersControllerListByWebAppSite.continuationToken retains the continuationToken query parameter; preserve wire compatibility."
       @query("continuationToken")
       continuationToken?: string;
 
       /**
        * Total count of machines in the given site.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing webServersControllerListByWebAppSite.totalRecordCount retains the totalRecordCount query parameter; preserve wire compatibility."
       @query("totalRecordCount")
       totalRecordCount?: int32;
     }

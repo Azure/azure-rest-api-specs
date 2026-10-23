@@ -407,6 +407,7 @@ model MosaicSearchQueryParameters {
   /**
    * Return as soon as the geometry is fully covered (defaults to True).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MosaicSearchQueryParameters.exitWhenFull has a boolean wire value; preserve the published property contract."
   @query("exitwhenfull")
   exitWhenFull?: boolean;
 
@@ -414,6 +415,7 @@ model MosaicSearchQueryParameters {
    * Skip any items that would show up completely under the previous items (defaults
    * to True).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MosaicSearchQueryParameters.skipCovered has a boolean wire value; preserve the published property contract."
   @query("skipcovered")
   skipCovered?: boolean;
 }

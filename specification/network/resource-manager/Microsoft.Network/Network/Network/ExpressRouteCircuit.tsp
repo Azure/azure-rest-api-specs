@@ -104,6 +104,7 @@ interface ExpressRouteCircuits {
   /**
    * Gets all the stats from an express route circuit in a resource group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getStats retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ExpressRouteCircuitStats")
   @get
   @action("stats")
@@ -139,6 +140,7 @@ interface ExpressRouteCircuits {
        * Fetch only the latest tests.
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getCircuitLinkFailoverAllTestsDetails POST contract uses fetchLatest in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getCircuitLinkFailoverAllTestsDetails.fetchLatest has a boolean wire value; preserve the published property contract."
       @query("fetchLatest")
       fetchLatest?: boolean;
     },

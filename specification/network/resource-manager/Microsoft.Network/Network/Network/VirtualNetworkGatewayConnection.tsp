@@ -130,6 +130,7 @@ interface VirtualNetworkGatewayConnections {
   /**
    * The Get VirtualNetworkGatewayConnectionSharedKey operation retrieves information about the specified virtual network gateway connection shared key through Network resource provider.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getSharedKey retains its response and SDK paging behavior; preserve published compatibility."
   @tag("VirtualNetworkGatewayConnections")
   @get
   @action("sharedkey")

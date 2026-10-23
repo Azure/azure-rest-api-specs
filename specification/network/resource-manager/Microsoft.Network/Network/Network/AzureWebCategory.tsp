@@ -53,6 +53,7 @@ interface AzureWebCategories {
       /**
        * Expands resourceIds back referenced by the azureWebCategory resource.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },

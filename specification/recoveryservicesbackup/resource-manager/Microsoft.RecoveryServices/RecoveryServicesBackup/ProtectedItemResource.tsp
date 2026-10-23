@@ -50,6 +50,7 @@ interface ProtectedItems {
       /**
        * OData filter options.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$filter retains the $filter query parameter; preserve wire compatibility."
       @query("$filter")
       $filter?: string;
     }

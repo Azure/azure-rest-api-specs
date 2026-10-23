@@ -35,6 +35,7 @@ interface ContainerAppsRevisionReplicas {
   /**
    * List replicas for a Container App Revision.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listReplicas retains its response and SDK paging behavior; preserve published compatibility."
   @summary("List replicas for a Container App Revision.")
   listReplicas is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     Replica,

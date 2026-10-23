@@ -29,6 +29,7 @@ alias VirtualNetworkId = Azure.Core.armResourceIdentifier<[
 /** A reusable query option to force delete a resource. */
 model QueryForceDelete {
   /** Forces the resource to be deleted. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing QueryForceDelete.force retains the force query parameter; preserve wire compatibility."
   @query("force")
   force?: ForceDelete;
 }

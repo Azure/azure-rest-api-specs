@@ -74,6 +74,7 @@ model BackupPolicyProperties {
   /**
    * The property to decide policy is enabled or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BackupPolicyProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -110,6 +111,7 @@ model VolumeBackups {
   /**
    * Policy enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VolumeBackups.policyEnabled has a boolean wire value; preserve the published property contract."
   policyEnabled?: boolean;
 }
 

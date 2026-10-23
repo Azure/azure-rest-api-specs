@@ -6,6 +6,7 @@ namespace Azure.AI.Projects;
 
 alias IncludeCoordinatesTrait = {
   /** The include coordinates query parameter. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IncludeCoordinatesTrait.includeCoordinates has a boolean wire value; preserve the published property contract."
   @query("includeCoordinates")
   @doc("Whether to include coordinates for visualization in the response. Defaults to false.")
   includeCoordinates?: boolean;

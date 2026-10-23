@@ -104,6 +104,7 @@ interface Machines {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: InstanceViewTypes;
     }
@@ -120,6 +121,7 @@ interface Machines {
       /**
        * Expands referenced resources.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing createOrUpdate.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -152,6 +154,7 @@ interface Machines {
       /**
        * Expands referenced resources.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -213,6 +216,7 @@ interface Machines {
   /**
    * The operation to get network information of hybrid machine
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing networkProfileGet retains its response and SDK paging behavior; preserve published compatibility."
   @tag("MachineNetworkProfile")
   @get
   @action("networkProfile")

@@ -89,6 +89,8 @@ interface StaticSiteUserProvidedFunctionAppARMResources {
       /**
        * Specify <code>true</code> to force the update of the auth configuration on the function app even if an AzureStaticWebApps provider is already configured on the function app. The default is <code>false</code>.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing registerUserProvidedFunctionAppWithStaticSiteBuild.isForced has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing registerUserProvidedFunctionAppWithStaticSiteBuild.isForced retains the isForced query parameter; preserve wire compatibility."
       @query("isForced")
       isForced?: boolean;
     },
@@ -171,6 +173,8 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
       /**
        * Specify <code>true</code> to force the update of the auth configuration on the function app even if an AzureStaticWebApps provider is already configured on the function app. The default is <code>false</code>.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing registerUserProvidedFunctionAppWithStaticSite.isForced has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing registerUserProvidedFunctionAppWithStaticSite.isForced retains the isForced query parameter; preserve wire compatibility."
       @query("isForced")
       isForced?: boolean;
     },

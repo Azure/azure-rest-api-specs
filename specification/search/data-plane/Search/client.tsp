@@ -47,6 +47,7 @@ namespace SearchClient {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing searchGet SDK method name; renaming it would break client compatibility."
   op searchGet is Search.Documents.searchGet;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -59,6 +60,7 @@ namespace SearchClient {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing suggestGet SDK method name; renaming it would break client compatibility."
   op suggestGet is Search.Documents.suggestGet;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -71,6 +73,7 @@ namespace SearchClient {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing autocompleteGet SDK method name; renaming it would break client compatibility."
   op autocompleteGet is Search.Documents.autocompleteGet;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"

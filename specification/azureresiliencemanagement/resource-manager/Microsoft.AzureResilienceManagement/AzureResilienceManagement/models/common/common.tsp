@@ -58,12 +58,14 @@ model QueryParameters {
   /**
    * Skip over when retrieving results.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing QueryParameters.skipToken retains the $skipToken query parameter; preserve wire compatibility."
   @query("$skipToken")
   skipToken?: string;
 
   /**
    * Number of elements to return when retrieving results.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing QueryParameters.top retains the $top query parameter; preserve wire compatibility."
   @maxValue(100)
   @minValue(1)
   @query("$top")

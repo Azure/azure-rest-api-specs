@@ -181,6 +181,7 @@ model Observation extends DomainResource {
   @doc("Actual result")
   valueString?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Observation.valueBoolean has a boolean wire value; preserve the published property contract."
   @doc("Actual result")
   valueBoolean?: boolean;
 

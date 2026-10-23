@@ -408,6 +408,7 @@ model OperationResourceMetricSpecification {
   /**
    * Fill gaps in the metric with zero.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OperationResourceMetricSpecification.fillGapWithZero has a boolean wire value; preserve the published property contract."
   fillGapWithZero?: boolean;
 
   /**
@@ -439,6 +440,7 @@ model OperationResourceMetricSpecificationDimension {
   /**
    * Indicates metric should be exported for Shoebox.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OperationResourceMetricSpecificationDimension.toBeExportedForShoebox has a boolean wire value; preserve the published property contract."
   toBeExportedForShoebox?: boolean;
 }
 
@@ -585,6 +587,7 @@ model CheckNameAvailabilityResult {
   /**
    * Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or invalid and cannot be used.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
@@ -630,6 +633,7 @@ model StorageSyncServiceCreateParametersProperties {
   /**
    * Use Identity authorization when customer have finished setup RBAC permissions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageSyncServiceCreateParametersProperties.useIdentity has a boolean wire value; preserve the published property contract."
   useIdentity?: boolean;
 }
 
@@ -664,6 +668,7 @@ model StorageSyncServiceProperties {
   /**
    * Use Identity authorization when customer have finished setup RBAC permissions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageSyncServiceProperties.useIdentity has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   useIdentity?: boolean;
 
@@ -720,6 +725,7 @@ model StorageSyncServiceUpdateProperties {
   /**
    * Use Identity authorization when customer have finished setup RBAC permissions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageSyncServiceUpdateProperties.useIdentity has a boolean wire value; preserve the published property contract."
   useIdentity?: boolean;
 }
 
@@ -1203,6 +1209,7 @@ model RestoreFileSpec {
   /**
    * Restore file spec isdir
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RestoreFileSpec.isdir has a boolean wire value; preserve the published property contract."
   isdir?: boolean;
 }
 
@@ -1748,6 +1755,7 @@ model ServerEndpointSyncActivityStatus {
   /**
    * Whether the remaining counts are final
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServerEndpointSyncActivityStatus.isRemainingFinal has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_12_01)
   @visibility(Lifecycle.Read)
   isRemainingFinal?: boolean;
@@ -2468,6 +2476,7 @@ model RegisteredServerProperties {
   /**
    * Apply server with newly discovered ApplicationId if available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RegisteredServerProperties.identity has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   identity?: boolean;
 
@@ -2553,6 +2562,7 @@ model RegisteredServerCreateParametersProperties {
   /**
    * Apply server with newly discovered ApplicationId if available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RegisteredServerCreateParametersProperties.identity has a boolean wire value; preserve the published property contract."
   identity?: boolean;
 }
 
@@ -2575,6 +2585,7 @@ model RegisteredServerUpdateProperties {
   /**
    * Apply server with newly discovered ApplicationId if available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RegisteredServerUpdateProperties.identity has a boolean wire value; preserve the published property contract."
   identity?: boolean;
 
   /**
@@ -2760,6 +2771,7 @@ model SubscriptionState {
   /**
    * Is Transitioning
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SubscriptionState.istransitioning has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   istransitioning?: boolean;
 

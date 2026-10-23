@@ -58,6 +58,7 @@ interface Agreements {
       /**
        * May be used to expand the participants.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.expand retains the expand query parameter; preserve wire compatibility."
       @query("expand")
       expand?: string;
     },

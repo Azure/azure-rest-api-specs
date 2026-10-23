@@ -641,6 +641,7 @@ model DeviceCapabilities {
   /**
    * If set to true, this device is an IoTEdge device.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeviceCapabilities.iotEdge has a boolean wire value; preserve the published property contract."
   iotEdge: boolean = false;
 }
 
@@ -679,6 +680,7 @@ model ReprovisionPolicy {
    * requests beyond the first from a given device. If set to false, the device will
    * stay assigned to its current IoT hub.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ReprovisionPolicy.updateHubAssignment has a boolean wire value; preserve the published property contract."
   updateHubAssignment: boolean = true;
 
   /**
@@ -688,6 +690,7 @@ model ReprovisionPolicy {
    * Provisioning Service will reset the device's data to the initial desired
    * configuration stored in the corresponding enrollment list.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ReprovisionPolicy.migrateDeviceData has a boolean wire value; preserve the published property contract."
   migrateDeviceData: boolean = true;
 }
 
@@ -978,6 +981,7 @@ model BulkEnrollmentOperationResult {
   /**
    * Indicates if the operation was successful in its entirety.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BulkEnrollmentOperationResult.isSuccessful has a boolean wire value; preserve the published property contract."
   isSuccessful: boolean;
 }
 
@@ -1054,6 +1058,7 @@ model BulkEnrollmentGroupOperationResult {
   /**
    * Indicates if the operation was successful in its entirety.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BulkEnrollmentGroupOperationResult.isSuccessful has a boolean wire value; preserve the published property contract."
   isSuccessful: boolean;
 }
 

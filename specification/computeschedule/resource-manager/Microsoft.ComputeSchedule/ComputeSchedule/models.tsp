@@ -722,6 +722,7 @@ model ExecuteDeleteRequest {
   @doc("CorrelationId item")
   correlationid?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExecuteDeleteRequest.forceDeletion has a boolean wire value; preserve the published property contract."
   @doc("Forced delete resource item")
   forceDeletion?: boolean;
 }

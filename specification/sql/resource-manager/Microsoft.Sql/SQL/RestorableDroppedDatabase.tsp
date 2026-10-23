@@ -57,12 +57,14 @@ interface RestorableDroppedDatabases {
       /**
        * The child resources to include in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       /**
        * An OData filter expression that filters elements in the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$filter retains the $filter query parameter; preserve wire compatibility."
       @query("$filter")
       $filter?: string;
     }
@@ -77,6 +79,7 @@ interface RestorableDroppedDatabases {
       /**
        * An opaque token that identifies a starting point in the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByServer.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       @added(Versions.v2026_08_01_preview)
       $skiptoken?: string;
@@ -84,6 +87,7 @@ interface RestorableDroppedDatabases {
       /**
        * The number of elements to return from the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByServer.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       @added(Versions.v2026_08_01_preview)
       $top?: int64;

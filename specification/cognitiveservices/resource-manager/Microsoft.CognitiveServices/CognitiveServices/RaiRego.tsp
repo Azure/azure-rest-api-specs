@@ -48,6 +48,7 @@ model RaiRegoListParameters {
   /**
    * The maximum number of reusable Rego artifacts to return. Defaults to 10.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing RaiRegoListParameters.$top retains the $top query parameter; preserve wire compatibility."
   @query("$top")
   @minValue(1)
   $top?: int32 = 10;

@@ -1237,6 +1237,7 @@ model DirectionsRequest {
    * are excluded from the optimized waypoint and their position is considered
    * fixed. Acceptable values are true or false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DirectionsRequest.optimizeWaypointOrder has a boolean wire value; preserve the published property contract."
   optimizeWaypointOrder?: boolean = false;
 
   /**
@@ -1438,6 +1439,7 @@ model VehicleSpec {
    * Whether the vehicle is used for commercial purposes. Commercial vehicles may
    * not be allowed to drive on some roads.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VehicleSpec.isVehicleCommercial has a boolean wire value; preserve the published property contract."
   isVehicleCommercial?: boolean = false;
 
   /**
@@ -1795,12 +1797,14 @@ model SnapToRoadsRequest {
    * The interpolated points will have `isInterpolate:true` in the response which
    * can be used to identify the snapped points from interpolated points.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SnapToRoadsRequest.interpolate has a boolean wire value; preserve the published property contract."
   interpolate?: boolean = false;
 
   /**
    * Specifies whether to include speed limit information for the snapped points in
    * the response. The unit is in kilometers per hour.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SnapToRoadsRequest.includeSpeedLimit has a boolean wire value; preserve the published property contract."
   includeSpeedLimit?: boolean = false;
 
   /**
@@ -1904,6 +1908,7 @@ model SnapToRoadsFeatureProperties {
   /**
    * Identify whether this is the interpolated point.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SnapToRoadsFeatureProperties.isInterpolated has a boolean wire value; preserve the published property contract."
   isInterpolated?: boolean;
 
   /**
@@ -2058,6 +2063,7 @@ model InputRouteRangeProperties {
    * polygon vertices while preserving the shape. The API returns low definition
    * polygon by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing InputRouteRangeProperties.isSimplifiedPolygon has a boolean wire value; preserve the published property contract."
   isSimplifiedPolygon?: boolean = true;
 
   /**

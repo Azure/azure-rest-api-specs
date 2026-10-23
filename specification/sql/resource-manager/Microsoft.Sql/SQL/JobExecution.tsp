@@ -104,42 +104,50 @@ interface JobExecutions {
       /**
        * If specified, only job executions created at or after the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByJob.createTimeMin retains the createTimeMin query parameter; preserve wire compatibility."
       @query("createTimeMin")
       createTimeMin?: utcDateTime;
 
       /**
        * If specified, only job executions created before the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByJob.createTimeMax retains the createTimeMax query parameter; preserve wire compatibility."
       @query("createTimeMax")
       createTimeMax?: utcDateTime;
 
       /**
        * If specified, only job executions completed at or after the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByJob.endTimeMin retains the endTimeMin query parameter; preserve wire compatibility."
       @query("endTimeMin")
       endTimeMin?: utcDateTime;
 
       /**
        * If specified, only job executions completed before the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByJob.endTimeMax retains the endTimeMax query parameter; preserve wire compatibility."
       @query("endTimeMax")
       endTimeMax?: utcDateTime;
 
       /**
        * If specified, only active or only completed job executions are included.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByJob.isActive has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByJob.isActive retains the isActive query parameter; preserve wire compatibility."
       @query("isActive")
       isActive?: boolean;
 
       /**
        * The number of elements in the collection to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByJob.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: int64;
 
       /**
        * The number of elements to return from the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByJob.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int64;
     }
@@ -206,42 +214,50 @@ interface JobStepExecutions {
       /**
        * If specified, only job executions created at or after the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ListByJobExecution.createTimeMin retains the createTimeMin query parameter; preserve wire compatibility."
       @query("createTimeMin")
       createTimeMin?: utcDateTime;
 
       /**
        * If specified, only job executions created before the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ListByJobExecution.createTimeMax retains the createTimeMax query parameter; preserve wire compatibility."
       @query("createTimeMax")
       createTimeMax?: utcDateTime;
 
       /**
        * If specified, only job executions completed at or after the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ListByJobExecution.endTimeMin retains the endTimeMin query parameter; preserve wire compatibility."
       @query("endTimeMin")
       endTimeMin?: utcDateTime;
 
       /**
        * If specified, only job executions completed before the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ListByJobExecution.endTimeMax retains the endTimeMax query parameter; preserve wire compatibility."
       @query("endTimeMax")
       endTimeMax?: utcDateTime;
 
       /**
        * If specified, only active or only completed job executions are included.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ListByJobExecution.isActive has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ListByJobExecution.isActive retains the isActive query parameter; preserve wire compatibility."
       @query("isActive")
       isActive?: boolean;
 
       /**
        * The number of elements in the collection to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ListByJobExecution.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: int64;
 
       /**
        * The number of elements to return from the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ListByJobExecution.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int64;
     }
@@ -314,42 +330,50 @@ interface JobTargetExecutions {
       /**
        * If specified, only job executions created at or after the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ListByStep.createTimeMin retains the createTimeMin query parameter; preserve wire compatibility."
       @query("createTimeMin")
       createTimeMin?: utcDateTime;
 
       /**
        * If specified, only job executions created before the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ListByStep.createTimeMax retains the createTimeMax query parameter; preserve wire compatibility."
       @query("createTimeMax")
       createTimeMax?: utcDateTime;
 
       /**
        * If specified, only job executions completed at or after the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ListByStep.endTimeMin retains the endTimeMin query parameter; preserve wire compatibility."
       @query("endTimeMin")
       endTimeMin?: utcDateTime;
 
       /**
        * If specified, only job executions completed before the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ListByStep.endTimeMax retains the endTimeMax query parameter; preserve wire compatibility."
       @query("endTimeMax")
       endTimeMax?: utcDateTime;
 
       /**
        * If specified, only active or only completed job executions are included.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ListByStep.isActive has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ListByStep.isActive retains the isActive query parameter; preserve wire compatibility."
       @query("isActive")
       isActive?: boolean;
 
       /**
        * The number of elements in the collection to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ListByStep.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: int64;
 
       /**
        * The number of elements to return from the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ListByStep.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int64;
     }
@@ -369,42 +393,50 @@ interface JobTargetExecutions {
       /**
        * If specified, only job executions created at or after the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByJobExecution.createTimeMin retains the createTimeMin query parameter; preserve wire compatibility."
       @query("createTimeMin")
       createTimeMin?: utcDateTime;
 
       /**
        * If specified, only job executions created before the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByJobExecution.createTimeMax retains the createTimeMax query parameter; preserve wire compatibility."
       @query("createTimeMax")
       createTimeMax?: utcDateTime;
 
       /**
        * If specified, only job executions completed at or after the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByJobExecution.endTimeMin retains the endTimeMin query parameter; preserve wire compatibility."
       @query("endTimeMin")
       endTimeMin?: utcDateTime;
 
       /**
        * If specified, only job executions completed before the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByJobExecution.endTimeMax retains the endTimeMax query parameter; preserve wire compatibility."
       @query("endTimeMax")
       endTimeMax?: utcDateTime;
 
       /**
        * If specified, only active or only completed job executions are included.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByJobExecution.isActive has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByJobExecution.isActive retains the isActive query parameter; preserve wire compatibility."
       @query("isActive")
       isActive?: boolean;
 
       /**
        * The number of elements in the collection to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByJobExecution.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: int64;
 
       /**
        * The number of elements to return from the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByJobExecution.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int64;
     }

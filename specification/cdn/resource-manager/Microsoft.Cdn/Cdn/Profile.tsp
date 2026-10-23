@@ -156,6 +156,7 @@ interface Profiles {
   /**
    * Get log report for AFD profile
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getLogAnalyticsMetrics retains its response and SDK paging behavior; preserve published compatibility."
   @get
   getLogAnalyticsMetrics is ArmResourceActionSync<
     Profile,
@@ -164,43 +165,52 @@ interface Profiles {
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getLogAnalyticsMetrics.metrics retains the metrics query parameter; preserve wire compatibility."
       @query(#{ name: "metrics", explode: true })
       metrics: LogMetric[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getLogAnalyticsMetrics.dateTimeBegin retains the dateTimeBegin query parameter; preserve wire compatibility."
       @query("dateTimeBegin")
       dateTimeBegin: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getLogAnalyticsMetrics.dateTimeEnd retains the dateTimeEnd query parameter; preserve wire compatibility."
       @query("dateTimeEnd")
       dateTimeEnd: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getLogAnalyticsMetrics.granularity retains the granularity query parameter; preserve wire compatibility."
       @query("granularity")
       granularity: LogMetricsGranularity;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getLogAnalyticsMetrics.groupBy retains the groupBy query parameter; preserve wire compatibility."
       @query(#{ name: "groupBy", explode: true })
       groupBy?: LogMetricsGroupBy[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getLogAnalyticsMetrics.continents retains the continents query parameter; preserve wire compatibility."
       @query(#{ name: "continents", explode: true })
       continents?: string[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getLogAnalyticsMetrics.countryOrRegions retains the countryOrRegions query parameter; preserve wire compatibility."
       @query(#{ name: "countryOrRegions", explode: true })
       countryOrRegions?: string[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getLogAnalyticsMetrics.customDomains retains the customDomains query parameter; preserve wire compatibility."
       @query(#{ name: "customDomains", explode: true })
       customDomains: string[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getLogAnalyticsMetrics.protocols retains the protocols query parameter; preserve wire compatibility."
       @query(#{ name: "protocols", explode: true })
       protocols: string[];
     }
@@ -209,6 +219,7 @@ interface Profiles {
   /**
    * Get log analytics ranking report for AFD profile
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getLogAnalyticsRankings retains its response and SDK paging behavior; preserve published compatibility."
   @get
   getLogAnalyticsRankings is ArmResourceActionSync<
     Profile,
@@ -217,28 +228,34 @@ interface Profiles {
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getLogAnalyticsRankings.rankings retains the rankings query parameter; preserve wire compatibility."
       @query(#{ name: "rankings", explode: true })
       rankings: LogRanking[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getLogAnalyticsRankings.metrics retains the metrics query parameter; preserve wire compatibility."
       @query(#{ name: "metrics", explode: true })
       metrics: LogRankingMetric[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getLogAnalyticsRankings.maxRanking retains the maxRanking query parameter; preserve wire compatibility."
       @query("maxRanking")
       maxRanking: int32;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getLogAnalyticsRankings.dateTimeBegin retains the dateTimeBegin query parameter; preserve wire compatibility."
       @query("dateTimeBegin")
       dateTimeBegin: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getLogAnalyticsRankings.dateTimeEnd retains the dateTimeEnd query parameter; preserve wire compatibility."
       @query("dateTimeEnd")
       dateTimeEnd: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getLogAnalyticsRankings.customDomains retains the customDomains query parameter; preserve wire compatibility."
       @query(#{ name: "customDomains", explode: true })
       customDomains?: string[];
     }
@@ -247,6 +264,7 @@ interface Profiles {
   /**
    * Get all available location names for AFD log analytics report.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getLogAnalyticsLocations retains its response and SDK paging behavior; preserve published compatibility."
   @get
   getLogAnalyticsLocations is ArmResourceActionSync<
     Profile,
@@ -257,6 +275,7 @@ interface Profiles {
   /**
    * Get all endpoints and custom domains available for AFD log report
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getLogAnalyticsResources retains its response and SDK paging behavior; preserve published compatibility."
   @get
   getLogAnalyticsResources is ArmResourceActionSync<
     Profile,
@@ -267,6 +286,7 @@ interface Profiles {
   /**
    * Get Waf related log analytics report for AFD profile.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getWafLogAnalyticsMetrics retains its response and SDK paging behavior; preserve published compatibility."
   @get
   getWafLogAnalyticsMetrics is ArmResourceActionSync<
     Profile,
@@ -275,33 +295,40 @@ interface Profiles {
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWafLogAnalyticsMetrics.metrics retains the metrics query parameter; preserve wire compatibility."
       @query(#{ name: "metrics", explode: true })
       metrics: WafMetric[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWafLogAnalyticsMetrics.dateTimeBegin retains the dateTimeBegin query parameter; preserve wire compatibility."
       @query("dateTimeBegin")
       dateTimeBegin: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWafLogAnalyticsMetrics.dateTimeEnd retains the dateTimeEnd query parameter; preserve wire compatibility."
       @query("dateTimeEnd")
       dateTimeEnd: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWafLogAnalyticsMetrics.granularity retains the granularity query parameter; preserve wire compatibility."
       @query("granularity")
       granularity: WafGranularity;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWafLogAnalyticsMetrics.actions retains the actions query parameter; preserve wire compatibility."
       @query(#{ name: "actions", explode: true })
       actions?: WafAction[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWafLogAnalyticsMetrics.groupBy retains the groupBy query parameter; preserve wire compatibility."
       @query(#{ name: "groupBy", explode: true })
       groupBy?: WafRankingGroupBy[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWafLogAnalyticsMetrics.ruleTypes retains the ruleTypes query parameter; preserve wire compatibility."
       @query(#{ name: "ruleTypes", explode: true })
       ruleTypes?: WafRuleType[];
     }
@@ -310,6 +337,7 @@ interface Profiles {
   /**
    * Get WAF log analytics charts for AFD profile
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getWafLogAnalyticsRankings retains its response and SDK paging behavior; preserve published compatibility."
   @get
   getWafLogAnalyticsRankings is ArmResourceActionSync<
     Profile,
@@ -318,33 +346,40 @@ interface Profiles {
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWafLogAnalyticsRankings.metrics retains the metrics query parameter; preserve wire compatibility."
       @query(#{ name: "metrics", explode: true })
       metrics: WafMetric[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWafLogAnalyticsRankings.dateTimeBegin retains the dateTimeBegin query parameter; preserve wire compatibility."
       @query("dateTimeBegin")
       dateTimeBegin: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWafLogAnalyticsRankings.dateTimeEnd retains the dateTimeEnd query parameter; preserve wire compatibility."
       @query("dateTimeEnd")
       dateTimeEnd: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWafLogAnalyticsRankings.maxRanking retains the maxRanking query parameter; preserve wire compatibility."
       @query("maxRanking")
       maxRanking: int32;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWafLogAnalyticsRankings.rankings retains the rankings query parameter; preserve wire compatibility."
       @query(#{ name: "rankings", explode: true })
       rankings: WafRankingType[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWafLogAnalyticsRankings.actions retains the actions query parameter; preserve wire compatibility."
       @query(#{ name: "actions", explode: true })
       actions?: WafAction[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWafLogAnalyticsRankings.ruleTypes retains the ruleTypes query parameter; preserve wire compatibility."
       @query(#{ name: "ruleTypes", explode: true })
       ruleTypes?: WafRuleType[];
     }

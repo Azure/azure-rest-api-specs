@@ -68,6 +68,7 @@ interface Jobs {
    * Retrieve the job output identified by job name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getOutput retains its response and SDK paging behavior; preserve published compatibility."
   @tag("Job")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   @get
@@ -76,6 +77,7 @@ interface Jobs {
     Job,
     void,
     {
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing getOutput.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "text/plain";
 
@@ -96,6 +98,7 @@ interface Jobs {
    * Retrieve the runbook content of the job identified by job name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getRunbookContent retains its response and SDK paging behavior; preserve published compatibility."
   @tag("Job")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   @get
@@ -104,6 +107,7 @@ interface Jobs {
     Job,
     void,
     {
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing getRunbookContent.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "text/powershell";
 

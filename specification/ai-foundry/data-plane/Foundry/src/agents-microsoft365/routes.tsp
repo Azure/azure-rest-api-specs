@@ -66,6 +66,7 @@ interface Microsoft365Publishing {
       /**
        * When true, returns defaults for publishing the agent as an autopilot (digital worker) agent.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getMicrosoft365PublishDefaults.publishAsDigitalWorker has a boolean wire value; preserve the published property contract."
       @query publishAsDigitalWorker?: boolean = false;
     },
     Microsoft365PublishDefaults

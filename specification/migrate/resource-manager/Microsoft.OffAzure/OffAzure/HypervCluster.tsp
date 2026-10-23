@@ -58,6 +58,7 @@ interface HypervClusters {
       /**
        * filter query
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByHypervSite.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
     }

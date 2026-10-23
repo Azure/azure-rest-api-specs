@@ -56,6 +56,7 @@ interface QuotaRequestStatus {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -63,6 +64,7 @@ interface QuotaRequestStatus {
       /**
        * The **Skiptoken** parameter is used only if a previous operation returned a partial result. If a previous response contains a **nextLink** element, its value includes a **skiptoken** parameter that specifies a starting point to use for subsequent calls.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: string;
     },

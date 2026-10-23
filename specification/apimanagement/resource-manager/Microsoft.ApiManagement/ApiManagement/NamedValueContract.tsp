@@ -178,6 +178,7 @@ interface NamedValueContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -185,6 +186,7 @@ interface NamedValueContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -192,6 +194,8 @@ interface NamedValueContracts {
       /**
        * When set to true, the response contains only named value entities which failed refresh.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByService.isKeyVaultRefreshFailed has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.isKeyVaultRefreshFailed retains the isKeyVaultRefreshFailed query parameter; preserve wire compatibility."
       @query("isKeyVaultRefreshFailed")
       isKeyVaultRefreshFailed?: boolean;
     },
@@ -391,6 +395,7 @@ interface WorkspaceNamedValue {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -398,6 +403,7 @@ interface WorkspaceNamedValue {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -405,6 +411,7 @@ interface WorkspaceNamedValue {
       /**
        * Query parameter to fetch named value entities based on refresh status.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.isKeyVaultRefreshFailed retains the isKeyVaultRefreshFailed query parameter; preserve wire compatibility."
       @query("isKeyVaultRefreshFailed")
       isKeyVaultRefreshFailed?: KeyVaultRefreshState;
     },

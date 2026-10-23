@@ -198,6 +198,7 @@ model StatefulServiceProperties extends ServiceResourceProperties {
   /**
    * A flag indicating whether this is a persistent service which stores states on the local disk. If it is then the value of this property is true, if not it is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StatefulServiceProperties.hasPersistedState has a boolean wire value; preserve the published property contract."
   hasPersistedState?: boolean;
 
   /**
@@ -678,6 +679,7 @@ model AverageServiceLoadScalingTrigger extends ScalingTrigger {
   /**
    * Flag determines whether only the load of primary replica should be considered for scaling. If set to true, then trigger will only consider the load of primary replicas of stateful service. If set to false, trigger will consider load of all replicas. This parameter cannot be set to true for stateless service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AverageServiceLoadScalingTrigger.useOnlyPrimaryLoad has a boolean wire value; preserve the published property contract."
   useOnlyPrimaryLoad: boolean;
 
   /**
@@ -847,6 +849,7 @@ model RestartReplicaRequest {
   /**
    * If true, the restart operation will be forced. Use this option with care, as it may cause data loss.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RestartReplicaRequest.forceRestart has a boolean wire value; preserve the published property contract."
   forceRestart?: boolean;
 
   /**

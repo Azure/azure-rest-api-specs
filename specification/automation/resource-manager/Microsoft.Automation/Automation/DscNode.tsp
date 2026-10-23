@@ -71,18 +71,21 @@ interface DscNodes {
       /**
        * The number of rows to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByAutomationAccount.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: int32;
 
       /**
        * The number of rows to take.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByAutomationAccount.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * Return total rows.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByAutomationAccount.$inlinecount retains the $inlinecount query parameter; preserve wire compatibility."
       @query("$inlinecount")
       $inlinecount?: string;
     },
@@ -136,6 +139,7 @@ interface DscNodes {
    * Retrieve the Dsc node reports by node id and report id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getContent retains its response and SDK paging behavior; preserve published compatibility."
   @tag("NodeReports")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodereportoperations")
   @get
@@ -144,6 +148,7 @@ interface DscNodes {
     DscNode,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DscNode>,
     Response = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing getContent.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "text/plain";
 

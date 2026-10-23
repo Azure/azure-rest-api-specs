@@ -46,6 +46,7 @@ interface VirtualMachines {
       /**
        * Specify the $expand query. Example: 'properties($expand=artifacts,computeVm,networkInterface,applicableSchedule)'
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -95,6 +96,7 @@ interface VirtualMachines {
       /**
        * Specify the $expand query. Example: 'properties($expand=artifacts,computeVm,networkInterface,applicableSchedule)'
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
@@ -107,12 +109,14 @@ interface VirtualMachines {
       /**
        * The maximum number of resources to return from the operation. Example: '$top=10'
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * The ordering expression for the results, using OData notation. Example: '$orderby=name desc'
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$orderby retains the $orderby query parameter; preserve wire compatibility."
       @query("$orderby")
       $orderby?: string;
     },

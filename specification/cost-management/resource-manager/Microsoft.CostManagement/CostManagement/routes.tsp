@@ -79,12 +79,14 @@ interface BenefitRecommendationsOperationGroup {
     /**
      * May be used to order the recommendations by: properties/armSkuName. For the savings plan, the results are in order by default. There is no need to use this clause.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$orderby retains the $orderby query parameter; preserve wire compatibility."
     @query("$orderby")
     $orderby?: string,
 
     /**
      * May be used to expand the properties by: properties/usage, properties/allRecommendationDetails
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
     @query("$expand")
     $expand?: string,
 
@@ -134,12 +136,14 @@ interface BenefitUtilizationSummariesOperationGroup {
     /**
      * Grain.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccountId.grainParameter retains the grainParameter query parameter; preserve wire compatibility."
     @query("grainParameter")
     grainParameter?: GrainParameter,
 
     /**
      * Supports filtering by properties/benefitId, properties/benefitOrderId and properties/usageDate.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccountId.filter retains the filter query parameter; preserve wire compatibility."
     @query("filter")
     filter?: string,
   ): ArmResponse<BenefitUtilizationSummariesListResult> | ErrorResponse;
@@ -185,12 +189,14 @@ interface BenefitUtilizationSummariesOperationGroup {
     /**
      * Grain.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfileId.grainParameter retains the grainParameter query parameter; preserve wire compatibility."
     @query("grainParameter")
     grainParameter?: GrainParameter,
 
     /**
      * Supports filtering by properties/benefitId, properties/benefitOrderId and properties/usageDate.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfileId.filter retains the filter query parameter; preserve wire compatibility."
     @query("filter")
     filter?: string,
   ): ArmResponse<BenefitUtilizationSummariesListResult> | ErrorResponse;
@@ -220,6 +226,7 @@ interface BenefitUtilizationSummariesOperationGroup {
     /**
      * Grain.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySavingsPlanOrder.grainParameter retains the grainParameter query parameter; preserve wire compatibility."
     @query("grainParameter")
     grainParameter?: GrainParameter,
 
@@ -263,6 +270,7 @@ interface BenefitUtilizationSummariesOperationGroup {
     /**
      * Grain.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySavingsPlanId.grainParameter retains the grainParameter query parameter; preserve wire compatibility."
     @query("grainParameter")
     grainParameter?: GrainParameter,
 
@@ -619,6 +627,7 @@ interface AlertsOperationGroup {
    * Lists the Alerts for external cloud provider type defined.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listExternal retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("Alerts_ListExternal")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   @autoRoute
@@ -746,18 +755,21 @@ interface DimensionsOperationGroup {
     /**
      * May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
     @query("$expand")
     $expand?: string,
 
     /**
      * Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
     @query("$skiptoken")
     $skiptoken?: string,
 
     /**
      * May be used to limit the number of results to the most recent N dimension data.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
     @maxValue(1000)
     @minValue(1)
     @query("$top")
@@ -768,6 +780,7 @@ interface DimensionsOperationGroup {
    * Lists the dimensions by the external cloud provider type.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing byExternalCloudProviderType SDK method name; renaming it would break client compatibility."
   @operationId("Dimensions_ByExternalCloudProviderType")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   @autoRoute
@@ -798,18 +811,21 @@ interface DimensionsOperationGroup {
       /**
        * May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing byExternalCloudProviderType.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       /**
        * Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing byExternalCloudProviderType.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: string;
 
       /**
        * May be used to limit the number of results to the most recent N dimension data.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing byExternalCloudProviderType.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @minValue(1)
       @query("$top")

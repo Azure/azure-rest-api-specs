@@ -112,6 +112,7 @@ interface ManagedHsms {
       /**
        * Maximum number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -127,6 +128,7 @@ interface ManagedHsms {
       /**
        * Maximum number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -137,6 +139,7 @@ interface ManagedHsms {
    * Gets the private link resources supported for the managed hsm pool.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByMHSMResource retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("privateLinkResources")
   listByMHSMResource is ArmResourceActionSync<

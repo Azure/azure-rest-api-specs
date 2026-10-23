@@ -64,6 +64,7 @@ interface Databases {
       /**
        * By default, any user who run operation on a database become an Admin on it. This property allows the caller to exclude the caller from Admins list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing createOrUpdate.callerRole retains the callerRole query parameter; preserve wire compatibility."
       @query("callerRole")
       callerRole?: CallerRole = CallerRole.Admin;
     },
@@ -94,6 +95,7 @@ interface Databases {
       /**
        * By default, any user who run operation on a database become an Admin on it. This property allows the caller to exclude the caller from Admins list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing update.callerRole retains the callerRole query parameter; preserve wire compatibility."
       @query("callerRole")
       callerRole?: CallerRole = CallerRole.Admin;
     },
@@ -138,6 +140,7 @@ interface Databases {
       /**
        * limit the number of results
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByCluster.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @minValue(5)
       @query("$top")
@@ -146,6 +149,7 @@ interface Databases {
       /**
        * Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByCluster.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: string;
     }

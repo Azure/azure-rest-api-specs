@@ -97,6 +97,7 @@ interface DataBoxEdgeDevices {
       /**
        * Specify $expand=details to populate additional fields related to the resource or Specify $skipToken=<token> to populate the next page in the list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -113,6 +114,7 @@ interface DataBoxEdgeDevices {
       /**
        * Specify $expand=details to populate additional fields related to the resource or Specify $skipToken=<token> to populate the next page in the list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },

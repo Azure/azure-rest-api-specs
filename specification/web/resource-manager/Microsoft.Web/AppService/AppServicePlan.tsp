@@ -183,6 +183,8 @@ interface AppServicePlans {
        * Specify <code>true</code> to return all App Service plan properties. The default is <code>false</code>, which returns a subset of the properties.
        *  Retrieval of all properties may increase the API latency.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.detailed has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.detailed retains the detailed query parameter; preserve wire compatibility."
       @query("detailed")
       detailed?: boolean;
     },
@@ -193,6 +195,7 @@ interface AppServicePlans {
   /**
    * Description for List all capabilities of an App Service plan.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listCapabilities retains its response and SDK paging behavior; preserve published compatibility."
   @summary("List all capabilities of an App Service plan.")
   @get
   @action("capabilities")
@@ -231,6 +234,7 @@ interface AppServicePlans {
        * Specify <code>true</code> to perform a soft restart, applies the configuration settings and restarts the apps if necessary. The default is <code>false</code>, which always restarts and reprovisions the apps
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing restartWebApps POST contract uses softRestart in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing restartWebApps.softRestart has a boolean wire value; preserve the published property contract."
       @query("softRestart")
       softRestart?: boolean;
     },
@@ -278,6 +282,7 @@ interface AppServicePlans {
       /**
        * Skip to a web app in the list of webapps associated with app service plan. If specified, the resulting list will contain web apps starting from (including) the skipToken. Otherwise, the resulting list contains web apps from the start of the list
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listWebApps.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
 
@@ -290,6 +295,7 @@ interface AppServicePlans {
       /**
        * List page size. If specified, results are paged.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listWebApps.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: string;
     },
@@ -299,6 +305,7 @@ interface AppServicePlans {
   /**
    * Description for Gets all selectable SKUs for a given App Service Plan
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getServerFarmSkus retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets all selectable SKUs for a given App Service Plan")
   @get
   @action("skus")

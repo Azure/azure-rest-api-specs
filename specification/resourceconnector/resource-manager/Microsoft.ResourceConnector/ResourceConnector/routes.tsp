@@ -17,6 +17,7 @@ interface AppliancesOperationGroup {
   /**
    * Gets the telemetry config.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getTelemetryConfig retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the telemetry config.")
   @autoRoute
   @get

@@ -106,6 +106,7 @@ interface Zones {
       /**
        * The maximum number of record sets to return. If not specified, returns up to 100 record sets.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -122,6 +123,7 @@ interface Zones {
       /**
        * The maximum number of DNS zones to return. If not specified, returns up to 100 zones.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -143,12 +145,14 @@ interface Zones {
       /**
        * The maximum number of record sets to return. If not specified, returns up to 100 record sets.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByDnsZone.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByDnsZone.$recordsetnamesuffix retains the $recordsetnamesuffix query parameter; preserve wire compatibility."
       @query("$recordsetnamesuffix")
       $recordsetnamesuffix?: string;
     },
@@ -170,12 +174,14 @@ interface Zones {
       /**
        * The maximum number of record sets to return. If not specified, returns up to 100 record sets.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAllByDnsZone.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAllByDnsZone.recordSetNameSuffix retains the $recordsetnamesuffix query parameter; preserve wire compatibility."
       @query("$recordsetnamesuffix")
       recordSetNameSuffix?: string;
     },

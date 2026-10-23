@@ -494,6 +494,7 @@ model LdapConfiguration {
    * Specifies whether or not the LDAP traffic needs to be secured via TLS.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LdapConfiguration.ldapOverTLS has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_06_15_preview)
   ldapOverTLS?: boolean;
 
@@ -756,11 +757,13 @@ model ActiveDirectory {
   /**
    * If enabled, AES encryption will be enabled for SMB communication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActiveDirectory.aesEncryption has a boolean wire value; preserve the published property contract."
   aesEncryption?: boolean;
 
   /**
    * Specifies whether or not the LDAP traffic needs to be signed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActiveDirectory.ldapSigning has a boolean wire value; preserve the published property contract."
   ldapSigning?: boolean;
 
   /**
@@ -772,17 +775,20 @@ model ActiveDirectory {
    * Specifies whether or not the LDAP traffic needs to be secured via TLS.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActiveDirectory.ldapOverTLS has a boolean wire value; preserve the published property contract."
   ldapOverTLS?: boolean;
 
   /**
    *  If enabled, NFS client local users can also (in addition to LDAP users) access the NFS volumes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActiveDirectory.allowLocalNfsUsersWithLdap has a boolean wire value; preserve the published property contract."
   allowLocalNfsUsersWithLdap?: boolean;
 
   /**
    * If enabled, Traffic between the SMB server to Domain Controller (DC) will be encrypted.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActiveDirectory.encryptDCConnections has a boolean wire value; preserve the published property contract."
   encryptDCConnections?: boolean;
 
   /**

@@ -81,6 +81,7 @@ interface SerialPorts {
   /**
    * Lists all of the configured serial ports for a parent resource
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     SerialPort,
     BaseParameters = ParentResourceParameters,
@@ -91,6 +92,7 @@ interface SerialPorts {
   /**
    * Handles requests to list all SerialPort resources in a subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listBySubscriptions retains its response and SDK paging behavior; preserve published compatibility."
   listBySubscriptions is Azure.ResourceManager.Legacy.ArmListSinglePageBySubscription<
     SerialPort,
     Response = ArmResponse<SerialPortListResult>,

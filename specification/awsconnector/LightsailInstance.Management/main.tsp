@@ -87,6 +87,7 @@ model AwsLightsailInstanceProperties {
   @doc("The names to use for your new Lightsail instance.")
   instanceName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsLightsailInstanceProperties.isStaticIp has a boolean wire value; preserve the published property contract."
   @doc("Is the IP Address of the Instance is the static IP")
   isStaticIp?: boolean;
 
@@ -268,6 +269,7 @@ model Disk {
   @doc("IOPS of disk.")
   iops?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Disk.isSystemDisk has a boolean wire value; preserve the published property contract."
   @doc("Is the Attached disk is the system disk of the Instance.")
   isSystemDisk?: boolean;
 

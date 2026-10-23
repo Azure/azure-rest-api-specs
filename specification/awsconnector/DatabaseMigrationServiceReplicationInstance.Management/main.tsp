@@ -76,6 +76,7 @@ model AwsDatabaseMigrationServiceReplicationInstanceProperties {
   @doc("<p>The amount of storage (in gigabytes) that is allocated for the replication instance.</p>")
   allocatedStorage?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsDatabaseMigrationServiceReplicationInstanceProperties.autoMinorVersionUpgrade has a boolean wire value; preserve the published property contract."
   @doc("<p>Boolean value indicating if minor version upgrades will be automatically applied to the instance.</p>")
   autoMinorVersionUpgrade?: boolean;
 
@@ -97,6 +98,7 @@ model AwsDatabaseMigrationServiceReplicationInstanceProperties {
   @doc("<p>An KMS key identifier that is used to encrypt the data on the replication instance.</p> <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses your default encryption key.</p> <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>")
   kmsKeyId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsDatabaseMigrationServiceReplicationInstanceProperties.multiAZ has a boolean wire value; preserve the published property contract."
   @doc("<p> Specifies whether the replication instance is a Multi-AZ deployment. You can't set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>")
   multiAZ?: boolean;
 
@@ -109,6 +111,7 @@ model AwsDatabaseMigrationServiceReplicationInstanceProperties {
   @doc("<p>The maintenance window times for the replication instance. Any pending upgrades to the replication instance are performed during this time.</p>")
   preferredMaintenanceWindow?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsDatabaseMigrationServiceReplicationInstanceProperties.publiclyAccessible has a boolean wire value; preserve the published property contract."
   @doc("<p> Specifies the accessibility options for the replication instance. A value of <code>true</code> represents an instance with a public IP address. A value of <code>false</code> represents an instance with a private IP address. The default value is <code>true</code>. </p>")
   publiclyAccessible?: boolean;
 
@@ -162,6 +165,7 @@ model ReplicationPendingModifiedValues {
   @doc("<p>The engine version number of the replication instance.</p>")
   engineVersion?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ReplicationPendingModifiedValues.multiAZ has a boolean wire value; preserve the published property contract."
   @doc("<p> Specifies whether the replication instance is a Multi-AZ deployment. You can't set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>")
   multiAZ?: boolean;
 

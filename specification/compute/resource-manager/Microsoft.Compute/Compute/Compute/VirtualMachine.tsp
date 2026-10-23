@@ -84,6 +84,7 @@ interface VirtualMachines {
       /**
        * The expand expression to apply on the operation. 'InstanceView' retrieves a snapshot of the runtime properties of the virtual machine that is managed by the platform and can change outside of control plane operations. 'UserData' retrieves the UserData property as part of the VM model view that was provided by the user during the VM Create/Update operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: InstanceViewTypes;
     }
@@ -149,6 +150,8 @@ interface VirtualMachines {
       /**
        * Optional parameter to force delete virtual machines.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.forceDeletion has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.forceDeletion retains the forceDeletion query parameter; preserve wire compatibility."
       @query("forceDeletion")
       forceDeletion?: boolean;
     }
@@ -169,6 +172,7 @@ interface VirtualMachines {
       /**
        * The expand expression to apply on operation. 'instanceView' enables fetching run time status of all Virtual Machines, this can only be specified if a valid $filter option is specified
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: ExpandTypeForListVMs;
     },
@@ -184,6 +188,7 @@ interface VirtualMachines {
       /**
        * statusOnly=true enables fetching run time status of all Virtual Machines in the subscription.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAll.statusOnly retains the statusOnly query parameter; preserve wire compatibility."
       @query("statusOnly")
       statusOnly?: string;
 
@@ -196,6 +201,7 @@ interface VirtualMachines {
       /**
        * The expand expression to apply on operation. 'instanceView' enables fetching run time status of all Virtual Machines, this can only be specified if a valid $filter option is specified
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAll.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: ExpandTypesForListVMs;
     },
@@ -251,6 +257,7 @@ interface VirtualMachines {
        * Optional parameter to hibernate a virtual machine.
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing deallocate POST contract uses hibernate in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing deallocate.hibernate has a boolean wire value; preserve the published property contract."
       @query("hibernate")
       hibernate?: boolean;
 
@@ -258,6 +265,7 @@ interface VirtualMachines {
        * Optional parameter to force deallocate a virtual machine. Default is false.
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing deallocate POST contract uses forceDeallocate in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing deallocate.forceDeallocate has a boolean wire value; preserve the published property contract."
       @added(Versions.v2025_11_01)
       @query("forceDeallocate")
       forceDeallocate?: boolean;
@@ -283,6 +291,8 @@ interface VirtualMachines {
    * Retrieves information about the run-time state of a virtual machine.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing instanceView retains its response and SDK paging behavior; preserve published compatibility."
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing instanceView SDK method name; renaming it would break client compatibility."
   @get
   instanceView is ComputeResourceActionSync<
     VirtualMachine,
@@ -312,6 +322,7 @@ interface VirtualMachines {
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing powerOff POST contract uses skipShutdown in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing powerOff.skipShutdown has a boolean wire value; preserve the published property contract."
       @query("skipShutdown")
       skipShutdown?: boolean;
     },

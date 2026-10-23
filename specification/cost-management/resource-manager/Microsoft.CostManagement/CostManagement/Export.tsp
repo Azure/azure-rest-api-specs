@@ -71,6 +71,7 @@ interface Exports {
       /**
        * May be used to expand the properties within an export. Currently only 'runHistory' is supported and will return information for the last 10 runs of the export.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -105,6 +106,7 @@ interface Exports {
    * The operation to list all exports at the given scope.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   list is ExportsOps.ListSinglePage<
     Export,
@@ -112,6 +114,7 @@ interface Exports {
       /**
        * May be used to expand the properties within an export. Currently only 'runHistory' is supported and will return information for the last run of each export.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -138,6 +141,7 @@ interface Exports {
    * The operation to get the run history of an export for the defined scope and export name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getExecutionHistory retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("runHistory")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")

@@ -131,6 +131,7 @@ interface EnvironmentDefinitionOperationGroup {
   listByCatalog is EnvironmentDefinitionOperationGroupOps.List<
     EnvironmentDefinition,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByCatalog.$top retains the $top query parameter; preserve wire compatibility."
       @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;

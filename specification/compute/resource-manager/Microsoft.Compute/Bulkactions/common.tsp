@@ -137,6 +137,7 @@ model VirtualMachineReimageParameters {
   /**
    * Indicates whether to reimage the temporary disk. The default value is `false`. This option is supported only for virtual machines or virtual machine scale sets that use an ephemeral operating system disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineReimageParameters.tempDisk has a boolean wire value; preserve the published property contract."
   tempDisk?: boolean;
 
   /**

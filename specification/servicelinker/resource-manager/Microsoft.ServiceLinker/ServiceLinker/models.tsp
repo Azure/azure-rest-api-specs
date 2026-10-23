@@ -944,6 +944,7 @@ model ConfigurationName {
   /**
    * Represent the configuration is required or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConfigurationName.required has a boolean wire value; preserve the published property contract."
   required?: boolean;
 }
 

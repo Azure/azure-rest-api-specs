@@ -174,6 +174,7 @@ model LatestLinkedSaaSResponse {
   @doc("SaaS resource id")
   saaSResourceId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LatestLinkedSaaSResponse.isHiddenSaaS has a boolean wire value; preserve the published property contract."
   @doc("Flag indicating if the SaaS resource is hidden")
   isHiddenSaaS?: boolean;
 }
@@ -1047,14 +1048,17 @@ model BackupOptions {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jobDescription: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BackupOptions.backupCopyImmediately has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether to run backup immediately or not for the VM")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   backupCopyImmediately: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BackupOptions.runSnapShotBackup has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether to run snapshot backup or not for the VM, if false, it will run regular backup")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   runSnapShotBackup: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BackupOptions.notifyUserOnJobCompletion has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether to notify the user on job completion")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   notifyUserOnJobCompletion: boolean;
@@ -1181,6 +1185,7 @@ model VmInfo {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   storageAccountId: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VmInfo.powerOnVmAfterRestore has a boolean wire value; preserve the published property contract."
   @doc("The identifier to check if VM needs to be powered on.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   powerOnVmAfterRestore?: boolean;
@@ -1205,6 +1210,7 @@ model VmInfo {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   subnetId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VmInfo.attachAndSwapOsDisk has a boolean wire value; preserve the published property contract."
   @doc("The identifier to check if to attach and swap disk of the VM.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   attachAndSwapOsDisk?: boolean;
@@ -1238,6 +1244,7 @@ model VmDestinationInfo {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The properties of RestoreProtectionItemRequest")
 model RestoreProtectionItemRequest {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RestoreProtectionItemRequest.inPlaceRestore has a boolean wire value; preserve the published property contract."
   @doc("Check whether inplace or out of place restore.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inPlaceRestore: boolean;

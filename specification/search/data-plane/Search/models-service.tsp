@@ -3283,6 +3283,7 @@ model SearchResourceEncryptionKey {
   identity?: SearchIndexerDataIdentity | null;
 
   /** An optional value indicating whether this key is a service-level key. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchResourceEncryptionKey.isServiceLevelKey has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   isServiceLevelKey?: boolean = false;
@@ -3416,12 +3417,15 @@ model IndexingParametersConfiguration {
   indexedFileNameExtensions?: string = "";
 
   /** For Azure blobs, set to false if you want to continue indexing when an unsupported content type is encountered, and you don't know all the content types (file extensions) in advance. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IndexingParametersConfiguration.failOnUnsupportedContentType has a boolean wire value; preserve the published property contract."
   failOnUnsupportedContentType?: boolean = false;
 
   /** For Azure blobs, set to false if you want to continue indexing if a document fails indexing. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IndexingParametersConfiguration.failOnUnprocessableDocument has a boolean wire value; preserve the published property contract."
   failOnUnprocessableDocument?: boolean = false;
 
   /** For Azure blobs, set this property to true to still index storage metadata for blob content that is too large to process. Oversized blobs are treated as errors by default. For limits on blob size, see https://learn.microsoft.com/azure/search/search-limits-quotas-capacity. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IndexingParametersConfiguration.indexStorageMetadataOnlyForOversizedDocuments has a boolean wire value; preserve the published property contract."
   indexStorageMetadataOnlyForOversizedDocuments?: boolean = false;
 
   /** For CSV blobs, specifies a comma-delimited list of column headers, useful for mapping source fields to destination fields in an index. */
@@ -3431,6 +3435,7 @@ model IndexingParametersConfiguration {
   delimitedTextDelimiter?: string;
 
   /** For CSV blobs, indicates that the first (non-blank) line of each blob contains headers. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IndexingParametersConfiguration.firstLineContainsHeaders has a boolean wire value; preserve the published property contract."
   firstLineContainsHeaders?: boolean = true;
 
   /** Specifies the submode that will determine whether a markdown file will be parsed into exactly one search document or multiple search documents. Default is `oneToMany`. */
@@ -3453,6 +3458,7 @@ model IndexingParametersConfiguration {
   imageAction?: BlobIndexerImageAction = BlobIndexerImageAction.None;
 
   /** If true, will create a path //document//file_data that is an object representing the original file data downloaded from your blob data source. This allows you to pass the original file data to a custom skill for processing within the enrichment pipeline, or to the Document Extraction skill. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IndexingParametersConfiguration.allowSkillsetToReadFileData has a boolean wire value; preserve the published property contract."
   allowSkillsetToReadFileData?: boolean = false;
 
   /** Determines algorithm for text extraction from PDF files in Azure blob storage. */
@@ -3465,6 +3471,7 @@ model IndexingParametersConfiguration {
   queryTimeout?: string = "00:05:00";
 
   /** For ADLS Gen2 data sources that ingest permissions, indicates whether the indexer refreshes the access control lists of documents whose content has not changed. Changing a file's permissions does not change its last-modified time, so without this the index keeps serving stale permissions. The refresh runs at most once every 24 hours, and only updates permission metadata: content and enriched fields are left as they are. Set to false to disable. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IndexingParametersConfiguration.refreshAllAcls has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_10_01)
   refreshAllAcls?: boolean = true;
 }
@@ -4169,24 +4176,31 @@ model SearchField {
   type: SearchFieldDataType;
 
   /** A value indicating whether the field uniquely identifies documents in the index. Exactly one top-level field in each index must be chosen as the key field and it must be of type Edm.String. Key fields can be used to look up documents directly and update or delete specific documents. Default is false for simple fields and null for complex fields. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchField.key has a boolean wire value; preserve the published property contract."
   key?: boolean;
 
   /** A value indicating whether the field can be returned in a search result. You can disable this option if you want to use a field (for example, margin) as a filter, sorting, or scoring mechanism but do not want the field to be visible to the end user. This property must be true for key fields, and it must be null for complex fields. This property can be changed on existing fields. Enabling this property does not cause any increase in index storage requirements. Default is true for simple fields, false for vector fields, and null for complex fields. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchField.retrievable has a boolean wire value; preserve the published property contract."
   retrievable?: boolean;
 
   /** An immutable value indicating whether the field will be persisted separately on disk to be returned in a search result. You can disable this option if you don't plan to return the field contents in a search response to save on storage overhead. This can only be set during index creation and only for vector fields. This property cannot be changed for existing fields or set as false for new fields. If this property is set as false, the property 'retrievable' must also be set to false. This property must be true or unset for key fields, for new fields, and for non-vector fields, and it must be null for complex fields. Disabling this property will reduce index storage requirements. The default is true for vector fields. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchField.stored has a boolean wire value; preserve the published property contract."
   stored?: boolean;
 
   /** A value indicating whether the field is full-text searchable. This means it will undergo analysis such as word-breaking during indexing. If you set a searchable field to a value like "sunny day", internally it will be split into the individual tokens "sunny" and "day". This enables full-text searches for these terms. Fields of type Edm.String or Collection(Edm.String) are searchable by default. This property must be false for simple fields of other non-string data types, and it must be null for complex fields. Note: searchable fields consume extra space in your index to accommodate additional tokenized versions of the field value for full-text searches. If you want to save space in your index and you don't need a field to be included in searches, set searchable to false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchField.searchable has a boolean wire value; preserve the published property contract."
   searchable?: boolean;
 
   /** A value indicating whether to enable the field to be referenced in $filter queries. filterable differs from searchable in how strings are handled. Fields of type Edm.String or Collection(Edm.String) that are filterable do not undergo word-breaking, so comparisons are for exact matches only. For example, if you set such a field f to "sunny day", $filter=f eq 'sunny' will find no matches, but $filter=f eq 'sunny day' will. This property must be null for complex fields. Default is true for simple fields and null for complex fields. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchField.filterable has a boolean wire value; preserve the published property contract."
   filterable?: boolean;
 
   /** A value indicating whether to enable the field to be referenced in $orderby expressions. By default, the search engine sorts results by score, but in many experiences users will want to sort by fields in the documents. A simple field can be sortable only if it is single-valued (it has a single value in the scope of the parent document). Simple collection fields cannot be sortable, since they are multi-valued. Simple sub-fields of complex collections are also multi-valued, and therefore cannot be sortable. This is true whether it's an immediate parent field, or an ancestor field, that's the complex collection. Complex fields cannot be sortable and the sortable property must be null for such fields. The default for sortable is true for single-valued simple fields, false for multi-valued simple fields, and null for complex fields. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchField.sortable has a boolean wire value; preserve the published property contract."
   sortable?: boolean;
 
   /** A value indicating whether to enable the field to be referenced in facet queries. Typically used in a presentation of search results that includes hit count by category (for example, search for digital cameras and see hits by brand, by megapixels, by price, and so on). This property must be null for complex fields. Fields of type Edm.GeographyPoint or Collection(Edm.GeographyPoint) cannot be facetable. Default is true for all other simple fields. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchField.facetable has a boolean wire value; preserve the published property contract."
   facetable?: boolean;
 
   /** A value indicating whether the field should be used as a permission filter. */
@@ -4196,6 +4210,7 @@ model SearchField {
   permissionFilter?: PermissionFilter | null;
 
   /** A value indicating whether the field contains the expiration timestamp for organization-scoped SharePoint sharing links. At most one top-level field of type Edm.DateTimeOffset can have this property set to true. On permission-filtered queries, expiration applies only to orgLink:<tenantId> values in a userIds permission-filter field whose tenant ID matches the validated user's tenant ID. The grant is valid only before the timestamp; an absent expiration field or a null timestamp means no time limit. Expiration does not affect orgGroup:<tenantId> values in groupIds permission-filter fields or ordinary user and group grants. If omitted or false, this field is not used for organization-link expiration. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchField.organizationAccessExpiration has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_10_01)
   organizationAccessExpiration?: boolean;
 
@@ -4205,22 +4220,26 @@ model SearchField {
   sensitivityLabel?: boolean | null;
 
   /** A value indicating whether the field should be used for sensitivity label ID filtering. This enables document-level filtering based on Microsoft Purview sensitivity label IDs. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchField.sensitivityLabelId has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   sensitivityLabelId?: boolean;
 
   /** A value indicating whether the field contains the name of a Microsoft Purview sensitivity label applied to the document. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchField.sensitivityLabelName has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   sensitivityLabelName?: boolean;
 
   /** A value indicating whether the field contains the source document identifier used for Purview audit tracking. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchField.sourceDocumentId has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   sourceDocumentId?: boolean;
 
   /** A value indicating whether the field contains a SharePoint site URL used for SharePoint group-based filtering. */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchField.sharepointSiteUrl has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01_preview)
   sharepointSiteUrl?: boolean;
 
@@ -4413,6 +4432,7 @@ model SemanticConfiguration {
   rankingOrder?: RankingOrder | null;
 
   /** Determines which semantic or query rewrite models to use during model flighting/upgrades. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SemanticConfiguration.flightingOptIn has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -4775,11 +4795,13 @@ model KnowledgeSourceReference {
   name: string;
 
   /** Indicates whether image serving should be enabled for this knowledge source. When true, images extracted during ingestion are delivered to downstream models at query time. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KnowledgeSourceReference.enableImageServing has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   enableImageServing?: boolean;
 
   /** Indicates whether freshness-aware retrieval should be enabled for this knowledge source. When true, a freshness scoring profile is applied during retrieval to bias results toward newer documents. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KnowledgeSourceReference.enableFreshness has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   enableFreshness?: boolean;
@@ -5048,6 +5070,7 @@ model AzureBlobKnowledgeSourceParameters {
 
   /** Set to true if connecting to an ADLS Gen2 storage account. Default is false. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureBlobKnowledgeSourceParameters.isADLSGen2 has a boolean wire value; preserve the published property contract."
   isADLSGen2?: boolean = false;
 
   /** Consolidates all general ingestion settings. */
@@ -5383,6 +5406,7 @@ model WebKnowledgeSourceDomain {
   address: string;
 
   /** Whether or not to include subpages from this domain. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebKnowledgeSourceDomain.includeSubpages has a boolean wire value; preserve the published property contract."
   includeSubpages?: boolean;
 }
 
@@ -5653,6 +5677,7 @@ model McpServerOutputParsingJsonParameters {
   documentsPath: string;
 
   /** Whether to include surrounding context from the JSON output alongside extracted documents. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing McpServerOutputParsingJsonParameters.includeContext has a boolean wire value; preserve the published property contract."
   includeContext?: boolean;
 }
 
@@ -5887,6 +5912,7 @@ model CustomAnalyzer extends LexicalAnalyzer {
 /** Flexibly separates text into terms via a regular expression pattern. This analyzer is implemented using Apache Lucene. */
 model PatternAnalyzer extends LexicalAnalyzer {
   /** A value indicating whether terms should be lower-cased. Default is true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PatternAnalyzer.lowercase has a boolean wire value; preserve the published property contract."
   lowercase?: boolean = true;
 
   /** A regular expression pattern to match token separators. Default is an expression that matches one or more non-word characters. */
@@ -6002,6 +6028,7 @@ model MicrosoftLanguageTokenizer extends LexicalTokenizer {
   maxTokenLength?: int32 = 255;
 
   /** A value indicating how the tokenizer is used. Set to true if used as the search tokenizer, set to false if used as the indexing tokenizer. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MicrosoftLanguageTokenizer.isSearchTokenizer has a boolean wire value; preserve the published property contract."
   isSearchTokenizer?: boolean = false;
 
   /** The language to use. The default is English. */
@@ -6019,6 +6046,7 @@ model MicrosoftLanguageStemmingTokenizer extends LexicalTokenizer {
   maxTokenLength?: int32 = 255;
 
   /** A value indicating how the tokenizer is used. Set to true if used as the search tokenizer, set to false if used as the indexing tokenizer. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MicrosoftLanguageStemmingTokenizer.isSearchTokenizer has a boolean wire value; preserve the published property contract."
   isSearchTokenizer?: boolean = false;
 
   /** The language to use. The default is English. */
@@ -6063,6 +6091,7 @@ model PathHierarchyTokenizerV2 extends LexicalTokenizer {
   maxTokenLength?: int32 = 300;
 
   /** A value indicating whether to generate tokens in reverse order. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PathHierarchyTokenizerV2.reverse has a boolean wire value; preserve the published property contract."
   reverse?: boolean = false;
 
   /** The number of initial tokens to skip. Default is 0. */
@@ -6128,6 +6157,7 @@ model UaxUrlEmailTokenizer extends LexicalTokenizer {
 /** Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the "Basic Latin" Unicode block) into their ASCII equivalents, if such equivalents exist. This token filter is implemented using Apache Lucene. */
 model AsciiFoldingTokenFilter extends TokenFilter {
   /** A value indicating whether the original token will be kept. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AsciiFoldingTokenFilter.preserveOriginal has a boolean wire value; preserve the published property contract."
   preserveOriginal?: boolean = false;
 
   /** A URI fragment specifying the type of token filter. */
@@ -6141,6 +6171,7 @@ model CjkBigramTokenFilter extends TokenFilter {
   ignoreScripts?: CjkBigramTokenFilterScripts[];
 
   /** A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CjkBigramTokenFilter.outputUnigrams has a boolean wire value; preserve the published property contract."
   outputUnigrams?: boolean = false;
 
   /** A URI fragment specifying the type of token filter. */
@@ -6154,9 +6185,11 @@ model CommonGramTokenFilter extends TokenFilter {
   commonWords: string[];
 
   /** A value indicating whether common words matching will be case insensitive. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CommonGramTokenFilter.ignoreCase has a boolean wire value; preserve the published property contract."
   ignoreCase?: boolean = false;
 
   /** A value that indicates whether the token filter is in query mode. When in query mode, the token filter generates bigrams and then removes common words and single terms followed by a common word. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CommonGramTokenFilter.queryMode has a boolean wire value; preserve the published property contract."
   queryMode?: boolean = false;
 
   /** A URI fragment specifying the type of token filter. */
@@ -6182,6 +6215,7 @@ model DictionaryDecompounderTokenFilter extends TokenFilter {
   maxSubwordSize?: int32 = 15;
 
   /** A value indicating whether to add only the longest matching subword to the output. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DictionaryDecompounderTokenFilter.onlyLongestMatch has a boolean wire value; preserve the published property contract."
   onlyLongestMatch?: boolean = false;
 
   /** A URI fragment specifying the type of token filter. */
@@ -6242,6 +6276,7 @@ model KeepTokenFilter extends TokenFilter {
   keepWords: string[];
 
   /** A value indicating whether to lower case all words first. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KeepTokenFilter.keepWordsCase has a boolean wire value; preserve the published property contract."
   keepWordsCase?: boolean = false;
 
   /** A URI fragment specifying the type of token filter. */
@@ -6255,6 +6290,7 @@ model KeywordMarkerTokenFilter extends TokenFilter {
   keywords: string[];
 
   /** A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KeywordMarkerTokenFilter.ignoreCase has a boolean wire value; preserve the published property contract."
   ignoreCase?: boolean = false;
 
   /** A URI fragment specifying the type of token filter. */
@@ -6283,6 +6319,7 @@ model LimitTokenFilter extends TokenFilter {
   maxTokenCount?: int32 = 1;
 
   /** A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LimitTokenFilter.consumeAllTokens has a boolean wire value; preserve the published property contract."
   consumeAllTokens?: boolean = false;
 
   /** A URI fragment specifying the type of token filter. */
@@ -6327,6 +6364,7 @@ model PatternCaptureTokenFilter extends TokenFilter {
   patterns: string[];
 
   /** A value indicating whether to return the original token even if one of the patterns matches. Default is true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PatternCaptureTokenFilter.preserveOriginal has a boolean wire value; preserve the published property contract."
   preserveOriginal?: boolean = true;
 
   /** A URI fragment specifying the type of token filter. */
@@ -6353,6 +6391,7 @@ model PhoneticTokenFilter extends TokenFilter {
   encoder?: PhoneticEncoder = PhoneticEncoder.Metaphone;
 
   /** A value indicating whether encoded tokens should replace original tokens. If false, encoded tokens are added as synonyms. Default is true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PhoneticTokenFilter.replace has a boolean wire value; preserve the published property contract."
   replace?: boolean = true;
 
   /** A URI fragment specifying the type of token filter. */
@@ -6371,9 +6410,11 @@ model ShingleTokenFilter extends TokenFilter {
   minShingleSize?: int32 = 2;
 
   /** A value indicating whether the output stream will contain the input tokens (unigrams) as well as shingles. Default is true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ShingleTokenFilter.outputUnigrams has a boolean wire value; preserve the published property contract."
   outputUnigrams?: boolean = true;
 
   /** A value indicating whether to output unigrams for those times when no shingles are available. This property takes precedence when outputUnigrams is set to false. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ShingleTokenFilter.outputUnigramsIfNoShingles has a boolean wire value; preserve the published property contract."
   outputUnigramsIfNoShingles?: boolean = false;
 
   /** The string to use when joining adjacent tokens to form a shingle. Default is a single space (" "). */
@@ -6426,9 +6467,11 @@ model StopwordsTokenFilter extends TokenFilter {
   stopwordsList?: StopwordsList = StopwordsList.English;
 
   /** A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StopwordsTokenFilter.ignoreCase has a boolean wire value; preserve the published property contract."
   ignoreCase?: boolean = false;
 
   /** A value indicating whether to ignore the last search term if it's a stop word. Default is true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StopwordsTokenFilter.removeTrailing has a boolean wire value; preserve the published property contract."
   removeTrailing?: boolean = true;
 
   /** A URI fragment specifying the type of token filter. */
@@ -6442,9 +6485,11 @@ model SynonymTokenFilter extends TokenFilter {
   synonyms: string[];
 
   /** A value indicating whether to case-fold input for matching. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SynonymTokenFilter.ignoreCase has a boolean wire value; preserve the published property contract."
   ignoreCase?: boolean = false;
 
   /** A value indicating whether all words in the list of synonyms (if => notation is not used) will map to one another. If true, all words in the list of synonyms (if => notation is not used) will map to one another. The following list: incredible, unbelievable, fabulous, amazing is equivalent to: incredible, unbelievable, fabulous, amazing => incredible, unbelievable, fabulous, amazing. If false, the following list: incredible, unbelievable, fabulous, amazing will be equivalent to: incredible, unbelievable, fabulous, amazing => incredible. Default is true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SynonymTokenFilter.expand has a boolean wire value; preserve the published property contract."
   expand?: boolean = true;
 
   /** A URI fragment specifying the type of token filter. */
@@ -6466,6 +6511,7 @@ model TruncateTokenFilter extends TokenFilter {
 /** Filters out tokens with same text as the previous token. This token filter is implemented using Apache Lucene. */
 model UniqueTokenFilter extends TokenFilter {
   /** A value indicating whether to remove duplicates only at the same position. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UniqueTokenFilter.onlyOnSamePosition has a boolean wire value; preserve the published property contract."
   onlyOnSamePosition?: boolean = false;
 
   /** A URI fragment specifying the type of token filter. */
@@ -6476,30 +6522,39 @@ model UniqueTokenFilter extends TokenFilter {
 /** Splits words into subwords and performs optional transformations on subword groups. This token filter is implemented using Apache Lucene. */
 model WordDelimiterTokenFilter extends TokenFilter {
   /** A value indicating whether to generate part words. If set, causes parts of words to be generated; for example "AzureSearch" becomes "Azure" "Search". Default is true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WordDelimiterTokenFilter.generateWordParts has a boolean wire value; preserve the published property contract."
   generateWordParts?: boolean = true;
 
   /** A value indicating whether to generate number subwords. Default is true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WordDelimiterTokenFilter.generateNumberParts has a boolean wire value; preserve the published property contract."
   generateNumberParts?: boolean = true;
 
   /** A value indicating whether maximum runs of word parts will be catenated. For example, if this is set to true, "Azure-Search" becomes "AzureSearch". Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WordDelimiterTokenFilter.catenateWords has a boolean wire value; preserve the published property contract."
   catenateWords?: boolean = false;
 
   /** A value indicating whether maximum runs of number parts will be catenated. For example, if this is set to true, "1-2" becomes "12". Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WordDelimiterTokenFilter.catenateNumbers has a boolean wire value; preserve the published property contract."
   catenateNumbers?: boolean = false;
 
   /** A value indicating whether all subword parts will be catenated. For example, if this is set to true, "Azure-Search-1" becomes "AzureSearch1". Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WordDelimiterTokenFilter.catenateAll has a boolean wire value; preserve the published property contract."
   catenateAll?: boolean = false;
 
   /** A value indicating whether to split words on caseChange. For example, if this is set to true, "AzureSearch" becomes "Azure" "Search". Default is true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WordDelimiterTokenFilter.splitOnCaseChange has a boolean wire value; preserve the published property contract."
   splitOnCaseChange?: boolean = true;
 
   /** A value indicating whether original words will be preserved and added to the subword list. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WordDelimiterTokenFilter.preserveOriginal has a boolean wire value; preserve the published property contract."
   preserveOriginal?: boolean = false;
 
   /** A value indicating whether to split on numbers. For example, if this is set to true, "Azure1Search" becomes "Azure" "1" "Search". Default is true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WordDelimiterTokenFilter.splitOnNumerics has a boolean wire value; preserve the published property contract."
   splitOnNumerics?: boolean = true;
 
   /** A value indicating whether to remove trailing "'s" for each subword. Default is true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WordDelimiterTokenFilter.stemEnglishPossessive has a boolean wire value; preserve the published property contract."
   stemEnglishPossessive?: boolean = true;
 
   /** A list of tokens to protect from being delimited. */
@@ -6881,6 +6936,7 @@ model MagnitudeScoringParameters {
   boostingRangeEnd: float64;
 
   /** A value indicating whether to apply a constant boost for field values beyond the range end value; default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MagnitudeScoringParameters.constantBoostBeyondRange has a boolean wire value; preserve the published property contract."
   constantBoostBeyondRange?: boolean;
 }
 
@@ -6905,6 +6961,7 @@ model SearchIndexerKnowledgeStoreParameters {
   ...Record<unknown>;
 
   /** Whether or not projections should synthesize a generated key name if one isn't already present. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchIndexerKnowledgeStoreParameters.synthesizeGeneratedKeyName has a boolean wire value; preserve the published property contract."
   synthesizeGeneratedKeyName?: boolean = false;
 }
 
@@ -7054,6 +7111,7 @@ model OcrSkill extends SearchIndexerSkill {
   defaultLanguageCode?: OcrSkillLanguage;
 
   /** A value indicating to turn orientation detection on or not. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OcrSkill.detectOrientation has a boolean wire value; preserve the published property contract."
   detectOrientation?: boolean = false;
 
   /** Defines the sequence of characters to use between the lines of text recognized by the OCR skill. The default value is "space". */
@@ -7122,6 +7180,7 @@ model SentimentSkillV3 extends SearchIndexerSkill {
   defaultLanguageCode?: SentimentSkillLanguage | null;
 
   /** If set to true, the skill output will include information from Text Analytics for opinion mining, namely targets (nouns or verbs) and their associated assessment (adjective) in the text. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SentimentSkillV3.includeOpinionMining has a boolean wire value; preserve the published property contract."
   includeOpinionMining?: boolean = false;
 
   /** The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary. */
@@ -7551,6 +7610,7 @@ model ChatCompletionSchema {
   required?: string[];
 
   /** Controls whether it is allowable for an object to contain additional keys / values that were not defined in the JSON Schema. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ChatCompletionSchema.additionalProperties has a boolean wire value; preserve the published property contract."
   additionalProperties?: boolean = false;
 }
 
@@ -7575,6 +7635,7 @@ model ChatCompletionSchemaProperties {
   description?: string | null;
 
   /** Whether or not the model's response should use structured outputs. Default is true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ChatCompletionSchemaProperties.strict has a boolean wire value; preserve the published property contract."
   strict?: boolean = true;
 
   /** The schema definition. */

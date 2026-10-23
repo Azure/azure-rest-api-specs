@@ -246,6 +246,8 @@ interface ProductContracts {
       /**
        * Delete existing subscriptions associated with the product or not.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.deleteSubscriptions has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.deleteSubscriptions retains the deleteSubscriptions query parameter; preserve wire compatibility."
       @query("deleteSubscriptions")
       deleteSubscriptions?: boolean;
     }
@@ -266,6 +268,7 @@ interface ProductContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -273,6 +276,7 @@ interface ProductContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -280,12 +284,15 @@ interface ProductContracts {
       /**
        * When set to true, the response contains an array of groups that have visibility to the product. The default is false.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByService.expandGroups has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.expandGroups retains the expandGroups query parameter; preserve wire compatibility."
       @query("expandGroups")
       expandGroups?: boolean;
 
       /**
        * Products which are part of a specific tag.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string;
     },
@@ -312,6 +319,7 @@ interface ProductContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByProduct.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -319,6 +327,7 @@ interface ProductContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByProduct.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -394,6 +403,7 @@ interface ProductContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing productGroupListByProduct.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -401,6 +411,7 @@ interface ProductContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing productGroupListByProduct.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -475,6 +486,7 @@ interface ProductContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -482,6 +494,7 @@ interface ProductContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -627,6 +640,8 @@ interface WorkspaceProduct {
       /**
        * Delete existing subscriptions associated with the product or not.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.deleteSubscriptions has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.deleteSubscriptions retains the deleteSubscriptions query parameter; preserve wire compatibility."
       @query("deleteSubscriptions")
       deleteSubscriptions?: boolean;
     }
@@ -647,6 +662,7 @@ interface WorkspaceProduct {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -654,6 +670,7 @@ interface WorkspaceProduct {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -661,12 +678,15 @@ interface WorkspaceProduct {
       /**
        * When set to true, the response contains an array of groups that have visibility to the product. The default is false.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByService.expandGroups has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.expandGroups retains the expandGroups query parameter; preserve wire compatibility."
       @query("expandGroups")
       expandGroups?: boolean;
 
       /**
        * Products which are part of a specific tag.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string;
     },

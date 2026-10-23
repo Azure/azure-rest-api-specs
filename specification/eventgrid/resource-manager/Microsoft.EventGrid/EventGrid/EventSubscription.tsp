@@ -177,6 +177,7 @@ interface EventSubscriptions {
       /**
        * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -223,6 +224,7 @@ interface EventSubscriptions {
       /**
        * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listGlobalByResourceGroup.$top retains the $top query parameter; preserve wire compatibility."
       @query
       $top?: int32;
     },
@@ -246,6 +248,7 @@ interface EventSubscriptions {
       /**
        * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByDomainTopic.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -343,6 +346,7 @@ interface TopicEventSubscriptions {
       /**
        * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -461,6 +465,7 @@ interface DomainEventSubscriptions {
       /**
        * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -588,6 +593,7 @@ interface EventSubscriptionOperationGroup {
       /**
        * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listGlobalBySubscription.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -611,6 +617,7 @@ interface EventSubscriptionOperationGroup {
       /**
        * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResource.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -733,6 +740,7 @@ interface SystemTopicEventSubscriptions {
       /**
        * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySystemTopic.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -852,6 +860,7 @@ interface PartnerTopicEventSubscriptions {
       /**
        * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByPartnerTopic.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },

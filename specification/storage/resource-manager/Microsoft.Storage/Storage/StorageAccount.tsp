@@ -97,6 +97,7 @@ interface StorageAccounts {
       /**
        * May be used to expand the properties within account's properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getProperties.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: StorageAccountExpand;
     },
@@ -295,6 +296,7 @@ interface StorageAccounts {
   /**
    * Gets the private link resources that need to be created for a storage account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByStorageAccount retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("privateLinkResources")
   listByStorageAccount is ArmResourceActionSync<
@@ -318,6 +320,7 @@ interface StorageAccounts {
       /**
        * Optional, specifies the maximum number of storage task assignment instances to be included in the list response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing storageTaskAssignmentsInstancesReportList.$maxpagesize retains the $maxpagesize query parameter; preserve wire compatibility."
       @query("$maxpagesize")
       $maxpagesize?: int32;
 

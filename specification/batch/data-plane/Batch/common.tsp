@@ -202,6 +202,7 @@ alias FileResponseHeaders = {
   @header("client-request-id")
   clientRequestId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FileResponseHeaders.ocpbatchfileisdirectory has a boolean wire value; preserve the published property contract."
   @header("ocp-batch-file-isdirectory")
   @doc("Whether the object represents a directory.")
   ocpbatchfileisdirectory: boolean;
@@ -405,6 +406,7 @@ alias CommonParameters = {
   @header("client-request-id")
   clientRequestId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CommonParameters.returnClientRequestId has a boolean wire value; preserve the published property contract."
   @doc("Whether the server should return the client-request-id in the response.")
   @header("return-client-request-id")
   returnClientRequestId?: boolean = false;
@@ -617,6 +619,7 @@ alias DeleteJobRequiredParameters = {
 };
 
 alias DeleteJobOptionalParameters = {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeleteJobOptionalParameters.force has a boolean wire value; preserve the published property contract."
   @doc("If true, the server will delete the Job even if the corresponding nodes have not fully processed the deletion. The default value is false.")
   @query
   force?: boolean;
@@ -687,6 +690,7 @@ alias TerminateJobOptionalParameters = {
   @bodyRoot
   options?: BatchJobTerminateOptions;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TerminateJobOptionalParameters.force has a boolean wire value; preserve the published property contract."
   @doc("If true, the server will terminate the Job even if the corresponding nodes have not fully processed the termination. The default value is false.")
   @query
   force?: boolean;
@@ -785,6 +789,7 @@ alias DeleteJobScheduleRequiredParameters = {
 };
 
 alias DeleteJobScheduleOptionalParameters = {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeleteJobScheduleOptionalParameters.force has a boolean wire value; preserve the published property contract."
   @doc("If true, the server will delete the JobSchedule even if the corresponding nodes have not fully processed the deletion. The default value is false.")
   @query
   force?: boolean;
@@ -847,6 +852,7 @@ alias TerminateJobScheduleRequiredParameters = {
 };
 
 alias TerminateJobScheduleOptionalParameters = {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TerminateJobScheduleOptionalParameters.force has a boolean wire value; preserve the published property contract."
   @doc("If true, the server will terminate the JobSchedule even if the corresponding nodes have not fully processed the termination. The default value is false.")
   @query
   force?: boolean;
@@ -1033,6 +1039,7 @@ alias ListTaskFilesOptionalParameters = {
   @clientName("filter", "!autorest")
   $filter?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ListTaskFilesOptionalParameters.recursive has a boolean wire value; preserve the published property contract."
   @doc("""
     Whether to list children of the Task directory. This parameter can be used in
     combination with the filter parameter to list specific type of files.
@@ -1042,6 +1049,7 @@ alias ListTaskFilesOptionalParameters = {
 };
 
 alias DeleteTaskFileOptionalParameters = {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeleteTaskFileOptionalParameters.recursive has a boolean wire value; preserve the published property contract."
   @doc("""
     Whether to delete children of a directory. If the filePath parameter represents
     a directory instead of a file, you can set recursive to true to delete the
@@ -1323,6 +1331,7 @@ alias ListNodeExtensionsOptionalParameters = {
 };
 
 alias DeleteNodeFileOptionalParameters = {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeleteNodeFileOptionalParameters.recursive has a boolean wire value; preserve the published property contract."
   @doc("""
     Whether to delete children of a directory. If the filePath parameter represents
     a directory instead of a file, you can set recursive to true to delete the
@@ -1378,6 +1387,7 @@ alias ListNodeFilesOptionalParameters = {
   @clientName("filter", "!autorest")
   $filter?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ListNodeFilesOptionalParameters.recursive has a boolean wire value; preserve the published property contract."
   @doc("Whether to list children of a directory.")
   @query
   recursive?: boolean;

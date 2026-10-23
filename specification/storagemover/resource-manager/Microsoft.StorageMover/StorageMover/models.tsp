@@ -847,6 +847,7 @@ model JobDefinitionProperties {
   /**
    * Boolean to preserve permissions or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing JobDefinitionProperties.preservePermissions has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_12_01)
   preservePermissions?: boolean = true;
 
@@ -857,6 +858,7 @@ model JobDefinitionProperties {
    * provided. Defaults to false. Cannot be modified after the Job Definition is
    * created.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing JobDefinitionProperties.isCrossTenantJob has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   isCrossTenantJob?: boolean = false;
@@ -905,6 +907,7 @@ model ScheduleInfo {
   frequency?: Frequency;
 
   /** Whether the schedule is currently active */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScheduleInfo.isActive has a boolean wire value; preserve the published property contract."
   isActive?: boolean;
 
   /** Time of day to execute (hours and minutes) */
@@ -1401,6 +1404,7 @@ model AzureStorageBlobContainerEndpointProperties
    * can be performed entirely in the tenant where this endpoint lives. Defaults
    * to false. Can be updated via PATCH.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureStorageBlobContainerEndpointProperties.enableCrossTenantTransfer has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   enableCrossTenantTransfer?: boolean = false;
 
@@ -1434,6 +1438,7 @@ model AzureStorageBlobContainerEndpointUpdateProperties
    * Opt-in flag enabling this endpoint to be used as one side of a cross-tenant
    * data transfer pair. Defaults to false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureStorageBlobContainerEndpointUpdateProperties.enableCrossTenantTransfer has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   enableCrossTenantTransfer?: boolean;
 
@@ -1595,6 +1600,7 @@ model AzureStorageSmbFileShareEndpointProperties
    * can be performed entirely in the tenant where this endpoint lives. Defaults
    * to false. Can be updated via PATCH.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureStorageSmbFileShareEndpointProperties.enableCrossTenantTransfer has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   enableCrossTenantTransfer?: boolean = false;
 
@@ -1630,6 +1636,7 @@ model AzureStorageSmbFileShareEndpointUpdateProperties
    * Opt-in flag enabling this endpoint to be used as one side of a cross-tenant
    * data transfer pair. Defaults to false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureStorageSmbFileShareEndpointUpdateProperties.enableCrossTenantTransfer has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   enableCrossTenantTransfer?: boolean;
 

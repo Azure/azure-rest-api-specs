@@ -332,6 +332,7 @@ interface IotHubDescriptionOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This is a non-standard ARM action (IotHubStats) on the IoT hub resource, retained to match the published API routing."
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getStats retains its response and SDK paging behavior; preserve published compatibility."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubStats")
   @get
   @summary("Get the statistics from an IoT hub")

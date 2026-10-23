@@ -135,12 +135,14 @@ model EntityUptime {
 
 @doc("App service native settings.")
 model AppSvcNativeSettings {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AppSvcNativeSettings.isolationRequired has a boolean wire value; preserve the published property contract."
   @doc("Gets or sets the isolation required.")
   isolationRequired: boolean;
 }
 
 @doc("App service container settings.")
 model AppSvcContainerSettings {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AppSvcContainerSettings.isolationRequired has a boolean wire value; preserve the published property contract."
   @doc("Gets or sets the isolation required.")
   isolationRequired: boolean;
 }

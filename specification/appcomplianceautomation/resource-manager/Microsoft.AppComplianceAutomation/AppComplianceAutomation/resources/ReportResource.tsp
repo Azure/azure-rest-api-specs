@@ -53,6 +53,7 @@ interface Report {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @operationId("Report_CreateOrUpdate")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<

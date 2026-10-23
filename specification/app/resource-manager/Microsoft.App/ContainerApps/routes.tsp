@@ -67,6 +67,7 @@ interface BillingMetersOperationGroup {
   /**
    * Get all billingMeters for a location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing get retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get billing meters by location.")
   @autoRoute
   @get

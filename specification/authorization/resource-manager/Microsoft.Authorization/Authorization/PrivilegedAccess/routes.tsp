@@ -54,6 +54,7 @@ interface PrivilegedResources {
      * Modeled as an extensible string so future scope expansions can be
      * added without a breaking change; clients should tolerate unknown values.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.accessScope retains the accessScope query parameter; preserve wire compatibility."
     @query
     accessScope?: AccessScopeFilter,
 
@@ -64,6 +65,7 @@ interface PrivilegedResources {
      * (`maxpagesize`) rather than the strict-maximum `$top` to signal the
      * advisory semantics.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.maxpagesize retains the maxpagesize query parameter; preserve wire compatibility."
     @query("maxpagesize")
     @minValue(1)
     @maxValue(1000)
@@ -128,6 +130,7 @@ interface PrivilegedResources {
      * before pagination, with `scope` as the deterministic tie-breaker.
      * Invalid expressions return `400 InvalidOrderBy`.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.orderby retains the $orderby query parameter; preserve wire compatibility."
     @query("$orderby")
     orderby?: string,
 
@@ -137,6 +140,8 @@ interface PrivilegedResources {
      * before the page slice. Absent or `false` omits `count`. Any other value
      * returns `400 InvalidCount`.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.count has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.count retains the $count query parameter; preserve wire compatibility."
     @query("$count")
     count?: boolean,
   ): ArmResponse<PagedResourceProjection> | ErrorResponse;
@@ -231,6 +236,7 @@ interface PrivilegedResourceFavorites {
    * (`400 InvalidRequest` on mismatch) and that the caller has read
    * permission on the resource (`403 Forbidden` otherwise).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @route("/providers/Microsoft.Authorization/privilegedResourceFavorites/{favoriteId}")
   @put
   createOrUpdate(

@@ -369,6 +369,7 @@ model AssetDto {
   dataReferences?: DataReferences;
 
   /** Whether the asset should be indexed. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AssetDto.shouldIndex has a boolean wire value; preserve the published property contract."
   shouldIndex?: boolean;
 
   /** The list of dependent assets. */
@@ -416,6 +417,7 @@ model ContainerResourceRequirements {
   memoryInGBLimit?: float64;
 
   /** Whether GPU is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerResourceRequirements.gpuEnabled has a boolean wire value; preserve the published property contract."
   gpuEnabled?: boolean;
 
   /** Number of GPUs. */
@@ -651,6 +653,7 @@ model Model {
   modifiedTime?: utcDateTime;
 
   /** Whether to unpack the model. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Model.unpack has a boolean wire value; preserve the published property contract."
   unpack?: boolean;
 
   /** The parent model identifier. */
@@ -711,12 +714,15 @@ model Model {
   defaultDeploymentSettings?: ModelDeploymentSettings;
 
   /** Whether the model is anonymous. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Model.isAnonymous has a boolean wire value; preserve the published property contract."
   isAnonymous?: boolean;
 
   /** Whether the model is archived. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Model.isArchived has a boolean wire value; preserve the published property contract."
   isArchived?: boolean;
 
   /** Whether the model is registered. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Model.isRegistered has a boolean wire value; preserve the published property contract."
   isRegistered?: boolean;
 
   /** The data path of the model. */
@@ -805,6 +811,7 @@ model ExtensiveModel {
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API contract"
 model IndexAnnotations {
   /** Whether the entity is archived. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IndexAnnotations.archived has a boolean wire value; preserve the published property contract."
   archived?: boolean;
 
   /** Tags for the entity. */
@@ -961,6 +968,7 @@ model ListModelsRequest {
   orderBy?: OrderString;
 
   /** Whether to return only the latest version. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ListModelsRequest.latestVersionOnly has a boolean wire value; preserve the published property contract."
   latestVersionOnly?: boolean;
 
   /** Filter by modified after date. */
@@ -1029,9 +1037,11 @@ model ModelContainerRequest {
   kvTags?: Record<string>;
 
   /** Whether the container is archived. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ModelContainerRequest.isArchived has a boolean wire value; preserve the published property contract."
   isArchived?: boolean;
 
   /** Whether the container is registered. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ModelContainerRequest.isRegistered has a boolean wire value; preserve the published property contract."
   isRegistered?: boolean;
 }
 

@@ -35,6 +35,7 @@ interface PrivateLinkResources {
   /**
    * Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByPrivateLinkScope retains its response and SDK paging behavior; preserve published compatibility."
   listByPrivateLinkScope is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<PrivateLinkResource>;
 }
 

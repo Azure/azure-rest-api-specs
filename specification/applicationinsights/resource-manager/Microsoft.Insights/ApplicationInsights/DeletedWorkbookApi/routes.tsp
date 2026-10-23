@@ -31,12 +31,14 @@ interface DeletedWorkbooksOperationGroup {
       /**
        * Category of workbook to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.category retains the category query parameter; preserve wire compatibility."
       @query("category")
       category?: CategoryType;
 
       /**
        * Tags presents on each workbook returned.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string[];
     },

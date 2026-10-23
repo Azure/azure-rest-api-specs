@@ -174,6 +174,7 @@ model ManagedIdentityAuthentication {
 
 @doc("Mqtt Local Broker Connection TLS details")
 model LocalBrokerConnectionTls {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LocalBrokerConnectionTls.tlsEnabled has a boolean wire value; preserve the published property contract."
   @doc("Tls Enabled on Local Broker Connection.")
   tlsEnabled?: boolean = false;
 

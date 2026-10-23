@@ -177,6 +177,7 @@ model ExecuteCommandConfiguration {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ExecuteCommandLogConfiguration")
 model ExecuteCommandLogConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExecuteCommandLogConfiguration.cloudWatchEncryptionEnabled has a boolean wire value; preserve the published property contract."
   @doc("Determines whether to use encryption on the CloudWatch logs. If not specified, encryption will be off.")
   cloudWatchEncryptionEnabled?: boolean;
 
@@ -186,6 +187,7 @@ model ExecuteCommandLogConfiguration {
   @doc("The name of the S3 bucket to send logs to.  The S3 bucket must already be created.")
   s3BucketName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExecuteCommandLogConfiguration.s3EncryptionEnabled has a boolean wire value; preserve the published property contract."
   @doc("Determines whether to use encryption on the S3 logs. If not specified, encryption is not used.")
   s3EncryptionEnabled?: boolean;
 

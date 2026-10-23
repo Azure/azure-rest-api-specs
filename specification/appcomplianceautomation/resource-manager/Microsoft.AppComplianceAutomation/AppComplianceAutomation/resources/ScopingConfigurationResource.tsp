@@ -58,6 +58,7 @@ interface ScopingConfiguration {
    * Get the AppComplianceAutomation scoping configuration of the specific report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @operationId("ScopingConfiguration_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ScopingConfigurationResource>;
 

@@ -57,12 +57,14 @@ interface EventOperationGroup {
       /**
        * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getBySubscriptionIdAndTrackingId.$filter retains the $filter query parameter; preserve wire compatibility."
       @query("$filter")
       $filter?: string;
 
       /**
        * Specifies from when to return events (default is 3 days), based on the lastUpdateTime property. For example, queryStartTime = 7/24/2020 OR queryStartTime=7%2F24%2F2020
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getBySubscriptionIdAndTrackingId.queryStartTime retains the queryStartTime query parameter; preserve wire compatibility."
       @query("queryStartTime")
       queryStartTime?: string;
     },
@@ -85,6 +87,7 @@ interface EventOperationGroup {
       /**
        * Specifies from when to return events (default is 3 days), based on the lastUpdateTime property. For example, queryStartTime = 7/24/2020 OR queryStartTime=7%2F24%2F2020
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscriptionId.queryStartTime retains the queryStartTime query parameter; preserve wire compatibility."
       @query("queryStartTime")
       queryStartTime?: string;
     },
@@ -174,12 +177,14 @@ interface TenantEventOperationGroup {
       /**
        * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByTenantIdAndTrackingId.$filter retains the $filter query parameter; preserve wire compatibility."
       @query("$filter")
       $filter?: string;
 
       /**
        * Specifies from when to return events (default is 3 days), based on the lastUpdateTime property. For example, queryStartTime = 7/24/2020 OR queryStartTime=7%2F24%2F2020
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByTenantIdAndTrackingId.queryStartTime retains the queryStartTime query parameter; preserve wire compatibility."
       @query("queryStartTime")
       queryStartTime?: string;
     },
@@ -202,6 +207,7 @@ interface TenantEventOperationGroup {
       /**
        * Specifies from when to return events (default is 3 days), based on the lastUpdateTime property. For example, queryStartTime = 7/24/2020 OR queryStartTime=7%2F24%2F2020
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByTenantId.queryStartTime retains the queryStartTime query parameter; preserve wire compatibility."
       @query("queryStartTime")
       queryStartTime?: string;
     },

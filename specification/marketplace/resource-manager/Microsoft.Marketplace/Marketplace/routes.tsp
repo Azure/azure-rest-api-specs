@@ -39,6 +39,8 @@ interface PrivateStoreCollectionOperationGroup {
     collectionId: string,
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing post.payload retains its media-type contract; preserve content-negotiation compatibility."
+    #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing post.payload retains its request-body shape; preserve wire compatibility."
     @bodyRoot
     payload?: Operation,
   ): OkResponse | ErrorResponse;
@@ -75,6 +77,8 @@ interface PrivateStoreCollectionOfferOperationGroup {
     offerId: string,
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing post.payload retains its media-type contract; preserve content-negotiation compatibility."
+    #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing post.payload retains its request-body shape; preserve wire compatibility."
     @bodyRoot
     payload?: Operation,
   ): OkResponse | ErrorResponse;

@@ -74,6 +74,7 @@ model ElasticLoadBalancingV2TargetGroupProperties {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsElasticLoadBalancingV2TargetGroup")
 model AwsElasticLoadBalancingV2TargetGroupProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsElasticLoadBalancingV2TargetGroupProperties.healthCheckEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether health checks are enabled. If the target type is lambda, health checks are disabled by default but can be enabled. If the target type is instance, ip, or alb, health checks are always enabled and cannot be disabled.")
   healthCheckEnabled?: boolean;
 

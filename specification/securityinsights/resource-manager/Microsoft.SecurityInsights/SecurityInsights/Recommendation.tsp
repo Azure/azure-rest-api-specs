@@ -35,6 +35,7 @@ interface Recommendations {
   /**
    * Gets a recommendation by its id.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing singleRecommendation SDK method name; renaming it would break client compatibility."
   @tag("recommendations")
   singleRecommendation is Extension.Read<
     workspaceExternalResource,

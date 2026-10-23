@@ -23,6 +23,7 @@ interface ApplicationGatewaysOperationGroup {
   /**
    * Lists all available server variables.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listAvailableServerVariables retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ApplicationGateways")
   @autoRoute
   @get
@@ -36,6 +37,7 @@ interface ApplicationGatewaysOperationGroup {
   /**
    * Lists all available request headers.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listAvailableRequestHeaders retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ApplicationGateways")
   @autoRoute
   @get
@@ -49,6 +51,7 @@ interface ApplicationGatewaysOperationGroup {
   /**
    * Lists all available response headers.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listAvailableResponseHeaders retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ApplicationGateways")
   @autoRoute
   @get
@@ -62,6 +65,7 @@ interface ApplicationGatewaysOperationGroup {
   /**
    * Lists all available web application firewall rule sets.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listAvailableWafRuleSets retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ApplicationGateways")
   @autoRoute
   @get
@@ -173,6 +177,8 @@ interface CheckDnsNameAvailability {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing checkDnsNameAvailability retains its response and SDK paging behavior; preserve published compatibility."
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing checkDnsNameAvailability SDK method name; renaming it would break client compatibility."
   @operationId("CheckDnsNameAvailability")
   @autoRoute
   @get
@@ -186,6 +192,7 @@ interface CheckDnsNameAvailability {
       /**
        * The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing checkDnsNameAvailability.domainNameLabel retains the domainNameLabel query parameter; preserve wire compatibility."
       @query("domainNameLabel")
       domainNameLabel: string;
     },
@@ -530,6 +537,7 @@ interface ServiceTagsOperationGroup {
   /**
    * Gets a list of service tag information resources.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("serviceTags")
@@ -561,12 +569,15 @@ interface ServiceTagInformationOperationGroup {
       /**
        * Do not return address prefixes for the tag(s).
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.noAddressPrefixes has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.noAddressPrefixes retains the noAddressPrefixes query parameter; preserve wire compatibility."
       @query("noAddressPrefixes")
       noAddressPrefixes?: boolean;
 
       /**
        * Return tag information for a particular tag.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.tagName retains the tagName query parameter; preserve wire compatibility."
       @query("tagName")
       tagName?: string;
     },

@@ -76,6 +76,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets the private endpoint connections associated with the Cognitive Services account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionListResult>

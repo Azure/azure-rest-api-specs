@@ -59,6 +59,7 @@ interface Reservations {
       /**
        * May be used to expand the detail information of some properties.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByReservationOrder.expand retains the expand query parameter; preserve wire compatibility."
       @query("expand")
       expand?: string;
     }

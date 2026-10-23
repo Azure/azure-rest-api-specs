@@ -279,6 +279,7 @@ model CheckQuotaAvailabilityResponse {
 
 @doc("Check quota availability response properties.")
 model CheckQuotaAvailabilityResponseProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckQuotaAvailabilityResponseProperties.isAvailable has a boolean wire value; preserve the published property contract."
   @doc("True/False indicating whether the quota request be granted based on availability.")
   isAvailable?: boolean;
 

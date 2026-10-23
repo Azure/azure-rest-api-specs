@@ -144,6 +144,7 @@ model EntityTagHeaderValue {
   tag?: StringSegment;
 
   /** Whether the entity tag uses weak comparison. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EntityTagHeaderValue.isWeak has a boolean wire value; preserve the published property contract."
   isWeak?: boolean;
 }
 
@@ -174,6 +175,7 @@ model StringSegment {
   value?: string;
 
   /** Whether the segment contains a value. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StringSegment.hasValue has a boolean wire value; preserve the published property contract."
   hasValue?: boolean;
 }
 

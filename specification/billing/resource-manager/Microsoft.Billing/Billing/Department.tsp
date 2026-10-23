@@ -58,30 +58,35 @@ interface Departments {
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
 
       /**
        * The orderby query option allows clients to request resources in a particular order.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.orderBy retains the orderBy query parameter; preserve wire compatibility."
       @query("orderBy")
       orderBy?: string;
 
       /**
        * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.top retains the top query parameter; preserve wire compatibility."
       @query("top")
       top?: int64;
 
       /**
        * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.skip retains the skip query parameter; preserve wire compatibility."
       @query("skip")
       skip?: int64;
 
       /**
        * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.search retains the search query parameter; preserve wire compatibility."
       @query("search")
       search?: string;
     },

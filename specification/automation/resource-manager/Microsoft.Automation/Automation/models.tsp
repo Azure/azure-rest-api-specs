@@ -1586,6 +1586,7 @@ model SUCScheduleProperties {
   /**
    * Gets or sets a value indicating whether this schedule is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SUCScheduleProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
@@ -2291,6 +2292,7 @@ model DscMetaConfiguration {
   /**
    * Gets or sets the RebootNodeIfNeeded value of the meta configuration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DscMetaConfiguration.rebootNodeIfNeeded has a boolean wire value; preserve the published property contract."
   rebootNodeIfNeeded?: boolean;
 
   /**
@@ -2316,6 +2318,7 @@ model DscMetaConfiguration {
   /**
    * Gets or sets the AllowModuleOverwrite value of the meta configuration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DscMetaConfiguration.allowModuleOverwrite has a boolean wire value; preserve the published property contract."
   allowModuleOverwrite?: boolean;
 }
 
@@ -2367,11 +2370,13 @@ model AutomationAccountUpdateProperties {
   /**
    * Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomationAccountUpdateProperties.publicNetworkAccess has a boolean wire value; preserve the published property contract."
   publicNetworkAccess?: boolean;
 
   /**
    * Indicates whether requests using non-AAD authentication are blocked
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomationAccountUpdateProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 }
 
@@ -2542,11 +2547,13 @@ model AutomationAccountProperties {
   /**
    * Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomationAccountProperties.publicNetworkAccess has a boolean wire value; preserve the published property contract."
   publicNetworkAccess?: boolean;
 
   /**
    * Indicates whether requests using non-AAD authentication are blocked
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomationAccountProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 
   /**
@@ -2656,11 +2663,13 @@ model AutomationAccountCreateOrUpdateProperties {
   /**
    * Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomationAccountCreateOrUpdateProperties.publicNetworkAccess has a boolean wire value; preserve the published property contract."
   publicNetworkAccess?: boolean;
 
   /**
    * Indicates whether requests using non-AAD authentication are blocked
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomationAccountCreateOrUpdateProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 }
 
@@ -2906,6 +2915,7 @@ model CertificateProperties {
   /**
    * Gets the is exportable flag of the certificate.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateProperties.isExportable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isExportable?: boolean;
 
@@ -2966,6 +2976,7 @@ model CertificateCreateOrUpdateProperties {
   /**
    * Gets or sets the is exportable flag of the certificate.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateCreateOrUpdateProperties.isExportable has a boolean wire value; preserve the published property contract."
   isExportable?: boolean;
 }
 
@@ -3116,6 +3127,7 @@ model ConnectionTypeProperties {
   /**
    * Gets or sets a Boolean value to indicate if the connection type is global.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectionTypeProperties.isGlobal has a boolean wire value; preserve the published property contract."
   isGlobal?: boolean;
 
   /**
@@ -3151,11 +3163,13 @@ model FieldDefinition {
   /**
    * Gets or sets the isEncrypted flag of the connection field definition.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FieldDefinition.isEncrypted has a boolean wire value; preserve the published property contract."
   isEncrypted?: boolean;
 
   /**
    * Gets or sets the isOptional flag of the connection field definition.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FieldDefinition.isOptional has a boolean wire value; preserve the published property contract."
   isOptional?: boolean;
 
   /**
@@ -3186,6 +3200,7 @@ model ConnectionTypeCreateOrUpdateProperties {
   /**
    * Gets or sets a Boolean value to indicate if the connection type is global.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectionTypeCreateOrUpdateProperties.isGlobal has a boolean wire value; preserve the published property contract."
   isGlobal?: boolean;
 
   /**
@@ -3330,6 +3345,7 @@ model DscConfigurationProperties {
   /**
    * Gets or sets verbose log option.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DscConfigurationProperties.logVerbose has a boolean wire value; preserve the published property contract."
   logVerbose?: boolean;
 
   /**
@@ -3367,6 +3383,7 @@ model DscConfigurationParameter {
   /**
    * Gets or sets a Boolean value to indicate whether the parameter is mandatory or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DscConfigurationParameter.isMandatory has a boolean wire value; preserve the published property contract."
   isMandatory?: boolean;
 
   /**
@@ -3453,11 +3470,13 @@ model DscConfigurationCreateOrUpdateProperties {
   /**
    * Gets or sets verbose log option.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DscConfigurationCreateOrUpdateProperties.logVerbose has a boolean wire value; preserve the published property contract."
   logVerbose?: boolean;
 
   /**
    * Gets or sets progress log option.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DscConfigurationCreateOrUpdateProperties.logProgress has a boolean wire value; preserve the published property contract."
   logProgress?: boolean;
 
   /**
@@ -3533,6 +3552,7 @@ model DscNodeConfigurationProperties {
   /**
    * If a new build version of NodeConfiguration is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DscNodeConfigurationProperties.incrementNodeConfigurationBuild has a boolean wire value; preserve the published property contract."
   incrementNodeConfigurationBuild?: boolean;
 }
 
@@ -3584,6 +3604,7 @@ model DscNodeConfigurationCreateOrUpdateParametersProperties {
   /**
    * If a new build version of NodeConfiguration is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DscNodeConfigurationCreateOrUpdateParametersProperties.incrementNodeConfigurationBuild has a boolean wire value; preserve the published property contract."
   incrementNodeConfigurationBuild?: boolean;
 }
 
@@ -4193,11 +4214,13 @@ model ActivityParameter {
   /**
    * Gets or sets a Boolean value that indicates true if the parameter is required. If the value is false, the parameter is optional.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActivityParameter.isMandatory has a boolean wire value; preserve the published property contract."
   isMandatory?: boolean;
 
   /**
    * Gets or sets a Boolean value that indicates true if the parameter is dynamic.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActivityParameter.isDynamic has a boolean wire value; preserve the published property contract."
   isDynamic?: boolean;
 
   /**
@@ -4208,16 +4231,19 @@ model ActivityParameter {
   /**
    * Gets or sets a Boolean value that indicates true if the parameter can take values from the incoming pipeline objects. This setting is used if the cmdlet must access the complete input object. false indicates that the parameter cannot take values from the complete input object.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActivityParameter.valueFromPipeline has a boolean wire value; preserve the published property contract."
   valueFromPipeline?: boolean;
 
   /**
    * Gets or sets a Boolean value that indicates true if the parameter can be filled from a property of the incoming pipeline object that has the same name as this parameter. false indicates that the parameter cannot be filled from the incoming pipeline object property with the same name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActivityParameter.valueFromPipelineByPropertyName has a boolean wire value; preserve the published property contract."
   valueFromPipelineByPropertyName?: boolean;
 
   /**
    * Gets or sets a Boolean value that indicates true if the cmdlet parameter accepts all the remaining command-line arguments that are associated with this parameter in the form of an array. false if the cmdlet parameter does not accept all the remaining argument values.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActivityParameter.valueFromRemainingArguments has a boolean wire value; preserve the published property contract."
   valueFromRemainingArguments?: boolean;
 
   /**
@@ -4269,6 +4295,7 @@ model ModuleProperties {
   /**
    * Gets or sets the isGlobal flag of the module.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ModuleProperties.isGlobal has a boolean wire value; preserve the published property contract."
   isGlobal?: boolean;
 
   /**
@@ -4322,6 +4349,7 @@ model ModuleProperties {
   /**
    * Gets or sets type of module, if its composite or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ModuleProperties.isComposite has a boolean wire value; preserve the published property contract."
   isComposite?: boolean;
 }
 
@@ -4657,6 +4685,7 @@ model PackageProperties {
   /**
    * Gets or sets the isGlobal flag of the package.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PackageProperties.default has a boolean wire value; preserve the published property contract."
   default?: boolean;
 
   /**
@@ -4814,6 +4843,7 @@ model RunbookDraft {
   /**
    * Gets or sets whether runbook is in edit mode.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RunbookDraft.inEdit has a boolean wire value; preserve the published property contract."
   inEdit?: boolean;
 
   /**
@@ -4857,6 +4887,7 @@ model RunbookParameter {
   /**
    * Gets or sets a Boolean value to indicate whether the parameter is mandatory or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RunbookParameter.isMandatory has a boolean wire value; preserve the published property contract."
   isMandatory?: boolean;
 
   /**
@@ -4907,11 +4938,13 @@ model RunbookProperties {
   /**
    * Gets or sets verbose log option.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RunbookProperties.logVerbose has a boolean wire value; preserve the published property contract."
   logVerbose?: boolean;
 
   /**
    * Gets or sets progress log option.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RunbookProperties.logProgress has a boolean wire value; preserve the published property contract."
   logProgress?: boolean;
 
   /**
@@ -5002,11 +5035,13 @@ model RunbookCreateOrUpdateProperties {
   /**
    * Gets or sets verbose log option.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RunbookCreateOrUpdateProperties.logVerbose has a boolean wire value; preserve the published property contract."
   logVerbose?: boolean;
 
   /**
    * Gets or sets progress log option.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RunbookCreateOrUpdateProperties.logProgress has a boolean wire value; preserve the published property contract."
   logProgress?: boolean;
 
   /**
@@ -5078,11 +5113,13 @@ model RunbookUpdateProperties {
   /**
    * Gets or sets verbose log option.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RunbookUpdateProperties.logVerbose has a boolean wire value; preserve the published property contract."
   logVerbose?: boolean;
 
   /**
    * Gets or sets progress log option.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RunbookUpdateProperties.logProgress has a boolean wire value; preserve the published property contract."
   logProgress?: boolean;
 
   /**
@@ -5340,6 +5377,7 @@ model ScheduleProperties {
   /**
    * Gets or sets a value indicating whether this schedule is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScheduleProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
@@ -5420,6 +5458,7 @@ model ScheduleUpdateProperties {
   /**
    * Gets or sets a value indicating whether this schedule is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScheduleUpdateProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 }
 
@@ -5775,11 +5814,13 @@ model SourceControlCreateOrUpdateProperties {
   /**
    * The auto async of the source control. Default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SourceControlCreateOrUpdateProperties.autoSync has a boolean wire value; preserve the published property contract."
   autoSync?: boolean;
 
   /**
    * The auto publish of the source control. Default is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SourceControlCreateOrUpdateProperties.publishRunbook has a boolean wire value; preserve the published property contract."
   publishRunbook?: boolean;
 
   /**
@@ -5843,11 +5884,13 @@ model SourceControlProperties {
   /**
    * The auto sync of the source control. Default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SourceControlProperties.autoSync has a boolean wire value; preserve the published property contract."
   autoSync?: boolean;
 
   /**
    * The auto publish of the source control. Default is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SourceControlProperties.publishRunbook has a boolean wire value; preserve the published property contract."
   publishRunbook?: boolean;
 
   /**
@@ -5900,11 +5943,13 @@ model SourceControlUpdateProperties {
   /**
    * The auto sync of the source control. Default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SourceControlUpdateProperties.autoSync has a boolean wire value; preserve the published property contract."
   autoSync?: boolean;
 
   /**
    * The auto publish of the source control. Default is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SourceControlUpdateProperties.publishRunbook has a boolean wire value; preserve the published property contract."
   publishRunbook?: boolean;
 
   /**
@@ -6210,6 +6255,7 @@ model VariableCreateOrUpdateProperties {
   /**
    * Gets or sets the encrypted flag of the variable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VariableCreateOrUpdateProperties.isEncrypted has a boolean wire value; preserve the published property contract."
   isEncrypted?: boolean;
 }
 
@@ -6367,6 +6413,7 @@ model WebhookProperties {
   /**
    * Gets or sets the value of the enabled flag of the webhook.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebhookProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
@@ -6448,6 +6495,7 @@ model WebhookCreateOrUpdateProperties {
   /**
    * Gets or sets the value of the enabled flag of webhook.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebhookCreateOrUpdateProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
@@ -6500,6 +6548,7 @@ model WebhookUpdateProperties {
   /**
    * Gets or sets the value of the enabled flag of webhook.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebhookUpdateProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
@@ -6526,11 +6575,13 @@ model RunbookCreateOrUpdateDraftProperties {
   /**
    * Gets or sets verbose log option.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RunbookCreateOrUpdateDraftProperties.logVerbose has a boolean wire value; preserve the published property contract."
   logVerbose?: boolean;
 
   /**
    * Gets or sets progress log option.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RunbookCreateOrUpdateDraftProperties.logProgress has a boolean wire value; preserve the published property contract."
   logProgress?: boolean;
 
   /**

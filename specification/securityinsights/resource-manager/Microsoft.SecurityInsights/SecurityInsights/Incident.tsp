@@ -114,12 +114,14 @@ interface Incidents {
       /**
        * Sorts the results. Optional.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$orderby retains the $orderby query parameter; preserve wire compatibility."
       @query("$orderby")
       $orderby?: string;
 
       /**
        * Returns only the first n results. Optional.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @query("$top")
       $top?: int32;
@@ -127,6 +129,7 @@ interface Incidents {
       /**
        * Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },

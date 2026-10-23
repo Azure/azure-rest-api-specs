@@ -70,18 +70,22 @@ interface CustomPrivateEndpointConnection {
       /**
        * Number of items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByHostPool.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @query("pageSize")
       pageSize?: int32;
 
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByHostPool.isDescending has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByHostPool.isDescending retains the isDescending query parameter; preserve wire compatibility."
       @query("isDescending")
       isDescending?: boolean;
 
       /**
        * Initial number of items to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByHostPool.initialSkip retains the initialSkip query parameter; preserve wire compatibility."
       @query("initialSkip")
       initialSkip?: int32;
     },

@@ -20,6 +20,7 @@ interface ManagedClustersOperationGroup {
   /**
    * Contains extra metadata on the version, including supported patch versions, capabilities, available upgrades, and details on preview status of the version
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listKubernetesVersions retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets a list of supported Kubernetes versions in the specified subscription.")
   @tag("ManagedClusters")
   @autoRoute
@@ -88,6 +89,8 @@ interface VmSkusOperationGroup {
       /**
        * To Include Extended Locations information or not in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.includeExtendedLocations has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.includeExtendedLocations retains the includeExtendedLocations query parameter; preserve wire compatibility."
       @query
       includeExtendedLocations?: boolean;
     }

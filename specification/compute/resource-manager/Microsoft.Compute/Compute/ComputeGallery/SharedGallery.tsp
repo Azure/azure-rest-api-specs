@@ -46,6 +46,7 @@ interface SharedGalleries {
       /**
        * The query parameter to decide what shared galleries to fetch when doing listing operations.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.sharedTo retains the sharedTo query parameter; preserve wire compatibility."
       @query("sharedTo")
       sharedTo?: SharedToValues;
     },

@@ -214,6 +214,7 @@ model Attributes {
   /**
    * Determines whether the object is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Attributes.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -333,6 +334,7 @@ model CertificateBundle {
   /**
    * Specifies whether the certificate chain preserves its original order. The default value is false, which sets the leaf certificate at index 0.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateBundle.preserveCertOrder has a boolean wire value; preserve the published property contract."
   @Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
   preserveCertOrder?: boolean;
 }
@@ -416,6 +418,7 @@ model KeyProperties {
   /**
    * Indicates if the private key can be exported. Release policy must be provided when creating the first version of an exportable key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KeyProperties.exportable has a boolean wire value; preserve the published property contract."
   exportable?: boolean;
 
   /**
@@ -433,6 +436,7 @@ model KeyProperties {
   /**
    * Indicates if the same key pair will be used on certificate renewal.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KeyProperties.reuseKey has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "reuse_key")
   reuseKey?: boolean;
 
@@ -587,6 +591,7 @@ model IssuerParameters {
    * Indicates if the certificates generated under this policy should be published to certificate transparency logs.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IssuerParameters.CertificateTransparency has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "cert_transparency")
   CertificateTransparency?: boolean;
 }
@@ -761,6 +766,7 @@ model IssuerAttributes {
   /**
    * Determines whether the issuer is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IssuerAttributes.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -860,6 +866,7 @@ model CertificateCreateParameters {
   /**
    * Specifies whether the certificate chain preserves its original order. The default value is false, which sets the leaf certificate at index 0.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateCreateParameters.preserveCertOrder has a boolean wire value; preserve the published property contract."
   @Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
   preserveCertOrder?: boolean;
 }
@@ -889,6 +896,7 @@ model CertificateOperation {
    * Indicates if cancellation was requested on the certificate operation.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateOperation.cancellation_requested has a boolean wire value; preserve the published property contract."
   cancellation_requested?: boolean;
 
   /**
@@ -916,6 +924,7 @@ model CertificateOperation {
   /**
    * Specifies whether the certificate chain preserves its original order. The default value is false, which sets the leaf certificate at index 0.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateOperation.preserveCertOrder has a boolean wire value; preserve the published property contract."
   @Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
   preserveCertOrder?: boolean;
 
@@ -962,6 +971,7 @@ model CertificateImportParameters {
   /**
    * Specifies whether the certificate chain preserves its original order. The default value is false, which sets the leaf certificate at index 0.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateImportParameters.preserveCertOrder has a boolean wire value; preserve the published property contract."
   @Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
   preserveCertOrder?: boolean;
 }
@@ -996,6 +1006,7 @@ model CertificateOperationUpdateParameter {
    * Indicates if cancellation was requested on the certificate operation.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateOperationUpdateParameter.cancellation_requested has a boolean wire value; preserve the published property contract."
   cancellation_requested: boolean;
 }
 

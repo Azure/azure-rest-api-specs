@@ -181,6 +181,7 @@ model ResourceProviderOperationDefinition {
   /**
    * Indicates whether the operation is data action or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ResourceProviderOperationDefinition.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**

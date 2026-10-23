@@ -1310,10 +1310,12 @@ model EnvironmentDefinitionParameter {
   @visibility(Lifecycle.Read)
   type?: ParameterType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EnvironmentDefinitionParameter.readOnly has a boolean wire value; preserve the published property contract."
   @doc("Whether or not this parameter is read-only.  If true, default should have a value.")
   @visibility(Lifecycle.Read)
   readOnly?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EnvironmentDefinitionParameter.required has a boolean wire value; preserve the published property contract."
   @doc("Whether or not this parameter is required.")
   @visibility(Lifecycle.Read)
   required?: boolean;
@@ -1468,6 +1470,7 @@ model ImageVersionProperties {
   @visibility(Lifecycle.Read)
   publishedDate?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImageVersionProperties.excludeFromLatest has a boolean wire value; preserve the published property contract."
   @doc("If the version should be excluded from being treated as the latest version.")
   @visibility(Lifecycle.Read)
   excludeFromLatest?: boolean;
@@ -1795,6 +1798,7 @@ model CustomizationTaskInput {
   @visibility(Lifecycle.Read)
   type?: CustomizationTaskInputType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CustomizationTaskInput.required has a boolean wire value; preserve the published property contract."
   @doc("Whether or not the input is required.")
   @visibility(Lifecycle.Read)
   required?: boolean;

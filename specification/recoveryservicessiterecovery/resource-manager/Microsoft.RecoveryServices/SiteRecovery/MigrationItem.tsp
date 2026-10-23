@@ -80,6 +80,7 @@ interface MigrationItems {
       /**
        * The delete option.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.deleteOption retains the deleteOption query parameter; preserve wire compatibility."
       @query("deleteOption")
       deleteOption?: string;
     },
@@ -96,12 +97,14 @@ interface MigrationItems {
       /**
        * The pagination token.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByReplicationProtectionContainers.skipToken retains the skipToken query parameter; preserve wire compatibility."
       @query("skipToken")
       skipToken?: string;
 
       /**
        * The page size.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByReplicationProtectionContainers.takeToken retains the takeToken query parameter; preserve wire compatibility."
       @query("takeToken")
       takeToken?: string;
 

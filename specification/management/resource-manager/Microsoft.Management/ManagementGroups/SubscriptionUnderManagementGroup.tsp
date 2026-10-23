@@ -50,6 +50,7 @@ interface SubscriptionUnderManagementGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing create retains its tenant-scoped route; preserve published resource IDs and API paths."
   create is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceSync<
     Extension.Tenant,
     SubscriptionUnderManagementGroup,
@@ -83,6 +84,7 @@ interface SubscriptionUnderManagementGroups {
        * If a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.
        *
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getSubscriptionsUnderManagementGroup.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: string;
     },

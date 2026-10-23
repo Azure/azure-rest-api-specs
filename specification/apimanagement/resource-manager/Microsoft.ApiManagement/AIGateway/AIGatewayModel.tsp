@@ -356,9 +356,11 @@ model AiGatewayPolicy {
   overrides?: AiGatewayCostLimitOverride[];
 
   /** Whether to check tool requests for threats. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AiGatewayPolicy.preInvocation has a boolean wire value; preserve the published property contract."
   preInvocation?: boolean;
 
   /** Whether to check tool responses for threats. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AiGatewayPolicy.postInvocation has a boolean wire value; preserve the published property contract."
   postInvocation?: boolean;
 
   /** Default HTTPS destination for agent hooks. */
@@ -422,9 +424,11 @@ model AiGatewayPolicy {
   exposeHeaders?: string[];
 
   /** Whether browsers may send credentials. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AiGatewayPolicy.allowCredentials has a boolean wire value; preserve the published property contract."
   allowCredentials?: boolean;
 
   /** Whether unmatched CORS requests are terminated. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AiGatewayPolicy.terminateUnmatchedRequest has a boolean wire value; preserve the published property contract."
   terminateUnmatchedRequest?: boolean;
 
   /** Browser preflight cache duration in seconds. */
@@ -463,9 +467,11 @@ model AiGatewayPolicyUpdate {
   overrides?: AiGatewayCostLimitOverrideUpdate[];
 
   /** Whether to check tool requests for threats. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AiGatewayPolicyUpdate.preInvocation has a boolean wire value; preserve the published property contract."
   preInvocation?: boolean;
 
   /** Whether to check tool responses for threats. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AiGatewayPolicyUpdate.postInvocation has a boolean wire value; preserve the published property contract."
   postInvocation?: boolean;
 
   /** Default HTTPS destination for agent hooks. */
@@ -529,9 +535,11 @@ model AiGatewayPolicyUpdate {
   exposeHeaders?: string[];
 
   /** Whether browsers may send credentials. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AiGatewayPolicyUpdate.allowCredentials has a boolean wire value; preserve the published property contract."
   allowCredentials?: boolean;
 
   /** Whether unmatched CORS requests are terminated. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AiGatewayPolicyUpdate.terminateUnmatchedRequest has a boolean wire value; preserve the published property contract."
   terminateUnmatchedRequest?: boolean;
 
   /** Browser preflight cache duration in seconds. */

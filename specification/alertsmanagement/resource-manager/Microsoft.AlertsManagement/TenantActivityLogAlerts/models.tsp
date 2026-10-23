@@ -51,6 +51,7 @@ model AlertRuleProperties {
   /**
    * Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AlertRuleProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean = true;
 
   /**
@@ -202,6 +203,7 @@ model TenantAlertRulePatchProperties {
   /**
    * Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TenantAlertRulePatchProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean = true;
 }
 

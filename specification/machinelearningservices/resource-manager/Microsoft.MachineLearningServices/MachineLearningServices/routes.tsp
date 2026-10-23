@@ -36,6 +36,7 @@ interface VirtualMachineSizesOperationGroup {
   /**
    * Returns supported VM Sizes in a location
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("vmSizes")
@@ -106,6 +107,7 @@ interface PTUQuotaOperationGroup {
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAvailable.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
     }
@@ -139,6 +141,7 @@ interface PTUQuotaOperationGroup {
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
     }

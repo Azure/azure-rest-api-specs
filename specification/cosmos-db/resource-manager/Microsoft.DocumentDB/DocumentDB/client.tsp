@@ -217,6 +217,7 @@ op mongoUserDefinitionCreateUpdateMongoUserDefinitionCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing mongoDBResourcesDeleteMongoRoleDefinitionCustomized SDK method name; renaming it would break client compatibility."
 op mongoDBResourcesDeleteMongoRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -251,6 +252,7 @@ op mongoDBResourcesDeleteMongoRoleDefinitionCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing mongoDBResourcesDeleteMongoUserDefinitionCustomized SDK method name; renaming it would break client compatibility."
 op mongoDBResourcesDeleteMongoUserDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -285,6 +287,7 @@ op mongoDBResourcesDeleteMongoUserDefinitionCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing mongoDBResourcesGetMongoRoleDefinitionCustomized SDK method name; renaming it would break client compatibility."
 op mongoDBResourcesGetMongoRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -316,6 +319,7 @@ op mongoDBResourcesGetMongoRoleDefinitionCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing mongoDBResourcesGetMongoUserDefinitionCustomized SDK method name; renaming it would break client compatibility."
 op mongoDBResourcesGetMongoUserDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -423,6 +427,7 @@ op sqlResourcesCreateUpdateSqlRoleDefinitionCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing sqlResourcesDeleteSqlRoleAssignmentCustomized SDK method name; renaming it would break client compatibility."
 op sqlResourcesDeleteSqlRoleAssignmentCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -457,6 +462,7 @@ op sqlResourcesDeleteSqlRoleAssignmentCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing sqlResourcesDeleteSqlRoleDefinitionCustomized SDK method name; renaming it would break client compatibility."
 op sqlResourcesDeleteSqlRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -491,6 +497,7 @@ op sqlResourcesDeleteSqlRoleDefinitionCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing sqlResourcesGetSqlRoleAssignmentCustomized SDK method name; renaming it would break client compatibility."
 op sqlResourcesGetSqlRoleAssignmentCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -522,6 +529,7 @@ op sqlResourcesGetSqlRoleAssignmentCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing sqlResourcesGetSqlRoleDefinitionCustomized SDK method name; renaming it would break client compatibility."
 op sqlResourcesGetSqlRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,

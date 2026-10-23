@@ -997,6 +997,7 @@ model AuthPlatform {
   /**
    * <code>true</code> if the Authentication / Authorization feature is enabled for the current app; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AuthPlatform.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1082,6 +1083,7 @@ model AzureActiveDirectory {
   /**
    * <code>false</code> if the Azure Active Directory provider should not be enabled despite the set registration; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureActiveDirectory.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1104,6 +1106,7 @@ model AzureActiveDirectory {
    * This is an internal flag primarily intended to support the Azure Management Portal. Users should not
    * read or write to this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureActiveDirectory.isAutoProvisioned has a boolean wire value; preserve the published property contract."
   isAutoProvisioned?: boolean;
 }
 
@@ -1165,6 +1168,7 @@ model AzureActiveDirectoryLogin {
    * <code>true</code> if the www-authenticate provider should be omitted from the request; otherwise, <code>false</code>.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureActiveDirectoryLogin.disableWWWAuthenticate has a boolean wire value; preserve the published property contract."
   disableWWWAuthenticate?: boolean;
 }
 
@@ -1240,6 +1244,7 @@ model Facebook {
   /**
    * <code>false</code> if the Facebook provider should not be enabled despite the set registration; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Facebook.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1290,6 +1295,7 @@ model GitHub {
   /**
    * <code>false</code> if the GitHub provider should not be enabled despite the set registration; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GitHub.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1325,6 +1331,7 @@ model Google {
   /**
    * <code>false</code> if the Google provider should not be enabled despite the set registration; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Google.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1360,6 +1367,7 @@ model Twitter {
   /**
    * <code>false</code> if the Twitter provider should not be enabled despite the set registration; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Twitter.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1394,6 +1402,7 @@ model Apple {
   /**
    * <code>false</code> if the Apple provider should not be enabled despite the set registration; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Apple.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1429,6 +1438,7 @@ model AzureStaticWebApps {
   /**
    * <code>false</code> if the Azure Static Web Apps provider should not be enabled despite the set registration; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureStaticWebApps.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1454,6 +1464,7 @@ model CustomOpenIdConnectProvider {
   /**
    * <code>false</code> if the custom Open ID provider provider should not be enabled; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CustomOpenIdConnectProvider.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1564,6 +1575,7 @@ model Login {
   /**
    * <code>true</code> if the fragments from the request are preserved after the login request is made; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Login.preserveUrlFragmentsForLogins has a boolean wire value; preserve the published property contract."
   preserveUrlFragmentsForLogins?: boolean;
 
   /**
@@ -1602,6 +1614,7 @@ model TokenStore {
    * <code>true</code> to durably store platform-specific security tokens that are obtained during login flows; otherwise, <code>false</code>.
    *  The default is <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TokenStore.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1669,6 +1682,7 @@ model Nonce {
   /**
    * <code>false</code> if the nonce should not be validated while completing the login flow; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Nonce.validateNonce has a boolean wire value; preserve the published property contract."
   validateNonce?: boolean;
 
   /**
@@ -1684,6 +1698,7 @@ model HttpSettings {
   /**
    * <code>false</code> if the authentication/authorization responses not having the HTTPS scheme are permissible; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HttpSettings.requireHttps has a boolean wire value; preserve the published property contract."
   requireHttps?: boolean;
 
   /**
@@ -2279,6 +2294,7 @@ model CertificateProperties {
   /**
    * Is the certificate valid?.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateProperties.valid has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   valid?: boolean;
 
@@ -2330,6 +2346,7 @@ model DaprComponentProperties {
   /**
    * Boolean describing if the component errors are ignores
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DaprComponentProperties.ignoreErrors has a boolean wire value; preserve the published property contract."
   ignoreErrors?: boolean = false;
 
   /**
@@ -2657,6 +2674,7 @@ model CheckMigrationEligibilityResponse {
   /**
    * Whether the managed environment can migrate to the requested target mode.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckMigrationEligibilityResponse.isEligible has a boolean wire value; preserve the published property contract."
   isEligible: boolean;
 
   /**
@@ -2759,6 +2777,7 @@ model ManagedEnvironmentProperties {
   /**
    * Whether or not this Managed Environment is zone-redundant.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedEnvironmentProperties.zoneRedundant has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   zoneRedundant?: boolean;
 
@@ -2857,6 +2876,7 @@ model VnetConfiguration {
   /**
    * Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource. They must provide infrastructureSubnetId if enabling this property
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VnetConfiguration.internal has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   internal?: boolean;
 
@@ -2920,6 +2940,7 @@ model LogAnalyticsConfiguration {
   /**
    * Boolean indicating whether to parse json string log into dynamic json columns
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LogAnalyticsConfiguration.dynamicJsonColumns has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_03_02_preview)
   @removed(Versions.v2026_07_01)
@@ -3011,6 +3032,7 @@ model OtlpConfiguration {
   /**
    * Boolean indicating if otlp configuration is insecure
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OtlpConfiguration.insecure has a boolean wire value; preserve the published property contract."
   insecure?: boolean;
 
   /**
@@ -3042,6 +3064,7 @@ model TracesConfiguration {
   /**
    * Boolean indicating if including dapr traces
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TracesConfiguration.includeDapr has a boolean wire value; preserve the published property contract."
   includeDapr?: boolean;
 
   /**
@@ -3067,6 +3090,7 @@ model MetricsConfiguration {
   /**
    * Boolean indicating if including keda metrics
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricsConfiguration.includeKeda has a boolean wire value; preserve the published property contract."
   includeKeda?: boolean;
 
   /**
@@ -3087,6 +3111,7 @@ model WorkloadProfile {
   /**
    * Whether to use a FIPS-enabled OS. Supported only for dedicated workload profiles.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WorkloadProfile.enableFips has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_03_02_preview)
   @removed(Versions.v2026_07_01)
@@ -3147,6 +3172,7 @@ model Mtls {
   /**
    * Boolean indicating whether the mutual TLS authentication is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Mtls.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3167,6 +3193,7 @@ model ManagedEnvironmentPropertiesPeerTrafficConfigurationEncryption {
   /**
    * Boolean indicating whether the peer traffic encryption is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedEnvironmentPropertiesPeerTrafficConfigurationEncryption.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3642,6 +3669,7 @@ model DaprSubscriptionBulkSubscribeOptions {
   /**
    * Enable bulk subscription
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DaprSubscriptionBulkSubscribeOptions.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean = false;
 
   /**
@@ -3801,6 +3829,7 @@ model HttpRouteMatch {
   /**
    * path case sensitive, default is true
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HttpRouteMatch.caseSensitive has a boolean wire value; preserve the published property contract."
   caseSensitive?: boolean;
 }
 
@@ -4829,6 +4858,7 @@ model DiagnosticRendering {
   /**
    * Flag if the table should be rendered
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DiagnosticRendering.isVisible has a boolean wire value; preserve the published property contract."
   isVisible?: boolean;
 }
 
@@ -6635,11 +6665,13 @@ model McpServerSettings {
   /**
    * Indicates whether the MCP server is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing McpServerSettings.isMcpServerEnabled has a boolean wire value; preserve the published property contract."
   isMcpServerEnabled?: boolean = false;
 
   /**
    * Indicates whether the MCP server API key is disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing McpServerSettings.isMcpServerApiKeyDisabled has a boolean wire value; preserve the published property contract."
   isMcpServerApiKeyDisabled?: boolean = false;
 
   /**
@@ -7231,6 +7263,7 @@ model Ingress {
   /**
    * Bool indicating if app exposes an external http endpoint
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Ingress.external has a boolean wire value; preserve the published property contract."
   external?: boolean = false;
 
   /**
@@ -7263,6 +7296,7 @@ model Ingress {
   /**
    * Bool indicating if HTTP connections to is allowed. If set to false HTTP connections are automatically redirected to HTTPS connections
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Ingress.allowInsecure has a boolean wire value; preserve the published property contract."
   allowInsecure?: boolean = false;
 
   /**
@@ -7318,6 +7352,7 @@ model TrafficWeight {
   /**
    * Indicates that the traffic weight belongs to a latest stable revision
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TrafficWeight.latestRevision has a boolean wire value; preserve the published property contract."
   latestRevision?: boolean = false;
 
   /**
@@ -7413,6 +7448,7 @@ model CorsPolicy {
   /**
    * Specifies whether the resource allows credentials
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CorsPolicy.allowCredentials has a boolean wire value; preserve the published property contract."
   allowCredentials?: boolean;
 }
 
@@ -7423,6 +7459,7 @@ model IngressPortMapping {
   /**
    * Specifies whether the app port is accessible outside of the environment
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IngressPortMapping.external has a boolean wire value; preserve the published property contract."
   external: boolean;
 
   /**
@@ -7443,6 +7480,7 @@ model Dapr {
   /**
    * Boolean indicating if the Dapr side car is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Dapr.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean = false;
 
   /**
@@ -7478,6 +7516,7 @@ model Dapr {
   /**
    * Enables API logging for the Dapr sidecar
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Dapr.enableApiLogging has a boolean wire value; preserve the published property contract."
   enableApiLogging?: boolean;
 
   /**
@@ -7498,6 +7537,7 @@ model DaprAppHealth {
   /**
    * Boolean indicating if the health probe is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DaprAppHealth.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -7549,6 +7589,7 @@ model RuntimeJava {
   /**
    * Enable jmx core metrics for the java app
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RuntimeJava.enableMetrics has a boolean wire value; preserve the published property contract."
   enableMetrics?: boolean;
 
   /**
@@ -7567,6 +7608,7 @@ model RuntimeJavaJavaAgent {
   /**
    * Enable java agent injection for the java app.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RuntimeJavaJavaAgent.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -7608,6 +7650,7 @@ model RuntimeDotnet {
   /**
    * Auto configure the ASP.NET Core Data Protection feature
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RuntimeDotnet.autoConfigureDataProtection has a boolean wire value; preserve the published property contract."
   autoConfigureDataProtection?: boolean;
 }
 
@@ -7827,6 +7870,7 @@ model Scale {
   /**
    * Optional. Whether custom scale rules can override the automatic scale rules. This property is only applicable to Function Apps.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Scale.allowScalingRuleOverride has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_07_01)
   allowScalingRuleOverride?: boolean;
 
@@ -7964,6 +8008,7 @@ model CustomHostnameAnalysisResult {
   /**
    * <code>true</code> if hostname is already verified; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CustomHostnameAnalysisResult.isHostnameAlreadyVerified has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isHostnameAlreadyVerified?: boolean;
 
@@ -7982,12 +8027,14 @@ model CustomHostnameAnalysisResult {
   /**
    * <code>true</code> if there is a conflict on the Container App's managed environment; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CustomHostnameAnalysisResult.hasConflictOnManagedEnvironment has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasConflictOnManagedEnvironment?: boolean;
 
   /**
    * <code>true</code> if there is a conflict on the Container App's managed environment level custom domain; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CustomHostnameAnalysisResult.conflictWithEnvironmentCustomDomain has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   conflictWithEnvironmentCustomDomain?: boolean;
 
@@ -8333,6 +8380,7 @@ model ContainerAppsFunctionProperties {
   /**
    * Indicates whether the function is disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerAppsFunctionProperties.isDisabledLegacy has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_07_01)
   @renamedFrom(Versions.v2026_07_01, "isDisabled")
   @visibility(Lifecycle.Read)
@@ -8342,6 +8390,7 @@ model ContainerAppsFunctionProperties {
    * Indicates whether the function is disabled. This property is deprecated; use `state` instead.
    */
   #deprecated "Use `state` instead."
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerAppsFunctionProperties.isDisabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_07_01)
   @visibility(Lifecycle.Read)
   isDisabled?: boolean;
@@ -8569,6 +8618,7 @@ model PatchSkipConfig {
   /**
    * The flag to indicate whether to skip the patch or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PatchSkipConfig.skip has a boolean wire value; preserve the published property contract."
   skip?: boolean;
 }
 
@@ -8613,6 +8663,7 @@ model RevisionProperties {
   /**
    * Boolean describing if the Revision is Active
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RevisionProperties.active has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   active?: boolean;
 
@@ -8716,11 +8767,13 @@ model ReplicaContainer {
   /**
    * The container ready status
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ReplicaContainer.ready has a boolean wire value; preserve the published property contract."
   ready?: boolean;
 
   /**
    * The container start status
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ReplicaContainer.started has a boolean wire value; preserve the published property contract."
   started?: boolean;
 
   /**
@@ -8847,6 +8900,7 @@ model OperationDetail {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OperationDetail.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**

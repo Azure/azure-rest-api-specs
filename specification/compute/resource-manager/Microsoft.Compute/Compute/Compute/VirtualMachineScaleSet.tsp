@@ -89,6 +89,7 @@ interface VirtualMachineScaleSets {
       /**
        * The expand expression to apply on the operation. 'UserData' retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: ExpandTypesForGetVMScaleSets;
     }
@@ -156,6 +157,8 @@ interface VirtualMachineScaleSets {
       /**
        * Optional parameter to force delete a VM scale set. (Feature in Preview)
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.forceDeletion has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.forceDeletion retains the forceDeletion query parameter; preserve wire compatibility."
       @query("forceDeletion")
       forceDeletion?: boolean;
     }
@@ -213,6 +216,7 @@ interface VirtualMachineScaleSets {
        * Optional parameter to hibernate a virtual machine from the VM scale set. (This feature is available for VMSS with Flexible OrchestrationMode only)
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing deallocate POST contract uses hibernate in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing deallocate.hibernate has a boolean wire value; preserve the published property contract."
       @query("hibernate")
       hibernate?: boolean;
     },
@@ -235,6 +239,7 @@ interface VirtualMachineScaleSets {
        * Optional parameter to force delete virtual machines from the VM scale set. (Feature in Preview)
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing deleteInstances POST contract uses forceDeletion in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing deleteInstances.forceDeletion has a boolean wire value; preserve the published property contract."
       @query("forceDeletion")
       forceDeletion?: boolean;
     },
@@ -277,6 +282,7 @@ interface VirtualMachineScaleSets {
    * Gets the status of a VM scale set instance.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getInstanceView retains its response and SDK paging behavior; preserve published compatibility."
   @tag("VirtualMachineScaleSets")
   @get
   @action("instanceView")
@@ -341,6 +347,7 @@ interface VirtualMachineScaleSets {
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing powerOff POST contract uses skipShutdown in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing powerOff.skipShutdown has a boolean wire value; preserve the published property contract."
       @query("skipShutdown")
       skipShutdown?: boolean;
     },

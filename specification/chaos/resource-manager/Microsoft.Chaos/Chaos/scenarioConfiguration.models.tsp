@@ -509,6 +509,7 @@ model PermissionsFixProperties {
   /**
    * Whether this was a what-if (dry run) operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PermissionsFixProperties.whatIfMode has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   whatIfMode: boolean;
 
@@ -696,5 +697,6 @@ model FixResourcePermissionsRequest {
   /**
    * Optional value that indicates whether to run a "dry run" of fixing resource permissions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FixResourcePermissionsRequest.whatIf has a boolean wire value; preserve the published property contract."
   whatIf?: boolean;
 }

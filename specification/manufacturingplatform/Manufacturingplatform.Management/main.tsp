@@ -98,10 +98,12 @@ model MdsResourceProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   version?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MdsResourceProperties.enableCopilot has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Enable Copilot.")
   enableCopilot?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MdsResourceProperties.enableDiagnosticSettings has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Enable Diagnostic Settings.")
   enableDiagnosticSettings?: boolean;
@@ -429,12 +431,15 @@ model ApplicationVersion {
   @doc("Application Version")
   version: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationVersion.isLatest has a boolean wire value; preserve the published property contract."
   @doc("Is Latest")
   isLatest: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationVersion.isPreview has a boolean wire value; preserve the published property contract."
   @doc("Is Preview")
   isPreview: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationVersion.isDeprecated has a boolean wire value; preserve the published property contract."
   @doc("Is Deprecated")
   isDeprecated: boolean;
 }

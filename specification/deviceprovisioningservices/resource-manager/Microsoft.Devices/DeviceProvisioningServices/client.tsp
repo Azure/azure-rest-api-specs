@@ -273,6 +273,7 @@ using Microsoft.Devices;
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing IotDpsResourceDeleteCustomized SDK method name; renaming it would break client compatibility."
 op IotDpsResourceDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -325,6 +326,7 @@ op IotDpsResourceListKeysCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing IotDpsResourceGetOperationResultCustomized SDK method name; renaming it would break client compatibility."
 op IotDpsResourceGetOperationResultCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -406,6 +408,7 @@ op IotDpsResourceListValidSkusCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing IotDpsResourceGetCustomized SDK method name; renaming it would break client compatibility."
 op IotDpsResourceGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -452,6 +455,7 @@ op CertificateResponseDeleteCustomized(
   certificateRawBytes?: bytes,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateResponseDeleteCustomized.certificateIsVerified has a boolean wire value; preserve the published property contract."
   @query("certificate.isVerified")
   certificateIsVerified?: boolean,
 
@@ -463,6 +467,7 @@ op CertificateResponseDeleteCustomized(
   ...CertificateNameQuery4,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateResponseDeleteCustomized.certificateHasPrivateKey has a boolean wire value; preserve the published property contract."
   @query("certificate.hasPrivateKey")
   certificateHasPrivateKey?: boolean,
 
@@ -510,6 +515,7 @@ op CertificateResponseGenerateVerificationCodeCustomized(
   /**
    * Indicates if the certificate has been verified by owner of the private key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateResponseGenerateVerificationCodeCustomized.certificateIsVerified has a boolean wire value; preserve the published property contract."
   @query("certificate.isVerified")
   certificateIsVerified?: boolean,
 
@@ -525,6 +531,7 @@ op CertificateResponseGenerateVerificationCodeCustomized(
   /**
    * Indicates if the certificate contains private key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateResponseGenerateVerificationCodeCustomized.certificateHasPrivateKey has a boolean wire value; preserve the published property contract."
   @query("certificate.hasPrivateKey")
   certificateHasPrivateKey?: boolean,
 
@@ -577,6 +584,7 @@ op CertificateResponseVerifyCertificateCustomized(
   /**
    * Indicates if the certificate has been verified by owner of the private key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateResponseVerifyCertificateCustomized.certificateIsVerified has a boolean wire value; preserve the published property contract."
   @query("certificate.isVerified")
   certificateIsVerified?: boolean,
 
@@ -592,6 +600,7 @@ op CertificateResponseVerifyCertificateCustomized(
   /**
    * Indicates if the certificate contains private key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateResponseVerifyCertificateCustomized.certificateHasPrivateKey has a boolean wire value; preserve the published property contract."
   @query("certificate.hasPrivateKey")
   certificateHasPrivateKey?: boolean,
 
@@ -616,6 +625,7 @@ op CertificateResponseVerifyCertificateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing CertificateResponseGetCustomized SDK method name; renaming it would break client compatibility."
 op CertificateResponseGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,

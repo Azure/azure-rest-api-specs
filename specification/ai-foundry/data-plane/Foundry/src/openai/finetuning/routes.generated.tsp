@@ -174,6 +174,7 @@ interface FineTuning {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing retrieveFineTuningJob SDK method name; renaming it would break client compatibility."
   @summary("Get a fine tuning job")
   @route("jobs/{fine_tuning_job_id}")
   @get

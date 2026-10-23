@@ -75,6 +75,7 @@ model TaskIdentifier {
 @added(Versions.v2023_04_01)
 model TaskParameters {
   /** logging opt out */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TaskParameters.loggingOptOut has a boolean wire value; preserve the published property contract."
   loggingOptOut?: boolean = false;
 }
 
@@ -87,6 +88,7 @@ model PreBuiltTaskParameters is TaskParameters {
 
 alias ShowStatsQueryParameter = QueryParametersTrait<{
   /** (Optional) if set to true, response will contain request and document level statistics. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ShowStatsQueryParameter.showStats has a boolean wire value; preserve the published property contract."
   @query
   @clientName("showStatistics", "csharp")
   showStats?: boolean;
@@ -214,6 +216,7 @@ model KnowledgeBaseAnswer {
 /** Dialog associated with Answer. */
 model KnowledgeBaseAnswerDialog {
   /** To mark if a prompt is relevant only with a previous question or not. If true, do not include this QnA as search result for queries without context; otherwise, if false, ignores context and includes this QnA in search result. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KnowledgeBaseAnswerDialog.isContextOnly has a boolean wire value; preserve the published property contract."
   isContextOnly?: boolean;
 
   /** List of prompts associated with the answer. */
@@ -283,12 +286,14 @@ model AnswersOptions {
   answerSpanRequest?: ShortAnswerOptions;
 
   /** (Optional) Flag to enable Query over Unstructured Sources. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AnswersOptions.includeUnstructuredSources has a boolean wire value; preserve the published property contract."
   includeUnstructuredSources?: boolean;
 }
 
 /** To configure Answer span prediction feature. */
 model ShortAnswerOptions {
   /** Enable or disable Answer Span prediction. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ShortAnswerOptions.enable has a boolean wire value; preserve the published property contract."
   enable?: boolean = true;
 
   /** Minimum threshold score required to include an answer span, value ranges from 0 to 1. */
@@ -500,9 +505,11 @@ model ConversationCallingOptions {
   language?: string;
 
   /** If true, the service will return more detailed information. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConversationCallingOptions.verbose has a boolean wire value; preserve the published property contract."
   verbose?: boolean;
 
   /** If true, the query will be saved for customers to further review in authoring, to improve the model quality. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConversationCallingOptions.isLoggingEnabled has a boolean wire value; preserve the published property contract."
   isLoggingEnabled?: boolean;
 }
 
@@ -764,6 +771,7 @@ model BooleanResolution extends BaseResolution {
   resolutionKind: ResolutionKind.BooleanResolution;
 
   /** A resolution for boolean expressions */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BooleanResolution.value has a boolean wire value; preserve the published property contract."
   value: boolean;
 }
 
@@ -1094,9 +1102,11 @@ model ConversationTaskParameters {
   deploymentName: string;
 
   /** If true, the service will return more detailed information in the response. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConversationTaskParameters.verbose has a boolean wire value; preserve the published property contract."
   verbose?: boolean;
 
   /** If true, the service will keep the query for further review. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConversationTaskParameters.isLoggingEnabled has a boolean wire value; preserve the published property contract."
   isLoggingEnabled?: boolean;
 
   /** Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets. */

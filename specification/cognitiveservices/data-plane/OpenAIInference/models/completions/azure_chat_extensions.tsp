@@ -152,6 +152,7 @@ union AzureChatExtensionRetrieveDocumentFilterReason {
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("A representation of the available options for the Azure OpenAI grounding enhancement.")
 model AzureChatGroundingEnhancementConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureChatGroundingEnhancementConfiguration.enabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the enhancement is enabled.")
   enabled: boolean;
 }
@@ -160,6 +161,7 @@ model AzureChatGroundingEnhancementConfiguration {
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("A representation of the available options for the Azure OpenAI optical character recognition (OCR) enhancement.")
 model AzureChatOCREnhancementConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureChatOCREnhancementConfiguration.enabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the enhancement is enabled.")
   enabled: boolean;
 }

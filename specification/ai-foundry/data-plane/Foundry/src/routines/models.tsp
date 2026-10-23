@@ -252,6 +252,7 @@ model Routine {
   @maxLength(1024)
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Routine.enabled has a boolean wire value; preserve the published property contract."
   @doc("Whether the routine is enabled.")
   enabled: boolean;
 
@@ -283,6 +284,7 @@ model RoutineCreateOrUpdateRequest {
   @maxLength(1024)
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RoutineCreateOrUpdateRequest.enabled has a boolean wire value; preserve the published property contract."
   @doc("Whether the routine is enabled.")
   enabled?: boolean;
 

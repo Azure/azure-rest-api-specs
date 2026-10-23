@@ -51,6 +51,7 @@ interface PipelineResources {
    * Creates or updates a pipeline.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing createOrUpdate retains its request-body shape; preserve wire compatibility."
   @tag("pipelines")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PipelineResource,
@@ -85,6 +86,7 @@ interface PipelineResources {
   /**
    * Creates a run of a pipeline.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing createRun retains its request-body shape; preserve wire compatibility."
   @tag("pipelines")
   createRun is ArmResourceActionSync<
     PipelineResource,
@@ -102,6 +104,7 @@ interface PipelineResources {
        * Recovery mode flag. If recovery mode is set to true, the specified referenced pipeline run and the new run will be grouped under the same groupId.
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing createRun POST contract uses isRecovery in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing createRun.isRecovery has a boolean wire value; preserve the published property contract."
       @query("isRecovery")
       isRecovery?: boolean;
 
@@ -116,6 +119,7 @@ interface PipelineResources {
        * In recovery mode, if set to true, the rerun will start from failed activities. The property will be used only if startActivityName is not specified.
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing createRun POST contract uses startFromFailure in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing createRun.startFromFailure has a boolean wire value; preserve the published property contract."
       @query("startFromFailure")
       startFromFailure?: boolean;
     },

@@ -316,6 +316,7 @@ model RegistryProperties {
   /**
    * The value that indicates whether the admin user is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RegistryProperties.adminUserEnabled has a boolean wire value; preserve the published property contract."
   adminUserEnabled?: boolean = false;
 
   /**
@@ -336,6 +337,7 @@ model RegistryProperties {
   /**
    * Enable a single data endpoint per region for serving data.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RegistryProperties.dataEndpointEnabled has a boolean wire value; preserve the published property contract."
   dataEndpointEnabled?: boolean;
 
   /**
@@ -382,6 +384,7 @@ model RegistryProperties {
   /**
    * Whether or not Tasks allowed to bypass the network rules for this container registry.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RegistryProperties.networkRuleBypassAllowedForTasks has a boolean wire value; preserve the published property contract."
   networkRuleBypassAllowedForTasks?: boolean = false;
 
   /**
@@ -392,6 +395,7 @@ model RegistryProperties {
   /**
    * Enables registry-wide pull from unauthenticated clients.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RegistryProperties.anonymousPullEnabled has a boolean wire value; preserve the published property contract."
   anonymousPullEnabled?: boolean = false;
 
   /**
@@ -678,6 +682,7 @@ model KeyVaultProperties {
   /**
    * Auto key rotation status for a CMK enabled registry.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KeyVaultProperties.keyRotationEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   keyRotationEnabled?: boolean;
 
@@ -734,6 +739,7 @@ model RegistryPropertiesUpdateParameters {
   /**
    * The value that indicates whether the admin user is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RegistryPropertiesUpdateParameters.adminUserEnabled has a boolean wire value; preserve the published property contract."
   adminUserEnabled?: boolean;
 
   /**
@@ -754,6 +760,7 @@ model RegistryPropertiesUpdateParameters {
   /**
    * Enable a single data endpoint per region for serving data.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RegistryPropertiesUpdateParameters.dataEndpointEnabled has a boolean wire value; preserve the published property contract."
   dataEndpointEnabled?: boolean;
 
   /**
@@ -781,11 +788,13 @@ model RegistryPropertiesUpdateParameters {
   /**
    * Whether to allow ACR Tasks service to access a network restricted registry.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RegistryPropertiesUpdateParameters.networkRuleBypassAllowedForTasks has a boolean wire value; preserve the published property contract."
   networkRuleBypassAllowedForTasks?: boolean;
 
   /**
    * Enables registry-wide pull from unauthenticated clients.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RegistryPropertiesUpdateParameters.anonymousPullEnabled has a boolean wire value; preserve the published property contract."
   anonymousPullEnabled?: boolean;
 
   /**
@@ -836,6 +845,7 @@ model RegistryNameStatus {
   /**
    * The value that indicates whether the name is available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RegistryNameStatus.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**

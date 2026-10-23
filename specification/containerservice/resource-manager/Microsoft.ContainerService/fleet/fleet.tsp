@@ -106,10 +106,12 @@ scalar SubnetResourceId
 #suppress "@azure-tools/typespec-azure-core/casing-style" "match existing AKS APIServerAccessProfile"
 @doc("Access profile for the Fleet hub API server.")
 model APIServerAccessProfile {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing APIServerAccessProfile.enablePrivateCluster has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Whether to create the Fleet hub as a private cluster or not.")
   enablePrivateCluster?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing APIServerAccessProfile.enableVnetIntegration has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2023_06_15_preview)
   @removed(Versions.v2024_04_01)

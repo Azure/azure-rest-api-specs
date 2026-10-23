@@ -52,16 +52,19 @@ model NetworkAnchorProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   ociBackupCidrBlock?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkAnchorProperties.isOracleToAzureDnsZoneSyncEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v20250701_preview)
   @doc("Indicates whether DNS zone sync from OCI to Azure is enabled")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   isOracleToAzureDnsZoneSyncEnabled?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkAnchorProperties.isOracleDnsListeningEndpointEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v20250701_preview)
   @doc("Indicates whether the Oracle DNS listening endpoint is enabled")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   isOracleDnsListeningEndpointEnabled?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkAnchorProperties.isOracleDnsForwardingEndpointEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v20250701_preview)
   @doc("Indicates whether the Oracle DNS forwarding endpoint is enabled")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)

@@ -385,6 +385,7 @@ model BotProperties {
   /**
    * Whether Cmek is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BotProperties.isCmekEnabled has a boolean wire value; preserve the published property contract."
   isCmekEnabled?: boolean = false;
 
   /**
@@ -413,11 +414,13 @@ model BotProperties {
   /**
    * Whether the bot is streaming supported
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BotProperties.isStreamingSupported has a boolean wire value; preserve the published property contract."
   isStreamingSupported?: boolean = false;
 
   /**
    * Whether the bot is developerAppInsightsApiKey set
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BotProperties.isDeveloperAppInsightsApiKeySet has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeveloperAppInsightsApiKeySet?: boolean;
 
@@ -431,6 +434,7 @@ model BotProperties {
   /**
    * Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BotProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 
   /**
@@ -990,16 +994,19 @@ model ChannelSettings {
   /**
    * Whether this channel is enabled for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ChannelSettings.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
    * Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ChannelSettings.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 
   /**
    * Whether customer needs to agree to new terms.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ChannelSettings.requireTermsAgreement has a boolean wire value; preserve the published property contract."
   requireTermsAgreement?: boolean;
 }
 
@@ -1040,22 +1047,26 @@ model Site {
   /**
    * Whether this site is enabled for DirectLine channel
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Site.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 
   /**
    * Whether this site is token enabled for channel
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Site.isTokenEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isTokenEnabled?: boolean;
 
   /**
    * Whether this site is EndpointParameters enabled for channel
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Site.isEndpointParametersEnabled has a boolean wire value; preserve the published property contract."
   isEndpointParametersEnabled?: boolean;
 
   /**
    * Whether this site is disabled detailed logging for
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Site.isDetailedLoggingEnabled has a boolean wire value; preserve the published property contract."
   isDetailedLoggingEnabled?: boolean;
 
   /**
@@ -1067,6 +1078,7 @@ model Site {
   /**
    * Whether this no-storage site is disabled detailed logging for
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Site.isNoStorageEnabled has a boolean wire value; preserve the published property contract."
   isNoStorageEnabled?: boolean;
 
   /**
@@ -1082,17 +1094,20 @@ model Site {
   /**
    * Whether this site is enabled for Bot Framework V1 protocol.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Site.isV1Enabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   isV1Enabled?: boolean;
 
   /**
    * Whether this site is enabled for Bot Framework V3 protocol.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Site.isV3Enabled has a boolean wire value; preserve the published property contract."
   isV3Enabled?: boolean;
 
   /**
    * Whether this site is enabled for authentication with Bot Framework.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Site.isSecureSiteEnabled has a boolean wire value; preserve the published property contract."
   isSecureSiteEnabled?: boolean;
 
   /**
@@ -1103,11 +1118,13 @@ model Site {
   /**
    * Whether this site is enabled for Webchat Speech
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Site.isWebChatSpeechEnabled has a boolean wire value; preserve the published property contract."
   isWebChatSpeechEnabled?: boolean = false;
 
   /**
    * Whether this site is enabled for preview versions of Webchat
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Site.isWebchatPreviewEnabled has a boolean wire value; preserve the published property contract."
   isWebchatPreviewEnabled?: boolean = false;
 }
 
@@ -1186,6 +1203,7 @@ model CheckNameAvailabilityResponseBody {
   /**
    * indicates if the bot name is valid.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckNameAvailabilityResponseBody.valid has a boolean wire value; preserve the published property contract."
   valid?: boolean;
 
   /**
@@ -1383,6 +1401,7 @@ model ServiceProviderParameterMetadataConstraints {
   /**
    * Whether required the constraints of the bot meta data.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServiceProviderParameterMetadataConstraints.required has a boolean wire value; preserve the published property contract."
   required?: boolean;
 }
 
@@ -1561,6 +1580,7 @@ model HostSettingsResponse {
    * Per cloud OAuth setting on whether authority is validated
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HostSettingsResponse.ValidateAuthority has a boolean wire value; preserve the published property contract."
   ValidateAuthority?: boolean;
 
   /**
@@ -1706,6 +1726,7 @@ model AlexaChannelProperties {
   /**
    * Whether this channel is enabled for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AlexaChannelProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 }
 
@@ -1761,6 +1782,7 @@ model FacebookChannelProperties {
   /**
    * Whether this channel is enabled for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FacebookChannelProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 }
 
@@ -1823,6 +1845,7 @@ model EmailChannelProperties {
   /**
    * Whether this channel is enabled for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EmailChannelProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 }
 
@@ -1858,6 +1881,7 @@ model MsTeamsChannelProperties {
   /**
    * Enable calling for Microsoft Teams channel
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MsTeamsChannelProperties.enableCalling has a boolean wire value; preserve the published property contract."
   enableCalling?: boolean = false;
 
   /**
@@ -1868,6 +1892,7 @@ model MsTeamsChannelProperties {
   /**
    * Whether this channel is enabled for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MsTeamsChannelProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 
   /**
@@ -1909,31 +1934,37 @@ model SkypeChannelProperties {
   /**
    * Enable messaging for Skype channel
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SkypeChannelProperties.enableMessaging has a boolean wire value; preserve the published property contract."
   enableMessaging?: boolean;
 
   /**
    * Enable media cards for Skype channel
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SkypeChannelProperties.enableMediaCards has a boolean wire value; preserve the published property contract."
   enableMediaCards?: boolean;
 
   /**
    * Enable video for Skype channel
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SkypeChannelProperties.enableVideo has a boolean wire value; preserve the published property contract."
   enableVideo?: boolean;
 
   /**
    * Enable calling for Skype channel
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SkypeChannelProperties.enableCalling has a boolean wire value; preserve the published property contract."
   enableCalling?: boolean = false;
 
   /**
    * Enable screen sharing for Skype channel
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SkypeChannelProperties.enableScreenSharing has a boolean wire value; preserve the published property contract."
   enableScreenSharing?: boolean;
 
   /**
    * Enable groups for Skype channel
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SkypeChannelProperties.enableGroups has a boolean wire value; preserve the published property contract."
   enableGroups?: boolean;
 
   /**
@@ -1954,6 +1985,7 @@ model SkypeChannelProperties {
   /**
    * Whether this channel is enabled for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SkypeChannelProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 }
 
@@ -1990,11 +2022,13 @@ model KikChannelProperties {
   /**
    * Whether this channel is validated for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KikChannelProperties.isValidated has a boolean wire value; preserve the published property contract."
   isValidated?: boolean;
 
   /**
    * Whether this channel is enabled for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KikChannelProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 }
 
@@ -2114,11 +2148,13 @@ model TelegramChannelProperties {
   /**
    * Whether this channel is validated for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TelegramChannelProperties.isValidated has a boolean wire value; preserve the published property contract."
   isValidated?: boolean;
 
   /**
    * Whether this channel is enabled for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TelegramChannelProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 }
 
@@ -2161,11 +2197,13 @@ model SmsChannelProperties {
   /**
    * Whether this channel is validated for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SmsChannelProperties.isValidated has a boolean wire value; preserve the published property contract."
   isValidated?: boolean;
 
   /**
    * Whether this channel is enabled for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SmsChannelProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 }
 
@@ -2232,12 +2270,14 @@ model SlackChannelProperties {
    * Whether to register the settings before OAuth validation is performed. Recommended to True.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SlackChannelProperties.registerBeforeOAuthFlow has a boolean wire value; preserve the published property contract."
   registerBeforeOAuthFlow?: boolean;
 
   /**
    * Whether this channel is validated for the bot
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SlackChannelProperties.IsValidated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   IsValidated?: boolean;
 
@@ -2250,6 +2290,7 @@ model SlackChannelProperties {
   /**
    * Whether this channel is enabled for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SlackChannelProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 }
 
@@ -2288,6 +2329,7 @@ model LineChannelProperties {
   /**
    * Whether this channel is validated for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LineChannelProperties.isValidated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isValidated?: boolean;
 }
@@ -2355,6 +2397,7 @@ model DirectLineSpeechChannelProperties {
   /**
    * Whether this channel is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DirectLineSpeechChannelProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
@@ -2370,6 +2413,7 @@ model DirectLineSpeechChannelProperties {
   /**
    * Make this a default bot for chosen cognitive service account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DirectLineSpeechChannelProperties.isDefaultBotForCogSvcAccount has a boolean wire value; preserve the published property contract."
   isDefaultBotForCogSvcAccount?: boolean;
 }
 
@@ -2440,6 +2484,7 @@ model TelephonyChannelProperties {
   /**
    * Whether the channel is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TelephonyChannelProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 }
 

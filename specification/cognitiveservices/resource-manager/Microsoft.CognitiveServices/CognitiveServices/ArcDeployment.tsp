@@ -499,6 +499,7 @@ model ArcDeploymentVllmParameters {
   /**
    * Whether eager execution is enforced for the vLLM runtime.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ArcDeploymentVllmParameters.enforceEager has a boolean wire value; preserve the published property contract."
   enforceEager?: boolean;
 }
 

@@ -134,6 +134,7 @@ interface BackupProtectionIntent {
     /**
      * skipToken Filter.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
     @query("$skipToken")
     $skipToken?: string,
   ): ArmResponse<ProtectionIntentResourceList> | ErrorResponse;
@@ -169,6 +170,7 @@ interface BackupUsageSummaries {
     /**
      * skipToken Filter.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
     @query("$skipToken")
     $skipToken?: string,
   ): ArmResponse<BackupManagementUsageList> | ErrorResponse;
@@ -234,6 +236,7 @@ interface BackupProtectedItems {
     /**
      * skipToken Filter.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
     @query("$skipToken")
     $skipToken?: string,
   ): ArmResponse<ProtectedItemResourceList> | ErrorResponse;
@@ -568,6 +571,7 @@ interface BackupProtectableItems {
     /**
      * skipToken Filter.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
     @query("$skipToken")
     $skipToken?: string,
   ): ArmResponse<WorkloadProtectableItemResourceList> | ErrorResponse;

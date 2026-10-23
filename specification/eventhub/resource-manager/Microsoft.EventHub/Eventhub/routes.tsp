@@ -18,6 +18,7 @@ interface ClustersOperationGroup {
   /**
    * List the quantity of available pre-provisioned Event Hubs Clusters, indexed by Azure region.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listAvailableClusterRegion retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("availableClusterRegions")

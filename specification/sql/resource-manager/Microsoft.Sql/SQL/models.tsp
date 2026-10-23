@@ -4294,6 +4294,7 @@ model BackupShortTermRetentionPolicyProperties {
   /**
    * Whether to lock the immutability of the backups governed by this short term retention policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BackupShortTermRetentionPolicyProperties.lockImmutability has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_01_preview)
   lockImmutability?: boolean;
 
@@ -4332,6 +4333,7 @@ model ServerBlobAuditingPolicyProperties {
    * or [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServerBlobAuditingPolicyProperties.isDevopsAuditEnabled has a boolean wire value; preserve the published property contract."
   isDevopsAuditEnabled?: boolean;
 
   /**
@@ -4407,6 +4409,7 @@ model ServerBlobAuditingPolicyProperties {
   /**
    * Specifies whether storageAccountAccessKey value is the storage's secondary key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServerBlobAuditingPolicyProperties.isStorageSecondaryKeyInUse has a boolean wire value; preserve the published property contract."
   isStorageSecondaryKeyInUse?: boolean;
 
   /**
@@ -4423,6 +4426,7 @@ model ServerBlobAuditingPolicyProperties {
    * or [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServerBlobAuditingPolicyProperties.isAzureMonitorTargetEnabled has a boolean wire value; preserve the published property contract."
   isAzureMonitorTargetEnabled?: boolean;
 
   /**
@@ -4434,6 +4438,7 @@ model ServerBlobAuditingPolicyProperties {
   /**
    * Specifies whether Managed Identity is used to access blob storage
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServerBlobAuditingPolicyProperties.isManagedIdentityInUse has a boolean wire value; preserve the published property contract."
   isManagedIdentityInUse?: boolean;
 
   /**
@@ -4554,6 +4559,7 @@ model DatabaseBlobAuditingPolicyProperties {
   /**
    * Specifies whether storageAccountAccessKey value is the storage's secondary key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseBlobAuditingPolicyProperties.isStorageSecondaryKeyInUse has a boolean wire value; preserve the published property contract."
   isStorageSecondaryKeyInUse?: boolean;
 
   /**
@@ -4570,6 +4576,7 @@ model DatabaseBlobAuditingPolicyProperties {
    * or [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseBlobAuditingPolicyProperties.isAzureMonitorTargetEnabled has a boolean wire value; preserve the published property contract."
   isAzureMonitorTargetEnabled?: boolean;
 
   /**
@@ -4581,6 +4588,7 @@ model DatabaseBlobAuditingPolicyProperties {
   /**
    * Specifies whether Managed Identity is used to access blob storage
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseBlobAuditingPolicyProperties.isManagedIdentityInUse has a boolean wire value; preserve the published property contract."
   isManagedIdentityInUse?: boolean;
 
   /**
@@ -4706,6 +4714,7 @@ model ExtendedDatabaseBlobAuditingPolicyProperties {
   /**
    * Specifies whether storageAccountAccessKey value is the storage's secondary key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExtendedDatabaseBlobAuditingPolicyProperties.isStorageSecondaryKeyInUse has a boolean wire value; preserve the published property contract."
   isStorageSecondaryKeyInUse?: boolean;
 
   /**
@@ -4722,6 +4731,7 @@ model ExtendedDatabaseBlobAuditingPolicyProperties {
    * or [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExtendedDatabaseBlobAuditingPolicyProperties.isAzureMonitorTargetEnabled has a boolean wire value; preserve the published property contract."
   isAzureMonitorTargetEnabled?: boolean;
 
   /**
@@ -4733,6 +4743,7 @@ model ExtendedDatabaseBlobAuditingPolicyProperties {
   /**
    * Specifies whether Managed Identity is used to access blob storage
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExtendedDatabaseBlobAuditingPolicyProperties.isManagedIdentityInUse has a boolean wire value; preserve the published property contract."
   isManagedIdentityInUse?: boolean;
 
   /**
@@ -4800,6 +4811,7 @@ model ExtendedServerBlobAuditingPolicyProperties {
    * or [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExtendedServerBlobAuditingPolicyProperties.isDevopsAuditEnabled has a boolean wire value; preserve the published property contract."
   isDevopsAuditEnabled?: boolean;
 
   /**
@@ -4880,6 +4892,7 @@ model ExtendedServerBlobAuditingPolicyProperties {
   /**
    * Specifies whether storageAccountAccessKey value is the storage's secondary key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExtendedServerBlobAuditingPolicyProperties.isStorageSecondaryKeyInUse has a boolean wire value; preserve the published property contract."
   isStorageSecondaryKeyInUse?: boolean;
 
   /**
@@ -4896,6 +4909,7 @@ model ExtendedServerBlobAuditingPolicyProperties {
    * or [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExtendedServerBlobAuditingPolicyProperties.isAzureMonitorTargetEnabled has a boolean wire value; preserve the published property contract."
   isAzureMonitorTargetEnabled?: boolean;
 
   /**
@@ -4907,6 +4921,7 @@ model ExtendedServerBlobAuditingPolicyProperties {
   /**
    * Specifies whether Managed Identity is used to access blob storage
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExtendedServerBlobAuditingPolicyProperties.isManagedIdentityInUse has a boolean wire value; preserve the published property contract."
   isManagedIdentityInUse?: boolean;
 
   /**
@@ -5040,18 +5055,21 @@ model RecommendedActionProperties {
   /**
    * Gets if this recommended action is actionable by user
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RecommendedActionProperties.isExecutableAction has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isExecutableAction?: boolean;
 
   /**
    * Gets if changes applied by this recommended action can be reverted by user
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RecommendedActionProperties.isRevertableAction has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isRevertableAction?: boolean;
 
   /**
    * Gets if this recommended action was suggested some time ago but user chose to ignore this and system added a new recommended action again.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RecommendedActionProperties.isArchivedAction has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isArchivedAction?: boolean;
 
@@ -5362,11 +5380,13 @@ model DatabaseColumnProperties {
   /**
    * Whether or not the column belongs to a memory optimized table.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseColumnProperties.memoryOptimized has a boolean wire value; preserve the published property contract."
   memoryOptimized?: boolean;
 
   /**
    * Whether or not the column is computed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseColumnProperties.isComputed has a boolean wire value; preserve the published property contract."
   isComputed?: boolean;
 }
 
@@ -5650,6 +5670,7 @@ model DatabaseOperationProperties {
   /**
    * Whether or not the error is a user error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseOperationProperties.isUserError has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isUserError?: boolean;
 
@@ -5669,6 +5690,7 @@ model DatabaseOperationProperties {
   /**
    * Whether the operation can be cancelled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseOperationProperties.isCancellable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCancellable?: boolean;
 
@@ -5931,6 +5953,7 @@ model DatabaseProperties {
   /**
    * Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseProperties.zoneRedundant has a boolean wire value; preserve the published property contract."
   zoneRedundant?: boolean;
 
   /**
@@ -6016,11 +6039,13 @@ model DatabaseProperties {
   /**
    * Whether or not this database is a ledger database, which means all tables in the database are ledger tables. Note: the value of this property cannot be changed after the database has been created.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseProperties.isLedgerOn has a boolean wire value; preserve the published property contract."
   isLedgerOn?: boolean;
 
   /**
    * Infra encryption is enabled for this database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseProperties.isInfraEncryptionEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isInfraEncryptionEnabled?: boolean;
 
@@ -6049,6 +6074,7 @@ model DatabaseProperties {
   /**
    * Whether or not the database uses free monthly limits. Allowed on one database in a subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseProperties.useFreeLimit has a boolean wire value; preserve the published property contract."
   useFreeLimit?: boolean;
 
   /**
@@ -6087,6 +6113,7 @@ model DatabaseProperties {
    *
    * To trigger cutover, please provide 'performCutover' parameter when the Scaling operation is in Waiting state.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseProperties.manualCutover has a boolean wire value; preserve the published property contract."
   manualCutover?: boolean;
 
   /**
@@ -6098,6 +6125,7 @@ model DatabaseProperties {
    *
    * When performCutover is specified, the scaling operation will trigger cutover and perform role-change to Hyperscale database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseProperties.performCutover has a boolean wire value; preserve the published property contract."
   performCutover?: boolean;
 
   /**
@@ -6108,6 +6136,7 @@ model DatabaseProperties {
   /**
    * The flag to enable or disable auto rotation of database encryption protector AKV key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseProperties.encryptionProtectorAutoRotation has a boolean wire value; preserve the published property contract."
   encryptionProtectorAutoRotation?: boolean;
 
   /**
@@ -6338,6 +6367,7 @@ model DatabaseUpdateProperties {
   /**
    * Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseUpdateProperties.zoneRedundant has a boolean wire value; preserve the published property contract."
   zoneRedundant?: boolean;
 
   /**
@@ -6423,11 +6453,13 @@ model DatabaseUpdateProperties {
   /**
    * Whether or not this database is a ledger database, which means all tables in the database are ledger tables. Note: the value of this property cannot be changed after the database has been created.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseUpdateProperties.isLedgerOn has a boolean wire value; preserve the published property contract."
   isLedgerOn?: boolean;
 
   /**
    * Infra encryption is enabled for this database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseUpdateProperties.isInfraEncryptionEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isInfraEncryptionEnabled?: boolean;
 
@@ -6456,6 +6488,7 @@ model DatabaseUpdateProperties {
   /**
    * Whether or not the database uses free monthly limits. Allowed on one database in a subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseUpdateProperties.useFreeLimit has a boolean wire value; preserve the published property contract."
   useFreeLimit?: boolean;
 
   /**
@@ -6476,6 +6509,7 @@ model DatabaseUpdateProperties {
    *
    * To trigger cutover, please provide 'performCutover' parameter when the Scaling operation is in Waiting state.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseUpdateProperties.manualCutover has a boolean wire value; preserve the published property contract."
   manualCutover?: boolean;
 
   /**
@@ -6487,11 +6521,13 @@ model DatabaseUpdateProperties {
    *
    * When performCutover is specified, the scaling operation will trigger cutover and perform role-change to Hyperscale database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseUpdateProperties.performCutover has a boolean wire value; preserve the published property contract."
   performCutover?: boolean;
 
   /**
    * The flag to enable or disable auto rotation of database encryption protector AKV key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseUpdateProperties.encryptionProtectorAutoRotation has a boolean wire value; preserve the published property contract."
   encryptionProtectorAutoRotation?: boolean;
 
   /**
@@ -6715,6 +6751,7 @@ model SecurityAlertsPolicyProperties {
   /**
    * Specifies that the alert is sent to the account administrators.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityAlertsPolicyProperties.emailAccountAdmins has a boolean wire value; preserve the published property contract."
   emailAccountAdmins?: boolean;
 
   /**
@@ -6772,6 +6809,7 @@ model DatabaseSqlVulnerabilityAssessmentRuleBaselineListInputProperties {
   /**
    * The latest scan flag
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseSqlVulnerabilityAssessmentRuleBaselineListInputProperties.latestScan has a boolean wire value; preserve the published property contract."
   latestScan: boolean;
 
   /**
@@ -6812,6 +6850,7 @@ model DatabaseSqlVulnerabilityAssessmentRuleBaselineInputProperties {
   /**
    * The latest scan flag
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseSqlVulnerabilityAssessmentRuleBaselineInputProperties.latestScan has a boolean wire value; preserve the published property contract."
   latestScan: boolean;
 
   /**
@@ -6847,6 +6886,7 @@ model SqlVulnerabilityAssessmentScanResultProperties {
   /**
    * SQL Vulnerability Assessment is the query results trimmed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlVulnerabilityAssessmentScanResultProperties.isTrimmed has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isTrimmed?: boolean;
 
@@ -6895,6 +6935,7 @@ model Remediation {
   /**
    * SQL Vulnerability Assessment is remediation automated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Remediation.automated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   automated?: boolean;
 
@@ -7157,6 +7198,7 @@ model SqlVulnerabilityAssessmentScanRecordProperties {
   /**
    * Baseline created for this database, and has one or more rules.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlVulnerabilityAssessmentScanRecordProperties.isBaselineApplied has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isBaselineApplied?: boolean;
 
@@ -7207,6 +7249,7 @@ model DatabaseTableProperties {
   /**
    * Whether or not the table is memory optimized.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseTableProperties.memoryOptimized has a boolean wire value; preserve the published property contract."
   memoryOptimized?: boolean;
 }
 
@@ -7314,11 +7357,13 @@ model VulnerabilityAssessmentRecurringScansProperties {
   /**
    * Recurring scans state.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VulnerabilityAssessmentRecurringScansProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
    * Specifies that the schedule scan notification will be is sent to the subscription administrators.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VulnerabilityAssessmentRecurringScansProperties.emailSubscriptionAdmins has a boolean wire value; preserve the published property contract."
   emailSubscriptionAdmins?: boolean = true;
 
   /**
@@ -7992,6 +8037,7 @@ model ElasticPoolOperationProperties {
   /**
    * Whether or not the error is a user error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ElasticPoolOperationProperties.isUserError has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isUserError?: boolean;
 
@@ -8011,6 +8057,7 @@ model ElasticPoolOperationProperties {
   /**
    * Whether the operation can be cancelled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ElasticPoolOperationProperties.isCancellable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCancellable?: boolean;
 }
@@ -8053,6 +8100,7 @@ model ElasticPoolProperties {
   /**
    * Whether or not this elastic pool is zone redundant, which means the replicas of this elastic pool will be spread across multiple availability zones.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ElasticPoolProperties.zoneRedundant has a boolean wire value; preserve the published property contract."
   zoneRedundant?: boolean;
 
   /**
@@ -8162,6 +8210,7 @@ model ElasticPoolUpdateProperties {
   /**
    * Whether or not this elastic pool is zone redundant, which means the replicas of this elastic pool will be spread across multiple availability zones.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ElasticPoolUpdateProperties.zoneRedundant has a boolean wire value; preserve the published property contract."
   zoneRedundant?: boolean;
 
   /**
@@ -8240,6 +8289,7 @@ model EncryptionProtectorProperties {
   /**
    * Key auto rotation opt-in flag. Either true or false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EncryptionProtectorProperties.autoRotationEnabled has a boolean wire value; preserve the published property contract."
   autoRotationEnabled?: boolean;
 
   /**
@@ -8737,6 +8787,7 @@ model InstancePoolOperationProperties {
   /**
    * Whether the operation can be cancelled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing InstancePoolOperationProperties.isCancellable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCancellable?: boolean;
 }
@@ -9133,6 +9184,7 @@ model JobSchedule {
   /**
    * Whether or not the schedule is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing JobSchedule.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -9394,6 +9446,7 @@ model LocationCapabilities {
   /**
    * Whether or not the subscription is allowed to provision zone resilient resources.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LocationCapabilities.isZoneResilientProvisioningAllowed has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isZoneResilientProvisioningAllowed?: boolean;
 
@@ -9466,6 +9519,7 @@ model EditionCapability {
   /**
    * Whether or not zone redundancy is supported for the edition.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EditionCapability.zoneRedundant has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   zoneRedundant?: boolean;
 
@@ -9485,6 +9539,7 @@ model EditionCapability {
   /**
    * Whether or not zone pinning is supported for the edition.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EditionCapability.zonePinning has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   zonePinning?: boolean;
 
@@ -9553,6 +9608,7 @@ model ServiceObjectiveCapability {
   /**
    * Whether or not zone redundancy is supported for the service objective.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServiceObjectiveCapability.zoneRedundant has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   zoneRedundant?: boolean;
 
@@ -9584,6 +9640,7 @@ model ServiceObjectiveCapability {
   /**
    * Whether or not zone pinning is supported.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServiceObjectiveCapability.zonePinning has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   zonePinning?: boolean;
 
@@ -9818,6 +9875,7 @@ model MaintenanceConfigurationCapability {
   /**
    * Whether or not zone redundancy is supported for the maintenance configuration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MaintenanceConfigurationCapability.zoneRedundant has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   zoneRedundant?: boolean;
 
@@ -9946,12 +10004,14 @@ model ElasticPoolEditionCapability {
   /**
    * Whether or not zone redundancy is supported for the edition.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ElasticPoolEditionCapability.zoneRedundant has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   zoneRedundant?: boolean;
 
   /**
    * Whether or not zone pinning is supported for the edition.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ElasticPoolEditionCapability.zonePinning has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   zonePinning?: boolean;
 
@@ -10027,6 +10087,7 @@ model ElasticPoolPerformanceLevelCapability {
   /**
    * Whether or not zone redundancy is supported for the performance level.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ElasticPoolPerformanceLevelCapability.zoneRedundant has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   zoneRedundant?: boolean;
 
@@ -10235,6 +10296,7 @@ model ManagedInstanceEditionCapability {
   /**
    * Whether or not this is a GPv2 variant of General Purpose edition.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceEditionCapability.isGeneralPurposeV2 has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isGeneralPurposeV2?: boolean;
 
@@ -10284,6 +10346,7 @@ model ManagedInstanceFamilyCapability {
   /**
    * Whether or not zone redundancy is supported for the family.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceFamilyCapability.zoneRedundant has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   zoneRedundant?: boolean;
 
@@ -10415,12 +10478,14 @@ model ManagedInstanceVcoresCapability {
   /**
    * True if this service objective is supported for managed instances in an instance pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceVcoresCapability.instancePoolSupported has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   instancePoolSupported?: boolean;
 
   /**
    * True if this service objective is supported for standalone managed instances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceVcoresCapability.standaloneSupported has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   standaloneSupported?: boolean;
 
@@ -10758,6 +10823,7 @@ model LongTermRetentionBackupProperties {
   /**
    * The setting whether the LTR backup is immutable
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LongTermRetentionBackupProperties.isBackupImmutable has a boolean wire value; preserve the published property contract."
   isBackupImmutable?: boolean;
 
   /**
@@ -11006,6 +11072,7 @@ model ManagedInstanceLongTermRetentionBackupProperties {
   /**
    * The setting whether the LTR backup is immutable
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceLongTermRetentionBackupProperties.isBackupImmutable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_08_01_preview)
   isBackupImmutable?: boolean;
@@ -11080,6 +11147,7 @@ model MaintenanceWindowOptionsProperties {
   /**
    * Whether maintenance windows are enabled for the database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MaintenanceWindowOptionsProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
@@ -11111,6 +11179,7 @@ model MaintenanceWindowOptionsProperties {
   /**
    * Whether we allow multiple maintenance windows per cycle.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MaintenanceWindowOptionsProperties.allowMultipleMaintenanceWindowsPerCycle has a boolean wire value; preserve the published property contract."
   allowMultipleMaintenanceWindowsPerCycle?: boolean;
 }
 
@@ -11182,6 +11251,7 @@ model ManagedBackupShortTermRetentionPolicyProperties {
   /**
    * Whether to lock the immutability of the backups governed by this short term retention policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedBackupShortTermRetentionPolicyProperties.lockImmutability has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Create, Lifecycle.Update)
   lockImmutability?: boolean;
@@ -11271,6 +11341,7 @@ model ManagedDatabaseMoveOperationResultProperties {
   /**
    * Is move operation cancellable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedDatabaseMoveOperationResultProperties.isCancellable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCancellable?: boolean;
 
@@ -11295,6 +11366,7 @@ model ManagedDatabaseMoveOperationResultProperties {
   /**
    * Whether or not the error is a user error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedDatabaseMoveOperationResultProperties.isUserError has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isUserError?: boolean;
 }
@@ -11782,6 +11854,7 @@ model ManagedDatabaseProperties {
   /**
    * Whether to auto complete restore of this managed database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedDatabaseProperties.autoCompleteRestore has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Create)
   autoCompleteRestore?: boolean;
 
@@ -11800,6 +11873,7 @@ model ManagedDatabaseProperties {
   /**
    * Whether or not this database is a ledger database, which means all tables in the database are ledger tables. Note: the value of this property cannot be changed after the database has been created.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedDatabaseProperties.isLedgerOn has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   isLedgerOn?: boolean;
 
@@ -11927,6 +12001,7 @@ model SecurityAlertPolicyProperties {
   /**
    * Specifies that the alert is sent to the account administrators.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityAlertPolicyProperties.emailAccountAdmins has a boolean wire value; preserve the published property contract."
   emailAccountAdmins?: boolean;
 
   /**
@@ -12130,6 +12205,7 @@ model SensitivityLabelProperties {
   /**
    * Is sensitivity recommendation disabled. Applicable for recommended sensitivity label only. Specifies whether the sensitivity recommendation on this column is disabled (dismissed) or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SensitivityLabelProperties.isDisabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDisabled?: boolean;
 
@@ -12293,6 +12369,7 @@ model ManagedInstanceAzureADOnlyAuthProperties {
    * Azure Active Directory only Authentication enabled.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceAzureADOnlyAuthProperties.azureADOnlyAuthentication has a boolean wire value; preserve the published property contract."
   azureADOnlyAuthentication: boolean;
 }
 
@@ -12305,6 +12382,7 @@ model ManagedInstanceDtcProperties {
   /**
    * Active status of managed instance DTC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceDtcProperties.dtcEnabled has a boolean wire value; preserve the published property contract."
   dtcEnabled?: boolean;
 
   /**
@@ -12326,6 +12404,7 @@ model ManagedInstanceDtcProperties {
   /**
    * Status of FQDN of managed instance DTC. Toggling this setting might trigger a restart of the managed instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceDtcProperties.fqdnEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_02_01_preview)
   fqdnEnabled?: boolean;
 
@@ -12350,11 +12429,13 @@ model ManagedInstanceDtcSecuritySettings {
   /**
    * Allow XA Transactions to managed instance DTC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceDtcSecuritySettings.xaTransactionsEnabled has a boolean wire value; preserve the published property contract."
   xaTransactionsEnabled?: boolean;
 
   /**
    * Allow SNA LU 6.2 Transactions to managed instance DTC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceDtcSecuritySettings.snaLu6point2TransactionsEnabled has a boolean wire value; preserve the published property contract."
   snaLu6point2TransactionsEnabled?: boolean;
 
   /**
@@ -12377,11 +12458,13 @@ model ManagedInstanceDtcTransactionManagerCommunicationSettings {
   /**
    * Allow Inbound traffic to managed instance DTC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceDtcTransactionManagerCommunicationSettings.allowInboundEnabled has a boolean wire value; preserve the published property contract."
   allowInboundEnabled?: boolean;
 
   /**
    * Allow Outbound traffic of managed instance DTC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceDtcTransactionManagerCommunicationSettings.allowOutboundEnabled has a boolean wire value; preserve the published property contract."
   allowOutboundEnabled?: boolean;
 
   /**
@@ -12424,6 +12507,7 @@ model ManagedInstanceEncryptionProtectorProperties {
   /**
    * Key auto rotation opt-in flag. Either true or false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceEncryptionProtectorProperties.autoRotationEnabled has a boolean wire value; preserve the published property contract."
   autoRotationEnabled?: boolean;
 }
 
@@ -12462,6 +12546,7 @@ model ManagedInstanceKeyProperties {
   /**
    * Key auto rotation opt-in flag. Either true or false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceKeyProperties.autoRotationEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   autoRotationEnabled?: boolean;
 }
@@ -12578,6 +12663,7 @@ model ManagedInstanceOperationProperties {
   /**
    * Whether or not the error is a user error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceOperationProperties.isUserError has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isUserError?: boolean;
 
@@ -12597,6 +12683,7 @@ model ManagedInstanceOperationProperties {
   /**
    * Whether the operation can be cancelled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceOperationProperties.isCancellable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCancellable?: boolean;
 
@@ -12851,6 +12938,7 @@ model ManagedInstanceProperties {
   /**
    * Whether or not this is a GPv2 variant of General Purpose edition.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceProperties.isGeneralPurposeV2 has a boolean wire value; preserve the published property contract."
   isGeneralPurposeV2?: boolean;
 
   /**
@@ -12947,6 +13035,7 @@ model ManagedInstanceProperties {
   /**
    * Whether or not the public data endpoint is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceProperties.publicDataEndpointEnabled has a boolean wire value; preserve the published property contract."
   publicDataEndpointEnabled?: boolean;
 
   /**
@@ -13013,6 +13102,7 @@ model ManagedInstanceProperties {
   /**
    * Whether or not the zone-redundancy is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceProperties.zoneRedundant has a boolean wire value; preserve the published property contract."
   zoneRedundant?: boolean;
 
   /**
@@ -13137,6 +13227,7 @@ model ManagedInstanceExternalAdministrator {
    * Azure Active Directory only Authentication enabled.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedInstanceExternalAdministrator.azureADOnlyAuthentication has a boolean wire value; preserve the published property contract."
   azureADOnlyAuthentication?: boolean;
 }
 
@@ -13497,6 +13588,7 @@ model ManagedServerDnsAliasCreation {
   /**
    * Whether or not DNS record should be created for this alias.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedServerDnsAliasCreation.createDnsRecord has a boolean wire value; preserve the published property contract."
   createDnsRecord?: boolean = true;
 }
 
@@ -13944,6 +14036,7 @@ model ReplicationLinkProperties {
   /**
    * Whether the user is currently allowed to terminate the link.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ReplicationLinkProperties.isTerminationAllowed has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isTerminationAllowed?: boolean;
 
@@ -14203,6 +14296,7 @@ model AdministratorProperties {
    * Azure Active Directory only Authentication enabled.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AdministratorProperties.azureADOnlyAuthentication has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   azureADOnlyAuthentication?: boolean;
 }
@@ -14219,6 +14313,7 @@ model AzureADOnlyAuthProperties {
    * Azure Active Directory only Authentication enabled.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureADOnlyAuthProperties.azureADOnlyAuthentication has a boolean wire value; preserve the published property contract."
   azureADOnlyAuthentication: boolean;
 }
 
@@ -14274,11 +14369,13 @@ model ServerDevOpsAuditSettingsProperties {
    * or [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServerDevOpsAuditSettingsProperties.isAzureMonitorTargetEnabled has a boolean wire value; preserve the published property contract."
   isAzureMonitorTargetEnabled?: boolean;
 
   /**
    * Specifies whether Managed Identity is used to access blob storage
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServerDevOpsAuditSettingsProperties.isManagedIdentityInUse has a boolean wire value; preserve the published property contract."
   isManagedIdentityInUse?: boolean;
 
   /**
@@ -14377,6 +14474,7 @@ model ServerKeyProperties {
   /**
    * Key auto rotation opt-in flag. Either true or false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServerKeyProperties.autoRotationEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   autoRotationEnabled?: boolean;
 
@@ -14464,6 +14562,7 @@ model ServerOperationProperties {
   /**
    * Whether or not the error is a user error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServerOperationProperties.isUserError has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isUserError?: boolean;
 
@@ -14483,6 +14582,7 @@ model ServerOperationProperties {
   /**
    * Whether the operation can be cancelled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServerOperationProperties.isCancellable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCancellable?: boolean;
 }
@@ -14515,6 +14615,7 @@ model CheckNameAvailabilityResponse {
   /**
    * True if the name is available, otherwise false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckNameAvailabilityResponse.available has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   available?: boolean;
 
@@ -14697,6 +14798,7 @@ model ServerExternalAdministrator {
    * Azure Active Directory only Authentication enabled.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServerExternalAdministrator.azureADOnlyAuthentication has a boolean wire value; preserve the published property contract."
   azureADOnlyAuthentication?: boolean;
 }
 
@@ -15190,6 +15292,7 @@ model SyncAgentProperties {
   /**
    * If the sync agent version is up to date.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SyncAgentProperties.isUpToDate has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isUpToDate?: boolean;
 
@@ -15352,6 +15455,7 @@ model SyncGroupProperties {
   /**
    * If conflict logging is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SyncGroupProperties.enableConflictLogging has a boolean wire value; preserve the published property contract."
   enableConflictLogging?: boolean;
 
   /**
@@ -15362,6 +15466,7 @@ model SyncGroupProperties {
   /**
    * If use private link connection is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SyncGroupProperties.usePrivateLinkConnection has a boolean wire value; preserve the published property contract."
   usePrivateLinkConnection?: boolean;
 
   /**
@@ -15472,6 +15577,7 @@ model SyncFullSchemaTable {
   /**
    * If there is error in the table.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SyncFullSchemaTable.hasError has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasError?: boolean;
 
@@ -15513,12 +15619,14 @@ model SyncFullSchemaTableColumn {
   /**
    * If there is error in the table.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SyncFullSchemaTableColumn.hasError has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasError?: boolean;
 
   /**
    * If it is the primary key of the table.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SyncFullSchemaTableColumn.isPrimaryKey has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPrimaryKey?: boolean;
 
@@ -15618,6 +15726,7 @@ model SyncMemberProperties {
   /**
    * Whether to use private link connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SyncMemberProperties.usePrivateLinkConnection has a boolean wire value; preserve the published property contract."
   usePrivateLinkConnection?: boolean;
 
   /**
@@ -15856,6 +15965,7 @@ model VirtualNetworkRuleProperties {
   /**
    * Create firewall rule before the virtual network has vnet service endpoint enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkRuleProperties.ignoreMissingVnetServiceEndpoint has a boolean wire value; preserve the published property contract."
   ignoreMissingVnetServiceEndpoint?: boolean;
 
   /**
@@ -15956,6 +16066,7 @@ model SecurityEventsFilterParameters {
   /**
    * Whether to show server records or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityEventsFilterParameters.showServerRecords has a boolean wire value; preserve the published property contract."
   showServerRecords?: boolean;
 }
 

@@ -64,12 +64,16 @@ alias BillingPropertyGetParameters = {
   /**
    * A flag that specifies whether or not to include billing country.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BillingPropertyGetParameters.includeBillingCountry has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing BillingPropertyGetParameters.includeBillingCountry retains the includeBillingCountry query parameter; preserve wire compatibility."
   @query("includeBillingCountry")
   includeBillingCountry?: boolean = false;
 
   /**
    * A flag that specifies whether or not to include transition status for billing accounts with agreement type Microsoft Customer Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BillingPropertyGetParameters.includeTransitionStatus has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing BillingPropertyGetParameters.includeTransitionStatus retains the includeTransitionStatus query parameter; preserve wire compatibility."
   @query("includeTransitionStatus")
   includeTransitionStatus?: boolean = false;
 };

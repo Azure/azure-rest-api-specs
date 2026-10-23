@@ -163,6 +163,7 @@ model TargetStorageLocation {
   @maxLength(1024)
   prefix: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TargetStorageLocation.overwrite has a boolean wire value; preserve the published property contract."
   @doc("When set to true during a job, the service will overwrite the output location if it already exists.")
   overwrite?: boolean = false;
 }

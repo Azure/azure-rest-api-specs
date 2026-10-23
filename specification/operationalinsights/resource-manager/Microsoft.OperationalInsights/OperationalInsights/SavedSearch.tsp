@@ -58,6 +58,7 @@ interface SavedSearches {
   /**
    * Gets the saved searches for a given Log Analytics Workspace
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByWorkspace retains its response and SDK paging behavior; preserve published compatibility."
   listByWorkspace is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     SavedSearch,
     Response = ArmResponse<SavedSearchesListResult>

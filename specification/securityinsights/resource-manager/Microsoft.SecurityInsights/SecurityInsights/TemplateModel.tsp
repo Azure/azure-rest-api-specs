@@ -80,42 +80,50 @@ interface TemplateModels {
       /**
        * Sorts the results. Optional.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$orderby retains the $orderby query parameter; preserve wire compatibility."
       @query("$orderby")
       $orderby?: string;
 
       /**
        * Expands the object with optional fiends that are not included by default. Optional.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       /**
        * Searches for a substring in the response. Optional.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$search retains the $search query parameter; preserve wire compatibility."
       @query("$search")
       $search?: string;
 
       /**
        * Instructs the server to return only object count without actual body. Optional.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.$count has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$count retains the $count query parameter; preserve wire compatibility."
       @query("$count")
       $count?: boolean;
 
       /**
        * Returns only the first n results. Optional.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * Used to skip n elements in the OData query (offset). Returns a nextLink to the next page of results if there are any left.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: int32;
 
       /**
        * Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },

@@ -112,6 +112,7 @@ interface SqlSites {
   /**
    * Method to generate report containing SQL servers.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing exportSqlServerErrors retains its request-body shape; preserve wire compatibility."
   @tag("SqlSitesController")
   exportSqlServerErrors is ArmResourceActionAsync<
     SqlSite,

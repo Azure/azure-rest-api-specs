@@ -36,6 +36,7 @@ model SolutionTemplateProperties {
   @doc("State of resource")
   state?: ResourceState;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SolutionTemplateProperties.enableExternalValidation has a boolean wire value; preserve the published property contract."
   @doc("Flag to enable external validation")
   enableExternalValidation?: boolean;
 
@@ -55,6 +56,7 @@ model SolutionTemplateUpdateProperties {
   @doc("State of resource")
   state?: ResourceState;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SolutionTemplateUpdateProperties.enableExternalValidation has a boolean wire value; preserve the published property contract."
   @doc("Flag to enable external validation")
   enableExternalValidation?: boolean;
 }

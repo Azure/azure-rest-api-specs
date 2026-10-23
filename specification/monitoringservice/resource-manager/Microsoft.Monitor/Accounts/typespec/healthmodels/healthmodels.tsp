@@ -179,6 +179,7 @@ interface DiscoveryRules {
 }
 
 alias TimestampQueryParam = {
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing TimestampQueryParam.timestamp retains the timestamp query parameter; preserve wire compatibility."
   @doc("Timestamp to use for the operation. When specified, the version of the resource at this point in time is retrieved. If not specified, the latest version is used.")
   @query
   timestamp?: utcDateTime;

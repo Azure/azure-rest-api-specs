@@ -300,6 +300,7 @@ interface VirtualNetworkGateways {
        * Attempt to recalculate the Resiliency Information for the gateway
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getResiliencyInformation POST contract uses attemptRefresh in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getResiliencyInformation.attemptRefresh has a boolean wire value; preserve the published property contract."
       @query("attemptRefresh")
       attemptRefresh?: boolean;
     },
@@ -319,6 +320,7 @@ interface VirtualNetworkGateways {
        * Attempt to recalculate the Route Sets Information for the gateway
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getRoutesInformation POST contract uses attemptRefresh in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getRoutesInformation.attemptRefresh has a boolean wire value; preserve the published property contract."
       @query("attemptRefresh")
       attemptRefresh?: boolean;
     },
@@ -408,6 +410,7 @@ interface VirtualNetworkGateways {
        * Fetch only the latest tests for each peering location
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getFailoverAllTestDetails POST contract uses fetchLatest in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getFailoverAllTestDetails.fetchLatest has a boolean wire value; preserve the published property contract."
       @query("fetchLatest")
       fetchLatest: boolean;
     },

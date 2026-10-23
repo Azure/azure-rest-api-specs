@@ -25,18 +25,22 @@ alias ManagementGroupsGetParameters = {
   /**
    * The $expand=children query string parameter allows clients to request inclusion of children in the response payload.  $expand=path includes the path from the root group to the current group.  $expand=ancestors includes the ancestor Ids of the current group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing ManagementGroupsGetParameters.$expand retains the $expand query parameter; preserve wire compatibility."
   @query("$expand")
   $expand?: ManagementGroupExpandType;
 
   /**
    * The $recurse=true query string parameter allows clients to request inclusion of entire hierarchy in the response payload. Note that  $expand=children must be passed up if $recurse is set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagementGroupsGetParameters.$recurse has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing ManagementGroupsGetParameters.$recurse retains the $recurse query parameter; preserve wire compatibility."
   @query("$recurse")
   $recurse?: boolean;
 
   /**
    * A filter which allows the exclusion of subscriptions from results (i.e. '$filter=children.childType ne Subscription')
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing ManagementGroupsGetParameters.$filter retains the $filter query parameter; preserve wire compatibility."
   @query("$filter")
   $filter?: string;
 
@@ -77,6 +81,7 @@ interface ManagementGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceAsync<
     Extension.Tenant,
@@ -145,12 +150,14 @@ interface ManagementGroups {
        * If a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.
        *
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getDescendants.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: string;
 
       /**
        * Number of elements to return when retrieving results. Passing this in will override $skipToken.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getDescendants.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     }
@@ -161,6 +168,7 @@ interface ManagementGroups {
    *
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("settings")
   list is Extension.ActionSync<

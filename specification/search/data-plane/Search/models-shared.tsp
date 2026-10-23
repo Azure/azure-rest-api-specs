@@ -153,6 +153,7 @@ alias queryWorkIQSourceAuthorizationHeader = {
 
 alias enableElevatedReadHeader = {
   /** A value that enables elevated read that bypass document level permission checks for the query operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing enableElevatedReadHeader.enableElevatedRead has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @header("x-ms-enable-elevated-read")

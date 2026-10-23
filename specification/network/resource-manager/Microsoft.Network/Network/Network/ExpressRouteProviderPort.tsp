@@ -45,6 +45,7 @@ interface ExpressRouteProviderPorts {
    * Retrieves detail of a provider port.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing expressRouteProviderPort SDK method name; renaming it would break client compatibility."
   @operationId("ExpressRouteProviderPort")
   expressRouteProviderPort is ArmResourceRead<
     ExpressRouteProviderPort,
@@ -55,6 +56,7 @@ interface ExpressRouteProviderPorts {
   /**
    * Retrieves all the ExpressRouteProviderPorts in a subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is Legacy.ArmListSinglePageByParent<
     ExpressRouteProviderPort,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

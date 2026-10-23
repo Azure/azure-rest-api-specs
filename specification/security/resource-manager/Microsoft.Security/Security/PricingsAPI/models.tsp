@@ -178,6 +178,7 @@ model PricingProperties {
   /**
    * Optional. True if the plan is deprecated. If there are replacing plans they will appear in `replacedBy` property
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PricingProperties.deprecated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   deprecated?: boolean;
 

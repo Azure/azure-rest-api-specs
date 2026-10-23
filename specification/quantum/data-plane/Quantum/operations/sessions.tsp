@@ -53,6 +53,7 @@ namespace Quantum.Workspace.Services {
       We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
       See https://github.com/Azure/typespec-azure/issues/494
       """
+    #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing jobsList SDK method name; renaming it would break client compatibility."
     @operationId("SessionsJobs_List")
     jobsList is CustomListOperation<
       Resource = JobDetails,

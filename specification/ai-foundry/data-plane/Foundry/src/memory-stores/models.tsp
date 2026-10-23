@@ -57,6 +57,7 @@ model DeleteMemoryStoreResponse {
   @doc("The name of the memory store.")
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeleteMemoryStoreResponse.deleted has a boolean wire value; preserve the published property contract."
   @doc("Whether the memory store was successfully deleted.")
   deleted: boolean;
 }
@@ -101,15 +102,18 @@ model MemoryStoreDefaultDefinition extends MemoryStoreDefinition {
 @doc("Default memory store configurations.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreDefaultOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MemoryStoreDefaultOptions.user_profile_enabled has a boolean wire value; preserve the published property contract."
   @doc("Whether to enable user profile extraction and storage. Default is true.")
   user_profile_enabled: boolean = true;
 
   @doc("Specific categories or types of user profile information to extract and store.")
   user_profile_details?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MemoryStoreDefaultOptions.chat_summary_enabled has a boolean wire value; preserve the published property contract."
   @doc("Whether to enable chat summary extraction and storage. Defaults to `true`.")
   chat_summary_enabled: boolean = true;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MemoryStoreDefaultOptions.procedural_memory_enabled has a boolean wire value; preserve the published property contract."
   @doc("Whether to enable procedural memory extraction and storage. The service defaults to `true` if a value is not specified by the caller.")
   procedural_memory_enabled?: boolean = true;
 
@@ -302,6 +306,7 @@ model MemoryStoreDeleteScopeResponse {
   @doc("The scope from which memories were deleted.")
   scope: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MemoryStoreDeleteScopeResponse.deleted has a boolean wire value; preserve the published property contract."
   @doc("Whether the deletion operation was successful.")
   deleted: boolean;
 }
@@ -316,6 +321,7 @@ model DeleteMemoryResponse {
   @doc("The unique ID of the deleted memory item.")
   memory_id: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeleteMemoryResponse.deleted has a boolean wire value; preserve the published property contract."
   @doc("Whether the memory item was successfully deleted.")
   deleted: boolean;
 }

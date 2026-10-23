@@ -623,6 +623,7 @@ model NginxDeploymentProperties {
   ipAddress?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NginxDeploymentProperties.enableDiagnosticsSupport has a boolean wire value; preserve the published property contract."
   enableDiagnosticsSupport?: boolean;
 
   /**
@@ -953,6 +954,7 @@ model NginxDeploymentUpdateParameters {
  */
 model NginxDeploymentUpdateProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NginxDeploymentUpdateProperties.enableDiagnosticsSupport has a boolean wire value; preserve the published property contract."
   enableDiagnosticsSupport?: boolean;
 
   /**
@@ -1279,5 +1281,6 @@ model OperationResult {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OperationResult.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 }

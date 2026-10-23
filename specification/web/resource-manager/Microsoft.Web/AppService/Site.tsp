@@ -160,12 +160,16 @@ interface Sites {
       /**
        * If true, web app metrics are also deleted.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.deleteMetrics has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.deleteMetrics retains the deleteMetrics query parameter; preserve wire compatibility."
       @query("deleteMetrics")
       deleteMetrics?: boolean;
 
       /**
        * Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.deleteEmptyServerFarm has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.deleteEmptyServerFarm retains the deleteEmptyServerFarm query parameter; preserve wire compatibility."
       @query("deleteEmptyServerFarm")
       deleteEmptyServerFarm?: boolean;
     },
@@ -192,6 +196,8 @@ interface Sites {
   /**
    * Description for Analyze a custom hostname.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing analyzeCustomHostname retains its response and SDK paging behavior; preserve published compatibility."
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing analyzeCustomHostname SDK method name; renaming it would break client compatibility."
   @summary("Analyze a custom hostname.")
   @get
   analyzeCustomHostname is SiteOps.ActionSync<
@@ -202,6 +208,7 @@ interface Sites {
       /**
        * Custom hostname.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing analyzeCustomHostname.hostName retains the hostName query parameter; preserve wire compatibility."
       @query("hostName")
       hostName?: string;
     },
@@ -455,6 +462,7 @@ interface Sites {
     Site,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing getWebSiteContainerLogs.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "application/octet-stream";
 
@@ -476,6 +484,7 @@ interface Sites {
     Site,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing getContainerLogsZip.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "application/zip";
 
@@ -529,6 +538,7 @@ interface Sites {
   /**
    * Description for Fetch a short lived token that can be exchanged for a master key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getFunctionsAdminToken retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Fetch a short lived token that can be exchanged for a master key.")
   @get
   @action("functions/admin/token")
@@ -631,6 +641,7 @@ interface Sites {
    * Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listHybridConnections retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Retrieves all Service Bus Hybrid Connections used by this Web App.")
   @get
   @action("hybridConnectionRelays")
@@ -645,6 +656,7 @@ interface Sites {
    * Description for Gets hybrid connections configured for an app (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listRelayServiceConnections retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets hybrid connections configured for an app (or deployment slot, if specified).")
   @get
   @action("hybridconnection")
@@ -1008,6 +1020,7 @@ interface Sites {
   /**
    * Description for Gets web app's event logs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getSitePhpErrorLogFlag retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets web app's event logs.")
   @get
   @action("phplogging")
@@ -1022,6 +1035,7 @@ interface Sites {
    * Description for Gets the premier add-ons of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listPremierAddOns retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the premier add-ons of an app.")
   @get
   @action("premieraddons")
@@ -1035,6 +1049,7 @@ interface Sites {
   /**
    * Description for Gets the private link resources
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getPrivateLinkResources retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the private link resources")
   @get
   @action("privateLinkResources")
@@ -1054,6 +1069,7 @@ interface Sites {
     Site,
     CsmPublishingProfileOptions,
     {
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing listPublishingProfileXmlWithSecrets.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "application/xml";
 
@@ -1095,6 +1111,7 @@ interface Sites {
        * Specify true to apply the configuration settings and restarts the app only if necessary. By default, the API always restarts and reprovisions the app.
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing restart POST contract uses softRestart in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing restart.softRestart has a boolean wire value; preserve the published property contract."
       @query("softRestart")
       softRestart?: boolean;
 
@@ -1102,6 +1119,7 @@ interface Sites {
        * Specify true to block until the app is restarted. By default, it is set to false, and the API responds immediately (asynchronous).
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing restart POST contract uses synchronous in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing restart.synchronous has a boolean wire value; preserve the published property contract."
       @query("synchronous")
       synchronous?: boolean;
     },
@@ -1390,6 +1408,8 @@ interface SiteRecommendations {
       /**
        * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listHistoryForWebApp.expiredOnly has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listHistoryForWebApp.expiredOnly retains the expiredOnly query parameter; preserve wire compatibility."
       @query("expiredOnly")
       expiredOnly?: boolean;
 
@@ -1419,6 +1439,8 @@ interface SiteRecommendations {
       /**
        * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listRecommendedRulesForWebApp.featured has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listRecommendedRulesForWebApp.featured retains the featured query parameter; preserve wire compatibility."
       @query("featured")
       featured?: boolean;
 
@@ -1623,12 +1645,16 @@ interface WebApps {
       /**
        * If true, web app metrics are also deleted.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing deleteSlot.deleteMetrics has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing deleteSlot.deleteMetrics retains the deleteMetrics query parameter; preserve wire compatibility."
       @query("deleteMetrics")
       deleteMetrics?: boolean;
 
       /**
        * Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing deleteSlot.deleteEmptyServerFarm has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing deleteSlot.deleteEmptyServerFarm retains the deleteEmptyServerFarm query parameter; preserve wire compatibility."
       @query("deleteEmptyServerFarm")
       deleteEmptyServerFarm?: boolean;
     },
@@ -1651,6 +1677,8 @@ interface WebApps {
       /**
        * Specify <strong>true</strong> to include deployment slots in results. The default is false, which only gives you the production slot of all apps.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByResourceGroup.includeSlots has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.includeSlots retains the includeSlots query parameter; preserve wire compatibility."
       @query("includeSlots")
       includeSlots?: boolean;
     },
@@ -1661,6 +1689,8 @@ interface WebApps {
   /**
    * Description for Analyze a custom hostname.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing analyzeCustomHostnameSlot retains its response and SDK paging behavior; preserve published compatibility."
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing analyzeCustomHostnameSlot SDK method name; renaming it would break client compatibility."
   @summary("Analyze a custom hostname.")
   @get
   @action("analyzeCustomHostname")
@@ -1672,6 +1702,7 @@ interface WebApps {
       /**
        * Custom hostname.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing analyzeCustomHostnameSlot.hostName retains the hostName query parameter; preserve wire compatibility."
       @query("hostName")
       hostName?: string;
     },
@@ -1935,6 +1966,7 @@ interface WebApps {
     Site,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing getWebSiteContainerLogsSlot.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "application/octet-stream";
 
@@ -1957,6 +1989,7 @@ interface WebApps {
     Site,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing getContainerLogsZipSlot.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "application/zip";
 
@@ -1983,6 +2016,7 @@ interface WebApps {
   /**
    * Description for Fetch a short lived token that can be exchanged for a master key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getFunctionsAdminTokenSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Fetch a short lived token that can be exchanged for a master key.")
   @get
   @action("functions/admin/token")
@@ -2089,6 +2123,7 @@ interface WebApps {
    * Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listHybridConnectionsSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Retrieves all Service Bus Hybrid Connections used by this Web App.")
   @get
   @action("hybridConnectionRelays")
@@ -2103,6 +2138,7 @@ interface WebApps {
    * Description for Gets hybrid connections configured for an app (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listRelayServiceConnectionsSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets hybrid connections configured for an app (or deployment slot, if specified).")
   @get
   @action("hybridconnection")
@@ -2374,6 +2410,7 @@ interface WebApps {
   /**
    * Description for Gets web app's event logs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getSitePhpErrorLogFlagSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets web app's event logs.")
   @get
   @action("phplogging")
@@ -2388,6 +2425,7 @@ interface WebApps {
    * Description for Gets the premier add-ons of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listPremierAddOnsSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the premier add-ons of an app.")
   @get
   @action("premieraddons")
@@ -2401,6 +2439,7 @@ interface WebApps {
   /**
    * Description for Gets the private link resources
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getPrivateLinkResourcesSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the private link resources")
   @get
   @action("privateLinkResources")
@@ -2420,6 +2459,7 @@ interface WebApps {
     Site,
     CsmPublishingProfileOptions,
     {
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing listPublishingProfileXmlWithSecretsSlot.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "application/xml";
 
@@ -2462,6 +2502,7 @@ interface WebApps {
        * Specify true to apply the configuration settings and restarts the app only if necessary. By default, the API always restarts and reprovisions the app.
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing restartSlot POST contract uses softRestart in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing restartSlot.softRestart has a boolean wire value; preserve the published property contract."
       @query("softRestart")
       softRestart?: boolean;
 
@@ -2469,6 +2510,7 @@ interface WebApps {
        * Specify true to block until the app is restarted. By default, it is set to false, and the API responds immediately (asynchronous).
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing restartSlot POST contract uses synchronous in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing restartSlot.synchronous has a boolean wire value; preserve the published property contract."
       @query("synchronous")
       synchronous?: boolean;
     },

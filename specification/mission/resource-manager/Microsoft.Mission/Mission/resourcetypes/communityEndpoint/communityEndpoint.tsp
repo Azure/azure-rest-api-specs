@@ -89,6 +89,7 @@ model CommunityEndpointProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CommunityEndpointProperties.approvalRequired has a boolean wire value; preserve the published property contract."
   @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Whether approval is needed for the connection (True or False).")
   approvalRequired?: boolean;

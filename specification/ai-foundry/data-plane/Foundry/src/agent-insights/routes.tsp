@@ -40,6 +40,7 @@ alias AgentInsightListFilters = {
 
 alias AgentInsightReadOptions = {
   /** Whether to include expanded insight details such as evidence and run links in the response. Defaults to false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AgentInsightReadOptions.include_details has a boolean wire value; preserve the published property contract."
   @query include_details?: boolean = false;
 };
 

@@ -155,6 +155,8 @@ interface ApiContracts {
       /**
        * Delete all revisions of the Api.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.deleteRevisions has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.deleteRevisions retains the deleteRevisions query parameter; preserve wire compatibility."
       @query("deleteRevisions")
       deleteRevisions?: boolean;
 
@@ -187,6 +189,7 @@ interface ApiContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -194,6 +197,7 @@ interface ApiContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -201,12 +205,15 @@ interface ApiContracts {
       /**
        * Include tags in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string;
 
       /**
        * Include full ApiVersionSet resource in response
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByService.expandApiVersionSet has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.expandApiVersionSet retains the expandApiVersionSet query parameter; preserve wire compatibility."
       @apiVersion(false)
       @query("expandApiVersionSet")
       expandApiVersionSet?: boolean;
@@ -234,6 +241,7 @@ interface ApiContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing apiRevisionListByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -241,6 +249,7 @@ interface ApiContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing apiRevisionListByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -267,6 +276,7 @@ interface ApiContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByApis.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -274,6 +284,7 @@ interface ApiContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByApis.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -300,6 +311,7 @@ interface ApiContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByTags.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -307,6 +319,7 @@ interface ApiContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByTags.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -314,6 +327,8 @@ interface ApiContracts {
       /**
        * Include not tagged Operations.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByTags.includeNotTaggedOperations has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByTags.includeNotTaggedOperations retains the includeNotTaggedOperations query parameter; preserve wire compatibility."
       @query("includeNotTaggedOperations")
       includeNotTaggedOperations?: boolean;
     }
@@ -457,6 +472,8 @@ interface WorkspaceApi {
       /**
        * Delete all revisions of the Api.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.deleteRevisions has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.deleteRevisions retains the deleteRevisions query parameter; preserve wire compatibility."
       @query("deleteRevisions")
       deleteRevisions?: boolean;
 
@@ -486,6 +503,7 @@ interface WorkspaceApi {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -493,6 +511,7 @@ interface WorkspaceApi {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -500,12 +519,15 @@ interface WorkspaceApi {
       /**
        * Include tags in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string;
 
       /**
        * Include full ApiVersionSet resource in response
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByService.expandApiVersionSet has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.expandApiVersionSet retains the expandApiVersionSet query parameter; preserve wire compatibility."
       @apiVersion(false)
       @query("expandApiVersionSet")
       expandApiVersionSet?: boolean;
@@ -533,6 +555,7 @@ interface WorkspaceApi {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing workspaceApiRevisionListByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -540,6 +563,7 @@ interface WorkspaceApi {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing workspaceApiRevisionListByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;

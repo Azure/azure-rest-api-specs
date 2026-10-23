@@ -53,6 +53,7 @@ model Resource {
  */
 model GeoPriorityReplicationStatus {
   /** Indicates whether Blob Geo Priority Replication is enabled for the storage account. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GeoPriorityReplicationStatus.isBlobEnabled has a boolean wire value; preserve the published property contract."
   isBlobEnabled?: boolean;
 }
 
@@ -1268,11 +1269,13 @@ model BlobServicePropertiesProperties {
   /**
    * Versioning is enabled if set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BlobServicePropertiesProperties.isVersioningEnabled has a boolean wire value; preserve the published property contract."
   isVersioningEnabled?: boolean;
 
   /**
    * Deprecated in favor of isVersioningEnabled property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BlobServicePropertiesProperties.automaticSnapshotPolicyEnabled has a boolean wire value; preserve the published property contract."
   automaticSnapshotPolicyEnabled?: boolean;
 
   /**
@@ -1345,6 +1348,7 @@ model DeleteRetentionPolicy {
   /**
    * Indicates whether DeleteRetentionPolicy is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeleteRetentionPolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1357,6 +1361,7 @@ model DeleteRetentionPolicy {
   /**
    * This property when set to true allows deletion of the soft deleted blob versions and snapshots. This property cannot be used blob restore policy. This property only applies to blob service and does not apply to containers or file share.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeleteRetentionPolicy.allowPermanentDelete has a boolean wire value; preserve the published property contract."
   allowPermanentDelete?: boolean;
 }
 
@@ -1368,6 +1373,7 @@ model StaticWebsite {
   /**
    * Indicates whether static website support is enabled for the specified account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StaticWebsite.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -1393,6 +1399,7 @@ model ChangeFeed {
   /**
    * Indicates whether change feed event logging is enabled for the Blob service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ChangeFeed.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1410,6 +1417,7 @@ model RestorePolicyProperties {
   /**
    * Blob restore is enabled if set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RestorePolicyProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -1441,6 +1449,7 @@ model LastAccessTimeTrackingPolicy {
   /**
    * When set to true last access time based tracking is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LastAccessTimeTrackingPolicy.enable has a boolean wire value; preserve the published property contract."
   enable: boolean;
 
   /**
@@ -1515,6 +1524,7 @@ model ContainerProperties {
   /**
    * Indicates whether the blob container was deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerProperties.deleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   deleted?: boolean;
 
@@ -1539,6 +1549,7 @@ model ContainerProperties {
   /**
    * Block override of encryption scope from the container default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerProperties.denyEncryptionScopeOverride has a boolean wire value; preserve the published property contract."
   denyEncryptionScopeOverride?: boolean;
 
   /**
@@ -1592,12 +1603,14 @@ model ContainerProperties {
   /**
    * The hasLegalHold public property is set to true by SRP if there are at least one existing tag. The hasLegalHold public property is set to false by SRP if all existing legal hold tags are cleared out. There can be a maximum of 1000 blob containers with hasLegalHold=true for a given account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerProperties.hasLegalHold has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasLegalHold?: boolean;
 
   /**
    * The hasImmutabilityPolicy public property is set to true by SRP if ImmutabilityPolicy has been created for this container. The hasImmutabilityPolicy public property is set to false by SRP if ImmutabilityPolicy has not been created for this container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerProperties.hasImmutabilityPolicy has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasImmutabilityPolicy?: boolean;
 
@@ -1609,11 +1622,13 @@ model ContainerProperties {
   /**
    * Enable NFSv3 root squash on blob container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerProperties.enableNfsV3RootSquash has a boolean wire value; preserve the published property contract."
   enableNfsV3RootSquash?: boolean;
 
   /**
    * Enable NFSv3 all squash on blob container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerProperties.enableNfsV3AllSquash has a boolean wire value; preserve the published property contract."
   enableNfsV3AllSquash?: boolean;
 
   /**
@@ -1683,11 +1698,13 @@ model ImmutabilityPolicyProperty {
   /**
    * This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImmutabilityPolicyProperty.allowProtectedAppendWrites has a boolean wire value; preserve the published property contract."
   allowProtectedAppendWrites?: boolean;
 
   /**
    * This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. The 'allowProtectedAppendWrites' and 'allowProtectedAppendWritesAll' properties are mutually exclusive.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImmutabilityPolicyProperty.allowProtectedAppendWritesAll has a boolean wire value; preserve the published property contract."
   allowProtectedAppendWritesAll?: boolean;
 }
 
@@ -1735,11 +1752,13 @@ model UpdateHistoryProperty {
   /**
    * This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UpdateHistoryProperty.allowProtectedAppendWrites has a boolean wire value; preserve the published property contract."
   allowProtectedAppendWrites?: boolean;
 
   /**
    * This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. The 'allowProtectedAppendWrites' and 'allowProtectedAppendWritesAll' properties are mutually exclusive.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UpdateHistoryProperty.allowProtectedAppendWritesAll has a boolean wire value; preserve the published property contract."
   allowProtectedAppendWritesAll?: boolean;
 }
 
@@ -1750,6 +1769,7 @@ model LegalHoldProperties {
   /**
    * The hasLegalHold public property is set to true by SRP if there are at least one existing tag. The hasLegalHold public property is set to false by SRP if all existing legal hold tags are cleared out. There can be a maximum of 1000 blob containers with hasLegalHold=true for a given account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LegalHoldProperties.hasLegalHold has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasLegalHold?: boolean;
 
@@ -1808,6 +1828,7 @@ model ProtectedAppendWritesHistory {
   /**
    * When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining legal hold protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ProtectedAppendWritesHistory.allowProtectedAppendWritesAll has a boolean wire value; preserve the published property contract."
   allowProtectedAppendWritesAll?: boolean;
 
   /**
@@ -1825,6 +1846,7 @@ model ImmutableStorageWithVersioning {
   /**
    * This is an immutable property, when set to true it enables object level immutability at the container level.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImmutableStorageWithVersioning.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1852,6 +1874,7 @@ model LegalHold {
   /**
    * The hasLegalHold public property is set to true by SRP if there are at least one existing tag. The hasLegalHold public property is set to false by SRP if all existing legal hold tags are cleared out. There can be a maximum of 1000 blob containers with hasLegalHold=true for a given account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LegalHold.hasLegalHold has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasLegalHold?: boolean;
 
@@ -1863,6 +1886,7 @@ model LegalHold {
   /**
    * When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining legal hold protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LegalHold.allowProtectedAppendWritesAll has a boolean wire value; preserve the published property contract."
   allowProtectedAppendWritesAll?: boolean;
 }
 
@@ -2041,6 +2065,7 @@ model Multichannel {
   /**
    * Indicates whether multichannel is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Multichannel.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -2051,6 +2076,7 @@ model EncryptionInTransit {
   /**
    * Indicates whether encryption in transit is required
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EncryptionInTransit.required has a boolean wire value; preserve the published property contract."
   required?: boolean;
 }
 
@@ -2404,6 +2430,7 @@ model FileShareProperties {
   /**
    * Indicates whether the share was deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FileShareProperties.deleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   deleted?: boolean;
 
@@ -2520,6 +2547,7 @@ model FileSharePropertiesFileSharePaidBursting {
   /**
    * Indicates whether paid bursting is enabled for the share. This property is only for file shares created under Files Provisioned v1 SSD account type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FileSharePropertiesFileSharePaidBursting.paidBurstingEnabled has a boolean wire value; preserve the published property contract."
   paidBurstingEnabled?: boolean;
 
   /**
@@ -2778,6 +2806,7 @@ model MetricSpecification {
   /**
    * The property to decide fill gap with zero or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricSpecification.fillGapWithZero has a boolean wire value; preserve the published property contract."
   fillGapWithZero?: boolean;
 
   /**
@@ -2949,6 +2978,7 @@ model CheckNameAvailabilityResult {
   /**
    * Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
@@ -3175,26 +3205,31 @@ model StorageAccountPropertiesCreateParameters {
   /**
    * Allows https traffic only to storage service if sets to true. The default value is true since API version 2019-04-01.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesCreateParameters.supportsHttpsTrafficOnly has a boolean wire value; preserve the published property contract."
   supportsHttpsTrafficOnly?: boolean;
 
   /**
    * Enables Secure File Transfer Protocol, if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesCreateParameters.isSftpEnabled has a boolean wire value; preserve the published property contract."
   isSftpEnabled?: boolean;
 
   /**
    * Enables local users feature, if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesCreateParameters.isLocalUserEnabled has a boolean wire value; preserve the published property contract."
   isLocalUserEnabled?: boolean;
 
   /**
    * Enables extended group support with local users feature, if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesCreateParameters.enableExtendedGroups has a boolean wire value; preserve the published property contract."
   enableExtendedGroups?: boolean;
 
   /**
    * Account HierarchicalNamespace enabled if sets to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesCreateParameters.isHnsEnabled has a boolean wire value; preserve the published property contract."
   isHnsEnabled?: boolean;
 
   /**
@@ -3215,6 +3250,7 @@ model StorageAccountPropertiesCreateParameters {
   /**
    * Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is false for this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesCreateParameters.allowBlobPublicAccess has a boolean wire value; preserve the published property contract."
   allowBlobPublicAccess?: boolean;
 
   /**
@@ -3225,22 +3261,26 @@ model StorageAccountPropertiesCreateParameters {
   /**
    * Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesCreateParameters.allowSharedKeyAccess has a boolean wire value; preserve the published property contract."
   allowSharedKeyAccess?: boolean;
 
   /**
    * NFS 3.0 protocol support enabled if set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesCreateParameters.isNfsV3Enabled has a boolean wire value; preserve the published property contract."
   isNfsV3Enabled?: boolean;
 
   /**
    * Allow or disallow cross AAD tenant object replication. Set this property to true for new or existing accounts only if object replication policies will involve storage accounts in different AAD tenants. The default interpretation is false for new accounts to follow best security practices by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesCreateParameters.allowCrossTenantReplication has a boolean wire value; preserve the published property contract."
   allowCrossTenantReplication?: boolean;
 
   /**
    * A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesCreateParameters.defaultToOAuthAuthentication has a boolean wire value; preserve the published property contract."
   defaultToOAuthAuthentication?: boolean;
 
   /**
@@ -3273,6 +3313,7 @@ model StorageAccountPropertiesCreateParameters {
   /**
    * Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesCreateParameters.allowCrossTenantDelegationSas has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01)
   allowCrossTenantDelegationSas?: boolean;
 }
@@ -3294,6 +3335,7 @@ model SasPolicy {
   /**
    * Indicates whether user delegation SAS (shared access signature) tokens are required to be bound to a specific user. The default interpretation is false for this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SasPolicy.requireUserBoundUserDelegationSas has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01)
   requireUserBoundUserDelegationSas?: boolean;
 
@@ -3326,6 +3368,7 @@ model CustomDomain {
   /**
    * Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CustomDomain.useSubDomainName has a boolean wire value; preserve the published property contract."
   useSubDomainName?: boolean;
 }
 
@@ -3346,6 +3389,7 @@ model Encryption {
   /**
    * A boolean indicating whether or not the service applies a secondary layer of encryption with platform managed keys for data at rest.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Encryption.requireInfrastructureEncryption has a boolean wire value; preserve the published property contract."
   requireInfrastructureEncryption?: boolean;
 
   /**
@@ -3391,6 +3435,7 @@ model EncryptionService {
   /**
    * A boolean indicating whether or not the service encrypts the data as it is stored. Encryption at rest is enabled by default today and cannot be disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EncryptionService.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3629,6 +3674,7 @@ model SmbOAuthSettings {
   /**
    * Specifies if managed identities can access SMB shares using OAuth. The default interpretation is false for this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SmbOAuthSettings.isSmbOAuthEnabled has a boolean wire value; preserve the published property contract."
   isSmbOAuthEnabled?: boolean;
 }
 
@@ -3644,11 +3690,13 @@ model RoutingPreference {
   /**
    * A boolean flag which indicates whether microsoft routing storage endpoints are to be published
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RoutingPreference.publishMicrosoftEndpoints has a boolean wire value; preserve the published property contract."
   publishMicrosoftEndpoints?: boolean;
 
   /**
    * A boolean flag which indicates whether internet routing storage endpoints are to be published
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RoutingPreference.publishInternetEndpoints has a boolean wire value; preserve the published property contract."
   publishInternetEndpoints?: boolean;
 }
 
@@ -3659,6 +3707,7 @@ model DualStackEndpointPreference {
   /**
    * A boolean flag which indicates whether IPv6 storage endpoints are to be published.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DualStackEndpointPreference.publishIpv6Endpoint has a boolean wire value; preserve the published property contract."
   publishIpv6Endpoint?: boolean;
 }
 
@@ -3669,6 +3718,7 @@ model ImmutableStorageAccount {
   /**
    * A boolean flag which enables account-level immutability. All the containers under such an account have object-level immutability enabled by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImmutableStorageAccount.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3696,6 +3746,7 @@ model AccountImmutabilityPolicyProperties {
   /**
    * This property can only be changed for disabled and unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccountImmutabilityPolicyProperties.allowProtectedAppendWrites has a boolean wire value; preserve the published property contract."
   allowProtectedAppendWrites?: boolean;
 }
 
@@ -3707,6 +3758,7 @@ model ServiceSharedKeyAccessProperties {
   /**
    * Indicates whether shared key access is enabled for the service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServiceSharedKeyAccessProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3744,22 +3796,26 @@ model StorageDataCollaborationPolicyProperties {
   /**
    * Indicates whether storage connectors are allowed to created or managed on the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageDataCollaborationPolicyProperties.allowStorageConnectors has a boolean wire value; preserve the published property contract."
   allowStorageConnectors?: boolean;
 
   /**
    * Indicates whether Blob Access Point configurations are allowed to be created or managed on the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageDataCollaborationPolicyProperties.allowBlobAccessPoints has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_09_01)
   allowBlobAccessPoints?: boolean;
 
   /**
    * Indicates whether data shares are allowed to be created or managed on the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageDataCollaborationPolicyProperties.allowStorageDataShares has a boolean wire value; preserve the published property contract."
   allowStorageDataShares?: boolean;
 
   /**
    * Indicates whether cross-entra tenant data sharing is allowed on the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageDataCollaborationPolicyProperties.allowCrossTenantDataSharing has a boolean wire value; preserve the published property contract."
   allowCrossTenantDataSharing?: boolean;
 }
 
@@ -3873,6 +3929,7 @@ model StorageAccountProperties {
   /**
    * Allows https traffic only to storage service if sets to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountProperties.supportsHttpsTrafficOnly has a boolean wire value; preserve the published property contract."
   supportsHttpsTrafficOnly?: boolean;
 
   /**
@@ -3884,21 +3941,25 @@ model StorageAccountProperties {
   /**
    * Enables Secure File Transfer Protocol, if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountProperties.isSftpEnabled has a boolean wire value; preserve the published property contract."
   isSftpEnabled?: boolean;
 
   /**
    * Enables local users feature, if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountProperties.isLocalUserEnabled has a boolean wire value; preserve the published property contract."
   isLocalUserEnabled?: boolean;
 
   /**
    * Enables extended group support with local users feature, if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountProperties.enableExtendedGroups has a boolean wire value; preserve the published property contract."
   enableExtendedGroups?: boolean;
 
   /**
    * Account HierarchicalNamespace enabled if sets to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountProperties.isHnsEnabled has a boolean wire value; preserve the published property contract."
   isHnsEnabled?: boolean;
 
   /**
@@ -3910,6 +3971,7 @@ model StorageAccountProperties {
   /**
    * If the failover is in progress, the value will be true, otherwise, it will be null.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountProperties.failoverInProgress has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   failoverInProgress?: boolean;
 
@@ -3943,6 +4005,7 @@ model StorageAccountProperties {
   /**
    * Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is false for this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountProperties.allowBlobPublicAccess has a boolean wire value; preserve the published property contract."
   allowBlobPublicAccess?: boolean;
 
   /**
@@ -3953,22 +4016,26 @@ model StorageAccountProperties {
   /**
    * Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountProperties.allowSharedKeyAccess has a boolean wire value; preserve the published property contract."
   allowSharedKeyAccess?: boolean;
 
   /**
    * NFS 3.0 protocol support enabled if set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountProperties.isNfsV3Enabled has a boolean wire value; preserve the published property contract."
   isNfsV3Enabled?: boolean;
 
   /**
    * Allow or disallow cross AAD tenant object replication. Set this property to true for new or existing accounts only if object replication policies will involve storage accounts in different AAD tenants. The default interpretation is false for new accounts to follow best security practices by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountProperties.allowCrossTenantReplication has a boolean wire value; preserve the published property contract."
   allowCrossTenantReplication?: boolean;
 
   /**
    * A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountProperties.defaultToOAuthAuthentication has a boolean wire value; preserve the published property contract."
   defaultToOAuthAuthentication?: boolean;
 
   /**
@@ -3999,12 +4066,14 @@ model StorageAccountProperties {
   /**
    * This property will be set to true or false on an event of ongoing migration. Default value is null.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountProperties.isSkuConversionBlocked has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isSkuConversionBlocked?: boolean;
 
   /**
    * If customer initiated account migration is in progress, the value will be true else it will be null.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountProperties.accountMigrationInProgress has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   accountMigrationInProgress?: boolean;
 
@@ -4028,6 +4097,7 @@ model StorageAccountProperties {
   /**
    * Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountProperties.allowCrossTenantDelegationSas has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01)
   allowCrossTenantDelegationSas?: boolean;
 }
@@ -4242,12 +4312,14 @@ model GeoReplicationStats {
   /**
    * A boolean flag which indicates whether or not account failover is supported for the account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GeoReplicationStats.canFailover has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   canFailover?: boolean;
 
   /**
    * A boolean flag which indicates whether or not planned account failover is supported for the account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GeoReplicationStats.canPlannedFailover has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   canPlannedFailover?: boolean;
 
@@ -4490,21 +4562,25 @@ model StorageAccountPropertiesUpdateParameters {
   /**
    * Allows https traffic only to storage service if sets to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesUpdateParameters.supportsHttpsTrafficOnly has a boolean wire value; preserve the published property contract."
   supportsHttpsTrafficOnly?: boolean;
 
   /**
    * Enables Secure File Transfer Protocol, if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesUpdateParameters.isSftpEnabled has a boolean wire value; preserve the published property contract."
   isSftpEnabled?: boolean;
 
   /**
    * Enables local users feature, if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesUpdateParameters.isLocalUserEnabled has a boolean wire value; preserve the published property contract."
   isLocalUserEnabled?: boolean;
 
   /**
    * Enables extended group support with local users feature, if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesUpdateParameters.enableExtendedGroups has a boolean wire value; preserve the published property contract."
   enableExtendedGroups?: boolean;
 
   /**
@@ -4530,6 +4606,7 @@ model StorageAccountPropertiesUpdateParameters {
   /**
    * Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is false for this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesUpdateParameters.allowBlobPublicAccess has a boolean wire value; preserve the published property contract."
   allowBlobPublicAccess?: boolean;
 
   /**
@@ -4540,17 +4617,20 @@ model StorageAccountPropertiesUpdateParameters {
   /**
    * Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesUpdateParameters.allowSharedKeyAccess has a boolean wire value; preserve the published property contract."
   allowSharedKeyAccess?: boolean;
 
   /**
    * Allow or disallow cross AAD tenant object replication. Set this property to true for new or existing accounts only if object replication policies will involve storage accounts in different AAD tenants. The default interpretation is false for new accounts to follow best security practices by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesUpdateParameters.allowCrossTenantReplication has a boolean wire value; preserve the published property contract."
   allowCrossTenantReplication?: boolean;
 
   /**
    * A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesUpdateParameters.defaultToOAuthAuthentication has a boolean wire value; preserve the published property contract."
   defaultToOAuthAuthentication?: boolean;
 
   /**
@@ -4593,6 +4673,7 @@ model StorageAccountPropertiesUpdateParameters {
   /**
    * Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageAccountPropertiesUpdateParameters.allowCrossTenantDelegationSas has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01)
   allowCrossTenantDelegationSas?: boolean;
 }
@@ -5006,6 +5087,7 @@ model ManagementPolicyRule {
   /**
    * Rule is enabled if set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagementPolicyRule.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -5091,6 +5173,7 @@ model ManagementPolicyBaseBlob {
   /**
    * This property enables auto tiering of a blob from cool to hot on a blob access. This property requires tierToCool.daysAfterLastAccessTimeGreaterThan.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagementPolicyBaseBlob.enableAutoTierToHotFromCool has a boolean wire value; preserve the published property contract."
   enableAutoTierToHotFromCool?: boolean;
 }
 
@@ -5269,6 +5352,7 @@ model BlobInventoryPolicySchema {
   /**
    * Policy is enabled if set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BlobInventoryPolicySchema.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -5295,6 +5379,7 @@ model BlobInventoryPolicyRule {
   /**
    * Rule is enabled when set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BlobInventoryPolicyRule.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -5365,16 +5450,19 @@ model BlobInventoryPolicyFilter {
   /**
    * Includes blob versions in blob inventory when value is set to true. The definition.schemaFields values 'VersionId and IsCurrentVersion' are required if this property is set to true, else they must be excluded.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BlobInventoryPolicyFilter.includeBlobVersions has a boolean wire value; preserve the published property contract."
   includeBlobVersions?: boolean;
 
   /**
    * Includes blob snapshots in blob inventory when value is set to true. The definition.schemaFields value 'Snapshot' is required if this property is set to true, else it must be excluded.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BlobInventoryPolicyFilter.includeSnapshots has a boolean wire value; preserve the published property contract."
   includeSnapshots?: boolean;
 
   /**
    * For 'Container' definition.objectType the definition.schemaFields must include 'Deleted, Version, DeletedTime and RemainingRetentionDays'. For 'Blob' definition.objectType and HNS enabled storage accounts the definition.schemaFields must include 'DeletionId, Deleted, DeletedTime and RemainingRetentionDays' and for Hns disabled accounts the definition.schemaFields must include 'Deleted and RemainingRetentionDays', else it must be excluded.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BlobInventoryPolicyFilter.includeDeleted has a boolean wire value; preserve the published property contract."
   includeDeleted?: boolean;
 
   /**
@@ -5584,6 +5672,7 @@ model ObjectReplicationPolicyPropertiesMetrics {
   /**
    * Indicates whether object replication metrics feature is enabled for the policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ObjectReplicationPolicyPropertiesMetrics.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -5594,6 +5683,7 @@ model ObjectReplicationPolicyPropertiesPriorityReplication {
   /**
    * Indicates whether object replication priority replication feature is enabled for the policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ObjectReplicationPolicyPropertiesPriorityReplication.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -5605,6 +5695,7 @@ model ObjectReplicationPolicyPropertiesTagsReplication {
   /**
    * Indicates whether object replication tags replication feature is enabled for the policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ObjectReplicationPolicyPropertiesTagsReplication.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -5644,16 +5735,19 @@ model LocalUserProperties {
   /**
    * Indicates whether shared key exists. Set it to false to remove existing shared key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LocalUserProperties.hasSharedKey has a boolean wire value; preserve the published property contract."
   hasSharedKey?: boolean;
 
   /**
    * Indicates whether ssh key exists. Set it to false to remove existing SSH key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LocalUserProperties.hasSshKey has a boolean wire value; preserve the published property contract."
   hasSshKey?: boolean;
 
   /**
    * Indicates whether ssh password exists. Set it to false to remove existing SSH password.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LocalUserProperties.hasSshPassword has a boolean wire value; preserve the published property contract."
   hasSshPassword?: boolean;
 
   /**
@@ -5670,6 +5764,7 @@ model LocalUserProperties {
   /**
    * Indicates whether ACL authorization is allowed for this user. Set it to false to disallow using ACL authorization.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LocalUserProperties.allowAclAuthorization has a boolean wire value; preserve the published property contract."
   allowAclAuthorization?: boolean;
 
   /**
@@ -5681,6 +5776,7 @@ model LocalUserProperties {
    * Indicates if the local user is enabled for access with NFSv3 protocol.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LocalUserProperties.isNFSv3Enabled has a boolean wire value; preserve the published property contract."
   isNFSv3Enabled?: boolean;
 }
 
@@ -5783,6 +5879,7 @@ model EncryptionScopeProperties {
   /**
    * A boolean indicating whether or not the service applies a secondary layer of encryption with platform managed keys for data at rest.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EncryptionScopeProperties.requireInfrastructureEncryption has a boolean wire value; preserve the published property contract."
   requireInfrastructureEncryption?: boolean;
 }
 
@@ -6108,6 +6205,7 @@ model StorageTaskAssignmentProperties {
   /**
    * Whether the storage task assignment is enabled or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageTaskAssignmentProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -6350,6 +6448,7 @@ model StorageTaskAssignmentUpdateProperties {
   /**
    * Whether the storage task assignment is enabled or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageTaskAssignmentUpdateProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -6516,6 +6615,7 @@ model StorageConnectorPropertiesUpdate {
   /**
    * Test connection to backing data source before creating the storage connector.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageConnectorPropertiesUpdate.testConnection has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Create, Lifecycle.Update)
   testConnection?: boolean = false;
 
@@ -6577,6 +6677,7 @@ model StorageConnectorProperties {
   /**
    * Test connection to backing data source before creating the storage connector.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageConnectorProperties.testConnection has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Create, Lifecycle.Update)
   testConnection?: boolean = false;
 
@@ -7068,6 +7169,7 @@ model ContextCacheCheckNameAvailabilityParameters {
 @added(Versions.v2026_09_01)
 model ContextCacheCheckNameAvailabilityResult {
   /** A boolean value that indicates whether the context cache name is available to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContextCacheCheckNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable: boolean;
 

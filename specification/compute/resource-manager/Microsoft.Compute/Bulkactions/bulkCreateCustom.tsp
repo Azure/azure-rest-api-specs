@@ -45,6 +45,8 @@ alias BulkCreateCustomId = {
 
 alias BulkCreateCustomDeleteInstancesParameter = {
   /** When true, deletes all virtual machines created by this BulkAction Operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BulkCreateCustomDeleteInstancesParameter.deleteInstances has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing BulkCreateCustomDeleteInstancesParameter.deleteInstances retains the deleteInstances query parameter; preserve wire compatibility."
   @query
   deleteInstances?: boolean;
 };

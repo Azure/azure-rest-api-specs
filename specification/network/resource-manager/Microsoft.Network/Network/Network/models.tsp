@@ -6507,11 +6507,13 @@ model ApplicationGatewayPropertiesFormat {
   /**
    * Whether HTTP2 is enabled on the application gateway resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayPropertiesFormat.enableHttp2 has a boolean wire value; preserve the published property contract."
   enableHttp2?: boolean;
 
   /**
    * Whether FIPS is enabled on the application gateway resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayPropertiesFormat.enableFips has a boolean wire value; preserve the published property contract."
   enableFips?: boolean;
 
   /**
@@ -6557,6 +6559,7 @@ model ApplicationGatewayPropertiesFormat {
   /**
    * If true, associates a firewall policy with an application gateway regardless whether the policy differs from the WAF Config.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayPropertiesFormat.forceFirewallPolicyAssociation has a boolean wire value; preserve the published property contract."
   forceFirewallPolicyAssociation?: boolean;
 
   /**
@@ -7238,11 +7241,13 @@ model ApplicationGatewayProbePropertiesFormat {
   /**
    * Whether the host header should be picked from the backend http settings. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayProbePropertiesFormat.pickHostNameFromBackendHttpSettings has a boolean wire value; preserve the published property contract."
   pickHostNameFromBackendHttpSettings?: boolean;
 
   /**
    * Whether the server name indication should be picked from the backend settings for Tls protocol. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayProbePropertiesFormat.pickHostNameFromBackendSettings has a boolean wire value; preserve the published property contract."
   pickHostNameFromBackendSettings?: boolean;
 
   /**
@@ -7258,6 +7263,7 @@ model ApplicationGatewayProbePropertiesFormat {
   /**
    * Whether to send Proxy Protocol header along with the Health Probe over TCP or TLS protocol. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayProbePropertiesFormat.enableProbeProxyProtocolHeader has a boolean wire value; preserve the published property contract."
   enableProbeProxyProtocolHeader?: boolean;
 
   /**
@@ -7375,6 +7381,7 @@ model ApplicationGatewayBackendHttpSettingsPropertiesFormat {
   /**
    * Whether to pick host header should be picked from the host name of the backend server. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayBackendHttpSettingsPropertiesFormat.pickHostNameFromBackendAddress has a boolean wire value; preserve the published property contract."
   pickHostNameFromBackendAddress?: boolean;
 
   /**
@@ -7385,6 +7392,7 @@ model ApplicationGatewayBackendHttpSettingsPropertiesFormat {
   /**
    * Whether the probe is enabled. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayBackendHttpSettingsPropertiesFormat.probeEnabled has a boolean wire value; preserve the published property contract."
   probeEnabled?: boolean;
 
   /**
@@ -7395,17 +7403,20 @@ model ApplicationGatewayBackendHttpSettingsPropertiesFormat {
   /**
    * Enable or disable dedicated connection per backend server. Default is set to false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayBackendHttpSettingsPropertiesFormat.dedicatedBackendConnection has a boolean wire value; preserve the published property contract."
   dedicatedBackendConnection?: boolean;
 
   /**
    * Verify or skip both chain and expiry validations of the certificate on the backend server. Default is set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayBackendHttpSettingsPropertiesFormat.validateCertChainAndExpiry has a boolean wire value; preserve the published property contract."
   validateCertChainAndExpiry?: boolean = true;
 
   /**
    * When enabled, verifies if the Common Name of the certificate provided by the backend server matches the Server Name Indication (SNI) value. Default value is true.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayBackendHttpSettingsPropertiesFormat.validateSNI has a boolean wire value; preserve the published property contract."
   validateSNI?: boolean = true;
 
   /**
@@ -7429,6 +7440,7 @@ model ApplicationGatewayConnectionDraining {
   /**
    * Whether connection draining is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayConnectionDraining.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -7508,12 +7520,14 @@ model ApplicationGatewayBackendSettingsPropertiesFormat {
   /**
    * Whether to pick server name indication from the host name of the backend server for Tls protocol. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayBackendSettingsPropertiesFormat.pickHostNameFromBackendAddress has a boolean wire value; preserve the published property contract."
   pickHostNameFromBackendAddress?: boolean;
 
   /**
    * Whether to send Proxy Protocol header to backend servers over TCP or TLS protocols. Default value is false.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayBackendSettingsPropertiesFormat.enableL4ClientIpPreservation has a boolean wire value; preserve the published property contract."
   enableL4ClientIpPreservation?: boolean;
 
   /**
@@ -7593,6 +7607,7 @@ model ApplicationGatewayHttpListenerPropertiesFormat {
   /**
    * Applicable only if protocol is https. Enables SNI for multi-hosting.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayHttpListenerPropertiesFormat.requireServerNameIndication has a boolean wire value; preserve the published property contract."
   requireServerNameIndication?: boolean;
 
   /**
@@ -7778,6 +7793,7 @@ model ApplicationGatewayClientAuthConfiguration {
    * Verify client certificate issuer name on the application gateway.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayClientAuthConfiguration.verifyClientCertIssuerDN has a boolean wire value; preserve the published property contract."
   verifyClientCertIssuerDN?: boolean;
 
   /**
@@ -8199,11 +8215,13 @@ model ApplicationGatewayAdvancedRoutingPropertyValueMatcher {
   /**
    * Setting this parameter to truth value with force the pattern to do a case in-sensitive comparison.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayAdvancedRoutingPropertyValueMatcher.ignoreCase has a boolean wire value; preserve the published property contract."
   ignoreCase?: boolean = true;
 
   /**
    * Setting this value as truth will force to check the negation of the condition given by the user in the pattern field.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayAdvancedRoutingPropertyValueMatcher.negate has a boolean wire value; preserve the published property contract."
   negate?: boolean;
 }
 
@@ -8476,11 +8494,13 @@ model ApplicationGatewayRewriteRuleCondition {
   /**
    * Setting this parameter to truth value with force the pattern to do a case in-sensitive comparison.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayRewriteRuleCondition.ignoreCase has a boolean wire value; preserve the published property contract."
   ignoreCase?: boolean;
 
   /**
    * Setting this value as truth will force to check the negation of the condition given by the user.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayRewriteRuleCondition.negate has a boolean wire value; preserve the published property contract."
   negate?: boolean;
 }
 
@@ -8544,11 +8564,13 @@ model HeaderValueMatcher {
   /**
    * Setting this parameter to truth value with force the pattern to do a case in-sensitive comparison.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HeaderValueMatcher.ignoreCase has a boolean wire value; preserve the published property contract."
   ignoreCase?: boolean;
 
   /**
    * Setting this value as truth will force to check the negation of the condition given by the user in the pattern field.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HeaderValueMatcher.negate has a boolean wire value; preserve the published property contract."
   negate?: boolean;
 }
 
@@ -8571,6 +8593,7 @@ model ApplicationGatewayUrlConfiguration {
   /**
    * If set as true, it will re-evaluate the url path map provided in path based request routing rules using modified path. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayUrlConfiguration.reroute has a boolean wire value; preserve the published property contract."
   reroute?: boolean;
 }
 
@@ -8629,11 +8652,13 @@ model ApplicationGatewayRedirectConfigurationPropertiesFormat {
   /**
    * Include path in the redirected url.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayRedirectConfigurationPropertiesFormat.includePath has a boolean wire value; preserve the published property contract."
   includePath?: boolean;
 
   /**
    * Include query string in the redirected url.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayRedirectConfigurationPropertiesFormat.includeQueryString has a boolean wire value; preserve the published property contract."
   includeQueryString?: boolean;
 
   /**
@@ -8661,6 +8686,7 @@ model ApplicationGatewayWebApplicationFirewallConfiguration {
   /**
    * Whether the web application firewall is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayWebApplicationFirewallConfiguration.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -8687,6 +8713,7 @@ model ApplicationGatewayWebApplicationFirewallConfiguration {
   /**
    * Whether allow WAF to check request Body.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayWebApplicationFirewallConfiguration.requestBodyCheck has a boolean wire value; preserve the published property contract."
   requestBodyCheck?: boolean;
 
   /**
@@ -8879,6 +8906,7 @@ model ApplicationGatewayPrivateLinkIpConfigurationProperties {
   /**
    * Whether the ip configuration is primary or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayPrivateLinkIpConfigurationProperties.primary has a boolean wire value; preserve the published property contract."
   primary?: boolean;
 
   /**
@@ -9104,16 +9132,19 @@ model ApplicationGatewayGlobalConfiguration {
   /**
    * Enable request buffering.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayGlobalConfiguration.enableRequestBuffering has a boolean wire value; preserve the published property contract."
   enableRequestBuffering?: boolean;
 
   /**
    * Enable response buffering.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayGlobalConfiguration.enableResponseBuffering has a boolean wire value; preserve the published property contract."
   enableResponseBuffering?: boolean;
 
   /**
    * Disable default server header in response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayGlobalConfiguration.disableDefaultServerHeaderInResponse has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_09_01)
   disableDefaultServerHeaderInResponse?: boolean;
 }
@@ -9235,11 +9266,13 @@ model ApplicationGatewayOnDemandProbe {
   /**
    * Whether the host header should be picked from the backend http settings. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayOnDemandProbe.pickHostNameFromBackendHttpSettings has a boolean wire value; preserve the published property contract."
   pickHostNameFromBackendHttpSettings?: boolean;
 
   /**
    * Whether to send Proxy Protocol header along with the Health Probe over TCP or TLS protocol. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGatewayOnDemandProbe.enableProbeProxyProtocolHeader has a boolean wire value; preserve the published property contract."
   enableProbeProxyProtocolHeader?: boolean;
 
   /**
@@ -9837,6 +9870,7 @@ model AzureFirewallPropertiesFormat {
   /**
    * Indicates whether the AI security add-on is enabled for the Azure Firewall.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureFirewallPropertiesFormat.aiSecurityAddOn has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_01_01)
   aiSecurityAddOn?: boolean;
 }
@@ -10601,41 +10635,49 @@ model BastionHostPropertiesFormat {
   /**
    * Enable/Disable Copy/Paste feature of the Bastion Host resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BastionHostPropertiesFormat.disableCopyPaste has a boolean wire value; preserve the published property contract."
   disableCopyPaste?: boolean = false;
 
   /**
    * Enable/Disable File Copy feature of the Bastion Host resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BastionHostPropertiesFormat.enableFileCopy has a boolean wire value; preserve the published property contract."
   enableFileCopy?: boolean = false;
 
   /**
    * Enable/Disable IP Connect feature of the Bastion Host resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BastionHostPropertiesFormat.enableIpConnect has a boolean wire value; preserve the published property contract."
   enableIpConnect?: boolean = false;
 
   /**
    * Enable/Disable Shareable Link of the Bastion Host resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BastionHostPropertiesFormat.enableShareableLink has a boolean wire value; preserve the published property contract."
   enableShareableLink?: boolean = false;
 
   /**
    * Enable/Disable Tunneling feature of the Bastion Host resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BastionHostPropertiesFormat.enableTunneling has a boolean wire value; preserve the published property contract."
   enableTunneling?: boolean = false;
 
   /**
    * Enable/Disable Kerberos feature of the Bastion Host resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BastionHostPropertiesFormat.enableKerberos has a boolean wire value; preserve the published property contract."
   enableKerberos?: boolean = false;
 
   /**
    * Enable/Disable Session Recording feature of the Bastion Host resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BastionHostPropertiesFormat.enableSessionRecording has a boolean wire value; preserve the published property contract."
   enableSessionRecording?: boolean = false;
 
   /**
    * Enable/Disable Private Only feature of the Bastion Host resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BastionHostPropertiesFormat.enablePrivateOnlyBastion has a boolean wire value; preserve the published property contract."
   enablePrivateOnlyBastion?: boolean = false;
 
   /**
@@ -11008,6 +11050,7 @@ model DnsNameAvailabilityResult {
   /**
    * Domain availability (True/False).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DnsNameAvailabilityResult.available has a boolean wire value; preserve the published property contract."
   available?: boolean;
 }
 
@@ -11081,6 +11124,7 @@ model CustomIpPrefixPropertiesFormat {
   /**
    * Whether to do express route advertise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CustomIpPrefixPropertiesFormat.expressRouteAdvertise has a boolean wire value; preserve the published property contract."
   expressRouteAdvertise?: boolean;
 
   /**
@@ -11091,6 +11135,7 @@ model CustomIpPrefixPropertiesFormat {
   /**
    * Whether to Advertise the range to Internet.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CustomIpPrefixPropertiesFormat.noInternetAdvertise has a boolean wire value; preserve the published property contract."
   noInternetAdvertise?: boolean;
 
   /**
@@ -12152,6 +12197,7 @@ model ExpressRouteCircuitPropertiesFormat {
   /**
    * Allow classic operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpressRouteCircuitPropertiesFormat.allowClassicOperations has a boolean wire value; preserve the published property contract."
   allowClassicOperations?: boolean;
 
   /**
@@ -12246,6 +12292,7 @@ model ExpressRouteCircuitPropertiesFormat {
   /**
    * Flag denoting global reach status.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpressRouteCircuitPropertiesFormat.globalReachEnabled has a boolean wire value; preserve the published property contract."
   globalReachEnabled?: boolean;
 
   /**
@@ -12263,6 +12310,7 @@ model ExpressRouteCircuitPropertiesFormat {
   /**
    * Flag denoting rate-limiting status of the ExpressRoute direct-port circuit.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpressRouteCircuitPropertiesFormat.enableDirectPortRateLimit has a boolean wire value; preserve the published property contract."
   enableDirectPortRateLimit?: boolean;
 }
 
@@ -12744,6 +12792,7 @@ model MigrateExpressRouteCircuitHealthCheckResponse {
   newCrossConnectionUrl?: url;
 
   /** Indicates whether rollback should be performed. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrateExpressRouteCircuitHealthCheckResponse.shouldRollback has a boolean wire value; preserve the published property contract."
   shouldRollback?: boolean;
 
   /** Detailed health check information for migration. */
@@ -13707,6 +13756,7 @@ model FirewallPolicyPropertiesFormat {
   /**
    * Indicates that the Firewall Policy is managed by AFC (Azure Firewall for Containers). When set, the policy is treated as read-only for callers that do not supply the AFC-managed sync marker on write operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FirewallPolicyPropertiesFormat.afcManaged has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   afcManaged?: boolean;
@@ -13738,6 +13788,7 @@ model FirewallPolicyInsights {
   /**
    * A flag to indicate if the insights are enabled on the policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FirewallPolicyInsights.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
@@ -13813,6 +13864,7 @@ model FirewallPolicySQL {
   /**
    * A flag to indicate if SQL Redirect traffic filtering is enabled. Turning on the flag requires no rule using port 11000-11999.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FirewallPolicySQL.allowSqlRedirect has a boolean wire value; preserve the published property contract."
   allowSqlRedirect?: boolean;
 }
 
@@ -13830,6 +13882,7 @@ model DnsSettings {
   /**
    * Enable DNS Proxy on Firewalls attached to the Firewall Policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DnsSettings.enableProxy has a boolean wire value; preserve the published property contract."
   enableProxy?: boolean;
 
   /**
@@ -14330,6 +14383,7 @@ model SingleQueryResult {
   /**
    * Describes if this override is inherited from base policy or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SingleQueryResult.inheritedFromParentPolicy has a boolean wire value; preserve the published property contract."
   inheritedFromParentPolicy?: boolean;
 }
 
@@ -15177,6 +15231,7 @@ model EffectiveRoute {
   /**
    * If true, on-premises routes are not propagated to the network interfaces in the subnet.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EffectiveRoute.disableBgpRoutePropagation has a boolean wire value; preserve the published property contract."
   disableBgpRoutePropagation?: boolean;
 
   /**
@@ -17118,6 +17173,7 @@ model PerimeterAssociableResourceProperties {
   /**
    * Indicates whether the resource type supports outbound scenario.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PerimeterAssociableResourceProperties.outboundSupported has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Read)
   outboundSupported?: boolean;
@@ -17768,6 +17824,7 @@ model VirtualApplianceIPConfigurationProperties {
   /**
    * Whether or not this is primary IP configuration of the NIC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualApplianceIPConfigurationProperties.primary has a boolean wire value; preserve the published property contract."
   primary?: boolean;
 }
 
@@ -17786,6 +17843,7 @@ model VirtualApplianceAdditionalNicProperties {
   /**
    * Flag (true or false) for Intent for Public Ip on additional nic
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualApplianceAdditionalNicProperties.hasPublicIp has a boolean wire value; preserve the published property contract."
   hasPublicIp?: boolean;
 }
 
@@ -18120,16 +18178,19 @@ model BreakOutCategoryPolicies {
   /**
    * Flag to control breakout of o365 allow category.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BreakOutCategoryPolicies.allow has a boolean wire value; preserve the published property contract."
   allow?: boolean;
 
   /**
    * Flag to control breakout of o365 optimize category.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BreakOutCategoryPolicies.optimize has a boolean wire value; preserve the published property contract."
   optimize?: boolean;
 
   /**
    * Flag to control breakout of o365 default category.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BreakOutCategoryPolicies.default has a boolean wire value; preserve the published property contract."
   default?: boolean;
 }
 
@@ -18670,6 +18731,7 @@ model PacketCaptureParameters {
   /**
    * This continuous capture is a nullable boolean, which can hold 'null', 'true' or 'false' value. If we do not pass this parameter, it would be consider as 'null', default value is 'null'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PacketCaptureParameters.continuousCapture has a boolean wire value; preserve the published property contract."
   continuousCapture?: boolean;
 
   /**
@@ -19071,6 +19133,7 @@ model FlowLogProperties {
   /**
    * Flag to enable/disable flow logging.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FlowLogProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -19834,26 +19897,31 @@ model NetworkSecurityRulesEvaluationResult {
   /**
    * Value indicating whether protocol is matched.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkSecurityRulesEvaluationResult.protocolMatched has a boolean wire value; preserve the published property contract."
   protocolMatched?: boolean;
 
   /**
    * Value indicating whether source is matched.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkSecurityRulesEvaluationResult.sourceMatched has a boolean wire value; preserve the published property contract."
   sourceMatched?: boolean;
 
   /**
    * Value indicating whether source port is matched.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkSecurityRulesEvaluationResult.sourcePortMatched has a boolean wire value; preserve the published property contract."
   sourcePortMatched?: boolean;
 
   /**
    * Value indicating whether destination is matched.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkSecurityRulesEvaluationResult.destinationMatched has a boolean wire value; preserve the published property contract."
   destinationMatched?: boolean;
 
   /**
    * Value indicating whether destination port is matched.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkSecurityRulesEvaluationResult.destinationPortMatched has a boolean wire value; preserve the published property contract."
   destinationPortMatched?: boolean;
 }
 
@@ -19899,6 +19967,7 @@ model ConnectionMonitorParameters {
   /**
    * Determines if the connection monitor will start automatically once created.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectionMonitorParameters.autoStart has a boolean wire value; preserve the published property contract."
   autoStart?: boolean = true;
 
   /**
@@ -20193,6 +20262,7 @@ model ConnectionMonitorHttpConfiguration {
    * Value indicating whether HTTPS is preferred over HTTP in cases where the choice is not explicit.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectionMonitorHttpConfiguration.preferHTTPS has a boolean wire value; preserve the published property contract."
   preferHTTPS?: boolean;
 }
 
@@ -20212,6 +20282,7 @@ model ConnectionMonitorTcpConfiguration {
   /**
    * Value indicating whether path evaluation with trace route should be disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectionMonitorTcpConfiguration.disableTraceRoute has a boolean wire value; preserve the published property contract."
   disableTraceRoute?: boolean;
 
   /**
@@ -20229,6 +20300,7 @@ model ConnectionMonitorIcmpConfiguration {
   /**
    * Value indicating whether path evaluation with trace route should be disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectionMonitorIcmpConfiguration.disableTraceRoute has a boolean wire value; preserve the published property contract."
   disableTraceRoute?: boolean;
 }
 
@@ -20263,6 +20335,7 @@ model ConnectionMonitorTestGroup {
   /**
    * Value indicating whether test group is disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectionMonitorTestGroup.disable has a boolean wire value; preserve the published property contract."
   disable?: boolean;
 
   /**
@@ -20489,11 +20562,13 @@ model MetricSpecification {
   /**
    * Whether regional MDM account enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricSpecification.enableRegionalMdmAccount has a boolean wire value; preserve the published property contract."
   enableRegionalMdmAccount?: boolean;
 
   /**
    * Whether gaps would be filled with zeros.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricSpecification.fillGapWithZero has a boolean wire value; preserve the published property contract."
   fillGapWithZero?: boolean;
 
   /**
@@ -20509,6 +20584,7 @@ model MetricSpecification {
   /**
    * Whether the metric is internal.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricSpecification.isInternal has a boolean wire value; preserve the published property contract."
   isInternal?: boolean;
 
   /**
@@ -20778,6 +20854,7 @@ model PrivateLinkServiceVisibility {
   /**
    * Private Link Service Visibility (True/False).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PrivateLinkServiceVisibility.visible has a boolean wire value; preserve the published property contract."
   visible?: boolean;
 }
 
@@ -20943,6 +21020,7 @@ model PublicIPPrefixPropertiesFormat {
   /**
    * Whether the public IP prefix SKU has been upgraded from Standard to StandardV2.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PublicIPPrefixPropertiesFormat.upgradedToV2 has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   upgradedToV2?: boolean;
@@ -21147,6 +21225,7 @@ model BGPCommunity {
   /**
    * Customer is authorized to use bgp community or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BGPCommunity.isAuthorizedToUse has a boolean wire value; preserve the published property contract."
   isAuthorizedToUse?: boolean;
 
   /**
@@ -21409,6 +21488,7 @@ model IPAddressAvailabilityResult {
   /**
    * Private IP address availability.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IPAddressAvailabilityResult.available has a boolean wire value; preserve the published property contract."
   available?: boolean;
 
   /**
@@ -21420,6 +21500,7 @@ model IPAddressAvailabilityResult {
   /**
    * Private IP address platform reserved.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IPAddressAvailabilityResult.isPlatformReserved has a boolean wire value; preserve the published property contract."
   isPlatformReserved?: boolean;
 }
 
@@ -21578,11 +21659,13 @@ model VirtualNetworkGatewayPropertiesFormat {
   /**
    * Whether BGP is enabled for this virtual network gateway or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayPropertiesFormat.enableBgp has a boolean wire value; preserve the published property contract."
   enableBgp?: boolean;
 
   /**
    * Whether private IP needs to be enabled on this gateway for connections or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayPropertiesFormat.enablePrivateIpAddress has a boolean wire value; preserve the published property contract."
   enablePrivateIpAddress?: boolean;
 
   /**
@@ -21593,17 +21676,20 @@ model VirtualNetworkGatewayPropertiesFormat {
   /**
    * ActiveActive flag.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayPropertiesFormat.activeActive has a boolean wire value; preserve the published property contract."
   activeActive?: boolean;
 
   /**
    * To enable Advanced Connectivity feature for VPN gateway
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayPropertiesFormat.enableHighBandwidthVpnGateway has a boolean wire value; preserve the published property contract."
   enableHighBandwidthVpnGateway?: boolean;
 
   /**
    * disableIPSecReplayProtection flag.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayPropertiesFormat.disableIPSecReplayProtection has a boolean wire value; preserve the published property contract."
   disableIPSecReplayProtection?: boolean;
 
   /**
@@ -21651,6 +21737,7 @@ model VirtualNetworkGatewayPropertiesFormat {
   /**
    * Whether dns forwarding is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayPropertiesFormat.enableDnsForwarding has a boolean wire value; preserve the published property contract."
   enableDnsForwarding?: boolean;
 
   /**
@@ -21672,16 +21759,19 @@ model VirtualNetworkGatewayPropertiesFormat {
   /**
    * EnableBgpRouteTranslationForNat flag.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayPropertiesFormat.enableBgpRouteTranslationForNat has a boolean wire value; preserve the published property contract."
   enableBgpRouteTranslationForNat?: boolean;
 
   /**
    * Configures this gateway to accept traffic from remote Virtual WAN networks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayPropertiesFormat.allowVirtualWanTraffic has a boolean wire value; preserve the published property contract."
   allowVirtualWanTraffic?: boolean;
 
   /**
    * Configure this gateway to accept traffic from other Azure Virtual Networks. This configuration does not support connectivity to Azure Virtual WAN.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayPropertiesFormat.allowRemoteVnetTraffic has a boolean wire value; preserve the published property contract."
   allowRemoteVnetTraffic?: boolean;
 
   /**
@@ -22139,6 +22229,7 @@ model VirtualNetworkGatewayPolicyGroupProperties {
   /**
    * Shows if this is a Default VirtualNetworkGatewayPolicyGroup or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayPolicyGroupProperties.isDefault has a boolean wire value; preserve the published property contract."
   isDefault: boolean;
 
   /**
@@ -22420,6 +22511,7 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
   /**
    * EnableBgp flag.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayConnectionListEntityPropertiesFormat.enableBgp has a boolean wire value; preserve the published property contract."
   enableBgp?: boolean;
 
   /**
@@ -22431,6 +22523,7 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
   /**
    * Enable policy-based traffic selectors.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayConnectionListEntityPropertiesFormat.usePolicyBasedTrafficSelectors has a boolean wire value; preserve the published property contract."
   usePolicyBasedTrafficSelectors?: boolean;
 
   /**
@@ -22460,11 +22553,13 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
   /**
    * Bypass ExpressRoute Gateway for data forwarding.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayConnectionListEntityPropertiesFormat.expressRouteGatewayBypass has a boolean wire value; preserve the published property contract."
   expressRouteGatewayBypass?: boolean;
 
   /**
    * Bypass the ExpressRoute gateway when accessing private-links. ExpressRoute FastPath (expressRouteGatewayBypass) must be enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayConnectionListEntityPropertiesFormat.enablePrivateLinkFastPath has a boolean wire value; preserve the published property contract."
   enablePrivateLinkFastPath?: boolean;
 
   /**
@@ -23256,6 +23351,7 @@ model ExpressRouteFailoverSingleTestDetails {
   /**
    * Whether the failover simulation was successful or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpressRouteFailoverSingleTestDetails.wasSimulationSuccessful has a boolean wire value; preserve the published property contract."
   wasSimulationSuccessful?: boolean;
 
   /**
@@ -23297,6 +23393,7 @@ model FailoverConnectionDetails {
   /**
    * Whether the customer was able to establish connectivity through this failover connection or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FailoverConnectionDetails.isVerified has a boolean wire value; preserve the published property contract."
   isVerified?: boolean;
 }
 
@@ -23315,6 +23412,7 @@ model ExpressRouteFailoverStopApiParameters {
   /**
    * Whether the failover simulation was successful or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpressRouteFailoverStopApiParameters.wasSimulationSuccessful has a boolean wire value; preserve the published property contract."
   wasSimulationSuccessful?: boolean;
 
   /**
@@ -23442,6 +23540,7 @@ model ExpressRouteLinkFailoverAllTestsDetails {
   /**
    * Whether the failover simulation was successful or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpressRouteLinkFailoverAllTestsDetails.wasSimulationSuccessful has a boolean wire value; preserve the published property contract."
   wasSimulationSuccessful?: boolean;
 
   /**
@@ -23486,6 +23585,7 @@ model ExpressRouteLinkFailoverSingleTestDetails {
   /**
    * Whether the failover simulation was successful or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpressRouteLinkFailoverSingleTestDetails.wasSimulationSuccessful has a boolean wire value; preserve the published property contract."
   wasSimulationSuccessful?: boolean;
 
   /**
@@ -23501,6 +23601,7 @@ model ExpressRouteLinkFailoverSingleTestDetails {
   /**
    * Whether the simulation was verified.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpressRouteLinkFailoverSingleTestDetails.isSimulationVerified has a boolean wire value; preserve the published property contract."
   isSimulationVerified?: boolean;
 
   /**
@@ -23540,11 +23641,13 @@ model ExpressRouteLinkFailoverStopApiParameters {
   /**
    * Whether the simulation was successful.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpressRouteLinkFailoverStopApiParameters.wasSimulationSuccessful has a boolean wire value; preserve the published property contract."
   wasSimulationSuccessful?: boolean;
 
   /**
    * Whether the link is verified.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpressRouteLinkFailoverStopApiParameters.isVerified has a boolean wire value; preserve the published property contract."
   isVerified?: boolean;
 }
 
@@ -23655,6 +23758,7 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
   /**
    * EnableBgp flag.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayConnectionPropertiesFormat.enableBgp has a boolean wire value; preserve the published property contract."
   enableBgp?: boolean;
 
   /**
@@ -23666,11 +23770,13 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
   /**
    * Use private local Azure IP for the connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayConnectionPropertiesFormat.useLocalAzureIpAddress has a boolean wire value; preserve the published property contract."
   useLocalAzureIpAddress?: boolean;
 
   /**
    * Enable policy-based traffic selectors.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayConnectionPropertiesFormat.usePolicyBasedTrafficSelectors has a boolean wire value; preserve the published property contract."
   usePolicyBasedTrafficSelectors?: boolean;
 
   /**
@@ -23700,11 +23806,13 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
   /**
    * Bypass ExpressRoute Gateway for data forwarding.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayConnectionPropertiesFormat.expressRouteGatewayBypass has a boolean wire value; preserve the published property contract."
   expressRouteGatewayBypass?: boolean;
 
   /**
    * Bypass the ExpressRoute gateway when accessing private-links. ExpressRoute FastPath (expressRouteGatewayBypass) must be enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkGatewayConnectionPropertiesFormat.enablePrivateLinkFastPath has a boolean wire value; preserve the published property contract."
   enablePrivateLinkFastPath?: boolean;
 
   /**
@@ -24035,6 +24143,7 @@ model VirtualWanProperties {
   /**
    * Vpn encryption to be disabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualWanProperties.disableVpnEncryption has a boolean wire value; preserve the published property contract."
   disableVpnEncryption?: boolean;
 
   /**
@@ -24052,11 +24161,13 @@ model VirtualWanProperties {
   /**
    * True if branch to branch traffic is allowed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualWanProperties.allowBranchToBranchTraffic has a boolean wire value; preserve the published property contract."
   allowBranchToBranchTraffic?: boolean;
 
   /**
    * True if Vnet to Vnet traffic is allowed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualWanProperties.allowVnetToVnetTraffic has a boolean wire value; preserve the published property contract."
   allowVnetToVnetTraffic?: boolean;
 
   /**
@@ -24132,6 +24243,7 @@ model VpnSiteProperties {
   /**
    * IsSecuritySite flag.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VpnSiteProperties.isSecuritySite has a boolean wire value; preserve the published property contract."
   isSecuritySite?: boolean;
 
   /**
@@ -24255,16 +24367,19 @@ model O365BreakOutCategoryPolicies {
   /**
    * Flag to control allow category.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing O365BreakOutCategoryPolicies.allow has a boolean wire value; preserve the published property contract."
   allow?: boolean;
 
   /**
    * Flag to control optimize category.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing O365BreakOutCategoryPolicies.optimize has a boolean wire value; preserve the published property contract."
   optimize?: boolean;
 
   /**
    * Flag to control default category.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing O365BreakOutCategoryPolicies.default has a boolean wire value; preserve the published property contract."
   default?: boolean;
 }
 
@@ -24570,6 +24685,7 @@ model P2SVpnGatewayProperties {
   /**
    * Enable Routing Preference property for the Public IP Interface of the P2SVpnGateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing P2SVpnGatewayProperties.isRoutingPreferenceInternet has a boolean wire value; preserve the published property contract."
   isRoutingPreferenceInternet?: boolean;
 }
 
@@ -24618,6 +24734,7 @@ model P2SConnectionConfigurationProperties {
   /**
    * Flag indicating whether the enable internet security flag is turned on for the P2S Connections or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing P2SConnectionConfigurationProperties.enableInternetSecurity has a boolean wire value; preserve the published property contract."
   enableInternetSecurity?: boolean;
 
   /**
@@ -24719,6 +24836,7 @@ model StaticRoutesConfig {
   /**
    * Boolean indicating whether static routes on this connection are automatically propagate to route tables which this connection propagates to.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StaticRoutesConfig.propagateStaticRoutes has a boolean wire value; preserve the published property contract."
   propagateStaticRoutes?: boolean;
 
   /**
@@ -24758,6 +24876,7 @@ model VpnServerConfigurationPolicyGroupProperties {
   /**
    * Shows if this is a Default VpnServerConfigurationPolicyGroup or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VpnServerConfigurationPolicyGroupProperties.isDefault has a boolean wire value; preserve the published property contract."
   isDefault?: boolean;
 
   /**
@@ -24971,6 +25090,7 @@ model VirtualHubProperties {
   /**
    * Flag to control transit for VirtualRouter hub.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualHubProperties.allowBranchToBranchTraffic has a boolean wire value; preserve the published property contract."
   allowBranchToBranchTraffic?: boolean;
 
   /**
@@ -25284,11 +25404,13 @@ model HubVirtualNetworkConnectionProperties {
   /**
    * Deprecated: VirtualHub to RemoteVnet transit to enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HubVirtualNetworkConnectionProperties.allowHubToRemoteVnetTransit has a boolean wire value; preserve the published property contract."
   allowHubToRemoteVnetTransit?: boolean;
 
   /**
    * Deprecated: Allow RemoteVnet to use Virtual Hub's gateways.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HubVirtualNetworkConnectionProperties.allowRemoteVnetToUseHubVnetGateways has a boolean wire value; preserve the published property contract."
   allowRemoteVnetToUseHubVnetGateways?: boolean;
 
   /**
@@ -25300,6 +25422,7 @@ model HubVirtualNetworkConnectionProperties {
   /**
    * Enable internet security.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HubVirtualNetworkConnectionProperties.enableInternetSecurity has a boolean wire value; preserve the published property contract."
   enableInternetSecurity?: boolean;
 
   /**
@@ -25311,6 +25434,7 @@ model HubVirtualNetworkConnectionProperties {
    * Enable Only IPv6 Peering for this connection.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the NRP wire contract property casing."
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HubVirtualNetworkConnectionProperties.enableOnlyIPv6Peering has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_09_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   enableOnlyIPv6Peering?: boolean;
@@ -25371,11 +25495,13 @@ model VpnGatewayProperties {
   /**
    * Enable BGP routes translation for NAT on this VpnGateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VpnGatewayProperties.enableBgpRouteTranslationForNat has a boolean wire value; preserve the published property contract."
   enableBgpRouteTranslationForNat?: boolean;
 
   /**
    * Enable Routing Preference property for the Public IP Interface of the VpnGateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VpnGatewayProperties.isRoutingPreferenceInternet has a boolean wire value; preserve the published property contract."
   isRoutingPreferenceInternet?: boolean;
 
   /**
@@ -25466,11 +25592,13 @@ model VpnConnectionProperties {
   /**
    * EnableBgp flag.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VpnConnectionProperties.enableBgp has a boolean wire value; preserve the published property contract."
   enableBgp?: boolean;
 
   /**
    * Enable policy-based traffic selectors.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VpnConnectionProperties.usePolicyBasedTrafficSelectors has a boolean wire value; preserve the published property contract."
   usePolicyBasedTrafficSelectors?: boolean;
 
   /**
@@ -25488,16 +25616,19 @@ model VpnConnectionProperties {
   /**
    * EnableBgp flag.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VpnConnectionProperties.enableRateLimiting has a boolean wire value; preserve the published property contract."
   enableRateLimiting?: boolean;
 
   /**
    * Enable internet security.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VpnConnectionProperties.enableInternetSecurity has a boolean wire value; preserve the published property contract."
   enableInternetSecurity?: boolean;
 
   /**
    * Use local azure ip to initiate connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VpnConnectionProperties.useLocalAzureIpAddress has a boolean wire value; preserve the published property contract."
   useLocalAzureIpAddress?: boolean;
 
   /**
@@ -25575,6 +25706,7 @@ model VpnSiteLinkConnectionProperties {
   /**
    * EnableBgp flag.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VpnSiteLinkConnectionProperties.enableBgp has a boolean wire value; preserve the published property contract."
   enableBgp?: boolean;
 
   /**
@@ -25586,6 +25718,7 @@ model VpnSiteLinkConnectionProperties {
   /**
    * Enable policy-based traffic selectors.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VpnSiteLinkConnectionProperties.usePolicyBasedTrafficSelectors has a boolean wire value; preserve the published property contract."
   usePolicyBasedTrafficSelectors?: boolean;
 
   /**
@@ -25597,11 +25730,13 @@ model VpnSiteLinkConnectionProperties {
   /**
    * EnableBgp flag.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VpnSiteLinkConnectionProperties.enableRateLimiting has a boolean wire value; preserve the published property contract."
   enableRateLimiting?: boolean;
 
   /**
    * Use local azure ip to initiate connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VpnSiteLinkConnectionProperties.useLocalAzureIpAddress has a boolean wire value; preserve the published property contract."
   useLocalAzureIpAddress?: boolean;
 
   /**
@@ -25974,6 +26109,7 @@ model ExpressRouteGatewayProperties {
   /**
    * Configures this gateway to accept traffic from non Virtual WAN networks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpressRouteGatewayProperties.allowNonVirtualWanTraffic has a boolean wire value; preserve the published property contract."
   allowNonVirtualWanTraffic?: boolean;
 }
 
@@ -26055,16 +26191,19 @@ model ExpressRouteConnectionProperties {
   /**
    * Enable internet security.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpressRouteConnectionProperties.enableInternetSecurity has a boolean wire value; preserve the published property contract."
   enableInternetSecurity?: boolean;
 
   /**
    * Enable FastPath to vWan Firewall hub.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpressRouteConnectionProperties.expressRouteGatewayBypass has a boolean wire value; preserve the published property contract."
   expressRouteGatewayBypass?: boolean;
 
   /**
    * Bypass the ExpressRoute gateway when accessing private-links. ExpressRoute FastPath (expressRouteGatewayBypass) must be enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpressRouteConnectionProperties.enablePrivateLinkFastPath has a boolean wire value; preserve the published property contract."
   enablePrivateLinkFastPath?: boolean;
 
   /**
@@ -26167,6 +26306,7 @@ model NetworkVirtualApplianceConnectionProperties {
   /**
    * Enable internet security.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkVirtualApplianceConnectionProperties.enableInternetSecurity has a boolean wire value; preserve the published property contract."
   enableInternetSecurity?: boolean;
 
   /**
@@ -26596,6 +26736,7 @@ model ConnectionPolicyProperties {
   /**
    * Enable internet security.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectionPolicyProperties.enableInternetSecurity has a boolean wire value; preserve the published property contract."
   enableInternetSecurity?: boolean;
 
   /**
@@ -26728,6 +26869,7 @@ model PolicySettings {
   /**
    * Whether to allow WAF to check request Body.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PolicySettings.requestBodyCheck has a boolean wire value; preserve the published property contract."
   requestBodyCheck?: boolean;
 
   /**
@@ -26739,6 +26881,7 @@ model PolicySettings {
   /**
    * Whether allow WAF to enforce request body limits.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PolicySettings.requestBodyEnforcement has a boolean wire value; preserve the published property contract."
   requestBodyEnforcement?: boolean = true;
 
   /**
@@ -26750,6 +26893,7 @@ model PolicySettings {
   /**
    * Whether allow WAF to enforce file upload limits.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PolicySettings.fileUploadEnforcement has a boolean wire value; preserve the published property contract."
   fileUploadEnforcement?: boolean = true;
 
   /**
@@ -26926,6 +27070,7 @@ model MatchCondition {
   /**
    * Whether this is negate condition or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MatchCondition.negationConditon has a boolean wire value; preserve the published property contract."
   negationConditon?: boolean;
 
   /**
@@ -27379,6 +27524,7 @@ model ApplicationRule extends FirewallPolicyRule {
    * Terminate TLS connections for this rule.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationRule.terminateTLS has a boolean wire value; preserve the published property contract."
   terminateTLS?: boolean;
 
   /**
@@ -28313,6 +28459,7 @@ model ServiceGatewayServiceRequest {
   /**
    * Set to true to mark the service for deletion.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServiceGatewayServiceRequest.isDelete has a boolean wire value; preserve the published property contract."
   isDelete?: boolean;
 
   /**
@@ -28352,6 +28499,7 @@ model ServiceGatewayServicePropertiesFormat {
   /**
    * Set to true to mark default service for inbound or outbound.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServiceGatewayServicePropertiesFormat.isDefault has a boolean wire value; preserve the published property contract."
   isDefault?: boolean;
 
   /**
@@ -28514,6 +28662,7 @@ model VirtualNetworkApplianceIpConfigurationProperties {
   /**
    * Whether the ip configuration is primary or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkApplianceIpConfigurationProperties.primary has a boolean wire value; preserve the published property contract."
   primary?: boolean;
 
   /**
@@ -28696,6 +28845,7 @@ model ConnectivityCheckSettings {
   /**
    * Whether to generate a hop-by-hop path during the connectivity check. Default value is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectivityCheckSettings.generatePath has a boolean wire value; preserve the published property contract."
   generatePath?: boolean = true;
 
   /**

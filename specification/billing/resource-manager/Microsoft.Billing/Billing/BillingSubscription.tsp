@@ -80,6 +80,7 @@ interface BillingSubscriptions {
       /**
        * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingProfile.expand retains the expand query parameter; preserve wire compatibility."
       @query("expand")
       expand?: string;
     }
@@ -138,6 +139,7 @@ interface BillingSubscriptionOperationGroup {
       /**
        * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.expand retains the expand query parameter; preserve wire compatibility."
       @query("expand")
       expand?: string;
     }
@@ -242,48 +244,58 @@ alias BillingSubscriptionsListByBillingProfileParameters = {
   /**
    * Can be used to get deleted billing subscriptions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BillingSubscriptionsListByBillingProfileParameters.includeDeleted has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingProfileParameters.includeDeleted retains the includeDeleted query parameter; preserve wire compatibility."
   @query("includeDeleted")
   includeDeleted?: boolean = false;
 
   /**
    * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingProfileParameters.expand retains the expand query parameter; preserve wire compatibility."
   @query("expand")
   expand?: string;
 
   /**
    * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingProfileParameters.filter retains the filter query parameter; preserve wire compatibility."
   @query("filter")
   filter?: string;
 
   /**
    * The orderby query option allows clients to request resources in a particular order.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingProfileParameters.orderBy retains the orderBy query parameter; preserve wire compatibility."
   @query("orderBy")
   orderBy?: string;
 
   /**
    * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingProfileParameters.top retains the top query parameter; preserve wire compatibility."
   @query("top")
   top?: int64;
 
   /**
    * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingProfileParameters.skip retains the skip query parameter; preserve wire compatibility."
   @query("skip")
   skip?: int64;
 
   /**
    * The count query option allows clients to request a count of the matching resources included with the resources in the response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BillingSubscriptionsListByBillingProfileParameters.count has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingProfileParameters.count retains the count query parameter; preserve wire compatibility."
   @query("count")
   count?: boolean;
 
   /**
    * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingProfileParameters.search retains the search query parameter; preserve wire compatibility."
   @query("search")
   search?: string;
 };
@@ -292,60 +304,74 @@ alias BillingSubscriptionsListByBillingAccountParameters = {
   /**
    * Can be used to get deleted billing subscriptions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BillingSubscriptionsListByBillingAccountParameters.includeDeleted has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingAccountParameters.includeDeleted retains the includeDeleted query parameter; preserve wire compatibility."
   @query("includeDeleted")
   includeDeleted?: boolean = false;
 
   /**
    * Can be used to get tenant-owned billing subscriptions. This field is only applies to Microsoft Online Services Program billing accounts.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BillingSubscriptionsListByBillingAccountParameters.includeTenantSubscriptions has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingAccountParameters.includeTenantSubscriptions retains the includeTenantSubscriptions query parameter; preserve wire compatibility."
   @query("includeTenantSubscriptions")
   includeTenantSubscriptions?: boolean = false;
 
   /**
    * Can be used to get failed billing subscriptions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BillingSubscriptionsListByBillingAccountParameters.includeFailed has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingAccountParameters.includeFailed retains the includeFailed query parameter; preserve wire compatibility."
   @query("includeFailed")
   includeFailed?: boolean = false;
 
   /**
    * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingAccountParameters.expand retains the expand query parameter; preserve wire compatibility."
   @query("expand")
   expand?: string;
 
   /**
    * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingAccountParameters.filter retains the filter query parameter; preserve wire compatibility."
   @query("filter")
   filter?: string;
 
   /**
    * The orderby query option allows clients to request resources in a particular order.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingAccountParameters.orderBy retains the orderBy query parameter; preserve wire compatibility."
   @query("orderBy")
   orderBy?: string;
 
   /**
    * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingAccountParameters.top retains the top query parameter; preserve wire compatibility."
   @query("top")
   top?: int64;
 
   /**
    * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingAccountParameters.skip retains the skip query parameter; preserve wire compatibility."
   @query("skip")
   skip?: int64;
 
   /**
    * The count query option allows clients to request a count of the matching resources included with the resources in the response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BillingSubscriptionsListByBillingAccountParameters.count has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingAccountParameters.count retains the count query parameter; preserve wire compatibility."
   @query("count")
   count?: boolean;
 
   /**
    * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing BillingSubscriptionsListByBillingAccountParameters.search retains the search query parameter; preserve wire compatibility."
   @query("search")
   search?: string;
 };

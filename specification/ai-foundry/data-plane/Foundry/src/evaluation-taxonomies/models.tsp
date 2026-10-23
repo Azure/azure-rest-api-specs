@@ -93,6 +93,7 @@ model TaxonomySubCategory {
   @doc("Description of the taxonomy sub-category.")
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TaxonomySubCategory.enabled has a boolean wire value; preserve the published property contract."
   @doc("List of taxonomy items under this sub-category.")
   enabled: boolean;
 

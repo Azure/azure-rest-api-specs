@@ -72,6 +72,7 @@ interface ApplicationPackages {
       /**
        * The maximum number of items to return in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.maxresults retains the maxresults query parameter; preserve wire compatibility."
       @query("maxresults")
       maxresults?: int32;
     },

@@ -41,6 +41,7 @@ interface RequestApprovalResources {
    * Create approval request
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createApprovalRequest retains its tenant-scoped route; preserve published resource IDs and API paths."
   createApprovalRequest is ArmResourceCreateOrReplaceSync<
     RequestApprovalResource,
     Response = ArmResourceUpdatedResponse<RequestApprovalResource>,
@@ -50,6 +51,7 @@ interface RequestApprovalResources {
   /**
    * Get all open approval requests of current user
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getApprovalRequestsList retains its response and SDK paging behavior; preserve published compatibility."
   getApprovalRequestsList is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     RequestApprovalResource,
     Response = ArmResponse<RequestApprovalsList>,

@@ -520,6 +520,7 @@ model CommunityGalleryInfo {
   /**
    * Contains info about whether community gallery sharing is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CommunityGalleryInfo.communityGalleryEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   communityGalleryEnabled?: boolean;
 
@@ -537,6 +538,7 @@ model SoftDeletePolicy {
   /**
    * Enables soft-deletion for resources in this gallery, allowing them to be recovered within retention time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SoftDeletePolicy.isSoftDeleteEnabled has a boolean wire value; preserve the published property contract."
   isSoftDeleteEnabled?: boolean;
 
   /**
@@ -750,6 +752,7 @@ model GalleryImageProperties {
   /**
    * Optional. Must be set to true if the gallery image features are being updated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GalleryImageProperties.allowUpdateImage has a boolean wire value; preserve the published property contract."
   allowUpdateImage?: boolean;
 }
 
@@ -968,6 +971,7 @@ model SecretsProvisioningSettings {
   /**
    * Specifies whether the image version supports secrets provisioning.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecretsProvisioningSettings.isSupported has a boolean wire value; preserve the published property contract."
   isSupported?: boolean;
 
   /**
@@ -1021,6 +1025,7 @@ model GalleryImageVersionProperties {
   /**
    * Indicates if this is a soft-delete resource restoration request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GalleryImageVersionProperties.restore has a boolean wire value; preserve the published property contract."
   restore?: boolean;
 
   /**
@@ -1064,6 +1069,7 @@ model GalleryArtifactPublishingProfileBase {
   /**
    * If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GalleryArtifactPublishingProfileBase.excludeFromLatest has a boolean wire value; preserve the published property contract."
   excludeFromLatest?: boolean;
 
   /**
@@ -1128,6 +1134,7 @@ model TargetRegion {
   /**
    * Contains the flag setting to hide an image when users specify version='latest'
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TargetRegion.excludeFromLatest has a boolean wire value; preserve the published property contract."
   excludeFromLatest?: boolean;
 
   /**
@@ -1389,6 +1396,7 @@ model GalleryImageVersionSafetyProfile
   /**
    * Indicates whether this image has been reported as violating Microsoft's policies.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GalleryImageVersionSafetyProfile.reportedForPolicyViolation has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   reportedForPolicyViolation?: boolean;
 
@@ -1402,6 +1410,7 @@ model GalleryImageVersionSafetyProfile
   /**
    * Indicates whether or not the deletion is blocked for this Gallery Image Version if its End Of Life has not expired.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GalleryImageVersionSafetyProfile.blockDeletionBeforeEndOfLife has a boolean wire value; preserve the published property contract."
   blockDeletionBeforeEndOfLife?: boolean;
 }
 
@@ -1427,6 +1436,7 @@ model GalleryArtifactSafetyProfileBase {
   /**
    * Indicates whether or not removing this Gallery Image Version from replicated regions is allowed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GalleryArtifactSafetyProfileBase.allowDeletionOfReplicatedLocations has a boolean wire value; preserve the published property contract."
   allowDeletionOfReplicatedLocations?: boolean;
 }
 
@@ -1709,6 +1719,7 @@ model GalleryApplicationCustomActionParameter {
   /**
    * Indicates whether this parameter must be passed when running the custom action.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GalleryApplicationCustomActionParameter.required has a boolean wire value; preserve the published property contract."
   required?: boolean;
 
   /**
@@ -1795,6 +1806,7 @@ model GalleryApplicationVersionPublishingProfile
   /**
    * Optional. Whether or not this application reports health.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GalleryApplicationVersionPublishingProfile.enableHealthCheck has a boolean wire value; preserve the published property contract."
   enableHealthCheck?: boolean;
 
   /**
@@ -2131,6 +2143,7 @@ model GenericGalleryParameter {
   /**
    * Indicates whether this parameter must be passed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GenericGalleryParameter.required has a boolean wire value; preserve the published property contract."
   required?: boolean;
 
   /**
@@ -2365,6 +2378,7 @@ model GalleryResourceProfileVersionPropertiesBase {
   /**
    * If set to true, Virtual Machines deployed from the latest version of the Resource Profile won't use this Profile version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GalleryResourceProfileVersionPropertiesBase.excludeFromLatest has a boolean wire value; preserve the published property contract."
   excludeFromLatest?: boolean;
 
   /**
@@ -2596,6 +2610,7 @@ model SharedGalleryImageVersionProperties {
   /**
    * If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SharedGalleryImageVersionProperties.excludeFromLatest has a boolean wire value; preserve the published property contract."
   excludeFromLatest?: boolean;
 
   /**
@@ -2885,6 +2900,7 @@ model CommunityGalleryImageVersionProperties {
   /**
    * If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CommunityGalleryImageVersionProperties.excludeFromLatest has a boolean wire value; preserve the published property contract."
   excludeFromLatest?: boolean;
 
   /**

@@ -57,6 +57,7 @@ interface Webhook {
    * Create a new AppComplianceAutomation webhook or update an exiting AppComplianceAutomation webhook.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @operationId("Webhook_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<WebhookResource>;
 

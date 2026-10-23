@@ -111,11 +111,13 @@ model ManagedClusterPoolUpgradeProfileUpgradesItem {
   /**
    * Whether the Kubernetes version is currently in preview.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedClusterPoolUpgradeProfileUpgradesItem.isPreview has a boolean wire value; preserve the published property contract."
   isPreview?: boolean;
 
   /**
    * Whether the Kubernetes version is out of support.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedClusterPoolUpgradeProfileUpgradesItem.isOutOfSupport has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_02_preview)
   isOutOfSupport?: boolean;
 }

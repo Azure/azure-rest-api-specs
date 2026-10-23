@@ -407,6 +407,7 @@ op guestConfigurationAssignmentsCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Matches source delete operation response shape."
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing guestConfigurationAssignmentsDeleteCustomized SDK method name; renaming it would break client compatibility."
 op guestConfigurationAssignmentsDeleteCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -436,6 +437,7 @@ op guestConfigurationAssignmentsDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing guestConfigurationAssignmentsGetCustomized SDK method name; renaming it would break client compatibility."
 op guestConfigurationAssignmentsGetCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -574,6 +576,7 @@ op guestConfigurationHCRPAssignmentsCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Matches source delete operation response shape."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SDK customization override keeps HCRP acronym."
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing guestConfigurationHCRPAssignmentsDeleteCustomized SDK method name; renaming it would break client compatibility."
 op guestConfigurationHCRPAssignmentsDeleteCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -607,6 +610,7 @@ op guestConfigurationHCRPAssignmentsDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SDK customization override keeps HCRP acronym."
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing guestConfigurationHCRPAssignmentsGetCustomized SDK method name; renaming it would break client compatibility."
 op guestConfigurationHCRPAssignmentsGetCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,

@@ -2192,6 +2192,7 @@ model ClusterProperties {
   /**
    * Is Management Cluster, when true indicates that the cluster is used for managing other clusters
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ClusterProperties.isManagementCluster has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isManagementCluster?: boolean;
 
@@ -3223,6 +3224,7 @@ model DeploymentData {
   /**
    * Is Management Cluster, when true indicates that the cluster is used for managing other clusters
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentData.isManagementCluster has a boolean wire value; preserve the published property contract."
   isManagementCluster?: boolean;
 
   /**
@@ -3265,51 +3267,61 @@ model DeploymentSecuritySettings {
   /**
    * By default, Hypervisor-protected Code Integrity is enabled on your Azure HCI cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentSecuritySettings.hvciProtection has a boolean wire value; preserve the published property contract."
   hvciProtection?: boolean = true;
 
   /**
    * By default, Secure Boot is enabled on your Azure HCI cluster. This setting is hardware dependent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentSecuritySettings.drtmProtection has a boolean wire value; preserve the published property contract."
   drtmProtection?: boolean = true;
 
   /**
    * When set to true, the security baseline is re-applied regularly.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentSecuritySettings.driftControlEnforced has a boolean wire value; preserve the published property contract."
   driftControlEnforced?: boolean = true;
 
   /**
    * When set to true, Credential Guard is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentSecuritySettings.credentialGuardEnforced has a boolean wire value; preserve the published property contract."
   credentialGuardEnforced?: boolean = false;
 
   /**
    * When set to true, the SMB default instance requires sign in for the client and server services.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentSecuritySettings.smbSigningEnforced has a boolean wire value; preserve the published property contract."
   smbSigningEnforced?: boolean = true;
 
   /**
    * When set to true, cluster east-west traffic is encrypted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentSecuritySettings.smbClusterEncryption has a boolean wire value; preserve the published property contract."
   smbClusterEncryption?: boolean = false;
 
   /**
    * When set to true, all the side channel mitigations are enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentSecuritySettings.sideChannelMitigationEnforced has a boolean wire value; preserve the published property contract."
   sideChannelMitigationEnforced?: boolean = true;
 
   /**
    * When set to true, BitLocker XTS_AES 256-bit encryption is enabled for all data-at-rest on the OS volume of your Azure Stack HCI cluster. This setting is TPM-hardware dependent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentSecuritySettings.bitlockerBootVolume has a boolean wire value; preserve the published property contract."
   bitlockerBootVolume?: boolean = true;
 
   /**
    * When set to true, BitLocker XTS-AES 256-bit encryption is enabled for all data-at-rest on your Azure Stack HCI cluster shared volumes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentSecuritySettings.bitlockerDataVolumes has a boolean wire value; preserve the published property contract."
   bitlockerDataVolumes?: boolean = true;
 
   /**
    * WDAC is enabled by default and limits the applications and the code that you can run on your Azure Stack HCI cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentSecuritySettings.wdacEnforced has a boolean wire value; preserve the published property contract."
   wdacEnforced?: boolean = true;
 }
 
@@ -3320,16 +3332,19 @@ model Observability {
   /**
    * Enables telemetry data to be sent to Microsoft
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Observability.streamingDataClient has a boolean wire value; preserve the published property contract."
   streamingDataClient?: boolean = true;
 
   /**
    * Location of your cluster. The log and diagnostic data is sent to the appropriate diagnostics servers depending upon where your cluster resides. Setting this to false results in all data sent to Microsoft to be stored outside of the EU.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Observability.euLocation has a boolean wire value; preserve the published property contract."
   euLocation?: boolean = false;
 
   /**
    * When set to true, collects log data to facilitate quicker issue resolution.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Observability.episodicDataUpload has a boolean wire value; preserve the published property contract."
   episodicDataUpload?: boolean = true;
 }
 
@@ -3527,6 +3542,7 @@ model InfrastructureNetwork {
   /**
    * Allows customers to use DHCP for Hosts and Cluster IPs. If not declared, the deployment will default to static IPs. When true, GW and DNS servers are not required
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing InfrastructureNetwork.useDhcp has a boolean wire value; preserve the published property contract."
   useDhcp?: boolean;
 }
 
@@ -3600,12 +3616,14 @@ model DeploymentSettingHostNetwork {
   /**
    * Defines how the storage adapters between nodes are connected either switch or switch less..
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentSettingHostNetwork.storageConnectivitySwitchless has a boolean wire value; preserve the published property contract."
   storageConnectivitySwitchless?: boolean = false;
 
   /**
    * Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentSettingHostNetwork.enableStorageAutoIp has a boolean wire value; preserve the published property contract."
   enableStorageAutoIp?: boolean = false;
 }
 
@@ -3631,6 +3649,7 @@ model DeploymentSettingIntents {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentSettingIntents.overrideVirtualSwitchConfiguration has a boolean wire value; preserve the published property contract."
   overrideVirtualSwitchConfiguration?: boolean = false;
 
   /**
@@ -3641,6 +3660,7 @@ model DeploymentSettingIntents {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentSettingIntents.overrideQosPolicy has a boolean wire value; preserve the published property contract."
   overrideQosPolicy?: boolean = false;
 
   /**
@@ -3651,6 +3671,7 @@ model DeploymentSettingIntents {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentSettingIntents.overrideAdapterProperty has a boolean wire value; preserve the published property contract."
   overrideAdapterProperty?: boolean = false;
 
   /**
@@ -3872,6 +3893,7 @@ model NetworkController {
   /**
    * NetworkVirtualizationEnabled of network controller used for SDN Integration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkController.networkVirtualizationEnabled has a boolean wire value; preserve the published property contract."
   networkVirtualizationEnabled?: boolean;
 }
 
@@ -4138,6 +4160,7 @@ model OptionalServices {
   /**
    * Indicates whether to deploy AKS enabled by Azure Arc for the cluster. After an EnableAksArcDeployment job succeeds, this reflects the deployment intent acknowledged by the device, not whether AKS Arc is installed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OptionalServices.deployAksArc has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read)
   deployAksArc?: boolean;
@@ -4506,6 +4529,7 @@ model ExtensionParameters {
   /**
    * Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExtensionParameters.autoUpgradeMinorVersion has a boolean wire value; preserve the published property contract."
   autoUpgradeMinorVersion?: boolean;
 
   /**
@@ -4524,6 +4548,7 @@ model ExtensionParameters {
   /**
    * Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExtensionParameters.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean;
 }
 
@@ -4650,6 +4675,7 @@ model ExtensionPatchParameters {
   /**
    * Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExtensionPatchParameters.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean;
 
   /**
@@ -5480,11 +5506,13 @@ model ValidatedSolutionRecipeComponentMetadata {
   /**
    * Indicates whether automatic upgrades of the extension are enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ValidatedSolutionRecipeComponentMetadata.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean;
 
   /**
    * Indicates whether the LCM (Lifecycle Management) update of the extension is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ValidatedSolutionRecipeComponentMetadata.lcmUpdate has a boolean wire value; preserve the published property contract."
   lcmUpdate?: boolean;
 
   /**
@@ -5530,6 +5558,7 @@ model ArcConnectivityProperties {
   /**
    * True indicates ARC connectivity is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ArcConnectivityProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -6395,6 +6424,7 @@ model SwitchExtension {
   /**
    * This represents whether extension is enabled on virtualSwitch.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SwitchExtension.extensionEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   extensionEnabled?: boolean;
 }
@@ -6420,6 +6450,7 @@ model HciEdgeDeviceHostNetwork {
   /**
    * Defines how the storage adapters between nodes are connected either switch or switch less.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HciEdgeDeviceHostNetwork.storageConnectivitySwitchless has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   storageConnectivitySwitchless?: boolean;
 
@@ -6427,6 +6458,7 @@ model HciEdgeDeviceHostNetwork {
    * Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HciEdgeDeviceHostNetwork.enableStorageAutoIp has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   enableStorageAutoIp?: boolean = false;
 }
@@ -6450,42 +6482,49 @@ model HciEdgeDeviceIntents {
   /**
    * IsComputeIntentSet for host network intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HciEdgeDeviceIntents.isComputeIntentSet has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isComputeIntentSet?: boolean;
 
   /**
    * IsStorageIntentSet for host network intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HciEdgeDeviceIntents.isStorageIntentSet has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isStorageIntentSet?: boolean;
 
   /**
    * IntentType for host network intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HciEdgeDeviceIntents.isOnlyStorage has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isOnlyStorage?: boolean;
 
   /**
    * IsManagementIntentSet for host network intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HciEdgeDeviceIntents.isManagementIntentSet has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isManagementIntentSet?: boolean;
 
   /**
    * IsStretchIntentSet for host network intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HciEdgeDeviceIntents.isStretchIntentSet has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isStretchIntentSet?: boolean;
 
   /**
    * IsOnlyStretch for host network intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HciEdgeDeviceIntents.isOnlyStretch has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isOnlyStretch?: boolean;
 
   /**
    * IsNetworkIntentType for host network intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HciEdgeDeviceIntents.isNetworkIntentType has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isNetworkIntentType?: boolean;
 
@@ -6504,6 +6543,7 @@ model HciEdgeDeviceIntents {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HciEdgeDeviceIntents.overrideVirtualSwitchConfiguration has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   overrideVirtualSwitchConfiguration?: boolean;
 
@@ -6516,6 +6556,7 @@ model HciEdgeDeviceIntents {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HciEdgeDeviceIntents.overrideQosPolicy has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   overrideQosPolicy?: boolean;
 
@@ -6528,6 +6569,7 @@ model HciEdgeDeviceIntents {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HciEdgeDeviceIntents.overrideAdapterProperty has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   overrideAdapterProperty?: boolean;
 
@@ -6702,6 +6744,7 @@ model EdgeDeviceDisks {
   manufacturer?: string;
 
   /** Indicates whether the manufacturer is supported. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeDeviceDisks.isSupported has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_04_30)
   @visibility(Lifecycle.Read)
   isSupported?: boolean;
@@ -8152,6 +8195,7 @@ model EdgeMachineHostNetwork {
   /**
    * Defines how the storage adapters between nodes are connected either switch or switch less.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeMachineHostNetwork.storageConnectivitySwitchless has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   storageConnectivitySwitchless?: boolean;
 
@@ -8159,6 +8203,7 @@ model EdgeMachineHostNetwork {
    * Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeMachineHostNetwork.enableStorageAutoIp has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   enableStorageAutoIp?: boolean = false;
 }
@@ -8183,42 +8228,49 @@ model EdgeMachineHostNetworkIntent {
   /**
    * IsComputeIntentSet for host network intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeMachineHostNetworkIntent.isComputeIntentSet has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isComputeIntentSet?: boolean;
 
   /**
    * IsStorageIntentSet for host network intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeMachineHostNetworkIntent.isStorageIntentSet has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isStorageIntentSet?: boolean;
 
   /**
    * IntentType for host network intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeMachineHostNetworkIntent.isOnlyStorage has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isOnlyStorage?: boolean;
 
   /**
    * IsManagementIntentSet for host network intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeMachineHostNetworkIntent.isManagementIntentSet has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isManagementIntentSet?: boolean;
 
   /**
    * IsStretchIntentSet for host network intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeMachineHostNetworkIntent.isStretchIntentSet has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isStretchIntentSet?: boolean;
 
   /**
    * IsOnlyStretch for host network intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeMachineHostNetworkIntent.isOnlyStretch has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isOnlyStretch?: boolean;
 
   /**
    * IsNetworkIntentType for host network intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeMachineHostNetworkIntent.isNetworkIntentType has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isNetworkIntentType?: boolean;
 
@@ -8237,6 +8289,7 @@ model EdgeMachineHostNetworkIntent {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeMachineHostNetworkIntent.overrideVirtualSwitchConfiguration has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   overrideVirtualSwitchConfiguration?: boolean;
 
@@ -8249,6 +8302,7 @@ model EdgeMachineHostNetworkIntent {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeMachineHostNetworkIntent.overrideQosPolicy has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   overrideQosPolicy?: boolean;
 
@@ -8261,6 +8315,7 @@ model EdgeMachineHostNetworkIntent {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeMachineHostNetworkIntent.overrideAdapterProperty has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   overrideAdapterProperty?: boolean;
 
@@ -9326,6 +9381,7 @@ model HciEnableAksArcDeploymentJobProperties extends ClusterJobProperties {
   jobType: HciJobType.EnableAksArcDeployment;
 
   /** Deployment intent. Only true is currently supported, enforced by service-side validation. Repeated execution preserves enabled intent; disabling or uninstalling AKS Arc is not supported. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HciEnableAksArcDeploymentJobProperties.deployAksArc has a boolean wire value; preserve the published property contract."
   deployAksArc: boolean;
 }
 
@@ -9613,6 +9669,7 @@ model EdgeMachineUpdateInfo {
   totalSizeBytes?: int64;
 
   /** Indicates whether a reboot is required after installing this update. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeMachineUpdateInfo.rebootRequired has a boolean wire value; preserve the published property contract."
   rebootRequired?: boolean;
 
   /** Estimated time in minutes to install this update. */
@@ -9746,12 +9803,14 @@ model EdgeMachineGpuProperties {
   /**
    * Indicates whether the GPU is assignable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeMachineGpuProperties.assignable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   assignable?: boolean;
 
   /**
    * Indicates whether the GPU is partitionable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EdgeMachineGpuProperties.partitionable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   partitionable?: boolean;
 
@@ -10319,6 +10378,7 @@ model NetworkAdapterReportedProperties {
   vlanId?: int32;
 
   /** Indicates if this is a management interface. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkAdapterReportedProperties.managementInterface has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   managementInterface?: boolean;
 
@@ -10843,6 +10903,7 @@ model DiskReportedProperties {
   manufacturer?: string;
 
   /** Indicates whether the disk manufacturer is supported for the validated solution recipe ring. Defaults to true. Set to false when the SAN vendor is not in the allowed vendor list for the current ring. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DiskReportedProperties.isSupported has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isSupported?: boolean;
 
@@ -10988,6 +11049,7 @@ model DiskVolumeReportedProperties {
   name?: string;
 
   /** Indicates if this volume is a boot volume. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DiskVolumeReportedProperties.isBoot has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isBoot?: boolean;
 
@@ -11052,6 +11114,7 @@ model VolumeReportedProperties {
   parentDiskId?: string;
 
   /** Indicates if this volume is a boot volume. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VolumeReportedProperties.isBoot has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isBoot?: boolean;
 
@@ -11239,6 +11302,7 @@ model DeleteVolumeJobProperties extends EdgeMachineDiskPrivilegedJobProperties {
   volumePath: string;
 
   /** Confirmation flag that must be set to true to proceed with deletion. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeleteVolumeJobProperties.confirmDeletion has a boolean wire value; preserve the published property contract."
   confirmDeletion?: boolean = false;
 }
 
@@ -11547,14 +11611,17 @@ model ClusterVolumeReportedProperties {
   server?: string;
 
   /** Whether data deduplication is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ClusterVolumeReportedProperties.isDedupEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDedupEnabled?: boolean;
 
   /** Whether BitLocker encryption is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ClusterVolumeReportedProperties.isEncrypted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEncrypted?: boolean;
 
   /** Whether ReFS integrity streams are enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ClusterVolumeReportedProperties.isIntegrityEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isIntegrityEnabled?: boolean;
 }
@@ -11695,6 +11762,7 @@ model ProxyConfigurationDetail {
   bypassList?: string[];
 
   /** Whether the proxy should be active on the device. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ProxyConfigurationDetail.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 }
 
@@ -11741,6 +11809,7 @@ model ProxyConfigurationReportedDetail {
   bypassList?: string[];
 
   /** Whether the proxy is currently active on the device, as reported. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ProxyConfigurationReportedDetail.isEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEnabled?: boolean;
 
@@ -11841,12 +11910,14 @@ model NetworkProfileReportedProperties {
   /**
    * Whether the storage adapters between nodes are connected without a switch.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkProfileReportedProperties.storageConnectivitySwitchless has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   storageConnectivitySwitchless?: boolean;
 
   /**
    * Whether automatic storage IP assignment is enabled across the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkProfileReportedProperties.enableStorageAutoIp has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   enableStorageAutoIp?: boolean;
 
@@ -11908,12 +11979,14 @@ model NetworkProfileLiveMigrationPolicy {
   /**
    * Whether the network used for virtual machine live migration is selected automatically.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkProfileLiveMigrationPolicy.autoSelectMigrationNetwork has a boolean wire value; preserve the published property contract."
   autoSelectMigrationNetwork?: boolean;
 
   /**
    * Whether the performance option used for virtual machine live migration is selected
    * automatically.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkProfileLiveMigrationPolicy.autoSelectVmMigrationPerformance has a boolean wire value; preserve the published property contract."
   autoSelectVmMigrationPerformance?: boolean;
 
   /**
@@ -11955,21 +12028,25 @@ model NetworkProfileIntent {
   /**
    * Whether the intent carries management traffic.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkProfileIntent.isManagementType has a boolean wire value; preserve the published property contract."
   isManagementType?: boolean;
 
   /**
    * Whether the intent carries compute traffic.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkProfileIntent.isComputeType has a boolean wire value; preserve the published property contract."
   isComputeType?: boolean;
 
   /**
    * Whether the intent carries storage traffic.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkProfileIntent.isStorageType has a boolean wire value; preserve the published property contract."
   isStorageType?: boolean;
 
   /**
    * Whether adapter property overrides apply to the intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkProfileIntent.overrideAdapterProperty has a boolean wire value; preserve the published property contract."
   overrideAdapterProperty?: boolean;
 
   /**
@@ -11980,6 +12057,7 @@ model NetworkProfileIntent {
   /**
    * Whether QoS policy overrides apply to the intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkProfileIntent.overrideQosPolicy has a boolean wire value; preserve the published property contract."
   overrideQosPolicy?: boolean;
 
   /**
@@ -11990,6 +12068,7 @@ model NetworkProfileIntent {
   /**
    * Whether virtual switch configuration overrides apply to the intent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkProfileIntent.overrideVirtualSwitchConfiguration has a boolean wire value; preserve the published property contract."
   overrideVirtualSwitchConfiguration?: boolean;
 
   /**
@@ -12065,6 +12144,7 @@ model NetworkProfileInfrastructureNetwork {
   /**
    * Whether DHCP is used for hosts and cluster IPs instead of static IP pools.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkProfileInfrastructureNetwork.useDhcp has a boolean wire value; preserve the published property contract."
   useDhcp?: boolean;
 
   /**

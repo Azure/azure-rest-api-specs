@@ -53,6 +53,7 @@ interface ServiceGroups {
   /**
    * Create or Update a serviceGroup
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdateServiceGroupV1 retains its tenant-scoped route; preserve published resource IDs and API paths."
   @removed(Versions.v2026_08_01)
   @renamedFrom(Versions.v2026_08_01, "createOrUpdateServiceGroup")
   @sharedRoute
@@ -64,6 +65,7 @@ interface ServiceGroups {
   /**
    * Create or Update a serviceGroup
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdateServiceGroup retains its tenant-scoped route; preserve published resource IDs and API paths."
   @added(Versions.v2026_08_01)
   @sharedRoute
   @Azure.Core.useFinalStateVia("original-uri")

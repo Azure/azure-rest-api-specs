@@ -1044,6 +1044,7 @@ model Operation {
   /**
    * Is data action.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -1148,6 +1149,7 @@ model MetricSpecification_V1 {
   /**
    * Set true to fill the gaps with zero.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricSpecification_V1.fillGapWithZero has a boolean wire value; preserve the published property contract."
   fillGapWithZero?: boolean;
 
   /**
@@ -1187,6 +1189,7 @@ model MetricDimension_V1 {
   /**
    * To be exported to shoe box.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricDimension_V1.toBeExportedForShoebox has a boolean wire value; preserve the published property contract."
   toBeExportedForShoebox?: boolean;
 }
 
@@ -1866,6 +1869,7 @@ model VmPlacementRequestResult {
   /**
    * Boolean value indicating if the VM(s) in VmSize can be created.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VmPlacementRequestResult.isFeasible has a boolean wire value; preserve the published property contract."
   isFeasible?: boolean;
 
   /**

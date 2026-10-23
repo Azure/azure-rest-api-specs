@@ -59,6 +59,7 @@ model AgentsPagedResult<T> {
   @continuationToken
   lastId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AgentsPagedResult.hasMore has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "has_more")
   @doc("A value indicating whether there are additional values available not captured in this list.")
   hasMore: boolean;
@@ -68,6 +69,7 @@ alias DeletionStatus = {
   @doc("The ID of the resource specified for deletion.")
   id: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeletionStatus.deleted has a boolean wire value; preserve the published property contract."
   @doc("A value indicating whether deletion was successful.")
   deleted: boolean;
 };

@@ -326,6 +326,7 @@ model AadProfile {
    * Whether to enable Azure RBAC for Kubernetes authorization.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AadProfile.enableAzureRBAC has a boolean wire value; preserve the published property contract."
   enableAzureRBAC?: boolean;
 
   /**
@@ -447,6 +448,7 @@ model SecurityProfileWorkloadIdentity {
   /**
    * Whether to enable or disable the workload identity Webhook
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityProfileWorkloadIdentity.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -457,6 +459,7 @@ model OidcIssuerProfile {
   /**
    * Whether to enable oidc issuer for workload identity integration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OidcIssuerProfile.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -478,6 +481,7 @@ model Gateway {
   /**
    * Indicates whether the gateway for arc router connectivity is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Gateway.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -589,6 +593,7 @@ model ListClusterUserCredentialProperties {
   /**
    * Boolean value to indicate whether the request is for client side proxy or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ListClusterUserCredentialProperties.clientProxy has a boolean wire value; preserve the published property contract."
   clientProxy: boolean;
 }
 

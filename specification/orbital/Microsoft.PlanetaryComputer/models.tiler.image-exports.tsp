@@ -45,6 +45,7 @@ model ImageParameters {
   /**
    * Whether to include branding on the output image
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImageParameters.showBranding has a boolean wire value; preserve the published property contract."
   showBranding?: boolean = true;
 
   /**

@@ -142,6 +142,7 @@ interface VariableValues {
   /**
    *  This operation creates or updates a variable value with the given management group and name for a given variable. Variable values are scoped to the variable for which they are created for.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdateAtManagementGroup retains its tenant-scoped route; preserve published resource IDs and API paths."
   @summary("Creates or updates a variable value.")
   createOrUpdateAtManagementGroup is VariableValueManagementGroupOps.CreateOrUpdateSync<VariableValue>;
 

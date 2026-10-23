@@ -48,11 +48,13 @@ model GoalAssignmentProperties {
   @removed(Versions.v2026_09_30_preview)
   goalAssignmentType?: GoalAssignmentType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GoalAssignmentProperties.requireZonalResiliency has a boolean wire value; preserve the published property contract."
   @doc("Whether zonal resiliency is required for this goal assignment.")
   @added(Versions.v2026_06_01_preview)
   @madeRequired(Versions.v2026_09_30_preview)
   requireZonalResiliency: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GoalAssignmentProperties.requireRegionalResiliency has a boolean wire value; preserve the published property contract."
   @doc("Whether regional resiliency is required for this goal assignment.")
   @added(Versions.v2026_10_31_preview)
   requireRegionalResiliency?: boolean;

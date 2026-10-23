@@ -336,6 +336,7 @@ model StatefulServiceProperties extends ServiceResourceProperties {
   /**
    * A flag indicating whether this is a persistent service which stores states on the local disk. If it is then the value of this property is true, if not it is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StatefulServiceProperties.hasPersistedState has a boolean wire value; preserve the published property contract."
   hasPersistedState?: boolean;
 
   /**

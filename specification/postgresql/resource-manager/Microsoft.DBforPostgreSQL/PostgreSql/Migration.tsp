@@ -62,6 +62,7 @@ interface Migrations {
       /**
        * Migration list filter. Indicates if the request should retrieve only active migrations or all migrations. Defaults to Active.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByTargetServer.migrationListFilter retains the migrationListFilter query parameter; preserve wire compatibility."
       @query("migrationListFilter")
       migrationListFilter?: MigrationListFilter;
     },

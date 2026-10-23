@@ -33,6 +33,7 @@ model MapsGeofenceEventProperties {
   invalidPeriodGeofenceGeometryId: string[];
 
   /** True if at least one event is published to the Azure Maps event subscriber, false if no event is published to the Azure Maps event subscriber. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MapsGeofenceEventProperties.isEventPublished has a boolean wire value; preserve the published property contract."
   @madeRequired(ServiceApiVersions.v2024_01_01)
   isEventPublished: boolean;
 }

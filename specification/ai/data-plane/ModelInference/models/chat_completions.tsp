@@ -36,6 +36,7 @@ model ChatCompletionsOptions {
   @minValue(-2.0)
   frequency_penalty?: float32 = 0.0;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ChatCompletionsOptions.stream has a boolean wire value; preserve the published property contract."
   @doc("""
     A value indicating whether chat completions should be streamed for this request.
     """)
@@ -348,6 +349,7 @@ model ChatCompletionsResponseFormatJsonSchemaDefinition {
   /** A description of the response format, used by the AI model to determine how to generate responses in this format. */
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ChatCompletionsResponseFormatJsonSchemaDefinition.strict has a boolean wire value; preserve the published property contract."
   @doc("""
     Whether to enable strict schema adherence when generating the output.
     If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of

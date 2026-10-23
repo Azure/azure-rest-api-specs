@@ -622,6 +622,7 @@ model ClusterProperties {
   /**
    * A value that indicates whether Scaling is Supported.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ClusterProperties.supportsScaling has a boolean wire value; preserve the published property contract."
   supportsScaling?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
@@ -630,6 +631,7 @@ model ClusterProperties {
   /**
    * A value that indicates whether the cluster is zone redundant.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ClusterProperties.zoneRedundant has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_01_01)
   zoneRedundant?: boolean;
 }
@@ -833,6 +835,7 @@ model EHNamespaceProperties {
   /**
    * Value that indicates whether AutoInflate is enabled for eventhub namespace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EHNamespaceProperties.isAutoInflateEnabled has a boolean wire value; preserve the published property contract."
   isAutoInflateEnabled?: boolean;
 
   /**
@@ -849,11 +852,13 @@ model EHNamespaceProperties {
   /**
    * Value that indicates whether Kafka is enabled for eventhub namespace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EHNamespaceProperties.kafkaEnabled has a boolean wire value; preserve the published property contract."
   kafkaEnabled?: boolean;
 
   /**
    * Enabling this property creates a Standard Event Hubs Namespace in regions supported availability zones.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EHNamespaceProperties.zoneRedundant has a boolean wire value; preserve the published property contract."
   zoneRedundant?: boolean;
 
   /**
@@ -869,6 +874,7 @@ model EHNamespaceProperties {
   /**
    * This property disables SAS authentication for the Event Hubs namespace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EHNamespaceProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 
   /**
@@ -909,6 +915,7 @@ model Encryption {
   /**
    * Enable Infrastructure Encryption (Double Encryption)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Encryption.requireInfrastructureEncryption has a boolean wire value; preserve the published property contract."
   requireInfrastructureEncryption?: boolean;
 }
 
@@ -1076,6 +1083,7 @@ model FailOverProperties {
   /**
    * If Force is false then graceful failover is attempted after ensuring no data loss. If Force flag is set to true, Forced failover is attempted with possible data loss.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FailOverProperties.force has a boolean wire value; preserve the published property contract."
   force?: boolean;
 }
 
@@ -1174,6 +1182,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * True if the EventHub namespace is backed by another Azure resource and not visible to end users.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkSecurityPerimeterConfigurationProperties.isBackingResource has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isBackingResource?: boolean;
 
@@ -1369,6 +1378,7 @@ model NetworkRuleSetProperties {
   /**
    * Value that indicates whether Trusted Service Access is Enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkRuleSetProperties.trustedServiceAccessEnabled has a boolean wire value; preserve the published property contract."
   trustedServiceAccessEnabled?: boolean;
 
   /**
@@ -1407,6 +1417,7 @@ model NWRuleSetVirtualNetworkRules {
   /**
    * Value that indicates whether to ignore missing Vnet Service Endpoint
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NWRuleSetVirtualNetworkRules.ignoreMissingVnetServiceEndpoint has a boolean wire value; preserve the published property contract."
   ignoreMissingVnetServiceEndpoint?: boolean;
 }
 
@@ -1534,6 +1545,7 @@ model CheckNameAvailabilityResult {
   /**
    * Value indicating Namespace is availability, true if the Namespace is available; otherwise, false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**
@@ -1611,6 +1623,7 @@ model Operation {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -1733,6 +1746,7 @@ model CaptureDescription {
   /**
    * A value that indicates whether capture description is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CaptureDescription.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1758,6 +1772,7 @@ model CaptureDescription {
   /**
    * A value that indicates whether to Skip Empty Archives
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CaptureDescription.skipEmptyArchives has a boolean wire value; preserve the published property contract."
   skipEmptyArchives?: boolean;
 }
 
@@ -1909,6 +1924,7 @@ model ApplicationGroupProperties {
   /**
    * Determines if Application Group is allowed to create connection with namespace or not. Once the isEnabled is set to false, all the existing connections of application group gets dropped and no new connections will be allowed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGroupProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**

@@ -114,11 +114,13 @@ model UpgradeStatus {
   /**
    * Whether at least one deferred upgrade is waiting for the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UpgradeStatus.pendingUpgrade has a boolean wire value; preserve the published property contract."
   pendingUpgrade: boolean;
 
   /**
    * Whether an upgrade-now override is currently active.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UpgradeStatus.inProgress has a boolean wire value; preserve the published property contract."
   inProgress: boolean;
 
   /**

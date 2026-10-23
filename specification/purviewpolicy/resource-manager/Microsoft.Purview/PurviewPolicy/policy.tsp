@@ -35,6 +35,7 @@ interface PurviewPolicies {
 /** The skipToken parameter definition. */
 model SkipTokenParameter {
   /** Paging key to paginate to next page. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing SkipTokenParameter.skipToken retains the skipToken query parameter; preserve wire compatibility."
   @query
   skipToken?: string;
 }

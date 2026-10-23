@@ -1579,11 +1579,13 @@ model ClusterProperties {
   /**
    * A boolean value that indicates if the cluster's disks are encrypted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ClusterProperties.enableDiskEncryption has a boolean wire value; preserve the published property contract."
   enableDiskEncryption?: boolean = false;
 
   /**
    * A boolean value that indicates if the streaming ingest is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ClusterProperties.enableStreamingIngest has a boolean wire value; preserve the published property contract."
   enableStreamingIngest?: boolean = false;
 
   /**
@@ -1599,6 +1601,7 @@ model ClusterProperties {
   /**
    * A boolean value that indicates if the purge operations are enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ClusterProperties.enablePurge has a boolean wire value; preserve the published property contract."
   enablePurge?: boolean = false;
 
   /**
@@ -1609,6 +1612,7 @@ model ClusterProperties {
   /**
    * A boolean value that indicates if double encryption is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ClusterProperties.enableDoubleEncryption has a boolean wire value; preserve the published property contract."
   enableDoubleEncryption?: boolean = false;
 
   /**
@@ -1635,6 +1639,7 @@ model ClusterProperties {
   /**
    * A boolean value that indicates if the cluster could be automatically stopped (due to lack of data or no activity for many days).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ClusterProperties.enableAutoStop has a boolean wire value; preserve the published property contract."
   enableAutoStop?: boolean = true;
 
   /**
@@ -1707,6 +1712,7 @@ model OptimizedAutoscale {
   /**
    * A boolean value that indicate if the optimized autoscale feature is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OptimizedAutoscale.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 
   /**
@@ -2012,6 +2018,7 @@ model CheckNameResult {
   /**
    * Specifies a Boolean value that indicates if the name is available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckNameResult.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**
@@ -2728,6 +2735,7 @@ model ScriptProperties {
   /**
    * Flag that indicates whether to continue if one of the command fails.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScriptProperties.continueOnErrors has a boolean wire value; preserve the published property contract."
   continueOnErrors?: boolean = false;
 
   /**
@@ -3345,6 +3353,7 @@ model ReadWriteDatabaseProperties {
   /**
    * Indicates whether the database is followed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ReadWriteDatabaseProperties.isFollowed has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isFollowed?: boolean;
 
@@ -3608,6 +3617,7 @@ model EventGridConnectionProperties {
   /**
    * A Boolean value that, if set to true, indicates that ingestion should ignore the first record of every file
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EventGridConnectionProperties.ignoreFirstRecord has a boolean wire value; preserve the published property contract."
   ignoreFirstRecord?: boolean;
 
   /**
@@ -3851,6 +3861,7 @@ model EventGridConnectionWithManagedIdentityProperties {
   /**
    * A Boolean value that, if set to true, indicates that ingestion should ignore the first record of every file
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EventGridConnectionWithManagedIdentityProperties.ignoreFirstRecord has a boolean wire value; preserve the published property contract."
   ignoreFirstRecord?: boolean;
 
   /**

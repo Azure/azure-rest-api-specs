@@ -246,6 +246,7 @@ model CustomerEntity {
   @doc("Customer resource contact full name.")
   contactName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CustomerEntity.isEntitled has a boolean wire value; preserve the published property contract."
   @doc("Customer resource entitlement flag as boolean.")
   isEntitled?: boolean;
 
@@ -271,15 +272,19 @@ model CustomerEntity {
   @visibility(Lifecycle.Read)
   lastSyncWithAzureTimestamp?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CustomerEntity.isEnterpriseManaged has a boolean wire value; preserve the published property contract."
   @doc("Customer resource flag for enterprise management as boolean.")
   isEnterpriseManaged?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CustomerEntity.shouldMigrate has a boolean wire value; preserve the published property contract."
   @doc("Customer resource flag for migration.")
   shouldMigrate?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CustomerEntity.resendSignupCode has a boolean wire value; preserve the published property contract."
   @doc("Customer resource flag for resending signup code as boolean.")
   resendSignupCode?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CustomerEntity.verifySignupCode has a boolean wire value; preserve the published property contract."
   @doc("Customer resource flag for requiring verification of signup code as boolean.")
   verifySignupCode?: boolean;
 
@@ -333,6 +338,7 @@ model AdditionalCustomerProperties {
   @visibility(Lifecycle.Read)
   customerPropertiesOverviewCacheNodesUnhealthyCount?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AdditionalCustomerProperties.signupStatus has a boolean wire value; preserve the published property contract."
   @doc("Customer resource signup status as boolean.")
   @visibility(Lifecycle.Read)
   signupStatus?: boolean;
@@ -465,6 +471,7 @@ model CacheNodeEntity {
   @doc("Cache node resource customer resource Asn (autonomous system number)")
   customerAsn?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CacheNodeEntity.isEnabled has a boolean wire value; preserve the published property contract."
   @doc("Cache node resource flag for indicating if cache node is enabled.")
   isEnabled?: boolean;
 
@@ -479,6 +486,7 @@ model CacheNodeEntity {
   @visibility(Lifecycle.Read)
   xCid?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CacheNodeEntity.isEnterpriseManaged has a boolean wire value; preserve the published property contract."
   @doc("Cache node resource flag for determining if managed by enterprise as boolean.")
   isEnterpriseManaged?: boolean;
 
@@ -565,6 +573,7 @@ model CacheNodeEntity {
   @visibility(Lifecycle.Read)
   bgpAddressSpace?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CacheNodeEntity.shouldMigrate has a boolean wire value; preserve the published property contract."
   @doc("Cache node resource flag for determining if customer will be migrated.")
   shouldMigrate?: boolean;
 
@@ -575,6 +584,7 @@ model CacheNodeEntity {
   @doc("Cache node resource current Cidr range precedence selection type.")
   cidrSelectionType?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CacheNodeEntity.isFrozen has a boolean wire value; preserve the published property contract."
   @doc("Cache node resource flag for indicating the cache node resource is frozen (not selectable, not editable in UI).")
   @visibility(Lifecycle.Read)
   isFrozen?: boolean;
@@ -639,18 +649,22 @@ model CacheNodeEntity {
   @pattern("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$")
   autoUpdateRequestedTime?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CacheNodeEntity.openFirewallPort80 has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01)
   @doc("Cache node port firewall rule creation opt-in for port 80 property")
   openFirewallPort80?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CacheNodeEntity.openFirewallPort443 has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01)
   @doc("Cache node port firewall rule creation opt-in for port 443 property")
   openFirewallPort443?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CacheNodeEntity.openFirewallPort5000 has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01)
   @doc("Cache node port firewall rule creation opt-in for port 5000 property")
   openFirewallPort5000?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CacheNodeEntity.openFirewallPort5001 has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01)
   @doc("Cache node port firewall rule creation opt-in for port 5001 property")
   openFirewallPort5001?: boolean;
@@ -701,6 +715,7 @@ model AdditionalCacheNodeProperties {
   @visibility(Lifecycle.Read)
   productVersion?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AdditionalCacheNodeProperties.isProvisioned has a boolean wire value; preserve the published property contract."
   @doc("Cache node resource flag indicating if cache node has been physically installed or provisioned on their physical lab.")
   @visibility(Lifecycle.Read)
   isProvisioned?: boolean;

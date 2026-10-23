@@ -116,48 +116,56 @@ interface ModelVersions {
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       /**
        * Ordering of list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @query("$orderBy")
       $orderBy?: string;
 
       /**
        * Maximum number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * Version identifier.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.version retains the version query parameter; preserve wire compatibility."
       @query("version")
       version?: string;
 
       /**
        * Model description.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.description retains the description query parameter; preserve wire compatibility."
       @query("description")
       description?: string;
 
       /**
        * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string;
 
       /**
        * Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.properties retains the properties query parameter; preserve wire compatibility."
       @query("properties")
       properties?: string;
 
       /**
        * View type for including/excluding (for example) archived entities.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.listViewType retains the listViewType query parameter; preserve wire compatibility."
       @query("listViewType")
       listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
@@ -238,60 +246,70 @@ interface ModelVersionOperationGroup {
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       /**
        * Ordering of list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @query("$orderBy")
       $orderBy?: string;
 
       /**
        * Maximum number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * Model version.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.version retains the version query parameter; preserve wire compatibility."
       @query("version")
       version?: string;
 
       /**
        * Model description.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.description retains the description query parameter; preserve wire compatibility."
       @query("description")
       description?: string;
 
       /**
        * Number of initial results to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.offset retains the offset query parameter; preserve wire compatibility."
       @query("offset")
       offset?: int32;
 
       /**
        * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string;
 
       /**
        * Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.properties retains the properties query parameter; preserve wire compatibility."
       @query("properties")
       properties?: string;
 
       /**
        * Name of the feed.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.feed retains the feed query parameter; preserve wire compatibility."
       @query("feed")
       feed?: string;
 
       /**
        * View type for including/excluding (for example) archived entities.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.listViewType retains the listViewType query parameter; preserve wire compatibility."
       @query("listViewType")
       listViewType?: ListViewType = ListViewType.ActiveOnly;
     },

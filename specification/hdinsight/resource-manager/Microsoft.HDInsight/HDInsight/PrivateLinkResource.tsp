@@ -35,6 +35,7 @@ interface PrivateLinkResources {
   /**
    * Lists the private link resources in a HDInsight cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByCluster retains its response and SDK paging behavior; preserve published compatibility."
   listByCluster is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     PrivateLinkResource,
     Response = ArmResponse<PrivateLinkResourceListResult>,

@@ -14,6 +14,7 @@ namespace KeyVault;
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing fullBackupStatus SDK method name; renaming it would break client compatibility."
 @route("/backup/{jobId}/pending")
 @get
 op fullBackupStatus is KeyVaultOperation<
@@ -107,6 +108,7 @@ op preFullBackup is KeyVaultOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing restoreStatus SDK method name; renaming it would break client compatibility."
 @sharedRoute
 @route("/restore/{jobId}/pending")
 @get
@@ -199,6 +201,7 @@ op fullRestoreOperation is KeyVaultOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing selectiveKeyRestoreStatus SDK method name; renaming it would break client compatibility."
 @sharedRoute
 @route("/restore/{jobId}/pending")
 @get

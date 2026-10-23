@@ -847,11 +847,13 @@ model VolumeGroupProperties {
   /**
    * A boolean indicating whether or not Data Integrity Check is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VolumeGroupProperties.enforceDataIntegrityCheckForIscsi has a boolean wire value; preserve the published property contract."
   enforceDataIntegrityCheckForIscsi?: boolean;
 
   /**
    * A boolean indicating whether or not Encryption in Transit is enabled, supported only for ISCSI protocol.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VolumeGroupProperties.encryptionInTransit has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01_preview)
   encryptionInTransit?: boolean;
 
@@ -1035,6 +1037,7 @@ model VolumeGroupUpdateProperties {
   /**
    * A boolean indicating whether or not Data Integrity Check is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VolumeGroupUpdateProperties.enforceDataIntegrityCheckForIscsi has a boolean wire value; preserve the published property contract."
   enforceDataIntegrityCheckForIscsi?: boolean;
 
   /**

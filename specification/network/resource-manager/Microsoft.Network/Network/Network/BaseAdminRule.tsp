@@ -76,6 +76,8 @@ interface BaseAdminRules {
       /**
        * Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.force has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.force retains the force query parameter; preserve wire compatibility."
       @query("force")
       force?: boolean;
     },
@@ -96,6 +98,7 @@ interface BaseAdminRules {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(20)
       @minValue(1)
       @query("$top")
@@ -104,6 +107,7 @@ interface BaseAdminRules {
       /**
        * SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },

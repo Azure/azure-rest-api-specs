@@ -79,30 +79,35 @@ interface Peerings {
       /**
        * The optional prefix that can be used to filter the routes.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByPeering.prefix retains the prefix query parameter; preserve wire compatibility."
       @query("prefix")
       prefix?: string;
 
       /**
        * The optional AS path that can be used to filter the routes.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByPeering.asPath retains the asPath query parameter; preserve wire compatibility."
       @query("asPath")
       asPath?: string;
 
       /**
        * The optional origin AS validation state that can be used to filter the routes.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByPeering.originAsValidationState retains the originAsValidationState query parameter; preserve wire compatibility."
       @query("originAsValidationState")
       originAsValidationState?: string;
 
       /**
        * The optional RPKI validation state that can be used to filter the routes.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByPeering.rpkiValidationState retains the rpkiValidationState query parameter; preserve wire compatibility."
       @query("rpkiValidationState")
       rpkiValidationState?: string;
 
       /**
        * The optional page continuation token that is used in the event of paginated result.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByPeering.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }
@@ -122,6 +127,8 @@ interface Peerings {
       /**
        * Flag to enable consolidation prefixes
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.consolidate has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.consolidate retains the consolidate query parameter; preserve wire compatibility."
       @query("consolidate")
       consolidate?: boolean;
     }

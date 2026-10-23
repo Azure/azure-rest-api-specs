@@ -978,6 +978,7 @@ model SecurityAssessmentMetadataProperties {
   /**
    * True if this assessment is in preview release status
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityAssessmentMetadataProperties.preview has a boolean wire value; preserve the published property contract."
   preview?: boolean;
 
   /**
@@ -1154,6 +1155,7 @@ model SecurityAssessmentPropertiesBaseRisk {
   /**
    * Indicates if the risk is contextual or static
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityAssessmentPropertiesBaseRisk.isContextualRisk has a boolean wire value; preserve the published property contract."
   isContextualRisk?: boolean;
 }
 

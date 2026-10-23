@@ -13,6 +13,7 @@ namespace Microsoft.Monitor {
     /**
      * Indicates whether automatic scaling of ingestion limits is enabled.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricsLimits.enableAutoScale has a boolean wire value; preserve the published property contract."
     @added(Versions.v2026_09_03_preview)
     enableAutoScale?: boolean;
 

@@ -161,6 +161,7 @@ op searchServicesListByResourceGroupCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing searchGetCustomization SDK method name; renaming it would break client compatibility."
 @autoRoute
 @get
 @action("searchGetCustomization")
@@ -398,6 +399,7 @@ op queryKeysListBySearchServiceCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing privateEndpointConnectionsListByServiceCustomization SDK method name; renaming it would break client compatibility."
 @autoRoute
 @get
 @action("privateEndpointConnectionsListByService")
@@ -424,6 +426,7 @@ op privateEndpointConnectionsListByServiceCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing privateEndpointConnectionsGetCustomization SDK method name; renaming it would break client compatibility."
 @autoRoute
 @get
 op privateEndpointConnectionsGetCustomization(
@@ -527,6 +530,7 @@ op privateEndpointConnectionsDeleteCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing privateLinkResourcesListSupportedCustomization SDK method name; renaming it would break client compatibility."
 @autoRoute
 @get
 @action("privateLinkResourcesCustomization")
@@ -588,6 +592,7 @@ op privateLinkResourcesRegenerateCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing SharedPrivateLinkResourcesListByServiceCustomization SDK method name; renaming it would break client compatibility."
 @autoRoute
 @get
 @action("sharedPrivateLinkResourcesCustomization")
@@ -615,6 +620,7 @@ op SharedPrivateLinkResourcesListByServiceCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing SharedPrivateLinkResourcesGetCustomization SDK method name; renaming it would break client compatibility."
 @autoRoute
 @get
 op SharedPrivateLinkResourcesGetCustomization(

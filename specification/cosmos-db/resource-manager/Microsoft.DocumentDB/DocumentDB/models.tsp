@@ -87,6 +87,7 @@ model GarnetClusterResourceProperties {
   nodeSku?: string;
 
   /** If the data center has Availability Zone support, apply it to the Virtual Machine ScaleSet that host the garnet cluster virtual machines. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GarnetClusterResourceProperties.availabilityZone has a boolean wire value; preserve the published property contract."
   availabilityZone?: boolean;
 
   /** The authentication method used for the Garnet cluster. */
@@ -94,6 +95,7 @@ model GarnetClusterResourceProperties {
   authenticationMethod?: GarnetAuthenticationType;
 
   /** Flag to indicate if persistence is enabled for the Garnet cluster. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GarnetClusterResourceProperties.persistence has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_04_01_preview)
   persistence?: boolean;
 
@@ -236,6 +238,7 @@ model GarnetClusterResourcePatchProperties {
   /**
    * Flag to indicate if persistence is enabled for the Garnet cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GarnetClusterResourcePatchProperties.persistence has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_04_01_preview)
   persistence?: boolean;
 }
@@ -269,6 +272,7 @@ model DataMaskingPolicy {
   /**
    * Flag indicating whether the data masking policy is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataMaskingPolicy.isPolicyEnabled has a boolean wire value; preserve the published property contract."
   isPolicyEnabled?: boolean;
 }
 
@@ -487,6 +491,7 @@ model SoftDeleteConfiguration {
   /**
    * Flag to indicate whether soft delete is enabled on the account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SoftDeleteConfiguration.softDeletionEnabled has a boolean wire value; preserve the published property contract."
   softDeletionEnabled?: boolean;
 
   /**
@@ -1556,11 +1561,13 @@ model DatabaseAccountGetProperties {
   /**
    * Flag to indicate whether to enable/disable Virtual Network ACL rules.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountGetProperties.isVirtualNetworkFilterEnabled has a boolean wire value; preserve the published property contract."
   isVirtualNetworkFilterEnabled?: boolean;
 
   /**
    * Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountGetProperties.enableAutomaticFailover has a boolean wire value; preserve the published property contract."
   enableAutomaticFailover?: boolean;
 
   /**
@@ -1611,11 +1618,13 @@ model DatabaseAccountGetProperties {
   /**
    * Enables the account to write in multiple locations
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountGetProperties.enableMultipleWriteLocations has a boolean wire value; preserve the published property contract."
   enableMultipleWriteLocations?: boolean;
 
   /**
    * Enables the cassandra connector on the Cosmos DB C* account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountGetProperties.enableCassandraConnector has a boolean wire value; preserve the published property contract."
   enableCassandraConnector?: boolean;
 
   /**
@@ -1626,6 +1635,7 @@ model DatabaseAccountGetProperties {
   /**
    * Disable write operations on metadata resources (databases, containers, throughput) via account keys
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountGetProperties.disableKeyBasedMetadataWriteAccess has a boolean wire value; preserve the published property contract."
   disableKeyBasedMetadataWriteAccess?: boolean;
 
   /**
@@ -1646,6 +1656,7 @@ model DatabaseAccountGetProperties {
   /**
    * Flag to indicate whether Free Tier is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountGetProperties.enableFreeTier has a boolean wire value; preserve the published property contract."
   enableFreeTier?: boolean;
 
   /**
@@ -1656,6 +1667,7 @@ model DatabaseAccountGetProperties {
   /**
    * Flag to indicate whether to enable storage analytics.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountGetProperties.enableAnalyticalStorage has a boolean wire value; preserve the published property contract."
   enableAnalyticalStorage?: boolean;
 
   /**
@@ -1709,6 +1721,7 @@ model DatabaseAccountGetProperties {
   /**
    * Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountGetProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 
   /**
@@ -1731,6 +1744,7 @@ model DatabaseAccountGetProperties {
   /**
    * Flag to indicate whether to enable MaterializedViews on the Cosmos DB account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountGetProperties.enableMaterializedViews has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_04_01_preview)
   enableMaterializedViews?: boolean;
 
@@ -1743,11 +1757,13 @@ model DatabaseAccountGetProperties {
   /**
    * Flag to indicate enabling/disabling of Partition Merge feature on the account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountGetProperties.enablePartitionMerge has a boolean wire value; preserve the published property contract."
   enablePartitionMerge?: boolean;
 
   /**
    * Flag to indicate enabling/disabling of Burst Capacity Preview feature on the account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountGetProperties.enableBurstCapacity has a boolean wire value; preserve the published property contract."
   enableBurstCapacity?: boolean;
 
   /**
@@ -1769,6 +1785,7 @@ model DatabaseAccountGetProperties {
   /**
    * Flag to indicate enabling/disabling of Priority Based Execution Preview feature on the account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountGetProperties.enablePriorityBasedExecution has a boolean wire value; preserve the published property contract."
   enablePriorityBasedExecution?: boolean;
 
   /**
@@ -1779,11 +1796,13 @@ model DatabaseAccountGetProperties {
   /**
    * Flag to indicate enabling/disabling of Per-Region Per-partition autoscale Preview feature on the account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountGetProperties.enablePerRegionPerPartitionAutoscale has a boolean wire value; preserve the published property contract."
   enablePerRegionPerPartitionAutoscale?: boolean;
 
   /**
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountGetProperties.enableAllVersionsAndDeletesChangeFeed has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_04_01_preview)
   enableAllVersionsAndDeletesChangeFeed?: boolean;
 
@@ -1810,6 +1829,7 @@ model DatabaseAccountGetProperties {
   /**
    * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountGetProperties.enforceHierarchicalPartitionKeyIdLastLevel has a boolean wire value; preserve the published property contract."
   enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
 }
 
@@ -1894,6 +1914,7 @@ model Location {
   /**
    * Flag to indicate whether or not this region is an AvailabilityZone region
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Location.isZoneRedundant has a boolean wire value; preserve the published property contract."
   isZoneRedundant?: boolean;
 }
 
@@ -1936,6 +1957,7 @@ model VirtualNetworkRule {
    * Create firewall rule before the virtual network has vnet service endpoint enabled.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkRule.ignoreMissingVNetServiceEndpoint has a boolean wire value; preserve the published property contract."
   ignoreMissingVNetServiceEndpoint?: boolean;
 }
 
@@ -2105,6 +2127,7 @@ model RestoreParametersBase {
   /**
    * Specifies whether the restored account will have Time-To-Live disabled upon the successful restore.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RestoreParametersBase.restoreWithTtlDisabled has a boolean wire value; preserve the published property contract."
   restoreWithTtlDisabled?: boolean;
 }
 
@@ -2423,11 +2446,13 @@ model DatabaseAccountUpdateProperties {
   /**
    * Flag to indicate whether to enable/disable Virtual Network ACL rules.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountUpdateProperties.isVirtualNetworkFilterEnabled has a boolean wire value; preserve the published property contract."
   isVirtualNetworkFilterEnabled?: boolean;
 
   /**
    * Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountUpdateProperties.enableAutomaticFailover has a boolean wire value; preserve the published property contract."
   enableAutomaticFailover?: boolean;
 
   /**
@@ -2443,11 +2468,13 @@ model DatabaseAccountUpdateProperties {
   /**
    * Enables the account to write in multiple locations
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountUpdateProperties.enableMultipleWriteLocations has a boolean wire value; preserve the published property contract."
   enableMultipleWriteLocations?: boolean;
 
   /**
    * Enables the cassandra connector on the Cosmos DB C* account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountUpdateProperties.enableCassandraConnector has a boolean wire value; preserve the published property contract."
   enableCassandraConnector?: boolean;
 
   /**
@@ -2458,6 +2485,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * Disable write operations on metadata resources (databases, containers, throughput) via account keys
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountUpdateProperties.disableKeyBasedMetadataWriteAccess has a boolean wire value; preserve the published property contract."
   disableKeyBasedMetadataWriteAccess?: boolean;
 
   /**
@@ -2478,6 +2506,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * Flag to indicate whether Free Tier is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountUpdateProperties.enableFreeTier has a boolean wire value; preserve the published property contract."
   enableFreeTier?: boolean;
 
   /**
@@ -2488,6 +2517,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * Flag to indicate whether to enable storage analytics.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountUpdateProperties.enableAnalyticalStorage has a boolean wire value; preserve the published property contract."
   enableAnalyticalStorage?: boolean;
 
   /**
@@ -2525,6 +2555,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountUpdateProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 
   /**
@@ -2541,6 +2572,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * Flag to indicate whether to enable MaterializedViews on the Cosmos DB account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountUpdateProperties.enableMaterializedViews has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_04_01_preview)
   enableMaterializedViews?: boolean;
 
@@ -2553,11 +2585,13 @@ model DatabaseAccountUpdateProperties {
   /**
    * Flag to indicate enabling/disabling of Partition Merge feature on the account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountUpdateProperties.enablePartitionMerge has a boolean wire value; preserve the published property contract."
   enablePartitionMerge?: boolean;
 
   /**
    * Flag to indicate enabling/disabling of Burst Capacity Preview feature on the account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountUpdateProperties.enableBurstCapacity has a boolean wire value; preserve the published property contract."
   enableBurstCapacity?: boolean;
 
   /**
@@ -2573,6 +2607,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * Flag to indicate enabling/disabling of Priority Based Execution Preview feature on the account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountUpdateProperties.enablePriorityBasedExecution has a boolean wire value; preserve the published property contract."
   enablePriorityBasedExecution?: boolean;
 
   /**
@@ -2583,11 +2618,13 @@ model DatabaseAccountUpdateProperties {
   /**
    * Flag to indicate enabling/disabling of Per-Region Per-partition autoscale Preview feature on the account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountUpdateProperties.enablePerRegionPerPartitionAutoscale has a boolean wire value; preserve the published property contract."
   enablePerRegionPerPartitionAutoscale?: boolean;
 
   /**
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountUpdateProperties.enableAllVersionsAndDeletesChangeFeed has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_04_01_preview)
   enableAllVersionsAndDeletesChangeFeed?: boolean;
 
@@ -2600,6 +2637,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountUpdateProperties.enforceHierarchicalPartitionKeyIdLastLevel has a boolean wire value; preserve the published property contract."
   enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
 }
 
@@ -2650,11 +2688,13 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Flag to indicate whether to enable/disable Virtual Network ACL rules.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountCreateUpdateProperties.isVirtualNetworkFilterEnabled has a boolean wire value; preserve the published property contract."
   isVirtualNetworkFilterEnabled?: boolean;
 
   /**
    * Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountCreateUpdateProperties.enableAutomaticFailover has a boolean wire value; preserve the published property contract."
   enableAutomaticFailover?: boolean;
 
   /**
@@ -2670,11 +2710,13 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Enables the account to write in multiple locations
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountCreateUpdateProperties.enableMultipleWriteLocations has a boolean wire value; preserve the published property contract."
   enableMultipleWriteLocations?: boolean;
 
   /**
    * Enables the cassandra connector on the Cosmos DB C* account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountCreateUpdateProperties.enableCassandraConnector has a boolean wire value; preserve the published property contract."
   enableCassandraConnector?: boolean;
 
   /**
@@ -2685,6 +2727,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Disable write operations on metadata resources (databases, containers, throughput) via account keys
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountCreateUpdateProperties.disableKeyBasedMetadataWriteAccess has a boolean wire value; preserve the published property contract."
   disableKeyBasedMetadataWriteAccess?: boolean;
 
   /**
@@ -2705,6 +2748,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Flag to indicate whether Free Tier is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountCreateUpdateProperties.enableFreeTier has a boolean wire value; preserve the published property contract."
   enableFreeTier?: boolean;
 
   /**
@@ -2715,6 +2759,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Flag to indicate whether to enable storage analytics.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountCreateUpdateProperties.enableAnalyticalStorage has a boolean wire value; preserve the published property contract."
   enableAnalyticalStorage?: boolean;
 
   /**
@@ -2757,6 +2802,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountCreateUpdateProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 
   /**
@@ -2778,6 +2824,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Flag to indicate whether to enable MaterializedViews on the Cosmos DB account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountCreateUpdateProperties.enableMaterializedViews has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_04_01_preview)
   enableMaterializedViews?: boolean;
 
@@ -2790,11 +2837,13 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Flag to indicate enabling/disabling of Partition Merge feature on the account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountCreateUpdateProperties.enablePartitionMerge has a boolean wire value; preserve the published property contract."
   enablePartitionMerge?: boolean;
 
   /**
    * Flag to indicate enabling/disabling of Burst Capacity Preview feature on the account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountCreateUpdateProperties.enableBurstCapacity has a boolean wire value; preserve the published property contract."
   enableBurstCapacity?: boolean;
 
   /**
@@ -2810,6 +2859,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Flag to indicate enabling/disabling of Priority Based Execution Preview feature on the account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountCreateUpdateProperties.enablePriorityBasedExecution has a boolean wire value; preserve the published property contract."
   enablePriorityBasedExecution?: boolean;
 
   /**
@@ -2820,11 +2870,13 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Flag to indicate enabling/disabling of Per-Region Per-partition autoscale Preview feature on the account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountCreateUpdateProperties.enablePerRegionPerPartitionAutoscale has a boolean wire value; preserve the published property contract."
   enablePerRegionPerPartitionAutoscale?: boolean;
 
   /**
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountCreateUpdateProperties.enableAllVersionsAndDeletesChangeFeed has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_04_01_preview)
   enableAllVersionsAndDeletesChangeFeed?: boolean;
 
@@ -2837,6 +2889,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountCreateUpdateProperties.enforceHierarchicalPartitionKeyIdLastLevel has a boolean wire value; preserve the published property contract."
   enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
 }
 
@@ -2970,6 +3023,7 @@ model DatabaseAccountRegenerateKeyParameters {
   /**
    * Optional flag indicating whether to skip account keys last usage check.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseAccountRegenerateKeyParameters.skipAccountKeysLastUsageCheck has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_04_01_preview)
   skipAccountKeysLastUsageCheck?: boolean;
 }
@@ -3779,6 +3833,7 @@ model ThroughputPolicyResource {
   /**
    * Determines whether the ThroughputPolicy is active or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ThroughputPolicyResource.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
@@ -3804,6 +3859,7 @@ model ThroughputBucketResource {
   /**
    * Indicates whether this is the default throughput bucket
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ThroughputBucketResource.isDefaultBucket has a boolean wire value; preserve the published property contract."
   isDefaultBucket?: boolean;
 }
 
@@ -4064,6 +4120,7 @@ model IndexingPolicy {
   /**
    * Indicates if the indexing policy is automatic
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IndexingPolicy.automatic has a boolean wire value; preserve the published property contract."
   automatic?: boolean;
 
   /**
@@ -4233,6 +4290,7 @@ model ContainerPartitionKey {
   /**
    * Indicates if the container is using a system generated partition key
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerPartitionKey.systemKey has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   systemKey?: boolean;
 }
@@ -4482,6 +4540,7 @@ model MergeParameters {
   /**
    * Specifies whether the operation is a real merge operation or a simulation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MergeParameters.isDryRun has a boolean wire value; preserve the published property contract."
   isDryRun?: boolean;
 }
 
@@ -5102,6 +5161,7 @@ model MongoIndexOptions {
   /**
    * Is unique or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MongoIndexOptions.unique has a boolean wire value; preserve the published property contract."
   unique?: boolean;
 }
 
@@ -5670,12 +5730,14 @@ model LocationProperties {
   /**
    * Flag indicating whether the location supports availability zones or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LocationProperties.supportsAvailabilityZone has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   supportsAvailabilityZone?: boolean;
 
   /**
    * Flag indicating whether the location is residency sensitive.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LocationProperties.isResidencyRestricted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isResidencyRestricted?: boolean;
 
@@ -5688,12 +5750,14 @@ model LocationProperties {
   /**
    * Flag indicating whether the subscription have access in region for Non-Availability Zones.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LocationProperties.isSubscriptionRegionAccessAllowedForRegular has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isSubscriptionRegionAccessAllowedForRegular?: boolean;
 
   /**
    * Flag indicating whether the subscription have access in region for Availability Zones(Az).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LocationProperties.isSubscriptionRegionAccessAllowedForAz has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isSubscriptionRegionAccessAllowedForAz?: boolean;
 
@@ -5977,6 +6041,7 @@ model ClusterResourceProperties {
   /**
    * Should automatic repairs run on this cluster? If omitted, this is true, and should stay true unless you are running a hybrid cluster where you are already doing your own repairs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ClusterResourceProperties.repairEnabled has a boolean wire value; preserve the published property contract."
   repairEnabled?: boolean;
 
   /**
@@ -6029,11 +6094,13 @@ model ClusterResourceProperties {
   /**
    * Whether the cluster and associated data centers has been deallocated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ClusterResourceProperties.deallocated has a boolean wire value; preserve the published property contract."
   deallocated?: boolean;
 
   /**
    * Whether Cassandra audit logging is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ClusterResourceProperties.cassandraAuditLoggingEnabled has a boolean wire value; preserve the published property contract."
   cassandraAuditLoggingEnabled?: boolean;
 
   /**
@@ -6222,11 +6289,13 @@ model CommandPostBody {
    * If true, stops cassandra before executing the command and then start it again
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CommandPostBody.cassandra-stop-start has a boolean wire value; preserve the published property contract."
   `cassandra-stop-start`?: boolean;
 
   /**
    * If true, allows the command to *write* to the cassandra directory, otherwise read-only.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CommandPostBody.readwrite has a boolean wire value; preserve the published property contract."
   readwrite?: boolean;
 }
 
@@ -6265,11 +6334,13 @@ model CommandAsyncPostBody {
    * If true, stops cassandra before executing the command and then start it again
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CommandAsyncPostBody.cassandra-stop-start has a boolean wire value; preserve the published property contract."
   `cassandra-stop-start`?: boolean;
 
   /**
    * If true, allows the command to *write* to the cassandra directory, otherwise read-only.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CommandAsyncPostBody.readWrite has a boolean wire value; preserve the published property contract."
   readWrite?: boolean;
 }
 
@@ -6301,16 +6372,19 @@ model CommandPublicResource {
   /**
    * Whether command has admin privileges
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CommandPublicResource.isAdmin has a boolean wire value; preserve the published property contract."
   isAdmin?: boolean;
 
   /**
    * If true, stops cassandra before executing the command and then start it again
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CommandPublicResource.cassandraStopStart has a boolean wire value; preserve the published property contract."
   cassandraStopStart?: boolean;
 
   /**
    * If true, allows the command to *write* to the cassandra directory, otherwise read-only.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CommandPublicResource.readWrite has a boolean wire value; preserve the published property contract."
   readWrite?: boolean;
 
   /**
@@ -6479,6 +6553,7 @@ model DataCenterResourceProperties {
   /**
    * If the data center has Availability Zone support, apply it to the Virtual Machine ScaleSet that host the cassandra data center virtual machines.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataCenterResourceProperties.availabilityZone has a boolean wire value; preserve the published property contract."
   availabilityZone?: boolean;
 
   /**
@@ -6489,6 +6564,7 @@ model DataCenterResourceProperties {
   /**
    * Whether the data center has been deallocated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataCenterResourceProperties.deallocated has a boolean wire value; preserve the published property contract."
   deallocated?: boolean;
 
   /**
@@ -6577,6 +6653,7 @@ model CassandraClusterPublicStatus {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedCassandraReaperStatus {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedCassandraReaperStatus.healthy has a boolean wire value; preserve the published property contract."
   healthy?: boolean;
 
   /**
@@ -6735,6 +6812,7 @@ model ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersIt
   /**
    * If node has been updated to latest model
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersItemsPropertiesNodesItems.isLatestModel has a boolean wire value; preserve the published property contract."
   isLatestModel?: boolean;
 }
 

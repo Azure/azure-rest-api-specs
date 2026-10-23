@@ -192,6 +192,7 @@ model AgentsPagedResult<T> {
   last_id?: string;
 
   /** A value indicating whether there are additional values available not captured in this list. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AgentsPagedResult.has_more has a boolean wire value; preserve the published property contract."
   has_more: boolean;
 }
 

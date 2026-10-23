@@ -21,6 +21,7 @@ namespace Microsoft.EdgeOperator;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "SystemReadiness is a read-only, provider-computed singleton exposed via GET only. It has no write or long-running operations, so it has no provisioning lifecycle and intentionally does not carry a provisioningState property."
 model SystemReadinessProperties {
   /** Indicates whether the system is ready. `true` when every readiness category has reported 100 percent. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SystemReadinessProperties.systemReady has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   systemReady: boolean;
 

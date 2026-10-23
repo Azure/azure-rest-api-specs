@@ -50,6 +50,7 @@ model TaskProperties is AzureResourceProperties {
   @doc("Task Dislay Name ")
   displayName: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TaskProperties.isEditable has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the task is editable.")
   @visibility(Lifecycle.Read)
   isEditable: boolean;

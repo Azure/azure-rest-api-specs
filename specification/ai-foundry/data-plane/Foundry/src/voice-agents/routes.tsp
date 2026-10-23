@@ -57,6 +57,7 @@ interface VoiceAgentWebSocket {
    *    or hosted-agent voice agents; those requests fail with `400 Bad Request`.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "A successful WebSocket 101 protocol switch has no HTTP entity body; messages begin as WebSocket frames after the upgrade."
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing connectVoiceAgent SDK method name; renaming it would break client compatibility."
   @summary("Connect to a voice agent")
   @get
   @sharedRoute
@@ -88,6 +89,7 @@ interface VoiceAgentWebSocket {
        * persisted voice agent definition's configured `store` value. If supplied, this value overrides the
        * definition's `store` setting for this session only.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing connectVoiceAgent.store has a boolean wire value; preserve the published property contract."
       @query store?: boolean;
 
       /**
@@ -341,6 +343,7 @@ interface AgentEndpointConversations {
    * returned by the item's `/audio` metadata route — so this route returns `409 Conflict` for BYOS recordings.
    * Returns `404` when the conversation, item, or its audio was not persisted (`store = false`).
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing downloadAudioItem SDK method name; renaming it would break client compatibility."
   @summary("Stream a voice agent conversation item's audio")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content")
@@ -393,6 +396,7 @@ interface AgentEndpointConversations {
    * Returns `404` when the conversation or item was not persisted, or when no generated audio exists beyond the
    * heard segment.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing downloadGeneratedAudioItem SDK method name; renaming it would break client compatibility."
   @summary("Stream a voice agent conversation item's generated audio")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated/content")
@@ -451,6 +455,7 @@ interface AgentEndpointConversations {
    * For a `completed` conversation, content is available subject to the existing BYOS behavior. A conversation
    * without persisted audio (`store = false`) returns `404`.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing downloadAudio SDK method name; renaming it would break client compatibility."
   @summary("Stream a voice agent conversation's merged recording")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio/content")

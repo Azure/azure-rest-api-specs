@@ -84,6 +84,7 @@ model KafkaConnectionDetails extends ConnectionBaseProperties {
   @doc("The OCID of the Kafka cluster being referenced.")
   clusterId?: Ocid;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KafkaConnectionDetails.shouldUseResourcePrincipal has a boolean wire value; preserve the published property contract."
   @doc("Indicates if resource principal should be used for authentication.")
   shouldUseResourcePrincipal?: boolean;
 }

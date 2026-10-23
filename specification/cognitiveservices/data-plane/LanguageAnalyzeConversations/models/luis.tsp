@@ -47,19 +47,23 @@ model LuisParameters extends AnalysisParameters {
 @access(Access.internal, "python")
 model LuisCallingOptions {
   /** Enable verbose response. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LuisCallingOptions.verbose has a boolean wire value; preserve the published property contract."
   verbose?: boolean;
 
   /** Save log to add in training utterances later. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LuisCallingOptions.log has a boolean wire value; preserve the published property contract."
   log?: boolean;
 
   /** Set true to show all intents. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LuisCallingOptions.show-all-intents has a boolean wire value; preserve the published property contract."
   `show-all-intents`?: boolean;
 
   /** The timezone offset for the location of the request. */
   timezoneOffset?: int32;
 
   /** Enable spell checking. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LuisCallingOptions.spellCheck has a boolean wire value; preserve the published property contract."
   spellCheck?: boolean;
 
   /** The subscription key to use when enabling Bing spell check */

@@ -36,6 +36,7 @@ model PipelineProperties {
   @doc("Detailed description of the Pipeline.")
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PipelineProperties.enabled has a boolean wire value; preserve the published property contract."
   @doc("Flag indicating whether the pipeline should be running or not.")
   enabled: boolean;
 

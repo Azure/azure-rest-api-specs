@@ -42,6 +42,7 @@ interface ReservationOrderResponses {
       /**
        * May be used to expand the planInformation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -53,6 +54,7 @@ interface ReservationOrderResponses {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing purchase retains its tenant-scoped route; preserve published resource IDs and API paths."
   @tag("Reservation, Purchase")
   @summary("Purchase `ReservationOrder`")
   purchase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<

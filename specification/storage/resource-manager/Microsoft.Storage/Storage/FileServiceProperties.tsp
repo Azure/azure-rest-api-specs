@@ -58,6 +58,7 @@ interface FileServices {
   /**
    * List all file services in storage accounts
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     FileServiceProperties,
     Response = ArmResponse<FileServiceItems>,
@@ -78,6 +79,7 @@ interface FileServices {
       /**
        * Optional. Specified maximum number of shares that can be included in the list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing fileSharesList.$maxpagesize retains the $maxpagesize query parameter; preserve wire compatibility."
       @query("$maxpagesize")
       $maxpagesize?: string;
 
@@ -90,6 +92,7 @@ interface FileServices {
       /**
        * Optional, used to expand the properties within share's properties. Valid values are: deleted, snapshots. Should be passed as a string with delimiter ','
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing fileSharesList.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },

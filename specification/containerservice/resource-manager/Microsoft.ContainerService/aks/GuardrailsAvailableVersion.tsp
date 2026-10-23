@@ -91,6 +91,7 @@ union GuardrailsSupport {
 @added(Versions.v2026_08_02_preview)
 model GuardrailsAvailableVersionsProperties {
   /** Whether this is the default version. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GuardrailsAvailableVersionsProperties.isDefaultVersion has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDefaultVersion?: boolean;
 

@@ -518,6 +518,7 @@ model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
   scheduledOn: utcDateTime;
 
   /** Unavailable For Matching for Router Job Received */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AcsRouterJobReceivedEventData.unavailableForMatching has a boolean wire value; preserve the published property contract."
   unavailableForMatching: boolean;
 }
 
@@ -620,6 +621,7 @@ model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
   scheduledOn: utcDateTime;
 
   /** Router Job Waiting For Activation Unavailable For Matching */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AcsRouterJobWaitingForActivationEventData.unavailableForMatching has a boolean wire value; preserve the published property contract."
   unavailableForMatching: boolean;
 }
 
@@ -1144,12 +1146,14 @@ model AcsCallingEventProperties {
   room?: AcsCallRoomProperties;
 
   /** Is two-party in calling event. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AcsCallingEventProperties.isTwoParty has a boolean wire value; preserve the published property contract."
   isTwoParty?: boolean;
 
   /** The correlationId of calling event */
   correlationId: string;
 
   /** Is the calling event a room call. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AcsCallingEventProperties.isRoomsCall has a boolean wire value; preserve the published property contract."
   isRoomsCall?: boolean;
 }
 
@@ -1378,6 +1382,7 @@ model AcsIncomingCallTeamsPhoneCallerDetails {
   screenPopUrl?: string;
 
   /** Whether the caller was authenticated. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AcsIncomingCallTeamsPhoneCallerDetails.isAuthenticated has a boolean wire value; preserve the published property contract."
   isAuthenticated?: boolean;
 
   /** Additional caller information keyed by field name. */
@@ -1467,6 +1472,7 @@ model MicrosoftTeamsUserIdentifierModel {
   userId: string;
 
   /** True if the Microsoft Teams user is anonymous. By default false if missing. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MicrosoftTeamsUserIdentifierModel.isAnonymous has a boolean wire value; preserve the published property contract."
   isAnonymous?: boolean;
 
   /** The cloud that the Microsoft Teams user belongs to. By default 'public' if missing. */
@@ -1590,6 +1596,7 @@ model AcsMessageMediaContent {
   caption?: string;
 
   /** Optional. Set to true if the sticker is animated; false otherwise. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AcsMessageMediaContent.animated has a boolean wire value; preserve the published property contract."
   animated?: boolean;
 }
 

@@ -110,6 +110,7 @@ interface ServerlessEndpoints {
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
     },

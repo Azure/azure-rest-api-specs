@@ -64,6 +64,7 @@ interface SandboxStreamsOperations {
       @query logFormat?: LogFormat;
 
       /** Whether to continue streaming new log records. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getSandboxLogStream.follow has a boolean wire value; preserve the published property contract."
       @query follow?: boolean;
 
       /** The container whose logs are streamed. */

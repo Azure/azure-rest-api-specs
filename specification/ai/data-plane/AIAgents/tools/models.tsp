@@ -989,6 +989,7 @@ model ToolApproval {
   @encodedName("application/json", "tool_call_id")
   toolCallId: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ToolApproval.approve has a boolean wire value; preserve the published property contract."
   @doc("The approval boolean value to be submitted.")
   approve: boolean;
 

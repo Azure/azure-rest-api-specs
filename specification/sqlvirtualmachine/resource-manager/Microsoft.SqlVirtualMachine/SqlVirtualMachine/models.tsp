@@ -391,6 +391,7 @@ model AvailabilityGroupListenerProperties {
   /**
    * Create a default availability group if it does not exist.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AvailabilityGroupListenerProperties.createDefaultAvailabilityGroupIfNotExist has a boolean wire value; preserve the published property contract."
   createDefaultAvailabilityGroupIfNotExist?: boolean;
 
   /**
@@ -613,6 +614,7 @@ model WsfcDomainProfile {
   /**
    * The flag to check if SQL service account is GMSA.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WsfcDomainProfile.isSqlServiceAccountGmsa has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Update)
   isSqlServiceAccountGmsa?: boolean;
 
@@ -778,6 +780,7 @@ model SqlVirtualMachineProperties {
   /**
    * Enable automatic upgrade of Sql IaaS extension Agent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlVirtualMachineProperties.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean = false;
 
   /**
@@ -829,6 +832,7 @@ model AutoPatchingSettings {
   /**
    * Enable or disable autopatching on SQL virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutoPatchingSettings.enable has a boolean wire value; preserve the published property contract."
   enable?: boolean;
 
   /**
@@ -859,11 +863,13 @@ model AutoBackupSettings {
   /**
    * Enable or disable autobackup on SQL virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutoBackupSettings.enable has a boolean wire value; preserve the published property contract."
   enable?: boolean;
 
   /**
    * Enable or disable encryption for backup on SQL virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutoBackupSettings.enableEncryption has a boolean wire value; preserve the published property contract."
   enableEncryption?: boolean;
 
   /**
@@ -899,6 +905,7 @@ model AutoBackupSettings {
   /**
    * Include or exclude system databases from auto backup.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutoBackupSettings.backupSystemDbs has a boolean wire value; preserve the published property contract."
   backupSystemDbs?: boolean;
 
   /**
@@ -939,6 +946,7 @@ model KeyVaultCredentialSettings {
   /**
    * Enable or disable key vault credential setting.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KeyVaultCredentialSettings.enable has a boolean wire value; preserve the published property contract."
   enable?: boolean;
 
   /**
@@ -1067,6 +1075,7 @@ model AdditionalFeaturesServerConfigurations {
    * Enable or disable R services (SQL 2016 onwards).
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AdditionalFeaturesServerConfigurations.isRServicesEnabled has a boolean wire value; preserve the published property contract."
   isRServicesEnabled?: boolean;
 }
 
@@ -1088,6 +1097,7 @@ model SQLInstanceSettings {
   /**
    * SQL Server Optimize for Adhoc workloads.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SQLInstanceSettings.isOptimizeForAdHocWorkloadsEnabled has a boolean wire value; preserve the published property contract."
   isOptimizeForAdHocWorkloadsEnabled?: boolean;
 
   /**
@@ -1105,11 +1115,13 @@ model SQLInstanceSettings {
   /**
    * SQL Server LPIM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SQLInstanceSettings.isLpimEnabled has a boolean wire value; preserve the published property contract."
   isLpimEnabled?: boolean;
 
   /**
    * SQL Server IFI.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SQLInstanceSettings.isIfiEnabled has a boolean wire value; preserve the published property contract."
   isIfiEnabled?: boolean;
 }
 
@@ -1146,6 +1158,7 @@ model StorageConfigurationSettings {
   /**
    * SQL Server SystemDb Storage on DataPool if true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageConfigurationSettings.sqlSystemDbOnDataDisk has a boolean wire value; preserve the published property contract."
   sqlSystemDbOnDataDisk?: boolean;
 
   /**
@@ -1162,6 +1175,7 @@ model StorageConfigurationSettings {
   /**
    * Enable SQL IaaS Agent storage configuration blade in Azure Portal.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageConfigurationSettings.enableStorageConfigBlade has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Create, Lifecycle.Update)
   enableStorageConfigBlade?: boolean = false;
 }
@@ -1184,6 +1198,7 @@ model SQLStorageSettings {
   /**
    * Use storage pool to build a drive if true or not provided
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SQLStorageSettings.useStoragePool has a boolean wire value; preserve the published property contract."
   useStoragePool?: boolean;
 }
 
@@ -1220,6 +1235,7 @@ model SQLTempDbSettings {
   /**
    * SQL Server tempdb persist folder choice
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SQLTempDbSettings.persistFolder has a boolean wire value; preserve the published property contract."
   persistFolder?: boolean;
 
   /**
@@ -1240,6 +1256,7 @@ model SQLTempDbSettings {
   /**
    * Use storage pool to build a drive if true or not provided
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SQLTempDbSettings.useStoragePool has a boolean wire value; preserve the published property contract."
   useStoragePool?: boolean;
 }
 
@@ -1314,11 +1331,13 @@ model AssessmentSettings {
   /**
    * Enable or disable SQL best practices Assessment feature on SQL virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AssessmentSettings.enable has a boolean wire value; preserve the published property contract."
   enable?: boolean;
 
   /**
    * Run SQL best practices Assessment immediately on SQL virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AssessmentSettings.runImmediately has a boolean wire value; preserve the published property contract."
   runImmediately?: boolean;
 
   /**
@@ -1334,6 +1353,7 @@ model Schedule {
   /**
    * Enable or disable assessment schedule on SQL virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Schedule.enable has a boolean wire value; preserve the published property contract."
   enable?: boolean;
 
   /**
@@ -1379,6 +1399,7 @@ model DiskConfigAssessmentRequest {
   /**
    * Boolean to run disk config Assessment. Use false to fetch past Assessment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DiskConfigAssessmentRequest.runDiskConfigRules has a boolean wire value; preserve the published property contract."
   runDiskConfigRules?: boolean;
 }
 

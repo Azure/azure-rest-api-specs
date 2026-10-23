@@ -1190,6 +1190,7 @@ model NetworkInterfaceProperties {
   @doc("DNS Settings for the interface")
   dnsSettings?: InterfaceDNSSettings;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkInterfaceProperties.createFromLocal has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_02_01_preview)
   @doc("Boolean indicating whether this is a existing local network interface or if one should be created.")
   createFromLocal?: boolean = false;
@@ -1205,6 +1206,7 @@ model NetworkInterfaceProperties {
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkInterfaceProperties.bypassSdnPolicies has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_09_01_preview)
   @doc("This setting is applicable only when SDN is supported and enabled in the environment. Indicates whether SDN policies should be bypassed for this network interface. By default, SDN is enabled. Set this value to true only if you want to disable SDN for the network interface.")
   bypassSdnPolicies?: boolean;
@@ -1965,6 +1967,7 @@ model NetworkInterfacesUpdateProperties {
   @doc("DNS Settings for the interface")
   dnsSettings?: InterfaceDNSSettings;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkInterfacesUpdateProperties.bypassSdnPolicies has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_09_01_preview)
   @doc("This setting is applicable only when SDN is supported and enabled in the environment. Indicates whether SDN policies should be bypassed for this network interface. By default, SDN is enabled. Set this value to true only if you want to disable SDN for the network interface.")
   bypassSdnPolicies?: boolean;
@@ -2113,6 +2116,7 @@ model VirtualHardDiskProperties {
   @doc("Size of the disk in GB")
   diskSizeGB?: int64;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualHardDiskProperties.dynamic has a boolean wire value; preserve the published property contract."
   @doc("Boolean for enabling dynamic sizing on the virtual hard disk")
   dynamic?: boolean;
 
@@ -2135,6 +2139,7 @@ model VirtualHardDiskProperties {
   @doc("The format of the actual VHD file [vhd, vhdx]")
   diskFileFormat?: DiskFileFormat;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualHardDiskProperties.createFromLocal has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_02_01_preview)
   @doc("Boolean indicating whether it is an existing local hard disk or if one should be created.")
   createFromLocal?: boolean = false;
@@ -2319,6 +2324,7 @@ model VirtualMachineInstanceProperties {
   @doc("HTTP Proxy configuration for the VM.")
   httpProxyConfig?: HttpProxyConfiguration;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineInstanceProperties.createFromLocal has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_02_01_preview)
   @doc("Boolean indicating whether this is an existing local virtual machine or if one should be created.")
   createFromLocal?: boolean = false;
@@ -2394,6 +2400,7 @@ model VirtualMachineInstancePropertiesPlacementProfile {
   @doc("The zone in which the VM should be placed in.")
   zone?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineInstancePropertiesPlacementProfile.strictPlacementPolicy has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether VM can only failover strictly within the zone it was placed in")
   strictPlacementPolicy?: boolean;
 }
@@ -2411,6 +2418,7 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
   @doc("Defines the amount of extra memory that should be reserved for a virtual machine instance at runtime, as a percentage of the total memory that the virtual machine instance is thought to need. This only applies to virtual systems with dynamic memory enabled. This property can be in the range of 5 to 2000.")
   targetMemoryBuffer?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig.enabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_07_01_preview)
   @doc("Specifies whether dynamic memory is enabled for the virtual machine instance. When omitted, dynamic memory remains enabled; setting this to false converts the virtual machine instance to static memory.")
   enabled?: boolean;
@@ -2460,6 +2468,7 @@ model VirtualMachineInstancePropertiesOsProfile {
 
 @doc("LinuxConfiguration - linux specific configuration values for the virtual machine instance")
 model VirtualMachineInstancePropertiesOsProfileLinuxConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineInstancePropertiesOsProfileLinuxConfiguration.disablePasswordAuthentication has a boolean wire value; preserve the published property contract."
   @doc("DisablePasswordAuthentication - whether password authentication should be disabled")
   disablePasswordAuthentication?: boolean;
 
@@ -2467,10 +2476,12 @@ model VirtualMachineInstancePropertiesOsProfileLinuxConfiguration {
   ssh?: SshConfiguration;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineInstancePropertiesOsProfileLinuxConfiguration.provisionVMAgent has a boolean wire value; preserve the published property contract."
   @doc("Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process.")
   provisionVMAgent?: boolean = true;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineInstancePropertiesOsProfileLinuxConfiguration.provisionVMConfigAgent has a boolean wire value; preserve the published property contract."
   @doc("Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process.")
   provisionVMConfigAgent?: boolean = true;
 }
@@ -2493,6 +2504,7 @@ model SshPublicKey {
 
 @doc("Windows Configuration for the virtual machine instance")
 model VirtualMachineInstancePropertiesOsProfileWindowsConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineInstancePropertiesOsProfileWindowsConfiguration.enableAutomaticUpdates has a boolean wire value; preserve the published property contract."
   @doc("Whether to EnableAutomaticUpdates on the machine")
   enableAutomaticUpdates?: boolean;
 
@@ -2503,10 +2515,12 @@ model VirtualMachineInstancePropertiesOsProfileWindowsConfiguration {
   timeZone?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineInstancePropertiesOsProfileWindowsConfiguration.provisionVMAgent has a boolean wire value; preserve the published property contract."
   @doc("Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process.")
   provisionVMAgent?: boolean = true;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineInstancePropertiesOsProfileWindowsConfiguration.provisionVMConfigAgent has a boolean wire value; preserve the published property contract."
   @doc("Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process.")
   provisionVMConfigAgent?: boolean = true;
 }
@@ -2514,6 +2528,7 @@ model VirtualMachineInstancePropertiesOsProfileWindowsConfiguration {
 @doc("SecurityProfile - Specifies the security settings for the virtual machine instance.")
 model VirtualMachineInstancePropertiesSecurityProfile {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "TPM is a short form. It is the correct case"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineInstancePropertiesSecurityProfile.enableTPM has a boolean wire value; preserve the published property contract."
   @doc("Enable TPM flag")
   enableTPM?: boolean = false;
 
@@ -2526,6 +2541,7 @@ model VirtualMachineInstancePropertiesSecurityProfile {
 
 @doc("Uefi settings - Specifies whether secure boot should be enabled on the virtual machine instance.")
 model VirtualMachineInstancePropertiesSecurityProfileUefiSettings {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineInstancePropertiesSecurityProfileUefiSettings.secureBootEnabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether secure boot should be enabled on the virtual machine instance.")
   secureBootEnabled?: boolean = false;
 }
@@ -2804,10 +2820,12 @@ model OsProfileUpdate {
 @doc("OSProfile update linux configuration")
 model OsProfileUpdateLinuxConfiguration {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OsProfileUpdateLinuxConfiguration.provisionVMAgent has a boolean wire value; preserve the published property contract."
   @doc("Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process.")
   provisionVMAgent?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OsProfileUpdateLinuxConfiguration.provisionVMConfigAgent has a boolean wire value; preserve the published property contract."
   @doc("Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process.")
   provisionVMConfigAgent?: boolean;
 }
@@ -2815,10 +2833,12 @@ model OsProfileUpdateLinuxConfiguration {
 @doc("OSProfile update windows configuration")
 model OsProfileUpdateWindowsConfiguration {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OsProfileUpdateWindowsConfiguration.provisionVMAgent has a boolean wire value; preserve the published property contract."
   @doc("Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process.")
   provisionVMAgent?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OsProfileUpdateWindowsConfiguration.provisionVMConfigAgent has a boolean wire value; preserve the published property contract."
   @doc("Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process.")
   provisionVMConfigAgent?: boolean;
 }
@@ -2917,6 +2937,7 @@ model GuestCredential {
 @added(Versions.v2026_04_01_preview)
 @doc("The operation gracefully shuts down a virtual machine by requesting the operating system to shut down. The virtual machine can be restarted with the same provisioned resources. To force an immediate shut down, see the skipShutdown flag.")
 model PowerOffVirtualMachineOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PowerOffVirtualMachineOptions.skipShutdown has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether to perform an immediate shut down. When set to true, the VM is forcefully shut down. If not specified, the default value is false, and the operation attempts a graceful shut down of the VM.")
   skipShutdown?: boolean = false;
 }

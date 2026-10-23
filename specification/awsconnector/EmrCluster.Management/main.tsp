@@ -72,6 +72,7 @@ model AwsEmrClusterProperties {
   @doc("<p>An IAM role for automatic scaling policies. The default role is <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate Amazon EC2 instances in an instance group.</p>")
   autoScalingRole?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsEmrClusterProperties.autoTerminate has a boolean wire value; preserve the published property contract."
   @doc("<p>Specifies whether the cluster should terminate after completing all steps.</p>")
   autoTerminate?: boolean;
 
@@ -162,12 +163,15 @@ model AwsEmrClusterProperties {
   @identifiers(#[])
   tags?: Tag[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsEmrClusterProperties.terminationProtected has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether Amazon EMR will lock the cluster to prevent the Amazon EC2 instances from being terminated by an API call or user intervention, or in the event of a cluster error.</p>")
   terminationProtected?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsEmrClusterProperties.unhealthyNodeReplacement has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether Amazon EMR should gracefully replace Amazon EC2 core instances that have degraded within the cluster.</p>")
   unhealthyNodeReplacement?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsEmrClusterProperties.visibleToAllUsers has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When <code>true</code>, IAM principals in the Amazon Web Services account can perform Amazon EMR cluster actions on the cluster that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform Amazon EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>true</code> if a value is not provided when creating a cluster using the Amazon EMR API <a>RunJobFlow</a> command, the CLI <a href='https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html'>create-cluster</a> command, or the Amazon Web Services Management Console.</p>")
   visibleToAllUsers?: boolean;
 }

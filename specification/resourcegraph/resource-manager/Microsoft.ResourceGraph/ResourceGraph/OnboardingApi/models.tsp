@@ -623,6 +623,7 @@ model OntologyProperties {
    * `validationDetails` reports the gaps, but no new supply is created. Existing approved supply
    * can still satisfy the ontology; unmet demand keeps its derived `reviewStatus` at `Submitted`.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OntologyProperties.autoOnboard has a boolean wire value; preserve the published property contract."
   autoOnboard?: boolean = false;
 
   /**

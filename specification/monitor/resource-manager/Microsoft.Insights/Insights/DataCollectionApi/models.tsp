@@ -1896,6 +1896,7 @@ model OtelLogsDataSource {
   /**
    * Specifies whether to replace the default resourceId in the log record with the resourceId of the referenced resource being used for enrichment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OtelLogsDataSource.replaceResourceIdWithReference has a boolean wire value; preserve the published property contract."
   replaceResourceIdWithReference?: boolean;
 
   /**
@@ -1956,6 +1957,7 @@ model OtelTracesDataSource {
   /**
    * Specifies whether to replace the default resourceId in the log record with the resourceId of the referenced resource being used for enrichment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OtelTracesDataSource.replaceResourceIdWithReference has a boolean wire value; preserve the published property contract."
   replaceResourceIdWithReference?: boolean;
 
   /**
@@ -2127,6 +2129,7 @@ model OtelLogsDirectDataSource {
   /**
    * Specifies whether to replace the default resourceId in the log record with the resourceId of the referenced resource being used for enrichment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OtelLogsDirectDataSource.replaceResourceIdWithReference has a boolean wire value; preserve the published property contract."
   replaceResourceIdWithReference?: boolean;
 
   /**
@@ -2159,6 +2162,7 @@ model OtelTracesDirectDataSource {
   /**
    * Specifies whether to replace the default resourceId in the log record with the resourceId of the referenced resource being used for enrichment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OtelTracesDirectDataSource.replaceResourceIdWithReference has a boolean wire value; preserve the published property contract."
   replaceResourceIdWithReference?: boolean;
 
   /**
@@ -2449,6 +2453,7 @@ model DataFlow {
   /**
    * Flag to enable overflow column in LA destinations
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataFlow.captureOverflow has a boolean wire value; preserve the published property contract."
   captureOverflow?: boolean;
 }
 

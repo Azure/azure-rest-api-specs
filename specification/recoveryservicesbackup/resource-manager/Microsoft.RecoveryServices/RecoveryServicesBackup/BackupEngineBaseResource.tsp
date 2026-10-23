@@ -45,12 +45,14 @@ interface BackupEngines {
       /**
        * OData filter options.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$filter retains the $filter query parameter; preserve wire compatibility."
       @query("$filter")
       $filter?: string;
 
       /**
        * skipToken Filter.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }
@@ -72,6 +74,7 @@ interface BackupEngines {
       /**
        * skipToken Filter.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },

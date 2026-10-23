@@ -425,6 +425,7 @@ interface Path {
   /** Read the contents of a file. For read operations, range requests are supported. This operation supports conditional HTTP requests. For more information, see [Specifying Conditional Headers for Blob Service Operations](https://learn.microsoft.com/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing read SDK method name; renaming it would break client compatibility."
   @get
   @sharedRoute
   read is DataLakeOperationResponseBody<
@@ -437,6 +438,7 @@ interface Path {
 
       /** Optional. When this header is set to "true" and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4MB in size. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing read.rangeGetContentMD5 has a boolean wire value; preserve the published property contract."
       @header("x-ms-range-get-content-md5")
       rangeGetContentMD5?: boolean;
 

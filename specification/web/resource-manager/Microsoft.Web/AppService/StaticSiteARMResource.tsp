@@ -328,6 +328,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Gets the private link resources
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getPrivateLinkResources retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the private link resources")
   @get
   @action("privateLinkResources")

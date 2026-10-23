@@ -45,6 +45,7 @@ model SqlInstanceExtendedDetails {
   @visibility(Lifecycle.Read)
   memoryInUseInMB?: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlInstanceExtendedDetails.hasScanOccurred has a boolean wire value; preserve the published property contract."
   @doc("Gets or sets a value indicating whether SQL instance has been deep discovered.")
   @visibility(Lifecycle.Read)
   hasScanOccurred?: boolean;
@@ -69,10 +70,12 @@ model SqlInstanceExtendedDetails {
   @visibility(Lifecycle.Read)
   availabilityReplicaSummary?: SqlAvailabilityReplicaSummary;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlInstanceExtendedDetails.isClustered has a boolean wire value; preserve the published property contract."
   @doc("Gets a value indicating whether the SQL instance is clustered or not.")
   @visibility(Lifecycle.Read)
   isClustered?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlInstanceExtendedDetails.isHighAvailabilityEnabled has a boolean wire value; preserve the published property contract."
   @doc("Gets a value indicating whether the high availability is enabled or not.")
   @visibility(Lifecycle.Read)
   isHighAvailabilityEnabled?: boolean;

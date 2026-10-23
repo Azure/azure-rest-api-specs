@@ -63,6 +63,7 @@ model ProviderOperation {
   /**
    * The dataAction flag to specify the operation type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ProviderOperation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 }
 

@@ -90,6 +90,7 @@ op accountsCreateOrUpdate(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing accountsDelete SDK method name; renaming it would break client compatibility."
 op accountsDelete(
   /**
    * Name of the account.
@@ -110,6 +111,7 @@ op accountsDelete(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing accountsGet SDK method name; renaming it would break client compatibility."
 op accountsGet(
   /**
    * Name of the account.
@@ -184,6 +186,7 @@ op enterpriseCreateOrUpdate(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing enterpriseGet SDK method name; renaming it would break client compatibility."
 op enterpriseGet(
   /**
    * Name of the EnterprisePolicy.

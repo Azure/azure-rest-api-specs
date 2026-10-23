@@ -112,6 +112,7 @@ interface Vaults {
       /**
        * Maximum number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -127,6 +128,7 @@ interface Vaults {
       /**
        * Maximum number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -150,6 +152,7 @@ interface Vaults {
   /**
    * Gets the private link resources supported for the key vault.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByVault retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("privateLinkResources")
   listByVault is ArmResourceActionSync<

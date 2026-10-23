@@ -492,6 +492,7 @@ interface NetworkWatchers {
   /**
    * Gets the specified connection analyzer by name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing connectionAnalyzersGet SDK method name; renaming it would break client compatibility."
   @added(Versions.v2025_09_01)
   @tag("ConnectionAnalyzers")
   @get
@@ -535,6 +536,7 @@ interface NetworkWatchers {
   /**
    * Lists all connection analyzers in the specified network watcher.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing connectionAnalyzersList SDK method name; renaming it would break client compatibility."
   @added(Versions.v2025_09_01)
   @tag("ConnectionAnalyzers")
   @list

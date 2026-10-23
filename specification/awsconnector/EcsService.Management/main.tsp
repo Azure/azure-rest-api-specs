@@ -81,9 +81,11 @@ model AwsEcsServiceProperties {
   @doc("The number of instantiations of the specified task definition to place and keep running in your service. For new services, if a desired count is not specified, a default value of ``1`` is used. When using the ``DAEMON`` scheduling strategy, the desired count is not required. For existing services, if a desired count is not specified, it is omitted from the operation.")
   desiredCount?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsEcsServiceProperties.enableECSManagedTags has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether to turn on Amazon ECS managed tags for the tasks within the service. For more information, see [Tagging your Amazon ECS resources](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html) in the *Amazon Elastic Container Service Developer Guide*. When you use Amazon ECS managed tags, you need to set the ``propagateTags`` request parameter.")
   enableECSManagedTags?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsEcsServiceProperties.enableExecuteCommand has a boolean wire value; preserve the published property contract."
   @doc("Determines whether the execute command functionality is turned on for the service. If ``true``, the execute command functionality is turned on for all containers in tasks as part of the service.")
   enableExecuteCommand?: boolean;
 
@@ -329,6 +331,7 @@ union PlacementStrategyType {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ServiceConnectConfiguration")
 model ServiceConnectConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServiceConnectConfiguration.enabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether to use Service Connect with this service.")
   enabled?: boolean;
 
@@ -397,9 +400,11 @@ model DeploymentAlarms {
   @doc("One or more CloudWatch alarm names. Use a ',' to separate the alarms.")
   alarmNames?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentAlarms.enable has a boolean wire value; preserve the published property contract."
   @doc("Determines whether to use the CloudWatch alarm option in the service deployment process.")
   enable?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentAlarms.rollback has a boolean wire value; preserve the published property contract."
   @doc("Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is used, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.")
   rollback?: boolean;
 }
@@ -410,9 +415,11 @@ model DeploymentAlarms {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DeploymentCircuitBreaker")
 model DeploymentCircuitBreaker {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentCircuitBreaker.enable has a boolean wire value; preserve the published property contract."
   @doc("Determines whether to use the deployment circuit breaker logic for the service.")
   enable?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentCircuitBreaker.rollback has a boolean wire value; preserve the published property contract."
   @doc("Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is on, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.")
   rollback?: boolean;
 }
@@ -493,6 +500,7 @@ model ServiceConnectService {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ServiceManagedEBSVolumeConfiguration")
 model ServiceManagedEBSVolumeConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServiceManagedEBSVolumeConfiguration.encrypted has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the volume should be encrypted. If no value is specified, encryption is turned on by default. This parameter maps 1:1 with the ``Encrypted`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.")
   encrypted?: boolean;
 

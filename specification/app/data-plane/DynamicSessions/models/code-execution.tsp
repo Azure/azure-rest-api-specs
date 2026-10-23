@@ -27,10 +27,12 @@ model SessionCodeExecutionRequest {
   outputStreamsMaxLength?: int32;
 
   /** Whether to use empty kernel for this execution. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SessionCodeExecutionRequest.useEmptyKernel has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_10_02_preview)
   useEmptyKernel?: boolean;
 
   /** Whether to formats primitive Python results (bool, int, float, string, None) as JSON strings or null. Default to false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SessionCodeExecutionRequest.returnJupyterFormatExecutionResult has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_10_02_preview)
   returnJupyterFormatExecutionResult?: boolean;
 

@@ -68,6 +68,7 @@ model AwsSqsQueueProperties {
   @doc("Property arn")
   arn?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsSqsQueueProperties.contentBasedDeduplication has a boolean wire value; preserve the published property contract."
   @doc("For first-in-first-out (FIFO) queues, specifies whether to enable content-based deduplication. During the deduplication interval, SQS treats messages that are sent with identical content as duplicates and delivers only one copy of the message. For more information, see the ``ContentBasedDeduplication`` attribute for the ``CreateQueue`` action in the *API Reference*.")
   contentBasedDeduplication?: boolean;
 
@@ -77,6 +78,7 @@ model AwsSqsQueueProperties {
   @doc("The time in seconds for which the delivery of all messages in the queue is delayed. You can specify an integer value of ``0`` to ``900`` (15 minutes). The default value is ``0``.")
   delaySeconds?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsSqsQueueProperties.fifoQueue has a boolean wire value; preserve the published property contract."
   @doc("If set to true, creates a FIFO queue. If you don't specify this property, SQS creates a standard queue. For more information, see [FIFO queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html) in the *Developer Guide*.")
   fifoQueue?: boolean;
 
@@ -110,6 +112,7 @@ model AwsSqsQueueProperties {
   @doc("The string that includes the parameters for the dead-letter queue functionality of the source queue as a JSON object. The parameters are as follows:  +  ``deadLetterTargetArn``: The Amazon Resource Name (ARN) of the dead-letter queue to which SQS moves messages after the value of ``maxReceiveCount`` is exceeded.  +  ``maxReceiveCount``: The number of times a message is delivered to the source queue before being moved to the dead-letter queue. When the ``ReceiveCount`` for a message exceeds the ``maxReceiveCount`` for a queue, SQS moves the message to the dead-letter-queue.    The dead-letter queue of a FIFO queue must also be a FIFO queue. Similarly, the dead-letter queue of a standard queue must also be a standard queue.   *JSON*   ``{ 'deadLetterTargetArn' : String, 'maxReceiveCount' : Integer }``   *YAML*   ``deadLetterTargetArn : String``   ``maxReceiveCount : Integer``")
   redrivePolicy?: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsSqsQueueProperties.sqsManagedSseEnabled has a boolean wire value; preserve the published property contract."
   @doc("Enables server-side queue encryption using SQS owned encryption keys. Only one server-side encryption option is supported per queue (for example, [SSE-KMS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html) or [SSE-SQS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html)). When ``SqsManagedSseEnabled`` is not defined, ``SSE-SQS`` encryption is enabled by default.")
   sqsManagedSseEnabled?: boolean;
 

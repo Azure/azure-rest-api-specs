@@ -473,6 +473,7 @@ model SelfServeExemptionSettings {
   /**
    * Indicates whether self-serve exemption is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SelfServeExemptionSettings.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -773,6 +774,7 @@ model ParameterDefinitionsValueMetadata {
   /**
    * Set to true to have Azure portal create role assignments on the resource ID or resource scope value of this parameter during policy assignment. This property is useful in case you wish to assign permissions outside the assignment scope.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ParameterDefinitionsValueMetadata.assignPermissions has a boolean wire value; preserve the published property contract."
   assignPermissions?: boolean;
 }
 
@@ -1830,6 +1832,7 @@ model DataManifestCustomResourceFunctionDefinition {
   /**
    * A value indicating whether the custom properties within the property bag are allowed. Needs api-version to be specified in the policy rule eg - vault('2019-06-01').
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataManifestCustomResourceFunctionDefinition.allowCustomProperties has a boolean wire value; preserve the published property contract."
   allowCustomProperties?: boolean;
 }
 
@@ -1903,6 +1906,7 @@ model DataPolicyManifestProperties {
   /**
    * A value indicating whether policy mode is allowed only in built-in definitions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataPolicyManifestProperties.isBuiltInOnly has a boolean wire value; preserve the published property contract."
   isBuiltInOnly?: boolean;
 
   /**

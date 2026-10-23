@@ -112,6 +112,7 @@ interface ElasticPools {
       /**
        * The number of elements in the collection to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByServer.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: int64;
     }

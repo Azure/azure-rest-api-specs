@@ -35,6 +35,7 @@ interface Offers {
    * Update or add an offer to a specific collection of the private store.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Offer,
     Response = ArmResourceUpdatedResponse<Offer>,

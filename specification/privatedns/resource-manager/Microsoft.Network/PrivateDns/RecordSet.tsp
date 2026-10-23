@@ -160,12 +160,14 @@ interface RecordSets {
       /**
        * The maximum number of record sets to return. If not specified, returns up to 100 record sets.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByType.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * The suffix label of the record set name to be used to filter the record set enumeration. If this parameter is specified, the returned enumeration will only contain records that end with ".<recordsetnamesuffix>".
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByType.$recordsetnamesuffix retains the $recordsetnamesuffix query parameter; preserve wire compatibility."
       @query("$recordsetnamesuffix")
       $recordsetnamesuffix?: string;
     },

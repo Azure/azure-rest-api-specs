@@ -64,6 +64,7 @@ model IdentityConfigurationProperties {
   @doc("The identity type of the Community Training Resource")
   identityType: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IdentityConfigurationProperties.teamsEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("To indicate whether the Community Training Resource has Teams enabled")
   teamsEnabled?: boolean = false;
@@ -120,10 +121,12 @@ model CommunityTrainingProperties {
   @doc("The identity configuration of the Community Training resource")
   identityConfiguration: IdentityConfigurationProperties;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CommunityTrainingProperties.zoneRedundancyEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("To indicate whether the Community Training instance has Zone Redundancy enabled")
   zoneRedundancyEnabled: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CommunityTrainingProperties.disasterRecoveryEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("To indicate whether the Community Training instance has Disaster Recovery enabled")
   disasterRecoveryEnabled: boolean;

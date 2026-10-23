@@ -77,6 +77,7 @@ model NodeCustomizationScript {
   @example("touch /hello_world.txt")
   script?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NodeCustomizationScript.rebootAfter has a boolean wire value; preserve the published property contract."
   @doc("Whether the node should reboot after successful script execution.")
   rebootAfter?: boolean;
 }

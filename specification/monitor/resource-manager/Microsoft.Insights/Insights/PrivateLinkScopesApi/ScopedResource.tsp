@@ -73,6 +73,7 @@ interface ScopedResources {
       /**
        * The kind of the private link resource. Not specifying a kind will return scoped resources of all kinds.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByPrivateLinkScope.kind retains the kind query parameter; preserve wire compatibility."
       @query("kind")
       kind?: string;
     }

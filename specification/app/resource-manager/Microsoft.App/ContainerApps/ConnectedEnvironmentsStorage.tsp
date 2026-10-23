@@ -51,6 +51,7 @@ interface ConnectedEnvironmentsStorages {
   /**
    * Get all storages for a connectedEnvironment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get all storages for a connectedEnvironment.")
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     ConnectedEnvironmentStorage,

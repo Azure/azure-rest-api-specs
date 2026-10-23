@@ -86,6 +86,7 @@ interface LogAnalyticsQueryPacks {
        * Flag indicating whether or not to return the body of each applicable query. If false, only return the query information.
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing search POST contract uses includeBody in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing search.includeBody has a boolean wire value; preserve the published property contract."
       @query("includeBody")
       includeBody?: boolean;
 

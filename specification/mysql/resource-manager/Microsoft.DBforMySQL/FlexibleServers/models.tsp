@@ -1885,6 +1885,7 @@ model NameAvailability {
   /**
    * Indicates whether the resource name is available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NameAvailability.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**

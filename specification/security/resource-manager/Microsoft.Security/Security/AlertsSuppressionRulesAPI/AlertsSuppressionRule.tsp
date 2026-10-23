@@ -70,6 +70,7 @@ interface AlertsSuppressionRules {
        * Type of the alert to get rules for
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.AlertType retains the AlertType query parameter; preserve wire compatibility."
       @query("AlertType")
       AlertType?: string;
     },

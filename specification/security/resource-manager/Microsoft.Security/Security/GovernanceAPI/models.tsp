@@ -137,6 +137,7 @@ model GovernanceAssignmentProperties {
   /**
    * Defines whether there is a grace period on the governance assignment
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GovernanceAssignmentProperties.isGracePeriod has a boolean wire value; preserve the published property contract."
   isGracePeriod?: boolean;
 
   /**
@@ -173,11 +174,13 @@ model GovernanceEmailNotification {
   /**
    * Exclude manager from weekly email notification.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GovernanceEmailNotification.disableManagerEmailNotification has a boolean wire value; preserve the published property contract."
   disableManagerEmailNotification?: boolean;
 
   /**
    * Exclude  owner from weekly email notification.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GovernanceEmailNotification.disableOwnerEmailNotification has a boolean wire value; preserve the published property contract."
   disableOwnerEmailNotification?: boolean;
 }
 
@@ -250,6 +253,7 @@ model GovernanceRuleProperties {
   /**
    * Defines whether there is a grace period on the governance rule
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GovernanceRuleProperties.isGracePeriod has a boolean wire value; preserve the published property contract."
   isGracePeriod?: boolean;
 
   /**
@@ -262,6 +266,7 @@ model GovernanceRuleProperties {
   /**
    * Defines whether the rule is active/inactive
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GovernanceRuleProperties.isDisabled has a boolean wire value; preserve the published property contract."
   isDisabled?: boolean;
 
   /**
@@ -288,6 +293,7 @@ model GovernanceRuleProperties {
   /**
    * Defines whether the rule is management scope rule (master connector as a single scope or management scope)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GovernanceRuleProperties.includeMemberScopes has a boolean wire value; preserve the published property contract."
   includeMemberScopes?: boolean;
 
   @doc("The owner source for the governance rule - e.g. Manually by user@contoso.com - see example")
@@ -326,11 +332,13 @@ model GovernanceRuleEmailNotification {
   /**
    * Defines whether manager email notifications are disabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GovernanceRuleEmailNotification.disableManagerEmailNotification has a boolean wire value; preserve the published property contract."
   disableManagerEmailNotification?: boolean;
 
   /**
    * Defines whether owner email notifications are disabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GovernanceRuleEmailNotification.disableOwnerEmailNotification has a boolean wire value; preserve the published property contract."
   disableOwnerEmailNotification?: boolean;
 }
 
@@ -372,6 +380,7 @@ model ExecuteGovernanceRuleParams {
   /**
    * Describe if governance rule should be override
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExecuteGovernanceRuleParams.override has a boolean wire value; preserve the published property contract."
   override?: boolean;
 }
 

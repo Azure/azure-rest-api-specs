@@ -136,6 +136,7 @@ interface Policies {
    * Updates the policies for a customer at billing account scope. This operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdateByCustomerAtBillingAccount retains its tenant-scoped route; preserve published resource IDs and API paths."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Policy")
   createOrUpdateByCustomerAtBillingAccount is PolicyOps.CreateOrUpdateAsync<

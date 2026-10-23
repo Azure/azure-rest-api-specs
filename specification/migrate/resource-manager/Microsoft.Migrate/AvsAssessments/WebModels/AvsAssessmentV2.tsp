@@ -55,6 +55,7 @@ model AvsAssessmentSettings is AssessmentSettings {
   @doc("Gets or sets the CPU headroom.")
   cpuHeadroom?: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AvsAssessmentSettings.isVcfByolEnabled has a boolean wire value; preserve the published property contract."
   @doc("Is VCF license applied")
   isVcfByolEnabled?: boolean;
 
@@ -64,6 +65,7 @@ model AvsAssessmentSettings is AssessmentSettings {
   @doc("De-duplication compression.")
   dedupeCompression?: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AvsAssessmentSettings.isStretchClusterEnabled has a boolean wire value; preserve the published property contract."
   @doc("Is Stretch Cluster Enabled.")
   isStretchClusterEnabled?: boolean;
 }

@@ -843,6 +843,7 @@ model AccountMergeInfo {
    * The deprovisioned status of the account.
    * Only applicable for the secondary account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccountMergeInfo.deprovisioned has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   deprovisioned?: boolean;
 
@@ -1336,6 +1337,7 @@ model Operation {
   /**
    * Whether operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -1511,6 +1513,7 @@ model DimensionProperties {
   /**
    * flag indicating whether this dimension should be included to the customer in Azure Monitor logs (aka Shoebox)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DimensionProperties.toBeExportedForCustomer has a boolean wire value; preserve the published property contract."
   toBeExportedForCustomer?: boolean;
 }
 
@@ -1570,6 +1573,7 @@ model CheckNameAvailabilityResult {
   /**
    * Indicates if name is valid and available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**

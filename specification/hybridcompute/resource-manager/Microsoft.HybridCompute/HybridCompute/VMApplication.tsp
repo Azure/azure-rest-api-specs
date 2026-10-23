@@ -43,6 +43,7 @@ interface VmApplications {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "The established ARM instance view pattern is a GET action."
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "The established ARM instance view pattern is a GET action."
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getInstanceView retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("instanceView")
   getInstanceView is ArmResourceActionSync<VmApplication, void, VmApplication>;
@@ -75,12 +76,14 @@ interface VmApplications {
       /**
        * The maximum number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32 = 100;
 
       /**
        * The continuation token for the next page of results.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },

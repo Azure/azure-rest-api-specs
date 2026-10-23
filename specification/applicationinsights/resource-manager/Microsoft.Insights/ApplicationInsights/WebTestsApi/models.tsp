@@ -56,6 +56,7 @@ model WebTestProperties {
    * Is the test actively being monitored.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebTestProperties.Enabled has a boolean wire value; preserve the published property contract."
   Enabled?: boolean;
 
   /**
@@ -80,6 +81,7 @@ model WebTestProperties {
    * Allow for retries should this WebTest fail.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebTestProperties.RetryEnabled has a boolean wire value; preserve the published property contract."
   RetryEnabled?: boolean;
 
   /**
@@ -172,12 +174,14 @@ model WebTestPropertiesRequest {
    * Parse Dependent request for this WebTest.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebTestPropertiesRequest.ParseDependentRequests has a boolean wire value; preserve the published property contract."
   ParseDependentRequests?: boolean;
 
   /**
    * Follow redirects for this web test.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebTestPropertiesRequest.FollowRedirects has a boolean wire value; preserve the published property contract."
   FollowRedirects?: boolean;
 }
 
@@ -210,6 +214,7 @@ model WebTestPropertiesValidationRules {
    * Checks to see if the SSL cert is still valid.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebTestPropertiesValidationRules.SSLCheck has a boolean wire value; preserve the published property contract."
   SSLCheck?: boolean;
 
   /**
@@ -228,6 +233,7 @@ model WebTestPropertiesValidationRules {
    * When set, validation will ignore the status code.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebTestPropertiesValidationRules.IgnoreHttpStatusCode has a boolean wire value; preserve the published property contract."
   IgnoreHttpStatusCode?: boolean;
 }
 
@@ -245,12 +251,14 @@ model WebTestPropertiesValidationRulesContentValidation {
    * When set, this value makes the ContentMatch validation case insensitive.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebTestPropertiesValidationRulesContentValidation.IgnoreCase has a boolean wire value; preserve the published property contract."
   IgnoreCase?: boolean;
 
   /**
    * When true, validation will pass if there is a match for the ContentMatch string.  If false, validation will fail if there is a match
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebTestPropertiesValidationRulesContentValidation.PassIfTextFound has a boolean wire value; preserve the published property contract."
   PassIfTextFound?: boolean;
 }
 

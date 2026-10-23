@@ -60,6 +60,7 @@ model SqlAssessmentSettings is AssessmentSettings {
   @doc("Gets or sets user preference indicating intent of async commit mode.")
   asyncCommitModeIntent?: AsyncCommitModeIntent;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlAssessmentSettings.isInternetAccessAvailable has a boolean wire value; preserve the published property contract."
   @doc("Gets or sets a value indicating whether internet access is available.")
   isInternetAccessAvailable?: boolean;
 
@@ -69,6 +70,7 @@ model SqlAssessmentSettings is AssessmentSettings {
     """)
   disasterRecoveryLocation?: AzureLocation;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlAssessmentSettings.enableHadrAssessment has a boolean wire value; preserve the published property contract."
   @doc("Gets or sets a value indicating whether HADR assessments needs to be created.")
   enableHadrAssessment?: boolean;
 

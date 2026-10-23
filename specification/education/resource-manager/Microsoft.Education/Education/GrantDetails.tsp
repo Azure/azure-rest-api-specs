@@ -84,6 +84,8 @@ interface Grants {
       /**
        * May be used to include information about budget that has been allocated.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing get.includeAllocatedBudget has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.includeAllocatedBudget retains the includeAllocatedBudget query parameter; preserve wire compatibility."
       @query("includeAllocatedBudget")
       includeAllocatedBudget?: boolean;
     },
@@ -99,6 +101,8 @@ interface Grants {
       /**
        * May be used to include information about budget that has been allocated.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.includeAllocatedBudget has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.includeAllocatedBudget retains the includeAllocatedBudget query parameter; preserve wire compatibility."
       @query("includeAllocatedBudget")
       includeAllocatedBudget?: boolean;
     },
@@ -115,6 +119,8 @@ interface Grants {
       /**
        * May be used to include information about budget that has been allocated.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listAll.includeAllocatedBudget has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAll.includeAllocatedBudget retains the includeAllocatedBudget query parameter; preserve wire compatibility."
       @query("includeAllocatedBudget")
       includeAllocatedBudget?: boolean;
     },

@@ -29,6 +29,7 @@ interface VirtualNetworks {
       /**
        * Expands referenced resources.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -85,6 +86,8 @@ interface VirtualNetworks {
    * Checks whether a private IP address is available for use.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing checkIPAddressAvailability retains its response and SDK paging behavior; preserve published compatibility."
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing checkIPAddressAvailability SDK method name; renaming it would break client compatibility."
   @get
   @action("CheckIPAddressAvailability")
   checkIPAddressAvailability is ArmResourceActionSync<
@@ -96,6 +99,7 @@ interface VirtualNetworks {
        * The private IP address to be verified.
        */
       #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing checkIPAddressAvailability.ipAddress retains the ipAddress query parameter; preserve wire compatibility."
       @query("ipAddress")
       ipAddress: string;
     },

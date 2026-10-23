@@ -18,6 +18,7 @@ interface AgentWebsocket {
    *
    * The client must send an HTTP GET with `Upgrade: websocket` headers.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing connectEndpointWebsocket SDK method name; renaming it would break client compatibility."
   @summary("Establish a WebSocket connection to a hosted agent")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/invocations_ws")

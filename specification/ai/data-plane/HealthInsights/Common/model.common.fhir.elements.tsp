@@ -24,6 +24,7 @@ alias value_x = {
   @doc("Value as string")
   valueString?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing value_x.valueBoolean has a boolean wire value; preserve the published property contract."
   @doc("Value as boolean")
   valueBoolean?: boolean;
 

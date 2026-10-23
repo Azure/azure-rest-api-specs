@@ -66,6 +66,7 @@ interface GroupIdInformations {
   /**
    * List private link resources for the given provisioning service
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listPrivateLinkResources retains its response and SDK paging behavior; preserve published compatibility."
   listPrivateLinkResources is GroupIdInformationsOps.ListSinglePage<
     GroupIdInformation,
     Response = ArmResponse<PrivateLinkResources>

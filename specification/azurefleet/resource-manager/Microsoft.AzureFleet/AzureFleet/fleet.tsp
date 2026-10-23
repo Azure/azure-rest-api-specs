@@ -197,6 +197,7 @@ model SpotPriorityProfile is BasePriorityProfile {
   @doc("Allocation strategy to follow when determining the VM sizes distribution for Spot VMs.")
   allocationStrategy?: SpotAllocationStrategy;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SpotPriorityProfile.maintain has a boolean wire value; preserve the published property contract."
   @added(Versions.v2024_05_01_preview)
   @doc("""
     Flag to enable/disable continuous goal seeking for the desired capacity and restoration of evicted Spot VMs.
@@ -254,12 +255,14 @@ union EvictionPolicy {
 @doc("AdditionalCapabilities for VM.")
 model AdditionalCapabilities {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "ultraSSDEnabled which does not follow camel casing"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AdditionalCapabilities.ultraSSDEnabled has a boolean wire value; preserve the published property contract."
   @doc("""
     The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS.
     Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled.
     """)
   ultraSSDEnabled?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AdditionalCapabilities.hibernationEnabled has a boolean wire value; preserve the published property contract."
   @doc("The flag that enables or disables hibernation capability on the VM.")
   hibernationEnabled?: boolean;
 }
@@ -677,6 +680,7 @@ alias ListVirtualMachinesParameters = {
   @query
   $filter?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ListVirtualMachinesParameters.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
   @doc("Skip token for pagination. Uses the token from a previous response to fetch the next page of results.")
   @query
   $skiptoken?: string;

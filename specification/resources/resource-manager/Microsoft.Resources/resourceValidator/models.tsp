@@ -34,6 +34,7 @@ model ResourceValidationRequest {
   validationType?: ResourceValidationType;
 
   /** If true, the validation will be performed without checking RBAC write permissions. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ResourceValidationRequest.performPreflightWithoutRbacWriteCheck has a boolean wire value; preserve the published property contract."
   performPreflightWithoutRbacWriteCheck?: boolean;
 }
 
@@ -54,6 +55,7 @@ model ResourceValidationRequestResource {
   apiVersion: string;
 
   /** Set this to true if this resource is meant to be provisioned only if it does not exist. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ResourceValidationRequestResource.onlyIfNotExists has a boolean wire value; preserve the published property contract."
   onlyIfNotExists?: boolean;
 
   ...Record<unknown>;

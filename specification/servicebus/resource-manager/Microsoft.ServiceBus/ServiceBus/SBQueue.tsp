@@ -73,6 +73,7 @@ interface SBQueues {
       /**
        * Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByNamespace.$skip retains the $skip query parameter; preserve wire compatibility."
       @maxValue(1000)
       @query("$skip")
       $skip?: int32;
@@ -80,6 +81,7 @@ interface SBQueues {
       /**
        * May be used to limit the number of results to the most recent N usageDetails.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByNamespace.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @minValue(1)
       @query("$top")

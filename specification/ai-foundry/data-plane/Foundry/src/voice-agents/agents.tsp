@@ -162,6 +162,7 @@ model VoiceAgentDefinition extends AgentDefinition {
     """)
   tool_choice?: VoiceAgentToolChoice = VoiceAgentToolChoice.auto;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VoiceAgentDefinition.parallel_tool_calls has a boolean wire value; preserve the published property contract."
   @doc("Whether the model may call multiple tools in parallel.")
   parallel_tool_calls?: boolean;
 
@@ -171,6 +172,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.")
   subagent_config?: VoiceAgentSubagentConfig;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VoiceAgentDefinition.store has a boolean wire value; preserve the published property contract."
   @doc("""
     Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
     `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
@@ -215,6 +217,7 @@ model VoiceAgentSubagent {
 @doc("Policy for delivering responses while a voice agent waits for a subagent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSubagentResponsePolicy {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VoiceAgentSubagentResponsePolicy.immediate_ack has a boolean wire value; preserve the published property contract."
   @doc("Whether the voice agent provides an immediate acknowledgement before forwarding a request to a subagent.")
   immediate_ack?: boolean;
 
@@ -230,6 +233,7 @@ model VoiceAgentSubagentResponsePolicy {
   @doc("Instructions used to generate gap-filling speech while waiting for progress.")
   gap_filling_instructions?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VoiceAgentSubagentResponsePolicy.enable_delta_progress has a boolean wire value; preserve the published property contract."
   @doc("Whether progress updates are emitted incrementally instead of only when the subagent invocation completes. Defaults to `false`.")
   enable_delta_progress?: boolean = false;
 
@@ -601,6 +605,7 @@ model VoiceAgentTurnDetectionConfig {
   @doc("The turn-detection strategy.")
   type: VoiceAgentTurnDetectionType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VoiceAgentTurnDetectionConfig.auto_truncate has a boolean wire value; preserve the published property contract."
   @doc("Whether the input audio buffer is truncated automatically when speech stops.")
   auto_truncate?: boolean = false;
 }
@@ -689,12 +694,15 @@ alias VoiceAgentAzureSemanticVadOptions = {
   @doc("Minimum speech duration required to trigger detection, in milliseconds.")
   speech_duration_ms?: FoundryDurationMilliseconds;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VoiceAgentAzureSemanticVadOptions.remove_filler_words has a boolean wire value; preserve the published property contract."
   @doc("Whether filler words are removed from transcription.")
   remove_filler_words?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VoiceAgentAzureSemanticVadOptions.create_response has a boolean wire value; preserve the published property contract."
   @doc("Whether a response is created automatically when speech stops.")
   create_response?: boolean = true;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VoiceAgentAzureSemanticVadOptions.interrupt_response has a boolean wire value; preserve the published property contract."
   @doc("Whether user speech may interrupt the agent's response.")
   interrupt_response?: boolean = true;
 };
@@ -902,6 +910,7 @@ model VoiceAgentAvatarConfig {
   @doc("The avatar style, e.g. 'casual-sitting'.")
   style?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VoiceAgentAvatarConfig.customized has a boolean wire value; preserve the published property contract."
   @doc("Whether the avatar is a customer-customized avatar. Defaults to false.")
   customized?: boolean = false;
 
@@ -917,6 +926,7 @@ model VoiceAgentAvatarConfig {
   @doc("Avatar placement and motion settings.")
   scene?: VoiceAgentAvatarScene;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VoiceAgentAvatarConfig.output_audit_audio has a boolean wire value; preserve the published property contract."
   @doc("Whether audit audio is emitted with avatar output. Defaults to false.")
   output_audit_audio?: boolean = false;
 }
@@ -986,6 +996,7 @@ model GenerateVoiceAgentRequest {
   @doc("Optional tools carried through verbatim onto the generated agent (see `VoiceAgentTool`).")
   tools?: VoiceAgentTool[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GenerateVoiceAgentRequest.draft has a boolean wire value; preserve the published property contract."
   @doc("(Preview) When `true`, the generated voice agent is created as a draft — an editable, unpublished version the caller can review and refine before publishing it via the standard create/version path. The service defaults to `false` if a value is not specified by the caller, in which case the agent is created and published normally.")
   @extension(
     "x-ms-foundry-meta",

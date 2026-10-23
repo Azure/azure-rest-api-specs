@@ -448,6 +448,7 @@ model CheckNameAvailabilityOutput {
   /**
    * Indicates whether the name is available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckNameAvailabilityOutput.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
@@ -503,6 +504,7 @@ model SupportTicketDetailsProperties {
   /**
    * Indicates if this requires a 24x7 response from Azure.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SupportTicketDetailsProperties.require24X7Response has a boolean wire value; preserve the published property contract."
   require24X7Response?: boolean;
 
   /**

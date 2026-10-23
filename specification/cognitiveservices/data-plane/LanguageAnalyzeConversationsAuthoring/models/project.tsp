@@ -83,6 +83,7 @@ model AnalyzeConversationAuthoringProjectMetadata {
   /**
    * Whether the project would be used for multiple languages or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AnalyzeConversationAuthoringProjectMetadata.multilingual has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Create, Lifecycle.Read)
   multilingual?: boolean;
 
@@ -167,6 +168,7 @@ model AnalyzeConversationAuthoringCreateProjectOptions {
   /**
    * Whether the project would be used for multiple languages or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AnalyzeConversationAuthoringCreateProjectOptions.multilingual has a boolean wire value; preserve the published property contract."
   multilingual?: boolean;
 
   /**
@@ -198,6 +200,7 @@ model AnalyzeConversationAuthoringCopyAuthorizationOptions {
   /**
    * Whether to allow an existing project to be overwritten using the resulting copy authorization.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AnalyzeConversationAuthoringCopyAuthorizationOptions.allowOverwrite has a boolean wire value; preserve the published property contract."
   allowOverwrite?: boolean;
 }
 
@@ -639,6 +642,7 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
   /**
    * The flag to indicate if the trained model has a snapshot ready.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AnalyzeConversationAuthoringProjectTrainedModel.hasSnapshot has a boolean wire value; preserve the published property contract."
   hasSnapshot: boolean;
 }
 
@@ -1976,6 +1980,7 @@ model AnalyzeConversationAuthoringDataGenerationSettings {
   /**
    * Must be explicitly set to True to enable data generation to augment training data.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AnalyzeConversationAuthoringDataGenerationSettings.enableDataGeneration has a boolean wire value; preserve the published property contract."
   enableDataGeneration: boolean;
 
   /**

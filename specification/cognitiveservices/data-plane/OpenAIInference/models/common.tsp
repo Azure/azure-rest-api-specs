@@ -26,6 +26,7 @@ model OpenAIPageableListOf<T> {
   @doc("The last ID represented in this list.")
   lastId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OpenAIPageableListOf.hasMore has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "has_more")
   @doc("A value indicating whether there are additional values available not captured in this list.")
   hasMore?: boolean;

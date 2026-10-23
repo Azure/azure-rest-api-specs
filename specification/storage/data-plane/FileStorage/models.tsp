@@ -549,6 +549,7 @@ model DirectoryItem {
 /** An encoded string value. */
 model StringEncoded {
   /** Whether the value is encoded. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StringEncoded.encoded has a boolean wire value; preserve the published property contract."
   @Xml.attribute
   @Xml.name("Encoded")
   encoded?: boolean;
@@ -673,6 +674,7 @@ model ListFilesAndDirectoriesSegmentResponse {
   shareSnapshot?: string;
 
   /** Whether the listing is encoded. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ListFilesAndDirectoriesSegmentResponse.encoded has a boolean wire value; preserve the published property contract."
   @Xml.attribute
   @Xml.name("Encoded")
   encoded?: boolean;
@@ -758,6 +760,7 @@ model ShareItemInternal {
   @Xml.name("Snapshot") snapshot?: string;
 
   /** Whether the share is deleted. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ShareItemInternal.deleted has a boolean wire value; preserve the published property contract."
   @Xml.name("Deleted") deleted?: boolean;
 
   /** The share version. */
@@ -840,10 +843,12 @@ model SharePropertiesInternal {
   @Xml.name("RootSquash") rootSquash?: ShareRootSquash;
 
   /** Whether snapshot virtual directory access is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SharePropertiesInternal.enableSnapshotVirtualDirectoryAccess has a boolean wire value; preserve the published property contract."
   @Xml.name("EnableSnapshotVirtualDirectoryAccess")
   enableSnapshotVirtualDirectoryAccess?: boolean;
 
   /** Whether paid bursting is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SharePropertiesInternal.paidBurstingEnabled has a boolean wire value; preserve the published property contract."
   @Xml.name("PaidBurstingEnabled") paidBurstingEnabled?: boolean;
 
   /** The maximum IOPS for paid bursting. */
@@ -870,6 +875,7 @@ model SharePropertiesInternal {
   nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
 
   /** Whether SMB directory lease is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SharePropertiesInternal.enableSmbDirectoryLease has a boolean wire value; preserve the published property contract."
   @Xml.name("EnableSmbDirectoryLease") enableSmbDirectoryLease?: boolean;
 }
 
@@ -879,12 +885,14 @@ model Metrics {
   @Xml.name("Version") version: string;
 
   /** Indicates whether metrics are enabled for the File service. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Metrics.enabled has a boolean wire value; preserve the published property contract."
   @Xml.name("Enabled") enabled: boolean;
 
   /**
    * Indicates whether metrics should generate summary statistics for called API
    * operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Metrics.includeApis has a boolean wire value; preserve the published property contract."
   @Xml.name("IncludeAPIs") includeApis?: boolean;
 
   /** The retention policy. */
@@ -897,6 +905,7 @@ model RetentionPolicy {
    * Indicates whether a retention policy is enabled for the File service. If false,
    * metrics data is retained, and the user is responsible for deleting it.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RetentionPolicy.enabled has a boolean wire value; preserve the published property contract."
   @Xml.name("Enabled") enabled: boolean;
 
   /**
@@ -914,6 +923,7 @@ model RetentionPolicy {
 @Xml.name("Multichannel")
 model SmbMultichannel {
   /** If SMB multichannel is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SmbMultichannel.enabled has a boolean wire value; preserve the published property contract."
   @Xml.name("Enabled") enabled?: boolean;
 }
 
@@ -961,6 +971,7 @@ model ShareSmbSettings {
 /** Enable or disable encryption in transit. */
 model ShareSmbSettingsEncryptionInTransit {
   /** If encryption in transit is required */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ShareSmbSettingsEncryptionInTransit.required has a boolean wire value; preserve the published property contract."
   @Xml.name("Required") required?: boolean;
 }
 
@@ -975,6 +986,7 @@ model ShareNfsSettings {
 /** Enable or disable encryption in transit. */
 model ShareNfsSettingsEncryptionInTransit {
   /** If encryption in transit is required */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ShareNfsSettingsEncryptionInTransit.required has a boolean wire value; preserve the published property contract."
   @Xml.name("Required") required?: boolean;
 }
 
@@ -1234,6 +1246,7 @@ alias FileRequestIntentParameter = {
 /** Allow trailing dot parameter. */
 alias AllowTrailingDotParameter = {
   /** If true, the trailing dot will not be trimmed from the target file/directory path. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AllowTrailingDotParameter.allowTrailingDot has a boolean wire value; preserve the published property contract."
   @header("x-ms-allow-trailing-dot")
   allowTrailingDot?: boolean;
 };
@@ -1241,6 +1254,7 @@ alias AllowTrailingDotParameter = {
 /** Source allow trailing dot parameter. */
 alias SourceAllowTrailingDotParameter = {
   /** If true, the trailing dot will not be trimmed from the source URI. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SourceAllowTrailingDotParameter.allowSourceTrailingDot has a boolean wire value; preserve the published property contract."
   @header("x-ms-source-allow-trailing-dot")
   allowSourceTrailingDot?: boolean;
 };
@@ -1336,6 +1350,7 @@ alias ShareQuotaOptionalHeader = {
 /** Recursive parameter (header). */
 alias RecursiveParameter = {
   /** Specifies operation should apply to the directory specified in the URI, its files, its subdirectories and their files. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RecursiveParameter.recursive has a boolean wire value; preserve the published property contract."
   @header("x-ms-recursive")
   recursive?: boolean;
 };
@@ -1459,6 +1474,7 @@ alias FileContentRequestHeaders = {
 /** Paid bursting request headers for share operations. */
 alias PaidBurstingRequestHeaders = {
   /** Optional. Boolean. Default if not specified is false. This property enables paid bursting. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PaidBurstingRequestHeaders.paidBurstingEnabled has a boolean wire value; preserve the published property contract."
   @header("x-ms-share-paid-bursting-enabled") paidBurstingEnabled?: boolean;
 
   /** Optional. Integer. Default if not specified is the maximum IOPS the file share can support. Current maximum for a file share is 102,400 IOPS. */
@@ -1483,6 +1499,7 @@ alias MaxBurstCreditsForIopsOptionalHeader = {
 /** Paid bursting response headers for share get properties. */
 alias PaidBurstingResponseHeaders = {
   /** Whether paid bursting is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PaidBurstingResponseHeaders.paidBurstingEnabled has a boolean wire value; preserve the published property contract."
   @header("x-ms-share-paid-bursting-enabled") paidBurstingEnabled?: boolean;
 
   /** The maximum IOPS for paid bursting. */
@@ -1573,6 +1590,7 @@ alias LeaseResponseHeaders = {
 /** Request server encrypted response header. */
 alias RequestServerEncryptedResponseHeader = {
   /** The value of this header is set to true if the contents of the request are successfully encrypted. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RequestServerEncryptedResponseHeader.requestServerEncrypted has a boolean wire value; preserve the published property contract."
   @header("x-ms-request-server-encrypted") requestServerEncrypted?: boolean;
 };
 
@@ -1582,10 +1600,12 @@ alias RenameRequestHeaders = {
   @header("x-ms-file-rename-source") renameSource: string;
 
   /** Boolean. Default value is false. Set to true to indicate that the destination should be overwritten. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RenameRequestHeaders.replaceIfExists has a boolean wire value; preserve the published property contract."
   @header("x-ms-file-rename-replace-if-exists")
   replaceIfExists?: boolean;
 
   /** Boolean. Default value is false. Set to true to overwrite the destination even if it has the read-only attribute set. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RenameRequestHeaders.ignoreReadOnly has a boolean wire value; preserve the published property contract."
   @header("x-ms-file-rename-ignore-readonly")
   ignoreReadOnly?: boolean;
 
@@ -1744,6 +1764,7 @@ alias ShareProvisionedBandwidthOptionalHeader = {
 /** Enable snapshot virtual directory access header. */
 alias EnableSnapshotVirtualDirectoryAccessHeader = {
   /** Optional. Used to enable snapshot virtual directory access. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EnableSnapshotVirtualDirectoryAccessHeader.enableSnapshotVirtualDirectoryAccess has a boolean wire value; preserve the published property contract."
   @header("x-ms-enable-snapshot-virtual-directory-access")
   enableSnapshotVirtualDirectoryAccess?: boolean;
 };
@@ -1751,6 +1772,7 @@ alias EnableSnapshotVirtualDirectoryAccessHeader = {
 /** Enable SMB directory lease header. */
 alias EnableSmbDirectoryLeaseHeader = {
   /** Optional. Used to enable SMB directory lease. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EnableSmbDirectoryLeaseHeader.enableSmbDirectoryLease has a boolean wire value; preserve the published property contract."
   @header("x-ms-enable-smb-directory-lease")
   enableSmbDirectoryLease?: boolean;
 };
@@ -1764,6 +1786,7 @@ alias DestinationLeaseIdParameter = {
 /** Server encrypted response header. */
 alias ServerEncryptedResponseHeader = {
   /** The value of this header indicates whether the file data and application metadata are completely encrypted. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServerEncryptedResponseHeader.serverEncrypted has a boolean wire value; preserve the published property contract."
   @header("x-ms-server-encrypted") serverEncrypted?: boolean;
 };
 
@@ -1789,6 +1812,7 @@ alias PreviousSnapshotParameter = {
 /** Support rename header. */
 alias SupportRenameHeader = {
   /** This header is allowed only when PrevShareSnapshot query parameter is set. Determines whether the changed ranges for a file that has been renamed or moved should be listed. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SupportRenameHeader.supportRename has a boolean wire value; preserve the published property contract."
   @header("x-ms-file-support-rename") supportRename?: boolean;
 };
 
@@ -1850,6 +1874,7 @@ alias EnabledProtocolsHeader = {
 /** File extended info header for directory listing. */
 alias FileExtendedInfoHeader = {
   /** Include extended information. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FileExtendedInfoHeader.includeExtendedInfo has a boolean wire value; preserve the published property contract."
   @header("x-ms-file-extended-info") includeExtendedInfo?: boolean;
 };
 
@@ -1863,6 +1888,7 @@ alias FilePermissionCopyModeHeader = {
 /** Ignore read-only header for copy operations. */
 alias IgnoreReadOnlyHeader = {
   /** A boolean value that specifies whether the ReadOnly attribute on a preexisting destination file should be respected or overridden. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IgnoreReadOnlyHeader.ignoreReadOnly has a boolean wire value; preserve the published property contract."
   @header("x-ms-file-copy-ignore-readonly")
   ignoreReadOnly?: boolean;
 };
@@ -1870,6 +1896,7 @@ alias IgnoreReadOnlyHeader = {
 /** Set archive attribute header for copy operations. */
 alias SetArchiveAttributeHeader = {
   /** Optional. Sets the archive attribute on the destination file. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SetArchiveAttributeHeader.setArchiveAttribute has a boolean wire value; preserve the published property contract."
   @header("x-ms-file-copy-set-archive")
   setArchiveAttribute?: boolean;
 };
@@ -1928,6 +1955,7 @@ alias TargetFileHeader = {
 alias RangeGetContentMD5Header = {
   /** When this header is set to true and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RangeGetContentMD5Header.rangeGetContentMD5 has a boolean wire value; preserve the published property contract."
   @header("x-ms-range-get-content-md5") rangeGetContentMD5?: boolean;
 };
 

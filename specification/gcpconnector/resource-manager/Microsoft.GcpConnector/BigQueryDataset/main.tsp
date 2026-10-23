@@ -174,16 +174,19 @@ model GcpBigQueryDatasetProperties {
   /**
    * Whether this dataset satisfies Protected Zone Shared requirements
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GcpBigQueryDatasetProperties.satisfiesPzs has a boolean wire value; preserve the published property contract."
   satisfiesPzs?: boolean;
 
   /**
    * Whether this dataset satisfies Protected Zone Isolated requirements
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GcpBigQueryDatasetProperties.satisfiesPzi has a boolean wire value; preserve the published property contract."
   satisfiesPzi?: boolean;
 
   /**
    * Whether this dataset is case insensitive
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GcpBigQueryDatasetProperties.isCaseInsensitive has a boolean wire value; preserve the published property contract."
   isCaseInsensitive?: boolean;
 
   /**

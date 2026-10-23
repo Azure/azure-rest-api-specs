@@ -129,6 +129,7 @@ model CsmOperationDescription {
   /**
    * Operation display name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CsmOperationDescription.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -231,11 +232,13 @@ model MetricSpecification {
   /**
    * Resource metric supported aggregation types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricSpecification.supportsInstanceLevelAggregation has a boolean wire value; preserve the published property contract."
   supportsInstanceLevelAggregation?: boolean;
 
   /**
    * Resource metric supported time grain types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricSpecification.enableRegionalMdmAccount has a boolean wire value; preserve the published property contract."
   enableRegionalMdmAccount?: boolean;
 
   /**
@@ -256,11 +259,13 @@ model MetricSpecification {
   /**
    * Resource metric fill gap with zero.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricSpecification.fillGapWithZero has a boolean wire value; preserve the published property contract."
   fillGapWithZero?: boolean;
 
   /**
    * Resource metric is internal.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricSpecification.isInternal has a boolean wire value; preserve the published property contract."
   isInternal?: boolean;
 
   /**
@@ -314,6 +319,7 @@ model Dimension {
   /**
    * Dimension to be exported for shoebox.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Dimension.toBeExportedForShoebox has a boolean wire value; preserve the published property contract."
   toBeExportedForShoebox?: boolean;
 }
 
@@ -450,6 +456,7 @@ model DomainAvailabilityCheckResult {
   /**
    * <code>true</code> if domain can be purchased using CreateDomain API; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DomainAvailabilityCheckResult.available has a boolean wire value; preserve the published property contract."
   available?: boolean;
 
   /**
@@ -512,6 +519,7 @@ model DomainProperties {
   /**
    * <code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DomainProperties.privacy has a boolean wire value; preserve the published property contract."
   privacy?: boolean;
 
   /**
@@ -538,11 +546,13 @@ model DomainProperties {
   /**
    * <code>true</code> if the domain should be automatically renewed; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DomainProperties.autoRenew has a boolean wire value; preserve the published property contract."
   autoRenew?: boolean = true;
 
   /**
    * <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and \n it is hosted on name servers Azure has programmatic access to.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DomainProperties.readyForDnsRecordManagement has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   readyForDnsRecordManagement?: boolean;
 
@@ -835,6 +845,7 @@ model DomainPatchResourceProperties {
   /**
    * <code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DomainPatchResourceProperties.privacy has a boolean wire value; preserve the published property contract."
   privacy?: boolean;
 
   /**
@@ -861,11 +872,13 @@ model DomainPatchResourceProperties {
   /**
    * <code>true</code> if the domain should be automatically renewed; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DomainPatchResourceProperties.autoRenew has a boolean wire value; preserve the published property contract."
   autoRenew?: boolean = true;
 
   /**
    * <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and \n it is hosted on name servers Azure has programmatic access to.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DomainPatchResourceProperties.readyForDnsRecordManagement has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   readyForDnsRecordManagement?: boolean;
 
@@ -968,6 +981,7 @@ model TopLevelDomainProperties {
   /**
    * If <code>true</code>, then the top level domain supports domain privacy; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TopLevelDomainProperties.privacy has a boolean wire value; preserve the published property contract."
   privacy?: boolean;
 }
 
@@ -978,11 +992,13 @@ model TopLevelDomainAgreementOption {
   /**
    * If <code>true</code>, then the list of agreements will include agreements for domain privacy as well; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TopLevelDomainAgreementOption.includePrivacy has a boolean wire value; preserve the published property contract."
   includePrivacy?: boolean;
 
   /**
    * If <code>true</code>, then the list of agreements will include agreements for domain transfer as well; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TopLevelDomainAgreementOption.forTransfer has a boolean wire value; preserve the published property contract."
   forTransfer?: boolean;
 }
 

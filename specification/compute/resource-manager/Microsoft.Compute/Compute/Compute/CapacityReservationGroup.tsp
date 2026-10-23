@@ -36,6 +36,7 @@ interface CapacityReservationGroups {
       /**
        * The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the capacity reservations under the capacity reservation group which is a snapshot of the runtime properties of a capacity reservation that is managed by the platform and can change outside of control plane operations.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: CapacityReservationGroupInstanceViewTypes;
     }
@@ -74,6 +75,7 @@ interface CapacityReservationGroups {
       /**
        * The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: ExpandTypesForGetCapacityReservationGroups;
     },
@@ -89,12 +91,14 @@ interface CapacityReservationGroups {
       /**
        * The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: ExpandTypesForGetCapacityReservationGroups;
 
       /**
        * The query option to fetch Capacity Reservation Group Resource Ids. <br> 'CreatedInSubscription' enables fetching Resource Ids for all capacity reservation group resources created in the subscription. <br> 'SharedWithSubscription' enables fetching Resource Ids for all capacity reservation group resources shared with the subscription. <br> 'All' enables fetching Resource Ids for all capacity reservation group resources shared with the subscription and created in the subscription.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.resourceIdsOnly retains the resourceIdsOnly query parameter; preserve wire compatibility."
       @query("resourceIdsOnly")
       resourceIdsOnly?: ResourceIdOptionsForGetCapacityReservationGroups;
     },

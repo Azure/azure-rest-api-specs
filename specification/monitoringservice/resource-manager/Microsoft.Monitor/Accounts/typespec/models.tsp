@@ -135,6 +135,7 @@ namespace Microsoft.Monitor {
     /**
      * Flag that indicates whether to enable access using resource permissions.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureMonitorWorkspaceMetrics.enableAccessUsingResourcePermissions has a boolean wire value; preserve the published property contract."
     enableAccessUsingResourcePermissions?: boolean;
   }
 

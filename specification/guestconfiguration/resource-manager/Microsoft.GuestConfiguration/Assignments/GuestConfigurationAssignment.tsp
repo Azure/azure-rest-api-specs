@@ -134,6 +134,7 @@ interface GuestConfigurationAssignments {
    * List all guest configuration assignments for a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing SubscriptionList SDK method name; renaming it would break client compatibility."
   SubscriptionList is Extension.ListByTarget<
     Extension.Subscription,
     GuestConfigurationAssignment,
@@ -147,6 +148,7 @@ interface GuestConfigurationAssignments {
   /**
    * List all reports for the guest configuration assignment, latest report first.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing guestConfigurationAssignmentReportsList retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("reports")
   guestConfigurationAssignmentReportsList is GuestConfigurationAssignmentOps.ActionSync<
@@ -299,6 +301,7 @@ interface GuestConfigurationHCRPAssignments {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing guestConfigurationHCRPAssignmentReportsList retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("reports")
   @operationId("GuestConfigurationHCRPAssignmentReports_List")
@@ -591,6 +594,7 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
    * List all reports for the guest configuration assignment, latest report first.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing guestConfigurationConnectedVMwarevSphereAssignmentsReportsList retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("reports")
   guestConfigurationConnectedVMwarevSphereAssignmentsReportsList is GuestConfigurationConnectedVMwarevSphereAssignmentOps.ActionSync<

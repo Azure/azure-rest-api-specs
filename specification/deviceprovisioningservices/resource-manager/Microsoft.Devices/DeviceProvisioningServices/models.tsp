@@ -316,6 +316,7 @@ model CertificateProperties {
   /**
    * Determines whether certificate has been verified.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateProperties.isVerified has a boolean wire value; preserve the published property contract."
   isVerified?: boolean;
 
   /**
@@ -426,6 +427,7 @@ model IotDpsPropertiesDescription {
    * Optional.
    * Indicates if the DPS instance has Data Residency enabled, removing the cross geo-pair disaster recovery.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IotDpsPropertiesDescription.enableDataResidency has a boolean wire value; preserve the published property contract."
   enableDataResidency?: boolean;
 
   /**
@@ -436,6 +438,7 @@ model IotDpsPropertiesDescription {
   /**
    * Disables all authentication methods other than Azure RBAC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IotDpsPropertiesDescription.disableLocalAuth has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01_preview)
   disableLocalAuth?: boolean = false;
 }
@@ -519,6 +522,7 @@ model IotHubDefinitionDescription {
   /**
    * flag for applying allocationPolicy or not for a given iot hub.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IotHubDefinitionDescription.applyAllocationPolicy has a boolean wire value; preserve the published property contract."
   applyAllocationPolicy?: boolean;
 
   /**
@@ -888,6 +892,7 @@ model VerificationCodeResponseProperties {
   /**
    * Indicate if the certificate is verified by owner of private key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VerificationCodeResponseProperties.isVerified has a boolean wire value; preserve the published property contract."
   isVerified?: boolean;
 
   /**
@@ -933,6 +938,7 @@ model NameAvailabilityInfo {
   /**
    * specifies if a name is available or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NameAvailabilityInfo.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**
@@ -996,6 +1002,7 @@ model CertificateBodyDescription {
   /**
    * True indicates that the certificate will be created in verified state and proof of possession will not be required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateBodyDescription.isVerified has a boolean wire value; preserve the published property contract."
   isVerified?: boolean;
 }
 

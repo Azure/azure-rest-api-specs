@@ -69,6 +69,7 @@ model AwsRdsDBInstanceProperties {
   @doc("The amount of storage in gibibytes (GiB) to be initially allocated for the database instance.  If any value is set in the ``Iops`` parameter, ``AllocatedStorage`` must be at least 100 GiB, which corresponds to the minimum Iops value of 1,000. If you increase the ``Iops`` value (in 1,000 IOPS increments), then you must also increase the ``AllocatedStorage`` value (in 100-GiB increments).    *Amazon Aurora*  Not applicable. Aurora cluster volumes automatically grow as the amount of data in your database increases, though you are only charged for the space that you use in an Aurora cluster volume.  *Db2*  Constraints to the amount of storage for each storage type are the following:  +  General Purpose (SSD) storage (gp3): Must be an integer from 20 to 64000.  +  Provisioned IOPS storage (io1): Must be an integer from 100 to 64000.    *MySQL*  Constraints to the amount of storage for each storage type are the following:   +  General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.  +  Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.  +  Magnetic storage (standard): Must be an integer from 5 to 3072.    *MariaDB*  Constraints to the amount of storage for each storage type are the following:   +  General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.  +  Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.  +  Magnetic storage (standard): Must be an integer from 5 to 3072.    *PostgreSQL*  Constraints to the amount of storage for each storage type are the following:   +  General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.  +  Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.  +  Magnetic storage (standard): Must be an integer from 5 to 3072.    *Oracle*  Constraints to the amount of storage for each storage type are the following:   +  General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.  +  Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.  +  Magnetic storage (standard): Must be an integer from 10 to 3072.    *SQL Server*  Constraints to the amount of storage for each storage type are the following:   +  General Purpose (SSD) storage (gp2):  +  Enterprise and Standard editions: Must be an integer from 20 to 16384.  +  Web and Express editions: Must be an integer from 20 to 16384.    +  Provisioned IOPS storage (io1):  +  Enterprise and Standard editions: Must be an integer from 20 to 16384.  +  Web and Express editions: Must be an integer from 20 to 16384.    +  Magnetic storage (standard):  +  Enterprise and Standard editions: Must be an integer from 20 to 1024.  +  Web and Express editions: Must be an integer from 20 to 1024.")
   allocatedStorage?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBInstanceProperties.allowMajorVersionUpgrade has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible. Constraints: Major version upgrades must be allowed when specifying a value for the ``EngineVersion`` parameter that is a different major version than the DB instance's current version.")
   allowMajorVersionUpgrade?: boolean;
 
@@ -76,6 +77,7 @@ model AwsRdsDBInstanceProperties {
   @identifiers(#[])
   associatedRoles?: DBInstanceRole[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBInstanceProperties.autoMinorVersionUpgrade has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.")
   autoMinorVersionUpgrade?: boolean;
 
@@ -97,12 +99,14 @@ model AwsRdsDBInstanceProperties {
   @doc("The details of the DB instance's server certificate. Returns the details of the DB instance’s server certificate. For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.")
   certificateDetails?: CertificateDetails;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBInstanceProperties.certificateRotationRestart has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the DB instance is restarted when you rotate your SSL/TLS certificate. By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.  Set this parameter only if you are *not* using SSL/TLS to connect to the DB instance.  If you are using SSL/TLS to connect to the DB instance, follow the appropriate instructions for your DB engine to rotate your SSL/TLS certificate:  +  For more information about rotating your SSL/TLS certificate for RDS DB engines, see [Rotating Your SSL/TLS Certificate.](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html) in the *Amazon RDS User Guide.*   +  For more information about rotating your SSL/TLS certificate for Aurora DB engines, see [Rotating Your SSL/TLS Certificate](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html) in the *Amazon Aurora User Guide*.   This setting doesn't apply to RDS Custom DB instances.")
   certificateRotationRestart?: boolean;
 
   @doc("For supported engines, indicates that the DB instance should be associated with the specified character set.  *Amazon Aurora*  Not applicable. The character set is managed by the DB cluster. For more information, see [AWS::RDS::DBCluster](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html).")
   characterSetName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBInstanceProperties.copyTagsToSnapshot has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether to copy tags from the DB instance to snapshots of the DB instance. By default, tags are not copied. This setting doesn't apply to Amazon Aurora DB instances. Copying tags to snapshots is managed by the DB cluster. Setting this value for an Aurora DB instance has no effect on the DB cluster setting.")
   copyTagsToSnapshot?: boolean;
 
@@ -145,12 +149,15 @@ model AwsRdsDBInstanceProperties {
   @doc("Property dbiResourceId")
   dbiResourceId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBInstanceProperties.dedicatedLogVolume has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the DB instance has a dedicated log volume (DLV) enabled.")
   dedicatedLogVolume?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBInstanceProperties.deleteAutomatedBackups has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether to remove automated backups immediately after the DB instance is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB instance is deleted.  *Amazon Aurora*  Not applicable. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the DB cluster are not deleted.")
   deleteAutomatedBackups?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBInstanceProperties.deletionProtection has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see [Deleting a DB Instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).   *Amazon Aurora*  Not applicable. You can enable or disable deletion protection for the DB cluster. For more information, see ``CreateDBCluster``. DB instances in a DB cluster can be deleted even when deletion protection is enabled for the DB cluster.")
   deletionProtection?: boolean;
 
@@ -175,9 +182,11 @@ model AwsRdsDBInstanceProperties {
   @doc("The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see [Publishing Database Logs to Amazon CloudWatch Logs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch) in the *Amazon Relational Database Service User Guide*.  *Amazon Aurora*  Not applicable. CloudWatch Logs exports are managed by the DB cluster.   *Db2*  Valid values: ``diag.log``, ``notify.log``   *MariaDB*  Valid values: ``audit``, ``error``, ``general``, ``slowquery``   *Microsoft SQL Server*  Valid values: ``agent``, ``error``   *MySQL*  Valid values: ``audit``, ``error``, ``general``, ``slowquery``   *Oracle*  Valid values: ``alert``, ``audit``, ``listener``, ``trace``, ``oemagent``   *PostgreSQL*  Valid values: ``postgresql``, ``upgrade``")
   enableCloudwatchLogsExports?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBInstanceProperties.enableIAMDatabaseAuthentication has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled. This property is supported for RDS for MariaDB, RDS for MySQL, and RDS for PostgreSQL. For more information, see [IAM Database Authentication for MariaDB, MySQL, and PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) in the *Amazon RDS User Guide.*   *Amazon Aurora*  Not applicable. Mapping AWS IAM accounts to database accounts is managed by the DB cluster.")
   enableIAMDatabaseAuthentication?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBInstanceProperties.enablePerformanceInsights has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether to enable Performance Insights for the DB instance. For more information, see [Using Amazon Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html) in the *Amazon RDS User Guide*. This setting doesn't apply to RDS Custom DB instances.")
   enablePerformanceInsights?: boolean;
 
@@ -199,6 +208,7 @@ model AwsRdsDBInstanceProperties {
   @doc("License model information for this DB instance.  Valid Values:  +  Aurora MySQL - ``general-public-license``   +  Aurora PostgreSQL - ``postgresql-license``   +  RDS for Db2 - ``bring-your-own-license``. For more information about RDS for Db2 licensing, see [](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html) in the *Amazon RDS User Guide.*   +  RDS for MariaDB - ``general-public-license``   +  RDS for Microsoft SQL Server - ``license-included``   +  RDS for MySQL - ``general-public-license``   +  RDS for Oracle - ``bring-your-own-license`` or ``license-included``   +  RDS for PostgreSQL - ``postgresql-license``     If you've specified ``DBSecurityGroups`` and then you update the license model, AWS CloudFormation replaces the underlying DB instance. This will incur some interruptions to database availability.")
   licenseModel?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBInstanceProperties.manageMasterUserPassword has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether to manage the master user password with AWS Secrets Manager. For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide.*  Constraints:  +  Can't manage the master user password with AWS Secrets Manager if ``MasterUserPassword`` is specified.")
   manageMasterUserPassword?: boolean;
 
@@ -221,6 +231,7 @@ model AwsRdsDBInstanceProperties {
   @doc("The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to Amazon CloudWatch Logs. For example, ``arn:aws:iam:123456789012:role/emaccess``. For information on creating a monitoring role, see [Setting Up and Enabling Enhanced Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling) in the *Amazon RDS User Guide*. If ``MonitoringInterval`` is set to a value other than ``0``, then you must supply a ``MonitoringRoleArn`` value. This setting doesn't apply to RDS Custom DB instances.")
   monitoringRoleArn?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBInstanceProperties.multiAZ has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the database instance is a Multi-AZ DB instance deployment. You can't set the ``AvailabilityZone`` parameter if the ``MultiAZ`` parameter is set to true.   For more information, see [Multi-AZ deployments for high availability](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html) in the *Amazon RDS User Guide*.  *Amazon Aurora*  Not applicable. Amazon Aurora storage is replicated across all of the Availability Zones and doesn't require the ``MultiAZ`` option to be set.")
   multiAZ?: boolean;
 
@@ -255,6 +266,7 @@ model AwsRdsDBInstanceProperties {
   @doc("The order of priority in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see [Fault Tolerance for an Aurora DB Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html#Aurora.Managing.FaultTolerance) in the *Amazon Aurora User Guide*. This setting doesn't apply to RDS Custom DB instances. Default: ``1``  Valid Values: ``0 - 15``")
   promotionTier?: int32 = 1;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBInstanceProperties.publiclyAccessible has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the DB instance is an internet-facing instance. If you specify true, AWS CloudFormation creates an instance with a publicly resolvable DNS name, which resolves to a public IP address. If you specify false, AWS CloudFormation creates an internal instance with a DNS name that resolves to a private IP address.  The default behavior value depends on your VPC setup and the database subnet group. For more information, see the ``PubliclyAccessible`` parameter in the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) in the *Amazon RDS API Reference*.")
   publiclyAccessible?: boolean;
 
@@ -279,6 +291,7 @@ model AwsRdsDBInstanceProperties {
   @doc("The ID of the region that contains the source DB instance for the read replica.")
   sourceRegion?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBInstanceProperties.storageEncrypted has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted. If you specify the ``KmsKeyId`` property, then you must enable encryption. If you specify the ``SourceDBInstanceIdentifier`` property, don't specify this property. The value is inherited from the source DB instance, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used. If you specify the ``DBSnapshotIdentifier`` and the specified snapshot is encrypted, don't specify this property. The value is inherited from the snapshot, and the specified ``KmsKeyId`` property is used. If you specify the ``DBSnapshotIdentifier`` and the specified snapshot isn't encrypted, you can use this property to specify that the restored DB instance is encrypted. Specify the ``KmsKeyId`` property for the KMS key to use for encryption. If you don't want the restored DB instance to be encrypted, then don't set this property or set it to ``false``.  *Amazon Aurora*  Not applicable. The encryption for DB instances is managed by the DB cluster.")
   storageEncrypted?: boolean;
 
@@ -302,9 +315,11 @@ model AwsRdsDBInstanceProperties {
   @doc("The time zone of the DB instance. The time zone parameter is currently supported only by [Microsoft SQL Server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone).")
   timezone?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBInstanceProperties.useDefaultProcessorFeatures has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the DB instance class of the DB instance uses its default processor features. This setting doesn't apply to RDS Custom DB instances.")
   useDefaultProcessorFeatures?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBInstanceProperties.useLatestRestorableTime has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the DB instance is restored from the latest backup time. By default, the DB instance isn't restored from the latest backup time. Constraints:  +  Can't be specified if the ``RestoreTime`` parameter is provided.")
   useLatestRestorableTime?: boolean;
 

@@ -66,6 +66,7 @@ model NetworkFirewallFirewallProperties {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsNetworkFirewallFirewall")
 model AwsNetworkFirewallFirewallProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsNetworkFirewallFirewallProperties.deleteProtection has a boolean wire value; preserve the published property contract."
   @doc("Property deleteProtection")
   deleteProtection?: boolean;
 
@@ -87,9 +88,11 @@ model AwsNetworkFirewallFirewallProperties {
   @doc("A resource ARN.")
   firewallPolicyArn?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsNetworkFirewallFirewallProperties.firewallPolicyChangeProtection has a boolean wire value; preserve the published property contract."
   @doc("Property firewallPolicyChangeProtection")
   firewallPolicyChangeProtection?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsNetworkFirewallFirewallProperties.subnetChangeProtection has a boolean wire value; preserve the published property contract."
   @doc("Property subnetChangeProtection")
   subnetChangeProtection?: boolean;
 

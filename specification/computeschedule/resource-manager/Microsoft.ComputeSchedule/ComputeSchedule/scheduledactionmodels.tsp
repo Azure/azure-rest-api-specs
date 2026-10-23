@@ -164,6 +164,7 @@ model ScheduledActionProperties {
   @Azure.ResourceManager.identifiers(#["destination"])
   notificationSettings: Array<NotificationProperties>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScheduledActionProperties.disabled has a boolean wire value; preserve the published property contract."
   @doc("Tell if the scheduled action is disabled or not")
   disabled?: boolean = false;
 

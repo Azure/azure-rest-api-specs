@@ -168,6 +168,7 @@ interface StorageSyncServices {
    * Gets the private link resources that need to be created for a storage sync service.
    */
   #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByStorageSyncService retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("privateLinkResources")
   listByStorageSyncService is ArmResourceActionSync<

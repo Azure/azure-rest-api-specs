@@ -248,6 +248,7 @@ model DatadogAgreementProperties {
   /**
    * If any version of the terms have been accepted, otherwise false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatadogAgreementProperties.accepted has a boolean wire value; preserve the published property contract."
   accepted?: boolean;
 }
 
@@ -278,6 +279,7 @@ model CreateResourceSupportedProperties {
   /**
    * Indicates if selected subscription supports Datadog resource creation, if not it is already being monitored for the selected organization via multi subscription feature.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CreateResourceSupportedProperties.creationSupported has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   creationSupported?: boolean;
 }
@@ -440,6 +442,7 @@ model MonitoredResource {
   /**
    * Flag indicating if resource is sending metrics to Datadog.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MonitoredResource.sendingMetrics has a boolean wire value; preserve the published property contract."
   sendingMetrics?: boolean;
 
   /**
@@ -450,6 +453,7 @@ model MonitoredResource {
   /**
    * Flag indicating if resource is sending logs to Datadog.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MonitoredResource.sendingLogs has a boolean wire value; preserve the published property contract."
   sendingLogs?: boolean;
 
   /**
@@ -475,6 +479,7 @@ model OperationResult {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OperationResult.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 }
 
@@ -656,11 +661,13 @@ model DatadogOrganizationProperties {
   /**
    * The configuration which describes the state of cloud security posture management. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatadogOrganizationProperties.cspm has a boolean wire value; preserve the published property contract."
   cspm?: boolean;
 
   /**
    * The configuration which describes the state of resource collection. This collects configuration information for all resources in a subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatadogOrganizationProperties.resourceCollection has a boolean wire value; preserve the published property contract."
   resourceCollection?: boolean;
 }
 
@@ -757,11 +764,13 @@ model MonitorUpdateProperties {
   /**
    * The new cloud security posture management value of the monitor resource. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MonitorUpdateProperties.cspm has a boolean wire value; preserve the published property contract."
   cspm?: boolean;
 
   /**
    * The new resource collection value of the monitor resource. This collects configuration information for all resources in a subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MonitorUpdateProperties.resourceCollection has a boolean wire value; preserve the published property contract."
   resourceCollection?: boolean;
 }
 
@@ -849,6 +858,7 @@ model MarketplaceSaaSInfo {
   /**
    * Flag specifying if the Marketplace status is subscribed or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MarketplaceSaaSInfo.subscribed has a boolean wire value; preserve the published property contract."
   subscribed?: boolean;
 }
 
@@ -910,11 +920,13 @@ model MonitoringTagRulesProperties {
   /**
    * Configuration to enable/disable auto-muting flag
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MonitoringTagRulesProperties.automuting has a boolean wire value; preserve the published property contract."
   automuting?: boolean;
 
   /**
    * Configuration to enable/disable custom metrics. If enabled, custom metrics from app insights will be sent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MonitoringTagRulesProperties.customMetrics has a boolean wire value; preserve the published property contract."
   customMetrics?: boolean;
 }
 
@@ -925,16 +937,19 @@ model LogRules {
   /**
    * Flag specifying if AAD logs should be sent for the Monitor resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LogRules.sendAadLogs has a boolean wire value; preserve the published property contract."
   sendAadLogs?: boolean;
 
   /**
    * Flag specifying if Azure subscription logs should be sent for the Monitor resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LogRules.sendSubscriptionLogs has a boolean wire value; preserve the published property contract."
   sendSubscriptionLogs?: boolean;
 
   /**
    * Flag specifying if Azure resource logs should be sent for the Monitor resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LogRules.sendResourceLogs has a boolean wire value; preserve the published property contract."
   sendResourceLogs?: boolean;
 
   /**
@@ -980,6 +995,7 @@ model AgentRules {
   /**
    * Flag specifying if agent monitoring should be enabled for the Monitor resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AgentRules.enableAgentMonitoring has a boolean wire value; preserve the published property contract."
   enableAgentMonitoring?: boolean;
 
   /**
@@ -1117,6 +1133,7 @@ model LatestLinkedSaaSResponse {
    * Flag indicating if the SaaS resource is hidden
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LatestLinkedSaaSResponse.isHiddenSaaS has a boolean wire value; preserve the published property contract."
   isHiddenSaaS?: boolean;
 
   /**

@@ -2129,6 +2129,7 @@ model MongoConnectionInformation {
   /**
    * Whether to UseSsl or UseTls to connect to Mongo. Default is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MongoConnectionInformation.useSsl has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Create, Lifecycle.Update)
   useSsl?: boolean;
 
@@ -2453,11 +2454,13 @@ model SqlConnectionInformation {
   /**
    * Whether to encrypt connection or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlConnectionInformation.encryptConnection has a boolean wire value; preserve the published property contract."
   encryptConnection?: boolean;
 
   /**
    * Whether to trust server certificate or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlConnectionInformation.trustServerCertificate has a boolean wire value; preserve the published property contract."
   trustServerCertificate?: boolean;
 }
 
@@ -2468,6 +2471,7 @@ model SqlDbOfflineConfiguration {
   /**
    * Offline migration
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlDbOfflineConfiguration.offline has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   offline?: boolean;
 }
@@ -2619,6 +2623,7 @@ model MigrationStatusDetails {
   /**
    * Whether full backup has been applied to the target database or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrationStatusDetails.isFullBackupRestored has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isFullBackupRestored?: boolean;
 
@@ -2715,12 +2720,14 @@ model SqlBackupSetInfo {
   /**
    * Whether this backup set has been restored or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlBackupSetInfo.isBackupRestored has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isBackupRestored?: boolean;
 
   /**
    * Has Backup Checksums
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlBackupSetInfo.hasBackupChecksums has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasBackupChecksums?: boolean;
 
@@ -2902,6 +2909,7 @@ model OfflineConfiguration {
   /**
    * Offline migration
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OfflineConfiguration.offline has a boolean wire value; preserve the published property contract."
   offline?: boolean;
 
   /**
@@ -2952,6 +2960,7 @@ model OperationsDefinition {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OperationsDefinition.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3522,6 +3531,7 @@ model DataMigrationServiceProperties {
   /**
    * Whether service resources should be deleted when stopped. (Turned on by default)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataMigrationServiceProperties.deleteResourcesOnStop has a boolean wire value; preserve the published property contract."
   deleteResourcesOnStop?: boolean;
 }
 
@@ -3774,6 +3784,7 @@ model NameAvailabilityResponse {
   /**
    * If true, the name is valid and available. If false, 'reason' describes why not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NameAvailabilityResponse.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**
@@ -3869,6 +3880,7 @@ model AzureActiveDirectoryApp {
   /**
    * Ignore checking azure permissions on the AAD app
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureActiveDirectoryApp.ignoreAzurePermissions has a boolean wire value; preserve the published property contract."
   ignoreAzurePermissions?: boolean;
 }
 
@@ -4167,6 +4179,7 @@ model MongoDbConnectionInfo extends ConnectionInfo {
   /**
    * Whether to encrypt the connection
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MongoDbConnectionInfo.encryptConnection has a boolean wire value; preserve the published property contract."
   encryptConnection?: boolean;
 
   /**
@@ -4187,10 +4200,12 @@ model MongoDbConnectionInfo extends ConnectionInfo {
   /**
    * Whether to trust the server certificate
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MongoDbConnectionInfo.trustServerCertificate has a boolean wire value; preserve the published property contract."
   trustServerCertificate?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MongoDbConnectionInfo.enforceSSL has a boolean wire value; preserve the published property contract."
   enforceSSL?: boolean;
 
   /**
@@ -4256,6 +4271,7 @@ model SqlConnectionInfo extends ConnectionInfo {
   /**
    * Whether to encrypt the connection
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlConnectionInfo.encryptConnection has a boolean wire value; preserve the published property contract."
   encryptConnection?: boolean = true;
 
   /**
@@ -4266,6 +4282,7 @@ model SqlConnectionInfo extends ConnectionInfo {
   /**
    * Whether to trust the server certificate
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlConnectionInfo.trustServerCertificate has a boolean wire value; preserve the published property contract."
   trustServerCertificate?: boolean;
 
   /**
@@ -4301,6 +4318,7 @@ model MySqlConnectionInfo extends ConnectionInfo {
   /**
    * Whether to encrypt the connection
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MySqlConnectionInfo.encryptConnection has a boolean wire value; preserve the published property contract."
   encryptConnection?: boolean = true;
 
   /**
@@ -4386,11 +4404,13 @@ model PostgreSqlConnectionInfo extends ConnectionInfo {
   /**
    * Whether to encrypt the connection
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PostgreSqlConnectionInfo.encryptConnection has a boolean wire value; preserve the published property contract."
   encryptConnection?: boolean = true;
 
   /**
    * Whether to trust the server certificate
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PostgreSqlConnectionInfo.trustServerCertificate has a boolean wire value; preserve the published property contract."
   trustServerCertificate?: boolean;
 
   /**
@@ -4485,6 +4505,7 @@ model BackupSetInfo {
   /**
    * Whether the backup set is restored or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BackupSetInfo.isBackupRestored has a boolean wire value; preserve the published property contract."
   isBackupRestored?: boolean;
 }
 
@@ -4545,6 +4566,7 @@ model ConnectToSourceMySqlTaskInput {
   /**
    * Flag for whether or not the migration is offline
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectToSourceMySqlTaskInput.isOfflineMigration has a boolean wire value; preserve the published property contract."
   isOfflineMigration?: boolean = false;
 }
 
@@ -4565,26 +4587,31 @@ model ConnectToSourceSqlServerTaskInput {
   /**
    * Flag for whether to collect databases from source server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectToSourceSqlServerTaskInput.collectDatabases has a boolean wire value; preserve the published property contract."
   collectDatabases?: boolean = true;
 
   /**
    * Flag for whether to collect logins from source server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectToSourceSqlServerTaskInput.collectLogins has a boolean wire value; preserve the published property contract."
   collectLogins?: boolean = false;
 
   /**
    * Flag for whether to collect agent jobs from source server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectToSourceSqlServerTaskInput.collectAgentJobs has a boolean wire value; preserve the published property contract."
   collectAgentJobs?: boolean = false;
 
   /**
    * Flag for whether to collect TDE Certificate names from source server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectToSourceSqlServerTaskInput.collectTdeCertificateInfo has a boolean wire value; preserve the published property contract."
   collectTdeCertificateInfo?: boolean = false;
 
   /**
    * Flag for whether to validate SSIS catalog is reachable on the source server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectToSourceSqlServerTaskInput.validateSsisCatalogOnly has a boolean wire value; preserve the published property contract."
   validateSsisCatalogOnly?: boolean = false;
 
   /**
@@ -4775,6 +4802,7 @@ model ConnectToSourceSqlServerTaskOutputLoginLevel
   /**
    * The state of the login.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectToSourceSqlServerTaskOutputLoginLevel.isEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEnabled?: boolean;
 
@@ -4797,6 +4825,7 @@ model MigrationEligibilityInfo {
   /**
    * Whether object is eligible for migration or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrationEligibilityInfo.isEligibleForMigration has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEligibleForMigration?: boolean;
 
@@ -4827,6 +4856,7 @@ model ConnectToSourceSqlServerTaskOutputAgentJobLevel
   /**
    * The state of the original Agent Job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectToSourceSqlServerTaskOutputAgentJobLevel.isEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEnabled?: boolean;
 
@@ -4925,6 +4955,7 @@ model ConnectToTargetAzureDbForMySqlTaskInput {
   /**
    * Flag for whether or not the migration is offline
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectToTargetAzureDbForMySqlTaskInput.isOfflineMigration has a boolean wire value; preserve the published property contract."
   isOfflineMigration?: boolean = false;
 }
 
@@ -4976,6 +5007,7 @@ model ConnectToTargetSqlDbTaskInput {
   /**
    * Boolean flag indicating whether to query object counts for each database on the target server
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectToTargetSqlDbTaskInput.queryObjectCounts has a boolean wire value; preserve the published property contract."
   queryObjectCounts?: boolean;
 }
 
@@ -5062,16 +5094,19 @@ model ConnectToTargetSqlMITaskInput {
   /**
    * Flag for whether to collect logins from target SQL MI server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectToTargetSqlMITaskInput.collectLogins has a boolean wire value; preserve the published property contract."
   collectLogins?: boolean = true;
 
   /**
    * Flag for whether to collect agent jobs from target SQL MI server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectToTargetSqlMITaskInput.collectAgentJobs has a boolean wire value; preserve the published property contract."
   collectAgentJobs?: boolean = true;
 
   /**
    * Flag for whether to validate SSIS catalog is reachable on the target SQL MI server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectToTargetSqlMITaskInput.validateSsisCatalogOnly has a boolean wire value; preserve the published property contract."
   validateSsisCatalogOnly?: boolean = false;
 }
 
@@ -5230,6 +5265,7 @@ model DatabaseTable {
   /**
    * Indicates whether table is empty or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseTable.hasRows has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasRows?: boolean;
 
@@ -5444,6 +5480,7 @@ model MigrateSchemaSqlServerSqlDbTaskProperties extends ProjectTaskProperties {
   /**
    * whether the task can be cloned or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrateSchemaSqlServerSqlDbTaskProperties.isCloneable has a boolean wire value; preserve the published property contract."
   isCloneable?: boolean;
 
   /**
@@ -5923,6 +5960,7 @@ model MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseLevel
   /**
    * Indicates if initial load (full load) has been completed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseLevel.initializationCompleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   initializationCompleted?: boolean;
 
@@ -6349,6 +6387,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseLevel
   /**
    * Indicates if initial load (full load) has been completed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseLevel.initializationCompleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   initializationCompleted?: boolean;
 
@@ -6570,16 +6609,19 @@ model MigrationValidationOptions {
   /**
    * Allows to compare the schema information between source and target.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrationValidationOptions.enableSchemaValidation has a boolean wire value; preserve the published property contract."
   enableSchemaValidation?: boolean;
 
   /**
    * Allows to perform a checksum based data integrity validation between source and target for the selected database / tables .
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrationValidationOptions.enableDataIntegrityValidation has a boolean wire value; preserve the published property contract."
   enableDataIntegrityValidation?: boolean;
 
   /**
    * Allows to perform a quick and intelligent query analysis by retrieving queries from the source database and executes them in the target. The result will have execution statistics for executions in source and target databases for the extracted queries.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrationValidationOptions.enableQueryAnalysisValidation has a boolean wire value; preserve the published property contract."
   enableQueryAnalysisValidation?: boolean;
 }
 
@@ -6740,6 +6782,7 @@ model MigrateSqlServerSqlDbSyncTaskOutputDatabaseLevel
   /**
    * Indicates if initial load (full load) has been completed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrateSqlServerSqlDbSyncTaskOutputDatabaseLevel.initializationCompleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   initializationCompleted?: boolean;
 
@@ -6927,6 +6970,7 @@ model MigrateSqlServerSqlDbDatabaseInput {
   /**
    * Whether to set database read only before migration
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrateSqlServerSqlDbDatabaseInput.makeSourceDbReadOnly has a boolean wire value; preserve the published property contract."
   makeSourceDbReadOnly?: boolean;
 
   /**
@@ -7644,6 +7688,7 @@ model ExecutionStatistics {
   /**
    * Indicates whether the query resulted in an error
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExecutionStatistics.hasErrors has a boolean wire value; preserve the published property contract."
   hasErrors?: boolean;
 
   /**
@@ -7913,6 +7958,7 @@ model MigrateSqlServerSqlMISyncTaskOutputDatabaseLevel
   /**
    * Whether full backup has been applied to the target database or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrateSqlServerSqlMISyncTaskOutputDatabaseLevel.isFullBackupRestored has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isFullBackupRestored?: boolean;
 
@@ -8206,6 +8252,7 @@ model MigrateSqlServerSqlMITaskOutputAgentJobLevel
   /**
    * The state of the original Agent Job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrateSqlServerSqlMITaskOutputAgentJobLevel.isEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEnabled?: boolean;
 
@@ -8536,6 +8583,7 @@ model MongoDbClusterInfo {
   /**
    * Whether the cluster supports sharded collections
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MongoDbClusterInfo.supportsSharding has a boolean wire value; preserve the published property contract."
   supportsSharding: boolean;
 
   /**
@@ -8563,6 +8611,7 @@ model MongoDbDatabaseInfo extends MongoDbObjectInfo {
   /**
    * Whether the database has sharding enabled. Note that the migration task will enable sharding on the target if necessary.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MongoDbDatabaseInfo.supportsSharding has a boolean wire value; preserve the published property contract."
   supportsSharding: boolean;
 }
 
@@ -8579,16 +8628,19 @@ model MongoDbCollectionInfo extends MongoDbObjectInfo {
   /**
    * Whether the collection is a capped collection (i.e. whether it has a fixed size and acts like a circular buffer)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MongoDbCollectionInfo.isCapped has a boolean wire value; preserve the published property contract."
   isCapped: boolean;
 
   /**
    * Whether the collection is system collection
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MongoDbCollectionInfo.isSystemCollection has a boolean wire value; preserve the published property contract."
   isSystemCollection: boolean;
 
   /**
    * Whether the collection is a view of another collection
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MongoDbCollectionInfo.isView has a boolean wire value; preserve the published property contract."
   isView: boolean;
 
   /**
@@ -8599,6 +8651,7 @@ model MongoDbCollectionInfo extends MongoDbObjectInfo {
   /**
    * Whether the database has sharding enabled. Note that the migration task will enable sharding on the target if necessary.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MongoDbCollectionInfo.supportsSharding has a boolean wire value; preserve the published property contract."
   supportsSharding: boolean;
 
   /**
@@ -8620,6 +8673,7 @@ model MongoDbShardKeyInfo {
   /**
    * Whether the shard key is unique
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MongoDbShardKeyInfo.isUnique has a boolean wire value; preserve the published property contract."
   isUnique: boolean;
 }
 
@@ -8787,6 +8841,7 @@ model MongoDbCollectionSettings {
   /**
    * Whether the migrator is allowed to drop the target collection in the course of performing a migration. The default is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MongoDbCollectionSettings.canDelete has a boolean wire value; preserve the published property contract."
   canDelete?: boolean;
 
   /**
@@ -8814,6 +8869,7 @@ model MongoDbShardKeySetting {
   /**
    * Whether the shard key is unique
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MongoDbShardKeySetting.isUnique has a boolean wire value; preserve the published property contract."
   isUnique?: boolean;
 }
 
@@ -8873,6 +8929,7 @@ model MongoDbFinishCommandInput extends MongoDbCommandInput {
   /**
    * If true, replication for the affected objects will be stopped immediately. If false, the migrator will finish replaying queued events before finishing the replication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MongoDbFinishCommandInput.immediate has a boolean wire value; preserve the published property contract."
   immediate: boolean;
 }
 
@@ -9371,6 +9428,7 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskOutputDatabaseLevel
   /**
    * Indicates if initial load (full load) has been completed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrateOracleAzureDbPostgreSqlSyncTaskOutputDatabaseLevel.initializationCompleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   initializationCompleted?: boolean;
 
@@ -10300,6 +10358,7 @@ model MigrateSqlServerSqlMITaskProperties extends ProjectTaskProperties {
   /**
    * whether the task can be cloned or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrateSqlServerSqlMITaskProperties.isCloneable has a boolean wire value; preserve the published property contract."
   isCloneable?: boolean;
 
   /**
@@ -10360,6 +10419,7 @@ model MigrateSqlServerSqlDbTaskProperties extends ProjectTaskProperties {
   /**
    * whether the task can be cloned or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrateSqlServerSqlDbTaskProperties.isCloneable has a boolean wire value; preserve the published property contract."
   isCloneable?: boolean;
 
   /**
@@ -10438,6 +10498,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskProperties
   /**
    * whether the task can be cloned or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrateMySqlAzureDbForMySqlOfflineTaskProperties.isCloneable has a boolean wire value; preserve the published property contract."
   isCloneable?: boolean;
 
   /**
@@ -10474,6 +10535,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskInput {
   /**
    * Setting to set the source server read only
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigrateMySqlAzureDbForMySqlOfflineTaskInput.makeSourceServerReadOnly has a boolean wire value; preserve the published property contract."
   makeSourceServerReadOnly?: boolean;
 
   /**
@@ -10563,6 +10625,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties
   /**
    * whether the task can be cloned or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties.isCloneable has a boolean wire value; preserve the published property contract."
   isCloneable?: boolean;
 
   /**
@@ -10817,12 +10880,14 @@ model DatabaseBackupInfo {
   /**
    * Database was damaged when backed up, but the backup operation was requested to continue despite errors.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseBackupInfo.isDamaged has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDamaged?: boolean;
 
   /**
    * Whether the backup set is compressed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DatabaseBackupInfo.isCompressed has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCompressed?: boolean;
 
@@ -11149,6 +11214,7 @@ model DataMigrationProjectMetadata {
   /**
    * Whether target connection is Windows authentication
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataMigrationProjectMetadata.targetUsingWinAuth has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   targetUsingWinAuth?: boolean;
 

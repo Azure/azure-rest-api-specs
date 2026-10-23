@@ -125,6 +125,7 @@ interface GovernanceRules {
   /**
    * Get governance rules long run operation result for the requested scope by ruleId and operationId
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing operationResults SDK method name; renaming it would break client compatibility."
   @get
   operationResults is GovernanceRuleOperationResultsOps.Read<
     OperationResult,

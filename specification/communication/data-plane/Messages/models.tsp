@@ -300,6 +300,7 @@ model ReadReceiptContent {
   @doc("The Channel Registration ID for the Business Identifier.")
   channelRegistrationId: uuid;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ReadReceiptContent.typingIndicator has a boolean wire value; preserve the published property contract."
   @doc("Whether this status update includes a typing indicator. This field defaults to false when not provided.")
   typingIndicator?: boolean;
 }

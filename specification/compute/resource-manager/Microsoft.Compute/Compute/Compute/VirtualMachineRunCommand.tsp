@@ -65,6 +65,7 @@ interface VirtualMachineRunCommands {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByVirtualMachine.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -112,6 +113,7 @@ interface VirtualMachineRunCommands {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByVirtualMachine.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -166,6 +168,7 @@ interface VirtualMachineScaleSetVMRunCommands {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -222,6 +225,7 @@ interface VirtualMachineScaleSetVMRunCommands {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },

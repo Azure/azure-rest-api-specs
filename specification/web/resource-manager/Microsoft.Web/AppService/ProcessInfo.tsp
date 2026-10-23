@@ -100,6 +100,7 @@ interface ProcessInfos {
   /**
    * Description for Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getInstanceProcessDump retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.")
   @get
   @action("dump")
@@ -107,6 +108,7 @@ interface ProcessInfos {
     ProcessInfo,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing getInstanceProcessDump.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "*/*";
 
@@ -195,6 +197,7 @@ interface ProcessInfoOperationGroup {
   /**
    * Description for Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getProcessDump retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.")
   @get
   @action("dump")
@@ -202,6 +205,7 @@ interface ProcessInfoOperationGroup {
     ProcessInfo,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing getProcessDump.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "*/*";
 
@@ -303,6 +307,7 @@ interface InstanceProcessSlotOperationGroup {
   /**
    * Description for Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getInstanceProcessDumpSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.")
   @get
   @action("dump")
@@ -310,6 +315,7 @@ interface InstanceProcessSlotOperationGroup {
     ProcessInfo,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing getInstanceProcessDumpSlot.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "*/*";
 
@@ -404,6 +410,7 @@ interface ProcessSlotOperationGroup {
   /**
    * Description for Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getProcessDumpSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.")
   @get
   @action("dump")
@@ -411,6 +418,7 @@ interface ProcessSlotOperationGroup {
     ProcessInfo,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing getProcessDumpSlot.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "*/*";
 

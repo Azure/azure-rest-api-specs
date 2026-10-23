@@ -487,6 +487,7 @@ model TcbBaseline {
    * The corresponding Tcb baseline is set in attestation policy and is used in
    * attestation request if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TcbBaseline.isSelectedTcb has a boolean wire value; preserve the published property contract."
   isSelectedTcb?: boolean;
 }
 
@@ -839,6 +840,7 @@ model AttestationResult {
   /**
    * True if the enclave is debuggable, false otherwise
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AttestationResult.isDebuggable has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "x-ms-sgx-is-debuggable")
   isDebuggable?: boolean;
 
@@ -888,6 +890,7 @@ model AttestationResult {
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-is-debuggable claim.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AttestationResult.deprecatedIsDebuggable has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "is-debuggable")
   deprecatedIsDebuggable?: boolean;
 

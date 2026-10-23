@@ -99,6 +99,7 @@ namespace Azure.AI.Projects {
 
   @doc("The default enablement setting for GitHub Copilot built-in tools.")
   model GitHubCopilotToolsetDefaultConfig {
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GitHubCopilotToolsetDefaultConfig.enabled has a boolean wire value; preserve the published property contract."
     @doc("Whether built-in tools are enabled by default. Defaults to true.")
     enabled?: boolean = true;
   }
@@ -108,6 +109,7 @@ namespace Azure.AI.Projects {
     @doc("The built-in tool to configure.")
     name: GitHubCopilotBuiltInTool;
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GitHubCopilotToolsetConfig.enabled has a boolean wire value; preserve the published property contract."
     @doc("Whether the built-in tool is enabled. If omitted, the toolset default applies.")
     enabled?: boolean;
   }
@@ -878,6 +880,7 @@ namespace Azure.AI.Projects {
      * agent's Agent Card. The service defaults to `false` if a value is not
      * specified by the caller (anonymous fetch).
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing A2AToolBase.send_credentials_for_agent_card has a boolean wire value; preserve the published property contract."
     send_credentials_for_agent_card?: boolean = false;
   }
 

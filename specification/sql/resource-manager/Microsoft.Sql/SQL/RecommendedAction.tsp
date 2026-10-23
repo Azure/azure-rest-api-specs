@@ -62,6 +62,7 @@ interface RecommendedActions {
   /**
    * Gets list of Database Recommended Actions.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByDatabaseAdvisor retains its response and SDK paging behavior; preserve published compatibility."
   @tag("DatabaseRecommendedActions")
   listByDatabaseAdvisor is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     RecommendedAction,

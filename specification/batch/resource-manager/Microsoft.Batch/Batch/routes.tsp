@@ -17,6 +17,7 @@ interface LocationOperationGroup {
   /**
    * Gets the Batch service quotas for the specified subscription at the given location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getQuotas retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("quotas")
@@ -42,6 +43,7 @@ interface LocationOperationGroup {
       /**
        * The maximum number of items to return in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listSupportedVirtualMachineSkus.maxresults retains the maxresults query parameter; preserve wire compatibility."
       @query("maxresults")
       maxresults?: int32;
 

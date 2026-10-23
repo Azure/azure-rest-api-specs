@@ -46,6 +46,7 @@ namespace Data.Tables {
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+    #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing query SDK method name; renaming it would break client compatibility."
     @get
     @list
     @route("/Tables")
@@ -142,6 +143,7 @@ namespace Data.Tables {
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+    #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing queryEntities SDK method name; renaming it would break client compatibility."
     @get
     @route("/{table}()")
     op queryEntities is TablesJsonOperation<
@@ -192,6 +194,7 @@ namespace Data.Tables {
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+    #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing queryEntityWithPartitionAndRowKey SDK method name; renaming it would break client compatibility."
     @get
     @route("/{table}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
     op queryEntityWithPartitionAndRowKey is TablesJsonOperation<
