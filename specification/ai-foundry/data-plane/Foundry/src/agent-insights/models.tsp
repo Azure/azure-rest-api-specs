@@ -253,7 +253,18 @@ model AgentInsightSuspension {
   details?: Record<unknown>;
 }
 
-/** The effective overview for an Agent Insights monitor. */
+/** Service-generated agent summary. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+@example(#{
+  markdown: "# Agent summary\n\nThis agent answers support questions from product documentation.",
+})
+model AgentInsightSummary {
+  /** Summary in Markdown. */
+  @visibility(Lifecycle.Read)
+  markdown: string;
+}
+
+/** Compatibility overview, including historical user overrides. */
 @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightsOverview {
   /** The overview content. */
@@ -266,11 +277,26 @@ model AgentInsightsOverview {
   updated_at: FoundryTimestamp;
 }
 
-/** A user-provided overview that becomes effective immediately and seeds the next generation. */
+/** Ignored legacy overview input. */
 @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightsOverviewOverride {
-  /** The nonblank overview content, limited to 64 KiB when encoded as UTF-8. */
+  /** Ignored legacy content. */
   content: string;
+}
+
+/** Monitor analysis priorities. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+@example(#{
+  categories: #["cost_tokens", "latency"],
+  instructions: "Focus on latency and token waste.",
+})
+model AgentInsightPriorities {
+  /** Up to 20 distinct normalized category identifiers (128 UTF-8 bytes each). Empty uses defaults. */
+  @minItems(0)
+  categories: string[];
+
+  /** Analysis guidance, up to 2,000 UTF-8 bytes after trimming. Null or blank removes guidance. */
+  instructions?: string | null;
 }
 
 /** Estimated Agent Insights cost. */
@@ -321,20 +347,28 @@ model AgentInsightMonitor {
   @visibility(Lifecycle.Read)
   suspension: AgentInsightSuspension | null;
 
-  /** The effective overview, or null before an overview is available. */
+  /** Generated summary, or null when unavailable. */
+  @visibility(Lifecycle.Read)
+  agent_summary: AgentInsightSummary | null;
+
+  /** Compatibility overview, or null when unavailable. */
   @visibility(Lifecycle.Read)
   overview: AgentInsightsOverview | null;
+
+  /** Analysis priorities. Omitted when not configured. */
+  @visibility(Lifecycle.Read)
+  priorities?: AgentInsightPriorities;
 
   /** The time when this monitor was last updated. */
   @visibility(Lifecycle.Read)
   updated_at: FoundryTimestamp;
 }
 
-/** An Agent Insights monitor summary returned by list operations. */
+/** Monitor list item without the summary or overview. */
 @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightMonitorListItem is OmitProperties<
   AgentInsightMonitor,
-  "overview"
+  "overview" | "agent_summary"
 >;
 
 /** Fields accepted when creating an Agent Insights monitor for an agent. */
@@ -353,10 +387,16 @@ model AgentInsightMonitorCreate {
 
   /** The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'. */
   model_deployment_name: string;
+
+  /** Analysis priorities for the monitor. */
+  priorities?: AgentInsightPriorities;
 }
 
 /** Fields that can be updated on an Agent Insights monitor. */
 @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+@example(#{ priorities: #{ categories: #["latency"], instructions: null } })
+@example(#{ priorities: null })
+@example(#{ priorities: #{ categories: #[] } })
 model AgentInsightMonitorUpdate {
   /** Whether scheduled insight generation is armed for the monitor. */
   enabled?: boolean;
@@ -369,10 +409,11 @@ model AgentInsightMonitorUpdate {
   /** The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'. */
   model_deployment_name?: string;
 
-  /**
-   * Sets the effective user overview, or clears it when explicitly set to null. Omission leaves
-   * the overview unchanged. This field cannot be combined with other monitor updates.
-   */
+  /** Replaces all priorities. Omit to preserve them; null clears them. */
+  priorities?: AgentInsightPriorities | null;
+
+  /** Ignored legacy input. Other updates still apply. */
+  #deprecated "Ignored. The service generates agent summaries."
   overview_override?: AgentInsightsOverviewOverride | null;
 }
 

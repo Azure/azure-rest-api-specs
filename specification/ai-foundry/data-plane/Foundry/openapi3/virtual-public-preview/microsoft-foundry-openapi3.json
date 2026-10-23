@@ -1577,7 +1577,7 @@
     "/agent_insight_monitors/{monitor_id}:reset": {
       "post": {
         "operationId": "AgentInsightMonitors_reset",
-        "description": "Reset an Agent Insights monitor's overview, checkpoint, and active insight state.",
+        "description": "Reset an Agent Insights monitor's generated summary, overview, checkpoint, and active insight state.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -37812,6 +37812,7 @@
           "run_interval_hours",
           "model_deployment_name",
           "suspension",
+          "agent_summary",
           "overview",
           "updated_at"
         ],
@@ -37866,6 +37867,18 @@
             "description": "Why the system suspended scheduled generation. Null when the monitor is not suspended.",
             "readOnly": true
           },
+          "agent_summary": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AgentInsightSummary"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Generated summary, or null when unavailable.",
+            "readOnly": true
+          },
           "overview": {
             "anyOf": [
               {
@@ -37875,7 +37888,12 @@
                 "type": "null"
               }
             ],
-            "description": "The effective overview, or null before an overview is available.",
+            "description": "Compatibility overview, or null when unavailable.",
+            "readOnly": true
+          },
+          "priorities": {
+            "$ref": "#/components/schemas/AgentInsightPriorities",
+            "description": "Analysis priorities. Omitted when not configured.",
             "readOnly": true
           },
           "updated_at": {
@@ -37918,6 +37936,10 @@
           "model_deployment_name": {
             "type": "string",
             "description": "The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
+          },
+          "priorities": {
+            "$ref": "#/components/schemas/AgentInsightPriorities",
+            "description": "Analysis priorities for the monitor."
           }
         },
         "description": "Fields accepted when creating an Agent Insights monitor for an agent.",
@@ -37989,13 +38011,18 @@
             "description": "Why the system suspended scheduled generation. Null when the monitor is not suspended.",
             "readOnly": true
           },
+          "priorities": {
+            "$ref": "#/components/schemas/AgentInsightPriorities",
+            "description": "Analysis priorities. Omitted when not configured.",
+            "readOnly": true
+          },
           "updated_at": {
             "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "The time when this monitor was last updated.",
             "readOnly": true
           }
         },
-        "description": "An Agent Insights monitor summary returned by list operations.",
+        "description": "Monitor list item without the summary or overview.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentInsights=V1Preview"
@@ -38020,6 +38047,17 @@
             "type": "string",
             "description": "The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
           },
+          "priorities": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AgentInsightPriorities"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Replaces all priorities. Omit to preserve them; null clears them."
+          },
           "overview_override": {
             "anyOf": [
               {
@@ -38029,10 +38067,29 @@
                 "type": "null"
               }
             ],
-            "description": "Sets the effective user overview, or clears it when explicitly set to null. Omission leaves\nthe overview unchanged. This field cannot be combined with other monitor updates."
+            "description": "Ignored legacy input. Other updates still apply.",
+            "deprecated": true
           }
         },
         "description": "Fields that can be updated on an Agent Insights monitor.",
+        "examples": [
+          {
+            "priorities": {
+              "categories": []
+            }
+          },
+          {
+            "priorities": null
+          },
+          {
+            "priorities": {
+              "categories": [
+                "latency"
+              ],
+              "instructions": null
+            }
+          }
+        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentInsights=V1Preview"
@@ -38053,6 +38110,48 @@
           }
         ],
         "description": "Identifies where an Agent Insights overview came from.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
+      },
+      "AgentInsightPriorities": {
+        "type": "object",
+        "required": [
+          "categories"
+        ],
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 0,
+            "description": "Up to 20 distinct normalized category identifiers (128 UTF-8 bytes each). Empty uses defaults."
+          },
+          "instructions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Analysis guidance, up to 2,000 UTF-8 bytes after trimming. Null or blank removes guidance."
+          }
+        },
+        "description": "Monitor analysis priorities.",
+        "examples": [
+          {
+            "categories": [
+              "cost_tokens",
+              "latency"
+            ],
+            "instructions": "Focus on latency and token waste."
+          }
+        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentInsights=V1Preview"
@@ -38423,6 +38522,30 @@
           ]
         }
       },
+      "AgentInsightSummary": {
+        "type": "object",
+        "required": [
+          "markdown"
+        ],
+        "properties": {
+          "markdown": {
+            "type": "string",
+            "description": "Summary in Markdown.",
+            "readOnly": true
+          }
+        },
+        "description": "Service-generated agent summary.",
+        "examples": [
+          {
+            "markdown": "# Agent summary\n\nThis agent answers support questions from product documentation."
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
+      },
       "AgentInsightSuspension": {
         "type": "object",
         "required": [
@@ -38528,7 +38651,7 @@
             "description": "The time when this overview was last updated."
           }
         },
-        "description": "The effective overview for an Agent Insights monitor.",
+        "description": "Compatibility overview, including historical user overrides.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentInsights=V1Preview"
@@ -38543,10 +38666,10 @@
         "properties": {
           "content": {
             "type": "string",
-            "description": "The nonblank overview content, limited to 64 KiB when encoded as UTF-8."
+            "description": "Ignored legacy content."
           }
         },
-        "description": "A user-provided overview that becomes effective immediately and seeds the next generation.",
+        "description": "Ignored legacy overview input.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentInsights=V1Preview"
