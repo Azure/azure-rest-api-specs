@@ -1,0 +1,44 @@
+{
+  "title": "ChangeRecordStageProgressions_RetrieveAuditTrail",
+  "operationId": "ChangeRecordStageProgressions_RetrieveAuditTrail",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeRecordName": "webApplicationChangeRecord",
+    "stageProgressionName": "developmentStage"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalRecords": 3,
+        "auditRecords": [
+          {
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord/stageProgressions/developmentStage/events/1",
+            "type": "Microsoft.ChangeSafety/changeRecords/stageProgressions/events",
+            "timestamp": "2025-07-09T07:35:00.000Z",
+            "initiatedBy": "devops@contoso.com",
+            "initiatedByType": "User",
+            "properties": {}
+          },
+          {
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord/stageProgressions/developmentStage/events/2",
+            "type": "Microsoft.ChangeSafety/changeRecords/stageProgressions/events",
+            "timestamp": "2025-07-09T07:40:00.000Z",
+            "initiatedBy": "system",
+            "initiatedByType": "System",
+            "properties": {}
+          },
+          {
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord/stageProgressions/developmentStage/events/3",
+            "type": "Microsoft.ChangeSafety/changeRecords/stageProgressions/events",
+            "timestamp": "2025-07-09T08:00:00.000Z",
+            "initiatedBy": "system",
+            "initiatedByType": "System",
+            "properties": {}
+          }
+        ]
+      }
+    }
+  }
+}
