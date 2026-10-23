@@ -6,6 +6,7 @@ import "./workspace.models.tsp";
 import "./workspaceEvaluation.models.tsp";
 import "./workspaceDiscovery.models.tsp";
 import "./lro-helpers.tsp";
+import "./put-preconditions.tsp";
 
 using Azure.ResourceManager;
 using Azure.Core;
@@ -26,7 +27,12 @@ interface Workspaces {
   /**
    * Create or update a Workspace resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Workspace>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Conditional PUT explicitly returns HTTP 412 as required for failed preconditions; 200, 201 and default responses remain unchanged."
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Workspace,
+    Parameters = PutPreconditionHeaders,
+    Error = PutPreconditionError
+  >;
 
   /**
    * Update a Workspace.

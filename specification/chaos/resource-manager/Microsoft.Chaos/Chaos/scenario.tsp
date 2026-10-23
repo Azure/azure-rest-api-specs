@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/http";
 import "./scenario.models.tsp";
+import "./put-preconditions.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -20,7 +21,12 @@ interface Scenarios {
   /**
    * Create or update a scenario.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Scenario>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Conditional PUT explicitly returns HTTP 412 as required for failed preconditions; 200, 201 and default responses remain unchanged."
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    Scenario,
+    Parameters = PutPreconditionHeaders,
+    Error = PutPreconditionError
+  >;
 
   /**
    * Delete a scenario.

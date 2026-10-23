@@ -8,6 +8,7 @@ import "./scenarioRun.models.tsp";
 import "./scenarioRun.tsp";
 import "./common.models.tsp";
 import "./lro-helpers.tsp";
+import "./put-preconditions.tsp";
 
 using Azure.ResourceManager;
 using Azure.Core;
@@ -30,7 +31,12 @@ interface ScenarioConfigurations {
   /**
    * Create or update a scenario definition.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ScenarioConfiguration>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Conditional PUT explicitly returns HTTP 412 as required for failed preconditions; 200, 201 and default responses remain unchanged."
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ScenarioConfiguration,
+    Parameters = PutPreconditionHeaders,
+    Error = PutPreconditionError
+  >;
 
   /**
    * Delete a scenario definition.

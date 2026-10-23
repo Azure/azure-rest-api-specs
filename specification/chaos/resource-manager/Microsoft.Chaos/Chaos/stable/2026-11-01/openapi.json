@@ -2255,6 +2255,12 @@
             "pattern": "^[^<>%&:?#/\\\\]+$"
           },
           {
+            "$ref": "#/parameters/PutPreconditionHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/PutPreconditionHeaders.ifMatch"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "Workspace resource to be created or updated.",
@@ -2288,6 +2294,13 @@
               }
             }
           },
+          "412": {
+            "description": "An effective request precondition failed or could not be verified. No resource change or asynchronous operation is started.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2296,6 +2309,9 @@
           }
         },
         "x-ms-examples": {
+          "Create a workspace only when absent, or return 412 when it already exists": {
+            "$ref": "./examples/Workspaces_CreateOrUpdate_CreateOnly.json"
+          },
           "Create or update a Microsoft-managed Workspace with empty encryption settings": {
             "$ref": "./examples/Workspaces_CreateOrUpdate_EmptyEncryption.json"
           },
@@ -2307,6 +2323,9 @@
           },
           "Create/update a workspace in a resource group.": {
             "$ref": "./examples/Workspaces_CreateOrUpdate.json"
+          },
+          "Update a workspace only when present, or return 412 when it does not exist": {
+            "$ref": "./examples/Workspaces_CreateOrUpdate_UpdateOnly.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3340,6 +3359,12 @@
             "pattern": "^[^<>%&:?#/\\\\]+$"
           },
           {
+            "$ref": "#/parameters/PutPreconditionHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/PutPreconditionHeaders.ifMatch"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
@@ -3362,6 +3387,13 @@
               "$ref": "#/definitions/Scenario"
             }
           },
+          "412": {
+            "description": "An effective request precondition failed or could not be verified. No resource change or asynchronous operation is started.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3373,11 +3405,17 @@
           "Create a scenario from a built-in scenario template version.": {
             "$ref": "./examples/Scenarios_CreateOrUpdate_From_Template.json"
           },
+          "Create a scenario only when absent, or return 412 when it already exists": {
+            "$ref": "./examples/Scenarios_CreateOrUpdate_CreateOnly.json"
+          },
           "Create or update a scenario that continues past suppressed action failures.": {
             "$ref": "./examples/Scenarios_CreateOrUpdate_With_Failure_Behavior.json"
           },
           "Create or update a scenario.": {
             "$ref": "./examples/Scenarios_CreateOrUpdate.json"
+          },
+          "Update a scenario only when present, or return 412 when it does not exist": {
+            "$ref": "./examples/Scenarios_CreateOrUpdate_UpdateOnly.json"
           }
         }
       },
@@ -3606,6 +3644,12 @@
             "pattern": "^[^<>%&:?#/\\\\]+$"
           },
           {
+            "$ref": "#/parameters/PutPreconditionHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/PutPreconditionHeaders.ifMatch"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
@@ -3639,6 +3683,13 @@
               }
             }
           },
+          "412": {
+            "description": "An effective request precondition failed or could not be verified. No resource change or asynchronous operation is started.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3647,11 +3698,17 @@
           }
         },
         "x-ms-examples": {
+          "Create a scenario configuration only when absent, or return 412 when it already exists": {
+            "$ref": "./examples/ScenarioConfigurations_CreateOrUpdate_CreateOnly.json"
+          },
           "Create or update a scenario configuration with physical zone targeting.": {
             "$ref": "./examples/ScenarioConfigurations_CreateOrUpdate_With_Physical_Zones.json"
           },
           "Create or update a scenario configuration.": {
             "$ref": "./examples/ScenarioConfigurations_CreateOrUpdate.json"
+          },
+          "Update a scenario configuration only when present, or return 412 when it does not exist": {
+            "$ref": "./examples/ScenarioConfigurations_CreateOrUpdate_UpdateOnly.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -9003,5 +9060,24 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "PutPreconditionHeaders.ifMatch": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "Use '*' to update the resource only if it exists. If the resource does not exist, the request fails with 412 Precondition Failed without creating it. Omit both condition headers for an unconditional create or update. Other effective conditions must be honored if supported or rejected with 412 if they cannot be verified; they must not be silently ignored. This contract does not introduce entity-tag matching.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    },
+    "PutPreconditionHeaders.ifNoneMatch": {
+      "name": "If-None-Match",
+      "in": "header",
+      "description": "Use '*' to create the resource only if it does not exist. If the resource exists, the request fails with 412 Precondition Failed without changing it. Omit both condition headers for an unconditional create or update. Other effective conditions must be honored if supported or rejected with 412 if they cannot be verified; they must not be silently ignored. This contract does not introduce entity-tag matching.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifNoneMatch"
+    }
+  }
 }
