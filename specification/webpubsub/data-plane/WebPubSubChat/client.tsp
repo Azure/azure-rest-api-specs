@@ -50,13 +50,6 @@ namespace WebPubSubChat.PythonCustomizations {
     }>;
   }
 
-  /** Properties supplied when creating or replacing a human user in JavaScript. */
-  model HumanChatUserInput {
-    ...CreateOrUpdate<{
-      ...WebPubSubChat.HumanChatUser;
-    }>;
-  }
-
   /** Properties supplied when partially updating a message. */
   model ChatMessageUpdate {
     ...OptionalProperties<Update<{
@@ -89,11 +82,6 @@ namespace WebPubSubChat.PythonCustomizations {
   }
 
   @@clientNamespace(WebPubSubChat.PythonCustomizations, "WebPubSubChat", "javascript");
-  @@clientName(ChatRoleCreateOrReplace, "ChatRoleInput", "javascript");
-  @@clientName(ChatRoomCreateOrReplace, "ChatRoomInput", "javascript");
-  @@clientName(ChatRoomMemberCreateOrReplace, "ChatRoomMemberInput", "javascript");
-  @@clientName(ChatMessageUpdate, "ChatMessageInput", "javascript");
-  @@clientName(ChatTopicCreateOrReplace, "ChatTopicInput", "javascript");
 }
 
 namespace Customizations {
@@ -247,7 +235,7 @@ namespace Customizations {
   );
   @@WebPubSubChat.PythonCustomizations.requestModel(
     WebPubSubChatServiceClient.createOrReplaceUser,
-    WebPubSubChat.PythonCustomizations.HumanChatUserInput,
+    WebPubSubChat.PythonCustomizations.HumanChatUserCreateOrReplace,
     "javascript"
   );
 }

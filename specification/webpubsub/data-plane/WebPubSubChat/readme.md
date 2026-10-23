@@ -14,8 +14,9 @@ retain the `kind` discriminator and human-user subtype.
 PUT models use `CreateOrUpdate` projections. Topic PUT requires `title` and
 optionally accepts `state` when replacing an existing topic. PATCH projections
 use `OptionalProperties<Update<...>>` so unchanged fields can be omitted.
-JavaScript uses the same projections with its existing `Input` names and a
-concrete `HumanChatUserInput` requiring `kind: "Human"`, `nickname`, and `roleName`.
+JavaScript uses the same projections and `CreateOrReplace` / `Update` model
+names as Python, with a concrete `HumanChatUserCreateOrReplace` requiring
+`kind: "Human"`, `nickname`, and `roleName`.
 
 `python-customizations.mjs` resolves the `resource` body parameter from each
 instantiated standard operation and applies the client generator core's
