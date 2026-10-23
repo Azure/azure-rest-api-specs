@@ -1623,6 +1623,7 @@ paths:
           - DigitalWorker=V1Preview
           - GitHubCopilot=V1Preview
           - Skills=V1Preview
+          - MicrosoftCopilot=V1Preview
       tags:
         - Agents
       requestBody:
@@ -2376,7 +2377,7 @@ paths:
           schema:
             type: boolean
           explode: false
-        - name: structured_input
+        - name: structured_inputs
           in: query
           required: false
           description: |-
@@ -5419,6 +5420,7 @@ paths:
           - DigitalWorker=V1Preview
           - GitHubCopilot=V1Preview
           - Skills=V1Preview
+          - MicrosoftCopilot=V1Preview
       tags:
         - Agent Versions
       requestBody:
@@ -42859,6 +42861,7 @@ components:
         - DigitalWorker=V1Preview
         - GitHubCopilot=V1Preview
         - Skills=V1Preview
+        - MicrosoftCopilot=V1Preview
       description: Feature opt-in keys for agent definition operations supporting conditional preview features.
     AgentEndpointAuthorizationScheme:
       type: object
@@ -42996,11 +42999,13 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          microsoft_copilot_preview: '#/components/schemas/MicrosoftCopilotHarness'
           github_copilot_preview: '#/components/schemas/GitHubCopilotHarness'
       description: A managed runtime and agent loop used to execute a prompt agent.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - GitHubCopilot=V1Preview
+          - MicrosoftCopilot=V1Preview
     AgentIdentity:
       type: object
       required:
@@ -46862,6 +46867,7 @@ components:
               - DigitalWorker=V1Preview
               - GitHubCopilot=V1Preview
               - Skills=V1Preview
+              - MicrosoftCopilot=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
@@ -46893,6 +46899,7 @@ components:
           - DigitalWorker=V1Preview
           - GitHubCopilot=V1Preview
           - Skills=V1Preview
+          - MicrosoftCopilot=V1Preview
     CreateAgentSessionRequest:
       type: object
       required:
@@ -47008,6 +47015,7 @@ components:
               - DigitalWorker=V1Preview
               - GitHubCopilot=V1Preview
               - Skills=V1Preview
+              - MicrosoftCopilot=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
@@ -50338,7 +50346,7 @@ components:
         - shell
         - web
         - subagents
-      description: A customer-configurable GitHub Copilot built-in tool.
+      description: The legacy GitHub Copilot built-in tool names retained for compatibility. Use `MicrosoftCopilotBuiltInTool` for new integrations.
     GitHubCopilotHarness:
       type: object
       required:
@@ -50348,10 +50356,10 @@ components:
           type: string
           enum:
             - github_copilot_preview
-          description: The type of managed harness. Always `github_copilot_preview`.
+          description: The legacy type of managed harness. Always `github_copilot_preview`; use `microsoft_copilot_preview` for new prompt agents.
       allOf:
         - $ref: '#/components/schemas/AgentHarness'
-      description: The GitHub Copilot managed harness for prompt agents.
+      description: The legacy GitHub Copilot managed harness retained for compatibility. Use `MicrosoftCopilotHarness` for new prompt agents.
       x-ms-foundry-meta:
         required_previews:
           - GitHubCopilot=V1Preview
@@ -50366,7 +50374,7 @@ components:
         enabled:
           type: boolean
           description: Whether the built-in tool is enabled. If omitted, the toolset default applies.
-      description: An enablement override for a GitHub Copilot built-in tool.
+      description: The legacy per-tool enablement override retained for compatibility. Use `MicrosoftCopilotToolsetConfig` for new integrations.
     GitHubCopilotToolsetDefaultConfig:
       type: object
       properties:
@@ -50374,7 +50382,7 @@ components:
           type: boolean
           description: Whether built-in tools are enabled by default. Defaults to true.
           default: true
-      description: The default enablement setting for GitHub Copilot built-in tools.
+      description: The legacy default enablement setting retained for compatibility. Use `MicrosoftCopilotToolsetDefaultConfig` for new integrations.
     GitHubCopilotToolsetPreview:
       type: object
       required:
@@ -50384,7 +50392,7 @@ components:
           type: string
           enum:
             - github_copilot_toolset_preview
-          description: The type of the toolset. Always `github_copilot_toolset_preview`.
+          description: The legacy type of the toolset. Always `github_copilot_toolset_preview`; use `microsoft_copilot_toolset_preview` for new integrations.
         default_config:
           $ref: '#/components/schemas/GitHubCopilotToolsetDefaultConfig'
           description: The default configuration for built-in tools. If omitted, built-in tools are enabled by default.
@@ -50395,7 +50403,7 @@ components:
           description: Per-tool configuration overrides. Duplicate built-in tool names are not allowed.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
-      description: Configuration overrides for GitHub Copilot built-in tools.
+      description: The legacy GitHub Copilot toolset retained for compatibility. Use `MicrosoftCopilotToolsetPreview` for new integrations.
       x-ms-foundry-meta:
         required_previews:
           - GitHubCopilot=V1Preview
@@ -51896,6 +51904,84 @@ components:
             - Shared
             - Tenant
       description: The publish scope for the generated Microsoft Teams app.
+    MicrosoftCopilotBuiltInTool:
+      type: string
+      enum:
+        - filesystem_read
+        - filesystem_write
+        - shell
+        - web
+        - subagents
+      description: A customer-configurable Microsoft Copilot built-in tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - MicrosoftCopilot=V1Preview
+    MicrosoftCopilotHarness:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - microsoft_copilot_preview
+          description: The type of managed harness. Always `microsoft_copilot_preview`.
+      allOf:
+        - $ref: '#/components/schemas/AgentHarness'
+      description: The Microsoft Copilot managed harness for prompt agents.
+      x-ms-foundry-meta:
+        required_previews:
+          - MicrosoftCopilot=V1Preview
+    MicrosoftCopilotToolsetConfig:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/MicrosoftCopilotBuiltInTool'
+          description: The built-in tool to configure.
+        enabled:
+          type: boolean
+          description: Whether the built-in tool is enabled. If omitted, the toolset default applies.
+      description: An enablement override for a Microsoft Copilot built-in tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - MicrosoftCopilot=V1Preview
+    MicrosoftCopilotToolsetDefaultConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether built-in tools are enabled by default. Defaults to true.
+          default: true
+      description: The default enablement setting for Microsoft Copilot built-in tools.
+      x-ms-foundry-meta:
+        required_previews:
+          - MicrosoftCopilot=V1Preview
+    MicrosoftCopilotToolsetPreview:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - microsoft_copilot_toolset_preview
+          description: The type of the toolset. Always `microsoft_copilot_toolset_preview`.
+        default_config:
+          $ref: '#/components/schemas/MicrosoftCopilotToolsetDefaultConfig'
+          description: The default configuration for built-in tools. If omitted, built-in tools are enabled by default.
+        configs:
+          type: array
+          items:
+            $ref: '#/components/schemas/MicrosoftCopilotToolsetConfig'
+          description: Per-tool configuration overrides. Duplicate built-in tool names are not allowed.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: Configuration overrides for Microsoft Copilot built-in tools.
+      x-ms-foundry-meta:
+        required_previews:
+          - MicrosoftCopilot=V1Preview
     MicrosoftFabricPreviewTool:
       type: object
       required:
@@ -78628,6 +78714,7 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          microsoft_copilot_toolset_preview: '#/components/schemas/MicrosoftCopilotToolsetPreview'
           github_copilot_toolset_preview: '#/components/schemas/GitHubCopilotToolsetPreview'
           bing_grounding: '#/components/schemas/BingGroundingTool'
           fabric_dataagent_preview: '#/components/schemas/MicrosoftFabricPreviewTool'
@@ -79048,6 +79135,7 @@ components:
             - browser_automation
             - capture_structured_outputs
             - openapi
+            - microsoft_copilot_toolset_preview
     OpenAI.ToolsArray:
       type: array
       items:
@@ -81070,8 +81158,9 @@ components:
           $ref: '#/components/schemas/AgentHarness'
           description: The managed runtime and agent loop used to execute this prompt agent.
           x-ms-foundry-meta:
-            required_previews:
+            conditional_previews:
               - GitHubCopilot=V1Preview
+              - MicrosoftCopilot=V1Preview
         model:
           type: string
           description: The model deployment to use for this agent.
@@ -86106,6 +86195,7 @@ components:
               - DigitalWorker=V1Preview
               - GitHubCopilot=V1Preview
               - Skills=V1Preview
+              - MicrosoftCopilot=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
@@ -86118,6 +86208,7 @@ components:
           - DigitalWorker=V1Preview
           - GitHubCopilot=V1Preview
           - Skills=V1Preview
+          - MicrosoftCopilot=V1Preview
     UpdateEvalParametersBody:
       type: object
       properties:
@@ -87263,9 +87354,19 @@ components:
           items:
             type: string
           description: Optional phrase hints that bias recognition toward domain terms.
+        profanity_filter:
+          $ref: '#/components/schemas/VoiceAgentProfanityFilterMode'
+          description: |-
+            Controls how profanity is handled in input transcripts. Supported only with managed Azure Speech
+            (`azure-speech`), including Custom Speech.
+            Set this property before the session starts. If omitted, the transcription provider's default applies.
+            You cannot change the mode during a session.
+            Filtering affects transcript events and the text sent to cascaded models. It does not change input
+            audio, voice activity detection, or assistant speech; audio-native models still receive the original
+            audio. Mandatory service masking policies apply even when you select `unfiltered`.
       description: |-
-        Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
-        options with the Azure and MAI transcription models, custom speech models, and phrase hints.
+        Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
+        and phrase hints.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -87491,6 +87592,18 @@ components:
             - far_field
             - azure_deep_noise_suppression
       description: The input audio noise reduction mode.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentProfanityFilterMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - masked
+            - unfiltered
+            - removed
+      description: The supported input-transcript profanity filtering modes.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
