@@ -3,6 +3,9 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Sql;
 
+@@clientName(ReaderEndpoints.createOrUpdate::parameters.resource, "parameters");
+@@clientName(ReaderEndpoints.update::parameters.properties, "parameters");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DatabaseExtensions.properties);
 

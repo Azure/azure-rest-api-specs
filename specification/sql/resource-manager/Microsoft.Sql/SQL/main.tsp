@@ -13,6 +13,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
+import "./ReaderEndpoint.tsp";
 import "./BackupShortTermRetentionPolicy.tsp";
 import "./ServerBlobAuditingPolicy.tsp";
 import "./DatabaseBlobAuditingPolicy.tsp";
