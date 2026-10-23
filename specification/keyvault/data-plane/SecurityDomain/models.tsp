@@ -149,6 +149,7 @@ model Attributes {
   /**
    * Determines whether the object is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Attributes.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**

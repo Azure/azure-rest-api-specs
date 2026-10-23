@@ -259,6 +259,7 @@ interface VirtualMachineBulkOperations {
   ): ArmResponse<ReimageResourceOperationResponse> | ErrorResponse;
 
   /** List recent errors for operations in a resource group. */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing bulkListOperationErrors SDK method name; renaming it would break client compatibility."
   @added(Versions.`2026-07-06-preview`)
   @removed(Versions.`2026-09-06-preview`)
   @added(Versions.`2026-10-06-preview`)
@@ -272,6 +273,7 @@ interface VirtualMachineBulkOperations {
     ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing bulkListOperationErrors.lookbackInMinutes retains the lookbackInMinutes query parameter; preserve wire compatibility."
     @query("lookbackInMinutes")
     @doc("The number of minutes before the current time to include when listing bulk action errors.")
     lookbackInMinutes?: int32,

@@ -119,24 +119,28 @@ interface EnvironmentVersions {
       /**
        * Ordering of list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @query("$orderBy")
       $orderBy?: string;
 
       /**
        * Maximum number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       /**
        * View type for including/excluding (for example) archived entities.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.listViewType retains the listViewType query parameter; preserve wire compatibility."
       @query("listViewType")
       listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
@@ -206,24 +210,28 @@ interface EnvironmentVersionOperationGroup {
       /**
        * Ordering of list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @query("$orderBy")
       $orderBy?: string;
 
       /**
        * Maximum number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       /**
        * View type for including/excluding (for example) archived entities.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.listViewType retains the listViewType query parameter; preserve wire compatibility."
       @query("listViewType")
       listViewType?: ListViewType = ListViewType.ActiveOnly;
     },

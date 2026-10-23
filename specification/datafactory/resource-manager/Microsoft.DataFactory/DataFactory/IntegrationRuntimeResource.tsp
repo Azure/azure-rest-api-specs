@@ -143,6 +143,7 @@ interface IntegrationRuntimeResources {
   /**
    * Gets the list of outbound network dependencies for a given Azure-SSIS integration runtime.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listOutboundNetworkDependenciesEndpoints retains its response and SDK paging behavior; preserve published compatibility."
   @tag("integrationRuntimes")
   @get
   @action("outboundNetworkDependenciesEndpoints")

@@ -425,12 +425,14 @@ model ApplicationInsightsComponentDataVolumeCap {
    * Reserved, not used for now.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentDataVolumeCap.StopSendNotificationWhenHitThreshold has a boolean wire value; preserve the published property contract."
   StopSendNotificationWhenHitThreshold?: boolean;
 
   /**
    * Do not send a notification email when the daily data volume cap is met.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentDataVolumeCap.StopSendNotificationWhenHitCap has a boolean wire value; preserve the published property contract."
   StopSendNotificationWhenHitCap?: boolean;
 
   /**
@@ -456,6 +458,7 @@ model ApplicationInsightsComponentQuotaStatus {
    * The daily data volume cap is met, and data ingestion will be stopped.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentQuotaStatus.ShouldBeThrottled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   ShouldBeThrottled?: boolean;
 
@@ -475,6 +478,7 @@ model ApplicationInsightsComponentFeatureCapabilities {
    * Whether allow to use continuous export feature.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentFeatureCapabilities.SupportExportData has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   SupportExportData?: boolean;
 
@@ -496,6 +500,7 @@ model ApplicationInsightsComponentFeatureCapabilities {
    * Reserved, not used now.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentFeatureCapabilities.LiveStreamMetrics has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   LiveStreamMetrics?: boolean;
 
@@ -503,6 +508,7 @@ model ApplicationInsightsComponentFeatureCapabilities {
    * Reserved, not used now.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentFeatureCapabilities.ApplicationMap has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   ApplicationMap?: boolean;
 
@@ -510,6 +516,7 @@ model ApplicationInsightsComponentFeatureCapabilities {
    * Whether allow to use work item integration feature.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentFeatureCapabilities.WorkItemIntegration has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   WorkItemIntegration?: boolean;
 
@@ -517,6 +524,7 @@ model ApplicationInsightsComponentFeatureCapabilities {
    * Reserved, not used now.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentFeatureCapabilities.PowerBIIntegration has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   PowerBIIntegration?: boolean;
 
@@ -524,6 +532,7 @@ model ApplicationInsightsComponentFeatureCapabilities {
    * Reserved, not used now.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentFeatureCapabilities.OpenSchema has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   OpenSchema?: boolean;
 
@@ -531,6 +540,7 @@ model ApplicationInsightsComponentFeatureCapabilities {
    * Reserved, not used now.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentFeatureCapabilities.ProactiveDetection has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   ProactiveDetection?: boolean;
 
@@ -538,6 +548,7 @@ model ApplicationInsightsComponentFeatureCapabilities {
    * Reserved, not used now.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentFeatureCapabilities.AnalyticsIntegration has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   AnalyticsIntegration?: boolean;
 
@@ -545,6 +556,7 @@ model ApplicationInsightsComponentFeatureCapabilities {
    * Whether allow to use multiple steps web test feature.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentFeatureCapabilities.MultipleStepWebTest has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   MultipleStepWebTest?: boolean;
 
@@ -633,6 +645,7 @@ model ApplicationInsightsComponentFeature {
    * Reserved, not used now.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentFeature.IsHidden has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   IsHidden?: boolean;
 
@@ -655,6 +668,7 @@ model ApplicationInsightsComponentFeature {
    * Whether can apply addon feature on to it.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentFeature.IsMainFeature has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   IsMainFeature?: boolean;
 
@@ -725,11 +739,13 @@ model ApplicationInsightsComponentProactiveDetectionConfiguration {
   /**
    * A flag that indicates whether this rule is enabled by the user
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentProactiveDetectionConfiguration.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
    * A flag that indicated whether notifications on this rule should be sent to subscription owners
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentProactiveDetectionConfiguration.sendEmailsToSubscriptionOwners has a boolean wire value; preserve the published property contract."
   sendEmailsToSubscriptionOwners?: boolean;
 
   /**
@@ -781,24 +797,28 @@ model ApplicationInsightsComponentProactiveDetectionConfigurationRuleDefinitions
    * A flag indicating whether the rule is hidden (from the UI)
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentProactiveDetectionConfigurationRuleDefinitions.IsHidden has a boolean wire value; preserve the published property contract."
   IsHidden?: boolean;
 
   /**
    * A flag indicating whether the rule is enabled by default
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentProactiveDetectionConfigurationRuleDefinitions.IsEnabledByDefault has a boolean wire value; preserve the published property contract."
   IsEnabledByDefault?: boolean;
 
   /**
    * A flag indicating whether the rule is in preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentProactiveDetectionConfigurationRuleDefinitions.IsInPreview has a boolean wire value; preserve the published property contract."
   IsInPreview?: boolean;
 
   /**
    * A flag indicating whether email notifications are supported for detections for this rule
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentProactiveDetectionConfigurationRuleDefinitions.SupportsEmailNotifications has a boolean wire value; preserve the published property contract."
   SupportsEmailNotifications?: boolean;
 }
 
@@ -839,6 +859,7 @@ model WorkItemConfiguration {
    * Boolean value indicating whether configuration is default
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WorkItemConfiguration.IsDefault has a boolean wire value; preserve the published property contract."
   IsDefault?: boolean;
 
   /**
@@ -895,6 +916,7 @@ model WorkItemCreateConfiguration {
    * Boolean indicating validate only
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WorkItemCreateConfiguration.ValidateOnly has a boolean wire value; preserve the published property contract."
   ValidateOnly?: boolean;
 
   /**

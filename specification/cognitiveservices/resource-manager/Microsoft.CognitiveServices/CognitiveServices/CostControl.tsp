@@ -163,6 +163,7 @@ model CostControlRule {
   /**
    * Whether the cost control renews. The default is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CostControlRule.recurring has a boolean wire value; preserve the published property contract."
   recurring?: boolean = true;
 
   /**

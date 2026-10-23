@@ -42,6 +42,7 @@ interface FileServiceUsageOperationGroup {
       /**
        * Optional, specifies the maximum number of file service usages to be included in the list response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listServiceUsages.$maxpagesize retains the $maxpagesize query parameter; preserve wire compatibility."
       @query("$maxpagesize")
       $maxpagesize?: int32;
     },

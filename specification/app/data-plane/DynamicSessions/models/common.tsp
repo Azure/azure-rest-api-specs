@@ -40,6 +40,7 @@ model SessionResourceFilePathQueryParameter {
 @added(Versions.v2025_10_02_preview)
 model SessionResourceFileRecursiveListParameter {
   /** Whether to recursively list files. Default to false that would only list files in the current directory. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SessionResourceFileRecursiveListParameter.recursive has a boolean wire value; preserve the published property contract."
   @query
   @added(Versions.v2025_10_02_preview)
   recursive?: boolean;

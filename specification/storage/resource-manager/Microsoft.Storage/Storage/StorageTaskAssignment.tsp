@@ -94,6 +94,7 @@ interface StorageTaskAssignments {
       /**
        * Optional, specifies the maximum number of storage task assignment Ids to be included in the list response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -115,6 +116,7 @@ interface StorageTaskAssignments {
       /**
        * Optional, specifies the maximum number of storage task assignment instances to be included in the list response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing storageTaskAssignmentInstancesReportList.$maxpagesize retains the $maxpagesize query parameter; preserve wire compatibility."
       @query("$maxpagesize")
       $maxpagesize?: int32;
 

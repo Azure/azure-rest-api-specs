@@ -192,6 +192,7 @@ interface Service {
       ...AccountKindResponseHeader;
 
       /** Indicates if the account has hierarchical namespace enabled. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getAccountInfo.isHierarchicalNamespaceEnabled has a boolean wire value; preserve the published property contract."
       @header("x-ms-is-hns-enabled")
       isHierarchicalNamespaceEnabled?: boolean;
     }
@@ -235,6 +236,7 @@ interface Service {
   /** Lists blobs across all containers whose tags match a given search expression. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing findBlobsByTags SDK method name; renaming it would break client compatibility."
   @list
   @route("?comp=blobs")
   findBlobsByTags is StorageOperationResponseBody<
@@ -299,10 +301,12 @@ interface Container {
       ...BlobPublicAccessResponseHeader;
 
       /** Indicates whether the container has an immutability policy set on it. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getProperties.hasImmutabilityPolicy has a boolean wire value; preserve the published property contract."
       @header("x-ms-has-immutability-policy")
       hasImmutabilityPolicy?: boolean;
 
       /** Indicates whether the container has a legal hold. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getProperties.hasLegalHold has a boolean wire value; preserve the published property contract."
       @header("x-ms-has-legal-hold")
       hasLegalHold?: boolean;
 
@@ -313,6 +317,7 @@ interface Container {
       ...DenyEncryptionScopeOverrideResponseHeader;
 
       /** Indicates whether version level WORM (Write Once, Read Many) is enabled on a container. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getProperties.isImmutableStorageWithVersioningEnabled has a boolean wire value; preserve the published property contract."
       @header("x-ms-immutable-storage-with-versioning-enabled")
       isImmutableStorageWithVersioningEnabled?: boolean;
     }
@@ -482,6 +487,7 @@ interface Container {
   /** Lists blobs in the specified container whose tags match a given search expression. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing findBlobsByTags SDK method name; renaming it would break client compatibility."
   @get
   @list
   @route("?restype=container&comp=blobs")
@@ -811,6 +817,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing download SDK method name; renaming it would break client compatibility."
   @get
   download(
     ...ApiVersionHeader,
@@ -822,11 +829,13 @@ interface Blob {
     ...LeaseIdOptionalParameter,
 
     /** When set to true and specified together with the `Range` header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MiB in size. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing download.rangeGetContentMd5 has a boolean wire value; preserve the published property contract."
     @clientName("rangeGetContentMD5", "javascript")
     @header("x-ms-range-get-content-md5")
     rangeGetContentMd5?: boolean,
 
     /** When set to true and the request includes a Range header, the service returns the CRC64 hash for the range, as long as the range is less than or equal to 4 MiB in size. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing download.rangeGetContentCrc64 has a boolean wire value; preserve the published property contract."
     @header("x-ms-range-get-content-crc64")
     rangeGetContentCrc64?: boolean,
 
@@ -905,6 +914,7 @@ interface Blob {
         accessTier?: string;
 
         /** Included if the access tier is inferred. */
+        #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing download.accessTierInferred has a boolean wire value; preserve the published property contract."
         @added(Versions.v2026_10_06)
         @header("x-ms-access-tier-inferred")
         accessTierInferred?: boolean;
@@ -977,6 +987,7 @@ interface Blob {
         accessTier?: string;
 
         /** Included if the access tier is inferred. */
+        #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing download.accessTierInferred has a boolean wire value; preserve the published property contract."
         @added(Versions.v2026_10_06)
         @header("x-ms-access-tier-inferred")
         accessTierInferred?: boolean;
@@ -1031,6 +1042,7 @@ interface Blob {
       ...CopySourceResponseHeader;
 
       /** Included if the blob is incremental copy blob. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getProperties.isIncrementalCopy has a boolean wire value; preserve the published property contract."
       @header("x-ms-incremental-copy")
       isIncrementalCopy?: boolean;
 
@@ -1060,6 +1072,7 @@ interface Blob {
       accessTier?: string;
 
       /** Included if the access tier is inferred. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getProperties.accessTierInferred has a boolean wire value; preserve the published property contract."
       @header("x-ms-access-tier-inferred")
       accessTierInferred?: boolean;
 
@@ -1455,6 +1468,7 @@ interface Blob {
       ...BlobTagsHeaderParameter;
 
       /** Overrides the sealed state of the destination blob. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing startCopyFromUrl.sealBlob has a boolean wire value; preserve the published property contract."
       @header("x-ms-seal-blob")
       sealBlob?: boolean;
 

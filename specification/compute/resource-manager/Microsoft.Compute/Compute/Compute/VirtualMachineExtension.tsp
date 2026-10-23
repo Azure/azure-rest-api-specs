@@ -62,6 +62,7 @@ interface VirtualMachineExtensions {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -99,12 +100,14 @@ interface VirtualMachineExtensions {
   /**
    * The operation to get all extensions of a Virtual Machine.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is VirtualMachineExtensionOps.ListSinglePage<
     VirtualMachineExtension,
     Parameters = {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },

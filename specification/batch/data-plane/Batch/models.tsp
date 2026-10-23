@@ -1141,6 +1141,7 @@ model BatchNodeFile {
   @doc("The URL of the file.")
   url?: url;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchNodeFile.isDirectory has a boolean wire value; preserve the published property contract."
   @doc("Whether the object represents a directory.")
   isDirectory?: boolean;
 
@@ -1299,6 +1300,7 @@ model HostEndpointSettings {
 
 @doc("Specifies ProxyAgent settings while creating the virtual machine.")
 model ProxyAgentSettings {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ProxyAgentSettings.enabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether Metadata Security Protocol feature should be enabled on the virtual machine or virtual machine scale set. Default is False.")
   enabled?: boolean;
 
@@ -1311,6 +1313,7 @@ model ProxyAgentSettings {
 
 @doc("Specifies the security profile settings for the virtual machine or virtual machine scale set.")
 model SecurityProfile {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityProfile.encryptionAtHost has a boolean wire value; preserve the published property contract."
   @doc("This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. For more information on encryption at host requirements, please refer to https://learn.microsoft.com/azure/virtual-machines/disk-encryption#supported-vm-sizes.")
   encryptionAtHost?: boolean;
 
@@ -1338,6 +1341,7 @@ model BatchJobSpecification {
   @doc("The priority of Jobs created under this schedule. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0. This priority is used as the default for all Jobs under the Job Schedule. You can update a Job's priority after it has been created using by using the update Job API.")
   priority?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchJobSpecification.allowTaskPreemption has a boolean wire value; preserve the published property contract."
   @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
@@ -1347,6 +1351,7 @@ model BatchJobSpecification {
   @doc("The display name for Jobs created under this schedule. The name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
   displayName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchJobSpecification.usesTaskDependencies has a boolean wire value; preserve the published property contract."
   @doc("Whether Tasks in the Job can define dependencies on each other. The default is false.")
   usesTaskDependencies?: boolean;
 
@@ -1390,6 +1395,7 @@ model BatchJobNetworkConfiguration {
   subnetId: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchJobNetworkConfiguration.skipWithdrawFromVNet has a boolean wire value; preserve the published property contract."
   @doc("Whether to withdraw Compute Nodes from the virtual network to DNC when the job is terminated or deleted.  If true, nodes will remain joined to the virtual network to DNC. If false, nodes will automatically withdraw when the job ends. Defaults to false.")
   @clientName("skipWithdrawFromVnet")
   skipWithdrawFromVNet?: boolean;
@@ -1457,12 +1463,14 @@ model BatchJobManagerTask {
   @doc("The number of scheduling slots that the Task requires to run. The default is 1. A Task can only be scheduled to run on a compute node if the node has enough free scheduling slots available. For multi-instance Tasks, this property is not supported and must not be specified.")
   requiredSlots?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchJobManagerTask.killJobOnCompletion has a boolean wire value; preserve the published property contract."
   @doc("Whether completion of the Job Manager Task signifies completion of the entire Job. If true, when the Job Manager Task completes, the Batch service marks the Job as complete. If any Tasks are still running at this time (other than Job Release), those Tasks are terminated. If false, the completion of the Job Manager Task does not affect the Job status. In this case, you should either use the onAllTasksComplete attribute to terminate the Job, or have a client or user terminate the Job explicitly. An example of this is if the Job Manager creates a set of Tasks but then takes no further role in their execution. The default value is true. If you are using the onAllTasksComplete and onTaskFailure attributes to control Job lifetime, and using the Job Manager Task only to create the Tasks for the Job (not to monitor progress), then it is important to set killJobOnCompletion to false.")
   killJobOnCompletion?: boolean;
 
   @doc("The user identity under which the Job Manager Task runs. If omitted, the Task runs as a non-administrative user unique to the Task.")
   userIdentity?: UserIdentity;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchJobManagerTask.runExclusive has a boolean wire value; preserve the published property contract."
   @doc("Whether the Job Manager Task requires exclusive use of the Compute Node where it runs. If true, no other Tasks will run on the same Node for as long as the Job Manager is running. If false, other Tasks can run simultaneously with the Job Manager on a Compute Node. The Job Manager Task counts normally against the Compute Node's concurrent Task limit, so this is only relevant if the Compute Node allows multiple concurrent Tasks. The default value is true.")
   runExclusive?: boolean;
 
@@ -1478,6 +1486,7 @@ model BatchJobManagerTask {
     """)
   applicationPackageReferences?: BatchApplicationPackageReference[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchJobManagerTask.allowLowPriorityNode has a boolean wire value; preserve the published property contract."
   @doc("Whether the Job Manager Task may run on a Spot/Low-priority Compute Node. The default value is true.")
   allowLowPriorityNode?: boolean;
 }
@@ -1505,6 +1514,7 @@ model ContainerHostBatchBindMountEntry {
   @doc("The path which be mounted to container customer can select.")
   source?: ContainerHostDataPath;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerHostBatchBindMountEntry.isReadOnly has a boolean wire value; preserve the published property contract."
   @doc("Mount this source path as read-only mode or not. Default value is false (read/write mode). For Linux, if you mount this path as a read/write mode, this does not mean that all users in container have the read/write access for the path, it depends on the access in host VM. If this path is mounted read-only, all users within the container will not be able to modify the path.")
   isReadOnly?: boolean;
 }
@@ -1643,9 +1653,11 @@ model UserIdentity {
 
 @doc("Specifies the security settings like secure boot and vTPM used while creating the virtual machine.")
 model BatchUefiSettings {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchUefiSettings.secureBootEnabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether secure boot should be enabled on the virtual machine.")
   secureBootEnabled?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchUefiSettings.vTpmEnabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether vTPM should be enabled on the virtual machine.")
   @clientName("vtpmEnabled", "python")
   vTpmEnabled?: boolean;
@@ -1718,12 +1730,14 @@ model BatchJobPreparationTask {
   @doc("Constraints that apply to the Job Preparation Task.")
   constraints?: BatchTaskConstraints;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchJobPreparationTask.waitForSuccess has a boolean wire value; preserve the published property contract."
   @doc("Whether the Batch service should wait for the Job Preparation Task to complete successfully before scheduling any other Tasks of the Job on the Compute Node. A Job Preparation Task has completed successfully if it exits with exit code 0. If true and the Job Preparation Task fails on a Node, the Batch service retries the Job Preparation Task up to its maximum retry count (as specified in the constraints element). If the Task has still not completed successfully after all retries, then the Batch service will not schedule Tasks of the Job to the Node. The Node remains active and eligible to run Tasks of other Jobs. If false, the Batch service will not wait for the Job Preparation Task to complete. In this case, other Tasks of the Job can start executing on the Compute Node while the Job Preparation Task is still running; and even if the Job Preparation Task fails, new Tasks will continue to be scheduled on the Compute Node. The default value is true.")
   waitForSuccess?: boolean;
 
   @doc("The user identity under which the Job Preparation Task runs. If omitted, the Task runs as a non-administrative user unique to the Task on Windows Compute Nodes, or a non-administrative user unique to the Pool on Linux Compute Nodes.")
   userIdentity?: UserIdentity;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchJobPreparationTask.rerunOnNodeRebootAfterSuccess has a boolean wire value; preserve the published property contract."
   @doc("Whether the Batch service should rerun the Job Preparation Task after a Compute Node reboots. The Job Preparation Task is always rerun if a Compute Node is reimaged, or if the Job Preparation Task did not complete (e.g. because the reboot occurred while the Task was running). Therefore, you should always write a Job Preparation Task to be idempotent and to behave correctly if run multiple times. The default value is true.")
   rerunOnNodeRebootAfterSuccess?: boolean;
 }
@@ -1793,6 +1807,7 @@ model BatchAutoPoolSpecification {
   @doc("The minimum lifetime of created auto Pools, and how multiple Jobs on a schedule are assigned to Pools.")
   poolLifetimeOption: BatchPoolLifetimeOption;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchAutoPoolSpecification.keepAlive has a boolean wire value; preserve the published property contract."
   @doc("Whether to keep an auto Pool alive after its lifetime expires. If false, the Batch service deletes the Pool once its lifetime (as determined by the poolLifetimeOption setting) expires; that is, when the Job or Job Schedule completes. If true, the Batch service does not delete the Pool automatically. It is up to the user to delete auto Pools created with this option.")
   keepAlive?: boolean;
 
@@ -1826,6 +1841,7 @@ model BatchPoolSpecification {
   @doc("The desired number of Spot/Low-priority Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
   targetLowPriorityNodes?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchPoolSpecification.enableAutoScale has a boolean wire value; preserve the published property contract."
   @doc("Whether the Pool size should automatically adjust over time. If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula element is required. The Pool automatically resizes according to the formula. The default value is false.")
   enableAutoScale?: boolean;
 
@@ -1835,6 +1851,7 @@ model BatchPoolSpecification {
   @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   autoScaleEvaluationInterval?: duration;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchPoolSpecification.enableInterNodeCommunication has a boolean wire value; preserve the published property contract."
   @doc("Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.")
   enableInterNodeCommunication?: boolean;
 
@@ -1918,6 +1935,7 @@ model VirtualMachineConfiguration {
 
 @doc("Windows operating system settings to apply to the virtual machine.")
 model WindowsConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WindowsConfiguration.enableAutomaticUpdates has a boolean wire value; preserve the published property contract."
   @doc("Whether automatic updates are enabled on the virtual machine. If omitted, the default value is true.")
   enableAutomaticUpdates?: boolean;
 }
@@ -1970,6 +1988,7 @@ model DiskCustomerManagedKey {
   @doc("Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value.")
   keyUrl?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DiskCustomerManagedKey.rotationToLatestKeyVersionEnabled has a boolean wire value; preserve the published property contract."
   @doc("Set this flag to true to enable auto-updating of the Disk Encryption to the latest key version. Default is false.")
   rotationToLatestKeyVersionEnabled?: boolean;
 }
@@ -2012,9 +2031,11 @@ model VMExtension {
   @doc("The version of script handler.")
   typeHandlerVersion?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMExtension.autoUpgradeMinorVersion has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.")
   autoUpgradeMinorVersion?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMExtension.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.")
   enableAutomaticUpgrade?: boolean;
 
@@ -2044,6 +2065,7 @@ model BatchOsDisk {
   @doc("The managed disk parameters.")
   managedDisk?: ManagedDisk;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchOsDisk.writeAcceleratorEnabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether writeAccelerator should be enabled or disabled on the disk.")
   writeAcceleratorEnabled?: boolean;
 }
@@ -2084,6 +2106,7 @@ model NetworkConfiguration {
   @clientName("publicIpAddressConfiguration", "!go")
   publicIPAddressConfiguration?: BatchPublicIpAddressConfiguration;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkConfiguration.enableAcceleratedNetworking has a boolean wire value; preserve the published property contract."
   @doc("Whether this pool should enable accelerated networking. Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview.")
   enableAcceleratedNetworking?: boolean;
 }
@@ -2202,6 +2225,7 @@ model BatchStartTask {
   @doc("The maximum number of times the Task may be retried. The Batch service retries a Task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries).")
   maxTaskRetryCount?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchStartTask.waitForSuccess has a boolean wire value; preserve the published property contract."
   @doc("Whether the Batch service should wait for the StartTask to complete successfully (that is, to exit with exit code 0) before scheduling any Tasks on the Compute Node. If true and the StartTask fails on a Node, the Batch service retries the StartTask up to its maximum retry count (maxTaskRetryCount). If the Task has still not completed successfully after all retries, then the Batch service marks the Node unusable, and will not schedule Tasks to it. This condition can be detected via the Compute Node state and failure info details. If false, the Batch service will not wait for the StartTask to complete. In this case, other Tasks can start executing on the Compute Node while the StartTask is still running; and even if the StartTask fails, new Tasks will continue to be scheduled on the Compute Node. The default is true.")
   waitForSuccess?: boolean;
 }
@@ -2478,6 +2502,7 @@ model BatchJob {
   @visibility(Lifecycle.Read)
   displayName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchJob.usesTaskDependencies has a boolean wire value; preserve the published property contract."
   @doc("Whether Tasks in the Job can define dependencies on each other. The default is false.")
   @visibility(Lifecycle.Read)
   usesTaskDependencies?: boolean;
@@ -2517,6 +2542,7 @@ model BatchJob {
   @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0.")
   priority?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchJob.allowTaskPreemption has a boolean wire value; preserve the published property contract."
   @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
@@ -2581,12 +2607,14 @@ model BatchJobCreateOptions {
   @doc("The display name for the Job. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
   displayName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchJobCreateOptions.usesTaskDependencies has a boolean wire value; preserve the published property contract."
   @doc("Whether Tasks in the Job can define dependencies on each other. The default is false.")
   usesTaskDependencies?: boolean;
 
   @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0.")
   priority?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchJobCreateOptions.allowTaskPreemption has a boolean wire value; preserve the published property contract."
   @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
@@ -2633,6 +2661,7 @@ model BatchJobUpdateOptions {
   @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. If omitted, the priority of the Job is left unchanged.")
   priority?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchJobUpdateOptions.allowTaskPreemption has a boolean wire value; preserve the published property contract."
   @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
@@ -2973,6 +3002,7 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   targetLowPriorityNodes?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchPool.enableAutoScale has a boolean wire value; preserve the published property contract."
   @doc("Whether the Pool size should automatically adjust over time. If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula property is required and the Pool automatically resizes according to the formula. The default value is false.")
   @visibility(Lifecycle.Read)
   enableAutoScale?: boolean;
@@ -2989,6 +3019,7 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   autoScaleRun?: AutoScaleRun;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchPool.enableInterNodeCommunication has a boolean wire value; preserve the published property contract."
   @doc("Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.")
   @visibility(Lifecycle.Read)
   enableInterNodeCommunication?: boolean;
@@ -3061,6 +3092,7 @@ model BatchPoolCreateOptions {
   @doc("The desired number of Spot/Low-priority Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
   targetLowPriorityNodes?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchPoolCreateOptions.enableAutoScale has a boolean wire value; preserve the published property contract."
   @doc("Whether the Pool size should automatically adjust over time. If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula property is required and the Pool automatically resizes according to the formula. The default value is false.")
   enableAutoScale?: boolean;
 
@@ -3070,6 +3102,7 @@ model BatchPoolCreateOptions {
   @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   autoScaleEvaluationInterval?: duration;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchPoolCreateOptions.enableInterNodeCommunication has a boolean wire value; preserve the published property contract."
   @doc("Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.")
   enableInterNodeCommunication?: boolean;
 
@@ -3123,6 +3156,7 @@ model BatchPoolUpdateOptions {
   @doc("The size of virtual machines in the Pool. For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-pool-vm-sizes).<br /><br />This field can be updated only when the pool is empty.")
   vmSize?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchPoolUpdateOptions.enableInterNodeCommunication has a boolean wire value; preserve the published property contract."
   @doc("Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.<br /><br />This field can be updated only when the pool is empty.")
   enableInterNodeCommunication?: boolean;
 
@@ -3783,25 +3817,30 @@ model UpgradePolicy {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("The configuration parameters used for performing automatic OS upgrade.")
 model AutomaticOsUpgradePolicy {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomaticOsUpgradePolicy.disableAutomaticRollback has a boolean wire value; preserve the published property contract."
   @doc("Whether OS image rollback feature should be disabled.")
   disableAutomaticRollback?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomaticOsUpgradePolicy.enableAutomaticOSUpgrade has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. <br /><br /> If this is set to true for Windows based pools, [WindowsConfiguration.enableAutomaticUpdates](https://learn.microsoft.com/rest/api/batchservice/pools/create-pool#windowsconfiguration) cannot be set to true.")
   @clientName("enableAutomaticOsUpgrade")
   enableAutomaticOSUpgrade?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomaticOsUpgradePolicy.useRollingUpgradePolicy has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether rolling upgrade policy should be used during Auto OS Upgrade. Auto OS Upgrade will fallback to the default policy if no policy is defined on the VMSS.")
   useRollingUpgradePolicy?: boolean;
 
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomaticOsUpgradePolicy.osRollingUpgradeDeferral has a boolean wire value; preserve the published property contract."
   @doc("Defer OS upgrades on the TVMs if they are running tasks.")
   osRollingUpgradeDeferral?: boolean;
 }
 
 @doc("The configuration parameters used while performing a rolling upgrade.")
 model RollingUpgradePolicy {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RollingUpgradePolicy.enableCrossZoneUpgrade has a boolean wire value; preserve the published property contract."
   @doc("Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. This field is able to be set to true or false only when using NodePlacementConfiguration as Zonal.")
   enableCrossZoneUpgrade?: boolean;
 
@@ -3817,9 +3856,11 @@ model RollingUpgradePolicy {
   @doc("The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration is specified in ISO 8601 format.")
   pauseTimeBetweenBatches?: duration;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RollingUpgradePolicy.prioritizeUnhealthyInstances has a boolean wire value; preserve the published property contract."
   @doc("Upgrade all unhealthy instances in a scale set before any healthy instances.")
   prioritizeUnhealthyInstances?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RollingUpgradePolicy.rollbackFailedInstancesOnPolicyBreach has a boolean wire value; preserve the published property contract."
   @doc("Rollback failed instances to previous model if the Rolling Upgrade policy is violated.")
   rollbackFailedInstancesOnPolicyBreach?: boolean;
 }
@@ -3830,6 +3871,7 @@ model BatchNodeUserCreateOptions {
   @doc("The user name of the Account.")
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchNodeUserCreateOptions.isAdmin has a boolean wire value; preserve the published property contract."
   @doc("Whether the Account should be an administrator on the Compute Node. The default value is false.")
   isAdmin?: boolean;
 
@@ -3937,6 +3979,7 @@ model BatchNode {
   @visibility(Lifecycle.Read)
   errors?: BatchNodeError[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchNode.isDedicated has a boolean wire value; preserve the published property contract."
   @doc("Whether this Compute Node is a dedicated Compute Node. If false, the Compute Node is a Spot/Low-priority Compute Node.")
   @visibility(Lifecycle.Read)
   isDedicated?: boolean;

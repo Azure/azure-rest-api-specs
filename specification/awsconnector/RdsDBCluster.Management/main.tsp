@@ -73,6 +73,7 @@ model AwsRdsDBClusterProperties {
   @identifiers(#[])
   associatedRoles?: DBClusterRole[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBClusterProperties.autoMinorVersionUpgrade has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.")
   autoMinorVersionUpgrade?: boolean;
 
@@ -85,6 +86,7 @@ model AwsRdsDBClusterProperties {
   @doc("The number of days for which automated backups are retained.")
   backupRetentionPeriod?: int32 = 1;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBClusterProperties.copyTagsToSnapshot has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.")
   copyTagsToSnapshot?: boolean;
 
@@ -115,6 +117,7 @@ model AwsRdsDBClusterProperties {
   @doc("The name of your database. If you don't provide a name, then Amazon RDS won't create a database in this DB cluster. For naming constraints, see Naming Constraints in the Amazon RDS User Guide.")
   databaseName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBClusterProperties.deletionProtection has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.")
   deletionProtection?: boolean;
 
@@ -127,12 +130,15 @@ model AwsRdsDBClusterProperties {
   @doc("The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs in the Amazon Aurora User Guide.")
   enableCloudwatchLogsExports?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBClusterProperties.enableGlobalWriteForwarding has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.")
   enableGlobalWriteForwarding?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBClusterProperties.enableHttpEndpoint has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether to enable the HTTP endpoint for DB cluster. By default, the HTTP endpoint is disabled.")
   enableHttpEndpoint?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBClusterProperties.enableIAMDatabaseAuthentication has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.")
   enableIAMDatabaseAuthentication?: boolean;
 
@@ -157,6 +163,7 @@ model AwsRdsDBClusterProperties {
   @doc("The Amazon Resource Name (ARN) of the AWS Key Management Service master key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default master key is used. If you specify this property, you must set the StorageEncrypted property to true.")
   kmsKeyId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBClusterProperties.manageMasterUserPassword has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether to manage the master user password with AWS Secrets Manager.")
   manageMasterUserPassword?: boolean;
 
@@ -179,6 +186,7 @@ model AwsRdsDBClusterProperties {
   @doc("The network type of the DB cluster.")
   networkType?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBClusterProperties.performanceInsightsEnabled has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether to turn on Performance Insights for the DB cluster.")
   performanceInsightsEnabled?: boolean;
 
@@ -197,6 +205,7 @@ model AwsRdsDBClusterProperties {
   @doc("The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. To see the time blocks available, see Adjusting the Preferred DB Cluster Maintenance Window in the Amazon Aurora User Guide.")
   preferredMaintenanceWindow?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBClusterProperties.publiclyAccessible has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether the DB cluster is publicly accessible.")
   publiclyAccessible?: boolean;
 
@@ -227,6 +236,7 @@ model AwsRdsDBClusterProperties {
   @doc("The AWS Region which contains the source DB cluster when replicating a DB cluster. For example, us-east-1.")
   sourceRegion?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBClusterProperties.storageEncrypted has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the DB instance is encrypted.If you specify the DBClusterIdentifier, SnapshotIdentifier, or SourceDBInstanceIdentifier property, don't specify this property. The value is inherited from the cluster, snapshot, or source DB instance.")
   storageEncrypted?: boolean;
 
@@ -240,6 +250,7 @@ model AwsRdsDBClusterProperties {
   @identifiers(#[])
   tags?: Tag[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsDBClusterProperties.useLatestRestorableTime has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether to restore the DB cluster to the latest restorable backup time. By default, the DB cluster is not restored to the latest restorable backup time.")
   useLatestRestorableTime?: boolean;
 
@@ -302,6 +313,7 @@ model ReadEndpoint {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ScalingConfiguration")
 model ScalingConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScalingConfiguration.autoPause has a boolean wire value; preserve the published property contract."
   @doc("A value that indicates whether to allow or disallow automatic pause for an Aurora DB cluster in serverless DB engine mode. A DB cluster can be paused only when it's idle (it has no connections).")
   autoPause?: boolean;
 

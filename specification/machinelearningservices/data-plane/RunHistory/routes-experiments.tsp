@@ -95,6 +95,7 @@ interface Experiments {
       ...WorkspacePathParams;
 
       /** Whether to return only URL-safe experiment names. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByQuery.urlSafeExperimentNamesOnly has a boolean wire value; preserve the published property contract."
       @query urlSafeExperimentNamesOnly?: boolean;
 
       /** The query parameters. */

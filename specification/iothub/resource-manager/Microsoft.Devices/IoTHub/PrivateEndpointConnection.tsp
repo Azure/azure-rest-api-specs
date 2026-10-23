@@ -95,6 +95,7 @@ interface PrivateEndpointConnections {
   /**
    * List private endpoint connection properties
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @summary("List private endpoint connections")
   @tag("GET")
   list is PrivateEndpointConnectionOps.ListSinglePage<

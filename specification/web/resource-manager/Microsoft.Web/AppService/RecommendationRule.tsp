@@ -67,12 +67,15 @@ interface RecommendationRules {
       /**
        * Specify <code>true</code> to update the last-seen timestamp of the recommendation object.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getRuleDetailsByHostingEnvironment.updateSeen has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getRuleDetailsByHostingEnvironment.updateSeen retains the updateSeen query parameter; preserve wire compatibility."
       @query("updateSeen")
       updateSeen?: boolean;
 
       /**
        * The GUID of the recommendation object if you query an expired one. You don't need to specify it to query an active entry.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getRuleDetailsByHostingEnvironment.recommendationId retains the recommendationId query parameter; preserve wire compatibility."
       @query("recommendationId")
       recommendationId?: string;
     },
@@ -94,6 +97,7 @@ interface RecommendationRules {
       /**
        * Site name
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing disableRecommendationForHostingEnvironment POST contract uses environmentName in the query; preserve wire compatibility."
       @query("environmentName")
       environmentName: string;
     },
@@ -137,12 +141,15 @@ interface Recommendations {
       /**
        * Specify <code>true</code> to update the last-seen timestamp of the recommendation object.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getRuleDetailsByWebApp.updateSeen has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getRuleDetailsByWebApp.updateSeen retains the updateSeen query parameter; preserve wire compatibility."
       @query("updateSeen")
       updateSeen?: boolean;
 
       /**
        * The GUID of the recommendation object if you query an expired one. You don't need to specify it to query an active entry.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getRuleDetailsByWebApp.recommendationId retains the recommendationId query parameter; preserve wire compatibility."
       @query("recommendationId")
       recommendationId?: string;
     },

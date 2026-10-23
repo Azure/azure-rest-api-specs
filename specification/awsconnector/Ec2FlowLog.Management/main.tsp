@@ -143,9 +143,11 @@ model DestinationOptionsModelProperties {
   @doc("Property fileFormat")
   fileFormat?: FileFormat;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DestinationOptionsModelProperties.hiveCompatiblePartitions has a boolean wire value; preserve the published property contract."
   @doc("Property hiveCompatiblePartitions")
   hiveCompatiblePartitions?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DestinationOptionsModelProperties.perHourPartition has a boolean wire value; preserve the published property contract."
   @doc("Property perHourPartition")
   perHourPartition?: boolean;
 }

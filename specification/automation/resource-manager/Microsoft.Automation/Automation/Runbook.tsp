@@ -104,6 +104,7 @@ interface Runbooks {
     Runbook,
     void,
     {
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing getContent.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "text/plain";
 
@@ -132,9 +133,11 @@ interface Runbooks {
       /**
        * The content type of the runbook draft content.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing replaceContent.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "text/plain";
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing replaceContent.runbookContent retains its request-body shape; preserve wire compatibility."
       @doc("The runbook draft content.")
       @bodyRoot
       runbookContent: string;
@@ -151,6 +154,7 @@ interface Runbooks {
    * Retrieve the runbook draft identified by runbook name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing runbookDraftGet retains its response and SDK paging behavior; preserve published compatibility."
   @tag("RunbookDraft")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookdraftoperations")
   @get
@@ -191,6 +195,7 @@ interface Runbooks {
    * Retrieve the content of runbook identified by runbook name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing runbookGetContent retains its response and SDK paging behavior; preserve published compatibility."
   @tag("Runbook")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookoperations")
   @get
@@ -199,6 +204,7 @@ interface Runbooks {
     Runbook,
     void,
     {
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing runbookGetContent.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "text/plain";
 

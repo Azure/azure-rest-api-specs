@@ -37,6 +37,7 @@ interface PostRulesResources {
   /**
    * Create a PostRulesResource
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is ArmResourceCreateOrReplaceAsync<PostRulesResource>;
 
   /**
@@ -69,6 +70,7 @@ interface PostRulesResources {
     ArmResponse<RuleCounter>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getCounters POST contract uses firewallName in the query; preserve wire compatibility."
       @query("firewallName")
       firewallName?: string;
     }
@@ -85,6 +87,7 @@ interface PostRulesResources {
     NoContentResponse,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing refreshCounters POST contract uses firewallName in the query; preserve wire compatibility."
       @query("firewallName")
       firewallName?: string;
     }
@@ -101,6 +104,7 @@ interface PostRulesResources {
     ArmResponse<RuleCounterReset>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing resetCounters POST contract uses firewallName in the query; preserve wire compatibility."
       @query("firewallName")
       firewallName?: string;
     }

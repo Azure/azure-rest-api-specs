@@ -40,12 +40,14 @@ interface RecoverableDatabases {
       /**
        * The child resources to include in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       /**
        * An OData filter expression that filters elements in the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$filter retains the $filter query parameter; preserve wire compatibility."
       @query("$filter")
       $filter?: string;
     }

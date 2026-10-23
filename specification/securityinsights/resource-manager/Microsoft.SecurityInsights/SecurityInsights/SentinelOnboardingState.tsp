@@ -141,6 +141,7 @@ interface SentinelOnboardingStates {
   /**
    * Gets all Sentinel onboarding states
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is SentinelOnboardingStatesOperations.ListSinglePage<
     SentinelOnboardingState,
     Response = ArmResponse<SentinelOnboardingStatesList>,

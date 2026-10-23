@@ -273,6 +273,7 @@ model Update {
   /**
    * Whether the update can be deployed to a device on its own.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Update.isDeployable has a boolean wire value; preserve the published property contract."
   isDeployable?: boolean = true;
 
   /**
@@ -860,6 +861,7 @@ model Device {
    * Boolean flag indicating whether the latest update (the best compatible update
    * for the device's device class and group) is installed on the device
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Device.onLatestUpdate has a boolean wire value; preserve the published property contract."
   onLatestUpdate: boolean;
 
   /**
@@ -1080,11 +1082,13 @@ model Deployment {
   /**
    * Boolean flag indicating whether the deployment was canceled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Deployment.isCanceled has a boolean wire value; preserve the published property contract."
   isCanceled?: boolean;
 
   /**
    * Boolean flag indicating whether the deployment has been retried.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Deployment.isRetried has a boolean wire value; preserve the published property contract."
   isRetried?: boolean;
 
   /**
@@ -1095,6 +1099,7 @@ model Deployment {
   /**
    * Boolean flag indicating whether the deployment is a rollback deployment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Deployment.isCloudInitiatedRollback has a boolean wire value; preserve the published property contract."
   isCloudInitiatedRollback?: boolean;
 
   /**
@@ -1292,6 +1297,7 @@ model DeploymentDeviceState {
    * Boolean flag indicating whether this device is in a newer deployment and can no
    * longer retry this deployment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentDeviceState.movedOnToNewDeployment has a boolean wire value; preserve the published property contract."
   movedOnToNewDeployment: boolean;
 
   /**
@@ -1585,6 +1591,7 @@ model UpdateFilter {
   /**
    * Update isDeployable property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UpdateFilter.isDeployable has a boolean wire value; preserve the published property contract."
   isDeployable?: boolean;
 }
 

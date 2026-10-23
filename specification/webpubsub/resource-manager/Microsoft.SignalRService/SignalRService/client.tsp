@@ -265,6 +265,7 @@ using Http;
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing WebPubSubHubsGetCustomized SDK method name; renaming it would break client compatibility."
 op WebPubSubHubsGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<WebPubSubHub>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -322,6 +323,7 @@ op WebPubSubHubsCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing WebPubSubHubsDeleteCustomized SDK method name; renaming it would break client compatibility."
 op WebPubSubHubsDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<WebPubSubHub>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -349,6 +351,7 @@ op WebPubSubHubsDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing PrivateEndpointConnectionsGetCustomized SDK method name; renaming it would break client compatibility."
 op PrivateEndpointConnectionsGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -406,6 +409,7 @@ op PrivateEndpointConnectionsUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing PrivateEndpointConnectionsDeleteCustomized SDK method name; renaming it would break client compatibility."
 op PrivateEndpointConnectionsDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -433,6 +437,7 @@ op PrivateEndpointConnectionsDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing WebPubSubSharedPrivateLinkResourcesGetCustomized SDK method name; renaming it would break client compatibility."
 op WebPubSubSharedPrivateLinkResourcesGetCustomized(
   ...Azure.ResourceManager.Legacy.Provider,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -490,6 +495,7 @@ op WebPubSubSharedPrivateLinkResourcesCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing WebPubSubSharedPrivateLinkResourcesDeleteCustomized SDK method name; renaming it would break client compatibility."
 op WebPubSubSharedPrivateLinkResourcesDeleteCustomized(
   ...Azure.ResourceManager.Legacy.Provider,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,

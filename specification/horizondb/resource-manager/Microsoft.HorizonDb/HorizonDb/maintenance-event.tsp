@@ -79,6 +79,7 @@ model MaintenanceEventProperties {
   @visibility(Lifecycle.Read)
   estimatedDowntime?: duration;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MaintenanceEventProperties.deferrable has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the customer can reschedule this maintenance event.")
   @visibility(Lifecycle.Read)
   deferrable: boolean;
@@ -127,6 +128,7 @@ model MaintenanceEventActionResponse {
   @doc("The planned end time of the maintenance event in UTC.")
   plannedEndTimeUtc?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MaintenanceEventActionResponse.appliedNow has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the maintenance event was requested to be applied immediately. The value is true for apply-now and false for reschedule.")
   appliedNow?: boolean;
 

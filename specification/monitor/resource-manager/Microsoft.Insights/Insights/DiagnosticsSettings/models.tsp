@@ -125,6 +125,7 @@ model DiagnosticsMetricSettings {
   /**
    * a value indicating whether this category is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DiagnosticsMetricSettings.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -150,6 +151,7 @@ model DiagnosticsLogSettings {
   /**
    * a value indicating whether this log is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DiagnosticsLogSettings.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**

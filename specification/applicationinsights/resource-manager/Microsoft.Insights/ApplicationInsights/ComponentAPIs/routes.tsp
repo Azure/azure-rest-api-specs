@@ -35,12 +35,14 @@ interface AnnotationsOperationGroup {
     /**
      * The start time to query from for annotations, cannot be older than 90 days from current date.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.start retains the start query parameter; preserve wire compatibility."
     @query("start")
     start: string,
 
     /**
      * The end time to query for annotations.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.end retains the end query parameter; preserve wire compatibility."
     @query("end")
     end: string,
   ): ArmResponse<AnnotationsListResult> | AnnotationError;
@@ -212,6 +214,7 @@ interface ExportConfigurationsOperationGroup {
   /**
    * Gets a list of Continuous Export configuration of an Application Insights component.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("exportconfiguration")
@@ -336,6 +339,7 @@ interface ComponentCurrentBillingFeaturesOperationGroup {
   /**
    * Returns current billing features for an Application Insights component.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing get retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("currentbillingfeatures")
@@ -379,6 +383,7 @@ interface ComponentQuotaStatusOperationGroup {
   /**
    * Returns daily data volume cap (quota) status for an Application Insights component.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing get retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("quotastatus")
@@ -402,6 +407,7 @@ interface ComponentFeatureCapabilitiesOperationGroup {
   /**
    * Returns feature capabilities of the application insights component.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing get retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("featurecapabilities")
@@ -425,6 +431,7 @@ interface ComponentAvailableFeaturesOperationGroup {
   /**
    * Returns all available features of the application insights component.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing get retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("getavailablebillingfeatures")
@@ -448,6 +455,7 @@ interface ProactiveDetectionConfigurationsOperationGroup {
   /**
    * Gets a list of ProactiveDetection configurations of an Application Insights component.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ProactiveDetectionConfigs")
   @get
   list(
@@ -571,6 +579,7 @@ interface WorkItemConfigurationsOperationGroup {
   /**
    * Gets default work item configurations that exist for the application
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getDefault retains its response and SDK paging behavior; preserve published compatibility."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/DefaultWorkItemConfig")
   @get
   getDefault(

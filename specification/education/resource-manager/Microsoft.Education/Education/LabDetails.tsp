@@ -108,6 +108,8 @@ interface Labs {
       /**
        * May be used to include budget information.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing get.includeBudget has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.includeBudget retains the includeBudget query parameter; preserve wire compatibility."
       @query("includeBudget")
       includeBudget?: boolean;
     },
@@ -117,6 +119,7 @@ interface Labs {
   /**
    * Create a new lab or update a previously created lab.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is InvoiceSectionLabOps.CreateOrUpdateSync<
     LabDetails,
     ErrorType = DefaultErrorResponse
@@ -139,6 +142,8 @@ interface Labs {
       /**
        * May be used to include budget information.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.includeBudget has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.includeBudget retains the includeBudget query parameter; preserve wire compatibility."
       @query("includeBudget")
       includeBudget?: boolean;
     },
@@ -155,12 +160,16 @@ interface Labs {
       /**
        * May be used to include budget information.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listAll.includeBudget has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAll.includeBudget retains the includeBudget query parameter; preserve wire compatibility."
       @query("includeBudget")
       includeBudget?: boolean;
 
       /**
        * May be used to show deleted items.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listAll.includeDeleted has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAll.includeDeleted retains the includeDeleted query parameter; preserve wire compatibility."
       @query("includeDeleted")
       includeDeleted?: boolean;
     },
@@ -180,6 +189,8 @@ interface Labs {
       /**
        * set this flag to true if you want to update student count without generating a new invite code
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing generateInviteCode POST contract uses onlyUpdateStudentCountParameter in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing generateInviteCode.onlyUpdateStudentCountParameter has a boolean wire value; preserve the published property contract."
       @query("onlyUpdateStudentCountParameter")
       onlyUpdateStudentCountParameter?: boolean;
     },

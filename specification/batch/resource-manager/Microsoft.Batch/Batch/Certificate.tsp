@@ -147,12 +147,14 @@ interface Certificates {
       /**
        * The maximum number of items to return in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBatchAccount.maxresults retains the maxresults query parameter; preserve wire compatibility."
       @query("maxresults")
       maxresults?: int32;
 
       /**
        * Comma separated list of properties that should be returned. e.g. "properties/provisioningState". Only top level properties under properties/ are valid for selection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBatchAccount.$select retains the $select query parameter; preserve wire compatibility."
       @query("$select")
       $select?: string;
 

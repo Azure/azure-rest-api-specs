@@ -161,6 +161,7 @@ interface DatabaseAccounts {
   /**
    * Lists the read-only access keys for the specified Azure Cosmos DB database account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getReadOnlyKeys retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("readonlykeys")
   getReadOnlyKeys is ArmResourceActionSync<

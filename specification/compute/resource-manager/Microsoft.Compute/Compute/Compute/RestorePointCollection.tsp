@@ -35,6 +35,7 @@ interface RestorePointCollections {
       /**
        * The expand expression to apply on the operation. If expand=restorePoints, server will return all contained restore points in the restorePointCollection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: RestorePointCollectionExpandOptions;
     }

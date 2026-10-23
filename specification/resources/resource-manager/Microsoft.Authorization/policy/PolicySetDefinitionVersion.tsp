@@ -137,6 +137,7 @@ interface PolicySetDefinitionVersions {
       /**
        * Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -161,12 +162,14 @@ interface PolicySetDefinitionVersions {
       /**
        * Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       /**
        * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @minValue(1)
       @query("$top")
@@ -183,6 +186,7 @@ interface PolicySetDefinitionVersions {
       /**
        * Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getBuiltIn.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -197,12 +201,14 @@ interface PolicySetDefinitionVersions {
       /**
        * Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBuiltIn.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       /**
        * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBuiltIn.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @minValue(1)
       @query("$top")
@@ -219,6 +225,7 @@ interface PolicySetDefinitionVersions {
       /**
        * Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getAtManagementGroup.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -227,6 +234,7 @@ interface PolicySetDefinitionVersions {
   /**
    * This operation creates or updates a policy set definition version in the given management group with the given name and version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdateAtManagementGroup retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdateAtManagementGroup is PolicySetDefinitionVersionManagementGroupOps.CreateOrUpdateSync<PolicySetDefinitionVersion>;
 
   /**
@@ -243,12 +251,14 @@ interface PolicySetDefinitionVersions {
       /**
        * Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByManagementGroup.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       /**
        * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByManagementGroup.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @minValue(1)
       @query("$top")

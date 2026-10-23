@@ -34,6 +34,7 @@ model SkipTokenParameter {
   /**
    * The opaque token that the server returns to indicate where to continue listing resources from. This is used for paging through large result sets.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing SkipTokenParameter.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
   @query("$skipToken")
   $skipToken?: string;
 }
@@ -45,6 +46,7 @@ model TopParameter {
   /**
    * The maximum number of resources to return from the operation. Example: '$top=10'.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing TopParameter.$top retains the $top query parameter; preserve wire compatibility."
   @query("$top")
   $top?: int32;
 }

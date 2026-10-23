@@ -134,6 +134,8 @@ interface SchemaContracts {
       /**
        * If true removes all references to the schema before deleting it.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.force has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.force retains the force query parameter; preserve wire compatibility."
       @query("force")
       force?: boolean;
 
@@ -161,6 +163,7 @@ interface SchemaContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByApi.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -168,6 +171,7 @@ interface SchemaContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByApi.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -294,6 +298,8 @@ interface WorkspaceApiSchema {
       /**
        * If true removes all references to the schema before deleting it.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.force has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.force retains the force query parameter; preserve wire compatibility."
       @query("force")
       force?: boolean;
 
@@ -321,6 +327,7 @@ interface WorkspaceApiSchema {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByApi.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -328,6 +335,7 @@ interface WorkspaceApiSchema {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByApi.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;

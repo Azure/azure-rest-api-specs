@@ -453,6 +453,7 @@ model GarbageCollectionProperties {
   /**
    * Indicates whether garbage collection is enabled for the connected registry.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GarbageCollectionProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**

@@ -1880,11 +1880,13 @@ model VirtualMachineScaleSetProperties {
   /**
    * Specifies whether the Virtual Machine Scale Set should be overprovisioned.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetProperties.overprovision has a boolean wire value; preserve the published property contract."
   overprovision?: boolean;
 
   /**
    * When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetProperties.doNotRunExtensionsOnOverprovisionedVMs has a boolean wire value; preserve the published property contract."
   doNotRunExtensionsOnOverprovisionedVMs?: boolean;
 
   /**
@@ -1896,11 +1898,13 @@ model VirtualMachineScaleSetProperties {
   /**
    * When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetProperties.singlePlacementGroup has a boolean wire value; preserve the published property contract."
   singlePlacementGroup?: boolean;
 
   /**
    * Whether to force strictly even Virtual Machine distribution cross x-zones in case there is zone outage. zoneBalance property can only be set if the zones property of the scale set contains more than one zone. If there are no zones or only one zone specified, then zoneBalance property should not be set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetProperties.zoneBalance has a boolean wire value; preserve the published property contract."
   zoneBalance?: boolean;
 
   /**
@@ -1952,6 +1956,7 @@ model VirtualMachineScaleSetProperties {
   /**
    * Optional property which must either be set to True or omitted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetProperties.constrainedMaximumCapacity has a boolean wire value; preserve the published property contract."
   constrainedMaximumCapacity?: boolean;
 
   /**
@@ -2040,21 +2045,25 @@ model RollingUpgradePolicy {
   /**
    * Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RollingUpgradePolicy.enableCrossZoneUpgrade has a boolean wire value; preserve the published property contract."
   enableCrossZoneUpgrade?: boolean;
 
   /**
    * Upgrade all unhealthy instances in a scale set before any healthy instances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RollingUpgradePolicy.prioritizeUnhealthyInstances has a boolean wire value; preserve the published property contract."
   prioritizeUnhealthyInstances?: boolean;
 
   /**
    * Rollback failed instances to previous model if the Rolling Upgrade policy is violated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RollingUpgradePolicy.rollbackFailedInstancesOnPolicyBreach has a boolean wire value; preserve the published property contract."
   rollbackFailedInstancesOnPolicyBreach?: boolean;
 
   /**
    * Create new virtual machines to upgrade the scale set, rather than updating the existing virtual machines. Existing virtual machines will be deleted once the new virtual machines are created for each batch.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RollingUpgradePolicy.maxSurge has a boolean wire value; preserve the published property contract."
   maxSurge?: boolean;
 }
 
@@ -2065,21 +2074,25 @@ model AutomaticOSUpgradePolicy {
   /**
    * Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. Default value is false. If this is set to true for Windows based scale sets, [enableAutomaticUpdates](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.compute.models.windowsconfiguration.enableautomaticupdates?view=azure-dotnet) is automatically set to false and cannot be set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomaticOSUpgradePolicy.enableAutomaticOSUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticOSUpgrade?: boolean;
 
   /**
    * Whether OS image rollback feature should be disabled. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomaticOSUpgradePolicy.disableAutomaticRollback has a boolean wire value; preserve the published property contract."
   disableAutomaticRollback?: boolean;
 
   /**
    * Indicates whether rolling upgrade policy should be used during Auto OS Upgrade. Default value is false. Auto OS Upgrade will fallback to the default policy if no policy is defined on the VMSS.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomaticOSUpgradePolicy.useRollingUpgradePolicy has a boolean wire value; preserve the published property contract."
   useRollingUpgradePolicy?: boolean;
 
   /**
    * Indicates whether Auto OS Upgrade should undergo deferral. Deferred OS upgrades will send advanced notifications on a per-VM basis that an OS upgrade from rolling upgrades is incoming, via the IMDS tag 'Platform.PendingOSUpgrade'. The upgrade then defers until the upgrade is approved via an ApproveRollingUpgrade call.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomaticOSUpgradePolicy.osRollingUpgradeDeferral has a boolean wire value; preserve the published property contract."
   osRollingUpgradeDeferral?: boolean;
 }
 
@@ -2116,6 +2129,7 @@ model UserInitiatedRedeploy {
   /**
    * Specifies Redeploy Scheduled Event related configurations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UserInitiatedRedeploy.automaticallyApprove has a boolean wire value; preserve the published property contract."
   automaticallyApprove?: boolean;
 }
 
@@ -2126,6 +2140,7 @@ model UserInitiatedReboot {
   /**
    * Specifies Reboot Scheduled Event related configurations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UserInitiatedReboot.automaticallyApprove has a boolean wire value; preserve the published property contract."
   automaticallyApprove?: boolean;
 }
 
@@ -2144,6 +2159,7 @@ model EventGridAndResourceGraph {
   /**
    * Specifies if event grid and resource graph is enabled for Scheduled event related configurations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EventGridAndResourceGraph.enable has a boolean wire value; preserve the published property contract."
   enable?: boolean;
 
   /**
@@ -2162,6 +2178,7 @@ model AllInstancesDown {
    * Specifies if Scheduled Events should be auto-approved when all instances are down.
    * its default value is true
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AllInstancesDown.automaticallyApprove has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_04_01)
   automaticallyApprove?: boolean;
 }
@@ -2173,6 +2190,7 @@ model AutomaticRepairsPolicy {
   /**
    * Specifies whether automatic repairs should be enabled on the virtual machine scale set. The default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomaticRepairsPolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2194,6 +2212,7 @@ model ExternalHealthPolicy {
   /**
    * If true, external health is enabled for this scale set. Cannot be set to true on instances where another health monitoring source is active (ApplicationHealth extension or SLB). Defaults to false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExternalHealthPolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2351,11 +2370,13 @@ model VirtualMachineScaleSetOSProfile {
   /**
    * Specifies whether extension operations should be allowed on the virtual machine scale set. This may only be set to False when no extensions are present on the virtual machine scale set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetOSProfile.allowExtensionOperations has a boolean wire value; preserve the published property contract."
   allowExtensionOperations?: boolean;
 
   /**
    * Optional property which must either be set to True or omitted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetOSProfile.requireGuestProvisionSignal has a boolean wire value; preserve the published property contract."
   requireGuestProvisionSignal?: boolean;
 }
 
@@ -2366,11 +2387,13 @@ model WindowsConfiguration {
   /**
    * Indicates whether virtual machine agent should be provisioned on the virtual machine. When this property is not specified in the request body, it is set to true by default. This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WindowsConfiguration.provisionVMAgent has a boolean wire value; preserve the published property contract."
   provisionVMAgent?: boolean;
 
   /**
    * Indicates whether Automatic Updates is enabled for the Windows virtual machine. Default value is true. For virtual machine scale sets, this property can be updated and updates will take effect on OS reprovisioning.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WindowsConfiguration.enableAutomaticUpdates has a boolean wire value; preserve the published property contract."
   enableAutomaticUpdates?: boolean;
 
   /**
@@ -2397,6 +2420,7 @@ model WindowsConfiguration {
   /**
    * Indicates whether VMAgent Platform Updates are enabled for the Windows Virtual Machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WindowsConfiguration.enableVMAgentPlatformUpdates has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   enableVMAgentPlatformUpdates?: boolean;
 }
@@ -2454,6 +2478,7 @@ model PatchSettings {
   /**
    * Enables customers to patch their Azure VMs without requiring a reboot. For enableHotpatching, the 'provisionVMAgent' must be set to true and 'patchMode' must be set to 'AutomaticByPlatform'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PatchSettings.enableHotpatching has a boolean wire value; preserve the published property contract."
   enableHotpatching?: boolean;
 
   /**
@@ -2479,6 +2504,7 @@ model WindowsVMGuestPatchAutomaticByPlatformSettings {
   /**
    * Enables customer to schedule patching without accidental upgrades
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule has a boolean wire value; preserve the published property contract."
   bypassPlatformSafetyChecksOnUserSchedule?: boolean;
 }
 
@@ -2516,6 +2542,7 @@ model LinuxConfiguration {
   /**
    * Specifies whether password authentication should be disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LinuxConfiguration.disablePasswordAuthentication has a boolean wire value; preserve the published property contract."
   disablePasswordAuthentication?: boolean;
 
   /**
@@ -2526,6 +2553,7 @@ model LinuxConfiguration {
   /**
    * Indicates whether virtual machine agent should be provisioned on the virtual machine. When this property is not specified in the request body, default behavior is to set it to true. This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LinuxConfiguration.provisionVMAgent has a boolean wire value; preserve the published property contract."
   provisionVMAgent?: boolean;
 
   /**
@@ -2536,6 +2564,7 @@ model LinuxConfiguration {
   /**
    * Indicates whether VMAgent Platform Updates is enabled for the Linux virtual machine. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LinuxConfiguration.enableVMAgentPlatformUpdates has a boolean wire value; preserve the published property contract."
   enableVMAgentPlatformUpdates?: boolean;
 }
 
@@ -2597,6 +2626,7 @@ model LinuxVMGuestPatchAutomaticByPlatformSettings {
   /**
    * Enables customer to schedule patching without accidental upgrades
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule has a boolean wire value; preserve the published property contract."
   bypassPlatformSafetyChecksOnUserSchedule?: boolean;
 }
 
@@ -2724,6 +2754,7 @@ model VirtualMachineScaleSetOSDisk {
   /**
    * Specifies whether writeAccelerator should be enabled or disabled on the disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetOSDisk.writeAcceleratorEnabled has a boolean wire value; preserve the published property contract."
   writeAcceleratorEnabled?: boolean;
 
   /**
@@ -2790,6 +2821,7 @@ model DiffDiskSettings {
   /**
    * Specifies whether or not to enable full caching for this VM which will cache the OS disk locally on the host and make this VM more resilient to storage outages
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DiffDiskSettings.enableFullCaching has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_11_01)
   enableFullCaching?: boolean;
 }
@@ -2874,6 +2906,7 @@ model VirtualMachineScaleSetDataDisk {
   /**
    * Specifies whether writeAccelerator should be enabled or disabled on the disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetDataDisk.writeAcceleratorEnabled has a boolean wire value; preserve the published property contract."
   writeAcceleratorEnabled?: boolean;
 
   /**
@@ -2981,21 +3014,25 @@ model VirtualMachineScaleSetNetworkConfigurationProperties {
   /**
    * Specifies the primary network interface in case the virtual machine has more than 1 network interface.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetNetworkConfigurationProperties.primary has a boolean wire value; preserve the published property contract."
   primary?: boolean;
 
   /**
    * Specifies whether the network interface is accelerated networking-enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetNetworkConfigurationProperties.enableAcceleratedNetworking has a boolean wire value; preserve the published property contract."
   enableAcceleratedNetworking?: boolean;
 
   /**
    * Specifies whether the network interface is disabled for tcp state tracking.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetNetworkConfigurationProperties.disableTcpStateTracking has a boolean wire value; preserve the published property contract."
   disableTcpStateTracking?: boolean;
 
   /**
    * Specifies whether the network interface is FPGA networking-enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetNetworkConfigurationProperties.enableFpga has a boolean wire value; preserve the published property contract."
   enableFpga?: boolean;
 
   /**
@@ -3017,6 +3054,7 @@ model VirtualMachineScaleSetNetworkConfigurationProperties {
   /**
    * Whether IP forwarding enabled on this NIC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetNetworkConfigurationProperties.enableIPForwarding has a boolean wire value; preserve the published property contract."
   enableIPForwarding?: boolean;
 
   /**
@@ -3074,6 +3112,7 @@ model VirtualMachineScaleSetIPConfigurationProperties {
   /**
    * Specifies the primary network interface in case the virtual machine has more than 1 network interface.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetIPConfigurationProperties.primary has a boolean wire value; preserve the published property contract."
   primary?: boolean;
 
   /**
@@ -3247,6 +3286,7 @@ model SecurityProfile {
   /**
    * This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. The default behavior is: The Encryption at host will be disabled unless this property is set to true for the resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityProfile.encryptionAtHost has a boolean wire value; preserve the published property contract."
   encryptionAtHost?: boolean;
 
   /**
@@ -3272,11 +3312,13 @@ model UefiSettings {
   /**
    * Specifies whether secure boot should be enabled on the virtual machine. Minimum api-version: 2020-12-01.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UefiSettings.secureBootEnabled has a boolean wire value; preserve the published property contract."
   secureBootEnabled?: boolean;
 
   /**
    * Specifies whether vTPM should be enabled on the virtual machine. Minimum api-version: 2020-12-01.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UefiSettings.vTpmEnabled has a boolean wire value; preserve the published property contract."
   vTpmEnabled?: boolean;
 }
 
@@ -3297,6 +3339,7 @@ model ProxyAgentSettings {
   /**
    * Specifies whether ProxyAgent feature should be enabled on the virtual machine or virtual machine scale set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ProxyAgentSettings.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3322,6 +3365,7 @@ model ProxyAgentSettings {
   /**
    * Specify whether to implicitly install the ProxyAgent Extension. This option is currently applicable only for Linux Os.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ProxyAgentSettings.addProxyAgentExtension has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_04_01)
   addProxyAgentExtension?: boolean;
 }
@@ -3343,6 +3387,7 @@ model HostEndpointSettings {
   /**
    * When set to true, instructs the GuestProxyAgent inside the VM to load additional access control rules defined in a local file on the VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HostEndpointSettings.useLocalFileRules has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_04_01)
   useLocalFileRules?: boolean;
 }
@@ -3364,6 +3409,7 @@ model BootDiagnostics {
   /**
    * Whether boot diagnostics should be enabled on the Virtual Machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BootDiagnostics.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3416,11 +3462,13 @@ model VirtualMachineScaleSetExtensionProperties {
   /**
    * Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetExtensionProperties.autoUpgradeMinorVersion has a boolean wire value; preserve the published property contract."
   autoUpgradeMinorVersion?: boolean;
 
   /**
    * Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetExtensionProperties.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean;
 
   /**
@@ -3450,6 +3498,7 @@ model VirtualMachineScaleSetExtensionProperties {
   /**
    * Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetExtensionProperties.suppressFailures has a boolean wire value; preserve the published property contract."
   suppressFailures?: boolean;
 
   /**
@@ -3507,6 +3556,7 @@ model TerminateNotificationProfile {
   /**
    * Specifies whether the Terminate Scheduled event is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TerminateNotificationProfile.enable has a boolean wire value; preserve the published property contract."
   enable?: boolean;
 }
 
@@ -3520,6 +3570,7 @@ model OSImageNotificationProfile {
   /**
    * Specifies whether the OS Image Scheduled event is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OSImageNotificationProfile.enable has a boolean wire value; preserve the published property contract."
   enable?: boolean;
 }
 
@@ -3535,6 +3586,7 @@ model CapacityReservationProfile {
   /**
    * Specifies whether the virtual machine is explicitly opted out from being associated with any capacity reservation. When set to true, the virtual machine will not be allowed to implicitly or explicitly associate with any type of capacity reservation and will consume capacity from the publicly available capacity. Minimum api-version: 2026-04-01.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CapacityReservationProfile.disableCapacityReservationAssignment has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_04_01)
   disableCapacityReservationAssignment?: boolean;
 }
@@ -3577,11 +3629,13 @@ model VMGalleryApplication {
   /**
    * Optional, If true, any failure for any operation in the VmApplication will fail the deployment
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMGalleryApplication.treatFailureAsDeploymentFailure has a boolean wire value; preserve the published property contract."
   treatFailureAsDeploymentFailure?: boolean;
 
   /**
    * If set to true, when a new Gallery Application version is available in PIR/SIG, it will be automatically updated for the VM/VMSS
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMGalleryApplication.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean;
 }
 
@@ -3643,6 +3697,7 @@ model SecurityPostureReference {
   /**
    * Whether the security posture can be overridden by the user.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityPostureReference.isOverridable has a boolean wire value; preserve the published property contract."
   isOverridable?: boolean;
 }
 
@@ -3653,16 +3708,19 @@ model AdditionalCapabilities {
   /**
    * The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AdditionalCapabilities.ultraSSDEnabled has a boolean wire value; preserve the published property contract."
   ultraSSDEnabled?: boolean;
 
   /**
    * The flag that enables or disables hibernation capability on the VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AdditionalCapabilities.hibernationEnabled has a boolean wire value; preserve the published property contract."
   hibernationEnabled?: boolean;
 
   /**
    * The flag enables the usage of FIPS 140-3 compliant cryptography on the protectedSettings of an extension. Learn more at: https://aka.ms/linuxagentfipssupport.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AdditionalCapabilities.enableFips1403Encryption has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_04_01)
   enableFips1403Encryption?: boolean;
 }
@@ -3679,11 +3737,13 @@ model ScaleInPolicy {
   /**
    * This property allows you to specify if virtual machines chosen for removal have to be force deleted when a virtual machine scale set is being scaled-in.(Feature in Preview)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScaleInPolicy.forceDeletion has a boolean wire value; preserve the published property contract."
   forceDeletion?: boolean;
 
   /**
    * This property allows you to prioritize the deletion of unhealthy and inactive VMs when a virtual machine scale set is being scaled-in.(Feature in Preview)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScaleInPolicy.prioritizeUnhealthyVMs has a boolean wire value; preserve the published property contract."
   prioritizeUnhealthyVMs?: boolean;
 }
 
@@ -3694,6 +3754,7 @@ model SpotRestorePolicy {
   /**
    * Enables the Spot-Try-Restore feature where evicted VMSS SPOT instances will be tried to be restored opportunistically based on capacity availability and pricing constraints
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SpotRestorePolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3757,6 +3818,7 @@ model ResilientVMCreationPolicy {
   /**
    * Specifies whether resilient VM creation should be enabled on the virtual machine scale set. The default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ResilientVMCreationPolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3767,6 +3829,7 @@ model ResilientVMDeletionPolicy {
   /**
    * Specifies whether resilient VM deletion should be enabled on the virtual machine scale set. The default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ResilientVMDeletionPolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3799,6 +3862,7 @@ model RestartRecoveryPolicy {
   /**
    * Specifies whether restart recovery should be enabled. The default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RestartRecoveryPolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3810,6 +3874,7 @@ model StartRecoveryPolicy {
   /**
    * Specifies whether start recovery should be enabled. The default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StartRecoveryPolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3821,6 +3886,7 @@ model ReimageRecoveryPolicy {
   /**
    * Specifies whether reimage recovery should be enabled. The default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ReimageRecoveryPolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3847,6 +3913,7 @@ model AutomaticZoneRebalancingPolicy {
   /**
    * Specifies whether Automatic AZ Balancing should be enabled on the virtual machine scale set. The default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomaticZoneRebalancingPolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3868,6 +3935,7 @@ model MaxInstancePercentPerZonePolicy {
   /**
    * Specifies whether maxInstancePercentPerZonePolicy should be enabled on the virtual machine scale set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MaxInstancePercentPerZonePolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3922,6 +3990,7 @@ model AutomaticSkuMigrationPolicy {
   /**
    * Specifies whether automatic SKU migration should be enabled on the virtual machine scale set. The default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomaticSkuMigrationPolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -4028,16 +4097,19 @@ model VirtualMachineScaleSetUpdateProperties {
   /**
    * Specifies whether the Virtual Machine Scale Set should be overprovisioned.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetUpdateProperties.overprovision has a boolean wire value; preserve the published property contract."
   overprovision?: boolean;
 
   /**
    * When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetUpdateProperties.doNotRunExtensionsOnOverprovisionedVMs has a boolean wire value; preserve the published property contract."
   doNotRunExtensionsOnOverprovisionedVMs?: boolean;
 
   /**
    * When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetUpdateProperties.singlePlacementGroup has a boolean wire value; preserve the published property contract."
   singlePlacementGroup?: boolean;
 
   /**
@@ -4229,6 +4301,7 @@ model VirtualMachineScaleSetUpdateOSDisk {
   /**
    * Specifies whether writeAccelerator should be enabled or disabled on the disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetUpdateOSDisk.writeAcceleratorEnabled has a boolean wire value; preserve the published property contract."
   writeAcceleratorEnabled?: boolean;
 
   /**
@@ -4326,21 +4399,25 @@ model VirtualMachineScaleSetUpdateNetworkConfigurationProperties {
   /**
    * Whether this is a primary NIC on a virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetUpdateNetworkConfigurationProperties.primary has a boolean wire value; preserve the published property contract."
   primary?: boolean;
 
   /**
    * Specifies whether the network interface is accelerated networking-enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetUpdateNetworkConfigurationProperties.enableAcceleratedNetworking has a boolean wire value; preserve the published property contract."
   enableAcceleratedNetworking?: boolean;
 
   /**
    * Specifies whether the network interface is disabled for tcp state tracking.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetUpdateNetworkConfigurationProperties.disableTcpStateTracking has a boolean wire value; preserve the published property contract."
   disableTcpStateTracking?: boolean;
 
   /**
    * Specifies whether the network interface is FPGA networking-enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetUpdateNetworkConfigurationProperties.enableFpga has a boolean wire value; preserve the published property contract."
   enableFpga?: boolean;
 
   /**
@@ -4362,6 +4439,7 @@ model VirtualMachineScaleSetUpdateNetworkConfigurationProperties {
   /**
    * Whether IP forwarding enabled on this NIC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetUpdateNetworkConfigurationProperties.enableIPForwarding has a boolean wire value; preserve the published property contract."
   enableIPForwarding?: boolean;
 
   /**
@@ -4409,6 +4487,7 @@ model VirtualMachineScaleSetUpdateIPConfigurationProperties {
   /**
    * Specifies the primary IP Configuration in case the network interface has more than one IP Configuration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetUpdateIPConfigurationProperties.primary has a boolean wire value; preserve the published property contract."
   primary?: boolean;
 
   /**
@@ -4517,6 +4596,7 @@ model SecurityPostureReferenceUpdate {
   /**
    * Whether the security posture can be overridden by the user.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityPostureReferenceUpdate.isOverridable has a boolean wire value; preserve the published property contract."
   isOverridable?: boolean;
 }
 
@@ -4609,6 +4689,7 @@ model RecoveryWalkResponse {
   /**
    * Whether the recovery walk was performed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RecoveryWalkResponse.walkPerformed has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   walkPerformed?: boolean;
 
@@ -4938,6 +5019,7 @@ model VirtualMachineScaleSetVMReimageParameters
   /**
    * Parameter to force update ephemeral OS disk for a virtual machine scale set VM
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetVMReimageParameters.forceUpdateOSDiskForEphemeral has a boolean wire value; preserve the published property contract."
   forceUpdateOSDiskForEphemeral?: boolean;
 }
 
@@ -4948,6 +5030,7 @@ model VirtualMachineReimageParameters {
   /**
    * Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineReimageParameters.tempDisk has a boolean wire value; preserve the published property contract."
   tempDisk?: boolean;
 
   /**
@@ -5142,6 +5225,7 @@ model VirtualMachineScaleSetVMProperties {
   /**
    * Specifies whether the latest model has been applied to the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetVMProperties.latestModelApplied has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   latestModelApplied?: boolean;
 
@@ -5418,6 +5502,7 @@ model MaintenanceRedeployStatus {
   /**
    * True, if customer is allowed to perform Maintenance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MaintenanceRedeployStatus.isCustomerInitiatedMaintenanceAllowed has a boolean wire value; preserve the published property contract."
   isCustomerInitiatedMaintenanceAllowed?: boolean;
 
   /**
@@ -5496,6 +5581,7 @@ model DiskEncryptionSettings {
   /**
    * Specifies whether disk encryption should be enabled on the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DiskEncryptionSettings.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -5641,6 +5727,7 @@ model StorageProfile {
   /**
    * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageProfile.alignRegionalDisksToVMZone has a boolean wire value; preserve the published property contract."
   alignRegionalDisksToVMZone?: boolean;
 
   /**
@@ -5658,6 +5745,7 @@ model ZoneMovement {
   /**
    * Indicates if zone movement is enabled. By default isEnabled is set to false i.e VM can't be moved from one zone to another.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ZoneMovement.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 }
 
@@ -5709,6 +5797,7 @@ model OSDisk {
   /**
    * Specifies whether writeAccelerator should be enabled or disabled on the disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OSDisk.writeAcceleratorEnabled has a boolean wire value; preserve the published property contract."
   writeAcceleratorEnabled?: boolean;
 
   /**
@@ -5796,16 +5885,19 @@ model ManagedDiskProperties {
   /**
    * Set to true to enable bursting beyond the provisioned performance target of the disk. Bursting is disabled by default. Does not apply to Ultra disks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedDiskProperties.burstingEnabled has a boolean wire value; preserve the published property contract."
   burstingEnabled?: boolean;
 
   /**
    * Set this flag to true to get a boost on the performance target of the disk deployed. This flag can only be set on disk creation time and cannot be disabled after enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedDiskProperties.performancePlus has a boolean wire value; preserve the published property contract."
   performancePlus?: boolean;
 
   /**
    * Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedDiskProperties.optimizedForFrequentAttach has a boolean wire value; preserve the published property contract."
   optimizedForFrequentAttach?: boolean;
 
   /**
@@ -5929,6 +6021,7 @@ model DataDisk {
   /**
    * Specifies whether writeAccelerator should be enabled or disabled on the disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataDisk.writeAcceleratorEnabled has a boolean wire value; preserve the published property contract."
   writeAcceleratorEnabled?: boolean;
 
   /**
@@ -5960,6 +6053,7 @@ model DataDisk {
   /**
    * Specifies whether the data disk is in process of detachment from the VirtualMachine/VirtualMachineScaleset
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataDisk.toBeDetached has a boolean wire value; preserve the published property contract."
   toBeDetached?: boolean;
 
   /**
@@ -6043,11 +6137,13 @@ model OSProfile {
   /**
    * Specifies whether extension operations should be allowed on the virtual machine. This may only be set to False when no extensions are present on the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OSProfile.allowExtensionOperations has a boolean wire value; preserve the published property contract."
   allowExtensionOperations?: boolean;
 
   /**
    * Optional property which must either be set to True or omitted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OSProfile.requireGuestProvisionSignal has a boolean wire value; preserve the published property contract."
   requireGuestProvisionSignal?: boolean;
 }
 
@@ -6098,6 +6194,7 @@ model NetworkInterfaceReferenceProperties {
   /**
    * Specifies the primary network interface in case the virtual machine has more than 1 network interface.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkInterfaceReferenceProperties.primary has a boolean wire value; preserve the published property contract."
   primary?: boolean;
 
   /**
@@ -6137,6 +6234,7 @@ model VirtualMachineNetworkInterfaceConfigurationProperties {
   /**
    * Specifies the primary network interface in case the virtual machine has more than 1 network interface.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineNetworkInterfaceConfigurationProperties.primary has a boolean wire value; preserve the published property contract."
   primary?: boolean;
 
   /**
@@ -6147,21 +6245,25 @@ model VirtualMachineNetworkInterfaceConfigurationProperties {
   /**
    * Specifies whether the network interface is accelerated networking-enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineNetworkInterfaceConfigurationProperties.enableAcceleratedNetworking has a boolean wire value; preserve the published property contract."
   enableAcceleratedNetworking?: boolean;
 
   /**
    * Specifies whether the network interface is disabled for tcp state tracking.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineNetworkInterfaceConfigurationProperties.disableTcpStateTracking has a boolean wire value; preserve the published property contract."
   disableTcpStateTracking?: boolean;
 
   /**
    * Specifies whether the network interface is FPGA networking-enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineNetworkInterfaceConfigurationProperties.enableFpga has a boolean wire value; preserve the published property contract."
   enableFpga?: boolean;
 
   /**
    * Whether IP forwarding enabled on this NIC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineNetworkInterfaceConfigurationProperties.enableIPForwarding has a boolean wire value; preserve the published property contract."
   enableIPForwarding?: boolean;
 
   /**
@@ -6233,6 +6335,7 @@ model VirtualMachineNetworkInterfaceIPConfigurationProperties {
   /**
    * Specifies the primary network interface in case the virtual machine has more than 1 network interface.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineNetworkInterfaceIPConfigurationProperties.primary has a boolean wire value; preserve the published property contract."
   primary?: boolean;
 
   /**
@@ -6403,11 +6506,13 @@ model VirtualMachineScaleSetVMProtectionPolicy {
   /**
    * Indicates that the virtual machine scale set VM shouldn't be considered for deletion during a scale-in operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetVMProtectionPolicy.protectFromScaleIn has a boolean wire value; preserve the published property contract."
   protectFromScaleIn?: boolean;
 
   /**
    * Indicates that model updates or actions (including scale-in) initiated on the virtual machine scale set should not be applied to the virtual machine scale set VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineScaleSetVMProtectionPolicy.protectFromScaleSetActions has a boolean wire value; preserve the published property contract."
   protectFromScaleSetActions?: boolean;
 }
 
@@ -6439,11 +6544,13 @@ model VirtualMachineExtensionProperties {
   /**
    * Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineExtensionProperties.autoUpgradeMinorVersion has a boolean wire value; preserve the published property contract."
   autoUpgradeMinorVersion?: boolean;
 
   /**
    * Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineExtensionProperties.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean;
 
   /**
@@ -6473,6 +6580,7 @@ model VirtualMachineExtensionProperties {
   /**
    * Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineExtensionProperties.suppressFailures has a boolean wire value; preserve the published property contract."
   suppressFailures?: boolean;
 
   /**
@@ -6578,11 +6686,13 @@ model VirtualMachineExtensionUpdateProperties {
   /**
    * Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineExtensionUpdateProperties.autoUpgradeMinorVersion has a boolean wire value; preserve the published property contract."
   autoUpgradeMinorVersion?: boolean;
 
   /**
    * Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineExtensionUpdateProperties.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean;
 
   /**
@@ -6600,6 +6710,7 @@ model VirtualMachineExtensionUpdateProperties {
   /**
    * Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineExtensionUpdateProperties.suppressFailures has a boolean wire value; preserve the published property contract."
   suppressFailures?: boolean;
 
   /**
@@ -6660,6 +6771,7 @@ model DataDisksToAttach {
   /**
    * Specifies whether writeAccelerator should be enabled or disabled on the disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataDisksToAttach.writeAcceleratorEnabled has a boolean wire value; preserve the published property contract."
   writeAcceleratorEnabled?: boolean;
 }
 
@@ -6960,6 +7072,7 @@ model VirtualMachineInstanceView {
   /**
    * [Preview Feature] Specifies whether the VM is currently in or out of the Standby Pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineInstanceView.isVMInStandbyPool has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isVMInStandbyPool?: boolean;
 
@@ -7019,6 +7132,7 @@ model AvailablePatchSummary {
   /**
    * The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AvailablePatchSummary.rebootPending has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   rebootPending?: boolean;
 
@@ -7072,6 +7186,7 @@ model LastPatchInstallationSummary {
   /**
    * Describes whether the operation ran out of time before it completed all its intended actions
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LastPatchInstallationSummary.maintenanceWindowExceeded has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   maintenanceWindowExceeded?: boolean;
 
@@ -7192,6 +7307,7 @@ model VirtualMachineAssessPatchesResult {
   /**
    * The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineAssessPatchesResult.rebootPending has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   rebootPending?: boolean;
 
@@ -7309,6 +7425,7 @@ model VirtualMachineCaptureParameters {
   /**
    * Specifies whether to overwrite the destination virtual hard disk, in case of conflict.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineCaptureParameters.overwriteVhds has a boolean wire value; preserve the published property contract."
   overwriteVhds: boolean;
 }
 
@@ -7415,6 +7532,7 @@ model WindowsParameters {
   /**
    * Filters out Kbs that don't have an InstallationRebootBehavior of 'NeverReboots' when this is set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WindowsParameters.excludeKbsRequiringReboot has a boolean wire value; preserve the published property contract."
   excludeKbsRequiringReboot?: boolean;
 
   /**
@@ -7485,6 +7603,7 @@ model VirtualMachineInstallPatchesResult {
   /**
    * Whether the operation ran out of time before it completed all its intended actions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineInstallPatchesResult.maintenanceWindowExceeded has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   maintenanceWindowExceeded?: boolean;
 
@@ -7737,6 +7856,7 @@ model AutomaticOSUpgradeProperties {
   /**
    * Specifies whether automatic OS upgrade is supported on the image.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomaticOSUpgradeProperties.automaticOSUpgradeSupported has a boolean wire value; preserve the published property contract."
   automaticOSUpgradeSupported: boolean;
 }
 
@@ -7838,11 +7958,13 @@ model VirtualMachineExtensionImageProperties {
   /**
    * Whether the extension can be used on xRP VMScaleSets. By default existing extensions are usable on scalesets, but there might be cases where a publisher wants to explicitly indicate the extension is only enabled for CRP VMs but not VMSS.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineExtensionImageProperties.vmScaleSetEnabled has a boolean wire value; preserve the published property contract."
   vmScaleSetEnabled?: boolean;
 
   /**
    * Whether the handler can support multiple extensions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineExtensionImageProperties.supportsMultipleExtensions has a boolean wire value; preserve the published property contract."
   supportsMultipleExtensions?: boolean;
 
   /**
@@ -8085,6 +8207,7 @@ model DefaultVirtualMachineScaleSetInfo {
   /**
    *  Indicates if the the maximum capacity of the default migrated Virtual Machine Scale Set after its migration will be constrained to a limited number of VMs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefaultVirtualMachineScaleSetInfo.constrainedMaximumCapacity has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   constrainedMaximumCapacity?: boolean;
 
@@ -8250,6 +8373,7 @@ model DedicatedHostGroupProperties {
   /**
    * Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'false' when not provided. Minimum api-version: 2020-06-01.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DedicatedHostGroupProperties.supportAutomaticPlacement has a boolean wire value; preserve the published property contract."
   supportAutomaticPlacement?: boolean;
 
   /**
@@ -8334,6 +8458,7 @@ model DedicatedHostGroupPropertiesAdditionalCapabilities {
   /**
    * The flag that enables or disables a capability to have UltraSSD Enabled Virtual Machines on Dedicated Hosts of the Dedicated Host Group. For the Virtual Machines to be UltraSSD Enabled, UltraSSDEnabled flag for the resource needs to be set true as well. The value is defaulted to 'false' when not provided. Please refer to https://docs.microsoft.com/en-us/azure/virtual-machines/disks-enable-ultra-ssd for more details on Ultra SSD feature. **Note:** The ultraSSDEnabled setting can only be enabled for Host Groups that are created as zonal. Minimum api-version: 2022-03-01.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DedicatedHostGroupPropertiesAdditionalCapabilities.ultraSSDEnabled has a boolean wire value; preserve the published property contract."
   ultraSSDEnabled?: boolean;
 }
 
@@ -8378,6 +8503,7 @@ model DedicatedHostProperties {
   /**
    * Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DedicatedHostProperties.autoReplaceOnFailure has a boolean wire value; preserve the published property contract."
   autoReplaceOnFailure?: boolean;
 
   /**
@@ -8725,6 +8851,7 @@ model ImageStorageProfile {
   /**
    * Specifies whether an image is zone resilient or not. Default is false. Zone resilient images can be created only in regions that provide Zone Redundant Storage (ZRS).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImageStorageProfile.zoneResilient has a boolean wire value; preserve the published property contract."
   zoneResilient?: boolean;
 }
 
@@ -8854,6 +8981,7 @@ model RestorePointCollectionProperties {
   /**
    * This property determines whether instant access snapshot is enabled for restore points created under this restore point collection for Premium SSD v2 or Ultra disk. Instant access snapshot for Premium SSD v2 or Ultra disk is instantaneously available for restoring disk with fast restore performance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RestorePointCollectionProperties.instantAccess has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_04_01)
   instantAccess?: boolean;
 }
@@ -9056,6 +9184,7 @@ model RestorePointSourceVMOSDisk {
   /**
    * Shows true if the disk is write-accelerator enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RestorePointSourceVMOSDisk.writeAcceleratorEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   writeAcceleratorEnabled?: boolean;
 }
@@ -9132,6 +9261,7 @@ model RestorePointSourceVMDataDisk {
   /**
    * Shows true if the disk is write-accelerator enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RestorePointSourceVMDataDisk.writeAcceleratorEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   writeAcceleratorEnabled?: boolean;
 }
@@ -9616,26 +9746,31 @@ model LogAnalyticsInputBase {
   /**
    * Group query result by Throttle Policy applied.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LogAnalyticsInputBase.groupByThrottlePolicy has a boolean wire value; preserve the published property contract."
   groupByThrottlePolicy?: boolean;
 
   /**
    * Group query result by Operation Name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LogAnalyticsInputBase.groupByOperationName has a boolean wire value; preserve the published property contract."
   groupByOperationName?: boolean;
 
   /**
    * Group query result by Resource Name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LogAnalyticsInputBase.groupByResourceName has a boolean wire value; preserve the published property contract."
   groupByResourceName?: boolean;
 
   /**
    * Group query result by Client Application ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LogAnalyticsInputBase.groupByClientApplicationId has a boolean wire value; preserve the published property contract."
   groupByClientApplicationId?: boolean;
 
   /**
    * Group query result by User Agent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LogAnalyticsInputBase.groupByUserAgent has a boolean wire value; preserve the published property contract."
   groupByUserAgent?: boolean;
 }
 
@@ -9749,6 +9884,7 @@ model RunCommandParameterDefinition {
   /**
    * The run command parameter required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RunCommandParameterDefinition.required has a boolean wire value; preserve the published property contract."
   required?: boolean;
 }
 
@@ -9804,6 +9940,7 @@ model VirtualMachineRunCommandProperties {
   /**
    * Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineRunCommandProperties.asyncExecution has a boolean wire value; preserve the published property contract."
   asyncExecution?: boolean;
 
   /**
@@ -9858,6 +9995,7 @@ model VirtualMachineRunCommandProperties {
   /**
    * Optional. If set to true, any failure in the script will fail the deployment and ProvisioningState will be marked as Failed. If set to false, ProvisioningState would only reflect whether the run command was run or not by the extensions platform, it would not indicate whether script failed in case of script failures. See instance view of run command in case of script failures to see executionMessage, output, error: https://aka.ms/runcommandmanaged#get-execution-status-and-results
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualMachineRunCommandProperties.treatFailureAsDeploymentFailure has a boolean wire value; preserve the published property contract."
   treatFailureAsDeploymentFailure?: boolean;
 }
 

@@ -1807,12 +1807,14 @@ model QueryParameters {
   /**
    * Skip over when retrieving results.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing QueryParameters.skipToken retains the $skipToken query parameter; preserve wire compatibility."
   @query("$skipToken")
   skipToken?: string;
 
   /**
    * Number of elements to return when retrieving results.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing QueryParameters.top retains the $top query parameter; preserve wire compatibility."
   @maxValue(100)
   @minValue(1)
   @query("$top")
@@ -1821,6 +1823,7 @@ model QueryParameters {
   /**
    * OData Select statement. Limits the properties on each entry to just those requested, e.g. ?$select=reportName,id.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing QueryParameters.select retains the $select query parameter; preserve wire compatibility."
   @minLength(1)
   @query("$select")
   select?: string;
@@ -1835,6 +1838,7 @@ model QueryParameters {
   /**
    * OData order by query option.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing QueryParameters.orderby retains the $orderby query parameter; preserve wire compatibility."
   @minLength(1)
   @query("$orderby")
   orderby?: string;
@@ -1842,6 +1846,7 @@ model QueryParameters {
   /**
    * The offerGuid which mapping to the reports.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing QueryParameters.offerGuid retains the offerGuid query parameter; preserve wire compatibility."
   @minLength(1)
   @query("offerGuid")
   offerGuid?: string;
@@ -1849,6 +1854,7 @@ model QueryParameters {
   /**
    * The tenant id of the report creator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing QueryParameters.reportCreatorTenantId retains the reportCreatorTenantId query parameter; preserve wire compatibility."
   @minLength(1)
   @query("reportCreatorTenantId")
   reportCreatorTenantId?: string;
@@ -1861,6 +1867,7 @@ model ExtraParameter {
   /**
    * The offerGuid which mapping to the reports.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing ExtraParameter.offerGuid retains the offerGuid query parameter; preserve wire compatibility."
   @minLength(1)
   @query("offerGuid")
   offerGuid?: string;
@@ -1868,6 +1875,7 @@ model ExtraParameter {
   /**
    * The tenant id of the report creator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing ExtraParameter.reportCreatorTenantId retains the reportCreatorTenantId query parameter; preserve wire compatibility."
   @minLength(1)
   @query("reportCreatorTenantId")
   reportCreatorTenantId?: string;

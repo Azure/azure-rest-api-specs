@@ -214,6 +214,7 @@ model CheckAvailabilityParameters {
   /**
    * Not used and deprecated since API version 2023-01-01-preview
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckAvailabilityParameters.isAvailiable has a boolean wire value; preserve the published property contract."
   isAvailiable?: boolean;
 
   /**
@@ -262,6 +263,7 @@ model CheckAvailabilityResult
    * Gets or sets true if the name is available and can be used to
    * create new Namespace/NotificationHub. Otherwise false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckAvailabilityResult.isAvailiable has a boolean wire value; preserve the published property contract."
   isAvailiable?: boolean;
 
   /**
@@ -1046,12 +1048,14 @@ model NamespaceProperties {
   /**
    * Gets or sets whether or not the namespace is currently enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NamespaceProperties.enabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   enabled?: boolean;
 
   /**
    * Gets or sets whether or not the namespace is set as Critical.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NamespaceProperties.critical has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   critical?: boolean;
 
@@ -1381,6 +1385,7 @@ model MetricSpecification {
   /**
    * Optional property. If set to true, then zero will be returned for time duration where no metric is emitted / published.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricSpecification.fillGapWithZero has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   fillGapWithZero?: boolean;
 }
@@ -1571,6 +1576,7 @@ model Operation {
   /** 
     The intended executor of the operation."
      */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDataAction?: boolean;
 

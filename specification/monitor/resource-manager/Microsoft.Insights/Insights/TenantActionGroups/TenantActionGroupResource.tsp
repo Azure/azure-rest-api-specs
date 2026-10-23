@@ -90,6 +90,7 @@ interface TenantActionGroupResources {
   /**
    * Create a new tenant action group or update an existing one.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ManagementGroup<"managementGroupId">,
     TenantActionGroupResource,

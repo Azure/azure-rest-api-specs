@@ -235,6 +235,7 @@ model ServiceProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServiceProperties.restore has a boolean wire value; preserve the published property contract."
   @added(Versions.v2024_03_15_preview)
   @doc("Flag used to restore soft-deleted API Center service. If specified and set to 'true' all other properties will be ignored.")
   restore?: boolean = false;
@@ -271,9 +272,11 @@ model MetadataAssignment {
   @doc("The entities this metadata schema component gets applied to.")
   entity?: MetadataAssignmentEntity;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetadataAssignment.required has a boolean wire value; preserve the published property contract."
   @doc("Required assignment")
   required?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetadataAssignment.deprecated has a boolean wire value; preserve the published property contract."
   @doc("Deprecated assignment")
   deprecated?: boolean;
 }

@@ -50,6 +50,7 @@ interface IpAllocations {
       /**
        * Expands referenced resources.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },

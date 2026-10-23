@@ -572,6 +572,7 @@ model DeviceGroupProperties {
   /**
    * Deployment status for the device group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeviceGroupProperties.hasDeployment has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasDeployment?: boolean;
 
@@ -831,6 +832,7 @@ model CustomFilterQueryParameter {
   /**
    * Filter the result list using the given expression
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using CustomFilterQueryParameter.filter retain the $filter query parameter for wire compatibility."
   @query("$filter")
   filter?: string;
 }
@@ -842,6 +844,8 @@ model CustomTopQueryParameter {
   /**
    * The number of result items to return.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using CustomTopQueryParameter.top retain the $top query parameter for wire compatibility."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing CustomTopQueryParameter.top retains the $top query parameter; preserve wire compatibility."
   @query("$top")
   top?: int32;
 }
@@ -853,6 +857,8 @@ model CustomSkipQueryParameter {
   /**
    * The number of result items to skip.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using CustomSkipQueryParameter.skip retain the $skip query parameter for wire compatibility."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing CustomSkipQueryParameter.skip retains the $skip query parameter; preserve wire compatibility."
   @query("$skip")
   skip?: int32;
 }
@@ -864,6 +870,8 @@ model CustomMaxPageSizeQueryParameter {
   /**
    * The maximum number of result items per page.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using CustomMaxPageSizeQueryParameter.maxpagesize retain the $maxpagesize query parameter for wire compatibility."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing CustomMaxPageSizeQueryParameter.maxpagesize retains the $maxpagesize query parameter; preserve wire compatibility."
   @query("$maxpagesize")
   maxpagesize?: int32;
 }

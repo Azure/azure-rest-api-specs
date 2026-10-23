@@ -49,6 +49,7 @@ model KnowledgeBaseRetrievalRequest {
   retrievalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
 
   /** Indicates retrieval results should include activity information. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KnowledgeBaseRetrievalRequest.includeActivity has a boolean wire value; preserve the published property contract."
   includeActivity?: boolean;
 
   /** The output configuration for this retrieval. */
@@ -166,22 +167,27 @@ model KnowledgeSourceParams {
   knowledgeSourceName: string;
 
   /** Indicates whether references should be included for data retrieved from this source. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KnowledgeSourceParams.includeReferences has a boolean wire value; preserve the published property contract."
   includeReferences?: boolean;
 
   /** Indicates whether references should include the structured data obtained during retrieval in their payload. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KnowledgeSourceParams.includeReferenceSourceData has a boolean wire value; preserve the published property contract."
   includeReferenceSourceData?: boolean;
 
   /** Indicates that this knowledge source should bypass source selection and always be queried at retrieval time. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KnowledgeSourceParams.alwaysQuerySource has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   alwaysQuerySource?: boolean;
 
   /** Indicates that this knowledge source should be excluded from the request's candidate set and never queried at retrieval time. The exclusion is request-local and does not modify knowledge base membership. Cannot be combined with alwaysQuerySource on the same knowledge source. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KnowledgeSourceParams.neverQuerySource has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   neverQuerySource?: boolean;
 
   /** Indicates that the entire retrieval request should fail if retrieval from this knowledge source encounters an error. Defaults to false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KnowledgeSourceParams.failOnError has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01_preview)
   failOnError?: boolean;
 
@@ -201,6 +207,7 @@ model KnowledgeSourceParams {
   kind: KnowledgeSourceKind;
 
   /** Indicates whether image serving should be enabled for this knowledge source at retrieval time. When true, images extracted during ingestion are delivered to downstream models. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KnowledgeSourceParams.enableImageServing has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   enableImageServing?: boolean;
@@ -1312,6 +1319,7 @@ model SharePointSensitivityLabelInfo {
   color?: string;
 
   /** Indicates whether the sensitivity label enforces encryption. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SharePointSensitivityLabelInfo.isEncrypted has a boolean wire value; preserve the published property contract."
   isEncrypted?: boolean;
 }
 
@@ -1335,6 +1343,7 @@ model PurviewSensitivityLabelInfo {
   color?: string;
 
   /** Indicates whether the sensitivity label enforces encryption. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PurviewSensitivityLabelInfo.isEncrypted has a boolean wire value; preserve the published property contract."
   isEncrypted?: boolean;
 }
 
@@ -1352,6 +1361,7 @@ model ImageServingStatistics {
   totalImageSizeBytes?: int64;
 
   /** Indicates whether image verbalization was used instead of direct image serving. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImageServingStatistics.verbalizationUsed has a boolean wire value; preserve the published property contract."
   verbalizationUsed?: boolean;
 
   /** The set of images the model selected to be served to the downstream model for this retrieval activity. */
@@ -1705,6 +1715,7 @@ model KnowledgeSourceIngestionParameters {
   chatCompletionModel?: KnowledgeBaseModel | null;
 
   /** Indicates whether image verbalization should be disabled. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KnowledgeSourceIngestionParameters.disableImageVerbalization has a boolean wire value; preserve the published property contract."
   disableImageVerbalization?: boolean = false;
 
   /** Optional schedule for data ingestion. */

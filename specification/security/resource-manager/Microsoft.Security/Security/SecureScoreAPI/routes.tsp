@@ -33,6 +33,7 @@ interface SecureScoreControlsOperationGroup {
       /**
        * OData expand. Optional.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: ExpandControlsEnum;
     }

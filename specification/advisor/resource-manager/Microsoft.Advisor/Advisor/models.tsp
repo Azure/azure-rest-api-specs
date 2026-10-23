@@ -461,6 +461,7 @@ model ConfigDataProperties {
   /**
    * Exclude the resource from Advisor evaluations. Valid values: False (default) or True.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConfigDataProperties.exclude has a boolean wire value; preserve the published property contract."
   exclude?: boolean;
 
   /**
@@ -750,6 +751,7 @@ model RecommendationProperties {
   /**
    * If the Recommendation has Tracking enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RecommendationProperties.tracked has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_02_01_preview)
   tracked?: boolean;
 
@@ -797,6 +799,7 @@ model ResourceRecommendationSavings {
   /**
    * Indicates whether the recommendation is for a direct billing channel.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ResourceRecommendationSavings.isDirectChannel has a boolean wire value; preserve the published property contract."
   isDirectChannel?: boolean;
 
   /**

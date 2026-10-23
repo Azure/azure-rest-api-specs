@@ -1331,6 +1331,7 @@ model CheckNameAvailabilityOutput {
   /**
    * A value indicating whether the name is available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckNameAvailabilityOutput.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 

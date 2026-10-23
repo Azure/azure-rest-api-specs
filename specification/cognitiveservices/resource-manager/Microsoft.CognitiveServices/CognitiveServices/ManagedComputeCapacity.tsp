@@ -57,12 +57,14 @@ interface ManagedComputeCapacities {
       /**
        * The offer name to query capacity for (required).
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.offer retains the offer query parameter; preserve wire compatibility."
       @query("offer")
       offer: string;
 
       /**
        * Optional accelerator type filter to narrow results to a specific accelerator type.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.acceleratorType retains the acceleratorType query parameter; preserve wire compatibility."
       @query("acceleratorType")
       acceleratorType?: string;
 
@@ -70,6 +72,7 @@ interface ManagedComputeCapacities {
        * Optional deployment resource ID. When provided, returns capacity for the specific region
        * where the deployment is hosted rather than the best available region.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.deploymentId retains the deploymentId query parameter; preserve wire compatibility."
       @query("deploymentId")
       deploymentId?: string;
     },

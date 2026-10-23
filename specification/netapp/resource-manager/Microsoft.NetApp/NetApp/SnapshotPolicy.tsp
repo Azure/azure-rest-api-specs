@@ -60,6 +60,7 @@ model SnapshotPolicyProperties {
   /**
    * The property to decide policy is enabled or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SnapshotPolicyProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -271,6 +272,7 @@ interface SnapshotPolicies {
   /**
    * Get volumes associated with snapshot policy
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listVolumes retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("volumes")
   listVolumes is ArmResourceActionSync<

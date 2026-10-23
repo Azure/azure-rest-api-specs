@@ -31,6 +31,7 @@ interface VirtualNetworkPeerings {
       /**
        * Parameter indicates the intention to sync the peering with the current address space on the remote vNet after it's updated.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing createOrUpdate.syncRemoteAddressSpace retains the syncRemoteAddressSpace query parameter; preserve wire compatibility."
       @query("syncRemoteAddressSpace")
       syncRemoteAddressSpace?: SyncRemoteAddressSpace;
     },

@@ -333,6 +333,7 @@ model CustomAlertRule {
   /**
    * Status of the custom alert.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CustomAlertRule.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 
   /**

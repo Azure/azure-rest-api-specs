@@ -171,6 +171,7 @@ model RedTeam {
   @doc("List of attack strategies or nested lists of attack strategies.")
   attackStrategies?: AttackStrategy[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RedTeam.simulationOnly has a boolean wire value; preserve the published property contract."
   @doc("Simulation-only or Simulation + Evaluation. If `true` the scan outputs conversation not evaluation result. The service defaults to `false` if a value is not specified by the caller.")
   simulationOnly?: boolean = false;
 

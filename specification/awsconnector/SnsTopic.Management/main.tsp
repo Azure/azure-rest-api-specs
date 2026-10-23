@@ -68,6 +68,7 @@ model AwsSnsTopicProperties {
   @doc("The archive policy determines the number of days SNS retains messages. You can set a retention period from 1 to 365 days.")
   archivePolicy?: unknown;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsSnsTopicProperties.contentBasedDeduplication has a boolean wire value; preserve the published property contract."
   @doc("Enables content-based deduplication for FIFO topics.  +  By default, ``ContentBasedDeduplication`` is set to ``false``. If you create a FIFO topic and this attribute is ``false``, you must specify a value for the ``MessageDeduplicationId`` parameter for the [Publish](https://docs.aws.amazon.com/sns/latest/api/API_Publish.html) action.   +  When you set ``ContentBasedDeduplication`` to ``true``, SNS uses a SHA-256 hash to generate the ``MessageDeduplicationId`` using the body of the message (but not the attributes of the message). (Optional) To override the generated value, you can specify a value for the the ``MessageDeduplicationId`` parameter for the ``Publish`` action.")
   contentBasedDeduplication?: boolean;
 
@@ -81,6 +82,7 @@ model AwsSnsTopicProperties {
   @doc("The display name to use for an SNS topic with SMS subscriptions. The display name must be maximum 100 characters long, including hyphens (-), underscores (_), spaces, and tabs.")
   displayName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsSnsTopicProperties.fifoTopic has a boolean wire value; preserve the published property contract."
   @doc("Set to true to create a FIFO topic.")
   fifoTopic?: boolean;
 

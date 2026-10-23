@@ -35,6 +35,7 @@ interface HsmSecurityDomain {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing downloadPending SDK method name; renaming it would break client compatibility."
   @OpenAPI.operationId("HSMSecurityDomain_DownloadPending")
   @route("/securitydomain/download/pending")
   @get
@@ -74,6 +75,7 @@ interface HsmSecurityDomain {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing transferKey SDK method name; renaming it would break client compatibility."
   @OpenAPI.operationId("HSMSecurityDomain_TransferKey")
   @route("/securitydomain/upload")
   @get
@@ -120,6 +122,7 @@ interface HsmSecurityDomain {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing uploadPending SDK method name; renaming it would break client compatibility."
   @OpenAPI.operationId("HSMSecurityDomain_UploadPending")
   @route("/securitydomain/upload/pending")
   @get

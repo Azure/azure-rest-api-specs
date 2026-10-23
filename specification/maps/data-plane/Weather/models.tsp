@@ -703,12 +703,14 @@ model HourlyForecast {
    * hail) is expected during the specified timeframe. Returns true if
    * precipitation is expected, otherwise false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HourlyForecast.hasPrecipitation has a boolean wire value; preserve the published property contract."
   hasPrecipitation?: boolean;
 
   /**
    * A boolean value that indicates whether it is daylight during the specified
    * hour. Returns true if it is daylight, otherwise false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HourlyForecast.isDaylight has a boolean wire value; preserve the published property contract."
   isDaylight?: boolean;
 
   /**
@@ -1408,6 +1410,7 @@ model QuarterDayForecast {
    * `true` if precipitation (rain, snow, sleet, or hail) is expected during
    * this quarter-day; otherwise `false`.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing QuarterDayForecast.hasPrecipitation has a boolean wire value; preserve the published property contract."
   hasPrecipitation?: boolean;
 
   /**
@@ -1547,12 +1550,14 @@ model CurrentConditions {
    * `true` if precipitation (rain, snow, sleet, or hail) is occurring at the
    * observation time; otherwise `false`.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CurrentConditions.hasPrecipitation has a boolean wire value; preserve the published property contract."
   hasPrecipitation?: boolean;
 
   /**
    * `true` if it is daytime at the specified location at the observation
    * time; `false` if it is nighttime.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CurrentConditions.isDayTime has a boolean wire value; preserve the published property contract."
   isDayTime?: boolean;
 
   /**
@@ -2151,6 +2156,7 @@ model DailyForecastDetail {
    * `true` if any precipitation (rain, snow, sleet, or hail) is expected
    * during this period; `false` otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DailyForecastDetail.hasPrecipitation has a boolean wire value; preserve the published property contract."
   hasPrecipitation?: boolean;
 
   /**
@@ -2498,6 +2504,7 @@ model WaypointForecast {
    * `true` if it is daytime at this waypoint at the forecast time;
    * `false` if it is nighttime.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WaypointForecast.isDayTime has a boolean wire value; preserve the published property contract."
   isDayTime?: boolean;
 
   /**
@@ -3045,6 +3052,7 @@ model DailyIndex {
    * Use this flag whenever comparing `value` or `categoryValue` across
    * indices.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DailyIndex.ascending has a boolean wire value; preserve the published property contract."
   ascending?: boolean;
 
   /**
@@ -3123,6 +3131,7 @@ model ActiveStorm {
    * `true` if the tropical storm is currently active and still being
    * tracked by the issuing agency; `false` if it is no longer active.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActiveStorm.isActive has a boolean wire value; preserve the published property contract."
   isActive?: boolean;
 
   /**
@@ -3130,6 +3139,7 @@ model ActiveStorm {
    * system with characteristics of both tropical and extratropical
    * cyclones; `false` otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActiveStorm.isSubtropical has a boolean wire value; preserve the published property contract."
   isSubtropical?: boolean;
 
   /**
@@ -3208,6 +3218,7 @@ model StormSearchResultItem {
    * `true` if the tropical storm is currently active and still being
    * tracked by the issuing agency; `false` if it is no longer active.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StormSearchResultItem.isActive has a boolean wire value; preserve the published property contract."
   isActive?: boolean;
 
   /**
@@ -3216,6 +3227,7 @@ model StormSearchResultItem {
    * Names are typically retired only when a storm is so deadly or costly
    * that future use of the name would be inappropriate.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StormSearchResultItem.isRetired has a boolean wire value; preserve the published property contract."
   isRetired?: boolean;
 
   /**
@@ -3223,6 +3235,7 @@ model StormSearchResultItem {
    * system with characteristics of both tropical and extratropical
    * cyclones; `false` otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StormSearchResultItem.isSubtropical has a boolean wire value; preserve the published property contract."
   isSubtropical?: boolean;
 
   /**
@@ -3624,6 +3637,7 @@ model StormLocation {
    * subtropical cyclone - a hybrid system with characteristics of both
    * tropical and extratropical cyclones. `false` otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StormLocation.isSubtropical has a boolean wire value; preserve the published property contract."
   isSubtropical?: boolean;
 
   /**
@@ -3631,6 +3645,7 @@ model StormLocation {
    * into a tropical cyclone, used to flag pre-genesis disturbances. `false`
    * otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StormLocation.hasTropicalPotential has a boolean wire value; preserve the published property contract."
   hasTropicalPotential?: boolean;
 
   /**
@@ -3638,6 +3653,7 @@ model StormLocation {
    * tropical cyclone to a post-tropical cyclone (for example, an
    * extratropical or remnant low). `false` otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StormLocation.isPostTropical has a boolean wire value; preserve the published property contract."
   isPostTropical?: boolean;
 
   /**

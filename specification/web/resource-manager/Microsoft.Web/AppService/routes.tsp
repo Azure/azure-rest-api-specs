@@ -64,6 +64,7 @@ op validate(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getSubscriptionDeploymentLocations retains its response and SDK paging behavior; preserve published compatibility."
 @summary("Gets list of available geo regions plus ministamps")
 @autoRoute
 @get
@@ -112,6 +113,7 @@ op listBillingMeters is ArmProviderActionSync<
     /**
      * Azure Location of billable resource
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBillingMeters.billingLocation retains the billingLocation query parameter; preserve wire compatibility."
     @query("billingLocation")
     billingLocation?: string;
 
@@ -119,6 +121,7 @@ op listBillingMeters is ArmProviderActionSync<
      * App Service OS type meters used for
      */
     #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBillingMeters.osType retains the osType query parameter; preserve wire compatibility."
     @query("osType")
     osType?: string;
   },
@@ -160,6 +163,7 @@ op listCustomHostNameSites is ArmProviderActionSync<
     /**
      * Specific hostname
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listCustomHostNameSites.hostname retains the hostname query parameter; preserve wire compatibility."
     @query("hostname")
     hostname?: string;
   },
@@ -184,30 +188,39 @@ op listGeoRegions is ArmProviderActionSync<
     /**
      * Name of SKU used to filter the regions.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listGeoRegions.sku retains the sku query parameter; preserve wire compatibility."
     @query("sku")
     sku?: SkuName;
 
     /**
      * Specify <code>true</code> if you want to filter to only regions that support Linux workers.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listGeoRegions.linuxWorkersEnabled has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listGeoRegions.linuxWorkersEnabled retains the linuxWorkersEnabled query parameter; preserve wire compatibility."
     @query("linuxWorkersEnabled")
     linuxWorkersEnabled?: boolean;
 
     /**
      * Specify <code>true</code> if you want to filter to only regions that support Xenon workers.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listGeoRegions.xenonWorkersEnabled has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listGeoRegions.xenonWorkersEnabled retains the xenonWorkersEnabled query parameter; preserve wire compatibility."
     @query("xenonWorkersEnabled")
     xenonWorkersEnabled?: boolean;
 
     /**
      * Specify <code>true</code> if you want to filter to only regions that support Linux Consumption Workers.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listGeoRegions.linuxDynamicWorkersEnabled has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listGeoRegions.linuxDynamicWorkersEnabled retains the linuxDynamicWorkersEnabled query parameter; preserve wire compatibility."
     @query("linuxDynamicWorkersEnabled")
     linuxDynamicWorkersEnabled?: boolean;
 
     /**
      * Specify <code>true</code> if you want to filter to only regions that support App Service Plans with <code>IsCustomMode</code> set to <code>true</code>.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listGeoRegions.customModeWorkersEnabled has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listGeoRegions.customModeWorkersEnabled retains the customModeWorkersEnabled query parameter; preserve wire compatibility."
     @query("customModeWorkersEnabled")
     customModeWorkersEnabled?: boolean;
   },
@@ -273,6 +286,7 @@ op listPremierAddOnOffers is ArmProviderActionSync<
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listSkus retains its response and SDK paging behavior; preserve published compatibility."
 @summary("List all SKUs.")
 @autoRoute
 @get
@@ -363,6 +377,7 @@ interface ProviderOperationGroup {
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getAvailableStacks.osTypeSelected retains the osTypeSelected query parameter; preserve wire compatibility."
       @query("osTypeSelected")
       osTypeSelected?: ProviderOsTypeSelected;
     },
@@ -383,6 +398,7 @@ interface ProviderOperationGroup {
        * Stack OS Type
        */
       #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getFunctionAppStacks.stackOsType retains the stackOsType query parameter; preserve wire compatibility."
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },
@@ -405,6 +421,7 @@ interface ProviderOperationGroup {
        * Stack OS Type
        */
       #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getFunctionAppStacksForLocation.stackOsType retains the stackOsType query parameter; preserve wire compatibility."
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },
@@ -427,6 +444,7 @@ interface ProviderOperationGroup {
        * Stack OS Type
        */
       #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWebAppStacksForLocation.stackOsType retains the stackOsType query parameter; preserve wire compatibility."
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },
@@ -447,6 +465,7 @@ interface ProviderOperationGroup {
        * Stack OS Type
        */
       #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getWebAppStacks.stackOsType retains the stackOsType query parameter; preserve wire compatibility."
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },
@@ -466,6 +485,7 @@ interface ProviderOperationGroup {
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getAvailableStacksOnPrem.osTypeSelected retains the osTypeSelected query parameter; preserve wire compatibility."
       @query("osTypeSelected")
       osTypeSelected?: ProviderOsTypeSelected;
     },
@@ -491,6 +511,8 @@ interface RecommendationsOperationGroup {
       /**
        * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.featured has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.featured retains the featured query parameter; preserve wire compatibility."
       @query("featured")
       featured?: boolean;
 

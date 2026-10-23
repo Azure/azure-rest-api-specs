@@ -115,12 +115,14 @@ interface SCClusterRecords {
       /**
        * Pagination size
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listClusters.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @query("pageSize")
       pageSize?: int32;
 
       /**
        * An opaque pagination token to fetch the next set of records
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listClusters.pageToken retains the pageToken query parameter; preserve wire compatibility."
       @query("pageToken")
       pageToken?: string;
     },

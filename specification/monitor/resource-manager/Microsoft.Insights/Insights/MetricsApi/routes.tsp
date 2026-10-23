@@ -19,6 +19,8 @@ alias IntervalQueryParameter = {
    * The interval (i.e. timegrain) of the query in ISO 8601 duration format. Defaults to PT1M. Special case for 'FULL' value that returns single datapoint for entire time span requested.
    * *Examples: PT15M, PT1H, P1D, FULL*
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using IntervalQueryParameter.interval retain the interval query parameter for wire compatibility."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing IntervalQueryParameter.interval retains the interval query parameter; preserve wire compatibility."
   @query("interval")
   interval?: string;
 };
@@ -40,12 +42,14 @@ interface MetricDefinitionsOperationGroup {
       /**
        * The region where the metrics you want reside.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtSubscriptionScope.region retains the region query parameter; preserve wire compatibility."
       @query("region")
       region: string;
 
       /**
        * Metric namespace where the metrics you want reside.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtSubscriptionScope.metricnamespace retains the metricnamespace query parameter; preserve wire compatibility."
       @query("metricnamespace")
       metricnamespace?: string;
     },
@@ -66,6 +70,7 @@ interface MetricDefinitionsOperationGroup {
       /**
        * Metric namespace where the metrics you want reside.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.metricnamespace retains the metricnamespace query parameter; preserve wire compatibility."
       @query("metricnamespace")
       metricnamespace?: string;
     },
@@ -96,6 +101,7 @@ interface MetricNamespacesOperationGroup {
     /**
      * The ISO 8601 conform Date start time from which to query for metric namespaces.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.startTime retains the startTime query parameter; preserve wire compatibility."
     @query("startTime")
     startTime?: string,
   ): MetricNamespaceCollection | Microsoft.Common.ErrorResponse;
@@ -106,6 +112,7 @@ interface MetricsOperationGroup {
   /**
    * **Lists the metric data for a subscription**. This API used the [default ARM throttling limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/request-limits-and-throttling).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listAtSubscriptionScope retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("metrics")
@@ -117,12 +124,14 @@ interface MetricsOperationGroup {
       /**
        * The region where the metrics you want reside.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtSubscriptionScope.region retains the region query parameter; preserve wire compatibility."
       @query("region")
       region: string;
 
       /**
        * The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtSubscriptionScope.timespan retains the timespan query parameter; preserve wire compatibility."
       @query("timespan")
       timespan?: string;
 
@@ -131,6 +140,7 @@ interface MetricsOperationGroup {
       /**
        * The names of the metrics (comma separated) to retrieve. Limit 20 metrics.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtSubscriptionScope.metricnames retains the metricnames query parameter; preserve wire compatibility."
       @query("metricnames")
       metricnames?: string;
 
@@ -138,6 +148,7 @@ interface MetricsOperationGroup {
        * The list of aggregation types (comma separated) to retrieve.
        * *Examples: average, minimum, maximum*
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtSubscriptionScope.aggregation retains the aggregation query parameter; preserve wire compatibility."
       @query("aggregation")
       aggregation?: string;
 
@@ -146,6 +157,7 @@ interface MetricsOperationGroup {
        * Valid only if filter is specified.
        * Defaults to 10.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtSubscriptionScope.top retains the top query parameter; preserve wire compatibility."
       @query("top")
       top?: int32;
 
@@ -154,6 +166,7 @@ interface MetricsOperationGroup {
        * Only one order can be specified.
        * *Examples: sum asc*
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtSubscriptionScope.orderby retains the orderby query parameter; preserve wire compatibility."
       @query("orderby")
       orderby?: string;
 
@@ -166,12 +179,14 @@ interface MetricsOperationGroup {
       /**
        * Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtSubscriptionScope.resultType retains the resultType query parameter; preserve wire compatibility."
       @query("resultType")
       resultType?: MetricResultType;
 
       /**
        * Metric namespace where the metrics you want reside.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtSubscriptionScope.metricnamespace retains the metricnamespace query parameter; preserve wire compatibility."
       @query("metricnamespace")
       metricnamespace?: string;
 
@@ -179,6 +194,8 @@ interface MetricsOperationGroup {
        * When set to true, if the timespan passed in is not supported by this metric, the API will return the result using the closest supported timespan. When set to false, an error is returned for invalid timespan parameters. Defaults to false.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listAtSubscriptionScope.AutoAdjustTimegrain has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtSubscriptionScope.AutoAdjustTimegrain retains the AutoAdjustTimegrain query parameter; preserve wire compatibility."
       @query("AutoAdjustTimegrain")
       AutoAdjustTimegrain?: boolean;
 
@@ -186,12 +203,15 @@ interface MetricsOperationGroup {
        * When set to false, invalid filter parameter values will be ignored. When set to true, an error is returned for invalid filter parameters. Defaults to true.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listAtSubscriptionScope.ValidateDimensions has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtSubscriptionScope.ValidateDimensions retains the ValidateDimensions query parameter; preserve wire compatibility."
       @query("ValidateDimensions")
       ValidateDimensions?: boolean;
 
       /**
        * Dimension name(s) to rollup results by. For example if you only want to see metric values with a filter like 'City eq Seattle or City eq Tacoma' but don't want to see separate values for each city, you can specify 'RollUpBy=City' to see the results for Seattle and Tacoma rolled up into one timeseries.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtSubscriptionScope.rollupby retains the rollupby query parameter; preserve wire compatibility."
       @query("rollupby")
       rollupby?: string;
     },
@@ -211,12 +231,14 @@ interface MetricsOperationGroup {
       /**
        * The region where the metrics you want reside.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listAtSubscriptionScopePost POST contract uses region in the query; preserve wire compatibility."
       @query("region")
       region: string;
 
       /**
        * The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listAtSubscriptionScopePost POST contract uses timespan in the query; preserve wire compatibility."
       @query("timespan")
       timespan?: string;
 
@@ -225,6 +247,7 @@ interface MetricsOperationGroup {
       /**
        * The names of the metrics (comma separated) to retrieve. Limit 20 metrics.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listAtSubscriptionScopePost POST contract uses metricnames in the query; preserve wire compatibility."
       @query("metricnames")
       metricnames?: string;
 
@@ -232,6 +255,7 @@ interface MetricsOperationGroup {
        * The list of aggregation types (comma separated) to retrieve.
        * *Examples: average, minimum, maximum*
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listAtSubscriptionScopePost POST contract uses aggregation in the query; preserve wire compatibility."
       @query("aggregation")
       aggregation?: string;
 
@@ -240,6 +264,7 @@ interface MetricsOperationGroup {
        * Valid only if filter is specified.
        * Defaults to 10.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listAtSubscriptionScopePost POST contract uses top in the query; preserve wire compatibility."
       @query("top")
       top?: int32;
 
@@ -248,24 +273,28 @@ interface MetricsOperationGroup {
        * Only one order can be specified.
        * *Examples: sum asc*
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listAtSubscriptionScopePost POST contract uses orderby in the query; preserve wire compatibility."
       @query("orderby")
       orderby?: string;
 
       /**
        * The **$filter** is used to reduce the set of metric data returned.<br>Example:<br>Metric contains metadata A, B and C.<br>- Return all time series of C where A = a1 and B = b1 or b2<br>**$filter=A eq ‘a1’ and B eq ‘b1’ or B eq ‘b2’ and C eq ‘*’**<br>- Invalid variant:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘*’ or B = ‘b2’**<br>This is invalid because the logical or operator cannot separate two different metadata names.<br>- Return all time series where A = a1, B = b1 and C = c1:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘c1’**<br>- Return all time series where A = a1<br>**$filter=A eq ‘a1’ and B eq ‘*’ and C eq ‘*’**.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listAtSubscriptionScopePost POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       $filter?: string;
 
       /**
        * Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listAtSubscriptionScopePost POST contract uses resultType in the query; preserve wire compatibility."
       @query("resultType")
       resultType?: MetricResultType;
 
       /**
        * Metric namespace where the metrics you want reside.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listAtSubscriptionScopePost POST contract uses metricnamespace in the query; preserve wire compatibility."
       @query("metricnamespace")
       metricnamespace?: string;
 
@@ -273,6 +302,8 @@ interface MetricsOperationGroup {
        * When set to true, if the timespan passed in is not supported by this metric, the API will return the result using the closest supported timespan. When set to false, an error is returned for invalid timespan parameters. Defaults to false.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listAtSubscriptionScopePost POST contract uses AutoAdjustTimegrain in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listAtSubscriptionScopePost.AutoAdjustTimegrain has a boolean wire value; preserve the published property contract."
       @query("AutoAdjustTimegrain")
       AutoAdjustTimegrain?: boolean;
 
@@ -280,12 +311,15 @@ interface MetricsOperationGroup {
        * When set to false, invalid filter parameter values will be ignored. When set to true, an error is returned for invalid filter parameters. Defaults to true.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listAtSubscriptionScopePost POST contract uses ValidateDimensions in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listAtSubscriptionScopePost.ValidateDimensions has a boolean wire value; preserve the published property contract."
       @query("ValidateDimensions")
       ValidateDimensions?: boolean;
 
       /**
        * Dimension name(s) to rollup results by. For example if you only want to see metric values with a filter like 'City eq Seattle or City eq Tacoma' but don't want to see separate values for each city, you can specify 'RollUpBy=City' to see the results for Seattle and Tacoma rolled up into one timeseries.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listAtSubscriptionScopePost POST contract uses rollupby in the query; preserve wire compatibility."
       @query("rollupby")
       rollupby?: string;
     },
@@ -295,6 +329,7 @@ interface MetricsOperationGroup {
   /**
    * **Lists the metric values for a resource**. This API used the [default ARM throttling limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/request-limits-and-throttling).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("metrics")
@@ -306,6 +341,7 @@ interface MetricsOperationGroup {
       /**
        * The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.timespan retains the timespan query parameter; preserve wire compatibility."
       @query("timespan")
       timespan?: string;
 
@@ -314,6 +350,7 @@ interface MetricsOperationGroup {
       /**
        * The names of the metrics (comma separated) to retrieve. Limit 20 metrics.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.metricnames retains the metricnames query parameter; preserve wire compatibility."
       @query("metricnames")
       metricnames?: string;
 
@@ -321,6 +358,7 @@ interface MetricsOperationGroup {
        * The list of aggregation types (comma separated) to retrieve.
        * *Examples: average, minimum, maximum*
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.aggregation retains the aggregation query parameter; preserve wire compatibility."
       @query("aggregation")
       aggregation?: string;
 
@@ -329,6 +367,7 @@ interface MetricsOperationGroup {
        * Valid only if filter is specified.
        * Defaults to 10.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.top retains the top query parameter; preserve wire compatibility."
       @query("top")
       top?: int32;
 
@@ -337,6 +376,7 @@ interface MetricsOperationGroup {
        * Only one order can be specified.
        * *Examples: sum asc*
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.orderby retains the orderby query parameter; preserve wire compatibility."
       @query("orderby")
       orderby?: string;
 
@@ -349,12 +389,14 @@ interface MetricsOperationGroup {
       /**
        * Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.resultType retains the resultType query parameter; preserve wire compatibility."
       @query("resultType")
       resultType?: ResultType;
 
       /**
        * Metric namespace where the metrics you want reside.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.metricnamespace retains the metricnamespace query parameter; preserve wire compatibility."
       @query("metricnamespace")
       metricnamespace?: string;
 
@@ -362,6 +404,8 @@ interface MetricsOperationGroup {
        * When set to true, if the timespan passed in is not supported by this metric, the API will return the result using the closest supported timespan. When set to false, an error is returned for invalid timespan parameters. Defaults to false.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.AutoAdjustTimegrain has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.AutoAdjustTimegrain retains the AutoAdjustTimegrain query parameter; preserve wire compatibility."
       @query("AutoAdjustTimegrain")
       AutoAdjustTimegrain?: boolean;
 
@@ -369,12 +413,15 @@ interface MetricsOperationGroup {
        * When set to false, invalid filter parameter values will be ignored. When set to true, an error is returned for invalid filter parameters. Defaults to true.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.ValidateDimensions has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.ValidateDimensions retains the ValidateDimensions query parameter; preserve wire compatibility."
       @query("ValidateDimensions")
       ValidateDimensions?: boolean;
 
       /**
        * Dimension name(s) to rollup results by. For example if you only want to see metric values with a filter like 'City eq Seattle or City eq Tacoma' but don't want to see separate values for each city, you can specify 'RollUpBy=City' to see the results for Seattle and Tacoma rolled up into one timeseries.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.rollupby retains the rollupby query parameter; preserve wire compatibility."
       @query("rollupby")
       rollupby?: string;
     },

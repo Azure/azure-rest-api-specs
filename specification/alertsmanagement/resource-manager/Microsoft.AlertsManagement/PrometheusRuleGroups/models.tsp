@@ -66,6 +66,7 @@ model PrometheusRuleGroupProperties {
   /**
    * Enable/disable rule group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PrometheusRuleGroupProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -107,6 +108,7 @@ model PrometheusRule {
   /**
    * Enable/disable rule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PrometheusRule.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -171,6 +173,7 @@ model PrometheusRuleResolveConfiguration {
   /**
    * Enable alert auto-resolution.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PrometheusRuleResolveConfiguration.autoResolved has a boolean wire value; preserve the published property contract."
   autoResolved?: boolean;
 
   /**
@@ -198,5 +201,6 @@ model PrometheusRuleGroupResourcePatchParametersProperties {
   /**
    * the flag that indicates whether the Prometheus rule group is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PrometheusRuleGroupResourcePatchParametersProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }

@@ -108,12 +108,14 @@ model RelayClusterProperties {
   /**
    * Indicates whether the Relay cluster supports capacity scaling.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RelayClusterProperties.supportsScaling has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   supportsScaling?: boolean;
 
   /**
    * Indicates whether the Relay cluster was created as zone redundant.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RelayClusterProperties.zoneRedundant has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   zoneRedundant?: boolean;
 }
@@ -370,6 +372,7 @@ interface Clusters {
   /**
    * Lists Relay namespace resource IDs assigned to a Relay cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listNamespaces retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("namespaces")
   listNamespaces is ArmResourceActionSync<
@@ -382,6 +385,7 @@ interface Clusters {
   /**
    * Lists SKUs supported by a Relay cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listSkus retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("skus")
   listSkus is ArmResourceActionSync<

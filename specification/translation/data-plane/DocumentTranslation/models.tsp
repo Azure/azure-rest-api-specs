@@ -150,6 +150,7 @@ model StartTranslationDetails {
 @doc("Translation batch request options")
 @added(Versions.v2024_11_01_preview)
 model BatchOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BatchOptions.translateTextWithinImage has a boolean wire value; preserve the published property contract."
   @doc("Translation text within an image option")
   translateTextWithinImage?: boolean = false;
 }
@@ -533,6 +534,7 @@ model DocumentTranslateBody {
   @query("deploymentName")
   deploymentName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DocumentTranslateBody.allowFallback has a boolean wire value; preserve the published property contract."
   @doc("""
     Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. 
     Possible values are: true (default) or false.
@@ -549,6 +551,7 @@ model DocumentTranslateBody {
   body: DocumentTranslateContent;
 
   // Placed after body to preserve parameter ordering with prior GA versions
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DocumentTranslateBody.translateTextWithinImage has a boolean wire value; preserve the published property contract."
   @doc("Optional boolean parameter to translate text within an image in the document")
   @added(Versions.v2024_11_01_preview)
   @query("translateTextWithinImage")

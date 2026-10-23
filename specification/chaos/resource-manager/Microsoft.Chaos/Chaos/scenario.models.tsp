@@ -93,6 +93,7 @@ model ScenarioParameter {
   /**
    * Whether this parameter is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScenarioParameter.required has a boolean wire value; preserve the published property contract."
   required?: boolean;
 
   /**

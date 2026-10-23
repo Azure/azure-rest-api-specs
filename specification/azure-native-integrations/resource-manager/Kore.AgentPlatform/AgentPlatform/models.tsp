@@ -235,6 +235,7 @@ model WorkspaceProperties {
   partnerProperties: WorkspacePartnerProperties;
 
   /** Indicates whether this is the default Workspace created with the Organization. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WorkspaceProperties.isDefault has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDefault?: boolean;
 
@@ -260,6 +261,7 @@ model DiscoveredWorkspace {
   ownerEmail?: email;
 
   /** Indicates whether this is the default Workspace created with the Organization. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DiscoveredWorkspace.isDefault has a boolean wire value; preserve the published property contract."
   isDefault?: boolean;
 
   /** Lifecycle status of the Workspace as reported by the Kore partner. */
@@ -273,6 +275,7 @@ model DiscoveredWorkspace {
   marketplaceDetails?: LiftrBase.MarketplaceDetails[];
 
   /** Indicates whether the Workspace is managed as an ARM resource through Liftr. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DiscoveredWorkspace.isManagedByLiftr has a boolean wire value; preserve the published property contract."
   isManagedByLiftr: boolean;
 
   /** ARM resource ID when the Workspace is managed through Liftr. */
@@ -335,6 +338,7 @@ model WorkspaceDetailPartnerProperties {
   retentionDays: int32;
 
   /** Indicates whether this is the Organization's default Workspace. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WorkspaceDetailPartnerProperties.default has a boolean wire value; preserve the published property contract."
   default: boolean;
 
   /** Marketplace SaaS subscriptions owned by the Workspace. */
@@ -549,6 +553,7 @@ model LinkedSaaSItem {
   ]>;
 
   /** Flag indicating if the SaaS resource is hidden. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LinkedSaaSItem.isHiddenSaaS has a boolean wire value; preserve the published property contract."
   isHiddenSaaS?: boolean;
 }
 
@@ -573,6 +578,7 @@ model WorkspaceLinkedSaaSItem {
   ]>;
 
   /** Flag indicating if the SaaS resource is hidden. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WorkspaceLinkedSaaSItem.isHiddenSaaS has a boolean wire value; preserve the published property contract."
   isHiddenSaaS?: boolean;
 }
 

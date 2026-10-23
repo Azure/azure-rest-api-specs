@@ -50,6 +50,7 @@ interface AssociatedTenants {
    * Create or update an associated tenant for the billing account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("AssociatedTenant")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -88,42 +89,51 @@ alias AssociatedTenantsListByBillingAccountParameters = {
   /**
    * Can be used to get revoked associated tenants.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AssociatedTenantsListByBillingAccountParameters.includeRevoked has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing AssociatedTenantsListByBillingAccountParameters.includeRevoked retains the includeRevoked query parameter; preserve wire compatibility."
   @query("includeRevoked")
   includeRevoked?: boolean = false;
 
   /**
    * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing AssociatedTenantsListByBillingAccountParameters.filter retains the filter query parameter; preserve wire compatibility."
   @query("filter")
   filter?: string;
 
   /**
    * The orderby query option allows clients to request resources in a particular order.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing AssociatedTenantsListByBillingAccountParameters.orderBy retains the orderBy query parameter; preserve wire compatibility."
   @query("orderBy")
   orderBy?: string;
 
   /**
    * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing AssociatedTenantsListByBillingAccountParameters.top retains the top query parameter; preserve wire compatibility."
   @query("top")
   top?: int64;
 
   /**
    * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing AssociatedTenantsListByBillingAccountParameters.skip retains the skip query parameter; preserve wire compatibility."
   @query("skip")
   skip?: int64;
 
   /**
    * The count query option allows clients to request a count of the matching resources included with the resources in the response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AssociatedTenantsListByBillingAccountParameters.count has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing AssociatedTenantsListByBillingAccountParameters.count retains the count query parameter; preserve wire compatibility."
   @query("count")
   count?: boolean;
 
   /**
    * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing AssociatedTenantsListByBillingAccountParameters.search retains the search query parameter; preserve wire compatibility."
   @query("search")
   search?: string;
 };

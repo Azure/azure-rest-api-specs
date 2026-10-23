@@ -55,6 +55,7 @@ model DeploymentProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   environmentType?: SetupType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentProperties.isAutoScalingEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates if auto scaling is enabled for the deployment's CPU core count.")
   @visibility(Lifecycle.Create)
   isAutoScalingEnabled?: boolean;
@@ -63,6 +64,7 @@ model DeploymentProperties {
   @visibility(Lifecycle.Read)
   ingressIps?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeploymentProperties.isPublic has a boolean wire value; preserve the published property contract."
   @doc("True if this object is publicly available.")
   @visibility(Lifecycle.Create)
   isPublic?: boolean;
@@ -277,6 +279,7 @@ model BackupScheduleType {
   @doc("Backup schedule frequency.")
   frequencyBackupScheduled?: FrequencyType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BackupScheduleType.isMetadataOnly has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the backup contains metadata only.")
   isMetadataOnly?: boolean;
 
@@ -384,6 +387,7 @@ model MaintenanceConfigurationType {
   @doc("Interim release upgrade period in days.")
   interimReleaseUpgradePeriodInDays?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MaintenanceConfigurationType.isInterimReleaseAutoUpgradeEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether interim release auto-upgrade is enabled.")
   isInterimReleaseAutoUpgradeEnabled?: boolean;
 

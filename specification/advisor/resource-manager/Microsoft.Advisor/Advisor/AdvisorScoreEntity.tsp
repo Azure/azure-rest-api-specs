@@ -40,6 +40,7 @@ interface AdvisorScoreEntities {
    * Gets the list of advisor scores.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is ArmResourceListByParent<
     AdvisorScoreEntity,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

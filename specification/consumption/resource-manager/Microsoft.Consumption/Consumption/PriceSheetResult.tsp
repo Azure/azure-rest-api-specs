@@ -52,18 +52,21 @@ interface PriceSheetResults {
       /**
        * May be used to expand the properties/meterDetails within a price sheet. By default, these fields are not included when returning price sheet.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       /**
        * Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: string;
 
       /**
        * May be used to limit the number of results to the top N results.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @minValue(1)
       @query("$top")
@@ -95,18 +98,21 @@ interface PriceSheet {
       /**
        * May be used to expand the properties/meterDetails within a price sheet. By default, these fields are not included when returning price sheet.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingPeriod.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       /**
        * Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingPeriod.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: string;
 
       /**
        * May be used to limit the number of results to the top N results.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingPeriod.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @minValue(1)
       @query("$top")

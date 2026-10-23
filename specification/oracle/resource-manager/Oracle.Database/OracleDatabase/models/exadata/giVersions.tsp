@@ -28,16 +28,19 @@ model GiVersionProperties {
 @added(Versions.v20241201_preview)
 @doc("Provides GiVersion query parameter for list operations.")
 model GiVersionFilter {
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing GiVersionFilter.shape retains the shape query parameter; preserve wire compatibility."
   @query
   @doc("If provided, filters the results for the given shape")
   @minLength(1)
   @maxLength(255)
   shape?: SystemShapes;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing GiVersionFilter.zone retains the zone query parameter; preserve wire compatibility."
   @query
   @doc("Filters the result for the given Azure Availability Zone")
   zone?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing GiVersionFilter.shapeAttribute retains the shapeAttribute query parameter; preserve wire compatibility."
   @added(Versions.v20250801_preview)
   @query
   @doc("Filters the result for the given Shape Attribute, such as BLOCK_STORAGE or SMART_STORAGE.")

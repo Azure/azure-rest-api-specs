@@ -263,6 +263,7 @@ model CloudVmClusterProperties {
   @maxValue(100)
   sparseStoragePercentage?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CloudVmClusterProperties.isLocalBackupEnabled has a boolean wire value; preserve the published property contract."
   @doc("If true, database backup on local Exadata storage is configured for the cloud VM cluster. If false, database backup on local Exadata storage is not available in the cloud VM cluster. ")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   isLocalBackupEnabled?: boolean = false;
@@ -276,6 +277,7 @@ model CloudVmClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   proximityPlacementGroup?: ProximityPlacementGroup;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CloudVmClusterProperties.isSparseDiskgroupEnabled has a boolean wire value; preserve the published property contract."
   @doc("If true, sparse disk group is configured for the cloud VM cluster. If false, sparse disk group is not created. ")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   isSparseDiskgroupEnabled?: boolean = false;
@@ -423,6 +425,7 @@ model CloudVmClusterProperties {
   @visibility(Lifecycle.Read)
   storageManagementType?: ExadataVmClusterStorageManagementType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CloudVmClusterProperties.isAcceleratedNetworkEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v20251201_preview)
   @doc("Indicates if the Accelerated Networking feature is enabled or disabled for provisioning an Exadata VM cluster. The default value is: false.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)

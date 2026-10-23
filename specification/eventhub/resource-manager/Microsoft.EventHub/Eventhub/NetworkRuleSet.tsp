@@ -80,6 +80,7 @@ interface NetworkRuleSets {
   /**
    * Gets NetworkRuleSet for a Namespace.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listNetworkRuleSet retains its response and SDK paging behavior; preserve published compatibility."
   listNetworkRuleSet is NetworkRuleSetsOps.ListSinglePage<
     NetworkRuleSet,
     Response = NetworkRuleSetListResult,

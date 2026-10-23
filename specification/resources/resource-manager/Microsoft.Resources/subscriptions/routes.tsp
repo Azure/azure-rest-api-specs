@@ -29,6 +29,7 @@ interface Subscriptions {
     /**
      * Whether to include extended locations.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listLocations.includeExtendedLocations has a boolean wire value; preserve the published property contract."
     @query("includeExtendedLocations")
     includeExtendedLocations?: boolean,
   ): ArmResponse<LocationListResult> | CloudError;

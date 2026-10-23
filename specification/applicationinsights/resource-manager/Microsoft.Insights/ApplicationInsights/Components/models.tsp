@@ -251,12 +251,14 @@ model ApplicationInsightsComponentProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentProperties.DisableIpMasking has a boolean wire value; preserve the published property contract."
   DisableIpMasking?: boolean;
 
   /**
    * Purge data immediately after 30 days.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentProperties.ImmediatePurgeDataOn30Days has a boolean wire value; preserve the published property contract."
   ImmediatePurgeDataOn30Days?: boolean;
 
   /**
@@ -301,12 +303,14 @@ model ApplicationInsightsComponentProperties {
    * Disable Non-AAD based Auth.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentProperties.DisableLocalAuth has a boolean wire value; preserve the published property contract."
   DisableLocalAuth?: boolean;
 
   /**
    * Force users to create their own storage account for profiler and debugger.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationInsightsComponentProperties.ForceCustomerStorageForProfiler has a boolean wire value; preserve the published property contract."
   ForceCustomerStorageForProfiler?: boolean;
 
   /**

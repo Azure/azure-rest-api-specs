@@ -316,6 +316,7 @@ namespace ReservationsClient;
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing quotaRequestStatusGet SDK method name; renaming it would break client compatibility."
 op quotaRequestStatusGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -350,6 +351,7 @@ op quotaRequestStatusGet(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing quotaRequestStatusList SDK method name; renaming it would break client compatibility."
 op quotaRequestStatusList(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,

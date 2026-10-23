@@ -117,6 +117,7 @@ model ValidationResponse {
   /**
    * Whether or not validation succeeded
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ValidationResponse.isValid has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isValid?: boolean;
 

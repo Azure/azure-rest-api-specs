@@ -37,6 +37,7 @@ interface AlertTemplates {
       /**
        * The provider type for filtering alert templates.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.providerType retains the providerType query parameter; preserve wire compatibility."
       @minLength(1)
       @query("providerType")
       providerType?: string;

@@ -524,6 +524,7 @@ model Operation {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -734,16 +735,19 @@ model AccessReviewScope {
   /**
    * Flag to indicate whether to expand nested memberships or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccessReviewScope.expandNestedMemberships has a boolean wire value; preserve the published property contract."
   expandNestedMemberships?: boolean;
 
   /**
    * Flag to indicate whether to expand nested memberships or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccessReviewScope.includeInheritedAccess has a boolean wire value; preserve the published property contract."
   includeInheritedAccess?: boolean;
 
   /**
    * Flag to indicate whether to expand nested memberships or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccessReviewScope.includeAccessBelowResource has a boolean wire value; preserve the published property contract."
   includeAccessBelowResource?: boolean;
 
   /**
@@ -974,21 +978,25 @@ model AccessReviewScheduleSettings {
   /**
    * Flag to indicate whether sending mails to reviewers and the review creator is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccessReviewScheduleSettings.mailNotificationsEnabled has a boolean wire value; preserve the published property contract."
   mailNotificationsEnabled?: boolean;
 
   /**
    * Flag to indicate whether sending reminder emails to reviewers are enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccessReviewScheduleSettings.reminderNotificationsEnabled has a boolean wire value; preserve the published property contract."
   reminderNotificationsEnabled?: boolean;
 
   /**
    * Flag to indicate whether reviewers are required to provide a justification when reviewing access.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccessReviewScheduleSettings.defaultDecisionEnabled has a boolean wire value; preserve the published property contract."
   defaultDecisionEnabled?: boolean;
 
   /**
    * Flag to indicate whether the reviewer is required to pass justification when recording a decision.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccessReviewScheduleSettings.justificationRequiredOnApproval has a boolean wire value; preserve the published property contract."
   justificationRequiredOnApproval?: boolean;
 
   /**
@@ -999,11 +1007,13 @@ model AccessReviewScheduleSettings {
   /**
    * Flag to indicate whether auto-apply capability, to automatically change the target object access resource, is enabled. If not enabled, a user must, after the review completes, apply the access review.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccessReviewScheduleSettings.autoApplyDecisionsEnabled has a boolean wire value; preserve the published property contract."
   autoApplyDecisionsEnabled?: boolean;
 
   /**
    * Flag to indicate whether showing recommendations to reviewers is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccessReviewScheduleSettings.recommendationsEnabled has a boolean wire value; preserve the published property contract."
   recommendationsEnabled?: boolean;
 
   /**

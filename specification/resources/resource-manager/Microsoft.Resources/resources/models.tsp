@@ -587,6 +587,7 @@ model RoleDefinition {
   /**
    * If this is a service role.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RoleDefinition.isServiceRole has a boolean wire value; preserve the published property contract."
   isServiceRole?: boolean;
 
   /**
@@ -644,6 +645,7 @@ model ProviderConsentDefinition {
   /**
    * A value indicating whether authorization is consented or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ProviderConsentDefinition.consentToAuthorization has a boolean wire value; preserve the published property contract."
   consentToAuthorization?: boolean;
 }
 

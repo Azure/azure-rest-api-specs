@@ -82,6 +82,7 @@ interface ProjectTasks {
       /**
        * Expand the response
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -122,6 +123,8 @@ interface ProjectTasks {
       /**
        * Delete the resource even if it contains running tasks
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.deleteRunningTasks has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.deleteRunningTasks retains the deleteRunningTasks query parameter; preserve wire compatibility."
       @query("deleteRunningTasks")
       deleteRunningTasks?: boolean;
     }
@@ -140,6 +143,7 @@ interface ProjectTasks {
       /**
        * Filter tasks by task type
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.taskType retains the taskType query parameter; preserve wire compatibility."
       @query("taskType")
       taskType?: string;
     },
@@ -217,6 +221,7 @@ interface ServiceTasks {
       /**
        * Expand the response
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -257,6 +262,8 @@ interface ServiceTasks {
       /**
        * Delete the resource even if it contains running tasks
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.deleteRunningTasks has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.deleteRunningTasks retains the deleteRunningTasks query parameter; preserve wire compatibility."
       @query("deleteRunningTasks")
       deleteRunningTasks?: boolean;
     }
@@ -275,6 +282,7 @@ interface ServiceTasks {
       /**
        * Filter tasks by task type
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.taskType retains the taskType query parameter; preserve wire compatibility."
       @query("taskType")
       taskType?: string;
     },

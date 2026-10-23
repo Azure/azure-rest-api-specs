@@ -197,6 +197,7 @@ interface DataAssets {
   List is UnifiedCatalogOperations.ResourceList<
     DataAsset,
     ListQueryParametersTrait<{
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing List.includeExtendedProperties has a boolean wire value; preserve the published property contract."
       @doc("Include extended properties in the response.")
       @query
       includeExtendedProperties: boolean;
@@ -247,10 +248,12 @@ interface DataAssets {
   @get
   GetById is RpcOperation<
     DataAssetIdParameter & {
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GetById.includeExtendedProperties has a boolean wire value; preserve the published property contract."
       @doc("Include extended properties in the response.")
       @query
       includeExtendedProperties: boolean;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GetById.includeLineage has a boolean wire value; preserve the published property contract."
       @doc("Include lineage information in the response.")
       @query
       includeLineage: boolean;
@@ -377,6 +380,7 @@ interface DataProducts {
   @post
   Query is RpcOperation<
     {
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Query.dataProductOwner has a boolean wire value; preserve the published property contract."
       @doc("Optional flag to restrict results to owned data products.")
       @query
       dataProductOwner?: boolean;
@@ -513,6 +517,7 @@ interface BusinessDomain {
       @query("$skipToken")
       skipToken?: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Enumerate.writeOnly has a boolean wire value; preserve the published property contract."
       @doc("writeOnly")
       @query
       writeOnly?: boolean;
@@ -970,10 +975,12 @@ interface DataColumns {
   @get
   Get is RpcOperation<
     DataColumnId & {
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Get.includeColumnDetails has a boolean wire value; preserve the published property contract."
       @doc("Include extended properties in the response.")
       @query
       includeColumnDetails?: boolean;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Get.includeAssetDetails has a boolean wire value; preserve the published property contract."
       @doc("Include extended properties in the response.")
       @query
       includeAssetDetails?: boolean;

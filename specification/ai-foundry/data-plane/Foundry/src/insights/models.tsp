@@ -366,6 +366,7 @@ model EvalResult {
   @doc("score")
   score: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EvalResult.passed has a boolean wire value; preserve the published property contract."
   @doc("indicates if the check passed or failed")
   passed: boolean;
 }

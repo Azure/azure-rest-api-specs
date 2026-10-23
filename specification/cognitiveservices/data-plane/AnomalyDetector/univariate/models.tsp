@@ -218,18 +218,21 @@ model UnivariateLastDetectionResult {
     """)
   lowerMargin: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UnivariateLastDetectionResult.isAnomaly has a boolean wire value; preserve the published property contract."
   @doc("""
     Anomaly status of the latest point. True means the latest point is an anomaly,
     either in the negative direction or in the positive direction.
     """)
   isAnomaly: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UnivariateLastDetectionResult.isNegativeAnomaly has a boolean wire value; preserve the published property contract."
   @doc("""
     Anomaly status of the latest point in a negative direction. True means the latest
     point is an anomaly and its real value is smaller than the expected one.
     """)
   isNegativeAnomaly: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UnivariateLastDetectionResult.isPositiveAnomaly has a boolean wire value; preserve the published property contract."
   @doc("""
     Anomaly status of the latest point in a positive direction. True means the latest
     point is an anomaly and its real value is larger than the expected one.

@@ -30,14 +30,17 @@ model GiMinorVersionProperties {
 @added(Versions.v20241201_preview)
 @doc("Provides GiMinorVersion query parameter for list operations.")
 model GiMinorVersionFilter {
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing GiMinorVersionFilter.shapeFamily retains the shapeFamily query parameter; preserve wire compatibility."
   @query
   @doc("If provided, filters the results to the set of database versions which are supported for the given shape family.")
   shapeFamily?: ShapeFamily;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing GiMinorVersionFilter.zone retains the zone query parameter; preserve wire compatibility."
   @query
   @doc("Filters the result for the given Azure Availability Zone")
   zone?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing GiMinorVersionFilter.shape retains the shape query parameter; preserve wire compatibility."
   @added(Versions.v20260401_preview)
   @query
   @doc("If provided, filters the results to the set of GI minor versions supported for the given shape.")
@@ -45,11 +48,14 @@ model GiMinorVersionFilter {
   @maxLength(255)
   shape?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GiMinorVersionFilter.isGiVersionForProvisioning has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing GiMinorVersionFilter.isGiVersionForProvisioning retains the isGiVersionForProvisioning query parameter; preserve wire compatibility."
   @added(Versions.v20260401_preview)
   @query
   @doc("If true, filters the results to GI minor versions supported during VM cluster provisioning.")
   isGiVersionForProvisioning?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing GiMinorVersionFilter.sortOrder retains the sortOrder query parameter; preserve wire compatibility."
   @added(Versions.v20260401_preview)
   @query
   @doc("Sort order for the returned GI minor versions.")

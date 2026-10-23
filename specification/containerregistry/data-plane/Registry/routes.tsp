@@ -24,6 +24,7 @@ interface ContainerRegistry {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing checkDockerV2Support SDK method name; renaming it would break client compatibility."
   @route("/v2/")
   @get
   checkDockerV2Support is AcrOperation<

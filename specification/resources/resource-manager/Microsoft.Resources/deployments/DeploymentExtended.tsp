@@ -119,6 +119,7 @@ interface Deployments {
       /**
        * The number of results to get. If null is passed, returns all deployments.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtScope.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -213,6 +214,7 @@ interface Deployments {
       /**
        * The number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing deploymentOperationsListAtScope.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -259,6 +261,7 @@ interface DeploymentsExtendedTenant {
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdateAtTenantScope retains its tenant-scoped route; preserve published resource IDs and API paths."
   @summary("Deploys resources at tenant scope.")
   @tag("Deployments")
   createOrUpdateAtTenantScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
@@ -382,6 +385,7 @@ interface DeploymentsExtendedTenant {
       /**
        * The number of results to get. If null is passed, returns all deployments.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -405,6 +409,7 @@ interface DeploymentsExtendedTenant {
       /**
        * The number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtTenantScope.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -457,6 +462,7 @@ interface DeploymentExtendedManagementGroup {
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdateAtManagementGroupScope retains its tenant-scoped route; preserve published resource IDs and API paths."
   @summary("Deploys resources at management group scope.")
   @tag("Deployments")
   createOrUpdateAtManagementGroupScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
@@ -496,6 +502,7 @@ interface DeploymentExtendedManagementGroup {
       /**
        * The number of results to get. If null is passed, returns all deployments.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtManagementGroupScope.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -603,6 +610,7 @@ interface DeploymentExtendedManagementGroup {
       /**
        * The number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing deploymentOperationsListAtManagementGroupScope.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -688,6 +696,7 @@ interface DeploymentExtendedSubscriptionGroup {
       /**
        * The number of results to get. If null is passed, returns all deployments.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAtSubscriptionScope.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -795,6 +804,7 @@ interface DeploymentExtendedSubscriptionGroup {
       /**
        * The number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing deploymentOperationsListAtSubscriptionScope.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -873,6 +883,7 @@ interface DeploymentExtendedOperationGroup {
       /**
        * The number of results to get. If null is passed, returns all deployments.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },

@@ -72,6 +72,7 @@ model AwsWafv2LoggingConfigurationProperties {
   @doc("Filtering that specifies which web requests are kept in the logs and which are dropped. You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation.")
   loggingFilter?: LoggingFilterModelProperties;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsWafv2LoggingConfigurationProperties.managedByFirewallManager has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration.")
   managedByFirewallManager?: boolean;
 

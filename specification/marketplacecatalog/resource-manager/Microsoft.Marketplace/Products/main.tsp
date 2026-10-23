@@ -38,20 +38,25 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations(Products)
 interface ProductList {
   /** Lists products for tenant. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByTenant retains its response and SDK paging behavior; preserve published compatibility."
   @route("/providers/Microsoft.Marketplace/products")
   @get
   @armResourceList(ProductSummary)
   listByTenant(
     ...ApiVersionParameter,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByTenant.market retains the market query parameter; preserve wire compatibility."
     @doc(MarketParameterDescription)
     @query
     market?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByTenant.language retains the language query parameter; preserve wire compatibility."
     @doc(LanguageParameterDescription)
     @query
     language?: string = "en",
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByTenant.excludePublicOffersAndPublicPlans has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByTenant.excludePublicOffersAndPublicPlans retains the excludePublicOffersAndPublicPlans query parameter; preserve wire compatibility."
     @doc(ExcludePublicParameterDescription)
     @query
     excludePublicOffersAndPublicPlans?: boolean = false,
@@ -60,18 +65,22 @@ interface ProductList {
     @query
     $filter?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByTenant.$select retains the $select query parameter; preserve wire compatibility."
     @doc(SelectOdataParameterDescription)
     @query
     $select?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByTenant.$expand retains the $expand query parameter; preserve wire compatibility."
     @doc(ExpandOdataParameterDescription)
     @query
     $expand?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByTenant.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
     @doc(OrderByOdataParameterDescription)
     @query
     $orderBy?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByTenant.$search retains the $search query parameter; preserve wire compatibility."
     @doc(SearchParameterDescription)
     @query
     $search?: string,
@@ -80,13 +89,17 @@ interface ProductList {
     | DiscoveryErrorPayload;
 
   /** Lists products for subscription. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listBySubscription retains its response and SDK paging behavior; preserve published compatibility."
   listBySubscription is ArmListBySubscriptionCustom<
     Products,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.language retains the language query parameter; preserve wire compatibility."
       @doc(LanguageParameterDescription)
       @query
       language?: string = "en";
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listBySubscription.excludePublicOffersAndPublicPlans has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.excludePublicOffersAndPublicPlans retains the excludePublicOffersAndPublicPlans query parameter; preserve wire compatibility."
       @doc(ExcludePublicParameterDescription)
       @query
       excludePublicOffersAndPublicPlans?: boolean = false;
@@ -95,18 +108,22 @@ interface ProductList {
       @query
       $filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.$select retains the $select query parameter; preserve wire compatibility."
       @doc(SelectOdataParameterDescription)
       @query
       $select?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.$expand retains the $expand query parameter; preserve wire compatibility."
       @doc(ExpandOdataParameterDescription)
       @query
       $expand?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @doc(OrderByOdataParameterDescription)
       @query
       $orderBy?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.$search retains the $search query parameter; preserve wire compatibility."
       @doc(SearchParameterDescription)
       @query
       $search?: string;
@@ -115,17 +132,22 @@ interface ProductList {
   >;
 
   /** Lists products for billing account. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByBillingAccount retains its response and SDK paging behavior; preserve published compatibility."
   listByBillingAccount is ArmListByBillingAccount<
     Products,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.language retains the language query parameter; preserve wire compatibility."
       @doc(LanguageParameterDescription)
       @query
       language?: string = "en";
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByBillingAccount.excludePublicOffersAndPublicPlans has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.excludePublicOffersAndPublicPlans retains the excludePublicOffersAndPublicPlans query parameter; preserve wire compatibility."
       @doc(ExcludePublicParameterDescription)
       @query
       excludePublicOffersAndPublicPlans?: boolean = false;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.locations retains the locations query parameter; preserve wire compatibility."
       @doc(LocationsarameterDescription)
       @query
       locations?: string;
@@ -134,18 +156,22 @@ interface ProductList {
       @query
       $filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.$select retains the $select query parameter; preserve wire compatibility."
       @doc(SelectOdataParameterDescription)
       @query
       $select?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.$expand retains the $expand query parameter; preserve wire compatibility."
       @doc(ExpandOdataParameterDescription)
       @query
       $expand?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @doc(OrderByOdataParameterDescription)
       @query
       $orderBy?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.$search retains the $search query parameter; preserve wire compatibility."
       @doc(SearchParameterDescription)
       @query
       $search?: string;
@@ -154,17 +180,22 @@ interface ProductList {
   >;
 
   /** Lists products for billing profile. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByBillingProfile retains its response and SDK paging behavior; preserve published compatibility."
   listByBillingProfile is ArmListByBillingProfile<
     Products,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfile.language retains the language query parameter; preserve wire compatibility."
       @doc(LanguageParameterDescription)
       @query
       language?: string = "en";
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByBillingProfile.excludePublicOffersAndPublicPlans has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfile.excludePublicOffersAndPublicPlans retains the excludePublicOffersAndPublicPlans query parameter; preserve wire compatibility."
       @doc(ExcludePublicParameterDescription)
       @query
       excludePublicOffersAndPublicPlans?: boolean = false;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfile.locations retains the locations query parameter; preserve wire compatibility."
       @doc(LocationsarameterDescription)
       @query
       locations?: string;
@@ -173,18 +204,22 @@ interface ProductList {
       @query
       $filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfile.$select retains the $select query parameter; preserve wire compatibility."
       @doc(SelectOdataParameterDescription)
       @query
       $select?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfile.$expand retains the $expand query parameter; preserve wire compatibility."
       @doc(ExpandOdataParameterDescription)
       @query
       $expand?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfile.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @doc(OrderByOdataParameterDescription)
       @query
       $orderBy?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfile.$search retains the $search query parameter; preserve wire compatibility."
       @doc(SearchParameterDescription)
       @query
       $search?: string;
@@ -203,34 +238,45 @@ interface ProductGet {
     ...ApiVersionParameter,
     ...ProductIdParameter,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByTenant.market retains the market query parameter; preserve wire compatibility."
     @doc(MarketSingleParameterDescription)
     @query
     market: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByTenant.includeStopSoldPlans has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByTenant.includeStopSoldPlans retains the includeStopSoldPlans query parameter; preserve wire compatibility."
     @doc(IncludeStopSoldPlansParameterDescription)
     @query
     includeStopSoldPlans?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByTenant.language retains the language query parameter; preserve wire compatibility."
     @doc(LanguageParameterDescription)
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByTenant.pricingAudience retains the pricingAudience query parameter; preserve wire compatibility."
     @doc(PricingAudienceParameterDescription)
     @query
     pricingAudience?: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByTenant.includeHiddenPlans has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByTenant.includeHiddenPlans retains the includeHiddenPlans query parameter; preserve wire compatibility."
     @doc(IncludeHiddenPlansParameterDescription)
     @query
     includeHiddenPlans?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByTenant.includeServiceInstructionTemplates has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByTenant.includeServiceInstructionTemplates retains the includeServiceInstructionTemplates query parameter; preserve wire compatibility."
     @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
     includeServiceInstructionTemplates?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByTenant.planId retains the planId query parameter; preserve wire compatibility."
     @doc(PlanIdParameterDescription)
     @query
     planId?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByTenant.skuId retains the skuId query parameter; preserve wire compatibility."
     @doc(SkuIdParameterDescription)
     @query
     skuId?: string,
@@ -245,30 +291,41 @@ interface ProductGet {
     ...SubscriptionIdParameter,
     ...ProductIdParameter,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getBySubscription.includeStopSoldPlans has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getBySubscription.includeStopSoldPlans retains the includeStopSoldPlans query parameter; preserve wire compatibility."
     @doc(IncludeStopSoldPlansParameterDescription)
     @query
     includeStopSoldPlans?: boolean,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getBySubscription.language retains the language query parameter; preserve wire compatibility."
     @doc(LanguageParameterDescription)
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getBySubscription.includeHiddenPlans has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getBySubscription.includeHiddenPlans retains the includeHiddenPlans query parameter; preserve wire compatibility."
     @doc(IncludeHiddenPlansParameterDescription)
     @query
     includeHiddenPlans?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getBySubscription.includeServiceInstructionTemplates has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getBySubscription.includeServiceInstructionTemplates retains the includeServiceInstructionTemplates query parameter; preserve wire compatibility."
     @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
     includeServiceInstructionTemplates?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getBySubscription.planId retains the planId query parameter; preserve wire compatibility."
     @doc(PlanIdParameterDescription)
     @query
     planId?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getBySubscription.skuId retains the skuId query parameter; preserve wire compatibility."
     @doc(SkuIdParameterDescription)
     @query
     skuId?: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getBySubscription.lookUpOfferInTenantLevel has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getBySubscription.lookUpOfferInTenantLevel retains the lookUpOfferInTenantLevel query parameter; preserve wire compatibility."
     @doc(LookUpOfferInTenantLevelParameterDescription)
     @query
     lookUpOfferInTenantLevel?: boolean = false,
@@ -283,26 +340,35 @@ interface ProductGet {
     ...BillingAccountIdParameter,
     ...ProductIdParameter,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByBillingAccount.includeStopSoldPlans has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingAccount.includeStopSoldPlans retains the includeStopSoldPlans query parameter; preserve wire compatibility."
     @doc(IncludeStopSoldPlansParameterDescription)
     @query
     includeStopSoldPlans?: boolean,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingAccount.language retains the language query parameter; preserve wire compatibility."
     @doc(LanguageParameterDescription)
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByBillingAccount.includeHiddenPlans has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingAccount.includeHiddenPlans retains the includeHiddenPlans query parameter; preserve wire compatibility."
     @doc(IncludeHiddenPlansParameterDescription)
     @query
     includeHiddenPlans?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByBillingAccount.includeServiceInstructionTemplates has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingAccount.includeServiceInstructionTemplates retains the includeServiceInstructionTemplates query parameter; preserve wire compatibility."
     @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
     includeServiceInstructionTemplates?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingAccount.planId retains the planId query parameter; preserve wire compatibility."
     @doc(PlanIdParameterDescription)
     @query
     planId?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingAccount.skuId retains the skuId query parameter; preserve wire compatibility."
     @doc(SkuIdParameterDescription)
     @query
     skuId?: string,
@@ -318,26 +384,35 @@ interface ProductGet {
     ...BillingProfileIdParameter,
     ...ProductIdParameter,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByBillingProfile.includeStopSoldPlans has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingProfile.includeStopSoldPlans retains the includeStopSoldPlans query parameter; preserve wire compatibility."
     @doc(IncludeStopSoldPlansParameterDescription)
     @query
     includeStopSoldPlans?: boolean,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingProfile.language retains the language query parameter; preserve wire compatibility."
     @doc(LanguageParameterDescription)
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByBillingProfile.includeHiddenPlans has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingProfile.includeHiddenPlans retains the includeHiddenPlans query parameter; preserve wire compatibility."
     @doc(IncludeHiddenPlansParameterDescription)
     @query
     includeHiddenPlans?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByBillingProfile.includeServiceInstructionTemplates has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingProfile.includeServiceInstructionTemplates retains the includeServiceInstructionTemplates query parameter; preserve wire compatibility."
     @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
     includeServiceInstructionTemplates?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingProfile.planId retains the planId query parameter; preserve wire compatibility."
     @doc(PlanIdParameterDescription)
     @query
     planId?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingProfile.skuId retains the skuId query parameter; preserve wire compatibility."
     @doc(SkuIdParameterDescription)
     @query
     skuId?: string,
@@ -345,6 +420,7 @@ interface ProductGet {
 }
 
 /** The operation to list products by subscription. */
+#suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing ArmListBySubscriptionCustom retains its response and SDK paging behavior; preserve published compatibility."
 @listsResource(Resource)
 @segmentOf(Resource)
 @armResourceList(Resource)
@@ -361,6 +437,7 @@ op ArmListBySubscriptionCustom<
 >;
 
 /** The operation to list products by billing account. */
+#suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing ArmListByBillingAccount retains its response and SDK paging behavior; preserve published compatibility."
 @listsResource(Resource)
 @segmentOf(Resource)
 @armResourceList(Resource)
@@ -377,6 +454,7 @@ op ArmListByBillingAccount<
 >;
 
 /** The operation to list products by billing account. */
+#suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing ArmListByBillingProfile retains its response and SDK paging behavior; preserve published compatibility."
 @listsResource(Resource)
 @segmentOf(Resource)
 @armResourceList(Resource)

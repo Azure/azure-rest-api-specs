@@ -82,6 +82,8 @@ interface Domains {
       /**
        * Specify <code>true</code> to delete the domain immediately. The default is <code>false</code> which deletes the domain after 24 hours.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.forceHardDeleteDomain has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.forceHardDeleteDomain retains the forceHardDeleteDomain query parameter; preserve wire compatibility."
       @query("forceHardDeleteDomain")
       forceHardDeleteDomain?: boolean;
     },

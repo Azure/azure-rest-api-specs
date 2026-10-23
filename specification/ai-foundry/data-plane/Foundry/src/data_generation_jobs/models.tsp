@@ -330,6 +330,7 @@ model TracesDataGenerationJobConfiguration
   @doc("Maximum number of samples to generate, up to service-defined limits. If omitted, sampling is turned off.")
   max_samples?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TracesDataGenerationJobConfiguration.redact_private_content has a boolean wire value; preserve the published property contract."
   @doc("Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.")
   redact_private_content?: boolean = true;
 }

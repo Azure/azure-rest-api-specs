@@ -199,12 +199,15 @@ interface ManagedInstanceLongTermRetentionBackups {
       /**
        * Whether or not to only get the latest backup for each database.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByDatabase.onlyLatestPerDatabase has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByDatabase.onlyLatestPerDatabase retains the onlyLatestPerDatabase query parameter; preserve wire compatibility."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 
       /**
        * Whether to query against just live databases, just deleted databases, or all databases.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByDatabase.databaseState retains the databaseState query parameter; preserve wire compatibility."
       @query("databaseState")
       databaseState?: DatabaseState;
     }
@@ -369,12 +372,15 @@ interface LongTermRetentionManagedInstanceBackups {
       /**
        * Whether or not to only get the latest backup for each database.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByResourceGroupDatabase.onlyLatestPerDatabase has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroupDatabase.onlyLatestPerDatabase retains the onlyLatestPerDatabase query parameter; preserve wire compatibility."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 
       /**
        * Whether to query against just live databases, just deleted databases, or all databases.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroupDatabase.databaseState retains the databaseState query parameter; preserve wire compatibility."
       @query("databaseState")
       databaseState?: DatabaseState;
     }

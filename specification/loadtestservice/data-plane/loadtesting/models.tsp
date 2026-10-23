@@ -422,6 +422,7 @@ model Test {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbervation and should be all caps"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Test.publicIPDisabled has a boolean wire value; preserve the published property contract."
   @added(APIVersions.v2023_04_01_preview)
   @doc("Inject load test engines without deploying public IP for outbound access")
   publicIPDisabled?: boolean;
@@ -563,6 +564,7 @@ model CertificateMetadata {
 @added(APIVersions.v2023_04_01_preview)
 @doc("Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window.")
 model AutoStopCriteria {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutoStopCriteria.autoStopDisabled has a boolean wire value; preserve the published property contract."
   @doc("Whether auto-stop should be disabled. The default value is false.")
   autoStopDisabled?: boolean = false;
 
@@ -586,6 +588,7 @@ model LoadTestConfiguration {
   engineInstances?: int32;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "CSV is an abbervation and should be all caps"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LoadTestConfiguration.splitAllCSVs has a boolean wire value; preserve the published property contract."
   @doc("""
     If false, Azure Load Testing copies and processes your input files unmodified
     across all test engine instances. If true, Azure Load Testing splits the CSV
@@ -594,6 +597,7 @@ model LoadTestConfiguration {
     """)
   splitAllCSVs?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LoadTestConfiguration.quickStartTest has a boolean wire value; preserve the published property contract."
   @doc("""
     If true, optionalLoadTestConfig is required and JMX script for the load test is
     not required to upload.
@@ -674,6 +678,7 @@ model TestInputArtifacts {
 @added(APIVersions.v2025_11_01_preview)
 model TestPreferences {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "AI is an abbervation and should be all caps"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TestPreferences.enableAIErrorInsights has a boolean wire value; preserve the published property contract."
   @doc("Enable or disable AI based insights on Test Run Errors.")
   enableAIErrorInsights?: boolean = true;
 }
@@ -922,12 +927,14 @@ model TestRun {
   @doc("Request data collection level for test run")
   requestDataLevel?: RequestDataLevel;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TestRun.debugLogsEnabled has a boolean wire value; preserve the published property contract."
   @added(APIVersions.v2024_05_01_preview)
   @doc("Enable or disable debug level logging. True if debug logs are enabled for the test run. False otherwise")
   debugLogsEnabled?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbervation and should be all caps"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TestRun.publicIPDisabled has a boolean wire value; preserve the published property contract."
   @added(APIVersions.v2023_04_01_preview)
   @doc("Inject load test engines without deploying public IP for outbound access")
   @visibility(Lifecycle.Read)

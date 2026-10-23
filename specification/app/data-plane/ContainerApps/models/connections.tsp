@@ -60,6 +60,7 @@ namespace ContainerAppsSandbox {
     createdAt?: utcDateTime;
 
     /** Whether the connection can currently be deleted. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Connection.deletable has a boolean wire value; preserve the published property contract."
     @visibility(Lifecycle.Read)
     deletable?: boolean;
 

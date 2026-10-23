@@ -127,6 +127,7 @@ interface Remediations {
   /**
    * Creates or updates a remediation at management group scope.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdateAtManagementGroup retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdateAtManagementGroup is RemediationManagementGroupOps.CreateOrUpdateSync<
     Remediation,
     Response =
@@ -155,6 +156,7 @@ interface Remediations {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listForManagementGroup.Top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -205,6 +207,7 @@ interface Remediations {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listForSubscription.Top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -233,6 +236,7 @@ interface Remediations {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listDeploymentsAtSubscription POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -287,6 +291,7 @@ interface Remediations {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listForResourceGroup.Top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -315,6 +320,7 @@ interface Remediations {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listDeploymentsAtResourceGroup POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -368,6 +374,7 @@ interface Remediations {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listForResource.Top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -395,6 +402,7 @@ interface Remediations {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listDeploymentsAtResource POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;

@@ -343,6 +343,7 @@ model IanaId {
   /**
    * IsAlias property
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IanaId.isAlias has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isAlias?: boolean;
 
@@ -356,6 +357,7 @@ model IanaId {
    * This attribute returns `True` if the IanaId has any country/zone associated
    * with it.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IanaId.hasZone1970Location has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasZone1970Location?: boolean;
 }

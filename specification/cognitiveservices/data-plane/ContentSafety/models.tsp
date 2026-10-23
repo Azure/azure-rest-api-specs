@@ -78,6 +78,7 @@ model AnalyzeTextOptions {
   @doc("The names of blocklists.")
   blocklistNames?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AnalyzeTextOptions.haltOnBlocklistHit has a boolean wire value; preserve the published property contract."
   @doc("When set to true, further analyses of harmful content will not be performed in cases where blocklists are hit. When set to false, all analyses of harmful content will be performed, whether or not blocklists are hit.")
   haltOnBlocklistHit?: boolean;
 
@@ -193,6 +194,7 @@ model TextBlocklistItem {
   @maxLength(128)
   text: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TextBlocklistItem.isRegex has a boolean wire value; preserve the published property contract."
   @added(ContentSafety.Versions.v2024_09_01)
   @doc("An optional properties indicating whether this item is to be matched as a regular expression.")
   isRegex?: boolean;
@@ -242,6 +244,7 @@ model ShieldPromptResult {
 @added(ContentSafety.Versions.v2024_09_01)
 @doc("The individual analysis result of potential injection attacks in the given user prompt.")
 model UserPromptInjectionAnalysisResult {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UserPromptInjectionAnalysisResult.attackDetected has a boolean wire value; preserve the published property contract."
   @doc("Whether a potential injection attack is detected or not.")
   attackDetected: boolean;
 }
@@ -249,6 +252,7 @@ model UserPromptInjectionAnalysisResult {
 @added(ContentSafety.Versions.v2024_09_01)
 @doc("The individual analysis result of potential injection attacks in the given documents.")
 model DocumentInjectionAnalysisResult {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DocumentInjectionAnalysisResult.attackDetected has a boolean wire value; preserve the published property contract."
   @doc("Whether a potential injection attack is detected or not.")
   attackDetected: boolean;
 }
@@ -271,6 +275,7 @@ model DetectTextProtectedMaterialResult {
 @added(ContentSafety.Versions.v2024_09_01)
 @doc("The individual detection result of potential protected material.")
 model TextProtectedMaterialAnalysisResult {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TextProtectedMaterialAnalysisResult.detected has a boolean wire value; preserve the published property contract."
   @doc("Whether potential protected material is detected or not.")
   detected: boolean;
 }
@@ -344,6 +349,7 @@ model UnifiedModerateOptions {
   @doc("A string containing a JSON-encoded object with the original arguments for a completed tool call. This property applies only to post_tool_call. The service uses an empty object when omitted.")
   toolArguments?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UnifiedModerateOptions.toolResultIsError has a boolean wire value; preserve the published property contract."
   @doc("Whether the completed tool call returned an error. This property applies only to post_tool_call.")
   toolResultIsError?: boolean;
 
@@ -385,9 +391,11 @@ union AcsDecision {
 @added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("The moderation and policy-attribution result for one harm category. The category name is the key in the harmResults map and is not restricted to a predefined set.")
 model AcsHarmResult {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AcsHarmResult.blocked has a boolean wire value; preserve the published property contract."
   @doc("Whether this harm contributed to the overall ACS verdict blocking the content.")
   blocked: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AcsHarmResult.detected has a boolean wire value; preserve the published property contract."
   @doc("Whether this harm was detected, regardless of whether it caused the overall verdict to block.")
   detected: boolean;
 
@@ -407,6 +415,7 @@ model AcsHarmResult {
 @added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("The detection result for one blocklist evaluated as part of a harm result.")
 model AcsHarmDetail {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AcsHarmDetail.detected has a boolean wire value; preserve the published property contract."
   @doc("Whether the blocklist was detected.")
   detected: boolean;
 

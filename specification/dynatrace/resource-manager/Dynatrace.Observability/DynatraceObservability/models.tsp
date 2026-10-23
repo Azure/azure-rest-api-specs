@@ -561,6 +561,7 @@ model CreateResourceSupportedProperties {
   /**
    * Indicates if selected subscription supports Dynatrace resource creation, if not it is already being monitored for the selected organization via multi subscription feature.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CreateResourceSupportedProperties.creationSupported has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   creationSupported?: boolean;
 }

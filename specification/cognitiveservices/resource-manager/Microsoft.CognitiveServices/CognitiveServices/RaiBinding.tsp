@@ -48,6 +48,7 @@ model RaiBindingListParameters {
   /**
    * The maximum number of RAI bindings to return. Defaults to 50.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing RaiBindingListParameters.$top retains the $top query parameter; preserve wire compatibility."
   @query("$top")
   @minValue(1)
   $top?: int32 = 50;

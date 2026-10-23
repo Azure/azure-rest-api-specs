@@ -216,6 +216,7 @@ model SensitivityLabel {
   /**
    * Indicates whether the label is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SensitivityLabel.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -248,11 +249,13 @@ model InformationType {
   /**
    * Indicates whether the information type is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing InformationType.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
    * Indicates whether the information type is custom or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing InformationType.custom has a boolean wire value; preserve the published property contract."
   custom?: boolean;
 
   /**
@@ -274,16 +277,19 @@ model InformationProtectionKeyword {
   /**
    * Indicates whether the keyword is custom or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing InformationProtectionKeyword.custom has a boolean wire value; preserve the published property contract."
   custom?: boolean;
 
   /**
    * Indicates whether the keyword can be applied on numeric types or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing InformationProtectionKeyword.canBeNumeric has a boolean wire value; preserve the published property contract."
   canBeNumeric?: boolean;
 
   /**
    * Indicates whether the keyword is excluded or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing InformationProtectionKeyword.excluded has a boolean wire value; preserve the published property contract."
   excluded?: boolean;
 }
 

@@ -22,6 +22,7 @@ model AvailableSolutionTemplateVersion {
   @doc("Latest Configuration Revision")
   latestConfigRevision: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AvailableSolutionTemplateVersion.isConfigured has a boolean wire value; preserve the published property contract."
   @doc("Has this solution template version been configured")
   isConfigured: boolean;
 }

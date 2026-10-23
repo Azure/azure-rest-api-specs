@@ -68,6 +68,7 @@ model SliResource {
   @doc("The streaming rule last updated timestamp associated with the Sli resource.")
   streamingRuleLastUpdatedTimestamp?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SliResource.enableAlert has a boolean wire value; preserve the published property contract."
   @doc("A flag to determine whether alert is enabled.")
   enableAlert: boolean;
 
@@ -151,6 +152,7 @@ interface Slis {
   @route(ServiceGroupRoute)
   get is ArmResourceRead<Sli, ServiceGroupParameters>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @doc("Creates or updates an SLI resource.")
   @route(ServiceGroupRoute)
   createOrUpdate is ArmResourceCreateOrReplaceSync<Sli, ServiceGroupParameters>;

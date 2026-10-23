@@ -335,6 +335,7 @@ alias ServiceGroup = Extension.ExternalResource<
 @added(Versions.`2026-03-01-preview`)
 interface DependencyOfRelationshipsByServiceGroup {
   get is Extension.Read<ServiceGroup, DependencyOfRelationship>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is Extension.CreateOrReplaceAsync<
     ServiceGroup,
     DependencyOfRelationship

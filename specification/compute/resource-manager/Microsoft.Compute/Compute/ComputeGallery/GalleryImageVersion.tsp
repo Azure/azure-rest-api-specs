@@ -39,6 +39,7 @@ interface GalleryImageVersions {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: ReplicationStatusTypes;
     }
@@ -87,6 +88,8 @@ interface GalleryImageVersions {
       /**
        * Specifies whether to bypass the gallery's soft-delete policy and permanently delete the gallery image version. If true, the version is not retained in the recycle bin and cannot be restored. If false or omitted, the version is soft-deleted when the gallery's soft-delete policy is enabled and permanently deleted when the policy is disabled.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.bypassSoftDelete has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.bypassSoftDelete retains the bypassSoftDelete query parameter; preserve wire compatibility."
       @added(Versions.v2026_03_03)
       @query("bypassSoftDelete")
       bypassSoftDelete?: boolean;

@@ -496,6 +496,7 @@ union AutocompleteMode {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SearchOptions {
   /** A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchOptions.includeTotalResultCount has a boolean wire value; preserve the published property contract."
   @query("$count")
   includeTotalResultCount?: boolean;
 
@@ -641,6 +642,7 @@ model SuggestOptions {
   filter?: string;
 
   /** A value indicating whether to use fuzzy matching for the suggestions query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestions queries are slower and consume more resources. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SuggestOptions.useFuzzyMatching has a boolean wire value; preserve the published property contract."
   @query("fuzzy")
   useFuzzyMatching?: boolean;
 
@@ -854,6 +856,7 @@ model QueryRewritesValuesDebugInfo {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SearchRequest {
   /** A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SearchRequest.count has a boolean wire value; preserve the published property contract."
   count?: boolean;
 
   /** The list of facet expressions to apply to the search query. Each facet expression contains a field name, optionally followed by a comma-separated list of name:value pairs. */
@@ -998,6 +1001,7 @@ model VectorQuery {
   fields?: string;
 
   /** When true, triggers an exhaustive k-nearest neighbor search across all vectors within the vector index. Useful for scenarios where exact matches are critical, such as determining ground truth values. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VectorQuery.exhaustive has a boolean wire value; preserve the published property contract."
   exhaustive?: boolean;
 
   /** Oversampling factor. Minimum value is 1. It overrides the 'defaultOversampling' parameter configured in the index definition. It can be set only when 'rerankWithOriginalVectors' is true. This parameter is only permitted when a compression method is used on the underlying vector field. */
@@ -1253,6 +1257,7 @@ model SuggestRequest {
   filter?: string;
 
   /** A value indicating whether to use fuzzy matching for the suggestion query. Default is false. When set to true, the query will find suggestions even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestion searches are slower and consume more resources. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SuggestRequest.fuzzy has a boolean wire value; preserve the published property contract."
   fuzzy?: boolean;
 
   /** A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting of suggestions is disabled. */
@@ -1338,6 +1343,7 @@ model IndexingResult {
   errorMessage?: string;
 
   /** A value indicating whether the indexing operation succeeded for the document identified by the key. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IndexingResult.status has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   status: boolean;
 
@@ -1383,6 +1389,7 @@ model AutocompleteRequest {
   filter?: string;
 
   /** A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will autocomplete terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutocompleteRequest.fuzzy has a boolean wire value; preserve the published property contract."
   fuzzy?: boolean;
 
   /** A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting is disabled. */

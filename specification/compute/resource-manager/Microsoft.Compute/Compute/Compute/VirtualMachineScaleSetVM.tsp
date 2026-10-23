@@ -113,6 +113,7 @@ interface VirtualMachineScaleSetVMS {
       /**
        * The expand expression to apply on the operation. 'InstanceView' will retrieve the instance view of the virtual machine. 'UserData' will retrieve the UserData of the virtual machine.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: InstanceViewTypes;
     }
@@ -162,6 +163,8 @@ interface VirtualMachineScaleSetVMS {
       /**
        * Optional parameter to force delete a virtual machine from a VM scale set. (Feature in Preview)
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.forceDeletion has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.forceDeletion retains the forceDeletion query parameter; preserve wire compatibility."
       @query("forceDeletion")
       forceDeletion?: boolean;
     }
@@ -185,12 +188,14 @@ interface VirtualMachineScaleSetVMS {
       /**
        * The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$select retains the $select query parameter; preserve wire compatibility."
       @query("$select")
       $select?: string;
 
       /**
        * The expand expression to apply to the operation. Allowed values are 'instanceView'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -225,6 +230,7 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getInstanceView retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("instanceView")
   @operationId("VirtualMachineScaleSetVMs_GetInstanceView")
@@ -308,6 +314,8 @@ interface VirtualMachineScaleSetVMS {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing powerOff POST contract uses skipShutdown in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing powerOff.skipShutdown has a boolean wire value; preserve the published property contract."
       @query("skipShutdown")
       skipShutdown?: boolean;
     },
@@ -351,6 +359,7 @@ interface VirtualMachineScaleSetVMS {
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing retrieveBootDiagnosticsData POST contract uses sasUriExpirationTimeInMinutes in the query; preserve wire compatibility."
       @query("sasUriExpirationTimeInMinutes")
       sasUriExpirationTimeInMinutes?: int32;
     }

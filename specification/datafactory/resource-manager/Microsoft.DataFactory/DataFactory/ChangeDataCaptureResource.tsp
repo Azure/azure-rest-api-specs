@@ -53,6 +53,7 @@ interface ChangeDataCaptureResources {
    * Creates or updates a change data capture resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing createOrUpdate retains its request-body shape; preserve wire compatibility."
   @tag("changeDataCapture")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ChangeDataCaptureResource,
@@ -112,6 +113,8 @@ interface ChangeDataCaptureResources {
   /**
    * Gets the current status for the change data capture resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing status retains its response and SDK paging behavior; preserve published compatibility."
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing status SDK method name; renaming it would break client compatibility."
   @tag("changeDataCapture")
   @get
   status is ArmResourceActionSync<

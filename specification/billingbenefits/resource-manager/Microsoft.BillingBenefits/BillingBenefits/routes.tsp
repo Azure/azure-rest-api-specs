@@ -35,30 +35,35 @@ interface SavingsPlanOperationGroup {
       /**
        * May be used to sort order by reservation properties.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAll.$orderby retains the $orderby query parameter; preserve wire compatibility."
       @query("$orderby")
       $orderby?: string;
 
       /**
        * To indicate whether to refresh the roll up counts of the savings plans group by provisioning states
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAll.refreshSummary retains the refreshSummary query parameter; preserve wire compatibility."
       @query("refreshSummary")
       refreshSummary?: string;
 
       /**
        * The number of savings plans to skip from the list before returning results
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAll.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: float32;
 
       /**
        * The selected provisioning state
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAll.selectedState retains the selectedState query parameter; preserve wire compatibility."
       @query("selectedState")
       selectedState?: string;
 
       /**
        * To number of savings plans to return
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listAll.take retains the take query parameter; preserve wire compatibility."
       @query("take")
       take?: float32;
     }
@@ -73,6 +78,7 @@ interface DiscountsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing scopeList SDK method name; renaming it would break client compatibility."
   @route("/{scope}/providers/Microsoft.BillingBenefits/applicableDiscounts")
   @get
   @list
@@ -213,6 +219,7 @@ interface ConditionalCreditsOperationGroup {
   /**
    * List conditional credits that are applicable for a given scope. Currently supported scopes: billing accounts
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing scopeList SDK method name; renaming it would break client compatibility."
   @route("/{scope}/providers/Microsoft.BillingBenefits/applicableConditionalCredits")
   @get
   @list

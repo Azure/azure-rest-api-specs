@@ -37,6 +37,7 @@ model UserConversationSimulationDefaultConfiguration {
   ...UserConversationSimulationConfiguration;
 
   /** Whether to write all generated conversations to a versioned Foundry dataset. When enabled, the completed run includes a `simulated_user_conversations` entry in `output_datasets`. When omitted, the service defaults to `false`. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UserConversationSimulationDefaultConfiguration.enable_conversation_dataset_generation has a boolean wire value; preserve the published property contract."
   enable_conversation_dataset_generation?: boolean = false;
 
   /** Name of the dataset to which generated conversations are written. This property is used only when `enable_conversation_dataset_generation` is `true`. When omitted, the service generates a dataset name. */

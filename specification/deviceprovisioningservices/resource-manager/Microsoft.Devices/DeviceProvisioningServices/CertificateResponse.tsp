@@ -37,6 +37,7 @@ alias CertificateNameQuery1 = {
    * Common Name for the certificate.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using CertificateNameQuery1.certificate.name retain the certificate.name query parameter for wire compatibility."
   @query("certificate.name")
   `certificate.name`?: string;
 };
@@ -46,6 +47,7 @@ alias CertificateNameQuery2 = {
    * This is optional, and it is the Common Name of the certificate.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing CertificateNameQuery2.certificate.name retains the certificate.name query parameter; preserve wire compatibility."
   @query("certificate.name")
   `certificate.name`?: string;
 };
@@ -54,6 +56,8 @@ alias CertificateNameQuery3 = {
   /**
    * Time the certificate is created.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using CertificateNameQuery3.certificateCreated retain the certificate.created query parameter for wire compatibility."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing CertificateNameQuery3.certificateCreated retains the certificate.created query parameter; preserve wire compatibility."
   @query("certificate.created")
   certificateCreated?: utcDateTime;
 };
@@ -62,6 +66,8 @@ alias CertificateNameQuery4 = {
   /**
    * Certificate last updated time.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using CertificateNameQuery4.certificateLastUpdated retain the certificate.lastUpdated query parameter for wire compatibility."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing CertificateNameQuery4.certificateLastUpdated retains the certificate.lastUpdated query parameter; preserve wire compatibility."
   @query("certificate.lastUpdated")
   certificateLastUpdated?: utcDateTime;
 };
@@ -117,18 +123,22 @@ interface CertificateResponses {
       /**
        * Raw data within the certificate.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.certificateRawBytes retains the certificate.rawBytes query parameter; preserve wire compatibility."
       @query("certificate.rawBytes")
       certificateRawBytes?: bytes;
 
       /**
        * Indicates if certificate has been verified by owner of the private key.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.certificateIsVerified has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.certificateIsVerified retains the certificate.isVerified query parameter; preserve wire compatibility."
       @query("certificate.isVerified")
       certificateIsVerified?: boolean;
 
       /**
        * A description that mentions the purpose of the certificate.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.certificatePurpose retains the certificate.purpose query parameter; preserve wire compatibility."
       @query("certificate.purpose")
       certificatePurpose?: CertificatePurpose;
 
@@ -138,12 +148,15 @@ interface CertificateResponses {
       /**
        * Indicates if the certificate contains a private key.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.certificateHasPrivateKey has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.certificateHasPrivateKey retains the certificate.hasPrivateKey query parameter; preserve wire compatibility."
       @query("certificate.hasPrivateKey")
       certificateHasPrivateKey?: boolean;
 
       /**
        * Random number generated to indicate Proof of Possession.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.certificateNonce retains the certificate.nonce query parameter; preserve wire compatibility."
       @query("certificate.nonce")
       certificateNonce?: string;
     },
@@ -153,6 +166,7 @@ interface CertificateResponses {
   /**
    * Get all the certificates tied to the provisioning service.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     CertificateResponse,
     Response = ArmResponse<CertificateListDescription>,
@@ -178,18 +192,22 @@ interface CertificateResponses {
       /**
        * Raw data of certificate.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing generateVerificationCode POST contract uses certificate.rawBytes in the query; preserve wire compatibility."
       @query("certificate.rawBytes")
       certificateRawBytes?: bytes;
 
       /**
        * Indicates if the certificate has been verified by owner of the private key.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing generateVerificationCode POST contract uses certificate.isVerified in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing generateVerificationCode.certificateIsVerified has a boolean wire value; preserve the published property contract."
       @query("certificate.isVerified")
       certificateIsVerified?: boolean;
 
       /**
        * Description mentioning the purpose of the certificate.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing generateVerificationCode POST contract uses certificate.purpose in the query; preserve wire compatibility."
       @query("certificate.purpose")
       certificatePurpose?: CertificatePurpose;
 
@@ -199,12 +217,15 @@ interface CertificateResponses {
       /**
        * Indicates if the certificate contains private key.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing generateVerificationCode POST contract uses certificate.hasPrivateKey in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing generateVerificationCode.certificateHasPrivateKey has a boolean wire value; preserve the published property contract."
       @query("certificate.hasPrivateKey")
       certificateHasPrivateKey?: boolean;
 
       /**
        * Random number generated to indicate Proof of Possession.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing generateVerificationCode POST contract uses certificate.nonce in the query; preserve wire compatibility."
       @query("certificate.nonce")
       certificateNonce?: string;
     },
@@ -231,18 +252,22 @@ interface CertificateResponses {
       /**
        * Raw data of certificate.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing verifyCertificate POST contract uses certificate.rawBytes in the query; preserve wire compatibility."
       @query("certificate.rawBytes")
       certificateRawBytes?: bytes;
 
       /**
        * Indicates if the certificate has been verified by owner of the private key.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing verifyCertificate POST contract uses certificate.isVerified in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing verifyCertificate.certificateIsVerified has a boolean wire value; preserve the published property contract."
       @query("certificate.isVerified")
       certificateIsVerified?: boolean;
 
       /**
        * Describe the purpose of the certificate.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing verifyCertificate POST contract uses certificate.purpose in the query; preserve wire compatibility."
       @query("certificate.purpose")
       certificatePurpose?: CertificatePurpose;
 
@@ -252,12 +277,15 @@ interface CertificateResponses {
       /**
        * Indicates if the certificate contains private key.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing verifyCertificate POST contract uses certificate.hasPrivateKey in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing verifyCertificate.certificateHasPrivateKey has a boolean wire value; preserve the published property contract."
       @query("certificate.hasPrivateKey")
       certificateHasPrivateKey?: boolean;
 
       /**
        * Random number generated to indicate Proof of Possession.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing verifyCertificate POST contract uses certificate.nonce in the query; preserve wire compatibility."
       @query("certificate.nonce")
       certificateNonce?: string;
     },

@@ -170,6 +170,7 @@ model Region {
   regionName: string;
 
   /** Whether region is primary. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Region.isPrimary has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPrimary: boolean;
 }

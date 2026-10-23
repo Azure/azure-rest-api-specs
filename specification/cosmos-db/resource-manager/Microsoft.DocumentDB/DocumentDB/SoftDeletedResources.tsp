@@ -39,6 +39,7 @@ model SoftDeletionMetadata {
   /**
    * Indicates whether the resource is soft deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SoftDeletionMetadata.isSoftDeleted has a boolean wire value; preserve the published property contract."
   isSoftDeleted?: boolean;
 
   /**
@@ -285,6 +286,7 @@ interface SoftDeletedDatabaseAccounts {
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Custom operation for soft-deleted resources"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-pageable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core paging operations."
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByLocation retains its response and SDK paging behavior; preserve published compatibility."
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts")
   @get
   @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
@@ -301,6 +303,7 @@ interface SoftDeletedDatabaseAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-pageable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core paging operations."
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByResourceGroupAndLocation retains its response and SDK paging behavior; preserve published compatibility."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts")
   @get
   @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
@@ -423,6 +426,7 @@ interface SoftDeletedSqlDatabases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-pageable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core paging operations."
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases")
   @get
   @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
@@ -575,6 +579,7 @@ interface SoftDeletedSqlContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-pageable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core paging operations."
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers")
   @get
   @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })

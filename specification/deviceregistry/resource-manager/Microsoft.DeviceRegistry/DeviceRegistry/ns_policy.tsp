@@ -98,6 +98,7 @@ model CertificateAuthorityConfiguration {
 @removed(Versions.v2026_04_01)
 @doc("Configuration for Bring Your Own Root. When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA.")
 model BringYourOwnRoot {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BringYourOwnRoot.enabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether Bring Your Own Root is enabled. This can only be set at creation time and cannot be changed afterward.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   enabled: boolean;

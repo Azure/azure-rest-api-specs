@@ -25,6 +25,7 @@ model TenantActionGroup {
   /**
    * Indicates whether this tenant action group is enabled. If a tenant action group is not enabled, then none of its receivers will receive communications.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TenantActionGroup.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean = true;
 
   /**
@@ -75,11 +76,13 @@ model WebhookReceiver {
   /**
    * Indicates whether to use common alert schema.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebhookReceiver.useCommonAlertSchema has a boolean wire value; preserve the published property contract."
   useCommonAlertSchema?: boolean = false;
 
   /**
    * Indicates whether or not use AAD authentication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebhookReceiver.useAadAuth has a boolean wire value; preserve the published property contract."
   useAadAuth?: boolean = false;
 
   /**

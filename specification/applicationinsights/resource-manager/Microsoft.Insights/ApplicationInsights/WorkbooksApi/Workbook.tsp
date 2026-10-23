@@ -68,6 +68,8 @@ interface Workbooks {
       /**
        * Flag indicating whether or not to return the full content for each applicable workbook. If false, only return summary content for workbooks.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing get.canFetchContent has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.canFetchContent retains the canFetchContent query parameter; preserve wire compatibility."
       @query("canFetchContent")
       canFetchContent?: boolean;
     }
@@ -82,6 +84,7 @@ interface Workbooks {
       /**
        * Azure Resource Id that will fetch all linked workbooks.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing createOrUpdate.sourceId retains the sourceId query parameter; preserve wire compatibility."
       @query("sourceId")
       sourceId?: string;
     }
@@ -98,6 +101,7 @@ interface Workbooks {
       /**
        * Azure Resource Id that will fetch all linked workbooks.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing update.sourceId retains the sourceId query parameter; preserve wire compatibility."
       @query("sourceId")
       sourceId?: string;
     },
@@ -121,18 +125,22 @@ interface Workbooks {
       /**
        * Category of workbook to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.category retains the category query parameter; preserve wire compatibility."
       @query("category")
       category: CategoryType;
 
       /**
        * Tags presents on each workbook returned.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string[];
 
       /**
        * Flag indicating whether or not to return the full content for each applicable workbook. If false, only return summary content for workbooks.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listBySubscription.canFetchContent has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.canFetchContent retains the canFetchContent query parameter; preserve wire compatibility."
       @query("canFetchContent")
       canFetchContent?: boolean;
     },
@@ -143,6 +151,7 @@ interface Workbooks {
   /**
    * Get the revisions for the workbook defined by its resourceName.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing revisionsList SDK method name; renaming it would break client compatibility."
   revisionsList is WorkbookOperationGroupOps.List<
     Workbook,
     Response = ArmResponse<WorkbooksListResult>
@@ -176,6 +185,7 @@ interface WorkbookOperationGroup {
   /**
    * Get a single workbook revision defined by its revisionId.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing revisionGet SDK method name; renaming it would break client compatibility."
   revisionGet is WorkbookOperationGroupOps.Read<Workbook>;
 
   /**
@@ -187,24 +197,29 @@ interface WorkbookOperationGroup {
       /**
        * Category of workbook to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.category retains the category query parameter; preserve wire compatibility."
       @query("category")
       category: CategoryType;
 
       /**
        * Tags presents on each workbook returned.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string[];
 
       /**
        * Azure Resource Id that will fetch all linked workbooks.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.sourceId retains the sourceId query parameter; preserve wire compatibility."
       @query("sourceId")
       sourceId?: string;
 
       /**
        * Flag indicating whether or not to return the full content for each applicable workbook. If false, only return summary content for workbooks.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByResourceGroup.canFetchContent has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.canFetchContent retains the canFetchContent query parameter; preserve wire compatibility."
       @query("canFetchContent")
       canFetchContent?: boolean;
     },

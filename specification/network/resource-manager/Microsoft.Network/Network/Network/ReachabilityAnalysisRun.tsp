@@ -89,30 +89,35 @@ alias ReachabilityAnalysisRunsListParameters = {
   /**
    * Optional skip token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ReachabilityAnalysisRunsListParameters.skipToken retains the skipToken query parameter; preserve wire compatibility."
   @query("skipToken")
   skipToken?: string;
 
   /**
    * Optional num entries to skip.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ReachabilityAnalysisRunsListParameters.skip retains the skip query parameter; preserve wire compatibility."
   @query("skip")
   skip?: int32 = 0;
 
   /**
    * Optional num entries to show.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ReachabilityAnalysisRunsListParameters.top retains the top query parameter; preserve wire compatibility."
   @query("top")
   top?: int32 = 50;
 
   /**
    * Optional key by which to sort.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ReachabilityAnalysisRunsListParameters.sortKey retains the sortKey query parameter; preserve wire compatibility."
   @query("sortKey")
   sortKey?: string;
 
   /**
    * Optional sort value for pagination.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ReachabilityAnalysisRunsListParameters.sortValue retains the sortValue query parameter; preserve wire compatibility."
   @query("sortValue")
   sortValue?: string;
 };

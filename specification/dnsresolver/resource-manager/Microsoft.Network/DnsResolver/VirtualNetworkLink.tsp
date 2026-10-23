@@ -111,6 +111,7 @@ interface VirtualNetworkLinks {
       /**
        * The maximum number of results to return. If not specified, returns up to 100 results.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },

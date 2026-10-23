@@ -419,6 +419,7 @@ model SecurityProfileFipsImage {
   /**
    * Indicates whether to enable FIPS image.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityProfileFipsImage.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean = false;
 }
 
@@ -445,6 +446,7 @@ model StorageProfileSmbCSIDriver {
   /**
    * Indicates whether to enable SMB CSI Driver. The default value is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageProfileSmbCSIDriver.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean = true;
 }
 
@@ -456,6 +458,7 @@ model StorageProfileNfsCSIDriver {
   /**
    * Indicates whether to enable NFS CSI Driver. The default value is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StorageProfileNfsCSIDriver.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean = true;
 }
 
@@ -520,6 +523,7 @@ model AgentPoolProfile {
   /**
    * Whether to enable auto-scaler. Default value is false
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AgentPoolProfile.enableAutoScaling has a boolean wire value; preserve the published property contract."
   enableAutoScaling?: boolean;
 
   /**
@@ -698,6 +702,7 @@ model AddonStatusProfile {
   /**
    * Indicates whether the addon or component is ready
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AddonStatusProfile.ready has a boolean wire value; preserve the published property contract."
   ready?: boolean;
 
   /**
@@ -890,6 +895,7 @@ model ProvisionedClusterPoolUpgradeProfileProperties {
   /**
    * Whether the Kubernetes version is currently in preview.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ProvisionedClusterPoolUpgradeProfileProperties.isPreview has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPreview?: boolean;
 }
@@ -1080,6 +1086,7 @@ model KubernetesVersionProperties {
   /**
    * Whether this version is in preview mode.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KubernetesVersionProperties.isPreview has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPreview?: boolean;
 
@@ -1127,6 +1134,7 @@ model KubernetesVersionReadiness {
   /**
    * Whether the kubernetes version image is ready or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing KubernetesVersionReadiness.ready has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   ready?: boolean;
 

@@ -82,6 +82,7 @@ interface Assets {
   /** Get an asset by identifier. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing queryById SDK method name; renaming it would break client compatibility."
   @route("/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/assets/{id}")
   @get
   queryById is Azure.Core.Foundations.Operation<
@@ -135,6 +136,7 @@ interface ExtensiveModels {
   /** Get an extensive model by identifier. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing queryById SDK method name; renaming it would break client compatibility."
   @route("/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/extensiveModels/{id}")
   @get
   queryById is Azure.Core.Foundations.Operation<
@@ -181,6 +183,7 @@ interface Models {
       ...WorkspacePathParameters;
 
       /** Whether to auto-version the model. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing register.autoVersion has a boolean wire value; preserve the published property contract."
       @query autoVersion?: boolean;
 
       /** The model to register. */
@@ -239,6 +242,7 @@ interface Models {
       @query orderBy?: string;
 
       /** Whether to return only the latest version. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.latestVersionOnly has a boolean wire value; preserve the published property contract."
       @query latestVersionOnly?: boolean;
 
       /** Filter by feed. */
@@ -295,6 +299,7 @@ interface Models {
   /** Get a model by identifier. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing queryById SDK method name; renaming it would break client compatibility."
   @route("/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{id}")
   @get
   queryById is Azure.Core.Foundations.Operation<
@@ -305,6 +310,7 @@ interface Models {
       @path id: string;
 
       /** Whether to include deployment settings. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing queryById.includeDeploymentSettings has a boolean wire value; preserve the published property contract."
       @query includeDeploymentSettings?: boolean;
     },
     Model

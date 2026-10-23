@@ -146,6 +146,7 @@ model BackupProperties {
   /**
    * Manual backup an already existing snapshot. This will always be false for scheduled backups and true/false for manual backups
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BackupProperties.useExistingSnapshot has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   useExistingSnapshot?: boolean = false;
 
@@ -168,6 +169,7 @@ model BackupProperties {
   /**
    * Specifies if the backup is for a large volume.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BackupProperties.isLargeVolume has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isLargeVolume?: boolean;
 }

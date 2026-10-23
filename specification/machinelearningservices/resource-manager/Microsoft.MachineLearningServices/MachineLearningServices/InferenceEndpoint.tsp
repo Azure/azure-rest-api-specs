@@ -141,6 +141,7 @@ interface InferenceEndpoints {
    * Update InferenceEndpoint (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Existing API uses custom patch envelope"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing update retains its request-body shape; preserve wire compatibility."
   @patch(#{ implicitOptionality: false })
   @summary("Update InferenceEndpoint (asynchronous).")
   update is InferenceEndpointOps.CustomPatchAsync<
@@ -187,30 +188,35 @@ interface InferenceEndpoints {
       /**
        * Number of InferenceEndpoint to be retrieved in a page of results.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.count retains the count query parameter; preserve wire compatibility."
       @query("count")
       count?: int32;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       /**
        * A set of tags with which to filter the returned models. It is a comma separated string of tags key or tags key=value. Example: tagKey1,tagKey2,tagKey3=value3 .
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string;
 
       /**
        * A set of properties with which to filter the returned models. It is a comma separated string of properties key and/or properties key=value Example: propKey1,propKey2,propKey3=value3 .
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.properties retains the properties query parameter; preserve wire compatibility."
       @query("properties")
       properties?: string;
 
       /**
        * The option to order the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.orderBy retains the orderBy query parameter; preserve wire compatibility."
       @query("orderBy")
       orderBy?: OrderString;
     },

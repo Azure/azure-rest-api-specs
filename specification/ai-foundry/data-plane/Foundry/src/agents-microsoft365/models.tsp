@@ -61,6 +61,7 @@ model Microsoft365PublishRequest {
    * When true, the agent is published as an autopilot (digital worker) agent: the bot id is taken from
    * the agent's blueprint identity and the generated Teams manifest is marked as a digital worker.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Microsoft365PublishRequest.publishAsAutopilot has a boolean wire value; preserve the published property contract."
   publishAsAutopilot?: boolean;
 
   /**
@@ -86,6 +87,7 @@ model Microsoft365PublishRequest {
    * on its surfaces, when false only when it is at-mentioned. When omitted, the agent's existing Teams
    * message-notification setting is left unchanged.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Microsoft365PublishRequest.canRespondWithoutMention has a boolean wire value; preserve the published property contract."
   canRespondWithoutMention?: boolean;
 
   /**

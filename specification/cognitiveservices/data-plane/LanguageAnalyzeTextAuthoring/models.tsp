@@ -245,6 +245,7 @@ model TextAnalysisAuthoringProjectMetadata {
   /**
    * Whether the project would be used for multiple languages or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TextAnalysisAuthoringProjectMetadata.multilingual has a boolean wire value; preserve the published property contract."
   multilingual?: boolean;
 
   /**
@@ -277,12 +278,14 @@ model TextAnalysisAuthoringProjectSettings {
   /**
    * Indicates whether the labeling experience can be modified or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TextAnalysisAuthoringProjectSettings.isLabelingLocked has a boolean wire value; preserve the published property contract."
   @added(Versions.v2024_11_15_preview)
   isLabelingLocked?: boolean;
 
   /**
    * Indicates whether to run GPT predictions or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TextAnalysisAuthoringProjectSettings.runGptPredictions has a boolean wire value; preserve the published property contract."
   @added(Versions.v2024_11_15_preview)
   runGptPredictions?: boolean;
 
@@ -383,6 +386,7 @@ model TextAnalysisAuthoringCreateProjectOptions {
   /**
    * Whether the project would be used for multiple languages or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TextAnalysisAuthoringCreateProjectOptions.multilingual has a boolean wire value; preserve the published property contract."
   multilingual?: boolean;
 
   /**
@@ -414,6 +418,7 @@ model TextAnalysisAuthoringCopyAuthorizationOptions {
   /**
    * Whether to allow an existing project to be overwritten using the resulting copy authorization.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TextAnalysisAuthoringCopyAuthorizationOptions.allowOverwrite has a boolean wire value; preserve the published property contract."
   allowOverwrite?: boolean;
 }
 
@@ -524,6 +529,7 @@ model TextAnalysisAuthoringDataGenerationSettings {
   /**
    * If set to true, augment customer provided training data with synthetic data to improve model quality.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TextAnalysisAuthoringDataGenerationSettings.enableDataGeneration has a boolean wire value; preserve the published property contract."
   enableDataGeneration: boolean;
 
   /**
@@ -984,6 +990,7 @@ model TextAnalysisAuthoringProjectTrainedModel {
   /**
    * The flag to indicate if the trained model has a snapshot ready.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TextAnalysisAuthoringProjectTrainedModel.hasSnapshot has a boolean wire value; preserve the published property contract."
   hasSnapshot: boolean;
 }
 

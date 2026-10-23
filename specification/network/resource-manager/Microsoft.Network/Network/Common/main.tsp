@@ -977,35 +977,41 @@ model NetworkInterfacePropertiesFormat {
   /**
    * Whether this is a primary network interface on a virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkInterfacePropertiesFormat.primary has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   primary?: boolean;
 
   /**
    * Whether the virtual machine this nic is attached to supports encryption.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkInterfacePropertiesFormat.vnetEncryptionSupported has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   vnetEncryptionSupported?: boolean;
 
   /**
    * Whether default outbound connectivity for nic was configured or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkInterfacePropertiesFormat.defaultOutboundConnectivityEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   defaultOutboundConnectivityEnabled?: boolean;
 
   /**
    * If the network interface is configured for accelerated networking. Not applicable to VM sizes which require accelerated networking.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkInterfacePropertiesFormat.enableAcceleratedNetworking has a boolean wire value; preserve the published property contract."
   enableAcceleratedNetworking?: boolean;
 
   /**
    * Indicates whether to disable tcp state tracking.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkInterfacePropertiesFormat.disableTcpStateTracking has a boolean wire value; preserve the published property contract."
   disableTcpStateTracking?: boolean;
 
   /**
    * Indicates whether IP forwarding is enabled on this network interface.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkInterfacePropertiesFormat.enableIPForwarding has a boolean wire value; preserve the published property contract."
   enableIPForwarding?: boolean;
 
   /**
@@ -1252,6 +1258,7 @@ model SubnetPropertiesFormat {
   /**
    * Set this property to false to disable default outbound connectivity for all VMs in the subnet.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SubnetPropertiesFormat.defaultOutboundAccess has a boolean wire value; preserve the published property contract."
   defaultOutboundAccess?: boolean;
 
   /**
@@ -1471,6 +1478,7 @@ model PublicIPAddressPropertiesFormat {
   /**
    * Whether the public IP address SKU has been upgraded from Standard to StandardV2.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PublicIPAddressPropertiesFormat.upgradedToV2 has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   upgradedToV2?: boolean;
@@ -1719,6 +1727,7 @@ model ServiceAssociationLinkPropertiesFormat {
   /**
    * If true, the resource can be deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServiceAssociationLinkPropertiesFormat.allowDelete has a boolean wire value; preserve the published property contract."
   allowDelete?: boolean;
 
   /**
@@ -1967,6 +1976,7 @@ model NetworkInterfaceIPConfigurationPropertiesFormat {
   /**
    * Whether this is a primary customer address on the network interface.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkInterfaceIPConfigurationPropertiesFormat.primary has a boolean wire value; preserve the published property contract."
   primary?: boolean;
 
   /**
@@ -2075,6 +2085,7 @@ model FrontendIPConfigurationPropertiesFormat {
   /**
    * Enables UDP flow tracking for traffic associated with the frontend IP configuration. When enabled, packets belonging to the same UDP flow are consistently directed to the same backend instance. This setting applies to all associated load balancing rules and takes precedence over rule-level enableConnectionTracking settings.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FrontendIPConfigurationPropertiesFormat.enableConnectionTracking has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_09_01)
   enableConnectionTracking?: boolean;
 }
@@ -2395,11 +2406,13 @@ model InboundNatRulePropertiesFormat {
    * Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing InboundNatRulePropertiesFormat.enableFloatingIP has a boolean wire value; preserve the published property contract."
   enableFloatingIP?: boolean;
 
   /**
    * Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing InboundNatRulePropertiesFormat.enableTcpReset has a boolean wire value; preserve the published property contract."
   enableTcpReset?: boolean;
 
   /**
@@ -2842,6 +2855,7 @@ model NetworkSecurityGroupPropertiesFormat {
   /**
    * When enabled, flows created from Network Security Group connections will be re-evaluated when rules are updates. Initial enablement will trigger re-evaluation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkSecurityGroupPropertiesFormat.flushConnection has a boolean wire value; preserve the published property contract."
   flushConnection?: boolean;
 
   /**
@@ -3062,6 +3076,7 @@ model PrivateLinkServiceProperties {
   /**
    * Whether the private link service is enabled for proxy protocol or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PrivateLinkServiceProperties.enableProxyProtocol has a boolean wire value; preserve the published property contract."
   enableProxyProtocol?: boolean;
 }
 
@@ -3130,6 +3145,7 @@ model FlowLogPropertiesFormat {
   /**
    * Flag to enable/disable flow logging.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FlowLogPropertiesFormat.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3168,6 +3184,7 @@ model RetentionPolicyParameters {
   /**
    * Flag to enable/disable retention.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RetentionPolicyParameters.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean = false;
 }
 
@@ -3209,6 +3226,7 @@ model TrafficAnalyticsConfigurationProperties {
   /**
    * Flag to enable/disable traffic analytics.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TrafficAnalyticsConfigurationProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3252,6 +3270,7 @@ model RouteTablePropertiesFormat {
   /**
    * Whether to disable the routes learned by BGP on that route table. True means disable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RouteTablePropertiesFormat.disableBgpRoutePropagation has a boolean wire value; preserve the published property contract."
   disableBgpRoutePropagation?: boolean;
 
   /**
@@ -3450,21 +3469,25 @@ model LoadBalancingRulePropertiesFormat {
    * Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LoadBalancingRulePropertiesFormat.enableFloatingIP has a boolean wire value; preserve the published property contract."
   enableFloatingIP?: boolean;
 
   /**
    * Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LoadBalancingRulePropertiesFormat.enableTcpReset has a boolean wire value; preserve the published property contract."
   enableTcpReset?: boolean;
 
   /**
    * Configures SNAT for the VMs in the backend pool to use the publicIP address specified in the frontend of the load balancing rule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LoadBalancingRulePropertiesFormat.disableOutboundSnat has a boolean wire value; preserve the published property contract."
   disableOutboundSnat?: boolean;
 
   /**
    * Enables UDP flow tracking for the load balancing rule. This property is retained for rule-level configuration compatibility. When enableConnectionTracking is specified on the associated frontend IP configuration, the frontend setting takes precedence.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LoadBalancingRulePropertiesFormat.enableConnectionTracking has a boolean wire value; preserve the published property contract."
   enableConnectionTracking?: boolean;
 
   /**
@@ -3599,11 +3622,13 @@ model InboundNatPoolPropertiesFormat {
    * Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing InboundNatPoolPropertiesFormat.enableFloatingIP has a boolean wire value; preserve the published property contract."
   enableFloatingIP?: boolean;
 
   /**
    * Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing InboundNatPoolPropertiesFormat.enableTcpReset has a boolean wire value; preserve the published property contract."
   enableTcpReset?: boolean;
 
   /**
@@ -3649,6 +3674,7 @@ model OutboundRulePropertiesFormat {
   /**
    * Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OutboundRulePropertiesFormat.enableTcpReset has a boolean wire value; preserve the published property contract."
   enableTcpReset?: boolean;
 
   /**
@@ -3666,21 +3692,25 @@ model VirtualNetworkPeeringPropertiesFormat {
   /**
    * Whether the VMs in the local virtual network space would be able to access the VMs in remote virtual network space.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkPeeringPropertiesFormat.allowVirtualNetworkAccess has a boolean wire value; preserve the published property contract."
   allowVirtualNetworkAccess?: boolean;
 
   /**
    * Whether the forwarded traffic from the VMs in the local virtual network will be allowed/disallowed in remote virtual network.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkPeeringPropertiesFormat.allowForwardedTraffic has a boolean wire value; preserve the published property contract."
   allowForwardedTraffic?: boolean;
 
   /**
    * If gateway links can be used in remote virtual networking to link to this virtual network.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkPeeringPropertiesFormat.allowGatewayTransit has a boolean wire value; preserve the published property contract."
   allowGatewayTransit?: boolean;
 
   /**
    * If remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkPeeringPropertiesFormat.useRemoteGateways has a boolean wire value; preserve the published property contract."
   useRemoteGateways?: boolean;
 
   /**
@@ -3738,6 +3768,7 @@ model VirtualNetworkPeeringPropertiesFormat {
   /**
    * If we need to verify the provisioning state of the remote gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkPeeringPropertiesFormat.doNotVerifyRemoteGateways has a boolean wire value; preserve the published property contract."
   doNotVerifyRemoteGateways?: boolean;
 
   /**
@@ -3749,12 +3780,14 @@ model VirtualNetworkPeeringPropertiesFormat {
   /**
    * Whether complete virtual network address space is peered.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkPeeringPropertiesFormat.peerCompleteVnets has a boolean wire value; preserve the published property contract."
   peerCompleteVnets?: boolean;
 
   /**
    * Whether only Ipv6 address space is peered for subnet peering.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkPeeringPropertiesFormat.enableOnlyIPv6Peering has a boolean wire value; preserve the published property contract."
   enableOnlyIPv6Peering?: boolean;
 
   /**
@@ -3933,6 +3966,7 @@ model PrivateLinkServiceIpConfigurationProperties {
   /**
    * Whether the ip configuration is primary or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PrivateLinkServiceIpConfigurationProperties.primary has a boolean wire value; preserve the published property contract."
   primary?: boolean;
 
   /**
@@ -3985,6 +4019,7 @@ model RoutePropertiesFormat {
   /**
    * A value indicating whether this route overrides overlapping BGP routes regardless of LPM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RoutePropertiesFormat.hasBgpOverride has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasBgpOverride?: boolean;
 }
@@ -4176,11 +4211,13 @@ model VirtualNetworkPropertiesFormat {
   /**
    * Indicates if DDoS protection is enabled for all the protected resources in the virtual network. It requires a DDoS protection plan associated with the resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkPropertiesFormat.enableDdosProtection has a boolean wire value; preserve the published property contract."
   enableDdosProtection?: boolean = false;
 
   /**
    * Indicates if VM protection is enabled for all the subnets in the virtual network.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkPropertiesFormat.enableVmProtection has a boolean wire value; preserve the published property contract."
   enableVmProtection?: boolean = false;
 
   /**
@@ -4287,6 +4324,7 @@ model VirtualNetworkEncryption {
   /**
    * Indicates if encryption is enabled on the virtual network.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VirtualNetworkEncryption.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**

@@ -599,6 +599,7 @@ model ApplicationJitAccessPolicy {
   /**
    * Whether the JIT access is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationJitAccessPolicy.jitAccessEnabled has a boolean wire value; preserve the published property contract."
   jitAccessEnabled: boolean;
 
   /**
@@ -977,6 +978,7 @@ model ApplicationDefinitionProperties {
   /**
    * A value indicating whether the package is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationDefinitionProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**

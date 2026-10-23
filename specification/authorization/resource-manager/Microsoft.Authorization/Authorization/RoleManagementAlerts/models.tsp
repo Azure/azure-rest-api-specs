@@ -48,6 +48,7 @@ model AlertProperties {
   /**
    * False by default; true if the alert is active.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AlertProperties.isActive has a boolean wire value; preserve the published property contract."
   isActive?: boolean;
 
   /**
@@ -139,12 +140,14 @@ model AlertDefinitionProperties {
   /**
    * True if the alert can be remediated; false, otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AlertDefinitionProperties.isRemediatable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isRemediatable?: boolean;
 
   /**
    * True if the alert configuration can be configured; false, otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AlertDefinitionProperties.isConfigurable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isConfigurable?: boolean;
 }
@@ -183,6 +186,7 @@ model AlertConfigurationProperties {
   /**
    * True if the alert is enabled, false will disable the scanning for the specific alert.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AlertConfigurationProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**

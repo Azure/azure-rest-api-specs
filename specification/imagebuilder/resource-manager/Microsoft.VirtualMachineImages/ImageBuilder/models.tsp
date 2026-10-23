@@ -524,11 +524,13 @@ model ImageTemplatePropertiesValidate {
   /**
    * If validation fails and this field is set to false, output image(s) will not be distributed. This is the default behavior. If validation fails and this field is set to true, output image(s) will still be distributed. Please use this option with caution as it may result in bad images being distributed for use. In either case (true or false), the end to end image run will be reported as having failed in case of a validation failure. [Note: This field has no effect if validation succeeds.]
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImageTemplatePropertiesValidate.continueDistributeOnFailure has a boolean wire value; preserve the published property contract."
   continueDistributeOnFailure?: boolean = false;
 
   /**
    * If this field is set to true, the image specified in the 'source' section will directly be validated. No separate build will be run to generate and then validate a customized image.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImageTemplatePropertiesValidate.sourceValidationOnly has a boolean wire value; preserve the published property contract."
   sourceValidationOnly?: boolean = false;
 
   /**
@@ -890,6 +892,7 @@ model Operation {
   /**
    * The flag that indicates whether the operation applies to data plane.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 }
 
@@ -1062,11 +1065,13 @@ model ImageTemplatePowerShellValidator extends ImageTemplateInVMValidator {
   /**
    * If specified, the PowerShell script will be run with elevated privileges
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImageTemplatePowerShellValidator.runElevated has a boolean wire value; preserve the published property contract."
   runElevated?: boolean = false;
 
   /**
    * If specified, the PowerShell script will be run with elevated privileges using the Local System user. Can only be true when the runElevated field above is set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImageTemplatePowerShellValidator.runAsSystem has a boolean wire value; preserve the published property contract."
   runAsSystem?: boolean = false;
 
   /**
@@ -1203,11 +1208,13 @@ model ImageTemplatePowerShellCustomizer extends ImageTemplateCustomizer {
   /**
    * If specified, the PowerShell script will be run with elevated privileges
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImageTemplatePowerShellCustomizer.runElevated has a boolean wire value; preserve the published property contract."
   runElevated?: boolean = false;
 
   /**
    * If specified, the PowerShell script will be run with elevated privileges using the Local System user. Can only be true when the runElevated field above is set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImageTemplatePowerShellCustomizer.runAsSystem has a boolean wire value; preserve the published property contract."
   runAsSystem?: boolean = false;
 
   /**
@@ -1283,6 +1290,7 @@ model ImageTemplateSharedImageDistributor extends ImageTemplateDistributor {
   /**
    * Flag that indicates whether created image version should be excluded from latest. Omit to use the default (false).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImageTemplateSharedImageDistributor.excludeFromLatest has a boolean wire value; preserve the published property contract."
   excludeFromLatest?: boolean = false;
 
   /**

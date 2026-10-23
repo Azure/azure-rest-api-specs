@@ -61,6 +61,7 @@ alias StorageAccountListKeysParameters = {
   /**
    * Specifies type of the key to be listed. Possible value is kerb.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using StorageAccountListKeysParameters.$expand retain the $expand query parameter for wire compatibility."
   @query("$expand")
   $expand?: "kerb";
 };
@@ -69,6 +70,7 @@ alias StorageAccountFailoverParameters = {
   /**
    * The parameter is set to 'Planned' to indicate whether a Planned failover is requested.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing POST contracts using StorageAccountFailoverParameters.failoverType retain the failoverType query parameter for wire compatibility."
   @query("failoverType")
   failoverType?: "Planned";
 };
@@ -95,6 +97,7 @@ interface StorageAccounts {
       /**
        * May be used to expand the properties within account's properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getProperties.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: StorageAccountExpand;
     },
@@ -223,6 +226,7 @@ interface StorageAccounts {
       /**
        * Required. Hierarchical namespace migration type can either be a hierarchical namespace validation request 'HnsOnValidationRequest' or a hydration request 'HnsOnHydrationRequest'. The validation request will validate the migration whereas the hydration request will migrate the account.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing hierarchicalNamespaceMigration POST contract uses requestType in the query; preserve wire compatibility."
       @query("requestType")
       requestType: string;
     },
@@ -292,6 +296,7 @@ interface StorageAccounts {
   /**
    * Gets the private link resources that need to be created for a storage account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByStorageAccount retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("privateLinkResources")
   listByStorageAccount is ArmResourceActionSync<
@@ -315,6 +320,7 @@ interface StorageAccounts {
       /**
        * Optional, specifies the maximum number of storage task assignment instances to be included in the list response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing storageTaskAssignmentsInstancesReportList.$maxpagesize retains the $maxpagesize query parameter; preserve wire compatibility."
       @query("$maxpagesize")
       $maxpagesize?: int32;
 

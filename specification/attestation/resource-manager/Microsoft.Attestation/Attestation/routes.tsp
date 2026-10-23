@@ -18,6 +18,7 @@ interface AttestationProvidersOperationGroup {
   /**
    * Get the default provider
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listDefault retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("defaultProviders")
@@ -30,6 +31,7 @@ interface AttestationProvidersOperationGroup {
   /**
    * Get the default provider by location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getDefaultByLocation retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("defaultProvider")

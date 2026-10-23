@@ -58,6 +58,7 @@ model AutoUpgradeProfileProperties {
   @doc("The node image upgrade to be applied to the target clusters in auto upgrade.")
   nodeImageSelection?: AutoUpgradeNodeImageSelection;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutoUpgradeProfileProperties.disabled has a boolean wire value; preserve the published property contract."
   @doc("""
     If set to False: the auto upgrade has effect - target managed clusters will be upgraded on schedule.
     If set to True: the auto upgrade has no effect - no upgrade will be run on the target managed clusters.
@@ -79,6 +80,7 @@ model AutoUpgradeProfileProperties {
   @added(Versions.v2025_04_01_preview)
   targetKubernetesVersion?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutoUpgradeProfileProperties.longTermSupport has a boolean wire value; preserve the published property contract."
   @doc("""
       If upgrade channel is not TargetKubernetesVersion, this field must be False.
       If set to True: Fleet auto upgrade will continue generate update runs for patches of minor versions earlier than N-2 

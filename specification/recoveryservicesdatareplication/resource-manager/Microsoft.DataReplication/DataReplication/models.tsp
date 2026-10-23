@@ -845,6 +845,7 @@ model EmailConfigurationModelProperties {
   /**
    * Gets or sets a value indicating whether to send email to subscription administrator.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EmailConfigurationModelProperties.sendToOwners has a boolean wire value; preserve the published property contract."
   sendToOwners: boolean;
 
   /**
@@ -996,6 +997,7 @@ model HealthErrorModel {
   /**
    * Gets or sets a value indicating whether the error is customer resolvable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HealthErrorModel.isCustomerResolvable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCustomerResolvable?: boolean;
 
@@ -1068,6 +1070,7 @@ model InnerHealthErrorModel {
   /**
    * Gets or sets a value indicating whether the error is customer resolvable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing InnerHealthErrorModel.isCustomerResolvable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCustomerResolvable?: boolean;
 
@@ -1228,6 +1231,7 @@ model FabricAgentModelProperties {
   /**
    * Gets or sets a value indicating whether the fabric agent is responsive.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FabricAgentModelProperties.isResponsive has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isResponsive?: boolean;
 
@@ -1917,6 +1921,7 @@ model ProtectedItemModelProperties {
   /**
    * Gets or sets a value indicating whether resynchronization is required or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ProtectedItemModelProperties.resyncRequired has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   resyncRequired?: boolean;
 
@@ -2208,6 +2213,7 @@ model CheckNameAvailabilityResponseModel {
   /**
    * Gets or sets a value indicating whether resource name is available or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckNameAvailabilityResponseModel.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**
@@ -2651,6 +2657,7 @@ model HyperVToAzStackHCIDiskInput {
   /**
    * Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HyperVToAzStackHCIDiskInput.isDynamic has a boolean wire value; preserve the published property contract."
   isDynamic?: boolean;
 
   /**
@@ -2667,6 +2674,7 @@ model HyperVToAzStackHCIDiskInput {
   /**
    * Gets or sets a value indicating whether disk is os disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HyperVToAzStackHCIDiskInput.isOsDisk has a boolean wire value; preserve the published property contract."
   isOsDisk: boolean;
 
   /**
@@ -2772,11 +2780,13 @@ model HyperVToAzStackHCINicInput {
   /**
    * Gets or sets a value indicating whether static ip migration is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HyperVToAzStackHCINicInput.isStaticIpMigrationEnabled has a boolean wire value; preserve the published property contract."
   isStaticIpMigrationEnabled?: boolean;
 
   /**
    * Gets or sets a value indicating whether mac address migration is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HyperVToAzStackHCINicInput.isMacMigrationEnabled has a boolean wire value; preserve the published property contract."
   isMacMigrationEnabled?: boolean;
 }
 
@@ -2789,6 +2799,7 @@ model HyperVToAzStackHCIPlannedFailoverModelCustomProperties
   /**
    * Gets or sets a value indicating whether VM needs to be shut down.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HyperVToAzStackHCIPlannedFailoverModelCustomProperties.shutdownSourceVM has a boolean wire value; preserve the published property contract."
   shutdownSourceVM: boolean;
 
   /**
@@ -2874,6 +2885,7 @@ model HyperVToAzStackHCIProtectedDiskProperties {
   /**
    * Gets or sets a value indicating whether the disk is the OS disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HyperVToAzStackHCIProtectedDiskProperties.isOsDisk has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isOsDisk?: boolean;
 
@@ -2886,6 +2898,7 @@ model HyperVToAzStackHCIProtectedDiskProperties {
   /**
    * Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HyperVToAzStackHCIProtectedDiskProperties.isDynamic has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDynamic?: boolean;
 
@@ -3021,6 +3034,7 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets a value indicating whether memory is dynamical.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HyperVToAzStackHCIProtectedItemModelCustomProperties.isDynamicRam has a boolean wire value; preserve the published property contract."
   isDynamicRam?: boolean;
 
   /**
@@ -3165,12 +3179,14 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets a value indicating whether conversion to Gen 2 is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HyperVToAzStackHCIProtectedItemModelCustomProperties.convertToGen2 has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   convertToGen2?: boolean;
 
   /**
    * Gets or sets a value indicating whether VM is to be migrated as Arc VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HyperVToAzStackHCIProtectedItemModelCustomProperties.migrateAsArcVM has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   migrateAsArcVM?: boolean;
 }
@@ -3257,6 +3273,7 @@ model HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate
   /**
    * Gets or sets a value indicating whether memory is dynamical.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate.isDynamicRam has a boolean wire value; preserve the published property contract."
   isDynamicRam?: boolean;
 
   /**
@@ -3288,12 +3305,14 @@ model HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate
   /**
    * Gets or sets a value indicating whether conversion to Gen 2 is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate.convertToGen2 has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   convertToGen2?: boolean;
 
   /**
    * Gets or sets a value indicating whether VM is to be migrated as Arc VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate.migrateAsArcVM has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   migrateAsArcVM?: boolean;
 }
@@ -3434,6 +3453,7 @@ model OperationModel {
   /**
    * Gets or sets a value indicating whether the action is specific to data plane or control plane.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OperationModel.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -3625,6 +3645,7 @@ model VMwareToAzStackHCIDiskInput {
   /**
    * Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCIDiskInput.isDynamic has a boolean wire value; preserve the published property contract."
   isDynamic?: boolean;
 
   /**
@@ -3641,6 +3662,7 @@ model VMwareToAzStackHCIDiskInput {
   /**
    * Gets or sets a value indicating whether disk is os disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCIDiskInput.isOsDisk has a boolean wire value; preserve the published property contract."
   isOsDisk: boolean;
 
   /**
@@ -3752,11 +3774,13 @@ model VMwareToAzStackHCINicInput {
   /**
    * Gets or sets a value indicating whether static ip migration is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCINicInput.isStaticIpMigrationEnabled has a boolean wire value; preserve the published property contract."
   isStaticIpMigrationEnabled?: boolean;
 
   /**
    * Gets or sets a value indicating whether mac address migration is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCINicInput.isMacMigrationEnabled has a boolean wire value; preserve the published property contract."
   isMacMigrationEnabled?: boolean;
 }
 
@@ -3769,6 +3793,7 @@ model VMwareToAzStackHCIPlannedFailoverModelCustomProperties
   /**
    * Gets or sets a value indicating whether VM needs to be shut down.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCIPlannedFailoverModelCustomProperties.shutdownSourceVM has a boolean wire value; preserve the published property contract."
   shutdownSourceVM: boolean;
 
   /**
@@ -3854,6 +3879,7 @@ model VMwareToAzStackHCIProtectedDiskProperties {
   /**
    * Gets or sets a value indicating whether the disk is the OS disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCIProtectedDiskProperties.isOsDisk has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isOsDisk?: boolean;
 
@@ -3866,6 +3892,7 @@ model VMwareToAzStackHCIProtectedDiskProperties {
   /**
    * Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCIProtectedDiskProperties.isDynamic has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDynamic?: boolean;
 
@@ -4010,6 +4037,7 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets a value indicating whether memory is dynamical.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCIProtectedItemModelCustomProperties.isDynamicRam has a boolean wire value; preserve the published property contract."
   isDynamicRam?: boolean;
 
   /**
@@ -4146,6 +4174,7 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets a value indicating whether resync is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCIProtectedItemModelCustomProperties.resyncRequired has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   resyncRequired?: boolean;
 
@@ -4158,6 +4187,7 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets a value indicating whether auto resync is to be done.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCIProtectedItemModelCustomProperties.performAutoResync has a boolean wire value; preserve the published property contract."
   performAutoResync?: boolean;
 
   /**
@@ -4187,12 +4217,14 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets a value indicating whether conversion to Gen 2 is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCIProtectedItemModelCustomProperties.convertToGen2 has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   convertToGen2?: boolean;
 
   /**
    * Gets or sets a value indicating whether VM is to be migrated as Arc VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCIProtectedItemModelCustomProperties.migrateAsArcVM has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   migrateAsArcVM?: boolean;
 }
@@ -4223,6 +4255,7 @@ model VMwareToAzStackHCIProtectedNicProperties {
   /**
    * Gets or sets a value indicating whether this is the primary NIC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCIProtectedNicProperties.isPrimaryNic has a boolean wire value; preserve the published property contract."
   isPrimaryNic?: boolean;
 
   /**
@@ -4270,6 +4303,7 @@ model VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate
   /**
    * Gets or sets a value indicating whether memory is dynamical.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate.isDynamicRam has a boolean wire value; preserve the published property contract."
   isDynamicRam?: boolean;
 
   /**
@@ -4301,12 +4335,14 @@ model VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate
   /**
    * Gets or sets a value indicating whether conversion to Gen 2 is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate.convertToGen2 has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   convertToGen2?: boolean;
 
   /**
    * Gets or sets a value indicating whether VM is to be migrated as Arc VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate.migrateAsArcVM has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   migrateAsArcVM?: boolean;
 }

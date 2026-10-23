@@ -59,6 +59,7 @@ interface TuningOptionsOperationGroup {
       /**
        * Recommendations list filter. Retrieves recommendations based on type.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listRecommendations.recommendationType retains the recommendationType query parameter; preserve wire compatibility."
       @query("recommendationType")
       recommendationType?: RecommendationTypeParameterEnum;
     }

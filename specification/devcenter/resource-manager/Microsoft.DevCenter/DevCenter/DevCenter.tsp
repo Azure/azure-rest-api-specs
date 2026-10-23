@@ -56,6 +56,7 @@ interface DevCenters {
   listByResourceGroup is ArmResourceListByParent<
     DevCenter,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.$top retains the $top query parameter; preserve wire compatibility."
       @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
@@ -67,6 +68,7 @@ interface DevCenters {
   listBySubscription is ArmListBySubscription<
     DevCenter,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.$top retains the $top query parameter; preserve wire compatibility."
       @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
@@ -83,6 +85,7 @@ interface DevCenters {
     void,
     Response = ImageListResult,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByDevCenter.$top retains the $top query parameter; preserve wire compatibility."
       @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;

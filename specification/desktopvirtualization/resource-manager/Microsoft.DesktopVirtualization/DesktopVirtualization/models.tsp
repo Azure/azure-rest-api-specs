@@ -1350,6 +1350,7 @@ model ResourceProviderOperation {
   /**
    * Is a data action.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ResourceProviderOperation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -1558,11 +1559,13 @@ model AppAttachPackageInfoProperties {
   /**
    * Specifies how to register Package in feed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AppAttachPackageInfoProperties.isRegularRegistration has a boolean wire value; preserve the published property contract."
   isRegularRegistration?: boolean;
 
   /**
    * Make this version of the package the active one across the hostpool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AppAttachPackageInfoProperties.isActive has a boolean wire value; preserve the published property contract."
   isActive?: boolean;
 
   /**
@@ -1982,12 +1985,14 @@ model SecurityInfoProperties {
   /**
    * Whether to use secureBoot on the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityInfoProperties.secureBootEnabled has a boolean wire value; preserve the published property contract."
   secureBootEnabled?: boolean;
 
   /**
    * Whether to use vTpm on the virtual machine.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "vTpm is acronym in service"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityInfoProperties.vTpmEnabled has a boolean wire value; preserve the published property contract."
   vTpmEnabled?: boolean;
 }
 
@@ -2003,12 +2008,14 @@ model SecurityInfoPatchProperties {
   /**
    * Whether to use secureBoot on the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityInfoPatchProperties.secureBootEnabled has a boolean wire value; preserve the published property contract."
   secureBootEnabled?: boolean;
 
   /**
    * Whether to use vTpm on the virtual machine.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "vTpm is an acronym used by service"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityInfoPatchProperties.vTpmEnabled has a boolean wire value; preserve the published property contract."
   vTpmEnabled?: boolean;
 }
 
@@ -2019,6 +2026,7 @@ model BootDiagnosticsInfoProperties {
   /**
    * Whether boot diagnostics should be enabled on the Virtual Machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BootDiagnosticsInfoProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2034,6 +2042,7 @@ model BootDiagnosticsInfoPatchProperties {
   /**
    * Whether boot diagnostics should be enabled on the Virtual Machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BootDiagnosticsInfoPatchProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2152,6 +2161,7 @@ model HostPoolUpdateConfigurationProperties {
   /**
    * Whether not to save original disk. False by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HostPoolUpdateConfigurationProperties.deleteOriginalVm has a boolean wire value; preserve the published property contract."
   deleteOriginalVm?: boolean;
 
   /**
@@ -2181,6 +2191,7 @@ model HostPoolUpdateConfigurationPatchProperties {
   /**
    * Whether not to save original disk. False by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HostPoolUpdateConfigurationPatchProperties.deleteOriginalVm has a boolean wire value; preserve the published property contract."
   deleteOriginalVm?: boolean;
 
   /**
@@ -2242,6 +2253,7 @@ model SessionHostProvisioningConfigurationProperties {
   /**
    * Whether the session host should be set in drain mode following provisioning.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SessionHostProvisioningConfigurationProperties.setDrainMode has a boolean wire value; preserve the published property contract."
   setDrainMode?: boolean;
 
   /**
@@ -2265,6 +2277,7 @@ model SessionHostProvisioningConfigurationPatchProperties {
   /**
    * Whether the session host should be set in drain mode following provisioning.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SessionHostProvisioningConfigurationPatchProperties.setDrainMode has a boolean wire value; preserve the published property contract."
   setDrainMode?: boolean;
 
   /**
@@ -2354,12 +2367,14 @@ model ApplicationGroupProperties {
   /**
    * Is cloud pc resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGroupProperties.cloudPcResource has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   cloudPcResource?: boolean;
 
   /**
    * Boolean representing whether the applicationGroup is show in the feed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGroupProperties.showInFeed has a boolean wire value; preserve the published property contract."
   showInFeed?: boolean;
 
   /**
@@ -2581,6 +2596,7 @@ model HostPoolProperties {
   /**
    * Is validation environment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HostPoolProperties.validationEnvironment has a boolean wire value; preserve the published property contract."
   validationEnvironment?: boolean;
 
   /**
@@ -2634,11 +2650,13 @@ model HostPoolProperties {
    * The flag to turn on/off StartVMOnConnect feature.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a valid acronym"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HostPoolProperties.startVMOnConnect has a boolean wire value; preserve the published property contract."
   startVMOnConnect?: boolean;
 
   /**
    * Is cloud pc resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HostPoolProperties.cloudPcResource has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   cloudPcResource?: boolean;
 
@@ -2759,6 +2777,7 @@ model AgentUpdateProperties {
   /**
    * Whether to use localTime of the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AgentUpdateProperties.useSessionHostLocalTime has a boolean wire value; preserve the published property contract."
   useSessionHostLocalTime?: boolean;
 
   /**
@@ -3002,6 +3021,7 @@ model ScalingSchedule {
   /**
    * Should users be logged off forcefully from hosts.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScalingSchedule.rampDownForceLogoffUsers has a boolean wire value; preserve the published property contract."
   rampDownForceLogoffUsers?: boolean;
 
   /**
@@ -3110,6 +3130,7 @@ model ScalingHostPoolReference {
   /**
    * Is the scaling plan enabled for this hostpool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScalingHostPoolReference.scalingPlanEnabled has a boolean wire value; preserve the published property contract."
   scalingPlanEnabled?: boolean;
 }
 
@@ -3147,6 +3168,7 @@ model WorkspaceProperties {
   /**
    * Is cloud pc resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WorkspaceProperties.cloudPcResource has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   cloudPcResource?: boolean;
 
@@ -3270,6 +3292,7 @@ model ApplicationGroupPatchProperties {
   /**
    * Boolean representing whether the applicationGroup is show in the feed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationGroupPatchProperties.showInFeed has a boolean wire value; preserve the published property contract."
   showInFeed?: boolean;
 }
 
@@ -3341,6 +3364,7 @@ model ApplicationProperties {
   /**
    * Specifies whether to show the RemoteApp program in the RD Web Access server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationProperties.showInPortal has a boolean wire value; preserve the published property contract."
   showInPortal?: boolean;
 
   /**
@@ -3408,6 +3432,7 @@ model ApplicationPatchProperties {
   /**
    * Specifies whether to show the RemoteApp program in the RD Web Access server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApplicationPatchProperties.showInPortal has a boolean wire value; preserve the published property contract."
   showInPortal?: boolean;
 
   /**
@@ -3598,6 +3623,7 @@ model ShortcutsExtension {
   /**
    * Indicates whether to create a desktop shortcut for the remote application.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ShortcutsExtension.putShortcutOnDesktop has a boolean wire value; preserve the published property contract."
   putShortcutOnDesktop?: boolean;
 }
 
@@ -3726,6 +3752,7 @@ model HostPoolPatchProperties {
   /**
    * Is validation environment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HostPoolPatchProperties.validationEnvironment has a boolean wire value; preserve the published property contract."
   validationEnvironment?: boolean;
 
   /**
@@ -3767,6 +3794,7 @@ model HostPoolPatchProperties {
    * The flag to turn on/off StartVMOnConnect feature.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a valid acronym"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HostPoolPatchProperties.startVMOnConnect has a boolean wire value; preserve the published property contract."
   startVMOnConnect?: boolean;
 
   /**
@@ -3853,6 +3881,7 @@ model AgentUpdatePatchProperties {
   /**
    * Whether to use localTime of the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AgentUpdatePatchProperties.useSessionHostLocalTime has a boolean wire value; preserve the published property contract."
   useSessionHostLocalTime?: boolean;
 
   /**
@@ -3955,11 +3984,13 @@ model ExpandMsixImageProperties {
   /**
    * Specifies how to register Package in feed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpandMsixImageProperties.isRegularRegistration has a boolean wire value; preserve the published property contract."
   isRegularRegistration?: boolean;
 
   /**
    * Make this version of the package the active one across the hostpool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExpandMsixImageProperties.isActive has a boolean wire value; preserve the published property contract."
   isActive?: boolean;
 
   /**
@@ -4148,6 +4179,7 @@ model SessionHostProperties {
   /**
    * Allow a new session.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SessionHostProperties.allowNewSession has a boolean wire value; preserve the published property contract."
   allowNewSession?: boolean;
 
   /**
@@ -4303,6 +4335,7 @@ model SessionHostPatchProperties {
   /**
    * Allow a new session.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SessionHostPatchProperties.allowNewSession has a boolean wire value; preserve the published property contract."
   allowNewSession?: boolean;
 
   /**
@@ -4841,6 +4874,7 @@ model ScalingPlanPooledScheduleProperties {
   /**
    * Should users be logged off forcefully from hosts.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScalingPlanPooledScheduleProperties.rampDownForceLogoffUsers has a boolean wire value; preserve the published property contract."
   rampDownForceLogoffUsers?: boolean;
 
   /**
@@ -4963,6 +4997,7 @@ model ScalingPlanPooledSchedulePatchProperties {
   /**
    * Should users be logged off forcefully from hosts.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScalingPlanPooledSchedulePatchProperties.rampDownForceLogoffUsers has a boolean wire value; preserve the published property contract."
   rampDownForceLogoffUsers?: boolean;
 
   /**
@@ -5390,11 +5425,13 @@ model MSIXPackageProperties {
   /**
    * Specifies how to register Package in feed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MSIXPackageProperties.isRegularRegistration has a boolean wire value; preserve the published property contract."
   isRegularRegistration?: boolean;
 
   /**
    * Make this version of the package the active one across the hostpool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MSIXPackageProperties.isActive has a boolean wire value; preserve the published property contract."
   isActive?: boolean;
 
   /**
@@ -5441,11 +5478,13 @@ model MSIXPackagePatchProperties {
   /**
    * Set a version of the package to be active across hostpool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MSIXPackagePatchProperties.isActive has a boolean wire value; preserve the published property contract."
   isActive?: boolean;
 
   /**
    * Set Registration mode. Regular or Delayed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MSIXPackagePatchProperties.isRegularRegistration has a boolean wire value; preserve the published property contract."
   isRegularRegistration?: boolean;
 
   /**

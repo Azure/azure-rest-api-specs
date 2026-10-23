@@ -144,6 +144,7 @@ model ContainerDefinition {
   @identifiers(#[])
   dependsOn?: ContainerDependency[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerDefinition.disableNetworking has a boolean wire value; preserve the published property contract."
   @doc("When this parameter is true, networking is off within the container. This parameter maps to ``NetworkDisabled`` in the [Create a container](https://docs.docker.com/reference/cli/docker/container/create/) section of the [Docker Remote API](https://docs.docker.com/engine/api/).  This parameter is not supported for Windows containers.")
   disableNetworking?: boolean;
 
@@ -170,6 +171,7 @@ model ContainerDefinition {
   @identifiers(#[])
   environmentFiles?: EnvironmentFile[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerDefinition.essential has a boolean wire value; preserve the published property contract."
   @doc("If the ``essential`` parameter of a container is marked as ``true``, and that container fails or stops for any reason, all other containers that are part of the task are stopped. If the ``essential`` parameter of a container is marked as ``false``, its failure doesn't affect the rest of the containers in a task. If this parameter is omitted, a container is assumed to be essential. All tasks must have at least one essential container. If you have an application that's composed of multiple containers, group containers that are used for a common purpose into components, and separate the different components into multiple task definitions. For more information, see [Application Architecture](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/application_architecture.html) in the *Amazon Elastic Container Service Developer Guide*.")
   essential?: boolean;
 
@@ -189,6 +191,7 @@ model ContainerDefinition {
   @doc("The image used to start a container. This string is passed directly to the Docker daemon. By default, images in the Docker Hub registry are available. Other repositories are specified with either ``repository-url/image:tag`` or ``repository-url/image@digest``. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to ``Image`` in the [Create a container](https://docs.docker.com/reference/cli/docker/container/create/) section of the [Docker Remote API](https://docs.docker.com/engine/api/) and the ``IMAGE`` parameter of [docker run](https://docs.docker.com/engine/reference/run/#security-configuration).  +  When a new task starts, the Amazon ECS container agent pulls the latest version of the specified image and tag for the container to use. However, subsequent updates to a repository image aren't propagated to already running tasks.  +  Images in Amazon ECR repositories can be specified by either using the full ``registry/repository:tag`` or ``registry/repository@digest``. For example, ``012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>:latest`` or ``012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE``.   +  Images in official repositories on Docker Hub use a single name (for example, ``ubuntu`` or ``mongo``).  +  Images in other repositories on Docker Hub are qualified with an organization name (for example, ``amazon/amazon-ecs-agent``).  +  Images in other online repositories are qualified further by a domain name (for example, ``quay.io/assemblyline/ubuntu``).")
   image?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerDefinition.interactive has a boolean wire value; preserve the published property contract."
   @doc("When this parameter is ``true``, you can deploy containerized applications that require ``stdin`` or a ``tty`` to be allocated. This parameter maps to ``OpenStdin`` in the [Create a container](https://docs.docker.com/reference/cli/docker/container/create/) section of the [Docker Remote API](https://docs.docker.com/engine/api/) and the ``--interactive`` option to [docker run](https://docs.docker.com/engine/reference/run/#security-configuration).")
   interactive?: boolean;
 
@@ -218,12 +221,15 @@ model ContainerDefinition {
   @identifiers(#[])
   portMappings?: PortMapping[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerDefinition.privileged has a boolean wire value; preserve the published property contract."
   @doc("When this parameter is true, the container is given elevated privileges on the host container instance (similar to the ``root`` user). This parameter maps to ``Privileged`` in the [Create a container](https://docs.docker.com/reference/cli/docker/container/create/) section of the [Docker Remote API](https://docs.docker.com/engine/api/) and the ``--privileged`` option to [docker run](https://docs.docker.com/engine/reference/run/#security-configuration).  This parameter is not supported for Windows containers or tasks run on FARGATElong.")
   privileged?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerDefinition.pseudoTerminal has a boolean wire value; preserve the published property contract."
   @doc("When this parameter is ``true``, a TTY is allocated. This parameter maps to ``Tty`` in the [Create a container](https://docs.docker.com/reference/cli/docker/container/create/) section of the [Docker Remote API](https://docs.docker.com/engine/api/) and the ``--tty`` option to [docker run](https://docs.docker.com/engine/reference/run/#security-configuration).")
   pseudoTerminal?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerDefinition.readonlyRootFilesystem has a boolean wire value; preserve the published property contract."
   @doc("When this parameter is true, the container is given read-only access to its root file system. This parameter maps to ``ReadonlyRootfs`` in the [Create a container](https://docs.docker.com/reference/cli/docker/container/create/) section of the [Docker Remote API](https://docs.docker.com/engine/api/) and the ``--read-only`` option to [docker run](https://docs.docker.com/engine/reference/run/#security-configuration).  This parameter is not supported for Windows containers.")
   readonlyRootFilesystem?: boolean;
 
@@ -348,6 +354,7 @@ model Tag {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Volume")
 model Volume {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Volume.configuredAtLaunch has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the volume should be configured at launch time. This is used to create Amazon EBS volumes for standalone tasks or tasks created as part of a service. Each task definition revision may only have one volume configured at launch in the volume configuration. To configure a volume at launch time, use this task definition revision and specify a ``volumeConfigurations`` object when calling the ``CreateService``, ``UpdateService``, ``RunTask`` or ``StartTask`` APIs.")
   configuredAtLaunch?: boolean;
 
@@ -467,6 +474,7 @@ model LinuxParameters {
   @identifiers(#[])
   devices?: Device[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LinuxParameters.initProcessEnabled has a boolean wire value; preserve the published property contract."
   @doc("Run an ``init`` process inside the container that forwards signals and reaps processes. This parameter maps to the ``--init`` option to [docker run](https://docs.docker.com/engine/reference/run/#security-configuration). This parameter requires version 1.25 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: ``sudo docker version --format '{{.Server.APIVersion}}'``")
   initProcessEnabled?: boolean;
 
@@ -510,6 +518,7 @@ model MountPoint {
   @doc("The path on the container to mount the host volume at.")
   containerPath?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MountPoint.readOnly has a boolean wire value; preserve the published property contract."
   @doc("If this value is ``true``, the container has read-only access to the volume. If this value is ``false``, then the container can write to the volume. The default value is ``false``.")
   readOnly?: boolean;
 
@@ -627,6 +636,7 @@ model Ulimit {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of VolumeFrom")
 model VolumeFrom {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VolumeFrom.readOnly has a boolean wire value; preserve the published property contract."
   @doc("If this value is ``true``, the container has read-only access to the volume. If this value is ``false``, then the container can write to the volume. The default value is ``false``.")
   readOnly?: boolean;
 
@@ -640,6 +650,7 @@ model VolumeFrom {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DockerVolumeConfiguration")
 model DockerVolumeConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DockerVolumeConfiguration.autoprovision has a boolean wire value; preserve the published property contract."
   @doc("If this value is ``true``, the Docker volume is created if it doesn't already exist.  This field is only used if the ``scope`` is ``shared``.")
   autoprovision?: boolean;
 

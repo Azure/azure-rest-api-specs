@@ -57,6 +57,7 @@ interface VirtualMachineDiagnosticRunCommands {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByVirtualMachine.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -102,6 +103,7 @@ interface VirtualMachineDiagnosticRunCommands {
   /**
    * The operation to get all diagnostic run commands of a Virtual Machine.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing diagnosticListByVirtualMachine SDK method name; renaming it would break client compatibility."
   @list
   @added(Versions.v2026_04_01)
   diagnosticListByVirtualMachine is VirtualMachineDiagnosticRunCommandOps.List<
@@ -110,6 +112,7 @@ interface VirtualMachineDiagnosticRunCommands {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing diagnosticListByVirtualMachine.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -145,6 +148,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -195,6 +199,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
    * The operation to get all diagnostic run commands of an instance in Virtual Machine Scaleset.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing diagnosticList SDK method name; renaming it would break client compatibility."
   @added(Versions.v2026_04_01)
   @operationId("VirtualMachineScaleSetVMDiagnosticRunCommands_List")
   @list
@@ -204,6 +209,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing diagnosticList.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },

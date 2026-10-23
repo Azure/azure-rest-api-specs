@@ -47,6 +47,7 @@ interface Transfers {
   /**
    * Sends a request to a user in another billing account to transfer billing ownership of their subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing initiate retains its tenant-scoped route; preserve published resource IDs and API paths."
   initiate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     TransferDetails,
     Request = InitiateTransferRequest,

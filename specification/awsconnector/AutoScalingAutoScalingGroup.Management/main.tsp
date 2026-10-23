@@ -79,6 +79,7 @@ model AwsAutoScalingAutoScalingGroupProperties {
   @doc("A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the ``VPCZoneIdentifier`` property, or for attaching a network interface when an existing network interface ID is specified in a launch template.")
   availabilityZones?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsAutoScalingAutoScalingGroupProperties.capacityRebalance has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether Capacity Rebalancing is enabled. Otherwise, Capacity Rebalancing is disabled. When you turn on Capacity Rebalancing, Amazon EC2 Auto Scaling attempts to launch a Spot Instance whenever Amazon EC2 notifies that a Spot Instance is at an elevated risk of interruption. After launching a new instance, it then terminates an old instance. For more information, see [Use Capacity Rebalancing to handle Amazon EC2 Spot Interruptions](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html) in the in the *Amazon EC2 Auto Scaling User Guide*.")
   capacityRebalance?: boolean;
 
@@ -138,6 +139,7 @@ model AwsAutoScalingAutoScalingGroupProperties {
   @doc("An embedded object that specifies a mixed instances policy. The policy includes properties that not only define the distribution of On-Demand Instances and Spot Instances, the maximum price to pay for Spot Instances (optional), and how the Auto Scaling group allocates instance types to fulfill On-Demand and Spot capacities, but also the properties that specify the instance configuration information—the launch template and instance types. The policy can also include a weight for each instance type and different launch templates for individual instance types. For more information, see [Auto Scaling groups with multiple instance types and purchase options](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html) in the *Amazon EC2 Auto Scaling User Guide*. Use this structure to launch multiple instance types and On-Demand Instances and Spot Instances within a single Auto Scaling group. A mixed instances policy contains information that Amazon EC2 Auto Scaling can use to launch instances and help optimize your costs. For more information, see [Auto Scaling groups with multiple instance types and purchase options](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html) in the *Amazon EC2 Auto Scaling User Guide*. You can create a mixed instances policy for new and existing Auto Scaling groups. You must use a launch template to configure the policy. You cannot use a launch configuration. There are key differences between Spot Instances and On-Demand Instances:  +  The price for Spot Instances varies based on demand  +  Amazon EC2 can terminate an individual Spot Instance as the availability of, or price for, Spot Instances changes   When a Spot Instance is terminated, Amazon EC2 Auto Scaling group attempts to launch a replacement instance to maintain the desired capacity for the group.   ``MixedInstancesPolicy`` is a property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource.")
   mixedInstancesPolicy?: MixedInstancesPolicy;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsAutoScalingAutoScalingGroupProperties.newInstancesProtectedFromScaleIn has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling when scaling in. For more information about preventing instances from terminating on scale in, see [Using instance scale-in protection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html) in the *Amazon EC2 Auto Scaling User Guide*.")
   newInstancesProtectedFromScaleIn?: boolean;
 
@@ -274,6 +276,7 @@ model TagProperty {
   @doc("The tag key.")
   key?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TagProperty.propagateAtLaunch has a boolean wire value; preserve the published property contract."
   @doc("Set to ``true`` if you want CloudFormation to copy the tag to EC2 instances that are launched as part of the Auto Scaling group. Set to ``false`` if you want the tag attached only to the Auto Scaling group and not copied to any instances launched as part of the Auto Scaling group.")
   propagateAtLaunch?: boolean;
 
@@ -405,6 +408,7 @@ model InstanceRequirements {
   @doc("[Price protection] The price protection threshold for On-Demand Instances, as a percentage higher than an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from either the lowest priced current generation instance types or, failing that, the lowest priced previous generation instance types that match your attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price exceeds your specified threshold.  The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as ``999999``.  If you set ``DesiredCapacityType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per instance price.  Default: ``20``")
   onDemandMaxPricePercentageOverLowestPrice?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing InstanceRequirements.requireHibernateSupport has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether instance types must provide On-Demand Instance hibernation support. Default: ``false``")
   requireHibernateSupport?: boolean;
 

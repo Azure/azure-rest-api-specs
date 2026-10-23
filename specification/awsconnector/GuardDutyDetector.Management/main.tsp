@@ -68,6 +68,7 @@ model AwsGuardDutyDetectorProperties {
   @doc("Property dataSources")
   dataSources?: CFNDataSourceConfigurations;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsGuardDutyDetectorProperties.enable has a boolean wire value; preserve the published property contract."
   @doc("Property enable")
   enable?: boolean;
 
@@ -169,6 +170,7 @@ model CFNMalwareProtectionConfiguration {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CFNS3LogsConfiguration")
 model CFNS3LogsConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CFNS3LogsConfiguration.enable has a boolean wire value; preserve the published property contract."
   @doc("Property enable")
   enable?: boolean;
 }
@@ -192,6 +194,7 @@ model CFNFeatureAdditionalConfiguration {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CFNKubernetesAuditLogsConfiguration")
 model CFNKubernetesAuditLogsConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CFNKubernetesAuditLogsConfiguration.enable has a boolean wire value; preserve the published property contract."
   @doc("Property enable")
   enable?: boolean;
 }
@@ -202,6 +205,7 @@ model CFNKubernetesAuditLogsConfiguration {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CFNScanEc2InstanceWithFindingsConfiguration")
 model CFNScanEc2InstanceWithFindingsConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CFNScanEc2InstanceWithFindingsConfiguration.ebsVolumes has a boolean wire value; preserve the published property contract."
   @doc("Property ebsVolumes")
   ebsVolumes?: boolean;
 }

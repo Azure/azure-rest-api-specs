@@ -115,12 +115,14 @@ model DistributionConfig {
   @doc("The object that you want CloudFront to request from your origin (for example, ``index.html``) when a viewer requests the root URL for your distribution (``https://www.example.com``) instead of an object in your distribution (``https://www.example.com/product-description.html``). Specifying a default root object avoids exposing the contents of your distribution. Specify only the object name, for example, ``index.html``. Don't add a ``/`` before the object name. If you don't want to specify a default root object when you create a distribution, include an empty ``DefaultRootObject`` element. To delete the default root object from an existing distribution, update the distribution configuration and include an empty ``DefaultRootObject`` element. To replace the default root object, update the distribution configuration and specify the new object. For more information about the default root object, see [Creating a Default Root Object](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html) in the *Amazon CloudFront Developer Guide*.")
   defaultRootObject?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DistributionConfig.enabled has a boolean wire value; preserve the published property contract."
   @doc("From this field, you can enable or disable the selected distribution.")
   enabled?: boolean;
 
   @doc("(Optional) Specify the maximum HTTP version(s) that you want viewers to use to communicate with CF. The default value for new distributions is ``http1.1``. For viewers and CF to use HTTP/2, viewers must support TLSv1.2 or later, and must support Server Name Indication (SNI). For viewers and CF to use HTTP/3, viewers must support TLSv1.3 and Server Name Indication (SNI). CF supports HTTP/3 connection migration to allow the viewer to switch networks without losing connection. For more information about connection migration, see [Connection Migration](https://www.rfc-editor.org/rfc/rfc9000.html#name-connection-migration) at RFC 9000. For more information about supported TLSv1.3 ciphers, see [Supported protocols and ciphers between viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html).")
   httpVersion?: string = "http1.1";
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DistributionConfig.ipV6Enabled has a boolean wire value; preserve the published property contract."
   @doc("If you want CloudFront to respond to IPv6 DNS requests with an IPv6 address for your distribution, specify ``true``. If you specify ``false``, CloudFront responds to IPv6 DNS requests with the DNS response code ``NOERROR`` and with no IP addresses. This allows viewers to submit a second request, for an IPv4 address for your distribution. In general, you should enable IPv6 if you have users on IPv6 networks who want to access your content. However, if you're using signed URLs or signed cookies to restrict access to your content, and if you're using a custom policy that includes the ``IpAddress`` parameter to restrict the IP addresses that can access your content, don't enable IPv6. If you want to restrict access to some content by IP address and not restrict access to other content (or restrict access but not by IP address), you can create two distributions. For more information, see [Creating a Signed URL Using a Custom Policy](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-custom-policy.html) in the *Amazon CloudFront Developer Guide*. If you're using an R53AWSIntlong alias resource record set to route traffic to your CloudFront distribution, you need to create a second alias resource record set when both of the following are true:  +  You enable IPv6 for the distribution  +  You're using alternate domain names in the URLs for your objects   For more information, see [Routing Traffic to an Amazon CloudFront Web Distribution by Using Your Domain Name](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html) in the *Developer Guide*. If you created a CNAME resource record set, either with R53AWSIntlong or with another DNS service, you don't need to make any changes. A CNAME record will route traffic to your distribution regardless of the IP address format of the viewer request.")
   ipV6Enabled?: boolean;
 
@@ -143,6 +145,7 @@ model DistributionConfig {
   @doc("Property s3Origin")
   s3Origin?: LegacyS3Origin;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DistributionConfig.staging has a boolean wire value; preserve the published property contract."
   @doc("A Boolean that indicates whether this is a staging distribution. When this value is ``true``, this is a staging distribution. When this value is ``false``, this is not a staging distribution.")
   staging?: boolean;
 
@@ -181,6 +184,7 @@ model CacheBehavior {
   @doc("A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices:  +  CloudFront caches responses to ``GET`` and ``HEAD`` requests.  +  CloudFront caches responses to ``GET``, ``HEAD``, and ``OPTIONS`` requests.   If you pick the second choice for your Amazon S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers, and Origin headers for the responses to be cached correctly.")
   cachedMethods?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CacheBehavior.compress has a boolean wire value; preserve the published property contract."
   @doc("Whether you want CloudFront to automatically compress certain files for this cache behavior. If so, specify true; if not, specify false. For more information, see [Serving Compressed Files](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html) in the *Amazon CloudFront Developer Guide*.")
   compress?: boolean;
 
@@ -219,6 +223,7 @@ model CacheBehavior {
   @doc("The identifier for a response headers policy.")
   responseHeadersPolicyId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CacheBehavior.smoothStreaming has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether you want to distribute media files in the Microsoft Smooth Streaming format using the origin that is associated with this cache behavior. If so, specify ``true``; if not, specify ``false``. If you specify ``true`` for ``SmoothStreaming``, you can still distribute other content using this cache behavior if the content matches the value of ``PathPattern``.")
   smoothStreaming?: boolean;
 
@@ -291,6 +296,7 @@ model DefaultCacheBehavior {
   @doc("A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices:  +  CloudFront caches responses to ``GET`` and ``HEAD`` requests.  +  CloudFront caches responses to ``GET``, ``HEAD``, and ``OPTIONS`` requests.   If you pick the second choice for your Amazon S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers, and Origin headers for the responses to be cached correctly.")
   cachedMethods?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefaultCacheBehavior.compress has a boolean wire value; preserve the published property contract."
   @doc("Whether you want CloudFront to automatically compress certain files for this cache behavior. If so, specify ``true``; if not, specify ``false``. For more information, see [Serving Compressed Files](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html) in the *Amazon CloudFront Developer Guide*.")
   compress?: boolean;
 
@@ -326,6 +332,7 @@ model DefaultCacheBehavior {
   @doc("The identifier for a response headers policy.")
   responseHeadersPolicyId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefaultCacheBehavior.smoothStreaming has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether you want to distribute media files in the Microsoft Smooth Streaming format using the origin that is associated with this cache behavior. If so, specify ``true``; if not, specify ``false``. If you specify ``true`` for ``SmoothStreaming``, you can still distribute other content using this cache behavior if the content matches the value of ``PathPattern``.")
   smoothStreaming?: boolean;
 
@@ -351,6 +358,7 @@ model Logging {
   @doc("The Amazon S3 bucket to store the access logs in, for example, ``myawslogbucket.s3.amazonaws.com``.")
   bucket?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Logging.includeCookies has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether you want CloudFront to include cookies in access logs, specify ``true`` for ``IncludeCookies``. If you choose to include cookies in logs, CloudFront logs all cookies regardless of how you configure the cache behaviors for this distribution. If you don't want to include cookies when you create a distribution or if you want to disable include cookies for an existing distribution, specify ``false`` for ``IncludeCookies``.")
   includeCookies?: boolean;
 
@@ -442,6 +450,7 @@ model ViewerCertificate {
   @doc("In CloudFormation, this field name is ``AcmCertificateArn``. Note the different capitalization.  If the distribution uses ``Aliases`` (alternate domain names or CNAMEs) and the SSL/TLS certificate is stored in [(ACM)](https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html), provide the Amazon Resource Name (ARN) of the ACM certificate. CloudFront only supports ACM certificates in the US East (N. Virginia) Region (``us-east-1``). If you specify an ACM certificate ARN, you must also specify values for ``MinimumProtocolVersion`` and ``SSLSupportMethod``. (In CloudFormation, the field name is ``SslSupportMethod``. Note the different capitalization.)")
   acmCertificateArn?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ViewerCertificate.cloudFrontDefaultCertificate has a boolean wire value; preserve the published property contract."
   @doc("If the distribution uses the CloudFront domain name such as ``d111111abcdef8.cloudfront.net``, set this field to ``true``. If the distribution uses ``Aliases`` (alternate domain names or CNAMEs), omit this field and specify values for the following fields:  +   ``AcmCertificateArn`` or ``IamCertificateId`` (specify a value for one, not both)   +   ``MinimumProtocolVersion``   +   ``SslSupportMethod``")
   cloudFrontDefaultCertificate?: boolean;
 
@@ -467,6 +476,7 @@ model ForwardedValues {
   @doc("This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include headers in the cache key, use a cache policy. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) in the *Amazon CloudFront Developer Guide*. If you want to send headers to the origin but not include them in the cache key, use an origin request policy. For more information, see [Creating origin request policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) in the *Amazon CloudFront Developer Guide*. A complex type that specifies the ``Headers``, if any, that you want CloudFront to forward to the origin for this cache behavior (whitelisted headers). For the headers that you specify, CloudFront also caches separate versions of a specified object that is based on the header values in viewer requests. For more information, see [Caching Content Based on Request Headers](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html) in the *Amazon CloudFront Developer Guide*.")
   headers?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ForwardedValues.queryString has a boolean wire value; preserve the published property contract."
   @doc("This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include query strings in the cache key, use a cache policy. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) in the *Amazon CloudFront Developer Guide*. If you want to send query strings to the origin but not include them in the cache key, use an origin request policy. For more information, see [Creating origin request policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) in the *Amazon CloudFront Developer Guide*. Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior and cache based on the query string parameters. CloudFront behavior depends on the value of ``QueryString`` and on the values that you specify for ``QueryStringCacheKeys``, if any: If you specify true for ``QueryString`` and you don't specify any values for ``QueryStringCacheKeys``, CloudFront forwards all query string parameters to the origin and caches based on all query string parameters. Depending on how many query string parameters and values you have, this can adversely affect performance because CloudFront must forward more requests to the origin. If you specify true for ``QueryString`` and you specify one or more values for ``QueryStringCacheKeys``, CloudFront forwards all query string parameters to the origin, but it only caches based on the query string parameters that you specify. If you specify false for ``QueryString``, CloudFront doesn't forward any query string parameters to the origin, and doesn't cache based on query string parameters. For more information, see [Configuring CloudFront to Cache Based on Query String Parameters](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/QueryStringParameters.html) in the *Amazon CloudFront Developer Guide*.")
   queryString?: boolean;
 
@@ -496,6 +506,7 @@ model LambdaFunctionAssociation {
   @doc("Specifies the event type that triggers a Lambda@Edge function invocation. You can specify the following values:  +   ``viewer-request``: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.  +   ``origin-request``: The function executes only when CloudFront sends a request to your origin. When the requested object is in the edge cache, the function doesn't execute.  +   ``origin-response``: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute.  +   ``viewer-response``: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache. If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.")
   eventType?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LambdaFunctionAssociation.includeBody has a boolean wire value; preserve the published property contract."
   @doc("A flag that allows a Lambda@Edge function to have read access to the body content. For more information, see [Accessing the Request Body by Choosing the Include Body Option](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-include-body-access.html) in the Amazon CloudFront Developer Guide.")
   includeBody?: boolean;
 
@@ -563,6 +574,7 @@ model OriginCustomHeader {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OriginShield")
 model OriginShield {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OriginShield.enabled has a boolean wire value; preserve the published property contract."
   @doc("A flag that specifies whether Origin Shield is enabled. When it's enabled, CloudFront routes all requests through Origin Shield, which can help protect your origin. When it's disabled, CloudFront might send requests directly to your origin from multiple edge locations or regional edge caches.")
   enabled?: boolean;
 

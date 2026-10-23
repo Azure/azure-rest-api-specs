@@ -166,6 +166,7 @@ interface VpnGateways {
        * VpnGateway ipConfigurationId to specify the gateway instance.
        */
       #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing reset POST contract uses ipConfigurationId in the query; preserve wire compatibility."
       @query("ipConfigurationId")
       ipConfigurationId?: string;
     },

@@ -29,6 +29,7 @@ union ProfanityFilterMode {
 
 @doc("Enhanced mode properties for transcription.")
 model EnhancedModeProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EnhancedModeProperties.enabled has a boolean wire value; preserve the published property contract."
   @doc("Enable enhanced mode for transcription. This is automatically set to true when task, targetLanguage, or prompt are specified.")
   @visibility(Lifecycle.Read)
   enabled?: boolean;
@@ -85,6 +86,7 @@ model TranscriptionOptions {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The Speaker Diarization settings. Diarization settings must be specified to enable speaker diarization.")
 model TranscriptionDiarizationOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TranscriptionDiarizationOptions.enabled has a boolean wire value; preserve the published property contract."
   @doc("Enable speaker diarization. This is automatically set to true when maxSpeakers is specified.")
   @visibility(Lifecycle.Read)
   enabled?: boolean;

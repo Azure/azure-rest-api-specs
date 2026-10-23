@@ -37,6 +37,7 @@ interface PrefixListGlobalRulestackResources {
   /**
    * Create a PrefixListGlobalRulestackResource
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is ArmResourceCreateOrReplaceAsync<PrefixListGlobalRulestackResource>;
 
   /**

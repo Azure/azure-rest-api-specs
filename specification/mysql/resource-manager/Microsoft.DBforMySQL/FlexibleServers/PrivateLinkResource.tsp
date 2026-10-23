@@ -39,6 +39,7 @@ interface PrivateLinkResources {
    * Lists the private link resources for MySQL server.
    */
   #suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByServer retains its response and SDK paging behavior; preserve published compatibility."
   listByServer is ArmResourceListByParent<
     PrivateLinkResource,
     Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResultV5>

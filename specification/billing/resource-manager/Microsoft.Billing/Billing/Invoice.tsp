@@ -84,48 +84,57 @@ interface Invoices {
       /**
        * The start date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.periodStartDate retains the periodStartDate query parameter; preserve wire compatibility."
       @query("periodStartDate")
       periodStartDate?: plainDate;
 
       /**
        * The end date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.periodEndDate retains the periodEndDate query parameter; preserve wire compatibility."
       @query("periodEndDate")
       periodEndDate?: plainDate;
 
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
 
       /**
        * The orderby query option allows clients to request resources in a particular order.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.orderBy retains the orderBy query parameter; preserve wire compatibility."
       @query("orderBy")
       orderBy?: string;
 
       /**
        * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.top retains the top query parameter; preserve wire compatibility."
       @query("top")
       top?: int64;
 
       /**
        * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.skip retains the skip query parameter; preserve wire compatibility."
       @query("skip")
       skip?: int64;
 
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByBillingAccount.count has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.count retains the count query parameter; preserve wire compatibility."
       @query("count")
       count?: boolean;
 
       /**
        * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.search retains the search query parameter; preserve wire compatibility."
       @query("search")
       search?: string;
     },
@@ -160,6 +169,7 @@ interface Invoices {
       /**
        * The ID that uniquely identifies an invoice document. This ID may be an identifier for an invoice PDF, a credit note, or a tax receipt.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing downloadByBillingAccount POST contract uses documentName in the query; preserve wire compatibility."
       @query("documentName")
       documentName?: string;
     }
@@ -195,36 +205,43 @@ interface Invoices {
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByInvoice.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
 
       /**
        * The orderby query option allows clients to request resources in a particular order.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByInvoice.orderBy retains the orderBy query parameter; preserve wire compatibility."
       @query("orderBy")
       orderBy?: string;
 
       /**
        * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByInvoice.top retains the top query parameter; preserve wire compatibility."
       @query("top")
       top?: int64;
 
       /**
        * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByInvoice.skip retains the skip query parameter; preserve wire compatibility."
       @query("skip")
       skip?: int64;
 
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByInvoice.count has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByInvoice.count retains the count query parameter; preserve wire compatibility."
       @query("count")
       count?: boolean;
 
       /**
        * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByInvoice.search retains the search query parameter; preserve wire compatibility."
       @query("search")
       search?: string;
     }
@@ -247,6 +264,7 @@ interface Invoices {
    * Gets the transaction summary for an invoice. Transactions include purchases, refunds and Azure usage charges.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getTransactionSummaryByInvoice retains its response and SDK paging behavior; preserve published compatibility."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Transaction")
   @get
@@ -259,12 +277,14 @@ interface Invoices {
       /**
        * The filter query option allows clients to filter the line items that are aggregated to create the line item summary.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getTransactionSummaryByInvoice.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
 
       /**
        * The search query option allows clients to filter the line items that are aggregated to create the line item summary.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getTransactionSummaryByInvoice.search retains the search query parameter; preserve wire compatibility."
       @query("search")
       search?: string;
     }
@@ -327,48 +347,57 @@ interface InvoiceByBillingSubscription {
       /**
        * The start date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingSubscription.periodStartDate retains the periodStartDate query parameter; preserve wire compatibility."
       @query("periodStartDate")
       periodStartDate?: plainDate;
 
       /**
        * The end date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingSubscription.periodEndDate retains the periodEndDate query parameter; preserve wire compatibility."
       @query("periodEndDate")
       periodEndDate?: plainDate;
 
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingSubscription.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
 
       /**
        * The orderby query option allows clients to request resources in a particular order.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingSubscription.orderBy retains the orderBy query parameter; preserve wire compatibility."
       @query("orderBy")
       orderBy?: string;
 
       /**
        * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingSubscription.top retains the top query parameter; preserve wire compatibility."
       @query("top")
       top?: int64;
 
       /**
        * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingSubscription.skip retains the skip query parameter; preserve wire compatibility."
       @query("skip")
       skip?: int64;
 
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByBillingSubscription.count has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingSubscription.count retains the count query parameter; preserve wire compatibility."
       @query("count")
       count?: boolean;
 
       /**
        * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingSubscription.search retains the search query parameter; preserve wire compatibility."
       @query("search")
       search?: string;
     },
@@ -390,6 +419,7 @@ interface InvoiceByBillingSubscription {
       /**
        * The ID that uniquely identifies an invoice document. This ID may be an identifier for an invoice PDF, a credit note, or a tax receipt.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing downloadByBillingSubscription POST contract uses documentName in the query; preserve wire compatibility."
       @query("documentName")
       documentName?: string;
     }

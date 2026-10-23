@@ -38,18 +38,22 @@ interface Skus {
   listByBillingAccount is ArmListByBillingAccount<
     Sku,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.serviceFamily retains the serviceFamily query parameter; preserve wire compatibility."
       @doc("The service family to filter by, such as 'Compute'.")
       @query
       serviceFamily: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.service retains the service query parameter; preserve wire compatibility."
       @doc("The service to filter by, such as 'Virtual Machines'.")
       @query
       service: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.language retains the language query parameter; preserve wire compatibility."
       @doc(LanguageParameterDescription)
       @query
       language?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.locations retains the locations query parameter; preserve wire compatibility."
       @doc(LocationsParameterDescription)
       @query
       locations?: string[];
@@ -58,14 +62,17 @@ interface Skus {
       @query
       $filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.$select retains the $select query parameter; preserve wire compatibility."
       @doc(SelectOdataParameterDescription)
       @query
       $select?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.$expand retains the $expand query parameter; preserve wire compatibility."
       @doc(ExpandOdataParameterDescription)
       @query
       $expand?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @doc(OrderByOdataParameterDescription)
       @query
       $orderBy?: string;
@@ -78,18 +85,22 @@ interface Skus {
   listByBillingProfile is ArmListByBillingProfile<
     Sku,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfile.serviceFamily retains the serviceFamily query parameter; preserve wire compatibility."
       @doc("The service family to filter by, such as 'Compute'.")
       @query
       serviceFamily: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfile.service retains the service query parameter; preserve wire compatibility."
       @doc("The service to filter by, such as 'Virtual Machines'.")
       @query
       service: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfile.language retains the language query parameter; preserve wire compatibility."
       @doc(LanguageParameterDescription)
       @query
       language?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfile.locations retains the locations query parameter; preserve wire compatibility."
       @doc(LocationsParameterDescription)
       @query
       locations?: string[];
@@ -98,14 +109,17 @@ interface Skus {
       @query
       $filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfile.$select retains the $select query parameter; preserve wire compatibility."
       @doc(SelectOdataParameterDescription)
       @query
       $select?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfile.$expand retains the $expand query parameter; preserve wire compatibility."
       @doc(ExpandOdataParameterDescription)
       @query
       $expand?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingProfile.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @doc(OrderByOdataParameterDescription)
       @query
       $orderBy?: string;
@@ -129,14 +143,19 @@ interface Skus {
     ...BillingAccountIdParameter,
     ...SkuIdParameter,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingAccount.language retains the language query parameter; preserve wire compatibility."
     @doc(LanguageParameterDescription)
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByBillingAccount.includeStopSold has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingAccount.includeStopSold retains the includeStopSold query parameter; preserve wire compatibility."
     @doc(IncludeStopSoldParameterDescription)
     @query
     includeStopSold?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByBillingAccount.includeFutureAvailabilities has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingAccount.includeFutureAvailabilities retains the includeFutureAvailabilities query parameter; preserve wire compatibility."
     @doc(IncludeFutureAvailabilitiesParameterDescription)
     @query
     includeFutureAvailabilities?: boolean = false,
@@ -158,14 +177,19 @@ interface Skus {
     ...BillingProfileIdParameter,
     ...SkuIdParameter,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingProfile.language retains the language query parameter; preserve wire compatibility."
     @doc(LanguageParameterDescription)
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByBillingProfile.includeStopSold has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingProfile.includeStopSold retains the includeStopSold query parameter; preserve wire compatibility."
     @doc(IncludeStopSoldParameterDescription)
     @query
     includeStopSold?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByBillingProfile.includeFutureAvailabilities has a boolean wire value; preserve the published property contract."
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingProfile.includeFutureAvailabilities retains the includeFutureAvailabilities query parameter; preserve wire compatibility."
     @doc(IncludeFutureAvailabilitiesParameterDescription)
     @query
     includeFutureAvailabilities?: boolean = false,
@@ -173,6 +197,7 @@ interface Skus {
 }
 
 /** The operation to list SKUs by billing account. */
+#suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing ArmListByBillingAccount retains its response and SDK paging behavior; preserve published compatibility."
 @listsResource(Resource)
 @segmentOf(Resource)
 @armResourceList(Resource)
@@ -189,6 +214,7 @@ op ArmListByBillingAccount<
 >;
 
 /** The operation to list SKUs by billing profile. */
+#suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing ArmListByBillingProfile retains its response and SDK paging behavior; preserve published compatibility."
 @listsResource(Resource)
 @segmentOf(Resource)
 @armResourceList(Resource)

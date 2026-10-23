@@ -68,12 +68,14 @@ interface ImpactCategories {
 
 @doc("Custom query params")
 model CustomParameters {
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing CustomParameters.categoryName retains the categoryName query parameter; preserve wire compatibility."
   @query
   @minLength(1)
   @doc("Filter by category name ")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$")
   categoryName?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing CustomParameters.resourceType retains the resourceType query parameter; preserve wire compatibility."
   @query
   @minLength(1)
   @doc("Filter by resource type")

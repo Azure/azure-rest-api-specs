@@ -131,10 +131,12 @@ interface Entity {
       @query(#{ explode: true })
       guid: string[];
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByGuids.minExtInfo has a boolean wire value; preserve the published property contract."
       @doc("Whether to return minimal information for referred entities.")
       @query
       minExtInfo?: boolean;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByGuids.ignoreRelationships has a boolean wire value; preserve the published property contract."
       @doc("Whether to ignore relationship attributes.")
       @query
       ignoreRelationships?: boolean;
@@ -217,10 +219,12 @@ interface Entity {
       @path
       guid: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing get.minExtInfo has a boolean wire value; preserve the published property contract."
       @doc("Whether to return minimal information for referred entities.")
       @query
       minExtInfo?: boolean;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing get.ignoreRelationships has a boolean wire value; preserve the published property contract."
       @doc("Whether to ignore relationship attributes.")
       @query
       ignoreRelationships?: boolean;
@@ -308,6 +312,7 @@ interface Entity {
       @path
       classificationName: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing removeClassification.suppressDeletedClassification has a boolean wire value; preserve the published property contract."
       @doc("To prevent classification changes from being overridden during regular scans, set this parameter to true. The default value is false.")
       @query
       suppressDeletedClassification?: boolean;
@@ -397,10 +402,12 @@ interface Entity {
       @path
       typeName: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByUniqueAttributes.minExtInfo has a boolean wire value; preserve the published property contract."
       @doc("Whether to return minimal information for referred entities.")
       @query
       minExtInfo?: boolean;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getByUniqueAttributes.ignoreRelationships has a boolean wire value; preserve the published property contract."
       @doc("Whether to ignore relationship attributes.")
       @query
       ignoreRelationships?: boolean;
@@ -615,10 +622,12 @@ interface Entity {
       @path
       typeName: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByUniqueAttributes.minExtInfo has a boolean wire value; preserve the published property contract."
       @doc("Whether to return minimal information for referred entities.")
       @query
       minExtInfo?: boolean;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByUniqueAttributes.ignoreRelationships has a boolean wire value; preserve the published property contract."
       @doc("Whether to ignore relationship attributes.")
       @query
       ignoreRelationships?: boolean;
@@ -681,6 +690,7 @@ interface Entity {
       @path
       guid: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing addOrUpdateBusinessMetadata.overwrite has a boolean wire value; preserve the published property contract."
       @doc("""
         Whether to overwrite the existing business metadata on the entity or not,
         default is false.
@@ -1003,6 +1013,7 @@ interface Glossary {
       @query
       sort?: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.ignoreTermsAndCategories has a boolean wire value; preserve the published property contract."
       @doc("Whether ignore terms and categories")
       @query
       ignoreTermsAndCategories?: boolean;
@@ -1181,6 +1192,7 @@ interface Glossary {
   @post
   createTerm is AtlasOperation<
     {
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing createTerm.includeTermHierarchy has a boolean wire value; preserve the published property contract."
       @doc("Whether include term hierarchy")
       @query
       includeTermHierarchy?: boolean;
@@ -1213,6 +1225,7 @@ interface Glossary {
       @path
       termId: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing updateTerm.includeTermHierarchy has a boolean wire value; preserve the published property contract."
       @doc("Whether include term hierarchy")
       @query
       includeTermHierarchy?: boolean;
@@ -1250,6 +1263,7 @@ interface Glossary {
       @path
       termId: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing partialUpdateTerm.includeTermHierarchy has a boolean wire value; preserve the published property contract."
       @doc("Whether include term hierarchy")
       @query
       includeTermHierarchy?: boolean;
@@ -1272,6 +1286,7 @@ interface Glossary {
   @post
   createTerms is AtlasOperation<
     {
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing createTerms.includeTermHierarchy has a boolean wire value; preserve the published property contract."
       @doc("Whether include term hierarchy")
       @query
       includeTermHierarchy?: boolean;
@@ -1415,6 +1430,7 @@ interface Glossary {
       @path
       glossaryId: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing update.ignoreTermsAndCategories has a boolean wire value; preserve the published property contract."
       @doc("Whether ignore terms and categories")
       @query
       ignoreTermsAndCategories?: boolean;
@@ -1544,6 +1560,7 @@ interface Glossary {
       @path
       glossaryId: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing partialUpdate.ignoreTermsAndCategories has a boolean wire value; preserve the published property contract."
       @doc("Whether ignore terms and categories")
       @query
       ignoreTermsAndCategories?: boolean;
@@ -1786,6 +1803,7 @@ interface Relationship {
       @path
       guid: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing get.extendedInfo has a boolean wire value; preserve the published property contract."
       @doc("Limits whether includes extended information.")
       @query
       extendedInfo?: boolean;
@@ -2042,6 +2060,7 @@ interface Type {
   @get
   list is AtlasOperation<
     {
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.includeTermTemplate has a boolean wire value; preserve the published property contract."
       @doc("""
         Whether include termtemplatedef when return all typedefs.
         This is always true
@@ -2090,6 +2109,7 @@ interface Type {
   @get
   listHeaders is AtlasOperation<
     {
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listHeaders.includeTermTemplate has a boolean wire value; preserve the published property contract."
       @doc("""
         Whether include termtemplatedef when return all typedefs.
         This is always true

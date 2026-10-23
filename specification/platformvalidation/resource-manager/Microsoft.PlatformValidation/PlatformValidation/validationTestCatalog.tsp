@@ -48,6 +48,7 @@ model ValidationTestInputDefinition {
   @doc("The data type expected for this input parameter.")
   type?: ValidationTestInputDataType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ValidationTestInputDefinition.required has a boolean wire value; preserve the published property contract."
   @doc("Whether this input parameter is required.")
   required?: boolean;
 

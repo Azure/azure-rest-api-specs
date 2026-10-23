@@ -134,6 +134,7 @@ interface BackupProtectionIntent {
     /**
      * skipToken Filter.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
     @query("$skipToken")
     $skipToken?: string,
   ): ArmResponse<ProtectionIntentResourceList> | ErrorResponse;
@@ -169,6 +170,7 @@ interface BackupUsageSummaries {
     /**
      * skipToken Filter.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
     @query("$skipToken")
     $skipToken?: string,
   ): ArmResponse<BackupManagementUsageList> | ErrorResponse;
@@ -198,6 +200,7 @@ interface Jobs {
     /**
      * OData filter options.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing export POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     $filter?: string,
   ): ArmAcceptedResponse<ExtraHeaders = {}> | ErrorResponse;
@@ -233,6 +236,7 @@ interface BackupProtectedItems {
     /**
      * skipToken Filter.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
     @query("$skipToken")
     $skipToken?: string,
   ): ArmResponse<ProtectedItemResourceList> | ErrorResponse;
@@ -463,6 +467,7 @@ interface ProtectionContainersOperationGroup {
     /**
      * OData filter options.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing refresh POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     $filter?: string,
   ): ArmAcceptedResponse<ExtraHeaders = {}> | ErrorResponse;
@@ -566,6 +571,7 @@ interface BackupProtectableItems {
     /**
      * skipToken Filter.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
     @query("$skipToken")
     $skipToken?: string,
   ): ArmResponse<WorkloadProtectableItemResourceList> | ErrorResponse;

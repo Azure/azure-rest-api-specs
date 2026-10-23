@@ -136,6 +136,7 @@ model PoolProperties {
   /**
    * If enabled (true) the pool can contain cool Access enabled volumes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PoolProperties.coolAccess has a boolean wire value; preserve the published property contract."
   coolAccess?: boolean = false;
 
   /**
@@ -245,6 +246,7 @@ model PoolPatchProperties {
   /**
    * If enabled (true) the pool can contain cool Access enabled volumes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PoolPatchProperties.coolAccess has a boolean wire value; preserve the published property contract."
   coolAccess?: boolean;
 
   /**

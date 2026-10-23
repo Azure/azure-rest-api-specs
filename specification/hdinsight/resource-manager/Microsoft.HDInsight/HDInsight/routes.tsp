@@ -19,6 +19,7 @@ interface LocationsOperationGroup {
   /**
    * Gets the capabilities for the specified location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getCapabilities retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("capabilities")
@@ -31,6 +32,7 @@ interface LocationsOperationGroup {
   /**
    * Lists the usages for the specified location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listUsages retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("usages")
@@ -43,6 +45,7 @@ interface LocationsOperationGroup {
   /**
    * Lists the billingSpecs for the specified subscription and location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listBillingSpecs retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("billingSpecs")
@@ -112,6 +115,7 @@ interface Configurations {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #deprecated "This API is deprecated, please use UpdateGatewaySettings in cluster endpoint instead."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing update retains its request-body shape; preserve wire compatibility."
   @post
   update is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     Cluster,
@@ -483,6 +487,7 @@ interface VirtualMachines {
   /**
    * Restarts the specified HDInsight cluster hosts.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing restartHosts retains its request-body shape; preserve wire compatibility."
   restartHosts is ArmResourceActionAsyncBase<
     Cluster,
     string[],

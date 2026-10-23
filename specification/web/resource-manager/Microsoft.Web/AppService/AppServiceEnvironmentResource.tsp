@@ -110,6 +110,8 @@ interface AppServiceEnvironmentResources {
       /**
        * Specify <code>true</code> to force the deletion even if the App Service Environment contains resources. The default is <code>false</code>.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.forceDelete has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.forceDelete retains the forceDelete query parameter; preserve wire compatibility."
       @query("forceDelete")
       forceDelete?: boolean;
     },
@@ -172,6 +174,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get diagnostic information for an App Service Environment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listDiagnostics retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get diagnostic information for an App Service Environment.")
   @get
   @action("diagnostics")
@@ -243,6 +246,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for List all currently running operations on the App Service Environment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listOperations retains its response and SDK paging behavior; preserve published compatibility."
   @summary("List all currently running operations on the App Service Environment.")
   @get
   @action("operations")
@@ -270,6 +274,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Gets the private link resources
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getPrivateLinkResources retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the private link resources")
   @get
   @action("privateLinkResources")
@@ -340,6 +345,7 @@ interface AppServiceEnvironmentResources {
       /**
        * Comma separated list of app properties to include.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listWebApps.propertiesToInclude retains the propertiesToInclude query parameter; preserve wire compatibility."
       @query("propertiesToInclude")
       propertiesToInclude?: string;
     },
@@ -409,6 +415,8 @@ interface AppServiceEnvironmentRecommendations {
       /**
        * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listHistoryForHostingEnvironment.expiredOnly has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listHistoryForHostingEnvironment.expiredOnly retains the expiredOnly query parameter; preserve wire compatibility."
       @query("expiredOnly")
       expiredOnly?: boolean;
 
@@ -441,6 +449,8 @@ interface AppServiceEnvironmentRecommendations {
       /**
        * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listRecommendedRulesForHostingEnvironment.featured has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listRecommendedRulesForHostingEnvironment.featured retains the featured query parameter; preserve wire compatibility."
       @query("featured")
       featured?: boolean;
 
@@ -471,6 +481,7 @@ interface AppServiceEnvironmentRecommendations {
       /**
        * Name of the app.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing disableAllForHostingEnvironment POST contract uses environmentName in the query; preserve wire compatibility."
       @query("environmentName")
       environmentName: string;
     },
@@ -495,6 +506,7 @@ interface AppServiceEnvironmentRecommendations {
       /**
        * Name of the app.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing resetAllFiltersForHostingEnvironment POST contract uses environmentName in the query; preserve wire compatibility."
       @query("environmentName")
       environmentName: string;
     },

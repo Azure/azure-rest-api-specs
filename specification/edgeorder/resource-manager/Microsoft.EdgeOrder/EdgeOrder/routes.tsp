@@ -28,6 +28,7 @@ interface ProductsAndConfigurationsOperationGroup {
       /**
        * $skipToken is supported on list of configurations, which provides the next page in the list of configurations.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listConfigurations POST contract uses $skipToken in the query; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }
@@ -45,12 +46,14 @@ interface ProductsAndConfigurationsOperationGroup {
       /**
        * $expand is supported on configurations parameter for product, which provides details on the configurations for the product.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listProductFamilies POST contract uses $expand in the query; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       /**
        * $skipToken is supported on list of product families, which provides the next page in the list of product families.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listProductFamilies POST contract uses $skipToken in the query; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }
@@ -68,6 +71,7 @@ interface ProductsAndConfigurationsOperationGroup {
       /**
        * $skipToken is supported on list of product families metadata, which provides the next page in the list of product families metadata.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listProductFamiliesMetadata POST contract uses $skipToken in the query; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }
@@ -90,12 +94,14 @@ interface OrdersOperationGroup {
       /**
        * $skipToken is supported on Get list of orders, which provides the next page in the list of orders.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
 
       /**
        * $top is supported on fetching list of resources. $top=10 means that the first 10 items in the list will be returned to the API caller.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     }
@@ -117,12 +123,14 @@ interface OrdersOperationGroup {
     /**
      * $skipToken is supported on Get list of orders, which provides the next page in the list of orders.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
     @query("$skipToken")
     $skipToken?: string,
 
     /**
      * $top is supported on fetching list of resources. $top=10 means that the first 10 items in the list will be returned to the API caller.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.$top retains the $top query parameter; preserve wire compatibility."
     @query("$top")
     $top?: int32,
   ): ArmResponse<OrderResourceList> | ErrorResponse;

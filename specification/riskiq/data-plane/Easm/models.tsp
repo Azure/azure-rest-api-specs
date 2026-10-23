@@ -174,6 +174,7 @@ model AlexaInfo {
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AlexaInfo.recent has a boolean wire value; preserve the published property contract."
   recent?: boolean;
 }
 
@@ -260,6 +261,7 @@ model AssetResource {
   @doc("Customer labels assigned to this asset.")
   labels?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AssetResource.wildcard has a boolean wire value; preserve the published property contract."
   @doc("An indicator of whether this asset represents a wildcard rollup of assets on this domain.")
   wildcard?: boolean;
 
@@ -275,11 +277,13 @@ model AssetResource {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model AssetSecurityPolicy {
   policyName?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AssetSecurityPolicy.isAffected has a boolean wire value; preserve the published property contract."
   isAffected?: boolean;
   description?: string;
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AssetSecurityPolicy.recent has a boolean wire value; preserve the published property contract."
   recent?: boolean;
   sources?: Source[];
 }
@@ -380,6 +384,7 @@ model Attribute {
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Attribute.recent has a boolean wire value; preserve the published property contract."
   recent?: boolean;
 }
 
@@ -424,6 +429,7 @@ model Banner {
   count?: int64;
   scanType?: string;
   bannerMetadata?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Banner.recent has a boolean wire value; preserve the published property contract."
   recent?: boolean;
   sha256?: string;
   sources?: Source[];
@@ -469,6 +475,7 @@ model Cookie {
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Cookie.recent has a boolean wire value; preserve the published property contract."
   recent?: boolean;
   cookieExpiryDate?: utcDateTime;
 }
@@ -544,6 +551,7 @@ model DataConnection {
   @visibility(Lifecycle.Read)
   userUpdatedAt?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataConnection.active has a boolean wire value; preserve the published property contract."
   @doc("An indicator of whether the data connection is active.")
   active?: boolean;
 
@@ -571,6 +579,7 @@ model DependentResource {
   sha384?: string;
   sha512?: string;
   url?: url;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DependentResource.cached has a boolean wire value; preserve the published property contract."
   cached?: boolean;
   sriChecks?: SubResourceIntegrityCheck[];
   host?: string;
@@ -853,6 +862,7 @@ model GuidPair {
   pageGuid?: string;
   crawlStateGuid?: string;
   loadDate?: utcDateTime;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GuidPair.recent has a boolean wire value; preserve the published property contract."
   recent?: boolean;
 }
 
@@ -978,7 +988,9 @@ model IpAddressAsset extends InventoryAsset {
   hosts?: ObservedString[];
   nxdomain?: ObservedBoolean[];
   sslServerConfig?: SslServerConfig[];
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IpAddressAsset.ipv4 has a boolean wire value; preserve the published property contract."
   ipv4?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IpAddressAsset.ipv6 has a boolean wire value; preserve the published property contract."
   ipv6?: boolean;
 }
 
@@ -992,6 +1004,7 @@ model IpBlock {
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IpBlock.recent has a boolean wire value; preserve the published property contract."
   recent?: boolean;
 }
 
@@ -1030,7 +1043,9 @@ model IpBlockAsset extends InventoryAsset {
   registrantPhones?: ObservedString[];
   adminPhones?: ObservedString[];
   technicalPhones?: ObservedString[];
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IpBlockAsset.ipv4 has a boolean wire value; preserve the published property contract."
   ipv4?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IpBlockAsset.ipv6 has a boolean wire value; preserve the published property contract."
   ipv6?: boolean;
 }
 
@@ -1060,6 +1075,7 @@ model LogAnalyticsDataConnectionProperties extends DataConnectionProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ObservedBoolean extends ObservedValue {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ObservedBoolean.value has a boolean wire value; preserve the published property contract."
   value?: boolean;
   sources?: Source[];
 }
@@ -1163,6 +1179,7 @@ model PageAsset extends InventoryAsset {
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   rootUrl?: ObservedBoolean;
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PageAsset.isRootUrl has a boolean wire value; preserve the published property contract."
   isRootUrl?: boolean;
   location?: ObservedLocation[];
   services?: Service[];
@@ -1184,6 +1201,7 @@ model PageCause {
   causeElementXPath?: string;
   location?: string;
   possibleMatches?: int32;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PageCause.loopDetected has a boolean wire value; preserve the published property contract."
   loopDetected?: boolean;
   version?: int32;
   domChangeIndex?: int32;
@@ -1303,11 +1321,13 @@ model ReportBillableAssetSummaryResult {
 model Reputation {
   listName?: string;
   threatType?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Reputation.trusted has a boolean wire value; preserve the published property contract."
   trusted?: boolean;
   cidr?: string;
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   listUpdatedAt?: utcDateTime;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Reputation.recent has a boolean wire value; preserve the published property contract."
   recent?: boolean;
 }
 
@@ -1318,6 +1338,7 @@ model ResourceUrl {
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ResourceUrl.recent has a boolean wire value; preserve the published property contract."
   recent?: boolean;
 }
 
@@ -1367,6 +1388,7 @@ model Service {
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Service.recent has a boolean wire value; preserve the published property contract."
   recent?: boolean;
   portStates?: ObservedPortState[];
 }
@@ -1379,6 +1401,7 @@ model SoaRecord {
   lastSeen?: utcDateTime;
   count?: int64;
   serialNumber?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SoaRecord.recent has a boolean wire value; preserve the published property contract."
   recent?: boolean;
 }
 
@@ -1422,9 +1445,12 @@ model SslCertAsset extends InventoryAsset {
   issuerOrganizations?: string[];
   issuerOrganizationalUnits?: string[];
   version?: int32;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SslCertAsset.certificateAuthority has a boolean wire value; preserve the published property contract."
   certificateAuthority?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SslCertAsset.selfSigned has a boolean wire value; preserve the published property contract."
   selfSigned?: boolean;
   sigAlgOid?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SslCertAsset.recent has a boolean wire value; preserve the published property contract."
   recent?: boolean;
   validationType?: SslCertAssetValidationType;
 }
@@ -1441,6 +1467,7 @@ model SslServerConfig {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model SubResourceIntegrityCheck {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SubResourceIntegrityCheck.violation has a boolean wire value; preserve the published property contract."
   violation?: boolean;
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
@@ -1501,6 +1528,7 @@ model WebComponent {
   count?: int64;
   cve?: Cve[];
   endOfLife?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebComponent.recent has a boolean wire value; preserve the published property contract."
   recent?: boolean;
   ports?: Port[];
   sources?: Source[];
@@ -1513,6 +1541,7 @@ model ObservedValue {
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ObservedValue.recent has a boolean wire value; preserve the published property contract."
   recent?: boolean;
 }
 
@@ -2173,6 +2202,7 @@ model ResponseIncludesParameter {
 @doc("The prameter of responseIncludes")
 @Versioning.added(Versions.v2024_03_01_preview)
 model RecentOnlyParameter {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RecentOnlyParameter.recentOnly has a boolean wire value; preserve the published property contract."
   @query("recentOnly")
   @doc("If it's recent only.")
   recentOnly?: boolean;

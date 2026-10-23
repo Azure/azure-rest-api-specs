@@ -105,6 +105,7 @@ interface Discounts {
   /**
    * List discounts at resource group level
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing resourceGroupList SDK method name; renaming it would break client compatibility."
   resourceGroupList is ArmResourceListByParent<
     Discount,
     Response = ArmResponse<DiscountList>
@@ -113,6 +114,7 @@ interface Discounts {
   /**
    * List discounts at subscription level
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing subscriptionList SDK method name; renaming it would break client compatibility."
   subscriptionList is ArmListBySubscription<
     Discount,
     Response = ArmResponse<DiscountList>

@@ -79,6 +79,7 @@ model WorkloadImpactProperties is ResourceProperties {
   @doc("Client incident details ex: incidentId , incident source")
   clientIncidentDetails?: ClientIncidentDetails;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WorkloadImpactProperties.ongoingImpact has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_01_01_preview)
   @doc("This field represents if an impact is ongoing or not. This is a boolean field.")
   ongoingImpact?: boolean;

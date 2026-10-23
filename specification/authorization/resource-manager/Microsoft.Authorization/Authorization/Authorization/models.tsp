@@ -1221,6 +1221,7 @@ model RoleManagementPolicyProperties {
   /**
    * The role management policy is default policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RoleManagementPolicyProperties.isOrganizationDefault has a boolean wire value; preserve the published property contract."
   isOrganizationDefault?: boolean;
 
   /**
@@ -1478,16 +1479,19 @@ model ApprovalSettings {
   /**
    * Determines whether approval is required or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApprovalSettings.isApprovalRequired has a boolean wire value; preserve the published property contract."
   isApprovalRequired?: boolean;
 
   /**
    * Determines whether approval is required for assignment extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApprovalSettings.isApprovalRequiredForExtension has a boolean wire value; preserve the published property contract."
   isApprovalRequiredForExtension?: boolean;
 
   /**
    * Determine whether requestor justification is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApprovalSettings.isRequestorJustificationRequired has a boolean wire value; preserve the published property contract."
   isRequestorJustificationRequired?: boolean;
 
   /**
@@ -1514,6 +1518,7 @@ model ApprovalStage {
   /**
    * Determines whether approver need to provide justification for his decision.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApprovalStage.isApproverJustificationRequired has a boolean wire value; preserve the published property contract."
   isApproverJustificationRequired?: boolean;
 
   /**
@@ -1529,6 +1534,7 @@ model ApprovalStage {
   /**
    * The value determine whether escalation feature is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApprovalStage.isEscalationEnabled has a boolean wire value; preserve the published property contract."
   isEscalationEnabled?: boolean;
 
   /**
@@ -1549,6 +1555,7 @@ model UserSet {
   /**
    * The value indicating whether the user is a backup fallback approver
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UserSet.isBackup has a boolean wire value; preserve the published property contract."
   isBackup?: boolean;
 
   /**
@@ -1590,6 +1597,7 @@ model RoleManagementPolicyAuthenticationContextRule
   /**
    * The value indicating if rule is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RoleManagementPolicyAuthenticationContextRule.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
@@ -1625,6 +1633,7 @@ model RoleManagementPolicyExpirationRule extends RoleManagementPolicyRule {
   /**
    * The value indicating whether expiration is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RoleManagementPolicyExpirationRule.isExpirationRequired has a boolean wire value; preserve the published property contract."
   isExpirationRequired?: boolean;
 
   /**
@@ -1670,6 +1679,7 @@ model RoleManagementPolicyNotificationRule extends RoleManagementPolicyRule {
   /**
    * Determines if the notification will be sent to the recipient type specified in the policy rule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RoleManagementPolicyNotificationRule.isDefaultRecipientsEnabled has a boolean wire value; preserve the published property contract."
   isDefaultRecipientsEnabled?: boolean;
 
   /**

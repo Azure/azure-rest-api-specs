@@ -444,15 +444,19 @@ alias HelmOperationConfiguration = {
   timeout?: int32;
 
   /** If set, the operation will wait for jobs to complete before marking the release as successful. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HelmOperationConfiguration.waitForJobs has a boolean wire value; preserve the published property contract."
   waitForJobs?: boolean;
 
   /** If set, the operation will be atomic. If the operation fails, all changes will be rolled back. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HelmOperationConfiguration.atomic has a boolean wire value; preserve the published property contract."
   atomic?: boolean;
 
   /** Disable pre/post upgrade hooks for the operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HelmOperationConfiguration.disableHooks has a boolean wire value; preserve the published property contract."
   disableHooks?: boolean;
 
   /** If set, the operation will wait until all Pods, PVCs, Services, and minimum number of Pods of a `Deployment`, `StatefulSet`, or `ReplicaSet` are in a ready state before marking the release as successful. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HelmOperationConfiguration.wait has a boolean wire value; preserve the published property contract."
   wait?: boolean;
 };
 

@@ -250,6 +250,7 @@ model AlertProcessingRuleProperties {
   /**
    * Indicates if the given alert processing rule is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AlertProcessingRuleProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean = true;
 }
 
@@ -435,6 +436,7 @@ model PatchProperties {
   /**
    * Indicates if the given alert processing rule is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PatchProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 

@@ -699,6 +699,7 @@ model CheckNameAvailabilityParameters {
  */
 model CheckNameAvailabilityResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   reason?: string;
@@ -1136,6 +1137,7 @@ model CmkKekIdentity {
   /**
    * Indicate that system assigned identity should be used. Mutually exclusive with 'userAssignedIdentity' field
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CmkKekIdentity.useSystemAssignedIdentity has a boolean wire value; preserve the published property contract."
   useSystemAssignedIdentity?: boolean;
 
   /**

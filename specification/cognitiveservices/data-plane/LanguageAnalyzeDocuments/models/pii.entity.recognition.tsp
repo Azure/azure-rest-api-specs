@@ -43,10 +43,12 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   confidenceScoreThreshold?: ConfidenceScoreThreshold;
 
   /** Disable entity validation for PII entity recognition */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PiiTaskParameters.disableEntityValidation has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_15_preview)
   disableEntityValidation?: boolean = false;
 
   /** Boolean to indicate if entities should be excluded from the response json stored in the customer's storage. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PiiTaskParameters.excludeExtractionData has a boolean wire value; preserve the published property contract."
   @added(Versions.v2024_11_15_preview)
   @removed(Versions.v2026_05_01)
   excludeExtractionData?: boolean;
@@ -127,6 +129,7 @@ model ConfidenceScoreThresholdOverride {
 @added(Versions.v2026_05_15_preview)
 model ValueExclusionPolicy {
   /** Option to make the values excluded values case sensitive */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ValueExclusionPolicy.caseSensitive has a boolean wire value; preserve the published property contract."
   caseSensitive: boolean = false;
 
   /** List of words and terms that should be excluded from detection by the PII detection service */
@@ -148,6 +151,7 @@ model BaseRedactionPolicy {
   policyName?: string;
 
   /** (Optional) flag to indicate whether this redaction policy is the default policy to be applied when no specific policy is defined for a PII category. Only one policy can be marked as default. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BaseRedactionPolicy.isDefault has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   isDefault?: boolean = false;
 }
@@ -159,6 +163,7 @@ model SyntheticReplacementPolicyType extends BaseRedactionPolicy {
   policyKind: RedactionPolicyKind.syntheticReplacement;
 
   /** Optional flag to indicate whether to preserve the original data format in the synthetic replacement. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SyntheticReplacementPolicyType.preserveDataFormat has a boolean wire value; preserve the published property contract."
   preserveDataFormat?: boolean;
 }
 

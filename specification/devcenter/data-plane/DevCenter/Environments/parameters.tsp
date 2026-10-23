@@ -11,6 +11,7 @@ namespace DevCenterService;
 
 @doc("The force delete environment query parameter.")
 model ForceDeleteEnvironmentQueryParameter {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ForceDeleteEnvironmentQueryParameter.force has a boolean wire value; preserve the published property contract."
   @doc("The query option to force environment deletion even if the environment definition does not exist. This is a best-effort delete, and anything custom that forces resource creation beyond the associated resource group may not be deleted.")
   @query("force")
   @added(APIVersions.v2024_09_01_preview)

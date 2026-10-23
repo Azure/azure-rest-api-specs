@@ -118,6 +118,7 @@ interface SecuritySolutionsReferenceDataOperationGroup {
    * Gets a list of all supported Security Solutions for the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @operationId("securitySolutionsReferenceData_List")
   @tag("securitySolutionsReferenceData")
@@ -131,6 +132,7 @@ interface SecuritySolutionsReferenceDataOperationGroup {
   /**
    * Gets list of all supported Security Solutions for subscription and location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByHomeRegion retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @tag("SecuritySolutionsReferenceData")
   @get

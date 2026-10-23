@@ -54,6 +54,7 @@ model ContentFilterResult {
 }
 
 alias FilteredResultBase = {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FilteredResultBase.filtered has a boolean wire value; preserve the published property contract."
   @doc("A value indicating whether or not the content has been filtered.")
   filtered: boolean;
 };
@@ -164,6 +165,7 @@ model ContentFilterResultsForPrompt {
 model ContentFilterDetectionResult {
   ...FilteredResultBase;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContentFilterDetectionResult.detected has a boolean wire value; preserve the published property contract."
   @doc("A value indicating whether detection occurred, irrespective of severity or whether the content was filtered.")
   detected: boolean;
 }

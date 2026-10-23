@@ -68,6 +68,7 @@ interface Workflows {
       /**
        * The ManagedCluster resource associated with the workflows.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.managedClusterResource retains the managedClusterResource query parameter; preserve wire compatibility."
       @query("managedClusterResource")
       managedClusterResource?: string;
     }

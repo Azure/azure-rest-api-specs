@@ -12,9 +12,11 @@ alias Request = {
 };
 
 alias ModelConfiguration = {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ModelConfiguration.verbose has a boolean wire value; preserve the published property contract."
   @doc("An indication whether the model should produce verbose output.")
   verbose?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ModelConfiguration.includeEvidence has a boolean wire value; preserve the published property contract."
   @doc("An indication whether the model's output should include evidence for the inferences.")
   includeEvidence?: boolean = true;
 };

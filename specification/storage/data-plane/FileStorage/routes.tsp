@@ -266,6 +266,7 @@ interface Share {
       rootSquash?: string;
 
       /** Whether snapshot virtual directory access is enabled. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getProperties.enableSnapshotVirtualDirectoryAccess has a boolean wire value; preserve the published property contract."
       @header("x-ms-enable-snapshot-virtual-directory-access")
       enableSnapshotVirtualDirectoryAccess?: boolean;
 
@@ -282,6 +283,7 @@ interface Share {
       nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
 
       /** Whether SMB directory lease is enabled. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getProperties.enableSmbDirectoryLease has a boolean wire value; preserve the published property contract."
       @header("x-ms-enable-smb-directory-lease")
       @clientName("EnableSMBDirectoryLease", "go")
       enableSmbDirectoryLease?: boolean;
@@ -840,6 +842,7 @@ interface File {
 
   /** Reads or downloads a file from the system, including its metadata and properties. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing download SDK method name; renaming it would break client compatibility."
   @get
   download is StorageOperationResponseBody<
     {

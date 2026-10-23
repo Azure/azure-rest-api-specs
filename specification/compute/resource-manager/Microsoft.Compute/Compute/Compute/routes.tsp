@@ -98,6 +98,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listPublishers retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImagesEdgeZone_ListPublishers")
   @autoRoute
   @get
@@ -121,6 +122,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listOffers retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImagesEdgeZone_ListOffers")
   @autoRoute
   @get
@@ -151,6 +153,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listSkus retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImagesEdgeZone_ListSkus")
   @autoRoute
   @get
@@ -195,6 +198,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImagesEdgeZone_List")
   @autoRoute
   @get
@@ -243,18 +247,21 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       /**
        * An integer value specifying the number of images to return that matches supplied values.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * Specifies the order of the results returned. Formatted as an OData query.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$orderby retains the $orderby query parameter; preserve wire compatibility."
       @query("$orderby")
       $orderby?: string;
     }
@@ -313,6 +320,7 @@ interface VirtualMachineImagesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByEdgeZone retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImages_ListByEdgeZone")
   @autoRoute
   @get
@@ -335,6 +343,7 @@ interface VirtualMachineImagesOperationGroup {
    * Gets a list of virtual machine image publishers for the specified Azure location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listPublishers retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImages_ListPublishers")
   @autoRoute
   @get
@@ -349,6 +358,7 @@ interface VirtualMachineImagesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listOffers retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImages_ListOffers")
   @autoRoute
   @get
@@ -372,6 +382,7 @@ interface VirtualMachineImagesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listSkus retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImages_ListSkus")
   @autoRoute
   @get
@@ -409,6 +420,7 @@ interface VirtualMachineImagesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImages_List")
   @autoRoute
   @get
@@ -450,14 +462,17 @@ interface VirtualMachineImagesOperationGroup {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$orderby retains the $orderby query parameter; preserve wire compatibility."
       @query("$orderby")
       $orderby?: string;
     }
@@ -465,6 +480,7 @@ interface VirtualMachineImagesOperationGroup {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listWithProperties retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImages_ListWithProperties")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions?$expand=Properties")
   @get
@@ -496,14 +512,17 @@ interface VirtualMachineImagesOperationGroup {
     /**
      * The expand expression to apply on the operation.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listWithProperties.$expand retains the $expand query parameter; preserve wire compatibility."
     @query("$expand")
     $expand: string,
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listWithProperties.$top retains the $top query parameter; preserve wire compatibility."
     @query("$top")
     $top?: int32,
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listWithProperties.$orderby retains the $orderby query parameter; preserve wire compatibility."
     @query("$orderby")
     $orderby?: string,
   ): ArmResponse<VirtualMachineImage[]> | CloudError;

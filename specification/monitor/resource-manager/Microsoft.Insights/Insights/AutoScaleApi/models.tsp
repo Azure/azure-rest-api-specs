@@ -306,6 +306,7 @@ model AutoscaleSetting {
   /**
    * the enabled flag. Specifies whether automatic scaling is enabled for the resource. The default value is 'false'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutoscaleSetting.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean = false;
 
   /**
@@ -459,6 +460,7 @@ model MetricTrigger {
   /**
    * a value indicating whether metric should divide per instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricTrigger.dividePerInstance has a boolean wire value; preserve the published property contract."
   dividePerInstance?: boolean;
 }
 
@@ -600,11 +602,13 @@ model EmailNotification {
   /**
    * a value indicating whether to send email to subscription administrator.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EmailNotification.sendToSubscriptionAdministrator has a boolean wire value; preserve the published property contract."
   sendToSubscriptionAdministrator?: boolean = false;
 
   /**
    * a value indicating whether to send email to subscription co-administrators.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EmailNotification.sendToSubscriptionCoAdministrators has a boolean wire value; preserve the published property contract."
   sendToSubscriptionCoAdministrators?: boolean = false;
 
   /**

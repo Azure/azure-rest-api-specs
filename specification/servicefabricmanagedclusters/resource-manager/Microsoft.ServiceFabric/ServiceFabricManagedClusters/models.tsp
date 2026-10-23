@@ -213,6 +213,7 @@ model OperationResult {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OperationResult.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -437,6 +438,7 @@ model FaultSimulationContent {
   /**
    * Force the action to go through without any check on the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FaultSimulationContent.force has a boolean wire value; preserve the published property contract."
   force?: boolean;
 
   /**

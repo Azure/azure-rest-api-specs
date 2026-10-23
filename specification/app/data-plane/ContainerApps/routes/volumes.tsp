@@ -212,6 +212,7 @@ interface VolumesOperations {
       @query path: string;
 
       /** Whether to delete a directory and all of its contents. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing deleteVolumeFile.recursive has a boolean wire value; preserve the published property contract."
       @query recursive?: boolean;
     },
     DeleteVolumeFileResult,
@@ -342,6 +343,7 @@ interface VolumesOperations {
       @query path: string;
 
       /** Whether to replace an existing file. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing createOrReplaceVolumeFile.overwrite has a boolean wire value; preserve the published property contract."
       @query overwrite?: boolean;
 
       /** Entity tag required for the request to be applied. */

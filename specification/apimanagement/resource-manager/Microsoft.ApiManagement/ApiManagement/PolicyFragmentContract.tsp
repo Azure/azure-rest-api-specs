@@ -67,6 +67,7 @@ interface PolicyFragmentContracts {
       /**
        * Policy fragment content format.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.format retains the format query parameter; preserve wire compatibility."
       @query("format")
       format?: PolicyFragmentContentFormat;
     },
@@ -157,12 +158,14 @@ interface PolicyFragmentContracts {
       /**
        * OData order by query option.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$orderby retains the $orderby query parameter; preserve wire compatibility."
       @query("$orderby")
       $orderby?: string;
 
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -170,6 +173,7 @@ interface PolicyFragmentContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -188,6 +192,7 @@ interface PolicyFragmentContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listReferences POST contract uses $top in the query; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -195,6 +200,7 @@ interface PolicyFragmentContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listReferences POST contract uses $skip in the query; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -252,6 +258,7 @@ interface WorkspacePolicyFragment {
       /**
        * Policy fragment content format.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.format retains the format query parameter; preserve wire compatibility."
       @query("format")
       format?: PolicyFragmentContentFormat;
     },
@@ -342,12 +349,14 @@ interface WorkspacePolicyFragment {
       /**
        * OData order by query option.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$orderby retains the $orderby query parameter; preserve wire compatibility."
       @query("$orderby")
       $orderby?: string;
 
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -355,6 +364,7 @@ interface WorkspacePolicyFragment {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -373,6 +383,7 @@ interface WorkspacePolicyFragment {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listReferences POST contract uses $top in the query; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -380,6 +391,7 @@ interface WorkspacePolicyFragment {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listReferences POST contract uses $skip in the query; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;

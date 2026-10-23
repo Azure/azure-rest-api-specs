@@ -131,6 +131,7 @@ interface EHNamespaces {
    * Gets lists of resources that supports Privatelinks.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "OpenAPI decorator is required to preserve the original API behavior defined in the OpenAPI specification."
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing privateLinkResourcesGet retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("privateLinkResources")
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")

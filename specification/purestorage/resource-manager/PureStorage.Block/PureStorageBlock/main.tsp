@@ -271,6 +271,7 @@ model StoragePoolProperties {
 @added(Versions.v2026_05_01_preview)
 @doc("Settings for platform console access to the storage pool")
 model PlatformConsoleSettings {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PlatformConsoleSettings.enabled has a boolean wire value; preserve the published property contract."
   @doc("Whether platform console access is enabled for the storage pool or not.When enabled is false, all console access is disabled regardless of individual interface settings.")
   enabled?: boolean;
 
@@ -294,6 +295,7 @@ model PlatformConsoleSettings {
 @added(Versions.v2026_05_01_preview)
 @doc("Access settings for a platform console interface")
 model PlatformConsoleAccessSettings {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PlatformConsoleAccessSettings.enabled has a boolean wire value; preserve the published property contract."
   @doc("Whether this console interface access is enabled")
   enabled: boolean;
 }
@@ -325,6 +327,7 @@ model VnetInjection {
 
 @doc("Connected AVS status")
 model AzureVmwareService {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureVmwareService.avsEnabled has a boolean wire value; preserve the published property contract."
   @doc("If true, an AVS SDDC is successfully connected to the storage pool")
   avsEnabled: boolean;
 
@@ -684,6 +687,7 @@ model ServiceInitializationHandle {
 
 @doc("Transient information about an on-going connection to an AVS instance")
 model AvsConnection {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AvsConnection.serviceInitializationCompleted has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether service initialization is complete")
   serviceInitializationCompleted: boolean;
 
@@ -696,6 +700,7 @@ model AvsConnection {
 
 @doc("Status of storage pool / AVS connection")
 model AvsStatus {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AvsStatus.avsEnabled has a boolean wire value; preserve the published property contract."
   @doc("If true, an AVS connection has been successfully completed")
   avsEnabled: boolean;
 
@@ -775,6 +780,7 @@ model AvsStorageContainerProperties {
   @visibility(Lifecycle.Read)
   datastore?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AvsStorageContainerProperties.mounted has a boolean wire value; preserve the published property contract."
   @doc("Whether the datastore is mounted in VMware or not")
   @visibility(Lifecycle.Read)
   mounted?: boolean;
@@ -860,6 +866,7 @@ model VolumeProperties {
 
 @doc("Soft-deletion state")
 model SoftDeletion {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SoftDeletion.destroyed has a boolean wire value; preserve the published property contract."
   @doc("If false, the resource is active; if true, the resource has been destroyed; resources can be soft-deleted by setting destroyed to true, and recovered by setting it to false")
   @visibility(Lifecycle.Read, Lifecycle.Update)
   destroyed: boolean;
@@ -1530,6 +1537,7 @@ model LatestLinkedSaaSResponse {
   @doc("SaaS resource id")
   saaSResourceId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LatestLinkedSaaSResponse.isHiddenSaaS has a boolean wire value; preserve the published property contract."
   @doc("Flag indicating if the SaaS resource is hidden")
   isHiddenSaaS?: boolean;
 }
@@ -1552,6 +1560,7 @@ interface SaaSOperationGroup {
 @added(Versions.v2026_05_01_preview)
 @doc("Soft-deletion (destroyed) state of a resource")
 model DestroyedStateProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DestroyedStateProperties.destroyed has a boolean wire value; preserve the published property contract."
   @doc("If false, the resource is active; if true, the resource has been destroyed")
   @visibility(Lifecycle.Read)
   destroyed: boolean;
@@ -1600,6 +1609,7 @@ model VolumeGroupSnapshotProperties {
   @visibility(Lifecycle.Read)
   createdAt?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VolumeGroupSnapshotProperties.createdByPolicy has a boolean wire value; preserve the published property contract."
   @doc("Whether the snapshot was created by a protection policy")
   @visibility(Lifecycle.Read)
   createdByPolicy?: boolean;
@@ -1703,14 +1713,17 @@ interface VolumeGroupSnapshots {
       @query("$filter")
       filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByVolumeGroup.orderby retains the $orderby query parameter; preserve wire compatibility."
       @doc("OData order-by expression (e.g. $orderby=name asc)")
       @query("$orderby")
       orderby?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByVolumeGroup.top retains the $top query parameter; preserve wire compatibility."
       @doc("Maximum number of results to return per page")
       @query("$top")
       top?: int32;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByVolumeGroup.skip retains the $skip query parameter; preserve wire compatibility."
       @doc("Number of results to skip (page offset)")
       @query("$skip")
       skip?: int32;

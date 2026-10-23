@@ -553,6 +553,7 @@ model MarketplaceProperties {
   /**
    * The estimated usage is subject to change.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MarketplaceProperties.isEstimated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEstimated?: boolean;
 
@@ -623,6 +624,7 @@ model MarketplaceProperties {
   /**
    * Flag indicating whether this is a recurring charge or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MarketplaceProperties.isRecurringCharge has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isRecurringCharge?: boolean;
 }
@@ -777,6 +779,7 @@ model Notification {
   /**
    * The notification is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Notification.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -1032,6 +1035,7 @@ model BalanceProperties {
   /**
    * Price is hidden or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BalanceProperties.priceHidden has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   priceHidden?: boolean;
 
@@ -2496,6 +2500,7 @@ model EventProperties {
   /**
    * If true, the listed details are based on an estimation and it will be subjected to change.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EventProperties.isEstimatedBalance has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEstimatedBalance?: boolean;
 
@@ -2683,6 +2688,7 @@ model LotProperties {
   /**
    * If true, the listed details are based on an estimation and it will be subjected to change.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LotProperties.isEstimatedBalance has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEstimatedBalance?: boolean;
 
@@ -2756,6 +2762,7 @@ model CreditSummaryProperties {
   /**
    * If true, the listed details are based on an estimation and it will be subjected to change.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CreditSummaryProperties.isEstimatedBalance has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEstimatedBalance?: boolean;
 
@@ -3031,6 +3038,7 @@ model LegacyUsageDetailProperties {
   /**
    * Is Azure Credit Eligible.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LegacyUsageDetailProperties.isAzureCreditEligible has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isAzureCreditEligible?: boolean;
 
@@ -3386,6 +3394,7 @@ model ModernUsageDetailProperties {
   /**
    * Determines if the cost is eligible to be paid for using Azure credits.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ModernUsageDetailProperties.isAzureCreditEligible has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isAzureCreditEligible?: boolean;
 
@@ -4182,6 +4191,7 @@ model ModernChargeSummaryProperties {
   /**
    * Is charge Invoiced
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ModernChargeSummaryProperties.isInvoiced has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isInvoiced?: boolean;
 

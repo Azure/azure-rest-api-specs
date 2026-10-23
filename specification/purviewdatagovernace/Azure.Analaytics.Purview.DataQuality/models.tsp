@@ -901,6 +901,7 @@ model AssetMetadata {
   /**
    * Soft deletion flag indicating if the observer has been logically deleted
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AssetMetadata.isDeleted has a boolean wire value; preserve the published property contract."
   @doc("Soft deletion flag")
   isDeleted?: boolean;
 
@@ -961,6 +962,7 @@ model AssetMetadata {
   @doc("Project ID for Google Big Query type of data asset")
   projectId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AssetMetadata.isDQAsset has a boolean wire value; preserve the published property contract."
   @doc("Flag indicating if the asset is a Data Quality asset")
   isDQAsset?: boolean;
 }
@@ -1115,6 +1117,7 @@ model ScheduleEntityResponse {
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
     typeProperties: {
       timezone?: string;
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScheduleEntityResponse.isScheduled has a boolean wire value; preserve the published property contract."
       isScheduled?: boolean;
       triggerTime?: utcDateTime;
     };
@@ -1207,6 +1210,7 @@ model ScheduleEntity {
       /**
        * Flag indicating if the schedule is active for automatic execution
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScheduleEntity.isScheduled has a boolean wire value; preserve the published property contract."
       @doc("Flag for automatic execution activation")
       isScheduled?: boolean;
 
@@ -1365,6 +1369,7 @@ model ScheduleEntityRequestResponse {
       /**
        * Flag indicating if the schedule is active for automatic execution
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScheduleEntityRequestResponse.isScheduled has a boolean wire value; preserve the published property contract."
       @doc("Flag for automatic execution activation")
       isScheduled?: boolean;
 
@@ -1714,6 +1719,7 @@ model JobMetadataEntity {
   /**
    * Flag indicating whether redundancy validation checks are enabled for this job
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing JobMetadataEntity.redundancyCheck has a boolean wire value; preserve the published property contract."
   @doc("Flag for redundancy validation checks")
   redundancyCheck?: boolean;
 
@@ -1941,6 +1947,7 @@ model JobHistoryEntity {
   accountId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing JobHistoryEntity.isDQAsset has a boolean wire value; preserve the published property contract."
   @doc("Flag indicating if the asset is a Data Quality asset")
   isDQAsset?: boolean;
 
@@ -1977,6 +1984,7 @@ model JobConfigDTO {
   /**
    * Flag enabling redundancy validation checks to prevent duplicate processing
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing JobConfigDTO.redundancyCheck has a boolean wire value; preserve the published property contract."
   @doc("Flag for redundancy validation checks")
   redundancyCheck?: boolean;
 
@@ -2095,6 +2103,7 @@ model CloneAssetRequest {
   /**
    * Whether the cloned asset is stand-alone (not tied to a data product).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CloneAssetRequest.isStandAloneAsset has a boolean wire value; preserve the published property contract."
   @doc("Whether the cloned asset is stand-alone")
   isStandAloneAsset?: boolean;
 
@@ -2128,6 +2137,7 @@ model CreateDqAssetRequest {
   @doc("Catalog asset identifier")
   catalogAssetId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CreateDqAssetRequest.isGovernedAssetFlag has a boolean wire value; preserve the published property contract."
   @doc("Whether the asset is governed")
   isGovernedAssetFlag?: boolean;
 }
@@ -2150,6 +2160,7 @@ model DqAssetResponse {
   @doc("Catalog asset identifier")
   catalogAssetId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DqAssetResponse.isGovernedAssetFlag has a boolean wire value; preserve the published property contract."
   @doc("Whether the asset is governed")
   isGovernedAssetFlag?: boolean;
 
@@ -2288,6 +2299,7 @@ model AssetMetadataObserverResponse {
   /**
    * Soft deletion flag indicating if the observer has been logically deleted
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AssetMetadataObserverResponse.isDeleted has a boolean wire value; preserve the published property contract."
   @doc("Soft deletion flag")
   isDeleted?: boolean;
 
@@ -2402,6 +2414,7 @@ model ScopedAssetMetadata {
  */
 @doc("Runtime configuration options for a scoped asset metadata entity.")
 model ScopedAssetMetadataRuntime {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScopedAssetMetadataRuntime.isErrorRowRequired has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether error row details should be captured.")
   isErrorRowRequired: boolean;
 
@@ -2432,6 +2445,7 @@ model DataSourceEntity {
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already existing body parameter"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataSourceEntity.isVNetEnabled has a boolean wire value; preserve the published property contract."
   @doc("Virtual Network connectivity flag.")
   isVNetEnabled?: boolean;
 
@@ -2721,6 +2735,7 @@ model DataSourceEntityResponse {
    * Flag indicating if the data source is configured for Virtual Network connectivity.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing property name"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataSourceEntityResponse.isVNetEnabled has a boolean wire value; preserve the published property contract."
   @doc("Virtual Network connectivity flag.")
   isVNetEnabled?: boolean;
 
@@ -3060,6 +3075,7 @@ model DataQualitySnapshotResponse {
           /**
            * Whether this is the primary dataset.
            */
+          #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DataQualitySnapshotResponse.primary has a boolean wire value; preserve the published property contract."
           @doc("Whether this is the primary dataset.")
           primary: boolean;
 
@@ -3295,6 +3311,7 @@ model OpinionEntity {
   @doc("Number of miscast rows identified during the opinion assessment")
   miscastRows: int64;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OpinionEntity.isClonedOpinion has a boolean wire value; preserve the published property contract."
   @doc("Indicates if the opinion is a cloned instance")
   isClonedOpinion: boolean;
 }
@@ -3364,6 +3381,7 @@ model AssetScopedMetadata {
  */
 @doc("Runtime configuration settings for asset processing")
 model AssetRuntimeConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AssetRuntimeConfiguration.isErrorRowRequired has a boolean wire value; preserve the published property contract."
   @doc("Whether error row is required during processing")
   isErrorRowRequired?: boolean;
 
@@ -3469,6 +3487,7 @@ model ScoreSnapshot {
   @doc("Origin asset identifier")
   originAssetId: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScoreSnapshot.isStandaloneAsset has a boolean wire value; preserve the published property contract."
   @doc("Is the asset standalone")
   isStandaloneAsset: boolean;
 
@@ -3575,6 +3594,7 @@ model SnapshotDataSource {
   region?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VNet is a well-known Azure term and follows established naming convention"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SnapshotDataSource.isVNetEnabled has a boolean wire value; preserve the published property contract."
   @doc("Whether VNet is enabled")
   isVNetEnabled?: boolean;
 
@@ -3800,6 +3820,7 @@ model Alert {
   @doc("Notification receivers for the alert")
   receivers: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Alert.enabledForFailedJobs has a boolean wire value; preserve the published property contract."
   @doc("Flag indicating whether failures automatically enable the alert")
   enabledForFailedJobs: boolean;
 

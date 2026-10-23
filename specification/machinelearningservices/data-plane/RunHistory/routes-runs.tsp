@@ -91,6 +91,7 @@ interface Runs {
       @query("$top") top?: int32;
 
       /** Whether to include count. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getChild.count has a boolean wire value; preserve the published property contract."
       @query("$count") count?: boolean;
     },
     PaginatedRunList
@@ -236,6 +237,7 @@ interface Runs {
       @query("$top") top?: int32;
 
       /** Whether to include count. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByCompute.count has a boolean wire value; preserve the published property contract."
       @query("$count") count?: boolean;
     },
     PaginatedRunList
@@ -315,6 +317,7 @@ interface Runs {
       @query("$top") top?: int32;
 
       /** Whether to include count. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getChildByExperimentId.count has a boolean wire value; preserve the published property contract."
       @query("$count") count?: boolean;
     },
     PaginatedRunList
@@ -542,6 +545,7 @@ interface Runs {
       @query("$top") top?: int32;
 
       /** Whether to include count. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getChildByExperimentName.count has a boolean wire value; preserve the published property contract."
       @query("$count") count?: boolean;
     },
     PaginatedRunList

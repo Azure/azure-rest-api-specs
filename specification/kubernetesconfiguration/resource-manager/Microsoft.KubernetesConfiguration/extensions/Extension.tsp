@@ -175,6 +175,8 @@ interface Extensions {
       /**
        * Delete the extension resource in Azure - not the normal asynchronous delete.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.forceDelete has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.forceDelete retains the forceDelete query parameter; preserve wire compatibility."
       @query("forceDelete")
       forceDelete?: boolean;
     },

@@ -33,6 +33,7 @@ interface PrivateLinkResources {
    * Gets the private link resources
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/legacy-type-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listPrivateLinkResources retains its response and SDK paging behavior; preserve published compatibility."
   listPrivateLinkResources is PrivateLinkOperations.ListSinglePageByParent<ApiManagementServiceResource>;
 }
 @@doc(PrivateLinkResource.properties, "Resource properties.");

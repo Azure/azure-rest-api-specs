@@ -31,6 +31,7 @@ op getCertificates is KeyVaultOperation<
     /**
      * Specifies whether to include certificates which are not completely provisioned.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getCertificates.includePending has a boolean wire value; preserve the published property contract."
     @query("includePending")
     includePending?: boolean;
   },
@@ -550,6 +551,7 @@ op getDeletedCertificates is KeyVaultOperation<
     /**
      * Specifies whether to include certificates which are not completely provisioned.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getDeletedCertificates.includePending has a boolean wire value; preserve the published property contract."
     @query("includePending")
     includePending?: boolean;
   },

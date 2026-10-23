@@ -253,6 +253,7 @@ model Notifications {
   @doc("The action group IDs to notify")
   actionGroupIds?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Notifications.excludeDefaultActionGroups has a boolean wire value; preserve the published property contract."
   @doc("Whether to exclude default action groups from notifications")
   excludeDefaultActionGroups?: boolean;
 }

@@ -46,6 +46,7 @@ interface CapacityReservations {
       /**
        * The expand expression to apply on the operation. 'InstanceView' retrieves a snapshot of the runtime properties of the capacity reservation that is managed by the platform and can change outside of control plane operations.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: CapacityReservationInstanceViewTypes;
     }
@@ -99,6 +100,7 @@ interface CapacityReservations {
       /**
        * The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByCapacityReservationGroup.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: ExpandTypesForGetCapacityReservationGroups;
     },

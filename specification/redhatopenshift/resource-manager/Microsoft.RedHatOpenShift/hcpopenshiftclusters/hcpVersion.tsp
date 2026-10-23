@@ -30,6 +30,7 @@ model HcpOpenShiftVersionProperties {
   channelGroup: string;
 
   /** Enabled indicates if this version can be used to create clusters. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HcpOpenShiftVersionProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /** EndOfLifeTimestamp is the date and time when this version will reach End of Life. */

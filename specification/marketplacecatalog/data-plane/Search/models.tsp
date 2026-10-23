@@ -105,9 +105,11 @@ model ProductSummary {
   @doc("A unique commercial identifier used to reference a specific product in transactional operations such as purchases, invoicing, and metering. This Id  services entitlement validation, and billing across systems")
   productId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ProductSummary.hasRiPlans has a boolean wire value; preserve the published property contract."
   @doc("Indication whether the product has plans with reservations")
   hasRiPlans?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ProductSummary.hasMarketplaceFootprint has a boolean wire value; preserve the published property contract."
   @doc("Indication of whether product appears in Azure Marketplace")
   hasMarketplaceFootprint?: boolean;
 
@@ -180,6 +182,7 @@ model PlanSummary {
   @doc("Plan CategoryIds")
   categoryIds?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PlanSummary.hasProtectedArtifacts has a boolean wire value; preserve the published property contract."
   @doc("Set to true if plan has artifacts that are to be hidden for non authenticated users")
   hasProtectedArtifacts?: boolean;
 
@@ -204,9 +207,11 @@ model PlanSummary {
   @doc("The order the plan is displayed in the 'Plans' table. Note that lower numbers appear first.")
   displayRank?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PlanSummary.isPrivate has a boolean wire value; preserve the published property contract."
   @doc("Indication that the plan is accessible to restricted audience only")
   isPrivate?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PlanSummary.hasRi has a boolean wire value; preserve the published property contract."
   @doc("Indication whether the SKU supports reservations")
   hasRi?: boolean;
 }

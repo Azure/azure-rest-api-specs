@@ -63,24 +63,28 @@ interface Configurations {
       /**
        * The tags of the server configuration.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByServer.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string;
 
       /**
        * The keyword of the server configuration.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByServer.keyword retains the keyword query parameter; preserve wire compatibility."
       @query("keyword")
       keyword?: string;
 
       /**
        * The page of the server configuration.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByServer.page retains the page query parameter; preserve wire compatibility."
       @query("page")
       page?: int32;
 
       /**
        * The pageSize of the server configuration.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByServer.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @query("pageSize")
       pageSize?: int32;
     },

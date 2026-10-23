@@ -97,6 +97,8 @@ interface SubscriptionContracts {
        *  - If false, do not send any email notification for change of state of subscription
        *  - If true, send email notification of change of state of subscription
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing createOrUpdate.notify has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing createOrUpdate.notify retains the notify query parameter; preserve wire compatibility."
       @query("notify")
       notify?: boolean;
 
@@ -110,6 +112,7 @@ interface SubscriptionContracts {
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing createOrUpdate.appType retains the appType query parameter; preserve wire compatibility."
       @query("appType")
       appType?: AppType;
     },
@@ -143,6 +146,8 @@ interface SubscriptionContracts {
        *  - If false, do not send any email notification for change of state of subscription
        *  - If true, send email notification of change of state of subscription
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing update.notify has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing update.notify retains the notify query parameter; preserve wire compatibility."
       @query("notify")
       notify?: boolean;
 
@@ -156,6 +161,7 @@ interface SubscriptionContracts {
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing update.appType retains the appType query parameter; preserve wire compatibility."
       @query("appType")
       appType?: AppType;
     },
@@ -198,6 +204,7 @@ interface SubscriptionContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -205,6 +212,7 @@ interface SubscriptionContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -314,6 +322,7 @@ interface UserSubscription {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -321,6 +330,7 @@ interface UserSubscription {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -409,6 +419,8 @@ interface WorkspaceSubscription {
        *  - If false, do not send any email notification for change of state of subscription
        *  - If true, send email notification of change of state of subscription
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing createOrUpdate.notify has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing createOrUpdate.notify retains the notify query parameter; preserve wire compatibility."
       @query("notify")
       notify?: boolean;
 
@@ -422,6 +434,7 @@ interface WorkspaceSubscription {
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing createOrUpdate.appType retains the appType query parameter; preserve wire compatibility."
       @query("appType")
       appType?: AppType;
     },
@@ -455,6 +468,8 @@ interface WorkspaceSubscription {
        *  - If false, do not send any email notification for change of state of subscription
        *  - If true, send email notification of change of state of subscription
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing update.notify has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing update.notify retains the notify query parameter; preserve wire compatibility."
       @query("notify")
       notify?: boolean;
 
@@ -468,6 +483,7 @@ interface WorkspaceSubscription {
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing update.appType retains the appType query parameter; preserve wire compatibility."
       @query("appType")
       appType?: AppType;
     },
@@ -510,6 +526,7 @@ interface WorkspaceSubscription {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -517,6 +534,7 @@ interface WorkspaceSubscription {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;

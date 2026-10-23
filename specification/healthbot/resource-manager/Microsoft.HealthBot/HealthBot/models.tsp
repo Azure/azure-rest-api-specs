@@ -411,6 +411,7 @@ model OperationDetail {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OperationDetail.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**

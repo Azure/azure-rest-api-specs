@@ -70,6 +70,7 @@ interface AvailableVersions {
   listByLocation is ArmResourceListByParent<
     Resource = AvailableVersion,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByLocation.kubernetesVersion retains the kubernetesVersion query parameter; preserve wire compatibility."
       @doc("Kubernetes version to filter profiles")
       @query("kubernetesVersion")
       kubernetesVersion?: string;

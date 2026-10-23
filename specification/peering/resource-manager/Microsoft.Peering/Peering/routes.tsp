@@ -27,6 +27,7 @@ interface CdnPeeringPrefixesOperationGroup {
       /**
        * The peering location.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.peeringLocation retains the peeringLocation query parameter; preserve wire compatibility."
       @query("peeringLocation")
       peeringLocation: string;
     }
@@ -73,24 +74,28 @@ interface LegacyPeeringsOperationGroup {
       /**
        * The location of the peering.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.peeringLocation retains the peeringLocation query parameter; preserve wire compatibility."
       @query("peeringLocation")
       peeringLocation: string;
 
       /**
        * The kind of the peering.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.kind retains the kind query parameter; preserve wire compatibility."
       @query("kind")
       kind: LegacyPeeringsKind;
 
       /**
        * The ASN number associated with a legacy peering.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.asn retains the asn query parameter; preserve wire compatibility."
       @query("asn")
       asn?: int32;
 
       /**
        * The direct peering type.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.directPeeringType retains the directPeeringType query parameter; preserve wire compatibility."
       @query("directPeeringType")
       directPeeringType?: DirectPeeringType;
     }
@@ -111,18 +116,21 @@ interface LookingGlassOperationGroup {
       /**
        * The command to be executed: ping, traceroute, bgpRoute.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing invoke POST contract uses command in the query; preserve wire compatibility."
       @query("command")
       command: LookingGlassCommand;
 
       /**
        * The type of the source: Edge site or Azure Region.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing invoke POST contract uses sourceType in the query; preserve wire compatibility."
       @query("sourceType")
       sourceType: LookingGlassSourceType;
 
       /**
        * The location of the source.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing invoke POST contract uses sourceLocation in the query; preserve wire compatibility."
       @query("sourceLocation")
       sourceLocation: string;
 
@@ -130,6 +138,7 @@ interface LookingGlassOperationGroup {
        * The IP address of the destination.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing parameter name"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing invoke POST contract uses destinationIP in the query; preserve wire compatibility."
       @query("destinationIP")
       destinationIP: string;
     }
@@ -152,12 +161,14 @@ interface PeeringLocationsOperationGroup {
       /**
        * The kind of the peering.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.kind retains the kind query parameter; preserve wire compatibility."
       @query("kind")
       kind: PeeringLocationsKind;
 
       /**
        * The type of direct peering.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.directPeeringType retains the directPeeringType query parameter; preserve wire compatibility."
       @query("directPeeringType")
       directPeeringType?: PeeringLocationsDirectPeeringType;
     }
@@ -195,6 +206,7 @@ interface PeeringServiceLocationsOperationGroup {
       /**
        * The country of interest, in which the locations are to be present.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.country retains the country query parameter; preserve wire compatibility."
       @query("country")
       country?: string;
     }

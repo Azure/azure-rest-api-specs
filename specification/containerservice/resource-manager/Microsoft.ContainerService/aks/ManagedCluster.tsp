@@ -54,6 +54,7 @@ model AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem {
   /**
    * Whether this version is the default agent pool version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem.default has a boolean wire value; preserve the published property contract."
   default?: boolean;
 
   /**
@@ -64,6 +65,7 @@ model AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem {
   /**
    * Whether Kubernetes version is currently in preview.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem.isPreview has a boolean wire value; preserve the published property contract."
   isPreview?: boolean;
 }
 
@@ -323,6 +325,8 @@ interface ManagedClusters {
        * ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.ignore-pod-disruption-budget has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.ignore-pod-disruption-budget retains the ignore-pod-disruption-budget query parameter; preserve wire compatibility."
       @added(Versions.v2026_08_02_preview)
       @query("ignore-pod-disruption-budget")
       `ignore-pod-disruption-budget`?: boolean;
@@ -376,6 +380,7 @@ interface ManagedClusters {
        * server fqdn type for credentials to be returned
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listClusterAdminCredentials POST contract uses server-fqdn in the query; preserve wire compatibility."
       @query("server-fqdn")
       `server-fqdn`?: string;
     }
@@ -395,12 +400,14 @@ interface ManagedClusters {
        * server fqdn type for credentials to be returned
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listClusterUserCredentials POST contract uses server-fqdn in the query; preserve wire compatibility."
       @query("server-fqdn")
       `server-fqdn`?: string;
 
       /**
        * Only apply to AAD clusters, specifies the format of returned kubeconfig. Format 'azure' will return azure auth-provider kubeconfig; format 'exec' will return exec format kubeconfig, which requires kubelogin binary in the path.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listClusterUserCredentials POST contract uses format in the query; preserve wire compatibility."
       @query("format")
       format?: Format;
     }
@@ -420,6 +427,7 @@ interface ManagedClusters {
        * server fqdn type for credentials to be returned
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing listClusterMonitoringUserCredentials POST contract uses server-fqdn in the query; preserve wire compatibility."
       @query("server-fqdn")
       `server-fqdn`?: string;
     }
@@ -584,6 +592,7 @@ interface ManagedClusters {
   /**
    * See [supported Kubernetes versions](https://docs.microsoft.com/azure/aks/supported-kubernetes-versions) for more details about the version lifecycle.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getAvailableAgentPoolVersions retains its response and SDK paging behavior; preserve published compatibility."
   @tag("AgentPools")
   @get
   @action("availableAgentPoolVersions")
@@ -597,6 +606,7 @@ interface ManagedClusters {
   /**
    * To learn more about private clusters, see: https://docs.microsoft.com/azure/aks/private-clusters
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing privateLinkResourcesList retains its response and SDK paging behavior; preserve published compatibility."
   @tag("privateLinkResources")
   @get
   @action("privateLinkResources")

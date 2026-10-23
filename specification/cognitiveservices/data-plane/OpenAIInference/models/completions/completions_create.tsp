@@ -85,6 +85,7 @@ model CompletionsOptions {
   @doc("The suffix that comes after a completion of inserted text")
   suffix?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CompletionsOptions.echo has a boolean wire value; preserve the published property contract."
   @doc("""
     A value specifying whether completions responses should include input prompts as prefixes to
     their generated output.
@@ -127,6 +128,7 @@ model CompletionsOptions {
   @clientName("GenerationSampleCount", "csharp")
   bestOf?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CompletionsOptions.stream has a boolean wire value; preserve the published property contract."
   @doc("""
     A value indicating whether chat completions should be streamed for this request.
     """)

@@ -72,6 +72,7 @@ interface ImageDefinitions {
   listByDevCenterCatalog is ImageDefinitionOps.List<
     ImageDefinition,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByDevCenterCatalog.$top retains the $top query parameter; preserve wire compatibility."
       @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
@@ -143,6 +144,7 @@ interface ProjectCatalogImageDefinitions {
   listByProjectCatalog is ProjectCatalogImageDefinitionOps.List<
     ImageDefinition,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByProjectCatalog.$top retains the $top query parameter; preserve wire compatibility."
       @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;

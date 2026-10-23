@@ -471,8 +471,10 @@ model FileClientParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
   fileRequestIntent?: ShareTokenIntent;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FileClientParameters.allowTrailingDot has a boolean wire value; preserve the published property contract."
   allowTrailingDot?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FileClientParameters.allowSourceTrailingDot has a boolean wire value; preserve the published property contract."
   allowSourceTrailingDot?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
@@ -484,8 +486,10 @@ model DirectoryClientParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
   fileRequestIntent?: ShareTokenIntent;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DirectoryClientParameters.allowTrailingDot has a boolean wire value; preserve the published property contract."
   allowTrailingDot?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DirectoryClientParameters.allowSourceTrailingDot has a boolean wire value; preserve the published property contract."
   allowSourceTrailingDot?: boolean;
 }
 

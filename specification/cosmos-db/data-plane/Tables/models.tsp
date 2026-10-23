@@ -238,12 +238,15 @@ model Logging {
   @Xml.name("Version") version: string;
 
   /** Whether delete operation is logged. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Logging.delete has a boolean wire value; preserve the published property contract."
   @Xml.name("Delete") delete: boolean;
 
   /** Whether read operation is logged. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Logging.read has a boolean wire value; preserve the published property contract."
   @Xml.name("Read") read: boolean;
 
   /** Whether write operation is logged. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Logging.write has a boolean wire value; preserve the published property contract."
   @Xml.name("Write") write: boolean;
 
   /** The retention policy of the logs. */
@@ -253,6 +256,7 @@ model Logging {
 /** The retention policy. */
 model RetentionPolicy {
   /** Whether to enable the retention policy. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RetentionPolicy.enabled has a boolean wire value; preserve the published property contract."
   @Xml.name("Enabled") enabled: boolean;
 
   /**
@@ -272,12 +276,14 @@ model Metrics {
   /**
    * Indicates whether metrics are enabled for the Table service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Metrics.enabled has a boolean wire value; preserve the published property contract."
   @Xml.name("Enabled") enabled: boolean;
 
   /**
    * Indicates whether metrics should generate summary statistics for called API
    * operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Metrics.includeApis has a boolean wire value; preserve the published property contract."
   @Xml.name("IncludeAPIs") includeApis?: boolean;
 
   /** The retention policy of the metrics. */

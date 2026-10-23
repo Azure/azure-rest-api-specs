@@ -62,6 +62,7 @@ model RecoveryResourceProperties {
   @doc("Reasons why inclusion of the resource in a recovery plan is disabled.")
   inclusionDisabledReasons?: ResourceInclusionDisabledReason[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RecoveryResourceProperties.needsAttention has a boolean wire value; preserve the published property contract."
   @doc("Indicating if resource needs user attention and action, details will be found in attentionReasons")
   @visibility(Lifecycle.Read)
   needsAttention?: boolean = false;

@@ -72,6 +72,7 @@ model SecretsManagerResourcePolicyProperties {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsSecretsManagerResourcePolicy")
 model AwsSecretsManagerResourcePolicyProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsSecretsManagerResourcePolicyProperties.blockPublicPolicy has a boolean wire value; preserve the published property contract."
   @doc("Property blockPublicPolicy")
   blockPublicPolicy?: boolean;
 

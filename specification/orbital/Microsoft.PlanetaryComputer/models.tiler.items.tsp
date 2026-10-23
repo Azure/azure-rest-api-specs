@@ -31,6 +31,7 @@ model StatisticsQueryParameters {
   /**
    * Return statistics for categorical dataset.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StatisticsQueryParameters.categorical has a boolean wire value; preserve the published property contract."
   @query("categorical")
   categorical?: boolean;
 

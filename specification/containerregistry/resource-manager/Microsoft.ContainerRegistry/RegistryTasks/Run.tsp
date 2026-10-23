@@ -52,6 +52,7 @@ interface Runs {
       /**
        * $top is supported for get list of runs, which limits the maximum number of runs to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },

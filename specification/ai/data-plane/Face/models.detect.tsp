@@ -18,6 +18,7 @@ alias FaceDetectionOptions = {
   @query
   recognitionModel?: RecognitionModel = "recognition_01";
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FaceDetectionOptions.returnFaceId has a boolean wire value; preserve the published property contract."
   @doc("Return faceIds of the detected faces or not. The default value is true.")
   @query
   returnFaceId?: boolean = true;
@@ -26,10 +27,12 @@ alias FaceDetectionOptions = {
   @query
   returnFaceAttributes?: FaceAttributeType[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FaceDetectionOptions.returnFaceLandmarks has a boolean wire value; preserve the published property contract."
   @doc("Return face landmarks of the detected faces or not. The default value is false.")
   @query
   returnFaceLandmarks?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FaceDetectionOptions.returnRecognitionModel has a boolean wire value; preserve the published property contract."
   @doc("Return 'recognitionModel' or not. The default value is false. This is only applicable when returnFaceId = true.")
   @query
   returnRecognitionModel?: boolean = false;
@@ -310,6 +313,7 @@ model HairProperties {
   @maxValue(1)
   bald: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HairProperties.invisible has a boolean wire value; preserve the published property contract."
   @doc("A boolean value describing whether the hair is visible in the image.")
   invisible: boolean;
 
@@ -359,12 +363,15 @@ union HairColorType {
 
 @doc("Properties describing occlusions on a given face.")
 model OcclusionProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OcclusionProperties.foreheadOccluded has a boolean wire value; preserve the published property contract."
   @doc("A boolean value indicating whether forehead is occluded.")
   foreheadOccluded: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OcclusionProperties.eyeOccluded has a boolean wire value; preserve the published property contract."
   @doc("A boolean value indicating whether eyes are occluded.")
   eyeOccluded: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OcclusionProperties.mouthOccluded has a boolean wire value; preserve the published property contract."
   @doc("A boolean value indicating whether the mouth is occluded.")
   mouthOccluded: boolean;
 }
@@ -471,6 +478,7 @@ union NoiseLevel {
 
 @doc("Properties describing the presence of a mask on a given face.")
 model MaskProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MaskProperties.noseAndMouthCovered has a boolean wire value; preserve the published property contract."
   @doc("A boolean value indicating whether nose and mouth are covered.")
   noseAndMouthCovered: boolean;
 

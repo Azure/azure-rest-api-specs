@@ -48,6 +48,7 @@ interface PartnerTransfers {
   /**
    * Sends a request to a user in a customer's billing account to transfer billing ownership of their subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing initiate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @tag("Transfers")
   initiate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     PartnerTransferDetails,

@@ -60,6 +60,7 @@ interface ConnectionMonitorResults {
       /**
        * Value indicating whether connection monitor V1 should be migrated to V2 format.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing createOrUpdate.migrate retains the migrate query parameter; preserve wire compatibility."
       @query("migrate")
       migrate?: string;
     },

@@ -483,6 +483,7 @@ model SBNamespaceProperties {
   /**
    * Enabling this property creates a Premium Service Bus Namespace in regions supported availability zones.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBNamespaceProperties.zoneRedundant has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   zoneRedundant?: boolean;
 
@@ -499,6 +500,7 @@ model SBNamespaceProperties {
   /**
    * This property disables SAS authentication for the Service Bus namespace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBNamespaceProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 
   /**
@@ -549,6 +551,7 @@ model Encryption {
   /**
    * Enable Infrastructure Encryption (Double Encryption)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Encryption.requireInfrastructureEncryption has a boolean wire value; preserve the published property contract."
   requireInfrastructureEncryption?: boolean;
 }
 
@@ -837,6 +840,7 @@ model SBNamespaceUpdateProperties {
   /**
    * This property disables SAS authentication for the Service Bus namespace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBNamespaceUpdateProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 
   /**
@@ -881,6 +885,7 @@ model FailOverProperties {
   /**
    * If Force is false then graceful failover is attempted after ensuring no data loss. If Force flag is set to true, Forced failover is attempted with possible data loss.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FailOverProperties.force has a boolean wire value; preserve the published property contract."
   force?: boolean;
 }
 
@@ -970,6 +975,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * True if the ServiceBus namespace is backed by another Azure resource and not visible to end users.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkSecurityPerimeterConfigurationProperties.isBackingResource has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isBackingResource?: boolean;
 
@@ -1167,6 +1173,7 @@ model Operation {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -1268,6 +1275,7 @@ model FailoverPropertiesProperties {
    * Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FailoverPropertiesProperties.IsSafeFailover has a boolean wire value; preserve the published property contract."
   IsSafeFailover?: boolean;
 }
 
@@ -1316,6 +1324,7 @@ model NetworkRuleSetProperties {
   /**
    * Value that indicates whether Trusted Service Access is Enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkRuleSetProperties.trustedServiceAccessEnabled has a boolean wire value; preserve the published property contract."
   trustedServiceAccessEnabled?: boolean;
 
   /**
@@ -1354,6 +1363,7 @@ model NWRuleSetVirtualNetworkRules {
   /**
    * Value that indicates whether to ignore missing VNet Service Endpoint
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NWRuleSetVirtualNetworkRules.ignoreMissingVnetServiceEndpoint has a boolean wire value; preserve the published property contract."
   ignoreMissingVnetServiceEndpoint?: boolean;
 }
 
@@ -1522,11 +1532,13 @@ model SBQueueProperties {
   /**
    * A value indicating if this queue requires duplicate detection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBQueueProperties.requiresDuplicateDetection has a boolean wire value; preserve the published property contract."
   requiresDuplicateDetection?: boolean;
 
   /**
    * A value that indicates whether the queue supports the concept of sessions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBQueueProperties.requiresSession has a boolean wire value; preserve the published property contract."
   requiresSession?: boolean;
 
   /**
@@ -1537,6 +1549,7 @@ model SBQueueProperties {
   /**
    * A value that indicates whether this queue has dead letter support when a message expires.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBQueueProperties.deadLetteringOnMessageExpiration has a boolean wire value; preserve the published property contract."
   deadLetteringOnMessageExpiration?: boolean;
 
   /**
@@ -1557,6 +1570,7 @@ model SBQueueProperties {
   /**
    * Value that indicates whether server-side batched operations are enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBQueueProperties.enableBatchedOperations has a boolean wire value; preserve the published property contract."
   enableBatchedOperations?: boolean;
 
   /**
@@ -1567,11 +1581,13 @@ model SBQueueProperties {
   /**
    * A value that indicates whether the queue is to be partitioned across multiple message brokers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBQueueProperties.enablePartitioning has a boolean wire value; preserve the published property contract."
   enablePartitioning?: boolean;
 
   /**
    * A value that indicates whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBQueueProperties.enableExpress has a boolean wire value; preserve the published property contract."
   enableExpress?: boolean;
 
   /**
@@ -1688,6 +1704,7 @@ model SBTopicProperties {
   /**
    * Value indicating if this topic requires duplicate detection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBTopicProperties.requiresDuplicateDetection has a boolean wire value; preserve the published property contract."
   requiresDuplicateDetection?: boolean;
 
   /**
@@ -1698,6 +1715,7 @@ model SBTopicProperties {
   /**
    * Value that indicates whether server-side batched operations are enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBTopicProperties.enableBatchedOperations has a boolean wire value; preserve the published property contract."
   enableBatchedOperations?: boolean;
 
   /**
@@ -1708,6 +1726,7 @@ model SBTopicProperties {
   /**
    * Value that indicates whether the topic supports ordering.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBTopicProperties.supportOrdering has a boolean wire value; preserve the published property contract."
   supportOrdering?: boolean;
 
   /**
@@ -1718,11 +1737,13 @@ model SBTopicProperties {
   /**
    * Value that indicates whether the topic to be partitioned across multiple message brokers is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBTopicProperties.enablePartitioning has a boolean wire value; preserve the published property contract."
   enablePartitioning?: boolean;
 
   /**
    * Value that indicates whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBTopicProperties.enableExpress has a boolean wire value; preserve the published property contract."
   enableExpress?: boolean;
 
   /**
@@ -1774,6 +1795,7 @@ model Action {
   /**
    * Value that indicates whether the rule action requires preprocessing.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Action.requiresPreprocessing has a boolean wire value; preserve the published property contract."
   requiresPreprocessing?: boolean = true;
 }
 
@@ -1794,6 +1816,7 @@ model SqlFilter {
   /**
    * Value that indicates whether the rule action requires preprocessing.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlFilter.requiresPreprocessing has a boolean wire value; preserve the published property contract."
   requiresPreprocessing?: boolean = true;
 }
 
@@ -1850,6 +1873,7 @@ model CorrelationFilter {
   /**
    * Value that indicates whether the rule action requires preprocessing.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CorrelationFilter.requiresPreprocessing has a boolean wire value; preserve the published property contract."
   requiresPreprocessing?: boolean = true;
 }
 
@@ -1900,6 +1924,7 @@ model SBSubscriptionProperties {
   /**
    * Value indicating if a subscription supports the concept of sessions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBSubscriptionProperties.requiresSession has a boolean wire value; preserve the published property contract."
   requiresSession?: boolean;
 
   /**
@@ -1910,11 +1935,13 @@ model SBSubscriptionProperties {
   /**
    * Value that indicates whether a subscription has dead letter support on filter evaluation exceptions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBSubscriptionProperties.deadLetteringOnFilterEvaluationExceptions has a boolean wire value; preserve the published property contract."
   deadLetteringOnFilterEvaluationExceptions?: boolean;
 
   /**
    * Value that indicates whether a subscription has dead letter support when a message expires.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBSubscriptionProperties.deadLetteringOnMessageExpiration has a boolean wire value; preserve the published property contract."
   deadLetteringOnMessageExpiration?: boolean;
 
   /**
@@ -1935,6 +1962,7 @@ model SBSubscriptionProperties {
   /**
    * Value that indicates whether server-side batched operations are enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBSubscriptionProperties.enableBatchedOperations has a boolean wire value; preserve the published property contract."
   enableBatchedOperations?: boolean;
 
   /**
@@ -1955,6 +1983,7 @@ model SBSubscriptionProperties {
   /**
    * Value that indicates whether the subscription has an affinity to the client id.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBSubscriptionProperties.isClientAffine has a boolean wire value; preserve the published property contract."
   isClientAffine?: boolean;
 
   /**
@@ -1981,11 +2010,13 @@ model SBClientAffineProperties {
   /**
    * For client-affine subscriptions, this value indicates whether the subscription is durable or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBClientAffineProperties.isDurable has a boolean wire value; preserve the published property contract."
   isDurable?: boolean;
 
   /**
    * For client-affine subscriptions, this value indicates whether the subscription is shared or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SBClientAffineProperties.isShared has a boolean wire value; preserve the published property contract."
   isShared?: boolean;
 }
 
@@ -2012,6 +2043,7 @@ model CheckNameAvailabilityResult {
   /**
    * Value indicating namespace is availability, true if the namespace is available; otherwise, false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**

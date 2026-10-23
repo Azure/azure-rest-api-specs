@@ -65,6 +65,7 @@ model LightsailBucketProperties {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsLightsailBucket")
 model AwsLightsailBucketProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsLightsailBucketProperties.ableToUpdateBundle has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the bundle that is currently applied to a bucket can be changed to another bundle. You can update a bucket's bundle only one time within a monthly AWS billing cycle.")
   ableToUpdateBundle?: boolean;
 
@@ -80,6 +81,7 @@ model AwsLightsailBucketProperties {
   @doc("The ID of the bundle to use for the bucket.")
   bundleId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsLightsailBucketProperties.objectVersioning has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether to enable or disable versioning of objects in the bucket.")
   objectVersioning?: boolean;
 
@@ -103,6 +105,7 @@ model AwsLightsailBucketProperties {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AccessRules")
 model AccessRules {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccessRules.allowPublicOverrides has a boolean wire value; preserve the published property contract."
   @doc("A Boolean value that indicates whether the access control list (ACL) permissions that are applied to individual objects override the getObject option that is currently specified.")
   allowPublicOverrides?: boolean;
 

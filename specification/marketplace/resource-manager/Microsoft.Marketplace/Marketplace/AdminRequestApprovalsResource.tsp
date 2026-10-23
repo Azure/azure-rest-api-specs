@@ -38,6 +38,7 @@ interface AdminRequestApprovalsResources {
       /**
        * The publisher id of this offer.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getAdminRequestApproval.publisherId retains the publisherId query parameter; preserve wire compatibility."
       @query("publisherId")
       publisherId: string;
     },
@@ -48,6 +49,7 @@ interface AdminRequestApprovalsResources {
    * Update the admin action, weather the request is approved or rejected and the approved plans
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing updateAdminRequestApproval retains its tenant-scoped route; preserve published resource IDs and API paths."
   updateAdminRequestApproval is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
     AdminRequestApprovalsResource,
     Response = ArmResourceUpdatedResponse<AdminRequestApprovalsResource>,
@@ -58,6 +60,8 @@ interface AdminRequestApprovalsResources {
   /**
    * Get list of admin request approvals
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing adminRequestApprovalsList retains its response and SDK paging behavior; preserve published compatibility."
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing adminRequestApprovalsList SDK method name; renaming it would break client compatibility."
   adminRequestApprovalsList is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     AdminRequestApprovalsResource,
     Response = ArmResponse<AdminRequestApprovalsList>,

@@ -129,6 +129,7 @@ model RetentionPolicy {
   /**
    * a value indicating whether the retention policy is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RetentionPolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -176,6 +177,7 @@ model EmailReceiver {
   /**
    * Indicates whether to use common alert schema.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EmailReceiver.useCommonAlertSchema has a boolean wire value; preserve the published property contract."
   useCommonAlertSchema?: boolean = false;
 
   /**
@@ -253,6 +255,7 @@ model ActionGroupPatch {
   /**
    * Indicates whether this action group is enabled. If an action group is not enabled, then none of its actions will be activated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActionGroupPatch.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean = true;
 }
 

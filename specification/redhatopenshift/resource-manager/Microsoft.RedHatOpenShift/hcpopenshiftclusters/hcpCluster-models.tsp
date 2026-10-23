@@ -821,6 +821,7 @@ model NodePoolProperties {
    * when more than 2 Nodes are unhealthy at the same time, giving time for
    * the cluster to stabilize or for the user to manually intervene.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NodePoolProperties.autoRepair has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   autoRepair?: boolean = true;
 
@@ -955,6 +956,7 @@ model NodePoolPlatformProfile {
   /** Whether to enable host based OS and data drive encryption.
    * - https://learn.microsoft.com/en-us/azure/virtual-machines/disk-encryption#encryption-at-host---end-to-end-encryption-for-your-vm-data
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NodePoolPlatformProfile.enableEncryptionAtHost has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   enableEncryptionAtHost?: boolean = false;
 

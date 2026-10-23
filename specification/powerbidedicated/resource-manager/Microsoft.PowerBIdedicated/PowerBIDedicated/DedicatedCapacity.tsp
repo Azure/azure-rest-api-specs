@@ -128,6 +128,7 @@ interface Capacities {
   /**
    * Lists eligible SKUs for a PowerBI Dedicated resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listSkusForCapacity retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("skus")
   listSkusForCapacity is ArmResourceActionSync<

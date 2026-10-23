@@ -117,6 +117,7 @@ interface InstancePools {
       /**
        * The child resources to include in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByInstancePool.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -139,6 +140,8 @@ interface InstancePools {
       /**
        * Optional request parameter to include managed instance usages within the instance pool.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing usagesListByInstancePool.expandChildren has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing usagesListByInstancePool.expandChildren retains the expandChildren query parameter; preserve wire compatibility."
       @query("expandChildren")
       expandChildren?: boolean;
     }

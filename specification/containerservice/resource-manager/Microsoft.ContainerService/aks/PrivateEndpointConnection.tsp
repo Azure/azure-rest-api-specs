@@ -66,6 +66,7 @@ interface PrivateEndpointConnections {
   /**
    * To learn more about private clusters, see: https://docs.microsoft.com/azure/aks/private-clusters
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets a list of private endpoint connections in the specified managed cluster.")
   list is PrivateEndpointConnectionsOps.ListSinglePage<
     PrivateEndpointConnection,

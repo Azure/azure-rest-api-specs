@@ -84,6 +84,7 @@ interface Students {
   /**
    * Create and add a new student to the specified lab or update the details of an existing student in a lab. Note the student must have a valid tenant to accept the lab after they have been added to lab.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is InvoiceSectionStudentOps.CreateOrUpdateSync<
     StudentDetails,
     ErrorType = DefaultErrorResponse
@@ -106,6 +107,8 @@ interface Students {
       /**
        * May be used to show deleted items.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.includeDeleted has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.includeDeleted retains the includeDeleted query parameter; preserve wire compatibility."
       @query("includeDeleted")
       includeDeleted?: boolean;
     },

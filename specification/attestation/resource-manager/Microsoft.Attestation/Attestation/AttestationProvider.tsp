@@ -91,6 +91,7 @@ interface AttestationProviders {
   /**
    * Returns attestation providers list in a resource group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByResourceGroup retains its response and SDK paging behavior; preserve published compatibility."
   listByResourceGroup is AttestationProvidersResourceGroupOps.ListSinglePage<
     AttestationProvider,
     Response = ArmResponse<AttestationProviderListResult>,
@@ -100,6 +101,7 @@ interface AttestationProviders {
   /**
    * Returns a list of attestation providers in a subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is AttestationProvidersOps.ListSinglePage<
     AttestationProvider,
     Response = ArmResponse<AttestationProviderListResult>,
@@ -109,6 +111,7 @@ interface AttestationProviders {
   /**
    * Gets the private link resources supported for the attestation provider.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByProvider retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("privateLinkResources")
   listByProvider is ArmResourceActionSync<

@@ -41,6 +41,7 @@ union ServiceEntitlementSettingProvisioningState {
 /** Properties of a service entitlement setting. */
 model ServiceEntitlementSettingProperties {
   /** Indicates whether the containing subscription is the default subscription for service entitlements in the tenant. Only one subscription in a tenant can be marked as the default. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServiceEntitlementSettingProperties.isDefault has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   isDefault: boolean;
 
@@ -52,6 +53,7 @@ model ServiceEntitlementSettingProperties {
 /** Properties that can be updated on a service entitlement setting. */
 model ServiceEntitlementSettingUpdateProperties {
   /** Indicates whether the containing subscription is the default subscription for service entitlements in the tenant. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServiceEntitlementSettingUpdateProperties.isDefault has a boolean wire value; preserve the published property contract."
   isDefault?: boolean;
 }
 

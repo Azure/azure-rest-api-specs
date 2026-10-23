@@ -129,6 +129,7 @@ model ManagedClusterPropertiesForSnapshot {
   /**
    * Whether the cluster has enabled Kubernetes Role-Based Access Control or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ManagedClusterPropertiesForSnapshot.enableRbac has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   enableRbac?: boolean;
 

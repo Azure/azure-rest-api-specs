@@ -43,6 +43,8 @@ alias WorkspacesDeleteParameters = {
   /**
    * Flag to indicate delete is a purge request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WorkspacesDeleteParameters.forceToPurge has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing WorkspacesDeleteParameters.forceToPurge retains the forceToPurge query parameter; preserve wire compatibility."
   @query("forceToPurge")
   forceToPurge?: boolean = false;
 };
@@ -102,16 +104,19 @@ interface Workspaces {
       /**
        * Kind of workspace.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.kind retains the kind query parameter; preserve wire compatibility."
       @query("kind")
       kind?: string;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.aiCapabilities retains the aiCapabilities query parameter; preserve wire compatibility."
       @query("aiCapabilities")
       aiCapabilities?: string;
     }
@@ -127,16 +132,19 @@ interface Workspaces {
       /**
        * Kind of workspace.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.kind retains the kind query parameter; preserve wire compatibility."
       @query("kind")
       kind?: string;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.aiCapabilities retains the aiCapabilities query parameter; preserve wire compatibility."
       @query("aiCapabilities")
       aiCapabilities?: string;
     }
@@ -208,6 +216,7 @@ interface Workspaces {
   /**
    * Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listOutboundNetworkDependenciesEndpoints retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("outboundNetworkDependenciesEndpoints")
   @summary("Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.")
@@ -287,12 +296,14 @@ interface Workspaces {
       /**
        * Endpoint type filter
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getInWorkspace.endpointType retains the endpointType query parameter; preserve wire compatibility."
       @query("endpointType")
       endpointType?: EndpointType;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing getInWorkspace.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
     }

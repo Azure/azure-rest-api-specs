@@ -51,6 +51,7 @@ union UnifiedResilienceItemRequirementSelected {
 @added(Versions.v2026_09_30_preview)
 @doc("Definition of a resilience goal requirement copied from the goal assignment.")
 model UnifiedResilienceItemGoalRequirement {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UnifiedResilienceItemGoalRequirement.required has a boolean wire value; preserve the published property contract."
   @doc("Whether the goal is required for the service group.")
   required: boolean;
 }

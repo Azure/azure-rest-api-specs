@@ -65,6 +65,7 @@ model RedshiftClusterProperties {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsRedshiftCluster")
 model AwsRedshiftClusterProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRedshiftClusterProperties.allowVersionUpgrade has a boolean wire value; preserve the published property contract."
   @doc("Major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. Default value is True")
   allowVersionUpgrade?: boolean;
 
@@ -77,12 +78,14 @@ model AwsRedshiftClusterProperties {
   @doc("The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint")
   availabilityZone?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRedshiftClusterProperties.availabilityZoneRelocation has a boolean wire value; preserve the published property contract."
   @doc("The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster modification is complete.")
   availabilityZoneRelocation?: boolean;
 
   @doc("The availability zone relocation status of the cluster")
   availabilityZoneRelocationStatus?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRedshiftClusterProperties.classic has a boolean wire value; preserve the published property contract."
   @doc("A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false , the resize type is elastic.")
   classic?: boolean;
 
@@ -110,6 +113,7 @@ model AwsRedshiftClusterProperties {
   @doc("The name of the first database to be created when the cluster is created. To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database.")
   dbName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRedshiftClusterProperties.deferMaintenance has a boolean wire value; preserve the published property contract."
   @doc("A boolean indicating whether to enable the deferred maintenance window.")
   deferMaintenance?: boolean;
 
@@ -131,12 +135,14 @@ model AwsRedshiftClusterProperties {
   @doc("The Elastic IP (EIP) address for the cluster.")
   elasticIp?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRedshiftClusterProperties.encrypted has a boolean wire value; preserve the published property contract."
   @doc("If true, the data in the cluster is encrypted at rest.")
   encrypted?: boolean;
 
   @doc("Property endpoint")
   endpoint?: Endpoint;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRedshiftClusterProperties.enhancedVpcRouting has a boolean wire value; preserve the published property contract."
   @doc("An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see Enhanced VPC Routing in the Amazon Redshift Cluster Management Guide.If this option is true , enhanced VPC routing is enabled.Default: false")
   enhancedVpcRouting?: boolean;
 
@@ -158,6 +164,7 @@ model AwsRedshiftClusterProperties {
   @doc("The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the PendingModifiedValues for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.")
   maintenanceTrackName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRedshiftClusterProperties.manageMasterPassword has a boolean wire value; preserve the published property contract."
   @doc("A boolean indicating if the redshift cluster's admin user credentials is managed by Redshift or not. You can't use MasterUserPassword if ManageMasterPassword is true. If ManageMasterPassword is false or not set, Amazon Redshift uses MasterUserPassword for the admin user account's password.")
   manageMasterPassword?: boolean;
 
@@ -177,6 +184,7 @@ model AwsRedshiftClusterProperties {
   @doc("The user name associated with the master user account for the cluster that is being created. The user name can't be PUBLIC and first character must be a letter.")
   masterUsername?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRedshiftClusterProperties.multiAZ has a boolean wire value; preserve the published property contract."
   @doc("A boolean indicating if the redshift cluster is multi-az or not. If you don't provide this parameter or set the value to false, the redshift cluster will be single-az.")
   multiAZ?: boolean;
 
@@ -198,6 +206,7 @@ model AwsRedshiftClusterProperties {
   @doc("The weekly time range (in UTC) during which automated cluster maintenance can occur.")
   preferredMaintenanceWindow?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRedshiftClusterProperties.publiclyAccessible has a boolean wire value; preserve the published property contract."
   @doc("If true, the cluster can be accessed from a public network.")
   publiclyAccessible?: boolean;
 
@@ -207,6 +216,7 @@ model AwsRedshiftClusterProperties {
   @doc("The identifier of the database revision. You can retrieve this value from the response to the DescribeClusterDbRevisions request.")
   revisionTarget?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRedshiftClusterProperties.rotateEncryptionKey has a boolean wire value; preserve the published property contract."
   @doc("A boolean indicating if we want to rotate Encryption Keys.")
   rotateEncryptionKey?: boolean;
 
@@ -216,6 +226,7 @@ model AwsRedshiftClusterProperties {
   @doc("The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.")
   snapshotCopyGrantName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRedshiftClusterProperties.snapshotCopyManual has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether to apply the snapshot retention period to newly copied manual snapshots instead of automated snapshots.")
   snapshotCopyManual?: boolean;
 

@@ -136,6 +136,7 @@ interface PolicyDefinitions {
       /**
        * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @minValue(1)
       @query("$top")
@@ -163,6 +164,7 @@ interface PolicyDefinitions {
       /**
        * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBuiltIn.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @minValue(1)
       @query("$top")
@@ -179,6 +181,7 @@ interface PolicyDefinitions {
    * This operation creates or updates a policy definition in the given management group with the given name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdateAtManagementGroup retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdateAtManagementGroup is PolicyDefinitionManagementGroupOps.CreateOrUpdateSync<
     PolicyDefinition,
     Response = ArmResourceCreatedSyncResponse<PolicyDefinition>
@@ -204,6 +207,7 @@ interface PolicyDefinitions {
       /**
        * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByManagementGroup.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @minValue(1)
       @query("$top")

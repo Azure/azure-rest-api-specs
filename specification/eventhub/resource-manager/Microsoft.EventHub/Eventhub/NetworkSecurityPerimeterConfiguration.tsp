@@ -46,6 +46,7 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets list of current NetworkSecurityPerimeterConfiguration for Namespace
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     NetworkSecurityPerimeterConfiguration,
     Response = ArmResponse<NetworkSecurityPerimeterConfigurationList>,

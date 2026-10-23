@@ -253,6 +253,7 @@ interface NotificationContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -260,6 +261,7 @@ interface NotificationContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -270,6 +272,7 @@ interface NotificationContracts {
   /**
    * Gets the list of the Notification Recipient User subscribed to the notification.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByNotification retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("recipientUsers")
   listByNotification is NotificationContractOps.ActionSync<
@@ -322,6 +325,7 @@ interface NotificationContracts {
   /**
    * Gets the list of the Notification Recipient Emails subscribed to a notification.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing notificationRecipientEmailListByNotification retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("recipientEmails")
   notificationRecipientEmailListByNotification is NotificationContractOps.ActionSync<
@@ -444,6 +448,7 @@ interface WorkspaceNotification {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -451,6 +456,7 @@ interface WorkspaceNotification {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -461,6 +467,7 @@ interface WorkspaceNotification {
   /**
    * Gets the list of the Notification Recipient User subscribed to the notification.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByNotification retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("recipientUsers")
   listByNotification is WorkspaceNotificationOps.ActionSync<
@@ -515,6 +522,7 @@ interface WorkspaceNotification {
   /**
    * Gets the list of the Notification Recipient Emails subscribed to a notification.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing workspaceNotificationRecipientEmailListByNotification retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("recipientEmails")
   workspaceNotificationRecipientEmailListByNotification is WorkspaceNotificationOps.ActionSync<

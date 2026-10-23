@@ -87,6 +87,7 @@ interface Factories {
    * Creates or updates a factory.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing createOrUpdate retains its request-body shape; preserve wire compatibility."
   @tag("factories")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Factory,
@@ -236,6 +237,8 @@ interface Factories {
       /**
        * If true, cancel all the Child pipelines that are triggered by the current pipeline.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing cancel POST contract uses isRecursive in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing cancel.isRecursive has a boolean wire value; preserve the published property contract."
       @query("isRecursive")
       isRecursive?: boolean;
     },
@@ -313,6 +316,7 @@ interface Factories {
   /**
    * Add a data flow into debug session.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing addDataFlow retains its request-body shape; preserve wire compatibility."
   @tag("dataFlowDebugSession")
   @action("addDataFlowToDebugSession")
   addDataFlow is ArmResourceActionSync<
@@ -350,6 +354,7 @@ interface Factories {
    * Gets the private link resources
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing privateLinkResourcesGet retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("privateLinkResources_Get")
   @tag("privateLinkResources")
   @get

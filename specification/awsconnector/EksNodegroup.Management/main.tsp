@@ -80,6 +80,7 @@ model AwsEksNodegroupProperties {
   @doc("The root device disk size (in GiB) for your node group instances.")
   diskSize?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsEksNodegroupProperties.forceUpdateEnabled has a boolean wire value; preserve the published property contract."
   @doc("Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue.")
   forceUpdateEnabled?: boolean;
 

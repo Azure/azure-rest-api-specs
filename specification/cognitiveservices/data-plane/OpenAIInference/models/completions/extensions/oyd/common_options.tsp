@@ -15,6 +15,7 @@ alias OnYourDataCommonChatExtensionConfiguration = {
   @encodedName("application/json", "top_n_documents")
   topNDocuments?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OnYourDataCommonChatExtensionConfiguration.inScope has a boolean wire value; preserve the published property contract."
   @doc("Whether queries should be restricted to use of indexed data.")
   @clientName("ShouldRestrictResultScope", "csharp")
   @encodedName("application/json", "in_scope")
@@ -42,6 +43,7 @@ alias OnYourDataCommonChatExtensionConfiguration = {
    * If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail.
    * If not specified, or specified as false, the request will fail if any search query fails.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OnYourDataCommonChatExtensionConfiguration.allowPartialResult has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "allow_partial_result")
   @added(ServiceApiVersions.v2024_05_01_Preview)
   allowPartialResult?: boolean = false;

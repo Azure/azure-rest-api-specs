@@ -750,6 +750,7 @@ model HierarchySettingsProperties {
   /**
    * Indicates whether RBAC access is required upon group creation under the root Management Group. If set to true, user will require Microsoft.Management/managementGroups/write action on the root Management Group scope in order to create new Groups directly under the root. This will prevent new users from creating new Management Groups, unless they are given access.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HierarchySettingsProperties.requireAuthorizationForGroupCreation has a boolean wire value; preserve the published property contract."
   requireAuthorizationForGroupCreation?: boolean;
 
   /**
@@ -776,6 +777,7 @@ model CreateOrUpdateSettingsProperties {
   /**
    * Indicates whether RBAC access is required upon group creation under the root Management Group. If set to true, user will require Microsoft.Management/managementGroups/write action on the root Management Group scope in order to create new Groups directly under the root. This will prevent new users from creating new Management Groups, unless they are given access.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CreateOrUpdateSettingsProperties.requireAuthorizationForGroupCreation has a boolean wire value; preserve the published property contract."
   requireAuthorizationForGroupCreation?: boolean;
 
   /**
@@ -852,6 +854,7 @@ model CheckNameAvailabilityResult {
   /**
    * Required. True indicates name is valid and available. False indicates the name is invalid, unavailable, or both.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 

@@ -116,6 +116,7 @@ alias CreateSkillVersionRequest = {
   @doc("Inline skill content for simple skills without file uploads. Foundry-specific extension.")
   inline_content?: SkillInlineContent;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CreateSkillVersionRequest.default has a boolean wire value; preserve the published property contract."
   @doc("Whether to set this version as the default.")
   default?: boolean;
 };
@@ -183,6 +184,7 @@ model DeleteSkillResponse {
   @doc("The unique name of the skill.")
   name: SkillName;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeleteSkillResponse.deleted has a boolean wire value; preserve the published property contract."
   @doc("Whether the skill was successfully deleted.")
   deleted: boolean;
 }
@@ -197,6 +199,7 @@ model DeleteSkillVersionResponse {
   @doc("The name of the skill.")
   name: SkillName;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeleteSkillVersionResponse.deleted has a boolean wire value; preserve the published property contract."
   @doc("Whether the skill version was successfully deleted.")
   deleted: boolean;
 

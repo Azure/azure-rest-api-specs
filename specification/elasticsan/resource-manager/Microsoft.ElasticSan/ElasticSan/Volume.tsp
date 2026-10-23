@@ -75,6 +75,7 @@ interface Volumes {
       /**
        * Optional. Specifies that the delete operation should be a permanent delete for the soft deleted volume. The value of deleteType can only be 'permanent'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.deleteType retains the deleteType query parameter; preserve wire compatibility."
       @added(Versions.v2026_05_01_preview)
       @query("deleteType")
       deleteType?: DeleteType;

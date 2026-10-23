@@ -72,6 +72,7 @@ interface VirtualMachineExtensionImages {
   /**
    * Gets a list of virtual machine extension image types.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listTypes retains its response and SDK paging behavior; preserve published compatibility."
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types")
   listTypes is VirtualMachineExtensionImageTypeOps.ListSinglePage<
     VirtualMachineExtensionImage,
@@ -81,6 +82,7 @@ interface VirtualMachineExtensionImages {
   /**
    * Gets a list of virtual machine extension image versions.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listVersions retains its response and SDK paging behavior; preserve published compatibility."
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions")
   listVersions is VirtualMachineExtensionImageOps.ListSinglePage<
     VirtualMachineExtensionImage,
@@ -93,16 +95,19 @@ interface VirtualMachineExtensionImages {
       $filter?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listVersions.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listVersions.$orderby retains the $orderby query parameter; preserve wire compatibility."
       @query("$orderby")
       $orderby?: string;
 
       /**
        * Expand the response to include additional read-only metadata. Allowed values: `properties` — returns extended metadata (`releaseCategory`, `urgencyLevel`, `runProfile`).
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listVersions.$expand retains the $expand query parameter; preserve wire compatibility."
       @added(Versions.v2026_04_01)
       @query("$expand")
       $expand?: ListVersionsExpandOptions;

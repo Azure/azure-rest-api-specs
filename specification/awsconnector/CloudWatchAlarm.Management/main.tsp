@@ -65,6 +65,7 @@ model CloudWatchAlarmProperties {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsCloudWatchAlarm")
 model AwsCloudWatchAlarmProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsCloudWatchAlarmProperties.actionsEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.")
   actionsEnabled?: boolean = true;
 
@@ -175,6 +176,7 @@ model MetricDataQuery {
   @doc("The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a ``PutMetricData`` operation that includes a ``StorageResolution of 1 second``.")
   period?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricDataQuery.returnData has a boolean wire value; preserve the published property contract."
   @doc("This option indicates whether to return the timestamps and raw data values of this metric. When you create an alarm based on a metric math expression, specify ``True`` for this value for only the one math expression that the alarm is based on. You must specify ``False`` for ``ReturnData`` for all the other metrics and expressions used in the alarm. This field is required.")
   returnData?: boolean;
 }

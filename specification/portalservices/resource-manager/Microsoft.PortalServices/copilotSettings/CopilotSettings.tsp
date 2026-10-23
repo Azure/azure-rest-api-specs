@@ -23,6 +23,7 @@ model CopilotSettingsResource is ProxyResource<CopilotSettingsProperties> {
 @armResourceOperations
 interface CopilotSettings {
   get is ArmResourceRead<CopilotSettingsResource>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is ArmResourceCreateOrReplaceSync<CopilotSettingsResource>;
   update is ArmCustomPatchSync<
     CopilotSettingsResource,

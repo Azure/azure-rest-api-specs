@@ -50,6 +50,7 @@ interface GitHubOAuthResponses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing gitHubOAuthCallback SDK method name; renaming it would break client compatibility."
   @summary("Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.")
   @tag("GitHubOAuth")
   @operationId("GitHubOAuthCallback")
@@ -59,12 +60,14 @@ interface GitHubOAuthResponses {
       /**
        * The code response from authenticating the GitHub App.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing gitHubOAuthCallback.code retains the code query parameter; preserve wire compatibility."
       @query("code")
       code: string;
 
       /**
        * The state response from authenticating the GitHub App.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing gitHubOAuthCallback.state retains the state query parameter; preserve wire compatibility."
       @query("state")
       state: string;
     }
@@ -75,6 +78,7 @@ interface GitHubOAuthResponses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listGitHubOAuth retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.")
   @tag("GitHubOAuth")
   @operationId("ListGitHubOAuth")

@@ -30,6 +30,7 @@ union UpdateType {
 
 @doc("Query parameters for updating Version")
 model VersionUpdateQueryParameters {
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing VersionUpdateQueryParameters.updateType retains the updateType query parameter; preserve wire compatibility."
   @doc("The type of update")
   @query
   updateType: UpdateType;

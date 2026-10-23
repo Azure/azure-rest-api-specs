@@ -80,18 +80,22 @@ interface PrivateLinkResources {
       /**
        * Number of items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByHostPool.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @query("pageSize")
       pageSize?: int32;
 
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByHostPool.isDescending has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByHostPool.isDescending retains the isDescending query parameter; preserve wire compatibility."
       @query("isDescending")
       isDescending?: boolean;
 
       /**
        * Initial number of items to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByHostPool.initialSkip retains the initialSkip query parameter; preserve wire compatibility."
       @query("initialSkip")
       initialSkip?: int32;
     }
@@ -111,18 +115,22 @@ interface PrivateLinkResources {
       /**
        * Number of items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByWorkspace.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @query("pageSize")
       pageSize?: int32;
 
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByWorkspace.isDescending has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByWorkspace.isDescending retains the isDescending query parameter; preserve wire compatibility."
       @query("isDescending")
       isDescending?: boolean;
 
       /**
        * Initial number of items to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByWorkspace.initialSkip retains the initialSkip query parameter; preserve wire compatibility."
       @query("initialSkip")
       initialSkip?: int32;
     }
@@ -155,6 +163,8 @@ interface HostPools {
       /**
        * Force flag to delete sessionHost.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.force has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.force retains the force query parameter; preserve wire compatibility."
       @query("force")
       force?: boolean;
     }
@@ -169,18 +179,22 @@ interface HostPools {
       /**
        * Number of items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @query("pageSize")
       pageSize?: int32;
 
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByResourceGroup.isDescending has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.isDescending retains the isDescending query parameter; preserve wire compatibility."
       @query("isDescending")
       isDescending?: boolean;
 
       /**
        * Initial number of items to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.initialSkip retains the initialSkip query parameter; preserve wire compatibility."
       @query("initialSkip")
       initialSkip?: int32;
     },
@@ -196,18 +210,22 @@ interface HostPools {
       /**
        * Number of items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @query("pageSize")
       pageSize?: int32;
 
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.isDescending has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.isDescending retains the isDescending query parameter; preserve wire compatibility."
       @query("isDescending")
       isDescending?: boolean;
 
       /**
        * Initial number of items to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.initialSkip retains the initialSkip query parameter; preserve wire compatibility."
       @query("initialSkip")
       initialSkip?: int32;
     },

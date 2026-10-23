@@ -119,6 +119,7 @@ interface Variables {
   /**
    *  This operation creates or updates a variable with the given  management group and name. Policy variables can only be used by a policy definition at the scope they are created or below.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdateAtManagementGroup retains its tenant-scoped route; preserve published resource IDs and API paths."
   @summary("Creates or updates a variable.")
   createOrUpdateAtManagementGroup is VariableManagementGroupOps.CreateOrUpdateSync<Variable>;
 

@@ -92,6 +92,7 @@ interface VmwareSites {
   /**
    * Method to get site error summary.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing computeErrorSummary retains its request-body shape; preserve wire compatibility."
   @tag("SitesController")
   computeErrorSummary is ArmResourceActionSync<
     VmwareSite,
@@ -102,6 +103,7 @@ interface VmwareSites {
   /**
    * Method to get site error summary.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing computeusage retains its request-body shape; preserve wire compatibility."
   @tag("SitesController")
   computeusage is ArmResourceActionSync<
     VmwareSite,
@@ -113,6 +115,7 @@ interface VmwareSites {
    * Method to generate report containing
    *             machine and the deep discovery of the application installed in the machine.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing exportApplications retains its request-body shape; preserve wire compatibility."
   @tag("SitesController")
   exportApplications is ArmResourceActionAsync<
     VmwareSite,

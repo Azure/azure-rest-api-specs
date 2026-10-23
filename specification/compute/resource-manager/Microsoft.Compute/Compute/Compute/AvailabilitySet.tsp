@@ -75,6 +75,7 @@ interface AvailabilitySets {
       /**
        * The expand expression to apply to the operation. Allowed values are 'instanceView'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listBySubscription.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },

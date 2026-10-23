@@ -87,6 +87,7 @@ model ChatCompletionStreamOptions {
   /**
    * If set, an additional chunk will be streamed before the `data: [DONE]` message. The `usage` field on this chunk shows the token usage statistics for the entire request, and the `choices` field will always be an empty array. All other chunks will also include a `usage` field, but with a null value.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ChatCompletionStreamOptions.includeUsage has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "include_usage")
   includeUsage?: boolean;
 }
@@ -208,6 +209,7 @@ model ChatCompletionsOptions {
   @encodedName("application/json", "frequency_penalty")
   frequencyPenalty?: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ChatCompletionsOptions.stream has a boolean wire value; preserve the published property contract."
   @doc("""
     A value indicating whether chat completions should be streamed for this request.
     """)
@@ -291,11 +293,13 @@ model ChatCompletionsOptions {
   /**
    * Whether to enable parallel function calling during tool use.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ChatCompletionsOptions.parallelToolCalls has a boolean wire value; preserve the published property contract."
   @added(ServiceApiVersions.v2024_09_01_Preview)
   @encodedName("application/json", "parallel_tool_calls")
   parallelToolCalls?: boolean = true;
 
   /** Whether or not to store the output of this chat completion request for use in our model distillation or evaluation products. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ChatCompletionsOptions.store has a boolean wire value; preserve the published property contract."
   @added(ServiceApiVersions.v2025_01_01_Preview)
   store?: boolean;
 

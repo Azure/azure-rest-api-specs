@@ -19,5 +19,6 @@ model AdvancedThreatProtectionProperties {
   /**
    * Indicates whether Advanced Threat Protection is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AdvancedThreatProtectionProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 }

@@ -93,6 +93,7 @@ interface DiskAccesses {
    * Gets the private link resources possible under disk access resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getPrivateLinkResources retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("privatelinkresources")
   getPrivateLinkResources is ComputeResourceActionSync<

@@ -300,6 +300,7 @@ model ConfigurationSetting {
   /**
    * If true - new configurations downloaded from the pull service are allowed to overwrite the old ones on the target node. Otherwise, false
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConfigurationSetting.allowModuleOverwrite has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   allowModuleOverwrite?: boolean;
 
@@ -318,6 +319,7 @@ model ConfigurationSetting {
   /**
    * Set this to true to automatically reboot the node after a configuration that requires reboot is applied. Otherwise, you will have to manually reboot the node for any configuration that requires it. The default value is false. To use this setting when a reboot condition is enacted by something other than DSC (such as Windows Installer), combine this setting with the xPendingReboot module.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConfigurationSetting.rebootIfNeeded has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   rebootIfNeeded?: boolean;
 

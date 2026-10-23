@@ -131,6 +131,7 @@ alias ApiManagementServiceListPagingParameters = {
   /**
    * Number of records to return.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ApiManagementServiceListPagingParameters.$top retains the $top query parameter; preserve wire compatibility."
   @query("$top")
   @minValue(1)
   $top?: int32;
@@ -138,6 +139,7 @@ alias ApiManagementServiceListPagingParameters = {
   /**
    * Skip token for retrieving the next page of results.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ApiManagementServiceListPagingParameters.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
   @query("$skipToken")
   $skipToken?: string;
 };
@@ -234,6 +236,7 @@ interface ApiManagementServiceResources {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByTags.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -241,6 +244,7 @@ interface ApiManagementServiceResources {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByTags.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -248,6 +252,8 @@ interface ApiManagementServiceResources {
       /**
        * Include not tagged APIs.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByTags.includeNotTaggedApis has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByTags.includeNotTaggedApis retains the includeNotTaggedApis query parameter; preserve wire compatibility."
       @query("includeNotTaggedApis")
       includeNotTaggedApis?: boolean;
     }
@@ -338,6 +344,7 @@ interface ApiManagementServiceResources {
   /**
    * Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing networkStatusListByService retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("networkstatus")
   networkStatusListByService is ArmResourceActionSync<
@@ -349,6 +356,7 @@ interface ApiManagementServiceResources {
   /**
    * Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByLocation retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("networkstatus")
   listByLocation is ArmResourceActionSync<
@@ -369,6 +377,7 @@ interface ApiManagementServiceResources {
   /**
    * Gets the network endpoints of all outbound dependencies of a ApiManagement service.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing outboundNetworkDependenciesEndpointsListByService retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("outboundNetworkDependenciesEndpoints")
   outboundNetworkDependenciesEndpointsListByService is ArmResourceActionSync<
@@ -380,6 +389,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists all policy descriptions.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing policyDescriptionListByService retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("policyDescriptions")
   policyDescriptionListByService is ArmResourceActionSync<
@@ -390,6 +400,7 @@ interface ApiManagementServiceResources {
       /**
        * Policy scope.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing policyDescriptionListByService.scope retains the scope query parameter; preserve wire compatibility."
       @query("scope")
       scope?: PolicyScopeContract;
     }
@@ -409,6 +420,7 @@ interface ApiManagementServiceResources {
    * Lists a collection of portalsettings defined within a service instance..
    */
   #deprecated "deprecated"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing portalSettingsListByService retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("portalsettings")
   portalSettingsListByService is ArmResourceActionSync<
@@ -437,6 +449,7 @@ interface ApiManagementServiceResources {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing productListByTags.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -444,6 +457,7 @@ interface ApiManagementServiceResources {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing productListByTags.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -451,6 +465,8 @@ interface ApiManagementServiceResources {
       /**
        * Include not tagged Products.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing productListByTags.includeNotTaggedProducts has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing productListByTags.includeNotTaggedProducts retains the includeNotTaggedProducts query parameter; preserve wire compatibility."
       @query("includeNotTaggedProducts")
       includeNotTaggedProducts?: boolean;
     }
@@ -860,6 +876,7 @@ interface ApiManagementServiceResources {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing tagResourceListByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -867,6 +884,7 @@ interface ApiManagementServiceResources {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing tagResourceListByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;

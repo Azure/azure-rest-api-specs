@@ -160,6 +160,7 @@ model SerialConsoleStatusProperties {
   /**
    * Whether or not Serial Console is disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SerialConsoleStatusProperties.disabled has a boolean wire value; preserve the published property contract."
   disabled?: boolean;
 }
 
@@ -204,6 +205,7 @@ model DisableSerialConsoleResultProperties {
   /**
    * Whether or not Serial Console is disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DisableSerialConsoleResultProperties.disabled has a boolean wire value; preserve the published property contract."
   disabled?: boolean;
 }
 
@@ -221,6 +223,7 @@ model EnableSerialConsoleResultProperties {
   /**
    * Whether or not Serial Console is disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EnableSerialConsoleResultProperties.disabled has a boolean wire value; preserve the published property contract."
   disabled?: boolean;
 }
 

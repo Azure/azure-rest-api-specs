@@ -312,6 +312,7 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing receiveMessages SDK method name; renaming it would break client compatibility."
   @get
   @route("messages")
   receiveMessages is StorageOperationResponseBody<
@@ -393,6 +394,7 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing peekMessages SDK method name; renaming it would break client compatibility."
   @get
   @route("messages?peekonly=true")
   peekMessages is StorageOperationResponseBody<

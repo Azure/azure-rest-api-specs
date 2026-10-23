@@ -398,6 +398,7 @@ model AnalyzeBatchDocumentsRequest {
   @doc("Blob name prefix of result files.")
   resultPrefix?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AnalyzeBatchDocumentsRequest.overwriteExisting has a boolean wire value; preserve the published property contract."
   @doc("Overwrite existing analyze result files?")
   overwriteExisting?: boolean = false;
 }
@@ -957,6 +958,7 @@ model DocumentKeyValueElement {
 
 @doc("An object representing observed text styles.")
 model DocumentStyle {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DocumentStyle.isHandwritten has a boolean wire value; preserve the published property contract."
   @doc("Is content handwritten?")
   isHandwritten?: boolean;
 
@@ -1075,6 +1077,7 @@ model DocumentField {
   @doc("Address value.")
   valueAddress?: AddressValue;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DocumentField.valueBoolean has a boolean wire value; preserve the published property contract."
   @doc("Boolean value.")
   valueBoolean?: boolean;
 
@@ -1188,6 +1191,7 @@ model BuildDocumentModelRequest {
   @doc("Max number of V100-equivalent GPU hours to use for model training.  Default=0.5.")
   maxTrainingHours?: float32 = 0.5;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BuildDocumentModelRequest.allowOverwrite has a boolean wire value; preserve the published property contract."
   @doc("Allow overwriting an existing model with the same name.")
   allowOverwrite?: boolean = false;
 }
@@ -1500,6 +1504,7 @@ model BuildDocumentClassifierRequest {
   @doc("List of document types to classify against.")
   docTypes: Record<ClassifierDocumentTypeDetails>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BuildDocumentClassifierRequest.allowOverwrite has a boolean wire value; preserve the published property contract."
   @doc("Allow overwriting an existing classifier with the same name.")
   allowOverwrite?: boolean = false;
 }

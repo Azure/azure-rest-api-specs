@@ -136,6 +136,7 @@ op currentQuotaLimitBasesCreateOrUpdate(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing currentQuotaLimitBasesGet SDK method name; renaming it would break client compatibility."
 op currentQuotaLimitBasesGet(
   ...Azure.ResourceManager.ApiVersionParameter,
 
@@ -191,6 +192,7 @@ op currentQuotaLimitBasesUpdate(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing quotaRequestStatusGet SDK method name; renaming it would break client compatibility."
 op quotaRequestStatusGet(
   ...Azure.ResourceManager.ApiVersionParameter,
 
@@ -217,6 +219,7 @@ op quotaRequestStatusGet(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing currentUsagesBasesGet SDK method name; renaming it would break client compatibility."
 op currentUsagesBasesGet(
   ...Azure.ResourceManager.ApiVersionParameter,
 

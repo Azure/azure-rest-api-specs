@@ -65,6 +65,7 @@ model RdsEventSubscriptionProperties {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsRdsEventSubscription")
 model AwsRdsEventSubscriptionProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsRdsEventSubscriptionProperties.enabled has a boolean wire value; preserve the published property contract."
   @doc("A Boolean value; set to true to activate the subscription, set to false to create the subscription but not active it.")
   enabled?: boolean = true;
 

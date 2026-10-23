@@ -441,6 +441,7 @@ model KidParameter {
 @doc("WaitForCommit query parameter for synchronous registration")
 @added(Versions.`2026-03-26`)
 model WaitForCommitParameter {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WaitForCommitParameter.waitForCommit has a boolean wire value; preserve the published property contract."
   @doc("If true, waits for the entry to be committed before returning. Returns 201 with receipt or 503 on rollback.")
   @query
   waitForCommit?: boolean;

@@ -97,6 +97,7 @@ interface ServerSiteResources {
   /**
    * Get the error summary for a server site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing computeErrorSummary retains its request-body shape; preserve wire compatibility."
   @tag("ServerSitesController")
   computeErrorSummary is ArmResourceActionSync<
     ServerSiteResource,
@@ -107,6 +108,7 @@ interface ServerSiteResources {
   /**
    * Get a serve site usage.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing computeusage retains its request-body shape; preserve wire compatibility."
   @tag("ServerSitesController")
   computeusage is ArmResourceActionSync<
     ServerSiteResource,
@@ -118,6 +120,7 @@ interface ServerSiteResources {
    * Method to generate report containing
    *             machine and the deep discovery of the application installed in the machine.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing exportApplications retains its request-body shape; preserve wire compatibility."
   @tag("ServerSitesController")
   exportApplications is ArmResourceActionAsync<
     ServerSiteResource,

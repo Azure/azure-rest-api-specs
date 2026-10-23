@@ -3972,6 +3972,7 @@ model AutomationRuleTriggeringLogic {
   /**
    * Determines whether the automation rule is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AutomationRuleTriggeringLogic.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 
   /**
@@ -5588,6 +5589,7 @@ model EntityGetInsightsParameters {
   /**
    * Indicates if query time range should be extended with default time range of the query. Default value is false
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EntityGetInsightsParameters.addDefaultExtendedTimeRange has a boolean wire value; preserve the published property contract."
   addDefaultExtendedTimeRange?: boolean;
 
   /**
@@ -7013,6 +7015,7 @@ model SentinelOnboardingStateProperties {
   /**
    * Flag that indicates the status of the CMK setting
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SentinelOnboardingStateProperties.customerManagedKey has a boolean wire value; preserve the published property contract."
   customerManagedKey?: boolean;
 }
 
@@ -7049,6 +7052,7 @@ model Operation {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 }
 
@@ -7539,6 +7543,7 @@ model Webhook {
   /**
    * A flag to instruct the backend service to rotate webhook secret.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Webhook.rotateWebhookSecret has a boolean wire value; preserve the published property contract."
   rotateWebhookSecret?: boolean;
 }
 
@@ -7758,6 +7763,7 @@ model ThreatIntelligenceIndicatorProperties extends EntityCommonProperties {
   /**
    * Is threat intelligence entity defanged
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ThreatIntelligenceIndicatorProperties.defanged has a boolean wire value; preserve the published property contract."
   defanged?: boolean;
 
   /**
@@ -7785,6 +7791,7 @@ model ThreatIntelligenceIndicatorProperties extends EntityCommonProperties {
   /**
    * Is threat intelligence entity revoked
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ThreatIntelligenceIndicatorProperties.revoked has a boolean wire value; preserve the published property contract."
   revoked?: boolean;
 
   /**
@@ -7970,6 +7977,7 @@ model ThreatIntelligenceFilteringCriteria {
   /**
    * Parameter to include/exclude disabled indicators.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ThreatIntelligenceFilteringCriteria.includeDisabled has a boolean wire value; preserve the published property contract."
   includeDisabled?: boolean;
 
   /**
@@ -8484,6 +8492,7 @@ model WatchlistProperties {
   /**
    * A flag that indicates if the watchlist is deleted or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WatchlistProperties.isDeleted has a boolean wire value; preserve the published property contract."
   isDeleted?: boolean;
 
   /**
@@ -8562,6 +8571,7 @@ model WatchlistItemProperties {
   /**
    * A flag that indicates if the watchlist item is deleted or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WatchlistItemProperties.isDeleted has a boolean wire value; preserve the published property contract."
   isDeleted?: boolean;
 
   /**
@@ -9080,6 +9090,7 @@ model MLBehaviorAnalyticsAlertRuleProperties {
   /**
    * Determines whether this alert rule is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MLBehaviorAnalyticsAlertRuleProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -9185,6 +9196,7 @@ model FusionAlertRuleProperties {
   /**
    * Determines whether this alert rule is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FusionAlertRuleProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -9242,6 +9254,7 @@ model FusionSourceSettings {
   /**
    * Determines whether this source signal is enabled or disabled in Fusion detection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FusionSourceSettings.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -9264,6 +9277,7 @@ model FusionSourceSubTypeSetting {
   /**
    * Determines whether this source subtype under source signal is enabled or disabled in Fusion detection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FusionSourceSubTypeSetting.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -9291,6 +9305,7 @@ model FusionSubTypeSeverityFilter {
   /**
    * Determines whether this source subtype supports severity configuration or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FusionSubTypeSeverityFilter.isSupported has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isSupported?: boolean;
 
@@ -9314,6 +9329,7 @@ model FusionSubTypeSeverityFiltersItem {
   /**
    * Determines whether this severity is enabled or disabled for this source subtype consumed in Fusion detection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FusionSubTypeSeverityFiltersItem.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 }
 
@@ -9471,6 +9487,7 @@ model FusionTemplateSubTypeSeverityFilter {
   /**
    * Determines whether severity configuration is supported for this source subtype consumed in Fusion detection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FusionTemplateSubTypeSeverityFilter.isSupported has a boolean wire value; preserve the published property contract."
   isSupported: boolean;
 
   /**
@@ -9520,6 +9537,7 @@ model ThreatIntelligenceAlertRuleProperties {
   /**
    * Determines whether this alert rule is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ThreatIntelligenceAlertRuleProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -9622,6 +9640,7 @@ model MicrosoftSecurityIncidentCreationAlertRuleProperties
   /**
    * Determines whether this alert rule is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MicrosoftSecurityIncidentCreationAlertRuleProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -9728,6 +9747,7 @@ model ScheduledAlertRuleProperties extends ScheduledAlertRuleCommonProperties {
   /**
    * Determines whether this alert rule is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScheduledAlertRuleProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -9745,6 +9765,7 @@ model ScheduledAlertRuleProperties extends ScheduledAlertRuleCommonProperties {
   /**
    * Determines whether the suppression for this alert rule is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ScheduledAlertRuleProperties.suppressionEnabled has a boolean wire value; preserve the published property contract."
   suppressionEnabled: boolean;
 
   /**
@@ -9776,6 +9797,7 @@ model IncidentConfiguration {
   /**
    * Create incidents from alerts triggered by this analytics rule
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IncidentConfiguration.createIncident has a boolean wire value; preserve the published property contract."
   createIncident: boolean;
 
   /**
@@ -9791,11 +9813,13 @@ model GroupingConfiguration {
   /**
    * Grouping enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GroupingConfiguration.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
    * Re-open closed matching incidents
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GroupingConfiguration.reopenClosedIncident has a boolean wire value; preserve the published property contract."
   reopenClosedIncident: boolean;
 
   /**
@@ -9936,6 +9960,7 @@ model NrtAlertRuleProperties {
   /**
    * Determines whether this alert rule is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NrtAlertRuleProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -9953,6 +9978,7 @@ model NrtAlertRuleProperties {
   /**
    * Determines whether the suppression for this alert rule is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NrtAlertRuleProperties.suppressionEnabled has a boolean wire value; preserve the published property contract."
   suppressionEnabled: boolean;
 
   /**
@@ -10446,6 +10472,7 @@ model ConnectorDefinitionsAvailability {
   /**
    * Gets or sets a value indicating whether the connector is preview.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectorDefinitionsAvailability.isPreview has a boolean wire value; preserve the published property contract."
   isPreview?: boolean;
 }
 
@@ -10590,6 +10617,7 @@ model CustomizableConnectorUiConfig {
   /**
    * Gets or sets a value indicating whether to use 'OR'(SOME) or 'AND' between ConnectivityCriteria items.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CustomizableConnectorUiConfig.isConnectivityCriteriasMatchSome has a boolean wire value; preserve the published property contract."
   isConnectivityCriteriasMatchSome?: boolean;
 }
 
@@ -10681,21 +10709,25 @@ model ResourceProviderRequiredPermissions {
   /**
    * Gets or sets a value indicating whether the permission is read action (GET).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ResourceProviderRequiredPermissions.read has a boolean wire value; preserve the published property contract."
   read?: boolean;
 
   /**
    * Gets or sets a value indicating whether the permission is write action (PUT or PATCH).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ResourceProviderRequiredPermissions.write has a boolean wire value; preserve the published property contract."
   write?: boolean;
 
   /**
    * Gets or sets a value indicating whether the permission is delete action (DELETE).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ResourceProviderRequiredPermissions.delete has a boolean wire value; preserve the published property contract."
   delete?: boolean;
 
   /**
    * Gets or sets a value indicating whether the permission is custom actions (POST).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ResourceProviderRequiredPermissions.action has a boolean wire value; preserve the published property contract."
   action?: boolean;
 }
 
@@ -11372,6 +11404,7 @@ model PremiumMdtiDataConnectorProperties extends DataConnectorTenantId {
    * The flag to indicate whether the tenant has the premium SKU required to access this connector.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PremiumMdtiDataConnectorProperties.requiredSKUsPresent has a boolean wire value; preserve the published property contract."
   requiredSKUsPresent?: boolean;
 
   /**
@@ -11683,6 +11716,7 @@ model RestApiPollerDataConnectorProperties {
   /**
    * Indicates whether the connector is active or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RestApiPollerDataConnectorProperties.isActive has a boolean wire value; preserve the published property contract."
   isActive?: boolean;
 
   /**
@@ -11855,6 +11889,7 @@ model CcpResponseConfig {
   /**
    * The value indicating whether the remote server support Gzip and we should expect Gzip response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CcpResponseConfig.isGzipCompressed has a boolean wire value; preserve the published property contract."
   isGzipCompressed?: boolean;
 
   /**
@@ -12028,6 +12063,7 @@ model RestApiPollerRequestPagingCountBaseConfig
   /**
    * Indicates whether the count is zero based
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RestApiPollerRequestPagingCountBaseConfig.zeroBasedIndexing has a boolean wire value; preserve the published property contract."
   zeroBasedIndexing?: boolean;
 
   /**
@@ -12157,6 +12193,7 @@ model ApiKeyAuthModel extends CcpAuthConfig {
   /**
    * Flag to indicate if API key is set in HTTP POST payload
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApiKeyAuthModel.isApiKeyInPostPayload has a boolean wire value; preserve the published property contract."
   isApiKeyInPostPayload?: boolean;
 
   /**
@@ -12419,6 +12456,7 @@ model OAuthModel extends CcpAuthConfig {
   /**
    * A value indicating whether it's a JWT flow.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OAuthModel.isJwtBearerFlow has a boolean wire value; preserve the published property contract."
   isJwtBearerFlow?: boolean;
 
   /**
@@ -13348,6 +13386,7 @@ model Availability {
   /**
    * Set connector as preview
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Availability.isPreview has a boolean wire value; preserve the published property contract."
   isPreview?: boolean;
 }
 
@@ -13414,21 +13453,25 @@ model RequiredPermissions {
   /**
    * action permission
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RequiredPermissions.action has a boolean wire value; preserve the published property contract."
   action?: boolean;
 
   /**
    * write permission
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RequiredPermissions.write has a boolean wire value; preserve the published property contract."
   write?: boolean;
 
   /**
    * read permission
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RequiredPermissions.read has a boolean wire value; preserve the published property contract."
   read?: boolean;
 
   /**
    * delete permission
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RequiredPermissions.delete has a boolean wire value; preserve the published property contract."
   delete?: boolean;
 }
 
@@ -13554,6 +13597,7 @@ model CodelessConnectorPollingConfigProperties {
   /**
    * The poller active status
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CodelessConnectorPollingConfigProperties.isActive has a boolean wire value; preserve the published property contract."
   isActive?: boolean;
 
   /**
@@ -13643,6 +13687,7 @@ model CodelessConnectorPollingAuthProperties {
   /**
    * Marks if we should send the client secret in header or payload, used in Oauth 2.0 flow
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CodelessConnectorPollingAuthProperties.isClientSecretInHeader has a boolean wire value; preserve the published property contract."
   isClientSecretInHeader?: boolean;
 
   /**
@@ -13793,6 +13838,7 @@ model CodelessConnectorPollingResponseProperties {
   /**
    * Describes if the data in the response is Gzip
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CodelessConnectorPollingResponseProperties.isGzipCompressed has a boolean wire value; preserve the published property contract."
   isGzipCompressed?: boolean;
 }
 
@@ -14109,6 +14155,7 @@ model InsightQueryItemPropertiesTableQueryColumnsDefinitionsItem {
   /**
    * Is query supports deep-link.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing InsightQueryItemPropertiesTableQueryColumnsDefinitionsItem.supportDeepLink has a boolean wire value; preserve the published property contract."
   supportDeepLink?: boolean;
 }
 
@@ -14383,6 +14430,7 @@ model ActivityEntityQueriesProperties {
   /**
    * Determines whether this activity is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ActivityEntityQueriesProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -14579,6 +14627,7 @@ model AnomalySecurityMLAnalyticsSettingsProperties {
   /**
    * Determines whether this settings is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AnomalySecurityMLAnalyticsSettingsProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -14628,6 +14677,7 @@ model AnomalySecurityMLAnalyticsSettingsProperties {
   /**
    * Determines whether this anomaly security ml analytics settings is a default settings
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AnomalySecurityMLAnalyticsSettingsProperties.isDefaultSettings has a boolean wire value; preserve the published property contract."
   isDefaultSettings: boolean;
 
   /**
@@ -14681,6 +14731,7 @@ model AnomaliesSettingsProperties {
   /**
    * Determines whether the setting is enable or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AnomaliesSettingsProperties.isEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEnabled?: boolean;
 }
@@ -14709,6 +14760,7 @@ model EyesOnSettingsProperties {
   /**
    * Determines whether the setting is enable or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EyesOnSettingsProperties.isEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEnabled?: boolean;
 }
@@ -14897,6 +14949,7 @@ model AccountEntityProperties extends EntityCommonProperties {
   /**
    * Determines whether this is a domain account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccountEntityProperties.isDomainJoined has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDomainJoined?: boolean;
 
@@ -15174,6 +15227,7 @@ model HostEntityProperties extends EntityCommonProperties {
   /**
    * Determines whether this host belongs to a domain.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HostEntityProperties.isDomainJoined has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDomainJoined?: boolean;
 
@@ -15391,6 +15445,7 @@ model IoTDeviceEntityProperties extends EntityCommonProperties {
   /**
    * Determines whether the device classified as authorized device
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IoTDeviceEntityProperties.isAuthorized has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   isAuthorized?: boolean;
@@ -15398,6 +15453,7 @@ model IoTDeviceEntityProperties extends EntityCommonProperties {
   /**
    * Determines whether the device classified as programming device
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IoTDeviceEntityProperties.isProgramming has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   isProgramming?: boolean;
@@ -15405,6 +15461,7 @@ model IoTDeviceEntityProperties extends EntityCommonProperties {
   /**
    * Is the device classified as a scanner device
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IoTDeviceEntityProperties.isScanner has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   isScanner?: boolean;
@@ -15659,6 +15716,7 @@ model MailClusterEntityProperties extends EntityCommonProperties {
   /**
    * Is this a volume anomaly mail cluster
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MailClusterEntityProperties.isVolumeAnomaly has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isVolumeAnomaly?: boolean;
 

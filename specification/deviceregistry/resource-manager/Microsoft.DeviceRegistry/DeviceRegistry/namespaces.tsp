@@ -204,6 +204,7 @@ union Scope {
 @added(Versions.v2026_11_02_preview)
 @doc("The observability configuration associated with a namespace.")
 model NamespaceObservability {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NamespaceObservability.enabled has a boolean wire value; preserve the published property contract."
   @doc("""
     Whether observability features are enabled. When omitted during create or
     replace, the effective value is false. On PATCH, omission preserves the

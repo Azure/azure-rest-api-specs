@@ -22,6 +22,7 @@ interface DataSources {
       ...preferHeader;
 
       /** Ignores cache reset requirements. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing createOrUpdate.skipIndexerResetRequirementForCache has a boolean wire value; preserve the published property contract."
       @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @removed(Versions.v2026_04_01)
@@ -153,6 +154,7 @@ interface Indexers {
       ...acceptHeaderMinimal;
 
       /** If false, keys or ids will be appended to existing ones. If true, only the keys or ids in this payload will be queued to be re-ingested. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing resetDocs.overwrite has a boolean wire value; preserve the published property contract."
       @query
       overwrite?: boolean = false;
 
@@ -194,6 +196,7 @@ interface Indexers {
       ...preferHeader;
 
       /** Ignores cache reset requirements. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing createOrUpdate.skipIndexerResetRequirementForCache has a boolean wire value; preserve the published property contract."
       @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @removed(Versions.v2026_04_01)
@@ -201,6 +204,7 @@ interface Indexers {
       skipIndexerResetRequirementForCache?: boolean;
 
       /** Disables cache reprocessing change detection. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing createOrUpdate.disableCacheReprocessingChangeDetection has a boolean wire value; preserve the published property contract."
       @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @removed(Versions.v2026_04_01)
@@ -308,6 +312,7 @@ interface Skillsets {
       ...preferHeader;
 
       /** Ignores cache reset requirements. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing createOrUpdate.skipIndexerResetRequirementForCache has a boolean wire value; preserve the published property contract."
       @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @removed(Versions.v2026_04_01)
@@ -315,6 +320,7 @@ interface Skillsets {
       skipIndexerResetRequirementForCache?: boolean;
 
       /** Disables cache reprocessing change detection. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing createOrUpdate.disableCacheReprocessingChangeDetection has a boolean wire value; preserve the published property contract."
       @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @removed(Versions.v2026_04_01)
@@ -529,6 +535,7 @@ interface LegacyIndexes {
       $skip?: int32;
 
       /** A value that specifies whether to fetch the total count of items. Default is false. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing list.$count has a boolean wire value; preserve the published property contract."
       @added(Versions.v2026_05_01_preview)
       @query("$count")
       $count?: boolean;
@@ -562,6 +569,7 @@ interface LegacyIndexes {
       $skip?: int32;
 
       /** A value that specifies whether to fetch the total count of items. Default is false. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listWithSelectedProperties.$count has a boolean wire value; preserve the published property contract."
       @added(Versions.v2026_05_01_preview)
       @query("$count")
       $count?: boolean;
@@ -634,6 +642,7 @@ interface Indexes {
       ...matchingHeader;
 
       /** Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing createOrUpdate.allowIndexDowntime has a boolean wire value; preserve the published property contract."
       @query
       allowIndexDowntime?: boolean;
 
@@ -1134,6 +1143,7 @@ op getIndexStatsSummaryPaginated is SearchOperation<
     $skip?: int32;
 
     /** A value that specifies whether to fetch the total count of items. Default is false. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getIndexStatsSummaryPaginated.$count has a boolean wire value; preserve the published property contract."
     @query("$count")
     $count?: boolean;
   },

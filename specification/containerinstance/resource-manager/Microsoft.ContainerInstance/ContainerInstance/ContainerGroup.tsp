@@ -127,6 +127,7 @@ interface ContainerGroups {
   /**
    * Gets all the network dependencies for this container group to allow complete control of network setting and configuration. For container groups, this will always be an empty list.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing getOutboundNetworkDependenciesEndpoints retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get all network dependencies for container group.")
   @get
   @action("outboundNetworkDependenciesEndpoints")
@@ -140,6 +141,7 @@ interface ContainerGroups {
   /**
    * Get the logs for a specified container instance in a specified resource group and container group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listLogs retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get the logs for a specified container instance.")
   @get
   @action("logs")
@@ -159,12 +161,15 @@ interface ContainerGroups {
       /**
        * The number of lines to show from the tail of the container instance log. If not provided, all available logs are shown up to 4mb.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listLogs.tail retains the tail query parameter; preserve wire compatibility."
       @query("tail")
       tail?: int32;
 
       /**
        * If true, adds a timestamp at the beginning of every line of log output. If not provided, defaults to false.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listLogs.timestamps has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listLogs.timestamps retains the timestamps query parameter; preserve wire compatibility."
       @query("timestamps")
       timestamps?: boolean;
     }

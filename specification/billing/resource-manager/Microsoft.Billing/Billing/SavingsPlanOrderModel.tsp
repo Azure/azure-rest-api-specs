@@ -52,6 +52,7 @@ interface SavingsPlanOrderModels {
       /**
        * May be used to expand the planInformation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing getByBillingAccount.expand retains the expand query parameter; preserve wire compatibility."
       @query("expand")
       expand?: string;
     }
@@ -68,18 +69,21 @@ interface SavingsPlanOrderModels {
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
 
       /**
        * The orderby query option allows clients to request resources in a particular order.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.orderBy retains the orderBy query parameter; preserve wire compatibility."
       @query("orderBy")
       orderBy?: string;
 
       /**
        * The number of savings plans to skip from the list before returning results
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByBillingAccount.skiptoken retains the skiptoken query parameter; preserve wire compatibility."
       @query("skiptoken")
       skiptoken?: float32;
     },

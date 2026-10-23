@@ -2212,11 +2212,13 @@ model ApiEntityBaseContract {
   /**
    * Indicates if API revision is current api revision.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApiEntityBaseContract.isCurrent has a boolean wire value; preserve the published property contract."
   isCurrent?: boolean;
 
   /**
    * Indicates if API revision is accessible via the gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApiEntityBaseContract.isOnline has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isOnline?: boolean;
 
@@ -2240,6 +2242,7 @@ model ApiEntityBaseContract {
   /**
    * Specifies whether an API or Product subscription is required for accessing the API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApiEntityBaseContract.subscriptionRequired has a boolean wire value; preserve the published property contract."
   subscriptionRequired?: boolean;
 
   /**
@@ -2550,12 +2553,14 @@ model ApiRevisionContract {
   /**
    * Indicates if API revision is the current api revision.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApiRevisionContract.isOnline has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isOnline?: boolean;
 
   /**
    * Indicates if API revision is accessible via the gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApiRevisionContract.isCurrent has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCurrent?: boolean;
 }
@@ -2729,6 +2734,7 @@ model ParameterContract {
   /**
    * Specifies whether parameter is required or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ParameterContract.required has a boolean wire value; preserve the published property contract."
   required?: boolean;
 
   /**
@@ -3119,11 +3125,13 @@ model ProductEntityBaseParameters {
   /**
    * Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as "protected" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as "open" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ProductEntityBaseParameters.subscriptionRequired has a boolean wire value; preserve the published property contract."
   subscriptionRequired?: boolean;
 
   /**
    * whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ProductEntityBaseParameters.approvalRequired has a boolean wire value; preserve the published property contract."
   approvalRequired?: boolean;
 
   /**
@@ -3308,6 +3316,7 @@ model DiagnosticContractProperties {
   /**
    * Log the ClientIP. Default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DiagnosticContractProperties.logClientIp has a boolean wire value; preserve the published property contract."
   logClientIp?: boolean;
 
   /**
@@ -3328,6 +3337,7 @@ model DiagnosticContractProperties {
   /**
    * Emit custom metrics via emit-metric policy. Applicable only to Application Insights diagnostic settings.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DiagnosticContractProperties.metrics has a boolean wire value; preserve the published property contract."
   metrics?: boolean;
 }
 
@@ -4471,11 +4481,13 @@ model AuthorizationServerContractProperties
   /**
    * If true, the authorization server may be used in the developer portal test console. True by default if no value is provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AuthorizationServerContractProperties.useInTestConsole has a boolean wire value; preserve the published property contract."
   useInTestConsole?: boolean;
 
   /**
    * If true, the authorization server will be used in the API documentation in the developer portal. False by default if no value is provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AuthorizationServerContractProperties.useInApiDocumentation has a boolean wire value; preserve the published property contract."
   useInApiDocumentation?: boolean;
 
   /**
@@ -4543,6 +4555,7 @@ model AuthorizationServerContractBaseProperties {
    * If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AuthorizationServerContractBaseProperties.supportState has a boolean wire value; preserve the published property contract."
   @OpenAPI.externalDocs("http://tools.ietf.org/html/rfc6749#section-3.1")
   supportState?: boolean;
 
@@ -4614,11 +4627,13 @@ model AuthorizationServerUpdateContractProperties
   /**
    * If true, the authorization server may be used in the developer portal test console. True by default if no value is provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AuthorizationServerUpdateContractProperties.useInTestConsole has a boolean wire value; preserve the published property contract."
   useInTestConsole?: boolean;
 
   /**
    * If true, the authorization server will be used in the API documentation in the developer portal. False by default if no value is provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AuthorizationServerUpdateContractProperties.useInApiDocumentation has a boolean wire value; preserve the published property contract."
   useInApiDocumentation?: boolean;
 
   /**
@@ -4931,11 +4946,13 @@ model BackendTlsProperties {
   /**
    * Flag indicating whether SSL certificate chain validation should be done when using self-signed certificates for this backend host.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BackendTlsProperties.validateCertificateChain has a boolean wire value; preserve the published property contract."
   validateCertificateChain?: boolean = true;
 
   /**
    * Flag indicating whether SSL certificate name validation should be done when using self-signed certificates for this backend host.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing BackendTlsProperties.validateCertificateName has a boolean wire value; preserve the published property contract."
   validateCertificateName?: boolean = true;
 
   /**
@@ -4983,6 +5000,7 @@ model CircuitBreakerRule {
   /**
    * flag to accept Retry-After header from the backend.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CircuitBreakerRule.acceptRetryAfter has a boolean wire value; preserve the published property contract."
   acceptRetryAfter?: boolean;
 
   /**
@@ -6064,6 +6082,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * Property only meant to be used for Consumption SKU Service. This enforces a client certificate to be presented on each request to the gateway. This also enables the ability to authenticate the certificate in the policy on the gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApiManagementServiceBaseProperties.enableClientCertificate has a boolean wire value; preserve the published property contract."
   enableClientCertificate?: boolean = false;
 
   /**
@@ -6081,6 +6100,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * Property only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in master region.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApiManagementServiceBaseProperties.disableGateway has a boolean wire value; preserve the published property contract."
   disableGateway?: boolean = false;
 
   /**
@@ -6096,6 +6116,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * Undelete Api Management Service if it was previously soft-deleted. If this flag is specified and set to True all other properties will be ignored.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApiManagementServiceBaseProperties.restore has a boolean wire value; preserve the published property contract."
   restore?: boolean = false;
 
   /**
@@ -6127,6 +6148,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * Zone Redundant Requirement when creating StandardV2 and PremiumV2. If this flag is set to True, will return a APIM service with Zone redundant or fail the request if any underneath component cannot be zone redundant.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApiManagementServiceBaseProperties.zoneRedundant has a boolean wire value; preserve the published property contract."
   zoneRedundant?: boolean = false;
 }
 
@@ -6167,11 +6189,13 @@ model HostnameConfiguration {
   /**
    * Specify true to setup the certificate associated with this Hostname as the Default SSL Certificate. If a client does not send the SNI header, then this will be the certificate that will be challenged. The property is useful if a service has multiple custom hostname enabled and it needs to decide on the default ssl certificate. The setting only applied to gateway Hostname Type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HostnameConfiguration.defaultSslBinding has a boolean wire value; preserve the published property contract."
   defaultSslBinding?: boolean = false;
 
   /**
    * Specify true to always negotiate client certificate on the hostname. Default Value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HostnameConfiguration.negotiateClientCertificate has a boolean wire value; preserve the published property contract."
   negotiateClientCertificate?: boolean = false;
 
   /**
@@ -6309,6 +6333,7 @@ model AdditionalLocation {
   /**
    * Property only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in this additional location.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AdditionalLocation.disableGateway has a boolean wire value; preserve the published property contract."
   disableGateway?: boolean = false;
 
   /**
@@ -6567,6 +6592,7 @@ model ApiManagementServiceNameAvailabilityResult {
   /**
    * True if the name is available and can be used to create a new API Management service; otherwise false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ApiManagementServiceNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
@@ -6702,6 +6728,7 @@ model EmailTemplateContractProperties {
   /**
    * Whether the template is the default template provided by API Management or has been edited.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EmailTemplateContractProperties.isDefault has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDefault?: boolean;
 
@@ -7062,21 +7089,25 @@ model GatewayHostnameConfigurationContractProperties {
   /**
    * Determines whether gateway requests client certificate
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GatewayHostnameConfigurationContractProperties.negotiateClientCertificate has a boolean wire value; preserve the published property contract."
   negotiateClientCertificate?: boolean;
 
   /**
    * Specifies if TLS 1.0 is supported
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GatewayHostnameConfigurationContractProperties.tls10Enabled has a boolean wire value; preserve the published property contract."
   tls10Enabled?: boolean;
 
   /**
    * Specifies if TLS 1.1 is supported
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GatewayHostnameConfigurationContractProperties.tls11Enabled has a boolean wire value; preserve the published property contract."
   tls11Enabled?: boolean;
 
   /**
    * Specifies if HTTP/2.0 is supported
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GatewayHostnameConfigurationContractProperties.http2Enabled has a boolean wire value; preserve the published property contract."
   http2Enabled?: boolean;
 }
 
@@ -7129,6 +7160,7 @@ model GatewayCertificateAuthorityContractProperties {
   /**
    * Determines whether certificate authority is trusted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GatewayCertificateAuthorityContractProperties.isTrusted has a boolean wire value; preserve the published property contract."
   isTrusted?: boolean;
 }
 
@@ -7223,6 +7255,7 @@ model GroupContractProperties {
   /**
    * true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GroupContractProperties.builtIn has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   builtIn?: boolean;
 
@@ -7653,6 +7686,7 @@ model LoggerContractProperties {
   /**
    * Whether records are buffered in the logger before publishing. Default is assumed to be true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LoggerContractProperties.isBuffered has a boolean wire value; preserve the published property contract."
   isBuffered?: boolean;
 
   /**
@@ -7694,6 +7728,7 @@ model LoggerUpdateParameters {
   /**
    * Whether records are buffered in the logger before publishing. Default is assumed to be true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing LoggerUpdateParameters.isBuffered has a boolean wire value; preserve the published property contract."
   isBuffered?: boolean;
 }
 
@@ -7764,6 +7799,7 @@ model NamedValueEntityBaseParameters {
   /**
    * Determines whether the value is a secret and should be encrypted or not. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NamedValueEntityBaseParameters.secret has a boolean wire value; preserve the published property contract."
   secret?: boolean;
 }
 
@@ -7926,6 +7962,7 @@ model ConnectivityStatusContract {
   /**
    * Whether this is optional.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectivityStatusContract.isOptional has a boolean wire value; preserve the published property contract."
   isOptional: boolean;
 }
 
@@ -8130,11 +8167,13 @@ model OpenidConnectProviderContractProperties {
   /**
    * If true, the Open ID Connect provider may be used in the developer portal test console. True by default if no value is provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OpenidConnectProviderContractProperties.useInTestConsole has a boolean wire value; preserve the published property contract."
   useInTestConsole?: boolean;
 
   /**
    * If true, the Open ID Connect provider will be used in the API documentation in the developer portal. False by default if no value is provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OpenidConnectProviderContractProperties.useInApiDocumentation has a boolean wire value; preserve the published property contract."
   useInApiDocumentation?: boolean;
 }
 
@@ -8182,11 +8221,13 @@ model OpenidConnectProviderUpdateContractProperties {
   /**
    * If true, the Open ID Connect provider may be used in the developer portal test console. True by default if no value is provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OpenidConnectProviderUpdateContractProperties.useInTestConsole has a boolean wire value; preserve the published property contract."
   useInTestConsole?: boolean;
 
   /**
    * If true, the Open ID Connect provider will be used in the API documentation in the developer portal. False by default if no value is provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing OpenidConnectProviderUpdateContractProperties.useInApiDocumentation has a boolean wire value; preserve the published property contract."
   useInApiDocumentation?: boolean;
 }
 
@@ -8564,6 +8605,7 @@ model PortalConfigProperties {
   /**
    * Enable or disable Basic authentication method.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PortalConfigProperties.enableBasicAuth has a boolean wire value; preserve the published property contract."
   enableBasicAuth?: boolean = true;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -8592,6 +8634,7 @@ model PortalConfigPropertiesSignin {
   /**
    * Redirect anonymous users to the sign-in page.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PortalConfigPropertiesSignin.require has a boolean wire value; preserve the published property contract."
   require?: boolean = false;
 }
 
@@ -8615,6 +8658,7 @@ model PortalConfigTermsOfServiceProperties {
   /**
    * Ask user for consent to the terms of service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PortalConfigTermsOfServiceProperties.requireConsent has a boolean wire value; preserve the published property contract."
   requireConsent?: boolean = false;
 }
 
@@ -8623,11 +8667,13 @@ model PortalConfigDelegationProperties {
   /**
    * Enable or disable delegation for user registration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PortalConfigDelegationProperties.delegateRegistration has a boolean wire value; preserve the published property contract."
   delegateRegistration?: boolean = false;
 
   /**
    * Enable or disable delegation for product subscriptions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PortalConfigDelegationProperties.delegateSubscription has a boolean wire value; preserve the published property contract."
   delegateSubscription?: boolean = false;
 
   /**
@@ -8830,6 +8876,7 @@ model PortalRevisionContractProperties {
   /**
    * Indicates if the portal's revision is public.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PortalRevisionContractProperties.isCurrent has a boolean wire value; preserve the published property contract."
   isCurrent?: boolean;
 
   /**
@@ -8909,6 +8956,7 @@ model PortalSettingsContractProperties {
   /**
    * Redirect Anonymous users to the Sign-In page.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PortalSettingsContractProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -8924,6 +8972,7 @@ model SubscriptionsDelegationSettingsProperties {
   /**
    * Enable or disable delegation for subscriptions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SubscriptionsDelegationSettingsProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -8934,6 +8983,7 @@ model RegistrationDelegationSettingsProperties {
   /**
    * Enable or disable delegation for user registration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RegistrationDelegationSettingsProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -8949,11 +8999,13 @@ model TermsOfServiceProperties {
   /**
    * Display terms of service during a sign-up process.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TermsOfServiceProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
    * Ask user for consent to the terms of service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TermsOfServiceProperties.consentRequired has a boolean wire value; preserve the published property contract."
   consentRequired?: boolean;
 }
 
@@ -8965,6 +9017,7 @@ model PortalSigninSettingProperties {
   /**
    * Redirect Anonymous users to the Sign-In page.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PortalSigninSettingProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -8976,6 +9029,7 @@ model PortalSignupSettingsProperties {
   /**
    * Allow users to sign up on a developer portal.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PortalSignupSettingsProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -9179,6 +9233,7 @@ model SubscriptionContractProperties {
   /**
    * Determines whether tracing is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SubscriptionContractProperties.allowTracing has a boolean wire value; preserve the published property contract."
   allowTracing?: boolean;
 }
 
@@ -9368,11 +9423,13 @@ model RegionContract {
   /**
    * whether Region is the master region.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RegionContract.isMasterRegion has a boolean wire value; preserve the published property contract."
   isMasterRegion?: boolean;
 
   /**
    * whether Region is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RegionContract.isDeleted has a boolean wire value; preserve the published property contract."
   isDeleted?: boolean;
 }
 
@@ -10061,6 +10118,7 @@ model SubscriptionCreateParameterProperties {
   /**
    * Determines whether tracing can be enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SubscriptionCreateParameterProperties.allowTracing has a boolean wire value; preserve the published property contract."
   allowTracing?: boolean;
 }
 
@@ -10126,6 +10184,7 @@ model SubscriptionUpdateParameterProperties {
   /**
    * Determines whether tracing can be enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SubscriptionUpdateParameterProperties.allowTracing has a boolean wire value; preserve the published property contract."
   allowTracing?: boolean;
 }
 
@@ -10302,6 +10361,7 @@ model AccessInformationContractProperties {
   /**
    * Determines whether direct access is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccessInformationContractProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -10339,6 +10399,7 @@ model AccessInformationCreateParameterProperties {
   /**
    * Determines whether direct access is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccessInformationCreateParameterProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -10359,6 +10420,7 @@ model AccessInformationUpdateParameterProperties {
   /**
    * Determines whether direct access is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccessInformationUpdateParameterProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -10391,6 +10453,7 @@ model AccessInformationSecretsContract {
   /**
    * Determines whether direct access is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AccessInformationSecretsContract.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -10416,6 +10479,7 @@ model DeployConfigurationParameterProperties {
   /**
    * The value enforcing deleting subscriptions to products that are deleted in this update.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeployConfigurationParameterProperties.force has a boolean wire value; preserve the published property contract."
   force?: boolean;
 }
 
@@ -10441,6 +10505,7 @@ model SaveConfigurationParameterProperties {
   /**
    * The value if true, the current configuration database is committed to the Git repository, even if the Git repository has newer changes that would be overwritten.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SaveConfigurationParameterProperties.force has a boolean wire value; preserve the published property contract."
   force?: boolean;
 }
 
@@ -10473,16 +10538,19 @@ model TenantConfigurationSyncStateContractProperties {
   /**
    * value indicating if last sync was save (true) or deploy (false) operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TenantConfigurationSyncStateContractProperties.isExport has a boolean wire value; preserve the published property contract."
   isExport?: boolean;
 
   /**
    * value indicating if last synchronization was later than the configuration change.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TenantConfigurationSyncStateContractProperties.isSynced has a boolean wire value; preserve the published property contract."
   isSynced?: boolean;
 
   /**
    * value indicating whether Git configuration access is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TenantConfigurationSyncStateContractProperties.isGitEnabled has a boolean wire value; preserve the published property contract."
   isGitEnabled?: boolean;
 
   /**
@@ -10712,6 +10780,7 @@ model DiagnosticContractUpdateProperties {
   /**
    * Log the ClientIP. Default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DiagnosticContractUpdateProperties.logClientIp has a boolean wire value; preserve the published property contract."
   logClientIp?: boolean;
 
   /**
@@ -10732,6 +10801,7 @@ model DiagnosticContractUpdateProperties {
   /**
    * Emit custom metrics via emit-metric policy. Applicable only to Application Insights diagnostic settings.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DiagnosticContractUpdateProperties.metrics has a boolean wire value; preserve the published property contract."
   metrics?: boolean;
 }
 

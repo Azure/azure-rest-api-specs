@@ -177,6 +177,7 @@ interface DiagnosticContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -184,6 +185,7 @@ interface DiagnosticContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       @minValue(0)
       $skip?: int32;
@@ -336,6 +338,7 @@ interface Diagnostic {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -343,6 +346,7 @@ interface Diagnostic {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: int32;
     },
@@ -503,6 +507,7 @@ interface WorkspaceDiagnostic {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByWorkspace.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -510,6 +515,7 @@ interface WorkspaceDiagnostic {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByWorkspace.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: int32;
     },
@@ -678,6 +684,7 @@ interface WorkspaceApiDiagnostic {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByWorkspace.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -685,6 +692,7 @@ interface WorkspaceApiDiagnostic {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByWorkspace.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: int32;
     },

@@ -131,6 +131,7 @@ op analyzeBinaryCustomSignature(
   @query
   processingLocation?: ProcessingLocation = ProcessingLocation.global,
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing analyzeBinaryCustomSignature.allowInputTruncation has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01_preview)
   @doc("Overrides the analyzer's allowInputTruncation setting for this request. When omitted, the analyzer's configured value applies.")
   @query
@@ -169,6 +170,7 @@ op analyzeCustomSignature(
   @query
   processingLocation?: ProcessingLocation = ProcessingLocation.global,
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing analyzeCustomSignature.allowInputTruncation has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01_preview)
   @doc("Overrides the analyzer's allowInputTruncation setting for this request. When omitted, the analyzer's configured value applies.")
   @query
@@ -204,6 +206,7 @@ op analyzeInlineCustomSignature(
   @query
   processingLocation?: ProcessingLocation = ProcessingLocation.global,
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing analyzeInlineCustomSignature.allowInputTruncation has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01_preview)
   @doc("Overrides the analyzer's allowInputTruncation setting for this request. When omitted, the analyzer's configured value applies.")
   @query
@@ -248,6 +251,7 @@ op analyzeBinaryInlineCustomSignature(
   @query
   processingLocation?: ProcessingLocation = ProcessingLocation.global,
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing analyzeBinaryInlineCustomSignature.allowInputTruncation has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01_preview)
   @doc("Overrides the analyzer's allowInputTruncation setting for this request. When omitted, the analyzer's configured value applies.")
   @query

@@ -68,6 +68,7 @@ model AwsEcrRepositoryProperties {
   @doc("Property arn")
   arn?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsEcrRepositoryProperties.emptyOnDelete has a boolean wire value; preserve the published property contract."
   @doc("If true, deleting the repository force deletes the contents of the repository. If false, the repository must be empty before attempting to delete it. If true, deleting the repository force deletes the contents of the repository. Without a force delete, you can only delete empty repositories.")
   emptyOnDelete?: boolean;
 
@@ -139,6 +140,7 @@ union EncryptionConfigurationEncryptionType {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ImageScanningConfiguration")
 model ImageScanningConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImageScanningConfiguration.scanOnPush has a boolean wire value; preserve the published property contract."
   @doc("The setting that determines whether images are scanned after being pushed to a repository. If set to ``true``, images will be scanned after being pushed. If this parameter is not specified, it will default to ``false`` and images will not be scanned unless a scan is manually started. The setting that determines whether images are scanned after being pushed to a repository.")
   scanOnPush?: boolean;
 }

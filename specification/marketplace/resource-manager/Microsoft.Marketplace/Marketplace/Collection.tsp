@@ -35,6 +35,7 @@ interface Collections {
    * Create or update private store collection
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
     Collection,
     Request = Collection,
@@ -51,6 +52,7 @@ interface Collections {
   /**
    * Gets private store collections list
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     Collection,
     Response = ArmResponse<CollectionsList>,

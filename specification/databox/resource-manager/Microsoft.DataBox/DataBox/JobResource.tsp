@@ -48,6 +48,7 @@ interface JobResources {
       /**
        * $expand is supported on details parameter for job, which provides details on the job stages.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -108,6 +109,7 @@ interface JobResources {
       /**
        * $skipToken is supported on Get list of jobs, which provides the next page in the list of jobs.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByResourceGroup.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },
@@ -124,6 +126,7 @@ interface JobResources {
       /**
        * $skipToken is supported on Get list of jobs, which provides the next page in the list of jobs.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },

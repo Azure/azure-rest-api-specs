@@ -818,23 +818,27 @@ model IotHubProperties {
   /**
    * If true, SAS tokens with Iot hub scoped SAS keys cannot be used for authentication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IotHubProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 
   /**
    * If true, all device(including Edge devices but excluding modules) scoped SAS keys cannot be used for authentication.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name retained as-is to preserve backward compatibility with the published API; 'SAS' is a well-known acronym."
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IotHubProperties.disableDeviceSAS has a boolean wire value; preserve the published property contract."
   disableDeviceSAS?: boolean;
 
   /**
    * If true, all module scoped SAS keys cannot be used for authentication.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name retained as-is to preserve backward compatibility with the published API; 'SAS' is a well-known acronym."
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IotHubProperties.disableModuleSAS has a boolean wire value; preserve the published property contract."
   disableModuleSAS?: boolean;
 
   /**
    * If true, egress from IotHub will be restricted to only the allowed FQDNs that are configured via allowedFqdnList.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IotHubProperties.restrictOutboundNetworkAccess has a boolean wire value; preserve the published property contract."
   restrictOutboundNetworkAccess?: boolean;
 
   /**
@@ -925,6 +929,7 @@ model IotHubProperties {
   /**
    * If True, file upload notifications are enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IotHubProperties.enableFileUploadNotifications has a boolean wire value; preserve the published property contract."
   enableFileUploadNotifications?: boolean;
 
   /**
@@ -964,6 +969,7 @@ model IotHubProperties {
   /**
    * This property when set to true, will enable data residency, thus, disabling disaster recovery.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IotHubProperties.enableDataResidency has a boolean wire value; preserve the published property contract."
   enableDataResidency?: boolean;
 
   /**
@@ -1095,6 +1101,7 @@ model NetworkRuleSetProperties {
   /**
    * If True, then Network Rule Set is also applied to BuiltIn EventHub EndPoint of IotHub
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NetworkRuleSetProperties.applyToBuiltInEventHubEndpoint has a boolean wire value; preserve the published property contract."
   applyToBuiltInEventHubEndpoint: boolean;
 
   /**
@@ -1735,6 +1742,7 @@ model RouteProperties {
   /**
    * Used to specify whether a route is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RouteProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 }
 
@@ -1768,6 +1776,7 @@ model FallbackRouteProperties {
   /**
    * Used to specify whether the fallback route is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FallbackRouteProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 }
 
@@ -1953,6 +1962,7 @@ model RootCertificateProperties {
   /**
    * This property when set to true, hub will use G2 cert; while it's set to false, hub uses Baltimore Cert.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RootCertificateProperties.enableRootCertificateV2 has a boolean wire value; preserve the published property contract."
   enableRootCertificateV2?: boolean;
 
   /**
@@ -2481,6 +2491,7 @@ model IotHubNameAvailabilityInfo {
   /**
    * The value which indicates whether the provided name is available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IotHubNameAvailabilityInfo.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
@@ -2770,6 +2781,7 @@ model ExportDevicesRequest {
   /**
    * The value indicating whether keys should be excluded during export.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExportDevicesRequest.excludeKeys has a boolean wire value; preserve the published property contract."
   excludeKeys: boolean;
 
   /**
@@ -2790,6 +2802,7 @@ model ExportDevicesRequest {
   /**
    * The value indicating whether configurations should be exported.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ExportDevicesRequest.includeConfigurations has a boolean wire value; preserve the published property contract."
   includeConfigurations?: boolean;
 
   /**
@@ -2835,6 +2848,7 @@ model ImportDevicesRequest {
   /**
    * The value indicating whether configurations should be imported.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImportDevicesRequest.includeConfigurations has a boolean wire value; preserve the published property contract."
   includeConfigurations?: boolean;
 
   /**
@@ -2881,6 +2895,7 @@ model CertificateProperties {
   /**
    * Determines whether certificate has been verified.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateProperties.isVerified has a boolean wire value; preserve the published property contract."
   isVerified?: boolean;
 
   /**
@@ -2979,6 +2994,7 @@ model CertificatePropertiesWithNonce {
   /**
    * Determines whether certificate has been verified.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificatePropertiesWithNonce.isVerified has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isVerified?: boolean;
 
@@ -3085,6 +3101,7 @@ model CertificateBodyDescription {
   /**
    * True indicates that the certificate will be created in verified state and proof of possession will not be required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CertificateBodyDescription.isVerified has a boolean wire value; preserve the published property contract."
   isVerified?: boolean;
 }
 

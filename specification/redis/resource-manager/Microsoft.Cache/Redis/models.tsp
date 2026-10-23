@@ -480,6 +480,7 @@ model RedisCommonProperties {
   /**
    * Specifies whether the non-ssl Redis server port (6379) is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RedisCommonProperties.enableNonSslPort has a boolean wire value; preserve the published property contract."
   enableNonSslPort?: boolean = false;
 
   /**
@@ -521,6 +522,7 @@ model RedisCommonProperties {
   /**
    * Authentication to Redis through access keys is disabled when set as true. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RedisCommonProperties.disableAccessKeyAuthentication has a boolean wire value; preserve the published property contract."
   disableAccessKeyAuthentication?: boolean = false;
 
   /**
@@ -785,12 +787,14 @@ model RedisInstanceDetails {
   /**
    * Specifies whether the instance is a primary node.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RedisInstanceDetails.isMaster has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isMaster?: boolean;
 
   /**
    * Specifies whether the instance is a primary node.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RedisInstanceDetails.isPrimary has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPrimary?: boolean;
 }

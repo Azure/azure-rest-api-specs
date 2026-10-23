@@ -82,6 +82,7 @@ interface ProtectionContainers {
       /**
        * OData filter options.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing inquire POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       $filter?: string;
     }
@@ -111,6 +112,7 @@ interface BackupWorkloadItems {
       /**
        * skipToken Filter.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }

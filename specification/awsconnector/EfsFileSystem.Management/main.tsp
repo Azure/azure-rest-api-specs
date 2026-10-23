@@ -74,9 +74,11 @@ model AwsEfsFileSystemProperties {
   @doc("Use the ``BackupPolicy`` to turn automatic backups on or off for the file system. The backup policy turns automatic backups for the file system on or off.")
   backupPolicy?: BackupPolicy;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsEfsFileSystemProperties.bypassPolicyLockoutSafetyCheck has a boolean wire value; preserve the published property contract."
   @doc("(Optional) A boolean that specifies whether or not to bypass the ``FileSystemPolicy`` lockout safety check. The lockout safety check determines whether the policy in the request will lock out, or prevent, the IAM principal that is making the request from making future ``PutFileSystemPolicy`` requests on this file system. Set ``BypassPolicyLockoutSafetyCheck`` to ``True`` only when you intend to prevent the IAM principal that is making the request from making subsequent ``PutFileSystemPolicy`` requests on this file system. The default value is ``False``.")
   bypassPolicyLockoutSafetyCheck?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsEfsFileSystemProperties.encrypted has a boolean wire value; preserve the published property contract."
   @doc("A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying a KmsKeyId for an existing kms-key-long. If you don't specify a kms-key, then the default kms-key for EFS, ``/aws/elasticfilesystem``, is used to protect the encrypted file system.")
   encrypted?: boolean;
 

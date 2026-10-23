@@ -20,18 +20,22 @@ alias ConnectionsListParameters = {
   /**
    * Target of the connection.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ConnectionsListParameters.target retains the target query parameter; preserve wire compatibility."
   @query("target")
   target?: string;
 
   /**
    * Category of the connection.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ConnectionsListParameters.category retains the category query parameter; preserve wire compatibility."
   @query("category")
   category?: string;
 
   /**
    * query parameter that indicates if get connection call should return both connections and datastores
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConnectionsListParameters.includeAll has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing ConnectionsListParameters.includeAll retains the includeAll query parameter; preserve wire compatibility."
   @query("includeAll")
   includeAll?: boolean = false;
 };

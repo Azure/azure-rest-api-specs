@@ -114,6 +114,7 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
   @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureDevOpsOrganizationProfile.updateDescription has a boolean wire value; preserve the published property contract."
   @doc("Determines whether the service updates the Azure DevOps pool description.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
   updateDescription?: boolean;
@@ -141,6 +142,7 @@ model Organization {
   @doc("How many machines can be created at maximum in this organization out of the maximumConcurrency of the pool.")
   parallelism?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Organization.openAccess has a boolean wire value; preserve the published property contract."
   @doc("Determines if the pool should have open access to all projects in this organization.")
   openAccess?: boolean;
 
@@ -341,6 +343,7 @@ model PoolImage {
   @doc("The ephemeral type of the image.")
   ephemeralType?: EphemeralType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PoolImage.isEphemeral has a boolean wire value; preserve the published property contract."
   @doc("Read only. Determines if the image is ephemeral.")
   @visibility(Lifecycle.Read)
   @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
@@ -358,6 +361,7 @@ model PoolImage {
   @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
   provisioningScriptManagedIdentityClientId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PoolImage.provisioningScriptShouldRestart has a boolean wire value; preserve the published property contract."
   @doc("Determines whether the machine should be restarted after provisioning script execution for this image.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
   provisioningScriptShouldRestart?: boolean;
@@ -398,6 +402,7 @@ model SecretsManagementSettings {
   @doc("The list of certificates to install on all machines in the pool.")
   observedCertificates: url[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecretsManagementSettings.keyExportable has a boolean wire value; preserve the published property contract."
   @doc("Defines if the key of the certificates should be exportable.")
   keyExportable: boolean;
 }
@@ -824,6 +829,7 @@ interface Sku {
 @armResourceOperations
 interface SubscriptionUsages {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Actions must be HTTP Post operations."
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing usages SDK method name; renaming it would break client compatibility."
   @action
   @armProviderNameValue
   @get

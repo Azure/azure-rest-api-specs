@@ -56,6 +56,7 @@ model ConversationSuggestionsResponse {
   @renamedFrom(Versions.`2026-02-01-preview`, "generatedAt")
   createdAt: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ConversationSuggestionsResponse.success has a boolean wire value; preserve the published property contract."
   @removed(Versions.`2026-02-01-preview`)
   @doc("Indicates whether the suggestion generation was successful.")
   @visibility(Lifecycle.Read)

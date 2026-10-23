@@ -12,6 +12,7 @@ model CheckAddressSpaceAvailabilityRequest {
 
 @doc("Response of availability of the requested address space.")
 model CheckAddressSpaceAvailabilityResponse {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CheckAddressSpaceAvailabilityResponse.value has a boolean wire value; preserve the published property contract."
   @doc("Boolean representing whether the address space is available.")
   value: boolean;
 }

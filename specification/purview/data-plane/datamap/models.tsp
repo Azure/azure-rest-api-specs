@@ -315,6 +315,7 @@ model AtlasEntity {
   @visibility(Lifecycle.Read)
   collectionId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AtlasEntity.isIncomplete has a boolean wire value; preserve the published property contract."
   @doc("Whether it is a shell entity")
   isIncomplete?: boolean;
 
@@ -327,6 +328,7 @@ model AtlasEntity {
   @doc("Used to record the provenance of an instance of an entity or relationship.")
   provenanceType?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AtlasEntity.proxy has a boolean wire value; preserve the published property contract."
   @doc("Determines if there's a proxy.")
   proxy?: boolean;
 
@@ -369,6 +371,7 @@ model AtlasClassification {
     """)
   entityStatus?: EntityStatus;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AtlasClassification.removePropagationsOnEntityDelete has a boolean wire value; preserve the published property contract."
   @doc("Determines if propagations will be removed on entity deletion.")
   removePropagationsOnEntityDelete?: boolean;
 
@@ -481,6 +484,7 @@ model AtlasEntityHeader {
   @doc("The GUID of the record.")
   guid?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AtlasEntityHeader.isIncomplete has a boolean wire value; preserve the published property contract."
   @doc("Whether it is a shell entity")
   isIncomplete?: boolean;
 
@@ -1013,6 +1017,7 @@ model QueryResult {
   @encodedName("application/json", "@search.count")
   searchCount?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing QueryResult.searchCountApproximate has a boolean wire value; preserve the published property contract."
   @doc("'True' if the '@search.count' is an approximate value and vise versa.")
   @encodedName("application/json", "@search.count.approximate")
   searchCountApproximate?: boolean;
@@ -1489,15 +1494,19 @@ model AtlasAttributeDef {
   @doc("The description of the attribute.")
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AtlasAttributeDef.includeInNotification has a boolean wire value; preserve the published property contract."
   @doc("Determines if it is included in notification.")
   includeInNotification?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AtlasAttributeDef.isIndexable has a boolean wire value; preserve the published property contract."
   @doc("Determines if it is indexable.")
   isIndexable?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AtlasAttributeDef.isOptional has a boolean wire value; preserve the published property contract."
   @doc("Determines if it is optional.")
   isOptional?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AtlasAttributeDef.isUnique has a boolean wire value; preserve the published property contract."
   @doc("Determines if it unique.")
   isUnique?: boolean;
 
@@ -1589,6 +1598,7 @@ model DateFormat {
   @doc("The date format.")
   instance?: DateFormat;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DateFormat.lenient has a boolean wire value; preserve the published property contract."
   @doc("Determines the leniency of the date format.")
   lenient?: boolean;
 
@@ -1613,6 +1623,7 @@ model NumberFormat {
   @doc("The number format.")
   currencyInstance?: NumberFormat;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NumberFormat.groupingUsed has a boolean wire value; preserve the published property contract."
   @doc("Determines if grouping is used.")
   groupingUsed?: boolean;
 
@@ -1637,6 +1648,7 @@ model NumberFormat {
   @doc("The number format.")
   numberInstance?: NumberFormat;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NumberFormat.parseIntegerOnly has a boolean wire value; preserve the published property contract."
   @doc("Determines if only integer is parsed.")
   parseIntegerOnly?: boolean;
 
@@ -1728,6 +1740,7 @@ model AtlasEntityDef {
 model AtlasRelationshipAttributeDef {
   ...AtlasAttributeDef;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AtlasRelationshipAttributeDef.isLegacyAttribute has a boolean wire value; preserve the published property contract."
   @doc("Determines if it is a legacy attribute.")
   isLegacyAttribute?: boolean;
 
@@ -1846,9 +1859,11 @@ model AtlasRelationshipEndDef {
   @doc("The description of the relationship end definition.")
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AtlasRelationshipEndDef.isContainer has a boolean wire value; preserve the published property contract."
   @doc("Determines if it is container.")
   isContainer?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AtlasRelationshipEndDef.isLegacyAttribute has a boolean wire value; preserve the published property contract."
   @doc("Determines if it is a legacy attribute.")
   isLegacyAttribute?: boolean;
 

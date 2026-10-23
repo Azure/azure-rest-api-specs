@@ -205,6 +205,7 @@ model AppServiceCertificateOrderProperties {
   /**
    * <code>true</code> if the certificate should be automatically renewed when it expires; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AppServiceCertificateOrderProperties.autoRenew has a boolean wire value; preserve the published property contract."
   autoRenew?: boolean = true;
 
   /**
@@ -264,6 +265,7 @@ model AppServiceCertificateOrderProperties {
   /**
    * <code>true</code> if private key is external; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AppServiceCertificateOrderProperties.isPrivateKeyExternal has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPrivateKeyExternal?: boolean;
 
@@ -498,6 +500,7 @@ model AppServiceCertificateOrderPatchResourceProperties {
   /**
    * <code>true</code> if the certificate should be automatically renewed when it expires; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AppServiceCertificateOrderPatchResourceProperties.autoRenew has a boolean wire value; preserve the published property contract."
   autoRenew?: boolean = true;
 
   /**
@@ -557,6 +560,7 @@ model AppServiceCertificateOrderPatchResourceProperties {
   /**
    * <code>true</code> if private key is external; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AppServiceCertificateOrderPatchResourceProperties.isPrivateKeyExternal has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPrivateKeyExternal?: boolean;
 
@@ -658,6 +662,7 @@ model ReissueCertificateOrderRequestProperties {
   /**
    * Should we change the ASC type (from managed private key to external private key and vice versa).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ReissueCertificateOrderRequestProperties.isPrivateKeyExternal has a boolean wire value; preserve the published property contract."
   isPrivateKeyExternal?: boolean;
 }
 
@@ -689,6 +694,7 @@ model RenewCertificateOrderRequestProperties {
   /**
    * Should we change the ASC type (from managed private key to external private key and vice versa).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing RenewCertificateOrderRequestProperties.isPrivateKeyExternal has a boolean wire value; preserve the published property contract."
   isPrivateKeyExternal?: boolean;
 }
 
@@ -709,6 +715,7 @@ model SiteSealRequest {
   /**
    * If <code>true</code> use the light color theme for site seal; otherwise, use the default color theme.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SiteSealRequest.lightTheme has a boolean wire value; preserve the published property contract."
   lightTheme?: boolean;
 
   /**
@@ -1051,6 +1058,7 @@ model CsmOperationDescription {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CsmOperationDescription.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -1119,8 +1127,10 @@ model MetricSpecification {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   aggregationType?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricSpecification.supportsInstanceLevelAggregation has a boolean wire value; preserve the published property contract."
   supportsInstanceLevelAggregation?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricSpecification.enableRegionalMdmAccount has a boolean wire value; preserve the published property contract."
   enableRegionalMdmAccount?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceMdmAccount?: string;
@@ -1129,8 +1139,10 @@ model MetricSpecification {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metricFilterPattern?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricSpecification.fillGapWithZero has a boolean wire value; preserve the published property contract."
   fillGapWithZero?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MetricSpecification.isInternal has a boolean wire value; preserve the published property contract."
   isInternal?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1162,6 +1174,7 @@ model Dimension {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   internalName?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Dimension.toBeExportedForShoebox has a boolean wire value; preserve the published property contract."
   toBeExportedForShoebox?: boolean;
 }
 

@@ -94,6 +94,7 @@ interface ComputeResources {
       /**
        * Delete the underlying compute if 'Delete', or detach the underlying compute from workspace if 'Detach'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.underlyingResourceAction retains the underlyingResourceAction query parameter; preserve wire compatibility."
       @query("underlyingResourceAction")
       underlyingResourceAction: UnderlyingResourceAction;
     },
@@ -112,6 +113,7 @@ interface ComputeResources {
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
     },
@@ -121,6 +123,7 @@ interface ComputeResources {
   /**
    * Updates the custom services list. The list of custom services provided shall be overwritten.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing updateCustomServices retains its request-body shape; preserve wire compatibility."
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
@@ -162,6 +165,7 @@ interface ComputeResources {
   /**
    * Update Data Mounts of a Machine Learning compute.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing updateDataMounts retains its request-body shape; preserve wire compatibility."
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)

@@ -524,6 +524,7 @@ model NodeGroupProperties {
   diskSizeGB?: int64;
 
   /** Whether high availability is enabled on the node group. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing NodeGroupProperties.enableHa has a boolean wire value; preserve the published property contract."
   enableHa?: boolean;
 }
 

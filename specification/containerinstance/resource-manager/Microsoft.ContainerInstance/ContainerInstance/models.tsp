@@ -740,6 +740,7 @@ model ListResultContainerGroupPropertiesProperties {
   /**
    * The flag to determine whether the container group is created from standby pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ListResultContainerGroupPropertiesProperties.isCreatedFromStandbyPool has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCreatedFromStandbyPool?: boolean;
 }
@@ -1083,6 +1084,7 @@ model VolumeMount {
   /**
    * The flag indicating whether the volume mount is read-only.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VolumeMount.readOnly has a boolean wire value; preserve the published property contract."
   readOnly?: boolean;
 }
 
@@ -1184,11 +1186,13 @@ model SecurityContextDefinition {
   /**
    * The flag to determine if the container permissions is elevated to Privileged.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityContextDefinition.privileged has a boolean wire value; preserve the published property contract."
   privileged?: boolean;
 
   /**
    * A boolean value indicating whether the init process can elevate its privileges
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SecurityContextDefinition.allowPrivilegeEscalation has a boolean wire value; preserve the published property contract."
   allowPrivilegeEscalation?: boolean;
 
   /**
@@ -1378,6 +1382,7 @@ model AzureFileVolume {
   /**
    * The flag indicating whether the Azure File shared mounted as a volume is read-only.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureFileVolume.readOnly has a boolean wire value; preserve the published property contract."
   readOnly?: boolean;
 
   /**
@@ -1720,6 +1725,7 @@ model StandbyPoolProfileDefinition {
   /**
    * The flag to determine whether ACI should fail the create request if the container group can not be obtained from standby pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing StandbyPoolProfileDefinition.failContainerGroupCreateOnReuseFailure has a boolean wire value; preserve the published property contract."
   failContainerGroupCreateOnReuseFailure?: boolean;
 }
 
@@ -1906,6 +1912,7 @@ model ContainerGroupPropertiesProperties {
   /**
    * The flag to determine whether the container group is created from standby pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerGroupPropertiesProperties.isCreatedFromStandbyPool has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCreatedFromStandbyPool?: boolean;
 }
@@ -2290,6 +2297,7 @@ model ElasticProfile {
   /**
    * Flag that indicates whether desiredCount should be maintained when customer deletes SPECIFIC container groups (CGs) from the NGroups. In this case, new CGs will be created by NGroup to compensate for the specific deleted ones.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ElasticProfile.maintainDesiredCount has a boolean wire value; preserve the published property contract."
   maintainDesiredCount?: boolean;
 
   /**
@@ -2562,6 +2570,7 @@ model UpdateProfileRollingUpdateProfile {
   /**
    * Default is false. If set to true, the CGs will be updated in-place instead of creating new CG and deleting old ones.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UpdateProfileRollingUpdateProfile.inPlaceUpdate has a boolean wire value; preserve the published property contract."
   inPlaceUpdate?: boolean;
 }
 
@@ -2738,6 +2747,7 @@ model ContainerGroupProfileProperties {
   /**
    * Gets or sets Krypton use property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerGroupProfileProperties.useKrypton has a boolean wire value; preserve the published property contract."
   useKrypton?: boolean;
 }
 

@@ -722,28 +722,33 @@ model defenderForContainersAwsOffering extends cloudOffering {
   /**
    * Is security gating enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing defenderForContainersAwsOffering.securityGatingEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_01_preview)
   securityGatingEnabled?: boolean;
 
   /**
    * Is defender anti-malware enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing defenderForContainersAwsOffering.containerAntiMalwareEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_01_preview)
   containerAntiMalwareEnabled?: boolean;
 
   /**
    * Is audit logs data collection enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing defenderForContainersAwsOffering.enableAuditLogsAutoProvisioning has a boolean wire value; preserve the published property contract."
   enableAuditLogsAutoProvisioning?: boolean;
 
   /**
    * Is Microsoft Defender for Cloud Kubernetes agent auto provisioning enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing defenderForContainersAwsOffering.enableDefenderAgentAutoProvisioning has a boolean wire value; preserve the published property contract."
   enableDefenderAgentAutoProvisioning?: boolean;
 
   /**
    * Is Policy Kubernetes agent auto provisioning enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing defenderForContainersAwsOffering.enablePolicyAgentAutoProvisioning has a boolean wire value; preserve the published property contract."
   enablePolicyAgentAutoProvisioning?: boolean;
 
   /**
@@ -824,6 +829,7 @@ model DefenderForContainersAwsOfferingMdcContainersImageAssessment {
   /**
    * Is Microsoft Defender container image assessment enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderForContainersAwsOfferingMdcContainersImageAssessment.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -834,6 +840,7 @@ model DefenderForContainersAwsOfferingMdcContainersImageAssessment {
   /**
    * Is security findings enabled for container image assessment
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderForContainersAwsOfferingMdcContainersImageAssessment.securityFindingsEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_01_preview)
   securityFindingsEnabled?: boolean;
 }
@@ -845,6 +852,7 @@ model DefenderForContainersAwsOfferingMdcContainersAgentlessDiscoveryK8S {
   /**
    * Is Microsoft Defender container agentless discovery K8s enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderForContainersAwsOfferingMdcContainersAgentlessDiscoveryK8S.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -881,6 +889,7 @@ model vmScannersBase {
   /**
    * Is VM scanning enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing vmScannersBase.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -984,6 +993,7 @@ model arcAutoProvisioning {
   /**
    * Is arc auto provisioning enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing arcAutoProvisioning.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1014,6 +1024,7 @@ model DefenderForServersAwsOfferingVaAutoProvisioning {
   /**
    * Is Vulnerability Assessment auto provisioning enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderForServersAwsOfferingVaAutoProvisioning.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1039,6 +1050,7 @@ model DefenderForServersAwsOfferingMdeAutoProvisioning {
   /**
    * Is Microsoft Defender for Endpoint auto provisioning enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderForServersAwsOfferingMdeAutoProvisioning.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1107,6 +1119,7 @@ model DefenderFoDatabasesAwsOfferingRds {
   /**
    * Is RDS protection enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderFoDatabasesAwsOfferingRds.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1122,6 +1135,7 @@ model DefenderFoDatabasesAwsOfferingDatabasesDspm {
   /**
    * Is databases data security posture management (DSPM) protection enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderFoDatabasesAwsOfferingDatabasesDspm.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1240,6 +1254,7 @@ model DefenderForServersGcpOfferingVaAutoProvisioning {
   /**
    * Is Vulnerability Assessment auto provisioning enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderForServersGcpOfferingVaAutoProvisioning.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1265,6 +1280,7 @@ model DefenderForServersGcpOfferingMdeAutoProvisioning {
   /**
    * Is Microsoft Defender for Endpoint auto provisioning enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderForServersGcpOfferingMdeAutoProvisioning.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1362,6 +1378,7 @@ model defenderForContainersGcpOffering extends cloudOffering {
   /**
    * Is audit logs data collection enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing defenderForContainersGcpOffering.enableAuditLogsAutoProvisioning has a boolean wire value; preserve the published property contract."
   enableAuditLogsAutoProvisioning?: boolean;
 
   /**
@@ -1373,23 +1390,27 @@ model defenderForContainersGcpOffering extends cloudOffering {
   /**
    * Is security gating enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing defenderForContainersGcpOffering.securityGatingEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_01_preview)
   securityGatingEnabled?: boolean;
 
   /**
    * Is defender anti-malware enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing defenderForContainersGcpOffering.containerAntiMalwareEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_01_preview)
   containerAntiMalwareEnabled?: boolean;
 
   /**
    * Is Microsoft Defender for Cloud Kubernetes agent auto provisioning enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing defenderForContainersGcpOffering.enableDefenderAgentAutoProvisioning has a boolean wire value; preserve the published property contract."
   enableDefenderAgentAutoProvisioning?: boolean;
 
   /**
    * Is Policy Kubernetes agent auto provisioning enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing defenderForContainersGcpOffering.enablePolicyAgentAutoProvisioning has a boolean wire value; preserve the published property contract."
   enablePolicyAgentAutoProvisioning?: boolean;
 
   /**
@@ -1450,6 +1471,7 @@ model DefenderForContainersGcpOfferingMdcContainersImageAssessment {
   /**
    * Is Microsoft Defender container image assessment enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderForContainersGcpOfferingMdcContainersImageAssessment.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1465,6 +1487,7 @@ model DefenderForContainersGcpOfferingMdcContainersImageAssessment {
   /**
    * Is security findings enabled for container image assessment
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderForContainersGcpOfferingMdcContainersImageAssessment.securityFindingsEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_01_preview)
   securityFindingsEnabled?: boolean;
 }
@@ -1476,6 +1499,7 @@ model DefenderForContainersGcpOfferingMdcContainersAgentlessDiscoveryK8S {
   /**
    * Is Microsoft Defender container agentless discovery enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderForContainersGcpOfferingMdcContainersAgentlessDiscoveryK8S.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1587,6 +1611,7 @@ model DefenderCspmAwsOfferingServerlessContainers {
   /**
    * Is serverless containers scanning enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderCspmAwsOfferingServerlessContainers.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -1597,6 +1622,7 @@ model DefenderCspmAwsOfferingDataSensitivityDiscovery {
   /**
    * Is Microsoft Defender Data Sensitivity discovery enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderCspmAwsOfferingDataSensitivityDiscovery.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1612,6 +1638,7 @@ model DefenderCspmAwsOfferingDatabasesDspm {
   /**
    * Is databases DSPM protection enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderCspmAwsOfferingDatabasesDspm.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1692,6 +1719,7 @@ model DefenderCspmAwsOfferingAgentlessServerlessPosture {
   /**
    * Is agentless serverless posture enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderCspmAwsOfferingAgentlessServerlessPosture.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1784,6 +1812,7 @@ model DefenderCspmAwsOfferingMdcContainersImageAssessment {
   /**
    * Is Microsoft Defender container image assessment enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderCspmAwsOfferingMdcContainersImageAssessment.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1794,6 +1823,7 @@ model DefenderCspmAwsOfferingMdcContainersImageAssessment {
   /**
    * Is security findings enabled for container image assessment
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderCspmAwsOfferingMdcContainersImageAssessment.securityFindingsEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_01_preview)
   securityFindingsEnabled?: boolean;
 }
@@ -1805,6 +1835,7 @@ model DefenderCspmAwsOfferingMdcContainersAgentlessDiscoveryK8S {
   /**
    * Is Microsoft Defender container agentless discovery K8s enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderCspmAwsOfferingMdcContainersAgentlessDiscoveryK8S.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1877,6 +1908,7 @@ model DefenderCspmGcpOfferingCiemDiscovery {
   /**
    * Is audit log ingestion enabled for the Permissions Management offering
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderCspmGcpOfferingCiemDiscovery.enableAuditLogIngestion has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_01_preview)
   enableAuditLogIngestion?: boolean;
 }
@@ -1990,6 +2022,7 @@ model DefenderCspmGcpOfferingDataSensitivityDiscovery {
   /**
    * Is Microsoft Defender Data Sensitivity discovery enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderCspmGcpOfferingDataSensitivityDiscovery.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2010,6 +2043,7 @@ model DefenderCspmGcpOfferingMdcContainersImageAssessment {
   /**
    * Is Microsoft Defender container image assessment enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderCspmGcpOfferingMdcContainersImageAssessment.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2025,6 +2059,7 @@ model DefenderCspmGcpOfferingMdcContainersImageAssessment {
   /**
    * Is security findings enabled for container image assessment
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderCspmGcpOfferingMdcContainersImageAssessment.securityFindingsEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_01_preview)
   securityFindingsEnabled?: boolean;
 }
@@ -2036,6 +2071,7 @@ model DefenderCspmGcpOfferingMdcContainersAgentlessDiscoveryK8S {
   /**
    * Is Microsoft Defender container agentless discovery enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderCspmGcpOfferingMdcContainersAgentlessDiscoveryK8S.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2139,5 +2175,6 @@ model DefenderCspmJFrogOfferingMdcContainersImageAssessment {
   /**
    * Is Microsoft Defender container image assessment enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DefenderCspmJFrogOfferingMdcContainersImageAssessment.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }

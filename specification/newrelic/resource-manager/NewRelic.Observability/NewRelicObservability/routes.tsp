@@ -27,12 +27,14 @@ interface AccountsOperationGroup {
       /**
        * User Email.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.userEmail retains the userEmail query parameter; preserve wire compatibility."
       @query("userEmail")
       userEmail: string;
 
       /**
        * Location for NewRelic.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.location retains the location query parameter; preserve wire compatibility."
       @query("location")
       location: string;
     }
@@ -55,12 +57,14 @@ interface OrganizationsOperationGroup {
       /**
        * User Email.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.userEmail retains the userEmail query parameter; preserve wire compatibility."
       @query("userEmail")
       userEmail: string;
 
       /**
        * Location for NewRelic.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.location retains the location query parameter; preserve wire compatibility."
       @query("location")
       location: string;
     }
@@ -83,12 +87,14 @@ interface PlansOperationGroup {
       /**
        * Account Id.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.accountId retains the accountId query parameter; preserve wire compatibility."
       @query("accountId")
       accountId?: string;
 
       /**
        * Organization Id.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.organizationId retains the organizationId query parameter; preserve wire compatibility."
       @query("organizationId")
       organizationId?: string;
     }

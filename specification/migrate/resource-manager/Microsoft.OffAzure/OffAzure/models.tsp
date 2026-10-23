@@ -1733,6 +1733,7 @@ model MasterSiteProperties {
    * Gets or sets a value indicating whether multiple sites per site type are
    * allowed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MasterSiteProperties.allowMultipleSites has a boolean wire value; preserve the published property contract."
   allowMultipleSites?: boolean;
 
   /**
@@ -2523,6 +2524,7 @@ model ErrorDetails {
   /**
    * Gets a value indicating whether the error originated from a agent or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ErrorDetails.isAgentReportedError has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isAgentReportedError?: boolean;
 
@@ -2690,6 +2692,7 @@ model HypervMachineProperties {
   /**
    * Value indicating whether dynamic memory is enabled for the VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HypervMachineProperties.isDynamicMemoryEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDynamicMemoryEnabled?: boolean;
 
@@ -2725,6 +2728,7 @@ model HypervMachineProperties {
   /**
    * Gets or sets a value indicating whether Secure boot is enabled for the VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HypervMachineProperties.secureBootEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   secureBootEnabled?: boolean;
 
@@ -2738,24 +2742,28 @@ model HypervMachineProperties {
    * Gets or sets a value indicating whether trusted platform module is enabled on
    * the VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HypervMachineProperties.tpmEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   tpmEnabled?: boolean;
 
   /**
    * Gets or sets a value indicating whether key storage device is enabled on the VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HypervMachineProperties.ksdEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   ksdEnabled?: boolean;
 
   /**
    * Gets or sets a value indicating whether shielding is enabled for the VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HypervMachineProperties.shieldingRequested has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   shieldingRequested?: boolean;
 
   /**
    * Gets or sets a value indicating whether data protection is requested for a VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HypervMachineProperties.dataProtectionRequested has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   dataProtectionRequested?: boolean;
 
@@ -2763,6 +2771,7 @@ model HypervMachineProperties {
    * Gets or sets a value indicating whether encryption of state and migration
    * traffic is enabled for the VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HypervMachineProperties.encryptStateAndVmMigrationTraffic has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   encryptStateAndVmMigrationTraffic?: boolean;
 
@@ -2770,6 +2779,7 @@ model HypervMachineProperties {
    * Gets or sets a value indicating whether VM virtualization based security is
    * enabled for the VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HypervMachineProperties.virtualizationBasedSecurityOptOut has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   virtualizationBasedSecurityOptOut?: boolean;
 
@@ -2837,6 +2847,7 @@ model HypervMachineProperties {
    *
    *   Portal will show discovery in progress, if this value is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HypervMachineProperties.isGuestDetailsDiscoveryInProgress has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isGuestDetailsDiscoveryInProgress?: boolean;
 
@@ -2979,6 +2990,7 @@ model HypervMachineProperties {
   /**
    * Value indicating whether VM is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing HypervMachineProperties.isDeleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeleted?: boolean;
 
@@ -3575,6 +3587,7 @@ model SqlServerApplication {
   /**
    * Gets or sets the value which reflects if Named Pipe is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlServerApplication.isNamedPipeEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isNamedPipeEnabled?: boolean;
 
@@ -3582,6 +3595,7 @@ model SqlServerApplication {
    * Gets or sets the value which reflects if Named Pipe is enabled or not.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlServerApplication.isTcpIpEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isTcpIpEnabled?: boolean;
 
@@ -3605,6 +3619,7 @@ model SharePointServer {
   /**
    * Gets or sets a value indicating whether the SharePointServer is Enterprise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SharePointServer.isEnterprise has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEnterprise?: boolean;
 
@@ -4071,6 +4086,7 @@ model DependencyMapMachineInput {
    *             dependency mapping is to
    * be enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DependencyMapMachineInput.isDependencyMapToBeEnabled has a boolean wire value; preserve the published property contract."
   isDependencyMapToBeEnabled?: boolean;
 }
 
@@ -4203,6 +4219,7 @@ model DeleteImportedMachinesJobProperties {
   /**
    * deletion Confirmation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeleteImportedMachinesJobProperties.deletionConfirmation has a boolean wire value; preserve the published property contract."
   deletionConfirmation?: boolean;
 
   /**
@@ -4521,6 +4538,7 @@ model ImportMachineProperties {
   /**
    * Value indicating whether VM is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ImportMachineProperties.isDeleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeleted?: boolean;
 
@@ -4661,6 +4679,7 @@ model MasterSiteUpdateProperties {
    * Gets or sets a value indicating whether multiple sites per site type are
    * allowed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MasterSiteUpdateProperties.allowMultipleSites has a boolean wire value; preserve the published property contract."
   allowMultipleSites?: boolean;
 
   /**
@@ -4981,6 +5000,7 @@ model SqlAvailabilityGroupProperties {
   /**
    * Gets or sets a value indicating whether AG is multi subnet or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlAvailabilityGroupProperties.isMultiSubNet has a boolean wire value; preserve the published property contract."
   isMultiSubNet?: boolean;
 
   /**
@@ -5012,11 +5032,13 @@ model SqlAvailabilityGroupProperties {
    * Gets or sets a value indicating whether this Availability group is part of a
    * distributed AG.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlAvailabilityGroupProperties.isPartOfDistributedAvailabilityGroup has a boolean wire value; preserve the published property contract."
   isPartOfDistributedAvailabilityGroup?: boolean;
 
   /**
    * Gets or sets a value indicating whether the entity is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlAvailabilityGroupProperties.isDeleted has a boolean wire value; preserve the published property contract."
   isDeleted?: boolean;
 
   /**
@@ -5208,6 +5230,7 @@ model SqlDatabasePropertiesV2 {
   /**
    * Gets or sets a value indicating whether this database is a part of an HA setup.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlDatabasePropertiesV2.isDatabaseHighlyAvailable has a boolean wire value; preserve the published property contract."
   isDatabaseHighlyAvailable?: boolean;
 
   /**
@@ -5255,6 +5278,7 @@ model SqlDatabasePropertiesV2 {
   /**
    * Gets or sets a value indicating whether the entity is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlDatabasePropertiesV2.isDeleted has a boolean wire value; preserve the published property contract."
   isDeleted?: boolean;
 
   /**
@@ -5319,6 +5343,7 @@ model FileMetaData {
   /**
    * Gets or sets a value indicating whether memory optimized data option is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing FileMetaData.isMemoryOptimizedDataOptionEnabled has a boolean wire value; preserve the published property contract."
   isMemoryOptimizedDataOptionEnabled?: boolean;
 }
 
@@ -5492,11 +5517,13 @@ model SqlServerProperties {
   /**
    * Gets or sets a value indicating whether High Availability is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlServerProperties.isHighAvailabilityEnabled has a boolean wire value; preserve the published property contract."
   isHighAvailabilityEnabled?: boolean;
 
   /**
    * Gets or sets a value indicating whether failover cluster is configured or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlServerProperties.isClustered has a boolean wire value; preserve the published property contract."
   isClustered?: boolean;
 
   /**
@@ -5556,6 +5583,7 @@ model SqlServerProperties {
   /**
    * Gets or sets a value indicating whether the entity is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlServerProperties.isDeleted has a boolean wire value; preserve the published property contract."
   isDeleted?: boolean;
 
   /**
@@ -5630,6 +5658,7 @@ model SqlFciProperties {
    * Gets or sets a value indicating whether the FCI is hosted on possible owners
    * which are in multiple subnets.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlFciProperties.isMultiSubnet has a boolean wire value; preserve the published property contract."
   isMultiSubnet?: boolean;
 
   /**
@@ -5726,11 +5755,13 @@ model SqlServerV2UpdateProperties {
   /**
    * Gets or sets a value indicating whether High Availability is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlServerV2UpdateProperties.isHighAvailabilityEnabled has a boolean wire value; preserve the published property contract."
   isHighAvailabilityEnabled?: boolean;
 
   /**
    * Gets or sets a value indicating whether failover cluster is configured or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlServerV2UpdateProperties.isClustered has a boolean wire value; preserve the published property contract."
   isClustered?: boolean;
 
   /**
@@ -5778,6 +5809,7 @@ model SqlServerV2UpdateProperties {
   /**
    * Gets or sets a value indicating whether the entity is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SqlServerV2UpdateProperties.isDeleted has a boolean wire value; preserve the published property contract."
   isDeleted?: boolean;
 
   /**
@@ -5913,6 +5945,7 @@ model WebAppExtendedMachineProperties {
   /**
    * Gets a value indicating whether application is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebAppExtendedMachineProperties.isDeleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeleted?: boolean;
 
@@ -6074,6 +6107,7 @@ model IisWebApplicationProperties {
   /**
    * Gets a value indicating whether application is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IisWebApplicationProperties.isDeleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeleted?: boolean;
 
@@ -6110,6 +6144,7 @@ model IisWebApplicationProperties {
   /**
    * Gets a value indicating whether the WebApp has errors or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IisWebApplicationProperties.hasErrors has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasErrors?: boolean;
 
@@ -6144,6 +6179,7 @@ model IisApplicationUnit {
    * Gets or sets a value indicating whether 32 bit applications are allowed to run
    * on 64 bit.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IisApplicationUnit.enable32BitApiOnWin64 has a boolean wire value; preserve the published property contract."
   enable32BitApiOnWin64?: boolean;
 
   /**
@@ -6181,6 +6217,7 @@ model IisVirtualApplicationUnit {
   /**
    * Gets a value indicating whether the application corresponds to a directory.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IisVirtualApplicationUnit.isVirtualDirectory has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isVirtualDirectory?: boolean;
 
@@ -6275,6 +6312,7 @@ model WebApplicationConfigurationUnit {
    * Gets or sets a value indicating whether the configuration is edited or not by
    * the user.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebApplicationConfigurationUnit.isDeploymentTimeEditable has a boolean wire value; preserve the published property contract."
   isDeploymentTimeEditable?: boolean;
 
   /**
@@ -6299,6 +6337,7 @@ model WebApplicationDirectoryUnit {
    * discovery is done
    *             manually.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebApplicationDirectoryUnit.isEditable has a boolean wire value; preserve the published property contract."
   isEditable?: boolean;
 
   /**
@@ -6392,6 +6431,7 @@ model IisWebServerProperties {
   /**
    * Gets a value indicating whether application is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IisWebServerProperties.isDeleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeleted?: boolean;
 
@@ -6428,6 +6468,7 @@ model IisWebServerProperties {
   /**
    * Gets a value indicating whether the WebApp has errors or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing IisWebServerProperties.hasErrors has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasErrors?: boolean;
 
@@ -6475,12 +6516,14 @@ model TomcatWebApplicationProperties {
   /**
    * Boolean value having true if the application has database dependency.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TomcatWebApplicationProperties.hasDatabaseDependency has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasDatabaseDependency?: boolean;
 
   /**
    * Boolean value having true if the application has file dependency.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TomcatWebApplicationProperties.isExternalLoggingConfigured has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isExternalLoggingConfigured?: boolean;
 
@@ -6569,6 +6612,7 @@ model TomcatWebApplicationProperties {
   /**
    * Gets a value indicating whether application is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TomcatWebApplicationProperties.isDeleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeleted?: boolean;
 
@@ -6605,6 +6649,7 @@ model TomcatWebApplicationProperties {
   /**
    * Gets a value indicating whether the WebApp has errors or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TomcatWebApplicationProperties.hasErrors has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasErrors?: boolean;
 
@@ -6646,23 +6691,27 @@ model TomcatWebServerProperties {
   /**
    * Gets a value indicating whether application is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TomcatWebServerProperties.isClusteringPresent has a boolean wire value; preserve the published property contract."
   isClusteringPresent?: boolean;
 
   /**
    * Gets a value indicating whether application is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TomcatWebServerProperties.isMemoryRealmPresent has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isMemoryRealmPresent?: boolean;
 
   /**
    * is session tracking present
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TomcatWebServerProperties.isSessionTrackingPresent has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isSessionTrackingPresent?: boolean;
 
   /**
    * is access log valve present
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TomcatWebServerProperties.isAccessLogValvePresent has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isAccessLogValvePresent?: boolean;
 
@@ -6722,6 +6771,7 @@ model TomcatWebServerProperties {
   /**
    * Gets a value indicating whether application is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TomcatWebServerProperties.isDeleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeleted?: boolean;
 
@@ -6758,6 +6808,7 @@ model TomcatWebServerProperties {
   /**
    * Gets a value indicating whether the WebApp has errors or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TomcatWebServerProperties.hasErrors has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasErrors?: boolean;
 
@@ -6965,6 +7016,7 @@ model WebApplicationProperties {
   /**
    * Gets a value indicating whether application is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebApplicationProperties.isDeleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeleted?: boolean;
 
@@ -7001,6 +7053,7 @@ model WebApplicationProperties {
   /**
    * Gets a value indicating whether the WebApp has errors or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebApplicationProperties.hasErrors has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasErrors?: boolean;
 
@@ -7072,6 +7125,7 @@ model WebServerProperties {
   /**
    * Gets a value indicating whether application is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebServerProperties.isDeleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeleted?: boolean;
 
@@ -7108,6 +7162,7 @@ model WebServerProperties {
   /**
    * Gets a value indicating whether the WebApp has errors or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing WebServerProperties.hasErrors has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasErrors?: boolean;
 
@@ -7242,6 +7297,7 @@ model ServerProperties {
   /**
    * Gets or sets a value indicating whether Secure boot is enabled for the VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServerProperties.secureBootEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   secureBootEnabled?: boolean;
 
@@ -7288,6 +7344,7 @@ model ServerProperties {
    *
    *   Portal will show discovery in progress, if this value is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServerProperties.isGuestDetailsDiscoveryInProgress has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isGuestDetailsDiscoveryInProgress?: boolean;
 
@@ -7424,6 +7481,7 @@ model ServerProperties {
   /**
    * Value indicating whether VM is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ServerProperties.isDeleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeleted?: boolean;
 
@@ -7895,6 +7953,7 @@ model VmwareMachineProperties {
   /**
    * Indicates whether the host is in maintenance mode.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VmwareMachineProperties.hostInMaintenanceMode has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hostInMaintenanceMode?: boolean;
 
@@ -7938,18 +7997,21 @@ model VmwareMachineProperties {
   /**
    * Value indicating whether change tracking is supported.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VmwareMachineProperties.changeTrackingSupported has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   changeTrackingSupported?: boolean;
 
   /**
    * Value indicating whether change tracking is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VmwareMachineProperties.changeTrackingEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   changeTrackingEnabled?: boolean;
 
   /**
    * Gets or sets a value indicating whether Secure boot is enabled for the VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VmwareMachineProperties.secureBootEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   secureBootEnabled?: boolean;
 
@@ -8043,6 +8105,7 @@ model VmwareMachineProperties {
    *
    *   Portal will show discovery in progress, if this value is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VmwareMachineProperties.isGuestDetailsDiscoveryInProgress has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isGuestDetailsDiscoveryInProgress?: boolean;
 
@@ -8185,6 +8248,7 @@ model VmwareMachineProperties {
   /**
    * Value indicating whether VM is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing VmwareMachineProperties.isDeleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeleted?: boolean;
 

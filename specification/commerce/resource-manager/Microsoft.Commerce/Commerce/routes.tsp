@@ -17,18 +17,22 @@ alias UsageAggregatesOperationGroupListParameters = {
   /**
    * The start of the time range to retrieve data for.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing UsageAggregatesOperationGroupListParameters.reportedStartTime retains the reportedStartTime query parameter; preserve wire compatibility."
   @query("reportedStartTime")
   reportedStartTime: utcDateTime;
 
   /**
    * The end of the time range to retrieve data for.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing UsageAggregatesOperationGroupListParameters.reportedEndTime retains the reportedEndTime query parameter; preserve wire compatibility."
   @query("reportedEndTime")
   reportedEndTime: utcDateTime;
 
   /**
    * `True` returns usage data in instance-level detail, `false` causes server-side aggregation with fewer details. For example, if you have 3 website instances, by default you will get 3 line items for website consumption. If you specify showDetails = false, the data will be aggregated as a single line item for website consumption within the time period (for the given subscriptionId, meterId, usageStartTime and usageEndTime).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing UsageAggregatesOperationGroupListParameters.showDetails has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing UsageAggregatesOperationGroupListParameters.showDetails retains the showDetails query parameter; preserve wire compatibility."
   @query("showDetails")
   showDetails?: boolean;
 
@@ -36,12 +40,14 @@ alias UsageAggregatesOperationGroupListParameters = {
    * `Daily` (default) returns the data in daily granularity, `Hourly` returns the data in hourly granularity.
    */
   #suppress "@azure-tools/typespec-client-generator-core/client-default-value-type-mismatch" "Default value kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing UsageAggregatesOperationGroupListParameters.aggregationGranularity retains the aggregationGranularity query parameter; preserve wire compatibility."
   @query("aggregationGranularity")
   aggregationGranularity?: AggregationGranularity = AggregationGranularity.Daily;
 
   /**
    * Used when a continuation token string is provided in the response body of the previous call, enabling paging through a large result set. If not present, the data is retrieved from the beginning of the day/hour (based on the granularity) passed in.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing UsageAggregatesOperationGroupListParameters.continuationToken retains the continuationToken query parameter; preserve wire compatibility."
   @query("continuationToken")
   continuationToken?: string;
 };
@@ -75,6 +81,7 @@ interface RateCardOperationGroup {
    * Enables you to query for the resource/meter metadata and related prices used in a given subscription by Offer ID, Currency, Locale and Region. The metadata associated with the billing meters, including but not limited to service names, types, resources, units of measure, and regions, is subject to change at any time and without notice. If you intend to use this billing data in an automated fashion, please use the billing meter GUID to uniquely identify each billable item. If the billing meter GUID is scheduled to change due to a new billing model, you will be notified in advance of the change.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing get retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @tag("RateCard")

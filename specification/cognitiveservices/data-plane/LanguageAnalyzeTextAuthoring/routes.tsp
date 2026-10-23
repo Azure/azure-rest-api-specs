@@ -27,6 +27,7 @@ alias languageOperations = ResourceOperations<
  * Lists the existing projects.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing textAnalysisAuthoringListProjects SDK method name; renaming it would break client compatibility."
 @clientName("listProjects", "csharp")
 op textAnalysisAuthoringListProjects is languageOperations.ResourceList<
   TextAnalysisAuthoringProjectMetadata,
@@ -37,6 +38,7 @@ op textAnalysisAuthoringListProjects is languageOperations.ResourceList<
  * Lists the deployments belonging to a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing textAnalysisAuthoringListDeployments SDK method name; renaming it would break client compatibility."
 @clientName("listDeployments", "csharp")
 op textAnalysisAuthoringListDeployments is languageOperations.ResourceList<
   TextAnalysisAuthoringProjectDeployment,
@@ -47,6 +49,7 @@ op textAnalysisAuthoringListDeployments is languageOperations.ResourceList<
  * Lists the exported models belonging to a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing textAnalysisAuthoringListExportedModels SDK method name; renaming it would break client compatibility."
 @clientName("listExportedModels", "csharp")
 @added(Versions.v2024_11_15_preview)
 op textAnalysisAuthoringListExportedModels is languageOperations.ResourceList<
@@ -58,6 +61,7 @@ op textAnalysisAuthoringListExportedModels is languageOperations.ResourceList<
  * Lists the trained models belonging to a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing textAnalysisAuthoringListTrainedModels SDK method name; renaming it would break client compatibility."
 @clientName("listTrainedModels", "csharp")
 op textAnalysisAuthoringListTrainedModels is languageOperations.ResourceList<
   TextAnalysisAuthoringProjectTrainedModel,
@@ -68,6 +72,7 @@ op textAnalysisAuthoringListTrainedModels is languageOperations.ResourceList<
  * Lists the deployments resources assigned to the project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing textAnalysisAuthoringListDeploymentResources SDK method name; renaming it would break client compatibility."
 @clientName("listDeploymentResources", "csharp")
 @added(Versions.v2024_11_15_preview)
 op textAnalysisAuthoringListDeploymentResources is languageOperations.ResourceList<
@@ -79,6 +84,7 @@ op textAnalysisAuthoringListDeploymentResources is languageOperations.ResourceLi
  * Lists the non-expired training jobs created for a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing textAnalysisAuthoringListTrainingJobs SDK method name; renaming it would break client compatibility."
 @clientName("listTrainingJobs", "csharp")
 op textAnalysisAuthoringListTrainingJobs is languageOperations.ResourceList<
   TextAnalysisAuthoringTrainingJobState,
@@ -89,6 +95,7 @@ op textAnalysisAuthoringListTrainingJobs is languageOperations.ResourceList<
  * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing textAnalysisAuthoringListAssignedResourceDeployments SDK method name; renaming it would break client compatibility."
 @clientName("listAssignedResourceDeployments", "csharp")
 @added(Versions.v2024_11_15_preview)
 op textAnalysisAuthoringListAssignedResourceDeployments is languageOperations.ResourceList<
@@ -100,6 +107,7 @@ op textAnalysisAuthoringListAssignedResourceDeployments is languageOperations.Re
  * Lists the supported languages.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing textAnalysisAuthoringGetSupportedLanguages SDK method name; renaming it would break client compatibility."
 @clientName("getSupportedLanguages", "csharp")
 op textAnalysisAuthoringGetSupportedLanguages is languageOperations.ResourceList<
   TextAnalysisAuthoringSupportedLanguage,
@@ -111,6 +119,7 @@ op textAnalysisAuthoringGetSupportedLanguages is languageOperations.ResourceList
  * Lists the supported prebuilt entities that can be used while creating composed entities.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing textAnalysisAuthoringGetSupportedPrebuiltEntities SDK method name; renaming it would break client compatibility."
 @clientName("getSupportedPrebuiltEntities", "csharp")
 @added(Versions.v2024_11_15_preview)
 op textAnalysisAuthoringGetSupportedPrebuiltEntities is languageOperations.ResourceList<
@@ -122,6 +131,7 @@ op textAnalysisAuthoringGetSupportedPrebuiltEntities is languageOperations.Resou
  * Lists the support training config version for a given project type.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing textAnalysisAuthoringListTrainingConfigVersions SDK method name; renaming it would break client compatibility."
 @clientName("listTrainingConfigVersions", "csharp")
 op textAnalysisAuthoringListTrainingConfigVersions is languageOperations.ResourceList<
   TextAnalysisAuthoringTrainingConfigVersion,

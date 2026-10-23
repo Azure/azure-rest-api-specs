@@ -103,6 +103,7 @@ interface Clusters {
   /**
    * List all Event Hubs Namespace IDs in an Event Hubs Dedicated Cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listNamespaces retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("namespaces")
   listNamespaces is ArmResourceActionSync<

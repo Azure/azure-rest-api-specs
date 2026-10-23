@@ -59,6 +59,7 @@ model DeviceLocationVerificationContent {
 
 @doc("Response verifying location")
 model DeviceLocationVerificationResult {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeviceLocationVerificationResult.verificationResult has a boolean wire value; preserve the published property contract."
   @doc("True if the location is in the specified area, False otherwise")
   verificationResult: boolean;
 }

@@ -53,6 +53,7 @@ interface ExtensionTypes {
   /**
    * Get an extension type for the location.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing locationGet SDK method name; renaming it would break client compatibility."
   @tag("ExtensionTypes")
   @tag("ClusterExtensionTypes")
   locationGet is ExtensionTypeOps.Read<ExtensionType>;
@@ -60,6 +61,7 @@ interface ExtensionTypes {
   /**
    * List all Extension Types for the location.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing locationList SDK method name; renaming it would break client compatibility."
   @tag("ExtensionTypes")
   @tag("ClusterExtensionTypes")
   locationList is ExtensionTypeOps.List<
@@ -68,30 +70,35 @@ interface ExtensionTypes {
       /**
        * Filter results by Publisher ID of a marketplace extension type
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing locationList.publisherId retains the publisherId query parameter; preserve wire compatibility."
       @query("publisherId")
       publisherId?: string;
 
       /**
        * Filter results by Offer or Product ID of a marketplace extension type
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing locationList.offerId retains the offerId query parameter; preserve wire compatibility."
       @query("offerId")
       offerId?: string;
 
       /**
        * Filter results by Plan ID of a marketplace extension type
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing locationList.planId retains the planId query parameter; preserve wire compatibility."
       @query("planId")
       planId?: string;
 
       /**
        * Filter results by release train (default value is stable)
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing locationList.releaseTrain retains the releaseTrain query parameter; preserve wire compatibility."
       @query("releaseTrain")
       releaseTrain?: string;
 
       /**
        * Filter results by the cluster type for extension types
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing locationList.clusterType retains the clusterType query parameter; preserve wire compatibility."
       @query("clusterType")
       clusterType?: string;
     },
@@ -159,24 +166,28 @@ interface ExtensionTypeOperationGroup {
       /**
        * Filter results by Publisher ID of a marketplace extension type
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.publisherId retains the publisherId query parameter; preserve wire compatibility."
       @query("publisherId")
       publisherId?: string;
 
       /**
        * Filter results by Offer or Product ID of a marketplace extension type
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.offerId retains the offerId query parameter; preserve wire compatibility."
       @query("offerId")
       offerId?: string;
 
       /**
        * Filter results by Plan ID of a marketplace extension type
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.planId retains the planId query parameter; preserve wire compatibility."
       @query("planId")
       planId?: string;
 
       /**
        * Filter results by release train (default value is stable)
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.releaseTrain retains the releaseTrain query parameter; preserve wire compatibility."
       @query("releaseTrain")
       releaseTrain?: string;
     },

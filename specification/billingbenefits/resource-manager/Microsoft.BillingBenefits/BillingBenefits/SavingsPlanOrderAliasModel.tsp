@@ -51,6 +51,7 @@ interface SavingsPlanOrderAliasModels {
    * Create a savings plan. Learn more about permissions needed at https://go.microsoft.com/fwlink/?linkid=2215851
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing create retains its tenant-scoped route; preserve published resource IDs and API paths."
   @OpenAPI.externalDocs("https://go.microsoft.com/fwlink/?linkid=2215851/")
   create is ArmResourceCreateOrReplaceAsync<
     SavingsPlanOrderAliasModel,

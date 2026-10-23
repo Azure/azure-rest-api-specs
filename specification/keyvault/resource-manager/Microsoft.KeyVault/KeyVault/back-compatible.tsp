@@ -214,6 +214,7 @@ using Azure.Core;
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing VaultsGetDeletedCustomized SDK method name; renaming it would break client compatibility."
 op VaultsGetDeletedCustomized(
   ...Azure.ResourceManager.ProviderNamespace<DeletedVault>,
 
@@ -256,6 +257,7 @@ op VaultsPurgeDeletedCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing ManagedHsmsGetDeletedCustomized SDK method name; renaming it would break client compatibility."
 op ManagedHsmsGetDeletedCustomized(
   ...Azure.ResourceManager.ProviderNamespace<DeletedManagedHsm>,
 

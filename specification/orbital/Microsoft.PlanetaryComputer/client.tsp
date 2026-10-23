@@ -1266,6 +1266,7 @@ model GetSearchTileJsonOptions {
   @query("colormap") colormap?: string;
 
   /** Add mask to the output data. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GetSearchTileJsonOptions.returnMask has a boolean wire value; preserve the published property contract."
   @query("return_mask") returnMask?: boolean = true;
 }
 
@@ -1427,6 +1428,7 @@ model GetItemAssetStatisticsOptions {
   @query("nodata") noData?: string;
 
   /** Apply internal Scale or Offset. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing GetItemAssetStatisticsOptions.unscale has a boolean wire value; preserve the published property contract."
   @query("unscale") unscale?: boolean;
 
   /** WarpKernel resampling algorithm (only used when doing re-projection). */

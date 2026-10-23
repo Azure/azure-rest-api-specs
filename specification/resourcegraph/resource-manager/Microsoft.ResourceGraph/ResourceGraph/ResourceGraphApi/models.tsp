@@ -167,6 +167,7 @@ model QueryRequestOptions {
   /**
    * Only applicable for tenant and management group level queries to decide whether to allow partial scopes for result in case the number of subscriptions exceed allowed limits.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing QueryRequestOptions.allowPartialScopes has a boolean wire value; preserve the published property contract."
   allowPartialScopes?: boolean = false;
 
   /**

@@ -1195,9 +1195,11 @@ model ServerEventResponseAnimationVisemeDone extends ServerEvent {
 @usage(ResponseUsage)
 model ResponseCreateParams {
   /** Whether to commit the response to the conversation. Defaults to true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ResponseCreateParams.commit has a boolean wire value; preserve the published property contract."
   commit?: boolean = true;
 
   /** Whether to cancel any ongoing generation before starting this one. Defaults to true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ResponseCreateParams.cancel_previous has a boolean wire value; preserve the published property contract."
   cancel_previous?: boolean = true;
 
   /** Input items to append to the conversation context before generating a response. */

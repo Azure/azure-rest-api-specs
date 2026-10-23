@@ -87,6 +87,7 @@ model AwsEc2ImageProperties {
   @doc("<p>The description of the AMI that was provided during image creation.</p>")
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsEc2ImageProperties.enaSupport has a boolean wire value; preserve the published property contract."
   @doc("<p>Specifies whether enhanced networking with ENA is enabled.</p>")
   enaSupport?: boolean;
 
@@ -130,6 +131,7 @@ model AwsEc2ImageProperties {
   @identifiers(#[])
   productCodes?: ProductCode[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AwsEc2ImageProperties.public has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether the image has public launch permissions. The value is <code>true</code> if this image has public launch permissions or <code>false</code> if it has only implicit and explicit launch permissions.</p>")
   public?: boolean;
 
@@ -487,9 +489,11 @@ model Tag {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EbsBlockDevice")
 model EbsBlockDevice {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EbsBlockDevice.deleteOnTermination has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether the EBS volume is deleted on instance termination. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#preserving-volumes-on-termination'>Preserving Amazon EBS volumes on instance termination</a> in the <i>Amazon EC2 User Guide</i>.</p>")
   deleteOnTermination?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EbsBlockDevice.encrypted has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The effect of setting the encryption state to <code>true</code> depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see <a href='https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html#encryption-parameters'>Amazon EBS encryption</a> in the <i>Amazon EBS User Guide</i>.</p> <p>In no case can you remove encryption from an encrypted volume.</p> <p>Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see <a href='https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances'>Supported instance types</a>.</p> <p>This parameter is not returned by <a>DescribeImageAttribute</a>.</p> <p>For <a>CreateImage</a> and <a>RegisterImage</a>, whether you can include this parameter, and the allowed values differ depending on the type of block device mapping you are creating.</p> <ul> <li> <p>If you are creating a block device mapping for a <b>new (empty) volume</b>, you can include this parameter, and specify either <code>true</code> for an encrypted volume, or <code>false</code> for an unencrypted volume. If you omit this parameter, it defaults to <code>false</code> (unencrypted).</p> </li> <li> <p>If you are creating a block device mapping from an <b>existing encrypted or unencrypted snapshot</b>, you must omit this parameter. If you include this parameter, the request will fail, regardless of the value that you specify.</p> </li> <li> <p>If you are creating a block device mapping from an <b>existing unencrypted volume</b>, you can include this parameter, but you must specify <code>false</code>. If you specify <code>true</code>, the request will fail. In this case, we recommend that you omit the parameter.</p> </li> <li> <p>If you are creating a block device mapping from an <b>existing encrypted volume</b>, you can include this parameter, and specify either <code>true</code> or <code>false</code>. However, if you specify <code>false</code>, the parameter is ignored and the block device mapping is always encrypted. In this case, we recommend that you omit the parameter.</p> </li> </ul>")
   encrypted?: boolean;
 

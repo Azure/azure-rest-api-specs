@@ -65,6 +65,8 @@ interface UserContracts {
       /**
        * Send an Email notification to the User.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing createOrUpdate.notify has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing createOrUpdate.notify retains the notify query parameter; preserve wire compatibility."
       @query("notify")
       notify?: boolean;
 
@@ -125,12 +127,16 @@ interface UserContracts {
       /**
        * Whether to delete user's subscription or not.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.deleteSubscriptions has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.deleteSubscriptions retains the deleteSubscriptions query parameter; preserve wire compatibility."
       @query("deleteSubscriptions")
       deleteSubscriptions?: boolean;
 
       /**
        * Send an Account Closed Email notification to the User.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing delete.notify has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.notify retains the notify query parameter; preserve wire compatibility."
       @query("notify")
       notify?: boolean;
 
@@ -144,6 +150,7 @@ interface UserContracts {
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.appType retains the appType query parameter; preserve wire compatibility."
       @query("appType")
       appType?: AppType;
     },
@@ -167,6 +174,7 @@ interface UserContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -174,6 +182,7 @@ interface UserContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -181,6 +190,8 @@ interface UserContracts {
       /**
        * Detailed Group in response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing listByService.expandGroups has a boolean wire value; preserve the published property contract."
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByService.expandGroups retains the expandGroups query parameter; preserve wire compatibility."
       @query("expandGroups")
       expandGroups?: boolean;
     },
@@ -226,6 +237,7 @@ interface UserContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -233,6 +245,7 @@ interface UserContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -263,6 +276,7 @@ interface UserContracts {
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing send POST contract uses appType in the query; preserve wire compatibility."
       @query("appType")
       appType?: AppType;
     }

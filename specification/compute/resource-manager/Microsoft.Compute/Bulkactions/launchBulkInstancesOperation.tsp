@@ -44,6 +44,8 @@ alias LaunchBulkInstancesOperationId = {
 
 alias DeleteInstancesParameter = {
   /** When true, deletes all virtual machines created by this BulkAction Operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DeleteInstancesParameter.deleteInstances has a boolean wire value; preserve the published property contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing DeleteInstancesParameter.deleteInstances retains the deleteInstances query parameter; preserve wire compatibility."
   @query
   deleteInstances?: boolean;
 };
@@ -418,6 +420,7 @@ interface LaunchBulkInstancesOperation {
     @query
     $filter?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listVirtualMachines.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
     @doc("Skip token for pagination. Uses the token from a previous response to fetch the next page of results.")
     @query
     $skiptoken?: string,

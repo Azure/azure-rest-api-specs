@@ -126,10 +126,12 @@ model SaasSubscriptionDetails {
   @visibility(Lifecycle.Read)
   termUnit?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SaasSubscriptionDetails.isAutoRenew has a boolean wire value; preserve the published property contract."
   @doc("AutoRenew flag")
   @visibility(Lifecycle.Read)
   isAutoRenew?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SaasSubscriptionDetails.isFreeTrial has a boolean wire value; preserve the published property contract."
   @doc("FreeTrial flag")
   @visibility(Lifecycle.Read)
   isFreeTrial?: boolean;

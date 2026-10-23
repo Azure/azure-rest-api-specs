@@ -89,6 +89,7 @@ interface BulkActions {
     @query
     $filter?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listVirtualMachines.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
     @doc("Skip token for pagination. Uses the token from a previous response to fetch the next page of results.")
     @query
     $skiptoken?: string,

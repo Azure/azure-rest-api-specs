@@ -213,18 +213,22 @@ model ContainerSecurityContext {
   runAsGroup?: int32;
 
   /** Whether the container must run as a non-root user. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerSecurityContext.runAsNonRoot has a boolean wire value; preserve the published property contract."
   runAsNonRoot?: boolean;
 
   /** Whether the container runs in privileged mode. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerSecurityContext.privileged has a boolean wire value; preserve the published property contract."
   privileged?: boolean = false;
 
   /** Linux capabilities to add or drop. */
   capabilities?: LinuxCapabilities;
 
   /** Whether the process can gain additional privileges. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerSecurityContext.allowPrivilegeEscalation has a boolean wire value; preserve the published property contract."
   allowPrivilegeEscalation?: boolean = true;
 
   /** Whether the container root filesystem is read-only. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerSecurityContext.readOnlyRootFilesystem has a boolean wire value; preserve the published property contract."
   readOnlyRootFilesystem?: boolean = false;
 
   /** The seccomp profile applied to the container. */
@@ -260,9 +264,11 @@ model ContainerStatus {
   state: ContainerRuntimeState;
 
   /** Whether the container is ready to receive traffic. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerStatus.ready has a boolean wire value; preserve the published property contract."
   ready: boolean;
 
   /** Whether the container has started. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerStatus.started has a boolean wire value; preserve the published property contract."
   started: boolean;
 
   /** The number of times the container has restarted. */
@@ -522,6 +528,7 @@ model EgressPolicyRuleMatch {
   scheme?: EgressPolicyMatchScheme;
 
   /** Whether to decode and normalize the request path before matching. Defaults to true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EgressPolicyRuleMatch.normalizePath has a boolean wire value; preserve the published property contract."
   normalizePath?: boolean;
 }
 
@@ -691,6 +698,7 @@ model ContainerVolumeMount {
   mountPath: string;
 
   /** Whether the volume is mounted read-only. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContainerVolumeMount.readOnly has a boolean wire value; preserve the published property contract."
   readOnly?: boolean = false;
 }
 
@@ -803,6 +811,7 @@ model AzureBlobByoPodVolume extends PodVolume {
   fileCacheSizeLimit: StorageQuantity;
 
   /** Whether the blob volume is read-only. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureBlobByoPodVolume.readOnly has a boolean wire value; preserve the published property contract."
   readOnly?: boolean = false;
 }
 
@@ -815,6 +824,7 @@ model AzureBlobPodVolume extends PodVolume {
   fileCacheSizeLimit: StorageQuantity;
 
   /** Whether the blob volume is read-only. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureBlobPodVolume.readOnly has a boolean wire value; preserve the published property contract."
   readOnly?: boolean = false;
 }
 
@@ -836,6 +846,7 @@ model LocalPodVolume extends PodVolume {
 /** Entra ID-specific auth configuration for a port. */
 model PortAuthConfigEntraId {
   /** Whether Entra ID authentication is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PortAuthConfigEntraId.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /** Allowed email addresses. A maximum of 100 identity filters can be configured. */
@@ -854,6 +865,7 @@ model PortAuthConfigEntraId {
 /** GitHub-specific auth configuration for a port. Permits users whose verified email ends with @microsoft.com or @github.com. */
 model PortAuthConfigGithub {
   /** Whether GitHub authentication is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PortAuthConfigGithub.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /** Allowed email addresses. A maximum of 100 identity filters can be configured. */
@@ -872,6 +884,7 @@ model PortAuthConfigGithub {
 /** Auth configuration for a port. Each provider can be independently enabled/disabled without removing configuration. */
 model PortAuthConfig {
   /** Whether unauthenticated access is allowed. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PortAuthConfig.anonymous has a boolean wire value; preserve the published property contract."
   anonymous?: boolean;
 
   /** GitHub authentication settings. */
@@ -893,6 +906,7 @@ model PortCorsConfig {
   allowHeaders?: string[];
 
   /** Whether cross-origin requests may include credentials. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PortCorsConfig.allowCredentials has a boolean wire value; preserve the published property contract."
   allowCredentials?: boolean;
 
   /** The preflight response cache duration in seconds. */
@@ -996,6 +1010,7 @@ model CreateSandboxPortContent {
 /** Preset-specific properties for sandbox creation. These properties configure optional features for specific preset types. */
 model SandboxPresetProperties {
   /** Whether to enable the WorkIQ connection for the GitHubCopilot preset. When true, the WorkIQ managed API must be available in the region. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SandboxPresetProperties.isWorkIqConnectionEnabled has a boolean wire value; preserve the published property contract."
   isWorkIqConnectionEnabled?: boolean;
 }
 
@@ -1096,6 +1111,7 @@ model SandboxSourceDiskImage {
   name?: string;
 
   /** Indicates whether this references a public disk image. Must be true when using Name, must be false when using Id. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SandboxSourceDiskImage.isPublic has a boolean wire value; preserve the published property contract."
   isPublic?: boolean;
 }
 
@@ -1162,6 +1178,7 @@ model SandboxVolume {
   mountpoint: string;
 
   /** Whether the mount is read-only. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SandboxVolume.readOnly has a boolean wire value; preserve the published property contract."
   readOnly?: boolean = false;
 }
 
@@ -1288,6 +1305,7 @@ model PodSecurityContext {
   runAsGroup?: int32;
 
   /** Whether pod containers must run as non-root users. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing PodSecurityContext.runAsNonRoot has a boolean wire value; preserve the published property contract."
   runAsNonRoot?: boolean;
 
   /** Supplemental group IDs assigned to pod processes. */
@@ -1393,6 +1411,7 @@ model SandboxAgentIdentityRef {
 /** Automatic deletion settings for a sandbox. */
 model SandboxAutoDeletePolicy {
   /** Whether automatic deletion is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SandboxAutoDeletePolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /** The deletion delay in days. */
@@ -1408,6 +1427,7 @@ model SandboxAutoDeletePolicy {
 /** Automatic suspension settings for a sandbox. */
 model SandboxAutoSuspendPolicy {
   /** Whether automatic suspension is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing SandboxAutoSuspendPolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /** The idle interval before suspension. */
@@ -1664,6 +1684,7 @@ model TelemetryEndpoint {
   columns?: Record<LogColumnDef>;
 
   /** Whether to add top-level JSON fields from container logs as columns. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing TelemetryEndpoint.dynamicJsonColumns has a boolean wire value; preserve the published property contract."
   dynamicJsonColumns?: boolean = false;
 }
 

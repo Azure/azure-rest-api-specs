@@ -15,6 +15,7 @@ namespace Microsoft.StandbyPool;
 @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
 @doc("Specifies the dynamic sizing configuration.")
 model DynamicSizing {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing DynamicSizing.enabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether dynamic sizing is enabled for the standby pool.")
   enabled?: boolean;
 }

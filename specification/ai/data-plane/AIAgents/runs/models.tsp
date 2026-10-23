@@ -143,6 +143,7 @@ model ThreadRun {
   @encodedName("application/json", "tool_resources")
   toolResources?: ToolResources | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ThreadRun.parallelToolCalls has a boolean wire value; preserve the published property contract."
   @doc("Determines if tools can be executed in parallel within the run.")
   @encodedName("application/json", "parallel_tool_calls")
   parallelToolCalls: boolean;
@@ -229,6 +230,7 @@ model CreateRunOptions {
    * If `true`, returns a stream of events that happen during the Run as server-sent events,
    * terminating when the Run enters a terminal state with a `data: [DONE]` message.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CreateRunOptions.stream has a boolean wire value; preserve the published property contract."
   stream?: boolean;
 
   /**
@@ -289,6 +291,7 @@ model CreateRunOptions {
   responseFormat?: AgentsResponseFormatOption | null;
 
   /** If `true` functions will run in parallel during tool use. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CreateRunOptions.parallelToolCalls has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "parallel_tool_calls")
   parallelToolCalls?: boolean;
 
@@ -421,6 +424,7 @@ model CreateAndRunThreadOptions {
    * If `true`, returns a stream of events that happen during the Run as server-sent events,
    * terminating when the Run enters a terminal state with a `data: [DONE]` message.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CreateAndRunThreadOptions.stream has a boolean wire value; preserve the published property contract."
   stream?: boolean;
 
   /**
@@ -481,6 +485,7 @@ model CreateAndRunThreadOptions {
   responseFormat?: AgentsResponseFormatOption | null;
 
   /** If `true` functions will run in parallel during tool use. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing CreateAndRunThreadOptions.parallelToolCalls has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "parallel_tool_calls")
   parallelToolCalls?: boolean;
 

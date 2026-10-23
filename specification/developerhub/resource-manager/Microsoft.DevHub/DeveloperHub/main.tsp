@@ -53,6 +53,7 @@ interface Operations {
   /**
    * Returns list of operations.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @route("/providers/Microsoft.DevHub/operations")
   @summary("Gets a list of operations.")
   @tag("Operations")

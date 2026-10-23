@@ -37,6 +37,7 @@ interface DataBoundaryDefinitions {
   /**
    * Opt-in tenant to data boundary.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Existing put retains its tenant-scoped route; preserve published resource IDs and API paths."
   @tag("DataBoundaries")
   put is Extension.CreateOrReplaceSync<
     Extension.Tenant,

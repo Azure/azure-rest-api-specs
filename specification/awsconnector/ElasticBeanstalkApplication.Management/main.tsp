@@ -108,9 +108,11 @@ model ApplicationVersionLifecycleConfig {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of MaxAgeRule")
 model MaxAgeRule {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MaxAgeRule.deleteSourceFromS3 has a boolean wire value; preserve the published property contract."
   @doc("Set to true to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.")
   deleteSourceFromS3?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MaxAgeRule.enabled has a boolean wire value; preserve the published property contract."
   @doc("Specify true to apply the rule, or false to disable it.")
   enabled?: boolean;
 
@@ -124,9 +126,11 @@ model MaxAgeRule {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of MaxCountRule")
 model MaxCountRule {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MaxCountRule.deleteSourceFromS3 has a boolean wire value; preserve the published property contract."
   @doc("Set to true to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.")
   deleteSourceFromS3?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing MaxCountRule.enabled has a boolean wire value; preserve the published property contract."
   @doc("Specify true to apply the rule, or false to disable it.")
   enabled?: boolean;
 

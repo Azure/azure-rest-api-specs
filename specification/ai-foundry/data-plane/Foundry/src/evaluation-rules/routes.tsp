@@ -20,6 +20,7 @@ alias EvaluationRulesFilterQueryParams = {
   agentName?: string;
 
   /** The enabled query parameter. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing EvaluationRulesFilterQueryParams.enabled has a boolean wire value; preserve the published property contract."
   @query("enabled")
   @doc("Filter by the enabled status.")
   enabled?: boolean;

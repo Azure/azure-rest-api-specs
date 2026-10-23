@@ -22,6 +22,7 @@ model Connection {
   @visibility(Lifecycle.Read)
   target: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing Connection.isDefault has a boolean wire value; preserve the published property contract."
   @doc("Whether the connection is tagged as the default connection of its type")
   @visibility(Lifecycle.Read)
   isDefault: boolean;

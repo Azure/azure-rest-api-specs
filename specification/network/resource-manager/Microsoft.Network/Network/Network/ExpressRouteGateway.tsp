@@ -138,6 +138,7 @@ interface ExpressRouteGateways {
   /**
    * Lists ExpressRoute gateways in a given resource group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByResourceGroup retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ExpressRouteGateways")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways")
   @get
@@ -151,6 +152,7 @@ interface ExpressRouteGateways {
   /**
    * Lists ExpressRoute gateways under a given subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listBySubscription retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ExpressRouteGateways")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteGateways")
   @get
@@ -219,6 +221,7 @@ interface ExpressRouteGateways {
   /**
    * Lists ExpressRouteConnections.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ExpressRouteConnections")
   @get
   @action("expressRouteConnections")
@@ -246,12 +249,15 @@ interface ExpressRouteGateways {
       /**
        * The type of failover test.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getFailoverAllTestsDetails POST contract uses type in the query; preserve wire compatibility."
       @query("type")
       type?: string;
 
       /**
        * Fetch only the latest tests for each peering location.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getFailoverAllTestsDetails POST contract uses fetchLatest in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getFailoverAllTestsDetails.fetchLatest has a boolean wire value; preserve the published property contract."
       @query("fetchLatest")
       fetchLatest?: boolean;
     },
@@ -276,12 +282,14 @@ interface ExpressRouteGateways {
       /**
        * Peering location of the test.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getFailoverSingleTestDetails POST contract uses peeringLocation in the query; preserve wire compatibility."
       @query("peeringLocation")
       peeringLocation: string;
 
       /**
        * The unique Guid value which identifies the test.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getFailoverSingleTestDetails POST contract uses failoverTestId in the query; preserve wire compatibility."
       @query("failoverTestId")
       failoverTestId: string;
     },
@@ -306,6 +314,7 @@ interface ExpressRouteGateways {
       /**
        * Peering location of the test.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing startSiteFailoverTest POST contract uses peeringLocation in the query; preserve wire compatibility."
       @query("peeringLocation")
       peeringLocation: string;
     },
@@ -348,6 +357,8 @@ interface ExpressRouteGateways {
       /**
        * Whether to attempt a refresh of the route sets.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getRoutesInformation POST contract uses attemptRefresh in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getRoutesInformation.attemptRefresh has a boolean wire value; preserve the published property contract."
       @query("attemptRefresh")
       attemptRefresh?: boolean;
     },
@@ -370,6 +381,8 @@ interface ExpressRouteGateways {
       /**
        * Whether to attempt a refresh of the resiliency information.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Existing getResiliencyInformation POST contract uses attemptRefresh in the query; preserve wire compatibility."
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing getResiliencyInformation.attemptRefresh has a boolean wire value; preserve the published property contract."
       @query("attemptRefresh")
       attemptRefresh?: boolean;
     },

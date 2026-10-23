@@ -492,6 +492,7 @@ namespace Azure.AI.Projects {
 
   @doc("A content filter result indicating severity level and whether content was filtered.")
   model AzureContentFilterSeverityResult {
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureContentFilterSeverityResult.filtered has a boolean wire value; preserve the published property contract."
     @doc("Whether the content was filtered.")
     filtered: boolean;
 
@@ -518,9 +519,11 @@ namespace Azure.AI.Projects {
 
   @doc("A content filter result indicating whether the content was detected and filtered.")
   model AzureContentFilterDetectionResult {
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureContentFilterDetectionResult.filtered has a boolean wire value; preserve the published property contract."
     @doc("Whether the content was filtered.")
     filtered: boolean;
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureContentFilterDetectionResult.detected has a boolean wire value; preserve the published property contract."
     @doc("Whether the content category was detected.")
     detected: boolean;
   }
@@ -530,12 +533,14 @@ namespace Azure.AI.Projects {
     @doc("The ID of the custom blocklist.")
     id: string;
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureContentFilterBlocklistIdResult.filtered has a boolean wire value; preserve the published property contract."
     @doc("Whether the blocklist resulted in filtering.")
     filtered: boolean;
   }
 
   @doc("A collection of filtering results for configured custom blocklists.")
   model AzureContentFilterBlocklistResult {
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureContentFilterBlocklistResult.filtered has a boolean wire value; preserve the published property contract."
     @doc("Whether any blocklist resulted in filtering.")
     filtered: boolean;
 
@@ -545,9 +550,11 @@ namespace Azure.AI.Projects {
 
   @doc("A content filter detection result that includes a reason description.")
   model AzureContentFilterDetectionWithReasonResult {
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureContentFilterDetectionWithReasonResult.filtered has a boolean wire value; preserve the published property contract."
     @doc("Whether the content was filtered.")
     filtered: boolean;
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureContentFilterDetectionWithReasonResult.detected has a boolean wire value; preserve the published property contract."
     @doc("Whether the content category was detected.")
     detected: boolean;
 
@@ -566,9 +573,11 @@ namespace Azure.AI.Projects {
 
   @doc("A content filter detection result with completion text span details.")
   model AzureContentFilterCompletionTextSpanDetectionResult {
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureContentFilterCompletionTextSpanDetectionResult.filtered has a boolean wire value; preserve the published property contract."
     @doc("Whether the content was filtered.")
     filtered: boolean;
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureContentFilterCompletionTextSpanDetectionResult.detected has a boolean wire value; preserve the published property contract."
     @doc("Whether the content category was detected.")
     detected: boolean;
 
@@ -578,9 +587,11 @@ namespace Azure.AI.Projects {
 
   @doc("A content filter detection result that includes citation information for protected material.")
   model AzureContentFilterDetectionWithCitationResult {
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureContentFilterDetectionWithCitationResult.filtered has a boolean wire value; preserve the published property contract."
     @doc("Whether the content was filtered.")
     filtered: boolean;
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureContentFilterDetectionWithCitationResult.detected has a boolean wire value; preserve the published property contract."
     @doc("Whether the content category was detected.")
     detected: boolean;
 
@@ -602,18 +613,22 @@ namespace Azure.AI.Projects {
     @doc("The PII subcategory that was evaluated.")
     sub_category: string;
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureContentFilterPiiSubCategoryResult.filtered has a boolean wire value; preserve the published property contract."
     @doc("Whether the content was filtered for this subcategory.")
     filtered: boolean;
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureContentFilterPiiSubCategoryResult.detected has a boolean wire value; preserve the published property contract."
     @doc("Whether the subcategory was detected in the content.")
     detected: boolean;
   }
 
   @doc("A content filter detection result for Personally Identifiable Information.")
   model AzureContentFilterPersonallyIdentifiableInformationResult {
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureContentFilterPersonallyIdentifiableInformationResult.filtered has a boolean wire value; preserve the published property contract."
     @doc("Whether the content was filtered.")
     filtered: boolean;
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AzureContentFilterPersonallyIdentifiableInformationResult.detected has a boolean wire value; preserve the published property contract."
     @doc("Whether PII was detected in the content.")
     detected: boolean;
 
@@ -677,6 +692,7 @@ namespace Azure.AI.Projects {
 
   @doc("A content filter evaluation result for a specific source in the response.")
   model ContentFilterResult {
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing ContentFilterResult.blocked has a boolean wire value; preserve the published property contract."
     @doc("Whether the content was blocked by the content filter.")
     blocked: boolean;
 

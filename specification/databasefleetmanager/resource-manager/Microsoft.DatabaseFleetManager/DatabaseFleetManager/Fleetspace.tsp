@@ -57,18 +57,21 @@ interface Fleetspaces {
       /**
        * The number of elements in the collection to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByFleet.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: int64;
 
       /**
        * The number of elements to return from the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByFleet.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int64;
 
       /**
        * An opaque token that identifies a starting point in the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByFleet.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: string;
     }

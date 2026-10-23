@@ -138,6 +138,7 @@ interface AutomationAccounts {
    * Get all software update configurations for the account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing softwareUpdateConfigurationsList retains its response and SDK paging behavior; preserve published compatibility."
   @tag("Software Update Configuration")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @get
@@ -164,6 +165,7 @@ interface AutomationAccounts {
   /**
    * Gets the private link resources that need to be created for Automation account.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Preserve the existing automation SDK method name; renaming it would break client compatibility."
   @tag("PrivateLinkResources")
   @list
   @get
@@ -178,6 +180,7 @@ interface AutomationAccounts {
    * Retrieve the automation agent registration information.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing agentRegistrationInformationGet retains its response and SDK paging behavior; preserve published compatibility."
   @tag("AgentRegistrationInformation")
   @get
   @action("agentRegistrationInformation")
@@ -292,6 +295,7 @@ interface AutomationAccounts {
    * Retrieve the linked workspace for the account id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing linkedWorkspaceGet retains its response and SDK paging behavior; preserve published compatibility."
   @tag("LinkedWorkspace")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/linkedworkspaceoperations")
   @get
@@ -361,6 +365,7 @@ interface AutomationAccounts {
    * Return list of software update configuration machine runs
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing softwareUpdateConfigurationMachineRunsList retains its response and SDK paging behavior; preserve published compatibility."
   @tag("Software Update Configuration Machine Run")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @get
@@ -385,12 +390,14 @@ interface AutomationAccounts {
       /**
        * number of entries you skip before returning results
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing softwareUpdateConfigurationMachineRunsList.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       /**
        * Maximum number of entries returned in the results collection
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing softwareUpdateConfigurationMachineRunsList.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: string;
     }
@@ -420,6 +427,7 @@ interface AutomationAccounts {
    * Return list of software update configuration runs
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing softwareUpdateConfigurationRunsList retains its response and SDK paging behavior; preserve published compatibility."
   @tag("Software Update Configuration Run")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @get
@@ -444,12 +452,14 @@ interface AutomationAccounts {
       /**
        * Number of entries you skip before returning results
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing softwareUpdateConfigurationRunsList.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       /**
        * Maximum number of entries returned in the results collection
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing softwareUpdateConfigurationRunsList.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: string;
     }
@@ -459,6 +469,7 @@ interface AutomationAccounts {
    * Generates a Uri for use in creating a webhook.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Existing generateUri retains its media-type contract; preserve content-negotiation compatibility."
   @tag("Webhook")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/webhookoperations")
   @action("webhooks/generateUri")

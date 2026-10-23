@@ -87,6 +87,7 @@ interface Advisors {
   /**
    * Gets a list of database advisors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByDatabase retains its response and SDK paging behavior; preserve published compatibility."
   @tag("DatabaseAdvisors")
   listByDatabase is AdvisorOps.ListSinglePage<
     Advisor,
@@ -94,6 +95,7 @@ interface Advisors {
       /**
        * The child resources to include in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByDatabase.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -141,12 +143,14 @@ interface ServerAdvisors {
   /**
    * Gets a list of server advisors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Existing listByServer retains its response and SDK paging behavior; preserve published compatibility."
   listByServer is ServerAdvisorOps.ListSinglePage<
     Advisor,
     Parameters = {
       /**
        * The child resources to include in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Existing listByServer.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },

@@ -671,6 +671,7 @@ model AttentionReason {
   @added(Versions.v2026_03_01_preview)
   missingRequiredResourceProviders?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Existing AttentionReason.monitoringSourceNotConfigured has a boolean wire value; preserve the published property contract."
   @doc("Neither an Azure Health Model nor an SLI is configured for the Drill. Execution is blocked until a monitoring source is configured.")
   @added(Versions.v2026_08_31_preview)
   monitoringSourceNotConfigured?: boolean;

@@ -61,6 +61,7 @@ interface NewRelicMonitorResources {
       /**
        * User Email.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Existing delete.userEmail retains the userEmail query parameter; preserve wire compatibility."
       @query("userEmail")
       userEmail: string;
     },
@@ -217,6 +218,7 @@ interface NewRelicMonitorResources {
     ArmResponse<BillingInfoResponse>
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Existing list retains its request-body shape; preserve wire compatibility."
   @list
   @action("listConnectedPartnerResources")
   @summary("List of all active deployments that are associated with the marketplace subscription linked to the given monitor.")
