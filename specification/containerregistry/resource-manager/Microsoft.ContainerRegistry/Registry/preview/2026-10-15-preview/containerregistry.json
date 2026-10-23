@@ -7331,10 +7331,8 @@
           "description": "The username to authenticate with the source registry."
         },
         "password": {
-          "type": "string",
-          "format": "password",
-          "description": "The password used to authenticate with the source registry.",
-          "x-ms-secret": true
+          "$ref": "#/definitions/SecretString",
+          "description": "The password used to authenticate with the source registry."
         }
       },
       "required": [
@@ -9210,6 +9208,12 @@
         }
       }
     },
+    "SecretString": {
+      "type": "string",
+      "format": "password",
+      "description": "A string value that must be handled as a secret.",
+      "x-ms-secret": true
+    },
     "Sku": {
       "type": "object",
       "description": "The SKU of a container registry.",
@@ -9778,11 +9782,9 @@
           "description": "The password name \"password1\" or \"password2\""
         },
         "value": {
-          "type": "string",
-          "format": "password",
+          "$ref": "#/definitions/SecretString",
           "description": "The password value, returned only by the GenerateCredentials operation.\nOmitted from GET, PUT, and PATCH responses.",
-          "readOnly": true,
-          "x-ms-secret": true
+          "readOnly": true
         }
       }
     },
