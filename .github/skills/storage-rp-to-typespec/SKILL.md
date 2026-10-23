@@ -89,10 +89,19 @@ diff that are necessary to describe a reachable public model or operation.
 Investigate every public feature in the PR; do not silently select only the
 feature resembling an example.
 
+For each changed backend field, check its public create-request, update-request,
+and response models separately. A shared backend property can require changes
+to several public declarations with different visibility or nullability.
+Inspect versioned member hiding (`new`) as well as inheritance: a shadowed
+member can change read-only behavior without changing the JSON name or type.
+
 Compare the intended public result against the selected TypeSpec baseline:
 
 - An implementation rename is an **addition** if the old declaration is absent
   from the public baseline.
+- A visibility-only change is a **modification** of the same public wire
+  property, scoped to the affected versions. Do not emit synthetic wire names
+  from versioning helper declarations or change older-version visibility.
 - If a declaration is already represented correctly, omit it.
 - For changes to existing public declarations, record their public before and
   after states, not the private implementation class names.
@@ -100,7 +109,12 @@ Compare the intended public result against the selected TypeSpec baseline:
   the existing public contract is removed, version-scoped, or still supported.
 - Keep management-plane `api-version` separate from downstream data-plane
   versions and rollout flags. Ask if the target public version or exposure is
-  not established.
+  not established. Private-preview access in an earlier version does not
+  establish which version the author intends to publish.
+
+Record conditional defaults and omitted/null/empty behavior explicitly in
+public descriptions. Do not turn a rule-dependent or state-dependent default
+into an unconditional `default`.
 
 ### 4. Resolve ambiguity
 
@@ -113,6 +127,11 @@ The PR description, implementation, tests, and historical TypeSpec may disagree.
 Explain the disagreement to the author; do not automatically prefer any one of
 them. Reuse decisions already supplied in the current run. Do not write a
 success-shaped partial manifest while material questions remain.
+
+A paired, merged TypeSpec PR is a reference, not automatic ground truth. A
+disagreement about enum values, requiredness, disabling through explicit null,
+or publication version must block the handoff until the author resolves it.
+See the [reference cases](references/srp-investigation.md#reference-cases).
 
 ### 5. Write and check YAML
 
@@ -151,7 +170,9 @@ Stop here. The YAML is input for a **separate**, user-initiated
 - "Summarize the public interface changes from my SRP PR for TypeSpec authoring."
 
 The [examples](examples) are synthetic contracts, not actual Microsoft.Storage
-features. Initial discovery used one historical PR pair; this is not a
-generalization claim or a completed historical evaluation corpus. Add reviewed
-cases as more pairs become available. Other Storage RPs and deployed-service
-parity remain out of scope.
+features. Investigation has considered three historical PR pairs; the reference
+cases capture their patterns, not unquestioned gold records. This is not a
+generalization claim or a completed historical evaluation corpus. New endpoints,
+LROs, and paging have only synthetic coverage. Add reviewed cases as more pairs
+become available. Other Storage RPs and deployed-service parity remain out of
+scope.

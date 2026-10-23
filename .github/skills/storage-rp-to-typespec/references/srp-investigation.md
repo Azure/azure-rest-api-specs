@@ -83,8 +83,12 @@ Build a temporary investigation record, not part of the final YAML:
 | Tests           | Both positive and negative cases, omitted/null fields, older versions, GET/LIST/PUT/PATCH, and flag-on/flag-off behavior when relevant.              |
 
 Search outward from changed operations and models. Follow base classes,
-referenced model types, generic wrappers, serializer registration, and version
-dispatch. For a new endpoint, trace registration to its request/response
+shadowed members, overridden serialization attributes, referenced model types,
+generic wrappers, serializer registration, and version dispatch. A C# `new`
+member without an inherited read-only attribute can make the same JSON field
+writable only in newer versions. Verify which member the serializer actually
+uses for each version; do not assume base-class attributes apply unchanged.
+For a new endpoint, trace registration to its request/response
 serialization rather than assuming the operation class name identifies the
 public route.
 
@@ -99,6 +103,19 @@ Backend data-plane headers, downstream service versions, feature flags, and
 deployment configuration are evidence about implementation behavior. They are
 not automatically part of Microsoft.Storage's ARM contract. Investigate whether
 they affect public exposure; omit their internal details from the manifest.
+
+Distinguish private-preview availability from the requested publication scope.
+A feature can be accessible to registered callers in an earlier management API
+version and published generally in a later one. Obtain the author's intended
+public version set rather than copying every backend version gate into
+`apiVersions`.
+
+Trace defaults and validation through operation helpers and tests, not just
+model initializers. Check omitted, explicit null, empty collections, duplicate
+items, and PATCH merge behavior separately. A default selected from a rule type
+or applied only in a particular state belongs in `description`, not an
+unconditional `default`. Record confirmed array constraints such as `minItems`
+and `uniqueItems`; describe cross-property allowed-value rules in prose.
 
 ## Compare with the public baseline
 
@@ -116,8 +133,17 @@ Compare wire contracts, not textual source changes:
 
 - Record property additions/removals and changes to types, requiredness,
   nullability, visibility, constraints, documented defaults, or wire names.
+- Treat a new-version visibility change on the same JSON name as a property
+  modification. Keep old-version behavior intact; internal helper declaration
+  names used to preserve old versions are not additional wire properties.
+- Map each backend field to every affected public create-request,
+  update-request, and response declaration. Check the baseline for separate
+  models, inherited properties, and spreads; do not assume one backend model
+  maps to one public model or redeclare a property already inherited correctly.
+  Check visibility, requiredness, and nullability independently in each context.
 - Include complete definitions for newly referenced public models and enums.
 - Capture enum extensions as `modify` with complete before/after values.
+  A CLR enum does not by itself establish whether the public enum is extensible.
 - Capture operation additions, removals, and contract changes, including error
   codes or response headers only when public and contract-relevant.
 - If a backend rename replaces something absent from the public baseline,
@@ -132,6 +158,65 @@ Compare wire contracts, not textual source changes:
 The PR description is a useful feature summary, not an authoritative diff.
 Historical public specs can also be wrong. Resolve disagreements with the SRP
 author before generating final YAML.
+
+## Reference cases
+
+These are sanitized reasoning cases motivated by public PRs
+[#45965](https://github.com/Azure/azure-rest-api-specs/pull/45965),
+[#45825](https://github.com/Azure/azure-rest-api-specs/pull/45825), and
+[#46118](https://github.com/Azure/azure-rest-api-specs/pull/46118). Names and
+contracts below are synthetic, not a reproduction of private source. The cases
+are manual extraction/review references; schema checks do not test whether an
+agent investigates correctly or asks a blocking question.
+
+### Same wire property, new-version visibility
+
+Suppose an older version exposes `ExampleRuleProperties.metrics` as read-only.
+A new version selects a derived backend model whose shadowed `metrics` member
+is writable. The author confirms that only `2027-02-01` gains write access;
+the old version and JSON name remain unchanged.
+
+Expected result: one property `modify`, with the same wire name/type and the
+old/new visibility states. Do not add a second property or change the older
+version. If omission selects all metrics supported by the rule type, describe
+that condition rather than inventing one fixed default list. See the
+[versioned visibility manifest](../examples/versioned-visibility.yaml).
+
+### One backend feature, several public model targets
+
+Suppose a shared backend `placement` field is reachable from account creation,
+PATCH, and GET. The public project has separate create-parameter,
+update-parameter, and returned-resource models. The author confirms publication
+in `2027-02-01`, despite registered preview callers using an earlier version.
+
+Expected result: cover all three public targets, plus any new shared model and
+extensible enum. An omitted PATCH property can preserve state while explicit
+null clears it; that does not imply the create or response property is nullable.
+Record a state-dependent numeric default in the shared model's description.
+See the [multi-model manifest](../examples/multi-model-property.yaml).
+
+### Blocking disagreement: do not produce YAML
+
+Assume branch selection and source comparison are complete, but the available
+records disagree:
+
+| Record                              | Synthetic contract                                                           |
+| ----------------------------------- | ---------------------------------------------------------------------------- |
+| Pinned backend model and validation | `placement.mode` is required and accepts `Automatic`.                        |
+| Backend PATCH test                  | Explicit `placement: null` clears the feature.                               |
+| Historical public spec and example  | `mode` is optional with `On`/`Off` values; `mode: Off` disables the feature. |
+
+Expected result: ask the author to establish the intended wire values,
+requiredness, and disable/clear behavior for the target public versions.
+Investigate any relevant translation layer; the records may describe different
+snapshots or an intentional translation rather than equivalent contracts.
+Do not assume the merged public example wins, copy the backend enum blindly,
+combine the incompatible alternatives, or silently omit the disputed feature.
+
+Until those decisions are resolved, **do not write a manifest**, including an
+empty or partial one. This is an expected clarification outcome, not a failed
+schema check or a new manifest status. After clarification, resume extraction
+using the author's decisions and the pinned public baseline.
 
 ## Reference APIs
 

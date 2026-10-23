@@ -1,0 +1,34 @@
+# Synthetic contract; this is not a real Microsoft.Storage feature.
+schemaVersion: 1
+provider: Microsoft.Storage
+typespecProject: specification/storage/Storage.Management
+baseline:
+  branch: feature/example-storage-release
+  commit: "1111111111111111111111111111111111111111"
+changes:
+  - kind: property
+    action: modify
+    target: ExampleRuleProperties.metrics
+    apiVersions: ["2027-02-01"]
+    before:
+      wireName: metrics
+      type: ExampleMetric[]
+      required: false
+      nullable: false
+      visibility: [read]
+      constraints:
+        minItems: 1
+        uniqueItems: true
+    after:
+      wireName: metrics
+      type: ExampleMetric[]
+      required: false
+      nullable: false
+      visibility: [read, create, update]
+      description: >-
+        If omitted on create or update, the service selects all metrics supported
+        by the rule type. Explicit null and an empty list are rejected. Requested
+        metrics must be supported by the rule type and cannot contain duplicates.
+      constraints:
+        minItems: 1
+        uniqueItems: true

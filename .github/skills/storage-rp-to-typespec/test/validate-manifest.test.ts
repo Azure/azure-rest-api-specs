@@ -34,13 +34,16 @@ function manifest(changes: object[]) {
 }
 
 describe("contract-change manifest", () => {
-  it.each(["property-delta", "operation-addition", "no-public-changes"])(
-    "accepts the synthetic %s example",
-    (name) => {
-      const source = readFileSync(new URL(`../examples/${name}.yaml`, import.meta.url), "utf8");
-      expect(() => validateManifestText(source)).not.toThrow();
-    },
-  );
+  it.each([
+    "property-delta",
+    "versioned-visibility",
+    "multi-model-property",
+    "operation-addition",
+    "no-public-changes",
+  ])("accepts the synthetic %s example", (name) => {
+    const source = readFileSync(new URL(`../examples/${name}.yaml`, import.meta.url), "utf8");
+    expect(() => validateManifestText(source)).not.toThrow();
+  });
 
   it.each([
     ["addition without after", { ...propertyAddition, after: undefined }],
@@ -60,6 +63,44 @@ describe("contract-change manifest", () => {
     ],
   ])("rejects %s", (_name, change) => {
     expect(() => validateManifestText(stringify(manifest([change])))).toThrow();
+  });
+
+  it.each([true, false])("accepts uniqueItems: %s as a public array constraint", (uniqueItems) => {
+    expect(() =>
+      validateManifestText(
+        stringify(
+          manifest([
+            {
+              ...propertyAddition,
+              after: {
+                ...property,
+                type: "string[]",
+                constraints: { minItems: 1, uniqueItems },
+              },
+            },
+          ]),
+        ),
+      ),
+    ).not.toThrow();
+  });
+
+  it.each(["true", 1, null])("rejects non-boolean uniqueItems: %s", (uniqueItems) => {
+    expect(() =>
+      validateManifestText(
+        stringify(
+          manifest([
+            {
+              ...propertyAddition,
+              after: {
+                ...property,
+                type: "string[]",
+                constraints: { uniqueItems },
+              },
+            },
+          ]),
+        ),
+      ),
+    ).toThrow();
   });
 
   it("requires a pinned public baseline and the registered SRP target", () => {

@@ -39,6 +39,12 @@ For different results in different versions, use separate entries with disjoint
 addition; ask about backward compatibility rather than inferring a breaking
 rename from an implementation rename.
 
+A change from read-only to writable is a `modify` on the same wire property,
+not a remove/add pair. Scope it to the new public version so old-version
+visibility remains unchanged. When one backend field appears in distinct public
+create, update, and response models, include every target that needs a change;
+do not assume their visibility or nullability is identical.
+
 ### Properties and models
 
 A property state contains `wireName`, `type`, `required`, `nullable`, and
@@ -54,9 +60,16 @@ Do not use private CLR type names or TypeSpec decorator expressions.
 
 Optional `description`, `constraints`, and `default` convey public semantics.
 Include a default only when explicitly established, not a language runtime's
-zero value. Constraints support lengths, patterns, item counts, numeric bounds,
-`multipleOf`, and wire `format`; put conditional invariants in `description`
-when they cannot be represented by these fields.
+zero value. Use `default` only for an unconditional default in that property's
+context. Describe defaults depending on another field, rule type, or state in
+`description`, without a misleading constant `default`.
+
+Constraints support lengths, patterns, item counts, `uniqueItems`, numeric
+bounds, `multipleOf`, and wire `format`; put conditional invariants in
+`description` when they cannot be represented by these fields. Explicitly
+describe omitted/null/empty behavior when it changes the contract. For example,
+PATCH omission can preserve a value while explicit null clears it, and an
+omitted array can select service defaults while an empty array is rejected.
 
 A model state contains its complete `properties` array, plus an optional
 `baseModel` and `description`. List only properties declared by that model;
@@ -86,9 +99,13 @@ or recommended ARM defaults. Synchronous operations must not carry LRO fields.
 ## Examples and checks
 
 The [property delta](../examples/property-delta.yaml),
+[versioned visibility](../examples/versioned-visibility.yaml),
+[multi-model property](../examples/multi-model-property.yaml),
 [new operation](../examples/operation-addition.yaml), and
 [no public changes](../examples/no-public-changes.yaml) examples are synthetic.
-They do not declare real Storage APIs or encode the private historical PR.
+They do not declare real Storage APIs or encode private historical PRs.
+The [blocking disagreement case](srp-investigation.md#blocking-disagreement-do-not-produce-yaml)
+deliberately has no output manifest until its contract questions are resolved.
 
 From the repository root:
 
