@@ -13911,6 +13911,65 @@
         ]
       }
     },
+    "McpFrontendCertificateSan": {
+      "type": "object",
+      "description": "Additional Subject Alternative Names (SANs) for the frontend certificate.",
+      "properties": {
+        "dns": {
+          "type": "array",
+          "description": "DNS SANs.",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "ip": {
+          "type": "array",
+          "description": "IP address SANs.",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "dns",
+        "ip"
+      ]
+    },
+    "McpFrontendCertificateSpec": {
+      "type": "object",
+      "description": "Automatic frontend TLS server certificate management with cert-manager.",
+      "properties": {
+        "duration": {
+          "type": "string",
+          "description": "Certificate lifetime in Go time.Duration format (h|m|s), for example 240h or 45m."
+        },
+        "secretName": {
+          "type": "string",
+          "description": "Name of the Secret for storing the server certificate. Any existing data will be overwritten."
+        },
+        "renewBefore": {
+          "type": "string",
+          "description": "Time before expiry to begin renewal, in Go time.Duration format (h|m|s)."
+        },
+        "issuerRef": {
+          "$ref": "#/definitions/McpFrontendIssuerRef",
+          "description": "The cert-manager issuer reference."
+        },
+        "privateKey": {
+          "$ref": "#/definitions/McpFrontendPrivateKey",
+          "description": "The certificate private-key settings."
+        },
+        "san": {
+          "$ref": "#/definitions/McpFrontendCertificateSan",
+          "description": "Additional Subject Alternative Names (SANs) to include in the certificate."
+        }
+      },
+      "required": [
+        "issuerRef"
+      ]
+    },
     "McpFrontendEndpoint": {
       "type": "object",
       "description": "The frontend's Service port, incoming authentication, and required serving certificate.",
@@ -13936,6 +13995,162 @@
         "authentication",
         "tls"
       ]
+    },
+    "McpFrontendIssuerKind": {
+      "type": "string",
+      "description": "The frontend certificate issuer kinds.",
+      "enum": [
+        "Issuer",
+        "ClusterIssuer"
+      ],
+      "x-ms-enum": {
+        "name": "McpFrontendIssuerKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Issuer",
+            "value": "Issuer",
+            "description": "A namespaced issuer."
+          },
+          {
+            "name": "ClusterIssuer",
+            "value": "ClusterIssuer",
+            "description": "A cluster-scoped issuer."
+          }
+        ]
+      }
+    },
+    "McpFrontendIssuerRef": {
+      "type": "object",
+      "description": "The issuer used to issue the frontend's serving certificate.",
+      "properties": {
+        "group": {
+          "type": "string",
+          "description": "The API group of the issuer.",
+          "default": "cert-manager.io"
+        },
+        "kind": {
+          "$ref": "#/definitions/McpFrontendIssuerKind",
+          "description": "The kind of issuer."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the issuer."
+        }
+      },
+      "required": [
+        "kind",
+        "name"
+      ]
+    },
+    "McpFrontendManualCertificate": {
+      "type": "object",
+      "description": "A manually managed frontend TLS certificate.",
+      "properties": {
+        "secretRef": {
+          "type": "string",
+          "description": "Name of the Kubernetes Secret containing the certificate and private key, not the Secret contents."
+        }
+      },
+      "required": [
+        "secretRef"
+      ]
+    },
+    "McpFrontendPrivateKey": {
+      "type": "object",
+      "description": "The frontend certificate private-key settings.",
+      "properties": {
+        "algorithm": {
+          "$ref": "#/definitions/McpFrontendPrivateKeyAlgorithm",
+          "description": "The private-key algorithm."
+        },
+        "rotationPolicy": {
+          "$ref": "#/definitions/McpFrontendPrivateKeyRotationPolicy",
+          "description": "The cert-manager private-key rotation policy."
+        }
+      },
+      "required": [
+        "algorithm",
+        "rotationPolicy"
+      ]
+    },
+    "McpFrontendPrivateKeyAlgorithm": {
+      "type": "string",
+      "description": "The frontend certificate private-key algorithms.",
+      "enum": [
+        "Ec256",
+        "Ec384",
+        "Ec521",
+        "Ed25519",
+        "Rsa2048",
+        "Rsa4096",
+        "Rsa8192"
+      ],
+      "x-ms-enum": {
+        "name": "McpFrontendPrivateKeyAlgorithm",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ec256",
+            "value": "Ec256",
+            "description": "Elliptic curve with a 256-bit key."
+          },
+          {
+            "name": "Ec384",
+            "value": "Ec384",
+            "description": "Elliptic curve with a 384-bit key."
+          },
+          {
+            "name": "Ec521",
+            "value": "Ec521",
+            "description": "Elliptic curve with a 521-bit key."
+          },
+          {
+            "name": "Ed25519",
+            "value": "Ed25519",
+            "description": "Ed25519."
+          },
+          {
+            "name": "Rsa2048",
+            "value": "Rsa2048",
+            "description": "RSA with a 2048-bit key."
+          },
+          {
+            "name": "Rsa4096",
+            "value": "Rsa4096",
+            "description": "RSA with a 4096-bit key."
+          },
+          {
+            "name": "Rsa8192",
+            "value": "Rsa8192",
+            "description": "RSA with an 8192-bit key."
+          }
+        ]
+      }
+    },
+    "McpFrontendPrivateKeyRotationPolicy": {
+      "type": "string",
+      "description": "The frontend certificate private-key rotation policies.",
+      "enum": [
+        "Always",
+        "Never"
+      ],
+      "x-ms-enum": {
+        "name": "McpFrontendPrivateKeyRotationPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Always",
+            "value": "Always",
+            "description": "Rotate the private key whenever the certificate is renewed."
+          },
+          {
+            "name": "Never",
+            "value": "Never",
+            "description": "Retain the existing private key when renewing the certificate."
+          }
+        ]
+      }
     },
     "McpFrontendProperties": {
       "type": "object",
@@ -14058,21 +14273,45 @@
       "description": "The frontend's serving certificate configuration. Only the selected mode's settings apply.",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/TlsCertMethodMode",
+          "$ref": "#/definitions/McpFrontendTlsMode",
           "description": "The mode of TLS server certificate management."
         },
         "certManagerCertificateSpec": {
-          "$ref": "#/definitions/CertManagerCertificateSpec",
+          "$ref": "#/definitions/McpFrontendCertificateSpec",
           "description": "Automatic TLS server certificate management with cert-manager."
         },
         "manual": {
-          "$ref": "#/definitions/X509ManualCertificate",
+          "$ref": "#/definitions/McpFrontendManualCertificate",
           "description": "Manual TLS server certificate management through a referenced Secret."
         }
       },
       "required": [
         "mode"
       ]
+    },
+    "McpFrontendTlsMode": {
+      "type": "string",
+      "description": "The frontend's TLS server certificate management modes.",
+      "enum": [
+        "Automatic",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "McpFrontendTlsMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Automatic",
+            "value": "Automatic",
+            "description": "Automatic TLS server certificate configuration."
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "Manual TLS server certificate configuration."
+          }
+        ]
+      }
     },
     "McpServerConnectionAuthentication": {
       "type": "object",

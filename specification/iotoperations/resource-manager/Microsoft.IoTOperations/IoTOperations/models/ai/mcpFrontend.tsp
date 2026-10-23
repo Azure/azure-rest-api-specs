@@ -108,13 +108,138 @@ scalar McpFrontendAudience extends string;
 @added(Versions.`2026-11-01-preview`)
 model McpFrontendTls {
   /** The mode of TLS server certificate management. */
-  mode: TlsCertMethodMode;
+  mode: McpFrontendTlsMode;
 
   /** Automatic TLS server certificate management with cert-manager. */
-  certManagerCertificateSpec?: CertManagerCertificateSpec;
+  certManagerCertificateSpec?: McpFrontendCertificateSpec;
 
   /** Manual TLS server certificate management through a referenced Secret. */
-  manual?: X509ManualCertificate;
+  manual?: McpFrontendManualCertificate;
+}
+
+/** The frontend's TLS server certificate management modes. */
+@added(Versions.`2026-11-01-preview`)
+union McpFrontendTlsMode {
+  string,
+
+  /** Automatic TLS server certificate configuration. */
+  Automatic: "Automatic",
+
+  /** Manual TLS server certificate configuration. */
+  Manual: "Manual",
+}
+
+/** Automatic frontend TLS server certificate management with cert-manager. */
+@added(Versions.`2026-11-01-preview`)
+model McpFrontendCertificateSpec {
+  /** Certificate lifetime in Go time.Duration format (h|m|s), for example 240h or 45m. */
+  duration?: string;
+
+  /** Name of the Secret for storing the server certificate. Any existing data will be overwritten. */
+  secretName?: string;
+
+  /** Time before expiry to begin renewal, in Go time.Duration format (h|m|s). */
+  renewBefore?: string;
+
+  /** The cert-manager issuer reference. */
+  issuerRef: McpFrontendIssuerRef;
+
+  /** The certificate private-key settings. */
+  privateKey?: McpFrontendPrivateKey;
+
+  /** Additional Subject Alternative Names (SANs) to include in the certificate. */
+  san?: McpFrontendCertificateSan;
+}
+
+/** The issuer used to issue the frontend's serving certificate. */
+@added(Versions.`2026-11-01-preview`)
+model McpFrontendIssuerRef {
+  /** The API group of the issuer. */
+  group?: string = "cert-manager.io";
+
+  /** The kind of issuer. */
+  kind: McpFrontendIssuerKind;
+
+  /** The name of the issuer. */
+  name: string;
+}
+
+/** The frontend certificate issuer kinds. */
+@added(Versions.`2026-11-01-preview`)
+union McpFrontendIssuerKind {
+  string,
+
+  /** A namespaced issuer. */
+  Issuer: "Issuer",
+
+  /** A cluster-scoped issuer. */
+  ClusterIssuer: "ClusterIssuer",
+}
+
+/** The frontend certificate private-key settings. */
+@added(Versions.`2026-11-01-preview`)
+model McpFrontendPrivateKey {
+  /** The private-key algorithm. */
+  algorithm: McpFrontendPrivateKeyAlgorithm;
+
+  /** The cert-manager private-key rotation policy. */
+  rotationPolicy: McpFrontendPrivateKeyRotationPolicy;
+}
+
+/** The frontend certificate private-key algorithms. */
+@added(Versions.`2026-11-01-preview`)
+union McpFrontendPrivateKeyAlgorithm {
+  string,
+
+  /** Elliptic curve with a 256-bit key. */
+  Ec256: "Ec256",
+
+  /** Elliptic curve with a 384-bit key. */
+  Ec384: "Ec384",
+
+  /** Elliptic curve with a 521-bit key. */
+  Ec521: "Ec521",
+
+  /** Ed25519. */
+  Ed25519: "Ed25519",
+
+  /** RSA with a 2048-bit key. */
+  Rsa2048: "Rsa2048",
+
+  /** RSA with a 4096-bit key. */
+  Rsa4096: "Rsa4096",
+
+  /** RSA with an 8192-bit key. */
+  Rsa8192: "Rsa8192",
+}
+
+/** The frontend certificate private-key rotation policies. */
+@added(Versions.`2026-11-01-preview`)
+union McpFrontendPrivateKeyRotationPolicy {
+  string,
+
+  /** Rotate the private key whenever the certificate is renewed. */
+  Always: "Always",
+
+  /** Retain the existing private key when renewing the certificate. */
+  Never: "Never",
+}
+
+/** Additional Subject Alternative Names (SANs) for the frontend certificate. */
+@added(Versions.`2026-11-01-preview`)
+model McpFrontendCertificateSan {
+  /** DNS SANs. */
+  dns: string[] = #[];
+
+  /** IP address SANs. */
+  ip: string[] = #[];
+}
+
+/** A manually managed frontend TLS certificate. */
+@added(Versions.`2026-11-01-preview`)
+model McpFrontendManualCertificate {
+  /** Name of the Kubernetes Secret containing the certificate and private key, not the Secret contents. */
+  secretRef: string;
 }
 
 /** The output-only health of the frontend's serving, authentication, and routing subsystems. */
