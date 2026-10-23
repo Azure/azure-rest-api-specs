@@ -66,14 +66,16 @@
             "in": "path",
             "description": "The name of the server.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$(?![\\s\\S])"
           },
           {
             "name": "databaseName",
             "in": "path",
             "description": "The name of the database.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>*%&:\\\\/?\\u0000-\\u001F\\u007F-\\u009F\\uFFFF]{0,127}[^<>*%&:\\\\/?\\u0000-\\u001F\\u007F-\\u009F\\uFFFF.\\s]$(?![\\s\\S])"
           }
         ],
         "responses": {

@@ -115,12 +115,32 @@ model ReaderEndpointListResult {
   /** Array of results. */
   @visibility(Lifecycle.Read)
   @pageItems
-  value?: ReaderEndpoint[];
+  value: ReaderEndpoint[];
 
   /** Link to retrieve the next page of results. */
   @visibility(Lifecycle.Read)
   @nextLink
   nextLink?: url;
+}
+
+/** Resource path parameters with reader-specific parent-name validation. */
+@added(Versions.v2026_11_01_preview)
+model ReaderEndpointPathParameters<Resource extends {}> {
+  ...OmitProperties<
+    ResourceInstanceParameters<Resource>,
+    "serverName" | "readerEndpointName" | "databaseName"
+  >;
+
+  /** The name of the server. */
+  @path
+  @segment("servers")
+  @pattern("^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$(?![\\s\\S])")
+  serverName: string;
+
+  ...PickProperties<
+    ResourceInstanceParameters<Resource>,
+    "readerEndpointName" | "databaseName"
+  >;
 }
 
 /** Manage reader endpoints under a server. */
@@ -132,11 +152,22 @@ model ReaderEndpointListResult {
 )
 interface ReaderEndpoints {
   /** Gets a reader endpoint. */
-  get is ArmResourceRead<ReaderEndpoint>;
+  @get
+  @autoRoute
+  @armResourceRead(ReaderEndpoint)
+  get is Azure.ResourceManager.Foundations.ArmReadOperation<
+    ReaderEndpointPathParameters<ReaderEndpoint>,
+    ArmResponse<ReaderEndpoint>,
+    ErrorResponse
+  >;
 
   /** Creates or updates a reader endpoint. */
+  @put
+  @autoRoute
+  @armResourceCreateOrUpdate(ReaderEndpoint)
   @Azure.Core.useFinalStateVia("location")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ReaderEndpointPathParameters<ReaderEndpoint>,
     ReaderEndpoint,
     Response =
       | (ArmResourceUpdatedResponse<ReaderEndpoint> &
@@ -152,37 +183,56 @@ interface ReaderEndpoints {
             FinalUrlValue = url
           > &
             Azure.Core.Foundations.RetryAfterHeader
-        >
+        >,
+    ErrorResponse = Azure.ResourceManager.ErrorResponse
   >;
 
   /** Updates a reader endpoint. */
+  @autoRoute
+  @armResourceUpdate(ReaderEndpoint)
   @Azure.Core.useFinalStateVia("location")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
-    ReaderEndpoint,
-    PatchModel = ReaderEndpointUpdate,
-    LroHeaders = ArmCombinedLroHeaders<
-      FinalResult = ReaderEndpoint,
-      FinalUrlValue = url
-    > &
-      Azure.Core.Foundations.RetryAfterHeader
+  update is Azure.ResourceManager.Foundations.ArmUpdateOperation<
+    ReaderEndpointPathParameters<ReaderEndpoint>,
+    ReaderEndpointUpdate,
+    Response =
+      | ArmResponse<ReaderEndpoint>
+      | ArmAcceptedLroResponse<
+          "Resource update request accepted.",
+          ArmCombinedLroHeaders<
+            FinalResult = ReaderEndpoint,
+            FinalUrlValue = url
+          > &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
+    ErrorResponse = Azure.ResourceManager.ErrorResponse
   >;
 
   /** Deletes a reader endpoint. */
+  @delete
+  @autoRoute
+  @armResourceDelete(ReaderEndpoint)
   @Azure.Core.useFinalStateVia("location")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    ReaderEndpoint,
-    LroHeaders = ArmCombinedLroHeaders<
-      FinalResult = void,
-      FinalUrlValue = url
-    > &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
+  delete(...ReaderEndpointPathParameters<ReaderEndpoint>):
+    | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<
+        FinalResult = void,
+        FinalUrlValue = url
+      > &
+        Azure.Core.Foundations.RetryAfterHeader>
+    | ArmDeletedNoContentResponse
+    | ErrorResponse;
 
   /** Lists the reader endpoints for a server. */
-  listByServer is ArmResourceListByParent<
-    ReaderEndpoint,
-    Response = ArmResponse<ReaderEndpointListResult>
+  @get
+  @autoRoute
+  @list
+  @listsResource(ReaderEndpoint)
+  @segmentOf(ReaderEndpoint)
+  @armResourceList(ReaderEndpoint)
+  listByServer is Azure.ResourceManager.Foundations.ArmReadOperation<
+    ReaderEndpointPathParameters<Server>,
+    ArmResponse<ReaderEndpointListResult>,
+    ErrorResponse
   >;
 }
 
@@ -202,7 +252,13 @@ interface ReaderEndpointsList {
   @segmentOf(ReaderEndpoint)
   @armResourceList(ReaderEndpoint)
   listByDatabase is Azure.ResourceManager.Foundations.ArmReadOperation<
-    ResourceInstanceParameters<Database>,
+    OmitProperties<ReaderEndpointPathParameters<Database>, "databaseName"> & {
+      /** The name of the database. */
+      @path
+      @segment("databases")
+      @pattern("^[^<>*%&:\\\\/?\\u0000-\\u001F\\u007F-\\u009F\\uFFFF]{0,127}[^<>*%&:\\\\/?\\u0000-\\u001F\\u007F-\\u009F\\uFFFF.\\s]$(?![\\s\\S])")
+      databaseName: string;
+    },
     ArmResponse<ReaderEndpointListResult>,
     ErrorResponse
   >;
