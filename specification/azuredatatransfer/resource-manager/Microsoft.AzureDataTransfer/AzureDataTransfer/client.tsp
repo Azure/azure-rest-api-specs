@@ -5,3 +5,5 @@ using Azure.ClientGenerator.Core;
 using Microsoft.AzureDataTransfer;
 
 @@clientName(ActionType, "DateTransferActionType", "!autorest");
+
+@@clientName(FlowProperties.sourceAddresses, "streamSourceAddresses", "csharp");
