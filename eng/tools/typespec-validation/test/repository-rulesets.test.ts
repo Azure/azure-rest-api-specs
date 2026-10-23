@@ -13,7 +13,7 @@ describe("repository ruleset package", () => {
       `/** Example model. */
 model Example {
   /** Example flag. */
-  flag: boolean;
+  flag: string;
 }
 `,
     );
@@ -44,11 +44,15 @@ model Example {
     },
   );
 
-  it("allows enabling an individual rule disabled by the inherited ruleset", async () => {
+  it("enables no-boolean without changing upstream defaults", async () => {
     const code = "@azure-tools/typespec-azure-core/no-boolean";
+    await writeFile(
+      join(folder, "main.tsp"),
+      "/** Example model. */ model Example { /** Example flag. */ flag: boolean; }",
+    );
     const defaults = await compile(NodeHost, join(folder, "main.tsp"), {
       noEmit: true,
-      linterRuleSet: { extends: ["@azure-tools/typespec-azure-rulesets/data-plane"] },
+      linterRuleSet: { extends: ["@azure-tools/typespec-azure-rulesets-original/data-plane"] },
     });
     expect(defaults.diagnostics.some((diagnostic) => diagnostic.code === code)).toBe(false);
 
@@ -56,7 +60,6 @@ model Example {
       noEmit: true,
       linterRuleSet: {
         extends: ["@azure-tools/typespec-azure-rulesets/data-plane"],
-        enable: { [code]: true },
       },
     });
     expect(enabled.diagnostics.filter((diagnostic) => diagnostic.severity === "error")).toEqual([]);
@@ -123,4 +126,149 @@ op restart(
     expect(diagnostics).toHaveLength(1);
     expect(diagnostics[0].message).toContain("'newReason'");
   });
+
+  const batchCases = [
+    {
+      code: "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op",
+      profile: "resource-manager",
+      source: `@get
+@route("/providers/Microsoft.RolloutTest/widgets/{name}")
+op getWidget(
+  @path name: string,
+  __SUPPRESSION__
+  @query legacyReason?: string,
+  @query newReason?: string,
+): void;`,
+    },
+    {
+      code: "@azure-tools/typespec-azure-resource-manager/no-query-in-collection",
+      profile: "resource-manager",
+      source: `@get
+@route("/providers/Microsoft.RolloutTest/widgets")
+op listWidgets(
+  __SUPPRESSION__
+  @query legacyReason?: string,
+  @query newReason?: string,
+): void;`,
+    },
+    {
+      code: "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type",
+      profile: "resource-manager",
+      source: `@post
+@route("/legacy")
+op sendLegacy(
+  __SUPPRESSION__
+  @header contentType: "application/octet-stream",
+  @body payload: bytes,
+): void;
+@post
+@route("/new")
+op sendNew(@header contentType: "application/octet-stream", @body payload: bytes): void;`,
+    },
+    {
+      code: "@azure-tools/typespec-azure-resource-manager/use-model-request-body",
+      profile: "resource-manager",
+      source: `@post
+@route("/legacy")
+op sendLegacy(
+  __SUPPRESSION__
+  @body payload: string,
+): void;
+@post
+@route("/new")
+op sendNew(@body payload: string): void;`,
+    },
+    {
+      code: "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable",
+      profile: "resource-manager",
+      source: `__SUPPRESSION__
+@get
+@route("/providers/Microsoft.RolloutTest/widgets")
+op listLegacy(): string[];
+@get
+@route("/providers/Microsoft.RolloutTest/otherWidgets")
+op listNew(): string[];`,
+    },
+    {
+      code: "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis",
+      profile: "resource-manager",
+      source: `__SUPPRESSION__
+@put
+@route("/providers/Microsoft.RolloutTest/widgets/{name}")
+op createLegacy(@path name: string): void;
+@put
+@route("/providers/Microsoft.RolloutTest/otherWidgets/{name}")
+op createNew(@path name: string): void;`,
+    },
+    {
+      code: "@azure-tools/typespec-azure-core/no-boolean",
+      profile: "data-plane",
+      source: `model Flags {
+  __SUPPRESSION__
+  legacyFlag: boolean;
+  newFlag: boolean;
+}`,
+    },
+    {
+      code: "@azure-tools/typespec-client-generator-core/get-operation-name",
+      profile: "client-sdk",
+      source: `__SUPPRESSION__
+@get
+@route("/legacy")
+op fetchLegacy(): string;
+@get
+@route("/new")
+op fetchNew(): string;`,
+    },
+  ];
+
+  it.each(batchCases)(
+    "enables $code through composition and keeps new violations detectable",
+    { timeout: 30_000 },
+    async ({ code, profile, source }) => {
+      const imports = `import "@typespec/http";
+import "@azure-tools/typespec-azure-resource-manager";
+using TypeSpec.Http;
+using Azure.ResourceManager;
+@service
+@armProviderNamespace
+namespace Microsoft.RolloutTest;
+`;
+      await writeFile(join(folder, "main.tsp"), imports + source.replace("__SUPPRESSION__", ""));
+      const upstream = await compile(NodeHost, join(folder, "main.tsp"), {
+        noEmit: true,
+        linterRuleSet: { extends: [`@azure-tools/typespec-azure-rulesets-original/${profile}`] },
+      });
+      expect(upstream.diagnostics.filter(({ severity }) => severity === "error")).toEqual([]);
+      expect(upstream.diagnostics.filter((diagnostic) => diagnostic.code === code)).toEqual([]);
+
+      const profiles =
+        profile === "data-plane"
+          ? ["data-plane", "client-sdk"]
+          : ["resource-manager", "client-sdk"];
+      const options = {
+        noEmit: true,
+        linterRuleSet: {
+          extends: profiles.map((name) => `@azure-tools/typespec-azure-rulesets/${name}`),
+        },
+      };
+      const enabled = await compile(NodeHost, join(folder, "main.tsp"), options);
+      expect(enabled.diagnostics.filter(({ severity }) => severity === "error")).toEqual([]);
+      expect(enabled.diagnostics.filter((diagnostic) => diagnostic.code === code)).toHaveLength(2);
+
+      await writeFile(
+        join(folder, "main.tsp"),
+        imports +
+          source.replace(
+            "__SUPPRESSION__",
+            `#suppress "${code}" "Preserve the existing API or SDK contract during rule enablement."`,
+          ),
+      );
+      const suppressed = await compile(NodeHost, join(folder, "main.tsp"), options);
+      expect(suppressed.diagnostics.filter(({ severity }) => severity === "error")).toEqual([]);
+      expect(suppressed.diagnostics.filter((diagnostic) => diagnostic.code === code)).toHaveLength(
+        1,
+      );
+    },
+  );
 });
