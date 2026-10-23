@@ -994,7 +994,7 @@
           }
         },
         "x-ms-examples": {
-          "Update runtime binding network configuration (contract example; PATCH is not implemented by the service)": {
+          "Update mutable runtime binding network configuration": {
             "$ref": "./examples/RuntimeBindings_Update.json"
           }
         },
@@ -1564,6 +1564,16 @@
             ]
           }
         },
+        "settings": {
+          "type": "array",
+          "description": "Capability-specific configuration entries. AKS core capabilities require this collection to be empty or omitted.",
+          "items": {
+            "$ref": "#/definitions/CapabilitySetting"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the capability.",
@@ -1581,8 +1591,25 @@
         }
       },
       "required": [
-        "kind",
-        "state"
+        "kind"
+      ]
+    },
+    "CapabilitySetting": {
+      "type": "object",
+      "description": "A named capability-specific configuration value.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the capability-specific setting."
+        },
+        "value": {
+          "type": "string",
+          "description": "The string value of the capability-specific setting."
+        }
+      },
+      "required": [
+        "name",
+        "value"
       ]
     },
     "CapabilityState": {
@@ -1632,6 +1659,16 @@
         "versionPolicy": {
           "$ref": "#/definitions/VersionPolicy",
           "description": "The version selection policy for the capability."
+        },
+        "settings": {
+          "type": "array",
+          "description": "Capability-specific configuration entries. AKS core capabilities require this collection to be empty or omitted.",
+          "items": {
+            "$ref": "#/definitions/CapabilitySetting"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1742,6 +1779,30 @@
       "required": [
         "state"
       ]
+    },
+    "EgressMode": {
+      "type": "string",
+      "description": "The egress ownership mode for a managed runtime.",
+      "enum": [
+        "ServiceManaged",
+        "CustomerManaged"
+      ],
+      "x-ms-enum": {
+        "name": "EgressMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServiceManaged",
+            "value": "ServiceManaged",
+            "description": "Workload Manager supplies and manages the egress configuration."
+          },
+          {
+            "name": "CustomerManaged",
+            "value": "CustomerManaged",
+            "description": "The customer supplies and manages the egress configuration."
+          }
+        ]
+      }
     },
     "ExecutionIdentity": {
       "type": "object",
@@ -2081,8 +2142,6 @@
       },
       "discriminator": "provisioningMode",
       "required": [
-        "state",
-        "ownership",
         "kind",
         "provisioningMode"
       ]
@@ -2306,8 +2365,7 @@
         }
       },
       "required": [
-        "orchestratorBindingResourceId",
-        "state"
+        "orchestratorBindingResourceId"
       ]
     },
     "RuntimeLinkUpdate": {
@@ -2347,29 +2405,8 @@
           }
         },
         "egressMode": {
-          "type": "string",
-          "description": "Indicates who manages runtime egress.",
-          "default": "ServiceManaged",
-          "enum": [
-            "ServiceManaged",
-            "CustomerManaged"
-          ],
-          "x-ms-enum": {
-            "name": "EgressMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "ServiceManaged",
-                "value": "ServiceManaged",
-                "description": "Workload Manager supplies and manages the egress configuration."
-              },
-              {
-                "name": "CustomerManaged",
-                "value": "CustomerManaged",
-                "description": "The customer supplies and manages the egress configuration."
-              }
-            ]
-          }
+          "$ref": "#/definitions/EgressMode",
+          "description": "Indicates who manages runtime egress."
         }
       }
     },
@@ -2535,10 +2572,7 @@
           "description": "Aggregate status across children and dependencies.",
           "readOnly": true
         }
-      },
-      "required": [
-        "state"
-      ]
+      }
     },
     "WorkloadSpaceState": {
       "type": "string",

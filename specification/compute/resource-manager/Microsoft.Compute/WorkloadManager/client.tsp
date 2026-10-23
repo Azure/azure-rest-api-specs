@@ -27,6 +27,7 @@ using Microsoft.Compute.WorkloadManager;
   "csharp"
 );
 @@access(CapacityProfileUpdate, Access.public, "csharp");
+@@clientName(CapabilitySetting, "WorkloadCapabilitySetting", "csharp");
 @@clientName(CapabilityProperties, "WorkloadCapabilityProperties", "csharp");
 @@clientName(Capability, "WorkloadCapability", "csharp");
 @@clientName(CapabilityUpdate, "WorkloadCapabilityPatch", "csharp");

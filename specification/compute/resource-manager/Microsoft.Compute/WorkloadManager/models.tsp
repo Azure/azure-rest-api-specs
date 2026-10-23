@@ -232,7 +232,7 @@ model WorkloadSpaceProperties {
 
   /** The readiness of the composed runtime environment. */
   @visibility(Lifecycle.Read)
-  state: WorkloadSpaceState;
+  state?: WorkloadSpaceState;
 
   /** Aggregate status across children and dependencies. */
   @visibility(Lifecycle.Read)
@@ -314,7 +314,7 @@ model RuntimeNetworkProfile {
   ]>;
 
   /** Indicates who manages runtime egress. */
-  egressMode?: EgressMode = EgressMode.ServiceManaged;
+  egressMode?: EgressMode;
 }
 
 /** Read-only status shared by runtime binding variants. */
@@ -329,11 +329,11 @@ model RuntimeBindingReadOnlyProperties {
 
   /** Runtime readiness, independent of the most recent write operation. */
   @visibility(Lifecycle.Read)
-  state: RuntimeState;
+  state?: RuntimeState;
 
   /** The ownership of the provider resource. */
   @visibility(Lifecycle.Read)
-  ownership: RuntimeOwnership;
+  ownership?: RuntimeOwnership;
 
   /** Actionable detail when the binding is not ready. */
   @visibility(Lifecycle.Read)
@@ -455,7 +455,7 @@ model RuntimeLinkProperties {
 
   /** Runtime-link readiness, independent of provisioning success. */
   @visibility(Lifecycle.Read)
-  state: RuntimeState;
+  state?: RuntimeState;
 
   /** Actionable detail when the link is not ready. */
   @visibility(Lifecycle.Read)
@@ -473,6 +473,15 @@ model RuntimeLink is ProxyResource<RuntimeLinkProperties, false> {
   >;
 }
 
+/** A named capability-specific configuration value. */
+model CapabilitySetting {
+  /** The name of the capability-specific setting. */
+  name: string;
+
+  /** The string value of the capability-specific setting. */
+  value: string;
+}
+
 /** Properties of a capability enabled for a workload space. */
 model CapabilityProperties {
   /** The capability to enable, fixed when the capability is created. */
@@ -482,13 +491,17 @@ model CapabilityProperties {
   /** The version selection policy for the capability. */
   versionPolicy?: VersionPolicy = VersionPolicy.ServiceManaged;
 
+  /** Capability-specific configuration entries. AKS core capabilities require this collection to be empty or omitted. */
+  @identifiers(#["name"])
+  settings?: CapabilitySetting[];
+
   /** The provisioning state of the capability. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /** Capability readiness, independent of the most recent write operation. */
   @visibility(Lifecycle.Read)
-  state: CapabilityState;
+  state?: CapabilityState;
 
   /** Actionable detail when the capability is not ready. */
   @visibility(Lifecycle.Read)
@@ -572,4 +585,8 @@ model CapabilityUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
 model CapabilityMutableProperties {
   /** The version selection policy for the capability. */
   versionPolicy?: VersionPolicy;
+
+  /** Capability-specific configuration entries. AKS core capabilities require this collection to be empty or omitted. */
+  @identifiers(#["name"])
+  settings?: CapabilitySetting[];
 }
