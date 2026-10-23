@@ -34,6 +34,10 @@ on:
     - cron: "0 0,6,12,18 * * *"
 
   workflow_dispatch:
+    inputs:
+      typespec-channel:
+        description: 'TypeSpec packages: "stable" or an npm dist-tag such as "next"'
+        default: next
 
 permissions:
   contents: read
@@ -49,10 +53,15 @@ jobs:
       # Sort matrix elements from "most important" to "least important" for the best grouping and UI
       # Keep matrix values short, to maximize number of parameters shown in UI
       matrix:
-        # When triggered by schedule, validate both the default branch and typespec-next
-        # Use the placeholder string "default" instead of passing "" directly, since the latter gets ignored by
-        # the GitHub Jobs UI.
-        ref: ${{ fromJSON(github.event_name == 'schedule' && '["default", "next"]' || '["default"]') }}
+        # stable: committed TypeSpec versions. next (or a dispatched dist-tag): upcoming TypeSpec.
+        # Scheduled runs validate both. Runs for the typespec-next branch use "next".
+        channel: >-
+          ${{ fromJSON(
+          github.event_name == 'schedule' && '["stable", "next"]'
+          || github.event_name == 'workflow_dispatch' && format('[{0}]', toJSON(inputs.typespec-channel))
+          || (github.ref_name == 'typespec-next' || github.base_ref == 'typespec-next') && '["next"]'
+          || '["stable"]'
+          ) }}
         os: [ubuntu, windows]
         # shards must start at 1 and increment by 1
         shard: [1, 2, 3]
@@ -60,6 +69,9 @@ jobs:
         total-shards: [3]
 
     runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
+
+    env:
+      OVERLAY_TYPESPEC_NEXT: ${{ matrix.channel != 'stable' && github.ref == 'refs/heads/main' }}
 
     steps:
       - name: Enable git long paths
@@ -69,16 +81,30 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-          # Convert placeholder string 'default' to '', which tells the action to checkout the default ref.
-          ref: ${{ matrix.ref == 'next' && 'typespec-next' || '' }}
+          # Overlaying typespec-next needs the history to find a merge base.
+          fetch-depth: ${{ fromJSON(env.OVERLAY_TYPESPEC_NEXT == 'true' && '0' || '1') }}
+
+      # On main, an upcoming TypeSpec release is validated together with the spec changes waiting
+      # on typespec-next. Only specification/ is taken from that branch, so tooling always comes
+      # from main. A conflict fails the job: sync main into typespec-next to resolve it.
+      - name: Overlay typespec-next spec changes
+        if: env.OVERLAY_TYPESPEC_NEXT == 'true'
+        shell: bash
+        run: |
+          git merge --no-commit --no-ff origin/typespec-next
+          git restore --source=HEAD --staged --worktree -- . ':!specification'
+          git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" \
+            commit --allow-empty --quiet -m "Overlay typespec-next spec changes"
 
       - name: Setup Node and install deps
-        # Use the checked-out branch, which can be typespec-next rather than the workflow's commit.
         uses: ./.github/actions/setup-node-install-deps
+        with:
+          typespec-channel: ${{ matrix.channel }}
 
       - name: Validate All Specs
         run: >-
           node eng/tools/typespec-validation/cmd/tsv.js --all
           --shard=${{ matrix.shard }}/${{ matrix.total-shards }} --git-clean specification
           --github-summary
+          ${{ matrix.channel != 'stable' && '--allow-generated-changes' || '' }}
           ${{ runner.debug == '1' && '--verbose' || '' }}
