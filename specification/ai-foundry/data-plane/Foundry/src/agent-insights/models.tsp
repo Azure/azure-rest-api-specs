@@ -253,18 +253,18 @@ model AgentInsightSuspension {
   details?: Record<unknown>;
 }
 
-/** A service-generated briefing for the monitored agent. */
+/** Service-generated agent summary. */
 @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 @example(#{
   markdown: "# Agent summary\n\nThis agent answers support questions from product documentation.",
 })
 model AgentInsightSummary {
-  /** The service-generated agent summary in Markdown. */
+  /** Summary in Markdown. */
   @visibility(Lifecycle.Read)
   markdown: string;
 }
 
-/** A compatibility overview for an Agent Insights monitor. Historical user overrides take precedence over generated content. */
+/** Compatibility overview, including historical user overrides. */
 @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightsOverview {
   /** The overview content. */
@@ -277,42 +277,25 @@ model AgentInsightsOverview {
   updated_at: FoundryTimestamp;
 }
 
-/** Legacy overview input accepted for compatibility and ignored. */
+/** Ignored legacy overview input. */
 @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightsOverviewOverride {
-  /** The legacy overview content. The service ignores this value. */
+  /** Ignored legacy content. */
   content: string;
 }
 
-/** Category selection and trace-grounded analysis guidance for an Agent Insights monitor. */
+/** Monitor analysis priorities. */
 @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 @example(#{
   categories: #["cost_tokens", "latency"],
-  instructions: "Prioritize customer-facing latency and token waste supported by trace evidence.",
+  instructions: "Focus on latency and token waste.",
 })
 model AgentInsightPriorities {
-  /**
-   * Built-in or custom category identifiers. Built-in identifiers are tool_call_failures,
-   * hallucinations, cost_tokens, latency, reliability_errors, output_quality, context_memory,
-   * and security_risk. Custom identifiers are also accepted.
-   *
-   * The service trims and lowercases identifiers, drops blank entries, maps safety_guardrails
-   * to security_risk, removes duplicates, and sorts the result in ordinal order. Select 1 to 20
-   * distinct nonblank categories after normalization. Each normalized identifier must be valid
-   * UTF-8, contain no control characters, and use at most 128 UTF-8 bytes.
-   */
-  @minItems(1)
+  /** Up to 20 distinct normalized category identifiers (128 UTF-8 bytes each). Empty uses defaults. */
+  @minItems(0)
   categories: string[];
 
-  /**
-   * Optional trace-grounded guidance for the monitor's analysis. The service trims the edges
-   * and preserves case and internal formatting. Omitted, null, or blank instructions clear
-   * earlier guidance when a priorities object is supplied.
-   *
-   * After trimming, instructions must be valid UTF-8 and use at most 2,000 UTF-8 bytes.
-   * Carriage returns, line feeds, and tabs are allowed; other control characters are rejected.
-   * Responses omit this property when there is no guidance.
-   */
+  /** Analysis guidance, up to 2,000 UTF-8 bytes after trimming. Null or blank removes guidance. */
   instructions?: string | null;
 }
 
@@ -364,18 +347,15 @@ model AgentInsightMonitor {
   @visibility(Lifecycle.Read)
   suspension: AgentInsightSuspension | null;
 
-  /** The service-generated briefing for this agent, or null before a summary is available. */
+  /** Generated summary, or null when unavailable. */
   @visibility(Lifecycle.Read)
   agent_summary: AgentInsightSummary | null;
 
-  /**
-   * The compatibility overview, or null before an overview is available. A historical user
-   * override takes precedence over generated content here, but never affects agent_summary.
-   */
+  /** Compatibility overview, or null when unavailable. */
   @visibility(Lifecycle.Read)
   overview: AgentInsightsOverview | null;
 
-  /** Category selection and analysis guidance. Omitted when priorities are not configured or have been cleared. */
+  /** Analysis priorities. Omitted when not configured. */
   @visibility(Lifecycle.Read)
   priorities?: AgentInsightPriorities;
 
@@ -384,7 +364,7 @@ model AgentInsightMonitor {
   updated_at: FoundryTimestamp;
 }
 
-/** An Agent Insights monitor returned by list operations, without agent_summary or overview. */
+/** Monitor list item without the summary or overview. */
 @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightMonitorListItem is OmitProperties<
   AgentInsightMonitor,
@@ -408,7 +388,7 @@ model AgentInsightMonitorCreate {
   /** The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'. */
   model_deployment_name: string;
 
-  /** Category selection and analysis guidance. Omit to create the monitor without priorities. Explicit null is not allowed. */
+  /** Analysis priorities for the monitor. */
   priorities?: AgentInsightPriorities;
 }
 
@@ -416,10 +396,7 @@ model AgentInsightMonitorCreate {
 @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 @example(#{ priorities: #{ categories: #["latency"], instructions: null } })
 @example(#{ priorities: null })
-@example(#{
-  enabled: true,
-  overview_override: #{ content: "Ignored legacy overview." },
-})
+@example(#{ priorities: #{ categories: #[] } })
 model AgentInsightMonitorUpdate {
   /** Whether scheduled insight generation is armed for the monitor. */
   enabled?: boolean;
@@ -432,21 +409,11 @@ model AgentInsightMonitorUpdate {
   /** The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'. */
   model_deployment_name?: string;
 
-  /**
-   * Replaces the complete priorities object. Omission leaves priorities unchanged; explicit
-   * null clears them. Include categories even when changing only instructions. Omitted, null,
-   * or blank instructions in a replacement clear earlier guidance. Responses omit cleared
-   * priorities.
-   */
+  /** Replaces all priorities. Omit to preserve them; null clears them. */
   priorities?: AgentInsightPriorities | null;
 
-  /**
-   * Legacy input accepted for compatibility and ignored after request validation. Supplying a
-   * value or null does not change or clear an overview or agent_summary. Other fields in the
-   * same update are validated and applied as usual. An update with only this field leaves
-   * the monitor unchanged.
-   */
-  #deprecated "This property is accepted for compatibility and ignored. The agent summary is generated by the service and cannot be edited."
+  /** Ignored legacy input. Other updates still apply. */
+  #deprecated "Ignored. The service generates agent summaries."
   overview_override?: AgentInsightsOverviewOverride | null;
 }
 
