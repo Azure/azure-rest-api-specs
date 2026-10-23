@@ -122,6 +122,7 @@ input-file:
   - preview/2026-11-01-preview/managedInstancePrivateEndpointConnections.json
   - preview/2026-11-01-preview/managedInstancePrivateLinkResources.json
   - preview/2026-11-01-preview/managedInstances.json
+  - preview/2026-11-01-preview/ManagedInstanceServerProtectionSettings.json
   - preview/2026-11-01-preview/managedInstanceTdeCertificates.json
   - preview/2026-11-01-preview/managedInstanceVulnerabilityAssessments.json
   - preview/2026-11-01-preview/managedLedgerDigestUploads.json
