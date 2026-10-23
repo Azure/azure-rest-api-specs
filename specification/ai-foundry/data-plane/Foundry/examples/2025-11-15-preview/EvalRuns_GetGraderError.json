@@ -1,0 +1,96 @@
+{
+  "title": "Get a TaskRun after a grading error",
+  "operationId": "EvalRuns_getTaskRun",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "run_id": "evalrun_01J9Z7F6J4",
+    "task_run_id": "taskrun_01J9Z7N4DP"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "taskrun_01J9Z7N4DP",
+        "task": {
+          "id": "covered-water-damage"
+        },
+        "repetition_number": 1,
+        "status": "failed",
+        "grader_results": [
+          {
+            "grader": "policy_citation",
+            "status": "completed",
+            "passed": true,
+            "explanation": "The policy section was cited."
+          },
+          {
+            "grader": "policy_tools",
+            "status": "error",
+            "explanation": "ATIF evidence is incomplete.",
+            "error": {
+              "code": "incomplete_trajectory",
+              "message": "Tool calls could not be verified."
+            }
+          }
+        ],
+        "error": {
+          "code": "incomplete_trajectory",
+          "message": "Tool calls could not be verified.",
+          "source": "grader",
+          "retriable": false
+        },
+        "lifecycle": {
+          "created_at": 1791524400,
+          "started_at": 1791524410,
+          "completed_at": 1791524430,
+          "queue_duration_ms": 10000,
+          "total_duration_ms": 30000,
+          "phases": [
+            {
+              "phase": "queued",
+              "state": "completed",
+              "started_at_ms": 1791524400000,
+              "completed_at_ms": 1791524410000
+            },
+            {
+              "phase": "invoking",
+              "state": "completed",
+              "started_at_ms": 1791524410000,
+              "completed_at_ms": 1791524420000
+            },
+            {
+              "phase": "grading",
+              "state": "completed",
+              "started_at_ms": 1791524420000,
+              "completed_at_ms": 1791524430000
+            }
+          ]
+        },
+        "evaluation_run_id": "evalrun_01J9Z7F6J4",
+        "input": {
+          "type": "prompt",
+          "instruction": "Review claim 12345 and cite the policy."
+        },
+        "expected": {
+          "policy_citation": "Section I - Perils Insured Against"
+        },
+        "observed": {
+          "text": "Approved. Section I - Perils Insured Against covers sudden water damage."
+        },
+        "artifacts": [],
+        "effective_graders": [
+          {
+            "name": "policy_citation",
+            "type": "substring_match",
+            "source": "task"
+          },
+          {
+            "name": "policy_tools",
+            "type": "tool_calls",
+            "source": "task"
+          }
+        ]
+      }
+    }
+  }
+}
