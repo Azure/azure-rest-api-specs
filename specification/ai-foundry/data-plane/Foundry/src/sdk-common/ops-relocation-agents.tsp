@@ -51,6 +51,10 @@ namespace Azure.AI.Projects {
     Agents
   );
   @@clientLocation(
+    Azure.AI.Projects.Microsoft365Publishing.unpublishAgentFromMicrosoft365,
+    Agents
+  );
+  @@clientLocation(
     Azure.AI.Projects.Microsoft365Publishing.getMicrosoft365AppPackage,
     Agents
   );

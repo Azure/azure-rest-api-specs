@@ -89,6 +89,10 @@ using Azure.AI.Projects;
   "publish_to_microsoft365"
 );
 @@clientName(
+  Microsoft365Publishing.unpublishAgentFromMicrosoft365,
+  "unpublish_from_microsoft365"
+);
+@@clientName(
   Microsoft365Publishing.getMicrosoft365AppPackage,
   "get_microsoft365_package"
 );
