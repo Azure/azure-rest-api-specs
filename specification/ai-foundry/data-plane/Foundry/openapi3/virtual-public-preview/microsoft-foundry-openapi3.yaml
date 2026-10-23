@@ -12,6 +12,7 @@ tags:
   - name: Voice Agent WebSocket
   - name: Agent Conversations
   - name: Agent Telephony
+  - name: Agent Session Exec
   - name: AgentServer Task Storage
   - name: EvaluationSuiteGenerationJobs
   - name: Responses Root
@@ -3709,6 +3710,83 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Sessions
+  /agents/{agent_name}/endpoint/sessions/{agent_session_id}/exec/stream:
+    get:
+      operationId: AgentSessionExec_openSessionExec
+      summary: Open a hosted agent session exec stream
+      description: |-
+        Opens a WebSocket connection to run one command in an existing hosted agent session.
+        The client sends an HTTP GET with WebSocket upgrade headers and requests the `exec.v1`
+        subprotocol. Authentication, authorization, session access, session state, and capacity
+        checks complete before the service returns `101 Switching Protocols`.
+
+        The caller must have endpoint action access and the
+        `Microsoft.CognitiveServices/accounts/AIServices/agents/session/exec/action` data action.
+        Non-browser clients authenticate with a Microsoft Entra bearer token. Browser clients
+        supply the bearer token as an additional `authorization.bearer.<token>` WebSocket
+        subprotocol; the service negotiates only `exec.v1`. Query-string bearer credentials
+        and API-key authentication are not supported.
+
+        After the upgrade, the client sends one `start` JSON text message, followed by optional
+        `stdin`, `resize`, or `close_stdin` messages. The service streams `stdout` and `stderr`
+        messages and sends an `exit_code` message before normal closure. Binary stream data
+        is base64-encoded in JSON messages. The connection owns the command and does not
+        support detach, reconnect, output replay, or automatic retry after execution may
+        have started. This operation does not create a session or restart a user-stopped session.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+        - name: agent_session_id
+          in: path
+          required: true
+          description: The ID of an existing hosted agent session accessible to the caller.
+          schema:
+            type: string
+        - name: Sec-WebSocket-Protocol
+          in: header
+          required: true
+          description: |-
+            The requested WebSocket subprotocols. Include `exec.v1`. Browser clients also
+            include `authorization.bearer.<token>` to authenticate; this credential is
+            never returned in the negotiated subprotocol.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '101':
+          description: Informational
+          headers:
+            Sec-WebSocket-Protocol:
+              required: true
+              description: The negotiated application subprotocol, excluding any bearer credential.
+              schema:
+                type: string
+                enum:
+                  - exec.v1
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Session Exec
   /agents/{agent_name}/endpoint/sessions/{agent_session_id}/files:
     get:
       operationId: AgentSessionFiles_listSessionFiles
