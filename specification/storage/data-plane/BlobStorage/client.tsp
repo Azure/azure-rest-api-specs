@@ -16,28 +16,28 @@ namespace Customizations;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Service.listContainers,
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Service.findBlobsByTags,
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Container.findBlobsByTags,
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Container.listBlobs,
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 
 @@clientName(
   FilteredBlobResponse,
   "FilterBlobSegment",
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 @@clientName(FilteredBlobResponse.blobItems, "blobs", "javascript,go");
 @@clientName(
@@ -241,7 +241,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Storage.Blob.PageBlob.getPageRanges,
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 
 @@clientName(
@@ -767,7 +767,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(
   ListBlobsHierarchicalResponse,
   "ListBlobsHierarchySegmentResponse",
-  "go"
+  "go,java"
 );
 @@clientName(ListBlobsHierarchicalResponse.hierarchicalList, "segment", "go");
 @@clientName(ListBlobsResponse.blobItems, "segment", "go");
@@ -830,7 +830,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is to support legacy SDKs"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Storage.Blob.Container.listBlobHierarchySegment,
-  "python,javascript,csharp"
+  "python,javascript,csharp,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is to support legacy SDKs"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
@@ -1301,3 +1301,125 @@ op uploadPagesNoStructuredMessage is StorageOperationRequestBody<
   "rust"
 )
 scalar HttpRange extends string;
+
+@@clientName(BlobServicePropertiesCsharp, "BlobServiceProperties", "java");
+@@clientName(GeoReplicationStatusType, "GeoReplicationStatus", "java");
+@@access(GeoReplicationStatusType, Access.public, "java");
+@@clientName(StorageErrorCode, "BlobErrorCode", "java");
+@@clientName(Container.listBlobs, "ListBlobFlatSegment", "java");
+@@clientName(BlobProperties, "BlobItemPropertiesInternal", "java");
+@@clientName(BlobItem, "BlobItemInternal", "java");
+@@clientName(ImmutabilityPolicyMode, "BlobImmutabilityPolicyMode", "java");
+@@clientName(SignedIdentifiers, "BlobSignedIdentifiers", "java");
+@@clientName(LeaseDuration, "LeaseDurationType", "java");
+@@clientName(Blob.setProperties, "SetHttpHeaders", "java");
+
+@@clientLocation(BlockBlob.query, Blob, "java");
+@@clientName(ListBlobsResponse, "ListBlobsFlatSegmentResponse", "java");
+@@clientName(Container.findBlobsByTags, "FilterBlobs", "java");
+@@clientName(Service.findBlobsByTags, "FilterBlobs", "java");
+@@clientName(Service.listContainers, "ListContainersSegment", "java");
+@@clientName(QueryType, "QueryFormatType", "java");
+@@clientName(QueryType.JSON, "Json", "java");
+@@clientName(ArrowField, "ArrowFieldInternal", "java");
+@@clientName(ArrowConfiguration, "ArrowTextConfigurationInternal", "java");
+@@clientName(ContainerItem, "BlobContainerItem", "java");
+@@clientName(ContainerProperties, "BlobContainerItemProperties", "java");
+@@clientName(JsonTextConfiguration, "JsonTextConfigurationInternal", "java");
+@@clientName(StorageServiceStats, "BlobServiceStatistics", "java");
+@@clientName(AccessPolicy.start, "StartsOn", "java");
+@@clientName(AccessPolicy.expiry, "ExpiresOn", "java");
+@@clientName(AccessPolicy.permission, "Permissions", "java");
+
+@@alternateType(AccessPolicy.start, utcDateTime, "java");
+@@alternateType(AccessPolicy.expiry, utcDateTime, "java");
+
+@@alternateType(UserDelegationKey.value, string, "java");
+@@alternateType(Block.name, string, "java");
+@@alternateType(BlockLookupList.committed, string[], "java");
+@@alternateType(BlockLookupList.uncommitted, string[], "java");
+@@alternateType(BlockLookupList.latest, string[], "java");
+@@alternateType(BlockIdParameter.blockid, string, "java");
+
+@@clientName(BlobPrefix, "BlobPrefixInternal", "java");
+@@access(BlobPrefix, Access.internal, "java");
+
+@@clientName(UserDelegationKey.signedOid, "signedObjectId", "java");
+@@clientName(UserDelegationKey.signedTid, "signedTenantId", "java");
+@@clientName(
+  UserDelegationKey.signedDelegatedUserTid,
+  "signedDelegatedUserTenantId",
+  "java"
+);
+
+@@clientName(ListBlobsIncludeItem.UncommittedBlobs, "uncommittedblobs", "java");
+
+@@alternateType(KeyInfo.start, string, "java");
+@@alternateType(KeyInfo.expiry, string, "java");
+@@clientName(KeyInfo.delegatedUserTid, "delegatedUserTenantId", "java");
+@@clientName(Metrics.includeApis, "IncludeApis", "java");
+
+@@clientName(
+  ContainerProperties.preventEncryptionScopeOverride,
+  "encryptionScopeOverridePrevented",
+  "java"
+);
+@@clientName(SkuName.StandardLRS, "StandardLrs", "java");
+@@clientName(SkuName.StandardGRS, "StandardGrs", "java");
+@@clientName(SkuName.StandardRAGRS, "StandardRagrs", "java");
+@@clientName(SkuName.StandardZRS, "StandardZrs", "java");
+@@clientName(SkuName.PremiumLRS, "PremiumLrs", "java");
+@@clientName(SkuName.StandardGZRS, "StandardGzrs", "java");
+@@clientName(SkuName.PremiumZRS, "PremiumZrs", "java");
+@@clientName(SkuName.StandardRAGZRS, "StandardRagzrs", "java");
+@@clientName(BlobDeleteTypeCustom, "BlobDeleteType", "java");
+
+@@clientName(AccessPolicy, "BlobAccessPolicy", "java");
+@@clientName(SignedIdentifier, "BlobSignedIdentifier", "java");
+@@clientName(CorsRule, "BlobCorsRule", "java");
+@@clientName(Logging, "BlobAnalyticsLogging", "java");
+@@clientName(Metrics, "BlobMetrics", "java");
+@@clientName(RetentionPolicy, "BlobRetentionPolicy", "java");
+@@clientName(LeaseStatus, "LeaseStatusType", "java");
+@@clientName(LeaseState, "LeaseStateType", "java");
+@@clientName(CopyStatus, "CopyStatusType", "java");
+@@clientName(
+  ListContainersIncludeType,
+  "ListBlobContainersIncludeType",
+  "java"
+);
+@@clientName(ParquetConfiguration, "ParquetTextConfiguration", "java");
+@@clientName(BlobHierarchyList, "BlobHierarchyListSegment", "java");
+
+@@clientName(ListContainersResponse, "BlobContainersSegment", "java");
+@@access(ListContainersResponse, Access.internal, "java");
+@@usage(ListContainersResponse, Usage.output, "java");
+
+@@alternateType(BlobItem.metadata, Record<string>, "java");
+@@alternateType(BlobItem.objectReplicationMetadata, Record<string>, "java");
+@@access(BlobProperties, Access.internal, "java");
+@@access(BlobItem, Access.internal, "java");
+@@access(ArrowField, Access.internal, "java");
+@@access(ArrowConfiguration, Access.internal, "java");
+@@access(DelimitedTextConfiguration, Access.internal, "java");
+@@access(JsonTextConfiguration, Access.internal, "java");
+@@access(BlobDeleteTypeCustom, Access.internal, "java");
+@@access(StorageErrorCode, Access.public, "java");
+@@usage(StorageErrorCode, Usage.output, "java");
+
+@@clientName(Storage.Blob, "AzureBlobStorage", "java");
+
+@@alternateType(MetadataHeaders.metadata, Record<string>, "java");
+
+@@alternateType(
+  ObjectReplicationHeaders.objectReplicationRules,
+  Record<string>,
+  "java"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  MetadataHeaders.metadata,
+  "collectionHeaderPrefix",
+  "x-ms-meta-",
+  "java"
+);
