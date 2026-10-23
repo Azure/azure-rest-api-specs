@@ -1,6 +1,7 @@
 import "../../common/models.tsp";
 import "../../common/servicepatterns.tsp";
 import "../../data_generation_jobs/models.tsp";
+import "../../evaluators/models.tsp";
 import "../../red-teams/models.tsp";
 import "./common.tsp";
 import "./user_conversation_simulation.tsp";
@@ -1118,9 +1119,20 @@ union EvalRunOutputItemResultStatus {
     reason?: string,
 
     /** Additional details about the test criteria metric. */
-    properties?: Record<string>,
+    properties?: EvalRunOutputItemResultProperties,
   }
 );
+
+/** Structured and evaluator-specific details attached to an evaluation result. */
+@TypeSpec.OpenAPI.oneOf
+union EvalRunOutputItemResultProperties {
+  /** Existing string-valued properties for legacy evaluators. */
+  legacy: Record<string>,
+
+  /** Mode-specific rubric judgments without an additional scoring wrapper. */
+  @added(Versions.v1)
+  rubric: RubricResultProperties,
+}
 
 model EvalRunOutputItemResult is OpenAI.EvalRunOutputItemResult;
 
