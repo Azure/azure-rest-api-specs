@@ -14,6 +14,7 @@ namespace Azure.AI.Projects {
   union _PreviewAgentToolType {
     a2a_preview: "a2a_preview",
     bing_custom_search_preview: "bing_custom_search_preview",
+    #deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
     browser_automation_preview: "browser_automation_preview",
     fabric_dataagent_preview: "fabric_dataagent_preview",
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
@@ -507,6 +508,7 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a Browser Automation Tool, as used to configure an Agent.
    */
+  #deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
   @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationPreviewTool extends OpenAI.Tool {
     /**

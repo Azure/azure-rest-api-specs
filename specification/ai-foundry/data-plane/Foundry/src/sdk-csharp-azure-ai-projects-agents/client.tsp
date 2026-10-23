@@ -69,11 +69,6 @@ namespace Azure.AI.Projects {
   @@clientName(OpenApiTool.openapi, "FunctionDefinition", "csharp");
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
   @@clientName(
-    BrowserAutomationPreviewTool.browser_automation_preview,
-    "ToolParameters",
-    "csharp"
-  );
-  @@clientName(
     BrowserAutomationTool.browser_automation,
     "ToolParameters",
     "csharp"
@@ -352,15 +347,6 @@ namespace Azure.AI.Projects {
     Azure.AI.Projects.BingGroundingSearchToolParameters,
     {
       identity: "Azure.AI.Extensions.OpenAI.BingGroundingSearchToolOptions",
-      package: "Azure.AI.Extensions.OpenAI",
-      minVersion: "3.0.0-alpha.20260908.3",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    Azure.AI.Projects.BrowserAutomationPreviewTool,
-    {
-      identity: "Azure.AI.Extensions.OpenAI.BrowserAutomationPreviewTool",
       package: "Azure.AI.Extensions.OpenAI",
       minVersion: "3.0.0-alpha.20260908.3",
     },
