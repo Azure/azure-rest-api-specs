@@ -83,6 +83,15 @@ directive:
       - UniqueResourcePaths
 ```
 
+### Tag: package-preview-2026-10-31-preview
+
+These settings apply only when `--tag=package-preview-2026-10-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-10-31-preview'
+input-file:
+  - preview/2026-10-31-preview/service.json
+```
+
 ### Tag: package-preview-2026-08-31-preview
 
 These settings apply only when `--tag=package-preview-2026-08-31-preview` is specified on the command line.
