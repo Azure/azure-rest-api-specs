@@ -16,7 +16,7 @@ namespace Microsoft.IoTOperations;
 @parentResource(InstanceResource)
 @singleton("default")
 model McpFrontendResource is ProxyResource<McpFrontendProperties> {
-  /** The fixed name of the instance's MCP frontend resource. */
+  /** The fixed name of the instance's MCP frontend resource. Only the value 'default' is allowed. */
   @key("mcpFrontendName")
   @path
   @segment("mcpFrontends")
