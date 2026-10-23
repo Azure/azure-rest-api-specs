@@ -75,25 +75,8 @@ model McpFrontendServiceAccountTokenAuthentication
   method: "ServiceAccountToken";
 
   /** The accepted incoming token audiences, independent of outbound backend tokens. */
-  serviceAccountTokenSettings: McpFrontendServiceAccountTokenSettings;
+  serviceAccountTokenSettings: BrokerAuthenticatorMethodSat;
 }
-
-/** The Kubernetes service account token validation settings for the frontend. */
-@added(Versions.`2026-11-01-preview`)
-model McpFrontendServiceAccountTokenSettings {
-  /** One to sixteen unique, non-blank audiences accepted on incoming requests. */
-  @minItems(1)
-  @maxItems(16)
-  @Azure.Core.uniqueItems
-  audiences: McpFrontendAudience[];
-}
-
-/** A non-blank incoming token audience of at most 256 characters. */
-@added(Versions.`2026-11-01-preview`)
-@minLength(1)
-@maxLength(256)
-@pattern("\\S")
-scalar McpFrontendAudience extends string;
 
 /** The output-only health of the frontend's serving, authentication, and routing subsystems. */
 @added(Versions.`2026-11-01-preview`)

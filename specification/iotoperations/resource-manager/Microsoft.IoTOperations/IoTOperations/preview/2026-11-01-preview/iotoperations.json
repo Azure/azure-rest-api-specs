@@ -13872,13 +13872,6 @@
       ],
       "x-ms-discriminator-value": "Role"
     },
-    "McpFrontendAudience": {
-      "type": "string",
-      "description": "A non-blank incoming token audience of at most 256 characters.",
-      "minLength": 1,
-      "maxLength": 256,
-      "pattern": "\\S"
-    },
     "McpFrontendAuthentication": {
       "type": "object",
       "description": "The authentication configuration for clients calling the frontend.",
@@ -13991,7 +13984,7 @@
       "description": "Kubernetes service account token authentication for clients calling the frontend.",
       "properties": {
         "serviceAccountTokenSettings": {
-          "$ref": "#/definitions/McpFrontendServiceAccountTokenSettings",
+          "$ref": "#/definitions/BrokerAuthenticatorMethodSat",
           "description": "The accepted incoming token audiences, independent of outbound backend tokens."
         }
       },
@@ -14004,25 +13997,6 @@
         }
       ],
       "x-ms-discriminator-value": "ServiceAccountToken"
-    },
-    "McpFrontendServiceAccountTokenSettings": {
-      "type": "object",
-      "description": "The Kubernetes service account token validation settings for the frontend.",
-      "properties": {
-        "audiences": {
-          "type": "array",
-          "description": "One to sixteen unique, non-blank audiences accepted on incoming requests.",
-          "minItems": 1,
-          "maxItems": 16,
-          "uniqueItems": true,
-          "items": {
-            "$ref": "#/definitions/McpFrontendAudience"
-          }
-        }
-      },
-      "required": [
-        "audiences"
-      ]
     },
     "McpFrontendStatus": {
       "type": "object",

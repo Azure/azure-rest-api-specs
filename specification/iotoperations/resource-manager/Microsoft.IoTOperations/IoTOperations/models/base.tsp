@@ -352,6 +352,12 @@ union ServiceAccountTokenMethod {
   ServiceAccountToken: ServiceAccountToken,
 }
 
+@doc("Service Account Token for BrokerAuthentication")
+model BrokerAuthenticatorMethodSat {
+  @doc("List of allowed audience.")
+  audiences: string[];
+}
+
 scalar SchemaRegistryID
   extends Azure.Core.armResourceIdentifier<[
     {
