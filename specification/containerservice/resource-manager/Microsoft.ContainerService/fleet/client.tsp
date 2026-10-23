@@ -102,6 +102,11 @@ using TypeSpec.Http;
 @@clientName(TargetType, "ContainerServiceFleetTargetType", "csharp");
 @@clientName(UpgradeChannel, "ContainerServiceFleetUpgradeChannel", "csharp");
 @@clientName(GenerateResponse, "AutoUpgradeProfileGenerateResult", "csharp");
+@@clientName(
+  FleetMemberCredentialRequest,
+  "FleetMemberCredentialContent",
+  "csharp"
+);
 @@clientName(FleetMemberStatus, "ContainerServiceFleetMemberStatus", "csharp");
 @@clientName(FleetStatus, "ContainerServiceFleetStatus", "csharp");
 @@clientName(Timing, "ContainerServiceFleetGateTiming", "csharp");
