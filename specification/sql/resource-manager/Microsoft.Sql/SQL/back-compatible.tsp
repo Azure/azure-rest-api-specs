@@ -1158,14 +1158,6 @@ using Microsoft.Sql;
 @@Legacy.flattenProperty(RestorableDroppedManagedDatabase.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(
-  RestorableDroppedManagedDatabaseFromDroppedManagedInstance.properties
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(RestorableDroppedManagedInstanceByLocation.properties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorePoint.properties);
 
 @@clientLocation(
