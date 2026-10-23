@@ -1,0 +1,291 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Storage-SRP public contract changes",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "provider", "typespecProject", "baseline", "changes"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "provider": { "const": "Microsoft.Storage" },
+    "typespecProject": { "const": "specification/storage/Storage.Management" },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["branch", "commit"],
+      "properties": {
+        "branch": { "$ref": "#/definitions/text" },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+      }
+    },
+    "changes": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/change" }
+    }
+  },
+  "definitions": {
+    "text": { "type": "string", "pattern": "\\S" },
+    "lifecycle": { "enum": ["read", "create", "update"] },
+    "strings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/definitions/text" }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "minLength": { "type": "integer", "minimum": 0 },
+        "maxLength": { "type": "integer", "minimum": 0 },
+        "pattern": { "$ref": "#/definitions/text" },
+        "minItems": { "type": "integer", "minimum": 0 },
+        "maxItems": { "type": "integer", "minimum": 0 },
+        "minimum": { "type": "number" },
+        "maximum": { "type": "number" },
+        "exclusiveMinimum": { "type": "number" },
+        "exclusiveMaximum": { "type": "number" },
+        "multipleOf": { "type": "number", "exclusiveMinimum": 0 },
+        "format": { "$ref": "#/definitions/text" }
+      }
+    },
+    "property": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wireName", "type", "required", "nullable", "visibility"],
+      "properties": {
+        "wireName": { "$ref": "#/definitions/text" },
+        "type": { "$ref": "#/definitions/text" },
+        "required": {
+          "oneOf": [
+            { "type": "boolean" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "minProperties": 1,
+              "properties": {
+                "read": { "type": "boolean" },
+                "create": { "type": "boolean" },
+                "update": { "type": "boolean" }
+              }
+            }
+          ]
+        },
+        "nullable": { "type": "boolean" },
+        "visibility": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/lifecycle" }
+        },
+        "description": { "$ref": "#/definitions/text" },
+        "constraints": { "$ref": "#/definitions/constraints" },
+        "default": {}
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["properties"],
+      "properties": {
+        "baseModel": { "$ref": "#/definitions/text" },
+        "description": { "$ref": "#/definitions/text" },
+        "properties": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/property" }
+        }
+      }
+    },
+    "enum": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "extensible", "values"],
+      "properties": {
+        "type": { "enum": ["string", "integer", "number"] },
+        "extensible": { "type": "boolean" },
+        "description": { "$ref": "#/definitions/text" },
+        "values": { "type": "array", "minItems": 1, "uniqueItems": true }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "string" } } },
+          "then": { "properties": { "values": { "type": "array", "items": { "type": "string" } } } }
+        },
+        {
+          "if": { "properties": { "type": { "const": "integer" } } },
+          "then": {
+            "properties": { "values": { "type": "array", "items": { "type": "integer" } } }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "number" } } },
+          "then": { "properties": { "values": { "type": "array", "items": { "type": "number" } } } }
+        }
+      ]
+    },
+    "parameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wireName", "location", "type", "required"],
+      "properties": {
+        "wireName": { "$ref": "#/definitions/text" },
+        "location": { "enum": ["path", "query", "header"] },
+        "type": { "$ref": "#/definitions/text" },
+        "required": { "type": "boolean" },
+        "description": { "$ref": "#/definitions/text" },
+        "constraints": { "$ref": "#/definitions/constraints" },
+        "default": {}
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "location": { "const": "path" } } },
+          "then": { "properties": { "required": { "const": true } } }
+        }
+      ]
+    },
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wireName", "type", "required"],
+      "properties": {
+        "wireName": { "$ref": "#/definitions/text" },
+        "type": { "$ref": "#/definitions/text" },
+        "required": { "type": "boolean" },
+        "description": { "$ref": "#/definitions/text" }
+      }
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statusCodes", "bodyType"],
+      "properties": {
+        "statusCodes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^([1-5][0-9]{2}|default)$" }
+        },
+        "bodyType": { "$ref": "#/definitions/text" },
+        "headers": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/header" }
+        }
+      }
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "path", "parameters", "requestBodyType", "responses", "longRunning"],
+      "properties": {
+        "method": { "enum": ["GET", "PUT", "PATCH", "DELETE", "POST", "HEAD", "OPTIONS"] },
+        "path": { "type": "string", "pattern": "^/" },
+        "description": { "$ref": "#/definitions/text" },
+        "parameters": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/parameter" }
+        },
+        "requestBodyType": { "$ref": "#/definitions/text" },
+        "responses": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/response" }
+        },
+        "longRunning": { "type": "boolean" },
+        "pollingHeaders": { "$ref": "#/definitions/strings" },
+        "finalResponseType": { "$ref": "#/definitions/text" },
+        "paging": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["itemName", "nextLinkName"],
+          "properties": {
+            "itemName": { "$ref": "#/definitions/text" },
+            "nextLinkName": { "$ref": "#/definitions/text" }
+          }
+        },
+        "errorCodes": { "$ref": "#/definitions/strings" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "longRunning": { "const": true } } },
+          "then": { "required": ["pollingHeaders", "finalResponseType"] },
+          "else": {
+            "not": {
+              "anyOf": [{ "required": ["pollingHeaders"] }, { "required": ["finalResponseType"] }]
+            }
+          }
+        }
+      ]
+    },
+    "change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "action", "target", "apiVersions"],
+      "properties": {
+        "kind": { "enum": ["property", "model", "enum", "operation"] },
+        "action": { "enum": ["add", "modify", "remove"] },
+        "target": { "$ref": "#/definitions/text" },
+        "apiVersions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])(-preview)?$"
+          }
+        },
+        "before": { "type": "object" },
+        "after": { "type": "object" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "action": { "const": "add" } } },
+          "then": { "required": ["after"], "not": { "required": ["before"] } }
+        },
+        {
+          "if": { "properties": { "action": { "const": "modify" } } },
+          "then": { "required": ["before", "after"] }
+        },
+        {
+          "if": { "properties": { "action": { "const": "remove" } } },
+          "then": { "required": ["before"], "not": { "required": ["after"] } }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "property" } } },
+          "then": {
+            "properties": {
+              "before": { "$ref": "#/definitions/property" },
+              "after": { "$ref": "#/definitions/property" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "model" } } },
+          "then": {
+            "properties": {
+              "before": { "$ref": "#/definitions/model" },
+              "after": { "$ref": "#/definitions/model" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "enum" } } },
+          "then": {
+            "properties": {
+              "before": { "$ref": "#/definitions/enum" },
+              "after": { "$ref": "#/definitions/enum" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "operation" } } },
+          "then": {
+            "properties": {
+              "before": { "$ref": "#/definitions/operation" },
+              "after": { "$ref": "#/definitions/operation" }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -35,6 +35,32 @@
 
 ---
 
+## Storage RP to TypeSpec
+
+The [storage-rp-to-typespec](storage-rp-to-typespec/SKILL.md) skill takes a
+Storage-SRP Azure DevOps PR link and produces YAML describing public
+Microsoft.Storage contract changes needed against an author-selected public-spec
+branch. It asks for that branch on every run and for the output path; it does not
+require an SRP checkout. Existing Azure DevOps CLI authentication and read access
+are required.
+
+The skill stops at YAML. Supply the resulting file to `azure-typespec-author`
+in a separate request to author and validate TypeSpec changes. It does not
+modify or automatically invoke that skill.
+
+See the [manifest contract](storage-rp-to-typespec/references/manifest.md) for
+synthetic examples and checks. From the repository root:
+
+```powershell
+pnpm exec vitest run --project storage-rp-to-typespec
+node .github\skills\storage-rp-to-typespec\scripts\validate-manifest.ts "<yaml-path>"
+```
+
+Initial scope is SRP only. The examples are synthetic; additional reviewed
+historical pairs and a broader evaluation corpus are follow-up work.
+
+---
+
 ## ARM API Reviewer
 
 The **ARM API Reviewer** agent
