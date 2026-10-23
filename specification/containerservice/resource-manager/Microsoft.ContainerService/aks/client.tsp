@@ -62,6 +62,23 @@ using Microsoft.ContainerService;
 
 // .NET SDK acronym casing.
 @@clientName(
+  ClusterAPIConnectivityProfile,
+  "ClusterApiConnectivityProfile",
+  "csharp"
+);
+@@clientName(
+  ContainerServiceNetworkProfile.clusterAPIConnectivityProfile,
+  "clusterApiConnectivityProfile",
+  "csharp"
+);
+@@clientName(ResourceSkuCosts.meterID, "meterId", "csharp");
+@@clientName(
+  ManagedClusterStorageProfileDiskCSIDriverQuickAttachDetach,
+  "ManagedClusterStorageProfileDiskCsiDriverQuickAttachDetach",
+  "csharp"
+);
+@@clientName(BootstrapKubeletConfig.clusterFQDN, "clusterFqdn", "csharp");
+@@clientName(
   ManagedClusterNATGatewaySku,
   "ManagedClusterNatGatewaySku",
   "csharp"
