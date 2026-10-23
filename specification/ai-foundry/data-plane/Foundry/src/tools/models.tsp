@@ -507,6 +507,9 @@ namespace Azure.AI.Projects {
 
   /**
    * The input definition information for a Browser Automation Tool, as used to configure an Agent.
+   * BrowserAutomationPreviewTool is deprecated and will be removed in the next releases.
+   * Please use BrowserAutomationTool instead.
+   * See https://aka.ms/bat/docs for more information on Browser automation tool.
    */
   #deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
   @extension("x-ms-foundry-meta", PreviewTool)

@@ -274,6 +274,9 @@ model A2APreviewToolboxTool extends ToolboxTool {
 
 /**
  * A browser automation tool stored in a toolbox.
+ * BrowserAutomationPreviewToolboxTool is deprecated and will be removed in the next releases.
+ * Please use BrowserAutomationToolboxTool instead.
+ * See https://aka.ms/bat/docs for more information on Browser automation tool.
  */
 #deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
 @extension("x-ms-foundry-meta", PreviewTool)
