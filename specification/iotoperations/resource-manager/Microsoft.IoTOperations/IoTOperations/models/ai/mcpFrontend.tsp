@@ -175,7 +175,9 @@ model McpFrontendIssuerRef {
   /** The kind of issuer. */
   kind: McpFrontendIssuerKind;
 
-  /** The name of the issuer. */
+  /** The non-blank name of the issuer. */
+  @minLength(1)
+  @pattern("\\S")
   name: string;
 }
 
@@ -253,7 +255,9 @@ model McpFrontendCertificateSan {
 /** A manually managed frontend TLS certificate. */
 @added(Versions.`2026-11-01-preview`)
 model McpFrontendManualCertificate {
-  /** Name of the Kubernetes Secret containing the certificate and private key, not the Secret contents. */
+  /** Non-blank name of the Kubernetes Secret containing the certificate and private key, not the Secret contents. */
+  @minLength(1)
+  @pattern("\\S")
   secretRef: string;
 }
 

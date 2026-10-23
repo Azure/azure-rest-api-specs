@@ -14054,7 +14054,9 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the issuer."
+          "description": "The non-blank name of the issuer.",
+          "minLength": 1,
+          "pattern": "\\S"
         }
       },
       "required": [
@@ -14068,7 +14070,9 @@
       "properties": {
         "secretRef": {
           "type": "string",
-          "description": "Name of the Kubernetes Secret containing the certificate and private key, not the Secret contents."
+          "description": "Non-blank name of the Kubernetes Secret containing the certificate and private key, not the Secret contents.",
+          "minLength": 1,
+          "pattern": "\\S"
         }
       },
       "required": [
