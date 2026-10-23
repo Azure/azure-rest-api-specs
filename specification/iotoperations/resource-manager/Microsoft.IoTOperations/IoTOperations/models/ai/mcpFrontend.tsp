@@ -14,13 +14,12 @@ namespace Microsoft.IoTOperations;
 /** The configuration of the instance's client-facing MCP frontend. */
 @added(Versions.`2026-11-01-preview`)
 @parentResource(InstanceResource)
-@singleton("default")
 model McpFrontendResource is ProxyResource<McpFrontendProperties> {
-  /** The fixed name of the instance's MCP frontend resource. Only the value 'default' is allowed. */
+  /** The name of the instance's MCP frontend resource. */
   @key("mcpFrontendName")
   @path
   @segment("mcpFrontends")
-  @pattern("^default$")
+  @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   name: string;
 
   /** The custom location of the frontend's Kubernetes cluster. */

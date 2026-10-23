@@ -224,7 +224,7 @@ interface McpAuthorizationPolicy {
   listByInstanceResource is ArmResourceListByParent<McpAuthorizationPolicyResource>;
 }
 
-/** Operations for the instance's singleton MCP frontend configuration. */
+/** Operations for the instance's MCP frontend configuration. */
 @armResourceOperations
 @added(Versions.`2026-11-01-preview`)
 interface McpFrontend {

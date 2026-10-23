@@ -5876,7 +5876,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/mcpFrontends/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/mcpFrontends/{mcpFrontendName}": {
       "get": {
         "operationId": "McpFrontend_Get",
         "tags": [
@@ -5901,6 +5901,14 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "mcpFrontendName",
+            "in": "path",
+            "description": "The name of the instance's MCP frontend resource.",
+            "required": true,
+            "type": "string",
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           }
         ],
@@ -5948,6 +5956,14 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "mcpFrontendName",
+            "in": "path",
+            "description": "The name of the instance's MCP frontend resource.",
+            "required": true,
+            "type": "string",
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
@@ -6028,6 +6044,14 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "mcpFrontendName",
+            "in": "path",
+            "description": "The name of the instance's MCP frontend resource.",
+            "required": true,
+            "type": "string",
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           }
         ],
