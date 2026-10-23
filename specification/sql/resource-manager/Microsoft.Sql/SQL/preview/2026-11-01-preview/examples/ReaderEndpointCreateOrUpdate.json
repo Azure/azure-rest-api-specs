@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default",
+    "serverName": "reader-endpoint-server",
+    "readerEndpointName": "reader-endpoint-test-1",
+    "api-version": "2026-11-01-preview",
+    "parameters": {
+      "properties": {
+        "readerEndpointPrimaryInfo": {
+          "primaryServer": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/primary-server",
+          "primaryDatabase": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/primary-server/databases/primary-database"
+        },
+        "databases": [
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/reader-endpoint-server/databases/testdb",
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/reader-endpoint-server/databases/testdb2"
+        ]
+      },
+      "tags": {
+        "tagKey1": "TagValue1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/reader-endpoint-server/readerEndpoints/reader-endpoint-test-1",
+        "name": "reader-endpoint-test-1",
+        "type": "Microsoft.Sql/servers/readerEndpoints",
+        "location": "East US",
+        "tags": {
+          "tagKey1": "TagValue1"
+        },
+        "properties": {
+          "readerEndpointPrimaryInfo": {
+            "primaryServer": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/primary-server",
+            "primaryDatabase": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/primary-server/databases/primary-database"
+          },
+          "databases": [
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/reader-endpoint-server/databases/testdb",
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/reader-endpoint-server/databases/testdb2"
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/reader-endpoint-server/readerEndpoints/reader-endpoint-test-1",
+        "name": "reader-endpoint-test-1",
+        "type": "Microsoft.Sql/servers/readerEndpoints",
+        "location": "East US",
+        "tags": {
+          "tagKey1": "TagValue1"
+        },
+        "properties": {
+          "readerEndpointPrimaryInfo": {
+            "primaryServer": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/primary-server",
+            "primaryDatabase": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/primary-server/databases/primary-database"
+          },
+          "databases": [
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/reader-endpoint-server/databases/testdb",
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/reader-endpoint-server/databases/testdb2"
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/eastus/readerEndpointOperationResults/11111111-1111-1111-1111-111111111111"
+      }
+    }
+  },
+  "operationId": "ReaderEndpoints_CreateOrUpdate",
+  "title": "Create reader endpoint"
+}

@@ -37,6 +37,8 @@ These settings apply only when `--tag=package-preview-2026-11-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2026-11-01-preview'
 input-file:
+  - preview/2026-11-01-preview/ReaderEndpoints.json
+  - preview/2026-11-01-preview/ReaderEndpointsList.json
   - preview/2026-11-01-preview/backupShortTermRetentionPolicies.json
   - preview/2026-11-01-preview/blobAuditing.json
   - preview/2026-11-01-preview/databaseAdvancedThreatProtectionSettings.json
