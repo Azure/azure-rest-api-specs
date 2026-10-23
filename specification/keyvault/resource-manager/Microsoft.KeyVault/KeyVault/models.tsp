@@ -1032,13 +1032,46 @@ model ManagedHsmKeyReleasePolicy {
   data?: bytes;
 }
 
+/** Managed identity settings for a vault, supporting user-assigned identities or no identity. */
+@Versioning.added(Versions.v2026_10_01_preview)
+model VaultIdentity {
+  /** The type of managed identity assigned to the vault. */
+  type: VaultIdentityType;
+
+  /** User-assigned identities keyed by their Azure resource IDs. Values can be empty objects in requests and cannot be null. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-assigned identities use the standard ARM dictionary keyed by identity resource IDs."
+  userAssignedIdentities?: Record<CommonTypes.UserAssignedIdentity>;
+}
+
+/** Managed identity settings for updating a vault, including removal of individual user-assigned identities. */
+@Versioning.added(Versions.v2026_10_01_preview)
+model VaultPatchIdentity {
+  /** The type of managed identity assigned to the vault. */
+  type: VaultIdentityType;
+
+  /** User-assigned identities keyed by their Azure resource IDs. Values can be empty objects to assign an identity or null to remove an identity. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-assigned identities use the standard ARM dictionary keyed by identity resource IDs."
+  userAssignedIdentities?: Record<CommonTypes.UserAssignedIdentity | null>;
+}
+
+/** The supported managed identity types for a vault. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Vault supports only UserAssigned and None; system-assigned and combined identity modes are not supported."
+@Versioning.added(Versions.v2026_10_01_preview)
+union VaultIdentityType {
+  /** No managed identity is assigned to the vault. */
+  None: "None",
+
+  /** User-assigned managed identities are assigned to the vault. */
+  UserAssigned: "UserAssigned",
+}
+
 /**
  * Parameters for creating or updating a vault
  */
 model VaultCreateOrUpdateParameters {
-  /** Managed service identity */
+  /** Managed identity settings. When provided, the user-assigned identity set is fully replaced. When omitted for an existing vault, the current identities are preserved. Setting type to None removes all user-assigned identities and their certificates. */
   @Versioning.added(Versions.v2026_10_01_preview)
-  identity?: CommonTypes.ManagedServiceIdentity;
+  identity?: VaultIdentity;
 
   /**
    * The supported Azure location where the key vault should be created.
@@ -1409,9 +1442,9 @@ model CloudErrorBody {
  * Parameters for creating or updating a vault
  */
 model VaultPatchParameters {
-  /** Managed service identity */
+  /** Managed identity settings. When omitted, identities are unchanged. Dictionary entries containing empty objects add or retain identities; null entries remove only the specified identities. Setting type to None removes all user-assigned identities and their certificates. */
   @Versioning.added(Versions.v2026_10_01_preview)
-  identity?: CommonTypes.ManagedServiceIdentity;
+  identity?: VaultPatchIdentity;
 
   /**
    * The tags that will be assigned to the key vault.

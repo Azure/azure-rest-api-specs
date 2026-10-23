@@ -1690,11 +1690,17 @@
           "Create a new vault or update an existing vault": {
             "$ref": "./examples/createVault.json"
           },
-          "Create or update a vault with a managed identity": {
+          "Create or update a vault by fully replacing the user-assigned identity set": {
             "$ref": "./examples/createVaultWithIdentity.json"
           },
           "Create or update a vault with network acls": {
             "$ref": "./examples/createVaultWithNetworkAcls.json"
+          },
+          "Preserve existing user-assigned identities by omitting identity from PUT": {
+            "$ref": "./examples/createVaultPreservingIdentity.json"
+          },
+          "Remove all user-assigned identities and their certificates from a vault using PUT": {
+            "$ref": "./examples/createVaultWithoutIdentity.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1757,8 +1763,17 @@
           }
         },
         "x-ms-examples": {
-          "Update a vault with a managed identity": {
+          "Add or retain a user-assigned identity on a vault": {
             "$ref": "./examples/updateVaultWithIdentity.json"
+          },
+          "Preserve existing user-assigned identities by omitting identity from PATCH": {
+            "$ref": "./examples/updateVaultPreservingIdentity.json"
+          },
+          "Remove all user-assigned identities and their certificates from a vault using PATCH": {
+            "$ref": "./examples/removeVaultWithIdentity.json"
+          },
+          "Remove only the specified user-assigned identity using a null PATCH entry": {
+            "$ref": "./examples/updateVaultRemoveIdentity.json"
           },
           "Update an existing vault": {
             "$ref": "./examples/updateVault.json"
@@ -6006,7 +6021,7 @@
           }
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/VaultIdentity",
           "description": "Managed service identity"
         }
       },
@@ -6102,8 +6117,8 @@
       "description": "Parameters for creating or updating a vault",
       "properties": {
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Managed service identity"
+          "$ref": "#/definitions/VaultIdentity",
+          "description": "Managed identity settings. When provided, the user-assigned identity set is fully replaced. When omitted for an existing vault, the current identities are preserved. Setting type to None removes all user-assigned identities and their certificates."
         },
         "location": {
           "type": "string",
@@ -6126,6 +6141,50 @@
         "properties"
       ]
     },
+    "VaultIdentity": {
+      "type": "object",
+      "description": "Managed identity settings for a vault, supporting user-assigned identities or no identity.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/VaultIdentityType",
+          "description": "The type of managed identity assigned to the vault."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "User-assigned identities keyed by their Azure resource IDs. Values can be empty objects in requests and cannot be null.",
+          "additionalProperties": {
+            "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "VaultIdentityType": {
+      "type": "string",
+      "description": "The supported managed identity types for a vault.",
+      "enum": [
+        "None",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "VaultIdentityType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity is assigned to the vault."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User-assigned managed identities are assigned to the vault."
+          }
+        ]
+      }
+    },
     "VaultListResult": {
       "type": "object",
       "description": "The response of a Vault list operation.",
@@ -6147,13 +6206,34 @@
         "value"
       ]
     },
+    "VaultPatchIdentity": {
+      "type": "object",
+      "description": "Managed identity settings for updating a vault, including removal of individual user-assigned identities.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/VaultIdentityType",
+          "description": "The type of managed identity assigned to the vault."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "User-assigned identities keyed by their Azure resource IDs. Values can be empty objects to assign an identity or null to remove an identity.",
+          "additionalProperties": {
+            "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "VaultPatchParameters": {
       "type": "object",
       "description": "Parameters for creating or updating a vault",
       "properties": {
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Managed service identity"
+          "$ref": "#/definitions/VaultPatchIdentity",
+          "description": "Managed identity settings. When omitted, identities are unchanged. Dictionary entries containing empty objects add or retain identities; null entries remove only the specified identities. Setting type to None removes all user-assigned identities and their certificates."
         },
         "tags": {
           "type": "object",

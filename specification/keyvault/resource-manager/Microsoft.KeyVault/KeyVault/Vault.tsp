@@ -34,9 +34,9 @@ model Vault is Azure.ResourceManager.ProxyResource<VaultProperties, false> {
   tags?: Record<string>;
 
   /** Managed service identity */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Vault requires a custom identity envelope supporting only UserAssigned and None."
   @Versioning.added(Versions.v2026_10_01_preview)
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  identity?: CommonTypes.ManagedServiceIdentity;
+  identity?: VaultIdentity;
 }
 alias VaultsParentParameter = {
   ...ApiVersionParameter;
