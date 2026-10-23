@@ -13928,7 +13928,7 @@
           "description": "The required authentication for incoming client requests."
         },
         "tls": {
-          "$ref": "#/definitions/TlsCertMethod",
+          "$ref": "#/definitions/McpFrontendTls",
           "description": "The required serving TLS configuration, using the same certificate settings as BrokerListener."
         }
       },
@@ -14052,6 +14052,27 @@
           "readOnly": true
         }
       }
+    },
+    "McpFrontendTls": {
+      "type": "object",
+      "description": "The frontend's serving certificate configuration. Only the selected mode's settings apply.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/TlsCertMethodMode",
+          "description": "The mode of TLS server certificate management."
+        },
+        "certManagerCertificateSpec": {
+          "$ref": "#/definitions/CertManagerCertificateSpec",
+          "description": "Automatic TLS server certificate management with cert-manager."
+        },
+        "manual": {
+          "$ref": "#/definitions/X509ManualCertificate",
+          "description": "Manual TLS server certificate management through a referenced Secret."
+        }
+      },
+      "required": [
+        "mode"
+      ]
     },
     "McpServerConnectionAuthentication": {
       "type": "object",

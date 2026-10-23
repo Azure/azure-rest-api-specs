@@ -56,7 +56,7 @@ model McpFrontendEndpoint {
   authentication: McpFrontendAuthentication;
 
   /** The required serving TLS configuration, using the same certificate settings as BrokerListener. */
-  tls: TlsCertMethod;
+  tls: McpFrontendTls;
 }
 
 /** The authentication configuration for clients calling the frontend. */
@@ -103,6 +103,19 @@ model McpFrontendServiceAccountTokenSettings {
 @maxLength(256)
 @pattern("\\S")
 scalar McpFrontendAudience extends string;
+
+/** The frontend's serving certificate configuration. Only the selected mode's settings apply. */
+@added(Versions.`2026-11-01-preview`)
+model McpFrontendTls {
+  /** The mode of TLS server certificate management. */
+  mode: TlsCertMethodMode;
+
+  /** Automatic TLS server certificate management with cert-manager. */
+  certManagerCertificateSpec?: CertManagerCertificateSpec;
+
+  /** Manual TLS server certificate management through a referenced Secret. */
+  manual?: X509ManualCertificate;
+}
 
 /** The output-only health of the frontend's serving, authentication, and routing subsystems. */
 @added(Versions.`2026-11-01-preview`)
