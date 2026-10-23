@@ -274,7 +274,7 @@ model A2APreviewToolboxTool extends ToolboxTool {
 
 /**
  * A browser automation tool stored in a toolbox.
- * BrowserAutomationPreviewToolboxTool is deprecated and will be removed in the next releases.
+ * BrowserAutomationPreviewToolboxTool is deprecated.
  * Please use BrowserAutomationToolboxTool instead.
  * See https://aka.ms/bat/docs for more information on Browser automation tool.
  */
