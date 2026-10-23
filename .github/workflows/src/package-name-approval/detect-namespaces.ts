@@ -202,7 +202,7 @@ export default async function detectNamespaces({ context, core }: GitHubScriptAr
   const allConfiguredPackageNames: Record<string, string> = {};
 
   const allConfiguredNamespaces: Record<string, string> = {};
-  const analyzedProjectPaths = new Set<string>();
+  const changedProjectPaths = new Set<string>();
   let isMgmt = false;
   let isDataPlane = false;
 
@@ -219,7 +219,6 @@ export default async function detectNamespaces({ context, core }: GitHubScriptAr
     core.info(`Running typespec-metadata emitter for: ${file}`);
 
     const prResult = await runMetadataEmitter(tspConfigDir, entrypoint, core);
-    analyzedProjectPaths.add(posix.dirname(file));
     if (prResult.isMgmt) isMgmt = true;
     if (prResult.isDataPlane) isDataPlane = true;
 
@@ -239,6 +238,10 @@ export default async function detectNamespaces({ context, core }: GitHubScriptAr
       baseResult,
       core,
     );
+
+    if (Object.keys(packageNames).length > 0) {
+      changedProjectPaths.add(posix.dirname(file));
+    }
 
     Object.assign(packageNamesFound, packageNames);
     Object.assign(namespacesFound, namespaces);
@@ -264,7 +267,7 @@ export default async function detectNamespaces({ context, core }: GitHubScriptAr
     }
   }
 
-  const typespecPaths = [...analyzedProjectPaths];
+  const typespecPaths = [...changedProjectPaths];
   const results = {
     typespecPath: typespecPaths.length === 1 ? typespecPaths[0] : null,
     typespecPaths,

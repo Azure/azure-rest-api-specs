@@ -258,7 +258,7 @@ describe("detect-namespaces", () => {
     expect(core.setOutput).toHaveBeenCalledWith("results", "true");
   });
 
-  it("includes analyzed projects whose package names were unchanged", async () => {
+  it("excludes unchanged projects from paths while retaining all configured names", async () => {
     const otherFile = "specification/storage/Storage.Management/tspconfig.yaml";
     mockFileStatuses([otherFile], { additions: [file] });
     const unchanged = metadata({ python: [{ packageName: "azure-mgmt-storage" }] });
@@ -268,11 +268,8 @@ describe("detect-namespaces", () => {
       .mockResolvedValueOnce(unchanged);
     await detectNamespaces(args());
     expect(writtenResults()).toMatchObject({
-      typespecPath: null,
-      typespecPaths: [
-        "specification/compute/Compute.Management",
-        "specification/storage/Storage.Management",
-      ],
+      typespecPath: "specification/compute/Compute.Management",
+      typespecPaths: ["specification/compute/Compute.Management"],
       namespacesFound: { dotnet: "Azure.ResourceManager.Compute" },
       allConfiguredPackageNames: {
         dotnet: "Azure.ResourceManager.Compute",
