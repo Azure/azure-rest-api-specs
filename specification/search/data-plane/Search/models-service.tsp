@@ -4577,7 +4577,7 @@ model VectorSearchTopicGraphProfile {
   @maxValue(1)
   defaultDiversityFactor?: float32;
 
-  /** Default minimum number of vector candidates to retrieve before topic graph sampling. This property can only be used when `defaultKind` is `diverse` or `balanced`. The default is 1,000 for classic services and 500 for serverless services. */
+  /** Default minimum number of vector candidates to retrieve before topic graph sampling. This property can only be used when `defaultKind` is `diverse` or `balanced`. The default is 1,000. */
   @minValue(250)
   @maxValue(10000)
   defaultMinDiversityPoolSize?: int32;

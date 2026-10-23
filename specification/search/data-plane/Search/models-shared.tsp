@@ -74,7 +74,7 @@ model DiverseVectorQueryTopicGraph extends VectorQueryTopicGraph {
   @maxValue(1)
   diversityFactor?: float32;
 
-  /** The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000 for classic services and 500 for serverless services. */
+  /** The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000. */
   @minValue(250)
   @maxValue(10000)
   minDiversityPoolSize?: int32;
@@ -86,7 +86,7 @@ model BalancedVectorQueryTopicGraph extends VectorQueryTopicGraph {
   /** The discriminator value. */
   kind: VectorSearchTopicGraphKind.Balanced;
 
-  /** The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000 for classic services and 500 for serverless services. */
+  /** The minimum number of vector candidates to retrieve before topic graph sampling. The default is 1,000. */
   @minValue(250)
   @maxValue(10000)
   minDiversityPoolSize?: int32;
