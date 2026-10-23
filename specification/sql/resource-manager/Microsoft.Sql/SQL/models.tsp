@@ -11298,6 +11298,40 @@ model QueryProperties {
 }
 
 /**
+ * Text of a requested database query.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep this response model in the existing databases OpenAPI feature file."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model QueryTextDatabase {
+  /**
+   * The type of the query text result: Microsoft.Sql/servers/databases/topQueries/queryText.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The name of the query text result. Always "current".
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The SQL text of the query. Omitted when query text is not included.
+   */
+  @visibility(Lifecycle.Read)
+  queryText?: string;
+}
+
+/**
+ * A list containing the text of the requested database query.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep this response model in the existing databases OpenAPI feature file."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model QueryTextResult is Azure.Core.Page<QueryTextDatabase>;
+
+/**
  * Execution statistics for one particular query
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
