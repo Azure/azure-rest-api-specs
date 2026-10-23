@@ -11,17 +11,17 @@ namespace Customizations;
 @@alternateType(
   FileCreationTimeParameter.fileCreationTime,
   string,
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 @@alternateType(
   FileLastWriteTimeParameter.fileLastWriteTime,
   string,
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 @@alternateType(
   FileChangeTimeParameter.fileChangeTime,
   string,
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 @@alternateType(
   FileCreationTimeResponseHeader.fileCreationTime,
@@ -39,8 +39,8 @@ namespace Customizations;
   "python,csharp"
 );
 
-@@alternateType(KeyInfo.start, string, "python,csharp,javascript,go");
-@@alternateType(KeyInfo.expiry, string, "python,csharp,javascript,go");
+@@alternateType(KeyInfo.start, string, "python,csharp,javascript,go,java");
+@@alternateType(KeyInfo.expiry, string, "python,csharp,javascript,go,java");
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
@@ -90,21 +90,29 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(ContentCrc64ResponseHeader.contentCrc64, bytes, "go");
 @@alternateType(DirectoryItem.name, string, "go");
 @@alternateType(FileItem.name, string, "go");
-@@alternateType(FileChangeTimeResponseHeader.fileChangeTime, utcDateTime, "go");
+@@alternateType(
+  FileChangeTimeResponseHeader.fileChangeTime,
+  utcDateTime,
+  "go,java"
+);
 @@alternateType(
   FileCreationTimeResponseHeader.fileCreationTime,
   utcDateTime,
-  "go"
+  "go,java"
 );
 @@alternateType(
   FileLastWriteTimeResponseHeader.fileLastWriteTime,
   utcDateTime,
-  "go"
+  "go,java"
 );
 @@alternateType(HandleItem.path, string, "go");
-@@alternateType(LeaseResponseHeaders.leaseDuration, LeaseDurationType, "go");
-@@alternateType(LeaseResponseHeaders.leaseState, LeaseStateType, "go");
-@@alternateType(LeaseResponseHeaders.leaseStatus, LeaseStatusType, "go");
+@@alternateType(
+  LeaseResponseHeaders.leaseDuration,
+  LeaseDurationType,
+  "go,java"
+);
+@@alternateType(LeaseResponseHeaders.leaseState, LeaseStateType, "go,java");
+@@alternateType(LeaseResponseHeaders.leaseStatus, LeaseStatusType, "go,java");
 @@alternateType(LinkCountResponseHeader.linkCount, int64, "go");
 @@alternateType(ListFilesAndDirectoriesSegmentResponse.prefix, string, "go");
 @@alternateType(NfsTimestampResponseHeaders.fileChangeTime, utcDateTime, "go");
@@ -430,28 +438,28 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
 @@Legacy.disablePageable(
   Storage.File.Service.listSharesSegment,
-  "python,javascript,csharp"
+  "python,javascript,csharp,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
 @@Legacy.disablePageable(
   Storage.File.Directory.listFilesAndDirectoriesSegment,
-  "python,javascript,csharp"
+  "python,javascript,csharp,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
 @@Legacy.disablePageable(
   Storage.File.Directory.listHandles,
-  "python,javascript,csharp,go"
+  "python,javascript,csharp,go,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
 @@Legacy.disablePageable(
   Storage.File.File.listHandles,
-  "python,javascript,csharp,go"
+  "python,javascript,csharp,go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
 @@Legacy.disablePageable(
   Storage.File.File.listAllRanges,
-  "python,javascript,csharp,go"
+  "python,javascript,csharp,go,java"
 );
 
 @@alternateType(Storage.File.FileProperty.creationTime, string, "python");
@@ -513,9 +521,9 @@ model DirectoryClientParameters {
   "csharp"
 );
 
-@@alternateType(AccessPolicy.start, utcDateTime, "csharp");
-@@alternateType(AccessPolicy.expiry, utcDateTime, "csharp");
-@@alternateType(MetadataHeaders.metadata, Record<string>, "csharp");
+@@alternateType(AccessPolicy.start, utcDateTime, "csharp,java");
+@@alternateType(AccessPolicy.expiry, utcDateTime, "csharp,java");
+@@alternateType(MetadataHeaders.metadata, Record<string>, "csharp,java");
 @@alternateType(FileProperty.eTag, string, "csharp");
 @@alternateType(ShareStats.shareUsageBytes, int64, "csharp");
 
@@ -529,7 +537,7 @@ model DirectoryClientParameters {
 @@clientName(Share, "ShareRestClient", "csharp");
 @@clientName(StorageErrorCode, "ShareErrorCode", "csharp");
 @@clientName(PermissionCopyModeType, "PermissionCopyMode", "csharp");
-@@clientName(FileRangeWriteType, "ShareFileRangeWriteType", "csharp");
+@@clientName(FileRangeWriteType, "ShareFileRangeWriteType", "csharp,java");
 @@clientName(LeaseDurationType, "ShareLeaseDuration", "csharp");
 @@clientName(LeaseStateType, "ShareLeaseState", "csharp");
 @@clientName(LeaseStatusType, "ShareLeaseStatus", "csharp");
@@ -545,5 +553,206 @@ model DirectoryClientParameters {
   Storage.File.MetadataHeaders.metadata,
   "collectionHeaderPrefix",
   "x-ms-meta-",
-  "csharp"
+  "csharp,java"
 );
+
+// java customizations
+// name the service-client impl "AzureFileStorageImpl" to match the historical swagger name
+@@clientName(Storage.File, "AzureFileStorage", "java");
+
+// java: carry the storage-wide client parameters on the service client so the generated
+// AzureFileStorageImpl constructor matches what the hand-written builders pass (mirrors the csharp
+// @clientInitialization blocks above).
+/** Storage-wide client parameters carried on the service client. */
+model AzureFileStorageClientParameters {
+  /** Valid values are 'backup'. */
+  fileRequestIntent?: ShareTokenIntent;
+
+  /** If true, the trailing dot will not be trimmed from the target file/directory path. */
+  allowTrailingDot?: boolean;
+
+  /** If true, the trailing dot will not be trimmed from the source URI. */
+  allowSourceTrailingDot?: boolean;
+}
+
+@@clientInitialization(
+  Storage.File,
+  {
+    parameters: AzureFileStorageClientParameters,
+  },
+  "java"
+);
+
+// java: reconcile generated model names with the existing models
+@@clientName(AccessPolicy, "ShareAccessPolicy", "java");
+@@clientName(AccessRight, "ShareFileHandleAccessRights", "java");
+@@clientName(CorsRule, "ShareCorsRule", "java");
+@@clientName(Metrics, "ShareMetrics", "java");
+@@clientName(RetentionPolicy, "ShareRetentionPolicy", "java");
+@@clientName(SignedIdentifier, "ShareSignedIdentifier", "java");
+@@clientName(SignedIdentifiers, "ShareSignedIdentifierWrapper", "java");
+@@clientName(StorageServiceProperties, "ShareServiceProperties", "java");
+@@clientName(
+  FileRangeWriteFromUrlType,
+  "ShareFileRangeWriteFromUrlType",
+  "java"
+);
+@@clientName(StorageErrorCode, "ShareErrorCode", "java");
+
+// java: reconcile generated model property names with the historical swagger x-ms-client-name
+// values so the public API surface stays backward compatible.
+@@clientName(AccessPolicy.start, "startsOn", "java");
+@@clientName(AccessPolicy.expiry, "expiresOn", "java");
+@@clientName(AccessPolicy.permission, "permissions", "java");
+@@clientName(UserDelegationKey.signedOid, "signedObjectId", "java");
+@@clientName(UserDelegationKey.signedTid, "signedTenantId", "java");
+@@clientName(
+  UserDelegationKey.signedDelegatedUserTid,
+  "signedDelegatedUserTenantId",
+  "java"
+);
+@@clientName(KeyInfo.delegatedUserTid, "delegatedUserTenantId", "java");
+
+// java: match the historical swagger numeric widths that the hand-written wrapper models depend on.
+// ShareStats.shareUsageBytes must be int64 (long); the hand-written ModelHelper feeds it into
+// new ShareStatistics(long shareUsageInBytes) -- an int would silently bind to the (int GB) ctor.
+@@alternateType(ShareStats.shareUsageBytes, int64, "java");
+
+// java: the generated copy-status response header must reference the public CopyStatusType custom-type.
+@@clientName(CopyStatus, "CopyStatusType", "java");
+// java: emit the public ShareErrorCode enum. In DPG it is otherwise orphaned (the error model isn't
+// referenced by a retained typed operation), so tag it public+output to force emission into the
+// custom-types (public models) package.
+@@access(StorageErrorCode, Access.public, "java");
+@@usage(StorageErrorCode, Usage.output, "java");
+// @@access(CopyStatus, Access.public, "java");
+// @@usage(CopyStatus, Usage.output, "java");
+
+// java: richer client doc for the token-intent enum than the terse spec description (SDK-only; does not change OpenAPI).
+@@clientDoc(
+  ShareTokenIntent,
+  "The request intent specifies requests that are intended for backup/admin type operations, meaning that all file/directory ACLs are bypassed and full permissions are granted. User must also have required RBAC permission.",
+  DocumentationMode.replace,
+  "java"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Emitter option for response header model synthesis"
+namespace JavaResponseHeaderModels {
+  @@clientOption(
+    Storage.File.File.setMetadata,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+
+  @@clientOption(
+    Storage.File.Directory.create,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+  @@clientOption(
+    Storage.File.Directory.forceCloseHandles,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+  @@clientOption(
+    Storage.File.Directory.getProperties,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+  @@clientOption(
+    Storage.File.Directory.setMetadata,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+  @@clientOption(
+    Storage.File.Directory.setProperties,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+
+  @@clientOption(
+    Storage.File.File.createHardLink,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+  @@clientOption(
+    Storage.File.File.create,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+  @@clientOption(
+    Storage.File.File.createSymbolicLink,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+  @@clientOption(
+    Storage.File.File.forceCloseHandles,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+  @@clientOption(
+    Storage.File.File.getProperties,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+  @@clientOption(
+    Storage.File.File.getSymbolicLink,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+  @@clientOption(
+    Storage.File.File.setHttpHeaders,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+  @@clientOption(
+    Storage.File.File.startCopy,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+  @@clientOption(
+    Storage.File.File.uploadRangeFromUrl,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+  @@clientOption(
+    Storage.File.File.uploadRange,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+
+  @@clientOption(
+    Storage.File.Share.createPermission,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+  @@clientOption(
+    Storage.File.Share.createSnapshot,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+  @@clientOption(
+    Storage.File.Share.getProperties,
+    "responseHeadersAsModel",
+    true,
+    "java"
+  );
+}
