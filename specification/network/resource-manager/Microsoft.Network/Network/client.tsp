@@ -8567,3 +8567,18 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 );
 
 @@clientName(Nat64Capability, "NAT64Capability", "go");
+
+// Preserve the released C# Network Manager action names and pageable value-array contracts.
+@@clientName(NetworkManagers.post, "PostNetworkManagerCommit", "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# pageable active connectivity configuration listing."
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(NetworkManagers.listActiveConnectivityConfigurations, "csharp");
+@@clientName(NetworkManagers.listActiveConnectivityConfigurations, "GetActiveConnectivityConfigurations", "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# pageable active security admin rule listing."
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(NetworkManagers.listActiveSecurityAdminRules, "csharp");
+@@clientName(NetworkManagers.listActiveSecurityAdminRules, "GetActiveSecurityAdminRules", "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# pageable deployment status listing."
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(NetworkManagers.networkManagerDeploymentStatusList, "csharp");
+@@clientName(NetworkManagers.networkManagerDeploymentStatusList, "GetNetworkManagerDeploymentStatus", "csharp");
