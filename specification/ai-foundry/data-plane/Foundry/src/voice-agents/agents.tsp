@@ -547,14 +547,30 @@ union VoiceAgentAudioTimestampType {
   word: "word",
 }
 
-@doc("Input audio noise reduction configuration.")
+@doc("""
+  Input audio noise reduction configuration. `azure_deep_noise_suppression_headset` and
+  `azure_personal_noise_suppression` are modes for local voice activity detection that
+  enhance detection audio without changing the audio used for recognition.
+  """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentNoiseReduction {
-  @doc("The noise reduction mode.")
+  @doc("""
+    The noise reduction mode. `azure_deep_noise_suppression_headset` provides
+    headset-optimized noise suppression for local voice activity detection, optimized for
+    low-sample-rate audio including 8 kHz telephony audio without changing recognition audio (not
+    restricted to headset devices). `azure_personal_noise_suppression` starts with headset
+    suppression for local voice activity detection and personalizes detection after automatic speaker
+    enrollment while keeping recognition audio unchanged and keeping headset suppression active when
+    personalization is unavailable.
+    """)
   type: VoiceAgentNoiseReductionType;
 }
 
-@doc("The input audio noise reduction mode.")
+@doc("""
+  The input audio noise reduction mode.
+  - `azure_deep_noise_suppression_headset`: Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.
+  - `azure_personal_noise_suppression`: Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.
+  """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentNoiseReductionType {
   string,
@@ -563,6 +579,12 @@ union VoiceAgentNoiseReductionType {
 
   @doc("Azure deep noise suppression.")
   azure_deep_noise_suppression: "azure_deep_noise_suppression",
+
+  @doc("Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.")
+  azure_deep_noise_suppression_headset: "azure_deep_noise_suppression_headset",
+
+  @doc("Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.")
+  azure_personal_noise_suppression: "azure_personal_noise_suppression",
 }
 
 @doc("The turn-detection strategy. Additional values may be added over time.")
@@ -753,6 +775,7 @@ model VoiceAgentEchoCancellation {
 @doc("""
   The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed
   voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
+  `azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.
   Additional values may be added over time.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -785,6 +808,9 @@ union VoiceAgentInputTranscriptionModel {
 
   @doc("Azure AI Speech to text.")
   azure_speech: "azure-speech",
+
+  @doc("Azure AI Speech streaming transcription for cascaded text-model conversations only. Requires a nonempty `language`, such as `en-US`; comma-separated locales are supported. Supports `custom_speech`, `phrase_list`, and `profanity_filter`. Not supported with realtime speech-to-speech models.")
+  azure_speech_streaming: "azure-speech-streaming",
 }
 
 @doc("The supported input-transcript profanity filtering modes.")
@@ -805,12 +831,25 @@ union VoiceAgentProfanityFilterMode {
 @doc("""
   Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
   and phrase hints.
+  When `model` is `azure-speech-streaming`, transcription is supported for cascaded text-model
+  conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as
+  `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and
+  `profanity_filter`.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentInputTranscription {
-  ...OmitProperties<OpenAI.AudioTranscription, "model">;
+  @doc("""
+    The language of the input audio. Supplying the input language in
+    [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format
+    will improve accuracy and latency. Optional for other transcription models; required and must be
+    nonempty when `model` is `azure-speech-streaming` (such as `en-US`; comma-separated locales are
+    supported).
+    """)
+  language?: string;
 
-  @doc("The transcription model identifier. Configure customer custom speech deployments in `custom_speech`.")
+  ...OmitProperties<OpenAI.AudioTranscription, "model" | "language">;
+
+  @doc("The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` is for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.")
   `model`: VoiceAgentInputTranscriptionModel;
 
   @doc("Optional customer custom speech deployment configuration, keyed by locale.")
@@ -821,7 +860,7 @@ model VoiceAgentInputTranscription {
 
   @doc("""
     Controls how profanity is handled in input transcripts. Supported only with managed Azure Speech
-    (`azure-speech`), including Custom Speech.
+    (`azure-speech` and `azure-speech-streaming`), including Custom Speech.
     Set this property before the session starts. If omitted, the transcription provider's default applies.
     You cannot change the mode during a session.
     Filtering affects transcript events and the text sent to cascaded models. It does not change input
