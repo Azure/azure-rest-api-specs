@@ -10,6 +10,18 @@
       "kind": "voice",
       "model_type": "managed",
       "model": "gpt-realtime",
+      "post_call": {
+        "destinations": [
+          {
+            "type": "routine",
+            "name": "archive"
+          },
+          {
+            "type": "routine",
+            "name": "analysis"
+          }
+        ]
+      },
       "audio": {
         "input": {
           "turn_detection": {
@@ -49,6 +61,18 @@
               "kind": "voice",
               "model_type": "managed",
               "model": "gpt-realtime",
+              "post_call": {
+                "destinations": [
+                  {
+                    "type": "routine",
+                    "name": "archive"
+                  },
+                  {
+                    "type": "routine",
+                    "name": "analysis"
+                  }
+                ]
+              },
               "audio": {
                 "input": {
                   "turn_detection": {

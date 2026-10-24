@@ -172,14 +172,139 @@ model VoiceAgentDefinition extends AgentDefinition {
   subagent_config?: VoiceAgentSubagentConfig;
 
   @doc("""
+    Optional post-call destinations and content selection stored with this immutable agent version. Omit this
+    property or set it to null when creating or replacing a complete definition to leave that version without post-call configuration;
+    earlier versions are unchanged.
+    Saving the configuration does not send events or dispatch routines. The service validates that the selected
+    voice-agent definition and requested content are supported; unsupported content requests fail explicitly.
+    """)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  post_call?: VoiceAgentPostCall | null;
+
+  @doc("""
     Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
     `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
     timeline and raw audio. When `false`, nothing is persisted and no conversation is surfaced. There is no separate
-    audio-logging control; audio is persisted only as part of this switch. Latency/performance telemetry (e.g.
+    audio-logging control; audio is persisted only as part of this switch, except that a `post_call.include` that
+    requests `audio` persists the conversation even when `false`. Latency/performance telemetry (e.g.
     time-to-first-audio, inter-token latency, interruption) is observability-only (customer trace / App Insights) and
     is not part of the persisted conversation content.
     """)
   store?: boolean = false;
+}
+
+@doc("""
+  Post-call destinations and content selection for a voice agent version. After an observable session end, the
+  service attempts all destinations independently and concurrently on a best-effort basis, sharing one captured
+  snapshot and an overall deadline. One destination's failure does not prevent attempts to the others.
+  Delivery is not guaranteed after a hard crash and is not exactly once.
+  """)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentPostCall {
+  ...Record<never>;
+
+  @doc("""
+    One to ten destinations in total, in any combination of Event Grid connections and routines. Multiple
+    destinations of either type are allowed. List order does not define execution order. The service rejects
+    duplicate references to the same destination rather than silently deduplicating them; Routine names use
+    ordinal, case-sensitive comparison.
+    """)
+  @minItems(1)
+  @maxItems(10)
+  destinations: VoiceAgentPostCallDestination[];
+
+  @doc("""
+    Content requested for every destination. Omission defaults to ["transcript"]; an empty list requests no
+    content but still triggers delivery of basic event, session, and quality metadata to every destination.
+    Only "transcript" and "audio" are supported. The service rejects repeated values. List order has no meaning.
+    The list selects content, not event types or payload formats. Schema defaults alone do not implement
+    service behavior. Delivery must distinguish content not requested from requested content that is unavailable.
+    Transcript uses standard conversation items, including tool calls and results. Audio requests an authorized
+    URL reference to the call's merged recording, not inline or base64 audio. Requesting audio persists the
+    session's conversation and audio even when store is false, because the recording is served from the stored
+    conversation; it then follows the conversation's retention and deletion.
+    """)
+  include?: VoiceAgentPostCallIncludeOption[] = #[
+    VoiceAgentPostCallIncludeOption.transcript
+  ];
+}
+
+@doc("""
+  The type of a post-call destination. Only Event Grid and Routine destinations are supported; the service rejects
+  any other value.
+  """)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentPostCallDestinationType {
+  string,
+
+  @doc("An Event Grid connection destination.")
+  event_grid: "event_grid",
+
+  @doc("A Routine destination.")
+  routine: "routine",
+}
+
+@doc("""
+  A post-call destination selected by its type. Each destination references a same-project resource by bare name.
+  """)
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentPostCallDestination {
+  @doc("The destination type.")
+  type: VoiceAgentPostCallDestinationType;
+}
+
+@doc("An Event Grid connection in the same project that receives post-call events.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentEventGridPostCallDestination
+  extends VoiceAgentPostCallDestination {
+  @doc("Selects an Event Grid connection destination.")
+  type: VoiceAgentPostCallDestinationType.event_grid;
+
+  @doc("""
+    The nonblank bare name of the Event Grid connection in the same project. The connection stores the endpoint
+    and authentication settings. The service rejects whitespace, URLs, and resource paths.
+    """)
+  @minLength(1)
+  @example("post-call-events")
+  connection_name: string;
+}
+
+@doc("A Routine in the same project, resolved from the versioned Routine definitions at post-call dispatch. This reference does not pin a Routine version or override its input.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentRoutinePostCallDestination
+  extends VoiceAgentPostCallDestination {
+  @doc("Selects a Routine destination.")
+  type: VoiceAgentPostCallDestinationType.routine;
+
+  @doc("""
+    The nonempty bare Routine name, limited to 128 characters. Names use ordinal, case-sensitive comparison.
+    The service rejects whitespace, URLs, resource paths, the names "." and "..", and the forward slash,
+    backslash, colon, question mark, number sign, and percent sign characters. Unicode names are allowed. Only the
+    name is stored, not a version, endpoint, or credentials.
+    """)
+  @minLength(1)
+  @maxLength(128)
+  @example("archive")
+  name: string;
+}
+
+@doc("Content that may be requested for post-call delivery. Only transcript conversation items and authorized recording URL references are supported by this contract.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentPostCallIncludeOption {
+  @doc("""
+    Standard conversation items, including tool calls and results, rather than a flattened text transcript
+    or generated analysis.
+    """)
+  transcript: "transcript",
+
+  @doc("""
+    An authorized URL reference to the call's merged recording, not inline or base64 audio. The URL carries no
+    credential; reading it requires Microsoft Entra ID and read access to the agent endpoint. Requesting audio
+    persists the session's conversation and audio even when store is false. Delivery distinguishes content not
+    requested from requested content that is unavailable.
+    """)
+  audio: "audio",
 }
 
 @doc("Configuration for sibling Foundry text agents that a voice agent may consult.")

@@ -86761,13 +86761,27 @@ components:
         subagent_config:
           $ref: '#/components/schemas/VoiceAgentSubagentConfig'
           description: Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.
+        post_call:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentPostCall'
+            - type: 'null'
+          description: |-
+            Optional post-call destinations and content selection stored with this immutable agent version. Omit this
+            property or set it to null when creating or replacing a complete definition to leave that version without post-call configuration;
+            earlier versions are unchanged.
+            Saving the configuration does not send events or dispatch routines. The service validates that the selected
+            voice-agent definition and requested content are supported; unsupported content requests fail explicitly.
+          x-ms-foundry-meta:
+            required_previews:
+              - VoiceAgents=V1Preview
         store:
           type: boolean
           description: |-
             Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
             `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
             timeline and raw audio. When `false`, nothing is persisted and no conversation is surfaced. There is no separate
-            audio-logging control; audio is persisted only as part of this switch. Latency/performance telemetry (e.g.
+            audio-logging control; audio is persisted only as part of this switch, except that a `post_call.include` that
+            requests `audio` persists the conversation even when `false`. Latency/performance telemetry (e.g.
             time-to-first-audio, inter-token latency, interruption) is observability-only (customer trace / App Insights) and
             is not part of the persisted conversation content.
           default: false
@@ -86871,6 +86885,31 @@ components:
             - high
             - default
       description: The sensitivity threshold for semantic end-of-utterance detection.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentEventGridPostCallDestination:
+      type: object
+      required:
+        - type
+        - connection_name
+      properties:
+        type:
+          type: string
+          enum:
+            - event_grid
+          description: Selects an Event Grid connection destination.
+        connection_name:
+          type: string
+          minLength: 1
+          description: |-
+            The nonblank bare name of the Event Grid connection in the same project. The connection stores the endpoint
+            and authentication settings. The service rejects whitespace, URLs, and resource paths.
+          examples:
+            - post-call-events
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentPostCallDestination'
+      description: An Event Grid connection in the same project that receives post-call events.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -87201,6 +87240,115 @@ components:
             - far_field
             - azure_deep_noise_suppression
       description: The input audio noise reduction mode.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentPostCall:
+      type: object
+      required:
+        - destinations
+      properties:
+        destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentPostCallDestination'
+          minItems: 1
+          maxItems: 10
+          description: |-
+            One to ten destinations in total, in any combination of Event Grid connections and routines. Multiple
+            destinations of either type are allowed. List order does not define execution order. The service rejects
+            duplicate references to the same destination rather than silently deduplicating them; Routine names use
+            ordinal, case-sensitive comparison.
+        include:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentPostCallIncludeOption'
+          description: |-
+            Content requested for every destination. Omission defaults to ["transcript"]; an empty list requests no
+            content but still triggers delivery of basic event, session, and quality metadata to every destination.
+            Only "transcript" and "audio" are supported. The service rejects repeated values. List order has no meaning.
+            The list selects content, not event types or payload formats. Schema defaults alone do not implement
+            service behavior. Delivery must distinguish content not requested from requested content that is unavailable.
+            Transcript uses standard conversation items, including tool calls and results. Audio requests an authorized
+            URL reference to the call's merged recording, not inline or base64 audio. Requesting audio persists the
+            session's conversation and audio even when store is false, because the recording is served from the stored
+            conversation; it then follows the conversation's retention and deletion.
+          default:
+            - transcript
+      unevaluatedProperties:
+        not: {}
+      description: |-
+        Post-call destinations and content selection for a voice agent version. After an observable session end, the
+        service attempts all destinations independently and concurrently on a best-effort basis, sharing one captured
+        snapshot and an overall deadline. One destination's failure does not prevent attempts to the others.
+        Delivery is not guaranteed after a hard crash and is not exactly once.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentPostCallDestination:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/VoiceAgentPostCallDestinationType'
+          description: The destination type.
+      discriminator:
+        propertyName: type
+        mapping:
+          event_grid: '#/components/schemas/VoiceAgentEventGridPostCallDestination'
+          routine: '#/components/schemas/VoiceAgentRoutinePostCallDestination'
+      description: A post-call destination selected by its type. Each destination references a same-project resource by bare name.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentPostCallDestinationType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - event_grid
+            - routine
+      description: |-
+        The type of a post-call destination. Only Event Grid and Routine destinations are supported; the service rejects
+        any other value.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentPostCallIncludeOption:
+      type: string
+      enum:
+        - transcript
+        - audio
+      description: Content that may be requested for post-call delivery. Only transcript conversation items and authorized recording URL references are supported by this contract.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentRoutinePostCallDestination:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          type: string
+          enum:
+            - routine
+          description: Selects a Routine destination.
+        name:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: |-
+            The nonempty bare Routine name, limited to 128 characters. Names use ordinal, case-sensitive comparison.
+            The service rejects whitespace, URLs, resource paths, the names "." and "..", and the forward slash,
+            backslash, colon, question mark, number sign, and percent sign characters. Unicode names are allowed. Only the
+            name is stored, not a version, endpoint, or credentials.
+          examples:
+            - archive
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentPostCallDestination'
+      description: A Routine in the same project, resolved from the versioned Routine definitions at post-call dispatch. This reference does not pin a Routine version or override its input.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

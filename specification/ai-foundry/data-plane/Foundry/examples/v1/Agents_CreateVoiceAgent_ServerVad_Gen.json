@@ -10,6 +10,25 @@
       "kind": "voice",
       "model_type": "managed",
       "model": "gpt-realtime",
+      "post_call": {
+        "destinations": [
+          {
+            "type": "event_grid",
+            "connection_name": "post-call-events"
+          },
+          {
+            "type": "routine",
+            "name": "archive"
+          },
+          {
+            "type": "routine",
+            "name": "analysis"
+          }
+        ],
+        "include": [
+          "transcript"
+        ]
+      },
       "audio": {
         "input": {
           "turn_detection": {
@@ -49,6 +68,25 @@
               "kind": "voice",
               "model_type": "managed",
               "model": "gpt-realtime",
+              "post_call": {
+                "destinations": [
+                  {
+                    "type": "event_grid",
+                    "connection_name": "post-call-events"
+                  },
+                  {
+                    "type": "routine",
+                    "name": "archive"
+                  },
+                  {
+                    "type": "routine",
+                    "name": "analysis"
+                  }
+                ],
+                "include": [
+                  "transcript"
+                ]
+              },
               "audio": {
                 "input": {
                   "turn_detection": {
