@@ -8443,6 +8443,11 @@ namespace Microsoft.Network {
 
 @@scope(Microsoft.Network.Subnets.resourceNavigationLinksList, "!csharp");
 @@scope(Microsoft.Network.Subnets.serviceAssociationLinksList, "!csharp");
+// These language-specific views intentionally describe the same two HTTP endpoints.
+@@sharedRoute(Microsoft.Network.Subnets.resourceNavigationLinksList);
+@@sharedRoute(Microsoft.Network.Subnets.serviceAssociationLinksList);
+@@sharedRoute(Microsoft.Network.CSharpSubnetLinkOperations.resourceNavigationLinksList);
+@@sharedRoute(Microsoft.Network.CSharpSubnetLinkOperations.serviceAssociationLinksList);
 @@clientLocation(Microsoft.Network.CSharpSubnetLinkOperations.resourceNavigationLinksList, Microsoft.Network.Subnets, "csharp");
 @@clientLocation(Microsoft.Network.CSharpSubnetLinkOperations.serviceAssociationLinksList, Microsoft.Network.Subnets, "csharp");
 @@clientName(Microsoft.Network.CSharpSubnetLinkOperations.resourceNavigationLinksList, "GetResourceNavigationLinks", "csharp");
