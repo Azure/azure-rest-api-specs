@@ -11369,6 +11369,20 @@ model QueryStatisticsProperties {
 }
 
 /**
+ * Execution statistics for a top resource consuming query on a managed instance.
+ */
+@added(Versions.v2026_11_01_preview)
+model QueryStatisticsPropertiesV2 {
+  ...QueryStatisticsProperties;
+
+  /**
+   * Hash identifying the query content.
+   */
+  @visibility(Lifecycle.Read)
+  queryHash?: string;
+}
+
+/**
  * Properties of a query metrics interval.
  */
 model QueryMetricInterval {
@@ -13381,7 +13395,8 @@ model TopQueries {
    * List of top resource consuming queries with appropriate metric data
    */
   @identifiers(#[])
-  queries?: QueryStatisticsProperties[];
+  @typeChangedFrom(Versions.v2026_11_01_preview, QueryStatisticsProperties[])
+  queries?: QueryStatisticsPropertiesV2[];
 }
 
 /**
