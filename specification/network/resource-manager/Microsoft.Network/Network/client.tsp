@@ -48,6 +48,13 @@ using Common;
 @@clientName(Microsoft.Network.NvaInterfaceConfigurationsProperties.type, "PropertiesType", "csharp");
 @@clientName(Microsoft.Network.TunnelConnectionHealth.lastConnectionEstablishedUtcTime, "LastConnectionEstablishedOn", "csharp");
 
+// In 1.15.0 FlowLogProperties is the format object, not the FlowLogInformation property bag.
+@@clientName(Common.FlowLogFormatParameters, "FlowLogProperties", "csharp");
+@@clientName(Common.FlowLogFormatParameters.type, "FormatType", "csharp");
+@@clientName(Microsoft.Network.FlowLogProperties, "FlowLogInformationProperties", "csharp");
+// Both flow-log entry points expose the released active name on the same nested wire field.
+@@clientName(Common.TrafficAnalyticsProperties.networkWatcherFlowAnalyticsConfiguration, "TrafficAnalyticsConfiguration", "csharp");
+
 // Keep the native connection routing field distinct from the released custom NFV compatibility member.
 @@clientName(
   Microsoft.Network.NetworkVirtualApplianceConnectionProperties.routingConfiguration,
