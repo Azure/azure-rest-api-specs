@@ -23,6 +23,9 @@ using Common;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# pageable ExpressRoute subscription listing."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.Network.ExpressRouteGateways.listBySubscription, "csharp");
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# pageable ExpressRoute provider-port collection."
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.Network.ExpressRouteProviderPorts.list, "csharp");
+
 // Preserve the released C# operation names on their existing service endpoints.
 @@clientName(Microsoft.Network.ExpressRouteCircuitPeerings.listArpTable, "GetArpTableExpressRouteCircuit", "csharp");
 @@clientName(Microsoft.Network.ExpressRouteCircuitPeerings.listRoutesTable, "GetRoutesTableExpressRouteCircuit", "csharp");
@@ -31,6 +34,8 @@ using Common;
 @@clientName(Microsoft.Network.ExpressRouteCrossConnections.listArpTable, "GetArpTableExpressRouteCrossConnection", "csharp");
 @@clientName(Microsoft.Network.ExpressRouteCrossConnections.listRoutesTable, "GetRoutesTableExpressRouteCrossConnection", "csharp");
 @@clientName(Microsoft.Network.ExpressRouteCrossConnections.listRoutesTableSummary, "GetRoutesTableSummaryExpressRouteCrossConnection", "csharp");
+@@clientName(Microsoft.Network.FirewallPolicies.firewallPolicyIdpsSignaturesList, "GetFirewallPolicyIdpsSignature", "csharp");
+@@clientName(Microsoft.Network.FirewallPolicies.firewallPolicyIdpsSignaturesFilterValuesList, "GetFirewallPolicyIdpsSignaturesFilterValue", "csharp");
 
 // Preserve the released C# property names on their original wire fields.
 @@clientName(Microsoft.Network.ApplicationGateway.zones, "AvailabilityZones", "csharp");
