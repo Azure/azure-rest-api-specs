@@ -15,6 +15,7 @@ import "./models.tsp";
 import "./Vault.tsp";
 import "./DeletedVault.tsp";
 import "./PrivateEndpointConnection.tsp";
+import "./NetworkSecurityPerimeter.tsp";
 import "./ManagedHsm.tsp";
 import "./DeletedManagedHsm.tsp";
 import "./MhsmPrivateEndpointConnection.tsp";
@@ -63,6 +64,11 @@ enum Versions {
    * The 2026-06-01-preview API version.
    */
   v2026_06_01_preview: "2026-06-01-preview",
+
+  /**
+   * The 2026-10-01-preview API version.
+   */
+  v2026_10_01_preview: "2026-10-01-preview",
 }
 
 interface Operations
