@@ -8427,10 +8427,26 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 // The released model exposes ResourceId, not a second facade over Id.
 @@clientName(Microsoft.Network.EffectiveBaseSecurityAdminRule.id, "ResourceId", "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# subnet resource-navigation link pageable action."
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.Network.Subnets.resourceNavigationLinksList, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# subnet service-association link pageable action."
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.Network.Subnets.serviceAssociationLinksList, "csharp");
+// Legacy.markAsPageable only unwraps the array and discards nextLink. Use real paging
+// on C#-only copies of the same actions without changing other language surfaces.
+namespace Microsoft.Network {
+  interface CSharpSubnetLinkOperations {
+    @scope("csharp")
+    @list
+    resourceNavigationLinksList is Subnets.resourceNavigationLinksList;
+
+    @scope("csharp")
+    @list
+    serviceAssociationLinksList is Subnets.serviceAssociationLinksList;
+  }
+}
+
+@@scope(Microsoft.Network.Subnets.resourceNavigationLinksList, "!csharp");
+@@scope(Microsoft.Network.Subnets.serviceAssociationLinksList, "!csharp");
+@@clientLocation(Microsoft.Network.CSharpSubnetLinkOperations.resourceNavigationLinksList, Microsoft.Network.Subnets, "csharp");
+@@clientLocation(Microsoft.Network.CSharpSubnetLinkOperations.serviceAssociationLinksList, Microsoft.Network.Subnets, "csharp");
+@@clientName(Microsoft.Network.CSharpSubnetLinkOperations.resourceNavigationLinksList, "GetResourceNavigationLinks", "csharp");
+@@clientName(Microsoft.Network.CSharpSubnetLinkOperations.serviceAssociationLinksList, "GetServiceAssociationLinks", "csharp");
 
 @@clientName(
   Microsoft.Network.Subnets.resourceNavigationLinksList,
