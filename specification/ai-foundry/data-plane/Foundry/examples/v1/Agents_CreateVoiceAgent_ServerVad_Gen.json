@@ -5,13 +5,16 @@
     "api-version": "v1",
     "Foundry-Features": "VoiceAgents=V1Preview",
     "name": "server-vad-agent",
-    "description": "A voice agent that uses server-side voice activity detection.",
+    "description": "A voice agent that uses headset-optimized voice activity detection and Azure Speech streaming transcription.",
     "definition": {
       "kind": "voice",
       "model_type": "managed",
-      "model": "gpt-realtime",
+      "model": "gpt-4.1",
       "audio": {
         "input": {
+          "noise_reduction": {
+            "type": "azure_deep_noise_suppression_headset"
+          },
           "turn_detection": {
             "type": "server_vad",
             "threshold": 0.5,
@@ -19,12 +22,13 @@
             "silence_duration_ms": 500
           },
           "transcription": {
-            "model": "azure-speech",
+            "model": "azure-speech-streaming",
+            "language": "en-US",
             "profanity_filter": "masked"
           }
         },
         "output": {
-          "voice": "alloy",
+          "voice": "en-US-AvaMultilingualNeural",
           "voice_type": "azure-standard",
           "voice_locale": "en-US"
         }
@@ -49,9 +53,12 @@
             "definition": {
               "kind": "voice",
               "model_type": "managed",
-              "model": "gpt-realtime",
+              "model": "gpt-4.1",
               "audio": {
                 "input": {
+                  "noise_reduction": {
+                    "type": "azure_deep_noise_suppression_headset"
+                  },
                   "turn_detection": {
                     "type": "server_vad",
                     "threshold": 0.5,
@@ -59,12 +66,13 @@
                     "silence_duration_ms": 500
                   },
                   "transcription": {
-                    "model": "azure-speech",
+                    "model": "azure-speech-streaming",
+                    "language": "en-US",
                     "profanity_filter": "masked"
                   }
                 },
                 "output": {
-                  "voice": "alloy",
+                  "voice": "en-US-AvaMultilingualNeural",
                   "voice_type": "azure-standard",
                   "voice_locale": "en-US"
                 }
