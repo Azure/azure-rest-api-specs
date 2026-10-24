@@ -7,12 +7,19 @@ import "./WebModels/WavePlans/CreateWavesFromPlan.tsp";
 import "./WebModels/WavePlans/GetWavePlans.tsp";
 import "./WebModels/WavePlans/FetchSasUri.tsp";
 import "./WebModels/WavePlans/ImportWavePlan.tsp";
+import "./WebModels/WavePlans/ImportWavePlanConfig.tsp";
+import "./WebModels/WavePlans/ValidateWavePlan.tsp";
+import "./WebModels/WavePlans/RefreshWavePlanStatus.tsp";
+import "./WebModels/WorkloadConfiguration/WorkloadConfiguration.tsp";
 import "./WebModels/Waves/MigrationWaves.tsp";
 import "./WebModels/RefreshEntities/RefreshEntities.tsp";
 import "./WebModels/MigrationEntity/MigrationEntity.tsp";
 import "./WebModels/MigrationEntityGroup/MigrationEntityGroups.tsp";
 import "./WebModels/Tasks/Tasks.tsp";
 import "./WebModels/Tasks/TaskSummary.tsp";
+import "./WebModels/Runbook/Runbook.tsp";
+import "./WebModels/RunbookExecution/RunbookExecution.tsp";
+import "./Common/ArmModels/Artifact.tsp";
 import "./Common/ArmModels/MigrateProject.tsp";
 
 using TypeSpec.Http;
@@ -77,6 +84,33 @@ interface MigrateProjects {
     ImportWavePlanRequest,
     ImportWavePlanResponse
   >;
+
+  @added(ApiVersions.v2026_09_01_preview)
+  @doc("Ingest a staged wave-plan configuration document and produce the refreshed wave-plan artifacts. Long-running operation.")
+  @action("importWavePlanConfig")
+  importWavePlanConfig is ArmResourceActionAsync<
+    MigrateProject,
+    ImportWavePlanConfigRequest,
+    ImportWavePlanConfigResponse
+  >;
+
+  @added(ApiVersions.v2026_09_01_preview)
+  @doc("Validate a customer-uploaded wave-plan CSV without applying it, and report the row and wave counts together with any findings. Long-running operation.")
+  @action("validateWavePlan")
+  validateWavePlan is ArmResourceActionAsync<
+    MigrateProject,
+    ValidateWavePlanRequest,
+    ValidateWavePlanResponse
+  >;
+
+  @added(ApiVersions.v2026_09_01_preview)
+  @doc("Re-evaluate whether the materialized wave plan for an assessment and migration path is still current, and persist the refreshed outdated status. Long-running operation.")
+  @action("refreshWavePlanStatus")
+  refreshWavePlanStatus is ArmResourceActionAsync<
+    MigrateProject,
+    RefreshWavePlanStatusRequest,
+    RefreshWavePlanStatusResponse
+  >;
 }
 
 @armResourceOperations
@@ -98,12 +132,40 @@ interface Waves {
   @Azure.ClientGenerator.Core.clientName("triggerRefresh", "java")
   @Azure.ClientGenerator.Core.clientName("triggerRefresh", "csharp")
   refresh is ArmResourceActionSync<Wave, void, WaveProperties>;
+
+  @added(ApiVersions.v2026_09_01_preview)
+  @doc("Export the workload configuration of a wave as a CSV and return a read-only download SAS URI. Long-running operation.")
+  @action("exportWorkloadConfiguration")
+  exportWorkloadConfiguration is ArmResourceActionAsync<
+    Wave,
+    void,
+    ExportWorkloadConfigurationResponse
+  >;
+
+  @added(ApiVersions.v2026_09_01_preview)
+  @doc("Validate the workload configuration CSV staged for a wave without applying it. Long-running operation.")
+  @action("validateWorkloadConfiguration")
+  validateWorkloadConfiguration is ArmResourceActionAsync<
+    Wave,
+    void,
+    ValidateWorkloadConfigurationResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 202 + 204 is emitted, which is the shape the LintDiff PostResponseCodes rule requires."
+  @added(ApiVersions.v2026_09_01_preview)
+  @doc("Apply the validated workload configuration staged for a wave. Long-running operation.")
+  @action("importWorkloadConfiguration")
+  importWorkloadConfiguration is ArmResourceActionNoContentAsync<Wave, void>;
 }
 
 @armResourceOperations
 interface MigrationEntities {
   @added(ApiVersions.v2025_03_30_preview)
   create is ArmResourceCreateOrUpdateAsync<MigrationEntity>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Updates a migration entity.")
+  update is ArmCustomPatchAsync<MigrationEntity, MigrationEntityPatch>;
 
   @added(ApiVersions.v2025_03_30_preview)
   get is ArmResourceRead<MigrationEntity>;
@@ -151,5 +213,158 @@ interface Tasks {
     MigrateProject,
     TaskSummaryRequest,
     TaskSummaryResponse
+  >;
+}
+
+@armResourceOperations
+interface Runbooks {
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Creates or updates a runbook.")
+  create is ArmResourceCreateOrUpdateAsync<Runbook>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Gets a runbook.")
+  get is ArmResourceRead<Runbook>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Lists runbooks in a migrate project.")
+  listByParent is ArmResourceListByParent<Runbook>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Deletes a runbook.")
+  delete is ArmResourceDeleteWithoutOkAsync<Runbook>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Starts an execution of the runbook.")
+  @action("execute")
+  execute is ArmResourceActionAsync<Runbook, void, RunbookExecution>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Regenerates the runbook from its current scope and configuration.")
+  @action("regenerate")
+  regenerate is ArmResourceActionAsync<Runbook, void, Runbook>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Generates an upload URL for runbook artifact content.")
+  @action("generateUploadUrl")
+  generateUploadUrl is ArmResourceActionSync<
+    Runbook,
+    ArtifactUploadUrlRequest,
+    ArtifactUploadUrlResponse
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Generates a download URL for runbook artifact content.")
+  @action("generateDownloadUrl")
+  generateDownloadUrl is ArmResourceActionSync<
+    Runbook,
+    ArtifactDownloadUrlRequest,
+    ArtifactDownloadUrlResponse
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Validates the runbook input and returns the validated runbook.")
+  @action("validateInput")
+  validateInput is ArmResourceActionAsync<Runbook, void, Runbook>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Adds a step to the runbook.")
+  @action("addStep")
+  addStep is ArmResourceActionAsync<Runbook, RunbookStepAddRequest, Runbook>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Updates a step in the runbook.")
+  @action("updateStep")
+  updateStep is ArmResourceActionAsync<
+    Runbook,
+    RunbookStepUpdateRequest,
+    Runbook
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Deletes a step from the runbook.")
+  @action("deleteStep")
+  deleteStep is ArmResourceActionAsync<
+    Runbook,
+    RunbookStepDeleteRequest,
+    Runbook
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Merges multiple runbook workstreams into one workstream.")
+  @action("mergeWorkstreams")
+  mergeWorkstreams is ArmResourceActionAsync<
+    Runbook,
+    RunbookWorkstreamsMergeRequest,
+    Runbook
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Splits selected steps into a new runbook workstream.")
+  @action("splitWorkstream")
+  splitWorkstream is ArmResourceActionAsync<
+    Runbook,
+    RunbookWorkstreamSplitRequest,
+    Runbook
+  >;
+}
+
+@armResourceOperations
+interface RunbookExecutions {
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Gets a runbook execution.")
+  get is ArmResourceRead<RunbookExecution>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Lists executions of a runbook.")
+  listByParent is ArmResourceListByParent<RunbookExecution>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Updates a runbook execution.")
+  update is ArmCustomPatchAsync<RunbookExecution, RunbookExecutionPatch>;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Generates a download URL for runbook execution artifact content.")
+  @action("generateDownloadUrl")
+  generateDownloadUrl is ArmResourceActionSync<
+    RunbookExecution,
+    ArtifactDownloadUrlRequest,
+    ArtifactDownloadUrlResponse
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Generates an upload URL for runbook execution artifact content.")
+  @action("generateUploadUrl")
+  generateUploadUrl is ArmResourceActionSync<
+    RunbookExecution,
+    ArtifactUploadUrlRequest,
+    ArtifactUploadUrlResponse
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Performs an action on the runbook execution.")
+  @action("performAction")
+  performAction is ArmResourceActionAsync<
+    RunbookExecution,
+    RunbookExecutionActionRequest,
+    RunbookExecution
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Updates the status of a step in the runbook execution.")
+  @action("updateStepStatus")
+  updateStepStatus is ArmResourceActionAsync<
+    RunbookExecution,
+    RunbookExecutionActionRequest,
+    RunbookExecution
+  >;
+
+  @added(ApiVersions.v2026_08_01_preview)
+  @doc("Provides an approval decision for a step in the runbook execution.")
+  @action("provideApproval")
+  provideApproval is ArmResourceActionAsync<
+    RunbookExecution,
+    RunbookExecutionActionRequest,
+    RunbookExecution
   >;
 }
