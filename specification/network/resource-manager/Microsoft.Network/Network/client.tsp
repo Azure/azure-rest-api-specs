@@ -3353,6 +3353,58 @@ union ProvisioningStateUnion {
   "csharp"
 );
 
+// Preserve the released C# tracked-resource contract without making location required in the REST model.
+// The native hierarchy supplies the location constructor and inherited ARM-field serialization.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# TrackedResourceData hierarchy for DdosProtectionPlan."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.DdosProtectionPlan,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+// Replace the remaining SDK-only tracked-resource bases and serialization shims with the native C# hierarchy.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the C# TrackedResourceData hierarchy for ConnectionAnalyzer."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.ConnectionAnalyzer,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# TrackedResourceData hierarchy for ExpressRouteProviderPort."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.ExpressRouteProviderPort,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# TrackedResourceData hierarchy for IpamPool."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.IpamPool,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# TrackedResourceData hierarchy for NetworkSecurityPerimeter."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.NetworkSecurityPerimeter,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# TrackedResourceData hierarchy for VerifierWorkspace."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.VerifierWorkspace,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# TrackedResourceData hierarchy for ServiceGateway."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Network.ServiceGateway,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy while retaining the complete NetworkManagerConnection wire model."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Microsoft.Network.NetworkManagerConnection,
@@ -3595,6 +3647,14 @@ union ProvisioningStateUnion {
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Experiment with retaining ARM resource generation through the shared legacy hierarchy target."
 @@Azure.ResourceManager.Legacy.customAzureResource(
   Azure.ResourceManager.Foundations.ProxyResource,
+  #{ isAzureResource: true }
+);
+
+// Match ProxyResource: mark the shared hierarchy target, not the service model, to avoid changing Swagger metadata.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Retain ARM resource detection through the shared C# tracked-resource hierarchy target."
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Retain ARM resource detection through the shared C# tracked-resource hierarchy target."
+@@Azure.ResourceManager.Legacy.customAzureResource(
+  Azure.ResourceManager.Foundations.TrackedResource,
   #{ isAzureResource: true }
 );
 
