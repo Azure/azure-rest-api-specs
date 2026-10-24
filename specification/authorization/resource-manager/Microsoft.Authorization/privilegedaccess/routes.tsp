@@ -197,7 +197,7 @@ interface PrivilegedResourceFavorites {
   @get
   @list
   list(...ApiVersionParameter):
-    | ArmResponse<Azure.Core.Page<PrivilegedResourceFavorite>>
+    | ArmResponse<PagedPrivilegedResourceFavorite>
     | ErrorResponse;
 
   /**

@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./PrivilegedResourceFavorite.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -25,7 +26,7 @@ using TypeSpec.Versioning;
  * Both resource types are tenant-scoped: they are addressed at the tenant, not
  * under a subscription or resource group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "The Microsoft.Authorization/operations listing is owned by the AccessReview subproject of the shared Authorization service; this subproject must not duplicate it."
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "The published PrivilegedAccess contract does not define Microsoft.Authorization/operations at 2026-06-01-preview. The legacy Authorization service emits that RP-level endpoint at 2021-12-01-preview, but runtime support for 2026-06-01-preview has not been confirmed. This migration does not invent a new operation or API-version contract; the exception requires Authorization owner review."
 @armProviderNamespace("Microsoft.Authorization")
 @service(#{ title: "AuthorizationManagementClient" })
 @versioned(Versions)
