@@ -26,6 +26,13 @@ using Common;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# pageable ExpressRoute provider-port collection."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.Network.ExpressRouteProviderPorts.list, "csharp");
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# pageable application gateway WAF rule-set listing."
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.Network.ApplicationGatewaysOperationGroup.listAvailableWafRuleSets, "csharp");
+@@clientName(Microsoft.Network.ApplicationGatewaysOperationGroup.listAvailableWafRuleSets, "GetAppGatewayAvailableWafRuleSets", "csharp");
+
+// The health endpoint returns a string ID; the released object-valued property is a custom convenience wrapper.
+@@clientName(Microsoft.Network.LoadBalancerHealthPerRulePerBackendAddress.networkInterfaceIPConfigurationId, "NetworkInterfaceIPConfigurationResourceId", "csharp");
+
 // Preserve the released C# operation names on their existing service endpoints.
 @@clientName(Microsoft.Network.ExpressRouteCircuitPeerings.listArpTable, "GetArpTableExpressRouteCircuit", "csharp");
 @@clientName(Microsoft.Network.ExpressRouteCircuitPeerings.listRoutesTable, "GetRoutesTableExpressRouteCircuit", "csharp");
