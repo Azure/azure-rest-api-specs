@@ -5070,9 +5070,10 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 
 @@clientName(Microsoft.Network.NextHopParameters, "NextHopContent", "csharp");
 
-@@clientName(
+// These are shared inner properties, not the released create/update request envelope.
+@@access(
   Microsoft.Network.PacketCaptureParameters,
-  "PacketCaptureCreateOrUpdateContent",
+  Azure.ClientGenerator.Core.Access.internal,
   "csharp"
 );
 
@@ -8254,7 +8255,11 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 
-@@clientName(Microsoft.Network.PacketCapture, "PacketCaptureContent", "csharp");
+@@clientName(
+  Microsoft.Network.PacketCapture,
+  "PacketCaptureCreateOrUpdateContent",
+  "csharp"
+);
 
 @@clientName(Microsoft.Network.PacketCaptureResult, "PacketCapture", "csharp");
 
