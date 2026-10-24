@@ -6308,9 +6308,10 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 
+// Preserve the released object wire shape and generate its writable flattened IPConfigurationId.
 @@alternateType(
   Microsoft.Network.QueryInboundNatRulePortMappingRequest.ipConfiguration,
-  armResourceIdentifier,
+  Azure.ResourceManager.Models.WritableSubResource,
   "csharp"
 );
 
