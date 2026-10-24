@@ -16,6 +16,22 @@ using Common;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# pageable CloudServiceSwap list contract."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.Network.SwapResources.list, "csharp");
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# pageable ExpressRoute connection collection."
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.Network.ExpressRouteGateways.list, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# pageable ExpressRoute gateway collection."
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.Network.ExpressRouteGateways.listByResourceGroup, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# pageable ExpressRoute subscription listing."
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.Network.ExpressRouteGateways.listBySubscription, "csharp");
+
+// Preserve the released C# operation names on their existing service endpoints.
+@@clientName(Microsoft.Network.ExpressRouteCircuitPeerings.listArpTable, "GetArpTableExpressRouteCircuit", "csharp");
+@@clientName(Microsoft.Network.ExpressRouteCircuitPeerings.listRoutesTable, "GetRoutesTableExpressRouteCircuit", "csharp");
+@@clientName(Microsoft.Network.ExpressRouteCircuitPeerings.listRoutesTableSummary, "GetRoutesTableSummaryExpressRouteCircuit", "csharp");
+@@clientName(Microsoft.Network.ExpressRouteCircuitPeerings.getPeeringStats, "GetPeeringStatsExpressRouteCircuit", "csharp");
+@@clientName(Microsoft.Network.ExpressRouteCrossConnections.listArpTable, "GetArpTableExpressRouteCrossConnection", "csharp");
+@@clientName(Microsoft.Network.ExpressRouteCrossConnections.listRoutesTable, "GetRoutesTableExpressRouteCrossConnection", "csharp");
+@@clientName(Microsoft.Network.ExpressRouteCrossConnections.listRoutesTableSummary, "GetRoutesTableSummaryExpressRouteCrossConnection", "csharp");
+
 // Preserve the released C# property names on their original wire fields.
 @@clientName(Microsoft.Network.ApplicationGateway.zones, "AvailabilityZones", "csharp");
 @@clientName(Microsoft.Network.ApplicationGatewayPrivateEndpointConnectionProperties.privateLinkServiceConnectionState, "ConnectionState", "csharp");
