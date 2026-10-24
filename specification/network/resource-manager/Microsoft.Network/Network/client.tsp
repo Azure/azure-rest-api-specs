@@ -169,7 +169,7 @@ namespace Azure.ResourceManager.Models {
 @@alternateType(Common.NatGatewayPropertiesFormat.publicIpPrefixesV6, Azure.ResourceManager.Models.WritableSubResource[], "csharp");
 @@alternateType(Microsoft.Network.NetworkVirtualAppliancePropertiesFormat.internetIngressPublicIps, Azure.ResourceManager.Models.WritableSubResource[], "csharp");
 // Restore released element types while keeping native property storage and wire serialization.
-@@alternateType(Microsoft.Network.SubnetPropertiesFormat.ipAllocations, Azure.ResourceManager.Models.WritableSubResource[], "csharp");
+@@alternateType(Common.SubnetPropertiesFormat.ipAllocations, Azure.ResourceManager.Models.WritableSubResource[], "csharp");
 @@alternateType(Microsoft.Network.PublicIPPrefixPropertiesFormat.publicIPAddresses, Azure.ResourceManager.Models.SubResource[], "csharp");
 // Retain the released public model and compatibility factory signatures after replacing its collection usage.
 @@usage(
@@ -8428,9 +8428,9 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 @@clientName(Microsoft.Network.EffectiveBaseSecurityAdminRule.id, "ResourceId", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# subnet resource-navigation link pageable action."
-@@Legacy.markAsPageable(Microsoft.Network.Subnets.resourceNavigationLinksList, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.Network.Subnets.resourceNavigationLinksList, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# subnet service-association link pageable action."
-@@Legacy.markAsPageable(Microsoft.Network.Subnets.serviceAssociationLinksList, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.Network.Subnets.serviceAssociationLinksList, "csharp");
 
 @@clientName(
   Microsoft.Network.Subnets.resourceNavigationLinksList,
