@@ -548,7 +548,14 @@
         "monitoringAccountId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. The workspace must be in the same location as the agent. Required when autonomous operations are enabled."
+          "description": "Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. The workspace must be in the same location as the agent. Required when autonomous operations are enabled.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Monitor/accounts"
+              }
+            ]
+          }
         },
         "autonomousOperationsEnabled": {
           "type": "boolean",
@@ -596,7 +603,14 @@
           "type": "string",
           "format": "arm-id",
           "description": "Resource ID of the Azure Monitor workspace where this agent stores issues. The workspace must be in the same location as the agent. Required when autonomous operations are enabled. If changed, existing issues remain in the previous workspace; only new issues are written to the new workspace.",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Monitor/accounts"
+              }
+            ]
+          }
         },
         "autonomousOperationsEnabled": {
           "type": "boolean",

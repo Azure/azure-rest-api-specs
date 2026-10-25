@@ -20,7 +20,11 @@ namespace Microsoft.Monitor {
     description?: string;
 
     /** Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. The workspace must be in the same location as the agent. Required when autonomous operations are enabled. */
-    monitoringAccountId?: Azure.Core.armResourceIdentifier;
+    monitoringAccountId?: Azure.Core.armResourceIdentifier<[
+      {
+        type: "Microsoft.Monitor/accounts";
+      }
+    ]>;
 
     /** Whether the agent can run operations autonomously. When true, monitoringAccountId and at least one investigation policy must be configured. */
     autonomousOperationsEnabled: boolean;
@@ -129,7 +133,13 @@ namespace Microsoft.Monitor {
     description?: string | null;
 
     /** Resource ID of the Azure Monitor workspace where this agent stores issues. The workspace must be in the same location as the agent. Required when autonomous operations are enabled. If changed, existing issues remain in the previous workspace; only new issues are written to the new workspace. */
-    monitoringAccountId?: Azure.Core.armResourceIdentifier | null;
+    monitoringAccountId?:
+      | Azure.Core.armResourceIdentifier<[
+          {
+            type: "Microsoft.Monitor/accounts";
+          }
+        ]>
+      | null;
 
     /** Whether the agent can run operations autonomously. Null leaves the existing value unchanged. Enabling autonomy requires a monitoring account and at least one investigation policy. */
     autonomousOperationsEnabled?: boolean | null;
