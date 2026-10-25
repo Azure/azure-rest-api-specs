@@ -11,7 +11,6 @@ namespace Azure.AI.Projects;
 const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
-    AgentDefinitionOptInKeys.external_agents_v1_preview,
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     AgentDefinitionOptInKeys.draft_agents_v1_preview,
     AgentDefinitionOptInKeys.digital_worker_v1_preview,
@@ -616,10 +615,6 @@ union CodeDependencyResolution {
   Registration is metadata-only: Foundry records the agent definition to light up observability experiences (traces, evaluations)
   over customer-emitted OpenTelemetry data.
   """)
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.external_agents_v1_preview] }
-)
 model ExternalAgentDefinition extends AgentDefinition {
   kind: AgentKind.external;
 
