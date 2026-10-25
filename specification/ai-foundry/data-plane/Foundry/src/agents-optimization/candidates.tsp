@@ -95,6 +95,64 @@ model AgentOptimizationToolsMutation extends AgentOptimizationMutation {
   value?: OpenAI.ChatCompletionTool[];
 }
 
+@doc("Evaluation-serving usage and estimated cost for one candidate, separate from the optimizer's candidate-generation costs.")
+model AgentOptimizationCandidateCost {
+  @doc("Measured token usage and estimated cost grouped by the actual serving model, including unpriced models. Empty when no model measurements are available.")
+  model_costs: AgentOptimizationCandidateModelCost[];
+
+  @doc("Estimated serving cost across priced validation tasks, in the specified currency. Omitted when measurement coverage is insufficient.")
+  @minValue(0)
+  estimated_cost?: float64;
+
+  @doc("Estimated serving cost per priced validation task, in the specified currency. Omitted when unavailable.")
+  @minValue(0)
+  estimated_cost_per_task?: float64;
+
+  @doc("Fraction of validation tasks with complete token measurements and a known model price, between 0 and 1.")
+  @minValue(0)
+  @maxValue(1)
+  measurement_coverage: float64;
+
+  @doc("ISO 4217 currency code for all costs in this summary. Currently USD.")
+  currency: string;
+}
+
+@doc("Measured evaluation-serving usage and estimated cost for one actual routed model.")
+model AgentOptimizationCandidateModelCost {
+  @doc("Actual model that served the measured validation tasks.")
+  `model`: string;
+
+  @doc("Aggregate token measurements for this model.")
+  token_usage: AgentOptimizationCandidateTokenUsage;
+
+  @doc("Estimated serving cost for this model, in the summary's currency. Omitted when the model is unpriced.")
+  @minValue(0)
+  estimated_cost?: float64;
+}
+
+@doc("Aggregate evaluation-serving token counts for one model. Unavailable prompt, completion, and total counts are omitted, not replaced with zero.")
+model AgentOptimizationCandidateTokenUsage {
+  @doc("Aggregate prompt token count. Omitted when unmeasured.")
+  @minValue(0)
+  prompt_tokens?: int64;
+
+  @doc("Aggregate prompt tokens served from the model's cache.")
+  @minValue(0)
+  cached_tokens: int64;
+
+  @doc("Aggregate completion token count. Omitted when unmeasured.")
+  @minValue(0)
+  completion_tokens?: int64;
+
+  @doc("Aggregate reasoning token count.")
+  @minValue(0)
+  reasoning_tokens: int64;
+
+  @doc("Aggregate total token count. Omitted when unmeasured.")
+  @minValue(0)
+  total_tokens?: int64;
+}
+
 @doc("Comparative evaluation summary for a candidate.")
 model AgentOptimizationCandidateEvaluation {
   @doc("Average composite score across evaluated tasks. Omitted until scoring produces an aggregate score.")
@@ -114,6 +172,9 @@ model AgentOptimizationCandidateEvaluation {
 
   @doc("Average total tokens consumed per task. Omitted when token usage was not measured.")
   avg_tokens?: float64;
+
+  @doc("Evaluation-serving cost estimates and per-model token measurements. Omitted when no cost summary was recorded. Unavailable estimates and token counts within a recorded summary are omitted rather than synthesized as zero.")
+  candidate_cost?: AgentOptimizationCandidateCost;
 
   @doc("Average end-to-end latency per task, rounded to milliseconds.")
   avg_latency_ms?: FoundryDurationMilliseconds;
