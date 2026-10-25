@@ -38658,6 +38658,410 @@
           }
         }
       },
+      "AgentOptimizationActivity": {
+        "type": "object",
+        "required": [
+          "id",
+          "order",
+          "title",
+          "status",
+          "started_at",
+          "completed_at",
+          "duration_ms",
+          "detail_markdown",
+          "references"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Stable execution identity within this job."
+          },
+          "attempt_number": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "One-based attempt number, at least 1. Omitted when attempt history was not recorded."
+          },
+          "order": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Presentation order, at least 0."
+          },
+          "title": {
+            "type": "string",
+            "description": "Service-authored display title."
+          },
+          "status": {
+            "$ref": "#/components/schemas/AgentOptimizationActivityStatus",
+            "description": "Current recorded state of this execution."
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Actual execution start in Unix seconds; null before execution starts."
+          },
+          "completed_at": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Recorded completion in Unix seconds; null while active, unstarted, or interrupted."
+          },
+          "duration_ms": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FoundryDurationMilliseconds"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Elapsed execution time in milliseconds; null when the start or interrupted end is unknown."
+          },
+          "detail_markdown": {
+            "type": "string",
+            "description": "Safe display Markdown. Resource links use activity-ref keys resolved against this activity's references, never service-supplied external navigation URLs."
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOptimizationActivityReference"
+            },
+            "description": "Project-scoped resource identities for this activity's activity-ref links. These identities do not grant access or resolve resources."
+          },
+          "error_code": {
+            "type": "string",
+            "description": "Recorded activity failure code. Omitted when no code was recorded."
+          },
+          "error_message": {
+            "type": "string",
+            "description": "Safe explanation of failure, skipping, or cancellation. Omitted when unavailable."
+          }
+        },
+        "description": "A recorded execution activity. Retries and replacement executions remain distinct entries; clients must not infer attempt identity from an ID suffix."
+      },
+      "AgentOptimizationActivityAgentReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "version"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent"
+            ],
+            "description": "Agent reference discriminator."
+          },
+          "name": {
+            "type": "string",
+            "description": "Foundry agent name."
+          },
+          "version": {
+            "type": "string",
+            "description": "Pinned agent version."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationActivityReference"
+          }
+        ],
+        "description": "Pinned agent identity in the current Foundry project."
+      },
+      "AgentOptimizationActivityCandidateReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "candidate_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "candidate"
+            ],
+            "description": "Candidate reference discriminator."
+          },
+          "candidate_id": {
+            "type": "string",
+            "description": "Recorded candidate identity."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationActivityReference"
+          }
+        ],
+        "description": "Candidate identity scoped to the current optimization job."
+      },
+      "AgentOptimizationActivityDatasetReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "version"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "dataset"
+            ],
+            "description": "Dataset reference discriminator."
+          },
+          "name": {
+            "type": "string",
+            "description": "Foundry dataset name."
+          },
+          "version": {
+            "type": "string",
+            "description": "Pinned dataset version."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationActivityReference"
+          }
+        ],
+        "description": "Pinned dataset identity in the current Foundry project."
+      },
+      "AgentOptimizationActivityEvaluationReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "evaluation_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "evaluation"
+            ],
+            "description": "Evaluation reference discriminator."
+          },
+          "evaluation_id": {
+            "type": "string",
+            "description": "Recorded evaluation identity."
+          },
+          "run_id": {
+            "type": "string",
+            "description": "Recorded run identity. Omitted for evaluation-level references."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationActivityReference"
+          }
+        ],
+        "description": "Evaluation identity in the current Foundry project."
+      },
+      "AgentOptimizationActivityEvaluatorReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "version"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "evaluator"
+            ],
+            "description": "Evaluator reference discriminator."
+          },
+          "name": {
+            "type": "string",
+            "description": "Foundry evaluator name."
+          },
+          "version": {
+            "type": "string",
+            "description": "Pinned evaluator version."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationActivityReference"
+          }
+        ],
+        "description": "Pinned evaluator identity in the current Foundry project."
+      },
+      "AgentOptimizationActivityInsightReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "insight_id",
+          "monitor_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "insight"
+            ],
+            "description": "Insight reference discriminator."
+          },
+          "insight_id": {
+            "type": "string",
+            "description": "Recorded Insight identity."
+          },
+          "monitor_id": {
+            "type": "string",
+            "description": "Monitor owning the Insight."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationActivityReference"
+          }
+        ],
+        "description": "Selected Insight and its owning monitor."
+      },
+      "AgentOptimizationActivityProgress": {
+        "type": "object",
+        "required": [
+          "tracking_status",
+          "activities",
+          "updated_at",
+          "observed_at"
+        ],
+        "properties": {
+          "tracking_status": {
+            "$ref": "#/components/schemas/AgentOptimizationActivityTrackingStatus",
+            "description": "Whether recorded history is available, missing, unsupported, or limited."
+          },
+          "recording_stopped_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "Recording cutoff in Unix seconds. Omitted while recording continues."
+          },
+          "notice": {
+            "type": "string",
+            "description": "Explanation of incomplete history when recording stopped. Omitted when no notice was recorded."
+          },
+          "activities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOptimizationActivity"
+            },
+            "description": "Activity snapshots in presentation order. Empty when no history is available."
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Latest persisted activity update in Unix seconds; null when no activity was recorded."
+          },
+          "observed_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "Response observation instant in Unix seconds, used to calculate active durations."
+          }
+        },
+        "description": "Recorded display progress included in optimization job detail GET. It is not a percentage-complete signal or a substitute for the job/candidate outcome."
+      },
+      "AgentOptimizationActivityReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "key"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/AgentOptimizationActivityReferenceType",
+            "description": "Resource kind. Unknown kinds must not be interpreted as navigation URLs."
+          },
+          "key": {
+            "type": "string",
+            "description": "Key resolved within this activity's references."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "agent": "#/components/schemas/AgentOptimizationActivityAgentReference",
+            "dataset": "#/components/schemas/AgentOptimizationActivityDatasetReference",
+            "evaluator": "#/components/schemas/AgentOptimizationActivityEvaluatorReference",
+            "insight": "#/components/schemas/AgentOptimizationActivityInsightReference",
+            "candidate": "#/components/schemas/AgentOptimizationActivityCandidateReference",
+            "evaluation": "#/components/schemas/AgentOptimizationActivityEvaluationReference"
+          }
+        },
+        "description": "Typed identity referenced by an activity-ref link in an activity's Markdown."
+      },
+      "AgentOptimizationActivityReferenceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "agent",
+              "dataset",
+              "evaluator",
+              "insight",
+              "candidate",
+              "evaluation"
+            ]
+          }
+        ],
+        "description": "Resource kinds supported by recorded activity references."
+      },
+      "AgentOptimizationActivityStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "not_started",
+              "in_progress",
+              "completed",
+              "failed",
+              "skipped",
+              "cancelled",
+              "interrupted"
+            ]
+          }
+        ],
+        "description": "Lifecycle of an execution activity, independent of the parent job status."
+      },
+      "AgentOptimizationActivityTrackingStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "available",
+              "not_recorded",
+              "unsupported",
+              "limit_reached"
+            ]
+          }
+        ],
+        "description": "Availability of the job's recorded activity history."
+      },
       "AgentOptimizationAgentCandidateOutput": {
         "type": "object",
         "required": [
@@ -38683,7 +39087,7 @@
             "$ref": "#/components/schemas/AgentOptimizationCandidateOutput"
           }
         ],
-        "description": "Candidate output produced by an agent-optimization job."
+        "description": "Candidate mutations produced by an agent-optimization or Insights-optimization job."
       },
       "AgentOptimizationBaselineAgentConfiguration": {
         "type": "object",
@@ -38739,13 +39143,17 @@
             "$ref": "#/components/schemas/AgentOptimizationCandidateStatus",
             "description": "The candidate's current lifecycle state."
           },
+          "error": {
+            "$ref": "#/components/schemas/OpenAI.Error",
+            "description": "Recorded reason this candidate failed or was skipped. Omitted when no candidate-local error was recorded. A candidate failure does not necessarily fail the parent job."
+          },
           "started_at": {
             "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "Timestamp when work on this candidate slot began, represented in Unix time."
           },
           "output": {
             "$ref": "#/components/schemas/AgentOptimizationCandidateOutput",
-            "description": "Typed output generated for this candidate. The output type matches the parent job's optimization type. Omitted until output is available."
+            "description": "Typed output generated for this candidate. Insights optimization reuses the agent_optimization mutation shape. Omitted for the baseline and until output is available."
           },
           "rationale": {
             "type": "string",
@@ -38773,6 +39181,26 @@
             "type": "number",
             "format": "double",
             "description": "Average composite score across evaluated tasks. Omitted until scoring produces an aggregate score."
+          },
+          "evaluator_scores": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "Average score for each configured evaluator. Omitted when evaluator scores are unavailable. These raw aggregates are distinct from the Insights failure-remediation selection score."
+          },
+          "sampled_training_evaluation": {
+            "$ref": "#/components/schemas/AgentOptimizationSampledTrainingEvaluation",
+            "description": "Sampled training metrics from an existing candidate screen, not full validation. Omitted when no screen metrics were recorded."
+          },
+          "validation_evaluation": {
+            "$ref": "#/components/schemas/AgentOptimizationCandidateValidationEvaluation",
+            "description": "Failure-remediation validation, coverage, and eligibility for Insights optimization. Omitted when this assessment was not performed."
+          },
+          "insights_summary": {
+            "$ref": "#/components/schemas/AgentOptimizationInsightsSummary",
+            "description": "Report-only remediation over all prepared Insight failure cases, including training cases. Available on candidate LIST and GET without expansion when recorded, including for the baseline. Omitted when no report is available; candidate completion alone does not guarantee report availability."
           },
           "avg_tokens": {
             "type": "number",
@@ -38820,7 +39248,7 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/AgentOptimizationConfigurationType",
-            "description": "Output type matching the parent job's optimization type. Additional types may be added in future API versions."
+            "description": "Identifies the output shape. Agent and Insights optimization use agent_optimization; prompt optimization uses prompt_optimization. Additional types may be added in future API versions."
           }
         },
         "discriminator": {
@@ -38880,6 +39308,145 @@
           }
         ],
         "description": "The candidate's lifecycle state."
+      },
+      "AgentOptimizationCandidateValidationEvaluation": {
+        "type": "object",
+        "required": [
+          "failure_holdout_rows",
+          "qualified_failure_rows",
+          "excluded_failure_rows",
+          "failure_boundary_rows",
+          "broad_quality_rows",
+          "eligible"
+        ],
+        "properties": {
+          "failure_holdout_score": {
+            "$ref": "#/components/schemas/AgentOptimizationNormalizedScore",
+            "description": "Remediation score between 0 and 1 on baseline-qualified held-out failures. Omitted when no held-out score is available."
+          },
+          "failure_boundary_score": {
+            "$ref": "#/components/schemas/AgentOptimizationNormalizedScore",
+            "description": "Failure-boundary score between 0 and 1 for jobs that performed this historical assessment. Omitted otherwise."
+          },
+          "broad_quality_score": {
+            "$ref": "#/components/schemas/AgentOptimizationNormalizedScore",
+            "description": "General-quality score between 0 and 1 on broad validation scenarios. Omitted when broad-quality evidence is unavailable."
+          },
+          "failure_replay_score": {
+            "$ref": "#/components/schemas/AgentOptimizationNormalizedScore",
+            "description": "Remediation score between 0 and 1 on reused training scenarios, not an independent holdout. Omitted unless shared replay was used."
+          },
+          "replay_quality_score": {
+            "$ref": "#/components/schemas/AgentOptimizationNormalizedScore",
+            "description": "General-quality score between 0 and 1 on shared replay scenarios. Omitted unless shared replay was used."
+          },
+          "failure_replay_rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Number of shared replay scenarios, at least 1. Omitted for independent validation."
+          },
+          "failure_holdout_rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of held-out failure rows, at least 0."
+          },
+          "qualified_failure_rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Failure rows where the baseline reproduced a selected failure, at least 0."
+          },
+          "excluded_failure_rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Failure rows excluded from qualification, at least 0."
+          },
+          "failure_boundary_rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of failure-boundary rows, at least 0."
+          },
+          "broad_quality_rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of broad-quality rows, at least 0."
+          },
+          "eligible": {
+            "type": "boolean",
+            "description": "Whether this candidate passed the applicable validation guards and is eligible for selection. Eligibility alone does not mean the candidate improved on the baseline."
+          },
+          "paired_quality_rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of definite paired-quality comparisons, at least 0. Omitted when this assessment did not run."
+          },
+          "paired_quality_wins": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Paired rows preferring the candidate, at least 0. Omitted when this assessment did not run."
+          },
+          "paired_quality_losses": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Paired rows preferring the baseline, at least 0. Omitted when this assessment did not run."
+          },
+          "paired_quality_ties": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Paired rows without a preference, at least 0. Omitted when this assessment did not run."
+          },
+          "paired_quality_undefined_rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Paired rows without a usable verdict, at least 0. Omitted when this assessment did not run."
+          },
+          "paired_net_preference": {
+            "type": "number",
+            "format": "double",
+            "minimum": -1,
+            "maximum": 1,
+            "description": "Paired net preference, (wins - losses) / definite rows, between -1 and 1. Omitted when no paired assessment is available."
+          },
+          "goal_achievement_delta": {
+            "type": "number",
+            "format": "double",
+            "minimum": -1,
+            "maximum": 1,
+            "description": "Candidate minus baseline goal-achievement rate, between -1 and 1. Omitted when no paired assessment is available."
+          },
+          "paired_quality_by_cohort": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/AgentOptimizationPairedQualityCohort"
+            },
+            "description": "Paired-quality counts keyed by validation cohort. Omitted when this historical assessment did not run."
+          },
+          "eligibility_reasons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Safe explanations of an ineligible result. Omitted when no reasons were recorded."
+          },
+          "rubric_comparisons": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/AgentOptimizationRubricComparison"
+            },
+            "description": "Scenario-matched native rubric comparisons, keyed by validation cohort. These are score differences, not side-by-side model preferences. Omitted when no native comparison was recorded."
+          }
+        },
+        "description": "Failure-remediation validation and quality guards for an Insights candidate. Missing scores are omitted rather than synthesized as zero."
       },
       "AgentOptimizationConfiguration": {
         "type": "object",
@@ -38941,7 +39508,8 @@
           "propertyName": "type",
           "mapping": {
             "agent_optimization": "#/components/schemas/AgentOptimizationConfiguration",
-            "prompt_optimization": "#/components/schemas/PromptOptimizationConfiguration"
+            "prompt_optimization": "#/components/schemas/PromptOptimizationConfiguration",
+            "insights_optimization": "#/components/schemas/InsightsOptimizationConfiguration"
           }
         },
         "description": "Base model for type-specific optimization configuration."
@@ -38955,7 +39523,8 @@
             "type": "string",
             "enum": [
               "agent_optimization",
-              "prompt_optimization"
+              "prompt_optimization",
+              "insights_optimization"
             ]
           }
         ],
@@ -39193,7 +39762,7 @@
           "version": {
             "type": "string",
             "minLength": 1,
-            "description": "Pinned agent version. Omitted to resolve and pin the latest version."
+            "description": "Pinned agent version. Omitted to resolve and pin the latest version for agent and prompt optimization. Insights optimization resolves the target version from the selected Insights when omitted; version compatibility is validated by the service."
           }
         },
         "allOf": [
@@ -39216,6 +39785,149 @@
           }
         ],
         "description": "Goal for an agent-optimization job."
+      },
+      "AgentOptimizationInsightId": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256,
+        "description": "Non-empty Insight identifier, up to 256 characters."
+      },
+      "AgentOptimizationInsightSummary": {
+        "type": "object",
+        "required": [
+          "insight_id",
+          "remediated_pairs",
+          "definite_pairs"
+        ],
+        "properties": {
+          "insight_id": {
+            "$ref": "#/components/schemas/AgentOptimizationInsightId",
+            "description": "Insight associated with the failure cases."
+          },
+          "failure_evaluation_score": {
+            "$ref": "#/components/schemas/AgentOptimizationNormalizedScore",
+            "description": "Mean definite-case score between 0 and 1; repetitions can produce fractional case scores. Omitted when no complete, scorable result is available."
+          },
+          "remediated_pairs": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Unique cases classified as fully remediated, at least 0."
+          },
+          "definite_pairs": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Unique cases with a definite score, at least 0."
+          },
+          "rows_improved_rate": {
+            "$ref": "#/components/schemas/AgentOptimizationNormalizedScore",
+            "description": "Fully remediated cases divided by definite cases, between 0 and 1. This can differ from the mean case score. Omitted without complete, scorable evidence."
+          }
+        },
+        "description": "Report-only remediation of one Insight's unique failure cases."
+      },
+      "AgentOptimizationInsightsSource": {
+        "type": "object",
+        "required": [
+          "monitor_id",
+          "insight_ids"
+        ],
+        "properties": {
+          "monitor_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "Identifier of the monitor that owns every selected Insight. Up to 256 characters; surrounding whitespace and control characters are rejected."
+          },
+          "insight_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOptimizationInsightId"
+            },
+            "minItems": 1,
+            "maxItems": 20,
+            "description": "Between 1 and 20 distinct, non-empty Insight IDs belonging to the monitor and target agent. Each ID is at most 256 characters, with no surrounding whitespace or control characters. The service rejects duplicate IDs."
+          }
+        },
+        "description": "Selected findings from one monitor in the job's Foundry project."
+      },
+      "AgentOptimizationInsightsSummary": {
+        "type": "object",
+        "required": [
+          "status",
+          "coverage",
+          "per_insight"
+        ],
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/AgentOptimizationInsightsSummaryStatus",
+            "description": "Report outcome, not the parent candidate's lifecycle status."
+          },
+          "improved_insight_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of Insights with at least one fully remediated case, at least 0. This is not improvement versus the baseline or proof that every case for an Insight is fixed. Omitted for incomplete or failed reports."
+          },
+          "coverage": {
+            "$ref": "#/components/schemas/AgentOptimizationInsightsSummaryCoverage",
+            "description": "Coverage of unique source-conversation/Insight pairs, not collected trace counts."
+          },
+          "per_insight": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOptimizationInsightSummary"
+            },
+            "description": "Results grouped by Insight identity; repetitions are aggregated within each unique case."
+          }
+        },
+        "description": "Report-only remediation over all prepared failure cases, including training cases and the baseline candidate. This report does not change candidate ranking or eligibility."
+      },
+      "AgentOptimizationInsightsSummaryCoverage": {
+        "type": "object",
+        "required": [
+          "failure_pairs",
+          "definite_pairs",
+          "partial_pairs"
+        ],
+        "properties": {
+          "failure_pairs": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Total unique source-conversation/Insight cases, at least 0."
+          },
+          "definite_pairs": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Cases with a definite score, at least 0."
+          },
+          "partial_pairs": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Cases missing configured repetitions, at least 0."
+          }
+        },
+        "description": "Case counts for an all-failure Insights report. A conversation linked to two Insights contributes one case to each."
+      },
+      "AgentOptimizationInsightsSummaryStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "complete",
+              "incomplete",
+              "failed"
+            ]
+          }
+        ],
+        "description": "Availability and completeness of an all-failure Insights report, independent of candidate or job status."
       },
       "AgentOptimizationInstructionsMutation": {
         "type": "object",
@@ -39280,7 +39992,7 @@
           },
           "target_configuration": {
             "$ref": "#/components/schemas/AgentOptimizationTargetConfiguration",
-            "description": "Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent."
+            "description": "Foundry agent whose configuration is optimized. Required for Insights optimization. Omitted when the workflow does not target a registered Foundry agent."
           },
           "optimization_model_configuration": {
             "$ref": "#/components/schemas/AgentOptimizationModelConfiguration",
@@ -39305,12 +40017,17 @@
             "description": "The timestamp when the job was last updated, represented in Unix time.",
             "readOnly": true
           },
+          "activity_progress": {
+            "$ref": "#/components/schemas/AgentOptimizationActivityProgress",
+            "description": "Recorded execution activities, included only in job detail GET when available. Job LIST does not include the activity journal. Tracking availability and limits are independent of the current job outcome.",
+            "readOnly": true
+          },
           "warnings": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "Non-fatal warnings emitted during optimization. Omitted when no warnings were produced.",
+            "description": "Non-fatal warnings emitted during optimization. Omitted when no warnings were produced. Insights optimization presents execution notes in recorded activities instead of this field.",
             "readOnly": true
           }
         },
@@ -39484,6 +40201,99 @@
         },
         "description": "Base candidate mutation."
       },
+      "AgentOptimizationNormalizedScore": {
+        "type": "number",
+        "format": "double",
+        "minimum": 0,
+        "maximum": 1,
+        "description": "Normalized evaluation score between 0 and 1."
+      },
+      "AgentOptimizationPairedQualityCohort": {
+        "type": "object",
+        "required": [
+          "rows",
+          "wins",
+          "losses",
+          "ties",
+          "undefined_rows",
+          "goal_wins",
+          "unjustified_goal_losses"
+        ],
+        "properties": {
+          "rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of definite comparison rows, at least 0."
+          },
+          "wins": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Rows preferring the candidate, at least 0."
+          },
+          "losses": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Rows preferring the baseline, at least 0."
+          },
+          "ties": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Rows with no preference, at least 0."
+          },
+          "undefined_rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Rows without a usable verdict, at least 0."
+          },
+          "goal_wins": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Rows where only the candidate achieved the user goal, at least 0."
+          },
+          "unjustified_goal_losses": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Unjustified losses of a goal achieved by the baseline, at least 0."
+          }
+        },
+        "description": "Historical paired-quality counts for one validation cohort."
+      },
+      "AgentOptimizationPreparedInsightEvaluator": {
+        "type": "object",
+        "required": [
+          "name",
+          "version"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Evaluator name."
+          },
+          "initialization_parameters": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "Parameters passed to the evaluator at initialization. Omitted when the evaluator requires no initialization parameters."
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Exact recorded evaluator version, not the latest alias."
+          },
+          "insight_id": {
+            "$ref": "#/components/schemas/AgentOptimizationInsightId",
+            "description": "Insight judged by a prepared per-Insight failure evaluator. Omitted for the shared comparator, quality rubric, and other unbound evaluators."
+          }
+        },
+        "description": "Pinned evaluator reference returned by Insights preparation, with an optional historical per-Insight binding."
+      },
       "AgentOptimizationPromptCandidateOutput": {
         "type": "object",
         "required": [
@@ -39550,6 +40360,124 @@
           }
         },
         "description": "Summary of candidates produced by an agent optimization job."
+      },
+      "AgentOptimizationRubricComparison": {
+        "type": "object",
+        "required": [
+          "rows",
+          "improved_rows",
+          "regressed_rows",
+          "tied_rows",
+          "undefined_rows",
+          "baseline_score",
+          "candidate_score",
+          "delta"
+        ],
+        "properties": {
+          "rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of definite comparison rows, at least 0."
+          },
+          "improved_rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Rows with a higher candidate rubric score, at least 0."
+          },
+          "regressed_rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Rows with a lower candidate rubric score, at least 0."
+          },
+          "tied_rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Rows with equal rubric scores, at least 0."
+          },
+          "undefined_rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Rows without a usable paired score, at least 0."
+          },
+          "baseline_score": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AgentOptimizationNormalizedScore"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Mean baseline rubric score between 0 and 1, or null when unavailable."
+          },
+          "candidate_score": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AgentOptimizationNormalizedScore"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Mean candidate rubric score between 0 and 1, or null when unavailable."
+          },
+          "delta": {
+            "anyOf": [
+              {
+                "type": "number",
+                "format": "double"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Candidate minus baseline rubric score, or null when unavailable."
+          }
+        },
+        "description": "Scenario-matched rubric scores for one validation cohort."
+      },
+      "AgentOptimizationSampledTrainingEvaluation": {
+        "type": "object",
+        "required": [
+          "evaluator_scores",
+          "sample_size",
+          "reproduced_failure_rows",
+          "excluded_rows"
+        ],
+        "properties": {
+          "evaluator_scores": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "Average score for each evaluator in this sample."
+          },
+          "sample_size": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of sampled training results, at least 0."
+          },
+          "reproduced_failure_rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Sampled rows with a reproduced failure, at least 0."
+          },
+          "excluded_rows": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Sampled rows excluded from the failure screen, at least 0."
+          }
+        },
+        "description": "Failure-training metrics from an existing parent/candidate screening sample."
       },
       "AgentOptimizationSkill": {
         "type": "object",
@@ -49911,6 +50839,92 @@
             "Insights=V1Preview"
           ]
         }
+      },
+      "InsightsOptimizationConfiguration": {
+        "type": "object",
+        "required": [
+          "type",
+          "insights_source",
+          "insights_preparation_model_configuration"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "insights_optimization"
+            ],
+            "description": "Insights optimization discriminator."
+          },
+          "insights_source": {
+            "$ref": "#/components/schemas/AgentOptimizationInsightsSource",
+            "description": "Findings to address, selected from one monitor for the target agent."
+          },
+          "insights_preparation_model_configuration": {
+            "$ref": "#/components/schemas/EvaluationModelConfiguration",
+            "description": "Model used for scenario and evaluator preparation, conversation simulation, and judging. The job's optimization_model_configuration separately supplies candidate generation. Only text simulation is supported; voice_model is not accepted."
+          },
+          "candidate_search_configuration": {
+            "$ref": "#/components/schemas/AgentOptimizationCandidateSearchConfiguration",
+            "description": "Optional search breadth. If omitted, the service defaults to one non-baseline candidate."
+          },
+          "evaluation_configuration": {
+            "$ref": "#/components/schemas/InsightsOptimizationPreparedEvaluationConfiguration",
+            "description": "Complete server-generated, version-pinned datasets and evaluators. Included only on job detail GET after preparation is ready; omitted from LIST and before readiness. This is not accepted as create input, so the returned configuration must not be resubmitted unchanged.",
+            "readOnly": true
+          },
+          "agent_optimization_space": {
+            "$ref": "#/components/schemas/AgentOptimizationSpace",
+            "description": "Attributes resolved by the backend for this job. Included in job reads when available, not required or accepted as SDK create input.",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationConfigurationBase"
+          }
+        ],
+        "description": "Configuration for deriving evaluation inputs from Insights and optimizing the registered agent. The service resolves the baseline and optimization attributes; callers do not supply evaluation data, evaluators, baseline overrides, or optimization context."
+      },
+      "InsightsOptimizationPreparedEvaluationConfiguration": {
+        "type": "object",
+        "required": [
+          "training_set",
+          "validation_set",
+          "evaluators",
+          "evaluation_model"
+        ],
+        "properties": {
+          "training_set": {
+            "$ref": "#/components/schemas/AgentOptimizationUserConversationSimulationEvaluationSet",
+            "description": "Version-pinned conversation-simulation training set prepared from the selected evidence."
+          },
+          "validation_set": {
+            "$ref": "#/components/schemas/AgentOptimizationUserConversationSimulationEvaluationSet",
+            "description": "Version-pinned conversation-simulation validation set. It can reference the training dataset when shared replay is used; the validation metrics distinguish that evidence mode."
+          },
+          "evaluators": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOptimizationPreparedInsightEvaluator"
+            },
+            "minItems": 2,
+            "maxItems": 21,
+            "description": "Exact evaluator versions used by the experiment. Between 2 and 21 references; older jobs can include one failure evaluator per selected Insight plus the quality rubric."
+          },
+          "evaluation_model": {
+            "$ref": "#/components/schemas/EvaluationModelConfiguration",
+            "description": "Model used by evaluators and text conversation simulation."
+          },
+          "max_concurrent_agent_runs": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1,
+            "description": "Conversation evaluation concurrency. If omitted, the service defaults to 1. The only supported value is 1.",
+            "default": 1
+          }
+        },
+        "description": "Frozen evaluation inputs returned after Insights preparation. These are service-owned outputs, not a reusable create request."
       },
       "InvocationsProtocolConfiguration": {
         "type": "object",

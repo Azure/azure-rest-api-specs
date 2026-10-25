@@ -1,6 +1,7 @@
 // Candidate models for the AgentsOptimization data-plane surface (v1 GA).
 
 import "./inputs.tsp";
+import "./insights.tsp";
 import "../common/servicepatterns.tsp";
 import "@azure-tools/openai-typespec/models/chat";
 
@@ -33,11 +34,11 @@ union AgentOptimizationCandidateStatus {
 @doc("Base candidate output. Job types define derived output models with their own fields.")
 @discriminator("type")
 model AgentOptimizationCandidateOutput {
-  @doc("Output type matching the parent job's optimization type. Additional types may be added in future API versions.")
+  @doc("Identifies the output shape. Agent and Insights optimization use agent_optimization; prompt optimization uses prompt_optimization. Additional types may be added in future API versions.")
   type: AgentOptimizationConfigurationType;
 }
 
-@doc("Candidate output produced by an agent-optimization job.")
+@doc("Candidate mutations produced by an agent-optimization or Insights-optimization job.")
 model AgentOptimizationAgentCandidateOutput
   extends AgentOptimizationCandidateOutput {
   type: AgentOptimizationConfigurationType.agent_optimization;
@@ -99,6 +100,18 @@ model AgentOptimizationCandidateEvaluation {
   @doc("Average composite score across evaluated tasks. Omitted until scoring produces an aggregate score.")
   score?: float64;
 
+  @doc("Average score for each configured evaluator. Omitted when evaluator scores are unavailable. These raw aggregates are distinct from the Insights failure-remediation selection score.")
+  evaluator_scores?: Record<float64>;
+
+  @doc("Sampled training metrics from an existing candidate screen, not full validation. Omitted when no screen metrics were recorded.")
+  sampled_training_evaluation?: AgentOptimizationSampledTrainingEvaluation;
+
+  @doc("Failure-remediation validation, coverage, and eligibility for Insights optimization. Omitted when this assessment was not performed.")
+  validation_evaluation?: AgentOptimizationCandidateValidationEvaluation;
+
+  @doc("Report-only remediation over all prepared Insight failure cases, including training cases. Available on candidate LIST and GET without expansion when recorded, including for the baseline. Omitted when no report is available; candidate completion alone does not guarantee report availability.")
+  insights_summary?: AgentOptimizationInsightsSummary;
+
   @doc("Average total tokens consumed per task. Omitted when token usage was not measured.")
   avg_tokens?: float64;
 
@@ -129,10 +142,13 @@ model AgentOptimizationCandidate {
   @doc("The candidate's current lifecycle state.")
   status: AgentOptimizationCandidateStatus;
 
+  @doc("Recorded reason this candidate failed or was skipped. Omitted when no candidate-local error was recorded. A candidate failure does not necessarily fail the parent job.")
+  error?: ApiError;
+
   @doc("Timestamp when work on this candidate slot began, represented in Unix time.")
   started_at: FoundryTimestamp;
 
-  @doc("Typed output generated for this candidate. The output type matches the parent job's optimization type. Omitted until output is available.")
+  @doc("Typed output generated for this candidate. Insights optimization reuses the agent_optimization mutation shape. Omitted for the baseline and until output is available.")
   output?: AgentOptimizationCandidateOutput;
 
   @doc("Human-readable explanation of why the optimizer produced this candidate. Populated on candidate GET when available and omitted from LIST.")

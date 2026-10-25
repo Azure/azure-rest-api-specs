@@ -2,6 +2,7 @@
 
 import "./inputs.tsp";
 import "./candidates.tsp";
+import "./activities.tsp";
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
 
@@ -135,7 +136,7 @@ model AgentOptimizationJob is JobLike<AgentOptimizationJobResult, never> {
   @maxLength(256)
   display_name?: string;
 
-  @doc("Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent.")
+  @doc("Foundry agent whose configuration is optimized. Required for Insights optimization. Omitted when the workflow does not target a registered Foundry agent.")
   target_configuration?: AgentOptimizationTargetConfiguration;
 
   @doc("Model used to generate candidate changes. An existing deployment name is also accepted.")
@@ -156,7 +157,11 @@ model AgentOptimizationJob is JobLike<AgentOptimizationJobResult, never> {
   @visibility(Lifecycle.Read)
   updated_at: FoundryTimestamp;
 
-  @doc("Non-fatal warnings emitted during optimization. Omitted when no warnings were produced.")
+  @doc("Recorded execution activities, included only in job detail GET when available. Job LIST does not include the activity journal. Tracking availability and limits are independent of the current job outcome.")
+  @visibility(Lifecycle.Read)
+  activity_progress?: AgentOptimizationActivityProgress;
+
+  @doc("Non-fatal warnings emitted during optimization. Omitted when no warnings were produced. Insights optimization presents execution notes in recorded activities instead of this field.")
   @visibility(Lifecycle.Read)
   warnings?: string[];
 }
