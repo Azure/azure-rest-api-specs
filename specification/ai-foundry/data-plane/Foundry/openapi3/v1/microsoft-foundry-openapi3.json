@@ -35237,7 +35237,7 @@
             "$ref": "#/components/schemas/AgentOptimizationCandidateOutput"
           }
         ],
-        "description": "Candidate mutations produced by an agent-optimization or Insights-optimization job."
+        "description": "Candidate output produced by an agent-optimization job."
       },
       "AgentOptimizationBaselineAgentConfiguration": {
         "type": "object",
@@ -35303,7 +35303,7 @@
           },
           "output": {
             "$ref": "#/components/schemas/AgentOptimizationCandidateOutput",
-            "description": "Typed output generated for this candidate. Insights optimization reuses the agent_optimization mutation shape. Omitted for the baseline and until output is available."
+            "description": "Typed output generated for this candidate. The output type matches the parent job's optimization type. Omitted until output is available."
           },
           "rationale": {
             "type": "string",
@@ -35398,7 +35398,7 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/AgentOptimizationConfigurationType",
-            "description": "Identifies the output shape. Agent and Insights optimization use agent_optimization; prompt optimization uses prompt_optimization. Additional types may be added in future API versions."
+            "description": "Identifies the output shape. Agent optimization uses agent_optimization; prompt optimization uses prompt_optimization. Additional types may be added in future API versions."
           }
         },
         "discriminator": {

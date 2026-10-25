@@ -34,11 +34,11 @@ union AgentOptimizationCandidateStatus {
 @doc("Base candidate output. Job types define derived output models with their own fields.")
 @discriminator("type")
 model AgentOptimizationCandidateOutput {
-  @doc("Identifies the output shape. Agent and Insights optimization use agent_optimization; prompt optimization uses prompt_optimization. Additional types may be added in future API versions.")
+  @doc("Identifies the output shape. Agent optimization uses agent_optimization; prompt optimization uses prompt_optimization. Additional types may be added in future API versions.")
   type: AgentOptimizationConfigurationType;
 }
 
-@doc("Candidate mutations produced by an agent-optimization or Insights-optimization job.")
+@doc("Candidate output produced by an agent-optimization job.")
 model AgentOptimizationAgentCandidateOutput
   extends AgentOptimizationCandidateOutput {
   type: AgentOptimizationConfigurationType.agent_optimization;
@@ -148,7 +148,7 @@ model AgentOptimizationCandidate {
   @doc("Timestamp when work on this candidate slot began, represented in Unix time.")
   started_at: FoundryTimestamp;
 
-  @doc("Typed output generated for this candidate. Insights optimization reuses the agent_optimization mutation shape. Omitted for the baseline and until output is available.")
+  @doc("Typed output generated for this candidate. The output type matches the parent job's optimization type. Omitted until output is available.")
   output?: AgentOptimizationCandidateOutput;
 
   @doc("Human-readable explanation of why the optimizer produced this candidate. Populated on candidate GET when available and omitted from LIST.")
