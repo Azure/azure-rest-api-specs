@@ -1,36 +1,16 @@
 {
-  "title": "ObservabilityAgents_Update",
+  "title": "ObservabilityAgents_Update_ClearUsageCap",
   "operationId": "ObservabilityAgents_Update",
   "parameters": {
-    "api-version": "2026-05-01-preview",
+    "api-version": "2026-08-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "observabilityAgentName": "myObservabilityAgent",
     "properties": {
-      "tags": {
-        "env": "prod"
-      },
-      "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {}
-        }
-      },
       "properties": {
-        "monitoringAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAzureMonitorWorkspace",
-        "enabled": false,
-        "operations": [
-          {
-            "type": "IssueCreation",
-            "mode": "Manual",
-            "instructions": "Focus on storage and networking issues only."
-          },
-          {
-            "type": "Investigation",
-            "mode": "Auto",
-            "instructions": "Focus on recent network issues."
-          }
-        ]
+        "usageCap": {
+          "amountAAC": null
+        }
       }
     }
   },
@@ -42,7 +22,7 @@
         "type": "Microsoft.Monitor/observabilityAgents",
         "location": "eastus",
         "tags": {
-          "env": "prod"
+          "env": "dev"
         },
         "identity": {
           "type": "UserAssigned",
@@ -54,18 +34,32 @@
           }
         },
         "properties": {
+          "description": "Investigates application health alerts.",
           "monitoringAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAzureMonitorWorkspace",
-          "enabled": false,
-          "operations": [
+          "autonomousOperationsEnabled": true,
+          "instructions": "Focus on application availability and recent changes.",
+          "investigation": {
+            "instructions": "Correlate alerts with application telemetry.",
+            "policies": [
+              {
+                "policyName": "ApplicationHealth",
+                "description": "Investigate application health alerts in eastus.",
+                "minimumSeverity": "2",
+                "ruleNameContains": [
+                  "availability"
+                ],
+                "ruleResourceId": [
+                  "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Insights/metricAlerts/myAvailabilityAlert"
+                ],
+                "locationFilter": "eastus"
+              }
+            ]
+          },
+          "usageCap": {},
+          "monitoredResources": [
             {
-              "type": "IssueCreation",
-              "mode": "Manual",
-              "instructions": "Focus on storage and networking issues only."
-            },
-            {
-              "type": "Investigation",
-              "mode": "Manual",
-              "instructions": "Focus on recent network issues."
+              "name": "myApplication",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Insights/components/myApplication"
             }
           ]
         },

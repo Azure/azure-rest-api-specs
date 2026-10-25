@@ -16,79 +16,133 @@ namespace Microsoft.Monitor {
     @visibility(Lifecycle.Read)
     provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
 
-    /** Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. */
-    monitoringAccountId: Azure.Core.armResourceIdentifier<[
-      {
-        type: "Microsoft.Monitor/accounts";
-      }
-    ]>;
+    /** Description of the observability agent. */
+    description?: string;
 
-    /** Whether the observability agent is enabled. Defaults to true when not specified. */
-    enabled?: boolean;
+    /** Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. The workspace must be in the same location as the agent. Required when autonomous operations are enabled. */
+    monitoringAccountId?: Azure.Core.armResourceIdentifier;
 
-    /** Configuration overrides for agent operations. When omitted, default behavior applies for all operations. */
-    @Azure.ResourceManager.identifiers(#["type"])
-    operations?: OperationEntry[];
-  }
+    /** Whether the agent can run operations autonomously. When true, monitoringAccountId and at least one investigation policy must be configured. */
+    autonomousOperationsEnabled: boolean;
 
-  /**
-   * Type of agent operation.
-   */
-  union OperationType {
-    /** Issue creation operation. */
-    issueCreation: "IssueCreation",
-
-    /** Investigation operation. */
-    investigation: "Investigation",
-
-    string,
-  }
-
-  /**
-   * Execution mode for a specific agent operation.
-   */
-  union OperationMode {
-    /** The operation runs autonomously. */
-    auto: "Auto",
-
-    /** The operation runs only when triggered manually. */
-    manual: "Manual",
-
-    string,
-  }
-
-  /**
-   * Configuration for a specific agent operation.
-   */
-  model OperationEntry {
-    /** Type of operation. */
-    type: OperationType;
-
-    /** Execution mode for this operation. Defaults to Auto when not specified. */
-    mode?: OperationMode;
-
-    /** Custom instructions that guide the agent's behavior for this operation. */
+    /** Instructions that guide the agent's behavior. */
     @maxLength(8192)
     instructions?: string;
+
+    /** Configuration of agent investigations. */
+    investigation?: ObservabilityAgentInvestigationConfiguration;
+
+    /** Usage cap in Azure Agent Credits. */
+    usageCap?: ObservabilityAgentUsageCapConfiguration;
+
+    /** Resources monitored by this agent. These entries are embedded configuration, not child ARM resources. */
+    @maxItems(10)
+    @Azure.ResourceManager.identifiers(#["name"])
+    monitoredResources?: ObservabilityAgentMonitoredResource[];
   }
 
   /**
-   * Updatable properties of an observability agent.
+   * Configuration of agent investigations. On PATCH, omitted members are unchanged and null clears the specified member.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The deployed PATCH contract distinguishes an omitted member from null, which clears that member."
+  model ObservabilityAgentInvestigationConfiguration {
+    /** Instructions that guide investigations. */
+    @maxLength(8192)
+    instructions?: string | null;
+
+    /** Policies that select alerts for investigation. At least one policy is required when autonomous operations are enabled. On PATCH, a supplied array replaces the existing array. */
+    @maxItems(10)
+    @TypeSpec.OpenAPI.extension("x-ms-identifiers", #[])
+    policies?: ObservabilityAgentInvestigationPolicy[] | null;
+  }
+
+  /**
+   * An investigation policy. At least one of minimumSeverity, ruleNameContains, or ruleResourceId must be specified.
+   */
+  model ObservabilityAgentInvestigationPolicy {
+    /** Name of the policy. */
+    policyName?: string;
+
+    /** Description of the policy. */
+    description?: string;
+
+    /** Minimum alert severity used by this policy, represented as a nonempty string. */
+    @minLength(1)
+    @maxLength(64)
+    minimumSeverity?: string;
+
+    /** Nonempty alert-rule name fragments used by this policy. */
+    @maxItems(10)
+    ruleNameContains?: ObservabilityAgentRuleNameFragment[];
+
+    /** ARM resource IDs of alert rules used by this policy. The wire property is named ruleResourceId even though its value is an array. */
+    @maxItems(10)
+    ruleResourceId?: Azure.Core.armResourceIdentifier[];
+
+    /** Location filter for the policy. An empty string is allowed, but a nonempty value must not contain only whitespace. */
+    @maxLength(64)
+    locationFilter?: string;
+  }
+
+  /**
+   * A nonempty alert-rule name fragment.
+   */
+  @minLength(1)
+  @maxLength(64)
+  scalar ObservabilityAgentRuleNameFragment extends string;
+
+  /**
+   * Usage cap configuration for an observability agent.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The deployed PATCH contract accepts null to clear the existing Azure Agent Credits cap."
+  model ObservabilityAgentUsageCapConfiguration {
+    /** Nonnegative cap in Azure Agent Credits (AAC). On PATCH, null clears the cap and omission leaves it unchanged. */
+    @minValue(0)
+    @encodedName("application/json", "amountAAC")
+    amountAac?: float64 | null;
+  }
+
+  /**
+   * An embedded resource monitored by an observability agent.
+   */
+  model ObservabilityAgentMonitoredResource {
+    /** Logical name of the monitored resource. Must not contain only whitespace. */
+    @minLength(1)
+    @maxLength(64)
+    name: string;
+
+    /** ARM resource ID of the monitored resource. */
+    resourceId: Azure.Core.armResourceIdentifier;
+  }
+
+  /**
+   * Updatable properties of an observability agent. Omitted properties are unchanged. Null clears optional configuration; a null autonomousOperationsEnabled leaves its existing value unchanged. The resulting configuration must satisfy the autonomous-operation requirements.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The deployed PATCH contract uses explicit null to clear optional configuration and treats a null autonomousOperationsEnabled as unchanged."
   model ObservabilityAgentPropertiesUpdate {
-    /** Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. If changed, existing issues remain in the previously configured workspace and are not migrated; only newly created issues are written to the new workspace. */
-    monitoringAccountId?: Azure.Core.armResourceIdentifier<[
-      {
-        type: "Microsoft.Monitor/accounts";
-      }
-    ]>;
+    /** Description of the observability agent. Null clears the description. */
+    description?: string | null;
 
-    /** Whether the observability agent is enabled. */
-    enabled?: boolean;
+    /** Resource ID of the Azure Monitor workspace where this agent stores issues. The workspace must be in the same location as the agent. Required when autonomous operations are enabled. If changed, existing issues remain in the previous workspace; only new issues are written to the new workspace. */
+    monitoringAccountId?: Azure.Core.armResourceIdentifier | null;
 
-    /** Configuration overrides for agent operations. When omitted, default behavior applies for all operations. */
-    @Azure.ResourceManager.identifiers(#["type"])
-    operations?: OperationEntry[];
+    /** Whether the agent can run operations autonomously. Null leaves the existing value unchanged. Enabling autonomy requires a monitoring account and at least one investigation policy. */
+    autonomousOperationsEnabled?: boolean | null;
+
+    /** Instructions that guide the agent's behavior. Null clears the instructions. */
+    @maxLength(8192)
+    instructions?: string | null;
+
+    /** Configuration of agent investigations. Null clears the configuration; supplied members are merged with the existing configuration. */
+    investigation?: ObservabilityAgentInvestigationConfiguration | null;
+
+    /** Usage cap configuration. Null clears the configuration; supplied members are merged with the existing configuration. */
+    usageCap?: ObservabilityAgentUsageCapConfiguration | null;
+
+    /** Resources monitored by this agent. A supplied array replaces the existing array; null or an empty array clears the list. */
+    @maxItems(10)
+    @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
+    monitoredResources?: ObservabilityAgentMonitoredResource[] | null;
   }
 
   /**
