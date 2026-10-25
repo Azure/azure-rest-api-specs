@@ -5070,13 +5070,6 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 
 @@clientName(Microsoft.Network.NextHopParameters, "NextHopContent", "csharp");
 
-// These are shared inner properties, not the released create/update request envelope.
-@@access(
-  Microsoft.Network.PacketCaptureParameters,
-  Azure.ClientGenerator.Core.Access.internal,
-  "csharp"
-);
-
 @@clientName(
   Microsoft.Network.PacketCaptureTargetType.AzureVM,
   "AzureVm",
