@@ -6022,12 +6022,13 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 
-// Keep the numeric bandwidth distinct from the released C# string compatibility property.
+// Preserve the released string property and its JSON string wire representation.
 @@clientName(
   Microsoft.Network.VirtualNetworkAppliancePropertiesFormat.bandwidthInGbps,
-  "bandwidthGbps",
+  "BandwidthInGbps",
   "csharp"
 );
+@@alternateType(Microsoft.Network.VirtualNetworkAppliancePropertiesFormat.bandwidthInGbps, string, "csharp");
 
 // Keep numeric rule identifiers distinct from the released C# string collection.
 @@clientName(
@@ -6757,45 +6758,47 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 
+// BinaryData certificate values in 1.15.0 are raw JSON, not base64-encoded bytes.
+// Preserve PEM text and caller-provided JSON strings (azure-sdk-for-net#63346 and #60969).
 @@alternateType(
   Microsoft.Network.ApplicationGatewayAuthenticationCertificatePropertiesFormat.data,
-  bytes,
+  unknown,
   "csharp"
 );
 
 @@alternateType(
   Microsoft.Network.ApplicationGatewaySslCertificatePropertiesFormat.data,
-  bytes,
+  unknown,
   "csharp"
 );
 
 @@alternateType(
   Microsoft.Network.ApplicationGatewaySslCertificatePropertiesFormat.publicCertData,
-  bytes,
+  unknown,
   "csharp"
 );
 
 @@alternateType(
   Microsoft.Network.ApplicationGatewayTrustedClientCertificatePropertiesFormat.data,
-  bytes,
+  unknown,
   "csharp"
 );
 
 @@alternateType(
   Microsoft.Network.ApplicationGatewayTrustedClientCertificatePropertiesFormat.validatedCertData,
-  bytes,
+  unknown,
   "csharp"
 );
 
 @@alternateType(
   Microsoft.Network.ApplicationGatewayTrustedRootCertificatePropertiesFormat.data,
-  bytes,
+  unknown,
   "csharp"
 );
 
 @@alternateType(
   Microsoft.Network.VpnClientRootCertificatePropertiesFormat.publicCertData,
-  bytes,
+  unknown,
   "csharp"
 );
 
@@ -8418,6 +8421,67 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 
 // The released model exposes ResourceId, not a second facade over Id.
 @@clientName(Microsoft.Network.EffectiveBaseSecurityAdminRule.id, "ResourceId", "csharp");
+
+// Restore released native reference storage and names instead of disconnected facades.
+@@alternateType(Common.VirtualNetworkPropertiesFormat.ipAllocations, Azure.ResourceManager.Models.WritableSubResource[], "csharp");
+@@alternateType(Microsoft.Network.WebApplicationFirewallPolicyPropertiesFormat.applicationGatewayForContainers, Azure.ResourceManager.Models.SubResource[], "csharp");
+@@alternateType(Microsoft.Network.VirtualHubRouteTableV2.etag, Azure.Core.eTag, "csharp");
+@@clientName(Microsoft.Network.VirtualNetworkGatewayPropertiesFormat.activeActive, "Active", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/deprecated" "Restore the released Routes projection of the routeTable wrapper."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.Network.VirtualHubProperties.routeTable, "csharp");
+
+// Restore the released operation names on the existing service actions.
+@@clientName(Microsoft.Network.VirtualHubs.getEffectiveVirtualHubRoutes, "GetVirtualHubEffectiveRoutes", "csharp");
+@@clientName(Microsoft.Network.VirtualHubs.getInboundRoutes, "GetVirtualHubInboundRoutes", "csharp");
+@@clientName(Microsoft.Network.VirtualHubs.getOutboundRoutes, "GetVirtualHubOutboundRoutes", "csharp");
+@@clientName(Microsoft.Network.VirtualNetworkGateways.generatevpnclientpackage, "GenerateVpnClientPackage", "csharp");
+@@clientName(Microsoft.Network.VirtualWans.download, "DownloadVpnSitesConfiguration", "csharp");
+@@clientName(Microsoft.Network.VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile, "GenerateVirtualWanVpnServerConfigurationVpnProfile", "csharp");
+@@clientLocation(Microsoft.Network.VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile, Microsoft.Network.VirtualWans, "csharp");
+@@clientName(Microsoft.Network.VirtualWans.vpnServerConfigurationsAssociatedWithVirtualWanList, "GetVpnServerConfigurationsAssociatedWithVirtualWan", "csharp");
+@@clientName(Microsoft.Network.VpnSiteLinkConnections.getIkeSas, "GetIkeSasVpnLinkConnection", "csharp");
+@@clientName(Microsoft.Network.VpnSiteLinkConnections.resetConnection, "ResetConnectionVpnLinkConnection", "csharp");
+
+namespace Microsoft.Network {
+  interface CSharpFinalNetworkListOperations {
+    @scope("csharp")
+    @list
+    gatewayRadiusSecrets is VirtualNetworkGateways.listRadiusSecrets;
+
+    @scope("csharp")
+    @list
+    configurationRadiusSecrets is VpnServerConfigurations.listRadiusSecrets;
+
+    @scope("csharp")
+    @list
+    effectiveConnectivityConfigurations is EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations;
+
+    @scope("csharp")
+    @list
+    effectiveSecurityAdminRules is EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules;
+  }
+}
+
+@@scope(Microsoft.Network.VirtualNetworkGateways.listRadiusSecrets, "!csharp");
+@@scope(Microsoft.Network.VpnServerConfigurations.listRadiusSecrets, "!csharp");
+@@scope(Microsoft.Network.EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations, "!csharp");
+@@scope(Microsoft.Network.EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules, "!csharp");
+@@sharedRoute(Microsoft.Network.VirtualNetworkGateways.listRadiusSecrets);
+@@sharedRoute(Microsoft.Network.VpnServerConfigurations.listRadiusSecrets);
+@@sharedRoute(Microsoft.Network.EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations);
+@@sharedRoute(Microsoft.Network.EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules);
+@@sharedRoute(Microsoft.Network.CSharpFinalNetworkListOperations.gatewayRadiusSecrets);
+@@sharedRoute(Microsoft.Network.CSharpFinalNetworkListOperations.configurationRadiusSecrets);
+@@sharedRoute(Microsoft.Network.CSharpFinalNetworkListOperations.effectiveConnectivityConfigurations);
+@@sharedRoute(Microsoft.Network.CSharpFinalNetworkListOperations.effectiveSecurityAdminRules);
+@@clientLocation(Microsoft.Network.CSharpFinalNetworkListOperations.gatewayRadiusSecrets, Microsoft.Network.VirtualNetworkGateways, "csharp");
+@@clientLocation(Microsoft.Network.CSharpFinalNetworkListOperations.configurationRadiusSecrets, Microsoft.Network.VpnServerConfigurations, "csharp");
+@@clientLocation(Microsoft.Network.CSharpFinalNetworkListOperations.effectiveConnectivityConfigurations, Microsoft.Network.VirtualNetworks, "csharp");
+@@clientLocation(Microsoft.Network.CSharpFinalNetworkListOperations.effectiveSecurityAdminRules, Microsoft.Network.VirtualNetworks, "csharp");
+@@clientName(Microsoft.Network.CSharpFinalNetworkListOperations.gatewayRadiusSecrets, "GetRadiusSecrets", "csharp");
+@@clientName(Microsoft.Network.CSharpFinalNetworkListOperations.configurationRadiusSecrets, "GetRadiusSecrets", "csharp");
+@@clientName(Microsoft.Network.CSharpFinalNetworkListOperations.effectiveConnectivityConfigurations, "GetNetworkManagerEffectiveConnectivityConfigurations", "csharp");
+@@clientName(Microsoft.Network.CSharpFinalNetworkListOperations.effectiveSecurityAdminRules, "GetNetworkManagerEffectiveSecurityAdminRules", "csharp");
 
 // Legacy.markAsPageable only unwraps the array and discards nextLink. Use real paging
 // on C#-only copies of the same actions without changing other language surfaces.
