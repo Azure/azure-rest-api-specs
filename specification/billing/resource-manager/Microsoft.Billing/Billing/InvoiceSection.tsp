@@ -1,14 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
 import "./models.tsp";
 import "./BillingProfile.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Billing;
 /**
@@ -22,50 +19,31 @@ model InvoiceSection
     Resource = InvoiceSection,
     KeyName = "invoiceSectionName",
     SegmentName = "invoiceSections",
-    NamePattern = "^[a-zA-Z\\d-_]{1,128}$"
+    NamePattern = BillingProfileCustomerInvoiceSectionNamePattern
   >;
 
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
   tags?: Record<string>;
 }
 
-alias InvoiceSectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-
-    /** The ID that uniquely identifies a billing account. */
-    @path
-    @segment("billingAccounts")
-    @key
-    billingAccountName: string;
-
-    /** The ID that uniquely identifies a billing profile. */
-    @path
-    @segment("billingProfiles")
-    @key
-    billingProfileName: string;
-  },
-  {
-    /** The ID that uniquely identifies an invoice section. */
-    @path
-    @segment("invoiceSections")
-    @key
-    invoiceSectionName: string;
-  }
->;
+alias InvoiceSectionNameParameter = {
+  /** The ID that uniquely identifies an invoice section. */
+  @path
+  @segment("invoiceSections")
+  @key
+  @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+  invoiceSectionName: string;
+};
 
 @armResourceOperations(#{ omitTags: true })
 interface InvoiceSections {
   /**
    * Gets an invoice section by its ID. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("InvoiceSection")
   get is ArmResourceRead<
     InvoiceSection,
@@ -75,9 +53,7 @@ interface InvoiceSections {
   /**
    * Creates or updates an invoice section. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing RP that uses 202 long running operation for create or update Billing Profile."
   @tag("InvoiceSection")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     InvoiceSection,
@@ -95,8 +71,6 @@ interface InvoiceSections {
   /**
    * Deletes an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("InvoiceSection")
   delete is ArmResourceDeleteWithoutOkAsync<
     InvoiceSection,
@@ -106,8 +80,6 @@ interface InvoiceSections {
   /**
    * Lists the invoice sections that a user has access to. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("InvoiceSection")
   listByBillingProfile is ArmResourceListByParent<
     InvoiceSection,
@@ -119,8 +91,6 @@ interface InvoiceSections {
   /**
    * Lists the billing permissions the caller has for an invoice section.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingPermission")
   @list
   @get
@@ -135,8 +105,6 @@ interface InvoiceSections {
   /**
    * Provides a list of check access response objects for an invoice section.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingPermission")
   @action("checkAccess")
   checkAccessByInvoiceSection is ArmResourceActionSync<
@@ -149,8 +117,6 @@ interface InvoiceSections {
   /**
    * The list of billing requests submitted for the invoice section.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRequest")
   @list
   @get
@@ -161,49 +127,13 @@ interface InvoiceSections {
     Response = ArmResponse<BillingRequestListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * The orderby query option allows clients to request resources in a particular order.
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-       */
-      @query("count")
-      count?: boolean;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
+      ...DefaultODataParameters;
     }
   >;
 
   /**
    * Adds a role assignment on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   @action("createBillingRoleAssignment")
   createByInvoiceSection is ArmResourceActionAsync<
@@ -216,8 +146,6 @@ interface InvoiceSections {
   /**
    * Lists the role assignments for the caller on an invoice section while fetching user info for each role assignment. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   @action("resolveBillingRoleAssignments")
   resolveByInvoiceSection is ArmResourceActionAsync<
@@ -231,24 +159,22 @@ interface InvoiceSections {
   /**
    * Lists the subscriptions that are billed to an invoice section. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   @list
   @get
-  @action("billingSubscriptions")
-  billingSubscriptionsListByInvoiceSection is InvoiceSectionOps.ActionSync<
-    InvoiceSection,
-    void,
-    ArmResponse<BillingSubscriptionListResult>,
-    Parameters = BillingSubscriptionsListByInvoiceSectionParameters
+  billingSubscriptionsListByInvoiceSection is ArmResourceListByParent<
+    BillingSubscription,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = {
+      ...InvoiceSectionNameParameter;
+      ...BillingSubscriptionsListByInvoiceSectionParameters;
+    },
+    Response = ArmResponse<BillingSubscriptionListResult>
   >;
 
   /**
    * Validates if the invoice section can be deleted. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("InvoiceSection")
   validateDeleteEligibility is ArmResourceActionSync<
     InvoiceSection,
@@ -259,8 +185,6 @@ interface InvoiceSections {
   /**
    * Lists the products for an invoice section. These don't include products billed based on usage. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Product")
   @list
   @get
@@ -271,49 +195,13 @@ interface InvoiceSections {
     ArmResponse<ProductListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * The orderby query option allows clients to request resources in a particular order.
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-       */
-      @query("count")
-      count?: boolean;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
+      ...DefaultODataParameters;
     }
   >;
 
   /**
    * Lists the billed or unbilled transactions by invoice section name for given start date and end date. Transactions include purchases, refunds and Azure usage charges. Unbilled transactions are listed under pending invoice Id and do not include tax. Tax is added to the amount once an invoice is generated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Transaction")
   @list
   @get
@@ -342,41 +230,7 @@ interface InvoiceSections {
       @query("type")
       type: TransactionType;
 
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * The orderby query option allows clients to request resources in a particular order.
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-       */
-      @query("count")
-      count?: boolean;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
+      ...DefaultODataParameters;
     }
   >;
 }
@@ -408,41 +262,7 @@ alias BillingSubscriptionsListByInvoiceSectionParameters = {
   @query("expand")
   expand?: string;
 
-  /**
-   * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-   */
-  @query("filter")
-  filter?: string;
-
-  /**
-   * The orderby query option allows clients to request resources in a particular order.
-   */
-  @query("orderBy")
-  orderBy?: string;
-
-  /**
-   * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-   */
-  @query("top")
-  top?: int64;
-
-  /**
-   * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-   */
-  @query("skip")
-  skip?: int64;
-
-  /**
-   * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-   */
-  @query("count")
-  count?: boolean;
-
-  /**
-   * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-   */
-  @query("search")
-  search?: string;
+  ...DefaultODataParameters;
 };
 
 alias InvoiceSectionsListByBillingProfileParameters = {
@@ -452,41 +272,7 @@ alias InvoiceSectionsListByBillingProfileParameters = {
   @query("includeDeleted")
   includeDeleted?: boolean = false;
 
-  /**
-   * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-   */
-  @query("filter")
-  filter?: string;
-
-  /**
-   * The orderby query option allows clients to request resources in a particular order.
-   */
-  @query("orderBy")
-  orderBy?: string;
-
-  /**
-   * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-   */
-  @query("top")
-  top?: int64;
-
-  /**
-   * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-   */
-  @query("skip")
-  skip?: int64;
-
-  /**
-   * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-   */
-  @query("count")
-  count?: boolean;
-
-  /**
-   * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-   */
-  @query("search")
-  search?: string;
+  ...DefaultODataParameters;
 };
 
 @@doc(

@@ -1,14 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./InvoiceSection.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Billing;
 /**
@@ -22,18 +20,18 @@ model TransferDetails
     Resource = TransferDetails,
     KeyName = "transferName",
     SegmentName = "transfers",
-    NamePattern = "^[a-z0-9]*$"
+    NamePattern = LowerAlphaNumericPattern
   >;
 
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
   tags?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "A transfer is not a living resource, so it does not support delete operation."
 @armResourceOperations
 interface Transfers {
   /**
@@ -49,7 +47,7 @@ interface Transfers {
    */
   initiate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     TransferDetails,
-    Request = InitiateTransferRequest,
+    Request = TransferDetails,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 
@@ -78,6 +76,11 @@ interface Transfers {
   "The ID that uniquely identifies a transfer request."
 );
 @@doc(TransferDetails.properties, "Details of the transfer.");
+@@typeChangedFrom(
+  Transfers.initiate::parameters.resource,
+  Versions.v2024_08_01_preview,
+  InitiateTransferRequest
+);
 @@doc(
   Transfers.initiate::parameters.resource,
   "Request parameters that are provided to the initiate transfer operation."
