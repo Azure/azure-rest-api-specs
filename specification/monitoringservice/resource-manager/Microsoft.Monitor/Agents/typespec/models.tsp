@@ -52,9 +52,14 @@ namespace Microsoft.Monitor {
 
     /** Policies that select alerts for investigation. At least one policy is required when autonomous operations are enabled. On PATCH, a supplied array replaces the existing array. */
     @maxItems(10)
-    @TypeSpec.OpenAPI.extension("x-ms-identifiers", #[])
-    policies?: ObservabilityAgentInvestigationPolicy[] | null;
+    policies?: ObservabilityAgentInvestigationPolicies | null;
   }
+
+  /** Investigation policies without stable item identifiers. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "This is a typed array, not an empty object. The array model carries native identifiers because the decorator does not accept a nullable array property."
+  @Azure.ResourceManager.identifiers(#[])
+  model ObservabilityAgentInvestigationPolicies
+    is ObservabilityAgentInvestigationPolicy[];
 
   /**
    * An investigation policy. At least one of minimumSeverity, ruleNameContains, or ruleResourceId must be specified.
@@ -141,9 +146,14 @@ namespace Microsoft.Monitor {
 
     /** Resources monitored by this agent. A supplied array replaces the existing array; null or an empty array clears the list. */
     @maxItems(10)
-    @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
-    monitoredResources?: ObservabilityAgentMonitoredResource[] | null;
+    monitoredResources?: ObservabilityAgentMonitoredResources | null;
   }
+
+  /** Embedded monitored resources identified by their logical names. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "This is a typed array, not an empty object. The array model carries native identifiers because the decorator does not accept a nullable array property."
+  @Azure.ResourceManager.identifiers(#["name"])
+  model ObservabilityAgentMonitoredResources
+    is ObservabilityAgentMonitoredResource[];
 
   /**
    * The request body used to update an observability agent resource.

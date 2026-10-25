@@ -426,15 +426,18 @@
           "x-nullable": true
         },
         "policies": {
-          "type": "array",
+          "$ref": "#/definitions/ObservabilityAgentInvestigationPolicies",
           "description": "Policies that select alerts for investigation. At least one policy is required when autonomous operations are enabled. On PATCH, a supplied array replaces the existing array.",
           "maxItems": 10,
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/ObservabilityAgentInvestigationPolicy"
-          },
-          "x-ms-identifiers": []
+          "x-nullable": true
         }
+      }
+    },
+    "ObservabilityAgentInvestigationPolicies": {
+      "type": "array",
+      "description": "Investigation policies without stable item identifiers.",
+      "items": {
+        "$ref": "#/definitions/ObservabilityAgentInvestigationPolicy"
       }
     },
     "ObservabilityAgentInvestigationPolicy": {
@@ -500,6 +503,13 @@
         "name",
         "resourceId"
       ]
+    },
+    "ObservabilityAgentMonitoredResources": {
+      "type": "array",
+      "description": "Embedded monitored resources identified by their logical names.",
+      "items": {
+        "$ref": "#/definitions/ObservabilityAgentMonitoredResource"
+      }
     },
     "ObservabilityAgentPatch": {
       "type": "object",
@@ -610,16 +620,10 @@
           "x-nullable": true
         },
         "monitoredResources": {
-          "type": "array",
+          "$ref": "#/definitions/ObservabilityAgentMonitoredResources",
           "description": "Resources monitored by this agent. A supplied array replaces the existing array; null or an empty array clears the list.",
           "maxItems": 10,
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/ObservabilityAgentMonitoredResource"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-nullable": true
         }
       }
     },
