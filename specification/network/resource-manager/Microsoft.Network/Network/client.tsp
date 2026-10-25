@@ -8426,7 +8426,7 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 @@alternateType(Common.VirtualNetworkPropertiesFormat.ipAllocations, Azure.ResourceManager.Models.WritableSubResource[], "csharp");
 @@alternateType(Microsoft.Network.WebApplicationFirewallPolicyPropertiesFormat.applicationGatewayForContainers, Azure.ResourceManager.Models.SubResource[], "csharp");
 @@alternateType(Microsoft.Network.VirtualHubRouteTableV2.etag, Azure.Core.eTag, "csharp");
-@@clientName(Microsoft.Network.VirtualNetworkGatewayPropertiesFormat.activeActive, "Active", "csharp");
+@@clientName(Microsoft.Network.VirtualNetworkGatewayPropertiesFormat.activeActive, "IsActive", "csharp");
 #suppress "@azure-tools/typespec-client-generator-core/deprecated" "Restore the released Routes projection of the routeTable wrapper."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.Network.VirtualHubProperties.routeTable, "csharp");
 
