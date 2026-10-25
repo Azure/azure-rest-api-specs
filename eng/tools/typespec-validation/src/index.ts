@@ -202,6 +202,12 @@ export async function main() {
         "after each project. Requires a clean, disposable checkout; " +
         "ignored files are retained.",
     },
+    "allow-generated-changes": {
+      type: "boolean",
+      description:
+        "Report generated-file and formatting changes as warnings instead of failing. " +
+        "Use when validating an upcoming TypeSpec release.",
+    },
   } satisfies Record<string, CliOption>;
   const parsedArgs = parseArgsWithHelp({ args, options, allowPositionals: true, help });
   if (!parsedArgs) return;
@@ -260,6 +266,7 @@ export async function main() {
       headCommitish: values.head,
       ignoreCoreFiles: values["ignore-core-files"],
       gitClean: values["git-clean"],
+      allowGeneratedChanges: values["allow-generated-changes"],
       dryRun: values["dry-run"],
       verbose: values.verbose,
     });
@@ -277,6 +284,7 @@ export async function main() {
     }
     const success = await runAll(parsedArgs.positionals[0] ?? "specification", {
       gitClean: values["git-clean"],
+      allowGeneratedChanges: values["allow-generated-changes"],
       shard: values.shard,
       dryRun: values["dry-run"],
       verbose: values.verbose,
@@ -296,6 +304,7 @@ export async function main() {
   if (parsedArgs.positionals[1]) {
     context = { ...context, ...(JSON.parse(parsedArgs.positionals[1]) as Record<string, unknown>) };
   }
+  if (values["allow-generated-changes"]) context = { ...context, allowGeneratedChanges: true };
 
   const absolutePath = resolve(folder);
 
