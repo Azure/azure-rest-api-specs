@@ -172,8 +172,6 @@ interface CheckDnsNameAvailability {
    * Checks whether a domain name in the cloudapp.azure.com zone is available for use.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CheckDnsNameAvailability")
   @autoRoute
   @get
   @action("CheckDnsNameAvailability")

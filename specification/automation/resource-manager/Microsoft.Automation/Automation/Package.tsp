@@ -56,7 +56,6 @@ interface Packages {
    * Delete the package by name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Package_Delete")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/packageoperations")
   delete is ArmResourceDeleteSync<Package>;
 

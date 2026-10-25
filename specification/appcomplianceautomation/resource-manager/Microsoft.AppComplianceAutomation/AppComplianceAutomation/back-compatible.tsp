@@ -28,3 +28,39 @@ using Microsoft.AppComplianceAutomation;
   WebhookResource.properties,
   "autorest,go,python,javascript"
 );
+
+@@clientLocation(Report.get, Report);
+@@clientLocation(Report.createOrUpdate, Report);
+@@clientLocation(Report.update, Report);
+@@clientLocation(Report.delete, Report);
+@@clientLocation(Report.list, Report);
+@@clientLocation(Report.syncCertRecord, Report);
+@@clientLocation(Report.checkNameAvailability, Report);
+@@clientName(
+  Report.checkNameAvailability,
+  "NestedResourceCheckNameAvailability"
+);
+@@clientLocation(Report.fix, Report);
+@@clientLocation(Report.getScopingQuestions, Report);
+@@clientLocation(Report.verify, Report);
+
+@@clientLocation(Evidence.get, Evidence);
+@@clientLocation(Evidence.createOrUpdate, Evidence);
+@@clientLocation(Evidence.delete, Evidence);
+@@clientLocation(Evidence.listByReport, Evidence);
+@@clientLocation(Evidence.download, Evidence);
+
+@@clientLocation(ScopingConfiguration.get, ScopingConfiguration);
+@@clientLocation(ScopingConfiguration.createOrUpdate, ScopingConfiguration);
+@@clientLocation(ScopingConfiguration.delete, ScopingConfiguration);
+@@clientLocation(ScopingConfiguration.list, ScopingConfiguration);
+
+@@clientLocation(Snapshot.get, Snapshot);
+@@clientLocation(Snapshot.list, Snapshot);
+@@clientLocation(Snapshot.download, Snapshot);
+
+@@clientLocation(Webhook.get, Webhook);
+@@clientLocation(Webhook.createOrUpdate, Webhook);
+@@clientLocation(Webhook.update, Webhook);
+@@clientLocation(Webhook.delete, Webhook);
+@@clientLocation(Webhook.list, Webhook);

@@ -290,10 +290,7 @@ interface JobRuns {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Grandparent-scoped aggregate list of JobRun; cannot use the standard ARM list-by-parent template because JobRun's parent is Job, not Namespace."
 @added(Versions.v2026_11_02_preview)
 interface JobRunsByNamespace {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom grandparent-scoped list; not expressible via ArmResourceListByParent because parent-key extraction always includes jobName."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId keeps this namespace-scoped list in the JobRuns SDK operation group instead of a separate JobRunsByNamespace group."
   @doc("List job runs by namespace, across all jobs in the namespace.")
-  @operationId("JobRuns_ListByNamespace")
   @get
   @list
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/jobRuns")

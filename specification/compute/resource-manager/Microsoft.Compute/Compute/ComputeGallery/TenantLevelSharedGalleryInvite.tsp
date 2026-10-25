@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
@@ -8,7 +7,6 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 using Common;
 
@@ -35,10 +33,8 @@ interface TenantLevelSharedGalleryInvites {
   /**
    * Accept sharing of a tenant-level shared gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
   @action("accept")
-  @operationId("TenantLevelGallerySharing_Accept")
   @added(Versions.v2025_12_03)
   tenantLevelGallerySharingAccept is ComputeResourceActionAsyncBase<
     TenantLevelSharedGalleryInvite,
@@ -53,10 +49,8 @@ interface TenantLevelSharedGalleryInvites {
   /**
    * Reject sharing of a tenant-level shared gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
   @action("reject")
-  @operationId("TenantLevelGallerySharing_Reject")
   @added(Versions.v2025_12_03)
   tenantLevelGallerySharingReject is ComputeResourceActionAsyncBase<
     TenantLevelSharedGalleryInvite,

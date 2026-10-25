@@ -168,8 +168,6 @@ interface EffectiveConfigurations {
   /**
    * List all effective connectivity configurations applied on a virtual network.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ListNetworkManagerEffectiveConnectivityConfigurations")
   @tag("NetworkManagerEffectiveConnectivityConfiguration")
   listNetworkManagerEffectiveConnectivityConfigurations is ArmResourceActionSync<
     VirtualNetwork,
@@ -190,8 +188,6 @@ interface EffectiveConfigurations {
   /**
    * List all effective security admin rules applied on a virtual network.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ListNetworkManagerEffectiveSecurityAdminRules")
   @tag("NetworkManagerEffectiveSecurityAdminRules")
   listNetworkManagerEffectiveSecurityAdminRules is ArmResourceActionSync<
     VirtualNetwork,

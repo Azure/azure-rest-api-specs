@@ -34,7 +34,6 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the operation"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("DiskAccesses")
-  @operationId("DiskAccesses_GetAPrivateEndpointConnection")
   getAPrivateEndpointConnection is ComputeResourceRead<PrivateEndpointConnection>;
 
   /**
@@ -45,7 +44,6 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @tag("DiskAccesses")
-  @operationId("DiskAccesses_UpdateAPrivateEndpointConnection")
   updateAPrivateEndpointConnection is ComputeResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
     Response =
@@ -65,7 +63,6 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @tag("DiskAccesses")
-  @operationId("DiskAccesses_DeleteAPrivateEndpointConnection")
   deleteAPrivateEndpointConnection is ComputeResourceDeleteAsync<PrivateEndpointConnection>;
 
   /**
@@ -73,7 +70,6 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("DiskAccesses")
-  @operationId("DiskAccesses_ListPrivateEndpointConnections")
   listPrivateEndpointConnections is ComputeResourceListByParent<
     PrivateEndpointConnection,
     Response = PrivateEndpointConnectionListResult

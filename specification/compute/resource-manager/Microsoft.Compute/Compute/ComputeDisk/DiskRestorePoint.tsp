@@ -67,7 +67,6 @@ interface DiskRestorePoints {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("IncrementalRestorePoints")
-  @operationId("DiskRestorePoint_Get")
   get is DiskRestorePointsOps.Read<DiskRestorePoint>;
 
   /**
@@ -75,7 +74,6 @@ interface DiskRestorePoints {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("IncrementalRestorePoints")
-  @operationId("DiskRestorePoint_ListByRestorePoint")
   @list
   listByRestorePoint is DiskRestorePointsOps.List<
     DiskRestorePoint,
@@ -85,7 +83,6 @@ interface DiskRestorePoints {
   /** Grants access to a diskRestorePoint. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("IncrementalRestorePoints")
-  @operationId("DiskRestorePoint_GrantAccess")
   @action("beginGetAccess")
   grantAccess is DiskRestorePointsOps.ActionAsync<
     DiskRestorePoint,
@@ -98,7 +95,6 @@ interface DiskRestorePoints {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @tag("IncrementalRestorePoints")
-  @operationId("DiskRestorePoint_RevokeAccess")
   @action("endGetAccess")
   revokeAccess is DiskRestorePointsOps.ActionAsync<
     DiskRestorePoint,

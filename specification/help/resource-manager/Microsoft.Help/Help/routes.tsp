@@ -64,9 +64,7 @@ interface DiscoverySolutionNLPOperationGroup {
   /**
    * Search for relevant Azure Diagnostics, Solutions and Troubleshooters using a natural language issue summary.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
-  @operationId("DiscoverySolutionNLP_DiscoverSolutions")
   discoverSolutions is ArmProviderActionSync<
     Request = DiscoveryNlpRequest,
     Response = DiscoveryNlpResponse,
@@ -75,10 +73,8 @@ interface DiscoverySolutionNLPOperationGroup {
   /**
    * Search for relevant Azure Diagnostics, Solutions and Troubleshooters using a natural language issue summary and subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @action("discoverSolutions")
-  @operationId("DiscoverySolutionNLP_DiscoverSolutionsBySubscription")
   discoverSolutionsBySubscription is ArmProviderActionSync<
     Request = DiscoveryNlpRequest,
     Response = DiscoveryNlpResponse,

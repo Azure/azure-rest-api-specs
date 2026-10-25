@@ -177,3 +177,37 @@ using ComputeGallery;
   "!csharp"
 );
 @@clientName(Galleries.gallerySharingProfileUpdate, "update", "!csharp");
+
+@@clientLocation(
+  SharedGalleryInvites.gallerySharingAccept,
+  "GallerySharing",
+  "!csharp"
+);
+@@clientName(SharedGalleryInvites.gallerySharingAccept, "accept", "!csharp");
+@@clientLocation(
+  SharedGalleryInvites.gallerySharingReject,
+  "GallerySharing",
+  "!csharp"
+);
+@@clientName(SharedGalleryInvites.gallerySharingReject, "reject", "!csharp");
+
+@@clientLocation(
+  TenantLevelSharedGalleryInvites.tenantLevelGallerySharingAccept,
+  "TenantLevelGallerySharing",
+  "!csharp"
+);
+@@clientName(
+  TenantLevelSharedGalleryInvites.tenantLevelGallerySharingAccept,
+  "accept",
+  "!csharp"
+);
+@@clientLocation(
+  TenantLevelSharedGalleryInvites.tenantLevelGallerySharingReject,
+  "TenantLevelGallerySharing",
+  "!csharp"
+);
+@@clientName(
+  TenantLevelSharedGalleryInvites.tenantLevelGallerySharingReject,
+  "reject",
+  "!csharp"
+);
