@@ -23,6 +23,7 @@ interface ApplicationGatewaysOperationGroup {
   /**
    * Lists all available server variables.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listAvailableServerVariables retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ApplicationGateways")
   @autoRoute
   @get
@@ -36,6 +37,7 @@ interface ApplicationGatewaysOperationGroup {
   /**
    * Lists all available request headers.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listAvailableRequestHeaders retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ApplicationGateways")
   @autoRoute
   @get
@@ -49,6 +51,7 @@ interface ApplicationGatewaysOperationGroup {
   /**
    * Lists all available response headers.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listAvailableResponseHeaders retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ApplicationGateways")
   @autoRoute
   @get
@@ -62,6 +65,7 @@ interface ApplicationGatewaysOperationGroup {
   /**
    * Lists all available web application firewall rule sets.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listAvailableWafRuleSets retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ApplicationGateways")
   @autoRoute
   @get
@@ -173,6 +177,7 @@ interface CheckDnsNameAvailability {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing checkDnsNameAvailability retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("CheckDnsNameAvailability")
   @autoRoute
   @get
@@ -530,6 +535,7 @@ interface ServiceTagsOperationGroup {
   /**
    * Gets a list of service tag information resources.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("serviceTags")

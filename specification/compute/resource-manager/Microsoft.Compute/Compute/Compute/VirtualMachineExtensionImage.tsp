@@ -72,6 +72,7 @@ interface VirtualMachineExtensionImages {
   /**
    * Gets a list of virtual machine extension image types.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listTypes retains its response and SDK paging behavior; preserve published compatibility."
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types")
   listTypes is VirtualMachineExtensionImageTypeOps.ListSinglePage<
     VirtualMachineExtensionImage,
@@ -81,6 +82,7 @@ interface VirtualMachineExtensionImages {
   /**
    * Gets a list of virtual machine extension image versions.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listVersions retains its response and SDK paging behavior; preserve published compatibility."
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions")
   listVersions is VirtualMachineExtensionImageOps.ListSinglePage<
     VirtualMachineExtensionImage,

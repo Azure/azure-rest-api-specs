@@ -100,6 +100,7 @@ interface ProcessInfos {
   /**
    * Description for Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getInstanceProcessDump retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.")
   @get
   @action("dump")
@@ -195,6 +196,7 @@ interface ProcessInfoOperationGroup {
   /**
    * Description for Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getProcessDump retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.")
   @get
   @action("dump")
@@ -303,6 +305,7 @@ interface InstanceProcessSlotOperationGroup {
   /**
    * Description for Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getInstanceProcessDumpSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.")
   @get
   @action("dump")
@@ -404,6 +407,7 @@ interface ProcessSlotOperationGroup {
   /**
    * Description for Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getProcessDumpSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.")
   @get
   @action("dump")

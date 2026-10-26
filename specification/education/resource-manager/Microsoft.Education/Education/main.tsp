@@ -47,6 +47,7 @@ enum Versions {
 }
 
 interface Operations {
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @tag("Operations")
   @autoRoute
   @doc("List the operations for the provider")

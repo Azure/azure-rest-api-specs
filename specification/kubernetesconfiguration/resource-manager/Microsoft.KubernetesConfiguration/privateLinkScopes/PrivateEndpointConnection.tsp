@@ -54,6 +54,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets all private endpoint connections on a private link scope.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByPrivateLinkScope retains its response and SDK paging behavior; preserve published compatibility."
   @action("privateEndpointConnections")
   listByPrivateLinkScope is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<PrivateEndpointConnection>;
 }

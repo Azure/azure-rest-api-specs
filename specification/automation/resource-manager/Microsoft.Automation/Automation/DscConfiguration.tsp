@@ -109,6 +109,7 @@ interface DscConfigurations {
    * Retrieve the configuration script identified by configuration name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getContent retains its response and SDK paging behavior; preserve published compatibility."
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/configurationoperations")
   @get
   @action("content")

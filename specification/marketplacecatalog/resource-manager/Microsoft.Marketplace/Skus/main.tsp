@@ -173,6 +173,7 @@ interface Skus {
 }
 
 /** The operation to list SKUs by billing account. */
+#suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing ArmListByBillingAccount retains its response and SDK paging behavior; preserve published compatibility."
 @listsResource(Resource)
 @segmentOf(Resource)
 @armResourceList(Resource)
@@ -189,6 +190,7 @@ op ArmListByBillingAccount<
 >;
 
 /** The operation to list SKUs by billing profile. */
+#suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing ArmListByBillingProfile retains its response and SDK paging behavior; preserve published compatibility."
 @listsResource(Resource)
 @segmentOf(Resource)
 @armResourceList(Resource)

@@ -134,6 +134,7 @@ interface SBNamespaces {
    * Gets lists of resources that supports Privatelinks.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing privateLinkResourcesGet retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("privateLinkResources")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")

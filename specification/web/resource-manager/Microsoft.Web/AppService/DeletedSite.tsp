@@ -133,6 +133,7 @@ interface Global {
   /**
    * Description for Get all deleted apps for a subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getDeletedWebAppSnapshots retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("snapshots")
   @summary("Get all deleted apps for a subscription.")

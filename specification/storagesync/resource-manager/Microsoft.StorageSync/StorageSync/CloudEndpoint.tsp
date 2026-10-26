@@ -309,6 +309,7 @@ interface CloudEndpoints {
   /**
    * Get the AFS file share metadata signing certificate public keys.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing afsShareMetadataCertificatePublicKeys retains its response and SDK paging behavior; preserve published compatibility."
   @get
   afsShareMetadataCertificatePublicKeys is ArmResourceActionSync<
     CloudEndpoint,

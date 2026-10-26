@@ -151,6 +151,7 @@ interface Runbooks {
    * Retrieve the runbook draft identified by runbook name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing runbookDraftGet retains its response and SDK paging behavior; preserve published compatibility."
   @tag("RunbookDraft")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookdraftoperations")
   @get
@@ -191,6 +192,7 @@ interface Runbooks {
    * Retrieve the content of runbook identified by runbook name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing runbookGetContent retains its response and SDK paging behavior; preserve published compatibility."
   @tag("Runbook")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookoperations")
   @get

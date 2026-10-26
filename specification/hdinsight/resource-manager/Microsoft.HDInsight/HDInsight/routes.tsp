@@ -19,6 +19,7 @@ interface LocationsOperationGroup {
   /**
    * Gets the capabilities for the specified location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getCapabilities retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("capabilities")
@@ -31,6 +32,7 @@ interface LocationsOperationGroup {
   /**
    * Lists the usages for the specified location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listUsages retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("usages")
@@ -43,6 +45,7 @@ interface LocationsOperationGroup {
   /**
    * Lists the billingSpecs for the specified subscription and location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listBillingSpecs retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("billingSpecs")

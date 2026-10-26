@@ -136,6 +136,7 @@ interface DscNodes {
    * Retrieve the Dsc node reports by node id and report id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getContent retains its response and SDK paging behavior; preserve published compatibility."
   @tag("NodeReports")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodereportoperations")
   @get

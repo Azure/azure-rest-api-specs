@@ -80,6 +80,7 @@ interface JitRequestDefinitions {
    * Lists all JIT requests within the resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByResourceGroup retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("jitRequests_ListByResourceGroup")
   listByResourceGroup is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<JitRequestDefinition>;
 
@@ -87,6 +88,7 @@ interface JitRequestDefinitions {
    * Lists all JIT requests within the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listBySubscription retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("jitRequests_ListBySubscription")
   listBySubscription is Azure.ResourceManager.Legacy.ArmListSinglePageBySubscription<JitRequestDefinition>;
 }

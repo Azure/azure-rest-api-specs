@@ -584,6 +584,7 @@ interface ManagedClusters {
   /**
    * See [supported Kubernetes versions](https://docs.microsoft.com/azure/aks/supported-kubernetes-versions) for more details about the version lifecycle.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getAvailableAgentPoolVersions retains its response and SDK paging behavior; preserve published compatibility."
   @tag("AgentPools")
   @get
   @action("availableAgentPoolVersions")
@@ -597,6 +598,7 @@ interface ManagedClusters {
   /**
    * To learn more about private clusters, see: https://docs.microsoft.com/azure/aks/private-clusters
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing privateLinkResourcesList retains its response and SDK paging behavior; preserve published compatibility."
   @tag("privateLinkResources")
   @get
   @action("privateLinkResources")

@@ -36,6 +36,7 @@ interface VirtualMachineSizesOperationGroup {
   /**
    * Returns supported VM Sizes in a location
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("vmSizes")

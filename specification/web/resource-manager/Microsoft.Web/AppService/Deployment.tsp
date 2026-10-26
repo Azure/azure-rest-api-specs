@@ -100,6 +100,7 @@ interface Deployments {
   /**
    * Description for List deployment log for specific deployment for an app, or a deployment slot.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listDeploymentLog retains its response and SDK paging behavior; preserve published compatibility."
   @summary("List deployment log for specific deployment for an app, or a deployment slot.")
   @get
   @action("log")
@@ -186,6 +187,7 @@ interface DeploymentOperationGroup {
   /**
    * Description for List deployment log for specific deployment for an app, or a deployment slot.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listDeploymentLogSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("List deployment log for specific deployment for an app, or a deployment slot.")
   @get
   @action("log")

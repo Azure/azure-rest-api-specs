@@ -64,6 +64,7 @@ interface PrivateLinkResourceDescriptions {
   /**
    * Gets the private link resources that need to be created for a service.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByService retains its response and SDK paging behavior; preserve published compatibility."
   @tag("PrivateLinkResources")
   listByService is PrivateLinkResourceDescriptionOps.ListSinglePage<
     PrivateLinkResourceDescription,

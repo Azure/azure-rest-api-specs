@@ -38,6 +38,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations(Products)
 interface ProductList {
   /** Lists products for tenant. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByTenant retains its response and SDK paging behavior; preserve published compatibility."
   @route("/providers/Microsoft.Marketplace/products")
   @get
   @armResourceList(ProductSummary)
@@ -80,6 +81,7 @@ interface ProductList {
     | DiscoveryErrorPayload;
 
   /** Lists products for subscription. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listBySubscription retains its response and SDK paging behavior; preserve published compatibility."
   listBySubscription is ArmListBySubscriptionCustom<
     Products,
     Parameters = {
@@ -115,6 +117,7 @@ interface ProductList {
   >;
 
   /** Lists products for billing account. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByBillingAccount retains its response and SDK paging behavior; preserve published compatibility."
   listByBillingAccount is ArmListByBillingAccount<
     Products,
     Parameters = {
@@ -154,6 +157,7 @@ interface ProductList {
   >;
 
   /** Lists products for billing profile. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByBillingProfile retains its response and SDK paging behavior; preserve published compatibility."
   listByBillingProfile is ArmListByBillingProfile<
     Products,
     Parameters = {
@@ -345,6 +349,7 @@ interface ProductGet {
 }
 
 /** The operation to list products by subscription. */
+#suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing ArmListBySubscriptionCustom retains its response and SDK paging behavior; preserve published compatibility."
 @listsResource(Resource)
 @segmentOf(Resource)
 @armResourceList(Resource)
@@ -361,6 +366,7 @@ op ArmListBySubscriptionCustom<
 >;
 
 /** The operation to list products by billing account. */
+#suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing ArmListByBillingAccount retains its response and SDK paging behavior; preserve published compatibility."
 @listsResource(Resource)
 @segmentOf(Resource)
 @armResourceList(Resource)
@@ -377,6 +383,7 @@ op ArmListByBillingAccount<
 >;
 
 /** The operation to list products by billing account. */
+#suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing ArmListByBillingProfile retains its response and SDK paging behavior; preserve published compatibility."
 @listsResource(Resource)
 @segmentOf(Resource)
 @armResourceList(Resource)

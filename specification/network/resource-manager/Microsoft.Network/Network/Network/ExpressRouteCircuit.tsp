@@ -104,6 +104,7 @@ interface ExpressRouteCircuits {
   /**
    * Gets all the stats from an express route circuit in a resource group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getStats retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ExpressRouteCircuitStats")
   @get
   @action("stats")

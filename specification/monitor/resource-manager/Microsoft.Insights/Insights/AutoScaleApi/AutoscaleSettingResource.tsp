@@ -90,6 +90,7 @@ interface AutoscaleSettingResources {
   /**
    * get predictive autoscale metric future data
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing predictiveMetricGet retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("predictiveMetrics")
   @tag("Metrics")

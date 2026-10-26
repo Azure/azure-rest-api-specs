@@ -140,6 +140,7 @@ interface SwapResources {
   /**
    * Gets the list of SwapResource which identifies the slot type for the specified cloud service. The slot type on a cloud service can either be Staging or Production
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @tag("VipSwap")
   @action("cloudServiceSlots")
   @get

@@ -241,6 +241,7 @@ interface ClusterResources {
   /**
    * Gets the CPU, memory, and disk usage statistics for each Cassandra node in a cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing status retains its response and SDK paging behavior; preserve published compatibility."
   @get
   status is ArmResourceActionSync<
     ClusterResource,

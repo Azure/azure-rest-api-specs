@@ -51,6 +51,7 @@ interface Collections {
   /**
    * Gets private store collections list
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     Collection,
     Response = ArmResponse<CollectionsList>,

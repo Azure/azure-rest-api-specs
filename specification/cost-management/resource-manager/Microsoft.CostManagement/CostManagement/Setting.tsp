@@ -84,6 +84,7 @@ interface Settings {
    * List all cost management settings in the requested scope.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   list is SettingsOps.ListSinglePage<
     Setting,

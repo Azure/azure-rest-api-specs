@@ -192,6 +192,7 @@ interface Sites {
   /**
    * Description for Analyze a custom hostname.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing analyzeCustomHostname retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Analyze a custom hostname.")
   @get
   analyzeCustomHostname is SiteOps.ActionSync<
@@ -529,6 +530,7 @@ interface Sites {
   /**
    * Description for Fetch a short lived token that can be exchanged for a master key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getFunctionsAdminToken retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Fetch a short lived token that can be exchanged for a master key.")
   @get
   @action("functions/admin/token")
@@ -631,6 +633,7 @@ interface Sites {
    * Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listHybridConnections retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Retrieves all Service Bus Hybrid Connections used by this Web App.")
   @get
   @action("hybridConnectionRelays")
@@ -645,6 +648,7 @@ interface Sites {
    * Description for Gets hybrid connections configured for an app (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listRelayServiceConnections retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets hybrid connections configured for an app (or deployment slot, if specified).")
   @get
   @action("hybridconnection")
@@ -1002,6 +1006,7 @@ interface Sites {
   /**
    * Description for Gets web app's event logs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getSitePhpErrorLogFlag retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets web app's event logs.")
   @get
   @action("phplogging")
@@ -1016,6 +1021,7 @@ interface Sites {
    * Description for Gets the premier add-ons of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listPremierAddOns retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the premier add-ons of an app.")
   @get
   @action("premieraddons")
@@ -1029,6 +1035,7 @@ interface Sites {
   /**
    * Description for Gets the private link resources
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getPrivateLinkResources retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the private link resources")
   @get
   @action("privateLinkResources")
@@ -1650,6 +1657,7 @@ interface WebApps {
   /**
    * Description for Analyze a custom hostname.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing analyzeCustomHostnameSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Analyze a custom hostname.")
   @get
   @action("analyzeCustomHostname")
@@ -1972,6 +1980,7 @@ interface WebApps {
   /**
    * Description for Fetch a short lived token that can be exchanged for a master key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getFunctionsAdminTokenSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Fetch a short lived token that can be exchanged for a master key.")
   @get
   @action("functions/admin/token")
@@ -2078,6 +2087,7 @@ interface WebApps {
    * Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listHybridConnectionsSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Retrieves all Service Bus Hybrid Connections used by this Web App.")
   @get
   @action("hybridConnectionRelays")
@@ -2092,6 +2102,7 @@ interface WebApps {
    * Description for Gets hybrid connections configured for an app (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listRelayServiceConnectionsSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets hybrid connections configured for an app (or deployment slot, if specified).")
   @get
   @action("hybridconnection")
@@ -2357,6 +2368,7 @@ interface WebApps {
   /**
    * Description for Gets web app's event logs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getSitePhpErrorLogFlagSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets web app's event logs.")
   @get
   @action("phplogging")
@@ -2371,6 +2383,7 @@ interface WebApps {
    * Description for Gets the premier add-ons of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listPremierAddOnsSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the premier add-ons of an app.")
   @get
   @action("premieraddons")
@@ -2384,6 +2397,7 @@ interface WebApps {
   /**
    * Description for Gets the private link resources
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getPrivateLinkResourcesSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the private link resources")
   @get
   @action("privateLinkResources")

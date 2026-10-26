@@ -271,6 +271,7 @@ interface SnapshotPolicies {
   /**
    * Get volumes associated with snapshot policy
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listVolumes retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("volumes")
   listVolumes is ArmResourceActionSync<

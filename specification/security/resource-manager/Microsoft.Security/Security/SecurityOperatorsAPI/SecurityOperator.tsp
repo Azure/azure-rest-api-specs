@@ -89,6 +89,7 @@ interface SecurityOperators {
   /**
    * Lists Microsoft Defender for Cloud securityOperators in the subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is SecurityOperatorOps.List<
     SecurityOperator,
     Response = ArmResponse<SecurityOperatorList>,

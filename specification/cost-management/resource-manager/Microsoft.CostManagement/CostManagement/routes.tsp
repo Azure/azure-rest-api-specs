@@ -619,6 +619,7 @@ interface AlertsOperationGroup {
    * Lists the Alerts for external cloud provider type defined.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listExternal retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("Alerts_ListExternal")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   @autoRoute

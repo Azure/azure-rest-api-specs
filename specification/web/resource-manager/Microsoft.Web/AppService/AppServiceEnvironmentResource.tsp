@@ -172,6 +172,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get diagnostic information for an App Service Environment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listDiagnostics retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get diagnostic information for an App Service Environment.")
   @get
   @action("diagnostics")
@@ -243,6 +244,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for List all currently running operations on the App Service Environment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listOperations retains its response and SDK paging behavior; preserve published compatibility."
   @summary("List all currently running operations on the App Service Environment.")
   @get
   @action("operations")
@@ -270,6 +272,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Gets the private link resources
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getPrivateLinkResources retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the private link resources")
   @get
   @action("privateLinkResources")

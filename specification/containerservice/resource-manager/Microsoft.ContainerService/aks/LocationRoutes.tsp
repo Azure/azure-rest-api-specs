@@ -20,6 +20,7 @@ interface ManagedClustersOperationGroup {
   /**
    * Contains extra metadata on the version, including supported patch versions, capabilities, available upgrades, and details on preview status of the version
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listKubernetesVersions retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets a list of supported Kubernetes versions in the specified subscription.")
   @tag("ManagedClusters")
   @autoRoute

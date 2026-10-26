@@ -18,6 +18,7 @@ interface FavoritesOperationGroup {
   /**
    * Gets a list of favorites defined within an Application Insights component.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("favorites")

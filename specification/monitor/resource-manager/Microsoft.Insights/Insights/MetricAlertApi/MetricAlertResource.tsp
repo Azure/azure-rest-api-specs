@@ -124,6 +124,7 @@ interface MetricAlertResources {
   /**
    * Retrieve an alert rule status.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @action("status")
   @tag("MetricAlertsStatus")
   @segment("")

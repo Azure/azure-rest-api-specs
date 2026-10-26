@@ -147,6 +147,7 @@ interface GuestConfigurationAssignments {
   /**
    * List all reports for the guest configuration assignment, latest report first.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing guestConfigurationAssignmentReportsList retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("reports")
   guestConfigurationAssignmentReportsList is GuestConfigurationAssignmentOps.ActionSync<
@@ -299,6 +300,7 @@ interface GuestConfigurationHCRPAssignments {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing guestConfigurationHCRPAssignmentReportsList retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("reports")
   @operationId("GuestConfigurationHCRPAssignmentReports_List")
@@ -591,6 +593,7 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
    * List all reports for the guest configuration assignment, latest report first.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing guestConfigurationConnectedVMwarevSphereAssignmentsReportsList retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("reports")
   guestConfigurationConnectedVMwarevSphereAssignmentsReportsList is GuestConfigurationConnectedVMwarevSphereAssignmentOps.ActionSync<

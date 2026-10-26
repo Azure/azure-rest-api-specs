@@ -58,6 +58,7 @@ interface FileServices {
   /**
    * List all file services in storage accounts
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     FileServiceProperties,
     Response = ArmResponse<FileServiceItems>,

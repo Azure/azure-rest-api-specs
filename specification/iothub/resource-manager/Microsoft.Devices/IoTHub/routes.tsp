@@ -34,6 +34,7 @@ interface ResourceProviderCommonOperationGroup {
   /**
    * Get the number of free and paid iot hubs in the subscription
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getSubscriptionQuota retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get the number of iot hubs in the subscription")
   @tag("GET")
   @autoRoute

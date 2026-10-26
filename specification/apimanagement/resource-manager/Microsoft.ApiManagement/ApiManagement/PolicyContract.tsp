@@ -157,6 +157,7 @@ interface PolicyContracts {
   /**
    * Get the list of policy configuration at the API Operation level.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByOperation retains its response and SDK paging behavior; preserve published compatibility."
   listByOperation is PolicyContractOps.ListSinglePage<
     PolicyContract,
     Response = ArmResponse<PolicyCollection>
@@ -408,6 +409,7 @@ interface ApiPolicy {
   /**
    * Get the policy configuration at the API level.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByApi retains its response and SDK paging behavior; preserve published compatibility."
   listByApi is ApiPolicyOps.ListSinglePage<
     PolicyContract,
     Response = ArmResponse<PolicyCollection>
@@ -1158,6 +1160,7 @@ interface WorkspaceProductPolicy {
   /**
    * Get the policy configuration at the Product level.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByProduct retains its response and SDK paging behavior; preserve published compatibility."
   listByProduct is WorkspaceProductPolicyOps.ListSinglePage<
     PolicyContract,
     Response = ArmResponse<PolicyCollection>

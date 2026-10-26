@@ -58,6 +58,7 @@ interface AdminRequestApprovalsResources {
   /**
    * Get list of admin request approvals
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing adminRequestApprovalsList retains its response and SDK paging behavior; preserve published compatibility."
   adminRequestApprovalsList is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     AdminRequestApprovalsResource,
     Response = ArmResponse<AdminRequestApprovalsList>,

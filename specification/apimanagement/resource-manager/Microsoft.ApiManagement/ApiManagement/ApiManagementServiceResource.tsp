@@ -338,6 +338,7 @@ interface ApiManagementServiceResources {
   /**
    * Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing networkStatusListByService retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("networkstatus")
   networkStatusListByService is ArmResourceActionSync<
@@ -349,6 +350,7 @@ interface ApiManagementServiceResources {
   /**
    * Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByLocation retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("networkstatus")
   listByLocation is ArmResourceActionSync<
@@ -369,6 +371,7 @@ interface ApiManagementServiceResources {
   /**
    * Gets the network endpoints of all outbound dependencies of a ApiManagement service.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing outboundNetworkDependenciesEndpointsListByService retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("outboundNetworkDependenciesEndpoints")
   outboundNetworkDependenciesEndpointsListByService is ArmResourceActionSync<
@@ -380,6 +383,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists all policy descriptions.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing policyDescriptionListByService retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("policyDescriptions")
   policyDescriptionListByService is ArmResourceActionSync<
@@ -409,6 +413,7 @@ interface ApiManagementServiceResources {
    * Lists a collection of portalsettings defined within a service instance..
    */
   #deprecated "deprecated"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing portalSettingsListByService retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("portalsettings")
   portalSettingsListByService is ArmResourceActionSync<

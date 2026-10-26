@@ -270,6 +270,7 @@ interface NotificationContracts {
   /**
    * Gets the list of the Notification Recipient User subscribed to the notification.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByNotification retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("recipientUsers")
   listByNotification is NotificationContractOps.ActionSync<
@@ -322,6 +323,7 @@ interface NotificationContracts {
   /**
    * Gets the list of the Notification Recipient Emails subscribed to a notification.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing notificationRecipientEmailListByNotification retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("recipientEmails")
   notificationRecipientEmailListByNotification is NotificationContractOps.ActionSync<
@@ -461,6 +463,7 @@ interface WorkspaceNotification {
   /**
    * Gets the list of the Notification Recipient User subscribed to the notification.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByNotification retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("recipientUsers")
   listByNotification is WorkspaceNotificationOps.ActionSync<
@@ -515,6 +518,7 @@ interface WorkspaceNotification {
   /**
    * Gets the list of the Notification Recipient Emails subscribed to a notification.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing workspaceNotificationRecipientEmailListByNotification retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("recipientEmails")
   workspaceNotificationRecipientEmailListByNotification is WorkspaceNotificationOps.ActionSync<

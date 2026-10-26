@@ -144,6 +144,7 @@ interface VirtualMachineScaleSetVMExtensions {
    * The operation to get all extensions of an instance in Virtual Machine Scaleset.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineScaleSetVMExtensions_List")
   list is VirtualMachineScaleSetVMExtensionsOps.ListSinglePage<
     VirtualMachineScaleSetVMExtension,

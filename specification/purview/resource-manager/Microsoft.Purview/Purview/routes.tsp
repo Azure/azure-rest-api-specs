@@ -43,6 +43,7 @@ interface DefaultAccountsOperationGroup {
   /**
    * Get the default account for the scope.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing get retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the default account information set for the scope.")
   @autoRoute
   @get
@@ -141,6 +142,7 @@ interface UsagesOperationGroup {
   /**
    * Get the usage quota configuration
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing get retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the Usage quota configuration.")
   @autoRoute
   @get

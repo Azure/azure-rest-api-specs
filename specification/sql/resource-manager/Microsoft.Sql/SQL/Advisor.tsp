@@ -87,6 +87,7 @@ interface Advisors {
   /**
    * Gets a list of database advisors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByDatabase retains its response and SDK paging behavior; preserve published compatibility."
   @tag("DatabaseAdvisors")
   listByDatabase is AdvisorOps.ListSinglePage<
     Advisor,
@@ -141,6 +142,7 @@ interface ServerAdvisors {
   /**
    * Gets a list of server advisors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByServer retains its response and SDK paging behavior; preserve published compatibility."
   listByServer is ServerAdvisorOps.ListSinglePage<
     Advisor,
     Parameters = {

@@ -116,6 +116,7 @@ op getCatalog(
 /**
  * Get applicable `Reservation`s that are applied to this subscription or a resource group under this subscription.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getAppliedReservationList retains its response and SDK paging behavior; preserve published compatibility."
 @summary("Get list of applicable `Reservation`s.")
 @autoRoute
 @get

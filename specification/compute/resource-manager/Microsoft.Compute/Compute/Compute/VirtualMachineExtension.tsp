@@ -99,6 +99,7 @@ interface VirtualMachineExtensions {
   /**
    * The operation to get all extensions of a Virtual Machine.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is VirtualMachineExtensionOps.ListSinglePage<
     VirtualMachineExtension,
     Parameters = {

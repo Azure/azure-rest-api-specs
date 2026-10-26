@@ -53,6 +53,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets all private endpoint connections on a server.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByServer retains its response and SDK paging behavior; preserve published compatibility."
   listByServer is Azure.ResourceManager.Legacy.PrivateEndpoints.ListSinglePageByParent<
     Server,
     PrivateEndpointConnection
