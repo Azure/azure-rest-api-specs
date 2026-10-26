@@ -34343,7 +34343,6 @@
           "run_interval_hours",
           "model_deployment_name",
           "suspension",
-          "agent_summary",
           "overview",
           "updated_at"
         ],
@@ -34399,15 +34398,8 @@
             "readOnly": true
           },
           "agent_summary": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AgentInsightSummary"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Generated summary, or null when unavailable.",
+            "$ref": "#/components/schemas/AgentInsightSummary",
+            "description": "Generated summary. Omitted when unavailable.",
             "readOnly": true
           },
           "overview": {

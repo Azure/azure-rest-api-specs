@@ -347,9 +347,9 @@ model AgentInsightMonitor {
   @visibility(Lifecycle.Read)
   suspension: AgentInsightSuspension | null;
 
-  /** Generated summary, or null when unavailable. */
+  /** Generated summary. Omitted when unavailable. */
   @visibility(Lifecycle.Read)
-  agent_summary: AgentInsightSummary | null;
+  agent_summary?: AgentInsightSummary;
 
   /** Compatibility overview, or null when unavailable. */
   @visibility(Lifecycle.Read)
