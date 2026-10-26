@@ -9,7 +9,7 @@ az:
 az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/synapse
 python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/synapse"
 input-file:
-  - Microsoft.Synapse/preview/2021-06-01-preview/kustoPool.json
+  - preview/2021-06-01-preview/kustoPool.json
 
 directive:
   - where:
