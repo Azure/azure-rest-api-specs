@@ -24,9 +24,6 @@ union EvaluationGraderType {
   /** Check a number against inclusive bounds. */
   numeric_range: "numeric_range",
 
-  /** Check required or disallowed tool calls in the trajectory. */
-  tool_calls: "tool_calls",
-
   /** Ask a judge model to decide each rubric criterion. */
   rubric: "rubric",
 
@@ -152,22 +149,6 @@ model NumericRangeGrader extends EvaluationGrader {
   max?: GraderNumberValue;
 }
 
-/**
- * Passes when every required tool was called and no disallowed tool was called. At least one
- * list is required and a name cannot appear in both. An incomplete trajectory is an `error`.
- */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model ToolCallsGrader extends EvaluationGrader {
-  /** The tool-call grader type. */
-  type: EvaluationGraderType.tool_calls;
-
-  /** Tool names, or single-placeholder templates, that must all be called. */
-  required?: string[];
-
-  /** Tool names, or single-placeholder templates, that must not be called. */
-  disallowed?: string[];
-}
-
 /** One rubric criterion decided by the judge. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model RubricCriterion {
@@ -240,7 +221,6 @@ union InlineGrader {
   SubstringMatchGrader,
   RegexCheckGrader,
   NumericRangeGrader,
-  ToolCallsGrader,
   RubricGrader,
 }
 

@@ -53737,7 +53737,6 @@ components:
           substring_match: '#/components/schemas/SubstringMatchGrader'
           regex: '#/components/schemas/RegexCheckGrader'
           numeric_range: '#/components/schemas/NumericRangeGrader'
-          tool_calls: '#/components/schemas/ToolCallsGrader'
           rubric: '#/components/schemas/RubricGrader'
           catalog_grader: '#/components/schemas/CatalogGrader'
           exact_match: '#/components/schemas/ExactMatchGrader'
@@ -53754,7 +53753,6 @@ components:
             - substring_match
             - regex
             - numeric_range
-            - tool_calls
             - rubric
             - catalog_grader
       description: The grader types supported by the evaluation MVP.
@@ -56554,7 +56552,6 @@ components:
         - $ref: '#/components/schemas/SubstringMatchGrader'
         - $ref: '#/components/schemas/RegexCheckGrader'
         - $ref: '#/components/schemas/NumericRangeGrader'
-        - $ref: '#/components/schemas/ToolCallsGrader'
         - $ref: '#/components/schemas/RubricGrader'
       description: A grader allowed in a Job version or a Dataset Task.
       x-ms-foundry-meta:
@@ -92434,34 +92431,6 @@ components:
         - incomplete
         - failed
       description: The status of a tool call.
-    ToolCallsGrader:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - tool_calls
-          description: The tool-call grader type.
-        required:
-          type: array
-          items:
-            type: string
-          description: Tool names, or single-placeholder templates, that must all be called.
-        disallowed:
-          type: array
-          items:
-            type: string
-          description: Tool names, or single-placeholder templates, that must not be called.
-      allOf:
-        - $ref: '#/components/schemas/EvaluationGrader'
-      description: |-
-        Passes when every required tool was called and no disallowed tool was called. At least one
-        list is required and a name cannot appear in both. An incomplete trajectory is an `error`.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
     ToolConfig:
       type: object
       properties:
