@@ -730,7 +730,7 @@ interface AgentTelephony {
   @list
   @route("/agents/{agent_name}/telephony/call_jobs")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  listTelephonyCallJobs is FoundryDataPlanePreviewOperation<
+  listTelephonyCallJobs is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The owning voice agent. Authorization is applied before pagination. */
@@ -752,7 +752,7 @@ interface AgentTelephony {
   @delete
   @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  deleteTelephonyCallJob is FoundryDataPlanePreviewOperation<
+  deleteTelephonyCallJob is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The owning voice agent. */

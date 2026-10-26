@@ -10,13 +10,13 @@ namespace Azure.AI.Projects;
 /**
  * Scalar template values. Objects, arrays, null and non-finite numbers are not accepted.
  * Numbers use JSON-number semantics, not separate int64/double wire tags: 1, 1.0 and 1e0 are
- * equivalent for replay; -0 equals 0. Compare normalized exact decimal coefficient/exponent
- * from the original JSON token before binary64 conversion. Never merge distinct int64 values
- * through float rounding. Strings such as "1" remain distinct from numbers. Preserve int64
- * values exactly; other values must convert to finite binary64 without nonzero underflow to zero.
+ * equivalent for replay; -0 equals 0. Replay uses the exact decimal coefficient/exponent of
+ * the received JSON token, so distinct int64 values remain distinct even if binary64 rounding
+ * would make them equal. Strings such as "1" remain distinct from numbers. Int64 values retain
+ * exact precision; other numeric values must be finite binary64 without nonzero underflow to zero.
  * Replay comparison applies to the JSON actually received by the service. SDK serialization can round
  * caller-side numeric values before transmission; clients needing exact values must use a lossless
- * serialization path. Retries preserve the same serialized numeric values.
+ * serialization path. A retry with the same serialized numeric values preserves replay identity.
  * Numeric tokens are limited to 128 characters. Strings are limited to 16 KiB in UTF-8 at runtime.
  */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -97,7 +97,7 @@ alias TelephonyCampaignConfiguration = {
   /** Authorized typed caller address. The connection validates which address variants it supports for the source role independently of recipient destination support. Generated CallJobs use the same TelephonyAddress representation. */
   source: TelephonyAddress;
 
-  /** Inline recipients, mutually exclusive with recipient_dataset. Exactly one source is required; neither, both or an empty array returns 400. Reads omit this array; retain the original submission for row correlation. Creation body limit: 1 MiB decoded UTF-8. */
+  /** One to 100 inline recipients. Supply either this array or recipient_dataset, not both. Missing, empty or conflicting recipient sources return 400. The entire creation body is limited to 1 MiB decoded UTF-8, including every recipient and configuration field; the budget is shared, not a per-recipient allowance. Reads omit this array, so retain the submission to correlate source rows. */
   @minItems(1)
   @maxItems(100)
   @visibility(Lifecycle.Create)
@@ -110,8 +110,8 @@ alias TelephonyCampaignConfiguration = {
    * An omitted version resolves to latest once per validation round and is persisted before content reads.
    * Worker retries reuse that concrete version and consistent snapshot. Reads expose the requested version
    * before resolution and concrete version afterward; an omitted unresolved version remains absent.
-   * Recheck the submitting principal's assets/read permission for the resolved version before content reads.
-   * Authorization failure fails preparation and keeps dispatch closed.
+   * The submitting principal's assets/read permission is checked again for the resolved version before content reads.
+   * Authorization failure fails preparation and prevents dispatch.
    * Validation identifies CSV, JSON array or JSONL by bounded content inspection using file metadata as hints.
    * Unsupported, ambiguous or malformed content fails preparation; parse failure does not select another format.
    * Fixed destination_type and destination_value fields construct each recipient's TelephonyAddress.
@@ -124,7 +124,7 @@ alias TelephonyCampaignConfiguration = {
    */
   recipient_dataset?: DatasetReference;
 
-  /** Omit for immediate scheduling. Every mode dispatches automatically after successful preparation, subject to its schedule. */
+  /** Dispatch schedule. Omission defaults to immediate scheduling; an explicit ImmediateSchedule has the same behavior. Every mode waits for successful preparation and then dispatches subject to its schedule and capacity. */
   schedule?: TelephonyCampaignSchedule;
 
   /** Per-recipient provider retries. Omit for one initial attempt with no retry. Generated CallJobs return fixed_interval with max_attempts=1 and interval=0 seconds for an omitted policy. */
@@ -156,7 +156,7 @@ model TelephonyCampaignProgress {
   @minValue(0) expired: int64;
 }
 
-/** Business lifecycle of a Campaign; validation, cancellation and deletion have independent LROs. Expiry is a recipient outcome, never a Campaign status. An executed Campaign completes when all recipient tasks are terminal, even if some expired. */
+/** Business lifecycle of a Campaign; validation, cancellation and deletion have independent LROs. An executed Campaign completes when every recipient task is terminal, independently of individual call outcomes. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCampaignStatus {
   string,
@@ -211,13 +211,6 @@ model TelephonyCampaign {
 
   /** ID of the most recently accepted asynchronous operation: validation, cancellation or deletion. Retained after completion and updated only when a new operation is accepted; completing an older operation never overwrites it. Use for operation discovery, not validation-round identity. Poll an individual request using its returned Operation-Id/Operation-Location rather than following this changing pointer. */
   @visibility(Lifecycle.Read) operation_id: string;
-
-  // Internal persistence/message field: execution_generation is an opaque, independently generated
-  // token, never an Operation-Id. Create or failed-state PUT replacement assigns a fresh value;
-  // request/worker retries, cancel and delete preserve it. Persist it with each task, queued message,
-  // operation ownership record and cursor boundary. Reject stale work before writes or origination.
-  // Check Campaign admission state as well: a matching generation alone does not authorize dialing.
-  // This internal field is intentionally absent from the public TypeSpec model.
 
   /** Time of terminal completion for the current round; cleared when failed preparation is replaced. */
   @visibility(Lifecycle.Read) finished_at?: FoundryTimestamp;
@@ -378,7 +371,7 @@ model TelephonyCampaignPage<T> {
 }
 
 /** Name-addressed Campaigns owned by the route Agent. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent-contained named resources use FoundryDataPlanePreviewOperation with shared job envelopes and paging; shared job templates have fixed project-level ID parameters."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent-contained named resources use FoundryDataPlaneRequiredPreviewOperation with shared job envelopes and paging; shared job templates have fixed project-level ID parameters."
 @tag("TelephonyCampaigns")
 interface TelephonyCampaigns {
   /**
@@ -447,7 +440,7 @@ interface TelephonyCampaigns {
       operation_id: ResponseProperty<"operationId">,
     }
   )
-  create is FoundryDataPlanePreviewOperation<
+  create is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** Owning Agent; never overridden in recipient inputs. */
@@ -475,7 +468,7 @@ interface TelephonyCampaigns {
   @get
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  get is FoundryDataPlanePreviewOperation<
+  get is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** Owning Agent; never overridden in recipient inputs. */
@@ -496,7 +489,7 @@ interface TelephonyCampaigns {
   @list
   @route("/agents/{agent_name}/telephony/campaigns")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  list is FoundryDataPlanePreviewOperation<
+  list is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** Owning Agent; never overridden in recipient inputs. */
@@ -551,7 +544,7 @@ interface TelephonyCampaigns {
       operation_id: ResponseProperty<"operationId">,
     }
   )
-  cancel is FoundryDataPlanePreviewOperation<
+  cancel is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** Owning Agent; never overridden in recipient inputs. */
@@ -604,7 +597,7 @@ interface TelephonyCampaigns {
       operation_id: ResponseProperty<"operationId">,
     }
   )
-  delete is FoundryDataPlanePreviewOperation<
+  delete is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** Owning Agent; never overridden in recipient inputs. */
@@ -665,7 +658,7 @@ interface TelephonyCampaigns {
   @list
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}/validation_errors")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  listValidationErrors is FoundryDataPlanePreviewOperation<
+  listValidationErrors is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** Owning Agent; never overridden in recipient inputs. */
@@ -725,7 +718,7 @@ interface TelephonyCampaigns {
   @get
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}/operations/{operation_id}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  getOperation is FoundryDataPlanePreviewOperation<
+  getOperation is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** Owning Agent. */

@@ -1330,10 +1330,10 @@ union TelephonyAddressType {
   /** An E.164 phone number. */
   phone_number: "phone_number",
 
-  /** A Teams resource account identified by its Entra object ID. */
+  /** Caller/source identity for ACS / Teams Phone extensibility origination: a nonempty Entra resource-account object GUID. Not a transfer destination. */
   teams_resource_account: "teams_resource_account",
 
-  /** A Microsoft Teams user or resource-account destination for transfer. */
+  /** Transfer destination for ACS / Teams Phone extensibility: a Teams user or resource account, represented by an object GUID or 28:orgid:{guid}. Not an outbound caller/source identity. */
   teams: "teams",
 
   /** A SIP or SIPS destination for transfer. */
@@ -1530,10 +1530,6 @@ model TelephonyCallJob {
   @doc("The service-generated call-job identifier.")
   @visibility(Lifecycle.Read)
   id: TelephonyCallJobId;
-
-  @doc("The object type. Always `telephony.call_job`.")
-  @visibility(Lifecycle.Read)
-  object: "telephony.call_job";
 
   @doc("The name of the voice agent used at execution time.")
   @visibility(Lifecycle.Read)
