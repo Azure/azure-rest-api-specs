@@ -185,6 +185,12 @@ union AmlFilesystemHealthStateType {
    * Expanding
    */
   Expanding: "Expanding",
+
+  /**
+   * The AML file system is reserving capacity.
+   */
+  @added(Versions.v2027_01_01)
+  ReservingCapacity: "ReservingCapacity",
 }
 
 /**
@@ -1510,6 +1516,20 @@ model AmlFilesystemPropertiesMaintenanceWindow {
 }
 
 /**
+ * Controls how additional properties are handled during HSM export.
+ */
+@added(Versions.v2027_01_01)
+union AmlFilesystemExportAdditionalProperties {
+  string,
+
+  /** Do not export additional properties. */
+  None: "None",
+
+  /** Rename additional properties when deleting the source. */
+  RenameDelete: "RenameDelete",
+}
+
+/**
  * Hydration and archive settings and status
  */
 model AmlFilesystemPropertiesHsm {
@@ -1517,6 +1537,12 @@ model AmlFilesystemPropertiesHsm {
    * Specifies HSM settings of the AML file system.
    */
   settings?: AmlFilesystemHsmSettings;
+
+  /**
+   * Controls how additional properties are handled during HSM export.
+   */
+  @added(Versions.v2027_01_01)
+  exportAdditionalProperties?: AmlFilesystemExportAdditionalProperties;
 
   /**
    * Archive status
