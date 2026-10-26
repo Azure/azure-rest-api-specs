@@ -33,6 +33,7 @@ export interface EmitterCheckResult {
   metadata?: TypeSpecMetadata;
   languageKey?: string;
   packageName?: string;
+  outputDir?: string;
 }
 
 /**
@@ -127,6 +128,7 @@ export async function checkEmitterEnabled(
       metadata,
       languageKey,
       packageName: langMetadata.packageName,
+      outputDir: langMetadata.outputDir,
     };
   } catch (error) {
     logMessage(`Error running typespec-metadata emitter: ${inspect(error)}`, LogLevel.Error);

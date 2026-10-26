@@ -1,4 +1,7 @@
-import { type APIViewRequestData } from "@azure-tools/specs-shared/sdk-types";
+import {
+  type APIViewRequestData,
+  type SdkReviewBundleEntry,
+} from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { inspect } from "node:util";
@@ -34,6 +37,10 @@ import {
 import { checkEmitterEnabled, type EmitterCheckResult } from "./emitter-check.ts";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.ts";
 import { validatePythonPackagesOnPyPI } from "./python-pypi-validation.ts";
+import {
+  captureSdkReviewBundleEntriesForSpec,
+  writeSdkReviewBundleManifest,
+} from "./review-bundle.ts";
 import { resolveSdkRepoBranch } from "./sdk-validation-config.ts";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.ts";
 import { type CommandResult, type ExecutionReport, type SpecGenSdkCmdInput } from "./types.ts";
@@ -161,6 +168,7 @@ async function runAzsdkGeneration(
 
   // Step 4 & 5: On success, build (if not Python) then pack
   let packResponse: AzsdkPackResponse | undefined;
+  let packageRootPath: string | undefined;
   if (
     generateResponse?.result === "succeeded" &&
     emitterCheck.metadata &&
@@ -169,6 +177,7 @@ async function runAzsdkGeneration(
     const langMeta = emitterCheck.metadata.languages[emitterCheck.languageKey]?.[0];
     if (langMeta?.outputDir) {
       const packagePath = resolvePackagePath(langMeta.outputDir, commandInput.localSdkRepoPath);
+      packageRootPath = packagePath;
       const isPython = commandInput.sdkRepoName.replace("-pr", "") === "azure-sdk-for-python";
       let buildSucceeded = true;
 
@@ -216,6 +225,7 @@ async function runAzsdkGeneration(
     packResponse,
     emitterCheck,
     buildResponse,
+    packageRootPath,
   );
   return { executionReport, statusCode };
 }
@@ -381,6 +391,7 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
   let currentExecutionResult: string;
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
+  const sdkReviewBundleEntries: SdkReviewBundleEntry[] = [];
   const breakingChangeDetectionEnabled = isBreakingChangeDetectionEnabled();
   // Tracks whether the SDK repo is currently checked out on a non-`main` branch
   // due to a `sdk-validation.yaml` pin from a previous spec in this run.
@@ -567,6 +578,19 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
         currentRunHasBreakingChange = getBreakingChangeInfo(executionReport);
         overallRunHasBreakingChange = overallRunHasBreakingChange || currentRunHasBreakingChange;
         logMessage(`Runner command execution result:${currentExecutionResult}`);
+
+        try {
+          const capturedEntries = await captureSdkReviewBundleEntriesForSpec({
+            commandInput,
+            executionReport,
+            tspConfigPath: changedSpec.typespecProject,
+            readmePath: changedSpec.readmeMd,
+            existingEntriesCount: sdkReviewBundleEntries.length,
+          });
+          sdkReviewBundleEntries.push(...capturedEntries);
+        } catch (error) {
+          logMessage(`Runner: error capturing SDK review bundle:${inspect(error)}`, LogLevel.Warn);
+        }
       } else {
         overallExecutionResult = "failed";
       }
@@ -584,6 +608,7 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
       }
     }
   }
+  writeSdkReviewBundleManifest(commandInput, sdkReviewBundleEntries);
   // Process the spec-gen-sdk artifacts
   statusCode =
     generateArtifact(

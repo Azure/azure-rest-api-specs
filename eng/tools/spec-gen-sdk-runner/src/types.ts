@@ -24,9 +24,12 @@ export type ExecutionResult =
  */
 export interface ExecutionReportPackage {
   packageName?: string;
+  serviceName?: string;
+  result?: ExecutionResult;
   installationInstructions?: string;
   apiViewArtifact?: string;
   shouldLabelBreakingChange?: boolean;
+  hasBreakingChange?: boolean;
   packageRootPath?: string;
 }
 

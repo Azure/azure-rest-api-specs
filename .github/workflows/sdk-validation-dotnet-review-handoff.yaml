@@ -1,0 +1,50 @@
+name: "SDK Validation - .NET Review Handoff"
+
+on:
+  check_run:
+    types: [completed]
+
+permissions:
+  contents: read # for actions/checkout
+
+jobs:
+  review-bundle-handoff:
+    permissions:
+      contents: read
+      pull-requests: read
+    if: >-
+      (
+        github.event.check_run.app.name == 'Azure Pipelines' ||
+        github.event.check_run.check_suite.app.name == 'Azure Pipelines'
+      ) &&
+      github.event.check_run.name == 'SDK Validation - .NET' &&
+      !endsWith(github.repository, '-pr')
+    name: "Review Bundle Handoff (Report-Only)"
+    runs-on: ubuntu-slim
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - id: review-handoff
+        name: Validate and download SDK review bundle
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { default: runSdkValidationDotnetReviewHandoff } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-validation-dotnet-review-handoff.ts');
+            return await runSdkValidationDotnetReviewHandoff({ github, context, core });
+
+      - name: Upload validated SDK review bundle
+        if: ${{ steps.review-handoff.outputs.handoff_status == 'validated' && steps.review-handoff.outputs.bundle_dir }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: sdk-review-bundle-build-${{ steps.review-handoff.outputs.build_id }}
+          path: ${{ steps.review-handoff.outputs.bundle_dir }}
+          if-no-files-found: error

@@ -92,3 +92,73 @@ export const sdkLabels: SdkLabels = {
     buildFailed: undefined,
   },
 };
+
+export const SDK_REVIEW_BUNDLE_ARTIFACT_NAME = "sdk-review-bundle" as const;
+export const SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME = "sdk-review-bundle.json" as const;
+export const SDK_REVIEW_BUNDLE_SCHEMA_VERSION = "1.0" as const;
+
+const sha40Schema = z.string().regex(/^[0-9a-f]{40}$/i, "Expected a 40-char git SHA");
+const sha256HexSchema = z
+  .string()
+  .regex(/^[0-9a-f]{64}$/i, "Expected a 64-char SHA-256 hex digest");
+const numericIdSchema = z.string().regex(/^[1-9]\d*$/, "Expected a positive numeric identifier");
+
+/**
+ * Validates that a relative POSIX path has no root prefix, parent traversal (`..`),
+ * current-dir segments (`.`), empty segments, backslashes, or control characters.
+ */
+export function isSafeRelativePosixPath(value: string): boolean {
+  if (
+    typeof value !== "string" ||
+    value.length === 0 ||
+    value.length > 512 ||
+    value.startsWith("/") ||
+    value.endsWith("/") ||
+    value.includes("\\") ||
+    value.includes("\0") ||
+    /^[A-Za-z]:/.test(value)
+  ) {
+    return false;
+  }
+  const segments = value.split("/");
+  return segments.every((segment) => segment.length > 0 && segment !== "." && segment !== "..");
+}
+
+export const SafeRelativePosixPathSchema = z
+  .string()
+  .refine(isSafeRelativePosixPath, "Expected a safe normalized relative POSIX path");
+
+const SafePatchFileNameSchema = SafeRelativePosixPathSchema.refine(
+  (value) => !value.includes("/") && value.endsWith(".patch"),
+  "Expected a single-segment .patch file name",
+);
+
+export const SdkReviewBundleEntrySchema = z.object({
+  entryId: z.string().regex(/^[A-Za-z0-9._-]+$/, "Expected a safe bundle entry identifier"),
+  tspConfigPath: SafeRelativePosixPathSchema.optional(),
+  readmePath: SafeRelativePosixPathSchema.optional(),
+  serviceName: z.string().optional(),
+  packageName: z.string().min(1),
+  packageRootPath: SafeRelativePosixPathSchema,
+  sdkBaseCommitSha: sha40Schema,
+  executionResult: z.string().min(1),
+  hasBreakingChange: z.boolean().optional(),
+  patchFile: SafePatchFileNameSchema,
+  patchSha256: sha256HexSchema,
+  patchBytes: z.number().int().nonnegative(),
+  changedFileCount: z.number().int().nonnegative(),
+  changedFiles: z.array(SafeRelativePosixPathSchema),
+});
+export type SdkReviewBundleEntry = import("zod").infer<typeof SdkReviewBundleEntrySchema>;
+
+export const SdkReviewBundleManifestSchema = z.object({
+  schemaVersion: z.literal(SDK_REVIEW_BUNDLE_SCHEMA_VERSION),
+  buildId: numericIdSchema.optional(),
+  specPrNumber: numericIdSchema,
+  specHeadSha: sha40Schema,
+  specRepoUrl: z.string().min(1),
+  sdkLanguage: SdkNameSchema,
+  sdkRepoName: z.string().min(1),
+  entries: z.array(SdkReviewBundleEntrySchema),
+});
+export type SdkReviewBundleManifest = import("zod").infer<typeof SdkReviewBundleManifestSchema>;
