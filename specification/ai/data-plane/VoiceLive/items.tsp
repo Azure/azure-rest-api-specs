@@ -443,6 +443,7 @@ model ResponseMCPApprovalResponseItem extends ResponseItem {
   approval_request_id: string;
 
   /** Whether the tool call was approved. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResponseMCPApprovalResponseItem.approve has a boolean wire value; preserve the published property contract."
   approve: boolean;
 
   /** The reason for the approval decision. */
@@ -461,6 +462,7 @@ model MCPApprovalResponseRequestItem extends ConversationRequestItem {
   approval_request_id: string;
 
   /** Whether the tool call was approved. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MCPApprovalResponseRequestItem.approve has a boolean wire value; preserve the published property contract."
   approve: boolean;
 }
 

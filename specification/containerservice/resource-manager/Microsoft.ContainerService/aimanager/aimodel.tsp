@@ -47,6 +47,7 @@ model ModelSpec {
   @doc("The license of the model, when known. SPDX license identifier, e.g. `mit`, `apache-2.0`.")
   license?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ModelSpec.isRestricted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   @doc("Whether access to the model is restricted and requires credential.")
   isRestricted: boolean;
@@ -114,6 +115,7 @@ model CalculateCostPlan {
   @doc("UTC timestamp of the price snapshot used for this plan.")
   priceAsOf?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CalculateCostPlan.feasible has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   @doc("""
     Whether the caller can actually deploy this plan today (region availability, GPU quota, model fit, etc.). This field gates the mutually exclusive properties on this model:

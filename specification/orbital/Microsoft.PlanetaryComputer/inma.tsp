@@ -141,9 +141,11 @@ model IngestionDefinition {
   @doc("Parquet catalog URL. Required for StacGeoparquet ingestion type")
   stacGeoparquetUrl?: url;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IngestionDefinition.skipExistingItems has a boolean wire value; preserve the published property contract."
   @doc("Skip processing existing items in the catalog")
   skipExistingItems?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IngestionDefinition.keepOriginalAssets has a boolean wire value; preserve the published property contract."
   @doc("Keep original source assets")
   keepOriginalAssets?: boolean;
 
@@ -245,9 +247,11 @@ model IngestionRun {
   @doc("URL of the source catalog")
   sourceCatalogUrl?: url;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IngestionRun.skipExistingItems has a boolean wire value; preserve the published property contract."
   @doc("Skip any item that already exist in the GeoCatalog")
   skipExistingItems?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IngestionRun.keepOriginalAssets has a boolean wire value; preserve the published property contract."
   @doc("Keep original source assets")
   keepOriginalAssets?: boolean;
 }

@@ -24,6 +24,7 @@ model DeleteEvalResponse {
   @doc("The identifier of the deleted evaluation.")
   eval_id: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeleteEvalResponse.deleted has a boolean wire value; preserve the published property contract."
   @doc("Whether the evaluation was deleted.")
   deleted: boolean;
 }
@@ -37,6 +38,7 @@ model DeleteEvalRunResponse {
   @doc("The identifier of the deleted evaluation run.")
   run_id?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeleteEvalRunResponse.deleted has a boolean wire value; preserve the published property contract."
   @doc("Whether the evaluation run was deleted.")
   deleted?: boolean;
 }

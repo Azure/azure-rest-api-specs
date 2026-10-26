@@ -144,6 +144,7 @@ model VirtualMachineReimageParameters {
   /**
    * Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineReimageParameters.tempDisk has a boolean wire value; preserve the published property contract."
   tempDisk?: boolean;
 
   /**

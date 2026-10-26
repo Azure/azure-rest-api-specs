@@ -55,6 +55,7 @@ interface StartMenuItems {
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.isDescending has a boolean wire value; preserve the published property contract."
       @query("isDescending")
       isDescending?: boolean;
 
@@ -113,6 +114,7 @@ interface ApplicationGroups {
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByResourceGroup.isDescending has a boolean wire value; preserve the published property contract."
       @query("isDescending")
       isDescending?: boolean;
 

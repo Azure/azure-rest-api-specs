@@ -87,6 +87,7 @@ model AdvancedPlatformMetricsRuleProperties {
   /**
    * A boolean flag which enables the advanced platform metrics rule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AdvancedPlatformMetricsRuleProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**

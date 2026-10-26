@@ -629,6 +629,7 @@ model DiskProperties {
   /**
    * Set to true to enable bursting beyond the provisioned performance target of the disk. Bursting is disabled by default. Does not apply to Ultra disks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DiskProperties.burstingEnabled has a boolean wire value; preserve the published property contract."
   burstingEnabled?: boolean;
 
   /**
@@ -640,6 +641,7 @@ model DiskProperties {
   /**
    * Indicates the OS on a disk supports hibernation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DiskProperties.supportsHibernation has a boolean wire value; preserve the published property contract."
   supportsHibernation?: boolean;
 
   /**
@@ -665,6 +667,7 @@ model DiskProperties {
   /**
    * Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) by detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DiskProperties.optimizedForFrequentAttach has a boolean wire value; preserve the published property contract."
   optimizedForFrequentAttach?: boolean;
 
   /**
@@ -718,6 +721,7 @@ model SupportedCapabilities {
   /**
    * True if the image from which the OS disk is created supports accelerated networking.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SupportedCapabilities.acceleratedNetwork has a boolean wire value; preserve the published property contract."
   acceleratedNetwork?: boolean;
 
   /**
@@ -794,6 +798,7 @@ model CreationData {
   /**
    * Set this flag to true to get a boost on the performance target of the disk deployed, see here on the respective performance target. This flag can only be set on disk creation time and cannot be disabled after enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CreationData.performancePlus has a boolean wire value; preserve the published property contract."
   performancePlus?: boolean;
 
   /**
@@ -846,6 +851,7 @@ model EncryptionSettingsCollection {
   /**
    * Set this flag to true and provide DiskEncryptionKey and optional KeyEncryptionKey to enable encryption. Set this flag to false and remove DiskEncryptionKey and KeyEncryptionKey to disable encryption. If EncryptionSettings is null in the request object, the existing settings remain unchanged.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EncryptionSettingsCollection.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -1069,6 +1075,7 @@ model DiskUpdateProperties {
   /**
    * Set to true to enable bursting beyond the provisioned performance target of the disk. Bursting is disabled by default. Does not apply to Ultra disks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DiskUpdateProperties.burstingEnabled has a boolean wire value; preserve the published property contract."
   burstingEnabled?: boolean;
 
   /**
@@ -1090,6 +1097,7 @@ model DiskUpdateProperties {
   /**
    * Indicates the OS on a disk supports hibernation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DiskUpdateProperties.supportsHibernation has a boolean wire value; preserve the published property contract."
   supportsHibernation?: boolean;
 
   /**
@@ -1105,6 +1113,7 @@ model DiskUpdateProperties {
   /**
    * Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) by detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DiskUpdateProperties.optimizedForFrequentAttach has a boolean wire value; preserve the published property contract."
   optimizedForFrequentAttach?: boolean;
 
   /**
@@ -1132,6 +1141,7 @@ model GrantAccessData {
    * Set this flag to true to get additional SAS for VM guest state
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GrantAccessData.getSecureVMGuestStateSAS has a boolean wire value; preserve the published property contract."
   getSecureVMGuestStateSAS?: boolean;
 
   /**
@@ -1224,6 +1234,7 @@ model ImmutabilityPolicy {
   /**
    * Indicates whether the immutability policy has expired.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ImmutabilityPolicy.isPolicyExpired has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPolicyExpired?: boolean;
 }
@@ -1474,6 +1485,7 @@ model EncryptionSetProperties {
   /**
    * Set this flag to true to enable auto-updating of this disk encryption set to the latest key version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EncryptionSetProperties.rotationToLatestKeyVersionEnabled has a boolean wire value; preserve the published property contract."
   rotationToLatestKeyVersionEnabled?: boolean;
 
   /**
@@ -1550,6 +1562,7 @@ model DiskEncryptionSetUpdateProperties {
   /**
    * Set this flag to true to enable auto-updating of this disk encryption set to the latest key version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DiskEncryptionSetUpdateProperties.rotationToLatestKeyVersionEnabled has a boolean wire value; preserve the published property contract."
   rotationToLatestKeyVersionEnabled?: boolean;
 
   /**
@@ -1643,6 +1656,7 @@ model DiskRestorePointProperties {
   /**
    * Indicates the OS on a disk supports hibernation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DiskRestorePointProperties.supportsHibernation has a boolean wire value; preserve the published property contract."
   supportsHibernation?: boolean;
 
   /**
@@ -1815,6 +1829,7 @@ model SnapshotProperties {
   /**
    * Whether a snapshot is incremental. Incremental snapshots on the same disk occupy less space than full snapshots and can be diffed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SnapshotProperties.incremental has a boolean wire value; preserve the published property contract."
   incremental?: boolean;
 
   /**
@@ -1846,6 +1861,7 @@ model SnapshotProperties {
   /**
    * Indicates the OS on a snapshot supports hibernation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SnapshotProperties.supportsHibernation has a boolean wire value; preserve the published property contract."
   supportsHibernation?: boolean;
 
   /**
@@ -1960,6 +1976,7 @@ model SnapshotUpdateProperties {
   /**
    * Indicates the OS on a snapshot supports hibernation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SnapshotUpdateProperties.supportsHibernation has a boolean wire value; preserve the published property contract."
   supportsHibernation?: boolean;
 
   /**

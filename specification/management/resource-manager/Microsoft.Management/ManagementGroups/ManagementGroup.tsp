@@ -31,6 +31,7 @@ alias ManagementGroupsGetParameters = {
   /**
    * The $recurse=true query string parameter allows clients to request inclusion of entire hierarchy in the response payload. Note that  $expand=children must be passed up if $recurse is set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagementGroupsGetParameters.$recurse has a boolean wire value; preserve the published property contract."
   @query("$recurse")
   $recurse?: boolean;
 

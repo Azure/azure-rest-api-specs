@@ -23,6 +23,7 @@ model UserHasReview is ProxyResource<UserHasReviewProperties> {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
 @doc("Response of the check user has review operation.")
 model UserHasReviewProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UserHasReviewProperties.hasReview has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether user has already submitted a review.")
   hasReview: boolean;
 

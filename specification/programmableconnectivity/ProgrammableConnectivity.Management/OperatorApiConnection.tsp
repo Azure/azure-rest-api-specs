@@ -118,6 +118,7 @@ model OperatorApiConnectionProperties {
    *
    * Must be set to True, as the Terms and Conditions must be accepted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OperatorApiConnectionProperties.planTermsAndConditionsAccepted has a boolean wire value; preserve the published property contract."
   @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
   planTermsAndConditionsAccepted: boolean;
 
@@ -224,6 +225,7 @@ model DataRegions {
   /**
    * Flag to indicate if commercial activity applies to this data management.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataRegions.commercialActivity has a boolean wire value; preserve the published property contract."
   commercialActivity: boolean;
 
   /**

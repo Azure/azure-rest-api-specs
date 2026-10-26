@@ -34,6 +34,7 @@ interface Connections {
       @query("connectionType")
       connectionType?: ConnectionType;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.defaultConnection has a boolean wire value; preserve the published property contract."
       @doc("Lists connections that are default connections")
       @query("defaultConnection")
       defaultConnection?: boolean;

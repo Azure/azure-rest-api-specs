@@ -1683,6 +1683,7 @@ model AgentUpgrade {
   /**
    * Specifies if the machine's agent should be upgraded
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AgentUpgrade.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean;
 
   /**
@@ -1760,6 +1761,7 @@ model PatchSettings {
   /**
    * Captures the hotpatch capability enrollment intent of the customers, which enables customers to patch their Windows machines without requiring a reboot.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PatchSettings.enableHotpatching has a boolean wire value; preserve the published property contract."
   enableHotpatching?: boolean;
 
   /**
@@ -1833,6 +1835,7 @@ model LicenseProfileMachineInstanceViewSoftwareAssurance {
   /**
    * Specifies if this machine is licensed as part of a Software Assurance agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LicenseProfileMachineInstanceViewSoftwareAssurance.softwareAssuranceCustomer has a boolean wire value; preserve the published property contract."
   softwareAssuranceCustomer?: boolean;
 }
 
@@ -2169,11 +2172,13 @@ model MachineExtensionProperties {
   /**
    * Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MachineExtensionProperties.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean;
 
   /**
    * Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MachineExtensionProperties.autoUpgradeMinorVersion has a boolean wire value; preserve the published property contract."
   autoUpgradeMinorVersion?: boolean;
 
   /**
@@ -2306,6 +2311,7 @@ model LicenseProfilePropertiesSoftwareAssurance {
   /**
    * Specifies if this machine is licensed as part of a Software Assurance agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LicenseProfilePropertiesSoftwareAssurance.softwareAssuranceCustomer has a boolean wire value; preserve the published property contract."
   softwareAssuranceCustomer?: boolean;
 }
 
@@ -2355,6 +2361,7 @@ model LicenseProfileUpdatePropertiesSoftwareAssurance {
   /**
    * Specifies if this machine is licensed as part of a Software Assurance agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LicenseProfileUpdatePropertiesSoftwareAssurance.softwareAssuranceCustomer has a boolean wire value; preserve the published property contract."
   softwareAssuranceCustomer?: boolean;
 }
 
@@ -2425,6 +2432,7 @@ model MachineAssessPatchesResult {
   /**
    * The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MachineAssessPatchesResult.rebootPending has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   rebootPending?: boolean;
 
@@ -2578,6 +2586,7 @@ model WindowsParameters {
   /**
    * Filters out Kbs that don't have an InstallationRebootBehavior of 'NeverReboots' when this is set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WindowsParameters.excludeKbsRequiringReboot has a boolean wire value; preserve the published property contract."
   excludeKbsRequiringReboot?: boolean;
 
   /**
@@ -2642,6 +2651,7 @@ model MachineInstallPatchesResult {
   /**
    * Whether the operation ran out of time before it completed all its intended actions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MachineInstallPatchesResult.maintenanceWindowExceeded has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   maintenanceWindowExceeded?: boolean;
 
@@ -2752,11 +2762,13 @@ model MachineExtensionUpdateProperties {
   /**
    * Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MachineExtensionUpdateProperties.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean;
 
   /**
    * Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MachineExtensionUpdateProperties.autoUpgradeMinorVersion has a boolean wire value; preserve the published property contract."
   autoUpgradeMinorVersion?: boolean;
 
   /**
@@ -2956,6 +2968,7 @@ model OperationValue {
   /**
    * This property indicates if the operation is an action or a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OperationValue.isDataAction has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDataAction?: boolean;
 }
@@ -3013,6 +3026,7 @@ model MachineRunCommandProperties {
   /**
    * Optional. If set to true, provisioning will complete as soon as script starts and will not wait for script to complete.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MachineRunCommandProperties.asyncExecution has a boolean wire value; preserve the published property contract."
   asyncExecution?: boolean = false;
 
   /**
@@ -3980,6 +3994,7 @@ model VmApplicationProperties {
   /**
    * Indicates whether an application operation failure causes the deployment to fail.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VmApplicationProperties.treatFailureAsDeploymentFailure has a boolean wire value; preserve the published property contract."
   treatFailureAsDeploymentFailure?: boolean;
 
   /**

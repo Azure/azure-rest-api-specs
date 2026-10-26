@@ -576,6 +576,7 @@ model Role {
   /**
    * Indicates whether encrypt the data disks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Role.encryptDataDisks has a boolean wire value; preserve the published property contract."
   encryptDataDisks?: boolean = false;
 }
 
@@ -856,6 +857,7 @@ model ApplicationGetHttpsEndpoint {
   /**
    * The value indicates whether to disable GatewayAuth.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ApplicationGetHttpsEndpoint.disableGatewayAuth has a boolean wire value; preserve the published property contract."
   disableGatewayAuth?: boolean;
 }
 
@@ -990,6 +992,7 @@ model IPConfigurationProperties {
   /**
    * Indicates whether this IP configuration is primary for the corresponding NIC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IPConfigurationProperties.primary has a boolean wire value; preserve the published property contract."
   primary?: boolean;
 
   /**
@@ -1318,6 +1321,7 @@ model StorageAccount {
   /**
    * Whether or not the storage account is the default storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StorageAccount.isDefault has a boolean wire value; preserve the published property contract."
   isDefault?: boolean;
 
   /**
@@ -1360,6 +1364,7 @@ model StorageAccount {
   /**
    * Enable secure channel or not, it's an optional field. Default value is false when cluster version < 5.1 and true when cluster version >= 5.1 ,
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StorageAccount.enableSecureChannel has a boolean wire value; preserve the published property contract."
   enableSecureChannel?: boolean;
 }
 
@@ -1395,6 +1400,7 @@ model DiskEncryptionProperties {
   /**
    * Indicates whether or not resource disk encryption is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DiskEncryptionProperties.encryptionAtHost has a boolean wire value; preserve the published property contract."
   encryptionAtHost?: boolean = false;
 }
 
@@ -1405,6 +1411,7 @@ model EncryptionInTransitProperties {
   /**
    * Indicates whether or not inter cluster node communication is encrypted in transit.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EncryptionInTransitProperties.isEncryptionInTransitEnabled has a boolean wire value; preserve the published property contract."
   isEncryptionInTransitEnabled?: boolean = false;
 }
 
@@ -1455,6 +1462,7 @@ model ComputeIsolationProperties {
   /**
    * The flag indicates whether enable compute isolation or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ComputeIsolationProperties.enableComputeIsolation has a boolean wire value; preserve the published property contract."
   enableComputeIsolation?: boolean = false;
 
   /**
@@ -1874,6 +1882,7 @@ model UpdateGatewaySettingsParameters {
    * Indicates whether or not the gateway settings based authorization is enabled.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UpdateGatewaySettingsParameters.restAuthCredential.isEnabled has a boolean wire value; preserve the published property contract."
   `restAuthCredential.isEnabled`?: boolean = true;
 
   /**
@@ -1954,6 +1963,7 @@ model ClusterMonitoringResponse {
   /**
    * The status of the monitor on the HDInsight cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterMonitoringResponse.clusterMonitoringEnabled has a boolean wire value; preserve the published property contract."
   clusterMonitoringEnabled?: boolean;
 
   /**
@@ -2021,6 +2031,7 @@ model AzureMonitorResponse {
   /**
    * The status of the monitor on the HDInsight cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureMonitorResponse.clusterMonitoringEnabled has a boolean wire value; preserve the published property contract."
   clusterMonitoringEnabled?: boolean;
 
   /**
@@ -2107,6 +2118,7 @@ model VersionSpec {
   /**
    * Whether or not the version is the default version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VersionSpec.isDefault has a boolean wire value; preserve the published property contract."
   isDefault?: boolean;
 
   /**
@@ -2342,11 +2354,13 @@ model VmSizeProperty {
   /**
    * This indicates this vm size is supported by virtual machines or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VmSizeProperty.supportedByVirtualMachines has a boolean wire value; preserve the published property contract."
   supportedByVirtualMachines?: boolean;
 
   /**
    * The indicates this vm size is supported by web worker roles or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VmSizeProperty.supportedByWebWorkerRoles has a boolean wire value; preserve the published property contract."
   supportedByWebWorkerRoles?: boolean;
 
   /**
@@ -2444,6 +2458,7 @@ model NameAvailabilityCheckResult {
   /**
    * This indicates whether the name is available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NameAvailabilityCheckResult.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**
@@ -2483,6 +2498,7 @@ model ClusterCreateRequestValidationParameters
   /**
    * This indicates whether fetch Aadds resource or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterCreateRequestValidationParameters.fetchAaddsResource has a boolean wire value; preserve the published property contract."
   fetchAaddsResource?: boolean;
 }
 
@@ -2551,11 +2567,13 @@ model AaddsResourceDetails {
   /**
    * This indicates whether initial sync complete or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AaddsResourceDetails.initialSyncComplete has a boolean wire value; preserve the published property contract."
   initialSyncComplete?: boolean;
 
   /**
    * This indicates whether enable ldaps or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AaddsResourceDetails.ldapsEnabled has a boolean wire value; preserve the published property contract."
   ldapsEnabled?: boolean;
 
   /**
@@ -2706,6 +2724,7 @@ model MetricSpecifications {
   /**
    * The flag indicates whether enable regional mdm account or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecifications.enableRegionalMdmAccount has a boolean wire value; preserve the published property contract."
   enableRegionalMdmAccount?: boolean;
 
   /**
@@ -2726,6 +2745,7 @@ model MetricSpecifications {
   /**
    * The flag indicates whether filling gap with zero.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecifications.fillGapWithZero has a boolean wire value; preserve the published property contract."
   fillGapWithZero?: boolean;
 
   /**
@@ -2741,6 +2761,7 @@ model MetricSpecifications {
   /**
    * The flag indicates whether the metric is internal or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecifications.isInternal has a boolean wire value; preserve the published property contract."
   isInternal?: boolean;
 
   /**
@@ -2777,6 +2798,7 @@ model Dimension {
   /**
    * The flag indicates whether the metric will be exported for shoebox or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Dimension.toBeExportedForShoebox has a boolean wire value; preserve the published property contract."
   toBeExportedForShoebox?: boolean;
 }
 
@@ -2804,6 +2826,7 @@ model ExecuteScriptActionParameters {
   /**
    * Gets or sets if the scripts needs to be persisted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExecuteScriptActionParameters.persistOnSuccess has a boolean wire value; preserve the published property contract."
   persistOnSuccess: boolean;
 }
 

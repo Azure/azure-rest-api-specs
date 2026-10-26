@@ -1249,11 +1249,13 @@ model CustomRolloutSpecification {
   /**
    * Whether refreshing subscription registration is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CustomRolloutSpecification.refreshSubscriptionRegistration has a boolean wire value; preserve the published property contract."
   refreshSubscriptionRegistration?: boolean;
 
   /**
    * Whether release scope validation should be skipped.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CustomRolloutSpecification.skipReleaseScopeValidation has a boolean wire value; preserve the published property contract."
   skipReleaseScopeValidation?: boolean;
 
   /**
@@ -1293,6 +1295,7 @@ model RolloutOrchestrationMetadata {
   /**
    * Whether the rollout is used for manifest buildout.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RolloutOrchestrationMetadata.isForManifestBuildout has a boolean wire value; preserve the published property contract."
   isForManifestBuildout?: boolean;
 
   /**
@@ -1321,8 +1324,10 @@ model RolloutOrchestrationMetadata {
  */
 model CustomRolloutSpecificationAutoProvisionConfig {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CustomRolloutSpecificationAutoProvisionConfig.storage has a boolean wire value; preserve the published property contract."
   storage?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CustomRolloutSpecificationAutoProvisionConfig.resourceGraph has a boolean wire value; preserve the published property contract."
   resourceGraph?: boolean;
 }
 
@@ -1386,6 +1391,7 @@ model ProviderRegistrationProperties
   /**
    * Indicates whether automatic registration for the preset resource types is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProviderRegistrationProperties.enablePresetResourceTypes has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_10_01)
   enablePresetResourceTypes?: boolean;
 
@@ -1488,6 +1494,7 @@ model ResourceProviderAuthorizationManagedByAuthorization {
   /**
    * Indicates whether the managed by resource role definition ID should be inherited.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceProviderAuthorizationManagedByAuthorization.allowManagedByInheritance has a boolean wire value; preserve the published property contract."
   allowManagedByInheritance?: boolean;
 }
 
@@ -1625,6 +1632,7 @@ model TokenAuthConfiguration {
   /**
    * Whether certification authentication fallback is disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TokenAuthConfiguration.disableCertificateAuthenticationFallback has a boolean wire value; preserve the published property contract."
   disableCertificateAuthenticationFallback?: boolean;
 }
 
@@ -1977,6 +1985,7 @@ model ResourceProviderManagementExpeditedRolloutMetadata {
   /**
    * Expedited rollout enabled?
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceProviderManagementExpeditedRolloutMetadata.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2018,6 +2027,7 @@ model TemplateDeploymentOptions {
   /**
    * Whether preflight is supported.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TemplateDeploymentOptions.preflightSupported has a boolean wire value; preserve the published property contract."
   preflightSupported?: boolean;
 
   /**
@@ -2031,6 +2041,7 @@ model ResourceProviderEndpoint {
   /**
    * Whether the endpoint is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceProviderEndpoint.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2324,6 +2335,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * Whether async operation is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceTypeRegistrationProperties.enableAsyncOperation has a boolean wire value; preserve the published property contract."
   enableAsyncOperation?: boolean;
 
   /**
@@ -2335,6 +2347,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * Whether third party S2S is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceTypeRegistrationProperties.enableThirdPartyS2S has a boolean wire value; preserve the published property contract."
   enableThirdPartyS2S?: boolean;
 
   /**
@@ -2345,6 +2358,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * Whether it is pure proxy.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceTypeRegistrationProperties.isPureProxy has a boolean wire value; preserve the published property contract."
   isPureProxy?: boolean;
 
   /**
@@ -2422,6 +2436,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * Indicates whether super scale is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceTypeRegistrationProperties.superScaleEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_10_01)
   superScaleEnabled?: boolean;
 
@@ -2518,6 +2533,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * The allow empty role assignments.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceTypeRegistrationProperties.allowEmptyRoleAssignments has a boolean wire value; preserve the published property contract."
   allowEmptyRoleAssignments?: boolean;
 
   /**
@@ -2607,6 +2623,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * Whether tags are supported.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceTypeRegistrationProperties.supportsTags has a boolean wire value; preserve the published property contract."
   supportsTags?: boolean;
 
   /**
@@ -2622,6 +2639,7 @@ model ResourceTypeRegistrationProperties {
   /**
    * Add resource list target locations?
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceTypeRegistrationProperties.addResourceListTargetLocations has a boolean wire value; preserve the published property contract."
   addResourceListTargetLocations?: boolean;
 
   /**
@@ -2660,6 +2678,7 @@ model ResourceTypeEndpoint {
   /**
    * Whether the endpoint is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceTypeEndpoint.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3024,6 +3043,7 @@ model CheckNameAvailabilitySpecifications {
   /**
    * Whether default validation is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CheckNameAvailabilitySpecifications.enableDefaultValidation has a boolean wire value; preserve the published property contract."
   enableDefaultValidation?: boolean;
 
   /**
@@ -3088,16 +3108,19 @@ model ResourceMovePolicy {
   /**
    * Whether validation is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceMovePolicy.validationRequired has a boolean wire value; preserve the published property contract."
   validationRequired?: boolean;
 
   /**
    * Whether cross resource group move is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceMovePolicy.crossResourceGroupMoveEnabled has a boolean wire value; preserve the published property contract."
   crossResourceGroupMoveEnabled?: boolean;
 
   /**
    * Whether cross subscription move is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceMovePolicy.crossSubscriptionMoveEnabled has a boolean wire value; preserve the published property contract."
   crossSubscriptionMoveEnabled?: boolean;
 }
 
@@ -3122,6 +3145,7 @@ model ResourceGraphConfiguration {
   /**
    * Whether it's enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceGraphConfiguration.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3151,6 +3175,7 @@ model OpenApiValidation {
   /**
    * Indicates whether a non compliance response is allowed for a LIST call
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OpenApiValidation.allowNoncompliantCollectionResponse has a boolean wire value; preserve the published property contract."
   allowNoncompliantCollectionResponse?: boolean;
 }
 
@@ -3356,6 +3381,7 @@ model ResourceTypeRegistrationPropertiesMarketplaceOptions {
   /**
    * Add-on plan conversion allowed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceTypeRegistrationPropertiesMarketplaceOptions.addOnPlanConversionAllowed has a boolean wire value; preserve the published property contract."
   addOnPlanConversionAllowed?: boolean;
 }
 
@@ -3379,6 +3405,7 @@ model ResourceTypeRegistrationPropertiesResourceCache {
   /**
    * Enable resource cache.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceTypeRegistrationPropertiesResourceCache.enableResourceCache has a boolean wire value; preserve the published property contract."
   enableResourceCache?: boolean;
 
   /**
@@ -3602,6 +3629,7 @@ model CheckinManifestInfo {
   /**
    * Whether the manifest is checked in.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CheckinManifestInfo.isCheckedIn has a boolean wire value; preserve the published property contract."
   isCheckedIn: boolean;
 
   /**
@@ -3723,6 +3751,7 @@ model ExpeditedRolloutDefinition {
   /**
    * Indicates whether expedited rollout is enabled/disabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExpeditedRolloutDefinition.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3811,11 +3840,13 @@ model DefaultRolloutSpecificationAutoProvisionConfig {
   /**
    * Whether auto provisioning for storage is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DefaultRolloutSpecificationAutoProvisionConfig.storage has a boolean wire value; preserve the published property contract."
   storage?: boolean;
 
   /**
    * Whether auto provisioning for resource graph is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DefaultRolloutSpecificationAutoProvisionConfig.resourceGraph has a boolean wire value; preserve the published property contract."
   resourceGraph?: boolean;
 }
 
@@ -4252,6 +4283,7 @@ model ReRegisterSubscriptionMetadata {
   /**
    * Whether it's enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReRegisterSubscriptionMetadata.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -4366,6 +4398,7 @@ model OperationsDefinition {
   /**
    * Indicates whether the operation applies to data-plane.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OperationsDefinition.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -4446,6 +4479,7 @@ model LocalizedOperationDefinition {
   /**
    * Indicates whether the operation applies to data-plane.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LocalizedOperationDefinition.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -5016,6 +5050,7 @@ model ApplicationDataAuthorization {
   /**
    * Exclude application id from 'providerAuthorizations' section of manifest?
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ApplicationDataAuthorization.excludeApplicationIdFromManifest has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_10_01)
   excludeApplicationIdFromManifest?: boolean;
 }
@@ -5253,6 +5288,7 @@ model ResourceTypeManagedResourceGroupConfiguration {
   /**
    * Indicates whether the managed resource group configuration is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceTypeManagedResourceGroupConfiguration.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -5279,6 +5315,7 @@ model ManagedResourceGroupDenyAssignmentConfiguration {
   /**
    * Indicates whether the deny assignment configuration is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedResourceGroupDenyAssignmentConfiguration.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**

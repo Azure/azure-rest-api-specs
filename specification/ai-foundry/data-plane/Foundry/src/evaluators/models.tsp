@@ -139,6 +139,7 @@ model Dimension {
   @maxValue(10)
   weight: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Dimension.always_applicable has a boolean wire value; preserve the published property contract."
   @doc("When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.")
   always_applicable?: boolean = false;
 }
@@ -478,6 +479,7 @@ model EvaluatorMetric {
   @doc("Default pass/fail threshold for this metric.")
   threshold?: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EvaluatorMetric.is_primary has a boolean wire value; preserve the published property contract."
   @doc("Indicates if this metric is primary when there are multiple metrics.")
   is_primary?: boolean;
 }

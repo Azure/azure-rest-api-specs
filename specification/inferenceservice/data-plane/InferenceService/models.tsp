@@ -28,6 +28,7 @@ model SemanticRerankingInferenceContent {
   documents: string[];
 
   /** Whether the response should include the submitted documents. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SemanticRerankingInferenceContent.returnDocuments has a boolean wire value; preserve the published property contract."
   returnDocuments?: boolean;
 
   /** The maximum number of ranked documents to return. */
@@ -41,6 +42,7 @@ model SemanticRerankingInferenceContent {
   batchSize?: int32;
 
   /** Whether to return documents sorted by relevance score. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SemanticRerankingInferenceContent.sort has a boolean wire value; preserve the published property contract."
   sort?: boolean;
 
   /** The format of the submitted documents. */
@@ -59,6 +61,7 @@ model SemanticRerankingInferenceContent {
   `model`?: string;
 
   /** Whether to return sentence-level scores in the response. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SemanticRerankingInferenceContent.returnSentenceScore has a boolean wire value; preserve the published property contract."
   returnSentenceScore?: boolean;
 }
 

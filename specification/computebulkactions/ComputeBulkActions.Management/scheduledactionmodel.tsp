@@ -424,6 +424,7 @@ model DeleteResourceOperationResponse {
 model ExecuteDeleteRequest {
   ...ExecuteTypeRequest;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExecuteDeleteRequest.forceDeletion has a boolean wire value; preserve the published property contract."
   @doc("Forced delete resource item")
   forceDeletion?: boolean;
 }

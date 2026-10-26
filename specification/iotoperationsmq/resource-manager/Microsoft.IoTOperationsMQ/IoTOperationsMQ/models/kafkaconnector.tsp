@@ -78,6 +78,7 @@ model KafkaRemoteBrokerAuthenticationProperties {
   @doc("The type of authentication to use for Kafka remote broker.")
   authType?: KafkaRemoteBrokerAuthenticationTypes;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KafkaRemoteBrokerAuthenticationProperties.enabled has a boolean wire value; preserve the published property contract."
   @doc("If authentication is enabled for Kafka remote broker.")
   enabled: boolean;
 }
@@ -156,6 +157,7 @@ model KafkaX509Authentication {
 
 @doc("Kafka RemoteBrokerConnection TLS details")
 model KafkaRemoteBrokerConnectionTls {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KafkaRemoteBrokerConnectionTls.tlsEnabled has a boolean wire value; preserve the published property contract."
   @doc("Tls Enabled on Remote Broker Connection.")
   tlsEnabled: boolean;
 
@@ -216,6 +218,7 @@ model KafkaTopicMapProperties {
 // Add KafkaTopicMapBatching properties.
 @doc("Kafka TopicMap Batching properties")
 model KafkaTopicMapBatching {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KafkaTopicMapBatching.enabled has a boolean wire value; preserve the published property contract."
   @doc("The setting to enable or disable batching.")
   enabled?: boolean = false;
 

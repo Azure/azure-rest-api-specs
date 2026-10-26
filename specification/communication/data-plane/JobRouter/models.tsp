@@ -438,6 +438,7 @@ model DistributionMode {
   @doc("Governs the maximum number of active concurrent offers a job can have.")
   maxConcurrentOffers?: int32 = 1;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DistributionMode.bypassSelectors has a boolean wire value; preserve the published property contract."
   @doc("If set to true, then router will match workers to jobs even if they don't match label selectors. Warning: You may get workers that are not qualified for a job they are matched with if you set this variable to true. This flag is intended more for temporary usage. By default, set to false.")
   bypassSelectors?: boolean = false;
 
@@ -571,6 +572,7 @@ model RouterWorkerSelector {
   @doc("Describes how long this label selector is valid in seconds.")
   expiresAfterSeconds?: float64;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RouterWorkerSelector.expedite has a boolean wire value; preserve the published property contract."
   @doc("Pushes a job to the front of the queue as long as this selector is active.")
   expedite?: boolean;
 
@@ -695,6 +697,7 @@ model RouterJobPositionDetails {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request payload for unassigning a job.")
 model UnassignJobOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UnassignJobOptions.suspendMatching has a boolean wire value; preserve the published property contract."
   @doc("If SuspendMatching is true, then a job is not queued for re-matching with a worker.")
   suspendMatching?: boolean;
 }
@@ -811,6 +814,7 @@ model RouterWorker {
   @visibility(Lifecycle.Read)
   loadRatio?: float64;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RouterWorker.availableForOffers has a boolean wire value; preserve the published property contract."
   @doc("A flag indicating this worker is open to receive offers or not.")
   availableForOffers?: boolean;
 
@@ -892,9 +896,11 @@ model ScoringRuleOptions {
     ScoringRuleParameterSelector.workerSelectors
   ];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScoringRuleOptions.isBatchScoringEnabled has a boolean wire value; preserve the published property contract."
   @doc("If set to true, will score workers in batches, and the parameter name of the worker labels will be sent as `workers`. By default, set to false and the parameter name for the worker labels will be sent as `worker`. Note: If enabled, use 'batchSize' to set batch size.")
   isBatchScoringEnabled?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScoringRuleOptions.descendingOrder has a boolean wire value; preserve the published property contract."
   @doc("If false, will sort scores by ascending order. By default, set to true.")
   descendingOrder?: boolean = true;
 }
@@ -1365,6 +1371,7 @@ alias ListWorkerQueryParams = ListQueryParametersTrait<{
   @query
   queueId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ListWorkerQueryParams.hasCapacity has a boolean wire value; preserve the published property contract."
   @doc("If set to true, select only workers who have capacity for the channel specified by `channelId` or for any channel if `channelId` not specified. If set to false, then will return all workers including workers without any capacity for jobs. Defaults to false.")
   @query
   hasCapacity?: boolean;

@@ -2432,6 +2432,7 @@ model CheckEndpointNameAvailabilityOutput {
   /**
    * Indicates whether the name is available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CheckEndpointNameAvailabilityOutput.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
@@ -2522,6 +2523,7 @@ model CheckNameAvailabilityOutput {
   /**
    * Indicates whether the name is available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CheckNameAvailabilityOutput.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
@@ -3000,6 +3002,7 @@ model ValidateCustomDomainOutput {
   /**
    * Indicates whether the custom domain is valid or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ValidateCustomDomainOutput.customDomainValidated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   customDomainValidated?: boolean;
 
@@ -3235,6 +3238,7 @@ model AFDOriginUpdatePropertiesParameters {
   /**
    * Whether to enable certificate name check at origin level
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AFDOriginUpdatePropertiesParameters.enforceCertificateNameCheck has a boolean wire value; preserve the published property contract."
   enforceCertificateNameCheck?: boolean = true;
 
   /**
@@ -3421,6 +3425,7 @@ model ActivatedResourceReference {
   /**
    * Whether the resource is active or inactive
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ActivatedResourceReference.isActive has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isActive?: boolean;
 }
@@ -3457,6 +3462,7 @@ model CompressionSettings {
   /**
    * Indicates whether content compression is enabled on AzureFrontDoor. Default value is false. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on AzureFrontDoor when requested content is smaller than 1 byte or larger than 1 MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CompressionSettings.isCompressionEnabled has a boolean wire value; preserve the published property contract."
   isCompressionEnabled?: boolean;
 }
 
@@ -3490,6 +3496,7 @@ model RuleSetProperties extends AFDStateProperties {
    * This property can only be set during rule set creation and cannot be updated later.
    * For switching modes, a new rule set needs to be created with the desired mode and rules need to be migrated to the new rule set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RuleSetProperties.batchMode has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Create, Lifecycle.Read)
   batchMode?: boolean;
 
@@ -3956,6 +3963,7 @@ model ResourcesResponseEndpointsItem {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourcesResponseEndpointsItem.history has a boolean wire value; preserve the published property contract."
   history?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customDomains?: ResourcesResponseEndpointsPropertiesItemsItem[];
@@ -3970,6 +3978,7 @@ model ResourcesResponseEndpointsPropertiesItemsItem {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endpointId?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourcesResponseEndpointsPropertiesItemsItem.history has a boolean wire value; preserve the published property contract."
   history?: boolean;
 }
 
@@ -3982,6 +3991,7 @@ model ResourcesResponseCustomDomainsItem {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endpointId?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourcesResponseCustomDomainsItem.history has a boolean wire value; preserve the published property contract."
   history?: boolean;
 }
 
@@ -4158,6 +4168,7 @@ model CanMigrateProperties {
   /**
    * Flag that says if the profile can be migrated
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CanMigrateProperties.canMigrate has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   canMigrate?: boolean;
 
@@ -4434,6 +4445,7 @@ model DeepCreatedOriginProperties {
   /**
    * Origin is enabled for load balancing or not. By default, origin is always enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeepCreatedOriginProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -4602,16 +4614,19 @@ model EndpointPropertiesUpdateParameters {
   /**
    * Indicates whether content compression is enabled on CDN. Default value is false. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on CDN when requested content is smaller than 1 byte or larger than 1 MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EndpointPropertiesUpdateParameters.isCompressionEnabled has a boolean wire value; preserve the published property contract."
   isCompressionEnabled?: boolean;
 
   /**
    * Indicates whether HTTP traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EndpointPropertiesUpdateParameters.isHttpAllowed has a boolean wire value; preserve the published property contract."
   isHttpAllowed?: boolean = true;
 
   /**
    * Indicates whether HTTPS traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EndpointPropertiesUpdateParameters.isHttpsAllowed has a boolean wire value; preserve the published property contract."
   isHttpsAllowed?: boolean = true;
 
   /**
@@ -4890,6 +4905,7 @@ model OriginUpdatePropertiesParameters {
   /**
    * Origin is enabled for load balancing or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OriginUpdatePropertiesParameters.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -5100,6 +5116,7 @@ model ValidateProbeOutput {
   /**
    * Indicates whether the probe URL is accepted or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ValidateProbeOutput.isValid has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isValid?: boolean;
 
@@ -5147,6 +5164,7 @@ model Operation {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -5298,6 +5316,7 @@ model MetricSpecification {
   /**
    * Property to specify whether to fill gap with zero.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecification.fillGapWithZero has a boolean wire value; preserve the published property contract."
   fillGapWithZero?: boolean;
 
   /**
@@ -5308,6 +5327,7 @@ model MetricSpecification {
   /**
    * Property to specify metric is internal or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecification.isInternal has a boolean wire value; preserve the published property contract."
   isInternal?: boolean;
 }
 
@@ -5658,6 +5678,7 @@ model MatchCondition {
   /**
    * Describes if the result of this condition should be negated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MatchCondition.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean;
 
   /**
@@ -6347,6 +6368,7 @@ model MatchConditionAfd {
   /**
    * Describes if the result of this condition should be negated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MatchConditionAfd.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean;
 
   /**
@@ -6573,6 +6595,7 @@ model CustomerCertificate extends Certificate {
   /**
    * Whether to use the latest version for the certificate
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CustomerCertificate.useLatestVersion has a boolean wire value; preserve the published property contract."
   useLatestVersion?: boolean;
 
   /**
@@ -6769,6 +6792,7 @@ model SecurityPolicyWebApplicationFirewallParameters
   /**
    * Indicates if this is a profile-level WAF policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SecurityPolicyWebApplicationFirewallParameters.isProfileLevel has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_07_01)
   isProfileLevel?: boolean;
 
@@ -6842,6 +6866,7 @@ model CustomerCertificateParameters extends SecretParameters {
   /**
    * Whether to use the latest version for the certificate
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CustomerCertificateParameters.useLatestVersion has a boolean wire value; preserve the published property contract."
   useLatestVersion?: boolean;
 
   /**
@@ -7215,6 +7240,7 @@ model RemoteAddressMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RemoteAddressMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7258,6 +7284,7 @@ model RequestMethodMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RequestMethodMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7301,6 +7328,7 @@ model QueryStringMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing QueryStringMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7348,6 +7376,7 @@ model PostArgsMatchConditionParameters extends DeliveryRuleConditionParameters {
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PostArgsMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7391,6 +7420,7 @@ model RequestUriMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RequestUriMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7439,6 +7469,7 @@ model RequestHeaderMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RequestHeaderMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7482,6 +7513,7 @@ model RequestBodyMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RequestBodyMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7525,6 +7557,7 @@ model RequestSchemeMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RequestSchemeMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7567,6 +7600,7 @@ model UrlPathMatchConditionParameters extends DeliveryRuleConditionParameters {
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UrlPathMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7610,6 +7644,7 @@ model UrlFileExtensionMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UrlFileExtensionMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7653,6 +7688,7 @@ model UrlFileNameMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UrlFileNameMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7696,6 +7732,7 @@ model HttpVersionMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing HttpVersionMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7743,6 +7780,7 @@ model CookiesMatchConditionParameters extends DeliveryRuleConditionParameters {
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CookiesMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7785,6 +7823,7 @@ model IsDeviceMatchConditionParameters extends DeliveryRuleConditionParameters {
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IsDeviceMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7828,6 +7867,7 @@ model SocketAddrMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SocketAddrMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7871,6 +7911,7 @@ model ClientPortMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClientPortMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7914,6 +7955,7 @@ model ServerPortMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServerPortMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7956,6 +7998,7 @@ model HostNameMatchConditionParameters extends DeliveryRuleConditionParameters {
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing HostNameMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -7999,6 +8042,7 @@ model SslProtocolMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SslProtocolMatchConditionParameters.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean = false;
 
   /**
@@ -8196,6 +8240,7 @@ model UrlRewriteActionParameters extends DeliveryRuleActionParameters {
   /**
    * Whether to preserve unmatched path. Default value is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UrlRewriteActionParameters.preserveUnmatchedPath has a boolean wire value; preserve the published property contract."
   preserveUnmatchedPath?: boolean;
 
   typeName: "DeliveryRuleUrlRewriteActionParameters";

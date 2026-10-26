@@ -128,6 +128,7 @@ interface JobExecutions {
       /**
        * If specified, only active or only completed job executions are included.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByJob.isActive has a boolean wire value; preserve the published property contract."
       @query("isActive")
       isActive?: boolean;
 
@@ -230,6 +231,7 @@ interface JobStepExecutions {
       /**
        * If specified, only active or only completed job executions are included.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ListByJobExecution.isActive has a boolean wire value; preserve the published property contract."
       @query("isActive")
       isActive?: boolean;
 
@@ -338,6 +340,7 @@ interface JobTargetExecutions {
       /**
        * If specified, only active or only completed job executions are included.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ListByStep.isActive has a boolean wire value; preserve the published property contract."
       @query("isActive")
       isActive?: boolean;
 
@@ -393,6 +396,7 @@ interface JobTargetExecutions {
       /**
        * If specified, only active or only completed job executions are included.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByJobExecution.isActive has a boolean wire value; preserve the published property contract."
       @query("isActive")
       isActive?: boolean;
 

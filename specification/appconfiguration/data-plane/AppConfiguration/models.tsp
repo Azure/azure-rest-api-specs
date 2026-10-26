@@ -243,6 +243,7 @@ model KeyValue {
   @doc("The description of the key-value.")
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KeyValue.locked has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the key-value is locked.")
   locked?: boolean;
 
@@ -274,6 +275,7 @@ model FeatureFlag {
   @doc("The name of the feature flag.")
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FeatureFlag.enabled has a boolean wire value; preserve the published property contract."
   @doc("The enabled state of the feature flag.")
   enabled: boolean;
 
@@ -439,6 +441,7 @@ model GroupAllocation {
 @doc("Feature Flag Telemetry object.")
 @added(Versions.v2026_05_01_preview)
 model FeatureFlagTelemetryConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FeatureFlagTelemetryConfiguration.enabled has a boolean wire value; preserve the published property contract."
   @doc("The enabled state of the telemetry.")
   enabled: boolean;
 

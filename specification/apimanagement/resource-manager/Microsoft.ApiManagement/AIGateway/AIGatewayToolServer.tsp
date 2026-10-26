@@ -254,6 +254,7 @@ model AiGatewayToolServerEndpoint {
   tools?: string[];
 
   /** Whether endpoint failure fails the whole federation. Defaults to false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AiGatewayToolServerEndpoint.required has a boolean wire value; preserve the published property contract."
   required?: boolean = false;
 }
 
@@ -331,6 +332,7 @@ model AiGatewayToolServerEndpointUpdate {
   tools?: string[];
 
   /** Whether endpoint failure fails the whole federation. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AiGatewayToolServerEndpointUpdate.required has a boolean wire value; preserve the published property contract."
   required?: boolean;
 }
 
@@ -372,6 +374,7 @@ model AiGatewayToolServerUpdateProperties {
   path?: string;
 
   /** Whether a subscription is required to invoke the tool server. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AiGatewayToolServerUpdateProperties.subscriptionRequired has a boolean wire value; preserve the published property contract."
   subscriptionRequired?: boolean;
 }
 
@@ -420,6 +423,7 @@ model AiGatewayToolServerProperties {
   path?: string;
 
   /** Whether a subscription is required to invoke the tool server. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AiGatewayToolServerProperties.subscriptionRequired has a boolean wire value; preserve the published property contract."
   subscriptionRequired?: boolean;
 
   /** Read-only invocation URLs, with optional SDK metadata when endpoint enrichment is enabled. */

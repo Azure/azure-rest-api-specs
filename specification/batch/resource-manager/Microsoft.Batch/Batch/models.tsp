@@ -1308,6 +1308,7 @@ model BatchAccountProperties {
    * If this flag is true, dedicated core quota is enforced via both the dedicatedCoreQuotaPerVMFamily and dedicatedCoreQuota properties on the account. If this flag is false, dedicated core quota is enforced only via the dedicatedCoreQuota property on the account and does not consider Virtual Machine family.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BatchAccountProperties.dedicatedCoreQuotaPerVMFamilyEnforced has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   @summary("A value indicating whether core quotas per Virtual Machine family are enforced for this account")
   dedicatedCoreQuotaPerVMFamilyEnforced?: boolean;
@@ -1659,6 +1660,7 @@ model ApplicationProperties {
   /**
    * A value indicating whether packages within the application may be overwritten using the same version string.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ApplicationProperties.allowUpdates has a boolean wire value; preserve the published property contract."
   allowUpdates?: boolean;
 
   /**
@@ -1754,6 +1756,7 @@ model Operation {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -1839,6 +1842,7 @@ model CheckNameAvailabilityResult {
   /**
    * Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or invalid and cannot be used.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CheckNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
@@ -2402,6 +2406,7 @@ model WindowsConfiguration {
   /**
    * If omitted, the default value is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WindowsConfiguration.enableAutomaticUpdates has a boolean wire value; preserve the published property contract."
   @summary("Whether automatic updates are enabled on the virtual machine.")
   enableAutomaticUpdates?: boolean;
 }
@@ -2541,6 +2546,7 @@ model DiskCustomerManagedKey {
   /**
    * Set this flag to true to enable auto-updating of the Disk Encryption to the latest key version. Default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DiskCustomerManagedKey.rotationToLatestKeyVersionEnabled has a boolean wire value; preserve the published property contract."
   rotationToLatestKeyVersionEnabled?: boolean;
 
   /**
@@ -2593,11 +2599,13 @@ model VMExtension {
   /**
    * Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMExtension.autoUpgradeMinorVersion has a boolean wire value; preserve the published property contract."
   autoUpgradeMinorVersion?: boolean;
 
   /**
    * Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMExtension.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean;
 
   /**
@@ -2655,6 +2663,7 @@ model OSDisk {
   /**
    * Specifies whether writeAccelerator should be enabled or disabled on the disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OSDisk.writeAcceleratorEnabled has a boolean wire value; preserve the published property contract."
   @summary("Specifies whether writeAccelerator should be enabled or disabled on the disk.")
   writeAcceleratorEnabled?: boolean;
 }
@@ -2748,6 +2757,7 @@ model SecurityProfile {
   /**
    * This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SecurityProfile.encryptionAtHost has a boolean wire value; preserve the published property contract."
   encryptionAtHost?: boolean;
 
   /**
@@ -2771,6 +2781,7 @@ model ProxyAgentSettings {
   /**
    * Specifies whether Metadata Security Protocol feature should be enabled on the virtual machine or virtual machine scale set. Default is False.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProxyAgentSettings.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2808,11 +2819,13 @@ model UefiSettings {
   /**
    * Specifies whether secure boot should be enabled on the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UefiSettings.secureBootEnabled has a boolean wire value; preserve the published property contract."
   secureBootEnabled?: boolean;
 
   /**
    * Specifies whether vTPM should be enabled on the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UefiSettings.vTpmEnabled has a boolean wire value; preserve the published property contract."
   vTpmEnabled?: boolean;
 }
 
@@ -2984,6 +2997,7 @@ model NetworkConfiguration {
    * Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy design that typespec didn't have a direct translation for"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkConfiguration.enableAcceleratedNetworking has a boolean wire value; preserve the published property contract."
   @summary("Whether this pool should enable accelerated networking.")
   @OpenAPI.externalDocs(
     "https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview",
@@ -3281,6 +3295,7 @@ model StartTask {
   /**
    * If true and the start task fails on a compute node, the Batch service retries the start task up to its maximum retry count (maxTaskRetryCount). If the task has still not completed successfully after all retries, then the Batch service marks the compute node unusable, and will not schedule tasks to it. This condition can be detected via the node state and scheduling error detail. If false, the Batch service will not wait for the start task to complete. In this case, other tasks can start executing on the compute node while the start task is still running; and even if the start task fails, new tasks will continue to be scheduled on the node. The default is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StartTask.waitForSuccess has a boolean wire value; preserve the published property contract."
   @summary("Whether the Batch service should wait for the start task to complete successfully (that is, to exit with exit code 0) before scheduling any tasks on the compute node.")
   waitForSuccess?: boolean;
 
@@ -3446,6 +3461,7 @@ model ContainerHostBatchBindMountEntry {
   /**
    * For Linux, if you mount this path as a read/write mode, this does not mean that all users in container have the read/write access for the path, it depends on the access in host VM. If this path is mounted read-only, all users within the container will not be able to modify the path.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContainerHostBatchBindMountEntry.isReadOnly has a boolean wire value; preserve the published property contract."
   @summary("Mount this source path as read-only mode or not. Default value is false (read/write mode).")
   isReadOnly?: boolean;
 }
@@ -3777,22 +3793,26 @@ model AutomaticOSUpgradePolicy {
   /**
    * Whether OS image rollback feature should be disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutomaticOSUpgradePolicy.disableAutomaticRollback has a boolean wire value; preserve the published property contract."
   disableAutomaticRollback?: boolean;
 
   /**
    * Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. <br /><br /> If this is set to true for Windows based pools, [WindowsConfiguration.enableAutomaticUpdates](https://learn.microsoft.com/rest/api/batchmanagement/pool/create?tabs=HTTP#windowsconfiguration) cannot be set to true.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutomaticOSUpgradePolicy.enableAutomaticOSUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticOSUpgrade?: boolean;
 
   /**
    * Indicates whether rolling upgrade policy should be used during Auto OS Upgrade. Auto OS Upgrade will fallback to the default policy if no policy is defined on the VMSS.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutomaticOSUpgradePolicy.useRollingUpgradePolicy has a boolean wire value; preserve the published property contract."
   useRollingUpgradePolicy?: boolean;
 
   /**
    * Defer OS upgrades on the TVMs if they are running tasks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutomaticOSUpgradePolicy.osRollingUpgradeDeferral has a boolean wire value; preserve the published property contract."
   osRollingUpgradeDeferral?: boolean;
 }
 
@@ -3803,6 +3823,7 @@ model RollingUpgradePolicy {
   /**
    * Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. If this field is not set, Azure Azure Batch will not set its default value. The value of enableCrossZoneUpgrade on the created VirtualMachineScaleSet will be decided by the default configurations on VirtualMachineScaleSet. This field is able to be set to true or false only when using NodePlacementConfiguration as Zonal.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RollingUpgradePolicy.enableCrossZoneUpgrade has a boolean wire value; preserve the published property contract."
   enableCrossZoneUpgrade?: boolean;
 
   /**
@@ -3834,11 +3855,13 @@ model RollingUpgradePolicy {
   /**
    * Upgrade all unhealthy instances in a scale set before any healthy instances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RollingUpgradePolicy.prioritizeUnhealthyInstances has a boolean wire value; preserve the published property contract."
   prioritizeUnhealthyInstances?: boolean;
 
   /**
    * Rollback failed instances to previous model if the Rolling Upgrade policy is violated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RollingUpgradePolicy.rollbackFailedInstancesOnPolicyBreach has a boolean wire value; preserve the published property contract."
   rollbackFailedInstancesOnPolicyBreach?: boolean;
 }
 

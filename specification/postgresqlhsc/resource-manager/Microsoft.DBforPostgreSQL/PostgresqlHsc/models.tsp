@@ -230,6 +230,7 @@ model NameAvailability {
   /**
    * Indicates whether the cluster name is available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NameAvailability.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**
@@ -307,11 +308,13 @@ model ClusterProperties {
   /**
    * If distributed tables are placed on coordinator or not. Should be set to 'true' on single node clusters. Requires shard rebalancing after value is changed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterProperties.enableShardsOnCoordinator has a boolean wire value; preserve the published property contract."
   enableShardsOnCoordinator?: boolean;
 
   /**
    * If high availability (HA) is enabled or not for the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterProperties.enableHa has a boolean wire value; preserve the published property contract."
   enableHa?: boolean;
 
   /**
@@ -333,6 +336,7 @@ model ClusterProperties {
   /**
    * If public access is enabled on coordinator.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterProperties.coordinatorEnablePublicIpAccess has a boolean wire value; preserve the published property contract."
   coordinatorEnablePublicIpAccess?: boolean;
 
   /**
@@ -359,6 +363,7 @@ model ClusterProperties {
   /**
    * If public access is enabled on worker nodes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterProperties.nodeEnablePublicIpAccess has a boolean wire value; preserve the published property contract."
   nodeEnablePublicIpAccess?: boolean;
 
   /**
@@ -420,6 +425,7 @@ model ClusterProperties {
   /**
    * If cluster backup is stored in another Azure region in addition to the copy of the backup stored in the cluster's region. Enabled only at the time of cluster creation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterProperties.enableGeoBackup has a boolean wire value; preserve the published property contract."
   enableGeoBackup?: boolean;
 
   /**
@@ -598,11 +604,13 @@ model ClusterPropertiesForUpdate {
   /**
    * If distributed tables are placed on coordinator or not. Should be set to 'true' on single node clusters. Requires shard rebalancing after value is changed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterPropertiesForUpdate.enableShardsOnCoordinator has a boolean wire value; preserve the published property contract."
   enableShardsOnCoordinator?: boolean;
 
   /**
    * If high availability (HA) is enabled or not for the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterPropertiesForUpdate.enableHa has a boolean wire value; preserve the published property contract."
   enableHa?: boolean;
 
   /**
@@ -629,6 +637,7 @@ model ClusterPropertiesForUpdate {
   /**
    * If public access is enabled on coordinator.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterPropertiesForUpdate.coordinatorEnablePublicIpAccess has a boolean wire value; preserve the published property contract."
   coordinatorEnablePublicIpAccess?: boolean;
 
   /**
@@ -655,6 +664,7 @@ model ClusterPropertiesForUpdate {
   /**
    * If public access is enabled on worker nodes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterPropertiesForUpdate.nodeEnablePublicIpAccess has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nodeEnablePublicIpAccess?: boolean;
 
@@ -689,6 +699,7 @@ model ConfigurationProperties {
   /**
    * If configuration change requires restart.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConfigurationProperties.requiresRestart has a boolean wire value; preserve the published property contract."
   requiresRestart?: boolean;
 
   /**
@@ -774,6 +785,7 @@ model ServerConfigurationProperties {
   /**
    * If configuration change requires restart.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServerConfigurationProperties.requiresRestart has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   requiresRestart?: boolean;
 
@@ -814,6 +826,7 @@ model PromoteRequest {
   /**
    * Boolean property to enable geo-redundant replica promotion.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PromoteRequest.enableGeoBackup has a boolean wire value; preserve the published property contract."
   enableGeoBackup?: boolean;
 }
 
@@ -924,17 +937,20 @@ model ServerProperties {
   /**
    * If high availability (HA) is enabled or not for the server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServerProperties.enableHa has a boolean wire value; preserve the published property contract."
   enableHa?: boolean;
 
   /**
    * If public access is enabled on server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServerProperties.enablePublicIpAccess has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   enablePublicIpAccess?: boolean;
 
   /**
    * If server database is set to read-only by system maintenance depending on high disk space usage.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServerProperties.isReadOnly has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isReadOnly?: boolean;
 

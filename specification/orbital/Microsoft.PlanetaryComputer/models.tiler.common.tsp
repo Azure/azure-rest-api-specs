@@ -528,6 +528,7 @@ model AssetQueryParameters {
   /**
    * Asset as Band
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AssetQueryParameters.assetAsBand has a boolean wire value; preserve the published property contract."
   @query("asset_as_band")
   assetAsBand?: boolean;
 
@@ -541,6 +542,7 @@ model AssetQueryParameters {
   /**
    * Apply internal Scale or Offset
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AssetQueryParameters.unscale has a boolean wire value; preserve the published property contract."
   @query("unscale")
   unscale?: boolean;
 
@@ -595,6 +597,7 @@ model MiscTileQueryParameters {
   /**
    * Add mask to the output data.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MiscTileQueryParameters.returnMask has a boolean wire value; preserve the published property contract."
   @query("return_mask")
   returnMask?: boolean = true;
 }

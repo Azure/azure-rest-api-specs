@@ -221,6 +221,7 @@ interface BillingAccounts {
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing billingRequestsListByBillingAccount.count has a boolean wire value; preserve the published property contract."
       @query("count")
       count?: boolean;
 
@@ -388,30 +389,35 @@ alias BillingAccountsListParameters = {
   /**
    * When true, results will include Billing Accounts that the user does not have a direct role assignment on if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingAccountsListParameters.includeAll has a boolean wire value; preserve the published property contract."
   @query("includeAll")
   includeAll?: boolean = false;
 
   /**
    * When true, results will include Billing Accounts that are not fully created if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingAccountsListParameters.includeAllWithoutBillingProfiles has a boolean wire value; preserve the published property contract."
   @query("includeAllWithoutBillingProfiles")
   includeAllWithoutBillingProfiles?: boolean = false;
 
   /**
    * When true, results will include any billing accounts in a deleted state.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingAccountsListParameters.includeDeleted has a boolean wire value; preserve the published property contract."
   @query("includeDeleted")
   includeDeleted?: boolean = false;
 
   /**
    * Includes billing accounts with agreement pending signature that the user has access to.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingAccountsListParameters.includePendingAgreement has a boolean wire value; preserve the published property contract."
   @query("includePendingAgreement")
   includePendingAgreement?: boolean = false;
 
   /**
    * Includes the customer's billing account of Microsoft Partner Agreement that the user has access to.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingAccountsListParameters.includeResellee has a boolean wire value; preserve the published property contract."
   @query("includeResellee")
   includeResellee?: boolean = false;
 
@@ -464,6 +470,7 @@ alias BillingRoleAssignmentsResolveByBillingAccountParameters = {
   /**
    * Resolves the scope display name for each of the role assignments.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingRoleAssignmentsResolveByBillingAccountParameters.resolveScopeDisplayNames has a boolean wire value; preserve the published property contract."
   @query("resolveScopeDisplayNames")
   resolveScopeDisplayNames?: boolean = false;
 

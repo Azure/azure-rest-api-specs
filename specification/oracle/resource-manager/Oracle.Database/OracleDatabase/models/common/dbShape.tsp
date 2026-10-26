@@ -93,6 +93,7 @@ model DatabaseSystemShapeProperties {
   @doc("The compute model of the DB system for this shape")
   computeModel?: ComputeModel;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DatabaseSystemShapeProperties.areServerTypesSupported has a boolean wire value; preserve the published property contract."
   @doc("Indicates if the shape supports database and storage server types")
   areServerTypesSupported?: boolean;
 

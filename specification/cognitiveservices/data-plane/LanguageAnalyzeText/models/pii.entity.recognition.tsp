@@ -52,6 +52,7 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
   confidenceScoreThreshold?: ConfidenceScoreThreshold;
 
   /** Disable entity validation for PII entity recognition */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PiiTaskParameters.disableEntityValidation has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   disableEntityValidation?: boolean = false;
 }
@@ -103,6 +104,7 @@ model EntitySynonym {
 @added(Versions.v2026_05_01)
 model ValueExclusionPolicy {
   /** Option to make the values excluded values case sensitive */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ValueExclusionPolicy.caseSensitive has a boolean wire value; preserve the published property contract."
   caseSensitive: boolean = false;
 
   /** List of words and terms that should be excluded from detection by the PII detection service */
@@ -125,6 +127,7 @@ model BaseRedactionPolicy {
   policyName?: string;
 
   /** (Optional) flag to indicate whether this redaction policy is the default policy to be applied when no specific policy is defined for a PII category. Only one policy can be marked as default. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BaseRedactionPolicy.isDefault has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_01)
   isDefault?: boolean = false;
 }
@@ -143,6 +146,7 @@ model CharacterMaskPolicyType extends BaseRedactionPolicy {
   unmaskLength?: int32;
 
   /** Optional parameter to indicate whether to unmask characters from the end of the redacted PII entity. Default is true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CharacterMaskPolicyType.unmaskFromEnd has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_05_15_preview)
   unmaskFromEnd?: boolean = true;
 }
@@ -154,6 +158,7 @@ model SyntheticReplacementPolicyType extends BaseRedactionPolicy {
   policyKind: RedactionPolicyKind.syntheticReplacement;
 
   /** Optional flag to indicate whether to preserve the original data format in the synthetic replacement. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SyntheticReplacementPolicyType.preserveDataFormat has a boolean wire value; preserve the published property contract."
   preserveDataFormat?: boolean;
 }
 

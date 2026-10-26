@@ -89,6 +89,7 @@ model AgentEvaluationSamplingConfiguration {
 @doc("The redaction configuration will allow the user to control what is redacted.")
 @removed(Versions.v1)
 model AgentEvaluationRedactionConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AgentEvaluationRedactionConfiguration.redactScoreProperties has a boolean wire value; preserve the published property contract."
   @doc("Redact score properties. If not specified, the default is to redact in production.")
   redactScoreProperties?: boolean;
 }

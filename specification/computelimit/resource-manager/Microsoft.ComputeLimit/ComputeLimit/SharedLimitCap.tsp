@@ -51,6 +51,7 @@ model SharedLimitCapProperties {
    * Enabling this flag is rejected if the current configuration already breaches the group limit;
    * reduce caps first, then enable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SharedLimitCapProperties.isBoundedCap has a boolean wire value; preserve the published property contract."
   isBoundedCap: boolean;
 
   ...DefaultProvisioningStateProperty;

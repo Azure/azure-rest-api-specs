@@ -124,6 +124,7 @@ model ResourceProtectionSolutionSettings {
   @visibility(Lifecycle.Read)
   replicaResources?: armResourceIdentifier[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceProtectionSolutionSettings.isAutoFailover has a boolean wire value; preserve the published property contract."
   @doc("Is AutoFailover configured for the resource replication.")
   @visibility(Lifecycle.Read)
   isAutoFailover: boolean = false;

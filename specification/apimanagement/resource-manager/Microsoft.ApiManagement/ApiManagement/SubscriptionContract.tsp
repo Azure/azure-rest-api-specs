@@ -97,6 +97,7 @@ interface SubscriptionContracts {
        *  - If false, do not send any email notification for change of state of subscription
        *  - If true, send email notification of change of state of subscription
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing createOrUpdate.notify has a boolean wire value; preserve the published property contract."
       @query("notify")
       notify?: boolean;
 
@@ -143,6 +144,7 @@ interface SubscriptionContracts {
        *  - If false, do not send any email notification for change of state of subscription
        *  - If true, send email notification of change of state of subscription
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing update.notify has a boolean wire value; preserve the published property contract."
       @query("notify")
       notify?: boolean;
 
@@ -409,6 +411,7 @@ interface WorkspaceSubscription {
        *  - If false, do not send any email notification for change of state of subscription
        *  - If true, send email notification of change of state of subscription
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing createOrUpdate.notify has a boolean wire value; preserve the published property contract."
       @query("notify")
       notify?: boolean;
 
@@ -455,6 +458,7 @@ interface WorkspaceSubscription {
        *  - If false, do not send any email notification for change of state of subscription
        *  - If true, send email notification of change of state of subscription
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing update.notify has a boolean wire value; preserve the published property contract."
       @query("notify")
       notify?: boolean;
 

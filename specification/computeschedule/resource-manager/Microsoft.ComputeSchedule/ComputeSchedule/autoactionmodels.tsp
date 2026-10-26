@@ -177,6 +177,7 @@ model NotificationProperties {
   @doc("The language the notification should be sent on.")
   language: Language;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NotificationProperties.disabled has a boolean wire value; preserve the published property contract."
   @doc("Tells if the notification is enabled or not.")
   disabled?: boolean = false;
 }

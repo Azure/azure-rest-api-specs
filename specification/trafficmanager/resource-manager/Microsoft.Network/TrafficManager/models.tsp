@@ -369,6 +369,7 @@ model DeleteOperationResult {
   /**
    * The result of the operation or request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeleteOperationResult.boolean has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   boolean?: boolean;
 }
@@ -405,6 +406,7 @@ model TrafficManagerNameAvailability {
   /**
    * Describes whether the relative name is available or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TrafficManagerNameAvailability.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**

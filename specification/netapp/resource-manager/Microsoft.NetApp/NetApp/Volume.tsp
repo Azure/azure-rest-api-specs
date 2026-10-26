@@ -155,6 +155,7 @@ model VolumeProperties {
   /**
    * If enabled (true) the snapshot the volume was created from will be automatically deleted after the volume create operation has finished.  Defaults to false
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeProperties.deleteBaseSnapshot has a boolean wire value; preserve the published property contract."
   deleteBaseSnapshot?: boolean;
 
   /**
@@ -235,17 +236,20 @@ model VolumeProperties {
   /**
    * Restoring
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeProperties.isRestoring has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isRestoring?: boolean;
 
   /**
    * If enabled (true) the volume will contain a read-only snapshot directory which provides access to each of the volume's snapshots (defaults to true).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeProperties.snapshotDirectoryVisible has a boolean wire value; preserve the published property contract."
   snapshotDirectoryVisible?: boolean = true;
 
   /**
    * Describe if a volume is KerberosEnabled. To be use with swagger version 2020-05-01 or later
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeProperties.kerberosEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   kerberosEnabled?: boolean = false;
 
@@ -258,6 +262,7 @@ model VolumeProperties {
   /**
    * Enables encryption for in-flight smb3 data. Only applicable for SMB/DualProtocol volume. To be used with swagger version 2020-08-01 or later
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeProperties.smbEncryption has a boolean wire value; preserve the published property contract."
   smbEncryption?: boolean = false;
 
   /**
@@ -274,6 +279,7 @@ model VolumeProperties {
   /**
    * Enables continuously available share property for smb volume. Only applicable for SMB volume
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeProperties.smbContinuouslyAvailable has a boolean wire value; preserve the published property contract."
   smbContinuouslyAvailable?: boolean = false;
 
   /**
@@ -309,6 +315,7 @@ model VolumeProperties {
   /**
    * Specifies whether LDAP is enabled or not for a given NFS volume.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeProperties.ldapEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapEnabled?: boolean = false;
 
@@ -336,6 +343,7 @@ model VolumeProperties {
   /**
    * Specifies whether Cool Access(tiering) is enabled for the volume.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeProperties.coolAccess has a boolean wire value; preserve the published property contract."
   coolAccess?: boolean = false;
 
   /**
@@ -392,6 +400,7 @@ model VolumeProperties {
   /**
    * Specifies if default quota is enabled for the volume.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeProperties.isDefaultQuotaEnabled has a boolean wire value; preserve the published property contract."
   isDefaultQuotaEnabled?: boolean = false;
 
   /**
@@ -446,6 +455,7 @@ model VolumeProperties {
   /**
    * Specifies if the volume is encrypted or not. Only available on volumes created or updated after 2022-01-01.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeProperties.encrypted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   encrypted?: boolean;
 
@@ -473,6 +483,7 @@ model VolumeProperties {
   /**
    * Specifies whether volume is a Large Volume or Regular Volume.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeProperties.isLargeVolume has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   isLargeVolume?: boolean = false;
 
@@ -1007,56 +1018,67 @@ model ExportPolicyRule {
   /**
    * Read only access
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportPolicyRule.unixReadOnly has a boolean wire value; preserve the published property contract."
   unixReadOnly?: boolean;
 
   /**
    * Read and write access
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportPolicyRule.unixReadWrite has a boolean wire value; preserve the published property contract."
   unixReadWrite?: boolean;
 
   /**
    * Kerberos5 Read only access. To be use with swagger version 2020-05-01 or later
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportPolicyRule.kerberos5ReadOnly has a boolean wire value; preserve the published property contract."
   kerberos5ReadOnly?: boolean = false;
 
   /**
    * Kerberos5 Read and write access. To be use with swagger version 2020-05-01 or later
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportPolicyRule.kerberos5ReadWrite has a boolean wire value; preserve the published property contract."
   kerberos5ReadWrite?: boolean = false;
 
   /**
    * Kerberos5i Read only access. To be use with swagger version 2020-05-01 or later
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportPolicyRule.kerberos5iReadOnly has a boolean wire value; preserve the published property contract."
   kerberos5iReadOnly?: boolean = false;
 
   /**
    * Kerberos5i Read and write access. To be use with swagger version 2020-05-01 or later
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportPolicyRule.kerberos5iReadWrite has a boolean wire value; preserve the published property contract."
   kerberos5iReadWrite?: boolean = false;
 
   /**
    * Kerberos5p Read only access. To be use with swagger version 2020-05-01 or later
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportPolicyRule.kerberos5pReadOnly has a boolean wire value; preserve the published property contract."
   kerberos5pReadOnly?: boolean = false;
 
   /**
    * Kerberos5p Read and write access. To be use with swagger version 2020-05-01 or later
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportPolicyRule.kerberos5pReadWrite has a boolean wire value; preserve the published property contract."
   kerberos5pReadWrite?: boolean = false;
 
   /**
    * Allows CIFS protocol
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportPolicyRule.cifs has a boolean wire value; preserve the published property contract."
   cifs?: boolean;
 
   /**
    * Allows NFSv3 protocol. Enable only for NFSv3 type volumes
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportPolicyRule.nfsv3 has a boolean wire value; preserve the published property contract."
   nfsv3?: boolean;
 
   /**
    * Allows NFSv4.1 protocol. Enable only for NFSv4.1 type volumes
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportPolicyRule.nfsv41 has a boolean wire value; preserve the published property contract."
   nfsv41?: boolean;
 
   /**
@@ -1067,6 +1089,7 @@ model ExportPolicyRule {
   /**
    * Has root access to volume
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportPolicyRule.hasRootAccess has a boolean wire value; preserve the published property contract."
   hasRootAccess?: boolean = true;
 
   /**
@@ -1155,6 +1178,7 @@ model VolumeBackupProperties {
   /**
    * Policy Enforced
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeBackupProperties.policyEnforced has a boolean wire value; preserve the published property contract."
   policyEnforced?: boolean;
 
   /**
@@ -1345,11 +1369,13 @@ model VolumeRelocationProperties {
   /**
    * Has relocation been requested for this volume
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeRelocationProperties.relocationRequested has a boolean wire value; preserve the published property contract."
   relocationRequested?: boolean;
 
   /**
    * Has relocation finished and is ready to be cleaned up
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeRelocationProperties.readyToBeFinalized has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   readyToBeFinalized?: boolean;
 }
@@ -1496,6 +1522,7 @@ model VolumePatchProperties {
   /**
    * Specifies if default quota is enabled for the volume.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumePatchProperties.isDefaultQuotaEnabled has a boolean wire value; preserve the published property contract."
   isDefaultQuotaEnabled?: boolean;
 
   /**
@@ -1523,6 +1550,7 @@ model VolumePatchProperties {
   /**
    * Specifies whether Cool Access(tiering) is enabled for the volume.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumePatchProperties.coolAccess has a boolean wire value; preserve the published property contract."
   coolAccess?: boolean;
 
   /**
@@ -1548,6 +1576,7 @@ model VolumePatchProperties {
   /**
    * If enabled (true) the volume will contain a read-only snapshot directory which provides access to each of the volume's snapshots.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumePatchProperties.snapshotDirectoryVisible has a boolean wire value; preserve the published property contract."
   snapshotDirectoryVisible?: boolean;
 
   /**
@@ -1635,6 +1664,7 @@ model BreakFileLocksRequest {
   /**
    * Break File locks could be a disruptive operation for application as locks on the volume will be broken, if want to process, set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BreakFileLocksRequest.confirmRunningDisruptiveOperation has a boolean wire value; preserve the published property contract."
   confirmRunningDisruptiveOperation?: boolean = false;
 }
 
@@ -1667,6 +1697,7 @@ model BreakReplicationRequest {
   /**
    * If replication is in status transferring and you want to force break the replication, set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BreakReplicationRequest.forceBreakReplication has a boolean wire value; preserve the published property contract."
   forceBreakReplication?: boolean;
 }
 
@@ -1687,6 +1718,7 @@ model ReplicationStatus {
   /**
    * Replication health check
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReplicationStatus.healthy has a boolean wire value; preserve the published property contract."
   healthy?: boolean;
 
   /**
@@ -1963,6 +1995,7 @@ model RestoreStatus {
   /**
    * Restore health status
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RestoreStatus.healthy has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   healthy?: boolean;
 
@@ -2005,6 +2038,7 @@ model BackupStatus {
   /**
    * Backup health status
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BackupStatus.healthy has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   healthy?: boolean;
 
@@ -2494,6 +2528,7 @@ model QuotaReport {
   /**
    * Flag to indicate whether the quota is derived from default quota.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing QuotaReport.isDerivedQuota has a boolean wire value; preserve the published property contract."
   isDerivedQuota?: boolean;
 }
 
@@ -2616,6 +2651,7 @@ interface Volumes {
       /**
        * An option to force delete the volume. Will cleanup resources connected to the particular volume
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.forceDelete has a boolean wire value; preserve the published property contract."
       @query("forceDelete")
       forceDelete?: boolean;
     }

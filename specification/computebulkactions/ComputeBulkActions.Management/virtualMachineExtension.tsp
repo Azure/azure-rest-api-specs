@@ -28,9 +28,11 @@ model VirtualMachineExtensionProperties {
   @doc("Specifies the version of the script handler.")
   typeHandlerVersion?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineExtensionProperties.autoUpgradeMinorVersion has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.")
   autoUpgradeMinorVersion?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineExtensionProperties.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.")
   enableAutomaticUpgrade?: boolean;
 
@@ -42,6 +44,7 @@ model VirtualMachineExtensionProperties {
   @doc("The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.")
   protectedSettings?: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineExtensionProperties.suppressFailures has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false.")
   suppressFailures?: boolean;
 

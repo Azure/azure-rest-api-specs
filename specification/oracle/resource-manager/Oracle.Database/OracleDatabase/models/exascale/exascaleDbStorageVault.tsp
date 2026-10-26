@@ -93,6 +93,7 @@ model ExascaleDbStorageVaultProperties {
   @maxItems(2)
   attachedShapeAttributes?: ShapeAttribute[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExascaleDbStorageVaultProperties.isAutoscaleEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v20251201_preview)
   @doc("Indicates if autoscale feature is enabled for the Storage Vault. The default value is: false.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)

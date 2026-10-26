@@ -165,6 +165,7 @@ model AccessConfigResponse {
   @doc("<p>The current authentication mode of the cluster.</p>")
   authenticationMode?: AuthenticationModeEnumValue;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AccessConfigResponse.bootstrapClusterCreatorAdminPermissions has a boolean wire value; preserve the published property contract."
   @doc("<p>Specifies whether or not the cluster creator IAM principal was set as a cluster admin access entry during cluster creation time.</p>")
   bootstrapClusterCreatorAdminPermissions?: boolean;
 }
@@ -332,9 +333,11 @@ model VpcConfigResponse {
   @doc("<p>The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control-plane-to-data-plane communication.</p>")
   clusterSecurityGroupId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VpcConfigResponse.endpointPrivateAccess has a boolean wire value; preserve the published property contract."
   @doc("<p>This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate from within your cluster's VPC use the private VPC endpoint instead of traversing the internet. If this value is disabled and you have nodes or Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the nodes or Fargate pods. For more information, see <a href='https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html'>Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>")
   endpointPrivateAccess?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VpcConfigResponse.endpointPublicAccess has a boolean wire value; preserve the published property contract."
   @doc("<p>Whether the public API server endpoint is enabled.</p>")
   endpointPublicAccess?: boolean;
 
@@ -465,6 +468,7 @@ model OIDC {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LogSetup")
 model LogSetup {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LogSetup.enabled has a boolean wire value; preserve the published property contract."
   @doc("<p>If a log type is enabled, that log type exports its control plane logs to CloudWatch Logs. If a log type isn't enabled, that log type doesn't export its control plane logs. Each individual log type can be enabled or disabled independently.</p>")
   enabled?: boolean;
 

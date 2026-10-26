@@ -510,6 +510,7 @@ model PolicyEvent {
   /**
    * Flag which states whether the resource is compliant against the policy assignment it was evaluated against.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PolicyEvent.isCompliant has a boolean wire value; preserve the published property contract."
   isCompliant?: boolean;
 
   /**
@@ -750,6 +751,7 @@ model PolicyState {
   /**
    * Flag which states whether the resource is compliant against the policy assignment it was evaluated against. This property is deprecated; please use ComplianceState instead.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PolicyState.isCompliant has a boolean wire value; preserve the published property contract."
   isCompliant?: boolean;
 
   /**
@@ -1291,6 +1293,7 @@ model CheckRestrictionsRequest {
   /**
    * Whether to include policies with the 'audit' effect in the results. Defaults to false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CheckRestrictionsRequest.includeAuditEffect has a boolean wire value; preserve the published property contract."
   includeAuditEffect?: boolean = false;
 }
 
@@ -1826,6 +1829,7 @@ model Operation {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**

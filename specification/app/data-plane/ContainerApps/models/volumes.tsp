@@ -121,6 +121,7 @@ namespace ContainerAppsSandbox {
     path: VolumePath;
 
     /** Whether the item is a directory. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumePathItem.isDirectory has a boolean wire value; preserve the published property contract."
     isDirectory: boolean;
 
     /** The file size in bytes. */
@@ -199,6 +200,7 @@ namespace ContainerAppsSandbox {
     size: StorageQuantity;
 
     /** Whether the volume is currently attached. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataDiskVolume.isAttached has a boolean wire value; preserve the published property contract."
     @visibility(Lifecycle.Read)
     isAttached: boolean;
 

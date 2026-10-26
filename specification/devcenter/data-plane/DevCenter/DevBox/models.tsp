@@ -1113,6 +1113,7 @@ model CustomizationTaskDefinitionParameter {
   @doc("Type of the parameter.")
   type: CustomizationTaskDefinitionParameterType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CustomizationTaskDefinitionParameter.required has a boolean wire value; preserve the published property contract."
   @doc("Whether or not the parameter is required.")
   @visibility(Lifecycle.Read)
   required?: boolean;

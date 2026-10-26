@@ -52,6 +52,7 @@ interface ProductList {
     @query
     language?: string = "en",
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByTenant.excludePublicOffersAndPublicPlans has a boolean wire value; preserve the published property contract."
     @doc(ExcludePublicParameterDescription)
     @query
     excludePublicOffersAndPublicPlans?: boolean = false,
@@ -87,6 +88,7 @@ interface ProductList {
       @query
       language?: string = "en";
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listBySubscription.excludePublicOffersAndPublicPlans has a boolean wire value; preserve the published property contract."
       @doc(ExcludePublicParameterDescription)
       @query
       excludePublicOffersAndPublicPlans?: boolean = false;
@@ -122,6 +124,7 @@ interface ProductList {
       @query
       language?: string = "en";
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByBillingAccount.excludePublicOffersAndPublicPlans has a boolean wire value; preserve the published property contract."
       @doc(ExcludePublicParameterDescription)
       @query
       excludePublicOffersAndPublicPlans?: boolean = false;
@@ -161,6 +164,7 @@ interface ProductList {
       @query
       language?: string = "en";
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByBillingProfile.excludePublicOffersAndPublicPlans has a boolean wire value; preserve the published property contract."
       @doc(ExcludePublicParameterDescription)
       @query
       excludePublicOffersAndPublicPlans?: boolean = false;
@@ -207,6 +211,7 @@ interface ProductGet {
     @query
     market: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getByTenant.includeStopSoldPlans has a boolean wire value; preserve the published property contract."
     @doc(IncludeStopSoldPlansParameterDescription)
     @query
     includeStopSoldPlans?: boolean = false,
@@ -219,10 +224,12 @@ interface ProductGet {
     @query
     pricingAudience?: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getByTenant.includeHiddenPlans has a boolean wire value; preserve the published property contract."
     @doc(IncludeHiddenPlansParameterDescription)
     @query
     includeHiddenPlans?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getByTenant.includeServiceInstructionTemplates has a boolean wire value; preserve the published property contract."
     @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
     includeServiceInstructionTemplates?: boolean = false,
@@ -245,6 +252,7 @@ interface ProductGet {
     ...SubscriptionIdParameter,
     ...ProductIdParameter,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getBySubscription.includeStopSoldPlans has a boolean wire value; preserve the published property contract."
     @doc(IncludeStopSoldPlansParameterDescription)
     @query
     includeStopSoldPlans?: boolean,
@@ -253,10 +261,12 @@ interface ProductGet {
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getBySubscription.includeHiddenPlans has a boolean wire value; preserve the published property contract."
     @doc(IncludeHiddenPlansParameterDescription)
     @query
     includeHiddenPlans?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getBySubscription.includeServiceInstructionTemplates has a boolean wire value; preserve the published property contract."
     @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
     includeServiceInstructionTemplates?: boolean = false,
@@ -269,6 +279,7 @@ interface ProductGet {
     @query
     skuId?: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getBySubscription.lookUpOfferInTenantLevel has a boolean wire value; preserve the published property contract."
     @doc(LookUpOfferInTenantLevelParameterDescription)
     @query
     lookUpOfferInTenantLevel?: boolean = false,
@@ -283,6 +294,7 @@ interface ProductGet {
     ...BillingAccountIdParameter,
     ...ProductIdParameter,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getByBillingAccount.includeStopSoldPlans has a boolean wire value; preserve the published property contract."
     @doc(IncludeStopSoldPlansParameterDescription)
     @query
     includeStopSoldPlans?: boolean,
@@ -291,10 +303,12 @@ interface ProductGet {
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getByBillingAccount.includeHiddenPlans has a boolean wire value; preserve the published property contract."
     @doc(IncludeHiddenPlansParameterDescription)
     @query
     includeHiddenPlans?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getByBillingAccount.includeServiceInstructionTemplates has a boolean wire value; preserve the published property contract."
     @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
     includeServiceInstructionTemplates?: boolean = false,
@@ -318,6 +332,7 @@ interface ProductGet {
     ...BillingProfileIdParameter,
     ...ProductIdParameter,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getByBillingProfile.includeStopSoldPlans has a boolean wire value; preserve the published property contract."
     @doc(IncludeStopSoldPlansParameterDescription)
     @query
     includeStopSoldPlans?: boolean,
@@ -326,10 +341,12 @@ interface ProductGet {
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getByBillingProfile.includeHiddenPlans has a boolean wire value; preserve the published property contract."
     @doc(IncludeHiddenPlansParameterDescription)
     @query
     includeHiddenPlans?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getByBillingProfile.includeServiceInstructionTemplates has a boolean wire value; preserve the published property contract."
     @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
     includeServiceInstructionTemplates?: boolean = false,

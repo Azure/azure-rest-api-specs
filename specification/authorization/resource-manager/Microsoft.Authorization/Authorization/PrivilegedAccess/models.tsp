@@ -128,6 +128,7 @@ model ResourceProjection {
    * Whether you have favorited this resource (see
    * `privilegedResourceFavorites`). Always populated on every row.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceProjection.isFavorite has a boolean wire value; preserve the published property contract."
   isFavorite: boolean;
 }
 
@@ -376,6 +377,7 @@ model RoleAssignmentSummary {
    * a recommendation so clients can guide users toward the least-privilege
    * option.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RoleAssignmentSummary.isLeastPrivilege has a boolean wire value; preserve the published property contract."
   isLeastPrivilege: boolean;
 }
 

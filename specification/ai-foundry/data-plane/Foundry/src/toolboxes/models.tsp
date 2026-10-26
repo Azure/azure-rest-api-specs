@@ -17,6 +17,7 @@ model ToolConfig {
    * When true, the tool is always included in agent context and visible in `tools/list`.
    * When false (default), the tool is hidden from `tools/list` and only discoverable via `tool_search`.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ToolConfig.pin has a boolean wire value; preserve the published property contract."
   pin?: boolean;
 
   /**

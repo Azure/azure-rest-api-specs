@@ -224,6 +224,7 @@ model SkuSummary {
   cspState?: string;
 
   /** A value indicating whether the SKU supports reservations. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SkuSummary.hasRi has a boolean wire value; preserve the published property contract."
   hasRi?: boolean;
 
   /** The SKU attributes. */
@@ -260,6 +261,7 @@ model Price {
   currencyCode?: string;
 
   /** A value indicating whether a payment instrument is required */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Price.isPiRequired has a boolean wire value; preserve the published property contract."
   isPiRequired: boolean;
 
   /** Retail price for the item */
@@ -376,6 +378,7 @@ model Term {
   renewToTermBillingPlan?: string;
 
   /** Indicates if autorenew is enabled */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Term.isAutorenewable has a boolean wire value; preserve the published property contract."
   isAutorenewable?: boolean;
 
   /** Defines the lifecycle management policy for the term */
@@ -410,6 +413,7 @@ model Availability {
   terms?: Term[];
 
   /** A value indicating whether it has free trials */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Availability.hasFreeTrials has a boolean wire value; preserve the published property contract."
   hasFreeTrials: boolean;
 
   /** Consumption unit type */

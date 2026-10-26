@@ -247,6 +247,7 @@ model OperationResult {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OperationResult.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -376,6 +377,7 @@ model MonitorProperties {
   /**
    * Flag to determine if User API Key has to be generated and shared.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MonitorProperties.generateApiKey has a boolean wire value; preserve the published property contract."
   generateApiKey?: boolean;
 
   /**
@@ -733,16 +735,19 @@ model LogRules {
   /**
    * Flag specifying if AAD logs should be sent for the Monitor resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LogRules.sendAadLogs has a boolean wire value; preserve the published property contract."
   sendAadLogs?: boolean;
 
   /**
    * Flag specifying if subscription logs should be sent for the Monitor resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LogRules.sendSubscriptionLogs has a boolean wire value; preserve the published property contract."
   sendSubscriptionLogs?: boolean;
 
   /**
    * Flag specifying if activity logs from Azure resources should be sent for the Monitor resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LogRules.sendActivityLogs has a boolean wire value; preserve the published property contract."
   sendActivityLogs?: boolean;
 
   /**
@@ -891,6 +896,7 @@ model MarketplaceSaaSInfo {
   /**
    * Flag specifying if the Marketplace status is subscribed or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MarketplaceSaaSInfo.subscribed has a boolean wire value; preserve the published property contract."
   subscribed?: boolean;
 }
 
@@ -953,6 +959,7 @@ model ExternalUserCreationResponse {
   /**
    * Shows if user is created or updated
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExternalUserCreationResponse.created has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   created?: boolean;
 }
@@ -1227,6 +1234,7 @@ model ElasticTrafficFilter {
   /**
    * IncludeByDefault for the elastic filter
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ElasticTrafficFilter.includeByDefault has a boolean wire value; preserve the published property contract."
   includeByDefault?: boolean;
 
   /**

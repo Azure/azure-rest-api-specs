@@ -175,6 +175,7 @@ interface BillingProfiles {
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing billingRequestsListByBillingProfile.count has a boolean wire value; preserve the published property contract."
       @query("count")
       count?: boolean;
 
@@ -269,6 +270,7 @@ interface BillingProfiles {
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing invoicesListByBillingProfile.count has a boolean wire value; preserve the published property contract."
       @query("count")
       count?: boolean;
 
@@ -321,6 +323,7 @@ interface BillingProfiles {
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing productsListByBillingProfile.count has a boolean wire value; preserve the published property contract."
       @query("count")
       count?: boolean;
 
@@ -443,6 +446,7 @@ interface BillingProfiles {
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing transactionsListByBillingProfile.count has a boolean wire value; preserve the published property contract."
       @query("count")
       count?: boolean;
 
@@ -459,6 +463,7 @@ alias BillingProfilesListByBillingAccountParameters = {
   /**
    * Can be used to get deleted billing profiles.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingProfilesListByBillingAccountParameters.includeDeleted has a boolean wire value; preserve the published property contract."
   @query("includeDeleted")
   includeDeleted?: boolean = false;
 
@@ -489,6 +494,7 @@ alias BillingProfilesListByBillingAccountParameters = {
   /**
    * The count query option allows clients to request a count of the matching resources included with the resources in the response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingProfilesListByBillingAccountParameters.count has a boolean wire value; preserve the published property contract."
   @query("count")
   count?: boolean;
 
@@ -503,6 +509,7 @@ alias BillingRoleAssignmentsResolveByBillingProfileParameters = {
   /**
    * Resolves the scope display name for each of the role assignments.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingRoleAssignmentsResolveByBillingProfileParameters.resolveScopeDisplayNames has a boolean wire value; preserve the published property contract."
   @query("resolveScopeDisplayNames")
   resolveScopeDisplayNames?: boolean = false;
 

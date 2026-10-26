@@ -190,24 +190,28 @@ op listGeoRegions is ArmProviderActionSync<
     /**
      * Specify <code>true</code> if you want to filter to only regions that support Linux workers.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listGeoRegions.linuxWorkersEnabled has a boolean wire value; preserve the published property contract."
     @query("linuxWorkersEnabled")
     linuxWorkersEnabled?: boolean;
 
     /**
      * Specify <code>true</code> if you want to filter to only regions that support Xenon workers.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listGeoRegions.xenonWorkersEnabled has a boolean wire value; preserve the published property contract."
     @query("xenonWorkersEnabled")
     xenonWorkersEnabled?: boolean;
 
     /**
      * Specify <code>true</code> if you want to filter to only regions that support Linux Consumption Workers.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listGeoRegions.linuxDynamicWorkersEnabled has a boolean wire value; preserve the published property contract."
     @query("linuxDynamicWorkersEnabled")
     linuxDynamicWorkersEnabled?: boolean;
 
     /**
      * Specify <code>true</code> if you want to filter to only regions that support App Service Plans with <code>IsCustomMode</code> set to <code>true</code>.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listGeoRegions.customModeWorkersEnabled has a boolean wire value; preserve the published property contract."
     @query("customModeWorkersEnabled")
     customModeWorkersEnabled?: boolean;
   },
@@ -491,6 +495,7 @@ interface RecommendationsOperationGroup {
       /**
        * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.featured has a boolean wire value; preserve the published property contract."
       @query("featured")
       featured?: boolean;
 

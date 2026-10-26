@@ -91,6 +91,7 @@ union SafeguardsSupport {
 @added(Versions.v2026_08_02_preview)
 model SafeguardsAvailableVersionsProperties {
   /** Whether this is the default version. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SafeguardsAvailableVersionsProperties.isDefaultVersion has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDefaultVersion?: boolean;
 

@@ -42,6 +42,7 @@ model AssetProperties {
   @removed(Versions.v2024_09_01_preview)
   assetType?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AssetProperties.enabled has a boolean wire value; preserve the published property contract."
   @doc("Enabled/Disabled status of the asset.")
   enabled?: boolean;
 

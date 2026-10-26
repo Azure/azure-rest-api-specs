@@ -1081,10 +1081,12 @@ model ParameterProperties {
   @doc("The allowed values for the parameter.")
   allowedValues?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ParameterProperties.isDynamic has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   @doc("Whether the parameter can be changed dynamically.")
   isDynamic?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ParameterProperties.isReadOnly has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   @doc("Whether the parameter is read-only. Read-only parameters cannot be overridden.")
   isReadOnly?: boolean;

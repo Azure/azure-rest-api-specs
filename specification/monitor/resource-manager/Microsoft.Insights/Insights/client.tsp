@@ -1550,6 +1550,7 @@ model MetricSettings {
   /**
    * a value indicating whether this category is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSettings.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -1599,6 +1600,7 @@ model LogSettings {
   /**
    * a value indicating whether this log is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LogSettings.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**

@@ -648,6 +648,7 @@ model BackupVault {
   /**
    * Is vault protected by resource guard
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BackupVault.isVaultProtectedByResourceGuard has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isVaultProtectedByResourceGuard?: boolean;
 
@@ -828,6 +829,7 @@ model RecoveryPointImmutabilityProperties {
   /**
    * Whether the recovery point is currently within its immutability window.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RecoveryPointImmutabilityProperties.isImmutable has a boolean wire value; preserve the published property contract."
   isImmutable: boolean;
 
   /**
@@ -1275,6 +1277,7 @@ model CheckNameAvailabilityResult {
   /**
    * Gets or sets a value indicating whether [name available].
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CheckNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**
@@ -1324,6 +1327,7 @@ model ClientDiscoveryValueForSingleApi {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClientDiscoveryValueForSingleApi.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -1754,11 +1758,13 @@ model UserFacingError {
   /**
    * Whether the operation will be retryable or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UserFacingError.isRetryable has a boolean wire value; preserve the published property contract."
   isRetryable?: boolean;
 
   /**
    * Whether the operation is due to a user error or service error
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UserFacingError.isUserError has a boolean wire value; preserve the published property contract."
   isUserError?: boolean;
 
   /**
@@ -1823,6 +1829,7 @@ model IdentityDetails {
   /**
    * Specifies if the BI is protected by System Identity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IdentityDetails.useSystemAssignedIdentity has a boolean wire value; preserve the published property contract."
   useSystemAssignedIdentity?: boolean;
 
   /**
@@ -2142,6 +2149,7 @@ model AzureBackupJob {
   /**
    * Indicated that whether the job is adhoc(true) or scheduled(false)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureBackupJob.isUserTriggered has a boolean wire value; preserve the published property contract."
   isUserTriggered: boolean;
 
   /**
@@ -2169,6 +2177,7 @@ model AzureBackupJob {
   /**
    * Indicated whether progress is enabled for the job
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureBackupJob.progressEnabled has a boolean wire value; preserve the published property contract."
   progressEnabled: boolean;
 
   /**
@@ -2632,6 +2641,7 @@ model ResourceGuard {
   /**
    * This flag indicates whether auto approval is allowed or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceGuard.allowAutoApprovals has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   allowAutoApprovals?: boolean;
 
@@ -2791,12 +2801,14 @@ model RecoveryPointsFilters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   restorePointDataStoreId?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RecoveryPointsFilters.isVisible has a boolean wire value; preserve the published property contract."
   isVisible?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startDate?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endDate?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RecoveryPointsFilters.extendedInfo has a boolean wire value; preserve the published property contract."
   extendedInfo?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   restorePointState?: string;
@@ -2928,6 +2940,7 @@ model RecoveryPointDataStoreDetails {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RecoveryPointDataStoreDetails.visible has a boolean wire value; preserve the published property contract."
   visible?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3128,6 +3141,7 @@ model KubernetesClusterBackupDatasourceParameters
   /**
    * Gets or sets the volume snapshot property. This property if enabled will take volume snapshots during backup.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesClusterBackupDatasourceParameters.snapshotVolumes has a boolean wire value; preserve the published property contract."
   snapshotVolumes: boolean;
 
   /**
@@ -3138,6 +3152,7 @@ model KubernetesClusterBackupDatasourceParameters
   /**
    * Gets or sets the include cluster resources property. This property if enabled will include cluster scope resources during backup.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesClusterBackupDatasourceParameters.includeClusterScopeResources has a boolean wire value; preserve the published property contract."
   includeClusterScopeResources: boolean;
 
   /**
@@ -3207,6 +3222,7 @@ model BlobBackupAutoProtectionSettings {
   /**
    * Flag to enable whether auto protection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobBackupAutoProtectionSettings.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 }
 
@@ -3387,6 +3403,7 @@ model GenericBackupDatasourceParameters extends BackupDatasourceParameters {
  */
 model AzureRetentionRule extends BasePolicyRule {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureRetentionRule.isDefault has a boolean wire value; preserve the published property contract."
   isDefault?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3548,6 +3565,7 @@ model Day {
   /**
    * Whether Date is last date of month
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Day.isLast has a boolean wire value; preserve the published property contract."
   isLast?: boolean;
 }
 
@@ -3687,6 +3705,7 @@ model ItemPathBasedRestoreCriteria extends ItemLevelRestoreCriteria {
   /**
    * Flag to specify if the path is relative to backup item or full path
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ItemPathBasedRestoreCriteria.isPathRelativeToBackupItem has a boolean wire value; preserve the published property contract."
   isPathRelativeToBackupItem: boolean;
 
   /**
@@ -3812,6 +3831,7 @@ model KubernetesClusterRestoreCriteria extends ItemLevelRestoreCriteria {
   /**
    * Gets or sets the include cluster resources property. This property if enabled will include cluster scope resources during restore.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesClusterRestoreCriteria.includeClusterScopeResources has a boolean wire value; preserve the published property contract."
   includeClusterScopeResources: boolean;
 
   /**
@@ -3880,6 +3900,7 @@ model KubernetesClusterVaultTierRestoreCriteria
   /**
    * Gets or sets the include cluster resources property. This property if enabled will include cluster scope resources during restore from vault.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesClusterVaultTierRestoreCriteria.includeClusterScopeResources has a boolean wire value; preserve the published property contract."
   includeClusterScopeResources: boolean;
 
   /**
@@ -4099,6 +4120,7 @@ model TaggingCriteria {
   /**
    * Specifies if tag is default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TaggingCriteria.isDefault has a boolean wire value; preserve the published property contract."
   isDefault: boolean;
 
   /**

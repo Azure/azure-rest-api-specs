@@ -51,6 +51,7 @@ model BrokerProperties {
   @doc("The settings of the disk-backed message buffer.")
   diskBackedMessageBufferSettings?: DiskBackedMessageBufferSettings;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BrokerProperties.encryptInternalTraffic has a boolean wire value; preserve the published property contract."
   @doc("The setting to enable or disable encryption of internal Traffic.")
   encryptInternalTraffic?: boolean = true;
 
@@ -95,6 +96,7 @@ model BackendChain {
   @maxValue(65535)
   redundancyFactor: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BackendChain.temporaryDiskTransferEnabled has a boolean wire value; preserve the published property contract."
   @doc("Defines whether disk transfer is enabled or not.")
   temporaryDiskTransferEnabled?: boolean;
 
@@ -181,15 +183,19 @@ model BrokerDiagnostics {
   @doc("Diagnostic Service endpoint")
   diagnosticServiceEndpoint?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BrokerDiagnostics.enableMetrics has a boolean wire value; preserve the published property contract."
   @doc("Knob to enable/disable metrics. Default = true")
   enableMetrics?: boolean = true;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BrokerDiagnostics.enableSelfCheck has a boolean wire value; preserve the published property contract."
   @doc("Enable self check on Broker via Probe.")
   enableSelfCheck?: boolean = true;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BrokerDiagnostics.enableSelfTracing has a boolean wire value; preserve the published property contract."
   @doc("Enable self tracing on the Broker so that every selfCheckFrequencySeconds a random message is traced even if it didn't have trace context.")
   enableSelfTracing?: boolean = true;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BrokerDiagnostics.enableTracing has a boolean wire value; preserve the published property contract."
   @doc("Knob to enable/disable entire tracing infrastructure.")
   enableTracing?: boolean = true;
 
@@ -388,9 +394,11 @@ model BrokerListenerResource is TrackedResource<BrokerListenerProperties> {
 
 @doc("Broker Listener Resource properties")
 model BrokerListenerProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BrokerListenerProperties.authenticationEnabled has a boolean wire value; preserve the published property contract."
   @doc("The flag for enabling Authentication rules on Listener Port.")
   authenticationEnabled?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BrokerListenerProperties.authorizationEnabled has a boolean wire value; preserve the published property contract."
   @doc("The flag for enabling Authorization policies on Listener Port. false - AllowAll, true - Use Authorization resource rules if present.")
   authorizationEnabled?: boolean = false;
 
@@ -655,6 +663,7 @@ model BrokerAuthorizationProperties {
 
 @doc("Broker AuthorizationConfig properties")
 model AuthorizationConfig {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AuthorizationConfig.enableCache has a boolean wire value; preserve the published property contract."
   @doc("Enable caching of the authorization rules.")
   enableCache?: boolean = true;
 

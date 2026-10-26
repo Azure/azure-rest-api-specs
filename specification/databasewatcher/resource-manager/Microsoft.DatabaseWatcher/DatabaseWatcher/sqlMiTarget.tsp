@@ -25,6 +25,7 @@ model SqlMiTargetProperties extends TargetProperties {
   @doc("The TCP port number to optionally use in the connection string when connecting to an Azure SQL Managed Instance target.")
   connectionTcpPort?: int32 = 1433;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlMiTargetProperties.readIntent has a boolean wire value; preserve the published property contract."
   @doc("Set to true to monitor a high availability replica of specified target, if any.")
   readIntent?: boolean = false;
 }

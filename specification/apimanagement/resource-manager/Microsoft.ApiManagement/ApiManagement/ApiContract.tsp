@@ -155,6 +155,7 @@ interface ApiContracts {
       /**
        * Delete all revisions of the Api.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.deleteRevisions has a boolean wire value; preserve the published property contract."
       @query("deleteRevisions")
       deleteRevisions?: boolean;
 
@@ -207,6 +208,7 @@ interface ApiContracts {
       /**
        * Include full ApiVersionSet resource in response
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByService.expandApiVersionSet has a boolean wire value; preserve the published property contract."
       @apiVersion(false)
       @query("expandApiVersionSet")
       expandApiVersionSet?: boolean;
@@ -314,6 +316,7 @@ interface ApiContracts {
       /**
        * Include not tagged Operations.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByTags.includeNotTaggedOperations has a boolean wire value; preserve the published property contract."
       @query("includeNotTaggedOperations")
       includeNotTaggedOperations?: boolean;
     }
@@ -457,6 +460,7 @@ interface WorkspaceApi {
       /**
        * Delete all revisions of the Api.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.deleteRevisions has a boolean wire value; preserve the published property contract."
       @query("deleteRevisions")
       deleteRevisions?: boolean;
 
@@ -506,6 +510,7 @@ interface WorkspaceApi {
       /**
        * Include full ApiVersionSet resource in response
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByService.expandApiVersionSet has a boolean wire value; preserve the published property contract."
       @apiVersion(false)
       @query("expandApiVersionSet")
       expandApiVersionSet?: boolean;

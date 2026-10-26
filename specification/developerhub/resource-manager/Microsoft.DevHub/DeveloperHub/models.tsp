@@ -1090,6 +1090,7 @@ model WorkflowRun {
   /**
    * Describes if the workflow run succeeded.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkflowRun.succeeded has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   succeeded?: boolean;
 
@@ -1613,6 +1614,7 @@ model Parameter {
   /**
    * Whether the parameter is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Parameter.required has a boolean wire value; preserve the published property contract."
   @summary("Parameter required")
   required?: boolean;
 

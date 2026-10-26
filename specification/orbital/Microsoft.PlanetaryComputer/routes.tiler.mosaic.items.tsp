@@ -1116,6 +1116,7 @@ interface MosaicItemsAssetStatistics {
       /**
        * Apply internal Scale or Offset
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getAll.unscale has a boolean wire value; preserve the published property contract."
       @query("unscale")
       unscale?: boolean;
 

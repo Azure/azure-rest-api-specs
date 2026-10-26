@@ -54,12 +54,15 @@ model RadiologyInsightsInferenceOptions {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Follow-up recommendation options.")
 model FollowupRecommendationOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FollowupRecommendationOptions.includeRecommendationsWithNoSpecifiedModality has a boolean wire value; preserve the published property contract."
   @doc("Include/Exclude follow-up recommendations without a specific radiology procedure. Default is false.")
   includeRecommendationsWithNoSpecifiedModality?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FollowupRecommendationOptions.includeRecommendationsInReferences has a boolean wire value; preserve the published property contract."
   @doc("Include/Exclude follow-up recommendations in references to a guideline or article. Default is false.")
   includeRecommendationsInReferences?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FollowupRecommendationOptions.provideFocusedSentenceEvidence has a boolean wire value; preserve the published property contract."
   @doc("If this is true, provide one or more sentences as evidence for the recommendation, next to the token evidence. The start and end positions of these sentences will be put in an extension with url 'modality_sentences'. Default is false.")
   provideFocusedSentenceEvidence?: boolean;
 }
@@ -67,6 +70,7 @@ model FollowupRecommendationOptions {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Finding options.")
 model FindingOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FindingOptions.provideFocusedSentenceEvidence has a boolean wire value; preserve the published property contract."
   @doc("If this is true, provide the sentence that contains the first token of the finding's clinical indicator (i.e. the medical problem), if there is one. This sentence is provided as an extension with url 'ci_sentence', next to the token evidence. Default is false.")
   provideFocusedSentenceEvidence?: boolean;
 }
@@ -75,6 +79,7 @@ model FindingOptions {
 @added(ApiVersion.v2024_10_01)
 @doc("Guidance options.")
 model GuidanceOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GuidanceOptions.showGuidanceInHistory has a boolean wire value; preserve the published property contract."
   @doc("If this is true, also show guidances from a clinical history section i.e. if the first token of the associated finding's clinical indicator is in this section. Default is false.")
   showGuidanceInHistory: boolean;
 }
@@ -261,15 +266,19 @@ model FollowupRecommendationInference extends RadiologyInsightsInference {
   @minItems(1)
   findings?: Array<RecommendationFinding>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FollowupRecommendationInference.isConditional has a boolean wire value; preserve the published property contract."
   @doc("The conditional value indicates whether or not the sentence containing the recommendation includes a conditional statement. Keywords for conditional statements include 'if', 'when', 'unless', and so on.")
   isConditional: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FollowupRecommendationInference.isOption has a boolean wire value; preserve the published property contract."
   @doc("The option value indicates whether or not the sentence containing the recommendation includes an optional statement. Keywords for optional statements include 'recommend', 'consider', and so on.")
   isOption: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FollowupRecommendationInference.isGuideline has a boolean wire value; preserve the published property contract."
   @doc("The guideline value indicates whether or not the recommendation is part of a guideline section that compiles all recommendations applicable to various findings.")
   isGuideline: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FollowupRecommendationInference.isHedging has a boolean wire value; preserve the published property contract."
   @doc("Hedging refers to ambiguous, vague or imprecise language within the sentence of the recommendation. Keywords for hedging are 'can be','may be',and so on.")
   isHedging: boolean;
 
@@ -363,6 +372,7 @@ model FollowupCommunicationInference extends RadiologyInsightsInference {
   @minItems(1)
   recipient?: Array<MedicalProfessionalType>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FollowupCommunicationInference.wasAcknowledged has a boolean wire value; preserve the published property contract."
   @doc("Communication was acknowledged.")
   wasAcknowledged: boolean;
 }

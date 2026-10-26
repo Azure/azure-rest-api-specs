@@ -141,6 +141,7 @@ model ThreadRun {
   /**
    * Whether to enable parallel function calling during tool use.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ThreadRun.parallelToolCalls has a boolean wire value; preserve the published property contract."
   @added(ServiceApiVersions.v2024_09_01_preview)
   @encodedName("application/json", "parallel_tool_calls")
   parallelToolCalls: boolean;
@@ -232,6 +233,7 @@ model CreateRunOptions {
   /**
    * Whether to enable parallel function calling during tool use.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CreateRunOptions.parallelToolCalls has a boolean wire value; preserve the published property contract."
   @added(ServiceApiVersions.v2024_09_01_preview)
   @encodedName("application/json", "parallel_tool_calls")
   parallelToolCalls?: boolean = true;
@@ -240,6 +242,7 @@ model CreateRunOptions {
    * If `true`, returns a stream of events that happen during the Run as server-sent events,
    * terminating when the Run enters a terminal state with a `data: [DONE]` message.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CreateRunOptions.stream has a boolean wire value; preserve the published property contract."
   @added(ServiceApiVersions.v2024_02_15_preview)
   stream?: boolean;
 
@@ -407,6 +410,7 @@ model CreateAndRunThreadOptions {
   /**
    * Whether to enable parallel function calling during tool use.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CreateAndRunThreadOptions.parallelToolCalls has a boolean wire value; preserve the published property contract."
   @added(ServiceApiVersions.v2024_09_01_preview)
   @encodedName("application/json", "parallel_tool_calls")
   parallelToolCalls?: boolean = true;
@@ -421,6 +425,7 @@ model CreateAndRunThreadOptions {
    * If `true`, returns a stream of events that happen during the Run as server-sent events,
    * terminating when the Run enters a terminal state with a `data: [DONE]` message.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CreateAndRunThreadOptions.stream has a boolean wire value; preserve the published property contract."
   @added(ServiceApiVersions.v2024_02_15_preview)
   stream?: boolean;
 

@@ -19,5 +19,6 @@ model SupportedAgentModelProperties {
   multiplier?: string;
 
   /** Indicates whether this is the default model */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SupportedAgentModelProperties.default has a boolean wire value; preserve the published property contract."
   default: boolean;
 }

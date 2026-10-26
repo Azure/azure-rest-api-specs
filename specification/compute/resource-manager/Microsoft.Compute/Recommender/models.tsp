@@ -46,6 +46,7 @@ model SpotPlacementScoresInput {
   /**
    * Defines if the scope is zonal or regional.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SpotPlacementScoresInput.availabilityZones has a boolean wire value; preserve the published property contract."
   availabilityZones?: boolean;
 }
 
@@ -82,6 +83,7 @@ model SpotPlacementScoresResponse {
   /**
    * Defines if the scope is zonal or regional.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SpotPlacementScoresResponse.availabilityZones has a boolean wire value; preserve the published property contract."
   availabilityZones?: boolean;
 
   /**
@@ -165,6 +167,7 @@ model PlacementScore {
   /**
    * Whether the desired quota is available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PlacementScore.isQuotaAvailable has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_10_05_preview)
   isQuotaAvailable?: boolean;
 }

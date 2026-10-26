@@ -68,6 +68,7 @@ interface AzureFirewalls {
       /**
        * When set to true, creates an AFC control plane for the Azure Firewall.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing createOrUpdate.createAfcControlPlane has a boolean wire value; preserve the published property contract."
       @added(Versions.v2025_07_01)
       @query("createAfcControlPlane")
       createAfcControlPlane?: boolean;

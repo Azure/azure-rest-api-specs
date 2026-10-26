@@ -187,6 +187,7 @@ model CatalogModelManagedAttribute {
   @doc("The value of the attribute.")
   value?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CatalogModelManagedAttribute.isRequired has a boolean wire value; preserve the published property contract."
   @doc("Whether this attribute is required.")
   isRequired?: boolean;
 }
@@ -669,6 +670,7 @@ model DataAssetQueryRequest {
   @doc("To filter by data map asset types.")
   assetTypes?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataAssetQueryRequest.includingOrphans has a boolean wire value; preserve the published property contract."
   @doc("To filter by status.")
   includingOrphans?: boolean;
 }
@@ -827,6 +829,7 @@ model DataProduct {
   @doc("The sensitivity label of the data product.")
   sensitivityLabel?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataProduct.endorsed has a boolean wire value; preserve the published property contract."
   @doc("Whether the data product is endorsed.")
   endorsed?: boolean;
 
@@ -987,6 +990,7 @@ model Domain {
   @doc("The name of the domain.")
   name?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Domain.isRestricted has a boolean wire value; preserve the published property contract."
   @doc("Whether the domain is restricted.")
   isRestricted?: boolean;
 
@@ -1129,6 +1133,7 @@ model Term {
   @doc("The resources associated with the term.")
   resources?: CatalogModelTermResource[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Term.isLeaf has a boolean wire value; preserve the published property contract."
   @doc("Whether the term is a leaf node.")
   isLeaf?: boolean;
 
@@ -1924,12 +1929,15 @@ model DataColumnQueryRequest {
   @doc("Maximum number of items to return (page size)")
   top?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataColumnQueryRequest.includingOrphans has a boolean wire value; preserve the published property contract."
   @doc("Include data columns without relationships (orphans)")
   includingOrphans: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataColumnQueryRequest.includeColumnDetails has a boolean wire value; preserve the published property contract."
   @doc("Include enriched column metadata from Data Map")
   includeColumnDetails?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataColumnQueryRequest.includeAssetDetails has a boolean wire value; preserve the published property contract."
   @doc("Include parent asset details (DG asset id, name, FQN)")
   includeAssetDetails?: boolean;
 }

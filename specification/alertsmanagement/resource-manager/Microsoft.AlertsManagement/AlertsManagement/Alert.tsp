@@ -191,12 +191,14 @@ interface AlertGetAllTenantOperation {
       /**
        * Include context which has contextual data specific to the monitor service. Default value is false'
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getAllTenant.includeContext has a boolean wire value; preserve the published property contract."
       @query("includeContext")
       includeContext?: boolean;
 
       /**
        * Include egress config which would be used for displaying the content in portal.  Default value is 'false'.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getAllTenant.includeEgressConfig has a boolean wire value; preserve the published property contract."
       @query("includeEgressConfig")
       includeEgressConfig?: boolean;
 
@@ -315,12 +317,14 @@ interface AlertOperationGroup {
       /**
        * Include context which has contextual data specific to the monitor service. Default value is false'
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getAll.includeContext has a boolean wire value; preserve the published property contract."
       @query("includeContext")
       includeContext?: boolean;
 
       /**
        * Include egress config which would be used for displaying the content in portal.  Default value is 'false'.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getAll.includeEgressConfig has a boolean wire value; preserve the published property contract."
       @query("includeEgressConfig")
       includeEgressConfig?: boolean;
 

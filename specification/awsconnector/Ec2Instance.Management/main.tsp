@@ -86,6 +86,7 @@ model AwsEc2InstanceProperties {
   @doc("<p>The boot mode that is used to boot the instance at launch or start. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>")
   currentInstanceBootMode?: InstanceBootModeValuesEnumValue;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsEc2InstanceProperties.ebsOptimized has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS Optimized instance.</p>")
   ebsOptimized?: boolean;
 
@@ -97,6 +98,7 @@ model AwsEc2InstanceProperties {
   @identifiers(#[])
   elasticInferenceAcceleratorAssociations?: ElasticInferenceAcceleratorAssociation[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsEc2InstanceProperties.enaSupport has a boolean wire value; preserve the published property contract."
   @doc("<p>Specifies whether enhanced networking with ENA is enabled.</p>")
   enaSupport?: boolean;
 
@@ -197,6 +199,7 @@ model AwsEc2InstanceProperties {
   @identifiers(#[])
   securityGroups?: GroupIdentifier[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsEc2InstanceProperties.sourceDestCheck has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether source/destination checking is enabled.</p>")
   sourceDestCheck?: boolean;
 
@@ -2949,6 +2952,7 @@ model ElasticInferenceAcceleratorAssociation {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EnclaveOptions")
 model EnclaveOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EnclaveOptions.enabled has a boolean wire value; preserve the published property contract."
   @doc("<p>If this parameter is set to <code>true</code>, the instance is enabled for Amazon Web Services Nitro Enclaves; otherwise, it is not enabled for Amazon Web Services Nitro Enclaves.</p>")
   enabled?: boolean;
 }
@@ -2959,6 +2963,7 @@ model EnclaveOptions {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of HibernationOptions")
 model HibernationOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing HibernationOptions.configured has a boolean wire value; preserve the published property contract."
   @doc("<p>If <code>true</code>, your instance is enabled for hibernation; otherwise, it is not enabled for hibernation.</p>")
   configured?: boolean;
 }
@@ -3219,6 +3224,7 @@ model InstanceNetworkInterface {
   @identifiers(#[])
   privateIpAddresses?: InstancePrivateIpAddress[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InstanceNetworkInterface.sourceDestCheck has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether source/destination checking is enabled.</p>")
   sourceDestCheck?: boolean;
 
@@ -3323,9 +3329,11 @@ model NetworkInterfaceStatusEnumValue {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PrivateDnsNameOptionsResponse")
 model PrivateDnsNameOptionsResponse {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PrivateDnsNameOptionsResponse.enableResourceNameDnsAAAARecord has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.</p>")
   enableResourceNameDnsAAAARecord?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PrivateDnsNameOptionsResponse.enableResourceNameDnsARecord has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether to respond to DNS queries for instance hostnames with DNS A records.</p>")
   enableResourceNameDnsARecord?: boolean;
 
@@ -3509,6 +3517,7 @@ model EbsInstanceBlockDevice {
   @doc("<p>The time stamp when the attachment initiated.</p>")
   attachTime?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EbsInstanceBlockDevice.deleteOnTermination has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether the volume is deleted on instance termination.</p>")
   deleteOnTermination?: boolean;
 
@@ -3596,6 +3605,7 @@ model InstanceNetworkInterfaceAttachment {
   @doc("<p>The ID of the network interface attachment.</p>")
   attachmentId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InstanceNetworkInterfaceAttachment.deleteOnTermination has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether the network interface is deleted when the instance is terminated.</p>")
   deleteOnTermination?: boolean;
 
@@ -3647,6 +3657,7 @@ model InstanceIpv6Address {
   @doc("<p>The IPv6 address.</p>")
   ipv6Address?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InstanceIpv6Address.isPrimaryIpv6 has a boolean wire value; preserve the published property contract."
   @doc("<p>Determines if an IPv6 address associated with a network interface is the primary IPv6 address. When you enable an IPv6 GUA address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6 address until the instance is terminated or the network interface is detached. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html'>RunInstances</a>.</p>")
   isPrimaryIpv6?: boolean;
 }
@@ -3670,6 +3681,7 @@ model InstancePrivateIpAddress {
   @doc("<p>The association information for an Elastic IP address for the network interface.</p>")
   association?: InstanceNetworkInterfaceAssociation;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InstancePrivateIpAddress.primary has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether this IPv4 address is the primary private IP address of the network interface.</p>")
   primary?: boolean;
 
@@ -3686,6 +3698,7 @@ model InstancePrivateIpAddress {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceAttachmentEnaSrdSpecification")
 model InstanceAttachmentEnaSrdSpecification {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InstanceAttachmentEnaSrdSpecification.enaSrdEnabled has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether ENA Express is enabled for the network interface.</p>")
   enaSrdEnabled?: boolean;
 
@@ -3699,15 +3712,18 @@ model InstanceAttachmentEnaSrdSpecification {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceAttachmentEnaSrdUdpSpecification")
 model InstanceAttachmentEnaSrdUdpSpecification {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InstanceAttachmentEnaSrdUdpSpecification.enaSrdUdpEnabled has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting, you must first enable ENA Express.</p>")
   enaSrdUdpEnabled?: boolean;
 }
 
 @doc("Defines the stop action properties.")
 model StopEc2InstanceOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StopEc2InstanceOptions.force has a boolean wire value; preserve the published property contract."
   @doc("Forces the instance to stop. The instance does not have an opportunity to flush file system caches or file system metadata. If you use this option, you must perform file system check and repair procedures. This option is not recommended for Windows instances. Defaults to false.")
   force?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StopEc2InstanceOptions.hibernate has a boolean wire value; preserve the published property contract."
   @doc("Hibernates the instance if the instance was enabled for hibernation at launch. If the instance cannot hibernate successfully, a normal shutdown occurs. Defaults to false.")
   hibernate?: boolean = false;
 }

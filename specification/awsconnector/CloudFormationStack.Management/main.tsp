@@ -77,9 +77,11 @@ model AwsCloudFormationStackProperties {
   @doc("Property description")
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsCloudFormationStackProperties.disableRollback has a boolean wire value; preserve the published property contract."
   @doc("Property disableRollback")
   disableRollback?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsCloudFormationStackProperties.enableTerminationProtection has a boolean wire value; preserve the published property contract."
   @doc("Property enableTerminationProtection")
   enableTerminationProtection?: boolean;
 

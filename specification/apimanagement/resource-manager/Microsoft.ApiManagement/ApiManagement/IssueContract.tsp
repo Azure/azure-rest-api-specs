@@ -74,6 +74,7 @@ interface IssueContracts {
       /**
        * Expand the comment attachments.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing get.expandCommentsAttachments has a boolean wire value; preserve the published property contract."
       @query("expandCommentsAttachments")
       expandCommentsAttachments?: boolean;
     },
@@ -184,6 +185,7 @@ interface IssueContracts {
       /**
        * Expand the comment attachments.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByService.expandCommentsAttachments has a boolean wire value; preserve the published property contract."
       @query("expandCommentsAttachments")
       expandCommentsAttachments?: boolean;
 

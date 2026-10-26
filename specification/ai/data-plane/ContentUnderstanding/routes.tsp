@@ -19,6 +19,7 @@ model OperationIdHeader {
 }
 
 alias AllowReplaceParameter = {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AllowReplaceParameter.allowReplace has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_11_01)
   @doc("Allow the operation to replace an existing resource.")
   @query

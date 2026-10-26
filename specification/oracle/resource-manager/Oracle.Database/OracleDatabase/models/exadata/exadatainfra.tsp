@@ -76,9 +76,11 @@ union CloudExadataInfrastructureLifecycleState {
 @doc("Predefined configurations for the file system")
 @added(Versions.v20241201_preview)
 model DefinedFileSystemConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DefinedFileSystemConfiguration.isBackupPartition has a boolean wire value; preserve the published property contract."
   @doc("Checks if the data can be backed up")
   isBackupPartition?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DefinedFileSystemConfiguration.isResizable has a boolean wire value; preserve the published property contract."
   @doc("Checks if the mount path is resizable")
   isResizable?: boolean;
 
@@ -121,10 +123,12 @@ model MaintenanceWindow {
   @maxValue(120)
   customActionTimeoutInMins?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MaintenanceWindow.isCustomActionTimeoutEnabled has a boolean wire value; preserve the published property contract."
   @doc("If true, enables the configuration of a custom action timeout (waiting period) between database server patching operations.")
   isCustomActionTimeoutEnabled?: boolean;
 
   // isMonthlyPatchingEnabled parameter was found in response in OCI, but is not found in OCI Docs: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/datatypes/MaintenanceWindow
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MaintenanceWindow.isMonthlyPatchingEnabled has a boolean wire value; preserve the published property contract."
   @doc("is Monthly Patching Enabled")
   isMonthlyPatchingEnabled?: boolean;
 }

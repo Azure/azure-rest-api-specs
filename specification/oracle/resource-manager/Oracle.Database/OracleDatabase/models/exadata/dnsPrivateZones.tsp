@@ -23,6 +23,7 @@ model DnsPrivateZoneProperties {
   @doc("The OCID of the Zone")
   ocid: Ocid;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DnsPrivateZoneProperties.isProtected has a boolean wire value; preserve the published property contract."
   @doc("A Boolean flag indicating whether or not parts of the resource are unable to be explicitly managed.")
   isProtected: boolean;
 

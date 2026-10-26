@@ -29,6 +29,7 @@ model NetworkFabricControllerProperties {
     }
   ]>[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkFabricControllerProperties.workloadManagementNetwork has a boolean wire value; preserve the published property contract."
   @doc("A workload management network is required for all the tenant (workload) traffic. This traffic is only dedicated for Tenant workloads which are required to access internet or any other MSFT/Public endpoints. This is used for the backward compatibility.")
   @visibility(Lifecycle.Read)
   @removed(Versions.v2024_06_15_preview)

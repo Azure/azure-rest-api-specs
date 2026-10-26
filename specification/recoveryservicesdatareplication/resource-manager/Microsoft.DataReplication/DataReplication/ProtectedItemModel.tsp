@@ -69,6 +69,7 @@ interface ProtectedItem {
       /**
        * A flag indicating whether to do force delete or not.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.forceDelete has a boolean wire value; preserve the published property contract."
       @query("forceDelete")
       forceDelete?: boolean;
     }

@@ -183,6 +183,7 @@ interface AppServicePlans {
        * Specify <code>true</code> to return all App Service plan properties. The default is <code>false</code>, which returns a subset of the properties.
        *  Retrieval of all properties may increase the API latency.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.detailed has a boolean wire value; preserve the published property contract."
       @query("detailed")
       detailed?: boolean;
     },
@@ -230,6 +231,7 @@ interface AppServicePlans {
       /**
        * Specify <code>true</code> to perform a soft restart, applies the configuration settings and restarts the apps if necessary. The default is <code>false</code>, which always restarts and reprovisions the apps
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing restartWebApps.softRestart has a boolean wire value; preserve the published property contract."
       @query("softRestart")
       softRestart?: boolean;
     },

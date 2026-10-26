@@ -3279,6 +3279,7 @@ op checkNameAvailabilityCustomized(
   /**
    * Is fully qualified domain name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing checkNameAvailabilityCustomized.isFqdn has a boolean wire value; preserve the published property contract."
   isFqdn?: boolean,
 
   /**

@@ -252,6 +252,7 @@ model SubscriptionScopeMetricDefinition {
   /**
    * Flag to indicate whether the dimension is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SubscriptionScopeMetricDefinition.isDimensionRequired has a boolean wire value; preserve the published property contract."
   isDimensionRequired?: boolean;
 
   /**
@@ -356,6 +357,7 @@ model MetricDefinition {
   /**
    * Flag to indicate whether the dimension is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricDefinition.isDimensionRequired has a boolean wire value; preserve the published property contract."
   isDimensionRequired?: boolean;
 
   /**
@@ -692,10 +694,12 @@ model SubscriptionScopeMetricsRequestBodyParameters {
   /**
    * When set to true, if the timespan passed in is not supported by this metric, the API will return the result using the closest supported timespan. When set to false, an error is returned for invalid timespan parameters. Defaults to false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SubscriptionScopeMetricsRequestBodyParameters.autoAdjustTimegrain has a boolean wire value; preserve the published property contract."
   autoAdjustTimegrain?: boolean;
 
   /**
    * When set to false, invalid filter parameter values will be ignored. When set to true, an error is returned for invalid filter parameters. Defaults to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SubscriptionScopeMetricsRequestBodyParameters.validateDimensions has a boolean wire value; preserve the published property contract."
   validateDimensions?: boolean;
 }

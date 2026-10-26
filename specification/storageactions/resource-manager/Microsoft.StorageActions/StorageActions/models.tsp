@@ -217,6 +217,7 @@ model StorageTaskPreviewActionCondition {
   /**
    * Specify whether the else block is present in the condition.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StorageTaskPreviewActionCondition.elseBlockExists has a boolean wire value; preserve the published property contract."
   elseBlockExists: boolean;
 }
 
@@ -245,6 +246,7 @@ model StorageTaskProperties {
   /**
    * Storage Task is enabled when set to true and disabled when set to false
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StorageTaskProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -404,6 +406,7 @@ model StorageTaskUpdateProperties {
   /**
    * Storage Task is enabled when set to true and disabled when set to false
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StorageTaskUpdateProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**

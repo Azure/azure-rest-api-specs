@@ -162,6 +162,7 @@ model AiGatewayTelemetryExporterProperties {
   kind: AiGatewayTelemetryExporterKind;
 
   /** Capture prompts, completions, and tool input/output; no built-in PII redaction is applied. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AiGatewayTelemetryExporterProperties.payloadCapture has a boolean wire value; preserve the published property contract."
   payloadCapture?: boolean = false;
 
   /** Configuration required for the ApplicationInsights exporter kind. */
@@ -182,6 +183,7 @@ model AiGatewayTelemetryExporterProperties {
 @added(Versions.v2026_11_01)
 model AiGatewayTelemetryExporterUpdateProperties {
   /** Capture prompts, completions, and tool input/output. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AiGatewayTelemetryExporterUpdateProperties.payloadCapture has a boolean wire value; preserve the published property contract."
   payloadCapture?: boolean;
 
   /** Application Insights configuration. */

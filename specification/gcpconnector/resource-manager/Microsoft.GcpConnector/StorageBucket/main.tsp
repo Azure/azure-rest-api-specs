@@ -72,6 +72,7 @@ model GcpBucketProperties {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   autoclass?: {
     /** Whether or not Autoclass is enabled on this bucket */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpBucketProperties.enabled has a boolean wire value; preserve the published property contract."
     enabled?: boolean;
 
     /** The storage class that objects in the bucket eventually transition to if they are not read for a certain length of time. Valid values are NEARLINE and ARCHIVE. */
@@ -90,6 +91,7 @@ model GcpBucketProperties {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   billing?: {
     /** When set to true, Requester Pays is enabled for this bucket. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpBucketProperties.requesterPays has a boolean wire value; preserve the published property contract."
     requesterPays?: boolean;
   };
 
@@ -123,6 +125,7 @@ model GcpBucketProperties {
   /**
    * The default value for event-based hold on newly created objects in this bucket. Event-based hold is a way to retain objects indefinitely until an event occurs, signified by the hold's release. After being released, such objects will be subject to bucket-level retention (if any). One sample use case of this flag is for banks to hold loan documents for at least 3 years after loan is paid in full. Here, bucket-level retention is 3 years and the event is loan being paid in full. In this example, these objects will be held intact for any number of years until the event has occurred (event-based hold on the object is released) and then 3 more years after that. That means retention duration of the objects begins from the moment event-based hold transitioned from true to false. Objects under event-based hold cannot be deleted, overwritten or archived until the hold is removed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpBucketProperties.defaultEventBasedHold has a boolean wire value; preserve the published property contract."
   defaultEventBasedHold?: boolean;
 
   /**
@@ -150,6 +153,7 @@ model GcpBucketProperties {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   hierarchicalNamespace?: {
     /** When set to true, hierarchical namespace is enabled for this bucket. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpBucketProperties.enabled has a boolean wire value; preserve the published property contract."
     enabled?: boolean;
   };
 
@@ -162,6 +166,7 @@ model GcpBucketProperties {
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
     bucketPolicyOnly?: {
       /** If set, access is controlled only by bucket-level or above IAM policies. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpBucketProperties.enabled has a boolean wire value; preserve the published property contract."
       enabled?: boolean;
 
       /** The deadline for changing iamConfiguration.bucketPolicyOnly.enabled from true to false in RFC 3339 format. iamConfiguration.bucketPolicyOnly.enabled may be changed from true to false until the locked time, after which the field is immutable. */
@@ -175,6 +180,7 @@ model GcpBucketProperties {
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
     uniformBucketLevelAccess?: {
       /** If set, access is controlled only by bucket-level or above IAM policies. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpBucketProperties.enabled has a boolean wire value; preserve the published property contract."
       enabled?: boolean;
 
       /** The deadline for changing iamConfiguration.uniformBucketLevelAccess.enabled from true to false in RFC 3339  format. iamConfiguration.uniformBucketLevelAccess.enabled may be changed from true to false until the locked time, after which the field is immutable. */
@@ -240,6 +246,7 @@ model GcpBucketProperties {
         daysSinceNoncurrentTime?: int32;
 
         /** Relevant only for versioned objects. If the value is true, this condition matches live objects; if the value is false, it matches archived objects. */
+        #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpBucketProperties.isLive has a boolean wire value; preserve the published property contract."
         isLive?: boolean;
 
         /** A regular expression that satisfies the RE2 syntax. This condition is satisfied when the name of the object matches the RE2 pattern. Note: This feature is currently in the "Early Access" launch stage and is only available to a whitelisted set of users; that means that this feature may be changed in backward-incompatible ways and that it is not guaranteed to be released. */
@@ -330,6 +337,7 @@ model GcpBucketProperties {
     effectiveTime?: utcDateTime;
 
     /** Once locked, an object retention policy cannot be modified. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpBucketProperties.isLocked has a boolean wire value; preserve the published property contract."
     isLocked?: boolean;
 
     /** The duration in seconds that objects need to be retained. Retention duration must be greater than zero and less than 100 years. Note that enforcement of retention periods less than a day is not guaranteed. Such periods should only be used for testing purposes. */
@@ -344,6 +352,7 @@ model GcpBucketProperties {
   /**
    * Reserved for future use.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpBucketProperties.satisfiesPZS has a boolean wire value; preserve the published property contract."
   satisfiesPZS?: boolean;
 
   /**
@@ -384,6 +393,7 @@ model GcpBucketProperties {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Mirrors the Google Cloud discovery document, which defines this nested object inline on its parent rather than as a named, independently referenced schema. Naming it here would introduce a type that has no counterpart in the Google API surface this resource projects."
   versioning?: {
     /** While set to true, versioning is fully enabled for this bucket. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpBucketProperties.enabled has a boolean wire value; preserve the published property contract."
     enabled?: boolean;
   };
 

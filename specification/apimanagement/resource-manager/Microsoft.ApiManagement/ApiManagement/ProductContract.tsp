@@ -246,6 +246,7 @@ interface ProductContracts {
       /**
        * Delete existing subscriptions associated with the product or not.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.deleteSubscriptions has a boolean wire value; preserve the published property contract."
       @query("deleteSubscriptions")
       deleteSubscriptions?: boolean;
     }
@@ -280,6 +281,7 @@ interface ProductContracts {
       /**
        * When set to true, the response contains an array of groups that have visibility to the product. The default is false.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByService.expandGroups has a boolean wire value; preserve the published property contract."
       @query("expandGroups")
       expandGroups?: boolean;
 
@@ -627,6 +629,7 @@ interface WorkspaceProduct {
       /**
        * Delete existing subscriptions associated with the product or not.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.deleteSubscriptions has a boolean wire value; preserve the published property contract."
       @query("deleteSubscriptions")
       deleteSubscriptions?: boolean;
     }
@@ -661,6 +664,7 @@ interface WorkspaceProduct {
       /**
        * When set to true, the response contains an array of groups that have visibility to the product. The default is false.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByService.expandGroups has a boolean wire value; preserve the published property contract."
       @query("expandGroups")
       expandGroups?: boolean;
 

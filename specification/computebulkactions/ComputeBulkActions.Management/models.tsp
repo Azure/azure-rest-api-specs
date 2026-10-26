@@ -53,6 +53,7 @@ alias LaunchBulkInstancesOperationId = {
 
 alias DeleteInstancesParameter = {
   /** When true, deletes all virtual machines created by this BulkAction Operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeleteInstancesParameter.deleteInstances has a boolean wire value; preserve the published property contract."
   @query
   deleteInstances?: boolean;
 };

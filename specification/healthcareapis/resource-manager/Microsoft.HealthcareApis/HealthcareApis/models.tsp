@@ -451,6 +451,7 @@ model ServiceAuthenticationConfigurationInfo {
   /**
    * If the SMART on FHIR proxy is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServiceAuthenticationConfigurationInfo.smartProxyEnabled has a boolean wire value; preserve the published property contract."
   smartProxyEnabled?: boolean;
 }
 
@@ -482,6 +483,7 @@ model ServiceCorsConfigurationInfo {
   /**
    * If credentials are allowed via CORS.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServiceCorsConfigurationInfo.allowCredentials has a boolean wire value; preserve the published property contract."
   allowCredentials?: boolean;
 }
 
@@ -543,11 +545,13 @@ model ServiceImportConfigurationInfo {
   /**
    * If the FHIR service is in InitialImportMode.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServiceImportConfigurationInfo.initialImportMode has a boolean wire value; preserve the published property contract."
   initialImportMode?: boolean;
 
   /**
    * If the import operation is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServiceImportConfigurationInfo.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -707,6 +711,7 @@ model ServicesNameAvailabilityInfo {
   /**
    * The value which indicates whether the provided name is available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServicesNameAvailabilityInfo.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
@@ -921,6 +926,7 @@ model DicomServiceProperties {
   /**
    * If data partitions is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DicomServiceProperties.enableDataPartitions has a boolean wire value; preserve the published property contract."
   enableDataPartitions?: boolean;
 }
 
@@ -969,6 +975,7 @@ model CorsConfiguration {
   /**
    * If credentials are allowed via CORS.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CorsConfiguration.allowCredentials has a boolean wire value; preserve the published property contract."
   allowCredentials?: boolean;
 }
 
@@ -1283,6 +1290,7 @@ model FhirServiceAuthenticationConfiguration {
   /**
    * If the SMART on FHIR proxy is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FhirServiceAuthenticationConfiguration.smartProxyEnabled has a boolean wire value; preserve the published property contract."
   smartProxyEnabled?: boolean;
 
   /**
@@ -1356,6 +1364,7 @@ model FhirServiceCorsConfiguration {
   /**
    * If credentials are allowed via CORS.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FhirServiceCorsConfiguration.allowCredentials has a boolean wire value; preserve the published property contract."
   allowCredentials?: boolean;
 }
 
@@ -1397,11 +1406,13 @@ model FhirServiceImportConfiguration {
   /**
    * If the FHIR service is in InitialImportMode.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FhirServiceImportConfiguration.initialImportMode has a boolean wire value; preserve the published property contract."
   initialImportMode?: boolean;
 
   /**
    * If the import operation is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FhirServiceImportConfiguration.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -1412,6 +1423,7 @@ model ImplementationGuidesConfiguration {
   /**
    * If US Core Missing Data requirement is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ImplementationGuidesConfiguration.usCoreMissingData has a boolean wire value; preserve the published property contract."
   usCoreMissingData?: boolean;
 }
 
@@ -1436,6 +1448,7 @@ model OperationDetail {
   /**
    * Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for ARM/control-plane operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OperationDetail.isDataAction has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDataAction?: boolean;
 
@@ -1585,6 +1598,7 @@ model MetricSpecification {
   /**
    * Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecification.fillGapWithZero has a boolean wire value; preserve the published property contract."
   fillGapWithZero?: boolean;
 
   /**
@@ -1601,6 +1615,7 @@ model MetricSpecification {
   /**
    * Whether the metric is internal.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecification.isInternal has a boolean wire value; preserve the published property contract."
   isInternal?: boolean;
 
   /**
@@ -1616,6 +1631,7 @@ model MetricSpecification {
   /**
    * Whether regional MDM account enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecification.enableRegionalMdmAccount has a boolean wire value; preserve the published property contract."
   enableRegionalMdmAccount?: boolean;
 
   /**
@@ -1641,6 +1657,7 @@ model MetricDimension {
   /**
    * Whether this dimension should be included for the Shoebox export scenario
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricDimension.toBeExportedForShoebox has a boolean wire value; preserve the published property contract."
   toBeExportedForShoebox?: boolean;
 }
 

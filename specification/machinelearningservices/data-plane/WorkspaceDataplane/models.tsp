@@ -181,6 +181,7 @@ model NotebookResourceInfo {
   fqdn?: string;
 
   /** Whether private link is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NotebookResourceInfo.isPrivateLinkEnabled has a boolean wire value; preserve the published property contract."
   isPrivateLinkEnabled?: boolean;
 
   /** The error that occurs when preparing notebook. */
@@ -301,6 +302,7 @@ model WorkspacePrivateEndpointResource {
 /** The properties of a machine learning workspace. */
 model WorkspaceProperties {
   /** The flag to indicate whether to allow public access when behind VNet. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.allowPublicAccessWhenBehindVnet has a boolean wire value; preserve the published property contract."
   allowPublicAccessWhenBehindVnet?: boolean;
 
   /** ARM id of the application insights associated with this workspace. */
@@ -323,6 +325,7 @@ model WorkspaceProperties {
   discoveryUrl?: string;
 
   /** Whether data isolation is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.enableDataIsolation has a boolean wire value; preserve the published property contract."
   enableDataIsolation?: boolean;
 
   /** Encryption configuration. */
@@ -338,6 +341,7 @@ model WorkspaceProperties {
   friendlyName?: string;
 
   /** The flag to signal HBI data in the workspace and reduce diagnostic data collected by the service. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.hbiWorkspace has a boolean wire value; preserve the published property contract."
   hbiWorkspace?: boolean;
 
   /** Hub resource ID. */
@@ -401,6 +405,7 @@ model WorkspaceProperties {
   storageAccounts?: string[];
 
   /** If the storage associated with the workspace has hierarchical namespace(HNS) enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.storageHnsEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   storageHnsEnabled?: boolean;
 
@@ -412,6 +417,7 @@ model WorkspaceProperties {
   tenantId?: string;
 
   /** Enabling v1_legacy_mode may prevent you from using features provided by the v2 API. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.v1LegacyMode has a boolean wire value; preserve the published property contract."
   v1LegacyMode?: boolean;
 
   /** Workspace hub configuration. */

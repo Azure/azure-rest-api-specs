@@ -71,6 +71,7 @@ interface ScalingPlans {
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByResourceGroup.isDescending has a boolean wire value; preserve the published property contract."
       @query("isDescending")
       isDescending?: boolean;
 
@@ -98,6 +99,7 @@ interface ScalingPlans {
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listBySubscription.isDescending has a boolean wire value; preserve the published property contract."
       @query("isDescending")
       isDescending?: boolean;
 
@@ -130,6 +132,7 @@ interface ScalingPlans {
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByHostPool.isDescending has a boolean wire value; preserve the published property contract."
       @query("isDescending")
       isDescending?: boolean;
 

@@ -25,6 +25,7 @@ model DnsPrivateViewProperties {
   @doc("The display name of the view resource")
   displayName: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DnsPrivateViewProperties.isProtected has a boolean wire value; preserve the published property contract."
   @doc("A Boolean flag indicating whether or not parts of the resource are unable to be explicitly managed.")
   isProtected: boolean;
 

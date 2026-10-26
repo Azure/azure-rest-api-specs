@@ -253,6 +253,7 @@ model CheckAvailabilityParametersReplacement
   /**
    * Not used and deprecated since API version 2023-01-01-preview
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CheckAvailabilityParametersReplacement.isAvailiable has a boolean wire value; preserve the published property contract."
   isAvailiable?: boolean;
 
   /**

@@ -192,6 +192,7 @@ interface NamedValueContracts {
       /**
        * When set to true, the response contains only named value entities which failed refresh.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByService.isKeyVaultRefreshFailed has a boolean wire value; preserve the published property contract."
       @query("isKeyVaultRefreshFailed")
       isKeyVaultRefreshFailed?: boolean;
     },

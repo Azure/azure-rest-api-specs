@@ -60,6 +60,7 @@ model SnapshotPolicyProperties {
   /**
    * The property to decide policy is enabled or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SnapshotPolicyProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**

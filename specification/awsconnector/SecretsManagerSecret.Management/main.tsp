@@ -101,15 +101,19 @@ model GenerateSecretString {
   @doc("A string of the characters that you don't want in the password.")
   excludeCharacters?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GenerateSecretString.excludeLowercase has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether to exclude lowercase letters from the password. If you don't include this switch, the password can contain lowercase letters.")
   excludeLowercase?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GenerateSecretString.excludeNumbers has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether to exclude numbers from the password. If you don't include this switch, the password can contain numbers.")
   excludeNumbers?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GenerateSecretString.excludePunctuation has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether to exclude the following punctuation characters from the password: ``! ' # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ ` { | } ~``. If you don't include this switch, the password can contain punctuation.")
   excludePunctuation?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GenerateSecretString.excludeUppercase has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether to exclude uppercase letters from the password. If you don't include this switch, the password can contain uppercase letters.")
   excludeUppercase?: boolean;
 
@@ -117,12 +121,14 @@ model GenerateSecretString {
   @doc("The JSON key name for the key/value pair, where the value is the generated password. This pair is added to the JSON structure specified by the ``SecretStringTemplate`` parameter. If you specify this parameter, then you must also specify ``SecretStringTemplate``.")
   generateStringKey?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GenerateSecretString.includeSpace has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether to include the space character. If you include this switch, the password can contain space characters.")
   includeSpace?: boolean;
 
   @doc("The length of the password. If you don't include this parameter, the default length is 32 characters.")
   passwordLength?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GenerateSecretString.requireEachIncludedType has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether to include at least one upper and lowercase letter, one number, and one punctuation. If you don't include this switch, the password contains at least one of every character type.")
   requireEachIncludedType?: boolean;
 

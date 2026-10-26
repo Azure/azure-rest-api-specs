@@ -284,6 +284,7 @@ model AutomationProperties {
   /**
    * Indicates whether the security automation is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutomationProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
@@ -400,6 +401,7 @@ model AutomationValidationStatus {
   /**
    * Indicates whether the model is valid or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutomationValidationStatus.isValid has a boolean wire value; preserve the published property contract."
   isValid?: boolean;
 
   /**
@@ -431,6 +433,7 @@ model SecurityContactProperties {
   /**
    * Indicates whether the security contact is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SecurityContactProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
@@ -514,6 +517,7 @@ model AutomationActionEventHub extends AutomationAction {
   /**
    * Indicates whether the trusted service is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutomationActionEventHub.isTrustedServiceEnabled has a boolean wire value; preserve the published property contract."
   isTrustedServiceEnabled?: boolean;
 
   /**

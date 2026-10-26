@@ -21,6 +21,7 @@ model NamespaceAssetProperties {
   @visibility(Lifecycle.Read)
   uuid?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NamespaceAssetProperties.enabled has a boolean wire value; preserve the published property contract."
   @doc("Enabled/disabled status of the asset.")
   enabled?: boolean;
 

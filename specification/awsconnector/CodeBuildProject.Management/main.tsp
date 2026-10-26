@@ -189,6 +189,7 @@ model ProjectArtifacts {
   @doc("Property bucketOwnerAccess")
   bucketOwnerAccess?: BucketOwnerAccessEnumValue;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProjectArtifacts.encryptionDisabled has a boolean wire value; preserve the published property contract."
   @doc("<p> Set to true if you do not want your output artifacts encrypted. This option is valid only if your artifacts type is Amazon S3. If this is set with another artifacts type, an invalidInputException is thrown. </p>")
   encryptionDisabled?: boolean;
 
@@ -201,6 +202,7 @@ model ProjectArtifacts {
   @doc("<p>Along with <code>path</code> and <code>name</code>, the pattern that CodeBuild uses to determine the name and location to store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output names instead of CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>BUILD_ID</code>: Include the build ID in the location of the build output artifact.</p> </li> <li> <p> <code>NONE</code>: Do not include the build ID. This is the default if <code>namespaceType</code> is not specified.</p> </li> </ul> </li> </ul> <p>For example, if <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, the output artifact is stored in <code>MyArtifacts/&lt;build-ID&gt;/MyArtifact.zip</code>.</p>")
   namespaceType?: ArtifactNamespaceEnumValue;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProjectArtifacts.overrideArtifactName has a boolean wire value; preserve the published property contract."
   @doc("<p> If this flag is set, a name specified in the buildspec file overrides the artifact name. The name specified in a buildspec file is calculated at build time and uses the Shell Command Language. For example, you can append a date and time to your artifact name so that it is always unique. </p>")
   overrideArtifactName?: boolean;
 
@@ -265,6 +267,7 @@ model ArtifactPackagingEnumValue {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ProjectBadge")
 model ProjectBadge {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProjectBadge.badgeEnabled has a boolean wire value; preserve the published property contract."
   @doc("<p>Set this to true to generate a publicly accessible URL for your project's build badge.</p>")
   badgeEnabled?: boolean;
 
@@ -302,6 +305,7 @@ model ProjectBuildBatchConfig {
   @doc("<p>Specifies how build status reports are sent to the source provider for the batch build. This property is only used when the source provider for your project is Bitbucket, GitHub, or GitHub Enterprise, and your project is configured to report build statuses to the source provider.</p> <dl> <dt>REPORT_AGGREGATED_BATCH</dt> <dd> <p>(Default) Aggregate all of the build statuses into a single status report.</p> </dd> <dt>REPORT_INDIVIDUAL_BUILDS</dt> <dd> <p>Send a separate status report for each individual build.</p> </dd> </dl>")
   batchReportMode?: BatchReportModeTypeEnumValue;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProjectBuildBatchConfig.combineArtifacts has a boolean wire value; preserve the published property contract."
   @doc("<p>Specifies if the build artifacts for the batch build should be combined into a single artifact location.</p>")
   combineArtifacts?: boolean;
 
@@ -425,6 +429,7 @@ model ProjectEnvironment {
   @doc("<p> The type of credentials CodeBuild uses to pull images in your build. There are two valid values: </p> <ul> <li> <p> <code>CODEBUILD</code> specifies that CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust CodeBuild service principal. </p> </li> <li> <p> <code>SERVICE_ROLE</code> specifies that CodeBuild uses your build project's service role. </p> </li> </ul> <p> When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an CodeBuild curated image, you must use CODEBUILD credentials. </p>")
   imagePullCredentialsType?: ImagePullCredentialsTypeEnumValue;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProjectEnvironment.privilegedMode has a boolean wire value; preserve the published property contract."
   @doc("<p>Enables running the Docker daemon inside a Docker container. Set to true only if the build project is used to build Docker images. Otherwise, a build that attempts to interact with the Docker daemon fails. The default setting is <code>false</code>.</p> <p>You can initialize the Docker daemon during the install phase of your build by adding one of the following sets of commands to the install phase of your buildspec file:</p> <p>If the operating system's base image is Ubuntu Linux:</p> <p> <code>- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&amp;</code> </p> <p> <code>- timeout 15 sh -c 'until docker info; do echo .; sleep 1; done'</code> </p> <p>If the operating system's base image is Alpine Linux and the previous command does not work, add the <code>-t</code> argument to <code>timeout</code>:</p> <p> <code>- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&amp;</code> </p> <p> <code>- timeout -t 15 sh -c 'until docker info; do echo .; sleep 1; done'</code> </p>")
   privilegedMode?: boolean;
 
@@ -648,12 +653,14 @@ model ProjectSource {
   @doc("<p> Information about the Git submodules configuration for the build project. </p>")
   gitSubmodulesConfig?: GitSubmodulesConfig;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProjectSource.insecureSsl has a boolean wire value; preserve the published property contract."
   @doc("<p>Enable this flag to ignore SSL warnings while connecting to the project source code.</p>")
   insecureSsl?: boolean;
 
   @doc("<p>Information about the location of the source code to be built. Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in CodePipeline, <code>location</code> should not be specified. If it is specified, CodePipeline ignores it. This is because CodePipeline uses the settings in a pipeline's source action instead of this value.</p> </li> <li> <p>For source code in an CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the buildspec file (for example, <code>https://git-codecommit.&lt;region-ID&gt;.amazonaws.com/v1/repos/&lt;repo-name&gt;</code>).</p> </li> <li> <p>For source code in an Amazon S3 input bucket, one of the following. </p> <ul> <li> <p>The path to the ZIP file that contains the source code (for example, <code>&lt;bucket-name&gt;/&lt;path&gt;/&lt;object-name&gt;.zip</code>). </p> </li> <li> <p>The path to the folder that contains the source code (for example, <code>&lt;bucket-name&gt;/&lt;path-to-source-code&gt;/&lt;folder&gt;/</code>). </p> </li> </ul> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your Amazon Web Services account to your GitHub account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with GitHub, on the GitHub <b>Authorize application</b> page, for <b>Organization access</b>, choose <b>Request access</b> next to each repository you want to allow CodeBuild to have access to, and then choose <b>Authorize application</b>. (After you have connected to your GitHub account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to use this connection, in the <code>source</code> object, set the <code>auth</code> object's <code>type</code> value to <code>OAUTH</code>.</p> </li> <li> <p>For source code in an GitLab or self-managed GitLab repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your Amazon Web Services account to your GitLab account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with GitLab, on the Connections <b>Authorize application</b> page, choose <b>Authorize</b>. Then on the CodeConnections <b>Create GitLab connection</b> page, choose <b>Connect to GitLab</b>. (After you have connected to your GitLab account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to override the default connection and use this connection instead, set the <code>auth</code> object's <code>type</code> value to <code>CODECONNECTIONS</code> in the <code>source</code> object.</p> </li> <li> <p>For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your Amazon Web Services account to your Bitbucket account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with Bitbucket, on the Bitbucket <b>Confirm access to your account</b> page, choose <b>Grant access</b>. (After you have connected to your Bitbucket account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to use this connection, in the <code>source</code> object, set the <code>auth</code> object's <code>type</code> value to <code>OAUTH</code>.</p> </li> </ul> <p> If you specify <code>CODEPIPELINE</code> for the <code>Type</code> property, don't specify this property. For all of the other types, you must specify <code>Location</code>. </p>")
   location?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProjectSource.reportBuildStatus has a boolean wire value; preserve the published property contract."
   @doc("<p> Set to true to report the status of a build's start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket. If this is set and you use a different source provider, an <code>invalidInputException</code> is thrown. </p> <p>To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href='https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html'>Source provider access</a> in the <i>CodeBuild User Guide</i>.</p> <p>The status of a build triggered by a webhook is always reported to your source provider. </p> <p>If your project's builds are triggered by a webhook, you must push a new commit to the repo for a change to this property to take effect.</p>")
   reportBuildStatus?: boolean;
 
@@ -927,6 +934,7 @@ model S3LogsConfig {
   @doc("Property bucketOwnerAccess")
   bucketOwnerAccess?: BucketOwnerAccessEnumValue;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing S3LogsConfig.encryptionDisabled has a boolean wire value; preserve the published property contract."
   @doc("<p> Set to true if you do not want your S3 build log output encrypted. By default S3 build logs are encrypted. </p>")
   encryptionDisabled?: boolean;
 
@@ -990,6 +998,7 @@ model BuildStatusConfig {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of GitSubmodulesConfig")
 model GitSubmodulesConfig {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GitSubmodulesConfig.fetchSubmodules has a boolean wire value; preserve the published property contract."
   @doc("<p> Set to true to fetch Git submodules for your CodeBuild build project. </p>")
   fetchSubmodules?: boolean;
 }
@@ -1010,6 +1019,7 @@ model FilterGroup {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of WebhookFilter")
 model WebhookFilter {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WebhookFilter.excludeMatchedPattern has a boolean wire value; preserve the published property contract."
   @doc("<p> Used to indicate that the <code>pattern</code> determines which webhook events do not trigger a build. If true, then a webhook event that does not match the <code>pattern</code> triggers a build. If false, then a webhook event that matches the <code>pattern</code> triggers a build. </p>")
   excludeMatchedPattern?: boolean;
 

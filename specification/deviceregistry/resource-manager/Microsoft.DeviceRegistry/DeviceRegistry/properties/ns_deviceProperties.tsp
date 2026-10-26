@@ -19,6 +19,7 @@ model NamespaceDeviceProperties {
   @visibility(Lifecycle.Read)
   uuid?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NamespaceDeviceProperties.enabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates if the resource is enabled or not.")
   enabled?: boolean = true;
 

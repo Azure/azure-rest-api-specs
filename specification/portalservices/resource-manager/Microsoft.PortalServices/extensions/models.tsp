@@ -462,12 +462,14 @@ model ExtensionVersionProperties {
   /**
    * Indicates if the version has ever been deployed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExtensionVersionProperties.hasBeenDeployed has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasBeenDeployed?: boolean;
 
   /**
    * Indicates if duplicate zip error should be ignored.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExtensionVersionProperties.ignoreDuplicateZipError has a boolean wire value; preserve the published property contract."
   ignoreDuplicateZipError?: boolean;
 
   /**
@@ -525,6 +527,7 @@ model PatchableExtensionVersionProperties {
   /**
    * Set by RP to indicate if the version has ever been deployed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PatchableExtensionVersionProperties.hasBeenDeployed has a boolean wire value; preserve the published property contract."
   hasBeenDeployed?: boolean;
 }
 

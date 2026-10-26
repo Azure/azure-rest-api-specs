@@ -91,6 +91,7 @@ model DbSystemShapeProperties {
   @doc("The compute model of the Exadata Infrastructure")
   computeModel?: ComputeModel;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DbSystemShapeProperties.areServerTypesSupported has a boolean wire value; preserve the published property contract."
   @added(Versions.v20250101_preview)
   @doc("Indicates if the shape supports database and storage server types")
   areServerTypesSupported?: boolean;

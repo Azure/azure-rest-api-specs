@@ -29,6 +29,7 @@ model DatasetVersion {
   @doc("Dataset type")
   type: DatasetType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DatasetVersion.isReference has a boolean wire value; preserve the published property contract."
   @doc("Indicates if the dataset holds a reference to the storage, or the dataset manages storage itself. If true, the underlying data will not be deleted when the dataset version is deleted")
   @visibility(Lifecycle.Read)
   isReference?: boolean;

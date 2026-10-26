@@ -13,6 +13,7 @@ alias SchedulesFilterQueryParams = {
   type?: ScheduleTaskType;
 
   /** The enabled query parameter. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SchedulesFilterQueryParams.enabled has a boolean wire value; preserve the published property contract."
   @query("enabled")
   @doc("Filter by the enabled status.")
   enabled?: boolean;

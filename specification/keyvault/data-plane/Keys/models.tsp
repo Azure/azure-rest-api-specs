@@ -484,6 +484,7 @@ model KeyAttributes {
   /**
    * Indicates if the private key can be exported. Release policy must be provided when creating the first version of an exportable key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KeyAttributes.exportable has a boolean wire value; preserve the published property contract."
   exportable?: boolean;
 
   /**
@@ -592,6 +593,7 @@ model Attributes {
   /**
    * Determines whether the object is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Attributes.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -635,6 +637,7 @@ model KeyReleasePolicy {
   /**
    * Defines the mutability state of the policy. Once marked immutable, this flag cannot be reset and the policy cannot be changed under any circumstances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KeyReleasePolicy.immutable has a boolean wire value; preserve the published property contract."
   immutable?: boolean;
 
   /**
@@ -667,6 +670,7 @@ model KeyBundle {
   /**
    * True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KeyBundle.managed has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   managed?: boolean;
 
@@ -796,6 +800,7 @@ model KeyImportParameters {
   /**
    * Whether to import as a hardware key (HSM) or software key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KeyImportParameters.hsm has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "Hsm")
   hsm?: boolean;
 
@@ -917,6 +922,7 @@ model KeyItem {
   /**
    * True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KeyItem.managed has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   managed?: boolean;
 }
@@ -1131,6 +1137,7 @@ model KeyVerifyResult {
   /**
    * True if the signature is verified, otherwise false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KeyVerifyResult.value has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   value?: boolean;
 }
@@ -1329,6 +1336,7 @@ model KeyProperties {
   /**
    * Indicates if the private key can be exported. Release policy must be provided when creating the first version of an exportable key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KeyProperties.exportable has a boolean wire value; preserve the published property contract."
   exportable?: boolean;
 
   /**
@@ -1347,6 +1355,7 @@ model KeyProperties {
   /**
    * Indicates if the same key pair will be used on certificate renewal.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KeyProperties.reuseKey has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "reuse_key")
   reuseKey?: boolean;
 

@@ -52,22 +52,27 @@ interface DataSubscriptions {
       @query
       skipToken?: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.workflowSubscriptions has a boolean wire value; preserve the published property contract."
       @doc("Filter for subscriptions using workflows.")
       @query
       workflowSubscriptions?: boolean;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.legacySubscriptions has a boolean wire value; preserve the published property contract."
       @doc("Filter for legacy subscriptions not using workflows.")
       @query
       legacySubscriptions?: boolean;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.accessProvidersOnly has a boolean wire value; preserve the published property contract."
       @doc("Filter for access provider subscriptions.")
       @query
       accessProvidersOnly?: boolean;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.powerAutomate has a boolean wire value; preserve the published property contract."
       @doc("Filter by Power Automate usage.")
       @query
       powerAutomate?: boolean;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.count has a boolean wire value; preserve the published property contract."
       @doc("Return only count of matching subscriptions.")
       @query
       count?: boolean;
@@ -92,6 +97,7 @@ interface DataSubscriptions {
       @query
       businessConceptType?: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.ignoreActionStatuses has a boolean wire value; preserve the published property contract."
       @doc("Whether to ignore action statuses in filtering.")
       @query
       ignoreActionStatuses?: boolean;
@@ -156,6 +162,7 @@ interface Workflows {
       @query
       skipToken?: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.isEnabled has a boolean wire value; preserve the published property contract."
       @doc("Filter by enabled status.")
       @query
       isEnabled?: boolean;
@@ -284,6 +291,7 @@ interface Workflows {
       @query
       businessConceptType?: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getRuns.ignoreActionStatuses has a boolean wire value; preserve the published property contract."
       @doc("Whether to ignore action statuses in filtering.")
       @query
       ignoreActionStatuses?: boolean;

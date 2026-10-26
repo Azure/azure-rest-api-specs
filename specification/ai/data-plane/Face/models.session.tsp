@@ -25,13 +25,16 @@ model CreateLivenessSessionContent {
   @doc("Type of liveness mode the client should follow.")
   livenessOperationMode: LivenessOperationMode;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CreateLivenessSessionContent.sendResultsToClient has a boolean wire value; preserve the published property contract."
   @removed(Versions.v1_2)
   @doc("Whether or not to allow a '200 - Success' response body to be sent to the client, which may be undesirable for security reasons. Default is false, clients will receive a '204 - NoContent' empty body response. Regardless of selection, calling Session GetResult will always contain a response body enabling business logic to be implemented.")
   sendResultsToClient?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CreateLivenessSessionContent.deviceCorrelationIdSetInClient has a boolean wire value; preserve the published property contract."
   @doc("Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body.")
   deviceCorrelationIdSetInClient?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CreateLivenessSessionContent.enableSessionImage has a boolean wire value; preserve the published property contract."
   @doc("Whether or not store the session image.")
   @added(Versions.v1_2_preview_1)
   enableSessionImage?: boolean;
@@ -48,6 +51,7 @@ model CreateLivenessSessionContent {
 @doc("Request for creating liveness with verify session.")
 model CreateLivenessWithVerifySessionJsonContent
   is CreateLivenessSessionContent {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CreateLivenessWithVerifySessionJsonContent.returnVerifyImageHash has a boolean wire value; preserve the published property contract."
   @doc("Whether or not return the verify image hash.")
   @added(Versions.v1_2_preview_1)
   returnVerifyImageHash?: boolean;
@@ -77,6 +81,7 @@ model LivenessSessionData {
   @doc("Unique Guid per each end-user. This is to provide rate limiting and anti-hammering. If 'userCorrelationIdSetInClient' is true in this request, this 'userCorrelationId' must be null.")
   userCorrelationId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LivenessSessionData.userCorrelationIdSetInClient has a boolean wire value; preserve the published property contract."
   @added(Versions.v1_3_preview_1)
   @doc("Whether or not to allow client to set their own 'userCorrelationId' via the Vision SDK. Default is false, and 'userCorrelationId' must be set in this request body.")
   userCorrelationIdSetInClient?: boolean;
@@ -100,6 +105,7 @@ model LivenessSessionItem {
   @doc("DateTime when this session was started by the client.")
   sessionStartDateTime?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LivenessSessionItem.sessionExpired has a boolean wire value; preserve the published property contract."
   @doc("Whether or not the session is expired.")
   sessionExpired: boolean;
 
@@ -240,6 +246,7 @@ model LivenessWithVerifyOutputs {
   @maxValue(1)
   matchConfidence: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LivenessWithVerifyOutputs.isIdentical has a boolean wire value; preserve the published property contract."
   @doc("Whether the target liveness face and comparison image face match.")
   isIdentical: boolean;
 }

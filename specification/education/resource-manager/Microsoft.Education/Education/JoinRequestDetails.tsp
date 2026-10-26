@@ -91,6 +91,7 @@ interface JoinRequests {
       /**
        * Include denied
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.includeDenied has a boolean wire value; preserve the published property contract."
       @query("includeDenied")
       includeDenied?: boolean;
     },

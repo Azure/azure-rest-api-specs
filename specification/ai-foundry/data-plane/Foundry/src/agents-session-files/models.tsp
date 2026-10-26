@@ -59,6 +59,7 @@ alias DeleteSessionFileParams = {
   @query path: string;
 
   /** Whether to recursively delete directory contents. The service defaults to `false` if a value is not specified by the caller. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeleteSessionFileParams.recursive has a boolean wire value; preserve the published property contract."
   @query recursive?: boolean = false;
 };
 
@@ -85,6 +86,7 @@ model SessionDirectoryEntry {
   @doc("The size in bytes (0 for directories).")
   size: safeint;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SessionDirectoryEntry.is_directory has a boolean wire value; preserve the published property contract."
   @doc("Whether this entry is a directory.")
   is_directory: boolean;
 
@@ -103,6 +105,7 @@ model SessionDirectoryListResponse {
   last_id?: string;
 
   /** A value indicating whether there are additional values available not captured in this list. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SessionDirectoryListResponse.has_more has a boolean wire value; preserve the published property contract."
   has_more: boolean;
 
   /** The path that was listed, relative to the session home directory. */

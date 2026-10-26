@@ -572,6 +572,7 @@ model DeviceGroupProperties {
   /**
    * Deployment status for the device group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeviceGroupProperties.hasDeployment has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasDeployment?: boolean;
 

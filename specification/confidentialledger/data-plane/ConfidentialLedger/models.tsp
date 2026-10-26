@@ -379,6 +379,7 @@ model JsRuntimeOptions {
   /**
    * Whether to log exception details in the runtime.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing JsRuntimeOptions.logExceptionDetails has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "log_exception_details")
   logExceptionDetails?: boolean;
 
@@ -413,6 +414,7 @@ model JsRuntimeOptions {
   /**
    * Whether to return exception details in the response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing JsRuntimeOptions.returnExceptionDetails has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "return_exception_details")
   returnExceptionDetails?: boolean;
 }
@@ -839,6 +841,7 @@ model EndpointProperties {
   /**
    * Openapi hidden
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EndpointProperties.openapiHidden has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "openapi_hidden")
   openapiHidden?: boolean;
 

@@ -793,6 +793,7 @@ model UsagesProperties {
   /**
    * States if quota can be requested for this resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UsagesProperties.isQuotaApplicable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isQuotaApplicable?: boolean;
 
@@ -931,6 +932,7 @@ model QuotaProperties {
   /**
    * States if quota can be requested for this resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing QuotaProperties.isQuotaApplicable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isQuotaApplicable?: boolean;
 
@@ -1306,6 +1308,7 @@ model QuotaRequestOneResourceProperties {
   /**
    * States if quota can be requested for this resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing QuotaRequestOneResourceProperties.isQuotaApplicable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isQuotaApplicable?: boolean;
 

@@ -139,6 +139,7 @@ interface InstancePools {
       /**
        * Optional request parameter to include managed instance usages within the instance pool.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing usagesListByInstancePool.expandChildren has a boolean wire value; preserve the published property contract."
       @query("expandChildren")
       expandChildren?: boolean;
     }

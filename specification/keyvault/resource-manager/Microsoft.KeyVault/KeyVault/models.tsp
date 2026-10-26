@@ -720,6 +720,7 @@ model KeyAttributes {
   /**
    * Determines whether or not the object is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KeyAttributes.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -753,6 +754,7 @@ model KeyAttributes {
   /**
    * Indicates if the private key can be exported.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KeyAttributes.exportable has a boolean wire value; preserve the published property contract."
   exportable?: boolean = false;
 }
 
@@ -914,6 +916,7 @@ model ManagedHsmKeyAttributes {
   /**
    * Determines whether or not the object is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedHsmKeyAttributes.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -947,6 +950,7 @@ model ManagedHsmKeyAttributes {
   /**
    * Indicates if the private key can be exported.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedHsmKeyAttributes.exportable has a boolean wire value; preserve the published property contract."
   exportable?: boolean;
 }
 
@@ -1087,21 +1091,25 @@ model VaultProperties {
   /**
    * Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VaultProperties.enabledForDeployment has a boolean wire value; preserve the published property contract."
   enabledForDeployment?: boolean = false;
 
   /**
    * Property to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VaultProperties.enabledForDiskEncryption has a boolean wire value; preserve the published property contract."
   enabledForDiskEncryption?: boolean = false;
 
   /**
    * Property to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VaultProperties.enabledForTemplateDeployment has a boolean wire value; preserve the published property contract."
   enabledForTemplateDeployment?: boolean = false;
 
   /**
    * Property to specify whether the 'soft delete' functionality is enabled for this key vault. If it's not set to any value(true or false) when creating new key vault, it will be set to true by default. Once set to true, it cannot be reverted to false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VaultProperties.enableSoftDelete has a boolean wire value; preserve the published property contract."
   enableSoftDelete?: boolean = true;
 
   /**
@@ -1112,6 +1120,7 @@ model VaultProperties {
   /**
    * Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be  ignored. When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the vault is created with the default value of false. Note that management actions are always authorized with RBAC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VaultProperties.enableRbacAuthorizationOld has a boolean wire value; preserve the published property contract."
   @Versioning.removed(KeyVault.Versions.v2026_02_01)
   @Versioning.renamedFrom(
     KeyVault.Versions.v2026_02_01,
@@ -1122,6 +1131,7 @@ model VaultProperties {
   /**
    * Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be  ignored. When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the vault is created with the default value of false. Note that management actions are always authorized with RBAC.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VaultProperties.enableRbacAuthorization has a boolean wire value; preserve the published property contract."
   @Versioning.added(KeyVault.Versions.v2026_02_01)
   enableRbacAuthorization?: boolean = true;
 
@@ -1134,6 +1144,7 @@ model VaultProperties {
   /**
    * Property specifying whether protection against purge is enabled for this vault. Setting this property to true activates protection against purge for this vault and its content - only the Key Vault service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible - that is, the property does not accept false as its value.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VaultProperties.enablePurgeProtection has a boolean wire value; preserve the published property contract."
   enablePurgeProtection?: boolean;
 
   /**
@@ -1296,6 +1307,7 @@ model VirtualNetworkRule {
   /**
    * Property to specify whether NRP will ignore the check if parent subnet has serviceEndpoints configured.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualNetworkRule.ignoreMissingVnetServiceEndpoint has a boolean wire value; preserve the published property contract."
   ignoreMissingVnetServiceEndpoint?: boolean;
 }
 
@@ -1440,26 +1452,31 @@ model VaultPatchProperties {
   /**
    * Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VaultPatchProperties.enabledForDeployment has a boolean wire value; preserve the published property contract."
   enabledForDeployment?: boolean;
 
   /**
    * Property to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VaultPatchProperties.enabledForDiskEncryption has a boolean wire value; preserve the published property contract."
   enabledForDiskEncryption?: boolean;
 
   /**
    * Property to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VaultPatchProperties.enabledForTemplateDeployment has a boolean wire value; preserve the published property contract."
   enabledForTemplateDeployment?: boolean;
 
   /**
    * Property to specify whether the 'soft delete' functionality is enabled for this key vault. Once set to true, it cannot be reverted to false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VaultPatchProperties.enableSoftDelete has a boolean wire value; preserve the published property contract."
   enableSoftDelete?: boolean;
 
   /**
    * Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be  ignored. When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the value of this property will not change.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VaultPatchProperties.enableRbacAuthorization has a boolean wire value; preserve the published property contract."
   enableRbacAuthorization?: boolean;
 
   /**
@@ -1475,6 +1492,7 @@ model VaultPatchProperties {
   /**
    * Property specifying whether protection against purge is enabled for this vault. Setting this property to true activates protection against purge for this vault and its content - only the Key Vault service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible - that is, the property does not accept false as its value.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VaultPatchProperties.enablePurgeProtection has a boolean wire value; preserve the published property contract."
   enablePurgeProtection?: boolean;
 
   /**
@@ -1580,6 +1598,7 @@ model DeletedVaultProperties {
   /**
    * Purge protection status of the original vault.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeletedVaultProperties.purgeProtectionEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   purgeProtectionEnabled?: boolean;
 }
@@ -1606,6 +1625,7 @@ model CheckNameAvailabilityResult {
   /**
    * A boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CheckNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
@@ -1702,6 +1722,7 @@ model ManagedHsmProperties {
   /**
    * Property to specify whether the 'soft delete' functionality is enabled for this managed HSM pool. Soft delete is enabled by default for all managed HSMs and is immutable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedHsmProperties.enableSoftDelete has a boolean wire value; preserve the published property contract."
   enableSoftDelete?: boolean = true;
 
   /**
@@ -1712,6 +1733,7 @@ model ManagedHsmProperties {
   /**
    * Property specifying whether protection against purge is enabled for this managed HSM pool. Setting this property to true activates protection against purge for this managed HSM pool and its content - only the Managed HSM service may initiate a hard, irrecoverable deletion. Enabling this functionality is irreversible.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedHsmProperties.enablePurgeProtection has a boolean wire value; preserve the published property contract."
   enablePurgeProtection?: boolean = true;
 
   /**
@@ -1848,6 +1870,7 @@ model MhsmGeoReplicatedRegion {
   /**
    * A boolean value that indicates whether the region is the primary region or a secondary region.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MhsmGeoReplicatedRegion.isPrimary has a boolean wire value; preserve the published property contract."
   isPrimary?: boolean;
 }
 
@@ -2027,6 +2050,7 @@ model DeletedManagedHsmProperties {
   /**
    * Purge protection status of the original managed HSM.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeletedManagedHsmProperties.purgeProtectionEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   purgeProtectionEnabled?: boolean;
 
@@ -2114,6 +2138,7 @@ model CheckMhsmNameAvailabilityResult {
   /**
    * A boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CheckMhsmNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
@@ -2230,6 +2255,7 @@ model MetricSpecification {
   /**
    * Property to specify whether to fill gap with zero.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecification.fillGapWithZero has a boolean wire value; preserve the published property contract."
   fillGapWithZero?: boolean;
 
   /**
@@ -2255,6 +2281,7 @@ model DimensionProperties {
   /**
    * Property to specify whether the dimension should be exported for Shoebox.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DimensionProperties.toBeExportedForShoebox has a boolean wire value; preserve the published property contract."
   toBeExportedForShoebox?: boolean;
 }
 
@@ -2321,6 +2348,7 @@ model Attributes {
   /**
    * Determines whether the object is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Attributes.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2472,6 +2500,7 @@ model Operation {
   /**
    * Property to specify whether the action is a data action.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 }
 /**

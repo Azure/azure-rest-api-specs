@@ -148,6 +148,7 @@ op listCertificateProperties is KeyVaultOperation<
     /**
      * Specifies whether to include certificates which are not completely provisioned.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listCertificateProperties.includePending has a boolean wire value; preserve the published property contract."
     @query("includePending")
     includePending?: boolean;
   },
@@ -200,6 +201,7 @@ op listDeletedCertificateProperties is KeyVaultOperation<
     /**
      * Specifies whether to include certificates which are not completely provisioned.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listDeletedCertificateProperties.includePending has a boolean wire value; preserve the published property contract."
     @query("includePending")
     includePending?: boolean;
   },

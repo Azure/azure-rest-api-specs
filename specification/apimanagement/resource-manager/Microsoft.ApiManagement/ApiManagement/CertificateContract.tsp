@@ -166,6 +166,7 @@ interface CertificateContracts {
       /**
        * When set to true, the response contains only certificates entities which failed refresh.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByService.isKeyVaultRefreshFailed has a boolean wire value; preserve the published property contract."
       @query("isKeyVaultRefreshFailed")
       isKeyVaultRefreshFailed?: boolean;
     },
@@ -342,6 +343,7 @@ interface WorkspaceCertificate {
       /**
        * When set to true, the response contains only certificates entities which failed refresh.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByWorkspace.isKeyVaultRefreshFailed has a boolean wire value; preserve the published property contract."
       @query("isKeyVaultRefreshFailed")
       isKeyVaultRefreshFailed?: boolean;
     },

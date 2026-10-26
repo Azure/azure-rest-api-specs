@@ -72,6 +72,7 @@ model RequestSession {
   tool_choice?: ToolChoice;
 
   /** Whether the model is allowed to call tools in parallel. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RequestSession.parallel_tool_calls has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01_preview)
   parallel_tool_calls?: boolean = true;
 
@@ -866,12 +867,15 @@ model ServerVad extends TurnDetection {
   end_of_utterance_detection?: EouDetection;
 
   /** Whether to automatically truncate the audio buffer when speech stops. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServerVad.auto_truncate has a boolean wire value; preserve the published property contract."
   auto_truncate?: boolean = false;
 
   /** Whether to automatically create a response when speech stops. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServerVad.create_response has a boolean wire value; preserve the published property contract."
   create_response?: boolean = false;
 
   /** Whether to allow the user's speech to interrupt the assistant's response. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServerVad.interrupt_response has a boolean wire value; preserve the published property contract."
   interrupt_response?: boolean = false;
 }
 
@@ -899,18 +903,22 @@ model AzureSemanticVad extends TurnDetection {
   speech_duration_ms?: int32;
 
   /** Whether to remove filler words (e.g., 'um', 'uh') from transcription. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureSemanticVad.remove_filler_words has a boolean wire value; preserve the published property contract."
   remove_filler_words?: boolean = false;
 
   /** List of BCP-47 language codes for speech detection. */
   languages?: string[];
 
   /** Whether to automatically truncate the audio buffer when speech stops. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureSemanticVad.auto_truncate has a boolean wire value; preserve the published property contract."
   auto_truncate?: boolean = false;
 
   /** Whether to automatically create a response when speech stops. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureSemanticVad.create_response has a boolean wire value; preserve the published property contract."
   create_response?: boolean = false;
 
   /** Whether to allow the user's speech to interrupt the assistant's response. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureSemanticVad.interrupt_response has a boolean wire value; preserve the published property contract."
   interrupt_response?: boolean = false;
 }
 
@@ -938,15 +946,19 @@ model AzureSemanticVadEn extends TurnDetection {
   speech_duration_ms?: int32;
 
   /** Whether to remove filler words (e.g., 'um', 'uh') from transcription. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureSemanticVadEn.remove_filler_words has a boolean wire value; preserve the published property contract."
   remove_filler_words?: boolean = false;
 
   /** Whether to automatically truncate the audio buffer when speech stops. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureSemanticVadEn.auto_truncate has a boolean wire value; preserve the published property contract."
   auto_truncate?: boolean = false;
 
   /** Whether to automatically create a response when speech stops. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureSemanticVadEn.create_response has a boolean wire value; preserve the published property contract."
   create_response?: boolean = false;
 
   /** Whether to allow the user's speech to interrupt the assistant's response. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureSemanticVadEn.interrupt_response has a boolean wire value; preserve the published property contract."
   interrupt_response?: boolean = false;
 }
 
@@ -974,18 +986,22 @@ model AzureSemanticVadMultilingual extends TurnDetection {
   speech_duration_ms?: int32;
 
   /** Whether to remove filler words (e.g., 'um', 'uh') from transcription. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureSemanticVadMultilingual.remove_filler_words has a boolean wire value; preserve the published property contract."
   remove_filler_words?: boolean = false;
 
   /** List of BCP-47 language codes for speech detection. */
   languages?: string[];
 
   /** Whether to automatically truncate the audio buffer when speech stops. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureSemanticVadMultilingual.auto_truncate has a boolean wire value; preserve the published property contract."
   auto_truncate?: boolean = false;
 
   /** Whether to automatically create a response when speech stops. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureSemanticVadMultilingual.create_response has a boolean wire value; preserve the published property contract."
   create_response?: boolean = false;
 
   /** Whether to allow the user's speech to interrupt the assistant's response. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureSemanticVadMultilingual.interrupt_response has a boolean wire value; preserve the published property contract."
   interrupt_response?: boolean = false;
 }
 
@@ -1118,6 +1134,7 @@ model AvatarConfig {
   `model`?: PhotoAvatarBaseModes;
 
   /** Indicates whether the avatar is customized or not. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AvatarConfig.customized has a boolean wire value; preserve the published property contract."
   customized: boolean;
 
   /** Optional video configuration including resolution, bitrate, and codec. */
@@ -1132,6 +1149,7 @@ model AvatarConfig {
   output_protocol?: AvatarOutputProtocol = AvatarOutputProtocol.webrtc;
 
   /** When enabled, forwards audit audio via WebSocket for review/debugging purposes, even when avatar output is delivered via WebRTC. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AvatarConfig.output_audit_audio has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_01_01_preview)
   output_audit_audio?: boolean = false;
 }

@@ -94,6 +94,7 @@ model AwsConfigServiceConfigurationRecorderStatusProperties {
   @doc("<p>The name of the configuration recorder.</p>")
   name?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsConfigServiceConfigurationRecorderStatusProperties.recording has a boolean wire value; preserve the published property contract."
   @doc("<p>Specifies whether or not the recorder is currently recording.</p>")
   recording?: boolean;
 }

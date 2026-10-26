@@ -93,6 +93,7 @@ interface LongTermRetentionBackups {
       /**
        * Whether or not to only get the latest backup for each database.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByDatabase.onlyLatestPerDatabase has a boolean wire value; preserve the published property contract."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 
@@ -254,6 +255,7 @@ interface LongTermRetentionBackupOperationGroup {
       /**
        * Whether or not to only get the latest backup for each database.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByResourceGroupDatabase.onlyLatestPerDatabase has a boolean wire value; preserve the published property contract."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 

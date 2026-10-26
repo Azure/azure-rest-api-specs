@@ -78,6 +78,7 @@ model AwsCloudTrailTrailProperties {
   @doc("Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.")
   cloudWatchLogsRoleArn?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsCloudTrailTrailProperties.enableLogFileValidation has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether log file validation is enabled. The default is false.")
   enableLogFileValidation?: boolean;
 
@@ -85,6 +86,7 @@ model AwsCloudTrailTrailProperties {
   @identifiers(#[])
   eventSelectors?: EventSelector[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsCloudTrailTrailProperties.includeGlobalServiceEvents has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the trail is publishing events from global services such as IAM to the log files.")
   includeGlobalServiceEvents?: boolean;
 
@@ -92,12 +94,15 @@ model AwsCloudTrailTrailProperties {
   @identifiers(#[])
   insightSelectors?: InsightSelector[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsCloudTrailTrailProperties.isLogging has a boolean wire value; preserve the published property contract."
   @doc("Whether the CloudTrail is currently logging AWS API calls.")
   isLogging?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsCloudTrailTrailProperties.isMultiRegionTrail has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted. As a best practice, consider using trails that log events in all regions.")
   isMultiRegionTrail?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsCloudTrailTrailProperties.isOrganizationTrail has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations.")
   isOrganizationTrail?: boolean;
 
@@ -151,6 +156,7 @@ model EventSelector {
   @doc("An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing 'kms.amazonaws.com'. By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail.")
   excludeManagementEventSources?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EventSelector.includeManagementEvents has a boolean wire value; preserve the published property contract."
   @doc("Specify if you want your event selector to include management events for your trail.")
   includeManagementEvents?: boolean;
 

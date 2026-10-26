@@ -242,6 +242,7 @@ alias BillingSubscriptionsListByBillingProfileParameters = {
   /**
    * Can be used to get deleted billing subscriptions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingSubscriptionsListByBillingProfileParameters.includeDeleted has a boolean wire value; preserve the published property contract."
   @query("includeDeleted")
   includeDeleted?: boolean = false;
 
@@ -278,6 +279,7 @@ alias BillingSubscriptionsListByBillingProfileParameters = {
   /**
    * The count query option allows clients to request a count of the matching resources included with the resources in the response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingSubscriptionsListByBillingProfileParameters.count has a boolean wire value; preserve the published property contract."
   @query("count")
   count?: boolean;
 
@@ -292,18 +294,21 @@ alias BillingSubscriptionsListByBillingAccountParameters = {
   /**
    * Can be used to get deleted billing subscriptions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingSubscriptionsListByBillingAccountParameters.includeDeleted has a boolean wire value; preserve the published property contract."
   @query("includeDeleted")
   includeDeleted?: boolean = false;
 
   /**
    * Can be used to get tenant-owned billing subscriptions. This field is only applies to Microsoft Online Services Program billing accounts.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingSubscriptionsListByBillingAccountParameters.includeTenantSubscriptions has a boolean wire value; preserve the published property contract."
   @query("includeTenantSubscriptions")
   includeTenantSubscriptions?: boolean = false;
 
   /**
    * Can be used to get failed billing subscriptions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingSubscriptionsListByBillingAccountParameters.includeFailed has a boolean wire value; preserve the published property contract."
   @query("includeFailed")
   includeFailed?: boolean = false;
 
@@ -340,6 +345,7 @@ alias BillingSubscriptionsListByBillingAccountParameters = {
   /**
    * The count query option allows clients to request a count of the matching resources included with the resources in the response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingSubscriptionsListByBillingAccountParameters.count has a boolean wire value; preserve the published property contract."
   @query("count")
   count?: boolean;
 

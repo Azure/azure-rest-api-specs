@@ -76,6 +76,7 @@ model GovernedServiceItem {
   @doc("Initiative enforcement (Enabled or Disabled).")
   enforcement?: GovernedServiceItemEnforcement;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GovernedServiceItem.auditOnly has a boolean wire value; preserve the published property contract."
   @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Policies set to auditOnly (True or False).")
   auditOnly?: boolean;

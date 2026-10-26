@@ -354,6 +354,7 @@ interface DatasetsV1 {
       @query searchText?: string;
 
       /** Include invisible datasets. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.includeInvisible has a boolean wire value; preserve the published property contract."
       @query includeInvisible?: boolean;
 
       /** Filter by status. */
@@ -369,12 +370,14 @@ interface DatasetsV1 {
       @query pageSize?: int32;
 
       /** Include latest definition. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.includeLatestDefinition has a boolean wire value; preserve the published property contract."
       @query includeLatestDefinition?: boolean;
 
       /** Order by field. */
       @query orderBy?: string;
 
       /** Order ascending. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.orderByAsc has a boolean wire value; preserve the published property contract."
       @query orderByAsc?: boolean;
 
       /** Dataset types to filter by. */
@@ -392,15 +395,19 @@ interface DatasetsV1 {
       ...WorkspacePathParameters;
 
       /** Register as pending. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing register.registerAsPending has a boolean wire value; preserve the published property contract."
       @query registerAsPending?: boolean;
 
       /** If exists, return OK. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing register.ifExistsOk has a boolean wire value; preserve the published property contract."
       @query ifExistsOk?: boolean;
 
       /** Update definition if exists. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing register.updateDefinitionIfExists has a boolean wire value; preserve the published property contract."
       @query updateDefinitionIfExists?: boolean;
 
       /** With data hash. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing register.withDataHash has a boolean wire value; preserve the published property contract."
       @query withDataHash?: boolean;
 
       /** User version ID. */
@@ -438,6 +445,7 @@ interface DatasetsV1 {
       @query versionId?: string;
 
       /** Include latest definition. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getDatasetByName.includeLatestDefinition has a boolean wire value; preserve the published property contract."
       @query includeLatestDefinition?: boolean;
     },
     Dataset
@@ -456,6 +464,7 @@ interface DatasetsV1 {
       @path datasetId: string;
 
       /** Force update. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing updateDataset.forceUpdate has a boolean wire value; preserve the published property contract."
       @query forceUpdate?: boolean;
 
       /** The dataset to update. */
@@ -501,9 +510,11 @@ interface DatasetsV1 {
       @path datasetId: string;
 
       /** Register as pending. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing updateDefinition.registerAsPending has a boolean wire value; preserve the published property contract."
       @query registerAsPending?: boolean;
 
       /** Force update. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing updateDefinition.forceUpdate has a boolean wire value; preserve the published property contract."
       @query forceUpdate?: boolean;
 
       /** Dataset type. */
@@ -597,6 +608,7 @@ interface DatasetControllerV2 {
       @query searchText?: string;
 
       /** Include invisible datasets. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.includeInvisible has a boolean wire value; preserve the published property contract."
       @query includeInvisible?: boolean;
 
       /** Filter by status. */
@@ -612,12 +624,14 @@ interface DatasetControllerV2 {
       @query pageSize?: int32;
 
       /** Include latest definition. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.includeLatestDefinition has a boolean wire value; preserve the published property contract."
       @query includeLatestDefinition?: boolean;
 
       /** Order by field. */
       @query orderBy?: string;
 
       /** Order ascending. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.orderByAsc has a boolean wire value; preserve the published property contract."
       @query orderByAsc?: boolean;
 
       /** Dataset types to filter by. */
@@ -635,15 +649,19 @@ interface DatasetControllerV2 {
       ...WorkspacePathParameters;
 
       /** Register as pending. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing register.registerAsPending has a boolean wire value; preserve the published property contract."
       @query registerAsPending?: boolean;
 
       /** If exists, return OK. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing register.ifExistsOk has a boolean wire value; preserve the published property contract."
       @query ifExistsOk?: boolean;
 
       /** Update definition if exists. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing register.updateDefinitionIfExists has a boolean wire value; preserve the published property contract."
       @query updateDefinitionIfExists?: boolean;
 
       /** With data hash. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing register.withDataHash has a boolean wire value; preserve the published property contract."
       @query withDataHash?: boolean;
 
       /** User version ID. */
@@ -681,6 +699,7 @@ interface DatasetControllerV2 {
       @query versionId?: string;
 
       /** Include latest definition. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getDatasetByName.includeLatestDefinition has a boolean wire value; preserve the published property contract."
       @query includeLatestDefinition?: boolean;
     },
     Dataset
@@ -699,6 +718,7 @@ interface DatasetControllerV2 {
       @path datasetId: string;
 
       /** Force update. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing updateDataset.forceUpdate has a boolean wire value; preserve the published property contract."
       @query forceUpdate?: boolean;
 
       /** The dataset to update. */
@@ -744,9 +764,11 @@ interface DatasetControllerV2 {
       @path datasetId: string;
 
       /** Register as pending. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing updateDefinition.registerAsPending has a boolean wire value; preserve the published property contract."
       @query registerAsPending?: boolean;
 
       /** Force update. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing updateDefinition.forceUpdate has a boolean wire value; preserve the published property contract."
       @query forceUpdate?: boolean;
 
       /** Dataset type. */
@@ -832,6 +854,7 @@ interface DatasetV2Operations {
       ...WorkspacePathParameters;
 
       /** If exists, update. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing create.ifExistsUpdate has a boolean wire value; preserve the published property contract."
       @query ifExistsUpdate?: boolean;
 
       /** The dataset to create. */

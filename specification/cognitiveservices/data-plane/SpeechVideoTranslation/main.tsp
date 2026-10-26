@@ -201,6 +201,7 @@ model TranslationInput {
   @doc("Number of speakers in the video, if not provided, it will be auto-detected from the video file.")
   speakerCount?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TranslationInput.enableLipSync has a boolean wire value; preserve the published property contract."
   @doc("Indicate whether to enable lip sync, if not provided, the default value is false to disable the lip sync.")
   @added(ApiVersions.v2025_05_20)
   enableLipSync?: boolean;
@@ -208,9 +209,11 @@ model TranslationInput {
   @doc("Subtitle max display character count per segment, if not provided, it will use the language dependent default value.")
   subtitleMaxCharCountPerSegment?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TranslationInput.exportSubtitleInVideo has a boolean wire value; preserve the published property contract."
   @doc("Export subtitle in video, if not specified, the default value is false, it will not burn subtitle to the translated video file.")
   exportSubtitleInVideo?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TranslationInput.autoCreateFirstIteration has a boolean wire value; preserve the published property contract."
   @added(ApiVersions.v2026_03_01)
   @doc("Indicate whether to automatically create the first iteration when creating a translation, if not specified, the default value is false without creating the first iteration automatically.")
   autoCreateFirstIteration?: boolean;
@@ -261,6 +264,7 @@ model IterationInput {
   @doc("Recommended: Do not set this parameter unless you have specific requirements. The default behavior is optimized for most customers. Subtitle max display character count per segment, if not specified, it will inherit the value defined in the input of translation creation.")
   subtitleMaxCharCountPerSegment?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IterationInput.exportSubtitleInVideo has a boolean wire value; preserve the published property contract."
   @doc("Export subtitle in video, if not specified, it will inherit the value defined in the input of translation creation.")
   exportSubtitleInVideo?: boolean;
 
@@ -272,14 +276,17 @@ model IterationInput {
   @doc("Translate with TTS custom lexicon for speech synthesis. Provide the custom lexicon file using either ttsCustomLexiconFileUrl or ttsCustomLexiconFileIdInAudioContentCreation. These parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid.")
   ttsCustomLexiconFileIdInAudioContentCreation?: Guid;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IterationInput.enableVideoSpeedAdjustment has a boolean wire value; preserve the published property contract."
   @added(ApiVersions.v2025_05_20)
   @doc("This parameter allows for the adjustment of video playback speed to ensure better alignment with translated audio. When enabled, the API can slow down or speed up the video to match the timing of the translated audio, providing a more synchronized and seamless viewing experience, if not specified, video speed will not be adjusted.")
   enableVideoSpeedAdjustment?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IterationInput.enableOcrCorrectionFromSubtitle has a boolean wire value; preserve the published property contract."
   @added(ApiVersions.v2025_05_20)
   @doc("Indicate whether to allow the API to correct the speech recognition (SR) results using the subtitles from the original video file. By leveraging the existing subtitles, the API can enhance the accuracy of the transcribed text, ensuring that the final output is more precise and reliable, if not specified, translation will not do correction from OCR subtitle.")
   enableOcrCorrectionFromSubtitle?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IterationInput.exportTargetLocaleAdvancedSubtitleFile has a boolean wire value; preserve the published property contract."
   @added(ApiVersions.v2025_05_20)
   @doc("This parameter, when enabled, allows the API to export subtitles in the Advanced SubStation Alpha format. The subtitle file can specify font styles and colors, which helps in addressing character display issues in certain target locales such as Arabic (Ar), Japanese (Ja), Korean (Ko), and Chinese (Ch). By using this parameter, you can ensure that the subtitles are visually appealing and correctly rendered across different languages and regions, if not specified, iteration response will not include advanced subtitle.")
   exportTargetLocaleAdvancedSubtitleFile?: boolean;
@@ -300,10 +307,12 @@ model IterationInput {
   @doc("Recommended: Do not set this parameter unless you have specific requirements. The default behavior is optimized for most customers. This parameter specifies whether to enable emotion for platform voice. By default, the server determines whether to apply emotion based on the target locale to optimize quality. If not specified, the API will automatically decide whether to enable emotional expression on the server side.")
   enableEmotionalPlatformVoice?: EnableEmotionalPlatformVoice;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IterationInput.adjustWebvttAlignment has a boolean wire value; preserve the published property contract."
   @added(ApiVersions.v2026_03_01)
   @doc("Recommended: Do not set this parameter unless you have specific requirements. The default behavior is optimized for most customers. Specify whether to adjust webvtt alignment according to the synthesized audio for the translated text. If true (default), alignment will be adjusted. If false, alignment will not be adjusted. When not specified, the default value is true (provided as null to the API).")
   adjustWebvttAlignment?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IterationInput.exportAdjustedPromptAudioInWebvtt has a boolean wire value; preserve the published property contract."
   @added(ApiVersions.v2026_03_01)
   @doc("Specify whether to export adjusted prompt audio in webvtt, if not specified, the default value is false.")
   exportAdjustedPromptAudioInWebvtt?: boolean;
@@ -328,6 +337,7 @@ model IterationInput {
   @doc("Managed identity client ID for user-assigned managed identity to push results to Azure storage blob, if not specified, API will use system-assigned managed identity. This property is only used when pushResultToAzureStorageBlobDirUrl is specified.")
   pushResultToAzureStorageBlobManagedIdentityClientId?: Guid;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IterationInput.use24kPromptAudio has a boolean wire value; preserve the published property contract."
   @added(ApiVersions.v2026_03_01)
   @doc("Recommended: Do not set this parameter unless you have specific requirements. The default behavior is optimized for most customers. When this parameter is set to true, the service uses a higher sample rate (24 kHz) prompt audio for voice prompting. If this parameter is not specified or is set to false, the service continues to use 16 kHz prompt audio by default, which generally provides better overall synthesis quality.")
   use24kPromptAudio?: boolean;
@@ -336,6 +346,7 @@ model IterationInput {
 @added(ApiVersions.v2025_05_20)
 @doc("EventHub configuration.")
 model EventHubConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EventHubConfiguration.isEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicate whether to enable sending event to EventHub.")
   isEnabled: boolean;
 

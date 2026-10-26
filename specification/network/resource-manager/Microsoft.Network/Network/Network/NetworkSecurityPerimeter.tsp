@@ -78,6 +78,7 @@ interface NetworkSecurityPerimeters {
       /**
        * Deletes the resource even if it contains any child associations.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.forceDeletion has a boolean wire value; preserve the published property contract."
       @query("forceDeletion")
       forceDeletion?: boolean;
     },

@@ -186,6 +186,7 @@ model ResourceRateCardInfo {
    * All rates are pretax, so this will always be returned as 'false'.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceRateCardInfo.IsTaxIncluded has a boolean wire value; preserve the published property contract."
   IsTaxIncluded?: boolean;
 
   /**

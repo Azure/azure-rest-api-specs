@@ -100,6 +100,7 @@ model LogFileProperties {
   @visibility(Lifecycle.Read)
   retentionExpiresAtUtc: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LogFileProperties.isMutable has a boolean wire value; preserve the published property contract."
   @doc("Whether the platform can still append to or otherwise modify the log file.")
   @visibility(Lifecycle.Read)
   isMutable: boolean;

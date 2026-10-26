@@ -43,6 +43,7 @@ interface Experiments {
       /**
        * Optional value that indicates whether to filter results based on if the Experiment is currently running. If null, then the results will not be filtered.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.running has a boolean wire value; preserve the published property contract."
       @query("running")
       running?: boolean;
 
@@ -64,6 +65,7 @@ interface Experiments {
       /**
        * Optional value that indicates whether to filter results based on if the Experiment is currently running. If null, then the results will not be filtered.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listAll.running has a boolean wire value; preserve the published property contract."
       @query("running")
       running?: boolean;
 

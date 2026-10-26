@@ -139,6 +139,7 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * Whether to enable auto-scaler
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAgentPoolProfileProperties.enableAutoScaling has a boolean wire value; preserve the published property contract."
   enableAutoScaling?: boolean;
 
   /**
@@ -193,6 +194,7 @@ model ManagedClusterAgentPoolProfileProperties {
    * Whether to enable the full-cache ephemeral OS disk feature. When this feature is enabled, the entire operating system will be locally cached on the ephemeral OS disk, preventing E17 events caused by network failures.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAgentPoolProfileProperties.enableOSDiskFullCaching has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_02_preview)
   enableOSDiskFullCaching?: boolean;
 
@@ -229,6 +231,7 @@ model ManagedClusterAgentPoolProfileProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAgentPoolProfileProperties.enableNodePublicIP has a boolean wire value; preserve the published property contract."
   enableNodePublicIP?: boolean;
 
   /**
@@ -303,18 +306,21 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * Whether to enable host based OS and data drive encryption. This is only supported on certain VM sizes and in certain Azure regions. For more information, see: https://docs.microsoft.com/azure/aks/enable-host-encryption
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAgentPoolProfileProperties.enableEncryptionAtHost has a boolean wire value; preserve the published property contract."
   enableEncryptionAtHost?: boolean;
 
   /**
    * Whether to enable UltraSSD
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAgentPoolProfileProperties.enableUltraSSD has a boolean wire value; preserve the published property contract."
   enableUltraSSD?: boolean;
 
   /**
    * Whether to use a FIPS-enabled OS. See [Add a FIPS-enabled node pool](https://docs.microsoft.com/azure/aks/use-multiple-node-pools#add-a-fips-enabled-node-pool-preview) for more details.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAgentPoolProfileProperties.enableFIPS has a boolean wire value; preserve the published property contract."
   enableFIPS?: boolean;
 
   /**
@@ -497,6 +503,7 @@ model KubeletConfig {
   /**
    * If CPU CFS quota enforcement is enabled for containers that specify CPU limits. The default is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubeletConfig.cpuCfsQuota has a boolean wire value; preserve the published property contract."
   cpuCfsQuota?: boolean;
 
   /**
@@ -527,6 +534,7 @@ model KubeletConfig {
   /**
    * If set to true it will make the Kubelet fail to start if swap is enabled on the node.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubeletConfig.failSwapOn has a boolean wire value; preserve the published property contract."
   failSwapOn?: boolean;
 
   /**
@@ -764,6 +772,7 @@ model SysctlConfig {
   /**
    * Sysctl setting net.ipv4.tcp_tw_reuse.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SysctlConfig.netIpv4TcpTwReuse has a boolean wire value; preserve the published property contract."
   netIpv4TcpTwReuse?: boolean;
 
   /**
@@ -949,6 +958,7 @@ model AgentPoolNetworkInterface {
   ]>;
 
   /** Whether accelerated networking is enabled on this secondary NIC. If omitted, this defaults to true only when the agent pool VM SKU supports accelerated networking. Validation will fail if it is enabled on an unsupported SKU or NIC configuration. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AgentPoolNetworkInterface.enableAcceleratedNetworking has a boolean wire value; preserve the published property contract."
   enableAcceleratedNetworking?: boolean;
 
   /** Public IP configuration for this secondary NIC. Only valid when `type` is `Standard`. Set `publicIPAddressVersion` to provision a per-VM instance-level public IP for the NIC, then optionally shape it with `ipTags` or `publicIPPrefixID`. If omitted, no public IP is provisioned. Idle timeout is not configurable. For more information, see https://aka.ms/aks/multi-nic */
@@ -1034,6 +1044,7 @@ model AgentPoolWindowsProfile {
   /**
    * Whether to disable OutboundNAT in windows nodes. The default value is false. Outbound NAT can only be disabled if the cluster outboundType is NAT Gateway and the Windows agent pool does not have node public IP enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AgentPoolWindowsProfile.disableOutboundNat has a boolean wire value; preserve the published property contract."
   disableOutboundNat?: boolean;
 }
 
@@ -1045,11 +1056,13 @@ model AgentPoolSecurityProfile {
    * vTPM is a Trusted Launch feature for configuring a dedicated secure vault for keys and measurements held locally on the node. For more details, see aka.ms/aks/trustedlaunch. If not specified, the default is false.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AgentPoolSecurityProfile.enableVTPM has a boolean wire value; preserve the published property contract."
   enableVTPM?: boolean;
 
   /**
    * Secure Boot is a feature of Trusted Launch which ensures that only signed operating systems and drivers can boot. For more details, see aka.ms/aks/trustedlaunch.  If not specified, the default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AgentPoolSecurityProfile.enableSecureBoot has a boolean wire value; preserve the published property contract."
   enableSecureBoot?: boolean;
 
   /**
@@ -1130,6 +1143,7 @@ model AgentPoolArtifactStreamingProfile {
   /**
    * Artifact streaming speeds up the cold-start of containers on a node through on-demand image loading. To use this feature, container images must also enable artifact streaming on ACR. If not specified, the default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AgentPoolArtifactStreamingProfile.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 

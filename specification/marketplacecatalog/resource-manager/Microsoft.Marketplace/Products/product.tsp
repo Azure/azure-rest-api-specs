@@ -108,9 +108,11 @@ model ProductBase {
   @doc("The unique id of the product")
   productId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProductBase.hasRiPlans has a boolean wire value; preserve the published property contract."
   @doc("Indication whether the product has plans with reservations")
   hasRiPlans?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProductBase.hasMarketplaceFootprint has a boolean wire value; preserve the published property contract."
   @doc("Indication if product has a representation in the marketplace")
   hasMarketplaceFootprint?: boolean;
 
@@ -154,6 +156,7 @@ model ProductDetails {
   @doc("The product language")
   language?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProductDetails.hasStandardContractAmendments has a boolean wire value; preserve the published property contract."
   @doc("A value indicating whether standard contract amendments are present")
   hasStandardContractAmendments?: boolean;
 
@@ -166,9 +169,11 @@ model ProductDetails {
   @doc("The universal amendment link for an enterprise contract")
   universalAmendmentUrl?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProductDetails.isPrivate has a boolean wire value; preserve the published property contract."
   @doc("Indicates if a product is private")
   isPrivate: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProductDetails.isStopSell has a boolean wire value; preserve the published property contract."
   @doc("Indicates if a product is no longer available for sale")
   isStopSell: boolean;
 
@@ -199,15 +204,18 @@ model ProductDetails {
   @doc("Pricing details uri of the product")
   pricingDetailsUri?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProductDetails.isReseller has a boolean wire value; preserve the published property contract."
   @doc("A value indicating whether microsoft is acting as a reseller")
   isReseller?: boolean;
 
   @doc("Product ownership selling motion")
   productOwnershipSellingMotion?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProductDetails.disableSendEmailOnPurchase has a boolean wire value; preserve the published property contract."
   @doc("Indication to disable sending email on purchase")
   disableSendEmailOnPurchase?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProductDetails.isCoreVm has a boolean wire value; preserve the published property contract."
   @doc("Indicates if VM was originally a Core Virtual Machine")
   isCoreVm?: boolean;
 
@@ -224,6 +232,7 @@ model ProductDetails {
   @doc("Full set of plan/SKU attributes")
   plans?: PlanDetails[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProductDetails.hasAddOns has a boolean wire value; preserve the published property contract."
   @doc("Indicates that the SKU has add-ons")
   hasAddOns?: boolean;
 
@@ -263,6 +272,7 @@ model PlanSummary {
   @doc("Plan CategoryIds")
   categoryIds?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PlanSummary.hasProtectedArtifacts has a boolean wire value; preserve the published property contract."
   @doc("Set to true if plan has artifacts that are to be hidden for non authenticated users")
   hasProtectedArtifacts?: boolean;
 
@@ -287,9 +297,11 @@ model PlanSummary {
   @doc("The order the plan is displayed in the 'Plans' table")
   displayRank?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PlanSummary.isPrivate has a boolean wire value; preserve the published property contract."
   @doc("Indication that the plan is accessible to restricted audience only")
   isPrivate?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PlanSummary.hasRi has a boolean wire value; preserve the published property contract."
   @doc("Indication whether the SKU supports reservations")
   hasRi?: boolean;
 }
@@ -314,9 +326,11 @@ model PlanDetails {
   @doc("Version of the marketplace item")
   version?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PlanDetails.isHidden has a boolean wire value; preserve the published property contract."
   @doc("A value indicating whether the plan is hidden")
   isHidden: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PlanDetails.isStopSell has a boolean wire value; preserve the published property contract."
   @doc("A value indicating whether plan has been stopped from selling")
   isStopSell: boolean;
 
@@ -329,6 +343,7 @@ model PlanDetails {
   @doc("Max quantity")
   maxQuantity?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PlanDetails.isQuantifiable has a boolean wire value; preserve the published property contract."
   @doc("A value indicating whether the plan is quantifiable")
   isQuantifiable: boolean;
 
@@ -340,6 +355,7 @@ model PlanDetails {
   @identifiers(#[])
   purchaseDurationDiscounts?: PurchaseDurationDiscount[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PlanDetails.isHiddenPrivateOffer has a boolean wire value; preserve the published property contract."
   @doc("A value indicating whether the plan is used as hidden private offer requiring a quote")
   isHiddenPrivateOffer?: boolean;
 
@@ -396,12 +412,15 @@ model PlanDetails {
   @identifiers(#[])
   offeringProperties?: OfferingProperties[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PlanDetails.hasConsumptionComponents has a boolean wire value; preserve the published property contract."
   @doc("Indicates if this SKU has consumption components")
   hasConsumptionComponents?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PlanDetails.isEndUserEligible has a boolean wire value; preserve the published property contract."
   @doc("Indicates if this SKU is available for end users")
   isEndUserEligible?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PlanDetails.isAdminEligible has a boolean wire value; preserve the published property contract."
   @doc("Indicates if this SKU is available for admins")
   isAdminEligible?: boolean;
 
@@ -658,6 +677,7 @@ model Term {
   @doc("Renew Billing Plan")
   renewToTermBillingPlan?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Term.isAutorenewable has a boolean wire value; preserve the published property contract."
   @doc("Indicates if autorenew is enabled")
   isAutorenewable?: boolean;
 
@@ -692,6 +712,7 @@ model Availability {
   @identifiers(#[])
   terms?: Term[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Availability.hasFreeTrials has a boolean wire value; preserve the published property contract."
   @doc("A value indicating whether it has free trials")
   hasFreeTrials: boolean;
 
@@ -780,6 +801,7 @@ model Price {
   @doc("Currency code i.e. 'USD'")
   currencyCode?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Price.isPiRequired has a boolean wire value; preserve the published property contract."
   @doc("A value indicating whether a payment instrument is required")
   isPiRequired: boolean;
 

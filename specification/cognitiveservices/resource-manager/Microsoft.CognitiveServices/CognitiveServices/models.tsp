@@ -544,6 +544,7 @@ model RaiPolicyCustomExternalSafetyProviderReference {
   source: RaiPolicyContentSource;
 
   /** Whether a provider rejection blocks the request. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RaiPolicyCustomExternalSafetyProviderReference.blocking has a boolean wire value; preserve the published property contract."
   blocking?: boolean;
 }
 
@@ -1898,6 +1899,7 @@ model AccountProperties {
   /**
    * If the resource is migrated from an existing key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AccountProperties.isMigrated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isMigrated?: boolean;
 
@@ -1970,16 +1972,19 @@ model AccountProperties {
   /**
    * The flag to enable dynamic throttling.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AccountProperties.dynamicThrottlingEnabled has a boolean wire value; preserve the published property contract."
   dynamicThrottlingEnabled?: boolean;
 
   /**
    * The flag to disable stored completions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AccountProperties.storedCompletionsDisabled has a boolean wire value; preserve the published property contract."
   storedCompletionsDisabled?: boolean;
 
   /**
    * Specifies whether A365 logging is enabled. Defaults to true. Set to false to opt out.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AccountProperties.a365LoggingEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_07_15_preview)
   a365LoggingEnabled?: boolean;
 
@@ -1988,10 +1993,12 @@ model AccountProperties {
   quotaLimit?: QuotaLimit;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Whether to restrict outbound network access for this Cognitive Services account"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AccountProperties.restrictOutboundNetworkAccess has a boolean wire value; preserve the published property contract."
   restrictOutboundNetworkAccess?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The allowed fqdn list for AccountProperties"
   allowedFqdnList?: string[];
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The disable local auth for AccountProperties"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AccountProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 
   /**
@@ -2002,6 +2009,7 @@ model AccountProperties {
   endpoints?: Record<string>;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The restore for AccountProperties"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AccountProperties.restore has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Create, Lifecycle.Update)
   restore?: boolean;
 
@@ -2061,6 +2069,7 @@ model AccountProperties {
   /**
    * Specifies whether this resource support project management as child resources, used as containers for access management, data isolation and cost in AI Foundry.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AccountProperties.allowProjectManagement has a boolean wire value; preserve the published property contract."
   allowProjectManagement?: boolean;
 
   /**
@@ -2283,6 +2292,7 @@ model FoundryAutoUpgrade {
   /**
    * Gets or sets a value indicating whether the auto-upgrade is planned by Microsoft.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FoundryAutoUpgrade.plannedByMicrosoft has a boolean wire value; preserve the published property contract."
   plannedByMicrosoft?: boolean;
 
   /**
@@ -2384,6 +2394,7 @@ model VirtualNetworkRule {
   /**
    * Ignore missing vnet service endpoint or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualNetworkRule.ignoreMissingVnetServiceEndpoint has a boolean wire value; preserve the published property contract."
   ignoreMissingVnetServiceEndpoint?: boolean;
 }
 
@@ -2505,6 +2516,7 @@ model ApiProperties {
   /**
    * (Bing Search Only) The flag to enable statistics of Bing Search.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ApiProperties.statisticsEnabled has a boolean wire value; preserve the published property contract."
   statisticsEnabled?: boolean;
 
   /**
@@ -2577,6 +2589,7 @@ model ThrottlingRule {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Minimum count threshold for the throttle rule"
   minCount?: float32;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Whether dynamic throttling is enabled for this rule"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ThrottlingRule.dynamicThrottlingEnabled has a boolean wire value; preserve the published property contract."
   dynamicThrottlingEnabled?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Patterns to match requests against for this rule"
@@ -2709,6 +2722,7 @@ model NetworkInjection {
   /**
    * Boolean to enable Microsoft Managed Network for subnet delegation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkInjection.useMicrosoftManagedNetwork has a boolean wire value; preserve the published property contract."
   useMicrosoftManagedNetwork?: boolean;
 }
 
@@ -2982,6 +2996,7 @@ model AccountModel extends DeploymentModel {
   /**
    * If the model is default version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AccountModel.isDefaultVersion has a boolean wire value; preserve the published property contract."
   isDefaultVersion?: boolean;
 
   /**
@@ -3254,6 +3269,7 @@ model SkuAvailability {
   /**
    * Indicates the given SKU is available or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SkuAvailability.skuAvailable has a boolean wire value; preserve the published property contract."
   skuAvailable?: boolean;
 
   /**
@@ -3498,6 +3514,7 @@ model DomainAvailability {
   /**
    * Indicates the given SKU is available or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DomainAvailability.isSubdomainAvailable has a boolean wire value; preserve the published property contract."
   isSubdomainAvailable?: boolean;
 
   /**
@@ -3727,6 +3744,7 @@ model DeploymentProperties {
   /**
    * If the dynamic throttling is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeploymentProperties.dynamicThrottlingEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   dynamicThrottlingEnabled?: boolean;
 
@@ -3951,6 +3969,7 @@ model CommitmentPlanProperties {
   /**
    * AutoRenew commitment plan.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CommitmentPlanProperties.autoRenew has a boolean wire value; preserve the published property contract."
   autoRenew?: boolean;
 
   /**
@@ -4114,6 +4133,7 @@ model RaiPolicyContentFilter {
   /**
    * If the ContentFilter is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RaiPolicyContentFilter.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -4124,6 +4144,7 @@ model RaiPolicyContentFilter {
   /**
    * If blocking would occur.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RaiPolicyContentFilter.blocking has a boolean wire value; preserve the published property contract."
   blocking?: boolean;
 
   /**
@@ -4160,6 +4181,7 @@ model RaiBlocklistConfig {
   /**
    * If blocking would occur.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RaiBlocklistConfig.blocking has a boolean wire value; preserve the published property contract."
   blocking?: boolean;
 }
 
@@ -4188,6 +4210,7 @@ model RaiTopicConfig {
   /**
    * If blocking would occur.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RaiTopicConfig.blocking has a boolean wire value; preserve the published property contract."
   blocking?: boolean;
 }
 
@@ -4214,6 +4237,7 @@ model RaiSafetyProviderConfig {
   /**
    * If blocking would occur.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RaiSafetyProviderConfig.blocking has a boolean wire value; preserve the published property contract."
   blocking?: boolean;
 }
 
@@ -4259,6 +4283,7 @@ model RaiBlocklistItemProperties {
   /**
    * If the pattern is a regex pattern.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RaiBlocklistItemProperties.isRegex has a boolean wire value; preserve the published property contract."
   isRegex?: boolean;
 }
 
@@ -4490,6 +4515,7 @@ model RaiContentFilterProperties {
   /**
    * If the Content Filter has multi severity levels(Low, Medium, or High).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RaiContentFilterProperties.isMultiLevelFilter has a boolean wire value; preserve the published property contract."
   isMultiLevelFilter?: boolean;
 
   /**
@@ -4783,6 +4809,7 @@ model ProjectProperties {
   /**
    * Indicates whether the project is the default project for the account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProjectProperties.isDefault has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDefault?: boolean;
 
@@ -4831,6 +4858,7 @@ model ConnectionPropertiesV2 {
   group?: ConnectionGroup;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The is shared to all for ConnectionPropertiesV2"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConnectionPropertiesV2.isSharedToAll has a boolean wire value; preserve the published property contract."
   isSharedToAll?: boolean;
 
   /**
@@ -4858,6 +4886,7 @@ model ConnectionPropertiesV2 {
   target?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The use workspace managed identity for ConnectionPropertiesV2"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConnectionPropertiesV2.useWorkspaceManagedIdentity has a boolean wire value; preserve the published property contract."
   useWorkspaceManagedIdentity?: boolean;
 }
 
@@ -4946,6 +4975,7 @@ model CapabilityHostProperties extends ResourceBase {
   /**
    * Whether public hosting environment is enabled for the capability host
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CapabilityHostProperties.enablePublicHostingEnvironment has a boolean wire value; preserve the published property contract."
   enablePublicHostingEnvironment?: boolean;
 }
 
@@ -5276,6 +5306,7 @@ model AgenticApplicationProperties extends ResourceBase {
   /**
    * Enabledstate of the application.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AgenticApplicationProperties.isEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEnabled?: boolean;
 }
@@ -6953,6 +6984,7 @@ model SshSettings {
   /**
    * Whether SSH admin access is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SshSettings.adminEnabled has a boolean wire value; preserve the published property contract."
   adminEnabled?: boolean;
 }
 

@@ -215,12 +215,15 @@ model Logging {
   @Xml.name("Version") version: string;
 
   /** Whether delete operation is logged. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Logging.delete has a boolean wire value; preserve the published property contract."
   @Xml.name("Delete") delete: boolean;
 
   /** Whether read operation is logged. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Logging.read has a boolean wire value; preserve the published property contract."
   @Xml.name("Read") read: boolean;
 
   /** Whether write operation is logged. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Logging.write has a boolean wire value; preserve the published property contract."
   @Xml.name("Write") write: boolean;
 
   /** The retention policy of the logs. */
@@ -230,6 +233,7 @@ model Logging {
 /** The retention policy. */
 model RetentionPolicy {
   /** Whether to enable the retention policy. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RetentionPolicy.enabled has a boolean wire value; preserve the published property contract."
   @Xml.name("Enabled") enabled: boolean;
 
   /** The number of days to retain the logs. */
@@ -244,9 +248,11 @@ model Metrics {
   @Xml.name("Version") version?: string;
 
   /** Whether it is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Metrics.enabled has a boolean wire value; preserve the published property contract."
   @Xml.name("Enabled") enabled: boolean;
 
   /** Whether to include API in the metrics. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Metrics.includeApis has a boolean wire value; preserve the published property contract."
   @Xml.name("IncludeAPIs") includeApis?: boolean;
 
   /** The retention policy of the metrics. */

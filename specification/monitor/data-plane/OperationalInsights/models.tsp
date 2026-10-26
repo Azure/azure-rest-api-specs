@@ -363,6 +363,7 @@ model MetadataTableColumnsItem {
   type: ColumnDataType;
 
   /** A flag indicating this column is a preferred facet */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetadataTableColumnsItem.isPreferredFacet has a boolean wire value; preserve the published property contract."
   isPreferredFacet?: boolean;
 
   /**

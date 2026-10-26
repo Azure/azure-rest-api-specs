@@ -136,6 +136,7 @@ model Filter {
   @doc("Property eq")
   eq?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Filter.exists has a boolean wire value; preserve the published property contract."
   @doc("Property exists")
   exists?: boolean;
 

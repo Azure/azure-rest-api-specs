@@ -23,6 +23,7 @@ model SqlDbSingleDatabaseTargetProperties extends TargetProperties {
     }
   ]>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlDbSingleDatabaseTargetProperties.readIntent has a boolean wire value; preserve the published property contract."
   @doc("Set to true to monitor a high availability replica of specified target, if any.")
   readIntent?: boolean = false;
 }

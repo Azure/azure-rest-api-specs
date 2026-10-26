@@ -223,6 +223,7 @@ model ContainerRegistryVulnerabilityProperties extends AdditionalData {
   /**
    * Indicates whether a patch is available or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContainerRegistryVulnerabilityProperties.patchable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   patchable?: boolean;
 
@@ -330,6 +331,7 @@ model ServerVulnerabilityProperties extends AdditionalData {
   /**
    * Indicates whether a patch is available or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServerVulnerabilityProperties.patchable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   patchable?: boolean;
 

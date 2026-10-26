@@ -88,6 +88,7 @@ alias AssociatedTenantsListByBillingAccountParameters = {
   /**
    * Can be used to get revoked associated tenants.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AssociatedTenantsListByBillingAccountParameters.includeRevoked has a boolean wire value; preserve the published property contract."
   @query("includeRevoked")
   includeRevoked?: boolean = false;
 
@@ -118,6 +119,7 @@ alias AssociatedTenantsListByBillingAccountParameters = {
   /**
    * The count query option allows clients to request a count of the matching resources included with the resources in the response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AssociatedTenantsListByBillingAccountParameters.count has a boolean wire value; preserve the published property contract."
   @query("count")
   count?: boolean;
 

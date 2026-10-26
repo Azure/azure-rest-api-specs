@@ -251,6 +251,7 @@ model EnvironmentOutput {
   @doc("The output value.")
   value?: unknown;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EnvironmentOutput.sensitive has a boolean wire value; preserve the published property contract."
   @doc("Indicates if the value is sensitive.")
   sensitive?: boolean;
 }
@@ -408,12 +409,14 @@ model EnvironmentDefinitionParameter {
     """)
   type: ParameterType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EnvironmentDefinitionParameter.readOnly has a boolean wire value; preserve the published property contract."
   @doc("""
     Whether or not this parameter is read-only.  If true, default should have a
     value.
     """)
   readOnly?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EnvironmentDefinitionParameter.required has a boolean wire value; preserve the published property contract."
   @doc("Whether or not this parameter is required.")
   required: boolean;
 

@@ -71,11 +71,13 @@ model AdvancedMachineFeatures {
   /**
    * Whether to enable nested virtualization or not (default is false).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AdvancedMachineFeatures.enableNestedVirtualization has a boolean wire value; preserve the published property contract."
   enableNestedVirtualization?: boolean;
 
   /**
    * Whether to enable UEFI networking for instance creation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AdvancedMachineFeatures.enableUefiNetworking has a boolean wire value; preserve the published property contract."
   enableUefiNetworking?: boolean;
 
   /**
@@ -205,11 +207,13 @@ model AttachedDisk {
   /**
    * Specifies whether the disk will be auto-deleted when the instance is deleted (but not when the disk is detached from the instance).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AttachedDisk.autoDelete has a boolean wire value; preserve the published property contract."
   autoDelete?: boolean;
 
   /**
    * Indicates that this is a boot disk. The virtual machine will use the first partition of the disk for its root filesystem.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AttachedDisk.boot has a boolean wire value; preserve the published property contract."
   boot?: boolean;
 
   /**
@@ -230,6 +234,7 @@ model AttachedDisk {
   /**
    * [Input Only] Whether to force attach the regional disk even if it's currently attached to another instance. If you try to force attach a zonal disk to an instance, you will receive an error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AttachedDisk.forceAttach has a boolean wire value; preserve the published property contract."
   forceAttach?: boolean;
 
   /**
@@ -321,6 +326,7 @@ model AttachedDiskInitializeParams {
   /**
    * Whether this disk is using confidential compute mode.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AttachedDiskInitializeParams.enableConfidentialCompute has a boolean wire value; preserve the published property contract."
   enableConfidentialCompute?: boolean;
 
   /**
@@ -511,6 +517,7 @@ model Scheduling {
   /**
    * Specifies whether the instance should be automatically restarted if it is terminated by Compute Engine (not terminated by a user). You can only set the automatic restart option for standard instances. Preemptible instances cannot be automatically restarted. By default, this is set to true so an instance is automatically restarted if it is terminated by Compute Engine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Scheduling.automaticRestart has a boolean wire value; preserve the published property contract."
   automaticRestart?: boolean;
 
   /**
@@ -547,6 +554,7 @@ model Scheduling {
   /**
    * Defines whether the instance is preemptible. This can only be set during instance creation or while the instance is stopped and therefore, in a `TERMINATED` state. See Instance Life Cycle for more information on the possible instance states.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Scheduling.preemptible has a boolean wire value; preserve the published property contract."
   preemptible?: boolean;
 
   /**
@@ -592,16 +600,19 @@ model ShieldedInstanceConfig {
   /**
    * Defines whether the instance has integrity monitoring enabled. Enabled by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ShieldedInstanceConfig.enableIntegrityMonitoring has a boolean wire value; preserve the published property contract."
   enableIntegrityMonitoring?: boolean;
 
   /**
    * Defines whether the instance has Secure Boot enabled. Disabled by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ShieldedInstanceConfig.enableSecureBoot has a boolean wire value; preserve the published property contract."
   enableSecureBoot?: boolean;
 
   /**
    * Defines whether the instance has the vTPM enabled. Enabled by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ShieldedInstanceConfig.enableVtpm has a boolean wire value; preserve the published property contract."
   enableVtpm?: boolean;
 }
 
@@ -612,6 +623,7 @@ model UpcomingMaintenance {
   /**
    * Indicates if the maintenance can be customer triggered.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UpcomingMaintenance.canReschedule has a boolean wire value; preserve the published property contract."
   canReschedule?: boolean;
 
   /**
@@ -720,6 +732,7 @@ model AccessConfig {
   /**
    * Specifies whether a public DNS 'PTR' record should be created to map the external IP address of the instance to a DNS domain name. This field is not used in ipv6AccessConfig. A default PTR record will be created if the VM has external IPv6 range associated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AccessConfig.setPublicPtr has a boolean wire value; preserve the published property contract."
   setPublicPtr?: boolean;
 
   /**
@@ -778,6 +791,7 @@ model GcpComputeInstanceProperties {
   /**
    * Allows this instance to send and receive packets with non-matching destination or source IPs. This is required if you plan to use this instance to forward routes. For more information, see Enabling IP Forwarding .
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpComputeInstanceProperties.canIpForward has a boolean wire value; preserve the published property contract."
   canIpForward?: boolean;
 
   /**
@@ -798,6 +812,7 @@ model GcpComputeInstanceProperties {
   /**
    * Whether the resource should be protected against deletion.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpComputeInstanceProperties.deletionProtection has a boolean wire value; preserve the published property contract."
   deletionProtection?: boolean;
 
   /**
@@ -936,11 +951,13 @@ model GcpComputeInstanceProperties {
   /**
    * [Output Only] Reserved for future use.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpComputeInstanceProperties.satisfiesPzi has a boolean wire value; preserve the published property contract."
   satisfiesPzi?: boolean;
 
   /**
    * [Output Only] Reserved for future use.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpComputeInstanceProperties.satisfiesPzs has a boolean wire value; preserve the published property contract."
   satisfiesPzs?: boolean;
 
   /**
@@ -982,6 +999,7 @@ model GcpComputeInstanceProperties {
   /**
    * [Output Only] Whether a VM has been restricted for start because Compute Engine has detected suspicious activity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpComputeInstanceProperties.startRestricted has a boolean wire value; preserve the published property contract."
   startRestricted?: boolean;
 
   /**
@@ -1012,6 +1030,7 @@ model DisplayDevice {
   /**
    * Defines whether the instance has Display enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DisplayDevice.enableDisplay has a boolean wire value; preserve the published property contract."
   enableDisplay?: boolean;
 }
 
@@ -1184,6 +1203,7 @@ model ShieldedInstanceIntegrityPolicy {
   /**
    * Updates the integrity policy baseline using the measurements from the VM instance's most recent boot.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ShieldedInstanceIntegrityPolicy.updateAutoLearnPolicy has a boolean wire value; preserve the published property contract."
   updateAutoLearnPolicy?: boolean;
 }
 
@@ -1280,6 +1300,7 @@ model ConfidentialInstanceConfig {
   /**
    * Defines whether the instance should have confidential compute enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConfidentialInstanceConfig.enableConfidentialCompute has a boolean wire value; preserve the published property contract."
   enableConfidentialCompute?: boolean;
 }
 

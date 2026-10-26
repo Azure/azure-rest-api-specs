@@ -1118,6 +1118,7 @@ model ScopeProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   scope?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScopeProperties.valid has a boolean wire value; preserve the published property contract."
   valid?: boolean;
 }
 
@@ -1441,6 +1442,7 @@ model PurchaseRequestProperties {
   /**
    * Setting this to true will automatically purchase a new reservation on the expiration date time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PurchaseRequestProperties.renew has a boolean wire value; preserve the published property contract."
   renew?: boolean = false;
 
   /**
@@ -1532,11 +1534,13 @@ model CalculatePriceResponseProperties {
   /**
    * Whether or not tax is included in grand total
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CalculatePriceResponseProperties.isTaxIncluded has a boolean wire value; preserve the published property contract."
   isTaxIncluded?: boolean;
 
   /**
    * True if billing is managed by Microsoft Partner. Used only for CSP accounts.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CalculatePriceResponseProperties.isBillingPartnerManaged has a boolean wire value; preserve the published property contract."
   isBillingPartnerManaged?: boolean;
 
   /**
@@ -1776,6 +1780,7 @@ model ReservationsProperties {
   /**
    * Indicates if the reservation is archived
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReservationsProperties.archived has a boolean wire value; preserve the published property contract."
   archived?: boolean;
 
   /**
@@ -1896,6 +1901,7 @@ model ReservationsProperties {
   /**
    * Setting this to true will automatically purchase a new reservation on the expiration date time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReservationsProperties.renew has a boolean wire value; preserve the published property contract."
   renew?: boolean = false;
 
   /**
@@ -2166,6 +2172,7 @@ model PatchProperties {
   /**
    * Setting this to true will automatically purchase a new reservation on the expiration date time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PatchProperties.renew has a boolean wire value; preserve the published property contract."
   renew?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -2209,6 +2216,7 @@ model OperationResponse {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OperationResponse.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -3076,6 +3084,7 @@ model ChangeDirectoryResult {
   /**
    * True if change directory operation succeeded on this reservation order or reservation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ChangeDirectoryResult.isSucceeded has a boolean wire value; preserve the published property contract."
   isSucceeded?: boolean;
 
   /**

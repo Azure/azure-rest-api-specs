@@ -160,12 +160,14 @@ interface Sites {
       /**
        * If true, web app metrics are also deleted.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.deleteMetrics has a boolean wire value; preserve the published property contract."
       @query("deleteMetrics")
       deleteMetrics?: boolean;
 
       /**
        * Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.deleteEmptyServerFarm has a boolean wire value; preserve the published property contract."
       @query("deleteEmptyServerFarm")
       deleteEmptyServerFarm?: boolean;
     },
@@ -1088,12 +1090,14 @@ interface Sites {
       /**
        * Specify true to apply the configuration settings and restarts the app only if necessary. By default, the API always restarts and reprovisions the app.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing restart.softRestart has a boolean wire value; preserve the published property contract."
       @query("softRestart")
       softRestart?: boolean;
 
       /**
        * Specify true to block until the app is restarted. By default, it is set to false, and the API responds immediately (asynchronous).
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing restart.synchronous has a boolean wire value; preserve the published property contract."
       @query("synchronous")
       synchronous?: boolean;
     },
@@ -1379,6 +1383,7 @@ interface SiteRecommendations {
       /**
        * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listHistoryForWebApp.expiredOnly has a boolean wire value; preserve the published property contract."
       @query("expiredOnly")
       expiredOnly?: boolean;
 
@@ -1408,6 +1413,7 @@ interface SiteRecommendations {
       /**
        * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listRecommendedRulesForWebApp.featured has a boolean wire value; preserve the published property contract."
       @query("featured")
       featured?: boolean;
 
@@ -1612,12 +1618,14 @@ interface WebApps {
       /**
        * If true, web app metrics are also deleted.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing deleteSlot.deleteMetrics has a boolean wire value; preserve the published property contract."
       @query("deleteMetrics")
       deleteMetrics?: boolean;
 
       /**
        * Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing deleteSlot.deleteEmptyServerFarm has a boolean wire value; preserve the published property contract."
       @query("deleteEmptyServerFarm")
       deleteEmptyServerFarm?: boolean;
     },
@@ -1640,6 +1648,7 @@ interface WebApps {
       /**
        * Specify <strong>true</strong> to include deployment slots in results. The default is false, which only gives you the production slot of all apps.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByResourceGroup.includeSlots has a boolean wire value; preserve the published property contract."
       @query("includeSlots")
       includeSlots?: boolean;
     },
@@ -2444,12 +2453,14 @@ interface WebApps {
       /**
        * Specify true to apply the configuration settings and restarts the app only if necessary. By default, the API always restarts and reprovisions the app.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing restartSlot.softRestart has a boolean wire value; preserve the published property contract."
       @query("softRestart")
       softRestart?: boolean;
 
       /**
        * Specify true to block until the app is restarted. By default, it is set to false, and the API responds immediately (asynchronous).
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing restartSlot.synchronous has a boolean wire value; preserve the published property contract."
       @query("synchronous")
       synchronous?: boolean;
     },

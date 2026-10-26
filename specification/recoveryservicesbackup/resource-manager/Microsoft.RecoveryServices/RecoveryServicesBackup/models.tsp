@@ -1677,6 +1677,7 @@ model BackupResourceConfig {
   /**
    * Opt in details of Cross Region Restore feature.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BackupResourceConfig.crossRegionRestoreFlag has a boolean wire value; preserve the published property contract."
   crossRegionRestoreFlag?: boolean;
 
   /**
@@ -2115,6 +2116,7 @@ model BackupResourceVaultConfig {
   /**
    * This flag is no longer in use. Please use 'softDeleteFeatureState' to set the soft delete state for the vault
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BackupResourceVaultConfig.isSoftDeleteFeatureStateEditable has a boolean wire value; preserve the published property contract."
   isSoftDeleteFeatureStateEditable?: boolean;
 }
 
@@ -2131,6 +2133,7 @@ model BackupResourceEncryptionConfigExtended
   /**
    * bool to indicate whether to use system Assigned Identity or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BackupResourceEncryptionConfigExtended.useSystemAssignedIdentity has a boolean wire value; preserve the published property contract."
   useSystemAssignedIdentity?: boolean;
 }
 
@@ -2357,6 +2360,7 @@ model PrepareDataMoveRequest {
   /**
    * Ignore the artifacts which are already moved.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PrepareDataMoveRequest.ignoreMoved has a boolean wire value; preserve the published property contract."
   ignoreMoved?: boolean;
 }
 
@@ -2406,6 +2410,7 @@ model TriggerDataMoveRequest {
    * Pause GC
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TriggerDataMoveRequest.pauseGC has a boolean wire value; preserve the published property contract."
   pauseGC?: boolean;
 }
 
@@ -2472,6 +2477,7 @@ model ProtectedItem {
   /**
    * Flag to identify whether the DS is scheduled for deferred delete
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProtectedItem.isScheduledForDeferredDelete has a boolean wire value; preserve the published property contract."
   isScheduledForDeferredDelete?: boolean;
 
   /**
@@ -2482,11 +2488,13 @@ model ProtectedItem {
   /**
    * Flag to identify whether the deferred deleted DS is to be purged soon
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProtectedItem.isDeferredDeleteScheduleUpcoming has a boolean wire value; preserve the published property contract."
   isDeferredDeleteScheduleUpcoming?: boolean;
 
   /**
    * Flag to identify that deferred deleted DS is to be moved into Pause state
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProtectedItem.isRehydrate has a boolean wire value; preserve the published property contract."
   isRehydrate?: boolean;
 
   /**
@@ -2497,6 +2505,7 @@ model ProtectedItem {
   /**
    * Flag to identify whether datasource is protected in archive
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProtectedItem.isArchiveEnabled has a boolean wire value; preserve the published property contract."
   isArchiveEnabled?: boolean;
 
   /**
@@ -2898,6 +2907,7 @@ model BackupEngineBase {
   /**
    * Flag indicating if the backup engine be registered, once already registered.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BackupEngineBase.canReRegister has a boolean wire value; preserve the published property contract."
   canReRegister?: boolean;
 
   /**
@@ -2918,11 +2928,13 @@ model BackupEngineBase {
   /**
    * To check if backup agent upgrade available
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BackupEngineBase.isAzureBackupAgentUpgradeAvailable has a boolean wire value; preserve the published property contract."
   isAzureBackupAgentUpgradeAvailable?: boolean;
 
   /**
    * To check if backup engine upgrade available
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BackupEngineBase.isDpmUpgradeAvailable has a boolean wire value; preserve the published property contract."
   isDpmUpgradeAvailable?: boolean;
 
   /**
@@ -3668,6 +3680,7 @@ model RecoveryPointProperties {
   /**
    * Bool to indicate whether RP is in soft delete state or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RecoveryPointProperties.isSoftDeleted has a boolean wire value; preserve the published property contract."
   isSoftDeleted?: boolean;
 
   /**
@@ -3685,6 +3698,7 @@ model RecoveryPointImmutabilityProperties {
   /**
    * Whether the recovery point is immutable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RecoveryPointImmutabilityProperties.isImmutable has a boolean wire value; preserve the published property contract."
   isImmutable: boolean;
 
   /**
@@ -3832,6 +3846,7 @@ model AzureVmWorkloadProtectionPolicy extends ProtectionPolicy {
   /**
    * Fix the policy inconsistency
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureVmWorkloadProtectionPolicy.makePolicyConsistent has a boolean wire value; preserve the published property contract."
   makePolicyConsistent?: boolean;
 
   /**
@@ -3852,12 +3867,14 @@ model Settings {
   /**
    * SQL compression flag
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Settings.issqlcompression has a boolean wire value; preserve the published property contract."
   issqlcompression?: boolean;
 
   /**
    * Workload compression flag. This has been added so that 'isSqlCompression'
    * will be deprecated once clients upgrade to consider this flag.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Settings.isCompression has a boolean wire value; preserve the published property contract."
   isCompression?: boolean;
 }
 
@@ -4206,6 +4223,7 @@ model AzureIaaSVMProtectedItemExtendedInfo {
   /**
    * Specifies if backup policy associated with the backup item is inconsistent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureIaaSVMProtectedItemExtendedInfo.policyInconsistent has a boolean wire value; preserve the published property contract."
   policyInconsistent?: boolean;
 }
 
@@ -4234,6 +4252,7 @@ model DiskExclusionProperties {
   /**
    * Flag to indicate whether DiskLunList is to be included/ excluded from backup.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DiskExclusionProperties.isInclusionList has a boolean wire value; preserve the published property contract."
   isInclusionList?: boolean;
 }
 
@@ -4318,6 +4337,7 @@ model AzureIaaSVMJob extends Job {
   /**
    * Indicated that whether the job is adhoc(true) or scheduled(false)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureIaaSVMJob.isUserTriggered has a boolean wire value; preserve the published property contract."
   isUserTriggered?: boolean;
 
   /**
@@ -4489,6 +4509,7 @@ model AzureIaaSVMProtectionPolicy extends ProtectionPolicy {
    * Specifies whether Instant Access snapshot is enabled for the policy. If false or omitted,
    * instantAccessDurationMinutes is ignored and no Instant Access snapshot is retained.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureIaaSVMProtectionPolicy.instantAccessSnapshotEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_10_01)
   instantAccessSnapshotEnabled?: boolean;
 
@@ -4644,6 +4665,7 @@ model AzureStorageJob extends Job {
   /**
    * Indicated that whether the job is adhoc(true) or scheduled(false)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureStorageJob.isUserTriggered has a boolean wire value; preserve the published property contract."
   isUserTriggered?: boolean;
 
   /**
@@ -5150,6 +5172,7 @@ model RecoveryPointTierInformationV2 extends RecoveryPointTierInformation {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecoveryPointMoveReadinessInfo {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RecoveryPointMoveReadinessInfo.isReadyForMove has a boolean wire value; preserve the published property contract."
   isReadyForMove?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalInfo?: string;
@@ -5265,6 +5288,7 @@ model TargetRestoreInfo {
  */
 model SnapshotRestoreParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SnapshotRestoreParameters.skipAttachAndMount has a boolean wire value; preserve the published property contract."
   skipAttachAndMount?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -5520,6 +5544,7 @@ model FilesystemInfo {
   /**
    * True when this volume sits on a Windows Storage Spaces virtual disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FilesystemInfo.isOnStorageSpace has a boolean wire value; preserve the published property contract."
   isOnStorageSpace?: boolean;
 
   /**
@@ -5654,11 +5679,13 @@ alias AzureWorkloadSQLRestoreRequestProperties = {
   /**
    * Default option set to true. If this is set to false, alternate data directory must be provided
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureWorkloadSQLRestoreRequestProperties.shouldUseAlternateTargetLocation has a boolean wire value; preserve the published property contract."
   shouldUseAlternateTargetLocation?: boolean;
 
   /**
    * SQL specific property where user can chose to set no-recovery when restore operation is tried
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureWorkloadSQLRestoreRequestProperties.isNonRecoverable has a boolean wire value; preserve the published property contract."
   isNonRecoverable?: boolean;
 
   /**
@@ -5752,18 +5779,21 @@ model BmsrpQueryObject {
   /**
    * In Get Recovery Point, it tells whether extended information about recovery point is asked.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BmsrpQueryObject.extendedInfo has a boolean wire value; preserve the published property contract."
   extendedInfo?: boolean;
 
   /**
    * Whether the RP can be moved to another tier
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BmsrpQueryObject.moveReadyRPOnly has a boolean wire value; preserve the published property contract."
   moveReadyRPOnly?: boolean;
 
   /**
    * Flag to indicate whether Soft Deleted RPs should be included/excluded from result.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BmsrpQueryObject.includeSoftDeletedRP has a boolean wire value; preserve the published property contract."
   includeSoftDeletedRP?: boolean;
 
   /**
@@ -5796,6 +5826,7 @@ model BmsrpQueryObject {
    * Flag to indicate whether to get only the latest recovery point.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BmsrpQueryObject.getLatestRPOnly has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
   @added(Versions.v2026_03_31_preview)
@@ -5946,6 +5977,7 @@ model Day {
   /**
    * Whether Date is last date of month
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Day.isLast has a boolean wire value; preserve the published property contract."
   isLast?: boolean;
 }
 
@@ -6143,11 +6175,13 @@ model DPMProtectedItemExtendedInfo {
   /**
    * To check if backup item is disk protected.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DPMProtectedItemExtendedInfo.protected has a boolean wire value; preserve the published property contract."
   protected?: boolean;
 
   /**
    * To check if backup item is cloud protected.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DPMProtectedItemExtendedInfo.isPresentOnCloud has a boolean wire value; preserve the published property contract."
   isPresentOnCloud?: boolean;
 
   /**
@@ -6188,6 +6222,7 @@ model DPMProtectedItemExtendedInfo {
   /**
    * To check if backup item is collocated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DPMProtectedItemExtendedInfo.isCollocated has a boolean wire value; preserve the published property contract."
   isCollocated?: boolean;
 
   /**
@@ -6213,6 +6248,7 @@ model EncryptionDetails {
   /**
    * Identifies whether this backup copy represents an encrypted VM at the time of backup.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EncryptionDetails.encryptionEnabled has a boolean wire value; preserve the published property contract."
   encryptionEnabled?: boolean;
 
   /**
@@ -6381,6 +6417,7 @@ model IdentityInfo {
   /**
    * To differentiate if the managed identity is system assigned or user assigned
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IdentityInfo.isSystemAssignedIdentity has a boolean wire value; preserve the published property contract."
   isSystemAssignedIdentity?: boolean;
 
   /**
@@ -6504,6 +6541,7 @@ model IaasVMRecoveryPoint extends RecoveryPoint {
   /**
    * Identifies whether the VM was encrypted when the backup copy is created.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IaasVMRecoveryPoint.isSourceVMEncrypted has a boolean wire value; preserve the published property contract."
   isSourceVMEncrypted?: boolean;
 
   /**
@@ -6514,6 +6552,7 @@ model IaasVMRecoveryPoint extends RecoveryPoint {
   /**
    * Is the session to recover items from this backup copy still active.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IaasVMRecoveryPoint.isInstantIlrSessionActive has a boolean wire value; preserve the published property contract."
   isInstantIlrSessionActive?: boolean;
 
   /**
@@ -6525,6 +6564,7 @@ model IaasVMRecoveryPoint extends RecoveryPoint {
   /**
    * Whether VM is with Managed Disks
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IaasVMRecoveryPoint.isManagedVirtualMachine has a boolean wire value; preserve the published property contract."
   isManagedVirtualMachine?: boolean;
 
   /**
@@ -6535,6 +6575,7 @@ model IaasVMRecoveryPoint extends RecoveryPoint {
   /**
    * Original Storage Account Option
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IaasVMRecoveryPoint.originalStorageAccountOption has a boolean wire value; preserve the published property contract."
   originalStorageAccountOption?: boolean;
 
   /**
@@ -6571,6 +6612,7 @@ model IaasVMRecoveryPoint extends RecoveryPoint {
   /**
    * This flag denotes if any of the disks in the VM are using Private access network setting
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IaasVMRecoveryPoint.isPrivateAccessEnabledOnAnyDisk has a boolean wire value; preserve the published property contract."
   isPrivateAccessEnabledOnAnyDisk?: boolean;
 
   /**
@@ -6856,11 +6898,13 @@ alias IaasVMRestoreRequestProperties = {
    * Should a new cloud service be created while restoring the VM. If this is false, VM will be restored to the same
    * cloud service as it was at the time of backup.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IaasVMRestoreRequestProperties.createNewCloudService has a boolean wire value; preserve the published property contract."
   createNewCloudService?: boolean;
 
   /**
    * Original Storage Account Option
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IaasVMRestoreRequestProperties.originalStorageAccountOption has a boolean wire value; preserve the published property contract."
   originalStorageAccountOption?: boolean;
 
   /**
@@ -6876,6 +6920,7 @@ alias IaasVMRestoreRequestProperties = {
   /**
    * Flag to denote of an Unmanaged disk VM should be restored with Managed disks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IaasVMRestoreRequestProperties.restoreWithManagedDisks has a boolean wire value; preserve the published property contract."
   restoreWithManagedDisks?: boolean;
 
   /**
@@ -6992,6 +7037,7 @@ model IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase {
   /**
    * Flag to denote if unmanaged disk VMs should be restored with managed disks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IaaSVMBulkRestoreRequest.restoreWithManagedDisks has a boolean wire value; preserve the published property contract."
   restoreWithManagedDisks?: boolean;
 
   /**
@@ -7054,6 +7100,7 @@ model IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase {
   /**
    * Flag to skip pre-OLR backup before restore.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IaaSVMBulkRestoreRequest.skipPreOLRBackup has a boolean wire value; preserve the published property contract."
   skipPreOLRBackup?: boolean;
 }
 
@@ -7846,6 +7893,7 @@ alias DpmContainerProperties = {
   /**
    * Specifies whether the container is re-registrable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DpmContainerProperties.canReRegister has a boolean wire value; preserve the published property contract."
   canReRegister?: boolean;
 
   /**
@@ -7871,6 +7919,7 @@ alias DpmContainerProperties = {
   /**
    * To check if upgrade available
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DpmContainerProperties.upgradeAvailable has a boolean wire value; preserve the published property contract."
   upgradeAvailable?: boolean;
 
   /**
@@ -8377,6 +8426,7 @@ alias AzureVmWorkloadItemProperties = {
   /**
    * Indicates if workload item is auto-protectable
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureVmWorkloadItemProperties.isAutoProtectable has a boolean wire value; preserve the published property contract."
   isAutoProtectable?: boolean;
 
   /**
@@ -8422,11 +8472,13 @@ alias AzureVmWorkloadProtectableItemProperties = {
   /**
    * Indicates if protectable item is auto-protectable
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureVmWorkloadProtectableItemProperties.isAutoProtectable has a boolean wire value; preserve the published property contract."
   isAutoProtectable?: boolean;
 
   /**
    * Indicates if protectable item is auto-protected
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureVmWorkloadProtectableItemProperties.isAutoProtected has a boolean wire value; preserve the published property contract."
   isAutoProtected?: boolean;
 
   /**
@@ -8447,6 +8499,7 @@ alias AzureVmWorkloadProtectableItemProperties = {
   /**
    * Indicates if item is protectable
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureVmWorkloadProtectableItemProperties.isProtectable has a boolean wire value; preserve the published property contract."
   isProtectable?: boolean;
 };
 
@@ -8730,6 +8783,7 @@ model AzureWorkloadBackupRequest extends BackupRequest {
   /**
    * Bool for Compression setting
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureWorkloadBackupRequest.enableCompression has a boolean wire value; preserve the published property contract."
   enableCompression?: boolean;
 
   /**
@@ -9181,6 +9235,7 @@ model IaasVMILRRegistrationRequest extends ILRRequest {
   /**
    * Whether to renew existing registration with the iSCSI server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IaasVMILRRegistrationRequest.renewExistingRegistration has a boolean wire value; preserve the published property contract."
   renewExistingRegistration?: boolean;
 
   /**
@@ -9207,6 +9262,7 @@ model MabContainer extends ProtectionContainer {
   /**
    * Can the container be registered one more time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MabContainer.canReRegister has a boolean wire value; preserve the published property contract."
   canReRegister?: boolean;
 
   /**

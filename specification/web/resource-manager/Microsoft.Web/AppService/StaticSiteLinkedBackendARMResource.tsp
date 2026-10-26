@@ -95,6 +95,7 @@ interface StaticSiteLinkedBackendARMResources {
       /**
        * Decides if Easy Auth configuration will be removed from backend configuration
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing unlinkBackend.isCleaningAuthConfig has a boolean wire value; preserve the published property contract."
       @query("isCleaningAuthConfig")
       isCleaningAuthConfig?: boolean;
     },
@@ -195,6 +196,7 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
       /**
        * Decides if auth will be removed from backend configuration
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing unlinkBackendFromBuild.isCleaningAuthConfig has a boolean wire value; preserve the published property contract."
       @query("isCleaningAuthConfig")
       isCleaningAuthConfig?: boolean;
     },

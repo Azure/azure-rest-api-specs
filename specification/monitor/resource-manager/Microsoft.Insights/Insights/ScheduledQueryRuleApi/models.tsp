@@ -199,6 +199,7 @@ model ScheduledQueryRuleProperties {
   /**
    * True if alert rule is legacy Log Analytic rule
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScheduledQueryRuleProperties.isLegacyLogAnalyticsRule has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isLegacyLogAnalyticsRule?: boolean;
 
@@ -220,6 +221,7 @@ model ScheduledQueryRuleProperties {
   /**
    * The flag which indicates whether this scheduled query rule is enabled. Value should be true or false
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScheduledQueryRuleProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -265,22 +267,26 @@ model ScheduledQueryRuleProperties {
   /**
    * The flag which indicates whether this scheduled query rule has been configured to be stored in the customer's storage. The default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScheduledQueryRuleProperties.isWorkspaceAlertsStorageConfigured has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isWorkspaceAlertsStorageConfigured?: boolean;
 
   /**
    * The flag which indicates whether this scheduled query rule should be stored in the customer's storage. The default is false. Relevant only for rules of the kind LogAlert.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScheduledQueryRuleProperties.checkWorkspaceAlertsStorageConfigured has a boolean wire value; preserve the published property contract."
   checkWorkspaceAlertsStorageConfigured?: boolean;
 
   /**
    * The flag which indicates whether the provided query should be validated or not. The default is false. Relevant only for rules of the kind LogAlert.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScheduledQueryRuleProperties.skipQueryValidation has a boolean wire value; preserve the published property contract."
   skipQueryValidation?: boolean;
 
   /**
    * The flag that indicates whether the alert should be automatically resolved or not. The default is true. Relevant only for rules of kinds LogAlert and SimpleLogAlert.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScheduledQueryRuleProperties.autoMitigate has a boolean wire value; preserve the published property contract."
   autoMitigate?: boolean;
 
   /**
@@ -436,6 +442,7 @@ model RuleResolveConfiguration {
   /**
    * The flag that indicates whether or not to auto resolve a fired alert.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RuleResolveConfiguration.autoResolved has a boolean wire value; preserve the published property contract."
   autoResolved?: boolean;
 
   /**

@@ -236,6 +236,7 @@ interface Factories {
       /**
        * If true, cancel all the Child pipelines that are triggered by the current pipeline.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing cancel.isRecursive has a boolean wire value; preserve the published property contract."
       @query("isRecursive")
       isRecursive?: boolean;
     },

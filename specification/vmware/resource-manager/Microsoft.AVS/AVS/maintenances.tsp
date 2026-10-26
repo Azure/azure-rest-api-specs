@@ -275,6 +275,7 @@ model MaintenanceProperties {
   @visibility(Lifecycle.Read)
   impact?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MaintenanceProperties.scheduledByMicrosoft has a boolean wire value; preserve the published property contract."
   @doc("If maintenance is scheduled by Microsoft")
   @visibility(Lifecycle.Read)
   scheduledByMicrosoft?: boolean;
@@ -432,6 +433,7 @@ model ImpactedMaintenanceResourceError {
   @visibility(Lifecycle.Read)
   resolutionSteps?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ImpactedMaintenanceResourceError.actionRequired has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether action is required by the customer")
   @visibility(Lifecycle.Read)
   actionRequired?: boolean;
@@ -512,6 +514,7 @@ model ScheduleOperation extends MaintenanceManagementOperation {
   @doc("The kind of operation")
   kind: MaintenanceManagementOperationKind.Schedule;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScheduleOperation.isDisabled has a boolean wire value; preserve the published property contract."
   @doc("If scheduling is disabled")
   @visibility(Lifecycle.Read)
   isDisabled?: boolean;
@@ -576,6 +579,7 @@ model SchedulingWindow extends ScheduleOperationConstraint {
 model WeekendSchedulingConstraint extends ScheduleOperationConstraint {
   kind: ScheduleOperationConstraintKind.WeekendScheduling;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WeekendSchedulingConstraint.isDisabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates if scheduling is disabled on weekends")
   @visibility(Lifecycle.Read)
   isDisabled?: boolean;
@@ -607,6 +611,7 @@ model RescheduleOperation extends MaintenanceManagementOperation {
   @doc("The kind of operation")
   kind: MaintenanceManagementOperationKind.Reschedule;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RescheduleOperation.isDisabled has a boolean wire value; preserve the published property contract."
   @doc("If rescheduling is disabled")
   @visibility(Lifecycle.Read)
   isDisabled?: boolean;
@@ -665,6 +670,7 @@ model ReschedulingWindowConstraint extends RescheduleOperationConstraint {
 model WeekendReschedulingConstraint extends RescheduleOperationConstraint {
   kind: RescheduleOperationConstraintKind.WeekendRescheduling;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WeekendReschedulingConstraint.isDisabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates if rescheduling is disabled on weekends")
   @visibility(Lifecycle.Read)
   isDisabled?: boolean;
@@ -697,6 +703,7 @@ model MaintenanceReadinessRefreshOperation
   @doc("The kind of operation")
   kind: MaintenanceManagementOperationKind.MaintenanceReadinessRefresh;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MaintenanceReadinessRefreshOperation.isDisabled has a boolean wire value; preserve the published property contract."
   @doc("If maintenanceReadiness refresh is disabled")
   @visibility(Lifecycle.Read)
   isDisabled?: boolean;
@@ -709,6 +716,7 @@ model MaintenanceReadinessRefreshOperation
   @visibility(Lifecycle.Read)
   status?: MaintenanceReadinessRefreshOperationStatus;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MaintenanceReadinessRefreshOperation.refreshedByMicrosoft has a boolean wire value; preserve the published property contract."
   @doc("Indicates if the operation was refreshed by Microsoft")
   @visibility(Lifecycle.Read)
   refreshedByMicrosoft?: boolean;

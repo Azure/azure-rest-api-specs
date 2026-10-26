@@ -132,6 +132,7 @@ model AwsAppSyncGraphqlApiProperties {
   @doc("<p>The ARN of the WAF access control list (ACL) associated with this <code>GraphqlApi</code>, if one exists.</p>")
   wafWebAclArn?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsAppSyncGraphqlApiProperties.xrayEnabled has a boolean wire value; preserve the published property contract."
   @doc("<p>A flag indicating whether to use X-Ray tracing for this <code>GraphqlApi</code>.</p>")
   xrayEnabled?: boolean;
 }
@@ -331,6 +332,7 @@ model LogConfig {
   @doc("<p>The service role that AppSync assumes to publish to CloudWatch logs in your account.</p>")
   cloudWatchLogsRoleArn?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LogConfig.excludeVerboseContent has a boolean wire value; preserve the published property contract."
   @doc("<p>Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging level.</p>")
   excludeVerboseContent?: boolean;
 

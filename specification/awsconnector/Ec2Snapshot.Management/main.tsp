@@ -71,6 +71,7 @@ model AwsEc2SnapshotProperties {
   @doc("<p>The description for the snapshot.</p>")
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsEc2SnapshotProperties.encrypted has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether the snapshot is encrypted.</p>")
   encrypted?: boolean;
 

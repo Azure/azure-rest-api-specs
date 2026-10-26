@@ -65,12 +65,15 @@ model IamPasswordPolicyProperties {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsIamPasswordPolicy")
 model AwsIamPasswordPolicyProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsIamPasswordPolicyProperties.allowUsersToChangePassword has a boolean wire value; preserve the published property contract."
   @doc("<p>Specifies whether IAM users are allowed to change their own password. Gives IAM users permissions to <code>iam:ChangePassword</code> for only their user and to the <code>iam:GetAccountPasswordPolicy</code> action. This option does not attach a permissions policy to each user, rather the permissions are applied at the account-level for all users by IAM.</p>")
   allowUsersToChangePassword?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsIamPasswordPolicyProperties.expirePasswords has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether passwords in the account expire. Returns true if <code>MaxPasswordAge</code> contains a value greater than 0. Returns false if MaxPasswordAge is 0 or not present.</p>")
   expirePasswords?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsIamPasswordPolicyProperties.hardExpiry has a boolean wire value; preserve the published property contract."
   @doc("<p>Specifies whether IAM users are prevented from setting a new password via the Amazon Web Services Management Console after their password has expired. The IAM user cannot access the console until an administrator resets the password. IAM users with <code>iam:ChangePassword</code> permission and active access keys can reset their own expired console password using the CLI or API.</p>")
   hardExpiry?: boolean;
 
@@ -83,15 +86,19 @@ model AwsIamPasswordPolicyProperties {
   @doc("<p>Specifies the number of previous passwords that IAM users are prevented from reusing.</p>")
   passwordReusePrevention?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsIamPasswordPolicyProperties.requireLowercaseCharacters has a boolean wire value; preserve the published property contract."
   @doc("<p>Specifies whether IAM user passwords must contain at least one lowercase character (a to z).</p>")
   requireLowercaseCharacters?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsIamPasswordPolicyProperties.requireNumbers has a boolean wire value; preserve the published property contract."
   @doc("<p>Specifies whether IAM user passwords must contain at least one numeric character (0 to 9).</p>")
   requireNumbers?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsIamPasswordPolicyProperties.requireSymbols has a boolean wire value; preserve the published property contract."
   @doc("<p>Specifies whether IAM user passwords must contain at least one of the following symbols:</p> <p>! @ # $ % ^ &amp; * ( ) _ + - = [ ] { } | '</p>")
   requireSymbols?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsIamPasswordPolicyProperties.requireUppercaseCharacters has a boolean wire value; preserve the published property contract."
   @doc("<p>Specifies whether IAM user passwords must contain at least one uppercase character (A to Z).</p>")
   requireUppercaseCharacters?: boolean;
 }

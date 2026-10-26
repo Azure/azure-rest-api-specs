@@ -443,6 +443,7 @@ union TracingConfigMode {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of VpcConfig")
 model VpcConfig {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VpcConfig.ipv6AllowedForDualStack has a boolean wire value; preserve the published property contract."
   @doc("Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets.")
   ipv6AllowedForDualStack?: boolean;
 

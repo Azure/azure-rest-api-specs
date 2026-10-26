@@ -266,6 +266,7 @@ interface Share {
       rootSquash?: string;
 
       /** Whether snapshot virtual directory access is enabled. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getProperties.enableSnapshotVirtualDirectoryAccess has a boolean wire value; preserve the published property contract."
       @header("x-ms-enable-snapshot-virtual-directory-access")
       enableSnapshotVirtualDirectoryAccess?: boolean;
 
@@ -282,6 +283,7 @@ interface Share {
       nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
 
       /** Whether SMB directory lease is enabled. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getProperties.enableSmbDirectoryLease has a boolean wire value; preserve the published property contract."
       @header("x-ms-enable-smb-directory-lease")
       @clientName("EnableSMBDirectoryLease", "go")
       enableSmbDirectoryLease?: boolean;

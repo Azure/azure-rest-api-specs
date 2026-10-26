@@ -1457,6 +1457,7 @@ model CostAllocationRuleCheckNameAvailabilityResponse {
   /**
    * Whether this rule name is available
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CostAllocationRuleCheckNameAvailabilityResponse.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**
@@ -2008,6 +2009,7 @@ model Notification {
    *
    *  Supported for CategoryType(s): Cost, ReservationUtilization.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Notification.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -2217,6 +2219,7 @@ model CommonExportProperties {
   /**
    * If set to true, exported data will be partitioned by size and placed in a blob directory together with a manifest file.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CommonExportProperties.partitionData has a boolean wire value; preserve the published property contract."
   partitionData?: boolean;
 
   /**
@@ -2594,6 +2597,7 @@ model ReportManifest {
   /**
    * Is the data in compressed format.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReportManifest.compressData has a boolean wire value; preserve the published property contract."
   compressData?: boolean;
 
   /**
@@ -2865,6 +2869,7 @@ model ReportConfigDefinition {
   /**
    * If true, report includes monetary commitment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReportConfigDefinition.includeMonetaryCommitment has a boolean wire value; preserve the published property contract."
   includeMonetaryCommitment?: boolean;
 }
 
@@ -3046,6 +3051,7 @@ model KpiProperties {
   /**
    * show the KPI in the UI?
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KpiProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3321,11 +3327,13 @@ model ForecastDefinition {
   /**
    * A boolean determining if actualCost will be included.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ForecastDefinition.includeActualCost has a boolean wire value; preserve the published property contract."
   includeActualCost?: boolean;
 
   /**
    * A boolean determining if FreshPartialCost will be included.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ForecastDefinition.includeFreshPartialCost has a boolean wire value; preserve the published property contract."
   includeFreshPartialCost?: boolean;
 }
 
@@ -3585,12 +3593,14 @@ model DimensionProperties {
   /**
    * Filter enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DimensionProperties.filterEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   filterEnabled?: boolean;
 
   /**
    * Grouping enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DimensionProperties.groupingEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   groupingEnabled?: boolean;
 
@@ -4653,6 +4663,7 @@ model TagInheritanceProperties {
   /**
    * This property defines the behavior when an inherited tag being applied matches a lower scope tag (Eg. Subscription tag matches the resource tag). If set to true - when tags match, the highest scope tags will be applied. Billing profile is the highest scope,  followed by invoice sections, subscriptions and resource groups (allows overriding of lower scope tag values). If set to false - when tags match, the lowest scope tags will be applied. So, if a resource has the same tag as a subscription tag, the resource tag will be applied (does not allow overriding of lower scope tag values).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TagInheritanceProperties.preferContainerTags has a boolean wire value; preserve the published property contract."
   preferContainerTags: boolean;
 }
 

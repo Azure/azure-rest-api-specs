@@ -439,6 +439,7 @@ interface Databases {
       $skipToken?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listCurrentByDatabase.$count has a boolean wire value; preserve the published property contract."
       @query("$count")
       $count?: boolean;
 
@@ -487,6 +488,7 @@ interface Databases {
       /**
        * Specifies whether to include disabled recommendations or not.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listRecommendedByDatabase.includeDisabledRecommendations has a boolean wire value; preserve the published property contract."
       @query("includeDisabledRecommendations")
       includeDisabledRecommendations?: boolean;
 

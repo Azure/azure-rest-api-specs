@@ -73,12 +73,15 @@ model BaseExportModel {
   @doc("The target Azure Terraform provider. Defaults to `azurerm`.")
   targetProvider?: targetProvider = targetProvider.azurerm;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BaseExportModel.fullProperties has a boolean wire value; preserve the published property contract."
   @doc("Whether to output all non-computed properties in the generated Terraform configuration. If set to `false` empty-valued properties will be omitted from the configuration. Defaults to `true`.")
   fullProperties?: boolean = true;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BaseExportModel.maskSensitive has a boolean wire value; preserve the published property contract."
   @doc("Mask sensitive attributes in the Terraform configuration. Defaults to `true`.")
   maskSensitive?: boolean = true;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BaseExportModel.includeRoleAssignment has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_09_01_preview)
   @doc("Whether to include role assignments assigned to the resources exported. Defaults to `false`. This is deprecated in favor of `includeExtensions` (with `role-assignments` specified).")
   includeRoleAssignment?: boolean = false;
@@ -87,6 +90,7 @@ model BaseExportModel {
   @doc("Include extension resource types directly associated to the resources exported")
   includeExtensions?: azureExtensionResourceType[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BaseExportModel.includeManagedResource has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_09_01_preview)
   @doc("Whether to include internal resources managed by Azure in the exported configuration. Defaults to `false`.")
   includeManagedResource?: boolean = false;
@@ -108,12 +112,14 @@ model ExportQuery extends BaseExportModel {
   @doc("The id prefix for the exported Terraform resources. Defaults to `res-`.")
   namePattern?: string = "res-";
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportQuery.recursive has a boolean wire value; preserve the published property contract."
   @doc("Recursively includes child resources. Defaults to `false`.")
   recursive?: boolean = false;
 
   @doc("Has to be `ExportQuery` to distinguish from other types.")
   type: Type.ExportQuery;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportQuery.includeResourceGroup has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_09_01_preview)
   @doc("Includes the resource group in the exported Terraform resources. Defaults to `false`.")
   includeResourceGroup?: boolean = false;
@@ -142,10 +148,12 @@ model ExportResource extends BaseExportModel {
   @doc("Has to be `ExportResource` to distinguish from other types.")
   type: Type.ExportResource;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportResource.recursive has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_09_01_preview)
   @doc("Recursively includes child resources. Defaults to `false`.")
   recursive?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExportResource.includeResourceGroup has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_09_01_preview)
   @doc("Includes the resource group in the exported Terraform resources. Defaults to `false`.")
   includeResourceGroup?: boolean = false;

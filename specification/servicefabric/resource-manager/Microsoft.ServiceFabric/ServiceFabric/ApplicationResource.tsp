@@ -182,6 +182,7 @@ model ApplicationResourceUpdateProperties {
   /**
    * Remove the current application capacity settings.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ApplicationResourceUpdateProperties.removeApplicationCapacity has a boolean wire value; preserve the published property contract."
   removeApplicationCapacity?: boolean;
 
   /**
@@ -207,6 +208,7 @@ model ApplicationUpgradePolicy {
   /**
    * If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ApplicationUpgradePolicy.forceRestart has a boolean wire value; preserve the published property contract."
   forceRestart?: boolean = false;
 
   /**
@@ -228,6 +230,7 @@ model ApplicationUpgradePolicy {
   /**
    * Determines whether the application should be recreated on update. If value=true, the rest of the upgrade policy parameters are not allowed and it will result in availability loss.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ApplicationUpgradePolicy.recreateApplication has a boolean wire value; preserve the published property contract."
   recreateApplication?: boolean;
 }
 /**
@@ -283,6 +286,7 @@ model ArmApplicationHealthPolicy {
   /**
    * Indicates whether warnings are treated with the same severity as errors.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ArmApplicationHealthPolicy.considerWarningAsError has a boolean wire value; preserve the published property contract."
   considerWarningAsError?: boolean = false;
 
   /**

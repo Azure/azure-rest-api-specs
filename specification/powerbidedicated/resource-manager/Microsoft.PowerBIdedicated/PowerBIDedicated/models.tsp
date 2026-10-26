@@ -438,6 +438,7 @@ model CheckCapacityNameAvailabilityResult {
   /**
    * Indicator of availability of the capacity name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CheckCapacityNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**

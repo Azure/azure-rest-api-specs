@@ -354,6 +354,7 @@ model UpdateSourceFromFileOperationRecord {
   fileName: string;
 
   /** Bool value for refresh. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UpdateSourceFromFileOperationRecord.refresh has a boolean wire value; preserve the published property contract."
   refresh?: boolean;
 }
 
@@ -399,6 +400,7 @@ model QuestionAnsweringProjectMetadata {
   /**
    * Resource enabled for multiple languages across projects or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing QuestionAnsweringProjectMetadata.multilingualResource has a boolean wire value; preserve the published property contract."
   multilingualResource?: boolean;
 
   /**
@@ -427,6 +429,7 @@ model QuestionAnsweringProjectMetadata {
   /**
    * Represents if semantic ranking is configured.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing QuestionAnsweringProjectMetadata.configureSemanticRanking has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_05_15_preview)
   configureSemanticRanking?: boolean;
 }
@@ -743,6 +746,7 @@ model QnaDialog {
    * do not include this QnA as answer for queries without context; otherwise,
    * ignores context and includes this QnA in answers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing QnaDialog.isContextOnly has a boolean wire value; preserve the published property contract."
   isContextOnly?: boolean;
 
   /**
@@ -930,6 +934,7 @@ model RefreshSourceOptions {
   /**
    * Boolean flag used to refresh data from the Source.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RefreshSourceOptions.refresh has a boolean wire value; preserve the published property contract."
   refresh?: boolean;
 }
 

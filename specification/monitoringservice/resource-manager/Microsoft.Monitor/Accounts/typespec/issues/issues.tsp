@@ -47,6 +47,7 @@ interface Issue {
       @query
       related?: string;
 
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing create.startInvestigation has a boolean wire value; preserve the published property contract."
       @removed(Versions.v2025_10_03)
       @doc("Whether to automatically start an investigation once the issue is created (default: false)")
       @query

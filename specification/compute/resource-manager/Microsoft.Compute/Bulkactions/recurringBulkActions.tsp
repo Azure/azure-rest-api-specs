@@ -269,6 +269,7 @@ model NotificationProperties {
   @doc("The language used for the notification.")
   language: Language;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NotificationProperties.disabled has a boolean wire value; preserve the published property contract."
   @doc("If true, notifications to this destination are disabled.")
   disabled?: boolean;
 }
@@ -529,6 +530,7 @@ model ScheduledActionProperties {
   @Azure.ResourceManager.identifiers(#["destination"])
   notificationSettings: Array<NotificationProperties>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScheduledActionProperties.disabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether new occurrences are disabled.")
   disabled?: boolean;
 
@@ -561,6 +563,7 @@ model ScheduledActionPropertiesUpdate {
   @Azure.ResourceManager.identifiers(#["destination"])
   notificationSettings: Array<NotificationProperties>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScheduledActionPropertiesUpdate.disabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether new occurrences are disabled.")
   disabled?: boolean;
 

@@ -176,6 +176,7 @@ model AnomalyState {
 
 @doc("Detailed information of the anomalous time stamp.")
 model AnomalyValue {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AnomalyValue.isAnomaly has a boolean wire value; preserve the published property contract."
   @doc("True if an anomaly is detected at the current time stamp.")
   isAnomaly: boolean;
 

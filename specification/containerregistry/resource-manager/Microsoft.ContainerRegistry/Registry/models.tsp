@@ -154,6 +154,7 @@ model OperationDefinition {
    * This property indicates if the operation is an action or a data action
    * ref: https://docs.microsoft.com/en-us/azure/role-based-access-control/role-definitions#management-and-data-operations
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OperationDefinition.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 }
 

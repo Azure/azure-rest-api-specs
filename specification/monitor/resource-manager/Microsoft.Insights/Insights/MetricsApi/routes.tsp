@@ -179,6 +179,7 @@ interface MetricsOperationGroup {
        * When set to true, if the timespan passed in is not supported by this metric, the API will return the result using the closest supported timespan. When set to false, an error is returned for invalid timespan parameters. Defaults to false.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listAtSubscriptionScope.AutoAdjustTimegrain has a boolean wire value; preserve the published property contract."
       @query("AutoAdjustTimegrain")
       AutoAdjustTimegrain?: boolean;
 
@@ -186,6 +187,7 @@ interface MetricsOperationGroup {
        * When set to false, invalid filter parameter values will be ignored. When set to true, an error is returned for invalid filter parameters. Defaults to true.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listAtSubscriptionScope.ValidateDimensions has a boolean wire value; preserve the published property contract."
       @query("ValidateDimensions")
       ValidateDimensions?: boolean;
 
@@ -273,6 +275,7 @@ interface MetricsOperationGroup {
        * When set to true, if the timespan passed in is not supported by this metric, the API will return the result using the closest supported timespan. When set to false, an error is returned for invalid timespan parameters. Defaults to false.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listAtSubscriptionScopePost.AutoAdjustTimegrain has a boolean wire value; preserve the published property contract."
       @query("AutoAdjustTimegrain")
       AutoAdjustTimegrain?: boolean;
 
@@ -280,6 +283,7 @@ interface MetricsOperationGroup {
        * When set to false, invalid filter parameter values will be ignored. When set to true, an error is returned for invalid filter parameters. Defaults to true.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listAtSubscriptionScopePost.ValidateDimensions has a boolean wire value; preserve the published property contract."
       @query("ValidateDimensions")
       ValidateDimensions?: boolean;
 
@@ -362,6 +366,7 @@ interface MetricsOperationGroup {
        * When set to true, if the timespan passed in is not supported by this metric, the API will return the result using the closest supported timespan. When set to false, an error is returned for invalid timespan parameters. Defaults to false.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.AutoAdjustTimegrain has a boolean wire value; preserve the published property contract."
       @query("AutoAdjustTimegrain")
       AutoAdjustTimegrain?: boolean;
 
@@ -369,6 +374,7 @@ interface MetricsOperationGroup {
        * When set to false, invalid filter parameter values will be ignored. When set to true, an error is returned for invalid filter parameters. Defaults to true.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.ValidateDimensions has a boolean wire value; preserve the published property contract."
       @query("ValidateDimensions")
       ValidateDimensions?: boolean;
 

@@ -2142,6 +2142,7 @@ model Operation {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction: boolean;
 
   /**
@@ -2516,6 +2517,7 @@ model SqlManagedInstanceSku {
   /**
    * Whether dev/test is enabled. When the dev field is set to true, the resource is used for dev/test purpose.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlManagedInstanceSku.dev has a boolean wire value; preserve the published property contract."
   dev?: boolean = true;
 
   /**
@@ -2693,12 +2695,14 @@ model SqlServerInstanceProperties {
    * Indicates whether database master key exists in SQL Server.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerInstanceProperties.dbMasterKeyExists has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   dbMasterKeyExists?: boolean;
 
   /**
    * Indicates whether always On availability groups is enabled in SQL Server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerInstanceProperties.isHadrEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isHadrEnabled?: boolean;
 
@@ -2844,12 +2848,14 @@ model SqlServerInstanceProperties {
   /**
    * Indicates whether Microsoft PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerInstanceProperties.isMicrosoftPkiCertTrustConfigured has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isMicrosoftPkiCertTrustConfigured?: boolean;
 
   /**
    * Indicates whether DigiCert PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerInstanceProperties.isDigiCertPkiCertTrustConfigured has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDigiCertPkiCertTrustConfigured?: boolean;
 
@@ -2879,6 +2885,7 @@ model DBMEndpoint {
   /**
    * Is Encryption enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DBMEndpoint.isEncryptionEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEncryptionEnabled?: boolean;
 
@@ -2903,6 +2910,7 @@ model DBMEndpoint {
   /**
    * Is the port number dynamically assigned.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DBMEndpoint.isDynamicPort has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDynamicPort?: boolean;
 
@@ -3023,6 +3031,7 @@ model Monitoring {
   /**
    * Indicates if monitoring is enabled for this SQL Server instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Monitoring.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3055,6 +3064,7 @@ model MigrationAssessment {
    * Indicates if migration assessment is enabled for this SQL Server instance.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MigrationAssessment.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3381,6 +3391,7 @@ model SkuRecommendationResultsAzureSqlDatabaseTargetSkuCategory {
   /**
    * Indicates if zone redundancy is available for the target SKU.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SkuRecommendationResultsAzureSqlDatabaseTargetSkuCategory.zoneRedundancyAvailable has a boolean wire value; preserve the published property contract."
   zoneRedundancyAvailable?: boolean;
 }
 
@@ -3478,6 +3489,7 @@ model SkuRecommendationResultsAzureSqlManagedInstanceTargetSkuCategory {
   /**
    * Indicates if zone redundancy is available for the target SKU.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SkuRecommendationResultsAzureSqlManagedInstanceTargetSkuCategory.zoneRedundancyAvailable has a boolean wire value; preserve the published property contract."
   zoneRedundancyAvailable?: boolean;
 }
 
@@ -3689,6 +3701,7 @@ model BestPracticesAssessment {
   /**
    * Indicates if SQL best practices assessment is enabled for the SQL Server instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BestPracticesAssessment.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3704,6 +3717,7 @@ model Schedule {
   /**
    * Indicates whether scheduling is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Schedule.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3739,6 +3753,7 @@ model ClientConnection {
   /**
    * Indicates if client connection is enabled for this SQL Server instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClientConnection.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3861,12 +3876,14 @@ model SqlServerInstanceUpdateProperties {
    * Indicates whether database master key exists in SQL Server.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerInstanceUpdateProperties.dbMasterKeyExists has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   dbMasterKeyExists?: boolean;
 
   /**
    * Indicates whether always On availability groups is enabled in SQL Server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerInstanceUpdateProperties.isHadrEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isHadrEnabled?: boolean;
 
@@ -4009,11 +4026,13 @@ model SqlServerInstanceUpdateProperties {
   /**
    * Indicates whether Microsoft PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerInstanceUpdateProperties.isMicrosoftPkiCertTrustConfigured has a boolean wire value; preserve the published property contract."
   isMicrosoftPkiCertTrustConfigured?: boolean;
 
   /**
    * Indicates whether DigiCert PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerInstanceUpdateProperties.isDigiCertPkiCertTrustConfigured has a boolean wire value; preserve the published property contract."
   isDigiCertPkiCertTrustConfigured?: boolean;
 
   /**
@@ -4282,6 +4301,7 @@ model SqlServerInstanceRunTargetRecommendationJobRequest {
   /**
    * Specifies whether to include file-level requirements in the target recommendation report.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerInstanceRunTargetRecommendationJobRequest.includeFileLevelRequirements has a boolean wire value; preserve the published property contract."
   includeFileLevelRequirements?: boolean = false;
 
   /**
@@ -4431,6 +4451,7 @@ model SqlServerInstanceTargetRecommendationReportSection {
   /**
    * Indicates whether the data field contains base64-encoded GZip-compressed JSON.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerInstanceTargetRecommendationReportSection.isCompressed has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCompressed?: boolean;
 }
@@ -4449,6 +4470,7 @@ model SqlServerInstanceMigrationReadinessReportResponse {
   /**
    * Indicates whether the report field contains base64-encoded GZip-compressed JSON.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerInstanceMigrationReadinessReportResponse.isCompressed has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCompressed?: boolean;
 
@@ -5198,6 +5220,7 @@ model ActiveDirectoryConnectorDNSDetails {
   /**
    * Flag indicating whether to prefer Kubernetes DNS server response over AD DNS server response for IP address lookups.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ActiveDirectoryConnectorDNSDetails.preferK8sDnsForPtrLookups has a boolean wire value; preserve the published property contract."
   preferK8sDnsForPtrLookups?: boolean = true;
 }
 
@@ -5285,6 +5308,7 @@ model CommonSku {
   /**
    * Whether dev/test is enabled. When the dev field is set to true, the resource is used for dev/test purpose.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CommonSku.dev has a boolean wire value; preserve the published property contract."
   dev?: boolean = true;
 
   /**
@@ -5408,22 +5432,26 @@ model AvailabilityGroupInfo {
   /**
    * Specifies whether this is a basic availability group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AvailabilityGroupInfo.basicFeatures has a boolean wire value; preserve the published property contract."
   basicFeatures?: boolean;
 
   /**
    * Specifies whether DTC support has been enabled for this availability group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AvailabilityGroupInfo.dtcSupport has a boolean wire value; preserve the published property contract."
   dtcSupport?: boolean;
 
   /**
    * Specifies whether the availability group supports failover for database health conditions.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AvailabilityGroupInfo.dbFailover has a boolean wire value; preserve the published property contract."
   dbFailover?: boolean;
 
   /**
    * Specifies whether this is a distributed availability group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AvailabilityGroupInfo.isDistributed has a boolean wire value; preserve the published property contract."
   isDistributed?: boolean;
 
   /**
@@ -5440,6 +5468,7 @@ model AvailabilityGroupInfo {
   /**
    * SQL Server availability group contained system databases.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AvailabilityGroupInfo.isContained has a boolean wire value; preserve the published property contract."
   isContained?: boolean;
 
   /**
@@ -5777,12 +5806,14 @@ model SqlAvailabilityGroupDatabaseReplicaResourceProperties {
   /**
    * Whether the availability database is local.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlAvailabilityGroupDatabaseReplicaResourceProperties.isLocal has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isLocal?: boolean;
 
   /**
    * Returns 1 if the replica is primary, or 0 if it is a secondary replica.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlAvailabilityGroupDatabaseReplicaResourceProperties.isPrimaryReplica has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPrimaryReplica?: boolean;
 
@@ -5795,6 +5826,7 @@ model SqlAvailabilityGroupDatabaseReplicaResourceProperties {
   /**
    * Whether this replica is transaction committer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlAvailabilityGroupDatabaseReplicaResourceProperties.isCommitParticipant has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCommitParticipant?: boolean;
 
@@ -5813,6 +5845,7 @@ model SqlAvailabilityGroupDatabaseReplicaResourceProperties {
   /**
    * Whether this data movement is suspended.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlAvailabilityGroupDatabaseReplicaResourceProperties.isSuspended has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isSuspended?: boolean;
 
@@ -6113,6 +6146,7 @@ model FailoverMiLinkResourceId {
   /**
    * Whether to perform a Force Failover as opposed to just a regular Failover.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FailoverMiLinkResourceId.force has a boolean wire value; preserve the published property contract."
   force?: boolean;
 }
 
@@ -6172,6 +6206,7 @@ model SqlServerDatabaseResourceProperties {
   /**
    * Whether the database is read only or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerDatabaseResourceProperties.isReadOnly has a boolean wire value; preserve the published property contract."
   isReadOnly?: boolean;
 
   /**
@@ -6247,25 +6282,34 @@ model SqlServerDatabaseResourceProperties {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SqlServerDatabaseResourcePropertiesDatabaseOptions {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerDatabaseResourcePropertiesDatabaseOptions.isAutoCloseOn has a boolean wire value; preserve the published property contract."
   isAutoCloseOn?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerDatabaseResourcePropertiesDatabaseOptions.isAutoShrinkOn has a boolean wire value; preserve the published property contract."
   isAutoShrinkOn?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerDatabaseResourcePropertiesDatabaseOptions.isAutoCreateStatsOn has a boolean wire value; preserve the published property contract."
   isAutoCreateStatsOn?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerDatabaseResourcePropertiesDatabaseOptions.isAutoUpdateStatsOn has a boolean wire value; preserve the published property contract."
   isAutoUpdateStatsOn?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerDatabaseResourcePropertiesDatabaseOptions.isRemoteDataArchiveEnabled has a boolean wire value; preserve the published property contract."
   isRemoteDataArchiveEnabled?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerDatabaseResourcePropertiesDatabaseOptions.isMemoryOptimizationEnabled has a boolean wire value; preserve the published property contract."
   isMemoryOptimizationEnabled?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerDatabaseResourcePropertiesDatabaseOptions.isEncrypted has a boolean wire value; preserve the published property contract."
   isEncrypted?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerDatabaseResourcePropertiesDatabaseOptions.isTrustworthyOn has a boolean wire value; preserve the published property contract."
   isTrustworthyOn?: boolean;
 
   /**
    * Whether the database uses the In-Memory OLTP feature for storing in-memory objects.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlServerDatabaseResourcePropertiesDatabaseOptions.isHekatonFilesOn has a boolean wire value; preserve the published property contract."
   isHekatonFilesOn?: boolean;
 
   /**
@@ -6470,6 +6514,7 @@ model SkuRecommendationSummaryTargetSkuCategory {
   /**
    * Indicates if zone redundancy is available for the target SKU.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SkuRecommendationSummaryTargetSkuCategory.zoneRedundancyAvailable has a boolean wire value; preserve the published property contract."
   zoneRedundancyAvailable?: boolean;
 }
 

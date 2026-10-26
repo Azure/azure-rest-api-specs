@@ -58,6 +58,7 @@ interface Responses {
       includables?: OpenAI.IncludeEnum[] = #[];
 
       /** The stream query parameter. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getResponse.stream has a boolean wire value; preserve the published property contract."
       @query stream?: boolean = false;
 
       /** The sequence number of the event after which to start streaming. */

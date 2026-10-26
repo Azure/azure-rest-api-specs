@@ -84,6 +84,7 @@ interface Grants {
       /**
        * May be used to include information about budget that has been allocated.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing get.includeAllocatedBudget has a boolean wire value; preserve the published property contract."
       @query("includeAllocatedBudget")
       includeAllocatedBudget?: boolean;
     },
@@ -99,6 +100,7 @@ interface Grants {
       /**
        * May be used to include information about budget that has been allocated.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.includeAllocatedBudget has a boolean wire value; preserve the published property contract."
       @query("includeAllocatedBudget")
       includeAllocatedBudget?: boolean;
     },
@@ -115,6 +117,7 @@ interface Grants {
       /**
        * May be used to include information about budget that has been allocated.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listAll.includeAllocatedBudget has a boolean wire value; preserve the published property contract."
       @query("includeAllocatedBudget")
       includeAllocatedBudget?: boolean;
     },

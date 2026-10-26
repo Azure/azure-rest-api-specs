@@ -59,6 +59,7 @@ model DatasetPropertyKey {
   @doc("Path to the input value from the message.")
   path: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DatasetPropertyKey.primaryKey has a boolean wire value; preserve the published property contract."
   @doc("If true the property will be used as a primary key. At most one primary key can exists.")
   primaryKey?: boolean;
 }

@@ -297,6 +297,7 @@ model ConfluentAgreementProperties {
   /**
    * If any version of the terms have been accepted, otherwise false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConfluentAgreementProperties.accepted has a boolean wire value; preserve the published property contract."
   accepted?: boolean;
 }
 
@@ -360,6 +361,7 @@ model OperationResult {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OperationResult.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 }
 
@@ -2088,6 +2090,7 @@ model AzureCosmosDBSourceConnectorServiceInfo
   /**
    * Azure Cosmos Database Message Key Enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureCosmosDBSourceConnectorServiceInfo.cosmosMessageKeyEnabled has a boolean wire value; preserve the published property contract."
   cosmosMessageKeyEnabled?: boolean;
 
   /**
@@ -2633,5 +2636,6 @@ model LatestLinkedSaaSResponse {
   /**
    * Flag indicating if the SaaS resource is hidden
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LatestLinkedSaaSResponse.isHiddenSaaS has a boolean wire value; preserve the published property contract."
   isHiddenSaaS?: boolean;
 }

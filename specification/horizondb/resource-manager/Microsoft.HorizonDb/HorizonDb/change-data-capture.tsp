@@ -456,6 +456,7 @@ model ChangeDataCaptureCapabilityProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ChangeDataCaptureCapabilityProperties.autoUpgradeExtension has a boolean wire value; preserve the published property contract."
   @doc("Whether HorizonDB may automatically upgrade the service-owned change data capture extension within the supported compatibility policy.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   autoUpgradeExtension?: boolean;
@@ -491,6 +492,7 @@ model ChangeDataCaptureCapabilityPropertiesForPatchUpdate {
   @visibility(Lifecycle.Update)
   desiredState?: ChangeDataCaptureDesiredState;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ChangeDataCaptureCapabilityPropertiesForPatchUpdate.autoUpgradeExtension has a boolean wire value; preserve the published property contract."
   @doc("Whether HorizonDB may automatically upgrade the service-owned change data capture extension within the supported compatibility policy.")
   @visibility(Lifecycle.Update)
   autoUpgradeExtension?: boolean;
@@ -673,6 +675,7 @@ model ActivateChangeDataCaptureIdentityRequest {
   @doc("The resource ID of an inactive, successfully validated identity assignment under the destination receiving the action.")
   identityAssignmentResourceId: ChangeDataCaptureIdentityAssignmentResourceId;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ActivateChangeDataCaptureIdentityRequest.drainExistingSessions has a boolean wire value; preserve the published property contract."
   @doc("Whether existing destination sessions should drain before the identity cutover. The default is false.")
   drainExistingSessions?: boolean;
 }

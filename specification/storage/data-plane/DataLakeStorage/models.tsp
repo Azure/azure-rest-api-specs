@@ -238,6 +238,7 @@ model PathItem {
   name?: string;
 
   /** Whether the path is a directory. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PathItem.isDirectory has a boolean wire value; preserve the published property contract."
   isDirectory?: boolean = false;
 
   /** The last modified time. */
@@ -380,6 +381,7 @@ model BlobItem {
   name: string;
 
   /** Whether the blob is deleted. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobItem.deleted has a boolean wire value; preserve the published property contract."
   @Xml.name("Deleted")
   deleted: boolean;
 
@@ -392,6 +394,7 @@ model BlobItem {
   versionId?: string;
 
   /** Whether this is the current version. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobItem.isCurrentVersion has a boolean wire value; preserve the published property contract."
   @Xml.name("IsCurrentVersion")
   isCurrentVersion?: boolean;
 
@@ -478,10 +481,12 @@ model BlobPropertiesInternal {
   copyStatusDescription?: string;
 
   /** Whether the server is encrypted. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobPropertiesInternal.serverEncrypted has a boolean wire value; preserve the published property contract."
   @Xml.name("ServerEncrypted")
   serverEncrypted?: boolean;
 
   /** Whether it is an incremental copy. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobPropertiesInternal.incrementalCopy has a boolean wire value; preserve the published property contract."
   @Xml.name("IncrementalCopy")
   incrementalCopy?: boolean;
 
@@ -500,6 +505,7 @@ model BlobPropertiesInternal {
   remainingRetentionDays?: int32;
 
   /** Whether the access tier is inferred. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobPropertiesInternal.accessTierInferred has a boolean wire value; preserve the published property contract."
   @Xml.name("AccessTierInferred")
   accessTierInferred?: boolean;
 
@@ -528,6 +534,7 @@ model BlobPropertiesInternal {
   expiresOn?: utcDateTime;
 
   /** Whether the blob is sealed. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobPropertiesInternal.isSealed has a boolean wire value; preserve the published property contract."
   @Xml.name("Sealed")
   isSealed?: boolean;
 
@@ -853,12 +860,14 @@ alias MaxResultsParameter = {
 /** The recursive required query parameter. */
 alias RecursiveRequiredParameter = {
   /** Required */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RecursiveRequiredParameter.recursive has a boolean wire value; preserve the published property contract."
   @query recursive: boolean;
 };
 
 /** The recursive optional query parameter. */
 alias RecursiveOptionalParameter = {
   /** Required */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RecursiveOptionalParameter.recursive has a boolean wire value; preserve the published property contract."
   @query recursive?: boolean;
 };
 
@@ -872,6 +881,7 @@ alias DirectoryParameter = {
 /** The upn query parameter. */
 alias UpnParameter = {
   /** Optional. Valid only when Hierarchical Namespace is enabled for the account. If "true", the user identity values returned in the x-ms-owner, x-ms-group, and x-ms-acl response headers will be transformed from Azure Active Directory Object IDs to User Principal Names. If "false", the values will be returned as Azure Active Directory Object IDs. The default value is false. Note that group and application Object IDs are not translated because they do not have unique friendly names. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UpnParameter.upn has a boolean wire value; preserve the published property contract."
   @query upn?: boolean;
 };
 
@@ -884,30 +894,35 @@ alias PositionParameter = {
 /** The retainUncommittedData query parameter. */
 alias RetainUncommittedDataParameter = {
   /** Valid only for flush operations. If "true", uncommitted data is retained after the flush operation completes; otherwise, the uncommitted data is deleted after the flush operation. The default is false. Data at offsets less than the specified position are written to the file when flush succeeds, but this optional parameter allows data after the flush position to be retained for a future flush operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RetainUncommittedDataParameter.retainUncommittedData has a boolean wire value; preserve the published property contract."
   @query retainUncommittedData?: boolean;
 };
 
 /** The close query parameter. */
 alias CloseParameter = {
   /** Azure Storage Events allow applications to receive notifications when files change. When Azure Storage Events are enabled, a file changed event is raised. This event has a property indicating whether this is the final change to distinguish the difference between an intermediate flush to a file stream and the final close of a file stream. The close query parameter is valid only when the action is "flush" and change notifications are enabled. If the value of close is "true" and the flush operation completes successfully, the service raises a file change notification with a property indicating that this is the final update (the file stream has been closed). If "false" a change notification is raised indicating the file has changed. The default is false. This query parameter is set to true by the Hadoop ABFS driver to indicate that the file stream has been closed. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CloseParameter.close has a boolean wire value; preserve the published property contract."
   @query close?: boolean;
 };
 
 /** The forceFlag query parameter. */
 alias ForceFlagParameter = {
   /** Optional. Valid for "SetAccessControlRecursive" operation. If set to false, the operation will terminate quickly on encountering user errors (4XX). If true, the operation will ignore user errors and proceed with the operation on other sub-entities of the directory. Continuation token will only be returned when forceFlag is true in case of user errors. If not set the default value is false for this. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ForceFlagParameter.forceFlag has a boolean wire value; preserve the published property contract."
   @query forceFlag?: boolean;
 };
 
 /** The flush query parameter. */
 alias FlushParameter = {
   /** If file should be flushed after the append. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FlushParameter.flush has a boolean wire value; preserve the published property contract."
   @query flush?: boolean;
 };
 
 /** The paginated query parameter. */
 alias PaginatedParameter = {
   /** If true, paginated behavior will be seen. Pagination is for the recursive ACL checks as a POSIX requirement in the server and Delete in an atomic operation once the ACL checks are completed. If false or missing, normal default behavior will kick in, which may timeout in case of very large directories due to recursive ACL checks. This new parameter is introduced for backward compatibility. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PaginatedParameter.paginated has a boolean wire value; preserve the published property contract."
   @query paginated?: boolean;
 };
 
@@ -1117,6 +1132,7 @@ alias LeaseStatusResponseHeader = {
 /** The is server encrypted response header (x-ms-request-server-encrypted). */
 alias IsServerEncryptedResponseHeader = {
   /** The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IsServerEncryptedResponseHeader.isServerEncrypted has a boolean wire value; preserve the published property contract."
   @header("x-ms-request-server-encrypted")
   isServerEncrypted?: boolean;
 };
@@ -1124,6 +1140,7 @@ alias IsServerEncryptedResponseHeader = {
 /** The is server encrypted response header (x-ms-server-encrypted, alternate form). */
 alias IsServerEncryptedAltResponseHeader = {
   /** The value of this header is set to true if the directory metadata is completely encrypted using the specified algorithm. Otherwise, the value is set to false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IsServerEncryptedAltResponseHeader.isServerEncrypted has a boolean wire value; preserve the published property contract."
   @header("x-ms-server-encrypted")
   isServerEncrypted?: boolean;
 };
@@ -1289,6 +1306,7 @@ alias AclResponseHeader = {
 /** The lease renewed response header. */
 alias LeaseRenewedResponseHeader = {
   /** If the lease was auto-renewed with this request. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LeaseRenewedResponseHeader.leaseRenewed has a boolean wire value; preserve the published property contract."
   @header("x-ms-lease-renewed")
   leaseRenewed?: boolean;
 };

@@ -1780,18 +1780,21 @@ model ConfigurationProperties {
   /**
    * Indicates if it's a dynamic (true) or static (false) configuration (also known as server parameter). Static server parameters require a server restart after changing the value assigned to them, for the change to take effect. Dynamic server parameters do not require a server restart after changing the value assigned to them, for the change to take effect.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConfigurationProperties.isDynamicConfig has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDynamicConfig?: boolean;
 
   /**
    * Indicates if it's a read-only (true) or modifiable (false) configuration (also known as server parameter).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConfigurationProperties.isReadOnly has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isReadOnly?: boolean;
 
   /**
    * Indicates if the value assigned to the configuration (also known as server parameter) is pending a server restart for it to take effect.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConfigurationProperties.isConfigPendingRestart has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isConfigPendingRestart?: boolean;
 
@@ -2646,6 +2649,7 @@ model MigrationNameAvailability {
   /**
    * Indicates if the migration name is available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MigrationNameAvailability.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
@@ -2794,6 +2798,7 @@ model Operation {
   /**
    * Indicates if the operation is a data action.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -3626,6 +3631,7 @@ model RestartParameter {
   /**
    * Indicates if restart the PostgreSQL database engine should failover or switch over from primary to standby. This only works if server has high availability enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RestartParameter.restartWithFailover has a boolean wire value; preserve the published property contract."
   restartWithFailover?: boolean;
 
   /**
@@ -4065,6 +4071,7 @@ model MaintenanceEventResourceProperties {
   @visibility(Lifecycle.Read)
   estimatedDowntime?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MaintenanceEventResourceProperties.deferrable has a boolean wire value; preserve the published property contract."
   @doc("A value indicating whether this maintenance event can be rescheduled by the customer.")
   @visibility(Lifecycle.Read)
   deferrable: boolean;
@@ -4155,6 +4162,7 @@ model MaintenanceEventActionResponse {
   @doc("The planned end time of the maintenance event (UTC).")
   plannedEndTime?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MaintenanceEventActionResponse.appliedNow has a boolean wire value; preserve the published property contract."
   @doc("A value indicating whether this was an apply-now (immediate) action. True for ApplyNow; false for Reschedule.")
   appliedNow?: boolean;
 
@@ -4194,6 +4202,7 @@ model PolicyDetail {
   @doc("The name of the policy.")
   policyName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PolicyDetail.passed has a boolean wire value; preserve the published property contract."
   @doc("Whether the policy validation passed.")
   passed?: boolean;
 

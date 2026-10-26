@@ -144,6 +144,7 @@ model FleetDatabaseProperties {
   /**
    * If true, database is recoverable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FleetDatabaseProperties.recoverable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   recoverable?: boolean;
 
@@ -282,6 +283,7 @@ model TransparentDataEncryption {
   /**
    * Enable key auto rotation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TransparentDataEncryption.enableAutoRotation has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   enableAutoRotation?: boolean;
 }
@@ -481,18 +483,21 @@ model FleetTierProperties {
   /**
    * If true, tier is disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FleetTierProperties.disabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   disabled?: boolean;
 
   /**
    * If true, serverless resources are provisioned in the tier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FleetTierProperties.serverless has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   serverless?: boolean;
 
   /**
    * If true, databases are pooled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FleetTierProperties.pooled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   pooled?: boolean;
 

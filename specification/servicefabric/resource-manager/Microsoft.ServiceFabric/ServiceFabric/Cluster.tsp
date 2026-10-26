@@ -209,6 +209,7 @@ model ClusterProperties {
   /**
    * Indicates if the event store service is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterProperties.eventStoreServiceEnabled has a boolean wire value; preserve the published property contract."
   eventStoreServiceEnabled?: boolean;
 
   /**
@@ -287,6 +288,7 @@ model ClusterProperties {
   /**
    * Indicates if infrastructure service manager is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterProperties.infrastructureServiceManager has a boolean wire value; preserve the published property contract."
   infrastructureServiceManager?: boolean;
 
   /**
@@ -309,6 +311,7 @@ model ClusterProperties {
   /**
    * Boolean to pause automatic runtime version upgrades to the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterProperties.waveUpgradePaused has a boolean wire value; preserve the published property contract."
   waveUpgradePaused?: boolean;
 
   /**
@@ -320,6 +323,7 @@ model ClusterProperties {
   /**
    * If true, token-based authentication is not allowed on the HttpGatewayEndpoint. This is required to support TLS versions 1.3 and above. If token-based authentication is used, HttpGatewayTokenAuthEndpointPort must be defined.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterProperties.enableHttpGatewayExclusiveAuthMode has a boolean wire value; preserve the published property contract."
   enableHttpGatewayExclusiveAuthMode?: boolean;
 }
 
@@ -751,6 +755,7 @@ model ClusterPropertiesUpdateParameters {
   /**
    * Indicates if the event store service is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterPropertiesUpdateParameters.eventStoreServiceEnabled has a boolean wire value; preserve the published property contract."
   eventStoreServiceEnabled?: boolean;
 
   /**
@@ -808,6 +813,7 @@ model ClusterPropertiesUpdateParameters {
   /**
    * Indicates if infrastructure service manager is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterPropertiesUpdateParameters.infrastructureServiceManager has a boolean wire value; preserve the published property contract."
   infrastructureServiceManager?: boolean;
 
   /**
@@ -830,6 +836,7 @@ model ClusterPropertiesUpdateParameters {
   /**
    * Boolean to pause automatic runtime version upgrades to the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterPropertiesUpdateParameters.waveUpgradePaused has a boolean wire value; preserve the published property contract."
   waveUpgradePaused?: boolean;
 
   /**
@@ -841,6 +848,7 @@ model ClusterPropertiesUpdateParameters {
   /**
    * If true, token-based authentication is not allowed on the HttpGatewayEndpoint. This is required to support TLS versions 1.3 and above. If token-based authentication is used, HttpGatewayTokenAuthEndpointPort must be defined.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterPropertiesUpdateParameters.enableHttpGatewayExclusiveAuthMode has a boolean wire value; preserve the published property contract."
   enableHttpGatewayExclusiveAuthMode?: boolean;
 }
 
@@ -871,6 +879,7 @@ model ClientCertificateCommonName {
   /**
    * Indicates if the client certificate has admin access to the cluster. Non admin clients can perform only read only operations on the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClientCertificateCommonName.isAdmin has a boolean wire value; preserve the published property contract."
   isAdmin: boolean;
 
   /**
@@ -891,6 +900,7 @@ model ClientCertificateThumbprint {
   /**
    * Indicates if the client certificate has admin access to the cluster. Non admin clients can perform only read only operations on the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClientCertificateThumbprint.isAdmin has a boolean wire value; preserve the published property contract."
   isAdmin: boolean;
 
   /**
@@ -970,6 +980,7 @@ model ClusterUpgradePolicy {
   /**
    * If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterUpgradePolicy.forceRestart has a boolean wire value; preserve the published property contract."
   forceRestart?: boolean = false;
 
   /**
@@ -1185,6 +1196,7 @@ model Notification {
   /**
    * Indicates if the notification is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Notification.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled: boolean;
 
   /**

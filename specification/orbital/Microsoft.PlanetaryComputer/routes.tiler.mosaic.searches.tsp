@@ -1039,6 +1039,7 @@ interface MosaicSearchesTileJson {
       /**
        * Add mask to the output data.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing get.returnMask has a boolean wire value; preserve the published property contract."
       @query("return_mask")
       returnMask?: boolean = true;
     },

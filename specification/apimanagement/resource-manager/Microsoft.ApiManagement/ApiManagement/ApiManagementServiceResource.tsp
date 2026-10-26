@@ -248,6 +248,7 @@ interface ApiManagementServiceResources {
       /**
        * Include not tagged APIs.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByTags.includeNotTaggedApis has a boolean wire value; preserve the published property contract."
       @query("includeNotTaggedApis")
       includeNotTaggedApis?: boolean;
     }
@@ -451,6 +452,7 @@ interface ApiManagementServiceResources {
       /**
        * Include not tagged Products.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing productListByTags.includeNotTaggedProducts has a boolean wire value; preserve the published property contract."
       @query("includeNotTaggedProducts")
       includeNotTaggedProducts?: boolean;
     }

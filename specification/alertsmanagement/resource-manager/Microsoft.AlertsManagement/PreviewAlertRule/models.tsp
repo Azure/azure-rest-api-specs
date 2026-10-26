@@ -274,6 +274,7 @@ model LogAlertRuleProperties {
   /**
    * The flag which indicates whether this scheduled query rule is enabled. Value should be true or false
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LogAlertRuleProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -485,6 +486,7 @@ model Evaluation {
   /**
    * Indicates whether the threshold was met for this evaluation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Evaluation.thresholdMet has a boolean wire value; preserve the published property contract."
   thresholdMet?: boolean;
 }
 
@@ -516,5 +518,6 @@ model EvaluatedPeriod {
   /**
    * Indicates whether the threshold was met during the evaluation period.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EvaluatedPeriod.thresholdMet has a boolean wire value; preserve the published property contract."
   thresholdMet?: boolean;
 }

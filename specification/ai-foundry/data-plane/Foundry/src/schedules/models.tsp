@@ -255,6 +255,7 @@ model Schedule {
   description?: string;
 
   #suppress "@azure-tools/typespec-autorest/union-unsupported"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Schedule.enabled has a boolean wire value; preserve the published property contract."
   @doc("Enabled status of the schedule.")
   enabled: boolean;
 
@@ -294,6 +295,7 @@ model ScheduleRun {
   scheduleId: string;
 
   #suppress "@azure-tools/typespec-autorest/union-unsupported"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScheduleRun.success has a boolean wire value; preserve the published property contract."
   @doc("Trigger success status of the schedule run.")
   @visibility(Lifecycle.Read)
   success: boolean;

@@ -70,6 +70,7 @@ model TranslateParameters {
     """)
   profanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TranslateParameters.includeAlignment has a boolean wire value; preserve the published property contract."
   @removed(APIVersion.v2025_10_01_preview)
   @query
   @doc("""
@@ -78,6 +79,7 @@ model TranslateParameters {
     """)
   includeAlignment?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TranslateParameters.includeSentenceLength has a boolean wire value; preserve the published property contract."
   @removed(APIVersion.v2025_10_01_preview)
   @query
   @doc("""
@@ -109,6 +111,7 @@ model TranslateParameters {
     """)
   toScript?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TranslateParameters.allowFallback has a boolean wire value; preserve the published property contract."
   @removed(APIVersion.v2025_10_01_preview)
   @query
   @doc("""
@@ -163,6 +166,7 @@ model TranslationTarget {
     """)
   deploymentName?: string = "general";
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TranslationTarget.allowFallback has a boolean wire value; preserve the published property contract."
   @doc("""
     In the case where a custom system is being used, specifies that the service is allowed to fall back to a
     general system when a custom system doesn't exist. 

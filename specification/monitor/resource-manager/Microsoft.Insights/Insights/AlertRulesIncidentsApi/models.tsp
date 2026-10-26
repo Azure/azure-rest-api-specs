@@ -30,6 +30,7 @@ model Incident {
   /**
    * A boolean to indicate whether the incident is active or resolved.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Incident.isActive has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isActive?: boolean;
 

@@ -179,6 +179,7 @@ model PolicyInitiativeAssignmentProperties {
 model DecommissionedManagementGroupProperties {
   ...ManagementGroupProperties;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DecommissionedManagementGroupProperties.create has a boolean wire value; preserve the published property contract."
   @doc("This parameter determines whether the 'Decommissioned' management group will be created. If set to true, the group will be created; if set to false, it will not be created. The default value is false.")
   create: boolean;
 }
@@ -187,6 +188,7 @@ model DecommissionedManagementGroupProperties {
 model SandboxManagementGroupProperties {
   ...ManagementGroupProperties;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SandboxManagementGroupProperties.create has a boolean wire value; preserve the published property contract."
   @doc("This parameter determines whether the 'Sandbox' management group will be created. If set to true, the group will be created; if set to false, it will not be created. The default value is false.")
   create: boolean;
 }

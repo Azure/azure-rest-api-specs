@@ -83,12 +83,14 @@ model AwsApiGatewayRestApiProperties {
   @doc("The description of the RestApi.")
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsApiGatewayRestApiProperties.disableExecuteApiEndpoint has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether clients can invoke your API by using the default ``execute-api`` endpoint. By default, clients can invoke your API with the default ``https://{api_id}.execute-api.{region}.amazonaws.com`` endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint")
   disableExecuteApiEndpoint?: boolean;
 
   @doc("A list of the endpoint types of the API. Use this property when creating an API. When importing an existing API, specify the endpoint configuration types using the ``Parameters`` property. The ``EndpointConfiguration`` property type specifies the endpoint types of a REST API. ``EndpointConfiguration`` is a property of the [AWS::ApiGateway::RestApi](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html) resource.")
   endpointConfiguration?: EndpointConfiguration;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsApiGatewayRestApiProperties.failOnWarnings has a boolean wire value; preserve the published property contract."
   @doc("A query parameter to indicate whether to rollback the API update (``true``) or not (``false``) when a warning is encountered. The default value is ``false``.")
   failOnWarnings?: boolean;
 

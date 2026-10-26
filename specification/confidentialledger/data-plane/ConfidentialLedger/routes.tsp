@@ -204,6 +204,7 @@ op createLedgerEntry is ConfidentialLedgerCommon.LedgerOperation<
      * specific write. Use the default behavior and poll the transaction status
      * or receipt endpoints when unambiguous per-request recovery is required.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing createLedgerEntry.waitForCommit has a boolean wire value; preserve the published property contract."
     @query("waitForCommit")
     waitForCommit?: boolean = false;
   },

@@ -75,6 +75,7 @@ interface ContainerAppsSourceControls {
       /**
        * Ignore Workflow Deletion Failure.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.ignoreWorkflowDeletionFailure has a boolean wire value; preserve the published property contract."
       @removed(Versions.v2026_01_01)
       @removed(Versions.v2026_07_01)
       @query("ignoreWorkflowDeletionFailure")
@@ -83,6 +84,7 @@ interface ContainerAppsSourceControls {
       /**
        * Delete workflow.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.deleteWorkflow has a boolean wire value; preserve the published property contract."
       @removed(Versions.v2026_01_01)
       @removed(Versions.v2026_07_01)
       @query("deleteWorkflow")

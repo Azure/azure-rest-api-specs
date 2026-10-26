@@ -24,6 +24,7 @@ namespace Microsoft.Monitor {
     ]>;
 
     /** Whether the observability agent is enabled. Defaults to true when not specified. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ObservabilityAgentProperties.enabled has a boolean wire value; preserve the published property contract."
     enabled?: boolean;
 
     /** Configuration overrides for agent operations. When omitted, default behavior applies for all operations. */
@@ -84,6 +85,7 @@ namespace Microsoft.Monitor {
     ]>;
 
     /** Whether the observability agent is enabled. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ObservabilityAgentPropertiesUpdate.enabled has a boolean wire value; preserve the published property contract."
     enabled?: boolean;
 
     /** Configuration overrides for agent operations. When omitted, default behavior applies for all operations. */

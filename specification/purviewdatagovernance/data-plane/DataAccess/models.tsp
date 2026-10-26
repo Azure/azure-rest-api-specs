@@ -56,6 +56,7 @@ model DataSubscription {
   @visibility(Lifecycle.Read)
   dataSubscriptionId: uuid;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataSubscription.useWorkflow has a boolean wire value; preserve the published property contract."
   @doc("Whether this subscription uses a workflow. Derived from the data product's workflow settings; read-only on the wire.")
   @visibility(Lifecycle.Read)
   useWorkflow?: boolean;
@@ -76,6 +77,7 @@ model DataSubscription {
   @visibility(Lifecycle.Read)
   governanceDomain?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataSubscription.writeAccess has a boolean wire value; preserve the published property contract."
   @doc("Whether write access is requested. Resolved server-side from the request context; read-only on the wire.")
   @visibility(Lifecycle.Read)
   writeAccess?: boolean;
@@ -133,6 +135,7 @@ model DataSubscription {
   @visibility(Lifecycle.Read)
   accessProviders?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataSubscription.usePowerAutomate has a boolean wire value; preserve the published property contract."
   @doc("Whether Power Automate is used. Resolved server-side from the data product's workflow settings; read-only on the wire.")
   @visibility(Lifecycle.Read)
   usePowerAutomate?: boolean;
@@ -166,6 +169,7 @@ model DataSubscriptionPolicySetValues {
   @doc("The use cases for the subscription.")
   useCases?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataSubscriptionPolicySetValues.termsOfUseAccepted has a boolean wire value; preserve the published property contract."
   @doc("The terms of use acceptance.")
   termsOfUseAccepted?: boolean;
 
@@ -203,6 +207,7 @@ model Workflow {
   @doc("The name of the workflow.")
   name?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Workflow.isEnabled has a boolean wire value; preserve the published property contract."
   @doc("Whether the workflow is enabled.")
   isEnabled?: boolean;
 
@@ -478,6 +483,7 @@ model ApprovalWorkflow {
   @doc("The callback URL the workflow uses to report the approval outcome.")
   callbackUrl: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ApprovalWorkflow.isPendingOnAll has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the approval requires action from every approver in the list.")
   isPendingOnAll: boolean;
 
@@ -642,9 +648,11 @@ model BasePolicies {
   @doc("Attestations that policy approvers must acknowledge.")
   attestations?: PolicyAttestation[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BasePolicies.managerApprovalRequired has a boolean wire value; preserve the published property contract."
   @doc("Whether manager approval is required for access requests.")
   managerApprovalRequired?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BasePolicies.dataCopyPermitted has a boolean wire value; preserve the published property contract."
   @doc("Whether data may be copied by subscribers after access is granted.")
   dataCopyPermitted?: boolean;
 }
@@ -686,24 +694,30 @@ model DataProductPolicies {
   @doc("Sensitive markers applied to the data product.")
   sensitiveMarkers?: SensitiveMarker[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataProductPolicies.termsOfUseRequired has a boolean wire value; preserve the published property contract."
   @doc("Whether terms of use acceptance is required.")
   termsOfUseRequired?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataProductPolicies.partnerSharingPermitted has a boolean wire value; preserve the published property contract."
   @doc("Whether sharing with partners is permitted.")
   partnerSharingPermitted?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataProductPolicies.customerSharingPermitted has a boolean wire value; preserve the published property contract."
   @doc("Whether sharing with customers is permitted.")
   customerSharingPermitted?: boolean;
 
   @doc("The maximum access duration (ISO 8601).")
   maximumAccessDuration?: duration;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataProductPolicies.privacyComplianceApprovalRequired has a boolean wire value; preserve the published property contract."
   @doc("Whether privacy compliance approval is required.")
   privacyComplianceApprovalRequired?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataProductPolicies.skipWorkflow has a boolean wire value; preserve the published property contract."
   @doc("Whether the workflow can be skipped.")
   skipWorkflow?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataProductPolicies.usePowerAutomate has a boolean wire value; preserve the published property contract."
   @doc("Whether Power Automate is used.")
   usePowerAutomate?: boolean;
 }
@@ -716,6 +730,7 @@ model PolicyAttestation {
   @doc("A reference to the supporting document.")
   documentReference?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PolicyAttestation.required has a boolean wire value; preserve the published property contract."
   @doc("Whether the attestation is required.")
   required?: boolean;
 }
@@ -770,15 +785,18 @@ union TagType {
 
 @doc("Response with workflow settings for a data product.")
 model DataProductWorkflowSettingsResponse {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataProductWorkflowSettingsResponse.skipWorkflowEnabled has a boolean wire value; preserve the published property contract."
   @doc("Whether the skip workflow option is enabled.")
   skipWorkflowEnabled: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataProductWorkflowSettingsResponse.usePowerAutomate has a boolean wire value; preserve the published property contract."
   @doc("Whether Power Automate is used.")
   usePowerAutomate: boolean;
 }
 
 @doc("Response for delete operations.")
 model DeleteResponse {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeleteResponse.success has a boolean wire value; preserve the published property contract."
   @doc("Whether the delete operation was successful.")
   success: boolean;
 }

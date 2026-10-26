@@ -45,6 +45,7 @@ model ServiceProperties {
   baseUrl?: url;
 
   /** Whether the service has auto-rollout enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServiceProperties.autoRolloutEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   autoRolloutEnabled?: boolean;
 
@@ -98,6 +99,7 @@ model ServiceDeploymentConfig {
   maxSurgePercent?: int32;
 
   /** Whether to automatically complete the rollout when the canary version reaches 100% traffic. Defaults to true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServiceDeploymentConfig.autoCompleteRollout has a boolean wire value; preserve the published property contract."
   autoCompleteRollout?: boolean;
 
   /** The traffic percentage for this version in a multi-version deployment (0-100). All version weights must sum to 100. */
@@ -253,6 +255,7 @@ model ServiceVersionDetail {
 /** Tracing configuration for distributed tracing. */
 model TracingConfig {
   /** Whether tracing is enabled. If enabled and no exporterImportPath is defined, the default tracing exporter will be used. Defaults to true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TracingConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /** Custom tracing exporter import path. Should be of the form 'module.submodule.export_tracing'. */

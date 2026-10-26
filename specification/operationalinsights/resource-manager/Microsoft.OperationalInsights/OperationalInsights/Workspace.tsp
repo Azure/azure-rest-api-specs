@@ -203,6 +203,7 @@ interface Workspaces {
       /**
        * Deletes the workspace without the recovery option. A workspace that was deleted with this flag cannot be recovered.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.force has a boolean wire value; preserve the published property contract."
       @query("force")
       force?: boolean;
     },
