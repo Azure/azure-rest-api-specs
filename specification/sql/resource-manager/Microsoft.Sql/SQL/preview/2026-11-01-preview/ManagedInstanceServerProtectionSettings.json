@@ -76,7 +76,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ServerProtectionSettingsListResult"
+              "$ref": "#/definitions/ManagedInstanceServerProtectionSettingsListResult"
             }
           },
           "default": {
@@ -89,9 +89,6 @@
         "x-ms-examples": {
           "List managed instance server protection settings": {
             "$ref": "./examples/ManagedServerProtectionSettingsList.json"
-          },
-          "List settings before opting in": {
-            "$ref": "./examples/ManagedServerProtectionSettingsListDisabled.json"
           }
         },
         "x-ms-pageable": {
@@ -132,6 +129,7 @@
             "description": "The protection settings name. Only default is supported.",
             "required": true,
             "type": "string",
+            "pattern": "^[dD][eE][fF][aA][uU][lL][tT]$",
             "enum": [
               "default"
             ],
@@ -152,7 +150,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ServerProtectionSettings"
+              "$ref": "#/definitions/ManagedInstanceServerProtectionSettings"
             }
           },
           "default": {
@@ -165,9 +163,6 @@
         "x-ms-examples": {
           "Get managed instance server protection settings": {
             "$ref": "./examples/ManagedServerProtectionSettingsGet.json"
-          },
-          "Get settings before opting in": {
-            "$ref": "./examples/ManagedServerProtectionSettingsGetDisabled.json"
           }
         }
       },
@@ -203,6 +198,7 @@
             "description": "The protection settings name. Only default is supported.",
             "required": true,
             "type": "string",
+            "pattern": "^[dD][eE][fF][aA][uU][lL][tT]$",
             "enum": [
               "default"
             ],
@@ -224,7 +220,7 @@
             "description": "The managed instance protection settings to apply.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerProtectionSettings"
+              "$ref": "#/definitions/ManagedInstanceServerProtectionSettings"
             }
           }
         ],
@@ -232,7 +228,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ServerProtectionSettings"
+              "$ref": "#/definitions/ManagedInstanceServerProtectionSettings"
             }
           },
           "202": {
@@ -271,14 +267,14 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/ServerProtectionSettings"
+          "final-state-schema": "#/definitions/ManagedInstanceServerProtectionSettings"
         },
         "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
-    "ServerProtectionSettings": {
+    "ManagedInstanceServerProtectionSettings": {
       "type": "object",
       "description": "The singleton protection settings for a managed instance. The only supported\nresource name is default. Enabling protection is an irreversible opt-in.",
       "properties": {
@@ -296,15 +292,15 @@
         }
       ]
     },
-    "ServerProtectionSettingsListResult": {
+    "ManagedInstanceServerProtectionSettingsListResult": {
       "type": "object",
-      "description": "The response of a ServerProtectionSettings list operation.",
+      "description": "The response of a ManagedInstanceServerProtectionSettings list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ServerProtectionSettings items on this page",
+          "description": "The ManagedInstanceServerProtectionSettings items on this page",
           "items": {
-            "$ref": "#/definitions/ServerProtectionSettings"
+            "$ref": "#/definitions/ManagedInstanceServerProtectionSettings"
           }
         },
         "nextLink": {
