@@ -77,6 +77,7 @@ interface ManagementGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceAsync<
     Extension.Tenant,

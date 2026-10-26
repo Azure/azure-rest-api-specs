@@ -231,6 +231,7 @@ interface PrivilegedResourceFavorites {
    * (`400 InvalidRequest` on mismatch) and that the caller has read
    * permission on the resource (`403 Forbidden` otherwise).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @route("/providers/Microsoft.Authorization/privilegedResourceFavorites/{favoriteId}")
   @put
   createOrUpdate(

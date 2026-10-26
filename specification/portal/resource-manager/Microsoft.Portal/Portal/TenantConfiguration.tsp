@@ -45,6 +45,7 @@ interface TenantConfigurations {
   /**
    * Create the tenant configuration. If configuration already exists - update it. User has to be a Tenant Admin for this operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing create retains its tenant-scoped route; preserve published resource IDs and API paths."
   create is ArmResourceCreateOrReplaceSync<Configuration, TenantBaseParameters>;
 
   /**

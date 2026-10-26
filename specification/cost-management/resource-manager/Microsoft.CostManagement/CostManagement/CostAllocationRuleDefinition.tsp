@@ -46,6 +46,7 @@ interface CostAllocationRuleDefinitions {
   /**
    * Create/Update a rule to allocate cost between different resources within a billing account or enterprise enrollment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is Extension.CreateOrReplaceSync<
     CostAllocationRuleDefinitionsOps,
     CostAllocationRuleDefinition,

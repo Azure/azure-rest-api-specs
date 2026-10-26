@@ -29,6 +29,7 @@ interface DrillsOld {
   get is ArmResourceRead<Drill, ServiceGroupParameters>;
 
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing create retains its tenant-scoped route; preserve published resource IDs and API paths."
   @route(ServiceGroupRoute)
   @doc("Create a Drill Deprecated: API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version.")
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
@@ -210,6 +211,7 @@ interface Drills {
   @sharedRoute
   get is ArmResourceRead<Drill, ServiceGroupParameters>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing create retains its tenant-scoped route; preserve published resource IDs and API paths."
   @route(ServiceGroupRoute)
   @sharedRoute
   create is ArmResourceCreateOrReplaceAsync<Drill, ServiceGroupParameters>;

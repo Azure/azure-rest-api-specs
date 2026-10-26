@@ -342,6 +342,7 @@ interface BillingRoleAssignmentByBillingAccount {
    * Create or update a billing role assignment. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdateByBillingAccount retains its tenant-scoped route; preserve published resource IDs and API paths."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   createOrUpdateByBillingAccount is BillingRoleAssignmentByBillingAccountOps.CreateOrUpdateAsync<
@@ -438,6 +439,7 @@ interface BillingRoleAssignmentByDepartment {
    * Create or update a billing role assignment. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdateByDepartment retains its tenant-scoped route; preserve published resource IDs and API paths."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   createOrUpdateByDepartment is BillingRoleAssignmentByDepartmentOps.CreateOrUpdateAsync<
@@ -515,6 +517,7 @@ interface BillingRoleAssignmentByEnrollmentAccount {
    * Create or update a billing role assignment. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdateByEnrollmentAccount retains its tenant-scoped route; preserve published resource IDs and API paths."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   createOrUpdateByEnrollmentAccount is BillingRoleAssignmentByEnrollmentAccountOps.CreateOrUpdateAsync<

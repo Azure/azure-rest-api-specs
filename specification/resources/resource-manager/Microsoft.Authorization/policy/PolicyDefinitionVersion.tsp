@@ -188,6 +188,7 @@ interface PolicyDefinitionVersions {
   /**
    * This operation creates or updates a policy definition version in the given management group with the given name.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdateAtManagementGroup retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdateAtManagementGroup is PolicyDefinitionVersionManagementGroupOps.CreateOrUpdateSync<PolicyDefinitionVersion>;
 
   /**

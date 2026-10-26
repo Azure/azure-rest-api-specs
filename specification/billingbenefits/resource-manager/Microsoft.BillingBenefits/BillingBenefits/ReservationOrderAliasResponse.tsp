@@ -50,6 +50,7 @@ interface ReservationOrderAliasResponses {
   /**
    * Create a reservation order alias.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing create retains its tenant-scoped route; preserve published resource IDs and API paths."
   @armResourceCreateOrUpdate(ReservationOrderAliasResponse)
   create is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<

@@ -28,6 +28,7 @@ interface SiteOps<
     OverrideResourceName = ResourceName
   >;
   get is Extension.Read<Scope, Site, OverrideResourceName = ResourceName>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is Extension.CreateOrUpdateAsync<
     Scope,
     Site,

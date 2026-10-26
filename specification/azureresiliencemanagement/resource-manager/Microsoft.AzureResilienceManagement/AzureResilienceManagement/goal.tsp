@@ -29,6 +29,7 @@ interface GoalAssignmentsOld {
   get is ArmResourceRead<GoalAssignment, ServiceGroupParameters>;
 
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @route(ServiceGroupRoute)
   @doc("Create a GoalAssignment Deprecated: API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version.")
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
@@ -136,6 +137,7 @@ interface GoalAssignments {
   @sharedRoute
   get is ArmResourceRead<GoalAssignment, ServiceGroupParameters>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @doc("Creates or updates a goal assignment.")
   @route(ServiceGroupRoute)
   @sharedRoute
@@ -231,6 +233,7 @@ interface GoalTemplates {
   get is ArmResourceRead<GoalTemplate, ServiceGroupParameters>;
 
   #deprecated "GoalTemplate is deprecated and removed in 2026-09-30-preview."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @doc("Creates or updates a goal template. Deprecated: the GoalTemplate resource type is deprecated and is removed in 2026-09-30-preview. Set resiliency intent directly on the GoalAssignment (requireZonalResiliency, requireRegionalResiliency) and read resource posture from GoalResource (zonalResiliency, regionalResiliency) instead.")
   @route(ServiceGroupRoute)
   @summary("Deprecated. Set resiliency intent on GoalAssignment and read resource posture from GoalResource instead.")

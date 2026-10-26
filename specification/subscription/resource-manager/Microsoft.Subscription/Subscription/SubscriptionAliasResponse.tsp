@@ -37,6 +37,7 @@ interface SubscriptionAliasResponses {
   /**
    * Create Alias Subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing create retains its tenant-scoped route; preserve published resource IDs and API paths."
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SubscriptionAliasResponse,
     Request = PutAliasRequest,

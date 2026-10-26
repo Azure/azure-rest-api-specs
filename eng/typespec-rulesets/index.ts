@@ -13,6 +13,9 @@ export const $linter = defineLinter({
     },
     "resource-manager": {
       extends: ["@azure-tools/typespec-azure-rulesets-original/resource-manager"],
+      enable: {
+        "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis": true,
+      },
     },
     "client-sdk": {
       extends: ["@azure-tools/typespec-azure-rulesets-original/client-sdk"],

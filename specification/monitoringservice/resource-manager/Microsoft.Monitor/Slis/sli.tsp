@@ -151,6 +151,7 @@ interface Slis {
   @route(ServiceGroupRoute)
   get is ArmResourceRead<Sli, ServiceGroupParameters>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @doc("Creates or updates an SLI resource.")
   @route(ServiceGroupRoute)
   createOrUpdate is ArmResourceCreateOrReplaceSync<Sli, ServiceGroupParameters>;

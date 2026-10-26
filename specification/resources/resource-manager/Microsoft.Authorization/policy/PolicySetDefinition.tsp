@@ -213,6 +213,7 @@ interface PolicySetDefinitions {
   /**
    * This operation creates or updates a policy set definition in the given management group with the given name.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdateAtManagementGroup retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdateAtManagementGroup is PolicySetDefinitionManagementGroupOps.CreateOrUpdateSync<PolicySetDefinition>;
 
   /**

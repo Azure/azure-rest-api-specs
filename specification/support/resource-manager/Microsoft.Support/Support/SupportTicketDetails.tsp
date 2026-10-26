@@ -161,6 +161,7 @@ interface SupportTicketsNoSubscription {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing create retains its tenant-scoped route; preserve published resource IDs and API paths."
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is SupportTicketsNoSubscriptionOps.CreateOrUpdateAsync<
     SupportTicketDetails,

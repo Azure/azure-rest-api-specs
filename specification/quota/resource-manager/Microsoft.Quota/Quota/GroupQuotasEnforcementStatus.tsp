@@ -97,6 +97,7 @@ interface GroupQuotasEnforcementStatuses {
    *  2. Then delete the GroupQuota (Check the example - GroupQuotas_Delete).
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is GroupQuotasEnforcementStatusesOps.CreateOrUpdateAsync<
     GroupQuotasEnforcementStatus,
     Response =
