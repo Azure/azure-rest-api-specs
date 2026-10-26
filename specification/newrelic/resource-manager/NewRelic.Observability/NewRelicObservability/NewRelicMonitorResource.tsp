@@ -61,6 +61,7 @@ interface NewRelicMonitorResources {
       /**
        * User Email.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.userEmail retains the userEmail query parameter; preserve wire compatibility."
       @query("userEmail")
       userEmail: string;
     },

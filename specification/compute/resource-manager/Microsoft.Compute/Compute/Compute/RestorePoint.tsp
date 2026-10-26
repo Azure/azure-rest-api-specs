@@ -37,6 +37,7 @@ interface RestorePoints {
       /**
        * The expand expression to apply on the operation. 'InstanceView' retrieves information about the run-time state of a restore point.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: RestorePointExpandOptions;
     }

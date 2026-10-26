@@ -86,6 +86,7 @@ interface VirtualMachineInstances {
       ...QueryForceDelete;
 
       /** Whether to disable the VM from azure and also delete it from Vmm. */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.deleteFromHost retains the deleteFromHost query parameter; preserve wire compatibility."
       @query("deleteFromHost")
       deleteFromHost?: DeleteFromHost;
     },

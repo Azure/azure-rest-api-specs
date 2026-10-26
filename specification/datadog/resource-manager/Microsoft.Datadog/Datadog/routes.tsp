@@ -79,6 +79,7 @@ interface CreationSupportedOperationGroup {
       /**
        * Datadog Organization Id
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.datadogOrganizationId retains the datadogOrganizationId query parameter; preserve wire compatibility."
       @query("datadogOrganizationId")
       datadogOrganizationId: string;
     }

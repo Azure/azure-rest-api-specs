@@ -132,6 +132,7 @@ interface DataMigrationServices {
       /**
        * Delete the resource even if it contains running tasks
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.deleteRunningTasks retains the deleteRunningTasks query parameter; preserve wire compatibility."
       @query("deleteRunningTasks")
       deleteRunningTasks?: boolean;
     },

@@ -31,6 +31,7 @@ alias DatastoresCreateOrUpdateParameters = {
   /**
    * Flag to skip validation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing DatastoresCreateOrUpdateParameters.skipValidation retains the skipValidation query parameter; preserve wire compatibility."
   @query("skipValidation")
   skipValidation?: boolean = false;
 };

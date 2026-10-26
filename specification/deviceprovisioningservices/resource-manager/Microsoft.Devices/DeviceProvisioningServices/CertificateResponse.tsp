@@ -46,6 +46,7 @@ alias CertificateNameQuery2 = {
    * This is optional, and it is the Common Name of the certificate.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing CertificateNameQuery2.certificate.name retains the certificate.name query parameter; preserve wire compatibility."
   @query("certificate.name")
   `certificate.name`?: string;
 };
@@ -54,6 +55,7 @@ alias CertificateNameQuery3 = {
   /**
    * Time the certificate is created.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing CertificateNameQuery3.certificateCreated retains the certificate.created query parameter; preserve wire compatibility."
   @query("certificate.created")
   certificateCreated?: utcDateTime;
 };
@@ -62,6 +64,7 @@ alias CertificateNameQuery4 = {
   /**
    * Certificate last updated time.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing CertificateNameQuery4.certificateLastUpdated retains the certificate.lastUpdated query parameter; preserve wire compatibility."
   @query("certificate.lastUpdated")
   certificateLastUpdated?: utcDateTime;
 };
@@ -117,18 +120,21 @@ interface CertificateResponses {
       /**
        * Raw data within the certificate.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.certificateRawBytes retains the certificate.rawBytes query parameter; preserve wire compatibility."
       @query("certificate.rawBytes")
       certificateRawBytes?: bytes;
 
       /**
        * Indicates if certificate has been verified by owner of the private key.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.certificateIsVerified retains the certificate.isVerified query parameter; preserve wire compatibility."
       @query("certificate.isVerified")
       certificateIsVerified?: boolean;
 
       /**
        * A description that mentions the purpose of the certificate.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.certificatePurpose retains the certificate.purpose query parameter; preserve wire compatibility."
       @query("certificate.purpose")
       certificatePurpose?: CertificatePurpose;
 
@@ -138,12 +144,14 @@ interface CertificateResponses {
       /**
        * Indicates if the certificate contains a private key.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.certificateHasPrivateKey retains the certificate.hasPrivateKey query parameter; preserve wire compatibility."
       @query("certificate.hasPrivateKey")
       certificateHasPrivateKey?: boolean;
 
       /**
        * Random number generated to indicate Proof of Possession.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.certificateNonce retains the certificate.nonce query parameter; preserve wire compatibility."
       @query("certificate.nonce")
       certificateNonce?: string;
     },

@@ -65,6 +65,7 @@ interface UserContracts {
       /**
        * Send an Email notification to the User.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing createOrUpdate.notify retains the notify query parameter; preserve wire compatibility."
       @query("notify")
       notify?: boolean;
 
@@ -125,12 +126,14 @@ interface UserContracts {
       /**
        * Whether to delete user's subscription or not.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.deleteSubscriptions retains the deleteSubscriptions query parameter; preserve wire compatibility."
       @query("deleteSubscriptions")
       deleteSubscriptions?: boolean;
 
       /**
        * Send an Account Closed Email notification to the User.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.notify retains the notify query parameter; preserve wire compatibility."
       @query("notify")
       notify?: boolean;
 
@@ -144,6 +147,7 @@ interface UserContracts {
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.appType retains the appType query parameter; preserve wire compatibility."
       @query("appType")
       appType?: AppType;
     },

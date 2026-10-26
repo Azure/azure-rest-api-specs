@@ -68,6 +68,7 @@ interface Workbooks {
       /**
        * Flag indicating whether or not to return the full content for each applicable workbook. If false, only return summary content for workbooks.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.canFetchContent retains the canFetchContent query parameter; preserve wire compatibility."
       @query("canFetchContent")
       canFetchContent?: boolean;
     }
@@ -82,6 +83,7 @@ interface Workbooks {
       /**
        * Azure Resource Id that will fetch all linked workbooks.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing createOrUpdate.sourceId retains the sourceId query parameter; preserve wire compatibility."
       @query("sourceId")
       sourceId?: string;
     }
@@ -98,6 +100,7 @@ interface Workbooks {
       /**
        * Azure Resource Id that will fetch all linked workbooks.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing update.sourceId retains the sourceId query parameter; preserve wire compatibility."
       @query("sourceId")
       sourceId?: string;
     },

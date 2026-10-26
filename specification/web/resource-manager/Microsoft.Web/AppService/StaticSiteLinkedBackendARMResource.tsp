@@ -95,6 +95,7 @@ interface StaticSiteLinkedBackendARMResources {
       /**
        * Decides if Easy Auth configuration will be removed from backend configuration
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing unlinkBackend.isCleaningAuthConfig retains the isCleaningAuthConfig query parameter; preserve wire compatibility."
       @query("isCleaningAuthConfig")
       isCleaningAuthConfig?: boolean;
     },
@@ -195,6 +196,7 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
       /**
        * Decides if auth will be removed from backend configuration
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing unlinkBackendFromBuild.isCleaningAuthConfig retains the isCleaningAuthConfig query parameter; preserve wire compatibility."
       @query("isCleaningAuthConfig")
       isCleaningAuthConfig?: boolean;
     },

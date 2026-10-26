@@ -1861,6 +1861,7 @@ model ExtraParameter {
   /**
    * The offerGuid which mapping to the reports.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing ExtraParameter.offerGuid retains the offerGuid query parameter; preserve wire compatibility."
   @minLength(1)
   @query("offerGuid")
   offerGuid?: string;
@@ -1868,6 +1869,7 @@ model ExtraParameter {
   /**
    * The tenant id of the report creator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing ExtraParameter.reportCreatorTenantId retains the reportCreatorTenantId query parameter; preserve wire compatibility."
   @minLength(1)
   @query("reportCreatorTenantId")
   reportCreatorTenantId?: string;

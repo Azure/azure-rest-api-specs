@@ -16,6 +16,7 @@ alias PolicyGetParameters = {
   /**
    * Policy Export Format.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing PolicyGetParameters.format retains the format query parameter; preserve wire compatibility."
   @query("format")
   format?: PolicyExportFormat = PolicyExportFormat.xml;
 };

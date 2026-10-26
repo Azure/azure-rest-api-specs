@@ -113,6 +113,7 @@ interface VirtualMachineScaleSetVMS {
       /**
        * The expand expression to apply on the operation. 'InstanceView' will retrieve the instance view of the virtual machine. 'UserData' will retrieve the UserData of the virtual machine.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: InstanceViewTypes;
     }
@@ -162,6 +163,7 @@ interface VirtualMachineScaleSetVMS {
       /**
        * Optional parameter to force delete a virtual machine from a VM scale set. (Feature in Preview)
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.forceDeletion retains the forceDeletion query parameter; preserve wire compatibility."
       @query("forceDeletion")
       forceDeletion?: boolean;
     }

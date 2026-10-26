@@ -80,6 +80,7 @@ interface MigrationItems {
       /**
        * The delete option.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.deleteOption retains the deleteOption query parameter; preserve wire compatibility."
       @query("deleteOption")
       deleteOption?: string;
     },

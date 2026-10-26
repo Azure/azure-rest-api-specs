@@ -51,12 +51,14 @@ interface LoadBalancers {
       /**
        * Expands referenced resources.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       /**
        * Controls verbosity of the returned load balancer resource. When set to 'Reduced', read-only back-reference collections (e.g., rules referencing frontendIPConfigurations) are omitted from the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.detailLevel retains the detailLevel query parameter; preserve wire compatibility."
       @added(Versions.v2025_07_01)
       @query("detailLevel")
       detailLevel?: LoadBalancerDetailLevel;

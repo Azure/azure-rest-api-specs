@@ -29,6 +29,7 @@ interface Schedules {
   get is ArmResourceRead<
     Schedule,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$top retains the $top query parameter; preserve wire compatibility."
       @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
@@ -39,6 +40,7 @@ interface Schedules {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Schedule,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing createOrUpdate.$top retains the $top query parameter; preserve wire compatibility."
       @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
@@ -51,6 +53,7 @@ interface Schedules {
     Schedule,
     PatchModel = ScheduleUpdate,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing update.$top retains the $top query parameter; preserve wire compatibility."
       @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
@@ -68,6 +71,7 @@ interface Schedules {
   delete is ArmResourceDeleteWithoutOkAsync<
     Schedule,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.$top retains the $top query parameter; preserve wire compatibility."
       @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;

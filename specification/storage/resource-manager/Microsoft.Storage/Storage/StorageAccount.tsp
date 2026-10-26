@@ -95,6 +95,7 @@ interface StorageAccounts {
       /**
        * May be used to expand the properties within account's properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getProperties.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: StorageAccountExpand;
     },

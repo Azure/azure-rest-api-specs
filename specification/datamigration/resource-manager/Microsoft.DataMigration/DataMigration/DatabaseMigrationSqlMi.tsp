@@ -67,12 +67,14 @@ interface DatabaseMigrationSqlMis {
        * Optional migration operation ID. If this is provided, then details of migration operation for that ID are retrieved. If not provided (default), then details related to most recent or current operation are retrieved.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.migrationOperationId retains the migrationOperationId query parameter; preserve wire compatibility."
       @query("migrationOperationId")
       migrationOperationId?: Azure.Core.uuid;
 
       /**
        * Complete migration details be included in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -98,6 +100,7 @@ interface DatabaseMigrationSqlMis {
       /**
        * Optional force delete boolean. If this is provided as true, migration will be deleted even if active.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.force retains the force query parameter; preserve wire compatibility."
       @query("force")
       force?: boolean;
     },

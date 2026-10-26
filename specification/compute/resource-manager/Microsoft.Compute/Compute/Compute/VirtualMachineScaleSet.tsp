@@ -89,6 +89,7 @@ interface VirtualMachineScaleSets {
       /**
        * The expand expression to apply on the operation. 'UserData' retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: ExpandTypesForGetVMScaleSets;
     }
@@ -156,6 +157,7 @@ interface VirtualMachineScaleSets {
       /**
        * Optional parameter to force delete a VM scale set. (Feature in Preview)
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.forceDeletion retains the forceDeletion query parameter; preserve wire compatibility."
       @query("forceDeletion")
       forceDeletion?: boolean;
     }

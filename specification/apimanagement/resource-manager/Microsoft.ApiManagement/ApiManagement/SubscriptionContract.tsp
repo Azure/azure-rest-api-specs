@@ -97,6 +97,7 @@ interface SubscriptionContracts {
        *  - If false, do not send any email notification for change of state of subscription
        *  - If true, send email notification of change of state of subscription
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing createOrUpdate.notify retains the notify query parameter; preserve wire compatibility."
       @query("notify")
       notify?: boolean;
 
@@ -110,6 +111,7 @@ interface SubscriptionContracts {
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing createOrUpdate.appType retains the appType query parameter; preserve wire compatibility."
       @query("appType")
       appType?: AppType;
     },
@@ -143,6 +145,7 @@ interface SubscriptionContracts {
        *  - If false, do not send any email notification for change of state of subscription
        *  - If true, send email notification of change of state of subscription
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing update.notify retains the notify query parameter; preserve wire compatibility."
       @query("notify")
       notify?: boolean;
 
@@ -156,6 +159,7 @@ interface SubscriptionContracts {
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing update.appType retains the appType query parameter; preserve wire compatibility."
       @query("appType")
       appType?: AppType;
     },
@@ -409,6 +413,7 @@ interface WorkspaceSubscription {
        *  - If false, do not send any email notification for change of state of subscription
        *  - If true, send email notification of change of state of subscription
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing createOrUpdate.notify retains the notify query parameter; preserve wire compatibility."
       @query("notify")
       notify?: boolean;
 
@@ -422,6 +427,7 @@ interface WorkspaceSubscription {
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing createOrUpdate.appType retains the appType query parameter; preserve wire compatibility."
       @query("appType")
       appType?: AppType;
     },
@@ -455,6 +461,7 @@ interface WorkspaceSubscription {
        *  - If false, do not send any email notification for change of state of subscription
        *  - If true, send email notification of change of state of subscription
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing update.notify retains the notify query parameter; preserve wire compatibility."
       @query("notify")
       notify?: boolean;
 
@@ -468,6 +475,7 @@ interface WorkspaceSubscription {
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing update.appType retains the appType query parameter; preserve wire compatibility."
       @query("appType")
       appType?: AppType;
     },

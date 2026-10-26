@@ -47,6 +47,7 @@ interface SessionHosts {
       /**
        * Force flag to update assign, unassign or reassign personal desktop.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing update.force retains the force query parameter; preserve wire compatibility."
       @query("force")
       force?: boolean;
     }
@@ -61,6 +62,7 @@ interface SessionHosts {
       /**
        * Force flag to force sessionHost deletion even when userSession exists.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.force retains the force query parameter; preserve wire compatibility."
       @query("force")
       force?: boolean;
     }

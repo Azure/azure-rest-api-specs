@@ -160,12 +160,14 @@ interface Sites {
       /**
        * If true, web app metrics are also deleted.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.deleteMetrics retains the deleteMetrics query parameter; preserve wire compatibility."
       @query("deleteMetrics")
       deleteMetrics?: boolean;
 
       /**
        * Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.deleteEmptyServerFarm retains the deleteEmptyServerFarm query parameter; preserve wire compatibility."
       @query("deleteEmptyServerFarm")
       deleteEmptyServerFarm?: boolean;
     },
@@ -1612,12 +1614,14 @@ interface WebApps {
       /**
        * If true, web app metrics are also deleted.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing deleteSlot.deleteMetrics retains the deleteMetrics query parameter; preserve wire compatibility."
       @query("deleteMetrics")
       deleteMetrics?: boolean;
 
       /**
        * Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing deleteSlot.deleteEmptyServerFarm retains the deleteEmptyServerFarm query parameter; preserve wire compatibility."
       @query("deleteEmptyServerFarm")
       deleteEmptyServerFarm?: boolean;
     },

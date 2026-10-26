@@ -73,6 +73,7 @@ interface Fabrics {
       /**
        * OData filter options.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$filter retains the $filter query parameter; preserve wire compatibility."
       @query("$filter")
       $filter?: string;
     },

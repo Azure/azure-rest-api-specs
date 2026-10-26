@@ -74,6 +74,7 @@ interface IssueContracts {
       /**
        * Expand the comment attachments.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.expandCommentsAttachments retains the expandCommentsAttachments query parameter; preserve wire compatibility."
       @query("expandCommentsAttachments")
       expandCommentsAttachments?: boolean;
     },

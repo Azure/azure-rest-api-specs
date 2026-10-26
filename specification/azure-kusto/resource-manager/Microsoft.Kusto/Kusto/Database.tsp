@@ -64,6 +64,7 @@ interface Databases {
       /**
        * By default, any user who run operation on a database become an Admin on it. This property allows the caller to exclude the caller from Admins list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing createOrUpdate.callerRole retains the callerRole query parameter; preserve wire compatibility."
       @query("callerRole")
       callerRole?: CallerRole = CallerRole.Admin;
     },
@@ -94,6 +95,7 @@ interface Databases {
       /**
        * By default, any user who run operation on a database become an Admin on it. This property allows the caller to exclude the caller from Admins list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing update.callerRole retains the callerRole query parameter; preserve wire compatibility."
       @query("callerRole")
       callerRole?: CallerRole = CallerRole.Admin;
     },

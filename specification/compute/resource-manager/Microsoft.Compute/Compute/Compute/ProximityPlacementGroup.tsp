@@ -36,6 +36,7 @@ interface ProximityPlacementGroups {
       /**
        * includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.includeColocationStatus retains the includeColocationStatus query parameter; preserve wire compatibility."
       @query("includeColocationStatus")
       includeColocationStatus?: string;
     }

@@ -80,6 +80,7 @@ interface BillingSubscriptions {
       /**
        * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingProfile.expand retains the expand query parameter; preserve wire compatibility."
       @query("expand")
       expand?: string;
     }
@@ -138,6 +139,7 @@ interface BillingSubscriptionOperationGroup {
       /**
        * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.expand retains the expand query parameter; preserve wire compatibility."
       @query("expand")
       expand?: string;
     }

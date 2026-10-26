@@ -110,6 +110,7 @@ interface AppServiceEnvironmentResources {
       /**
        * Specify <code>true</code> to force the deletion even if the App Service Environment contains resources. The default is <code>false</code>.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.forceDelete retains the forceDelete query parameter; preserve wire compatibility."
       @query("forceDelete")
       forceDelete?: boolean;
     },

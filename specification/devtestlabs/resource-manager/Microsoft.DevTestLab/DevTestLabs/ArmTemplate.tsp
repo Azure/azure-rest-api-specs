@@ -44,6 +44,7 @@ interface ArmTemplates {
       /**
        * Specify the $expand query. Example: 'properties($select=displayName)'
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }

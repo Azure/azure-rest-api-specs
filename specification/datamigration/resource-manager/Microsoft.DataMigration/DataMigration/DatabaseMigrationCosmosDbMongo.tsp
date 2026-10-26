@@ -86,6 +86,7 @@ interface DatabaseMigrationCosmosDbMongos {
       /**
        * Optional force delete boolean. If this is provided as true, migration will be deleted even if active.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.force retains the force query parameter; preserve wire compatibility."
       @query("force")
       force?: boolean;
     }
@@ -162,6 +163,7 @@ interface DatabaseMigrationsMongoToCosmosDbvCoreMongo {
       /**
        * Optional force delete boolean. If this is provided as true, migration will be deleted even if active.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.force retains the force query parameter; preserve wire compatibility."
       @query("force")
       force?: boolean;
     }

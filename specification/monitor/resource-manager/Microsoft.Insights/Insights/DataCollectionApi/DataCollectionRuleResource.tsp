@@ -91,6 +91,7 @@ interface DataCollectionRuleResources {
       /**
        * If set to 'true' then all associations of this data collection rule will also be deleted
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.deleteAssociations retains the deleteAssociations query parameter; preserve wire compatibility."
       @query("deleteAssociations")
       deleteAssociations?: boolean = false;
     },

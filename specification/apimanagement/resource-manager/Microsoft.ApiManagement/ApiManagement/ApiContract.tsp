@@ -155,6 +155,7 @@ interface ApiContracts {
       /**
        * Delete all revisions of the Api.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.deleteRevisions retains the deleteRevisions query parameter; preserve wire compatibility."
       @query("deleteRevisions")
       deleteRevisions?: boolean;
 
@@ -457,6 +458,7 @@ interface WorkspaceApi {
       /**
        * Delete all revisions of the Api.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.deleteRevisions retains the deleteRevisions query parameter; preserve wire compatibility."
       @query("deleteRevisions")
       deleteRevisions?: boolean;
 

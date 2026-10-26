@@ -38,6 +38,7 @@ interface AdminRequestApprovalsResources {
       /**
        * The publisher id of this offer.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getAdminRequestApproval.publisherId retains the publisherId query parameter; preserve wire compatibility."
       @query("publisherId")
       publisherId: string;
     },

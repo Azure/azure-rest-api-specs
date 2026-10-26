@@ -78,6 +78,7 @@ interface NetworkSecurityPerimeters {
       /**
        * Deletes the resource even if it contains any child associations.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.forceDeletion retains the forceDeletion query parameter; preserve wire compatibility."
       @query("forceDeletion")
       forceDeletion?: boolean;
     },

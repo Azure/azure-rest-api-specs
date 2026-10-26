@@ -69,18 +69,21 @@ interface DetectorResponses {
       /**
        * Start Time
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getHostingEnvironmentDetectorResponse.startTime retains the startTime query parameter; preserve wire compatibility."
       @query("startTime")
       startTime?: utcDateTime;
 
       /**
        * End Time
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getHostingEnvironmentDetectorResponse.endTime retains the endTime query parameter; preserve wire compatibility."
       @query("endTime")
       endTime?: utcDateTime;
 
       /**
        * Time Grain
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getHostingEnvironmentDetectorResponse.timeGrain retains the timeGrain query parameter; preserve wire compatibility."
       @pattern("PT[1-9][0-9]+[SMH]")
       @query("timeGrain")
       timeGrain?: string;
@@ -135,18 +138,21 @@ interface Diagnostics {
       /**
        * Start Time
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getSiteDetectorResponse.startTime retains the startTime query parameter; preserve wire compatibility."
       @query("startTime")
       startTime?: utcDateTime;
 
       /**
        * End Time
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getSiteDetectorResponse.endTime retains the endTime query parameter; preserve wire compatibility."
       @query("endTime")
       endTime?: utcDateTime;
 
       /**
        * Time Grain
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getSiteDetectorResponse.timeGrain retains the timeGrain query parameter; preserve wire compatibility."
       @pattern("PT[1-9][0-9]+[SMH]")
       @query("timeGrain")
       timeGrain?: string;
@@ -208,18 +214,21 @@ interface DetectorResponseOperationGroup {
       /**
        * Start Time
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getSiteDetectorResponseSlot.startTime retains the startTime query parameter; preserve wire compatibility."
       @query("startTime")
       startTime?: utcDateTime;
 
       /**
        * End Time
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getSiteDetectorResponseSlot.endTime retains the endTime query parameter; preserve wire compatibility."
       @query("endTime")
       endTime?: utcDateTime;
 
       /**
        * Time Grain
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getSiteDetectorResponseSlot.timeGrain retains the timeGrain query parameter; preserve wire compatibility."
       @pattern("PT[1-9][0-9]+[SMH]")
       @query("timeGrain")
       timeGrain?: string;

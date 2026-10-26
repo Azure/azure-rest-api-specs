@@ -68,6 +68,7 @@ interface AzureFirewalls {
       /**
        * When set to true, creates an AFC control plane for the Azure Firewall.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing createOrUpdate.createAfcControlPlane retains the createAfcControlPlane query parameter; preserve wire compatibility."
       @added(Versions.v2025_07_01)
       @query("createAfcControlPlane")
       createAfcControlPlane?: boolean;

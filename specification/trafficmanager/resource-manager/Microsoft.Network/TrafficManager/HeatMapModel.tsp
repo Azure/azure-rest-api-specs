@@ -62,6 +62,7 @@ interface HeatMapModels {
       /**
        * The top left latitude,longitude pair of the rectangular viewport to query for.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.topLeft retains the topLeft query parameter; preserve wire compatibility."
       @query("topLeft")
       @minItems(2)
       @maxItems(2)
@@ -70,6 +71,7 @@ interface HeatMapModels {
       /**
        * The bottom right latitude,longitude pair of the rectangular viewport to query for.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.botRight retains the botRight query parameter; preserve wire compatibility."
       @query("botRight")
       @minItems(2)
       @maxItems(2)
