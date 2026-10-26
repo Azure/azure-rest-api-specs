@@ -349,7 +349,7 @@ model BillingAccountItemDetailsReportQueryFilter
   @doc("Specifies the category type for item details.")
   categoryType: BillingAccountCategoryTypeEnum;
 
-  @doc("Page size for server paging. Optional. Default value is 1000 items per page.")
+  @doc("Number of items to return in one request, max value is 5000.")
   @maxValue(5000)
   @minValue(1)
   pageSize: int32;
@@ -627,7 +627,6 @@ model ResourceGroupCarbonEmissionItemDetailData extends CarbonEmissionData {
 model CarbonEmissionDataListResult {
   @doc("The CarbonEmissionData items on this page")
   @Azure.ResourceManager.identifiers(#[])
-  @pageItems
   value: CarbonEmissionData[];
 
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "skipToken is a pagination token, not a secret"
@@ -655,8 +654,6 @@ model CarbonEmissionDataAvailableDateRange {
 interface CarbonService {
   @doc("API for Carbon Emissions Reports")
   @post
-  @list
-  @armResourceCollectionAction
   @route("/providers/Microsoft.Carbon/carbonEmissionReports")
   queryCarbonEmissionReports(
     ...ApiVersionParameter,
