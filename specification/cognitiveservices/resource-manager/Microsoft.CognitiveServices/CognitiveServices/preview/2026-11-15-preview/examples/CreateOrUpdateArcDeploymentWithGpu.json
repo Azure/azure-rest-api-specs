@@ -1,0 +1,103 @@
+{
+  "operationId": "ArcDeployments_CreateOrUpdate",
+  "title": "CreateOrUpdateArcDeploymentWithGpu",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "deploymentName": "phi-3-gpu-arc",
+    "api-version": "2026-11-15-preview",
+    "resource": {
+      "properties": {
+        "model": {
+          "assetId": "azureml://registries/azureml/models/Phi-3-mini-128k-instruct-cuda-gpu/versions/2"
+        },
+        "extensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
+        "replicas": 2,
+        "resources": {
+          "limits": {
+            "gpu": 5
+          }
+        },
+        "nodeSelector": {
+          "agentpool": "a100"
+        }
+      },
+      "sku": {
+        "name": "Arc"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/phi-3-gpu-arc",
+        "name": "phi-3-gpu-arc",
+        "type": "Microsoft.CognitiveServices/accounts/arcDeployments",
+        "properties": {
+          "model": {
+            "format": "OpenAI",
+            "name": "Phi-3-mini-128k-instruct-cuda-gpu",
+            "version": "2",
+            "assetId": "azureml://registries/azureml/models/Phi-3-mini-128k-instruct-cuda-gpu/versions/2"
+          },
+          "extensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
+          "runtime": "onnx-genai",
+          "compute": "gpu",
+          "replicas": 2,
+          "resources": {
+            "limits": {
+              "gpu": 5
+            }
+          },
+          "nodeSelector": {
+            "agentpool": "a100"
+          },
+          "provisioningState": "Succeeded",
+          "deploymentState": "Running",
+          "raiPolicyName": "Microsoft.DefaultV2"
+        },
+        "sku": {
+          "name": "Arc"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "azure-asyncoperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000011?api-version=2026-11-15-preview",
+        "location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000011?operationResultResponseType=Location&api-version=2026-11-15-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/phi-3-gpu-arc",
+        "name": "phi-3-gpu-arc",
+        "type": "Microsoft.CognitiveServices/accounts/arcDeployments",
+        "properties": {
+          "model": {
+            "format": "OpenAI",
+            "name": "Phi-3-mini-128k-instruct-cuda-gpu",
+            "version": "2",
+            "assetId": "azureml://registries/azureml/models/Phi-3-mini-128k-instruct-cuda-gpu/versions/2"
+          },
+          "extensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
+          "runtime": "onnx-genai",
+          "compute": "gpu",
+          "replicas": 2,
+          "resources": {
+            "limits": {
+              "gpu": 5
+            }
+          },
+          "nodeSelector": {
+            "agentpool": "a100"
+          },
+          "provisioningState": "Creating",
+          "deploymentState": "Running",
+          "raiPolicyName": "Microsoft.DefaultV2"
+        },
+        "sku": {
+          "name": "Arc"
+        }
+      }
+    }
+  }
+}

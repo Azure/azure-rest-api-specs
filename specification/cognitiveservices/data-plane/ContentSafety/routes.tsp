@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
+import "./agent-hooks.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -85,11 +86,14 @@ interface ImageOperations {
 
 @added(ContentSafety.Versions.v2026_09_01_preview)
 interface UnifiedOperations {
+  @removed(ContentSafety.Versions.v2026_10_15_preview)
+  @renamedFrom(ContentSafety.Versions.v2026_10_15_preview, "unifiedModerate")
   @summary("Unified Moderate")
   @doc("A synchronous API that evaluates input, output, a proposed tool call, or a completed tool result against an applicable Agent Control Specification policy and returns the enforced content and policy verdict.")
   @route("/content:unifiedModerate")
+  @sharedRoute
   @post
-  unifiedModerate is Azure.Core.RpcOperation<
+  unifiedModerateLegacy is Azure.Core.RpcOperation<
     {
       @bodyRoot
       @doc("The unified moderation request.")
@@ -99,6 +103,51 @@ interface UnifiedOperations {
       body: UnifiedModerateOptions;
     },
     UnifiedModerateResult
+  >;
+
+  @added(ContentSafety.Versions.v2026_10_15_preview)
+  @summary("Unified Moderate")
+  @doc("Synchronously evaluate a canonical Agent Hooks 0.1 context and return a closed canonical Verdict plus a separate evaluation receipt. The hosted API supports two selector profiles. The Foundry-project profile requires targetResourceId plus one exact selected Guardrail through the all-or-none selectedPolicyId/revision/digest tuple. AACS may additionally resolve zero or more explicit administrator policies bound to the target or its ancestors; no binding is required for the selected-Guardrail-only case. The named-policy profile uses policyId without requiring a Foundry project. Exactly one profile is selected; targetResourceId and policyId cannot be combined. Local Copilot and WorkIQ integrations use in-process Agent Hooks/ACS rather than this hosted protocol. The receipt binds its policy metadata to the exact API version, AgentContext and admitted selectors through an RFC 8785 SHA-256 request digest. The calling host recomputes that binding and owns transform application, final enforcement, approvals, timeouts, audit and any separate host-action attestation. The receipt proves evaluation evidence, not host enforcement or feature activation. Body identity metadata and customer-settable headers are not authorization. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Duplicate members, ambiguous selectors and over-limit requests are errors, not truncated successful responses.")
+  @route("/content:unifiedModerate")
+  @sharedRoute
+  @post
+  unifiedModerate is Azure.Core.RpcOperation<
+    {
+      @query
+      @doc("Full Azure resource ID of the governed Foundry project used to resolve explicit administrator hierarchy bindings. It is not the selected Guardrail or binding resource ID. The target must be under the authenticated serving account and requires a verified producer. Required with the selectedPolicyId/revision/digest tuple for the Foundry-project profile and forbidden when policyId is present.")
+      @minLength(1)
+      targetResourceId?: string;
+
+      @query
+      @doc("Authorized named policy selector for the named-policy gateway profile. It may be a supported policy name or full policy resource ID according to the serving account's existing selector grammar. Required when targetResourceId is absent and forbidden when targetResourceId or selectedPolicyId is present.")
+      @minLength(1)
+      policyId?: string;
+
+      @query
+      @doc("Full resource ID of the Guardrail selected by the Foundry agent version. Required with targetResourceId for the Foundry-project profile. selectedPolicyRevision and selectedPolicySemanticDigest are required. The exact tuple must match the policy admitted for the agent operation; missing, stale, mismatched or deleted revisions fail closed and never follow mutable policy content.")
+      @minLength(1)
+      selectedPolicyId?: string;
+
+      @query
+      @doc("Opaque exact selected Guardrail revision admitted for the operation. Current RP/PMS resources use the RP-assigned ETag preserved verbatim. Required exactly when selectedPolicyId is present.")
+      @minLength(1)
+      selectedPolicyRevision?: string;
+
+      @query
+      @doc("SHA-256 digest of the admitted selected Guardrail semantic closure. Required exactly when selectedPolicyId is present and verified with selectedPolicyRevision before evaluation.")
+      @pattern("^sha256:[0-9a-f]{64}$")
+      selectedPolicySemanticDigest?: string;
+
+      @bodyRoot
+      @doc("Canonical Agent Hooks context with native JSON point payloads. Azure AI Content Safety (AACS) classifier role metadata, when needed by a non-Hooks caller, belongs in extensions.aacs.role.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: AgentContext;
+    },
+    AgentEvaluationResult,
+    {},
+    AgentEvaluationError | Azure.Core.Foundations.ErrorResponse
   >;
 }
 
