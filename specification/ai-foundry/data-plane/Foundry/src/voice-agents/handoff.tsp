@@ -128,8 +128,8 @@ model InlineVoiceSubagent {
   @doc("Tool-selection behavior for this subagent. Omission or null defaults to `auto`.")
   tool_choice?: VoiceAgentToolChoice | null;
 
-  @doc("The output voice configuration activated for this subagent, using the same flat voice fields as the top-level audio output. Omission inherits the entrypoint configuration; a supplied object replaces the voice-specific settings; null clears them where supported.")
-  audio_output?: VoiceAgentVoiceConfig | null;
+  @doc("The output voice configuration activated for this subagent, using the same flat voice fields as the top-level audio output. Omission inherits the entrypoint configuration; a supplied object replaces the voice-specific settings.")
+  audio_output?: VoiceAgentVoiceConfig;
 
   @doc("The sampling temperature for a compatible subagent model.")
   @minValue(0)

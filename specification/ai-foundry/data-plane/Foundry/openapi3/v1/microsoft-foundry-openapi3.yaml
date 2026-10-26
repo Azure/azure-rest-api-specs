@@ -50719,10 +50719,8 @@ components:
             - type: 'null'
           description: Tool-selection behavior for this subagent. Omission or null defaults to `auto`.
         audio_output:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentVoiceConfig'
-            - type: 'null'
-          description: The output voice configuration activated for this subagent, using the same flat voice fields as the top-level audio output. Omission inherits the entrypoint configuration; a supplied object replaces the voice-specific settings; null clears them where supported.
+          $ref: '#/components/schemas/VoiceAgentVoiceConfig'
+          description: The output voice configuration activated for this subagent, using the same flat voice fields as the top-level audio output. Omission inherits the entrypoint configuration; a supplied object replaces the voice-specific settings.
         temperature:
           anyOf:
             - type: number
