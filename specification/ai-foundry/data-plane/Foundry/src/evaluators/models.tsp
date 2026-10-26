@@ -164,6 +164,20 @@ model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
   @doc("Name of the Project Connection that stores the endpoint URL and credentials. The connection must exist on the project and have a non-empty target URL. Supported auth types: ApiKey (sends `api-key` header) and AAD/Entra ID (acquires a bearer token via the project's Managed Identity).")
   @minLength(1)
   connection_name: string;
+
+  @doc("Version of the request and response contract between the service and the evaluator endpoint. Defaults to `0.0.1` when omitted. Version `0.0.2` requires exactly one metric of type `ordinal` or `continuous`.")
+  schema_version?: EndpointEvaluatorSchemaVersion;
+}
+
+@doc("The request and response contract version used by an endpoint-based evaluator.")
+union EndpointEvaluatorSchemaVersion {
+  string,
+
+  @doc("Original endpoint contract with scenario-specific input fields under `data.item` and `data.sample`.")
+  v0_0_1: "0.0.1",
+
+  @doc("Endpoint contract with normalized `messages`, `evaluation_target`, `context`, `agent_definition`, and `metadata` fields.")
+  v0_0_2: "0.0.2",
 }
 
 // ============================================================================
