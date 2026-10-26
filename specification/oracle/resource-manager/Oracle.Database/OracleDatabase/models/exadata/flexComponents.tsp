@@ -77,6 +77,7 @@ model FlexComponentProperties {
 @added(Versions.v20250101_preview)
 @doc("FlexComponents filter")
 model FlexComponentsFilter {
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FlexComponentsFilter.shape retains the shape query parameter; preserve wire compatibility."
   @query
   @doc("If provided, filters the results for the given shape")
   @minLength(1)

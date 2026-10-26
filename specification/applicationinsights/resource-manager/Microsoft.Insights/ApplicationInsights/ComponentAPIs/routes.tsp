@@ -35,12 +35,14 @@ interface AnnotationsOperationGroup {
     /**
      * The start time to query from for annotations, cannot be older than 90 days from current date.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.start retains the start query parameter; preserve wire compatibility."
     @query("start")
     start: string,
 
     /**
      * The end time to query for annotations.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.end retains the end query parameter; preserve wire compatibility."
     @query("end")
     end: string,
   ): ArmResponse<AnnotationsListResult> | AnnotationError;

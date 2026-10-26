@@ -112,6 +112,7 @@ interface ManagedHsms {
       /**
        * Maximum number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -127,6 +128,7 @@ interface ManagedHsms {
       /**
        * Maximum number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },

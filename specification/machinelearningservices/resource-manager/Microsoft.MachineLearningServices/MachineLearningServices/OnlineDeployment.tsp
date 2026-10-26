@@ -112,18 +112,21 @@ interface OnlineDeployments {
       /**
        * Ordering of list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @query("$orderBy")
       $orderBy?: string;
 
       /**
        * Top of list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
     },
@@ -155,12 +158,14 @@ interface OnlineDeployments {
       /**
        * Number of Skus to be retrieved in a page of results.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listSkus.count retains the count query parameter; preserve wire compatibility."
       @query("count")
       count?: int32;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listSkus.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
     }

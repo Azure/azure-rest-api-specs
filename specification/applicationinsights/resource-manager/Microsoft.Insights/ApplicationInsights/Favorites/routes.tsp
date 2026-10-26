@@ -37,24 +37,28 @@ interface FavoritesOperationGroup {
       /**
        * The type of favorite. Value can be either shared or user.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.favoriteType retains the favoriteType query parameter; preserve wire compatibility."
       @query("favoriteType")
       favoriteType?: FavoriteType = FavoriteType.shared;
 
       /**
        * Source type of favorite to return. When left out, the source type defaults to 'other' (not present in this enum).
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.sourceType retains the sourceType query parameter; preserve wire compatibility."
       @query("sourceType")
       sourceType?: FavoriteSourceType;
 
       /**
        * Flag indicating whether or not to return the full content for each applicable favorite. If false, only return summary content for favorites.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.canFetchContent retains the canFetchContent query parameter; preserve wire compatibility."
       @query("canFetchContent")
       canFetchContent?: boolean;
 
       /**
        * Tags that must be present on each favorite returned.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string[];
     },

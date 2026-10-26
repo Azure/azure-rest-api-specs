@@ -28,36 +28,42 @@ alias FeaturesListParameters = {
   /**
    * Continuation token for pagination.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FeaturesListParameters.$skip retains the $skip query parameter; preserve wire compatibility."
   @query("$skip")
   $skip?: string;
 
   /**
    * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FeaturesListParameters.tags retains the tags query parameter; preserve wire compatibility."
   @query("tags")
   tags?: string;
 
   /**
    * feature name.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FeaturesListParameters.featureName retains the featureName query parameter; preserve wire compatibility."
   @query("featureName")
   featureName?: string;
 
   /**
    * Description of the featureset.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FeaturesListParameters.description retains the description query parameter; preserve wire compatibility."
   @query("description")
   description?: string;
 
   /**
    * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FeaturesListParameters.listViewType retains the listViewType query parameter; preserve wire compatibility."
   @query("listViewType")
   listViewType?: ListViewType = ListViewType.ActiveOnly;
 
   /**
    * Page size.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FeaturesListParameters.pageSize retains the pageSize query parameter; preserve wire compatibility."
   @query("pageSize")
   pageSize?: int32 = 1000;
 };

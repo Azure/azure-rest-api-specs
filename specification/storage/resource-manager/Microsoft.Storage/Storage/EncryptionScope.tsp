@@ -57,6 +57,7 @@ interface EncryptionScopes {
       /**
        * Optional, specifies the maximum number of encryption scopes that will be included in the list response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$maxpagesize retains the $maxpagesize query parameter; preserve wire compatibility."
       @maxValue(5000)
       @minValue(1)
       @query("$maxpagesize")
@@ -71,6 +72,7 @@ interface EncryptionScopes {
       /**
        * Optional, when specified, will list encryption scopes with the specific state. Defaults to All
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$include retains the $include query parameter; preserve wire compatibility."
       @query("$include")
       $include?: ListEncryptionScopesInclude;
     },

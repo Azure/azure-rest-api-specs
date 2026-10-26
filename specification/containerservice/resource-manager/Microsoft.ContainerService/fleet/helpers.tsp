@@ -29,6 +29,7 @@ alias IfMatchHeadersParameters<T extends Azure.ResourceManager.Foundations.Resou
 
 @doc("Provides the standard '$skiptoken' query parameter for list operations.")
 model SkipTokenQueryParameter {
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing SkipTokenQueryParameter.skipToken retains the $skipToken query parameter; preserve wire compatibility."
   @query("$skipToken")
   @doc("The page-continuation token to use with a paged version of this API.")
   skipToken?: string;
@@ -36,6 +37,7 @@ model SkipTokenQueryParameter {
 
 @doc("Provides the standard '$top' query parameter for list operations.")
 model TopQueryParameter {
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing TopQueryParameter.top retains the $top query parameter; preserve wire compatibility."
   @query("$top")
   @doc("The number of result items to return.")
   top?: int32;

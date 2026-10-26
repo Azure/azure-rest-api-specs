@@ -79,14 +79,17 @@ interface EvaluatedMachinesOperations {
       @query
       $filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByParent.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @doc("Optional parameter for page size.")
       @query
       pageSize?: int32;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByParent.continuationToken retains the continuationToken query parameter; preserve wire compatibility."
       @doc("Optional parameter for continuation token.")
       @query
       continuationToken?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByParent.totalRecordCount retains the totalRecordCount query parameter; preserve wire compatibility."
       @doc("Total record count.")
       @query
       totalRecordCount?: int32;
@@ -110,14 +113,17 @@ interface EvaluatedSqlEntitiesOperations {
       @query
       $filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByParent.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @doc("Optional parameter for page size.")
       @query
       pageSize?: int32;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByParent.continuationToken retains the continuationToken query parameter; preserve wire compatibility."
       @doc("Optional parameter for continuation token.")
       @query
       continuationToken?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByParent.totalRecordCount retains the totalRecordCount query parameter; preserve wire compatibility."
       @doc("Total record count.")
       @query
       totalRecordCount?: int32;
@@ -141,14 +147,17 @@ interface EvaluatedWebAppsOperations {
       @query
       $filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByParent.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @doc("Optional parameter for page size.")
       @query
       pageSize?: int32;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByParent.continuationToken retains the continuationToken query parameter; preserve wire compatibility."
       @doc("Optional parameter for continuation token.")
       @query
       continuationToken?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByParent.totalRecordCount retains the totalRecordCount query parameter; preserve wire compatibility."
       @doc("Total record count.")
       @query
       totalRecordCount?: int32;
@@ -172,14 +181,17 @@ interface EvaluatedAvsMachinesOperations {
       @query
       $filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByParent.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @doc("Optional parameter for page size.")
       @query
       pageSize?: int32;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByParent.continuationToken retains the continuationToken query parameter; preserve wire compatibility."
       @doc("Optional parameter for continuation token.")
       @query
       continuationToken?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByParent.totalRecordCount retains the totalRecordCount query parameter; preserve wire compatibility."
       @doc("Total record count.")
       @query
       totalRecordCount?: int32;

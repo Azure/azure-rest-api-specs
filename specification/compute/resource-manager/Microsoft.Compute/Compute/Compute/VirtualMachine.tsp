@@ -169,6 +169,7 @@ interface VirtualMachines {
       /**
        * The expand expression to apply on operation. 'instanceView' enables fetching run time status of all Virtual Machines, this can only be specified if a valid $filter option is specified
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: ExpandTypeForListVMs;
     },
@@ -184,6 +185,7 @@ interface VirtualMachines {
       /**
        * statusOnly=true enables fetching run time status of all Virtual Machines in the subscription.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAll.statusOnly retains the statusOnly query parameter; preserve wire compatibility."
       @query("statusOnly")
       statusOnly?: string;
 
@@ -196,6 +198,7 @@ interface VirtualMachines {
       /**
        * The expand expression to apply on operation. 'instanceView' enables fetching run time status of all Virtual Machines, this can only be specified if a valid $filter option is specified
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAll.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: ExpandTypesForListVMs;
     },

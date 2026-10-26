@@ -43,6 +43,7 @@ model IncludeExtendedLocationsParameter {
   /**
    * To Include Extended Locations information or not in the response.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing IncludeExtendedLocationsParameter.includeExtendedLocations retains the includeExtendedLocations query parameter; preserve wire compatibility."
   @query("includeExtendedLocations")
   includeExtendedLocations?: string;
 }

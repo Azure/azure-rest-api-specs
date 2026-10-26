@@ -1703,14 +1703,17 @@ interface VolumeGroupSnapshots {
       @query("$filter")
       filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByVolumeGroup.orderby retains the $orderby query parameter; preserve wire compatibility."
       @doc("OData order-by expression (e.g. $orderby=name asc)")
       @query("$orderby")
       orderby?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByVolumeGroup.top retains the $top query parameter; preserve wire compatibility."
       @doc("Maximum number of results to return per page")
       @query("$top")
       top?: int32;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByVolumeGroup.skip retains the $skip query parameter; preserve wire compatibility."
       @doc("Number of results to skip (page offset)")
       @query("$skip")
       skip?: int32;

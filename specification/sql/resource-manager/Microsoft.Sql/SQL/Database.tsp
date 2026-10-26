@@ -145,6 +145,7 @@ interface Databases {
       /**
        * The number of elements to return from the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByServer.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       @added(Versions.v2025_02_01_preview)
       $top?: int64;
@@ -152,6 +153,7 @@ interface Databases {
       /**
        * The number of elements in the collection to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByServer.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       @added(Versions.v2025_02_01_preview)
       $skip?: int64;
@@ -166,11 +168,13 @@ interface Databases {
       /**
        * How the results should be ordered.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByServer.$orderby retains the $orderby query parameter; preserve wire compatibility."
       @query("$orderby")
       @added(Versions.v2025_02_01_preview)
       $orderby?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByServer.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @removed(Versions.v2025_02_01_preview)
       @query("$skipToken")
       $skipToken?: string;
@@ -193,27 +197,32 @@ interface Databases {
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByDatabase.schema retains the schema query parameter; preserve wire compatibility."
       @query(#{ name: "schema", explode: true })
       schema?: string[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByDatabase.table retains the table query parameter; preserve wire compatibility."
       @query(#{ name: "table", explode: true })
       table?: string[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByDatabase.column retains the column query parameter; preserve wire compatibility."
       @query(#{ name: "column", explode: true })
       column?: string[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByDatabase.orderBy retains the orderBy query parameter; preserve wire compatibility."
       @query(#{ name: "orderBy", explode: true })
       orderBy?: string[];
 
       /**
        * An opaque token that identifies a starting point in the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByDatabase.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: string;
     }
@@ -435,10 +444,12 @@ interface Databases {
     ArmResponse<ResourceListResult<SensitivityLabel>>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listCurrentByDatabase.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listCurrentByDatabase.$count retains the $count query parameter; preserve wire compatibility."
       @query("$count")
       $count?: boolean;
 
@@ -481,12 +492,14 @@ interface Databases {
     ArmResponse<ResourceListResult<SensitivityLabel>>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listRecommendedByDatabase.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
 
       /**
        * Specifies whether to include disabled recommendations or not.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listRecommendedByDatabase.includeDisabledRecommendations retains the includeDisabledRecommendations query parameter; preserve wire compatibility."
       @query("includeDisabledRecommendations")
       includeDisabledRecommendations?: boolean;
 

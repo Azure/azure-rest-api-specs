@@ -85,6 +85,7 @@ interface EventOperationGroup {
       /**
        * Specifies from when to return events (default is 3 days), based on the lastUpdateTime property. For example, queryStartTime = 7/24/2020 OR queryStartTime=7%2F24%2F2020
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscriptionId.queryStartTime retains the queryStartTime query parameter; preserve wire compatibility."
       @query("queryStartTime")
       queryStartTime?: string;
     },
@@ -201,6 +202,7 @@ interface TenantEventOperationGroup {
       /**
        * Specifies from when to return events (default is 3 days), based on the lastUpdateTime property. For example, queryStartTime = 7/24/2020 OR queryStartTime=7%2F24%2F2020
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTenantId.queryStartTime retains the queryStartTime query parameter; preserve wire compatibility."
       @query("queryStartTime")
       queryStartTime?: string;
     },

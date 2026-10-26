@@ -28,6 +28,7 @@ interface ElasticVersionsOperationGroup {
       /**
        * Region where elastic deployment will take place.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.region retains the region query parameter; preserve wire compatibility."
       @query("region")
       region: string;
     },

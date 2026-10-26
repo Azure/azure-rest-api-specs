@@ -77,6 +77,7 @@ interface RestorableDroppedDatabases {
       /**
        * An opaque token that identifies a starting point in the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByServer.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       @added(Versions.v2026_08_01_preview)
       $skiptoken?: string;
@@ -84,6 +85,7 @@ interface RestorableDroppedDatabases {
       /**
        * The number of elements to return from the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByServer.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       @added(Versions.v2026_08_01_preview)
       $top?: int64;

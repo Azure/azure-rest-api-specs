@@ -31,54 +31,63 @@ alias FeaturestoreEntityVersionsListParameters = {
   /**
    * Continuation token for pagination.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FeaturestoreEntityVersionsListParameters.$skip retains the $skip query parameter; preserve wire compatibility."
   @query("$skip")
   $skip?: string;
 
   /**
    * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FeaturestoreEntityVersionsListParameters.tags retains the tags query parameter; preserve wire compatibility."
   @query("tags")
   tags?: string;
 
   /**
    * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FeaturestoreEntityVersionsListParameters.listViewType retains the listViewType query parameter; preserve wire compatibility."
   @query("listViewType")
   listViewType?: ListViewType = ListViewType.ActiveOnly;
 
   /**
    * page size
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FeaturestoreEntityVersionsListParameters.pageSize retains the pageSize query parameter; preserve wire compatibility."
   @query("pageSize")
   pageSize?: int32 = 20;
 
   /**
    * name for the featurestore entity version
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FeaturestoreEntityVersionsListParameters.versionName retains the versionName query parameter; preserve wire compatibility."
   @query("versionName")
   versionName?: string;
 
   /**
    * featurestore entity version
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FeaturestoreEntityVersionsListParameters.version retains the version query parameter; preserve wire compatibility."
   @query("version")
   version?: string;
 
   /**
    * description for the feature entity version
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FeaturestoreEntityVersionsListParameters.description retains the description query parameter; preserve wire compatibility."
   @query("description")
   description?: string;
 
   /**
    * createdBy user name
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FeaturestoreEntityVersionsListParameters.createdBy retains the createdBy query parameter; preserve wire compatibility."
   @query("createdBy")
   createdBy?: string;
 
   /**
    * Specifies the featurestore stage
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing FeaturestoreEntityVersionsListParameters.stage retains the stage query parameter; preserve wire compatibility."
   @query("stage")
   stage?: string;
 };

@@ -3533,6 +3533,7 @@ alias GetTimeseriesParameters = {
    * The start DateTime of the Timeseries in UTC
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing GetTimeseriesParameters.startDateTimeUTC retains the startDateTimeUTC query parameter; preserve wire compatibility."
   @query("startDateTimeUTC")
   startDateTimeUTC: utcDateTime;
 
@@ -3540,30 +3541,35 @@ alias GetTimeseriesParameters = {
    * The end DateTime of the Timeseries in UTC
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing GetTimeseriesParameters.endDateTimeUTC retains the endDateTimeUTC query parameter; preserve wire compatibility."
   @query("endDateTimeUTC")
   endDateTimeUTC: utcDateTime;
 
   /**
    * The aggregation interval of the Timeseries
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing GetTimeseriesParameters.aggregationInterval retains the aggregationInterval query parameter; preserve wire compatibility."
   @query("aggregationInterval")
   aggregationInterval: TimeseriesAggregationInterval;
 
   /**
    * The type of Timeseries
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing GetTimeseriesParameters.timeseriesType retains the timeseriesType query parameter; preserve wire compatibility."
   @query("timeseriesType")
   timeseriesType: TimeseriesType;
 
   /**
    * The specific endpoint
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing GetTimeseriesParameters.endpoint retains the endpoint query parameter; preserve wire compatibility."
   @query("endpoint")
   endpoint?: string;
 
   /**
    * The country associated with the Timeseries. Values are country ISO codes as specified here- https://www.iso.org/iso-3166-country-codes.html
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing GetTimeseriesParameters.country retains the country query parameter; preserve wire compatibility."
   @query("country")
   country?: string;
 };
@@ -3576,18 +3582,21 @@ alias GetLatencyScorecardsParameters = {
    * The end DateTime of the Latency Scorecard in UTC
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing GetLatencyScorecardsParameters.endDateTimeUTC retains the endDateTimeUTC query parameter; preserve wire compatibility."
   @query("endDateTimeUTC")
   endDateTimeUTC?: string;
 
   /**
    * The country associated with the Latency Scorecard. Values are country ISO codes as specified here- https://www.iso.org/iso-3166-country-codes.html
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing GetLatencyScorecardsParameters.country retains the country query parameter; preserve wire compatibility."
   @query("country")
   country?: string;
 
   /**
    * The aggregation interval of the Latency Scorecard
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing GetLatencyScorecardsParameters.aggregationInterval retains the aggregationInterval query parameter; preserve wire compatibility."
   @query("aggregationInterval")
   aggregationInterval: LatencyScorecardAggregationInterval;
 };

@@ -33,12 +33,14 @@ alias NamespaceResourceListParameters = {
   /**
    * Skip token for subsequent requests.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing NamespaceResourceListParameters.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
   @query("$skipToken")
   $skipToken?: string;
 
   /**
    * Maximum number of results to return.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing NamespaceResourceListParameters.$top retains the $top query parameter; preserve wire compatibility."
   @query("$top")
   $top?: int32 = 100;
 };
@@ -47,12 +49,14 @@ alias NamespaceResourceListAllParameters = {
   /**
    * Skip token for subsequent requests.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing NamespaceResourceListAllParameters.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
   @query("$skipToken")
   $skipToken?: string;
 
   /**
    * Maximum number of results to return.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing NamespaceResourceListAllParameters.$top retains the $top query parameter; preserve wire compatibility."
   @query("$top")
   $top?: int32 = 100;
 };

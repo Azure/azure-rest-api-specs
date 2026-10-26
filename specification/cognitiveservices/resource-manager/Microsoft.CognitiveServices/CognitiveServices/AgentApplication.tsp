@@ -16,18 +16,21 @@ alias AgentApplicationsListParameters = {
   /**
    * Number of agent applications to be retrieved in a page of results.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing AgentApplicationsListParameters.count retains the count query parameter; preserve wire compatibility."
   @query("count")
   count?: int32 = 30;
 
   /**
    * Number of agent applications to skip.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing AgentApplicationsListParameters.$skip retains the $skip query parameter; preserve wire compatibility."
   @query("$skip")
   $skip?: int32;
 
   /**
    * Continuation token for pagination.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing AgentApplicationsListParameters.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
   @query("$skipToken")
   $skipToken?: string;
 
@@ -35,24 +38,28 @@ alias AgentApplicationsListParameters = {
    * Names of agent applications to retrieve.
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Query parameter 'names' serialization matches existing service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing AgentApplicationsListParameters.names retains the names query parameter; preserve wire compatibility."
   @query(#{ name: "names", explode: true })
   names?: string[];
 
   /**
    * Search text for filtering agent applications.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing AgentApplicationsListParameters.searchText retains the searchText query parameter; preserve wire compatibility."
   @query("searchText")
   searchText?: string;
 
   /**
    * Field to order by.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing AgentApplicationsListParameters.orderBy retains the orderBy query parameter; preserve wire compatibility."
   @query("orderBy")
   orderBy?: string;
 
   /**
    * Whether to order in ascending order.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing AgentApplicationsListParameters.orderByAsc retains the orderByAsc query parameter; preserve wire compatibility."
   @query("orderByAsc")
   orderByAsc?: boolean = false;
 };

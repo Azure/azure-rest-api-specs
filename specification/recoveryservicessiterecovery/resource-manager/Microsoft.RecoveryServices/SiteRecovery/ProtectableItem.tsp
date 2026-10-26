@@ -56,12 +56,14 @@ interface ProtectableItems {
       /**
        * take OData query parameter.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByReplicationProtectionContainers.$take retains the $take query parameter; preserve wire compatibility."
       @query("$take")
       $take?: string;
 
       /**
        * skipToken OData query parameter.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByReplicationProtectionContainers.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },

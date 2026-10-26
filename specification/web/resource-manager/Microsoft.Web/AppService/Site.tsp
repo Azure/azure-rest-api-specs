@@ -202,6 +202,7 @@ interface Sites {
       /**
        * Custom hostname.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing analyzeCustomHostname.hostName retains the hostName query parameter; preserve wire compatibility."
       @query("hostName")
       hostName?: string;
     },
@@ -1379,6 +1380,7 @@ interface SiteRecommendations {
       /**
        * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listHistoryForWebApp.expiredOnly retains the expiredOnly query parameter; preserve wire compatibility."
       @query("expiredOnly")
       expiredOnly?: boolean;
 
@@ -1408,6 +1410,7 @@ interface SiteRecommendations {
       /**
        * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listRecommendedRulesForWebApp.featured retains the featured query parameter; preserve wire compatibility."
       @query("featured")
       featured?: boolean;
 
@@ -1640,6 +1643,7 @@ interface WebApps {
       /**
        * Specify <strong>true</strong> to include deployment slots in results. The default is false, which only gives you the production slot of all apps.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.includeSlots retains the includeSlots query parameter; preserve wire compatibility."
       @query("includeSlots")
       includeSlots?: boolean;
     },
@@ -1661,6 +1665,7 @@ interface WebApps {
       /**
        * Custom hostname.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing analyzeCustomHostnameSlot.hostName retains the hostName query parameter; preserve wire compatibility."
       @query("hostName")
       hostName?: string;
     },

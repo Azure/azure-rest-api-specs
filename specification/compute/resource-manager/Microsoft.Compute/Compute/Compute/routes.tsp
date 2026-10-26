@@ -243,18 +243,21 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       /**
        * An integer value specifying the number of images to return that matches supplied values.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * Specifies the order of the results returned. Formatted as an OData query.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$orderby retains the $orderby query parameter; preserve wire compatibility."
       @query("$orderby")
       $orderby?: string;
     }
@@ -450,14 +453,17 @@ interface VirtualMachineImagesOperationGroup {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$orderby retains the $orderby query parameter; preserve wire compatibility."
       @query("$orderby")
       $orderby?: string;
     }
@@ -496,14 +502,17 @@ interface VirtualMachineImagesOperationGroup {
     /**
      * The expand expression to apply on the operation.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listWithProperties.$expand retains the $expand query parameter; preserve wire compatibility."
     @query("$expand")
     $expand: string,
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listWithProperties.$top retains the $top query parameter; preserve wire compatibility."
     @query("$top")
     $top?: int32,
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listWithProperties.$orderby retains the $orderby query parameter; preserve wire compatibility."
     @query("$orderby")
     $orderby?: string,
   ): ArmResponse<VirtualMachineImage[]> | CloudError;

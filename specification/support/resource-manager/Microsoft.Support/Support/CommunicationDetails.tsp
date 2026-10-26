@@ -97,6 +97,7 @@ interface Communications {
       /**
        * The number of values to return in the collection. Default is 10 and max is 10.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
@@ -161,6 +162,7 @@ interface CommunicationsNoSubscription {
       /**
        * The number of values to return in the collection. Default is 10 and max is 10.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 

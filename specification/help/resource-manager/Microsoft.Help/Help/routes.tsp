@@ -52,6 +52,7 @@ interface DiscoverySolutionOperationGroup {
       /**
        * Skiptoken is only used if a previous operation returned a partial result.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: string;
     }

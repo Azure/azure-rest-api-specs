@@ -17,6 +17,7 @@ model FilterQueryParameter {
 
 @doc("Provides the standard '$top' query parameter for list operations.")
 model TopQueryParameter {
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing TopQueryParameter.top retains the $top query parameter; preserve wire compatibility."
   @query("$top")
   @doc("The number of result items to return.")
   top?: int32;
@@ -24,6 +25,7 @@ model TopQueryParameter {
 
 @doc("Provides the standard '$skip' query parameter for list operations.")
 model SkipQueryParameter {
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing SkipQueryParameter.skip retains the $skip query parameter; preserve wire compatibility."
   @query("$skip")
   @doc("The number of result items to skip.")
   skip?: int32;

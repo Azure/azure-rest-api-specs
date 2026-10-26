@@ -116,42 +116,49 @@ interface JobAgents {
       /**
        * If specified, only job executions created at or after the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByAgent.createTimeMin retains the createTimeMin query parameter; preserve wire compatibility."
       @query("createTimeMin")
       createTimeMin?: utcDateTime;
 
       /**
        * If specified, only job executions created before the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByAgent.createTimeMax retains the createTimeMax query parameter; preserve wire compatibility."
       @query("createTimeMax")
       createTimeMax?: utcDateTime;
 
       /**
        * If specified, only job executions completed at or after the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByAgent.endTimeMin retains the endTimeMin query parameter; preserve wire compatibility."
       @query("endTimeMin")
       endTimeMin?: utcDateTime;
 
       /**
        * If specified, only job executions completed before the specified time are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByAgent.endTimeMax retains the endTimeMax query parameter; preserve wire compatibility."
       @query("endTimeMax")
       endTimeMax?: utcDateTime;
 
       /**
        * If specified, only active or only completed job executions are included.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByAgent.isActive retains the isActive query parameter; preserve wire compatibility."
       @query("isActive")
       isActive?: boolean;
 
       /**
        * The number of elements in the collection to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByAgent.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: int64;
 
       /**
        * The number of elements to return from the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByAgent.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int64;
     }

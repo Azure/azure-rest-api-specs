@@ -59,6 +59,7 @@ interface CapabilitiesOperationGroup {
       /**
        * If specified, restricts the response to only include the selected item.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByLocation.include retains the include query parameter; preserve wire compatibility."
       @query("include")
       include?: CapabilityGroup;
     }
@@ -92,18 +93,21 @@ interface LongTermRetentionBackupsOperationGroup {
       /**
        * Whether or not to only get the latest backup for each database.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByLocation.onlyLatestPerDatabase retains the onlyLatestPerDatabase query parameter; preserve wire compatibility."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 
       /**
        * Whether to query against just live databases, just deleted databases, or all databases.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByLocation.databaseState retains the databaseState query parameter; preserve wire compatibility."
       @query("databaseState")
       databaseState?: DatabaseState;
 
       /**
        * An opaque token that identifies a starting point in the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByLocation.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       @added(Versions.v2026_08_01_preview)
       $skiptoken?: string;
@@ -111,6 +115,7 @@ interface LongTermRetentionBackupsOperationGroup {
       /**
        * The number of elements to return from the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByLocation.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       @added(Versions.v2026_08_01_preview)
       $top?: int64;
@@ -145,18 +150,21 @@ interface LongTermRetentionBackupsOperationGroup {
       /**
        * Whether or not to only get the latest backup for each database.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByServer.onlyLatestPerDatabase retains the onlyLatestPerDatabase query parameter; preserve wire compatibility."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 
       /**
        * Whether to query against just live databases, just deleted databases, or all databases.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByServer.databaseState retains the databaseState query parameter; preserve wire compatibility."
       @query("databaseState")
       databaseState?: DatabaseState;
 
       /**
        * An opaque token that identifies a starting point in the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByServer.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       @added(Versions.v2026_08_01_preview)
       $skiptoken?: string;
@@ -164,6 +172,7 @@ interface LongTermRetentionBackupsOperationGroup {
       /**
        * The number of elements to return from the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByServer.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       @added(Versions.v2026_08_01_preview)
       $top?: int64;
@@ -191,18 +200,21 @@ interface LongTermRetentionBackupsOperationGroup {
       /**
        * Whether or not to only get the latest backup for each database.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupLocation.onlyLatestPerDatabase retains the onlyLatestPerDatabase query parameter; preserve wire compatibility."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 
       /**
        * Whether to query against just live databases, just deleted databases, or all databases.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupLocation.databaseState retains the databaseState query parameter; preserve wire compatibility."
       @query("databaseState")
       databaseState?: DatabaseState;
 
       /**
        * An opaque token that identifies a starting point in the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupLocation.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       @added(Versions.v2026_08_01_preview)
       $skiptoken?: string;
@@ -210,6 +222,7 @@ interface LongTermRetentionBackupsOperationGroup {
       /**
        * The number of elements to return from the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupLocation.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       @added(Versions.v2026_08_01_preview)
       $top?: int64;
@@ -244,18 +257,21 @@ interface LongTermRetentionBackupsOperationGroup {
       /**
        * Whether or not to only get the latest backup for each database.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupServer.onlyLatestPerDatabase retains the onlyLatestPerDatabase query parameter; preserve wire compatibility."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 
       /**
        * Whether to query against just live databases, just deleted databases, or all databases.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupServer.databaseState retains the databaseState query parameter; preserve wire compatibility."
       @query("databaseState")
       databaseState?: DatabaseState;
 
       /**
        * An opaque token that identifies a starting point in the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupServer.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       @added(Versions.v2026_08_01_preview)
       $skiptoken?: string;
@@ -263,6 +279,7 @@ interface LongTermRetentionBackupsOperationGroup {
       /**
        * The number of elements to return from the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupServer.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       @added(Versions.v2026_08_01_preview)
       $top?: int64;
@@ -299,24 +316,28 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
       /**
        * Whether or not to only get the latest backup for each database.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByLocation.onlyLatestPerDatabase retains the onlyLatestPerDatabase query parameter; preserve wire compatibility."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 
       /**
        * Whether to query against just live databases, just deleted databases, or all databases.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByLocation.databaseState retains the databaseState query parameter; preserve wire compatibility."
       @query("databaseState")
       databaseState?: DatabaseState;
 
       /**
        * The number of elements in the collection to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByLocation.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: int64;
 
       /**
        * The number of elements to return from the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByLocation.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int64;
 
@@ -356,12 +377,14 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
       /**
        * Whether or not to only get the latest backup for each database.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByInstance.onlyLatestPerDatabase retains the onlyLatestPerDatabase query parameter; preserve wire compatibility."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 
       /**
        * Whether to query against just live databases, just deleted databases, or all databases.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByInstance.databaseState retains the databaseState query parameter; preserve wire compatibility."
       @query("databaseState")
       databaseState?: DatabaseState;
     }
@@ -388,24 +411,28 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
       /**
        * Whether or not to only get the latest backup for each database.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupLocation.onlyLatestPerDatabase retains the onlyLatestPerDatabase query parameter; preserve wire compatibility."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 
       /**
        * Whether to query against just live databases, just deleted databases, or all databases.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupLocation.databaseState retains the databaseState query parameter; preserve wire compatibility."
       @query("databaseState")
       databaseState?: DatabaseState;
 
       /**
        * The number of elements in the collection to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupLocation.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: int64;
 
       /**
        * The number of elements to return from the collection.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupLocation.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int64;
 
@@ -445,12 +472,14 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
       /**
        * Whether or not to only get the latest backup for each database.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupInstance.onlyLatestPerDatabase retains the onlyLatestPerDatabase query parameter; preserve wire compatibility."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 
       /**
        * Whether to query against just live databases, just deleted databases, or all databases.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupInstance.databaseState retains the databaseState query parameter; preserve wire compatibility."
       @query("databaseState")
       databaseState?: DatabaseState;
     }

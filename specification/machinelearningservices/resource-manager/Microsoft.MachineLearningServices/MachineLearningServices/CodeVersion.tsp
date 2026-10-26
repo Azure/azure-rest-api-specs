@@ -116,18 +116,21 @@ interface CodeVersions {
       /**
        * Ordering of list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @query("$orderBy")
       $orderBy?: string;
 
       /**
        * Maximum number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
     },
@@ -208,30 +211,35 @@ interface CodeVersionOperationGroup {
       /**
        * Ordering of list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @query("$orderBy")
       $orderBy?: string;
 
       /**
        * Maximum number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       /**
        * If specified, return CodeVersion assets with specified content hash value, regardless of name
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.hash retains the hash query parameter; preserve wire compatibility."
       @query("hash")
       hash?: string;
 
       /**
        * Hash algorithm version when listing by hash
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.hashVersion retains the hashVersion query parameter; preserve wire compatibility."
       @query("hashVersion")
       hashVersion?: string;
     },

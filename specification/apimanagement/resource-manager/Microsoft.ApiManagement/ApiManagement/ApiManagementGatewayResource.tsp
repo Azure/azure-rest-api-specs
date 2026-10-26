@@ -42,6 +42,7 @@ alias ApiManagementGatewayListPagingParameters = {
   /**
    * Number of records to return.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing ApiManagementGatewayListPagingParameters.$top retains the $top query parameter; preserve wire compatibility."
   @query("$top")
   @minValue(1)
   $top?: int32;
@@ -49,6 +50,7 @@ alias ApiManagementGatewayListPagingParameters = {
   /**
    * Skip token for retrieving the next page of results.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing ApiManagementGatewayListPagingParameters.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
   @query("$skipToken")
   $skipToken?: string;
 };

@@ -119,6 +119,7 @@ interface Deployments {
       /**
        * The number of results to get. If null is passed, returns all deployments.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAtScope.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -213,6 +214,7 @@ interface Deployments {
       /**
        * The number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing deploymentOperationsListAtScope.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -382,6 +384,7 @@ interface DeploymentsExtendedTenant {
       /**
        * The number of results to get. If null is passed, returns all deployments.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -405,6 +408,7 @@ interface DeploymentsExtendedTenant {
       /**
        * The number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAtTenantScope.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -496,6 +500,7 @@ interface DeploymentExtendedManagementGroup {
       /**
        * The number of results to get. If null is passed, returns all deployments.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAtManagementGroupScope.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -603,6 +608,7 @@ interface DeploymentExtendedManagementGroup {
       /**
        * The number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing deploymentOperationsListAtManagementGroupScope.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -688,6 +694,7 @@ interface DeploymentExtendedSubscriptionGroup {
       /**
        * The number of results to get. If null is passed, returns all deployments.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAtSubscriptionScope.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -795,6 +802,7 @@ interface DeploymentExtendedSubscriptionGroup {
       /**
        * The number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing deploymentOperationsListAtSubscriptionScope.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -873,6 +881,7 @@ interface DeploymentExtendedOperationGroup {
       /**
        * The number of results to get. If null is passed, returns all deployments.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },

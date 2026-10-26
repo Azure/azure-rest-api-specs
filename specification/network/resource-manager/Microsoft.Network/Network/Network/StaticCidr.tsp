@@ -118,30 +118,35 @@ alias StaticCidrsListParameters = {
   /**
    * Optional skip token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing StaticCidrsListParameters.skipToken retains the skipToken query parameter; preserve wire compatibility."
   @query("skipToken")
   skipToken?: string;
 
   /**
    * Optional num entries to skip.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing StaticCidrsListParameters.skip retains the skip query parameter; preserve wire compatibility."
   @query("skip")
   skip?: int32 = 0;
 
   /**
    * Optional num entries to show.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing StaticCidrsListParameters.top retains the top query parameter; preserve wire compatibility."
   @query("top")
   top?: int32 = 50;
 
   /**
    * Optional key by which to sort.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing StaticCidrsListParameters.sortKey retains the sortKey query parameter; preserve wire compatibility."
   @query("sortKey")
   sortKey?: string;
 
   /**
    * Optional sort value for pagination.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing StaticCidrsListParameters.sortValue retains the sortValue query parameter; preserve wire compatibility."
   @query("sortValue")
   sortValue?: string;
 };

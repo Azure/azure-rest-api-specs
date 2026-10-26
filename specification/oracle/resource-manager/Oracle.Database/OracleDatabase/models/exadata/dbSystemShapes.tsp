@@ -113,10 +113,12 @@ model DbSystemShapeProperties {
 @added(Versions.v20241201_preview)
 @doc("Provides GiMinorVersion query parameter for list operations.")
 model DbSystemShapeFilter {
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing DbSystemShapeFilter.zone retains the zone query parameter; preserve wire compatibility."
   @query
   @doc("Filters the result for the given Azure Availability Zone")
   zone?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing DbSystemShapeFilter.shapeAttribute retains the shapeAttribute query parameter; preserve wire compatibility."
   @added(Versions.v20250801_preview)
   @query
   @doc("Filters the result for the given Shape Attribute, such as BLOCK_STORAGE or SMART_STORAGE.")

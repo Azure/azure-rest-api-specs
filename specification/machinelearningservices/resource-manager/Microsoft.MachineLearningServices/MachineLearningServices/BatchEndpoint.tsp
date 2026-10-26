@@ -113,12 +113,14 @@ interface BatchEndpoints {
       /**
        * Number of endpoints to be retrieved in a page of results.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.count retains the count query parameter; preserve wire compatibility."
       @query("count")
       count?: int32;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
     },

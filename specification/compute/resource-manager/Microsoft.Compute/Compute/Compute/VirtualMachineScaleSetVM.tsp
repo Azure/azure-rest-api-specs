@@ -185,12 +185,14 @@ interface VirtualMachineScaleSetVMS {
       /**
        * The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$select retains the $select query parameter; preserve wire compatibility."
       @query("$select")
       $select?: string;
 
       /**
        * The expand expression to apply to the operation. Allowed values are 'instanceView'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },

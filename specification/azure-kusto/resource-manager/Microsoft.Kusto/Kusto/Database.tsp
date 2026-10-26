@@ -138,6 +138,7 @@ interface Databases {
       /**
        * limit the number of results
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByCluster.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @minValue(5)
       @query("$top")
@@ -146,6 +147,7 @@ interface Databases {
       /**
        * Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByCluster.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: string;
     }

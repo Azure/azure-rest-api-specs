@@ -52,18 +52,21 @@ interface ManagedInstanceQueries {
       /**
        * Start time for observed period.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByQuery.startTime retains the startTime query parameter; preserve wire compatibility."
       @query("startTime")
       startTime?: string;
 
       /**
        * End time for observed period.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByQuery.endTime retains the endTime query parameter; preserve wire compatibility."
       @query("endTime")
       endTime?: string;
 
       /**
        * The time step to be used to summarize the metric values.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByQuery.interval retains the interval query parameter; preserve wire compatibility."
       @query("interval")
       interval?: QueryTimeGrainType;
     }

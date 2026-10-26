@@ -164,43 +164,52 @@ interface Profiles {
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getLogAnalyticsMetrics.metrics retains the metrics query parameter; preserve wire compatibility."
       @query(#{ name: "metrics", explode: true })
       metrics: LogMetric[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getLogAnalyticsMetrics.dateTimeBegin retains the dateTimeBegin query parameter; preserve wire compatibility."
       @query("dateTimeBegin")
       dateTimeBegin: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getLogAnalyticsMetrics.dateTimeEnd retains the dateTimeEnd query parameter; preserve wire compatibility."
       @query("dateTimeEnd")
       dateTimeEnd: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getLogAnalyticsMetrics.granularity retains the granularity query parameter; preserve wire compatibility."
       @query("granularity")
       granularity: LogMetricsGranularity;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getLogAnalyticsMetrics.groupBy retains the groupBy query parameter; preserve wire compatibility."
       @query(#{ name: "groupBy", explode: true })
       groupBy?: LogMetricsGroupBy[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getLogAnalyticsMetrics.continents retains the continents query parameter; preserve wire compatibility."
       @query(#{ name: "continents", explode: true })
       continents?: string[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getLogAnalyticsMetrics.countryOrRegions retains the countryOrRegions query parameter; preserve wire compatibility."
       @query(#{ name: "countryOrRegions", explode: true })
       countryOrRegions?: string[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getLogAnalyticsMetrics.customDomains retains the customDomains query parameter; preserve wire compatibility."
       @query(#{ name: "customDomains", explode: true })
       customDomains: string[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getLogAnalyticsMetrics.protocols retains the protocols query parameter; preserve wire compatibility."
       @query(#{ name: "protocols", explode: true })
       protocols: string[];
     }
@@ -217,28 +226,34 @@ interface Profiles {
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getLogAnalyticsRankings.rankings retains the rankings query parameter; preserve wire compatibility."
       @query(#{ name: "rankings", explode: true })
       rankings: LogRanking[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getLogAnalyticsRankings.metrics retains the metrics query parameter; preserve wire compatibility."
       @query(#{ name: "metrics", explode: true })
       metrics: LogRankingMetric[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getLogAnalyticsRankings.maxRanking retains the maxRanking query parameter; preserve wire compatibility."
       @query("maxRanking")
       maxRanking: int32;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getLogAnalyticsRankings.dateTimeBegin retains the dateTimeBegin query parameter; preserve wire compatibility."
       @query("dateTimeBegin")
       dateTimeBegin: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getLogAnalyticsRankings.dateTimeEnd retains the dateTimeEnd query parameter; preserve wire compatibility."
       @query("dateTimeEnd")
       dateTimeEnd: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getLogAnalyticsRankings.customDomains retains the customDomains query parameter; preserve wire compatibility."
       @query(#{ name: "customDomains", explode: true })
       customDomains?: string[];
     }
@@ -275,33 +290,40 @@ interface Profiles {
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getWafLogAnalyticsMetrics.metrics retains the metrics query parameter; preserve wire compatibility."
       @query(#{ name: "metrics", explode: true })
       metrics: WafMetric[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getWafLogAnalyticsMetrics.dateTimeBegin retains the dateTimeBegin query parameter; preserve wire compatibility."
       @query("dateTimeBegin")
       dateTimeBegin: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getWafLogAnalyticsMetrics.dateTimeEnd retains the dateTimeEnd query parameter; preserve wire compatibility."
       @query("dateTimeEnd")
       dateTimeEnd: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getWafLogAnalyticsMetrics.granularity retains the granularity query parameter; preserve wire compatibility."
       @query("granularity")
       granularity: WafGranularity;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getWafLogAnalyticsMetrics.actions retains the actions query parameter; preserve wire compatibility."
       @query(#{ name: "actions", explode: true })
       actions?: WafAction[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getWafLogAnalyticsMetrics.groupBy retains the groupBy query parameter; preserve wire compatibility."
       @query(#{ name: "groupBy", explode: true })
       groupBy?: WafRankingGroupBy[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getWafLogAnalyticsMetrics.ruleTypes retains the ruleTypes query parameter; preserve wire compatibility."
       @query(#{ name: "ruleTypes", explode: true })
       ruleTypes?: WafRuleType[];
     }
@@ -318,33 +340,40 @@ interface Profiles {
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getWafLogAnalyticsRankings.metrics retains the metrics query parameter; preserve wire compatibility."
       @query(#{ name: "metrics", explode: true })
       metrics: WafMetric[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getWafLogAnalyticsRankings.dateTimeBegin retains the dateTimeBegin query parameter; preserve wire compatibility."
       @query("dateTimeBegin")
       dateTimeBegin: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getWafLogAnalyticsRankings.dateTimeEnd retains the dateTimeEnd query parameter; preserve wire compatibility."
       @query("dateTimeEnd")
       dateTimeEnd: utcDateTime;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getWafLogAnalyticsRankings.maxRanking retains the maxRanking query parameter; preserve wire compatibility."
       @query("maxRanking")
       maxRanking: int32;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getWafLogAnalyticsRankings.rankings retains the rankings query parameter; preserve wire compatibility."
       @query(#{ name: "rankings", explode: true })
       rankings: WafRankingType[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getWafLogAnalyticsRankings.actions retains the actions query parameter; preserve wire compatibility."
       @query(#{ name: "actions", explode: true })
       actions?: WafAction[];
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getWafLogAnalyticsRankings.ruleTypes retains the ruleTypes query parameter; preserve wire compatibility."
       @query(#{ name: "ruleTypes", explode: true })
       ruleTypes?: WafRuleType[];
     }

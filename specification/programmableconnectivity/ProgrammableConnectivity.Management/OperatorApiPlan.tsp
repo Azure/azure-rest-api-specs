@@ -138,6 +138,7 @@ interface OperatorApiPlans {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.top retains the $top query parameter; preserve wire compatibility."
       @maxValue(20)
       @minValue(1)
       @query("$top")
@@ -146,6 +147,7 @@ interface OperatorApiPlans {
       /**
        * An optional query parameter which specifies the number of records to be skipped.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       skip?: int32;
     }

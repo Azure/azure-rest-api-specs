@@ -40,6 +40,7 @@ interface AlertRuleRecommendationsOperationGroup {
       /**
        * The recommendations target type.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTargetType.targetType retains the targetType query parameter; preserve wire compatibility."
       @query("targetType")
       targetType: string;
     }

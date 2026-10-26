@@ -121,18 +121,21 @@ interface Workbooks {
       /**
        * Category of workbook to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.category retains the category query parameter; preserve wire compatibility."
       @query("category")
       category: CategoryType;
 
       /**
        * Tags presents on each workbook returned.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string[];
 
       /**
        * Flag indicating whether or not to return the full content for each applicable workbook. If false, only return summary content for workbooks.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.canFetchContent retains the canFetchContent query parameter; preserve wire compatibility."
       @query("canFetchContent")
       canFetchContent?: boolean;
     },
@@ -187,24 +190,28 @@ interface WorkbookOperationGroup {
       /**
        * Category of workbook to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.category retains the category query parameter; preserve wire compatibility."
       @query("category")
       category: CategoryType;
 
       /**
        * Tags presents on each workbook returned.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string[];
 
       /**
        * Azure Resource Id that will fetch all linked workbooks.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.sourceId retains the sourceId query parameter; preserve wire compatibility."
       @query("sourceId")
       sourceId?: string;
 
       /**
        * Flag indicating whether or not to return the full content for each applicable workbook. If false, only return summary content for workbooks.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.canFetchContent retains the canFetchContent query parameter; preserve wire compatibility."
       @query("canFetchContent")
       canFetchContent?: boolean;
     },

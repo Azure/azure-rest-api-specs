@@ -93,12 +93,14 @@ interface LongTermRetentionBackups {
       /**
        * Whether or not to only get the latest backup for each database.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByDatabase.onlyLatestPerDatabase retains the onlyLatestPerDatabase query parameter; preserve wire compatibility."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 
       /**
        * Whether to query against just live databases, just deleted databases, or all databases.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByDatabase.databaseState retains the databaseState query parameter; preserve wire compatibility."
       @query("databaseState")
       databaseState?: DatabaseState;
     },
@@ -254,12 +256,14 @@ interface LongTermRetentionBackupOperationGroup {
       /**
        * Whether or not to only get the latest backup for each database.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupDatabase.onlyLatestPerDatabase retains the onlyLatestPerDatabase query parameter; preserve wire compatibility."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 
       /**
        * Whether to query against just live databases, just deleted databases, or all databases.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroupDatabase.databaseState retains the databaseState query parameter; preserve wire compatibility."
       @query("databaseState")
       databaseState?: DatabaseState;
     },

@@ -91,6 +91,7 @@ interface CloudHsmClusters {
       /**
        * The page-continuation token to use with a paged version of this API
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: string;
     }
@@ -105,6 +106,7 @@ interface CloudHsmClusters {
       /**
        * The page-continuation token to use with a paged version of this API
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: string;
     }

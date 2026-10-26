@@ -82,12 +82,14 @@ interface AddressResources {
       /**
        * $skipToken is supported on Get list of addresses, which provides the next page in the list of addresses.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
 
       /**
        * $top is supported on fetching list of resources. $top=10 means that the first 10 items in the list will be returned to the API caller.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
@@ -109,12 +111,14 @@ interface AddressResources {
       /**
        * $skipToken is supported on Get list of addresses, which provides the next page in the list of addresses.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
 
       /**
        * $top is supported on fetching list of resources. $top=10 means that the first 10 items in the list will be returned to the API caller.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },

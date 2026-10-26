@@ -34,30 +34,35 @@ interface ReservationOperationGroup {
       /**
        * May be used to sort order by reservation properties.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAll.$orderby retains the $orderby query parameter; preserve wire compatibility."
       @query("$orderby")
       $orderby?: string;
 
       /**
        * To indicate whether to refresh the roll up counts of the reservations group by provisioning states
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAll.refreshSummary retains the refreshSummary query parameter; preserve wire compatibility."
       @query("refreshSummary")
       refreshSummary?: string;
 
       /**
        * The number of reservations to skip from the list before returning results
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAll.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: float32;
 
       /**
        * The selected provisioning state
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAll.selectedState retains the selectedState query parameter; preserve wire compatibility."
       @query("selectedState")
       selectedState?: string;
 
       /**
        * To number of reservations to return
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAll.take retains the take query parameter; preserve wire compatibility."
       @query("take")
       take?: float32;
     },
@@ -81,22 +86,27 @@ op getCatalog(
   ...SubscriptionIdParameter,
 
   /** The type of the resource for which the skus should be provided. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getCatalog.reservedResourceType retains the reservedResourceType query parameter; preserve wire compatibility."
   @query("reservedResourceType")
   reservedResourceType?: string,
 
   /** Filters the skus based on the location specified in this parameter. This can be an azure region or global */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getCatalog.location retains the location query parameter; preserve wire compatibility."
   @query
   location?: string,
 
   /** Publisher id used to get the third party products */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getCatalog.publisherId retains the publisherId query parameter; preserve wire compatibility."
   @query("publisherId")
   publisherId?: string,
 
   /** Offer id used to get the third party products */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getCatalog.offerId retains the offerId query parameter; preserve wire compatibility."
   @query("offerId")
   offerId?: string,
 
   /** Plan id used to get the third party products */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getCatalog.planId retains the planId query parameter; preserve wire compatibility."
   @query("planId")
   planId?: string,
 
@@ -105,10 +115,12 @@ op getCatalog(
   $filter?: string,
 
   /** The number of reservations to skip from the list before returning results */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getCatalog.$skip retains the $skip query parameter; preserve wire compatibility."
   @query("$skip")
   $skip?: float32,
 
   /** To number of reservations to return */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getCatalog.$take retains the $take query parameter; preserve wire compatibility."
   @query("$take")
   $take?: float32,
 ): ArmResponse<CatalogsResult> | Error;

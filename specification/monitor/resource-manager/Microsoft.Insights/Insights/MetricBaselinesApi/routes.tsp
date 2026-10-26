@@ -32,36 +32,42 @@ interface BaselinesOperationGroup {
       /**
        * The names of the metrics (comma separated) to retrieve. Special case: If a metricname itself has a comma in it then use %2 to indicate it. Eg: 'Metric,Name1' should be **'Metric%2Name1'**
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.metricnames retains the metricnames query parameter; preserve wire compatibility."
       @query("metricnames")
       metricnames?: string;
 
       /**
        * Metric namespace that contains the requested metric names.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.metricnamespace retains the metricnamespace query parameter; preserve wire compatibility."
       @query("metricnamespace")
       metricnamespace?: string;
 
       /**
        * The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.timespan retains the timespan query parameter; preserve wire compatibility."
       @query("timespan")
       timespan?: string;
 
       /**
        * The interval (i.e. timegrain) of the query.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.interval retains the interval query parameter; preserve wire compatibility."
       @query("interval")
       interval?: duration;
 
       /**
        * The list of aggregation types (comma separated) to retrieve.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.aggregation retains the aggregation query parameter; preserve wire compatibility."
       @query("aggregation")
       aggregation?: string;
 
       /**
        * The list of sensitivities (comma separated) to retrieve.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.sensitivities retains the sensitivities query parameter; preserve wire compatibility."
       @query("sensitivities")
       sensitivities?: string;
 
@@ -74,6 +80,7 @@ interface BaselinesOperationGroup {
       /**
        * Allows retrieving only metadata of the baseline. On data request all information is retrieved.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.resultType retains the resultType query parameter; preserve wire compatibility."
       @query("resultType")
       resultType?: ResultType;
     },

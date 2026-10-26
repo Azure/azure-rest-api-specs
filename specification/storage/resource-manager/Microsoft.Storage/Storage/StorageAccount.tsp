@@ -315,6 +315,7 @@ interface StorageAccounts {
       /**
        * Optional, specifies the maximum number of storage task assignment instances to be included in the list response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing storageTaskAssignmentsInstancesReportList.$maxpagesize retains the $maxpagesize query parameter; preserve wire compatibility."
       @query("$maxpagesize")
       $maxpagesize?: int32;
 

@@ -842,6 +842,7 @@ model CustomTopQueryParameter {
   /**
    * The number of result items to return.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing CustomTopQueryParameter.top retains the $top query parameter; preserve wire compatibility."
   @query("$top")
   top?: int32;
 }
@@ -853,6 +854,7 @@ model CustomSkipQueryParameter {
   /**
    * The number of result items to skip.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing CustomSkipQueryParameter.skip retains the $skip query parameter; preserve wire compatibility."
   @query("$skip")
   skip?: int32;
 }
@@ -864,6 +866,7 @@ model CustomMaxPageSizeQueryParameter {
   /**
    * The maximum number of result items per page.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing CustomMaxPageSizeQueryParameter.maxpagesize retains the $maxpagesize query parameter; preserve wire compatibility."
   @query("$maxpagesize")
   maxpagesize?: int32;
 }

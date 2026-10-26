@@ -37,18 +37,21 @@ interface AnalyticsItemsOperationGroup {
     /**
      * Enum indicating if this item definition is owned by a specific user or is shared between all users with access to the Application Insights component.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.scope retains the scope query parameter; preserve wire compatibility."
     @query("scope")
     scope?: ItemScope = ItemScope.shared,
 
     /**
      * Enum indicating the type of the Analytics item.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.type retains the type query parameter; preserve wire compatibility."
     @query("type")
     type?: ItemTypeParameter = ItemTypeParameter.none,
 
     /**
      * Flag indicating whether or not to return the content of each applicable item. If false, only return the item information.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.includeContent retains the includeContent query parameter; preserve wire compatibility."
     @query("includeContent")
     includeContent?: boolean,
   ): ArmResponse<ApplicationInsightsComponentAnalyticsItem[]>;

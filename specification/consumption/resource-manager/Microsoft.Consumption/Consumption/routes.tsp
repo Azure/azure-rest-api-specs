@@ -60,6 +60,7 @@ alias UsageDetailsListParameters = {
   /**
    * May be used to expand the properties/additionalInfo or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing UsageDetailsListParameters.$expand retains the $expand query parameter; preserve wire compatibility."
   @query("$expand")
   $expand?: string;
 
@@ -72,12 +73,14 @@ alias UsageDetailsListParameters = {
   /**
    * Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing UsageDetailsListParameters.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
   @query("$skiptoken")
   $skiptoken?: string;
 
   /**
    * May be used to limit the number of results to the most recent N usageDetails.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing UsageDetailsListParameters.$top retains the $top query parameter; preserve wire compatibility."
   @maxValue(1000)
   @minValue(1)
   @query("$top")
@@ -86,6 +89,7 @@ alias UsageDetailsListParameters = {
   /**
    * Allows to select different type of cost/usage records.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing UsageDetailsListParameters.metric retains the metric query parameter; preserve wire compatibility."
   @query("metric")
   metric?: Metrictype;
 };
@@ -121,6 +125,7 @@ alias MarketplacesListParameters = {
   /**
    * May be used to limit the number of results to the most recent N marketplaces.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing MarketplacesListParameters.$top retains the $top query parameter; preserve wire compatibility."
   @maxValue(1000)
   @minValue(1)
   @query("$top")
@@ -129,6 +134,7 @@ alias MarketplacesListParameters = {
   /**
    * Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing MarketplacesListParameters.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
   @query("$skiptoken")
   $skiptoken?: string;
 };
@@ -186,12 +192,14 @@ interface ChargesOperationGroup {
       /**
        * Start date
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.startDate retains the startDate query parameter; preserve wire compatibility."
       @query("startDate")
       startDate?: string;
 
       /**
        * End date
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.endDate retains the endDate query parameter; preserve wire compatibility."
       @query("endDate")
       endDate?: string;
 
@@ -204,6 +212,7 @@ interface ChargesOperationGroup {
       /**
        * May be used to group charges for billingAccount scope by properties/billingProfileId, properties/invoiceSectionId, properties/customerId (specific for Partner Led), or for billingProfile scope by properties/invoiceSectionId.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$apply retains the $apply query parameter; preserve wire compatibility."
       @query("$apply")
       $apply?: string;
     },
@@ -315,6 +324,7 @@ interface ReservationsSummariesOperationGroup {
     /**
      * Can be daily or monthly
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByReservationOrder.grain retains the grain query parameter; preserve wire compatibility."
     @query("grain")
     grain: Datagrain,
 
@@ -364,6 +374,7 @@ interface ReservationsSummariesOperationGroup {
     /**
      * Can be daily or monthly
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByReservationOrderAndReservation.grain retains the grain query parameter; preserve wire compatibility."
     @query("grain")
     grain: Datagrain,
 
@@ -390,18 +401,21 @@ interface ReservationsSummariesOperationGroup {
       /**
        * Can be daily or monthly
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.grain retains the grain query parameter; preserve wire compatibility."
       @query("grain")
       grain: Datagrain;
 
       /**
        * Start date. Only applicable when querying with billing profile
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.startDate retains the startDate query parameter; preserve wire compatibility."
       @query("startDate")
       startDate?: string;
 
       /**
        * End date. Only applicable when querying with billing profile
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.endDate retains the endDate query parameter; preserve wire compatibility."
       @query("endDate")
       endDate?: string;
 
@@ -414,12 +428,14 @@ interface ReservationsSummariesOperationGroup {
       /**
        * Reservation Id GUID. Only valid if reservationOrderId is also provided. Filter to a specific reservation
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.reservationId retains the reservationId query parameter; preserve wire compatibility."
       @query("reservationId")
       reservationId?: string;
 
       /**
        * Reservation Order Id GUID. Required if reservationId is provided. Filter to a specific reservation order
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.reservationOrderId retains the reservationOrderId query parameter; preserve wire compatibility."
       @query("reservationOrderId")
       reservationOrderId?: string;
     },
@@ -525,12 +541,14 @@ interface ReservationsDetailsOperationGroup {
       /**
        * Start date. Only applicable when querying with billing profile
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.startDate retains the startDate query parameter; preserve wire compatibility."
       @query("startDate")
       startDate?: string;
 
       /**
        * End date. Only applicable when querying with billing profile
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.endDate retains the endDate query parameter; preserve wire compatibility."
       @query("endDate")
       endDate?: string;
 
@@ -543,12 +561,14 @@ interface ReservationsDetailsOperationGroup {
       /**
        * Reservation Id GUID. Only valid if reservationOrderId is also provided. Filter to a specific reservation
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.reservationId retains the reservationId query parameter; preserve wire compatibility."
       @query("reservationId")
       reservationId?: string;
 
       /**
        * Reservation Order Id GUID. Required if reservationId is provided. Filter to a specific reservation order
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.reservationOrderId retains the reservationOrderId query parameter; preserve wire compatibility."
       @query("reservationOrderId")
       reservationOrderId?: string;
     },
@@ -606,30 +626,35 @@ interface ReservationRecommendationDetailsOperationGroup {
     /**
      * Scope of the reservation.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing get.scope retains the scope query parameter; preserve wire compatibility."
     @query("scope")
     scope: Scope,
 
     /**
      * Used to select the region the recommendation should be generated for.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing get.region retains the region query parameter; preserve wire compatibility."
     @query("region")
     region: string,
 
     /**
      * Specify length of reservation recommendation term.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing get.term retains the term query parameter; preserve wire compatibility."
     @query("term")
     term: Term,
 
     /**
      * Filter the time period on which reservation recommendation results are based.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing get.lookBackPeriod retains the lookBackPeriod query parameter; preserve wire compatibility."
     @query("lookBackPeriod")
     lookBackPeriod: LookBackPeriod,
 
     /**
      * Filter the products for which reservation recommendation results are generated. Examples: Standard_DS1_v2 (for VM), Premium_SSD_Managed_Disks_P30 (for Managed Disks)
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing get.product retains the product query parameter; preserve wire compatibility."
     @query("product")
     product: string,
 
@@ -642,6 +667,7 @@ interface ReservationRecommendationDetailsOperationGroup {
     /**
      * Specify the management group ID. Required when recommendation scope is 'ManagementGroup'.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing get.managementGroupId retains the managementGroupId query parameter; preserve wire compatibility."
     @added(Versions.v2026_06_01)
     @query("managementGroupId")
     managementGroupId?: string,
@@ -692,12 +718,14 @@ interface ReservationTransactionsOperationGroup {
     /**
      * Applies mark up to the transactions if the caller is a partner.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.useMarkupIfPartner retains the useMarkupIfPartner query parameter; preserve wire compatibility."
     @query("useMarkupIfPartner")
     useMarkupIfPartner?: boolean,
 
     /**
      * Preview markup percentage to be applied.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.previewMarkupPercentage retains the previewMarkupPercentage query parameter; preserve wire compatibility."
     @query("previewMarkupPercentage")
     previewMarkupPercentage?: decimal,
   ): ReservationTransactionsListResult | ErrorResponse;
@@ -867,12 +895,14 @@ interface EventsOperationGroup {
     /**
      * Start date
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingProfile.startDate retains the startDate query parameter; preserve wire compatibility."
     @query("startDate")
     startDate: string,
 
     /**
      * End date
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingProfile.endDate retains the endDate query parameter; preserve wire compatibility."
     @query("endDate")
     endDate: string,
   ): Events | ErrorResponse;

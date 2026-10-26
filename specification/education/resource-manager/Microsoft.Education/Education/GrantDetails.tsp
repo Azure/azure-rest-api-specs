@@ -99,6 +99,7 @@ interface Grants {
       /**
        * May be used to include information about budget that has been allocated.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.includeAllocatedBudget retains the includeAllocatedBudget query parameter; preserve wire compatibility."
       @query("includeAllocatedBudget")
       includeAllocatedBudget?: boolean;
     },
@@ -115,6 +116,7 @@ interface Grants {
       /**
        * May be used to include information about budget that has been allocated.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAll.includeAllocatedBudget retains the includeAllocatedBudget query parameter; preserve wire compatibility."
       @query("includeAllocatedBudget")
       includeAllocatedBudget?: boolean;
     },

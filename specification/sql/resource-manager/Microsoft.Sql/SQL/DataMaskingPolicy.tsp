@@ -127,6 +127,7 @@ interface DataMaskingPolicies {
       /**
        * The number of elements in the collection to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByDatabase.$skip retains the $skip query parameter; preserve wire compatibility."
       @added(Versions.v2025_02_01_preview)
       @query("$skip")
       $skip?: int64;

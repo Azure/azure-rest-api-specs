@@ -63,18 +63,21 @@ interface ScalingPlanPooledSchedules {
       /**
        * Number of items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @query("pageSize")
       pageSize?: int32;
 
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.isDescending retains the isDescending query parameter; preserve wire compatibility."
       @query("isDescending")
       isDescending?: boolean;
 
       /**
        * Initial number of items to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.initialSkip retains the initialSkip query parameter; preserve wire compatibility."
       @query("initialSkip")
       initialSkip?: int32;
     },

@@ -133,12 +133,14 @@ interface DataCollectionRuleResources {
       /**
        * (Optional) The continuation token for paginated responses
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByRule.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
 
       /**
        * (Optional) The max number of items to return per page
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByRule.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     },
