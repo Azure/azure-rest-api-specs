@@ -2913,11 +2913,29 @@ model ApiKeys {
   /**
    * Gets the value of key 1.
    */
+  @renamedFrom(Versions.v2026_11_01, "key1")
+  @removed(Versions.v2026_11_01)
+  key1Legacy?: string;
+
+  /**
+   * Gets the value of key 1.
+   */
+  @added(Versions.v2026_11_01)
+  @secret
   key1?: string;
 
   /**
    * Gets the value of key 2.
    */
+  @renamedFrom(Versions.v2026_11_01, "key2")
+  @removed(Versions.v2026_11_01)
+  key2Legacy?: string;
+
+  /**
+   * Gets the value of key 2.
+   */
+  @added(Versions.v2026_11_01)
+  @secret
   key2?: string;
 }
 
@@ -7933,14 +7951,27 @@ model PolicyExpressionEvaluationDetails {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-@added(Versions.v2026_11_15_preview)
 model ManagedComputeCapacityProperties {
   /**
    * The type of accelerator (e.g., Azure.A100, Azure.H100).
    */
   @visibility(Lifecycle.Read)
   acceleratorType?: string;
+
+  /**
+   * The capacity offer scope: Global or DataZone. Omitted for deployment-scoped results.
+   */
+  @added(Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  offerScope?: string;
+
+  /**
+   * The identifier within the offer scope: an empty string for Global, or US or EU
+   * for DataZone. Omitted for deployment-scoped results.
+   */
+  @added(Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  scopeId?: string;
 
   /**
    * The Azure region where the capacity is available.
@@ -7954,6 +7985,14 @@ model ManagedComputeCapacityProperties {
    */
   @visibility(Lifecycle.Read)
   availableAccelerators?: int32;
+
+  /**
+   * The total number of available accelerators summed across regions within the scope.
+   * Omitted for deployment-scoped results.
+   */
+  @added(Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  totalAvailableAccelerators?: int32;
 
   /**
    * Capacity information broken down by deployment size.
@@ -7973,8 +8012,6 @@ model ManagedComputeCapacityProperties {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-@added(Versions.v2026_11_15_preview)
 model DeploymentSizeCapacity {
   /**
    * The number of accelerators required per model instance.
@@ -8005,8 +8042,6 @@ model DeploymentSizeCapacity {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-@added(Versions.v2026_11_15_preview)
 model ManagedComputeCapacityListResult {
   /**
    * The link used to get the next page of managed compute capacities.
