@@ -1,0 +1,51 @@
+{
+  "title": "Get the individual virtual machine results for a bulk create operation",
+  "operationId": "BulkCreate_VirtualMachinesGetOperationStatus",
+  "parameters": {
+    "api-version": "2026-10-06",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-bulk-create",
+    "location": "eastus",
+    "name": "11111111-1111-4111-8111-111111111111"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-bulk-create/providers/Microsoft.Compute/virtualMachines/11111111-1111-4111-8111-111111111111_0",
+            "operation": {
+              "operationId": "55555555-5555-4555-8555-555555555550",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-bulk-create/providers/Microsoft.Compute/virtualMachines/11111111-1111-4111-8111-111111111111_0",
+              "opType": "Create",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "state": "Succeeded",
+              "completedAt": "2026-10-06T10:05:00Z"
+            },
+            "virtualMachineInfo": {
+              "name": "11111111-1111-4111-8111-111111111111_0",
+              "vmSize": "Standard_D2s_v5",
+              "zone": "1"
+            }
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-bulk-create/providers/Microsoft.Compute/virtualMachines/11111111-1111-4111-8111-111111111111_1",
+            "operation": {
+              "operationId": "55555555-5555-4555-8555-555555555551",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-bulk-create/providers/Microsoft.Compute/virtualMachines/11111111-1111-4111-8111-111111111111_1",
+              "opType": "Create",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "state": "Succeeded",
+              "completedAt": "2026-10-06T10:05:00Z"
+            },
+            "virtualMachineInfo": {
+              "name": "11111111-1111-4111-8111-111111111111_1",
+              "vmSize": "Standard_D2s_v5",
+              "zone": "1"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

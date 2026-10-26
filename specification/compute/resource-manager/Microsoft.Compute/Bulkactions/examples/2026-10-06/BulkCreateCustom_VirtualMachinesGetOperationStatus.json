@@ -1,0 +1,51 @@
+{
+  "title": "Get the individual virtual machine results for a bulk create custom operation",
+  "operationId": "BulkCreateCustom_VirtualMachinesGetOperationStatus",
+  "parameters": {
+    "api-version": "2026-10-06",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-bulk-create",
+    "location": "eastus",
+    "name": "22222222-2222-4222-8222-222222222222"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-bulk-create/providers/Microsoft.Compute/virtualMachines/web-01",
+            "operation": {
+              "operationId": "55555555-5555-4555-8555-555555555550",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-bulk-create/providers/Microsoft.Compute/virtualMachines/web-01",
+              "opType": "Create",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "state": "Succeeded",
+              "completedAt": "2026-10-06T10:05:00Z"
+            },
+            "virtualMachineInfo": {
+              "name": "web-01",
+              "vmSize": "Standard_D2s_v5",
+              "zone": "1"
+            }
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-bulk-create/providers/Microsoft.Compute/virtualMachines/worker-01",
+            "operation": {
+              "operationId": "55555555-5555-4555-8555-555555555551",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-bulk-create/providers/Microsoft.Compute/virtualMachines/worker-01",
+              "opType": "Create",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "state": "Succeeded",
+              "completedAt": "2026-10-06T10:05:00Z"
+            },
+            "virtualMachineInfo": {
+              "name": "worker-01",
+              "vmSize": "Standard_D2s_v5",
+              "zone": "1"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
