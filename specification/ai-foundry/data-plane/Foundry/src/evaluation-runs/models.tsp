@@ -607,11 +607,11 @@ model TaskRun {
   evaluation_run_id: string;
 
   /** The Task ID. */
-  task_id?: string;
+  task_id: string;
 
-  /** The one-based repetition number, present with `task_id`. */
+  /** The one-based repetition number of this Task. */
   @minValue(1)
-  repetition?: int32;
+  repetition: int32;
 
   /** The quality result, set exactly when `status` is terminal; otherwise null. */
   result: TaskRunResult | null;
@@ -620,10 +620,10 @@ model TaskRun {
   provenance: SourceProvenance;
 
   /** The resolved target invoked by this TaskRun. */
-  target?: EvaluationTargetDefinition;
+  target: EvaluationTargetDefinition;
 
   /** The Task's inputs as sent to the agent; graders read them through `{{inputs.*}}`. */
-  inputs?: PromptTaskInput;
+  inputs: PromptTaskInput;
 
   /** The Task's reference values; graders read them through `{{expected.*}}`. */
   expected?: Record<unknown>;

@@ -90786,8 +90786,12 @@ components:
         - id
         - status
         - evaluation_run_id
+        - task_id
+        - repetition
         - result
         - provenance
+        - target
+        - inputs
         - grader_results
         - phase_results
         - usage
@@ -90814,7 +90818,7 @@ components:
           type: integer
           format: int32
           minimum: 1
-          description: The one-based repetition number, present with `task_id`.
+          description: The one-based repetition number of this Task.
         result:
           anyOf:
             - $ref: '#/components/schemas/TaskRunResult'
