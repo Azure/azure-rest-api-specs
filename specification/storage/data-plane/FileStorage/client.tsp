@@ -223,30 +223,25 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   Directory.listFilesAndDirectoriesSegment,
-  "preserveContentTypeHeader",
+  "emitContentTypeHeader",
   true,
   "go"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(Directory.listHandles, "preserveContentTypeHeader", true, "go");
+@@clientOption(Directory.listHandles, "emitContentTypeHeader", true, "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(
-  Storage.File.File.download,
-  "preserveContentTypeHeader",
-  true,
-  "go"
-);
+@@clientOption(Storage.File.File.download, "emitContentTypeHeader", true, "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   Storage.File.File.getProperties,
-  "preserveContentTypeHeader",
+  "emitContentTypeHeader",
   true,
   "go"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   Storage.File.File.listHandles,
-  "preserveContentTypeHeader",
+  "emitContentTypeHeader",
   true,
   "go"
 );
