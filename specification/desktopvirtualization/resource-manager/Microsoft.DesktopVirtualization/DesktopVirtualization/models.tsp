@@ -4035,6 +4035,7 @@ model RegistrationTokenList {
   /**
    * Link to the next page of results.
    */
+  @nextLink
   @visibility(Lifecycle.Read)
   nextLink?: string;
 }
