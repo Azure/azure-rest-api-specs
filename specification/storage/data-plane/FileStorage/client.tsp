@@ -548,3 +548,15 @@ model DirectoryClientParameters {
   "x-ms-meta-",
   "csharp"
 );
+
+// NFS List V2 Files and Directories is not yet exposed in the Go SDK.
+@@scope(FilesAndDirectoriesListSegment.symLinkItems, "!go");
+@@scope(FilesAndDirectoriesListSegment.blockDeviceItems, "!go");
+@@scope(FilesAndDirectoriesListSegment.charDeviceItems, "!go");
+@@scope(FilesAndDirectoriesListSegment.fifoItems, "!go");
+@@scope(FilesAndDirectoriesListSegment.socketItems, "!go");
+@@scope(DirectoryItem.linkCount, "!go");
+@@scope(FileItem.linkCount, "!go");
+@@scope(FileProperty.owner, "!go");
+@@scope(FileProperty.group, "!go");
+@@scope(FileProperty.fileMode, "!go");
