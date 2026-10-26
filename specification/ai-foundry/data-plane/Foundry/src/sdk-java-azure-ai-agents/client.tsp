@@ -508,7 +508,6 @@ using Azure.AI.Projects;
 );
 
 @@clientName(TelephonyBindingListItem.etag, "eTag");
-@@clientName(TelephonyCallJob.object, "objectType");
 @@clientName(
   OpenAI.TranscriptTextUsageTokensInputTokenDetails,
   "TranscriptTextInputTokenDetails"
