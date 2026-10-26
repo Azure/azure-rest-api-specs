@@ -1,0 +1,103 @@
+name: azure-typespec-author-eval
+description: unsupported target does not borrow csharp rules
+version: "1.0"
+type: capability
+area: naming
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 007003-unsupported-target-does-not-borrow-csharp-rules-trigger
+    tags:
+      suite: naming
+      mode: trigger
+    prompt: |
+      Continue TypeSpec source authoring with SDK client configuration planning only;
+      analysis, intake and general grounding are complete, and the user kept the recommended
+      default. A new, never-shipped Java-only ARM service at
+      specification/widget/resource-manager/Microsoft.Widget adds enabled: boolean to
+      WidgetProperties. No C# SDK is targeted. No authoritative Java naming guidance is
+      supplied. No network, MCP, edits, compilation or generation. Return JSON "coverage"
+      ("covered" or "not-covered"), "decorators" (only justified SDK overrides), and
+      "applied". Do not invent language conventions.
+    constraints: &a1
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azsdk-common-typespec-naming
+      - &a2
+        type: tool-calls
+        config:
+          required:
+            - name: ^(view|powershell|bash|rg)$
+              pattern: naming-conventions\.md
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - &a3
+        type: output-matches
+        config:
+          pattern: '"coverage"\s*:\s*"not-covered"'
+      - &a4
+        type: output-matches
+        config:
+          pattern: '"decorators"\s*:\s*\[\s*\]'
+      - &a5
+        type: output-matches
+        config:
+          pattern: '"applied"\s*:\s*false'
+  - name: 007003-unsupported-target-does-not-borrow-csharp-rules-forced
+    tags:
+      suite: naming
+      mode: forced
+    prompt: |
+      @azure-typespec-author Continue TypeSpec source authoring with SDK client configuration planning only;
+      analysis, intake and general grounding are complete, and the user kept the recommended
+      default. A new, never-shipped Java-only ARM service at
+      specification/widget/resource-manager/Microsoft.Widget adds enabled: boolean to
+      WidgetProperties. No C# SDK is targeted. No authoritative Java naming guidance is
+      supplied. No network, MCP, edits, compilation or generation. Return JSON "coverage"
+      ("covered" or "not-covered"), "decorators" (only justified SDK overrides), and
+      "applied". Do not invent language conventions.
+    constraints: *a1
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+            - azsdk-common-typespec-naming
+      - *a2
+      - *a3
+      - *a4
+      - *a5
+  - name: 007003-unsupported-target-does-not-borrow-csharp-rules-no-skill
+    tags:
+      suite: naming
+      mode: no-skill
+    prompt: |
+      Continue TypeSpec source authoring with SDK client configuration planning only;
+      analysis, intake and general grounding are complete, and the user kept the recommended
+      default. A new, never-shipped Java-only ARM service at
+      specification/widget/resource-manager/Microsoft.Widget adds enabled: boolean to
+      WidgetProperties. No C# SDK is targeted. No authoritative Java naming guidance is
+      supplied. No network, MCP, edits, compilation or generation. Return JSON "coverage"
+      ("covered" or "not-covered"), "decorators" (only justified SDK overrides), and
+      "applied". Do not invent language conventions.
+    constraints: *a1
+    graders:
+      - type: tool-calls
+        config:
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - *a3
+      - *a4
+      - *a5
