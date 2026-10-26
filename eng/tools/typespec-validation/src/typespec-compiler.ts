@@ -8,7 +8,6 @@ import {
 } from "@typespec/compiler";
 import { relative, resolve } from "pathe";
 import { verbatim } from "./diagnostic-content.ts";
-import { supportsColor } from "./diagnostics.ts";
 import { failure, warning, type RuleResult } from "./rule-result.ts";
 
 export interface CompileResult extends RuleResult {
@@ -78,7 +77,7 @@ function compilerResult(
   logs: string[] = [],
 ): RuleResult {
   const output = [
-    ...diagnostics.map((diagnostic) => formatDiagnostic(diagnostic, { pretty: supportsColor() })),
+    ...diagnostics.map((diagnostic) => formatDiagnostic(diagnostic, { pretty: true })),
     ...logs,
   ].join("\n");
   const label = command === "compile" ? "TypeSpec compilation" : "TypeSpec formatting";

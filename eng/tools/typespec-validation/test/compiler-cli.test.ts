@@ -211,6 +211,9 @@ it.each([
       "error tsv/compile: TypeSpec compilation failed.",
     );
     expect(stripVTControlCharacters(result.stderr)).toContain("main.tsp:1:");
+    expect(stripVTControlCharacters(result.stderr)).toMatch(
+      /> 1 \| model Invalid \{ value: Unknown; \}\n\s+\| +\^{7}/,
+    );
     expect(stripVTControlCharacters(result.stdout).includes("\u00d7 Compile")).toBe(verbose);
     expect(stripVTControlCharacters(result.stdout)).toContain(
       "6 passed | 1 failed | 1 skipped | 2 not run",
