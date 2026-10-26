@@ -213,6 +213,7 @@ interface ExpressRouteLags {
   /**
    * Retrieves the specified ExpressRouteLagLink resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing linksGet SDK method name; renaming it would break client compatibility."
   @tag("ExpressRouteLagLinks")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/links/{linkName}")
@@ -226,6 +227,7 @@ interface ExpressRouteLags {
   /**
    * Retrieve the ExpressRouteLagLink sub-resources of the specified ExpressRouteLag resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing linksList SDK method name; renaming it would break client compatibility."
   @tag("ExpressRouteLagLinks")
   @list
   @get
@@ -241,6 +243,7 @@ interface ExpressRouteLags {
   /**
    * Retrieves the specified ExpressRouteLagMember resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing membersGet SDK method name; renaming it would break client compatibility."
   @tag("ExpressRouteLagMembers")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/links/{linkName}/members/{memberName}")
@@ -254,6 +257,7 @@ interface ExpressRouteLags {
   /**
    * Retrieve the ExpressRouteLagMember sub-resources of the specified ExpressRouteLagLink resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing membersList SDK method name; renaming it would break client compatibility."
   @tag("ExpressRouteLagMembers")
   @list
   @get

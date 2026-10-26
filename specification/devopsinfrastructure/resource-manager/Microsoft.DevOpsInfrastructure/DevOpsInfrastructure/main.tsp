@@ -824,6 +824,7 @@ interface Sku {
 @armResourceOperations
 interface SubscriptionUsages {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Actions must be HTTP Post operations."
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing usages SDK method name; renaming it would break client compatibility."
   @action
   @armProviderNameValue
   @get

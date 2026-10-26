@@ -192,6 +192,7 @@ interface Sites {
   /**
    * Description for Analyze a custom hostname.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing analyzeCustomHostname SDK method name; renaming it would break client compatibility."
   @summary("Analyze a custom hostname.")
   @get
   analyzeCustomHostname is SiteOps.ActionSync<
@@ -1650,6 +1651,7 @@ interface WebApps {
   /**
    * Description for Analyze a custom hostname.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing analyzeCustomHostnameSlot SDK method name; renaming it would break client compatibility."
   @summary("Analyze a custom hostname.")
   @get
   @action("analyzeCustomHostname")

@@ -1804,6 +1804,7 @@ model AccessRulePropertiesSubscriptionsItem {
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing PrivateLinkScopeOperationStatusGetCustomized SDK method name; renaming it would break client compatibility."
 op PrivateLinkScopeOperationStatusGetCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,

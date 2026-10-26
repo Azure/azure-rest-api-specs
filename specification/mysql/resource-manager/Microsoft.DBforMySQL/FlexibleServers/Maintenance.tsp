@@ -32,6 +32,7 @@ interface Maintenances {
   /**
    * Read maintenance.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing read SDK method name; renaming it would break client compatibility."
   read is ArmResourceRead<Maintenance>;
 
   /**

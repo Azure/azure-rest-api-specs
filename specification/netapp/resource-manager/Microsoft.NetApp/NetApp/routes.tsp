@@ -51,6 +51,7 @@ interface NetAppResourceOperationGroup {
   /**
    * Provides storage to network proximity and logical zone mapping information.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing queryRegionInfo SDK method name; renaming it would break client compatibility."
   @summary("Describes region specific information.")
   @autoRoute
   @get

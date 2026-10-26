@@ -164,6 +164,7 @@ interface AutomationAccounts {
   /**
    * Gets the private link resources that need to be created for Automation account.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing automation SDK method name; renaming it would break client compatibility."
   @tag("PrivateLinkResources")
   @list
   @get

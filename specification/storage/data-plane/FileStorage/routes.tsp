@@ -840,6 +840,7 @@ interface File {
 
   /** Reads or downloads a file from the system, including its metadata and properties. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing download SDK method name; renaming it would break client compatibility."
   @get
   download is StorageOperationResponseBody<
     {

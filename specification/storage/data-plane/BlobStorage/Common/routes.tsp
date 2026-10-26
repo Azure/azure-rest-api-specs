@@ -235,6 +235,7 @@ interface Service {
   /** Lists blobs across all containers whose tags match a given search expression. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing findBlobsByTags SDK method name; renaming it would break client compatibility."
   @list
   @route("?comp=blobs")
   findBlobsByTags is StorageOperationResponseBody<
@@ -482,6 +483,7 @@ interface Container {
   /** Lists blobs in the specified container whose tags match a given search expression. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing findBlobsByTags SDK method name; renaming it would break client compatibility."
   @get
   @list
   @route("?restype=container&comp=blobs")
@@ -811,6 +813,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing download SDK method name; renaming it would break client compatibility."
   @get
   download(
     ...ApiVersionHeader,

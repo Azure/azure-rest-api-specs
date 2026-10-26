@@ -259,6 +259,7 @@ interface VirtualMachineBulkOperations {
   ): ArmResponse<ReimageResourceOperationResponse> | ErrorResponse;
 
   /** List recent errors for operations in a resource group. */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing bulkListOperationErrors SDK method name; renaming it would break client compatibility."
   @added(Versions.`2026-07-06-preview`)
   @removed(Versions.`2026-09-06-preview`)
   @added(Versions.`2026-10-06-preview`)

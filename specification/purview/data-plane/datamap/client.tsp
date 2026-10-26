@@ -54,6 +54,7 @@ interface Entity {
   addClassificationsByUniqueAttribute is PurviewDataMap.Entity.addClassificationsByUniqueAttribute;
   updateClassificationsUniqueByAttribute is PurviewDataMap.Entity.updateClassificationsByUniqueAttribute;
   batchSetClassifications is PurviewDataMap.Entity.bulkSetClassifications;
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing batchGetByUniqueAttributes SDK method name; renaming it would break client compatibility."
   batchGetByUniqueAttributes is PurviewDataMap.Entity.listByUniqueAttributes;
   getHeader is PurviewDataMap.Entity.getHeader;
   removeBusinessMetadata is PurviewDataMap.Entity.removeBusinessMetadata;
@@ -75,6 +76,7 @@ interface Entity {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
 interface Glossary {
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing batchGet SDK method name; renaming it would break client compatibility."
   batchGet is PurviewDataMap.Glossary.list;
   create is PurviewDataMap.Glossary.create;
   createCategories is PurviewDataMap.Glossary.createCategories;
