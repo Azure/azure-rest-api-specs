@@ -2762,11 +2762,29 @@ model ApiKeys {
   /**
    * Gets the value of key 1.
    */
+  @renamedFrom(Versions.v2026_11_01, "key1")
+  @removed(Versions.v2026_11_01)
+  key1Legacy?: string;
+
+  /**
+   * Gets the value of key 1.
+   */
+  @added(Versions.v2026_11_01)
+  @secret
   key1?: string;
 
   /**
    * Gets the value of key 2.
    */
+  @renamedFrom(Versions.v2026_11_01, "key2")
+  @removed(Versions.v2026_11_01)
+  key2Legacy?: string;
+
+  /**
+   * Gets the value of key 2.
+   */
+  @added(Versions.v2026_11_01)
+  @secret
   key2?: string;
 }
 
