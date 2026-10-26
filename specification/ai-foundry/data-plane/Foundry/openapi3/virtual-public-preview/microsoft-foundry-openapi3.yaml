@@ -48383,60 +48383,6 @@ components:
         A data source that selects traces for evaluation.
 
         See [create an evaluation dataset from traces](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/traces-to-dataset?tabs=python).
-    AzureAvatarVoiceSyncVoice:
-      type: object
-      required:
-        - type
-        - model
-      properties:
-        type:
-          type: string
-          enum:
-            - avatar-voice-sync
-        temperature:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: The synthesis temperature.
-        custom_lexicon_url:
-          type: string
-          format: uri
-          description: The URL of a custom pronunciation lexicon.
-        custom_text_normalization_url:
-          type: string
-          format: uri
-          description: The URL of a custom text-normalization configuration.
-        prefer_locales:
-          type: array
-          items:
-            type: string
-          description: Preferred BCP-47 locales for multilingual synthesis.
-        locale:
-          type: string
-          description: The enforced BCP-47 output locale.
-        style:
-          type: string
-          description: The voice speaking style.
-        pitch:
-          type: string
-          description: The SSML-compatible pitch adjustment.
-        rate:
-          type: string
-          description: The SSML-compatible speaking-rate adjustment.
-        volume:
-          type: string
-          description: The SSML-compatible volume adjustment.
-        model:
-          type: string
-          minLength: 1
-          description: The neural model used to synthesize the avatar voice.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentVoice'
-      description: An Azure avatar voice-synchronization configuration used by a handoff node.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     AzureContentFilterBlocklistIdResult:
       type: object
       required:
@@ -48672,65 +48618,6 @@ components:
           $ref: '#/components/schemas/AzureContentFilterSeverity'
           description: The severity level of the content.
       description: A content filter result indicating severity level and whether content was filtered.
-    AzureCustomVoice:
-      type: object
-      required:
-        - type
-        - name
-        - endpoint_id
-      properties:
-        type:
-          type: string
-          enum:
-            - azure-custom
-        temperature:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: The synthesis temperature.
-        custom_lexicon_url:
-          type: string
-          format: uri
-          description: The URL of a custom pronunciation lexicon.
-        custom_text_normalization_url:
-          type: string
-          format: uri
-          description: The URL of a custom text-normalization configuration.
-        prefer_locales:
-          type: array
-          items:
-            type: string
-          description: Preferred BCP-47 locales for multilingual synthesis.
-        locale:
-          type: string
-          description: The enforced BCP-47 output locale.
-        style:
-          type: string
-          description: The voice speaking style.
-        pitch:
-          type: string
-          description: The SSML-compatible pitch adjustment.
-        rate:
-          type: string
-          description: The SSML-compatible speaking-rate adjustment.
-        volume:
-          type: string
-          description: The SSML-compatible volume adjustment.
-        name:
-          type: string
-          minLength: 1
-          description: The custom voice name.
-        endpoint_id:
-          type: string
-          minLength: 1
-          description: The Azure Speech custom voice deployment endpoint identifier.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentVoice'
-      description: An Azure custom neural voice used by a handoff node.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     AzureFunctionBinding:
       type: object
       required:
@@ -48887,142 +48774,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - RedTeams=V1Preview
-    AzurePersonalVoice:
-      type: object
-      required:
-        - type
-        - name
-        - model
-      properties:
-        type:
-          type: string
-          enum:
-            - azure-personal
-        temperature:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: The synthesis temperature.
-        custom_lexicon_url:
-          type: string
-          format: uri
-          description: The URL of a custom pronunciation lexicon.
-        custom_text_normalization_url:
-          type: string
-          format: uri
-          description: The URL of a custom text-normalization configuration.
-        prefer_locales:
-          type: array
-          items:
-            type: string
-          description: Preferred BCP-47 locales for multilingual synthesis.
-        locale:
-          type: string
-          description: The enforced BCP-47 output locale.
-        style:
-          type: string
-          description: The voice speaking style.
-        pitch:
-          type: string
-          description: The SSML-compatible pitch adjustment.
-        rate:
-          type: string
-          description: The SSML-compatible speaking-rate adjustment.
-        volume:
-          type: string
-          description: The SSML-compatible volume adjustment.
-        name:
-          type: string
-          minLength: 1
-          description: The personal voice name.
-        model:
-          type: string
-          minLength: 1
-          description: The neural model used by the personal voice.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentVoice'
-      description: An Azure personal voice used by a handoff node.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    AzureRealtimeNativeVoice:
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        type:
-          type: string
-          enum:
-            - azure-realtime-native
-        name:
-          type: string
-          minLength: 1
-          description: The Azure realtime-native voice name.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentVoice'
-      description: An Azure realtime-native voice used by a handoff node.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    AzureStandardVoice:
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        type:
-          type: string
-          enum:
-            - azure-standard
-        temperature:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: The synthesis temperature.
-        custom_lexicon_url:
-          type: string
-          format: uri
-          description: The URL of a custom pronunciation lexicon.
-        custom_text_normalization_url:
-          type: string
-          format: uri
-          description: The URL of a custom text-normalization configuration.
-        prefer_locales:
-          type: array
-          items:
-            type: string
-          description: Preferred BCP-47 locales for multilingual synthesis.
-        locale:
-          type: string
-          description: The enforced BCP-47 output locale.
-        style:
-          type: string
-          description: The voice speaking style.
-        pitch:
-          type: string
-          description: The SSML-compatible pitch adjustment.
-        rate:
-          type: string
-          description: The SSML-compatible speaking-rate adjustment.
-        volume:
-          type: string
-          description: The SSML-compatible volume adjustment.
-        name:
-          type: string
-          minLength: 1
-          description: The Azure neural voice name.
-        multi_talker_speaker_name:
-          type: string
-          description: The speaker name used by a multi-talker voice.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentVoice'
-      description: An Azure standard neural voice used by a handoff node.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     AzureUserSecurityContext:
       type: object
       properties:
@@ -54643,11 +54394,11 @@ components:
             - $ref: '#/components/schemas/VoiceAgentToolChoice'
             - type: 'null'
           description: Tool-selection behavior for this subagent. Omission or null defaults to `auto`.
-        voice:
+        audio_output:
           anyOf:
-            - $ref: '#/components/schemas/VoiceAgentVoice'
+            - $ref: '#/components/schemas/VoiceAgentVoiceConfig'
             - type: 'null'
-          description: The voice activated for this subagent. Omission inherits the entrypoint voice; null clears it where supported.
+          description: The output voice configuration activated for this subagent, using the same flat voice fields as the top-level audio output. Omission inherits the entrypoint voice configuration; null clears it where supported.
         temperature:
           anyOf:
             - type: number
@@ -84634,26 +84385,6 @@ components:
     OpenAI.numeric:
       type: number
       format: double
-    OpenAIVoice:
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        type:
-          type: string
-          enum:
-            - openai
-        name:
-          type: string
-          minLength: 1
-          description: The OpenAI built-in voice name.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentVoice'
-      description: An OpenAI built-in voice used by a handoff node.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     OpenApiAnonymousAuthDetails:
       type: object
       required:
@@ -92285,24 +92016,71 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceAgentVoice:
+    VoiceAgentVoiceConfig:
       type: object
-      required:
-        - type
       properties:
-        type:
+        voice:
+          type: string
+          description: The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar.
+        voice_type:
           $ref: '#/components/schemas/VoiceType'
-          description: The voice implementation. Additional values may be added over time.
-      discriminator:
-        propertyName: type
-        mapping:
-          openai: '#/components/schemas/OpenAIVoice'
-          azure-standard: '#/components/schemas/AzureStandardVoice'
-          azure-custom: '#/components/schemas/AzureCustomVoice'
-          azure-personal: '#/components/schemas/AzurePersonalVoice'
-          avatar-voice-sync: '#/components/schemas/AzureAvatarVoiceSyncVoice'
-          azure-realtime-native: '#/components/schemas/AzureRealtimeNativeVoice'
-      description: A typed voice configuration used by a voice-agent handoff node.
+          description: The voice implementation.
+        voice_locale:
+          type: string
+          description: The enforced BCP-47 output locale. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
+        speed:
+          type: number
+          format: float
+          minimum: 0.25
+          maximum: 1.5
+          description: The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.
+          default: 1
+        voice_temperature:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: The voice variation temperature. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
+        custom_lexicon_url:
+          type: string
+          format: uri
+          description: The URL of a custom pronunciation lexicon. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
+        custom_text_normalization_url:
+          type: string
+          format: uri
+          description: The URL of a custom text-normalization configuration. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
+        prefer_locales:
+          type: array
+          items:
+            type: string
+          description: Preferred BCP-47 locales for multilingual synthesis. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
+        style:
+          type: string
+          description: The voice speaking style. Applies only when `voice_type` is `azure-standard`.
+        pitch:
+          type: string
+          description: The voice pitch adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
+        volume:
+          type: string
+          description: The voice volume adjustment. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.
+        custom_voice_endpoint_id:
+          type: string
+          description: The Azure custom-voice deployment endpoint identifier. Applies only when `voice_type` is `azure-custom`.
+        personal_voice_model:
+          type: string
+          description: The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`.
+      description: |-
+        Voice-specific output settings shared by the top-level audio configuration and inline subagent overrides.
+        Session-level output format and timestamp settings are intentionally excluded.
+        Provider-specific fields are selected by `voice_type`:
+        - `openai`: `voice` and `speed`.
+        - `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,
+          `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.
+        - `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.
+        - `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.
+        - `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;
+          the voice name is derived from the avatar.
+        - `azure-realtime-native`: `voice` and `speed`.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

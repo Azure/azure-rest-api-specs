@@ -128,8 +128,8 @@ model InlineVoiceSubagent {
   @doc("Tool-selection behavior for this subagent. Omission or null defaults to `auto`.")
   tool_choice?: VoiceAgentToolChoice | null;
 
-  @doc("The voice activated for this subagent. Omission inherits the entrypoint voice; null clears it where supported.")
-  voice?: VoiceAgentVoice | null;
+  @doc("The output voice configuration activated for this subagent, using the same flat voice fields as the top-level audio output. Omission inherits the entrypoint voice configuration; null clears it where supported.")
+  audio_output?: VoiceAgentVoiceConfig | null;
 
   @doc("The sampling temperature for a compatible subagent model.")
   @minValue(0)
@@ -168,122 +168,6 @@ model VoiceAgentHandoffPolicy {
   @minValue(1)
   @maxValue(100)
   max_attempts?: int32;
-}
-
-@doc("A typed voice configuration used by a voice-agent handoff node.")
-@discriminator("type")
-@extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
-model VoiceAgentVoice {
-  @doc("The voice implementation. Additional values may be added over time.")
-  type: VoiceType;
-}
-
-@doc("An OpenAI built-in voice used by a handoff node.")
-@extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
-model OpenAIVoice extends VoiceAgentVoice {
-  type: VoiceType.openai;
-
-  @doc("The OpenAI built-in voice name.")
-  @minLength(1)
-  name: string;
-}
-
-@doc("Properties shared by Azure synthesized voices used by handoff nodes.")
-@extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
-model VoiceAgentAzureVoiceProperties {
-  @doc("The synthesis temperature.")
-  @minValue(0)
-  @maxValue(1)
-  temperature?: float32;
-
-  @doc("The URL of a custom pronunciation lexicon.")
-  custom_lexicon_url?: url;
-
-  @doc("The URL of a custom text-normalization configuration.")
-  custom_text_normalization_url?: url;
-
-  @doc("Preferred BCP-47 locales for multilingual synthesis.")
-  prefer_locales?: string[];
-
-  @doc("The enforced BCP-47 output locale.")
-  locale?: string;
-
-  @doc("The voice speaking style.")
-  style?: string;
-
-  @doc("The SSML-compatible pitch adjustment.")
-  pitch?: string;
-
-  @doc("The SSML-compatible speaking-rate adjustment.")
-  rate?: string;
-
-  @doc("The SSML-compatible volume adjustment.")
-  volume?: string;
-}
-
-@doc("An Azure standard neural voice used by a handoff node.")
-@extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
-model AzureStandardVoice extends VoiceAgentVoice {
-  type: VoiceType.azure_standard;
-  ...VoiceAgentAzureVoiceProperties;
-
-  @doc("The Azure neural voice name.")
-  @minLength(1)
-  name: string;
-
-  @doc("The speaker name used by a multi-talker voice.")
-  multi_talker_speaker_name?: string;
-}
-
-@doc("An Azure custom neural voice used by a handoff node.")
-@extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
-model AzureCustomVoice extends VoiceAgentVoice {
-  type: VoiceType.azure_custom;
-  ...VoiceAgentAzureVoiceProperties;
-
-  @doc("The custom voice name.")
-  @minLength(1)
-  name: string;
-
-  @doc("The Azure Speech custom voice deployment endpoint identifier.")
-  @minLength(1)
-  endpoint_id: string;
-}
-
-@doc("An Azure personal voice used by a handoff node.")
-@extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
-model AzurePersonalVoice extends VoiceAgentVoice {
-  type: VoiceType.azure_personal;
-  ...VoiceAgentAzureVoiceProperties;
-
-  @doc("The personal voice name.")
-  @minLength(1)
-  name: string;
-
-  @doc("The neural model used by the personal voice.")
-  @minLength(1)
-  `model`: string;
-}
-
-@doc("An Azure avatar voice-synchronization configuration used by a handoff node.")
-@extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
-model AzureAvatarVoiceSyncVoice extends VoiceAgentVoice {
-  type: VoiceType.avatar_voice_sync;
-  ...VoiceAgentAzureVoiceProperties;
-
-  @doc("The neural model used to synthesize the avatar voice.")
-  @minLength(1)
-  `model`: string;
-}
-
-@doc("An Azure realtime-native voice used by a handoff node.")
-@extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
-model AzureRealtimeNativeVoice extends VoiceAgentVoice {
-  type: VoiceType.azure_realtime_native;
-
-  @doc("The Azure realtime-native voice name.")
-  @minLength(1)
-  name: string;
 }
 
 @doc("The immutable pipeline family selected for a voice-agent handoff graph.")
