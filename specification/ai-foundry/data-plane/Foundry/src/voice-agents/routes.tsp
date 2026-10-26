@@ -516,9 +516,6 @@ interface AgentTelephony {
       /** Filters bindings by provider. */
       @query provider?: TelephonyProvider;
 
-      /** Filters bindings by lifecycle status. */
-      @query status?: TelephonyBindingStatus;
-
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<TelephonyBindingListItem>

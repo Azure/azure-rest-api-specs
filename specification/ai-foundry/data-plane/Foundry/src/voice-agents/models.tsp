@@ -437,6 +437,12 @@ model VoiceRecording {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyBindingId extends string;
 
+@doc("An exact canonical E.164 number or a restricted pattern for E.164 caller numbers, up to 256 characters after trimming. Patterns must start with ^ followed by an escaped plus sign, a nonzero first digit or [1-9], then ASCII digit literals or single-digit classes/ranges with optional bounded {n} or {n,m} quantifiers, and a final $. Each bound is 1 to 15. Other regex constructs, including Unicode digit shortcuts, groups, alternation, lookahead or lookbehind assertions, backreferences, and unbounded repetition, are not supported. The schema pattern is a lexical filter; the service additionally rejects descending digit ranges and reversed quantifier bounds and verifies that every possible match has 2 to 15 ASCII digits after the plus sign. Matching covers the entire normalized canonical E.164 caller number. Supply trimmed values. Previously accepted arbitrary regexes must be replaced; they are not silently rewritten.")
+@maxLength(256)
+@pattern("^(?:\\+[1-9][0-9]{1,14}|\\^\\\\\\+(?:[1-9]|\\[1-9\\])(?:(?:[0-9]|\\[[0-9](?:-[0-9])?\\])(?:\\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\\})?)+\\$)$")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+scalar SipAllowedCallingNumber extends string;
+
 @doc("A service-generated telephony call identifier.")
 @minLength(1)
 @maxLength(128)
@@ -446,7 +452,7 @@ scalar TelephonyCallId extends string;
 @doc("The unique name of a telephony transfer target.")
 @minLength(1)
 @maxLength(64)
-@pattern("^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$")
+@pattern("^[A-Za-z0-9][A-Za-z0-9_-]{0,63}(?![\\s\\S])")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyTransferTargetName extends string;
 
@@ -460,18 +466,9 @@ union TelephonyProvider {
 
   @doc("Twilio Programmable Voice.")
   twilio: "twilio",
-}
 
-@doc("The lifecycle status of a telephony binding.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyBindingStatus {
-  string,
-
-  @doc("The binding accepts new inbound calls.")
-  active: "active",
-
-  @doc("The binding remains configured but rejects new inbound calls.")
-  suspended: "suspended",
+  @doc("Session Initiation Protocol.")
+  sip: "sip",
 }
 
 @doc("A Microsoft Teams destination for a telephony transfer target.")
@@ -517,21 +514,22 @@ model TelephonyTransferTarget {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("UpdateTelephonyBindingContent", "csharp")
 model UpdateTelephonyBindingRequest {
-  @doc("The new lifecycle status.")
-  status?: TelephonyBindingStatus;
-
-  @doc("The replacement display label. Omit it to preserve the current value; use null to clear it.")
+  @doc("The replacement display label. Omit to preserve it; null, empty or whitespace-only clears it. Nonblank values are trimmed before applying the length limit.")
   @maxLength(128)
   label?: string | null;
 
-  @doc("The replacement Foundry connection name. This property is valid only for a Teams Phone extensibility binding; a Twilio binding's connection is immutable.")
+  @doc("The replacement same-project connection name. Valid for Teams Phone extensibility and SIP bindings; a Twilio binding's connection is immutable. A SIP replacement must reference SipInbound. Explicit null or blank names are invalid.")
   @minLength(1)
   @maxLength(256)
   connection_name?: string;
 
-  @doc("The replacement Teams Phone extensibility display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone extensibility binding.")
+  @doc("The replacement Teams Phone extensibility or SIP display phone number. Omit to preserve it; null, empty or whitespace-only clears it. SIP values are display metadata, not routing keys. Not supported for Twilio.")
   @maxLength(64)
   phone_number?: string | null;
+
+  @doc("SIP-only complete caller restriction replacement. Omit to preserve; an empty array clears the restriction. Null is invalid. Source network restrictions belong to the connection, not the binding.")
+  @maxItems(64)
+  allowed_calling_numbers?: SipAllowedCallingNumber[];
 }
 
 @doc("A telephony binding owned by a voice agent.")
@@ -554,11 +552,7 @@ model TelephonyBinding {
   @maxLength(128)
   label?: string;
 
-  @doc("The lifecycle status.")
-  @visibility(Lifecycle.Read)
-  status: TelephonyBindingStatus;
-
-  @doc("The service-generated webhook URL to configure with the telephony provider.")
+  @doc("The service-generated incoming address: an HTTPS webhook for webhook-based providers or a SIP/SIPS ingress URI for SIP.")
   @visibility(Lifecycle.Read)
   incoming_call_url: url;
 }
@@ -584,8 +578,23 @@ model TwilioTelephonyBinding extends TelephonyBinding {
   provider: TelephonyProvider.twilio;
 
   @doc("The Twilio E.164 phone number.")
-  @pattern("^\\+[1-9]\\d{6,14}$")
+  @pattern("^\\+[1-9][0-9]{6,14}(?![\\s\\S])")
   phone_number: string;
+}
+
+@doc("An inbound SIP binding backed by a same-project SipInbound connection. Authentication and source-network restrictions are connection settings. Regional runtime readiness is independent of successful creation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model SipTelephonyBinding extends TelephonyBinding {
+  @doc("The SIP provider.")
+  provider: TelephonyProvider.sip;
+
+  @doc("Optional display metadata, not a routing key or E.164-constrained destination.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("Exact E.164 caller numbers or restricted fully anchored patterns. Omit or use an empty array for no caller-number restriction; the service enforces pattern semantics in addition to the lexical schema.")
+  @maxItems(64)
+  allowed_calling_numbers?: SipAllowedCallingNumber[];
 }
 
 @doc("A telephony binding returned in a list, including its entity tag.")
@@ -606,9 +615,6 @@ model TelephonyBindingListItem {
   @doc("The optional display label for the binding.")
   @maxLength(128)
   label?: string;
-
-  @doc("The lifecycle status.")
-  status: TelephonyBindingStatus;
 
   @doc("The service-generated webhook URL to configure with the telephony provider.")
   incoming_call_url: url;
@@ -640,8 +646,23 @@ model TwilioTelephonyBindingListItem extends TelephonyBindingListItem {
   provider: TelephonyProvider.twilio;
 
   @doc("The Twilio E.164 phone number.")
-  @pattern("^\\+[1-9]\\d{6,14}$")
+  @pattern("^\\+[1-9][0-9]{6,14}(?![\\s\\S])")
   phone_number: string;
+}
+
+@doc("An inbound SIP binding returned in a list, including its current entity tag.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model SipTelephonyBindingListItem extends TelephonyBindingListItem {
+  @doc("The SIP provider.")
+  provider: TelephonyProvider.sip;
+
+  @doc("Optional display phone metadata, not a routing key.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("Current exact E.164 caller numbers or restricted fully anchored patterns.")
+  @maxItems(64)
+  allowed_calling_numbers?: SipAllowedCallingNumber[];
 }
 
 /** A telephony binding response with its entity tag. */
@@ -1357,7 +1378,8 @@ model PhoneNumber extends TelephonyAddress {
   type: TelephonyAddressType.phone_number;
 
   /** E.164 phone number. */
-  @pattern("^\\+[1-9]\\d{1,14}$")
+  // ASCII digits and an absolute end assertion: $ alone also matches before a final newline.
+  @pattern("^\\+[1-9][0-9]{1,14}(?![\\s\\S])")
   value: string;
 }
 
@@ -1390,12 +1412,12 @@ model TelephonyCallJobConfiguration {
   @doc("The phone destination to call.")
   destination: TelephonyAddress;
 
-  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required.")
+  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SipOutbound. SIP authentication and source networks are connection settings: authType is CustomKeys; trimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl. Missing, null, blank or empty-object mode values default to digest; other non-string values are invalid. Digest requires nonblank username/password; IP ACL requires credentials.keys.source_cidrs as a non-null comma-separated string (4096 raw characters and 64 entries before deduplication). The empty string allows all source IPs; whitespace-only strings and empty entries are invalid. Metadata and binding CIDR fallbacks are unsupported. Native IPv4/IPv6 addresses or CIDRs are accepted; scoped and IPv4-mapped IPv6 addresses are rejected. SipOutbound target is a DNS hostname with optional port 1-65535, not an IP literal, URI, path or SIP parameter. Execution revalidates target before origination; saving a connection does not prove connectivity. No inbound telephony binding is required.")
   @minLength(1)
   @maxLength(256)
   connection_name: string;
 
-  @doc("The typed caller address. Use phone_number for Twilio or teams_resource_account for ACS/Teams Phone extensibility. The connection validates the supported source role; outbound origination is independent of inbound bindings.")
+  @doc("The typed caller address. Use phone_number for Twilio or SipOutbound, or teams_resource_account for ACS/Teams Phone extensibility. The connection validates the supported source role; outbound origination is independent of inbound bindings.")
   source: TelephonyAddress;
 
   @doc("An optional customer-declared purpose for placing the call.")
@@ -1517,7 +1539,7 @@ model TelephonyCallJobCancellation {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @minLength(1)
 @maxLength(64)
-@pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$")
+@pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}(?![\\s\\S])")
 scalar TelephonyCampaignName extends string;
 
 @doc("A durable direct or campaign-created outbound call intent.")

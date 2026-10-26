@@ -6649,16 +6649,6 @@
             "explode": false
           },
           {
-            "name": "status",
-            "in": "query",
-            "required": false,
-            "description": "Filters bindings by lifecycle status.",
-            "schema": {
-              "$ref": "#/components/schemas/TelephonyBindingStatus"
-            },
-            "explode": false
-          },
-          {
             "name": "limit",
             "in": "query",
             "required": false,
@@ -92940,7 +92930,7 @@
           },
           "value": {
             "type": "string",
-            "pattern": "^\\+[1-9]\\d{1,14}$",
+            "pattern": "^\\+[1-9][0-9]{1,14}(?![\\s\\S])",
             "description": "E.164 phone number."
           }
         },
@@ -96695,6 +96685,95 @@
         ],
         "description": "The configuration for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`."
       },
+      "SipAllowedCallingNumber": {
+        "type": "string",
+        "maxLength": 256,
+        "pattern": "^(?:\\+[1-9][0-9]{1,14}|\\^\\\\\\+(?:[1-9]|\\[1-9\\])(?:(?:[0-9]|\\[[0-9](?:-[0-9])?\\])(?:\\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\\})?)+\\$)$",
+        "description": "An exact canonical E.164 number or a restricted pattern for E.164 caller numbers, up to 256 characters after trimming. Patterns must start with ^ followed by an escaped plus sign, a nonzero first digit or [1-9], then ASCII digit literals or single-digit classes/ranges with optional bounded {n} or {n,m} quantifiers, and a final $. Each bound is 1 to 15. Other regex constructs, including Unicode digit shortcuts, groups, alternation, lookahead or lookbehind assertions, backreferences, and unbounded repetition, are not supported. The schema pattern is a lexical filter; the service additionally rejects descending digit ranges and reversed quantifier bounds and verifies that every possible match has 2 to 15 ASCII digits after the plus sign. Matching covers the entire normalized canonical E.164 caller number. Supply trimmed values. Previously accepted arbitrary regexes must be replaced; they are not silently rewritten.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "SipTelephonyBinding": {
+        "type": "object",
+        "required": [
+          "provider"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "sip"
+            ],
+            "description": "The SIP provider."
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "Optional display metadata, not a routing key or E.164-constrained destination."
+          },
+          "allowed_calling_numbers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SipAllowedCallingNumber"
+            },
+            "maxItems": 64,
+            "description": "Exact E.164 caller numbers or restricted fully anchored patterns. Omit or use an empty array for no caller-number restriction; the service enforces pattern semantics in addition to the lexical schema."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBinding"
+          }
+        ],
+        "description": "An inbound SIP binding backed by a same-project SipInbound connection. Authentication and source-network restrictions are connection settings. Regional runtime readiness is independent of successful creation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "SipTelephonyBindingListItem": {
+        "type": "object",
+        "required": [
+          "provider"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "sip"
+            ],
+            "description": "The SIP provider."
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "Optional display phone metadata, not a routing key."
+          },
+          "allowed_calling_numbers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SipAllowedCallingNumber"
+            },
+            "maxItems": 64,
+            "description": "Current exact E.164 caller numbers or restricted fully anchored patterns."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBindingListItem"
+          }
+        ],
+        "description": "An inbound SIP binding returned in a list, including its current entity tag.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "SipTelephonyTransferDestination": {
         "type": "object",
         "required": [
@@ -97807,7 +97886,6 @@
           "id",
           "provider",
           "connection_name",
-          "status",
           "incoming_call_url"
         ],
         "properties": {
@@ -97831,15 +97909,10 @@
             "maxLength": 128,
             "description": "The optional display label for the binding."
           },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status.",
-            "readOnly": true
-          },
           "incoming_call_url": {
             "type": "string",
             "format": "uri",
-            "description": "The service-generated webhook URL to configure with the telephony provider.",
+            "description": "The service-generated incoming address: an HTTPS webhook for webhook-based providers or a SIP/SIPS ingress URI for SIP.",
             "readOnly": true
           }
         },
@@ -97847,7 +97920,8 @@
           "propertyName": "provider",
           "mapping": {
             "teams_phone_extensibility": "#/components/schemas/TeamsPhoneExtensibilityTelephonyBinding",
-            "twilio": "#/components/schemas/TwilioTelephonyBinding"
+            "twilio": "#/components/schemas/TwilioTelephonyBinding",
+            "sip": "#/components/schemas/SipTelephonyBinding"
           }
         },
         "description": "A telephony binding owned by a voice agent.",
@@ -97874,7 +97948,6 @@
           "id",
           "provider",
           "connection_name",
-          "status",
           "incoming_call_url",
           "etag"
         ],
@@ -97898,10 +97971,6 @@
             "maxLength": 128,
             "description": "The optional display label for the binding."
           },
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The lifecycle status."
-          },
           "incoming_call_url": {
             "type": "string",
             "format": "uri",
@@ -97917,30 +97986,11 @@
           "propertyName": "provider",
           "mapping": {
             "teams_phone_extensibility": "#/components/schemas/TeamsPhoneExtensibilityTelephonyBindingListItem",
-            "twilio": "#/components/schemas/TwilioTelephonyBindingListItem"
+            "twilio": "#/components/schemas/TwilioTelephonyBindingListItem",
+            "sip": "#/components/schemas/SipTelephonyBindingListItem"
           }
         },
         "description": "A telephony binding returned in a list, including its entity tag.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "TelephonyBindingStatus": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "active",
-              "suspended"
-            ]
-          }
-        ],
-        "description": "The lifecycle status of a telephony binding.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -98050,7 +98100,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
-            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required."
+            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SipOutbound. SIP authentication and source networks are connection settings: authType is CustomKeys; trimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl. Missing, null, blank or empty-object mode values default to digest; other non-string values are invalid. Digest requires nonblank username/password; IP ACL requires credentials.keys.source_cidrs as a non-null comma-separated string (4096 raw characters and 64 entries before deduplication). The empty string allows all source IPs; whitespace-only strings and empty entries are invalid. Metadata and binding CIDR fallbacks are unsupported. Native IPv4/IPv6 addresses or CIDRs are accepted; scoped and IPv4-mapped IPv6 addresses are rejected. SipOutbound target is a DNS hostname with optional port 1-65535, not an IP literal, URI, path or SIP parameter. Execution revalidates target before origination; saving a connection does not prove connectivity. No inbound telephony binding is required."
           },
           "purpose": {
             "type": "string",
@@ -98134,7 +98184,7 @@
           },
           "source": {
             "$ref": "#/components/schemas/TelephonyAddress",
-            "description": "The typed caller address. Use phone_number for Twilio or teams_resource_account for ACS/Teams Phone extensibility. The connection validates the supported source role; outbound origination is independent of inbound bindings."
+            "description": "The typed caller address. Use phone_number for Twilio or SipOutbound, or teams_resource_account for ACS/Teams Phone extensibility. The connection validates the supported source role; outbound origination is independent of inbound bindings."
           },
           "campaign_name": {
             "$ref": "#/components/schemas/TelephonyCampaignName",
@@ -99095,7 +99145,7 @@
         "type": "string",
         "minLength": 1,
         "maxLength": 64,
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$",
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}(?![\\s\\S])",
         "description": "Immutable customer-chosen Campaign name within a project and Agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -99431,7 +99481,8 @@
             "type": "string",
             "enum": [
               "teams_phone_extensibility",
-              "twilio"
+              "twilio",
+              "sip"
             ]
           }
         ],
@@ -99505,7 +99556,7 @@
         "type": "string",
         "minLength": 1,
         "maxLength": 64,
-        "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}(?![\\s\\S])",
         "description": "The unique name of a telephony transfer target.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -100538,7 +100589,7 @@
           },
           "phone_number": {
             "type": "string",
-            "pattern": "^\\+[1-9]\\d{6,14}$",
+            "pattern": "^\\+[1-9][0-9]{6,14}(?![\\s\\S])",
             "description": "The Twilio E.164 phone number."
           }
         },
@@ -100570,7 +100621,7 @@
           },
           "phone_number": {
             "type": "string",
-            "pattern": "^\\+[1-9]\\d{6,14}$",
+            "pattern": "^\\+[1-9][0-9]{6,14}(?![\\s\\S])",
             "description": "The Twilio E.164 phone number."
           }
         },
@@ -100718,10 +100769,6 @@
       "UpdateTelephonyBindingRequest": {
         "type": "object",
         "properties": {
-          "status": {
-            "$ref": "#/components/schemas/TelephonyBindingStatus",
-            "description": "The new lifecycle status."
-          },
           "label": {
             "anyOf": [
               {
@@ -100732,13 +100779,13 @@
               }
             ],
             "maxLength": 128,
-            "description": "The replacement display label. Omit it to preserve the current value; use null to clear it."
+            "description": "The replacement display label. Omit to preserve it; null, empty or whitespace-only clears it. Nonblank values are trimmed before applying the length limit."
           },
           "connection_name": {
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
-            "description": "The replacement Foundry connection name. This property is valid only for a Teams Phone extensibility binding; a Twilio binding's connection is immutable."
+            "description": "The replacement same-project connection name. Valid for Teams Phone extensibility and SIP bindings; a Twilio binding's connection is immutable. A SIP replacement must reference SipInbound. Explicit null or blank names are invalid."
           },
           "phone_number": {
             "anyOf": [
@@ -100750,7 +100797,15 @@
               }
             ],
             "maxLength": 64,
-            "description": "The replacement Teams Phone extensibility display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone extensibility binding."
+            "description": "The replacement Teams Phone extensibility or SIP display phone number. Omit to preserve it; null, empty or whitespace-only clears it. SIP values are display metadata, not routing keys. Not supported for Twilio."
+          },
+          "allowed_calling_numbers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SipAllowedCallingNumber"
+            },
+            "maxItems": 64,
+            "description": "SIP-only complete caller restriction replacement. Omit to preserve; an empty array clears the restriction. Null is invalid. Source network restrictions belong to the connection, not the binding."
           }
         },
         "description": "The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.",
