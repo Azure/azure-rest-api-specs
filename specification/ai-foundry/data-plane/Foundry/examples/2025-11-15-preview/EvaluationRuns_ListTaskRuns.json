@@ -1,0 +1,95 @@
+{
+  "title": "List TaskRuns",
+  "operationId": "EvaluationRuns_listTaskRuns",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "run_id": "claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2",
+    "limit": 20
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          {
+            "id": "task-run-0000000000",
+            "evaluation_run_id": "claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2",
+            "status": "succeeded",
+            "result": "passed",
+            "provenance": {
+              "type": "inline_dataset",
+              "source_record_id": "observation-17",
+              "record_ordinal": 0,
+              "content_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "evaluation_job_version": {
+                "name": "claims-observations",
+                "version": "1",
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              }
+            },
+            "input": {
+              "prompt": {
+                "type": "text",
+                "value": "Review claim 17."
+              }
+            },
+            "observed": {
+              "finalOutput": {
+                "type": "json",
+                "value": {
+                  "decision": "approved"
+                }
+              }
+            },
+            "expected": {
+              "finalOutput": {
+                "type": "json",
+                "value": {
+                  "decision": "approved"
+                }
+              }
+            },
+            "grader_results": [
+              {
+                "name": "answer-matches",
+                "defined_in": "job",
+                "result": "passed",
+                "score": 1,
+                "explanation": "Outputs match."
+              }
+            ],
+            "phase_results": [
+              {
+                "phase": "invoke",
+                "status": "skipped",
+                "started_at": null,
+                "finished_at": null,
+                "failure": null
+              },
+              {
+                "phase": "grade",
+                "status": "succeeded",
+                "started_at": 1792738806,
+                "finished_at": 1792738807,
+                "failure": null
+              }
+            ],
+            "usage": {
+              "known": false,
+              "input_tokens": null,
+              "output_tokens": null,
+              "cost": null,
+              "currency": null
+            },
+            "latency_ms": 1000,
+            "started_at": 1792738806,
+            "finished_at": 1792738807
+          }
+        ],
+        "first_id": "task-run-0000000000",
+        "last_id": "task-run-0000000000",
+        "has_more": false
+      }
+    }
+  }
+}

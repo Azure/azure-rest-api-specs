@@ -1,0 +1,49 @@
+{
+  "title": "Get an EvaluationRun that failed before selection",
+  "operationId": "EvaluationRuns_get",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "run_id": "claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"run-3\""
+      },
+      "body": {
+        "id": "claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2",
+        "name": "Claims baseline",
+        "evaluation_job": {
+          "name": "claims-agent-regression"
+        },
+        "resolved_evaluation_job_version": {
+          "name": "claims-agent-regression",
+          "version": "1",
+          "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "resolved_run_configuration_ref": "/evaluation_runs/claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2/resolved_configuration?api-version=2026-10-23-preview",
+        "status": "failed",
+        "task_run_progress": {
+          "selected_task_run_count": null,
+          "task_run_counts": null,
+          "progress_observation": {
+            "consistency": "frozen",
+            "started_at": 1792738815,
+            "finished_at": 1792738815
+          }
+        },
+        "run_summary": null,
+        "error": {
+          "code": "source_read_failed",
+          "message": "Source preparation failed before selection was complete.",
+          "param": "dataset"
+        },
+        "created_at": 1792738800,
+        "updated_at": 1792738815,
+        "started_at": null,
+        "finished_at": 1792738815
+      }
+    }
+  }
+}

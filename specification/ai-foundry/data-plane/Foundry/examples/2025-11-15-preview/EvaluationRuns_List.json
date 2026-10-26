@@ -1,0 +1,91 @@
+{
+  "title": "List EvaluationRuns",
+  "operationId": "EvaluationRuns_list",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "limit": 1
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          {
+            "id": "claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2",
+            "name": "Claims baseline",
+            "evaluation_job": {
+              "name": "claims-agent-regression"
+            },
+            "resolved_evaluation_job_version": {
+              "name": "claims-agent-regression",
+              "version": "1",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "resolved_run_configuration_ref": "/evaluation_runs/claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2/resolved_configuration?api-version=2026-10-23-preview",
+            "status": "succeeded",
+            "task_run_progress": {
+              "selected_task_run_count": 3,
+              "task_run_counts": {
+                "queued": 0,
+                "in_progress": 0,
+                "succeeded": 3,
+                "failed": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "progress_observation": {
+                "consistency": "frozen",
+                "started_at": 1792738820,
+                "finished_at": 1792738820
+              }
+            },
+            "run_summary": {
+              "result_counts": {
+                "total": 3,
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "pass_rate": 1.0,
+              "grader_summaries": [
+                {
+                  "name": "answer-matches",
+                  "result_counts": {
+                    "total": 3,
+                    "passed": 3,
+                    "failed": 0,
+                    "error": 0,
+                    "skipped": 0
+                  },
+                  "pass_rate": 1.0,
+                  "score": 1.0
+                }
+              ],
+              "usage": {
+                "known": true,
+                "input_tokens": 300,
+                "output_tokens": 60,
+                "cost": "0.01",
+                "currency": "USD"
+              },
+              "latency": {
+                "count": 3,
+                "total_ms": 1500,
+                "min_ms": 400,
+                "max_ms": 600
+              }
+            },
+            "created_at": 1792738800,
+            "updated_at": 1792738820,
+            "started_at": 1792738805,
+            "finished_at": 1792738820
+          }
+        ],
+        "first_id": "claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2",
+        "last_id": "claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2",
+        "has_more": true
+      }
+    }
+  }
+}

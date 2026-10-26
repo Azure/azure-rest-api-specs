@@ -4,7 +4,6 @@ import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
 import "../task-sets/models.tsp";
 import "../openai/evaluations/models.tsp";
-import "./suite-config.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
@@ -120,120 +119,6 @@ model EvaluationSuiteVersion {
   /** User-defined tags. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
-}
-
-/** A reference to an exact published EvalJob version. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalJobReference {
-  /** The published EvalJob name. */
-  name: string;
-
-  /** The immutable configuration version. */
-  version: string;
-}
-
-/** A reference to a validated Foundry Dataset version containing Tasks. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationDatasetVersionReference {
-  /** Dataset name. */
-  name: string;
-
-  /** Exact Dataset version. */
-  version: string;
-}
-
-/** Published grading and invocation settings, captured on each run. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalJobDefinition {
-  /** Human-readable description of the evaluation. */
-  description?: string;
-
-  /** Graders run for every Task alongside its Task-specific graders. */
-  graders?: InlineEvaluationGrader[];
-
-  /** Validated Task content at an exact Dataset version. */
-  dataset: EvaluationDatasetVersionReference;
-
-  /** The system invoked by each TaskRun. */
-  target: FoundryAgentTarget;
-
-  /** Number of TaskRuns created for every Task. */
-  repetitions?: EvaluationRepetitions;
-
-  /** Maximum concurrent TaskRuns, including invocation and grading. */
-  @minValue(1)
-  maxParallelTaskRuns?: int32 = 1;
-
-  /** User-defined string labels. */
-  metadata?: Record<string>;
-}
-
-/** Stable EvalJob identity, separate from its immutable configuration versions. */
-@resource("evaluation-jobs")
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalJob {
-  /** The stable job name. */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  @key
-  name: string;
-
-  /** Editable stable description. */
-  description?: string;
-
-  /** Editable stable labels. */
-  metadata?: Record<string>;
-
-  /** Latest remaining published configuration version, when available. */
-  @visibility(Lifecycle.Read)
-  latest_version?: string;
-
-  /** The time when the job was created. */
-  @visibility(Lifecycle.Read)
-  created_at: FoundryTimestamp;
-
-  /** The time when the job was last changed. */
-  @visibility(Lifecycle.Read)
-  updated_at: FoundryTimestamp;
-
-  /** The identity that created this job. */
-  @visibility(Lifecycle.Read)
-  created_by: string;
-}
-
-/** Mutable fields on the stable job; published versions are never patched. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalJobUpdate {
-  /** New stable description. */
-  description?: string;
-
-  /** New stable labels. */
-  metadata?: Record<string>;
-}
-
-/** An immutable configuration published under a named EvalJob. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalJobVersion {
-  ...EvalJobDefinition;
-
-  /** Name of the stable job. */
-  @visibility(Lifecycle.Read)
-  name: string;
-
-  /** Published version identifier. Assignment is pending API review. */
-  @visibility(Lifecycle.Read)
-  version: string;
-
-  /** Digest of the Dataset content validated at publication. */
-  @visibility(Lifecycle.Read)
-  dataset_content_digest: string;
-
-  /** Publication time in Unix seconds. */
-  @visibility(Lifecycle.Read)
-  created_at: FoundryTimestamp;
-
-  /** Identity that published this version. */
-  @visibility(Lifecycle.Read)
-  created_by: string;
 }
 
 /** Request to run a suite through the existing evaluation preview. */

@@ -1,0 +1,66 @@
+{
+  "title": "Get an EvaluationRun resolved configuration",
+  "operationId": "EvaluationRuns_getResolvedConfiguration",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "run_id": "claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluation_run_id": "claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2",
+        "resolved_evaluation_job_version": {
+          "name": "claims-agent-regression",
+          "version": "1",
+          "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "resolved_run_configuration_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "resolved_run_configuration": {
+          "dataset": {
+            "name": "claims",
+            "version": "3"
+          },
+          "target": {
+            "type": "foundry_agent",
+            "name": "claims-agent",
+            "version": "2"
+          },
+          "graders": [
+            {
+              "name": "answer-matches",
+              "type": "exact_match",
+              "actual": "{{outputs.finalOutput.value.decision}}",
+              "expected": "{{expected.finalOutput.value.decision}}"
+            }
+          ],
+          "repetitions": {
+            "count": 3
+          },
+          "max_parallel_task_runs": 1
+        },
+        "resolved_judges": [],
+        "resolved_dependencies": [
+          {
+            "kind": "dataset",
+            "name": "claims",
+            "version": "3",
+            "digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "dependency_definition": null
+          },
+          {
+            "kind": "agent",
+            "name": "claims-agent",
+            "version": "2",
+            "digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "dependency_definition": {
+              "type": "foundry_agent",
+              "name": "claims-agent",
+              "version": "2"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

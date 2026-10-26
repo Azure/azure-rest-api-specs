@@ -1,0 +1,68 @@
+{
+  "title": "Get a TaskRun whose invocation outcome is unknown",
+  "operationId": "EvaluationRuns_getTaskRun",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "run_id": "claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2",
+    "task_run_id": "task-run-0000000001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "task-run-0000000001",
+        "evaluation_run_id": "claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2",
+        "task_id": "claim-18",
+        "repetition": 1,
+        "status": "failed",
+        "result": "error",
+        "provenance": {
+          "type": "dataset",
+          "source_record_id": "claim-18",
+          "record_ordinal": 1,
+          "content_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "dataset": {
+            "name": "claims",
+            "version": "3",
+            "digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        },
+        "input": {
+          "prompt": {
+            "type": "text",
+            "value": "Review claim 18."
+          }
+        },
+        "grader_results": [],
+        "phase_results": [
+          {
+            "phase": "invoke",
+            "status": "outcome_unknown",
+            "started_at": 1792738805,
+            "finished_at": 1792738815,
+            "failure": {
+              "code": "provider_outcome_unknown",
+              "message": "Invocation outcome could not be established.",
+              "retryable": false
+            }
+          }
+        ],
+        "usage": {
+          "known": false,
+          "input_tokens": null,
+          "output_tokens": null,
+          "cost": null,
+          "currency": null
+        },
+        "latency_ms": 10000,
+        "started_at": 1792738805,
+        "finished_at": 1792738815,
+        "error": {
+          "code": "provider_outcome_unknown",
+          "message": "Invocation outcome could not be established.",
+          "param": "invoke"
+        }
+      }
+    }
+  }
+}

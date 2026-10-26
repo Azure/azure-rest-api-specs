@@ -2,556 +2,701 @@ import "@typespec/openapi";
 
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
-import "../evaluation-suites/models.tsp";
+import "../evaluation-jobs/models.tsp";
 
 using Azure.Core;
 using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
-/** Select an exact named EvalJob version; inline definitions and overrides are P1. */
+/** Runs an evaluation definition directly, without a saved Job. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalRunFromJob {
-  /** Published job and immutable configuration version to run. */
-  evaluation_job: EvalJobReference;
+model EvaluationRunFromDefinition {
+  /** Optional non-unique display label of 1-64 Unicode scalar values. */
+  name?: string | null;
+
+  ...EvaluationDefinition;
 }
 
-/** Provisional execution states, separate from grading outcomes. */
+/** Runs a saved Job version, without inline parameters or overrides. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvaluationRunFromJob {
+  /** Optional non-unique display label of 1-64 Unicode scalar values. */
+  name?: string | null;
+
+  /** The Job to run; an omitted version resolves to the latest at Run creation. */
+  evaluation_job: ResourceVersionReference;
+}
+
+/** Exactly one of a direct definition or a saved Job reference; mixed forms return `400`. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+union EvaluationRunCreateRequest {
+  EvaluationRunFromDefinition,
+  EvaluationRunFromJob,
+}
+
+/**
+ * Execution status of an EvaluationRun: Foundry job statuses plus `cancelling` and
+ * `partially_failed`. Clients treat an unknown value as non-terminal. Quality is reported in
+ * `run_summary`, not here.
+ */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 union EvaluationRunStatus {
+  string,
+
   /** Accepted and waiting to start. */
   queued: "queued",
 
-  /** Reserved for future observed-evidence upload, not emitted by MVP runs. */
-  awaiting_task_runs: "awaiting_task_runs",
+  /** Executing TaskRuns. */
+  in_progress: "in_progress",
 
-  /** Executing contained TaskRuns. */
-  running: "running",
-
-  /** Cancellation requested, in-flight work is stopping. */
+  /** Cancellation was requested and in-flight work is stopping. */
   cancelling: "cancelling",
 
-  /** Orchestration completed without TaskRun execution errors. */
+  /** Every TaskRun finished execution; some may still have failed their graders. */
   @lroSucceeded
   succeeded: "succeeded",
 
-  /** Orchestration completed with at least one TaskRun error. */
+  /** The Run finished, but at least one TaskRun's execution failed. */
   @lroSucceeded
   partially_failed: "partially_failed",
 
-  /** Orchestration could not complete. */
+  /** The Run could not complete. */
   @lroFailed
   failed: "failed",
 
-  /** Cancelled by the caller. */
+  /** The Run was cancelled. */
   @lroCanceled
   cancelled: "cancelled",
 }
 
-/** Execution state of a single Task attempt. */
+/** The exact Job version a Run resolved. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvaluationTaskRunStatus {
-  /** Waiting for a concurrency slot. */
+model ResolvedEvaluationJobVersion {
+  /** The Job name. */
+  name: string;
+
+  /** The concrete version. */
+  version: string;
+
+  /** Lowercase SHA-256 of the version content. */
+  digest: string;
+}
+
+/** TaskRun counts by execution status. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model TaskRunStatusCounts {
+  /** TaskRuns waiting to start. */
+  queued: int64;
+
+  /** TaskRuns executing. */
+  in_progress: int64;
+
+  /** TaskRuns whose execution succeeded. */
+  succeeded: int64;
+
+  /** TaskRuns whose execution failed. */
+  failed: int64;
+
+  /** TaskRuns that were cancelled. */
+  cancelled: int64;
+
+  /** TaskRuns that were skipped. */
+  skipped: int64;
+}
+
+/** How consistent the reported TaskRun progress is. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+union ProgressConsistency {
+  string,
+
+  /** Counts are not available yet. */
+  unavailable: "unavailable",
+
+  /** Live counts read over an interval; not an atomic snapshot and not monotonic. */
+  shard_window: "shard_window",
+
+  /** Final counts of a terminal Run. */
+  frozen: "frozen",
+}
+
+/** When and how the TaskRun progress was observed. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model ProgressObservation {
+  /** The consistency of the counts. */
+  consistency: ProgressConsistency;
+
+  /** When the observation started. */
+  started_at: FoundryTimestamp | null;
+
+  /** When the observation finished. */
+  finished_at: FoundryTimestamp | null;
+}
+
+/** Execution progress of a Run's TaskRuns. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model TaskRunProgress {
+  /** The number of selected TaskRuns, or null before selection completes. */
+  selected_task_run_count: int64 | null;
+
+  /** TaskRun counts by execution status, or null before selection completes. */
+  task_run_counts: TaskRunStatusCounts | null;
+
+  /** How the counts were observed. */
+  progress_observation: ProgressObservation;
+}
+
+/** Terminal TaskRuns or grader results by quality result; `total` is the sum of the other four. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvaluationResultCounts {
+  /** The sum of `passed`, `failed`, `error` and `skipped`. */
+  total: int64;
+
+  /** Results that passed. */
+  passed: int64;
+
+  /** Results that failed a quality check. */
+  failed: int64;
+
+  /** Results that could not be decided. */
+  error: int64;
+
+  /** Results that did not apply. */
+  skipped: int64;
+}
+
+/** Token and cost usage; unknown values are null, never zero. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvaluationUsage {
+  /** Whether every contributing call reported its usage. */
+  known: boolean;
+
+  /** Input tokens, or null when unknown. */
+  input_tokens: int64 | null;
+
+  /** Output tokens, or null when unknown. */
+  output_tokens: int64 | null;
+
+  /** Cost as a finite invariant decimal string, or null when unknown. */
+  cost: string | null;
+
+  /** ISO 4217 currency code of `cost`, or null when unknown. */
+  currency: string | null;
+}
+
+/** TaskRun latency aggregates. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvaluationLatency {
+  /** TaskRuns with a measured latency. */
+  count: int64;
+
+  /** Sum of measured latencies in milliseconds. */
+  total_ms: int64;
+
+  /** Minimum latency in milliseconds, or null when `count` is 0. */
+  min_ms: int64 | null;
+
+  /** Maximum latency in milliseconds, or null when `count` is 0. */
+  max_ms: int64 | null;
+}
+
+/** Results of one Job grader across the Run's TaskRuns. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model GraderSummary {
+  /** The Job grader name. */
+  name: string;
+
+  /** This grader's results; TaskRuns that failed before grading are left out. */
+  result_counts: EvaluationResultCounts;
+
+  /** `passed / (passed + failed)`, or null when nothing was graded. */
+  pass_rate: float64 | null;
+
+  /** Mean 0-1 `score` of this grader's results that have one, or null when none do. */
+  score: float64 | null;
+}
+
+/** Quality results of a Run. Run `status` reports execution only. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model RunSummary {
+  /** Terminal TaskRuns by quality result; each repetition counts separately. */
+  result_counts: EvaluationResultCounts;
+
+  /** `passed / (passed + failed)`, or null when nothing was graded. Excludes `error` and `skipped`. */
+  pass_rate: float64 | null;
+
+  /** One entry per resolved Job grader, in definition order. Task graders have no Run-level summary. */
+  grader_summaries: GraderSummary[];
+
+  /** Usage for agent invocations and judge calls. */
+  usage: EvaluationUsage;
+
+  /** TaskRun latency aggregates. */
+  latency: EvaluationLatency;
+}
+
+/** A durable execution of an evaluation definition. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvaluationRun is JobLike<never, never, EvaluationRunStatus> {
+  /** Optional non-unique display label. */
+  name: string | null;
+
+  /** The requested Job reference as written, or null for direct execution. */
+  evaluation_job: ResourceVersionReference | null;
+
+  /** The concrete Job version resolved at creation, or null for direct execution. */
+  resolved_evaluation_job_version: ResolvedEvaluationJobVersion | null;
+
+  /** Relative API path of this Run's resolved configuration. */
+  resolved_run_configuration_ref: string;
+
+  /** Execution progress of the Run's TaskRuns. */
+  task_run_progress: TaskRunProgress;
+
+  /** Quality results, or null until aggregates are available. */
+  run_summary: RunSummary | null;
+
+  /** The time when the Run was created. */
+  created_at: FoundryTimestamp;
+
+  /** The time when the Run was last changed. */
+  updated_at: FoundryTimestamp;
+
+  /** The time when execution started, or null before it starts. */
+  started_at: FoundryTimestamp | null;
+
+  /** The time when the Run became terminal; null while `status` is not terminal. */
+  finished_at: FoundryTimestamp | null;
+}
+
+/** A judge deployment and the model it resolved to at Run creation. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model ResolvedJudge {
+  /** The requested judge deployment. */
+  `model`: string;
+
+  /** The model name behind the deployment. */
+  model_name: string;
+
+  /** The model version behind the deployment. */
+  model_version: string;
+}
+
+/** The kinds of resolved Run dependency. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+union ResolvedDependencyKind {
+  string,
+
+  /** The Dataset. */
+  dataset: "dataset",
+
+  /** The target agent. */
+  agent: "agent",
+}
+
+/** A concrete dependency pinned at Run creation. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model ResolvedDependency {
+  /** The dependency kind. */
+  kind: ResolvedDependencyKind;
+
+  /** The dependency name. */
+  name: string;
+
+  /** The concrete version. */
+  version: string;
+
+  /** Lowercase SHA-256 of the dependency content. */
+  digest: string;
+
+  /** The resolved definition, or null when none is retained. */
+  dependency_definition: Record<unknown> | null;
+}
+
+/** The configuration a Run retained at creation, without credentials or storage locations. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model ResolvedRunConfiguration {
+  /** The parent Run ID. */
+  evaluation_run_id: string;
+
+  /** The concrete Job version, or null for direct execution. */
+  resolved_evaluation_job_version: ResolvedEvaluationJobVersion | null;
+
+  /** Lowercase SHA-256 of the canonical retained configuration. */
+  resolved_run_configuration_digest: string;
+
+  /**
+   * The effective definition with defaults applied and references resolved. `graders` lists each
+   * Job grader as it ran: canonical, with `grader_version` pinned and `pass_threshold` filled in.
+   */
+  resolved_run_configuration: EvaluationDefinition;
+
+  /** One entry per distinct judge used by Job or Task graders. */
+  resolved_judges: ResolvedJudge[];
+
+  /** The Dataset and target pinned for this Run. */
+  resolved_dependencies: ResolvedDependency[];
+}
+
+/** Execution status of one TaskRun. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+union TaskRunStatus {
+  string,
+
+  /** Waiting to start. */
   queued: "queued",
 
   /** Invoking or grading. */
-  running: "running",
+  in_progress: "in_progress",
 
-  /** Attempt completed with an applicable quality outcome. */
+  /** Execution completed. */
   succeeded: "succeeded",
 
-  /** Invocation or grading failed. */
+  /** Execution failed. */
   failed: "failed",
 
-  /** Attempt was cancelled. */
+  /** Execution was cancelled. */
   cancelled: "cancelled",
 
-  /** Every applicable grader returned N/A. */
+  /** Execution was skipped. */
   skipped: "skipped",
 }
 
-/** Mutually exclusive TaskRun outcome counts for a completed run. */
+/** Quality result of a TaskRun, decided from its grader results by the scoring rule. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalRunCounts {
-  /** TaskRuns with a passing quality result. */
-  @minValue(0)
-  pass: int32;
+union TaskRunResult {
+  string,
 
-  /** TaskRuns with a failing quality result but no execution error. */
-  @minValue(0)
-  fail: int32;
+  /** Every applicable grader passed. */
+  passed: "passed",
 
-  /** TaskRuns for which every applicable grader returned N/A. */
-  @minValue(0)
-  skipped: int32;
+  /** A grader failed. */
+  failed: "failed",
 
-  /** TaskRuns with an invocation or grading error. */
-  @minValue(0)
-  error: int32;
+  /** Execution failed, an outcome is unknown, or a grader returned `error`. */
+  error: "error",
+
+  /** Execution was cancelled or skipped, or every grader returned `skipped`. */
+  skipped: "skipped",
 }
 
-/** Aggregate results produced by a completed evaluation run. */
+/** Where a grader was defined. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalRunResult {
-  /** Pass, quality fail, all skipped, and invocation or grading error counts. */
-  counts: EvalRunCounts;
+union GraderDefinedIn {
+  string,
 
-  /** counts.pass / (counts.pass + counts.fail), or null when neither exists. */
-  pass_rate: float32 | null;
+  /** The evaluation definition's graders, including a direct Run's. */
+  job: "job",
+
+  /** The Task's own graders. */
+  task: "task",
 }
 
-/** State of a planned or reached lifecycle phase. */
+/** The outcome of one grader. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvaluationPhaseState {
-  pending: "pending",
-  in_progress: "in_progress",
-  completed: "completed",
-  not_reached: "not_reached",
+union GraderOutcome {
+  string,
+
+  /** The check passed. */
+  passed: "passed",
+
+  /** The check failed, including a missing or wrong-type `outputs` value. */
+  failed: "failed",
+
+  /** The grader could not decide; never a quality failure. */
+  error: "error",
+
+  /** The grader does not apply to this TaskRun. */
+  skipped: "skipped",
 }
 
-/** A planned or reached phase in a run or task-run lifecycle. */
+/** One sub-metric of a grader, such as a rubric criterion, on the grader's native scale. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationPhaseEntry {
-  /** Extensible snake_case phase name, such as queued or invoking. */
-  phase: string;
+model GraderMetric {
+  /** The sub-metric name. */
+  name: string;
 
-  /** Planned, active, finished, or bypassed because the run ended early. */
-  state: EvaluationPhaseState;
+  /** The sub-metric value, not normalized. */
+  value: unknown;
 
-  /** Start time in Unix milliseconds; set when a phase begins. */
-  started_at_ms?: int64;
-
-  /** End time in Unix milliseconds; set only for a completed phase. */
-  completed_at_ms?: int64;
-}
-
-/** Timing and upcoming work for an EvalRun or TaskRun. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationLifecycle {
-  /** Creation time in Unix seconds. */
-  created_at: FoundryTimestamp;
-
-  /** Execution start time in Unix seconds, after queueing. */
-  started_at?: FoundryTimestamp;
-
-  /** Terminal time in Unix seconds. */
-  completed_at?: FoundryTimestamp;
-
-  /** Queue duration, present once execution begins. */
-  @minValue(0)
-  queue_duration_ms?: int64;
-
-  /** Creation-to-terminal duration, including queue time. */
-  @minValue(0)
-  total_duration_ms?: int64;
-
-  /** Known upcoming phases and timings for phases already reached. */
-  @minItems(1)
-  phases: EvaluationPhaseEntry[];
-}
-
-/** A durable Foundry evaluation run, distinct from the existing OpenAI EvalRun. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model FoundryEvalRun {
-  /** Server-assigned run identifier. */
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  /** Exact published job selected at creation. */
-  evaluation_job: EvalJobReference;
-
-  /** Complete job definition captured when this run was admitted. */
-  @visibility(Lifecycle.Read)
-  job_definition: EvalJobDefinition;
-
-  /** Current orchestration status; quality is reported separately in result. */
-  @visibility(Lifecycle.Read)
-  @lroStatus
-  status: EvaluationRunStatus;
-
-  /** Run and upcoming phase timings. */
-  @visibility(Lifecycle.Read)
-  lifecycle: EvaluationLifecycle;
-
-  /** Exact target identity resolved when this run was admitted. */
-  @visibility(Lifecycle.Read)
-  resolved_target: ResolvedFoundryAgentTarget;
-
-  /** Digest of the authorized Task content retained for this run. */
-  @visibility(Lifecycle.Read)
-  task_content_digest: string;
-
-  /** Quality and coverage counts, set when orchestration succeeds. */
-  @visibility(Lifecycle.Read)
-  result?: EvalRunResult;
-
-  /** Opaque Foundry portal URL for this run's report. */
-  @visibility(Lifecycle.Read)
-  report_url?: string;
-
-  /** Terminal orchestration error, set only when the run fails. */
-  @visibility(Lifecycle.Read)
-  error?: ApiError;
-}
-
-/** Effective configuration retained at admission, without raw Task content. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalRunResolvedConfiguration {
-  /** Exact published job version. */
-  evaluation_job: EvalJobReference;
-
-  /** Dataset whose Task content was captured. */
-  dataset: EvaluationDatasetVersionReference;
-
-  /** Resolved target identity, never credentials. */
-  target: ResolvedFoundryAgentTarget;
-
-  /** Attempts per Task with defaults applied. */
-  repetitions: EvaluationRepetitions;
-
-  /** Maximum parallel TaskRuns with the default applied. */
-  @minValue(1)
-  maxParallelTaskRuns: int32;
-
-  /** Digest of the Task bytes authorized at admission. */
-  task_content_digest: string;
-}
-
-/** A readable task summary retained with a task run. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTaskSummary {
-  /** The task identifier. */
-  id: string;
-
-  /** The task description. */
-  description?: string;
-}
-
-/** The outcome of one rubric criterion. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationCriterionResult {
-  /** The criterion identifier. */
-  id: string;
-
-  /** Whether the criterion passed. */
-  passed: boolean;
-
-  /** Optional ordered rating, from one to five. */
-  @minValue(1)
-  @maxValue(5)
-  score?: int32;
-
-  /** An explanation of the criterion outcome. */
+  /** Why this sub-metric got `value`; distinct from the grader-level `explanation`. */
   explanation?: string;
 }
 
-/** Whether a grader completed, returned N/A, or could not grade. */
+/** Why a grader returned `error`. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvaluationGraderStatus {
-  completed: "completed",
-  skipped: "skipped",
-  error: "error",
-}
-
-/** The outcome produced by one grader. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationGraderResult {
-  /** The resolved grader name. */
-  grader: string;
-
-  /** Completed grading, genuine N/A, or a grading failure. */
-  status: EvaluationGraderStatus;
-
-  /** The quality verdict, present only on a completed grader. */
-  passed?: boolean;
-
-  /** An optional diagnostic score between zero and one. */
-  @minValue(0)
-  @maxValue(1)
-  score?: float32;
-
-  /** An explanation of the grader outcome. */
-  explanation: string;
-
-  /** Per-criterion outcomes when the grader has multiple criteria. */
-  criteria?: EvaluationCriterionResult[];
-
-  /** Failure details for a grader with status error. */
-  error?: EvaluationGraderError;
-
-  /** Judge-model usage for this grader, absent for built-in checks. */
-  usage?: EvaluationJudgeUsage;
-
-  /** Additional grader diagnostics. */
-  diagnostics?: Record<unknown>;
-}
-
-/** Details of an attempted grader failure. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationGraderError {
+model GraderError {
+  /** A stable code, such as `MissingEvaluationEvidence` or `JudgeUnavailable`. */
   code: string;
+
+  /** The reason the grader could not decide. */
   message: string;
 }
 
-/** A reference to the normalized trajectory retained for a task run. */
+/**
+ * The result of one grader on a TaskRun. Field presence depends on `result`:
+ * - `passed` or `failed`: `score` is always set; `explanation` and `metrics` are optional; `error` is absent.
+ * - `error`: `error` is required; `score`, `explanation` and `metrics` are absent.
+ * - `skipped`: `explanation` is required; `score`, `metrics`, `error` and `usage` are absent.
+ * `usage` is present when a judge was called.
+ */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTrajectoryReference {
-  /** The trajectory format. */
-  format: "atif";
+model GraderResult {
+  /** The grader name as submitted. */
+  name: string;
 
-  /** The trajectory identifier. */
-  trajectory_id: string;
+  /** Where the grader was defined; results are keyed by `defined_in` and `name`. */
+  defined_in: GraderDefinedIn;
 
-  /** The harness session identifier. */
-  session_id: string;
+  /** The grader outcome. */
+  result: GraderOutcome;
 
-  /** The retained artifact identifier. */
-  artifact_id: string;
+  /** The primary metric normalized to 0-1, higher is better; boolean graders score 1 or 0. */
+  @minValue(0)
+  @maxValue(1)
+  score?: float64;
+
+  /** Why the grader reached `result`; required for `skipped`. */
+  explanation?: string;
+
+  /** Sub-metrics, such as rubric criteria. */
+  metrics?: GraderMetric[];
+
+  /** Why the grader could not decide; set only for `error`. */
+  error?: GraderError;
+
+  /** This grader's judge calls, including retries; a breakdown of the TaskRun `usage`. */
+  usage?: EvaluationUsage;
 }
 
-/** Usage fields shared by agent invocation and judge calls. */
+/** The source kind a TaskRun came from. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationUsageMetrics {
-  /** Active call duration across service retries, excluding queue and retry waits. */
-  @minValue(0)
-  duration_ms?: int64;
+union SourceProvenanceType {
+  string,
 
-  /** Total input tokens, including cached input tokens. */
-  @minValue(0)
-  input_tokens?: int64;
+  /** A published Dataset version. */
+  dataset: "dataset",
 
-  /** The cached subset of input tokens. */
-  @minValue(0)
-  cached_input_tokens?: int64;
-
-  /** Total output tokens. */
-  @minValue(0)
-  output_tokens?: int64;
-
-  /** Estimated cost in US dollars for these calls. */
-  @minValue(0)
-  estimated_cost_usd?: decimal128;
+  /** Tasks embedded in the evaluation definition. */
+  inline_dataset: "inline_dataset",
 }
 
-/** Agent invocation usage, excluding grading and queueing. */
+/** A concrete source version and its digest. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTaskRunUsage {
-  ...EvaluationUsageMetrics;
+model ResolvedSourceVersion {
+  /** The source name. */
+  name: string;
 
-  /** Number of conversation turns. */
-  @minValue(0)
-  turn_count?: int32;
+  /** The concrete version. */
+  version: string;
 
-  /** Number of tool calls. */
-  @minValue(0)
-  tool_call_count?: int32;
+  /** Lowercase SHA-256 of the source content. */
+  digest: string;
 }
 
-/** Judge-model call usage for one grader, including retries. */
+/** The selected source record of a TaskRun. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationJudgeUsage {
-  ...EvaluationUsageMetrics;
+model SourceProvenance {
+  /** The source kind. */
+  type: SourceProvenanceType;
+
+  /** The source record ID. */
+  source_record_id: string;
+
+  /** Zero-based ordinal of the record in the source. */
+  record_ordinal: int64;
+
+  /** Lowercase SHA-256 of the record content. */
+  content_digest: string;
+
+  /** The Dataset version, for Dataset sources. */
+  dataset?: ResolvedSourceVersion;
+
+  /** The Job version, when execution selected a saved Job. */
+  evaluation_job_version?: ResolvedSourceVersion;
 }
 
-/** Metadata for evidence retained with a task run. */
+/** A typed text or JSON value. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationArtifact {
-  /** The artifact identifier. */
-  artifact_id: string;
+union EvaluationTypedValue {
+  /** A text value. */
+  text: EvaluationTextContent,
 
-  /** The artifact type, such as `trajectory` or `harness_log`. */
-  type: string;
+  /** A JSON value. */
+  json: EvaluationJsonContent,
+}
+
+/** An expected or observed tool call. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvaluationToolCall {
+  /** The tool name. */
+  name: string;
+
+  /** The tool arguments. */
+  arguments: Record<unknown>;
+}
+
+/** Retained evidence, without credentials or signed URLs. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvaluationArtifactReference {
+  /** The artifact ID. */
+  id: string;
 
   /** The artifact media type. */
   media_type: string;
 
-  /** The artifact size in bytes, when known. */
-  size_bytes?: int64;
+  /** The artifact size in bytes. */
+  byte_length: int64;
+
+  /** Lowercase SHA-256 of the artifact. */
+  digest: string;
+
+  /** The source-owned artifact reference. */
+  source_artifact_reference: string;
 }
 
-/** Retry counts for a task-run phase. */
+/** Reference evidence visible to graders. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTaskRunAttempts {
-  /** The number of harness attempts. */
-  harness?: int32;
+model ExpectedEvidence {
+  /** The expected final output. */
+  finalOutput?: EvaluationTypedValue;
 
-  /** Grader attempt counts keyed by grader name. */
-  graders?: Record<int32>;
+  /** The expected tool calls. */
+  toolCalls?: EvaluationToolCall[];
+
+  /** Expected artifacts. */
+  artifacts?: EvaluationArtifactReference[];
 }
 
-/** Diagnostics retained for a task run. */
+/** Evidence produced by the target. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTaskRunDiagnostics {
-  /** Harness and grader attempt counts. */
-  attempts?: EvaluationTaskRunAttempts;
+model ObservedEvidence {
+  /** The final output. */
+  finalOutput?: EvaluationTypedValue;
 
-  /** The latest durable phase boundary completed by this task run. */
-  last_checkpoint?: string;
+  /** The normalized trajectory. */
+  trajectory?: Record<unknown>;
 
-  /** Artifact identifiers containing retained diagnostic logs. */
-  log_artifacts?: string[];
+  /** Produced artifacts. */
+  artifacts?: EvaluationArtifactReference[];
 }
 
-/** Available invocation output and optional reference to retained ATIF. */
+/** TaskRun execution phases. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTaskRunObserved {
-  /** Final text-mode answer. */
-  text?: string;
-
-  /** Parsed final JSON-schema output, not duplicated in text. */
-  data?: Record<unknown>;
-
-  /** Reference to normalized ATIF, fetched through the contained trajectory read. */
-  trajectory?: EvaluationTrajectoryReference;
-}
-
-/** Where an effective grader was selected. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvaluationGraderSource {
-  /** Defined on the published job version. */
-  job: "job",
-
-  /** Defined on the Dataset Task. */
-  task: "task",
-}
-
-/** Resolved check selected for a TaskRun before execution starts. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationEffectiveGrader {
-  /** Grader name within this TaskRun. */
-  name: string;
-
-  /** Type of check to apply. */
-  type: EvaluationGraderType;
-
-  /** Job or Task scope that defined this check. */
-  source: EvaluationGraderSource;
-
-  /** Pinned catalog version when the grader uses a Foundry Evaluator. */
-  evaluator?: FoundryEvaluatorReference;
-}
-
-/** The component responsible for a task-run error. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvaluationTaskRunErrorSource {
+union TaskRunPhase {
   string,
-
-  /** The harness could not invoke the agent or collect its evidence. */
-  harness: "harness",
-
-  /** A grader could not evaluate the captured evidence. */
-  grader: "grader",
-
-  /** Orchestration could not complete a task-run phase. */
-  orchestration: "orchestration",
+  acquire: "acquire",
+  invoke: "invoke",
+  collect: "collect",
+  grade: "grade",
+  publish: "publish",
+  complete: "complete",
 }
 
-/** A structured execution or grader failure for one task run. */
+/** Status of one TaskRun phase. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTaskRunError {
-  /** The machine-readable error code. */
+union TaskRunPhaseStatus {
+  string,
+  succeeded: "succeeded",
+  failed: "failed",
+  cancelled: "cancelled",
+  skipped: "skipped",
+
+  /** The phase may or may not have taken effect. */
+  outcome_unknown: "outcome_unknown",
+}
+
+/** A phase failure. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model ExecutionFailure {
+  /** The failure code. */
   code: string;
 
-  /** The human-readable error description. */
+  /** The failure description. */
   message: string;
 
-  /** The component where the failure occurred. */
-  source: EvaluationTaskRunErrorSource;
-
-  /** The exception type when available. */
-  exception_type?: string;
-
-  /** The time when the failure occurred. */
-  occurred_at?: FoundryTimestamp;
-
-  /** Whether another attempt might succeed, regardless of remaining service-policy retries. */
-  retriable: boolean;
-
-  /** Identifiers of retained artifacts with additional failure evidence. */
-  artifact_ids?: string[];
+  /** Whether the phase may be retried. */
+  retryable: boolean;
 }
 
-/** Quality result of a successfully executed TaskRun. */
+/** The outcome of one TaskRun phase. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvaluationTaskOverallResult {
-  pass: "pass",
-  fail: "fail",
-  skipped: "skipped",
+model PhaseResult {
+  /** The phase. */
+  phase: TaskRunPhase;
+
+  /** The phase status. */
+  status: TaskRunPhaseStatus;
+
+  /** When the phase started. */
+  started_at: FoundryTimestamp | null;
+
+  /** When the phase finished. */
+  finished_at: FoundryTimestamp | null;
+
+  /** The phase failure, or null. */
+  failure: ExecutionFailure | null;
 }
 
-/** One attempt of one task within an EvalRun. */
+/**
+ * One attempt of one Task within an EvaluationRun. `error` is set only when `status` is
+ * `failed`: the last failed or unknown phase, with `param` naming that phase; other execution
+ * failures follow in `details`, at most 10. Grader errors stay in `grader_results[].error`.
+ */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalTaskRun {
-  /** The task-run identifier. */
+model TaskRun {
+  /** The TaskRun ID, scoped to its parent Run. */
   id: string;
 
-  /** The parent EvalRun identifier. */
+  /** The execution status. */
+  status: TaskRunStatus;
+
+  /** The execution failure, set only when `status` is `failed`. */
+  error?: ApiError;
+
+  /** The parent Run ID. */
   evaluation_run_id: string;
 
-  /** The resolved task identity. */
-  task: EvaluationTaskSummary;
+  /** The Task ID. */
+  task_id?: string;
 
-  /** The one-based repetition number for this task. */
-  repetition_number: int32;
+  /** The one-based repetition number, present with `task_id`. */
+  @minValue(1)
+  repetition?: int32;
 
-  /** The task-run execution status. */
-  status: EvaluationTaskRunStatus;
+  /** The quality result, set exactly when `status` is terminal; otherwise null. */
+  result: TaskRunResult | null;
 
-  /** Prompt sent to the target, without grader-only reference facts. */
-  input: PromptTaskInput;
+  /** The selected source record. */
+  provenance: SourceProvenance;
 
-  /** Reference facts visible only to graders. */
-  expected?: Record<unknown>;
+  /** The resolved target invoked by this TaskRun. */
+  target?: EvaluationTargetDefinition;
 
-  /** Task metadata visible only to graders. */
-  metadata?: Record<unknown>;
+  /** The original Task input. */
+  input?: Record<unknown>;
 
-  /** Final output and trajectory reference, when available. */
-  observed?: EvaluationTaskRunObserved;
+  /** Reference evidence visible to graders. */
+  expected?: ExpectedEvidence;
 
-  /** Available target usage, excluding grader calls. */
-  usage?: EvaluationTaskRunUsage;
+  /** Evidence produced by the target; required for successful completed evidence. */
+  observed?: ObservedEvidence;
 
-  /** Metadata for retained evidence, empty when none was captured. */
-  artifacts: EvaluationArtifact[];
+  /** One result per grader with a retained terminal result, Job graders first, each in definition order. */
+  grader_results: GraderResult[];
 
-  /** Retry counts, checkpoints, and retained diagnostic logs. */
-  diagnostics?: EvaluationTaskRunDiagnostics;
+  /** Execution phase outcomes. */
+  phase_results: PhaseResult[];
 
-  /** All job and Task checks, exposed before grading and retained after invocation failure. */
-  effective_graders: EvaluationEffectiveGrader[];
+  /** Usage for the agent invocation and every judge call. */
+  usage: EvaluationUsage;
 
-  /** Outcomes from attempted effective graders. */
-  grader_results: EvaluationGraderResult[];
+  /** TaskRun latency in milliseconds, or null. */
+  latency_ms: int64 | null;
 
-  /** Pass, quality fail, or all graders N/A; absent on failure and cancellation. */
-  overall_result?: EvaluationTaskOverallResult;
+  /** The time when execution started, or null before it starts. */
+  started_at: FoundryTimestamp | null;
 
-  /** Upcoming and reached task-run phases. */
-  lifecycle: EvaluationLifecycle;
-
-  /** The terminal task-run error, when execution or grading failed. */
-  error?: EvaluationTaskRunError;
-}
-
-/** A normalized ATIF trajectory. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTrajectory {
-  /** The ATIF schema version. */
-  schema_version: string;
-
-  /** The trajectory session identifier. */
-  session_id: string;
-
-  /** The trajectory identifier. */
-  trajectory_id: string;
-
-  /** The agent identity and model recorded by ATIF. */
-  agent: Record<unknown>;
-
-  /** Ordered ATIF messages, tool calls, observations, and final output. */
-  steps: Record<unknown>[];
-
-  /** Aggregate metrics recorded by ATIF. */
-  final_metrics?: Record<unknown>;
+  /** The time when the TaskRun became terminal; null while `status` is not terminal. */
+  finished_at: FoundryTimestamp | null;
 }
