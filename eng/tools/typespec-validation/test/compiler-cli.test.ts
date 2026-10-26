@@ -1,7 +1,7 @@
 import { execFile } from "node:child_process";
 import { mkdir, mkdtemp, realpath, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join, resolve } from "pathe";
+import { dirname, join, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
 import { promisify, stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
@@ -33,11 +33,22 @@ beforeEach(async () => {
     join(root, "suppressions.yaml"),
     "- tool: TypeSpecValidation\n  paths: [specification/service/data-plane/Project/tspconfig.yaml]\n  rules: [SdkTspConfigValidation]\n  reason: command fixture\n",
   );
-  await symlink(
-    fileURLToPath(new URL("../../../../node_modules", import.meta.url)),
-    join(root, "node_modules"),
-    "junction",
-  );
+  // Resolve pnpm's links before exposing packages through the fixture's Windows junctions.
+  for (const packageName of [
+    "@typespec/compiler",
+    "@azure-tools/typespec-autorest",
+    "@azure-tools/typespec-azure-core",
+    "@azure-tools/typespec-azure-rulesets",
+    "@azure-tools/typespec-azure-rulesets-original",
+    "@azure-tools/typespec-client-generator-core",
+  ]) {
+    await mkdir(join(root, "node_modules", dirname(packageName)), { recursive: true });
+    await symlink(
+      await realpath(new URL(`../../../../node_modules/${packageName}`, import.meta.url)),
+      join(root, "node_modules", packageName),
+      "junction",
+    );
+  }
   const compiled = await compileTypeSpec(join(root, project));
   expect(compiled.success, JSON.stringify(compiled.diagnostics)).toBe(true);
   expect((await formatTypeSpec(join(root, project))).success).toBe(true);
