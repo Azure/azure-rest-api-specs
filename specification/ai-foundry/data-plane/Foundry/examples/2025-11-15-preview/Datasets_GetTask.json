@@ -1,0 +1,37 @@
+{
+  "title": "Get a Task",
+  "operationId": "Datasets_getTask",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "refund-cases",
+    "version": "1",
+    "task_id": "refund-window-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "refund-window-01",
+        "description": "Purchase inside the 30-day window.",
+        "inputs": {
+          "type": "prompt",
+          "instruction": "Can I return headphones I bought 3 weeks ago?"
+        },
+        "expected": {
+          "days_left": 9
+        },
+        "metadata": {
+          "scenario": "refund"
+        },
+        "graders": [
+          {
+            "name": "days-left",
+            "type": "exact_match",
+            "actual": "{{outputs.data.days_left}}",
+            "expected": "{{expected.days_left}}"
+          }
+        ]
+      }
+    }
+  }
+}

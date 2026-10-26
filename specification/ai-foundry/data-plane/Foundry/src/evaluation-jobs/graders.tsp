@@ -55,7 +55,7 @@ model GraderLiteral {
 }
 
 /**
- * A JSON scalar literal, a `{{inputs|expected|outputs.path}}` template, or an explicit literal
+ * A JSON scalar literal, a `{{inputs|expected|metadata|outputs.path}}` template, or an explicit literal
  * string. A value that is exactly one placeholder keeps the evidence's JSON type.
  */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)

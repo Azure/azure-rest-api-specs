@@ -7236,6 +7236,90 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - Datasets
+    post:
+      operationId: Datasets_createVersion
+      summary: Create a Dataset version
+      description: |-
+        Creates a `taskset` version with the next service-assigned version, records it as `queued` and
+        starts validation; the first version creates the Dataset. A name that holds another Dataset type
+        returns `409 dataset_type_conflict`; a `base_version` that has not succeeded returns
+        `409 dataset_version_not_ready`. Poll the returned URL until `validation_status` is terminal.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          description: Dataset name.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Operation-Location:
+              required: true
+              description: URL of the version to poll for validation status.
+              schema:
+                type: string
+            Location:
+              required: true
+              description: URL of the created version.
+              schema:
+                type: string
+            Retry-After:
+              required: false
+              description: Recommended delay before polling, in seconds.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetVersion'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Datasets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewDatasetVersion'
+        description: The version to create.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
   /datasets/{name}/versions/{version}:
     get:
       operationId: Datasets_getVersion
@@ -7510,11 +7594,13 @@ paths:
             schema:
               $ref: '#/components/schemas/PendingUploadRequest'
         description: The pending upload request parameters
-  /datasets/{name}/versions/{version}:validate:
-    post:
-      operationId: Datasets_validate
-      summary: Validate evaluation Task content
-      description: Starts validation of the current Task manifest on a taskset Dataset version.
+  /datasets/{name}/versions/{version}/tasks:
+    get:
+      operationId: Datasets_listTasks
+      summary: List Tasks
+      description: |-
+        Lists a succeeded `taskset` version's Tasks in version order, in canonical JSON. Another
+        validation status returns `409 dataset_version_not_ready`.
       parameters:
         - name: Foundry-Features
           in: header
@@ -7533,7 +7619,110 @@ paths:
         - name: version
           in: path
           required: true
-          description: Dataset version to validate.
+          description: Dataset version.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Datasets
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /datasets/{name}/versions/{version}/tasks/{task_id}:
+    get:
+      operationId: Datasets_getTask
+      summary: Get a Task
+      description: Retrieves one Task of a succeeded `taskset` version.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: Dataset name.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: Dataset version.
+          schema:
+            type: string
+        - name: task_id
+          in: path
+          required: true
+          description: Task ID.
           schema:
             type: string
         - name: api-version
@@ -7544,24 +7733,63 @@ paths:
             type: string
           explode: false
       responses:
-        '202':
-          description: The request has been accepted for processing, but processing has not yet completed.
-          headers:
-            Location:
-              required: true
-              description: URL of the Dataset version to poll for validation status.
-              schema:
-                type: string
-            Retry-After:
-              required: false
-              description: Recommended delay before polling, in seconds.
-              schema:
-                type: integer
-                format: int32
+        '200':
+          description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DatasetVersion'
+                $ref: '#/components/schemas/Task'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Datasets
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /datasets/{name}/versions:start_pending_upload:
+    post:
+      operationId: Datasets_startTasksetPendingUpload
+      summary: Start a taskset upload
+      description: Returns a write URL for a `taskset` JSONL upload; no version is created.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: Dataset name.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TasksetPendingUpload'
         4XX:
           description: Client error
           content:
@@ -51999,13 +52227,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Dataset source for evaluator generation jobs — reference to a dataset.
-    DatasetKind:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - taskset
-      description: The authored content carried by a Dataset version, independent of its storage type.
     DatasetReference:
       type: object
       required:
@@ -52026,61 +52247,15 @@ components:
           enum:
             - uri_file
             - uri_folder
+            - taskset
       description: Enum to determine the type of data.
-    DatasetValidationError:
-      type: object
-      required:
-        - code
-        - message
-      properties:
-        code:
-          type: string
-          description: Machine-readable failure category.
-        message:
-          type: string
-          description: Explanation of the invalid Task or manifest.
-        task_id:
-          type: string
-          description: Task identifier, when a specific Task caused the error.
-      description: An actionable validation failure without disclosing private Task content.
-    DatasetValidationStatus:
-      type: string
-      enum:
-        - pending
-        - in_progress
-        - succeeded
-        - failed
-      description: Evaluation-content validation state for a Dataset version.
     DatasetVersion:
       type: object
       required:
-        - dataUri
         - type
         - name
         - version
       properties:
-        kind:
-          $ref: '#/components/schemas/DatasetKind'
-          description: The purpose of this Dataset version; `taskset` identifies evaluation Task content.
-        validation_status:
-          $ref: '#/components/schemas/DatasetValidationStatus'
-          description: Current validation state of the Task content.
-          readOnly: true
-        validation_errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/DatasetValidationError'
-          description: Errors produced by content validation, if any.
-          readOnly: true
-        content_digest:
-          type: string
-          description: Digest of the exact content approved by successful validation.
-          readOnly: true
-        dataUri:
-          type: string
-          minLength: 1
-          pattern: '[a-zA-Z0-9_]'
-          description: URI of the data ([example](https://go.microsoft.com/fwlink/?linkid=2202330))
         type:
           $ref: '#/components/schemas/DatasetType'
           description: Dataset type
@@ -52108,15 +52283,13 @@ components:
         mapping:
           uri_file: '#/components/schemas/FileDatasetVersion'
           uri_folder: '#/components/schemas/FolderDatasetVersion'
+          taskset: '#/components/schemas/TasksetDatasetVersion'
       description: DatasetVersion Definition
     DatasetVersionUpdate:
       type: object
       required:
         - type
       properties:
-        kind:
-          $ref: '#/components/schemas/DatasetKind'
-          description: The purpose of this Dataset version; `taskset` identifies evaluation Task content.
         type:
           $ref: '#/components/schemas/DatasetType'
           description: Dataset type
@@ -52133,6 +52306,7 @@ components:
         mapping:
           uri_file: '#/components/schemas/FileDatasetVersionUpdate'
           uri_folder: '#/components/schemas/FolderDatasetVersionUpdate'
+          taskset: '#/components/schemas/TasksetDatasetVersionUpdate'
       description: DatasetVersion Definition
     DayOfWeek:
       anyOf:
@@ -53730,7 +53904,7 @@ components:
           description: Indicates JSON content.
         value:
           description: The JSON value.
-      description: JSON content supplied to a task or its graders.
+      description: A typed JSON value.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -54659,23 +54833,12 @@ components:
     EvaluationTaskConstraints:
       type: object
       properties:
-        maxDurationSeconds:
+        max_duration_seconds:
           type: integer
           format: int32
           minimum: 1
-          description: Maximum attempt duration in seconds.
-      description: Optional deadline for the entire task attempt, including grading.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-    EvaluationTaskContent:
-      anyOf:
-        - type: string
-        - type: object
-          unevaluatedProperties: {}
-        - $ref: '#/components/schemas/EvaluationTextContent'
-        - $ref: '#/components/schemas/EvaluationJsonContent'
-      description: Task content, including shorthand strings and JSON objects.
+          description: Deadline in seconds for the whole TaskRun attempt, including grading.
+      description: Optional limits for one TaskRun attempt.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -54830,7 +54993,7 @@ components:
         value:
           type: string
           description: The text value.
-      description: Text content supplied to a task or its graders.
+      description: A typed text value.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -55617,12 +55780,18 @@ components:
       type: object
       required:
         - type
+        - dataUri
       properties:
         type:
           type: string
           enum:
             - uri_file
           description: Dataset type
+        dataUri:
+          type: string
+          minLength: 1
+          pattern: '[a-zA-Z0-9_]'
+          description: URI of the data ([example](https://go.microsoft.com/fwlink/?linkid=2202330))
       allOf:
         - $ref: '#/components/schemas/DatasetVersion'
       description: FileDatasetVersion Definition
@@ -55696,12 +55865,18 @@ components:
       type: object
       required:
         - type
+        - dataUri
       properties:
         type:
           type: string
           enum:
             - uri_folder
           description: Dataset type
+        dataUri:
+          type: string
+          minLength: 1
+          pattern: '[a-zA-Z0-9_]'
+          description: URI of the data ([example](https://go.microsoft.com/fwlink/?linkid=2202330))
       allOf:
         - $ref: '#/components/schemas/DatasetVersion'
       description: FileDatasetVersion Definition
@@ -56182,7 +56357,7 @@ components:
         - type: boolean
         - $ref: '#/components/schemas/GraderLiteral'
       description: |-
-        A JSON scalar literal, a `{{inputs|expected|outputs.path}}` template, or an explicit literal
+        A JSON scalar literal, a `{{inputs|expected|metadata|outputs.path}}` template, or an explicit literal
         string. A value that is exactly one placeholder keeps the evidence's JSON type.
       x-ms-foundry-meta:
         conditional_previews:
@@ -58209,6 +58384,71 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Schedules=V1Preview
+    NewDatasetVersion:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/DatasetType'
+          description: The Dataset type; the first version fixes the type for the name.
+      discriminator:
+        propertyName: type
+        mapping:
+          taskset: '#/components/schemas/NewTasksetDatasetVersion'
+      description: Request body that creates a Dataset version with a service-assigned version.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    NewTasksetDatasetVersion:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - taskset
+          description: Dataset type.
+        description:
+          type: string
+          maxLength: 1024
+          description: A description of this version.
+        tags:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: 'Tags for this version: at most 32 keys of up to 64 characters, values up to 256 characters.'
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+          minItems: 1
+          maxItems: 1000
+          description: Inline Tasks.
+        pending_upload_id:
+          type: string
+          description: A finished upload from `start_pending_upload` holding UTF-8 JSONL Tasks, one per line; used by one version only.
+        base_version:
+          type: string
+          description: A concrete succeeded version to edit; `latest` is rejected.
+        delete_task_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 1000
+          description: Base Task IDs to remove.
+      allOf:
+        - $ref: '#/components/schemas/NewDatasetVersion'
+      description: |-
+        Creates a `taskset` version. Without `base_version`, supply exactly one of `tasks` or
+        `pending_upload_id`. With `base_version`, supply at most one of them, plus optional
+        `delete_task_ids`, and change at least one Task: a Task whose `id` matches a base Task replaces
+        it in place, new Tasks follow in order, and deleted IDs are removed. Invalid Task content never
+        returns `400`; it fails the version with `invalid_tasks`.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     NoAuthenticationCredentials:
       type: object
       required:
@@ -87374,13 +87614,12 @@ components:
         instruction:
           type: string
           minLength: 1
-          description: The prompt delivered to the agent.
+          description: The prompt sent to the agent.
         data:
           type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/EvaluationTaskContent'
-          description: Additional named context visible to the agent.
-      description: The single-prompt input mode supported in the MVP.
+          unevaluatedProperties: {}
+          description: A JSON object sent to the agent with the instruction.
+      description: The single-prompt input mode; other input modes are Later.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -90634,31 +90873,40 @@ components:
         id:
           type: string
           minLength: 1
-          description: The task identifier, unique within the Dataset task manifest.
+          maxLength: 128
+          pattern: ^[A-Za-z0-9][A-Za-z0-9._-]*$
+          description: |-
+            Caller-chosen ID, unique within the version and compared case-sensitively. Starts with a
+            letter or digit and does not end with `.`.
         description:
           type: string
-          description: A description of the behavior being evaluated.
+          maxLength: 1024
+          description: A description for people; never sent to the agent or graders.
         inputs:
           $ref: '#/components/schemas/PromptTaskInput'
-          description: The prompt and optional context provided to the agent.
+          description: The prompt and optional data sent to the agent.
         expected:
           type: object
           unevaluatedProperties: {}
-          description: Reference values visible to graders but not to the agent.
+          description: Reference values that graders read; the agent never sees them.
+        metadata:
+          type: object
+          unevaluatedProperties: {}
+          description: Context that graders read; the agent never sees it.
         graders:
           type: array
           items:
             $ref: '#/components/schemas/InlineGrader'
           maxItems: 32
-          description: Inline graders run for this Task in addition to the Job's graders.
+          description: Inline graders that run in addition to the Job's graders.
         constraints:
           $ref: '#/components/schemas/EvaluationTaskConstraints'
-          description: Per-attempt deadline including invocation and grading.
-        metadata:
-          type: object
-          unevaluatedProperties: {}
-          description: Caller-defined JSON annotations visible to graders.
-      description: A reusable evaluation task.
+          description: Limits for each TaskRun attempt of this Task.
+      description: |-
+        One evaluation Task: a prompt for the agent, optional reference values and context for graders,
+        and optional Task-specific graders. Unknown fields are invalid. Graders read Task values through
+        `{{inputs.*}}`, `{{expected.*}}` and `{{metadata.*}}`, and the agent's answer through
+        `{{outputs.text}}` and `{{outputs.data.*}}`.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -90871,6 +91119,124 @@ components:
           format: int64
           description: TaskRuns that were skipped.
       description: TaskRun counts by execution status.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    TasksetDatasetVersion:
+      type: object
+      required:
+        - type
+        - validation_status
+        - base_version
+        - task_count
+        - content_digest
+        - created_at
+        - finished_at
+      properties:
+        type:
+          type: string
+          enum:
+            - taskset
+          description: Dataset type.
+        validation_status:
+          $ref: '#/components/schemas/TasksetValidationStatus'
+          description: The validation state.
+          readOnly: true
+        error:
+          $ref: '#/components/schemas/OpenAI.Error'
+          description: |-
+            Set when validation fails, with code `invalid_tasks` or `validation_timeout`. `details` holds the
+            first 100 problems in Task order, each with a `param` such as `lines[11].graders[0].actual`,
+            `tasks[3].id` or `delete_task_ids[0]`.
+          readOnly: true
+        base_version:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: The version this one edits, or null.
+          readOnly: true
+        task_count:
+          anyOf:
+            - type: integer
+              format: int32
+            - type: 'null'
+          description: The number of Tasks, set when validation succeeds.
+          readOnly: true
+        content_digest:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Lowercase hex SHA-256 over the canonical (RFC 8785) Tasks in order, set when validation succeeds.
+          readOnly: true
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when the version was created.
+          readOnly: true
+        finished_at:
+          anyOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+            - type: 'null'
+          description: The time when validation finished, or null.
+          readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/DatasetVersion'
+      description: |-
+        A version of evaluation Tasks. Versions are service-assigned and immutable: native `PATCH` and
+        `credentials` return `400 operation_not_supported_for_type`. Use it from a Job or Run only after
+        `validation_status` is `succeeded`; otherwise they return `409 dataset_version_not_ready`.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    TasksetDatasetVersionUpdate:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - taskset
+          description: Dataset type.
+      allOf:
+        - $ref: '#/components/schemas/DatasetVersionUpdate'
+      description: |-
+        A version of evaluation Tasks. Versions are service-assigned and immutable: native `PATCH` and
+        `credentials` return `400 operation_not_supported_for_type`. Use it from a Job or Run only after
+        `validation_status` is `succeeded`; otherwise they return `409 dataset_version_not_ready`.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    TasksetPendingUpload:
+      type: object
+      required:
+        - pending_upload_id
+        - upload_url
+        - expires_at
+      properties:
+        pending_upload_id:
+          type: string
+          description: The upload ID to pass as `pending_upload_id`.
+        upload_url:
+          type: string
+          format: uri
+          description: A write-only HTTPS URL for one block blob.
+        expires_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when the upload expires.
+      description: A write URL for a `taskset` upload; no version exists until a version create claims it.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    TasksetValidationStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - queued
+            - in_progress
+            - succeeded
+            - failed
+      description: Validation state of a `taskset` Dataset version.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview

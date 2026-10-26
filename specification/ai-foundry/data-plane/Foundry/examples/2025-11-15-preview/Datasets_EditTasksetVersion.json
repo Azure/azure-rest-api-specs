@@ -1,0 +1,48 @@
+{
+  "title": "Edit a taskset version",
+  "operationId": "Datasets_createVersion",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "refund-cases",
+    "body": {
+      "type": "taskset",
+      "base_version": "4",
+      "description": "Fix claim 17; drop two retired cases.",
+      "tasks": [
+        {
+          "id": "refund-window-17",
+          "inputs": {
+            "type": "prompt",
+            "instruction": "Can I return a gift without a receipt?"
+          }
+        }
+      ],
+      "delete_task_ids": [
+        "refund-window-03",
+        "refund-window-09"
+      ]
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "/datasets/refund-cases/versions/5",
+        "Location": "/datasets/refund-cases/versions/5",
+        "Retry-After": 5
+      },
+      "body": {
+        "name": "refund-cases",
+        "version": "5",
+        "type": "taskset",
+        "description": "Fix claim 17; drop two retired cases.",
+        "validation_status": "queued",
+        "base_version": "4",
+        "task_count": null,
+        "content_digest": null,
+        "created_at": 1792865400,
+        "finished_at": null
+      }
+    }
+  }
+}

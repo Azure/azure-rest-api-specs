@@ -13,7 +13,7 @@ const EvaluationServiceV2RequiredPreviews = #{
   conditional_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
 };
 
-/** Text content supplied to a task or its graders. */
+/** A typed text value. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvaluationTextContent {
   /** Indicates text content. */
@@ -23,7 +23,7 @@ model EvaluationTextContent {
   value: string;
 }
 
-/** JSON content supplied to a task or its graders. */
+/** A typed JSON value. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvaluationJsonContent {
   /** Indicates JSON content. */
@@ -33,67 +33,62 @@ model EvaluationJsonContent {
   value: unknown;
 }
 
-/** Task content, including shorthand strings and JSON objects. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvaluationTaskContent {
-  /** A text value without a content wrapper. */
-  shorthand_text: string,
-
-  /** A JSON object without a content wrapper. */
-  shorthand_json: Record<unknown>,
-
-  /** A typed text value. */
-  text: EvaluationTextContent,
-
-  /** A typed JSON value. */
-  json: EvaluationJsonContent,
-}
-
-/** The single-prompt input mode supported in the MVP. */
+/** The single-prompt input mode; other input modes are Later. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model PromptTaskInput {
   /** Indicates a single prompt invocation. */
   type: "prompt";
 
-  /** The prompt delivered to the agent. */
+  /** The prompt sent to the agent. */
   @minLength(1)
   instruction: string;
 
-  /** Additional named context visible to the agent. */
-  data?: Record<EvaluationTaskContent>;
+  /** A JSON object sent to the agent with the instruction. */
+  data?: Record<unknown>;
 }
 
-/** Optional deadline for the entire task attempt, including grading. */
+/** Optional limits for one TaskRun attempt. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvaluationTaskConstraints {
-  /** Maximum attempt duration in seconds. */
+  /** Deadline in seconds for the whole TaskRun attempt, including grading. */
   @minValue(1)
-  maxDurationSeconds?: int32;
+  max_duration_seconds?: int32;
 }
 
-/** A reusable evaluation task. */
+/**
+ * One evaluation Task: a prompt for the agent, optional reference values and context for graders,
+ * and optional Task-specific graders. Unknown fields are invalid. Graders read Task values through
+ * `{{inputs.*}}`, `{{expected.*}}` and `{{metadata.*}}`, and the agent's answer through
+ * `{{outputs.text}}` and `{{outputs.data.*}}`.
+ */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model Task {
-  /** The task identifier, unique within the Dataset task manifest. */
+  /**
+   * Caller-chosen ID, unique within the version and compared case-sensitively. Starts with a
+   * letter or digit and does not end with `.`.
+   */
   @minLength(1)
+  @maxLength(128)
+  @pattern("^[A-Za-z0-9][A-Za-z0-9._-]*$")
   id: string;
 
-  /** A description of the behavior being evaluated. */
+  /** A description for people; never sent to the agent or graders. */
+  @maxLength(1024)
   description?: string;
 
-  /** The prompt and optional context provided to the agent. */
+  /** The prompt and optional data sent to the agent. */
   inputs: PromptTaskInput;
 
-  /** Reference values visible to graders but not to the agent. */
+  /** Reference values that graders read; the agent never sees them. */
   expected?: Record<unknown>;
 
-  /** Inline graders run for this Task in addition to the Job's graders. */
+  /** Context that graders read; the agent never sees it. */
+  metadata?: Record<unknown>;
+
+  /** Inline graders that run in addition to the Job's graders. */
   @maxItems(32)
   graders?: InlineGrader[];
 
-  /** Per-attempt deadline including invocation and grading. */
+  /** Limits for each TaskRun attempt of this Task. */
   constraints?: EvaluationTaskConstraints;
-
-  /** Caller-defined JSON annotations visible to graders. */
-  metadata?: Record<unknown>;
 }
