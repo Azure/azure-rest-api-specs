@@ -84,6 +84,7 @@ interface Students {
   /**
    * Create and add a new student to the specified lab or update the details of an existing student in a lab. Note the student must have a valid tenant to accept the lab after they have been added to lab.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is InvoiceSectionStudentOps.CreateOrUpdateSync<
     StudentDetails,
     ErrorType = DefaultErrorResponse

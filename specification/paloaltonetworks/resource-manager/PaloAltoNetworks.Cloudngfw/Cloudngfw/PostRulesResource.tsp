@@ -37,6 +37,7 @@ interface PostRulesResources {
   /**
    * Create a PostRulesResource
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is ArmResourceCreateOrReplaceAsync<PostRulesResource>;
 
   /**

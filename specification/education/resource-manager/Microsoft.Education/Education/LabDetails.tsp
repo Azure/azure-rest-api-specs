@@ -117,6 +117,7 @@ interface Labs {
   /**
    * Create a new lab or update a previously created lab.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is InvoiceSectionLabOps.CreateOrUpdateSync<
     LabDetails,
     ErrorType = DefaultErrorResponse

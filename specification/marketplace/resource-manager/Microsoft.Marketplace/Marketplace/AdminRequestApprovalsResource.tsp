@@ -48,6 +48,7 @@ interface AdminRequestApprovalsResources {
    * Update the admin action, weather the request is approved or rejected and the approved plans
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing updateAdminRequestApproval retains its tenant-scoped route; preserve published resource IDs and API paths."
   updateAdminRequestApproval is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
     AdminRequestApprovalsResource,
     Response = ArmResourceUpdatedResponse<AdminRequestApprovalsResource>,

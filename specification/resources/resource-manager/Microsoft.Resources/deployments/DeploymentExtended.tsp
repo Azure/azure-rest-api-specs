@@ -259,6 +259,7 @@ interface DeploymentsExtendedTenant {
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdateAtTenantScope retains its tenant-scoped route; preserve published resource IDs and API paths."
   @summary("Deploys resources at tenant scope.")
   @tag("Deployments")
   createOrUpdateAtTenantScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
@@ -457,6 +458,7 @@ interface DeploymentExtendedManagementGroup {
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdateAtManagementGroupScope retains its tenant-scoped route; preserve published resource IDs and API paths."
   @summary("Deploys resources at management group scope.")
   @tag("Deployments")
   createOrUpdateAtManagementGroupScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<

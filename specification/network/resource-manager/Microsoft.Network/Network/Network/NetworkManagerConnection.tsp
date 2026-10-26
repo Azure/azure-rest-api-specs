@@ -128,6 +128,7 @@ interface ManagementGroupNetworkManagerConnections {
   /**
    * Create a network manager connection on this management group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @tag("NetworkManagerConnections")
   createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ManagementGroup<"managementGroupId">,

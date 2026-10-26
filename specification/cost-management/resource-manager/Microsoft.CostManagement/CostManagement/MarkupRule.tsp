@@ -64,6 +64,7 @@ interface MarkupRules {
   /**
    * Create or update a markup rule for a billing account and billing profile.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdate is Extension.CreateOrReplaceSync<
     MarkupRuleBillingProfile,
     MarkupRule,

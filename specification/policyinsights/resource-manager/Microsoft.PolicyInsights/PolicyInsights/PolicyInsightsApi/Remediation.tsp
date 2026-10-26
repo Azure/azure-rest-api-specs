@@ -127,6 +127,7 @@ interface Remediations {
   /**
    * Creates or updates a remediation at management group scope.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdateAtManagementGroup retains its tenant-scoped route; preserve published resource IDs and API paths."
   createOrUpdateAtManagementGroup is RemediationManagementGroupOps.CreateOrUpdateSync<
     Remediation,
     Response =

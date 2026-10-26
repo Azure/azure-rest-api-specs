@@ -77,6 +77,7 @@ interface InvoiceSections {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing createOrUpdate retains its tenant-scoped route; preserve published resource IDs and API paths."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("InvoiceSection")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<

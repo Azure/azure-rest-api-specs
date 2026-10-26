@@ -121,6 +121,7 @@ interface FilesNoSubscription {
    * Creates a new file under a workspace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-tenant-level-apis" "Back compat: Existing create retains its tenant-scoped route; preserve published resource IDs and API paths."
   create is FilesNoSubscriptionOps.CreateOrUpdateSync<
     FileDetails,
     Response = ArmResourceCreatedSyncResponse<FileDetails>
