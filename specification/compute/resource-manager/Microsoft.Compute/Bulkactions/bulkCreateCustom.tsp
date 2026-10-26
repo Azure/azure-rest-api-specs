@@ -25,7 +25,7 @@ namespace Microsoft.Compute;
 // ============================================================
 
 alias BulkCreateCustomLocationParameter = {
-  /** The Azure region that contains the bulk create custom operations. */
+  /** The location name. */
   @path
   @minLength(1)
   @segment("locations")
@@ -34,7 +34,7 @@ alias BulkCreateCustomLocationParameter = {
 };
 
 alias BulkCreateCustomId = {
-  /** The name of the bulk create custom operation. The value must be a UUID. */
+  /** The name of the BulkCreateCustom. The value must be an UUID. */
   @path
   @minLength(1)
   @segment("bulkCreateCustom")
@@ -90,11 +90,11 @@ model BulkCreateCustomResource {
 // ============================================================
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Bare envelope used as the @listsResource target; shape is documented via LocationBasedBulkCreateCustom."
-@doc("Default settings for the virtual machines created by a bulk create custom operation.")
+@doc("Envelope properties shared by BulkCreateCustom. Used as the @listsResource target to avoid collision with the interface name.")
 model BulkCreateCustomEnvelope {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid envelope property for this resource."
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("Default availability zones for the virtual machines. An individual virtual machine can override this setting.")
+  @doc("Zones in which the BulkCreateCustom is available")
   zones?: Array<string>;
 
   // Spread the ARM common-types envelope property; versioning and docs are
@@ -109,7 +109,7 @@ model BulkCreateCustomEnvelope {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags free-form object matches the established compute contract."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Tags is a standard ARM resource property."
-  @doc("Default tags for the virtual machines created by the operation.")
+  @doc("Resource tags.")
   tags?: Record<string>;
 
   ...ManagedServiceIdentityProperty;
@@ -125,10 +125,10 @@ model BulkCreateCustomEnvelope {
   "The extended location of the virtual machines created by the BulkCreateCustom operation."
 );
 
-@doc("A bulk create custom operation that creates virtual machines with per-virtual-machine settings. The Azure region is specified in the resource path.")
+@doc("Location based BulkCreateCustom resource. The location is part of the resource path.")
 model LocationBasedBulkCreateCustom
   is Azure.ResourceManager.ProxyResource<BulkCreateCustomProperties> {
-  @doc("The Azure region in which the virtual machines are created.")
+  @doc("The location name.")
   @path
   @minLength(1)
   @segment("locations")
@@ -139,19 +139,19 @@ model LocationBasedBulkCreateCustom
   ...BulkCreateCustomEnvelope;
 }
 
-@doc("Settings that override the shared virtual machine configuration.")
+@doc("Override fields shared by per-VM and per-VM-size overrides. Each set field takes precedence over the operation-level value. VM size, zone, priority, eviction policy, and billing are owned by the service and cannot be set here.")
 model BulkCreateCustomOverrideBase {
-  @doc("Virtual machine settings that override the corresponding settings in computeProfile.virtualMachineProfile.")
+  @doc("VM profile, the same shape as operation-level ComputeProfile.virtualMachineProfile. Overrides the operation-level VM profile.")
   virtualMachineProfile?: BulkactionVMProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags free-form object matches the established compute contract."
   @doc("Tags overriding the operation-level tags.")
   tags?: Record<string>;
 
-  @doc("Managed identity settings that override the operation-level settings.")
+  @doc("Identity overriding the operation-level identity.")
   identity?: VirtualMachineIdentity;
 
-  @doc("Marketplace plan settings that override the operation-level settings.")
+  @doc("Plan overriding the operation-level plan.")
   plan?: Plan;
 
   @identifiers(#["name"])
@@ -159,12 +159,9 @@ model BulkCreateCustomOverrideBase {
   extensions?: Array<BulkactionVMExtension>;
 }
 
-@doc("Settings for one virtual machine in a bulk create custom operation.")
+@doc("A single per-VM override. Extends the shared override fields with a per-VM name.")
 model BulkCreateCustomOverride {
-  @doc("""
-    The virtual machine resource name. If omitted, the name is generated as {prefix}_{index}
-    using virtualMachineNamePrefix and the zero-based index in the overrides list.
-    """)
+  @doc("ARM VM name for this VM. Optional; when omitted the name is generated from the prefix as {prefix}_{index}.")
   virtualMachineName?: string;
 
   @added(Versions.`2026-10-06-preview`)
@@ -182,19 +179,13 @@ model BulkCreateCustomOverride {
   ...BulkCreateCustomOverrideBase;
 }
 
-@doc("Per-virtual-machine settings and the prefix used to name virtual machines that do not specify a name.")
+@doc("Groups the per-VM overrides with the name prefix that names any override that does not supply its own VM name.")
 model BulkCreateCustomOverridesProfile {
-  @doc("""
-    Prefix used to generate names as {prefix}_{index}, where index is zero-based.
-    Required when any override omits virtualMachineName. Omit this prefix when every override specifies a name.
-    """)
+  @doc("Prefix used to build the ARM VM name ({prefix}_{index}) for overrides that omit a virtualMachineName. Required when any override is unnamed and rejected when every override is named.")
   virtualMachineNamePrefix?: string;
 
   @identifiers(#[])
-  @doc("""
-    One override entry per virtual machine. The list must be nonempty and its length must equal capacity.
-    Each entry must specify at least one value, such as a name, virtual machine profile, or tags.
-    """)
+  @doc("Per-VM overrides. The count is the VM count and must equal capacity. Each override maps to VM index i.")
   overrides?: Array<BulkCreateCustomOverride>;
 }
 
@@ -258,21 +249,21 @@ model BulkCreateCustomZoneAllocationPolicy {
   zonePreferences?: Array<ZonePreference>;
 }
 
-@doc("Settings and status for a bulk create custom operation.")
+@doc("Details of the BulkCreateCustom.")
 model BulkCreateCustomProperties {
   @visibility(Lifecycle.Read)
-  @doc("The time the bulk create custom operation was created, in UTC.")
+  @doc("The UTC time the BulkCreateCustom resource was created.")
   createdTime?: utcDateTime;
 
   @visibility(Lifecycle.Read)
-  @doc("The provisioning state of the bulk create custom operation.")
+  @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @doc("The requested capacity, measured in the units specified by capacityType.")
+  @doc("Total capacity to achieve. It can be in terms of VMs or vCPUs.")
   @minValue(1)
   capacity: int32;
 
-  @doc("The unit used to measure capacity: virtual machines or virtual CPUs.")
+  @doc("Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs.")
   capacityType?: CapacityType;
 
   @added(Versions.`2026-08-06-preview`)
@@ -289,7 +280,7 @@ model BulkCreateCustomProperties {
   @added(Versions.`2026-08-06-preview`)
   @visibility(Lifecycle.Read)
   @identifiers(#[])
-  @doc("The names, sizes, and availability zones of the virtual machines resolved for the operation.")
+  @doc("The virtual machine resources resolved for the operation.")
   resources?: Array<BulkCreateCustomResource>;
 
   @removed(Versions.`2026-10-06-preview`)
@@ -301,7 +292,7 @@ model BulkCreateCustomProperties {
   @doc("List of VM sizes supported for BulkCreateCustom")
   vmSizesProfile?: Array<BulkCreateCustomVmSizeProfile>;
 
-  @doc("The shared compute profile used as the base for each virtual machine. Per-virtual-machine overrides take precedence.")
+  @doc("Compute Profile to configure the Virtual Machines.")
   computeProfile: ComputeProfile;
 
   @removed(Versions.`2026-10-06-preview`)
@@ -309,18 +300,18 @@ model BulkCreateCustomProperties {
   zoneAllocationPolicy?: BulkCreateCustomZoneAllocationPolicy;
 
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  @doc("Per-virtual-machine settings and an optional name prefix. Required when creating the operation and not returned in responses.")
+  @doc("Per-VM overrides and the shared name prefix, specified when the operation is created.")
   overridesProfile?: BulkCreateCustomOverridesProfile;
 
   @doc("Extra parameters that control how the request is executed, including the retry policy.")
   executionParameters?: ExecutionParameters;
 }
 
-@doc("A page of bulk create custom operations.")
+@doc("List of BulkCreateCustom resources.")
 model BulkCreateCustomListResult {
   @pageItems
   @identifiers(#["id"])
-  @doc("The bulk create custom operations on this page.")
+  @doc("The list of BulkCreateCustom resources.")
   value: LocationBasedBulkCreateCustom[];
 
   @nextLink
@@ -335,26 +326,26 @@ model BulkCreateCustomListResult {
 @added(Versions.`2026-07-06-preview`)
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface BulkCreateCustom {
-  @doc("Gets a bulk create custom operation and its provisioning state.")
+  @doc("Gets an instance of BulkCreateCustoms.")
   get is ArmResourceRead<
     Resource = LocationBasedBulkCreateCustom,
     Parameters = BulkCreateCustomId,
     Response = ArmResponse<LocationBasedBulkCreateCustom>
   >;
 
-  @doc("Gets the status of an asynchronous bulk create custom operation.")
+  @doc("Get the status of an async operation of a BulkCreateCustom.")
   @get
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/asyncOperations/{asyncOperationId}")
   getAsyncOperationStatus(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
 
-    @doc("The Azure region that contains the bulk create custom operation.")
+    @doc("The location name.")
     @path
     @minLength(1)
     location: azureLocation,
 
-    @doc("The identifier of the asynchronous operation.")
+    @doc("The async operation id.")
     @path
     @minLength(1)
     @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
@@ -364,12 +355,7 @@ interface BulkCreateCustom {
     | ErrorResponse;
 
   @renamedFrom(Versions.`2026-10-06`, "createOrUpdate")
-  @doc("""
-    Creates virtual machines from a shared compute profile with per-virtual-machine overrides.
-    Provide one override entry for each requested virtual machine. The operation runs asynchronously.
-    Use Get Async Operation Status to track its progress and Virtual Machines Get Operation Status
-    to retrieve per-virtual-machine results.
-    """)
+  @doc("Creates virtual machines in bulk with custom settings.")
   create is ArmResourceCreateOrUpdateAsync<
     Resource = LocationBasedBulkCreateCustom,
     Parameters = BulkCreateCustomId
@@ -391,7 +377,7 @@ interface BulkCreateCustom {
   >;
 
   @added(Versions.`2026-08-06-preview`)
-  @doc("Lists the operation statuses and any errors for the virtual machines in a bulk create custom operation.")
+  @doc("Gets the operation status for virtual machines in a BulkCreateCustom operation.")
   @list
   virtualMachinesGetOperationStatus is ArmResourceActionSync<
     Resource = LocationBasedBulkCreateCustom,
@@ -400,7 +386,7 @@ interface BulkCreateCustom {
     Parameters = BulkCreateCustomId
   >;
 
-  @doc("Lists bulk create custom operations in the specified resource group and Azure region.")
+  @doc("List BulkCreateCustom resources by resource group.")
   @get
   @autoRoute
   @action("bulkCreateCustom")
@@ -413,7 +399,7 @@ interface BulkCreateCustom {
     ...BulkCreateCustomLocationParameter,
   ): ArmResponse<BulkCreateCustomListResult> | ErrorResponse;
 
-  @doc("Lists bulk create custom operations in the specified subscription and Azure region.")
+  @doc("List BulkCreateCustom resources by subscriptionId.")
   @get
   @autoRoute
   @action("bulkCreateCustom")

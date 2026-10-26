@@ -97,7 +97,7 @@
         "tags": [
           "BulkCreate"
         ],
-        "description": "Lists bulk create operations in the specified subscription and Azure region.",
+        "description": "List BulkCreate resources by subscriptionId.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -108,7 +108,7 @@
           {
             "name": "location",
             "in": "path",
-            "description": "The Azure region that contains the bulk create operations.",
+            "description": "The location name.",
             "required": true,
             "type": "string",
             "minLength": 1
@@ -144,7 +144,7 @@
         "tags": [
           "BulkCreate"
         ],
-        "description": "Gets the status of an asynchronous bulk create operation.",
+        "description": "Get the status of an async operation of a BulkCreate.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -155,7 +155,7 @@
           {
             "name": "location",
             "in": "path",
-            "description": "The Azure region that contains the bulk create operation.",
+            "description": "The location name.",
             "required": true,
             "type": "string",
             "minLength": 1
@@ -163,7 +163,7 @@
           {
             "name": "asyncOperationId",
             "in": "path",
-            "description": "The identifier of the asynchronous operation.",
+            "description": "The async operation id.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -200,7 +200,7 @@
         "tags": [
           "BulkCreateCustom"
         ],
-        "description": "Lists bulk create custom operations in the specified subscription and Azure region.",
+        "description": "List BulkCreateCustom resources by subscriptionId.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -211,7 +211,7 @@
           {
             "name": "location",
             "in": "path",
-            "description": "The Azure region that contains the bulk create custom operations.",
+            "description": "The location name.",
             "required": true,
             "type": "string",
             "minLength": 1
@@ -247,7 +247,7 @@
         "tags": [
           "BulkCreateCustom"
         ],
-        "description": "Gets the status of an asynchronous bulk create custom operation.",
+        "description": "Get the status of an async operation of a BulkCreateCustom.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -258,7 +258,7 @@
           {
             "name": "location",
             "in": "path",
-            "description": "The Azure region that contains the bulk create custom operation.",
+            "description": "The location name.",
             "required": true,
             "type": "string",
             "minLength": 1
@@ -266,7 +266,7 @@
           {
             "name": "asyncOperationId",
             "in": "path",
-            "description": "The identifier of the asynchronous operation.",
+            "description": "The async operation id.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -303,7 +303,7 @@
         "tags": [
           "BulkCreate"
         ],
-        "description": "Lists bulk create operations in the specified resource group and Azure region.",
+        "description": "List BulkCreate resources by resource group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -317,7 +317,7 @@
           {
             "name": "location",
             "in": "path",
-            "description": "The Azure region that contains the bulk create operations.",
+            "description": "The location name.",
             "required": true,
             "type": "string",
             "minLength": 1
@@ -353,7 +353,7 @@
         "tags": [
           "BulkCreate"
         ],
-        "description": "Gets a bulk create operation and its provisioning state.",
+        "description": "Gets an instance of BulkCreates.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -367,7 +367,7 @@
           {
             "name": "location",
             "in": "path",
-            "description": "The Azure region in which the virtual machines are created.",
+            "description": "The location name.",
             "required": true,
             "type": "string",
             "minLength": 1
@@ -375,7 +375,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the bulk create operation. The value must be a UUID.",
+            "description": "The name of the BulkCreate. The value must be an UUID.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -407,7 +407,7 @@
         "tags": [
           "BulkCreate"
         ],
-        "description": "Creates virtual machines from a shared compute profile.\nThe operation runs asynchronously. Use Get Async Operation Status to track its progress\nand Virtual Machines Get Operation Status to retrieve per-virtual-machine results.",
+        "description": "Creates virtual machines in bulk.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -421,7 +421,7 @@
           {
             "name": "location",
             "in": "path",
-            "description": "The Azure region in which the virtual machines are created.",
+            "description": "The location name.",
             "required": true,
             "type": "string",
             "minLength": 1
@@ -429,7 +429,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the bulk create operation. The value must be a UUID.",
+            "description": "The name of the BulkCreate. The value must be an UUID.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -496,7 +496,7 @@
         "tags": [
           "BulkCreate"
         ],
-        "description": "Lists the operation statuses and any errors for the virtual machines in a bulk create operation.",
+        "description": "Gets the operation status for virtual machines in a BulkCreate operation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -510,7 +510,7 @@
           {
             "name": "location",
             "in": "path",
-            "description": "The Azure region in which the virtual machines are created.",
+            "description": "The location name.",
             "required": true,
             "type": "string",
             "minLength": 1
@@ -518,7 +518,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the bulk create operation. The value must be a UUID.",
+            "description": "The name of the BulkCreate. The value must be an UUID.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -556,7 +556,7 @@
         "tags": [
           "BulkCreateCustom"
         ],
-        "description": "Lists bulk create custom operations in the specified resource group and Azure region.",
+        "description": "List BulkCreateCustom resources by resource group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -570,7 +570,7 @@
           {
             "name": "location",
             "in": "path",
-            "description": "The Azure region that contains the bulk create custom operations.",
+            "description": "The location name.",
             "required": true,
             "type": "string",
             "minLength": 1
@@ -606,7 +606,7 @@
         "tags": [
           "BulkCreateCustom"
         ],
-        "description": "Gets a bulk create custom operation and its provisioning state.",
+        "description": "Gets an instance of BulkCreateCustoms.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -620,7 +620,7 @@
           {
             "name": "location",
             "in": "path",
-            "description": "The Azure region in which the virtual machines are created.",
+            "description": "The location name.",
             "required": true,
             "type": "string",
             "minLength": 1
@@ -628,7 +628,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the bulk create custom operation. The value must be a UUID.",
+            "description": "The name of the BulkCreateCustom. The value must be an UUID.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -660,7 +660,7 @@
         "tags": [
           "BulkCreateCustom"
         ],
-        "description": "Creates virtual machines from a shared compute profile with per-virtual-machine overrides.\nProvide one override entry for each requested virtual machine. The operation runs asynchronously.\nUse Get Async Operation Status to track its progress and Virtual Machines Get Operation Status\nto retrieve per-virtual-machine results.",
+        "description": "Creates virtual machines in bulk with custom settings.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -674,7 +674,7 @@
           {
             "name": "location",
             "in": "path",
-            "description": "The Azure region in which the virtual machines are created.",
+            "description": "The location name.",
             "required": true,
             "type": "string",
             "minLength": 1
@@ -682,7 +682,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the bulk create custom operation. The value must be a UUID.",
+            "description": "The name of the BulkCreateCustom. The value must be an UUID.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -749,7 +749,7 @@
         "tags": [
           "BulkCreateCustom"
         ],
-        "description": "Lists the operation statuses and any errors for the virtual machines in a bulk create custom operation.",
+        "description": "Gets the operation status for virtual machines in a BulkCreateCustom operation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -763,7 +763,7 @@
           {
             "name": "location",
             "in": "path",
-            "description": "The Azure region in which the virtual machines are created.",
+            "description": "The location name.",
             "required": true,
             "type": "string",
             "minLength": 1
@@ -771,7 +771,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the bulk create custom operation. The value must be a UUID.",
+            "description": "The name of the BulkCreateCustom. The value must be an UUID.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1449,11 +1449,11 @@
     },
     "BulkCreateCustomListResult": {
       "type": "object",
-      "description": "A page of bulk create custom operations.",
+      "description": "List of BulkCreateCustom resources.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The bulk create custom operations on this page.",
+          "description": "The list of BulkCreateCustom resources.",
           "items": {
             "$ref": "#/definitions/LocationBasedBulkCreateCustom"
           },
@@ -1497,11 +1497,11 @@
     },
     "BulkCreateCustomOverride": {
       "type": "object",
-      "description": "Settings for one virtual machine in a bulk create custom operation.",
+      "description": "A single per-VM override. Extends the shared override fields with a per-VM name.",
       "properties": {
         "virtualMachineName": {
           "type": "string",
-          "description": "The virtual machine resource name. If omitted, the name is generated as {prefix}_{index}\nusing virtualMachineNamePrefix and the zero-based index in the overrides list."
+          "description": "ARM VM name for this VM. Optional; when omitted the name is generated from the prefix as {prefix}_{index}."
         },
         "zone": {
           "type": "string",
@@ -1517,7 +1517,7 @@
         },
         "virtualMachineProfile": {
           "$ref": "#/definitions/BulkactionVMProperties",
-          "description": "Virtual machine settings that override the corresponding settings in computeProfile.virtualMachineProfile."
+          "description": "VM profile, the same shape as operation-level ComputeProfile.virtualMachineProfile. Overrides the operation-level VM profile."
         },
         "tags": {
           "type": "object",
@@ -1528,11 +1528,11 @@
         },
         "identity": {
           "$ref": "#/definitions/VirtualMachineIdentity",
-          "description": "Managed identity settings that override the operation-level settings."
+          "description": "Identity overriding the operation-level identity."
         },
         "plan": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Plan",
-          "description": "Marketplace plan settings that override the operation-level settings."
+          "description": "Plan overriding the operation-level plan."
         },
         "extensions": {
           "type": "array",
@@ -1548,15 +1548,15 @@
     },
     "BulkCreateCustomOverridesProfile": {
       "type": "object",
-      "description": "Per-virtual-machine settings and the prefix used to name virtual machines that do not specify a name.",
+      "description": "Groups the per-VM overrides with the name prefix that names any override that does not supply its own VM name.",
       "properties": {
         "virtualMachineNamePrefix": {
           "type": "string",
-          "description": "Prefix used to generate names as {prefix}_{index}, where index is zero-based.\nRequired when any override omits virtualMachineName. Omit this prefix when every override specifies a name."
+          "description": "Prefix used to build the ARM VM name ({prefix}_{index}) for overrides that omit a virtualMachineName. Required when any override is unnamed and rejected when every override is named."
         },
         "overrides": {
           "type": "array",
-          "description": "One override entry per virtual machine. The list must be nonempty and its length must equal capacity.\nEach entry must specify at least one value, such as a name, virtual machine profile, or tags.",
+          "description": "Per-VM overrides. The count is the VM count and must equal capacity. Each override maps to VM index i.",
           "items": {
             "$ref": "#/definitions/BulkCreateCustomOverride"
           },
@@ -1566,32 +1566,32 @@
     },
     "BulkCreateCustomProperties": {
       "type": "object",
-      "description": "Settings and status for a bulk create custom operation.",
+      "description": "Details of the BulkCreateCustom.",
       "properties": {
         "createdTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the bulk create custom operation was created, in UTC.",
+          "description": "The UTC time the BulkCreateCustom resource was created.",
           "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the bulk create custom operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         },
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "The requested capacity, measured in the units specified by capacityType.",
+          "description": "Total capacity to achieve. It can be in terms of VMs or vCPUs.",
           "minimum": 1
         },
         "capacityType": {
           "$ref": "#/definitions/CapacityType",
-          "description": "The unit used to measure capacity: virtual machines or virtual CPUs."
+          "description": "Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs."
         },
         "resources": {
           "type": "array",
-          "description": "The names, sizes, and availability zones of the virtual machines resolved for the operation.",
+          "description": "The virtual machine resources resolved for the operation.",
           "items": {
             "$ref": "#/definitions/BulkCreateCustomResource"
           },
@@ -1600,11 +1600,11 @@
         },
         "computeProfile": {
           "$ref": "#/definitions/ComputeProfile",
-          "description": "The shared compute profile used as the base for each virtual machine. Per-virtual-machine overrides take precedence."
+          "description": "Compute Profile to configure the Virtual Machines."
         },
         "overridesProfile": {
           "$ref": "#/definitions/BulkCreateCustomOverridesProfile",
-          "description": "Per-virtual-machine settings and an optional name prefix. Required when creating the operation and not returned in responses.",
+          "description": "Per-VM overrides and the shared name prefix, specified when the operation is created.",
           "x-ms-mutability": [
             "update",
             "create"
@@ -1650,11 +1650,11 @@
     },
     "BulkCreateListResult": {
       "type": "object",
-      "description": "A page of bulk create operations.",
+      "description": "List of BulkCreate resources.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The bulk create operations on this page.",
+          "description": "The list of BulkCreate resources.",
           "items": {
             "$ref": "#/definitions/LocationBasedBulkCreate"
           },
@@ -1674,7 +1674,7 @@
     },
     "BulkCreateOperationStatusListResult": {
       "type": "object",
-      "description": "A page of per-virtual-machine operation statuses for a bulk create operation.",
+      "description": "The paged response for virtual machine operation statuses in a BulkCreate operation.",
       "properties": {
         "results": {
           "type": "array",
@@ -1698,32 +1698,32 @@
     },
     "BulkCreateProperties": {
       "type": "object",
-      "description": "Settings and status for a bulk create operation.",
+      "description": "Details of the BulkCreate.",
       "properties": {
         "createdTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the bulk create operation was created, in UTC.",
+          "description": "The UTC time the BulkCreate resource was created.",
           "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the bulk create operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         },
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "The requested capacity, measured in the units specified by capacityType.",
+          "description": "Total capacity to achieve. It can be in terms of VMs or vCPUs.",
           "minimum": 1
         },
         "capacityType": {
           "$ref": "#/definitions/CapacityType",
-          "description": "The unit used to measure capacity: virtual machines or virtual CPUs."
+          "description": "Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs."
         },
         "computeProfile": {
           "$ref": "#/definitions/ComputeProfile",
-          "description": "The compute profile applied to every virtual machine created by the operation."
+          "description": "Compute Profile to configure the Virtual Machines. Applied uniformly to every virtual machine created by the operation."
         },
         "executionParameters": {
           "$ref": "#/definitions/ExecutionParameters",
@@ -3094,7 +3094,7 @@
     },
     "LocationBasedBulkCreate": {
       "type": "object",
-      "description": "A bulk create operation that creates virtual machines from a shared compute profile. The Azure region is specified in the resource path.",
+      "description": "Location based BulkCreate resource. The location is part of the resource path.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/BulkCreateProperties",
@@ -3102,7 +3102,7 @@
         },
         "zones": {
           "type": "array",
-          "description": "The availability zones in which to create the virtual machines.",
+          "description": "Zones in which the BulkCreate is available",
           "items": {
             "type": "string"
           },
@@ -3129,7 +3129,7 @@
         },
         "tags": {
           "type": "object",
-          "description": "Tags applied to the virtual machines created by the operation.",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
@@ -3151,7 +3151,7 @@
     },
     "LocationBasedBulkCreateCustom": {
       "type": "object",
-      "description": "A bulk create custom operation that creates virtual machines with per-virtual-machine settings. The Azure region is specified in the resource path.",
+      "description": "Location based BulkCreateCustom resource. The location is part of the resource path.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/BulkCreateCustomProperties",
@@ -3159,7 +3159,7 @@
         },
         "zones": {
           "type": "array",
-          "description": "Default availability zones for the virtual machines. An individual virtual machine can override this setting.",
+          "description": "Zones in which the BulkCreateCustom is available",
           "items": {
             "type": "string"
           },
@@ -3186,7 +3186,7 @@
         },
         "tags": {
           "type": "object",
-          "description": "Default tags for the virtual machines created by the operation.",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }

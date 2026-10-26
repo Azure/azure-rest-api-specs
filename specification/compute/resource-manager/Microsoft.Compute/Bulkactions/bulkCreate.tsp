@@ -24,7 +24,7 @@ namespace Microsoft.Compute;
 // ============================================================
 
 alias BulkCreateLocationParameter = {
-  /** The Azure region that contains the bulk create operations. */
+  /** The location name. */
   @path
   @minLength(1)
   @segment("locations")
@@ -33,7 +33,7 @@ alias BulkCreateLocationParameter = {
 };
 
 alias BulkCreateId = {
-  /** The name of the bulk create operation. The value must be a UUID. */
+  /** The name of the BulkCreate. The value must be an UUID. */
   @path
   @minLength(1)
   @segment("bulkCreate")
@@ -75,11 +75,11 @@ alias BulkCreateSubscriptionParams = {
 // ============================================================
 
 @added(Versions.`2026-09-06-preview`)
-@doc("Settings shared by the virtual machines created by a bulk create operation.")
+@doc("Envelope properties shared by BulkCreate. Used as the @listsResource target to avoid collision with the interface name.")
 model BulkCreateEnvelope {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid envelope property for this resource."
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The availability zones in which to create the virtual machines.")
+  @doc("Zones in which the BulkCreate is available")
   zones?: Array<string>;
 
   // Spread the ARM common-types envelope property; versioning and docs are
@@ -94,7 +94,7 @@ model BulkCreateEnvelope {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags free-form object matches the established compute contract."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Tags is a standard ARM resource property."
-  @doc("Tags applied to the virtual machines created by the operation.")
+  @doc("Resource tags.")
   tags?: Record<string>;
 
   ...ManagedServiceIdentityProperty;
@@ -108,10 +108,10 @@ model BulkCreateEnvelope {
 );
 
 @added(Versions.`2026-09-06-preview`)
-@doc("A bulk create operation that creates virtual machines from a shared compute profile. The Azure region is specified in the resource path.")
+@doc("Location based BulkCreate resource. The location is part of the resource path.")
 model LocationBasedBulkCreate
   is Azure.ResourceManager.ProxyResource<BulkCreateProperties> {
-  @doc("The Azure region in which the virtual machines are created.")
+  @doc("The location name.")
   @path
   @minLength(1)
   @segment("locations")
@@ -134,21 +134,21 @@ model BulkCreateVmSizeProfile {
 }
 
 @added(Versions.`2026-09-06-preview`)
-@doc("Settings and status for a bulk create operation.")
+@doc("Details of the BulkCreate.")
 model BulkCreateProperties {
   @visibility(Lifecycle.Read)
-  @doc("The time the bulk create operation was created, in UTC.")
+  @doc("The UTC time the BulkCreate resource was created.")
   createdTime?: utcDateTime;
 
   @visibility(Lifecycle.Read)
-  @doc("The provisioning state of the bulk create operation.")
+  @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @doc("The requested capacity, measured in the units specified by capacityType.")
+  @doc("Total capacity to achieve. It can be in terms of VMs or vCPUs.")
   @minValue(1)
   capacity: int32;
 
-  @doc("The unit used to measure capacity: virtual machines or virtual CPUs.")
+  @doc("Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs.")
   capacityType?: CapacityType;
 
   @removed(Versions.`2026-10-06-preview`)
@@ -169,7 +169,7 @@ model BulkCreateProperties {
   @doc("List of VM sizes supported for BulkCreate. Every virtual machine is created from the operation-level computeProfile regardless of the size selected, so no per-VM-size override can be supplied here.")
   vmSizesProfile?: Array<BulkCreateVmSizeProfile>;
 
-  @doc("The compute profile applied to every virtual machine created by the operation.")
+  @doc("Compute Profile to configure the Virtual Machines. Applied uniformly to every virtual machine created by the operation.")
   computeProfile: ComputeProfile;
 
   @removed(Versions.`2026-10-06-preview`)
@@ -181,11 +181,11 @@ model BulkCreateProperties {
 }
 
 @added(Versions.`2026-09-06-preview`)
-@doc("A page of bulk create operations.")
+@doc("List of BulkCreate resources.")
 model BulkCreateListResult {
   @pageItems
   @identifiers(#["id"])
-  @doc("The bulk create operations on this page.")
+  @doc("The list of BulkCreate resources.")
   value: LocationBasedBulkCreate[];
 
   @nextLink
@@ -194,7 +194,7 @@ model BulkCreateListResult {
 }
 
 @added(Versions.`2026-09-06-preview`)
-@doc("A page of per-virtual-machine operation statuses for a bulk create operation.")
+@doc("The paged response for virtual machine operation statuses in a BulkCreate operation.")
 model BulkCreateOperationStatusListResult {
   @pageItems
   @identifiers(#["resourceId"])
@@ -213,26 +213,26 @@ model BulkCreateOperationStatusListResult {
 @added(Versions.`2026-09-06-preview`)
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface BulkCreate {
-  @doc("Gets a bulk create operation and its provisioning state.")
+  @doc("Gets an instance of BulkCreates.")
   get is ArmResourceRead<
     Resource = LocationBasedBulkCreate,
     Parameters = BulkCreateId,
     Response = ArmResponse<LocationBasedBulkCreate>
   >;
 
-  @doc("Gets the status of an asynchronous bulk create operation.")
+  @doc("Get the status of an async operation of a BulkCreate.")
   @get
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/bulkCreate/asyncOperations/{asyncOperationId}")
   getAsyncOperationStatus(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
 
-    @doc("The Azure region that contains the bulk create operation.")
+    @doc("The location name.")
     @path
     @minLength(1)
     location: azureLocation,
 
-    @doc("The identifier of the asynchronous operation.")
+    @doc("The async operation id.")
     @path
     @minLength(1)
     @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
@@ -242,11 +242,7 @@ interface BulkCreate {
     | ErrorResponse;
 
   @renamedFrom(Versions.`2026-10-06`, "createOrUpdate")
-  @doc("""
-    Creates virtual machines from a shared compute profile.
-    The operation runs asynchronously. Use Get Async Operation Status to track its progress
-    and Virtual Machines Get Operation Status to retrieve per-virtual-machine results.
-    """)
+  @doc("Creates virtual machines in bulk.")
   create is ArmResourceCreateOrUpdateAsync<
     Resource = LocationBasedBulkCreate,
     Parameters = BulkCreateId
@@ -267,7 +263,7 @@ interface BulkCreate {
     Parameters = BulkCreateId
   >;
 
-  @doc("Lists the operation statuses and any errors for the virtual machines in a bulk create operation.")
+  @doc("Gets the operation status for virtual machines in a BulkCreate operation.")
   @list
   virtualMachinesGetOperationStatus is ArmResourceActionSync<
     Resource = LocationBasedBulkCreate,
@@ -276,7 +272,7 @@ interface BulkCreate {
     Parameters = BulkCreateId
   >;
 
-  @doc("Lists bulk create operations in the specified resource group and Azure region.")
+  @doc("List BulkCreate resources by resource group.")
   @get
   @autoRoute
   @action("bulkCreate")
@@ -289,7 +285,7 @@ interface BulkCreate {
     ...BulkCreateLocationParameter,
   ): ArmResponse<BulkCreateListResult> | ErrorResponse;
 
-  @doc("Lists bulk create operations in the specified subscription and Azure region.")
+  @doc("List BulkCreate resources by subscriptionId.")
   @get
   @autoRoute
   @action("bulkCreate")
