@@ -816,11 +816,12 @@
     },
     "PartitionTagsUpdate": {
       "type": "object",
-      "description": "The type used for updating tags in Partition resources.",
+      "description": "Tags-only update for a partition.",
       "properties": {
         "tags": {
           "type": "object",
-          "description": "Resource tags.",
+          "description": "Replacement resource tags. Omit to preserve existing tags; null or an empty object clears all tags.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -1081,7 +1082,7 @@
     },
     "ZkpRollupUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the ZkpRollup.",
+      "description": "Tags and managed identity update for a ZkpRollup. Service configuration cannot be updated through PATCH.",
       "properties": {
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -1089,52 +1090,10 @@
         },
         "tags": {
           "type": "object",
-          "description": "Resource tags.",
+          "description": "Replacement resource tags. Omit to preserve existing tags; null or an empty object clears all tags.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/ZkpRollupUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "ZkpRollupUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the ZkpRollup.",
-      "properties": {
-        "tokenOwnerAccounts": {
-          "type": "array",
-          "description": "Rollup-level list of token owner account addresses used for auto-discovery.",
-          "minItems": 1,
-          "maxItems": 100,
-          "items": {
-            "$ref": "#/definitions/EvmContractAddress"
-          }
-        },
-        "keyVaultId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The fully qualified resource ID of the customer Key Vault used to resolve Besu node private keys. Omit to leave the current vault unchanged.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.KeyVault/vaults"
-              }
-            ]
-          }
-        },
-        "keyVaultUserAssignedIdentityResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "User-assigned managed identity resource ID used for customer Key Vault reads.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
           }
         }
       }

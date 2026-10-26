@@ -90,26 +90,13 @@ model ZkpRollupProperties {
   operationalStatus?: OperationalStatus;
 }
 
-@doc("Properties that may be updated via PATCH on a ZkpRollup.")
-model ZkpRollupPatchProperties {
-  @doc("Rollup-level list of token owner account addresses used for auto-discovery.")
-  @minItems(1)
-  @maxItems(100)
-  tokenOwnerAccounts?: EvmContractAddress[];
+@doc("Tags and managed identity update for a ZkpRollup. Service configuration cannot be updated through PATCH.")
+model ZkpRollupUpdate {
+  ...ManagedServiceIdentityProperty;
 
-  @doc("The fully qualified resource ID of the customer Key Vault used to resolve Besu node private keys. Omit to leave the current vault unchanged.")
-  keyVaultId?: armResourceIdentifier<[
-    {
-      type: "Microsoft.KeyVault/vaults";
-    }
-  ]>;
-
-  @doc("User-assigned managed identity resource ID used for customer Key Vault reads.")
-  keyVaultUserAssignedIdentityResourceId?: armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null clears resource tags; omission preserves them."
+  @doc("Replacement resource tags. Omit to preserve existing tags; null or an empty object clears all tags.")
+  tags?: Record<string> | null;
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -131,13 +118,7 @@ interface ZkpRollups {
   get is ArmResourceRead<ZkpRollup>;
   @doc("Creates or replaces a ZKP rollup.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ZkpRollup>;
-  update is ArmCustomPatchSync<
-    ZkpRollup,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      ZkpRollup,
-      ZkpRollupPatchProperties
-    >
-  >;
+  update is ArmCustomPatchSync<ZkpRollup, ZkpRollupUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<
     ZkpRollup,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
