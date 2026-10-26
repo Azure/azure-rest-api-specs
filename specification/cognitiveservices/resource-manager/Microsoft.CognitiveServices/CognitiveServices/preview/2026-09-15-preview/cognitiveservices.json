@@ -11052,6 +11052,9 @@
           },
           "ListRaiPolicies": {
             "$ref": "./examples/ListRaiPolicies.json"
+          },
+          "List ACS policies with hosted sandbox egress companions": {
+            "$ref": "./examples/ListRaiPoliciesAcsWithEgress.json"
           }
         },
         "x-ms-pageable": {
@@ -11124,6 +11127,9 @@
           },
           "GetRaiPolicy": {
             "$ref": "./examples/GetRaiPolicy.json"
+          },
+          "Get an ACS policy with a hosted sandbox egress companion": {
+            "$ref": "./examples/GetRaiPolicyAcsWithEgress.json"
           }
         }
       },
@@ -11227,6 +11233,9 @@
           },
           "Replace an ACS policy conditionally": {
             "$ref": "./examples/UpdateRaiPolicyAcs.json"
+          },
+          "Create an ACS policy with a hosted sandbox egress companion": {
+            "$ref": "./examples/PutRaiPolicyAcsWithEgress.json"
           }
         }
       },
@@ -22721,7 +22730,7 @@
         },
         "egressPolicy": {
           "$ref": "#/definitions/RaiEgressPolicyConfig",
-          "description": "Egress (outbound network) policy controlling which external endpoints sandboxed\nagents can reach. Includes rules with Allow/Deny/Transform/Rewrite actions."
+          "description": "Static outbound network policy for hosted-agent sandboxes, independent of the\nContentFilters or ACS representation on the same RAI policy resource. Includes\nAllow/Deny/Transform/Rewrite rules; it is not evaluated by the ACS SDK or by\nper-request AACS content moderation."
         }
       }
     },

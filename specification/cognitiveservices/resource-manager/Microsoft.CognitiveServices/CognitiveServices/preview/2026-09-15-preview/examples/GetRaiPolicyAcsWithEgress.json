@@ -1,0 +1,85 @@
+{
+  "operationId": "RaiPolicies_Get",
+  "title": "Get an ACS policy with a hosted sandbox egress companion",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resource-group",
+    "accountName": "safety-account",
+    "raiPolicyName": "input-egress-guard",
+    "api-version": "2026-09-15-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000006\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiPolicies/input-egress-guard",
+        "name": "input-egress-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiPolicies",
+        "etag": "\"00000000-0000-0000-0000-000000000006\"",
+        "properties": {
+          "type": "UserManaged",
+          "format": "ACS",
+          "acs": {
+            "agent_control_specification_version": "0.4.0-alpha.1",
+            "policies": {
+              "input-guard": {
+                "type": "rego",
+                "query": "data.input_guard.verdict"
+              }
+            },
+            "intervention_points": {
+              "input": {
+                "policy_target": "$snap.input",
+                "policy_target_kind": "user_input",
+                "policy": {
+                  "id": "input-guard"
+                }
+              }
+            }
+          },
+          "acsRegos": [
+            {
+              "regoName": "input-guard"
+            }
+          ],
+          "egressPolicy": {
+            "mode": "Audit",
+            "defaultAction": "Deny",
+            "rules": [
+              {
+                "name": "allow-docs",
+                "ruleType": "Fqdn",
+                "match": {
+                  "host": "learn.microsoft.com",
+                  "path": "/azure/*"
+                },
+                "action": {
+                  "actionType": "Allow"
+                }
+              },
+              {
+                "name": "label-api",
+                "ruleType": "Fqdn",
+                "match": {
+                  "host": "api.contoso.com",
+                  "path": "/v1/*"
+                },
+                "action": {
+                  "actionType": "Transform",
+                  "headers": [
+                    {
+                      "operation": "Set",
+                      "name": "X-Workload-Class"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
