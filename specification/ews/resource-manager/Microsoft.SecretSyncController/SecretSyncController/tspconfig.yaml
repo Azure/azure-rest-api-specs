@@ -4,6 +4,9 @@ parameters:
 emit:
   - "@azure-tools/typespec-autorest"
 options:
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.SecretsStoreExtension"
+    emitter-output-dir: "{output-dir}/sdk/secretsstoreextension/{namespace}"
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}"
     azure-resource-provider-folder: "resource-manager"
