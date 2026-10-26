@@ -8827,6 +8827,11 @@
           "$ref": "#/definitions/StorageType",
           "description": "Storage type of the cluster. Indicates whether the cluster uses S2D, SAN, or a combination.",
           "readOnly": true
+        },
+        "useManagedIdentityForWitness": {
+          "type": "boolean",
+          "description": "Indicates this cluster uses a managed identity (MSI / passwordless) cloud witness rather than a storage account access key.",
+          "readOnly": true
         }
       }
     },
@@ -9278,6 +9283,10 @@
         "clusterPattern": {
           "$ref": "#/definitions/ClusterPattern",
           "description": "Cluster Pattern supported."
+        },
+        "useManagedIdentityForWitness": {
+          "type": "boolean",
+          "description": "Indicates the cluster's cloud witness authenticates using each node's managed identity (MSI) instead of a storage account access key. Set by the resource provider from the Validated Solution Recipe; read by the device to configure the witness in identity (passwordless) mode."
         }
       }
     },
