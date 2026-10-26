@@ -1,0 +1,53 @@
+{
+  "title": "Create a taskset version from inline Tasks",
+  "operationId": "Datasets_createVersion",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "refund-cases",
+    "Operation-Id": "refund-cases-v1",
+    "body": {
+      "type": "taskset",
+      "description": "Initial refund cases.",
+      "tags": {
+        "source": "hand-written"
+      },
+      "tasks": [
+        {
+          "id": "refund-window-01",
+          "inputs": {
+            "type": "prompt",
+            "instruction": "Can I return headphones I bought 3 weeks ago?"
+          },
+          "expected": {
+            "days_left": 9
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "/datasets/refund-cases/versions/1",
+        "Location": "/datasets/refund-cases/versions/1",
+        "Retry-After": 5
+      },
+      "body": {
+        "name": "refund-cases",
+        "version": "1",
+        "type": "taskset",
+        "description": "Initial refund cases.",
+        "tags": {
+          "source": "hand-written"
+        },
+        "validation_status": "queued",
+        "base_version": null,
+        "task_count": null,
+        "content_digest": null,
+        "created_at": 1792865100,
+        "finished_at": null
+      }
+    }
+  }
+}

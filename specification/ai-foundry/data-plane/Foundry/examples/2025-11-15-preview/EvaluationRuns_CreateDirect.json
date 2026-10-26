@@ -1,0 +1,63 @@
+{
+  "title": "Run an evaluation definition directly",
+  "operationId": "EvaluationRuns_create",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "Operation-Id": "claims-direct-1",
+    "request": {
+      "name": "Claims direct evaluation",
+      "dataset": {
+        "name": "claims"
+      },
+      "target": {
+        "type": "foundry_agent",
+        "name": "claims-agent",
+        "version": "2"
+      },
+      "graders": [
+        {
+          "name": "answer-matches",
+          "type": "exact_match",
+          "actual": "{{outputs.data.decision}}",
+          "expected": "{{expected.decision}}"
+        }
+      ],
+      "repetitions": {
+        "count": 3
+      },
+      "max_parallel_task_runs": 1
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "/evaluation_runs/claims-direct-evaluation-41c65708-2b33-4ebc-a25e-bb737b7719aa?api-version=2025-11-15-preview",
+        "Location": "/evaluation_runs/claims-direct-evaluation-41c65708-2b33-4ebc-a25e-bb737b7719aa?api-version=2025-11-15-preview",
+        "ETag": "\"run-1\""
+      },
+      "body": {
+        "id": "claims-direct-evaluation-41c65708-2b33-4ebc-a25e-bb737b7719aa",
+        "name": "Claims direct evaluation",
+        "evaluation_job": null,
+        "resolved_evaluation_job_version": null,
+        "resolved_run_configuration_ref": "/evaluation_runs/claims-direct-evaluation-41c65708-2b33-4ebc-a25e-bb737b7719aa/resolved_configuration?api-version=2025-11-15-preview",
+        "status": "queued",
+        "task_run_progress": {
+          "selected_task_run_count": null,
+          "task_run_counts": null,
+          "progress_observation": {
+            "consistency": "unavailable",
+            "started_at": null,
+            "finished_at": null
+          }
+        },
+        "run_summary": null,
+        "created_at": 1792738800,
+        "updated_at": 1792738800,
+        "started_at": null,
+        "finished_at": null
+      }
+    }
+  }
+}

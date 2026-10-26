@@ -1,0 +1,85 @@
+{
+  "title": "Get a completed TaskRun",
+  "operationId": "EvaluationRuns_getTaskRun",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "run_id": "claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2",
+    "task_run_id": "task-run-0000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "task-run-0000000000",
+        "evaluation_run_id": "claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2",
+        "task_id": "claim-17",
+        "repetition": 1,
+        "status": "succeeded",
+        "result": "passed",
+        "provenance": {
+          "type": "dataset",
+          "source_record_id": "claim-17",
+          "record_ordinal": 0,
+          "content_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "dataset": {
+            "name": "claims",
+            "version": "3",
+            "digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        },
+        "target": {
+          "type": "foundry_agent",
+          "name": "claims-agent",
+          "version": "2"
+        },
+        "inputs": {
+          "type": "prompt",
+          "instruction": "Review claim 17."
+        },
+        "outputs": {
+          "data": {
+            "decision": "approved"
+          }
+        },
+        "expected": {
+          "decision": "approved"
+        },
+        "grader_results": [
+          {
+            "name": "answer-matches",
+            "defined_in": "job",
+            "result": "passed",
+            "score": 1,
+            "explanation": "Outputs match."
+          }
+        ],
+        "phase_results": [
+          {
+            "phase": "invoke",
+            "status": "succeeded",
+            "started_at": 1792738805,
+            "finished_at": 1792738806,
+            "failure": null
+          },
+          {
+            "phase": "grade",
+            "status": "succeeded",
+            "started_at": 1792738806,
+            "finished_at": 1792738807,
+            "failure": null
+          }
+        ],
+        "usage": {
+          "known": true,
+          "input_tokens": 100,
+          "output_tokens": 20,
+          "cost": "0.003",
+          "currency": "USD"
+        },
+        "latency_ms": 2000,
+        "started_at": 1792738805,
+        "finished_at": 1792738807
+      }
+    }
+  }
+}

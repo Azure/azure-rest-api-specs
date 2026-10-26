@@ -1,0 +1,49 @@
+{
+  "title": "List EvaluationJobs",
+  "operationId": "EvaluationJobs_list",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "limit": 20
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          {
+            "name": "claims-agent-regression",
+            "versions": {
+              "latest": {
+                "name": "claims-agent-regression",
+                "version": "3",
+                "description": "Claims decision regression evaluation.",
+                "metadata": {
+                  "team": "claims"
+                },
+                "created_at": 1792778400,
+                "dataset": {
+                  "name": "claims"
+                },
+                "target": {
+                  "type": "foundry_agent",
+                  "name": "claims-agent"
+                },
+                "graders": [
+                  {
+                    "name": "answer-matches",
+                    "type": "exact_match",
+                    "actual": "{{outputs.data.decision}}",
+                    "expected": "{{expected.decision}}"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "first_id": "claims-agent-regression",
+        "last_id": "claims-agent-regression",
+        "has_more": false
+      }
+    }
+  }
+}

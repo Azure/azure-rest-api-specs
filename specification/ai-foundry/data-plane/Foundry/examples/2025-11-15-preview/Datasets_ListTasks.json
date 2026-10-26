@@ -1,0 +1,32 @@
+{
+  "title": "List Tasks of a taskset version",
+  "operationId": "Datasets_listTasks",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "refund-cases",
+    "version": "1",
+    "limit": 1
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          {
+            "id": "refund-window-01",
+            "inputs": {
+              "type": "prompt",
+              "instruction": "Can I return headphones I bought 3 weeks ago?"
+            },
+            "expected": {
+              "days_left": 9
+            }
+          }
+        ],
+        "first_id": "refund-window-01",
+        "last_id": "refund-window-01",
+        "has_more": true
+      }
+    }
+  }
+}

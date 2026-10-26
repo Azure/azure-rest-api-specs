@@ -1,0 +1,84 @@
+{
+  "title": "Publish an EvaluationJob version with inline Tasks",
+  "operationId": "EvaluationJobs_createVersion",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "claims-agent-regression",
+    "Operation-Id": "claims-job-v1",
+    "body": {
+      "description": "Claims decision regression evaluation.",
+      "metadata": {
+        "team": "claims"
+      },
+      "inline_dataset": {
+        "tasks": [
+          {
+            "id": "claim-123",
+            "inputs": {
+              "type": "prompt",
+              "instruction": "Review claim 123."
+            },
+            "expected": {
+              "decision": "approved"
+            }
+          }
+        ]
+      },
+      "target": {
+        "type": "foundry_agent",
+        "name": "claims-agent"
+      },
+      "graders": [
+        {
+          "name": "answer-matches",
+          "type": "exact_match",
+          "actual": "{{outputs.data.decision}}",
+          "expected": "{{expected.decision}}"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"version-1\""
+      },
+      "body": {
+        "name": "claims-agent-regression",
+        "version": "1",
+        "description": "Claims decision regression evaluation.",
+        "metadata": {
+          "team": "claims"
+        },
+        "created_at": 1792778400,
+        "inline_dataset": {
+          "tasks": [
+            {
+              "id": "claim-123",
+              "inputs": {
+                "type": "prompt",
+                "instruction": "Review claim 123."
+              },
+              "expected": {
+                "decision": "approved"
+              }
+            }
+          ]
+        },
+        "target": {
+          "type": "foundry_agent",
+          "name": "claims-agent"
+        },
+        "graders": [
+          {
+            "name": "answer-matches",
+            "type": "exact_match",
+            "actual": "{{outputs.data.decision}}",
+            "expected": "{{expected.decision}}"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "title": "Get an in-progress EvaluationRun",
+  "operationId": "EvaluationRuns_get",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "run_id": "claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"run-2\"",
+        "Retry-After": 2
+      },
+      "body": {
+        "id": "claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2",
+        "name": "Claims baseline",
+        "evaluation_job": {
+          "name": "claims-agent-regression"
+        },
+        "resolved_evaluation_job_version": {
+          "name": "claims-agent-regression",
+          "version": "1",
+          "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "resolved_run_configuration_ref": "/evaluation_runs/claims-baseline-9f72954d-61d7-4f62-9ceb-bff5239e9fe2/resolved_configuration?api-version=2025-11-15-preview",
+        "status": "in_progress",
+        "task_run_progress": {
+          "selected_task_run_count": 3,
+          "task_run_counts": {
+            "queued": 1,
+            "in_progress": 1,
+            "succeeded": 1,
+            "failed": 0,
+            "cancelled": 0,
+            "skipped": 0
+          },
+          "progress_observation": {
+            "consistency": "shard_window",
+            "started_at": 1792738810,
+            "finished_at": 1792738811
+          }
+        },
+        "run_summary": {
+          "result_counts": {
+            "total": 1,
+            "passed": 1,
+            "failed": 0,
+            "error": 0,
+            "skipped": 0
+          },
+          "pass_rate": 1.0,
+          "grader_summaries": [
+            {
+              "name": "answer-matches",
+              "result_counts": {
+                "total": 1,
+                "passed": 1,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "pass_rate": 1.0,
+              "score": 1.0
+            }
+          ],
+          "usage": {
+            "known": false,
+            "input_tokens": null,
+            "output_tokens": null,
+            "cost": null,
+            "currency": null
+          },
+          "latency": {
+            "count": 1,
+            "total_ms": 500,
+            "min_ms": 500,
+            "max_ms": 500
+          }
+        },
+        "created_at": 1792738800,
+        "updated_at": 1792738805,
+        "started_at": 1792738805,
+        "finished_at": null
+      }
+    }
+  }
+}

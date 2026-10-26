@@ -1,0 +1,41 @@
+{
+  "title": "Get a taskset version that failed validation",
+  "operationId": "Datasets_getVersion",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "refund-cases",
+    "version": "5"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "refund-cases",
+        "version": "5",
+        "type": "taskset",
+        "validation_status": "failed",
+        "base_version": null,
+        "task_count": null,
+        "content_digest": null,
+        "error": {
+          "code": "invalid_tasks",
+          "message": "2 Tasks are invalid.",
+          "details": [
+            {
+              "code": "invalid_request",
+              "param": "lines[11].graders[0].actual",
+              "message": "Task \"refund-window-12\": \"outputs.data.days_left\" looks like a path. Did you mean \"{{outputs.data.days_left}}\"?"
+            },
+            {
+              "code": "invalid_request",
+              "param": "lines[39].id",
+              "message": "Task id \"refund-window-01\" also appears on line 3."
+            }
+          ]
+        },
+        "created_at": 1792865400,
+        "finished_at": 1792865490
+      }
+    }
+  }
+}
