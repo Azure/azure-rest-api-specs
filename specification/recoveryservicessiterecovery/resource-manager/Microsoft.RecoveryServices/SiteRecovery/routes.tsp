@@ -166,12 +166,14 @@ interface ReplicationMigrationItemsOperationGroup {
       /**
        * The pagination token.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.skipToken retains the skipToken query parameter; preserve wire compatibility."
       @query("skipToken")
       skipToken?: string;
 
       /**
        * The page size.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.takeToken retains the takeToken query parameter; preserve wire compatibility."
       @query("takeToken")
       takeToken?: string;
 
@@ -210,6 +212,7 @@ interface ReplicationProtectedItemsOperationGroup {
       /**
        * The pagination token. Possible values: "FabricId" or "FabricId_CloudId" or null.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.skipToken retains the skipToken query parameter; preserve wire compatibility."
       @query("skipToken")
       skipToken?: string;
 
@@ -249,6 +252,7 @@ interface ReplicationProtectionClustersOperationGroup {
       /**
        * The pagination token. Possible values: "FabricId" or "FabricId_CloudId" or null.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.skipToken retains the skipToken query parameter; preserve wire compatibility."
       @query("skipToken")
       skipToken?: string;
 
@@ -440,6 +444,7 @@ interface SupportedOperatingSystemsOperationGroup {
       /**
        * The instance type.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing get.instanceType retains the instanceType query parameter; preserve wire compatibility."
       @query("instanceType")
       instanceType?: string;
     },

@@ -65,18 +65,21 @@ interface ScalingPlans {
       /**
        * Number of items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @query("pageSize")
       pageSize?: int32;
 
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.isDescending retains the isDescending query parameter; preserve wire compatibility."
       @query("isDescending")
       isDescending?: boolean;
 
       /**
        * Initial number of items to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.initialSkip retains the initialSkip query parameter; preserve wire compatibility."
       @query("initialSkip")
       initialSkip?: int32;
     },
@@ -92,18 +95,21 @@ interface ScalingPlans {
       /**
        * Number of items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @query("pageSize")
       pageSize?: int32;
 
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.isDescending retains the isDescending query parameter; preserve wire compatibility."
       @query("isDescending")
       isDescending?: boolean;
 
       /**
        * Initial number of items to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.initialSkip retains the initialSkip query parameter; preserve wire compatibility."
       @query("initialSkip")
       initialSkip?: int32;
     },
@@ -124,18 +130,21 @@ interface ScalingPlans {
       /**
        * Number of items per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByHostPool.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @query("pageSize")
       pageSize?: int32;
 
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByHostPool.isDescending retains the isDescending query parameter; preserve wire compatibility."
       @query("isDescending")
       isDescending?: boolean;
 
       /**
        * Initial number of items to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByHostPool.initialSkip retains the initialSkip query parameter; preserve wire compatibility."
       @query("initialSkip")
       initialSkip?: int32;
     }

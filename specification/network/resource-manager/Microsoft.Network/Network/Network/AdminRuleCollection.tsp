@@ -85,6 +85,7 @@ interface AdminRuleCollections {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(20)
       @minValue(1)
       @query("$top")
@@ -93,6 +94,7 @@ interface AdminRuleCollections {
       /**
        * SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },

@@ -87,12 +87,14 @@ interface ResourceRecommendationBases {
       /**
        * The number of recommendations per page if a paged version of this API is being used.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * The page-continuation token to use with a paged version of this API.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },
@@ -125,18 +127,21 @@ interface ResourceRecommendationBases {
       /**
        * The recommendation retrieval mode.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listWithMode.mode retains the mode query parameter; preserve wire compatibility."
       @query("mode")
       mode?: RecommendationListMode;
 
       /**
        * The number of recommendations per page if a paged version of this API is being used.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listWithMode.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * The page-continuation token to use with a paged version of this API.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listWithMode.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },
@@ -161,12 +166,14 @@ interface ResourceRecommendationBases {
       /**
        * The number of recommendations per page if a paged version of this API is being used.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTenant.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * The page-continuation token to use with a paged version of this API.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTenant.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },
@@ -233,18 +240,21 @@ interface ServiceGroupRecommendations {
       /**
        * The recommendation retrieval mode.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.mode retains the mode query parameter; preserve wire compatibility."
       @query("mode")
       mode?: RecommendationListMode;
 
       /**
        * The number of recommendations per page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * The page-continuation token for the next page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },

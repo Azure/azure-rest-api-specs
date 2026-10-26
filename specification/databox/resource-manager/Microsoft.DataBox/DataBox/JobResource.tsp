@@ -108,6 +108,7 @@ interface JobResources {
       /**
        * $skipToken is supported on Get list of jobs, which provides the next page in the list of jobs.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },
@@ -124,6 +125,7 @@ interface JobResources {
       /**
        * $skipToken is supported on Get list of jobs, which provides the next page in the list of jobs.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },

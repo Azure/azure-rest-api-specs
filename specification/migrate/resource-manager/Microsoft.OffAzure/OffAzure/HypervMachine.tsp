@@ -49,24 +49,28 @@ interface HypervMachines {
       /**
        * filter query
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByHypervSite.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
 
       /**
        * page size  query
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByHypervSite.top retains the top query parameter; preserve wire compatibility."
       @query("top")
       top?: int32;
 
       /**
        * Optional parameter for continuation token.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByHypervSite.continuationToken retains the continuationToken query parameter; preserve wire compatibility."
       @query("continuationToken")
       continuationToken?: string;
 
       /**
        * Total count of machines in the given site.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByHypervSite.totalRecordCount retains the totalRecordCount query parameter; preserve wire compatibility."
       @query("totalRecordCount")
       totalRecordCount?: int32;
     }

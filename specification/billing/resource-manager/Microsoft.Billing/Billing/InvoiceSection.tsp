@@ -164,36 +164,42 @@ interface InvoiceSections {
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing billingRequestsListByInvoiceSection.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
 
       /**
        * The orderby query option allows clients to request resources in a particular order.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing billingRequestsListByInvoiceSection.orderBy retains the orderBy query parameter; preserve wire compatibility."
       @query("orderBy")
       orderBy?: string;
 
       /**
        * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing billingRequestsListByInvoiceSection.top retains the top query parameter; preserve wire compatibility."
       @query("top")
       top?: int64;
 
       /**
        * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing billingRequestsListByInvoiceSection.skip retains the skip query parameter; preserve wire compatibility."
       @query("skip")
       skip?: int64;
 
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing billingRequestsListByInvoiceSection.count retains the count query parameter; preserve wire compatibility."
       @query("count")
       count?: boolean;
 
       /**
        * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing billingRequestsListByInvoiceSection.search retains the search query parameter; preserve wire compatibility."
       @query("search")
       search?: string;
     }
@@ -274,36 +280,42 @@ interface InvoiceSections {
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing productsListByInvoiceSection.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
 
       /**
        * The orderby query option allows clients to request resources in a particular order.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing productsListByInvoiceSection.orderBy retains the orderBy query parameter; preserve wire compatibility."
       @query("orderBy")
       orderBy?: string;
 
       /**
        * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing productsListByInvoiceSection.top retains the top query parameter; preserve wire compatibility."
       @query("top")
       top?: int64;
 
       /**
        * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing productsListByInvoiceSection.skip retains the skip query parameter; preserve wire compatibility."
       @query("skip")
       skip?: int64;
 
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing productsListByInvoiceSection.count retains the count query parameter; preserve wire compatibility."
       @query("count")
       count?: boolean;
 
       /**
        * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing productsListByInvoiceSection.search retains the search query parameter; preserve wire compatibility."
       @query("search")
       search?: string;
     }
@@ -327,54 +339,63 @@ interface InvoiceSections {
       /**
        * The start date to fetch the transactions. The date should be specified in MM-DD-YYYY format.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing transactionsListByInvoiceSection.periodStartDate retains the periodStartDate query parameter; preserve wire compatibility."
       @query("periodStartDate")
       periodStartDate: plainDate;
 
       /**
        * The end date to fetch the transactions. The date should be specified in MM-DD-YYYY format.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing transactionsListByInvoiceSection.periodEndDate retains the periodEndDate query parameter; preserve wire compatibility."
       @query("periodEndDate")
       periodEndDate: plainDate;
 
       /**
        * The type of transaction.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing transactionsListByInvoiceSection.type retains the type query parameter; preserve wire compatibility."
       @query("type")
       type: TransactionType;
 
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing transactionsListByInvoiceSection.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
 
       /**
        * The orderby query option allows clients to request resources in a particular order.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing transactionsListByInvoiceSection.orderBy retains the orderBy query parameter; preserve wire compatibility."
       @query("orderBy")
       orderBy?: string;
 
       /**
        * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing transactionsListByInvoiceSection.top retains the top query parameter; preserve wire compatibility."
       @query("top")
       top?: int64;
 
       /**
        * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing transactionsListByInvoiceSection.skip retains the skip query parameter; preserve wire compatibility."
       @query("skip")
       skip?: int64;
 
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing transactionsListByInvoiceSection.count retains the count query parameter; preserve wire compatibility."
       @query("count")
       count?: boolean;
 
       /**
        * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing transactionsListByInvoiceSection.search retains the search query parameter; preserve wire compatibility."
       @query("search")
       search?: string;
     }
@@ -399,48 +420,56 @@ alias BillingSubscriptionsListByInvoiceSectionParameters = {
   /**
    * Can be used to get deleted billing subscriptions.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingSubscriptionsListByInvoiceSectionParameters.includeDeleted retains the includeDeleted query parameter; preserve wire compatibility."
   @query("includeDeleted")
   includeDeleted?: boolean = false;
 
   /**
    * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingSubscriptionsListByInvoiceSectionParameters.expand retains the expand query parameter; preserve wire compatibility."
   @query("expand")
   expand?: string;
 
   /**
    * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingSubscriptionsListByInvoiceSectionParameters.filter retains the filter query parameter; preserve wire compatibility."
   @query("filter")
   filter?: string;
 
   /**
    * The orderby query option allows clients to request resources in a particular order.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingSubscriptionsListByInvoiceSectionParameters.orderBy retains the orderBy query parameter; preserve wire compatibility."
   @query("orderBy")
   orderBy?: string;
 
   /**
    * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingSubscriptionsListByInvoiceSectionParameters.top retains the top query parameter; preserve wire compatibility."
   @query("top")
   top?: int64;
 
   /**
    * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingSubscriptionsListByInvoiceSectionParameters.skip retains the skip query parameter; preserve wire compatibility."
   @query("skip")
   skip?: int64;
 
   /**
    * The count query option allows clients to request a count of the matching resources included with the resources in the response.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingSubscriptionsListByInvoiceSectionParameters.count retains the count query parameter; preserve wire compatibility."
   @query("count")
   count?: boolean;
 
   /**
    * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingSubscriptionsListByInvoiceSectionParameters.search retains the search query parameter; preserve wire compatibility."
   @query("search")
   search?: string;
 };
@@ -449,42 +478,49 @@ alias InvoiceSectionsListByBillingProfileParameters = {
   /**
    * Can be used to get deleted invoice sections.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing InvoiceSectionsListByBillingProfileParameters.includeDeleted retains the includeDeleted query parameter; preserve wire compatibility."
   @query("includeDeleted")
   includeDeleted?: boolean = false;
 
   /**
    * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing InvoiceSectionsListByBillingProfileParameters.filter retains the filter query parameter; preserve wire compatibility."
   @query("filter")
   filter?: string;
 
   /**
    * The orderby query option allows clients to request resources in a particular order.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing InvoiceSectionsListByBillingProfileParameters.orderBy retains the orderBy query parameter; preserve wire compatibility."
   @query("orderBy")
   orderBy?: string;
 
   /**
    * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing InvoiceSectionsListByBillingProfileParameters.top retains the top query parameter; preserve wire compatibility."
   @query("top")
   top?: int64;
 
   /**
    * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing InvoiceSectionsListByBillingProfileParameters.skip retains the skip query parameter; preserve wire compatibility."
   @query("skip")
   skip?: int64;
 
   /**
    * The count query option allows clients to request a count of the matching resources included with the resources in the response.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing InvoiceSectionsListByBillingProfileParameters.count retains the count query parameter; preserve wire compatibility."
   @query("count")
   count?: boolean;
 
   /**
    * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing InvoiceSectionsListByBillingProfileParameters.search retains the search query parameter; preserve wire compatibility."
   @query("search")
   search?: string;
 };

@@ -340,6 +340,7 @@ interface AppServiceEnvironmentResources {
       /**
        * Comma separated list of app properties to include.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listWebApps.propertiesToInclude retains the propertiesToInclude query parameter; preserve wire compatibility."
       @query("propertiesToInclude")
       propertiesToInclude?: string;
     },
@@ -409,6 +410,7 @@ interface AppServiceEnvironmentRecommendations {
       /**
        * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listHistoryForHostingEnvironment.expiredOnly retains the expiredOnly query parameter; preserve wire compatibility."
       @query("expiredOnly")
       expiredOnly?: boolean;
 
@@ -441,6 +443,7 @@ interface AppServiceEnvironmentRecommendations {
       /**
        * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listRecommendedRulesForHostingEnvironment.featured retains the featured query parameter; preserve wire compatibility."
       @query("featured")
       featured?: boolean;
 

@@ -385,12 +385,14 @@ interface AutomationAccounts {
       /**
        * number of entries you skip before returning results
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing softwareUpdateConfigurationMachineRunsList.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       /**
        * Maximum number of entries returned in the results collection
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing softwareUpdateConfigurationMachineRunsList.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: string;
     }
@@ -444,12 +446,14 @@ interface AutomationAccounts {
       /**
        * Number of entries you skip before returning results
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing softwareUpdateConfigurationRunsList.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       /**
        * Maximum number of entries returned in the results collection
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing softwareUpdateConfigurationRunsList.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: string;
     }

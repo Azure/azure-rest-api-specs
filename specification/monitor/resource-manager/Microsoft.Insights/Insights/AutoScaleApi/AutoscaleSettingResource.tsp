@@ -101,30 +101,35 @@ interface AutoscaleSettingResources {
       /**
        * The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing predictiveMetricGet.timespan retains the timespan query parameter; preserve wire compatibility."
       @query("timespan")
       timespan: string;
 
       /**
        * The interval (i.e. timegrain) of the query.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing predictiveMetricGet.interval retains the interval query parameter; preserve wire compatibility."
       @query("interval")
       interval: duration;
 
       /**
        * Metric namespace to query metric definitions for.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing predictiveMetricGet.metricNamespace retains the metricNamespace query parameter; preserve wire compatibility."
       @query("metricNamespace")
       metricNamespace: string;
 
       /**
        * The names of the metrics (comma separated) to retrieve. Special case: If a metricname itself has a comma in it then use %2 to indicate it. Eg: 'Metric,Name1' should be **'Metric%2Name1'**
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing predictiveMetricGet.metricName retains the metricName query parameter; preserve wire compatibility."
       @query("metricName")
       metricName: string;
 
       /**
        * The list of aggregation types (comma separated) to retrieve.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing predictiveMetricGet.aggregation retains the aggregation query parameter; preserve wire compatibility."
       @query("aggregation")
       aggregation: string;
     },

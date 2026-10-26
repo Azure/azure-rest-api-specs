@@ -146,6 +146,7 @@ interface LocationBasedModelCapacitiesOperationGroup {
       /**
        * The format of the Model
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.modelFormat retains the modelFormat query parameter; preserve wire compatibility."
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
       @query("modelFormat")
       modelFormat: string;
@@ -153,6 +154,7 @@ interface LocationBasedModelCapacitiesOperationGroup {
       /**
        * The name of the Model
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.modelName retains the modelName query parameter; preserve wire compatibility."
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
       @query("modelName")
       modelName: string;
@@ -160,6 +162,7 @@ interface LocationBasedModelCapacitiesOperationGroup {
       /**
        * The version of the Model
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.modelVersion retains the modelVersion query parameter; preserve wire compatibility."
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
       @query("modelVersion")
       modelVersion: string;
@@ -184,6 +187,7 @@ interface ModelCapacitiesOperationGroup {
       /**
        * The format of the Model
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.modelFormat retains the modelFormat query parameter; preserve wire compatibility."
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
       @query("modelFormat")
       modelFormat: string;
@@ -191,6 +195,7 @@ interface ModelCapacitiesOperationGroup {
       /**
        * The name of the Model
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.modelName retains the modelName query parameter; preserve wire compatibility."
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
       @query("modelName")
       modelName: string;
@@ -198,6 +203,7 @@ interface ModelCapacitiesOperationGroup {
       /**
        * The version of the Model
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.modelVersion retains the modelVersion query parameter; preserve wire compatibility."
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
       @query("modelVersion")
       modelVersion: string;

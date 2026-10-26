@@ -198,6 +198,7 @@ interface SubscriptionContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -205,6 +206,7 @@ interface SubscriptionContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -314,6 +316,7 @@ interface UserSubscription {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -321,6 +324,7 @@ interface UserSubscription {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -510,6 +514,7 @@ interface WorkspaceSubscription {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -517,6 +522,7 @@ interface WorkspaceSubscription {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;

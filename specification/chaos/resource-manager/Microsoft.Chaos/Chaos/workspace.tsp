@@ -48,6 +48,7 @@ interface Workspaces {
       /**
        * String that sets the continuation token.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.continuationToken retains the continuationToken query parameter; preserve wire compatibility."
       @query("continuationToken")
       continuationToken?: string;
     },
@@ -63,6 +64,7 @@ interface Workspaces {
       /**
        * String that sets the continuation token.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAll.continuationToken retains the continuationToken query parameter; preserve wire compatibility."
       @query("continuationToken")
       continuationToken?: string;
     },

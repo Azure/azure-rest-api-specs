@@ -19,18 +19,21 @@ alias WorkspaceConnectionListParameters = {
   /**
    * Target of the workspace connection.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing WorkspaceConnectionListParameters.target retains the target query parameter; preserve wire compatibility."
   @query("target")
   target?: string;
 
   /**
    * Category of the workspace connection.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing WorkspaceConnectionListParameters.category retains the category query parameter; preserve wire compatibility."
   @query("category")
   category?: string;
 
   /**
    * query parameter that indicates if get connection call should return both connections and datastores
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing WorkspaceConnectionListParameters.includeAll retains the includeAll query parameter; preserve wire compatibility."
   @query("includeAll")
   includeAll?: boolean = false;
 };

@@ -119,24 +119,28 @@ interface SyncGroups {
       /**
        * Get logs generated after this time.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listLogs.startTime retains the startTime query parameter; preserve wire compatibility."
       @query("startTime")
       startTime: string;
 
       /**
        * Get logs generated before this time.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listLogs.endTime retains the endTime query parameter; preserve wire compatibility."
       @query("endTime")
       endTime: string;
 
       /**
        * The types of logs to retrieve.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listLogs.type retains the type query parameter; preserve wire compatibility."
       @query("type")
       type: SyncGroupsType;
 
       /**
        * The continuation token for this operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listLogs.continuationToken retains the continuationToken query parameter; preserve wire compatibility."
       @query("continuationToken")
       continuationToken?: string;
     }

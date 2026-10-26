@@ -24,6 +24,7 @@ alias ProxyApiVersion = {
   /**
    * Api version used by proxy call
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing ProxyApiVersion.proxy-api-version retains the proxy-api-version query parameter; preserve wire compatibility."
   @query("proxy-api-version")
   `proxy-api-version`?: string;
 };

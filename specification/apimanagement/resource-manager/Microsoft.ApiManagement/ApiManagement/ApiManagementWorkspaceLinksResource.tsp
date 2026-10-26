@@ -38,6 +38,7 @@ alias ApiManagementWorkspaceLinksListPagingParameters = {
   /**
    * Number of records to return.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing ApiManagementWorkspaceLinksListPagingParameters.$top retains the $top query parameter; preserve wire compatibility."
   @query("$top")
   @minValue(1)
   $top?: int32;
@@ -45,6 +46,7 @@ alias ApiManagementWorkspaceLinksListPagingParameters = {
   /**
    * Skip token for retrieving the next page of results.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing ApiManagementWorkspaceLinksListPagingParameters.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
   @query("$skipToken")
   $skipToken?: string;
 };

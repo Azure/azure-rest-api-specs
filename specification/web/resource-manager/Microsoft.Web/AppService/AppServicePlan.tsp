@@ -183,6 +183,7 @@ interface AppServicePlans {
        * Specify <code>true</code> to return all App Service plan properties. The default is <code>false</code>, which returns a subset of the properties.
        *  Retrieval of all properties may increase the API latency.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.detailed retains the detailed query parameter; preserve wire compatibility."
       @query("detailed")
       detailed?: boolean;
     },
@@ -277,6 +278,7 @@ interface AppServicePlans {
       /**
        * Skip to a web app in the list of webapps associated with app service plan. If specified, the resulting list will contain web apps starting from (including) the skipToken. Otherwise, the resulting list contains web apps from the start of the list
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listWebApps.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
 
@@ -289,6 +291,7 @@ interface AppServicePlans {
       /**
        * List page size. If specified, results are paged.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listWebApps.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: string;
     },

@@ -140,6 +140,7 @@ interface ProjectTasks {
       /**
        * Filter tasks by task type
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.taskType retains the taskType query parameter; preserve wire compatibility."
       @query("taskType")
       taskType?: string;
     },
@@ -275,6 +276,7 @@ interface ServiceTasks {
       /**
        * Filter tasks by task type
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.taskType retains the taskType query parameter; preserve wire compatibility."
       @query("taskType")
       taskType?: string;
     },

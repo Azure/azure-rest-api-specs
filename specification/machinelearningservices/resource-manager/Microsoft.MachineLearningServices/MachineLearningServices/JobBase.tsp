@@ -68,30 +68,35 @@ interface JobBases {
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       /**
        * Type of job to be returned.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.jobType retains the jobType query parameter; preserve wire compatibility."
       @query("jobType")
       jobType?: string;
 
       /**
        * Jobs returned will have this tag key.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.tag retains the tag query parameter; preserve wire compatibility."
       @query("tag")
       tag?: string;
 
       /**
        * View type for including/excluding (for example) archived entities.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.listViewType retains the listViewType query parameter; preserve wire compatibility."
       @query("listViewType")
       listViewType?: ListViewType = ListViewType.ActiveOnly;
 
       /**
        * Comma-separated list of user property names (and optionally values). Example: prop1,prop2=value2
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.properties retains the properties query parameter; preserve wire compatibility."
       @query("properties")
       properties?: string;
     },

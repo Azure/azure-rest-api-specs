@@ -139,6 +139,7 @@ interface Labs {
       /**
        * May be used to include budget information.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.includeBudget retains the includeBudget query parameter; preserve wire compatibility."
       @query("includeBudget")
       includeBudget?: boolean;
     },
@@ -155,12 +156,14 @@ interface Labs {
       /**
        * May be used to include budget information.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAll.includeBudget retains the includeBudget query parameter; preserve wire compatibility."
       @query("includeBudget")
       includeBudget?: boolean;
 
       /**
        * May be used to show deleted items.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAll.includeDeleted retains the includeDeleted query parameter; preserve wire compatibility."
       @query("includeDeleted")
       includeDeleted?: boolean;
     },

@@ -96,6 +96,7 @@ interface VirtualNetworks {
        * The private IP address to be verified.
        */
       #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing checkIPAddressAvailability.ipAddress retains the ipAddress query parameter; preserve wire compatibility."
       @query("ipAddress")
       ipAddress: string;
     },

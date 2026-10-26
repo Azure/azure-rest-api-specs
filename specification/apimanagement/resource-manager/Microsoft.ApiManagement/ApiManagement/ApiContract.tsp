@@ -187,6 +187,7 @@ interface ApiContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -194,6 +195,7 @@ interface ApiContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -201,12 +203,14 @@ interface ApiContracts {
       /**
        * Include tags in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByService.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string;
 
       /**
        * Include full ApiVersionSet resource in response
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByService.expandApiVersionSet retains the expandApiVersionSet query parameter; preserve wire compatibility."
       @apiVersion(false)
       @query("expandApiVersionSet")
       expandApiVersionSet?: boolean;
@@ -234,6 +238,7 @@ interface ApiContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing apiRevisionListByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -241,6 +246,7 @@ interface ApiContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing apiRevisionListByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -267,6 +273,7 @@ interface ApiContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByApis.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -274,6 +281,7 @@ interface ApiContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByApis.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -300,6 +308,7 @@ interface ApiContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTags.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -307,6 +316,7 @@ interface ApiContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTags.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -314,6 +324,7 @@ interface ApiContracts {
       /**
        * Include not tagged Operations.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTags.includeNotTaggedOperations retains the includeNotTaggedOperations query parameter; preserve wire compatibility."
       @query("includeNotTaggedOperations")
       includeNotTaggedOperations?: boolean;
     }
@@ -486,6 +497,7 @@ interface WorkspaceApi {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -493,6 +505,7 @@ interface WorkspaceApi {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -500,12 +513,14 @@ interface WorkspaceApi {
       /**
        * Include tags in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByService.tags retains the tags query parameter; preserve wire compatibility."
       @query("tags")
       tags?: string;
 
       /**
        * Include full ApiVersionSet resource in response
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByService.expandApiVersionSet retains the expandApiVersionSet query parameter; preserve wire compatibility."
       @apiVersion(false)
       @query("expandApiVersionSet")
       expandApiVersionSet?: boolean;
@@ -533,6 +548,7 @@ interface WorkspaceApi {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing workspaceApiRevisionListByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -540,6 +556,7 @@ interface WorkspaceApi {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing workspaceApiRevisionListByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;

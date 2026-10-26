@@ -43,12 +43,14 @@ interface Experiments {
       /**
        * Optional value that indicates whether to filter results based on if the Experiment is currently running. If null, then the results will not be filtered.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.running retains the running query parameter; preserve wire compatibility."
       @query("running")
       running?: boolean;
 
       /**
        * String that sets the continuation token.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.continuationToken retains the continuationToken query parameter; preserve wire compatibility."
       @query("continuationToken")
       continuationToken?: string;
     },
@@ -64,12 +66,14 @@ interface Experiments {
       /**
        * Optional value that indicates whether to filter results based on if the Experiment is currently running. If null, then the results will not be filtered.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAll.running retains the running query parameter; preserve wire compatibility."
       @query("running")
       running?: boolean;
 
       /**
        * String that sets the continuation token.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAll.continuationToken retains the continuationToken query parameter; preserve wire compatibility."
       @query("continuationToken")
       continuationToken?: string;
     },

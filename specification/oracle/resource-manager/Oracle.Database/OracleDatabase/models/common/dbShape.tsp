@@ -111,26 +111,31 @@ model DatabaseSystemShapeProperties {
 @added(Versions.v20260401_preview)
 @doc("Provides query parameters for DatabaseSystemShape list operations.")
 model DatabaseSystemShapeFilter {
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing DatabaseSystemShapeFilter.shapeAttribute retains the shapeAttribute query parameter; preserve wire compatibility."
   @query
   @doc("Filters the result for the given Shape Attribute, such as BLOCK_STORAGE or SMART_STORAGE.")
   shapeAttribute?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing DatabaseSystemShapeFilter.zone retains the zone query parameter; preserve wire compatibility."
   @query
   @doc("Filters the result for the given Azure Availability Zone")
   zone?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing DatabaseSystemShapeFilter.availabilityDomain retains the availabilityDomain query parameter; preserve wire compatibility."
   @query
   @doc("If provided, filters the result by availability domain. Example: GWjz:US-ASHBURN-AD-1")
   @minLength(1)
   @maxLength(255)
   availabilityDomain?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing DatabaseSystemShapeFilter.databaseShapeFamily retains the databaseShapeFamily query parameter; preserve wire compatibility."
   @query
   @doc("If provided, filters the result by database shape family. Example: VIRTUALMACHINE")
   @minLength(1)
   @maxLength(255)
   databaseShapeFamily?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing DatabaseSystemShapeFilter.databaseEdition retains the databaseEdition query parameter; preserve wire compatibility."
   @query
   @doc("If provided, filters the result by database edition.")
   @minLength(1)

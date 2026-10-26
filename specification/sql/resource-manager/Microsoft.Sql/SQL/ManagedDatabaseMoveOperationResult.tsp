@@ -68,6 +68,7 @@ interface ManagedDatabaseMoveOperationResults {
       /**
        * Whether or not to only get the latest operation for each database. Has higher priority than $filter.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByLocation.onlyLatestPerDatabase retains the onlyLatestPerDatabase query parameter; preserve wire compatibility."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 

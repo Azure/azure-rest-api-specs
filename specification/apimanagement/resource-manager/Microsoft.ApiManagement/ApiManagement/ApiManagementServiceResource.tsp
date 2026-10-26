@@ -131,6 +131,7 @@ alias ApiManagementServiceListPagingParameters = {
   /**
    * Number of records to return.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing ApiManagementServiceListPagingParameters.$top retains the $top query parameter; preserve wire compatibility."
   @query("$top")
   @minValue(1)
   $top?: int32;
@@ -138,6 +139,7 @@ alias ApiManagementServiceListPagingParameters = {
   /**
    * Skip token for retrieving the next page of results.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing ApiManagementServiceListPagingParameters.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
   @query("$skipToken")
   $skipToken?: string;
 };
@@ -234,6 +236,7 @@ interface ApiManagementServiceResources {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTags.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -241,6 +244,7 @@ interface ApiManagementServiceResources {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTags.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -248,6 +252,7 @@ interface ApiManagementServiceResources {
       /**
        * Include not tagged APIs.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTags.includeNotTaggedApis retains the includeNotTaggedApis query parameter; preserve wire compatibility."
       @query("includeNotTaggedApis")
       includeNotTaggedApis?: boolean;
     }
@@ -390,6 +395,7 @@ interface ApiManagementServiceResources {
       /**
        * Policy scope.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing policyDescriptionListByService.scope retains the scope query parameter; preserve wire compatibility."
       @query("scope")
       scope?: PolicyScopeContract;
     }
@@ -437,6 +443,7 @@ interface ApiManagementServiceResources {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing productListByTags.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -444,6 +451,7 @@ interface ApiManagementServiceResources {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing productListByTags.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -451,6 +459,7 @@ interface ApiManagementServiceResources {
       /**
        * Include not tagged Products.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing productListByTags.includeNotTaggedProducts retains the includeNotTaggedProducts query parameter; preserve wire compatibility."
       @query("includeNotTaggedProducts")
       includeNotTaggedProducts?: boolean;
     }
@@ -860,6 +869,7 @@ interface ApiManagementServiceResources {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing tagResourceListByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -867,6 +877,7 @@ interface ApiManagementServiceResources {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing tagResourceListByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;

@@ -122,6 +122,7 @@ interface MaintenanceEvents {
   list is ArmResourceListByParent<
     MaintenanceEventResource,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.maintenanceStatus retains the maintenanceStatus query parameter; preserve wire compatibility."
       @doc("Filter maintenance events by status.")
       @query("maintenanceStatus")
       maintenanceStatus?: MaintenanceEventStatusFilter;

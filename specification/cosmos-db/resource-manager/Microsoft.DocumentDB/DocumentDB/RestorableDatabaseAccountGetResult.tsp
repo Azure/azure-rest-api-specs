@@ -83,18 +83,21 @@ interface RestorableDatabaseAccountGetResults {
       /**
        * The resource ID of the SQL database.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing restorableSqlContainersList.restorableSqlDatabaseRid retains the restorableSqlDatabaseRid query parameter; preserve wire compatibility."
       @query("restorableSqlDatabaseRid")
       restorableSqlDatabaseRid?: string;
 
       /**
        * Restorable Sql containers event feed start time.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing restorableSqlContainersList.startTime retains the startTime query parameter; preserve wire compatibility."
       @query("startTime")
       startTime?: string;
 
       /**
        * Restorable Sql containers event feed end time.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing restorableSqlContainersList.endTime retains the endTime query parameter; preserve wire compatibility."
       @query("endTime")
       endTime?: string;
     },
@@ -189,18 +192,21 @@ interface RestorableDatabaseAccountGetResults {
       /**
        * The resource ID of the Gremlin database.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing restorableGremlinGraphsList.restorableGremlinDatabaseRid retains the restorableGremlinDatabaseRid query parameter; preserve wire compatibility."
       @query("restorableGremlinDatabaseRid")
       restorableGremlinDatabaseRid?: string;
 
       /**
        * Restorable Gremlin graphs event feed start time.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing restorableGremlinGraphsList.startTime retains the startTime query parameter; preserve wire compatibility."
       @query("startTime")
       startTime?: string;
 
       /**
        * Restorable Gremlin graphs event feed end time.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing restorableGremlinGraphsList.endTime retains the endTime query parameter; preserve wire compatibility."
       @query("endTime")
       endTime?: string;
     },
@@ -237,12 +243,14 @@ interface RestorableDatabaseAccountGetResults {
       /**
        * Restorable Tables event feed start time.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing restorableTablesList.startTime retains the startTime query parameter; preserve wire compatibility."
       @query("startTime")
       startTime?: string;
 
       /**
        * Restorable Tables event feed end time.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing restorableTablesList.endTime retains the endTime query parameter; preserve wire compatibility."
       @query("endTime")
       endTime?: string;
     },
@@ -269,18 +277,21 @@ alias RestorableMongodbCollectionsListParameters = {
   /**
    * The resource ID of the MongoDB database.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing RestorableMongodbCollectionsListParameters.restorableMongodbDatabaseRid retains the restorableMongodbDatabaseRid query parameter; preserve wire compatibility."
   @query("restorableMongodbDatabaseRid")
   restorableMongodbDatabaseRid?: string;
 
   /**
    * Restorable MongoDB collections event feed start time.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing RestorableMongodbCollectionsListParameters.startTime retains the startTime query parameter; preserve wire compatibility."
   @query("startTime")
   startTime?: string;
 
   /**
    * Restorable MongoDB collections event feed end time.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing RestorableMongodbCollectionsListParameters.endTime retains the endTime query parameter; preserve wire compatibility."
   @query("endTime")
   endTime?: string;
 };
@@ -289,12 +300,14 @@ alias RestorableMongodbResourcesListParameters = {
   /**
    * The location where the restorable resources are located.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing RestorableMongodbResourcesListParameters.restoreLocation retains the restoreLocation query parameter; preserve wire compatibility."
   @query("restoreLocation")
   restoreLocation?: string;
 
   /**
    * The timestamp when the restorable resources existed.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing RestorableMongodbResourcesListParameters.restoreTimestampInUtc retains the restoreTimestampInUtc query parameter; preserve wire compatibility."
   @query("restoreTimestampInUtc")
   restoreTimestampInUtc?: string;
 };
@@ -303,12 +316,14 @@ alias RestorableSqlResourcesListParameters = {
   /**
    * The location where the restorable resources are located.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing RestorableSqlResourcesListParameters.restoreLocation retains the restoreLocation query parameter; preserve wire compatibility."
   @query("restoreLocation")
   restoreLocation?: string;
 
   /**
    * The timestamp when the restorable resources existed.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing RestorableSqlResourcesListParameters.restoreTimestampInUtc retains the restoreTimestampInUtc query parameter; preserve wire compatibility."
   @query("restoreTimestampInUtc")
   restoreTimestampInUtc?: string;
 };
@@ -317,12 +332,14 @@ alias RestorableGremlinResourcesListParameters = {
   /**
    * The location where the restorable resources are located.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing RestorableGremlinResourcesListParameters.restoreLocation retains the restoreLocation query parameter; preserve wire compatibility."
   @query("restoreLocation")
   restoreLocation?: string;
 
   /**
    * The timestamp when the restorable resources existed.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing RestorableGremlinResourcesListParameters.restoreTimestampInUtc retains the restoreTimestampInUtc query parameter; preserve wire compatibility."
   @query("restoreTimestampInUtc")
   restoreTimestampInUtc?: string;
 };
@@ -331,12 +348,14 @@ alias RestorableTableResourcesListParameters = {
   /**
    * The location where the restorable resources are located.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing RestorableTableResourcesListParameters.restoreLocation retains the restoreLocation query parameter; preserve wire compatibility."
   @query("restoreLocation")
   restoreLocation?: string;
 
   /**
    * The timestamp when the restorable resources existed.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing RestorableTableResourcesListParameters.restoreTimestampInUtc retains the restoreTimestampInUtc query parameter; preserve wire compatibility."
   @query("restoreTimestampInUtc")
   restoreTimestampInUtc?: string;
 };

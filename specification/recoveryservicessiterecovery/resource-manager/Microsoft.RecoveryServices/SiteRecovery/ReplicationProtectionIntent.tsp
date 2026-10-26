@@ -61,12 +61,14 @@ interface ReplicationProtectionIntents {
       /**
        * The pagination token.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.skipToken retains the skipToken query parameter; preserve wire compatibility."
       @query("skipToken")
       skipToken?: string;
 
       /**
        * The page size.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.takeToken retains the takeToken query parameter; preserve wire compatibility."
       @query("takeToken")
       takeToken?: string;
     },

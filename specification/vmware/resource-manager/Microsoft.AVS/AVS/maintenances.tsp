@@ -12,18 +12,22 @@ interface Maintenances {
   list is ArmResourceListByParent<
     Maintenance,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.stateName retains the stateName query parameter; preserve wire compatibility."
       @query
       @doc("Filter maintenances based on state")
       stateName?: MaintenanceStateName;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.status retains the status query parameter; preserve wire compatibility."
       @query
       @doc("Filter active or inactive maintenances")
       status?: MaintenanceStatusFilter;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.from retains the from query parameter; preserve wire compatibility."
       @query
       @doc("date from which result should be returned. ie. scheduledStartTime >= from")
       from?: utcDateTime;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.to retains the to query parameter; preserve wire compatibility."
       @query
       @doc("date till which result should be returned. i.e. scheduledStartTime <= to")
       to?: utcDateTime;

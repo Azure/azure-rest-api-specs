@@ -50,6 +50,7 @@ interface EntityQueryTemplates {
       /**
        * The entity template query kind we want to fetch
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.kind retains the kind query parameter; preserve wire compatibility."
       @query("kind")
       kind?: EntityQueryTemplateKind;
     },

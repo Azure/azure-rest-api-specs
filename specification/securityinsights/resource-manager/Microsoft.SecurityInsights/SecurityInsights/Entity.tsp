@@ -95,6 +95,7 @@ interface Entities {
       /**
        * The Kind parameter for queries
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing queries.kind retains the kind query parameter; preserve wire compatibility."
       @query("kind")
       kind: EntityItemQueryKind;
     },

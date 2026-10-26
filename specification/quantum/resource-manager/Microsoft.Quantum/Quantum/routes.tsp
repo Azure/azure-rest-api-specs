@@ -44,6 +44,7 @@ interface Offerings {
       /**
        * The filter to apply to the operation. Example: '$filter=kind eq 'v1'
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
     }

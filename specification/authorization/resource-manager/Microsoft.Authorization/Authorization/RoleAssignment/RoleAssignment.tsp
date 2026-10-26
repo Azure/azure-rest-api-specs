@@ -187,12 +187,14 @@ interface RoleAssignments {
       /**
        * Tenant ID for cross-tenant request
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listForScope.tenantId retains the tenantId query parameter; preserve wire compatibility."
       @query("tenantId")
       tenantId?: string;
 
       /**
        * The skipToken to apply on the operation. Use $skipToken={skiptoken} to return paged role assignments following the skipToken passed. Only supported on provider level calls.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listForScope.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     },
@@ -214,6 +216,7 @@ interface RoleAssignments {
       /**
        * Tenant ID for cross-tenant request
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listForSubscription.tenantId retains the tenantId query parameter; preserve wire compatibility."
       @query("tenantId")
       tenantId?: string;
     },
@@ -236,6 +239,7 @@ interface RoleAssignments {
       /**
        * Tenant ID for cross-tenant request
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listForResourceGroup.tenantId retains the tenantId query parameter; preserve wire compatibility."
       @query("tenantId")
       tenantId?: string;
     },
@@ -257,6 +261,7 @@ interface RoleAssignments {
       /**
        * Tenant ID for cross-tenant request
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listForResource.tenantId retains the tenantId query parameter; preserve wire compatibility."
       @query("tenantId")
       tenantId?: string;
     },

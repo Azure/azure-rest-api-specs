@@ -93,16 +93,19 @@ interface VirtualMachineExtensionImages {
       $filter?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listVersions.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listVersions.$orderby retains the $orderby query parameter; preserve wire compatibility."
       @query("$orderby")
       $orderby?: string;
 
       /**
        * Expand the response to include additional read-only metadata. Allowed values: `properties` — returns extended metadata (`releaseCategory`, `urgencyLevel`, `runProfile`).
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listVersions.$expand retains the $expand query parameter; preserve wire compatibility."
       @added(Versions.v2026_04_01)
       @query("$expand")
       $expand?: ListVersionsExpandOptions;

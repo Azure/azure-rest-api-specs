@@ -102,16 +102,19 @@ interface Workspaces {
       /**
        * Kind of workspace.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.kind retains the kind query parameter; preserve wire compatibility."
       @query("kind")
       kind?: string;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByResourceGroup.aiCapabilities retains the aiCapabilities query parameter; preserve wire compatibility."
       @query("aiCapabilities")
       aiCapabilities?: string;
     }
@@ -127,16 +130,19 @@ interface Workspaces {
       /**
        * Kind of workspace.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.kind retains the kind query parameter; preserve wire compatibility."
       @query("kind")
       kind?: string;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.aiCapabilities retains the aiCapabilities query parameter; preserve wire compatibility."
       @query("aiCapabilities")
       aiCapabilities?: string;
     }
@@ -287,12 +293,14 @@ interface Workspaces {
       /**
        * Endpoint type filter
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getInWorkspace.endpointType retains the endpointType query parameter; preserve wire compatibility."
       @query("endpointType")
       endpointType?: EndpointType;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getInWorkspace.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
     }

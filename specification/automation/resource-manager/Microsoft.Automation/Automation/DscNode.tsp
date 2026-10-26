@@ -71,18 +71,21 @@ interface DscNodes {
       /**
        * The number of rows to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByAutomationAccount.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: int32;
 
       /**
        * The number of rows to take.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByAutomationAccount.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * Return total rows.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByAutomationAccount.$inlinecount retains the $inlinecount query parameter; preserve wire compatibility."
       @query("$inlinecount")
       $inlinecount?: string;
     },

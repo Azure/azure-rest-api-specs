@@ -197,36 +197,42 @@ interface BillingAccounts {
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing billingRequestsListByBillingAccount.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
 
       /**
        * The orderby query option allows clients to request resources in a particular order.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing billingRequestsListByBillingAccount.orderBy retains the orderBy query parameter; preserve wire compatibility."
       @query("orderBy")
       orderBy?: string;
 
       /**
        * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing billingRequestsListByBillingAccount.top retains the top query parameter; preserve wire compatibility."
       @query("top")
       top?: int64;
 
       /**
        * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing billingRequestsListByBillingAccount.skip retains the skip query parameter; preserve wire compatibility."
       @query("skip")
       skip?: int64;
 
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing billingRequestsListByBillingAccount.count retains the count query parameter; preserve wire compatibility."
       @query("count")
       count?: boolean;
 
       /**
        * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing billingRequestsListByBillingAccount.search retains the search query parameter; preserve wire compatibility."
       @query("search")
       search?: string;
     }
@@ -277,36 +283,42 @@ interface BillingAccounts {
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing savingsPlansListByBillingAccount.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
 
       /**
        * The orderby query option allows clients to request resources in a particular order.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing savingsPlansListByBillingAccount.orderBy retains the orderBy query parameter; preserve wire compatibility."
       @query("orderBy")
       orderBy?: string;
 
       /**
        * The number of savings plans to skip from the list before returning results
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing savingsPlansListByBillingAccount.skiptoken retains the skiptoken query parameter; preserve wire compatibility."
       @query("skiptoken")
       skiptoken?: float32;
 
       /**
        * The number of savings plans to return
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing savingsPlansListByBillingAccount.take retains the take query parameter; preserve wire compatibility."
       @query("take")
       take?: float32;
 
       /**
        * The selected provisioning state
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing savingsPlansListByBillingAccount.selectedState retains the selectedState query parameter; preserve wire compatibility."
       @query("selectedState")
       selectedState?: string;
 
       /**
        * To indicate whether to refresh the roll up counts of the savings plans group by provisioning states
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing savingsPlansListByBillingAccount.refreshSummary retains the refreshSummary query parameter; preserve wire compatibility."
       @query("refreshSummary")
       refreshSummary?: string;
     }
@@ -348,36 +360,42 @@ interface BillingAccounts {
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing reservationsListByBillingAccount.filter retains the filter query parameter; preserve wire compatibility."
       @query("filter")
       filter?: string;
 
       /**
        * The orderby query option allows clients to request resources in a particular order.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing reservationsListByBillingAccount.orderBy retains the orderBy query parameter; preserve wire compatibility."
       @query("orderBy")
       orderBy?: string;
 
       /**
        * The number of reservations to skip from the list before returning results
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing reservationsListByBillingAccount.skiptoken retains the skiptoken query parameter; preserve wire compatibility."
       @query("skiptoken")
       skiptoken?: float32;
 
       /**
        * To indicate whether to refresh the roll up counts of the reservations group by provisioning states
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing reservationsListByBillingAccount.refreshSummary retains the refreshSummary query parameter; preserve wire compatibility."
       @query("refreshSummary")
       refreshSummary?: string;
 
       /**
        * The selected provisioning state
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing reservationsListByBillingAccount.selectedState retains the selectedState query parameter; preserve wire compatibility."
       @query("selectedState")
       selectedState?: string;
 
       /**
        * The number of reservations to return in API response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing reservationsListByBillingAccount.take retains the take query parameter; preserve wire compatibility."
       @query("take")
       take?: float32;
     }
@@ -388,30 +406,35 @@ alias BillingAccountsListParameters = {
   /**
    * When true, results will include Billing Accounts that the user does not have a direct role assignment on if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingAccountsListParameters.includeAll retains the includeAll query parameter; preserve wire compatibility."
   @query("includeAll")
   includeAll?: boolean = false;
 
   /**
    * When true, results will include Billing Accounts that are not fully created if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingAccountsListParameters.includeAllWithoutBillingProfiles retains the includeAllWithoutBillingProfiles query parameter; preserve wire compatibility."
   @query("includeAllWithoutBillingProfiles")
   includeAllWithoutBillingProfiles?: boolean = false;
 
   /**
    * When true, results will include any billing accounts in a deleted state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingAccountsListParameters.includeDeleted retains the includeDeleted query parameter; preserve wire compatibility."
   @query("includeDeleted")
   includeDeleted?: boolean = false;
 
   /**
    * Includes billing accounts with agreement pending signature that the user has access to.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingAccountsListParameters.includePendingAgreement retains the includePendingAgreement query parameter; preserve wire compatibility."
   @query("includePendingAgreement")
   includePendingAgreement?: boolean = false;
 
   /**
    * Includes the customer's billing account of Microsoft Partner Agreement that the user has access to.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingAccountsListParameters.includeResellee retains the includeResellee query parameter; preserve wire compatibility."
   @query("includeResellee")
   includeResellee?: boolean = false;
 
@@ -419,6 +442,7 @@ alias BillingAccountsListParameters = {
    * Must be combined with legalOwnerOID, results will only include Billing Accounts for whom is legally responsible for the Billing Accounts. Optional.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingAccountsListParameters.legalOwnerTID retains the legalOwnerTID query parameter; preserve wire compatibility."
   @query("legalOwnerTID")
   legalOwnerTID?: string;
 
@@ -426,36 +450,42 @@ alias BillingAccountsListParameters = {
    * Must be combined with legalOwnerTID, results will only include Billing Accounts for whom is legally responsible for the Billing Accounts. Optional.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingAccountsListParameters.legalOwnerOID retains the legalOwnerOID query parameter; preserve wire compatibility."
   @query("legalOwnerOID")
   legalOwnerOID?: string;
 
   /**
    * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingAccountsListParameters.filter retains the filter query parameter; preserve wire compatibility."
   @query("filter")
   filter?: string;
 
   /**
    * Expand is allowed for SoldTo and EnrollmentDetails/PONumber.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingAccountsListParameters.expand retains the expand query parameter; preserve wire compatibility."
   @query("expand")
   expand?: string;
 
   /**
    * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingAccountsListParameters.top retains the top query parameter; preserve wire compatibility."
   @query("top")
   top?: int64;
 
   /**
    * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingAccountsListParameters.skip retains the skip query parameter; preserve wire compatibility."
   @query("skip")
   skip?: int64;
 
   /**
    * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing BillingAccountsListParameters.search retains the search query parameter; preserve wire compatibility."
   @query("search")
   search?: string;
 };

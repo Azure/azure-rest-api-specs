@@ -25,14 +25,17 @@ interface Publishers {
     {
       ...Azure.ResourceManager.Foundations.BaseParameters<Publisher>;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.top retains the $top query parameter; preserve wire compatibility."
       @doc("The number of result items to return.")
       @query("$top")
       top?: int32;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.skip retains the skip query parameter; preserve wire compatibility."
       @doc("The number of result items to skip.")
       @query("skip")
       skip?: int32;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.maxpagesize retains the maxpagesize query parameter; preserve wire compatibility."
       @doc("The maximum number of result items per page.")
       @query("maxpagesize")
       maxpagesize?: int32;
@@ -41,6 +44,7 @@ interface Publishers {
       @query("$filter")
       filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @doc("Skip over when retrieving results.")
       @query("$skipToken")
       skipToken?: string;

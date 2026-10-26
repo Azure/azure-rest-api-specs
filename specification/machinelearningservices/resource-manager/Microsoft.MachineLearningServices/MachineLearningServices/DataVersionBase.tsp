@@ -154,6 +154,7 @@ interface DataVersionBases {
       /**
        * Please choose OrderBy value from ['createdtime', 'modifiedtime']
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @query("$orderBy")
       $orderBy?: string;
 
@@ -161,24 +162,28 @@ interface DataVersionBases {
        * Top count of results, top count cannot be greater than the page size.
        *                               If topCount > page size, results with be default page size count will be returned
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       /**
        * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$tags retains the $tags query parameter; preserve wire compatibility."
       @query("$tags")
       $tags?: string;
 
       /**
        * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.listViewType retains the listViewType query parameter; preserve wire compatibility."
       @query("listViewType")
       listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
@@ -259,6 +264,7 @@ interface DataVersions {
       /**
        * Please choose OrderBy value from ['createdtime', 'modifiedtime']
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @query("$orderBy")
       $orderBy?: string;
 
@@ -266,24 +272,28 @@ interface DataVersions {
        * Top count of results, top count cannot be greater than the page size.
        *                               If topCount > page size, results with be default page size count will be returned
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       /**
        * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$tags retains the $tags query parameter; preserve wire compatibility."
       @query("$tags")
       $tags?: string;
 
       /**
        * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.listViewType retains the listViewType query parameter; preserve wire compatibility."
       @query("listViewType")
       listViewType?: ListViewType = ListViewType.ActiveOnly;
     },

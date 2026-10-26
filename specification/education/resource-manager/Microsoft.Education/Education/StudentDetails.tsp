@@ -106,6 +106,7 @@ interface Students {
       /**
        * May be used to show deleted items.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.includeDeleted retains the includeDeleted query parameter; preserve wire compatibility."
       @query("includeDeleted")
       includeDeleted?: boolean;
     },

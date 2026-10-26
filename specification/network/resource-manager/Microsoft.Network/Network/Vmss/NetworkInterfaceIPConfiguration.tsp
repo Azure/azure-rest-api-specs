@@ -101,6 +101,7 @@ interface NetworkInterfaceIPConfigurations {
       /**
        * Expands referenced resources.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listVirtualMachineScaleSetIpConfigurations.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },

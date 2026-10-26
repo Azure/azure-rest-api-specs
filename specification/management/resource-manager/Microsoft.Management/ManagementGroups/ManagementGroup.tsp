@@ -145,12 +145,14 @@ interface ManagementGroups {
        * If a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.
        *
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getDescendants.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
       @query("$skiptoken")
       $skiptoken?: string;
 
       /**
        * Number of elements to return when retrieving results. Passing this in will override $skipToken.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing getDescendants.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
     }

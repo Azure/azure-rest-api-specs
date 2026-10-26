@@ -64,18 +64,21 @@ interface LogAnalyticsQueryPackQueries {
       /**
        * Maximum items returned in page.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int64;
 
       /**
        * Flag indicating whether or not to return the body of each applicable query. If false, only return the query information.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.includeBody retains the includeBody query parameter; preserve wire compatibility."
       @query("includeBody")
       includeBody?: boolean;
 
       /**
        * Base64 encoded token used to fetch the next page of items. Default is null.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }

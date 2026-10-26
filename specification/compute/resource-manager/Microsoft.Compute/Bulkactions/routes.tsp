@@ -272,6 +272,7 @@ interface VirtualMachineBulkOperations {
     ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing bulkListOperationErrors.lookbackInMinutes retains the lookbackInMinutes query parameter; preserve wire compatibility."
     @query("lookbackInMinutes")
     @doc("The number of minutes before the current time to include when listing bulk action errors.")
     lookbackInMinutes?: int32,

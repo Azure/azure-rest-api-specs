@@ -77,6 +77,7 @@ interface BlobServices {
       /**
        * Optional. Specified maximum number of containers that can be included in the list.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing blobContainersList.$maxpagesize retains the $maxpagesize query parameter; preserve wire compatibility."
       @query("$maxpagesize")
       $maxpagesize?: string;
 
@@ -89,6 +90,7 @@ interface BlobServices {
       /**
        * Optional, used to include the properties for soft deleted blob containers.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing blobContainersList.$include retains the $include query parameter; preserve wire compatibility."
       @query("$include")
       $include?: ListContainersInclude;
     },

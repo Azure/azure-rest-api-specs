@@ -44,14 +44,17 @@ interface ProductList {
   listByTenant(
     ...ApiVersionParameter,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTenant.market retains the market query parameter; preserve wire compatibility."
     @doc(MarketParameterDescription)
     @query
     market?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTenant.language retains the language query parameter; preserve wire compatibility."
     @doc(LanguageParameterDescription)
     @query
     language?: string = "en",
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTenant.excludePublicOffersAndPublicPlans retains the excludePublicOffersAndPublicPlans query parameter; preserve wire compatibility."
     @doc(ExcludePublicParameterDescription)
     @query
     excludePublicOffersAndPublicPlans?: boolean = false,
@@ -60,18 +63,22 @@ interface ProductList {
     @query
     $filter?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTenant.$select retains the $select query parameter; preserve wire compatibility."
     @doc(SelectOdataParameterDescription)
     @query
     $select?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTenant.$expand retains the $expand query parameter; preserve wire compatibility."
     @doc(ExpandOdataParameterDescription)
     @query
     $expand?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTenant.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
     @doc(OrderByOdataParameterDescription)
     @query
     $orderBy?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByTenant.$search retains the $search query parameter; preserve wire compatibility."
     @doc(SearchParameterDescription)
     @query
     $search?: string,
@@ -83,10 +90,12 @@ interface ProductList {
   listBySubscription is ArmListBySubscriptionCustom<
     Products,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.language retains the language query parameter; preserve wire compatibility."
       @doc(LanguageParameterDescription)
       @query
       language?: string = "en";
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.excludePublicOffersAndPublicPlans retains the excludePublicOffersAndPublicPlans query parameter; preserve wire compatibility."
       @doc(ExcludePublicParameterDescription)
       @query
       excludePublicOffersAndPublicPlans?: boolean = false;
@@ -95,18 +104,22 @@ interface ProductList {
       @query
       $filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.$select retains the $select query parameter; preserve wire compatibility."
       @doc(SelectOdataParameterDescription)
       @query
       $select?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.$expand retains the $expand query parameter; preserve wire compatibility."
       @doc(ExpandOdataParameterDescription)
       @query
       $expand?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @doc(OrderByOdataParameterDescription)
       @query
       $orderBy?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBySubscription.$search retains the $search query parameter; preserve wire compatibility."
       @doc(SearchParameterDescription)
       @query
       $search?: string;
@@ -118,14 +131,17 @@ interface ProductList {
   listByBillingAccount is ArmListByBillingAccount<
     Products,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingAccount.language retains the language query parameter; preserve wire compatibility."
       @doc(LanguageParameterDescription)
       @query
       language?: string = "en";
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingAccount.excludePublicOffersAndPublicPlans retains the excludePublicOffersAndPublicPlans query parameter; preserve wire compatibility."
       @doc(ExcludePublicParameterDescription)
       @query
       excludePublicOffersAndPublicPlans?: boolean = false;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingAccount.locations retains the locations query parameter; preserve wire compatibility."
       @doc(LocationsarameterDescription)
       @query
       locations?: string;
@@ -134,18 +150,22 @@ interface ProductList {
       @query
       $filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingAccount.$select retains the $select query parameter; preserve wire compatibility."
       @doc(SelectOdataParameterDescription)
       @query
       $select?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingAccount.$expand retains the $expand query parameter; preserve wire compatibility."
       @doc(ExpandOdataParameterDescription)
       @query
       $expand?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingAccount.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @doc(OrderByOdataParameterDescription)
       @query
       $orderBy?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingAccount.$search retains the $search query parameter; preserve wire compatibility."
       @doc(SearchParameterDescription)
       @query
       $search?: string;
@@ -157,14 +177,17 @@ interface ProductList {
   listByBillingProfile is ArmListByBillingProfile<
     Products,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingProfile.language retains the language query parameter; preserve wire compatibility."
       @doc(LanguageParameterDescription)
       @query
       language?: string = "en";
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingProfile.excludePublicOffersAndPublicPlans retains the excludePublicOffersAndPublicPlans query parameter; preserve wire compatibility."
       @doc(ExcludePublicParameterDescription)
       @query
       excludePublicOffersAndPublicPlans?: boolean = false;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingProfile.locations retains the locations query parameter; preserve wire compatibility."
       @doc(LocationsarameterDescription)
       @query
       locations?: string;
@@ -173,18 +196,22 @@ interface ProductList {
       @query
       $filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingProfile.$select retains the $select query parameter; preserve wire compatibility."
       @doc(SelectOdataParameterDescription)
       @query
       $select?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingProfile.$expand retains the $expand query parameter; preserve wire compatibility."
       @doc(ExpandOdataParameterDescription)
       @query
       $expand?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingProfile.$orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @doc(OrderByOdataParameterDescription)
       @query
       $orderBy?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByBillingProfile.$search retains the $search query parameter; preserve wire compatibility."
       @doc(SearchParameterDescription)
       @query
       $search?: string;

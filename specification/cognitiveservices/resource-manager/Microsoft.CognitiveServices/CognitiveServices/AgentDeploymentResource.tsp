@@ -16,12 +16,14 @@ alias AgentDeploymentsListParameters = {
   /**
    * Number of agent deployments to be retrieved in a page of results.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing AgentDeploymentsListParameters.count retains the count query parameter; preserve wire compatibility."
   @query("count")
   count?: int32 = 30;
 
   /**
    * Continuation token for pagination.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing AgentDeploymentsListParameters.$skipToken retains the $skipToken query parameter; preserve wire compatibility."
   @query("$skipToken")
   $skipToken?: string;
 
@@ -29,18 +31,21 @@ alias AgentDeploymentsListParameters = {
    * Names of agent deployments to retrieve.
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Query parameter 'names' serialization matches existing service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing AgentDeploymentsListParameters.names retains the names query parameter; preserve wire compatibility."
   @query(#{ name: "names", explode: true })
   names?: string[];
 
   /**
    * Field to order by.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing AgentDeploymentsListParameters.orderBy retains the orderBy query parameter; preserve wire compatibility."
   @query("orderBy")
   orderBy?: string;
 
   /**
    * Whether to order in ascending order.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing AgentDeploymentsListParameters.orderByAsc retains the orderByAsc query parameter; preserve wire compatibility."
   @query("orderByAsc")
   orderByAsc?: boolean = false;
 };

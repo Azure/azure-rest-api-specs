@@ -152,6 +152,7 @@ interface CertificateContracts {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByService.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -159,6 +160,7 @@ interface CertificateContracts {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByService.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -166,6 +168,7 @@ interface CertificateContracts {
       /**
        * When set to true, the response contains only certificates entities which failed refresh.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByService.isKeyVaultRefreshFailed retains the isKeyVaultRefreshFailed query parameter; preserve wire compatibility."
       @query("isKeyVaultRefreshFailed")
       isKeyVaultRefreshFailed?: boolean;
     },
@@ -328,6 +331,7 @@ interface WorkspaceCertificate {
       /**
        * Number of records to return.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByWorkspace.$top retains the $top query parameter; preserve wire compatibility."
       @minValue(1)
       @query("$top")
       $top?: int32;
@@ -335,6 +339,7 @@ interface WorkspaceCertificate {
       /**
        * Number of records to skip.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByWorkspace.$skip retains the $skip query parameter; preserve wire compatibility."
       @minValue(0)
       @query("$skip")
       $skip?: int32;
@@ -342,6 +347,7 @@ interface WorkspaceCertificate {
       /**
        * When set to true, the response contains only certificates entities which failed refresh.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByWorkspace.isKeyVaultRefreshFailed retains the isKeyVaultRefreshFailed query parameter; preserve wire compatibility."
       @query("isKeyVaultRefreshFailed")
       isKeyVaultRefreshFailed?: boolean;
     },

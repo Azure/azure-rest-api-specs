@@ -186,6 +186,7 @@ interface CheckDnsNameAvailability {
       /**
        * The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing checkDnsNameAvailability.domainNameLabel retains the domainNameLabel query parameter; preserve wire compatibility."
       @query("domainNameLabel")
       domainNameLabel: string;
     },
@@ -561,12 +562,14 @@ interface ServiceTagInformationOperationGroup {
       /**
        * Do not return address prefixes for the tag(s).
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.noAddressPrefixes retains the noAddressPrefixes query parameter; preserve wire compatibility."
       @query("noAddressPrefixes")
       noAddressPrefixes?: boolean;
 
       /**
        * Return tag information for a particular tag.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.tagName retains the tagName query parameter; preserve wire compatibility."
       @query("tagName")
       tagName?: string;
     },

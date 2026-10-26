@@ -39,42 +39,49 @@ alias DatastoresListParameters = {
   /**
    * Continuation token for pagination.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing DatastoresListParameters.$skip retains the $skip query parameter; preserve wire compatibility."
   @query("$skip")
   $skip?: string;
 
   /**
    * Maximum number of results to return.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing DatastoresListParameters.count retains the count query parameter; preserve wire compatibility."
   @query("count")
   count?: int32 = 30;
 
   /**
    * Filter down to the workspace default datastore.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing DatastoresListParameters.isDefault retains the isDefault query parameter; preserve wire compatibility."
   @query("isDefault")
   isDefault?: boolean;
 
   /**
    * Names of datastores to return.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing DatastoresListParameters.names retains the names query parameter; preserve wire compatibility."
   @query("names")
   names?: string[];
 
   /**
    * Text to search for in the datastore names.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing DatastoresListParameters.searchText retains the searchText query parameter; preserve wire compatibility."
   @query("searchText")
   searchText?: string;
 
   /**
    * Order by property (createdtime | modifiedtime | name).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing DatastoresListParameters.orderBy retains the orderBy query parameter; preserve wire compatibility."
   @query("orderBy")
   orderBy?: string;
 
   /**
    * Order by property in ascending order.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing DatastoresListParameters.orderByAsc retains the orderByAsc query parameter; preserve wire compatibility."
   @query("orderByAsc")
   orderByAsc?: boolean = false;
 };

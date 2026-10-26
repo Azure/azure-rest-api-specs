@@ -76,24 +76,28 @@ interface ExtensionTypeVersionForReleaseTrains {
       /**
        * Filter results by release train (default value is stable)
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listVersions.releaseTrain retains the releaseTrain query parameter; preserve wire compatibility."
       @query("releaseTrain")
       releaseTrain?: string;
 
       /**
        * Filter results by the cluster type for extension types
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listVersions.clusterType retains the clusterType query parameter; preserve wire compatibility."
       @query("clusterType")
       clusterType?: string;
 
       /**
        * Filter results by the major version of an extension type
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listVersions.majorVersion retains the majorVersion query parameter; preserve wire compatibility."
       @query("majorVersion")
       majorVersion?: string;
 
       /**
        * Filter results by only the latest version (based on other query parameters)
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listVersions.showLatest retains the showLatest query parameter; preserve wire compatibility."
       @query("showLatest")
       showLatest?: boolean;
     },
@@ -167,18 +171,21 @@ interface ExtensionTypeVersionForReleaseTrainOperationGroup {
       /**
        * Filter results by release train (default value is stable)
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing clusterListVersions.releaseTrain retains the releaseTrain query parameter; preserve wire compatibility."
       @query("releaseTrain")
       releaseTrain?: string;
 
       /**
        * Filter results by the major version of an extension type
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing clusterListVersions.majorVersion retains the majorVersion query parameter; preserve wire compatibility."
       @query("majorVersion")
       majorVersion?: string;
 
       /**
        * Filter results by only the latest version (based on other query parameters)
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing clusterListVersions.showLatest retains the showLatest query parameter; preserve wire compatibility."
       @query("showLatest")
       showLatest?: boolean;
     },

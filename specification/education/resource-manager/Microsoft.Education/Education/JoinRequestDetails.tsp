@@ -91,6 +91,7 @@ interface JoinRequests {
       /**
        * Include denied
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.includeDenied retains the includeDenied query parameter; preserve wire compatibility."
       @query("includeDenied")
       includeDenied?: boolean;
     },

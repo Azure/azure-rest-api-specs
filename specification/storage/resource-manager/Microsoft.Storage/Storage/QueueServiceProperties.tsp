@@ -70,6 +70,7 @@ interface QueueServices {
       /**
        * Optional, a maximum number of queues that should be included in a list queue response
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing queueList.$maxpagesize retains the $maxpagesize query parameter; preserve wire compatibility."
       @query("$maxpagesize")
       $maxpagesize?: string;
 

@@ -136,6 +136,7 @@ interface PolicyDefinitions {
       /**
        * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @minValue(1)
       @query("$top")
@@ -163,6 +164,7 @@ interface PolicyDefinitions {
       /**
        * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listBuiltIn.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @minValue(1)
       @query("$top")
@@ -204,6 +206,7 @@ interface PolicyDefinitions {
       /**
        * Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByManagementGroup.$top retains the $top query parameter; preserve wire compatibility."
       @maxValue(1000)
       @minValue(1)
       @query("$top")

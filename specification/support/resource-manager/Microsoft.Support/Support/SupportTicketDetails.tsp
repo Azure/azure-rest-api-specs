@@ -99,6 +99,7 @@ interface SupportTickets {
       /**
        * The number of values to return in the collection. Default is 25 and max is 100.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 
@@ -188,6 +189,7 @@ interface SupportTicketsNoSubscription {
       /**
        * The number of values to return in the collection. Default is 25 and max is 100.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       $top?: int32;
 

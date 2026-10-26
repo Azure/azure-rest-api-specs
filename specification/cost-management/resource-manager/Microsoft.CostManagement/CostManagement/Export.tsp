@@ -112,6 +112,7 @@ interface Exports {
       /**
        * May be used to expand the properties within an export. Currently only 'runHistory' is supported and will return information for the last run of each export.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },

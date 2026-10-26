@@ -184,6 +184,7 @@ interface AgentPools {
       /**
        * If true, only return operations that are currently active (not terminal).
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByAgentPool.activeOnly retains the activeOnly query parameter; preserve wire compatibility."
       @query
       activeOnly?: boolean;
     }

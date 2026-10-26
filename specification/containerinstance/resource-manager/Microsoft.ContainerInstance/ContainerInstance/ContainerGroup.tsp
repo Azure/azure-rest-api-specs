@@ -159,12 +159,14 @@ interface ContainerGroups {
       /**
        * The number of lines to show from the tail of the container instance log. If not provided, all available logs are shown up to 4mb.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listLogs.tail retains the tail query parameter; preserve wire compatibility."
       @query("tail")
       tail?: int32;
 
       /**
        * If true, adds a timestamp at the beginning of every line of log output. If not provided, defaults to false.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listLogs.timestamps retains the timestamps query parameter; preserve wire compatibility."
       @query("timestamps")
       timestamps?: boolean;
     }

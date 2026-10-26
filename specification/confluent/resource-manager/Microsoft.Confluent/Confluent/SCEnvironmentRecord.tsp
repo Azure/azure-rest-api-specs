@@ -105,12 +105,14 @@ interface SCEnvironmentRecords {
       /**
        * Pagination size
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listEnvironments.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @query("pageSize")
       pageSize?: int32;
 
       /**
        * An opaque pagination token to fetch the next set of records
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listEnvironments.pageToken retains the pageToken query parameter; preserve wire compatibility."
       @query("pageToken")
       pageToken?: string;
     },
@@ -133,12 +135,14 @@ interface SCEnvironmentRecords {
       /**
        * Pagination size
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listSchemaRegistryClusters.pageSize retains the pageSize query parameter; preserve wire compatibility."
       @query("pageSize")
       pageSize?: int32;
 
       /**
        * An opaque pagination token to fetch the next set of records
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listSchemaRegistryClusters.pageToken retains the pageToken query parameter; preserve wire compatibility."
       @query("pageToken")
       pageToken?: string;
     },

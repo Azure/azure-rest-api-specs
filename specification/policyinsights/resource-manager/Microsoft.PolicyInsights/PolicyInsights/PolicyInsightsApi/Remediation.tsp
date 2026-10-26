@@ -155,6 +155,7 @@ interface Remediations {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listForManagementGroup.Top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -205,6 +206,7 @@ interface Remediations {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listForSubscription.Top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -287,6 +289,7 @@ interface Remediations {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listForResourceGroup.Top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -368,6 +371,7 @@ interface Remediations {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listForResource.Top retains the $top query parameter; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;

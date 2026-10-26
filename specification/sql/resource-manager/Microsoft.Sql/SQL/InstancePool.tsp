@@ -117,6 +117,7 @@ interface InstancePools {
       /**
        * The child resources to include in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByInstancePool.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -139,6 +140,7 @@ interface InstancePools {
       /**
        * Optional request parameter to include managed instance usages within the instance pool.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing usagesListByInstancePool.expandChildren retains the expandChildren query parameter; preserve wire compatibility."
       @query("expandChildren")
       expandChildren?: boolean;
     }

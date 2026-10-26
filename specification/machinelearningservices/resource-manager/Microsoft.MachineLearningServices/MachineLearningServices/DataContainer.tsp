@@ -142,12 +142,14 @@ interface DataContainers {
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       /**
        * View type for including/excluding (for example) archived entities.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.listViewType retains the listViewType query parameter; preserve wire compatibility."
       @query("listViewType")
       listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
@@ -211,12 +213,14 @@ interface DataContainerOperationGroup {
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
 
       /**
        * View type for including/excluding (for example) archived entities.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.listViewType retains the listViewType query parameter; preserve wire compatibility."
       @query("listViewType")
       listViewType?: ListViewType = ListViewType.ActiveOnly;
     },

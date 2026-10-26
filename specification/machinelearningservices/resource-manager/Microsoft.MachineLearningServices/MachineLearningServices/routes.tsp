@@ -106,6 +106,7 @@ interface PTUQuotaOperationGroup {
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listAvailable.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
     }
@@ -139,6 +140,7 @@ interface PTUQuotaOperationGroup {
       /**
        * Continuation token for pagination.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing list.$skip retains the $skip query parameter; preserve wire compatibility."
       @query("$skip")
       $skip?: string;
     }

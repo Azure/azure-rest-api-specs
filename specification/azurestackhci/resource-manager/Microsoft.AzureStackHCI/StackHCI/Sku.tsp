@@ -49,6 +49,7 @@ interface Skus {
       /**
        * Specify $expand=content,contentVersion to populate additional fields related to the marketplace offer.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByOffer.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },

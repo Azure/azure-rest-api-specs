@@ -258,6 +258,7 @@ interface JobRuns {
       @query("$filter")
       filter?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByJob.orderBy retains the $orderBy query parameter; preserve wire compatibility."
       @doc("An OData order by expression to sort the results. For example, \"status asc\" or \"status desc\".")
       @query("$orderBy")
       orderBy?: string;
@@ -313,6 +314,7 @@ interface JobRunsByNamespace {
     @query("$filter")
     filter?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listByNamespace.orderBy retains the $orderBy query parameter; preserve wire compatibility."
     @doc("An OData order by expression to sort the results. For example, \"status asc\" or \"status desc\".")
     @query("$orderBy")
     orderBy?: string,

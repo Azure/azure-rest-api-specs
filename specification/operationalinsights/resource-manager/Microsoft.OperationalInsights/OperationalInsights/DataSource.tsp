@@ -89,6 +89,7 @@ alias DataSourcesListByWorkspaceParameters = {
   /**
    * Starting point of the collection of data source instances.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing DataSourcesListByWorkspaceParameters.$skiptoken retains the $skiptoken query parameter; preserve wire compatibility."
   @query("$skiptoken")
   $skiptoken?: string;
 };

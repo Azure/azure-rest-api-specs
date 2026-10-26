@@ -18,30 +18,36 @@ alias EndpointResourceListParameters = {
   /**
    * Endpoint type filter
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing EndpointResourceListParameters.endpointType retains the endpointType query parameter; preserve wire compatibility."
   @query("endpointType")
   endpointType?: EndpointType;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing EndpointResourceListParameters.includeOnlineEndpoints retains the includeOnlineEndpoints query parameter; preserve wire compatibility."
   @query("includeOnlineEndpoints")
   includeOnlineEndpoints?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing EndpointResourceListParameters.includeServerlessEndpoints retains the includeServerlessEndpoints query parameter; preserve wire compatibility."
   @query("includeServerlessEndpoints")
   includeServerlessEndpoints?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing EndpointResourceListParameters.includeConnections retains the includeConnections query parameter; preserve wire compatibility."
   @query("includeConnections")
   includeConnections?: boolean = false;
 
   /**
    * Continuation token for pagination.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing EndpointResourceListParameters.$skip retains the $skip query parameter; preserve wire compatibility."
   @query("$skip")
   $skip?: string;
 
   /**
    * Whether the endpoint resource will be expand to include deployment information, e.g. $expand=deployments
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing EndpointResourceListParameters.$expand retains the $expand query parameter; preserve wire compatibility."
   @query("$expand")
   $expand?: string;
 };

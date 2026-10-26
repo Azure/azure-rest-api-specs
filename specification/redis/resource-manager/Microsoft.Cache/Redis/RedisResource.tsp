@@ -126,6 +126,7 @@ interface RedisResources {
       /**
        * how many minutes in past to look for upgrade notifications
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-collection" "Back compat: Existing listUpgradeNotifications.history retains the history query parameter; preserve wire compatibility."
       @query("history")
       history: float64;
     }
