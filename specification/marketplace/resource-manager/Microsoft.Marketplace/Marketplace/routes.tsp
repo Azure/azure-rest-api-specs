@@ -39,6 +39,7 @@ interface PrivateStoreCollectionOperationGroup {
     collectionId: string,
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing post.payload retains its media-type contract; preserve content-negotiation compatibility."
     @bodyRoot
     payload?: Operation,
   ): OkResponse | ErrorResponse;
@@ -75,6 +76,7 @@ interface PrivateStoreCollectionOfferOperationGroup {
     offerId: string,
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing post.payload retains its media-type contract; preserve content-negotiation compatibility."
     @bodyRoot
     payload?: Operation,
   ): OkResponse | ErrorResponse;

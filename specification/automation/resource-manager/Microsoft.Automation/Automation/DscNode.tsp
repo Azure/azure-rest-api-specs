@@ -144,6 +144,7 @@ interface DscNodes {
     DscNode,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DscNode>,
     Response = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing getContent.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "text/plain";
 

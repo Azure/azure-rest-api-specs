@@ -455,6 +455,7 @@ interface Sites {
     Site,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing getWebSiteContainerLogs.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "application/octet-stream";
 
@@ -476,6 +477,7 @@ interface Sites {
     Site,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing getContainerLogsZip.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "application/zip";
 
@@ -1048,6 +1050,7 @@ interface Sites {
     Site,
     CsmPublishingProfileOptions,
     {
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing listPublishingProfileXmlWithSecrets.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "application/xml";
 
@@ -1924,6 +1927,7 @@ interface WebApps {
     Site,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing getWebSiteContainerLogsSlot.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "application/octet-stream";
 
@@ -1946,6 +1950,7 @@ interface WebApps {
     Site,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing getContainerLogsZipSlot.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "application/zip";
 
@@ -2403,6 +2408,7 @@ interface WebApps {
     Site,
     CsmPublishingProfileOptions,
     {
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing listPublishingProfileXmlWithSecretsSlot.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "application/xml";
 

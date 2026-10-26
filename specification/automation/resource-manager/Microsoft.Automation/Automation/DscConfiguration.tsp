@@ -116,6 +116,7 @@ interface DscConfigurations {
     DscConfiguration,
     void,
     {
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing getContent.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "text/powershell";
 

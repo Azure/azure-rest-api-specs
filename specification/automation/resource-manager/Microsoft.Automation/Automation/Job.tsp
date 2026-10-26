@@ -76,6 +76,7 @@ interface Jobs {
     Job,
     void,
     {
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing getOutput.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "text/plain";
 
@@ -104,6 +105,7 @@ interface Jobs {
     Job,
     void,
     {
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing getRunbookContent.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "text/powershell";
 
