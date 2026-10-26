@@ -114,7 +114,21 @@ directive:
   - suppress: XmsPageableForListCalls
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}/virtualNetworkIntegrations"].get
-    reason: This GET is an ARM action on the silo resource rather than a collection GET. It returns the fixed set of virtual network integrations for a single silo and has no continuation contract. The rule classifies an operation as a list purely by counting path segments, so any GET shaped action on a resource produces an even segment count and is treated as a list, which is the known TypeSpec false positive tracked by https://github.com/Azure/azure-openapi-validator/issues/646. The response is a bare array, so x-ms-pageable would have no item property to reference. This shape matches the existing App Service virtual network endpoints under serverfarms/{name}/virtualNetworkConnections and sites/{name}/virtualNetworkConnections, which are reported by this same rule in every prior API version.
+    reason: This GET inspects the virtual network integrations of a single silo and returns one nonpaged object. Its properties array contains the bounded set of subnet integrations and their allocation metadata, while its root metadata identifies the backing plan's virtual network integrations. It is not a resource collection and has no continuation contract, value property, or nextLink. Adding x-ms-pageable would incorrectly advertise pagination for this inspection response.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}/virtualNetworkIntegrations"].get.responses["200"].schema.properties
+    reason: This GET returns a nonpaged inspection result, not a collection of addressable resources. GetSiloVnetIntegrationsAsync delegates to GetVnetIntegrationsFromServerFarm, which returns ResponseMessageEnvelope<List<SwiftVirtualNetwork>> with subnet entries under properties. Replacing the deployed envelope with value and nextLink would change the service contract. This suppression is limited to this operation's response properties.
+  - suppress: TrackedResourcePatchOperation
+    from: openapi.json
+    where:
+      - $.definitions.ServerFarmSilo
+      - $.definitions.SiteSilo
+    reason: These silo resources use the tracked-resource envelope, but their currently implemented update operation is PUT. The silo surface does not currently register PATCH, unlike ordinary sites and App Service plans. This temporary, resource-scoped exception requires ARM review approval; it avoids advertising an unsupported PATCH operation. Tag-update behavior and future PATCH support require separate service alignment.
+  - suppress: LocationMustHaveXmsMutability
+    from: openapi.json
+    where: $.definitions.ServerFarmSiloVnetIntegrationsResult.properties.location
+    reason: This location is read-only metadata in a GET-only inspection result, not the location of a resource that clients create or update. The result has no create operation, so adding create mutability would misrepresent the implemented contract. This exception is limited to the inspection result's location property.
 ```
 
 ### Tag: package-2026-08

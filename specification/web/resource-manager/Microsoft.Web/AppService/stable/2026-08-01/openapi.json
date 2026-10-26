@@ -6713,10 +6713,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SwiftVirtualNetwork"
-              }
+              "$ref": "#/definitions/ServerFarmSiloVnetIntegrationsResult"
             }
           },
           "default": {
@@ -6729,6 +6726,9 @@
         "x-ms-examples": {
           "Get the virtual network integrations of an App Service plan silo": {
             "$ref": "./examples/ServerFarmSiloResources_GetServerFarmSiloVnetIntegrations.json"
+          },
+          "Get the virtual network integrations of an App Service plan silo with no integrations": {
+            "$ref": "./examples/ServerFarmSiloResources_GetServerFarmSiloVnetIntegrations_Empty.json"
           }
         }
       }
@@ -51480,7 +51480,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -51511,7 +51511,7 @@
       "properties": {
         "siloLocation": {
           "type": "string",
-          "description": "ARM location of the App Service plan silo."
+          "description": "Azure region of the App Service plan silo, retained for compatibility. When supplied, it must identify the same region as the required root location."
         },
         "primaryServerFarmName": {
           "type": "string",
@@ -51561,6 +51561,130 @@
       "required": [
         "primaryLocation"
       ]
+    },
+    "ServerFarmSiloResourceAllocation": {
+      "type": "object",
+      "description": "Resource IDs reported by the service for resources connected to an integration subnet.",
+      "properties": {
+        "connectedServerFarmsId": {
+          "type": "array",
+          "description": "Resource IDs of the connected App Service plans, including backing replica plans.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Web/serverfarms"
+                }
+              ]
+            }
+          },
+          "readOnly": true
+        },
+        "connectedSitesId": {
+          "type": "array",
+          "description": "Resource IDs of the connected apps, including backing replica apps.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Web/sites"
+                }
+              ]
+            }
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ServerFarmSiloSubnetIpAllocation": {
+      "type": "object",
+      "description": "IP address allocation counts for an integration subnet.",
+      "properties": {
+        "subnetIpAddressesAvailable": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of subnet IP addresses available.",
+          "readOnly": true
+        },
+        "subnetIpAddressesUsed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of subnet IP addresses in use.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerFarmSiloVnetIntegration": {
+      "type": "object",
+      "description": "Subnet integration and allocation information for an App Service plan silo.",
+      "properties": {
+        "subnetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the integration subnet.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        },
+        "subnetIpAllocation": {
+          "$ref": "#/definitions/ServerFarmSiloSubnetIpAllocation",
+          "description": "IP address allocation counts for the subnet.",
+          "readOnly": true
+        },
+        "resourceAllocation": {
+          "$ref": "#/definitions/ServerFarmSiloResourceAllocation",
+          "description": "Resources connected to the subnet.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerFarmSiloVnetIntegrationsResult": {
+      "type": "object",
+      "description": "Nonpaged virtual network inspection response for an App Service plan silo.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier returned by the service for the backing plan's virtual network integrations, not the customer-facing silo.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the inspection response, when one is available.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type returned by the service for the backing plan's virtual network integrations.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure region returned by the service for the backing plan.",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "array",
+          "description": "Subnet integrations and their allocation metadata. An empty array indicates no integrations.",
+          "items": {
+            "$ref": "#/definitions/ServerFarmSiloVnetIntegration"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "subnetResourceId"
+          ]
+        }
+      }
     },
     "ServiceSpecification": {
       "type": "object",
@@ -53608,7 +53732,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -53639,7 +53763,7 @@
       "properties": {
         "siloLocation": {
           "type": "string",
-          "description": "ARM location of the site silo."
+          "description": "Azure region of the site silo, retained for compatibility. When supplied, it must identify the same region as the required root location."
         },
         "primarySiteName": {
           "type": "string",

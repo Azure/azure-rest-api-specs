@@ -21,7 +21,7 @@ namespace Microsoft.Web;
 @added(Versions.v2026_08_01)
 @parentResource(AppServicePlan)
 model ServerFarmSilo
-  is Azure.ResourceManager.ProxyResource<ServerFarmSiloProperties> {
+  is Azure.ResourceManager.TrackedResource<ServerFarmSiloProperties> {
   ...ResourceNameParameter<
     Resource = ServerFarmSilo,
     KeyName = "siloName",
@@ -75,7 +75,7 @@ interface ServerFarmSiloResources {
   getServerFarmSiloVnetIntegrations is ArmResourceActionSync<
     ServerFarmSilo,
     void,
-    ArmResponse<SwiftVirtualNetwork[]>,
+    ArmResponse<ServerFarmSiloVnetIntegrationsResult>,
     Error = DefaultErrorResponse
   >;
 }

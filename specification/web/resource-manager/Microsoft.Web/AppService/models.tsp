@@ -16627,7 +16627,7 @@ model EndpointTrafficConfig {
 @added(Versions.v2026_08_01)
 model SiteSiloProperties {
   /**
-   * ARM location of the site silo.
+   * Azure region of the site silo, retained for compatibility. When supplied, it must identify the same region as the required root location.
    */
   siloLocation?: string;
 
@@ -16771,7 +16771,7 @@ model SiteSiloProperties {
 @added(Versions.v2026_08_01)
 model ServerFarmSiloProperties {
   /**
-   * ARM location of the App Service plan silo.
+   * Azure region of the App Service plan silo, retained for compatibility. When supplied, it must identify the same region as the required root location.
    */
   siloLocation?: string;
 
@@ -16824,6 +16824,115 @@ model ServerFarmSiloProperties {
    */
   @visibility(Lifecycle.Read)
   lastModifiedTime?: utcDateTime;
+}
+
+/**
+ * Nonpaged virtual network inspection response for an App Service plan silo.
+ */
+@added(Versions.v2026_08_01)
+model ServerFarmSiloVnetIntegrationsResult {
+  /**
+   * Identifier returned by the service for the backing plan's virtual network integrations, not the customer-facing silo.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Name of the inspection response, when one is available.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type returned by the service for the backing plan's virtual network integrations.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Azure region returned by the service for the backing plan.
+   */
+  @visibility(Lifecycle.Read)
+  location?: string;
+
+  /**
+   * Subnet integrations and their allocation metadata. An empty array indicates no integrations.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["subnetResourceId"])
+  properties?: ServerFarmSiloVnetIntegration[];
+}
+
+/**
+ * Subnet integration and allocation information for an App Service plan silo.
+ */
+@added(Versions.v2026_08_01)
+model ServerFarmSiloVnetIntegration {
+  /**
+   * Resource ID of the integration subnet.
+   */
+  @visibility(Lifecycle.Read)
+  subnetResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
+
+  /**
+   * IP address allocation counts for the subnet.
+   */
+  @visibility(Lifecycle.Read)
+  subnetIpAllocation?: ServerFarmSiloSubnetIpAllocation;
+
+  /**
+   * Resources connected to the subnet.
+   */
+  @visibility(Lifecycle.Read)
+  resourceAllocation?: ServerFarmSiloResourceAllocation;
+}
+
+/**
+ * IP address allocation counts for an integration subnet.
+ */
+@added(Versions.v2026_08_01)
+model ServerFarmSiloSubnetIpAllocation {
+  /**
+   * Number of subnet IP addresses available.
+   */
+  @visibility(Lifecycle.Read)
+  subnetIpAddressesAvailable?: int32;
+
+  /**
+   * Number of subnet IP addresses in use.
+   */
+  @visibility(Lifecycle.Read)
+  subnetIpAddressesUsed?: int32;
+}
+
+/**
+ * Resource IDs reported by the service for resources connected to an integration subnet.
+ */
+@added(Versions.v2026_08_01)
+model ServerFarmSiloResourceAllocation {
+  /**
+   * Resource IDs of the connected App Service plans, including backing replica plans.
+   */
+  @visibility(Lifecycle.Read)
+  connectedServerFarmsId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Web/serverfarms";
+    }
+  ]>[];
+
+  /**
+   * Resource IDs of the connected apps, including backing replica apps.
+   */
+  @visibility(Lifecycle.Read)
+  connectedSitesId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Web/sites";
+    }
+  ]>[];
 }
 
 /**

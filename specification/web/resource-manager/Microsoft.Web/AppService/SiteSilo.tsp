@@ -20,7 +20,7 @@ namespace Microsoft.Web;
  */
 @added(Versions.v2026_08_01)
 @parentResource(Site)
-model SiteSilo is Azure.ResourceManager.ProxyResource<SiteSiloProperties> {
+model SiteSilo is Azure.ResourceManager.TrackedResource<SiteSiloProperties> {
   ...ResourceNameParameter<
     Resource = SiteSilo,
     KeyName = "siloName",

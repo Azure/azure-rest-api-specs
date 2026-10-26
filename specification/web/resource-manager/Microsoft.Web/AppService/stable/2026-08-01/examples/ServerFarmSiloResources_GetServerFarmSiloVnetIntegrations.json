@@ -8,17 +8,28 @@
   },
   "responses": {
     "200": {
-      "body": [
-        {
-          "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/testsf6141/silos/silo1/virtualNetworkIntegrations/vnet1",
-          "name": "vnet1",
-          "type": "Microsoft.Web/serverfarms/silos/virtualNetworkIntegrations",
-          "properties": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/testsf6141-silo1/virtualNetworkIntegrations",
+        "type": "Microsoft.Web/serverfarms/virtualNetworkIntegrations",
+        "location": "West US 2",
+        "properties": [
+          {
             "subnetResourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/silo-subnet",
-            "swiftSupported": true
+            "subnetIpAllocation": {
+              "subnetIpAddressesAvailable": 59,
+              "subnetIpAddressesUsed": 0
+            },
+            "resourceAllocation": {
+              "connectedServerFarmsId": [
+                "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/testsf6141-silo1"
+              ],
+              "connectedSitesId": [
+                "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141-silo1"
+              ]
+            }
           }
-        }
-      ]
+        ]
+      }
     }
   },
   "operationId": "ServerFarmSiloResources_GetServerFarmSiloVnetIntegrations",
