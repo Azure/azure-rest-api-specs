@@ -168,7 +168,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
-  @doc("Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.")
+  @doc("Optional configuration for referenced background specialists and inline voice subagents.")
   subagent_config?: VoiceAgentSubagentConfig;
 
   @doc("""
@@ -180,27 +180,32 @@ model VoiceAgentDefinition extends AgentDefinition {
     is not part of the persisted conversation content.
     """)
   store?: boolean = false;
+}
 
+@doc("Configuration for referenced background specialists and inline voice subagents.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSubagentConfig {
   @doc("""
-    Inline voice subagents owned and versioned with this Voice Agent. New Handoff authoring requires `$entrypoint`
-    as the first subagent, followed by at least one specialist and at most 31 additional subagents. Each subagent
+    The subagents configured for this Voice Agent. Referenced subagents identify sibling Foundry text agents that
+    may be consulted in the background. Inline voice subagents are owned and versioned with the parent Voice Agent
+    and may become active through Handoff. Inline Handoff authoring requires `$entrypoint` as the first inline
+    subagent, followed by at least one specialist and at most 31 additional inline subagents. Each inline subagent
     declares its outgoing `handoff_conditions`; condition identifiers and the 128-condition limit apply across
-    the entire Agent. Referenced agents and delegations are not supported by this property.
+    the entire Agent.
     """)
-  @minItems(2)
-  @maxItems(32)
-  subagents?: InlineVoiceSubagent[];
+  @minItems(1)
+  subagents: VoiceAgentSubagentDefinition[];
 
-  @doc("Session-wide handoff limits. Requires `subagents` and at least one outgoing condition from `$entrypoint`. When omitted, the service permits up to 16 completed and 16 attempted handoffs.")
+  @doc("Session-wide Handoff limits for inline voice subagents. Requires an inline `$entrypoint` with at least one outgoing condition. When omitted, the service permits up to 16 completed and 16 attempted handoffs.")
   handoff_policy?: VoiceAgentHandoffPolicy;
 }
 
-@doc("Configuration for sibling Foundry text agents that a voice agent may consult.")
+@doc("A referenced background specialist or an inline voice subagent.")
+@oneOf
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentSubagentConfig {
-  @doc("The sibling Foundry text agents, in the same project, that this voice agent may consult.")
-  @minItems(1)
-  subagents: VoiceAgentSubagent[];
+union VoiceAgentSubagentDefinition {
+  referenced: VoiceAgentSubagent,
+  inline: InlineVoiceSubagent,
 }
 
 @doc("A sibling Foundry text agent that a voice agent may consult as a background specialist.")
