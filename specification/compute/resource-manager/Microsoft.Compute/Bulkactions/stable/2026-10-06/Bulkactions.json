@@ -129,8 +129,8 @@
           }
         },
         "x-ms-examples": {
-          "BulkCreate_ListBySubscription_MaximumSet": {
-            "$ref": "./examples/BulkCreate_ListBySubscription_MaximumSet_Gen.json"
+          "List bulk create operations in a subscription and region": {
+            "$ref": "./examples/BulkCreate_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -185,8 +185,11 @@
           }
         },
         "x-ms-examples": {
-          "BulkCreate_GetAsyncOperationStatus_MaximumSet": {
-            "$ref": "./examples/BulkCreate_GetAsyncOperationStatus_MaximumSet_Gen.json"
+          "Get the status of a completed bulk create operation": {
+            "$ref": "./examples/BulkCreate_GetAsyncOperationStatus.json"
+          },
+          "Get the status of a failed bulk create operation": {
+            "$ref": "./examples/BulkCreate_GetAsyncOperationStatus_Failed.json"
           }
         }
       }
@@ -229,8 +232,8 @@
           }
         },
         "x-ms-examples": {
-          "BulkCreateCustom_ListBySubscription_MaximumSet": {
-            "$ref": "./examples/BulkCreateCustom_ListBySubscription_MaximumSet_Gen.json"
+          "List bulk create custom operations in a subscription and region": {
+            "$ref": "./examples/BulkCreateCustom_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -285,8 +288,11 @@
           }
         },
         "x-ms-examples": {
-          "BulkCreateCustom_GetAsyncOperationStatus_MaximumSet": {
-            "$ref": "./examples/BulkCreateCustom_GetAsyncOperationStatus_MaximumSet_Gen.json"
+          "Get the status of a completed bulk create custom operation": {
+            "$ref": "./examples/BulkCreateCustom_GetAsyncOperationStatus.json"
+          },
+          "Get the status of a failed bulk create custom operation": {
+            "$ref": "./examples/BulkCreateCustom_GetAsyncOperationStatus_Failed.json"
           }
         }
       }
@@ -332,8 +338,8 @@
           }
         },
         "x-ms-examples": {
-          "BulkCreate_ListByResourceGroup_MaximumSet": {
-            "$ref": "./examples/BulkCreate_ListByResourceGroup_MaximumSet_Gen.json"
+          "List bulk create operations in a resource group and region": {
+            "$ref": "./examples/BulkCreate_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -391,17 +397,17 @@
           }
         },
         "x-ms-examples": {
-          "BulkCreate_Get_MaximumSet": {
-            "$ref": "./examples/BulkCreate_Get_MaximumSet_Gen.json"
+          "Get a completed bulk create operation": {
+            "$ref": "./examples/BulkCreate_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "BulkCreate_CreateOrUpdate",
+        "operationId": "BulkCreate_Create",
         "tags": [
           "BulkCreate"
         ],
-        "description": "Creates or updates BulkCreates.",
+        "description": "Creates virtual machines in bulk.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -471,156 +477,15 @@
           }
         },
         "x-ms-examples": {
-          "BulkCreate_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/BulkCreate_CreateOrUpdate_MaximumSet_Gen.json"
+          "Create two Linux virtual machines with a shared profile": {
+            "$ref": "./examples/BulkCreate_Create.json"
+          },
+          "Create two Spot virtual machines with a shared profile": {
+            "$ref": "./examples/BulkCreate_Create_Spot.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "BulkCreate_Delete",
-        "tags": [
-          "BulkCreate"
-        ],
-        "description": "Deletes BulkCreates.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the BulkCreate. The value must be an UUID.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          },
-          {
-            "name": "deleteInstances",
-            "in": "query",
-            "description": "When true, deletes all virtual machines created by this BulkAction Operation.",
-            "required": false,
-            "type": "boolean"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BulkCreate_Delete_MaximumSet": {
-            "$ref": "./examples/BulkCreate_Delete_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreate/{name}/cancel": {
-      "post": {
-        "operationId": "BulkCreate_Cancel",
-        "tags": [
-          "BulkCreate"
-        ],
-        "description": "Cancels BulkCreate instances that have not yet launched.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the BulkCreate. The value must be an UUID.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BulkCreate_Cancel_MaximumSet": {
-            "$ref": "./examples/BulkCreate_Cancel_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -675,8 +540,8 @@
           }
         },
         "x-ms-examples": {
-          "BulkCreate_VirtualMachinesGetOperationStatus_MaximumSet": {
-            "$ref": "./examples/BulkCreate_VirtualMachinesGetOperationStatus_MaximumSet_Gen.json"
+          "Get the individual virtual machine results for a bulk create operation": {
+            "$ref": "./examples/BulkCreate_VirtualMachinesGetOperationStatus.json"
           }
         },
         "x-ms-pageable": {
@@ -726,8 +591,8 @@
           }
         },
         "x-ms-examples": {
-          "BulkCreateCustom_ListByResourceGroup_MaximumSet": {
-            "$ref": "./examples/BulkCreateCustom_ListByResourceGroup_MaximumSet_Gen.json"
+          "List bulk create custom operations in a resource group and region": {
+            "$ref": "./examples/BulkCreateCustom_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -785,17 +650,17 @@
           }
         },
         "x-ms-examples": {
-          "BulkCreateCustom_Get_MaximumSet": {
-            "$ref": "./examples/BulkCreateCustom_Get_MaximumSet_Gen.json"
+          "Get a completed bulk create custom operation": {
+            "$ref": "./examples/BulkCreateCustom_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "BulkCreateCustom_CreateOrUpdate",
+        "operationId": "BulkCreateCustom_Create",
         "tags": [
           "BulkCreateCustom"
         ],
-        "description": "Creates or updates BulkCreateCustoms.",
+        "description": "Creates virtual machines in bulk with custom settings.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -865,156 +730,15 @@
           }
         },
         "x-ms-examples": {
-          "BulkCreateCustom_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/BulkCreateCustom_CreateOrUpdate_MaximumSet_Gen.json"
+          "Create two Linux virtual machines with individual names and tags": {
+            "$ref": "./examples/BulkCreateCustom_Create.json"
+          },
+          "Create virtual machines with generated names and per-VM zones": {
+            "$ref": "./examples/BulkCreateCustom_Create_NamePrefix.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "BulkCreateCustom_Delete",
-        "tags": [
-          "BulkCreateCustom"
-        ],
-        "description": "Deletes BulkCreateCustoms.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the BulkCreateCustom. The value must be an UUID.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          },
-          {
-            "name": "deleteInstances",
-            "in": "query",
-            "description": "When true, deletes all virtual machines created by this BulkAction Operation.",
-            "required": false,
-            "type": "boolean"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BulkCreateCustom_Delete_MaximumSet": {
-            "$ref": "./examples/BulkCreateCustom_Delete_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/{name}/cancel": {
-      "post": {
-        "operationId": "BulkCreateCustom_Cancel",
-        "tags": [
-          "BulkCreateCustom"
-        ],
-        "description": "Cancels BulkCreateCustom instances that have not yet launched.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the BulkCreateCustom. The value must be an UUID.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BulkCreateCustom_Cancel_MaximumSet": {
-            "$ref": "./examples/BulkCreateCustom_Cancel_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1069,8 +793,8 @@
           }
         },
         "x-ms-examples": {
-          "BulkCreateCustom_VirtualMachinesGetOperationStatus_MaximumSet": {
-            "$ref": "./examples/BulkCreateCustom_VirtualMachinesGetOperationStatus_MaximumSet_Gen.json"
+          "Get the individual virtual machine results for a bulk create custom operation": {
+            "$ref": "./examples/BulkCreateCustom_VirtualMachinesGetOperationStatus.json"
           }
         },
         "x-ms-pageable": {

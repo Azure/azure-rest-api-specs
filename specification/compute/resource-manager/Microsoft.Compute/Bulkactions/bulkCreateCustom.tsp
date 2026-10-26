@@ -320,7 +320,7 @@ model BulkCreateCustomListResult {
 }
 
 // ============================================================
-// Routes: BulkCreateCustom interface (8 operations)
+// Routes: BulkCreateCustom interface
 // ============================================================
 
 @added(Versions.`2026-07-06-preview`)
@@ -354,18 +354,21 @@ interface BulkCreateCustom {
     | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
     | ErrorResponse;
 
-  @doc("Creates or updates BulkCreateCustoms.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  @renamedFrom(Versions.`2026-10-06`, "createOrUpdate")
+  @doc("Creates virtual machines in bulk with custom settings.")
+  create is ArmResourceCreateOrUpdateAsync<
     Resource = LocationBasedBulkCreateCustom,
     Parameters = BulkCreateCustomId
   >;
 
+  @removed(Versions.`2026-10-06`)
   @doc("Deletes BulkCreateCustoms.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Resource = LocationBasedBulkCreateCustom,
     Parameters = BulkCreateCustomId & BulkCreateCustomDeleteInstancesParameter
   >;
 
+  @removed(Versions.`2026-10-06`)
   @doc("Cancels BulkCreateCustom instances that have not yet launched.")
   cancel is ArmResourceActionNoResponseContentAsync<
     Resource = LocationBasedBulkCreateCustom,

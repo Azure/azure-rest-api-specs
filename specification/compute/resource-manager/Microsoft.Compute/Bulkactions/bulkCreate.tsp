@@ -207,7 +207,7 @@ model BulkCreateOperationStatusListResult {
 }
 
 // ============================================================
-// Routes: BulkCreate interface (8 operations)
+// Routes: BulkCreate interface
 // ============================================================
 
 @added(Versions.`2026-09-06-preview`)
@@ -241,18 +241,21 @@ interface BulkCreate {
     | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
     | ErrorResponse;
 
-  @doc("Creates or updates BulkCreates.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  @renamedFrom(Versions.`2026-10-06`, "createOrUpdate")
+  @doc("Creates virtual machines in bulk.")
+  create is ArmResourceCreateOrUpdateAsync<
     Resource = LocationBasedBulkCreate,
     Parameters = BulkCreateId
   >;
 
+  @removed(Versions.`2026-10-06`)
   @doc("Deletes BulkCreates.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Resource = LocationBasedBulkCreate,
     Parameters = BulkCreateId & BulkCreateDeleteInstancesParameter
   >;
 
+  @removed(Versions.`2026-10-06`)
   @doc("Cancels BulkCreate instances that have not yet launched.")
   cancel is ArmResourceActionNoResponseContentAsync<
     Resource = LocationBasedBulkCreate,
