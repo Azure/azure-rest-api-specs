@@ -104,6 +104,7 @@ interface Runbooks {
     Runbook,
     void,
     {
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing getContent.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "text/plain";
 
@@ -132,6 +133,7 @@ interface Runbooks {
       /**
        * The content type of the runbook draft content.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing replaceContent.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "text/plain";
 
@@ -199,6 +201,7 @@ interface Runbooks {
     Runbook,
     void,
     {
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing runbookGetContent.contentType retains its media-type contract; preserve content-negotiation compatibility."
       @header("Content-Type")
       contentType: "text/plain";
 

@@ -459,6 +459,7 @@ interface AutomationAccounts {
    * Generates a Uri for use in creating a webhook.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing generateUri retains its media-type contract; preserve content-negotiation compatibility."
   @tag("Webhook")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/webhookoperations")
   @action("webhooks/generateUri")

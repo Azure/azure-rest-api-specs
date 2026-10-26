@@ -107,6 +107,7 @@ interface ProcessInfos {
     ProcessInfo,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing getInstanceProcessDump.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "*/*";
 
@@ -202,6 +203,7 @@ interface ProcessInfoOperationGroup {
     ProcessInfo,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing getProcessDump.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "*/*";
 
@@ -310,6 +312,7 @@ interface InstanceProcessSlotOperationGroup {
     ProcessInfo,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing getInstanceProcessDumpSlot.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "*/*";
 
@@ -411,6 +414,7 @@ interface ProcessSlotOperationGroup {
     ProcessInfo,
     void,
     | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing getProcessDumpSlot.contentType retains its media-type contract; preserve content-negotiation compatibility."
         @header("Content-Type")
         contentType: "*/*";
 

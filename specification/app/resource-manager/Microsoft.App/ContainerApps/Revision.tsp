@@ -126,6 +126,7 @@ interface FunctionsExtension {
   /**
    * Proxies a Functions host call to the function app backed by the container app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-application-json-content-type" "Back compat: Existing invokeFunctionsHost retains its media-type contract; preserve content-negotiation compatibility."
   @action("invoke")
   @summary("Proxies a Functions host call to the function app backed by the container app.")
   invokeFunctionsHost is FunctionExtensionOps.ActionSync<
