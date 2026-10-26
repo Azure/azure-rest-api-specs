@@ -561,6 +561,7 @@ interface ServiceTagInformationOperationGroup {
       /**
        * Do not return address prefixes for the tag(s).
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.noAddressPrefixes has a boolean wire value; preserve the published property contract."
       @query("noAddressPrefixes")
       noAddressPrefixes?: boolean;
 

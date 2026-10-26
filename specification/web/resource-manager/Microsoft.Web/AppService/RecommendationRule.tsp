@@ -67,6 +67,7 @@ interface RecommendationRules {
       /**
        * Specify <code>true</code> to update the last-seen timestamp of the recommendation object.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getRuleDetailsByHostingEnvironment.updateSeen has a boolean wire value; preserve the published property contract."
       @query("updateSeen")
       updateSeen?: boolean;
 
@@ -137,6 +138,7 @@ interface Recommendations {
       /**
        * Specify <code>true</code> to update the last-seen timestamp of the recommendation object.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getRuleDetailsByWebApp.updateSeen has a boolean wire value; preserve the published property contract."
       @query("updateSeen")
       updateSeen?: boolean;
 

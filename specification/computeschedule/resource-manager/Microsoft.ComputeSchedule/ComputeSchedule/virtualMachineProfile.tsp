@@ -75,6 +75,7 @@ model ScheduledEventsPolicy {
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies Redeploy related Scheduled Event related configurations.")
 model UserInitiatedRedeploy {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UserInitiatedRedeploy.automaticallyApprove has a boolean wire value; preserve the published property contract."
   @doc("Specifies Redeploy Scheduled Event related configurations.")
   automaticallyApprove?: boolean;
 }
@@ -82,6 +83,7 @@ model UserInitiatedRedeploy {
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies Reboot related Scheduled Event related configurations.")
 model UserInitiatedReboot {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UserInitiatedReboot.automaticallyApprove has a boolean wire value; preserve the published property contract."
   @doc("Specifies Reboot Scheduled Event related configurations.")
   automaticallyApprove?: boolean;
 }
@@ -96,6 +98,7 @@ model ScheduledEventsAdditionalPublishingTargets {
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies eventGridAndResourceGraph related Scheduled Event related configurations.")
 model EventGridAndResourceGraph {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EventGridAndResourceGraph.enable has a boolean wire value; preserve the published property contract."
   @doc("Specifies if event grid and resource graph is enabled for Scheduled event related configurations.")
   enable?: boolean;
 
@@ -106,6 +109,7 @@ model EventGridAndResourceGraph {
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies if Scheduled Events should be auto-approved when all instances are down.")
 model AllInstancesDown {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AllInstancesDown.automaticallyApprove has a boolean wire value; preserve the published property contract."
   @doc("Specifies if Scheduled Events should be auto-approved when all instances are down. Its default value is true.")
   automaticallyApprove?: boolean;
 }
@@ -195,6 +199,7 @@ model OSDisk {
   @doc("Specifies the caching requirements. Possible values are: None, ReadOnly, ReadWrite. The defaulting behavior is: None for Standard storage. ReadOnly for Premium storage.")
   caching?: CachingTypes;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OSDisk.writeAcceleratorEnabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether writeAccelerator should be enabled or disabled on the disk.")
   writeAcceleratorEnabled?: boolean;
 
@@ -358,6 +363,7 @@ model DiskEncryptionSettings {
   @doc("Specifies the location of the key encryption key in Key Vault.")
   keyEncryptionKey?: KeyVaultKeyReference;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DiskEncryptionSettings.enabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether disk encryption should be enabled on the virtual machine.")
   enabled?: boolean;
 }
@@ -447,6 +453,7 @@ model DataDisk {
   @doc("Specifies the caching requirements. Possible values are: None, ReadOnly, ReadWrite. The defaulting behavior is: None for Standard storage. ReadOnly for Premium storage.")
   caching?: CachingTypes;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataDisk.writeAcceleratorEnabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether writeAccelerator should be enabled or disabled on the disk.")
   writeAcceleratorEnabled?: boolean;
 
@@ -463,6 +470,7 @@ model DataDisk {
   @doc("The source resource identifier. It can be a snapshot, or disk restore point from which to create a disk.")
   sourceResource?: ApiEntityReference;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataDisk.toBeDetached has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the data disk is in process of detachment from the VirtualMachine/VirtualMachineScaleset.")
   toBeDetached?: boolean;
 
@@ -511,9 +519,11 @@ union DiskControllerTypes {
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model AdditionalCapabilities {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SSD is an abbreviation for Solid State Drive"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AdditionalCapabilities.ultraSSDEnabled has a boolean wire value; preserve the published property contract."
   @doc("The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled.")
   ultraSSDEnabled?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AdditionalCapabilities.hibernationEnabled has a boolean wire value; preserve the published property contract."
   @doc("The flag that enables or disables hibernation capability on the VM.")
   hibernationEnabled?: boolean;
 }
@@ -559,11 +569,13 @@ model OSProfile {
   /**
    * Specifies whether extension operations should be allowed on the virtual machine. This may only be set to False when no extensions are present on the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OSProfile.allowExtensionOperations has a boolean wire value; preserve the published property contract."
   allowExtensionOperations?: boolean;
 
   /**
    * Optional property which must either be set to True or omitted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OSProfile.requireGuestProvisionSignal has a boolean wire value; preserve the published property contract."
   requireGuestProvisionSignal?: boolean;
 }
 
@@ -576,11 +588,13 @@ model WindowsConfiguration {
    * Indicates whether virtual machine agent should be provisioned on the virtual machine. When this property is not specified in the request body, it is set to true by default. This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is an abbreviation for Virtual Machine"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WindowsConfiguration.provisionVMAgent has a boolean wire value; preserve the published property contract."
   provisionVMAgent?: boolean;
 
   /**
    * Indicates whether Automatic Updates is enabled for the Windows virtual machine. Default value is true. For virtual machine scale sets, this property can be updated and updates will take effect on OS reprovisioning.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WindowsConfiguration.enableAutomaticUpdates has a boolean wire value; preserve the published property contract."
   enableAutomaticUpdates?: boolean;
 
   /**
@@ -645,6 +659,7 @@ model PatchSettings {
   /**
    * Enables customers to patch their Azure VMs without requiring a reboot. For enableHotpatching, the 'provisionVMAgent' must be set to true and 'patchMode' must be set to 'AutomaticByPlatform'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PatchSettings.enableHotpatching has a boolean wire value; preserve the published property contract."
   enableHotpatching?: boolean;
 
   /**
@@ -672,6 +687,7 @@ model WindowsVMGuestPatchAutomaticByPlatformSettings {
   /**
    * Enables customer to schedule patching without accidental upgrades
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule has a boolean wire value; preserve the published property contract."
   bypassPlatformSafetyChecksOnUserSchedule?: boolean;
 }
 
@@ -787,6 +803,7 @@ model LinuxConfiguration {
   /**
    * Specifies whether password authentication should be disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LinuxConfiguration.disablePasswordAuthentication has a boolean wire value; preserve the published property contract."
   disablePasswordAuthentication?: boolean;
 
   /**
@@ -798,6 +815,7 @@ model LinuxConfiguration {
    * Indicates whether virtual machine agent should be provisioned on the virtual machine. When this property is not specified in the request body, default behavior is to set it to true. This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is an abbreviation for Virtual Machine"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LinuxConfiguration.provisionVMAgent has a boolean wire value; preserve the published property contract."
   provisionVMAgent?: boolean;
 
   /**
@@ -809,6 +827,7 @@ model LinuxConfiguration {
    * Indicates whether VMAgent Platform Updates is enabled for the Linux virtual machine. Default value is false.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is an abbreviation for Virtual Machine"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LinuxConfiguration.enableVMAgentPlatformUpdates has a boolean wire value; preserve the published property contract."
   enableVMAgentPlatformUpdates?: boolean;
 }
 
@@ -867,6 +886,7 @@ model LinuxVMGuestPatchAutomaticByPlatformSettings {
   /**
    * Enables customer to schedule patching without accidental upgrades
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule has a boolean wire value; preserve the published property contract."
   bypassPlatformSafetyChecksOnUserSchedule?: boolean;
 }
 
@@ -965,6 +985,7 @@ model NetworkInterfaceReference extends SubResource {
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a network interface reference properties.")
 model NetworkInterfaceReferenceProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkInterfaceReferenceProperties.primary has a boolean wire value; preserve the published property contract."
   @doc("Specifies the primary network interface in case the virtual machine has more than 1 network interface.")
   primary?: boolean;
 
@@ -989,22 +1010,27 @@ model VirtualMachineNetworkInterfaceConfiguration {
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a virtual machine network profile's IP configuration.")
 model VirtualMachineNetworkInterfaceConfigurationProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineNetworkInterfaceConfigurationProperties.primary has a boolean wire value; preserve the published property contract."
   @doc("Specifies the primary network interface in case the virtual machine has more than 1 network interface.")
   primary?: boolean;
 
   @doc("Specify what happens to the network interface when the VM is deleted")
   deleteOption?: DeleteOptions;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineNetworkInterfaceConfigurationProperties.enableAcceleratedNetworking has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the network interface is accelerated networking-enabled.")
   enableAcceleratedNetworking?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineNetworkInterfaceConfigurationProperties.disableTcpStateTracking has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the network interface is disabled for tcp state tracking.")
   disableTcpStateTracking?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineNetworkInterfaceConfigurationProperties.enableFpga has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the network interface is FPGA networking-enabled.")
   enableFpga?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbreviation for Internet Protocol"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineNetworkInterfaceConfigurationProperties.enableIPForwarding has a boolean wire value; preserve the published property contract."
   @doc("Whether IP forwarding enabled on this NIC.")
   enableIPForwarding?: boolean;
 
@@ -1054,6 +1080,7 @@ model VirtualMachineNetworkInterfaceIPConfigurationProperties {
   @doc("Specifies the identifier of the subnet.")
   subnet?: SubResource;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineNetworkInterfaceIPConfigurationProperties.primary has a boolean wire value; preserve the published property contract."
   @doc("Specifies the primary network interface in case the virtual machine has more than 1 network interface.")
   primary?: boolean;
 
@@ -1316,9 +1343,11 @@ model VMGalleryApplication {
   @doc("Optional, Specifies the uri to an azure blob that will replace the default configuration for the package if provided")
   configurationReference?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMGalleryApplication.treatFailureAsDeploymentFailure has a boolean wire value; preserve the published property contract."
   @doc("Optional, If true, any failure for any operation in the VmApplication will fail the deployment")
   treatFailureAsDeploymentFailure?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMGalleryApplication.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   @doc("If set to true, when a new Gallery Application version is available in PIR/SIG, it will be automatically updated for the VM/VMSS")
   enableAutomaticUpgrade?: boolean;
 }
@@ -1348,6 +1377,7 @@ model TerminateNotificationProfile {
   @doc("Configurable length of time a Virtual Machine being deleted will have to potentially approve the Terminate Scheduled Event before the event is auto approved (timed out). The configuration must be specified in ISO 8601 format, the default value is 5 minutes (PT5M)")
   notBeforeTimeout?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TerminateNotificationProfile.enable has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the Terminate Scheduled event is enabled or disabled.")
   enable?: boolean;
 }
@@ -1359,6 +1389,7 @@ model OSImageNotificationProfile {
   @doc("Length of time a Virtual Machine being reimaged or having its OS upgraded will have to potentially approve the OS Image Scheduled Event before the event is auto approved (timed out). The configuration is specified in ISO 8601 format, and the value must be 15 minutes (PT15M)")
   notBeforeTimeout?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OSImageNotificationProfile.enable has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the OS Image Scheduled event is enabled or disabled.")
   enable?: boolean;
 }
@@ -1377,6 +1408,7 @@ model DiagnosticsProfile {
  */
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model BootDiagnostics {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BootDiagnostics.enabled has a boolean wire value; preserve the published property contract."
   @doc("Whether boot diagnostics should be enabled on the Virtual Machine.")
   enabled?: boolean;
 
@@ -1392,6 +1424,7 @@ model SecurityProfile {
   @doc("Specifies the security settings like secure boot and vTPM used while creating the virtual machine. Minimum compute api-version: 2020-12-01.")
   uefiSettings?: UefiSettings;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SecurityProfile.encryptionAtHost has a boolean wire value; preserve the published property contract."
   @doc("This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. The default behavior is: The Encryption at host will be disabled unless this property is set to true for the resource.")
   encryptionAtHost?: boolean;
 
@@ -1410,9 +1443,11 @@ model SecurityProfile {
  */
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model UefiSettings {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UefiSettings.secureBootEnabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether secure boot should be enabled on the virtual machine. Minimum compute api-version: 2020-12-01.")
   secureBootEnabled?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UefiSettings.vTpmEnabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether vTPM should be enabled on the virtual machine. Minimum compute api-version: 2020-12-01.")
   vTpmEnabled?: boolean;
 }
@@ -1431,6 +1466,7 @@ model EncryptionIdentity {
  */
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model ProxyAgentSettings {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProxyAgentSettings.enabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether ProxyAgent feature should be enabled on the virtual machine or virtual machine scale set.")
   enabled?: boolean;
 
@@ -1446,6 +1482,7 @@ model ProxyAgentSettings {
   @doc("Specifies the IMDS endpoint settings while creating the virtual machine or virtual machine scale set. Minimum api-version: 2024-03-01.")
   imds?: HostEndpointSettings;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProxyAgentSettings.addProxyAgentExtension has a boolean wire value; preserve the published property contract."
   @doc("Specify whether to implicitly install the ProxyAgent Extension. This option is currently applicable only for Linux Os.")
   addProxyAgentExtension?: boolean;
 }

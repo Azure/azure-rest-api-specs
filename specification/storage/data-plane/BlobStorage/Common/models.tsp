@@ -506,6 +506,7 @@ model FilterBlobItem {
   @Xml.name("VersionId") versionId?: string;
 
   /** Whether it is the current version of the blob. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FilterBlobItem.isCurrentVersion has a boolean wire value; preserve the published property contract."
   @Xml.name("IsCurrentVersion") isCurrentVersion?: boolean;
 }
 
@@ -619,6 +620,7 @@ model ContainerItem {
   @Xml.name("Name") name: string;
 
   /** Whether the container is soft-deleted. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContainerItem.deleted has a boolean wire value; preserve the published property contract."
   @Xml.name("Deleted") deleted?: boolean;
 
   /** The version of the container. */
@@ -656,15 +658,18 @@ model ContainerProperties {
   @Xml.name("PublicAccess") publicAccess?: PublicAccessType;
 
   /** Whether the container has an immutability policy. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContainerProperties.hasImmutabilityPolicy has a boolean wire value; preserve the published property contract."
   @Xml.name("HasImmutabilityPolicy") hasImmutabilityPolicy?: boolean;
 
   /** Whether the container has a legal hold. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContainerProperties.hasLegalHold has a boolean wire value; preserve the published property contract."
   @Xml.name("HasLegalHold") hasLegalHold?: boolean;
 
   /** The default encryption scope of the container. */
   @Xml.name("DefaultEncryptionScope") defaultEncryptionScope?: string;
 
   /** Whether to prevent encryption scope override. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContainerProperties.preventEncryptionScopeOverride has a boolean wire value; preserve the published property contract."
   @Xml.name("DenyEncryptionScopeOverride")
   preventEncryptionScopeOverride?: boolean;
 
@@ -678,6 +683,7 @@ model ContainerProperties {
   @Xml.name("RemainingRetentionDays") remainingRetentionDays?: int32;
 
   /** Whether immutable storage with versioning is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContainerProperties.isImmutableStorageWithVersioningEnabled has a boolean wire value; preserve the published property contract."
   @Xml.name("ImmutableStorageWithVersioningEnabled")
   isImmutableStorageWithVersioningEnabled?: boolean;
 }
@@ -932,6 +938,7 @@ model BlobItem {
   @Xml.name("Name") name: BlobName;
 
   /** Whether the blob is deleted. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobItem.deleted has a boolean wire value; preserve the published property contract."
   @Xml.name("Deleted") deleted: boolean;
 
   /** The snapshot of the blob. */
@@ -941,6 +948,7 @@ model BlobItem {
   @Xml.name("VersionId") versionId?: string;
 
   /** Whether the blob is the current version. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobItem.isCurrentVersion has a boolean wire value; preserve the published property contract."
   @Xml.name("IsCurrentVersion") isCurrentVersion?: boolean;
 
   /** The properties of the blob. */
@@ -958,6 +966,7 @@ model BlobItem {
   objectReplicationMetadata?: ObjectReplicationMetadata;
 
   /** Whether the blob has versions only. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobItem.hasVersionsOnly has a boolean wire value; preserve the published property contract."
   @Xml.name("HasVersionsOnly") hasVersionsOnly?: boolean;
 }
 
@@ -1037,9 +1046,11 @@ model BlobProperties {
   @Xml.name("CopyStatusDescription") copyStatusDescription?: string;
 
   /** Whether the blob is encrypted on the server. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobProperties.serverEncrypted has a boolean wire value; preserve the published property contract."
   @Xml.name("ServerEncrypted") serverEncrypted?: boolean;
 
   /** Whether the blob is an incremental copy. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobProperties.incrementalCopy has a boolean wire value; preserve the published property contract."
   @Xml.name("IncrementalCopy") incrementalCopy?: boolean;
 
   /** The name of the destination snapshot. */
@@ -1058,6 +1069,7 @@ model BlobProperties {
   @Xml.name("AccessTier") accessTier?: AccessTier;
 
   /** Whether the access tier is inferred. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobProperties.accessTierInferred has a boolean wire value; preserve the published property contract."
   @Xml.name("AccessTierInferred") accessTierInferred?: boolean;
 
   /** The archive status of the blob. */
@@ -1090,6 +1102,7 @@ model BlobProperties {
   expiresOn?: utcDateTime;
 
   /** Whether the blob is sealed. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobProperties.isSealed has a boolean wire value; preserve the published property contract."
   @Xml.name("Sealed")
   isSealed?: boolean;
 
@@ -1113,6 +1126,7 @@ model BlobProperties {
   immutabilityPolicyMode?: ImmutabilityPolicyMode;
 
   /** Whether the blob is under legal hold. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobProperties.legalHold has a boolean wire value; preserve the published property contract."
   @Xml.name("LegalHold") legalHold?: boolean;
 }
 
@@ -1210,6 +1224,7 @@ model BlobServiceProperties {
 /** The properties that enable an account to host a static website. */
 model StaticWebsite {
   /** Indicates whether this account is hosting a static website. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StaticWebsite.enabled has a boolean wire value; preserve the published property contract."
   @Xml.name("Enabled") enabled: boolean;
 
   /** The index document. */
@@ -1249,9 +1264,11 @@ model Metrics {
   @Xml.name("Version") version?: string;
 
   /** Whether the metrics are enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Metrics.enabled has a boolean wire value; preserve the published property contract."
   @Xml.name("Enabled") enabled: boolean;
 
   /** Whether to include API in the metrics. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Metrics.includeApis has a boolean wire value; preserve the published property contract."
   @Xml.name("IncludeAPIs") includeApis?: boolean;
 
   /** The retention policy of the metrics. */
@@ -1264,12 +1281,15 @@ model Logging {
   @Xml.name("Version") version: string;
 
   /** Whether delete operation is logged. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Logging.delete has a boolean wire value; preserve the published property contract."
   @Xml.name("Delete") delete: boolean;
 
   /** Whether read operation is logged. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Logging.read has a boolean wire value; preserve the published property contract."
   @Xml.name("Read") read: boolean;
 
   /** Whether write operation is logged. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Logging.write has a boolean wire value; preserve the published property contract."
   @Xml.name("Write") write: boolean;
 
   /** The retention policy of the logs. */
@@ -1279,6 +1299,7 @@ model Logging {
 /** The retention policy. */
 model RetentionPolicy {
   /** Whether the policy is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RetentionPolicy.enabled has a boolean wire value; preserve the published property contract."
   @Xml.name("Enabled") enabled: boolean;
 
   /** The number of days to retain the logs. */
@@ -1287,6 +1308,7 @@ model RetentionPolicy {
   days?: int32;
 
   /** Whether to allow permanent delete. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RetentionPolicy.allowPermanentDelete has a boolean wire value; preserve the published property contract."
   @Xml.name("AllowPermanentDelete") allowPermanentDelete?: boolean;
 }
 
@@ -1436,6 +1458,7 @@ model DelimitedTextConfiguration {
   @Xml.name("EscapeChar") escapeChar?: string;
 
   /** Represents whether the data has headers. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DelimitedTextConfiguration.headersPresent has a boolean wire value; preserve the published property contract."
   @Xml.name("HasHeaders") headersPresent?: boolean;
 }
 
@@ -1555,6 +1578,7 @@ alias BlobContentLengthRequired = {
 /** The deny encryption scope override parameter. */
 alias DenyEncryptionScopeOverrideParameter = {
   /** Whether to prevent encryption scope override. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DenyEncryptionScopeOverrideParameter.preventEncryptionScopeOverride has a boolean wire value; preserve the published property contract."
   @header("x-ms-deny-encryption-scope-override")
   preventEncryptionScopeOverride?: boolean;
 };
@@ -1562,6 +1586,7 @@ alias DenyEncryptionScopeOverrideParameter = {
 /** The deny encryption scope override response header. */
 alias DenyEncryptionScopeOverrideResponseHeader = {
   /** Whether to prevent encryption scope override. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DenyEncryptionScopeOverrideResponseHeader.preventEncryptionScopeOverride has a boolean wire value; preserve the published property contract."
   @header("x-ms-deny-encryption-scope-override")
   preventEncryptionScopeOverride?: boolean;
 };
@@ -1662,6 +1687,7 @@ alias AccessTierChangeTimeResponseHeaderV2026_10_06 = {
 /** The is sealed response header. */
 alias IsSealedResponseHeader = {
   /** Whether the blob is sealed. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IsSealedResponseHeader.isSealed has a boolean wire value; preserve the published property contract."
   @header("x-ms-blob-sealed")
   isSealed?: boolean;
 };
@@ -1697,6 +1723,7 @@ alias AcceptRangesResponseHeaderPrivate = {
 /** The is current version response header. */
 alias IsCurrentVersionResponseHeader = {
   /** Indicates whether this is the current version of the blob. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IsCurrentVersionResponseHeader.isCurrentVersion has a boolean wire value; preserve the published property contract."
   @header("x-ms-is-current-version")
   isCurrentVersion?: boolean;
 };
@@ -1919,6 +1946,7 @@ alias LeaseIdResponseHeader = {
 /** The request server encrypted response header. */
 alias RequestServerEncryptedResponseHeader = {
   /** Indicates whether the contents of the request are successfully encrypted. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RequestServerEncryptedResponseHeader.isServerEncrypted has a boolean wire value; preserve the published property contract."
   @header("x-ms-request-server-encrypted")
   isServerEncrypted?: boolean;
 };
@@ -1926,6 +1954,7 @@ alias RequestServerEncryptedResponseHeader = {
 /** The request server encrypted response header. (Internal) */
 alias RequestServerEncryptedResponseHeaderPrivate = {
   /** Indicates whether the contents of the request are successfully encrypted. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RequestServerEncryptedResponseHeaderPrivate.isServerEncrypted has a boolean wire value; preserve the published property contract."
   @access(Access.internal)
   @header("x-ms-request-server-encrypted")
   isServerEncrypted?: boolean;
@@ -1934,6 +1963,7 @@ alias RequestServerEncryptedResponseHeaderPrivate = {
 /** The server encrypted response header. */
 alias ServerEncryptedResponseHeader = {
   /** Indicates whether the contents of the request are successfully encrypted. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServerEncryptedResponseHeader.isServerEncrypted has a boolean wire value; preserve the published property contract."
   @header("x-ms-server-encrypted")
   isServerEncrypted?: boolean;
 };
@@ -1949,6 +1979,7 @@ alias ServerEncryptedResponseHeaderPrivate = {
 /** The legal hold response header. (Optional) */
 alias LegalHoldOptionalResponseHeader = {
   /** Indicates whether the blob has a legal hold. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LegalHoldOptionalResponseHeader.legalHold has a boolean wire value; preserve the published property contract."
   @header("x-ms-legal-hold")
   legalHold?: boolean;
 };
@@ -1963,6 +1994,7 @@ alias LegalHoldResponseHeader = {
 /** The legal hold response header. (Internal) */
 alias LegalHoldResponseHeaderPrivate = {
   /** Indicates whether the blob has a legal hold. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LegalHoldResponseHeaderPrivate.legalHold has a boolean wire value; preserve the published property contract."
   @access(Access.internal)
   @header("x-ms-legal-hold")
   legalHold: boolean;
@@ -1971,6 +2003,7 @@ alias LegalHoldResponseHeaderPrivate = {
 /** The legal hold required parameter. */
 alias LegalHoldRequiredParameter = {
   /** Indicates whether the blob has a legal hold. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LegalHoldRequiredParameter.legalHold has a boolean wire value; preserve the published property contract."
   @header("x-ms-legal-hold")
   legalHold: boolean;
 };
@@ -2196,6 +2229,7 @@ alias SourceEncryptionAlgorithmParameter = {
 /** The copy source blob properties parameter. */
 alias CopySourceBlobPropertiesParameter = {
   /** Indicates if properties from the source blob should be copied. Default is true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CopySourceBlobPropertiesParameter.copySourceBlobProperties has a boolean wire value; preserve the published property contract."
   @header("x-ms-copy-source-blob-properties")
   copySourceBlobProperties?: boolean;
 };
@@ -2268,6 +2302,7 @@ alias ContentMd5Parameter = {
 /** The legal hold optional parameter. */
 alias LegalHoldOptionalParameter = {
   /** Indicates whether the blob has a legal hold. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LegalHoldOptionalParameter.legalHold has a boolean wire value; preserve the published property contract."
   @header("x-ms-legal-hold")
   legalHold?: boolean;
 };
@@ -2544,6 +2579,7 @@ alias SnapshotParameter = {
 /** Represents a blob name. */
 model BlobName {
   /** Whether the blob name is encoded. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobName.encoded has a boolean wire value; preserve the published property contract."
   @Xml.attribute
   @Xml.name("Encoded")
   encoded?: boolean;
@@ -2777,6 +2813,7 @@ alias MultipartBodyParameter = {
 
 alias IsHierarchicalNamespaceEnabled = {
   /** Indicates if the account has a hierarchical namespace enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IsHierarchicalNamespaceEnabled.isHierarchicalNamespaceEnabled has a boolean wire value; preserve the published property contract."
   @header("x-ms-is-hns-enabled")
   isHierarchicalNamespaceEnabled?: boolean;
 };

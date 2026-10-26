@@ -65,6 +65,7 @@ model Ec2SubnetProperties {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2Subnet")
 model AwsEc2SubnetProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsEc2SubnetProperties.assignIpv6AddressOnCreation has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether a network interface created in this subnet receives an IPv6 address. The default value is ``false``. If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block.")
   assignIpv6AddressOnCreation?: boolean;
 
@@ -77,6 +78,7 @@ model AwsEc2SubnetProperties {
   @doc("The IPv4 CIDR block assigned to the subnet. If you update this property, we create a new subnet, and then delete the existing one.")
   cidrBlock?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsEc2SubnetProperties.enableDns64 has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations. For more information, see [DNS64 and NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-nat64-dns64) in the *User Guide*.")
   enableDns64?: boolean;
 
@@ -98,12 +100,14 @@ model AwsEc2SubnetProperties {
   @doc("An IPv6 IPAM pool ID for the subnet.")
   ipv6IpamPoolId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsEc2SubnetProperties.ipv6Native has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether this is an IPv6 only subnet. For more information, see [Subnet basics](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#subnet-basics) in the *User Guide*.")
   ipv6Native?: boolean;
 
   @doc("An IPv6 netmask length for the subnet.")
   ipv6NetmaskLength?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsEc2SubnetProperties.mapPublicIpOnLaunch has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://aws.amazon.com/vpc/pricing/).")
   mapPublicIpOnLaunch?: boolean;
 
@@ -133,9 +137,11 @@ model AwsEc2SubnetProperties {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PrivateDnsNameOptionsOnLaunchModelProperties")
 model PrivateDnsNameOptionsOnLaunchModelProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PrivateDnsNameOptionsOnLaunchModelProperties.enableResourceNameDnsAAAARecord has a boolean wire value; preserve the published property contract."
   @doc("Property enableResourceNameDnsAAAARecord")
   enableResourceNameDnsAAAARecord?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PrivateDnsNameOptionsOnLaunchModelProperties.enableResourceNameDnsARecord has a boolean wire value; preserve the published property contract."
   @doc("Property enableResourceNameDnsARecord")
   enableResourceNameDnsARecord?: boolean;
 

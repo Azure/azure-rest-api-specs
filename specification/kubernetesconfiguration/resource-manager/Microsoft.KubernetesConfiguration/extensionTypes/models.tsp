@@ -21,11 +21,13 @@ model ExtensionTypeProperties {
   /**
    * Is this Extension Type a system extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExtensionTypeProperties.isSystemExtension has a boolean wire value; preserve the published property contract."
   isSystemExtension?: boolean;
 
   /**
    * Should an identity for this cluster resource be created
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExtensionTypeProperties.isManagedIdentityRequired has a boolean wire value; preserve the published property contract."
   isManagedIdentityRequired?: boolean;
 
   /**
@@ -108,6 +110,7 @@ model ClusterScopeSettingsProperties {
   /**
    * Describes if multiple instances of the extension are allowed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterScopeSettingsProperties.allowMultipleInstances has a boolean wire value; preserve the published property contract."
   allowMultipleInstances?: boolean;
 
   /**

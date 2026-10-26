@@ -416,6 +416,7 @@ model Smtp {
   /**
    * Enable this to allow Grafana to send email. Default is false
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Smtp.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean = false;
 
   /**
@@ -457,6 +458,7 @@ model Smtp {
    * Verify SSL for SMTP server. Default is false
    * https://pkg.go.dev/crypto/tls#Config
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Smtp.skipVerify has a boolean wire value; preserve the published property contract."
   skipVerify?: boolean;
 }
 
@@ -467,6 +469,7 @@ model Snapshots {
   /**
    * Set to false to disable external snapshot publish endpoint
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Snapshots.externalEnabled has a boolean wire value; preserve the published property contract."
   externalEnabled?: boolean;
 }
 
@@ -477,11 +480,13 @@ model Users {
   /**
    * Set to true so viewers can access and use explore and perform temporary edits on panels in dashboards they have access to. They cannot save their changes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Users.viewersCanEdit has a boolean wire value; preserve the published property contract."
   viewersCanEdit?: boolean;
 
   /**
    * Set to true so editors can administrate dashboards, folders and teams they create.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Users.editorsCanAdmin has a boolean wire value; preserve the published property contract."
   editorsCanAdmin?: boolean;
 }
 
@@ -492,6 +497,7 @@ model Security {
   /**
    * Set to true to execute the CSRF check even if the login cookie is not in a request (default false).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Security.csrfAlwaysCheck has a boolean wire value; preserve the published property contract."
   csrfAlwaysCheck?: boolean;
 }
 
@@ -502,6 +508,7 @@ model UnifiedAlertingScreenshots {
   /**
    * Set to false to disable capture screenshot in Unified Alert due to performance issue.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UnifiedAlertingScreenshots.captureEnabled has a boolean wire value; preserve the published property contract."
   captureEnabled?: boolean;
 }
 

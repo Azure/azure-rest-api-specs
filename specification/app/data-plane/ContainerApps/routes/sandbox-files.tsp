@@ -125,6 +125,7 @@ interface SandboxFilesOperations {
       @query path: string;
 
       /** Whether to delete a directory and all of its contents. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing deleteSandboxFile.recursive has a boolean wire value; preserve the published property contract."
       @query recursive?: boolean;
 
       /** The target container name. */
@@ -235,6 +236,7 @@ interface SandboxFilesOperations {
       @query path: string;
 
       /** Whether to create missing parent directories. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing postSandboxFile.createDirs has a boolean wire value; preserve the published property contract."
       @query createDirs?: boolean;
 
       /** The Unix mode for the uploaded file. */

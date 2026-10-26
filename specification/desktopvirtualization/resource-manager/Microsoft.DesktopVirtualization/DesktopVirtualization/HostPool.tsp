@@ -86,6 +86,7 @@ interface PrivateLinkResources {
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByHostPool.isDescending has a boolean wire value; preserve the published property contract."
       @query("isDescending")
       isDescending?: boolean;
 
@@ -117,6 +118,7 @@ interface PrivateLinkResources {
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByWorkspace.isDescending has a boolean wire value; preserve the published property contract."
       @query("isDescending")
       isDescending?: boolean;
 
@@ -155,6 +157,7 @@ interface HostPools {
       /**
        * Force flag to delete sessionHost.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.force has a boolean wire value; preserve the published property contract."
       @query("force")
       force?: boolean;
     }
@@ -175,6 +178,7 @@ interface HostPools {
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByResourceGroup.isDescending has a boolean wire value; preserve the published property contract."
       @query("isDescending")
       isDescending?: boolean;
 
@@ -202,6 +206,7 @@ interface HostPools {
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.isDescending has a boolean wire value; preserve the published property contract."
       @query("isDescending")
       isDescending?: boolean;
 

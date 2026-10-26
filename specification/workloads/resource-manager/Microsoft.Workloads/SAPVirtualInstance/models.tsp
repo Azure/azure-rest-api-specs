@@ -657,11 +657,13 @@ model SAPSupportedSku {
   /**
    * True if the Sku is certified for App server in the SAP system.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SAPSupportedSku.isAppServerCertified has a boolean wire value; preserve the published property contract."
   isAppServerCertified?: boolean;
 
   /**
    * True if the Sku is certified for Database server in the SAP system.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SAPSupportedSku.isDatabaseCertified has a boolean wire value; preserve the published property contract."
   isDatabaseCertified?: boolean;
 }
 
@@ -1566,6 +1568,7 @@ model StartRequest {
   /**
    * The boolean value indicates whether to start the virtual machines before starting the SAP instances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StartRequest.startVm has a boolean wire value; preserve the published property contract."
   startVm?: boolean = false;
 }
 
@@ -1581,6 +1584,7 @@ model StopRequest {
   /**
    * The boolean value indicates whether to Stop and deallocate the virtual machines along with the SAP instances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StopRequest.deallocateVm has a boolean wire value; preserve the published property contract."
   deallocateVm?: boolean = false;
 }
 
@@ -1666,6 +1670,7 @@ model LinuxConfiguration extends OSConfiguration {
   /**
    * Specifies whether password authentication should be disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LinuxConfiguration.disablePasswordAuthentication has a boolean wire value; preserve the published property contract."
   disablePasswordAuthentication?: boolean;
 
   /**
@@ -1854,6 +1859,7 @@ model NetworkConfiguration {
   /**
    * Specifies whether a secondary IP address should be added to the network interface on all VMs of the SAP system being deployed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkConfiguration.isSecondaryIpEnabled has a boolean wire value; preserve the published property contract."
   isSecondaryIpEnabled?: boolean = false;
 }
 

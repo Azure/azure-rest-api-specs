@@ -162,6 +162,7 @@ interface VirtualMachineScaleSetVMS {
       /**
        * Optional parameter to force delete a virtual machine from a VM scale set. (Feature in Preview)
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.forceDeletion has a boolean wire value; preserve the published property contract."
       @query("forceDeletion")
       forceDeletion?: boolean;
     }
@@ -308,6 +309,7 @@ interface VirtualMachineScaleSetVMS {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing powerOff.skipShutdown has a boolean wire value; preserve the published property contract."
       @query("skipShutdown")
       skipShutdown?: boolean;
     },

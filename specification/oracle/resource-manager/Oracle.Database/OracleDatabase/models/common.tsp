@@ -148,12 +148,15 @@ union ValidationStatus {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("DataCollectionOptions resource properties")
 model DataCollectionOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataCollectionOptions.isDiagnosticsEventsEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether diagnostic collection is enabled for the VM cluster/Cloud VM cluster/VMBM DBCS.")
   isDiagnosticsEventsEnabled?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataCollectionOptions.isHealthMonitoringEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether health monitoring is enabled for the VM cluster / Cloud VM cluster / VMBM DBCS.")
   isHealthMonitoringEnabled?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataCollectionOptions.isIncidentLogsEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether incident logs and trace collection are enabled for the VM cluster / Cloud VM cluster / VMBM DBCS.")
   isIncidentLogsEnabled?: boolean = false;
 }
@@ -255,6 +258,7 @@ model Month {
 @doc("Header to distinguish between resource creation or update")
 model MsRpaasNewResourceHeader {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-default-description custom extension"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MsRpaasNewResourceHeader.msRpaasNewResource has a boolean wire value; preserve the published property contract."
   @header("x-ms-rpaas-new-resource")
   @doc("Boolean parameter to distinguish between resource creation or update")
   @extension("x-default-description", true)

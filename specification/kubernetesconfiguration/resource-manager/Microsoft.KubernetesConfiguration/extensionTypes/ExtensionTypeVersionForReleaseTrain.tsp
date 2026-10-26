@@ -94,6 +94,7 @@ interface ExtensionTypeVersionForReleaseTrains {
       /**
        * Filter results by only the latest version (based on other query parameters)
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listVersions.showLatest has a boolean wire value; preserve the published property contract."
       @query("showLatest")
       showLatest?: boolean;
     },
@@ -179,6 +180,7 @@ interface ExtensionTypeVersionForReleaseTrainOperationGroup {
       /**
        * Filter results by only the latest version (based on other query parameters)
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing clusterListVersions.showLatest has a boolean wire value; preserve the published property contract."
       @query("showLatest")
       showLatest?: boolean;
     },

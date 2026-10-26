@@ -74,6 +74,7 @@ interface FirewallPolicies {
       /**
        * Indicates that the write originates from AFC (Azure Firewall for Containers) and is permitted to modify an AFC-managed Firewall Policy.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing createOrUpdate.afcManagedSync has a boolean wire value; preserve the published property contract."
       @added(Versions.v2025_09_01)
       @query("afcManagedSync")
       afcManagedSync?: boolean;

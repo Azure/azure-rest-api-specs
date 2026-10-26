@@ -194,11 +194,13 @@ model VirtualMachineScaleSetOSProfile {
    * scale set. This may only be set to False when no extensions are present on the
    * virtual machine scale set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineScaleSetOSProfile.allowExtensionOperations has a boolean wire value; preserve the published property contract."
   allowExtensionOperations?: boolean;
 
   /**
    * Optional property which must either be set to True or omitted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineScaleSetOSProfile.requireGuestProvisionSignal has a boolean wire value; preserve the published property contract."
   requireGuestProvisionSignal?: boolean;
 }
 
@@ -213,6 +215,7 @@ model WindowsConfiguration {
    * extensions can be added to the VM later.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WindowsConfiguration.provisionVMAgent has a boolean wire value; preserve the published property contract."
   provisionVMAgent?: boolean;
 
   /**
@@ -220,6 +223,7 @@ model WindowsConfiguration {
    * Default value is true. For virtual machine scale sets, this property can be
    * updated and updates will take effect on OS reprovisioning.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WindowsConfiguration.enableAutomaticUpdates has a boolean wire value; preserve the published property contract."
   enableAutomaticUpdates?: boolean;
 
   /**
@@ -255,6 +259,7 @@ model WindowsConfiguration {
    * machine. Default value is false.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WindowsConfiguration.enableVMAgentPlatformUpdates has a boolean wire value; preserve the published property contract."
   enableVMAgentPlatformUpdates?: boolean;
 }
 
@@ -315,6 +320,7 @@ model PatchSettings {
    * enableHotpatching, the 'provisionVMAgent' must be set to true and 'patchMode'
    * must be set to 'AutomaticByPlatform'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PatchSettings.enableHotpatching has a boolean wire value; preserve the published property contract."
   enableHotpatching?: boolean;
 
   /**
@@ -348,6 +354,7 @@ model WindowsVMGuestPatchAutomaticByPlatformSettings {
   /**
    * Enables customer to schedule patching without accidental upgrades
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule has a boolean wire value; preserve the published property contract."
   bypassPlatformSafetyChecksOnUserSchedule?: boolean;
 }
 
@@ -402,6 +409,7 @@ model LinuxConfiguration {
   /**
    * Specifies whether password authentication should be disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LinuxConfiguration.disablePasswordAuthentication has a boolean wire value; preserve the published property contract."
   disablePasswordAuthentication?: boolean;
 
   /**
@@ -416,6 +424,7 @@ model LinuxConfiguration {
    * the VM so that extensions can be added to the VM later.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LinuxConfiguration.provisionVMAgent has a boolean wire value; preserve the published property contract."
   provisionVMAgent?: boolean;
 
   /**
@@ -428,6 +437,7 @@ model LinuxConfiguration {
    * machine. Default value is false.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LinuxConfiguration.enableVMAgentPlatformUpdates has a boolean wire value; preserve the published property contract."
   enableVMAgentPlatformUpdates?: boolean;
 }
 
@@ -508,6 +518,7 @@ model LinuxVMGuestPatchAutomaticByPlatformSettings {
   /**
    * Enables customer to schedule patching without accidental upgrades
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule has a boolean wire value; preserve the published property contract."
   bypassPlatformSafetyChecksOnUserSchedule?: boolean;
 }
 
@@ -687,6 +698,7 @@ model VirtualMachineScaleSetOSDisk {
   /**
    * Specifies whether writeAccelerator should be enabled or disabled on the disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineScaleSetOSDisk.writeAcceleratorEnabled has a boolean wire value; preserve the published property contract."
   writeAcceleratorEnabled?: boolean;
 
   /**
@@ -860,6 +872,7 @@ model VirtualMachineScaleSetDataDisk {
   /**
    * Specifies whether writeAccelerator should be enabled or disabled on the disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineScaleSetDataDisk.writeAcceleratorEnabled has a boolean wire value; preserve the published property contract."
   writeAcceleratorEnabled?: boolean;
 
   /**
@@ -967,21 +980,25 @@ model VirtualMachineScaleSetNetworkConfigurationProperties {
    * Specifies the primary network interface in case the virtual machine has more
    * than 1 network interface.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineScaleSetNetworkConfigurationProperties.primary has a boolean wire value; preserve the published property contract."
   primary?: boolean;
 
   /**
    * Specifies whether the network interface is accelerated networking-enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineScaleSetNetworkConfigurationProperties.enableAcceleratedNetworking has a boolean wire value; preserve the published property contract."
   enableAcceleratedNetworking?: boolean;
 
   /**
    * Specifies whether the network interface is disabled for tcp state tracking.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineScaleSetNetworkConfigurationProperties.disableTcpStateTracking has a boolean wire value; preserve the published property contract."
   disableTcpStateTracking?: boolean;
 
   /**
    * Specifies whether the network interface is FPGA networking-enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineScaleSetNetworkConfigurationProperties.enableFpga has a boolean wire value; preserve the published property contract."
   enableFpga?: boolean;
 
   /**
@@ -1004,6 +1021,7 @@ model VirtualMachineScaleSetNetworkConfigurationProperties {
    * Whether IP forwarding enabled on this NIC.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineScaleSetNetworkConfigurationProperties.enableIPForwarding has a boolean wire value; preserve the published property contract."
   enableIPForwarding?: boolean;
 
   /**
@@ -1066,6 +1084,7 @@ model VirtualMachineScaleSetIPConfigurationProperties {
    * Specifies the primary network interface in case the virtual machine has more
    * than 1 network interface.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineScaleSetIPConfigurationProperties.primary has a boolean wire value; preserve the published property contract."
   primary?: boolean;
 
   /**
@@ -1243,6 +1262,7 @@ model SecurityProfile {
    * itself. The default behavior is: The Encryption at host will be disabled unless
    * this property is set to true for the resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SecurityProfile.encryptionAtHost has a boolean wire value; preserve the published property contract."
   encryptionAtHost?: boolean;
 
   /**
@@ -1274,12 +1294,14 @@ model UefiSettings {
    * Specifies whether secure boot should be enabled on the virtual machine. Minimum
    * api-version: 2020-12-01.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UefiSettings.secureBootEnabled has a boolean wire value; preserve the published property contract."
   secureBootEnabled?: boolean;
 
   /**
    * Specifies whether vTPM should be enabled on the virtual machine. Minimum
    * api-version: 2020-12-01.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UefiSettings.vTpmEnabled has a boolean wire value; preserve the published property contract."
   vTpmEnabled?: boolean;
 }
 
@@ -1303,6 +1325,7 @@ model ProxyAgentSettings {
    * Specifies whether ProxyAgent feature should be enabled on the virtual machine
    * or virtual machine scale set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProxyAgentSettings.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1344,6 +1367,7 @@ model BootDiagnostics {
   /**
    * Whether boot diagnostics should be enabled on the Virtual Machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BootDiagnostics.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1424,12 +1448,14 @@ model VirtualMachineScaleSetExtensionProperties {
    * available at deployment time. Once deployed, however, the extension will not
    * upgrade minor versions unless redeployed, even with this property set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineScaleSetExtensionProperties.autoUpgradeMinorVersion has a boolean wire value; preserve the published property contract."
   autoUpgradeMinorVersion?: boolean;
 
   /**
    * Indicates whether the extension should be automatically upgraded by the
    * platform if there is a newer version of the extension available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineScaleSetExtensionProperties.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean;
 
   /**
@@ -1464,6 +1490,7 @@ model VirtualMachineScaleSetExtensionProperties {
    * (Operational failures such as not connecting to the VM will not be suppressed
    * regardless of this value). The default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineScaleSetExtensionProperties.suppressFailures has a boolean wire value; preserve the published property contract."
   suppressFailures?: boolean;
 
   /**
@@ -1530,6 +1557,7 @@ model TerminateNotificationProfile {
   /**
    * Specifies whether the Terminate Scheduled event is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TerminateNotificationProfile.enable has a boolean wire value; preserve the published property contract."
   enable?: boolean;
 }
 
@@ -1549,6 +1577,7 @@ model OSImageNotificationProfile {
   /**
    * Specifies whether the OS Image Scheduled event is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OSImageNotificationProfile.enable has a boolean wire value; preserve the published property contract."
   enable?: boolean;
 }
 
@@ -1609,12 +1638,14 @@ model VMGalleryApplication {
    * Optional, If true, any failure for any operation in the VmApplication will fail
    * the deployment
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMGalleryApplication.treatFailureAsDeploymentFailure has a boolean wire value; preserve the published property contract."
   treatFailureAsDeploymentFailure?: boolean;
 
   /**
    * If set to true, when a new Gallery Application version is available in PIR/SIG,
    * it will be automatically updated for the VM/VMSS
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMGalleryApplication.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean;
 }
 
@@ -1688,6 +1719,7 @@ model SecurityPostureReference {
   /**
    * Whether the security posture can be overridden by the user.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SecurityPostureReference.isOverridable has a boolean wire value; preserve the published property contract."
   isOverridable?: boolean;
 }
 

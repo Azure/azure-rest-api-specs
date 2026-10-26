@@ -275,6 +275,7 @@ model HybridConnectionProperties {
   /**
    * Returns true if client authorization is needed for this hybrid connection; otherwise, false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing HybridConnectionProperties.requiresClientAuthorization has a boolean wire value; preserve the published property contract."
   requiresClientAuthorization?: boolean;
 
   /**
@@ -306,6 +307,7 @@ model CheckNameAvailabilityResult {
   /**
    * Value indicating namespace is available. Returns true if the namespace is available; otherwise, false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CheckNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**
@@ -520,6 +522,7 @@ model NetworkRuleSetProperties {
   /**
    * Value that indicates whether Trusted Service Access is Enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkRuleSetProperties.trustedServiceAccessEnabled has a boolean wire value; preserve the published property contract."
   trustedServiceAccessEnabled?: boolean;
 
   /**
@@ -568,6 +571,7 @@ model Operation {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDataAction?: boolean;
 
@@ -629,6 +633,7 @@ model WcfRelayProperties {
   /**
    * Returns true if the relay is dynamic; otherwise, false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WcfRelayProperties.isDynamic has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDynamic?: boolean;
 
@@ -661,11 +666,13 @@ model WcfRelayProperties {
   /**
    * Returns true if client authorization is needed for this relay; otherwise, false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WcfRelayProperties.requiresClientAuthorization has a boolean wire value; preserve the published property contract."
   requiresClientAuthorization?: boolean;
 
   /**
    * Returns true if transport security is needed for this relay; otherwise, false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WcfRelayProperties.requiresTransportSecurity has a boolean wire value; preserve the published property contract."
   requiresTransportSecurity?: boolean;
 
   /**

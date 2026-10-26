@@ -30,15 +30,19 @@ model AutonomousDbVersionProperties {
   @doc("The Autonomous Database workload type")
   dbWorkload?: WorkloadType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDbVersionProperties.isDefaultForFree has a boolean wire value; preserve the published property contract."
   @doc("True if this version of the Oracle Database software's default is free.")
   isDefaultForFree?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDbVersionProperties.isDefaultForPaid has a boolean wire value; preserve the published property contract."
   @doc("True if this version of the Oracle Database software's default is paid.")
   isDefaultForPaid?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDbVersionProperties.isFreeTierEnabled has a boolean wire value; preserve the published property contract."
   @doc("True if this version of the Oracle Database software can be used for Always-Free Autonomous Databases.")
   isFreeTierEnabled?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDbVersionProperties.isPaidEnabled has a boolean wire value; preserve the published property contract."
   @doc("True if this version of the Oracle Database software has payments enabled.")
   isPaidEnabled?: boolean;
 }

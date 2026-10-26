@@ -29,6 +29,7 @@ alias UsageAggregatesOperationGroupListParameters = {
   /**
    * `True` returns usage data in instance-level detail, `false` causes server-side aggregation with fewer details. For example, if you have 3 website instances, by default you will get 3 line items for website consumption. If you specify showDetails = false, the data will be aggregated as a single line item for website consumption within the time period (for the given subscriptionId, meterId, usageStartTime and usageEndTime).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UsageAggregatesOperationGroupListParameters.showDetails has a boolean wire value; preserve the published property contract."
   @query("showDetails")
   showDetails?: boolean;
 

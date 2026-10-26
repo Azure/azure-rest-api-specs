@@ -47,6 +47,7 @@ interface SessionHosts {
       /**
        * Force flag to update assign, unassign or reassign personal desktop.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing update.force has a boolean wire value; preserve the published property contract."
       @query("force")
       force?: boolean;
     }
@@ -61,6 +62,7 @@ interface SessionHosts {
       /**
        * Force flag to force sessionHost deletion even when userSession exists.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.force has a boolean wire value; preserve the published property contract."
       @query("force")
       force?: boolean;
     }
@@ -81,6 +83,7 @@ interface SessionHosts {
       /**
        * Indicates whether the collection is descending.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.isDescending has a boolean wire value; preserve the published property contract."
       @query("isDescending")
       isDescending?: boolean;
 

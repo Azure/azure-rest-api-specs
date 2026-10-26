@@ -33,6 +33,7 @@ alias SharedAnalyzeQuery = {
   @minLength(2)
   language?: string = "en";
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SharedAnalyzeQuery.genderNeutralCaption has a boolean wire value; preserve the published property contract."
   @query("gender-neutral-caption")
   @doc("""
     Boolean flag for enabling gender-neutral captioning for Caption and Dense Captions features.

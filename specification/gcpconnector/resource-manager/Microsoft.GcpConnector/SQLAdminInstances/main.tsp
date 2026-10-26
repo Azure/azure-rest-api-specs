@@ -104,6 +104,7 @@ model GcpSqlAdminInstanceProperties {
     /**
      * The availability status of the failover replica. A false status indicates that the failover replica is out of sync. The primary instance can only failover to the failover replica when the status is true.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpSqlAdminInstanceProperties.available has a boolean wire value; preserve the published property contract."
     available?: boolean;
 
     /**
@@ -187,6 +188,7 @@ model GcpSqlAdminInstanceProperties {
   /**
    * The status indicating if instance satisfies physical zone separation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpSqlAdminInstanceProperties.satisfiesPzs has a boolean wire value; preserve the published property contract."
   satisfiesPzs?: boolean;
 
   /**
@@ -308,6 +310,7 @@ model GcpSqlAdminInstanceProperties {
   /**
    * Whether transaction logs switch to cloud storage is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpSqlAdminInstanceProperties.switchTransactionLogsToCloudStorageEnabled has a boolean wire value; preserve the published property contract."
   switchTransactionLogsToCloudStorageEnabled?: boolean;
 
   /**
@@ -420,6 +423,7 @@ model ReplicaConfiguration {
   /**
    * Whether this replica can be used as a failover target.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReplicaConfiguration.failoverTarget has a boolean wire value; preserve the published property contract."
   failoverTarget?: boolean;
 
   /**
@@ -470,6 +474,7 @@ model Settings {
   /**
    * Configuration specific to read replicas replication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Settings.crashSafeReplicationEnabled has a boolean wire value; preserve the published property contract."
   crashSafeReplicationEnabled?: boolean;
 
   /**
@@ -525,6 +530,7 @@ model Settings {
   /**
    * Configuration to increase storage size automatically.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Settings.storageAutoResize has a boolean wire value; preserve the published property contract."
   storageAutoResize?: boolean;
 
   /**
@@ -621,11 +627,13 @@ model SqlScheduledMaintenance {
   /**
    * If the scheduled maintenance can be deferred.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlScheduledMaintenance.canDefer has a boolean wire value; preserve the published property contract."
   canDefer?: boolean;
 
   /**
    * If the scheduled maintenance can be rescheduled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlScheduledMaintenance.canReschedule has a boolean wire value; preserve the published property contract."
   canReschedule?: boolean;
 
   /**
@@ -743,6 +751,7 @@ model MySqlReplicaConfiguration {
   /**
    * Whether or not to check the primary instance's Common Name value.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MySqlReplicaConfiguration.verifyServerCertificate has a boolean wire value; preserve the published property contract."
   verifyServerCertificate?: boolean;
 }
 
@@ -773,6 +782,7 @@ model BackupConfiguration {
   /**
    * Whether backup configuration is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BackupConfiguration.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -788,11 +798,13 @@ model BackupConfiguration {
   /**
    * True if Point-in-time recovery is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BackupConfiguration.pointInTimeRecoveryEnabled has a boolean wire value; preserve the published property contract."
   pointInTimeRecoveryEnabled?: boolean;
 
   /**
    * Reserved for future use.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BackupConfiguration.replicationLogArchivingEnabled has a boolean wire value; preserve the published property contract."
   replicationLogArchivingEnabled?: boolean;
 
   /**
@@ -838,6 +850,7 @@ model IpConfiguration {
   /**
    * Whether the instance is assigned a public IP address or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IpConfiguration.ipv4Enabled has a boolean wire value; preserve the published property contract."
   ipv4Enabled?: boolean;
 
   /**
@@ -848,6 +861,7 @@ model IpConfiguration {
   /**
    * Whether SSL connections over IP are enforced or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IpConfiguration.requireSsl has a boolean wire value; preserve the published property contract."
   requireSsl?: boolean;
 }
 

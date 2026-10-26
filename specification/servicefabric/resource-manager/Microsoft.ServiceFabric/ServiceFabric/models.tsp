@@ -116,6 +116,7 @@ model OperationResult {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OperationResult.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -213,6 +214,7 @@ model NodeTypeDescription {
   /**
    * The node type on which system services will run. Only one node type should be marked as primary. Primary node type cannot be deleted or changed for existing clusters.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeDescription.isPrimary has a boolean wire value; preserve the published property contract."
   isPrimary: boolean;
 
   /**
@@ -230,11 +232,13 @@ model NodeTypeDescription {
   /**
    * Indicates if the node type can only host Stateless workloads.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeDescription.isStateless has a boolean wire value; preserve the published property contract."
   isStateless?: boolean;
 
   /**
    * Indicates if the node type is enabled to support multiple zones.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeDescription.multipleAvailabilityZones has a boolean wire value; preserve the published property contract."
   multipleAvailabilityZones?: boolean;
 
   /**

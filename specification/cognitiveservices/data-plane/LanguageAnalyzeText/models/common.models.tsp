@@ -450,12 +450,14 @@ model TaskIdentifier {
 /** Base parameters object for a text analysis task. */
 model TaskParameters {
   /** logging opt out */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TaskParameters.loggingOptOut has a boolean wire value; preserve the published property contract."
   loggingOptOut?: boolean = false;
 }
 
 /** Base parameters object for a text analysis task. with logging Opt out */
 model TaskParametersLoggingOptOut {
   /** logging opt out */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TaskParametersLoggingOptOut.loggingOptOut has a boolean wire value; preserve the published property contract."
   loggingOptOut?: boolean = true;
 }
 
@@ -487,6 +489,7 @@ alias ShowStatsQueryParameter = QueryParametersTrait<{
 
 alias AnalyzeTextJobQueryParameters = QueryParametersTrait<{
   /** (Optional) if set to true, response will contain request and document level statistics. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AnalyzeTextJobQueryParameters.showStats has a boolean wire value; preserve the published property contract."
   @query
   showStats?: boolean;
 
@@ -501,6 +504,7 @@ alias AnalyzeTextJobQueryParameters = QueryParametersTrait<{
 
 alias AnalyzeTextQueryParameters = {
   /** (Optional) if set to true, response will contain request and document level statistics. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AnalyzeTextQueryParameters.showStats has a boolean wire value; preserve the published property contract."
   @query
   @clientName("showStatistics", "csharp")
   showStats?: boolean;

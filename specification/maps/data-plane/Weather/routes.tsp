@@ -807,6 +807,7 @@ interface Weather {
       /**
        * When true, wind radii summary data is included in the response
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getTropicalStormForecast.includeDetails has a boolean wire value; preserve the published property contract."
       @query("details")
       includeDetails?: boolean;
 
@@ -814,12 +815,14 @@ interface Weather {
        * When true, wind radii summary data and geoJSON details are included in the
        * response
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getTropicalStormForecast.includeGeometricDetails has a boolean wire value; preserve the published property contract."
       @query("radiiGeometry")
       includeGeometricDetails?: boolean;
 
       /**
        * When true, window geometry data (geoJSON) is included in the response
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getTropicalStormForecast.includeWindowGeometry has a boolean wire value; preserve the published property contract."
       @query("windowGeometry")
       includeWindowGeometry?: boolean;
     },
@@ -879,6 +882,7 @@ interface Weather {
       /**
        * When true, wind radii summary data is included in the response
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getTropicalStormLocations.includeDetails has a boolean wire value; preserve the published property contract."
       @query("details")
       includeDetails?: boolean;
 
@@ -886,6 +890,7 @@ interface Weather {
        * When true, wind radii summary data and geoJSON details are included in the
        * response
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getTropicalStormLocations.includeGeometricDetails has a boolean wire value; preserve the published property contract."
       @query("radiiGeometry")
       includeGeometricDetails?: boolean;
 
@@ -899,6 +904,7 @@ interface Weather {
       /**
        * When true, return the current storm location
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getTropicalStormLocations.includeCurrentStorm has a boolean wire value; preserve the published property contract."
       @query("current")
       includeCurrentStorm?: boolean;
     },
@@ -963,6 +969,7 @@ interface Weather {
        * Boolean value that returns detailed information about each pollutant. By
        * default is True.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getCurrentAirQuality.includePollutantDetails has a boolean wire value; preserve the published property contract."
       @query("pollutants")
       includePollutantDetails?: boolean;
     },
@@ -1101,6 +1108,7 @@ interface Weather {
        * Boolean value that returns detailed information about each pollutant. By
        * default is True.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getAirQualityHourlyForecasts.includePollutantDetails has a boolean wire value; preserve the published property contract."
       @query("pollutants")
       includePollutantDetails?: boolean;
     },

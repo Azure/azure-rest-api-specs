@@ -302,6 +302,7 @@ model ManagedClusterProperties {
   /**
    * Setting this to true enables RDP access to the VM. The default NSG rule opens RDP port to Internet which can be overridden with custom Network Security Rules. The default value for this setting is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterProperties.allowRdpAccess has a boolean wire value; preserve the published property contract."
   allowRdpAccess?: boolean;
 
   /**
@@ -358,11 +359,13 @@ model ManagedClusterProperties {
    * Enables automatic OS upgrade for node types created using OS images with version 'latest'. The default value for this setting is false.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "OS is a well known abbreviation"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterProperties.enableAutoOSUpgrade has a boolean wire value; preserve the published property contract."
   enableAutoOSUpgrade?: boolean;
 
   /**
    * Indicates if the cluster has zone resiliency.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterProperties.zonalResiliency has a boolean wire value; preserve the published property contract."
   zonalResiliency?: boolean = false;
 
   /**
@@ -373,6 +376,7 @@ model ManagedClusterProperties {
   /**
    * Setting this to true creates IPv6 address space for the default VNet used by the cluster. This setting cannot be changed once the cluster is created. The default value for this setting is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterProperties.enableIpv6 has a boolean wire value; preserve the published property contract."
   enableIpv6?: boolean;
 
   /**
@@ -396,6 +400,7 @@ model ManagedClusterProperties {
    * Setting this to true will link the IPv4 address as the ServicePublicIP of the IPv6 address. It can only be set to True if IPv6 is enabled on the cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterProperties.enableServicePublicIP has a boolean wire value; preserve the published property contract."
   enableServicePublicIP?: boolean;
 
   /**
@@ -418,6 +423,7 @@ model ManagedClusterProperties {
   /**
    * For new clusters, this parameter indicates that it uses Bring your own VNet, but the subnet is specified at node type level; and for such clusters, the subnetId property is required for node types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterProperties.useCustomVnet has a boolean wire value; preserve the published property contract."
   useCustomVnet?: boolean;
 
   /**
@@ -462,6 +468,7 @@ model ManagedClusterProperties {
   /**
    * If true, token-based authentication is not allowed on the HttpGatewayEndpoint. This is required to support TLS versions 1.3 and above. If token-based authentication is used, HttpGatewayTokenAuthConnectionPort must be defined.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterProperties.enableHttpGatewayExclusiveAuthMode has a boolean wire value; preserve the published property contract."
   enableHttpGatewayExclusiveAuthMode?: boolean;
 
   /**
@@ -484,12 +491,14 @@ model ManagedClusterProperties {
   /**
    * Enable the creation of node types with only outbound traffic enabled. If set, a separate load balancer backend pool will be created for node types with inbound traffic enabled. Can only be set at the time of cluster creation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterProperties.enableOutboundOnlyNodeTypes has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_06_01_preview)
   enableOutboundOnlyNodeTypes?: boolean;
 
   /**
    * Determines whether to skip the assignment of the managed network security group (SF-NSG) to the cluster subnet when using a bring-your-own virtual network (BYOVNET) configuration. The default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterProperties.skipManagedNsgAssignment has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_02_01)
   skipManagedNsgAssignment?: boolean;
 }
@@ -705,6 +714,7 @@ model Subnet {
   /**
    * Indicates wether to enable Ipv6 or not. If not provided, it will take the same configuration as the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Subnet.enableIpv6 has a boolean wire value; preserve the published property contract."
   enableIpv6?: boolean;
 
   /**
@@ -756,6 +766,7 @@ model ClusterUpgradePolicy {
   /**
    * If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterUpgradePolicy.forceRestart has a boolean wire value; preserve the published property contract."
   forceRestart?: boolean = false;
 
   /**
@@ -1045,24 +1056,28 @@ model ManagedMaintenanceWindowStatusContent {
   /**
    * If maintenance window is enabled on this cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedMaintenanceWindowStatusContent.isWindowEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isWindowEnabled?: boolean;
 
   /**
    * Indicates if the region is ready to configure maintenance windows.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedMaintenanceWindowStatusContent.isRegionReady has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isRegionReady?: boolean;
 
   /**
    * If maintenance window is active.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedMaintenanceWindowStatusContent.isWindowActive has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isWindowActive?: boolean;
 
   /**
    * If updates can be applied.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedMaintenanceWindowStatusContent.canApplyUpdates has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   canApplyUpdates?: boolean;
 
@@ -1123,6 +1138,7 @@ model ManagedAzResiliencyStatusContent {
   /**
    * URL to get the next set of Managed VM Sizes if there are any.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedAzResiliencyStatusContent.isClusterZoneResilient has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isClusterZoneResilient?: boolean;
 }
@@ -1146,6 +1162,7 @@ model ResourceAzStatus {
   /**
    * VM Size name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceAzStatus.isZoneResilient has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isZoneResilient?: boolean;
 
@@ -1278,6 +1295,7 @@ model ClientCertificate {
   /**
    * Indicates if the client certificate has admin access to the cluster. Non admin clients can perform only read only operations on the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClientCertificate.isAdmin has a boolean wire value; preserve the published property contract."
   isAdmin: boolean;
 
   /**

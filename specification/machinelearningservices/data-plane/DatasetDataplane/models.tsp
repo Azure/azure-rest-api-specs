@@ -312,6 +312,7 @@ union SType {
 /** The result of a profile action. */
 model ActionResult {
   /** Whether the data is up to date. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ActionResult.isUpToDate has a boolean wire value; preserve the published property contract."
   isUpToDate?: boolean;
 
   /** Error if up-to-date check failed. */
@@ -423,6 +424,7 @@ model DataContainer {
   mutableProps?: DataContainerMutable;
 
   /** Whether the data container is registered. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataContainer.isRegistered has a boolean wire value; preserve the published property contract."
   isRegistered?: boolean;
 }
 
@@ -453,6 +455,7 @@ model DataContainerMutable {
   tags?: Record<string>;
 
   /** Whether the data container is archived. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataContainerMutable.isArchived has a boolean wire value; preserve the published property contract."
   isArchived?: boolean;
 }
 
@@ -523,6 +526,7 @@ model DataVersionMutable {
   tags?: Record<string>;
 
   /** Whether the data version is archived. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataVersionMutable.isArchived has a boolean wire value; preserve the published property contract."
   isArchived?: boolean;
 }
 
@@ -568,6 +572,7 @@ model Dataset {
   tags?: Record<string>;
 
   /** Whether the dataset is visible. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Dataset.isVisible has a boolean wire value; preserve the published property contract."
   isVisible?: boolean;
 
   /** The default compute target. */
@@ -637,6 +642,7 @@ model DatasetDefinition {
   telemetryInfo?: Record<string>;
 
   /** Whether to use description and tags from definition. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DatasetDefinition.useDescriptionTagsFromDefinition has a boolean wire value; preserve the published property contract."
   useDescriptionTagsFromDefinition?: boolean;
 
   /** The description. */
@@ -683,6 +689,7 @@ model DatasetPath {
   partitionFormat?: string;
 
   /** Whether to ignore partition format errors. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DatasetPath.partitionFormatIgnoreError has a boolean wire value; preserve the published property contract."
   partitionFormatIgnoreError?: boolean;
 }
 
@@ -734,6 +741,7 @@ model DatasetV2 {
   description?: string;
 
   /** Whether the dataset is anonymous. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DatasetV2.isAnonymous has a boolean wire value; preserve the published property contract."
   isAnonymous?: boolean;
 
   /** Tags for the dataset. */
@@ -876,6 +884,7 @@ model HttpResponseMessage {
   requestMessage?: HttpRequestMessage;
 
   /** Whether the status code indicates success. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing HttpResponseMessage.isSuccessStatusCode has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isSuccessStatusCode?: boolean;
 }

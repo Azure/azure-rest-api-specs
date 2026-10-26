@@ -68,6 +68,7 @@ interface ManagedDatabaseMoveOperationResults {
       /**
        * Whether or not to only get the latest operation for each database. Has higher priority than $filter.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByLocation.onlyLatestPerDatabase has a boolean wire value; preserve the published property contract."
       @query("onlyLatestPerDatabase")
       onlyLatestPerDatabase?: boolean;
 

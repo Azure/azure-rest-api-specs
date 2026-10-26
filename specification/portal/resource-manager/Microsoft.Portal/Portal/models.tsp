@@ -346,6 +346,7 @@ model ConfigurationProperties {
   /**
    * When flag is set to true Markdown tile will require external storage configuration (URI). The inline content configuration will be prohibited.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConfigurationProperties.enforcePrivateMarkdownStorage has a boolean wire value; preserve the published property contract."
   enforcePrivateMarkdownStorage?: boolean;
 
   @doc("The status of the last operation.")

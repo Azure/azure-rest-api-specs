@@ -122,6 +122,7 @@ interface Peerings {
       /**
        * Flag to enable consolidation prefixes
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.consolidate has a boolean wire value; preserve the published property contract."
       @query("consolidate")
       consolidate?: boolean;
     }

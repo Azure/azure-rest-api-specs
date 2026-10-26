@@ -23,6 +23,7 @@ model SystemVersionsFilter {
   @doc("Exadata shape")
   shape: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SystemVersionsFilter.isLatestVersion has a boolean wire value; preserve the published property contract."
   @doc("Check If we have to list only latest versions")
   isLatestVersion?: boolean;
 }

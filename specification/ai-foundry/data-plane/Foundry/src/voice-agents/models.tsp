@@ -1323,6 +1323,7 @@ model TelephonyCallRecord {
   @doc("The lifecycle timeline.")
   events: TelephonyCallLifecycleEvent[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TelephonyCallRecord.events_truncated has a boolean wire value; preserve the published property contract."
   @doc("Whether older lifecycle events were omitted from the timeline.")
   events_truncated: boolean;
 }

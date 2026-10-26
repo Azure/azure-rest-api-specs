@@ -81,6 +81,7 @@ model DataflowGraphFileStore {
   id: string;
 
   /** Indicates whether the file store is mounted as read-only. Defaults to true. Set to false to allow writes. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataflowGraphFileStore.readOnly has a boolean wire value; preserve the published property contract."
   readOnly?: boolean = true;
 }
 

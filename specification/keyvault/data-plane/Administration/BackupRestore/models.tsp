@@ -25,6 +25,7 @@ model SASTokenParameter {
   /**
    * Indicates which authentication method should be used. If set to true, Managed HSM will use the configured user-assigned managed identity to authenticate with Azure Storage. Otherwise, a SAS token has to be specified.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SASTokenParameter.useManagedIdentity has a boolean wire value; preserve the published property contract."
   useManagedIdentity?: boolean = false;
 }
 
@@ -110,6 +111,7 @@ model PreBackupOperationParameters {
   /**
    * Indicates which authentication method should be used. If set to true, Managed HSM will use the configured user-assigned managed identity to authenticate with Azure Storage. Otherwise, a SAS token has to be specified.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PreBackupOperationParameters.useManagedIdentity has a boolean wire value; preserve the published property contract."
   useManagedIdentity?: boolean = false;
 }
 

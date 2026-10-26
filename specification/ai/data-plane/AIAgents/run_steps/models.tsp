@@ -591,6 +591,7 @@ model ActivityFunctionParameters {
   @doc("The list of the required parameters.")
   required: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ActivityFunctionParameters.additionalProperties has a boolean wire value; preserve the published property contract."
   @doc("If true the function has additional parameters.")
   additionalProperties?: boolean;
 }

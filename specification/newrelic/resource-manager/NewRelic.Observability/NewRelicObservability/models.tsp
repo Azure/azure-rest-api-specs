@@ -1316,6 +1316,7 @@ model LatestLinkedSaaSResponse {
   /**
    * Flag indicating if the SaaS resource is hidden
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LatestLinkedSaaSResponse.isHiddenSaaS has a boolean wire value; preserve the published property contract."
   isHiddenSaaS?: boolean;
 }
 

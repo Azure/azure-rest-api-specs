@@ -98,6 +98,7 @@ interface DatabaseMigrationSqlVms {
       /**
        * Optional force delete boolean. If this is provided as true, migration will be deleted even if active.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.force has a boolean wire value; preserve the published property contract."
       @query("force")
       force?: boolean;
     },

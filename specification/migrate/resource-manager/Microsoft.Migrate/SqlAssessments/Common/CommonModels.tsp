@@ -39,6 +39,7 @@ model SqlAssessmentV2PaasSuitabilityData {
   @visibility(Lifecycle.Read)
   securitySuitability?: CloudSuitability;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlAssessmentV2PaasSuitabilityData.shouldProvisionReplicas has a boolean wire value; preserve the published property contract."
   @doc("Gets a value indicating whether replicas should be provisioned.")
   @visibility(Lifecycle.Read)
   shouldProvisionReplicas?: boolean;
@@ -174,6 +175,7 @@ model SqlAssessmentV2IaasSuitabilityData {
   @visibility(Lifecycle.Read)
   securitySuitability?: CloudSuitability;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlAssessmentV2IaasSuitabilityData.shouldProvisionReplicas has a boolean wire value; preserve the published property contract."
   @doc("Gets a value indicating whether replicas should be provisioned.")
   @visibility(Lifecycle.Read)
   shouldProvisionReplicas?: boolean;
@@ -249,9 +251,11 @@ model AssessedSqlInstanceSummary {
   @doc("Gets the Sql version.")
   sqlVersion?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AssessedSqlInstanceSummary.isClustered has a boolean wire value; preserve the published property contract."
   @doc("Gets whether Sql is clustered.")
   isClustered?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AssessedSqlInstanceSummary.isHighAvailabilityEnabled has a boolean wire value; preserve the published property contract."
   @doc("Gets whether Sql is highly available.")
   isHighAvailabilityEnabled?: boolean;
 
@@ -420,6 +424,7 @@ model SqlFCIMetadata {
   @doc("Gets the Sql fci meta data state.")
   state?: SqlFCIMetadataState;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlFCIMetadata.isMultiSubnet has a boolean wire value; preserve the published property contract."
   @doc("Gets whether fci is multi subnet.")
   isMultiSubnet?: boolean;
 
@@ -470,6 +475,7 @@ model SqlEntityRecommendations is Recommendations<
   MigrationSuitability,
   Skus<MigrationSuitability>
 > {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlEntityRecommendations.shouldProvisionReplicas has a boolean wire value; preserve the published property contract."
   @doc("Gets a value indicating whether replicas should be provisioned.")
   @visibility(Lifecycle.Read)
   shouldProvisionReplicas?: boolean;

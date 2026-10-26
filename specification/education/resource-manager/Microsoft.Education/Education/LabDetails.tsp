@@ -108,6 +108,7 @@ interface Labs {
       /**
        * May be used to include budget information.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing get.includeBudget has a boolean wire value; preserve the published property contract."
       @query("includeBudget")
       includeBudget?: boolean;
     },
@@ -139,6 +140,7 @@ interface Labs {
       /**
        * May be used to include budget information.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.includeBudget has a boolean wire value; preserve the published property contract."
       @query("includeBudget")
       includeBudget?: boolean;
     },
@@ -155,12 +157,14 @@ interface Labs {
       /**
        * May be used to include budget information.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listAll.includeBudget has a boolean wire value; preserve the published property contract."
       @query("includeBudget")
       includeBudget?: boolean;
 
       /**
        * May be used to show deleted items.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listAll.includeDeleted has a boolean wire value; preserve the published property contract."
       @query("includeDeleted")
       includeDeleted?: boolean;
     },
@@ -180,6 +184,7 @@ interface Labs {
       /**
        * set this flag to true if you want to update student count without generating a new invite code
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing generateInviteCode.onlyUpdateStudentCountParameter has a boolean wire value; preserve the published property contract."
       @query("onlyUpdateStudentCountParameter")
       onlyUpdateStudentCountParameter?: boolean;
     },

@@ -45,6 +45,7 @@ model GiMinorVersionFilter {
   @maxLength(255)
   shape?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GiMinorVersionFilter.isGiVersionForProvisioning has a boolean wire value; preserve the published property contract."
   @added(Versions.v20260401_preview)
   @query
   @doc("If true, filters the results to GI minor versions supported during VM cluster provisioning.")

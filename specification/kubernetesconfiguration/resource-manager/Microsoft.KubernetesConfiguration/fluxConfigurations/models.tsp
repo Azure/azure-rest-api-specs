@@ -235,6 +235,7 @@ model FluxConfigurationProperties {
   /**
    * Whether this configuration should suspend its reconciliation of its kustomizations and sources.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FluxConfigurationProperties.suspend has a boolean wire value; preserve the published property contract."
   suspend?: boolean = false;
 
   /**
@@ -446,6 +447,7 @@ model BucketDefinition {
   /**
    * Specify whether to use insecure communication when puling data from the S3 bucket.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BucketDefinition.insecure has a boolean wire value; preserve the published property contract."
   insecure?: boolean = true;
 
   /**
@@ -572,6 +574,7 @@ model ServicePrincipalDefinition {
   /**
    * Specifies whether to include x5c header in client claims when acquiring a token to enable subject name / issuer based authentication for the Client Certificate
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServicePrincipalDefinition.clientCertificateSendChain has a boolean wire value; preserve the published property contract."
   clientCertificateSendChain?: boolean = false;
 }
 
@@ -627,11 +630,13 @@ model OCIRepositoryDefinition {
   /**
    * Specify whether to allow connecting to a non-TLS HTTP container registry.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OCIRepositoryDefinition.insecure has a boolean wire value; preserve the published property contract."
   insecure?: boolean = false;
 
   /**
    * Specifies whether to use Workload Identity to authenticate with the OCI repository.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OCIRepositoryDefinition.useWorkloadIdentity has a boolean wire value; preserve the published property contract."
   useWorkloadIdentity?: boolean = false;
 
   /**
@@ -799,16 +804,19 @@ model KustomizationDefinition {
   /**
    * Enable/disable garbage collections of Kubernetes objects created by this Kustomization.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KustomizationDefinition.prune has a boolean wire value; preserve the published property contract."
   prune?: boolean = false;
 
   /**
    * Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KustomizationDefinition.force has a boolean wire value; preserve the published property contract."
   force?: boolean = false;
 
   /**
    * Enable/disable health check for all Kubernetes objects created by this Kustomization.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KustomizationDefinition.wait has a boolean wire value; preserve the published property contract."
   wait?: boolean = true;
 
   /**
@@ -853,6 +861,7 @@ model SubstituteFromDefinition {
   /**
    * Set to True to proceed without ConfigMap/Secret, if it is not present.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SubstituteFromDefinition.optional has a boolean wire value; preserve the published property contract."
   optional?: boolean = false;
 }
 
@@ -1000,6 +1009,7 @@ model FluxConfigurationPatchProperties {
   /**
    * Whether this configuration should suspend its reconciliation of its kustomizations and sources.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FluxConfigurationPatchProperties.suspend has a boolean wire value; preserve the published property contract."
   suspend?: boolean;
 
   /**
@@ -1240,6 +1250,7 @@ model ServicePrincipalPatchDefinition {
   /**
    * Specifies whether to include x5c header in client claims when acquiring a token to enable subject name / issuer based authentication for the Client Certificate
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServicePrincipalPatchDefinition.clientCertificateSendChain has a boolean wire value; preserve the published property contract."
   clientCertificateSendChain?: boolean;
 }
 
@@ -1296,12 +1307,14 @@ model OCIRepositoryPatchDefinition {
    * Specify whether to allow connecting to a non-TLS HTTP container registry.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OCIRepositoryPatchDefinition.insecure has a boolean wire value; preserve the published property contract."
   insecure?: boolean = false;
 
   /**
    * Specifies whether to use Workload Identity to authenticate with the OCI repository.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OCIRepositoryPatchDefinition.useWorkloadIdentity has a boolean wire value; preserve the published property contract."
   useWorkloadIdentity?: boolean = false;
 
   /**
@@ -1521,6 +1534,7 @@ model SubstituteFromPatchDefinition {
   /**
    * Set to True to proceed without ConfigMap/Secret, if it is not present.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SubstituteFromPatchDefinition.optional has a boolean wire value; preserve the published property contract."
   optional?: boolean = false;
 }
 

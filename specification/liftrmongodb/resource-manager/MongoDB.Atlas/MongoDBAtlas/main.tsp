@@ -242,6 +242,7 @@ model ProjectLimitStatus {
   @doc("Current value.")
   current: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProjectLimitStatus.isReached has a boolean wire value; preserve the published property contract."
   @doc("Whether the limit has been reached.")
   isReached: boolean;
 }

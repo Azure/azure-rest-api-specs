@@ -107,11 +107,13 @@ model ResourceChangesRequestParameters {
   /**
    * The flag if set to true will fetch property changes
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceChangesRequestParameters.fetchPropertyChanges has a boolean wire value; preserve the published property contract."
   fetchPropertyChanges?: boolean;
 
   /**
    * The flag if set to true will fetch change snapshots
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceChangesRequestParameters.fetchSnapshots has a boolean wire value; preserve the published property contract."
   fetchSnapshots?: boolean;
 }
 

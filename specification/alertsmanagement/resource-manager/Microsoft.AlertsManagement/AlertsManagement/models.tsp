@@ -653,6 +653,7 @@ model ActionStatus {
   /**
    * Value indicating whether alert is suppressed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ActionStatus.isSuppressed has a boolean wire value; preserve the published property contract."
   isSuppressed?: boolean;
 }
 

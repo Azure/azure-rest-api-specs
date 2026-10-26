@@ -132,6 +132,7 @@ model MessageLog {
   @visibility(Lifecycle.Read)
   isAction?: IsAction;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MessageLog.codeEnvironment has a boolean wire value; preserve the published property contract."
   @doc("Indicates the code environment")
   @visibility(Lifecycle.Read)
   codeEnvironment?: boolean;

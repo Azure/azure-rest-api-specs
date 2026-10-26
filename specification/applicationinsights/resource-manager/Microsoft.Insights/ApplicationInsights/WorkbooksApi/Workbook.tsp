@@ -68,6 +68,7 @@ interface Workbooks {
       /**
        * Flag indicating whether or not to return the full content for each applicable workbook. If false, only return summary content for workbooks.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing get.canFetchContent has a boolean wire value; preserve the published property contract."
       @query("canFetchContent")
       canFetchContent?: boolean;
     }
@@ -133,6 +134,7 @@ interface Workbooks {
       /**
        * Flag indicating whether or not to return the full content for each applicable workbook. If false, only return summary content for workbooks.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listBySubscription.canFetchContent has a boolean wire value; preserve the published property contract."
       @query("canFetchContent")
       canFetchContent?: boolean;
     },
@@ -205,6 +207,7 @@ interface WorkbookOperationGroup {
       /**
        * Flag indicating whether or not to return the full content for each applicable workbook. If false, only return summary content for workbooks.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByResourceGroup.canFetchContent has a boolean wire value; preserve the published property contract."
       @query("canFetchContent")
       canFetchContent?: boolean;
     },

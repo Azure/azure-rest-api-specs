@@ -159,6 +159,7 @@ model PrivateStoreProperties {
   /**
    * Is government
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PrivateStoreProperties.isGov has a boolean wire value; preserve the published property contract."
   isGov?: boolean;
 
   /**
@@ -192,6 +193,7 @@ model NotificationsSettingsProperties {
   /**
    * Gets or sets whether to send email to all marketplace admins for new requests
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NotificationsSettingsProperties.sendToAllMarketplaceAdmins has a boolean wire value; preserve the published property contract."
   sendToAllMarketplaceAdmins?: boolean;
 }
 
@@ -319,6 +321,7 @@ model AnyExistingOffersInTheCollectionsResponse {
   /**
    * Boolean answer, true if exists at least a single offer in an enabled collection, otherwise, false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AnyExistingOffersInTheCollectionsResponse.value has a boolean wire value; preserve the published property contract."
   value?: boolean;
 }
 
@@ -388,6 +391,7 @@ model OfferProperties {
   /**
    * Indicating whether the offer was not updated to db (true = not updated). If the allow list is identical to the existed one in db, the offer would not be updated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OfferProperties.updateSuppressedDueIdempotence has a boolean wire value; preserve the published property contract."
   updateSuppressedDueIdempotence?: boolean;
 
   /**
@@ -399,6 +403,7 @@ model OfferProperties {
   /**
    * Indicating whether the offer is stop sell or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OfferProperties.isStopSell has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isStopSell?: boolean;
 
@@ -449,6 +454,7 @@ model Plan {
   /**
    * Indicating whether the plan is stop sell or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Plan.isStopSell has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isStopSell?: boolean;
 }
@@ -615,11 +621,13 @@ model CollectionProperties {
   /**
    * Indicating whether all subscriptions are selected (=true) or not (=false).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CollectionProperties.allSubscriptions has a boolean wire value; preserve the published property contract."
   allSubscriptions?: boolean;
 
   /**
    * Indicating whether all items are approved for this collection (=true) or not (=false).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CollectionProperties.approveAllItems has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   approveAllItems?: boolean;
 
@@ -638,6 +646,7 @@ model CollectionProperties {
   /**
    * Indicating whether the collection is enabled or disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CollectionProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -774,6 +783,7 @@ model QueryApprovedPlansDetails {
   /**
    * Indicates whether all subscriptions are approved for this plan
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing QueryApprovedPlansDetails.allSubscriptions has a boolean wire value; preserve the published property contract."
   allSubscriptions?: boolean;
 }
 
@@ -987,6 +997,7 @@ model RequestApprovalProperties {
   /**
    * Gets a value indicating whether the request is closed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RequestApprovalProperties.isClosed has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isClosed?: boolean;
 
@@ -1258,6 +1269,7 @@ model StopSellNotifications {
   /**
    * Gets a value indicating whether entire offer is in stop sell or only few of its plans
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StopSellNotifications.isEntire has a boolean wire value; preserve the published property contract."
   isEntire?: boolean;
 
   /**
@@ -1309,6 +1321,7 @@ model NewNotifications {
   /**
    * Gets a value indicating whether future plans is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NewNotifications.isFuturePlansEnabled has a boolean wire value; preserve the published property contract."
   isFuturePlansEnabled?: boolean;
 
   /**
@@ -1381,16 +1394,19 @@ model AcknowledgeOfferNotificationDetails {
   /**
    * Gets or sets a value indicating whether acknowledge action flag is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AcknowledgeOfferNotificationDetails.acknowledge has a boolean wire value; preserve the published property contract."
   acknowledge?: boolean;
 
   /**
    * Gets or sets a value indicating whether dismiss action flag is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AcknowledgeOfferNotificationDetails.dismiss has a boolean wire value; preserve the published property contract."
   dismiss?: boolean;
 
   /**
    * Gets or sets a value indicating whether remove offer action flag is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AcknowledgeOfferNotificationDetails.removeOffer has a boolean wire value; preserve the published property contract."
   removeOffer?: boolean;
 
   /**
@@ -1527,6 +1543,7 @@ model StopSellOffersPlansNotificationsListProperties {
   /**
    * A value indicating whether entire offer is in stop sell or only few of its plans
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StopSellOffersPlansNotificationsListProperties.isEntire has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEntire?: boolean;
 
@@ -1552,6 +1569,7 @@ model StopSellOffersPlansNotificationsListProperties {
   /**
    * True if the offer has public plans
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StopSellOffersPlansNotificationsListProperties.publicContext has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   publicContext?: boolean;
 
@@ -1587,6 +1605,7 @@ model SingleOperation {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SingleOperation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**

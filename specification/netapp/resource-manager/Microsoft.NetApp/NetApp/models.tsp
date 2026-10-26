@@ -497,6 +497,7 @@ model MetricSpecification {
   /**
    * Whether or not the service is using regional MDM accounts.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecification.enableRegionalMdmAccount has a boolean wire value; preserve the published property contract."
   enableRegionalMdmAccount?: boolean;
 
   /**
@@ -523,6 +524,7 @@ model MetricSpecification {
   /**
    * The property to decide fill gap with zero or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecification.fillGapWithZero has a boolean wire value; preserve the published property contract."
   fillGapWithZero?: boolean;
 
   /**
@@ -538,6 +540,7 @@ model MetricSpecification {
   /**
    * Whether the metric is internal.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecification.isInternal has a boolean wire value; preserve the published property contract."
   isInternal?: boolean;
 }
 
@@ -598,6 +601,7 @@ model CheckAvailabilityResponse {
   /**
    * <code>true</code> indicates name is valid and available. <code>false</code> indicates the name is invalid, unavailable, or both.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CheckAvailabilityResponse.isAvailable has a boolean wire value; preserve the published property contract."
   isAvailable?: boolean;
 
   /**
@@ -745,6 +749,7 @@ model RegionInfoAvailabilityZoneMappingsItem {
   /**
    * Available availability zone
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RegionInfoAvailabilityZoneMappingsItem.isAvailable has a boolean wire value; preserve the published property contract."
   isAvailable?: boolean;
 }
 

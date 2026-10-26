@@ -541,6 +541,7 @@ model CommunicationServiceProperties {
   /**
    * Disable local authentication for the CommunicationService.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CommunicationServiceProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   disableLocalAuth?: boolean;
 }
@@ -578,6 +579,7 @@ model CommunicationServiceUpdateProperties {
   /**
    * Disable local authentication for the CommunicationService.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CommunicationServiceUpdateProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Update)
   disableLocalAuth?: boolean;
 }

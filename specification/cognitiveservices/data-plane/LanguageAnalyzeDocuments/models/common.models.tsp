@@ -617,6 +617,7 @@ model TaskIdentifier {
 /** Base parameters object for a documents analysis task. */
 model TaskParameters {
   /** logging opt out */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TaskParameters.loggingOptOut has a boolean wire value; preserve the published property contract."
   loggingOptOut?: boolean = false;
 }
 
@@ -634,6 +635,7 @@ alias ShowStatsQueryParameter = QueryParametersTrait<{
 
 alias AnalyzeDocumentsJobQueryParameters = QueryParametersTrait<{
   /** (Optional) if set to true, response will contain request and document level statistics. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AnalyzeDocumentsJobQueryParameters.showStats has a boolean wire value; preserve the published property contract."
   @query
   showStats?: boolean;
 

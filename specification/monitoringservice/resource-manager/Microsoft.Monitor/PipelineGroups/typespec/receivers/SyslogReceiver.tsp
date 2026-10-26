@@ -24,6 +24,7 @@ model SyslogReceiver {
   @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
   transportProtocol?: TransportProtocol = TransportProtocol.tcp;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SyslogReceiver.allowSkipPriHeader has a boolean wire value; preserve the published property contract."
   @doc("Configure the receiver to allow parsing of messages without the PRI header. Default false.")
   @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
   allowSkipPriHeader?: boolean = false;

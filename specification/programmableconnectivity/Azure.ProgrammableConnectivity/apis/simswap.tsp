@@ -70,6 +70,7 @@ model SimSwapRetrievalResult {
 
 @doc("Response verifying SimSwap in period")
 model SimSwapVerificationResult {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SimSwapVerificationResult.verificationResult has a boolean wire value; preserve the published property contract."
   @doc("True if the SIM has swapped in the specified period, False otherwise")
   verificationResult: boolean;
 }

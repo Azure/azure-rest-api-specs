@@ -1656,11 +1656,13 @@ model KubernetesVersion {
   /**
    * Whether this version is default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesVersion.isDefault has a boolean wire value; preserve the published property contract."
   isDefault?: boolean;
 
   /**
    * Whether this version is in preview mode.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesVersion.isPreview has a boolean wire value; preserve the published property contract."
   isPreview?: boolean;
 
   /**
@@ -1922,6 +1924,7 @@ model ManagedClusterProperties {
    * Whether to enable Kubernetes Role-Based Access Control.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterProperties.enableRBAC has a boolean wire value; preserve the published property contract."
   enableRBAC?: boolean;
 
   /**
@@ -1933,18 +1936,21 @@ model ManagedClusterProperties {
    * Whether to enable FIPS mode at the cluster level. When enabled, this setting enforces FIPS compliance for all AKS-managed components, such as the node operating system, addons, and [managed containerized components](https://aka.ms/aks/components/docs). See [Enable cluster-wide FIPS](https://aka.ms/aks/fips) for more details. When this property is enabled, all node pools in the cluster must also be FIPS-enabled. Although this property is available in a stable API version, cluster-wide FIPS remains a preview feature. Write requests whose resulting cluster state has this property set to true require the `Microsoft.ContainerService/EnableFIPSPreview` subscription feature registration.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for consistency with existing FIPS properties in AKS."
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterProperties.enableFIPS has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_07_01)
   enableFIPS?: boolean;
 
   /**
    * Whether to enable node hardening at the cluster level. When enabled, AKS applies hardened defaults for soft eviction thresholds, kube-reserved, and system-reserved on all Linux node pools in the cluster. Per-node-pool kubeletConfig settings take precedence over hardening defaults. On agent pools running Kubernetes 1.37 or later, node hardening is enabled by default and cannot be disabled; setting this field to false has no effect on those pools.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterProperties.enableNodeHardening has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_02_preview)
   enableNodeHardening?: boolean;
 
   /**
    * Enable namespace as Azure resource. The default value is false. It can be enabled/disabled on creation and updating of the managed cluster. See [https://aka.ms/NamespaceARMResource](https://aka.ms/NamespaceARMResource) for more details on Namespace as a ARM Resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterProperties.enableNamespaceResources has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_02_preview)
   enableNamespaceResources?: boolean;
 
@@ -2002,6 +2008,7 @@ model ManagedClusterProperties {
   /**
    * If local accounts should be disabled on the Managed Cluster. If set to true, getting static credentials will be disabled for this cluster. This must only be used on Managed Clusters that are AAD enabled. For more details see [disable local accounts](https://docs.microsoft.com/azure/aks/managed-aad#disable-local-accounts-preview).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterProperties.disableLocalAccounts has a boolean wire value; preserve the published property contract."
   disableLocalAccounts?: boolean;
 
   /**
@@ -2179,6 +2186,7 @@ model ManagedClusterWindowsProfile {
    * Whether to enable CSI proxy. For more details on CSI proxy, see the [CSI proxy GitHub repo](https://github.com/kubernetes-csi/csi-proxy).
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterWindowsProfile.enableCSIProxy has a boolean wire value; preserve the published property contract."
   enableCSIProxy?: boolean;
 
   /**
@@ -2194,6 +2202,7 @@ model WindowsGmsaProfile {
   /**
    * Whether to enable Windows gMSA. Specifies whether to enable Windows gMSA in the managed cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WindowsGmsaProfile.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2231,6 +2240,7 @@ model ManagedClusterAddonProfile {
   /**
    * Whether the add-on is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAddonProfile.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -2284,11 +2294,13 @@ model ManagedClusterPodIdentityProfile {
   /**
    * Whether the pod identity addon is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterPodIdentityProfile.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
    * Whether pod identity is allowed to run on clusters with Kubenet networking. Running in Kubenet is disabled by default due to the security related nature of AAD Pod Identity and the risks of IP spoofing. See [using Kubenet network plugin with AAD Pod Identity](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity#using-kubenet-network-plugin-with-azure-active-directory-pod-managed-identities) for more information.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterPodIdentityProfile.allowNetworkPluginKubenet has a boolean wire value; preserve the published property contract."
   allowNetworkPluginKubenet?: boolean;
 
   /**
@@ -2419,6 +2431,7 @@ model ManagedClusterOIDCIssuerProfile {
   /**
    * Whether the OIDC issuer is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterOIDCIssuerProfile.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -2723,6 +2736,7 @@ model AdvancedNetworking {
   /**
    * Indicates the enablement of Advanced Networking functionalities of observability and security on AKS clusters. When this is set to true, all observability and security features will be set to enabled unless explicitly disabled. If not specified, the default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AdvancedNetworking.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2749,6 +2763,7 @@ model AdvancedNetworkingObservability {
   /**
    * Indicates the enablement of Advanced Networking observability functionalities on clusters.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AdvancedNetworkingObservability.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -2759,6 +2774,7 @@ model AdvancedNetworkingSecurity {
   /**
    * This feature allows user to configure network policy based on DNS (FQDN) names. It can be enabled only on cilium based clusters. If not specified, the default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AdvancedNetworkingSecurity.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2782,6 +2798,7 @@ model BastionProfile {
   /**
    * Indicates whether managed bastion is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BastionProfile.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2876,6 +2893,7 @@ model ManagedClusterLoadBalancerProfile {
   /**
    * Enable multiple standard load balancers per AKS cluster or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterLoadBalancerProfile.enableMultipleStandardLoadBalancers has a boolean wire value; preserve the published property contract."
   enableMultipleStandardLoadBalancers?: boolean;
 
   /**
@@ -3058,6 +3076,7 @@ model ManagedClusterStaticEgressGatewayProfile {
   /**
    * Enable Static Egress Gateway addon. Indicates if Static Egress Gateway addon is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterStaticEgressGatewayProfile.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3069,6 +3088,7 @@ model ContainerServiceNetworkProfileKubeProxyConfig {
   /**
    * Whether to enable on kube-proxy on the cluster (if no 'kubeProxyConfig' exists, kube-proxy is enabled in AKS by default without these customizations).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContainerServiceNetworkProfileKubeProxyConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3138,12 +3158,14 @@ model ManagedClusterAADProfile {
   /**
    * Whether to enable managed AAD.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAADProfile.managed has a boolean wire value; preserve the published property contract."
   managed?: boolean;
 
   /**
    * Whether to enable Azure RBAC for Kubernetes authorization.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAADProfile.enableAzureRBAC has a boolean wire value; preserve the published property contract."
   enableAzureRBAC?: boolean;
 
   /**
@@ -3218,6 +3240,7 @@ model UpgradeGateSettings {
   /**
    * Whether upgrade gating is enabled. Defaults to `false` when unset, except on a newly created agent pool in a cluster where upgrade gating is enabled, which defaults to `true`. When `true`, upgrade-gated health checks are enabled for upgrades in the corresponding scope. Setting this to `true` at the cluster scope enables gating for the entire cluster, including all agent pool upgrades. When the cluster scope is unset or `false`, an agent pool can opt in independently by setting this to `true`. When the cluster scope is `true`, an agent pool cannot set this to `false`. Force upgrade (`overrideSettings.forceUpgrade`) overrides the gate: while the override window is active, the upgrade skips health signal validation and proceeds.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UpgradeGateSettings.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3228,6 +3251,7 @@ model UpgradeOverrideSettings {
   /**
    * Whether to force upgrade the cluster. Note that this option instructs upgrade operation to bypass upgrade protections such as checking for deprecated API usage. Enable this option only with caution.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UpgradeOverrideSettings.forceUpgrade has a boolean wire value; preserve the published property contract."
   forceUpgrade?: boolean;
 
   /**
@@ -3252,6 +3276,7 @@ model ManagedClusterPropertiesAutoScalerProfile {
    * DaemonSet pods will be gracefully terminated from empty nodes. If set to true, all daemonset pods on empty nodes will be evicted before deletion of the node. If the daemonset pod cannot be evicted another node will be chosen for scaling. If set to false, the node will be deleted without ensuring that daemonset pods are deleted or evicted.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterPropertiesAutoScalerProfile.daemonset-eviction-for-empty-nodes has a boolean wire value; preserve the published property contract."
   @clientName("daemonsetEvictionForEmptyNodes")
   `daemonset-eviction-for-empty-nodes`?: boolean;
 
@@ -3259,6 +3284,7 @@ model ManagedClusterPropertiesAutoScalerProfile {
    * DaemonSet pods will be gracefully terminated from non-empty nodes. If set to true, all daemonset pods on occupied nodes will be evicted before deletion of the node. If the daemonset pod cannot be evicted another node will be chosen for scaling. If set to false, the node will be deleted without ensuring that daemonset pods are deleted or evicted.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterPropertiesAutoScalerProfile.daemonset-eviction-for-occupied-nodes has a boolean wire value; preserve the published property contract."
   @clientName("daemonsetEvictionForOccupiedNodes")
   `daemonset-eviction-for-occupied-nodes`?: boolean;
 
@@ -3266,6 +3292,7 @@ model ManagedClusterPropertiesAutoScalerProfile {
    * Should CA ignore DaemonSet pods when calculating resource utilization for scaling down. If set to true, the resources used by daemonset will be taken into account when making scaling down decisions.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterPropertiesAutoScalerProfile.ignore-daemonsets-utilization has a boolean wire value; preserve the published property contract."
   @clientName("ignoreDaemonsetsUtilization")
   `ignore-daemonsets-utilization`?: boolean;
 
@@ -3394,6 +3421,7 @@ model ManagedClusterAPIServerAccessProfile {
   /**
    * Whether to create the cluster as a private cluster or not. For more details, see [Creating a private AKS cluster](https://docs.microsoft.com/azure/aks/private-clusters).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAPIServerAccessProfile.enablePrivateCluster has a boolean wire value; preserve the published property contract."
   enablePrivateCluster?: boolean;
 
   /**
@@ -3406,16 +3434,19 @@ model ManagedClusterAPIServerAccessProfile {
    * Whether to create additional public FQDN for private cluster or not.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAPIServerAccessProfile.enablePrivateClusterPublicFQDN has a boolean wire value; preserve the published property contract."
   enablePrivateClusterPublicFQDN?: boolean;
 
   /**
    * Whether to disable run command for the cluster or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAPIServerAccessProfile.disableRunCommand has a boolean wire value; preserve the published property contract."
   disableRunCommand?: boolean;
 
   /**
    * Whether to enable apiserver vnet integration for the cluster or not. See aka.ms/AksVnetIntegration for more details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAPIServerAccessProfile.enableVnetIntegration has a boolean wire value; preserve the published property contract."
   enableVnetIntegration?: boolean;
 
   /**
@@ -3500,6 +3531,7 @@ model ManagedClusterHTTPProxyConfig {
   /**
    * Whether to enable HTTP proxy. If disabled, the specified proxy configuration will be not be set on pods and nodes. If not specified, the default is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterHTTPProxyConfig.enabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_01_01)
   enabled?: boolean;
 }
@@ -3593,6 +3625,7 @@ model ManagedClusterSecurityProfileDefenderSecurityMonitoring {
   /**
    * Whether to enable Defender threat detection
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterSecurityProfileDefenderSecurityMonitoring.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3604,6 +3637,7 @@ model ManagedClusterSecurityProfileDefenderSecurityGating {
   /**
    * Whether to enable Defender security gating. When enabled, the gating feature scans container images and audits or blocks deployment of images that do not meet security standards according to configured security rules. For more information, see https://aka.ms/KubernetesDefenderAuditRule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterSecurityProfileDefenderSecurityGating.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3615,6 +3649,7 @@ model ManagedClusterSecurityProfileDefenderSecurityGating {
   /**
    * In use only while registry access is granted by secret rather than managed identity. Sets whether to grant the Defender gating agent access to cluster secrets for pulling images from registries. If secret access is denied and the registry requires pull secrets, the add-on will not perform image validation. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterSecurityProfileDefenderSecurityGating.allowSecretAccess has a boolean wire value; preserve the published property contract."
   allowSecretAccess?: boolean;
 }
 
@@ -3639,6 +3674,7 @@ model AzureKeyVaultKms {
   /**
    * Whether to enable Azure Key Vault key management service. The default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureKeyVaultKms.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3680,6 +3716,7 @@ model ManagedClusterSecurityProfileWorkloadIdentity {
   /**
    * Whether to enable workload identity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterSecurityProfileWorkloadIdentity.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3690,6 +3727,7 @@ model ManagedClusterSecurityProfileImageCleaner {
   /**
    * Whether to enable Image Cleaner on AKS cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterSecurityProfileImageCleaner.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3706,6 +3744,7 @@ model ManagedClusterSecurityProfileImageIntegrity {
   /**
    * Whether to enable image integrity. The default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterSecurityProfileImageIntegrity.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3717,6 +3756,7 @@ model ManagedClusterSecurityProfileNodeRestriction {
   /**
    * Whether to enable Node Restriction
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterSecurityProfileNodeRestriction.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3727,6 +3767,7 @@ model ServiceAccountImagePullProfile {
   /**
    * Indicates whether service account based image pull is enabled, for which identity bindings are required for the managed identity to be used for authentication. For more information, refer to https://aka.ms/aks/identity-binding-docs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServiceAccountImagePullProfile.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3771,6 +3812,7 @@ model ManagedClusterStorageProfileDiskCSIDriver {
   /**
    * Whether to enable AzureDisk CSI Driver. The default value is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterStorageProfileDiskCSIDriver.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3789,6 +3831,7 @@ model ManagedClusterStorageProfileDiskCSIDriverQuickAttachDetach {
   /**
    * Whether to enable Quick Attach Detach for the AzureDisk CSI driver. The default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterStorageProfileDiskCSIDriverQuickAttachDetach.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3806,6 +3849,7 @@ model ManagedClusterStorageProfileFileCSIDriver {
   /**
    * Whether to enable AzureFile CSI Driver. The default value is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterStorageProfileFileCSIDriver.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3816,6 +3860,7 @@ model ManagedClusterStorageProfileSnapshotController {
   /**
    * Whether to enable Snapshot Controller. The default value is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterStorageProfileSnapshotController.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3827,6 +3872,7 @@ model ManagedClusterStorageProfileBlobCSIDriver {
   /**
    * Whether to enable AzureBlob CSI Driver. The default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterStorageProfileBlobCSIDriver.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3869,6 +3915,7 @@ model ManagedClusterIngressProfileWebAppRouting {
   /**
    * Whether to enable the Application Routing add-on.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterIngressProfileWebAppRouting.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3942,6 +3989,7 @@ model ManagedClusterIngressDefaultDomainProfile {
   /**
    * Whether to enable Default Domain.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterIngressDefaultDomainProfile.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3959,6 +4007,7 @@ model ManagedClusterIngressProfileApplicationLoadBalancer {
   /**
    * Whether to enable Application Load Balancer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterIngressProfileApplicationLoadBalancer.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3990,6 +4039,7 @@ model ManagedClusterWorkloadAutoScalerProfileKeda {
   /**
    * Whether to enable KEDA.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterWorkloadAutoScalerProfileKeda.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 }
 
@@ -4000,6 +4050,7 @@ model ManagedClusterWorkloadAutoScalerProfileVerticalPodAutoscaler {
   /**
    * Whether to enable VPA. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterWorkloadAutoScalerProfileVerticalPodAutoscaler.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean = false;
 
   /**
@@ -4038,6 +4089,7 @@ model ManagedClusterAzureMonitorProfileMetrics {
   /**
    * Whether to enable or disable the Azure Managed Prometheus addon for Prometheus monitoring. See aka.ms/AzureManagedPrometheus-aks-enable for details on enabling and disabling.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAzureMonitorProfileMetrics.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -4075,6 +4127,7 @@ model ManagedClusterAzureMonitorProfileMetricsControlPlane {
   /**
    * Whether to enable or disable collection of control plane metrics by the Azure Managed Prometheus addon. Defaults to disabled. See aka.ms/aks/controlplane-metrics for details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAzureMonitorProfileMetricsControlPlane.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -4086,6 +4139,7 @@ model ManagedClusterAzureMonitorProfileContainerInsights {
   /**
    * Indicates if Azure Monitor Container Insights Logs Addon is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAzureMonitorProfileContainerInsights.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -4105,6 +4159,7 @@ model ManagedClusterAzureMonitorProfileContainerInsights {
   /**
    * Indicates whether prometheus metrics scraping is disabled or not. If not specified the default is false i.e. the prometheus scraping is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAzureMonitorProfileContainerInsights.disablePrometheusMetricsScraping has a boolean wire value; preserve the published property contract."
   disablePrometheusMetricsScraping?: boolean;
 
   /**
@@ -4163,6 +4218,7 @@ model ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation {
   /**
    * Indicates if Application Monitoring Auto-instrumentation is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -4174,6 +4230,7 @@ model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics {
   /**
    * Indicates if Application Monitoring OpenTelemetry Metrics is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -4195,6 +4252,7 @@ model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces {
   /**
    * Indicates if Application Monitoring OpenTelemetry Logs and traces is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -4280,6 +4338,7 @@ model IstioIngressGateway {
   /**
    * Whether to enable the ingress gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IstioIngressGateway.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 }
 
@@ -4290,6 +4349,7 @@ model IstioEgressGateway {
   /**
    * Whether to enable the egress gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IstioEgressGateway.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -4370,6 +4430,7 @@ model ManagedClusterCostAnalysis {
   /**
    * Whether to enable cost analysis. The Managed Cluster sku.tier must be set to 'Standard' or 'Premium' to enable this feature. Enabling this will add Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal. If not specified, the default is false. For more information see aka.ms/aks/docs/cost-analysis.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterCostAnalysis.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -4413,6 +4474,7 @@ model ManagedClusterAIToolchainOperatorProfile {
   /**
    * Whether to enable AI toolchain operator to the cluster. Indicates if AI toolchain operator  enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAIToolchainOperatorProfile.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -4424,6 +4486,7 @@ model ManagedClusterAgentSandboxProfile {
   /**
    * Whether the Agent Sandbox core extension is enabled for the cluster. On cluster creation, the default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterAgentSandboxProfile.enabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_02_preview)
   enabled?: boolean;
 }
@@ -4436,6 +4499,7 @@ model ManagedClusterPodSnapshotProfile {
   /**
    * Whether the Pod Snapshot Restore core extension is enabled for the managed cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterPodSnapshotProfile.enabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_02_preview)
   enabled?: boolean;
 }
@@ -4470,6 +4534,7 @@ model ManagedClusterHostedSystemProfile {
   /**
    * Whether to enable hosted system addons for the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterHostedSystemProfile.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -4537,6 +4602,7 @@ model Component {
   /**
    * If upgraded component version contains breaking changes from the current version. To see a detailed description of what the breaking changes are, visit https://learn.microsoft.com/azure/aks/supported-kubernetes-versions?tabs=azure-cli#aks-components-breaking-changes-by-version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Component.hasBreakingChanges has a boolean wire value; preserve the published property contract."
   hasBreakingChanges?: boolean;
 }
 
@@ -4768,11 +4834,13 @@ model ManagedClusterHealthMonitorProfile {
   /**
    * Whether to enable continuous control plane and addon monitor.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterHealthMonitorProfile.enableContinuousControlPlaneAndAddonMonitor has a boolean wire value; preserve the published property contract."
   enableContinuousControlPlaneAndAddonMonitor?: boolean;
 
   /**
    * Whether to enable on-demand monitor.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedClusterHealthMonitorProfile.enableOnDemandMonitor has a boolean wire value; preserve the published property contract."
   enableOnDemandMonitor?: boolean;
 }
 

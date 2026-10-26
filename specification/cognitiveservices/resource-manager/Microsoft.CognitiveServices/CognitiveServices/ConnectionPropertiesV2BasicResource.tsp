@@ -32,6 +32,7 @@ alias ConnectionsListParameters = {
   /**
    * query parameter that indicates if get connection call should return both connections and datastores
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConnectionsListParameters.includeAll has a boolean wire value; preserve the published property contract."
   @query("includeAll")
   includeAll?: boolean = false;
 };

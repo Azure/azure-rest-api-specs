@@ -87,6 +87,7 @@ interface GalleryImageVersions {
       /**
        * Specifies whether to bypass the gallery's soft-delete policy and permanently delete the gallery image version. If true, the version is not retained in the recycle bin and cannot be restored. If false or omitted, the version is soft-deleted when the gallery's soft-delete policy is enabled and permanently deleted when the policy is disabled.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.bypassSoftDelete has a boolean wire value; preserve the published property contract."
       @added(Versions.v2026_03_03)
       @query("bypassSoftDelete")
       bypassSoftDelete?: boolean;

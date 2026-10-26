@@ -531,11 +531,13 @@ model PutTenantPolicyRequestProperties {
   /**
    * Blocks the leaving of subscriptions from user's tenant.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PutTenantPolicyRequestProperties.blockSubscriptionsLeavingTenant has a boolean wire value; preserve the published property contract."
   blockSubscriptionsLeavingTenant?: boolean;
 
   /**
    * Blocks the entering of subscriptions into user's tenant.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PutTenantPolicyRequestProperties.blockSubscriptionsIntoTenant has a boolean wire value; preserve the published property contract."
   blockSubscriptionsIntoTenant?: boolean;
 
   /**
@@ -558,11 +560,13 @@ model TenantPolicy {
   /**
    * Blocks the leaving of subscriptions from user's tenant.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TenantPolicy.blockSubscriptionsLeavingTenant has a boolean wire value; preserve the published property contract."
   blockSubscriptionsLeavingTenant?: boolean;
 
   /**
    * Blocks the entering of subscriptions into user's tenant.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TenantPolicy.blockSubscriptionsIntoTenant has a boolean wire value; preserve the published property contract."
   blockSubscriptionsIntoTenant?: boolean;
 
   /**
@@ -590,6 +594,7 @@ model BillingAccountPoliciesResponseProperties {
   /**
    * Determine if the transfers are allowed for the billing account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingAccountPoliciesResponseProperties.allowTransfers has a boolean wire value; preserve the published property contract."
   allowTransfers?: boolean;
 }
 

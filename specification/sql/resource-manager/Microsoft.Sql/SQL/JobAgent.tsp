@@ -140,6 +140,7 @@ interface JobAgents {
       /**
        * If specified, only active or only completed job executions are included.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByAgent.isActive has a boolean wire value; preserve the published property contract."
       @query("isActive")
       isActive?: boolean;
 

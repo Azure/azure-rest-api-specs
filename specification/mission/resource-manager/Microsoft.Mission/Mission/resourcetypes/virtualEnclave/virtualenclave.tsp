@@ -98,10 +98,12 @@ model EnclaveVirtualNetworkModel {
   @identifiers(#[])
   subnetConfigurations?: SubnetConfiguration[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EnclaveVirtualNetworkModel.allowSubnetCommunication has a boolean wire value; preserve the published property contract."
   @doc("Allow Subnet Communication.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   allowSubnetCommunication?: boolean = false;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EnclaveVirtualNetworkModel.connectToAzureServices has a boolean wire value; preserve the published property contract."
   @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Connect to Azure Services (True or False).")
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -198,6 +200,7 @@ model VirtualEnclaveBaseModel {
   @visibility(Lifecycle.Read)
   managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualEnclaveBaseModel.bastionEnabled has a boolean wire value; preserve the published property contract."
   @doc("Deploy Bastion service (True or False).")
   bastionEnabled?: boolean = false;
 

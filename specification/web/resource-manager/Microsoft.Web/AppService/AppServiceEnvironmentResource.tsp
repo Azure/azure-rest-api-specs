@@ -110,6 +110,7 @@ interface AppServiceEnvironmentResources {
       /**
        * Specify <code>true</code> to force the deletion even if the App Service Environment contains resources. The default is <code>false</code>.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.forceDelete has a boolean wire value; preserve the published property contract."
       @query("forceDelete")
       forceDelete?: boolean;
     },
@@ -409,6 +410,7 @@ interface AppServiceEnvironmentRecommendations {
       /**
        * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listHistoryForHostingEnvironment.expiredOnly has a boolean wire value; preserve the published property contract."
       @query("expiredOnly")
       expiredOnly?: boolean;
 
@@ -441,6 +443,7 @@ interface AppServiceEnvironmentRecommendations {
       /**
        * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listRecommendedRulesForHostingEnvironment.featured has a boolean wire value; preserve the published property contract."
       @query("featured")
       featured?: boolean;
 

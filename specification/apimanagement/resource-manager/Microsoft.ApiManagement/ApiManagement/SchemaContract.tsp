@@ -134,6 +134,7 @@ interface SchemaContracts {
       /**
        * If true removes all references to the schema before deleting it.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.force has a boolean wire value; preserve the published property contract."
       @query("force")
       force?: boolean;
 
@@ -294,6 +295,7 @@ interface WorkspaceApiSchema {
       /**
        * If true removes all references to the schema before deleting it.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.force has a boolean wire value; preserve the published property contract."
       @query("force")
       force?: boolean;
 

@@ -396,6 +396,7 @@ model InputWindowsParameters {
   /**
    * Exclude patches which need reboot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InputWindowsParameters.excludeKbsRequiringReboot has a boolean wire value; preserve the published property contract."
   excludeKbsRequiringReboot?: boolean;
 }
 

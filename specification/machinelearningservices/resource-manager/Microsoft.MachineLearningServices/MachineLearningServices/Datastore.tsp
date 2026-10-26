@@ -31,6 +31,7 @@ alias DatastoresCreateOrUpdateParameters = {
   /**
    * Flag to skip validation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DatastoresCreateOrUpdateParameters.skipValidation has a boolean wire value; preserve the published property contract."
   @query("skipValidation")
   skipValidation?: boolean = false;
 };
@@ -51,6 +52,7 @@ alias DatastoresListParameters = {
   /**
    * Filter down to the workspace default datastore.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DatastoresListParameters.isDefault has a boolean wire value; preserve the published property contract."
   @query("isDefault")
   isDefault?: boolean;
 
@@ -75,6 +77,7 @@ alias DatastoresListParameters = {
   /**
    * Order by property in ascending order.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DatastoresListParameters.orderByAsc has a boolean wire value; preserve the published property contract."
   @query("orderByAsc")
   orderByAsc?: boolean = false;
 };

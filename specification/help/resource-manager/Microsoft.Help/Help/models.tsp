@@ -357,6 +357,7 @@ model CheckNameAvailabilityResponse {
   /**
    * Returns true or false depending on the availability of the name
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CheckNameAvailabilityResponse.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**
@@ -1088,6 +1089,7 @@ model Step {
   /**
    * is this last step of the workflow.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Step.isLastStep has a boolean wire value; preserve the published property contract."
   isLastStep?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1180,6 +1182,7 @@ model ResponseValidationProperties {
   /**
    * Default True
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResponseValidationProperties.isRequired has a boolean wire value; preserve the published property contract."
   isRequired?: boolean;
 
   /**

@@ -46,6 +46,7 @@ alias NamespaceDevicePropertiesUpdate = {
     "enabled"
   >>>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NamespaceDevicePropertiesUpdate.enabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_07_01_preview)
   @doc("Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.")
   enabled?: boolean;
@@ -56,6 +57,7 @@ alias NamespaceDevicePropertiesUpdate = {
 @added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
 model DeviceCredentialsRevokeRequest {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeviceCredentialsRevokeRequest.disable has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether to disable the device(s) after revoking credentials. Prevents new credentials to be issued.")
   disable?: boolean;
 }

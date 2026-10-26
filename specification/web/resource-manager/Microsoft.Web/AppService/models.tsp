@@ -1675,6 +1675,7 @@ model AppServiceEnvironment {
    * <code>true</code> if the App Service Environment is suspended; otherwise, <code>false</code>. The environment can be suspended, e.g. when the management endpoint is no longer available
    *  (most likely because NSG blocked the incoming traffic).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServiceEnvironment.suspended has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   suspended?: boolean;
 
@@ -1692,6 +1693,7 @@ model AppServiceEnvironment {
   /**
    * Flag that displays whether an ASE has linux workers or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServiceEnvironment.hasLinuxWorkers has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasLinuxWorkers?: boolean;
 
@@ -1708,6 +1710,7 @@ model AppServiceEnvironment {
   /**
    * Whether or not this App Service Environment is zone-redundant.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServiceEnvironment.zoneRedundant has a boolean wire value; preserve the published property contract."
   zoneRedundant?: boolean;
 
   /**
@@ -1850,16 +1853,19 @@ model AseV3NetworkingConfigurationProperties {
   /**
    * Property to enable and disable new private endpoint connection creation on ASE
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AseV3NetworkingConfigurationProperties.allowNewPrivateEndpointConnections has a boolean wire value; preserve the published property contract."
   allowNewPrivateEndpointConnections?: boolean;
 
   /**
    * Property to enable and disable FTP on ASEV3
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AseV3NetworkingConfigurationProperties.ftpEnabled has a boolean wire value; preserve the published property contract."
   ftpEnabled?: boolean;
 
   /**
    * Property to enable and disable Remote Debug on ASEV3
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AseV3NetworkingConfigurationProperties.remoteDebugEnabled has a boolean wire value; preserve the published property contract."
   remoteDebugEnabled?: boolean;
 
   /**
@@ -2003,11 +2009,13 @@ model StampCapacity {
    * If <code>true</code>, it includes basic apps.
    * Basic apps are not used for capacity allocation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StampCapacity.excludeFromCapacityAllocation has a boolean wire value; preserve the published property contract."
   excludeFromCapacityAllocation?: boolean;
 
   /**
    * <code>true</code> if capacity is applicable for all apps; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StampCapacity.isApplicableForAllComputeModes has a boolean wire value; preserve the published property contract."
   isApplicableForAllComputeModes?: boolean;
 
   /**
@@ -2018,6 +2026,7 @@ model StampCapacity {
   /**
    * Is this a linux stamp capacity
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StampCapacity.isLinux has a boolean wire value; preserve the published property contract."
   isLinux?: boolean;
 }
 
@@ -2071,6 +2080,7 @@ model VirtualIPMapping {
   /**
    * Is virtual IP mapping in use.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualIPMapping.inUse has a boolean wire value; preserve the published property contract."
   inUse?: boolean;
 
   /**
@@ -2116,11 +2126,13 @@ model SiteProperties {
   /**
    * <code>true</code> if the app is enabled; otherwise, <code>false</code>. Setting this value to false disables the app (takes the app offline).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
    * <code>true</code> if site scoped certificates are enabled; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.siteScopedCertificatesEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_03_15)
   siteScopedCertificatesEnabled?: boolean = false;
 
@@ -2151,18 +2163,21 @@ model SiteProperties {
   /**
    * <code>true</code> if reserved; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.reserved has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   reserved?: boolean = false;
 
   /**
    * Obsolete: Hyper-V sandbox.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.isXenon has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   isXenon?: boolean = false;
 
   /**
    * Hyper-V sandbox.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.hyperV has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   hyperV?: boolean = false;
 
@@ -2224,6 +2239,7 @@ model SiteProperties {
   /**
    * <code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.scmSiteAlsoStopped has a boolean wire value; preserve the published property contract."
   scmSiteAlsoStopped?: boolean = false;
 
   /**
@@ -2241,21 +2257,25 @@ model SiteProperties {
   /**
    * <code>true</code> to enable client affinity; <code>false</code> to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.clientAffinityEnabled has a boolean wire value; preserve the published property contract."
   clientAffinityEnabled?: boolean = false;
 
   /**
    * <code>true</code> to enable client affinity partitioning using CHIPS cookies, this will add the <code>partitioned</code> property to the affinity cookies; <code>false</code> to stop sending partitioned affinity cookies. Default is <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.clientAffinityPartitioningEnabled has a boolean wire value; preserve the published property contract."
   clientAffinityPartitioningEnabled?: boolean;
 
   /**
    * <code>true</code> to override client affinity cookie domain with X-Forwarded-Host request header. <code>false</code> to use default domain. Default is <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.clientAffinityProxyEnabled has a boolean wire value; preserve the published property contract."
   clientAffinityProxyEnabled?: boolean;
 
   /**
    * <code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.clientCertEnabled has a boolean wire value; preserve the published property contract."
   clientCertEnabled?: boolean;
 
   /**
@@ -2279,17 +2299,20 @@ model SiteProperties {
   /**
    * Whether to use end to end encryption between the FrontEnd and the Worker
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.endToEndEncryptionEnabled has a boolean wire value; preserve the published property contract."
   endToEndEncryptionEnabled?: boolean;
 
   /**
    * Whether to enable ssh access.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.sshEnabled has a boolean wire value; preserve the published property contract."
   sshEnabled?: boolean;
 
   /**
    * <code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.
    *  If <code>true</code>, the app is only accessible via API management process.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.hostNamesDisabled has a boolean wire value; preserve the published property contract."
   hostNamesDisabled?: boolean;
 
   /**
@@ -2348,6 +2371,7 @@ model SiteProperties {
   /**
    * <code>true</code> if the app is a default container; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.isDefaultContainer has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDefaultContainer?: boolean;
 
@@ -2367,6 +2391,7 @@ model SiteProperties {
    * HttpsOnly: configures a web site to accept only https requests. Issues redirect for
    * http requests
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.httpsOnly has a boolean wire value; preserve the published property contract."
   httpsOnly?: boolean;
 
   /**
@@ -2391,6 +2416,7 @@ model SiteProperties {
   /**
    * Checks if Customer provided storage account is required
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.storageAccountRequired has a boolean wire value; preserve the published property contract."
   storageAccountRequired?: boolean;
 
   /**
@@ -2429,6 +2455,7 @@ model SiteProperties {
   /**
    * <code>true</code> if the app is in maintenance mode; otherwise, <code>false</code>. Setting this value to true puts the app in maintenance mode, making it return the maintenance custom error page. The maintenance custom error page is required to set the site to maintenance. Default value is <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteProperties.maintenanceEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_07_15)
   maintenanceEnabled?: boolean;
 }
@@ -2461,6 +2488,7 @@ model HostNameSslState {
   /**
    * Set to <code>true</code> to update existing hostname.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing HostNameSslState.toUpdate has a boolean wire value; preserve the published property contract."
   toUpdate?: boolean;
 
   /**
@@ -2499,6 +2527,7 @@ model SiteDnsConfig {
   /**
    * Indicates that sites using Virtual network custom DNS servers are still sorting the list of DNS servers. Read-Only.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteDnsConfig.dnsLegacySortOrder has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   dnsLegacySortOrder?: boolean;
 }
@@ -2510,31 +2539,37 @@ model OutboundVnetRouting {
   /**
    * Enables all other routing options defined in OutboundVnetRouting if this setting is set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OutboundVnetRouting.allTraffic has a boolean wire value; preserve the published property contract."
   allTraffic?: boolean;
 
   /**
    * This causes all outbound traffic to have Virtual Network Security Groups and User Defined Routes applied. Previously called VnetRouteAllEnabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OutboundVnetRouting.applicationTraffic has a boolean wire value; preserve the published property contract."
   applicationTraffic?: boolean;
 
   /**
    * Enables accessing content over virtual network. Previously called VnetContentShareEnabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OutboundVnetRouting.contentShareTraffic has a boolean wire value; preserve the published property contract."
   contentShareTraffic?: boolean;
 
   /**
    * Enables pulling image over Virtual Network. Previously called VnetImagePullEnabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OutboundVnetRouting.imagePullTraffic has a boolean wire value; preserve the published property contract."
   imagePullTraffic?: boolean;
 
   /**
    * Enables Backup and Restore operations over virtual network. Previously called VnetBackupRestoreEnabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OutboundVnetRouting.backupRestoreTraffic has a boolean wire value; preserve the published property contract."
   backupRestoreTraffic?: boolean;
 
   /**
    * Enables Managed Identity operations over virtual network.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OutboundVnetRouting.managedIdentityTraffic has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_03_01_preview)
   managedIdentityTraffic?: boolean;
 }
@@ -2592,6 +2627,7 @@ model SiteConfig {
   /**
    * <code>true</code> if request tracing is enabled; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteConfig.requestTracingEnabled has a boolean wire value; preserve the published property contract."
   requestTracingEnabled?: boolean;
 
   /**
@@ -2603,6 +2639,7 @@ model SiteConfig {
   /**
    * <code>true</code> if remote debugging is enabled; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteConfig.remoteDebuggingEnabled has a boolean wire value; preserve the published property contract."
   remoteDebuggingEnabled?: boolean;
 
   /**
@@ -2613,11 +2650,13 @@ model SiteConfig {
   /**
    * <code>true</code> if HTTP logging is enabled; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteConfig.httpLoggingEnabled has a boolean wire value; preserve the published property contract."
   httpLoggingEnabled?: boolean;
 
   /**
    * Flag to use Managed Identity Creds for ACR pull
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteConfig.acrUseManagedIdentityCreds has a boolean wire value; preserve the published property contract."
   acrUseManagedIdentityCreds?: boolean;
 
   /**
@@ -2634,6 +2673,7 @@ model SiteConfig {
   /**
    * <code>true</code> if detailed error logging is enabled; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteConfig.detailedErrorLoggingEnabled has a boolean wire value; preserve the published property contract."
   detailedErrorLoggingEnabled?: boolean;
 
   /**
@@ -2687,16 +2727,19 @@ model SiteConfig {
   /**
    * <code>true</code> to use 32-bit worker process; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteConfig.use32BitWorkerProcess has a boolean wire value; preserve the published property contract."
   use32BitWorkerProcess?: boolean;
 
   /**
    * <code>true</code> if WebSocket is enabled; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteConfig.webSocketsEnabled has a boolean wire value; preserve the published property contract."
   webSocketsEnabled?: boolean;
 
   /**
    * <code>true</code> if Always On is enabled; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteConfig.alwaysOn has a boolean wire value; preserve the published property contract."
   alwaysOn?: boolean;
 
   /**
@@ -2748,6 +2791,7 @@ model SiteConfig {
   /**
    * <code>true</code> if Auto Heal is enabled; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteConfig.autoHealEnabled has a boolean wire value; preserve the published property contract."
   autoHealEnabled?: boolean;
 
   /**
@@ -2769,6 +2813,7 @@ model SiteConfig {
   /**
    * Virtual Network Route All enabled. This causes all outbound traffic to have Virtual Network Security Groups and User Defined Routes applied.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteConfig.vnetRouteAllEnabled has a boolean wire value; preserve the published property contract."
   vnetRouteAllEnabled?: boolean;
 
   /**
@@ -2804,6 +2849,7 @@ model SiteConfig {
   /**
    * <code>true</code> to enable local MySQL; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteConfig.localMySqlEnabled has a boolean wire value; preserve the published property contract."
   localMySqlEnabled?: boolean = false;
 
   /**
@@ -2846,11 +2892,13 @@ model SiteConfig {
   /**
    * IP security restrictions for scm to use main.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteConfig.scmIpSecurityRestrictionsUseMain has a boolean wire value; preserve the published property contract."
   scmIpSecurityRestrictionsUseMain?: boolean;
 
   /**
    * Http20Enabled: configures a web site to allow clients to connect over http2.0
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteConfig.http20Enabled has a boolean wire value; preserve the published property contract."
   http20Enabled?: boolean = true;
 
   /**
@@ -2910,6 +2958,7 @@ model SiteConfig {
    * the ScaleController will not monitor event sources directly, but will instead call to the
    * runtime to get scale status.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteConfig.functionsRuntimeScaleMonitoringEnabled has a boolean wire value; preserve the published property contract."
   functionsRuntimeScaleMonitoringEnabled?: boolean;
 
   /**
@@ -3023,6 +3072,7 @@ model VirtualApplication {
   /**
    * <code>true</code> if preloading is enabled; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualApplication.preloadEnabled has a boolean wire value; preserve the published property contract."
   preloadEnabled?: boolean;
 
   /**
@@ -3330,6 +3380,7 @@ model CorsSettings {
    * https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials
    * for more details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CorsSettings.supportCredentials has a boolean wire value; preserve the published property contract."
   supportCredentials?: boolean;
 }
 
@@ -3352,6 +3403,7 @@ model PushSettingsProperties {
   /**
    * Gets or sets a flag indicating whether the Push endpoint is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PushSettingsProperties.isPushEnabled has a boolean wire value; preserve the published property contract."
   isPushEnabled: boolean;
 
   /**
@@ -3686,6 +3738,7 @@ model DaprConfig {
   /**
    * Boolean indicating if the Dapr side car is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DaprConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean = false;
 
   /**
@@ -3716,6 +3769,7 @@ model DaprConfig {
   /**
    * Enables API logging for the Dapr sidecar
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DaprConfig.enableApiLogging has a boolean wire value; preserve the published property contract."
   enableApiLogging?: boolean;
 }
 
@@ -3770,6 +3824,7 @@ model McpServerConfig {
   /**
    * Whether the MCP server is enabled. Defaults to true when not specified on creation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing McpServerConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3867,16 +3922,19 @@ model CloningInfo {
   /**
    * <code>true</code> to overwrite destination app; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CloningInfo.overwrite has a boolean wire value; preserve the published property contract."
   overwrite?: boolean;
 
   /**
    * <code>true</code> to clone custom hostnames from source app; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CloningInfo.cloneCustomHostNames has a boolean wire value; preserve the published property contract."
   cloneCustomHostNames?: boolean;
 
   /**
    * <code>true</code> to clone source control from source app; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CloningInfo.cloneSourceControl has a boolean wire value; preserve the published property contract."
   cloneSourceControl?: boolean;
 
   /**
@@ -3906,6 +3964,7 @@ model CloningInfo {
   /**
    * <code>true</code> to configure load balancing for source and destination app.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CloningInfo.configureLoadBalancing has a boolean wire value; preserve the published property contract."
   configureLoadBalancing?: boolean;
 
   /**
@@ -4513,6 +4572,7 @@ model EndpointDetail {
   /**
    * Whether it is possible to create a TCP connection from the App Service Environment to this IpAddress at this Port.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EndpointDetail.isAccessible has a boolean wire value; preserve the published property contract."
   isAccessible?: boolean;
 }
 
@@ -4681,11 +4741,13 @@ model AppServicePlanProperties {
    * If <code>true</code>, apps assigned to this App Service plan can be scaled independently.
    * If <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanProperties.perSiteScaling has a boolean wire value; preserve the published property contract."
   perSiteScaling?: boolean;
 
   /**
    * ServerFarm supports ElasticScale. Apps in this plan will scale as if the ServerFarm was ElasticPremium sku
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanProperties.elasticScaleEnabled has a boolean wire value; preserve the published property contract."
   elasticScaleEnabled?: boolean;
 
   /**
@@ -4702,6 +4764,7 @@ model AppServicePlanProperties {
   /**
    * If <code>true</code>, this App Service Plan owns spot instances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanProperties.isSpot has a boolean wire value; preserve the published property contract."
   isSpot?: boolean;
 
   /**
@@ -4725,18 +4788,21 @@ model AppServicePlanProperties {
   /**
    * If Linux app service plan <code>true</code>, <code>false</code> otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanProperties.reserved has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   reserved?: boolean;
 
   /**
    * Obsolete: If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanProperties.isXenon has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   isXenon?: boolean;
 
   /**
    * If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanProperties.hyperV has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   hyperV?: boolean;
 
@@ -4765,12 +4831,14 @@ model AppServicePlanProperties {
    * If <code>true</code>, this App Service Plan will perform availability zone balancing.
    * If <code>false</code>, this App Service Plan will not perform availability zone balancing.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanProperties.zoneRedundant has a boolean wire value; preserve the published property contract."
   zoneRedundant?: boolean;
 
   /**
    * If <code>true</code>, this App Service Plan will attempt to scale asynchronously if there are insufficient workers to scale synchronously.
    * If <code>false</code>, this App Service Plan will only attempt sync scaling.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanProperties.asyncScalingEnabled has a boolean wire value; preserve the published property contract."
   asyncScalingEnabled?: boolean;
 
   /**
@@ -4781,6 +4849,7 @@ model AppServicePlanProperties {
   /**
    * Whether this server farm is in custom mode.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanProperties.isCustomMode has a boolean wire value; preserve the published property contract."
   isCustomMode?: boolean;
 
   /**
@@ -4808,6 +4877,7 @@ model AppServicePlanProperties {
    * If <code>true</code>, RDP access is enabled for this App Service plan. Only applicable for IsCustomMode ASPs.
    * If <code>false</code>, RDP access is disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanProperties.rdpEnabled has a boolean wire value; preserve the published property contract."
   rdpEnabled?: boolean;
 }
 
@@ -4952,11 +5022,13 @@ model AppServicePlanPatchResourceProperties {
    * If <code>true</code>, apps assigned to this App Service plan can be scaled independently.
    * If <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanPatchResourceProperties.perSiteScaling has a boolean wire value; preserve the published property contract."
   perSiteScaling?: boolean = false;
 
   /**
    * ServerFarm supports ElasticScale. Apps in this plan will scale as if the ServerFarm was ElasticPremium sku
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanPatchResourceProperties.elasticScaleEnabled has a boolean wire value; preserve the published property contract."
   elasticScaleEnabled?: boolean;
 
   /**
@@ -4973,6 +5045,7 @@ model AppServicePlanPatchResourceProperties {
   /**
    * If <code>true</code>, this App Service Plan owns spot instances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanPatchResourceProperties.isSpot has a boolean wire value; preserve the published property contract."
   isSpot?: boolean;
 
   /**
@@ -4996,18 +5069,21 @@ model AppServicePlanPatchResourceProperties {
   /**
    * If Linux app service plan <code>true</code>, <code>false</code> otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanPatchResourceProperties.reserved has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   reserved?: boolean = false;
 
   /**
    * Obsolete: If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanPatchResourceProperties.isXenon has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   isXenon?: boolean = false;
 
   /**
    * If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanPatchResourceProperties.hyperV has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   hyperV?: boolean = false;
 
@@ -5036,6 +5112,7 @@ model AppServicePlanPatchResourceProperties {
    * If <code>true</code>, this App Service Plan will perform availability zone balancing.
    * If <code>false</code>, this App Service Plan will not perform availability zone balancing.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppServicePlanPatchResourceProperties.zoneRedundant has a boolean wire value; preserve the published property contract."
   zoneRedundant?: boolean = false;
 }
 
@@ -5183,6 +5260,7 @@ model VnetInfo {
   /**
    * <code>true</code> if a resync is required; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VnetInfo.resyncRequired has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   resyncRequired?: boolean;
 
@@ -5194,6 +5272,7 @@ model VnetInfo {
   /**
    * Flag that is used to denote if this is VNET injection
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VnetInfo.isSwift has a boolean wire value; preserve the published property contract."
   isSwift?: boolean;
 }
 
@@ -5320,6 +5399,7 @@ model CertificateProperties {
   /**
    * Is the certificate valid?.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CertificateProperties.valid has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   valid?: boolean;
 
@@ -5467,6 +5547,7 @@ model CertificatePatchResourceProperties {
   /**
    * Is the certificate valid?.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CertificatePatchResourceProperties.valid has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   valid?: boolean;
 
@@ -6127,6 +6208,7 @@ model DetectorDefinition {
   /**
    * Flag representing whether detector is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DetectorDefinition.isEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEnabled?: boolean;
 }
@@ -6205,6 +6287,7 @@ model DiagnosticMetricSample {
   /**
    * Whether the values are aggregates across all workers or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DiagnosticMetricSample.isAggregated has a boolean wire value; preserve the published property contract."
   isAggregated?: boolean;
 }
 
@@ -6270,6 +6353,7 @@ model DiagnosticDetectorResponseProperties {
   /**
    * Flag representing Issue was detected.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DiagnosticDetectorResponseProperties.issueDetected has a boolean wire value; preserve the published property contract."
   issueDetected?: boolean;
 
   /**
@@ -6349,6 +6433,7 @@ model KubeEnvironmentProperties {
   /**
    * Only visible within Vnet/Subnet
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubeEnvironmentProperties.internalLoadBalancerEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   internalLoadBalancerEnabled?: boolean;
 
@@ -6525,6 +6610,7 @@ model KubeEnvironmentPatchResourceProperties {
   /**
    * Only visible within Vnet/Subnet
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubeEnvironmentPatchResourceProperties.internalLoadBalancerEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   internalLoadBalancerEnabled?: boolean;
 
@@ -6637,6 +6723,7 @@ model StackMajorVersion {
   /**
    * <code>true</code> if this is the default major version; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StackMajorVersion.isDefault has a boolean wire value; preserve the published property contract."
   isDefault?: boolean;
 
   /**
@@ -6648,21 +6735,25 @@ model StackMajorVersion {
   /**
    * <code>true</code> if this supports Application Insights; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StackMajorVersion.applicationInsights has a boolean wire value; preserve the published property contract."
   applicationInsights?: boolean;
 
   /**
    * <code>true</code> if this stack is in Preview, otherwise <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StackMajorVersion.isPreview has a boolean wire value; preserve the published property contract."
   isPreview?: boolean;
 
   /**
    * <code>true</code> if this stack has been deprecated, otherwise <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StackMajorVersion.isDeprecated has a boolean wire value; preserve the published property contract."
   isDeprecated?: boolean;
 
   /**
    * <code>true</code> if this stack should be hidden for new customers on portal, otherwise <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StackMajorVersion.isHidden has a boolean wire value; preserve the published property contract."
   isHidden?: boolean;
 
   /**
@@ -6701,11 +6792,13 @@ model StackMinorVersion {
   /**
    * <code>true</code> if this is the default minor version; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StackMinorVersion.isDefault has a boolean wire value; preserve the published property contract."
   isDefault?: boolean;
 
   /**
    * <code>true</code> if this supports Remote Debugging, otherwise <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StackMinorVersion.isRemoteDebuggingEnabled has a boolean wire value; preserve the published property contract."
   isRemoteDebuggingEnabled?: boolean;
 }
 
@@ -6839,6 +6932,7 @@ model FunctionAppRuntimeSettings {
   /**
    * <code>true</code> if remote debugging is supported for the stack; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FunctionAppRuntimeSettings.remoteDebuggingSupported has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   remoteDebuggingSupported?: boolean;
 
@@ -6876,18 +6970,21 @@ model FunctionAppRuntimeSettings {
   /**
    * <code>true</code> if the stack is in preview; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FunctionAppRuntimeSettings.isPreview has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPreview?: boolean;
 
   /**
    * <code>true</code> if the stack is deprecated; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FunctionAppRuntimeSettings.isDeprecated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeprecated?: boolean;
 
   /**
    * <code>true</code> if the stack should be hidden; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FunctionAppRuntimeSettings.isHidden has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isHidden?: boolean;
 
@@ -6901,18 +6998,21 @@ model FunctionAppRuntimeSettings {
   /**
    * <code>true</code> if the stack version is auto-updated; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FunctionAppRuntimeSettings.isAutoUpdate has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isAutoUpdate?: boolean;
 
   /**
    * <code>true</code> if the minor version is early-access; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FunctionAppRuntimeSettings.isEarlyAccess has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEarlyAccess?: boolean;
 
   /**
    * <code>true</code> if the minor version the default; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FunctionAppRuntimeSettings.isDefault has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDefault?: boolean;
 }
@@ -6924,12 +7024,14 @@ model AppInsightsWebAppStackSettings {
   /**
    * <code>true</code> if remote Application Insights is supported for the stack; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppInsightsWebAppStackSettings.isSupported has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isSupported?: boolean;
 
   /**
    * <code>true</code> if Application Insights is disabled by default for the stack; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppInsightsWebAppStackSettings.isDefaultOff has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDefaultOff?: boolean;
 }
@@ -6941,6 +7043,7 @@ model GitHubActionWebAppStackSettings {
   /**
    * <code>true</code> if GitHub Actions is supported for the stack; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GitHubActionWebAppStackSettings.isSupported has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isSupported?: boolean;
 
@@ -6958,6 +7061,7 @@ model SiteConfigPropertiesDictionary {
   /**
    * <code>true</code> if use32BitWorkerProcess should be set to true for the stack; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteConfigPropertiesDictionary.use32BitWorkerProcess has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   use32BitWorkerProcess?: boolean;
 
@@ -7122,6 +7226,7 @@ model WebAppRuntimeSettings {
   /**
    * <code>true</code> if remote debugging is supported for the stack; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WebAppRuntimeSettings.remoteDebuggingSupported has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   remoteDebuggingSupported?: boolean;
 
@@ -7140,18 +7245,21 @@ model WebAppRuntimeSettings {
   /**
    * <code>true</code> if the stack is in preview; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WebAppRuntimeSettings.isPreview has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPreview?: boolean;
 
   /**
    * <code>true</code> if the stack is deprecated; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WebAppRuntimeSettings.isDeprecated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeprecated?: boolean;
 
   /**
    * <code>true</code> if the stack should be hidden; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WebAppRuntimeSettings.isHidden has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isHidden?: boolean;
 
@@ -7165,12 +7273,14 @@ model WebAppRuntimeSettings {
   /**
    * <code>true</code> if the stack version is auto-updated; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WebAppRuntimeSettings.isAutoUpdate has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isAutoUpdate?: boolean;
 
   /**
    * <code>true</code> if the minor version is early-access; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WebAppRuntimeSettings.isEarlyAccess has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEarlyAccess?: boolean;
 }
@@ -7194,18 +7304,21 @@ model LinuxJavaContainerSettings {
   /**
    * <code>true</code> if the stack is in preview; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LinuxJavaContainerSettings.isPreview has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPreview?: boolean;
 
   /**
    * <code>true</code> if the stack is deprecated; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LinuxJavaContainerSettings.isDeprecated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeprecated?: boolean;
 
   /**
    * <code>true</code> if the stack should be hidden; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LinuxJavaContainerSettings.isHidden has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isHidden?: boolean;
 
@@ -7219,12 +7332,14 @@ model LinuxJavaContainerSettings {
   /**
    * <code>true</code> if the stack version is auto-updated; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LinuxJavaContainerSettings.isAutoUpdate has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isAutoUpdate?: boolean;
 
   /**
    * <code>true</code> if the minor version is early-access; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LinuxJavaContainerSettings.isEarlyAccess has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEarlyAccess?: boolean;
 }
@@ -7248,18 +7363,21 @@ model WindowsJavaContainerSettings {
   /**
    * <code>true</code> if the stack is in preview; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WindowsJavaContainerSettings.isPreview has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPreview?: boolean;
 
   /**
    * <code>true</code> if the stack is deprecated; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WindowsJavaContainerSettings.isDeprecated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeprecated?: boolean;
 
   /**
    * <code>true</code> if the stack should be hidden; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WindowsJavaContainerSettings.isHidden has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isHidden?: boolean;
 
@@ -7273,12 +7391,14 @@ model WindowsJavaContainerSettings {
   /**
    * <code>true</code> if the stack version is auto-updated; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WindowsJavaContainerSettings.isAutoUpdate has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isAutoUpdate?: boolean;
 
   /**
    * <code>true</code> if the minor version is early-access; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WindowsJavaContainerSettings.isEarlyAccess has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEarlyAccess?: boolean;
 }
@@ -7310,6 +7430,7 @@ model CsmOperationDescription {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CsmOperationDescription.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -7378,8 +7499,10 @@ model MetricSpecification {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   aggregationType?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecification.supportsInstanceLevelAggregation has a boolean wire value; preserve the published property contract."
   supportsInstanceLevelAggregation?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecification.enableRegionalMdmAccount has a boolean wire value; preserve the published property contract."
   enableRegionalMdmAccount?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceMdmAccount?: string;
@@ -7388,8 +7511,10 @@ model MetricSpecification {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metricFilterPattern?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecification.fillGapWithZero has a boolean wire value; preserve the published property contract."
   fillGapWithZero?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecification.isInternal has a boolean wire value; preserve the published property contract."
   isInternal?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -7421,6 +7546,7 @@ model Dimension {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   internalName?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Dimension.toBeExportedForShoebox has a boolean wire value; preserve the published property contract."
   toBeExportedForShoebox?: boolean;
 }
 
@@ -7576,6 +7702,7 @@ model RecommendationProperties {
   /**
    * True if this is associated with a dynamically added rule
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RecommendationProperties.isDynamic has a boolean wire value; preserve the published property contract."
   isDynamic?: boolean;
 
   /**
@@ -7651,6 +7778,7 @@ model RecommendationRuleProperties {
   /**
    * True if this is associated with a dynamically added rule
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RecommendationRuleProperties.isDynamic has a boolean wire value; preserve the published property contract."
   isDynamic?: boolean;
 
   /**
@@ -7688,6 +7816,7 @@ model ResourceHealthMetadataProperties {
   /**
    * Is there a health signal for the resource
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceHealthMetadataProperties.signalAvailability has a boolean wire value; preserve the published property contract."
   signalAvailability?: boolean;
 }
 
@@ -7834,6 +7963,7 @@ model ResourceNameAvailabilityRequest {
   /**
    * Is fully qualified domain name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceNameAvailabilityRequest.isFqdn has a boolean wire value; preserve the published property contract."
   isFqdn?: boolean;
 
   /**
@@ -7849,6 +7979,7 @@ model ResourceNameAvailability {
   /**
    * <code>true</code> indicates name is valid and available. <code>false</code> indicates the name is invalid, unavailable, or both.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceNameAvailability.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**
@@ -8006,18 +8137,21 @@ model AseRegionProperties {
   /**
    * Is region standard.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AseRegionProperties.standard has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   standard?: boolean;
 
   /**
    * Dedicated host enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AseRegionProperties.dedicatedHost has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   dedicatedHost?: boolean;
 
   /**
    * Zone redundant deployment enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AseRegionProperties.zoneRedundant has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   zoneRedundant?: boolean;
 
@@ -8087,6 +8221,7 @@ model DnlResourceNameAvailability {
   /**
    * <code>true</code> indicates name is valid and available. <code>false</code> indicates the name is invalid, unavailable, or both.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DnlResourceNameAvailability.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**
@@ -8139,6 +8274,7 @@ model PremierAddOnOfferProperties {
   /**
    * <code>true</code> if promotion code is required; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PremierAddOnOfferProperties.promoCodeRequired has a boolean wire value; preserve the published property contract."
   promoCodeRequired?: boolean;
 
   /**
@@ -8292,6 +8428,7 @@ model VnetValidationFailureDetailsProperties {
   /**
    * A flag describing whether or not validation failed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VnetValidationFailureDetailsProperties.failed has a boolean wire value; preserve the published property contract."
   failed?: boolean;
 
   /**
@@ -8389,11 +8526,13 @@ model ValidateProperties {
   /**
    * <code>true</code> if App Service plan is for Linux workers; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ValidateProperties.needLinuxWorkers has a boolean wire value; preserve the published property contract."
   needLinuxWorkers?: boolean;
 
   /**
    * <code>true</code> if App Service plan is for Spot instances; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ValidateProperties.isSpot has a boolean wire value; preserve the published property contract."
   isSpot?: boolean;
 
   /**
@@ -8410,6 +8549,7 @@ model ValidateProperties {
   /**
    * <code>true</code> if App Service plan is running as a windows container
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ValidateProperties.isXenon has a boolean wire value; preserve the published property contract."
   isXenon?: boolean;
 
   /**
@@ -8549,6 +8689,7 @@ model StaticSiteBuildProperties {
   /**
    * Skip Github Action workflow generation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StaticSiteBuildProperties.skipGithubActionWorkflowGeneration has a boolean wire value; preserve the published property contract."
   skipGithubActionWorkflowGeneration?: boolean;
 
   /**
@@ -8647,6 +8788,7 @@ model StaticSite {
   /**
    * <code>false</code> if config file is locked for this static web app; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StaticSite.allowConfigFileUpdates has a boolean wire value; preserve the published property contract."
   allowConfigFileUpdates?: boolean;
 
   /**
@@ -8865,6 +9007,7 @@ model StaticSiteTemplateOptions {
   /**
    * Whether or not the newly generated repository is a private repository. Defaults to false (i.e. public).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StaticSiteTemplateOptions.isPrivate has a boolean wire value; preserve the published property contract."
   isPrivate?: boolean;
 }
 
@@ -9543,6 +9686,7 @@ model StaticSiteResetPropertiesARMResourceProperties {
   /**
    * Determines whether the repository should be updated with the new properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StaticSiteResetPropertiesARMResourceProperties.shouldUpdateRepository has a boolean wire value; preserve the published property contract."
   shouldUpdateRepository?: boolean;
 }
 
@@ -9631,11 +9775,13 @@ model SitePatchResourceProperties {
   /**
    * <code>true</code> if the app is enabled; otherwise, <code>false</code>. Setting this value to false disables the app (takes the app offline).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SitePatchResourceProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
    * <code>true</code> if site scoped certificates are enabled; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SitePatchResourceProperties.siteScopedCertificatesEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_03_15)
   siteScopedCertificatesEnabled?: boolean = false;
 
@@ -9666,18 +9812,21 @@ model SitePatchResourceProperties {
   /**
    * <code>true</code> if reserved; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SitePatchResourceProperties.reserved has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   reserved?: boolean = false;
 
   /**
    * Obsolete: Hyper-V sandbox.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SitePatchResourceProperties.isXenon has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   isXenon?: boolean = false;
 
   /**
    * Hyper-V sandbox.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SitePatchResourceProperties.hyperV has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   hyperV?: boolean = false;
 
@@ -9713,6 +9862,7 @@ model SitePatchResourceProperties {
   /**
    * <code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SitePatchResourceProperties.scmSiteAlsoStopped has a boolean wire value; preserve the published property contract."
   scmSiteAlsoStopped?: boolean = false;
 
   /**
@@ -9730,16 +9880,19 @@ model SitePatchResourceProperties {
   /**
    * <code>true</code> to enable client affinity; <code>false</code> to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SitePatchResourceProperties.clientAffinityEnabled has a boolean wire value; preserve the published property contract."
   clientAffinityEnabled?: boolean;
 
   /**
    * <code>true</code> to override client affinity cookie domain with X-Forwarded-Host request header. <code>false</code> to use default domain. Default is <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SitePatchResourceProperties.clientAffinityProxyEnabled has a boolean wire value; preserve the published property contract."
   clientAffinityProxyEnabled?: boolean;
 
   /**
    * <code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SitePatchResourceProperties.clientCertEnabled has a boolean wire value; preserve the published property contract."
   clientCertEnabled?: boolean;
 
   /**
@@ -9758,6 +9911,7 @@ model SitePatchResourceProperties {
   /**
    * <code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\n If <code>true</code>, the app is only accessible via API management process.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SitePatchResourceProperties.hostNamesDisabled has a boolean wire value; preserve the published property contract."
   hostNamesDisabled?: boolean;
 
   /**
@@ -9816,6 +9970,7 @@ model SitePatchResourceProperties {
   /**
    * <code>true</code> if the app is a default container; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SitePatchResourceProperties.isDefaultContainer has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDefaultContainer?: boolean;
 
@@ -9835,6 +9990,7 @@ model SitePatchResourceProperties {
    * HttpsOnly: configures a web site to accept only https requests. Issues redirect for
    * http requests
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SitePatchResourceProperties.httpsOnly has a boolean wire value; preserve the published property contract."
   httpsOnly?: boolean;
 
   /**
@@ -9858,6 +10014,7 @@ model SitePatchResourceProperties {
   /**
    * Checks if Customer provided storage account is required
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SitePatchResourceProperties.storageAccountRequired has a boolean wire value; preserve the published property contract."
   storageAccountRequired?: boolean;
 
   /**
@@ -9891,6 +10048,7 @@ model CustomHostnameAnalysisResultProperties {
   /**
    * <code>true</code> if hostname is already verified; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CustomHostnameAnalysisResultProperties.isHostnameAlreadyVerified has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isHostnameAlreadyVerified?: boolean;
 
@@ -9909,12 +10067,14 @@ model CustomHostnameAnalysisResultProperties {
   /**
    * <code>true</code> if there is a conflict on a scale unit; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CustomHostnameAnalysisResultProperties.hasConflictOnScaleUnit has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasConflictOnScaleUnit?: boolean;
 
   /**
    * <code>true</code> if there is a conflict across subscriptions; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CustomHostnameAnalysisResultProperties.hasConflictAcrossSubscription has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasConflictAcrossSubscription?: boolean;
 
@@ -9963,6 +10123,7 @@ model CsmSlotEntity {
   /**
    * <code>true</code> to preserve Virtual Network to the slot during swap; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CsmSlotEntity.preserveVnet has a boolean wire value; preserve the published property contract."
   preserveVnet: boolean;
 }
 
@@ -9990,6 +10151,7 @@ model BackupRequestProperties {
   /**
    * True if the backup schedule is enabled (must be included in that case), false if the backup schedule should be disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BackupRequestProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -10027,6 +10189,7 @@ model BackupSchedule {
   /**
    * True if the retention policy should always keep at least one backup in the storage account, regardless how old it is; false otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BackupSchedule.keepAtLeastOneBackup has a boolean wire value; preserve the published property contract."
   keepAtLeastOneBackup: boolean = true;
 
   /**
@@ -10139,6 +10302,7 @@ model BackupItemProperties {
   /**
    * True if this backup has been created due to a schedule being triggered.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BackupItemProperties.scheduled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   scheduled?: boolean;
 
@@ -10204,6 +10368,7 @@ model RestoreRequestProperties {
   /**
    * <code>true</code> if the restore operation can overwrite target app; otherwise, <code>false</code>. <code>true</code> is needed if trying to restore over an existing app.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RestoreRequestProperties.overwrite has a boolean wire value; preserve the published property contract."
   overwrite: boolean;
 
   /**
@@ -10220,11 +10385,13 @@ model RestoreRequestProperties {
   /**
    * Changes a logic when restoring an app with custom domains. <code>true</code> to remove custom domains automatically. If <code>false</code>, custom domains are added to \nthe app's object when it is being restored, but that might fail due to conflicts during the operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RestoreRequestProperties.ignoreConflictingHostNames has a boolean wire value; preserve the published property contract."
   ignoreConflictingHostNames?: boolean = false;
 
   /**
    * Ignore the databases and only restore the site content
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RestoreRequestProperties.ignoreDatabases has a boolean wire value; preserve the published property contract."
   ignoreDatabases?: boolean = false;
 
   /**
@@ -10240,6 +10407,7 @@ model RestoreRequestProperties {
   /**
    * <code>true</code> if SiteConfig.ConnectionStrings should be set in new app; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RestoreRequestProperties.adjustConnectionStrings has a boolean wire value; preserve the published property contract."
   adjustConnectionStrings?: boolean;
 
   /**
@@ -10262,6 +10430,7 @@ model CsmPublishingCredentialsPoliciesEntityProperties {
   /**
    * <code>true</code> to allow access to a publishing method; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CsmPublishingCredentialsPoliciesEntityProperties.allow has a boolean wire value; preserve the published property contract."
   allow: boolean;
 }
 
@@ -10289,6 +10458,7 @@ model SiteAuthSettingsProperties {
   /**
    * <code>true</code> if the Authentication / Authorization feature is enabled for the current app; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteAuthSettingsProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -10306,6 +10476,7 @@ model SiteAuthSettingsProperties {
    * <code>true</code> to durably store platform-specific security tokens that are obtained during login flows; otherwise, <code>false</code>.
    *  The default is <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteAuthSettingsProperties.tokenStoreEnabled has a boolean wire value; preserve the published property contract."
   tokenStoreEnabled?: boolean;
 
   /**
@@ -10367,6 +10538,7 @@ model SiteAuthSettingsProperties {
   /**
    * Gets a value indicating whether the issuer should be a valid HTTPS url and be validated as such.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteAuthSettingsProperties.validateIssuer has a boolean wire value; preserve the published property contract."
   validateIssuer?: boolean;
 
   /**
@@ -10578,6 +10750,7 @@ model AuthPlatform {
   /**
    * <code>true</code> if the Authentication / Authorization feature is enabled for the current app; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AuthPlatform.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -10600,6 +10773,7 @@ model GlobalValidation {
   /**
    * <code>true</code> if the authentication flow is required any request is made; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GlobalValidation.requireAuthentication has a boolean wire value; preserve the published property contract."
   requireAuthentication?: boolean;
 
   /**
@@ -10679,6 +10853,7 @@ model AzureActiveDirectory {
   /**
    * <code>false</code> if the Azure Active Directory provider should not be enabled despite the set registration; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureActiveDirectory.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -10701,6 +10876,7 @@ model AzureActiveDirectory {
    * This is an internal flag primarily intended to support the Azure Management Portal. Users should not
    * read or write to this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureActiveDirectory.isAutoProvisioned has a boolean wire value; preserve the published property contract."
   isAutoProvisioned?: boolean;
 }
 
@@ -10762,6 +10938,7 @@ model AzureActiveDirectoryLogin {
    * <code>true</code> if the www-authenticate provider should be omitted from the request; otherwise, <code>false</code>.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureActiveDirectoryLogin.disableWWWAuthenticate has a boolean wire value; preserve the published property contract."
   disableWWWAuthenticate?: boolean;
 }
 
@@ -10837,6 +11014,7 @@ model Facebook {
   /**
    * <code>false</code> if the Facebook provider should not be enabled despite the set registration; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Facebook.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -10887,6 +11065,7 @@ model GitHub {
   /**
    * <code>false</code> if the GitHub provider should not be enabled despite the set registration; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GitHub.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -10922,6 +11101,7 @@ model Google {
   /**
    * <code>false</code> if the Google provider should not be enabled despite the set registration; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Google.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -10957,6 +11137,7 @@ model LegacyMicrosoftAccount {
   /**
    * <code>false</code> if the legacy Microsoft Account provider should not be enabled despite the set registration; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LegacyMicrosoftAccount.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -10982,6 +11163,7 @@ model Twitter {
   /**
    * <code>false</code> if the Twitter provider should not be enabled despite the set registration; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Twitter.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -11016,6 +11198,7 @@ model Apple {
   /**
    * <code>false</code> if the Apple provider should not be enabled despite the set registration; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Apple.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -11051,6 +11234,7 @@ model AzureStaticWebApps {
   /**
    * <code>false</code> if the Azure Static Web Apps provider should not be enabled despite the set registration; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureStaticWebApps.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -11076,6 +11260,7 @@ model CustomOpenIdConnectProvider {
   /**
    * <code>false</code> if the custom Open ID provider provider should not be enabled; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CustomOpenIdConnectProvider.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -11186,6 +11371,7 @@ model Login {
   /**
    * <code>true</code> if the fragments from the request are preserved after the login request is made; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Login.preserveUrlFragmentsForLogins has a boolean wire value; preserve the published property contract."
   preserveUrlFragmentsForLogins?: boolean;
 
   /**
@@ -11224,6 +11410,7 @@ model TokenStore {
    * <code>true</code> to durably store platform-specific security tokens that are obtained during login flows; otherwise, <code>false</code>.
    *  The default is <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TokenStore.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -11285,6 +11472,7 @@ model Nonce {
   /**
    * <code>false</code> if the nonce should not be validated while completing the login flow; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Nonce.validateNonce has a boolean wire value; preserve the published property contract."
   validateNonce?: boolean;
 
   /**
@@ -11300,6 +11488,7 @@ model HttpSettings {
   /**
    * <code>false</code> if the authentication/authorization responses not having the HTTPS scheme are permissible; otherwise, <code>true</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing HttpSettings.requireHttps has a boolean wire value; preserve the published property contract."
   requireHttps?: boolean;
 
   /**
@@ -11551,6 +11740,7 @@ model FileSystemHttpLogsConfig {
   /**
    * True if configuration is enabled, false if it is disabled and null if configuration is not set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FileSystemHttpLogsConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -11574,6 +11764,7 @@ model AzureBlobStorageHttpLogsConfig {
   /**
    * True if configuration is enabled, false if it is disabled and null if configuration is not set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureBlobStorageHttpLogsConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -11584,6 +11775,7 @@ model EnabledConfig {
   /**
    * True if configuration is enabled, false if it is disabled and null if configuration is not set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EnabledConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -11707,6 +11899,7 @@ model ContinuousWebJobProperties {
    * Using SDK?
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContinuousWebJobProperties.using_sdk has a boolean wire value; preserve the published property contract."
   using_sdk?: boolean;
 
   /**
@@ -11816,6 +12009,7 @@ model DeploymentProperties {
   /**
    * True if deployment is currently active, false if completed and null if not started.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeploymentProperties.active has a boolean wire value; preserve the published property contract."
   active?: boolean;
 
   /**
@@ -11858,6 +12052,7 @@ model MSDeployStatusProperties {
   /**
    * Whether the deployment operation has completed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MSDeployStatusProperties.complete has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   complete?: boolean;
 }
@@ -11922,12 +12117,14 @@ model MSDeployCore {
    * will not be deleted, and any App_Data directory in the source will be ignored.
    * Setting is <code>false</code> by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MSDeployCore.skipAppData has a boolean wire value; preserve the published property contract."
   skipAppData?: boolean;
 
   /**
    * Sets the AppOffline rule while the MSDeploy operation executes.
    * Setting is <code>false</code> by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MSDeployCore.appOffline has a boolean wire value; preserve the published property contract."
   appOffline?: boolean;
 }
 
@@ -12065,6 +12262,7 @@ model FunctionEnvelopeProperties {
   /**
    * Gets or sets a value indicating whether the function is disabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FunctionEnvelopeProperties.isDisabled has a boolean wire value; preserve the published property contract."
   isDisabled?: boolean;
 }
 
@@ -12384,12 +12582,14 @@ model ProcessInfoProperties {
    * Is profile running?
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProcessInfoProperties.is_profile_running has a boolean wire value; preserve the published property contract."
   is_profile_running?: boolean;
 
   /**
    * Is the IIS Profile running?
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProcessInfoProperties.is_iis_profile_running has a boolean wire value; preserve the published property contract."
   is_iis_profile_running?: boolean;
 
   /**
@@ -12557,12 +12757,14 @@ model ProcessInfoProperties {
    * Is this the SCM site?
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProcessInfoProperties.is_scm_site has a boolean wire value; preserve the published property contract."
   is_scm_site?: boolean;
 
   /**
    * Is this a Web Job?
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProcessInfoProperties.is_webjob has a boolean wire value; preserve the published property contract."
   is_webjob?: boolean;
 
   /**
@@ -12719,6 +12921,7 @@ model ProcessModuleInfoProperties {
    * Is debug?
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProcessModuleInfoProperties.is_debug has a boolean wire value; preserve the published property contract."
   is_debug?: boolean;
 
   /**
@@ -12812,12 +13015,14 @@ model StorageMigrationOptionsProperties {
   /**
    * <code>true</code>if the app should be switched over; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StorageMigrationOptionsProperties.switchSiteAfterMigration has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Create)
   switchSiteAfterMigration?: boolean = false;
 
   /**
    * <code>true</code> if the app should be read only during copy operation; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StorageMigrationOptionsProperties.blockWriteAccessToSite has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Create)
   blockWriteAccessToSite?: boolean = false;
 }
@@ -12892,6 +13097,7 @@ model MigrateMySqlStatusProperties {
   /**
    * True if the web app has in app MySql enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MigrateMySqlStatusProperties.localMySqlEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   localMySqlEnabled?: boolean;
 }
@@ -12909,6 +13115,7 @@ model SwiftVirtualNetworkProperties {
   /**
    * A flag that specifies if the scale unit this Web App is on supports Swift integration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SwiftVirtualNetworkProperties.swiftSupported has a boolean wire value; preserve the published property contract."
   swiftSupported?: boolean;
 }
 
@@ -13422,6 +13629,7 @@ model PrivateAccessProperties {
   /**
    * Whether private access is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PrivateAccessProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -13514,6 +13722,7 @@ model CsmPublishingProfileOptions {
   /**
    * Include the DisasterRecover endpoint if true
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CsmPublishingProfileOptions.includeDisasterRecoveryEndpoints has a boolean wire value; preserve the published property contract."
   includeDisasterRecoveryEndpoints?: boolean;
 }
 
@@ -13542,6 +13751,7 @@ model DeletedAppRestoreRequestProperties {
   /**
    * If true, deleted site configuration, in addition to content, will be restored.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeletedAppRestoreRequestProperties.recoverConfiguration has a boolean wire value; preserve the published property contract."
   recoverConfiguration?: boolean;
 
   /**
@@ -13554,6 +13764,7 @@ model DeletedAppRestoreRequestProperties {
    * If true, the snapshot is retrieved from DRSecondary endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeletedAppRestoreRequestProperties.useDRSecondary has a boolean wire value; preserve the published property contract."
   useDRSecondary?: boolean;
 }
 
@@ -13588,23 +13799,27 @@ model SnapshotRestoreRequestProperties {
   /**
    * If <code>true</code> the restore operation can overwrite source app; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SnapshotRestoreRequestProperties.overwrite has a boolean wire value; preserve the published property contract."
   overwrite: boolean;
 
   /**
    * If true, site configuration, in addition to content, will be reverted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SnapshotRestoreRequestProperties.recoverConfiguration has a boolean wire value; preserve the published property contract."
   recoverConfiguration?: boolean;
 
   /**
    * If true, custom hostname conflicts will be ignored when recovering to a target web app.
    * This setting is only necessary when RecoverConfiguration is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SnapshotRestoreRequestProperties.ignoreConflictingHostNames has a boolean wire value; preserve the published property contract."
   ignoreConflictingHostNames?: boolean;
 
   /**
    * If true, the snapshot is retrieved from DRSecondary endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SnapshotRestoreRequestProperties.useDRSecondary has a boolean wire value; preserve the published property contract."
   useDRSecondary?: boolean;
 }
 
@@ -13648,6 +13863,7 @@ model SiteContainerProperties {
   /**
    * <code>true</code> if the container is the main site container; <code>false</code> otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteContainerProperties.isMain has a boolean wire value; preserve the published property contract."
   isMain: boolean;
 
   /**
@@ -13699,6 +13915,7 @@ model SiteContainerProperties {
   /**
    * <code>true</code> if all AppSettings and ConnectionStrings have to be passed to the container as environment variables; <code>false</code> otherwise.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteContainerProperties.inheritAppSettingsAndConnectionStrings has a boolean wire value; preserve the published property contract."
   inheritAppSettingsAndConnectionStrings?: boolean;
 
   /**
@@ -13727,6 +13944,7 @@ model VolumeMount {
   /**
    * Boolean to specify if the mount is read only on the container
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeMount.readOnly has a boolean wire value; preserve the published property contract."
   readOnly?: boolean;
 }
 
@@ -13845,6 +14063,7 @@ model SiteExtensionInfoProperties {
    * <code>true</code> if the local version is the latest version; <code>false</code> otherwise.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteExtensionInfoProperties.local_is_latest_version has a boolean wire value; preserve the published property contract."
   local_is_latest_version?: boolean;
 
   /**
@@ -13962,24 +14181,28 @@ model SiteSourceControlProperties {
   /**
    * <code>true</code> to limit to manual integration; <code>false</code> to enable continuous integration (which configures webhooks into online repos like GitHub).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteSourceControlProperties.isManualIntegration has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   isManualIntegration?: boolean;
 
   /**
    * <code>true</code> if this is deployed via GitHub action.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteSourceControlProperties.isGitHubAction has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   isGitHubAction?: boolean;
 
   /**
    * <code>true</code> to enable deployment rollback; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteSourceControlProperties.deploymentRollbackEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   deploymentRollbackEnabled?: boolean;
 
   /**
    * <code>true</code> for a Mercurial repository; <code>false</code> for a Git repository.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SiteSourceControlProperties.isMercurial has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   isMercurial?: boolean;
 
@@ -14006,11 +14229,13 @@ model GitHubActionConfiguration {
   /**
    * This will help determine the workflow configuration to select.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GitHubActionConfiguration.isLinux has a boolean wire value; preserve the published property contract."
   isLinux?: boolean;
 
   /**
    * Workflow option to determine whether the workflow file should be generated and written to the repository.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GitHubActionConfiguration.generateWorkflowFile has a boolean wire value; preserve the published property contract."
   generateWorkflowFile?: boolean;
 }
 
@@ -14119,6 +14344,7 @@ model TriggeredWebJobProperties {
    * Using SDK?
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TriggeredWebJobProperties.using_sdk has a boolean wire value; preserve the published property contract."
   using_sdk?: boolean;
 
   /**
@@ -14130,6 +14356,7 @@ model TriggeredWebJobProperties {
   /**
    * Checks if Customer provided storage account is required
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TriggeredWebJobProperties.storageAccountRequired has a boolean wire value; preserve the published property contract."
   storageAccountRequired?: boolean;
 
   /**
@@ -14270,6 +14497,7 @@ model WebJobProperties {
    * Using SDK?
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WebJobProperties.using_sdk has a boolean wire value; preserve the published property contract."
   using_sdk?: boolean;
 
   /**
@@ -15360,6 +15588,7 @@ model WorkflowTriggerHistoryProperties {
   /**
    * The value indicating whether trigger was fired.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkflowTriggerHistoryProperties.fired has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   fired?: boolean;
 
@@ -15908,6 +16137,7 @@ model Dapr {
   /**
    * Boolean indicating if the Dapr side car is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Dapr.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -16130,6 +16360,7 @@ model AppserviceGithubToken {
   /**
    * True if valid github token received, False otherwise
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AppserviceGithubToken.gotToken has a boolean wire value; preserve the published property contract."
   gotToken?: boolean;
 
   /**
@@ -16176,6 +16407,7 @@ model ErrorPage {
   /**
    * If true, the error page will be shown for all requests with a matching status code, regardless of whether they failed on the App Service FrontEnd load balancer or on the app itself.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ErrorPage.alwaysUse has a boolean wire value; preserve the published property contract."
   alwaysUse?: boolean;
 }
 

@@ -1835,6 +1835,7 @@ model MatchCondition {
   /**
    * Describes if the result of this condition should be negated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MatchCondition.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean;
 
   /**
@@ -2724,6 +2725,7 @@ model RulesEngineMatchCondition {
   /**
    * Describes if this is negate condition or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RulesEngineMatchCondition.negateCondition has a boolean wire value; preserve the published property contract."
   negateCondition?: boolean;
 
   /**
@@ -3309,6 +3311,7 @@ model ValidateCustomDomainOutput {
   /**
    * Indicates whether the custom domain is valid or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ValidateCustomDomainOutput.customDomainValidated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   customDomainValidated?: boolean;
 

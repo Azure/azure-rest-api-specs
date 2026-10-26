@@ -79,10 +79,12 @@ model AutonomousDatabaseBackupProperties {
   @visibility(Lifecycle.Read)
   ocid?: Ocid;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseBackupProperties.isAutomatic has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the backup is user-initiated or automatic.")
   @visibility(Lifecycle.Read)
   isAutomatic?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseBackupProperties.isRestorable has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the backup can be used to restore the associated Autonomous Database.")
   @visibility(Lifecycle.Read)
   isRestorable?: boolean;

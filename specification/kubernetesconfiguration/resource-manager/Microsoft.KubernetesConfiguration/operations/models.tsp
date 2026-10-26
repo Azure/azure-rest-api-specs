@@ -100,6 +100,7 @@ model ResourceProviderOperation {
   /**
    * The flag that indicates whether the operation applies to data plane.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceProviderOperation.isDataAction has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDataAction?: boolean;
 

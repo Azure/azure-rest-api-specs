@@ -112,6 +112,7 @@ model MqttBridgeRemoteBrokerX509Authentication {
 
 @doc("MqttBridge RemoteBrokerConnection TLS details")
 model MqttBridgeRemoteBrokerConnectionTls {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MqttBridgeRemoteBrokerConnectionTls.tlsEnabled has a boolean wire value; preserve the published property contract."
   @doc("Tls Enabled on Remote Broker Connection.")
   tlsEnabled: boolean;
 

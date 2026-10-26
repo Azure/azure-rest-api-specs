@@ -177,6 +177,7 @@ model CreatePersonResult {
 }
 
 alias ReturnRecognitionModelOptions = {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReturnRecognitionModelOptions.returnRecognitionModel has a boolean wire value; preserve the published property contract."
   @query
   @doc("Return 'recognitionModel' or not. The default value is false.")
   returnRecognitionModel?: boolean = false;
@@ -242,6 +243,7 @@ model IdentificationCandidate {
 
 @doc("Verify result.")
 model VerificationResult {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VerificationResult.isIdentical has a boolean wire value; preserve the published property contract."
   @doc("True if the two faces belong to the same person or the face belongs to the person, otherwise false.")
   isIdentical: boolean;
 

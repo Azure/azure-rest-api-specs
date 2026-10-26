@@ -238,6 +238,7 @@ model TargetUpdate {
 
 @doc("Param that indicates if the delete should be forced")
 model ForceDeleteParameter {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ForceDeleteParameter.forceDelete has a boolean wire value; preserve the published property contract."
   @doc("Force delete")
   @query
   forceDelete?: boolean = false;

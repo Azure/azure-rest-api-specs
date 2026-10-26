@@ -306,6 +306,7 @@ model SkuDescription {
   /**
    * Flag to indicate whether the sku should be automatically added during workspace creation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SkuDescription.autoAdd has a boolean wire value; preserve the published property contract."
   autoAdd?: boolean;
 
   /**
@@ -440,6 +441,7 @@ model WorkspaceResourceProperties {
   /**
    * Indicator of enablement of the Quantum workspace Api keys.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceResourceProperties.apiKeyEnabled has a boolean wire value; preserve the published property contract."
   apiKeyEnabled?: boolean;
 
   /**
@@ -556,6 +558,7 @@ model ListKeysResult {
   /**
    * Indicator of enablement of the Quantum workspace Api keys.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ListKeysResult.apiKeyEnabled has a boolean wire value; preserve the published property contract."
   apiKeyEnabled?: boolean;
 
   /**

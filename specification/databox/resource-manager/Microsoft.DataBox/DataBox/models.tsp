@@ -1088,18 +1088,21 @@ model JobProperties {
   /**
    * Describes whether the job is cancellable or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing JobProperties.isCancellable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCancellable?: boolean;
 
   /**
    * Describes whether the job is deletable or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing JobProperties.isDeletable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeletable?: boolean;
 
   /**
    * Describes whether the shipping address is editable or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing JobProperties.isShippingAddressEditable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isShippingAddressEditable?: boolean;
 
@@ -1118,6 +1121,7 @@ model JobProperties {
   /**
    * Is Prepare To Ship Enabled on this job
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing JobProperties.isPrepareToShipEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPrepareToShipEnabled?: boolean;
 
@@ -1170,12 +1174,14 @@ model JobProperties {
   /**
    * Flag to indicate cancellation of scheduled job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing JobProperties.isCancellableWithoutFee has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isCancellableWithoutFee?: boolean;
 
   /**
    * Flag to indicate if all devices associated with the job are lost.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing JobProperties.allDevicesLost has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   allDevicesLost?: boolean;
 }
@@ -1483,6 +1489,7 @@ model NotificationPreference {
   /**
    * Notification is required or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NotificationPreference.sendNotification has a boolean wire value; preserve the published property contract."
   sendNotification: boolean = true;
 }
 
@@ -1543,6 +1550,7 @@ model ShippingAddress {
   /**
    * Flag to indicate if customer has chosen to skip default address validation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ShippingAddress.skipAddressValidation has a boolean wire value; preserve the published property contract."
   skipAddressValidation?: boolean;
 
   /**
@@ -1760,11 +1768,13 @@ model TransferAllDetails {
   /**
    * To indicate if all Azure blobs have to be transferred
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TransferAllDetails.transferAllBlobs has a boolean wire value; preserve the published property contract."
   transferAllBlobs?: boolean;
 
   /**
    * To indicate if all Azure Files have to be transferred
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TransferAllDetails.transferAllFiles has a boolean wire value; preserve the published property contract."
   transferAllFiles?: boolean;
 }
 
@@ -1810,6 +1820,7 @@ model TransportPreferences {
   /**
    * Read only property which indicates whether transport preferences has been updated or not after device is prepared.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TransportPreferences.isUpdated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isUpdated?: boolean;
 }
@@ -1847,6 +1858,7 @@ model ReverseShippingDetails {
    * A flag to indicate whether Reverse Shipping details are updated or not after device has been prepared.
    * Read only field
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReverseShippingDetails.isUpdated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isUpdated?: boolean;
 }
@@ -1981,6 +1993,7 @@ model LastMitigationActionOnJob {
    * Action performed by customer,
    * possibility is that mitigation might happen by customer or service or by ops
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LastMitigationActionOnJob.isPerformedByCustomer has a boolean wire value; preserve the published property contract."
   isPerformedByCustomer?: boolean;
 
   /**
@@ -2729,6 +2742,7 @@ model SkuInformation {
   /**
    * The sku is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SkuInformation.enabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   enabled?: boolean;
 
@@ -3080,6 +3094,7 @@ model CopyProgress {
    * To indicate if enumeration of data is in progress.
    * Until this is true, the TotalBytesToProcess may not be valid.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CopyProgress.isEnumerationInProgress has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEnumerationInProgress?: boolean;
 
@@ -3298,6 +3313,7 @@ model DataBoxCustomerDiskJobDetails extends JobDetails {
   /**
    * Flag to indicate if disk manifest should be backed-up in the Storage Account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataBoxCustomerDiskJobDetails.enableManifestBackup has a boolean wire value; preserve the published property contract."
   enableManifestBackup?: boolean = false;
 
   /**
@@ -3581,6 +3597,7 @@ model GranularCopyProgress {
    * To indicate if enumeration of data is in progress.
    * Until this is true, the TotalBytesToProcess may not be valid.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GranularCopyProgress.isEnumerationInProgress has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isEnumerationInProgress?: boolean;
 
@@ -3668,6 +3685,7 @@ model DataBoxDiskJobSecrets extends JobSecrets {
   /**
    * Whether passkey was provided by user.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataBoxDiskJobSecrets.isPasskeyUserDefined has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPasskeyUserDefined?: boolean;
 
@@ -4266,6 +4284,7 @@ model Operation {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 }
 

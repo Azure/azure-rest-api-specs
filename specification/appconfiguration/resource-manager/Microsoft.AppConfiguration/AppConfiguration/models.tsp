@@ -289,6 +289,7 @@ model ConfigurationStoreProperties {
   /**
    * Disables all authentication methods other than AAD authentication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConfigurationStoreProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean = false;
 
   /**
@@ -304,6 +305,7 @@ model ConfigurationStoreProperties {
   /**
    * Property specifying whether protection against purge is enabled for this configuration store.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConfigurationStoreProperties.enablePurgeProtection has a boolean wire value; preserve the published property contract."
   enablePurgeProtection?: boolean = false;
 
   /**
@@ -527,6 +529,7 @@ model ConfigurationStorePropertiesUpdateParameters {
   /**
    * Disables all authentication methods other than AAD authentication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConfigurationStorePropertiesUpdateParameters.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 
   /**
@@ -537,6 +540,7 @@ model ConfigurationStorePropertiesUpdateParameters {
   /**
    * Property specifying whether protection against purge is enabled for this configuration store.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConfigurationStorePropertiesUpdateParameters.enablePurgeProtection has a boolean wire value; preserve the published property contract."
   enablePurgeProtection?: boolean;
 
   /**
@@ -583,6 +587,7 @@ model NameAvailabilityStatus {
   /**
    * The value indicating whether the resource name is available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NameAvailabilityStatus.nameAvailable has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
@@ -642,6 +647,7 @@ model ApiKey {
   /**
    * Whether this key can only be used for read operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ApiKey.readOnly has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   readOnly?: boolean;
 }
@@ -668,6 +674,7 @@ model OperationDefinition {
   /**
    * Indicates whether the operation is a data action
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OperationDefinition.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -821,6 +828,7 @@ model MetricSpecification {
   /**
    * Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSpecification.fillGapWithZero has a boolean wire value; preserve the published property contract."
   fillGapWithZero?: boolean;
 }
 
@@ -916,6 +924,7 @@ model KeyValueProperties {
    * A value indicating whether the key-value is locked.
    * A locked key-value may not be modified until it is unlocked.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KeyValueProperties.locked has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   locked?: boolean;
 
@@ -967,6 +976,7 @@ model DeletedConfigurationStoreProperties {
   /**
    * Purge protection status of the original configuration store.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeletedConfigurationStoreProperties.purgeProtectionEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   purgeProtectionEnabled?: boolean;
 }

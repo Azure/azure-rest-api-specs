@@ -141,9 +141,11 @@ model MonitoringDataPoint {
   @doc("Timestamp when the client transmits the metrics and documents to Live Metrics.")
   TransmissionTime?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MonitoringDataPoint.IsWebApp has a boolean wire value; preserve the published property contract."
   @doc("True if the current application is an Azure Web App.")
   IsWebApp: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MonitoringDataPoint.PerformanceCollectionSupported has a boolean wire value; preserve the published property contract."
   @doc("True if performance counters collection is supported.")
   PerformanceCollectionSupported: boolean;
 

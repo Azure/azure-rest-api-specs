@@ -2735,6 +2735,7 @@ model DomainProperties {
   /**
    * This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only Microsoft Entra ID token will be used to authenticate if user is allowed to publish to the domain.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DomainProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean = false;
 
   /**
@@ -2746,6 +2747,7 @@ model DomainProperties {
    * flexibility to perform less operations and manage fewer resources by the user. Also, note that in auto-managed creation mode, user is allowed to create the
    * domain topic on demand if needed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DomainProperties.autoCreateTopicWithFirstSubscription has a boolean wire value; preserve the published property contract."
   autoCreateTopicWithFirstSubscription?: boolean = true;
 
   /**
@@ -2757,6 +2759,7 @@ model DomainProperties {
    * control of when the domain topic needs to be deleted, while auto-managed mode provides the flexibility to perform less operations and manage fewer
    * resources by the user.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DomainProperties.autoDeleteTopicWithLastSubscription has a boolean wire value; preserve the published property contract."
   autoDeleteTopicWithLastSubscription?: boolean = true;
 
   /**
@@ -2948,6 +2951,7 @@ model DomainUpdateParameterProperties {
   /**
    * This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only Microsoft Entra ID token will be used to authenticate if user is allowed to publish to the domain.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DomainUpdateParameterProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 
   /**
@@ -2959,6 +2963,7 @@ model DomainUpdateParameterProperties {
    * flexibility to perform less operations and manage fewer resources by the user. Also, note that in auto-managed creation mode, user is allowed to create the
    * domain topic on demand if needed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DomainUpdateParameterProperties.autoCreateTopicWithFirstSubscription has a boolean wire value; preserve the published property contract."
   autoCreateTopicWithFirstSubscription?: boolean;
 
   /**
@@ -2970,6 +2975,7 @@ model DomainUpdateParameterProperties {
    * control of when the domain topic needs to be deleted, while auto-managed mode provides the flexibility to perform less operations and manage fewer
    * resources by the user.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DomainUpdateParameterProperties.autoDeleteTopicWithLastSubscription has a boolean wire value; preserve the published property contract."
   autoDeleteTopicWithLastSubscription?: boolean;
 
   /**
@@ -3451,11 +3457,13 @@ model EventSubscriptionFilter {
    * Specifies if the SubjectBeginsWith and SubjectEndsWith properties of the filter
    * should be compared in a case sensitive manner.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EventSubscriptionFilter.isSubjectCaseSensitive has a boolean wire value; preserve the published property contract."
   isSubjectCaseSensitive?: boolean = false;
 
   /**
    * Allows advanced filters to be evaluated against an array of values instead of expecting a singular value.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EventSubscriptionFilter.enableAdvancedFilteringOnArrays has a boolean wire value; preserve the published property contract."
   enableAdvancedFilteringOnArrays?: boolean;
 
   /**
@@ -3584,6 +3592,7 @@ model NamespaceProperties {
    *     b. For non-Availability Zones enabled regions - The default property value would be false.
    * Once specified, this property cannot be updated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NamespaceProperties.isZoneRedundant has a boolean wire value; preserve the published property contract."
   isZoneRedundant?: boolean;
 
   /**
@@ -3623,6 +3632,7 @@ model AutoScaleConfiguration {
    * Indicates whether auto-scaling is enabled for the namespace. When enabled, the namespace will automatically scale
    * between minimumThroughputUnits and maximumThroughputUnits based on usage patterns.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutoScaleConfiguration.enableAutoScale has a boolean wire value; preserve the published property contract."
   enableAutoScale?: boolean;
 
   /**
@@ -3644,6 +3654,7 @@ model UpdateAutoScaleConfiguration {
    * Indicates whether auto-scaling is enabled for the namespace. When enabled, the namespace will automatically scale
    * between minimumThroughputUnits and maximumThroughputUnits based on usage patterns.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UpdateAutoScaleConfiguration.enableAutoScale has a boolean wire value; preserve the published property contract."
   enableAutoScale?: boolean;
 
   /**
@@ -4243,6 +4254,7 @@ model Operation {
   /**
    * This Boolean is used to determine if the operation is a data plane action or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -4466,6 +4478,7 @@ model PartnerNamespaceProperties {
   /**
    * This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only Microsoft Entra ID token will be used to authenticate if user is allowed to publish to the partner namespace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PartnerNamespaceProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean = false;
 
   /**
@@ -4515,6 +4528,7 @@ model PartnerNamespaceUpdateParameterProperties {
   /**
    * This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only Microsoft Entra ID token will be used to authenticate if user is allowed to publish to the partner namespace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PartnerNamespaceUpdateParameterProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 }
 
@@ -5114,6 +5128,7 @@ model TopicProperties {
   /**
    * This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only Microsoft Entra ID token will be used to authenticate if user is allowed to publish to the topic.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TopicProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean = false;
 
   /**
@@ -5197,6 +5212,7 @@ model TopicUpdateParameterProperties {
   /**
    * This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only Microsoft Entra ID token will be used to authenticate if user is allowed to publish to the topic.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TopicUpdateParameterProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean;
 
   /**
@@ -5259,6 +5275,7 @@ model EventTypeProperties {
   /**
    * IsInDefaultSet flag of the event type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EventTypeProperties.isInDefaultSet has a boolean wire value; preserve the published property contract."
   isInDefaultSet?: boolean;
 }
 
@@ -5366,6 +5383,7 @@ model TopicTypeProperties {
   /**
    * Flag to indicate that a topic type can support both regional or global system topics.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TopicTypeProperties.areRegionalAndGlobalSourcesSupported has a boolean wire value; preserve the published property contract."
   areRegionalAndGlobalSourcesSupported?: boolean;
 
   /**
@@ -5380,6 +5398,7 @@ model TopicTypeAdditionalEnforcedPermission {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   permissionName?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TopicTypeAdditionalEnforcedPermission.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 }
 
@@ -5661,6 +5680,7 @@ model StaticDeliveryAttributeMappingProperties {
   /**
    * Boolean flag to tell if the attribute contains sensitive information .
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StaticDeliveryAttributeMappingProperties.isSecret has a boolean wire value; preserve the published property contract."
   @secret
   isSecret?: boolean = false;
 }
@@ -5836,6 +5856,7 @@ model BoolEqualsFilter extends Filter {
   /**
    * The boolean filter value.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BoolEqualsFilter.value has a boolean wire value; preserve the published property contract."
   value?: boolean;
 
   /**
@@ -6162,6 +6183,7 @@ model BoolEqualsAdvancedFilter extends AdvancedFilter {
   /**
    * The boolean filter value.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BoolEqualsAdvancedFilter.value has a boolean wire value; preserve the published property contract."
   value?: boolean;
 
   /**

@@ -106,6 +106,7 @@ interface Students {
       /**
        * May be used to show deleted items.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.includeDeleted has a boolean wire value; preserve the published property contract."
       @query("includeDeleted")
       includeDeleted?: boolean;
     },

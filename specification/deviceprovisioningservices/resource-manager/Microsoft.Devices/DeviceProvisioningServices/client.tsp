@@ -452,6 +452,7 @@ op CertificateResponseDeleteCustomized(
   certificateRawBytes?: bytes,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CertificateResponseDeleteCustomized.certificateIsVerified has a boolean wire value; preserve the published property contract."
   @query("certificate.isVerified")
   certificateIsVerified?: boolean,
 
@@ -463,6 +464,7 @@ op CertificateResponseDeleteCustomized(
   ...CertificateNameQuery4,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CertificateResponseDeleteCustomized.certificateHasPrivateKey has a boolean wire value; preserve the published property contract."
   @query("certificate.hasPrivateKey")
   certificateHasPrivateKey?: boolean,
 
@@ -510,6 +512,7 @@ op CertificateResponseGenerateVerificationCodeCustomized(
   /**
    * Indicates if the certificate has been verified by owner of the private key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CertificateResponseGenerateVerificationCodeCustomized.certificateIsVerified has a boolean wire value; preserve the published property contract."
   @query("certificate.isVerified")
   certificateIsVerified?: boolean,
 
@@ -525,6 +528,7 @@ op CertificateResponseGenerateVerificationCodeCustomized(
   /**
    * Indicates if the certificate contains private key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CertificateResponseGenerateVerificationCodeCustomized.certificateHasPrivateKey has a boolean wire value; preserve the published property contract."
   @query("certificate.hasPrivateKey")
   certificateHasPrivateKey?: boolean,
 
@@ -577,6 +581,7 @@ op CertificateResponseVerifyCertificateCustomized(
   /**
    * Indicates if the certificate has been verified by owner of the private key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CertificateResponseVerifyCertificateCustomized.certificateIsVerified has a boolean wire value; preserve the published property contract."
   @query("certificate.isVerified")
   certificateIsVerified?: boolean,
 
@@ -592,6 +597,7 @@ op CertificateResponseVerifyCertificateCustomized(
   /**
    * Indicates if the certificate contains private key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CertificateResponseVerifyCertificateCustomized.certificateHasPrivateKey has a boolean wire value; preserve the published property contract."
   @query("certificate.hasPrivateKey")
   certificateHasPrivateKey?: boolean,
 

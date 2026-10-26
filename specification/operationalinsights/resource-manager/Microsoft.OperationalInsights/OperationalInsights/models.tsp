@@ -1100,6 +1100,7 @@ model AvailableServiceTier {
   /**
    * True if the Service Tier is enabled for the workspace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AvailableServiceTier.enabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   enabled?: boolean;
 
@@ -1169,12 +1170,14 @@ model ClusterProperties {
   /**
    * Configures whether cluster will use double encryption. This Property can not be modified after cluster creation. Default value is 'true'
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterProperties.isDoubleEncryptionEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   isDoubleEncryptionEnabled?: boolean;
 
   /**
    * Sets whether the cluster will support availability zones. This can be set as true only in regions where Azure Data Explorer support Availability Zones. This Property can not be modified after cluster creation. Default value is 'true' if region supports Availability Zones.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterProperties.isAvailabilityZonesEnabled has a boolean wire value; preserve the published property contract."
   isAvailabilityZonesEnabled?: boolean;
 
   /**
@@ -1310,11 +1313,13 @@ model ClusterReplicationProperties {
   /**
    * Specifies whether the replication is enabled or not. When true the cluster is replicate to the specified location.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterReplicationProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
    * Should enable AvailabilityZones for the given replicated cluster
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterReplicationProperties.isAvailabilityZonesEnabled has a boolean wire value; preserve the published property contract."
   isAvailabilityZonesEnabled?: boolean;
 
   /**
@@ -1420,6 +1425,7 @@ model DataExportProperties {
   /**
    * Active when enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataExportProperties.enable has a boolean wire value; preserve the published property contract."
   enable?: boolean;
 
   /**
@@ -1476,6 +1482,7 @@ model IntelligencePack {
   /**
    * The enabled boolean for the intelligence pack.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IntelligencePack.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1596,6 +1603,7 @@ model ManagementGroupProperties {
   /**
    * Gets or sets a value indicating whether the management group is a gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagementGroupProperties.isGateway has a boolean wire value; preserve the published property contract."
   isGateway?: boolean;
 
   /**
@@ -2117,16 +2125,19 @@ model SearchSchemaValue {
   /**
    * The boolean that indicates the field is searchable as free text.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SearchSchemaValue.indexed has a boolean wire value; preserve the published property contract."
   indexed: boolean;
 
   /**
    * The boolean that indicates whether or not the field is stored.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SearchSchemaValue.stored has a boolean wire value; preserve the published property contract."
   stored: boolean;
 
   /**
    * The boolean that indicates whether or not the field is a facet.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SearchSchemaValue.facet has a boolean wire value; preserve the published property contract."
   facet: boolean;
 
   /**
@@ -2316,12 +2327,14 @@ model TableProperties {
   /**
    * True - Value originates from workspace retention in days, False - Customer specific.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TableProperties.retentionInDaysAsDefault has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   retentionInDaysAsDefault?: boolean;
 
   /**
    * True - Value originates from retention in days, False - Customer specific.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TableProperties.totalRetentionInDaysAsDefault has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   totalRetentionInDaysAsDefault?: boolean;
 }
@@ -2522,12 +2535,14 @@ model Column {
   /**
    * Is displayed by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Column.isDefaultDisplay has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDefaultDisplay?: boolean;
 
   /**
    * Is column hidden.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Column.isHidden has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isHidden?: boolean;
 }
@@ -2771,6 +2786,7 @@ model WorkspaceProperties {
   /**
    * Indicates whether customer managed storage is mandatory for query management.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.forceCmkForQuery has a boolean wire value; preserve the published property contract."
   forceCmkForQuery?: boolean;
 
   /**
@@ -2931,6 +2947,7 @@ model WorkspaceReplicationProperties {
   /**
    * Specifies whether the replication is enabled or not. When true, workspace configuration and data is replicated to the specified location. If replication is been enabled, location must be provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceReplicationProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3082,6 +3099,7 @@ model SummaryLogsProperties {
   /**
    * Indicates if Summary rule is active. If not, Summary rule execution stops.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SummaryLogsProperties.isActive has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isActive?: boolean;
 
@@ -3248,6 +3266,7 @@ model WorkspaceReplicationPatProperties {
   /**
    * Specifies whether the replication is enabled or not. When true, workspace configuration and data is replicated to the specified location.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceReplicationPatProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**

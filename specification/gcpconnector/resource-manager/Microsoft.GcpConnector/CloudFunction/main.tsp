@@ -247,11 +247,13 @@ model GcpFunctionProperties {
   /**
    * Output only. Reserved for future use.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpFunctionProperties.satisfiesPzs has a boolean wire value; preserve the published property contract."
   satisfiesPzs?: boolean;
 
   /**
    * Output only. Reserved for future use.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpFunctionProperties.satisfiesPzi has a boolean wire value; preserve the published property contract."
   satisfiesPzi?: boolean;
 
   /**
@@ -421,6 +423,7 @@ model ServiceConfig {
   /**
    * Whether 100% of traffic is routed to the latest revision. On CreateFunction and UpdateFunction, when set to true, the revision being deployed will serve 100% of traffic, ignoring any traffic split settings, if any. On GetFunction, true will be returned if the latest revision is serving 100% of traffic.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServiceConfig.allTrafficOnLatestRevision has a boolean wire value; preserve the published property contract."
   allTrafficOnLatestRevision?: boolean;
 
   /**

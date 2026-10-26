@@ -43,6 +43,7 @@ alias WorkspacesDeleteParameters = {
   /**
    * Flag to indicate delete is a purge request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspacesDeleteParameters.forceToPurge has a boolean wire value; preserve the published property contract."
   @query("forceToPurge")
   forceToPurge?: boolean = false;
 };

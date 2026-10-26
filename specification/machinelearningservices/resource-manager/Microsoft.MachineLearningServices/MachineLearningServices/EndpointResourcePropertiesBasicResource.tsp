@@ -22,14 +22,17 @@ alias EndpointResourceListParameters = {
   endpointType?: EndpointType;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EndpointResourceListParameters.includeOnlineEndpoints has a boolean wire value; preserve the published property contract."
   @query("includeOnlineEndpoints")
   includeOnlineEndpoints?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EndpointResourceListParameters.includeServerlessEndpoints has a boolean wire value; preserve the published property contract."
   @query("includeServerlessEndpoints")
   includeServerlessEndpoints?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EndpointResourceListParameters.includeConnections has a boolean wire value; preserve the published property contract."
   @query("includeConnections")
   includeConnections?: boolean = false;
 

@@ -431,6 +431,7 @@ model LongTermBackUpScheduleDetails {
   @doc("Retention period, in days, for backups.")
   retentionPeriodInDays?: RetentionPeriod;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LongTermBackUpScheduleDetails.isDisabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates if the long-term backup schedule should be deleted. The default value is `FALSE`.")
   isDisabled?: boolean;
 }
@@ -520,6 +521,7 @@ model ProfileType {
   @doc("Host format used in connection string.")
   hostFormat: HostFormatType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProfileType.isRegional has a boolean wire value; preserve the published property contract."
   @doc("True for a regional connection string, applicable to cross-region DG only.")
   isRegional?: boolean;
 
@@ -672,10 +674,12 @@ model AutonomousDatabaseUpdateProperties {
   @maxLength(255)
   displayName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseUpdateProperties.isAutoScalingEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates if auto scaling is enabled for the Autonomous Database CPU core count.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   isAutoScalingEnabled?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseUpdateProperties.isAutoScalingForStorageEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates if auto scaling is enabled for the Autonomous Database storage.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   isAutoScalingForStorageEnabled?: boolean;
@@ -686,10 +690,12 @@ model AutonomousDatabaseUpdateProperties {
   @maxLength(255)
   peerDbId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseUpdateProperties.isLocalDataGuardEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the Autonomous Database has local or called in-region Data Guard enabled.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   isLocalDataGuardEnabled?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseUpdateProperties.isMtlsConnectionRequired has a boolean wire value; preserve the published property contract."
   @doc("Specifies if the Autonomous Database requires mTLS connections.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   isMtlsConnectionRequired?: boolean;
@@ -768,10 +774,12 @@ model AutonomousDatabaseCloneProperties
   @visibility(Lifecycle.Create)
   cloneType: CloneType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseCloneProperties.isReconnectCloneEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates if the refreshable clone can be reconnected to its source database.")
   @visibility(Lifecycle.Read)
   isReconnectCloneEnabled?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseCloneProperties.isRefreshableClone has a boolean wire value; preserve the published property contract."
   @doc("Indicates if the Autonomous Database is a refreshable clone.")
   @visibility(Lifecycle.Read)
   isRefreshableClone?: boolean;
@@ -818,6 +826,7 @@ model AutonomousDatabaseCrossRegionDisasterRecoveryProperties
   @visibility(Lifecycle.Create, Lifecycle.Read)
   remoteDisasterRecoveryType: DisasterRecoveryType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseCrossRegionDisasterRecoveryProperties.isReplicateAutomaticBackups has a boolean wire value; preserve the published property contract."
   @doc("If true, 7 days worth of backups are replicated across regions for Cross-Region ADB or Backup-Based DR between Primary and Standby. If false, the backups taken on the Primary are not replicated to the Standby database.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   isReplicateAutomaticBackups?: boolean;
@@ -846,6 +855,7 @@ model AutonomousDatabaseFromBackupTimestampProperties
   @visibility(Lifecycle.Create)
   timestamp?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseFromBackupTimestampProperties.useLatestAvailableBackupTimeStamp has a boolean wire value; preserve the published property contract."
   @doc("Clone from latest available backup timestamp.")
   @visibility(Lifecycle.Create)
   useLatestAvailableBackupTimeStamp?: boolean;
@@ -923,10 +933,12 @@ model AutonomousDatabaseBaseProperties {
   @maxLength(255)
   displayName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseBaseProperties.isAutoScalingEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates if auto scaling is enabled for the Autonomous Database CPU core count.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   isAutoScalingEnabled?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseBaseProperties.isAutoScalingForStorageEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates if auto scaling is enabled for the Autonomous Database storage.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   isAutoScalingForStorageEnabled?: boolean;
@@ -941,10 +953,12 @@ model AutonomousDatabaseBaseProperties {
   @maxLength(255)
   peerDbId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseBaseProperties.isLocalDataGuardEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the Autonomous Database has local or called in-region Data Guard enabled.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   isLocalDataGuardEnabled?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseBaseProperties.isRemoteDataGuardEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the Autonomous Database has Cross Region Data Guard enabled.")
   @visibility(Lifecycle.Read)
   isRemoteDataGuardEnabled?: boolean;
@@ -971,10 +985,12 @@ model AutonomousDatabaseBaseProperties {
   @visibility(Lifecycle.Read)
   failedDataRecoveryInSeconds?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseBaseProperties.isMtlsConnectionRequired has a boolean wire value; preserve the published property contract."
   @doc("Specifies if the Autonomous Database requires mTLS connections.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   isMtlsConnectionRequired?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseBaseProperties.isPreviewVersionWithServiceTermsAccepted has a boolean wire value; preserve the published property contract."
   @doc("Specifies if the Autonomous Database preview version is being provisioned.")
   @visibility(Lifecycle.Create)
   isPreviewVersionWithServiceTermsAccepted?: boolean;
@@ -1093,6 +1109,7 @@ model AutonomousDatabaseBaseProperties {
   @visibility(Lifecycle.Read, Lifecycle.Update)
   longTermBackupSchedule?: LongTermBackUpScheduleDetails;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseBaseProperties.isPreview has a boolean wire value; preserve the published property contract."
   @doc("Indicates if the Autonomous Database version is a preview version.")
   @visibility(Lifecycle.Read)
   isPreview?: boolean;
@@ -1202,6 +1219,7 @@ model AutonomousDatabaseBaseProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   whitelistedIps?: aclString[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutonomousDatabaseBaseProperties.isScheduleAzUpdateToEarliest has a boolean wire value; preserve the published property contract."
   @added(Versions.v20260401_preview)
   @doc("Update AZ at the earliest available opportunity")
   @visibility(Lifecycle.Update)
@@ -1262,6 +1280,7 @@ model GenerateAutonomousDatabaseWalletDetails {
   @doc("The type of wallet to generate.")
   generateType?: GenerateType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GenerateAutonomousDatabaseWalletDetails.isRegional has a boolean wire value; preserve the published property contract."
   @doc("True when requesting regional connection strings in PDB connect info, applicable to cross-region DG only.")
   isRegional?: boolean;
 
@@ -1285,9 +1304,11 @@ model DisasterRecoveryConfigurationDetails {
   @doc("Time and date stored as an RFC 3339 formatted timestamp string. For example, 2022-01-01T12:00:00.000Z would set a limit for the snapshot standby to be converted back to a cross-region standby database.")
   timeSnapshotStandbyEnabledTill?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DisasterRecoveryConfigurationDetails.isSnapshotStandby has a boolean wire value; preserve the published property contract."
   @doc("Indicates if user wants to convert to a snapshot standby. For example, true would set a standby database to snapshot standby database. False would set a snapshot standby database back to regular standby database.")
   isSnapshotStandby?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DisasterRecoveryConfigurationDetails.isReplicateAutomaticBackups has a boolean wire value; preserve the published property contract."
   @doc("If true, 7 days worth of backups are replicated across regions for Cross-Region ADB or Backup-Based DR between Primary and Standby. If false, the backups taken on the Primary are not replicated to the Standby database.")
   isReplicateAutomaticBackups?: boolean;
 }

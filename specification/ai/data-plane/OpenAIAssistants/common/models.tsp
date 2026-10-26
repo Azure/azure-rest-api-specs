@@ -64,6 +64,7 @@ model OpenAIPageableListOf<T> {
   @doc("The last ID represented in this list.")
   lastId: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OpenAIPageableListOf.hasMore has a boolean wire value; preserve the published property contract."
   @encodedName("application/json", "has_more")
   @doc("A value indicating whether there are additional values available not captured in this list.")
   hasMore: boolean;
@@ -73,6 +74,7 @@ alias DeletionStatus = {
   @doc("The ID of the resource specified for deletion.")
   id: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeletionStatus.deleted has a boolean wire value; preserve the published property contract."
   @doc("A value indicating whether deletion was successful.")
   deleted: boolean;
 };
@@ -188,6 +190,7 @@ model AssistantsApiResponseFormatJsonSchema
     /**
      * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the Structured Outputs guide.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AssistantsApiResponseFormatJsonSchema.strict has a boolean wire value; preserve the published property contract."
     strict?: boolean;
   };
 }

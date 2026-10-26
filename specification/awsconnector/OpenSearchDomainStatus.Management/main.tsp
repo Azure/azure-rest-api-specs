@@ -90,9 +90,11 @@ model AwsOpenSearchDomainStatusProperties {
   @doc("<p>Key-value pairs to configure Amazon Cognito authentication for OpenSearch Dashboards.</p>")
   cognitoOptions?: CognitoOptions;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsOpenSearchDomainStatusProperties.created has a boolean wire value; preserve the published property contract."
   @doc("<p>Creation status of an OpenSearch Service domain. True if domain creation is complete. False if domain creation is still in progress.</p>")
   created?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsOpenSearchDomainStatusProperties.deleted has a boolean wire value; preserve the published property contract."
   @doc("<p>Deletion status of an OpenSearch Service domain. True if domain deletion is complete. False if domain deletion is still in progress. Once deletion is complete, the status of the domain is no longer returned.</p>")
   deleted?: boolean;
 
@@ -142,6 +144,7 @@ model AwsOpenSearchDomainStatusProperties {
   @doc("<p>Options that specify a custom 10-hour window during which OpenSearch Service can perform configuration changes on the domain.</p>")
   offPeakWindowOptions?: OffPeakWindowOptions;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsOpenSearchDomainStatusProperties.processing has a boolean wire value; preserve the published property contract."
   @doc("<p>The status of the domain configuration. True if OpenSearch Service is processing configuration changes. False if the configuration is active.</p>")
   processing?: boolean;
 
@@ -154,6 +157,7 @@ model AwsOpenSearchDomainStatusProperties {
   @doc("<p>Service software update options for the domain.</p>")
   softwareUpdateOptions?: SoftwareUpdateOptions;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsOpenSearchDomainStatusProperties.upgradeProcessing has a boolean wire value; preserve the published property contract."
   @doc("<p>The status of a domain version upgrade to a new version of OpenSearch or Elasticsearch. True if OpenSearch Service is in the process of a version upgrade. False if the configuration is active.</p>")
   upgradeProcessing?: boolean;
 
@@ -206,12 +210,15 @@ model AdvancedSecurityOptions {
   @doc("<p>Date and time when the migration period will be disabled. Only necessary when <a href='https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-enabling-existing'>enabling fine-grained access control on an existing domain</a>.</p>")
   anonymousAuthDisableDate?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AdvancedSecurityOptions.anonymousAuthEnabled has a boolean wire value; preserve the published property contract."
   @doc("<p>True if a 30-day migration period is enabled, during which administrators can create role mappings. Only necessary when <a href='https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-enabling-existing'>enabling fine-grained access control on an existing domain</a>.</p>")
   anonymousAuthEnabled?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AdvancedSecurityOptions.enabled has a boolean wire value; preserve the published property contract."
   @doc("<p>True if fine-grained access control is enabled.</p>")
   enabled?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AdvancedSecurityOptions.internalUserDatabaseEnabled has a boolean wire value; preserve the published property contract."
   @doc("<p>True if the internal user database is enabled.</p>")
   internalUserDatabaseEnabled?: boolean;
 
@@ -252,6 +259,7 @@ model AutoTuneOptionsOutput {
   @doc("<p>The current state of Auto-Tune on the domain.</p>")
   state?: AutoTuneStateEnumValue;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutoTuneOptionsOutput.useOffPeakWindow has a boolean wire value; preserve the published property contract."
   @doc("<p>Whether the domain's off-peak window will be used to deploy Auto-Tune changes rather than a maintenance schedule.</p>")
   useOffPeakWindow?: boolean;
 }
@@ -374,6 +382,7 @@ model ClusterConfig {
   @doc("<p>Number of dedicated master nodes in the cluster. This number must be greater than 2 and not 4, otherwise you receive a validation exception.</p>")
   dedicatedMasterCount?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterConfig.dedicatedMasterEnabled has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether dedicated master nodes are enabled for the cluster.<code>True</code> if the cluster will use a dedicated master node.<code>False</code> if the cluster will not.</p>")
   dedicatedMasterEnabled?: boolean;
 
@@ -386,12 +395,14 @@ model ClusterConfig {
   @doc("<p>Instance type of data nodes in the cluster.</p>")
   instanceType?: OpenSearchPartitionInstanceTypeEnumValue;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterConfig.multiAZWithStandbyEnabled has a boolean wire value; preserve the published property contract."
   @doc("<p>A boolean that indicates whether a multi-AZ domain is turned on with a standby AZ. For more information, see <a href='https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html'>Configuring a multi-AZ domain in Amazon OpenSearch Service</a>. </p>")
   multiAZWithStandbyEnabled?: boolean;
 
   @doc("<p>The number of warm nodes in the cluster.</p>")
   warmCount?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterConfig.warmEnabled has a boolean wire value; preserve the published property contract."
   @doc("<p>Whether to enable warm storage for the cluster.</p>")
   warmEnabled?: boolean;
 
@@ -401,6 +412,7 @@ model ClusterConfig {
   @doc("<p>Container for zone awareness configuration options. Only required if <code>ZoneAwarenessEnabled</code> is <code>true</code>.</p>")
   zoneAwarenessConfig?: ZoneAwarenessConfig;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterConfig.zoneAwarenessEnabled has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether multiple Availability Zones are enabled. For more information, see <a href='https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html'>Configuring a multi-AZ domain in Amazon OpenSearch Service</a>.</p>")
   zoneAwarenessEnabled?: boolean;
 }
@@ -456,6 +468,7 @@ model OpenSearchWarmPartitionInstanceTypeEnumValue {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CognitoOptions")
 model CognitoOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CognitoOptions.enabled has a boolean wire value; preserve the published property contract."
   @doc("<p>Whether to enable or disable Amazon Cognito authentication for OpenSearch Dashboards.</p>")
   enabled?: boolean;
 
@@ -805,9 +818,11 @@ model DomainEndpointOptions {
   @doc("<p>The ARN for your security certificate, managed in Amazon Web Services Certificate Manager (ACM).</p>")
   customEndpointCertificateArn?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DomainEndpointOptions.customEndpointEnabled has a boolean wire value; preserve the published property contract."
   @doc("<p>Whether to enable a custom endpoint for the domain.</p>")
   customEndpointEnabled?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DomainEndpointOptions.enforceHTTPS has a boolean wire value; preserve the published property contract."
   @doc("<p>True to require that all traffic to the domain arrive over HTTPS.</p>")
   enforceHTTPS?: boolean;
 
@@ -845,6 +860,7 @@ model TLSSecurityPolicyEnumValue {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EBSOptions")
 model EBSOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EBSOptions.ebsEnabled has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether EBS volumes are attached to data nodes in an OpenSearch Service domain.</p>")
   ebsEnabled?: boolean;
 
@@ -894,6 +910,7 @@ model VolumeTypeEnumValue {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EncryptionAtRestOptions")
 model EncryptionAtRestOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EncryptionAtRestOptions.enabled has a boolean wire value; preserve the published property contract."
   @doc("<p>True to enable encryption at rest.</p>")
   enabled?: boolean;
 
@@ -910,6 +927,7 @@ model LogPublishingOption {
   @doc("<p>The Amazon Resource Name (ARN) of the CloudWatch Logs group to publish logs to.</p>")
   cloudWatchLogsLogGroupArn?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LogPublishingOption.enabled has a boolean wire value; preserve the published property contract."
   @doc("<p>Whether the log should be published.</p>")
   enabled?: boolean;
 }
@@ -960,6 +978,7 @@ model PropertyValueTypeEnumValue {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of NodeToNodeEncryptionOptions")
 model NodeToNodeEncryptionOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeToNodeEncryptionOptions.enabled has a boolean wire value; preserve the published property contract."
   @doc("<p>True to enable node-to-node encryption.</p>")
   enabled?: boolean;
 }
@@ -970,6 +989,7 @@ model NodeToNodeEncryptionOptions {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OffPeakWindowOptions")
 model OffPeakWindowOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OffPeakWindowOptions.enabled has a boolean wire value; preserve the published property contract."
   @doc("<p>Whether to enable an off-peak window.</p> <p>This option is only available when modifying a domain created prior to February 16, 2023, not when creating a new domain. All domains created after this date have the off-peak window enabled by default. You can't disable the off-peak window after it's enabled for a domain.</p>")
   enabled?: boolean;
 
@@ -986,6 +1006,7 @@ model ServiceSoftwareOptions {
   @doc("<p>The timestamp, in Epoch time, until which you can manually request a service software update. After this date, we automatically update your service software.</p>")
   automatedUpdateDate?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServiceSoftwareOptions.cancellable has a boolean wire value; preserve the published property contract."
   @doc("<p> True if you're able to cancel your service software version update. False if you can't cancel your service software update.</p>")
   cancellable?: boolean;
 
@@ -998,9 +1019,11 @@ model ServiceSoftwareOptions {
   @doc("<p>The new service software version, if one is available.</p>")
   newVersion?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServiceSoftwareOptions.optionalDeployment has a boolean wire value; preserve the published property contract."
   @doc("<p>True if a service software is never automatically updated. False if a service software is automatically updated after the automated update date.</p>")
   optionalDeployment?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServiceSoftwareOptions.updateAvailable has a boolean wire value; preserve the published property contract."
   @doc("<p>True if you're able to update your service software version. False if you can't update your service software version.</p>")
   updateAvailable?: boolean;
 
@@ -1054,6 +1077,7 @@ model SnapshotOptions {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SoftwareUpdateOptions")
 model SoftwareUpdateOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SoftwareUpdateOptions.autoSoftwareUpdateEnabled has a boolean wire value; preserve the published property contract."
   @doc("<p>Whether automatic service software updates are enabled for the domain.</p>")
   autoSoftwareUpdateEnabled?: boolean;
 }
@@ -1083,6 +1107,7 @@ model VPCDerivedInfo {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SAMLOptionsOutput")
 model SAMLOptionsOutput {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SAMLOptionsOutput.enabled has a boolean wire value; preserve the published property contract."
   @doc("<p>True if SAML is enabled.</p>")
   enabled?: boolean;
 
@@ -1107,6 +1132,7 @@ model SAMLOptionsOutput {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ColdStorageOptions")
 model ColdStorageOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ColdStorageOptions.enabled has a boolean wire value; preserve the published property contract."
   @doc("<p>Whether to enable or disable cold storage on the domain. You must enable UltraWarm storage to enable cold storage.</p>")
   enabled?: boolean;
 }

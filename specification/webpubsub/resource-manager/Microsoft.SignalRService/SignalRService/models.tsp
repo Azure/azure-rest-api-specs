@@ -246,6 +246,7 @@ model Operation {
   /**
    * If the operation is a data action. (for data plane rbac)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -387,6 +388,7 @@ model Dimension {
   /**
    * A Boolean flag indicating whether this dimension should be included for the shoebox export scenario.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Dimension.toBeExportedForShoebox has a boolean wire value; preserve the published property contract."
   toBeExportedForShoebox?: boolean;
 }
 
@@ -427,6 +429,7 @@ model NameAvailability {
   /**
    * Indicates whether the name is available or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NameAvailability.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable?: boolean;
 
   /**
@@ -641,6 +644,7 @@ model WebPubSubProperties {
    * Enable or disable local auth with AccessKey
    * When set as true, connection with AccessKey=xxx won't work.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WebPubSubProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean = false;
 
   /**
@@ -648,6 +652,7 @@ model WebPubSubProperties {
    * Enable or disable aad auth
    * When set as true, connection with AuthType=aad won't work.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WebPubSubProperties.disableAadAuth has a boolean wire value; preserve the published property contract."
   disableAadAuth?: boolean = false;
 
   /**
@@ -772,6 +777,7 @@ model WebPubSubTlsSettings {
   /**
    * Request client certificate during TLS handshake if enabled. Not supported for free tier. Any input will be ignored for free tier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WebPubSubTlsSettings.clientCertEnabled has a boolean wire value; preserve the published property contract."
   clientCertEnabled?: boolean = false;
 }
 

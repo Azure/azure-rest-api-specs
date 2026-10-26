@@ -100,6 +100,7 @@ interface PipelineResources {
       /**
        * Recovery mode flag. If recovery mode is set to true, the specified referenced pipeline run and the new run will be grouped under the same groupId.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing createRun.isRecovery has a boolean wire value; preserve the published property contract."
       @query("isRecovery")
       isRecovery?: boolean;
 
@@ -112,6 +113,7 @@ interface PipelineResources {
       /**
        * In recovery mode, if set to true, the rerun will start from failed activities. The property will be used only if startActivityName is not specified.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing createRun.startFromFailure has a boolean wire value; preserve the published property contract."
       @query("startFromFailure")
       startFromFailure?: boolean;
     },

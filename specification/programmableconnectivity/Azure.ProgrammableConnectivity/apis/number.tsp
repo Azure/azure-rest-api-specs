@@ -82,6 +82,7 @@ model NumberVerificationWithCodeContent {
 
 @doc("Response verifying number of device")
 model NumberVerificationResult {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NumberVerificationResult.verificationResult has a boolean wire value; preserve the published property contract."
   @doc("True if number if the phone number matches the device, False otherwise")
   verificationResult: boolean;
 }

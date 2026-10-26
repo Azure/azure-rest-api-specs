@@ -29,6 +29,7 @@ model ApiDeployment {
   @doc("The custom metadata defined for API deployment entities.")
   customProperties?: {};
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ApiDeployment.recommended has a boolean wire value; preserve the published property contract."
   @doc("Indicates if this is currently recommended deployment.")
   recommended?: boolean;
 }

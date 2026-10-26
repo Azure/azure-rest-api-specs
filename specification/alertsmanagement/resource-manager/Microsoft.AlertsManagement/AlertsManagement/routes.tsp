@@ -51,6 +51,7 @@ interface AlertsOperationGroup {
       /**
        * Include count of the SmartGroups as part of the summary. Default value is 'false'.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getSummary.includeSmartGroupsCount has a boolean wire value; preserve the published property contract."
       @query("includeSmartGroupsCount")
       includeSmartGroupsCount?: boolean;
 

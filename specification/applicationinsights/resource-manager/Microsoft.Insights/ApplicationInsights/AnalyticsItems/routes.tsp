@@ -49,6 +49,7 @@ interface AnalyticsItemsOperationGroup {
     /**
      * Flag indicating whether or not to return the content of each applicable item. If false, only return the item information.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.includeContent has a boolean wire value; preserve the published property contract."
     @query("includeContent")
     includeContent?: boolean,
   ): ArmResponse<ApplicationInsightsComponentAnalyticsItem[]>;
@@ -112,6 +113,7 @@ interface AnalyticsItemsOperationGroup {
     /**
      * Flag indicating whether or not to force save an item. This allows overriding an item if it already exists.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing put.overrideItem has a boolean wire value; preserve the published property contract."
     @query("overrideItem")
     overrideItem?: boolean,
 

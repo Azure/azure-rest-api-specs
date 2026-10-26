@@ -528,6 +528,7 @@ model WorkspaceProperties {
   /**
    * Indicates whether unity catalog enabled for the workspace or not. Set as true in Serverless ComputeMode workspace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.isUcEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isUcEnabled?: boolean;
 
@@ -658,6 +659,7 @@ model WorkspaceNoPublicIPBooleanParameter {
   /**
    * The value which should be used for this field.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceNoPublicIPBooleanParameter.value has a boolean wire value; preserve the published property contract."
   value: boolean;
 }
 
@@ -673,6 +675,7 @@ model WorkspaceCustomBooleanParameter {
   /**
    * The value which should be used for this field.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceCustomBooleanParameter.value has a boolean wire value; preserve the published property contract."
   value: boolean;
 }
 
@@ -883,6 +886,7 @@ model ManagedDiskEncryption {
   /**
    * Indicate whether the latest key version should be automatically used for Managed Disk Encryption.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedDiskEncryption.rotationToLatestKeyVersionEnabled has a boolean wire value; preserve the published property contract."
   rotationToLatestKeyVersionEnabled?: boolean;
 }
 
@@ -1261,21 +1265,25 @@ model VirtualNetworkPeeringPropertiesFormat {
   /**
    * Whether the VMs in the local virtual network space would be able to access the VMs in remote virtual network space.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualNetworkPeeringPropertiesFormat.allowVirtualNetworkAccess has a boolean wire value; preserve the published property contract."
   allowVirtualNetworkAccess?: boolean;
 
   /**
    * Whether the forwarded traffic from the VMs in the local virtual network will be allowed/disallowed in remote virtual network.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualNetworkPeeringPropertiesFormat.allowForwardedTraffic has a boolean wire value; preserve the published property contract."
   allowForwardedTraffic?: boolean;
 
   /**
    * If gateway links can be used in remote virtual networking to link to this virtual network.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualNetworkPeeringPropertiesFormat.allowGatewayTransit has a boolean wire value; preserve the published property contract."
   allowGatewayTransit?: boolean;
 
   /**
    * If remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualNetworkPeeringPropertiesFormat.useRemoteGateways has a boolean wire value; preserve the published property contract."
   useRemoteGateways?: boolean;
 
   /**

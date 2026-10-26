@@ -188,6 +188,7 @@ model VirtualNetworkLinkProperties {
   /**
    * Is auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled?
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualNetworkLinkProperties.registrationEnabled has a boolean wire value; preserve the published property contract."
   registrationEnabled?: boolean;
 
   /**
@@ -243,6 +244,7 @@ model RecordSetProperties {
   /**
    * Is the record set auto-registered in the Private DNS zone through a virtual network link?
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RecordSetProperties.isAutoRegistered has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isAutoRegistered?: boolean;
 

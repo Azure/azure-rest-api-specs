@@ -97,6 +97,7 @@ model DefenderForStorageSettingProperties {
   /**
    * Indicates whether Defender for Storage is enabled on this storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DefenderForStorageSettingProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
@@ -112,6 +113,7 @@ model DefenderForStorageSettingProperties {
   /**
    * Indicates whether the settings defined for this storage account should override the settings defined for the subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DefenderForStorageSettingProperties.overrideSubscriptionLevelSettings has a boolean wire value; preserve the published property contract."
   overrideSubscriptionLevelSettings?: boolean;
 
   /**
@@ -180,6 +182,7 @@ model OnUploadProperties {
   /**
    * Indicates whether On Upload malware scanning should be enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OnUploadProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**
@@ -228,6 +231,7 @@ model SensitiveDataDiscoveryProperties {
   /**
    * Indicates whether Sensitive Data Discovery should be enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SensitiveDataDiscoveryProperties.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /**

@@ -152,6 +152,7 @@ interface Customers {
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByBillingProfile.count has a boolean wire value; preserve the published property contract."
       @query("count")
       count?: boolean;
 
@@ -234,6 +235,7 @@ interface Customers {
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing billingRequestsListByCustomer.count has a boolean wire value; preserve the published property contract."
       @query("count")
       count?: boolean;
 
@@ -371,6 +373,7 @@ interface Customers {
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing transactionsListByCustomer.count has a boolean wire value; preserve the published property contract."
       @query("count")
       count?: boolean;
 
@@ -490,6 +493,7 @@ interface CustomerOperationGroup {
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByBillingAccount.count has a boolean wire value; preserve the published property contract."
       @query("count")
       count?: boolean;
 
@@ -575,6 +579,7 @@ interface CustomerOperationGroup {
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByCustomer.count has a boolean wire value; preserve the published property contract."
       @query("count")
       count?: boolean;
 
@@ -591,6 +596,7 @@ alias BillingRoleAssignmentsResolveByCustomerParameters = {
   /**
    * Resolves the scope display name for each of the role assignments.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingRoleAssignmentsResolveByCustomerParameters.resolveScopeDisplayNames has a boolean wire value; preserve the published property contract."
   @query("resolveScopeDisplayNames")
   resolveScopeDisplayNames?: boolean = false;
 
@@ -605,6 +611,7 @@ alias BillingSubscriptionsListByCustomerParameters = {
   /**
    * Can be used to get deleted billing subscriptions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingSubscriptionsListByCustomerParameters.includeDeleted has a boolean wire value; preserve the published property contract."
   @query("includeDeleted")
   includeDeleted?: boolean = false;
 
@@ -641,6 +648,7 @@ alias BillingSubscriptionsListByCustomerParameters = {
   /**
    * The count query option allows clients to request a count of the matching resources included with the resources in the response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingSubscriptionsListByCustomerParameters.count has a boolean wire value; preserve the published property contract."
   @query("count")
   count?: boolean;
 
@@ -655,6 +663,7 @@ alias BillingSubscriptionsListByCustomerAtBillingAccountParameters = {
   /**
    * Can be used to get deleted billing subscriptions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingSubscriptionsListByCustomerAtBillingAccountParameters.includeDeleted has a boolean wire value; preserve the published property contract."
   @query("includeDeleted")
   includeDeleted?: boolean = false;
 
@@ -691,6 +700,7 @@ alias BillingSubscriptionsListByCustomerAtBillingAccountParameters = {
   /**
    * The count query option allows clients to request a count of the matching resources included with the resources in the response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingSubscriptionsListByCustomerAtBillingAccountParameters.count has a boolean wire value; preserve the published property contract."
   @query("count")
   count?: boolean;
 

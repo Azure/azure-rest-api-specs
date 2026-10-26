@@ -1304,11 +1304,13 @@ model Persistence {
   /**
    * Sets whether AOF is enabled. Note that at most one of AOF or RDB persistence may be enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Persistence.aofEnabled has a boolean wire value; preserve the published property contract."
   aofEnabled?: boolean;
 
   /**
    * Sets whether RDB is enabled. Note that at most one of AOF or RDB persistence may be enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Persistence.rdbEnabled has a boolean wire value; preserve the published property contract."
   rdbEnabled?: boolean;
 
   /**
@@ -1889,11 +1891,13 @@ model AzureCacheForRedisMigrationProperties extends MigrationProperties {
   /**
    * Sets whether the DNS is switched automatically after the data is transferred from the source cache to the target cache. This property must be true during the preview.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureCacheForRedisMigrationProperties.switchDns has a boolean wire value; preserve the published property contract."
   switchDns: boolean;
 
   /**
    * Sets whether the data is migrated from source to target or not. This property must be true during the preview.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureCacheForRedisMigrationProperties.skipDataMigrationPreview has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_09_01)
   @renamedFrom(Versions.v2026_09_01, "skipDataMigration")
   skipDataMigrationPreview: boolean;
@@ -1901,12 +1905,14 @@ model AzureCacheForRedisMigrationProperties extends MigrationProperties {
   /**
    * Sets whether the data is migrated from source to target or not. Set this property to true to skip data migration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureCacheForRedisMigrationProperties.skipDataMigration has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_09_01)
   skipDataMigration: boolean;
 
   /**
    * Sets whether to ignore warnings when performing validation of the migration request. If this property is true, warning-level disparities between the source and target resources will be ignored, and the request will only fail validation if there are error-level disparities. The default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AzureCacheForRedisMigrationProperties.forceMigrate has a boolean wire value; preserve the published property contract."
   forceMigrate?: boolean;
 
   /**
@@ -1931,11 +1937,13 @@ model MigrationValidationRequest {
   /**
    * Sets whether the data is migrated from source to target or not. The default value is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MigrationValidationRequest.skipDataMigration has a boolean wire value; preserve the published property contract."
   skipDataMigration?: boolean;
 
   /**
    * Sets whether to ignore warnings when validating if the source cache can be migrated to the target cache. If this property is true, the isValid property in the response will ignore warning-level disparities between the source and target resource. The default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MigrationValidationRequest.forceMigrate has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2026_09_01)
   forceMigrate?: boolean;
 }
@@ -1947,6 +1955,7 @@ model MigrationValidationResponse {
   /**
    * Indicates whether the migration validation passed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MigrationValidationResponse.isValid has a boolean wire value; preserve the published property contract."
   isValid: boolean;
 
   /**

@@ -304,6 +304,7 @@ model BatchIMetricV2 {
   values?: IMetricV2[];
 
   /** Whether to report errors. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BatchIMetricV2.reportErrors has a boolean wire value; preserve the published property contract."
   reportErrors?: boolean;
 }
 
@@ -390,6 +391,7 @@ model CreateRun {
   options?: RunOptions;
 
   /** A virtual run can set an active child run that will override the virtual run status. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CreateRun.isVirtual has a boolean wire value; preserve the published property contract."
   isVirtual?: boolean;
 
   /** The display name of the run. */
@@ -405,6 +407,7 @@ model CreateRun {
   description?: string;
 
   /** Whether the run is hidden. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CreateRun.hidden has a boolean wire value; preserve the published property contract."
   hidden?: boolean;
 
   /** The run type. */
@@ -474,6 +477,7 @@ model CreateRun {
   compute?: Compute;
 
   /** Whether to retain for lifetime of workspace. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CreateRun.retainForLifetimeOfWorkspace has a boolean wire value; preserve the published property contract."
   retainForLifetimeOfWorkspace?: boolean;
 
   /** The queueing information. */
@@ -551,6 +555,7 @@ model DeleteConfiguration {
   workspaceId?: string;
 
   /** Whether deletion is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeleteConfiguration.isEnabled has a boolean wire value; preserve the published property contract."
   isEnabled?: boolean;
 
   /** The cutoff days. */
@@ -623,6 +628,7 @@ model EndpointSetting {
   errorMessage?: string;
 
   /** Whether the endpoint is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EndpointSetting.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /** Additional properties. */
@@ -694,6 +700,7 @@ model Experiment {
   archivedTime?: utcDateTime;
 
   /** Whether to retain for lifetime of workspace. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Experiment.retainForLifetimeOfWorkspace has a boolean wire value; preserve the published property contract."
   retainForLifetimeOfWorkspace?: boolean;
 
   /** The artifact location. */
@@ -725,12 +732,15 @@ model GetRunDataRequest {
   runId?: string;
 
   /** Whether to select run metadata. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GetRunDataRequest.selectRunMetadata has a boolean wire value; preserve the published property contract."
   selectRunMetadata?: boolean;
 
   /** Whether to select run definition. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GetRunDataRequest.selectRunDefinition has a boolean wire value; preserve the published property contract."
   selectRunDefinition?: boolean;
 
   /** Whether to select job specification. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GetRunDataRequest.selectJobSpecification has a boolean wire value; preserve the published property contract."
   selectJobSpecification?: boolean;
 }
 
@@ -904,6 +914,7 @@ model MetricSample {
   derivedLabelValues?: Record<string>;
 
   /** Whether this is a partial result. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricSample.isPartialResult has a boolean wire value; preserve the published property contract."
   isPartialResult?: boolean;
 
   /** The number of values logged. */
@@ -1019,9 +1030,11 @@ model ModifyExperiment {
   tags?: Record<string>;
 
   /** Whether to archive the experiment. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ModifyExperiment.archive has a boolean wire value; preserve the published property contract."
   archive?: boolean;
 
   /** Whether to retain for lifetime of workspace. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ModifyExperiment.retainForLifetimeOfWorkspace has a boolean wire value; preserve the published property contract."
   retainForLifetimeOfWorkspace?: boolean;
 }
 
@@ -1263,6 +1276,7 @@ model Run {
   rootRunUuid?: string;
 
   /** Indicates if this is a child of a virtual run. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Run.hasVirtualParent has a boolean wire value; preserve the published property contract."
   hasVirtualParent?: boolean;
 
   /** The last timestamp when a run transitioned from paused to running. Initialized with StartTimeUtc. */
@@ -1311,6 +1325,7 @@ model Run {
   options?: RunOptions;
 
   /** A virtual run can set an active child run that will override the virtual run status. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Run.isVirtual has a boolean wire value; preserve the published property contract."
   isVirtual?: boolean;
 
   /** The display name of the run. */
@@ -1326,6 +1341,7 @@ model Run {
   description?: string;
 
   /** Whether the run is hidden. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Run.hidden has a boolean wire value; preserve the published property contract."
   hidden?: boolean;
 
   /** The run type. */
@@ -1395,6 +1411,7 @@ model Run {
   compute?: Compute;
 
   /** Whether to retain for lifetime of workspace. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Run.retainForLifetimeOfWorkspace has a boolean wire value; preserve the published property contract."
   retainForLifetimeOfWorkspace?: boolean;
 
   /** The queueing information. */
@@ -1518,6 +1535,7 @@ model RunDetails {
   statusRevision?: int64;
 
   /** Indicates if this is a child of a virtual run. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RunDetails.hasVirtualParent has a boolean wire value; preserve the published property contract."
   hasVirtualParent?: boolean;
 
   /** The cumulative time spent in an active status for an active run. */
@@ -1596,6 +1614,7 @@ model RunMetric {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RunOptions {
   /** Whether to generate a data container ID if not specified. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RunOptions.generateDataContainerIdIfNotSpecified has a boolean wire value; preserve the published property contract."
   generateDataContainerIdIfNotSpecified?: boolean;
 }
 
@@ -1629,6 +1648,7 @@ model RunTypeV2 {
 /** A service instance. */
 model ServiceInstance {
   /** Whether this is a single node service. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServiceInstance.isSingleNode has a boolean wire value; preserve the published property contract."
   isSingleNode?: boolean;
 
   /** The error message. */
@@ -1677,9 +1697,11 @@ model SpanContext {
   spanId?: string;
 
   /** Gets a value indicating whether this span context is remote. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SpanContext.isRemote has a boolean wire value; preserve the published property contract."
   isRemote?: boolean;
 
   /** Gets a value indicating whether this span context is valid. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SpanContext.isValid has a boolean wire value; preserve the published property contract."
   isValid?: boolean;
 
   /** Gets the Tracestate associated with this span context. */

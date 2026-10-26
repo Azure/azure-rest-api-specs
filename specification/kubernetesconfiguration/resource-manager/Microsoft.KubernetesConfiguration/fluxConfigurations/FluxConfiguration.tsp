@@ -156,6 +156,7 @@ interface FluxConfigurations {
       /**
        * Delete the extension resource in Azure - not the normal asynchronous delete.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.forceDelete has a boolean wire value; preserve the published property contract."
       @query("forceDelete")
       forceDelete?: boolean;
     },

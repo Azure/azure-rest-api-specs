@@ -99,6 +99,7 @@ namespace SplitIO.Experimentation {
     @doc("Resource id of the storage account associated with the Log Analytics workspace.")
     storageAccountResourceId: StorageAccountResourceId;
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LogAnalytics.enabled has a boolean wire value; preserve the published property contract."
     @doc("Controls whether data flow from the configured Log Analytics workspace into the experimentation workspace is enabled.")
     enabled: boolean;
   }

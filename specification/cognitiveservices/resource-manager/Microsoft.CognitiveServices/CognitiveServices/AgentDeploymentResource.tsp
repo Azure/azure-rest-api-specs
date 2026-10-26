@@ -41,6 +41,7 @@ alias AgentDeploymentsListParameters = {
   /**
    * Whether to order in ascending order.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AgentDeploymentsListParameters.orderByAsc has a boolean wire value; preserve the published property contract."
   @query("orderByAsc")
   orderByAsc?: boolean = false;
 };

@@ -496,6 +496,7 @@ model RunRequest {
   /**
    * The value that indicates whether archiving is enabled for the run or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RunRequest.isArchiveEnabled has a boolean wire value; preserve the published property contract."
   isArchiveEnabled?: boolean = false;
 
   /**
@@ -631,6 +632,7 @@ model RunProperties {
   /**
    * The value that indicates whether archiving is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RunProperties.isArchiveEnabled has a boolean wire value; preserve the published property contract."
   isArchiveEnabled?: boolean = false;
 }
 
@@ -817,6 +819,7 @@ model RunUpdateParameters {
   /**
    * The value that indicates whether archiving is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RunUpdateParameters.isArchiveEnabled has a boolean wire value; preserve the published property contract."
   isArchiveEnabled?: boolean;
 }
 
@@ -1018,6 +1021,7 @@ model TaskProperties {
   /**
    * The value of this property indicates whether the task resource is system task or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TaskProperties.isSystemTask has a boolean wire value; preserve the published property contract."
   isSystemTask?: boolean = false;
 }
 
@@ -1624,6 +1628,7 @@ model RunFilter {
   /**
    * The value that indicates whether archiving is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RunFilter.isArchiveEnabled has a boolean wire value; preserve the published property contract."
   isArchiveEnabled?: boolean;
 
   /**
@@ -1649,11 +1654,13 @@ model DockerBuildRequest extends RunRequest {
   /**
    * The value of this property indicates whether the image built should be pushed to the registry or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DockerBuildRequest.isPushEnabled has a boolean wire value; preserve the published property contract."
   isPushEnabled?: boolean = true;
 
   /**
    * The value of this property indicates whether the image cache is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DockerBuildRequest.noCache has a boolean wire value; preserve the published property contract."
   noCache?: boolean = false;
 
   /**
@@ -1723,6 +1730,7 @@ model Argument {
   /**
    * Flag to indicate whether the argument represents a secret and want to be removed from build logs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Argument.isSecret has a boolean wire value; preserve the published property contract."
   isSecret?: boolean = false;
 }
 
@@ -1797,6 +1805,7 @@ model SetValue {
   /**
    * Flag to indicate whether the value represents a secret or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SetValue.isSecret has a boolean wire value; preserve the published property contract."
   isSecret?: boolean = false;
 }
 
@@ -1923,11 +1932,13 @@ model DockerBuildStep extends TaskStepProperties {
   /**
    * The value of this property indicates whether the image built should be pushed to the registry or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DockerBuildStep.isPushEnabled has a boolean wire value; preserve the published property contract."
   isPushEnabled?: boolean = true;
 
   /**
    * The value of this property indicates whether the image cache is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DockerBuildStep.noCache has a boolean wire value; preserve the published property contract."
   noCache?: boolean = false;
 
   /**
@@ -2016,11 +2027,13 @@ model DockerBuildStepUpdateParameters extends TaskStepUpdateParameters {
   /**
    * The value of this property indicates whether the image built should be pushed to the registry or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DockerBuildStepUpdateParameters.isPushEnabled has a boolean wire value; preserve the published property contract."
   isPushEnabled?: boolean;
 
   /**
    * The value of this property indicates whether the image cache is enabled or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DockerBuildStepUpdateParameters.noCache has a boolean wire value; preserve the published property contract."
   noCache?: boolean;
 
   /**

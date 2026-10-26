@@ -19,6 +19,7 @@ model ReplicationProperties {
   /**
    * Specifies whether the replication's regional endpoint is enabled. Requests will not be routed to a replication whose regional endpoint is disabled, however its data will continue to be synced with other replications.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReplicationProperties.regionEndpointEnabled has a boolean wire value; preserve the published property contract."
   regionEndpointEnabled?: boolean = true;
 
   /**
@@ -50,6 +51,7 @@ model ReplicationUpdateParametersProperties {
   /**
    * Specifies whether the replication's regional endpoint is enabled. Requests will not be routed to a replication whose regional endpoint is disabled, however its data will continue to be synced with other replications.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReplicationUpdateParametersProperties.regionEndpointEnabled has a boolean wire value; preserve the published property contract."
   regionEndpointEnabled?: boolean;
 }
 

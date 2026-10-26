@@ -3343,6 +3343,7 @@ model PaymentTerm {
   /**
    * Indicates payment term is the standard payment term.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PaymentTerm.isDefault has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDefault?: boolean;
 }
@@ -3400,11 +3401,13 @@ model BillingAccountProperties {
   /**
    * Indicates whether user has read access to the billing account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingAccountProperties.hasReadAccess has a boolean wire value; preserve the published property contract."
   hasReadAccess?: boolean;
 
   /**
    * Indicates whether or not the billing account has any billing profiles.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingAccountProperties.hasNoBillingProfiles has a boolean wire value; preserve the published property contract."
   hasNoBillingProfiles?: boolean;
 
   /**
@@ -3660,6 +3663,7 @@ model AddressDetails {
   /**
    * Indicates if the address is incomplete.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AddressDetails.isValidAddress has a boolean wire value; preserve the published property contract."
   isValidAddress?: boolean;
 }
 
@@ -3682,6 +3686,7 @@ model RegistrationNumber {
   /**
    * Identifies if the registration number is required for the billing account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RegistrationNumber.required has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   required?: boolean;
 
@@ -4019,6 +4024,7 @@ model BillingProfileProperties {
   /**
    * Indicates whether user has read access to the billing profile.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingProfileProperties.hasReadAccess has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   hasReadAccess?: boolean;
 
@@ -4036,6 +4042,7 @@ model BillingProfileProperties {
   /**
    * Flag controlling whether the invoices for the billing profile are sent through email.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingProfileProperties.invoiceEmailOptIn has a boolean wire value; preserve the published property contract."
   invoiceEmailOptIn?: boolean;
 
   /**
@@ -4358,6 +4365,7 @@ model BillingPropertyProperties {
   /**
    * Specifies if the billing account for the subscription is transitioned from a Microsoft Online Service Program to a Microsoft Customer Agreement (MCA) account. Will be present and value will be true if its a transitioned billing account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingPropertyProperties.isTransitionedBillingAccount has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isTransitionedBillingAccount?: boolean;
 
@@ -4411,6 +4419,7 @@ model BillingPropertyProperties {
   /**
    * Indicates whether user is the account admin.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingPropertyProperties.isAccountAdmin has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isAccountAdmin?: boolean;
 
@@ -5207,6 +5216,7 @@ model SavingsPlanModelProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SavingsPlanModelProperties.renew has a boolean wire value; preserve the published property contract."
   renew?: boolean = false;
 
   /**
@@ -5352,6 +5362,7 @@ model PurchaseRequestProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PurchaseRequestProperties.renew has a boolean wire value; preserve the published property contract."
   renew?: boolean = false;
 
   /**
@@ -5491,6 +5502,7 @@ model SavingsPlanUpdateRequestProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SavingsPlanUpdateRequestProperties.renew has a boolean wire value; preserve the published property contract."
   renew?: boolean = false;
 
   /**
@@ -5531,6 +5543,7 @@ model SavingsPlanValidResponseProperty {
   /**
    * Indicates if the provided input is valid
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SavingsPlanValidResponseProperty.valid has a boolean wire value; preserve the published property contract."
   valid?: boolean;
 
   /**
@@ -6030,6 +6043,7 @@ model MoveBillingSubscriptionEligibilityResult {
   /**
    * Specifies whether the subscription is eligible to be transferred.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MoveBillingSubscriptionEligibilityResult.isMoveEligible has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isMoveEligible?: boolean;
 
@@ -6184,6 +6198,7 @@ model EnrollmentAccountProperties {
   /**
    * Boolean flag which enables subscribers to run development and testing workloads on Azure at special Dev/Test rates.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EnrollmentAccountProperties.isDevTestEnabled has a boolean wire value; preserve the published property contract."
   isDevTestEnabled?: boolean;
 
   /**
@@ -6330,6 +6345,7 @@ model InvoiceProperties {
   /**
    * Specifies if the invoice is generated as part of monthly invoicing cycle or not. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InvoiceProperties.isMonthlyInvoice has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isMonthlyInvoice?: boolean;
 
@@ -6818,6 +6834,7 @@ model Operation {
   /**
    * Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for ARM/control-plane operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDataAction?: boolean;
 
@@ -7348,6 +7365,7 @@ model MoveProductEligibilityResult {
   /**
    * Specifies whether the subscription is eligible to be transferred.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MoveProductEligibilityResult.isMoveEligible has a boolean wire value; preserve the published property contract."
   isMoveEligible?: boolean;
 
   /**
@@ -7492,6 +7510,7 @@ model ReservationProperty {
   /**
    * Indicates if the reservation is archived
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReservationProperty.archived has a boolean wire value; preserve the published property contract."
   archived?: boolean;
 
   /**
@@ -7618,6 +7637,7 @@ model ReservationProperty {
   /**
    * The renew state of the reservation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReservationProperty.renew has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   renew?: boolean;
 
@@ -7877,6 +7897,7 @@ model ReservationPurchaseRequestProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReservationPurchaseRequestProperties.renew has a boolean wire value; preserve the published property contract."
   renew?: boolean = false;
 
   /**
@@ -8011,6 +8032,7 @@ model PatchProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PatchProperties.renew has a boolean wire value; preserve the published property contract."
   renew?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -8311,6 +8333,7 @@ model TransactionProperties {
   /**
    * Whether or not the transaction is third party.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TransactionProperties.isThirdParty has a boolean wire value; preserve the published property contract."
   isThirdParty?: boolean;
 
   /**

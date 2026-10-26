@@ -335,6 +335,7 @@ model TrainingSetProperties {
   durationInSeconds?: float64;
 
   /** Indicates whether the training set is composed of contextual data */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TrainingSetProperties.isContextual has a boolean wire value; preserve the published property contract."
   isContextual?: boolean;
 }
 

@@ -88,6 +88,7 @@ interface VmSkusOperationGroup {
       /**
        * To Include Extended Locations information or not in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.includeExtendedLocations has a boolean wire value; preserve the published property contract."
       @query
       includeExtendedLocations?: boolean;
     }

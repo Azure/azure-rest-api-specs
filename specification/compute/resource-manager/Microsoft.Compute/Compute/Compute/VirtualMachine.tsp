@@ -149,6 +149,7 @@ interface VirtualMachines {
       /**
        * Optional parameter to force delete virtual machines.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.forceDeletion has a boolean wire value; preserve the published property contract."
       @query("forceDeletion")
       forceDeletion?: boolean;
     }
@@ -250,12 +251,14 @@ interface VirtualMachines {
       /**
        * Optional parameter to hibernate a virtual machine.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing deallocate.hibernate has a boolean wire value; preserve the published property contract."
       @query("hibernate")
       hibernate?: boolean;
 
       /**
        * Optional parameter to force deallocate a virtual machine. Default is false.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing deallocate.forceDeallocate has a boolean wire value; preserve the published property contract."
       @added(Versions.v2025_11_01)
       @query("forceDeallocate")
       forceDeallocate?: boolean;
@@ -309,6 +312,7 @@ interface VirtualMachines {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing powerOff.skipShutdown has a boolean wire value; preserve the published property contract."
       @query("skipShutdown")
       skipShutdown?: boolean;
     },

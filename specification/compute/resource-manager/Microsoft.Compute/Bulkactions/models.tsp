@@ -409,6 +409,7 @@ model ExecutionParameters {
   @doc("The retry settings for the bulk action.")
   retryPolicy?: RetryPolicy;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExecutionParameters.verifyVmAgentHealth has a boolean wire value; preserve the published property contract."
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @doc("If true, Bulk Actions verifies the virtual machine guest agent health after a start operation. Setting this property to true for any other operation causes the request to fail.")
   verifyVmAgentHealth?: boolean;
@@ -432,6 +433,7 @@ model CapacityRecommendationParameters {
   @doc("The list of desired VM sizes (SKUs) to be considered for the capacity recommendation")
   desiredSizes?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CapacityRecommendationParameters.availabilityZones has a boolean wire value; preserve the published property contract."
   @doc("Whether the capacity recommendation should be computed per availability zone")
   availabilityZones?: boolean;
 }
@@ -574,6 +576,7 @@ model CapacityRecommendationPlacementScore {
   @doc("The placement score, eg High, Medium or Low")
   score?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CapacityRecommendationPlacementScore.isQuotaAvailable has a boolean wire value; preserve the published property contract."
   @doc("Whether quota is available for the SKU, region and zone combination")
   isQuotaAvailable?: boolean;
 }
@@ -591,6 +594,7 @@ model CapacityRecommendationDetails {
   @identifiers(#[])
   desiredSizes?: CapacityRecommendationSize[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CapacityRecommendationDetails.availabilityZones has a boolean wire value; preserve the published property contract."
   @doc("Whether the response is split by availability zone")
   availabilityZones?: boolean;
 
@@ -911,6 +915,7 @@ model ExecuteDeleteRequest {
   @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
   resourcesWithContext?: ResourcesWithContext;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExecuteDeleteRequest.forceDeletion has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether Bulk Actions uses forced deletion for the target virtual machines.")
   forceDeletion?: boolean;
 }

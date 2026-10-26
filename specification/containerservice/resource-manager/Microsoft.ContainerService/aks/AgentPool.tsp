@@ -64,6 +64,7 @@ interface AgentPools {
        * ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.ignore-pod-disruption-budget has a boolean wire value; preserve the published property contract."
       @query("ignore-pod-disruption-budget")
       `ignore-pod-disruption-budget`?: boolean;
 
@@ -184,6 +185,7 @@ interface AgentPools {
       /**
        * If true, only return operations that are currently active (not terminal).
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByAgentPool.activeOnly has a boolean wire value; preserve the published property contract."
       @query
       activeOnly?: boolean;
     }

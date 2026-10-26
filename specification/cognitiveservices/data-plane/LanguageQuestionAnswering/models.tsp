@@ -313,6 +313,7 @@ model AnswersOptions {
   /**
    * (Optional) Flag to enable Query over Unstructured Sources.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AnswersOptions.includeUnstructuredSources has a boolean wire value; preserve the published property contract."
   includeUnstructuredSources?: boolean;
 
   /**
@@ -394,6 +395,7 @@ model ShortAnswerOptions {
   /**
    * Enable or disable Answer Span prediction.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ShortAnswerOptions.enable has a boolean wire value; preserve the published property contract."
   enable: boolean;
 
   /**
@@ -458,6 +460,7 @@ model PrebuiltQueryMatchingPolicy extends MatchingPolicy {
   /**
    * Disabling full match on query. Enabling this will give preference to qna pairs that have exact match.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PrebuiltQueryMatchingPolicy.disableFullMatch has a boolean wire value; preserve the published property contract."
   disableFullMatch?: boolean;
 }
 
@@ -528,6 +531,7 @@ model KnowledgeBaseAnswerDialog {
    * do not include this QnA as search result for queries without context;
    * otherwise, if false, ignores context and includes this QnA in search result.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KnowledgeBaseAnswerDialog.isContextOnly has a boolean wire value; preserve the published property contract."
   isContextOnly?: boolean;
 
   /**

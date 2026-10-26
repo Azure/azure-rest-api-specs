@@ -3965,6 +3965,7 @@ model VirtualMachineSize {
   /**
    * Specifies if the virtual machine size supports low priority VMs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineSize.lowPriorityCapable has a boolean wire value; preserve the published property contract."
   @summary("Low priority capable")
   @visibility(Lifecycle.Read)
   lowPriorityCapable?: boolean;
@@ -3973,6 +3974,7 @@ model VirtualMachineSize {
    * Specifies if the virtual machine size supports premium IO.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineSize.premiumIO has a boolean wire value; preserve the published property contract."
   @summary("Premium IO supported")
   @visibility(Lifecycle.Read)
   premiumIO?: boolean;
@@ -4269,12 +4271,14 @@ model Compute {
   /**
    * Indicating whether the compute was provisioned by user and brought from outside if true, or machine learning service provisioned it if false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Compute.isAttachedCompute has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isAttachedCompute?: boolean;
 
   /**
    * Opt-out of local authentication and ensure customers can use only MSI and AAD exclusively for authentication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Compute.disableLocalAuth has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   disableLocalAuth?: boolean;
 }
@@ -4828,6 +4832,7 @@ model AssetContainer extends ResourceBase {
   /**
    * Is the asset archived?
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AssetContainer.isArchived has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isArchived?: boolean = false;
 
@@ -4899,12 +4904,14 @@ model AssetBase extends ResourceBase {
   /**
    * If the name version are system generated (anonymous registration).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AssetBase.isAnonymous has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   isAnonymous?: boolean = false;
 
   /**
    * Is the asset archived?
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AssetBase.isArchived has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isArchived?: boolean = false;
 }
@@ -5265,6 +5272,7 @@ model ImageDetails {
   /**
    * Indicates if image exists
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ImageDetails.exists has a boolean wire value; preserve the published property contract."
   exists?: boolean;
 
   /**
@@ -5403,6 +5411,7 @@ model VulnerabilityDetails {
   /**
    * Indicates if there is a known patch for vulnerability.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VulnerabilityDetails.patchable has a boolean wire value; preserve the published property contract."
   patchable?: boolean;
 
   /**
@@ -6103,6 +6112,7 @@ model DatastoreProperties extends ResourceBase {
   /**
    * Readonly property to indicate if datastore is the workspace default datastore
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DatastoreProperties.isDefault has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDefault?: boolean;
 }
@@ -6125,6 +6135,7 @@ model SecretExpiry {
   /**
    * Indicates if the secret is expirable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SecretExpiry.expirableSecret has a boolean wire value; preserve the published property contract."
   expirableSecret?: boolean = false;
 
   /**
@@ -6587,6 +6598,7 @@ model ScaleUnitConfiguration {
   /**
    * Gets or sets a value indicating whether PublicEgress is disabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScaleUnitConfiguration.disablePublicEgress has a boolean wire value; preserve the published property contract."
   disablePublicEgress?: boolean = false;
 
   /**
@@ -7163,6 +7175,7 @@ model JobBaseProperties extends ResourceBase {
   /**
    * Is the asset archived?
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing JobBaseProperties.isArchived has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isArchived?: boolean = false;
 
@@ -7404,6 +7417,7 @@ model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
    * If true, enables Application Insights logging.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OnlineDeploymentProperties.appInsightsEnabled has a boolean wire value; preserve the published property contract."
   appInsightsEnabled?: boolean = false;
 
   /**
@@ -7664,6 +7678,7 @@ model ScheduleProperties extends ResourceBase {
   /**
    * Is the schedule enabled?
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScheduleProperties.isEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isEnabled?: boolean = true;
 
@@ -8050,6 +8065,7 @@ model SystemCreatedStorageAccount {
   /**
    * Public blob access allowed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SystemCreatedStorageAccount.allowBlobPublicAccess has a boolean wire value; preserve the published property contract."
   allowBlobPublicAccess?: boolean;
 
   /**
@@ -8061,6 +8077,7 @@ model SystemCreatedStorageAccount {
   /**
    * HNS enabled for storage account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SystemCreatedStorageAccount.storageAccountHnsEnabled has a boolean wire value; preserve the published property contract."
   storageAccountHnsEnabled?: boolean;
 
   /**
@@ -8190,12 +8207,14 @@ model WorkspaceProperties {
   /**
    * The flag to indicate whether to allow public access when behind VNet.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.allowPublicAccessWhenBehindVnet has a boolean wire value; preserve the published property contract."
   allowPublicAccessWhenBehindVnet?: boolean;
 
   /**
    * The flag to indicate whether we will do role assignment for the workspace MSI on resource group level.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.allowRoleAssignmentOnRG has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
@@ -8246,14 +8265,17 @@ model WorkspaceProperties {
   discoveryUrl?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.enableDataIsolation has a boolean wire value; preserve the published property contract."
   enableDataIsolation?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.enableServiceSideCMKEncryption has a boolean wire value; preserve the published property contract."
   enableServiceSideCMKEncryption?: boolean;
 
   /**
    * Flag to tell if simplified CMK should be enabled for this workspace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.enableSimplifiedCmk has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
@@ -8269,6 +8291,7 @@ model WorkspaceProperties {
   /**
    * Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.enableSoftwareBillOfMaterials has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
@@ -8310,6 +8333,7 @@ model WorkspaceProperties {
   /**
    * The flag to signal HBI data in the workspace and reduce diagnostic data collected by the service
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.hbiWorkspace has a boolean wire value; preserve the published property contract."
   hbiWorkspace?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
@@ -8405,6 +8429,7 @@ model WorkspaceProperties {
   /**
    * Set to trigger the provisioning of the managed VNet with the default Options when creating a Workspace with the managed VNet enabled, or else it does nothing.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.provisionNetworkNow has a boolean wire value; preserve the published property contract."
   provisionNetworkNow?: boolean;
 
   /**
@@ -8476,6 +8501,7 @@ model WorkspaceProperties {
   /**
    * If the storage associated with the workspace has hierarchical namespace(HNS) enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.storageHnsEnabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   storageHnsEnabled?: boolean;
 
@@ -8493,6 +8519,7 @@ model WorkspaceProperties {
   /**
    * Enabling v1_legacy_mode may prevent you from using features provided by the v2 API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceProperties.v1LegacyMode has a boolean wire value; preserve the published property contract."
   v1LegacyMode?: boolean;
 
   /**
@@ -8602,6 +8629,7 @@ model ManagedNetworkSettings {
   /**
    * A flag to indicate if monitoring needs to be enabled for the managed network.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedNetworkSettings.enableNetworkMonitor has a boolean wire value; preserve the published property contract."
   enableNetworkMonitor?: boolean = false;
 
   /**
@@ -8682,6 +8710,7 @@ model OutboundRule {
  */
 model ManagedNetworkProvisionStatus {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedNetworkProvisionStatus.sparkReady has a boolean wire value; preserve the published property contract."
   sparkReady?: boolean;
 
   /**
@@ -8720,6 +8749,7 @@ model NotebookResourceInfo {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   fqdn?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NotebookResourceInfo.isPrivateLinkEnabled has a boolean wire value; preserve the published property contract."
   isPrivateLinkEnabled?: boolean;
 
   /**
@@ -8808,6 +8838,7 @@ model ServerlessComputeSettings {
    * The flag to signal if serverless compute nodes deployed in custom vNet would have no public IP addresses for a workspace with private endpoint
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServerlessComputeSettings.serverlessComputeNoPublicIP has a boolean wire value; preserve the published property contract."
   serverlessComputeNoPublicIP?: boolean;
 }
 
@@ -8903,6 +8934,7 @@ model WorkspaceUpdateParameters {
 model WorkspacePropertiesUpdateParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspacePropertiesUpdateParameters.allowRoleAssignmentOnRG has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
@@ -8931,11 +8963,13 @@ model WorkspacePropertiesUpdateParameters {
   description?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspacePropertiesUpdateParameters.enableDataIsolation has a boolean wire value; preserve the published property contract."
   enableDataIsolation?: boolean;
 
   /**
    * Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspacePropertiesUpdateParameters.enableSoftwareBillOfMaterials has a boolean wire value; preserve the published property contract."
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
@@ -9044,6 +9078,7 @@ model WorkspacePropertiesUpdateParameters {
   /**
    * Enabling v1_legacy_mode may prevent you from using features provided by the v2 API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspacePropertiesUpdateParameters.v1LegacyMode has a boolean wire value; preserve the published property contract."
   v1LegacyMode?: boolean;
 }
 
@@ -9097,6 +9132,7 @@ model WorkspaceConnectionPropertiesV2 {
   group?: ConnectionGroup;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceConnectionPropertiesV2.isSharedToAll has a boolean wire value; preserve the published property contract."
   isSharedToAll?: boolean;
 
   /**
@@ -9114,6 +9150,7 @@ model WorkspaceConnectionPropertiesV2 {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   target?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceConnectionPropertiesV2.useWorkspaceManagedIdentity has a boolean wire value; preserve the published property contract."
   useWorkspaceManagedIdentity?: boolean;
 }
 
@@ -9185,6 +9222,7 @@ model EndpointModelProperties {
   /**
    * If the model is default version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EndpointModelProperties.isDefaultVersion has a boolean wire value; preserve the published property contract."
   isDefaultVersion?: boolean;
 
   /**
@@ -9303,6 +9341,7 @@ model EndpointModelSkuRateLimitRuleProperties {
   /**
    * If the dynamic throttling is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EndpointModelSkuRateLimitRuleProperties.dynamicThrottlingEnabled has a boolean wire value; preserve the published property contract."
   dynamicThrottlingEnabled?: boolean;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
@@ -9370,6 +9409,7 @@ model RaiBlocklistItemProperties {
   /**
    * If the pattern is a regex pattern.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RaiBlocklistItemProperties.isRegex has a boolean wire value; preserve the published property contract."
   isRegex?: boolean;
 
   /**
@@ -9427,6 +9467,7 @@ model RaiBlocklistConfig {
   /**
    * If blocking would occur.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RaiBlocklistConfig.blocking has a boolean wire value; preserve the published property contract."
   blocking?: boolean;
 
   /**
@@ -9447,11 +9488,13 @@ model RaiPolicyContentFilter {
   /**
    * If blocking would occur.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RaiPolicyContentFilter.blocking has a boolean wire value; preserve the published property contract."
   blocking?: boolean;
 
   /**
    * If the ContentFilter is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RaiPolicyContentFilter.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -9669,6 +9712,7 @@ model EndpointResourceProperties {
   /**
    * Whether the proxy (non-byo) endpoint is a regular endpoint or a OneKeyV2 AI services account endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EndpointResourceProperties.shouldCreateAiServicesEndpoint has a boolean wire value; preserve the published property contract."
   shouldCreateAiServicesEndpoint?: boolean;
 }
 
@@ -9948,6 +9992,7 @@ model PrivateLinkResourceProperties {
  */
 model ManagedNetworkProvisionOptions {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ManagedNetworkProvisionOptions.includeSpark has a boolean wire value; preserve the published property contract."
   includeSpark?: boolean;
 }
 
@@ -10140,6 +10185,7 @@ model SslConfiguration {
   /**
    * Indicates whether to overwrite existing domain label.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SslConfiguration.overwriteExistingDomain has a boolean wire value; preserve the published property contract."
   overwriteExistingDomain?: boolean;
 }
 
@@ -10307,6 +10353,7 @@ model AmlComputeProperties {
   /**
    * Network is isolated or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AmlComputeProperties.isolatedNetwork has a boolean wire value; preserve the published property contract."
   isolatedNetwork?: boolean;
 
   /**
@@ -10788,6 +10835,7 @@ model ImageMetadata {
    * Specifies whether this compute instance is running on the latest operating system image.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ImageMetadata.isLatestOsImageVersion has a boolean wire value; preserve the published property contract."
   isLatestOsImageVersion?: boolean;
 
   /**
@@ -10816,6 +10864,7 @@ model OsPatchingStatus {
   /**
    * Specifies whether this compute instance is pending for reboot to finish os patching.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OsPatchingStatus.rebootPending has a boolean wire value; preserve the published property contract."
   rebootPending?: boolean;
 
   /**
@@ -11311,6 +11360,7 @@ model VirtualMachineSchemaProperties {
   /**
    * Indicates whether this compute will be used for running notebooks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualMachineSchemaProperties.isNotebookInstanceCompute has a boolean wire value; preserve the published property contract."
   isNotebookInstanceCompute?: boolean;
 }
 
@@ -11524,6 +11574,7 @@ model AutoScaleProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   minNodeCount?: int32;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutoScaleProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   maxNodeCount?: int32;
@@ -11536,6 +11587,7 @@ model AutoPauseProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   delayInMinutes?: int32;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutoPauseProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -12690,26 +12742,31 @@ model TrainingSettings {
   /**
    * Enable recommendation of DNN models.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TrainingSettings.enableDnnTraining has a boolean wire value; preserve the published property contract."
   enableDnnTraining?: boolean = false;
 
   /**
    * Flag to turn on explainability on best model.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TrainingSettings.enableModelExplainability has a boolean wire value; preserve the published property contract."
   enableModelExplainability?: boolean = true;
 
   /**
    * Flag for enabling onnx compatible models.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TrainingSettings.enableOnnxCompatibleModels has a boolean wire value; preserve the published property contract."
   enableOnnxCompatibleModels?: boolean = false;
 
   /**
    * Enable stack ensemble run.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TrainingSettings.enableStackEnsemble has a boolean wire value; preserve the published property contract."
   enableStackEnsemble?: boolean = true;
 
   /**
    * Enable voting ensemble run.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TrainingSettings.enableVoteEnsemble has a boolean wire value; preserve the published property contract."
   enableVoteEnsemble?: boolean = true;
 
   /**
@@ -12832,6 +12889,7 @@ model TableVerticalFeaturizationSettings extends FeaturizationSettings {
   /**
    * Determines whether to use Dnn based featurizers for data featurization.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TableVerticalFeaturizationSettings.enableDnnFeaturization has a boolean wire value; preserve the published property contract."
   enableDnnFeaturization?: boolean = false;
 
   /**
@@ -12884,6 +12942,7 @@ model TableVerticalLimitSettings {
   /**
    * Enable early termination, determines whether or not if AutoMLJob will terminate early if there is no score improvement in last 20 iterations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TableVerticalLimitSettings.enableEarlyTermination has a boolean wire value; preserve the published property contract."
   enableEarlyTermination?: boolean = true;
 
   /**
@@ -13545,8 +13604,10 @@ model DataGenerationVertical {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model PromptSettings {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PromptSettings.enableChainOfDensity has a boolean wire value; preserve the published property contract."
   enableChainOfDensity?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PromptSettings.enableChainOfThought has a boolean wire value; preserve the published property contract."
   enableChainOfThought?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   maxLenSummary?: int32;
@@ -15525,6 +15586,7 @@ model Ray extends DistributionConfiguration {
   /**
    * Provide this argument to start the Ray dashboard GUI.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Ray.includeDashboard has a boolean wire value; preserve the published property contract."
   includeDashboard?: boolean;
 
   /**
@@ -15547,6 +15609,7 @@ model Ray extends DistributionConfiguration {
   /**
    * Whether to expose the Ray Client server through the AML proxy on the default port 10001.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Ray.enableRemoteAccessClientServer has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
@@ -16794,6 +16857,7 @@ model PrivateEndpointDestination {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   serviceResourceId?: Azure.Core.armResourceIdentifier;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PrivateEndpointDestination.sparkEnabled has a boolean wire value; preserve the published property contract."
   sparkEnabled?: boolean;
 
   /**

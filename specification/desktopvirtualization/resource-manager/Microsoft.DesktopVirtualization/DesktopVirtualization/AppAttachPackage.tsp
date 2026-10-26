@@ -58,6 +58,7 @@ interface AppAttachPackages {
        * Allows force delete
        * @Introduced in 2023-10-04-preview
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.force has a boolean wire value; preserve the published property contract."
       @added(Versions.vLatestPreview)
       @query("force")
       force?: boolean;

@@ -163,6 +163,7 @@ model TrafficIncidentFeatureProperties {
   /**
    * A value of `true` indicates that there is a road closure.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TrafficIncidentFeatureProperties.isRoadClosed has a boolean wire value; preserve the published property contract."
   isRoadClosed?: boolean;
 
   /**
@@ -211,6 +212,7 @@ model TrafficIncidentFeatureProperties {
    * A value of `true` indicates that the area of road covered by this incident is
    * experiencing abnormal traffic conditions resulting in non-typical delays.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TrafficIncidentFeatureProperties.isTrafficJam has a boolean wire value; preserve the published property contract."
   isTrafficJam?: boolean;
 }
 

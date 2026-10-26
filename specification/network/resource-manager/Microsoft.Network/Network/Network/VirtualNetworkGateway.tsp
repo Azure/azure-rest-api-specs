@@ -296,6 +296,7 @@ interface VirtualNetworkGateways {
       /**
        * Attempt to recalculate the Resiliency Information for the gateway
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getResiliencyInformation.attemptRefresh has a boolean wire value; preserve the published property contract."
       @query("attemptRefresh")
       attemptRefresh?: boolean;
     },
@@ -314,6 +315,7 @@ interface VirtualNetworkGateways {
       /**
        * Attempt to recalculate the Route Sets Information for the gateway
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getRoutesInformation.attemptRefresh has a boolean wire value; preserve the published property contract."
       @query("attemptRefresh")
       attemptRefresh?: boolean;
     },
@@ -401,6 +403,7 @@ interface VirtualNetworkGateways {
       /**
        * Fetch only the latest tests for each peering location
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getFailoverAllTestDetails.fetchLatest has a boolean wire value; preserve the published property contract."
       @query("fetchLatest")
       fetchLatest: boolean;
     },

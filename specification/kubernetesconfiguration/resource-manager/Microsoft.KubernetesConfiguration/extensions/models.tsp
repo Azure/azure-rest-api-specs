@@ -134,6 +134,7 @@ model ExtensionProperties {
   /**
    * Flag to note if this extension participates in auto upgrade of minor version, or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExtensionProperties.autoUpgradeMinorVersion has a boolean wire value; preserve the published property contract."
   autoUpgradeMinorVersion?: boolean = true;
 
   /**
@@ -216,6 +217,7 @@ model ExtensionProperties {
   /**
    * Flag to note if this extension is a system extension
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExtensionProperties.isSystemExtension has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isSystemExtension?: boolean = false;
 
@@ -370,6 +372,7 @@ model PatchExtensionProperties {
   /**
    * Flag to note if this extension participates in auto upgrade of minor version, or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PatchExtensionProperties.autoUpgradeMinorVersion has a boolean wire value; preserve the published property contract."
   autoUpgradeMinorVersion?: boolean = true;
 
   /**

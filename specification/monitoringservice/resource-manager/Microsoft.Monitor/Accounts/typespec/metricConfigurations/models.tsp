@@ -50,11 +50,13 @@ namespace Microsoft.Monitor {
     /**
      * Whether minimum and maximum aggregations are enabled.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricAggregationFunctions.enableMinMax has a boolean wire value; preserve the published property contract."
     enableMinMax: boolean;
 
     /**
      * Whether percentile aggregations are enabled.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricAggregationFunctions.enablePercentiles has a boolean wire value; preserve the published property contract."
     enablePercentiles: boolean;
   }
 
@@ -66,6 +68,7 @@ namespace Microsoft.Monitor {
     /**
      * Whether aggregated metric data is stored.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricAggregationConfiguration.storeAggregatedData has a boolean wire value; preserve the published property contract."
     storeAggregatedData?: boolean;
 
     /**
@@ -116,6 +119,7 @@ namespace Microsoft.Monitor {
     /**
      * Whether raw metric data is stored.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricConfigurationProperties.storeRawData has a boolean wire value; preserve the published property contract."
     storeRawData?: boolean;
 
     /**

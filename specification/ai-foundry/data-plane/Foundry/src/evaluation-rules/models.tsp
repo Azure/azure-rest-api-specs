@@ -110,6 +110,7 @@ model EvaluationRule {
   @doc("Event type that the evaluation rule applies to.")
   eventType: EvaluationRuleEventType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EvaluationRule.enabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the evaluation rule is enabled. Default is true.")
   enabled: boolean;
 

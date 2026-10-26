@@ -812,6 +812,7 @@ model EventProperties {
   /**
    * If true the event may contains sensitive data. Use the post events/{trackingId}/fetchEventDetails endpoint to fetch sensitive data see https://learn.microsoft.com/en-us/azure/service-health/security-advisories-elevated-access
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EventProperties.isEventSensitive has a boolean wire value; preserve the published property contract."
   isEventSensitive?: boolean;
 
   /**
@@ -868,11 +869,13 @@ model EventProperties {
    * It provides information if the event is High incident rate event or not.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EventProperties.isHIR has a boolean wire value; preserve the published property contract."
   isHIR?: boolean;
 
   /**
    * Tells if we want to enable or disable Microsoft Support for this event.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EventProperties.enableMicrosoftSupport has a boolean wire value; preserve the published property contract."
   enableMicrosoftSupport?: boolean;
 
   /**
@@ -883,11 +886,13 @@ model EventProperties {
   /**
    * Is true if the event is platform initiated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EventProperties.platformInitiated has a boolean wire value; preserve the published property contract."
   platformInitiated?: boolean;
 
   /**
    * Tells if we want to enable or disable Microsoft Support for this event.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EventProperties.enableChatWithUs has a boolean wire value; preserve the published property contract."
   enableChatWithUs?: boolean;
 
   /**
@@ -1260,6 +1265,7 @@ model StatusActiveEvent {
   /**
    * The boolean value of this active event if published or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StatusActiveEvent.published has a boolean wire value; preserve the published property contract."
   published?: boolean;
 
   /**

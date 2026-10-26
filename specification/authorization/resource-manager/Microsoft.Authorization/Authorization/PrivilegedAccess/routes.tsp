@@ -137,6 +137,7 @@ interface PrivilegedResources {
      * before the page slice. Absent or `false` omits `count`. Any other value
      * returns `400 InvalidCount`.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.count has a boolean wire value; preserve the published property contract."
     @query("$count")
     count?: boolean,
   ): ArmResponse<PagedResourceProjection> | ErrorResponse;

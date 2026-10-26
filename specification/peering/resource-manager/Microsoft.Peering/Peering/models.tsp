@@ -396,6 +396,7 @@ model CdnPeeringPrefixProperties {
   /**
    * The flag that indicates whether or not this is the primary region.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CdnPeeringPrefixProperties.isPrimaryRegion has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isPrimaryRegion?: boolean;
 
@@ -523,6 +524,7 @@ model PeeringPropertiesDirect {
   /**
    * The flag that indicates whether or not the peering is used for peering service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PeeringPropertiesDirect.useForPeeringService has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   useForPeeringService?: boolean;
 
@@ -560,6 +562,7 @@ model DirectConnection {
   /**
    * The flag that indicates whether or not the connection is used for peering service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DirectConnection.useForPeeringService has a boolean wire value; preserve the published property contract."
   useForPeeringService?: boolean;
 
   /**
@@ -807,6 +810,7 @@ model Operation {
   /**
    * The flag that indicates whether the operation applies to data plane.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Operation.isDataAction has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDataAction?: boolean;
 
@@ -1304,6 +1308,7 @@ model ConnectionMonitorTestProperties {
   /**
    * The flag that indicates if the Connection Monitor test is successful or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConnectionMonitorTestProperties.isTestSuccessful has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isTestSuccessful?: boolean;
 

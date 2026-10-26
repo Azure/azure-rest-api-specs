@@ -169,6 +169,7 @@ model Update {
   /**
    * Whether the update can be deployed to a device on its own.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Update.isDeployable has a boolean wire value; preserve the published property contract."
   isDeployable?: boolean = true;
 
   /**
@@ -325,6 +326,7 @@ model ImportUpdateRequest {
   /**
    * Whether to enable anti-malware scan of the imported update payload files.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ImportUpdateRequest.enableScan has a boolean wire value; preserve the published property contract."
   enableScan?: boolean = false;
 }
 

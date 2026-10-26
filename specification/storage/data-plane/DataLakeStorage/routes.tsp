@@ -437,6 +437,7 @@ interface Path {
 
       /** Optional. When this header is set to "true" and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4MB in size. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing read.rangeGetContentMD5 has a boolean wire value; preserve the published property contract."
       @header("x-ms-range-get-content-md5")
       rangeGetContentMD5?: boolean;
 

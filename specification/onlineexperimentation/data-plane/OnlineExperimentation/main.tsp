@@ -278,6 +278,7 @@ model DiagnosticDetail {
 
 @doc("The result of validating an experiment metric.")
 model ExperimentMetricValidationResult {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExperimentMetricValidationResult.isValid has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether the experiment metric is valid.")
   isValid: boolean;
 

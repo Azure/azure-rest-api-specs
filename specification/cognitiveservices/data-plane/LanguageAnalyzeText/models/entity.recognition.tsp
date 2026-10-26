@@ -284,6 +284,7 @@ union EntityCategory {
 @added(Versions.v2024_11_01)
 model EntityInferenceOptions {
   /** Option to include/exclude the detected entity values to be normalized and included in the metadata. The numeric and temporal entity types support value normalization. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EntityInferenceOptions.excludeNormalizedValues has a boolean wire value; preserve the published property contract."
   excludeNormalizedValues?: boolean = false;
 }
 

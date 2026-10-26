@@ -623,6 +623,7 @@ model LabAnnouncementProperties {
   /**
    * Has this announcement expired?
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LabAnnouncementProperties.expired has a boolean wire value; preserve the published property contract."
   expired?: boolean;
 
   /**
@@ -953,6 +954,7 @@ model ArmTemplateProperties {
   /**
    * Whether or not ARM template is enabled for use by lab user.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ArmTemplateProperties.enabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   enabled?: boolean;
 }
@@ -1395,6 +1397,7 @@ model CustomImageProperties {
   /**
    * Whether or not the custom images underlying offer/plan has been enabled for programmatic deployment
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CustomImageProperties.isPlanAuthorized has a boolean wire value; preserve the published property contract."
   isPlanAuthorized?: boolean;
 
   /**
@@ -1465,6 +1468,7 @@ model CustomImagePropertiesCustom {
   /**
    * Indicates whether sysprep has been run on the VHD.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CustomImagePropertiesCustom.sysPrep has a boolean wire value; preserve the published property contract."
   sysPrep?: boolean;
 
   /**
@@ -1659,6 +1663,7 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * Indicates whether this virtual machine uses an SSH key for authentication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LabVirtualMachineCreationParameterProperties.isAuthenticationWithSshKey has a boolean wire value; preserve the published property contract."
   isAuthenticationWithSshKey?: boolean;
 
   /**
@@ -1674,6 +1679,7 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * Indicates whether the virtual machine is to be created without a public IP address.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LabVirtualMachineCreationParameterProperties.disallowPublicIpAddress has a boolean wire value; preserve the published property contract."
   disallowPublicIpAddress?: boolean = false;
 
   /**
@@ -1706,6 +1712,7 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * Indicates whether another user can take ownership of the virtual machine
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LabVirtualMachineCreationParameterProperties.allowClaim has a boolean wire value; preserve the published property contract."
   allowClaim?: boolean = false;
 
   /**
@@ -2079,6 +2086,7 @@ model GalleryImageProperties {
   /**
    * Indicates whether this gallery image is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GalleryImageProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2089,6 +2097,7 @@ model GalleryImageProperties {
   /**
    * Indicates if the plan has been authorized for programmatic deployment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GalleryImageProperties.isPlanAuthorized has a boolean wire value; preserve the published property contract."
   isPlanAuthorized?: boolean;
 }
 
@@ -2235,6 +2244,7 @@ model PolicySetResult {
   /**
    * A value indicating whether this policy set evaluation has discovered violations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PolicySetResult.hasError has a boolean wire value; preserve the published property contract."
   hasError?: boolean;
 
   /**
@@ -2834,6 +2844,7 @@ model LabVirtualMachineProperties {
   /**
    * Indicates whether this virtual machine uses an SSH key for authentication.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LabVirtualMachineProperties.isAuthenticationWithSshKey has a boolean wire value; preserve the published property contract."
   isAuthenticationWithSshKey?: boolean;
 
   /**
@@ -2855,6 +2866,7 @@ model LabVirtualMachineProperties {
   /**
    * Indicates whether the virtual machine is to be created without a public IP address.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LabVirtualMachineProperties.disallowPublicIpAddress has a boolean wire value; preserve the published property contract."
   disallowPublicIpAddress?: boolean = false;
 
   /**
@@ -2905,6 +2917,7 @@ model LabVirtualMachineProperties {
   /**
    * Indicates whether another user can take ownership of the virtual machine
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LabVirtualMachineProperties.allowClaim has a boolean wire value; preserve the published property contract."
   allowClaim?: boolean = false;
 
   /**

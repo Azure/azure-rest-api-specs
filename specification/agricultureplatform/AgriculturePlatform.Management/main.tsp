@@ -310,6 +310,7 @@ model DataManagerForAgricultureSolution {
   @doc("Entra application name used to access azure data manager for agriculture instance.")
   accessAzureDataManagerForAgricultureApplicationName: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataManagerForAgricultureSolution.isValidateInput has a boolean wire value; preserve the published property contract."
   @doc("Whether solution inference will validate input.")
   isValidateInput: boolean;
 }

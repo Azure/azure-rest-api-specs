@@ -403,6 +403,7 @@ namespace Microsoft.RedHatOpenShift {
      * when more than 2 Nodes are unhealthy at the same time, giving time for
      * the cluster to stabilize or for the user to manually intervene.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodePoolPropertiesUpdate.autoRepair has a boolean wire value; preserve the published property contract."
     @visibility(Lifecycle.Read, Lifecycle.Create)
     autoRepair?: boolean = true;
 

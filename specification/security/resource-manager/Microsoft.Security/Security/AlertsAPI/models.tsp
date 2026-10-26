@@ -386,6 +386,7 @@ model AlertProperties {
   /**
    * This field determines whether the alert is an incident (a compound grouping of several alerts) or a single alert.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AlertProperties.isIncident has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isIncident?: boolean;
 

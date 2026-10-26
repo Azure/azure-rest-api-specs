@@ -47,6 +47,7 @@ model QueryBaseRequest {
 
 @doc("Result of a storage configuration connectivity test.")
 model StorageConfigConnectivityResult {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StorageConfigConnectivityResult.succeeded has a boolean wire value; preserve the published property contract."
   @doc("Whether the connectivity test was successful.")
   succeeded: boolean;
 
@@ -474,6 +475,7 @@ model Control {
   @doc("Contacts associated with the control, grouped by role.")
   contacts?: Contacts;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Control.reserved has a boolean wire value; preserve the published property contract."
   @doc("True when the control is reserved (system-managed).")
   reserved?: boolean;
 
@@ -729,6 +731,7 @@ model StorageConfigTypeProperties {
 
 @doc("Network properties associated with a storage configuration, including managed virtual network and managed private endpoint information.")
 model StorageConfigNetworkProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StorageConfigNetworkProperties.isManagedVnetEnabled has a boolean wire value; preserve the published property contract."
   @doc("Whether managed virtual network is enabled for this storage configuration.")
   isManagedVnetEnabled?: boolean;
 
@@ -741,6 +744,7 @@ model StorageConfigNetworkProperties {
   @doc("The status of the managed private endpoint. Possible values include `Approved`, `Rejected`, `Pending`, `Provisioning`, or an empty string when no endpoint exists.")
   mpeStatus?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StorageConfigNetworkProperties.markedForDeletion has a boolean wire value; preserve the published property contract."
   @doc("Whether the managed private endpoint is marked for deletion.")
   markedForDeletion?: boolean;
 }
@@ -806,6 +810,7 @@ model ManagedPrivateEndpointExistsResponse {
 
 @doc("Network properties including managed private endpoint information.")
 model NetworkProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkProperties.isManagedVnetEnabled has a boolean wire value; preserve the published property contract."
   @doc("Whether managed virtual network is enabled.")
   isManagedVnetEnabled?: boolean;
 
@@ -821,6 +826,7 @@ model NetworkProperties {
   @doc("The managed private endpoint ID.")
   mpeId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkProperties.markedForDeletion has a boolean wire value; preserve the published property contract."
   @doc("Whether the endpoint is marked for deletion.")
   markedForDeletion?: boolean;
 }

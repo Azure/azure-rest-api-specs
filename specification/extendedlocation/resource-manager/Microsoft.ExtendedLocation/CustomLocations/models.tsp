@@ -78,6 +78,7 @@ model customLocationOperation {
   /**
    * Is this Operation a data plane operation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing customLocationOperation.isDataAction has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDataAction?: boolean;
 

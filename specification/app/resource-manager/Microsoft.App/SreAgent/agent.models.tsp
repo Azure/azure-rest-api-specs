@@ -175,6 +175,7 @@ model SandboxEgressConfiguration {
    * Whether remote HTTP MCP servers can use the managed network path.
    * In PATCH, omission preserves the setting and JSON merge-patch null clears it.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SandboxEgressConfiguration.allowHttpMcpServerNetworkAccess has a boolean wire value; preserve the published property contract."
   allowHttpMcpServerNetworkAccess?: boolean;
 
   /**
@@ -354,6 +355,7 @@ union UpgradeChannel {
 /** Agent identity configuration */
 model AgentIdentity {
   /** Indicates whether the agent identity is enabled */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AgentIdentity.enabled has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   enabled?: boolean;
 

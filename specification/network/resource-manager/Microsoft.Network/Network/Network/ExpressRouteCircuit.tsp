@@ -137,6 +137,7 @@ interface ExpressRouteCircuits {
       /**
        * Fetch only the latest tests.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getCircuitLinkFailoverAllTestsDetails.fetchLatest has a boolean wire value; preserve the published property contract."
       @query("fetchLatest")
       fetchLatest?: boolean;
     },

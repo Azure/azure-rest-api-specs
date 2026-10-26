@@ -112,6 +112,7 @@ interface Projects {
       /**
        * Delete the resource even if it contains running tasks
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.deleteRunningTasks has a boolean wire value; preserve the published property contract."
       @query("deleteRunningTasks")
       deleteRunningTasks?: boolean;
     }

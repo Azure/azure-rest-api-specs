@@ -266,6 +266,7 @@ model ActionOnUnmanageDeleteParameters {
   /**
    * Flag to bypass service errors that indicate the stack resource list is not correctly synchronized.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ActionOnUnmanageDeleteParameters.bypassStackOutOfSyncError has a boolean wire value; preserve the published property contract."
   @added(Versions.v2024_03_01)
   @query("bypassStackOutOfSyncError")
   bypassStackOutOfSyncError?: boolean;
@@ -380,6 +381,7 @@ model DeploymentStackProperties {
   /**
    * Flag to bypass service errors that indicate the stack resource list is not correctly synchronized.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeploymentStackProperties.bypassStackOutOfSyncError has a boolean wire value; preserve the published property contract."
   @added(Versions.v2024_03_01)
   @visibility(Lifecycle.Create, Lifecycle.Update)
   bypassStackOutOfSyncError?: boolean;
@@ -625,6 +627,7 @@ model DenySettings {
   /**
    * DenySettings will be applied to child resource scopes of every managed resource with a deny assignment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DenySettings.applyToChildScopes has a boolean wire value; preserve the published property contract."
   applyToChildScopes?: boolean;
 }
 

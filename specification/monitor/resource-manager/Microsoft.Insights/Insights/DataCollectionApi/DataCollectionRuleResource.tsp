@@ -91,6 +91,7 @@ interface DataCollectionRuleResources {
       /**
        * If set to 'true' then all associations of this data collection rule will also be deleted
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.deleteAssociations has a boolean wire value; preserve the published property contract."
       @query("deleteAssociations")
       deleteAssociations?: boolean = false;
     },

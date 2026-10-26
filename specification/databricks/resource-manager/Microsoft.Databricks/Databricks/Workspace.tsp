@@ -96,6 +96,7 @@ alias WorkspaceDeleteParameters = {
   /**
    * Optional parameter to retain default unity catalog data. By default the data will retained if Uc is enabled on the workspace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WorkspaceDeleteParameters.forceDeletion has a boolean wire value; preserve the published property contract."
   @query("forceDeletion")
   forceDeletion?: boolean = false;
 };

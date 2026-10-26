@@ -531,9 +531,11 @@ model BlobPropertiesGo {
   @Xml.name("CopyStatusDescription") copyStatusDescription?: string;
 
   /** Whether the blob is encrypted on the server. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobPropertiesGo.serverEncrypted has a boolean wire value; preserve the published property contract."
   @Xml.name("ServerEncrypted") serverEncrypted?: boolean;
 
   /** Whether the blob is incremental copy. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobPropertiesGo.incrementalCopy has a boolean wire value; preserve the published property contract."
   @Xml.name("IncrementalCopy") incrementalCopy?: boolean;
 
   /** The name of the destination snapshot. */
@@ -552,6 +554,7 @@ model BlobPropertiesGo {
   @Xml.name("AccessTier") accessTier?: AccessTier;
 
   /** Whether the access tier is inferred. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobPropertiesGo.accessTierInferred has a boolean wire value; preserve the published property contract."
   @Xml.name("AccessTierInferred") accessTierInferred?: boolean;
 
   /** The archive status of the blob. */
@@ -584,6 +587,7 @@ model BlobPropertiesGo {
   expiresOn?: utcDateTime;
 
   /** Whether the blob is sealed. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobPropertiesGo.isSealed has a boolean wire value; preserve the published property contract."
   @Xml.name("Sealed")
   isSealed?: boolean;
 
@@ -607,6 +611,7 @@ model BlobPropertiesGo {
   immutabilityPolicyMode?: ImmutabilityPolicyMode;
 
   /** Whether the blob is under legal hold. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BlobPropertiesGo.legalHold has a boolean wire value; preserve the published property contract."
   @Xml.name("LegalHold") legalHold?: boolean;
 
   @Xml.name("Acl") acl?: string;

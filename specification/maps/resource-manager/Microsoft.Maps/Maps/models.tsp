@@ -219,6 +219,7 @@ model MapsAccountProperties {
   /**
    * Allows toggle functionality on Azure Policy to disable Azure Maps local authentication support. This will disable Shared Keys and Shared Access Signature Token authentication from any usage.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MapsAccountProperties.disableLocalAuth has a boolean wire value; preserve the published property contract."
   disableLocalAuth?: boolean = false;
 
   /**

@@ -169,6 +169,7 @@ model ConnectionBaseProperties {
   @doc("The customer's master key OCID.")
   keyId?: Ocid;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConnectionBaseProperties.doesUseSecretIds has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether secret OCIDs are used for credential fields.")
   doesUseSecretIds?: boolean;
 

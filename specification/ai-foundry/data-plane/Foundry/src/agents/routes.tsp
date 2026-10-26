@@ -203,6 +203,7 @@ interface Agents {
       @path agent_name: string;
 
       /** For Hosted Agents, if `true`, force-deletes the agent even if its versions have active sessions, cascading deletion to all associated sessions. The service defaults to `false` if a value is not specified by the caller. This value is not relevant for other Agent types. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing deleteAgent.force has a boolean wire value; preserve the published property contract."
       @query force?: boolean = false;
     },
     DeleteAgentResponse
@@ -314,6 +315,7 @@ interface Agents {
       @path agent_version: string;
 
       /** For Hosted Agents, if `true`, force-deletes the version even if it has active sessions, cascading deletion to all associated sessions. The service defaults to `false` if a value is not specified by the caller. This value is not relevant for other Agent types. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing deleteAgentVersion.force has a boolean wire value; preserve the published property contract."
       @query force?: boolean = false;
     },
     DeleteAgentVersionResponse
@@ -342,6 +344,7 @@ interface Agents {
       ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.draft_agents_v1_preview>;
 
       /** (Preview) Whether to include draft versions in the listing. The service defaults to `false` if a value is not specified by the caller (only non-draft versions are returned). */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listAgentVersions.include_drafts has a boolean wire value; preserve the published property contract."
       @extension(
         "x-ms-foundry-meta",
         #{

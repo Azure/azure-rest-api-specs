@@ -156,6 +156,7 @@ interface VirtualMachineScaleSets {
       /**
        * Optional parameter to force delete a VM scale set. (Feature in Preview)
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.forceDeletion has a boolean wire value; preserve the published property contract."
       @query("forceDeletion")
       forceDeletion?: boolean;
     }
@@ -212,6 +213,7 @@ interface VirtualMachineScaleSets {
       /**
        * Optional parameter to hibernate a virtual machine from the VM scale set. (This feature is available for VMSS with Flexible OrchestrationMode only)
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing deallocate.hibernate has a boolean wire value; preserve the published property contract."
       @query("hibernate")
       hibernate?: boolean;
     },
@@ -233,6 +235,7 @@ interface VirtualMachineScaleSets {
       /**
        * Optional parameter to force delete virtual machines from the VM scale set. (Feature in Preview)
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing deleteInstances.forceDeletion has a boolean wire value; preserve the published property contract."
       @query("forceDeletion")
       forceDeletion?: boolean;
     },
@@ -335,6 +338,7 @@ interface VirtualMachineScaleSets {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing powerOff.skipShutdown has a boolean wire value; preserve the published property contract."
       @query("skipShutdown")
       skipShutdown?: boolean;
     },

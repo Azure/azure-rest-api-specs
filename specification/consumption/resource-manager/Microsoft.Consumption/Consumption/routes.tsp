@@ -692,6 +692,7 @@ interface ReservationTransactionsOperationGroup {
     /**
      * Applies mark up to the transactions if the caller is a partner.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.useMarkupIfPartner has a boolean wire value; preserve the published property contract."
     @query("useMarkupIfPartner")
     useMarkupIfPartner?: boolean,
 

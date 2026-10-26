@@ -52,6 +52,7 @@ union AiGatewayNameAvailabilityReason {
 @added(Versions.v2026_11_01)
 model AiGatewayCheckNameAvailabilityResponse {
   /** Whether the name is valid and available. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AiGatewayCheckNameAvailabilityResponse.nameAvailable has a boolean wire value; preserve the published property contract."
   nameAvailable: boolean;
 
   /** Reason for the availability result. */

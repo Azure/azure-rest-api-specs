@@ -75,18 +75,21 @@ model AwsAcmCertificateSummaryProperties {
   @doc("<p>Fully qualified domain name (FQDN), such as www.example.com or example.com, for the certificate.</p>")
   domainName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsAcmCertificateSummaryProperties.exported has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether the certificate has been exported. This value exists only when the certificate type is <code>PRIVATE</code>.</p>")
   exported?: boolean;
 
   @doc("<p>Contains a list of Extended Key Usage X.509 v3 extension objects. Each object specifies a purpose for which the certificate public key can be used and consists of a name and an object identifier (OID). </p>")
   extendedKeyUsages?: ExtendedKeyUsageName[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsAcmCertificateSummaryProperties.hasAdditionalSubjectAlternativeNames has a boolean wire value; preserve the published property contract."
   @doc("<p>When called by <a href='https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html'>ListCertificates</a>, indicates whether the full list of subject alternative names has been included in the response. If false, the response includes all of the subject alternative names included in the certificate. If true, the response only includes the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use <a href='https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html'>DescribeCertificate</a>.</p>")
   hasAdditionalSubjectAlternativeNames?: boolean;
 
   @doc("<p>The date and time when the certificate was imported. This value exists only when the certificate type is <code>IMPORTED</code>. </p>")
   importedAt?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsAcmCertificateSummaryProperties.inUse has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether the certificate is currently in use by any Amazon Web Services resources.</p>")
   inUse?: boolean;
 

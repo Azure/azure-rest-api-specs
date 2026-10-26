@@ -65,6 +65,7 @@ interface UserContracts {
       /**
        * Send an Email notification to the User.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing createOrUpdate.notify has a boolean wire value; preserve the published property contract."
       @query("notify")
       notify?: boolean;
 
@@ -125,12 +126,14 @@ interface UserContracts {
       /**
        * Whether to delete user's subscription or not.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.deleteSubscriptions has a boolean wire value; preserve the published property contract."
       @query("deleteSubscriptions")
       deleteSubscriptions?: boolean;
 
       /**
        * Send an Account Closed Email notification to the User.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.notify has a boolean wire value; preserve the published property contract."
       @query("notify")
       notify?: boolean;
 
@@ -181,6 +184,7 @@ interface UserContracts {
       /**
        * Detailed Group in response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listByService.expandGroups has a boolean wire value; preserve the published property contract."
       @query("expandGroups")
       expandGroups?: boolean;
     },

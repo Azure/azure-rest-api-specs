@@ -137,18 +137,23 @@ model BinaryHardeningResult {
 
 @doc("Binary hardening features.")
 model BinaryHardeningFeatures {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BinaryHardeningFeatures.noExecute has a boolean wire value; preserve the published property contract."
   @doc("Flag indicating the binary's stack is set to NX (no-execute).")
   noExecute?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BinaryHardeningFeatures.positionIndependentExecutable has a boolean wire value; preserve the published property contract."
   @doc("Flag indicating the binary was compiled to be a position independent executable.")
   positionIndependentExecutable?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BinaryHardeningFeatures.relocationReadOnly has a boolean wire value; preserve the published property contract."
   @doc("Flag indicating the binary has enabled relocation read-only protections.")
   relocationReadOnly?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BinaryHardeningFeatures.canary has a boolean wire value; preserve the published property contract."
   @doc("Flag indicating if the binary was compiled with stack canaries enabled.")
   canary?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BinaryHardeningFeatures.stripped has a boolean wire value; preserve the published property contract."
   @doc("Flag indicating if debug symbols have been stripped from the binary.")
   stripped?: boolean;
 }
@@ -291,15 +296,19 @@ model CryptoCertificate {
   @doc("A matching paired private key.")
   pairedKey?: PairedKey;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CryptoCertificate.isExpired has a boolean wire value; preserve the published property contract."
   @doc("Indicates if the certificate is expired.")
   isExpired?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CryptoCertificate.isSelfSigned has a boolean wire value; preserve the published property contract."
   @doc("Indicates if the certificate is self-signed.")
   isSelfSigned?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CryptoCertificate.isWeakSignature has a boolean wire value; preserve the published property contract."
   @doc("Indicates the signature algorithm used is insecure according to NIST guidance.")
   isWeakSignature?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CryptoCertificate.isShortKeySize has a boolean wire value; preserve the published property contract."
   @doc("Indicates the certificate's key size is considered too small to be secure for the key algorithm according to NIST guidance.")
   isShortKeySize?: boolean;
 
@@ -370,6 +379,7 @@ model CryptoKey {
   @doc("A matching paired key or certificate.")
   pairedKey?: PairedKey;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CryptoKey.isShortKeySize has a boolean wire value; preserve the published property contract."
   @doc("Indicates the key size is considered too small to be secure for the algorithm according to NIST guidance.")
   isShortKeySize?: boolean;
 

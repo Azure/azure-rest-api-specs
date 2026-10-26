@@ -649,6 +649,7 @@ using Azure.AI.Projects;
 // Add optional boolean "allow_preview" client initialization parameter
 // See: https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#adding-client-initialization-parameters
 model AIProjectClientOptions {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AIProjectClientOptions.allow_preview has a boolean wire value; preserve the published property contract."
   @doc("Whether to enable preview features. Must be specified and set to True to enable preview features.")
   allow_preview?: boolean;
 }

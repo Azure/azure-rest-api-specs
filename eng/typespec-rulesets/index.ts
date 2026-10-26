@@ -10,9 +10,15 @@ export const $linter = defineLinter({
   ruleSets: {
     "data-plane": {
       extends: ["@azure-tools/typespec-azure-rulesets-original/data-plane"],
+      enable: {
+        "@azure-tools/typespec-azure-core/no-boolean": true,
+      },
     },
     "resource-manager": {
       extends: ["@azure-tools/typespec-azure-rulesets-original/resource-manager"],
+      enable: {
+        "@azure-tools/typespec-azure-core/no-boolean": true,
+      },
     },
     "client-sdk": {
       extends: ["@azure-tools/typespec-azure-rulesets-original/client-sdk"],

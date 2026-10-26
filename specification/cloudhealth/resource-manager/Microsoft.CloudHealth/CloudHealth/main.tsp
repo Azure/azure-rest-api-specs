@@ -781,6 +781,7 @@ model DependenciesSignalGroupV2 {
   @typeChangedFrom(Versions.v2026_09_01_preview, DependenciesAggregationUnit)
   unit?: AggregationUnit;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DependenciesSignalGroupV2.ignoreUnknown has a boolean wire value; preserve the published property contract."
   @doc("If true, children with Unknown health state are excluded from aggregation calculations. Defaults to true.")
   ignoreUnknown?: boolean = true;
 }
@@ -815,6 +816,7 @@ model SignalAggregationGroup {
   @doc("Unit type for the thresholds. Required when aggregationType is MinHealthy or MaxNotHealthy; MUST NOT be set otherwise.")
   unit?: AggregationUnit;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SignalAggregationGroup.ignoreUnknown has a boolean wire value; preserve the published property contract."
   @doc("If true (default), members reporting Unknown are excluded from the aggregation. For MinHealthy and MaxNotHealthy this flag affects the denominator/count and is meaningful. For WorstOf and BestOf the flag has no observable effect: under WorstOf, Unknown=0 is the lowest severity and can never beat any non-Unknown member in a Max() so filtering it changes nothing observable; under BestOf, Unknown is unconditionally excluded by the strategy itself irrespective of the flag. The flag is retained on the contract for vocabulary symmetry across all four strategies.")
   ignoreUnknown?: boolean = true;
 

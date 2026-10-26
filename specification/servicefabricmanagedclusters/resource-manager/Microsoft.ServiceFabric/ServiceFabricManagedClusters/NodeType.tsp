@@ -245,6 +245,7 @@ model NodeTypeProperties {
   /**
    * Indicates the Service Fabric system services for the cluster will run on this node type. This setting cannot be changed once the node type is created.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.isPrimary has a boolean wire value; preserve the published property contract."
   isPrimary: boolean;
 
   /**
@@ -338,11 +339,13 @@ model NodeTypeProperties {
   /**
    * Indicates if the node type can only host Stateless workloads.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.isStateless has a boolean wire value; preserve the published property contract."
   isStateless?: boolean = false;
 
   /**
    * Indicates if scale set associated with the node type can be composed of multiple placement groups.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.multiplePlacementGroups has a boolean wire value; preserve the published property contract."
   multiplePlacementGroups?: boolean = false;
 
   /**
@@ -366,6 +369,7 @@ model NodeTypeProperties {
   /**
    * Enable or disable the Host Encryption for the virtual machines on the node type. This will enable the encryption for all the disks including Resource/Temp disk at host itself. Default: The Encryption at host will be disabled unless this property is set to true for the resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.enableEncryptionAtHost has a boolean wire value; preserve the published property contract."
   enableEncryptionAtHost?: boolean = false;
 
   /**
@@ -377,21 +381,25 @@ model NodeTypeProperties {
   /**
    * Specifies whether the network interface is accelerated networking-enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.enableAcceleratedNetworking has a boolean wire value; preserve the published property contract."
   enableAcceleratedNetworking?: boolean;
 
   /**
    * Specifies whether the use public load balancer. If not specified and the node type doesn't have its own frontend configuration, it will be attached to the default load balancer. If the node type uses its own Load balancer and useDefaultPublicLoadBalancer is true, then the frontend has to be an Internal Load Balancer. If the node type uses its own Load balancer and useDefaultPublicLoadBalancer is false or not set, then the custom load balancer must include a public load balancer to provide outbound connectivity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.useDefaultPublicLoadBalancer has a boolean wire value; preserve the published property contract."
   useDefaultPublicLoadBalancer?: boolean;
 
   /**
    * Specifies whether to use the temporary disk for the service fabric data root, in which case no managed data disk will be attached and the temporary disk will be used. It is only allowed for stateless node types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.useTempDataDisk has a boolean wire value; preserve the published property contract."
   useTempDataDisk?: boolean;
 
   /**
    * Specifies whether the node type should be overprovisioned. It is only allowed for stateless node types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.enableOverProvisioning has a boolean wire value; preserve the published property contract."
   enableOverProvisioning?: boolean;
 
   /**
@@ -403,6 +411,7 @@ model NodeTypeProperties {
    * Indicates whether the node type will be Spot Virtual Machines. Azure will allocate the VMs if there is capacity available and the VMs can be evicted at any time.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well known abbreviation"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.isSpotVM has a boolean wire value; preserve the published property contract."
   isSpotVM?: boolean;
 
   /**
@@ -414,6 +423,7 @@ model NodeTypeProperties {
    * Indicates whether to use ephemeral os disk. The sku selected on the vmSize property needs to support this feature.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "OS is a well known abbreviation"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.useEphemeralOSDisk has a boolean wire value; preserve the published property contract."
   useEphemeralOSDisk?: boolean;
 
   /**
@@ -468,18 +478,21 @@ model NodeTypeProperties {
   /**
    * Specifies whether secure boot should be enabled on the nodeType. Can only be used with TrustedLaunch and ConfidentialVM SecurityType.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.secureBootEnabled has a boolean wire value; preserve the published property contract."
   secureBootEnabled?: boolean;
 
   /**
    * Specifies whether each node is allocated its own public IPv4 address. This is only supported on secondary node types with custom Load Balancers.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.enableNodePublicIP has a boolean wire value; preserve the published property contract."
   enableNodePublicIP?: boolean;
 
   /**
    * Specifies whether each node is allocated its own public IPv6 address. This is only supported on secondary node types with custom Load Balancers.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.enableNodePublicIPv6 has a boolean wire value; preserve the published property contract."
   enableNodePublicIPv6?: boolean;
 
   /**
@@ -552,12 +565,14 @@ model NodeTypeProperties {
   /**
    * 	Setting this to true allows stateless node types to scale out without equal distribution across zones.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.zoneBalance has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_03_01_preview)
   zoneBalance?: boolean;
 
   /**
    * Specifies the node type should be configured for only outbound traffic and not inbound traffic.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.isOutboundOnly has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_06_01_preview)
   isOutboundOnly?: boolean;
 
@@ -565,6 +580,7 @@ model NodeTypeProperties {
    * Specifies whether the node type should use a resilient ephemeral OS disk when using a supported SKU size. A resilient ephemeral OS disk provides improved reliability for ephemeral OS disks by enabling full caching.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeProperties.enableResilientEphemeralOsDisk has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_02_01)
   enableResilientEphemeralOsDisk?: boolean;
 
@@ -593,6 +609,7 @@ model AdditionalNetworkInterfaceConfiguration {
   /**
    * Specifies whether the network interface is accelerated networking-enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AdditionalNetworkInterfaceConfiguration.enableAcceleratedNetworking has a boolean wire value; preserve the published property contract."
   enableAcceleratedNetworking?: boolean;
 
   /**
@@ -684,6 +701,7 @@ model VmApplication {
   /**
    * If set to true, when a new Gallery Application version is available in PIR/SIG, it will be automatically updated for the underlying VMSS.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VmApplication.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean;
 
   /**
@@ -708,6 +726,7 @@ model VmApplication {
   /**
    * Optional, If true, any failure for any operation in the VmApplication will fail the deployment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VmApplication.treatFailureAsDeploymentFailure has a boolean wire value; preserve the published property contract."
   treatFailureAsDeploymentFailure?: boolean;
 }
 
@@ -761,6 +780,7 @@ model NodeTypeActionParameters {
   /**
    * Force the action to go through.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeTypeActionParameters.force has a boolean wire value; preserve the published property contract."
   force?: boolean;
 
   /**
@@ -943,6 +963,7 @@ model VMSSExtensionProperties {
   /**
    * Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMSSExtensionProperties.autoUpgradeMinorVersion has a boolean wire value; preserve the published property contract."
   autoUpgradeMinorVersion?: boolean;
 
   /**
@@ -976,6 +997,7 @@ model VMSSExtensionProperties {
   /**
    * Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMSSExtensionProperties.enableAutomaticUpgrade has a boolean wire value; preserve the published property contract."
   enableAutomaticUpgrade?: boolean;
 
   /**
@@ -1359,6 +1381,7 @@ model ProxyAgentSettings {
   /**
    * Specifies whether ProxyAgent feature should be enabled on the virtual machine or virtual machine scale set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProxyAgentSettings.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1379,6 +1402,7 @@ model ProxyAgentSettings {
   /**
    * Specify whether to implicitly install the ProxyAgent Extension. This option is currently applicable only for Linux Os.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ProxyAgentSettings.addProxyAgentExtension has a boolean wire value; preserve the published property contract."
   addProxyAgentExtension?: boolean;
 }
 

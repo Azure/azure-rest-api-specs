@@ -90,6 +90,7 @@ model DenyAssignmentProperties {
   /**
    * Determines if the deny assignment applies to child scopes. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DenyAssignmentProperties.doNotApplyToChildScopes has a boolean wire value; preserve the published property contract."
   doNotApplyToChildScopes?: boolean;
 
   /**
@@ -105,6 +106,7 @@ model DenyAssignmentProperties {
   /**
    * Specifies whether this deny assignment was created by Azure and cannot be edited or deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DenyAssignmentProperties.isSystemProtected has a boolean wire value; preserve the published property contract."
   isSystemProtected?: boolean;
 
   /**

@@ -123,6 +123,7 @@ interface CertificateResponses {
       /**
        * Indicates if certificate has been verified by owner of the private key.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.certificateIsVerified has a boolean wire value; preserve the published property contract."
       @query("certificate.isVerified")
       certificateIsVerified?: boolean;
 
@@ -138,6 +139,7 @@ interface CertificateResponses {
       /**
        * Indicates if the certificate contains a private key.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.certificateHasPrivateKey has a boolean wire value; preserve the published property contract."
       @query("certificate.hasPrivateKey")
       certificateHasPrivateKey?: boolean;
 
@@ -184,6 +186,7 @@ interface CertificateResponses {
       /**
        * Indicates if the certificate has been verified by owner of the private key.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing generateVerificationCode.certificateIsVerified has a boolean wire value; preserve the published property contract."
       @query("certificate.isVerified")
       certificateIsVerified?: boolean;
 
@@ -199,6 +202,7 @@ interface CertificateResponses {
       /**
        * Indicates if the certificate contains private key.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing generateVerificationCode.certificateHasPrivateKey has a boolean wire value; preserve the published property contract."
       @query("certificate.hasPrivateKey")
       certificateHasPrivateKey?: boolean;
 
@@ -237,6 +241,7 @@ interface CertificateResponses {
       /**
        * Indicates if the certificate has been verified by owner of the private key.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing verifyCertificate.certificateIsVerified has a boolean wire value; preserve the published property contract."
       @query("certificate.isVerified")
       certificateIsVerified?: boolean;
 
@@ -252,6 +257,7 @@ interface CertificateResponses {
       /**
        * Indicates if the certificate contains private key.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing verifyCertificate.certificateHasPrivateKey has a boolean wire value; preserve the published property contract."
       @query("certificate.hasPrivateKey")
       certificateHasPrivateKey?: boolean;
 

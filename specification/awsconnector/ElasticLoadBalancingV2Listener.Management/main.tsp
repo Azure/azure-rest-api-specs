@@ -150,6 +150,7 @@ model Action {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of MutualAuthentication")
 model MutualAuthentication {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MutualAuthentication.ignoreClientCertificateExpiry has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether expired client certificates are ignored.")
   ignoreClientCertificateExpiry?: boolean;
 
@@ -228,6 +229,7 @@ model AuthenticateOidcConfig {
   @doc("The token endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.")
   tokenEndpoint?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AuthenticateOidcConfig.useExistingClientSecret has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether to use the existing client secret when modifying a rule. If you are creating a rule, you can omit this parameter or set it to false.")
   useExistingClientSecret?: boolean;
 
@@ -299,6 +301,7 @@ model TargetGroupStickinessConfig {
   @doc("The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days).")
   durationSeconds?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TargetGroupStickinessConfig.enabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether target group stickiness is enabled.")
   enabled?: boolean;
 }

@@ -261,6 +261,7 @@ model DeltaTableSchema {
   @doc("Delta table schema name.")
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeltaTableSchema.optional has a boolean wire value; preserve the published property contract."
   @doc("Delta table schema optional.")
   optional: boolean;
 }

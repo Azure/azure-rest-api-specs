@@ -68,6 +68,7 @@ model AwsApiGatewayStageProperties {
   @doc("Access log settings, including the access log format and access log destination ARN. The ``AccessLogSetting`` property type specifies settings for logging access in this stage.  ``AccessLogSetting`` is a property of the [AWS::ApiGateway::Stage](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html) resource.")
   accessLogSetting?: AccessLogSetting;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsApiGatewayStageProperties.cacheClusterEnabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether a cache cluster is enabled for the stage.")
   cacheClusterEnabled?: boolean;
 
@@ -103,6 +104,7 @@ model AwsApiGatewayStageProperties {
   @identifiers(#[])
   tags?: Tag[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsApiGatewayStageProperties.tracingEnabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether active tracing with X-ray is enabled for the Stage.")
   tracingEnabled?: boolean;
 
@@ -138,6 +140,7 @@ model CanarySetting {
   @doc("Stage variables overridden for a canary release deployment, including new stage variables introduced in the canary. These stage variables are represented as a string-to-string map between stage variable names and their values.")
   stageVariableOverrides?: Record<string>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CanarySetting.useStageCache has a boolean wire value; preserve the published property contract."
   @doc("A Boolean flag to indicate whether the canary deployment uses the stage cache or not.")
   useStageCache?: boolean;
 }
@@ -148,15 +151,18 @@ model CanarySetting {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of MethodSetting")
 model MethodSetting {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MethodSetting.cacheDataEncrypted has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the cached responses are encrypted.")
   cacheDataEncrypted?: boolean;
 
   @doc("Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached.")
   cacheTtlInSeconds?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MethodSetting.cachingEnabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached.")
   cachingEnabled?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MethodSetting.dataTraceEnabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. This can be useful to troubleshoot APIs, but can result in logging sensitive data. We recommend that you don't enable this option for production APIs.")
   dataTraceEnabled?: boolean;
 
@@ -166,6 +172,7 @@ model MethodSetting {
   @doc("Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. Valid values are ``OFF``, ``ERROR``, and ``INFO``. Choose ``ERROR`` to write only error-level entries to CloudWatch Logs, or choose ``INFO`` to include all ``ERROR`` events as well as extra informational events.")
   loggingLevel?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MethodSetting.metricsEnabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether Amazon CloudWatch metrics are enabled for this method.")
   metricsEnabled?: boolean;
 

@@ -39,6 +39,7 @@ model SoftDeletionMetadata {
   /**
    * Indicates whether the resource is soft deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SoftDeletionMetadata.isSoftDeleted has a boolean wire value; preserve the published property contract."
   isSoftDeleted?: boolean;
 
   /**

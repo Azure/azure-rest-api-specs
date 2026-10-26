@@ -68,6 +68,7 @@ model SliResource {
   @doc("The streaming rule last updated timestamp associated with the Sli resource.")
   streamingRuleLastUpdatedTimestamp?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SliResource.enableAlert has a boolean wire value; preserve the published property contract."
   @doc("A flag to determine whether alert is enabled.")
   enableAlert: boolean;
 

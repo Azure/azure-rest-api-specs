@@ -58,6 +58,7 @@ model SqlDbExtendedDetails {
   @visibility(Lifecycle.Read)
   bufferCacheSizeInMB?: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlDbExtendedDetails.isDatabaseHighlyAvailable has a boolean wire value; preserve the published property contract."
   @doc("The product support status.")
   @visibility(Lifecycle.Read)
   isDatabaseHighlyAvailable?: boolean;
@@ -96,9 +97,11 @@ model SqlDbExtendedDetails {
   @doc("Gets or sets the SQL edition.")
   sqlEdition: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlDbExtendedDetails.isClustered has a boolean wire value; preserve the published property contract."
   @doc("Gets or sets a value indicating whether the parent SQL instance is clustered or not.")
   isClustered?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SqlDbExtendedDetails.isHighAvailabilityEnabled has a boolean wire value; preserve the published property contract."
   @doc("Gets or sets a value indicating whether the high availability is enabled or not.")
   isHighAvailabilityEnabled?: boolean;
 }

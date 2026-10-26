@@ -54,6 +54,7 @@ model AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem {
   /**
    * Whether this version is the default agent pool version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem.default has a boolean wire value; preserve the published property contract."
   default?: boolean;
 
   /**
@@ -64,6 +65,7 @@ model AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem {
   /**
    * Whether Kubernetes version is currently in preview.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem.isPreview has a boolean wire value; preserve the published property contract."
   isPreview?: boolean;
 }
 
@@ -323,6 +325,7 @@ interface ManagedClusters {
        * ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.ignore-pod-disruption-budget has a boolean wire value; preserve the published property contract."
       @added(Versions.v2026_08_02_preview)
       @query("ignore-pod-disruption-budget")
       `ignore-pod-disruption-budget`?: boolean;

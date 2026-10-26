@@ -88,6 +88,7 @@ interface VoiceAgentWebSocket {
        * persisted voice agent definition's configured `store` value. If supplied, this value overrides the
        * definition's `store` setting for this session only.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing connectVoiceAgent.store has a boolean wire value; preserve the published property contract."
       @query store?: boolean;
 
       /**

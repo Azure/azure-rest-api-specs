@@ -2097,6 +2097,7 @@ model AutoImportJobProperties {
   /**
    * Whether or not to enable deletions during auto import. This only affects overwrite-dirty.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutoImportJobProperties.enableDeletions has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   enableDeletions?: boolean = false;
 
@@ -2376,6 +2377,7 @@ model ExpansionJobProperties {
   /**
    * When true, expansion creates a RebalanceJob after completing. Optional, defaults to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExpansionJobProperties.runRebalanceJob has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   runRebalanceJob?: boolean = true;
@@ -2707,6 +2709,7 @@ model ApiOperation {
   /**
    * The flag that indicates whether the operation applies to data plane.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ApiOperation.isDataAction has a boolean wire value; preserve the published property contract."
   isDataAction?: boolean;
 
   /**
@@ -2840,6 +2843,7 @@ model MetricDimension {
   /**
    * To be exported to shoe box.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricDimension.toBeExportedForShoebox has a boolean wire value; preserve the published property contract."
   toBeExportedForShoebox?: boolean;
 }
 
@@ -3346,6 +3350,7 @@ model CacheUpgradeSettings {
   /**
    * True if the user chooses to select an installation time between now and firmwareUpdateDeadline. Else the firmware will automatically be installed after firmwareUpdateDeadline if not triggered earlier via the upgrade operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CacheUpgradeSettings.upgradeScheduleEnabled has a boolean wire value; preserve the published property contract."
   upgradeScheduleEnabled?: boolean;
 
   /**
@@ -3401,6 +3406,7 @@ model CacheEncryptionSettings {
   /**
    * Specifies whether the service will automatically rotate to the newest version of the key in the key vault.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CacheEncryptionSettings.rotationToLatestKeyVersionEnabled has a boolean wire value; preserve the published property contract."
   rotationToLatestKeyVersionEnabled?: boolean;
 }
 
@@ -3453,16 +3459,19 @@ model NfsAccessRule {
   /**
    * Allow SUID semantics.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NfsAccessRule.suid has a boolean wire value; preserve the published property contract."
   suid?: boolean;
 
   /**
    * For the default policy, allow access to subdirectories under the root export. If this is set to no, clients can only mount the path '/'. If set to yes, clients can mount a deeper path, like '/a/b'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NfsAccessRule.submountAccess has a boolean wire value; preserve the published property contract."
   submountAccess?: boolean;
 
   /**
    * Map root accesses to anonymousUID and anonymousGID.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NfsAccessRule.rootSquash has a boolean wire value; preserve the published property contract."
   rootSquash?: boolean;
 
   /**
@@ -3560,6 +3569,7 @@ model CacheUsernameDownloadSettings {
   /**
    * Whether or not Extended Groups is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CacheUsernameDownloadSettings.extendedGroups has a boolean wire value; preserve the published property contract."
   extendedGroups?: boolean;
 
   /**
@@ -3593,16 +3603,19 @@ model CacheUsernameDownloadSettings {
   /**
    * Whether or not the LDAP connection should be encrypted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CacheUsernameDownloadSettings.encryptLdapConnection has a boolean wire value; preserve the published property contract."
   encryptLdapConnection?: boolean = false;
 
   /**
    * Determines if the certificates must be validated by a certificate authority. When true, caCertificateURI must be provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CacheUsernameDownloadSettings.requireValidCertificate has a boolean wire value; preserve the published property contract."
   requireValidCertificate?: boolean = false;
 
   /**
    * Determines if the certificate should be automatically downloaded. This applies to 'caCertificateURI' only if 'requireValidCertificate' is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CacheUsernameDownloadSettings.autoDownloadCertificate has a boolean wire value; preserve the published property contract."
   autoDownloadCertificate?: boolean = false;
 
   /**

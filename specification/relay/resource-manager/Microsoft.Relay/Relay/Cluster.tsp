@@ -108,12 +108,14 @@ model RelayClusterProperties {
   /**
    * Indicates whether the Relay cluster supports capacity scaling.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RelayClusterProperties.supportsScaling has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   supportsScaling?: boolean;
 
   /**
    * Indicates whether the Relay cluster was created as zone redundant.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RelayClusterProperties.zoneRedundant has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   zoneRedundant?: boolean;
 }

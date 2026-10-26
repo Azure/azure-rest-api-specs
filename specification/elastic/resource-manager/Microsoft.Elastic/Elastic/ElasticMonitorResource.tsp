@@ -137,6 +137,7 @@ interface ElasticMonitorResources {
       /**
        * Indicates whether to perform a soft delete. When set to true, the Azure resource (Liftr integration) only is deleted and not the Partner Cloud resource. When set to false (default), the resource is permanently deleted from both Azure and the Partner Cloud.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.softDelete has a boolean wire value; preserve the published property contract."
       @added(Versions.v2026_03_15_preview)
       @query("softDelete")
       softDelete?: boolean = false;

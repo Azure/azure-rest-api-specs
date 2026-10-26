@@ -111,6 +111,7 @@ interface ProductTemplateModels {
       /**
        * Instructs the server to return only object count without actual body. Optional.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.$count has a boolean wire value; preserve the published property contract."
       @query("$count")
       $count?: boolean;
 

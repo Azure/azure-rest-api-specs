@@ -46,6 +46,7 @@ model CreateAgentVersionRequest {
   )
   digital_worker_type?: DigitalWorkerType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CreateAgentVersionRequest.draft has a boolean wire value; preserve the published property contract."
   @doc("(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.")
   @extension(
     "x-ms-foundry-meta",
@@ -242,6 +243,7 @@ model AgentVersionObject {
 
   definition: AgentDefinition;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AgentVersionObject.draft has a boolean wire value; preserve the published property contract."
   @doc("Whether this agent version is a draft (candidate) rather than a release. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted. Defaults to false.")
   @extension(
     "x-ms-foundry-meta",
@@ -708,6 +710,7 @@ model DeleteAgentResponse {
   @doc("The name of the agent.")
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeleteAgentResponse.deleted has a boolean wire value; preserve the published property contract."
   @doc("Whether the agent was successfully deleted.")
   deleted: boolean;
 }
@@ -724,6 +727,7 @@ model DeleteAgentVersionResponse {
   @doc("The version identifier of the agent.")
   version: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeleteAgentVersionResponse.deleted has a boolean wire value; preserve the published property contract."
   @doc("Whether the agent was successfully deleted.")
   deleted: boolean;
 }
@@ -739,6 +743,7 @@ model StructuredInputDefinition {
   @doc("The JSON schema for the structured input (optional).")
   schema?: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StructuredInputDefinition.required has a boolean wire value; preserve the published property contract."
   @doc("Whether the input property is required when the agent is invoked. The service defaults to `false` if a value is not specified by the caller.")
   required?: boolean = false;
 }
@@ -905,6 +910,7 @@ union ActivityProtocolAccessBoundary {
 
 @doc("Configuration specific to the activity protocol.")
 model ActivityProtocolConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ActivityProtocolConfiguration.enable_m365_public_endpoint has a boolean wire value; preserve the published property contract."
   @doc("Whether to enable the M365 public endpoint for the activity protocol.")
   enable_m365_public_endpoint?: boolean;
 

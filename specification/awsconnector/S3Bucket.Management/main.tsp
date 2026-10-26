@@ -117,6 +117,7 @@ model AwsS3BucketProperties {
   @doc("This operation is not supported by directory buckets.  Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see [Locking Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).    +  The ``DefaultRetention`` settings require both a mode and a period.  +  The ``DefaultRetention`` period can be either ``Days`` or ``Years`` but you must select one. You cannot specify ``Days`` and ``Years`` at the same time.  +  You can enable Object Lock for new or existing buckets. For more information, see [Configuring Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html). Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see [Locking Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).")
   objectLockConfiguration?: ObjectLockConfiguration;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsS3BucketProperties.objectLockEnabled has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether this bucket has an Object Lock configuration enabled. Enable ``ObjectLockEnabled`` when you apply ``ObjectLockConfiguration`` to a bucket.")
   objectLockEnabled?: boolean;
 
@@ -282,6 +283,7 @@ model InventoryConfiguration {
   @doc("Contains information about where to publish the inventory results. Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket.")
   destination?: Destination;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InventoryConfiguration.enabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether the inventory is enabled or disabled. If set to ``True``, an inventory list is generated. If set to ``False``, no inventory list is generated.")
   enabled?: boolean;
 
@@ -472,15 +474,19 @@ model OwnershipControls {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PublicAccessBlockConfiguration")
 model PublicAccessBlockConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PublicAccessBlockConfiguration.blockPublicAcls has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to ``TRUE`` causes the following behavior:  +  PUT Bucket ACL and PUT Object ACL calls fail if the specified ACL is public.  +  PUT Object calls fail if the request includes a public ACL.  +  PUT Bucket calls fail if the request includes a public ACL.   Enabling this setting doesn't affect existing policies or ACLs.")
   blockPublicAcls?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PublicAccessBlockConfiguration.blockPublicPolicy has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this element to ``TRUE`` causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access.  Enabling this setting doesn't affect existing bucket policies.")
   blockPublicPolicy?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PublicAccessBlockConfiguration.ignorePublicAcls has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. Setting this element to ``TRUE`` causes Amazon S3 to ignore all public ACLs on this bucket and objects in this bucket. Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.")
   ignorePublicAcls?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PublicAccessBlockConfiguration.restrictPublicBuckets has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to ``TRUE`` restricts access to this bucket to only AWS-service principals and authorized users within this account if the bucket has a public policy. Enabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.")
   restrictPublicBuckets?: boolean;
 }
@@ -582,6 +588,7 @@ model TagFilter {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ServerSideEncryptionRule")
 model ServerSideEncryptionRule {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServerSideEncryptionRule.bucketKeyEnabled has a boolean wire value; preserve the published property contract."
   @doc("Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the ``BucketKeyEnabled`` element to ``true`` causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled. For more information, see [Amazon S3 Bucket Keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the *Amazon S3 User Guide*.")
   bucketKeyEnabled?: boolean;
 
@@ -706,6 +713,7 @@ model Rule {
   @doc("Indicates the number of days after creation when objects are deleted from Amazon S3 and Amazon S3 Glacier. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time.")
   expirationInDays?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Rule.expiredObjectDeleteMarker has a boolean wire value; preserve the published property contract."
   @doc("Indicates whether Amazon S3 will remove a delete marker without any noncurrent versions. If set to true, the delete marker will be removed if there are no noncurrent versions. This cannot be specified with ``ExpirationInDays``, ``ExpirationDate``, or ``TagFilters``.")
   expiredObjectDeleteMarker?: boolean;
 
@@ -779,6 +787,7 @@ model TargetObjectKeyFormat {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EventBridgeConfiguration")
 model EventBridgeConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EventBridgeConfiguration.eventBridgeEnabled has a boolean wire value; preserve the published property contract."
   @doc("Enables delivery of events to Amazon EventBridge.")
   eventBridgeEnabled?: boolean = true;
 }

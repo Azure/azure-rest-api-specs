@@ -165,6 +165,7 @@ interface ContainerGroups {
       /**
        * If true, adds a timestamp at the beginning of every line of log output. If not provided, defaults to false.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing listLogs.timestamps has a boolean wire value; preserve the published property contract."
       @query("timestamps")
       timestamps?: boolean;
     }

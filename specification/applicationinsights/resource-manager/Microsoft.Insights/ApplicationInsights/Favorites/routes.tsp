@@ -49,6 +49,7 @@ interface FavoritesOperationGroup {
       /**
        * Flag indicating whether or not to return the full content for each applicable favorite. If false, only return summary content for favorites.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.canFetchContent has a boolean wire value; preserve the published property contract."
       @query("canFetchContent")
       canFetchContent?: boolean;
 

@@ -102,6 +102,7 @@ model Attributes {
   /**
    * Determines whether the object is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Attributes.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -173,6 +174,7 @@ model SecretBundle {
   /**
    * True if the secret's lifetime is managed by key vault. If this is a secret backing a certificate, then managed will be true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SecretBundle.managed has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   managed?: boolean;
 
@@ -276,6 +278,7 @@ model SecretItem {
   /**
    * True if the secret's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SecretItem.managed has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   managed?: boolean;
 }

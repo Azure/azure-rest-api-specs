@@ -43,9 +43,11 @@ model OwnerReference {
   uid: string;
 
   /** True when this owner manages the lifecycle of the referencing object. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OwnerReference.controller has a boolean wire value; preserve the published property contract."
   controller?: boolean;
 
   /** If true, deletion of the owner is blocked until this reference is removed. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing OwnerReference.blockOwnerDeletion has a boolean wire value; preserve the published property contract."
   blockOwnerDeletion?: boolean;
 }
 
@@ -157,6 +159,7 @@ model VolumeMount {
   mountPath?: string;
 
   /** Mount the volume as read-only when true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VolumeMount.readOnly has a boolean wire value; preserve the published property contract."
   readOnly?: boolean;
 
   /** Sub-path within the volume to mount instead of the volume root. */
@@ -178,15 +181,19 @@ model ContainerSecurityContext {
   capabilities?: Capabilities;
 
   /** When true, the container runs with full host privileges (root + all Linux capabilities). */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContainerSecurityContext.privileged has a boolean wire value; preserve the published property contract."
   privileged?: boolean;
 
   /** Mount the container's root filesystem as read-only when true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContainerSecurityContext.readOnlyRootFilesystem has a boolean wire value; preserve the published property contract."
   readOnlyRootFilesystem?: boolean;
 
   /** Prevent the container process from gaining more privileges than its parent when false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContainerSecurityContext.allowPrivilegeEscalation has a boolean wire value; preserve the published property contract."
   allowPrivilegeEscalation?: boolean;
 
   /** Require the container to run as a non-root user when true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContainerSecurityContext.runAsNonRoot has a boolean wire value; preserve the published property contract."
   runAsNonRoot?: boolean;
 
   /** UID to run the container process as. */
@@ -399,6 +406,7 @@ model PodSecurityContext {
   runAsGroup?: int64;
 
   /** Require all containers to run as non-root when true. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PodSecurityContext.runAsNonRoot has a boolean wire value; preserve the published property contract."
   runAsNonRoot?: boolean;
 
   /** Supplemental GIDs applied to each container in addition to the primary GID. */
@@ -465,6 +473,7 @@ model ContainerStatus {
   name: string;
 
   /** True when the container has passed its readiness probe. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContainerStatus.ready has a boolean wire value; preserve the published property contract."
   ready?: boolean;
 
   /** Number of times the container has restarted since the pod was started. */
@@ -474,6 +483,7 @@ model ContainerStatus {
   image?: string;
 
   /** Whether the container has passed its startup probe and is considered started. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContainerStatus.started has a boolean wire value; preserve the published property contract."
   started?: boolean;
 
   /** Current state of the container. */
@@ -623,6 +633,7 @@ model EndpointSliceEndpoint {
   addresses: string[];
 
   /** True when the endpoint is ready to receive traffic. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EndpointSliceEndpoint.ready has a boolean wire value; preserve the published property contract."
   ready?: boolean;
 
   /** Name of the node hosting this endpoint. */
@@ -767,12 +778,15 @@ model KubernetesResourceSpec {
    * When true, the pod uses the host network namespace (disables pod network isolation).
    * Populated for Pod resources.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesResourceSpec.hostNetwork has a boolean wire value; preserve the published property contract."
   hostNetwork?: boolean;
 
   /** When true, the pod shares the host PID namespace. Populated for Pod resources. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesResourceSpec.hostPid has a boolean wire value; preserve the published property contract."
   hostPid?: boolean;
 
   /** When true, the pod shares the host IPC namespace. Populated for Pod resources. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesResourceSpec.hostIpc has a boolean wire value; preserve the published property contract."
   hostIpc?: boolean;
 
   /** Name of the RuntimeClass for specialized container runtimes. Populated for Pod resources. */
@@ -831,6 +845,7 @@ model KubernetesResourceSpec {
   maxSurge?: string;
 
   /** When true, the Deployment rollout is paused. Populated for Deployment resources. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesResourceSpec.paused has a boolean wire value; preserve the published property contract."
   paused?: boolean;
 
   /**
@@ -968,6 +983,7 @@ model KubernetesResourceSpec {
    * When true, future executions are suspended.
    * Populated for CronJob and Job resources.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesResourceSpec.suspend has a boolean wire value; preserve the published property contract."
   suspend?: boolean;
 
   /**
@@ -1080,6 +1096,7 @@ model KubernetesResourceSpec {
    * When true, PVCs using this StorageClass may be expanded after provisioning.
    * Populated for StorageClass resources.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesResourceSpec.allowVolumeExpansion has a boolean wire value; preserve the published property contract."
   allowVolumeExpansion?: boolean;
 
   /**
@@ -1109,6 +1126,7 @@ model KubernetesResourceSpec {
    * When true, the ConfigMap is immutable and cannot be updated after creation.
    * Populated for ConfigMap resources.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesResourceSpec.configMapImmutable has a boolean wire value; preserve the published property contract."
   configMapImmutable?: boolean;
 
   // ── ServiceAccount ─────────────────────────────────────────────────────────
@@ -1118,6 +1136,7 @@ model KubernetesResourceSpec {
    * auto-mounted into pods running as this ServiceAccount.
    * Populated for ServiceAccount resources.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesResourceSpec.automountServiceAccountToken has a boolean wire value; preserve the published property contract."
   automountServiceAccountToken?: boolean;
 
   // ── VolumeAttachment ────────────────────────────────────────────────────────
@@ -1264,6 +1283,7 @@ model KubernetesResourceSpec {
    * When true, this PriorityClass is the cluster default for pods without an explicit priorityClassName.
    * Populated for PriorityClass resources.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesResourceSpec.globalDefault has a boolean wire value; preserve the published property contract."
   globalDefault?: boolean;
 
   /**
@@ -1286,6 +1306,7 @@ model KubernetesResourceSpec {
    * When true, the node is cordoned and will not accept new pod scheduling.
    * Populated for Node resources.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesResourceSpec.unschedulable has a boolean wire value; preserve the published property contract."
   unschedulable?: boolean;
 
   /**
@@ -1651,6 +1672,7 @@ model KubernetesResourceStatus {
    * When true, the volume is successfully attached to the target node.
    * Populated for VolumeAttachment resources.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesResourceStatus.volumeAttached has a boolean wire value; preserve the published property contract."
   volumeAttached?: boolean;
 
   // ── Generic overflow ────────────────────────────────────────────────────────

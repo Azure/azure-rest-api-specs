@@ -38,16 +38,20 @@ model DbVersionProperties {
   @maxLength(255)
   version: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DbVersionProperties.isLatestForMajorVersion has a boolean wire value; preserve the published property contract."
   @doc("True if this version of the Oracle Database software is the latest version for a release.")
   isLatestForMajorVersion?: boolean;
 
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DbVersionProperties.isPreviewDbVersion has a boolean wire value; preserve the published property contract."
   @doc("True if this version of the Oracle Database software is the preview version.")
   isPreviewDbVersion?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DbVersionProperties.isUpgradeSupported has a boolean wire value; preserve the published property contract."
   @doc("True if this version of the Oracle Database software is supported for Upgrade.")
   isUpgradeSupported?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DbVersionProperties.supportsPdb has a boolean wire value; preserve the published property contract."
   @doc("True if this version of the Oracle Database software supports pluggable databases.")
   supportsPdb?: boolean;
 }
@@ -72,10 +76,12 @@ model DbVersionFilter {
   @doc("The DB system storage management option. Used to list database versions available for that storage manager. Valid values are ASM and LVM.")
   storageManagement?: StorageManagementType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DbVersionFilter.isUpgradeSupported has a boolean wire value; preserve the published property contract."
   @query
   @doc("If true, filters the results to the set of database versions which are supported for Upgrade.")
   isUpgradeSupported?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DbVersionFilter.isDatabaseSoftwareImageSupported has a boolean wire value; preserve the published property contract."
   @query
   @doc("If true, filters the results to the set of Oracle Database versions that are supported for the database software images.")
   isDatabaseSoftwareImageSupported?: boolean;

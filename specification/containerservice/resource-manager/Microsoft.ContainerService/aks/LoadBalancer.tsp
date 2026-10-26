@@ -110,6 +110,7 @@ model LoadBalancerProperties {
   /**
    * Whether to automatically place services on the load balancer. If not supplied, the default value is true. If set to false manually, both of the external and the internal load balancer will not be selected for services unless they explicitly target it.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LoadBalancerProperties.allowServicePlacement has a boolean wire value; preserve the published property contract."
   allowServicePlacement?: boolean;
 
   /**

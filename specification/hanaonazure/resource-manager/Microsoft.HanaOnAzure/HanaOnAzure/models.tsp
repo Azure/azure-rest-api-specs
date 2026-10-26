@@ -172,6 +172,7 @@ model SapMonitorProperties {
   /**
    * The value indicating whether to send analytics to Microsoft
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SapMonitorProperties.enableCustomerAnalytics has a boolean wire value; preserve the published property contract."
   enableCustomerAnalytics?: boolean;
 
   /**

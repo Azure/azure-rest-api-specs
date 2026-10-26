@@ -64,6 +64,7 @@ model ContentAnalyzer {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   fieldSchema?: FieldSchema;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContentAnalyzer.dynamicFieldSchema has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_11_01)
   @doc("Indicates whether the result may contain additional fields outside of the defined schema.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -200,26 +201,32 @@ model FieldSchema {
 
 @doc("Configuration settings for an analyzer.")
 model ContentAnalyzerConfig {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContentAnalyzerConfig.returnDetails has a boolean wire value; preserve the published property contract."
   @doc("Return all content details.")
   returnDetails?: boolean;
 
   @doc("List of locale hints for speech transcription.")
   locales?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContentAnalyzerConfig.enableOcr has a boolean wire value; preserve the published property contract."
   @doc("Enable optical character recognition (OCR).")
   enableOcr?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContentAnalyzerConfig.enableLayout has a boolean wire value; preserve the published property contract."
   @doc("Enable layout analysis.")
   enableLayout?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContentAnalyzerConfig.enableFigureDescription has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_11_01)
   @doc("Enable generation of figure description.")
   enableFigureDescription?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContentAnalyzerConfig.enableFigureAnalysis has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_11_01)
   @doc("Enable analysis of figures, such as charts and diagrams.")
   enableFigureAnalysis?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContentAnalyzerConfig.enableFormula has a boolean wire value; preserve the published property contract."
   @doc("Enable mathematical formula detection.")
   enableFormula?: boolean;
 
@@ -234,9 +241,11 @@ model ContentAnalyzerConfig {
   @doc("Representation format of annotations in analyze result markdown.")
   annotationFormat?: AnnotationFormat = AnnotationFormat.markdown;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContentAnalyzerConfig.disableFaceBlurring has a boolean wire value; preserve the published property contract."
   @doc("Disable the default blurring of faces for privacy while processing the content.")
   disableFaceBlurring?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContentAnalyzerConfig.estimateFieldSourceAndConfidence has a boolean wire value; preserve the published property contract."
   @doc("Return field grounding source and confidence.")
   estimateFieldSourceAndConfidence?: boolean;
 
@@ -244,14 +253,17 @@ model ContentAnalyzerConfig {
   @doc("Map of categories to classify the input content(s) against.")
   contentCategories?: Record<ContentCategoryDefinition>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContentAnalyzerConfig.enableSegment has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_11_01)
   @doc("Enable segmentation of the input by contentCategories.")
   enableSegment?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContentAnalyzerConfig.segmentPerPage has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_11_01)
   @doc("Force segmentation of document content by page.")
   segmentPerPage?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContentAnalyzerConfig.omitContent has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_11_01)
   @doc("""
     Omit the content for this analyzer from analyze result.
@@ -263,6 +275,7 @@ model ContentAnalyzerConfig {
   @doc("Workflow used for content analysis.")
   workflow?: ContentAnalyzerWorkflow;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContentAnalyzerConfig.allowInputTruncation has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01_preview)
   @doc("""
     When true, input that exceeds the service's processable-unit limit is truncated to the limit and returned as a
@@ -272,6 +285,7 @@ model ContentAnalyzerConfig {
     """)
   allowInputTruncation?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContentAnalyzerConfig.allowInPageSegments has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01_preview)
   @doc("Enable sub-page segmentation. When true, segments may cover a portion of a page instead of full pages.")
   allowInPageSegments?: boolean;
@@ -385,6 +399,7 @@ model ContentFieldDefinition {
   @doc("Reference to another field definition.")
   $ref?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ContentFieldDefinition.estimateSourceAndConfidence has a boolean wire value; preserve the published property contract."
   @added(Versions.v2025_11_01)
   @doc("Return grounding source and confidence.")
   estimateSourceAndConfidence?: boolean;
@@ -463,6 +478,7 @@ model AnalyzeParameters {
   @query
   processingLocation?: ProcessingLocation = ProcessingLocation.global;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AnalyzeParameters.allowInputTruncation has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_06_01_preview)
   @doc("Overrides the analyzer's allowInputTruncation setting for this request. When omitted, the analyzer's configured value applies.")
   @query
@@ -690,6 +706,7 @@ model BooleanField extends ContentField {
   @doc("Semantic data type of the field value.")
   type: ContentFieldType.boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BooleanField.valueBoolean has a boolean wire value; preserve the published property contract."
   @doc("Boolean field value.")
   valueBoolean?: boolean;
 }

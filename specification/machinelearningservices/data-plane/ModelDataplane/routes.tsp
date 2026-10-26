@@ -181,6 +181,7 @@ interface Models {
       ...WorkspacePathParameters;
 
       /** Whether to auto-version the model. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing register.autoVersion has a boolean wire value; preserve the published property contract."
       @query autoVersion?: boolean;
 
       /** The model to register. */
@@ -239,6 +240,7 @@ interface Models {
       @query orderBy?: string;
 
       /** Whether to return only the latest version. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing list.latestVersionOnly has a boolean wire value; preserve the published property contract."
       @query latestVersionOnly?: boolean;
 
       /** Filter by feed. */
@@ -305,6 +307,7 @@ interface Models {
       @path id: string;
 
       /** Whether to include deployment settings. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing queryById.includeDeploymentSettings has a boolean wire value; preserve the published property contract."
       @query includeDeploymentSettings?: boolean;
     },
     Model

@@ -167,6 +167,7 @@ interface Documents {
       $filter?: string;
 
       /** A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing autocompleteGet.useFuzzyMatching has a boolean wire value; preserve the published property contract."
       @query("fuzzy")
       useFuzzyMatching?: boolean;
 

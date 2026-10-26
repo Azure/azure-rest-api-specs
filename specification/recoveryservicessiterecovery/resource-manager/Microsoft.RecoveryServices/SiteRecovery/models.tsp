@@ -3428,6 +3428,7 @@ model VMNicInputDetails {
   /**
    * Whether the NIC has accelerated networking enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMNicInputDetails.enableAcceleratedNetworkingOnRecovery has a boolean wire value; preserve the published property contract."
   enableAcceleratedNetworkingOnRecovery?: boolean;
 
   /**
@@ -3438,6 +3439,7 @@ model VMNicInputDetails {
   /**
    * Whether the test NIC has accelerated networking enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMNicInputDetails.enableAcceleratedNetworkingOnTfo has a boolean wire value; preserve the published property contract."
   enableAcceleratedNetworkingOnTfo?: boolean;
 
   /**
@@ -3453,6 +3455,7 @@ model VMNicInputDetails {
   /**
    * A value indicating whether an existing NIC is allowed to be reused during failover subject to availability.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMNicInputDetails.reuseExistingNic has a boolean wire value; preserve the published property contract."
   reuseExistingNic?: boolean;
 
   /**
@@ -3468,6 +3471,7 @@ model VMNicInputDetails {
   /**
    * A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMNicInputDetails.tfoReuseExistingNic has a boolean wire value; preserve the published property contract."
   tfoReuseExistingNic?: boolean;
 
   /**
@@ -3482,8 +3486,10 @@ model IPConfigInputDetails {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipConfigName?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IPConfigInputDetails.isPrimary has a boolean wire value; preserve the published property contract."
   isPrimary?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IPConfigInputDetails.isSeletedForFailover has a boolean wire value; preserve the published property contract."
   isSeletedForFailover?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoverySubnetName?: string;
@@ -4287,6 +4293,7 @@ model ReplicationProtectionClusterProperties {
   /**
    * A value indicating whether all nodes of the cluster are registered or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReplicationProtectionClusterProperties.areAllClusterNodesRegistered has a boolean wire value; preserve the published property contract."
   areAllClusterNodesRegistered?: boolean;
 
   /**
@@ -4337,6 +4344,7 @@ model RegisteredClusterNodes {
   /**
    * A value indicating whether this represents virtual entity hosting all the shared disks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RegisteredClusterNodes.isSharedDiskVirtualNode has a boolean wire value; preserve the published property contract."
   isSharedDiskVirtualNode?: boolean;
 }
 
@@ -5792,6 +5800,7 @@ model ReplicationProtectionIntentProperties {
   /**
    * A value indicating whether the intent object is active.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ReplicationProtectionIntentProperties.isActive has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isActive?: boolean;
 
@@ -7531,6 +7540,7 @@ model A2AProtectedDiskDetails {
   /**
    * A value indicating whether resync is required for this disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing A2AProtectedDiskDetails.resyncRequired has a boolean wire value; preserve the published property contract."
   resyncRequired?: boolean;
 
   /**
@@ -7567,6 +7577,7 @@ model A2AProtectedDiskDetails {
   /**
    * A value indicating whether vm has encrypted os disk or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing A2AProtectedDiskDetails.isDiskEncrypted has a boolean wire value; preserve the published property contract."
   isDiskEncrypted?: boolean;
 
   /**
@@ -7582,6 +7593,7 @@ model A2AProtectedDiskDetails {
   /**
    * A value indicating whether disk key got encrypted or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing A2AProtectedDiskDetails.isDiskKeyEncrypted has a boolean wire value; preserve the published property contract."
   isDiskKeyEncrypted?: boolean;
 
   /**
@@ -7735,6 +7747,7 @@ model A2AProtectedManagedDiskDetails {
   /**
    * A value indicating whether resync is required for this disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing A2AProtectedManagedDiskDetails.resyncRequired has a boolean wire value; preserve the published property contract."
   resyncRequired?: boolean;
 
   /**
@@ -7771,6 +7784,7 @@ model A2AProtectedManagedDiskDetails {
   /**
    * A value indicating whether vm has encrypted os disk or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing A2AProtectedManagedDiskDetails.isDiskEncrypted has a boolean wire value; preserve the published property contract."
   isDiskEncrypted?: boolean;
 
   /**
@@ -7786,6 +7800,7 @@ model A2AProtectedManagedDiskDetails {
   /**
    * A value indicating whether disk key got encrypted or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing A2AProtectedManagedDiskDetails.isDiskKeyEncrypted has a boolean wire value; preserve the published property contract."
   isDiskKeyEncrypted?: boolean;
 
   /**
@@ -7978,6 +7993,7 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * A value indicating if the cluster infra is ready or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing A2AReplicationDetails.isClusterInfraReady has a boolean wire value; preserve the published property contract."
   isClusterInfraReady?: boolean;
 
   /**
@@ -8096,6 +8112,7 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * A value indicating whether replication agent update is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing A2AReplicationDetails.isReplicationAgentUpdateRequired has a boolean wire value; preserve the published property contract."
   isReplicationAgentUpdateRequired?: boolean;
 
   /**
@@ -8108,6 +8125,7 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * A value indicating whether agent certificate update is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing A2AReplicationDetails.isReplicationAgentCertificateUpdateRequired has a boolean wire value; preserve the published property contract."
   isReplicationAgentCertificateUpdateRequired?: boolean;
 
   /**
@@ -8233,11 +8251,13 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * A value indicating whether replication agent upgradeable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing A2AReplicationDetails.isAgentUpgradeable has a boolean wire value; preserve the published property contract."
   isAgentUpgradeable?: boolean;
 
   /**
    * A value indicating whether replication agent reinstallation is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing A2AReplicationDetails.isAgentReinstallRequired has a boolean wire value; preserve the published property contract."
   isAgentReinstallRequired?: boolean;
 
   /**
@@ -8254,6 +8274,7 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * A value indicating whether replication agent Upgrade is In-Progress.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing A2AReplicationDetails.isAgentUpgradeInProgress has a boolean wire value; preserve the published property contract."
   isAgentUpgradeInProgress?: boolean;
 
   /**
@@ -8264,6 +8285,7 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * A value indicating whether replication agent Upgrade retry exhausted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing A2AReplicationDetails.isAgentUpgradeRetryThresholdExhausted has a boolean wire value; preserve the published property contract."
   isAgentUpgradeRetryThresholdExhausted?: boolean;
 
   /**
@@ -8341,6 +8363,7 @@ model VMNicDetails {
   /**
    * A value indicating whether the NIC has accelerated networking enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMNicDetails.enableAcceleratedNetworkingOnRecovery has a boolean wire value; preserve the published property contract."
   enableAcceleratedNetworkingOnRecovery?: boolean;
 
   /**
@@ -8356,6 +8379,7 @@ model VMNicDetails {
   /**
    * Whether the TFO NIC has accelerated networking enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMNicDetails.enableAcceleratedNetworkingOnTfo has a boolean wire value; preserve the published property contract."
   enableAcceleratedNetworkingOnTfo?: boolean;
 
   /**
@@ -8371,6 +8395,7 @@ model VMNicDetails {
   /**
    * A value indicating whether an existing NIC is allowed to be reused during failover subject to availability.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMNicDetails.reuseExistingNic has a boolean wire value; preserve the published property contract."
   reuseExistingNic?: boolean = false;
 
   /**
@@ -8386,6 +8411,7 @@ model VMNicDetails {
   /**
    * A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VMNicDetails.tfoReuseExistingNic has a boolean wire value; preserve the published property contract."
   tfoReuseExistingNic?: boolean = false;
 
   /**
@@ -8400,6 +8426,7 @@ model IPConfigDetails {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IPConfigDetails.isPrimary has a boolean wire value; preserve the published property contract."
   isPrimary?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   subnetName?: string;
@@ -8408,6 +8435,7 @@ model IPConfigDetails {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipAddressType?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IPConfigDetails.isSeletedForFailover has a boolean wire value; preserve the published property contract."
   isSeletedForFailover?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoverySubnetName?: string;
@@ -9375,6 +9403,7 @@ model AutomationRunbookTaskDetails extends TaskTypeDetails {
   /**
    * A value indicating whether it is a primary side script or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutomationRunbookTaskDetails.isPrimarySideScript has a boolean wire value; preserve the published property contract."
   isPrimarySideScript?: boolean;
 
   /**
@@ -12634,6 +12663,7 @@ model InMageAzureV2ReplicationDetails
   /**
    * A value indicating whether additional IR stats are available or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InMageAzureV2ReplicationDetails.isAdditionalStatsAvailable has a boolean wire value; preserve the published property contract."
   isAdditionalStatsAvailable?: boolean;
 
   /**
@@ -14252,6 +14282,7 @@ model InMageRcmDiscoveredProtectedVmDetails {
   /**
    * A value indicating whether the VM is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InMageRcmDiscoveredProtectedVmDetails.isDeleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeleted?: boolean;
 
@@ -14737,6 +14768,7 @@ model InMageRcmFailbackDiscoveredProtectedVmDetails {
   /**
    * A value indicating whether the VM is deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InMageRcmFailbackDiscoveredProtectedVmDetails.isDeleted has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isDeleted?: boolean;
 
@@ -15236,6 +15268,7 @@ model InMageRcmFailbackReplicationDetails
   /**
    * A value indicating whether agent registration was successful after failover.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InMageRcmFailbackReplicationDetails.isAgentRegistrationSuccessfulAfterFailover has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isAgentRegistrationSuccessfulAfterFailover?: boolean;
 
@@ -15462,16 +15495,19 @@ model InMageRcmMobilityAgentDetails {
   /**
    * A value indicating whether replication agent upgradeable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InMageRcmMobilityAgentDetails.isAgentUpgradeable has a boolean wire value; preserve the published property contract."
   isAgentUpgradeable?: boolean;
 
   /**
    * A value indicating whether replication agent reinstallation is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InMageRcmMobilityAgentDetails.isAgentReinstallRequired has a boolean wire value; preserve the published property contract."
   isAgentReinstallRequired?: boolean;
 
   /**
    * A value indicating whether replication agent reinstallation is required.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InMageRcmMobilityAgentDetails.isLastReinstallSuccessful has a boolean wire value; preserve the published property contract."
   isLastReinstallSuccessful?: boolean;
 
   /**
@@ -16211,6 +16247,7 @@ model InMageRcmReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * A value indicating whether agent registration was successful after failover.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InMageRcmReplicationDetails.isAgentRegistrationSuccessfulAfterFailover has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isAgentRegistrationSuccessfulAfterFailover?: boolean;
 
@@ -16732,6 +16769,7 @@ model InMageReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * A value indicating whether additional IR stats are available or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InMageReplicationDetails.isAdditionalStatsAvailable has a boolean wire value; preserve the published property contract."
   isAdditionalStatsAvailable?: boolean;
 
   /**
@@ -17836,6 +17874,7 @@ model ScriptActionTaskDetails extends TaskTypeDetails {
   /**
    * A value indicating whether it is a primary side script or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ScriptActionTaskDetails.isPrimarySideScript has a boolean wire value; preserve the published property contract."
   isPrimarySideScript?: boolean;
 
   /**

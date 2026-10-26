@@ -72,6 +72,7 @@ model Route53DomainsDomainSummaryProperties {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsRoute53DomainsDomainSummary")
 model AwsRoute53DomainsDomainSummaryProperties {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsRoute53DomainsDomainSummaryProperties.autoRenew has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether the domain is automatically renewed upon expiration.</p>")
   autoRenew?: boolean;
 
@@ -81,6 +82,7 @@ model AwsRoute53DomainsDomainSummaryProperties {
   @doc("<p>Expiration date of the domain in Unix time format and Coordinated Universal Time (UTC).</p>")
   expiry?: utcDateTime;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsRoute53DomainsDomainSummaryProperties.transferLock has a boolean wire value; preserve the published property contract."
   @doc("<p>Indicates whether a domain is locked from unauthorized transfer to another party.</p>")
   transferLock?: boolean;
 }

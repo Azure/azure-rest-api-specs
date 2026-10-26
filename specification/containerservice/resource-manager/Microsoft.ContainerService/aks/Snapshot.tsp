@@ -125,6 +125,7 @@ model SnapshotProperties {
    * Whether to use a FIPS-enabled OS.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SnapshotProperties.enableFIPS has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   enableFIPS?: boolean;
 }

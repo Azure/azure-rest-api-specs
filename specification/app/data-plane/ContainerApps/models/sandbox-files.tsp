@@ -23,9 +23,11 @@ namespace ContainerAppsSandbox {
     mode: int32;
 
     /** Whether the path is a directory. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FileInfo.isDir has a boolean wire value; preserve the published property contract."
     isDir: boolean;
 
     /** Whether the path is a symbolic link. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FileInfo.isSymlink has a boolean wire value; preserve the published property contract."
     isSymlink: boolean;
 
     /** The symbolic link target, when applicable. */
@@ -38,6 +40,7 @@ namespace ContainerAppsSandbox {
   /** Result of a sandbox file operation. */
   model FileOpStatusResponse {
     /** Whether the file operation succeeded. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FileOpStatusResponse.success has a boolean wire value; preserve the published property contract."
     success: boolean;
 
     /** The error message when the operation failed. */
@@ -53,6 +56,7 @@ namespace ContainerAppsSandbox {
     path: string;
 
     /** Whether to create missing parent directories. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MkDirContent.createParents has a boolean wire value; preserve the published property contract."
     createParents?: boolean;
 
     /** The Unix mode for the new directory. */
@@ -62,6 +66,7 @@ namespace ContainerAppsSandbox {
   /** Result of writing a sandbox file. */
   model WriteFileResponse {
     /** Whether the file was written successfully. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing WriteFileResponse.success has a boolean wire value; preserve the published property contract."
     success: boolean;
 
     /** The error message when the write failed. */

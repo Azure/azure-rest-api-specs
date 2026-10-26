@@ -35,6 +35,7 @@ model TransparentDataEncryptionProperties {
   @doc("The URI of the key in Key Vault to be used for transparent data encryption")
   keyVaultKeyUri?: url;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing TransparentDataEncryptionProperties.autoRotationEnabled has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_07_01_Preview)
   @doc("Indicates whether auto-rotation of the customer-managed keys is enabled for transparent data encryption")
   autoRotationEnabled?: boolean;

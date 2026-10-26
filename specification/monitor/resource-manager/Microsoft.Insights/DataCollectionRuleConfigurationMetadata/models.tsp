@@ -18,6 +18,7 @@ model DataCollectionRuleConfigurationMetadataRequest {
   resourceType?: string;
 
   /** When true, returns detailed stream metadata in the response. Defaults to false. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DataCollectionRuleConfigurationMetadataRequest.withStreamMetadata has a boolean wire value; preserve the published property contract."
   withStreamMetadata?: boolean;
 }
 

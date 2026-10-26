@@ -148,11 +148,13 @@ model GcpContainerClusterProperties {
   /**
    * Kubernetes alpha features are enabled on this cluster. This includes alpha API groups (e.g. v1alpha1) and features that may not be production ready in the kubernetes version of the master and nodes. The cluster has no SLA for uptime and master/node upgrades are disabled. Alpha enabled clusters are automatically deleted thirty days after creation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpContainerClusterProperties.enableKubernetesAlpha has a boolean wire value; preserve the published property contract."
   enableKubernetesAlpha?: boolean;
 
   /**
    * Enable the ability to use Cloud TPUs in this cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpContainerClusterProperties.enableTpu has a boolean wire value; preserve the published property contract."
   enableTpu?: boolean;
 
   /**
@@ -474,6 +476,7 @@ model NodeConfig {
   /**
    * Optional. Reserved for future use.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeConfig.enableConfidentialStorage has a boolean wire value; preserve the published property contract."
   enableConfidentialStorage?: boolean;
 
   /**
@@ -561,6 +564,7 @@ model NodeConfig {
   /**
    * Whether the nodes are created as preemptible VM instances. See: https://cloud.google.com/compute/docs/instances/preemptible for more information about preemptible VM instances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeConfig.preemptible has a boolean wire value; preserve the published property contract."
   preemptible?: boolean;
 
   /**
@@ -608,6 +612,7 @@ model NodeConfig {
   /**
    * Spot flag for enabling Spot VM, which is a rebrand of the existing preemptible flag.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeConfig.spot has a boolean wire value; preserve the published property contract."
   spot?: boolean;
 
   /**
@@ -751,6 +756,7 @@ model NodeNetworkConfig {
   /**
    * Whether to create a pod range for this node pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeNetworkConfig.createPodRange has a boolean wire value; preserve the published property contract."
   createPodRange?: boolean;
 
   /**
@@ -783,6 +789,7 @@ model NodeNetworkConfig {
   /**
    * Whether to enable private nodes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeNetworkConfig.enablePrivateNodes has a boolean wire value; preserve the published property contract."
   enablePrivateNodes?: boolean;
 }
 
@@ -828,6 +835,7 @@ model PodCidrOverprovisionConfig {
   /**
    * Whether to disable pod CIDR overprovision.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PodCidrOverprovisionConfig.disable has a boolean wire value; preserve the published property contract."
   disable?: boolean;
 }
 
@@ -1049,6 +1057,7 @@ model QueuedProvisioning {
   /**
    * Denotes that this nodepool is QRM specific.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing QueuedProvisioning.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -1059,6 +1068,7 @@ model BestEffortProvisioning {
   /**
    * When this is enabled, cluster/node pool creations will ignore non-fatal errors like stockout to best provision as many nodes as possible.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BestEffortProvisioning.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1074,11 +1084,13 @@ model NodePoolAutoscaling {
   /**
    * Can this node pool be deleted automatically.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodePoolAutoscaling.autoprovisioned has a boolean wire value; preserve the published property contract."
   autoprovisioned?: boolean;
 
   /**
    * Is autoscaling enabled for this node pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodePoolAutoscaling.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1130,11 +1142,13 @@ model NodeManagement {
   /**
    * A flag that specifies whether node auto-upgrade is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeManagement.autoUpgrade has a boolean wire value; preserve the published property contract."
   autoUpgrade?: boolean;
 
   /**
    * A flag that specifies whether the node auto-repair is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeManagement.autoRepair has a boolean wire value; preserve the published property contract."
   autoRepair?: boolean;
 }
 
@@ -1182,6 +1196,7 @@ model ClientCertificateConfig {
   /**
    * Issue a client certificate.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClientCertificateConfig.issueClientCertificate has a boolean wire value; preserve the published property contract."
   issueClientCertificate?: boolean;
 }
 
@@ -1322,6 +1337,7 @@ model HttpLoadBalancing {
   /**
    * Whether the HTTP Load Balancing addon is disabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing HttpLoadBalancing.disabled has a boolean wire value; preserve the published property contract."
   disabled?: boolean;
 }
 
@@ -1332,6 +1348,7 @@ model HorizontalPodAutoscaling {
   /**
    * Whether the Horizontal Pod Autoscaling addon is disabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing HorizontalPodAutoscaling.disabled has a boolean wire value; preserve the published property contract."
   disabled?: boolean;
 }
 
@@ -1342,6 +1359,7 @@ model KubernetesDashboard {
   /**
    * Whether the Kubernetes Dashboard addon is disabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing KubernetesDashboard.disabled has a boolean wire value; preserve the published property contract."
   disabled?: boolean;
 }
 
@@ -1352,6 +1370,7 @@ model NetworkPolicyConfig {
   /**
    * Whether the Network Policy addon is disabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkPolicyConfig.disabled has a boolean wire value; preserve the published property contract."
   disabled?: boolean;
 }
 
@@ -1362,6 +1381,7 @@ model CloudRunConfig {
   /**
    * Whether the Cloud Run addon is disabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CloudRunConfig.disabled has a boolean wire value; preserve the published property contract."
   disabled?: boolean;
 
   /**
@@ -1377,6 +1397,7 @@ model DnsCacheConfig {
   /**
    * Whether the DNS Cache addon is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DnsCacheConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -1387,6 +1408,7 @@ model ConfigConnectorConfig {
   /**
    * Whether the Config Connector addon is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConfigConnectorConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -1397,6 +1419,7 @@ model GcePersistentDiskCsiDriverConfig {
   /**
    * Whether the GCE Persistent Disk CSI Driver addon is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcePersistentDiskCsiDriverConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -1407,6 +1430,7 @@ model GcpFilestoreCsiDriverConfig {
   /**
    * Whether the GCP Filestore CSI Driver addon is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcpFilestoreCsiDriverConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -1417,6 +1441,7 @@ model GkeBackupAgentConfig {
   /**
    * Whether the GKE Backup Agent addon is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GkeBackupAgentConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -1427,6 +1452,7 @@ model GcsFuseCsiDriverConfig {
   /**
    * Whether the GCS Fuse CSI Driver addon is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcsFuseCsiDriverConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -1437,6 +1463,7 @@ model StatefulHaConfig {
   /**
    * Whether the Stateful HA addon is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing StatefulHaConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -1447,6 +1474,7 @@ model ParallelstoreCsiDriverConfig {
   /**
    * Whether the Parallelstore CSI Driver addon is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ParallelstoreCsiDriverConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -1457,6 +1485,7 @@ model RayOperatorConfig {
   /**
    * Whether the Ray Operator addon is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RayOperatorConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1477,6 +1506,7 @@ model HighScaleCheckpointingConfig {
   /**
    * Whether the High Scale Checkpointing addon is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing HighScaleCheckpointingConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -1487,6 +1517,7 @@ model LustreCsiDriverConfig {
   /**
    * Whether the Lustre CSI Driver addon is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LustreCsiDriverConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -1513,6 +1544,7 @@ model RayClusterLoggingConfig {
   /**
    * Whether Ray cluster logging is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RayClusterLoggingConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -1523,6 +1555,7 @@ model RayClusterMonitoringConfig {
   /**
    * Whether Ray cluster monitoring is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RayClusterMonitoringConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -1533,6 +1566,7 @@ model LegacyAbac {
   /**
    * Whether the Legacy Authorization mode is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing LegacyAbac.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1548,6 +1582,7 @@ model NetworkPolicy {
   /**
    * Whether network policy is enabled on the cluster
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkPolicy.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1584,6 +1619,7 @@ model IpAllocationPolicy {
   /**
    * Whether a new subnetwork will be created automatically for the cluster. This field is only applicable when `use_ip_aliases` is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IpAllocationPolicy.createSubnetwork has a boolean wire value; preserve the published property contract."
   createSubnetwork?: boolean;
 
   /**
@@ -1656,11 +1692,13 @@ model IpAllocationPolicy {
   /**
    * Whether alias IPs will be used for pod IPs in the cluster. This is used in conjunction with use_routes. It cannot be true if use_routes is true. If both use_ip_aliases and use_routes are false, then the server picks the default IP allocation mode
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IpAllocationPolicy.useIpAliases has a boolean wire value; preserve the published property contract."
   useIpAliases?: boolean;
 
   /**
    * Whether routes will be used for pod IPs in the cluster. This is used in conjunction with use_ip_aliases. It cannot be true if use_ip_aliases is true. If both use_ip_aliases and use_routes are false, then the server picks the default IP allocation mode
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IpAllocationPolicy.useRoutes has a boolean wire value; preserve the published property contract."
   useRoutes?: boolean;
 }
 
@@ -1734,6 +1772,7 @@ model MasterAuthorizedNetworksConfig {
   /**
    * Whether or not master authorized networks is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MasterAuthorizedNetworksConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1745,11 +1784,13 @@ model MasterAuthorizedNetworksConfig {
   /**
    * Whether access from Google Cloud public IP addresses is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MasterAuthorizedNetworksConfig.gcpPublicCidrsAccessEnabled has a boolean wire value; preserve the published property contract."
   gcpPublicCidrsAccessEnabled?: boolean;
 
   /**
    * Whether private endpoint enforcement is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MasterAuthorizedNetworksConfig.privateEndpointEnforcementEnabled has a boolean wire value; preserve the published property contract."
   privateEndpointEnforcementEnabled?: boolean;
 }
 
@@ -1898,6 +1939,7 @@ model BinaryAuthorization {
   /**
    * Whether Binary Authorization is enabled for this cluster
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BinaryAuthorization.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -1913,6 +1955,7 @@ model ClusterAutoscaling {
   /**
    * Enables automatic node pool creation and deletion
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ClusterAutoscaling.enableNodeAutoprovisioning has a boolean wire value; preserve the published property contract."
   enableNodeAutoprovisioning?: boolean;
 
   /**
@@ -2036,11 +2079,13 @@ model AutoprovisioningNodePoolDefaults {
   /**
    * Whether the nodes are preemptible or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutoprovisioningNodePoolDefaults.insecureKubeletReadonlyPortEnabled has a boolean wire value; preserve the published property contract."
   insecureKubeletReadonlyPortEnabled?: boolean;
 
   /**
    * Whether the nodes are created as spot VM instances or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AutoprovisioningNodePoolDefaults.enableSpotInstances has a boolean wire value; preserve the published property contract."
   enableSpotInstances?: boolean;
 
   /**
@@ -2104,6 +2149,7 @@ model NetworkConfig {
   /**
    * Whether Intra-node visibility is enabled for this cluster
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkConfig.enableIntraNodeVisibility has a boolean wire value; preserve the published property contract."
   enableIntraNodeVisibility?: boolean;
 
   /**
@@ -2114,6 +2160,7 @@ model NetworkConfig {
   /**
    * Whether L4ILB Subsetting is enabled for this cluster
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkConfig.enableL4ilbSubsetting has a boolean wire value; preserve the published property contract."
   enableL4ilbSubsetting?: boolean;
 
   /**
@@ -2144,6 +2191,7 @@ model NetworkConfig {
   /**
    * Whether multi-networking is enabled for this cluster
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkConfig.enableMultiNetworking has a boolean wire value; preserve the published property contract."
   enableMultiNetworking?: boolean;
 
   /**
@@ -2154,6 +2202,7 @@ model NetworkConfig {
   /**
    * Whether FQDN network policy is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkConfig.enableFqdnNetworkPolicy has a boolean wire value; preserve the published property contract."
   enableFqdnNetworkPolicy?: boolean;
 
   /**
@@ -2164,16 +2213,19 @@ model NetworkConfig {
   /**
    * Whether Cilium cluster-wide network policy is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkConfig.enableCiliumClusterwideNetworkPolicy has a boolean wire value; preserve the published property contract."
   enableCiliumClusterwideNetworkPolicy?: boolean;
 
   /**
    * Whether private nodes are enabled by default
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkConfig.defaultEnablePrivateNodes has a boolean wire value; preserve the published property contract."
   defaultEnablePrivateNodes?: boolean;
 
   /**
    * Whether to disable L4 load balancer firewall reconciliation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NetworkConfig.disableL4LbFirewallReconciliation has a boolean wire value; preserve the published property contract."
   disableL4LbFirewallReconciliation?: boolean;
 }
 
@@ -2184,6 +2236,7 @@ model ServiceExternalIpsConfig {
   /**
    * Whether Services with ExternalIPs field are allowed or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ServiceExternalIpsConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -2209,6 +2262,7 @@ model ResourceUsageExportConfig {
   /**
    * Whether to enable network egress metering for this cluster
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResourceUsageExportConfig.enableNetworkEgressMetering has a boolean wire value; preserve the published property contract."
   enableNetworkEgressMetering?: boolean;
 
   /**
@@ -2224,6 +2278,7 @@ model AuthenticatorGroupsConfig {
   /**
    * Whether Google Groups for RBAC and IAM are enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AuthenticatorGroupsConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2239,11 +2294,13 @@ model PrivateClusterConfig {
   /**
    * Whether nodes have internal IP addresses only
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PrivateClusterConfig.enablePrivateNodes has a boolean wire value; preserve the published property contract."
   enablePrivateNodes?: boolean;
 
   /**
    * Whether the master's internal IP address is used as the cluster endpoint
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PrivateClusterConfig.enablePrivateEndpoint has a boolean wire value; preserve the published property contract."
   enablePrivateEndpoint?: boolean;
 
   /**
@@ -2284,6 +2341,7 @@ model PrivateClusterMasterGlobalAccessConfig {
   /**
    * Whether the cluster master is accessible globally or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PrivateClusterMasterGlobalAccessConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -2325,6 +2383,7 @@ model VerticalPodAutoscaling {
   /**
    * Enables vertical pod autoscaling
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VerticalPodAutoscaling.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -2335,6 +2394,7 @@ model ShieldedNodes {
   /**
    * Whether Shielded Nodes features are enabled on all nodes in this cluster
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ShieldedNodes.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -2365,6 +2425,7 @@ model MeshCertificates {
   /**
    * Whether to enable certificates for service mesh
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MeshCertificates.enableCertificates has a boolean wire value; preserve the published property contract."
   enableCertificates?: boolean;
 }
 
@@ -2375,6 +2436,7 @@ model CostManagementConfig {
   /**
    * Whether the cost management feature is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CostManagementConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -2395,6 +2457,7 @@ model PubSub {
   /**
    * Whether notifications are enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PubSub.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2425,6 +2488,7 @@ model ConfidentialNodes {
   /**
    * Whether Confidential Nodes feature is enabled for this cluster
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConfidentialNodes.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2459,6 +2523,7 @@ model IdentityServiceConfig {
   /**
    * Whether Identity Service is enabled for this cluster
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing IdentityServiceConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -2489,6 +2554,7 @@ model Autopilot {
   /**
    * Whether the cluster is an Autopilot cluster
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing Autopilot.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -2569,6 +2635,7 @@ model PodAutoscaling {
   /**
    * Whether pod autoscaling is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PodAutoscaling.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -2612,6 +2679,7 @@ model K8sBetaApiConfig {
   /**
    * Whether Beta APIs are enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing K8sBetaApiConfig.enableBetaApis has a boolean wire value; preserve the published property contract."
   enableBetaApis?: boolean;
 
   /**
@@ -2627,6 +2695,7 @@ model EnterpriseConfig {
   /**
    * Whether enterprise features are enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing EnterpriseConfig.enableEnterpriseFeatures has a boolean wire value; preserve the published property contract."
   enableEnterpriseFeatures?: boolean;
 
   /**
@@ -2647,6 +2716,7 @@ model SecretManagerConfig {
   /**
    * Whether Secret Manager integration is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SecretManagerConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -2657,6 +2727,7 @@ model CompliancePostureConfig {
   /**
    * Whether compliance posture features are enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CompliancePostureConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -2667,6 +2738,7 @@ model GkeAutoUpgradeConfig {
   /**
    * Whether auto-upgrade is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GkeAutoUpgradeConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -2682,6 +2754,7 @@ model AnonymousAuthenticationConfig {
   /**
    * Whether anonymous authentication is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AnonymousAuthenticationConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -2712,6 +2785,7 @@ model UserManagedKeysConfig {
   /**
    * Whether user-managed keys are enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing UserManagedKeysConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -2722,6 +2796,7 @@ model DefaultSnatStatus {
   /**
    * Whether SNAT is disabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DefaultSnatStatus.disabled has a boolean wire value; preserve the published property contract."
   disabled?: boolean;
 }
 
@@ -2833,6 +2908,7 @@ model ConsumptionMeteringConfig {
   /**
    * Whether consumption metering is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConsumptionMeteringConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3042,11 +3118,13 @@ model ShieldedInstanceConfig {
   /**
    * Defines whether the instance has Secure Boot enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ShieldedInstanceConfig.enableSecureBoot has a boolean wire value; preserve the published property contract."
   enableSecureBoot?: boolean;
 
   /**
    * Defines whether the instance has integrity monitoring enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ShieldedInstanceConfig.enableIntegrityMonitoring has a boolean wire value; preserve the published property contract."
   enableIntegrityMonitoring?: boolean;
 }
 
@@ -3078,6 +3156,7 @@ model NodeKubeletConfig {
   /**
    * Enable CPU CFS quota enforcement for containers that specify CPU limits
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeKubeletConfig.cpuCfsQuota has a boolean wire value; preserve the published property contract."
   cpuCfsQuota?: boolean;
 
   /**
@@ -3093,6 +3172,7 @@ model NodeKubeletConfig {
   /**
    * Set flag to enable/disable the logs verbosity for the node
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing NodeKubeletConfig.insecureKubeletReadonlyPortEnabled has a boolean wire value; preserve the published property contract."
   insecureKubeletReadonlyPortEnabled?: boolean;
 }
 
@@ -3103,6 +3183,7 @@ model GcfsConfig {
   /**
    * Whether to use GCFS or not
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GcfsConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3118,6 +3199,7 @@ model AdvancedMachineFeatures {
   /**
    * Whether or not to enable nested virtualization
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AdvancedMachineFeatures.enableNestedVirtualization has a boolean wire value; preserve the published property contract."
   enableNestedVirtualization?: boolean;
 }
 
@@ -3128,6 +3210,7 @@ model VirtualNic {
   /**
    * Whether gVNIC features are enabled in the node pool
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing VirtualNic.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 
@@ -3230,6 +3313,7 @@ model PrivateRegistryAccessConfig {
   /**
    * Whether or not private registries are configured
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing PrivateRegistryAccessConfig.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -3307,6 +3391,7 @@ model FastSocket {
   /**
    * Whether or not NCCL Fast Socket is enabled
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FastSocket.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 }
 

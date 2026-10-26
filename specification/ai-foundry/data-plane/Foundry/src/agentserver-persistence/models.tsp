@@ -217,6 +217,7 @@ model AgentServerTaskListResponse {
   first_id?: string;
 
   /** Whether more records are available. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AgentServerTaskListResponse.has_more has a boolean wire value; preserve the published property contract."
   has_more: boolean;
 
   /** Cursor to pass as `after` for the next page when `has_more` is true. */

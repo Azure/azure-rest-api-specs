@@ -216,6 +216,7 @@ model AwsCloudProfile {
   @doc("List of AWS accounts which need to be excluded.")
   excludedAccounts?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AwsCloudProfile.isOrganizationalAccount has a boolean wire value; preserve the published property contract."
   @doc("Boolean value that indicates whether the account is organizational or not. True represents organization account, whereas false represents a single account.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   isOrganizationalAccount?: boolean = false;

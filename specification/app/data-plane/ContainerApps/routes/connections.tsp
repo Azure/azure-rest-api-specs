@@ -16,6 +16,7 @@ alias DeleteConnectionErrors =
 alias DeleteConnectionTraits = QueryParametersTrait<
   {
     /** Whether to force deletion of the connection. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing DeleteConnectionTraits.force has a boolean wire value; preserve the published property contract."
     @query force?: boolean;
   },
   TraitContext.Delete
@@ -36,6 +37,7 @@ alias ListConnectionErrors =
 alias ListConnectionTraits = QueryParametersTrait<
   {
     /** Whether to include sandbox identifiers using each connection. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ListConnectionTraits.includeSandboxIds has a boolean wire value; preserve the published property contract."
     @query includeSandboxIds?: boolean;
 
     /** Comma-separated key=value labels that all resources must match. */
@@ -63,6 +65,7 @@ alias GetConnectionErrors =
 alias GetConnectionTraits = QueryParametersTrait<
   {
     /** Whether to include sandbox identifiers using the connection. */
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing GetConnectionTraits.includeSandboxIds has a boolean wire value; preserve the published property contract."
     @query includeSandboxIds?: boolean;
   },
   TraitContext.Read
@@ -255,6 +258,7 @@ interface ConnectionsOperations {
     Connection,
     {
       /** Whether to include identifiers of sandboxes using the connection. */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing postConnectionRefresh.includeSandboxIds has a boolean wire value; preserve the published property contract."
       @query includeSandboxIds?: boolean;
     },
     PostConnectionRefreshResult

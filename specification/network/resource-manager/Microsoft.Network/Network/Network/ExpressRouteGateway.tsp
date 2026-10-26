@@ -252,6 +252,7 @@ interface ExpressRouteGateways {
       /**
        * Fetch only the latest tests for each peering location.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getFailoverAllTestsDetails.fetchLatest has a boolean wire value; preserve the published property contract."
       @query("fetchLatest")
       fetchLatest?: boolean;
     },
@@ -348,6 +349,7 @@ interface ExpressRouteGateways {
       /**
        * Whether to attempt a refresh of the route sets.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getRoutesInformation.attemptRefresh has a boolean wire value; preserve the published property contract."
       @query("attemptRefresh")
       attemptRefresh?: boolean;
     },
@@ -370,6 +372,7 @@ interface ExpressRouteGateways {
       /**
        * Whether to attempt a refresh of the resiliency information.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getResiliencyInformation.attemptRefresh has a boolean wire value; preserve the published property contract."
       @query("attemptRefresh")
       attemptRefresh?: boolean;
     },

@@ -183,6 +183,7 @@ model MetricAlertProperties {
   /**
    * The flag that indicates whether the metric alert is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricAlertProperties.enabled has a boolean wire value; preserve the published property contract."
   enabled: boolean;
 
   /**
@@ -218,6 +219,7 @@ model MetricAlertProperties {
   /**
    * The flag that indicates whether the alert should be auto resolved or not. The default is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricAlertProperties.autoMitigate has a boolean wire value; preserve the published property contract."
   autoMitigate?: boolean;
 
   /**
@@ -241,6 +243,7 @@ model MetricAlertProperties {
   /**
    * The value indicating whether this alert rule is migrated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricAlertProperties.isMigrated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isMigrated?: boolean;
 
@@ -276,6 +279,7 @@ model ResolveConfiguration {
   /**
    * Indicates whether the alert should be auto resolved
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ResolveConfiguration.autoResolved has a boolean wire value; preserve the published property contract."
   autoResolved: boolean;
 
   /**
@@ -388,6 +392,7 @@ model MetricAlertPropertiesPatch {
   /**
    * The flag that indicates whether the metric alert is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricAlertPropertiesPatch.enabled has a boolean wire value; preserve the published property contract."
   enabled?: boolean;
 
   /**
@@ -423,6 +428,7 @@ model MetricAlertPropertiesPatch {
   /**
    * The flag that indicates whether the alert should be auto resolved or not. The default is true.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricAlertPropertiesPatch.autoMitigate has a boolean wire value; preserve the published property contract."
   autoMitigate?: boolean;
 
   /**
@@ -446,6 +452,7 @@ model MetricAlertPropertiesPatch {
   /**
    * The value indicating whether this alert rule is migrated.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MetricAlertPropertiesPatch.isMigrated has a boolean wire value; preserve the published property contract."
   @visibility(Lifecycle.Read)
   isMigrated?: boolean;
 
@@ -600,6 +607,7 @@ model MultiMetricCriteria {
   /**
    * Allows creating an alert rule on a custom metric that isn't yet emitted, by causing the metric validation to be skipped.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MultiMetricCriteria.skipMetricValidation has a boolean wire value; preserve the published property contract."
   skipMetricValidation?: boolean;
 }
 

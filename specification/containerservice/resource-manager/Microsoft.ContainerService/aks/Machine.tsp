@@ -134,11 +134,13 @@ model MachineSecurityProfile {
    * vTPM is a Trusted Launch feature for configuring a dedicated secure vault for keys and measurements held locally on the node. For more details, see aka.ms/aks/trustedlaunch. If not specified, the default is false.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MachineSecurityProfile.enableVTPM has a boolean wire value; preserve the published property contract."
   enableVTPM?: boolean;
 
   /**
    * Secure Boot is a feature of Trusted Launch which ensures that only signed operating systems and drivers can boot. For more details, see aka.ms/aks/trustedlaunch.  If not specified, the default is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MachineSecurityProfile.enableSecureBoot has a boolean wire value; preserve the published property contract."
   enableSecureBoot?: boolean;
 
   /**
@@ -149,6 +151,7 @@ model MachineSecurityProfile {
   /**
    * Whether to enable host based OS and data drive encryption. This is only supported on certain VM sizes and in certain Azure regions. For more information, see: https://docs.microsoft.com/azure/aks/enable-host-encryption
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MachineSecurityProfile.enableEncryptionAtHost has a boolean wire value; preserve the published property contract."
   enableEncryptionAtHost?: boolean;
 }
 
@@ -175,6 +178,7 @@ model MachineHardwareProfile {
   /**
    * Whether to enable UltraSSD
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MachineHardwareProfile.ultraSsdEnabled has a boolean wire value; preserve the published property contract."
   ultraSsdEnabled?: boolean;
 }
 
@@ -211,6 +215,7 @@ model MachineOSProfile {
    * Whether to use a FIPS-enabled OS.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MachineOSProfile.enableFIPS has a boolean wire value; preserve the published property contract."
   enableFIPS?: boolean;
 
   /**
@@ -553,6 +558,7 @@ model MachineNetworkProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing MachineNetworkProperties.enableNodePublicIP has a boolean wire value; preserve the published property contract."
   @added(Versions.v2026_08_02_preview)
   enableNodePublicIP?: boolean;
 

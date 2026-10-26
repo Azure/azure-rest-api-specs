@@ -82,6 +82,7 @@ interface Projects {
        * Set this to true if you want to delete a project with model and endpoint.
        * Otherwise, the delete operation will fail.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing delete.forceDelete has a boolean wire value; preserve the published property contract."
       @query("forceDelete")
       forceDelete?: boolean;
     },

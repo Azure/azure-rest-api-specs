@@ -194,6 +194,7 @@ model CertificateProfileProperties {
   @visibility(Lifecycle.Read)
   streetAddress?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CertificateProfileProperties.includeStreetAddress has a boolean wire value; preserve the published property contract."
   @doc("Whether to include STREET in the certificate subject name.")
   includeStreetAddress?: boolean = false;
 
@@ -202,6 +203,7 @@ model CertificateProfileProperties {
   @visibility(Lifecycle.Read)
   city?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CertificateProfileProperties.includeCity has a boolean wire value; preserve the published property contract."
   @doc("Whether to include L in the certificate subject name. Applicable only for private trust, private trust ci profile types")
   includeCity?: boolean = false;
 
@@ -210,6 +212,7 @@ model CertificateProfileProperties {
   @visibility(Lifecycle.Read)
   state?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CertificateProfileProperties.includeState has a boolean wire value; preserve the published property contract."
   @doc("Whether to include S in the certificate subject name. Applicable only for private trust, private trust ci profile types")
   includeState?: boolean = false;
 
@@ -218,6 +221,7 @@ model CertificateProfileProperties {
   @visibility(Lifecycle.Read)
   country?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CertificateProfileProperties.includeCountry has a boolean wire value; preserve the published property contract."
   @doc("Whether to include C in the certificate subject name. Applicable only for private trust, private trust ci profile types")
   includeCountry?: boolean = false;
 
@@ -226,6 +230,7 @@ model CertificateProfileProperties {
   @visibility(Lifecycle.Read)
   postalCode?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CertificateProfileProperties.includePostalCode has a boolean wire value; preserve the published property contract."
   @doc("Whether to include PC in the certificate subject name.")
   includePostalCode?: boolean = false;
 
@@ -343,6 +348,7 @@ model CheckNameAvailability {
 
 @doc("The CheckNameAvailability operation response.")
 model CheckNameAvailabilityResult {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing CheckNameAvailabilityResult.nameAvailable has a boolean wire value; preserve the published property contract."
   @doc("A boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.")
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;

@@ -345,6 +345,7 @@ model AvailabilityData extends Domain {
   /**
    * Success flag.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing AvailabilityData.success has a boolean wire value; preserve the published property contract."
   success: boolean;
 
   /**
@@ -521,6 +522,7 @@ model ExceptionDetails {
    * Indicates if full exception stack is provided in the exception. The stack may
    * be trimmed, such as in the case of a StackOverflow exception.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ExceptionDetails.hasFullStack has a boolean wire value; preserve the published property contract."
   hasFullStack?: boolean = true;
 
   /**
@@ -814,6 +816,7 @@ model RemoteDependencyData extends Domain {
   /**
    * Indication of successful or unsuccessful call.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RemoteDependencyData.success has a boolean wire value; preserve the published property contract."
   success?: boolean = true;
 
   /**
@@ -862,6 +865,7 @@ model RequestData extends Domain {
   /**
    * Indication of successful or unsuccessful call.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing RequestData.success has a boolean wire value; preserve the published property contract."
   success: boolean = true;
 
   /**

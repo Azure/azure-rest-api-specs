@@ -125,6 +125,7 @@ model FileDeletionStatus {
   @doc("The ID of the resource specified for deletion.")
   id: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing FileDeletionStatus.deleted has a boolean wire value; preserve the published property contract."
   @doc("A value indicating whether deletion was successful.")
   deleted: boolean;
 

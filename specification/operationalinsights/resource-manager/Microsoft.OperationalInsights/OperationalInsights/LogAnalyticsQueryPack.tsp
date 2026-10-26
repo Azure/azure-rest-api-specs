@@ -84,6 +84,7 @@ interface LogAnalyticsQueryPacks {
       /**
        * Flag indicating whether or not to return the body of each applicable query. If false, only return the query information.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing search.includeBody has a boolean wire value; preserve the published property contract."
       @query("includeBody")
       includeBody?: boolean;
 

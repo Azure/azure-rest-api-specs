@@ -110,6 +110,7 @@ model ConversationPiiTaskParameters is PreBuiltTaskParameters {
   piiCategories?: Array<ConversationPiiCategories>;
 
   /** Flag to indicate if response should include audio stream offset and duration for any detected entities to be redacted. By default, audio timing of redacted entities are not included. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing ConversationPiiTaskParameters.redactAudioTiming has a boolean wire value; preserve the published property contract."
   redactAudioTiming?: boolean;
 
   /** For transcript conversations, this parameter provides information regarding which content type (ITN, Text, Lexical, Masked ITN) should be used for entity detection. The details of the entities detected - like the offset, length and the text itself - will correspond to the text type selected here. */

@@ -188,6 +188,7 @@ interface InvoiceSections {
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing billingRequestsListByInvoiceSection.count has a boolean wire value; preserve the published property contract."
       @query("count")
       count?: boolean;
 
@@ -298,6 +299,7 @@ interface InvoiceSections {
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing productsListByInvoiceSection.count has a boolean wire value; preserve the published property contract."
       @query("count")
       count?: boolean;
 
@@ -369,6 +371,7 @@ interface InvoiceSections {
       /**
        * The count query option allows clients to request a count of the matching resources included with the resources in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing transactionsListByInvoiceSection.count has a boolean wire value; preserve the published property contract."
       @query("count")
       count?: boolean;
 
@@ -385,6 +388,7 @@ alias BillingRoleAssignmentsResolveByInvoiceSectionParameters = {
   /**
    * Resolves the scope display name for each of the role assignments.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingRoleAssignmentsResolveByInvoiceSectionParameters.resolveScopeDisplayNames has a boolean wire value; preserve the published property contract."
   @query("resolveScopeDisplayNames")
   resolveScopeDisplayNames?: boolean = false;
 
@@ -399,6 +403,7 @@ alias BillingSubscriptionsListByInvoiceSectionParameters = {
   /**
    * Can be used to get deleted billing subscriptions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingSubscriptionsListByInvoiceSectionParameters.includeDeleted has a boolean wire value; preserve the published property contract."
   @query("includeDeleted")
   includeDeleted?: boolean = false;
 
@@ -435,6 +440,7 @@ alias BillingSubscriptionsListByInvoiceSectionParameters = {
   /**
    * The count query option allows clients to request a count of the matching resources included with the resources in the response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing BillingSubscriptionsListByInvoiceSectionParameters.count has a boolean wire value; preserve the published property contract."
   @query("count")
   count?: boolean;
 
@@ -449,6 +455,7 @@ alias InvoiceSectionsListByBillingProfileParameters = {
   /**
    * Can be used to get deleted invoice sections.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InvoiceSectionsListByBillingProfileParameters.includeDeleted has a boolean wire value; preserve the published property contract."
   @query("includeDeleted")
   includeDeleted?: boolean = false;
 
@@ -479,6 +486,7 @@ alias InvoiceSectionsListByBillingProfileParameters = {
   /**
    * The count query option allows clients to request a count of the matching resources included with the resources in the response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing InvoiceSectionsListByBillingProfileParameters.count has a boolean wire value; preserve the published property contract."
   @query("count")
   count?: boolean;
 

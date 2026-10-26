@@ -23,6 +23,7 @@ model AnalyzeTextSentimentAnalysisInput extends AnalyzeTextTask {
 /** Supported parameters for a Sentiment Analysis task. */
 model SentimentAnalysisTaskParameters is PreBuiltTaskParameters {
   /** Whether to use opinion mining in the request or not. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SentimentAnalysisTaskParameters.opinionMining has a boolean wire value; preserve the published property contract."
   opinionMining?: boolean = false;
 
   /** Specifies the method used to interpret string offsets. */
@@ -162,6 +163,7 @@ model SentenceAssessment {
   text: string;
 
   /** The indicator representing if the assessment is negated. */
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing SentenceAssessment.isNegated has a boolean wire value; preserve the published property contract."
   isNegated: boolean;
 }
 

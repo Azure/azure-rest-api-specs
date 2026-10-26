@@ -133,10 +133,12 @@ interface Skus {
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getByBillingAccount.includeStopSold has a boolean wire value; preserve the published property contract."
     @doc(IncludeStopSoldParameterDescription)
     @query
     includeStopSold?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getByBillingAccount.includeFutureAvailabilities has a boolean wire value; preserve the published property contract."
     @doc(IncludeFutureAvailabilitiesParameterDescription)
     @query
     includeFutureAvailabilities?: boolean = false,
@@ -162,10 +164,12 @@ interface Skus {
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getByBillingProfile.includeStopSold has a boolean wire value; preserve the published property contract."
     @doc(IncludeStopSoldParameterDescription)
     @query
     includeStopSold?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing getByBillingProfile.includeFutureAvailabilities has a boolean wire value; preserve the published property contract."
     @doc(IncludeFutureAvailabilitiesParameterDescription)
     @query
     includeFutureAvailabilities?: boolean = false,

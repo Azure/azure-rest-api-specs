@@ -25,6 +25,7 @@ model DelayUntilQueryParameter {
 
 @doc("The hibernate query parameter.")
 model HibernateQueryParameter {
+  #suppress "@azure-tools/typespec-azure-core/no-boolean" "Back compat: Existing HibernateQueryParameter.hibernate has a boolean wire value; preserve the published property contract."
   @doc("Optional parameter to hibernate the dev box.")
   @query
   hibernate?: boolean;
