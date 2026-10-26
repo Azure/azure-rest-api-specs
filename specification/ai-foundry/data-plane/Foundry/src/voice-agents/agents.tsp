@@ -496,21 +496,7 @@ union VoiceType {
   azure_realtime_native: "azure-realtime-native",
 }
 
-@doc("""
-  Voice-specific output settings shared by the top-level audio configuration and inline subagent overrides.
-  Session-level output format and timestamp settings are intentionally excluded.
-  Provider-specific fields are selected by `voice_type`:
-  - `openai`: `voice` and `speed`.
-  - `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,
-    `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.
-  - `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.
-  - `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.
-  - `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;
-    the voice name is derived from the avatar.
-  - `azure-realtime-native`: `voice` and `speed`.
-  """)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentVoiceConfig {
+model VoiceAgentVoiceSelectionConfig {
   @doc("The voice name or identifier. Applies to `openai`, `azure-standard`, `azure-custom`, `azure-personal`, and `azure-realtime-native`. It does not apply to `avatar-voice-sync`, which derives the voice name from the avatar.")
   voice?: string;
 
@@ -519,12 +505,9 @@ model VoiceAgentVoiceConfig {
 
   @doc("The enforced BCP-47 output locale. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
   voice_locale?: string;
+}
 
-  @doc("The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.")
-  @minValue(0.25)
-  @maxValue(1.5)
-  speed?: float32 = 1;
-
+model VoiceAgentVoiceSynthesisConfig {
   @doc("The voice variation temperature. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
   @minValue(0)
   @maxValue(1)
@@ -556,6 +539,31 @@ model VoiceAgentVoiceConfig {
 }
 
 @doc("""
+  Voice-specific output overrides for an inline subagent. Session-level output format and timestamp settings are
+  intentionally excluded. Omitted fields inherit the entrypoint configuration.
+  Provider-specific fields are selected by `voice_type`:
+  - `openai`: `voice` and `speed`.
+  - `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,
+    `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.
+  - `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.
+  - `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.
+  - `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;
+    the voice name is derived from the avatar.
+  - `azure-realtime-native`: `voice` and `speed`.
+  """)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentVoiceConfig {
+  ...VoiceAgentVoiceSelectionConfig;
+
+  @doc("The numeric output speed multiplier. Applies to all known `voice_type` values. Omission inherits the entrypoint speed.")
+  @minValue(0.25)
+  @maxValue(1.5)
+  speed?: float32;
+
+  ...VoiceAgentVoiceSynthesisConfig;
+}
+
+@doc("""
   Output audio configuration for a voice agent.
   Provider-specific fields are selected by `voice_type`:
   - `openai`: `voice` and `speed`.
@@ -572,7 +580,14 @@ model VoiceAgentAudioOutputConfig {
   @doc("The output audio format. Applies to every `voice_type` and defaults to 24 kHz PCM.")
   format?: OpenAI.RealtimeAudioFormats;
 
-  ...VoiceAgentVoiceConfig;
+  ...VoiceAgentVoiceSelectionConfig;
+
+  @doc("The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.")
+  @minValue(0.25)
+  @maxValue(1.5)
+  speed?: float32 = 1;
+
+  ...VoiceAgentVoiceSynthesisConfig;
 
   @doc("Timestamp kinds to include with output audio. Applies to every `voice_type`.")
   output_audio_timestamp_types?: VoiceAgentAudioTimestampType[];

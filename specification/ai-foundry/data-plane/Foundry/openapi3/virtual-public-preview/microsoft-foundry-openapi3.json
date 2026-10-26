@@ -49608,7 +49608,7 @@
                 "type": "null"
               }
             ],
-            "description": "The output voice configuration activated for this subagent, using the same flat voice fields as the top-level audio output. Omission inherits the entrypoint voice configuration; null clears it where supported."
+            "description": "The output voice configuration activated for this subagent, using the same flat voice fields as the top-level audio output. Omission inherits the entrypoint configuration; supplied fields override it; null clears it where supported."
           },
           "temperature": {
             "anyOf": [
@@ -101912,8 +101912,7 @@
             "format": "float",
             "minimum": 0.25,
             "maximum": 1.5,
-            "description": "The numeric output speed multiplier. Applies to all known `voice_type` values and defaults to 1.",
-            "default": 1
+            "description": "The numeric output speed multiplier. Applies to all known `voice_type` values. Omission inherits the entrypoint speed."
           },
           "voice_temperature": {
             "type": "number",
@@ -101960,7 +101959,7 @@
             "description": "The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`."
           }
         },
-        "description": "Voice-specific output settings shared by the top-level audio configuration and inline subagent overrides.\nSession-level output format and timestamp settings are intentionally excluded.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.\n- `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;\n  the voice name is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`.",
+        "description": "Voice-specific output overrides for an inline subagent. Session-level output format and timestamp settings are\nintentionally excluded. Omitted fields inherit the entrypoint configuration.\nProvider-specific fields are selected by `voice_type`:\n- `openai`: `voice` and `speed`.\n- `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,\n  `custom_text_normalization_url`, `prefer_locales`, `style`, `pitch`, and `volume`.\n- `azure-custom`: all `azure-standard` fields except `style`, plus `custom_voice_endpoint_id`.\n- `azure-personal`: all `azure-standard` fields except `style`, plus `personal_voice_model`.\n- `avatar-voice-sync`: all `azure-standard` fields except `voice` and `style`, plus `personal_voice_model`;\n  the voice name is derived from the avatar.\n- `azure-realtime-native`: `voice` and `speed`.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
