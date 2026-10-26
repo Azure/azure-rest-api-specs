@@ -129,6 +129,9 @@ model VoiceAgentDefinition extends AgentDefinition {
     """)
   audio?: VoiceAgentAudioConfig;
 
+  @doc("Optional background ambience and event cues, stored with the agent version and separate from the audio configuration. Currently rendered only for telephony calls, not browser WebRTC or direct voice WebSocket sessions. Omit this property to disable all auxiliary audio. Persisted conversation recordings do not include the soundscape mix.")
+  soundscape?: VoiceAgentSoundscapeConfig;
+
   @doc("""
     The output modalities the agent produces. Defaults to `["audio"]`. `animation` and `avatar` are available
     when an avatar is configured.
@@ -179,6 +182,85 @@ model VoiceAgentDefinition extends AgentDefinition {
     is not part of the persisted conversation content.
     """)
   store?: boolean = false;
+}
+
+@doc("Agent-owned background ambience and event cues. Each omitted track is disabled. The service rejects unknown fields; custom uploads, URLs, and inline audio are not supported.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSoundscapeConfig {
+  @doc("Continuous background ambience that continues during caller and agent speech.")
+  background?: VoiceAgentSoundscapeTrackConfig;
+
+  @doc("A loop played while a non-call-control tool is pending and the agent is silent, after the configured delay.")
+  working?: VoiceAgentSoundscapeWorkingTrackConfig;
+
+  @doc("An interruptible cue played before the first agent speech.")
+  opening?: VoiceAgentSoundscapeTrackConfig;
+
+  @doc("A one-shot cue played after queued agent speech drains and before a committed call transfer.")
+  transfer?: VoiceAgentSoundscapeTrackConfig;
+
+  @doc("A one-shot cue played after queued agent speech drains and before a committed session end.")
+  closing?: VoiceAgentSoundscapeTrackConfig;
+}
+
+@doc("A soundscape track with its own audio source and playback volume.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSoundscapeTrackConfig {
+  @doc("The required audio source for this track.")
+  source: VoiceAgentSoundscapeSourceConfig;
+
+  @doc("Linear playback gain from 0 to 1, independent of agent speech volume. If omitted, the service defaults to 1. A value of 0 mutes this track.")
+  @minValue(0)
+  @maxValue(1)
+  gain?: float64 = 1;
+}
+
+@doc("A working-loop track with a delay measured from the first pending non-call-control tool.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSoundscapeWorkingTrackConfig {
+  ...VoiceAgentSoundscapeTrackConfig;
+
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "The soundscape wire contract requires an integer-millisecond delay."
+  @doc("The delay in milliseconds before working audio starts, from 0 to 10000. If omitted, the service defaults to 1000 milliseconds. This delays only working audio, not tool execution, and is valid only on the working track.")
+  @encode(DurationKnownEncoding.milliseconds, int32)
+  @minValue(duration.fromISO("PT0S"))
+  @maxValue(duration.fromISO("PT10S"))
+  delay_ms?: duration = duration.fromISO("PT1S");
+}
+
+@doc("A packaged sound selected from the service-managed catalogue. The service rejects unknown source fields and discriminator values.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSoundscapeSourceConfig {
+  @doc("The audio source type. Always `built_in`.")
+  type: "built_in";
+
+  @doc("The name of the packaged sound. Only the listed built-in sounds are accepted.")
+  name: VoiceAgentSoundscapeSound;
+}
+
+@doc("The packaged sounds accepted by a built-in soundscape source.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentSoundscapeSound {
+  @doc("Quiet office ambience.")
+  office: "office",
+
+  @doc("Busy call-center ambience.")
+  call_center: "call_center",
+
+  @doc("Busy street ambience.")
+  busy_street: "busy_street",
+
+  @doc("Crowd conversation ambience.")
+  people_talking: "people_talking",
+
+  @doc("Street and metro-station ambience.")
+  street_and_metro_station: "street_and_metro_station",
+
+  @doc("The first notification tone.")
+  ding1: "ding1",
+
+  @doc("The second notification tone.")
+  ding2: "ding2",
 }
 
 @doc("Configuration for sibling Foundry text agents that a voice agent may consult.")
