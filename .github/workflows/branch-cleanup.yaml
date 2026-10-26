@@ -1,0 +1,60 @@
+name: Cleanup stale branches
+
+on:
+  schedule:
+    - cron: "23 5 * * 1"
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "Report eligible branches without deleting them"
+        type: boolean
+        default: true
+      copilot-days:
+        description: "Minimum last-commit age for copilot/* branches, in positive whole days"
+        type: number
+        default: 90
+      other-days:
+        description: "Minimum last-commit age for other branches, in positive whole days"
+        type: number
+        default: 730
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: branch-cleanup
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    if: >-
+      github.repository == 'Azure/azure-rest-api-specs' &&
+      github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout default branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Branch deletion uses git push and needs the workflow token.
+          persist-credentials: true
+          ref: ${{ github.event.repository.default_branch }}
+          sparse-checkout: .github/workflows/src
+
+      - name: Clean up stale branches
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { cleanupBranches } = await import("${{ github.workspace }}/.github/workflows/src/branch-cleanup.ts");
+            await cleanupBranches(
+              { github, context, core },
+              ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }},
+              (args) => exec.exec("git", args),
+              context.eventName === "workflow_dispatch"
+                ? {
+                    copilotDays: Number(context.payload.inputs["copilot-days"]),
+                    otherDays: Number(context.payload.inputs["other-days"]),
+                  }
+                : undefined,
+            );

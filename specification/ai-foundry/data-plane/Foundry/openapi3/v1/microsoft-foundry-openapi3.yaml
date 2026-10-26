@@ -31,6 +31,9 @@ tags:
   - name: Agent Invocations WebSocket
     parent: Agents Root
     description: Agent Invocations (WebSocket)
+  - name: Agent Voice Conversation Engine
+    parent: Agents Root
+    description: Hosted Voice Live Bridge connections
   - name: Agent Sessions
     parent: Agents Root
   - name: Agent Session Files
@@ -1624,6 +1627,7 @@ paths:
           - DigitalWorker=V1Preview
           - GitHubCopilot=V1Preview
           - Skills=V1Preview
+          - MicrosoftCopilot=V1Preview
       tags:
         - Agents
       requestBody:
@@ -2377,7 +2381,7 @@ paths:
           schema:
             type: boolean
           explode: false
-        - name: structured_input
+        - name: structured_inputs
           in: query
           required: false
           description: |-
@@ -3560,6 +3564,88 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+  /agents/{agent_name}/endpoint/protocols/voice_conversation_engine:
+    get:
+      operationId: AgentVoiceConversationEngine_connectEndpointVoiceConversationEngine
+      summary: Connect to a hosted voice conversation engine
+      description: |-
+        Establishes a WebSocket connection to a hosted voice conversation engine. The client must send an HTTP GET
+        with `Upgrade: websocket` headers. The target hosted agent must declare `voice_conversation_engine` version
+        `1.0.0`. An `invocations_ws` declaration is neither required nor a fallback. Both protocols may be
+        declared independently during migration; this operation always selects `voice_conversation_engine`.
+
+        The service resolves or creates a hosted session and forwards the connection to
+        `ws://container:8088/voice_conversation_engine` without rewriting the protocol path. The AgentServer SDK
+        exposes that container endpoint only when a Voice Bridge handler is registered.
+
+        The declared `voice_conversation_engine` version `1.0.0` identifies the Voice Live Bridge
+        protocol. Its container protocol version is independent of Bridge message version `1.0` and
+        Hosted Agents API version `v1`.
+
+        Voice Live owns audio, STT, TTS, turn detection, and interruption. The engine reuses the existing
+        Bridge Protocol 1.0 wire semantics. Voice Live sends `session.start` with `protocol_version: "1.0"`;
+        the engine acknowledges activation with `session.ready` or rejects it with `session.rejected`.
+        Caller input uses `user.message`. The engine opens a response with `response.created`, emits
+        `response.output_text.delta` and `response.output_text.done` for text or `response.output_data.done`
+        for non-audio structured output, and completes generation with `response.done`. `response.none`
+        consumes input without opening a response; failures use `error`.
+
+        Messages carry envelope `id` and `ts` fields. Inputs and output items use `item_id`; responses use
+        `response_id`, and replies correlate consumed inputs through ordered-prefix `in_reply_to` values.
+        Voice Live reports interruption through `user.barge_in`, including `heard_text`. An engine-initiated
+        `response.cancel` is acknowledged by Voice Live with `response.cancelled` after playback stops.
+        Existing bounded-message, timeout, and proactive-response admission semantics are retained.
+
+        Reconnection obtains fresh authentication and reattaches through the same `agent_session_id`, then
+        sends `session.start` with `reconnect: true` and waits for `session.ready`. In-flight response state
+        is abandoned, not replayed; there is no sequence acknowledgement or cursor-based recovery.
+        Audio transport is outside this contract. The service relays frames without changing their message
+        semantics; WebSocket close codes and ping/pong are preserved. Authorization, throttling, metrics,
+        and tracing are applied to the selected voice-conversation-engine protocol.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the target hosted voice conversation engine in the current project.
+          schema:
+            type: string
+        - name: agent_session_id
+          in: query
+          required: false
+          description: Optional hosted session ID. Supply the same ID to reconnect to an existing session; omit it to create a session with an automatically generated ID.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '101':
+          description: Informational
+          headers:
+            x-agent-session-id:
+              required: true
+              description: The resolved hosted session ID, either the supplied ID or an automatically generated one.
+              schema:
+                type: string
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Voice Conversation Engine
   /agents/{agent_name}/endpoint/sessions:
     post:
       operationId: Agents_createSession
@@ -6385,6 +6471,7 @@ paths:
           - DigitalWorker=V1Preview
           - GitHubCopilot=V1Preview
           - Skills=V1Preview
+          - MicrosoftCopilot=V1Preview
       tags:
         - Agent Versions
       requestBody:
@@ -43825,6 +43912,7 @@ components:
         - DigitalWorker=V1Preview
         - GitHubCopilot=V1Preview
         - Skills=V1Preview
+        - MicrosoftCopilot=V1Preview
       description: Feature opt-in keys for agent definition operations supporting conditional preview features.
     AgentEndpointAuthorizationScheme:
       type: object
@@ -43893,6 +43981,7 @@ components:
             - invocations
             - voice
             - invocations_ws
+            - voice_conversation_engine
     AgentEvaluatorGenerationJobSource:
       type: object
       required:
@@ -43962,11 +44051,13 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          microsoft_copilot_preview: '#/components/schemas/MicrosoftCopilotHarness'
           github_copilot_preview: '#/components/schemas/GitHubCopilotHarness'
       description: A managed runtime and agent loop used to execute a prompt agent.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - GitHubCopilot=V1Preview
+          - MicrosoftCopilot=V1Preview
     AgentIdentity:
       type: object
       required:
@@ -47203,7 +47294,12 @@ components:
           description: The Browser Automation Tool parameters.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
-      description: The input definition information for a Browser Automation Tool, as used to configure an Agent.
+      description: |-
+        The input definition information for a Browser Automation Tool, as used to configure an Agent.
+        BrowserAutomationPreviewTool is deprecated.
+        Please use BrowserAutomationTool instead.
+        See https://aka.ms/bat/docs for more information on Browser automation tool.
+      deprecated: true
       x-ms-foundry-meta:
         required_previews:
           - preview_tool
@@ -47222,7 +47318,12 @@ components:
           description: The Browser Automation Tool parameters.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
-      description: A browser automation tool stored in a toolbox.
+      description: |-
+        A browser automation tool stored in a toolbox.
+        BrowserAutomationPreviewToolboxTool is deprecated.
+        Please use BrowserAutomationToolboxTool instead.
+        See https://aka.ms/bat/docs for more information on Browser automation tool.
+      deprecated: true
       x-ms-foundry-meta:
         required_previews:
           - preview_tool
@@ -47845,6 +47946,7 @@ components:
               - DigitalWorker=V1Preview
               - GitHubCopilot=V1Preview
               - Skills=V1Preview
+              - MicrosoftCopilot=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
@@ -47876,6 +47978,7 @@ components:
           - DigitalWorker=V1Preview
           - GitHubCopilot=V1Preview
           - Skills=V1Preview
+          - MicrosoftCopilot=V1Preview
     CreateAgentSessionRequest:
       type: object
       required:
@@ -47991,6 +48094,7 @@ components:
               - DigitalWorker=V1Preview
               - GitHubCopilot=V1Preview
               - Skills=V1Preview
+              - MicrosoftCopilot=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
@@ -51220,7 +51324,7 @@ components:
         - shell
         - web
         - subagents
-      description: A customer-configurable GitHub Copilot built-in tool.
+      description: The legacy GitHub Copilot built-in tool names retained for compatibility. Use `MicrosoftCopilotBuiltInTool` for new integrations.
     GitHubCopilotHarness:
       type: object
       required:
@@ -51230,10 +51334,10 @@ components:
           type: string
           enum:
             - github_copilot_preview
-          description: The type of managed harness. Always `github_copilot_preview`.
+          description: The legacy type of managed harness. Always `github_copilot_preview`; use `microsoft_copilot_preview` for new prompt agents.
       allOf:
         - $ref: '#/components/schemas/AgentHarness'
-      description: The GitHub Copilot managed harness for prompt agents.
+      description: The legacy GitHub Copilot managed harness retained for compatibility. Use `MicrosoftCopilotHarness` for new prompt agents.
       x-ms-foundry-meta:
         required_previews:
           - GitHubCopilot=V1Preview
@@ -51248,7 +51352,7 @@ components:
         enabled:
           type: boolean
           description: Whether the built-in tool is enabled. If omitted, the toolset default applies.
-      description: An enablement override for a GitHub Copilot built-in tool.
+      description: The legacy per-tool enablement override retained for compatibility. Use `MicrosoftCopilotToolsetConfig` for new integrations.
     GitHubCopilotToolsetDefaultConfig:
       type: object
       properties:
@@ -51256,7 +51360,7 @@ components:
           type: boolean
           description: Whether built-in tools are enabled by default. Defaults to true.
           default: true
-      description: The default enablement setting for GitHub Copilot built-in tools.
+      description: The legacy default enablement setting retained for compatibility. Use `MicrosoftCopilotToolsetDefaultConfig` for new integrations.
     GitHubCopilotToolsetPreview:
       type: object
       required:
@@ -51266,7 +51370,7 @@ components:
           type: string
           enum:
             - github_copilot_toolset_preview
-          description: The type of the toolset. Always `github_copilot_toolset_preview`.
+          description: The legacy type of the toolset. Always `github_copilot_toolset_preview`; use `microsoft_copilot_toolset_preview` for new integrations.
         default_config:
           $ref: '#/components/schemas/GitHubCopilotToolsetDefaultConfig'
           description: The default configuration for built-in tools. If omitted, built-in tools are enabled by default.
@@ -51277,7 +51381,7 @@ components:
           description: Per-tool configuration overrides. Duplicate built-in tool names are not allowed.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
-      description: Configuration overrides for GitHub Copilot built-in tools.
+      description: The legacy GitHub Copilot toolset retained for compatibility. Use `MicrosoftCopilotToolsetPreview` for new integrations.
       x-ms-foundry-meta:
         required_previews:
           - GitHubCopilot=V1Preview
@@ -51411,6 +51515,10 @@ components:
           description: Optional session defaults (for example, the idle timeout) applied to sessions created for this agent version.
           examples:
             - idle_timeout_seconds: 300
+        enable_memory_snapshot:
+          type: boolean
+          description: Whether this agent version uses memory snapshots. Sessions for a snapshot-enabled version start from a snapshot of the agent's initialized process rather than starting the process from its image. Defaults to false.
+          default: false
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: The hosted agent definition.
@@ -52789,6 +52897,84 @@ components:
             - Shared
             - Tenant
       description: The publish scope for the generated Microsoft Teams app.
+    MicrosoftCopilotBuiltInTool:
+      type: string
+      enum:
+        - filesystem_read
+        - filesystem_write
+        - shell
+        - web
+        - subagents
+      description: A customer-configurable Microsoft Copilot built-in tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - MicrosoftCopilot=V1Preview
+    MicrosoftCopilotHarness:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - microsoft_copilot_preview
+          description: The type of managed harness. Always `microsoft_copilot_preview`.
+      allOf:
+        - $ref: '#/components/schemas/AgentHarness'
+      description: The Microsoft Copilot managed harness for prompt agents.
+      x-ms-foundry-meta:
+        required_previews:
+          - MicrosoftCopilot=V1Preview
+    MicrosoftCopilotToolsetConfig:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/MicrosoftCopilotBuiltInTool'
+          description: The built-in tool to configure.
+        enabled:
+          type: boolean
+          description: Whether the built-in tool is enabled. If omitted, the toolset default applies.
+      description: An enablement override for a Microsoft Copilot built-in tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - MicrosoftCopilot=V1Preview
+    MicrosoftCopilotToolsetDefaultConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether built-in tools are enabled by default. Defaults to true.
+          default: true
+      description: The default enablement setting for Microsoft Copilot built-in tools.
+      x-ms-foundry-meta:
+        required_previews:
+          - MicrosoftCopilot=V1Preview
+    MicrosoftCopilotToolsetPreview:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - microsoft_copilot_toolset_preview
+          description: The type of the toolset. Always `microsoft_copilot_toolset_preview`.
+        default_config:
+          $ref: '#/components/schemas/MicrosoftCopilotToolsetDefaultConfig'
+          description: The default configuration for built-in tools. If omitted, built-in tools are enabled by default.
+        configs:
+          type: array
+          items:
+            $ref: '#/components/schemas/MicrosoftCopilotToolsetConfig'
+          description: Per-tool configuration overrides. Duplicate built-in tool names are not allowed.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: Configuration overrides for Microsoft Copilot built-in tools.
+      x-ms-foundry-meta:
+        required_previews:
+          - MicrosoftCopilot=V1Preview
     MicrosoftFabricPreviewTool:
       type: object
       required:
@@ -79521,6 +79707,7 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          microsoft_copilot_toolset_preview: '#/components/schemas/MicrosoftCopilotToolsetPreview'
           github_copilot_toolset_preview: '#/components/schemas/GitHubCopilotToolsetPreview'
           bing_grounding: '#/components/schemas/BingGroundingTool'
           fabric_dataagent_preview: '#/components/schemas/MicrosoftFabricPreviewTool'
@@ -79942,6 +80129,7 @@ components:
             - browser_automation
             - capture_structured_outputs
             - openapi
+            - microsoft_copilot_toolset_preview
     OpenAI.ToolsArray:
       type: array
       items:
@@ -81668,6 +81856,7 @@ components:
           description: The endpoint kind, always 'OTLP' for OpenTelemetry Protocol endpoints.
         endpoint:
           type: string
+          format: uri
           description: The OTLP collector endpoint URL.
           examples:
             - https://my-collector.example.com/otlp
@@ -81977,8 +82166,9 @@ components:
           $ref: '#/components/schemas/AgentHarness'
           description: The managed runtime and agent loop used to execute this prompt agent.
           x-ms-foundry-meta:
-            required_previews:
+            conditional_previews:
               - GitHubCopilot=V1Preview
+              - MicrosoftCopilot=V1Preview
         model:
           type: string
           description: The model deployment to use for this agent.
@@ -87436,6 +87626,7 @@ components:
               - DigitalWorker=V1Preview
               - GitHubCopilot=V1Preview
               - Skills=V1Preview
+              - MicrosoftCopilot=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
@@ -87448,6 +87639,7 @@ components:
           - DigitalWorker=V1Preview
           - GitHubCopilot=V1Preview
           - Skills=V1Preview
+          - MicrosoftCopilot=V1Preview
     UpdateEvalParametersBody:
       type: object
       properties:
@@ -88346,6 +88538,9 @@ components:
           description: |-
             The audio configuration, including input and output formats, voice, turn detection, noise reduction, and
             transcription. These values are session defaults; a client may override supported fields when connecting.
+        soundscape:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeConfig'
+          description: Optional background ambience and event cues, stored with the agent version and separate from the audio configuration. Currently rendered only for telephony calls, not browser WebRTC or direct voice WebSocket sessions. Omit this property to disable all auxiliary audio. Persisted conversation recordings do not include the soundscape mix.
         output_modalities:
           type: array
           items:
@@ -88563,8 +88758,10 @@ components:
           type: string
           description: |-
             The language of the input audio. Supplying the input language in
-              [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format
-              will improve accuracy and latency.
+            [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format
+            will improve accuracy and latency. Optional for other transcription models; required and must be
+            nonempty when `model` is `azure-speech-streaming` (such as `en-US`; comma-separated locales are
+            supported).
         languages:
           type: array
           items:
@@ -88598,7 +88795,7 @@ components:
               Only supported with `gpt-realtime-whisper` in GA Realtime sessions.
         model:
           $ref: '#/components/schemas/VoiceAgentInputTranscriptionModel'
-          description: The transcription model identifier. Configure customer custom speech deployments in `custom_speech`.
+          description: The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` is for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.
         custom_speech:
           type: object
           unevaluatedProperties:
@@ -88609,9 +88806,23 @@ components:
           items:
             type: string
           description: Optional phrase hints that bias recognition toward domain terms.
+        profanity_filter:
+          $ref: '#/components/schemas/VoiceAgentProfanityFilterMode'
+          description: |-
+            Controls how profanity is handled in input transcripts. Supported only with managed Azure Speech
+            (`azure-speech` and `azure-speech-streaming`), including Custom Speech.
+            Set this property before the session starts. If omitted, the transcription provider's default applies.
+            You cannot change the mode during a session.
+            Filtering affects transcript events and the text sent to cascaded models. It does not change input
+            audio, voice activity detection, or assistant speech; audio-native models still receive the original
+            audio. Mandatory service masking policies apply even when you select `unfiltered`.
       description: |-
-        Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
-        options with the Azure and MAI transcription models, custom speech models, and phrase hints.
+        Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
+        and phrase hints.
+        When `model` is `azure-speech-streaming`, transcription is supported for cascaded text-model
+        conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as
+        `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and
+        `profanity_filter`.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -88629,9 +88840,11 @@ components:
             - gpt-live-transcribe
             - mai-transcribe
             - azure-speech
+            - azure-speech-streaming
       description: |-
         The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed
         voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
+        `azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.
         Additional values may be added over time.
       x-ms-foundry-meta:
         required_previews:
@@ -88747,6 +88960,12 @@ components:
         server_label:
           type: string
           description: A label for this MCP server, used to identify it in tool calls.
+        server_url:
+          type: string
+          format: uri
+          description: |-
+            The URL for the MCP server. One of `server_url`, `connector_id`, or
+              `tunnel_id` must be provided.
         authorization:
           type: string
           description: |-
@@ -88800,17 +89019,13 @@ components:
           type: string
           enum:
             - mcp
-        server_url:
-          type: string
-          format: uri
-          description: The URL for the MCP server.
         response_scheduling:
           $ref: '#/components/schemas/VoiceAgentToolResponseScheduling'
           description: When the MCP invocation creates a follow-up response. Defaults to `when_idle`.
           default: when_idle
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTool'
-      description: An MCP tool available to a voice agent.
+      description: An MCP tool available to a voice agent. Server endpoints use `server_url`; connector and tunnel identifiers are not supported.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -88821,8 +89036,18 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/VoiceAgentNoiseReductionType'
-          description: The noise reduction mode.
-      description: Input audio noise reduction configuration.
+          description: |-
+            The noise reduction mode. `azure_deep_noise_suppression_headset` provides
+            headset-optimized noise suppression for local voice activity detection, optimized for
+            low-sample-rate audio including 8 kHz telephony audio without changing recognition audio (not
+            restricted to headset devices). `azure_personal_noise_suppression` starts with headset
+            suppression for local voice activity detection and personalizes detection after automatic speaker
+            enrollment while keeping recognition audio unchanged and keeping headset suppression active when
+            personalization is unavailable.
+      description: |-
+        Input audio noise reduction configuration. `azure_deep_noise_suppression_headset` and
+        `azure_personal_noise_suppression` are modes for local voice activity detection that
+        enhance detection audio without changing the audio used for recognition.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -88834,7 +89059,24 @@ components:
             - near_field
             - far_field
             - azure_deep_noise_suppression
-      description: The input audio noise reduction mode.
+            - azure_deep_noise_suppression_headset
+            - azure_personal_noise_suppression
+      description: |-
+        The input audio noise reduction mode.
+        - `azure_deep_noise_suppression_headset`: Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.
+        - `azure_personal_noise_suppression`: Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentProfanityFilterMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - masked
+            - unfiltered
+            - removed
+      description: The supported input-transcript profanity filtering modes.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -88928,6 +89170,105 @@ components:
         - item.input_audio_transcription.phrases
         - file_search_call.results
       description: Additional fields that a voice-agent session may include in service outputs.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentSoundscapeConfig:
+      type: object
+      properties:
+        background:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeTrackConfig'
+          description: Continuous background ambience that continues during caller and agent speech.
+        working:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeWorkingTrackConfig'
+          description: A loop played while a non-call-control tool is pending and the agent is silent, after the configured delay.
+        opening:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeTrackConfig'
+          description: An interruptible cue played before the first agent speech.
+        transfer:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeTrackConfig'
+          description: A one-shot cue played after queued agent speech drains and before a committed call transfer.
+        closing:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeTrackConfig'
+          description: A one-shot cue played after queued agent speech drains and before a committed session end.
+      description: Agent-owned background ambience and event cues. Each omitted track is disabled. The service rejects unknown fields; custom uploads, URLs, and inline audio are not supported.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentSoundscapeSound:
+      type: string
+      enum:
+        - office
+        - call_center
+        - busy_street
+        - people_talking
+        - street_and_metro_station
+        - ding1
+        - ding2
+      description: The packaged sounds accepted by a built-in soundscape source.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentSoundscapeSourceConfig:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          type: string
+          enum:
+            - built_in
+          description: The audio source type. Always `built_in`.
+        name:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeSound'
+          description: The name of the packaged sound. Only the listed built-in sounds are accepted.
+      description: A packaged sound selected from the service-managed catalogue. The service rejects unknown source fields and discriminator values.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentSoundscapeTrackConfig:
+      type: object
+      required:
+        - source
+      properties:
+        source:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeSourceConfig'
+          description: The required audio source for this track.
+        gain:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 1
+          description: Linear playback gain from 0 to 1, independent of agent speech volume. If omitted, the service defaults to 1. A value of 0 mutes this track.
+          default: 1
+      description: A soundscape track with its own audio source and playback volume.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentSoundscapeWorkingTrackConfig:
+      type: object
+      required:
+        - source
+      properties:
+        source:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeSourceConfig'
+          description: The required audio source for this track.
+        gain:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 1
+          description: Linear playback gain from 0 to 1, independent of agent speech volume. If omitted, the service defaults to 1. A value of 0 mutes this track.
+          default: 1
+        delay_ms:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 10000
+          description: The delay in milliseconds before working audio starts, from 0 to 10000. If omitted, the service defaults to 1000 milliseconds. This delays only working audio, not tool execution, and is valid only on the working track.
+          default: 1000
+      description: A working-loop track with a delay measured from the first pending non-call-control tool.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89446,7 +89787,7 @@ components:
         not: {}
       allOf:
         - $ref: '#/components/schemas/VoiceConversationEngine'
-      description: A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must support the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.
+      description: A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must declare `voice_conversation_engine` version `1.0.0`. Voice Live connects through the dedicated voice-conversation-engine endpoint using the existing Bridge Protocol 1.0 wire semantics; the Bridge message version is independent of the container protocol version and the Hosted Agents API version `v1`. Declaring `invocations_ws` is optional and does not substitute for `voice_conversation_engine`.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89543,29 +89884,78 @@ components:
           - VoiceAgents=V1Preview
     VoiceResponse:
       type: object
-      required:
-        - id
-        - conversation_id
       properties:
         id:
           type: string
-          description: The unique id of the response.
+          description: The unique ID of the response, will look like `resp_1234`.
+        object:
+          type: string
+          enum:
+            - realtime.response
+          description: The object type, must be `realtime.response`.
+          x-stainless-const: true
+        status:
+          type: string
+          enum:
+            - completed
+            - cancelled
+            - failed
+            - incomplete
+            - in_progress
+          description: |-
+            The final status of the response (`completed`, `cancelled`, `failed`, or
+              `incomplete`, `in_progress`).
+        status_details:
+          $ref: '#/components/schemas/OpenAI.RealtimeResponseStatusDetails'
+          description: Additional details about the status.
         output:
           type: array
           items:
             $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
-          description: The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list.
+          description: The list of output items generated by the response.
+        metadata:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.Metadata'
+            - type: 'null'
+        usage:
+          $ref: '#/components/schemas/OpenAI.RealtimeResponseUsage'
+          description: |-
+            Usage statistics for the Response, this will correspond to billing. A
+              Realtime API session will maintain a conversation context and append new
+              Items to the Conversation, thus output from previous turns (text and
+              audio tokens) will become the input for later turns.
         conversation_id:
           type: string
-          description: The id of the conversation this response belongs to.
+          description: |-
+            Which conversation the response is added to, determined by the `conversation`
+              field in the `response.create` event. If `auto`, the response will be added to
+              the default conversation and the value of `conversation_id` will be an id like
+              `conv_1234`. If `none`, the response will not be added to any conversation and
+              the value of `conversation_id` will be `null`. If responses are being triggered
+              automatically by VAD the response will be added to the default conversation
+        output_modalities:
+          type: array
+          items:
+            type: string
+            enum:
+              - text
+              - audio
+          description: |-
+            The set of modalities the model used to respond, currently the only possible values are
+              `[\"audio\"]`, `[\"text\"]`. Audio output always include a text transcript. Setting the
+              output to mode `text` will disable audio output from the model.
+        max_output_tokens:
+          oneOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
+            - type: string
+              enum:
+                - inf
+          description: |-
+            Maximum number of output tokens for a single assistant response,
+              inclusive of tool calls, that was used in this response.
         audio:
           $ref: '#/components/schemas/VoiceResponseAudio'
           description: The audio configuration used for the response, including the voice and audio format used for output.
-        metadata:
-          type: object
-          unevaluatedProperties:
-            type: string
-          description: A set of key-value pairs attached to the response.
         temperature:
           type: number
           format: float
@@ -89576,8 +89966,6 @@ components:
         completed_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the response completed.
-      allOf:
-        - $ref: '#/components/schemas/VoiceResponseBase'
       description: |-
         A persisted voice response representing one model inference turn within a conversation. In list results the
         `output` projection may be omitted; retrieve the
@@ -89613,60 +90001,6 @@ components:
           $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
           description: The audio format used for the response's audio output.
       description: The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceResponseBase:
-      type: object
-      properties:
-        object:
-          type: string
-          enum:
-            - realtime.response
-          description: The object type, must be `realtime.response`.
-          x-stainless-const: true
-        status:
-          type: string
-          enum:
-            - completed
-            - cancelled
-            - failed
-            - incomplete
-            - in_progress
-          description: |-
-            The final status of the response (`completed`, `cancelled`, `failed`, or
-              `incomplete`, `in_progress`).
-        status_details:
-          $ref: '#/components/schemas/OpenAI.RealtimeResponseStatusDetails'
-          description: Additional details about the status.
-        usage:
-          $ref: '#/components/schemas/OpenAI.RealtimeResponseUsage'
-          description: |-
-            Usage statistics for the Response, this will correspond to billing. A
-              Realtime API session will maintain a conversation context and append new
-              Items to the Conversation, thus output from previous turns (text and
-              audio tokens) will become the input for later turns.
-        output_modalities:
-          type: array
-          items:
-            type: string
-            enum:
-              - text
-              - audio
-          description: |-
-            The set of modalities the model used to respond, currently the only possible values are
-              `[\"audio\"]`, `[\"text\"]`. Audio output always include a text transcript. Setting the
-              output to mode `text` will disable audio output from the model.
-        max_output_tokens:
-          oneOf:
-            - $ref: '#/components/schemas/OpenAI.integer'
-            - type: string
-              enum:
-                - inf
-          description: |-
-            Maximum number of output tokens for a single assistant response,
-              inclusive of tool calls, that was used in this response.
-      description: Properties shared by persisted voice responses.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

@@ -34,7 +34,7 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   // Fix the xref.
   // --------------------------------------------------------------------------------
-  //@@clientNamespace(OpenAI, "Azure.AI.Projects.Agents", "csharp");
+  @@clientNamespace(OpenAI, "Azure.AI.Projects.Agents", "csharp");
 
   // --------------------------------------------------------------------------------
   // Root client
@@ -162,6 +162,17 @@ namespace Azure.AI.Projects {
   // Keep VoiceAgentTransport reachable even though the WebSocket operation that references it is excluded.
   @@usage(VoiceAgentTransport, Usage.input | Usage.json);
   @@access(VoiceAgentTransport, Access.public);
+
+  // Change types to avoid serialization as BinaryData
+  @@alternateType(OpenAI.RealtimeResponse.metadata, Record<unknown>);
+  @@alternateType(OpenAI.MCPTool.allowed_tools, OpenAI.MCPToolFilter | null);
+
+  // Rename Time properties for compliance
+  @@clientName(
+    VoiceAgentAzureSemanticVadOptions.idle_timeout_ms,
+    "IdleTimeout"
+  );
+  @@clientName(VoiceAgentSubagent.invoke_timeout_seconds, "InvokeTimeout");
 
   // --------------------------------------------------------------------------------
   // Hide session operations, containing the foundry features
@@ -1291,6 +1302,15 @@ namespace Azure.AI.Projects {
   // Realtime classes replacements
   // --------------------------------------------------------------------------------
   @@alternateType(
+    OpenAI.RealtimeResponse,
+    {
+      identity: "OpenAI.Realtime.RealtimeResponse",
+      package: "OpenAI",
+      minVersion: "2.14.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
     OpenAI.RealtimeAudioFormats,
     {
       identity: "OpenAI.Realtime.RealtimeAudioFormat",
@@ -1339,27 +1359,9 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   // Fix APIView namespace leak: these Foundry-only types were generating into the
   // OpenAI C# namespace instead of Azure.AI.Projects.Agents.
-  //
-  // The properties below are declared as anonymous inline unions on their source
-  // models in the external OpenAI package, so there is no real TypeSpec symbol
-  // named e.g. `OpenAI.VoiceResponseBaseStatus` to target directly: such names
-  // only exist post-emission, invented by the C# emitter for anonymous types.
-  // Instead, each property is first retyped (@@alternateType) to a small local
-  // named union declared here. Unions already shipped by OpenAI .NET are then
-  // mapped to those external types; only Foundry-specific unions are emitted
-  // in the Azure.AI.Projects.Agents namespace.
-  //
-  // Several of these properties are spread into a Foundry-local model via
-  // `OmitProperties`/`ToolFields` (e.g. VoiceResponseBase spreads
-  // OpenAI.RealtimeResponse). The client generator does not bind
-  // alternateType/clientNamespace to the spread-derived copy of the property,
-  // only to the property on its original declaring model, so every
-  // @@alternateType below targets `OpenAI.<Model>.<prop>` (never the Foundry
-  // model that spreads it in) -- confirmed against
-  // sdk-java-azure-ai-agents/client.tsp, which already uses this exact pattern for
-  // these same properties.
+  // Reuse published OpenAI types for the inline response unions.
   // --------------------------------------------------------------------------------
-  union VoiceResponseBaseStatus {
+  union VoiceResponseStatus {
     "completed",
     "cancelled",
     "failed",
@@ -1368,11 +1370,11 @@ namespace Azure.AI.Projects {
   }
   @@alternateType(
     OpenAI.RealtimeResponse.status,
-    VoiceResponseBaseStatus,
+    VoiceResponseStatus,
     "csharp"
   );
   @@alternateType(
-    VoiceResponseBaseStatus,
+    VoiceResponseStatus,
     {
       identity: "OpenAI.Realtime.RealtimeResponseStatus",
       package: "OpenAI",
@@ -1381,17 +1383,17 @@ namespace Azure.AI.Projects {
     "csharp"
   );
 
-  union VoiceResponseBaseOutputModality {
+  union VoiceResponseOutputModality {
     "text",
     "audio",
   }
   @@alternateType(
     OpenAI.RealtimeResponse.output_modalities,
-    VoiceResponseBaseOutputModality[],
+    VoiceResponseOutputModality[],
     "csharp"
   );
   @@alternateType(
-    VoiceResponseBaseOutputModality,
+    VoiceResponseOutputModality,
     {
       identity: "OpenAI.Realtime.RealtimeOutputModality",
       package: "OpenAI",
