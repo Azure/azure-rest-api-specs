@@ -126,3 +126,9 @@ are retained. In a disposable checkout, `--git-clean` restores tracked files and
 removes untracked files and directories across the entire repository after each
 project. It requires an initially clean checkout; ignored files are retained.
 Do not use it while other work is in progress. `--dry-run` disables cleanup.
+
+Cleanup is skipped when the checkout is already clean. Otherwise, tracked files
+are restored from the index and untracked files are cleaned repository-wide.
+Git errors or changes remaining after cleanup stop validation rather than letting
+the next project run in a dirty checkout. Nested repositories are not forcibly deleted.
+Use `--verbose` to include per-command cleanup timings.

@@ -1,0 +1,165 @@
+# Vally configuration for Azure SDK Typespec Author MCP tool evaluations
+# See: https://vally.dev/reference/vally-config
+# This file is the local/default entrypoint for developers.
+#
+# `azsdk-mcp` is the pipeline environment and selects a prebuilt live or mock
+# binary through AZSDK_EVAL_MCP_KIND. The `*-local` environments use the same
+# artifact layout while fixing the MCP kind in the environment name.
+#
+# The benchmark pipelines invoke suite branches from this file directly with --suite.
+# Vally 0.6.0 supports parallel execution across multiple eval files, so pipeline
+# runs do not need consolidated suite eval files plus tag filtering.
+
+paths:
+  evals: [evals/]
+  evalFilenames: ["*.eval.yaml"]
+  skills: [../]
+  results: results/
+
+environments:
+  azsdk-mcp:
+    files:
+      - src: ../fixtures/instructions-test/copilot-instructions.md
+        dest: .github/copilot-instructions.md
+    mcpServers:
+      azure-sdk-mcp:
+        type: stdio
+        command: node
+        cwd: ../../../..
+        args: [".github/skills/azure-typespec-author/evaluate/scripts/run-prebuilt-mcp.js"]
+        timeout: 5m
+        env:
+          AZSDKTOOLS_AGENT_TESTING: "false"
+          AZSDKTOOLS_COLLECT_TELEMETRY: "false"
+          # New KB agent preview endpoint (issue #15675 & #16692). Was: http://localhost:8088 (local qa-bot backend).
+          # When the endpoint is overridden the CLI no longer applies the built-in preview
+          # client id/scope, so the preview backend's client id and scope must be supplied
+          # explicitly (values validated in issue #15675). The access token is requested
+          # as "{AZURE_SDK_KB_CLIENT_ID}/user_impersonation"; the ambient Azure credential is provided
+          # by the pipeline (AzureCLI@2 / azuresdkqabot-dev) or `az login` locally.
+          AZURE_SDK_KB_ENDPOINT: "https://azuresdkqabot-test-server-cbdbh2gva6h7hrfr.westus2-01.azurewebsites.net"
+          AZURE_SDK_KB_CLIENT_ID: "674414e1-152b-41ac-b0d2-763535edea6c"
+          AZURE_SDK_KB_SCOPE: "api://azure-sdk-qa-bot-test/user_impersonation"
+
+  azsdk-mcp-local:
+    files:
+      - src: ../fixtures/instructions-test/copilot-instructions.md
+        dest: .github/copilot-instructions.md
+      - src: ../scripts/run-prebuilt-mcp.js
+        dest: tools/run-prebuilt-mcp.js
+    mcpServers:
+      azure-sdk-mcp:
+        type: stdio
+        command: node
+        args: ["tools/run-prebuilt-mcp.js"]
+        timeout: 5m
+        env:
+          AZSDK_EVAL_MCP_KIND: "live"
+          AZSDKTOOLS_AGENT_TESTING: "false"
+          AZSDKTOOLS_COLLECT_TELEMETRY: "false"
+          AZURE_SDK_KB_ENDPOINT: "https://azuresdkqabot-test-server-cbdbh2gva6h7hrfr.westus2-01.azurewebsites.net"
+          AZURE_SDK_KB_CLIENT_ID: "674414e1-152b-41ac-b0d2-763535edea6c"
+          AZURE_SDK_KB_SCOPE: "api://azure-sdk-qa-bot-test/user_impersonation"
+
+  azsdk-mcp-mock-local:
+    files:
+      - src: ../scripts/run-prebuilt-mcp.js
+        dest: tools/run-prebuilt-mcp.js
+    mcpServers:
+      azure-sdk-mcp:
+        type: stdio
+        command: node
+        args: ["tools/run-prebuilt-mcp.js"]
+        timeout: "60s"
+        env:
+          AZSDK_EVAL_MCP_KIND: "mock"
+
+  # Legacy remote-KB source startup retained for reference. It is disabled because
+  # `dotnet run` performs an implicit build that may download Copilot SDK assets from
+  # registry.npmjs.org, which is blocked on managed development devices. Local and
+  # pipeline evaluations use the prebuilt environments above instead.
+  # azsdk-mcp-remote-kb:
+  #   files:
+  #     - src: ../fixtures/instructions-test/copilot-instructions.md
+  #       dest: .github/copilot-instructions.md
+  #   mcpServers:
+  #     azure-sdk-mcp:
+  #       type: stdio
+  #       command: dotnet
+  #       args:
+  #         [
+  #           "run",
+  #           "--project",
+  #           "../../../../tools/azsdk-cli/Azure.Sdk.Tools.Cli",
+  #           "--",
+  #           "start",
+  #         ]
+  #       timeout: 5m
+  #       env:
+  #         AZSDKTOOLS_AGENT_TESTING: "false"
+  #         AZSDKTOOLS_COLLECT_TELEMETRY: "false"
+
+suites:
+  versioning-forced:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: versioning, mode: forced }
+  armtemplate-forced:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: armtemplate, mode: forced }
+  longrunningoperation-forced:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: lro, mode: forced }
+  decorators-forced:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: decorators, mode: forced }
+  warning-forced:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: warning, mode: forced }
+  dataplane-forced:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: dataplane, mode: forced }
+  versioning-trigger:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: versioning, mode: trigger }
+  armtemplate-trigger:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: armtemplate, mode: trigger }
+  longrunningoperation-trigger:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: lro, mode: trigger }
+  decorators-trigger:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: decorators, mode: trigger }
+  warning-trigger:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: warning, mode: trigger }
+  dataplane-trigger:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: dataplane, mode: trigger }
+  versioning-no-skill:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: versioning, mode: no-skill }
+  armtemplate-no-skill:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: armtemplate, mode: no-skill }
+  longrunningoperation-no-skill:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: lro, mode: no-skill }
+  decorators-no-skill:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: decorators, mode: no-skill }
+  warning-no-skill:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: warning, mode: no-skill }
+  dataplane-no-skill:
+    evals: ["evals/*.eval.yaml"]
+    filter: { suite: dataplane, mode: no-skill }
+  forced:
+    evals: ["evals/*.eval.yaml"]
+    filter: { mode: forced }
+  trigger:
+    evals: ["evals/*.eval.yaml"]
+    filter: { mode: trigger }
+  no-skill:
+    evals: ["evals/*.eval.yaml"]
+    filter: { mode: no-skill }
