@@ -1,6 +1,7 @@
 import "@typespec/versioning";
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
@@ -1278,6 +1279,16 @@ union DeploymentScope {
 }
 
 /**
+ * Read-only deployment scope for ApplicationGroup.
+ */
+@added(Versions.vLatestPreview)
+@TypeSpec.OpenAPI.extension("readOnly", true)
+union ReadOnlyDeploymentScope {
+  DeploymentScope,
+  string,
+}
+
+/**
  * Day of the week. Modeled as string
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Service already defined this as non-extensible"
@@ -2375,7 +2386,7 @@ model ApplicationGroupProperties {
    */
   @added(Versions.vLatestPreview)
   @visibility(Lifecycle.Read)
-  deploymentScope?: DeploymentScope;
+  deploymentScope?: ReadOnlyDeploymentScope;
 }
 
 /**
