@@ -98,6 +98,7 @@ input-file:
   - preview/2026-11-01-preview/managedBackupShortTermRetentionPolicies.json
   - preview/2026-11-01-preview/managedDatabaseAdvancedThreatProtectionSettings.json
   - preview/2026-11-01-preview/managedDatabaseColumns.json
+  - preview/2026-11-01-preview/managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
   - preview/2026-11-01-preview/managedDatabaseMoveOperations.json
   - preview/2026-11-01-preview/managedDatabaseQueries.json
   - preview/2026-11-01-preview/managedDatabaseRestoreDetails.json
@@ -139,6 +140,8 @@ input-file:
   - preview/2026-11-01-preview/replicationLinks.json
   - preview/2026-11-01-preview/restorableDroppedDatabases.json
   - preview/2026-11-01-preview/restorableDroppedManagedDatabases.json
+  - preview/2026-11-01-preview/restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
+  - preview/2026-11-01-preview/restorableDroppedManagedInstancesByLocation.json
   - preview/2026-11-01-preview/restorePoints.json
   - preview/2026-11-01-preview/sensitivityLabels.json
   - preview/2026-11-01-preview/serverAdvancedThreatProtectionSettings.json
@@ -179,6 +182,30 @@ input-file:
   - preview/2026-11-01-preview/virtualNetworkRules.json
   - preview/2026-11-01-preview/workloadClassifiers.json
   - preview/2026-11-01-preview/workloadGroups.json
+
+suppressions:
+  - code: ResourceNameRestriction
+    from: restorableDroppedManagedInstancesByLocation.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}"]
+    reason: locationName uses the shared Azure.Core.azureLocation region selector, not a customer-defined resource name. The service normalizes location names; a resource-name regex could exclude accepted location aliases.
+  - code: ResourceNameRestriction
+    from: restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}"]
+    reason: locationName uses the shared Azure.Core.azureLocation region selector, not a customer-defined resource name. The service normalizes location names; a resource-name regex could exclude accepted location aliases.
+  - code: ResourceNameRestriction
+    from: managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"]
+    reason: locationName uses the shared Azure.Core.azureLocation region selector, not a customer-defined resource name. The service normalizes location names; a resource-name regex could exclude accepted location aliases.
+  - code: DescriptionMustNotBeNodeName
+    from: managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"].get.parameters..description
+    reason: The policy supports only default. Its enum metadata is inherited unchanged from ManagedShortTermRetentionPolicyName, which is shared with existing retention APIs.
 ```
 
 ### Tag: package-preview-2026-08-01-preview
