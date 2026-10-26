@@ -73,9 +73,6 @@ virtual machine names and names generated from a prefix.
 The Linux examples explicitly enable the VM agent, platform-managed guest patching, 
 and periodic patch assessment.
 
-`name` is a caller-generated UUID for the bulk operation, not a virtual machine name.
-The polling URL contains a separate `asyncOperationId`, which matches `name` in the polling response.
-
 ```yaml $(tag) == 'package-2026-10-06'
 input-file:
   - stable/2026-10-06/Bulkactions.json
