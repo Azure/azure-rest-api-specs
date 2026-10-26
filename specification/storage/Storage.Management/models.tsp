@@ -532,6 +532,7 @@ union MinimumTlsVersion {
   TLS1_1: "TLS1_1",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   TLS1_2: "TLS1_2",
+
   /** Minimum api-version: 2026-12-01. */
   TLS1_3: "TLS1_3",
 }
