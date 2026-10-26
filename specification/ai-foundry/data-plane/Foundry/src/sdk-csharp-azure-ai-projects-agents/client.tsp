@@ -158,7 +158,6 @@ namespace Azure.AI.Projects {
 
   // WebSocket protocol upgrades are not representable by the C# HTTP client generator.
   @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!csharp");
-  @@scope(VoiceAgentGenesysAudioHook.connectGenesysAudioHook, "!csharp");
 
   // Keep VoiceAgentTransport reachable even though the WebSocket operation that references it is excluded.
   @@usage(VoiceAgentTransport, Usage.input | Usage.json);
