@@ -129,12 +129,6 @@ interface Clusters {
   >;
 
   /**
-   * Changes ring of a cluster
-   */
-  @added(Versions.v2026_11_01_preview)
-  changeRing is ArmResourceActionAsync<Cluster, ChangeRingRequest, Cluster>;
-
-  /**
    * Trigger Log Collection on a cluster
    */
   triggerLogCollection is ArmResourceActionAsync<
@@ -184,7 +178,6 @@ interface Clusters {
   Clusters.extendSoftwareAssuranceBenefit::parameters.body,
   "Software Assurance Change Request Payload"
 );
-@@doc(Clusters.changeRing::parameters.body, "Change ring request payload");
 @@doc(
   Clusters.triggerLogCollection::parameters.body,
   "Trigger Log Collection Request Payload"
