@@ -38620,6 +38620,57 @@
           ]
         }
       },
+      "CloudComputerUsePreviewTool": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "cloud_computer_use_preview"
+            ],
+            "description": "The object type, which is always `cloud_computer_use_preview`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "The input definition information for a cloud computer use tool, as used to configure an agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "preview_tool"
+          ]
+        }
+      },
+      "CloudComputerUsePreviewToolboxTool": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "cloud_computer_use_preview"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ToolboxTool"
+          }
+        ],
+        "description": "A cloud computer use tool stored in a toolbox.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "preview_tool"
+          ]
+        }
+      },
       "ClusterInsightResult": {
         "type": "object",
         "required": [
@@ -83013,6 +83064,7 @@
             "openapi": "#/components/schemas/OpenApiTool",
             "bing_custom_search_preview": "#/components/schemas/BingCustomSearchPreviewTool",
             "browser_automation_preview": "#/components/schemas/BrowserAutomationPreviewTool",
+            "cloud_computer_use_preview": "#/components/schemas/CloudComputerUsePreviewTool",
             "browser_automation": "#/components/schemas/BrowserAutomationTool",
             "azure_function": "#/components/schemas/AzureFunctionTool",
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
@@ -83568,7 +83620,8 @@
               "browser_automation",
               "capture_structured_outputs",
               "openapi",
-              "microsoft_copilot_toolset_preview"
+              "microsoft_copilot_toolset_preview",
+              "cloud_computer_use_preview"
             ]
           }
         ]
@@ -92918,6 +92971,7 @@
             "a2a": "#/components/schemas/A2AToolboxTool",
             "a2a_preview": "#/components/schemas/A2APreviewToolboxTool",
             "browser_automation_preview": "#/components/schemas/BrowserAutomationPreviewToolboxTool",
+            "cloud_computer_use_preview": "#/components/schemas/CloudComputerUsePreviewToolboxTool",
             "browser_automation": "#/components/schemas/BrowserAutomationToolboxTool",
             "reminder_preview": "#/components/schemas/ReminderPreviewToolboxTool",
             "work_iq_preview": "#/components/schemas/WorkIQPreviewToolboxTool",
@@ -92948,7 +93002,8 @@
           "a2a",
           "shell",
           "web_iq_preview",
-          "browser_automation"
+          "browser_automation",
+          "cloud_computer_use_preview"
         ],
         "description": "Supported tool types for tools stored in a toolbox."
       },
