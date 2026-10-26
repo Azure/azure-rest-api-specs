@@ -352,6 +352,180 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}/disable": {
+      "post": {
+        "operationId": "ServerAzureADAdministrators_Disable",
+        "tags": [
+          "ServerAzureADAdministrators"
+        ],
+        "description": "Disables the Azure Active Directory administrator on the server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$"
+          },
+          {
+            "name": "administratorName",
+            "in": "path",
+            "description": "The name of server active directory administrator.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ActiveDirectory"
+            ],
+            "x-ms-enum": {
+              "name": "AdministratorName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ActiveDirectory",
+                  "value": "ActiveDirectory",
+                  "description": "ActiveDirectory"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADAdministrator"
+            }
+          },
+          "202": {
+            "description": "Disabling the Azure Active Directory administrator is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Disables the Azure Active Directory administrator on the server.": {
+            "$ref": "./examples/AdministratorDisable.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ServerAzureADAdministrator"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}/enable": {
+      "post": {
+        "operationId": "ServerAzureADAdministrators_Enable",
+        "tags": [
+          "ServerAzureADAdministrators"
+        ],
+        "description": "Enables the Azure Active Directory administrator on the server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$"
+          },
+          {
+            "name": "administratorName",
+            "in": "path",
+            "description": "The name of server active directory administrator.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ActiveDirectory"
+            ],
+            "x-ms-enum": {
+              "name": "AdministratorName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ActiveDirectory",
+                  "value": "ActiveDirectory",
+                  "description": "ActiveDirectory"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADAdministrator"
+            }
+          },
+          "202": {
+            "description": "Enabling the Azure Active Directory administrator is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Enables the Azure Active Directory administrator on the server.": {
+            "$ref": "./examples/AdministratorEnable.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ServerAzureADAdministrator"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -397,6 +571,11 @@
         "azureADOnlyAuthentication": {
           "type": "boolean",
           "description": "Azure Active Directory only Authentication enabled.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/ExternalAdminStatus",
+          "description": "The status of the external administrator.",
           "readOnly": true
         }
       },

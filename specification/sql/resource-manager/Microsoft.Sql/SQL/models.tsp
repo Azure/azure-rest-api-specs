@@ -2313,6 +2313,24 @@ union AdministratorName {
   ActiveDirectory: "ActiveDirectory",
 }
 
+/**
+ * The status of the external administrator.
+ */
+@added(Versions.v2026_11_01_preview)
+union ExternalAdminStatus {
+  string,
+
+  /**
+   * The external administrator is enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * The external administrator is disabled.
+   */
+  Disabled: "Disabled",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AuthenticationName {
   string,
@@ -12836,6 +12854,14 @@ model ManagedInstanceProperties {
   /**
    * Whether or not this is a GPv2 variant of General Purpose edition.
    */
+  @removed(Versions.v2026_11_01_preview)
+  @renamedFrom(Versions.v2026_11_01_preview, "isGeneralPurposeV2")
+  isGeneralPurposeV2Before20261101?: boolean;
+
+  /**
+   * Whether or not this is a GPv2 variant of General Purpose edition. Starting with API version 2026-11-01, this property cannot be used to create a GPv1 instance or change an existing instance to GPv1.
+   */
+  @added(Versions.v2026_11_01_preview)
   isGeneralPurposeV2?: boolean;
 
   /**
@@ -14190,6 +14216,13 @@ model AdministratorProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   azureADOnlyAuthentication?: boolean;
+
+  /**
+   * The status of the external administrator.
+   */
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  status?: ExternalAdminStatus;
 }
 
 /**
@@ -14683,6 +14716,13 @@ model ServerExternalAdministrator {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureADOnlyAuthentication?: boolean;
+
+  /**
+   * The status of the external administrator.
+   */
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  status?: ExternalAdminStatus;
 }
 
 /**
