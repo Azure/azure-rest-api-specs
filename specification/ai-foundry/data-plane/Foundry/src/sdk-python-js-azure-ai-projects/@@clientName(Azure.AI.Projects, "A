@@ -45,6 +45,7 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Root client
 // --------------------------------------------------------------------------------
+// Temporary change to trigger Python/JS private-preview SDK package generation for CUA
 @@clientName(Azure.AI.Projects, "AIProjectClient");
 
 // --------------------------------------------------------------------------------
