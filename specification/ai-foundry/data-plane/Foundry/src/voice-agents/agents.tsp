@@ -540,7 +540,7 @@ model VoiceAgentVoiceSynthesisConfig {
 
 @doc("""
   Voice-specific output overrides for an inline subagent. Session-level output format and timestamp settings are
-  intentionally excluded. Omitted fields inherit the entrypoint configuration.
+  intentionally excluded.
   Provider-specific fields are selected by `voice_type`:
   - `openai`: `voice` and `speed`.
   - `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,
@@ -555,7 +555,7 @@ model VoiceAgentVoiceSynthesisConfig {
 model VoiceAgentVoiceConfig {
   ...VoiceAgentVoiceSelectionConfig;
 
-  @doc("The numeric output speed multiplier. Applies to all known `voice_type` values. Omission inherits the entrypoint speed.")
+  @doc("The numeric output speed multiplier. Applies to all known `voice_type` values.")
   @minValue(0.25)
   @maxValue(1.5)
   speed?: float32;

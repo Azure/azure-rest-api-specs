@@ -54398,7 +54398,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/VoiceAgentVoiceConfig'
             - type: 'null'
-          description: The output voice configuration activated for this subagent, using the same flat voice fields as the top-level audio output. Omission inherits the entrypoint configuration; supplied fields override it; null clears it where supported.
+          description: The output voice configuration activated for this subagent, using the same flat voice fields as the top-level audio output. Omission inherits the entrypoint configuration; a supplied object replaces the voice-specific settings; null clears them where supported.
         temperature:
           anyOf:
             - type: number
@@ -92033,7 +92033,7 @@ components:
           format: float
           minimum: 0.25
           maximum: 1.5
-          description: The numeric output speed multiplier. Applies to all known `voice_type` values. Omission inherits the entrypoint speed.
+          description: The numeric output speed multiplier. Applies to all known `voice_type` values.
         voice_temperature:
           type: number
           format: float
@@ -92070,7 +92070,7 @@ components:
           description: The Azure personal or avatar voice model. Applies only when `voice_type` is `azure-personal` or `avatar-voice-sync`.
       description: |-
         Voice-specific output overrides for an inline subagent. Session-level output format and timestamp settings are
-        intentionally excluded. Omitted fields inherit the entrypoint configuration.
+        intentionally excluded.
         Provider-specific fields are selected by `voice_type`:
         - `openai`: `voice` and `speed`.
         - `azure-standard`: `voice`, `voice_locale`, `speed`, `voice_temperature`, `custom_lexicon_url`,
