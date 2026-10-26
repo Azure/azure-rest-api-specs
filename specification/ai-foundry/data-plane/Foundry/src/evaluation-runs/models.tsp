@@ -235,7 +235,11 @@ model RunSummary {
   latency: EvaluationLatency;
 }
 
-/** A durable execution of an evaluation definition. */
+/**
+ * A durable execution of an evaluation definition. `error` is set only when `status` is `failed`
+ * or `partially_failed`; its `param` names the related request field when known and never holds a
+ * resource ID.
+ */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvaluationRun is JobLike<never, never, EvaluationRunStatus> {
   /** Optional non-unique display label. */
@@ -559,10 +563,10 @@ model EvaluationArtifactReference {
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model ExpectedEvidence {
   /** The expected final output. */
-  finalOutput?: EvaluationTypedValue;
+  final_output?: EvaluationTypedValue;
 
   /** The expected tool calls. */
-  toolCalls?: EvaluationToolCall[];
+  tool_calls?: EvaluationToolCall[];
 
   /** Expected artifacts. */
   artifacts?: EvaluationArtifactReference[];
@@ -572,7 +576,7 @@ model ExpectedEvidence {
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model ObservedEvidence {
   /** The final output. */
-  finalOutput?: EvaluationTypedValue;
+  final_output?: EvaluationTypedValue;
 
   /** The normalized trajectory. */
   trajectory?: Record<unknown>;
@@ -640,7 +644,7 @@ model PhaseResult {
 
 /**
  * One attempt of one Task within an EvaluationRun. `error` is set only when `status` is
- * `failed`: the last failed or unknown phase, with `param` naming that phase; other execution
+ * `failed`: the last failed or unknown phase, with `param` naming that phase (never a resource ID); other execution
  * failures follow in `details`, at most 10. Grader errors stay in `grader_results[].error`.
  */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)

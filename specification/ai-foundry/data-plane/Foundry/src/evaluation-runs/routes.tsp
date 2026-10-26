@@ -24,7 +24,7 @@ alias EvaluationRunListFilters = {
 @tag("EvaluationRuns")
 @removed(Versions.v1)
 interface EvaluationRuns {
-  /** Creates and starts a Run from a direct definition or a saved Job. */
+  /** Creates a Run in `queued` status; an equivalent `Operation-Id` retry returns the original Run with `201`. */
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Clients poll the Location URL."
   @summary("Create an EvaluationRun")
   @post
@@ -39,7 +39,7 @@ interface EvaluationRuns {
       /** A direct definition or a saved Job reference. */
       @body request: EvaluationRunCreateRequest;
     },
-    AcceptedResponse &
+    CreatedResponse &
       WithEvaluationETag<EvaluationRun> & {
         /** URL to poll for the Run status. */
         @header("Operation-Location") operationLocation: string;
@@ -78,7 +78,7 @@ interface EvaluationRuns {
     AgentsPagedResult<EvaluationRun>
   >;
 
-  /** Requests cancellation of a queued or in-progress Run. */
+  /** Requests cancellation of a queued or in-progress Run and returns its current `cancelling` or `cancelled` view. */
   @summary("Cancel an EvaluationRun")
   @post
   @route("/evaluation_runs/{run_id}:cancel")
@@ -89,7 +89,7 @@ interface EvaluationRuns {
       /** The Run ID. */
       @path run_id: string;
     },
-    AcceptedResponse & WithEvaluationETag<EvaluationRun>
+    OkResponse & WithEvaluationETag<EvaluationRun>
   >;
 
   /** Deletes a terminal Run. */

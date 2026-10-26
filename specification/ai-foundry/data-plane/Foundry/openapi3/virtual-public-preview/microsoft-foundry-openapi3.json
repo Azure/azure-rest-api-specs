@@ -12169,7 +12169,7 @@
       "post": {
         "operationId": "EvaluationRuns_create",
         "summary": "Create an EvaluationRun",
-        "description": "Creates and starts a Run from a direct definition or a saved Job.",
+        "description": "Creates a Run in `queued` status; an equivalent `Operation-Id` retry returns the original Run with `201`.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -12204,8 +12204,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
               "ETag": {
                 "required": true,
@@ -12924,7 +12924,7 @@
       "post": {
         "operationId": "EvaluationRuns_cancel",
         "summary": "Cancel an EvaluationRun",
-        "description": "Requests cancellation of a queued or in-progress Run.",
+        "description": "Requests cancellation of a queued or in-progress Run and returns its current `cancelling` or `cancelled` view.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -12959,8 +12959,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+          "200": {
+            "description": "The request has succeeded.",
             "headers": {
               "ETag": {
                 "required": true,
@@ -48435,7 +48435,7 @@
             "default": 1
           }
         },
-        "description": "What an evaluation runs. It is the Job-version create body and is flattened into the direct\nRun-create body. Exactly one of `dataset` or `inline_dataset` is required.",
+        "description": "What an evaluation runs. It is the Job-version create body and is flattened into the direct\nRun-create body. Exactly one of `dataset` or `inline_dataset` is required. A field the schema does\nnot define returns `400 invalid_request`; a recognized value that is not yet supported, such as a\nLater grader feature, returns `400 unsupported_feature`.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -48520,9 +48520,33 @@
           "versions": {
             "$ref": "#/components/schemas/EvaluationJobVersions",
             "description": "The Job's latest version."
+          },
+          "state": {
+            "$ref": "#/components/schemas/EvaluationJobState",
+            "description": "Set to `deleting` while asynchronous deletion is in progress; omitted while the Job is active.",
+            "readOnly": true
           }
         },
         "description": "A saved, versioned evaluation configuration identified by its name.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluationJobState": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "deleting"
+            ]
+          }
+        ],
+        "description": "Lifecycle state of an EvaluationJob.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -49100,7 +49124,7 @@
             "description": "The time when the Run became terminal; null while `status` is not terminal."
           }
         },
-        "description": "A durable execution of an evaluation definition.",
+        "description": "A durable execution of an evaluation definition. `error` is set only when `status` is `failed`\nor `partially_failed`; its `param` names the related request field when known and never holds a\nresource ID.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -51129,11 +51153,11 @@
       "ExpectedEvidence": {
         "type": "object",
         "properties": {
-          "finalOutput": {
+          "final_output": {
             "$ref": "#/components/schemas/EvaluationTypedValue",
             "description": "The expected final output."
           },
-          "toolCalls": {
+          "tool_calls": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EvaluationToolCall"
@@ -55287,7 +55311,7 @@
       "ObservedEvidence": {
         "type": "object",
         "properties": {
-          "finalOutput": {
+          "final_output": {
             "$ref": "#/components/schemas/EvaluationTypedValue",
             "description": "The final output."
           },
@@ -100338,7 +100362,7 @@
             "description": "The time when the TaskRun became terminal; null while `status` is not terminal."
           }
         },
-        "description": "One attempt of one Task within an EvaluationRun. `error` is set only when `status` is\n`failed`: the last failed or unknown phase, with `param` naming that phase; other execution\nfailures follow in `details`, at most 10. Grader errors stay in `grader_results[].error`.",
+        "description": "One attempt of one Task within an EvaluationRun. `error` is set only when `status` is\n`failed`: the last failed or unknown phase, with `param` naming that phase (never a resource ID); other execution\nfailures follow in `details`, at most 10. Grader errors stay in `grader_results[].error`.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"

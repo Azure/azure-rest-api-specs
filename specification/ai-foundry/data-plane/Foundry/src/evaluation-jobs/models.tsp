@@ -68,7 +68,9 @@ model EvaluationRepetitions {
 
 /**
  * What an evaluation runs. It is the Job-version create body and is flattened into the direct
- * Run-create body. Exactly one of `dataset` or `inline_dataset` is required.
+ * Run-create body. Exactly one of `dataset` or `inline_dataset` is required. A field the schema does
+ * not define returns `400 invalid_request`; a recognized value that is not yet supported, such as a
+ * Later grader feature, returns `400 unsupported_feature`.
  */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvaluationDefinition {
@@ -138,6 +140,15 @@ model EvaluationJobVersions {
   latest: EvaluationJobVersion;
 }
 
+/** Lifecycle state of an EvaluationJob. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+union EvaluationJobState {
+  string,
+
+  /** Asynchronous deletion is in progress; publication returns `409`. */
+  deleting: "deleting",
+}
+
 /** A saved, versioned evaluation configuration identified by its name. */
 @resource("evaluation_jobs")
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
@@ -149,4 +160,8 @@ model EvaluationJob {
 
   /** The Job's latest version. */
   versions: EvaluationJobVersions;
+
+  /** Set to `deleting` while asynchronous deletion is in progress; omitted while the Job is active. */
+  @visibility(Lifecycle.Read)
+  state?: EvaluationJobState;
 }
