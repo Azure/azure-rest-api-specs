@@ -115,6 +115,17 @@ suppressions:
       https://github.com/Azure/azure-openapi-validator/blob/main/docs/path-for-nested-resource.md#pathfornestedresource).
     from: Bulkactions.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/bulkCreate/asyncOperations/{asyncOperationId}"]
+  - code: BodyTopLevelProperties
+    reason: >
+      placement is an ARM envelope property on the Microsoft.Compute virtualMachines resource and is
+      mirrored here so bulkCreate and bulkCreateCustom accept the same top-level contract as a single
+      VM create. The BodyTopLevelProperties allow-list has not yet been extended with placement
+      (extendedLocation, the sibling envelope property, is already accepted), so this is a rule gap
+      rather than a deviation from the ARM resource shape.
+    from: Bulkactions.json
+    where:
+      - $.definitions.LocationBasedBulkCreate
+      - $.definitions.LocationBasedBulkCreateCustom
 ```
 
 ### Tag: package-2026-09-06-preview
@@ -307,19 +318,19 @@ suppressions:
   - code: PostResponseCodes
     reason: ScheduledActions disable is an async void action (ArmResourceActionNoResponseContentAsync, final-state-via Location). The POST returns 202 with the Azure-AsyncOperation and Location polling headers; the terminal no-content (204) result is delivered by polling the Location status URL per the ARM async contract (RPC-Async-V1-07). No library template emits an explicit 202+204 for async-void actions; mirrors the Microsoft.Compute BulkActions / ComputeBulkActions precedent for the same pattern.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{scheduledActionName}/disable"].post
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{recurringBulkActionName}/disable"].post
   - code: PostResponseCodes
     reason: ScheduledActions enable is an async void action (ArmResourceActionNoResponseContentAsync, final-state-via Location). The POST returns 202 with the Azure-AsyncOperation and Location polling headers; the terminal no-content (204) result is delivered by polling the Location status URL per the ARM async contract (RPC-Async-V1-07). No library template emits an explicit 202+204 for async-void actions; mirrors the Microsoft.Compute BulkActions / ComputeBulkActions precedent for the same pattern.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{scheduledActionName}/enable"].post
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{recurringBulkActionName}/enable"].post
   - code: EnumInsteadOfBoolean
     reason: The disabled property is a binary on/off flag (whether the scheduled action / notification is disabled) with no foreseeable additional states, so a boolean is the clearest representation and an enum would add no expressive value; mirrors the Microsoft.Compute BulkActions precedent for binary flags.
     from: Bulkactions.json
     where:
       - $.definitions.NotificationProperties.properties.disabled
-      - $.definitions.ScheduledActionProperties.properties.disabled
-      - $.definitions.ScheduledActionUpdateProperties.properties.disabled
-      - $.definitions.ScheduledActionsExtensionProperties.properties.disabled
+      - $.definitions.RecurringBulkActionProperties.properties.disabled
+      - $.definitions.RecurringBulkActionUpdateProperties.properties.disabled
+      - $.definitions.RecurringBulkActionExtensionProperties.properties.disabled
   - code: ParameterNotUsingCommonTypes
     reason: The scheduledActionsOperationStatuses status-monitor is a manually-routed GET (mirroring the BulkActions getOperationStatus pattern); its location and operationId path parameters are declared inline and bound to the explicit route; mirrors the Microsoft.Compute BulkActions precedent.
     from: Bulkactions.json
