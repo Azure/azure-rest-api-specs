@@ -4055,7 +4055,7 @@
     },
     "ManagedDatabaseCreateMode": {
       "type": "string",
-      "description": "Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. SourceDatabaseName, SourceManagedInstanceName and PointInTime must be specified. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).",
+      "description": "Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup. Specify sourceDatabaseId for an existing database or restorableDroppedDatabaseId for a dropped database, and specify restorePointInTime. The dropped database can be on an existing or dropped managed instance. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).",
       "enum": [
         "Default",
         "RestoreExternalBackup",
@@ -6195,6 +6195,82 @@
         "type": {
           "type": "string",
           "description": "Resource type.",
+          "readOnly": true
+        }
+      }
+    },
+    "RestorableDroppedManagedInstanceProperties": {
+      "type": "object",
+      "description": "Metadata retained for a dropped managed instance.",
+      "properties": {
+        "managedInstanceName": {
+          "type": "string",
+          "description": "The name of the managed instance.",
+          "readOnly": true
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation time of the managed instance (ISO8601 format).",
+          "readOnly": true
+        },
+        "deletionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deletion time of the managed instance (ISO8601 format).",
+          "readOnly": true
+        },
+        "serviceLevelObjective": {
+          "type": "string",
+          "description": "The SLO of the managed instance.",
+          "readOnly": true
+        },
+        "reservedStorageSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The reserved storage size of the managed instance in gigabytes.",
+          "readOnly": true,
+          "x-ms-client-name": "reservedStorageSizeGb"
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "The name of the resource group that contained the managed instance.",
+          "readOnly": true
+        },
+        "edition": {
+          "type": "string",
+          "description": "The edition of the managed instance.",
+          "readOnly": true
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of virtual cores provisioned for the managed instance.",
+          "readOnly": true
+        },
+        "dnsZone": {
+          "type": "string",
+          "description": "The DNS zone of the managed instance.",
+          "readOnly": true
+        },
+        "zoneRedundant": {
+          "type": "boolean",
+          "description": "Whether the managed instance used zone redundancy.",
+          "readOnly": true
+        },
+        "backupStorageAccountType": {
+          "type": "string",
+          "description": "The backup storage redundancy used by the managed instance.",
+          "readOnly": true
+        },
+        "versionEdition": {
+          "type": "string",
+          "description": "The SQL engine version edition of the managed instance.",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "The customer-visible state of the dropped managed instance.",
           "readOnly": true
         }
       }
