@@ -46,6 +46,8 @@ type GetAzurePipelineArtifactOptions = {
   maxBytes?: number;
 };
 
+type ByteStreamReadResult = { done: true; value?: undefined } | { done: false; value: Uint8Array };
+
 async function readResponseTextWithLimit(response: Response, maxBytes?: number): Promise<string> {
   const contentLength = response.headers?.get("content-length");
   if (
@@ -62,10 +64,11 @@ async function readResponseTextWithLimit(response: Response, maxBytes?: number):
     const chunks: Uint8Array[] = [];
     let totalBytes = 0;
     while (true) {
-      const { done, value } = await reader.read();
-      if (done) {
+      const readResult = (await reader.read()) as ByteStreamReadResult;
+      if (readResult.done) {
         break;
       }
+      const { value } = readResult;
       totalBytes += value.byteLength;
       if (totalBytes > maxBytes) {
         await reader.cancel();
@@ -180,7 +183,7 @@ export async function getAzurePipelineArtifact({
       throw new Error(`Failed to fetch artifact: ${artifactResponse.statusText}`);
     }
 
-    artifactData = await readResponseTextWithLimit(artifactResponse as Response, maxBytes);
+    artifactData = await readResponseTextWithLimit(artifactResponse, maxBytes);
     if (strict) {
       return { status: "found", artifactData };
     }

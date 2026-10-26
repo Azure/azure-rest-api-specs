@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   isSafeRelativePosixPath,
+  SDK_REVIEW_BUNDLE_MAX_CHANGED_FILES_PER_ENTRY,
   SDK_REVIEW_BUNDLE_SCHEMA_VERSION,
   sdkLabels,
   SdkName,
@@ -106,5 +107,29 @@ describe("sdk-types", () => {
         entries: validManifest.entries,
       }),
     ).toThrow();
+
+    const entriesOverTotalChangedFilesLimit = [0, 1, 2].map((entryIndex) => {
+      const changedFiles = Array.from(
+        {
+          length: entryIndex < 2 ? SDK_REVIEW_BUNDLE_MAX_CHANGED_FILES_PER_ENTRY : 1,
+        },
+        (_, fileIndex) =>
+          `sdk/privatetrafficmanager/Azure.ResourceManager.PrivateTrafficManager/src/Generated/${entryIndex}-${fileIndex}.cs`,
+      );
+      return {
+        ...validManifest.entries[0],
+        entryId: `entry-${entryIndex}`,
+        patchFile: `entry-${entryIndex}.patch`,
+        changedFileCount: changedFiles.length,
+        changedFiles,
+      };
+    });
+    expect(() =>
+      SdkReviewBundleManifestSchema.parse({
+        ...validManifest,
+        expectedEntryCount: entriesOverTotalChangedFilesLimit.length,
+        entries: entriesOverTotalChangedFilesLimit,
+      }),
+    ).toThrow("maximum");
   });
 });
