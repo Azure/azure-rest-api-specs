@@ -243,6 +243,7 @@ interface VirtualMachineBulkOperations {
    */
   @removed(Versions.`2026-06-06`)
   @added(Versions.`2026-07-06-preview`)
+  @removed(Versions.`2026-10-06`)
   @post
   @autoRoute
   @armResourceCollectionAction

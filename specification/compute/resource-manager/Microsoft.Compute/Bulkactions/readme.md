@@ -61,7 +61,7 @@ suppressions:
 ### Tag: package-2026-10-06
 
 These settings apply only when `--tag=package-2026-10-06` is specified on the command line.
-This GA version excludes scheduled actions, occurrences, and their extension resources.
+This GA version excludes bulk reimage, scheduled actions, occurrences, and their extension resources.
 
 ```yaml $(tag) == 'package-2026-10-06'
 input-file:
