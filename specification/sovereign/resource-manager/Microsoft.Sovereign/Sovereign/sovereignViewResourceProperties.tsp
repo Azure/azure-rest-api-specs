@@ -132,8 +132,8 @@ model SovereignViewPolicyInitiativeDetail {
   /** The compliance dimension associated with the policy initiative. */
   dimension: ComplianceDimension;
 
-  /** The policy assignment Ids generated during assignment of the policy initiative to a scope. */
-  @visibility(Lifecycle.Read)
+  /** The resource identifiers of existing policy assignments associated with the policy initiative. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   policyAssignmentIds?: armResourceIdentifier<[
     {
       type: "Microsoft.Authorization/policyAssignments";
@@ -142,17 +142,6 @@ model SovereignViewPolicyInitiativeDetail {
 
   /** The version of the policy initiative. */
   policyVersion: string;
-
-  /** The parameters for the assignment of policy initiatives. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameters vary based on the selected policy initiatives."
-  assignmentParameters: Record<ParameterValuesValue>;
-}
-
-/** The value of a parameter for the assignment of a policy initiative. */
-model ParameterValuesValue {
-  /** The value of the parameter. */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Parameter values can be of any type, depending on the selected policy initiative."
-  value?: unknown;
 }
 
 /** The compliance dimension to be associated with the policy initiative. */

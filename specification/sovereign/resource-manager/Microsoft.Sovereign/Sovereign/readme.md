@@ -39,10 +39,6 @@ These settings apply only when `--tag=package-2026-10-31-preview` is specified o
 input-file:
   - preview/2026-10-31-preview/sovereign.json
 suppressions:
-  - code: AvoidAdditionalProperties
-    from: sovereign.json
-    where: $.definitions.SovereignViewPolicyInitiativeDetail.properties.assignmentParameters
-    reason: Parameters vary based on the selected policy initiatives.
   - code: GuidUsage
     from: sovereign.json
     where: $.definitions["Azure.Core.uuid"].format
