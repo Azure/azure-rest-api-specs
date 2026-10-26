@@ -87,6 +87,7 @@ interface Factories {
    * Creates or updates a factory.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing createOrUpdate retains its request-body shape; preserve wire compatibility."
   @tag("factories")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Factory,
@@ -313,6 +314,7 @@ interface Factories {
   /**
    * Add a data flow into debug session.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing addDataFlow retains its request-body shape; preserve wire compatibility."
   @tag("dataFlowDebugSession")
   @action("addDataFlowToDebugSession")
   addDataFlow is ArmResourceActionSync<

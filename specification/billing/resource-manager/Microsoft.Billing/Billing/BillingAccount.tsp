@@ -75,6 +75,7 @@ interface BillingAccounts {
    * Adds payment terms to all the billing profiles under the billing account. Currently, payment terms can be added only on billing accounts that have Agreement Type as 'Microsoft Customer Agreement' and AccountType as 'Enterprise'. This action needs pre-authorization and only Field Sellers are authorized to add the payment terms and is not a self-serve action.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing addPaymentTerms retains its request-body shape; preserve wire compatibility."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingAccount")
   addPaymentTerms is ArmResourceActionAsync<
@@ -88,6 +89,7 @@ interface BillingAccounts {
    * Cancels all the payment terms on billing account that falls after the cancellation date in the request. Currently, cancel payment terms is only served by admin actions and is not a self-serve action.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing cancelPaymentTerms retains its request-body shape; preserve wire compatibility."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingAccount")
   cancelPaymentTerms is ArmResourceActionAsync<
@@ -140,6 +142,7 @@ interface BillingAccounts {
    * Validates payment terms on a billing account with agreement type 'Microsoft Customer Agreement' and account type 'Enterprise'.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing validatePaymentTerms retains its request-body shape; preserve wire compatibility."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingAccount")
   validatePaymentTerms is ArmResourceActionSync<
@@ -316,6 +319,7 @@ interface BillingAccounts {
    * Gets a URL to download multiple invoice documents (invoice pdf, tax receipts, credit notes) as a zip file. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing downloadDocumentsByBillingAccount retains its request-body shape; preserve wire compatibility."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   @action("downloadDocuments")
