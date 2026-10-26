@@ -168,7 +168,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
-  @doc("Optional configuration for referenced background specialists and inline voice subagents.")
+  @doc("Optional subagent configuration. `subagent_type` selects delegated background specialists or inline voice subagents.")
   subagent_config?: VoiceAgentSubagentConfig;
 
   @doc("""
@@ -182,30 +182,52 @@ model VoiceAgentDefinition extends AgentDefinition {
   store?: boolean = false;
 }
 
-@doc("Configuration for referenced background specialists and inline voice subagents.")
+@doc("The subagent configuration mode. Additional modes may be added over time.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentSubagentConfig {
-  @doc("""
-    The subagents configured for this Voice Agent. Referenced subagents identify sibling Foundry text agents that
-    may be consulted in the background. Inline voice subagents are owned and versioned with the parent Voice Agent
-    and may become active through Handoff. Inline Handoff authoring requires `$entrypoint` as the first inline
-    subagent, followed by at least one specialist and at most 31 additional inline subagents. Each inline subagent
-    declares its outgoing `handoff_conditions`; condition identifiers and the 128-condition limit apply across
-    the entire Agent.
-    """)
-  @minItems(1)
-  subagents: VoiceAgentSubagentDefinition[];
+union VoiceAgentSubagentType {
+  string,
 
-  @doc("Session-wide Handoff limits for inline voice subagents. Requires an inline `$entrypoint` with at least one outgoing condition. When omitted, the service permits up to 16 completed and 16 attempted handoffs.")
-  handoff_policy?: VoiceAgentHandoffPolicy;
+  @doc("Referenced Foundry agents invoked as delegated background specialists.")
+  delegate: "delegate",
+
+  @doc("Inline voice behaviors that may become active through Handoff.")
+  inline: "inline",
 }
 
-@doc("A referenced background specialist or an inline voice subagent.")
-@oneOf
+@doc("Base configuration for one mutually exclusive subagent mode.")
+@discriminator("subagent_type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceAgentSubagentDefinition {
-  referenced: VoiceAgentSubagent,
-  inline: InlineVoiceSubagent,
+model VoiceAgentSubagentConfig {
+  @doc("The subagent mode. All entries in `subagents` use the configuration selected by this value.")
+  subagent_type: VoiceAgentSubagentType;
+}
+
+@doc("Configuration for referenced Foundry agents invoked as delegated background specialists.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentDelegateSubagentConfig extends VoiceAgentSubagentConfig {
+  subagent_type: VoiceAgentSubagentType.delegate;
+
+  @doc("The sibling Foundry text agents, in the same project, that this Voice Agent may consult.")
+  @minItems(1)
+  subagents: VoiceAgentSubagent[];
+}
+
+@doc("Configuration for inline voice subagents that may become active through Handoff.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentInlineSubagentConfig extends VoiceAgentSubagentConfig {
+  subagent_type: VoiceAgentSubagentType.inline;
+
+  @doc("""
+    Inline voice subagents owned and versioned with the parent Voice Agent. `$entrypoint` must be first, followed
+    by at least one specialist and at most 31 additional subagents. Each subagent declares its outgoing
+    `handoff_conditions`; condition identifiers and the 128-condition limit apply across the entire Agent.
+    """)
+  @minItems(2)
+  @maxItems(32)
+  subagents: InlineVoiceSubagent[];
+
+  @doc("Session-wide Handoff limits. Requires `$entrypoint` with at least one outgoing condition. When omitted, the service permits up to 16 completed and 16 attempted handoffs.")
+  handoff_policy?: VoiceAgentHandoffPolicy;
 }
 
 @doc("A sibling Foundry text agent that a voice agent may consult as a background specialist.")

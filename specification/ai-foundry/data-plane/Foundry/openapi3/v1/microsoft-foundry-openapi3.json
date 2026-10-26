@@ -94787,7 +94787,7 @@
           },
           "subagent_config": {
             "$ref": "#/components/schemas/VoiceAgentSubagentConfig",
-            "description": "Optional configuration for referenced background specialists and inline voice subagents."
+            "description": "Optional subagent configuration. `subagent_type` selects delegated background specialists or inline voice subagents."
           },
           "store": {
             "type": "boolean",
@@ -94801,6 +94801,40 @@
           }
         ],
         "description": "The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a\nmanaged speech-to-speech experience. Establish realtime voice sessions through\n`GET /agents/{agent_name}/endpoint/protocols/voice`. Every create or update produces a new immutable version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentDelegateSubagentConfig": {
+        "type": "object",
+        "required": [
+          "subagent_type",
+          "subagents"
+        ],
+        "properties": {
+          "subagent_type": {
+            "type": "string",
+            "enum": [
+              "delegate"
+            ]
+          },
+          "subagents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentSubagent"
+            },
+            "minItems": 1,
+            "description": "The sibling Foundry text agents, in the same project, that this Voice Agent may consult."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentSubagentConfig"
+          }
+        ],
+        "description": "Configuration for referenced Foundry agents invoked as delegated background specialists.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -95180,6 +95214,45 @@
           }
         },
         "description": "Voice-optimized instruction adaptation applied while a handoff node is active.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentInlineSubagentConfig": {
+        "type": "object",
+        "required": [
+          "subagent_type",
+          "subagents"
+        ],
+        "properties": {
+          "subagent_type": {
+            "type": "string",
+            "enum": [
+              "inline"
+            ]
+          },
+          "subagents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InlineVoiceSubagent"
+            },
+            "minItems": 2,
+            "maxItems": 32,
+            "description": "Inline voice subagents owned and versioned with the parent Voice Agent. `$entrypoint` must be first, followed\nby at least one specialist and at most 31 additional subagents. Each subagent declares its outgoing\n`handoff_conditions`; condition identifiers and the 128-condition limit apply across the entire Agent."
+          },
+          "handoff_policy": {
+            "$ref": "#/components/schemas/VoiceAgentHandoffPolicy",
+            "description": "Session-wide Handoff limits. Requires `$entrypoint` with at least one outgoing condition. When omitted, the service permits up to 16 completed and 16 attempted handoffs."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentSubagentConfig"
+          }
+        ],
+        "description": "Configuration for inline voice subagents that may become active through Handoff.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -95825,39 +95898,22 @@
       "VoiceAgentSubagentConfig": {
         "type": "object",
         "required": [
-          "subagents"
+          "subagent_type"
         ],
         "properties": {
-          "subagents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceAgentSubagentDefinition"
-            },
-            "minItems": 1,
-            "description": "The subagents configured for this Voice Agent. Referenced subagents identify sibling Foundry text agents that\nmay be consulted in the background. Inline voice subagents are owned and versioned with the parent Voice Agent\nand may become active through Handoff. Inline Handoff authoring requires `$entrypoint` as the first inline\nsubagent, followed by at least one specialist and at most 31 additional inline subagents. Each inline subagent\ndeclares its outgoing `handoff_conditions`; condition identifiers and the 128-condition limit apply across\nthe entire Agent."
-          },
-          "handoff_policy": {
-            "$ref": "#/components/schemas/VoiceAgentHandoffPolicy",
-            "description": "Session-wide Handoff limits for inline voice subagents. Requires an inline `$entrypoint` with at least one outgoing condition. When omitted, the service permits up to 16 completed and 16 attempted handoffs."
+          "subagent_type": {
+            "$ref": "#/components/schemas/VoiceAgentSubagentType",
+            "description": "The subagent mode. All entries in `subagents` use the configuration selected by this value."
           }
         },
-        "description": "Configuration for referenced background specialists and inline voice subagents.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAgentSubagentDefinition": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/VoiceAgentSubagent"
-          },
-          {
-            "$ref": "#/components/schemas/InlineVoiceSubagent"
+        "discriminator": {
+          "propertyName": "subagent_type",
+          "mapping": {
+            "delegate": "#/components/schemas/VoiceAgentDelegateSubagentConfig",
+            "inline": "#/components/schemas/VoiceAgentInlineSubagentConfig"
           }
-        ],
-        "description": "A referenced background specialist or an inline voice subagent.",
+        },
+        "description": "Base configuration for one mutually exclusive subagent mode.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -95904,6 +95960,26 @@
           }
         },
         "description": "Policy for delivering responses while a voice agent waits for a subagent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentSubagentType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "delegate",
+              "inline"
+            ]
+          }
+        ],
+        "description": "The subagent configuration mode. Additional modes may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
