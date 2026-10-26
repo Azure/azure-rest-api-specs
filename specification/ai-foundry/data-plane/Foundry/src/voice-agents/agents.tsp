@@ -247,14 +247,14 @@ union VoiceAgentSoundscapeSound {
   @doc("Busy call-center ambience.")
   call_center: "call_center",
 
-  @doc("Busy street ambience recorded with an iPhone microphone.")
-  busy_street_iphone_mic: "busy_street_iphone_mic",
+  @doc("Busy street ambience.")
+  busy_street: "busy_street",
 
   @doc("Crowd conversation ambience.")
   people_talking: "people_talking",
 
-  @doc("Street and metro-station ambience recorded with an iPhone microphone.")
-  street_and_metro_station_iphone_mic: "street_and_metro_station_iphone_mic",
+  @doc("Street and metro-station ambience.")
+  street_and_metro_station: "street_and_metro_station",
 
   @doc("The first notification tone.")
   ding1: "ding1",
