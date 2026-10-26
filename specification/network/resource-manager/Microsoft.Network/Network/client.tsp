@@ -178,28 +178,6 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 
-namespace Common {
-  /**
-   * Common writable subresource representation used by the previous C# AutoRest projection.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Back compatibility with the previous Network AutoRest C# hierarchy."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "Back compatibility with the previous Network AutoRest C# hierarchy."
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Back compatibility with the previous Network AutoRest C# hierarchy."
-  @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
-  model WritableSubResourceModel extends SubResource {
-    /**
-     * Resource name.
-     */
-    name?: string;
-
-    /**
-     * Resource type.
-     */
-    type?: string;
-  }
-}
-
 @@clientLocation(
   Microsoft.Compute.NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
   Microsoft.Network.NetworkInterfaces,
@@ -2106,7 +2084,7 @@ union ProvisioningStateUnion {
 );
 @@clientName(ChildResource, "NetworkChildResource", "csharp");
 @@clientName(Microsoft.Network.ProxyResource, "NetworkProxyResource", "csharp");
-@@clientName(WritableResource, "NetworkWritableResource", "csharp");
+@@clientName(WritableResource, "NetworkWritableResourceData", "csharp");
 @@clientName(
   Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.requestTimeout,
   "RequestTimeoutInSeconds",
@@ -5571,14 +5549,6 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 @@clientName(Common.SubResourceModel.type, "ResourceType", "csharp");
 
 @@clientName(
-  Common.WritableSubResourceModel,
-  "NetworkWritableResourceData",
-  "csharp"
-);
-
-@@clientName(Common.WritableSubResourceModel.type, "ResourceType", "csharp");
-
-@@clientName(
   Microsoft.Network.EndpointServiceResult.type,
   "ResourceType",
   "csharp"
@@ -5613,12 +5583,6 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 
 @@alternateType(
   Common.SubResourceModel.type,
-  Azure.Core.armResourceType,
-  "csharp"
-);
-
-@@alternateType(
-  Common.WritableSubResourceModel.type,
   Azure.Core.armResourceType,
   "csharp"
 );
@@ -6884,42 +6848,42 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Common.NetworkInterfaceIPConfiguration,
-  Common.WritableSubResourceModel,
+  Microsoft.Network.WritableResource,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Common.Route,
-  Common.WritableSubResourceModel,
+  Microsoft.Network.WritableResource,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Common.SecurityRule,
-  Common.WritableSubResourceModel,
+  Microsoft.Network.WritableResource,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Common.Subnet,
-  Common.WritableSubResourceModel,
+  Microsoft.Network.WritableResource,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Common.VirtualNetworkPeering,
-  Common.WritableSubResourceModel,
+  Microsoft.Network.WritableResource,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Common.Delegation,
-  Common.WritableSubResourceModel,
+  Microsoft.Network.WritableResource,
   "csharp"
 );
 
