@@ -125,6 +125,7 @@ interface SessionHosts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SessionHosts_ListSingleRegistrationTokens")
   @added(Versions.vLatestPreview)
+  @TypeSpec.OpenAPI.extension("x-ms-pageable", #{ nextLinkName: null })
   @list
   listSingleSessionHostRegistrationTokens is ArmResourceActionSync<
     SessionHost,

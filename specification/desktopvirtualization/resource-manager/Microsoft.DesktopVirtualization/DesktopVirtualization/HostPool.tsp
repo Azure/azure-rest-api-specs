@@ -217,6 +217,7 @@ interface HostPools {
   /**
    * Operation to list the RegistrationTokens associated with the HostPool.
    */
+  @TypeSpec.OpenAPI.extension("x-ms-pageable", #{ nextLinkName: null })
   @list
   listRegistrationTokens is ArmResourceActionSync<
     HostPool,
