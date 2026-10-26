@@ -458,6 +458,22 @@ interface RecoveryPlanActions {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  @added(Versions.v2026_10_31_preview)
+  @route(ServiceGroupRoute)
+  @post
+  @doc("Fetches recovery points for applicable recovery resources in the recovery orchestration plan.")
+  @sharedRoute
+  fetchRecoveryPoints is ArmResourceActionAsync<
+    RecoveryPlan,
+    FetchRecoveryPointsContent,
+    FetchRecoveryPointsResult,
+    ServiceGroupAndRequestHeadersParameters,
+    OptionalRequestBody = true,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = FetchRecoveryPointsResult> &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
   @route(ServiceGroupRoute)
   @post
   @doc("This action triggers the failover operation on the recovery orchestration plan for the qualified resources.")

@@ -1,0 +1,68 @@
+{
+  "title": "RecoveryPlanActions_FetchRecoveryPoints_MaximumSet",
+  "operationId": "RecoveryPlanActions_FetchRecoveryPoints",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2026-10-31-preview",
+    "operation-id": "qmn",
+    "recoveryPlanName": "samplePlanName",
+    "body": {
+      "resourceSelectionMode": "All",
+      "recoveryPointPolicy": {
+        "type": "Latest"
+      },
+      "recoveryGroups": [
+        {
+          "recoveryGroupId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/samplePlanName/recoveryGroups/11111111-1111-1111-1111-111111111111",
+          "recoveryPointPolicy": {
+            "type": "Random",
+            "startTime": "2026-10-20T00:00:00Z",
+            "endTime": "2026-10-22T00:00:00Z"
+          }
+        }
+      ],
+      "recoveryResourceSets": [
+        {
+          "recoveryResourceIds": [
+            "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/samplePlanName/recoveryResources/22222222-2222-2222-2222-222222222222"
+          ],
+          "recoveryPointPolicy": {
+            "type": "PointInTime",
+            "pointInTime": "2026-10-22T10:45:00Z"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.AzureResilienceManagement/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-10-31-preview"
+      }
+    },
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/samplePlanName/recoveryResources/22222222-2222-2222-2222-222222222222",
+            "name": "22222222-2222-2222-2222-222222222222",
+            "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryResources",
+            "properties": {
+              "recoveryPoint": {
+                "recoveryPointId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.RecoveryServices/vaults/sampleVault/backupFabrics/Azure/protectionContainers/sampleContainer/protectedItems/sampleItem/recoveryPoints/123456",
+                "recoveryPointTime": "2026-10-22T10:30:00Z",
+                "recoveryPointType": "ApplicationConsistent"
+              }
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/samplePlanName/recoveryResources/33333333-3333-3333-3333-333333333333",
+            "name": "33333333-3333-3333-3333-333333333333",
+            "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryResources",
+            "properties": {}
+          }
+        ]
+      }
+    }
+  }
+}
