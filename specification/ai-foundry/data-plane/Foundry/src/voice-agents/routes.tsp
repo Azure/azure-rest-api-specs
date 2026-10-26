@@ -109,6 +109,79 @@ interface VoiceAgentWebSocket {
   >;
 }
 
+@added(Versions.v1)
+@doc("The bodyless response that upgrades a Genesys AudioHook connection to WebSocket.")
+model GenesysAudioHookUpgradeResult {
+  @statusCode
+  status_code: 101;
+}
+
+@added(Versions.v1)
+@doc("A handshake error that can have no response body. Any JSON body uses the shared API error format.")
+@error
+model GenesysAudioHookErrorResult {
+  /** The platform error details, when a response body is returned. */
+  @body body?: ApiErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "A provider-initiated WebSocket upgrade does not match a standard resource operation template."
+@added(Versions.v1)
+@tag("Voice Agent WebSocket")
+interface VoiceAgentGenesysAudioHook {
+  /**
+   * Connects Genesys AudioHook directly to the voice agent. Authenticate with a Foundry account primary or
+   * secondary key in `X-API-KEY`; the key is account-wide, not agent-scoped. Caller bearer tokens and alternate
+   * API-key headers are not accepted. The agent must be enabled for voice in the target subscription.
+   *
+   * Send exactly one `api-version` query value, `v1`, and no other query parameters. Each required AudioHook
+   * header and the optional retry header must have exactly one value. Unknown `Audiohook-*` headers and any
+   * `Sec-WebSocket-Protocol` header are rejected. Fixed route segments and header names are case-insensitive;
+   * one trailing slash is accepted.
+   *
+   * The successful upgrade has no response body or negotiated subprotocol. After the upgrade, exchange
+   * [AudioHook v2 control messages and binary audio](https://developer.genesys.cloud/devapps/audiohook/protocol-reference),
+   * not Voice Agent Realtime JSON events. Supported media is mono external PCMU at 8 kHz.
+   *
+   * Before upgrade, malformed handshakes return `400`, rejected account credentials return `401`, and
+   * unsupported routes or unavailable projects return `404`. Service rejections for malformed or untrusted
+   * handshakes (`400` or `403`), a disabled subscription feature (`404`), or exhausted connection capacity
+   * (`429`) can have no response body. Any JSON error body uses the shared API error format. Other authorization
+   * and upstream failures retain their applicable platform error responses. Genesys binding management,
+   * public call end/transfer, outbound dialing, and AudioHook input/output-variable integration are not
+   * supported by this endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "A successful WebSocket 101 upgrade has no HTTP entity body."
+  @summary("Connect Genesys AudioHook to a voice agent")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/telephony/genesys-audiohook")
+  @useAuth(ApiKeyAuth<ApiKeyLocation.header, "X-API-KEY">)
+  connectGenesysAudioHook(
+    /** The name of the voice agent. */
+    @path agent_name: string,
+
+    /** The API version. Only `v1` is supported. */
+    @query("api-version")
+    @pattern("^v1(?![\\s\\S])")
+    apiVersion: string,
+
+    /** The Genesys organization identifier, as a hyphenated UUID. */
+    @header("Audiohook-Organization-Id") audiohook_organization_id: uuid,
+
+    /** The Genesys correlation identifier, as a hyphenated UUID. */
+    @header("Audiohook-Correlation-Id") audiohook_correlation_id: uuid,
+
+    /** The AudioHook session identifier, as a hyphenated UUID. */
+    @header("Audiohook-Session-Id") audiohook_session_id: uuid,
+
+    /** The retry attempt as ASCII digits. Leading zeros are accepted and no numeric maximum is imposed. */
+    @header("Audiohook-Retry-Attempt")
+    @pattern("^[0-9]+(?![\\s\\S])")
+    audiohook_retry_attempt?: string,
+  ):
+    | GenesysAudioHookUpgradeResult
+    | AzureRangeErrorResponse<GenesysAudioHookErrorResult>;
+}
+
 /**
  * Read-only, endpoint-scoped retrieval of the conversations, responses, transcript items, per-turn
  * metrics, and audio recorded by a voice agent. For a `voice` agent, the service is the sole writer of

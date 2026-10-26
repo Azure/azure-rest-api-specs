@@ -5171,6 +5171,105 @@
         }
       }
     },
+    "/agents/{agent_name}/endpoint/protocols/voice/telephony/genesys-audiohook": {
+      "get": {
+        "operationId": "VoiceAgentGenesysAudioHook_connectGenesysAudioHook",
+        "summary": "Connect Genesys AudioHook to a voice agent",
+        "description": "Connects Genesys AudioHook directly to the voice agent. Authenticate with a Foundry account primary or\nsecondary key in `X-API-KEY`; the key is account-wide, not agent-scoped. Caller bearer tokens and alternate\nAPI-key headers are not accepted. The agent must be enabled for voice in the target subscription.\n\nSend exactly one `api-version` query value, `v1`, and no other query parameters. Each required AudioHook\nheader and the optional retry header must have exactly one value. Unknown `Audiohook-*` headers and any\n`Sec-WebSocket-Protocol` header are rejected. Fixed route segments and header names are case-insensitive;\none trailing slash is accepted.\n\nThe successful upgrade has no response body or negotiated subprotocol. After the upgrade, exchange\n[AudioHook v2 control messages and binary audio](https://developer.genesys.cloud/devapps/audiohook/protocol-reference),\nnot Voice Agent Realtime JSON events. Supported media is mono external PCMU at 8 kHz.\n\nBefore upgrade, malformed handshakes return `400`, rejected account credentials return `401`, and\nunsupported routes or unavailable projects return `404`. Service rejections for malformed or untrusted\nhandshakes (`400` or `403`), a disabled subscription feature (`404`), or exhausted connection capacity\n(`429`) can have no response body. Any JSON error body uses the shared API error format. Other authorization\nand upstream failures retain their applicable platform error responses. Genesys binding management,\npublic call end/transfer, outbound dialing, and AudioHook input/output-variable integration are not\nsupported by this endpoint.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version. Only `v1` is supported.",
+            "schema": {
+              "type": "string",
+              "pattern": "^v1(?![\\s\\S])"
+            },
+            "explode": false
+          },
+          {
+            "name": "Audiohook-Organization-Id",
+            "in": "header",
+            "required": true,
+            "description": "The Genesys organization identifier, as a hyphenated UUID.",
+            "schema": {
+              "$ref": "#/components/schemas/Azure.Core.uuid"
+            }
+          },
+          {
+            "name": "Audiohook-Correlation-Id",
+            "in": "header",
+            "required": true,
+            "description": "The Genesys correlation identifier, as a hyphenated UUID.",
+            "schema": {
+              "$ref": "#/components/schemas/Azure.Core.uuid"
+            }
+          },
+          {
+            "name": "Audiohook-Session-Id",
+            "in": "header",
+            "required": true,
+            "description": "The AudioHook session identifier, as a hyphenated UUID.",
+            "schema": {
+              "$ref": "#/components/schemas/Azure.Core.uuid"
+            }
+          },
+          {
+            "name": "Audiohook-Retry-Attempt",
+            "in": "header",
+            "required": false,
+            "description": "The retry attempt as ASCII digits. Leading zeros are accepted and no numeric maximum is imposed.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9]+(?![\\s\\S])"
+            }
+          }
+        ],
+        "responses": {
+          "101": {
+            "description": "The bodyless response that upgrades a Genesys AudioHook connection to WebSocket."
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Voice Agent WebSocket"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
     "/agents/{agent_name}/endpoint/sessions": {
       "post": {
         "operationId": "Agents_createSession",
@@ -96654,6 +96753,11 @@
             }
           }
         }
+      },
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
       }
     }
   },

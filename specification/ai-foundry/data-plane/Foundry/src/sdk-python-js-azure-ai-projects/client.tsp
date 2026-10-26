@@ -312,6 +312,10 @@ using Azure.AI.Projects;
 // needs its own WebSocket transport to speak the realtime protocol afterward. Exclude this
 // operation entirely from the emitted SDK; it remains in the spec for raw REST documentation only.
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!(python, javascript)");
+@@scope(
+  VoiceAgentGenesysAudioHook.connectGenesysAudioHook,
+  "!(python, javascript)"
+);
 
 // Keep VoiceAgentTransport reachable even though the WebSocket operation that references it is excluded.
 @@usage(VoiceAgentTransport, Usage.input | Usage.json);

@@ -63,6 +63,7 @@ using Azure.AI.Projects;
 // Azure Core's HTTP pipeline cannot expose the upgraded WebSocket channel.
 // Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!java");
+@@scope(VoiceAgentGenesysAudioHook.connectGenesysAudioHook, "!java");
 
 // Keep the OpenAI realtime discriminator roots reachable even though the WebSocket operation is excluded.
 @@usage(OpenAI.RealtimeClientEvent, Usage.input | Usage.json);
