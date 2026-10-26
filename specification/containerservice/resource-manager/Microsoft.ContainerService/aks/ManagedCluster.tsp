@@ -225,13 +225,6 @@ model PrivateLinkResourcesListResult {
    */
   @pageItems
   value?: PrivateLinkResource[];
-
-  /**
-   * The link to the next page, if any. Omitted when all results are returned in a single response.
-   */
-  @added(Versions.v2026_09_01)
-  @nextLink
-  nextLink?: string;
 }
 
 /**
@@ -617,7 +610,6 @@ interface ManagedClusters {
   @get
   @action("privateLinkResources")
   @summary("Gets a list of private link resources in the specified managed cluster.")
-  @list
   privateLinkResourcesList is ArmResourceActionSync<
     ManagedCluster,
     void,
