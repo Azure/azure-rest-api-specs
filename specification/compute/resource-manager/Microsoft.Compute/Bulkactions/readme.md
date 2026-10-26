@@ -61,14 +61,16 @@ suppressions:
 ### Tag: package-2026-10-06
 
 These settings apply only when `--tag=package-2026-10-06` is specified on the command line.
-This GA version excludes scheduled actions, occurrences, and their extension resources.
+
+This GA version excludes bulk reimage, scheduled actions, occurrences, and their extension resources.
+
 BulkCreate and BulkCreateCustom expose create, get, list, and status operations.
 Delete and cancel are not part of their public GA API.
 
 The create examples use an existing subnet. Replace the sample subscription ID, subnet ID,
 and SSH public key before sending a request. BulkCreateCustom examples show both explicit
 virtual machine names and names generated from a prefix.
-The Linux examples explicitly enable the VM agent, platform-managed guest patching,
+The Linux examples explicitly enable the VM agent, platform-managed guest patching, 
 and periodic patch assessment.
 
 ```yaml $(tag) == 'package-2026-10-06'

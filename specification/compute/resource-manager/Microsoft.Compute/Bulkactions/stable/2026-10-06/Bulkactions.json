@@ -1101,68 +1101,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkReimage": {
-      "post": {
-        "operationId": "VirtualMachineBulkOperations_BulkReimage",
-        "description": "This feature is currently in preview.\n\nReimage one or more virtual machines. Reimaging is destructive and can replace operating system disk contents. Bulk Actions begins processing the request immediately and returns a Bulk Action Operation Id for each virtual machine. Use the returned IDs to get operation status updates.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "requestBody",
-            "in": "body",
-            "description": "The virtual machines to reimage and the execution settings for the bulk action.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExecuteReimageRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ReimageResourceOperationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "01 - Reimage multiple virtual machines": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_BasicSuccess.json"
-          },
-          "02 - Reimage virtual machines with shared settings and a per-VM override": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_ComprehensiveSuccess.json"
-          },
-          "03 - Reimage virtual machines with per-VM temporary disk settings": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_WithReimagePayload.json"
-          },
-          "04 - Response when a virtual machine does not exist": {
-            "$ref": "./examples/VirtualMachineBulkOperations_BulkReimage_VmNotFoundError.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkStart": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkStart",
@@ -2664,31 +2602,6 @@
         "executionParameters"
       ]
     },
-    "ExecuteReimageRequest": {
-      "type": "object",
-      "description": "The virtual machines and configuration for a bulk reimage action.",
-      "properties": {
-        "executionParameters": {
-          "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution settings for the bulk action."
-        },
-        "resources": {
-          "$ref": "#/definitions/Resources",
-          "description": "The target virtual machines."
-        },
-        "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithContext",
-          "description": "The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified."
-        },
-        "reimageParameters": {
-          "$ref": "#/definitions/ReimagePayload",
-          "description": "The shared and per-virtual-machine reimage configuration."
-        }
-      },
-      "required": [
-        "executionParameters"
-      ]
-    },
     "ExecuteStartRequest": {
       "type": "object",
       "description": "The virtual machines and execution settings for a bulk start action.",
@@ -3560,22 +3473,6 @@
         }
       }
     },
-    "OSProfileProvisioningData": {
-      "type": "object",
-      "description": "Additional parameters for reimaging a virtual machine that does not use an ephemeral operating system disk.",
-      "properties": {
-        "adminPassword": {
-          "type": "string",
-          "format": "password",
-          "description": "The password for the virtual machine administrator account. The password must be 8 to 123 characters long for Windows virtual machines or 6 to 72 characters long for Linux virtual machines. It must contain characters from at least three of these categories: lowercase letters, uppercase letters, digits, and special characters. The following values are not allowed: `abc@123`, `P@$$w0rd`, `P@ssw0rd`, `P@ssword123`, `Pa$$word`, `pass@word1`, `Password!`, `Password1`, `Password22`, and `iloveyou!`. This secret is accepted only in the request and is not returned in responses.",
-          "x-ms-secret": true
-        },
-        "customData": {
-          "type": "string",
-          "description": "Base64-encoded custom data provided to the virtual machine. The decoded data can contain up to 65,535 bytes. Do not include secrets or passwords."
-        }
-      }
-    },
     "OperatingSystemTypes": {
       "type": "string",
       "description": "This property allows you to specify the supported type of the OS that application is built for. Possible values are: **Windows,** **Linux.**",
@@ -3902,87 +3799,6 @@
           }
         ]
       }
-    },
-    "ReimagePayload": {
-      "type": "object",
-      "description": "The shared and per-virtual-machine configuration for a bulk reimage action.",
-      "properties": {
-        "baseProfile": {
-          "$ref": "#/definitions/VirtualMachineReimageParameters",
-          "description": "The reimage configuration applied to every virtual machine unless a per-virtual-machine override is provided."
-        },
-        "resourceOverrides": {
-          "type": "array",
-          "description": "The reimage configuration overrides for individual virtual machines.",
-          "items": {
-            "$ref": "#/definitions/ReimageResourceOverride"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "ReimageResourceOperationResponse": {
-      "type": "object",
-      "description": "The result of a bulk reimage action.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "A description of the bulk action result."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of resources targeted by the bulk action."
-        },
-        "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The Azure region where Bulk Actions processes the request.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "results": {
-          "type": "array",
-          "description": "The result for each virtual machine.",
-          "items": {
-            "$ref": "#/definitions/ResourceOperation"
-          },
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
-        }
-      },
-      "required": [
-        "description",
-        "type",
-        "location"
-      ]
-    },
-    "ReimageResourceOverride": {
-      "type": "object",
-      "description": "A reimage configuration override for one virtual machine.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure resource ID of the virtual machine to which the override applies.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Compute/virtualMachines"
-              }
-            ]
-          }
-        },
-        "profile": {
-          "$ref": "#/definitions/VirtualMachineReimageParameters",
-          "description": "The reimage configuration for this virtual machine."
-        }
-      },
-      "required": [
-        "resourceId",
-        "profile"
-      ]
     },
     "ResourceIdentityType": {
       "type": "string",
@@ -5022,24 +4838,6 @@
       "required": [
         "domainNameLabel"
       ]
-    },
-    "VirtualMachineReimageParameters": {
-      "type": "object",
-      "description": "The parameters for reimaging a virtual machine. The operating system disk is always reimaged.",
-      "properties": {
-        "tempDisk": {
-          "type": "boolean",
-          "description": "Indicates whether to reimage the temporary disk. The default value is `false`. This option is supported only for virtual machines or virtual machine scale sets that use an ephemeral operating system disk."
-        },
-        "exactVersion": {
-          "type": "string",
-          "description": "The exact image version to use when reimaging the operating system disk. When omitted, the disk is reimaged to its current image version."
-        },
-        "osProfile": {
-          "$ref": "#/definitions/OSProfileProvisioningData",
-          "description": "The operating system profile used when reimaging a non-ephemeral operating system disk."
-        }
-      }
     },
     "VmSizeProperties": {
       "type": "object",
