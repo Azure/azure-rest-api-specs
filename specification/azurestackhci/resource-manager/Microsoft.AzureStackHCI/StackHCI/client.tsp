@@ -234,9 +234,7 @@ using Microsoft.AzureStackHCI;
 @@clientName(ExtensionPatch, "ArcExtensionPatch", "csharp");
 
 // ==================== Request → Content renames ====================
-@@clientName(ChangeRingRequest, "ChangeRingContent", "csharp");
 @@clientName(CheckUpdatesRequest, "CheckUpdatesContent", "csharp");
-@@clientName(ClaimDeviceRequest, "ClaimDeviceContent", "csharp");
 @@clientName(DownloadRequest, "HciOSDownloadContent", "csharp");
 @@clientName(ProvisioningRequest, "EdgeMachineOSProvisionContent", "csharp");
 @@clientName(
@@ -244,7 +242,6 @@ using Microsoft.AzureStackHCI;
   "ReconcileArcSettingsContent",
   "csharp"
 );
-@@clientName(ReleaseDeviceRequest, "ReleaseDeviceContent", "csharp");
 @@clientName(
   SecretsLocationsChangeRequest,
   "SecretsLocationsChangeContent",
@@ -283,9 +280,7 @@ using Microsoft.AzureStackHCI;
 @@clientName(SecretsType, "HciSecretsType", "csharp");
 @@clientName(StorageType, "HciStorageType", "csharp");
 @@clientName(VolumeType, "HciVolumeType", "csharp");
-@@clientName(DeviceDetail, "HciDeviceDetail", "csharp");
 @@clientName(IdentityProvider, "HciIdentityProvider", "csharp");
-@@clientName(KubernetesVersion, "HciKubernetesVersion", "csharp");
 @@clientName(OperationDetail, "HciOperationDetail", "csharp");
 @@clientName(SiteDetails, "HciSiteDetails", "csharp");
 @@clientName(ProvisioningDetails, "HciProvisioningDetails", "csharp");
@@ -668,14 +663,6 @@ using Microsoft.AzureStackHCI;
 @@clientName(ExtensionInstanceView.type, "ExtensionInstanceViewType", "csharp");
 
 // ==================== Misc fixes ====================
-// CS0542 fix: KubernetesVersionProperties.version flattens to property named
-// same as enclosing type KubernetesVersion
-@@clientName(
-  KubernetesVersionProperties.version,
-  "kubernetesVersionValue",
-  "csharp"
-);
-
 // CS0102 fix: Step.lastUpdatedTimeUtc → LastUpdatedOn collides with
 // UpdateRunProperties.lastUpdatedTime → LastUpdatedOn (generator naming bug)
 // Fix: rename UpdateRunProperties.lastUpdatedTime to LastCompletedOn (matches old SDK name)

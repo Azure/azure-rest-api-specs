@@ -16,7 +16,6 @@ namespace Microsoft.AzureStackHCI;
  * Publisher details.
  */
 @parentResource(Cluster)
-@added(Versions.v2026_11_01_preview)
 model Publisher is Azure.ResourceManager.ProxyResource<PublisherProperties> {
   ...ResourceNameParameter<
     Resource = Publisher,

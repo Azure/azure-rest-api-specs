@@ -11,15 +11,14 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./KubernetesVersions.tsp";
-import "./PlatformUpdates.tsp";
+
 import "./OsImages.tsp";
-import "./UpdateContents.tsp";
+
 import "./Operations.tsp";
 import "./back-compatible.tsp";
 import "./ArcSetting.tsp";
 import "./Cluster.tsp";
-import "./NetworkProfile.tsp";
+
 import "./DeploymentSetting.tsp";
 import "./EdgeDeviceJob.tsp";
 import "./EdgeDevice.tsp";
@@ -34,18 +33,15 @@ import "./UpdateSummaries.tsp";
 import "./ValidatedSolutionRecipe.tsp";
 import "./EdgeMachine.tsp";
 import "./EdgeMachineJobs.tsp";
-import "./EdgeMachineUpdate.tsp";
+
 import "./ValidateOwnershipVouchers.tsp";
 import "./ClusterJobs.tsp";
-import "./ClusterVolume.tsp";
-import "./CapacitySetting.tsp";
-import "./DevicePool.tsp";
-import "./EdgeMachineGpu.tsp";
+
 import "./EdgeMachineNetworkAdapters.tsp";
 import "./EdgeMachineStorage.tsp";
 import "./EdgeMachineSecuritySettings.tsp";
 import "./EdgeMachineDeploymentSetting.tsp";
-import "./ProxyConfiguration.tsp";
+
 import "./client.tsp";
 
 using Azure.ResourceManager;
@@ -64,7 +60,7 @@ namespace Microsoft.AzureStackHCI;
  * The available API versions.
  *
  * This enum lists only the currently active API versions. Retired preview
- * versions (e.g. 2025-11-01-preview through 2026-10-15-preview) are
+ * versions (e.g. 2025-11-01-preview through 2026-11-01-preview) are
  * intentionally omitted — each new preview fully supersedes the previous one,
  * and customers are expected to adopt the latest preview. Including every
  * shipped preview would require extensive `@added`/`@removed` decorator
@@ -94,7 +90,13 @@ enum Versions {
   v2026_10_01: "2026-10-01",
 
   /**
-   * The 2026-11-01-preview API version.
+   * The 2027-01-01 API version.
    */
-  v2026_11_01_preview: "2026-11-01-preview",
+  v2027_01_01: "2027-01-01",
+
+  /**
+   * The 2027-01-15-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2027_01_15_preview: "2027-01-15-preview",
 }
