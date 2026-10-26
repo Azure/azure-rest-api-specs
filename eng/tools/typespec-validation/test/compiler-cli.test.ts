@@ -1,12 +1,11 @@
 import { execFile } from "node:child_process";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
 import { promisify, stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { normalizePath } from "../src/utils.ts";
 
 const exec = promisify(execFile);
 const cli = fileURLToPath(new URL("../cmd/tsv.js", import.meta.url));
@@ -14,7 +13,7 @@ const project = "specification/service/data-plane/Project";
 let root: string;
 
 beforeEach(async () => {
-  root = await realpath(await mkdtemp(join(tmpdir(), "tsv-command-cli-")));
+  root = resolve(await realpath(await mkdtemp(join(tmpdir(), "tsv-command-cli-"))));
   await writeFile(join(root, ".gitattributes"), "* text=auto eol=lf\n");
   vi.stubEnv("DEBUG", "");
   vi.stubEnv("GITHUB_ACTIONS", "false");
@@ -84,10 +83,11 @@ it("prints only a final summary by default and compact rule statuses with --verb
   }`);
   const quiet = await run(project);
   expect(quiet.code).toBe(0);
-  expect(quiet.stdout).toBe("8 passed | 3 skipped | 1 suppressed\n");
+  expect(quiet.stdout).toBe("8 passed | 1 skipped | 1 suppressed\n");
   expect(quiet.stderr).toBe("");
   const verbose = await run(project, "--verbose");
   expect(verbose.code).toBe(quiet.code);
+  expect(verbose.stderr).toContain("simple-git");
   expect(verbose.stdout.match(/TypeSpec compiler v1.16.0/g)).toHaveLength(1);
   expect(verbose.stdout).toContain("Compilation completed successfully.");
   expect(verbose.stdout).toContain("1 unchanged");
@@ -111,11 +111,9 @@ it("prints only a final summary by default and compact rule statuses with --verb
     "\u2714 Compile",
     "\u2714 Format",
     "- SdkTspConfigValidation (suppressed)",
-    "- MultipleNewApiVersions (skipped)",
-    "- StaleApiVersionPin (skipped)",
   ]);
   expect(verbose.stdout).toContain(
-    "- StaleApiVersionPin (skipped)\n\n8 passed | 3 skipped | 1 suppressed",
+    "- SdkTspConfigValidation (suppressed)\n\n8 passed | 1 skipped | 1 suppressed",
   );
 });
 
@@ -148,7 +146,7 @@ it.each([false, true])("compiles one entrypoint with main present=%s", async (ma
     .map((line): unknown => JSON.parse(line));
   expect(args).toEqual([
     mainExists
-      ? ["compile", "--list-files", "--warn-as-error", normalizePath(folder)]
+      ? ["compile", "--list-files", "--warn-as-error", resolve(folder)]
       : ["compile", "--no-emit", "--warn-as-error", join(folder, "client.tsp")],
   ]);
 });
@@ -228,12 +226,12 @@ it.each([
     expect(result.stderr).toContain("> 3 | invalid");
     expect(stripVTControlCharacters(result.stdout).includes("\u00d7 Compile")).toBe(verbose);
     expect(stripVTControlCharacters(result.stdout)).toContain(
-      "6 passed | 1 failed | 1 skipped | 4 not run",
+      "6 passed | 1 failed | 1 skipped | 2 not run",
     );
     expect(stripVTControlCharacters(result.stdout)).not.toContain("\u2714 Format");
     if (!verbose) {
       expect(stripVTControlCharacters(result.stdout)).toBe(
-        "\n6 passed | 1 failed | 1 skipped | 4 not run\n",
+        "\n6 passed | 1 failed | 1 skipped | 2 not run\n",
       );
     }
   },
