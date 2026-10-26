@@ -65,6 +65,11 @@
       "description": "Agent Invocations (WebSocket)"
     },
     {
+      "name": "Agent Voice Conversation Engine",
+      "parent": "Agents Root",
+      "description": "Hosted Voice Live Bridge connections"
+    },
+    {
       "name": "Agent Sessions",
       "parent": "Agents Root"
     },
@@ -2500,7 +2505,8 @@
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
             "GitHubCopilot=V1Preview",
-            "Skills=V1Preview"
+            "Skills=V1Preview",
+            "MicrosoftCopilot=V1Preview"
           ]
         },
         "tags": [
@@ -3545,7 +3551,7 @@
             "explode": false
           },
           {
-            "name": "structured_input",
+            "name": "structured_inputs",
             "in": "query",
             "required": false,
             "description": "Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and\nURL-encoded as this query parameter. Supplied values override definition defaults when rendering the\nagent's instructions and session-start greeting for this session only. The decoded value must be a JSON\nobject no larger than 32 KiB with a maximum nesting depth of 16.",
@@ -5184,6 +5190,81 @@
             "VoiceAgents=V1Preview"
           ]
         }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice_conversation_engine": {
+      "get": {
+        "operationId": "AgentVoiceConversationEngine_connectEndpointVoiceConversationEngine",
+        "summary": "Connect to a hosted voice conversation engine",
+        "description": "Establishes a WebSocket connection to a hosted voice conversation engine. The client must send an HTTP GET\nwith `Upgrade: websocket` headers. The target hosted agent must declare `voice_conversation_engine` version\n`1.0.0`. An `invocations_ws` declaration is neither required nor a fallback. Both protocols may be\ndeclared independently during migration; this operation always selects `voice_conversation_engine`.\n\nThe service resolves or creates a hosted session and forwards the connection to\n`ws://container:8088/voice_conversation_engine` without rewriting the protocol path. The AgentServer SDK\nexposes that container endpoint only when a Voice Bridge handler is registered.\n\nThe declared `voice_conversation_engine` version `1.0.0` identifies the Voice Live Bridge\nprotocol. Its container protocol version is independent of Bridge message version `1.0` and\nHosted Agents API version `v1`.\n\nVoice Live owns audio, STT, TTS, turn detection, and interruption. The engine reuses the existing\nBridge Protocol 1.0 wire semantics. Voice Live sends `session.start` with `protocol_version: \"1.0\"`;\nthe engine acknowledges activation with `session.ready` or rejects it with `session.rejected`.\nCaller input uses `user.message`. The engine opens a response with `response.created`, emits\n`response.output_text.delta` and `response.output_text.done` for text or `response.output_data.done`\nfor non-audio structured output, and completes generation with `response.done`. `response.none`\nconsumes input without opening a response; failures use `error`.\n\nMessages carry envelope `id` and `ts` fields. Inputs and output items use `item_id`; responses use\n`response_id`, and replies correlate consumed inputs through ordered-prefix `in_reply_to` values.\nVoice Live reports interruption through `user.barge_in`, including `heard_text`. An engine-initiated\n`response.cancel` is acknowledged by Voice Live with `response.cancelled` after playback stops.\nExisting bounded-message, timeout, and proactive-response admission semantics are retained.\n\nReconnection obtains fresh authentication and reattaches through the same `agent_session_id`, then\nsends `session.start` with `reconnect: true` and waits for `session.ready`. In-flight response state\nis abandoned, not replayed; there is no sequence acknowledgement or cursor-based recovery.\nAudio transport is outside this contract. The service relays frames without changing their message\nsemantics; WebSocket close codes and ping/pong are preserved. Authorization, throttling, metrics,\nand tracing are applied to the selected voice-conversation-engine protocol.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the target hosted voice conversation engine in the current project.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_session_id",
+            "in": "query",
+            "required": false,
+            "description": "Optional hosted session ID. Supply the same ID to reconnect to an existing session; omit it to create a session with an automatically generated ID.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "101": {
+            "description": "Informational",
+            "headers": {
+              "x-agent-session-id": {
+                "required": true,
+                "description": "The resolved hosted session ID, either the supplied ID or an automatically generated one.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Voice Conversation Engine"
+        ]
       }
     },
     "/agents/{agent_name}/endpoint/sessions": {
@@ -7934,7 +8015,8 @@
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
             "GitHubCopilot=V1Preview",
-            "Skills=V1Preview"
+            "Skills=V1Preview",
+            "MicrosoftCopilot=V1Preview"
           ]
         },
         "tags": [
@@ -33483,7 +33565,8 @@
           "VoiceAgents=V1Preview",
           "DigitalWorker=V1Preview",
           "GitHubCopilot=V1Preview",
-          "Skills=V1Preview"
+          "Skills=V1Preview",
+          "MicrosoftCopilot=V1Preview"
         ],
         "description": "Feature opt-in keys for agent definition operations supporting conditional preview features."
       },
@@ -33582,7 +33665,8 @@
               "mcp",
               "invocations",
               "voice",
-              "invocations_ws"
+              "invocations_ws",
+              "voice_conversation_engine"
             ]
           }
         ]
@@ -33685,13 +33769,15 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "microsoft_copilot_preview": "#/components/schemas/MicrosoftCopilotHarness",
             "github_copilot_preview": "#/components/schemas/GitHubCopilotHarness"
           }
         },
         "description": "A managed runtime and agent loop used to execute a prompt agent.",
         "x-ms-foundry-meta": {
-          "required_previews": [
-            "GitHubCopilot=V1Preview"
+          "conditional_previews": [
+            "GitHubCopilot=V1Preview",
+            "MicrosoftCopilot=V1Preview"
           ]
         }
       },
@@ -38248,7 +38334,8 @@
             "$ref": "#/components/schemas/OpenAI.Tool"
           }
         ],
-        "description": "The input definition information for a Browser Automation Tool, as used to configure an Agent.",
+        "description": "The input definition information for a Browser Automation Tool, as used to configure an Agent.\nBrowserAutomationPreviewTool is deprecated.\nPlease use BrowserAutomationTool instead.\nSee https://aka.ms/bat/docs for more information on Browser automation tool.",
+        "deprecated": true,
         "x-ms-foundry-meta": {
           "required_previews": [
             "preview_tool"
@@ -38278,7 +38365,8 @@
             "$ref": "#/components/schemas/ToolboxTool"
           }
         ],
-        "description": "A browser automation tool stored in a toolbox.",
+        "description": "A browser automation tool stored in a toolbox.\nBrowserAutomationPreviewToolboxTool is deprecated.\nPlease use BrowserAutomationToolboxTool instead.\nSee https://aka.ms/bat/docs for more information on Browser automation tool.",
+        "deprecated": true,
         "x-ms-foundry-meta": {
           "required_previews": [
             "preview_tool"
@@ -39104,7 +39192,8 @@
                 "DraftAgents=V1Preview",
                 "DigitalWorker=V1Preview",
                 "GitHubCopilot=V1Preview",
-                "Skills=V1Preview"
+                "Skills=V1Preview",
+                "MicrosoftCopilot=V1Preview"
               ]
             }
           },
@@ -39148,7 +39237,8 @@
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
             "GitHubCopilot=V1Preview",
-            "Skills=V1Preview"
+            "Skills=V1Preview",
+            "MicrosoftCopilot=V1Preview"
           ]
         }
       },
@@ -39276,7 +39366,8 @@
                 "DraftAgents=V1Preview",
                 "DigitalWorker=V1Preview",
                 "GitHubCopilot=V1Preview",
-                "Skills=V1Preview"
+                "Skills=V1Preview",
+                "MicrosoftCopilot=V1Preview"
               ]
             }
           },
@@ -43680,7 +43771,7 @@
           "web",
           "subagents"
         ],
-        "description": "A customer-configurable GitHub Copilot built-in tool."
+        "description": "The legacy GitHub Copilot built-in tool names retained for compatibility. Use `MicrosoftCopilotBuiltInTool` for new integrations."
       },
       "GitHubCopilotHarness": {
         "type": "object",
@@ -43693,7 +43784,7 @@
             "enum": [
               "github_copilot_preview"
             ],
-            "description": "The type of managed harness. Always `github_copilot_preview`."
+            "description": "The legacy type of managed harness. Always `github_copilot_preview`; use `microsoft_copilot_preview` for new prompt agents."
           }
         },
         "allOf": [
@@ -43701,7 +43792,7 @@
             "$ref": "#/components/schemas/AgentHarness"
           }
         ],
-        "description": "The GitHub Copilot managed harness for prompt agents.",
+        "description": "The legacy GitHub Copilot managed harness retained for compatibility. Use `MicrosoftCopilotHarness` for new prompt agents.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "GitHubCopilot=V1Preview"
@@ -43723,7 +43814,7 @@
             "description": "Whether the built-in tool is enabled. If omitted, the toolset default applies."
           }
         },
-        "description": "An enablement override for a GitHub Copilot built-in tool."
+        "description": "The legacy per-tool enablement override retained for compatibility. Use `MicrosoftCopilotToolsetConfig` for new integrations."
       },
       "GitHubCopilotToolsetDefaultConfig": {
         "type": "object",
@@ -43734,7 +43825,7 @@
             "default": true
           }
         },
-        "description": "The default enablement setting for GitHub Copilot built-in tools."
+        "description": "The legacy default enablement setting retained for compatibility. Use `MicrosoftCopilotToolsetDefaultConfig` for new integrations."
       },
       "GitHubCopilotToolsetPreview": {
         "type": "object",
@@ -43747,7 +43838,7 @@
             "enum": [
               "github_copilot_toolset_preview"
             ],
-            "description": "The type of the toolset. Always `github_copilot_toolset_preview`."
+            "description": "The legacy type of the toolset. Always `github_copilot_toolset_preview`; use `microsoft_copilot_toolset_preview` for new integrations."
           },
           "default_config": {
             "$ref": "#/components/schemas/GitHubCopilotToolsetDefaultConfig",
@@ -43766,7 +43857,7 @@
             "$ref": "#/components/schemas/OpenAI.Tool"
           }
         ],
-        "description": "Configuration overrides for GitHub Copilot built-in tools.",
+        "description": "The legacy GitHub Copilot toolset retained for compatibility. Use `MicrosoftCopilotToolsetPreview` for new integrations.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "GitHubCopilot=V1Preview"
@@ -45873,6 +45964,123 @@
           }
         ],
         "description": "The publish scope for the generated Microsoft Teams app."
+      },
+      "MicrosoftCopilotBuiltInTool": {
+        "type": "string",
+        "enum": [
+          "filesystem_read",
+          "filesystem_write",
+          "shell",
+          "web",
+          "subagents"
+        ],
+        "description": "A customer-configurable Microsoft Copilot built-in tool.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "MicrosoftCopilot=V1Preview"
+          ]
+        }
+      },
+      "MicrosoftCopilotHarness": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "microsoft_copilot_preview"
+            ],
+            "description": "The type of managed harness. Always `microsoft_copilot_preview`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentHarness"
+          }
+        ],
+        "description": "The Microsoft Copilot managed harness for prompt agents.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "MicrosoftCopilot=V1Preview"
+          ]
+        }
+      },
+      "MicrosoftCopilotToolsetConfig": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/MicrosoftCopilotBuiltInTool",
+            "description": "The built-in tool to configure."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the built-in tool is enabled. If omitted, the toolset default applies."
+          }
+        },
+        "description": "An enablement override for a Microsoft Copilot built-in tool.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "MicrosoftCopilot=V1Preview"
+          ]
+        }
+      },
+      "MicrosoftCopilotToolsetDefaultConfig": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether built-in tools are enabled by default. Defaults to true.",
+            "default": true
+          }
+        },
+        "description": "The default enablement setting for Microsoft Copilot built-in tools.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "MicrosoftCopilot=V1Preview"
+          ]
+        }
+      },
+      "MicrosoftCopilotToolsetPreview": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "microsoft_copilot_toolset_preview"
+            ],
+            "description": "The type of the toolset. Always `microsoft_copilot_toolset_preview`."
+          },
+          "default_config": {
+            "$ref": "#/components/schemas/MicrosoftCopilotToolsetDefaultConfig",
+            "description": "The default configuration for built-in tools. If omitted, built-in tools are enabled by default."
+          },
+          "configs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MicrosoftCopilotToolsetConfig"
+            },
+            "description": "Per-tool configuration overrides. Duplicate built-in tool names are not allowed."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "Configuration overrides for Microsoft Copilot built-in tools.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "MicrosoftCopilot=V1Preview"
+          ]
+        }
       },
       "MicrosoftFabricPreviewTool": {
         "type": "object",
@@ -82796,6 +83004,7 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "microsoft_copilot_toolset_preview": "#/components/schemas/MicrosoftCopilotToolsetPreview",
             "github_copilot_toolset_preview": "#/components/schemas/GitHubCopilotToolsetPreview",
             "bing_grounding": "#/components/schemas/BingGroundingTool",
             "fabric_dataagent_preview": "#/components/schemas/MicrosoftFabricPreviewTool",
@@ -83358,7 +83567,8 @@
               "bing_grounding",
               "browser_automation",
               "capture_structured_outputs",
-              "openapi"
+              "openapi",
+              "microsoft_copilot_toolset_preview"
             ]
           }
         ]
@@ -85765,6 +85975,7 @@
           },
           "endpoint": {
             "type": "string",
+            "format": "uri",
             "description": "The OTLP collector endpoint URL.",
             "examples": [
               "https://my-collector.example.com/otlp"
@@ -86186,8 +86397,9 @@
             "$ref": "#/components/schemas/AgentHarness",
             "description": "The managed runtime and agent loop used to execute this prompt agent.",
             "x-ms-foundry-meta": {
-              "required_previews": [
-                "GitHubCopilot=V1Preview"
+              "conditional_previews": [
+                "GitHubCopilot=V1Preview",
+                "MicrosoftCopilot=V1Preview"
               ]
             }
           },
@@ -93279,7 +93491,8 @@
                 "DraftAgents=V1Preview",
                 "DigitalWorker=V1Preview",
                 "GitHubCopilot=V1Preview",
-                "Skills=V1Preview"
+                "Skills=V1Preview",
+                "MicrosoftCopilot=V1Preview"
               ]
             }
           },
@@ -93296,7 +93509,8 @@
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
             "GitHubCopilot=V1Preview",
-            "Skills=V1Preview"
+            "Skills=V1Preview",
+            "MicrosoftCopilot=V1Preview"
           ]
         }
       },
@@ -94871,7 +95085,7 @@
         "properties": {
           "language": {
             "type": "string",
-            "description": "The language of the input audio. Supplying the input language in\n  [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format\n  will improve accuracy and latency."
+            "description": "The language of the input audio. Supplying the input language in\n[ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format\nwill improve accuracy and latency. Optional for other transcription models; required and must be\nnonempty when `model` is `azure-speech-streaming` (such as `en-US`; comma-separated locales are\nsupported)."
           },
           "languages": {
             "type": "array",
@@ -94905,7 +95119,7 @@
           },
           "model": {
             "$ref": "#/components/schemas/VoiceAgentInputTranscriptionModel",
-            "description": "The transcription model identifier. Configure customer custom speech deployments in `custom_speech`."
+            "description": "The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` is for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`."
           },
           "custom_speech": {
             "type": "object",
@@ -94920,9 +95134,13 @@
               "type": "string"
             },
             "description": "Optional phrase hints that bias recognition toward domain terms."
+          },
+          "profanity_filter": {
+            "$ref": "#/components/schemas/VoiceAgentProfanityFilterMode",
+            "description": "Controls how profanity is handled in input transcripts. Supported only with managed Azure Speech\n(`azure-speech` and `azure-speech-streaming`), including Custom Speech.\nSet this property before the session starts. If omitted, the transcription provider's default applies.\nYou cannot change the mode during a session.\nFiltering affects transcript events and the text sent to cascaded models. It does not change input\naudio, voice activity detection, or assistant speech; audio-native models still receive the original\naudio. Mandatory service masking policies apply even when you select `unfiltered`."
           }
         },
-        "description": "Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription\noptions with the Azure and MAI transcription models, custom speech models, and phrase hints.",
+        "description": "Settings for transcribing input audio, including the transcription model, Custom Speech deployments,\nand phrase hints.\nWhen `model` is `azure-speech-streaming`, transcription is supported for cascaded text-model\nconversations only (not realtime speech-to-speech models), requires a nonempty `language` such as\n`en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and\n`profanity_filter`.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -94945,11 +95163,12 @@
               "gpt-transcribe",
               "gpt-live-transcribe",
               "mai-transcribe",
-              "azure-speech"
+              "azure-speech",
+              "azure-speech-streaming"
             ]
           }
         ],
-        "description": "The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed\nvoice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.\nAdditional values may be added over time.",
+        "description": "The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed\nvoice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.\n`azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.\nAdditional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -95245,10 +95464,10 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/VoiceAgentNoiseReductionType",
-            "description": "The noise reduction mode."
+            "description": "The noise reduction mode. `azure_deep_noise_suppression_headset` provides\nheadset-optimized noise suppression for local voice activity detection, optimized for\nlow-sample-rate audio including 8 kHz telephony audio without changing recognition audio (not\nrestricted to headset devices). `azure_personal_noise_suppression` starts with headset\nsuppression for local voice activity detection and personalizes detection after automatic speaker\nenrollment while keeping recognition audio unchanged and keeping headset suppression active when\npersonalization is unavailable."
           }
         },
-        "description": "Input audio noise reduction configuration.",
+        "description": "Input audio noise reduction configuration. `azure_deep_noise_suppression_headset` and\n`azure_personal_noise_suppression` are modes for local voice activity detection that\nenhance detection audio without changing the audio used for recognition.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -95265,11 +95484,34 @@
             "enum": [
               "near_field",
               "far_field",
-              "azure_deep_noise_suppression"
+              "azure_deep_noise_suppression",
+              "azure_deep_noise_suppression_headset",
+              "azure_personal_noise_suppression"
             ]
           }
         ],
-        "description": "The input audio noise reduction mode.",
+        "description": "The input audio noise reduction mode.\n- `azure_deep_noise_suppression_headset`: Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.\n- `azure_personal_noise_suppression`: Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentProfanityFilterMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "masked",
+              "unfiltered",
+              "removed"
+            ]
+          }
+        ],
+        "description": "The supported input-transcript profanity filtering modes.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -96307,7 +96549,7 @@
             "$ref": "#/components/schemas/VoiceConversationEngine"
           }
         ],
-        "description": "A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must support the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.",
+        "description": "A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must declare `voice_conversation_engine` version `1.0.0`. Voice Live connects through the dedicated voice-conversation-engine endpoint using the existing Bridge Protocol 1.0 wire semantics; the Bridge message version is independent of the container protocol version and the Hosted Agents API version `v1`. Declaring `invocations_ws` is optional and does not substitute for `voice_conversation_engine`.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

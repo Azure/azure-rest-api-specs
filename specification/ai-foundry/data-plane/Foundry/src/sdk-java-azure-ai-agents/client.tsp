@@ -234,7 +234,28 @@ using Azure.AI.Projects;
   "TranscriptTextUsageType"
 );
 
-// Use descriptive Java names for configuration properties
+@@clientName(
+  MicrosoftCopilotToolsetConfig,
+  "MicrosoftCopilotToolsetConfiguration"
+);
+@@clientName(
+  MicrosoftCopilotToolsetDefaultConfig,
+  "MicrosoftCopilotToolsetDefaultConfiguration"
+);
+@@doc(
+  GitHubCopilotToolsetConfig,
+  "The legacy per-tool enablement override retained for compatibility. Use `MicrosoftCopilotToolsetConfiguration` for new integrations."
+);
+@@doc(
+  GitHubCopilotToolsetDefaultConfig,
+  "The legacy default enablement setting retained for compatibility. Use `MicrosoftCopilotToolsetDefaultConfiguration` for new integrations."
+);
+@@clientName(MicrosoftCopilotToolsetConfig.name, "toolName");
+@@clientName(
+  MicrosoftCopilotToolsetPreview.default_config,
+  "defaultConfiguration"
+);
+@@clientName(MicrosoftCopilotToolsetPreview.configs, "toolConfigurations");
 @@clientName(GitHubCopilotToolsetConfig.name, "toolName");
 @@clientName(
   GitHubCopilotToolsetPreview.default_config,
@@ -712,6 +733,7 @@ using Azure.AI.Projects;
 );
 
 @@clientName(VoiceConversation.object, "objectType");
+@@clientName(OpenAI.RealtimeResponse.object, "objectType");
 @@clientName(OpenAI.VoiceIdsShared, "VoiceIds");
 
 // Use natural Java ordering for Realtime conversation-message model names.
@@ -733,6 +755,8 @@ using Azure.AI.Projects;
 );
 
 // Use idiomatic Java word boundaries for file-system enum members.
+@@clientName(MicrosoftCopilotBuiltInTool.filesystem_read, "FILE_SYSTEM_READ");
+@@clientName(MicrosoftCopilotBuiltInTool.filesystem_write, "FILE_SYSTEM_WRITE");
 @@clientName(GitHubCopilotBuiltInTool.filesystem_read, "FILE_SYSTEM_READ");
 @@clientName(GitHubCopilotBuiltInTool.filesystem_write, "FILE_SYSTEM_WRITE");
 
