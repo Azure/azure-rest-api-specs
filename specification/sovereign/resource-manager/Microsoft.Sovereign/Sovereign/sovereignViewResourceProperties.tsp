@@ -132,9 +132,9 @@ model SovereignViewPolicyInitiativeDetail {
   /** The compliance dimension associated with the policy initiative. */
   dimension: ComplianceDimension;
 
-  /** The resource identifiers of existing policy assignments associated with the policy initiative. */
+  /** The resource identifiers of existing policy assignments association with the policy initiative and scopes in the sovereign view. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  policyAssignmentIds?: armResourceIdentifier<[
+  policyAssignmentIds: armResourceIdentifier<[
     {
       type: "Microsoft.Authorization/policyAssignments";
     }
