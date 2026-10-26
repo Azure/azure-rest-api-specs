@@ -51163,7 +51163,7 @@ components:
           description: "Name of the Project Connection that stores the endpoint URL and credentials. The connection must exist on the project and have a non-empty target URL. Supported auth types: ApiKey (sends `api-key` header) and AAD/Entra ID (acquires a bearer token via the project's Managed Identity)."
         schema_version:
           $ref: '#/components/schemas/EndpointEvaluatorSchemaVersion'
-          description: Version of the request and response contract between the service and the evaluator endpoint. Defaults to `0.0.1` when omitted. Version `0.0.2` requires exactly one metric of type `ordinal` or `continuous`.
+          description: Version of the contract between the service and the evaluator endpoint. Defaults to `0.0.1` when omitted.
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.
@@ -51177,7 +51177,7 @@ components:
           enum:
             - 0.0.1
             - 0.0.2
-      description: The request and response contract version used by an endpoint-based evaluator.
+      description: Contract version for an endpoint-based evaluator.
     EntraAuthorizationScheme:
       type: object
       required:
