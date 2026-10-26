@@ -1,14 +1,20 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
+import { globFiles } from "@azure-tools/specs-shared/glob";
+import { untilLastSegmentWithParent } from "@azure-tools/specs-shared/path";
+import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { readFile } from "node:fs/promises";
-import path, { basename, dirname, normalize } from "node:path";
-import { reportCommandOutput } from "../command-output.ts";
+import path, { basename, dirname, normalize } from "pathe";
 import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
-import { globFiles } from "../glob.ts";
 import { type Diagnostic, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { compileTypeSpec } from "../typespec-compiler.ts";
-import { fileExists, getSuppressions, gitDiffTopSpecFolder } from "../utils.ts";
+import {
+  fileExists,
+  getStructureVersion,
+  getSuppressions,
+  gitDiffTopSpecFolder,
+} from "../utils.ts";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
@@ -20,17 +26,16 @@ export class CompileRule implements Rule {
 
     const mainTspExists = await fileExists(path.join(folder, "main.tsp"));
     if (mainTspExists) {
-      const { output, emittedFiles } = await compileTypeSpec(path.join(folder, "main.tsp"));
-      const [err] = output;
-      const compiled = reportCommandOutput("compile", "TypeSpec compilation", output, logger);
+      const compiled = await compileTypeSpec(folder);
+      const { emittedFiles } = compiled;
       diagnostics.push(...(compiled.diagnostics ?? []));
 
       if (success) {
-        if (!err) {
+        if (compiled.success) {
           // Check for *extra* typespec-generated swagger files under the output folder, which
           // indicates a mismatch between TypeSpec and swaggers.
           const outputSwaggers = emittedFiles
-            // Normalize to platform-specific path
+            // Normalize separators to forward slashes
             .map((l) => normalize(l))
             // Filter to JSON files
             .filter((p) => basename(p).toLowerCase().endsWith(".json"))
@@ -48,11 +53,40 @@ export class CompileRule implements Rule {
 
             logger.debug(`Output folder:\n${outputFolder}`);
 
+            const gitRoot = await getRootFolder(folder);
+            const relativeFolder = path.relative(gitRoot, folder).split(path.sep).join("/");
+
+            if (getStructureVersion(relativeFolder) === 2) {
+              // Projects may intentionally share emitted Swagger at their service's specification root.
+              const allowedOutputFolderPath = untilLastSegmentWithParent(folder, "specification");
+              if (!allowedOutputFolderPath) {
+                throw new Error(`Could not determine the allowed output folder for '${folder}'`);
+              }
+
+              const allowedOutputFolder = path.relative(process.cwd(), allowedOutputFolderPath);
+              const outputFolderRelativeToAllowed = path.relative(
+                allowedOutputFolderPath,
+                path.resolve(outputFolder),
+              );
+
+              logger.debug(`Allowed output folder:\n${allowedOutputFolder}`);
+
+              if (
+                outputFolderRelativeToAllowed === ".." ||
+                outputFolderRelativeToAllowed.startsWith(`..${path.sep}`) ||
+                path.isAbsolute(outputFolderRelativeToAllowed)
+              ) {
+                throw new Error(
+                  `Output folder '${outputFolder}' must be under path '${allowedOutputFolder}'`,
+                );
+              }
+            }
+
             // Filter to only specs matching the folder and filename extracted from the first output-file.
             // Necessary to handle multi-project specs like keyvault.
             //
             // Glob patterns use forward slashes on all platforms.
-            const pattern = path.posix.join(...outputFolder.split(path.sep), "**", outputFilename);
+            const pattern = path.join(outputFolder, "**", outputFilename);
             const allSwaggers = (await globFiles(pattern, { exclude: ["**/examples/**"] })).map(
               (p) => normalize(p),
             );
@@ -122,18 +156,13 @@ export class CompileRule implements Rule {
 
             if (extraSwaggers.length > 0) {
               // Helper function to extract version from swagger path
-              // Normalize to POSIX path for consistent pattern matching
               const extractVersion = (swaggerPath: string): string | null => {
-                const posixPath = swaggerPath.split(path.sep).join(path.posix.sep);
-                const match = posixPath.match(/\/(preview|stable)\/([^/]+)\//);
+                const match = swaggerPath.match(/\/(preview|stable)\/([^/]+)\//);
                 return match ? match[2] : null;
               };
 
               // Check if all extra swaggers are preview versions
-              const allArePreview = extraSwaggers.every((s) => {
-                const posixPath = s.split(path.sep).join(path.posix.sep);
-                return posixPath.includes("/preview/");
-              });
+              const allArePreview = extraSwaggers.every((s) => s.includes("/preview/"));
 
               let isOnlyOlderPreviews = false;
               if (allArePreview) {
@@ -185,16 +214,9 @@ export class CompileRule implements Rule {
 
     const clientTsp = path.join(folder, "client.tsp");
     if (!mainTspExists && (await fileExists(clientTsp))) {
-      const { output } = await compileTypeSpec(clientTsp, { noEmit: true });
-      const [err] = output;
-      const compiled = reportCommandOutput(
-        "compile",
-        "Client TypeSpec compilation",
-        output,
-        logger,
-      );
+      const compiled = await compileTypeSpec(clientTsp, { noEmit: true });
       diagnostics.push(...(compiled.diagnostics ?? []));
-      if (err) {
+      if (!compiled.success) {
         success = false;
       }
     }

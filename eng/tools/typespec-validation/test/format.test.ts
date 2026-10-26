@@ -4,6 +4,8 @@ import { FormatRule } from "../src/rules/format.ts";
 import { formatTypeSpec } from "../src/typespec-compiler.ts";
 import { gitDiffTopSpecFolder } from "../src/utils.ts";
 import { diagnosticDetails } from "./diagnostics.ts";
+import { verbatim } from "../src/diagnostic-content.ts";
+import { failure, warning } from "../src/rule-result.ts";
 
 const mockFolder = "specification/foo/Foo";
 vi.mock("../src/typespec-compiler.ts", () => ({
@@ -15,7 +17,7 @@ vi.mock("../src/utils.ts", () => ({
 
 beforeEach(() => {
   vi.resetAllMocks();
-  vi.mocked(formatTypeSpec).mockResolvedValue([null, "", ""]);
+  vi.mocked(formatTypeSpec).mockResolvedValue({ success: true });
   vi.mocked(gitDiffTopSpecFolder).mockResolvedValue({ success: true, files: [] });
 });
 
@@ -23,20 +25,15 @@ describe("FormatRule", () => {
   it("formats TypeSpec and tspconfig.yaml in one pass and checks files afterward", async () => {
     const logger = new ConsoleLogger(true);
     const result = await new FormatRule().execute(mockFolder, logger);
-    expect(formatTypeSpec).toHaveBeenCalledExactlyOnceWith(mockFolder, [
-      "../**/*.tsp",
-      "tspconfig.yaml",
-    ]);
+    expect(formatTypeSpec).toHaveBeenCalledExactlyOnceWith(mockFolder);
     expect(gitDiffTopSpecFolder).toHaveBeenCalledExactlyOnceWith(mockFolder, logger);
     expect(result).toEqual({ success: true });
   });
 
-  it("preserves native formatter diagnostics without repeating Error.message", async () => {
-    vi.mocked(formatTypeSpec).mockResolvedValueOnce([
-      new Error("TypeSpec formatting failed"),
-      "native diagnostic\n",
-      "",
-    ]);
+  it("preserves native formatter diagnostics", async () => {
+    vi.mocked(formatTypeSpec).mockResolvedValueOnce(
+      failure("format", "TypeSpec formatting failed.", { details: verbatim("native diagnostic") }),
+    );
     const result = await new FormatRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(false);
     expect(result.diagnostics).toMatchObject([
@@ -76,7 +73,11 @@ describe("FormatRule", () => {
   });
 
   it("preserves unexpected successful output even when formatting also changes files", async () => {
-    vi.mocked(formatTypeSpec).mockResolvedValueOnce([null, "Formatter warning\n", ""]);
+    vi.mocked(formatTypeSpec).mockResolvedValueOnce(
+      warning("format-output", "TypeSpec formatting reported additional output.", {
+        details: verbatim("Formatter warning"),
+      }),
+    );
     vi.mocked(gitDiffTopSpecFolder).mockResolvedValue({
       success: false,
       files: ["main.tsp"],

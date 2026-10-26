@@ -1,5 +1,4 @@
 import type { ILogger } from "@azure-tools/specs-shared/logger";
-import { reportCommandOutput } from "../command-output.ts";
 import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
@@ -12,8 +11,7 @@ export class FormatRule implements Rule {
 
   async execute(folder: string, logger: ILogger): Promise<RuleResult> {
     // Format parent folder to include shared files
-    const output = await formatTypeSpec(folder, ["../**/*.tsp", "tspconfig.yaml"]);
-    const result = reportCommandOutput("format", "TypeSpec formatting", output, logger);
+    const result = await formatTypeSpec(folder);
     if (!result.success) return result;
     const gitDiffResult = await gitDiffTopSpecFolder(folder, logger);
     if (gitDiffResult.success) return result;

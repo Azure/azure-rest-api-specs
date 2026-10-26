@@ -87,6 +87,7 @@ interface Images {
   /**
    * Creates an image variation from the supplied request.
    */
+  #deprecated "This operation is deprecated and may be removed in future versions."
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/byos" "Auto-suppressed warnings non-applicable rules during import."
@@ -102,6 +103,7 @@ interface Images {
       contentType: "multipart/form-data";
 
       /** The multipart request body. */
+      #suppress deprecated
       @multipartBody
       body: OpenAI.CreateImageVariationRequest;
     },
