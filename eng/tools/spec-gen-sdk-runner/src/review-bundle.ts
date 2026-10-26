@@ -1,6 +1,8 @@
 import {
   isSafeRelativePosixPath,
   SDK_REVIEW_BUNDLE_ARTIFACT_NAME,
+  SDK_REVIEW_BUNDLE_MAX_CAPTURE_ERROR_LENGTH,
+  SDK_REVIEW_BUNDLE_MAX_CAPTURE_ERRORS,
   SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME,
   SDK_REVIEW_BUNDLE_SCHEMA_VERSION,
   SdkName,
@@ -30,6 +32,19 @@ export type CaptureSpecReviewEntriesOptions = {
   readmePath?: string;
   existingEntriesCount: number;
 };
+
+export type SdkReviewBundleCaptureResult =
+  | {
+      captureStatus: "complete";
+      expectedEntryCount: number;
+      entries: SdkReviewBundleEntry[];
+    }
+  | {
+      captureStatus: "failed";
+      expectedEntryCount: number;
+      captureErrors: string[];
+      entries: [];
+    };
 
 /**
  * Normalizes a path to a relative POSIX path inside `repoRootPath` and verifies
@@ -92,6 +107,10 @@ export function isExcludedGeneratedPackagePath(
   return EXCLUDED_PACKAGE_FILE_NAMES.has(fileName);
 }
 
+function isStrictPackageDescendant(packageRootPath: string, filePath: string): boolean {
+  return filePath.startsWith(`${packageRootPath}/`);
+}
+
 function sanitizeSlugSegment(value: string): string {
   const sanitized = value
     .replace(/[^A-Za-z0-9._-]+/g, "-")
@@ -141,6 +160,7 @@ async function listChangedPackageFiles(
     "-c",
     "core.quotepath=false",
     "diff",
+    "--no-renames",
     "--name-only",
     "-z",
     "HEAD",
@@ -213,11 +233,9 @@ export async function captureSdkReviewBundleEntriesForSpec(
   for (const [pkgOffset, pkg] of executionReport.packages.entries()) {
     const packageName = pkg.packageName?.trim();
     if (!packageName || !pkg.packageRootPath) {
-      logMessage(
-        `Skipping SDK review bundle capture for package '${packageName ?? "unknown"}': missing packageName or packageRootPath`,
-        LogLevel.Warn,
+      throw new Error(
+        `Cannot capture SDK review bundle package #${pkgOffset + 1}: missing packageName or packageRootPath`,
       );
-      continue;
     }
 
     const packageRootPath = normalizePackageRootPath(
@@ -225,11 +243,9 @@ export async function captureSdkReviewBundleEntriesForSpec(
       pkg.packageRootPath,
     );
     if (!packageRootPath) {
-      logMessage(
-        `Skipping SDK review bundle capture for package '${packageName}': unsafe packageRootPath '${pkg.packageRootPath}'`,
-        LogLevel.Warn,
+      throw new Error(
+        `Cannot capture SDK review bundle package '${packageName}': unsafe packageRootPath '${pkg.packageRootPath}'`,
       );
-      continue;
     }
 
     const untrackedFiles = await listUntrackedPackageFiles(
@@ -244,12 +260,21 @@ export async function captureSdkReviewBundleEntriesForSpec(
       commandInput.localSdkRepoPath,
       packageRootPath,
     );
+    if (
+      new Set(changedFiles).size !== changedFiles.length ||
+      changedFiles.some((filePath) => !isStrictPackageDescendant(packageRootPath, filePath))
+    ) {
+      throw new Error(
+        `Cannot capture SDK review bundle package '${packageName}': changed files are duplicated or outside packageRootPath '${packageRootPath}'`,
+      );
+    }
     const patchContent =
       changedFiles.length > 0
         ? await runGitStdout(commandInput.localSdkRepoPath, [
             "-c",
             "core.quotepath=false",
             "diff",
+            "--no-renames",
             "--no-ext-diff",
             "--binary",
             "--full-index",
@@ -302,16 +327,38 @@ export async function captureSdkReviewBundleEntriesForSpec(
   return capturedEntries;
 }
 
+export function discardSdkReviewBundleOutput(workingFolder: string): void {
+  const { absoluteFolderPath } = getSdkReviewBundleOutputPaths(workingFolder);
+  try {
+    fs.rmSync(absoluteFolderPath, { recursive: true, force: true });
+  } catch (error) {
+    logMessage(
+      `Runner: failed discarding partial SDK review bundle at ${absoluteFolderPath}: ${inspect(error)}`,
+      LogLevel.Warn,
+    );
+  }
+}
+
+export function createSdkReviewCaptureErrorSummary(error: unknown): string {
+  const summary =
+    (error instanceof Error ? error.message : inspect(error)).trim() ||
+    "Unknown SDK review bundle capture error";
+  return summary.replace(/[\r\n\t]+/g, " ").slice(0, SDK_REVIEW_BUNDLE_MAX_CAPTURE_ERROR_LENGTH);
+}
+
 /**
  * Writes the validated `sdk-review-bundle.json` manifest and emits the Azure Pipelines
  * variables (`SdkReviewBundlePath` and `SdkReviewBundleName`) used by `publish-artifact.yml`.
  */
 export function writeSdkReviewBundleManifest(
   commandInput: SpecGenSdkCmdInput,
-  entries: SdkReviewBundleEntry[],
+  captureResult: SdkReviewBundleCaptureResult,
   buildId: string | undefined = process.env.BUILD_BUILDID,
 ): SdkReviewBundleManifest | undefined {
-  if (!shouldCaptureSdkReviewBundle(commandInput) || entries.length === 0) {
+  if (
+    !shouldCaptureSdkReviewBundle(commandInput) ||
+    (captureResult.captureStatus === "complete" && captureResult.entries.length === 0)
+  ) {
     return undefined;
   }
 
@@ -320,18 +367,25 @@ export function writeSdkReviewBundleManifest(
   fs.mkdirSync(absoluteFolderPath, { recursive: true });
 
   const trimmedBuildId = buildId?.trim();
-  const manifest: SdkReviewBundleManifest = SdkReviewBundleManifestSchema.parse({
-    schemaVersion: SDK_REVIEW_BUNDLE_SCHEMA_VERSION,
-    ...(trimmedBuildId && /^[1-9]\d*$/.test(trimmedBuildId) ? { buildId: trimmedBuildId } : {}),
-    specPrNumber: commandInput.prNumber!,
-    specHeadSha: commandInput.specCommitSha,
-    specRepoUrl: commandInput.specRepoHttpsUrl,
-    sdkLanguage: commandInput.sdkLanguage,
-    sdkRepoName: commandInput.sdkRepoName,
-    entries,
-  });
-
   try {
+    const manifest: SdkReviewBundleManifest = SdkReviewBundleManifestSchema.parse({
+      schemaVersion: SDK_REVIEW_BUNDLE_SCHEMA_VERSION,
+      ...(trimmedBuildId && /^[1-9]\d*$/.test(trimmedBuildId) ? { buildId: trimmedBuildId } : {}),
+      specPrNumber: commandInput.prNumber!,
+      specHeadSha: commandInput.specCommitSha,
+      specRepoUrl: commandInput.specRepoHttpsUrl,
+      sdkLanguage: commandInput.sdkLanguage,
+      sdkRepoName: commandInput.sdkRepoName,
+      ...captureResult,
+      ...(captureResult.captureStatus === "failed"
+        ? {
+            captureErrors: captureResult.captureErrors.slice(
+              0,
+              SDK_REVIEW_BUNDLE_MAX_CAPTURE_ERRORS,
+            ),
+          }
+        : {}),
+    });
     fs.writeFileSync(manifestFilePath, JSON.stringify(manifest, undefined, 2));
     setVsoVariable("SdkReviewBundlePath", relativeFolderPath);
     setVsoVariable("SdkReviewBundleName", SDK_REVIEW_BUNDLE_ARTIFACT_NAME);

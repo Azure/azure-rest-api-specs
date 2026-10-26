@@ -8,9 +8,11 @@ import {
   generateSdkForSingleSpec,
   generateSdkForSpecPr,
 } from "../src/commands.ts";
+import * as emitterCheck from "../src/emitter-check.ts";
 import * as log from "../src/log.ts";
 import { LogLevel } from "../src/log.ts";
 import * as pythonPypiValidation from "../src/python-pypi-validation.ts";
+import * as reviewBundle from "../src/review-bundle.ts";
 import * as sdkValidationConfig from "../src/sdk-validation-config.ts";
 import * as changeFiles from "../src/spec-helpers.ts";
 import type { ExecutionReport } from "../src/types.ts";
@@ -352,6 +354,83 @@ describe("generateSdkForSpecPr", () => {
     expect(checkoutMainBranchSpy).toHaveBeenCalledOnce();
     expect(checkoutMainBranchSpy).toHaveBeenCalledWith(mockCommandInput.localSdkRepoPath);
     expect(runSpecGenSdkCommandSpy).toHaveBeenCalledTimes(2);
+  });
+
+  test("does not reuse a prior execution report when later azsdk generation throws", async () => {
+    const mockCommandInput = {
+      localSdkRepoPath: "path/to/local/repo",
+      localSpecRepoPath: "/spec/path",
+      workingFolder: "/working/folder",
+      runMode: "spec-pull-request",
+      sdkRepoName: "azure-sdk-for-net",
+      sdkLanguage: SdkName.Net,
+      specCommitSha: "38865cd3b650b3510e2a5b8bf9f990d0668a8810",
+      specRepoHttpsUrl: "https://github.com/Azure/azure-rest-api-specs",
+      prNumber: "47607",
+    };
+    const mockChangedSpecs = [
+      {
+        specs: ["specification/first/Project/file.tsp"],
+        typespecProject: "specification/first/Project/tspconfig.yaml",
+      },
+      {
+        specs: ["specification/second/Project/file.tsp"],
+        typespecProject: "specification/second/Project/tspconfig.yaml",
+      },
+    ];
+    const firstReport: ExecutionReport = {
+      executionResult: "succeeded",
+      packages: [
+        {
+          packageName: "Azure.First",
+          packageRootPath: "sdk/first/Azure.First",
+          result: "succeeded",
+        },
+      ],
+    };
+
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+    vi.spyOn(commandHelpers, "selectGenerationTool")
+      .mockReturnValueOnce("spec-gen-sdk")
+      .mockReturnValueOnce("azsdk-cli");
+    vi.spyOn(commandHelpers, "installLanguageToolchain").mockResolvedValue(undefined);
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockResolvedValue(mockChangedSpecs);
+    vi.spyOn(sdkValidationConfig, "resolveSdkRepoBranch").mockReturnValue(undefined);
+    vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
+    vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(firstReport);
+    vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue(false);
+    vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
+    vi.spyOn(emitterCheck, "checkEmitterEnabled").mockRejectedValue(
+      new Error("azsdk setup failed"),
+    );
+    const captureSpy = vi
+      .spyOn(reviewBundle, "captureSdkReviewBundleEntriesForSpec")
+      .mockResolvedValue([]);
+    const writeManifestSpy = vi
+      .spyOn(reviewBundle, "writeSdkReviewBundleManifest")
+      .mockReturnValue(undefined);
+    vi.spyOn(log, "logMessage").mockImplementation(() => {});
+
+    const result = await generateSdkForSpecPr();
+
+    expect(result.statusCode).toBe(1);
+    expect(captureSpy).toHaveBeenCalledOnce();
+    expect(captureSpy).toHaveBeenCalledWith(
+      expect.objectContaining({
+        executionReport: firstReport,
+        tspConfigPath: mockChangedSpecs[0].typespecProject,
+      }),
+    );
+    expect(writeManifestSpy).toHaveBeenCalledWith(
+      mockCommandInput,
+      expect.objectContaining({
+        captureStatus: "failed",
+        expectedEntryCount: 1,
+        entries: [],
+      }),
+    );
   });
 
   test("should validate Python PR package registration on PyPI", async () => {

@@ -5,6 +5,9 @@ import * as z from "zod";
 import {
   isSafeRelativePosixPath,
   SDK_REVIEW_BUNDLE_ARTIFACT_NAME,
+  SDK_REVIEW_BUNDLE_MAX_CHANGED_FILES_PER_ENTRY,
+  SDK_REVIEW_BUNDLE_MAX_ENTRIES,
+  SDK_REVIEW_BUNDLE_MAX_TOTAL_CHANGED_FILES,
   SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME,
   SdkName,
   SdkReviewBundleManifestSchema,
@@ -20,6 +23,14 @@ export const EXPECTED_AZURE_PIPELINES_APP_NAME = "Azure Pipelines" as const;
 export const EXPECTED_AZURE_PIPELINES_APP_SLUG = "azure-pipelines" as const;
 export const EXPECTED_ADO_HOST = "dev.azure.com" as const;
 export const EXPECTED_ADO_ORG = "azure-sdk" as const;
+export const MAX_SDK_REVIEW_MANIFEST_BYTES = 1024 * 1024;
+export const MAX_SDK_REVIEW_PATCH_BYTES = 16 * 1024 * 1024;
+export const MAX_SDK_REVIEW_TOTAL_PATCH_BYTES = 16 * 1024 * 1024;
+export {
+  SDK_REVIEW_BUNDLE_MAX_CHANGED_FILES_PER_ENTRY as MAX_SDK_REVIEW_CHANGED_FILES_PER_ENTRY,
+  SDK_REVIEW_BUNDLE_MAX_ENTRIES as MAX_SDK_REVIEW_ENTRIES,
+  SDK_REVIEW_BUNDLE_MAX_TOTAL_CHANGED_FILES as MAX_SDK_REVIEW_TOTAL_CHANGED_FILES,
+};
 
 const CheckRunAppSchema = z
   .object({
@@ -75,6 +86,11 @@ export type DownloadedBundleEntry = {
   entry: SdkReviewBundleEntry;
   localPatchPath: string;
 };
+
+type CompleteSdkReviewBundleManifest = Extract<
+  SdkReviewBundleManifest,
+  { captureStatus: "complete" }
+>;
 
 export type SdkReviewHandoffResult = {
   status: "validated" | "skipped";
@@ -274,8 +290,16 @@ export function verifyManifestAgainstCheckRun(
     );
   }
 
+  if (manifest.captureStatus === "failed") {
+    throw new Error(
+      `SDK review bundle capture failed for build ${event.adoBuild.buildId}: ${manifest.captureErrors.join("; ")}`,
+    );
+  }
+
   const seenEntryIds = new Set<string>();
   const seenPatchFiles = new Set<string>();
+  let totalChangedFileCount = 0;
+  let totalPatchBytes = 0;
   for (const entry of manifest.entries) {
     if (seenEntryIds.has(entry.entryId)) {
       throw new Error(`Duplicate entryId '${entry.entryId}' in review bundle manifest`);
@@ -292,9 +316,85 @@ export function verifyManifestAgainstCheckRun(
         `Entry '${entry.entryId}' changedFileCount (${entry.changedFileCount}) does not match changedFiles length (${entry.changedFiles.length})`,
       );
     }
+
+    const seenChangedFiles = new Set<string>();
+    for (const changedFile of entry.changedFiles) {
+      if (!changedFile.startsWith(`${entry.packageRootPath}/`)) {
+        throw new Error(
+          `Entry '${entry.entryId}' changed file '${changedFile}' is not a strict descendant of packageRootPath '${entry.packageRootPath}'`,
+        );
+      }
+      if (seenChangedFiles.has(changedFile)) {
+        throw new Error(`Entry '${entry.entryId}' has duplicate changed file '${changedFile}'`);
+      }
+      seenChangedFiles.add(changedFile);
+    }
+
+    if (entry.patchBytes > MAX_SDK_REVIEW_PATCH_BYTES) {
+      throw new Error(
+        `Entry '${entry.entryId}' patchBytes (${entry.patchBytes}) exceeds ${MAX_SDK_REVIEW_PATCH_BYTES}`,
+      );
+    }
+    totalChangedFileCount += entry.changedFiles.length;
+    totalPatchBytes += entry.patchBytes;
+  }
+
+  if (manifest.entries.length > SDK_REVIEW_BUNDLE_MAX_ENTRIES) {
+    throw new Error(`Manifest exceeds ${SDK_REVIEW_BUNDLE_MAX_ENTRIES} entries`);
+  }
+  if (totalChangedFileCount > SDK_REVIEW_BUNDLE_MAX_TOTAL_CHANGED_FILES) {
+    throw new Error(
+      `Manifest has ${totalChangedFileCount} changed files; maximum is ${SDK_REVIEW_BUNDLE_MAX_TOTAL_CHANGED_FILES}`,
+    );
+  }
+  if (totalPatchBytes > MAX_SDK_REVIEW_TOTAL_PATCH_BYTES) {
+    throw new Error(
+      `Manifest declares ${totalPatchBytes} patch bytes; maximum is ${MAX_SDK_REVIEW_TOTAL_PATCH_BYTES}`,
+    );
   }
 
   return prNumber;
+}
+
+export function verifyPatchPaths(entry: SdkReviewBundleEntry, patchText: string): void {
+  const patchFiles = new Set<string>();
+  for (const line of patchText.split(/\r?\n/)) {
+    if (!line.startsWith("diff --git ")) {
+      continue;
+    }
+
+    const header = line.slice("diff --git ".length);
+    if (header.includes('"')) {
+      throw new Error(`Patch '${entry.patchFile}' uses unsupported quoted diff paths`);
+    }
+    const matchedFile = entry.changedFiles.find(
+      (changedFile) => header === `a/${changedFile} b/${changedFile}`,
+    );
+    if (!matchedFile) {
+      throw new Error(
+        `Patch '${entry.patchFile}' has an undeclared, renamed, or unsupported diff header '${line}'`,
+      );
+    }
+    if (!isSafeRelativePosixPath(matchedFile)) {
+      throw new Error(`Patch '${entry.patchFile}' contains an unsafe diff path '${matchedFile}'`);
+    }
+    if (patchFiles.has(matchedFile)) {
+      throw new Error(`Patch '${entry.patchFile}' contains duplicate diff path '${matchedFile}'`);
+    }
+    patchFiles.add(matchedFile);
+  }
+
+  const declaredFiles = new Set(entry.changedFiles);
+  const undeclaredFiles = [...patchFiles].filter((filePath) => !declaredFiles.has(filePath));
+  const missingFiles = entry.changedFiles.filter((filePath) => !patchFiles.has(filePath));
+  if (patchFiles.size === 0 && patchText.trim().length > 0) {
+    throw new Error(`Patch '${entry.patchFile}' has content without a diff header`);
+  }
+  if (undeclaredFiles.length > 0 || missingFiles.length > 0) {
+    throw new Error(
+      `Patch '${entry.patchFile}' paths do not match changedFiles (undeclared: ${undeclaredFiles.join(", ") || "none"}; missing: ${missingFiles.join(", ") || "none"})`,
+    );
+  }
 }
 
 /**
@@ -340,7 +440,7 @@ export async function verifyPullRequestFreshness(params: {
  */
 export function formatReviewHandoffSummary(params: {
   event: ValidatedCheckRunEvent;
-  manifest: SdkReviewBundleManifest;
+  manifest: CompleteSdkReviewBundleManifest;
   prNumber: number;
   downloadedEntries: DownloadedBundleEntry[];
 }): string {
@@ -442,9 +542,11 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     core,
     fallbackToFailedArtifact: true,
     retryOptions,
+    strict: true,
+    maxBytes: MAX_SDK_REVIEW_MANIFEST_BYTES,
   });
 
-  if (!manifestArtifact.artifactData) {
+  if (manifestArtifact.status === "not-found") {
     const reason = `No '${SDK_REVIEW_BUNDLE_ARTIFACT_NAME}' artifact found on build ${event.adoBuild.buildId}`;
     core.info(reason);
     return {
@@ -454,6 +556,12 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
       headSha: event.headSha,
       entryCount: 0,
     };
+  }
+
+  if (Buffer.byteLength(manifestArtifact.artifactData, "utf8") > MAX_SDK_REVIEW_MANIFEST_BYTES) {
+    throw new Error(
+      `'${SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME}' exceeds ${MAX_SDK_REVIEW_MANIFEST_BYTES} bytes`,
+    );
   }
 
   let parsedJson: unknown;
@@ -468,6 +576,11 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
 
   const manifest = SdkReviewBundleManifestSchema.parse(parsedJson);
   const prNumber = verifyManifestAgainstCheckRun(manifest, event);
+  if (manifest.captureStatus !== "complete") {
+    throw new Error(
+      `SDK review bundle capture did not complete for build ${event.adoBuild.buildId}`,
+    );
+  }
 
   const prStatus = await verifyPullRequestFreshness({
     github,
@@ -495,6 +608,7 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, undefined, 2));
 
   const downloadedEntries: DownloadedBundleEntry[] = [];
+  let remainingPatchBytes = MAX_SDK_REVIEW_TOTAL_PATCH_BYTES;
   for (const entry of manifest.entries) {
     const localPatchPath = resolveSafeChildPath(bundleDirectory, entry.patchFile);
     const patchResponse = await getAzurePipelineArtifact({
@@ -506,11 +620,13 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
       core,
       fallbackToFailedArtifact: true,
       retryOptions,
+      strict: true,
+      maxBytes: Math.min(MAX_SDK_REVIEW_PATCH_BYTES, remainingPatchBytes),
     });
 
-    if (patchResponse.artifactData === "" && entry.patchBytes > 0) {
+    if (patchResponse.status === "not-found") {
       throw new Error(
-        `Missing or empty patch file '${entry.patchFile}' for entry '${entry.entryId}' in build ${event.adoBuild.buildId}`,
+        `Missing patch file '${entry.patchFile}' for entry '${entry.entryId}' in build ${event.adoBuild.buildId}`,
       );
     }
 
@@ -528,6 +644,8 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
       );
     }
 
+    verifyPatchPaths(entry, patchResponse.artifactData);
+    remainingPatchBytes -= patchBuffer.byteLength;
     fs.writeFileSync(localPatchPath, patchBuffer);
     downloadedEntries.push({ entry, localPatchPath });
   }

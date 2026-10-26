@@ -19,6 +19,82 @@ export type ListArtifactsResponse = {
   value: Array<ArtifactValue>;
 };
 
+export type AzurePipelineArtifactResult = {
+  artifactData: string;
+};
+
+export type StrictAzurePipelineArtifactResult =
+  | {
+      status: "found";
+      artifactData: string;
+    }
+  | {
+      status: "not-found";
+      artifactData: "";
+    };
+
+type GetAzurePipelineArtifactOptions = {
+  ado_build_id: string;
+  ado_project_url: string;
+  artifactName: string;
+  artifactFileName: string;
+  core: Core;
+  retryOptions?: import("./retries.ts").RetryOptions;
+  fallbackToFailedArtifact?: boolean;
+  token?: string;
+  strict?: boolean;
+  maxBytes?: number;
+};
+
+async function readResponseTextWithLimit(response: Response, maxBytes?: number): Promise<string> {
+  const contentLength = response.headers?.get("content-length");
+  if (
+    maxBytes !== undefined &&
+    contentLength &&
+    Number.isFinite(Number(contentLength)) &&
+    Number(contentLength) > maxBytes
+  ) {
+    throw new Error(`Artifact content exceeds ${maxBytes} bytes`);
+  }
+
+  if (maxBytes !== undefined && response.body) {
+    const reader = response.body.getReader();
+    const chunks: Uint8Array[] = [];
+    let totalBytes = 0;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) {
+        break;
+      }
+      totalBytes += value.byteLength;
+      if (totalBytes > maxBytes) {
+        await reader.cancel();
+        throw new Error(`Artifact content exceeds ${maxBytes} bytes`);
+      }
+      chunks.push(value);
+    }
+    const bytes = new Uint8Array(totalBytes);
+    let offset = 0;
+    for (const chunk of chunks) {
+      bytes.set(chunk, offset);
+      offset += chunk.byteLength;
+    }
+    return new TextDecoder().decode(bytes);
+  }
+
+  const text = await response.text();
+  if (maxBytes !== undefined && Buffer.byteLength(text, "utf8") > maxBytes) {
+    throw new Error(`Artifact content exceeds ${maxBytes} bytes`);
+  }
+  return text;
+}
+
+export function getAzurePipelineArtifact(
+  options: GetAzurePipelineArtifactOptions & { strict: true },
+): Promise<StrictAzurePipelineArtifactResult>;
+export function getAzurePipelineArtifact(
+  options: GetAzurePipelineArtifactOptions & { strict?: false },
+): Promise<AzurePipelineArtifactResult>;
 export async function getAzurePipelineArtifact({
   ado_build_id,
   ado_project_url,
@@ -28,16 +104,11 @@ export async function getAzurePipelineArtifact({
   retryOptions = {},
   fallbackToFailedArtifact = false,
   token = undefined,
-}: {
-  ado_build_id: string;
-  ado_project_url: string;
-  artifactName: string;
-  artifactFileName: string;
-  core: Core;
-  retryOptions?: import("./retries.ts").RetryOptions;
-  fallbackToFailedArtifact?: boolean;
-  token?: string;
-}): Promise<{ artifactData: string }> {
+  strict = false,
+  maxBytes,
+}: GetAzurePipelineArtifactOptions): Promise<
+  AzurePipelineArtifactResult | StrictAzurePipelineArtifactResult
+> {
   const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
   core.info(`Calling Azure DevOps API to get the artifact: ${apiUrl}`);
 
@@ -60,7 +131,7 @@ export async function getAzurePipelineArtifact({
   if (response.status === 404) {
     if (!fallbackToFailedArtifact) {
       core.info(`Artifact '${artifactName}' not found (404)`);
-      return { artifactData };
+      return strict ? { status: "not-found", artifactData: "" } : { artifactData };
     } else {
       response = await fetchFailedArtifact({
         ado_build_id,
@@ -71,6 +142,11 @@ export async function getAzurePipelineArtifact({
         headers,
       });
     }
+  }
+
+  if (response.status === 404) {
+    core.info(`Artifact '${artifactName}' not found (404)`);
+    return strict ? { status: "not-found", artifactData: "" } : { artifactData };
   }
 
   if (response.ok) {
@@ -104,11 +180,19 @@ export async function getAzurePipelineArtifact({
       throw new Error(`Failed to fetch artifact: ${artifactResponse.statusText}`);
     }
 
-    artifactData = await artifactResponse.text();
+    artifactData = await readResponseTextWithLimit(artifactResponse as Response, maxBytes);
+    if (strict) {
+      return { status: "found", artifactData };
+    }
   } else {
     core.error(`Failed to fetch artifacts: ${response.status}, ${response.statusText}`);
     const errorText = await response.text();
     core.error(`Error details: ${errorText}`);
+    if (strict) {
+      throw new Error(
+        `Failed to fetch artifact '${artifactName}': ${response.status}, ${response.statusText}`,
+      );
+    }
   }
   return { artifactData };
 }

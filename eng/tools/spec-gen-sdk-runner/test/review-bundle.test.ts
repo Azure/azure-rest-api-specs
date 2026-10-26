@@ -13,6 +13,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import * as log from "../src/log.ts";
 import {
   captureSdkReviewBundleEntriesForSpec,
+  discardSdkReviewBundleOutput,
   isExcludedGeneratedPackagePath,
   normalizeOptionalSpecPath,
   normalizePackageRootPath,
@@ -245,9 +246,18 @@ describe("review-bundle", () => {
     ]);
 
     const allEntries = [...entries1, ...entries2];
-    const manifest = writeSdkReviewBundleManifest(commandInput, allEntries, "6999663");
+    const manifest = writeSdkReviewBundleManifest(
+      commandInput,
+      {
+        captureStatus: "complete",
+        expectedEntryCount: allEntries.length,
+        entries: allEntries,
+      },
+      "6999663",
+    );
 
     expect(manifest).toBeDefined();
+    expect(manifest?.captureStatus).toBe("complete");
     expect(manifest?.entries).toHaveLength(2);
     expect(manifest?.buildId).toBe("6999663");
 
@@ -283,5 +293,105 @@ describe("review-bundle", () => {
       "SdkReviewBundleName",
       SDK_REVIEW_BUNDLE_ARTIFACT_NAME,
     );
+  });
+
+  test.each([
+    [
+      "missing packageName",
+      { packageRootPath: "./sdk/widget/Azure.Widget", result: "succeeded" },
+      "missing packageName or packageRootPath",
+    ],
+    [
+      "missing packageRootPath",
+      { packageName: "Azure.Widget", result: "succeeded" },
+      "missing packageName or packageRootPath",
+    ],
+    [
+      "unsafe packageRootPath",
+      {
+        packageName: "Azure.Widget",
+        packageRootPath: "../outside",
+        result: "succeeded",
+      },
+      "unsafe packageRootPath",
+    ],
+  ])("rejects %s instead of silently skipping the package", async (_label, pkg, message) => {
+    const { sdkRepoPath, workingFolder } = createTempSdkGitRepo();
+    const commandInput = createNetSpecPrInput(sdkRepoPath, workingFolder);
+    const report: ExecutionReport = {
+      executionResult: "succeeded",
+      packages: [pkg as ExecutionReport["packages"][number]],
+    };
+
+    await expect(
+      captureSdkReviewBundleEntriesForSpec({
+        commandInput,
+        executionReport: report,
+        existingEntriesCount: 0,
+      }),
+    ).rejects.toThrow(message);
+  });
+
+  test("discard removes patches written before a later package capture failure", async () => {
+    const { sdkRepoPath, workingFolder } = createTempSdkGitRepo();
+    const commandInput = createNetSpecPrInput(sdkRepoPath, workingFolder);
+    const pkg1Dir = path.join(sdkRepoPath, "sdk", "widget", "Azure.Widget");
+    fs.writeFileSync(
+      path.join(pkg1Dir, "src", "WidgetClient.cs"),
+      "namespace Azure.Widget;\npublic class WidgetClient { public int Version => 2; }\n",
+    );
+    const report: ExecutionReport = {
+      executionResult: "succeeded",
+      packages: [
+        {
+          packageName: "Azure.Widget",
+          packageRootPath: "./sdk/widget/Azure.Widget",
+          result: "succeeded",
+        },
+        {
+          packageName: "Azure.Invalid",
+          packageRootPath: "../outside",
+          result: "succeeded",
+        },
+      ],
+    };
+
+    await expect(
+      captureSdkReviewBundleEntriesForSpec({
+        commandInput,
+        executionReport: report,
+        existingEntriesCount: 0,
+      }),
+    ).rejects.toThrow("unsafe packageRootPath");
+
+    const bundleDir = path.join(workingFolder, "out", SDK_REVIEW_BUNDLE_ARTIFACT_NAME);
+    expect(fs.readdirSync(bundleDir)).toContain("01-Azure.Widget.patch");
+    discardSdkReviewBundleOutput(workingFolder);
+    expect(fs.existsSync(bundleDir)).toBe(false);
+  });
+
+  test("writes a failed manifest with no consumable entries", () => {
+    const { sdkRepoPath, workingFolder } = createTempSdkGitRepo();
+    const commandInput = createNetSpecPrInput(sdkRepoPath, workingFolder);
+
+    const manifest = writeSdkReviewBundleManifest(
+      commandInput,
+      {
+        captureStatus: "failed",
+        expectedEntryCount: 2,
+        captureErrors: ["Missing packageRootPath"],
+        entries: [],
+      },
+      "6999663",
+    );
+
+    expect(manifest).toMatchObject({
+      captureStatus: "failed",
+      expectedEntryCount: 2,
+      captureErrors: ["Missing packageRootPath"],
+      entries: [],
+    });
+    const bundleDir = path.join(workingFolder, "out", SDK_REVIEW_BUNDLE_ARTIFACT_NAME);
+    expect(fs.readdirSync(bundleDir)).toEqual([SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME]);
   });
 });

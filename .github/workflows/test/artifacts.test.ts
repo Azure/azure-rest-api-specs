@@ -219,6 +219,23 @@ describe("getAzurePipelineArtifact function", () => {
     expect(mockCore.error).toHaveBeenCalled();
   });
 
+  it("preserves default empty-result behavior but throws for strict non-404 failures", async () => {
+    mockFetch.mockResolvedValue({
+      ok: false,
+      status: 500,
+      statusText: "Server Error",
+      text: vi.fn().mockResolvedValue("Failure"),
+    });
+
+    await expect(
+      getAzurePipelineArtifact({
+        ...inputs,
+        strict: true,
+        retryOptions: { initialDelayMs: 1 },
+      }),
+    ).rejects.toThrow("Failed to fetch artifact");
+  });
+
   it("should complete without op when artifact does not exist", async () => {
     // Mock fetch failure
     mockFetch.mockResolvedValue({
@@ -239,6 +256,25 @@ describe("getAzurePipelineArtifact function", () => {
 
     // Verify result uses default values when artifact fetch fails
     expect(result).toEqual({
+      artifactData: "",
+    });
+  });
+
+  it("returns an explicit not-found result for strict 404 handling", async () => {
+    mockFetch.mockResolvedValue({
+      ok: false,
+      status: 404,
+      statusText: "Not Found",
+      text: vi.fn().mockResolvedValue("Artifact not found"),
+    });
+
+    const result = await getAzurePipelineArtifact({
+      ...inputs,
+      strict: true,
+    });
+
+    expect(result).toEqual({
+      status: "not-found",
       artifactData: "",
     });
   });
@@ -492,6 +528,56 @@ describe("getAzurePipelineArtifact function", () => {
         labelAction: true,
       }),
     });
+  });
+
+  it("enforces actual artifact response bytes even without Content-Length", async () => {
+    mockFetch.mockImplementation((url) => {
+      if (url.includes("artifacts?artifactName=")) {
+        return Promise.resolve({
+          ok: true,
+          json: vi.fn().mockResolvedValue({
+            resource: {
+              downloadUrl: "https://dev.azure.com/download?format=zip",
+            },
+          }),
+        });
+      }
+      return Promise.resolve(new Response("12345", { status: 200 }));
+    });
+
+    await expect(
+      getAzurePipelineArtifact({
+        ...inputs,
+        strict: true,
+        maxBytes: 4,
+      }),
+    ).rejects.toThrow("exceeds 4 bytes");
+  });
+
+  it("treats a present zero-byte artifact as found in strict mode", async () => {
+    mockFetch.mockImplementation((url) => {
+      if (url.includes("artifacts?artifactName=")) {
+        return Promise.resolve({
+          ok: true,
+          json: vi.fn().mockResolvedValue({
+            resource: {
+              downloadUrl: "https://dev.azure.com/download?format=zip",
+            },
+          }),
+        });
+      }
+      return Promise.resolve({
+        ok: true,
+        text: vi.fn().mockResolvedValue(""),
+      });
+    });
+
+    const result = await getAzurePipelineArtifact({
+      ...inputs,
+      strict: true,
+      maxBytes: 0,
+    });
+    expect(result).toEqual({ status: "found", artifactData: "" });
   });
 });
 

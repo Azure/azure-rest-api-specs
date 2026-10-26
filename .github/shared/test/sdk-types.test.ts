@@ -48,6 +48,8 @@ describe("sdk-types", () => {
       specRepoUrl: "https://github.com/Azure/azure-rest-api-specs",
       sdkLanguage: SdkName.Net,
       sdkRepoName: "azure-sdk-for-net",
+      captureStatus: "complete",
+      expectedEntryCount: 1,
       entries: [
         {
           entryId: "01-Azure.ResourceManager.PrivateTrafficManager",
@@ -80,6 +82,28 @@ describe("sdk-types", () => {
             patchFile: "../evil.patch",
           },
         ],
+      }),
+    ).toThrow();
+
+    expect(() =>
+      SdkReviewBundleManifestSchema.parse({
+        ...validManifest,
+        expectedEntryCount: 2,
+      }),
+    ).toThrow("must match expectedEntryCount");
+
+    const failedManifest = {
+      ...validManifest,
+      captureStatus: "failed",
+      expectedEntryCount: 1,
+      captureErrors: ["Missing packageRootPath"],
+      entries: [],
+    };
+    expect(SdkReviewBundleManifestSchema.parse(failedManifest)).toEqual(failedManifest);
+    expect(() =>
+      SdkReviewBundleManifestSchema.parse({
+        ...failedManifest,
+        entries: validManifest.entries,
       }),
     ).toThrow();
   });

@@ -96,6 +96,11 @@ export const sdkLabels: SdkLabels = {
 export const SDK_REVIEW_BUNDLE_ARTIFACT_NAME = "sdk-review-bundle" as const;
 export const SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME = "sdk-review-bundle.json" as const;
 export const SDK_REVIEW_BUNDLE_SCHEMA_VERSION = "1.0" as const;
+export const SDK_REVIEW_BUNDLE_MAX_ENTRIES = 128;
+export const SDK_REVIEW_BUNDLE_MAX_CHANGED_FILES_PER_ENTRY = 2_048;
+export const SDK_REVIEW_BUNDLE_MAX_TOTAL_CHANGED_FILES = 4_096;
+export const SDK_REVIEW_BUNDLE_MAX_CAPTURE_ERRORS = 16;
+export const SDK_REVIEW_BUNDLE_MAX_CAPTURE_ERROR_LENGTH = 512;
 
 const sha40Schema = z.string().regex(/^[0-9a-f]{40}$/i, "Expected a 40-char git SHA");
 const sha256HexSchema = z
@@ -147,11 +152,13 @@ export const SdkReviewBundleEntrySchema = z.object({
   patchSha256: sha256HexSchema,
   patchBytes: z.number().int().nonnegative(),
   changedFileCount: z.number().int().nonnegative(),
-  changedFiles: z.array(SafeRelativePosixPathSchema),
+  changedFiles: z
+    .array(SafeRelativePosixPathSchema)
+    .max(SDK_REVIEW_BUNDLE_MAX_CHANGED_FILES_PER_ENTRY),
 });
 export type SdkReviewBundleEntry = import("zod").infer<typeof SdkReviewBundleEntrySchema>;
 
-export const SdkReviewBundleManifestSchema = z.object({
+const SdkReviewBundleManifestBaseSchema = z.object({
   schemaVersion: z.literal(SDK_REVIEW_BUNDLE_SCHEMA_VERSION),
   buildId: numericIdSchema.optional(),
   specPrNumber: numericIdSchema,
@@ -159,6 +166,48 @@ export const SdkReviewBundleManifestSchema = z.object({
   specRepoUrl: z.string().min(1),
   sdkLanguage: SdkNameSchema,
   sdkRepoName: z.string().min(1),
-  entries: z.array(SdkReviewBundleEntrySchema),
 });
+
+const CompleteSdkReviewBundleManifestSchema = SdkReviewBundleManifestBaseSchema.extend({
+  captureStatus: z.literal("complete"),
+  expectedEntryCount: z.number().int().nonnegative().max(SDK_REVIEW_BUNDLE_MAX_ENTRIES),
+  entries: z.array(SdkReviewBundleEntrySchema).max(SDK_REVIEW_BUNDLE_MAX_ENTRIES),
+}).superRefine((manifest, context) => {
+  if (manifest.entries.length !== manifest.expectedEntryCount) {
+    context.addIssue({
+      code: "custom",
+      path: ["entries"],
+      message: `Complete manifest entries length (${manifest.entries.length}) must match expectedEntryCount (${manifest.expectedEntryCount})`,
+    });
+  }
+});
+
+const FailedSdkReviewBundleManifestSchema = SdkReviewBundleManifestBaseSchema.extend({
+  captureStatus: z.literal("failed"),
+  expectedEntryCount: z.number().int().nonnegative().max(SDK_REVIEW_BUNDLE_MAX_ENTRIES),
+  captureErrors: z
+    .array(z.string().min(1).max(SDK_REVIEW_BUNDLE_MAX_CAPTURE_ERROR_LENGTH))
+    .min(1)
+    .max(SDK_REVIEW_BUNDLE_MAX_CAPTURE_ERRORS),
+  entries: z.array(SdkReviewBundleEntrySchema).length(0),
+});
+
+export const SdkReviewBundleManifestSchema = z
+  .discriminatedUnion("captureStatus", [
+    CompleteSdkReviewBundleManifestSchema,
+    FailedSdkReviewBundleManifestSchema,
+  ])
+  .superRefine((manifest, context) => {
+    const totalChangedFiles = manifest.entries.reduce(
+      (total, entry) => total + entry.changedFiles.length,
+      0,
+    );
+    if (totalChangedFiles > SDK_REVIEW_BUNDLE_MAX_TOTAL_CHANGED_FILES) {
+      context.addIssue({
+        code: "custom",
+        path: ["entries"],
+        message: `Manifest has ${totalChangedFiles} changed files; maximum is ${SDK_REVIEW_BUNDLE_MAX_TOTAL_CHANGED_FILES}`,
+      });
+    }
+  });
 export type SdkReviewBundleManifest = import("zod").infer<typeof SdkReviewBundleManifestSchema>;
