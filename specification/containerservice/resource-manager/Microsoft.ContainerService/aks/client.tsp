@@ -60,7 +60,41 @@ using Microsoft.ContainerService;
 
 @@clientName(Microsoft.ContainerService.IPFamily, "IpFamily", "javascript");
 
+// These payload models do not inherit the .NET ARM resource client base class.
+@@clientName(
+  UpgradeInsightImpactedResource,
+  "UpgradeInsightImpactedResourceInfo",
+  "csharp"
+);
+@@clientName(
+  ArmImpactedResource,
+  "UpgradeInsightArmImpactedResourceInfo",
+  "csharp"
+);
+@@clientName(
+  KubernetesImpactedResource,
+  "UpgradeInsightKubernetesImpactedResourceInfo",
+  "csharp"
+);
+
 // .NET SDK acronym casing.
+@@clientName(
+  ClusterAPIConnectivityProfile,
+  "ClusterApiConnectivityProfile",
+  "csharp"
+);
+@@clientName(
+  ContainerServiceNetworkProfile.clusterAPIConnectivityProfile,
+  "clusterApiConnectivityProfile",
+  "csharp"
+);
+@@clientName(ResourceSkuCosts.meterID, "meterId", "csharp");
+@@clientName(
+  ManagedClusterStorageProfileDiskCSIDriverQuickAttachDetach,
+  "ManagedClusterStorageProfileDiskCsiDriverQuickAttachDetach",
+  "csharp"
+);
+@@clientName(BootstrapKubeletConfig.clusterFQDN, "clusterFqdn", "csharp");
 @@clientName(
   ManagedClusterNATGatewaySku,
   "ManagedClusterNatGatewaySku",
@@ -87,6 +121,16 @@ using Microsoft.ContainerService;
 @@clientName(
   ManagedClusterHTTPProxyConfig,
   "ManagedClusterHttpProxyConfig",
+  "java"
+);
+@@clientName(
+  ClusterAPIConnectivityProfile,
+  "ClusterApiConnectivityProfile",
+  "java"
+);
+@@clientName(
+  ContainerServiceNetworkProfile.clusterAPIConnectivityProfile,
+  "clusterApiConnectivityProfile",
   "java"
 );
 @@clientName(ManagedClusterIngressProfile.gatewayAPI, "gatewayApi", "java");
@@ -252,6 +296,7 @@ using Microsoft.ContainerService;
 @@clientName(ManagedClusterAddonProfile.enabled, "IsEnabled", "csharp");
 @@clientName(ManagedClusterPodIdentityProfile.enabled, "IsEnabled", "csharp");
 @@clientName(WindowsGmsaProfile.enabled, "IsEnabled", "csharp");
+@@clientName(UpgradeGateSettings.enabled, "IsEnabled", "csharp");
 @@clientName(TimeSpan.start, "StartOn", "csharp");
 @@clientName(TimeSpan.end, "EndOn", "csharp");
 @@clientName(KubeletConfig.failSwapOn, "ShouldFailStartWithSwapOn", "csharp");
