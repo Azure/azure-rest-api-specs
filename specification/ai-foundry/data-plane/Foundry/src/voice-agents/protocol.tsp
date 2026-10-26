@@ -446,6 +446,24 @@ model VoiceAgentServerEventSystemToolArgumentsDone
   arguments: string;
 }
 
+@doc("Decoded model-generated language-switch arguments, not a new client ingress. Unsupported speech components do not gain language support from this tool.")
+@usage(VoiceAgentServerEventUsage)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLanguageDetectionArguments {
+  ...Record<never>;
+
+  @doc("Target language in lowercase ISO 639-1 format, such as es or fr.")
+  @minLength(2)
+  @maxLength(2)
+  @pattern("^[a-z]{2}$")
+  language: string;
+
+  @doc("Non-blank reason for switching the conversation language.")
+  @minLength(1)
+  @pattern("\\S")
+  reason: string;
+}
+
 @doc("Common model-generated collection arguments. Each invocation starts collection; there is no action parameter or model-call cancellation variant. The service requires output_variable_name exactly when secret is true. It applies timeouts and service input limits, validates provider capabilities, then locks effective arguments before preparing a receiver. Duplicate invocations cannot change settings or extend the deadline. These are decoded intent arguments, not a new client ingress or Agent settings object. Collection is not authentication.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -610,6 +628,7 @@ union VoiceAgentInputCollectionStatus {
   invalid_input: "invalid_input",
   invalid_arguments: "invalid_arguments",
   stale_collection: "stale_collection",
+  @doc("The configured channel has no supported receiver. Also used as the tool-resolution error code when the capability is omitted before model exposure; no collection or variable is created.")
   unsupported_channel: "unsupported_channel",
   dispatch_failed: "dispatch_failed",
   provider_accepted: "provider_accepted",
@@ -617,7 +636,7 @@ union VoiceAgentInputCollectionStatus {
   provider_failed_or_unsupported: "provider_failed_or_unsupported",
   provider_result_uncertain: "provider_result_uncertain",
 
-  @doc("The operation was rejected before any provider side effect, including a known unavailable executor. Unlike an uncertain post-dispatch failure, this confirms that nothing was sent or dialed for this invocation.")
+  @doc("The operation was rejected before any provider side effect, including a known unavailable executor. Also used as the tool-resolution error code for an unavailable sender before model exposure. Unlike an uncertain post-dispatch failure, this confirms that nothing was sent or dialed for this invocation.")
   provider_not_executed: "provider_not_executed",
 }
 

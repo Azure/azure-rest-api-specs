@@ -510,6 +510,7 @@ union VoiceAgentTransferStrategy {
 @doc("The configured transfer routing policy. The model selects a target name, not destinations or routing settings.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTransferRouting {
+  ...Record<never>;
   @doc("The routing strategy. Current native Telephony transfer supports ACS sequential and random routing only.")
   strategy: VoiceAgentTransferStrategy;
 
@@ -527,8 +528,11 @@ model VoiceAgentTransferRouting {
 @doc("One logical transfer target configured in the immutable Agent definition. Only name and description are exposed to the model; destinations and routing are executor settings. This is separate from the existing management transfer-target resource.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTransferTarget {
-  @doc("The non-blank logical target name. Names must be unique within the transfer tool.")
+  ...Record<never>;
+
+  @doc("The non-blank logical target name. Surrounding whitespace is trimmed; names must be unique after trimming within the transfer tool.")
   @minLength(1)
+  @pattern("\\S")
   name: string;
 
   @doc("A description that helps the model select this target.")

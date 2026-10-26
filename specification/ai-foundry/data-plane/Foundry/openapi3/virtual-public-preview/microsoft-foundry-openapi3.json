@@ -101759,6 +101759,9 @@
             "default": 45
           }
         },
+        "unevaluatedProperties": {
+          "not": {}
+        },
         "description": "The configured transfer routing policy. The model selects a target name, not destinations or routing settings.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -101836,7 +101839,8 @@
           "name": {
             "type": "string",
             "minLength": 1,
-            "description": "The non-blank logical target name. Names must be unique within the transfer tool."
+            "pattern": "\\S",
+            "description": "The non-blank logical target name. Surrounding whitespace is trimmed; names must be unique after trimming within the transfer tool."
           },
           "description": {
             "type": "string",
@@ -101854,6 +101858,9 @@
             "$ref": "#/components/schemas/VoiceAgentTransferRouting",
             "description": "The trusted routing policy for this target."
           }
+        },
+        "unevaluatedProperties": {
+          "not": {}
         },
         "description": "One logical transfer target configured in the immutable Agent definition. Only name and description are exposed to the model; destinations and routing are executor settings. This is separate from the existing management transfer-target resource.",
         "x-ms-foundry-meta": {
