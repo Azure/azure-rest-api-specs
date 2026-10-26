@@ -93,9 +93,7 @@ All lease files are automatically validated with the following requirements:
 
 ## Troubleshooting
 
-### ARM Modeling Review reports a missing or expired lease
-
-If a pull request for a newly detected resource provider fails the **ARM Modeling Review** check with an error that no lease file was found, the lease has expired, or the resource provider does not have a valid ARM lease, treat it as an ARM lease requirement issue rather than a generic validation failure.
+If your PR is for a newly detected resource provider and fails the **ARM Modeling Review** check with an error that no lease file was found, the lease has expired, or the resource provider does not have a valid ARM lease, treat it as an ARM lease requirement issue rather than a generic validation failure.
 
 - Follow the pull request's **next steps to merge** instructions to resolve the lease requirement.
 - Verify that the required lease exists and is valid on public `main`. The check reads leases from public `main`, so a lease file added only in the pull request branch will not satisfy it.
