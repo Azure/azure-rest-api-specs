@@ -43,6 +43,7 @@ using Common;
 @@clientName(Microsoft.Network.ExpressRouteCrossConnections.listRoutesTableSummary, "GetRoutesTableSummaryExpressRouteCrossConnection", "csharp");
 @@clientName(Microsoft.Network.FirewallPolicies.firewallPolicyIdpsSignaturesList, "GetFirewallPolicyIdpsSignature", "csharp");
 @@clientName(Microsoft.Network.FirewallPolicies.firewallPolicyIdpsSignaturesFilterValuesList, "GetFirewallPolicyIdpsSignaturesFilterValue", "csharp");
+@@clientName(Microsoft.Network.NetworkInterfaceOperationGroup.networkInterfaceLoadBalancersList, "GetNetworkInterfaceLoadBalancers", "csharp");
 
 // Preserve the released C# property names on their original wire fields.
 @@clientName(Microsoft.Network.ApplicationGateway.zones, "AvailabilityZones", "csharp");
