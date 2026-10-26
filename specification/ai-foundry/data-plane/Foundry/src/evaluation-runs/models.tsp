@@ -520,69 +520,14 @@ model SourceProvenance {
   evaluation_job_version?: ResolvedSourceVersion;
 }
 
-/** A typed text or JSON value. */
+/** What the agent returned, as graders read it through `{{outputs.*}}`. Trajectory and artifacts are Later. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvaluationTypedValue {
-  /** A text value. */
-  text: EvaluationTextContent,
+model TaskRunOutputs {
+  /** The agent's final answer. */
+  text?: string;
 
-  /** A JSON value. */
-  json: EvaluationJsonContent,
-}
-
-/** An expected or observed tool call. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationToolCall {
-  /** The tool name. */
-  name: string;
-
-  /** The tool arguments. */
-  arguments: Record<unknown>;
-}
-
-/** Retained evidence, without credentials or signed URLs. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationArtifactReference {
-  /** The artifact ID. */
-  id: string;
-
-  /** The artifact media type. */
-  media_type: string;
-
-  /** The artifact size in bytes. */
-  byte_length: int64;
-
-  /** Lowercase SHA-256 of the artifact. */
-  digest: string;
-
-  /** The source-owned artifact reference. */
-  source_artifact_reference: string;
-}
-
-/** Reference evidence visible to graders. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model ExpectedEvidence {
-  /** The expected final output. */
-  final_output?: EvaluationTypedValue;
-
-  /** The expected tool calls. */
-  tool_calls?: EvaluationToolCall[];
-
-  /** Expected artifacts. */
-  artifacts?: EvaluationArtifactReference[];
-}
-
-/** Evidence produced by the target. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model ObservedEvidence {
-  /** The final output. */
-  final_output?: EvaluationTypedValue;
-
-  /** The normalized trajectory. */
-  trajectory?: Record<unknown>;
-
-  /** Produced artifacts. */
-  artifacts?: EvaluationArtifactReference[];
+  /** The parsed result when the agent declares a JSON response schema. */
+  data?: unknown;
 }
 
 /** TaskRun execution phases. */
@@ -677,14 +622,17 @@ model TaskRun {
   /** The resolved target invoked by this TaskRun. */
   target?: EvaluationTargetDefinition;
 
-  /** The original Task input. */
-  input?: Record<unknown>;
+  /** The Task's inputs as sent to the agent; graders read them through `{{inputs.*}}`. */
+  inputs?: PromptTaskInput;
 
-  /** Reference evidence visible to graders. */
-  expected?: ExpectedEvidence;
+  /** The Task's reference values; graders read them through `{{expected.*}}`. */
+  expected?: Record<unknown>;
 
-  /** Evidence produced by the target; required for successful completed evidence. */
-  observed?: ObservedEvidence;
+  /** The Task's context; graders read it through `{{metadata.*}}`. */
+  metadata?: Record<unknown>;
+
+  /** What the agent returned, present once the agent answered; graders read it through `{{outputs.*}}`. */
+  outputs?: TaskRunOutputs;
 
   /** One result per grader with a retained terminal result, Job graders first, each in definition order. */
   grader_results: GraderResult[];

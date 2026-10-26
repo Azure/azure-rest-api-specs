@@ -108,6 +108,15 @@ model TasksetDatasetVersion extends DatasetVersion {
   /** Dataset type. */
   type: DatasetType.taskset;
 
+  /** The version description, immutable with the version. */
+  @maxLength(1024)
+  @visibility(Lifecycle.Read)
+  description?: string;
+
+  /** The version tags, immutable with the version. */
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
+
   /** The validation state. */
   @visibility(Lifecycle.Read)
   validation_status: TasksetValidationStatus;

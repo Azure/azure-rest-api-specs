@@ -79,7 +79,8 @@ interface Datasets
 
   /**
    * Lists a succeeded `taskset` version's Tasks in version order, in canonical JSON. Another
-   * validation status returns `409 dataset_version_not_ready`.
+   * validation status returns `409 dataset_version_not_ready`; a missing Dataset, version or Task returns
+   * `404 resource_not_found`, and an unavailable Dataset service returns `503 dependency_unavailable`.
    */
   @summary("List Tasks")
   @get

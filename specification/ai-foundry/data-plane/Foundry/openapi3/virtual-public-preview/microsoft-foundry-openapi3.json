@@ -11167,7 +11167,7 @@
       "get": {
         "operationId": "Datasets_listTasks",
         "summary": "List Tasks",
-        "description": "Lists a succeeded `taskset` version's Tasks in version order, in canonical JSON. Another\nvalidation status returns `409 dataset_version_not_ready`.",
+        "description": "Lists a succeeded `taskset` version's Tasks in version order, in canonical JSON. Another\nvalidation status returns `409 dataset_version_not_ready`; a missing Dataset, version or Task returns\n`404 resource_not_found`, and an unavailable Dataset service returns `503 dependency_unavailable`.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -48341,45 +48341,6 @@
         },
         "description": "Evaluation Definition"
       },
-      "EvaluationArtifactReference": {
-        "type": "object",
-        "required": [
-          "id",
-          "media_type",
-          "byte_length",
-          "digest",
-          "source_artifact_reference"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The artifact ID."
-          },
-          "media_type": {
-            "type": "string",
-            "description": "The artifact media type."
-          },
-          "byte_length": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The artifact size in bytes."
-          },
-          "digest": {
-            "type": "string",
-            "description": "Lowercase SHA-256 of the artifact."
-          },
-          "source_artifact_reference": {
-            "type": "string",
-            "description": "The source-owned artifact reference."
-          }
-        },
-        "description": "Retained evidence, without credentials or signed URLs.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
       "EvaluationAzureStandardVoiceModelConfiguration": {
         "type": "object",
         "required": [
@@ -48899,31 +48860,6 @@
           }
         },
         "description": "The versions embedded in an EvaluationJob.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationJsonContent": {
-        "type": "object",
-        "required": [
-          "type",
-          "value"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "json"
-            ],
-            "description": "Indicates JSON content."
-          },
-          "value": {
-            "description": "The JSON value."
-          }
-        },
-        "description": "A typed JSON value.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -50562,72 +50498,6 @@
           ]
         }
       },
-      "EvaluationTextContent": {
-        "type": "object",
-        "required": [
-          "type",
-          "value"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "text"
-            ],
-            "description": "Indicates text content."
-          },
-          "value": {
-            "type": "string",
-            "description": "The text value."
-          }
-        },
-        "description": "A typed text value.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationToolCall": {
-        "type": "object",
-        "required": [
-          "name",
-          "arguments"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The tool name."
-          },
-          "arguments": {
-            "type": "object",
-            "unevaluatedProperties": {},
-            "description": "The tool arguments."
-          }
-        },
-        "description": "An expected or observed tool call.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationTypedValue": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/EvaluationTextContent"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationJsonContent"
-          }
-        ],
-        "description": "A typed text or JSON value.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
       "EvaluationUsage": {
         "type": "object",
         "required": [
@@ -51376,35 +51246,6 @@
           }
         },
         "description": "A phase failure.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "ExpectedEvidence": {
-        "type": "object",
-        "properties": {
-          "final_output": {
-            "$ref": "#/components/schemas/EvaluationTypedValue",
-            "description": "The expected final output."
-          },
-          "tool_calls": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvaluationToolCall"
-            },
-            "description": "The expected tool calls."
-          },
-          "artifacts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvaluationArtifactReference"
-            },
-            "description": "Expected artifacts."
-          }
-        },
-        "description": "Reference evidence visible to graders.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -55640,33 +55481,6 @@
           }
         ],
         "description": "Request from the service for the user to perform OAuth consent."
-      },
-      "ObservedEvidence": {
-        "type": "object",
-        "properties": {
-          "final_output": {
-            "$ref": "#/components/schemas/EvaluationTypedValue",
-            "description": "The final output."
-          },
-          "trajectory": {
-            "type": "object",
-            "unevaluatedProperties": {},
-            "description": "The normalized trajectory."
-          },
-          "artifacts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvaluationArtifactReference"
-            },
-            "description": "Produced artifacts."
-          }
-        },
-        "description": "Evidence produced by the target.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
       },
       "OneTimeTrigger": {
         "type": "object",
@@ -100630,18 +100444,23 @@
             "$ref": "#/components/schemas/EvaluationTargetDefinition",
             "description": "The resolved target invoked by this TaskRun."
           },
-          "input": {
-            "type": "object",
-            "unevaluatedProperties": {},
-            "description": "The original Task input."
+          "inputs": {
+            "$ref": "#/components/schemas/PromptTaskInput",
+            "description": "The Task's inputs as sent to the agent; graders read them through `{{inputs.*}}`."
           },
           "expected": {
-            "$ref": "#/components/schemas/ExpectedEvidence",
-            "description": "Reference evidence visible to graders."
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "The Task's reference values; graders read them through `{{expected.*}}`."
           },
-          "observed": {
-            "$ref": "#/components/schemas/ObservedEvidence",
-            "description": "Evidence produced by the target; required for successful completed evidence."
+          "metadata": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "The Task's context; graders read it through `{{metadata.*}}`."
+          },
+          "outputs": {
+            "$ref": "#/components/schemas/TaskRunOutputs",
+            "description": "What the agent returned, present once the agent answered; graders read it through `{{outputs.*}}`."
           },
           "grader_results": {
             "type": "array",
@@ -100697,6 +100516,24 @@
           }
         },
         "description": "One attempt of one Task within an EvaluationRun. `error` is set only when `status` is\n`failed`: the last failed or unknown phase, with `param` naming that phase (never a resource ID); other execution\nfailures follow in `details`, at most 10. Grader errors stay in `grader_results[].error`.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "TaskRunOutputs": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The agent's final answer."
+          },
+          "data": {
+            "description": "The parsed result when the agent declares a JSON response schema."
+          }
+        },
+        "description": "What the agent returned, as graders read it through `{{outputs.*}}`. Trajectory and artifacts are Later.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -100906,6 +100743,20 @@
               "taskset"
             ],
             "description": "Dataset type."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1024,
+            "description": "The version description, immutable with the version.",
+            "readOnly": true
+          },
+          "tags": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "The version tags, immutable with the version.",
+            "readOnly": true
           },
           "validation_status": {
             "$ref": "#/components/schemas/TasksetValidationStatus",

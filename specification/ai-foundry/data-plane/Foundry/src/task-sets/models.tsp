@@ -13,26 +13,6 @@ const EvaluationServiceV2RequiredPreviews = #{
   conditional_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
 };
 
-/** A typed text value. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTextContent {
-  /** Indicates text content. */
-  type: "text";
-
-  /** The text value. */
-  value: string;
-}
-
-/** A typed JSON value. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationJsonContent {
-  /** Indicates JSON content. */
-  type: "json";
-
-  /** The JSON value. */
-  value: unknown;
-}
-
 /** The single-prompt input mode; other input modes are Later. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model PromptTaskInput {
