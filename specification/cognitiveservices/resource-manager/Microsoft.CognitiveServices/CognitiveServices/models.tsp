@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -2094,6 +2095,17 @@ model AccountProperties {
   agentHostingConfigurations?: AgentHostingConfiguration[];
 
   /**
+   * Private CA trust sources for supported features in an AIServices account with allowProjectManagement enabled. Supports one Azure Key Vault source containing version-pinned references to secrets with PEM-encoded CA certificates or certificate bundles. On PUT or PATCH, a non-null array replaces the complete configuration, so include all references to retain. Omit this property or send null to preserve the existing configuration; send an empty array to clear it.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service accepts explicit null on account PUT and PATCH to preserve existing trust sources; an empty array clears the configuration."
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @maxItems(1)
+  // @identifiers does not support nullable arrays.
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  trustedCertificateSources?: TrustedCertificateSource[] | null;
+
+  /**
    * The full resource IDs of cost controls directly attached to this account.
    * At the moment the service only supports a single cost control. This will be expanded in future API versions.
    */
@@ -2112,6 +2124,67 @@ model AccountProperties {
   @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Update)
   costControlConnections?: CostControlConnections | null;
+}
+
+/**
+ * An Azure resource containing the CA certificate bundles trusted by supported features in the account.
+ */
+@added(Versions.v2026_09_15_preview)
+model TrustedCertificateSource {
+  /**
+   * Type of resource containing the certificate bundles. Currently only AzureKeyVault is supported.
+   */
+  type: TrustedCertificateSourceType;
+
+  /**
+   * Azure resource ID of the Key Vault containing the referenced secrets. The account identity must have permission to read these secrets.
+   */
+  resourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.KeyVault/vaults";
+    }
+  ]>;
+
+  /**
+   * References to secrets containing one or more PEM-encoded CA certificates. Each secret name and version pair must be unique within the source, using case-insensitive comparison. The same secret name can be referenced with different versions.
+   */
+  @minItems(1)
+  @maxItems(25)
+  @identifiers(#["secretName", "secretVersion"])
+  certificateBundleReferences: CertificateBundleReference[];
+}
+
+/**
+ * Type of Azure resource containing trusted CA certificate bundles.
+ */
+@added(Versions.v2026_09_15_preview)
+union TrustedCertificateSourceType {
+  string,
+
+  /** Azure Key Vault secrets containing CA certificates or certificate bundles. */
+  AzureKeyVault: "AzureKeyVault",
+}
+
+/**
+ * A reference to a specific version of a Key Vault secret containing a PEM-encoded CA certificate or certificate bundle.
+ */
+@added(Versions.v2026_09_15_preview)
+model CertificateBundleReference {
+  /**
+   * Name of the Key Vault secret containing the CA certificate or certificate bundle.
+   */
+  @minLength(1)
+  @maxLength(127)
+  @pattern("^[0-9a-zA-Z-]{1,127}$")
+  secretName: string;
+
+  /**
+   * Required, pinned version of the Key Vault secret. Newer secret versions are not followed automatically. To rotate a bundle, update this value and resubmit the complete account trust configuration.
+   */
+  @minLength(1)
+  @maxLength(127)
+  @pattern("^[0-9a-zA-Z-]{1,127}$")
+  secretVersion: string;
 }
 
 /**
