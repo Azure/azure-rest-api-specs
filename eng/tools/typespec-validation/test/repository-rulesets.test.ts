@@ -67,7 +67,6 @@ model Example {
     expect(enabled.diagnostics.some((diagnostic) => diagnostic.code === code)).toBe(true);
   });
 
-
   const batchCases = [
     {
       code: "@azure-tools/typespec-azure-core/no-boolean",
