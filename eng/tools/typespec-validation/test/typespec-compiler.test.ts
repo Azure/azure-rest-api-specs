@@ -1,7 +1,6 @@
-import { mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { fileURLToPath } from "node:url";
-import { dirname, join, relative, resolve } from "pathe";
+import { join, relative, resolve } from "pathe";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { compileTypeSpec, formatTypeSpec } from "../src/typespec-compiler.ts";
 import { diagnosticDetails } from "./diagnostics.ts";
@@ -10,12 +9,6 @@ let root: string;
 
 beforeEach(async () => {
   root = resolve(await realpath(await mkdtemp(join(tmpdir(), "tsv-compiler-"))));
-  await mkdir(join(root, "node_modules/@typespec"), { recursive: true });
-  await symlink(
-    dirname(fileURLToPath(import.meta.resolve("@typespec/compiler/package.json"))),
-    join(root, "node_modules/@typespec/compiler"),
-    "junction",
-  );
 });
 
 afterEach(async () => {
@@ -74,6 +67,7 @@ export async function $onEmit({ program }) {
 it("formats shared TypeSpec files and project config, excluding node_modules", async () => {
   const folder = join(root, "project");
   await mkdir(folder);
+  await mkdir(join(root, "node_modules"));
   await writeFile(join(root, "shared.tsp"), "model   Shared{value:string;}");
   await writeFile(join(root, "node_modules/ignored.tsp"), "invalid ignored file");
   await writeFile(join(folder, "tspconfig.yaml"), "emit: []");
