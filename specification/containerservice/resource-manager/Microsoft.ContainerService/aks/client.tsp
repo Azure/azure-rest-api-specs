@@ -60,6 +60,23 @@ using Microsoft.ContainerService;
 
 @@clientName(Microsoft.ContainerService.IPFamily, "IpFamily", "javascript");
 
+// These payload models do not inherit the .NET ARM resource client base class.
+@@clientName(
+  UpgradeInsightImpactedResource,
+  "UpgradeInsightImpactedResourceInfo",
+  "csharp"
+);
+@@clientName(
+  ArmImpactedResource,
+  "UpgradeInsightArmImpactedResourceInfo",
+  "csharp"
+);
+@@clientName(
+  KubernetesImpactedResource,
+  "UpgradeInsightKubernetesImpactedResourceInfo",
+  "csharp"
+);
+
 // .NET SDK acronym casing.
 @@clientName(
   ClusterAPIConnectivityProfile,
