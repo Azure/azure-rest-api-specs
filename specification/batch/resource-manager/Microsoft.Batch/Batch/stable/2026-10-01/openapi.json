@@ -4533,7 +4533,7 @@
       "description": "Specifies the hardware settings for the compute nodes.",
       "properties": {
         "vmSizeProperties": {
-          "$ref": "#/definitions/VMSizeProperties",
+          "$ref": "#/definitions/VmSizeProperties",
           "description": "Specifies the properties for customizing the size of the virtual machine."
         }
       }
@@ -6236,7 +6236,7 @@
       ],
       "x-ms-enum": {
         "name": "RequestedComputeNodeDeallocationOption",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Requeue",
@@ -7038,22 +7038,6 @@
         "type"
       ]
     },
-    "VMSizeProperties": {
-      "type": "object",
-      "description": "Specifies the properties for customizing the size of the virtual machine.",
-      "properties": {
-        "vCPUsAvailable": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Specifies the number of vCPUs available for the VM. When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size."
-        },
-        "vCPUsPerCore": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Specifies the vCPU to physical core ratio. When this property is not specified in the request body the default behavior is set to the value of vCPUsPerCore for the VM Size. **Setting this property to 1 also means that hyper-threading is disabled.**"
-        }
-      }
-    },
     "VirtualMachineConfiguration": {
       "type": "object",
       "title": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.",
@@ -7209,7 +7193,7 @@
           "minItems": 1,
           "maxItems": 5,
           "items": {
-            "$ref": "#/definitions/VirtualMachineSkuProfileVMSize"
+            "$ref": "#/definitions/VirtualMachineSkuProfileVmSize"
           },
           "x-ms-identifiers": [
             "name"
@@ -7221,7 +7205,7 @@
         }
       }
     },
-    "VirtualMachineSkuProfileVMSize": {
+    "VirtualMachineSkuProfileVmSize": {
       "type": "object",
       "description": "Specifies a single VM size that may be allocated for an Instance Mix pool.",
       "properties": {
@@ -7238,6 +7222,22 @@
       "required": [
         "name"
       ]
+    },
+    "VmSizeProperties": {
+      "type": "object",
+      "description": "Specifies the properties for customizing the size of the virtual machine.",
+      "properties": {
+        "vCPUsAvailable": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of vCPUs available for the VM. When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size."
+        },
+        "vCPUsPerCore": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the vCPU to physical core ratio. When this property is not specified in the request body the default behavior is set to the value of vCPUsPerCore for the VM Size. **Setting this property to 1 also means that hyper-threading is disabled.**"
+        }
+      }
     },
     "WindowsConfiguration": {
       "type": "object",

@@ -653,23 +653,24 @@ enum ComputeNodeDeallocationOption {
 /**
  * Determines what to do with a node and its running task(s) after it has been selected for deallocation. This is the set of values that can be requested; `RetainedData` is no longer accepted as of the 2026-10-01 API version.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 @added(Versions.v2026_10_01)
-enum RequestedComputeNodeDeallocationOption {
+union RequestedComputeNodeDeallocationOption {
+  string,
+
   /**
    * Terminate running task processes and requeue the tasks. The tasks will run again when a node is available. Remove nodes as soon as tasks have been terminated.
    */
-  Requeue,
+  Requeue: "Requeue",
 
   /**
    * Terminate running tasks. The tasks will be completed with failureInfo indicating that they were terminated, and will not run again. Remove nodes as soon as tasks have been terminated.
    */
-  Terminate,
+  Terminate: "Terminate",
 
   /**
    * Allow currently running tasks to complete. Schedule no new tasks while waiting. Remove nodes when all tasks have completed.
    */
-  TaskCompletion,
+  TaskCompletion: "TaskCompletion",
 }
 
 /**
@@ -2483,7 +2484,7 @@ model VirtualMachineSkuProfile {
   @minItems(1)
   @maxItems(5)
   @identifiers(#["name"])
-  vmSizes?: VirtualMachineSkuProfileVMSize[];
+  vmSizes?: VirtualMachineSkuProfileVmSize[];
 
   /**
    * The allocation strategy used to select VM sizes from vmSizes. Defaults to LowestPrice when not specified.
@@ -2494,9 +2495,8 @@ model VirtualMachineSkuProfile {
 /**
  * Specifies a single VM size that may be allocated for an Instance Mix pool.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "VMSize matches the existing Batch vmSize terminology for VM sizes."
 @added(Versions.v2026_10_01)
-model VirtualMachineSkuProfileVMSize {
+model VirtualMachineSkuProfileVmSize {
   /**
    * The name of the VM size (for example, "Standard_D8s_v5").
    */
@@ -2539,15 +2539,14 @@ model HardwareProfile {
   /**
    * Specifies the properties for customizing the size of the virtual machine.
    */
-  vmSizeProperties?: VMSizeProperties;
+  vmSizeProperties?: VmSizeProperties;
 }
 
 /**
  * Specifies the properties for customizing the size of the virtual machine.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "VMSizeProperties matches the Azure Compute VM size customization model naming."
 @added(Versions.v2026_10_01)
-model VMSizeProperties {
+model VmSizeProperties {
   /**
    * Specifies the number of vCPUs available for the VM. When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size.
    */
