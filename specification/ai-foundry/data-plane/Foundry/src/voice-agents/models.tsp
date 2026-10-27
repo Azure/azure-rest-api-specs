@@ -118,8 +118,8 @@ model VoiceResponse {
   @doc("The sampling temperature used for the response.")
   sampling_temperature?: float32;
 
-  @doc("The Unix timestamp (in seconds) for when the response was created.")
-  created_at?: FoundryTimestamp;
+  @doc("The creation timestamp for the response.")
+  created_at?: string;
 
   @doc("The Unix timestamp (in seconds) for when the response completed.")
   completed_at?: FoundryTimestamp;
