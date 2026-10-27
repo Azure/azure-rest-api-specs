@@ -273,6 +273,11 @@ using Microsoft.Storage;
   Azure.Core.azureLocation,
   "csharp"
 );
+@@alternateType(
+  BlobAccessPointPrivateLinkConnectionProperties.privateLinkLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@clientName(
   UsagesOperationGroup.listByLocation,
   "GetUsagesByLocation",
@@ -389,6 +394,11 @@ union CSharpBlobInventoryPolicyName {
 );
 @@clientName(Reason, "StorageAccountNameUnavailableReason", "csharp");
 @@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
+  "StorageResourceProvisioningState",
+  "csharp"
+);
+@@clientName(
   ContextCacheCheckNameAvailabilityFailureReason,
   "ContextCacheNameUnavailableReason",
   "csharp"
@@ -436,6 +446,11 @@ union CSharpBlobInventoryPolicyName {
 // C# SAS casing: new generator preserves uppercase SAS, prior GA used Sas
 @@clientName(StorageAccounts.listAccountSAS, "GetAccountSas", "csharp");
 @@clientName(StorageAccounts.listServiceSAS, "GetServiceSas", "csharp");
+@@clientName(
+  BlobAccessPointConnectionTests.testProposedConnection,
+  "TestBlobAccessPointProposedConnection",
+  "csharp"
+);
 @@clientName(ImmutableStorageWithVersioning.timeStamp, "timestamp", "java");
 @@clientName(FileShareRecommendations.baseIOPS, "baseIops", "java");
 @@clientName(AccountSasParameters.signedIp, "ipAddressOrRange", "java");
