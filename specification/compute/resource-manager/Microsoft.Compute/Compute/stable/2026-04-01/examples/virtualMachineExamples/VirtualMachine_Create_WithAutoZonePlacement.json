@@ -1,166 +1,197 @@
 {
   "parameters": {
     "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "rg-auto-zone-placement",
-    "vmName": "vm-auto-zone-placement",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
     "api-version": "2026-04-01",
     "parameters": {
-      "location": "eastus2",
-      "placement": {
-        "zonePlacementPolicy": "Auto"
+      "location": "westus2",
+      "plan": {
+        "publisher": "microsoft-ads",
+        "product": "windows-data-science-vm",
+        "name": "windows2016"
       },
       "properties": {
         "hardwareProfile": {
-          "vmSize": "Standard_D2s_v5"
+          "vmSize": "Standard_DS1_v2"
         },
         "storageProfile": {
           "imageReference": {
-            "publisher": "Canonical",
-            "offer": "0001-com-ubuntu-server-jammy",
-            "sku": "22_04-lts-gen2",
-            "version": "latest"
+            "sku": "windows2016",
+            "publisher": "microsoft-ads",
+            "version": "latest",
+            "offer": "windows-data-science-vm"
           },
           "osDisk": {
-            "createOption": "FromImage",
-            "deleteOption": "Delete",
+            "caching": "ReadOnly",
             "managedDisk": {
               "storageAccountType": "Standard_LRS"
-            }
-          },
-          "dataDisks": []
+            },
+            "createOption": "FromImage",
+            "name": "myVMosdisk"
+          }
         },
         "osProfile": {
-          "computerName": "vm-auto-zone-placement",
-          "adminUsername": "azureuser",
-          "adminPassword": "{password}",
-          "linuxConfiguration": {
-            "disablePasswordAuthentication": false
-          }
+          "adminUsername": "{your-username}",
+          "computerName": "myVM",
+          "adminPassword": "{your-password}"
         },
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "/subscriptions/{subscription-id}/resourceGroups/rg-auto-zone-placement/providers/Microsoft.Network/networkInterfaces/nic-auto-zone-placement",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{existing-nic-name}",
               "properties": {
-                "primary": true,
-                "deleteOption": "Delete"
+                "primary": true
               }
             }
           ]
         }
+      },
+      "placement": {
+        "zonePlacementPolicy": "Auto",
+        "includeZones": [
+          "1",
+          "3"
+        ]
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/rg-auto-zone-placement/providers/Microsoft.Compute/virtualMachines/vm-auto-zone-placement",
-        "name": "vm-auto-zone-placement",
-        "type": "Microsoft.Compute/virtualMachines",
-        "location": "eastus2",
-        "placement": {
-          "zonePlacementPolicy": "Auto"
-        },
+        "name": "myVM",
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_D2s_v5"
-          },
-          "storageProfile": {
-            "imageReference": {
-              "publisher": "Canonical",
-              "offer": "0001-com-ubuntu-server-jammy",
-              "sku": "22_04-lts-gen2",
-              "version": "latest"
-            },
-            "osDisk": {
-              "osType": "Linux",
-              "createOption": "FromImage",
-              "deleteOption": "Delete",
-              "managedDisk": {
-                "storageAccountType": "Standard_LRS"
-              }
-            },
-            "dataDisks": []
-          },
           "osProfile": {
-            "computerName": "vm-auto-zone-placement",
-            "adminUsername": "azureuser",
-            "linuxConfiguration": {
-              "disablePasswordAuthentication": false
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
             }
           },
           "networkProfile": {
             "networkInterfaces": [
               {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/rg-auto-zone-placement/providers/Microsoft.Network/networkInterfaces/nic-auto-zone-placement",
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
                 "properties": {
-                  "primary": true,
-                  "deleteOption": "Delete"
+                  "primary": true
                 }
               }
             ]
           },
-          "provisioningState": "Succeeded"
-        }
+          "storageProfile": {
+            "imageReference": {
+              "sku": "standard-data-science-vm",
+              "publisher": "microsoft-ads",
+              "version": "latest",
+              "offer": "standard-data-science-vm"
+            },
+            "osDisk": {
+              "osType": "Windows",
+              "caching": "ReadOnly",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              },
+              "createOption": "FromImage",
+              "name": "myVMosdisk"
+            },
+            "dataDisks": []
+          },
+          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85",
+          "hardwareProfile": {
+            "vmSize": "Standard_DS1_v2"
+          },
+          "provisioningState": "Creating"
+        },
+        "zones": [
+          "3"
+        ],
+        "placement": {
+          "zonePlacementPolicy": "Auto",
+          "includeZones": [
+            "1",
+            "3"
+          ]
+        },
+        "plan": {
+          "publisher": "microsoft-ads",
+          "product": "standard-data-science-vm",
+          "name": "standard-data-science-vm"
+        },
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus2"
       }
     },
     "201": {
-      "headers": {
-        "Location": "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.Compute/locations/eastus2/operations/{operation-id}?monitor=true&api-version=2026-04-01",
-        "Retry-After": 10
-      },
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/rg-auto-zone-placement/providers/Microsoft.Compute/virtualMachines/vm-auto-zone-placement",
-        "name": "vm-auto-zone-placement",
-        "type": "Microsoft.Compute/virtualMachines",
-        "location": "eastus2",
-        "placement": {
-          "zonePlacementPolicy": "Auto"
-        },
+        "name": "myVM",
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_D2s_v5"
-          },
-          "storageProfile": {
-            "imageReference": {
-              "publisher": "Canonical",
-              "offer": "0001-com-ubuntu-server-jammy",
-              "sku": "22_04-lts-gen2",
-              "version": "latest"
-            },
-            "osDisk": {
-              "osType": "Linux",
-              "createOption": "FromImage",
-              "deleteOption": "Delete",
-              "managedDisk": {
-                "storageAccountType": "Standard_LRS"
-              }
-            },
-            "dataDisks": []
-          },
           "osProfile": {
-            "computerName": "vm-auto-zone-placement",
-            "adminUsername": "azureuser",
-            "linuxConfiguration": {
-              "disablePasswordAuthentication": false
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
             }
           },
           "networkProfile": {
             "networkInterfaces": [
               {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/rg-auto-zone-placement/providers/Microsoft.Network/networkInterfaces/nic-auto-zone-placement",
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
                 "properties": {
-                  "primary": true,
-                  "deleteOption": "Delete"
+                  "primary": true
                 }
               }
             ]
           },
+          "storageProfile": {
+            "imageReference": {
+              "sku": "standard-data-science-vm",
+              "publisher": "microsoft-ads",
+              "version": "latest",
+              "offer": "standard-data-science-vm"
+            },
+            "osDisk": {
+              "osType": "Windows",
+              "caching": "ReadOnly",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              },
+              "createOption": "FromImage",
+              "name": "myVMosdisk"
+            },
+            "dataDisks": []
+          },
+          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85",
+          "hardwareProfile": {
+            "vmSize": "Standard_DS1_v2"
+          },
           "provisioningState": "Creating"
-        }
+        },
+        "zones": [
+          "3"
+        ],
+        "placement": {
+          "zonePlacementPolicy": "Auto",
+          "includeZones": [
+            "1",
+            "3"
+          ]
+        },
+        "plan": {
+          "publisher": "microsoft-ads",
+          "product": "standard-data-science-vm",
+          "name": "standard-data-science-vm"
+        },
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus2"
       }
     }
   },
   "operationId": "VirtualMachines_CreateOrUpdate",
-  "title": "Create a Linux VM with Auto zone placement and a Standard LRS OS disk"
+  "title": "Create a VM with Auto zone placement"
 }
