@@ -85,7 +85,6 @@ namespace Azure.AI.Projects.Beta {
     Azure.AI.Projects.MemoryStores.getUpdateResult,
     MemoryStores
   );
-  @@clientLocation(Azure.AI.Projects.MemoryStores.deleteScope, MemoryStores);
   @@clientLocation(Azure.AI.Projects.MemoryStores.createMemory, MemoryStores);
   @@clientLocation(Azure.AI.Projects.MemoryStores.updateMemory, MemoryStores);
   @@clientLocation(Azure.AI.Projects.MemoryStores.getMemory, MemoryStores);

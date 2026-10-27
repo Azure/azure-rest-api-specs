@@ -121,19 +121,6 @@ interface MemoryStores {
     MemoryStoreUpdateResponse
   >;
 
-  /** Deletes all memories in the specified memory store that are associated with the provided scope. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @summary("Delete memories by scope")
-  @operationId("deleteScopeMemories")
-  @post
-  @route("/memory_stores/{name}:delete_scope")
-  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  deleteScope is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
-    MemoryStoreDeleteScopeRequest,
-    MemoryStoreDeleteScopeResponse
-  >;
-
   /** Creates a memory item in the specified memory store. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("Create a memory item")

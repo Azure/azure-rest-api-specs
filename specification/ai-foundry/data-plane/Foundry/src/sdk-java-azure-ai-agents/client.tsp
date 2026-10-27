@@ -1026,19 +1026,16 @@ using Azure.AI.Projects;
 @@convenientAPI(Agents.deleteAgent, false, "java");
 @@convenientAPI(Agents.deleteAgentVersion, false, "java");
 @@convenientAPI(MemoryStores.deleteMemoryStore, false, "java");
-@@convenientAPI(MemoryStores.deleteScope, false, "java");
 @@convenientAPI(MemoryStores.deleteMemory, false, "java");
 
 //making delete methods internal to add public shims that return void
 @@access(Agents.deleteAgentVersion, Access.internal);
 @@access(Agents.deleteAgent, Access.internal);
 @@access(MemoryStores.deleteMemoryStore, Access.internal);
-@@access(MemoryStores.deleteScope, Access.internal);
 @@access(MemoryStores.deleteMemory, Access.internal);
 @@clientName(Agents.deleteAgentVersion, "internalDeleteAgentVersion");
 @@clientName(Agents.deleteAgent, "internalDeleteAgent");
 @@clientName(MemoryStores.deleteMemoryStore, "internalDeleteMemoryStore");
-@@clientName(MemoryStores.deleteScope, "internalDeleteScope");
 @@clientName(MemoryStores.deleteMemory, "internalDeleteMemory");
 
 @@access(MemoryStoreSearchResponse, Access.public);
