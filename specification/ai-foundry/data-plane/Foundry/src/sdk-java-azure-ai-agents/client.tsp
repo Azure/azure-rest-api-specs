@@ -1240,6 +1240,22 @@ union VoiceResponseObjectType {
 @@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!java");
 @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!java");
 
+// Preserve the existing Java paging overloads that accept an initial continuation token.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
+@@clientOption(
+  PageAfterQueryParameter.after,
+  "includeContinuationTokenParameter",
+  true,
+  "java"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
+@@clientOption(
+  AgentOptimizationCandidatePageQueryParameters.after,
+  "includeContinuationTokenParameter",
+  true,
+  "java"
+);
+
 // --------------------------------------------------------------------------------
 // Type overrides
 // --------------------------------------------------------------------------------
