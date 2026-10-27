@@ -64,6 +64,13 @@ shared model base for that error union, and Harbor's empty feature-gate 404
 alongside its default error payload. Suppression approval remains required;
 compilation does not constitute API approval.
 
+The Harbor `no-error-status-codes` exception applies to the operation foundation
+and both upload operations. When the feature is disabled, the backend returns
+404 with no response body; it does not return the default structured/string
+error payload. Keep the explicit empty 404 so generated clients do not assume
+an error body exists. An authorized API reviewer must approve this exception
+through the repository's suppression-review process.
+
 Formal API review follows experience-spec sign-off. Public package distribution
 does not establish regional endpoint availability or SDK release readiness.
 
