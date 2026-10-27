@@ -1583,6 +1583,21 @@ describe("Summarize Checks Unit Tests", () => {
       ).resolves.toEqual(impactAssessment);
     });
 
+    it("reads cached service-scoped artifacts without affected-README metadata", async () => {
+      const github = mockArtifactDownload(
+        JSON.stringify({
+          ...impactAssessment,
+          services: impactAssessment.services.map((service) => ({
+            ...service,
+            hasAffectedReadme: undefined,
+          })),
+        }),
+      );
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
+    });
+
     it.each(["application/json", "text/plain", "application/octet-stream"])(
       "reads raw bytes through Octokit with Content-Type %s",
       async (contentType) => {

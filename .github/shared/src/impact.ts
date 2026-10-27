@@ -4,6 +4,7 @@ export const ServiceImpactSchema = z.object({
   path: z.string(),
   plane: z.enum(["resource-manager", "data-plane", "unknown"]),
   changes: z.array(z.enum(["api", "examples", "sdk-configuration", "readme", "other"])),
+  hasAffectedReadme: z.boolean().default(false),
   typeSpec: z.boolean(),
   newApiVersions: z.array(z.string()),
   suppressionsChanged: z.boolean(),

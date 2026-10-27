@@ -89,6 +89,7 @@ export const ImpactAssessmentSchema = z.union([
       path: "specification/legacy",
       plane,
       changes: ["api"],
+      hasAffectedReadme: false,
       typeSpec: legacy.typeSpecChanged,
       // Legacy artifacts know only whether a version was added, not its name or owning service.
       newApiVersions: legacy.isNewApiVersion ? ["unknown"] : [],

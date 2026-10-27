@@ -8,6 +8,7 @@ const managementService: ServiceImpact = {
   path: "specification/example",
   plane: "resource-manager",
   changes: ["api"],
+  hasAffectedReadme: false,
   typeSpec: true,
   newApiVersions: [],
   suppressionsChanged: false,
@@ -388,6 +389,24 @@ describe("service-scoped impact labels", () => {
     expect([...labels.toAdd].sort()).toEqual(["TypeSpec", "resource-manager"]);
     expect([...labels.toRemove]).toEqual(["ARMReview"]);
   });
+
+  it.each([true, false])(
+    "requires ARM review for other changes only when they affect an owning README: %s",
+    (hasAffectedReadme) => {
+      const labels = updateLabels(
+        [],
+        impact({ changes: ["other"], typeSpec: false, hasAffectedReadme }),
+        context,
+      );
+      expect([...labels.toAdd].sort()).toEqual(
+        (hasAffectedReadme
+          ? ["ARMReview", "WaitForARMFeedback", "resource-manager"]
+          : ["resource-manager"]
+        ).sort(),
+      );
+      expect([...labels.toRemove]).toEqual([]);
+    },
+  );
 
   it("does not combine an ARM version addition with data-plane suppression changes", () => {
     const labels = updateLabels(

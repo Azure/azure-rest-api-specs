@@ -11,13 +11,13 @@ export type ReviewRequirements = {
   suppressions: boolean;
 };
 
+function isReleaseBranch(branchName: string): boolean {
+  const branchRegex = [/^main$/, /^RPSaaSMaster$/, /^release.*$/, /^ARMCoreRPDev$/];
+  return branchRegex.some((branch) => branch.test(branchName));
+}
+
 export function specReviewApplies(context: ReviewContext): boolean {
-  return (
-    !context.isDraft &&
-    [/^main$/, /^RPSaaSMaster$/, /^release.*$/, /^ARMCoreRPDev$/].some((branch) =>
-      branch.test(context.targetBranch),
-    )
-  );
+  return !context.isDraft && isReleaseBranch(context.targetBranch);
 }
 
 export function evaluateReviewRequirements(
@@ -31,9 +31,10 @@ export function evaluateReviewRequirements(
       impact.services.some(
         (service) =>
           service.plane === "resource-manager" &&
-          service.changes.some(
-            (kind) => kind === "api" || kind === "examples" || kind === "readme",
-          ),
+          (service.hasAffectedReadme ||
+            service.changes.some(
+              (kind) => kind === "api" || kind === "examples" || kind === "readme",
+            )),
       ),
     dataPlane:
       active &&
