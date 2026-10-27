@@ -10,11 +10,13 @@ If you're a Microsoft employee looking for information about all of the reposito
 
 External Contributors can read [Getting Started with OpenAPI Specifications](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Getting%20started%20with%20OpenAPI%20specifications.md) and [Getting Started with TypeSpec Specifications](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Getting-started-with-TypeSpec-specifications.md).
 
+See the [documentation index](./documentation/README.md) for contributor workflows, specification structure, and pull request check references.
+
 <!-- Please check the [announcements page](https://github.com/Azure/azure-rest-api-specs/wiki/Announcements) for any new updates since your last visit.-->
 
 ## Directory Structure
 
-See [aka.ms/azsdk/spec-dirs](https://aka.ms/azsdk/spec-dirs).
+See the [specification folder structure guide](./documentation/specification-guidelines/specification-folder-structure-guide.md) (also available at [aka.ms/azsdk/spec-dirs](https://aka.ms/azsdk/spec-dirs)).
 
 ## Examples
 

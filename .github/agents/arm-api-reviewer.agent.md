@@ -543,7 +543,7 @@ Use these to verify claims, check the latest guidelines, or investigate edge cas
 - [Directory structure](https://aka.ms/azsdk/spec-dirs) - specification folder layout conventions
 - [CI fix guide](../../documentation/ci-fix.md) - troubleshooting PR validation failures
 - [Swagger extensions](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md) - x-ms extension documentation
-- [TypeSpec dev process](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-REST-API,-SDK-development-process-with-TypeSpec) - end-to-end TypeSpec workflow
+- [TypeSpec dev process](../../documentation/contributing/typespec-development-process.md) - end-to-end TypeSpec workflow
 - [Getting started with TypeSpec](../../documentation/Getting-started-with-TypeSpec-specifications.md) - TypeSpec project checklist
 - [TypeSpec Azure docs](https://azure.github.io/typespec-azure/docs/intro/) - Azure TypeSpec library reference
 - [TypeSpec language docs](https://typespec.io/docs/) - TypeSpec language reference
