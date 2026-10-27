@@ -116,7 +116,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   `model`?: string;
 
   @doc("The engine that owns conversation handling for this voice agent. Exactly one of this property and the model-backed configuration (`model_type` with `model`) must be provided. When this property is provided, `model_type`, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the engine owns the conversation logic. The initial implementation supports a hosted-agent engine.")
-  conversation_engine?: VoiceConversationEngine;
+  conversation_engine?: VoiceConversationEngineVNext;
 
   @doc("A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.")
   instructions?: string;
@@ -292,14 +292,14 @@ union VoiceModelType {
 @doc("An engine that owns conversation handling for a voice agent.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationEngine {
+model VoiceConversationEngineVNext {
   @doc("The conversation engine type.")
   type: string;
 }
 
 @doc("A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must support the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceHostedAgentConversationEngine extends VoiceConversationEngine {
+model VoiceHostedAgentConversationEngine extends VoiceConversationEngineVNext {
   ...Record<never>;
 
   @doc("Selects a hosted Foundry agent as the conversation engine.")
