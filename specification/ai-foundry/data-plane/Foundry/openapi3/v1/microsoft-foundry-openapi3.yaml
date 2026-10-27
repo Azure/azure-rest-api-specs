@@ -439,7 +439,7 @@ paths:
   /agent_insight_monitors/{monitor_id}/insights:
     get:
       operationId: AgentInsightMonitors_listInsights
-      description: List current insights for an Agent Insights monitor.
+      description: List current insights for a monitor. Filter types combine with AND; values within each list combine with OR.
       parameters:
         - name: Foundry-Features
           in: header
@@ -508,6 +508,33 @@ paths:
           description: Filter insights by lifecycle status.
           schema:
             $ref: '#/components/schemas/AgentInsightStatus'
+          explode: false
+        - name: categories
+          in: query
+          required: false
+          description: Match any listed category. Use category for names containing commas; do not combine both.
+          schema:
+            type: array
+            items:
+              type: string
+          explode: false
+        - name: severities
+          in: query
+          required: false
+          description: Match any listed severity. Do not combine with severity.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AgentInsightSeverity'
+          explode: false
+        - name: statuses
+          in: query
+          required: false
+          description: Match any listed status. Do not combine with status.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AgentInsightStatus'
           explode: false
         - name: include_details
           in: query

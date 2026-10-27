@@ -36,6 +36,18 @@ alias AgentInsightListFilters = {
 
   /** Filter insights by lifecycle status. */
   @query status?: AgentInsightStatus;
+
+  /** Match any listed category. Use category for names containing commas; do not combine both. */
+  @query(#{ explode: false })
+  categories?: string[];
+
+  /** Match any listed severity. Do not combine with severity. */
+  @query(#{ explode: false })
+  severities?: AgentInsightSeverity[];
+
+  /** Match any listed status. Do not combine with status. */
+  @query(#{ explode: false })
+  statuses?: AgentInsightStatus[];
 };
 
 alias AgentInsightReadOptions = {
@@ -219,7 +231,7 @@ interface AgentInsightMonitors {
     OkResponse & AgentInsightRun
   >;
 
-  /** List current insights for an Agent Insights monitor. */
+  /** List current insights for a monitor. Filter types combine with AND; values within each list combine with OR. */
   @get
   @list
   @route("/agent_insight_monitors/{monitor_id}/insights")
