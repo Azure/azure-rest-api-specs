@@ -299,6 +299,15 @@ model AgentInsightPriorities {
   instructions?: string | null;
 }
 
+/** Monitor analysis priorities returned by the service. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
+model AgentInsightPrioritiesRead {
+  ...OmitProperties<AgentInsightPriorities, "instructions">;
+
+  /** Analysis guidance. Omitted when unavailable. */
+  instructions?: string;
+}
+
 /** Estimated Agent Insights cost. */
 @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightEstimatedCost {
@@ -357,7 +366,7 @@ model AgentInsightMonitor {
 
   /** Analysis priorities. Omitted when not configured. */
   @visibility(Lifecycle.Read)
-  priorities?: AgentInsightPriorities;
+  priorities?: AgentInsightPrioritiesRead;
 
   /** The time when this monitor was last updated. */
   @visibility(Lifecycle.Read)

@@ -38026,7 +38026,7 @@
             "readOnly": true
           },
           "priorities": {
-            "$ref": "#/components/schemas/AgentInsightPriorities",
+            "$ref": "#/components/schemas/AgentInsightPrioritiesRead",
             "description": "Analysis priorities. Omitted when not configured.",
             "readOnly": true
           },
@@ -38146,7 +38146,7 @@
             "readOnly": true
           },
           "priorities": {
-            "$ref": "#/components/schemas/AgentInsightPriorities",
+            "$ref": "#/components/schemas/AgentInsightPrioritiesRead",
             "description": "Analysis priorities. Omitted when not configured.",
             "readOnly": true
           },
@@ -38286,6 +38286,32 @@
             "instructions": "Focus on latency and token waste."
           }
         ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentInsights=V1Preview"
+          ]
+        }
+      },
+      "AgentInsightPrioritiesRead": {
+        "type": "object",
+        "required": [
+          "categories"
+        ],
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 0,
+            "description": "Up to 20 distinct normalized category identifiers (128 UTF-8 bytes each). Empty uses defaults."
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Analysis guidance. Omitted when unavailable."
+          }
+        },
+        "description": "Monitor analysis priorities returned by the service.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentInsights=V1Preview"
