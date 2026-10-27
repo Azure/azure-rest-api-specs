@@ -285,8 +285,6 @@ union VoiceModelType {
   @doc("The service hosts and manages the named model, for example `gpt-realtime`.")
   managed: "managed",
 
-  @doc("The service uses the customer's own Foundry deployment named by `model`.")
-  self_deployed: "self_deployed",
 }
 
 @doc("An engine that owns conversation handling for a voice agent.")
