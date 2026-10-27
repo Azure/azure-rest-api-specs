@@ -1378,6 +1378,7 @@ union PolicyResourceState {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.preview)
 union AgentPathType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1392,6 +1393,7 @@ union AgentPathType {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.preview)
 union WebAgentProvisioningState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1411,12 +1413,25 @@ union WebAgentProvisioningState {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.preview)
 union KnowledgeSourceType {
   string,
+
+  /** HTML source type. */
+  @added(Versions.preview)
+  Html: "Html",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SchemaOrgMarkup: "SchemaOrgMarkup",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.preview)
   RssFeeds: "RssFeeds",
+
+  /** RSS feed source type. */
+  @added(Versions.preview)
+  RssFeed: "RssFeed",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Sitemap: "Sitemap",
 }
@@ -1426,6 +1441,7 @@ union KnowledgeSourceType {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.preview)
 union KnowledgeSourceUpdateFrequency {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1444,6 +1460,7 @@ union KnowledgeSourceUpdateFrequency {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.preview)
 union KnowledgeSourceProvisioningState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -6149,6 +6166,7 @@ model ManagedRuleDefinition {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model WebAgentList is Azure.Core.Page<WebAgent>;
 
 /**
@@ -6156,7 +6174,21 @@ model WebAgentList is Azure.Core.Page<WebAgent>;
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model WebAgentProperties {
+  /**
+   * The mode of the web agent, which can be either 'Preview' or 'Live'.
+   */
+  @added(Versions.preview)
+  mode?: WebAgentMode = WebAgentMode.Preview;
+
+  /**
+   * System-generated preview GUID of the web agent.
+   */
+  @added(Versions.preview)
+  @visibility(Lifecycle.Read)
+  previewGuid?: string;
+
   /**
    * Optional textual description of the agent.
    */
@@ -6165,7 +6197,8 @@ model WebAgentProperties {
   /**
    * System prompt for the web agent.
    */
-  systemPrompt?: string;
+  @madeRequired(Versions.preview)
+  systemPrompt: string;
 
   /**
    * List of paths associated with the web agent.
@@ -6187,10 +6220,25 @@ model WebAgentProperties {
 }
 
 /**
+ * Defines the mode of the web agent.
+ */
+@added(Versions.preview)
+union WebAgentMode {
+  string,
+
+  /** Runs the web agent in preview mode. */
+  Preview: "Preview",
+
+  /** Runs the web agent in live mode. */
+  Live: "Live",
+}
+
+/**
  * Defines a path configuration for a web agent.
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model AgentPath {
   /**
    * The type of the path.
@@ -6208,6 +6256,7 @@ model AgentPath {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model WebAgentUpdateParameters {
   /**
    * Web agent tags
@@ -6228,7 +6277,14 @@ model WebAgentUpdateParameters {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model WebAgentPropertiesUpdateParameters {
+  /**
+   * The mode of the web agent, which can be either 'Preview' or 'Live'.
+   */
+  @added(Versions.preview)
+  mode?: WebAgentMode;
+
   /**
    * Optional textual description of the agent.
    */
@@ -6251,6 +6307,7 @@ model WebAgentPropertiesUpdateParameters {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model KnowledgeSourceList is Azure.Core.Page<KnowledgeSource>;
 
 /**
@@ -6258,16 +6315,17 @@ model KnowledgeSourceList is Azure.Core.Page<KnowledgeSource>;
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model KnowledgeSourceProperties {
   /**
    * Description of the knowledge source.
    */
+  @removed(Versions.v2025_12_01)
   description?: string;
 
   /**
    * Format or origin of the knowledge source.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceType: KnowledgeSourceType;
 
   /**
@@ -6299,6 +6357,7 @@ model KnowledgeSourceProperties {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model KnowledgeSourceUpdateParameters {
   /**
    * Properties of the knowledge source to be updated.
@@ -6313,15 +6372,18 @@ model KnowledgeSourceUpdateParameters {
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model KnowledgeSourcePropertiesUpdateParameters {
   /**
    * Description of the knowledge source.
    */
+  @removed(Versions.v2025_12_01)
   description?: string;
 
   /**
    * Endpoint or location of the knowledge source.
    */
+  @removed(Versions.v2025_12_01)
   url?: string;
 
   /**
