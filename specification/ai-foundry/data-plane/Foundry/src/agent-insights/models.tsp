@@ -361,6 +361,7 @@ model AgentInsightMonitor {
   agent_summary?: AgentInsightSummary;
 
   /** Compatibility overview, or null when unavailable. */
+  #deprecated "Use agent_summary instead."
   @visibility(Lifecycle.Read)
   overview: AgentInsightsOverview | null;
 
