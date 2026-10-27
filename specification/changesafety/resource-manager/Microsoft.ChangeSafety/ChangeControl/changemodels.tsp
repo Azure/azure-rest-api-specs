@@ -113,10 +113,10 @@ model ChangeDefinition {
   @doc("Kind of the change definition.")
   kind: ChangeDefinitionType;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The extensible change-definition kind determines customer-supplied payload fields. Preserve their arbitrary JSON keys and values without empty-model SDK serialization."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Allows for an extensible object structure to support diverse change scenarios."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Free form object containing additional details for the change definition.")
-  details: Record<unknown>;
+  details: {};
 }
 
 @doc("Defines the type of change definition.")

@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
 import "./commonmodels.tsp";
 import "./changerecordstageprogression.tsp";
 import "./stagemap.tsp";
@@ -88,10 +87,10 @@ model ChangeRecordProperties {
   @doc("Collection of related links for the change.")
   links?: Link[];
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Orchestration metadata keys are customer-defined and values may be nested JSON. A dictionary preserves them in generated SDK serializers."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Defines a flexible placeholder for tool-specific metadata for diverse orchestration and change scenarios."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Additional metadata for the change required for various orchestration tools.")
-  additionalData?: Record<unknown>;
+  additionalData?: {};
 
   @doc("Captured StageMap references and optional resource contents.")
   @Azure.ResourceManager.identifiers(#["resourceId"])
@@ -100,10 +99,6 @@ model ChangeRecordProperties {
 }
 
 @doc("RetrieveNextStages POST Action response for ChangeRecord.")
-@Azure.ClientGenerator.Core.clientName(
-  "ChangeRecordRetrieveNextStagesResult",
-  "csharp"
-)
 model ChangeRecordRetrieveNextStagesResponse {
   @doc("ChangeRecord resource Id.")
   changeRecordResourceId: ChangeRecordResourceId;
@@ -143,10 +138,10 @@ model ChangeRecordRetrieveNextStagesResponseItem {
   @doc("Collection of related links for the change.")
   links?: Link[];
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Stage-specific orchestration metadata keys are customer-defined and values may be nested JSON."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Provides flexible object schema for stage-specific orchestration metadata and dynamic tool-specific configuration data."
   @visibility(Lifecycle.Read)
   @doc("Additional metadata related to the StageProgression resource.")
-  additionalData?: Record<unknown>;
+  additionalData?: {};
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameters can be any type and can have an arbitrary name as key, hence using a Record."
   @doc("List of Parameters & their schemas for the current Stage that user supposed to provide.")
@@ -186,10 +181,6 @@ scalar ChangeRecordResourceId
   ]>;
 
 @doc("VerifyChangeValidity POST Action request for ChangeRecord.")
-@Azure.ClientGenerator.Core.clientName(
-  "ChangeRecordVerifyChangeValidityContent",
-  "csharp"
-)
 model ChangeRecordVerifyChangeValidityRequest {
   @doc("The resource operation.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -211,10 +202,6 @@ model ChangeRecordVerifyChangeValidityRequestContext {
 }
 
 @doc("VerifyChangeValidity POST Action response for ChangeRecord.")
-@Azure.ClientGenerator.Core.clientName(
-  "ChangeRecordVerifyChangeValidityResult",
-  "csharp"
-)
 model ChangeRecordVerifyChangeValidityResponse {
   @doc("The outcome of the verification.")
   outcome: ValidationOutcome;

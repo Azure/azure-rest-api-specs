@@ -2622,7 +2622,6 @@
         "details": {
           "type": "object",
           "description": "Free form object containing additional details for the change definition.",
-          "additionalProperties": {},
           "x-ms-mutability": [
             "read",
             "update",
@@ -2661,7 +2660,6 @@
         "details": {
           "type": "object",
           "description": "Free form object containing additional details for the change definition.",
-          "additionalProperties": {},
           "x-ms-mutability": [
             "read",
             "update",
@@ -2869,7 +2867,6 @@
         "additionalData": {
           "type": "object",
           "description": "Additional metadata for the change required for various orchestration tools.",
-          "additionalProperties": {},
           "x-ms-mutability": [
             "read",
             "update",
@@ -2980,7 +2977,6 @@
         "additionalData": {
           "type": "object",
           "description": "Additional metadata related to the StageProgression resource.",
-          "additionalProperties": {},
           "readOnly": true
         },
         "parameters": {
@@ -3107,7 +3103,6 @@
         "additionalData": {
           "type": "object",
           "description": "Additional metadata for the stageProgression resource.",
-          "additionalProperties": {},
           "x-ms-mutability": [
             "read",
             "update",
@@ -3129,6 +3124,83 @@
         "stageReference",
         "status"
       ]
+    },
+    "ChangeRecordStageProgressionPropertiesUpdate": {
+      "type": "object",
+      "description": "Detailed properties of the ChangeRecord StageProgression resource.",
+      "properties": {
+        "stageReference": {
+          "type": "string",
+          "description": "Stage name relevant to hierarchical StageMap.",
+          "minLength": 3,
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/ChangeRecordStageProgressionState",
+          "description": "StageProgression resource status.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "stageVariables": {
+          "type": "object",
+          "description": "Variables to apply on the change of that stage. Key value pairs supporting any JSON values.",
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments about the update to the resource.",
+          "maxLength": 2000,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "links": {
+          "type": "array",
+          "description": "Collection of related links for the change.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "additionalData": {
+          "type": "object",
+          "description": "Additional metadata for the stageProgression resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Stage specific key value pairs of parameter names & their values for the current Stage, If any.",
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
     },
     "ChangeRecordStageProgressionState": {
       "type": "string",
@@ -3192,91 +3264,18 @@
     },
     "ChangeRecordStageProgressionUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the ChangeRecordStageProgression.",
+      "description": "Defines the progression of a change using these child resources, with ChangeRecord parent resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ChangeRecordStageProgressionUpdateProperties",
+          "$ref": "#/definitions/ChangeRecordStageProgressionPropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
-      }
-    },
-    "ChangeRecordStageProgressionUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the ChangeRecordStageProgression.",
-      "properties": {
-        "stageReference": {
-          "type": "string",
-          "description": "Stage name relevant to hierarchical StageMap.",
-          "minLength": 3,
-          "maxLength": 200,
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "status": {
-          "$ref": "#/definitions/ChangeRecordStageProgressionState",
-          "description": "StageProgression resource status.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "stageVariables": {
-          "type": "object",
-          "description": "Variables to apply on the change of that stage. Key value pairs supporting any JSON values.",
-          "additionalProperties": {},
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "comments": {
-          "type": "string",
-          "description": "Comments about the update to the resource.",
-          "maxLength": 2000,
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "links": {
-          "type": "array",
-          "description": "Collection of related links for the change.",
-          "items": {
-            "$ref": "#/definitions/Link"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "additionalData": {
-          "type": "object",
-          "description": "Additional metadata for the stageProgression resource.",
-          "additionalProperties": {},
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "parameters": {
-          "type": "object",
-          "description": "Stage specific key value pairs of parameter names & their values for the current Stage, If any.",
-          "additionalProperties": {},
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
-      }
+      ]
     },
     "ChangeRecordStatus": {
       "type": "string",
@@ -3449,7 +3448,6 @@
         "additionalData": {
           "type": "object",
           "description": "Additional metadata for the change required for various orchestration tools.",
-          "additionalProperties": {},
           "x-ms-mutability": [
             "read",
             "update",
@@ -3722,7 +3720,6 @@
         "defaultValue": {
           "type": "object",
           "description": "Default value for the parameter.",
-          "additionalProperties": {},
           "x-ms-mutability": [
             "read",
             "update",
@@ -3733,8 +3730,7 @@
           "type": "array",
           "description": "Allowed list of the values for the parameter.",
           "items": {
-            "type": "object",
-            "additionalProperties": {}
+            "type": "object"
           },
           "x-ms-identifiers": [],
           "x-ms-mutability": [
