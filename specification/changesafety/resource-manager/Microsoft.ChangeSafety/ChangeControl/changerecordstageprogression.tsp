@@ -139,13 +139,19 @@ interface ChangeRecordStageProgressions {
     }
   >;
 
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     ChangeRecordStageProgression,
-    ChangeRecordStageProgressionProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ChangeRecordStageProgression,
+      ChangeRecordStageProgressionProperties
+    >
   >;
-  updateAtSubscriptionLevel is ArmResourcePatchSync<
+  updateAtSubscriptionLevel is ArmCustomPatchSync<
     ChangeRecordStageProgression,
-    ChangeRecordStageProgressionProperties,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ChangeRecordStageProgression,
+      ChangeRecordStageProgressionProperties
+    >,
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;

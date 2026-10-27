@@ -97,11 +97,11 @@ directive:
       - $.definitions.ChangeRecordProperties.properties.parameters
       - $.definitions.ChangeRecordProperties.properties.additionalData
       - $.definitions.ChangeRecordStageProgressionProperties.properties.stageVariables
-      - $.definitions.ChangeRecordStageProgressionPropertiesUpdate.properties.stageVariables
+      - $.definitions.ChangeRecordStageProgressionUpdateProperties.properties.stageVariables
       - $.definitions.ChangeRecordStageProgressionProperties.properties.additionalData
-      - $.definitions.ChangeRecordStageProgressionPropertiesUpdate.properties.additionalData
+      - $.definitions.ChangeRecordStageProgressionUpdateProperties.properties.additionalData
       - $.definitions.ChangeRecordStageProgressionProperties.properties.parameters
-      - $.definitions.ChangeRecordStageProgressionPropertiesUpdate.properties.parameters
+      - $.definitions.ChangeRecordStageProgressionUpdateProperties.properties.parameters
       - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.stageVariables
       - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.additionalData
       - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.parameters

@@ -3130,9 +3130,79 @@
         "status"
       ]
     },
-    "ChangeRecordStageProgressionPropertiesUpdate": {
+    "ChangeRecordStageProgressionState": {
+      "type": "string",
+      "description": "Indicates the current status of the progression of the change within the stage for ChangeRecord.",
+      "enum": [
+        "Initialized",
+        "InProgress",
+        "Completed",
+        "Cancelled",
+        "Paused",
+        "Failed",
+        "Skipped",
+        "Uninitialized"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeRecordStageProgressionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Initialized",
+            "value": "Initialized",
+            "description": "Change is initialized to be applied within the stage."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Change is being applied within the stage."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Change has successfully been applied to the stage."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Change apply operation was cancelled."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "Change apply operation was paused."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Change apply operation was failed."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "Change is not applied to the stage."
+          },
+          {
+            "name": "Uninitialized",
+            "value": "Uninitialized",
+            "description": "Change has not yet been initialized for the stage."
+          }
+        ]
+      }
+    },
+    "ChangeRecordStageProgressionUpdate": {
       "type": "object",
-      "description": "Detailed properties of the ChangeRecord StageProgression resource.",
+      "description": "The type used for update operations of the ChangeRecordStageProgression.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeRecordStageProgressionUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ChangeRecordStageProgressionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ChangeRecordStageProgression.",
       "properties": {
         "stageReference": {
           "type": "string",
@@ -3207,81 +3277,6 @@
           ]
         }
       }
-    },
-    "ChangeRecordStageProgressionState": {
-      "type": "string",
-      "description": "Indicates the current status of the progression of the change within the stage for ChangeRecord.",
-      "enum": [
-        "Initialized",
-        "InProgress",
-        "Completed",
-        "Cancelled",
-        "Paused",
-        "Failed",
-        "Skipped",
-        "Uninitialized"
-      ],
-      "x-ms-enum": {
-        "name": "ChangeRecordStageProgressionState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Initialized",
-            "value": "Initialized",
-            "description": "Change is initialized to be applied within the stage."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "Change is being applied within the stage."
-          },
-          {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "Change has successfully been applied to the stage."
-          },
-          {
-            "name": "Cancelled",
-            "value": "Cancelled",
-            "description": "Change apply operation was cancelled."
-          },
-          {
-            "name": "Paused",
-            "value": "Paused",
-            "description": "Change apply operation was paused."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Change apply operation was failed."
-          },
-          {
-            "name": "Skipped",
-            "value": "Skipped",
-            "description": "Change is not applied to the stage."
-          },
-          {
-            "name": "Uninitialized",
-            "value": "Uninitialized",
-            "description": "Change has not yet been initialized for the stage."
-          }
-        ]
-      }
-    },
-    "ChangeRecordStageProgressionUpdate": {
-      "type": "object",
-      "description": "Defines the progression of a change using these child resources, with ChangeRecord parent resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ChangeRecordStageProgressionPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "ChangeRecordStatus": {
       "type": "string",
