@@ -1680,6 +1680,58 @@ model RecoveryPointResourceList extends ResourceList {
 }
 
 /**
+ * Known recovery point discriminator values.
+ */
+union RecoveryPointObjectType {
+  string,
+
+  /**
+   * An Azure File Share recovery point.
+   */
+  AzureFileShareRecoveryPoint: "AzureFileShareRecoveryPoint",
+
+  /**
+   * An Azure workload point-in-time recovery point.
+   */
+  AzureWorkloadPointInTimeRecoveryPoint: "AzureWorkloadPointInTimeRecoveryPoint",
+
+  /**
+   * An Azure workload recovery point.
+   */
+  AzureWorkloadRecoveryPoint: "AzureWorkloadRecoveryPoint",
+
+  /**
+   * An Azure workload SAP HANA point-in-time recovery point.
+   */
+  AzureWorkloadSapHanaPointInTimeRecoveryPoint: "AzureWorkloadSAPHanaPointInTimeRecoveryPoint",
+
+  /**
+   * An Azure workload SAP HANA recovery point.
+   */
+  AzureWorkloadSapHanaRecoveryPoint: "AzureWorkloadSAPHanaRecoveryPoint",
+
+  /**
+   * An Azure workload SQL point-in-time recovery point.
+   */
+  AzureWorkloadSqlPointInTimeRecoveryPoint: "AzureWorkloadSQLPointInTimeRecoveryPoint",
+
+  /**
+   * An Azure workload SQL recovery point.
+   */
+  AzureWorkloadSqlRecoveryPoint: "AzureWorkloadSQLRecoveryPoint",
+
+  /**
+   * A generic recovery point.
+   */
+  GenericRecoveryPoint: "GenericRecoveryPoint",
+
+  /**
+   * An IaaS VM recovery point.
+   */
+  IaasVmRecoveryPoint: "IaasVMRecoveryPoint",
+}
+
+/**
  * Base class for backup copies. Workload-specific backup copies are derived from this class.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -1688,8 +1740,7 @@ model RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Passive stamp: reproduces a frozen plain-string discriminator; modeling it as an extensible union changes the emitted schema (enum/x-ms-enum), so the plain string is retained to preserve the frozen wire."
-  objectType: string;
+  objectType: RecoveryPointObjectType;
 }
 
 /**

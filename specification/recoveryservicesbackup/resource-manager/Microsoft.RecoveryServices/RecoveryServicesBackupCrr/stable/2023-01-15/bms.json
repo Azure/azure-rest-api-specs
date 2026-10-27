@@ -4726,7 +4726,7 @@
       "description": "Base class for backup copies. Workload-specific backup copies are derived from this class.",
       "properties": {
         "objectType": {
-          "type": "string",
+          "$ref": "#/definitions/RecoveryPointObjectType",
           "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types."
         }
       },
@@ -4777,6 +4777,72 @@
           "type": "string",
           "description": "Additional information about move readiness."
         }
+      }
+    },
+    "RecoveryPointObjectType": {
+      "type": "string",
+      "description": "Known recovery point discriminator values.",
+      "enum": [
+        "AzureFileShareRecoveryPoint",
+        "AzureWorkloadPointInTimeRecoveryPoint",
+        "AzureWorkloadRecoveryPoint",
+        "AzureWorkloadSAPHanaPointInTimeRecoveryPoint",
+        "AzureWorkloadSAPHanaRecoveryPoint",
+        "AzureWorkloadSQLPointInTimeRecoveryPoint",
+        "AzureWorkloadSQLRecoveryPoint",
+        "GenericRecoveryPoint",
+        "IaasVMRecoveryPoint"
+      ],
+      "x-ms-enum": {
+        "name": "RecoveryPointObjectType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureFileShareRecoveryPoint",
+            "value": "AzureFileShareRecoveryPoint",
+            "description": "An Azure File Share recovery point."
+          },
+          {
+            "name": "AzureWorkloadPointInTimeRecoveryPoint",
+            "value": "AzureWorkloadPointInTimeRecoveryPoint",
+            "description": "An Azure workload point-in-time recovery point."
+          },
+          {
+            "name": "AzureWorkloadRecoveryPoint",
+            "value": "AzureWorkloadRecoveryPoint",
+            "description": "An Azure workload recovery point."
+          },
+          {
+            "name": "AzureWorkloadSapHanaPointInTimeRecoveryPoint",
+            "value": "AzureWorkloadSAPHanaPointInTimeRecoveryPoint",
+            "description": "An Azure workload SAP HANA point-in-time recovery point."
+          },
+          {
+            "name": "AzureWorkloadSapHanaRecoveryPoint",
+            "value": "AzureWorkloadSAPHanaRecoveryPoint",
+            "description": "An Azure workload SAP HANA recovery point."
+          },
+          {
+            "name": "AzureWorkloadSqlPointInTimeRecoveryPoint",
+            "value": "AzureWorkloadSQLPointInTimeRecoveryPoint",
+            "description": "An Azure workload SQL point-in-time recovery point."
+          },
+          {
+            "name": "AzureWorkloadSqlRecoveryPoint",
+            "value": "AzureWorkloadSQLRecoveryPoint",
+            "description": "An Azure workload SQL recovery point."
+          },
+          {
+            "name": "GenericRecoveryPoint",
+            "value": "GenericRecoveryPoint",
+            "description": "A generic recovery point."
+          },
+          {
+            "name": "IaasVmRecoveryPoint",
+            "value": "IaasVMRecoveryPoint",
+            "description": "An IaaS VM recovery point."
+          }
+        ]
       }
     },
     "RecoveryPointProperties": {
