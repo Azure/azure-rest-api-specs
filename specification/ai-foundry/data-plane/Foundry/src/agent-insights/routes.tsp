@@ -1,12 +1,9 @@
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.Core;
 
 namespace Azure.AI.Projects;
-
-alias AgentInsightsPreviewKey = FoundryFeaturesOptInKeys.agent_insights_v1_preview;
 
 alias AgentInsightsPageQueryParameters = {
   /** A cursor that identifies the last item in the previous page. */
@@ -28,24 +25,15 @@ alias AgentInsightsPageQueryParameters = {
 };
 
 alias AgentInsightListFilters = {
-  /** Filter insights by category. */
-  @query category?: string;
-
-  /** Filter insights by severity. */
-  @query severity?: AgentInsightSeverity;
-
-  /** Filter insights by lifecycle status. */
-  @query status?: AgentInsightStatus;
-
-  /** Match any listed category. Use category for names containing commas; do not combine both. */
+  /** Match any listed category. Commas separate identifiers; identifiers containing commas cannot be filtered individually. */
   @query(#{ explode: false })
   categories?: string[];
 
-  /** Match any listed severity. Do not combine with severity. */
+  /** Match any listed severity. */
   @query(#{ explode: false })
   severities?: AgentInsightSeverity[];
 
-  /** Match any listed status. Do not combine with status. */
+  /** Match any listed status. */
   @query(#{ explode: false })
   statuses?: AgentInsightStatus[];
 };
@@ -74,16 +62,14 @@ alias AgentInsightMonitorCreatedResponse = ResourceCreatedResponse<AgentInsightM
   location: string;
 };
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent Insights uses project-standard FoundryDataPlaneRequiredPreviewOperation templates for Foundry data-plane preview routing and error handling."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent Insights uses project-standard FoundryDataPlaneOperation templates for Foundry data-plane routing and error handling."
 @tag("Agent Insight Monitors")
 interface AgentInsightMonitors {
   /** List Agent Insights monitors, optionally filtered by agent name. */
   @get
   @list
   @route("/agent_insight_monitors")
-  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
-  list is FoundryDataPlaneRequiredPreviewOperation<
-    AgentInsightsPreviewKey,
+  list is FoundryDataPlaneOperation<
     {
       ...AgentInsightsPageQueryParameters;
       ...AgentInsightMonitorFilters;
@@ -94,9 +80,7 @@ interface AgentInsightMonitors {
   /** Create an Agent Insights monitor for an agent. */
   @post
   @route("/agent_insight_monitors")
-  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
-  create is FoundryDataPlaneRequiredPreviewOperation<
-    AgentInsightsPreviewKey,
+  create is FoundryDataPlaneOperation<
     {
       /** The monitor to create. */
       @body monitor: AgentInsightMonitorCreate;
@@ -107,9 +91,7 @@ interface AgentInsightMonitors {
   /** Get an Agent Insights monitor. */
   @get
   @route("/agent_insight_monitors/{monitor_id}")
-  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
-  get is FoundryDataPlaneRequiredPreviewOperation<
-    AgentInsightsPreviewKey,
+  get is FoundryDataPlaneOperation<
     {
       /** The identifier of the monitor. */
       @path monitor_id: string;
@@ -120,9 +102,7 @@ interface AgentInsightMonitors {
   /** Delete an Agent Insights monitor and all of its runs, insights, and state. */
   @delete
   @route("/agent_insight_monitors/{monitor_id}")
-  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
-  delete is FoundryDataPlaneRequiredPreviewOperation<
-    AgentInsightsPreviewKey,
+  delete is FoundryDataPlaneOperation<
     {
       /** The identifier of the monitor. */
       @path monitor_id: string;
@@ -133,9 +113,7 @@ interface AgentInsightMonitors {
   /** Update an Agent Insights monitor. */
   @patch
   @route("/agent_insight_monitors/{monitor_id}")
-  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
-  update is FoundryDataPlaneRequiredPreviewOperation<
-    AgentInsightsPreviewKey,
+  update is FoundryDataPlaneOperation<
     {
       /** The identifier of the monitor. */
       @path monitor_id: string;
@@ -150,12 +128,10 @@ interface AgentInsightMonitors {
     OkResponse & AgentInsightMonitor
   >;
 
-  /** Reset an Agent Insights monitor's generated summary, overview, checkpoint, and active insight state. */
+  /** Reset an Agent Insights monitor's generated summary, checkpoint, and active insight state. */
   @post
   @route("/agent_insight_monitors/{monitor_id}:reset")
-  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
-  reset is FoundryDataPlaneRequiredPreviewOperation<
-    AgentInsightsPreviewKey,
+  reset is FoundryDataPlaneOperation<
     {
       /** The identifier of the monitor. */
       @path monitor_id: string;
@@ -167,17 +143,14 @@ interface AgentInsightMonitors {
   @post
   @route("/agent_insight_monitors/{monitor_id}/runs")
   @pollingOperation(AgentInsightMonitors.getRun)
-  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
-  createRun is FoundryDataPlaneRequiredPreviewOperation<
-    AgentInsightsPreviewKey,
+  createRun is FoundryDataPlaneOperation<
     {
       ...WithOperationId;
 
       /** The identifier of the monitor. */
       @path monitor_id: string;
 
-      /** Run inputs. Send an empty object to use the default 168-hour lookback window. */
-      @body run: AgentInsightRunCreate;
+      ...AgentInsightRunCreate;
     },
     JobCreatedResponse<AgentInsightRun>
   >;
@@ -186,9 +159,7 @@ interface AgentInsightMonitors {
   @get
   @list
   @route("/agent_insight_monitors/{monitor_id}/runs")
-  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
-  listRuns is FoundryDataPlaneRequiredPreviewOperation<
-    AgentInsightsPreviewKey,
+  listRuns is FoundryDataPlaneOperation<
     {
       /** The identifier of the monitor. */
       @path monitor_id: string;
@@ -202,9 +173,7 @@ interface AgentInsightMonitors {
   /** Get an Agent Insights run. */
   @get
   @route("/agent_insight_monitors/{monitor_id}/runs/{run_id}")
-  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
-  getRun is FoundryDataPlaneRequiredPreviewOperation<
-    AgentInsightsPreviewKey,
+  getRun is FoundryDataPlaneOperation<
     {
       /** The identifier of the monitor. */
       @path monitor_id: string;
@@ -218,9 +187,7 @@ interface AgentInsightMonitors {
   /** Cancel an Agent Insights run. */
   @post
   @route("/agent_insight_monitors/{monitor_id}/runs/{run_id}:cancel")
-  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
-  cancelRun is FoundryDataPlaneRequiredPreviewOperation<
-    AgentInsightsPreviewKey,
+  cancelRun is FoundryDataPlaneOperation<
     {
       /** The identifier of the monitor. */
       @path monitor_id: string;
@@ -235,9 +202,7 @@ interface AgentInsightMonitors {
   @get
   @list
   @route("/agent_insight_monitors/{monitor_id}/insights")
-  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
-  listInsights is FoundryDataPlaneRequiredPreviewOperation<
-    AgentInsightsPreviewKey,
+  listInsights is FoundryDataPlaneOperation<
     {
       /** The identifier of the monitor. */
       @path monitor_id: string;
@@ -252,9 +217,7 @@ interface AgentInsightMonitors {
   /** Get a full insight for an Agent Insights monitor. */
   @get
   @route("/agent_insight_monitors/{monitor_id}/insights/{insight_id}")
-  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
-  getInsight is FoundryDataPlaneRequiredPreviewOperation<
-    AgentInsightsPreviewKey,
+  getInsight is FoundryDataPlaneOperation<
     {
       /** The identifier of the monitor. */
       @path monitor_id: string;
@@ -270,9 +233,7 @@ interface AgentInsightMonitors {
   /** Update the lifecycle status of an insight. */
   @patch
   @route("/agent_insight_monitors/{monitor_id}/insights/{insight_id}")
-  @extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
-  updateInsight is FoundryDataPlaneRequiredPreviewOperation<
-    AgentInsightsPreviewKey,
+  updateInsight is FoundryDataPlaneOperation<
     {
       /** The identifier of the monitor. */
       @path monitor_id: string;

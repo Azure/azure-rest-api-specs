@@ -10,6 +10,7 @@ import "../data_generation_jobs/routes.tsp";
 import "../sdk-common/ops-relocation-datasets.tsp";
 
 // Stable operation (GA routes) without preview features
+import "../agent-insights/routes.tsp";
 import "../agents-optimization/routes.tsp";
 import "../agents-microsoft365/routes.tsp";
 import "../connections/routes.tsp";
@@ -19,7 +20,6 @@ import "../indexes/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
 import "../voice-agents/routes.tsp";
-import "../agent-insights/routes.tsp";
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
@@ -35,12 +35,63 @@ import "../agents-session-files/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "../sdk-common/ops-relocation-agents.tsp";
-import "../sdk-common/ops-relocation-agent-insights.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/error.default.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.AI.Projects;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "These Python-only signature overrides are not service operations. The original operations retain their HTTP and polling contracts."
+namespace AgentInsightsPythonCustomizations {
+  op createMonitor is Azure.Core.Foundations.Operation<
+    AgentInsightMonitorCreate,
+    void,
+    FoundryDataPlaneApiVersionParameter
+  >;
+
+  op updateMonitor is Azure.Core.Foundations.Operation<
+    {
+      @TypeSpec.Http.path monitor_id: string;
+
+      @TypeSpec.Http.header("Content-Type")
+      content_type: "application/merge-patch+json";
+
+      ...AgentInsightMonitorUpdate;
+    },
+    void,
+    FoundryDataPlaneApiVersionParameter
+  >;
+
+  op updateMonitorInsight is Azure.Core.Foundations.Operation<
+    {
+      @TypeSpec.Http.path monitor_id: string;
+      @TypeSpec.Http.path insight_id: string;
+
+      @TypeSpec.Http.header("Content-Type")
+      content_type: "application/merge-patch+json";
+
+      ...AgentInsightUpdate;
+    },
+    void,
+    FoundryDataPlaneApiVersionParameter
+  >;
+}
+
+@@override(
+  AgentInsightMonitors.create,
+  AgentInsightsPythonCustomizations.createMonitor,
+  "python"
+);
+@@override(
+  AgentInsightMonitors.update,
+  AgentInsightsPythonCustomizations.updateMonitor,
+  "python"
+);
+@@override(
+  AgentInsightMonitors.updateInsight,
+  AgentInsightsPythonCustomizations.updateMonitorInsight,
+  "python"
+);
 
 // --------------------------------------------------------------------------------
 // Root client
