@@ -32,6 +32,14 @@ describe("ARM review label handoff", () => {
       github.rest.issues.listLabelsOnIssue.mockResolvedValue({
         data: existingLabels.map((name) => ({ name })),
       });
+      github.rest.pulls.get.mockResolvedValue({
+        data: {
+          head: { sha: fullGitSha },
+          base: { ref: "main" },
+          draft: false,
+          labels: existingLabels.map((name) => ({ name })),
+        },
+      });
       github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });
       github.rest.checks.listForRef.mockResolvedValue({
         data: {
@@ -83,7 +91,6 @@ describe("ARM review label handoff", () => {
             123,
             fullGitSha,
             "workflow_run",
-            "main",
             WORKFLOW_URL,
           ),
       };
@@ -133,6 +140,42 @@ describe("ARM review label handoff", () => {
       await expect(run()).rejects.toThrow("Label write failed");
       expect(core.setOutput).not.toHaveBeenCalledWith("arm_review_ready", true);
     });
+
+    it("uses live PR state instead of the draft and branch snapshot in the artifact", async () => {
+      const { github, core, run } = createSummary();
+      github.rest.pulls.get.mockResolvedValue({
+        data: {
+          head: { sha: fullGitSha },
+          base: { ref: "feature/example" },
+          draft: true,
+          labels: [{ name: "ARMReview" }],
+        },
+      });
+
+      await run();
+
+      expect(github.rest.issues.addLabels.mock.calls[0]?.[0]).not.toHaveProperty(
+        "labels",
+        expect.arrayContaining(["WaitForARMFeedback"]),
+      );
+      expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", false);
+      expect(github.rest.repos.getBranchRules).toHaveBeenCalledWith(
+        expect.objectContaining({ branch: "feature/example" }),
+      );
+      expect(github.rest.pulls.get).toHaveBeenCalledTimes(1);
+      expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
+    });
+
+    it("does not apply an old head's impact to the current PR", async () => {
+      const { github, run } = createSummary();
+      github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: "different-head" } } });
+
+      await run();
+
+      expect(github.rest.actions.downloadArtifact).not.toHaveBeenCalled();
+      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+      expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+    });
   });
 
   describe("workflow_dispatch from Update Labels", () => {
@@ -155,6 +198,9 @@ describe("ARM review label handoff", () => {
       core.summary.addHeading = vi.fn().mockReturnValue(core.summary);
       core.summary.addCodeBlock = vi.fn().mockReturnValue(core.summary);
       github.rest.issues.listLabelsOnIssue.mockResolvedValue({ data: [] });
+      github.rest.pulls.get.mockResolvedValue({
+        data: { head: { sha: fullGitSha }, base: { ref: "main" }, draft: false, labels: [] },
+      });
       github.rest.checks.listForRef.mockResolvedValue({ data: { check_runs: [] } });
       github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });
 
@@ -253,12 +299,15 @@ describe("Summarize Checks Integration Tests", () => {
           owner,
           repo,
           head_sha,
-          issue_number,
+          pr.base.ref,
           [],
         );
 
         let adjustedStartLabels = expectedLabels.filter((x) => ignorableLabels.includes(x));
-        const labelContext = updateLabels(adjustedStartLabels, impactAssessment);
+        const labelContext = updateLabels(adjustedStartLabels, impactAssessment, {
+          isDraft: pr.draft ?? false,
+          targetBranch: pr.base.ref,
+        });
 
         adjustedStartLabels = adjustedStartLabels.filter(
           (name) => !labelContext.toRemove.has(name),

@@ -493,7 +493,7 @@ describe("update labels", () => {
   it.each(testCases)(
     "$description",
     ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove, impactAssessment }) => {
-      const labelContext = updateLabels(existingLabels, impactAssessment);
+      const labelContext = updateLabels(existingLabels, impactAssessment, impactAssessment);
 
       expect([...labelContext.toAdd].sort()).toEqual(expectedLabelsToAdd.sort());
       expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
@@ -512,11 +512,11 @@ describe("update labels", () => {
   ])(
     "only adds review labels for release branches: $targetBranch",
     ({ targetBranch, requiresReview }) => {
-      const labelContext = updateLabels([], {
-        ...testCases[0].impactAssessment,
-        isNewApiVersion: true,
-        targetBranch,
-      });
+      const labelContext = updateLabels(
+        [],
+        { ...testCases[0].impactAssessment, isNewApiVersion: true },
+        { isDraft: false, targetBranch },
+      );
 
       expect([...labelContext.toAdd].sort()).toEqual(
         (requiresReview
@@ -529,13 +529,16 @@ describe("update labels", () => {
   );
 
   it("does not request data-plane review for a feature branch containing a release name", () => {
-    const labelContext = updateLabels([], {
-      ...testCases[0].impactAssessment,
-      resourceManagerRequired: false,
-      dataPlaneRequired: true,
-      isNewApiVersion: true,
-      targetBranch: "feature/release-network-2025-03-01",
-    });
+    const labelContext = updateLabels(
+      [],
+      {
+        ...testCases[0].impactAssessment,
+        resourceManagerRequired: false,
+        dataPlaneRequired: true,
+        isNewApiVersion: true,
+      },
+      { isDraft: false, targetBranch: "feature/release-network-2025-03-01" },
+    );
 
     expect([...labelContext.toAdd].sort()).toEqual(["TypeSpec", "data-plane"]);
     expect([...labelContext.toRemove]).toEqual([]);

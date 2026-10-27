@@ -16,7 +16,6 @@ import { Readme } from "@azure-tools/specs-shared/readme";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 
 import { type DiffResult, type ReadmeTag, type TagConfigDiff, type TagDiff } from "./diff-types.ts";
-import { type LabelContext } from "./labelling-types.ts";
 
 export type FileListInfo = {
   additions: string[];
@@ -53,19 +52,12 @@ export class PRContext {
   owner: string;
   prNumber: string;
   isDraft: boolean;
-  labelContext: LabelContext;
 
-  constructor(
-    sourceDirectory: string,
-    targetDirectory: string,
-    labelContext: LabelContext,
-    options: PRContextOptions,
-  ) {
+  constructor(sourceDirectory: string, targetDirectory: string, options: PRContextOptions) {
     this.sourceDirectory = sourceDirectory;
     this.targetDirectory = targetDirectory;
     this.sourceSpecModel = new SpecModel(sourceDirectory);
     this.targetSpecModel = new SpecModel(targetDirectory);
-    this.labelContext = labelContext;
     this.sourceBranch = options.sourceBranch;
     this.targetBranch = options.targetBranch;
     this.sha = options.sha;
