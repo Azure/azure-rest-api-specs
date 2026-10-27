@@ -441,16 +441,28 @@
   "definitions": {
     "ReaderEndpoint": {
       "type": "object",
-      "description": "A reader endpoint. Its location must match the location of its parent server.",
+      "description": "A reader endpoint whose location is inherited from its parent server.",
       "properties": {
         "properties": {
           "$ref": "./common.json#/definitions/ReaderEndpointProperties",
           "description": "Resource properties."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location inherited from the parent server.",
+          "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     }

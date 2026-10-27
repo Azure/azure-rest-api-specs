@@ -13,20 +13,30 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 
-/** A reader endpoint. Its location must match the location of its parent server. */
+/** A reader endpoint whose location is inherited from its parent server. */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The SQL project splits its specifications by legacy feature."
 @added(Versions.v2026_11_01_preview)
 @parentResource(Server)
 @Azure.ResourceManager.Legacy.feature(
   Microsoft.SqlFeatureRegistration.Features.ReaderEndpoints
 )
-model ReaderEndpoint is TrackedResource<ReaderEndpointProperties> {
+model ReaderEndpoint is ProxyResource<ReaderEndpointProperties> {
   ...ResourceNameParameter<
     Resource = ReaderEndpoint,
     KeyName = "readerEndpointName",
     SegmentName = "readerEndpoints",
     NamePattern = "^[a-z0-9]+(-*[a-z0-9]+)*$"
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Preserves the SQL reader endpoint proxy contract with writable tags. ARM exception approval is required."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Reader endpoint tags are a string dictionary in the existing SQL contract. ARM exception approval is required."
+  tags?: Record<string>;
+
+  /** Resource location inherited from the parent server. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The SQL reader endpoint proxy exposes its parent server location as read-only metadata. ARM exception approval is required."
+  @visibility(Lifecycle.Read)
+  location?: string;
 }
 
 /** Primary server and database of a reader endpoint. */
