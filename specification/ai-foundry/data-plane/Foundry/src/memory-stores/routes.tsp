@@ -86,7 +86,7 @@ interface MemoryStores {
   searchMemories is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.memory_stores_v1_preview,
     MemoryStoreSearchRequest,
-    MemoryStoreSearchResponse
+    MemoryStoreObject
   >;
 
   /**
