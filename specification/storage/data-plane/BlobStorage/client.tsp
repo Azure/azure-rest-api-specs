@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
+import "./Cpp/client.tsp";
 
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
@@ -433,8 +434,8 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@alternateType(SourceRangeParameter.sourceRange, HttpRange, "rust");
 @@alternateType(SourceRangeParameterRequired.sourceRange, HttpRange, "rust");
 
-@@scope(Storage.Blob.Container.submitBatch, "!rust");
-@@scope(Storage.Blob.Service.submitBatch, "!rust");
+@@scope(Storage.Blob.Container.submitBatch, "!rust,!cpp");
+@@scope(Storage.Blob.Service.submitBatch, "!rust,!cpp");
 
 // GO SPECIFICATION
 
@@ -1315,6 +1316,9 @@ op uploadPagesNoStructuredMessage is StorageOperationRequestBody<
   "rust"
 )
 scalar HttpRange extends string;
+
+/** Preserves the empty Parquet XML configuration used by the C++ client. */
+model StorageCppParquetConfiguration {}
 
 // Rust-Scoped Smart Tier Removal
 
