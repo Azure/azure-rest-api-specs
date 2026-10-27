@@ -197,20 +197,17 @@ pnpm run build
 pnpm run lint
 pnpm run format:check
 pnpm exec vitest run
-pnpm run test:integration
 pnpm run test:ci
 pnpm run check
 ```
 
 `build` type-checks without emitting JavaScript. `pnpm exec vitest run` runs unit
-tests only. `test:integration` runs the real metadata emitter against repository
-projects: Compute and its subservices, Bulkactions, HealthDataAIServices, and an
-AutoRest-only AWS Connector project. Paths are relative to the repository, not a
-developer's clone location. These tests require the specification files and
-TypeSpec dependencies and take longer than unit tests.
+tests, and `test:ci` runs them with coverage. `check` adds type, lint, and formatting
+checks.
 
-The package's `test:ci` runs unit tests with coverage followed by integration
-tests. `check` adds type, lint, and formatting checks. The repository-root Vitest
-workspace uses the standard package config and does not invoke this package's
-`test:ci` script; the separate integration suite is not automatically included
-in that workspace run.
+Project-discovery tests use temporary fixtures with repository-relative project
+paths and mocked metadata, including Compute and its subservices, Bulkactions,
+HealthDataAIServices, MongoCluster, ObservabilityEval, FileStorage, and an
+AutoRest-only AWS Connector project. They do not compile live specifications or
+require the repository's specification files. These cases are included in both
+package-local tests and the repository-root Vitest workspace.

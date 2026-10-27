@@ -124,6 +124,107 @@ describe("TypeSpec path discovery", () => {
     ],
   };
 
+  describe("repository project paths with mocked metadata", () => {
+    const compute = "specification/compute/resource-manager/Microsoft.Compute/Compute";
+    const bulkActions = "specification/compute/resource-manager/Microsoft.Compute/Bulkactions";
+
+    function writeComputeProjects() {
+      writeConfig(compute, sdkLanguages, "", "client.tsp");
+      writeConfig(`${compute}/ComputeDisk`);
+      writeConfig(`${compute}/Compute`);
+    }
+
+    it("identifies Compute and Bulkactions when both services and Compute subservices change", async () => {
+      writeComputeProjects();
+      writeConfig(bulkActions, sdkLanguages);
+
+      const projects = await collectTypeSpecProjectPaths(
+        [
+          { filename: `${bulkActions}/tspconfig.yaml`, status: "modified" },
+          { filename: `${compute}/tspconfig.yaml`, status: "modified" },
+          { filename: `${compute}/ComputeDisk/tspconfig.yaml`, status: "modified" },
+          { filename: `${compute}/Compute/tspconfig.yaml`, status: "modified" },
+        ],
+        workspace,
+      );
+
+      expect(projects.toSorted()).toEqual([compute, bulkActions].toSorted());
+    });
+
+    it("identifies only Compute when Bulkactions is not in the changed files", async () => {
+      writeComputeProjects();
+
+      const projects = await collectTypeSpecProjectPaths(
+        [
+          { filename: `${compute}/tspconfig.yaml`, status: "modified" },
+          { filename: `${compute}/ComputeDisk/tspconfig.yaml`, status: "modified" },
+          { filename: `${compute}/Compute/tspconfig.yaml`, status: "modified" },
+        ],
+        workspace,
+      );
+
+      expect(projects).toEqual([compute]);
+    });
+
+    it.each([
+      {
+        project: "specification/healthdataaiservices/data-plane/HealthDataAIServices",
+        filename: "tspconfig.yaml",
+      },
+      {
+        project: "specification/mongocluster/resource-manager/Microsoft.DocumentDB/MongoCluster",
+        filename: "tspconfig.yaml",
+      },
+      {
+        project:
+          "specification/liftrarize/resource-manager/ArizeAi.ObservabilityEval/ObservabilityEval",
+        filename: "client.tsp",
+      },
+      {
+        project: "specification/storage/data-plane/FileStorage",
+        filename: "client.tsp",
+      },
+    ])("identifies $project from $filename", async ({ project, filename }) => {
+      writeConfig(project, sdkLanguages, "", filename === "client.tsp" ? "client.tsp" : "main.tsp");
+
+      const projects = await collectTypeSpecProjectPaths(
+        [{ filename: `${project}/${filename}`, status: "modified" }],
+        workspace,
+      );
+
+      expect(projects).toEqual([project]);
+    });
+
+    it("retains an AutoRest-only project and resolves its version for a private preview", async () => {
+      const project = "specification/awsconnector/AcmCertificateSummary.Management";
+      const metadataCache = new Map<string, Promise<TypeSpecMetadata>>();
+      writeConfig(project, {
+        unknown: [{ emitterName: "@azure-tools/typespec-autorest", apiVersion: "2024-12-01" }],
+      });
+
+      const projects = await collectTypeSpecProjectPaths(
+        [{ filename: `${project}/tspconfig.yaml`, status: "modified" }],
+        workspace,
+        metadataCache,
+      );
+
+      expect(projects).toEqual([project]);
+
+      const projectInfo = await getTypeSpecProjectVersionFromMetadata(
+        join(workspace, project),
+        project,
+        metadataCache,
+        true,
+      );
+      expect(projectInfo).toEqual({
+        tspProjectPath: project,
+        apiVersion: "2024-12-01",
+        isPreview: false,
+      });
+      expect(generateTypeSpecMetadata).toHaveBeenCalledExactlyOnceWith(join(workspace, project));
+    });
+  });
+
   it("finds the SDK parent using emitted languages without service-dir", async () => {
     writeConfig(`${service}/BatchPricingsAPI`);
     writeConfig(service, sdkLanguages);
