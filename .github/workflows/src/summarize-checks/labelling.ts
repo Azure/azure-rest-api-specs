@@ -6,7 +6,15 @@ import type { Core } from "../github.ts";
 */
 
 import * as z from "zod";
-import type { ReviewContext } from "./review-requirements.ts";
+import {
+  ImpactAssessmentSchema as ChangeImpactSchema,
+  type ImpactAssessment,
+} from "../../../shared/src/impact.ts";
+import {
+  evaluateReviewRequirements,
+  specReviewApplies,
+  type ReviewContext,
+} from "./review-requirements.ts";
 import { includesEvery, includesNone } from "../../../shared/src/array.ts";
 import {
   TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
@@ -52,7 +60,7 @@ export type LabelContext = {
   toRemove: Set<string>;
 };
 
-export const ImpactAssessmentSchema = z.object({
+const LegacyImpactAssessmentSchema = z.object({
   resourceManagerRequired: z.boolean().describe("Whether a resource manager review is required."),
   dataPlaneRequired: z.boolean().describe("Whether a data plane review is required."),
   suppressionReviewRequired: z.boolean().describe("Whether a suppression review is required."),
@@ -68,7 +76,34 @@ export const ImpactAssessmentSchema = z.object({
   targetBranch: z.string().describe("The name of the target branch for the PR."),
 });
 
-export type ImpactAssessment = import("zod").infer<typeof ImpactAssessmentSchema>;
+// Runs already in flight can still produce the old, PR-wide artifact.
+export const ImpactAssessmentSchema = z.union([
+  ChangeImpactSchema,
+  LegacyImpactAssessmentSchema.transform((legacy): ImpactAssessment => ({
+    schemaVersion: 2,
+    services: [
+      ...(legacy.resourceManagerRequired ? ["resource-manager" as const] : []),
+      ...(legacy.dataPlaneRequired ? ["data-plane" as const] : []),
+      ...(!legacy.resourceManagerRequired && !legacy.dataPlaneRequired ? ["unknown" as const] : []),
+    ].map((plane) => ({
+      path: "specification/legacy",
+      plane,
+      changes: ["api"],
+      typeSpec: legacy.typeSpecChanged,
+      // Legacy artifacts know only whether a version was added, not its name or owning service.
+      newApiVersions: legacy.isNewApiVersion ? ["unknown"] : [],
+      suppressionsChanged: legacy.suppressionReviewRequired,
+      resourceProvider: {
+        newNamespaces: legacy.newRP ? ["unknown"] : [],
+        usesRpaas: legacy.rpaasChange,
+        hasAddedDefinitions: legacy.rpaasRpNotInPrivateRepo,
+        registered: !legacy.rpaasRpNotInPrivateRepo,
+      },
+    })),
+  })),
+]);
+
+export type { ImpactAssessment };
 
 /**
  * This file is the single source of truth for the labels used by the SDK generation tooling
@@ -416,47 +451,32 @@ export function processArmReviewLabels(context: LabelContext, existingLabels: st
   }
 }
 
-/**
-This function determines which labels of the ARM review should
-be applied to given PR. It adds and removes the labels as appropriate. It used to be called
-ProcessARMReview, but was renamed to processImpactAssessment to better reflect its purpose given that is
-merely evaluating the impact assessment of the PR and returning a final set of labels to be applied/removed
-from the PR.
-
-This function does the following, **among other things**:
-
-- Adds the "ARMReview" label if all of the following conditions hold:
-  - The processed PR "isReleaseBranch" or "isShiftLeftPRWithRPSaaSDev"
-  - The PR is not a draft, as determined by "isDraftPR"
-  - The PR is labelled with "resource-manager" label, meaning it pertains
-    to ARM, as previously determined by the "isManagementPR" function,
-    called from the "getPRType" function.
-
-- Calls the "processARMReviewWorkflowLabels" function if "ARMReview" label applies.
-*/
-
 export function processImpactAssessment(
   labelContext: LabelContext,
   impactAssessment: ImpactAssessment,
   context: ReviewContext,
 ): { armReviewLabelShouldBePresent: boolean } {
-  console.log("ENTER definition processARMReview");
+  const reviews = evaluateReviewRequirements(impactAssessment, context);
+  const services = impactAssessment.services;
+  const managementServices = services.filter((service) => service.plane === "resource-manager");
+  const newResourceProvider =
+    (context.targetBranch === "main" || context.targetBranch === "ARMCoreRPDev") &&
+    managementServices.some((service) => service.resourceProvider.newNamespaces.length > 0);
 
-  // By default these two should not be present. We may determine later in this function that they should be present after all.
   const armReviewLabel = new Label("ARMReview", labelContext.present);
-  armReviewLabel.shouldBePresent = false;
+  armReviewLabel.shouldBePresent = reviews.arm;
   const newApiVersionLabel = new Label("new-api-version", labelContext.present);
-  newApiVersionLabel.shouldBePresent = false;
+  newApiVersionLabel.shouldBePresent =
+    specReviewApplies(context) && services.some((service) => service.newApiVersions.length > 0);
 
   const resourceManagerLabel = new Label("resource-manager", labelContext.present);
-  resourceManagerLabel.shouldBePresent = impactAssessment.resourceManagerRequired || false;
+  resourceManagerLabel.shouldBePresent = managementServices.length > 0;
 
   const dataplaneLabel = new Label("data-plane", labelContext.present);
-  dataplaneLabel.shouldBePresent = impactAssessment.dataPlaneRequired || false;
+  dataplaneLabel.shouldBePresent = services.some((service) => service.plane === "data-plane");
 
   // Auto-applied intake signal for data-plane stewardship review. Present exactly when a
-  // data-plane PR introduces a new API version (i.e. when both `data-plane` and
-  // `new-api-version` would be present). This single label is what the merge gate, reviewer
+  // data-plane service introduces a new API version. This single label is what the merge gate, reviewer
   // assignment, and the review queue all key off. Reviewer assignment is owned by the
   // azure-sdk-automation GitHub App (it requests the reviewer team with its own identity,
   // which the default Actions token cannot do). See rulesPri0dataPlane below.
@@ -468,29 +488,35 @@ export function processImpactAssessment(
   // PR adds it below; otherwise it's left as-is. Preserves manual requests and avoids a
   // remove/re-add flip that would re-queue an approved PR.
   dataPlaneReviewRequestedLabel.shouldBePresent = dataPlaneReviewRequestedLabel.present ?? false;
+  if (reviews.dataPlane) dataPlaneReviewRequestedLabel.shouldBePresent = true;
 
   const typeSpecLabel = new Label("TypeSpec", labelContext.present);
-  typeSpecLabel.shouldBePresent = impactAssessment.typeSpecChanged || false;
+  typeSpecLabel.shouldBePresent = services.some((service) => service.typeSpec);
 
   const suppressionReviewRequiredLabel = new Label(
     "SuppressionReviewRequired",
     labelContext.present,
   );
-  suppressionReviewRequiredLabel.shouldBePresent =
-    (impactAssessment.resourceManagerRequired && impactAssessment.suppressionReviewRequired) ||
-    false;
+  suppressionReviewRequiredLabel.shouldBePresent = reviews.suppressions;
 
   const rpassReviewRequiredLabel = new Label("RPaaS", labelContext.present);
-  rpassReviewRequiredLabel.shouldBePresent = impactAssessment.rpaasChange || false;
+  rpassReviewRequiredLabel.shouldBePresent = services.some(
+    (service) => service.resourceProvider.usesRpaas,
+  );
 
   const newRPNamespaceLabel = new Label("new-rp-namespace", labelContext.present);
-  newRPNamespaceLabel.shouldBePresent = impactAssessment.newRP || false;
+  newRPNamespaceLabel.shouldBePresent = newResourceProvider;
 
   const ciNewRPNamespaceWithoutRpaaSLabel = new Label(
     "CI-NewRPNamespaceWithoutRPaaS",
     labelContext.present,
   );
-  ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent = impactAssessment.rpaasRPMissing || false;
+  ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent =
+    newResourceProvider &&
+    managementServices.some(
+      (service) =>
+        service.resourceProvider.newNamespaces.length > 0 && !service.resourceProvider.usesRpaas,
+    );
 
   const rpaasExceptionLabelPresent = labelContext.present.has("RPaaSException");
 
@@ -499,39 +525,21 @@ export function processImpactAssessment(
     labelContext.present,
   );
   ciRpaasRPNotInPrivateRepoLabel.shouldBePresent =
-    impactAssessment.rpaasRpNotInPrivateRepo || false;
+    context.targetBranch === "main" &&
+    managementServices.some(
+      (service) =>
+        service.resourceProvider.usesRpaas &&
+        service.resourceProvider.hasAddedDefinitions &&
+        !service.resourceProvider.registered,
+    );
 
-  const branch = context.targetBranch;
-  const isReleaseBranchVal = isReleaseBranch(branch);
-
-  // we used to also calculate if the branch name was from ShiftLeft, in which case we would or that
-  // with isReleaseBranchVal to see if it's in scope of ARM review. ShiftLeft is not supported anymore,
-  // so we only check if the branch is a release branch.
-  // const prTitle = await getPrTitle(owner, repo, prNumber)
-  // const isShiftLeftPRWithRPSaaSDevVal = isShiftLeftPRWithRPSaaSDev(prTitle, branch)
-  const isBranchInScopeOfSpecReview = isReleaseBranchVal;
-
-  // 'specReviewApplies' means that either ARM or data-plane review applies. Downstream logic
-  // determines which kind of review exactly we need.
-  const specReviewApplies = !context.isDraft && isBranchInScopeOfSpecReview;
-  if (specReviewApplies) {
-    if (impactAssessment.isNewApiVersion) {
-      newApiVersionLabel.shouldBePresent = true;
-
-      // Classify from PR content only; never read the protected signoff label here (racy,
-      // not proof of sign-off). The label is add-only, so an approved PR is never re-queued.
-      if (impactAssessment.dataPlaneRequired) {
-        dataPlaneReviewRequestedLabel.shouldBePresent = true;
-      }
-    }
-
-    armReviewLabel.shouldBePresent = impactAssessment.resourceManagerRequired;
+  if (specReviewApplies(context)) {
     processARMReviewWorkflowLabels(
       labelContext,
-      armReviewLabel.shouldBePresent,
-      impactAssessment.rpaasRPMissing,
+      reviews.arm,
+      ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent,
       rpaasExceptionLabelPresent,
-      impactAssessment.rpaasRpNotInPrivateRepo,
+      ciRpaasRPNotInPrivateRepoLabel.shouldBePresent,
     );
   }
 
@@ -558,23 +566,7 @@ export function processImpactAssessment(
     ),
   );
 
-  console.log(
-    `RETURN definition processARMReview. ` +
-      `isReleaseBranch: ${isReleaseBranchVal}, ` +
-      `isArmReview: ${armReviewLabel.shouldBePresent}, ` +
-      `isBranchInScopeOfArmReview: ${isBranchInScopeOfSpecReview}, ` +
-      `isNewApiVersion: ${impactAssessment.isNewApiVersion}, ` +
-      `isDraft: ${context.isDraft}, ` +
-      `newApiVersionLabel.shouldBePresent: ${newApiVersionLabel.shouldBePresent}, ` +
-      `armReviewLabel.shouldBePresent: ${armReviewLabel.shouldBePresent}.`,
-  );
-
   return { armReviewLabelShouldBePresent: armReviewLabel.shouldBePresent };
-}
-
-function isReleaseBranch(branchName: string): boolean {
-  const branchRegex = [/^main$/, /^RPSaaSMaster$/, /^release.*$/, /^ARMCoreRPDev$/];
-  return branchRegex.some((b) => b.test(branchName));
 }
 
 /**
