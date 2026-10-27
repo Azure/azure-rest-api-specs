@@ -6,6 +6,12 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.ContainerService;
 
+// Preserve existing single-response SDK methods; .NET already exposes pageable methods.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep existing SDK list methods and response-envelope return types."
+@@disablePageable(PrivateEndpointConnections.list, "!csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep existing SDK list methods and response-envelope return types."
+@@disablePageable(ManagedClusters.privateLinkResourcesList, "!csharp");
+
 // Fix .NET code generation naming conflict: BootstrapAzureConfig has both an internal
 // BootstrapTokenInfo property and a flattened public string property that both resolve
 // to "BootstrapToken". Renaming the backing property avoids the CS0102 duplicate error.
@@ -1362,11 +1368,6 @@ using Microsoft.ContainerService;
   "GetManagedClusterKubernetesVersions",
   "csharp"
 );
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
-@@markAsPageable(PrivateEndpointConnections.list, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
-@@markAsPageable(ManagedClusters.privateLinkResourcesList, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
