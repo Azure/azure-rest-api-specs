@@ -28,7 +28,7 @@ for (const version of ["v1", "virtual-public-preview"]) {
       for (const removed of [
         "sample_level",
         "generate_test_case_description_preview",
-        "generate_test_case_rubric",
+        "generate_test_case_rubric_preview",
       ]) {
         assert(
           !Object.hasOwn(schema.properties, removed),
@@ -38,7 +38,7 @@ for (const version of ["v1", "virtual-public-preview"]) {
       if (name === "ConversationsDataGenerationJobConfiguration") continue;
       for (const flag of [
         "generate_test_case_description",
-        "generate_test_case_rubric_preview",
+        "generate_test_case_rubric",
       ]) {
         assert(!Object.hasOwn(schema.properties, flag), `${name}.${flag}`);
       }
@@ -57,7 +57,7 @@ for (const version of ["v1", "virtual-public-preview"]) {
     assert.deepEqual(conversations.properties.type.enum, ["conversations"]);
     for (const flag of [
       "generate_test_case_description",
-      "generate_test_case_rubric_preview",
+      "generate_test_case_rubric",
     ]) {
       assert.equal(conversations.properties[flag].type, "boolean");
       assert.match(
@@ -80,7 +80,7 @@ for (const version of ["v1", "virtual-public-preview"]) {
     );
     assert.match(
       conversations.properties.model_options.description,
-      /generate_test_case_description.*or.*generate_test_case_rubric_preview/,
+      /generate_test_case_description.*or.*generate_test_case_rubric/,
     );
     assert.deepEqual(schemas.DataGenerationModelOptions.required, ["model"]);
   });
@@ -93,7 +93,10 @@ for (const version of ["v1", "virtual-public-preview"]) {
         !Object.hasOwn(configuration, "generate_test_case_description_preview"),
         name,
       );
-      assert(!Object.hasOwn(configuration, "generate_test_case_rubric"), name);
+      assert(
+        !Object.hasOwn(configuration, "generate_test_case_rubric_preview"),
+        name,
+      );
       for (const field of Object.keys(configuration)) {
         const ownProperties =
           configuration.type === "traces"
@@ -120,7 +123,7 @@ for (const version of ["v1", "virtual-public-preview"]) {
       );
       const needsModel =
         configuration.generate_test_case_description === true ||
-        configuration.generate_test_case_rubric_preview === true;
+        configuration.generate_test_case_rubric === true;
       if (needsModel) {
         assert(configuration.model_options.model.length > 0, name);
       } else {
@@ -134,7 +137,7 @@ for (const version of ["v1", "virtual-public-preview"]) {
     );
     assert.equal(
       examples["rubric-request"].generation_configuration
-        .generate_test_case_rubric_preview,
+        .generate_test_case_rubric,
       true,
     );
     assert(

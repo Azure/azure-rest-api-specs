@@ -34,7 +34,7 @@ union DataGenerationJobType {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("LLM model options for data generation jobs.")
 model DataGenerationModelOptions {
-  @doc("Base model name used to generate data. For conversation jobs, a nonempty value is required when `generate_test_case_description` or `generate_test_case_rubric_preview` is true. Model options must be omitted for conversation reconstruction when neither description nor rubric generation is enabled.")
+  @doc("Base model name used to generate data. For conversation jobs, a nonempty value is required when `generate_test_case_description` or `generate_test_case_rubric` is true. Model options must be omitted for conversation reconstruction when neither description nor rubric generation is enabled.")
   `model`: string;
 }
 
@@ -367,9 +367,9 @@ model ConversationsDataGenerationJobConfiguration
   generate_test_case_description?: boolean = false;
 
   @doc("Whether to generate test-case rubric dimensions for each reconstructed conversation. This is a preview feature. When true, requires a nonempty `model_options.model`. Model options must be omitted when neither description nor rubric generation is enabled.")
-  generate_test_case_rubric_preview?: boolean;
+  generate_test_case_rubric?: boolean;
 
-  @doc("The model used to generate test-case descriptions or rubric dimensions. Required with a nonempty `model` when `generate_test_case_description` or `generate_test_case_rubric_preview` is true; must be omitted otherwise.")
+  @doc("The model used to generate test-case descriptions or rubric dimensions. Required with a nonempty `model` when `generate_test_case_description` or `generate_test_case_rubric` is true; must be omitted otherwise.")
   model_options?: DataGenerationModelOptions;
 }
 

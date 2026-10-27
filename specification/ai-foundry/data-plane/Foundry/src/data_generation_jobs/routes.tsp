@@ -57,7 +57,7 @@ interface DataGenerationJobs {
    * Jobs with `type: conversations` reconstruct existing traced conversations,
    * use sources of type `traces`, and do not support `sample_level`.
    * The conversation-only flags `generate_test_case_description` and
-   * `generate_test_case_rubric_preview` require a nonempty `model_options.model`
+   * `generate_test_case_rubric` require a nonempty `model_options.model`
    * when either is true. Model options must be omitted when neither is enabled.
    * Create, get, and list responses preserve `type: conversations`.
    * The response includes the effective generation settings.

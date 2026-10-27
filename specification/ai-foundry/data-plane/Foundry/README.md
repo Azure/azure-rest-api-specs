@@ -76,7 +76,7 @@ available on `traces`, and neither configuration exposes `sample_level`.
 The optional `generate_test_case_description` flag defaults to `false`.
 When enabled, it generates one AI-authored description for each reconstructed
 conversation, using the existing `model_options.model`. The optional
-`generate_test_case_rubric_preview` flag controls test-case rubric generation.
+`generate_test_case_rubric` flag controls test-case rubric generation.
 Either flag requires a nonempty `model_options.model` when true. Model options
 must be omitted when neither is enabled.
 
@@ -426,7 +426,7 @@ Foundry-Features: DataGenerationJobs=V1Preview
   ],
   "generation_configuration": {
     "type": "conversations",
-    "generate_test_case_rubric_preview": true,
+    "generate_test_case_rubric": true,
     "model_options": {
       "model": "gpt-4.1"
     },
