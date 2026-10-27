@@ -10,10 +10,10 @@ $ pnpm ci
 $ pnpm --dir .github exec spec-model ../specification/contosowidgetmanager
 
 {
-  "folder": "/home/mharder/specs/specification/contosowidgetmanager",
+  "folder": "/home/user/specs/specification/contosowidgetmanager",
   "readmes": [
     {
-      "path": "/home/mharder/specs/specification/contosowidgetmanager/data-plane/readme.md",
+      "path": "/home/user/specs/specification/contosowidgetmanager/data-plane/readme.md",
       "globalConfig": {
         "openapi-type": "data-plane",
 ...
@@ -26,15 +26,15 @@ If spec-model detects any errors in your spec (e.g. unreferenced or missing swag
 $ pnpm --dir .github exec spec-model ../specification/with-errors
 
 Multiple input-file definitions for tag package-preview-2024-01 in
-/home/mharder/specs-pr/specification/with-errors/resource-manager/readme.md
-file:///home/mharder/specs-pr/.github/shared/src/readme.js:148
+/home/user/specs-pr/specification/with-errors/resource-manager/readme.md
+file:///home/user/specs-pr/.github/shared/src/readme.js:148
           throw new Error(message);
                 ^
 
 Error: Multiple input-file definitions for tag package-preview-2024-01 in
-/home/mharder/specs-pr/specification/with-errors/resource-manager/readme.md
-    at #getData (file:///home/mharder/specs-pr/.github/shared/src/readme.js:148:17)
-    at async Readme.getTags (file:///home/mharder/specs-pr/.github/shared/src/readme.js:188:13)
+/home/user/specs-pr/specification/with-errors/resource-manager/readme.md
+    at #getData (file:///home/user/specs-pr/.github/shared/src/readme.js:148:17)
+    at async Readme.getTags (file:///home/user/specs-pr/.github/shared/src/readme.js:188:13)
 ```
 
 Any errors from spec-model are fatal, and must be fixed before proceeding.  There are no exceptions or suppressions.

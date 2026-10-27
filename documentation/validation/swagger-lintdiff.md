@@ -7,7 +7,7 @@
 https://github.com/Azure/azure-openapi-validator/wiki#usage
 
 # Adding Scoped Suppressions
-When adding suppressions for LintDiff (https://github.com/Azure/autorest/blob/main/docs/generate/suppress-warnings.md), it's recommened to use a `where` clause to scope the suppression to one instance of the error  How to find the JSON path to use for the suppression.
+When adding suppressions for LintDiff (https://github.com/Azure/autorest/blob/main/docs/generate/suppress-warnings.md), it's recommended to use a `where` clause to scope the suppression to one instance of the error  How to find the JSON path to use for the suppression.
 
 1. In the raw log for the "LintDiff" step of the "LintDiff" check, find the line containing the JSON object representing your error.  For example:
 

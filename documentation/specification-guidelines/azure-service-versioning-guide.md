@@ -1,5 +1,7 @@
 # Azure Service Versioning Guide
 
+<!-- cspell:words Pulumi -->
+
 This document defines what an Azure service is, the rules that govern the service’s versioning, and all the benefits that flow from this.\
 The end of this document describes the problems that arise from Azure services that do not follow the service versioning rules and why they must now adopt these rules to greatly improve the Azure customer experience as well as the Azure engineering experience.\
 For questions related to Azure Service Versioning, contact azversioning@service.microsoft.com\

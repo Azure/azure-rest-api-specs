@@ -1,3 +1,5 @@
+<!-- cspell:words commitish armcontoso azmanager contosowidget -->
+
 # Table of Contents
 - [Running Locally](#running-locally)
 - [Examples Source and Destination](#examples-source-and-destination)

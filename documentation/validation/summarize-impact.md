@@ -1,6 +1,6 @@
 ## Description
 
-The `Summarize Impact` check is used to evaluate an incoming changeset on a PR to `azure-rest-api-specs` or `azure-rest-api-specs-pr`. This evaluation examines the code, and bucketizes the "types" of changes that are occurring. It is used so that the `summarize-checks` check can apply the correct labels and evaluate `automated merge requirements` without actually those details itself. Doing it this way creates a security boundary between the change itself and the code that will be executing privileged actions in the specs repo.
+The `Summarize Impact` check is used to evaluate an incoming changeset on a PR to `azure-rest-api-specs` or `azure-rest-api-specs-pr`. This evaluation examines the code, and categorizes the "types" of changes that are occurring. It is used so that the `summarize-checks` check can apply the correct labels and evaluate `automated merge requirements` without actually those details itself. Doing it this way creates a security boundary between the change itself and the code that will be executing privileged actions in the specs repo.
 
 Questions that `Summarize Impact` answers will be similar to:
 
