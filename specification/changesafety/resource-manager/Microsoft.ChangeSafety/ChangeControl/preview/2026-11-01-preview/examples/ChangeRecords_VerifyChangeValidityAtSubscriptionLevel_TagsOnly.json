@@ -1,0 +1,29 @@
+{
+  "title": "ChangeRecords_VerifyChangeValidityAtSubscriptionLevel_TagsOnly",
+  "operationId": "ChangeRecords_VerifyChangeValidityAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeRecordName": "storageAccountTagsChangeRecord",
+    "body": {
+      "operation": {
+        "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.Storage/storageAccounts/storageaccount?api-version=2023-05-01",
+        "httpMethod": "PATCH",
+        "body": {
+          "tags": {
+            "environment": "test"
+          }
+        }
+      },
+      "changeSafetyReferenceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeRecords/storageAccountTagsChangeRecord"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "outcome": "Succeeded",
+        "message": "The resource operation is part of a valid ChangeRecord."
+      }
+    }
+  }
+}

@@ -1,0 +1,4264 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ChangeSafety management service",
+    "version": "2026-11-01-preview",
+    "description": "Microsoft.ChangeSafety Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "StageMaps"
+    },
+    {
+      "name": "ChangeRecords"
+    },
+    {
+      "name": "ChangeRecordStageProgressions"
+    },
+    {
+      "name": "ChangeActivityEvents"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.ChangeSafety/changeActivityEvents": {
+      "get": {
+        "operationId": "ChangeActivityEvents_ListByParent",
+        "tags": [
+          "ChangeActivityEvents"
+        ],
+        "description": "List ChangeActivityEvents by parent resource ID. The parent resource should be a Microsoft.ChangeSafety resource (e.g., ChangeRecords, StageProgressions).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeActivityEventListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeActivityEvents_ListByParent_2026_11_01_preview": {
+            "$ref": "./examples/ChangeActivityEvents_ListByParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ChangeSafety/changeActivityEvents/{changeActivityEventName}": {
+      "get": {
+        "operationId": "ChangeActivityEvents_Get",
+        "tags": [
+          "ChangeActivityEvents"
+        ],
+        "description": "Get a ChangeActivityEvent by name under its parent resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "changeActivityEventName",
+            "in": "path",
+            "description": "The name of the ChangeActivityEvent resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-|]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeActivityEvent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeActivityEvents_Get": {
+            "$ref": "./examples/ChangeActivityEvents_Get.json"
+          },
+          "ChangeActivityEvents_Get_PolicyEvaluation": {
+            "$ref": "./examples/ChangeActivityEvents_Get_PolicyEvaluation.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ChangeSafety/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.ChangeSafety/stageMaps": {
+      "get": {
+        "operationId": "StageMaps_ListByManagementGroup",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "List StageMap resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StageMapListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_ListByManagementGroup": {
+            "$ref": "./examples/StageMaps_ListByManagementGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.ChangeSafety/stageMaps/{stageMapName}": {
+      "get": {
+        "operationId": "StageMaps_GetAtManagementGroupLevel",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Get a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_GetAtManagementGroupLevel": {
+            "$ref": "./examples/StageMaps_GetAtManagementGroupLevel.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StageMaps_CreateOrUpdateAtManagementGroupLevel",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Create a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'StageMap' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "201": {
+            "description": "Resource 'StageMap' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_CreateOrUpdateAtManagementGroupLevel": {
+            "$ref": "./examples/StageMaps_CreateOrUpdateAtManagementGroupLevel.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "StageMaps_UpdateAtManagementGroupLevel",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Update a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StageMapUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_UpdateAtManagementGroupLevel": {
+            "$ref": "./examples/StageMaps_UpdateAtManagementGroupLevel.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "StageMaps_DeleteAtManagementGroupLevel",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Delete a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_DeleteAtManagementGroupLevel": {
+            "$ref": "./examples/StageMaps_DeleteAtManagementGroupLevel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/changeRecords": {
+      "get": {
+        "operationId": "ChangeRecords_ListBySubscription",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "List ChangeRecord resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_ListBySubscription": {
+            "$ref": "./examples/ChangeRecords_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}": {
+      "get": {
+        "operationId": "ChangeRecords_GetAtSubscriptionLevel",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "Get a ChangeRecord",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecord"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_GetAtSubscriptionLevel": {
+            "$ref": "./examples/ChangeRecords_GetAtSubscriptionLevel.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ChangeRecords_CreateOrUpdateAtSubscriptionLevel",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "Create a ChangeRecord",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ChangeRecord' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecord"
+            }
+          },
+          "201": {
+            "description": "Resource 'ChangeRecord' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecord"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_CreateOrUpdateAtSubscriptionLevel": {
+            "$ref": "./examples/ChangeRecords_CreateOrUpdateAtSubscriptionLevel.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ChangeRecords_UpdateAtSubscriptionLevel",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "Update a ChangeRecord",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecord"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_UpdateAtSubscriptionLevel": {
+            "$ref": "./examples/ChangeRecords_UpdateAtSubscriptionLevel.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ChangeRecords_DeleteAtSubscriptionLevel",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "Delete a ChangeRecord",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_DeleteAtSubscriptionLevel": {
+            "$ref": "./examples/ChangeRecords_DeleteAtSubscriptionLevel.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}/retrieveNextStages": {
+      "post": {
+        "operationId": "ChangeRecords_RetrieveNextStagesAtSubscriptionLevel",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "Gets list of next stages that are eligible to put in 'InProgress' state in a ChangeRecord resource at subscription level.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordRetrieveNextStagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_RetrieveNextStagesAtSubscriptionLevel": {
+            "$ref": "./examples/ChangeRecords_RetrieveNextStagesAtSubscriptionLevel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}/stageProgressions": {
+      "get": {
+        "operationId": "ChangeRecordStageProgressions_ListByParentAtSubscriptionLevel",
+        "tags": [
+          "ChangeRecordStageProgressions"
+        ],
+        "description": "List ChangeRecordStageProgression resources by ChangeRecord",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordStageProgressionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecordStageProgressions_ListByParentAtSubscriptionLevel": {
+            "$ref": "./examples/ChangeRecordStageProgressions_ListByParentAtSubscriptionLevel.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}/stageProgressions/{stageProgressionName}": {
+      "get": {
+        "operationId": "ChangeRecordStageProgressions_GetAtSubscriptionLevel",
+        "tags": [
+          "ChangeRecordStageProgressions"
+        ],
+        "description": "Get a ChangeRecordStageProgression",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "stageProgressionName",
+            "in": "path",
+            "description": "Name of the stageProgression",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-|]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordStageProgression"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecordStageProgressions_GetAtSubscriptionLevel": {
+            "$ref": "./examples/ChangeRecordStageProgressions_GetAtSubscriptionLevel.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ChangeRecordStageProgressions_CreateOrUpdateAtSubscriptionLevel",
+        "tags": [
+          "ChangeRecordStageProgressions"
+        ],
+        "description": "Create a ChangeRecordStageProgression",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "stageProgressionName",
+            "in": "path",
+            "description": "Name of the stageProgression",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-|]{3,100}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordStageProgression"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ChangeRecordStageProgression' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordStageProgression"
+            }
+          },
+          "201": {
+            "description": "Resource 'ChangeRecordStageProgression' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordStageProgression"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecordStageProgressions_CreateOrUpdateAtSubscriptionLevel": {
+            "$ref": "./examples/ChangeRecordStageProgressions_CreateOrUpdateAtSubscriptionLevel.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ChangeRecordStageProgressions_UpdateAtSubscriptionLevel",
+        "tags": [
+          "ChangeRecordStageProgressions"
+        ],
+        "description": "Update a ChangeRecordStageProgression",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "stageProgressionName",
+            "in": "path",
+            "description": "Name of the stageProgression",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-|]{3,100}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordStageProgressionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordStageProgression"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecordStageProgressions_UpdateAtSubscriptionLevel": {
+            "$ref": "./examples/ChangeRecordStageProgressions_UpdateAtSubscriptionLevel.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ChangeRecordStageProgressions_DeleteAtSubscriptionLevel",
+        "tags": [
+          "ChangeRecordStageProgressions"
+        ],
+        "description": "Delete a ChangeRecordStageProgression",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "stageProgressionName",
+            "in": "path",
+            "description": "Name of the stageProgression",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-|]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecordStageProgressions_DeleteAtSubscriptionLevel": {
+            "$ref": "./examples/ChangeRecordStageProgressions_DeleteAtSubscriptionLevel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}/verifyChangeValidity": {
+      "post": {
+        "operationId": "ChangeRecords_VerifyChangeValidityAtSubscriptionLevel",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "Verify the change validity at subscription level for a ChangeRecord.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordVerifyChangeValidityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordVerifyChangeValidityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_VerifyChangeValidityAtSubscriptionLevel": {
+            "$ref": "./examples/ChangeRecords_VerifyChangeValidityAtSubscriptionLevel.json"
+          },
+          "ChangeRecords_VerifyChangeValidityAtSubscriptionLevel_TagsOnly": {
+            "$ref": "./examples/ChangeRecords_VerifyChangeValidityAtSubscriptionLevel_TagsOnly.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/stageMaps": {
+      "get": {
+        "operationId": "StageMaps_ListBySubscription",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "List StageMap resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StageMapListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_ListBySubscription": {
+            "$ref": "./examples/StageMaps_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/stageMaps/{stageMapName}": {
+      "get": {
+        "operationId": "StageMaps_GetAtSubscriptionLevel",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Get a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_GetAtSubscriptionLevel": {
+            "$ref": "./examples/StageMaps_GetAtSubscriptionLevel.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StageMaps_CreateOrUpdateAtSubscriptionLevel",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Create a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'StageMap' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "201": {
+            "description": "Resource 'StageMap' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_CreateOrUpdateAtSubscriptionLevel": {
+            "$ref": "./examples/StageMaps_CreateOrUpdateAtSubscriptionLevel.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "StageMaps_UpdateAtSubscriptionLevel",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Update a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StageMapUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_UpdateAtSubscriptionLevel": {
+            "$ref": "./examples/StageMaps_UpdateAtSubscriptionLevel.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "StageMaps_DeleteAtSubscriptionLevel",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Delete a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_DeleteAtSubscriptionLevel": {
+            "$ref": "./examples/StageMaps_DeleteAtSubscriptionLevel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeRecords": {
+      "get": {
+        "operationId": "ChangeRecords_ListByResourceGroup",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "List ChangeRecord resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_ListByResourceGroup": {
+            "$ref": "./examples/ChangeRecords_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}": {
+      "get": {
+        "operationId": "ChangeRecords_Get",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "Get a ChangeRecord",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecord"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_Get": {
+            "$ref": "./examples/ChangeRecords_Get.json"
+          },
+          "ChangeRecords_Get_StageMapSnapshot": {
+            "$ref": "./examples/ChangeRecords_Get_StageMapSnapshot.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ChangeRecords_CreateOrUpdate",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "Create a ChangeRecord",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ChangeRecord' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecord"
+            }
+          },
+          "201": {
+            "description": "Resource 'ChangeRecord' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecord"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_CreateOrUpdate": {
+            "$ref": "./examples/ChangeRecords_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ChangeRecords_Update",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "Update a ChangeRecord",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecord"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_Update": {
+            "$ref": "./examples/ChangeRecords_Update.json"
+          },
+          "ChangeRecords_Update_ParameterMetadata": {
+            "$ref": "./examples/ChangeRecords_Update_ParameterMetadata.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ChangeRecords_Delete",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "Delete a ChangeRecord",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_Delete": {
+            "$ref": "./examples/ChangeRecords_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}/retrieveNextStages": {
+      "post": {
+        "operationId": "ChangeRecords_RetrieveNextStages",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "Gets list of next stages that are eligible to put in 'InProgress' state in a ChangeRecord resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordRetrieveNextStagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_RetrieveNextStages": {
+            "$ref": "./examples/ChangeRecords_RetrieveNextStages.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}/stageProgressions": {
+      "get": {
+        "operationId": "ChangeRecordStageProgressions_ListByParent",
+        "tags": [
+          "ChangeRecordStageProgressions"
+        ],
+        "description": "List ChangeRecordStageProgression resources by ChangeRecord",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordStageProgressionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecordStageProgressions_ListByParent": {
+            "$ref": "./examples/ChangeRecordStageProgressions_ListByParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}/stageProgressions/{stageProgressionName}": {
+      "get": {
+        "operationId": "ChangeRecordStageProgressions_Get",
+        "tags": [
+          "ChangeRecordStageProgressions"
+        ],
+        "description": "Get a ChangeRecordStageProgression",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "stageProgressionName",
+            "in": "path",
+            "description": "Name of the stageProgression",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-|]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordStageProgression"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecordStageProgressions_Get": {
+            "$ref": "./examples/ChangeRecordStageProgressions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ChangeRecordStageProgressions_CreateOrUpdate",
+        "tags": [
+          "ChangeRecordStageProgressions"
+        ],
+        "description": "Create a ChangeRecordStageProgression",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "stageProgressionName",
+            "in": "path",
+            "description": "Name of the stageProgression",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-|]{3,100}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordStageProgression"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ChangeRecordStageProgression' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordStageProgression"
+            }
+          },
+          "201": {
+            "description": "Resource 'ChangeRecordStageProgression' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordStageProgression"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecordStageProgressions_CreateOrUpdate": {
+            "$ref": "./examples/ChangeRecordStageProgressions_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ChangeRecordStageProgressions_Update",
+        "tags": [
+          "ChangeRecordStageProgressions"
+        ],
+        "description": "Update a ChangeRecordStageProgression",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "stageProgressionName",
+            "in": "path",
+            "description": "Name of the stageProgression",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-|]{3,100}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordStageProgressionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordStageProgression"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecordStageProgressions_Update": {
+            "$ref": "./examples/ChangeRecordStageProgressions_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ChangeRecordStageProgressions_Delete",
+        "tags": [
+          "ChangeRecordStageProgressions"
+        ],
+        "description": "Delete a ChangeRecordStageProgression",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "stageProgressionName",
+            "in": "path",
+            "description": "Name of the stageProgression",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-|]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecordStageProgressions_Delete": {
+            "$ref": "./examples/ChangeRecordStageProgressions_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}/verifyChangeValidity": {
+      "post": {
+        "operationId": "ChangeRecords_VerifyChangeValidity",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "Verify the change validity for a ChangeRecord.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordVerifyChangeValidityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordVerifyChangeValidityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_VerifyChangeValidity": {
+            "$ref": "./examples/ChangeRecords_VerifyChangeValidity.json"
+          },
+          "ChangeRecords_VerifyChangeValidity_StorageAccount": {
+            "$ref": "./examples/ChangeRecords_VerifyChangeValidity_StorageAccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/stageMaps": {
+      "get": {
+        "operationId": "StageMaps_ListByResourceGroup",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "List StageMap resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StageMapListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_ListByResourceGroup": {
+            "$ref": "./examples/StageMaps_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/stageMaps/{stageMapName}": {
+      "get": {
+        "operationId": "StageMaps_Get",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Get a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_Get": {
+            "$ref": "./examples/StageMaps_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StageMaps_CreateOrUpdate",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Create a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'StageMap' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "201": {
+            "description": "Resource 'StageMap' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_CreateOrUpdate": {
+            "$ref": "./examples/StageMaps_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "StageMaps_Update",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Update a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StageMapUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_Update": {
+            "$ref": "./examples/StageMaps_Update.json"
+          },
+          "StageMaps_Update_ParameterMetadata": {
+            "$ref": "./examples/StageMaps_Update_ParameterMetadata.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "StageMaps_Delete",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Delete a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_Delete": {
+            "$ref": "./examples/StageMaps_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AcquirePolicyTokenEventData": {
+      "type": "object",
+      "description": "Policy-token acquisition event details.",
+      "properties": {
+        "tokenId": {
+          "type": "string",
+          "description": "Identifier of the acquired policy token."
+        },
+        "validationResult": {
+          "type": "string",
+          "description": "Result of the policy-token validation."
+        },
+        "policyEvaluationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of policy evaluations performed.",
+          "minimum": 0
+        }
+      }
+    },
+    "AcquirePolicyTokenEventProperties": {
+      "type": "object",
+      "description": "Properties of an AcquirePolicyToken event using the 2026-01-01 payload schema.",
+      "properties": {
+        "eventVersion": {
+          "type": "string",
+          "description": "The event payload schema version.",
+          "enum": [
+            "2026-01-01"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "eventData": {
+          "$ref": "#/definitions/AcquirePolicyTokenEventData",
+          "description": "Details of policy-token acquisition."
+        }
+      },
+      "required": [
+        "eventVersion",
+        "eventData"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeActivityEventProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AcquirePolicyToken"
+    },
+    "ActivityType": {
+      "type": "string",
+      "description": "ActivityType of the ChangeActivityEvent.",
+      "enum": [
+        "PolicyGovernance",
+        "ArmControlPlane"
+      ],
+      "x-ms-enum": {
+        "name": "ActivityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PolicyGovernance",
+            "value": "PolicyGovernance",
+            "description": "Policy Governance activity"
+          },
+          {
+            "name": "ArmControlPlane",
+            "value": "ArmControlPlane",
+            "description": "ARM Control Plane activity"
+          }
+        ]
+      }
+    },
+    "ArmOperation": {
+      "type": "string",
+      "description": "Supported ARM Operations.",
+      "enum": [
+        "DELETE",
+        "PUT",
+        "PATCH",
+        "POST"
+      ],
+      "x-ms-enum": {
+        "name": "ArmOperation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DELETE",
+            "value": "DELETE",
+            "description": "DELETE ARM Operation."
+          },
+          {
+            "name": "PUT",
+            "value": "PUT",
+            "description": "PUT ARM Operation."
+          },
+          {
+            "name": "PATCH",
+            "value": "PATCH",
+            "description": "PATCH ARM Operation."
+          },
+          {
+            "name": "POST",
+            "value": "POST",
+            "description": "POST ARM Operation."
+          }
+        ]
+      }
+    },
+    "ArmResourceOperation": {
+      "type": "object",
+      "description": "Artifact content model for Inline ArmOperations.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The uri of the operation.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "httpMethod": {
+          "$ref": "#/definitions/ArmOperation",
+          "description": "The http method of the operation.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "body": {
+          "type": "object",
+          "description": "The resource operation request body.",
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "uri",
+        "httpMethod"
+      ]
+    },
+    "ArrayParameter": {
+      "type": "object",
+      "description": "Array type parameter model",
+      "properties": {
+        "defaultValue": {
+          "type": "array",
+          "description": "Default value for the parameter.",
+          "items": {},
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "Allowed list of the values for the parameter.",
+          "items": {},
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Parameter"
+        }
+      ],
+      "x-ms-discriminator-value": "array"
+    },
+    "ChangeActivityEvent": {
+      "type": "object",
+      "description": "Immutable, append-only audit event resource that captures fine-grained Change Safety activities.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeActivityEventProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ChangeActivityEventCategory": {
+      "type": "string",
+      "description": "Category of the ChangeActivityEvent.",
+      "enum": [
+        "Information",
+        "Warning",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeActivityEventCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Information",
+            "value": "Information",
+            "description": "Informational event"
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning event"
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Error event"
+          }
+        ]
+      }
+    },
+    "ChangeActivityEventKind": {
+      "type": "string",
+      "description": "Kind of the ChangeActivityEvent.",
+      "enum": [
+        "AcquirePolicyToken",
+        "PolicyEvaluation"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeActivityEventKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AcquirePolicyToken",
+            "value": "AcquirePolicyToken",
+            "description": "Acquire Policy Token event"
+          },
+          {
+            "name": "PolicyEvaluation",
+            "value": "PolicyEvaluation",
+            "description": "Policy Evaluation event"
+          }
+        ]
+      }
+    },
+    "ChangeActivityEventListResult": {
+      "type": "object",
+      "description": "The response of a ChangeActivityEvent list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ChangeActivityEvent items on this page",
+          "items": {
+            "$ref": "#/definitions/ChangeActivityEvent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ChangeActivityEventProperties": {
+      "type": "object",
+      "description": "Detailed properties of the ChangeActivityEvent resource.",
+      "properties": {
+        "activityId": {
+          "type": "string",
+          "description": "Correlation identifier tying related events together."
+        },
+        "kind": {
+          "$ref": "#/definitions/ChangeActivityEventKind",
+          "description": "Logical event kind describing the action."
+        },
+        "category": {
+          "$ref": "#/definitions/ChangeActivityEventCategory",
+          "description": "Category of the event."
+        },
+        "activityType": {
+          "$ref": "#/definitions/ActivityType",
+          "description": "High-level activity domain."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ID of the resource targeted by the operation associated with this activity."
+        },
+        "externalReferenceId": {
+          "type": "string",
+          "description": "Identifier in an external system."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time the activity occurred in ISO-8601 format."
+        },
+        "initiatedByType": {
+          "$ref": "#/definitions/InitiatedByType",
+          "description": "Identity type that initiated the event."
+        },
+        "initiatedBy": {
+          "type": "string",
+          "description": "Initiator or end user identity."
+        },
+        "links": {
+          "type": "array",
+          "description": "Collection of references to external systems associated with this change.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "activityId",
+        "kind",
+        "category",
+        "activityType",
+        "timestamp"
+      ]
+    },
+    "ChangeDefinition": {
+      "type": "object",
+      "description": "Model that defines the change definition with name, type, and details.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the change definition.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "kind": {
+          "$ref": "#/definitions/ChangeDefinitionType",
+          "description": "Kind of the change definition.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "details": {
+          "type": "object",
+          "description": "Free form object containing additional details for the change definition.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "kind",
+        "details"
+      ]
+    },
+    "ChangeDefinitionPatch": {
+      "type": "object",
+      "description": "Partial change definition supplied by a PATCH request.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the change definition.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "kind": {
+          "$ref": "#/definitions/ChangeDefinitionType",
+          "description": "Kind of the change definition.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "details": {
+          "type": "object",
+          "description": "Free form object containing additional details for the change definition.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ChangeDefinitionType": {
+      "type": "string",
+      "description": "Defines the type of change definition.",
+      "enum": [
+        "ApiOperations",
+        "Targets"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDefinitionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ApiOperations",
+            "value": "ApiOperations",
+            "description": "API operation change definition type."
+          },
+          {
+            "name": "Targets",
+            "value": "Targets",
+            "description": "Target selection criteria change definition type."
+          }
+        ]
+      }
+    },
+    "ChangeRecord": {
+      "type": "object",
+      "description": "Resource allows the user to define the change that they intended to execute & indicate the progression it will use. ChangeRecord replaces the deprecated ChangeState resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeRecordProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ChangeRecordListResult": {
+      "type": "object",
+      "description": "The response of a ChangeRecord list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ChangeRecord items on this page",
+          "items": {
+            "$ref": "#/definitions/ChangeRecord"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ChangeRecordProperties": {
+      "type": "object",
+      "description": "Detailed properties of the ChangeRecord resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "changeType": {
+          "$ref": "#/definitions/ChangeType",
+          "description": "Describes the nature of the change.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief description about the change.",
+          "maxLength": 2000,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/ChangeRecordStatus",
+          "description": "Current Status of the ChangeRecord resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments about the last update to the ChangeRecord resource.",
+          "maxLength": 2000,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "stageMap": {
+          "$ref": "#/definitions/NestedStageMap",
+          "description": "Reference to the StageMap, defining progression.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Schema of parameters that will be provided for each stageProgression.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Parameter"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "rolloutType": {
+          "$ref": "#/definitions/RolloutType",
+          "description": "Describes the type of the rollout used for the change.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "changeDefinition": {
+          "$ref": "#/definitions/ChangeDefinition",
+          "description": "Change request body and/or resource selection criteria used to identify the targeted resources.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "releaseLabel": {
+          "type": "string",
+          "description": "Label for the release associated with this change.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "anticipatedStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expected start time when the change execution should begin, in ISO 8601 format.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "anticipatedEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expected completion time when the change should be finished, in ISO 8601 format.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "orchestrationTool": {
+          "type": "string",
+          "description": "Tool used for deployment orchestration of this change.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "links": {
+          "type": "array",
+          "description": "Collection of related links for the change.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "additionalData": {
+          "type": "object",
+          "description": "Additional metadata for the change required for various orchestration tools.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "stageMapSnapshot": {
+          "type": "array",
+          "description": "Captured StageMap references and optional resource contents.",
+          "items": {
+            "$ref": "#/definitions/StageMapSnapshot"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "changeType",
+        "rolloutType",
+        "changeDefinition",
+        "anticipatedStartTime",
+        "anticipatedEndTime"
+      ]
+    },
+    "ChangeRecordResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Azure resource Id of a ChangeRecord.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ChangeSafety/changeRecords"
+          }
+        ]
+      }
+    },
+    "ChangeRecordRetrieveNextStagesResponse": {
+      "type": "object",
+      "description": "RetrieveNextStages POST Action response for ChangeRecord.",
+      "properties": {
+        "changeRecordResourceId": {
+          "$ref": "#/definitions/ChangeRecordResourceId",
+          "description": "ChangeRecord resource Id."
+        },
+        "lastStageProgressionSequence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sequence of last StageProgression completed within the ChangeRecord."
+        },
+        "nextStages": {
+          "type": "array",
+          "description": "StageProgression resources that are ready to put in 'InProgress' state.",
+          "items": {
+            "$ref": "#/definitions/ChangeRecordRetrieveNextStagesResponseItem"
+          },
+          "x-ms-identifiers": [
+            "stageReference"
+          ]
+        }
+      },
+      "required": [
+        "changeRecordResourceId",
+        "lastStageProgressionSequence",
+        "nextStages"
+      ]
+    },
+    "ChangeRecordRetrieveNextStagesResponseItem": {
+      "type": "object",
+      "description": "StageProgression data comes from RetrieveNextStages API for ChangeRecord.",
+      "properties": {
+        "stageReference": {
+          "type": "string",
+          "description": "Stage name relevant to the hierarchical StageMap. Identifies the stage uniquely within a ChangeRecord resource.",
+          "readOnly": true
+        },
+        "stageVariables": {
+          "type": "object",
+          "description": "Variables to apply on the change for the stage. Key value pairs supporting any JSON values.",
+          "additionalProperties": {},
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ChangeRecordStageProgressionState",
+          "description": "Current state of the stage progression.",
+          "readOnly": true
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence of the stageProgression resource.",
+          "readOnly": true
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments about the stage progression.",
+          "readOnly": true
+        },
+        "links": {
+          "type": "array",
+          "description": "Collection of related links for the change.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "readOnly": true
+        },
+        "additionalData": {
+          "type": "object",
+          "description": "Additional metadata related to the StageProgression resource.",
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "object",
+          "description": "List of Parameters & their schemas for the current Stage that user supposed to provide.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Parameter"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "stageReference"
+      ]
+    },
+    "ChangeRecordStageProgression": {
+      "type": "object",
+      "description": "Defines the progression of a change using these child resources, with ChangeRecord parent resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeRecordStageProgressionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ChangeRecordStageProgressionListResult": {
+      "type": "object",
+      "description": "The response of a ChangeRecordStageProgression list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ChangeRecordStageProgression items on this page",
+          "items": {
+            "$ref": "#/definitions/ChangeRecordStageProgression"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ChangeRecordStageProgressionProperties": {
+      "type": "object",
+      "description": "Detailed properties of the ChangeRecord StageProgression resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "stageReference": {
+          "type": "string",
+          "description": "Stage name relevant to hierarchical StageMap.",
+          "minLength": 3,
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/ChangeRecordStageProgressionState",
+          "description": "StageProgression resource status.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence of the stage within the ChangeRecord parent resource.",
+          "minimum": 1,
+          "readOnly": true
+        },
+        "stageVariables": {
+          "type": "object",
+          "description": "Variables to apply on the change of that stage. Key value pairs supporting any JSON values.",
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments about the update to the resource.",
+          "maxLength": 2000,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "links": {
+          "type": "array",
+          "description": "Collection of related links for the change.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "additionalData": {
+          "type": "object",
+          "description": "Additional metadata for the stageProgression resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Stage specific key value pairs of parameter names & their values for the current Stage, If any.",
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "stageReference",
+        "status"
+      ]
+    },
+    "ChangeRecordStageProgressionPropertiesUpdate": {
+      "type": "object",
+      "description": "Detailed properties of the ChangeRecord StageProgression resource.",
+      "properties": {
+        "stageReference": {
+          "type": "string",
+          "description": "Stage name relevant to hierarchical StageMap.",
+          "minLength": 3,
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/ChangeRecordStageProgressionState",
+          "description": "StageProgression resource status.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "stageVariables": {
+          "type": "object",
+          "description": "Variables to apply on the change of that stage. Key value pairs supporting any JSON values.",
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments about the update to the resource.",
+          "maxLength": 2000,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "links": {
+          "type": "array",
+          "description": "Collection of related links for the change.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "additionalData": {
+          "type": "object",
+          "description": "Additional metadata for the stageProgression resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Stage specific key value pairs of parameter names & their values for the current Stage, If any.",
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ChangeRecordStageProgressionState": {
+      "type": "string",
+      "description": "Indicates the current status of the progression of the change within the stage for ChangeRecord.",
+      "enum": [
+        "Initialized",
+        "InProgress",
+        "Completed",
+        "Cancelled",
+        "Paused",
+        "Failed",
+        "Skipped",
+        "Uninitialized"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeRecordStageProgressionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Initialized",
+            "value": "Initialized",
+            "description": "Change is initialized to be applied within the stage."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Change is being applied within the stage."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Change has successfully been applied to the stage."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Change apply operation was cancelled."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "Change apply operation was paused."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Change apply operation was failed."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "Change is not applied to the stage."
+          },
+          {
+            "name": "Uninitialized",
+            "value": "Uninitialized",
+            "description": "Change has not yet been initialized for the stage."
+          }
+        ]
+      }
+    },
+    "ChangeRecordStageProgressionUpdate": {
+      "type": "object",
+      "description": "Defines the progression of a change using these child resources, with ChangeRecord parent resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeRecordStageProgressionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ChangeRecordStatus": {
+      "type": "string",
+      "description": "Internal status of the ChangeRecord resource.",
+      "enum": [
+        "Initialized",
+        "InProgress",
+        "Completed",
+        "Cancelled",
+        "NotApplicable",
+        "Paused"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeRecordStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Initialized",
+            "value": "Initialized",
+            "description": "Resource initialized status."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Resource is currently In progress."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Resource is completed the execution."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Resource is Cancelled."
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "Resource is in NotApplicable state, when no stagemap is associated with the change."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "Resource is in Paused state."
+          }
+        ]
+      }
+    },
+    "ChangeRecordUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the ChangeRecord.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChangeRecordUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ChangeRecordUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ChangeRecord.",
+      "properties": {
+        "changeType": {
+          "$ref": "#/definitions/ChangeType",
+          "description": "Describes the nature of the change.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief description about the change.",
+          "maxLength": 2000,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/ChangeRecordStatus",
+          "description": "Current Status of the ChangeRecord resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments about the last update to the ChangeRecord resource.",
+          "maxLength": 2000,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "stageMap": {
+          "$ref": "#/definitions/NestedStageMap",
+          "description": "Reference to the StageMap, defining progression.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "rolloutType": {
+          "$ref": "#/definitions/RolloutType",
+          "description": "Describes the type of the rollout used for the change.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "releaseLabel": {
+          "type": "string",
+          "description": "Label for the release associated with this change.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "anticipatedStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expected start time when the change execution should begin, in ISO 8601 format.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "anticipatedEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expected completion time when the change should be finished, in ISO 8601 format.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "orchestrationTool": {
+          "type": "string",
+          "description": "Tool used for deployment orchestration of this change.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "links": {
+          "type": "array",
+          "description": "Collection of related links for the change.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "additionalData": {
+          "type": "object",
+          "description": "Additional metadata for the change required for various orchestration tools.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameter definitions supplied by the PATCH request.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterPatch"
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "changeDefinition": {
+          "$ref": "#/definitions/ChangeDefinitionPatch",
+          "description": "Change request body and/or resource selection criteria used to identify the targeted resources.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ChangeRecordVerifyChangeValidityRequest": {
+      "type": "object",
+      "description": "VerifyChangeValidity POST Action request for ChangeRecord.",
+      "properties": {
+        "operation": {
+          "$ref": "#/definitions/ArmResourceOperation",
+          "description": "The resource operation.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "changeSafetyReferenceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The change safety resource Id.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "context": {
+          "$ref": "#/definitions/ChangeRecordVerifyChangeValidityRequestContext",
+          "description": "The context of the verify change validity request.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "operation"
+      ]
+    },
+    "ChangeRecordVerifyChangeValidityRequestContext": {
+      "type": "object",
+      "description": "The context object of the verify change validity request for ChangeRecord.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The application Id performing the ARM operation."
+        }
+      },
+      "required": [
+        "clientId"
+      ]
+    },
+    "ChangeRecordVerifyChangeValidityResponse": {
+      "type": "object",
+      "description": "VerifyChangeValidity POST Action response for ChangeRecord.",
+      "properties": {
+        "outcome": {
+          "$ref": "#/definitions/ValidationOutcome",
+          "description": "The outcome of the verification."
+        },
+        "message": {
+          "type": "string",
+          "description": "The explanation message of the verification."
+        },
+        "validUntil": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the validation result expires."
+        }
+      },
+      "required": [
+        "outcome",
+        "message"
+      ]
+    },
+    "ChangeType": {
+      "type": "string",
+      "description": "Defines the Kind of the intended Change.",
+      "enum": [
+        "AppDeployment",
+        "Config",
+        "PolicyDeployment",
+        "ManualTouch"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AppDeployment",
+            "value": "AppDeployment",
+            "description": "Application deployment change."
+          },
+          {
+            "name": "Config",
+            "value": "Config",
+            "description": "Configuration change."
+          },
+          {
+            "name": "PolicyDeployment",
+            "value": "PolicyDeployment",
+            "description": "Policy deployment change."
+          },
+          {
+            "name": "ManualTouch",
+            "value": "ManualTouch",
+            "description": "Manual touch change."
+          }
+        ]
+      }
+    },
+    "InitiatedByType": {
+      "type": "string",
+      "description": "Identity type that initiated the event.",
+      "enum": [
+        "Application",
+        "User",
+        "ManagedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "InitiatedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "An application initiated the event."
+          },
+          {
+            "name": "User",
+            "value": "User",
+            "description": "A user initialized the event."
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "A Managed identity initialized the event."
+          }
+        ]
+      }
+    },
+    "Link": {
+      "type": "object",
+      "description": "Link model for related resources and references.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the link.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A single URL for this link. Use separate Link entries for multiple URLs.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description or note about the link.",
+          "maxLength": 2000,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "uri"
+      ]
+    },
+    "NestedStageMap": {
+      "type": "object",
+      "description": "Nested stage map reference.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/StageMapResourceId",
+          "description": "ARM resource ID for the nested stagemap resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Key value pairs of parameter names & their values for the stageMap referenced by the resourceId field.",
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "NumberParameter": {
+      "type": "object",
+      "description": "Integer type parameter model",
+      "properties": {
+        "defaultValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Default value for the parameter.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "Allowed list of the values for the parameter.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Parameter"
+        }
+      ],
+      "x-ms-discriminator-value": "number"
+    },
+    "ObjectParameter": {
+      "type": "object",
+      "description": "Object type parameter model",
+      "properties": {
+        "defaultValue": {
+          "type": "object",
+          "description": "Default value for the parameter.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "Allowed list of the values for the parameter.",
+          "items": {
+            "type": "object"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Parameter"
+        }
+      ],
+      "x-ms-discriminator-value": "object"
+    },
+    "Parameter": {
+      "type": "object",
+      "description": "Base class for the Parameters.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ParameterType",
+          "description": "Data type of the parameter.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "metadata": {
+          "type": "object",
+          "description": "user-specified parameter metadata",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ParameterPatch": {
+      "type": "object",
+      "description": "Partial parameter definition for PATCH requests. Omitted fields are not supplied by the request.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ParameterType",
+          "description": "Data type of the parameter.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "metadata": {
+          "type": "object",
+          "description": "user-specified parameter metadata",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "defaultValue": {
+          "description": "Default value for the parameter. The value must match the supplied or existing parameter type."
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "Allowed values for the parameter. Values must match the supplied or existing parameter type.",
+          "items": {}
+        }
+      }
+    },
+    "ParameterType": {
+      "type": "string",
+      "description": "Data type of the parameter.",
+      "enum": [
+        "string",
+        "number",
+        "array",
+        "object"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "String",
+            "value": "string",
+            "description": "String data type"
+          },
+          {
+            "name": "Number",
+            "value": "number",
+            "description": "Integer data type"
+          },
+          {
+            "name": "Array",
+            "value": "array",
+            "description": "Array data type"
+          },
+          {
+            "name": "Object",
+            "value": "object",
+            "description": "Object data type"
+          }
+        ]
+      }
+    },
+    "PolicyEvaluationEventData": {
+      "type": "object",
+      "description": "Policy evaluation event details.",
+      "properties": {
+        "policyName": {
+          "type": "string",
+          "description": "Name of the evaluated policy."
+        },
+        "evaluationResult": {
+          "type": "string",
+          "description": "Result of the policy evaluation."
+        },
+        "evaluationDurationMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of the policy evaluation in milliseconds.",
+          "minimum": 0
+        }
+      }
+    },
+    "PolicyEvaluationEventProperties": {
+      "type": "object",
+      "description": "Properties of a PolicyEvaluation event using the 2026-01-01 payload schema.",
+      "properties": {
+        "eventVersion": {
+          "type": "string",
+          "description": "The event payload schema version.",
+          "enum": [
+            "2026-01-01"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "eventData": {
+          "$ref": "#/definitions/PolicyEvaluationEventData",
+          "description": "Details of the policy evaluation."
+        }
+      },
+      "required": [
+        "eventVersion",
+        "eventData"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeActivityEventProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "PolicyEvaluation"
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of resource.",
+      "enum": [
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": " The resource create request has been accepted."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RolloutType": {
+      "type": "string",
+      "description": "Defines the type of rollout for the change.",
+      "enum": [
+        "Normal",
+        "Hotfix",
+        "Emergency"
+      ],
+      "x-ms-enum": {
+        "name": "RolloutType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Normal",
+            "value": "Normal",
+            "description": "Normal rollout type."
+          },
+          {
+            "name": "Hotfix",
+            "value": "Hotfix",
+            "description": "Hotfix rollout type."
+          },
+          {
+            "name": "Emergency",
+            "value": "Emergency",
+            "description": "Emergency rollout type."
+          }
+        ]
+      }
+    },
+    "Stage": {
+      "type": "object",
+      "description": "Defines details about each stage in the stage map resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the individual stage.",
+          "minLength": 3,
+          "maxLength": 100,
+          "pattern": "^[a-zA-Z0-9-]{3,100}$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Positive integer defining the orchestration order of the stages.",
+          "minimum": 1,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "stageVariables": {
+          "type": "object",
+          "description": "Variables to apply on the change of that stage. Key value pairs supporting any JSON values.",
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "nestedStageMap": {
+          "$ref": "#/definitions/NestedStageMap",
+          "description": "Nested stage map details.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "sequence"
+      ]
+    },
+    "StageMap": {
+      "type": "object",
+      "description": "Resource provides details about stages a deployment goes through.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StageMapProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "StageMapListResult": {
+      "type": "object",
+      "description": "The response of a StageMap list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StageMap items on this page",
+          "items": {
+            "$ref": "#/definitions/StageMap"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StageMapProperties": {
+      "type": "object",
+      "description": "Detailed properties of the StageMap resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "stages": {
+          "type": "array",
+          "description": "Array of stages objects.",
+          "items": {
+            "$ref": "#/definitions/Stage"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "parameters": {
+          "type": "object",
+          "description": "StageMap parameters schema for each stage.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Parameter"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "stages"
+      ]
+    },
+    "StageMapResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Azure resource Id of a stage map.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ChangeSafety/stageMaps"
+          }
+        ]
+      }
+    },
+    "StageMapSnapshot": {
+      "type": "object",
+      "description": "A StageMap reference and optional captured resource contents in a ChangeRecord snapshot.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/StageMapResourceId",
+          "description": "ARM resource ID of the captured StageMap.",
+          "readOnly": true
+        },
+        "stageMap": {
+          "$ref": "#/definitions/StageMap",
+          "description": "Captured StageMap resource. Omitted when the snapshot entry contains only a reference.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "StageMapUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the StageMap.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StageMapUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "StageMapUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the StageMap.",
+      "properties": {
+        "stages": {
+          "type": "array",
+          "description": "Array of stages objects.",
+          "items": {
+            "$ref": "#/definitions/Stage"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameter definitions supplied by the PATCH request.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterPatch"
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
+    "StringParameter": {
+      "type": "object",
+      "description": "String Type Parameter model.",
+      "properties": {
+        "defaultValue": {
+          "type": "string",
+          "description": "Default value for the parameter.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "Allowed list of the values for the parameter.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Parameter"
+        }
+      ],
+      "x-ms-discriminator-value": "string"
+    },
+    "ValidationOutcome": {
+      "type": "string",
+      "description": "Supported validation outcomes.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Deferred"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationOutcome",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Represents a Succeeded outcome."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Represents a Failed outcome."
+          },
+          {
+            "name": "Deferred",
+            "value": "Deferred",
+            "description": "Represents a Deferred outcome."
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}
