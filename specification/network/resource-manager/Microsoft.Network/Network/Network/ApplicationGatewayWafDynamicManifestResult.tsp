@@ -55,7 +55,6 @@ alias ApplicationGatewayWafDynamicManifestResultOps = Azure.ResourceManager.Lega
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...Azure.ResourceManager.Legacy.Provider;
-
     ...ApplicationGatewayWafDynamicManifestLocationParameter;
   },
   {
