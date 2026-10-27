@@ -1422,6 +1422,7 @@ union KnowledgeSourceType {
   Html: "Html",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.preview)
   SchemaOrgMarkup: "SchemaOrgMarkup",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -6170,6 +6171,24 @@ model ManagedRuleDefinition {
 model WebAgentList is Azure.Core.Page<WebAgent>;
 
 /**
+ * Optional textual description of the agent.
+ */
+@maxLength(1000)
+scalar WebAgentDescription extends string;
+
+/**
+ * List of paths associated with the web agent.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "This named array carries preview-only item constraints while @typeChangedFrom preserves the historical array contract."
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.preview)
+@minItems(1)
+@maxItems(2)
+@identifiers(#[])
+model WebAgentPaths is AgentPath[];
+
+/**
  * Defines properties of a web agent.
  */
 @added(Versions.v2025_09_01_preview)
@@ -6192,19 +6211,30 @@ model WebAgentProperties {
   /**
    * Optional textual description of the agent.
    */
-  description?: string;
+  @typeChangedFrom(Versions.preview, string)
+  description?: WebAgentDescription;
 
   /**
    * System prompt for the web agent.
    */
-  @madeRequired(Versions.preview)
-  systemPrompt: string;
+  @removed(Versions.v2025_12_01)
+  systemPrompt?: string;
+
+  /**
+   * Retrieval context prompt for the web agent.
+   */
+  @added(Versions.preview)
+  @minLength(300)
+  @maxLength(8000)
+  retrievalContextPrompt: string;
 
   /**
    * List of paths associated with the web agent.
    */
+  @typeChangedFrom(Versions.preview, AgentPath[])
+  @madeRequired(Versions.preview)
   @identifiers(#[])
-  paths?: AgentPath[];
+  paths: WebAgentPaths;
 
   /**
    * References to agent links in CDN profiles.
@@ -6288,18 +6318,29 @@ model WebAgentPropertiesUpdateParameters {
   /**
    * Optional textual description of the agent.
    */
-  description?: string;
+  @typeChangedFrom(Versions.preview, string)
+  description?: WebAgentDescription;
 
   /**
    * System prompt for the web agent.
    */
+  @removed(Versions.v2025_12_01)
   systemPrompt?: string;
+
+  /**
+   * Retrieval context prompt for the web agent.
+   */
+  @added(Versions.preview)
+  @minLength(300)
+  @maxLength(8000)
+  retrievalContextPrompt?: string;
 
   /**
    * List of paths associated with the web agent.
    */
+  @typeChangedFrom(Versions.preview, AgentPath[])
   @identifiers(#[])
-  paths?: AgentPath[];
+  paths?: WebAgentPaths;
 }
 
 /**
