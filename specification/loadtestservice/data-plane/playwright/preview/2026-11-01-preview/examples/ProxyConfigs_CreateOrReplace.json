@@ -1,0 +1,81 @@
+{
+  "title": "ProxyConfigs_CreateOrReplace",
+  "operationId": "ProxyConfigs_CreateOrReplace",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "workspaceId": "11111111-2222-3333-4444-555555555555",
+    "proxyConfigId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "resource": {
+      "name": "corporate-proxy",
+      "description": "Routes corporate traffic through approved proxies.",
+      "proxyPool": {
+        "default-proxy": {
+          "server": "https://proxy.example.com:8443",
+          "credentials": {
+            "username": "proxy-user",
+            "secretUri": "https://example-vault.vault.azure.net/secrets/proxy-password"
+          }
+        },
+        "corp-route": {
+          "server": "http://corp-proxy.example.com:8080",
+          "pattern": ["*.contoso.com"],
+          "priority": 10
+        }
+      },
+      "rotation": "Disabled",
+      "bypass": ["localhost"]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+        "name": "corporate-proxy",
+        "description": "Routes corporate traffic through approved proxies.",
+        "proxyPool": {
+          "default-proxy": {
+            "server": "https://proxy.example.com:8443"
+          },
+          "corp-route": {
+            "server": "http://corp-proxy.example.com:8080",
+            "pattern": ["*.contoso.com"],
+            "priority": 10
+          }
+        },
+        "rotation": "Disabled",
+        "bypass": ["localhost"],
+        "systemData": {
+          "createdAt": "2026-10-27T06:00:00Z",
+          "createdBy": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff",
+          "lastModifiedAt": "2026-10-27T06:00:00Z",
+          "lastModifiedBy": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+        "name": "corporate-proxy",
+        "description": "Routes corporate traffic through approved proxies.",
+        "proxyPool": {
+          "default-proxy": {
+            "server": "https://proxy.example.com:8443"
+          },
+          "corp-route": {
+            "server": "http://corp-proxy.example.com:8080",
+            "pattern": ["*.contoso.com"],
+            "priority": 10
+          }
+        },
+        "rotation": "Disabled",
+        "bypass": ["localhost"],
+        "systemData": {
+          "createdAt": "2026-10-27T06:00:00Z",
+          "createdBy": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff",
+          "lastModifiedAt": "2026-10-27T06:00:00Z",
+          "lastModifiedBy": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff"
+        }
+      }
+    }
+  }
+}

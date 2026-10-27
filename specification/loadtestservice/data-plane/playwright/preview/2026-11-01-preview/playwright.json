@@ -658,6 +658,15 @@
         "x-ms-examples": {
           "BrowserSessions_CreateOrUpdate": {
             "$ref": "./examples/BrowserSessions_CreateOrUpdate.json"
+          },
+          "BrowserSessions_CreateOrUpdateProxyConfigById": {
+            "$ref": "./examples/BrowserSessions_CreateOrUpdateProxyConfigById.json"
+          },
+          "BrowserSessions_CreateOrUpdateProxyConfigByName": {
+            "$ref": "./examples/BrowserSessions_CreateOrUpdateProxyConfigByName.json"
+          },
+          "BrowserSessions_CreateOrUpdateProxyConfigIdPrecedence": {
+            "$ref": "./examples/BrowserSessions_CreateOrUpdateProxyConfigIdPrecedence.json"
           }
         }
       }
@@ -759,6 +768,395 @@
         "x-ms-examples": {
           "Workspaces_GetBrowsers": {
             "$ref": "./examples/Workspaces_GetBrowsers.json"
+          }
+        }
+      }
+    },
+    "/playwrightworkspaces/{workspaceId}/proxy-configs": {
+      "get": {
+        "operationId": "ProxyConfigs_List",
+        "description": "Lists saved proxy configurations without credentials. Supports query parameters like top, skip, and filter. Default page size is 10. Use nextLink in response to fetch additional results.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace ID in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedProxyConfig"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProxyConfigs_List": {
+            "$ref": "./examples/ProxyConfigs_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/playwrightworkspaces/{workspaceId}/proxy-configs/{proxyConfigId}": {
+      "get": {
+        "operationId": "ProxyConfigs_Get",
+        "description": "Gets a saved proxy configuration without credentials.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace ID in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "proxyConfigId",
+            "in": "path",
+            "description": "The proxy configuration ID in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProxyConfig"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProxyConfigs_Get": {
+            "$ref": "./examples/ProxyConfigs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ProxyConfigs_CreateOrReplace",
+        "description": "Creates or replaces a proxy configuration and returns it without credentials.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace ID in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "proxyConfigId",
+            "in": "path",
+            "description": "The proxy configuration ID in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProxyConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProxyConfig"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ProxyConfig"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProxyConfigs_CreateOrReplace": {
+            "$ref": "./examples/ProxyConfigs_CreateOrReplace.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ProxyConfigs_Update",
+        "description": "Updates an existing proxy configuration and returns it without credentials.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace ID in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "proxyConfigId",
+            "in": "path",
+            "description": "The proxy configuration ID in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProxyConfigUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProxyConfig"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProxyConfigs_Update": {
+            "$ref": "./examples/ProxyConfigs_Update.json"
+          },
+          "ProxyConfigs_UpdateDescription": {
+            "$ref": "./examples/ProxyConfigs_UpdateDescription.json"
+          },
+          "ProxyConfigs_UpdateRemoveOptionalFields": {
+            "$ref": "./examples/ProxyConfigs_UpdateRemoveOptionalFields.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ProxyConfigs_Delete",
+        "description": "Deletes a proxy configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace ID in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "proxyConfigId",
+            "in": "path",
+            "description": "The proxy configuration ID in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProxyConfigs_Delete": {
+            "$ref": "./examples/ProxyConfigs_Delete.json"
           }
         }
       }
@@ -1253,6 +1651,14 @@
             "update",
             "create"
           ]
+        },
+        "proxyConfig": {
+          "$ref": "#/definitions/ProxyConfigReference",
+          "description": "The saved proxy configuration selected at session creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -1620,19 +2026,19 @@
           {
             "name": "SystemAssigned",
             "value": "SystemAssigned",
-            "description": "Use the workspace's system-assigned managed identity."
+            "description": "The workspace's system-assigned managed identity."
           },
           {
             "name": "UserAssigned",
             "value": "UserAssigned",
-            "description": "Use a user-assigned managed identity assigned to the workspace."
+            "description": "A user-assigned managed identity assigned to the workspace."
           }
         ]
       }
     },
     "LinkedIdentityProperties": {
       "type": "object",
-      "description": "A managed identity assigned to the workspace for accessing a linked Azure resource.",
+      "description": "A workspace managed identity used to access a linked Azure resource.",
       "properties": {
         "type": {
           "$ref": "#/definitions/IdentityType",
@@ -1641,24 +2047,24 @@
         },
         "resourceId": {
           "type": "string",
-          "description": "The fully qualified Azure resource ID of the user-assigned managed identity. Required when type is UserAssigned; omitted when type is SystemAssigned.",
+          "description": "The fully qualified Azure resource ID of the user-assigned managed identity. Required for UserAssigned and omitted for SystemAssigned.",
           "readOnly": true
         }
       }
     },
     "LinkedKeyVaultProperties": {
       "type": "object",
-      "description": "The Azure Key Vault and managed identity used to retrieve browser proxy credentials.",
+      "description": "The linked Azure Key Vault and managed identity used for browser proxy credentials.",
       "properties": {
         "vaultUri": {
           "type": "string",
           "format": "uri",
-          "description": "The base HTTPS URI of the linked Azure Key Vault, without a secret path, query, fragment, user information, or non-default port. The vault must belong to the workspace tenant.",
+          "description": "The vault's base HTTPS URI. The vault must belong to the workspace tenant. Secret paths, query strings, fragments, user information, and non-default ports are not allowed.",
           "readOnly": true
         },
         "vaultIdentity": {
           "$ref": "#/definitions/LinkedIdentityProperties",
-          "description": "The managed identity assigned to the workspace with permission to read secrets from the linked Azure Key Vault.",
+          "description": "The workspace managed identity authorized to read secrets from the linked vault.",
           "readOnly": true
         }
       }
@@ -1717,6 +2123,27 @@
           "description": "The BrowserSession items on this page",
           "items": {
             "$ref": "#/definitions/BrowserSession"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedProxyConfig": {
+      "type": "object",
+      "description": "Paged collection of ProxyConfig items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProxyConfig items on this page",
+          "items": {
+            "$ref": "#/definitions/ProxyConfig"
           }
         },
         "nextLink": {
@@ -1862,6 +2289,14 @@
             "update",
             "create"
           ]
+        },
+        "proxyConfig": {
+          "$ref": "#/definitions/ProxyConfigReference",
+          "description": "The saved proxy configuration selected at session creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -1917,6 +2352,412 @@
           "description": "The artifact configuration and finalized artifacts for the browser session.",
           "x-ms-mutability": [
             "read",
+            "update",
+            "create"
+          ]
+        },
+        "proxyConfig": {
+          "$ref": "#/definitions/ProxyConfigReferenceCreateOrUpdate",
+          "description": "The saved proxy configuration selected at session creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "ProxyConfig": {
+      "type": "object",
+      "description": "A saved browser proxy configuration scoped to a Playwright workspace.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The proxy configuration ID in GUID format.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The proxy configuration name.",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[a-zA-Z0-9-]{3,24}$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "The configuration description.",
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "proxyPool": {
+          "type": "object",
+          "description": "The named proxy endpoints. At most 5 distinct proxy endpoints are allowed excluding the required 'default-proxy'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ProxyEndpoint"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "rotation": {
+          "type": "string",
+          "description": "The proxy selection mode, fixed for each session. Enabled selects proxy endpoint randomly per hostname pattern; Disabled selects the lowest numeric priority.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "bypass": {
+          "type": "array",
+          "description": "The hostname patterns that bypass the proxy and goes through internet directly.",
+          "maxItems": 50,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "The read-only creation and modification metadata.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "proxyPool",
+        "systemData"
+      ]
+    },
+    "ProxyConfigReference": {
+      "type": "object",
+      "description": "A reference to a saved proxy configuration in the session's workspace.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The saved proxy configuration ID in GUID form. Takes precedence over name.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The saved proxy configuration name, resolved ignoring case when id is omitted.",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[a-zA-Z0-9-]{3,24}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "ProxyConfigReferenceCreateOrUpdate": {
+      "type": "object",
+      "description": "A reference to a saved proxy configuration in the session's workspace.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The saved proxy configuration ID in GUID form. Takes precedence over name.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The saved proxy configuration name, resolved ignoring case when id is omitted.",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[a-zA-Z0-9-]{3,24}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "ProxyConfigUpdate": {
+      "type": "object",
+      "description": "A saved browser proxy configuration scoped to a Playwright workspace.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The proxy configuration name.",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[a-zA-Z0-9-]{3,24}$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "The configuration description.",
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "proxyPool": {
+          "type": "object",
+          "description": "The named proxy endpoints. At most 5 distinct proxy endpoints are allowed excluding the required 'default-proxy'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ProxyEndpointUpdate"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "rotation": {
+          "type": "string",
+          "description": "The proxy selection mode, fixed for each session. Enabled selects proxy endpoint randomly per hostname pattern; Disabled selects the lowest numeric priority.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "bypass": {
+          "type": "array",
+          "description": "The hostname patterns that bypass the proxy and goes through internet directly.",
+          "maxItems": 50,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ProxyCredentials": {
+      "type": "object",
+      "description": "The proxy endpoint credentials.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The proxy authentication username.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "secretUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The secret URI of the proxy password in the playwright workspace's linked Azure Key Vault.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "username",
+        "secretUri"
+      ]
+    },
+    "ProxyCredentialsUpdate": {
+      "type": "object",
+      "description": "The proxy endpoint credentials.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The proxy authentication username.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "secretUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The secret URI of the proxy password in the playwright workspace's linked Azure Key Vault.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ProxyEndpoint": {
+      "type": "object",
+      "description": "A named endpoint in a browser proxy pool. Required 'default-proxy' named proxy endpoint without pattern and priority specified for requests that doesn't match any pattern in the given proxy endpoints.",
+      "properties": {
+        "server": {
+          "type": "string",
+          "format": "uri",
+          "description": "The proxy origin URL using http, https, or socks4. Embedded credentials and private, loopback, or link-local IP literals are not allowed.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "pattern": {
+          "type": "array",
+          "description": "The hostname patterns routed through this proxy endpoint. At most 40 distinct patterns are allowed.",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The routing priority. Lower values take precedence.",
+          "minimum": 1,
+          "maximum": 100,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "credentials": {
+          "$ref": "#/definitions/ProxyCredentials",
+          "description": "The proxy endpoint credentials.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "server"
+      ]
+    },
+    "ProxyEndpointUpdate": {
+      "type": "object",
+      "description": "A named endpoint in a browser proxy pool. Required 'default-proxy' named proxy endpoint without pattern and priority specified for requests that doesn't match any pattern in the given proxy endpoints.",
+      "properties": {
+        "server": {
+          "type": "string",
+          "format": "uri",
+          "description": "The proxy origin URL using http, https, or socks4. Embedded credentials and private, loopback, or link-local IP literals are not allowed.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "pattern": {
+          "type": "array",
+          "description": "The hostname patterns routed through this proxy endpoint. At most 40 distinct patterns are allowed.",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The routing priority. Lower values take precedence.",
+          "minimum": 1,
+          "maximum": 100,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "credentials": {
+          "$ref": "#/definitions/ProxyCredentialsUpdate",
+          "description": "The proxy endpoint credentials.",
+          "x-ms-mutability": [
             "update",
             "create"
           ]
@@ -2147,6 +2988,46 @@
         ]
       }
     },
+    "SystemData": {
+      "type": "object",
+      "description": "Read-only metadata identifying who created and last modified a resource, and when.",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The resource creation timestamp in UTC. Preserved on replacement and update.",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The Microsoft Entra caller's ID at creation. Preserved on replacement and update.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The resource's last modification timestamp in UTC, including its initial creation.",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The Microsoft Entra caller's ID for the last modification, including initial creation.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "createdAt",
+        "createdBy",
+        "lastModifiedAt",
+        "lastModifiedBy"
+      ]
+    },
     "TestRun": {
       "type": "object",
       "description": "Model of a test run used for tracking purposes.",
@@ -2349,12 +3230,12 @@
         },
         "linkedKeyVault": {
           "$ref": "#/definitions/LinkedKeyVaultProperties",
-          "description": "The Azure Key Vault linked to the workspace for browser proxy credentials.",
+          "description": "The Azure Key Vault used to retrieve browser proxy credentials.",
           "readOnly": true
         },
         "browserProxy": {
           "type": "string",
-          "description": "Whether browser proxy support is enabled for the workspace.",
+          "description": "The browser proxy enablement status for the workspace.",
           "default": "Enabled",
           "enum": [
             "Enabled",

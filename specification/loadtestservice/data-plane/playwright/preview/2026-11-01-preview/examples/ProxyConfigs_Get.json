@@ -1,0 +1,36 @@
+{
+  "title": "ProxyConfigs_Get",
+  "operationId": "ProxyConfigs_Get",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "workspaceId": "11111111-2222-3333-4444-555555555555",
+    "proxyConfigId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+        "name": "corporate-proxy",
+        "description": "Updated routing policy.",
+        "proxyPool": {
+          "default-proxy": {
+            "server": "https://proxy.example.com:8443"
+          },
+          "corp-route": {
+            "server": "http://corp-proxy.example.com:8080",
+            "pattern": ["*.contoso.com", "api.example.com"],
+            "priority": 20
+          }
+        },
+        "rotation": "Enabled",
+        "bypass": [],
+        "systemData": {
+          "createdAt": "2026-10-27T06:00:00Z",
+          "createdBy": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff",
+          "lastModifiedAt": "2026-10-27T07:00:00Z",
+          "lastModifiedBy": "cccccccc-dddd-eeee-ffff-000000000000"
+        }
+      }
+    }
+  }
+}

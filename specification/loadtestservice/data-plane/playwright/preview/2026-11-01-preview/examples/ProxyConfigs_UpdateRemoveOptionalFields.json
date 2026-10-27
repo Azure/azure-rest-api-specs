@@ -1,0 +1,39 @@
+{
+  "title": "ProxyConfigs_UpdateRemoveOptionalFields",
+  "operationId": "ProxyConfigs_Update",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "workspaceId": "11111111-2222-3333-4444-555555555555",
+    "proxyConfigId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "resource": {
+      "description": null,
+      "proxyPool": {
+        "default-proxy": {
+          "credentials": null
+        },
+        "corp-route": null
+      },
+      "bypass": null
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+        "name": "corporate-proxy",
+        "proxyPool": {
+          "default-proxy": {
+            "server": "https://proxy.example.com:8443"
+          }
+        },
+        "rotation": "Disabled",
+        "systemData": {
+          "createdAt": "2026-10-27T06:00:00Z",
+          "createdBy": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff",
+          "lastModifiedAt": "2026-10-27T07:00:00Z",
+          "lastModifiedBy": "cccccccc-dddd-eeee-ffff-000000000000"
+        }
+      }
+    }
+  }
+}
