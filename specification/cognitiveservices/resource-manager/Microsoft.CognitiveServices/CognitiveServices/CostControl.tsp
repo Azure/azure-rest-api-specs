@@ -73,7 +73,7 @@ model CostControlProperties {
    * Token amounts must be whole numbers no greater than 9223372036854775807.
    */
   @minValueExclusive(0)
-  amount: decimal128;
+  amount: float64;
 
   /** The calendar-aligned UTC interval at which consumption counters renew within the validity window. */
   timeGrain: CostControlTimeGrain;
@@ -111,7 +111,7 @@ model CostControlPatchProperties {
 
   /** Replaces the positive budget amount in United States dollars or whole tokens, according to category. Token amounts cannot exceed 9223372036854775807. */
   @minValueExclusive(0)
-  amount?: decimal128;
+  amount?: float64;
 
   /** Replaces the calendar-aligned UTC renewal interval. */
   timeGrain?: CostControlTimeGrain;
@@ -292,7 +292,7 @@ model CostControlNotification {
 
   /** The positive threshold. Percentages cannot exceed 100; absolute thresholds cannot exceed amount and must be whole numbers for Tokens budgets. */
   @minValueExclusive(0)
-  threshold: decimal128;
+  threshold: float64;
 
   /** Whether this notification is enabled. Disabled notifications remain configured but do not publish alerts. */
   enabled: boolean;
@@ -348,7 +348,7 @@ model CostControlAction {
 
   /** The positive threshold. Percentages cannot exceed 100; absolute thresholds cannot exceed amount and must be whole numbers for Tokens budgets. */
   @minValueExclusive(0)
-  threshold: decimal128;
+  threshold: float64;
 
   /** The threshold comparison. Only GreaterThanOrEqualTo is supported. */
   operator: "GreaterThanOrEqualTo";
