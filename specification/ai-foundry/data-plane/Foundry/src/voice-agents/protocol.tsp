@@ -220,11 +220,6 @@ model VoiceAgentSessionUpdateConfig {
   @doc("Instructions applied throughout the session.")
   instructions?: string;
 
-  @doc("The sampling temperature for compatible cascaded pipelines.")
-  @minValue(0)
-  @maxValue(2)
-  temperature?: float32;
-
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matches the service's integer-or-inf token limit."
   @doc("The maximum output-token count for one response.")
   max_output_tokens?: VoiceAgentMaxOutputTokens;
