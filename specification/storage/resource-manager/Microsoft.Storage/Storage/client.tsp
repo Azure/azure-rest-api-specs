@@ -1035,12 +1035,12 @@ namespace Azure.ResourceManager.Models {
 );
 @@clientName(
   BlobAccessPointRemoteAuthPropertiesUpdate,
-  "BlobAccessPointRemoteAuthPropertiesPatch",
+  "BlobAccessPointRemoteAuthenticationPropertiesPatch",
   "csharp"
 );
 @@clientName(
   BlobAccessPointAccessKeyAuthPropertiesUpdate,
-  "BlobAccessPointAccessKeyAuthPropertiesPatch",
+  "BlobAccessPointAccessKeyAuthenticationPropertiesPatch",
   "csharp"
 );
 @@clientName(
@@ -1157,12 +1157,125 @@ namespace Azure.ResourceManager.Models {
 // ManagementPolicy flattened property access
 @@clientName(ManagementPolicySchema.rules, "Rules", "csharp");
 
+// Expand authentication names only within the new Blob Access Point family.
+@@clientName(
+  BlobAccessPointRemoteAuthType,
+  "BlobAccessPointRemoteAuthenticationType",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointRemoteAuthProperties,
+  "BlobAccessPointRemoteAuthenticationProperties",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointAccessKeyAuthProperties,
+  "BlobAccessPointAccessKeyAuthenticationProperties",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointRemoteAuthProperties.authType,
+  "AuthenticationType",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointAccessKeyAuthProperties.authType,
+  "AuthenticationType",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointRemoteAuthPropertiesUpdate.authType,
+  "AuthenticationType",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointAccessKeyAuthPropertiesUpdate.authType,
+  "AuthenticationType",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointNetAppOntapSourceProperties.auth,
+  "Authentication",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointAzureNetAppFilesSourceProperties.auth,
+  "Authentication",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointDellOneFsSourceProperties.auth,
+  "Authentication",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointQumuloSourceProperties.auth,
+  "Authentication",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointCommvaultSourceProperties.auth,
+  "Authentication",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointNasuniSourceProperties.auth,
+  "Authentication",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointGenericS3SourceProperties.auth,
+  "Authentication",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointNetAppOntapSourcePropertiesUpdate.auth,
+  "Authentication",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointAzureNetAppFilesSourcePropertiesUpdate.auth,
+  "Authentication",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointDellOneFsSourcePropertiesUpdate.auth,
+  "Authentication",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointQumuloSourcePropertiesUpdate.auth,
+  "Authentication",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointCommvaultSourcePropertiesUpdate.auth,
+  "Authentication",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointNasuniSourcePropertiesUpdate.auth,
+  "Authentication",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointGenericS3SourcePropertiesUpdate.auth,
+  "Authentication",
+  "csharp"
+);
+
 // @@alternateType decorators for C# backward compat types
 @@alternateType(ResourceAccessRule.resourceId, armResourceIdentifier, "csharp");
 @@alternateType(VirtualNetworkRule.id, armResourceIdentifier, "csharp");
 @@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@alternateType(ResourceAccessRule.tenantId, uuid, "csharp");
 @@alternateType(ActiveDirectoryProperties.domainGuid, uuid, "csharp");
+@@alternateType(BlobAccessPointConnectionTestRequest.uniqueId, uuid, "csharp");
+@@alternateType(
+  BlobAccessPointConfigurationProperties.uniqueId,
+  uuid,
+  "csharp"
+);
 @@alternateType(EncryptionScopeKeyVaultProperties.keyUri, url, "csharp");
 @@alternateType(KeyVaultProperties.keyvaulturi, url, "csharp");
 @@alternateType(
