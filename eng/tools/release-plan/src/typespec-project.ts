@@ -314,7 +314,7 @@ export async function getCommitChangedFiles(params: {
 }
 
 /**
- * Resolve PR number associated with a commit SHA.
+ * Resolve the PR merged at this commit, not another PR that merely contains it.
  */
 export async function getAssociatedPrNumber(params: {
   octokit: OctokitLike;
@@ -333,7 +333,11 @@ export async function getAssociatedPrNumber(params: {
     commit_sha: commitSha,
   });
 
-  return response.data[0]?.number;
+  return response.data.find(
+    (pullRequest) =>
+      pullRequest.merged_at &&
+      pullRequest.merge_commit_sha?.toLowerCase() === commitSha.toLowerCase(),
+  )?.number;
 }
 
 /**
