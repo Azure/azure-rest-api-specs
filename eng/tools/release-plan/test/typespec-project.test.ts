@@ -1,15 +1,23 @@
-import type { TypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
+import {
+  generateTypeSpecMetadata,
+  type TypeSpecMetadata,
+} from "@azure-tools/specs-shared/typespec-metadata";
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-const { mockMetadataMap } = vi.hoisted(() => ({
+const { mockMetadataMap, mockLanguagesMap } = vi.hoisted(() => ({
   mockMetadataMap: new Map<string, { apiVersion: string; sdkType: "stable" | "preview" }>(),
+  mockLanguagesMap: new Map<string, TypeSpecMetadata["languages"]>(),
 }));
 
 vi.mock("@azure-tools/specs-shared/typespec-metadata", () => ({
   generateTypeSpecMetadata: vi.fn((projectDir: string) => {
+    const languages = mockLanguagesMap.get(projectDir);
+    if (languages) {
+      return Promise.resolve(createMetadata(languages));
+    }
     const mockData = mockMetadataMap.get(projectDir);
     if (!mockData) {
       return Promise.reject(new Error(`Metadata not mocked for ${projectDir}`));
@@ -44,18 +52,15 @@ vi.mock("@azure-tools/specs-shared/typespec-metadata", () => ({
 }));
 
 import {
-  compareApiVersionsDesc,
+  collectTypeSpecProjectPaths,
   createOctokit,
-  detectApiVersions,
   findTspConfigDir,
   getAssociatedPrNumber,
   getCommitChangedFiles,
   getPrChangedFiles,
   getPullRequestLabels,
   getTypeSpecProjectInfoFromCommit,
-  getTypeSpecProjectInfoFromPr,
   getTypeSpecProjectVersionFromMetadata,
-  parseApiVersion,
   resolveTypeSpecMetadata,
 } from "../src/typespec-project.ts";
 
@@ -78,55 +83,311 @@ let workspace: string;
 beforeEach(() => {
   workspace = mkdtempSync(join(tmpdir(), "release-plan-typespec-"));
   mockMetadataMap.clear();
+  mockLanguagesMap.clear();
+  vi.mocked(generateTypeSpecMetadata).mockClear();
 });
 
 afterEach(() => {
   rmSync(workspace, { recursive: true, force: true });
 });
 
-describe("version helpers", () => {
-  it("sorts API versions descending with GA preferred over preview on same date", () => {
-    const input = ["2025-06-01-preview", "2025-06-01", "2026-01-01-preview"];
-    const sorted = [...input].sort(compareApiVersionsDesc);
-    expect(sorted).toEqual(["2026-01-01-preview", "2025-06-01", "2025-06-01-preview"]);
+describe("TypeSpec path discovery", () => {
+  function writeConfig(
+    directory: string,
+    languages: TypeSpecMetadata["languages"] = {},
+    content = "",
+  ) {
+    const projectPath = join(workspace, directory);
+    mkdirSync(projectPath, { recursive: true });
+    writeFileSync(join(projectPath, "tspconfig.yaml"), content);
+    mockLanguagesMap.set(projectPath, languages);
+  }
+
+  const service = "specification/security/resource-manager/Microsoft.Security/Security";
+  const sdkLanguages = {
+    python: [
+      {
+        emitterName: "python",
+        packageName: "azure-mgmt-security",
+        apiVersion: "2026-01-01-preview",
+      },
+    ],
+  };
+
+  it("finds the SDK parent using emitted languages without service-dir", async () => {
+    writeConfig(`${service}/BatchPricingsAPI`);
+    writeConfig(service, sdkLanguages);
+
+    expect(await findTspConfigDir(`${service}/BatchPricingsAPI/main.tsp`, workspace)).toBe(service);
   });
 
-  it("parses valid API version", () => {
-    expect(parseApiVersion("2025-06-01-preview")).toEqual({
-      year: 2025,
-      month: 6,
-      day: 1,
+  it("does not treat service-dir alone as SDK configuration", async () => {
+    writeConfig(`${service}/BatchPricingsAPI`, {}, "parameters:\n  service-dir: sdk/security\n");
+    writeConfig(service, sdkLanguages);
+
+    expect(await findTspConfigDir(`${service}/BatchPricingsAPI/main.tsp`, workspace)).toBe(service);
+  });
+
+  it.each(["java", "javascript", "typescript", "csharp", "python", "go"])(
+    "accepts %s metadata without requiring a package or API version",
+    async (language) => {
+      writeConfig(service, sdkLanguages);
+      writeConfig(`${service}/BatchPricingsAPI`, {
+        [language]: [{ emitterName: language }],
+      });
+
+      expect(await findTspConfigDir(`${service}/BatchPricingsAPI/models/main.tsp`, workspace)).toBe(
+        `${service}/BatchPricingsAPI`,
+      );
+      expect(generateTypeSpecMetadata).toHaveBeenCalledTimes(1);
+    },
+  );
+
+  it("skips unsupported languages and non-SDK emitters", async () => {
+    writeConfig(service, sdkLanguages);
+    writeConfig(`${service}/BatchPricingsAPI`, {
+      unknown: [
+        { emitterName: "@azure-tools/typespec-autorest" },
+        { emitterName: "@azure-tools/typespec-metadata" },
+      ],
+      rust: [{ emitterName: "@azure-tools/typespec-rust" }],
+      go: [],
+    });
+
+    expect(await findTspConfigDir(`${service}/BatchPricingsAPI/main.tsp`, workspace)).toBe(service);
+  });
+
+  it("skips intervening directories and empty language arrays", async () => {
+    writeConfig(`${service}/BatchPricingsAPI/nested`);
+    writeConfig(`${service}/BatchPricingsAPI`, { python: [] });
+    writeConfig(service, sdkLanguages);
+
+    expect(
+      await findTspConfigDir(`${service}/BatchPricingsAPI/nested/src/main.tsp`, workspace),
+    ).toBe(service);
+  });
+
+  it("falls back to the initial config for private preview", async () => {
+    writeConfig(`${service}/BatchPricingsAPI`);
+    writeConfig(service);
+    writeConfig("specification", sdkLanguages);
+    writeConfig(".", sdkLanguages);
+
+    expect(await findTspConfigDir(`${service}/BatchPricingsAPI/main.tsp`, workspace)).toBe(
+      `${service}/BatchPricingsAPI`,
+    );
+    expect(generateTypeSpecMetadata).not.toHaveBeenCalledWith(join(workspace, "specification"));
+    expect(generateTypeSpecMetadata).not.toHaveBeenCalledWith(workspace);
+  });
+
+  it("checks the service folder directly below specification", async () => {
+    writeConfig("specification/security", sdkLanguages);
+    writeConfig(service);
+
+    expect(await findTspConfigDir(`${service}/main.tsp`, workspace)).toBe("specification/security");
+  });
+
+  it("returns null when no config exists below specification", async () => {
+    writeConfig("specification", sdkLanguages);
+    writeConfig(".", sdkLanguages);
+
+    expect(await findTspConfigDir(`${service}/main.tsp`, workspace)).toBeNull();
+    expect(await findTspConfigDir("specification-other/main.tsp", workspace)).toBeNull();
+    expect(generateTypeSpecMetadata).not.toHaveBeenCalled();
+  });
+
+  it("propagates metadata failures instead of silently selecting another project", async () => {
+    writeConfig(service);
+    vi.mocked(generateTypeSpecMetadata).mockRejectedValueOnce(new Error("Compilation failed"));
+
+    await expect(findTspConfigDir(`${service}/main.tsp`, workspace)).rejects.toThrow(
+      "Compilation failed",
+    );
+  });
+
+  it.each(["main.tsp", "tspconfig.yaml"])(
+    "deduplicates multiple changed subprojects sharing an SDK parent (%s)",
+    async (filename) => {
+      writeConfig(service, sdkLanguages);
+      writeConfig(`${service}/BatchPricingsAPI`);
+      writeConfig(`${service}/PricingsAPI`);
+
+      expect(
+        await collectTypeSpecProjectPaths(
+          [
+            { filename: `${service}/BatchPricingsAPI/${filename}`, status: "modified" },
+            { filename: `${service}/PricingsAPI/${filename}`, status: "modified" },
+          ],
+          workspace,
+        ),
+      ).toEqual([service]);
+      expect(generateTypeSpecMetadata).toHaveBeenCalledTimes(3);
+    },
+  );
+
+  it("does not let a changed config hide another changed SDK project", async () => {
+    writeConfig(service, sdkLanguages);
+    writeConfig("specification/other", sdkLanguages);
+
+    expect(
+      await collectTypeSpecProjectPaths(
+        [
+          { filename: `${service}/tspconfig.yaml`, status: "modified" },
+          { filename: "specification/other/main.tsp", status: "modified" },
+        ],
+        workspace,
+      ),
+    ).toEqual([service, "specification/other"]);
+    expect(
+      await collectTypeSpecProjectPaths(
+        [
+          { filename: `${service}/main.tsp`, status: "modified" },
+          { filename: "specification/other/main.tsp", status: "modified" },
+        ],
+        workspace,
+      ),
+    ).toEqual([service, "specification/other"]);
+  });
+
+  it("resolves removed subproject configs through the surviving SDK parent", async () => {
+    writeConfig(service, sdkLanguages);
+
+    expect(
+      await collectTypeSpecProjectPaths(
+        [{ filename: `${service}/BatchPricingsAPI/tspconfig.yaml`, status: "removed" }],
+        workspace,
+      ),
+    ).toEqual([service]);
+  });
+
+  it("uses parent metadata when a PR modifies multiple subservices", async () => {
+    writeConfig(service, sdkLanguages);
+    writeConfig(`${service}/BatchPricingsAPI`);
+    writeConfig(`${service}/PricingsAPI`);
+
+    const result = await getTypeSpecProjectInfoFromCommit({
+      commitSha: "abc123",
+      owner: "Azure",
+      repo: "azure-rest-api-specs",
+      workspace,
+      octokit: {
+        rest: {
+          pulls: {
+            get: vi.fn().mockResolvedValue({ data: { labels: [] } }),
+            listFiles: vi.fn().mockResolvedValue({
+              data: [
+                { filename: `${service}/BatchPricingsAPI/main.tsp`, status: "modified" },
+                { filename: `${service}/PricingsAPI/main.tsp`, status: "modified" },
+              ],
+            }),
+          },
+          repos: {
+            getCommit: vi.fn(),
+            listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
+              data: [{ number: 42 }],
+            }),
+          },
+        },
+      },
+    });
+
+    expect(result.projectInfo).toEqual({
+      tspProjectPath: service,
+      apiVersion: "2026-01-01-preview",
       isPreview: true,
     });
+    expect(generateTypeSpecMetadata).toHaveBeenCalledTimes(3);
   });
 
-  it("returns zeros for invalid API version", () => {
-    expect(parseApiVersion("foo")).toEqual({ year: 0, month: 0, day: 0, isPreview: false });
-  });
-});
+  it.each(["2026-01-01-preview", "all", "multiple-versions", undefined])(
+    "resolves private-preview version %s from non-language metadata",
+    async (apiVersion) => {
+      writeConfig(service, {
+        unknown: [{ emitterName: "@azure-tools/typespec-autorest", apiVersion }],
+      });
+      const result = await getTypeSpecProjectInfoFromCommit({
+        commitSha: "abc123",
+        owner: "Azure",
+        repo: "azure-rest-api-specs-pr",
+        workspace,
+        octokit: {
+          rest: {
+            pulls: {
+              get: vi.fn().mockResolvedValue({ data: { labels: [] } }),
+              listFiles: vi.fn().mockResolvedValue({
+                data: [{ filename: `${service}/tspconfig.yaml`, status: "modified" }],
+              }),
+            },
+            repos: {
+              getCommit: vi.fn(),
+              listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
+                data: [{ number: 42 }],
+              }),
+            },
+          },
+        },
+      });
 
-describe("TypeSpec path discovery", () => {
-  it("finds nearest tspconfig.yaml directory", () => {
-    const result = findTspConfigDir(
-      "specification/service/resource-manager/Microsoft.Sample/main.tsp",
-      workspace,
-    );
-    expect(result === null || result.startsWith("specification/")).toBeTruthy();
-  });
+      expect(result.prNumber).toBe(42);
+      if (apiVersion) {
+        expect(result.projectInfo).toEqual({
+          tspProjectPath: service,
+          apiVersion,
+          isPreview: apiVersion.endsWith("-preview"),
+        });
+        expect(result.projectError).toBeUndefined();
+      } else {
+        expect(result.projectInfo).toBeNull();
+        expect(result.projectError?.tspProjectPath).toBe(service);
+        expect(result.projectError?.message).toContain("No API version found");
+      }
+      expect(generateTypeSpecMetadata).toHaveBeenCalledTimes(1);
+    },
+  );
 
-  it("detects API versions from changed files", () => {
-    const result = detectApiVersions(
-      [
-        "specification/foo/preview/2025-06-01-preview/main.tsp",
-        "specification/foo/stable/2025-05-01/foo.json",
-      ],
-      "specification/foo",
-      workspace,
-    );
+  it.each([true, false])(
+    "carries ambiguous paths and reuses changed files (associated PR: %s)",
+    async (hasPr) => {
+      const paths = [service, "specification/other"];
+      for (const path of paths) {
+        writeConfig(path, sdkLanguages);
+      }
+      const files = [
+        { filename: `${service}/tspconfig.yaml`, status: "modified" },
+        { filename: "specification/other/main.tsp", status: "modified" },
+      ];
+      const listFiles = vi.fn().mockResolvedValue({ data: files });
+      const getCommit = vi.fn().mockResolvedValue({ data: { files } });
+      const get = vi.fn().mockResolvedValue({ data: { labels: [{ name: "new-api-version" }] } });
 
-    expect(result.apiVersions[0]).toBe("2025-06-01-preview");
-    expect(result.isPreview).toBe(true);
-  });
+      const result = await getTypeSpecProjectInfoFromCommit({
+        commitSha: "abc123",
+        owner: "Azure",
+        repo: "azure-rest-api-specs",
+        workspace,
+        octokit: {
+          rest: {
+            pulls: { get, listFiles },
+            repos: {
+              getCommit,
+              listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
+                data: hasPr ? [{ number: 42 }] : [],
+              }),
+            },
+          },
+        },
+      });
+
+      expect(result.projectInfo).toBeNull();
+      expect(result.multipleProjectPaths).toEqual(paths);
+      expect(result.changedFiles).toEqual(files);
+      expect(result.prNumber).toBe(hasPr ? 42 : undefined);
+      expect(listFiles).toHaveBeenCalledTimes(hasPr ? 1 : 0);
+      expect(getCommit).toHaveBeenCalledTimes(hasPr ? 0 : 1);
+      expect(get).toHaveBeenCalledTimes(hasPr ? 1 : 0);
+      expect(generateTypeSpecMetadata).toHaveBeenCalledTimes(2);
+    },
+  );
 });
 
 describe("GitHub PR file listing", () => {
@@ -176,8 +437,8 @@ describe("GitHub PR file listing", () => {
     const get = vi.fn().mockResolvedValueOnce({ data: { labels: [{ name: "new-api-version" }] } });
     const listFiles = vi.fn().mockResolvedValueOnce({ data: [] });
 
-    const result = await getTypeSpecProjectInfoFromPr({
-      prNumber: 42,
+    const result = await getTypeSpecProjectInfoFromCommit({
+      commitSha: "abc123",
       owner: "Azure",
       repo: "azure-rest-api-specs",
       workspace,
@@ -187,11 +448,17 @@ describe("GitHub PR file listing", () => {
             get,
             listFiles,
           },
+          repos: {
+            getCommit: vi.fn(),
+            listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
+              data: [{ number: 42 }],
+            }),
+          },
         },
       },
     });
 
-    expect(result).toBeNull();
+    expect(result.projectInfo).toBeNull();
   });
 });
 
@@ -199,6 +466,7 @@ describe("TypeSpec project detection edge cases", () => {
   it("still detects project when PR lacks new-api-version label", async () => {
     const projectPath = join(workspace, "specification/foo");
     mkdirSync(projectPath, { recursive: true });
+    writeFileSync(join(projectPath, "tspconfig.yaml"), "");
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
 
     // Setup mock metadata for the project
@@ -217,8 +485,8 @@ describe("TypeSpec project detection edge cases", () => {
       })
       .mockResolvedValueOnce({ data: [] });
 
-    const result = await getTypeSpecProjectInfoFromPr({
-      prNumber: 42,
+    const result = await getTypeSpecProjectInfoFromCommit({
+      commitSha: "abc123",
       owner: "Azure",
       repo: "azure-rest-api-specs",
       workspace,
@@ -228,18 +496,30 @@ describe("TypeSpec project detection edge cases", () => {
             get,
             listFiles,
           },
+          repos: {
+            getCommit: vi.fn(),
+            listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
+              data: [{ number: 42 }],
+            }),
+          },
         },
       },
     });
 
-    expect(result).not.toBeNull();
-    expect(result?.tspProjectPath).toBe("specification/foo");
-    expect(result?.apiVersion).toBe("2025-08-01");
-    expect(result?.isPreview).toBe(false);
+    expect(result.projectInfo).not.toBeNull();
+    expect(result.projectInfo?.tspProjectPath).toBe("specification/foo");
+    expect(result.projectInfo?.apiVersion).toBe("2025-08-01");
+    expect(result.projectInfo?.isPreview).toBe(false);
     expect(listFiles).toHaveBeenCalled();
   });
 
   it("returns null when PR has multiple tsp projects", async () => {
+    for (const project of ["proj1", "proj2"]) {
+      const projectPath = join(workspace, "specification", project);
+      mkdirSync(projectPath, { recursive: true });
+      writeFileSync(join(projectPath, "tspconfig.yaml"), "");
+      setupMockMetadata(projectPath, "2026-01-01", "stable");
+    }
     const get = vi.fn().mockResolvedValueOnce({ data: { labels: [{ name: "new-api-version" }] } });
     const listFiles = vi
       .fn()
@@ -251,8 +531,8 @@ describe("TypeSpec project detection edge cases", () => {
       })
       .mockResolvedValueOnce({ data: [] });
 
-    const result = await getTypeSpecProjectInfoFromPr({
-      prNumber: 42,
+    const result = await getTypeSpecProjectInfoFromCommit({
+      commitSha: "abc123",
       owner: "Azure",
       repo: "azure-rest-api-specs",
       workspace,
@@ -262,11 +542,17 @@ describe("TypeSpec project detection edge cases", () => {
             get,
             listFiles,
           },
+          repos: {
+            getCommit: vi.fn(),
+            listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
+              data: [{ number: 42 }],
+            }),
+          },
         },
       },
     });
 
-    expect(result).toBeNull();
+    expect(result.projectInfo).toBeNull();
   });
 
   it("handles paginated file responses across multiple pages", async () => {
@@ -300,37 +586,6 @@ describe("TypeSpec project detection edge cases", () => {
 
     expect(listFiles).toHaveBeenCalledTimes(2);
     expect(files.length).toBe(101);
-  });
-
-  it("detects API versions with various format patterns", () => {
-    const result = detectApiVersions(
-      [
-        "specification/foo/stable/2025-05-01/main.tsp",
-        "specification/foo/preview/2025-06-01-preview/models.tsp",
-        "specification/foo/2026-01-01/readme.md",
-      ],
-      "specification/foo",
-      workspace,
-    );
-
-    expect(result.apiVersions).toContain("2025-05-01");
-    expect(result.apiVersions).toContain("2025-06-01-preview");
-    expect(result.apiVersions).toContain("2026-01-01");
-    // Release type is decided by the final (latest) version. The latest here is
-    // the GA version 2026-01-01, so isPreview must be false even though a
-    // preview version is present in the change set.
-    expect(result.apiVersions[0]).toBe("2026-01-01");
-    expect(result.isPreview).toBe(false);
-  });
-
-  it("returns null for invalid API version format", () => {
-    const result = parseApiVersion("not-a-date");
-    expect(result).toEqual({ year: 0, month: 0, day: 0, isPreview: false });
-  });
-
-  it("parses API version with preview suffix correctly", () => {
-    const result = parseApiVersion("2025-12-25-preview");
-    expect(result).toEqual({ year: 2025, month: 12, day: 25, isPreview: true });
   });
 
   it("resolves associated PR from commit SHA", async () => {
@@ -395,6 +650,7 @@ describe("TypeSpec project detection edge cases", () => {
   it("uses associated PR path when commit maps to a PR", async () => {
     const projectPath = join(workspace, "specification/foo");
     mkdirSync(projectPath, { recursive: true });
+    writeFileSync(join(projectPath, "tspconfig.yaml"), "");
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
 
     // Setup mock metadata for the project
@@ -447,6 +703,7 @@ describe("TypeSpec project detection edge cases", () => {
   it("inspects TypeSpec commit changes when no PR is associated", async () => {
     const projectPath = join(workspace, "specification/bar");
     mkdirSync(projectPath, { recursive: true });
+    writeFileSync(join(projectPath, "tspconfig.yaml"), "");
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
 
     // Setup mock metadata for the project
@@ -561,6 +818,7 @@ describe("TypeSpec project detection edge cases", () => {
   it("ignores renamed files when detecting the API version", async () => {
     const projectPath = join(workspace, "specification/bar");
     mkdirSync(projectPath, { recursive: true });
+    writeFileSync(join(projectPath, "tspconfig.yaml"), "");
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
 
     // Setup mock metadata for the project
@@ -629,6 +887,43 @@ describe("pull request label helpers", () => {
 });
 
 describe("TypeSpec metadata resolution", () => {
+  it("prefers existing SDK version resolution over the private-preview fallback", () => {
+    const metadata = createMetadata({
+      unknown: [{ emitterName: "@azure-tools/typespec-autorest", apiVersion: "all" }],
+      python: [
+        {
+          emitterName: "python",
+          apiVersion: "2026-01-01-preview",
+          packageName: "azure-mgmt-sample",
+        },
+      ],
+    });
+
+    expect(resolveTypeSpecMetadata(metadata, true)).toEqual({
+      apiVersion: "2026-01-01-preview",
+    });
+  });
+
+  it("does not allow non-language metadata without a package for public releases", () => {
+    const metadata = createMetadata({
+      unknown: [{ emitterName: "@azure-tools/typespec-autorest", apiVersion: "2026-01-01" }],
+    });
+
+    expect(() => resolveTypeSpecMetadata(metadata)).toThrow(
+      "No valid language configurations found",
+    );
+  });
+
+  it.each<TypeSpecMetadata["languages"]>([
+    {},
+    { unknown: [{ emitterName: "@azure-tools/typespec-autorest" }] },
+    { python: [{ emitterName: "python", packageName: "azure-mgmt-sample", apiVersion: "" }] },
+  ])("rejects a private preview with no emitter API version", (languages) => {
+    expect(() => resolveTypeSpecMetadata(createMetadata(languages), true)).toThrow(
+      "No API version found",
+    );
+  });
+
   it("parses valid TypeSpec metadata with multiple languages", () => {
     const metadata = createMetadata({
       csharp: [

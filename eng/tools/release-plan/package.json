@@ -22,7 +22,8 @@
     "format:check": "oxfmt . --check",
     "lint": "oxlint .",
     "test": "vitest",
-    "test:ci": "vitest run --coverage --reporter=verbose"
+    "test:integration": "vitest run --config vitest.integration.config.ts --reporter=verbose",
+    "test:ci": "vitest run --coverage --reporter=verbose && pnpm run test:integration"
   },
   "engines": {
     "node": ">=24.14.1"

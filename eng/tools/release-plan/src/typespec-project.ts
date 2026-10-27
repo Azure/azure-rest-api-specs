@@ -4,7 +4,7 @@ import {
 } from "@azure-tools/specs-shared/typespec-metadata";
 import { Octokit } from "@octokit/rest";
 import { execSync } from "node:child_process";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { join, posix } from "node:path";
 import type {
   CommitProjectInfoResult,
@@ -12,6 +12,20 @@ import type {
   PullRequestChangedFile,
   TypeSpecProjectInfo,
 } from "./types.ts";
+
+type TypeSpecMetadataCache = Map<string, Promise<TypeSpecMetadata>>;
+
+function getCachedTypeSpecMetadata(
+  projectPath: string,
+  cache: TypeSpecMetadataCache,
+): Promise<TypeSpecMetadata> {
+  let metadata = cache.get(projectPath);
+  if (!metadata) {
+    metadata = generateTypeSpecMetadata(projectPath);
+    cache.set(projectPath, metadata);
+  }
+  return metadata;
+}
 
 /** Label indicating that a spec PR introduces a new API version. */
 export const NEW_API_VERSION_LABEL = "new-api-version";
@@ -25,60 +39,49 @@ export const FOLDER_MIGRATION_LABEL = "FolderMigrationV2";
 /** Label indicating that release plan automation should not process a spec PR. */
 export const SKIP_RELEASE_PLAN_AUTOMATION_LABEL = "Skip-ReleasePlan-Automation";
 
-/**
- * Identifies one TypeSpec project path and selected API version from a pull request.
- * Returns null when no specification files were modified, or when zero/multiple projects found.
- * Uses TypeSpec metadata emitter to determine API version and SDK type.
- * @param params Object containing PR details, owner, repo, workspace, and Octokit instance
- * @param params.prNumber Pull request number
- * @param params.owner Repository owner
- * @param params.repo Repository name
- * @param params.workspace Absolute path to workspace root
- * @param params.octokit Octokit instance for GitHub API calls
- * @returns TypeSpec project info with path and API version, or null if no spec changes, no projects found, multiple projects found, or API version detection fails
- */
-export async function getTypeSpecProjectInfoFromPr(params: {
-  prNumber: number;
-  owner: string;
-  repo: string;
-  workspace: string;
-  octokit: OctokitLike;
-}): Promise<TypeSpecProjectInfo | null> {
-  const { prNumber, owner, repo, workspace, octokit } = params;
-
-  const allFiles = await getPrChangedFiles({
-    octokit,
-    owner,
-    repo,
-    prNumber,
-  });
-
+async function getTypeSpecProjectInfoFromFiles(
+  allFiles: PullRequestChangedFile[],
+  workspace: string,
+  isPrivatePreview = false,
+): Promise<Pick<CommitProjectInfoResult, "projectInfo" | "multipleProjectPaths" | "projectError">> {
   const specFiles = allFiles.filter((f) => f.filename.startsWith("specification/"));
   if (specFiles.length === 0) {
-    return null;
+    return { projectInfo: null };
   }
 
-  const tspProjectPaths = collectTypeSpecProjectPaths(specFiles, workspace);
+  const metadataCache: TypeSpecMetadataCache = new Map();
+  const tspProjectPaths = await collectTypeSpecProjectPaths(specFiles, workspace, metadataCache);
 
   if (tspProjectPaths.length === 0) {
     console.log("Unable to locate TypeSpec project (tspconfig.yaml) for modified files.");
-    return null;
+    return { projectInfo: null };
   }
   if (tspProjectPaths.length > 1) {
     console.log(
-      `Multiple TypeSpec projects found in PR: ${tspProjectPaths.join(", ")}. Create release plan manually using aka.ms/azsdk/releaseplan-dashboard.`,
+      `Multiple TypeSpec projects found: ${tspProjectPaths.join(", ")}. Create release plan manually using aka.ms/azsdk/releaseplan-dashboard.`,
     );
-    return null;
+    return { projectInfo: null, multipleProjectPaths: tspProjectPaths };
   }
 
   const tspProjectRelPath = tspProjectPaths[0];
   const tspProjectAbsPath = join(workspace, tspProjectRelPath);
 
   try {
-    return await getTypeSpecProjectVersionFromMetadata(tspProjectAbsPath, tspProjectRelPath);
-  } catch {
+    return {
+      projectInfo: await getTypeSpecProjectVersionFromMetadata(
+        tspProjectAbsPath,
+        tspProjectRelPath,
+        metadataCache,
+        isPrivatePreview,
+      ),
+    };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
     console.error(`Failed to determine API version for TypeSpec project at ${tspProjectRelPath}`);
-    return null;
+    return {
+      projectInfo: null,
+      projectError: { tspProjectPath: tspProjectRelPath, message },
+    };
   }
 }
 
@@ -121,6 +124,7 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
       );
       return {
         projectInfo: null,
+        changedFiles: [],
         prNumber: associatedPrNumber,
         hasNewApiVersionLabel: false,
         skipReleasePlanAutomation: true,
@@ -129,15 +133,19 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
 
     const hasNewApiVersionLabel = labels.includes(NEW_API_VERSION_LABEL);
 
-    const projectInfo = await getTypeSpecProjectInfoFromPr({
+    const changedFiles = await getPrChangedFiles({
       prNumber: associatedPrNumber,
       owner,
       repo,
-      workspace,
       octokit,
     });
     return {
-      projectInfo,
+      ...(await getTypeSpecProjectInfoFromFiles(
+        changedFiles,
+        workspace,
+        repo === "azure-rest-api-specs-pr",
+      )),
+      changedFiles,
       prNumber: associatedPrNumber,
       hasNewApiVersionLabel,
     };
@@ -150,40 +158,15 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
     commitSha,
   });
 
-  const specFiles = allFiles.filter((f) => f.filename.startsWith("specification/"));
-  if (specFiles.length === 0) {
-    return { projectInfo: null, hasNewApiVersionLabel: false };
-  }
-
-  const tspProjectPaths = collectTypeSpecProjectPaths(specFiles, workspace);
-  if (tspProjectPaths.length === 0) {
-    console.log("Unable to locate TypeSpec project (tspconfig.yaml) for modified files.");
-    return { projectInfo: null, hasNewApiVersionLabel: false };
-  }
-
-  if (tspProjectPaths.length > 1) {
-    console.log(
-      `Multiple TypeSpec projects found in commit: ${tspProjectPaths.join(", ")}. Create release plan manually using aka.ms/azsdk/releaseplan-dashboard.`,
-    );
-    return { projectInfo: null, hasNewApiVersionLabel: false };
-  }
-
-  const tspProjectRelPath = tspProjectPaths[0];
-  const tspProjectAbsPath = join(workspace, tspProjectRelPath);
-
-  try {
-    const projectInfo = await getTypeSpecProjectVersionFromMetadata(
-      tspProjectAbsPath,
-      tspProjectRelPath,
-    );
-    return {
-      projectInfo,
-      hasNewApiVersionLabel: false,
-    };
-  } catch {
-    console.error(`Failed to determine API version for TypeSpec project at ${tspProjectRelPath}`);
-    return { projectInfo: null, hasNewApiVersionLabel: false };
-  }
+  return {
+    ...(await getTypeSpecProjectInfoFromFiles(
+      allFiles,
+      workspace,
+      repo === "azure-rest-api-specs-pr",
+    )),
+    changedFiles: allFiles,
+    hasNewApiVersionLabel: false,
+  };
 }
 
 /**
@@ -209,31 +192,27 @@ export async function getPullRequestLabels(params: {
 
 /**
  * Collects TypeSpec project paths from changed specification files.
- * Prioritizes files with tspconfig.yaml changes, falls back to directory traversal if none found.
+ * Resolves every changed directory so config changes cannot hide other changed projects.
  * @param specFiles Array of changed specification files
  * @param workspace Absolute path to workspace root
  * @returns Array of unique TypeSpec project paths
  */
-export function collectTypeSpecProjectPaths(
+export async function collectTypeSpecProjectPaths(
   specFiles: PullRequestChangedFile[],
   workspace: string,
-): string[] {
+  metadataCache: TypeSpecMetadataCache = new Map(),
+): Promise<string[]> {
   const projectPaths = new Set<string>();
 
-  const changedTspConfigs = specFiles.filter(
-    (f) => f.filename.endsWith("/tspconfig.yaml") && f.status !== "removed",
-  );
-
-  if (changedTspConfigs.length > 0) {
-    for (const file of changedTspConfigs) {
-      projectPaths.add(posix.dirname(file.filename));
-    }
-  } else {
-    for (const file of specFiles) {
-      const tspProject = findTspConfigDir(file.filename, workspace);
-      if (tspProject) {
-        projectPaths.add(tspProject);
-      }
+  const directories = new Set(specFiles.map((file) => posix.dirname(file.filename)));
+  for (const directory of directories) {
+    const tspProject = await findTspConfigDir(
+      posix.join(directory, "tspconfig.yaml"),
+      workspace,
+      metadataCache,
+    );
+    if (tspProject) {
+      projectPaths.add(tspProject);
     }
   }
 
@@ -337,20 +316,33 @@ export async function getAssociatedPrNumber(params: {
 }
 
 /**
- * Walk up from a file path to locate nearest TypeSpec project root with tspconfig.yaml.
- * Starting from the directory of the given file, searches parent directories until
- * a tspconfig.yaml is found or the specification root is reached.
+ * Finds the nearest tspconfig.yaml with Java, JavaScript, .NET, Python, or Go metadata.
+ * Searches up through the service folder directly below specification, falling back
+ * to the first tspconfig.yaml when no SDK project is configured (e.g. private preview).
  * @param relativeFilePath Relative path to a file within specification directory
  * @param workspace Absolute path to workspace root
  * @returns Relative path to TypeSpec project directory, or null if not found
  */
-export function findTspConfigDir(relativeFilePath: string, workspace: string): string | null {
+export async function findTspConfigDir(
+  relativeFilePath: string,
+  workspace: string,
+  metadataCache: TypeSpecMetadataCache = new Map(),
+): Promise<string | null> {
   let dir = posix.dirname(relativeFilePath);
+  let firstConfigDir: string | null = null;
 
-  while (dir && dir !== "." && dir.startsWith("specification")) {
+  while (dir.startsWith("specification/")) {
     const tspConfigAbsolute = join(workspace, dir, "tspconfig.yaml");
     if (existsSync(tspConfigAbsolute)) {
-      return dir;
+      firstConfigDir ??= dir;
+      const metadata = await getCachedTypeSpecMetadata(join(workspace, dir), metadataCache);
+      if (
+        ["java", "javascript", "typescript", "csharp", "python", "go"].some(
+          (language) => (metadata.languages[language]?.length ?? 0) > 0,
+        )
+      ) {
+        return dir;
+      }
     }
 
     const parent = posix.dirname(dir);
@@ -360,13 +352,17 @@ export function findTspConfigDir(relativeFilePath: string, workspace: string): s
     dir = parent;
   }
 
-  return null;
+  return firstConfigDir;
 }
 
 /**
- * Extracts the API version from TypeSpec metadata.
+ * Extracts the API version from TypeSpec metadata. Private previews can fall back
+ * to any emitter's version without requiring SDK package metadata.
  */
-export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
+export function resolveTypeSpecMetadata(
+  metadata: TypeSpecMetadata,
+  isPrivatePreview = false,
+): {
   apiVersion: string;
 } {
   const apiVersions = new Set<string>();
@@ -394,6 +390,19 @@ export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
     }
   }
 
+  if (isPrivatePreview && apiVersions.size === 0) {
+    for (const configs of Object.values(metadata.languages)) {
+      for (const config of configs) {
+        if (config.apiVersion) {
+          return { apiVersion: config.apiVersion };
+        }
+      }
+    }
+    throw new Error(
+      "No API version found in TypeSpec metadata. Configure api-version in tspconfig.yaml emitter options.",
+    );
+  }
+
   if (apiVersions.size === 0 && !hasPackage) {
     throw new Error("No valid language configurations found in TypeSpec metadata");
   }
@@ -411,10 +420,12 @@ export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
 export async function getTypeSpecProjectVersionFromMetadata(
   tspProjectAbsPath: string,
   tspProjectRelPath: string,
+  metadataCache: TypeSpecMetadataCache = new Map(),
+  isPrivatePreview = false,
 ): Promise<TypeSpecProjectInfo> {
   try {
-    const metadata = await generateTypeSpecMetadata(tspProjectAbsPath);
-    const { apiVersion } = resolveTypeSpecMetadata(metadata);
+    const metadata = await getCachedTypeSpecMetadata(tspProjectAbsPath, metadataCache);
+    const { apiVersion } = resolveTypeSpecMetadata(metadata, isPrivatePreview);
     const isPreview = apiVersion.endsWith("-preview");
 
     console.log(
@@ -433,122 +444,6 @@ export async function getTypeSpecProjectVersionFromMetadata(
     );
     throw error;
   }
-}
-
-/**
- * Detect API versions from changed file paths or from TypeSpec project content.
- * Searches in order: changed file paths, project directory tree, main.tsp content.
- * @param changedFiles Array of changed file paths
- * @param tspProjectPath Relative path to TypeSpec project
- * @param workspace Absolute path to workspace root
- * @returns Object containing sorted API versions (latest first) and a preview flag derived from the final (latest) API version
- */
-export function detectApiVersions(
-  changedFiles: string[],
-  tspProjectPath: string,
-  workspace: string,
-): { apiVersions: string[]; isPreview: boolean } {
-  const apiVersionPattern = /(\d{4}-\d{2}-\d{2}(?:-preview)?)/g;
-  const versions = new Set<string>();
-
-  for (const file of changedFiles) {
-    const matches = file.match(apiVersionPattern);
-    if (matches) {
-      for (const version of matches) {
-        versions.add(version);
-      }
-    }
-  }
-
-  if (versions.size === 0) {
-    for (const version of collectApiVersionsFromMainTsp(tspProjectPath, workspace)) {
-      versions.add(version);
-    }
-  }
-
-  const apiVersions = [...versions].sort(compareApiVersionsDesc);
-
-  // The release type (Public Preview vs GA) is decided solely by the final
-  // (latest) API version detected, not by whether any version in the change
-  // set happens to be a preview. apiVersions[0] is the latest version because
-  // the list is sorted in descending order.
-  const isPreview = apiVersions.length > 0 && apiVersions[0].endsWith("-preview");
-
-  return { apiVersions, isPreview };
-}
-
-/**
- * Collects API versions from main.tsp file content.
- * Searches the TypeSpec project's main.tsp file for version patterns.
- * @param tspProjectPath Relative path to TypeSpec project
- * @param workspace Absolute path to workspace root
- * @returns Array of API versions found in main.tsp content
- */
-function collectApiVersionsFromMainTsp(tspProjectPath: string, workspace: string): string[] {
-  const mainFile = join(workspace, tspProjectPath, "main.tsp");
-  if (!existsSync(mainFile)) {
-    return [];
-  }
-
-  const content = readFileSync(mainFile, "utf8");
-  const matches = content.match(/(\d{4}-\d{2}-\d{2}(?:-preview)?)/g);
-  if (!matches) {
-    return [];
-  }
-
-  return [...new Set(matches)];
-}
-
-/**
- * Compare API versions in descending order (latest first).
- * Sorts by year, month, day, then prioritizes GA versions over preview for same date.
- * @param a First API version string (e.g., "2025-06-01" or "2025-06-01-preview")
- * @param b Second API version string
- * @returns Negative if a > b, positive if b > a, zero if equal
- */
-export function compareApiVersionsDesc(a: string, b: string): number {
-  const pa = parseApiVersion(a);
-  const pb = parseApiVersion(b);
-
-  if (pa.year !== pb.year) {
-    return pb.year - pa.year;
-  }
-  if (pa.month !== pb.month) {
-    return pb.month - pa.month;
-  }
-  if (pa.day !== pb.day) {
-    return pb.day - pa.day;
-  }
-  if (pa.isPreview !== pb.isPreview) {
-    return pa.isPreview ? 1 : -1;
-  }
-
-  return b.localeCompare(a);
-}
-
-/**
- * Parse API version string.
- * Extracts year, month, day, and preview flag from a version string like "2025-06-01" or "2025-06-01-preview".
- * @param version API version string in format YYYY-MM-DD or YYYY-MM-DD-preview
- * @returns Parsed version components (year, month, day, isPreview), or zeros if invalid format
- */
-export function parseApiVersion(version: string): {
-  year: number;
-  month: number;
-  day: number;
-  isPreview: boolean;
-} {
-  const match = /^(\d{4})-(\d{2})-(\d{2})(-preview)?$/.exec(version);
-  if (!match) {
-    return { year: 0, month: 0, day: 0, isPreview: false };
-  }
-
-  return {
-    year: Number.parseInt(match[1], 10),
-    month: Number.parseInt(match[2], 10),
-    day: Number.parseInt(match[3], 10),
-    isPreview: Boolean(match[4]),
-  };
 }
 
 /**
