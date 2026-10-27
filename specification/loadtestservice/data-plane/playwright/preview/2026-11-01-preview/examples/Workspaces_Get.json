@@ -2,7 +2,7 @@
   "title": "Workspaces_Get",
   "operationId": "Workspaces_Get",
   "parameters": {
-    "api-version": "2026-10-01-preview",
+    "api-version": "2026-11-01-preview",
     "workspaceId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
@@ -18,7 +18,15 @@
         "location": "westus3",
         "regionalAffinity": "Enabled",
         "localAuth": "Enabled",
-        "storageUri": "https://examplestorageaccount.blob.core.windows.net"
+        "storageUri": "https://examplestorageaccount.blob.core.windows.net",
+        "linkedKeyVault": {
+          "vaultUri": "https://example-vault.vault.azure.net/",
+          "vaultIdentity": {
+            "type": "UserAssigned",
+            "resourceId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/example-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/example-identity"
+          }
+        },
+        "browserProxy": "Enabled"
       }
     }
   }

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Playwright Service API",
-    "version": "2026-10-01-preview",
+    "version": "2026-11-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -1606,6 +1606,63 @@
         }
       }
     },
+    "IdentityType": {
+      "type": "string",
+      "description": "The type of managed identity used to access a linked Azure resource.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "Use the workspace's system-assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "Use a user-assigned managed identity assigned to the workspace."
+          }
+        ]
+      }
+    },
+    "LinkedIdentityProperties": {
+      "type": "object",
+      "description": "A managed identity assigned to the workspace for accessing a linked Azure resource.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of managed identity used to access the linked resource.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The fully qualified Azure resource ID of the user-assigned managed identity. Required when type is UserAssigned; omitted when type is SystemAssigned.",
+          "readOnly": true
+        }
+      }
+    },
+    "LinkedKeyVaultProperties": {
+      "type": "object",
+      "description": "The Azure Key Vault and managed identity used to retrieve browser proxy credentials.",
+      "properties": {
+        "vaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The base HTTPS URI of the linked Azure Key Vault, without a secret path, query, fragment, user information, or non-default port. The vault must belong to the workspace tenant.",
+          "readOnly": true
+        },
+        "vaultIdentity": {
+          "$ref": "#/definitions/LinkedIdentityProperties",
+          "description": "The managed identity assigned to the workspace with permission to read secrets from the linked Azure Key Vault.",
+          "readOnly": true
+        }
+      }
+    },
     "OS": {
       "type": "string",
       "description": "The operating system to configure for remote script execution.",
@@ -2288,6 +2345,37 @@
           "type": "string",
           "format": "uri",
           "description": "When set on Playwright workspace resource, it provides the URI of the Azure storage account used to store workspace artifacts, test results, and reports.",
+          "readOnly": true
+        },
+        "linkedKeyVault": {
+          "$ref": "#/definitions/LinkedKeyVaultProperties",
+          "description": "The Azure Key Vault linked to the workspace for browser proxy credentials.",
+          "readOnly": true
+        },
+        "browserProxy": {
+          "type": "string",
+          "description": "Whether browser proxy support is enabled for the workspace.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          },
           "readOnly": true
         }
       },
