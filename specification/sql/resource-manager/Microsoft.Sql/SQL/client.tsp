@@ -20,8 +20,18 @@ using Microsoft.Sql;
 
 @@clientName(Microsoft.Sql, "SqlManagementClient", "java,javascript,python");
 
+@@clientName(ServerProtectionSettingsOperations, "ServerProtectionSettings");
 @@clientName(
-  ManagedInstanceServerProtectionSettings.createOrUpdate::parameters.resource,
+  ServerProtectionSettingsOperations.createOrUpdate::parameters.resource,
+  "parameters"
+);
+
+@@clientName(
+  ManagedInstanceServerProtectionSettingsOperations,
+  "ManagedInstanceServerProtectionSettings"
+);
+@@clientName(
+  ManagedInstanceServerProtectionSettingsOperations.createOrUpdate::parameters.resource,
   "parameters"
 );
 
@@ -774,6 +784,11 @@ using Microsoft.Sql;
 @@alternateType(ServicePrincipal.principalId, uuid, "csharp");
 @@alternateType(ServicePrincipal.clientId, uuid, "csharp");
 @@alternateType(ServicePrincipal.tenantId, uuid, "csharp");
+@@alternateType(
+  ManagedDatabaseProperties.legacyRestorableDroppedDatabaseId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(
   ManagedDatabaseProperties.restorableDroppedDatabaseId,
   armResourceIdentifier,

@@ -4,6 +4,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./ManagedInstance.tsp";
 import "./ServerProtectionSettingsFeatureRegistration.tsp";
+import "./ServerProtectionSettingsModels.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -22,79 +23,24 @@ namespace Microsoft.Sql;
 @Azure.ResourceManager.Legacy.feature(
   Microsoft.SqlFeatureRegistration.Features.ManagedInstanceServerProtectionSettings
 )
-model ServerProtectionSettings is ProxyResource<
+model ManagedInstanceServerProtectionSettings is ProxyResource<
   ServerProtectionSettingsProperties,
   PropertiesOptional = false
 > {
   ...ResourceNameParameter<
-    Resource = ServerProtectionSettings,
+    Resource = ManagedInstanceServerProtectionSettings,
     KeyName = "serverProtectionSettingsName",
     SegmentName = "serverProtectionSettings",
-    NamePattern = "",
+    NamePattern = "^[dD][eE][fF][aA][uU][lL][tT]$",
     Type = ServerProtectionSettingsName
   >;
 }
 
-/** The singleton name for managed instance protection settings. */
-@added(Versions.v2026_11_01_preview)
-union ServerProtectionSettingsName {
-  string,
-
-  /** The only supported protection settings resource, matched case-insensitively. */
-  Default: "default",
-}
-
-/** Settings that control protection against deletion of a managed instance. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The API-review exception for this singleton permits operation polling instead of resource provisioningState."
-@added(Versions.v2026_11_01_preview)
-model ServerProtectionSettingsProperties {
-  /**
-   * Block managed instance deletion while any live or dropped user database has
-   * immutable PITR backups within retention. Supported request values are enabled
-   * and disabled, compared case-insensitively. Setting enabled is an
-   * irreversible opt-in. Setting disabled before opt-in is a no-op; changing from
-   * enabled to disabled is rejected. GET and LIST return the persisted setting.
-   * Use the update operation's polling endpoints to track completion.
-   */
-  blockDropWhenImmutablePitrBackupInRetention: BlockDropWhenImmutablePitrBackupInRetention;
-}
-
-/**
- * Opt-in state for managed instance deletion protection while immutable backups
- * are retained.
- */
-@added(Versions.v2026_11_01_preview)
-union BlockDropWhenImmutablePitrBackupInRetention {
-  string,
-
-  /**
-   * Permanent protection is requested. Once applied, instance deletion is blocked
-   * while any live or dropped user database has immutable PITR backups in retention.
-   */
-  Enabled: "enabled",
-
-  /**
-   * Deletion protection has not been enabled. Requesting this state before opt-in
-   * leaves the settings unchanged.
-   */
-  Disabled: "disabled",
-}
-
-/** Metadata for an accepted protection-settings update. */
-@added(Versions.v2026_11_01_preview)
-model ServerProtectionSettingsOperationMetadata {
-  /** Name of the accepted management operation. */
-  operation: string;
-
-  /** Time when the management operation started. */
-  startTime: utcDateTime;
-}
-
 /** The update is in progress. Follow the polling headers to retrieve its result. */
 @added(Versions.v2026_11_01_preview)
-model ServerProtectionSettingsAcceptedResult {
+model ManagedInstanceServerProtectionSettingsAcceptedResult {
   ...AcceptedResponse;
-  ...ArmCombinedLroHeaders<FinalResult = ServerProtectionSettings>;
+  ...ArmCombinedLroHeaders<FinalResult = ManagedInstanceServerProtectionSettings>;
   ...Azure.Core.Foundations.RetryAfterHeader;
 
   /** Metadata for the accepted update. */
@@ -128,6 +74,7 @@ alias ServerProtectionSettingsInstanceParameters = {
   /** The protection settings name. Only default is supported. */
   @path
   @segment("serverProtectionSettings")
+  @pattern("^[dD][eE][fF][aA][uU][lL][tT]$")
   serverProtectionSettingsName: ServerProtectionSettingsName;
 };
 
@@ -135,18 +82,19 @@ alias ServerProtectionSettingsInstanceParameters = {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "These settings always exist with the managed instance and cannot be deleted; enabling protection is irreversible."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This SQL project requires legacy-feature-files output splitting for operation registration."
 @added(Versions.v2026_11_01_preview)
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 @Azure.ResourceManager.Legacy.feature(
   Microsoft.SqlFeatureRegistration.Features.ManagedInstanceServerProtectionSettings
 )
-interface ManagedInstanceServerProtectionSettings {
+interface ManagedInstanceServerProtectionSettingsOperations {
   /** Gets a managed instance's server protection settings. */
   @get
   @autoRoute
-  @armResourceRead(ServerProtectionSettings)
+  @tag("ManagedInstanceServerProtectionSettings")
+  @armResourceRead(ManagedInstanceServerProtectionSettings)
   get is Azure.ResourceManager.Foundations.ArmReadOperation<
     ServerProtectionSettingsInstanceParameters,
-    ArmResponse<ServerProtectionSettings>,
+    ArmResponse<ManagedInstanceServerProtectionSettings>,
     ErrorResponse
   >;
 
@@ -156,12 +104,13 @@ interface ManagedInstanceServerProtectionSettings {
   @get
   @autoRoute
   @list
-  @listsResource(ServerProtectionSettings)
-  @segmentOf(ServerProtectionSettings)
-  @armResourceList(ServerProtectionSettings)
+  @tag("ManagedInstanceServerProtectionSettings")
+  @listsResource(ManagedInstanceServerProtectionSettings)
+  @segmentOf(ManagedInstanceServerProtectionSettings)
+  @armResourceList(ManagedInstanceServerProtectionSettings)
   listByManagedInstance is Azure.ResourceManager.Foundations.ArmReadOperation<
     ServerProtectionSettingsRequestParameters,
-    ArmResponse<ResourceListResult<ServerProtectionSettings>>,
+    ArmResponse<ResourceListResult<ManagedInstanceServerProtectionSettings>>,
     ErrorResponse
   >;
 
@@ -175,26 +124,27 @@ interface ManagedInstanceServerProtectionSettings {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The SQL RP pending 202 response contains the operation name and start time."
   @put
   @autoRoute
-  @armResourceCreateOrUpdate(ServerProtectionSettings)
+  @tag("ManagedInstanceServerProtectionSettings")
+  @armResourceCreateOrUpdate(ManagedInstanceServerProtectionSettings)
   @Azure.Core.useFinalStateVia("location")
   createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ServerProtectionSettingsInstanceParameters,
-    ServerProtectionSettings,
-    | ArmResponse<ServerProtectionSettings>
-    | ServerProtectionSettingsAcceptedResult,
+    ManagedInstanceServerProtectionSettings,
+    | ArmResponse<ManagedInstanceServerProtectionSettings>
+    | ManagedInstanceServerProtectionSettingsAcceptedResult,
     ErrorResponse
   >;
 }
 
 @@doc(
-  ServerProtectionSettings.name,
+  ManagedInstanceServerProtectionSettings.name,
   "The protection settings name. Only default is supported."
 );
 @@doc(
-  ServerProtectionSettings.properties,
+  ManagedInstanceServerProtectionSettings.properties,
   "The required managed instance protection settings."
 );
 @@doc(
-  ManagedInstanceServerProtectionSettings.createOrUpdate::parameters.resource,
+  ManagedInstanceServerProtectionSettingsOperations.createOrUpdate::parameters.resource,
   "The managed instance protection settings to apply."
 );

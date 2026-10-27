@@ -98,6 +98,7 @@ input-file:
   - preview/2026-11-01-preview/managedBackupShortTermRetentionPolicies.json
   - preview/2026-11-01-preview/managedDatabaseAdvancedThreatProtectionSettings.json
   - preview/2026-11-01-preview/managedDatabaseColumns.json
+  - preview/2026-11-01-preview/managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
   - preview/2026-11-01-preview/managedDatabaseMoveOperations.json
   - preview/2026-11-01-preview/managedDatabaseQueries.json
   - preview/2026-11-01-preview/managedDatabaseRestoreDetails.json
@@ -139,6 +140,8 @@ input-file:
   - preview/2026-11-01-preview/replicationLinks.json
   - preview/2026-11-01-preview/restorableDroppedDatabases.json
   - preview/2026-11-01-preview/restorableDroppedManagedDatabases.json
+  - preview/2026-11-01-preview/restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
+  - preview/2026-11-01-preview/restorableDroppedManagedInstancesByLocation.json
   - preview/2026-11-01-preview/restorePoints.json
   - preview/2026-11-01-preview/sensitivityLabels.json
   - preview/2026-11-01-preview/serverAdvancedThreatProtectionSettings.json
@@ -153,6 +156,7 @@ input-file:
   - preview/2026-11-01-preview/serverKeys.json
   - preview/2026-11-01-preview/serverOperations.json
   - preview/2026-11-01-preview/servers.json
+  - preview/2026-11-01-preview/ServerProtectionSettings.json
   - preview/2026-11-01-preview/serverSecurityAlertPolicies.json
   - preview/2026-11-01-preview/serverTrustCertificates.json
   - preview/2026-11-01-preview/serverTrustGroups.json
@@ -179,6 +183,30 @@ input-file:
   - preview/2026-11-01-preview/virtualNetworkRules.json
   - preview/2026-11-01-preview/workloadClassifiers.json
   - preview/2026-11-01-preview/workloadGroups.json
+
+suppressions:
+  - code: ResourceNameRestriction
+    from: restorableDroppedManagedInstancesByLocation.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}"]
+    reason: locationName uses the shared Azure.Core.azureLocation region selector, not a customer-defined resource name. The service normalizes location names; a resource-name regex could exclude accepted location aliases.
+  - code: ResourceNameRestriction
+    from: restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}"]
+    reason: locationName uses the shared Azure.Core.azureLocation region selector, not a customer-defined resource name. The service normalizes location names; a resource-name regex could exclude accepted location aliases.
+  - code: ResourceNameRestriction
+    from: managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"]
+    reason: locationName uses the shared Azure.Core.azureLocation region selector, not a customer-defined resource name. The service normalizes location names; a resource-name regex could exclude accepted location aliases.
+  - code: DescriptionMustNotBeNodeName
+    from: managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"].get.parameters..description
+    reason: The policy supports only default. Its enum metadata is inherited unchanged from ManagedShortTermRetentionPolicyName, which is shared with existing retention APIs.
 ```
 
 ### Tag: package-preview-2026-08-01-preview
@@ -4020,10 +4048,31 @@ directive:
   - suppress: EnumInsteadOfBoolean
     reason: This warning gives many positives for existing APIs that cannot be changed.
 ```
+
+```yaml $(tag) == 'package-preview-2026-11-01-preview'
+suppressions:
+  - code: DescriptionMustNotBeNodeName
+    from: serverAzureAdAdministrators.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}/enable"].post.parameters[4]["x-ms-enum"].values[0].description
+    reason: The enable action reuses the existing AdministratorName union. Its enum-member description is inherited; changing the shared union would rewrite earlier published API versions. This exception applies only to the November preview action.
+  - code: DescriptionMustNotBeNodeName
+    from: serverAzureAdAdministrators.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}/disable"].post.parameters[4]["x-ms-enum"].values[0].description
+    reason: The disable action reuses the existing AdministratorName union. Its enum-member description is inherited; changing the shared union would rewrite earlier published API versions. This exception applies only to the November preview action.
+```
+
 ## Suppressions
 
 ``` yaml
 suppressions:
+  - code: PutResponseCodes
+    from: preview/2026-11-01-preview/ServerProtectionSettings.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serverProtectionSettings/{serverProtectionSettingsName}"].put
+    reason: This always-existing singleton follows the MI contract, returning HTTP 200 with the resource on completion or HTTP 202 with operation metadata and polling headers while pending. PUT never creates a new resource.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: preview/2026-11-01-preview/ServerProtectionSettings.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serverProtectionSettings/{serverProtectionSettingsName}"].put
+    reason: Assumes an ARM exception to omit durable provisioningState from this always-existing proxy resource. GET returns the persisted flag; operation status is available through polling endpoints.
   - code: MissingSegmentsInNestedResourceListOperation
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies"]
