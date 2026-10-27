@@ -226,6 +226,11 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@access(Storage.Blob.ListBlobsHierarchicalResponse, Access.public, "rust");
 @@access(Storage.Blob.ListBlobsIncludeItem, Access.public, "rust");
 
+@@access(Storage.Blob.Container.createSession, Access.internal, "rust");
+@@access(CreateSessionConfiguration, Access.internal, "rust");
+@@access(CreateSessionResponse, Access.internal, "rust");
+@@access(SessionCredentials, Access.internal, "rust");
+@@access(AuthenticationType, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.abortCopyFromUrl, "abortCopy", "rust");
 @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
@@ -247,6 +252,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option" ""
 @@clientOption(Storage.Blob.Blob.getLayout, "forcePageIterator", true, "rust");
+@@clientName(Storage.Blob.Blob.getLayout, "getLayout", "rust");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Storage.Blob.Blob.getLayout,
@@ -1313,3 +1319,63 @@ scalar HttpRange extends string;
 
 /** Preserves the empty Parquet XML configuration used by the C++ client. */
 model StorageCppParquetConfiguration {}
+
+// Rust-Scoped Smart Tier Removal
+
+@@alternateType(AccessTier, AccessTierRust, "rust");
+@@clientName(AccessTierRust, "AccessTier", "rust");
+@@clientNamespace(AccessTierRust, "Azure.Storage.Blobs", "rust");
+
+/** The access tiers. */
+union AccessTierRust {
+  /** The P4 access tier. */
+  P4: "P4",
+
+  /** The P6 access tier. */
+  P6: "P6",
+
+  /** The P10 access tier. */
+  P10: "P10",
+
+  /** The P15 access tier. */
+  P15: "P15",
+
+  /** The P20 access tier. */
+  P20: "P20",
+
+  /** The P30 access tier. */
+  P30: "P30",
+
+  /** The P40 access tier. */
+  P40: "P40",
+
+  /** The P50 access tier. */
+  P50: "P50",
+
+  /** The P60 access tier. */
+  P60: "P60",
+
+  /** The P70 access tier. */
+  P70: "P70",
+
+  /** The P80 access tier. */
+  P80: "P80",
+
+  /** The Hot access tier. */
+  Hot: "Hot",
+
+  /** The Cool access tier. */
+  Cool: "Cool",
+
+  /** The Archive access tier. */
+  Archive: "Archive",
+
+  /** The Premium access tier. */
+  Premium: "Premium",
+
+  /** The Cold access tier. */
+  Cold: "Cold",
+
+  /** Extensible. */
+  string,
+}
