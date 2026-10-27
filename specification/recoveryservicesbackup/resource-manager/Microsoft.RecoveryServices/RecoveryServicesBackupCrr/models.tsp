@@ -1304,6 +1304,7 @@ model CrrAccessToken {
   /**
    * Access token used for authentication
    */
+  @secret
   accessTokenString?: string;
 
   /**
