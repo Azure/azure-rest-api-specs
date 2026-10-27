@@ -867,7 +867,7 @@ describe("TypeSpec project detection edge cases", () => {
 
   it("resolves associated PR from commit SHA", async () => {
     const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({
-      data: [{ number: 99 }],
+      data: [{ number: 99, merged_at: "2026-10-26T00:00:00Z", merge_commit_sha: "abc123" }],
     });
 
     const result = await getAssociatedPrNumber({
@@ -889,6 +889,68 @@ describe("TypeSpec project detection edge cases", () => {
     });
 
     expect(result).toBe(99);
+  });
+
+  it.each([
+    {
+      name: "an open PR with a matching provisional merge SHA",
+      pullRequests: [{ number: 29284, merged_at: null, merge_commit_sha: "abc123" }],
+      expected: undefined,
+    },
+    {
+      name: "a PR merged at a different commit",
+      pullRequests: [
+        { number: 29284, merged_at: "2026-10-26T00:00:00Z", merge_commit_sha: "def456" },
+      ],
+      expected: undefined,
+    },
+    {
+      name: "a merged PR without a merge commit SHA",
+      pullRequests: [{ number: 29284, merged_at: "2026-10-26T00:00:00Z" }],
+      expected: undefined,
+    },
+    {
+      name: "a matching merged PR after unrelated associations",
+      pullRequests: [
+        { number: 29284, merged_at: null, merge_commit_sha: null },
+        { number: 30467, merged_at: "2026-10-25T00:00:00Z", merge_commit_sha: "def456" },
+        { number: 30970, merged_at: "2026-10-26T00:00:00Z", merge_commit_sha: "abc123" },
+      ],
+      expected: 30970,
+    },
+    {
+      name: "a matching merge SHA with different hexadecimal casing",
+      pullRequests: [
+        { number: 30970, merged_at: "2026-10-26T00:00:00Z", merge_commit_sha: "ABC123" },
+      ],
+      expected: 30970,
+    },
+    { name: "no associated PRs", pullRequests: [], expected: undefined },
+  ])("resolves only the actual merged PR: $name", async ({ pullRequests, expected }) => {
+    const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({
+      data: pullRequests,
+    });
+    const get = vi.fn();
+
+    const result = await getAssociatedPrNumber({
+      octokit: {
+        rest: {
+          pulls: { get, listFiles: vi.fn() },
+          repos: { listPullRequestsAssociatedWithCommit, getCommit: vi.fn() },
+        },
+      },
+      owner: "Azure",
+      repo: "azure-rest-api-specs-pr",
+      commitSha: "abc123",
+    });
+
+    expect(result).toBe(expected);
+    expect(listPullRequestsAssociatedWithCommit).toHaveBeenCalledExactlyOnceWith({
+      owner: "Azure",
+      repo: "azure-rest-api-specs-pr",
+      commit_sha: "abc123",
+    });
+    expect(get).not.toHaveBeenCalled();
   });
 
   it("gets changed files from commit SHA", async () => {
@@ -934,7 +996,10 @@ describe("TypeSpec project detection edge cases", () => {
     setupMockMetadata(projectPath, "2026-01-01-preview", "stable");
 
     const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({
-      data: [{ number: 123 }],
+      data: [
+        { number: 29284, merged_at: null, merge_commit_sha: null },
+        { number: 123, merged_at: "2026-10-26T00:00:00Z", merge_commit_sha: "abcdef" },
+      ],
     });
     const get = vi.fn().mockResolvedValue({
       data: {
@@ -975,6 +1040,18 @@ describe("TypeSpec project detection edge cases", () => {
     expect(result.projectInfo?.tspProjectPath).toBe("specification/foo");
     expect(result.projectInfo?.apiVersion).toBe("2026-01-01-preview");
     expect(result.projectInfo?.isPreview).toBe(true);
+    expect(get).toHaveBeenCalledExactlyOnceWith({
+      owner: "Azure",
+      repo: "azure-rest-api-specs",
+      pull_number: 123,
+    });
+    expect(listFiles).toHaveBeenCalledExactlyOnceWith({
+      owner: "Azure",
+      repo: "azure-rest-api-specs",
+      pull_number: 123,
+      per_page: 100,
+      page: 1,
+    });
   });
 
   it("inspects TypeSpec commit changes when no PR is associated", async () => {
@@ -1023,7 +1100,7 @@ describe("TypeSpec project detection edge cases", () => {
 
   it("skips folder-migration PRs and does not fetch changed files", async () => {
     const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({
-      data: [{ number: 321 }],
+      data: [{ number: 321, merged_at: "2026-10-26T00:00:00Z", merge_commit_sha: "mig123" }],
     });
     const get = vi
       .fn()
@@ -1059,7 +1136,7 @@ describe("TypeSpec project detection edge cases", () => {
 
   it("skips PRs labeled to opt out of release plan automation", async () => {
     const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({
-      data: [{ number: 654 }],
+      data: [{ number: 654, merged_at: "2026-10-26T00:00:00Z", merge_commit_sha: "skip123" }],
     });
     const get = vi.fn().mockResolvedValueOnce({
       data: { labels: [{ name: "Skip-ReleasePlan-Automation" }] },
@@ -1102,7 +1179,7 @@ describe("TypeSpec project detection edge cases", () => {
     setupMockMetadata(projectPath, "2025-09-01", "stable");
 
     const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({
-      data: [{ number: 123 }],
+      data: [{ number: 123, merged_at: "2026-10-26T00:00:00Z", merge_commit_sha: "abcdef" }],
     });
     const get = vi.fn().mockResolvedValue({
       data: { labels: [] },

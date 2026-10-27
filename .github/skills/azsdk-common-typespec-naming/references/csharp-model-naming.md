@@ -7,6 +7,8 @@ Sources: [.NET management naming conventions](https://github.com/Azure/azure-sdk
 Additional context: [payload and options-bag naming rules](https://github.com/Azure/azure-sdk-for-net/blob/8ce543a7602e7e3c8402fe808b9b376c1c3ea833/.github/skills/code-review/references/repository-rules.md#naming--review-only)
 from [Azure/azure-sdk-for-net#62615](https://github.com/Azure/azure-sdk-for-net/pull/62615).
 
+Before proposing model overrides, consult the [emitter defaults and override caveats](csharp-naming.md#emitter-defaults-before-overrides). Automatic `Response`-to-`Result` and acronym conversions may already produce the intended name; check their documented exceptions rather than inferring output from TypeSpec spelling alone.
+
 ## Body Role Before Suffix
 
 Choose names from HTTP usage, not a global string replacement:
