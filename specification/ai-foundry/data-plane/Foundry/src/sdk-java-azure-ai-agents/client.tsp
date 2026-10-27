@@ -702,8 +702,8 @@ using Azure.AI.Projects;
 @@clientName(VoiceAgentServerEventWarning, "VoiceAgentWarningEvent");
 @@clientName(VoiceAgentServerEventWarningDetails, "VoiceAgentWarningDetails");
 @@clientName(
-  VoiceAgentSessionAvatarConfig,
-  "VoiceAgentSessionAvatarConfiguration"
+  VoiceAgentSessionAvatarSettings,
+  "VoiceAgentSessionAvatarSettings"
 );
 @@clientName(
   VoiceAgentSessionResponseConfig,

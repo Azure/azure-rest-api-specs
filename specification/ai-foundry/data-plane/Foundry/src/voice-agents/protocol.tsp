@@ -206,7 +206,7 @@ model VoiceAgentAvatarIceServer {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The session model is a wire-compatible specialization of the persisted avatar configuration and adds only runtime transport fields."
 @doc("Avatar settings accepted by the stable voice-agent WebSocket contract.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentSessionAvatarConfig extends VoiceAgentAvatarConfig {
+model VoiceAgentSessionAvatarSettings extends VoiceAgentAvatarConfig {
   ice_servers?: VoiceAgentAvatarIceServer[] | null;
 }
 
@@ -236,7 +236,7 @@ model VoiceAgentSessionUpdateConfig {
   audio?: VoiceAgentAudioConfig;
 
   @doc("The avatar settings for the session.")
-  avatar?: VoiceAgentSessionAvatarConfig;
+  avatar?: VoiceAgentSessionAvatarSettings;
 
   @doc("Animation settings for the session.")
   animation?: VoiceAgentAnimationConfig;
