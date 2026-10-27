@@ -9689,7 +9689,7 @@
         "tags": [
           "ProjectCostControls"
         ],
-        "description": "Creates or replaces a project-owned budget synchronously. Omitted grouping selects the project's default counter; explicit projectId grouping is rejected.",
+        "description": "Creates or replaces a project-owned budget synchronously. Omitted grouping selects the Foundry project's default counter; explicit projectId grouping is rejected.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9789,7 +9789,7 @@
         "tags": [
           "ProjectCostControls"
         ],
-        "description": "Updates selected project budget properties synchronously, merging named notifications, actions, and supplied validity dates.",
+        "description": "Updates selected Foundry project budget properties synchronously, merging named notifications, actions, and supplied validity dates.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -17771,7 +17771,7 @@
           {
             "name": "ProjectId",
             "value": "projectId",
-            "description": "The project resource ID."
+            "description": "The Foundry project resource ID."
           },
           {
             "name": "DeploymentId",
@@ -17836,7 +17836,7 @@
           {
             "name": "ProjectId",
             "value": "projectId",
-            "description": "Creates an independent counter for each project in the owning account."
+            "description": "Creates an independent counter for each Foundry project in the owning account."
           },
           {
             "name": "AgentResourceId",
@@ -18058,7 +18058,7 @@
         },
         "grouping": {
           "type": "array",
-          "description": "Optional additional partitioning of consumption. Omission or an empty array uses one counter for the owning account or project.\nResponses omit owner-default grouping. A project-owned control cannot explicitly group by projectId.",
+          "description": "Optional additional partitioning of consumption. Omission or an empty array uses one counter for the owning account or Foundry project.\nResponses omit owner-default grouping. A project-owned control cannot explicitly group by projectId.",
           "maxItems": 1,
           "items": {
             "$ref": "#/definitions/CostControlGrouping"
@@ -18141,7 +18141,7 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/CostControlFilterName",
-          "description": "The built-in attribute: agentResourceId, identityObjectId, sessionId, projectId, deploymentId, or tokenType.\nAgent resource IDs use /subscriptions/{subscriptionId}/accounts/{accountName}/project/{projectName}/agent/{agentName}.\nprojectId values are project resource IDs. deploymentId values must be deployment resource IDs in the owning account.\ntokenType accepts input, output, or both for a Tokens budget; omission measures overall tokens."
+          "description": "The built-in attribute: agentResourceId, identityObjectId, sessionId, projectId, deploymentId, or tokenType.\nAgent resource IDs use /subscriptions/{subscriptionId}/accounts/{accountName}/project/{projectName}/agent/{agentName}.\nprojectId values are Foundry project resource IDs. deploymentId values must be deployment resource IDs in the owning account.\ntokenType accepts input, output, or both for a Tokens budget; omission measures overall tokens."
         },
         "operator": {
           "type": "string",
@@ -21500,7 +21500,7 @@
     },
     "ProjectCostControl": {
       "type": "object",
-      "description": "A budget that measures consumption and optionally alerts or blocks requests within its owning project.",
+      "description": "A budget that measures consumption and optionally alerts or blocks requests within its owning Foundry project.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CostControlProperties",
@@ -21520,7 +21520,7 @@
     },
     "ProjectCostControlListResult": {
       "type": "object",
-      "description": "A page of cost controls owned by a project.",
+      "description": "A page of cost controls owned by a Foundry project.",
       "properties": {
         "nextLink": {
           "type": "string",

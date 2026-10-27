@@ -30,7 +30,7 @@ model CostControl is ProxyResource<CostControlProperties> {
   etag?: string;
 }
 
-/** A budget that measures consumption and optionally alerts or blocks requests within its owning project. */
+/** A budget that measures consumption and optionally alerts or blocks requests within its owning Foundry project. */
 @added(Versions.v2026_11_15_preview)
 @parentResource(Project)
 model ProjectCostControl is ProxyResource<CostControlProperties> {
@@ -58,7 +58,7 @@ model CostControlProperties {
   provider?: "Microsoft.CognitiveServices";
 
   /**
-   * Optional additional partitioning of consumption. Omission or an empty array uses one counter for the owning account or project.
+   * Optional additional partitioning of consumption. Omission or an empty array uses one counter for the owning account or Foundry project.
    * Responses omit owner-default grouping. A project-owned control cannot explicitly group by projectId.
    */
   @maxItems(1)
@@ -159,7 +159,7 @@ model CostControlGrouping {
 union CostControlGroupingName {
   string,
 
-  /** Creates an independent counter for each project in the owning account. */
+  /** Creates an independent counter for each Foundry project in the owning account. */
   ProjectId: "projectId",
 
   /** Creates an independent counter for each Foundry agent resource ID. */
@@ -234,7 +234,7 @@ model CostControlTagFilter {
   /**
    * The built-in attribute: agentResourceId, identityObjectId, sessionId, projectId, deploymentId, or tokenType.
    * Agent resource IDs use /subscriptions/{subscriptionId}/accounts/{accountName}/project/{projectName}/agent/{agentName}.
-   * projectId values are project resource IDs. deploymentId values must be deployment resource IDs in the owning account.
+   * projectId values are Foundry project resource IDs. deploymentId values must be deployment resource IDs in the owning account.
    * tokenType accepts input, output, or both for a Tokens budget; omission measures overall tokens.
    */
   name: CostControlFilterName;
@@ -262,7 +262,7 @@ union CostControlFilterName {
   /** The Foundry session ID. */
   SessionId: "sessionId",
 
-  /** The project resource ID. */
+  /** The Foundry project resource ID. */
   ProjectId: "projectId",
 
   /** The deployment resource ID within the owning account. */
@@ -398,7 +398,7 @@ model CostControlListResult {
   value: CostControl[];
 }
 
-/** A page of cost controls owned by a project. */
+/** A page of cost controls owned by a Foundry project. */
 @added(Versions.v2026_11_15_preview)
 model ProjectCostControlListResult {
   /** The link used to retrieve the next page, when present. */
@@ -518,7 +518,7 @@ interface CostControls {
 }
 
 /**
- * Operations for project-owned cost controls. Budgets remain confined to their owning project.
+ * Operations for project-owned cost controls. Budgets remain confined to their owning Foundry project.
  * This API version accepts and returns only the budget contract, without attachment-ID properties.
  */
 @added(Versions.v2026_11_15_preview)
@@ -540,7 +540,7 @@ interface ProjectCostControls {
     Response = CostControlHeadResponse | CostControlNotModifiedResponse
   >;
 
-  /** Creates or replaces a project-owned budget synchronously. Omitted grouping selects the project's default counter; explicit projectId grouping is rejected. */
+  /** Creates or replaces a project-owned budget synchronously. Omitted grouping selects the Foundry project's default counter; explicit projectId grouping is rejected. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ProjectCostControl,
     Parameters = CostControlCreateOrUpdateHeaders,
@@ -550,7 +550,7 @@ interface ProjectCostControls {
           CostControlEtagHeader)
   >;
 
-  /** Updates selected project budget properties synchronously, merging named notifications, actions, and supplied validity dates. */
+  /** Updates selected Foundry project budget properties synchronously, merging named notifications, actions, and supplied validity dates. */
   update is ArmCustomPatchSync<
     ProjectCostControl,
     CostControlPatch,
