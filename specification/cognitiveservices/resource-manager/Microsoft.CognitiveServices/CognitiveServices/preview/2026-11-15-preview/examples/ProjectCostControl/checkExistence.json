@@ -1,0 +1,25 @@
+{
+  "operationId": "ProjectCostControls_CheckExistence",
+  "title": "Check for a budget without returning its body",
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "foundry-resource-group",
+    "accountName": "foundry-account",
+    "projectName": "production",
+    "api-version": "2026-11-15-preview",
+    "costControlName": "project-token-budget",
+    "If-None-Match": "\"00000000-0000-0000-0000-000000000001\""
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000002\""
+      }
+    },
+    "304": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000001\""
+      }
+    }
+  }
+}

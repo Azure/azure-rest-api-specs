@@ -1297,3 +1297,9 @@ op regenerateKeyCustom(
 );
 @@clientName(CostControl, "CognitiveServicesAccountCostControl", "csharp");
 @@alternateType(CostControl.etag, eTag, "csharp");
+@@clientName(
+  ProjectCostControl,
+  "CognitiveServicesProjectCostControl",
+  "csharp"
+);
+@@alternateType(ProjectCostControl.etag, eTag, "csharp");

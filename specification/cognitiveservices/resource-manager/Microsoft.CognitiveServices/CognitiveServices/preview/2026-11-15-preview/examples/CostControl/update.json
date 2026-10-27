@@ -1,58 +1,35 @@
 {
   "operationId": "CostControls_Update",
+  "title": "Merge named budget settings and restore owner-default grouping",
   "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "foundry-resource-group",
     "accountName": "foundry-account",
     "api-version": "2026-11-15-preview",
     "costControlName": "production-agents",
     "If-Match": "\"00000000-0000-0000-0000-000000000001\"",
     "properties": {
       "properties": {
-        "displayName": "Updated production agent budget",
-        "rules": [
-          {
-            "name": "monthly-agent-budget",
-            "unit": "Usd",
-            "amount": 1500,
-            "period": "Month",
-            "recurring": true,
-            "match": {
-              "identityObjectIds": [
-                "11111111-2222-3333-4444-555555555555"
-              ],
-              "sessionIds": [
-                "production-session"
-              ],
-              "projectIds": [
-                "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/foundry-resource-group/providers/Microsoft.CognitiveServices/accounts/foundry-account/projects/production"
-              ],
-              "agentResourceIds": [
-                "/subscriptions/00000000-1111-2222-3333-444444444444/accounts/foundry-account/project/production/agent/customer-support-agent",
-                "/subscriptions/00000000-1111-2222-3333-444444444444/accounts/foundry-account/project/production/agent/sales-assistant-agent"
-              ]
-            },
-            "thresholds": [
-              {
-                "type": "Percentage",
-                "value": 80,
-                "action": "Alert"
-              },
-              {
-                "type": "Absolute",
-                "value": 1500,
-                "action": "Block"
-              }
-            ],
-            "counterKey": {
-              "type": "Agent"
+        "grouping": [],
+        "amount": 1500,
+        "timePeriod": {
+          "endDate": "2028-11-15T00:00:00Z"
+        },
+        "notifications": {
+          "usageAlert": {
+            "enabled": false
+          }
+        },
+        "providerProperties": {
+          "actions": {
+            "stopRequests": {
+              "threshold": 90
             }
           }
-        ]
+        }
       }
-    },
-    "resourceGroupName": "foundry-resource-group",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+    }
   },
-  "title": "Update all configurable cost control settings",
   "responses": {
     "200": {
       "headers": {
@@ -64,46 +41,55 @@
         "type": "Microsoft.CognitiveServices/accounts/costControls",
         "etag": "\"00000000-0000-0000-0000-000000000002\"",
         "properties": {
-          "displayName": "Updated production agent budget",
-          "rules": [
-            {
-              "name": "monthly-agent-budget",
-              "unit": "Usd",
-              "amount": 1500,
-              "period": "Month",
-              "recurring": true,
-              "match": {
-                "identityObjectIds": [
-                  "11111111-2222-3333-4444-555555555555"
-                ],
-                "sessionIds": [
-                  "production-session"
-                ],
-                "projectIds": [
-                  "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/foundry-resource-group/providers/Microsoft.CognitiveServices/accounts/foundry-account/projects/production"
-                ],
-                "agentResourceIds": [
-                  "/subscriptions/00000000-1111-2222-3333-444444444444/accounts/foundry-account/project/production/agent/customer-support-agent",
-                  "/subscriptions/00000000-1111-2222-3333-444444444444/accounts/foundry-account/project/production/agent/sales-assistant-agent"
-                ]
-              },
-              "thresholds": [
-                {
-                  "type": "Percentage",
-                  "value": 80,
-                  "action": "Alert"
-                },
-                {
-                  "type": "Absolute",
-                  "value": 1500,
-                  "action": "Block"
+          "provider": "Microsoft.CognitiveServices",
+          "category": "Cost",
+          "amount": 1500,
+          "timeGrain": "Monthly",
+          "timePeriod": {
+            "startDate": "2026-11-15T00:00:00Z",
+            "endDate": "2028-11-15T00:00:00Z"
+          },
+          "filter": {
+            "and": [
+              {
+                "tags": {
+                  "name": "projectId",
+                  "operator": "In",
+                  "values": [
+                    "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/foundry-resource-group/providers/Microsoft.CognitiveServices/accounts/foundry-account/projects/production"
+                  ]
                 }
-              ],
-              "counterKey": {
-                "type": "Agent"
+              },
+              {
+                "tags": {
+                  "name": "deploymentId",
+                  "operator": "In",
+                  "values": [
+                    "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/foundry-resource-group/providers/Microsoft.CognitiveServices/accounts/foundry-account/deployments/customer-support-model"
+                  ]
+                }
+              }
+            ]
+          },
+          "notifications": {
+            "usageAlert": {
+              "eventGridConnectionId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/foundry-resource-group/providers/Microsoft.CognitiveServices/accounts/foundry-account/connections/budget-alerts",
+              "thresholdType": "Percentage",
+              "threshold": 80,
+              "enabled": false,
+              "operator": "GreaterThanOrEqualTo"
+            }
+          },
+          "providerProperties": {
+            "actions": {
+              "stopRequests": {
+                "type": "block",
+                "thresholdType": "Percentage",
+                "threshold": 90,
+                "operator": "GreaterThanOrEqualTo"
               }
             }
-          ]
+          }
         }
       }
     }
