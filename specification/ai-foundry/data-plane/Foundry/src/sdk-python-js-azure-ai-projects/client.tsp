@@ -457,7 +457,7 @@ using Azure.AI.Projects;
 
 // The Python SDK will have custom code to handle LRO memory updates, and
 // new input "items" specified via OpenAI classes.
-@@access(MemoryStores.updateMemories, Access.internal, "python");
+@@access(MemoryStores.refreshMemories, Access.internal, "python");
 @@scope(MemoryStores.getUpdateResult, "!(python)");
 @@usage(MemoryStoreUpdateCompletedResult, Usage.output);
 @@access(MemoryStoreUpdateCompletedResult, Access.public);

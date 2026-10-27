@@ -95,12 +95,12 @@ interface MemoryStores {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("Update memories")
-  @operationId("updateMemories")
+  @operationId("refreshMemories")
   @post
   @route("/memory_stores/{name}:update_memories")
   @pollingOperation(MemoryStores.getUpdateResult)
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  updateMemories is FoundryDataPlaneRequiredPreviewOperation<
+  refreshMemories is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.memory_stores_v1_preview,
     MemoryStoreUpdateRequest,
     Foundations.AcceptedResponse &

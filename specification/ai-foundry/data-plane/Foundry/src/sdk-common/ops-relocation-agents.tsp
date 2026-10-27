@@ -80,7 +80,7 @@ namespace Azure.AI.Projects.Beta {
     MemoryStores
   );
   @@clientLocation(Azure.AI.Projects.MemoryStores.searchMemories, MemoryStores);
-  @@clientLocation(Azure.AI.Projects.MemoryStores.updateMemories, MemoryStores);
+  @@clientLocation(Azure.AI.Projects.MemoryStores.refreshMemories, MemoryStores);
   @@clientLocation(
     Azure.AI.Projects.MemoryStores.getUpdateResult,
     MemoryStores

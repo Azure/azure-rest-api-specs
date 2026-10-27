@@ -1018,8 +1018,8 @@ using Azure.AI.Projects;
 
 // making methods private to add a public shim using the OpenAI types.
 @@access(MemoryStores.searchMemories, Access.internal);
-@@access(MemoryStores.updateMemories, Access.internal);
-@@clientName(MemoryStores.updateMemories, "internalUpdateMemories");
+@@access(MemoryStores.refreshMemories, Access.internal);
+@@clientName(MemoryStores.refreshMemories, "internalRefreshMemories");
 @@clientName(MemoryStores.searchMemories, "internalSearchMemories");
 
 // Disabled convenient API generation and make private to provide a custom shim returning `void` in the client
