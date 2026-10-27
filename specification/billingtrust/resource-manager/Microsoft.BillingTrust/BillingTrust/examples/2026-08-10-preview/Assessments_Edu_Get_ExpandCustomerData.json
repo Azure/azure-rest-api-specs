@@ -1,0 +1,55 @@
+{
+  "operationId": "Assessments_Get",
+  "title": "Get an assessment with $expandCustomerData=true (draft and the full initialValues seed returned)",
+  "parameters": {
+    "resourceUri": "providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31",
+    "assessmentName": "Edu",
+    "api-version": "2026-08-10-preview",
+    "$expandCustomerData": true
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/Edu",
+        "name": "Edu",
+        "type": "Microsoft.BillingTrust/assessments",
+        "properties": {
+          "evaluationState": "succeeded",
+          "provisioningState": "Succeeded",
+          "initialValues": [
+            {
+              "kind": "eduQualification",
+              "domains": [
+                {
+                  "domainNames": [
+                    "students.contoso.edu",
+                    "faculty.contoso.edu"
+                  ],
+                  "tenantId": "20000000-0000-0000-0000-000000000000"
+                }
+              ]
+            }
+          ],
+          "draft": [
+            {
+              "key": "firstName",
+              "value": "Jane"
+            },
+            {
+              "key": "lastName",
+              "value": "Doe"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "edu-admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-17T10:00:00.000Z",
+          "lastModifiedBy": "edu-admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-17T12:30:00.000Z"
+        }
+      }
+    }
+  }
+}
