@@ -96031,6 +96031,63 @@
           ]
         }
       },
+      "VoiceAgentTransferDestination": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VoiceAgentTransferDestinationType",
+            "description": "The destination format: phone_number for an E.164 number, teams for a Teams identifier, or sip for a SIP URI. Required unless the legacy kind field is supplied. The pstn alias is normalized to phone_number."
+          },
+          "kind": {
+            "$ref": "#/components/schemas/VoiceAgentTransferDestinationType",
+            "description": "Legacy input alias for type. Supply at least one of type or kind; when both are supplied their normalized formats must agree. Execution uses only the canonical type field."
+          },
+          "value": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The concrete address. Phone numbers use E.164; Teams and SIP identifiers are validated against the selected provider's capabilities."
+          }
+        },
+        "unevaluatedProperties": {
+          "not": {}
+        },
+        "description": "The canonical system-tool transfer destination. The service also accepts legacy kind and pstn input aliases, normalizing them to type and phone_number before execution. If type and kind are both supplied, they must identify the same address format. These values are never model-call arguments.",
+        "anyOf": [
+          {
+            "required": [
+              "type"
+            ]
+          },
+          {
+            "required": [
+              "kind"
+            ]
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentTransferDestinationType": {
+        "type": "string",
+        "enum": [
+          "phone_number",
+          "pstn",
+          "teams",
+          "sip"
+        ],
+        "description": "The supported address formats for a system-tool transfer destination.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentTransferRouting": {
         "type": "object",
         "required": [
@@ -96148,7 +96205,7 @@
           "destinations": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TelephonyTransferDestination"
+              "$ref": "#/components/schemas/VoiceAgentTransferDestination"
             },
             "minItems": 1,
             "description": "The ordered concrete destinations. Current ACS execution permits at most 16 PSTN or Teams destinations. PSTN requires an admitted Agent-side E.164 caller ID; Teams requires a valid user/resource-account GUID. SIP remains subject to executor capability."

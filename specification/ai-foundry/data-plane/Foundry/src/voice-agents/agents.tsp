@@ -525,6 +525,39 @@ model VoiceAgentTransferRouting {
   total_timeout_seconds?: int32 = 45;
 }
 
+@doc("The supported address formats for a system-tool transfer destination.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentTransferDestinationType {
+  @doc("An E.164 telephone number.")
+  phone_number: "phone_number",
+
+  @doc("Legacy input alias for phone_number. New configurations should use phone_number.")
+  pstn: "pstn",
+
+  @doc("A Microsoft Teams user or resource-account identifier.")
+  teams: "teams",
+
+  @doc("A SIP or SIPS URI.")
+  sip: "sip",
+}
+
+@doc("The canonical system-tool transfer destination. The service also accepts legacy kind and pstn input aliases, normalizing them to type and phone_number before execution. If type and kind are both supplied, they must identify the same address format. These values are never model-call arguments.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@extension("anyOf", #[#{ required: #["type"] }, #{ required: #["kind"] }])
+model VoiceAgentTransferDestination {
+  ...Record<never>;
+
+  @doc("The destination format: phone_number for an E.164 number, teams for a Teams identifier, or sip for a SIP URI. Required unless the legacy kind field is supplied. The pstn alias is normalized to phone_number.")
+  type?: VoiceAgentTransferDestinationType;
+
+  @doc("Legacy input alias for type. Supply at least one of type or kind; when both are supplied their normalized formats must agree. Execution uses only the canonical type field.")
+  kind?: VoiceAgentTransferDestinationType;
+
+  @doc("The concrete address. Phone numbers use E.164; Teams and SIP identifiers are validated against the selected provider's capabilities.")
+  @minLength(1)
+  value: string;
+}
+
 @doc("One logical transfer target configured in the immutable Agent definition. Only name and description are exposed to the model; destinations and routing are executor settings. This is separate from the existing management transfer-target resource.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTransferTarget {
@@ -540,7 +573,7 @@ model VoiceAgentTransferTarget {
 
   @doc("The ordered concrete destinations. Current ACS execution permits at most 16 PSTN or Teams destinations. PSTN requires an admitted Agent-side E.164 caller ID; Teams requires a valid user/resource-account GUID. SIP remains subject to executor capability.")
   @minItems(1)
-  destinations: TelephonyTransferDestination[];
+  destinations: VoiceAgentTransferDestination[];
 
   @doc("The trusted routing policy for this target.")
   routing: VoiceAgentTransferRouting;
