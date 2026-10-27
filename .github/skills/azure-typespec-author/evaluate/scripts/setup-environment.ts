@@ -44,7 +44,7 @@ function run(command: string, args: string[], options: ExecFileSyncOptions = {})
 
 function runPnpm(args: string[], options: ExecFileSyncOptions = {}) {
   if (process.platform === "win32") {
-    run(process.env.ComSpec || "cmd.exe", ["/d", "/s", "/c", `pnpm ${args.join(" ")}`], options);
+    run("cmd.exe", ["/d", "/s", "/c", `pnpm ${args.join(" ")}`], options);
     return;
   }
   run("pnpm", args, options);
@@ -52,7 +52,7 @@ function runPnpm(args: string[], options: ExecFileSyncOptions = {}) {
 
 function runNpm(args: string[], options: ExecFileSyncOptions = {}) {
   if (process.platform === "win32") {
-    run(process.env.ComSpec || "cmd.exe", ["/d", "/s", "/c", `npm ${args.join(" ")}`], options);
+    run("cmd.exe", ["/d", "/s", "/c", `npm ${args.join(" ")}`], options);
     return;
   }
   run("npm", args, options);
@@ -83,11 +83,10 @@ const vallyExecutable = path.join(
 );
 const vallyVersion =
   process.platform === "win32"
-    ? execFileSync(
-        process.env.ComSpec || "cmd.exe",
-        ["/d", "/s", "/c", "node_modules\\.bin\\vally.cmd --version"],
-        { cwd: evalToolsDir, encoding: "utf8" },
-      ).trim()
+    ? execFileSync("cmd.exe", ["/d", "/s", "/c", "node_modules\\.bin\\vally.cmd --version"], {
+        cwd: evalToolsDir,
+        encoding: "utf8",
+      }).trim()
     : execFileSync(vallyExecutable, ["--version"], { encoding: "utf8" }).trim();
 if (vallyVersion !== "0.14.0") {
   throw new Error(
