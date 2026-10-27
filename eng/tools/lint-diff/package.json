@@ -10,10 +10,9 @@
     "build": "tsc --noEmit",
     "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
     "clean": "rm -rf dist && rm -rf node_modules",
-    "format": "prettier . --ignore-path ../.prettierignore --write",
-    "format:check": "prettier . --ignore-path ../.prettierignore --check",
-    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
-    "lint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
+    "lint": "oxlint .",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
@@ -24,28 +23,17 @@
     "@apidevtools/json-schema-ref-parser": "catalog:",
     "@azure-tools/specs-shared": "workspace:*",
     "@azure-tools/suppressions": "workspace:*",
-    "@microsoft.azure/openapi-validator": "2.2.4",
-    "@microsoft.azure/openapi-validator-core": "1.0.7",
-    "@microsoft.azure/openapi-validator-rulesets": "2.2.6",
+    "@microsoft.azure/openapi-validator": "catalog:",
+    "@microsoft.azure/openapi-validator-core": "catalog:",
+    "@microsoft.azure/openapi-validator-rulesets": "catalog:",
     "autorest": "catalog:",
-    "change-case": "^5.4.4",
-    "deep-eql": "^5.0.2",
+    "change-case": "catalog:",
     "marked": "catalog:"
   },
   "devDependencies": {
-    "@eslint/js": "catalog:",
-    "@types/deep-eql": "^4.0.2",
     "@types/node": "catalog:",
-    "@vitest/coverage-v8": "catalog:",
-    "cross-env": "catalog:",
-    "eslint": "catalog:",
-    "execa": "^10.0.0",
-    "memfs": "^4.17.0",
-    "prettier": "catalog:",
-    "prettier-plugin-organize-imports": "catalog:",
-    "typescript": "catalog:",
-    "typescript-eslint": "catalog:",
-    "vitest": "catalog:"
+    "execa": "catalog:",
+    "memfs": "catalog:"
   },
   "version": "0.0.0"
 }

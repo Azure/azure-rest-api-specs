@@ -9,9 +9,10 @@
   },
   "scripts": {
     "build": "tsc --noEmit",
-    "format": "prettier . --ignore-path ../.prettierignore --write",
-    "format:check": "prettier . --ignore-path ../.prettierignore --check",
-    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
+    "lint": "oxlint .",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
@@ -20,20 +21,13 @@
   },
   "dependencies": {
     "@azure-tools/specs-shared": "workspace:*",
-    "ajv": "^8.17.1",
+    "ajv": "catalog:",
     "debug": "catalog:",
-    "lodash": "^4.17.20",
     "simple-git": "catalog:",
-    "yaml": "^2.4.2"
+    "yaml": "catalog:"
   },
   "devDependencies": {
     "@types/debug": "catalog:",
-    "@types/lodash": "^4.14.161",
-    "@types/node": "catalog:",
-    "@vitest/coverage-v8": "catalog:",
-    "prettier": "catalog:",
-    "prettier-plugin-organize-imports": "catalog:",
-    "typescript": "catalog:",
-    "vitest": "catalog:"
+    "@types/node": "catalog:"
   }
 }

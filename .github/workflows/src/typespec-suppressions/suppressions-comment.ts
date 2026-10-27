@@ -1,0 +1,534 @@
+import type { Core, GitHub, WorkflowRuns } from "../github.ts";
+/*
+  Rendering for the dedicated "TypeSpec Suppressions Review" pull request comment.
+
+  This module owns everything related to surfacing TypeSpec suppressions in a
+  standalone sticky PR comment: downloading the analyzer report artifact produced
+  by the "TypeSpec Suppressions - Analyze Code" workflow (located by head_sha, so
+  the comment can also be refreshed on label events) and rendering it into an HTML
+  block suitable for its own comment.
+
+  It is consumed by post-results.js, which resolves PR context, reads the current
+  labels for approval state, and posts/updates the comment. summarize-checks.js no
+  longer embeds this content; it surfaces the check via CHECK_METADATA and the
+  required "TypeSpec Suppressions" commit status instead.
+*/
+
+import { execFile } from "../../../shared/src/exec.ts";
+import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
+import { byDate, invert } from "../../../shared/src/sort.ts";
+import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
+
+import { createHash } from "node:crypto";
+import fs from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
+
+export type WorkflowRunInfo = WorkflowRuns[0];
+
+export type TypeSpecRuleMetadata = {
+  packageName?: string;
+  localRuleName?: string;
+  description?: string;
+  documentationUrl?: string;
+  guidelineCodes?: string[];
+};
+
+export type TypeSpecSourceLocation = {
+  line: number;
+  column: number;
+};
+
+export type TypeSpecSuppressionRecord = {
+  specPath: string;
+  sourceKind: "inline" | "tspconfig";
+  ruleName: string;
+  justification: string;
+  sourceFile: string;
+  anchorPath: string;
+  location: TypeSpecSourceLocation;
+  rawText: string;
+  ruleMetadata?: TypeSpecRuleMetadata;
+};
+
+export type TypeSpecSuppressionChange = {
+  before: TypeSpecSuppressionRecord;
+  after: TypeSpecSuppressionRecord;
+};
+
+export type TypeSpecCheckedSuppressions = {
+  checkRules: string[];
+  requiresApproval: boolean;
+  newSuppressions?: TypeSpecSuppressionRecord[];
+  removedSuppressions?: TypeSpecSuppressionRecord[];
+  changedSuppressions?: TypeSpecSuppressionChange[];
+};
+
+export type TypeSpecSuppressionsReport = {
+  requiresApproval?: boolean;
+  newSuppressions?: TypeSpecSuppressionRecord[];
+  changedSuppressions?: TypeSpecSuppressionChange[];
+  checkedSuppressions?: TypeSpecCheckedSuppressions;
+};
+
+export type TypeSpecSuppressionsCommentResult = {
+  body: string | undefined;
+  requiresApproval: boolean;
+  report: TypeSpecSuppressionsReport;
+  run: WorkflowRunInfo;
+  runUrl: string;
+};
+
+export const TYPESPEC_SUPPRESSIONS_WORKFLOW_NAME = "TypeSpec Suppressions - Analyze Code";
+export const TYPESPEC_SUPPRESSIONS_REPORT_ARTIFACT_NAME = "typespec-suppressions-report";
+export const TYPESPEC_SUPPRESSIONS_COMMENT_IDENTIFIER = "TypeSpecSuppressionsReview";
+export const TYPESPEC_SUPPRESSIONS_SECTION_TITLE = "TypeSpec suppressions requiring review";
+// GitHub caps comment bodies at ~65k characters, so only render a handful of suppressions
+// inline per table (new and changed) and link to the analysis log for the full list.
+const MAX_SUPPRESSIONS_SHOWN = 5;
+
+/**
+ * Downloads a text artifact for a given workflow run.
+ */
+export async function downloadArtifactText(
+  github: GitHub,
+  core: Core,
+  owner: string,
+  repo: string,
+  runId: number,
+  artifactName: string,
+): Promise<string> {
+  const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+    owner,
+    repo,
+    run_id: runId,
+    name: artifactName,
+    per_page: PER_PAGE_MAX,
+  });
+
+  const artifact = artifacts.sort(invert(byDate((item) => item.updated_at || "1970")))[0];
+  if (!artifact) {
+    throw new Error(`Unable to find ${artifactName} artifact for run ID: ${runId}.`);
+  }
+
+  const download = await github.rest.actions.downloadArtifact({
+    owner,
+    repo,
+    artifact_id: artifact.id,
+    archive_format: "zip",
+  });
+
+  core.info(`Successfully downloaded ${artifactName} artifact ID: ${artifact.id}`);
+
+  const tmpZip = path.join(
+    process.env.RUNNER_TEMP || os.tmpdir(),
+    `${artifactName.replace(/[^A-Za-z0-9_.-]/g, "-")}-${runId}.zip`,
+  );
+  const arrayBuffer = download.data as ArrayBuffer;
+  const zipBuffer = Buffer.from(new Uint8Array(arrayBuffer));
+  await fs.writeFile(tmpZip, zipBuffer);
+
+  try {
+    const { stdout } = await execFile("unzip", ["-p", tmpZip]);
+    return stdout;
+  } finally {
+    await fs.unlink(tmpZip);
+  }
+}
+
+export async function getLatestTypeSpecSuppressionsWorkflowRun(
+  github: GitHub,
+  core: Core,
+  owner: string,
+  repo: string,
+  head_sha: string,
+): Promise<WorkflowRunInfo | undefined> {
+  const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
+    owner,
+    repo,
+    event: "pull_request",
+    head_sha,
+    per_page: PER_PAGE_MAX,
+  });
+
+  const targetRuns = workflowRuns
+    .filter(
+      (workflowRun) =>
+        workflowRun.name === TYPESPEC_SUPPRESSIONS_WORKFLOW_NAME ||
+        workflowRun.name === `[TEST-IGNORE] ${TYPESPEC_SUPPRESSIONS_WORKFLOW_NAME}`,
+    )
+    .sort(invert(byDate((workflowRun) => workflowRun.updated_at)));
+
+  const run = targetRuns[0];
+  if (run) {
+    core.info(`Using TypeSpec suppressions workflow run ${run.id}.`);
+  }
+  return run;
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+/**
+ * Returns the file name (basename) of a path, e.g. `.../main.tsp` -> `main.tsp`.
+ * The full path is preserved in the link's href; only the visible label is
+ * shortened so the Source column stays narrow and readable.
+ */
+function getFileName(filePath: string): string {
+  return filePath.split("/").pop() || filePath;
+}
+
+function getPullRequestDiffLineLink(
+  owner: string,
+  repo: string,
+  pullNumber: number,
+  filePath: string,
+  line: number,
+): string {
+  const normalizedPath = filePath.replaceAll("\\", "/").replace(/^\.?\//, "");
+  const fileHash = createHash("sha256").update(normalizedPath).digest("hex");
+  return `https://github.com/${owner}/${repo}/pull/${pullNumber}/files#diff-${fileHash}R${line}`;
+}
+
+function pluralize(count: number, singular: string, plural: string = `${singular}s`): string {
+  return `${count} ${count === 1 ? singular : plural}`;
+}
+
+function getReportedSuppressions(
+  report: TypeSpecSuppressionsReport,
+): TypeSpecSuppressionsReport | TypeSpecCheckedSuppressions {
+  return report.checkedSuppressions ?? report;
+}
+
+function getSuppressionApprovalIdentity(suppression: TypeSpecSuppressionRecord) {
+  return {
+    specPath: suppression.specPath,
+    sourceKind: suppression.sourceKind,
+    ruleName: suppression.ruleName,
+    justification: suppression.justification,
+    sourceFile: suppression.sourceFile,
+    anchorPath: suppression.anchorPath,
+  };
+}
+
+/**
+ * Returns a stable representation of the suppression content that a reviewer approves.
+ * Analysis revisions, line numbers, rule metadata, and report ordering are intentionally
+ * excluded because they can change after merging the target branch without changing the
+ * approval decision.
+ */
+export function getSuppressionApprovalFingerprint(report: TypeSpecSuppressionsReport): string {
+  const reported = getReportedSuppressions(report);
+  const approvalItems = [
+    ...(reported.newSuppressions ?? []).map((suppression) => ({
+      kind: "new",
+      suppression: getSuppressionApprovalIdentity(suppression),
+    })),
+    ...(reported.changedSuppressions ?? []).map((change) => ({
+      kind: "changed",
+      before: getSuppressionApprovalIdentity(change.before),
+      after: getSuppressionApprovalIdentity(change.after),
+    })),
+  ]
+    .map((item) => JSON.stringify(item))
+    .sort();
+
+  return JSON.stringify({
+    requiresApproval: Boolean(reported.requiresApproval),
+    approvalItems,
+  });
+}
+
+function renderRuleLabel(suppression: TypeSpecSuppressionRecord): string {
+  const label = `<code>${escapeHtml(suppression.ruleName)}</code>`;
+  const documentationUrl = suppression.ruleMetadata?.documentationUrl;
+  return documentationUrl ? `<a href="${documentationUrl}">${label}</a>` : label;
+}
+
+function renderSourceLink(
+  owner: string,
+  repo: string,
+  pullNumber: number,
+  suppression: TypeSpecSuppressionRecord,
+): string {
+  const sourceLabel = `${getFileName(suppression.sourceFile)}#L${suppression.location.line}`;
+  const sourceUrl = getPullRequestDiffLineLink(
+    owner,
+    repo,
+    pullNumber,
+    suppression.sourceFile,
+    suppression.location.line,
+  );
+  return `<a href="${sourceUrl}">${escapeHtml(sourceLabel)}</a>`;
+}
+
+function renderRuleCell(suppression: TypeSpecSuppressionRecord): string {
+  const ruleMetadata = suppression.ruleMetadata;
+  const description = ruleMetadata?.description
+    ? `<br/>${escapeHtml(ruleMetadata.description)}`
+    : "";
+  const guidance = ruleMetadata?.guidelineCodes?.length
+    ? `<br/>Azure guidance: ${ruleMetadata.guidelineCodes
+        .map((code) => `<code>${escapeHtml(code)}</code>`)
+        .join(", ")}`
+    : "";
+  return `<strong>${renderRuleLabel(suppression)}</strong>${description}${guidance}`;
+}
+
+function renderJustificationValue(justification: string | undefined): string {
+  if (!justification || !justification.trim()) {
+    return "<strong>NO JUSTIFICATION PROVIDED, THIS IS A REQUIRED SUPPRESSION COMPONENT</strong>";
+  }
+  return escapeHtml(justification);
+}
+
+function renderNewSuppressionRow(
+  owner: string,
+  repo: string,
+  pullNumber: number,
+  suppression: TypeSpecSuppressionRecord,
+  statusCell: string,
+): string {
+  return (
+    `<tr><td align="center">${statusCell}</td>` +
+    `<td>${renderRuleCell(suppression)}</td>` +
+    `<td>${renderSourceLink(owner, repo, pullNumber, suppression)}</td>` +
+    `<td>${renderJustificationValue(suppression.justification)}</td></tr>`
+  );
+}
+
+function renderChangedSuppressionRow(
+  owner: string,
+  repo: string,
+  pullNumber: number,
+  change: TypeSpecSuppressionChange,
+  statusCell: string,
+): string {
+  return (
+    `<tr><td align="center">${statusCell}</td>` +
+    `<td>${renderRuleCell(change.after)}</td>` +
+    `<td>${renderSourceLink(owner, repo, pullNumber, change.after)}</td>` +
+    `<td>${renderJustificationValue(change.before.justification)}</td>` +
+    `<td>${renderJustificationValue(change.after.justification)}</td></tr>`
+  );
+}
+
+/**
+ * Renders the dedicated comment body from an already-parsed analyzer report.
+ *
+ * Returns `undefined` when no checked suppressions require review, in which case
+ * no comment should be posted (or an existing comment should be resolved).
+ */
+export function renderSuppressionsCommentBody(
+  report: TypeSpecSuppressionsReport,
+  {
+    owner,
+    repo,
+    pullNumber,
+    isApproved,
+    runUrl,
+  }: { owner: string; repo: string; pullNumber: number; isApproved: boolean; runUrl?: string },
+): string | undefined {
+  const reported = getReportedSuppressions(report);
+  if (!reported.requiresApproval) {
+    return undefined;
+  }
+
+  const newSuppressions = reported.newSuppressions ?? [];
+  const changedSuppressions = reported.changedSuppressions ?? [];
+
+  const statusCell = isApproved ? "✅" : "❌";
+  const approvalState = isApproved ? "✅ Approved" : "❌ Approval required";
+
+  const totalCount = newSuppressions.length + changedSuppressions.length;
+
+  const summaryParts = [approvalState, pluralize(totalCount, "suppression")];
+
+  const sectionLines = [
+    `## ${TYPESPEC_SUPPRESSIONS_SECTION_TITLE}`,
+    "",
+    `**Status:** ${summaryParts.join(" — ")}`,
+    "",
+    `This PR adds or updates the TypeSpec suppressions listed below. <strong>Suppressions are strongly discouraged</strong> — they bypass linter rules that protect API quality and consistency. Authors should avoid adding new suppressions and prefer fixing the underlying issue; reviewers should approve only when there is a clear, compelling justification and no reasonable alternative. Review each linked rule and source location, then apply <code>${TYPESPEC_SUPPRESSIONS_APPROVED_LABEL}</code> only if every justification is acceptable. The <strong>Status</strong> column shows ✅ once the label is applied and ❌ while approval is pending.`,
+    "",
+  ];
+
+  const shownNew = newSuppressions.slice(0, MAX_SUPPRESSIONS_SHOWN);
+  const shownChanged = changedSuppressions.slice(0, MAX_SUPPRESSIONS_SHOWN);
+  const shownCount = shownNew.length + shownChanged.length;
+  const hiddenCount = totalCount - shownCount;
+
+  if (shownNew.length > 0) {
+    sectionLines.push(
+      `<strong>New suppressions (${newSuppressions.length})</strong>`,
+      "",
+      "<table>",
+      "<thead><tr><th>Status</th><th>Rule</th><th>Source</th><th>Justification</th></tr></thead>",
+      "<tbody>",
+      ...shownNew.map((suppression) =>
+        renderNewSuppressionRow(owner, repo, pullNumber, suppression, statusCell),
+      ),
+      "</tbody>",
+      "</table>",
+      "",
+    );
+  }
+
+  if (shownChanged.length > 0) {
+    sectionLines.push(
+      `<strong>Changed suppressions (${changedSuppressions.length})</strong>`,
+      "",
+      "<table>",
+      "<thead><tr><th>Status</th><th>Rule</th><th>Source</th><th>Previous justification</th><th>New justification</th></tr></thead>",
+      "<tbody>",
+      ...shownChanged.map((change) =>
+        renderChangedSuppressionRow(owner, repo, pullNumber, change, statusCell),
+      ),
+      "</tbody>",
+      "</table>",
+      "",
+    );
+  }
+
+  if (hiddenCount > 0 && runUrl) {
+    sectionLines.push(
+      `<em>Showing ${shownCount} of ${totalCount} suppressions. See the <a href="${runUrl}">full analysis log</a> for the complete list.</em>`,
+      "",
+    );
+  }
+
+  sectionLines.push(
+    "",
+    'For an overview of TypeSpec linting rules <a href="https://aka.ms/tsp-suppress/tsp-to-lintdiff">click here</a>.<br/>For a mapping from ARM lintdiff rules to corresponding TypeSpec linting rules <a href="https://aka.ms/tsp-suppress/lintdiff-to-tsp">click here</a>.',
+    "",
+    '💬 Have feedback on the TypeSpec suppression flow? <a href="https://aka.ms/tsp-suppress/feedback">Let us know</a>.',
+  );
+  return sectionLines.join("\n");
+}
+
+/**
+ * Locates the latest "TypeSpec Suppressions - Analyze Code" run for the given
+ * head_sha, downloads and parses its report artifact, and renders the dedicated
+ * comment body.
+ *
+ * Returns `undefined` when the analysis result is not yet known (no completed
+ * run, or no artifact to parse). Once a report has been successfully parsed,
+ * returns an object carrying both the rendered `body` (`undefined` when no
+ * suppressions require review) and the definitive `requiresApproval` boolean.
+ */
+export async function buildSuppressionsComment(
+  github: GitHub,
+  core: Core,
+  owner: string,
+  repo: string,
+  head_sha: string,
+  pullNumber: number,
+  labelNames: string[] = [],
+): Promise<TypeSpecSuppressionsCommentResult | undefined> {
+  const run = await getLatestTypeSpecSuppressionsWorkflowRun(github, core, owner, repo, head_sha);
+  if (!run || run.status !== "completed") {
+    return undefined;
+  }
+
+  let reportContent;
+  try {
+    reportContent = await downloadArtifactText(
+      github,
+      core,
+      owner,
+      repo,
+      run.id,
+      TYPESPEC_SUPPRESSIONS_REPORT_ARTIFACT_NAME,
+    );
+  } catch {
+    return undefined;
+  }
+
+  const parsedReport: unknown = JSON.parse(reportContent);
+  const report = parsedReport as TypeSpecSuppressionsReport;
+
+  const runUrl = run.html_url ?? `https://github.com/${owner}/${repo}/actions/runs/${run.id}`;
+
+  const body = renderSuppressionsCommentBody(report, {
+    owner,
+    repo,
+    pullNumber,
+    isApproved: labelNames.includes(TYPESPEC_SUPPRESSIONS_APPROVED_LABEL),
+    runUrl,
+  });
+
+  const requiresApproval = Boolean(getReportedSuppressions(report).requiresApproval);
+
+  return { body, requiresApproval, report, run, runUrl };
+}
+
+export async function shouldInvalidateSuppressionApproval(
+  github: GitHub,
+  core: Core,
+  owner: string,
+  repo: string,
+  pullNumber: number,
+  currentRun: WorkflowRunInfo,
+  currentReport: TypeSpecSuppressionsReport,
+): Promise<boolean> {
+  const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
+    owner,
+    repo,
+    event: "pull_request",
+    branch: currentRun.head_branch ?? undefined,
+    per_page: PER_PAGE_MAX,
+  });
+
+  const previousRuns = workflowRuns
+    .filter(
+      (run) =>
+        run.id !== currentRun.id &&
+        run.status === "completed" &&
+        run.head_branch === currentRun.head_branch &&
+        (!currentRun.head_repository?.id ||
+          !run.head_repository?.id ||
+          run.head_repository.id === currentRun.head_repository.id) &&
+        (run.name === TYPESPEC_SUPPRESSIONS_WORKFLOW_NAME ||
+          run.name === `[TEST-IGNORE] ${TYPESPEC_SUPPRESSIONS_WORKFLOW_NAME}`) &&
+        (!run.pull_requests?.length ||
+          run.pull_requests.some((pullRequest) => pullRequest.number === pullNumber)),
+    )
+    .sort(invert(byDate((run) => run.updated_at)));
+
+  for (const previousRun of previousRuns) {
+    try {
+      const reportContent = await downloadArtifactText(
+        github,
+        core,
+        owner,
+        repo,
+        previousRun.id,
+        TYPESPEC_SUPPRESSIONS_REPORT_ARTIFACT_NAME,
+      );
+      const previousReport = JSON.parse(reportContent) as TypeSpecSuppressionsReport;
+      const changed =
+        getSuppressionApprovalFingerprint(previousReport) !==
+        getSuppressionApprovalFingerprint(currentReport);
+      core.info(
+        `TypeSpec suppression approval content ${changed ? "changed" : "did not change"} between workflow runs ${previousRun.id} and ${currentRun.id}.`,
+      );
+      return changed;
+    } catch (error) {
+      core.warning(
+        `Unable to compare TypeSpec suppression report from workflow run ${previousRun.id}: ${
+          error instanceof Error ? error.message : String(error)
+        }`,
+      );
+    }
+  }
+
+  core.info(
+    `No previous TypeSpec suppression report was available for ${owner}/${repo}#${pullNumber}; invalidating approval.`,
+  );
+  return true;
+}

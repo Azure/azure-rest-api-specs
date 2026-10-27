@@ -1,16 +1,21 @@
-import * as fs from "fs";
-import { dirname, join } from "path";
+import * as fs from "node:fs";
+import { dirname, join } from "node:path";
 
 import { parseMarkdown } from "@azure-tools/openapi-tools-common";
 import * as amd from "@azure/openapi-markdown";
 
-import { example, readme, swagger, typespec } from "@azure-tools/specs-shared/changed-files";
+import {
+  example,
+  readme,
+  swagger,
+  tspconfig,
+  typespec,
+} from "@azure-tools/specs-shared/changed-files";
 import { includesSegment } from "@azure-tools/specs-shared/path";
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 
 import { type DiffResult, type ReadmeTag, type TagConfigDiff, type TagDiff } from "./diff-types.ts";
-import { type LabelContext } from "./labelling-types.ts";
 
 export type FileListInfo = {
   additions: string[];
@@ -47,19 +52,12 @@ export class PRContext {
   owner: string;
   prNumber: string;
   isDraft: boolean;
-  labelContext: LabelContext;
 
-  constructor(
-    sourceDirectory: string,
-    targetDirectory: string,
-    labelContext: LabelContext,
-    options: PRContextOptions,
-  ) {
+  constructor(sourceDirectory: string, targetDirectory: string, options: PRContextOptions) {
     this.sourceDirectory = sourceDirectory;
     this.targetDirectory = targetDirectory;
     this.sourceSpecModel = new SpecModel(sourceDirectory);
     this.targetSpecModel = new SpecModel(targetDirectory);
-    this.labelContext = labelContext;
     this.sourceBranch = options.sourceBranch;
     this.targetBranch = options.targetBranch;
     this.sha = options.sha;
@@ -151,12 +149,13 @@ export class PRContext {
 
   async getPossibleParentConfigurations(): Promise<string[]> {
     console.log("ENTER definition getPossibleParentConfigurations");
-    const changedFiles = await this.getChangedFiles();
+    const changedFiles = this.getChangedFiles();
     console.log(`Detect changes in the PR:\n${JSON.stringify(changedFiles, null, 2)}`);
     const readmes = changedFiles.filter((f) => readme(f));
 
     const visitedFolder = new Set<string>();
     changedFiles
+      .filter((f) => !tspconfig(f))
       .filter((f) => [".md", ".json", ".yaml", ".yml"].some((p) => f.endsWith(p)))
       .forEach((f) => {
         let dir = dirname(f);
@@ -179,7 +178,7 @@ export class PRContext {
         }
       });
     console.log("RETURN definition getPossibleParentConfigurations");
-    return readmes;
+    return Promise.resolve(readmes);
   }
 
   getAllTags(readMeContent: string): string[] {
@@ -197,7 +196,7 @@ export class PRContext {
     // todo: we should refactor this to use spec model, but I haven't had time to isolate exactly what
     // openapi-markdown is doing here, so I'm just going to use the same logic for now
     const cmd = parseMarkdown(readMeContent);
-    return amd.getInputFilesForTag(cmd.markDown, tag);
+    return Promise.resolve(amd.getInputFilesForTag(cmd.markDown, tag));
   }
 
   async getChangingTags(): Promise<TagDiff[]> {
@@ -235,7 +234,7 @@ export class PRContext {
       // const allAffectedInputFiles = await this.getRealAffectedSwagger(readme)
       // talk to Mike and ask him how we could get all affected swagger files from a readme path.
       // I want to say that readme(readme).specModel.getAffectedSwaggerFiles will work?
-      const allAffectedInputFiles = await (await this.getChangedFiles()).filter((f) => swagger(f));
+      const allAffectedInputFiles = this.getChangedFiles().filter((f) => swagger(f));
       console.log(`all affected swagger files in ${readme} are:`);
       console.log(JSON.stringify(allAffectedInputFiles, null, 2));
       const getChangedInputFiles = async (tag: string) => {
@@ -273,7 +272,7 @@ export class PRContext {
     // const readmeDeletions = this.fileList?.deletions.filter(file => readme(file));
     //const changedFiles: DiffFileResult | undefined = await this.localPRContext?.getChangingFiles();
 
-    const changedFiles = await this.fileList;
+    const changedFiles = this.fileList;
     const tagDiffs = (await this.getChangingTags()) || [];
 
     const readmeTagDiffs = tagDiffs
@@ -286,7 +285,7 @@ export class PRContext {
             deletions: tagDiff.deletions,
             additions: tagDiff.insertions,
           },
-        } as ReadmeTag;
+        };
       });
 
     const readmeTagDiffsInAddedReadmeFiles: ReadmeTag[] = readmeTagDiffs.filter(

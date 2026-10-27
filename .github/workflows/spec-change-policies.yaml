@@ -1,0 +1,57 @@
+name: Spec Change Policies
+
+on:
+  pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
+
+permissions:
+  contents: read
+
+jobs:
+  spec-change-policies:
+    name: Spec Change Policies
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          # Compare the synthetic merge commit with its target-branch parent.
+          fetch-depth: 2
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - run: >-
+          node eng/tools/spec-change-policies/cmd/spec-change-policies.js --base=HEAD^ --head=HEAD
+          ${{ runner.debug == '1' && '--verbose' || '' }}
+        id: validation
+
+      # Always add label artifact, even if "brownfield=false", to ensure label is removed when necessary
+      - uses: ./.github/actions/add-label-artifact
+        if: ${{ always() && steps.validation.outputs.brownfield != '' }}
+        name: Upload artifact with results
+        with:
+          name: "brownfield"
+          value: "${{ steps.validation.outputs.brownfield == 'true' }}"
+
+  # Temporary required-check compatibility.
+  # Cleanup: https://github.com/Azure/azure-rest-api-specs/issues/47248
+  legacy-required-check:
+    name: TypeSpec Requirement
+    needs: spec-change-policies
+    if: ${{ always() }}
+    runs-on: ubuntu-slim
+    permissions: {}
+    steps:
+      - name: Mirror Spec Change Policies result
+        env:
+          RESULT: ${{ needs.spec-change-policies.result }}
+        run: test "$RESULT" = success
