@@ -59,7 +59,7 @@ model Workspace {
   @visibility(Lifecycle.Read)
   storageUri?: url;
 
-  @doc("The Azure Key Vault used to retrieve browser proxy credentials.")
+  @doc("The Azure Key Vault linked with the playwright workspace.")
   @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read)
   linkedKeyVault?: LinkedKeyVaultProperties;
@@ -67,10 +67,10 @@ model Workspace {
   @doc("The browser proxy enablement status for the workspace.")
   @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read)
-  browserProxy?: EnablementStatus = EnablementStatus.Enabled;
+  browserProxy?: EnablementStatus = EnablementStatus.Disabled;
 }
 
-@doc("The linked Azure Key Vault and managed identity used for browser proxy credentials.")
+@doc("The linked Azure Key Vault and managed identity for the playwright workspace.")
 @added(Versions.v2026_11_01_preview)
 model LinkedKeyVaultProperties {
   @doc("The vault's base HTTPS URI. The vault must belong to the workspace tenant. Secret paths, query strings, fragments, user information, and non-default ports are not allowed.")

@@ -2039,7 +2039,7 @@
     },
     "LinkedKeyVaultProperties": {
       "type": "object",
-      "description": "The linked Azure Key Vault and managed identity used for browser proxy credentials.",
+      "description": "The linked Azure Key Vault and managed identity for the playwright workspace.",
       "properties": {
         "vaultUri": {
           "type": "string",
@@ -2377,7 +2377,7 @@
         },
         "description": {
           "type": "string",
-          "description": "The configuration description.",
+          "description": "The configuration description. Set this to null to delete the existing value.",
           "maxLength": 200,
           "x-ms-mutability": [
             "read",
@@ -2387,7 +2387,7 @@
         },
         "proxyPool": {
           "type": "object",
-          "description": "The named proxy endpoints. At most 5 distinct proxy endpoints are allowed excluding the required 'default-proxy'.",
+          "description": "The named proxy endpoints. At most 5 distinct proxy endpoints are allowed excluding the required 'default-proxy'. Set a 'proxy-endpoint-name':null to delete the existing record.",
           "additionalProperties": {
             "$ref": "#/definitions/ProxyEndpoint"
           },
@@ -2429,7 +2429,7 @@
         },
         "bypass": {
           "type": "array",
-          "description": "The hostname patterns that bypass the proxy and goes through internet directly.",
+          "description": "The hostname patterns that bypass the proxy and goes through internet directly. Set this to null to delete the existing value.",
           "maxItems": 50,
           "items": {
             "type": "string"
@@ -2531,7 +2531,7 @@
         },
         "description": {
           "type": "string",
-          "description": "The configuration description.",
+          "description": "The configuration description. Set this to null to delete the existing value.",
           "maxLength": 200,
           "x-ms-mutability": [
             "read",
@@ -2541,7 +2541,7 @@
         },
         "proxyPool": {
           "type": "object",
-          "description": "The named proxy endpoints. At most 5 distinct proxy endpoints are allowed excluding the required 'default-proxy'.",
+          "description": "The named proxy endpoints. At most 5 distinct proxy endpoints are allowed excluding the required 'default-proxy'. Set a 'proxy-endpoint-name':null to delete the existing record.",
           "additionalProperties": {
             "$ref": "#/definitions/ProxyEndpointUpdate"
           },
@@ -2583,7 +2583,7 @@
         },
         "bypass": {
           "type": "array",
-          "description": "The hostname patterns that bypass the proxy and goes through internet directly.",
+          "description": "The hostname patterns that bypass the proxy and goes through internet directly. Set this to null to delete the existing value.",
           "maxItems": 50,
           "items": {
             "type": "string"
@@ -2662,7 +2662,7 @@
         },
         "pattern": {
           "type": "array",
-          "description": "The hostname patterns routed through this proxy endpoint. At most 40 distinct patterns are allowed.",
+          "description": "The hostname patterns routed through this proxy endpoint.",
           "minItems": 1,
           "maxItems": 40,
           "items": {
@@ -2688,7 +2688,7 @@
         },
         "credentials": {
           "$ref": "#/definitions/ProxyCredentials",
-          "description": "The proxy endpoint credentials.",
+          "description": "The proxy endpoint credentials. Set this to null to delete the existing value.",
           "x-ms-mutability": [
             "update",
             "create"
@@ -2715,7 +2715,7 @@
         },
         "pattern": {
           "type": "array",
-          "description": "The hostname patterns routed through this proxy endpoint. At most 40 distinct patterns are allowed.",
+          "description": "The hostname patterns routed through this proxy endpoint.",
           "minItems": 1,
           "maxItems": 40,
           "items": {
@@ -2741,7 +2741,7 @@
         },
         "credentials": {
           "$ref": "#/definitions/ProxyCredentialsUpdate",
-          "description": "The proxy endpoint credentials.",
+          "description": "The proxy endpoint credentials. Set this to null to delete the existing value.",
           "x-ms-mutability": [
             "update",
             "create"
@@ -3215,13 +3215,13 @@
         },
         "linkedKeyVault": {
           "$ref": "#/definitions/LinkedKeyVaultProperties",
-          "description": "The Azure Key Vault used to retrieve browser proxy credentials.",
+          "description": "The Azure Key Vault linked with the playwright workspace.",
           "readOnly": true
         },
         "browserProxy": {
           "type": "string",
           "description": "The browser proxy enablement status for the workspace.",
-          "default": "Enabled",
+          "default": "Disabled",
           "enum": [
             "Enabled",
             "Disabled"

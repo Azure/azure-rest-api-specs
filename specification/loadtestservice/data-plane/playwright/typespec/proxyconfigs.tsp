@@ -33,12 +33,12 @@ model ProxyConfig {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   name: string;
 
-  @doc("The configuration description.")
+  @doc("The configuration description. Set this to null to delete the existing value.")
   @maxLength(200)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   description?: string;
 
-  @doc("The named proxy endpoints. At most 5 distinct proxy endpoints are allowed excluding the required 'default-proxy'.")
+  @doc("The named proxy endpoints. At most 5 distinct proxy endpoints are allowed excluding the required 'default-proxy'. Set a 'proxy-endpoint-name':null to delete the existing record.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   proxyPool: Record<ProxyEndpoint>;
 
@@ -46,7 +46,7 @@ model ProxyConfig {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   rotation?: EnablementStatus = EnablementStatus.Disabled;
 
-  @doc("The hostname patterns that bypass the proxy and goes through internet directly.")
+  @doc("The hostname patterns that bypass the proxy and goes through internet directly. Set this to null to delete the existing value.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @maxItems(50)
   bypass?: string[];
@@ -63,7 +63,7 @@ model ProxyEndpoint {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   server: url;
 
-  @doc("The hostname patterns routed through this proxy endpoint. At most 40 distinct patterns are allowed.")
+  @doc("The hostname patterns routed through this proxy endpoint.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minItems(1)
   @maxItems(40)
@@ -75,7 +75,7 @@ model ProxyEndpoint {
   @maxValue(100)
   priority?: int32;
 
-  @doc("The proxy endpoint credentials.")
+  @doc("The proxy endpoint credentials. Set this to null to delete the existing value.")
   @visibility(Lifecycle.Create, Lifecycle.Update)
   credentials?: ProxyCredentials;
 }
