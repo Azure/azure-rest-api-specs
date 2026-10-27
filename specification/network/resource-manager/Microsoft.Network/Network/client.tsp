@@ -8721,6 +8721,17 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 
+@@clientLocation(
+  Microsoft.Network.Subnets.resourceNavigationLinksList,
+  Microsoft.Network.Subnets,
+  "csharp"
+);
+@@clientLocation(
+  Microsoft.Network.Subnets.serviceAssociationLinksList,
+  Microsoft.Network.Subnets,
+  "csharp"
+);
+
 @@clientName(
   Microsoft.Network.Subnets.resourceNavigationLinksList,
   "GetResourceNavigationLinks",
