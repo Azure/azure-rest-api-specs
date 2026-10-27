@@ -20,43 +20,55 @@ global-approvers:
   - timotheeguerin
   - xirzec
 
-# Data-plane REST stewardship reviewers. Gated here as the only users who may apply the
-# sign-off label, the approval that clears the merge gate.
-#
-# This list manually mirrors the GitHub team `azure-data-plane-api-reviewers`
-# (https://github.com/orgs/Azure/teams/azure-data-plane-api-reviewers/members). Finding
-# (#45487): the default Actions GITHUB_TOKEN cannot read org membership, so resolving the
-# team live would mean building up a purpose-built GitHub App with org Members:Read.
-# Since this low cost effort and the list changes rarely, the simpler path
-# fits better for now, so we mirror the members by hand. Keep this in sync when team
-# membership changes.
+# Data-plane REST stewardship reviewers. The Automation App resolves the live
+# `azure-data-plane-api-reviewers` roster with its Organization Members read permission.
 data-plane-review-signoff: &data-plane-reviewers
-  - alzimmermsft
-  - heaths
-  - jeremymeng
-  - jhendrixMSFT
-  - JonathanGiles
-  - JoshLove-msft
-  - kashifkhan
-  - LarryOsterman
-  - m-nash
-  - maorleger
-  - qiaozha
-  - samvaity
-  - tjprescott
-  - weidongxu-microsoft
-  - xirzec
+  team: azure-data-plane-api-reviewers
 
-# TypeSpec lint-suppression approval (data-plane stewardship review).
-# `typespec-suppressions-approved` clears the suppression review on a data-plane spec PR.
-# Only the data-plane stewardship reviewers may apply it, mirroring the azure-data-plane-api-reviewers
-# team (same pool as `data-plane-review-signoff`); the alias keeps the two rosters in sync.
-# Management-plane is left `unprotected`: ARM runs its own suppression review process, and
-# this preserves today's behavior (the label was previously unprotected on all planes).
+# TypeSpec lint-suppression approval uses each plane's API reviewers.
+# Data-plane shares its team with `data-plane-review-signoff`; management-plane
+# shares its ARM reviewer team with the ARM signoff and validation labels below.
 # See the stewardship board member guide (aka.ms/azsdk/architect-guidance).
 typespec-suppressions-approved:
   data-plane: *data-plane-reviewers
-  management-plane: unprotected
+  management-plane: &arm-api-reviewers
+    team: arm-api-reviewers
+
+# ARM signoff and validation approval labels. Data-plane behavior remains unchanged.
+ARMSignedOff: &arm-api-review-policy
+  management-plane: *arm-api-reviewers
+  data-plane: unprotected
+Approved-Suppression: *arm-api-review-policy
+Approved-LintDiff: *arm-api-review-policy
+
+# ARM validation approvals are shared by API and SDK reviewers.
+Approved-ModelValidation: &arm-validation-review-policy
+  management-plane:
+    teams:
+      - arm-api-reviewers
+      - azure-sdk-team
+      - azure-arm-sdk-reviewers
+  data-plane: unprotected
+Approved-Avocado: *arm-validation-review-policy
+Approved-SemanticValidation: *arm-validation-review-policy
+
+# REST breaking-change and versioning approvals on both API planes.
+# Enumerate existing labels explicitly; policy keys are not wildcard patterns.
+BreakingChange-Approved-Benign: &arm-breaking-change-policy
+  team: arm-breaking-change-reviewers
+BreakingChange-Approved-BugFix: *arm-breaking-change-policy
+BreakingChange-Approved-UserImpact: *arm-breaking-change-policy
+BreakingChange-Approved-BranchPolicyException: *arm-breaking-change-policy
+BreakingChange-Approved-Previously: *arm-breaking-change-policy
+BreakingChange-Approved-Security: *arm-breaking-change-policy
+BreakingChange-Approved-Retired: *arm-breaking-change-policy
+Versioning-Approved-Benign: *arm-breaking-change-policy
+Versioning-Approved-BugFix: *arm-breaking-change-policy
+Versioning-Approved-PrivatePreview: *arm-breaking-change-policy
+Versioning-Approved-BranchPolicyException: *arm-breaking-change-policy
+Versioning-Approved-Previously: *arm-breaking-change-policy
+Versioning-Approved-Retired: *arm-breaking-change-policy
+Versioning-Approved-NotReleased: *arm-breaking-change-policy
 
 # Package name approval labels (plane-aware)
 package-name-dotnet-approved:
@@ -109,39 +121,20 @@ package-name-approved-all:
 # .github/workflows/src/summarize-checks/labelling.ts). Only authorized reviewers may apply
 # them; if anyone else does, the bot removes the label.
 #
-# The roster is the union of the Azure/azure-data-plane-api-reviewers team and the
-# contributors who actually apply these labels today (audited from recent PR label history).
-# It is hand-maintained as one flat list; keep it in sync when either pool changes.
+# The Automation App resolves the live `azure-sdk-team` roster. Explicit users
+# preserve access for current approvers who are not members of that team.
 #
 # Only the labels that currently exist in the repo are listed. The Java and Python-Track2
 # approval labels (BreakingChange-Java-Sdk-Approved, BreakingChange-Java-Sdk-Suppression-Approved,
 # BreakingChange-Python-Track2-Sdk-Approved) are defined in labelling.ts but not yet created
 # as repo labels; add them here once they exist.
 BreakingChange-Go-Sdk-Approved: &sdk-breaking-change-approvers
-  - alzimmermsft
-  - ArcturusZhang
-  - ArthurMa1978
-  - heaths
-  - jeremymeng
-  - jhendrixMSFT
-  - JialinHuang803
-  - JonathanGiles
-  - JoshLove-msft
-  - kashifkhan
-  - kazrael2119
-  - LarryOsterman
-  - m-nash
-  - maorleger
-  - msyyc
-  - nasc17
-  - qiaozha
-  - samvaity
-  - tadelesh
-  - tjprescott
-  - v-jiaodi
-  - v-xuto
-  - weidongxu-microsoft
-  - xirzec
+  team: azure-sdk-team
+  users:
+    - kazrael2119
+    - nasc17
+    - v-jiaodi
+    - v-xuto
 BreakingChange-Go-Sdk-Suppression-Approved: *sdk-breaking-change-approvers
 BreakingChange-JavaScript-Sdk-Approved: *sdk-breaking-change-approvers
 BreakingChange-JavaScript-Sdk-Suppression-Approved: *sdk-breaking-change-approvers

@@ -8,6 +8,25 @@ using Azure.Core;
 using TypeSpec.Http;
 using Microsoft.Storage;
 
+// Preserve provisioning name-generation constraints without changing service validation.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  FileShare,
+  "resource-name-constraint",
+  #{ minLength: 3, maxLength: 63, pattern: "^[a-z0-9-]+$" },
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  BlobContainer,
+  "resource-name-constraint",
+  #{ minLength: 3, maxLength: 63, pattern: "^[a-z0-9-]+$" },
+  "csharp"
+);
+
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
 @@clientOption(
@@ -23,6 +42,7 @@ using Microsoft.Storage;
     StorageBlobDelegator: "db58b8e5-c6ad-4a2a-8342-4190687cbf4a",
     StorageFileDataPrivilegedContributor: "69566ab7-960f-475b-8e7c-b3118f30c6bd",
     StorageFileDataPrivilegedReader: "b8eda974-7b85-4f76-af95-65846b26df6d",
+    StorageFileDataSmbMIAdmin: "a235d3ee-5935-4cfb-8cc5-a3303ad5995e",
     StorageFileDataSmbShareContributor: "0c867c2a-1d8c-454a-a3db-ab2ea1bdc8bb",
     StorageFileDataSmbShareElevatedContributor: "a7264617-510b-434b-a828-9731dc254ea7",
     StorageFileDataSmbShareReader: "aba4ae5f-2193-4029-9191-0cb91df5e314",
@@ -253,6 +273,11 @@ using Microsoft.Storage;
   Azure.Core.azureLocation,
   "csharp"
 );
+@@alternateType(
+  BlobAccessPointPrivateLinkConnectionProperties.privateLinkLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@clientName(
   UsagesOperationGroup.listByLocation,
   "GetUsagesByLocation",
@@ -369,6 +394,11 @@ union CSharpBlobInventoryPolicyName {
 );
 @@clientName(Reason, "StorageAccountNameUnavailableReason", "csharp");
 @@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
+  "StorageResourceProvisioningState",
+  "csharp"
+);
+@@clientName(
   ContextCacheCheckNameAvailabilityFailureReason,
   "ContextCacheNameUnavailableReason",
   "csharp"
@@ -410,18 +440,23 @@ union CSharpBlobInventoryPolicyName {
 @@clientName(SKUCapability, "SkuCapability", "java");
 @@clientName(IPRule, "IpRule", "java");
 @@clientName(IPRule.value, "ipAddressOrRange", "java");
-@@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
+@@clientName(IPRule.value, exact("iPAddressOrRange"), "javascript");
 @@clientName(StorageAccounts.listAccountSAS, "listAccountSas", "java");
 @@clientName(StorageAccounts.listServiceSAS, "listServiceSas", "java");
 // C# SAS casing: new generator preserves uppercase SAS, prior GA used Sas
 @@clientName(StorageAccounts.listAccountSAS, "GetAccountSas", "csharp");
 @@clientName(StorageAccounts.listServiceSAS, "GetServiceSas", "csharp");
+@@clientName(
+  BlobAccessPointConnectionTests.testProposedConnection,
+  "TestBlobAccessPointProposedConnection",
+  "csharp"
+);
 @@clientName(ImmutableStorageWithVersioning.timeStamp, "timestamp", "java");
 @@clientName(FileShareRecommendations.baseIOPS, "baseIops", "java");
 @@clientName(AccountSasParameters.signedIp, "ipAddressOrRange", "java");
 @@clientName(
   AccountSasParameters.signedIp,
-  "$DO_NOT_NORMALIZE$iPAddressOrRange",
+  exact("iPAddressOrRange"),
   "javascript"
 );
 @@clientName(AccountLimits.maxProvisionedIOPS, "maxProvisionedIops", "java");
@@ -432,7 +467,7 @@ union CSharpBlobInventoryPolicyName {
 @@clientName(ServiceSasParameters.signedIp, "ipAddressOrRange", "java");
 @@clientName(
   ServiceSasParameters.signedIp,
-  "$DO_NOT_NORMALIZE$iPAddressOrRange",
+  exact("iPAddressOrRange"),
   "javascript"
 );
 
@@ -1651,4 +1686,27 @@ enum ProvisioningStateEnum {
   ContextCacheUpdate.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp,java,python,javascript,go"
+);
+
+@@clientName(BlobAccessPointSourceType.DellOneFs, "DellOneFS", "go");
+@@clientName(BlobAccessPointSourceType.NetAppOntap, "NetAppONTAP", "go");
+@@clientName(
+  BlobAccessPointDellOneFsSourceProperties,
+  "BlobAccessPointDellOneFSSourceProperties",
+  "go"
+);
+@@clientName(
+  BlobAccessPointDellOneFsSourcePropertiesUpdate,
+  "BlobAccessPointDellOneFSSourcePropertiesUpdate",
+  "go"
+);
+@@clientName(
+  BlobAccessPointNetAppOntapSourceProperties,
+  "BlobAccessPointNetAppONTAPSourceProperties",
+  "go"
+);
+@@clientName(
+  BlobAccessPointNetAppOntapSourcePropertiesUpdate,
+  "BlobAccessPointNetAppONTAPSourcePropertiesUpdate",
+  "go"
 );
