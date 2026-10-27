@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Kore.AgentPlatform;
 
-@@clientName(Kore.AgentPlatform, "KoreAIArtemisMgmtClient", "python");
+@@clientName(Kore.AgentPlatform, "KoreaiartemisMgmtClient", "python");
 // java
 @@clientName(Kore.AgentPlatform, "KoreAIArtemisManagementClient", "java");
 
