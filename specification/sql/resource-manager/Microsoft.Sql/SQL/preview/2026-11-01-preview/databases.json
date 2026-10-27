@@ -1062,6 +1062,81 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{topQueryName}/queryText": {
+      "get": {
+        "operationId": "TopQueriesQueryText_ListByQuery",
+        "tags": [
+          "Queries"
+        ],
+        "description": "Gets the text of a query in a database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "topQueryName",
+            "in": "path",
+            "description": "The numeric query identifier.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          },
+          {
+            "name": "includeQueryText",
+            "in": "query",
+            "description": "Whether to include query text in the response. Defaults to false.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QueryTextResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Do not include query text.": {
+            "$ref": "./examples/GetQueryTextMin.json"
+          },
+          "Include query text.": {
+            "$ref": "./examples/GetQueryTextMax.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{topQueryName}/statistics": {
       "get": {
         "operationId": "TopQueryStatistics_ListByQuery",
@@ -2296,6 +2371,49 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QueryTextDatabase": {
+      "type": "object",
+      "description": "Text of a requested database query.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the query text result: Microsoft.Sql/servers/databases/topQueries/queryText.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the query text result. Always \"current\".",
+          "readOnly": true
+        },
+        "queryText": {
+          "type": "string",
+          "description": "The SQL text of the query. Omitted when query text is not included.",
+          "readOnly": true
+        }
+      }
+    },
+    "QueryTextResult": {
+      "type": "object",
+      "description": "A list containing the text of the requested database query.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QueryTextDatabase items on this page",
+          "items": {
+            "$ref": "#/definitions/QueryTextDatabase"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [

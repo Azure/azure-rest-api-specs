@@ -9276,6 +9276,14 @@ suppressions:
   - code: ResourceNameRestriction
     from: ManagedInstances.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/topqueries"]
+  - code: ResourceNameRestriction
+    from: databases.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{topQueryName}/queryText"]
+    reason: serverName and databaseName are ancestor resource name parameters.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: databases.json
+    where: $.definitions.QueryTextResult
+    reason: Returns top-query text rather than ARM resources; resource identity fields are not part of this response contract.
   - code: OperationIdNounVerb
     from: ManagedInstances.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/topqueries"].get.operationId
