@@ -2582,18 +2582,27 @@ model MarketplacePlanInfo {
  * A single Marketplace offer and the plans it exposes to the caller. The entry carries the standard
  * Azure Resource Manager proxy-resource identity.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The catalogue entry returns the standard Azure Resource Manager proxy-resource envelope (readonly id/name/type/systemData) around its properties bag, so inheriting the common-types ProxyResource is the correct relation here rather than composition. ProxyResource is deliberately non-polymorphic and defines no discriminator, which is what trips this data-plane style rule."
+@subscriptionResource
 @added(Versions.v2026_09_25_preview)
-model OfferPlanGroup extends Azure.ResourceManager.CommonTypes.ProxyResource {
+model OfferPlanGroup
+  is Azure.ResourceManager.ProxyResource<OfferPlanGroupProperties> {
   /**
-   * The plans belonging to this Marketplace offer.
+   * The Marketplace offer identifier.
    */
-  properties?: OfferPlanGroupProperties;
+  ...ResourceNameParameter<
+    Resource = OfferPlanGroup,
+    KeyName = "offerName",
+    SegmentName = "marketplaceOffers",
+    NamePattern = ""
+  >;
 }
+
+@@doc(OfferPlanGroup.name, "The Marketplace offer identifier.");
 
 /**
  * The plans belonging to a single Marketplace offer.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "marketplaceOffers is a read-only pure proxy resource with no provisioning lifecycle."
 @added(Versions.v2026_09_25_preview)
 model OfferPlanGroupProperties {
   /**

@@ -70,19 +70,23 @@ interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
+}
+
+@armResourceOperations
+interface MarketplaceOffers {
+  /**
+   * Get a single Marketplace offer and the plans visible to the subscription.
+   */
+  @added(Versions.v2026_09_25_preview)
+  get is ArmResourceRead<OfferPlanGroup>;
 
   /**
    * List the Marketplace offers, and the plans within each offer, that are available to the
    * subscription, each plan annotated with the firewall mode it provisions.
    */
   @added(Versions.v2026_09_25_preview)
-  @autoRoute
-  @get
-  @list
-  @action("marketplaceOffers")
-  listMarketplaceOffers is ArmProviderActionSync<
-    Response = MarketplaceOffersResult,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
+  listBySubscription is ArmListBySubscription<
+    OfferPlanGroup,
+    Response = ArmResponse<MarketplaceOffersResult>
   >;
 }
