@@ -5,24 +5,29 @@ using TypeSpec.Http;
 namespace Azure.AI.Projects;
 
 alias IncludeCoordinatesTrait = {
+  /** The include coordinates query parameter. */
   @query("includeCoordinates")
   @doc("Whether to include coordinates for visualization in the response. Defaults to false.")
   includeCoordinates?: boolean;
 };
 
 alias FilterQueryParamsTraits = {
+  /** The type query parameter. */
   @query("type")
   @doc("Filter by the type of analysis.")
   type?: InsightType;
 
+  /** The eval id query parameter. */
   @query("evalId")
   @doc("Filter by the evaluation ID.")
   evalId?: string;
 
+  /** The run id query parameter. */
   @query("runId")
   @doc("Filter by the evaluation run ID.")
   runId?: string;
 
+  /** The agent name query parameter. */
   @query("agentName")
   @doc("Filter by the agent name.")
   agentName?: string;
@@ -48,6 +53,7 @@ interface Insights {
   generate is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.insights_v1_preview,
     {
+      /** The repeatability request id request header. */
       @header("Repeatability-Request-ID")
       @doc("Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.")
       repeatabilityRequestId?: string;

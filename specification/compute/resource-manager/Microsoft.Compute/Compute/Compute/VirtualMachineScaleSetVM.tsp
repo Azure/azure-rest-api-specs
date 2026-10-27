@@ -224,6 +224,7 @@ interface VirtualMachineScaleSetVMS {
    * Gets the status of a virtual machine from a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @get
   @action("instanceView")
   @operationId("VirtualMachineScaleSetVMs_GetInstanceView")

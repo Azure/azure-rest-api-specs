@@ -47,31 +47,35 @@ using TypeSpec.Versioning;
 // These ensure consistent operationId generation in the output
 
 // LinkerResources interface operations with Connector_ prefix
-@@clientLocation(LinkerResources.get, "Connector");
+@@clientLocation(LinkerResources.get, "Connector", "!csharp");
 @@clientName(LinkerResources.get, "Get");
-@@clientLocation(LinkerResources.createOrUpdate, "Connector");
+@@clientLocation(LinkerResources.createOrUpdate, "Connector", "!csharp");
 @@clientName(LinkerResources.createOrUpdate, "CreateOrUpdate");
-@@clientLocation(LinkerResources.update, "Connector");
+@@clientLocation(LinkerResources.update, "Connector", "!csharp");
 @@clientName(LinkerResources.update, "Update");
-@@clientLocation(LinkerResources.delete, "Connector");
+@@clientLocation(LinkerResources.delete, "Connector", "!csharp");
 @@clientName(LinkerResources.delete, "Delete");
-@@clientLocation(LinkerResources.list, "Connector");
+@@clientLocation(LinkerResources.list, "Connector", "!csharp");
 @@clientName(LinkerResources.list, "List");
-@@clientLocation(LinkerResources.validate, "Connector");
+@@clientLocation(LinkerResources.validate, "Connector", "!csharp");
 @@clientName(LinkerResources.validate, "Validate");
-@@clientLocation(LinkerResources.generateConfigurations, "Connector");
+@@clientLocation(
+  LinkerResources.generateConfigurations,
+  "Connector",
+  "!csharp"
+);
 @@clientName(LinkerResources.generateConfigurations, "GenerateConfigurations");
 
 // DryrunResources interface operations with Connector_ prefix
-@@clientLocation(DryrunResources.getDryrun, "Connector");
+@@clientLocation(DryrunResources.getDryrun, "Connector", "!csharp");
 @@clientName(DryrunResources.getDryrun, "GetDryrun");
-@@clientLocation(DryrunResources.createDryrun, "Connector");
+@@clientLocation(DryrunResources.createDryrun, "Connector", "!csharp");
 @@clientName(DryrunResources.createDryrun, "CreateDryrun");
-@@clientLocation(DryrunResources.updateDryrun, "Connector");
+@@clientLocation(DryrunResources.updateDryrun, "Connector", "!csharp");
 @@clientName(DryrunResources.updateDryrun, "UpdateDryrun");
-@@clientLocation(DryrunResources.deleteDryrun, "Connector");
+@@clientLocation(DryrunResources.deleteDryrun, "Connector", "!csharp");
 @@clientName(DryrunResources.deleteDryrun, "DeleteDryrun");
-@@clientLocation(DryrunResources.listDryrun, "Connector");
+@@clientLocation(DryrunResources.listDryrun, "Connector", "!csharp");
 @@clientName(DryrunResources.listDryrun, "ListDryrun");
 
 // Linker interface operations with Linkers_ prefix

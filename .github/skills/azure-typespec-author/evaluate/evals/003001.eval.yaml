@@ -1,0 +1,131 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "longrunningoperation"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 003001-arm-action-lro-trigger
+    tags:
+      suite: "lro"
+      mode: "trigger"
+    prompt: |
+      Add a POST asynchronous operation to move an Employee. The request is MoveRequest and the final response is MoveResponse. This is a greenfield operation: its 202 response must include Location, Azure-AsyncOperation, and Retry-After headers. All material design decisions are provided, so proceed without confirmation.
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/003-long-running-operation-share/employee.tsp
+          dest: employee.tsp
+        - src: ../fixtures/003-long-running-operation-share/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/003-long-running-operation-share/readme.md
+          dest: readme.md
+        - src: ../fixtures/003-long-running-operation-share/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/003-long-running-operation-share/tspconfig.yaml
+          dest: tspconfig.yaml
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 003001-arm-action-lro-forced
+    tags:
+      suite: "lro"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author Add a POST asynchronous operation to move an Employee. The request is MoveRequest and the final response is MoveResponse. This is a greenfield operation: its 202 response must include Location, Azure-AsyncOperation, and Retry-After headers. All material design decisions are provided, so proceed without confirmation.
+    environment: *shared_environment
+    rubric: &shared_rubric
+      - The implementation adds a POST asynchronous move action for Employee using MoveRequest as the request and MoveResponse as the final response.
+      - The implementation uses ARM long-running-operation headers whose final result is MoveResponse.
+      - Changes are limited to the requested operation and contain no unrelated edits.
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: '(?:move|moveEmployee)\s+is\s+ArmResourceActionAsync\s*<\s*Employee\s*,\s*MoveRequest\s*,\s*MoveResponse(?:\s*>|\s*,\s*LroHeaders\s*=)'
+          path: "employee.tsp"
+      - type: "file-matches"
+        name: "file-matches-lro-response"
+        config:
+          pattern: 'ArmCombinedLroHeaders\s*<\s*(FinalResult\s*=\s*MoveResponse|ArmOperationStatus\s*,\s*MoveResponse|(Azure\.ResourceManager\.)?ArmOperationStatus\s*,\s*MoveResponse)\s*>'
+          path: "employee.tsp"
+      - type: "prompt"
+        config:
+          threshold: 0.77
+          model: "gpt-5.6-sol"
+          scoring: "scale_1_10"
+          prompt: "Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent."
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 003001-arm-action-lro-no-skill
+    tags:
+      suite: "lro"
+      mode: "no-skill"
+    prompt: "Add a POST asynchronous operation to move an Employee. The request is MoveRequest and the final response is MoveResponse. This is a greenfield operation: its 202 response must include Location, Azure-AsyncOperation, and Retry-After headers. All material design decisions are provided, so proceed without confirmation."
+    environment: *shared_environment
+    rubric: *shared_rubric
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - *file_matches
+      - type: "file-matches"
+        name: "file-matches-lro-response"
+        config:
+          path: "employee.tsp"
+          pattern: 'ArmCombinedLroHeaders\s*<\s*(FinalResult\s*=\s*MoveResponse|ArmOperationStatus\s*,\s*MoveResponse|(Azure\.ResourceManager\.)?ArmOperationStatus\s*,\s*MoveResponse)\s*>'
+      - type: "prompt"
+        config:
+          prompt: "Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent. Do not penalize for pre-existing project configuration issues such as swagger generation failures unrelated to the agent changes."
+          model: "gpt-5.6-sol"
+          scoring: "scale_1_10"
+          threshold: 0.77
+    constraints:
+      max_turns: 10
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.15
+    prompt: 0.15
+    run-command: 0.15
+    skill-invocation: 0.15
+    file-matches: 0.4
+  threshold: 0.95

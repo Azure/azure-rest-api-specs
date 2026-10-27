@@ -55,7 +55,7 @@ model VolumeProperties {
   /**
    * A unique file path for the volume. Used when creating mount targets
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark with @secret if this value should be kept private"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "creationToken is the customer-visible volume path used to create mount targets; it is not a credential."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxLength(80)
   @minLength(1)
@@ -84,6 +84,15 @@ model VolumeProperties {
   @added(Versions.v2026_05_01)
   @removed(Versions.v2026_05_15_preview)
   @renamedFrom(Versions.v2026_05_15_preview, "usageThreshold")
+  @added(Versions.v2026_06_01)
+  @removed(Versions.v2026_06_15_preview)
+  @renamedFrom(Versions.v2026_06_15_preview, "usageThreshold")
+  @added(Versions.v2026_07_01)
+  @removed(Versions.v2026_07_15_preview)
+  @renamedFrom(Versions.v2026_07_15_preview, "usageThreshold")
+  @added(Versions.v2026_08_01)
+  @removed(Versions.v2026_08_15_preview)
+  @renamedFrom(Versions.v2026_08_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThresholdOld: int64 = 107374182400;
@@ -102,6 +111,12 @@ model VolumeProperties {
   @added(Versions.v2026_04_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold: int64 = 107374182400;
@@ -112,7 +127,8 @@ model VolumeProperties {
   exportPolicy?: VolumePropertiesExportPolicy;
 
   /**
-   * Set of protocol types, default NFSv3, CIFS for SMB protocol
+   * Specify the protocol types for the volume. Supported values are NFSv3, NFSv4.1, and CIFS. For SMB volumes, specify CIFS.
+   * The value SMB isn't supported in the protocolTypes property. Default: NFSv3
    */
   protocolTypes?: string[];
 
@@ -261,6 +277,14 @@ model VolumeProperties {
   smbContinuouslyAvailable?: boolean = false;
 
   /**
+   * Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol volume
+   */
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
+  smbOplocks?: SmbOplocks;
+
+  /**
    * Maximum throughput in MiB/s that can be achieved by this volume and this will be accepted as input only for manual qosType volume
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
@@ -300,6 +324,12 @@ model VolumeProperties {
   @added(Versions.v2026_04_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
 
@@ -363,6 +393,12 @@ model VolumeProperties {
    * Specifies if default quota is enabled for the volume.
    */
   isDefaultQuotaEnabled?: boolean = false;
+
+  /**
+   * Async Directory Delete configuration for the volume.
+   */
+  @added(Versions.v2026_08_15_preview)
+  asyncDirectoryDelete?: AsyncDirectoryDelete;
 
   /**
    * Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .
@@ -454,6 +490,12 @@ model VolumeProperties {
   @added(Versions.v2026_04_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   largeVolumeType?: LargeVolumeType;
 
@@ -483,6 +525,12 @@ model VolumeProperties {
   @added(Versions.v2026_04_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
   language?: VolumeLanguage;
 
   /**
@@ -517,6 +565,52 @@ model VolumeProperties {
   @added(Versions.v2026_05_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   breakthroughMode?: BreakthroughMode;
+
+  /**
+   * Geographic namespace properties for this volume.
+   */
+  @added(Versions.v2026_08_15_preview)
+  geoNamespaceProperties?: VolumeNamespaceProperties;
+}
+
+/**
+ * Indicates whether a volume is designated as an origin for cache volumes.
+ */
+@added(Versions.v2026_08_15_preview)
+union OriginVolume {
+  string,
+
+  /**
+   * This volume is not designated as an origin for cache volumes.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * This volume is designated as an origin for one or more cache volumes.
+   */
+  Enabled: "Enabled",
+}
+
+/**
+ * Geographic namespace properties for a volume.
+ */
+@added(Versions.v2026_08_15_preview)
+model VolumeNamespaceProperties {
+  /**
+   * Indicates whether this volume is designated as an origin for cache volumes.
+   */
+  originVolume?: OriginVolume;
+}
+
+/**
+ * Geographic namespace properties for a volume patch operation.
+ */
+@added(Versions.v2026_08_15_preview)
+model VolumePatchNamespaceProperties {
+  /**
+   * Indicates whether this volume is designated as an origin for cache volumes.
+   */
+  originVolume?: OriginVolume;
 }
 
 /**
@@ -1341,6 +1435,15 @@ model VolumePatchProperties {
   @added(Versions.v2026_05_01)
   @removed(Versions.v2026_05_15_preview)
   @renamedFrom(Versions.v2026_05_15_preview, "usageThreshold")
+  @added(Versions.v2026_06_01)
+  @removed(Versions.v2026_06_15_preview)
+  @renamedFrom(Versions.v2026_06_15_preview, "usageThreshold")
+  @added(Versions.v2026_07_01)
+  @removed(Versions.v2026_07_15_preview)
+  @renamedFrom(Versions.v2026_07_15_preview, "usageThreshold")
+  @added(Versions.v2026_08_01)
+  @removed(Versions.v2026_08_15_preview)
+  @renamedFrom(Versions.v2026_08_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThreshold20250901?: int64;
@@ -1359,6 +1462,12 @@ model VolumePatchProperties {
   @added(Versions.v2026_04_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold?: int64;
@@ -1369,7 +1478,8 @@ model VolumePatchProperties {
   exportPolicy?: VolumePatchPropertiesExportPolicy;
 
   /**
-   * Set of protocol types, default NFSv3, CIFS for SMB protocol
+   * Specify the protocol types for the volume. Supported values are NFSv3, NFSv4.1, and CIFS. For SMB volumes, specify CIFS.
+   * The value SMB isn't supported in the protocolTypes property. Default: NFSv3
    */
   protocolTypes?: string[];
 
@@ -1387,6 +1497,12 @@ model VolumePatchProperties {
    * Specifies if default quota is enabled for the volume.
    */
   isDefaultQuotaEnabled?: boolean;
+
+  /**
+   * Async Directory Delete configuration for the volume.
+   */
+  @added(Versions.v2026_08_15_preview)
+  asyncDirectoryDelete?: AsyncDirectoryDelete;
 
   /**
    * Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .
@@ -1444,6 +1560,20 @@ model VolumePatchProperties {
    * Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume
    */
   smbNonBrowsable?: SmbNonBrowsable;
+
+  /**
+   * Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol volume
+   */
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
+  smbOplocks?: SmbOplocks;
+
+  /**
+   * Geographic namespace properties for this volume.
+   */
+  @added(Versions.v2026_08_15_preview)
+  geoNamespaceProperties?: VolumePatchNamespaceProperties;
 }
 
 /**
@@ -1706,7 +1836,17 @@ model ClusterPeerCommandResponseProperties {
   /**
    * Passphrase for use with cluster peer command
    */
+  @removed(Versions.v2026_07_01)
+  @renamedFrom(Versions.v2026_07_01, "passphrase")
   @example("SecurePassphrase123")
+  passphraseOld?: string;
+
+  /**
+   * Passphrase for use with cluster peer command
+   */
+  @added(Versions.v2026_07_01)
+  @secret
+  @example("{passphrase}")
   passphrase?: string;
 }
 
@@ -2063,6 +2203,26 @@ union SmbNonBrowsable {
 }
 
 /**
+ * SMB opportunistic-lock setting shared by volume and cache resources. Omit the property when unspecified.
+ */
+@added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_08_01)
+@added(Versions.v2026_08_15_preview)
+union SmbOplocks {
+  string,
+
+  /**
+   * SMB opportunistic locks share setting is disabled.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * SMB opportunistic locks share setting is enabled.
+   */
+  Enabled: "Enabled",
+}
+
+/**
  * Source of key used to encrypt data in volume. Applicable if NetApp account has encryption.keySource = 'Microsoft.KeyVault'. Possible values (case-insensitive) are: 'Microsoft.NetApp, Microsoft.KeyVault'
  */
 union EncryptionKeySource {
@@ -2157,6 +2317,42 @@ union EnableSubvolumes {
    * subvolumes are not enabled
    */
   Disabled: "Disabled",
+}
+
+/**
+ * Whether Async Directory Delete is enabled for the volume.
+ */
+@added(Versions.v2026_08_15_preview)
+union AsyncDirectoryDeleteStatus {
+  string,
+
+  /**
+   * Async Directory Delete is enabled
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Async Directory Delete is disabled
+   */
+  Disabled: "Disabled",
+}
+
+/**
+ * Async Directory Delete configuration for the volume.
+ */
+@added(Versions.v2026_08_15_preview)
+model AsyncDirectoryDelete {
+  /**
+   * Specifies whether Async Directory Delete is enabled for the volume.
+   */
+  status?: AsyncDirectoryDeleteStatus;
+
+  /**
+   * The name of the Trash bin folder for deleted files. Max length of 255. Must contain at least one alphanumeric character (A-Z, a-z, 0-9) and may include dots (.), underscores (_), and hyphens (-).
+   */
+  @maxLength(255)
+  @pattern("^[a-zA-Z0-9._-]*[a-zA-Z0-9][a-zA-Z0-9._-]*$")
+  trashBinName?: string;
 }
 
 /**

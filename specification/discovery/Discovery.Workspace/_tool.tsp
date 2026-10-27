@@ -194,6 +194,7 @@ model OutputDataUri {
  * When the run completes, the status API will provide a URI which identifies the location to which
  * the output has been written, allowing it to be consumed by downstream tools.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters to run a Tool")
 model RunRequest {
   ...WithProjectNamePath;
@@ -351,6 +352,7 @@ model RunResult {
   @doc("The user that started the tool run.")
   createdBy?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Details provided by the tool (rather than the platform).")
   toolReport?: {
     /** Percentage compete */

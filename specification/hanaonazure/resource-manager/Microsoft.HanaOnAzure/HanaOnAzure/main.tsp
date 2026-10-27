@@ -45,18 +45,9 @@ enum Versions {
   v2020_02_07_preview: "2020-02-07-preview",
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface Operations {
-  /**
-   * Gets a list of SAP HANA management operations.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @autoRoute
-  @get
-  @segment("operations")
-  @list
-  @tag("HanaOnAzure")
-  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
-    | ArmResponse<OperationList>
-    | ErrorResponse;
-}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationList>,
+      ErrorResponse,
+      Tag = "HanaOnAzure"
+    > {}

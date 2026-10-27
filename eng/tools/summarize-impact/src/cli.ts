@@ -4,10 +4,10 @@ import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { evaluateImpact, getRPaaSFolderList } from "./impact.ts";
 
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
-import { writeFile } from "fs/promises";
+import { writeFile } from "node:fs/promises";
 import { parseArgs, type ParseArgsConfig } from "node:util";
-import { resolve } from "path";
-import { type LabelContext } from "./labelling-types.ts";
+import { resolve } from "node:path";
+import { simpleGit } from "simple-git";
 import { PRContext } from "./PRContext.ts";
 
 export async function main() {
@@ -74,8 +74,11 @@ export async function main() {
   const targetDirectory = opts.targetDirectory as string;
   const sourceGitRoot = await getRootFolder(sourceDirectory);
   const targetGitRoot = await getRootFolder(targetDirectory);
+  // The target checkout is the PR merge base, not necessarily the source's first parent.
+  const baseCommitish = await simpleGit(targetGitRoot).revparse("HEAD");
   const fileList = await getChangedFilesStatuses({
     cwd: sourceGitRoot,
+    baseCommitish,
     // code in diff-types.ts and impact.ts assumes the file list only contains add/modify/delete, not renames
     gitOptions: ["--no-renames"],
     logger: defaultLogger,
@@ -92,15 +95,7 @@ export async function main() {
   // Get the list of RPaaS folders from the target branch's arm-leases directory (read from disk)
   const mainSpecFolders = getRPaaSFolderList(targetGitRoot);
 
-  const labelContext: LabelContext = {
-    // summarize-impact only triggers on PR code changes, not label changes.  Since this code cannot depend
-    // on the state of any labels at the time it runs, initialize the "present" set of labels to empty.
-    present: new Set(),
-    toAdd: new Set(),
-    toRemove: new Set(),
-  };
-
-  const prContext = new PRContext(sourceGitRoot, targetGitRoot, labelContext, {
+  const prContext = new PRContext(sourceGitRoot, targetGitRoot, {
     sha,
     sourceBranch,
     targetBranch,
@@ -111,7 +106,7 @@ export async function main() {
     isDraft,
   });
 
-  let impact = await evaluateImpact(prContext, labelContext, mainSpecFolders);
+  const impact = await evaluateImpact(prContext, mainSpecFolders);
 
   console.log("Evaluated impact: ", JSON.stringify(impact, null, 2));
 

@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "subscriptionId": "7f4a1d92-3b6e-4c8f-9a25-e1b8c3d7f024",
+    "resourceGroupName": "connectionAnalyzerRG",
+    "networkWatcherName": "nw1",
+    "connectionAnalyzerName": "ca1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/7f4a1d92-3b6e-4c8f-9a25-e1b8c3d7f024/resourceGroups/connectionAnalyzerRG/providers/Microsoft.Network/networkWatchers/nw1/connectionAnalyzers/ca1",
+        "connectionAnalyzerStatus": "Succeeded",
+        "outputStoragePath": "https://sa1.blob.core.windows.net/network-watcher-logs/connectionanalyzer/ca1_2025_09_01_10_00_00.json",
+        "expiryInUtc": "2025-10-01T10:00:00Z",
+        "diagnosticOperationResults": [
+          {
+            "diagnosticOperation": "ConnectivityCheck",
+            "result": "{\"ConnectivityStatus\":\"Reachable\"}"
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/7f4a1d92-3b6e-4c8f-9a25-e1b8c3d7f024/providers/Microsoft.Network/locations/eastus/operationResults/operationid?api-version=2025-09-01",
+        "Retry-After": 30
+      }
+    }
+  },
+  "operationId": "NetworkWatchers_ConnectionAnalyzersQuery",
+  "title": "Query connection analyzer"
+}

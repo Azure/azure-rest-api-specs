@@ -93,6 +93,7 @@ union AgentStatus {
 /**
  * The minute element of the time. Allowed values are 0 and 30. If not specified, its value defaults to 0.
  */
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union Minute {
   int32,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -810,6 +811,7 @@ model JobDefinitionProperties {
   /**
    * The list of cloud endpoints to migrate.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @added(Versions.v2025_07_01)
   sourceTargetMap?: {
     @visibility(Lifecycle.Read)
