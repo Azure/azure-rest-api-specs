@@ -34,7 +34,7 @@ union DataGenerationJobType {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("LLM model options for data generation jobs.")
 model DataGenerationModelOptions {
-  @doc("Base model name used to generate data. For conversation jobs, a nonempty value is required when `generate_test_case_description` or `generate_test_case_rubric` is true. Model options must be omitted for conversation reconstruction when neither description nor rubric generation is enabled.")
+  @doc("Base model name used to generate data. For trace and conversation jobs, a nonempty value is required when `generate_test_case_rubric` is true. Conversation jobs also require a nonempty value when `generate_test_case_description` is true. Model options must be omitted for conversation reconstruction when neither description nor rubric generation is enabled.")
   `model`: string;
 }
 
@@ -347,6 +347,9 @@ model TracesDataGenerationJobConfiguration
 
   @doc("Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.")
   redact_private_content?: boolean = true;
+
+  @doc("Whether to generate test-case rubric dimensions for each captured turn sample. This is a preview feature requiring the `Foundry-Features: DataGenerationJobs=V1Preview` request header. When true, requires a nonempty `model_options.model`.")
+  generate_test_case_rubric?: boolean;
 }
 
 @doc("The configuration for reconstructing existing traced conversations for evaluation, not synthetic conversation simulation. This preview requires `scenario` to be `evaluation`, sources of type `traces`, and the `Foundry-Features: DataGenerationJobs=V1Preview` request header. Conversation-level sampling is implicit; `sample_level` is not supported. Existing trace selection, annotations, and output dataset row schemas are unchanged. Create, get, and list responses preserve `type: conversations`. The service enforces the scenario, source, and conditional model-options requirements. Conversation-level output rows contain `test_case_id`, `messages`, `tool_definitions`, and `metadata`. A successful optional description adds `test_case_description`. If description generation fails, the row is retained with safe row-level status and error metadata, without raw provider or model error bodies.")

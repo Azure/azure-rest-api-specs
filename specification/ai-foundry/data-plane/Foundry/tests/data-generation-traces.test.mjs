@@ -21,8 +21,9 @@ for (const version of ["v1", "virtual-public-preview"]) {
   );
   const schemas = spec.components.schemas;
   const conversations = schemas.ConversationsDataGenerationJobConfiguration;
+  const traces = schemas.TracesDataGenerationJobConfiguration;
 
-  test(`${version}: conversation-only options are absent from other generation configurations`, () => {
+  test(`${version}: description generation is conversation-only and rubric generation is limited to traces and conversations`, () => {
     for (const [name, schema] of Object.entries(schemas)) {
       if (!name.endsWith("DataGenerationJobConfiguration")) continue;
       for (const removed of [
@@ -36,20 +37,43 @@ for (const version of ["v1", "virtual-public-preview"]) {
         );
       }
       if (name === "ConversationsDataGenerationJobConfiguration") continue;
-      for (const flag of [
-        "generate_test_case_description",
-        "generate_test_case_rubric",
-      ]) {
-        assert(!Object.hasOwn(schema.properties, flag), `${name}.${flag}`);
+      assert(
+        !Object.hasOwn(schema.properties, "generate_test_case_description"),
+        `${name}.generate_test_case_description`,
+      );
+      if (name !== "TracesDataGenerationJobConfiguration") {
+        assert(
+          !Object.hasOwn(schema.properties, "generate_test_case_rubric"),
+          `${name}.generate_test_case_rubric`,
+        );
       }
     }
     assert(!Object.hasOwn(schemas, "TraceSampleLevel"));
     assert.deepEqual(
-      Object.keys(
-        schemas.TracesDataGenerationJobConfiguration.properties,
-      ).sort(),
-      ["max_samples", "redact_private_content", "type"],
+      Object.keys(traces.properties).sort(),
+      [
+        "generate_test_case_rubric",
+        "max_samples",
+        "redact_private_content",
+        "type",
+      ],
     );
+  });
+
+  test(`${version}: trace rubric generation is optional and uses existing model options`, () => {
+    assert.deepEqual(traces.required, ["type"]);
+    assert.equal(traces.properties.generate_test_case_rubric.type, "boolean");
+    assert.match(
+      traces.properties.generate_test_case_rubric.description,
+      /requires a nonempty `model_options\.model`/,
+    );
+    assert.equal(
+      schemas.DataGenerationJobConfiguration.properties.model_options.$ref,
+      "#/components/schemas/DataGenerationModelOptions",
+    );
+    assert.deepEqual(traces.allOf, [
+      { $ref: "#/components/schemas/DataGenerationJobConfiguration" },
+    ]);
   });
 
   test(`${version}: conversation generation supports independent flags and shared model options`, () => {
@@ -85,7 +109,7 @@ for (const version of ["v1", "virtual-public-preview"]) {
     assert.deepEqual(schemas.DataGenerationModelOptions.required, ["model"]);
   });
 
-  test(`${version}: examples use conversations for description and rubric generation`, () => {
+  test(`${version}: examples support rubric generation on traces and conversations`, () => {
     for (const [name, job] of Object.entries(examples)) {
       const configuration = job.generation_configuration;
       assert(!Object.hasOwn(configuration, "sample_level"), name);
@@ -111,6 +135,14 @@ for (const version of ["v1", "virtual-public-preview"]) {
           `${name}.${field}`,
         );
       }
+      const needsModel =
+        configuration.generate_test_case_description === true ||
+        configuration.generate_test_case_rubric === true;
+      if (needsModel) {
+        assert(configuration.model_options.model.length > 0, name);
+      } else if (configuration.type === "conversations") {
+        assert(!Object.hasOwn(configuration, "model_options"), name);
+      }
       if (name.startsWith("turn-")) {
         assert.equal(configuration.type, "traces");
         continue;
@@ -121,19 +153,22 @@ for (const version of ["v1", "virtual-public-preview"]) {
         job.sources.every((source) => source.type === "traces"),
         name,
       );
-      const needsModel =
-        configuration.generate_test_case_description === true ||
-        configuration.generate_test_case_rubric === true;
-      if (needsModel) {
-        assert(configuration.model_options.model.length > 0, name);
-      } else {
-        assert(!Object.hasOwn(configuration, "model_options"), name);
-      }
     }
     assert.equal(
       examples["description-request"].generation_configuration
         .generate_test_case_description,
       true,
+    );
+    assert.equal(
+      examples["turn-rubric-request"].generation_configuration
+        .generate_test_case_rubric,
+      true,
+    );
+    assert(
+      !Object.hasOwn(
+        examples["turn-rubric-request"].generation_configuration,
+        "generate_test_case_description",
+      ),
     );
     assert.equal(
       examples["rubric-request"].generation_configuration

@@ -9098,7 +9098,7 @@
       "post": {
         "operationId": "DataGenerationJobs_create",
         "summary": "Create a data generation job",
-        "description": "Submits a new data generation job for asynchronous execution.\nRequests with `type` set to `conversations` require\n`Foundry-Features: DataGenerationJobs=V1Preview`; the service rejects\nconversation requests without this opt-in. Ordinary turn-level trace\nrequests do not require the header.\nConversation samples require `scenario` to be `evaluation`.\nJobs with `type: conversations` reconstruct existing traced conversations,\nuse sources of type `traces`, and do not support `sample_level`.\nThe conversation-only flags `generate_test_case_description` and\n`generate_test_case_rubric` require a nonempty `model_options.model`\nwhen either is true. Model options must be omitted when neither is enabled.\nCreate, get, and list responses preserve `type: conversations`.\nThe response includes the effective generation settings.",
+        "description": "Submits a new data generation job for asynchronous execution.\nRequests with `type` set to `conversations`, or `traces` with\n`generate_test_case_rubric` set to true, require\n`Foundry-Features: DataGenerationJobs=V1Preview`; the service rejects\nthese requests without this opt-in. Ordinary turn-level trace requests\nwithout rubric generation do not require the header.\nConversation samples require `scenario` to be `evaluation`.\nJobs with `type: conversations` reconstruct existing traced conversations,\nuse sources of type `traces`, and do not support `sample_level`.\nThe `generate_test_case_rubric` flag is supported for both trace and\nconversation jobs and requires a nonempty `model_options.model` when true.\nThe conversation-only `generate_test_case_description` flag also requires\na nonempty `model_options.model` when true. For conversation jobs, model\noptions must be omitted when neither flag is enabled.\nCreate, get, and list responses preserve `type: conversations`.\nThe response includes the effective generation settings.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -40157,7 +40157,7 @@
         "properties": {
           "model": {
             "type": "string",
-            "description": "Base model name used to generate data. For conversation jobs, a nonempty value is required when `generate_test_case_description` or `generate_test_case_rubric` is true. Model options must be omitted for conversation reconstruction when neither description nor rubric generation is enabled."
+            "description": "Base model name used to generate data. For trace and conversation jobs, a nonempty value is required when `generate_test_case_rubric` is true. Conversation jobs also require a nonempty value when `generate_test_case_description` is true. Model options must be omitted for conversation reconstruction when neither description nor rubric generation is enabled."
           }
         },
         "description": "LLM model options for data generation jobs."
@@ -93110,6 +93110,10 @@
             "type": "boolean",
             "description": "Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.",
             "default": true
+          },
+          "generate_test_case_rubric": {
+            "type": "boolean",
+            "description": "Whether to generate test-case rubric dimensions for each captured turn sample. This is a preview feature requiring the `Foundry-Features: DataGenerationJobs=V1Preview` request header. When true, requires a nonempty `model_options.model`."
           }
         },
         "allOf": [

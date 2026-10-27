@@ -70,18 +70,22 @@ This TypeSpec project does not define the legacy `inputs.options` shape.
 
 `type: "traces"` generates samples from captured turns and retains its existing
 options. Conversation reconstruction uses the separate
-`type: "conversations"` configuration. Conversation-only flags are not
-available on `traces`, and neither configuration exposes `sample_level`.
+`type: "conversations"` configuration. Description generation is
+conversation-only; rubric generation is available on both types. Neither
+configuration exposes `sample_level`.
 
 The optional `generate_test_case_description` flag defaults to `false`.
 When enabled, it generates one AI-authored description for each reconstructed
 conversation, using the existing `model_options.model`. The optional
-`generate_test_case_rubric` flag controls test-case rubric generation.
-Either flag requires a nonempty `model_options.model` when true. Model options
-must be omitted when neither is enabled.
+`generate_test_case_rubric` flag controls test-case rubric generation for
+captured turn samples or reconstructed conversations.
+Either flag requires a nonempty `model_options.model` when true. For
+conversation jobs, model options must be omitted when neither is enabled.
 
-The feature header remains optional for ordinary turn-level requests. Reading or
-listing an existing job does not require preview opt-in.
+The feature header remains optional for ordinary turn-level requests without
+rubric generation. Trace requests with `generate_test_case_rubric: true` require
+`Foundry-Features: DataGenerationJobs=V1Preview`, as do conversation requests.
+Reading or listing an existing job does not require preview opt-in.
 
 Conversation dataset rows contain `test_case_id`, `messages`, `tool_definitions`,
 and `metadata`. A successful optional description adds `test_case_description`.
@@ -401,6 +405,41 @@ Location: https://travel-foundry.services.ai.azure.com/api/projects/travel/data_
   },
   "status": "queued",
   "created_at": 1792108800
+}
+```
+
+### Trace request with rubric generation
+
+Turn-level trace jobs support rubric generation using the existing model
+options, without enabling conversation-only description generation.
+
+```http
+POST /data_generation_jobs?api-version=v1
+Content-Type: application/json
+Foundry-Features: DataGenerationJobs=V1Preview
+```
+
+<!-- trace-generation-example: turn-rubric-request -->
+
+```json
+{
+  "name": "travel-support-rubric-turns",
+  "scenario": "evaluation",
+  "sources": [
+    {
+      "type": "traces",
+      "agent_name": "travel-support-agent",
+      "start_time": 1792022400
+    }
+  ],
+  "generation_configuration": {
+    "type": "traces",
+    "generate_test_case_rubric": true,
+    "model_options": {
+      "model": "gpt-4.1"
+    },
+    "max_samples": 25
+  }
 }
 ```
 
