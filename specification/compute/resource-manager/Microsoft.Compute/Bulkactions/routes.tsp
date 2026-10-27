@@ -16,7 +16,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Compute;
 
-@removed(Versions.`2026-10-06`)
 interface Operations extends Azure.ResourceManager.Operations {}
 
 alias LocationParameter = {
