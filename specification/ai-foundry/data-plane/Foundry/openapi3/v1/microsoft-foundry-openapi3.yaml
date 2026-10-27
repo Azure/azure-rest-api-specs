@@ -44,6 +44,8 @@ tags:
   - name: Agent Microsoft 365 Publishing
     parent: Agents Root
   - name: Platform APIs
+  - name: Reinforcement Learning Environments
+    parent: Platform APIs
   - name: Datasets
     parent: Platform APIs
   - name: Indexes
@@ -40376,6 +40378,1319 @@ paths:
             schema:
               $ref: '#/components/schemas/RedTeam'
         description: Redteam to be run
+  /rl_environments:
+    post:
+      operationId: RLE_createEnvironment
+      summary: Register an environment version
+      description: |-
+        Register an immutable version. Returns 400 for conflicting version selectors,
+        invalid harness/defaults or non-successor versions; 403 if not enabled.
+        Registration starts image conversion but does not wait for readiness.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Location:
+              required: true
+              description: URI of the registered version.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleEnvironment'
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RleCreateEnvironmentContent'
+        description: Environment image, identity and configuration.
+      x-ms-examples:
+        Register an immutable Gym environment:
+          $ref: ../../examples/v1/rle/RegisterEnvironment.json
+    get:
+      operationId: RLE_listEnvironments
+      summary: List environments
+      description: List one latest registered version per environment; invalid paging returns 400.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - $ref: '#/components/parameters/RlePageParameters.limit'
+        - $ref: '#/components/parameters/RlePageParameters.continuationToken'
+        - $ref: '#/components/parameters/RleOrderParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RleEnvironment'
+                    description: Items in this page.
+                  nextContinuationToken:
+                    anyOf:
+                      - type: string
+                      - type: 'null'
+                    description: Opaque token for the next page, or null at the end.
+                description: A page using the service's opaque continuation-token contract.
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+      x-ms-examples:
+        List environments using an opaque continuation token:
+          $ref: ../../examples/v1/rle/ListEnvironments.json
+  /rl_environments/jobs/{jobId}:
+    get:
+      operationId: RLE_getJob
+      summary: Get RLE job metadata
+      description: Get durable job status and metadata; returns 404 when the job is unknown.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: jobId
+          in: path
+          required: true
+          description: Training job identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleJob'
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/jobs/{jobId}/metrics:
+    get:
+      operationId: RLE_listJobMetrics
+      summary: List RLE job metrics
+      description: |-
+        Read stored job metrics after a training step; returns 404 for an unknown
+        job and 400 for invalid paging. Records retain their producer-defined schema.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: jobId
+          in: path
+          required: true
+          description: Training job identifier.
+          schema:
+            type: string
+        - name: lastStep
+          in: query
+          required: false
+          description: Return records after this training step; defaults to -1.
+          schema:
+            type: integer
+            format: int64
+          explode: false
+        - $ref: '#/components/parameters/RlePageParameters.limit'
+        - $ref: '#/components/parameters/RlePageParameters.continuationToken'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items: {}
+                    description: Items in this page.
+                  nextContinuationToken:
+                    anyOf:
+                      - type: string
+                      - type: 'null'
+                    description: Opaque token for the next page, or null at the end.
+                description: A page using the service's opaque continuation-token contract.
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/jobs/{jobId}/rollouts:
+    get:
+      operationId: RLE_listJobRollouts
+      summary: List rollouts for a job
+      description: |-
+        List a job's rollout summaries; lastSequence is used only without a
+        continuation token. Returns 400 for invalid cursors and 404 for an unknown job.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: jobId
+          in: path
+          required: true
+          description: Training job identifier.
+          schema:
+            type: string
+        - name: lastSequence
+          in: query
+          required: false
+          description: Return rollouts after this sampler sequence.
+          schema:
+            type: integer
+            format: int64
+          explode: false
+        - $ref: '#/components/parameters/RlePageParameters.limit'
+        - $ref: '#/components/parameters/RlePageParameters.continuationToken'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RleRolloutSummary'
+                    description: Items in this page.
+                  nextContinuationToken:
+                    anyOf:
+                      - type: string
+                      - type: 'null'
+                    description: Opaque token for the next page, or null at the end.
+                description: A page using the service's opaque continuation-token contract.
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/rollouts/{rolloutId}:
+    get:
+      operationId: RLE_getRollout
+      summary: Get rollout metadata
+      description: |-
+        Get execution metadata; returns 404 for an unknown rollout. Graph retention
+        is separate from durable metadata; inspect result_available before reading it.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: rolloutId
+          in: path
+          required: true
+          description: Canonical rollout identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleRolloutDetail'
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/rollouts/{rolloutId}/events:
+    get:
+      operationId: RLE_listRolloutEvents
+      summary: List rollout events
+      description: |-
+        List producer-defined events; returns 404 for an unknown rollout and 400
+        for invalid pagination.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: rolloutId
+          in: path
+          required: true
+          description: Canonical rollout identifier.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/RlePageParameters.limit'
+        - $ref: '#/components/parameters/RlePageParameters.continuationToken'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items: {}
+                    description: Items in this page.
+                  nextContinuationToken:
+                    anyOf:
+                      - type: string
+                      - type: 'null'
+                    description: Opaque token for the next page, or null at the end.
+                description: A page using the service's opaque continuation-token contract.
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/rollouts/{rolloutId}/result:
+    get:
+      operationId: RLE_getRolloutResult
+      summary: Get the retained rollout result
+      description: |-
+        Read the retained result JSON. Returns 404 when the rollout is unknown,
+        incomplete, not stored or expired; durable metadata can outlive the result.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: rolloutId
+          in: path
+          required: true
+          description: Canonical rollout identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/{name}:
+    get:
+      operationId: RLE_getEnvironment
+      summary: Get an environment
+      description: Get the latest registered version; returns 404 if the environment does not exist.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: Environment name.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleEnvironment'
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/{name}/instance_groups:
+    post:
+      operationId: RLE_createInstanceGroupForLatestVersion
+      summary: Create an instance group for the latest version
+      description: |-
+        Create a group by resolving the latest version once at registration.
+        The returned group remains pinned to that resolved version.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: Environment name.
+          schema:
+            type: string
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Location:
+              required: true
+              description: URI of the group.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleInstanceGroup'
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RleCreateInstanceGroupContent'
+        description: Capacity and advisory resource requirements.
+    get:
+      operationId: RLE_listInstanceGroupsByEnvironment
+      summary: List instance groups by environment
+      description: List groups addressed by environment name; invalid paging returns 400.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: Environment name.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/RlePageParameters.limit'
+        - $ref: '#/components/parameters/RlePageParameters.continuationToken'
+        - $ref: '#/components/parameters/RleOrderParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RleInstanceGroup'
+                    description: Items in this page.
+                  nextContinuationToken:
+                    anyOf:
+                      - type: string
+                      - type: 'null'
+                    description: Opaque token for the next page, or null at the end.
+                description: A page using the service's opaque continuation-token contract.
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/{name}/instance_groups/{instanceGroupId}:
+    get:
+      operationId: RLE_getInstanceGroupByEnvironment
+      summary: Get an instance group by environment
+      description: Get a group's pinned version and capacity; returns 404 when absent.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: Environment name.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Group identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleInstanceGroup'
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+    delete:
+      operationId: RLE_deleteInstanceGroupByEnvironment
+      summary: Delete an instance group by environment
+      description: Delete a group through its environment-name alias; returns 404 when absent.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: Environment name.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Group identifier.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/{name}/instance_groups/{instanceGroupId}/instances:
+    post:
+      operationId: RLE_createInstanceByEnvironment
+      summary: Create an instance by environment
+      description: |-
+        Acquire an instance using the group's pinned version. Returns 429 with
+        Retry-After when full and 409 when its environment is not ready.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: Environment name.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Group identifier.
+          schema:
+            type: string
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleInstance'
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/{name}/instance_groups/{instanceGroupId}/instances/{instanceId}:
+    get:
+      operationId: RLE_getInstanceByEnvironment
+      summary: Get an instance by environment
+      description: Read an instance through its environment-name alias; returns 404 when absent.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: Environment name.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Group identifier.
+          schema:
+            type: string
+        - name: instanceId
+          in: path
+          required: true
+          description: Instance identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleInstance'
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+    delete:
+      operationId: RLE_deleteInstanceByEnvironment
+      summary: Delete an instance by environment
+      description: Release an instance through its environment-name alias; returns 404 when absent.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: Environment name.
+          schema:
+            type: string
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Group identifier.
+          schema:
+            type: string
+        - name: instanceId
+          in: path
+          required: true
+          description: Instance identifier.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/{name}/versions:
+    get:
+      operationId: RLE_listEnvironmentVersions
+      summary: List environment versions
+      description: List immutable versions; invalid paging returns 400.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: Environment name.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/RlePageParameters.limit'
+        - $ref: '#/components/parameters/RlePageParameters.continuationToken'
+        - $ref: '#/components/parameters/RleOrderParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RleEnvironment'
+                    description: Items in this page.
+                  nextContinuationToken:
+                    anyOf:
+                      - type: string
+                      - type: 'null'
+                    description: Opaque token for the next page, or null at the end.
+                description: A page using the service's opaque continuation-token contract.
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/{name}/versions/{version}:
+    get:
+      operationId: RLE_getEnvironmentVersion
+      summary: Get an environment version
+      description: |-
+        Get an exact release and refresh pending conversion state; returns 400 for
+        an invalid semantic version and 404 when the release does not exist.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - $ref: '#/components/parameters/RleVersionPath.name'
+        - $ref: '#/components/parameters/RleVersionPath.version'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleEnvironment'
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+    delete:
+      operationId: RLE_deleteEnvironmentVersion
+      summary: Delete an environment version
+      description: |-
+        Delete one release and request image cleanup. Returns 404 for a missing
+        release. This operation does not delete the publisher's ACR image.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - $ref: '#/components/parameters/RleVersionPath.name'
+        - $ref: '#/components/parameters/RleVersionPath.version'
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/{name}/versions/{version}/instance_groups:
+    post:
+      operationId: RLE_createInstanceGroup
+      summary: Create an instance group
+      description: |-
+        Reserve manual execution capacity for an exact release. Returns 400 when
+        its image is not ready, 404 for a missing release, 429 for quota exhaustion,
+        and 503 when capacity admission is unavailable.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - $ref: '#/components/parameters/RleVersionPath.name'
+        - $ref: '#/components/parameters/RleVersionPath.version'
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Location:
+              required: true
+              description: URI of the group.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleInstanceGroup'
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RleCreateInstanceGroupContent'
+        description: Capacity and advisory resource requirements.
+    get:
+      operationId: RLE_listInstanceGroups
+      summary: List instance groups
+      description: List groups for an exact release; invalid paging returns 400.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - $ref: '#/components/parameters/RleVersionPath.name'
+        - $ref: '#/components/parameters/RleVersionPath.version'
+        - $ref: '#/components/parameters/RlePageParameters.limit'
+        - $ref: '#/components/parameters/RlePageParameters.continuationToken'
+        - $ref: '#/components/parameters/RleOrderParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RleInstanceGroup'
+                    description: Items in this page.
+                  nextContinuationToken:
+                    anyOf:
+                      - type: string
+                      - type: 'null'
+                    description: Opaque token for the next page, or null at the end.
+                description: A page using the service's opaque continuation-token contract.
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/{name}/versions/{version}/instance_groups/{instanceGroupId}:
+    get:
+      operationId: RLE_getInstanceGroup
+      summary: Get an instance group
+      description: Read a capacity reservation; returns 404 when absent.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - $ref: '#/components/parameters/RleVersionPath.name'
+        - $ref: '#/components/parameters/RleVersionPath.version'
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Group identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleInstanceGroup'
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+    delete:
+      operationId: RLE_deleteInstanceGroup
+      summary: Delete an instance group
+      description: Delete a group and release its runtime resources; returns 404 when absent.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - $ref: '#/components/parameters/RleVersionPath.name'
+        - $ref: '#/components/parameters/RleVersionPath.version'
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Group identifier.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/{name}/versions/{version}/instance_groups/{instanceGroupId}/instances:
+    post:
+      operationId: RLE_createInstance
+      summary: Create an instance
+      description: |-
+        Acquire an instance. Returns 409 when the image is not ready and 429 with
+        Retry-After and capacity counts when the group is full. A 201 response can
+        describe a still-provisioning runtime; readiness is read through getInstance.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - $ref: '#/components/parameters/RleVersionPath.name'
+        - $ref: '#/components/parameters/RleVersionPath.version'
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Group identifier.
+          schema:
+            type: string
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleInstance'
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/{name}/versions/{version}/instance_groups/{instanceGroupId}/instances/{instanceId}:
+    get:
+      operationId: RLE_getInstance
+      summary: Get an instance
+      description: Read instance readiness; returns 404 when absent.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - $ref: '#/components/parameters/RleVersionPath.name'
+        - $ref: '#/components/parameters/RleVersionPath.version'
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Group identifier.
+          schema:
+            type: string
+        - name: instanceId
+          in: path
+          required: true
+          description: Instance identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleInstance'
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+    delete:
+      operationId: RLE_deleteInstance
+      summary: Delete an instance
+      description: Release a leased instance; returns 404 when absent.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - $ref: '#/components/parameters/RleVersionPath.name'
+        - $ref: '#/components/parameters/RleVersionPath.version'
+        - name: instanceGroupId
+          in: path
+          required: true
+          description: Group identifier.
+          schema:
+            type: string
+        - name: instanceId
+          in: path
+          required: true
+          description: Instance identifier.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/{name}/versions/{version}/rollout:
+    post:
+      operationId: RLE_executeRolloutNative
+      summary: Execute one rollout through the native route
+      description: |-
+        Backend-native rollout route with the same execution and one-shot identity
+        semantics as executeRollout. Project gateway publication must be qualified.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - $ref: '#/components/parameters/RleVersionPath.name'
+        - $ref: '#/components/parameters/RleVersionPath.version'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleRolloutResult'
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RleExecuteRolloutContent'
+        description: Task, model policy and correlation identity.
+  /rl_environments/{name}/versions/{version}/tasks:
+    get:
+      operationId: RLE_listEnvironmentTasks
+      summary: List published environment tasks
+      description: |-
+        List Harbor tasks and per-task image readiness; returns 404 for a missing
+        release and 400 for invalid version or paging parameters.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - $ref: '#/components/parameters/RleVersionPath.name'
+        - $ref: '#/components/parameters/RleVersionPath.version'
+        - $ref: '#/components/parameters/RlePageParameters.limit'
+        - $ref: '#/components/parameters/RlePageParameters.continuationToken'
+        - $ref: '#/components/parameters/RleOrderParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RleHarborTask'
+                    description: Items in this page.
+                  nextContinuationToken:
+                    anyOf:
+                      - type: string
+                      - type: 'null'
+                    description: Opaque token for the next page, or null at the end.
+                description: A page using the service's opaque continuation-token contract.
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+  /rl_environments/{name}/versions/{version}:executeRollout:
+    post:
+      operationId: RLE_executeRollout
+      summary: Execute one rollout
+      description: |-
+        Execute a scored rollout with an exact release. Returns 400 for invalid
+        policy/task/harness, 403 when disabled, 404 for a missing release, and 409
+        for an already-reserved rollout ID. A submitted timeout has an unknown
+        outcome; never automatically replay. Dependency failures return 500 with
+        attribution and retryability, not an instruction to reuse the rollout ID.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - $ref: '#/components/parameters/RleVersionPath.name'
+        - $ref: '#/components/parameters/RleVersionPath.version'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleRolloutResult'
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RleExecuteRolloutContent'
+        description: Task, model policy and correlation identity.
+      x-ms-examples:
+        Evaluate one task using a project model deployment:
+          $ref: ../../examples/v1/rle/ExecuteRollout.json
   /routines:
     get:
       operationId: listRoutines
@@ -42469,6 +43784,47 @@ components:
         type: integer
         format: int32
       explode: false
+    RleOrderParameter:
+      name: order
+      in: query
+      required: false
+      description: Sort direction; defaults to descending.
+      schema:
+        $ref: '#/components/schemas/RlePaginationOrder'
+      explode: false
+    RlePageParameters.continuationToken:
+      name: continuationToken
+      in: query
+      required: false
+      description: Token from a previous page.
+      schema:
+        type: string
+      explode: false
+    RlePageParameters.limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum items in this page; default 100, maximum 100.
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 100
+      explode: false
+    RleVersionPath.name:
+      name: name
+      in: path
+      required: true
+      description: Environment name.
+      schema:
+        type: string
+    RleVersionPath.version:
+      name: version
+      in: path
+      required: true
+      description: Immutable semantic version, in major.minor.patch form.
+      schema:
+        type: string
     UpdateToolboxRequest.name:
       name: name
       in: path
@@ -81909,6 +83265,824 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - RedTeams=V1Preview
+    RleCreateEnvironmentContent:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Environment name; omitted to let the service allocate a name.
+        acrImagePath:
+          type: string
+          description: ACR image reference; required unless tasks provide their own images.
+        version:
+          type: string
+          description: Exact semantic version. Mutually exclusive with versionBump.
+        versionBump:
+          $ref: '#/components/schemas/RleVersionBump'
+          description: Semantic version component to increment when version is omitted.
+        harness:
+          $ref: '#/components/schemas/RleHarnessConfiguration'
+          description: Callable harness; defaults to Gym when omitted.
+        task:
+          $ref: '#/components/schemas/RleTaskConfiguration'
+          description: Task encoding; defaults to JSON when omitted.
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/RleHarborTaskInput'
+          description: Tasks packaged with a Harbor environment version.
+        schema_version:
+          type: string
+          description: Manifest configuration schema version.
+        model:
+          $ref: '#/components/schemas/RleModelDefaults'
+          description: Reusable model selection and renderer settings.
+        train:
+          $ref: '#/components/schemas/RleTrainDefaults'
+          description: Reusable training-loop settings.
+        rollout:
+          $ref: '#/components/schemas/RleRolloutDefaults'
+          description: Reusable rollout-loop settings.
+      description: Project-scoped environment registration with an immutable version.
+    RleCreateInstanceGroupContent:
+      type: object
+      properties:
+        maxActiveInstances:
+          type: integer
+          format: int32
+          minimum: 1
+          description: Maximum simultaneously active instances; defaults to one.
+        metadata:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: Caller metadata.
+        resourceProfile:
+          $ref: '#/components/schemas/RleResourceProfile'
+          description: Advisory resource hints.
+      description: Capacity reservation for manual OpenEnv episode control.
+    RleEnvironment:
+      type: object
+      required:
+        - id
+        - projectId
+        - name
+        - acrImagePath
+        - version
+        - harness
+        - task
+        - createdAtUtc
+        - updatedAtUtc
+      properties:
+        id:
+          type: string
+          description: Service-assigned environment version identifier.
+        projectId:
+          type: string
+          description: Owning project identifier.
+        name:
+          type: string
+          description: Environment name.
+        acrImagePath:
+          type: string
+          description: Environment image reference; task environments use per-task images.
+        version:
+          type: string
+          description: Immutable semantic version.
+        harness:
+          $ref: '#/components/schemas/RleHarnessConfiguration'
+          description: Callable harness configuration.
+        task:
+          $ref: '#/components/schemas/RleTaskConfiguration'
+          description: Task encoding.
+        schema_version:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Manifest configuration schema version, if supplied.
+        model:
+          anyOf:
+            - $ref: '#/components/schemas/RleModelDefaults'
+            - type: 'null'
+          description: Model defaults, if supplied.
+        train:
+          anyOf:
+            - $ref: '#/components/schemas/RleTrainDefaults'
+            - type: 'null'
+          description: Training-loop defaults, if supplied.
+        rollout:
+          anyOf:
+            - $ref: '#/components/schemas/RleRolloutDefaults'
+            - type: 'null'
+          description: Rollout-loop defaults, if supplied.
+        diskImageConversionStatus:
+          $ref: '#/components/schemas/RleImageConversionStatus'
+          description: Image readiness; absent for environments with per-task images.
+        diskImageConversionError:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Image conversion failure detail, otherwise null.
+        createdAtUtc:
+          type: string
+          format: date-time
+          description: UTC creation timestamp.
+        updatedAtUtc:
+          type: string
+          format: date-time
+          description: UTC last-update timestamp.
+      description: An immutable registered environment version.
+    RleError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: Stable error code.
+        message:
+          type: string
+          description: Human-readable description.
+        dependency:
+          type: string
+          description: Failed upstream component, when attributable.
+        operation:
+          type: string
+          description: Failed upstream operation, when attributable.
+        upstream_status:
+          type: integer
+          format: int32
+          description: Upstream HTTP status, when applicable.
+        retryable:
+          type: boolean
+          description: Whether a new attempt may be worthwhile; not permission to replay the same rollout ID.
+        diagnostic:
+          type: string
+          description: Opt-in, bounded and redacted upstream wording.
+        exception:
+          type: string
+          description: Opt-in, bounded and redacted exception details.
+        activeInstanceCount:
+          type: integer
+          format: int32
+          description: Active instances when a group is at capacity.
+        maxActiveInstances:
+          type: integer
+          format: int32
+          description: Group capacity when a group is at capacity.
+        retryAfterSeconds:
+          type: integer
+          format: int32
+          description: Suggested delay in seconds for capacity errors.
+      description: Machine-readable RLE failure; management and execution share code/message.
+    RleErrorBody:
+      anyOf:
+        - $ref: '#/components/schemas/RleError'
+        - type: string
+      description: Failure payloads returned by the existing environment input validators.
+    RleExecuteRolloutContent:
+      type: object
+      required:
+        - rollout_id
+        - task
+        - policy
+      properties:
+        rollout_id:
+          type: string
+          description: Caller-generated canonical rollout identifier, reserved once per project.
+        task:
+          description: Environment-defined task JSON, or a published Harbor task name object.
+        policy:
+          $ref: '#/components/schemas/RleRolloutPolicy'
+          description: Required model binding for capture and sampling.
+        job_id:
+          type: string
+          description: Optional enclosing training job identifier.
+        harness:
+          $ref: '#/components/schemas/RleHarnessConfiguration'
+          description: Per-execution callable override; does not mutate the registered release.
+        sampling:
+          $ref: '#/components/schemas/RleSamplingConfig'
+          description: Optional sampling renderer.
+        include_upstream_diagnostics:
+          type: boolean
+          description: Opt into bounded, redacted upstream and exception diagnostics for this call.
+      description: One service-owned, scored execution; this call does not update weights.
+    RleFoundryPolicy:
+      type: object
+      required:
+        - type
+        - deployment_name
+      properties:
+        type:
+          type: string
+          enum:
+            - foundry
+          description: Foundry deployment policy discriminator.
+        deployment_name:
+          type: string
+          description: Evaluation deployment name in the project.
+      allOf:
+        - $ref: '#/components/schemas/RleRolloutPolicy'
+      description: Text-level evaluation capture using a project model deployment.
+    RleGrpoDefaults:
+      type: object
+      properties:
+        learning_rate:
+          type: number
+          format: double
+          description: Optimizer learning rate.
+        group_size:
+          type: integer
+          format: int32
+          description: Rollouts sampled per group.
+        groups_per_batch:
+          type: integer
+          format: int32
+          description: Groups consumed per training batch.
+        lora_rank:
+          type: integer
+          format: int32
+          description: LoRA adapter rank.
+        num_epochs:
+          type: integer
+          format: int32
+          description: Dataset epochs.
+        max_steps:
+          type: integer
+          format: int32
+          description: Optional maximum training steps.
+        eval_every:
+          type: integer
+          format: int32
+          description: Evaluation interval in training steps.
+        save_every:
+          type: integer
+          format: int32
+          description: Checkpoint interval in training steps.
+        remove_constant_reward_groups:
+          type: boolean
+          description: Whether constant-reward groups are excluded.
+        sampling_seed:
+          type: integer
+          format: int32
+          description: Random sampling seed.
+        min_trainable_group_members:
+          type: integer
+          format: int32
+          description: Minimum trainable members required per group.
+      description: GRPO optimization-loop defaults.
+    RleGymOpenEnvDefaults:
+      type: object
+      properties:
+        model_response_field:
+          type: string
+          description: Action property that receives the model completion verbatim.
+      description: Mapping between model output and the environment's action model.
+    RleHarborTask:
+      type: object
+      required:
+        - name
+        - acrImagePath
+        - bundle
+        - diskImageConversionStatus
+      properties:
+        name:
+          type: string
+          description: Task name, unique within this environment version.
+        acrImagePath:
+          type: string
+          description: ACR image built from the task environment.
+        bundle:
+          $ref: '#/components/schemas/RleTaskBundle'
+          description: Content-addressed task archive reference.
+        diskImageId:
+          type: string
+          description: Converted disk image identifier, when allocated.
+        diskImageConversionStatus:
+          $ref: '#/components/schemas/RleImageConversionStatus'
+          description: Current conversion state.
+        diskImageConversionError:
+          type: string
+          description: Conversion failure detail, when present.
+      description: Published task with its conversion state.
+    RleHarborTaskInput:
+      type: object
+      required:
+        - name
+        - acrImagePath
+        - bundle
+      properties:
+        name:
+          type: string
+          description: Task name, unique within this environment version.
+        acrImagePath:
+          type: string
+          description: ACR image built from the task environment.
+        bundle:
+          $ref: '#/components/schemas/RleTaskBundle'
+          description: Content-addressed task archive reference.
+      description: A task published with an environment version.
+    RleHarnessConfiguration:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/RleHarnessType'
+          description: Harness type; defaults to gym.
+        name:
+          type: string
+          description: Package name for a package harness.
+        endpoint:
+          type: string
+          format: uri
+          description: HTTPS invocation endpoint or same-project Hosted Agent base URL.
+        protocol:
+          $ref: '#/components/schemas/RleHarnessProtocol'
+          description: BYOH protocol; responses or rle-invocation.
+      description: |-
+        Selection of the component that drives the model-and-tool loop.
+        Endpoint and protocol apply only to byoh; name applies only to package.
+        For responses, endpoint is a same-project /agents/{agentName} base URL.
+        The service appends the Responses protocol route.
+    RleHarnessProtocol:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - responses
+            - rle-invocation
+      description: Protocols used to invoke an existing agent.
+    RleHarnessType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - gym
+            - byoh
+            - package
+      description: Supported harness selections.
+    RleImageConversionStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - Pending
+            - Ready
+            - Failed
+      description: Image conversion states; registration does not wait for readiness.
+    RleInstance:
+      type: object
+      required:
+        - instanceId
+        - instanceGroupId
+        - status
+        - createdAtUtc
+        - updatedAtUtc
+      properties:
+        instanceId:
+          type: string
+          description: Instance identifier.
+        instanceGroupId:
+          type: string
+          description: Owning group identifier.
+        status:
+          $ref: '#/components/schemas/RleInstanceStatus'
+          description: Runtime lifecycle state.
+        baseUrl:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Runtime base URL, if available.
+        error:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Runtime failure detail, if present.
+        createdAtUtc:
+          type: string
+          format: date-time
+          description: UTC creation timestamp.
+        updatedAtUtc:
+          type: string
+          format: date-time
+          description: UTC last-update timestamp.
+      description: One runtime leased from an instance group.
+    RleInstanceGroup:
+      type: object
+      required:
+        - id
+        - projectId
+        - environmentName
+        - environmentVersion
+        - maxActiveInstances
+        - createdAtUtc
+        - updatedAtUtc
+      properties:
+        id:
+          type: string
+          description: Group identifier.
+        projectId:
+          type: string
+          description: Owning project identifier.
+        environmentName:
+          type: string
+          description: Registered environment name.
+        environmentVersion:
+          type: string
+          description: Resolved immutable version.
+        maxActiveInstances:
+          type: integer
+          format: int32
+          description: Maximum simultaneously active instances.
+        metadata:
+          anyOf:
+            - type: object
+              unevaluatedProperties:
+                type: string
+            - type: 'null'
+          description: Caller metadata.
+        resourceProfile:
+          anyOf:
+            - $ref: '#/components/schemas/RleResourceProfile'
+            - type: 'null'
+          description: Advisory resource hints.
+        createdAtUtc:
+          type: string
+          format: date-time
+          description: UTC creation timestamp.
+        updatedAtUtc:
+          type: string
+          format: date-time
+          description: UTC last-update timestamp.
+      description: A project-owned group pinned to one environment version.
+    RleInstanceStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - Creating
+            - Running
+            - Stopped
+            - Failed
+            - Deleted
+      description: Runtime states returned by the service.
+    RleJob:
+      type: object
+      required:
+        - id
+        - status
+        - metadata
+      properties:
+        id:
+          type: string
+          description: Job identifier.
+        status:
+          type: string
+          description: Current status.
+        metadata:
+          description: Caller-defined metadata envelope.
+      description: An RLE job's durable status and caller-defined metadata.
+    RleLoomPolicy:
+      type: object
+      required:
+        - type
+        - model_name
+        - session_id
+        - checkpoint_id
+      properties:
+        type:
+          type: string
+          enum:
+            - loom
+          description: Loom policy discriminator.
+        model_name:
+          type: string
+          description: Enabled training model name.
+        session_id:
+          type: string
+          description: Training session identifier, supplied with checkpoint_id.
+        checkpoint_id:
+          type: string
+          description: Immutable sampler checkpoint identifier.
+        sequence_id:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Optional sampler sequence identifier.
+      allOf:
+        - $ref: '#/components/schemas/RleRolloutPolicy'
+      description: Checkpoint-bound training capture using Loom.
+    RleModelDefaults:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Training model name supported by the project.
+        renderer_name:
+          type: string
+          description: Capture renderer compatible with the model.
+      description: Reusable model and renderer selection.
+    RlePaginationOrder:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - asc
+            - desc
+      description: Collection sort directions.
+    RleResourceProfile:
+      type: object
+      properties:
+        cpu:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: CPU resource hint.
+        memory:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Memory resource hint.
+        disk:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Disk resource hint.
+      description: Advisory resource requirements for leased runtime instances.
+    RleRolloutDefaults:
+      type: object
+      properties:
+        gym_openenv:
+          $ref: '#/components/schemas/RleGymOpenEnvDefaults'
+          description: Gym/OpenEnv action mapping.
+      description: Rollout-loop configuration.
+    RleRolloutDetail:
+      type: object
+      required:
+        - rollout_id
+        - environment_name
+        - environment_version
+        - created_at_utc
+        - status
+        - has_graph
+        - result_available
+      properties:
+        rollout_id:
+          type: string
+          description: Rollout identifier.
+        job_id:
+          type: string
+          description: Owning job identifier, when associated.
+        environment_name:
+          type: string
+          description: Registered environment name.
+        environment_version:
+          type: string
+          description: Immutable environment version.
+        created_at_utc:
+          type: string
+          format: date-time
+          description: UTC admission timestamp.
+        sequence_id:
+          type: integer
+          format: int64
+          description: Sampler sequence identifier.
+        session_id:
+          type: string
+          description: Loom session identifier.
+        checkpoint_id:
+          type: string
+          description: Sampler checkpoint identifier.
+        status:
+          type: string
+          description: Effective execution status.
+        reward:
+          type: number
+          format: double
+          description: Persisted reward, if available.
+        success:
+          type: boolean
+          description: Persisted verdict, if available.
+        latency_s:
+          type: number
+          format: double
+          description: Execution latency in seconds, if terminal.
+        has_graph:
+          type: boolean
+          description: Whether a retained graph can be read now.
+        saved_at:
+          type: string
+          format: date-time
+          description: UTC result-storage timestamp, if stored.
+        result_available:
+          type: boolean
+          description: Whether the retained result is currently available.
+        terminal_at_utc:
+          type: string
+          format: date-time
+          description: UTC terminal timestamp.
+      description: Rollout detail includes a terminal timestamp when execution has ended.
+    RleRolloutEpisode:
+      type: object
+      required:
+        - kind
+        - termination_reason
+        - steps
+      properties:
+        kind:
+          type: string
+          description: Episode-shape discriminator.
+        termination_reason:
+          type: string
+          description: Why the episode ended.
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/RleRolloutStep'
+          description: Ordered steps associated with model turns.
+        ungraded:
+          type: boolean
+          description: True when no terminal environment grade was observed.
+      description: Bounded Gym episode evidence.
+    RleRolloutPolicy:
+      type: object
+      required:
+        - type
+        - project_endpoint
+      properties:
+        type:
+          type: string
+          description: Policy backend.
+        project_endpoint:
+          type: string
+          format: uri
+          description: Project endpoint authorizing model access.
+      discriminator:
+        propertyName: type
+        mapping:
+          loom: '#/components/schemas/RleLoomPolicy'
+          foundry: '#/components/schemas/RleFoundryPolicy'
+      description: Model binding used for rollout capture.
+    RleRolloutResult:
+      type: object
+      required:
+        - rollout_id
+        - rollout_graph
+        - reward
+      properties:
+        rollout_id:
+          type: string
+          description: Caller-supplied rollout identifier, returned unchanged.
+        rollout_graph:
+          description: Model conversation and token capture; runtime credentials are removed.
+        final_response:
+          type: string
+          description: Final user-facing text, when produced.
+        reward:
+          type: number
+          format: double
+          description: Finite reward; Gym sums per-step rewards without discounting.
+        success:
+          type: boolean
+          description: Grader verdict; absent for Gym rather than inferred from reward.
+        result:
+          description: Optional structured, sanitized target result.
+        episode:
+          $ref: '#/components/schemas/RleRolloutEpisode'
+          description: Gym episode annotations; absent for existing-agent targets.
+      description: Completed execution with sanitized graph and grading evidence.
+    RleRolloutStep:
+      type: object
+      required:
+        - capture_node_id
+        - reward
+        - episode_done
+      properties:
+        capture_node_id:
+          type: string
+          description: Model-turn identifier in the capture graph.
+        reward:
+          type: number
+          format: double
+          description: Finite reward for this step.
+        episode_done:
+          type: boolean
+          description: Whether this step terminated the episode.
+      description: One environment action correlated with a model turn.
+    RleRolloutSummary:
+      type: object
+      required:
+        - rollout_id
+        - environment_name
+        - environment_version
+        - created_at_utc
+        - status
+        - has_graph
+        - result_available
+      properties:
+        rollout_id:
+          type: string
+          description: Rollout identifier.
+        job_id:
+          type: string
+          description: Owning job identifier, when associated.
+        environment_name:
+          type: string
+          description: Registered environment name.
+        environment_version:
+          type: string
+          description: Immutable environment version.
+        created_at_utc:
+          type: string
+          format: date-time
+          description: UTC admission timestamp.
+        sequence_id:
+          type: integer
+          format: int64
+          description: Sampler sequence identifier.
+        session_id:
+          type: string
+          description: Loom session identifier.
+        checkpoint_id:
+          type: string
+          description: Sampler checkpoint identifier.
+        status:
+          type: string
+          description: Effective execution status.
+        reward:
+          type: number
+          format: double
+          description: Persisted reward, if available.
+        success:
+          type: boolean
+          description: Persisted verdict, if available.
+        latency_s:
+          type: number
+          format: double
+          description: Execution latency in seconds, if terminal.
+        has_graph:
+          type: boolean
+          description: Whether a retained graph can be read now.
+        saved_at:
+          type: string
+          format: date-time
+          description: UTC result-storage timestamp, if stored.
+        result_available:
+          type: boolean
+          description: Whether the retained result is currently available.
+      description: Durable rollout metadata returned by monitoring.
+    RleSamplingConfig:
+      type: object
+      properties:
+        renderer_name:
+          type: string
+          description: Capture renderer name; the capture service chooses a compatible default if omitted.
+      description: Rendering controls for model conversation capture.
+    RleTaskBundle:
+      type: object
+      required:
+        - path
+        - sha256
+      properties:
+        path:
+          type: string
+          description: Project storage path of the task archive.
+        sha256:
+          type: string
+          description: Archive SHA-256 digest.
+      description: Content-addressed Harbor task archive.
+    RleTaskConfiguration:
+      type: object
+      properties:
+        format:
+          $ref: '#/components/schemas/RleTaskFormat'
+          description: Opaque JSON or a published Harbor task name; defaults to json.
+      description: Encoding of tasks supplied to the environment.
+    RleTaskFormat:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - json
+            - harbor
+      description: Supported task encodings.
+    RleTrainDefaults:
+      type: object
+      properties:
+        grpo:
+          $ref: '#/components/schemas/RleGrpoDefaults'
+          description: GRPO recipe settings.
+      description: Training-loop recipe configuration.
+    RleVersionBump:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - Major
+            - Minor
+            - Patch
+      description: Semantic version allocation choices accepted by registration.
     Routine:
       type: object
       required:
