@@ -549,7 +549,7 @@ union ApplicationGatewayClientAuthVerificationModes {
 /**
  * Deployment tier of the Application Gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This project uses legacy-feature-files output splitting; this union participates in the Application Gateway feature's emission."
 @Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 @added(Versions.v2026_05_01)
 union ApplicationGatewayDeploymentTier {
