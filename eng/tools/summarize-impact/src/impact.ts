@@ -5,7 +5,7 @@ import { isDeepStrictEqual } from "node:util";
 import { dirname, join, resolve } from "node:path";
 
 import * as commonmark from "commonmark";
-import yaml from "js-yaml";
+import { parse } from "yaml";
 
 import {
   type ChangeHandler,
@@ -21,7 +21,7 @@ import { Label, type LabelContext, PRType } from "./labelling-types.ts";
 import { type ImpactAssessment } from "./ImpactAssessment.ts";
 import { PRContext } from "./PRContext.ts";
 
-import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files";
+import { dataPlane, resourceManager, tspconfig } from "@azure-tools/specs-shared/changed-files";
 import { Readme } from "@azure-tools/specs-shared/readme";
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
@@ -154,7 +154,7 @@ export async function evaluateImpact(
 }
 
 export function isManagementPR(filePaths: string[]): boolean {
-  return filePaths.some(resourceManager);
+  return filePaths.some((file) => resourceManager(file) && !tspconfig(file));
 }
 
 export function isDataPlanePR(filePaths: string[]): boolean {
@@ -501,7 +501,7 @@ function getSuppressions(readmePath: string) {
     for (const block of codeBlocks) {
       if (block.literal) {
         try {
-          const blockObject = yaml.load(block.literal) as
+          const blockObject = parse(block.literal) as
             | {
                 directive?: Record<string, unknown>[];
                 suppressions?: Record<string, unknown>[];
