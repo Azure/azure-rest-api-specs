@@ -8600,6 +8600,13 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 
+// Preserve Routes through the generator's automatic single-property flattening.
+@@clientName(
+  Microsoft.Network.VirtualHubProperties.routeTable,
+  "Route",
+  "csharp"
+);
+
 // Restore the released operation names on the existing service actions.
 @@clientName(
   Microsoft.Network.VirtualHubs.getEffectiveVirtualHubRoutes,
