@@ -99,7 +99,7 @@ model EvaluationDataGenerationJobOutputConfiguration {
   @doc("Tags to assign to the output dataset.")
   tags?: Record<string>;
 
-  @doc("Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows. `merge` combines newly generated rows with the latest existing dataset version and de-duplicates trace rows. Conversation rows follow the same write modes; merging does not union newly observed turns into an existing conversation snapshot.")
+  @doc("Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows. `merge` combines newly generated rows with the latest existing dataset version and de-duplicates trace rows. For conversation jobs, a newly generated conversation snapshot replaces the existing snapshot of the same conversation, preserving any additional captured turns. Existing conversations without a newly generated replacement remain unchanged. Merging replaces whole conversation snapshots rather than unioning individual turns.")
   write_mode?: DataGenerationJobOutputWriteMode = DataGenerationJobOutputWriteMode.overwrite;
 }
 
@@ -136,7 +136,7 @@ union DataGenerationJobOutputWriteMode {
   @doc("Default behavior. Write newly generated output without merging it with an existing output. For dataset outputs, creates the next dataset version using only newly generated rows.")
   overwrite: "overwrite",
 
-  @doc("Merge newly generated output into an existing output. For trace data generation jobs that output evaluation datasets, creates the next dataset version by merging newly generated rows with the latest existing dataset version and de-duping trace rows. Conversation rows are conversation snapshots; merging does not union newly observed turns into an existing conversation snapshot. For fine-tuning file outputs, merges into the file identified by `merge_file_id`.")
+  @doc("Merge newly generated output into an existing output. For trace data generation jobs that output evaluation datasets, creates the next dataset version by merging newly generated rows with the latest existing dataset version and de-duping trace rows. For conversation jobs, a newly generated conversation snapshot replaces the existing snapshot of the same conversation, preserving any additional captured turns. Existing conversations without a newly generated replacement remain unchanged. Merging replaces whole conversation snapshots rather than unioning individual turns. For fine-tuning file outputs, merges into the file identified by `merge_file_id`.")
   merge: "merge",
 }
 

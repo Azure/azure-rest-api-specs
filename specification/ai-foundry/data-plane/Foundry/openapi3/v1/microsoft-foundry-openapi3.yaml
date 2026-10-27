@@ -49101,7 +49101,7 @@ components:
           description: Tags to assign to the output dataset.
         write_mode:
           $ref: '#/components/schemas/DataGenerationJobOutputWriteMode'
-          description: Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows. `merge` combines newly generated rows with the latest existing dataset version and de-duplicates trace rows. Conversation rows follow the same write modes; merging does not union newly observed turns into an existing conversation snapshot.
+          description: Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows. `merge` combines newly generated rows with the latest existing dataset version and de-duplicates trace rows. For conversation jobs, a newly generated conversation snapshot replaces the existing snapshot of the same conversation, preserving any additional captured turns. Existing conversations without a newly generated replacement remain unchanged. Merging replaces whole conversation snapshots rather than unioning individual turns.
           default: overwrite
       description: Dataset output configuration for an evaluation data generation job.
     EvaluationDataset:

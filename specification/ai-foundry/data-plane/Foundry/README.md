@@ -88,8 +88,11 @@ and `metadata`. A successful optional description adds `test_case_description`.
 Description failure retains the row and records safe row-level status/error
 metadata, without raw provider or model error bodies.
 `max_samples` counts whole conversation candidates, not turns.
-Dataset merge preserves conversation-snapshot semantics: it is not a union of
-newly observed turns into an existing conversation snapshot.
+When merging conversation datasets, a newly generated conversation snapshot
+replaces the existing snapshot of the same conversation, preserving any
+additional captured turns. Existing conversations without a newly generated
+replacement remain unchanged. Merge replaces whole conversation snapshots; it
+does not union individual turns.
 
 These complete wire examples are maintained here because OpenAPI3 operation
 example emission through the existing polymorphic base types omits subtype
@@ -115,7 +118,8 @@ counts whole conversations, `redact_private_content` defaults to `true`, and
 
 Sources remain `type: "traces"` with the existing agent, time-window, and
 `trace_ids` selectors. This variant does not change trace-selection expansion,
-annotations, dataset rows, or snapshot merge behavior.
+annotations, or dataset row schemas. Conversation dataset merge uses the
+new-snapshot-wins behavior described above.
 
 The service enforces these cross-property rules for
 `type: "conversations"`; the schema does not express these conditional
