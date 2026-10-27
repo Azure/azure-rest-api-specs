@@ -35,7 +35,8 @@ export const SKIP_RELEASE_PLAN_AUTOMATION_LABEL = "Skip-ReleasePlan-Automation";
  * @param params.repo Repository name
  * @param params.workspace Absolute path to workspace root
  * @param params.octokit Octokit instance for GitHub API calls
- * @returns TypeSpec project info with path and API version, or null if no spec changes, no projects found, multiple projects found, or API version detection fails
+ * @returns TypeSpec project info, or null if no spec changes, no projects found, or multiple projects found
+ * @throws When TypeSpec metadata generation or version resolution fails
  */
 export async function getTypeSpecProjectInfoFromPr(params: {
   prNumber: number;
@@ -76,9 +77,9 @@ export async function getTypeSpecProjectInfoFromPr(params: {
 
   try {
     return await getTypeSpecProjectVersionFromMetadata(tspProjectAbsPath, tspProjectRelPath);
-  } catch {
+  } catch (error) {
     console.error(`Failed to determine API version for TypeSpec project at ${tspProjectRelPath}`);
-    return null;
+    throw error;
   }
 }
 
@@ -87,6 +88,7 @@ export async function getTypeSpecProjectInfoFromPr(params: {
  * Attempts to resolve an associated PR first; if not found, inspects commit file changes directly.
  * Uses TypeSpec metadata emitter to determine API version and SDK type.
  * @returns TypeSpec project info and optional associated PR number
+ * @throws When TypeSpec metadata generation or version resolution fails
  */
 export async function getTypeSpecProjectInfoFromCommit(params: {
   commitSha: string;
@@ -180,9 +182,9 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
       projectInfo,
       hasNewApiVersionLabel: false,
     };
-  } catch {
+  } catch (error) {
     console.error(`Failed to determine API version for TypeSpec project at ${tspProjectRelPath}`);
-    return { projectInfo: null, hasNewApiVersionLabel: false };
+    throw error;
   }
 }
 

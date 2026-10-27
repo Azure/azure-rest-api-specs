@@ -5,6 +5,10 @@ parameters:
   - name: ReleasePlanId
     type: number
     default: 0
+  - name: SpecCommitSha
+    displayName: "Historical spec commit (optional; keep current tooling)"
+    type: string
+    default: ""
 
 trigger:
   branches:
@@ -34,7 +38,10 @@ stages:
 
         steps:
           - checkout: self
-            fetchDepth: 2
+            ${{ if ne(parameters.SpecCommitSha, '') }}:
+              fetchDepth: 0
+            ${{ else }}:
+              fetchDepth: 2
 
           - template: /eng/common/pipelines/templates/steps/login-to-github.yml
 
@@ -42,12 +49,21 @@ stages:
 
           - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
 
+          - ${{ if ne(parameters.SpecCommitSha, '') }}:
+              - script: node eng/scripts/prepare-release-plan-replay.ts
+                displayName: "Prepare historical specifications with current tooling"
+                workingDirectory: $(Build.SourcesDirectory)
+                env:
+                  RELEASE_PLAN_SPEC_COMMIT_SHA: ${{ parameters.SpecCommitSha }}
+                  RELEASE_PLAN_ID: ${{ parameters.ReleasePlanId }}
+
           - task: AzureCLI@2
             displayName: "Create or Get Release Plan details"
             condition: succeeded()
             continueOnError: true
             env:
               GH_TOKEN: $(GH_TOKEN)
+              RELEASE_PLAN_SPEC_COMMIT_SHA: ${{ parameters.SpecCommitSha }}
               AZSDKTOOLS_NOTIFICATION_SERVICE_URL: $(AzureSDKEmailerSasURL)
               ${{ if eq(parameters['Test-release-Plan'], true) }}:
                 AZSDKTOOLS_AGENT_TESTING: "true"
@@ -72,7 +88,10 @@ stages:
                   Write-Host "Using release plan ID: $releasePlanId"
                   $nodeArgs += @("--release-plan-id", $releasePlanId)
                 } else {
-                  $commitSha = "$(Build.SourceVersion)"
+                  $commitSha = ([string]$env:RELEASE_PLAN_SPEC_COMMIT_SHA).Trim()
+                  if ([string]::IsNullOrWhiteSpace($commitSha)) {
+                    $commitSha = "$(Build.SourceVersion)"
+                  }
                   if ([string]::IsNullOrWhiteSpace($commitSha)) {
                     Write-Host "Build.SourceVersion is empty. Falling back to repo HEAD commit."
                     $commitSha = (git -C "$(Build.SourcesDirectory)" rev-parse HEAD).Trim()
