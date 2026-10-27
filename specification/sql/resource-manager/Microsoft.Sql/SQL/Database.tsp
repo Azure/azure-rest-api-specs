@@ -597,6 +597,43 @@ interface TopQueryStatistics {
   >;
 }
 
+/**
+ * Query text operations for top resource consuming database queries.
+ */
+@armResourceOperations(#{ omitTags: true })
+interface TopQueriesQueryText {
+  /**
+   * Gets the text of a query in a database.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep this operation in the existing databases OpenAPI feature file."
+  @added(Versions.v2026_11_01_preview)
+  @tag("Queries")
+  @list
+  @get
+  @action("queryText")
+  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  listByQuery is ArmResourceActionSync<
+    Database,
+    void,
+    ArmResponse<QueryTextResult>,
+    Parameters = {
+      /**
+       * The numeric query identifier.
+       */
+      @path
+      @segment("topQueries")
+      @pattern("^[0-9]+$")
+      topQueryName: string;
+
+      /**
+       * Whether to include query text in the response. Defaults to false.
+       */
+      @query
+      includeQueryText?: boolean = false;
+    }
+  >;
+}
+
 @@doc(Database.name, "The name of the database.");
 @@doc(Database.properties, "Resource properties.");
 @@doc(
