@@ -4,9 +4,9 @@ import { $alternateType, $scope } from "@azure-tools/typespec-client-generator-c
  * @param {import("@typespec/compiler").DecoratorContext} context
  * @param {import("@typespec/compiler").Operation} operation
  * @param {import("@typespec/compiler").Model} input
- * @param {string} [scope="python"]
+ * @param {string} scope
  */
-function requestModel(context, operation, input, scope = "python") {
+function requestModel(context, operation, input, scope) {
   // Resolve the instantiated body; template-expanded parameters cannot be referenced with ::parameters.resource.
   const resource = operation.parameters.properties.get("resource");
   if (!resource) {
@@ -24,8 +24,9 @@ function requestModel(context, operation, input, scope = "python") {
 /**
  * @param {import("@typespec/compiler").DecoratorContext} context
  * @param {import("@typespec/compiler").Operation} operation
+ * @param {string} scope
  */
-function omitContinuationToken(context, operation) {
+function omitContinuationToken(context, operation, scope) {
   // Resolve template-expanded parameters, which cannot be referenced with ::parameters.
   const token = operation.parameters.properties.get("continuationToken");
   if (!token) {
@@ -37,9 +38,9 @@ function omitContinuationToken(context, operation) {
     });
     return;
   }
-  context.call($scope, token, "!python");
+  context.call($scope, token, scope);
 }
 
 export const $decorators = {
-  "WebPubSubChat.PythonCustomizations": { requestModel, omitContinuationToken },
+  ClientCustomizations: { requestModel, omitContinuationToken },
 };

@@ -6,16 +6,19 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 
 @TypeSpec.Versioning.versioned(WebPubSubChat.Versions)
-namespace WebPubSubChat.PythonCustomizations {
+namespace ClientCustomizations {
   /** Substitute the resource request model for selected SDKs without changing the REST operation. */
   extern dec requestModel(
     target: TypeSpec.Reflection.Operation,
     input: TypeSpec.Reflection.Model,
-    scope?: valueof string
+    scope: valueof string
   );
 
   /** Omit the initial continuation token from Python paging method parameters. */
-  extern dec omitContinuationToken(target: TypeSpec.Reflection.Operation);
+  extern dec omitContinuationToken(
+    target: TypeSpec.Reflection.Operation,
+    scope: valueof string
+  );
 
   /** Properties supplied when creating or replacing a role. */
   model ChatRoleCreateOrReplace {
@@ -85,11 +88,7 @@ namespace WebPubSubChat.PythonCustomizations {
     }>>;
   }
 
-  @@clientNamespace(
-    WebPubSubChat.PythonCustomizations,
-    "WebPubSubChat",
-    "javascript"
-  );
+  @@clientNamespace(ClientCustomizations, "WebPubSubChat", "javascript");
 }
 
 namespace Customizations {
@@ -207,63 +206,70 @@ namespace Customizations {
   );
 
   // Python callers resume pagination through ItemPaged.by_page(continuation_token=...).
-  @@WebPubSubChat.PythonCustomizations.omitContinuationToken(
-    WebPubSubChatServiceClient.listRoles
+  @@ClientCustomizations.omitContinuationToken(
+    WebPubSubChatServiceClient.listRoles,
+    "!python"
   );
-  @@WebPubSubChat.PythonCustomizations.omitContinuationToken(
-    WebPubSubChatServiceClient.listRooms
+  @@ClientCustomizations.omitContinuationToken(
+    WebPubSubChatServiceClient.listRooms,
+    "!python"
   );
-  @@WebPubSubChat.PythonCustomizations.omitContinuationToken(
-    WebPubSubChatServiceClient.listTopics
+  @@ClientCustomizations.omitContinuationToken(
+    WebPubSubChatServiceClient.listTopics,
+    "!python"
   );
-  @@WebPubSubChat.PythonCustomizations.omitContinuationToken(
-    WebPubSubChatServiceClient.listRoomMembers
+  @@ClientCustomizations.omitContinuationToken(
+    WebPubSubChatServiceClient.listRoomMembers,
+    "!python"
   );
-  @@WebPubSubChat.PythonCustomizations.omitContinuationToken(
-    WebPubSubChatServiceClient.listUsers
+  @@ClientCustomizations.omitContinuationToken(
+    WebPubSubChatServiceClient.listUsers,
+    "!python"
   );
-  @@WebPubSubChat.PythonCustomizations.omitContinuationToken(
-    WebPubSubChatServiceClient.listRoomsForUser
+  @@ClientCustomizations.omitContinuationToken(
+    WebPubSubChatServiceClient.listRoomsForUser,
+    "!python"
   );
 
-  @@WebPubSubChat.PythonCustomizations.requestModel(
+  @@ClientCustomizations.requestModel(
     WebPubSubChatServiceClient.createOrReplaceTopic,
-    WebPubSubChat.PythonCustomizations.ChatTopicCreateOrReplace,
+    ClientCustomizations.ChatTopicCreateOrReplace,
     "python,javascript"
   );
-  @@WebPubSubChat.PythonCustomizations.requestModel(
+  @@ClientCustomizations.requestModel(
     WebPubSubChatServiceClient.updateTopic,
-    WebPubSubChat.PythonCustomizations.ChatTopicUpdate,
+    ClientCustomizations.ChatTopicUpdate,
     "python,javascript"
   );
 
-  @@WebPubSubChat.PythonCustomizations.requestModel(
+  @@ClientCustomizations.requestModel(
     WebPubSubChatServiceClient.updateMessage,
-    WebPubSubChat.PythonCustomizations.ChatMessageUpdate,
+    ClientCustomizations.ChatMessageUpdate,
     "python,javascript"
   );
-  @@WebPubSubChat.PythonCustomizations.requestModel(
+  @@ClientCustomizations.requestModel(
     WebPubSubChatServiceClient.createOrReplaceRole,
-    WebPubSubChat.PythonCustomizations.ChatRoleCreateOrReplace,
+    ClientCustomizations.ChatRoleCreateOrReplace,
     "python,javascript"
   );
-  @@WebPubSubChat.PythonCustomizations.requestModel(
+  @@ClientCustomizations.requestModel(
     WebPubSubChatServiceClient.createOrReplaceRoom,
-    WebPubSubChat.PythonCustomizations.ChatRoomCreateOrReplace,
+    ClientCustomizations.ChatRoomCreateOrReplace,
     "python,javascript"
   );
-  @@WebPubSubChat.PythonCustomizations.requestModel(
+  @@ClientCustomizations.requestModel(
     WebPubSubChatServiceClient.createOrReplaceRoomMember,
-    WebPubSubChat.PythonCustomizations.ChatRoomMemberCreateOrReplace,
+    ClientCustomizations.ChatRoomMemberCreateOrReplace,
     "python,javascript"
   );
-  @@WebPubSubChat.PythonCustomizations.requestModel(
+  @@ClientCustomizations.requestModel(
     WebPubSubChatServiceClient.createOrReplaceUser,
-    WebPubSubChat.PythonCustomizations.ChatUserCreateOrReplace
+    ClientCustomizations.ChatUserCreateOrReplace,
+    "python"
   );
-  @@WebPubSubChat.PythonCustomizations.requestModel(
+  @@ClientCustomizations.requestModel(
     WebPubSubChatServiceClient.createOrReplaceUser,
-    WebPubSubChat.PythonCustomizations.HumanChatUserCreateOrReplace,
+    ClientCustomizations.HumanChatUserCreateOrReplace,
     "javascript"
   );
 }
