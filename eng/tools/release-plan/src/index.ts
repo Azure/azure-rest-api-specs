@@ -105,7 +105,9 @@ export async function main(): Promise<void> {
     const commitFiles = commitResult.changedFiles;
     const specFiles = commitFiles.filter((f) => f.filename.startsWith("specification/"));
     const hasTspFiles = specFiles.some((f) => f.filename.endsWith(".tsp"));
-    isTspConfigChanged = specFiles.some((f) => f.filename.endsWith("tspconfig.yaml"));
+    isTspConfigChanged = specFiles.some(
+      (f) => path.posix.basename(f.filename) === "tspconfig.yaml",
+    );
 
     // Skip only if both conditions are true: no label AND no TypeSpec files
     if (!hasNewApiVersionLabel && !hasTspFiles && !isTspConfigChanged) {

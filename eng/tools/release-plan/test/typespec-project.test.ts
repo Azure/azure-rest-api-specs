@@ -2,7 +2,7 @@ import {
   generateTypeSpecMetadata,
   type TypeSpecMetadata,
 } from "@azure-tools/specs-shared/typespec-metadata";
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -11,6 +11,11 @@ const { mockMetadataMap, mockLanguagesMap } = vi.hoisted(() => ({
   mockMetadataMap: new Map<string, { apiVersion: string; sdkType: "stable" | "preview" }>(),
   mockLanguagesMap: new Map<string, TypeSpecMetadata["languages"]>(),
 }));
+
+vi.mock("node:fs", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("node:fs")>();
+  return { ...actual, existsSync: vi.fn(actual.existsSync) };
+});
 
 vi.mock("@azure-tools/specs-shared/typespec-metadata", () => ({
   generateTypeSpecMetadata: vi.fn((projectDir: string) => {
@@ -85,6 +90,7 @@ beforeEach(() => {
   mockMetadataMap.clear();
   mockLanguagesMap.clear();
   vi.mocked(generateTypeSpecMetadata).mockClear();
+  vi.mocked(existsSync).mockClear();
 });
 
 afterEach(() => {
@@ -96,10 +102,14 @@ describe("TypeSpec path discovery", () => {
     directory: string,
     languages: TypeSpecMetadata["languages"] = {},
     content = "",
+    entrypoint: "main.tsp" | "client.tsp" | null = "main.tsp",
   ) {
     const projectPath = join(workspace, directory);
     mkdirSync(projectPath, { recursive: true });
     writeFileSync(join(projectPath, "tspconfig.yaml"), content);
+    if (entrypoint) {
+      writeFileSync(join(projectPath, entrypoint), "");
+    }
     mockLanguagesMap.set(projectPath, languages);
   }
 
@@ -120,6 +130,19 @@ describe("TypeSpec path discovery", () => {
 
     expect(await findTspConfigDir(`${service}/BatchPricingsAPI/main.tsp`, workspace)).toBe(service);
   });
+
+  it.each(["main.tsp", "client.tsp"] as const)(
+    "skips a config-only partial and finds the SDK parent with %s",
+    async (entrypoint) => {
+      writeConfig(`${service}/BatchPricingsAPI`, {}, "", null);
+      writeConfig(service, sdkLanguages, "", entrypoint);
+
+      expect(await findTspConfigDir(`${service}/BatchPricingsAPI/tspconfig.yaml`, workspace)).toBe(
+        service,
+      );
+      expect(generateTypeSpecMetadata).toHaveBeenCalledExactlyOnceWith(join(workspace, service));
+    },
+  );
 
   it("does not treat service-dir alone as SDK configuration", async () => {
     writeConfig(`${service}/BatchPricingsAPI`, {}, "parameters:\n  service-dir: sdk/security\n");
@@ -247,6 +270,155 @@ describe("TypeSpec path discovery", () => {
         workspace,
       ),
     ).toEqual([service, "specification/other"]);
+  });
+
+  it.each(["main.tsp", "tspconfig.yaml"])(
+    "ignores unrelated files in another project when %s changes",
+    async (filename) => {
+      writeConfig(service, sdkLanguages);
+      writeConfig("specification/other", sdkLanguages);
+
+      expect(
+        await collectTypeSpecProjectPaths(
+          [
+            { filename: `${service}/${filename}`, status: "modified" },
+            { filename: "specification/other/examples/example.json", status: "modified" },
+            { filename: "specification/other/README.md", status: "modified" },
+            { filename: "specification/other/custom-tspconfig.yaml", status: "modified" },
+          ],
+          workspace,
+        ),
+      ).toEqual([service]);
+      expect(generateTypeSpecMetadata).toHaveBeenCalledExactlyOnceWith(join(workspace, service));
+    },
+  );
+
+  it("does not search directories when only unrelated files change", async () => {
+    writeConfig(service, sdkLanguages);
+
+    expect(
+      await collectTypeSpecProjectPaths(
+        [{ filename: `${service}/examples/example.json`, status: "modified" }],
+        workspace,
+      ),
+    ).toEqual([]);
+    expect(existsSync).not.toHaveBeenCalled();
+    expect(generateTypeSpecMetadata).not.toHaveBeenCalled();
+  });
+
+  it("checks shared ancestors only once across sibling directories", async () => {
+    writeConfig(service, sdkLanguages);
+
+    expect(
+      await collectTypeSpecProjectPaths(
+        [
+          { filename: `${service}/models/first/main.tsp`, status: "modified" },
+          { filename: `${service}/models/second/main.tsp`, status: "modified" },
+          { filename: `${service}/models/main.tsp`, status: "modified" },
+          { filename: `${service}/main.tsp`, status: "modified" },
+        ],
+        workspace,
+      ),
+    ).toEqual([service]);
+    expect(
+      vi
+        .mocked(existsSync)
+        .mock.calls.map(([path]) => path)
+        .filter((path) => String(path).endsWith("tspconfig.yaml"))
+        .sort(),
+    ).toEqual(
+      [
+        join(workspace, service, "models", "first", "tspconfig.yaml"),
+        join(workspace, service, "models", "tspconfig.yaml"),
+        join(workspace, service, "tspconfig.yaml"),
+        join(workspace, service, "models", "second", "tspconfig.yaml"),
+      ].sort(),
+    );
+    expect(generateTypeSpecMetadata).toHaveBeenCalledTimes(1);
+  });
+
+  it("searches descendants before changed ancestors while retaining unrelated projects", async () => {
+    const otherService = `${service}Bulk`;
+    writeConfig(service, sdkLanguages);
+    writeConfig(`${service}/ComputeDisk`);
+    writeConfig(otherService, sdkLanguages);
+
+    expect(
+      await collectTypeSpecProjectPaths(
+        [
+          { filename: `${service}/main.tsp`, status: "modified" },
+          { filename: `${service}/ComputeDisk/client.tsp`, status: "modified" },
+          { filename: `${service}/ComputeDisk/models.tsp`, status: "modified" },
+          { filename: `${otherService}/client.tsp`, status: "modified" },
+        ],
+        workspace,
+      ),
+    ).toEqual([service, otherService]);
+    expect(
+      vi
+        .mocked(existsSync)
+        .mock.calls.map(([path]) => path)
+        .filter((path) => String(path).endsWith("tspconfig.yaml")),
+    ).toEqual([
+      join(workspace, service, "ComputeDisk", "tspconfig.yaml"),
+      join(workspace, service, "tspconfig.yaml"),
+      join(workspace, otherService, "tspconfig.yaml"),
+    ]);
+  });
+
+  it("still searches a changed ancestor when an SDK-enabled child stops traversal", async () => {
+    writeConfig(service, sdkLanguages);
+    writeConfig(`${service}/ComputeDisk`, sdkLanguages);
+
+    expect(
+      new Set(
+        await collectTypeSpecProjectPaths(
+          [
+            { filename: `${service}/main.tsp`, status: "modified" },
+            { filename: `${service}/ComputeDisk/client.tsp`, status: "modified" },
+          ],
+          workspace,
+        ),
+      ),
+    ).toEqual(new Set([service, `${service}/ComputeDisk`]));
+    expect(generateTypeSpecMetadata).toHaveBeenCalledTimes(2);
+  });
+
+  it("preserves each nearest fallback when a cached ancestor has no SDK emitter", async () => {
+    writeConfig(service);
+    writeConfig(`${service}/BatchPricingsAPI`);
+    writeConfig(`${service}/PricingsAPI`);
+
+    expect(
+      new Set(
+        await collectTypeSpecProjectPaths(
+          [
+            { filename: `${service}/main.tsp`, status: "modified" },
+            { filename: `${service}/BatchPricingsAPI/main.tsp`, status: "modified" },
+            { filename: `${service}/PricingsAPI/main.tsp`, status: "modified" },
+          ],
+          workspace,
+        ),
+      ),
+    ).toEqual(new Set([service, `${service}/BatchPricingsAPI`, `${service}/PricingsAPI`]));
+    const checkedPaths = vi.mocked(existsSync).mock.calls.map(([path]) => path);
+    expect(new Set(checkedPaths).size).toBe(checkedPaths.length);
+    expect(generateTypeSpecMetadata).toHaveBeenCalledTimes(3);
+  });
+
+  it("caches unsuccessful ancestor searches across siblings", async () => {
+    expect(
+      await collectTypeSpecProjectPaths(
+        [
+          { filename: `${service}/first/main.tsp`, status: "modified" },
+          { filename: `${service}/second/main.tsp`, status: "modified" },
+        ],
+        workspace,
+      ),
+    ).toEqual([]);
+    const checkedPaths = vi.mocked(existsSync).mock.calls.map(([path]) => path);
+    expect(new Set(checkedPaths).size).toBe(checkedPaths.length);
+    expect(generateTypeSpecMetadata).not.toHaveBeenCalled();
   });
 
   it("resolves removed subproject configs through the surviving SDK parent", async () => {

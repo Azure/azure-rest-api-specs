@@ -14,6 +14,11 @@ import type {
 } from "./types.ts";
 
 type TypeSpecMetadataCache = Map<string, Promise<TypeSpecMetadata>>;
+type TypeSpecDirectoryResult = {
+  sdkProjectPath: string | null;
+  fallbackProjectPath: string | null;
+};
+type TypeSpecDirectoryCache = Map<string, TypeSpecDirectoryResult>;
 
 function getCachedTypeSpecMetadata(
   projectPath: string,
@@ -191,7 +196,7 @@ export async function getPullRequestLabels(params: {
 }
 
 /**
- * Collects TypeSpec project paths from changed specification files.
+ * Collects TypeSpec project paths from changed .tsp files and tspconfig.yaml files.
  * Resolves every changed directory so config changes cannot hide other changed projects.
  * @param specFiles Array of changed specification files
  * @param workspace Absolute path to workspace root
@@ -203,14 +208,28 @@ export async function collectTypeSpecProjectPaths(
   metadataCache: TypeSpecMetadataCache = new Map(),
 ): Promise<string[]> {
   const projectPaths = new Set<string>();
+  const directoryCache: TypeSpecDirectoryCache = new Map();
 
-  const directories = new Set(specFiles.map((file) => posix.dirname(file.filename)));
-  for (const directory of directories) {
-    const tspProject = await findTspConfigDir(
-      posix.join(directory, "tspconfig.yaml"),
-      workspace,
-      metadataCache,
-    );
+  const directories = new Set(
+    specFiles
+      .filter(
+        ({ filename }) =>
+          filename.startsWith("specification/") &&
+          (filename.endsWith(".tsp") || posix.basename(filename) === "tspconfig.yaml"),
+      )
+      .map((file) => posix.dirname(file.filename)),
+  );
+  // Descendants populate their ancestors' cache entries before those ancestors are considered.
+  for (const directory of [...directories].sort((a, b) => b.length - a.length)) {
+    const result = directoryCache.get(directory);
+    const tspProject = result
+      ? (result.sdkProjectPath ?? result.fallbackProjectPath)
+      : await findTspConfigDir(
+          posix.join(directory, "tspconfig.yaml"),
+          workspace,
+          metadataCache,
+          directoryCache,
+        );
     if (tspProject) {
       projectPaths.add(tspProject);
     }
@@ -327,22 +346,40 @@ export async function findTspConfigDir(
   relativeFilePath: string,
   workspace: string,
   metadataCache: TypeSpecMetadataCache = new Map(),
+  directoryCache: TypeSpecDirectoryCache = new Map(),
 ): Promise<string | null> {
   let dir = posix.dirname(relativeFilePath);
-  let firstConfigDir: string | null = null;
+  const visited: { directory: string; hasConfig: boolean }[] = [];
+  let result: TypeSpecDirectoryResult = { sdkProjectPath: null, fallbackProjectPath: null };
 
   while (dir.startsWith("specification/")) {
+    const cached = directoryCache.get(dir);
+    if (cached) {
+      result = cached;
+      break;
+    }
+
     const tspConfigAbsolute = join(workspace, dir, "tspconfig.yaml");
-    if (existsSync(tspConfigAbsolute)) {
-      firstConfigDir ??= dir;
+    const hasConfig = existsSync(tspConfigAbsolute);
+    visited.push({ directory: dir, hasConfig });
+    if (
+      hasConfig &&
+      (existsSync(join(workspace, dir, "main.tsp")) ||
+        existsSync(join(workspace, dir, "client.tsp")))
+    ) {
       const metadata = await getCachedTypeSpecMetadata(join(workspace, dir), metadataCache);
       if (
         ["java", "javascript", "typescript", "csharp", "python", "go"].some(
           (language) => (metadata.languages[language]?.length ?? 0) > 0,
         )
       ) {
-        return dir;
+        result = { sdkProjectPath: dir, fallbackProjectPath: dir };
+        break;
       }
+    } else if (hasConfig) {
+      console.log(
+        `Skipping metadata generation for partial TypeSpec config at ${dir}: no main.tsp or client.tsp found.`,
+      );
     }
 
     const parent = posix.dirname(dir);
@@ -352,7 +389,15 @@ export async function findTspConfigDir(
     dir = parent;
   }
 
-  return firstConfigDir;
+  for (const { directory, hasConfig } of visited.reverse()) {
+    result = {
+      sdkProjectPath: result.sdkProjectPath,
+      fallbackProjectPath: hasConfig ? directory : result.fallbackProjectPath,
+    };
+    directoryCache.set(directory, result);
+  }
+
+  return result.sdkProjectPath ?? result.fallbackProjectPath;
 }
 
 /**

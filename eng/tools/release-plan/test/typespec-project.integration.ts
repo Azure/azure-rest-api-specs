@@ -52,6 +52,30 @@ describe("TypeSpec project discovery with repository projects and real metadata"
     expect(projects).toEqual([project]);
   });
 
+  it.each([
+    {
+      project: "specification/mongocluster/resource-manager/Microsoft.DocumentDB/MongoCluster",
+      filename: "tspconfig.yaml",
+    },
+    {
+      project:
+        "specification/liftrarize/resource-manager/ArizeAi.ObservabilityEval/ObservabilityEval",
+      filename: "client.tsp",
+    },
+    {
+      project: "specification/storage/data-plane/FileStorage",
+      filename: "client.tsp",
+    },
+  ])("identifies $project from $filename", async ({ project, filename }) => {
+    const projects = await collectTypeSpecProjectPaths(
+      [{ filename: `${project}/${filename}`, status: "modified" }],
+      workspace,
+      metadataCache,
+    );
+
+    expect(projects).toEqual([project]);
+  });
+
   it("retains an AutoRest-only project and resolves its version for a private preview", async () => {
     const project = "specification/awsconnector/AcmCertificateSummary.Management";
     const projects = await collectTypeSpecProjectPaths(

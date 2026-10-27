@@ -54,6 +54,37 @@ afterEach(() => {
 });
 
 describe("release plan CLI", () => {
+  it("does not allow creation for an unrelated filename ending with tspconfig.yaml", async () => {
+    const discovery: CommitProjectInfoResult = {
+      projectInfo: {
+        tspProjectPath: projectPath,
+        apiVersion: "2026-01-01-preview",
+        isPreview: true,
+      },
+      changedFiles: [
+        { filename: `${projectPath}/main.tsp`, status: "modified" },
+        { filename: "specification/other/custom-tspconfig.yaml", status: "modified" },
+      ],
+      prNumber: 42,
+      hasNewApiVersionLabel: false,
+    };
+    mocks.getTypeSpecProjectInfoFromCommit.mockResolvedValue(discovery);
+    mocks.ensureReleasePlan.mockReturnValue({
+      outcome: "not_found",
+      releasePlan: null,
+      details: {},
+    });
+
+    await main();
+
+    expect(mocks.ensureReleasePlan).toHaveBeenCalledExactlyOnceWith(
+      expect.objectContaining({ tspProjectPath: projectPath }),
+      mocks.runner,
+      false,
+    );
+    expect(mocks.createComment).not.toHaveBeenCalled();
+  });
+
   it("only comments when multiple projects remain, without creating a plan or SDK artifact", async () => {
     const paths = [projectPath, "specification/other/Other"];
     const result: CommitProjectInfoResult = {

@@ -129,8 +129,12 @@ and reused for shared ancestors and API-version extraction.
 
 ### Project and API-version selection
 
-Every changed directory under `specification` is inspected. Discovery searches
-upward for `tspconfig.yaml` and runs the metadata emitter at each candidate.
+Directories containing changed `.tsp` files or `tspconfig.yaml` under
+`specification` are inspected; other changed files do not affect project selection.
+Discovery searches upward for `tspconfig.yaml` and runs the metadata emitter at
+each candidate with a `main.tsp` or `client.tsp` entrypoint. Config-only partial
+directories are skipped during metadata generation so discovery can reach the
+parent project. Compilation failures in standalone projects still fail discovery.
 A candidate qualifies when metadata contains at least one configuration for Java,
 JavaScript/TypeScript, .NET (`csharp`), Python, or Go. AutoRest and the metadata
 emitter alone do not qualify. The search includes the service directory directly
