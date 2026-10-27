@@ -16,8 +16,6 @@ namespace Microsoft.Cdn;
 /**
  * Defines a knowledge source resource for a web agent.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 @parentResource(WebAgent)
 model KnowledgeSource
@@ -33,22 +31,16 @@ model KnowledgeSource
 /**
  * Defines a KnowledgeSource response body for long-running operation
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 model KnowledgeSourceAcceptedBody {
   /**
    * Defines a KnowledgeSource response body
    */
   @bodyRoot
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.preview)
   _: KnowledgeSource;
 }
 
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 @armResourceOperations
 interface KnowledgeSources {
@@ -103,18 +95,6 @@ interface KnowledgeSources {
   listByWebAgent is ArmResourceListByParent<
     KnowledgeSource,
     Response = ArmResponse<KnowledgeSourceList>
-  >;
-
-  /**
-   * Remove the cache of a knowledge source.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @removed(Versions.v2025_12_01)
-  purge is ArmResourceActionAsync<
-    KnowledgeSource,
-    void,
-    OkResponse,
-    LroHeaders = ArmLroLocationHeader
   >;
 
   /**

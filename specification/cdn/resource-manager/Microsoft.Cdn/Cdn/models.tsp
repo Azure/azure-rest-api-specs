@@ -1376,8 +1376,6 @@ union PolicyResourceState {
 /**
  * The type of the path.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 union AgentPathType {
   string,
@@ -1391,8 +1389,6 @@ union AgentPathType {
  * Provisioning status of the web agent.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 union WebAgentProvisioningState {
   string,
@@ -1411,8 +1407,6 @@ union WebAgentProvisioningState {
 /**
  * Format or origin of the knowledge source.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 union KnowledgeSourceType {
   string,
@@ -1420,14 +1414,6 @@ union KnowledgeSourceType {
   /** HTML source type. */
   @added(Versions.preview)
   Html: "Html",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @removed(Versions.preview)
-  SchemaOrgMarkup: "SchemaOrgMarkup",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @removed(Versions.preview)
-  RssFeeds: "RssFeeds",
 
   /** RSS feed source type. */
   @added(Versions.preview)
@@ -1440,8 +1426,6 @@ union KnowledgeSourceType {
 /**
  * Specifies the units of time for scheduling update intervals for the knowledge source.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 union KnowledgeSourceUpdateFrequency {
   string,
@@ -1459,8 +1443,6 @@ union KnowledgeSourceUpdateFrequency {
  * Provisioning status of the knowledge source.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 union KnowledgeSourceProvisioningState {
   string,
@@ -6165,44 +6147,12 @@ model ManagedRuleDefinition {
 /**
  * Defines a list of web agents. It contains a list of WebAgent objects and a URL link to get the next set of results.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 model WebAgentList is Azure.Core.Page<WebAgent>;
 
 /**
- * Optional textual description of the agent.
- */
-@maxLength(1000)
-scalar WebAgentDescription extends string;
-
-/**
- * Constraints for paths associated with the web agent.
- */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
-@added(Versions.preview)
-model WebAgentPathConstraints {
-  /**
-   * List of paths associated with the web agent.
-   */
-  @minItems(1)
-  @maxItems(2)
-  @identifiers(#[])
-  paths: AgentPath[];
-
-  /**
-   * Paths without preview-only item constraints, preserving the historical contract.
-   */
-  @identifiers(#[])
-  historicalPaths: AgentPath[];
-}
-
-/**
  * Defines properties of a web agent.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 model WebAgentProperties {
   /**
@@ -6221,14 +6171,8 @@ model WebAgentProperties {
   /**
    * Optional textual description of the agent.
    */
-  @typeChangedFrom(Versions.preview, string)
-  description?: WebAgentDescription;
-
-  /**
-   * System prompt for the web agent.
-   */
-  @removed(Versions.v2025_12_01)
-  systemPrompt?: string;
+  @maxLength(1000)
+  description?: string;
 
   /**
    * Retrieval context prompt for the web agent.
@@ -6241,9 +6185,10 @@ model WebAgentProperties {
   /**
    * List of paths associated with the web agent.
    */
-  @typeChangedFrom(Versions.preview, WebAgentPathConstraints.historicalPaths)
-  @madeRequired(Versions.preview)
-  paths: WebAgentPathConstraints.paths;
+  @minItems(1)
+  @maxItems(2)
+  @identifiers(#[])
+  paths: AgentPath[];
 
   /**
    * References to agent links in CDN profiles.
@@ -6275,8 +6220,6 @@ union WebAgentMode {
 /**
  * Defines a path configuration for a web agent.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 model AgentPath {
   /**
@@ -6293,8 +6236,6 @@ model AgentPath {
 /**
  * Properties required to update a web agent.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 model WebAgentUpdateParameters {
   /**
@@ -6314,8 +6255,6 @@ model WebAgentUpdateParameters {
 /**
  * Defines properties of a web agent that can be updated.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 model WebAgentPropertiesUpdateParameters {
   /**
@@ -6327,14 +6266,8 @@ model WebAgentPropertiesUpdateParameters {
   /**
    * Optional textual description of the agent.
    */
-  @typeChangedFrom(Versions.preview, string)
-  description?: WebAgentDescription;
-
-  /**
-   * System prompt for the web agent.
-   */
-  @removed(Versions.v2025_12_01)
-  systemPrompt?: string;
+  @maxLength(1000)
+  description?: string;
 
   /**
    * Retrieval context prompt for the web agent.
@@ -6347,31 +6280,23 @@ model WebAgentPropertiesUpdateParameters {
   /**
    * List of paths associated with the web agent.
    */
-  @typeChangedFrom(Versions.preview, WebAgentPathConstraints.historicalPaths)
-  paths?: WebAgentPathConstraints.paths;
+  @minItems(1)
+  @maxItems(2)
+  @identifiers(#[])
+  paths?: AgentPath[];
 }
 
 /**
  * Defines a list of knowledge sources. It contains a list of KnowledgeSource objects and a URL link to get the next set of results.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 model KnowledgeSourceList is Azure.Core.Page<KnowledgeSource>;
 
 /**
  * Defines properties of a knowledge source.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 model KnowledgeSourceProperties {
-  /**
-   * Description of the knowledge source.
-   */
-  @removed(Versions.v2025_12_01)
-  description?: string;
-
   /**
    * Format or origin of the knowledge source.
    */
@@ -6404,8 +6329,6 @@ model KnowledgeSourceProperties {
 /**
  * Properties required to update a knowledge source.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 model KnowledgeSourceUpdateParameters {
   /**
@@ -6419,22 +6342,8 @@ model KnowledgeSourceUpdateParameters {
 /**
  * Defines properties of a knowledge source that can be updated.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.preview)
 model KnowledgeSourcePropertiesUpdateParameters {
-  /**
-   * Description of the knowledge source.
-   */
-  @removed(Versions.v2025_12_01)
-  description?: string;
-
-  /**
-   * Endpoint or location of the knowledge source.
-   */
-  @removed(Versions.v2025_12_01)
-  url?: string;
-
   /**
    * Specifies the units of time for scheduling update intervals for the knowledge source.
    */
