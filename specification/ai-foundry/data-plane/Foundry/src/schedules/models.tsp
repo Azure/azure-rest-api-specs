@@ -11,7 +11,6 @@ const SchedulesRequiredPreviews = #{
 };
 
 @doc("Schedule provisioning status.")
-@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 union ScheduleProvisioningStatus {
   string,
 
@@ -32,7 +31,6 @@ union ScheduleProvisioningStatus {
 }
 
 @doc("Type of the trigger.")
-@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 union TriggerType {
   string,
 
@@ -48,18 +46,16 @@ union TriggerType {
 
 @doc("Base model for Trigger of the schedule.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model Trigger {
   @doc("Type of the trigger.")
   type: TriggerType;
 }
 
 @doc("Cron based trigger.")
-@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model CronTrigger extends Trigger {
   type: TriggerType.Cron;
 
-  @doc("Cron expression that defines the schedule frequency.")
+  @doc("Five-field cron expression that defines the schedule frequency: minute hour day-of-month month day-of-week.")
   expression: string;
 
   @doc("Time zone for the cron schedule. Defaults to `UTC`.")
@@ -73,7 +69,6 @@ model CronTrigger extends Trigger {
 }
 
 @doc("Recurrence type.")
-@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 union RecurrenceType {
   string,
 
@@ -91,7 +86,6 @@ union RecurrenceType {
 }
 
 @doc("Days of the week for recurrence schedule.")
-@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 union DayOfWeek {
   string,
 
@@ -119,20 +113,17 @@ union DayOfWeek {
 
 @doc("Recurrence schedule model.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model RecurrenceSchedule {
   @doc("Recurrence type for the recurrence schedule.")
   type: RecurrenceType;
 }
 
 @doc("Hourly recurrence schedule.")
-@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model HourlyRecurrenceSchedule extends RecurrenceSchedule {
   type: RecurrenceType.Hourly;
 }
 
 @doc("Daily recurrence schedule.")
-@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model DailyRecurrenceSchedule extends RecurrenceSchedule {
   @doc("Daily recurrence type.")
   type: RecurrenceType.Daily;
@@ -142,7 +133,6 @@ model DailyRecurrenceSchedule extends RecurrenceSchedule {
 }
 
 @doc("Weekly recurrence schedule.")
-@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model WeeklyRecurrenceSchedule extends RecurrenceSchedule {
   @doc("Weekly recurrence type.")
   type: RecurrenceType.Weekly;
@@ -152,7 +142,6 @@ model WeeklyRecurrenceSchedule extends RecurrenceSchedule {
 }
 
 @doc("Monthly recurrence schedule.")
-@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model MonthlyRecurrenceSchedule extends RecurrenceSchedule {
   @doc("Monthly recurrence type.")
   type: RecurrenceType.Monthly;
@@ -162,7 +151,6 @@ model MonthlyRecurrenceSchedule extends RecurrenceSchedule {
 }
 
 @doc("Recurrence based trigger.")
-@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model RecurrenceTrigger extends Trigger {
   @doc("Type of the trigger.")
   type: TriggerType.Recurrence;
@@ -184,7 +172,6 @@ model RecurrenceTrigger extends Trigger {
 }
 
 @doc("One-time trigger.")
-@extension("x-ms-foundry-meta", SchedulesRequiredPreviews)
 model OneTimeTrigger extends Trigger {
   type: TriggerType.OneTime;
 

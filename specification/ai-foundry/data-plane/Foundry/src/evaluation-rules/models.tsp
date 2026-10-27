@@ -26,20 +26,11 @@ union EvaluationRuleActionType {
   @doc("Human evaluation preview.")
   humanEvaluationPreview: "humanEvaluationPreview",
 
-  /** Evaluate agent traces using a configured schedule. */
-  traceEvaluation: "trace_evaluation",
+  /** Evaluate agent traces on the rule's schedule. */
+  traceEvaluation: "traceEvaluation",
 
-  /** Evaluate dataset inputs using a configured schedule. */
-  datasetEvaluation: "dataset_evaluation",
-}
-
-/** Selects action types for List without changing the existing unfiltered results. */
-union EvaluationRuleActionTypeFilter {
-  /** Return rules matching the specified action type. */
-  actionType: EvaluationRuleActionType,
-
-  /** Return existing event rules and supported scheduled evaluations. This selector is not a rule action. */
-  all: "all",
+  /** Evaluate dataset inputs on the rule's schedule. */
+  datasetEvaluation: "datasetEvaluation",
 }
 
 @doc("Evaluation action model.")
@@ -79,11 +70,28 @@ model TraceEvaluationRuleAction extends EvaluationRuleAction {
   type: EvaluationRuleActionType.traceEvaluation;
 
   /** Identifier of the evaluation used to score the selected traces. */
-  @encodedName("application/json", "eval_id")
   evalId: string;
 
-  /** Existing trace inputs for each scheduled occurrence. Preserve the selected variant's query-window and sampling behavior. */
+  /** Trace inputs for each scheduled occurrence. The selected variant's query-window and sampling behavior is preserved. */
   source: TraceEvaluationSource;
+}
+
+/** Dataset inputs supported by scheduled rules. Targets are configured within the selected source. */
+union DatasetEvaluationSource {
+  /** JSONL inputs from file content or a file ID. */
+  jsonl: OpenAI.CreateEvalJsonlRunDataSource,
+
+  /** CSV inputs from a file ID. */
+  csv: EvalCsvRunDataSource,
+
+  /** Inputs that are sent to a model to generate completions before scoring. */
+  completions: OpenAI.CreateEvalCompletionsRunDataSource,
+
+  /** Inputs that are sent to an evaluation target to generate responses before scoring. */
+  targetCompletions: TargetCompletionEvalRunDataSource,
+
+  /** Simulated user conversations with an evaluation target. */
+  userConversationSimulation: UserConversationSimulationEvalRunDataSource,
 }
 
 /** Configures a scheduled evaluation of dataset inputs. */
@@ -91,30 +99,10 @@ model DatasetEvaluationRuleAction extends EvaluationRuleAction {
   type: EvaluationRuleActionType.datasetEvaluation;
 
   /** Identifier of the evaluation used to score the dataset. */
-  @encodedName("application/json", "eval_id")
   evalId: string;
 
-  /** Dataset inputs selected for each scheduled occurrence. */
-  source: DatasetSource;
-
-  /** Optional existing evaluation target used to generate responses before scoring. */
-  target?: FoundryEvaluationTarget;
-}
-
-/** References an exact version of a dataset for scheduled evaluation. */
-model DatasetSource {
-  /** Identifies a versioned dataset input. */
-  type: "dataset";
-
-  /** Name of the dataset containing evaluation inputs. */
-  @encodedName("application/json", "dataset_name")
-  @minLength(1)
-  datasetName: string;
-
-  /** Exact immutable dataset version; mutable aliases such as latest are not supported. */
-  @encodedName("application/json", "dataset_version")
-  @minLength(1)
-  datasetVersion: string;
+  /** Dataset inputs for each scheduled occurrence. */
+  source: DatasetEvaluationSource;
 }
 
 @doc("Evaluation rule action for human evaluation.")
@@ -154,8 +142,8 @@ union EvaluationRuleEventType {
   @doc("Manual trigger.")
   manual: "manual",
 
-  /** Execute the evaluation using the rule's configured schedule. */
-  timeTrigger: "time_trigger",
+  /** Run the rule's action on its schedule. */
+  timerTrigger: "timerTrigger",
 }
 
 @doc("Evaluation rule model.")
@@ -182,8 +170,16 @@ model EvaluationRule {
   @doc("Event type that the evaluation rule applies to.")
   eventType: EvaluationRuleEventType;
 
-  /** Timing for time_trigger rules. Required for time_trigger and forbidden for other events. Reuses existing Cron, Recurrence, and OneTime triggers. */
+  /** Timing for timerTrigger rules. Required for timerTrigger and not allowed for other event types. */
   schedule?: Trigger;
+
+  /** Provisioning state of the rule's schedule. Returned for timerTrigger rules only. */
+  @visibility(Lifecycle.Read)
+  provisioningStatus?: ScheduleProvisioningStatus;
+
+  /** Error that caused the rule to be disabled, if any. */
+  @visibility(Lifecycle.Read)
+  error?: Azure.Core.Foundations.Error;
 
   @doc("Indicates whether the evaluation rule is enabled. Default is true.")
   enabled: boolean;

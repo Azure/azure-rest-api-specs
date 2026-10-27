@@ -11,8 +11,8 @@ alias EvaluationRulesPreviewHeader = WithConditionalFoundryPreviewHeader<Foundry
 alias EvaluationRulesFilterQueryParams = {
   /** The action type query parameter. */
   @query("actionType")
-  @doc("Select an action type, or all to include existing event rules and supported schedules. When omitted, return only existing event-rule types. trace_evaluation and dataset_evaluation select their scheduled evaluations explicitly; existing action filters retain their behavior.")
-  actionType?: EvaluationRuleActionTypeFilter;
+  @doc("Filter by action type. When omitted, rules of all action types are returned.")
+  actionType?: EvaluationRuleActionType;
 
   /** The agent name query parameter. */
   @query("agentName")
@@ -64,7 +64,7 @@ interface EvaluationRules {
   >;
 
   // GET /evaluationrules
-  /** Returns existing event rules by default. Use actionType=all for the combined collection, or trace_evaluation or dataset_evaluation for scheduled evaluations of that type. Agent and enabled filters still apply, and results remain paginated. */
+  /** Returns the evaluation rules configured for the project, including scheduled trace and dataset evaluations, optionally filtered by action type, agent name, or enabled state. */
   @summary("List evaluation rules")
   @Rest.listsResource(EvaluationRule)
   list is FoundryResourceList<
