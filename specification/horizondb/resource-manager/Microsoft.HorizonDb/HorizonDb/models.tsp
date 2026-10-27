@@ -93,8 +93,6 @@ model Pool is Azure.ResourceManager.ProxyResource<PoolProperties> {
   @path
   @segment("pools")
   name: PoolName;
-
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 @doc("An IPv4 address in dotted-decimal notation.")
@@ -449,8 +447,6 @@ model PoolParameterGroupReferenceForPatchUpdate {
 
 @doc("HorizonDB pool for update operations.")
 model PoolForPatchUpdate {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
   @doc("The properties that can be updated for a HorizonDB pool.")
   properties?: PoolPropertiesForPatchUpdate;
 }
