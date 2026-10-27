@@ -5,7 +5,11 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Migrate;
 
 @@clientName(DownloadUrl.assessmentReportUrl, "assessmentReportUri", "csharp");
-@@clientName(ContainerAppsAssessmentOptions, "ContainerAppsAssessmentConfig", "csharp");
+@@clientName(
+  ContainerAppsAssessmentOptions,
+  "ContainerAppsAssessmentConfig",
+  "csharp"
+);
 
 @@clientName(
   ContainerAppsOptionsOperations,
