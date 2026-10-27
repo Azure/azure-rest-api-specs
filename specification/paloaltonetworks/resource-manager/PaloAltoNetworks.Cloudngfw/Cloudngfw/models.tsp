@@ -2593,7 +2593,7 @@ model OfferPlanGroup
     Resource = OfferPlanGroup,
     KeyName = "offerName",
     SegmentName = "marketplaceOffers",
-    NamePattern = ""
+    NamePattern = "^[A-Za-z0-9_-]{1,50}$"
   >;
 }
 
