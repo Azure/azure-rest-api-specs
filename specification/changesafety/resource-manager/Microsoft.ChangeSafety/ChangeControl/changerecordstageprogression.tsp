@@ -60,10 +60,10 @@ model ChangeRecordStageProgressionProperties {
   @doc("Collection of related links for the change.")
   links?: Link[];
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Defines a flexible placeholder for stage specific meta data for diverse orchestration and change scenarios."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Stage orchestration metadata keys are customer-defined and values may be nested JSON. A dictionary preserves them in generated SDK serializers."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Additional metadata for the stageProgression resource.")
-  additionalData?: {};
+  additionalData?: Record<unknown>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Key value pairs of parameter names & their values for the current Stage.Value can be any type, hence using Unknown type."
   @doc("Stage specific key value pairs of parameter names & their values for the current Stage, If any.")

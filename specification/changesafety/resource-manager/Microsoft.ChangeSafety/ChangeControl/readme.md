@@ -17,6 +17,8 @@ and does not change `2026-01-01-preview`, deploy a backend, or release an SDK.
   operations retained before the next-stage design decision.
 - Uses one URL per Link entry, complete optional parameter PATCH fields, canonical
   management-group paths, and native ARM identifiers.
+- Uses explicit JSON dictionaries for free-form object values so generated clients
+  preserve their contents instead of serializing them as empty models.
 - Replaces the untyped snapshot union with `StageMapSnapshot` entries containing
   `resourceId` and optional captured `stageMap` contents.
 - Proposes typed AcquirePolicyToken and PolicyEvaluation payloads for their
@@ -86,6 +88,8 @@ directive:
     from: ChangeControl.json
     where:
       - $.definitions.Parameter.properties.metadata
+      - $.definitions.ObjectParameter.properties.defaultValue
+      - $.definitions.ObjectParameter.properties.allowedValues.items
       - $.definitions.StageMapProperties.properties.parameters
       - $.definitions.ChangeDefinition.properties.details
       - $.definitions.Stage.properties.stageVariables
@@ -147,7 +151,9 @@ See configuration in [readme.python.md](./readme.python.md)
 
 ## TypeScript
 
-See configuration in [readme.typescript.md](./readme.typescript.md)
+TypeScript uses the modular `@azure-tools/typespec-ts` emitter configured in
+[tspconfig.yaml](./tspconfig.yaml), not the retired AutoRest high-level client
+generation path.
 
 ## CSharp
 
