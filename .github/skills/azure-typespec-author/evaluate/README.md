@@ -86,7 +86,8 @@ participating files under `evals/`. Local environment overrides should not be co
 2. Set scalar eval specs to the selected local prebuilt environment.
 3. Install the pnpm version pinned by the current spec checkout and run
    `pnpm install --frozen-lockfile` at the repository root.
-4. Generate the fixture `package.json` from the current checkout's pnpm catalog and copy
+4. Generate the fixture `package.json` from the current checkout's pnpm catalog and root workspace
+   dependencies, including the workspace ruleset's upstream npm alias, and copy
    `.github/copilot-instructions.md` into `fixtures/instructions-test/copilot-instructions.md`.
 5. Verify fixture dependencies and print shell commands that export `AZSDK_EVAL_REPO_ROOT`,
    `AZSDK_EVAL_MCP_ROOT`, and `FIXTURE_NODE_MODULES`.
@@ -96,8 +97,8 @@ Why each piece matters:
 - **`FIXTURE_NODE_MODULES`** lets the agent symlink the spec repository's pnpm-installed root
   `node_modules` instead of installing dependencies in every case.
 - **Generated fixture package metadata** keeps every dependency version aligned with the spec
-  repository's pnpm catalog. Dependency graders read this package directly, so newly added fixture
-  dependencies are checked automatically.
+  repository's pnpm catalog and root workspace dependencies. Dependency graders read this package
+  directly, so newly added fixture dependencies are checked automatically.
 - **`copilot-instructions.md`** is copied into each run's `.github/` by the `azsdk-mcp` environments
   in `.vally.yaml`, so evals exercise the _real_ spec-repo authoring guidance. It is generated
   locally, should remain untracked, and is refreshed from the current checkout.
@@ -229,6 +230,13 @@ run its unit tests from this directory:
 
 ```powershell
 node --test scripts/check-employee-service.test.ts
+```
+
+Fixture setup tests cover both catalog-only and workspace-ruleset dependencies without installing
+packages. Run them from this directory:
+
+```powershell
+node --test scripts/setup-fixture-files.test.ts
 ```
 
 ## File Structure

@@ -9,6 +9,7 @@ const repoRoot = path.resolve(scriptDir, "../../../../..");
 const fixtureRoot = path.resolve(scriptDir, "../fixtures");
 const instructionsSource = path.join(repoRoot, ".github", "copilot-instructions.md");
 const workspaceFile = path.join(repoRoot, "pnpm-workspace.yaml");
+const rootPackageFile = path.join(repoRoot, "package.json");
 const instructionsDestination = path.join(
   fixtureRoot,
   "instructions-test",
@@ -32,10 +33,17 @@ const fixtureDependencies = [
   "@typespec/versioning",
 ];
 
-for (const requiredFile of [instructionsSource, workspaceFile]) {
+for (const requiredFile of [instructionsSource, workspaceFile, rootPackageFile]) {
   if (!fs.existsSync(requiredFile)) {
     throw new Error(`Required fixture input does not exist: ${requiredFile}`);
   }
+}
+
+const rootPackage: { devDependencies: Record<string, string> } = JSON.parse(
+  fs.readFileSync(rootPackageFile, "utf8"),
+);
+if (rootPackage.devDependencies["@azure-tools/typespec-azure-rulesets"]?.startsWith("workspace:")) {
+  fixtureDependencies.push("@azure-tools/typespec-azure-rulesets-original");
 }
 
 const catalog = new Map<string, string>();
@@ -59,7 +67,8 @@ for (const line of fs.readFileSync(workspaceFile, "utf8").split(/\r?\n/)) {
 
 const devDependencies: Record<string, string> = {};
 for (const dependency of fixtureDependencies) {
-  const version = catalog.get(dependency);
+  const rootVersion = rootPackage.devDependencies[dependency];
+  const version = rootVersion?.startsWith("workspace:") ? rootVersion : catalog.get(dependency);
   if (!version) {
     throw new Error(`Required dependency is missing from the pnpm catalog: ${dependency}`);
   }
