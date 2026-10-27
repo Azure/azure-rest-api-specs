@@ -17,6 +17,33 @@ options:
     # Emit installable metadata in clean outputs; public packaging customizations
     # remain checked in and are not replaced by the reproducibility verifier.
     generate-packaging-files: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-finetuningsessions"
+    api-version: "v1"
+    is-modular-library: true
+    generate-test: true
+    generate-metadata: false
+    ignore-property-name-normalize: true
+    ignore-enum-member-name-normalize: true
+    package-details:
+      name: "@azure/ai-finetuningsessions"
+      description: "Azure AI Fine-Tuning Sessions Client"
+    flavor: azure
+  "@typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
+    package-name: Azure.AI.FineTuningSessions
+    api-version: "v1"
+  "@azure-tools/typespec-java":
+    api-version: "v1"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-finetuningsessions"
+    namespace: "com.azure.ai.finetuningsessions"
+    service-name: "FineTuningSessions"
+    partial-update: true
+    enable-sync-stack: true
+    generate-tests: false
+    generate-samples: false
+    custom-types-subpackage: "implementation.models"
+    flavor: azure
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - "specification/ai-foundry/data-plane/Foundry/src/session-finetuning/"
