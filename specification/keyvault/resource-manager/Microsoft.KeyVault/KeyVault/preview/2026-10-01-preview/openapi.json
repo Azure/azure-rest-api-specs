@@ -6173,7 +6173,7 @@
       ],
       "x-ms-enum": {
         "name": "VaultIdentityType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "None",
@@ -6215,7 +6215,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/VaultIdentityType",
-          "description": "The type of managed identity assigned to the vault."
+          "description": "The type of managed identity assigned to the vault. When omitted, the existing identity type remains unchanged."
         },
         "userAssignedIdentities": {
           "type": "object",
@@ -6225,10 +6225,7 @@
             "x-nullable": true
           }
         }
-      },
-      "required": [
-        "type"
-      ]
+      }
     },
     "VaultPatchParameters": {
       "type": "object",

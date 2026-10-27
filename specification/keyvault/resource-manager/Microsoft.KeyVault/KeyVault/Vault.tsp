@@ -34,7 +34,7 @@ model Vault is Azure.ResourceManager.ProxyResource<VaultProperties, false> {
   tags?: Record<string>;
 
   /** Managed service identity */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Vault requires a custom identity envelope supporting only UserAssigned and None."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Identity must remain in the standard ARM resource envelope. The unmodified ManagedServiceIdentityProperty mixin exposes unsupported system-assigned identity modes; Vault uses a custom type documenting only None and UserAssigned, with separate PUT and PATCH models to restrict null dictionary entries to PATCH."
   @Versioning.added(Versions.v2026_10_01_preview)
   identity?: VaultIdentity;
 }
