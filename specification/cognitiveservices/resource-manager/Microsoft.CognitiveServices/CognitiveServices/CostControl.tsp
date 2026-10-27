@@ -150,7 +150,7 @@ model CostControlGrouping {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   name: CostControlGroupingName;
 
-  /** The grouping kind. Only TagKey is supported. */
+  /** The grouping kind. Only `TagKey` is supported. */
   type: "TagKey";
 }
 
@@ -239,7 +239,7 @@ model CostControlTagFilter {
    */
   name: CostControlFilterName;
 
-  /** The comparison operator. Only In is supported. */
+  /** The comparison operator.`In` is supported. */
   operator: "In";
 
   /** Between one and twenty nonempty, non-whitespace strings to match. */
@@ -297,7 +297,7 @@ model CostControlNotification {
   /** Whether this notification is enabled. Disabled notifications remain configured but do not publish alerts. */
   enabled: boolean;
 
-  /** The threshold comparison. Only GreaterThanOrEqualTo is supported. */
+  /** The threshold comparison. Only `GreaterThanOrEqualTo` is supported. */
   operator: "GreaterThanOrEqualTo";
 }
 
@@ -340,7 +340,7 @@ model CostControlProviderPropertiesPatch {
 /** Blocks requests when consumption reaches the explicitly configured threshold. No implicit blocking action is created. */
 @added(Versions.v2026_11_15_preview)
 model CostControlAction {
-  /** The enforcement action. Only block is supported. */
+  /** The enforcement action.`block` is supported. */
   type: "block";
 
   /** Whether threshold is a percentage of amount or an absolute value in the budget's unit. */
@@ -350,7 +350,7 @@ model CostControlAction {
   @minValueExclusive(0)
   threshold: float64;
 
-  /** The threshold comparison. Only GreaterThanOrEqualTo is supported. */
+  /** The threshold comparison. Only `GreaterThanOrEqualTo` is supported. */
   operator: "GreaterThanOrEqualTo";
 }
 
