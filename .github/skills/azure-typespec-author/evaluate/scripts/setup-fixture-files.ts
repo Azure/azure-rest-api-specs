@@ -38,8 +38,7 @@ for (const requiredFile of [instructionsSource, workspaceFile]) {
   }
 }
 
-/** @type {Map<string, string>} */
-const catalog = new Map();
+const catalog = new Map<string, string>();
 let inCatalog = false;
 for (const line of fs.readFileSync(workspaceFile, "utf8").split(/\r?\n/)) {
   if (line === "catalog:") {
@@ -58,8 +57,7 @@ for (const line of fs.readFileSync(workspaceFile, "utf8").split(/\r?\n/)) {
   }
 }
 
-/** @type {Record<string, string>} */
-const devDependencies = {};
+const devDependencies: Record<string, string> = {};
 for (const dependency of fixtureDependencies) {
   const version = catalog.get(dependency);
   if (!version) {

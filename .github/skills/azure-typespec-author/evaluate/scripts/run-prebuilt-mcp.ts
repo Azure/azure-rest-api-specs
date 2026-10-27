@@ -7,7 +7,7 @@ import * as path from "node:path";
 const mcpKind = process.env.AZSDK_EVAL_MCP_KIND;
 const repoRoot = process.env.AZSDK_EVAL_REPO_ROOT || process.cwd();
 const mcpRoot = process.env.AZSDK_EVAL_MCP_ROOT || path.join(repoRoot, "artifacts", "mcp");
-if (!["live", "mock"].includes(mcpKind)) {
+if (mcpKind !== "live" && mcpKind !== "mock") {
   console.error("MCP kind must be live or mock.");
   process.exit(1);
 }

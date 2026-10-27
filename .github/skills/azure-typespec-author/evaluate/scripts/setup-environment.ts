@@ -7,6 +7,7 @@
  * 5. Verifies fixture dependencies and outputs variables for local Vally runs.
  */
 import { execFileSync } from "node:child_process";
+import type { ExecFileSyncOptions } from "node:child_process";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -24,21 +25,16 @@ const suppliedMcpRoot =
   rootArgIndex === -1 ? process.env.AZSDK_EVAL_MCP_ROOT : process.argv[rootArgIndex + 1];
 const mcpRoot = path.resolve(suppliedMcpRoot || path.join(repoRoot, "artifacts", "mcp"));
 if (
-  !["live", "mock"].includes(mcpKind) ||
+  (mcpKind !== "live" && mcpKind !== "mock") ||
   (rootArgIndex !== -1 && !process.argv[rootArgIndex + 1])
 ) {
   process.stderr.write(
-    "Usage: node scripts/setup-environment.js --mcp-kind live|mock [--mcp-root <path>]\n",
+    "Usage: node scripts/setup-environment.ts --mcp-kind live|mock [--mcp-root <path>]\n",
   );
   process.exit(1);
 }
 
-/**
- * @param {string} command
- * @param {string[]} args
- * @param {import("node:child_process").ExecFileSyncOptions} [options]
- */
-function run(command, args, options = {}) {
+function run(command: string, args: string[], options: ExecFileSyncOptions = {}) {
   process.stderr.write(`> ${command} ${args.join(" ")}\n`);
   execFileSync(command, args, {
     stdio: ["inherit", 2, "inherit"],
@@ -46,11 +42,7 @@ function run(command, args, options = {}) {
   });
 }
 
-/**
- * @param {string[]} args
- * @param {import("node:child_process").ExecFileSyncOptions} [options]
- */
-function runPnpm(args, options = {}) {
+function runPnpm(args: string[], options: ExecFileSyncOptions = {}) {
   if (process.platform === "win32") {
     run(process.env.ComSpec || "cmd.exe", ["/d", "/s", "/c", `pnpm ${args.join(" ")}`], options);
     return;
@@ -58,11 +50,7 @@ function runPnpm(args, options = {}) {
   run("pnpm", args, options);
 }
 
-/**
- * @param {string[]} args
- * @param {import("node:child_process").ExecFileSyncOptions} [options]
- */
-function runNpm(args, options = {}) {
+function runNpm(args: string[], options: ExecFileSyncOptions = {}) {
   if (process.platform === "win32") {
     run(process.env.ComSpec || "cmd.exe", ["/d", "/s", "/c", `npm ${args.join(" ")}`], options);
     return;
@@ -127,10 +115,10 @@ run(process.execPath, [path.join(repoRoot, "eng", "scripts", "install-pnpm.mts")
 runPnpm(["install", "--frozen-lockfile"], { cwd: repoRoot });
 
 process.stderr.write("==> Preparing fixture files from the current checkout...\n");
-run(process.execPath, [path.join(scriptDir, "setup-fixture-files.js")], {
+run(process.execPath, [path.join(scriptDir, "setup-fixture-files.ts")], {
   cwd: repoRoot,
 });
-run(process.execPath, [path.join(scriptDir, "check-node-dependencies.js"), "packages"], {
+run(process.execPath, [path.join(scriptDir, "check-node-dependencies.ts"), "packages"], {
   cwd: fixtureRoot,
   env: {
     ...process.env,

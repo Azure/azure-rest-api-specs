@@ -28,8 +28,8 @@ stimuli:
           dest: main.tsp
         - src: ../fixtures/Microsoft.Widget/Widget/package.json
           dest: package.json
-        - src: ../scripts/check-node-dependencies.js
-          dest: check-node-dependencies.js
+        - src: ../scripts/check-node-dependencies.ts
+          dest: check-node-dependencies.ts
         - src: ../fixtures/001005-version-add-preview-after-preview/shared.tsp
           dest: shared.tsp
         - src: ../fixtures/001005-version-add-preview-after-preview/tspconfig.yaml
@@ -108,11 +108,11 @@ stimuli:
             - "azure-sdk-mcp-azsdk_typespec_retrieve_knowledge"
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js node_modules"
+          command: "node check-node-dependencies.ts node_modules"
           expected_exit_code: 0
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js packages"
+          command: "node check-node-dependencies.ts packages"
           expected_exit_code: 0
       - type: "run-command"
         config:

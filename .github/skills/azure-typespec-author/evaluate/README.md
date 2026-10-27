@@ -27,13 +27,13 @@ and prints the environment variables needed by local Vally runs:
 
 ```powershell
 # PowerShell
-node scripts/setup-environment.js --mcp-kind live `
+node scripts/setup-environment.ts --mcp-kind live `
   --mcp-root C:\path\to\pinned-mcp-artifact | Invoke-Expression
 ```
 
 ```bash
 # Bash / Zsh
-eval "$(node scripts/setup-environment.js --mcp-kind live --mcp-root /path/to/pinned-mcp-artifact)"
+eval "$(node scripts/setup-environment.ts --mcp-kind live --mcp-root /path/to/pinned-mcp-artifact)"
 ```
 
 Vally 0.14 isolates the Copilot config home by default. For local runs that authenticate through
@@ -55,7 +55,7 @@ Setup rewrites scalar eval specs to the selected local environment. Choose `mock
 only when an approved mock artifact is available:
 
 ```powershell
-node scripts/setup-environment.js --mcp-kind mock `
+node scripts/setup-environment.ts --mcp-kind mock `
   --mcp-root C:\path\to\pinned-mcp-artifact | Invoke-Expression
 ```
 
@@ -79,7 +79,7 @@ For a single-case run, change only that eval file. For a suite run, replace the 
 participating files under `evals/`. Local environment overrides should not be committed; restore
 `environment: azsdk-mcp` before committing.
 
-`setup-environment.js` does the following:
+`setup-environment.ts` does the following:
 
 1. Restore and select the repository-pinned Vally 0.14.0 toolchain, then verify the selected
    prebuilt MCP artifact.
@@ -228,7 +228,7 @@ unreachable resources or missing standard operations. With fixture dependencies 
 run its unit tests from this directory:
 
 ```powershell
-node --test scripts\check-employee-service.test.mjs
+node --test scripts/check-employee-service.test.ts
 ```
 
 ## File Structure

@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
-import { spawnSync } from "node:child_process";
+import { spawnSync, type SpawnSyncReturns } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { test } from "node:test";
+import { test, type TestContext } from "node:test";
 import { fileURLToPath } from "node:url";
 
 const modules =
@@ -18,11 +18,9 @@ const employee = fs.readFileSync(
   "utf8",
 );
 
-/**
- * @param {import("node:test").TestContext} t
- * @param {"inline" | "imported" | "unreachable" | "missing-operations"} variant
- */
-function check(t, variant) {
+type Variant = "inline" | "imported" | "unreachable" | "missing-operations";
+
+function check(t: TestContext, variant: Variant): SpawnSyncReturns<string> {
   assert.ok(
     fs.existsSync(modules),
     "Prepare FIXTURE_NODE_MODULES before running compiler-backed tests.",
@@ -31,8 +29,8 @@ function check(t, variant) {
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   fs.symlinkSync(modules, path.join(root, "node_modules"), "junction");
   fs.copyFileSync(
-    new URL("check-employee-service.mjs", import.meta.url),
-    path.join(root, "check.mjs"),
+    new URL("check-employee-service.ts", import.meta.url),
+    path.join(root, "check.ts"),
   );
   fs.writeFileSync(path.join(root, "package.json"), '{"type":"module"}');
   let entrypoint = main;
@@ -46,11 +44,10 @@ function check(t, variant) {
     if (variant !== "unreachable") entrypoint = 'import "./employee.tsp";\n' + entrypoint;
   }
   fs.writeFileSync(path.join(root, "main.tsp"), entrypoint);
-  return spawnSync(process.execPath, ["check.mjs"], { cwd: root, encoding: "utf8" });
+  return spawnSync(process.execPath, ["check.ts"], { cwd: root, encoding: "utf8" });
 }
 
-/** @type {readonly ["inline", "imported"]} */
-const validVariants = ["inline", "imported"];
+const validVariants = ["inline", "imported"] as const;
 for (const variant of validVariants) {
   await test(`accepts a compiled ${variant} Employee service`, (t) => {
     const result = check(t, variant);
