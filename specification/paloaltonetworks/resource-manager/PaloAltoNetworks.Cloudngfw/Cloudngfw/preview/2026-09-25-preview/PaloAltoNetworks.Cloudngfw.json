@@ -88,6 +88,9 @@
     },
     {
       "name": "LogIngestionSettingsResources"
+    },
+    {
+      "name": "MarketplaceOffers"
     }
   ],
   "paths": {
@@ -2702,7 +2705,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/marketplaceOffers": {
       "get": {
-        "operationId": "PaloAltoNetworksCloudngfwOperationsOperationGroup_ListMarketplaceOffers",
+        "operationId": "MarketplaceOffers_ListBySubscription",
+        "tags": [
+          "MarketplaceOffers"
+        ],
         "description": "List the Marketplace offers, and the plans within each offer, that are available to the\nsubscription, each plan annotated with the firewall mode it provisions.",
         "parameters": [
           {
@@ -2714,7 +2720,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MarketplaceOffersResult"
             }
@@ -2727,15 +2733,61 @@
           }
         },
         "x-ms-examples": {
-          "PaloAltoNetworksCloudngfwOperationsOperationGroup_ListMarketplaceOffers_MaximumSet_Gen": {
-            "$ref": "./examples/PaloAltoNetworksCloudngfwOperationsOperationGroup_ListMarketplaceOffers_MaximumSet_Gen.json"
+          "MarketplaceOffers_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/MarketplaceOffers_ListBySubscription_MaximumSet_Gen.json"
           },
-          "PaloAltoNetworksCloudngfwOperationsOperationGroup_ListMarketplaceOffers_MinimumSet_Gen": {
-            "$ref": "./examples/PaloAltoNetworksCloudngfwOperationsOperationGroup_ListMarketplaceOffers_MinimumSet_Gen.json"
+          "MarketplaceOffers_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/MarketplaceOffers_ListBySubscription_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/marketplaceOffers/{offerName}": {
+      "get": {
+        "operationId": "MarketplaceOffers_Get",
+        "tags": [
+          "MarketplaceOffers"
+        ],
+        "description": "Get a single Marketplace offer and the plans visible to the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offerName",
+            "in": "path",
+            "description": "The Marketplace offer identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OfferPlanGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MarketplaceOffers_Get_MaximumSet_Gen": {
+            "$ref": "./examples/MarketplaceOffers_Get_MaximumSet_Gen.json"
+          },
+          "MarketplaceOffers_Get_MinimumSet_Gen": {
+            "$ref": "./examples/MarketplaceOffers_Get_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -8643,7 +8695,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/OfferPlanGroupProperties",
-          "description": "The plans belonging to this Marketplace offer."
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
