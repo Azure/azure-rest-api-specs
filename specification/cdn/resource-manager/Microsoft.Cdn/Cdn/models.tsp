@@ -6177,16 +6177,26 @@ model WebAgentList is Azure.Core.Page<WebAgent>;
 scalar WebAgentDescription extends string;
 
 /**
- * List of paths associated with the web agent.
+ * Constraints for paths associated with the web agent.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "This named array carries preview-only item constraints while @typeChangedFrom preserves the historical array contract."
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.preview)
-@minItems(1)
-@maxItems(2)
-@identifiers(#[])
-model WebAgentPaths is AgentPath[];
+model WebAgentPathConstraints {
+  /**
+   * List of paths associated with the web agent.
+   */
+  @minItems(1)
+  @maxItems(2)
+  @identifiers(#[])
+  paths: AgentPath[];
+
+  /**
+   * Paths without preview-only item constraints, preserving the historical contract.
+   */
+  @identifiers(#[])
+  historicalPaths: AgentPath[];
+}
 
 /**
  * Defines properties of a web agent.
@@ -6231,10 +6241,9 @@ model WebAgentProperties {
   /**
    * List of paths associated with the web agent.
    */
-  @typeChangedFrom(Versions.preview, AgentPath[])
+  @typeChangedFrom(Versions.preview, WebAgentPathConstraints.historicalPaths)
   @madeRequired(Versions.preview)
-  @identifiers(#[])
-  paths: WebAgentPaths;
+  paths: WebAgentPathConstraints.paths;
 
   /**
    * References to agent links in CDN profiles.
@@ -6338,9 +6347,8 @@ model WebAgentPropertiesUpdateParameters {
   /**
    * List of paths associated with the web agent.
    */
-  @typeChangedFrom(Versions.preview, AgentPath[])
-  @identifiers(#[])
-  paths?: WebAgentPaths;
+  @typeChangedFrom(Versions.preview, WebAgentPathConstraints.historicalPaths)
+  paths?: WebAgentPathConstraints.paths;
 }
 
 /**
