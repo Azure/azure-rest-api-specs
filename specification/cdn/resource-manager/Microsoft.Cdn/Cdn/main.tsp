@@ -21,6 +21,7 @@ import "./Route.tsp";
 import "./RuleSet.tsp";
 import "./Rule.tsp";
 import "./SecurityPolicy.tsp";
+import "./AuthPolicy.tsp";
 import "./Secret.tsp";
 import "./KeyGroup.tsp";
 import "./DeploymentVersion.tsp";
@@ -82,6 +83,12 @@ enum Versions {
    * The 2026-10-01 API version.
    */
   v2026_10_01: "2026-10-01",
+
+  /**
+   * The current preview API version. Only the value changes when a new preview is released.
+   */
+  @previewVersion
+  preview: "2026-11-01-preview",
 }
 
 interface Operations
