@@ -1,0 +1,166 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "rg-auto-zone-placement",
+    "vmName": "vm-auto-zone-placement",
+    "api-version": "2026-04-01",
+    "parameters": {
+      "location": "eastus2",
+      "placement": {
+        "zonePlacementPolicy": "Auto"
+      },
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "Standard_D2s_v5"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "Canonical",
+            "offer": "0001-com-ubuntu-server-jammy",
+            "sku": "22_04-lts-gen2",
+            "version": "latest"
+          },
+          "osDisk": {
+            "createOption": "FromImage",
+            "deleteOption": "Delete",
+            "managedDisk": {
+              "storageAccountType": "Standard_LRS"
+            }
+          },
+          "dataDisks": []
+        },
+        "osProfile": {
+          "computerName": "vm-auto-zone-placement",
+          "adminUsername": "azureuser",
+          "adminPassword": "{password}",
+          "linuxConfiguration": {
+            "disablePasswordAuthentication": false
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/rg-auto-zone-placement/providers/Microsoft.Network/networkInterfaces/nic-auto-zone-placement",
+              "properties": {
+                "primary": true,
+                "deleteOption": "Delete"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/rg-auto-zone-placement/providers/Microsoft.Compute/virtualMachines/vm-auto-zone-placement",
+        "name": "vm-auto-zone-placement",
+        "type": "Microsoft.Compute/virtualMachines",
+        "location": "eastus2",
+        "placement": {
+          "zonePlacementPolicy": "Auto"
+        },
+        "properties": {
+          "hardwareProfile": {
+            "vmSize": "Standard_D2s_v5"
+          },
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "Canonical",
+              "offer": "0001-com-ubuntu-server-jammy",
+              "sku": "22_04-lts-gen2",
+              "version": "latest"
+            },
+            "osDisk": {
+              "osType": "Linux",
+              "createOption": "FromImage",
+              "deleteOption": "Delete",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              }
+            },
+            "dataDisks": []
+          },
+          "osProfile": {
+            "computerName": "vm-auto-zone-placement",
+            "adminUsername": "azureuser",
+            "linuxConfiguration": {
+              "disablePasswordAuthentication": false
+            }
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/rg-auto-zone-placement/providers/Microsoft.Network/networkInterfaces/nic-auto-zone-placement",
+                "properties": {
+                  "primary": true,
+                  "deleteOption": "Delete"
+                }
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.Compute/locations/eastus2/operations/{operation-id}?monitor=true&api-version=2026-04-01",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/rg-auto-zone-placement/providers/Microsoft.Compute/virtualMachines/vm-auto-zone-placement",
+        "name": "vm-auto-zone-placement",
+        "type": "Microsoft.Compute/virtualMachines",
+        "location": "eastus2",
+        "placement": {
+          "zonePlacementPolicy": "Auto"
+        },
+        "properties": {
+          "hardwareProfile": {
+            "vmSize": "Standard_D2s_v5"
+          },
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "Canonical",
+              "offer": "0001-com-ubuntu-server-jammy",
+              "sku": "22_04-lts-gen2",
+              "version": "latest"
+            },
+            "osDisk": {
+              "osType": "Linux",
+              "createOption": "FromImage",
+              "deleteOption": "Delete",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              }
+            },
+            "dataDisks": []
+          },
+          "osProfile": {
+            "computerName": "vm-auto-zone-placement",
+            "adminUsername": "azureuser",
+            "linuxConfiguration": {
+              "disablePasswordAuthentication": false
+            }
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/rg-auto-zone-placement/providers/Microsoft.Network/networkInterfaces/nic-auto-zone-placement",
+                "properties": {
+                  "primary": true,
+                  "deleteOption": "Delete"
+                }
+              }
+            ]
+          },
+          "provisioningState": "Creating"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachines_CreateOrUpdate",
+  "title": "Create a Linux VM with Auto zone placement and a Standard LRS OS disk"
+}
