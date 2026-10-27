@@ -162,18 +162,6 @@ enum Type {
 }
 
 /**
- * The type of support resource for resource Id lookup.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility with the existing closed ResourceType x-ms-enum contract."
-@added(Versions.v2025_06_01_preview)
-enum ResourceType {
-  /**
-   * Microsoft Support ticket resource type.
-   */
-  `Microsoft.Support/supportTickets`,
-}
-
-/**
  * The operation supported by Microsoft Support resource provider.
  */
 model Operation {
@@ -1063,7 +1051,7 @@ model LookUpResourceIdRequest {
   /**
    * The type of resource.
    */
-  type?: ResourceType;
+  type?: "Microsoft.Support/supportTickets";
 }
 
 /**
