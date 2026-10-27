@@ -42,7 +42,7 @@ model ProjectCostControl is ProxyResource<CostControlProperties> {
   >;
 
   /** The opaque entity tag used for optimistic concurrency. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The service returns the lowercase 'etag' envelope property rather than 'eTag'."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc uses lowercase 'etag' field name — EntityTagProperty uses 'eTag'"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
