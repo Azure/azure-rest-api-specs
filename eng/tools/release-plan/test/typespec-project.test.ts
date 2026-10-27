@@ -557,7 +557,7 @@ describe("TypeSpec path discovery", () => {
           repos: {
             getCommit: vi.fn(),
             listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
-              data: [{ number: 42 }],
+              data: [{ number: 42, merged_at: "2026-01-01T00:00:00Z", merge_commit_sha: "abc123" }],
             }),
           },
         },
@@ -594,7 +594,9 @@ describe("TypeSpec path discovery", () => {
             repos: {
               getCommit: vi.fn(),
               listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
-                data: [{ number: 42 }],
+                data: [
+                  { number: 42, merged_at: "2026-01-01T00:00:00Z", merge_commit_sha: "abc123" },
+                ],
               }),
             },
           },
@@ -644,7 +646,9 @@ describe("TypeSpec path discovery", () => {
             repos: {
               getCommit,
               listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
-                data: hasPr ? [{ number: 42 }] : [],
+                data: hasPr
+                  ? [{ number: 42, merged_at: "2026-01-01T00:00:00Z", merge_commit_sha: "abc123" }]
+                  : [],
               }),
             },
           },
@@ -724,7 +728,7 @@ describe("GitHub PR file listing", () => {
           repos: {
             getCommit: vi.fn(),
             listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
-              data: [{ number: 42 }],
+              data: [{ number: 42, merged_at: "2026-01-01T00:00:00Z", merge_commit_sha: "abc123" }],
             }),
           },
         },
@@ -772,7 +776,7 @@ describe("TypeSpec project detection edge cases", () => {
           repos: {
             getCommit: vi.fn(),
             listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
-              data: [{ number: 42 }],
+              data: [{ number: 42, merged_at: "2026-01-01T00:00:00Z", merge_commit_sha: "abc123" }],
             }),
           },
         },
@@ -818,7 +822,7 @@ describe("TypeSpec project detection edge cases", () => {
           repos: {
             getCommit: vi.fn(),
             listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
-              data: [{ number: 42 }],
+              data: [{ number: 42, merged_at: "2026-01-01T00:00:00Z", merge_commit_sha: "abc123" }],
             }),
           },
         },
