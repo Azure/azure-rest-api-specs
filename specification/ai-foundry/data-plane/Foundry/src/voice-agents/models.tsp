@@ -561,6 +561,9 @@ model CreateTeamsPhoneExtensibilityTelephonyBindingRequest
 @clientName("CreateTwilioTelephonyBindingContent", "csharp")
 model CreateTwilioTelephonyBindingRequest
   extends CreateTelephonyBindingRequest {
+  @doc("The required account identifier for this binding.")
+  account_id: string;
+
   @doc("The Twilio provider.")
   provider: TelephonyProvider.twilio;
 
