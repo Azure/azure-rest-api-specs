@@ -4,7 +4,13 @@ import { dirname, join } from "node:path";
 import { parseMarkdown } from "@azure-tools/openapi-tools-common";
 import * as amd from "@azure/openapi-markdown";
 
-import { example, readme, swagger, typespec } from "@azure-tools/specs-shared/changed-files";
+import {
+  example,
+  readme,
+  swagger,
+  tspconfig,
+  typespec,
+} from "@azure-tools/specs-shared/changed-files";
 import { includesSegment } from "@azure-tools/specs-shared/path";
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
@@ -157,6 +163,7 @@ export class PRContext {
 
     const visitedFolder = new Set<string>();
     changedFiles
+      .filter((f) => !tspconfig(f))
       .filter((f) => [".md", ".json", ".yaml", ".yml"].some((p) => f.endsWith(p)))
       .forEach((f) => {
         let dir = dirname(f);
