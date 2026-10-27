@@ -2742,6 +2742,39 @@ union MetricType {
 }
 
 /**
+ * Requested execution type of top queries.
+ */
+@added(Versions.v2026_11_01_preview)
+union ExecutionType {
+  string,
+
+  /**
+   * Any execution type
+   */
+  any: "any",
+
+  /**
+   * Regular execution type
+   */
+  regular: "regular",
+
+  /**
+   * Irregular execution type
+   */
+  irregular: "irregular",
+
+  /**
+   * Aborted execution type
+   */
+  aborted: "aborted",
+
+  /**
+   * Exception execution type
+   */
+  exception: "exception",
+}
+
+/**
  * Specifies the state of ledger digest upload.
  */
 union ManagedLedgerDigestUploadsState {
@@ -13435,6 +13468,252 @@ model TopQueries {
    */
   @identifiers(#[])
   queries?: QueryStatisticsProperties[];
+}
+
+/**
+ * A list of top resource consuming queries on database.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep this database query collection in databases.json with its operations under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model TopQueriesDatabaseListResult is Azure.Core.Page<TopQueriesDatabase>;
+
+/**
+ * Top resource consuming queries on database.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model TopQueriesDatabase {
+  /**
+   * The Azure resource type reported for the top queries results.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Requested number of top queries.
+   */
+  @visibility(Lifecycle.Read)
+  numberOfTopQueries?: int32;
+
+  /**
+   * Aggregation function used to calculate query metrics.
+   */
+  @visibility(Lifecycle.Read)
+  aggregationFunction?: AggregationFunctionType;
+
+  /**
+   * Requested execution type of top queries.
+   */
+  @visibility(Lifecycle.Read)
+  executionType?: ExecutionType;
+
+  /**
+   * Metric used to rank queries.
+   */
+  @visibility(Lifecycle.Read)
+  observedMetric?: MetricType;
+
+  /**
+   * Interval type (length).
+   */
+  @visibility(Lifecycle.Read)
+  intervalType?: QueryTimeGrainType;
+
+  /**
+   * The start time for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  observationStartTime?: utcDateTime;
+
+  /**
+   * The end time for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  observationEndTime?: utcDateTime;
+
+  /**
+   * List of top resource consuming queries with appropriate metric data
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  queries?: QueryMetrics[];
+}
+
+/**
+ * Metrics of a query execution.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model QueryMetrics {
+  /**
+   * Unique query id
+   */
+  @visibility(Lifecycle.Read)
+  queryId?: int64;
+
+  /**
+   * List of intervals with appropriate metric data
+   */
+  @identifiers(#[])
+  intervals?: QueryMetricIntervalDetails[];
+}
+
+/**
+ * Properties of a query metrics interval.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model QueryMetricIntervalDetails {
+  /**
+   * The start time for the metric interval.
+   */
+  @visibility(Lifecycle.Read)
+  intervalStartTime?: utcDateTime;
+
+  /**
+   * Execution count of a query in this interval.
+   */
+  @visibility(Lifecycle.Read)
+  executionCount?: int32;
+
+  /**
+   * List of metric objects for this interval
+   */
+  @identifiers(#[])
+  metrics?: QueryMetric[];
+}
+
+/**
+ * Properties of a topquery metric in one interval.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model QueryMetric {
+  /**
+   * The name information for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The UI appropriate name for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /**
+   * The unit of the metric.
+   */
+  @visibility(Lifecycle.Read)
+  unit?: QueryMetricUnitType;
+
+  /**
+   * The value of the metric.
+   */
+  @visibility(Lifecycle.Read)
+  value?: float64;
+}
+
+/**
+ * A list of query execution statistics for a database.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep this database query collection in databases.json with its operations under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model QueryStatisticsDatabaseListResult
+  is Azure.Core.Page<QueryStatisticsDatabase>;
+
+/**
+ * A query execution statistics.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model QueryStatisticsDatabase {
+  /**
+   * Interval type (length).
+   */
+  @visibility(Lifecycle.Read)
+  intervalType?: QueryTimeGrainType;
+
+  /**
+   * The start time for the metric (ISO-8601 format).
+   */
+  @visibility(Lifecycle.Read)
+  intervalStartTime?: utcDateTime;
+
+  /**
+   * Execution count of a query in this interval.
+   */
+  @visibility(Lifecycle.Read)
+  executionCount?: int32;
+
+  /**
+   * List of metric objects for one interval
+   */
+  @identifiers(#[])
+  metrics?: MetricQuery[];
+}
+
+/**
+ * A query metric.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model MetricQuery {
+  /**
+   * The name information for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The UI appropriate name for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /**
+   * The unit of the metric.
+   */
+  @visibility(Lifecycle.Read)
+  unit?: QueryMetricUnitType;
+
+  /**
+   * Metric value when min() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  min?: float64;
+
+  /**
+   * Metric value when max() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  max?: float64;
+
+  /**
+   * Metric value when avg() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  avg?: float64;
+
+  /**
+   * Metric value when sum() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  sum?: float64;
+
+  /**
+   * Metric value when stdev aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  stdev?: float64;
 }
 
 /**
