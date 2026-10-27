@@ -1,6 +1,8 @@
+import "../../common/custom-types.tsp";
 import "../../common/models.tsp";
 import "../../common/servicepatterns.tsp";
 import "../../data_generation_jobs/models.tsp";
+import "../../evaluators/models.tsp";
 import "../../red-teams/models.tsp";
 import "./common.tsp";
 import "./user_conversation_simulation.tsp";
@@ -866,6 +868,10 @@ model UserConversationSimulationEvalRunDataSource extends EvalRunDataSource {
 @@copyProperties(
   OpenAI.EvalRunPerTestingCriteriaResults,
   {
+    /** Optional metric identity when one testing criterion reports multiple metrics. Safety rubrics return separate entries for impermissible_behavior_violated and permissible_behavior_violated, each counting evaluable conversations independently. */
+    @added(Versions.v1)
+    metric?: string,
+
     /** Number of tests that errored for this criteria. */
     #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
@@ -1105,7 +1111,7 @@ union EvalRunOutputItemResultStatus {
     /** The evaluation status for this result item. Values: "completed", "errored", "skipped". Null if not provided by evaluator. When status is skipped, passed/score can be ignored. */
     status?: EvalRunOutputItemResultStatus,
 
-    /** The name of the metric (e.g., "fluency", "f1_score"). */
+    /** The metric name. A safety rubric reports impermissible_behavior_violated and permissible_behavior_violated as separate entries for the same evaluator, never as a combined safety score. */
     metric?: string,
 
     /** The label associated with the test criteria metric (e.g., "pass", "fail", "good", "bad"). */
@@ -1118,11 +1124,61 @@ union EvalRunOutputItemResultStatus {
     reason?: string,
 
     /** Additional details about the test criteria metric. */
-    properties?: Record<string>,
+    properties?: EvalRunOutputItemResultProperties,
   }
 );
 
-model EvalRunOutputItemResult is OpenAI.EvalRunOutputItemResult;
+/** Structured and evaluator-specific details attached to an evaluation result. */
+@TypeSpec.OpenAPI.oneOf
+union EvalRunOutputItemResultProperties {
+  /** Existing string-valued properties for legacy evaluators, including separate safety metric evidence. */
+  legacy: Record<string>,
+
+  /** Mode-specific ordinary rubric judgments without an additional scoring wrapper. */
+  @added(Versions.v1)
+  rubric: RubricResultProperties,
+}
+
+/** A named metric result for an evaluation run output item. One safety evaluator reports two entries, one for each permissibility group, with no overall safety aggregate. */
+@summary("EvalRunOutputItemResult")
+model EvalRunOutputItemResult {
+  ...Record<unknown>;
+
+  /** The name of the grader. */
+  name: string;
+
+  /** The grader type (for example, "string-check-grader"). */
+  type?: string;
+
+  /** The numeric metric score. Safety violation metrics use 1 for a known violation and 0 for no violation on relevant evaluable behavior. An irrelevant or indeterminate group has a null score, not a clear result. */
+  @typeChangedFrom(Versions.v1, OpenAI.numeric)
+  score: float64 | null;
+
+  /** Whether the grader considered the output a pass. */
+  @madeOptional(Versions.v1)
+  passed?: boolean;
+
+  /** Optional sample or intermediate data produced by the grader. */
+  sample?: Record<unknown> | null;
+
+  /** The evaluation status for this result item. Values: "completed", "errored", "skipped". Null if not provided by evaluator. When status is skipped, passed/score can be ignored. */
+  status?: EvalRunOutputItemResultStatus;
+
+  /** The metric name. Safety rubrics report impermissible_behavior_violated and permissible_behavior_violated separately, using lower-is-better event scores. */
+  metric?: string;
+
+  /** The label associated with the test criteria metric (e.g., "pass", "fail", "good", "bad"). */
+  label?: string;
+
+  /** The threshold used to determine pass/fail for this test criteria, if it is numerical. */
+  threshold?: float32;
+
+  /** The reason for the test criteria metric. */
+  reason?: string;
+
+  /** Additional details about the test criteria metric. */
+  properties?: EvalRunOutputItemResultProperties;
+}
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(
