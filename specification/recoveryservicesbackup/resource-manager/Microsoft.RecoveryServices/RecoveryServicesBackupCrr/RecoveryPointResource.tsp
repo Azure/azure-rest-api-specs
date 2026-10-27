@@ -12,21 +12,25 @@ namespace Microsoft.RecoveryServices;
  * Base class for backup copies. Workload-specific backup copies are derived from this class.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "Faithful migration: the frozen CRR recoveryPoints path nesting depth exceeds the ARM-standard limit; the legacy path shape must be preserved."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Faithful migration: RecoveryPointResource carries a legacy optional 'location' and is modeled with Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation to reproduce the original envelope exactly. It is a read-only proxy resource, not a true tracked resource."
 @parentResource(ProtectedItemVirtualResource)
-model RecoveryPointResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<RecoveryPoint> {
+model RecoveryPointResource is ProxyResource<RecoveryPoint> {
   ...ResourceNameParameter<
     Resource = RecoveryPointResource,
     KeyName = "recoveryPointId",
     SegmentName = "recoveryPoints",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
   eTag?: string;
 }
 

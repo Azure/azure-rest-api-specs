@@ -1222,17 +1222,29 @@ model NewErrorResponse {
 /**
  * AAD properties response resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
-model AadPropertiesResource extends Resource {
+model AadPropertiesResource
+  is Azure.ResourceManager.ProxyResource<AadPropertiesModel> {
+  ...ResourceNameParameter<AadPropertiesResource, NamePattern = "">;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
+
   /**
-   * AADPropertiesResource properties
+   * Optional ETag.
    */
-  properties?: AadPropertiesModel;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
+  eTag?: string;
 }
+
+@@doc(AadPropertiesResource.properties, "AADPropertiesResource properties");
 
 /**
  * Azure Active Directory properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Faithful migration: this legacy response property model has no provisioning state in the stable/2023-01-15 contract."
 model AadPropertiesModel {
   /**
    * Service principal client ID.
@@ -1261,50 +1273,10 @@ model AadPropertiesModel {
 }
 
 /**
- * ARM Resource.
- */
-#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Faithful migration: the frozen stable 2023-01-15 Resource definition includes x-ms-azure-resource: true. This legacy extension is retained to preserve the generated OpenAPI contract."
-@extension("x-ms-azure-resource", true)
-model Resource {
-  /**
-   * Resource Id represents the complete path to the resource.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource name associated with the resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Resource location.
-   */
-  location?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
-  /**
-   * Optional ETag.
-   */
-  eTag?: string;
-}
-
-/**
  * Cross-region restore request.
  */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Faithful migration: this legacy request property model has no provisioning state in the stable/2023-01-15 contract."
 model CrossRegionRestoreRequest {
   /**
    * Access details for cross region restore
@@ -1320,6 +1292,7 @@ model CrossRegionRestoreRequest {
 /**
  * Cross-region restore access token.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Faithful migration: this legacy response property model has no provisioning state in the stable/2023-01-15 contract."
 @discriminator("objectType")
 model CrrAccessToken {
   /**
@@ -1475,6 +1448,7 @@ model RestoreRequest {
  * Request object for fetching CRR jobs.
  */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Faithful migration: this legacy request property model has no provisioning state in the stable/2023-01-15 contract."
 model CrrJobRequest {
   /**
    * Entire ARM resource id of the resource
@@ -1490,17 +1464,28 @@ model CrrJobRequest {
 /**
  * Defines workload agnostic properties for a job.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
-model JobResource extends Resource {
+model JobResource is Azure.ResourceManager.ProxyResource<Job> {
+  ...ResourceNameParameter<JobResource, NamePattern = "">;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
+
   /**
-   * JobResource properties
+   * Optional ETag.
    */
-  properties?: Job;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
+  eTag?: string;
 }
+
+@@doc(JobResource.properties, "JobResource properties");
 
 /**
  * Defines workload agnostic properties for a job.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Faithful migration: this legacy response property model has no provisioning state in the stable/2023-01-15 contract."
 @discriminator("jobType")
 model Job {
   /**
@@ -1637,13 +1622,24 @@ model OperationStatusExtendedInfo {
 /**
  * Cross-region restore access token resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
-model CrrAccessTokenResource extends Resource {
+model CrrAccessTokenResource
+  is Azure.ResourceManager.ProxyResource<CrrAccessToken> {
+  ...ResourceNameParameter<CrrAccessTokenResource, NamePattern = "">;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
+
   /**
-   * CrrAccessTokenResource properties
+   * Optional ETag.
    */
-  properties?: CrrAccessToken;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
+  eTag?: string;
 }
+
+@@doc(CrrAccessTokenResource.properties, "CrrAccessTokenResource properties");
 
 /**
  * The resource storage details.
@@ -1711,17 +1707,29 @@ model ProtectedItemResourceList extends ResourceList {
 /**
  * Base class for backup items.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
-model ProtectedItemResource extends Resource {
+model ProtectedItemResource
+  is Azure.ResourceManager.ProxyResource<ProtectedItem> {
+  ...ResourceNameParameter<ProtectedItemResource, NamePattern = "">;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
+
   /**
-   * ProtectedItemResource properties
+   * Optional ETag.
    */
-  properties?: ProtectedItem;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
+  eTag?: string;
 }
+
+@@doc(ProtectedItemResource.properties, "ProtectedItemResource properties");
 
 /**
  * Base class for backup items.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @discriminator("protectedItemType")
 model ProtectedItem {
   /**
@@ -3274,13 +3282,24 @@ model BmsrpQueryObject {
 /**
  * Request object for fetching CRR jobs.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
-model CrrJobRequestResource extends Resource {
+model CrrJobRequestResource
+  is Azure.ResourceManager.ProxyResource<CrrJobRequest> {
+  ...ResourceNameParameter<CrrJobRequestResource, NamePattern = "">;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
+
   /**
-   * CrrJobRequestResource properties
+   * Optional ETag.
    */
-  properties?: CrrJobRequest;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
+  eTag?: string;
 }
+
+@@doc(CrrJobRequestResource.properties, "CrrJobRequestResource properties");
 
 /**
  * Client script details for file / folder restore.
@@ -3317,13 +3336,27 @@ model ClientScriptForConnect {
 /**
  * Cross-region restore request resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
-model CrossRegionRestoreRequestResource extends Resource {
+model CrossRegionRestoreRequestResource
+  is Azure.ResourceManager.ProxyResource<CrossRegionRestoreRequest> {
+  ...ResourceNameParameter<CrossRegionRestoreRequestResource, NamePattern = "">;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
+
   /**
-   * CrossRegionRestoreRequestResource properties
+   * Optional ETag.
    */
-  properties?: CrossRegionRestoreRequest;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
+  eTag?: string;
 }
+
+@@doc(
+  CrossRegionRestoreRequestResource.properties,
+  "CrossRegionRestoreRequestResource properties"
+);
 
 /**
  * Disk information

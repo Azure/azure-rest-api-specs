@@ -23,13 +23,6 @@ using Microsoft.RecoveryServices;
 
 @@clientName(BackupCrrJobs.list::parameters.body, "parameters");
 
-// These language-scoped names avoid duplicate SDK model names without changing
-// the AutoRest definition keys in the frozen OpenAPI contract.
-@@clientName(
-  Microsoft.RecoveryServices.Resource,
-  "CrrResource",
-  "csharp,java,python"
-);
 @@clientName(
   Microsoft.RecoveryServices.ErrorDetail,
   "CrrErrorDetail",

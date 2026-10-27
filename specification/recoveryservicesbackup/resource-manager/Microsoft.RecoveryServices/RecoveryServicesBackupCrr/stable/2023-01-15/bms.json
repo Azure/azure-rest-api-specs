@@ -966,13 +966,36 @@
         "properties": {
           "$ref": "#/definitions/AADProperties",
           "description": "AADPropertiesResource properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Optional ETag."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "AzureFileShareRecoveryPoint": {
       "type": "object",
@@ -2256,7 +2279,7 @@
           }
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -2270,7 +2293,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2393,11 +2416,30 @@
         "properties": {
           "$ref": "#/definitions/CrossRegionRestoreRequest",
           "description": "CrossRegionRestoreRequestResource properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Optional ETag."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2526,11 +2568,30 @@
         "properties": {
           "$ref": "#/definitions/CrrAccessToken",
           "description": "CrrAccessTokenResource properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Optional ETag."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2555,11 +2616,30 @@
         "properties": {
           "$ref": "#/definitions/CrrJobRequest",
           "description": "CrrJobRequestResource properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Optional ETag."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3515,11 +3595,30 @@
         "properties": {
           "$ref": "#/definitions/Job",
           "description": "JobResource properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Optional ETag."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4451,11 +4550,30 @@
         "properties": {
           "$ref": "#/definitions/ProtectedItem",
           "description": "ProtectedItemResource properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Optional ETag."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4695,7 +4813,7 @@
           }
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -4709,7 +4827,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4871,43 +4989,6 @@
           }
         ]
       }
-    },
-    "Resource": {
-      "type": "object",
-      "description": "ARM Resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id represents the complete path to the resource.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name associated with the resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Optional ETag."
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "ResourceHealthDetails": {
       "type": "object",

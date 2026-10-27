@@ -14,22 +14,26 @@ namespace Microsoft.RecoveryServices;
 /**
  * The resource storage details.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Faithful migration: BackupResourceConfigResource carries a legacy optional 'location' and is modeled with Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation to reproduce the original envelope exactly. It is a singleton proxy resource, not a true tracked resource."
 @parentResource(VaultResource)
 @singleton("vaultstorageconfig")
-model BackupResourceConfigResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<BackupResourceConfig> {
+model BackupResourceConfigResource is ProxyResource<BackupResourceConfig> {
   ...ResourceNameParameter<
     Resource = BackupResourceConfigResource,
     KeyName = "backupstorageconfig",
     SegmentName = "backupstorageconfig",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
   eTag?: string;
 }
 
