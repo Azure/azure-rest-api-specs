@@ -1,0 +1,31 @@
+{
+  "title": "Evaluate a published Harbor task",
+  "operationId": "RLE_executeRollout",
+  "parameters": {
+    "endpoint": "https://contoso.services.ai.azure.com/api/projects/learning",
+    "api-version": "2025-11-15-preview",
+    "name": "harbor_eval",
+    "version": "1.0.0",
+    "body": {
+      "rollout_id": "550e8400-e29b-41d4-a716-446655440001",
+      "task": {
+        "name": "hello-alpine"
+      },
+      "policy": {
+        "type": "foundry",
+        "deployment_name": "evaluation-model",
+        "project_endpoint": "https://contoso.services.ai.azure.com/api/projects/learning"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "rollout_id": "550e8400-e29b-41d4-a716-446655440001",
+        "rollout_graph": {},
+        "reward": 1.0,
+        "success": true
+      }
+    }
+  }
+}

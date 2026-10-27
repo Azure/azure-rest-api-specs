@@ -186,6 +186,51 @@ model RleTaskBundle {
   sha256: string;
 }
 
+/** Request a project-scoped upload target for a task archive. */
+model RleHarborUploadUrlContent {
+  /** Lowercase SHA-256 digest of the complete compressed archive. */
+  @pattern("^[0-9a-f]{64}$")
+  sha256: string;
+}
+
+/** Validate a staged archive and publish its content-addressed bundle. */
+model RleHarborFinalizeUploadContent {
+  ...RleHarborUploadUrlContent;
+
+  /** Staging path returned for this digest by the upload-target operation. */
+  @pattern("^task-data/staging/[0-9a-f]{64}-[0-9a-f]{32}\\.tar\\.gz$")
+  stagingPath: string;
+}
+
+/** Project storage target; an existing bundle needs no upload or finalization. */
+model RleHarborUploadTarget {
+  /** Content-addressed path used in environment registration. */
+  path: string;
+
+  /** Whether the verified bundle already exists in this project. */
+  exists: boolean;
+
+  /** Per-attempt staging path; null when the bundle already exists. */
+  stagingPath?: string | null;
+
+  /** Short-lived signed write URL. Treat as a credential; never log it. */
+  @Azure.ClientGenerator.Core.clientName("uploadUri", "csharp")
+  uploadUrl?: url | null;
+
+  /** Signed URL expiry, normally fifteen minutes after issue. */
+  expiresOn?: utcDateTime | null;
+
+  /** Maximum compressed bundle size in bytes; currently 64 MiB. */
+  maxBytes: int64;
+}
+
+/** Empty response when environment or execution feature access is unavailable. */
+@error
+model RleHarborFeatureUnavailable {
+  /** Harbor is not enabled for this project. */
+  @statusCode statusCode: 404;
+}
+
 /** A task published with an environment version. */
 model RleHarborTaskInput {
   /** Task name, unique within this environment version. */
@@ -427,7 +472,9 @@ model RleExecuteRolloutContent {
   /** Caller-generated canonical rollout identifier, reserved once per project. */
   rollout_id: string;
 
-  /** Environment-defined task JSON, or a published Harbor task name object. */
+  /** Environment-defined task JSON. For Harbor, use {"name":"published-task"};
+   * image, bundle and disk_image_id overrides are rejected.
+   */
   task: unknown;
 
   /** Required model binding for capture and sampling. */

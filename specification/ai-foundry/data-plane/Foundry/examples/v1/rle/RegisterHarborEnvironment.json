@@ -1,0 +1,54 @@
+{
+  "title": "Register a Harbor environment with a prepared task",
+  "operationId": "RLE_createEnvironment",
+  "parameters": {
+    "endpoint": "https://contoso.services.ai.azure.com/api/projects/learning",
+    "api-version": "v1",
+    "body": {
+      "name": "harbor_eval",
+      "version": "1.0.0",
+      "schema_version": "1.0.0",
+      "task": {
+        "format": "harbor"
+      },
+      "harness": {
+        "type": "package",
+        "name": "opencode"
+      },
+      "tasks": [
+        {
+          "name": "hello-alpine",
+          "acrImagePath": "contoso.azurecr.io/harbor/hello-alpine:v1",
+          "bundle": {
+            "path": "task-data/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.tar.gz",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Location": "https://contoso.services.ai.azure.com/api/projects/learning/rl_environments/harbor_eval/versions/1.0.0"
+      },
+      "body": {
+        "id": "harbor_eval/versions/1.0.0",
+        "projectId": "learning",
+        "name": "harbor_eval",
+        "version": "1.0.0",
+        "acrImagePath": "",
+        "schema_version": "1.0.0",
+        "task": {
+          "format": "harbor"
+        },
+        "harness": {
+          "type": "package",
+          "name": "opencode"
+        },
+        "createdAtUtc": "2026-10-27T14:00:00Z",
+        "updatedAtUtc": "2026-10-27T14:00:00Z"
+      }
+    }
+  }
+}

@@ -7,6 +7,7 @@ namespace Azure.AI.Projects;
 
 /** Standard operation foundation with the implemented RLE error contract. */
 #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The implemented error body can be structured JSON or a validation string; both are errors, never success responses."
+#suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Harbor upload operations return an empty feature-gate 404, distinct from their default structured/string error payload."
 op RleOperation<
   Params extends Reflection.Model,
   Response
@@ -34,6 +35,9 @@ interface RLE {
     #{
       `Register an immutable Gym environment`: #{
         $ref: "../../examples/v1/rle/RegisterEnvironment.json",
+      },
+      `Register a Harbor environment with a prepared task`: #{
+        $ref: "../../examples/v1/rle/RegisterHarborEnvironment.json",
       },
     }
   )
@@ -134,6 +138,56 @@ interface RLE {
     RlePage<RleHarborTask>
   >;
 
+  /** Get a short-lived write URL for one archive digest. If exists is true,
+   * reuse path without uploading. Otherwise upload bytes directly to storage
+   * and finalize before registration. Invalid hashes return 400; disabled
+   * environment or execution access returns an empty 404 response.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Feature-gate 404 has no body and must not be assigned the default error payload."
+  @post
+  @route("/tasks/upload-url")
+  @summary("Get a Harbor task bundle upload target")
+  @extension(
+    "x-ms-examples",
+    #{
+      `Reuse a task bundle already uploaded to this project`: #{
+        $ref: "../../examples/v1/rle/GetHarborUploadUrl.json",
+      },
+    }
+  )
+  getHarborUploadUrl is RleOperation<
+    {
+      /** Digest of the complete task archive. */
+      @body body: RleHarborUploadUrlContent;
+    },
+    RleHarborUploadTarget | RleHarborFeatureUnavailable
+  >;
+
+  /** Validate staged bytes against their digest and size bound, then publish
+   * the immutable bundle path. Returns 400 for invalid/missing staging data,
+   * size or digest mismatch; feature unavailability returns an empty 404.
+   * This operation completes synchronously and is not an LRO.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Feature-gate 404 has no body and must not be assigned the default error payload."
+  @post
+  @route("/tasks/finalize")
+  @summary("Finalize a Harbor task bundle upload")
+  @extension(
+    "x-ms-examples",
+    #{
+      `Finalize a staged task archive`: #{
+        $ref: "../../examples/v1/rle/FinalizeHarborBundle.json",
+      },
+    }
+  )
+  finalizeHarborBundle is RleOperation<
+    {
+      /** Archive digest and its per-attempt staging path. */
+      @body body: RleHarborFinalizeUploadContent;
+    },
+    RleHarborUploadTarget | RleHarborFeatureUnavailable
+  >;
+
   /** Execute a scored rollout with an exact release. Returns 400 for invalid
    * policy/task/harness, 403 when disabled, 404 for a missing release, and 409
    * for an already-reserved rollout ID. A submitted timeout has an unknown
@@ -148,6 +202,9 @@ interface RLE {
     #{
       `Evaluate one task using a project model deployment`: #{
         $ref: "../../examples/v1/rle/ExecuteRollout.json",
+      },
+      `Evaluate a published Harbor task`: #{
+        $ref: "../../examples/v1/rle/ExecuteHarborRollout.json",
       },
     }
   )

@@ -40428,6 +40428,8 @@ paths:
       x-ms-examples:
         Register an immutable Gym environment:
           $ref: ../../examples/v1/rle/RegisterEnvironment.json
+        Register a Harbor environment with a prepared task:
+          $ref: ../../examples/v1/rle/RegisterHarborEnvironment.json
     get:
       operationId: RLE_listEnvironments
       summary: List environments
@@ -40771,6 +40773,100 @@ paths:
                 $ref: '#/components/schemas/RleErrorBody'
       tags:
         - Reinforcement Learning Environments
+  /rl_environments/tasks/finalize:
+    post:
+      operationId: RLE_finalizeHarborBundle
+      summary: Finalize a Harbor task bundle upload
+      description: |-
+        Validate staged bytes against their digest and size bound, then publish
+        the immutable bundle path. Returns 400 for invalid/missing staging data,
+        size or digest mismatch; feature unavailability returns an empty 404.
+        This operation completes synchronously and is not an LRO.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleHarborUploadTarget'
+        '404':
+          description: Empty response when environment or execution feature access is unavailable.
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RleHarborFinalizeUploadContent'
+        description: Archive digest and its per-attempt staging path.
+      x-ms-examples:
+        Finalize a staged task archive:
+          $ref: ../../examples/v1/rle/FinalizeHarborBundle.json
+  /rl_environments/tasks/upload-url:
+    post:
+      operationId: RLE_getHarborUploadUrl
+      summary: Get a Harbor task bundle upload target
+      description: |-
+        Get a short-lived write URL for one archive digest. If exists is true,
+        reuse path without uploading. Otherwise upload bytes directly to storage
+        and finalize before registration. Invalid hashes return 400; disabled
+        environment or execution access returns an empty 404 response.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleHarborUploadTarget'
+        '404':
+          description: Empty response when environment or execution feature access is unavailable.
+        default:
+          description: Error response, including validation strings emitted by management endpoints.
+          headers:
+            Retry-After:
+              required: false
+              description: Retry delay in seconds, when returned for capacity exhaustion.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RleErrorBody'
+      tags:
+        - Reinforcement Learning Environments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RleHarborUploadUrlContent'
+        description: Digest of the complete task archive.
+      x-ms-examples:
+        Reuse a task bundle already uploaded to this project:
+          $ref: ../../examples/v1/rle/GetHarborUploadUrl.json
   /rl_environments/{name}:
     get:
       operationId: RLE_getEnvironment
@@ -41691,6 +41787,8 @@ paths:
       x-ms-examples:
         Evaluate one task using a project model deployment:
           $ref: ../../examples/v1/rle/ExecuteRollout.json
+        Evaluate a published Harbor task:
+          $ref: ../../examples/v1/rle/ExecuteHarborRollout.json
   /routines:
     get:
       operationId: listRoutines
@@ -83452,7 +83550,9 @@ components:
           type: string
           description: Caller-generated canonical rollout identifier, reserved once per project.
         task:
-          description: Environment-defined task JSON, or a published Harbor task name object.
+          description: |-
+            Environment-defined task JSON. For Harbor, use {"name":"published-task"};
+            image, bundle and disk_image_id overrides are rejected.
         policy:
           $ref: '#/components/schemas/RleRolloutPolicy'
           description: Required model binding for capture and sampling.
@@ -83540,6 +83640,21 @@ components:
           type: string
           description: Action property that receives the model completion verbatim.
       description: Mapping between model output and the environment's action model.
+    RleHarborFinalizeUploadContent:
+      type: object
+      required:
+        - sha256
+        - stagingPath
+      properties:
+        sha256:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+          description: Lowercase SHA-256 digest of the complete compressed archive.
+        stagingPath:
+          type: string
+          pattern: ^task-data/staging/[0-9a-f]{64}-[0-9a-f]{32}\.tar\.gz$
+          description: Staging path returned for this digest by the upload-target operation.
+      description: Validate a staged archive and publish its content-addressed bundle.
     RleHarborTask:
       type: object
       required:
@@ -83584,6 +83699,51 @@ components:
           $ref: '#/components/schemas/RleTaskBundle'
           description: Content-addressed task archive reference.
       description: A task published with an environment version.
+    RleHarborUploadTarget:
+      type: object
+      required:
+        - path
+        - exists
+        - maxBytes
+      properties:
+        path:
+          type: string
+          description: Content-addressed path used in environment registration.
+        exists:
+          type: boolean
+          description: Whether the verified bundle already exists in this project.
+        stagingPath:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Per-attempt staging path; null when the bundle already exists.
+        uploadUrl:
+          anyOf:
+            - type: string
+              format: uri
+            - type: 'null'
+          description: Short-lived signed write URL. Treat as a credential; never log it.
+        expiresOn:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          description: Signed URL expiry, normally fifteen minutes after issue.
+        maxBytes:
+          type: integer
+          format: int64
+          description: Maximum compressed bundle size in bytes; currently 64 MiB.
+      description: Project storage target; an existing bundle needs no upload or finalization.
+    RleHarborUploadUrlContent:
+      type: object
+      required:
+        - sha256
+      properties:
+        sha256:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+          description: Lowercase SHA-256 digest of the complete compressed archive.
+      description: Request a project-scoped upload target for a task archive.
     RleHarnessConfiguration:
       type: object
       properties:

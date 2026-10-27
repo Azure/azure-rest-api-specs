@@ -8,6 +8,8 @@ covers publication, training, evaluation and inspection.
 ## Contract scope
 
 - Environment registration, latest/exact-version reads, version/task listing and deletion.
+- Harbor task archive upload-target issuance and finalization, with
+  project-scoped content-hash reuse and per-task image readiness.
 - Execute Rollout through the client-facing `:executeRollout` action and the
   backend-native `/rollout` route.
 - Instance group and instance lifecycle through both pinned-version and
@@ -23,8 +25,9 @@ OpenEnv reset/step/state/MCP proxying and binary rollout WebSockets are runtime
 protocols, not JSON resource operations. They are not represented as ordinary
 HTTP model methods here. The asynchronous rollout client uses that separate
 transport; HTTP execution uses the same task/policy/result contract.
-Harbor archive upload/finalization, sandbox-pool management, rollout-to-sandbox
-bindings and producer-side job/metric writes are outside this draft's scope.
+Signed archive bytes are uploaded directly to project storage, not to an RLE
+JSON endpoint. Sandbox-pool management, rollout-to-sandbox bindings and
+producer-side job/metric writes are outside this draft's scope.
 High-level training submission/cancellation remains on the existing fine-tuning
 API, not an RLE job-create action.
 
@@ -40,6 +43,11 @@ migration:
   identify the request/response token without inventing `nextLink`.
 - Registration is a non-repeatable POST, returns 201/Location, and starts image
   conversion. Read `diskImageConversionStatus`; there is no LRO poller contract.
+  Harbor versions use per-task readiness from the tasks list instead of the
+  environment-level image status.
+- Harbor selects a published task with `task: {"name":"..."}` and a package
+  harness such as `opencode` or `terminus-2`. It does not accept BYOH/Hosted
+  Agent harnesses or per-rollout image/bundle overrides.
 - Rollout IDs are one-shot reservations, not idempotency keys. A timeout after
   admission has an unknown outcome; a retryable dependency error does not permit
   replaying the same ID.
@@ -50,9 +58,10 @@ migration:
   rollout clients select different version strings. Version convergence and
   gateway publication of backend-native routes require API-owner agreement.
 
-Three narrowly scoped linter exceptions preserve these existing contracts:
-nonstandard resource operations, mixed string/object errors, and the lack of a
-shared model base for that error union. Suppression approval remains required;
+Four narrowly scoped linter exception categories preserve these existing contracts:
+nonstandard resource operations, mixed string/object errors, the lack of a
+shared model base for that error union, and Harbor's empty feature-gate 404
+alongside its default error payload. Suppression approval remains required;
 compilation does not constitute API approval.
 
 Formal API review follows experience-spec sign-off. Public package distribution
