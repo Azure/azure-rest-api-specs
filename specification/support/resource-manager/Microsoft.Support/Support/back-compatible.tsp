@@ -121,4 +121,3 @@ using Microsoft.Support;
   SupportTickets.lookUpResourceId::parameters.body,
   "lookUpResourceIdRequest"
 );
-@@clientName(LookUpResourceIdRequest.type, "ResourceType");
