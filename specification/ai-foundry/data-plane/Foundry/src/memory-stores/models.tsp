@@ -480,5 +480,5 @@ alias DeleteMemoryRequest = {
 
   @doc("The ID of the memory item to delete.")
   @path
-  memory_id: string;
+  memory_id: int32;
 };
