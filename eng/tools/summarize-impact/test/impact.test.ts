@@ -3,7 +3,6 @@ import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest"; //vi
 import { PRContext } from "../src/PRContext.ts";
 import { evaluateImpact } from "../src/impact.ts";
-import { type LabelContext } from "../src/labelling-types.ts";
 
 const FIXTURE_DIRECTORY = path.join(__dirname, "fixtures");
 const BEFORE_REPO_FIXTURE = path.join(FIXTURE_DIRECTORY, "default", "before");
@@ -178,13 +177,7 @@ describe("Impact Detection - default fixture", () => {
     },
   ];
   it.each(testCases)("$description", async ({ changedFileDetails, expectedImpact }) => {
-    const labelContext: LabelContext = {
-      present: new Set(),
-      toAdd: new Set(),
-      toRemove: new Set(),
-    };
-
-    const prContext = new PRContext(AFTER_REPO_FIXTURE, BEFORE_REPO_FIXTURE, labelContext, {
+    const prContext = new PRContext(AFTER_REPO_FIXTURE, BEFORE_REPO_FIXTURE, {
       sha: "2bd8350d465081401a0f4f03e633eca41f0991de",
       sourceBranch: "contosotest",
       targetBranch: expectedImpact.targetBranch,
@@ -195,7 +188,7 @@ describe("Impact Detection - default fixture", () => {
       isDraft: false,
     });
 
-    const actualImpact = await evaluateImpact(prContext, labelContext, DEFAULT_MAIN_SPEC_FOLDERS);
+    const actualImpact = await evaluateImpact(prContext, DEFAULT_MAIN_SPEC_FOLDERS);
     expect(actualImpact).toEqual(expectedImpact);
   });
 
@@ -221,12 +214,7 @@ describe("Impact Detection - default fixture", () => {
       resourceManagerRequired: true,
     },
   ])("$description", async ({ modifications, resourceManagerRequired }) => {
-    const labelContext: LabelContext = {
-      present: new Set(),
-      toAdd: new Set(),
-      toRemove: new Set(),
-    };
-    const context = new PRContext(AFTER_REPO_FIXTURE, BEFORE_REPO_FIXTURE, labelContext, {
+    const context = new PRContext(AFTER_REPO_FIXTURE, BEFORE_REPO_FIXTURE, {
       sha: "2bd8350d465081401a0f4f03e633eca41f0991de",
       sourceBranch: "contosotest",
       targetBranch: "main",
@@ -243,7 +231,7 @@ describe("Impact Detection - default fixture", () => {
       isDraft: false,
     });
 
-    expect(await evaluateImpact(context, labelContext, DEFAULT_MAIN_SPEC_FOLDERS)).toMatchObject({
+    expect(await evaluateImpact(context, DEFAULT_MAIN_SPEC_FOLDERS)).toMatchObject({
       resourceManagerRequired,
       typeSpecChanged: true,
     });
@@ -275,13 +263,7 @@ describe("Impact Detection - arm-leases folder behavior", () => {
       total: 1,
     };
 
-    const labelContext: LabelContext = {
-      present: new Set(),
-      toAdd: new Set(),
-      toRemove: new Set(),
-    };
-
-    const prContext = new PRContext(AFTER_REPO_FIXTURE, BEFORE_REPO_FIXTURE, labelContext, {
+    const prContext = new PRContext(AFTER_REPO_FIXTURE, BEFORE_REPO_FIXTURE, {
       sha: "2bd8350d465081401a0f4f03e633eca41f0991de",
       sourceBranch: "contosotest",
       targetBranch: "main",
@@ -294,7 +276,7 @@ describe("Impact Detection - arm-leases folder behavior", () => {
 
     // Simulate that the RP folder names are present in the target branch's .github/arm-leases directory
     const armLeasesFolders = ["contosowidgetmanager", "contosowidgermanager2"];
-    const actualImpact = await evaluateImpact(prContext, labelContext, armLeasesFolders);
+    const actualImpact = await evaluateImpact(prContext, armLeasesFolders);
 
     // Should NOT be flagged because arm-lease exists
     expect(actualImpact.rpaasRpNotInPrivateRepo).toBe(false);
@@ -315,13 +297,7 @@ describe("Impact Detection - arm-leases folder behavior", () => {
       total: 1,
     };
 
-    const labelContext: LabelContext = {
-      present: new Set(),
-      toAdd: new Set(),
-      toRemove: new Set(),
-    };
-
-    const prContext = new PRContext(AFTER_REPO_FIXTURE, BEFORE_REPO_FIXTURE, labelContext, {
+    const prContext = new PRContext(AFTER_REPO_FIXTURE, BEFORE_REPO_FIXTURE, {
       sha: "2bd8350d465081401a0f4f03e633eca41f0991de",
       sourceBranch: "contosotest",
       targetBranch: "main",
@@ -335,7 +311,7 @@ describe("Impact Detection - arm-leases folder behavior", () => {
     // Only include existing arm-lease entries; omit "contosowidgermanager2" to simulate a truly new RP
     const armLeasesFolders = ["contosowidgetmanager"];
 
-    const actualImpact = await evaluateImpact(prContext, labelContext, armLeasesFolders);
+    const actualImpact = await evaluateImpact(prContext, armLeasesFolders);
 
     // Should be flagged because arm-lease does NOT exist
     expect(actualImpact.rpaasRpNotInPrivateRepo).toBe(true);
