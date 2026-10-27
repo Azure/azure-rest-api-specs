@@ -2616,6 +2616,7 @@ interface Volumes {
       /**
        * An option to force delete the volume. Will cleanup resources connected to the particular volume
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.forceDelete retains the forceDelete query parameter; preserve wire compatibility."
       @query("forceDelete")
       forceDelete?: boolean;
     }

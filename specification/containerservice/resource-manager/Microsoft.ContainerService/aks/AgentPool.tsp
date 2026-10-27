@@ -64,6 +64,7 @@ interface AgentPools {
        * ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.ignore-pod-disruption-budget retains the ignore-pod-disruption-budget query parameter; preserve wire compatibility."
       @query("ignore-pod-disruption-budget")
       `ignore-pod-disruption-budget`?: boolean;
 

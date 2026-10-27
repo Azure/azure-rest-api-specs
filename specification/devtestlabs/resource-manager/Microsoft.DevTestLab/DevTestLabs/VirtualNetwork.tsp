@@ -45,6 +45,7 @@ interface VirtualNetworks {
       /**
        * Specify the $expand query. Example: 'properties($expand=externalSubnets)'
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }

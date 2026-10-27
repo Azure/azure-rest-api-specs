@@ -66,6 +66,7 @@ interface ConnectivityConfigurations {
       /**
        * Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.force retains the force query parameter; preserve wire compatibility."
       @query("force")
       force?: boolean;
     },

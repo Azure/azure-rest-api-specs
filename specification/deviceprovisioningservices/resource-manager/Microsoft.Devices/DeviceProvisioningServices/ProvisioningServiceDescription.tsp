@@ -89,6 +89,7 @@ alias GetOperationResultParameters = {
   /**
    * Async header used to poll on the status of the operation, obtained while creating the long running operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing GetOperationResultParameters.asyncinfo retains the asyncinfo query parameter; preserve wire compatibility."
   @query("asyncinfo")
   asyncinfo: string = "true";
 };

@@ -79,6 +79,7 @@ alias RoleAssignmentQuerysOps = Azure.ResourceManager.Legacy.ExtensionOperations
     /**
      * Tenant ID for cross-tenant request
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing RoleAssignmentQuerysOps.tenantId retains the tenantId query parameter; preserve wire compatibility."
     @query("tenantId")
     tenantId?: string;
 

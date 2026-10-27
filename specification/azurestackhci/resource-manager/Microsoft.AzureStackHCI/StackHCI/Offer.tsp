@@ -35,6 +35,7 @@ interface Offers {
       /**
        * Specify $expand=content,contentVersion to populate additional fields related to the marketplace offer.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }

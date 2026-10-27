@@ -43,10 +43,12 @@ interface Issue {
   create is ArmResourceCreateOrReplaceSync<
     Resource = IssueResource,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing create.related retains the related query parameter; preserve wire compatibility."
       @doc("Related resource or alert that is to be added to the issue (default: empty - the issue will be created without any related resources or alerts)")
       @query
       related?: string;
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing create.startInvestigation retains the startInvestigation query parameter; preserve wire compatibility."
       @removed(Versions.v2025_10_03)
       @doc("Whether to automatically start an investigation once the issue is created (default: false)")
       @query

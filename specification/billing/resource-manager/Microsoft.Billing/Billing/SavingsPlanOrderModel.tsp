@@ -52,6 +52,7 @@ interface SavingsPlanOrderModels {
       /**
        * May be used to expand the planInformation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingAccount.expand retains the expand query parameter; preserve wire compatibility."
       @query("expand")
       expand?: string;
     }

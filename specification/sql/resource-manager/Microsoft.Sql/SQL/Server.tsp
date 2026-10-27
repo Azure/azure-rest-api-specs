@@ -51,6 +51,7 @@ interface Servers {
       /**
        * The child resources to include in the response.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }

@@ -57,6 +57,7 @@ interface VirtualMachineDiagnosticRunCommands {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByVirtualMachine.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -145,6 +146,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
       /**
        * The expand expression to apply on the operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }

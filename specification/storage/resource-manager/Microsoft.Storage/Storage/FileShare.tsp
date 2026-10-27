@@ -42,6 +42,7 @@ interface FileShares {
       /**
        * Optional, used to expand the properties within share's properties. Valid values are: stats. Should be passed as a string with delimiter ','.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
@@ -64,6 +65,7 @@ interface FileShares {
       /**
        * Optional, used to expand the properties within share's properties. Valid values are: snapshots. Should be passed as a string with delimiter ','
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing create.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -96,6 +98,7 @@ interface FileShares {
       /**
        * Optional. Valid values are: snapshots, leased-snapshots, none. The default value is snapshots. For 'snapshots', the file share is deleted including all of its file share snapshots. If the file share contains leased-snapshots, the deletion fails. For 'leased-snapshots', the file share is deleted included all of its file share snapshots (leased/unleased). For 'none', the file share is deleted if it has no share snapshots. If the file share contains any snapshots (leased or unleased), the deletion fails.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.$include retains the $include query parameter; preserve wire compatibility."
       @query("$include")
       $include?: string;
     },

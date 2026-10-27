@@ -145,6 +145,7 @@ interface DeploymentScripts {
       /**
        * The number of lines to show from the tail of the deployment script log. Valid value is a positive number up to 1000. If 'tail' is not provided, all available logs are shown up to container instance log capacity of 4mb.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getLogsDefault.tail retains the tail query parameter; preserve wire compatibility."
       @query("tail")
       tail?: int32;
     }

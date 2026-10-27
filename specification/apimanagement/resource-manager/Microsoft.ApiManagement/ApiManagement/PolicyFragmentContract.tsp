@@ -67,6 +67,7 @@ interface PolicyFragmentContracts {
       /**
        * Policy fragment content format.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.format retains the format query parameter; preserve wire compatibility."
       @query("format")
       format?: PolicyFragmentContentFormat;
     },
@@ -252,6 +253,7 @@ interface WorkspacePolicyFragment {
       /**
        * Policy fragment content format.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.format retains the format query parameter; preserve wire compatibility."
       @query("format")
       format?: PolicyFragmentContentFormat;
     },

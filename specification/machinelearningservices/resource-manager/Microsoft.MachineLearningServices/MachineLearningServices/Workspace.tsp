@@ -43,6 +43,7 @@ alias WorkspacesDeleteParameters = {
   /**
    * Flag to indicate delete is a purge request.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing WorkspacesDeleteParameters.forceToPurge retains the forceToPurge query parameter; preserve wire compatibility."
   @query("forceToPurge")
   forceToPurge?: boolean = false;
 };

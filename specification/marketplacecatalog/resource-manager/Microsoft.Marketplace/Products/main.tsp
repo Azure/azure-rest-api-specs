@@ -203,34 +203,42 @@ interface ProductGet {
     ...ApiVersionParameter,
     ...ProductIdParameter,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByTenant.market retains the market query parameter; preserve wire compatibility."
     @doc(MarketSingleParameterDescription)
     @query
     market: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByTenant.includeStopSoldPlans retains the includeStopSoldPlans query parameter; preserve wire compatibility."
     @doc(IncludeStopSoldPlansParameterDescription)
     @query
     includeStopSoldPlans?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByTenant.language retains the language query parameter; preserve wire compatibility."
     @doc(LanguageParameterDescription)
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByTenant.pricingAudience retains the pricingAudience query parameter; preserve wire compatibility."
     @doc(PricingAudienceParameterDescription)
     @query
     pricingAudience?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByTenant.includeHiddenPlans retains the includeHiddenPlans query parameter; preserve wire compatibility."
     @doc(IncludeHiddenPlansParameterDescription)
     @query
     includeHiddenPlans?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByTenant.includeServiceInstructionTemplates retains the includeServiceInstructionTemplates query parameter; preserve wire compatibility."
     @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
     includeServiceInstructionTemplates?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByTenant.planId retains the planId query parameter; preserve wire compatibility."
     @doc(PlanIdParameterDescription)
     @query
     planId?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByTenant.skuId retains the skuId query parameter; preserve wire compatibility."
     @doc(SkuIdParameterDescription)
     @query
     skuId?: string,
@@ -245,30 +253,37 @@ interface ProductGet {
     ...SubscriptionIdParameter,
     ...ProductIdParameter,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getBySubscription.includeStopSoldPlans retains the includeStopSoldPlans query parameter; preserve wire compatibility."
     @doc(IncludeStopSoldPlansParameterDescription)
     @query
     includeStopSoldPlans?: boolean,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getBySubscription.language retains the language query parameter; preserve wire compatibility."
     @doc(LanguageParameterDescription)
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getBySubscription.includeHiddenPlans retains the includeHiddenPlans query parameter; preserve wire compatibility."
     @doc(IncludeHiddenPlansParameterDescription)
     @query
     includeHiddenPlans?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getBySubscription.includeServiceInstructionTemplates retains the includeServiceInstructionTemplates query parameter; preserve wire compatibility."
     @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
     includeServiceInstructionTemplates?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getBySubscription.planId retains the planId query parameter; preserve wire compatibility."
     @doc(PlanIdParameterDescription)
     @query
     planId?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getBySubscription.skuId retains the skuId query parameter; preserve wire compatibility."
     @doc(SkuIdParameterDescription)
     @query
     skuId?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getBySubscription.lookUpOfferInTenantLevel retains the lookUpOfferInTenantLevel query parameter; preserve wire compatibility."
     @doc(LookUpOfferInTenantLevelParameterDescription)
     @query
     lookUpOfferInTenantLevel?: boolean = false,
@@ -283,26 +298,32 @@ interface ProductGet {
     ...BillingAccountIdParameter,
     ...ProductIdParameter,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingAccount.includeStopSoldPlans retains the includeStopSoldPlans query parameter; preserve wire compatibility."
     @doc(IncludeStopSoldPlansParameterDescription)
     @query
     includeStopSoldPlans?: boolean,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingAccount.language retains the language query parameter; preserve wire compatibility."
     @doc(LanguageParameterDescription)
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingAccount.includeHiddenPlans retains the includeHiddenPlans query parameter; preserve wire compatibility."
     @doc(IncludeHiddenPlansParameterDescription)
     @query
     includeHiddenPlans?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingAccount.includeServiceInstructionTemplates retains the includeServiceInstructionTemplates query parameter; preserve wire compatibility."
     @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
     includeServiceInstructionTemplates?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingAccount.planId retains the planId query parameter; preserve wire compatibility."
     @doc(PlanIdParameterDescription)
     @query
     planId?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingAccount.skuId retains the skuId query parameter; preserve wire compatibility."
     @doc(SkuIdParameterDescription)
     @query
     skuId?: string,
@@ -318,26 +339,32 @@ interface ProductGet {
     ...BillingProfileIdParameter,
     ...ProductIdParameter,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingProfile.includeStopSoldPlans retains the includeStopSoldPlans query parameter; preserve wire compatibility."
     @doc(IncludeStopSoldPlansParameterDescription)
     @query
     includeStopSoldPlans?: boolean,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingProfile.language retains the language query parameter; preserve wire compatibility."
     @doc(LanguageParameterDescription)
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingProfile.includeHiddenPlans retains the includeHiddenPlans query parameter; preserve wire compatibility."
     @doc(IncludeHiddenPlansParameterDescription)
     @query
     includeHiddenPlans?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingProfile.includeServiceInstructionTemplates retains the includeServiceInstructionTemplates query parameter; preserve wire compatibility."
     @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
     includeServiceInstructionTemplates?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingProfile.planId retains the planId query parameter; preserve wire compatibility."
     @doc(PlanIdParameterDescription)
     @query
     planId?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingProfile.skuId retains the skuId query parameter; preserve wire compatibility."
     @doc(SkuIdParameterDescription)
     @query
     skuId?: string,

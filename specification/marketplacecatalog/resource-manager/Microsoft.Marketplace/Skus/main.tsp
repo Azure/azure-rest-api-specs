@@ -129,14 +129,17 @@ interface Skus {
     ...BillingAccountIdParameter,
     ...SkuIdParameter,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingAccount.language retains the language query parameter; preserve wire compatibility."
     @doc(LanguageParameterDescription)
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingAccount.includeStopSold retains the includeStopSold query parameter; preserve wire compatibility."
     @doc(IncludeStopSoldParameterDescription)
     @query
     includeStopSold?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingAccount.includeFutureAvailabilities retains the includeFutureAvailabilities query parameter; preserve wire compatibility."
     @doc(IncludeFutureAvailabilitiesParameterDescription)
     @query
     includeFutureAvailabilities?: boolean = false,
@@ -158,14 +161,17 @@ interface Skus {
     ...BillingProfileIdParameter,
     ...SkuIdParameter,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingProfile.language retains the language query parameter; preserve wire compatibility."
     @doc(LanguageParameterDescription)
     @query
     language?: string,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingProfile.includeStopSold retains the includeStopSold query parameter; preserve wire compatibility."
     @doc(IncludeStopSoldParameterDescription)
     @query
     includeStopSold?: boolean = false,
 
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getByBillingProfile.includeFutureAvailabilities retains the includeFutureAvailabilities query parameter; preserve wire compatibility."
     @doc(IncludeFutureAvailabilitiesParameterDescription)
     @query
     includeFutureAvailabilities?: boolean = false,

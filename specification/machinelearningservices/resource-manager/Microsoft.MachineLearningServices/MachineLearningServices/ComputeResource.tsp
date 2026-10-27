@@ -94,6 +94,7 @@ interface ComputeResources {
       /**
        * Delete the underlying compute if 'Delete', or detach the underlying compute from workspace if 'Detach'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.underlyingResourceAction retains the underlyingResourceAction query parameter; preserve wire compatibility."
       @query("underlyingResourceAction")
       underlyingResourceAction: UnderlyingResourceAction;
     },

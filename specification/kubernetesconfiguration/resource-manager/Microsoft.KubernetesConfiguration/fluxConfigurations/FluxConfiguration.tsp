@@ -156,6 +156,7 @@ interface FluxConfigurations {
       /**
        * Delete the extension resource in Azure - not the normal asynchronous delete.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.forceDelete retains the forceDelete query parameter; preserve wire compatibility."
       @query("forceDelete")
       forceDelete?: boolean;
     },

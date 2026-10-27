@@ -67,12 +67,14 @@ interface RecommendationRules {
       /**
        * Specify <code>true</code> to update the last-seen timestamp of the recommendation object.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getRuleDetailsByHostingEnvironment.updateSeen retains the updateSeen query parameter; preserve wire compatibility."
       @query("updateSeen")
       updateSeen?: boolean;
 
       /**
        * The GUID of the recommendation object if you query an expired one. You don't need to specify it to query an active entry.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getRuleDetailsByHostingEnvironment.recommendationId retains the recommendationId query parameter; preserve wire compatibility."
       @query("recommendationId")
       recommendationId?: string;
     },
@@ -137,12 +139,14 @@ interface Recommendations {
       /**
        * Specify <code>true</code> to update the last-seen timestamp of the recommendation object.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getRuleDetailsByWebApp.updateSeen retains the updateSeen query parameter; preserve wire compatibility."
       @query("updateSeen")
       updateSeen?: boolean;
 
       /**
        * The GUID of the recommendation object if you query an expired one. You don't need to specify it to query an active entry.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing getRuleDetailsByWebApp.recommendationId retains the recommendationId query parameter; preserve wire compatibility."
       @query("recommendationId")
       recommendationId?: string;
     },

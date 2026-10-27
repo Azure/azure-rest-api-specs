@@ -108,6 +108,7 @@ interface Labs {
       /**
        * May be used to include budget information.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.includeBudget retains the includeBudget query parameter; preserve wire compatibility."
       @query("includeBudget")
       includeBudget?: boolean;
     },

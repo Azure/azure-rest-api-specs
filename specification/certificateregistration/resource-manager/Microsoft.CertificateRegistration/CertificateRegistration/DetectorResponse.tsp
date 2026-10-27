@@ -35,18 +35,21 @@ alias GetAppServiceCertificateOrderDetectorParameters = {
   /**
    * The start time for detector response.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing GetAppServiceCertificateOrderDetectorParameters.startTime retains the startTime query parameter; preserve wire compatibility."
   @query("startTime")
   startTime?: utcDateTime;
 
   /**
    * The end time for the detector response.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing GetAppServiceCertificateOrderDetectorParameters.endTime retains the endTime query parameter; preserve wire compatibility."
   @query("endTime")
   endTime?: utcDateTime;
 
   /**
    * The time grain for the detector response.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing GetAppServiceCertificateOrderDetectorParameters.timeGrain retains the timeGrain query parameter; preserve wire compatibility."
   @pattern("PT[1-9][0-9]+[SMH]")
   @query("timeGrain")
   timeGrain?: string;

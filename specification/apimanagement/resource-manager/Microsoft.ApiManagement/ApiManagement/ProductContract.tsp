@@ -246,6 +246,7 @@ interface ProductContracts {
       /**
        * Delete existing subscriptions associated with the product or not.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.deleteSubscriptions retains the deleteSubscriptions query parameter; preserve wire compatibility."
       @query("deleteSubscriptions")
       deleteSubscriptions?: boolean;
     }
@@ -627,6 +628,7 @@ interface WorkspaceProduct {
       /**
        * Delete existing subscriptions associated with the product or not.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.deleteSubscriptions retains the deleteSubscriptions query parameter; preserve wire compatibility."
       @query("deleteSubscriptions")
       deleteSubscriptions?: boolean;
     }

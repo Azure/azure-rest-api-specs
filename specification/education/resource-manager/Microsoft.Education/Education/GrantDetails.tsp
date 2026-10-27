@@ -84,6 +84,7 @@ interface Grants {
       /**
        * May be used to include information about budget that has been allocated.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.includeAllocatedBudget retains the includeAllocatedBudget query parameter; preserve wire compatibility."
       @query("includeAllocatedBudget")
       includeAllocatedBudget?: boolean;
     },

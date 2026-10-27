@@ -82,6 +82,7 @@ interface ProjectTasks {
       /**
        * Expand the response
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -122,6 +123,7 @@ interface ProjectTasks {
       /**
        * Delete the resource even if it contains running tasks
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.deleteRunningTasks retains the deleteRunningTasks query parameter; preserve wire compatibility."
       @query("deleteRunningTasks")
       deleteRunningTasks?: boolean;
     }
@@ -217,6 +219,7 @@ interface ServiceTasks {
       /**
        * Expand the response
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     }
@@ -257,6 +260,7 @@ interface ServiceTasks {
       /**
        * Delete the resource even if it contains running tasks
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.deleteRunningTasks retains the deleteRunningTasks query parameter; preserve wire compatibility."
       @query("deleteRunningTasks")
       deleteRunningTasks?: boolean;
     }

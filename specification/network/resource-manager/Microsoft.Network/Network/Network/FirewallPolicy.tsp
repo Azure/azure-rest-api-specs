@@ -58,6 +58,7 @@ interface FirewallPolicies {
       /**
        * Expands referenced resources.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
     },
@@ -74,6 +75,7 @@ interface FirewallPolicies {
       /**
        * Indicates that the write originates from AFC (Azure Firewall for Containers) and is permitted to modify an AFC-managed Firewall Policy.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing createOrUpdate.afcManagedSync retains the afcManagedSync query parameter; preserve wire compatibility."
       @added(Versions.v2025_09_01)
       @query("afcManagedSync")
       afcManagedSync?: boolean;

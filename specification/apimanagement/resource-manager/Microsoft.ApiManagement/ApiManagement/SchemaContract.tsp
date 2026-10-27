@@ -134,6 +134,7 @@ interface SchemaContracts {
       /**
        * If true removes all references to the schema before deleting it.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.force retains the force query parameter; preserve wire compatibility."
       @query("force")
       force?: boolean;
 
@@ -294,6 +295,7 @@ interface WorkspaceApiSchema {
       /**
        * If true removes all references to the schema before deleting it.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.force retains the force query parameter; preserve wire compatibility."
       @query("force")
       force?: boolean;
 

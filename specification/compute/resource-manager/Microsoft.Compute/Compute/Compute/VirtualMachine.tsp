@@ -84,6 +84,7 @@ interface VirtualMachines {
       /**
        * The expand expression to apply on the operation. 'InstanceView' retrieves a snapshot of the runtime properties of the virtual machine that is managed by the platform and can change outside of control plane operations. 'UserData' retrieves the UserData property as part of the VM model view that was provided by the user during the VM Create/Update operation.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing get.$expand retains the $expand query parameter; preserve wire compatibility."
       @query("$expand")
       $expand?: InstanceViewTypes;
     }
@@ -149,6 +150,7 @@ interface VirtualMachines {
       /**
        * Optional parameter to force delete virtual machines.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.forceDeletion retains the forceDeletion query parameter; preserve wire compatibility."
       @query("forceDeletion")
       forceDeletion?: boolean;
     }

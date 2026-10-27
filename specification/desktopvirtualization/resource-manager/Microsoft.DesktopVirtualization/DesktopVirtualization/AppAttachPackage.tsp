@@ -58,6 +58,7 @@ interface AppAttachPackages {
        * Allows force delete
        * @Introduced in 2023-10-04-preview
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing delete.force retains the force query parameter; preserve wire compatibility."
       @added(Versions.vLatestPreview)
       @query("force")
       force?: boolean;

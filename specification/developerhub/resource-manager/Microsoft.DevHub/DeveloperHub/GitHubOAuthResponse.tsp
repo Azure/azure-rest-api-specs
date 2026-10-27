@@ -59,12 +59,14 @@ interface GitHubOAuthResponses {
       /**
        * The code response from authenticating the GitHub App.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing gitHubOAuthCallback.code retains the code query parameter; preserve wire compatibility."
       @query("code")
       code: string;
 
       /**
        * The state response from authenticating the GitHub App.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-point-op" "Back compat: Existing gitHubOAuthCallback.state retains the state query parameter; preserve wire compatibility."
       @query("state")
       state: string;
     }
