@@ -70,17 +70,11 @@ union MemoryStoreKind {
   default: "default",
 }
 
-@doc("Base definition for memory store configurations.")
-@discriminator("kind")
-@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-model MemoryStoreDefinition {
-  @doc("The kind of the memory store.")
-  kind: MemoryStoreKind;
-}
+alias MemoryStoreDefinition = MemoryStoreDefaultDefinition;
 
 @doc("Default memory store implementation.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-model MemoryStoreDefaultDefinition extends MemoryStoreDefinition {
+model MemoryStoreDefaultDefinition {
   @doc("The kind of the memory store.")
   kind: MemoryStoreKind.default;
 
