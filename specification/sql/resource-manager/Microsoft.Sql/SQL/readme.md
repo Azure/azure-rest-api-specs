@@ -37,6 +37,8 @@ These settings apply only when `--tag=package-preview-2026-11-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2026-11-01-preview'
 input-file:
+  - preview/2026-11-01-preview/ReaderEndpoints.json
+  - preview/2026-11-01-preview/ReaderEndpointsList.json
   - preview/2026-11-01-preview/backupShortTermRetentionPolicies.json
   - preview/2026-11-01-preview/blobAuditing.json
   - preview/2026-11-01-preview/databaseAdvancedThreatProtectionSettings.json
@@ -4065,6 +4067,10 @@ suppressions:
 
 ``` yaml
 suppressions:
+  - code: DeleteResponseCodes
+    from: ReaderEndpoints.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/readerEndpoints/{readerEndpointName}"].delete
+    reason: "Preserve the SQL RP deletion contract: completed deletion of an existing resource returns 200, pending deletion returns 202, and an absent resource returns 204. ARM exception approval is required."
   - code: PutResponseCodes
     from: preview/2026-11-01-preview/ServerProtectionSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serverProtectionSettings/{serverProtectionSettingsName}"].put
