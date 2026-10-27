@@ -10194,7 +10194,7 @@
       "get": {
         "operationId": "EvaluationRules_list",
         "summary": "List evaluation rules",
-        "description": "Returns existing event rules by default. Use actionType=all for the combined collection, or trace_evaluation or dataset_evaluation for scheduled evaluations of that type. Agent and enabled filters still apply, and results remain paginated.",
+        "description": "Returns the evaluation rules configured for the project, including scheduled trace and dataset evaluations, optionally filtered by action type, agent name, or enabled state.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -10203,9 +10203,9 @@
             "name": "actionType",
             "in": "query",
             "required": false,
-            "description": "Select an action type, or all to include existing event rules and supported schedules. When omitted, return only existing event-rule types. trace_evaluation and dataset_evaluation select their scheduled evaluations explicitly; existing action filters retain their behavior.",
+            "description": "Filter by action type. When omitted, rules of all action types are returned.",
             "schema": {
-              "$ref": "#/components/schemas/EvaluationRuleActionTypeFilter"
+              "$ref": "#/components/schemas/EvaluationRuleActionType"
             },
             "explode": false
           },
@@ -39670,7 +39670,7 @@
           },
           "expression": {
             "type": "string",
-            "description": "Cron expression that defines the schedule frequency."
+            "description": "Five-field cron expression that defines the schedule frequency: minute hour day-of-month month day-of-week."
           },
           "timeZone": {
             "type": "string",
@@ -39691,12 +39691,7 @@
             "$ref": "#/components/schemas/Trigger"
           }
         ],
-        "description": "Cron based trigger.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Cron based trigger."
       },
       "CustomCredential": {
         "type": "object",
@@ -39794,12 +39789,7 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Daily recurrence schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Daily recurrence schedule."
       },
       "DataGenerationJob": {
         "type": "object",
@@ -40216,27 +40206,23 @@
         "type": "object",
         "required": [
           "type",
-          "eval_id",
+          "evalId",
           "source"
         ],
         "properties": {
           "type": {
             "type": "string",
             "enum": [
-              "dataset_evaluation"
+              "datasetEvaluation"
             ]
           },
-          "eval_id": {
+          "evalId": {
             "type": "string",
             "description": "Identifier of the evaluation used to score the dataset."
           },
           "source": {
-            "$ref": "#/components/schemas/DatasetSource",
-            "description": "Dataset inputs selected for each scheduled occurrence."
-          },
-          "target": {
-            "$ref": "#/components/schemas/FoundryEvaluationTarget",
-            "description": "Optional existing evaluation target used to generate responses before scoring."
+            "$ref": "#/components/schemas/DatasetEvaluationSource",
+            "description": "Dataset inputs for each scheduled occurrence."
           }
         },
         "allOf": [
@@ -40245,6 +40231,26 @@
           }
         ],
         "description": "Configures a scheduled evaluation of dataset inputs."
+      },
+      "DatasetEvaluationSource": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.CreateEvalJsonlRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/EvalCsvRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/TargetCompletionEvalRunDataSource"
+          },
+          {
+            "$ref": "#/components/schemas/UserConversationSimulationEvalRunDataSource"
+          }
+        ],
+        "description": "Dataset inputs supported by scheduled rules. Targets are configured within the selected source."
       },
       "DatasetEvaluatorGenerationJobSource": {
         "type": "object",
@@ -40297,34 +40303,6 @@
           }
         },
         "description": "Reference to a versioned Foundry Dataset."
-      },
-      "DatasetSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "dataset_name",
-          "dataset_version"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "dataset"
-            ],
-            "description": "Identifies a versioned dataset input."
-          },
-          "dataset_name": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Name of the dataset containing evaluation inputs."
-          },
-          "dataset_version": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Exact immutable dataset version; mutable aliases such as latest are not supported."
-          }
-        },
-        "description": "References an exact version of a dataset for scheduled evaluation."
       },
       "DatasetType": {
         "anyOf": [
@@ -40443,12 +40421,7 @@
             ]
           }
         ],
-        "description": "Days of the week for recurrence schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Days of the week for recurrence schedule."
       },
       "DeleteAgentResponse": {
         "type": "object",
@@ -42000,7 +41973,17 @@
           },
           "schedule": {
             "$ref": "#/components/schemas/Trigger",
-            "description": "Timing for time_trigger rules. Required for time_trigger and forbidden for other events. Reuses existing Cron, Recurrence, and OneTime triggers."
+            "description": "Timing for timerTrigger rules. Required for timerTrigger and not allowed for other event types."
+          },
+          "provisioningStatus": {
+            "$ref": "#/components/schemas/ScheduleProvisioningStatus",
+            "description": "Provisioning state of the rule's schedule. Returned for timerTrigger rules only.",
+            "readOnly": true
+          },
+          "error": {
+            "$ref": "#/components/schemas/Azure.Core.Foundations.Error",
+            "description": "Error that caused the rule to be disabled, if any.",
+            "readOnly": true
           },
           "enabled": {
             "type": "boolean",
@@ -42032,8 +42015,8 @@
           "propertyName": "type",
           "mapping": {
             "continuousEvaluation": "#/components/schemas/ContinuousEvaluationRuleAction",
-            "trace_evaluation": "#/components/schemas/TraceEvaluationRuleAction",
-            "dataset_evaluation": "#/components/schemas/DatasetEvaluationRuleAction",
+            "traceEvaluation": "#/components/schemas/TraceEvaluationRuleAction",
+            "datasetEvaluation": "#/components/schemas/DatasetEvaluationRuleAction",
             "humanEvaluationPreview": "#/components/schemas/HumanEvaluationPreviewRuleAction"
           }
         },
@@ -42049,26 +42032,12 @@
             "enum": [
               "continuousEvaluation",
               "humanEvaluationPreview",
-              "trace_evaluation",
-              "dataset_evaluation"
+              "traceEvaluation",
+              "datasetEvaluation"
             ]
           }
         ],
         "description": "Type of the evaluation action."
-      },
-      "EvaluationRuleActionTypeFilter": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/EvaluationRuleActionType"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "all"
-            ]
-          }
-        ],
-        "description": "Selects action types for List without changing the existing unfiltered results."
       },
       "EvaluationRuleEventType": {
         "anyOf": [
@@ -42080,7 +42049,7 @@
             "enum": [
               "responseCompleted",
               "manual",
-              "time_trigger"
+              "timerTrigger"
             ]
           }
         ],
@@ -44092,12 +44061,7 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Hourly recurrence schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Hourly recurrence schedule."
       },
       "HumanEvaluationPreviewRuleAction": {
         "type": "object",
@@ -46613,12 +46577,7 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Monthly recurrence schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Monthly recurrence schedule."
       },
       "NoAuthenticationCredentials": {
         "type": "object",
@@ -46704,12 +46663,7 @@
             "$ref": "#/components/schemas/Trigger"
           }
         ],
-        "description": "One-time trigger.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "One-time trigger."
       },
       "OpenAI.AddUploadPartRequest": {
         "type": "object",
@@ -58033,7 +57987,7 @@
                 "type": "string"
               },
               {
-                "$ref": "#/components/schemas/OpenAI.InputMessageContentList"
+                "$ref": "#/components/schemas/OpenAI.InputMessageContentListItem"
               }
             ],
             "description": "Text, image, or audio input to the model, used to generate a response.\n  Can also contain previous assistant responses."
@@ -62634,7 +62588,6 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "message": "#/components/schemas/OpenAI.EasyInputMessage",
             "item_reference": "#/components/schemas/OpenAI.ItemReferenceParam",
             "output_message": "#/components/schemas/OpenAI.InputItemOutputMessage",
             "file_search_call": "#/components/schemas/OpenAI.InputItemFileSearchToolCall",
@@ -62662,7 +62615,8 @@
             "mcp_approval_response": "#/components/schemas/OpenAI.InputItemMcpApprovalResponse",
             "mcp_call": "#/components/schemas/OpenAI.InputItemMcpToolCall",
             "custom_tool_call_output": "#/components/schemas/OpenAI.InputItemCustomToolCallOutput",
-            "custom_tool_call": "#/components/schemas/OpenAI.InputItemCustomToolCall"
+            "custom_tool_call": "#/components/schemas/OpenAI.InputItemCustomToolCall",
+            "message": "#/components/schemas/OpenAI.EasyInputMessage"
           }
         },
         "description": "An item representing part of the context for the response to be\ngenerated by the model. Can contain text, images, and audio inputs,\nas well as previous assistant responses and tool call outputs."
@@ -64336,6 +64290,14 @@
         "title": "Web search tool call"
       },
       "OpenAI.InputMessageContentList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/OpenAI.InputContent"
+        },
+        "description": "A list of one or many input items to the model, containing different content\ntypes.",
+        "title": "Input item content list"
+      },
+      "OpenAI.InputMessageContentListItem": {
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/OpenAI.InputContent"
@@ -86833,12 +86795,7 @@
             "Monthly": "#/components/schemas/MonthlyRecurrenceSchedule"
           }
         },
-        "description": "Recurrence schedule model.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Recurrence schedule model."
       },
       "RecurrenceTrigger": {
         "type": "object",
@@ -86883,12 +86840,7 @@
             "$ref": "#/components/schemas/Trigger"
           }
         ],
-        "description": "Recurrence based trigger.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Recurrence based trigger."
       },
       "RecurrenceType": {
         "anyOf": [
@@ -86905,12 +86857,7 @@
             ]
           }
         ],
-        "description": "Recurrence type.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Recurrence type."
       },
       "RedTeam": {
         "type": "object",
@@ -88095,12 +88042,7 @@
             ]
           }
         ],
-        "description": "Schedule provisioning status.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Schedule provisioning status."
       },
       "ScheduleRoutineTrigger": {
         "type": "object",
@@ -93041,23 +92983,23 @@
         "type": "object",
         "required": [
           "type",
-          "eval_id",
+          "evalId",
           "source"
         ],
         "properties": {
           "type": {
             "type": "string",
             "enum": [
-              "trace_evaluation"
+              "traceEvaluation"
             ]
           },
-          "eval_id": {
+          "evalId": {
             "type": "string",
             "description": "Identifier of the evaluation used to score the selected traces."
           },
           "source": {
             "$ref": "#/components/schemas/TraceEvaluationSource",
-            "description": "Existing trace inputs for each scheduled occurrence. Preserve the selected variant's query-window and sampling behavior."
+            "description": "Trace inputs for each scheduled occurrence. The selected variant's query-window and sampling behavior is preserved."
           }
         },
         "allOf": [
@@ -93381,12 +93323,7 @@
             "OneTime": "#/components/schemas/OneTimeTrigger"
           }
         },
-        "description": "Base model for Trigger of the schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Base model for Trigger of the schedule."
       },
       "TriggerType": {
         "anyOf": [
@@ -93402,12 +93339,7 @@
             ]
           }
         ],
-        "description": "Type of the trigger.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Type of the trigger."
       },
       "TwilioTelephonyBinding": {
         "type": "object",
@@ -96927,12 +96859,7 @@
             "$ref": "#/components/schemas/RecurrenceSchedule"
           }
         ],
-        "description": "Weekly recurrence schedule.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Schedules=V1Preview"
-          ]
-        }
+        "description": "Weekly recurrence schedule."
       },
       "WorkIQPreviewTool": {
         "type": "object",
