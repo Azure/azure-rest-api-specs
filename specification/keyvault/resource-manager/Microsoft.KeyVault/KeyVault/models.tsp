@@ -494,7 +494,7 @@ union ManagedHsmSkuFamily {
 /**
  * This specifies whether token binding is disabled, enabled or enforced.
  */
-@Versioning.added(KeyVault.Versions.v2026_06_01_preview)
+@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
 union TokenBindingMode {
   string,
 
@@ -508,7 +508,7 @@ union TokenBindingMode {
 /**
  * Must be one of the following values "NoValidation", "Unattested", "AttestedTrustedLaunch", "AttestedConfidential". Strength of the token binding increases with each value in that order.
  */
-@Versioning.added(KeyVault.Versions.v2026_06_01_preview)
+@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
 union TokenBindingStrength {
   string,
 
@@ -1162,7 +1162,7 @@ model VaultProperties {
   /**
    * Configuration for Token Binding for Entra tokens
    */
-  @Versioning.added(KeyVault.Versions.v2026_06_01_preview)
+  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
   tokenBindingParameters?: TokenBindingParameters;
 
   /**
@@ -1240,7 +1240,7 @@ model Permissions {
 /**
  * Configuration for Token Binding for Entra tokens
  */
-@Versioning.added(KeyVault.Versions.v2026_06_01_preview)
+@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
 model TokenBindingParameters {
   /**
    * This specifies whether token binding is disabled, enabled or enforced.
@@ -1496,7 +1496,7 @@ model VaultPatchProperties {
   /**
    * Configuration for Token Binding for Entra tokens
    */
-  @Versioning.added(KeyVault.Versions.v2026_06_01_preview)
+  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
   tokenBindingParameters?: TokenBindingParameters;
 
   /**
