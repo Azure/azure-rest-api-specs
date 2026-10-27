@@ -26,6 +26,7 @@ resource-manager, without describing the change as an API change:
       "path": "specification/example",
       "plane": "resource-manager",
       "changes": ["sdk-configuration"],
+      "hasAffectedReadme": false,
       "typeSpec": true,
       "newApiVersions": [],
       "suppressionsChanged": false,
@@ -41,6 +42,9 @@ resource-manager, without describing the change as an API change:
 ```
 
 `changes` distinguishes API definitions, examples, SDK configuration, readmes, and other files.
+`hasAffectedReadme` identifies changes associated with an owning README, even when that README is
+unchanged. This preserves ARM review for policy and manifest changes without making every `other`
+file review-relevant or removing the SDK-configuration-only exemption.
 `typeSpec` identifies TypeSpec-related changes, including changes to generated Swagger.
 Plane classification uses path segments or the owning TypeSpec configuration's AutoRest output
 plane/linter ruleset. Unresolved files use `unknown`; deleted projects can use the baseline config.

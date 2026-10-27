@@ -51,6 +51,7 @@ export async function evaluateImpact(
         path,
         plane,
         changes: [],
+        hasAffectedReadme: false,
         typeSpec: false,
         newApiVersions: [],
         suppressionsChanged: false,
@@ -103,10 +104,11 @@ export async function evaluateImpact(
     }
   }
 
-  // Parent readmes carry RPaaS and suppression configuration even when only their specs changed.
+  // Owning readmes can be affected without being modified, including by policy and manifest changes.
   for (const file of changedReadmes) {
     const service = getService(file);
     if (!service) continue;
+    service.hasAffectedReadme = true;
     const after = resolve(context.sourceDirectory, file);
     if (!existsSync(after)) continue;
     const config = await new Readme(after).getGlobalConfig();

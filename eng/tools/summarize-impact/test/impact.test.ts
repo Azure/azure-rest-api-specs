@@ -88,7 +88,24 @@ describe("change impact", () => {
       expect.objectContaining({
         plane: "resource-manager",
         changes: ["sdk-configuration"],
+        hasAffectedReadme: false,
         typeSpec: true,
+      }),
+    ]);
+  });
+
+  it("records policy changes through an unchanged owning README", async () => {
+    const impact = await evaluateImpact(
+      context({
+        modifications: ["specification/contosowidgetmanager/resource-manager/suppressions.yaml"],
+      }),
+      [],
+    );
+    expect(impact.services).toEqual([
+      expect.objectContaining({
+        plane: "resource-manager",
+        changes: ["other"],
+        hasAffectedReadme: true,
       }),
     ]);
   });
