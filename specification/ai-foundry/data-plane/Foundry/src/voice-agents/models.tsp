@@ -116,7 +116,7 @@ model VoiceResponse {
   audio?: VoiceResponseAudio;
 
   @doc("The sampling temperature used for the response.")
-  temperature?: float32;
+  sampling_temperature?: float32;
 
   @doc("The Unix timestamp (in seconds) for when the response was created.")
   created_at?: FoundryTimestamp;
