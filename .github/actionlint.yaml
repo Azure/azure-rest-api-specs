@@ -6,10 +6,9 @@ self-hosted-runner:
 
 paths:
   # Temporary compatibility for https://github.com/rhysd/actionlint/pull/732.
-  # Only suppress unsupported syntax for the known self-repository targets.
+  # Only suppress unsupported syntax for the self-repository reusable workflow.
   .github/workflows/*.{yaml,yml}:
     ignore:
-      - '^specifying action "\$/\.github/actions/(add-empty-artifact|add-label-artifact|checkout|install-deps-github-script|setup-node-install-deps)" in invalid format because ref is missing\.'
       - '^reusable workflow call "\$/\.github/workflows/_reusable-set-check-status\.yaml" at "uses" is not following the format '
 
   .github/workflows/*.lock.yml:

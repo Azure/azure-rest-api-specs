@@ -1,10 +1,8 @@
-import { readFile } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
 import { stringify } from "yaml";
 import {
   ARCHIVE_DESCRIPTION,
   ARCHIVE_PREFIX,
-  DELETED_LABEL,
   existingLabelSchema,
   labelDefinitionSchema,
   parseLabelCatalog,
@@ -12,13 +10,13 @@ import {
 } from "../src/label-catalog.ts";
 import type { ExistingLabel, LabelCatalog, LabelDefinition } from "../src/label-catalog.ts";
 
-const marker: LabelDefinition = {
-  name: DELETED_LABEL,
+const canonical: LabelDefinition = {
+  name: "canonical",
   color: "123456",
   description: "A label was removed",
 };
 const bug: LabelDefinition = { name: "bug", color: "abcdef", description: "" };
-const catalog: LabelCatalog = { unconfiguredLabels: "preserve", labels: [marker, bug] };
+const catalog: LabelCatalog = { unconfiguredLabels: "preserve", labels: [canonical, bug] };
 const existing = (label: LabelDefinition, id = 1): ExistingLabel => ({
   ...label,
   id,
@@ -27,17 +25,6 @@ const existing = (label: LabelDefinition, id = 1): ExistingLabel => ({
 });
 
 describe("label catalog", () => {
-  it("validates the checked-in migration catalog without enabling archival or deletion", async () => {
-    const parsed = parseLabelCatalog(
-      await readFile(new URL("../../labels.yaml", import.meta.url), "utf8"),
-    );
-    expect(parsed.unconfiguredLabels).toBe("preserve");
-    expect(parsed.labels).toContainEqual(expect.objectContaining({ name: DELETED_LABEL }));
-    expect(parsed.labels).toContainEqual(
-      expect.objectContaining({ name: "BreakingChange-Approved-Benign" }),
-    );
-  });
-
   it("rejects duplicate YAML keys rather than accepting the last value", () => {
     expect(() =>
       parseLabelCatalog("unconfiguredLabels: preserve\nunconfiguredLabels: archive\n"),
@@ -49,16 +36,15 @@ describe("label catalog", () => {
     { ...catalog, unconfiguredLabels: "delete" },
     { ...catalog, unconfiguredLabels: "replace" },
     { ...catalog, labels: [] },
-    { ...catalog, labels: [bug] },
-    { ...catalog, labels: [marker, bug, { ...bug, name: "BUG" }] },
-    { ...catalog, labels: [marker, { ...bug, name: "" }] },
-    { ...catalog, labels: [marker, { ...bug, name: "Archived: bug" }] },
-    { ...catalog, labels: [marker, { ...bug, name: "a".repeat(51) }] },
-    { ...catalog, labels: [marker, { ...bug, color: "12345" }] },
-    { ...catalog, labels: [marker, { ...bug, color: "#123456" }] },
-    { ...catalog, labels: [marker, { ...bug, color: 123456 }] },
-    { ...catalog, labels: [marker, { ...bug, description: "x".repeat(101) }] },
-    { ...catalog, labels: [marker, { ...bug, summary: "unexpected property" }] },
+    { ...catalog, labels: [canonical, bug, { ...bug, name: "BUG" }] },
+    { ...catalog, labels: [canonical, { ...bug, name: "" }] },
+    { ...catalog, labels: [canonical, { ...bug, name: "Archived: bug" }] },
+    { ...catalog, labels: [canonical, { ...bug, name: "a".repeat(51) }] },
+    { ...catalog, labels: [canonical, { ...bug, color: "12345" }] },
+    { ...catalog, labels: [canonical, { ...bug, color: "#123456" }] },
+    { ...catalog, labels: [canonical, { ...bug, color: 123456 }] },
+    { ...catalog, labels: [canonical, { ...bug, description: "x".repeat(101) }] },
+    { ...catalog, labels: [canonical, { ...bug, summary: "unexpected property" }] },
   ])("rejects invalid definitions or policy: %j", (invalid) => {
     expect(() => parseLabelCatalog(stringify(invalid))).toThrow();
   });
@@ -67,11 +53,60 @@ describe("label catalog", () => {
     const special = {
       ...catalog,
       labels: [
-        marker,
+        canonical,
         { name: 'a: "quote" / #tag', color: "001234", description: "first\nsecond" },
       ],
     };
     expect(parseLabelCatalog(stringify(special))).toEqual(special);
+  });
+
+  it("does not require a generic deleted-label marker", () => {
+    expect(
+      parseLabelCatalog(stringify({ unconfiguredLabels: "archive", labels: [bug] })).labels,
+    ).toEqual([bug]);
+  });
+  it.each(
+    [
+      [{ ...bug, aliases: ["BUG"] }],
+      [{ ...bug, aliases: ["old", "OLD"] }],
+      [{ ...bug, aliases: ["archived: old"] }],
+      [
+        { ...bug, aliases: ["old"] },
+        { ...canonical, aliases: ["OLD"] },
+      ],
+      [bug, { ...canonical, aliases: ["bug"] }],
+    ].map((labels) => ({ labels })),
+  )("rejects ambiguous or configured aliases", ({ labels }) => {
+    expect(() => parseLabelCatalog(stringify({ unconfiguredLabels: "archive", labels }))).toThrow();
+  });
+});
+
+describe("alias migration planning", () => {
+  const config: LabelCatalog = {
+    unconfiguredLabels: "archive",
+    labels: [{ ...bug, aliases: ["old"] }],
+  };
+  it("plans migration to the canonical label before archiving an active alias", () => {
+    const before = existing({ ...bug, name: "old" });
+    const plan = planLabels(config, [before]);
+    expect(plan.migrate).toEqual([{ before, target: bug.name }]);
+    expect(plan.archive).toEqual([{ before, name: "archived: old" }]);
+    expect(plan.delete).toEqual([]);
+  });
+  it("recognizes aliases already renamed by the archive lifecycle", () => {
+    const before = {
+      ...existing({ ...bug, name: "archived: old", description: ARCHIVE_DESCRIPTION }),
+      archived_at: "2000-01-01T00:00:00Z",
+    };
+    const plan = planLabels(config, [before]);
+    expect(plan.migrate).toEqual([{ before, target: bug.name }]);
+    expect(plan.delete).toEqual([before]);
+  });
+  it("does not migrate in preserve mode", () => {
+    const plan = planLabels({ ...config, unconfiguredLabels: "preserve" }, [
+      existing({ ...bug, name: "old" }),
+    ]);
+    expect(plan.migrate).toEqual([]);
   });
 });
 
@@ -80,10 +115,12 @@ describe("label planning", () => {
     const oldBug = existing({ ...bug, color: "ffffff" });
     const unknown = existing({ ...bug, name: "unconfigured" }, 2);
     expect(planLabels(catalog, [oldBug, unknown])).toEqual({
-      create: [marker],
+      create: [canonical],
       update: [{ before: oldBug, after: bug }],
       archive: [],
+      skippedArchives: [],
       delete: [],
+      migrate: [],
       unconfigured: [unknown],
       unchanged: 0,
     });
@@ -91,11 +128,13 @@ describe("label planning", () => {
 
   it("normalizes GitHub name/color case and null descriptions without changing definitions", () => {
     const actual = { ...existing(bug), name: "BUG", color: "ABCDEF", description: null };
-    expect(planLabels(catalog, [existing(marker, 2), actual])).toEqual({
+    expect(planLabels(catalog, [existing(canonical, 2), actual])).toEqual({
       create: [],
       update: [],
       archive: [],
+      skippedArchives: [],
       delete: [],
+      migrate: [],
       unconfigured: [],
       unchanged: 2,
     });
@@ -174,7 +213,7 @@ describe("label planning", () => {
       (policy) => {
         const before = { ...archived, name: "ARCHIVED: BUG" };
         const plan = planLabels({ ...catalog, unconfiguredLabels: policy }, [before], now);
-        expect(plan.create).toEqual([marker]);
+        expect(plan.create).toEqual([canonical]);
         expect(plan.update).toEqual([{ before, after: bug }]);
         expect(plan.unconfigured).toEqual([]);
         expect(plan.delete).toEqual([]);
@@ -185,13 +224,13 @@ describe("label planning", () => {
       const before = { ...archived, name: "archived: bug", archived_at: null };
       const plan = planLabels(catalog, [before], now);
       expect(plan.update).toEqual([{ before, after: bug }]);
-      expect(plan.create).toEqual([marker]);
+      expect(plan.create).toEqual([canonical]);
     });
 
     it("does not confuse an unmanaged prefixed label with a configured original", () => {
       const manual = { ...archived, name: "archived: bug", description: "Manual archive" };
       const plan = planLabels(archiveCatalog, [manual], now);
-      expect(plan.create).toEqual([bug, marker]);
+      expect(plan.create).toEqual([bug, canonical]);
       expect(plan.update).toEqual([]);
       expect(plan.archive).toEqual([]);
       expect(plan.delete).toEqual([]);
@@ -203,7 +242,7 @@ describe("label planning", () => {
         const duplicate = { ...archived, name: "Archived: BUG" };
         expect(() =>
           planLabels(
-            configured ? archiveCatalog : { ...archiveCatalog, labels: [marker] },
+            configured ? archiveCatalog : { ...archiveCatalog, labels: [canonical] },
             [existing(bug), duplicate],
             now,
           ),
@@ -211,27 +250,32 @@ describe("label planning", () => {
       },
     );
 
-    it("fails on a target occupied by an unmanaged archive", () => {
+    it("skips a target occupied by an unmanaged archive", () => {
       const manual = { ...archived, description: "Manual archive" };
       const active = existing({ ...bug, name: "retired" }, 4);
-      expect(() => planLabels(archiveCatalog, [manual, active], now)).toThrow(
-        "Label name collision",
-      );
+      const plan = planLabels(archiveCatalog, [manual, active], now);
+      expect(plan.archive).toEqual([]);
+      expect(plan.skippedArchives.map(({ label }) => label)).toEqual([active]);
+      expect(plan.skippedArchives[0].reason).toContain("Label name collision");
     });
 
     it.each([40, 41, 50])(
       "enforces the complete 50-character name limit (original=%s)",
       (length) => {
         const before = existing({ ...bug, name: "x".repeat(length) });
+        const plan = planLabels(archiveCatalog, [before], now);
         if (length > 40) {
-          expect(() => planLabels(archiveCatalog, [before], now)).toThrow("exceeds 50 characters");
+          expect(plan.archive).toEqual([]);
+          expect(plan.skippedArchives.map(({ label }) => label)).toEqual([before]);
+          expect(plan.skippedArchives[0].reason).toContain("exceeds 50 characters");
         } else {
-          expect(planLabels(archiveCatalog, [before], now).archive).toEqual([
+          expect(plan.archive).toEqual([
             {
               before,
               name: ARCHIVE_PREFIX + before.name,
             },
           ]);
+          expect(plan.skippedArchives).toEqual([]);
         }
       },
     );
@@ -241,9 +285,12 @@ describe("label planning", () => {
       expect(planLabels(catalog, [before], now).archive).toEqual([]);
     });
 
-    it("rejects an unmanaged active label using the reserved prefix", () => {
+    it("skips an unmanaged active label using the reserved prefix", () => {
       const before = { ...archived, archived_at: null, description: "" };
-      expect(() => planLabels(archiveCatalog, [before], now)).toThrow("prefix is reserved");
+      const plan = planLabels(archiveCatalog, [before], now);
+      expect(plan.archive).toEqual([]);
+      expect(plan.skippedArchives.map(({ label }) => label)).toEqual([before]);
+      expect(plan.skippedArchives[0].reason).toContain("prefix is reserved");
     });
 
     it("prefixes an earlier managed archive without making it eligible for deletion early", () => {

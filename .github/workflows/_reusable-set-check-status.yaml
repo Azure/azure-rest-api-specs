@@ -29,8 +29,9 @@ jobs:
     name: "${{ inputs.required_check_name }} - Set Status"
 
     if: |
-      github.event_name == 'workflow_run' ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'skipped') ||
       (github.event_name == 'pull_request_target' &&
+       github.event.pull_request.state == 'open' &&
        ((github.event.action == 'opened' ||
          github.event.action == 'synchronize' ||
          github.event.action == 'reopened') ||
@@ -44,8 +45,9 @@ jobs:
       # For workflows that are triggered by the pull_request_target event, the workflow runs in the
       # context of the base of the pull request.  You should make sure that you do not check out,
       # build, or run untrusted code from the head of the pull request.
-      - uses: $/.github/actions/checkout
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           # Only needs .github folder for automation, not the files in the PR (analyzed in a
           # separate workflow).
           #
@@ -74,14 +76,14 @@ jobs:
 
       - if: ${{ always() && steps.set-status.outputs.head_sha }}
         name: Upload artifact with head SHA
-        uses: $/.github/actions/add-empty-artifact
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: head-sha
           value: ${{ steps.set-status.outputs.head_sha }}
 
       - if: ${{ always() && steps.set-status.outputs.issue_number }}
         name: Upload artifact with issue number
-        uses: $/.github/actions/add-empty-artifact
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: issue-number
           value: ${{ steps.set-status.outputs.issue_number }}

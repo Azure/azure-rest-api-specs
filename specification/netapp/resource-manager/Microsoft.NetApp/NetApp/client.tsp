@@ -24,10 +24,26 @@ using Microsoft.NetApp;
   "nfsV4IdDomain",
   "java"
 );
+@@clientName(
+  Microsoft.NetApp.AccountPropertiesPatch.nfsV4IDDomain,
+  "nfsV4IdDomain",
+  "java"
+);
 
+@@alternateType(
+  Microsoft.NetApp.ActiveDirectoryPatch,
+  Microsoft.NetApp.ActiveDirectory,
+  "java"
+);
 @@clientName(Microsoft.NetApp.ActiveDirectory.kdcIP, "kdcIp", "java");
+@@clientName(Microsoft.NetApp.ActiveDirectoryPatch.kdcIP, "kdcIp", "java");
 @@clientName(
   Microsoft.NetApp.ActiveDirectory.ldapOverTLS,
+  "ldapOverTls",
+  "java"
+);
+@@clientName(
+  Microsoft.NetApp.ActiveDirectoryPatch.ldapOverTLS,
   "ldapOverTls",
   "java"
 );
@@ -99,7 +115,7 @@ using Microsoft.NetApp;
 
 @@clientName(
   Microsoft.NetApp.ReplicationSchedule._10minutely,
-  "$DO_NOT_NORMALIZE$\"10Minutely\"",
+  exact("10Minutely"),
   "javascript"
 );
 
@@ -131,7 +147,13 @@ using Microsoft.NetApp;
 );
 @@clientName(QosType, "CapacityPoolQosType", "csharp");
 @@clientName(ActiveDirectory, "NetAppAccountActiveDirectory", "csharp");
+@@clientName(
+  ActiveDirectoryPatch,
+  "NetAppAccountActiveDirectoryPatch",
+  "csharp"
+);
 @@clientName(AccountEncryption, "NetAppAccountEncryption", "csharp");
+@@clientName(AccountEncryptionPatch, "NetAppAccountEncryptionPatch", "csharp");
 @@clientName(Replication, "NetAppVolumeReplication", "csharp");
 @@clientName(CacheProperties, "NetAppCacheProperties", "csharp");
 @@clientName(
@@ -287,6 +309,11 @@ using Microsoft.NetApp;
 @@clientName(ChownMode, "NetAppChownMode", "csharp");
 @@clientName(DestinationReplication, "NetAppDestinationReplication", "csharp");
 @@clientName(EncryptionIdentity, "NetAppEncryptionIdentity", "csharp");
+@@clientName(
+  EncryptionIdentityPatch,
+  "NetAppEncryptionIdentityPatch",
+  "csharp"
+);
 @@clientName(EncryptionKeySource, "NetAppEncryptionKeySource", "csharp");
 @@clientName(KeySource, "NetAppKeySource", "csharp");
 @@clientName(
@@ -295,6 +322,11 @@ using Microsoft.NetApp;
   "csharp"
 );
 @@clientName(KeyVaultProperties, "NetAppKeyVaultProperties", "csharp");
+@@clientName(
+  KeyVaultPropertiesPatch,
+  "NetAppKeyVaultPropertiesPatch",
+  "csharp"
+);
 @@clientName(RegionInfo, "NetAppRegionInfo", "csharp");
 @@clientName(ReplicationObject, "NetAppReplicationObject", "csharp");
 @@clientName(ReplicationStatus, "NetAppVolumeReplicationStatus", "csharp");
@@ -467,6 +499,21 @@ using Microsoft.NetApp;
 @@clientName(ActiveDirectory.aesEncryption, "IsAesEncryptionEnabled", "csharp");
 @@clientName(ActiveDirectory.ldapSigning, "IsLdapSigningEnabled", "csharp");
 @@clientName(ActiveDirectory.ldapOverTLS, "IsLdapOverTlsEnabled", "csharp");
+@@clientName(
+  ActiveDirectoryPatch.aesEncryption,
+  "IsAesEncryptionEnabled",
+  "csharp"
+);
+@@clientName(
+  ActiveDirectoryPatch.ldapSigning,
+  "IsLdapSigningEnabled",
+  "csharp"
+);
+@@clientName(
+  ActiveDirectoryPatch.ldapOverTLS,
+  "IsLdapOverTlsEnabled",
+  "csharp"
+);
 @@clientName(LdapConfiguration.ldapOverTLS, "IsLdapOverTlsEnabled", "csharp");
 
 @@clientName(PoolProperties.coolAccess, "IsCoolAccessEnabled", "csharp");
@@ -578,6 +625,11 @@ using Microsoft.NetApp;
 // C# property name renames
 @@clientName(
   KeyVaultProperties.keyVaultResourceId,
+  "KeyVaultArmResourceId",
+  "csharp"
+);
+@@clientName(
+  KeyVaultPropertiesPatch.keyVaultResourceId,
   "KeyVaultArmResourceId",
   "csharp"
 );
@@ -736,6 +788,7 @@ using Microsoft.NetApp;
   "csharp"
 );
 @@alternateType(ActiveDirectory.kdcIP, Azure.Core.ipV4Address, "csharp");
+@@alternateType(ActiveDirectoryPatch.kdcIP, Azure.Core.ipV4Address, "csharp");
 @@alternateType(
   BackupPolicyProperties.backupPolicyId,
   armResourceIdentifier,

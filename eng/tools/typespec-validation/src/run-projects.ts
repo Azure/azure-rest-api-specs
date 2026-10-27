@@ -1,14 +1,16 @@
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
+import { findTypeSpecProjects } from "@azure-tools/specs-shared/typespec-projects";
 import { getSuppressions } from "@azure-tools/suppressions";
 import { spawn } from "node:child_process";
 import { appendFile, stat } from "node:fs/promises";
-import { relative, resolve, sep } from "node:path";
+import { relative, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
 import pc from "picocolors";
 import { simpleGit } from "simple-git";
 import { formatRuleSummary, supportsColor, type RuleCounts } from "./diagnostics.ts";
-import { findChangedProjects, findProjects, type ChangedProjectsOptions } from "./find-projects.ts";
+import { findChangedProjects, type ChangedProjectsOptions } from "./find-projects.ts";
+import { cleanWorktree } from "./git-cleanup.ts";
 
 interface RunOptions {
   gitClean?: boolean;
@@ -54,7 +56,7 @@ export async function runAll(
     throw new Error(`Please run TypeSpec Validation on a directory path: ${root}`);
   }
 
-  let projects = await findProjects(root);
+  let projects = await findTypeSpecProjects(root);
   if (projects.length === 0) {
     console.error(`No TypeSpec projects found in ${root}`);
     return false;
@@ -73,7 +75,7 @@ export async function runChanged(
   folder: string,
   options: RunOptions & Partial<Omit<ChangedProjectsOptions, "logger">> = {},
 ): Promise<boolean> {
-  const root = await getRootFolder(folder);
+  const root = resolve(await getRootFolder(folder));
   const { baseCommitish = "HEAD^", headCommitish = "HEAD", ignoreCoreFiles } = options;
   const { projects, checkingAllSpecs } = await findChangedProjects(root, {
     baseCommitish,
@@ -99,11 +101,12 @@ async function runProjects(
   options: RunOptions,
 ): Promise<boolean> {
   const git = simpleGit(root);
+  const logger = new ConsoleLogger(options.verbose);
   const gitClean = options.gitClean && !options.dryRun;
-  const displayRoot =
-    gitClean || (await git.checkIsRepo()) ? await getRootFolder(root) : process.cwd();
-  const displayPath = (project: string) =>
-    relative(displayRoot, project).split(sep).join("/") || ".";
+  const displayRoot = resolve(
+    gitClean || (await git.checkIsRepo()) ? await getRootFolder(root) : process.cwd(),
+  );
+  const displayPath = (project: string) => relative(displayRoot, project) || ".";
   if (gitClean) {
     await git.cwd(displayRoot);
     await git.revparse(["--verify", "HEAD"]);
@@ -178,8 +181,7 @@ async function runProjects(
       throw error;
     } finally {
       if (gitClean) {
-        await git.raw(["restore", "--worktree", "--", "."]);
-        await git.clean("f", ["-d"]);
+        await cleanWorktree(displayRoot, logger);
       }
     }
   }

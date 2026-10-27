@@ -1,7 +1,6 @@
 import { parseDocument } from "yaml";
 import { z } from "zod";
 
-export const DELETED_LABEL = "label-deleted";
 export const ARCHIVE_PREFIX = "archived: ";
 export const ARCHIVE_RETENTION_DAYS = 14;
 export const ARCHIVE_DESCRIPTION = `Archived by label sync: absent from .github/labels.yaml. Eligible for deletion after ${ARCHIVE_RETENTION_DAYS} days.`;
@@ -14,6 +13,15 @@ export const labelDefinitionSchema = z.strictObject({
     .regex(/^[^\r\n]+$/),
   color: z.string().regex(/^[0-9a-fA-F]{6}$/),
   description: z.string().max(100),
+  aliases: z
+    .array(
+      z
+        .string()
+        .min(1)
+        .max(50)
+        .regex(/^[^\r\n]+$/),
+    )
+    .optional(),
 });
 
 export const labelCatalogSchema = z
@@ -41,16 +49,24 @@ export const labelCatalogSchema = z
       }
       names.add(name);
     }
-    if (!catalog.labels.some((label) => label.name === DELETED_LABEL)) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["labels"],
-        message: `The ${DELETED_LABEL} marker must be defined`,
-      });
+    const aliases = new Set<string>();
+    for (const [index, label] of catalog.labels.entries()) {
+      for (const alias of label.aliases ?? []) {
+        const key = alias.toLowerCase();
+        if (names.has(key) || aliases.has(key) || key.startsWith(ARCHIVE_PREFIX)) {
+          ctx.addIssue({
+            code: "custom",
+            path: ["labels", index, "aliases"],
+            message: `Alias must be unique, unconfigured, and not archived: ${alias}`,
+          });
+        }
+        aliases.add(key);
+      }
     }
   });
 
 export const existingLabelSchema = labelDefinitionSchema
+  .omit({ aliases: true })
   .extend({
     id: z.number().int().positive(),
     node_id: z.string().min(1),
@@ -65,7 +81,11 @@ export const labelPlanSchema = z.strictObject({
   archive: z.array(
     z.strictObject({ before: existingLabelSchema, name: labelDefinitionSchema.shape.name }),
   ),
+  skippedArchives: z.array(
+    z.strictObject({ label: existingLabelSchema, reason: z.string().min(1) }),
+  ),
   delete: z.array(existingLabelSchema),
+  migrate: z.array(z.strictObject({ before: existingLabelSchema, target: z.string() })),
   unconfigured: z.array(existingLabelSchema),
   unchanged: z.number().int().nonnegative(),
 });
@@ -114,24 +134,6 @@ export function originalLabelName(label: ExistingLabel): string {
   return label.name;
 }
 
-function archivedLabelName(label: ExistingLabel): string {
-  if (label.name.toLowerCase().startsWith(ARCHIVE_PREFIX)) {
-    if (label.description !== ARCHIVE_DESCRIPTION) {
-      throw new Error(
-        `Cannot archive ${JSON.stringify(label.name)}: the ${ARCHIVE_PREFIX} prefix is reserved`,
-      );
-    }
-    return label.name;
-  }
-  const name = ARCHIVE_PREFIX + label.name;
-  if (name.length > 50) {
-    throw new Error(
-      `Cannot archive ${JSON.stringify(label.name)}: its prefixed name exceeds 50 characters. Rename it explicitly first.`,
-    );
-  }
-  return name;
-}
-
 export function planLabels(
   catalog: LabelCatalog,
   existing: ExistingLabel[],
@@ -156,7 +158,9 @@ export function planLabels(
     create: [],
     update: [],
     archive: [],
+    skippedArchives: [],
     delete: [],
+    migrate: [],
     unconfigured: [],
     unchanged: 0,
   };
@@ -173,6 +177,17 @@ export function planLabels(
   }
   plan.unconfigured = [...remaining.values()].sort((a, b) => a.name.localeCompare(b.name, "en"));
   if (catalog.unconfiguredLabels === "archive") {
+    const targets = new Map(
+      catalog.labels.flatMap((label) =>
+        (label.aliases ?? []).map((alias) => [alias.toLowerCase(), label.name] as const),
+      ),
+    );
+    for (const before of plan.unconfigured) {
+      const target = targets.get(originalLabelName(before).toLowerCase());
+      if (target && (before.archived_at === null || before.description === ARCHIVE_DESCRIPTION)) {
+        plan.migrate.push({ before, target });
+      }
+    }
     plan.delete = plan.unconfigured.filter((label) => isArchivedLabelExpired(label, now));
     for (const before of plan.unconfigured) {
       if (
@@ -182,12 +197,20 @@ export function planLabels(
           isArchivedLabelExpired(before, now))
       )
         continue;
-      const name = archivedLabelName(before);
+      const prefixed = before.name.toLowerCase().startsWith(ARCHIVE_PREFIX);
+      const name = prefixed ? before.name : ARCHIVE_PREFIX + before.name;
       const occupant = byName.get(name.toLowerCase());
-      if (occupant && occupant.id !== before.id) {
-        throw new Error(
-          `Label name collision: ${JSON.stringify(name)} already exists. Resolve it before syncing.`,
-        );
+      let reason: string | undefined;
+      if (prefixed && before.description !== ARCHIVE_DESCRIPTION) {
+        reason = `The ${ARCHIVE_PREFIX} prefix is reserved. Rename the label explicitly first.`;
+      } else if (name.length > 50) {
+        reason = "Its prefixed name exceeds 50 characters. Rename it explicitly first.";
+      } else if (occupant && occupant.id !== before.id) {
+        reason = `Label name collision: ${JSON.stringify(name)} already exists. Resolve it before archiving.`;
+      }
+      if (reason) {
+        plan.skippedArchives.push({ label: before, reason });
+        continue;
       }
       plan.archive.push({ before, name });
     }
