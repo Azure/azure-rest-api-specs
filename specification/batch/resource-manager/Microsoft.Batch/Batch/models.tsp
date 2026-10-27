@@ -653,24 +653,23 @@ enum ComputeNodeDeallocationOption {
 /**
  * Determines what to do with a node and its running task(s) after it has been selected for deallocation. This is the set of values that can be requested; `RetainedData` is no longer accepted as of the 2026-10-01 API version.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Retain the closed enum to preserve the generated SDK contract; an open union changes modelAsString and SDK types."
 @added(Versions.v2026_10_01)
-union RequestedComputeNodeDeallocationOption {
-  string,
-
+enum RequestedComputeNodeDeallocationOption {
   /**
    * Terminate running task processes and requeue the tasks. The tasks will run again when a node is available. Remove nodes as soon as tasks have been terminated.
    */
-  Requeue: "Requeue",
+  Requeue,
 
   /**
    * Terminate running tasks. The tasks will be completed with failureInfo indicating that they were terminated, and will not run again. Remove nodes as soon as tasks have been terminated.
    */
-  Terminate: "Terminate",
+  Terminate,
 
   /**
    * Allow currently running tasks to complete. Schedule no new tasks while waiting. Remove nodes when all tasks have completed.
    */
-  TaskCompletion: "TaskCompletion",
+  TaskCompletion,
 }
 
 /**
@@ -1325,7 +1324,20 @@ model BatchAccountProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
+  @removed(Versions.v2026_10_01)
+  @renamedFrom(Versions.v2026_10_01, "dedicatedCoreQuotaPerVMFamily")
   @visibility(Lifecycle.Read)
+  dedicatedCoreQuotaPerVMFamilyLegacy?: VirtualMachineFamilyCoreQuota[] | null;
+
+  /**
+   * A list of the dedicated core quota per Virtual Machine family for the Batch account. For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy design that typespec didn't have a direct translation for"
+  @added(Versions.v2026_10_01)
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   dedicatedCoreQuotaPerVMFamily?: VirtualMachineFamilyCoreQuota[] | null;
 
   /**
@@ -1651,15 +1663,34 @@ model ApplicationPackageProperties {
   format?: string;
 
   /**
-   * The URL for the application package in Azure Storage. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated for API versions newer than 2025-06-01.
+   * The URL for the application package in Azure Storage.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  @removed(Versions.v2026_10_01)
+  @renamedFrom(Versions.v2026_10_01, "storageUrl")
+  @visibility(Lifecycle.Read)
+  storageUrlLegacy?: string;
+
+  /**
+    * The URL for the application package in Azure Storage. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  @added(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
   storageUrl?: string;
 
   /**
-   * The UTC time at which the Azure Storage URL will expire. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated for API versions newer than 2025-06-01.
+   * The UTC time at which the Azure Storage URL will expire.
    */
+  @removed(Versions.v2026_10_01)
+  @renamedFrom(Versions.v2026_10_01, "storageUrlExpiry")
+  @visibility(Lifecycle.Read)
+  storageUrlExpiryLegacy?: utcDateTime;
+
+  /**
+    * The UTC time at which the Azure Storage URL will expire. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated.
+   */
+  @added(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
   storageUrlExpiry?: utcDateTime;
 
@@ -2470,6 +2501,90 @@ union ZonePlacementPolicyType {
    */
   Auto: "Auto",
 }
+
+/** Properties supplied when updating a pool. */
+model PoolPatch {
+  ...OmitProperties<Pool, "properties">;
+
+  /** The pool properties to update. */
+  @typeChangedFrom(Versions.v2026_10_01, PoolProperties)
+  properties?: PoolPatchProperties;
+}
+
+/** Pool settings supplied in a PATCH request. */
+@added(Versions.v2026_10_01)
+model PoolPatchProperties {
+  ...OmitProperties<
+    PoolProperties,
+    | "deploymentConfiguration"
+    | "certificates"
+    | "targetNodeCommunicationMode"
+    | "currentNodeCommunicationMode"
+    | "resourceTags"
+  >;
+
+  /** The deployment settings to update. */
+  deploymentConfiguration?: DeploymentConfigurationPatch;
+}
+
+/** Deployment settings supplied in a PATCH request. */
+@added(Versions.v2026_10_01)
+model DeploymentConfigurationPatch {
+  ...OmitProperties<DeploymentConfiguration, "virtualMachineConfiguration">;
+
+  /** The virtual machine settings to update. */
+  virtualMachineConfiguration?: VirtualMachineConfigurationPatch;
+}
+
+/** Virtual machine settings supplied in a PATCH request. */
+@added(Versions.v2026_10_01)
+@withOptionalProperties
+model VirtualMachineConfigurationPatch {
+  ...OmitProperties<
+    VirtualMachineConfiguration,
+    "placement" | "resiliencyPolicy"
+  >;
+
+  /** The availability zone placement policy to update. */
+  placement?: PlacementPatch;
+
+  /** The resiliency policy to update. */
+  resiliencyPolicy?: ResiliencyPolicyPatch;
+}
+
+/** Placement settings supplied in a PATCH request. */
+@added(Versions.v2026_10_01)
+@withOptionalProperties
+model PlacementPatch is Placement;
+
+/** Resiliency settings supplied in a PATCH request. */
+@added(Versions.v2026_10_01)
+model ResiliencyPolicyPatch {
+  ...OmitProperties<ResiliencyPolicy, "zoneAllocationPolicy">;
+
+  /** The zone allocation policy to update. */
+  zoneAllocationPolicy?: ZoneAllocationPolicyPatch;
+}
+
+/** Zone allocation settings supplied in a PATCH request. */
+@added(Versions.v2026_10_01)
+model ZoneAllocationPolicyPatch {
+  ...OmitProperties<ZoneAllocationPolicy, "maxInstancePercentPerZonePolicy">;
+
+  /** The per-zone instance percentage policy to update. */
+  maxInstancePercentPerZonePolicy?: MaxInstancePercentPerZonePolicyPatch;
+}
+
+/** Per-zone instance percentage settings supplied in a PATCH request. */
+@added(Versions.v2026_10_01)
+@withOptionalProperties
+model MaxInstancePercentPerZonePolicyPatch is MaxInstancePercentPerZonePolicy;
+
+@@typeChangedFrom(
+  Pools.update::parameters.properties,
+  Versions.v2026_10_01,
+  Pool
+);
 
 /**
  * Specifies the set of VM sizes and the allocation strategy used to allocate compute nodes for an Instance Mix pool.
@@ -4014,8 +4129,16 @@ model AutomaticOSUpgradePolicy {
  */
 model RollingUpgradePolicy {
   /**
-   * Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. If this field is not set, Azure Azure Batch will not set its default value. The value of enableCrossZoneUpgrade on the created VirtualMachineScaleSet will be decided by the default configurations on VirtualMachineScaleSet. This field can be set to true or false only when nodePlacementConfiguration.policy is Zonal or placement.zonePlacementPolicy is Auto. Auto placement is supported starting with API version 2026-10-01.
+   * Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. If this field is not set, Azure Azure Batch will not set its default value. The value of enableCrossZoneUpgrade on the created VirtualMachineScaleSet will be decided by the default configurations on VirtualMachineScaleSet. This field is able to be set to true or false only when using NodePlacementConfiguration as Zonal.
    */
+  @removed(Versions.v2026_10_01)
+  @renamedFrom(Versions.v2026_10_01, "enableCrossZoneUpgrade")
+  enableCrossZoneUpgradeLegacy?: boolean;
+
+  /**
+    * Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. If this field is not set, Azure Azure Batch will not set its default value. The value of enableCrossZoneUpgrade on the created VirtualMachineScaleSet will be decided by the default configurations on VirtualMachineScaleSet. This field can be set to true or false only when nodePlacementConfiguration.policy is Zonal or placement.zonePlacementPolicy is Auto.
+   */
+  @added(Versions.v2026_10_01)
   enableCrossZoneUpgrade?: boolean;
 
   /**

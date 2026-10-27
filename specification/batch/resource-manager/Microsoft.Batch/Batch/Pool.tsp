@@ -59,7 +59,7 @@ interface Pools {
        * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
        */
       @header("ETag")
-      @clientName("ETag","go")
+      @clientName("ETag", "go")
       etag?: string;
     },
     Error = CloudError
@@ -91,7 +91,7 @@ interface Pools {
        * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
        */
       @header("ETag")
-      @clientName("ETag","go")
+      @clientName("ETag", "go")
       etag?: string;
     },
     Error = CloudError
@@ -103,7 +103,7 @@ interface Pools {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Pool,
-    PatchModel = Pool,
+    PatchModel = PoolPatch,
     Parameters = {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
@@ -117,7 +117,7 @@ interface Pools {
        * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
        */
       @header("ETag")
-      @clientName("ETag","go")
+      @clientName("ETag", "go")
       etag?: string;
     },
     Error = CloudError
@@ -187,7 +187,7 @@ interface Pools {
        * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
        */
       @header("ETag")
-      @clientName("ETag","go")
+      @clientName("ETag", "go")
       etag?: string;
     },
     Error = CloudError
@@ -204,7 +204,7 @@ interface Pools {
        * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
        */
       @header("ETag")
-      @clientName("ETag","go")
+      @clientName("ETag", "go")
       etag?: string;
     },
     Error = CloudError
