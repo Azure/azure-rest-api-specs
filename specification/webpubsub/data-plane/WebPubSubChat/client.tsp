@@ -1,6 +1,6 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
-import "./python-customizations.mjs";
+import "./client-customizations.mjs";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;

@@ -18,7 +18,7 @@ JavaScript uses the same projections and `CreateOrReplace` / `Update` model
 names as Python, with a concrete `HumanChatUserCreateOrReplace` requiring
 `kind: "Human"`, `nickname`, and `roleName`.
 
-`python-customizations.mjs` resolves the `resource` body parameter from each
+`client-customizations.mjs` resolves the `resource` body parameter from each
 instantiated standard operation and applies the client generator core's
 `alternateType` decorator with an explicit language scope (defaulting to Python).
 JavaScript bindings opt in explicitly; experimental visibility splitting is not
