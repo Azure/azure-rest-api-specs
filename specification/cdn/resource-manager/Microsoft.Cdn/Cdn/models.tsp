@@ -1376,8 +1376,7 @@ union PolicyResourceState {
 /**
  * The type of the path.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 union AgentPathType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1390,8 +1389,7 @@ union AgentPathType {
  * Provisioning status of the web agent.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 union WebAgentProvisioningState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1409,14 +1407,18 @@ union WebAgentProvisioningState {
 /**
  * Format or origin of the knowledge source.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 union KnowledgeSourceType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  SchemaOrgMarkup: "SchemaOrgMarkup",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  RssFeeds: "RssFeeds",
+
+  /** HTML source type. */
+  @added(Versions.preview)
+  Html: "Html",
+
+  /** RSS feed source type. */
+  @added(Versions.preview)
+  RssFeed: "RssFeed",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Sitemap: "Sitemap",
 }
@@ -1424,8 +1426,7 @@ union KnowledgeSourceType {
 /**
  * Specifies the units of time for scheduling update intervals for the knowledge source.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 union KnowledgeSourceUpdateFrequency {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1442,8 +1443,7 @@ union KnowledgeSourceUpdateFrequency {
  * Provisioning status of the knowledge source.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 union KnowledgeSourceProvisioningState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -6147,31 +6147,48 @@ model ManagedRuleDefinition {
 /**
  * Defines a list of web agents. It contains a list of WebAgent objects and a URL link to get the next set of results.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model WebAgentList is Azure.Core.Page<WebAgent>;
 
 /**
  * Defines properties of a web agent.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model WebAgentProperties {
+  /**
+   * The mode of the web agent, which can be either 'Preview' or 'Live'.
+   */
+  @added(Versions.preview)
+  mode?: WebAgentMode = WebAgentMode.Preview;
+
+  /**
+   * System-generated preview GUID of the web agent.
+   */
+  @added(Versions.preview)
+  @visibility(Lifecycle.Read)
+  previewGuid?: string;
+
   /**
    * Optional textual description of the agent.
    */
+  @maxLength(1000)
   description?: string;
 
   /**
-   * System prompt for the web agent.
+   * Retrieval context prompt for the web agent.
    */
-  systemPrompt?: string;
+  @added(Versions.preview)
+  @minLength(300)
+  @maxLength(8000)
+  retrievalContextPrompt: string;
 
   /**
    * List of paths associated with the web agent.
    */
+  @minItems(1)
+  @maxItems(2)
   @identifiers(#[])
-  paths?: AgentPath[];
+  paths: AgentPath[];
 
   /**
    * References to agent links in CDN profiles.
@@ -6187,10 +6204,23 @@ model WebAgentProperties {
 }
 
 /**
+ * Defines the mode of the web agent.
+ */
+@added(Versions.preview)
+union WebAgentMode {
+  string,
+
+  /** Runs the web agent in preview mode. */
+  Preview: "Preview",
+
+  /** Runs the web agent in live mode. */
+  Live: "Live",
+}
+
+/**
  * Defines a path configuration for a web agent.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model AgentPath {
   /**
    * The type of the path.
@@ -6206,8 +6236,7 @@ model AgentPath {
 /**
  * Properties required to update a web agent.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model WebAgentUpdateParameters {
   /**
    * Web agent tags
@@ -6226,22 +6255,33 @@ model WebAgentUpdateParameters {
 /**
  * Defines properties of a web agent that can be updated.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model WebAgentPropertiesUpdateParameters {
+  /**
+   * The mode of the web agent, which can be either 'Preview' or 'Live'.
+   */
+  @added(Versions.preview)
+  mode?: WebAgentMode;
+
   /**
    * Optional textual description of the agent.
    */
+  @maxLength(1000)
   description?: string;
 
   /**
-   * System prompt for the web agent.
+   * Retrieval context prompt for the web agent.
    */
-  systemPrompt?: string;
+  @added(Versions.preview)
+  @minLength(300)
+  @maxLength(8000)
+  retrievalContextPrompt?: string;
 
   /**
    * List of paths associated with the web agent.
    */
+  @minItems(1)
+  @maxItems(2)
   @identifiers(#[])
   paths?: AgentPath[];
 }
@@ -6249,25 +6289,17 @@ model WebAgentPropertiesUpdateParameters {
 /**
  * Defines a list of knowledge sources. It contains a list of KnowledgeSource objects and a URL link to get the next set of results.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model KnowledgeSourceList is Azure.Core.Page<KnowledgeSource>;
 
 /**
  * Defines properties of a knowledge source.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model KnowledgeSourceProperties {
-  /**
-   * Description of the knowledge source.
-   */
-  description?: string;
-
   /**
    * Format or origin of the knowledge source.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceType: KnowledgeSourceType;
 
   /**
@@ -6297,8 +6329,7 @@ model KnowledgeSourceProperties {
 /**
  * Properties required to update a knowledge source.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model KnowledgeSourceUpdateParameters {
   /**
    * Properties of the knowledge source to be updated.
@@ -6311,19 +6342,8 @@ model KnowledgeSourceUpdateParameters {
 /**
  * Defines properties of a knowledge source that can be updated.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model KnowledgeSourcePropertiesUpdateParameters {
-  /**
-   * Description of the knowledge source.
-   */
-  description?: string;
-
-  /**
-   * Endpoint or location of the knowledge source.
-   */
-  url?: string;
-
   /**
    * Specifies the units of time for scheduling update intervals for the knowledge source.
    */

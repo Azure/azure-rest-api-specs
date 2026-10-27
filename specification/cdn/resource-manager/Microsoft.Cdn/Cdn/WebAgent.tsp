@@ -15,8 +15,7 @@ namespace Microsoft.Cdn;
 /**
  * Defines a web agent resource for Azure CDN.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model WebAgent is Azure.ResourceManager.TrackedResource<WebAgentProperties> {
   ...ResourceNameParameter<
     Resource = WebAgent,
@@ -29,20 +28,17 @@ model WebAgent is Azure.ResourceManager.TrackedResource<WebAgentProperties> {
 /**
  * Defines a WebAgent response body for long-running operations.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model WebAgentAcceptedBody {
   /**
    * Defines a WebAgent response body
    */
   @bodyRoot
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
+  @added(Versions.preview)
   _: WebAgent;
 }
 
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 @armResourceOperations
 interface WebAgents {
   /**
