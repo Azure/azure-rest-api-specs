@@ -14,6 +14,9 @@ namespace WebPubSubChat.PythonCustomizations {
     scope?: valueof string
   );
 
+  /** Omit the initial continuation token from Python paging method parameters. */
+  extern dec omitContinuationToken(target: TypeSpec.Reflection.Operation);
+
   /** Properties supplied when creating or replacing a role. */
   model ChatRoleCreateOrReplace {
     ...CreateOrUpdate<{
@@ -68,6 +71,7 @@ namespace WebPubSubChat.PythonCustomizations {
   model ChatTopicCreateOrReplace {
     ...CreateOrUpdate<{
       ...OmitProperties<WebPubSubChat.ChatTopic, "state">;
+
       // State is writable on replacement, but must not be required for creation.
       ...OptionalProperties<PickProperties<WebPubSubChat.ChatTopic, "state">>;
     }>;
@@ -81,7 +85,11 @@ namespace WebPubSubChat.PythonCustomizations {
     }>>;
   }
 
-  @@clientNamespace(WebPubSubChat.PythonCustomizations, "WebPubSubChat", "javascript");
+  @@clientNamespace(
+    WebPubSubChat.PythonCustomizations,
+    "WebPubSubChat",
+    "javascript"
+  );
 }
 
 namespace Customizations {
@@ -196,6 +204,26 @@ namespace Customizations {
     {
       parameters: WebPubSubChatServiceClientOptions,
     }
+  );
+
+  // Python callers resume pagination through ItemPaged.by_page(continuation_token=...).
+  @@WebPubSubChat.PythonCustomizations.omitContinuationToken(
+    WebPubSubChatServiceClient.listRoles
+  );
+  @@WebPubSubChat.PythonCustomizations.omitContinuationToken(
+    WebPubSubChatServiceClient.listRooms
+  );
+  @@WebPubSubChat.PythonCustomizations.omitContinuationToken(
+    WebPubSubChatServiceClient.listTopics
+  );
+  @@WebPubSubChat.PythonCustomizations.omitContinuationToken(
+    WebPubSubChatServiceClient.listRoomMembers
+  );
+  @@WebPubSubChat.PythonCustomizations.omitContinuationToken(
+    WebPubSubChatServiceClient.listUsers
+  );
+  @@WebPubSubChat.PythonCustomizations.omitContinuationToken(
+    WebPubSubChatServiceClient.listRoomsForUser
   );
 
   @@WebPubSubChat.PythonCustomizations.requestModel(

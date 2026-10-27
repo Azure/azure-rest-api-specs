@@ -26,6 +26,12 @@ enabled. This avoids changing the
 standard resource operations, REST contract, and other language SDKs. Keep this
 module alongside `client.tsp` when generating from local inputs.
 
+For Python listing operations, `omitContinuationToken` resolves the instantiated
+`continuationToken` parameter and applies the standard client generator core
+`scope("!python")` decorator. Python callers use `by_page(continuation_token=...)`
+on the returned pager to resume from a previous page. The service query parameter,
+next-link pagination, and other language SDKs are unchanged.
+
 ## Configuration
 
 ### Basic Information

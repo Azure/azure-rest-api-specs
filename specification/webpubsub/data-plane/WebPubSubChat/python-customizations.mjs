@@ -1,4 +1,4 @@
-import { $alternateType } from "@azure-tools/typespec-client-generator-core";
+import { $alternateType, $scope } from "@azure-tools/typespec-client-generator-core";
 
 /**
  * @param {import("@typespec/compiler").DecoratorContext} context
@@ -21,6 +21,25 @@ function requestModel(context, operation, input, scope = "python") {
   context.call($alternateType, resource, input, scope);
 }
 
+/**
+ * @param {import("@typespec/compiler").DecoratorContext} context
+ * @param {import("@typespec/compiler").Operation} operation
+ */
+function omitContinuationToken(context, operation) {
+  // Resolve template-expanded parameters, which cannot be referenced with ::parameters.
+  const token = operation.parameters.properties.get("continuationToken");
+  if (!token) {
+    context.program.reportDiagnostic({
+      code: "webpubsub-chat/missing-continuation-token-parameter",
+      severity: "error",
+      message: `Operation ${operation.name} has no continuationToken parameter.`,
+      target: context.decoratorTarget,
+    });
+    return;
+  }
+  context.call($scope, token, "!python");
+}
+
 export const $decorators = {
-  "WebPubSubChat.PythonCustomizations": { requestModel },
+  "WebPubSubChat.PythonCustomizations": { requestModel, omitContinuationToken },
 };
