@@ -62,27 +62,6 @@ options:
     head-as-boolean: true
     inject-spans: true
     api-version: "2026-05-15"
-  "@azure-tools/typespec-ts-provisioning":
-    emitter-output-dir: "{output-dir}/{service-dir}/provisioning-keyvault"
-    azure-sdk-for-js: true
-    generate-test: true
-    package-details:
-      name: "@azure/provisioning-keyvault"
-    api-version: "2026-02-01"
-    resource-overrides:
-      - resourceType: "Microsoft.KeyVault/vaults"
-        className: "KeyVault"
-        namingRules:
-          abbreviation: "kv"
-          minLength: 3
-          maxLength: 24
-          scope: "global"
-      - resourceType: "Microsoft.KeyVault/managedHSMs"
-        namingRules:
-          abbreviation: "mhsm"
-          minLength: 3
-          maxLength: 24
-          scope: "global"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
