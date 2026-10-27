@@ -552,6 +552,88 @@ interface Databases {
   >;
 }
 
+@armResourceOperations(#{ omitTags: true })
+interface Queries {
+  /**
+   * Get top resource consuming queries of a database
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI operation is emitted into the existing databases.json file under legacy feature-file output splitting instead of creating a new feature file."
+  @added(Versions.v2026_11_01_preview)
+  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @tag("Queries")
+  @list
+  @get
+  @action("topQueries")
+  listByDatabase is ArmResourceActionSync<
+    Database,
+    void,
+    ArmResponse<TopQueriesDatabaseListResult>
+  >;
+}
+
+@armResourceOperations(#{ omitTags: true })
+interface TopQueryStatistics {
+  /**
+   * Get query statistics.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI operation is emitted into the existing databases.json file under legacy feature-file output splitting instead of creating a new feature file."
+  @added(Versions.v2026_11_01_preview)
+  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @tag("Queries")
+  @list
+  @get
+  @action("statistics")
+  listByQuery is ArmResourceActionSync<
+    Database,
+    void,
+    ArmResponse<QueryStatisticsDatabaseListResult>,
+    Parameters = {
+      /** The query ID. */
+      @path
+      @segment("topQueries")
+      @pattern("^[0-9]*$")
+      topQueryName: string;
+    }
+  >;
+}
+
+/**
+ * Query text operations for top resource consuming database queries.
+ */
+@armResourceOperations(#{ omitTags: true })
+interface TopQueriesQueryText {
+  /**
+   * Gets the text of a query in a database.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep this operation in the existing databases OpenAPI feature file."
+  @added(Versions.v2026_11_01_preview)
+  @tag("Queries")
+  @list
+  @get
+  @action("queryText")
+  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  listByQuery is ArmResourceActionSync<
+    Database,
+    void,
+    ArmResponse<QueryTextResult>,
+    Parameters = {
+      /**
+       * The numeric query identifier.
+       */
+      @path
+      @segment("topQueries")
+      @pattern("^[0-9]+$")
+      topQueryName: string;
+
+      /**
+       * Whether to include query text in the response. Defaults to false.
+       */
+      @query
+      includeQueryText?: boolean = false;
+    }
+  >;
+}
+
 @@doc(Database.name, "The name of the database.");
 @@doc(Database.properties, "Resource properties.");
 @@doc(

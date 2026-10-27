@@ -264,6 +264,7 @@ using Microsoft.Sql;
 
 @@clientName(Databases.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Databases.update::parameters.properties, "parameters");
+@@clientLocation(Queries.listByDatabase, "TopQueries");
 @@clientLocation(Databases.listByDatabase, DatabaseColumns);
 @@clientLocation(Databases.revalidate, "DatabaseEncryptionProtectors");
 @@clientLocation(Databases.revert, "DatabaseEncryptionProtectors");
