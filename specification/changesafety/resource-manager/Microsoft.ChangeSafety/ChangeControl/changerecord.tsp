@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "./commonmodels.tsp";
 import "./changerecordstageprogression.tsp";
 import "./stagemap.tsp";
@@ -99,6 +100,10 @@ model ChangeRecordProperties {
 }
 
 @doc("RetrieveNextStages POST Action response for ChangeRecord.")
+@Azure.ClientGenerator.Core.clientName(
+  "ChangeRecordRetrieveNextStagesResult",
+  "csharp"
+)
 model ChangeRecordRetrieveNextStagesResponse {
   @doc("ChangeRecord resource Id.")
   changeRecordResourceId: ChangeRecordResourceId;
@@ -181,6 +186,10 @@ scalar ChangeRecordResourceId
   ]>;
 
 @doc("VerifyChangeValidity POST Action request for ChangeRecord.")
+@Azure.ClientGenerator.Core.clientName(
+  "ChangeRecordVerifyChangeValidityContent",
+  "csharp"
+)
 model ChangeRecordVerifyChangeValidityRequest {
   @doc("The resource operation.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -202,6 +211,10 @@ model ChangeRecordVerifyChangeValidityRequestContext {
 }
 
 @doc("VerifyChangeValidity POST Action response for ChangeRecord.")
+@Azure.ClientGenerator.Core.clientName(
+  "ChangeRecordVerifyChangeValidityResult",
+  "csharp"
+)
 model ChangeRecordVerifyChangeValidityResponse {
   @doc("The outcome of the verification.")
   outcome: ValidationOutcome;
