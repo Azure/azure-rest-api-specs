@@ -48,6 +48,7 @@ using Microsoft.AzureStackHCI;
   Clusters.extendSoftwareAssuranceBenefit::parameters.body,
   "softwareAssuranceChangeRequest"
 );
+@@clientName(Clusters.changeRing::parameters.body, "changeRingRequest");
 @@clientName(
   Clusters.triggerLogCollection::parameters.body,
   "logCollectionRequest"

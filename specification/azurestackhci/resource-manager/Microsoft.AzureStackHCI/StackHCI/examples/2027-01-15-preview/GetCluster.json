@@ -11,6 +11,7 @@
         "name": "myCluster",
         "type": "Microsoft.AzureStackHCI/clusters",
         "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster",
+        "kind": "AzureLocal",
         "location": "East US",
         "properties": {
           "aadClientId": "24a6e53d-04e5-44d2-b7cc-1b732a847dfc",
@@ -28,12 +29,16 @@
           "cloudId": "a3c0468f-e38e-4dda-ac48-817f620536f0",
           "cloudManagementEndpoint": "https://98294836-31be-4668-aeae-698667faf99b.waconazure.com",
           "connectivityStatus": "Connected",
+          "arcGatewayProperties": {
+            "arcGatewayStatus": "Enabled"
+          },
           "desiredProperties": {
             "diagnosticLevel": "Basic",
             "windowsServerSubscription": "Enabled"
           },
           "identityProvider": "ActiveDirectory",
           "useManagedIdentityForWitness": true,
+          "storageType": "S2D",
           "isolatedVmAttestationConfiguration": {
             "attestationResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.Attestation/attestationProviders/testmaa",
             "attestationServiceEndpoint": "https://dantestnoauth01.eus.attest.azure.net",
@@ -66,6 +71,7 @@
             "clusterVersion": "10.0.17777",
             "diagnosticLevel": "Basic",
             "hardwareClass": "Medium",
+            "localAvailabilityZoneCount": 2,
             "imdsAttestation": "Disabled",
             "lastUpdated": "2020-03-11T19:24:42.1946017Z",
             "manufacturer": "Dell Inc.",
@@ -82,7 +88,8 @@
                 "osName": "Azure Stack HCI",
                 "osVersion": "10.0.17777.1061",
                 "serialNumber": "Q45CZC3",
-                "windowsServerSubscription": "Enabled"
+                "windowsServerSubscription": "Enabled",
+                "nodeState": "NodeUp"
               },
               {
                 "name": "Node2",
@@ -96,7 +103,8 @@
                 "osName": "Azure Stack HCI",
                 "osVersion": "10.0.17777.1061",
                 "serialNumber": "Q44BSC3",
-                "windowsServerSubscription": "Enabled"
+                "windowsServerSubscription": "Enabled",
+                "nodeState": "NodeUp"
               },
               {
                 "name": "Node3",
@@ -110,11 +118,13 @@
                 "osName": "Azure Stack HCI",
                 "osVersion": "10.0.17777.1061",
                 "serialNumber": "Q44RFC3",
-                "windowsServerSubscription": "Enabled"
+                "windowsServerSubscription": "Enabled",
+                "nodeState": "NodeUp"
               }
             ],
             "oemActivation": "Disabled"
           },
+          "ring": "Insider",
           "status": "ConnectedRecently",
           "trialDaysRemaining": 30,
           "remoteSupportProperties": {
@@ -137,8 +147,7 @@
                 "duration": 120,
                 "nodeName": "arcNode0",
                 "sessionEndTime": "2020-01-01T17:18:19.1234567Z",
-                "sessionStartTime": "2020-01-01T17:18:19.1234567Z",
-                "transcriptLocation": "/transcript/location"
+                "sessionStartTime": "2020-01-01T17:18:19.1234567Z"
               }
             ],
             "remoteSupportType": "Enable",

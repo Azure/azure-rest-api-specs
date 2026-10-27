@@ -11,14 +11,15 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-
+import "./KubernetesVersions.tsp";
+import "./PlatformUpdates.tsp";
 import "./OsImages.tsp";
-
+import "./UpdateContents.tsp";
 import "./Operations.tsp";
 import "./back-compatible.tsp";
 import "./ArcSetting.tsp";
 import "./Cluster.tsp";
-
+import "./NetworkProfile.tsp";
 import "./DeploymentSetting.tsp";
 import "./EdgeDeviceJob.tsp";
 import "./EdgeDevice.tsp";
@@ -33,15 +34,18 @@ import "./UpdateSummaries.tsp";
 import "./ValidatedSolutionRecipe.tsp";
 import "./EdgeMachine.tsp";
 import "./EdgeMachineJobs.tsp";
-
+import "./EdgeMachineUpdate.tsp";
 import "./ValidateOwnershipVouchers.tsp";
 import "./ClusterJobs.tsp";
-
+import "./ClusterVolume.tsp";
+import "./CapacitySetting.tsp";
+import "./DevicePool.tsp";
+import "./EdgeMachineGpu.tsp";
 import "./EdgeMachineNetworkAdapters.tsp";
 import "./EdgeMachineStorage.tsp";
 import "./EdgeMachineSecuritySettings.tsp";
 import "./EdgeMachineDeploymentSetting.tsp";
-
+import "./ProxyConfiguration.tsp";
 import "./client.tsp";
 
 using Azure.ResourceManager;
