@@ -1,6 +1,6 @@
 import "@typespec/openapi";
 import "@azure-tools/openai-typespec/models/realtime";
-import "./agents.tsp";
+import "../voice-agents/agents.tsp";
 
 using TypeSpec.OpenAPI;
 using Azure.AI.Projects;
