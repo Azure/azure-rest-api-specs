@@ -463,7 +463,7 @@ union VoiceType {
   openai: "openai",
 
   @doc("An Azure standard voice.")
-  azure_standard: "azure-standard",
+  azure_standard_vnext: "azure-standard",
 
   @doc("An Azure custom voice.")
   azure_custom: "azure-custom",
