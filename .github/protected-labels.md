@@ -100,10 +100,8 @@ Each label is listed explicitly in the configuration; new approval labels must b
 added individually, not as wildcard patterns.
 
 The ARM signoff, suppression, and validation policies leave data-plane behavior unchanged.
-On data-plane PRs, `typespec-suppressions-approved` permits the existing
-`azure-data-plane-api-reviewers` team and the explicit Foundry reviewers listed in the
-configuration. Those explicit users do not gain `data-plane-review-signoff` permission.
-The other ARM policies explicitly opt data-plane PRs out.
+`typespec-suppressions-approved` retains its existing `azure-data-plane-api-reviewers`
+policy on data-plane PRs; the other ARM policies explicitly opt data-plane PRs out.
 `WaitForARMFeedback` and `ARMChangesRequested` remain unprotected.
 
 Protection applies to label application, not removal.
