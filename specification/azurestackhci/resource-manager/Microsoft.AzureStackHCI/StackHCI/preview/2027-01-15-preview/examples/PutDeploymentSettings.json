@@ -19,8 +19,8 @@
                   "azureServiceEndpoint": "core.windows.net",
                   "cloudAccountName": "myasestoragacct",
                   "witnessPath": "Cloud",
-                  "witnessType": "Cloud",
-                  "useManagedIdentityForWitness": true
+                  "witnessType": "ClusterWitnessDisk",
+                  "witnessLunId": "PURE1234567890ABCDEF"
                 },
                 "domainFqdn": "ASZ1PLab8.nttest.microsoft.com",
                 "hostNetwork": {
@@ -112,7 +112,8 @@
                   "streamingDataClient": true
                 },
                 "optionalServices": {
-                  "customLocation": "customLocationName"
+                  "customLocation": "customLocationName",
+                  "confidentialVmIntent": "Disable"
                 },
                 "physicalNodes": [
                   {
@@ -319,7 +320,8 @@
                     "streamingDataClient": true
                   },
                   "optionalServices": {
-                    "customLocation": "customLocationName"
+                    "customLocation": "customLocationName",
+                    "confidentialVmIntent": "Disable"
                   },
                   "physicalNodes": [
                     {
@@ -621,7 +623,8 @@
                     "streamingDataClient": true
                   },
                   "optionalServices": {
-                    "customLocation": "customLocationName"
+                    "customLocation": "customLocationName",
+                    "confidentialVmIntent": "Disable"
                   },
                   "physicalNodes": [
                     {
