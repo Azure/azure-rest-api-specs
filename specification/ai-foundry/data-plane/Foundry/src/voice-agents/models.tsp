@@ -98,12 +98,7 @@ model VoiceResponseAudioOutput {
   format?: OpenAI.RealtimeAudioFormats;
 }
 
-@doc("Audio configuration for a response. Follows the OpenAI Realtime GA `audio` object shape.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceResponseAudio {
-  @doc("The audio output configuration used for the response.")
-  output?: VoiceResponseAudioOutput;
-}
+alias VoiceResponseAudio = unknown;
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("""
