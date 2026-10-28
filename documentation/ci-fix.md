@@ -13,6 +13,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
 - [Table of Contents](#table-of-contents)
 - [Prerequisites](#prerequisites)
 - [Checks troubleshooting guides](#checks-troubleshooting-guides)
+  - [Transient fetch failures](#transient-fetch-failures)
   - [`Format`](#format)
   - [`CredScan`](#credscan)
   - [`PoliCheck`](#policheck)
@@ -45,6 +46,21 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
 Most guides here require for you to have `npm` installed, which you can get by installing [Node.js](https://nodejs.org/en/download).
 
 # Checks troubleshooting guides
+
+## Transient fetch failures
+
+As a historical troubleshooting workaround, if a PR pipeline fails with a
+fetch-related error and there is no obvious issue in the PR itself, treat the
+failure as potentially transient or external rather than evidence of a spec
+problem. Retry the failed run once and re-check the CI results before starting
+deeper spec or pipeline investigation.
+
+If the retry succeeds, ensure all required CI checks are passing before
+requesting or re-requesting review. If the same fetch-related failure repeats,
+investigate it as a persistent CI or repository issue instead of assuming the PR
+content is the cause. Apply this guidance only to fetch-related errors without
+a specific problem in the submitted changes; it is not a blanket rule for all
+CI failures.
 
 ## `Format`
 
