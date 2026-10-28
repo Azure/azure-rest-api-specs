@@ -47,7 +47,6 @@ suppressions:
       supplied; they do not require it when updating unrelated vault properties.
       Review requested at
       https://github.com/Azure/azure-rest-api-specs/pull/47534#issuecomment-6351020880.
-
 ```
 
 ### Tag: package-preview-2026-06
