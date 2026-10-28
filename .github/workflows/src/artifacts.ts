@@ -33,6 +33,20 @@ export type StrictAzurePipelineArtifactResult =
       artifactData: "";
     };
 
+export type ResolvedAzurePipelineArtifact = {
+  downloadUrl: string;
+  headers: Record<string, string>;
+};
+
+export type AzurePipelineArtifactResolution =
+  | {
+      status: "found";
+      artifact: ResolvedAzurePipelineArtifact;
+    }
+  | {
+      status: "not-found";
+    };
+
 type GetAzurePipelineArtifactOptions = {
   ado_build_id: string;
   ado_project_url: string;
@@ -46,7 +60,28 @@ type GetAzurePipelineArtifactOptions = {
   maxBytes?: number;
 };
 
+type ResolveAzurePipelineArtifactOptions = Omit<
+  GetAzurePipelineArtifactOptions,
+  "artifactFileName" | "strict" | "maxBytes"
+>;
+
+type DownloadAzurePipelineArtifactFileOptions = {
+  artifact: ResolvedAzurePipelineArtifact;
+  artifactFileName: string;
+  retryOptions?: import("./retries.ts").RetryOptions;
+  maxBytes?: number;
+};
+
 type ByteStreamReadResult = { done: true; value?: undefined } | { done: false; value: Uint8Array };
+
+class AzurePipelineArtifactHttpError extends Error {
+  public readonly status: number;
+
+  public constructor(message: string, status: number) {
+    super(message);
+    this.status = status;
+  }
+}
 
 async function readResponseTextWithLimit(response: Response, maxBytes?: number): Promise<string> {
   const contentLength = response.headers?.get("content-length");
@@ -92,6 +127,128 @@ async function readResponseTextWithLimit(response: Response, maxBytes?: number):
   return text;
 }
 
+function getArtifactHeaders(token?: string): Record<string, string> {
+  return {
+    "Content-Type": "application/json",
+    ...(token && { Authorization: `Bearer ${token}` }),
+  };
+}
+
+function parseArtifactDownloadUrl(metadata: unknown, artifactName: string): string {
+  if (!metadata || typeof metadata !== "object") {
+    throw new Error(`Malformed metadata for artifact ${artifactName}`);
+  }
+
+  const resource = (metadata as Artifacts).resource;
+  if (!resource || typeof resource.downloadUrl !== "string" || !resource.downloadUrl) {
+    throw new Error(`Download URL not found for the artifact ${artifactName}`);
+  }
+
+  let parsedUrl: URL;
+  try {
+    parsedUrl = new URL(resource.downloadUrl);
+  } catch (error) {
+    throw new Error(`Invalid download URL for the artifact ${artifactName}`, { cause: error });
+  }
+  if (parsedUrl.protocol !== "https:") {
+    throw new Error(`Invalid download URL protocol for the artifact ${artifactName}`);
+  }
+
+  parsedUrl.searchParams.delete("format");
+  return parsedUrl.toString();
+}
+
+/**
+ * Resolves Azure Pipelines artifact metadata once into a reusable download target.
+ * Only a verified 404 is returned as not found. Authentication, throttling, server,
+ * network, and malformed-metadata failures are thrown.
+ */
+export async function resolveAzurePipelineArtifact({
+  ado_build_id,
+  ado_project_url,
+  artifactName,
+  core,
+  retryOptions = {},
+  fallbackToFailedArtifact = false,
+  token = undefined,
+}: ResolveAzurePipelineArtifactOptions): Promise<AzurePipelineArtifactResolution> {
+  const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
+  core.info(`Calling Azure DevOps API to get the artifact: ${apiUrl}`);
+
+  const headers = getArtifactHeaders(token);
+  let response = await fetchWithRetry(
+    apiUrl,
+    {
+      method: "GET",
+      headers,
+    },
+    retryOptions,
+  );
+
+  if (response.status === 404 && fallbackToFailedArtifact) {
+    response = await fetchFailedArtifact({
+      ado_build_id,
+      ado_project_url,
+      artifactName,
+      core,
+      retryOptions,
+      headers,
+    });
+  }
+
+  if (response.status === 404) {
+    core.info(`Artifact '${artifactName}' not found (404)`);
+    return { status: "not-found" };
+  }
+  if (!response.ok) {
+    core.error(`Failed to fetch artifacts: ${response.status}, ${response.statusText}`);
+    const errorText = await response.text();
+    core.error(`Error details: ${errorText}`);
+    throw new AzurePipelineArtifactHttpError(
+      `Failed to fetch artifact '${artifactName}': ${response.status}, ${response.statusText}`,
+      response.status,
+    );
+  }
+
+  const metadata: unknown = await response.json();
+  core.info(`Artifacts found: ${JSON.stringify(metadata)}`);
+  return {
+    status: "found",
+    artifact: {
+      downloadUrl: parseArtifactDownloadUrl(metadata, artifactName),
+      headers,
+    },
+  };
+}
+
+/**
+ * Downloads one bounded file from a previously resolved Azure Pipelines artifact.
+ */
+export async function downloadAzurePipelineArtifactFile({
+  artifact,
+  artifactFileName,
+  retryOptions = {},
+  maxBytes,
+}: DownloadAzurePipelineArtifactFileOptions): Promise<string> {
+  const separator = artifact.downloadUrl.includes("?") ? "&" : "?";
+  const url = `${artifact.downloadUrl}${separator}format=file&subPath=/${artifactFileName}`;
+  const artifactResponse = await fetchWithRetry(
+    url,
+    {
+      method: "GET",
+      headers: artifact.headers,
+    },
+    retryOptions,
+  );
+  if (!artifactResponse.ok) {
+    throw new Error(
+      `Failed to fetch artifact file '${artifactFileName}': ${artifactResponse.status}, ${artifactResponse.statusText}`,
+    );
+  }
+
+  return await readResponseTextWithLimit(artifactResponse, maxBytes);
+}
+
 export function getAzurePipelineArtifact(
   options: GetAzurePipelineArtifactOptions & { strict: true },
 ): Promise<StrictAzurePipelineArtifactResult>;
@@ -112,92 +269,33 @@ export async function getAzurePipelineArtifact({
 }: GetAzurePipelineArtifactOptions): Promise<
   AzurePipelineArtifactResult | StrictAzurePipelineArtifactResult
 > {
-  const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
-  core.info(`Calling Azure DevOps API to get the artifact: ${apiUrl}`);
-
-  const headers = {
-    "Content-Type": "application/json",
-    ...(token && { Authorization: `Bearer ${token}` }),
-  };
-  let artifactData = "";
-  // Use Node.js fetch with retry to call the API
-  let response = await fetchWithRetry(
-    apiUrl,
-    {
-      method: "GET",
-      headers,
-    },
-    retryOptions,
-  );
-
-  // If the response is 404, check if we should fallback to the failed artifact
-  if (response.status === 404) {
-    if (!fallbackToFailedArtifact) {
-      core.info(`Artifact '${artifactName}' not found (404)`);
-      return strict ? { status: "not-found", artifactData: "" } : { artifactData };
-    } else {
-      response = await fetchFailedArtifact({
-        ado_build_id,
-        ado_project_url,
-        artifactName,
-        core,
-        retryOptions,
-        headers,
-      });
-    }
-  }
-
-  if (response.status === 404) {
-    core.info(`Artifact '${artifactName}' not found (404)`);
-    return strict ? { status: "not-found", artifactData: "" } : { artifactData };
-  }
-
-  if (response.ok) {
-    // Step 1: Get the download URL for the artifact
-
-    const artifacts: Artifacts = (await response.json()) as Artifacts;
-    core.info(`Artifacts found: ${JSON.stringify(artifacts)}`);
-    if (!artifacts.resource || !artifacts.resource.downloadUrl) {
-      throw new Error(`Download URL not found for the artifact ${artifactName}`);
-    }
-
-    let downloadUrl = artifacts.resource.downloadUrl;
-    const index = downloadUrl.indexOf("?format=zip");
-    if (index !== -1) {
-      // Keep everything up to (but not including) "?format=zip"
-      downloadUrl = downloadUrl.substring(0, index);
-    }
-    downloadUrl += `?format=file&subPath=/${artifactFileName}`;
-    core.info(`Downloading artifact from: ${downloadUrl}`);
-
-    // Step 2: Fetch Artifact Content (as a Buffer) with retry
-    const artifactResponse = await fetchWithRetry(
-      downloadUrl,
-      {
-        method: "GET",
-        headers,
-      },
+  try {
+    const resolution = await resolveAzurePipelineArtifact({
+      ado_build_id,
+      ado_project_url,
+      artifactName,
+      core,
       retryOptions,
-    );
-    if (!artifactResponse.ok) {
-      throw new Error(`Failed to fetch artifact: ${artifactResponse.statusText}`);
+      fallbackToFailedArtifact,
+      token,
+    });
+    if (resolution.status === "not-found") {
+      return strict ? { status: "not-found", artifactData: "" } : { artifactData: "" };
     }
 
-    artifactData = await readResponseTextWithLimit(artifactResponse, maxBytes);
-    if (strict) {
-      return { status: "found", artifactData };
+    const artifactData = await downloadAzurePipelineArtifactFile({
+      artifact: resolution.artifact,
+      artifactFileName,
+      retryOptions,
+      maxBytes,
+    });
+    return strict ? { status: "found", artifactData } : { artifactData };
+  } catch (error) {
+    if (!strict && error instanceof AzurePipelineArtifactHttpError) {
+      return { artifactData: "" };
     }
-  } else {
-    core.error(`Failed to fetch artifacts: ${response.status}, ${response.statusText}`);
-    const errorText = await response.text();
-    core.error(`Error details: ${errorText}`);
-    if (strict) {
-      throw new Error(
-        `Failed to fetch artifact '${artifactName}': ${response.status}, ${response.statusText}`,
-      );
-    }
+    throw error;
   }
-  return { artifactData };
 }
 
 /**

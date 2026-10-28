@@ -1,8 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
+  downloadAzurePipelineArtifactFile,
   fetchFailedArtifact,
   getAdoBuildInfoFromUrl,
   getAzurePipelineArtifact,
+  resolveAzurePipelineArtifact,
 } from "../src/artifacts.ts";
 import { createMockCore } from "./mocks.ts";
 
@@ -578,6 +580,73 @@ describe("getAzurePipelineArtifact function", () => {
       maxBytes: 0,
     });
     expect(result).toEqual({ status: "found", artifactData: "" });
+  });
+
+  it("resolves metadata once and reuses the target for multiple file downloads", async () => {
+    mockFetch.mockImplementation((url) => {
+      if (url.includes("artifacts?artifactName=")) {
+        return Promise.resolve({
+          ok: true,
+          json: vi.fn().mockResolvedValue({
+            resource: {
+              downloadUrl: "https://dev.azure.com/download?format=zip",
+            },
+          }),
+        });
+      }
+      return Promise.resolve({
+        ok: true,
+        text: vi.fn().mockResolvedValue(String(url).includes("one.patch") ? "one" : "two"),
+      });
+    });
+
+    const resolution = await resolveAzurePipelineArtifact(inputs);
+    expect(resolution.status).toBe("found");
+    if (resolution.status !== "found") {
+      throw new Error("Expected resolved artifact");
+    }
+    const first = await downloadAzurePipelineArtifactFile({
+      artifact: resolution.artifact,
+      artifactFileName: "one.patch",
+    });
+    const second = await downloadAzurePipelineArtifactFile({
+      artifact: resolution.artifact,
+      artifactFileName: "two.patch",
+    });
+
+    expect(first).toBe("one");
+    expect(second).toBe("two");
+    expect(
+      mockFetch.mock.calls.filter(([url]) => String(url).includes("artifacts?artifactName=")),
+    ).toHaveLength(1);
+  });
+
+  it("rejects malformed metadata in the resolution primitive", async () => {
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: vi.fn().mockResolvedValue({ resource: { downloadUrl: "not a URL" } }),
+    });
+
+    await expect(resolveAzurePipelineArtifact(inputs)).rejects.toThrow("Invalid download URL");
+  });
+
+  it("enforces Content-Length before reading a resolved artifact file", async () => {
+    mockFetch.mockResolvedValue(
+      new Response("12345", {
+        status: 200,
+        headers: { "Content-Length": "5" },
+      }),
+    );
+    await expect(
+      downloadAzurePipelineArtifactFile({
+        artifact: {
+          downloadUrl: "https://dev.azure.com/download",
+          headers: { "Content-Type": "application/json" },
+        },
+        artifactFileName: "large.patch",
+        maxBytes: 4,
+      }),
+    ).rejects.toThrow("exceeds 4 bytes");
   });
 });
 

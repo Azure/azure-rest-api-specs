@@ -118,6 +118,7 @@ export function createMockContext(): Context & ReturnType<typeof createMockConte
 // Partial mock of `context` parameter passed into github-script actions
 function createMockContextImpl() {
   return {
+    eventName: "check_run",
     payload: {},
     repo: {
       owner: "owner",

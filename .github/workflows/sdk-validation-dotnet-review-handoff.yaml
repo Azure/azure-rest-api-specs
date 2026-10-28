@@ -1,25 +1,44 @@
-name: "SDK Validation - .NET Review Handoff"
+name: "SDK Validation - .NET Bundle Validation"
 
 on:
   check_run:
     types: [completed]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "Pull request number to validate or backfill"
+        required: true
+        type: string
+      build_id:
+        description: "Optional Azure Pipelines build ID to select"
+        required: false
+        type: string
 
 permissions:
   contents: read # for actions/checkout
+  checks: read # for resolving manual backfill check runs
+
+concurrency:
+  group: sdk-validation-dotnet-bundle-validation-${{ github.event.check_run.head_sha || format('{0}-{1}', inputs.pr_number, inputs.build_id || 'latest') }}
+  cancel-in-progress: false
 
 jobs:
-  review-bundle-handoff:
+  validate-review-bundle:
     permissions:
       contents: read
+      checks: read
       pull-requests: read
     if: >-
       (
-        github.event.check_run.app.name == 'Azure Pipelines' ||
-        github.event.check_run.check_suite.app.name == 'Azure Pipelines'
+        github.event_name == 'workflow_dispatch' ||
+        (
+          github.event.check_run.app.name == 'Azure Pipelines' &&
+          github.event.check_run.app.slug == 'azure-pipelines' &&
+          github.event.check_run.name == 'SDK Validation - .NET'
+        )
       ) &&
-      github.event.check_run.name == 'SDK Validation - .NET' &&
       !endsWith(github.repository, '-pr')
-    name: "Review Bundle Handoff (Report-Only)"
+    name: "Validate Review Bundle (Read-Only)"
     runs-on: ubuntu-slim
 
     steps:
@@ -33,13 +52,25 @@ jobs:
         uses: ./.github/actions/install-deps-github-script
 
       - id: review-handoff
-        name: Validate and download SDK review bundle
+        name: Validate bundle identity and download files
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: runSdkValidationDotnetReviewHandoff } =
               await import('${{ github.workspace }}/.github/workflows/src/sdk-validation-dotnet-review-handoff.ts');
             return await runSdkValidationDotnetReviewHandoff({ github, context, core });
+
+      - name: Validate complete patch applicability
+        if: ${{ steps.review-handoff.outputs.handoff_status == 'validated' && steps.review-handoff.outputs.bundle_dir }}
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { default: validatePatchApplicability } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-review-patch-applicability.ts');
+            await validatePatchApplicability({
+              core,
+              bundleDirectory: '${{ steps.review-handoff.outputs.bundle_dir }}',
+            });
 
       - name: Upload validated SDK review bundle
         if: ${{ steps.review-handoff.outputs.handoff_status == 'validated' && steps.review-handoff.outputs.bundle_dir }}

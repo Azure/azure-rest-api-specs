@@ -14,7 +14,7 @@ import {
   type SdkReviewBundleEntry,
   type SdkReviewBundleManifest,
 } from "../../shared/src/sdk-types.ts";
-import { getAzurePipelineArtifact } from "./artifacts.ts";
+import { downloadAzurePipelineArtifactFile, resolveAzurePipelineArtifact } from "./artifacts.ts";
 import type { Context, Core, GitHub, GitHubScriptArgs } from "./github.ts";
 import type { RetryOptions } from "./retries.ts";
 
@@ -23,6 +23,7 @@ export const EXPECTED_AZURE_PIPELINES_APP_NAME = "Azure Pipelines" as const;
 export const EXPECTED_AZURE_PIPELINES_APP_SLUG = "azure-pipelines" as const;
 export const EXPECTED_ADO_HOST = "dev.azure.com" as const;
 export const EXPECTED_ADO_ORG = "azure-sdk" as const;
+export const EXPECTED_ADO_DEFINITION_ID = 7516 as const;
 export const MAX_SDK_REVIEW_MANIFEST_BYTES = 1024 * 1024;
 export const MAX_SDK_REVIEW_PATCH_BYTES = 16 * 1024 * 1024;
 export const MAX_SDK_REVIEW_TOTAL_PATCH_BYTES = 16 * 1024 * 1024;
@@ -53,8 +54,8 @@ const CheckRunEventPayloadSchema = z.object({
   check_run: z.object({
     name: z.string(),
     head_sha: z.string().regex(/^[0-9a-f]{40}$/i, "Expected a 40-char check_run.head_sha"),
-    details_url: z.string().nullable().optional(),
-    external_id: z.string().nullable().optional(),
+    details_url: z.string(),
+    external_id: z.string(),
     status: z.string().optional(),
     conclusion: z.string().nullable().optional(),
     app: CheckRunAppSchema,
@@ -82,6 +83,12 @@ export type ValidatedCheckRunEvent = {
   eventPrNumbers: number[];
 };
 
+export type ResolvedReviewHandoffInvocation = {
+  event: ValidatedCheckRunEvent;
+  prNumber?: number;
+  allowClosedPullRequest: boolean;
+};
+
 export type DownloadedBundleEntry = {
   entry: SdkReviewBundleEntry;
   localPatchPath: string;
@@ -105,8 +112,10 @@ export type SdkReviewHandoffResult = {
 };
 
 /**
- * Validates that an Azure DevOps `details_url` targets `https://dev.azure.com/azure-sdk/<project>/_build/results?buildId=<numeric>`
- * and optionally cross-checks `check_run.external_id` (`<definitionId>|<buildId>|<projectId>`).
+ * Validates that an Azure DevOps `details_url` targets
+ * `https://dev.azure.com/azure-sdk/<project>/_build/results?buildId=<numeric>`.
+ * The required `check_run.external_id` must be exactly
+ * `7516|<details_url buildId>|<details_url project>`.
  */
 export function parseAndValidateAdoBuildDetailsUrl(
   detailsUrl: string | null | undefined,
@@ -154,18 +163,31 @@ export function parseAndValidateAdoBuildDetailsUrl(
     throw new Error(`Invalid or non-numeric buildId '${buildId}' in details_url '${detailsUrl}'`);
   }
 
-  if (externalId) {
-    const externalParts = externalId.split("|");
-    if (externalParts.length >= 2 && externalParts[1] && externalParts[1] !== buildId) {
-      throw new Error(
-        `Mismatch between details_url buildId '${buildId}' and check_run.external_id '${externalId}'`,
-      );
-    }
-    if (externalParts.length >= 3 && externalParts[2] && externalParts[2] !== project) {
-      throw new Error(
-        `Mismatch between details_url project '${project}' and check_run.external_id '${externalId}'`,
-      );
-    }
+  if (!externalId) {
+    throw new Error("Missing check_run.external_id for SDK Validation - .NET");
+  }
+
+  const externalParts = externalId.split("|");
+  if (externalParts.length !== 3 || externalParts.some((part) => part.length === 0)) {
+    throw new Error(
+      `Malformed check_run.external_id '${externalId}' (expected <definitionId>|<buildId>|<projectId>)`,
+    );
+  }
+  const [definitionId, externalBuildId, externalProjectId] = externalParts;
+  if (definitionId !== String(EXPECTED_ADO_DEFINITION_ID)) {
+    throw new Error(
+      `Unexpected Azure Pipelines definition ID '${definitionId}' (expected '${EXPECTED_ADO_DEFINITION_ID}')`,
+    );
+  }
+  if (externalBuildId !== buildId) {
+    throw new Error(
+      `Mismatch between details_url buildId '${buildId}' and check_run.external_id '${externalId}'`,
+    );
+  }
+  if (externalProjectId !== project) {
+    throw new Error(
+      `Mismatch between details_url project '${project}' and check_run.external_id '${externalId}'`,
+    );
   }
 
   return {
@@ -204,22 +226,22 @@ export function validateCheckRunEventPayload(payload: unknown): {
 
   const appName = checkRun.app?.name ?? checkRun.check_suite?.app?.name;
   const appSlug = checkRun.app?.slug ?? checkRun.check_suite?.app?.slug;
-  if (appName && appName !== EXPECTED_AZURE_PIPELINES_APP_NAME) {
+  if (appName !== EXPECTED_AZURE_PIPELINES_APP_NAME) {
     return {
       matched: false,
-      reason: `Ignoring check_run from app '${appName}' (expected '${EXPECTED_AZURE_PIPELINES_APP_NAME}')`,
+      reason: `Ignoring check_run from app '${appName ?? "missing"}' (expected '${EXPECTED_AZURE_PIPELINES_APP_NAME}')`,
     };
   }
-  if (appSlug && appSlug !== EXPECTED_AZURE_PIPELINES_APP_SLUG) {
+  if (appSlug !== EXPECTED_AZURE_PIPELINES_APP_SLUG) {
     return {
       matched: false,
-      reason: `Ignoring check_run from app slug '${appSlug}' (expected '${EXPECTED_AZURE_PIPELINES_APP_SLUG}')`,
+      reason: `Ignoring check_run from app slug '${appSlug ?? "missing"}' (expected '${EXPECTED_AZURE_PIPELINES_APP_SLUG}')`,
     };
   }
-  if (!appName && !appSlug) {
+  if (checkRun.status !== "completed") {
     return {
       matched: false,
-      reason: "Ignoring check_run with missing app identity",
+      reason: `Ignoring non-terminal check_run with status '${checkRun.status ?? "unknown"}'`,
     };
   }
 
@@ -234,6 +256,185 @@ export function validateCheckRunEventPayload(payload: unknown): {
       conclusion: checkRun.conclusion,
       adoBuild,
       eventPrNumbers,
+    },
+  };
+}
+
+const ManualCheckRunSchema = z.object({
+  name: z.string(),
+  head_sha: z.string(),
+  status: z.string(),
+  conclusion: z.string().nullable(),
+  details_url: z.string().nullable(),
+  external_id: z.string().nullable(),
+  completed_at: z.string().nullable(),
+  app: z
+    .object({
+      name: z.string().nullable().optional(),
+      slug: z.string().nullable().optional(),
+    })
+    .nullable(),
+});
+
+function validatePullRequestRepository(
+  context: Context,
+  prNumber: number,
+  pullRequest: {
+    base: { repo?: { full_name?: string | null } | null };
+  },
+): void {
+  const expectedRepository = `${context.repo.owner}/${context.repo.repo}`;
+  const actualRepository = pullRequest.base.repo?.full_name;
+  if (actualRepository && actualRepository.toLowerCase() !== expectedRepository.toLowerCase()) {
+    throw new Error(`PR #${prNumber} targets '${actualRepository}', not '${expectedRepository}'`);
+  }
+}
+
+/**
+ * Resolves a workflow_dispatch request from the trusted PR and check-run APIs.
+ * User input supplies only a PR number and optional build ID; URLs and SHAs are
+ * always taken from GitHub's current PR/check data.
+ */
+export async function resolveManualReviewHandoffInvocation(params: {
+  github: GitHub;
+  context: Context;
+  prNumberInput: unknown;
+  buildIdInput?: unknown;
+}): Promise<ResolvedReviewHandoffInvocation> {
+  const { github, context } = params;
+  const prNumberText = typeof params.prNumberInput === "string" ? params.prNumberInput.trim() : "";
+  if (!/^[1-9]\d*$/.test(prNumberText)) {
+    throw new Error(`Invalid workflow_dispatch pr_number '${prNumberText}'`);
+  }
+  const prNumber = Number.parseInt(prNumberText, 10);
+  if (!Number.isSafeInteger(prNumber)) {
+    throw new Error(`Invalid workflow_dispatch pr_number '${prNumberText}'`);
+  }
+
+  const buildIdText = typeof params.buildIdInput === "string" ? params.buildIdInput.trim() : "";
+  if (buildIdText && !/^[1-9]\d*$/.test(buildIdText)) {
+    throw new Error(`Invalid workflow_dispatch build_id '${buildIdText}'`);
+  }
+
+  const { data: pullRequest } = await github.rest.pulls.get({
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    pull_number: prNumber,
+  });
+  validatePullRequestRepository(context, prNumber, pullRequest);
+  const prHeadSha = pullRequest.head.sha;
+  if (!/^[0-9a-f]{40}$/i.test(prHeadSha)) {
+    throw new Error(`PR #${prNumber} has an invalid head SHA`);
+  }
+
+  const checkRuns = await github.paginate(github.rest.checks.listForRef, {
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    ref: prHeadSha,
+    filter: "all",
+    per_page: 100,
+  });
+  const validationErrors: string[] = [];
+  const matchingEvents: Array<{ event: ValidatedCheckRunEvent; completedAt: string }> = [];
+
+  for (const candidate of checkRuns) {
+    const parsedCandidate = ManualCheckRunSchema.safeParse(candidate);
+    if (!parsedCandidate.success) {
+      continue;
+    }
+    const checkRun = parsedCandidate.data;
+    if (
+      checkRun.name !== EXPECTED_DOTNET_CHECK_NAME ||
+      checkRun.status !== "completed" ||
+      checkRun.conclusion === null ||
+      checkRun.app?.name !== EXPECTED_AZURE_PIPELINES_APP_NAME ||
+      checkRun.app?.slug !== EXPECTED_AZURE_PIPELINES_APP_SLUG
+    ) {
+      continue;
+    }
+    if (checkRun.head_sha.toLowerCase() !== prHeadSha.toLowerCase()) {
+      validationErrors.push(
+        `Check '${checkRun.name}' head '${checkRun.head_sha}' does not match PR head '${prHeadSha}'`,
+      );
+      continue;
+    }
+
+    try {
+      const validation = validateCheckRunEventPayload({
+        check_run: {
+          ...checkRun,
+          pull_requests: [{ number: prNumber, head: { sha: prHeadSha } }],
+        },
+      });
+      if (!validation.matched || !validation.event) {
+        validationErrors.push(validation.reason ?? "Check run did not match");
+        continue;
+      }
+      if (buildIdText && validation.event.adoBuild.buildId !== buildIdText) {
+        continue;
+      }
+      matchingEvents.push({
+        event: validation.event,
+        completedAt: checkRun.completed_at ?? "",
+      });
+    } catch (error) {
+      validationErrors.push(error instanceof Error ? error.message : String(error));
+    }
+  }
+
+  matchingEvents.sort((left, right) => right.completedAt.localeCompare(left.completedAt));
+  const selected = matchingEvents[0];
+  if (!selected) {
+    const buildDescription = buildIdText ? ` build ${buildIdText}` : "";
+    const details = validationErrors.length > 0 ? `: ${validationErrors.join("; ")}` : "";
+    throw new Error(
+      `No matching completed '${EXPECTED_DOTNET_CHECK_NAME}' check found for PR #${prNumber}${buildDescription}${details}`,
+    );
+  }
+
+  return {
+    event: selected.event,
+    prNumber,
+    allowClosedPullRequest: true,
+  };
+}
+
+export async function resolveReviewHandoffInvocation(params: {
+  github: GitHub;
+  context: Context;
+}): Promise<
+  | { matched: true; invocation: ResolvedReviewHandoffInvocation }
+  | { matched: false; reason: string }
+> {
+  const { github, context } = params;
+  if (context.eventName === "workflow_dispatch") {
+    const dispatchPayload = z
+      .object({
+        inputs: z.record(z.string(), z.unknown()).optional(),
+      })
+      .safeParse(context.payload);
+    const inputs = dispatchPayload.success ? (dispatchPayload.data.inputs ?? {}) : {};
+    const invocation = await resolveManualReviewHandoffInvocation({
+      github,
+      context,
+      prNumberInput: inputs.pr_number,
+      buildIdInput: inputs.build_id,
+    });
+    return { matched: true, invocation };
+  }
+
+  const eventValidation = validateCheckRunEventPayload(context.payload);
+  if (!eventValidation.matched || !eventValidation.event) {
+    return {
+      matched: false,
+      reason: eventValidation.reason ?? "Check run did not match target filter",
+    };
+  }
+  return {
+    matched: true,
+    invocation: {
+      event: eventValidation.event,
+      allowClosedPullRequest: false,
     },
   };
 }
@@ -406,27 +607,21 @@ export async function verifyPullRequestFreshness(params: {
   context: Context;
   prNumber: number;
   expectedHeadSha: string;
+  allowClosedPullRequest?: boolean;
 }): Promise<{ currentHeadSha: string; isFresh: boolean; state: string }> {
-  const { github, context, prNumber, expectedHeadSha } = params;
+  const { github, context, prNumber, expectedHeadSha, allowClosedPullRequest = false } = params;
   const { data: pullRequest } = await github.rest.pulls.get({
     owner: context.repo.owner,
     repo: context.repo.repo,
     pull_number: prNumber,
   });
 
-  if (
-    pullRequest.base.repo &&
-    pullRequest.base.repo.full_name.toLowerCase() !==
-      `${context.repo.owner}/${context.repo.repo}`.toLowerCase()
-  ) {
-    throw new Error(
-      `PR #${prNumber} targets '${pullRequest.base.repo.full_name}', not '${context.repo.owner}/${context.repo.repo}'`,
-    );
-  }
+  validatePullRequestRepository(context, prNumber, pullRequest);
 
   const currentHeadSha = pullRequest.head.sha;
   const isFresh =
-    pullRequest.state === "open" && currentHeadSha.toLowerCase() === expectedHeadSha.toLowerCase();
+    (allowClosedPullRequest || pullRequest.state === "open") &&
+    currentHeadSha.toLowerCase() === expectedHeadSha.toLowerCase();
 
   return {
     currentHeadSha,
@@ -493,9 +688,9 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     retryOptions,
   } = options;
 
-  const eventValidation = validateCheckRunEventPayload(context.payload);
-  if (!eventValidation.matched || !eventValidation.event) {
-    const reason = eventValidation.reason ?? "Check run did not match target filter";
+  const resolvedInvocation = await resolveReviewHandoffInvocation({ github, context });
+  if (!resolvedInvocation.matched) {
+    const reason = resolvedInvocation.reason;
     core.info(reason);
     return {
       status: "skipped",
@@ -504,7 +699,7 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     };
   }
 
-  const event = eventValidation.event;
+  const { event, prNumber: manualPrNumber, allowClosedPullRequest } = resolvedInvocation.invocation;
   core.info(
     `Validated check_run '${event.checkName}' for head '${event.headSha}' and Azure Pipelines build '${event.adoBuild.buildId}'`,
   );
@@ -518,6 +713,7 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
       context,
       prNumber: primaryPrNumber,
       expectedHeadSha: event.headSha,
+      allowClosedPullRequest,
     });
     if (!prStatus.isFresh) {
       const reason = `Skipping stale or closed PR #${primaryPrNumber}: state='${prStatus.state}', currentHeadSha='${prStatus.currentHeadSha}', checkRunHeadSha='${event.headSha}'`;
@@ -533,20 +729,17 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     }
   }
 
-  const manifestArtifact = await getAzurePipelineArtifact({
+  const artifactResolution = await resolveAzurePipelineArtifact({
     ado_project_url: event.adoBuild.projectUrl,
     ado_build_id: event.adoBuild.buildId,
     artifactName: SDK_REVIEW_BUNDLE_ARTIFACT_NAME,
-    artifactFileName: SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME,
     token,
     core,
     fallbackToFailedArtifact: true,
     retryOptions,
-    strict: true,
-    maxBytes: MAX_SDK_REVIEW_MANIFEST_BYTES,
   });
 
-  if (manifestArtifact.status === "not-found") {
+  if (artifactResolution.status === "not-found") {
     const reason = `No '${SDK_REVIEW_BUNDLE_ARTIFACT_NAME}' artifact found on build ${event.adoBuild.buildId}`;
     core.info(reason);
     return {
@@ -558,7 +751,14 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     };
   }
 
-  if (Buffer.byteLength(manifestArtifact.artifactData, "utf8") > MAX_SDK_REVIEW_MANIFEST_BYTES) {
+  const manifestArtifactData = await downloadAzurePipelineArtifactFile({
+    artifact: artifactResolution.artifact,
+    artifactFileName: SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME,
+    retryOptions,
+    maxBytes: MAX_SDK_REVIEW_MANIFEST_BYTES,
+  });
+
+  if (Buffer.byteLength(manifestArtifactData, "utf8") > MAX_SDK_REVIEW_MANIFEST_BYTES) {
     throw new Error(
       `'${SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME}' exceeds ${MAX_SDK_REVIEW_MANIFEST_BYTES} bytes`,
     );
@@ -566,7 +766,7 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
 
   let parsedJson: unknown;
   try {
-    parsedJson = JSON.parse(manifestArtifact.artifactData);
+    parsedJson = JSON.parse(manifestArtifactData);
   } catch (error) {
     throw new Error(
       `Invalid JSON in '${SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME}' from build ${event.adoBuild.buildId}`,
@@ -576,6 +776,11 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
 
   const manifest = SdkReviewBundleManifestSchema.parse(parsedJson);
   const prNumber = verifyManifestAgainstCheckRun(manifest, event);
+  if (manualPrNumber !== undefined && manualPrNumber !== prNumber) {
+    throw new Error(
+      `Manifest specPrNumber #${prNumber} does not match workflow_dispatch PR #${manualPrNumber}`,
+    );
+  }
   if (manifest.captureStatus !== "complete") {
     throw new Error(
       `SDK review bundle capture did not complete for build ${event.adoBuild.buildId}`,
@@ -587,6 +792,7 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     context,
     prNumber,
     expectedHeadSha: event.headSha,
+    allowClosedPullRequest,
   });
   if (!prStatus.isFresh) {
     const reason = `Skipping stale or closed PR #${prNumber}: state='${prStatus.state}', currentHeadSha='${prStatus.currentHeadSha}', checkRunHeadSha='${event.headSha}'`;
@@ -611,26 +817,14 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
   let remainingPatchBytes = MAX_SDK_REVIEW_TOTAL_PATCH_BYTES;
   for (const entry of manifest.entries) {
     const localPatchPath = resolveSafeChildPath(bundleDirectory, entry.patchFile);
-    const patchResponse = await getAzurePipelineArtifact({
-      ado_project_url: event.adoBuild.projectUrl,
-      ado_build_id: event.adoBuild.buildId,
-      artifactName: SDK_REVIEW_BUNDLE_ARTIFACT_NAME,
+    const patchData = await downloadAzurePipelineArtifactFile({
+      artifact: artifactResolution.artifact,
       artifactFileName: entry.patchFile,
-      token,
-      core,
-      fallbackToFailedArtifact: true,
       retryOptions,
-      strict: true,
       maxBytes: Math.min(MAX_SDK_REVIEW_PATCH_BYTES, remainingPatchBytes),
     });
 
-    if (patchResponse.status === "not-found") {
-      throw new Error(
-        `Missing patch file '${entry.patchFile}' for entry '${entry.entryId}' in build ${event.adoBuild.buildId}`,
-      );
-    }
-
-    const patchBuffer = Buffer.from(patchResponse.artifactData, "utf8");
+    const patchBuffer = Buffer.from(patchData, "utf8");
     if (patchBuffer.byteLength !== entry.patchBytes) {
       throw new Error(
         `Patch size mismatch for '${entry.patchFile}': expected ${entry.patchBytes} bytes, got ${patchBuffer.byteLength}`,
@@ -644,7 +838,7 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
       );
     }
 
-    verifyPatchPaths(entry, patchResponse.artifactData);
+    verifyPatchPaths(entry, patchData);
     remainingPatchBytes -= patchBuffer.byteLength;
     fs.writeFileSync(localPatchPath, patchBuffer);
     downloadedEntries.push({ entry, localPatchPath });

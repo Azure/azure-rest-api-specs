@@ -11,14 +11,17 @@ import {
   type SdkReviewBundleManifest,
 } from "../../shared/src/sdk-types.ts";
 import {
+  EXPECTED_ADO_DEFINITION_ID,
   MAX_SDK_REVIEW_MANIFEST_BYTES,
   MAX_SDK_REVIEW_TOTAL_PATCH_BYTES,
   parseAndValidateAdoBuildDetailsUrl,
+  resolveManualReviewHandoffInvocation,
   resolveSafeChildPath,
   runSdkValidationDotnetReviewHandoffImpl,
   validateCheckRunEventPayload,
   verifyManifestAgainstCheckRun,
   verifyPatchPaths,
+  verifyPullRequestFreshness,
 } from "../src/sdk-validation-dotnet-review-handoff.ts";
 import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
 
@@ -141,7 +144,32 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     });
 
     it.each([
-      ["missing URL", undefined, undefined, "Missing check_run.details_url"],
+      ["missing URL", undefined, SAMPLE_EXTERNAL_ID, "Missing check_run.details_url"],
+      ["missing external_id", SAMPLE_DETAILS_URL, undefined, "Missing check_run.external_id"],
+      [
+        "malformed external_id",
+        SAMPLE_DETAILS_URL,
+        `${EXPECTED_ADO_DEFINITION_ID}|${SAMPLE_BUILD_ID}`,
+        "Malformed check_run.external_id",
+      ],
+      [
+        "external_id with an empty component",
+        SAMPLE_DETAILS_URL,
+        `${EXPECTED_ADO_DEFINITION_ID}||${SAMPLE_PROJECT_ID}`,
+        "Malformed check_run.external_id",
+      ],
+      [
+        "external_id with an extra component",
+        SAMPLE_DETAILS_URL,
+        `${SAMPLE_EXTERNAL_ID}|extra`,
+        "Malformed check_run.external_id",
+      ],
+      [
+        "wrong definition ID",
+        SAMPLE_DETAILS_URL,
+        `9999|${SAMPLE_BUILD_ID}|${SAMPLE_PROJECT_ID}`,
+        "Unexpected Azure Pipelines definition ID",
+      ],
       [
         "non-HTTPS protocol",
         `http://dev.azure.com/azure-sdk/${SAMPLE_PROJECT_ID}/_build/results?buildId=123`,
@@ -209,6 +237,169 @@ describe("sdk-validation-dotnet-review-handoff", () => {
       );
       expect(result.matched).toBe(false);
       expect(result.reason).toContain("Ignoring check_run from app");
+    });
+  });
+
+  describe("resolveManualReviewHandoffInvocation", () => {
+    function createManualCheck(overrides: Record<string, unknown> = {}) {
+      return {
+        name: "SDK Validation - .NET",
+        head_sha: SAMPLE_HEAD_SHA,
+        status: "completed",
+        conclusion: "success",
+        details_url: SAMPLE_DETAILS_URL,
+        external_id: SAMPLE_EXTERNAL_ID,
+        completed_at: "2026-10-28T20:00:00Z",
+        app: {
+          slug: "azure-pipelines",
+          name: "Azure Pipelines",
+        },
+        ...overrides,
+      };
+    }
+
+    function setupManualResolution(prState: "open" | "closed", checks: unknown[]) {
+      const github = createMockGithub();
+      const context = createMockContext();
+      github.rest.pulls.get.mockResolvedValue({
+        data: {
+          number: 47607,
+          state: prState,
+          merged: prState === "closed",
+          head: { sha: SAMPLE_HEAD_SHA },
+          base: { repo: { full_name: "owner/repo" } },
+        },
+      });
+      github.rest.checks.listForRef.mockResolvedValue({
+        data: { check_runs: checks },
+      });
+      return { github, context };
+    }
+
+    it.each(["open", "closed"] as const)(
+      "resolves a trusted terminal check for a %s PR",
+      async (prState) => {
+        const { github, context } = setupManualResolution(prState, [createManualCheck()]);
+        const result = await resolveManualReviewHandoffInvocation({
+          github,
+          context,
+          prNumberInput: "47607",
+        });
+
+        expect(result.prNumber).toBe(47607);
+        expect(result.allowClosedPullRequest).toBe(true);
+        expect(result.event.adoBuild.buildId).toBe(SAMPLE_BUILD_ID);
+        expect(result.event.headSha).toBe(SAMPLE_HEAD_SHA);
+      },
+    );
+
+    it("allows the manual path, but not the event path, to validate a closed PR head", async () => {
+      const { github, context } = setupManualResolution("closed", []);
+      const eventResult = await verifyPullRequestFreshness({
+        github,
+        context,
+        prNumber: 47607,
+        expectedHeadSha: SAMPLE_HEAD_SHA,
+      });
+      const manualResult = await verifyPullRequestFreshness({
+        github,
+        context,
+        prNumber: 47607,
+        expectedHeadSha: SAMPLE_HEAD_SHA,
+        allowClosedPullRequest: true,
+      });
+
+      expect(eventResult.isFresh).toBe(false);
+      expect(manualResult.isFresh).toBe(true);
+    });
+
+    it("selects the latest completed matching check by default", async () => {
+      const olderBuildId = "6999000";
+      const { github, context } = setupManualResolution("open", [
+        createManualCheck({
+          details_url: SAMPLE_DETAILS_URL.replace(SAMPLE_BUILD_ID, olderBuildId),
+          external_id: `${EXPECTED_ADO_DEFINITION_ID}|${olderBuildId}|${SAMPLE_PROJECT_ID}`,
+          completed_at: "2026-10-27T20:00:00Z",
+        }),
+        createManualCheck(),
+      ]);
+
+      const result = await resolveManualReviewHandoffInvocation({
+        github,
+        context,
+        prNumberInput: "47607",
+      });
+      expect(result.event.adoBuild.buildId).toBe(SAMPLE_BUILD_ID);
+    });
+
+    it("selects an explicitly requested build", async () => {
+      const olderBuildId = "6999000";
+      const { github, context } = setupManualResolution("open", [
+        createManualCheck({
+          details_url: SAMPLE_DETAILS_URL.replace(SAMPLE_BUILD_ID, olderBuildId),
+          external_id: `${EXPECTED_ADO_DEFINITION_ID}|${olderBuildId}|${SAMPLE_PROJECT_ID}`,
+          completed_at: "2026-10-27T20:00:00Z",
+        }),
+        createManualCheck(),
+      ]);
+
+      const result = await resolveManualReviewHandoffInvocation({
+        github,
+        context,
+        prNumberInput: "47607",
+        buildIdInput: olderBuildId,
+      });
+      expect(result.event.adoBuild.buildId).toBe(olderBuildId);
+      expect(github.rest.checks.listForRef).toHaveBeenCalledWith(
+        expect.objectContaining({ filter: "all", ref: SAMPLE_HEAD_SHA }),
+      );
+    });
+
+    it("rejects when no matching terminal check exists", async () => {
+      const { github, context } = setupManualResolution("open", [
+        createManualCheck({ name: "SDK Validation - Java" }),
+      ]);
+      await expect(
+        resolveManualReviewHandoffInvocation({
+          github,
+          context,
+          prNumberInput: "47607",
+        }),
+      ).rejects.toThrow("No matching completed");
+    });
+
+    it("rejects a matching Azure Pipelines check from the wrong definition", async () => {
+      const { github, context } = setupManualResolution("open", [
+        createManualCheck({
+          external_id: `9999|${SAMPLE_BUILD_ID}|${SAMPLE_PROJECT_ID}`,
+        }),
+      ]);
+      await expect(
+        resolveManualReviewHandoffInvocation({
+          github,
+          context,
+          prNumberInput: "47607",
+        }),
+      ).rejects.toThrow("Unexpected Azure Pipelines definition ID");
+    });
+
+    it.each([
+      ["stale head SHA", { head_sha: "f".repeat(40) }],
+      [
+        "mismatched build identity",
+        {
+          external_id: `${EXPECTED_ADO_DEFINITION_ID}|9999999|${SAMPLE_PROJECT_ID}`,
+        },
+      ],
+    ])("rejects %s", async (_label, overrides) => {
+      const { github, context } = setupManualResolution("open", [createManualCheck(overrides)]);
+      await expect(
+        resolveManualReviewHandoffInvocation({
+          github,
+          context,
+          prNumberInput: "47607",
+        }),
+      ).rejects.toThrow("No matching completed");
     });
   });
 
@@ -418,6 +609,11 @@ describe("sdk-validation-dotnet-review-handoff", () => {
         expect.stringContaining("SDK Validation - .NET Review Bundle Handoff (Report-Only)"),
       );
       expect(mockCore.summary.write).toHaveBeenCalledOnce();
+      expect(
+        mockFetch.mock.calls.filter(([url]) =>
+          String(url).includes(`artifacts?artifactName=${SDK_REVIEW_BUNDLE_ARTIFACT_NAME}`),
+        ),
+      ).toHaveLength(1);
 
       // Report-only guarantee: no comments, labels, or status mutations
       expect(mockGithub.rest.issues.createComment).not.toHaveBeenCalled();
