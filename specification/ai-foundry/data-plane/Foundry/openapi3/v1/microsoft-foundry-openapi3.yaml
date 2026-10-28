@@ -47642,9 +47642,9 @@ components:
           enum:
             - simple_qna
             - traces
-            - conversations
             - tool_use
             - simulation_seed
+            - conversations
       description: The supported data generation job types.
     DataGenerationModelOptions:
       type: object
@@ -47684,12 +47684,19 @@ components:
         - message
       properties:
         code:
-          type: string
+          $ref: '#/components/schemas/DataGenerationWarningCode'
           description: The warning code.
         message:
           type: string
           description: A safe, human-readable warning message that does not include raw provider or model error bodies.
       description: A nonfatal warning associated with data generation output.
+    DataGenerationWarningCode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - TestCaseDescriptionGenerationIncomplete
+      description: Known warning codes for data generation jobs. Additional codes may be returned.
     DataSourceConfig:
       type: object
       required:

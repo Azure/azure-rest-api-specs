@@ -21,14 +21,14 @@ union DataGenerationJobType {
   @doc("Samples from captured turns in agent traces.")
   traces: "traces",
 
-  @doc("Reconstruction of existing traced conversations for evaluation. This is a preview feature, not synthetic conversation simulation.")
-  conversations: "conversations",
-
   @doc("Tool calling conversation between user and agent.")
   tool_use: "tool_use",
 
   @doc("Simulation seed for evaluation scenarios.")
   simulation_seed: "simulation_seed",
+
+  @doc("Reconstruction of existing traced conversations for evaluation. This is a preview feature, not synthetic conversation simulation.")
+  conversations: "conversations",
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
@@ -158,10 +158,18 @@ model DataGenerationJobResult {
 @doc("A nonfatal warning associated with data generation output.")
 model DataGenerationWarning {
   @doc("The warning code.")
-  code?: string;
+  code?: DataGenerationWarningCode;
 
   @doc("A safe, human-readable warning message that does not include raw provider or model error bodies.")
   message: string;
+}
+
+@doc("Known warning codes for data generation jobs. Additional codes may be returned.")
+union DataGenerationWarningCode {
+  string,
+
+  @doc("Conversation rows were produced, but one or more optional test-case descriptions could not be generated.")
+  TestCaseDescriptionGenerationIncomplete: "TestCaseDescriptionGenerationIncomplete",
 }
 
 @doc("Data Generation Job resource.")

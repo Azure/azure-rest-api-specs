@@ -44620,9 +44620,9 @@
             "enum": [
               "simple_qna",
               "traces",
-              "conversations",
               "tool_use",
-              "simulation_seed"
+              "simulation_seed",
+              "conversations"
             ]
           }
         ],
@@ -44677,7 +44677,7 @@
         ],
         "properties": {
           "code": {
-            "type": "string",
+            "$ref": "#/components/schemas/DataGenerationWarningCode",
             "description": "The warning code."
           },
           "message": {
@@ -44686,6 +44686,20 @@
           }
         },
         "description": "A nonfatal warning associated with data generation output."
+      },
+      "DataGenerationWarningCode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "TestCaseDescriptionGenerationIncomplete"
+            ]
+          }
+        ],
+        "description": "Known warning codes for data generation jobs. Additional codes may be returned."
       },
       "DataSourceConfig": {
         "type": "object",

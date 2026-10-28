@@ -23,6 +23,13 @@ for (const version of ["v1", "virtual-public-preview"]) {
   const conversations = schemas.ConversationsDataGenerationJobConfiguration;
   const traces = schemas.TracesDataGenerationJobConfiguration;
 
+  test(`${version}: conversation job type is appended after existing job types`, () => {
+    assert.deepEqual(
+      schemas.DataGenerationJobType.anyOf.find((variant) => variant.enum).enum,
+      ["simple_qna", "traces", "tool_use", "simulation_seed", "conversations"],
+    );
+  });
+
   test(`${version}: description generation is conversation-only and rubric generation is limited to traces and conversations`, () => {
     for (const [name, schema] of Object.entries(schemas)) {
       if (!name.endsWith("DataGenerationJobConfiguration")) continue;
@@ -231,13 +238,23 @@ for (const version of ["v1", "virtual-public-preview"]) {
     assert.deepEqual(header.schema.enum, ["DataGenerationJobs=V1Preview"]);
   });
 
-  test(`${version}: warning codes are optional unrestricted strings`, () => {
+  test(`${version}: warning codes expose known values while remaining open to future strings`, () => {
     const warning = schemas.DataGenerationWarning;
-    assert.equal(warning.properties.code.type, "string");
-    assert(!Object.hasOwn(warning.properties.code, "enum"));
-    assert(!Object.hasOwn(warning.properties.code, "$ref"));
+    assert.equal(
+      warning.properties.code.$ref,
+      "#/components/schemas/DataGenerationWarningCode",
+    );
+    const variants = schemas.DataGenerationWarningCode.anyOf;
+    assert(
+      variants.some(
+        (variant) => variant.type === "string" && !Object.hasOwn(variant, "enum"),
+      ),
+    );
+    assert.deepEqual(
+      variants.find((variant) => variant.enum).enum,
+      ["TestCaseDescriptionGenerationIncomplete"],
+    );
     assert.deepEqual(warning.required, ["message"]);
-    assert(!Object.hasOwn(schemas, "DataGenerationWarningCode"));
     assert.equal(
       schemas.DataGenerationJobResult.properties.warnings.items.$ref,
       "#/components/schemas/DataGenerationWarning",
