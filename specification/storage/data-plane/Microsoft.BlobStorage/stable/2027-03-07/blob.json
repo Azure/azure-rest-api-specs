@@ -2957,14 +2957,18 @@
           "in": "query",
           "required": true,
           "type": "string",
-          "enum": ["container"]
+          "enum": [
+            "container"
+          ]
         },
         {
           "name": "comp",
           "in": "query",
           "required": true,
           "type": "string",
-          "enum": ["session"]
+          "enum": [
+            "session"
+          ]
         }
       ]
     },
@@ -11567,7 +11571,9 @@
     },
     "AuthenticationType": {
       "type": "string",
-      "enum": ["HMAC"],
+      "enum": [
+        "HMAC"
+      ],
       "x-ms-enum": {
         "name": "AuthenticationType",
         "modelAsString": true
@@ -11576,7 +11582,9 @@
     },
     "CreateSessionRequest": {
       "type": "object",
-      "required": ["AuthenticationType"],
+      "required": [
+        "AuthenticationType"
+      ],
       "x-ms-client-name": "CreateSessionConfiguration",
       "xml": {
         "name": "CreateSessionRequest"
@@ -12609,82 +12617,121 @@
     },
     "BlobLayout": {
       "type": "object",
-      "xml": { "name": "BlobLayout" },
+      "xml": {
+        "name": "BlobLayout"
+      },
       "properties": {
         "Ranges": {
           "type": "object",
-          "xml": { "name": "Ranges" },
+          "xml": {
+            "name": "Ranges"
+          },
           "properties": {
             "Range": {
               "type": "array",
-              "xml": { "name": "Range", "wrapped": false },
+              "xml": {
+                "name": "Range",
+                "wrapped": false
+              },
               "items": {
                 "type": "object",
-                "xml": { "name": "Range" },
+                "xml": {
+                  "name": "Range"
+                },
                 "properties": {
                   "Start": {
                     "type": "integer",
                     "format": "int64",
-                    "xml": { "attribute": true },
+                    "xml": {
+                      "attribute": true
+                    },
                     "description": "The start byte offset of the range."
                   },
                   "End": {
                     "type": "integer",
                     "format": "int64",
-                    "xml": { "attribute": true },
+                    "xml": {
+                      "attribute": true
+                    },
                     "description": "The end byte offset of the range."
                   },
                   "EndpointIndex": {
                     "type": "integer",
-                    "xml": { "attribute": true },
+                    "xml": {
+                      "attribute": true
+                    },
                     "description": "Index into the Endpoints array indicating which endpoint serves this range."
                   }
                 },
-                "required": ["Start", "End", "EndpointIndex"]
+                "required": [
+                  "Start",
+                  "End",
+                  "EndpointIndex"
+                ]
               }
             }
           }
         },
         "Endpoints": {
           "type": "object",
-          "xml": { "name": "Endpoints" },
+          "xml": {
+            "name": "Endpoints"
+          },
           "properties": {
             "Endpoint": {
               "type": "array",
-              "xml": { "name": "Endpoint", "wrapped": false },
+              "xml": {
+                "name": "Endpoint",
+                "wrapped": false
+              },
               "items": {
                 "type": "object",
-                "xml": { "name": "Endpoint" },
+                "xml": {
+                  "name": "Endpoint"
+                },
                 "properties": {
                   "Index": {
                     "type": "integer",
-                    "xml": { "attribute": true },
+                    "xml": {
+                      "attribute": true
+                    },
                     "description": "The index of the endpoint, referenced by Range elements."
                   },
                   "Value": {
                     "type": "string",
-                    "xml": { "attribute": true },
+                    "xml": {
+                      "attribute": true
+                    },
                     "description": "The host:port of the endpoint."
                   }
                 },
-                "required": ["Index", "Value"]
+                "required": [
+                  "Index",
+                  "Value"
+                ]
               }
             }
           }
         },
         "Marker": {
           "type": "string",
-          "xml": { "name": "Marker" },
+          "xml": {
+            "name": "Marker"
+          },
           "description": "The continuation marker used for this request."
         },
         "NextMarker": {
           "type": "string",
-          "xml": { "name": "NextMarker" },
+          "xml": {
+            "name": "NextMarker"
+          },
           "description": "If the number of ranges exceeds MaxResults, a NextMarker is returned for use in subsequent requests to continue listing."
         },
         "MaxResults": {
           "type": "integer",
-          "xml": { "name": "MaxResults" },
+          "xml": {
+            "name": "MaxResults"
+          },
           "description": "The maximum number of ranges to return per request."
         }
       }
