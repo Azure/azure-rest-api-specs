@@ -1334,10 +1334,8 @@ model BatchAccountProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The ARM @identifiers decorator rejects nullable arrays; emit identifiers explicitly to preserve nullability and array-item metadata."
   @added(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
   dedicatedCoreQuotaPerVMFamily?: VirtualMachineFamilyCoreQuota[] | null;
 
   /**
