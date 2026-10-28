@@ -125,6 +125,9 @@
     },
     {
       "name": "Fabrics"
+    },
+    {
+      "name": "FabricDelegations"
     }
   ],
   "paths": {
@@ -2239,6 +2242,350 @@
         "x-ms-examples": {
           "Fabrics_Delete_MaximumSet_Gen": {
             "$ref": "./examples/Fabrics_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/fabrics/{fabricName}/delegations": {
+      "get": {
+        "operationId": "FabricDelegations_ListByFabric",
+        "tags": [
+          "FabricDelegations"
+        ],
+        "description": "Lists FabricDelegations by Fabric.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Name of the Fabric.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FabricDelegationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FabricDelegations_ListByFabric": {
+            "$ref": "./examples/FabricDelegations_ListByFabric.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/fabrics/{fabricName}/delegations/{delegationName}": {
+      "get": {
+        "operationId": "FabricDelegations_Get",
+        "tags": [
+          "FabricDelegations"
+        ],
+        "description": "Gets the specified FabricDelegation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Name of the Fabric.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          },
+          {
+            "name": "delegationName",
+            "in": "path",
+            "description": "Name of the FabricDelegation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FabricDelegation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FabricDelegations_Get": {
+            "$ref": "./examples/FabricDelegations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FabricDelegations_Create",
+        "tags": [
+          "FabricDelegations"
+        ],
+        "description": "Creates a FabricDelegation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Name of the Fabric.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          },
+          {
+            "name": "delegationName",
+            "in": "path",
+            "description": "Name of the FabricDelegation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FabricDelegation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FabricDelegation' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FabricDelegation"
+            }
+          },
+          "201": {
+            "description": "Resource 'FabricDelegation' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FabricDelegation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FabricDelegations_Create": {
+            "$ref": "./examples/FabricDelegations_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "FabricDelegations_Update",
+        "tags": [
+          "FabricDelegations"
+        ],
+        "description": "Updates a FabricDelegation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Name of the Fabric.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          },
+          {
+            "name": "delegationName",
+            "in": "path",
+            "description": "Name of the FabricDelegation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "FabricDelegation properties to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FabricDelegationPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FabricDelegation"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FabricDelegations_Update": {
+            "$ref": "./examples/FabricDelegations_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FabricDelegations_Delete",
+        "tags": [
+          "FabricDelegations"
+        ],
+        "description": "Deletes the specified FabricDelegation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Name of the Fabric.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          },
+          {
+            "name": "delegationName",
+            "in": "path",
+            "description": "Name of the FabricDelegation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FabricDelegations_Delete": {
+            "$ref": "./examples/FabricDelegations_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -14470,6 +14817,30 @@
         }
       }
     },
+    "AuthorizationState": {
+      "type": "string",
+      "description": "Authorization lifecycle state served to tenant-local projections.",
+      "enum": [
+        "Active",
+        "Revoked"
+      ],
+      "x-ms-enum": {
+        "name": "AuthorizationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Authorization is active."
+          },
+          {
+            "name": "Revoked",
+            "value": "Revoked",
+            "description": "Authorization has been revoked."
+          }
+        ]
+      }
+    },
     "AuthorizedTransceiverPatchProperties": {
       "type": "object",
       "description": "Authorized Transceiver Patch Properties.",
@@ -16190,38 +16561,32 @@
         }
       }
     },
-    "ConnectivityModel": {
+    "ConnectivityState": {
       "type": "string",
-      "description": "Connectivity model for EdgeConnector.",
+      "description": "Connectivity state of the EdgeConnector.",
       "enum": [
-        "none",
-        "direct",
-        "arcProxy",
-        "expressRoute"
+        "Connected",
+        "Disconnected",
+        "Pending"
       ],
       "x-ms-enum": {
-        "name": "ConnectivityModel",
+        "name": "ConnectivityState",
         "modelAsString": true,
         "values": [
           {
-            "name": "none",
-            "value": "none",
-            "description": "No connectivity."
+            "name": "Connected",
+            "value": "Connected",
+            "description": "Connected and ready to receive requests."
           },
           {
-            "name": "direct",
-            "value": "direct",
-            "description": "Direct IP reachability."
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "Not connected."
           },
           {
-            "name": "arcProxy",
-            "value": "arcProxy",
-            "description": "Arc Proxy tunnel."
-          },
-          {
-            "name": "expressRoute",
-            "value": "expressRoute",
-            "description": "ExpressRoute private peering."
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Connection pending."
           }
         ]
       }
@@ -17085,13 +17450,14 @@
       "type": "object",
       "description": "EdgeConnector patchable properties.",
       "properties": {
-        "connectivityModel": {
-          "$ref": "#/definitions/ConnectivityModel",
-          "description": "How the EdgeConnector establishes connectivity to on-prem infrastructure."
+        "connectivity": {
+          "$ref": "#/definitions/PatchConnectivityConfig",
+          "description": "Connectivity configuration."
         },
-        "version": {
+        "description": {
           "type": "string",
-          "description": "Software version of the control plane."
+          "description": "Free-text description. Max 1024 characters.",
+          "maxLength": 1024
         }
       }
     },
@@ -17099,29 +17465,18 @@
       "type": "object",
       "description": "EdgeConnectorProperties defines the resource properties.",
       "properties": {
-        "connectivityModel": {
-          "$ref": "#/definitions/ConnectivityModel",
-          "description": "How the EdgeConnector establishes connectivity to on-prem infrastructure."
+        "connectivity": {
+          "$ref": "#/definitions/PatchConnectivityConfig",
+          "description": "Connectivity configuration."
         },
-        "version": {
+        "description": {
           "type": "string",
-          "description": "Software version of the control plane."
+          "description": "Free-text description. Max 1024 characters.",
+          "maxLength": 1024
         },
-        "managedFabricIds": {
-          "type": "array",
-          "description": "ARM resource IDs of Fabric resources managed by this EdgeConnector.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.ManagedNetworkFabric/fabrics"
-                }
-              ]
-            }
-          },
+        "connectivityState": {
+          "$ref": "#/definitions/ConnectivityState",
+          "description": "Whether the target destination is connected and ready to receive requests.",
           "readOnly": true
         },
         "provisioningState": {
@@ -18047,6 +18402,190 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
+      ]
+    },
+    "FabricDelegation": {
+      "type": "object",
+      "description": "Defines the FabricDelegation resource. A FabricDelegation is a provider-side authorization that projects Fabric routing-domain policy into one customer resource group.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FabricDelegationProperties",
+          "description": "The FabricDelegation properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "FabricDelegationListResult": {
+      "type": "object",
+      "description": "The response of a FabricDelegation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FabricDelegation items on this page",
+          "items": {
+            "$ref": "#/definitions/FabricDelegation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FabricDelegationPatch": {
+      "type": "object",
+      "description": "The FabricDelegation patch resource definition.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/FabricDelegationPatchableProperties",
+          "description": "FabricDelegation patchable properties."
+        }
+      }
+    },
+    "FabricDelegationPatchableProperties": {
+      "type": "object",
+      "description": "FabricDelegation patchable properties.",
+      "properties": {
+        "routingDomainBudget": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum active plus cleanup-pending routing domains under this authorization.",
+          "minimum": 0
+        },
+        "defaultRoutingDomainLimits": {
+          "$ref": "#/definitions/PatchRoutingDomainGrantLimits",
+          "description": "CSP-owned limits snapshotted by future Vrf delegations created from this authorization."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "description": "Optional normalized private IPv4 prefixes that constrain customer-requested routing domains.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedEgressNetworks": {
+          "type": "array",
+          "description": "Provider-neutral egress labels a customer-created Vrf may select.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "administrativeState": {
+          "$ref": "#/definitions/AdministrativeState",
+          "description": "Enabled publishes the grant; Disabled blocks new use and starts fail-closed revocation."
+        }
+      }
+    },
+    "FabricDelegationProperties": {
+      "type": "object",
+      "description": "Provider-side authorization that projects Fabric routing-domain policy into one customer resource group.",
+      "properties": {
+        "customerSubscriptionId": {
+          "type": "string",
+          "description": "Customer subscription authorized to consume routing domains from this Fabric. Required and immutable after creation.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "customerTenantId": {
+          "type": "string",
+          "description": "Customer Entra tenant that owns customerSubscriptionId. Required and immutable after creation.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "customerResourceGroupName": {
+          "type": "string",
+          "description": "Exact customer resource group that receives the tenant-local authorization. Required and immutable after creation.",
+          "minLength": 1,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "routingDomainBudget": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum active plus cleanup-pending routing domains under this authorization.",
+          "minimum": 0
+        },
+        "defaultRoutingDomainLimits": {
+          "$ref": "#/definitions/RoutingDomainGrantLimits",
+          "description": "CSP-owned limits snapshotted by future Vrf delegations created from this authorization."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "description": "Optional normalized private IPv4 prefixes that constrain customer-requested routing domains.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedEgressNetworks": {
+          "type": "array",
+          "description": "Provider-neutral egress labels a customer-created Vrf may select. Empty authorizes private-only routing domains.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "administrativeState": {
+          "$ref": "#/definitions/AdministrativeState",
+          "description": "Enabled publishes the grant; Disabled blocks new use and starts fail-closed revocation."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Service-populated ARM provisioning state.",
+          "readOnly": true
+        },
+        "authorizationState": {
+          "$ref": "#/definitions/AuthorizationState",
+          "description": "Authorization lifecycle state served to tenant-local projections.",
+          "readOnly": true
+        },
+        "activeRoutingDomains": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of held routing-domain claims that are live and not cleanup-pending.",
+          "minimum": 0,
+          "readOnly": true
+        },
+        "availableRoutingDomains": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Routing-domain budget still free for new use: budget minus active minus cleanup-pending.",
+          "minimum": 0,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "customerSubscriptionId",
+        "customerTenantId",
+        "customerResourceGroupName",
+        "routingDomainBudget",
+        "defaultRoutingDomainLimits",
+        "allowedEgressNetworks",
+        "administrativeState"
       ]
     },
     "FabricListResult": {
@@ -26201,6 +26740,28 @@
         }
       }
     },
+    "PatchConnectivityConfig": {
+      "type": "object",
+      "description": "Connectivity configuration for PATCH.",
+      "properties": {
+        "tunnelType": {
+          "$ref": "#/definitions/TunnelType",
+          "description": "How connectivity is established."
+        },
+        "customLocationId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the Custom Location where the RP projects CRDs.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ExtendedLocation/customLocations"
+              }
+            ]
+          }
+        }
+      }
+    },
     "PatchInfraNetwork": {
       "type": "object",
       "description": "Infrastructure network definition for PATCH. All fields optional.",
@@ -26307,6 +26868,34 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "PatchRoutingDomainGrantLimits": {
+      "type": "object",
+      "description": "Per-routing-domain authorization limits for PATCH. All fields optional.",
+      "properties": {
+        "vlanBudget": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum managed segments authorized in this routing domain.",
+          "minimum": 0
+        },
+        "publicIpAllowance": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum concurrently bound PublicIPAddress resources.",
+          "minimum": 0
+        },
+        "managedNatEnabled": {
+          "$ref": "#/definitions/BooleanEnumProperty",
+          "description": "Whether this Vrf grant permits one managed NatGateway/default edge."
+        },
+        "maxSnatPorts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum SNAT ports authorized for the one managed NatGateway. Must be zero when managedNatEnabled is False.",
+          "minimum": 0
         }
       }
     },
@@ -27319,6 +27908,40 @@
         ]
       }
     },
+    "RoutingDomainGrantLimits": {
+      "type": "object",
+      "description": "Per-routing-domain authorization limits.",
+      "properties": {
+        "vlanBudget": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum managed segments authorized in this routing domain.",
+          "minimum": 0
+        },
+        "publicIpAllowance": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum concurrently bound PublicIPAddress resources.",
+          "minimum": 0
+        },
+        "managedNatEnabled": {
+          "$ref": "#/definitions/BooleanEnumProperty",
+          "description": "Whether this Vrf grant permits one managed NatGateway/default edge."
+        },
+        "maxSnatPorts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum SNAT ports authorized for the one managed NatGateway. Must be zero when managedNatEnabled is False.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "vlanBudget",
+        "publicIpAllowance",
+        "managedNatEnabled",
+        "maxSnatPorts"
+      ]
+    },
     "RuleCondition": {
       "type": "string",
       "description": "Specify Rule condition.",
@@ -28192,6 +28815,24 @@
           "type": "string",
           "description": "Secondary IPv6 Address Prefix."
         }
+      }
+    },
+    "TunnelType": {
+      "type": "string",
+      "description": "Tunnel type for EdgeConnector connectivity.",
+      "enum": [
+        "direct"
+      ],
+      "x-ms-enum": {
+        "name": "TunnelType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "direct",
+            "value": "direct",
+            "description": "Customer-managed connectivity — the RP does not orchestrate the tunnel."
+          }
+        ]
       }
     },
     "UniqueRouteDistinguisherConfigurationState": {
