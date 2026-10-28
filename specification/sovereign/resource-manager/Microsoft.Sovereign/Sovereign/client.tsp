@@ -3,4 +3,4 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.Sovereign, "SovereignManagementClient", "python");
+@@clientName(Microsoft.Sovereign, "SovereignMgmtClient", "python");
