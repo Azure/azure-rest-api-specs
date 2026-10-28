@@ -6025,7 +6025,7 @@
         },
         "identity": {
           "$ref": "#/definitions/VaultIdentity",
-          "description": "Managed service identity"
+          "description": "The identity of the Vault, if configured."
         }
       },
       "required": [
@@ -6154,7 +6154,7 @@
         },
         "userAssignedIdentities": {
           "type": "object",
-          "description": "User-assigned identities keyed by their Azure resource IDs. This dictionary can be omitted when type is UserAssigned. When type is None, this dictionary must be omitted or empty; nonempty entries are rejected. Values can be empty objects in requests and cannot be null.",
+          "description": "The list of user identities associated with the Vault. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "additionalProperties": {
             "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
           }
@@ -6219,7 +6219,7 @@
         },
         "userAssignedIdentities": {
           "type": "object",
-          "description": "User-assigned identities keyed by their Azure resource IDs. When type is UserAssigned, this dictionary can be omitted to retain existing identities. When type is None, this dictionary must be omitted or empty; nonempty entries are rejected. Empty objects add or retain identities without removing other existing identities. Null entries remove only the specified identities. Existing identities omitted from the dictionary remain unchanged when type is UserAssigned.",
+          "description": "The list of user identities associated with the Vault. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "additionalProperties": {
             "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
             "x-nullable": true

@@ -1038,8 +1038,10 @@ model VaultIdentity {
   /** The type of managed identity assigned to the vault. */
   type: VaultIdentityType;
 
-  /** User-assigned identities keyed by their Azure resource IDs. This dictionary can be omitted when type is UserAssigned. When type is None, this dictionary must be omitted or empty; nonempty entries are rejected. Values can be empty objects in requests and cannot be null. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The ARM user-assigned identity wire format requires dynamic identity resource IDs as dictionary keys; fixed properties cannot represent them. PUT rejects null entries, so its dictionary values must be non-null."
+  /**
+   * The list of user identities associated with the Vault. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   userAssignedIdentities?: Record<CommonTypes.UserAssignedIdentity>;
 }
 
@@ -1049,8 +1051,10 @@ model VaultPatchIdentity {
   /** The type of managed identity assigned to the vault. When omitted, the existing identity type remains unchanged. */
   type?: VaultIdentityType;
 
-  /** User-assigned identities keyed by their Azure resource IDs. When type is UserAssigned, this dictionary can be omitted to retain existing identities. When type is None, this dictionary must be omitted or empty; nonempty entries are rejected. Empty objects add or retain identities without removing other existing identities. Null entries remove only the specified identities. Existing identities omitted from the dictionary remain unchanged when type is UserAssigned. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The ARM user-assigned identity wire format requires dynamic identity resource IDs as dictionary keys; fixed properties cannot represent them. PATCH requires nullable values to remove individual identities while preserving omitted entries."
+  /**
+   * The list of user identities associated with the Vault. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   userAssignedIdentities?: Record<CommonTypes.UserAssignedIdentity | null>;
 }
 
