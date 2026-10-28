@@ -16,12 +16,10 @@ import {
   type ReadmeTag,
 } from "./diff-types.ts";
 
-import { Label, type LabelContext, PRType } from "./labelling-types.ts";
-
 import { type ImpactAssessment } from "./ImpactAssessment.ts";
 import { PRContext } from "./PRContext.ts";
 
-import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files";
+import { dataPlane, resourceManager, tspconfig } from "@azure-tools/specs-shared/changed-files";
 import { Readme } from "@azure-tools/specs-shared/readme";
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
@@ -87,30 +85,26 @@ export async function isNewApiVersion(context: PRContext): Promise<boolean> {
 
 export async function evaluateImpact(
   context: PRContext,
-  labelContext: LabelContext,
   mainSpecFolders: string[],
 ): Promise<ImpactAssessment> {
-  const typeSpecLabelShouldBePresent = await processTypeSpec(context, labelContext);
+  const typeSpecLabelShouldBePresent = await processTypeSpec(context);
 
   // examine changed files. if changedpaths includes data-plane, add "data-plane"
   // same for "resource-manager". We care about whether resourcemanager will be present for a later check
-  const { resourceManagerLabelShouldBePresent, dataPlaneShouldBePresent } = await processPRType(
-    context,
-    labelContext,
-  );
+  const { resourceManagerLabelShouldBePresent, dataPlaneShouldBePresent } =
+    await processPRType(context);
 
   // Has to be run in a PR context. Uses addition and update to understand
   // if the suppressions have been changed. If they have, suppressionReviewRequired must be added
   // as a label
-  const suppressionRequired = await processSuppression(context, labelContext);
+  const suppressionRequired = await processSuppression(context);
 
   // needs to examine "after" context to understand if a readme that was changed is RPaaS or not
-  const { rpaasLabelShouldBePresent } = await processRPaaS(context, labelContext);
+  const { rpaasLabelShouldBePresent } = await processRPaaS(context);
 
   // Has to be in PR context. Uses the addition to understand if the newRPNamespace label should be present.
   const { newRPNamespaceLabelShouldBePresent } = await processNewRPNamespace(
     context,
-    labelContext,
     resourceManagerLabelShouldBePresent,
   );
 
@@ -120,7 +114,6 @@ export async function evaluateImpact(
   const ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent =
     await processNewRpNamespaceWithoutRpaasLabel(
       context,
-      labelContext,
       resourceManagerLabelShouldBePresent,
       newRPNamespaceLabelShouldBePresent,
       rpaasLabelShouldBePresent,
@@ -130,7 +123,6 @@ export async function evaluateImpact(
   const { ciRpaasRPNotInPrivateRepoLabelShouldBePresent } =
     await processRpaasRpNotInPrivateRepoLabel(
       context,
-      labelContext,
       resourceManagerLabelShouldBePresent,
       rpaasLabelShouldBePresent,
       mainSpecFolders,
@@ -154,7 +146,7 @@ export async function evaluateImpact(
 }
 
 export function isManagementPR(filePaths: string[]): boolean {
-  return filePaths.some(resourceManager);
+  return filePaths.some((file) => resourceManager(file) && !tspconfig(file));
 }
 
 export function isDataPlanePR(filePaths: string[]): boolean {
@@ -235,17 +227,15 @@ export const getResourceProviderFromFilePath = (filePath: string): string | unde
   return undefined;
 };
 
-async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Promise<boolean> {
+async function processTypeSpec(ctx: PRContext): Promise<boolean> {
   console.log("ENTER definition processTypeSpec");
-  const typeSpecLabel = new Label("TypeSpec");
-  // By default this label should not be present. We may determine later in this function that it should be present after all.
-  typeSpecLabel.shouldBePresent = false;
+  let typeSpecChanged = false;
   const handlers: ChangeHandler[] = [];
   const typeSpecFileHandler = () => {
     return () => {
       // Note: this code will be executed if the PR has a diff on a TypeSpec file,
       // as defined in public/swagger-validation-common/src/context.ts/defaultFilePatterns/typespec
-      typeSpecLabel.shouldBePresent = true;
+      typeSpecChanged = true;
     };
   };
   const swaggerFileHandler = () => {
@@ -254,7 +244,7 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
         prChange.changeType !== ChangeTypes.Deletion &&
         isSwaggerGeneratedByTypeSpec(prChange.filePath)
       ) {
-        typeSpecLabel.shouldBePresent = true;
+        typeSpecChanged = true;
       }
     };
   };
@@ -263,10 +253,9 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
     SwaggerFile: swaggerFileHandler(),
   });
   await processPrChanges(ctx, handlers);
-  typeSpecLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processTypeSpec");
 
-  return typeSpecLabel.shouldBePresent;
+  return typeSpecChanged;
 }
 
 function isSwaggerGeneratedByTypeSpec(swaggerFilePath: string): boolean {
@@ -371,41 +360,17 @@ export async function getPRChanges(ctx: PRContext): Promise<PRChange[]> {
 // https://github.com/Azure/azure-sdk-tools/issues/8144
 async function processPRType(
   context: PRContext,
-  labelContext: LabelContext,
 ): Promise<{ resourceManagerLabelShouldBePresent: boolean; dataPlaneShouldBePresent: boolean }> {
-  console.log("ENTER definition processPRType");
-  const types: PRType[] = await getPRType(context);
-
-  const resourceManagerLabelShouldBePresent = processPRTypeLabel(
-    PRType.ResourceManager,
-    types,
-    labelContext,
-  );
-  const dataPlaneShouldBePresent = processPRTypeLabel(PRType.DataPlane, types, labelContext);
-
-  console.log("RETURN definition processPRType");
-  return { resourceManagerLabelShouldBePresent, dataPlaneShouldBePresent };
-}
-
-async function getPRType(context: PRContext): Promise<PRType[]> {
-  console.log("ENTER definition getPRType");
   const prChanges: PRChange[] = await getPRChanges(context);
 
   logPRChanges(prChanges);
 
   const changedFilePaths: string[] = prChanges.map((it) => it.filePath);
 
-  const prTypes: PRType[] = [];
-  if (changedFilePaths.length > 0) {
-    if (isDataPlanePR(changedFilePaths)) {
-      prTypes.push(PRType.DataPlane);
-    }
-    if (isManagementPR(changedFilePaths)) {
-      prTypes.push(PRType.ResourceManager);
-    }
-  }
-  console.log("RETURN definition getPRType");
-  return prTypes;
+  return {
+    resourceManagerLabelShouldBePresent: isManagementPR(changedFilePaths),
+    dataPlaneShouldBePresent: isDataPlanePR(changedFilePaths),
+  };
 
   function logPRChanges(prChanges: PRChange[]) {
     console.log(`PR changes table (count: ${prChanges.length}):`);
@@ -421,24 +386,10 @@ async function getPRType(context: PRContext): Promise<PRType[]> {
   }
 }
 
-function processPRTypeLabel(
-  labelName: PRType,
-  types: PRType[],
-  labelContext: LabelContext,
-): boolean {
-  const label = new Label(labelName);
-  label.shouldBePresent = types.includes(labelName);
-
-  label.applyStateChange(labelContext.toAdd, labelContext.toRemove);
-  return label.shouldBePresent;
-}
-
-async function processSuppression(context: PRContext, labelContext: LabelContext) {
+async function processSuppression(context: PRContext) {
   console.log("ENTER definition processSuppression");
 
-  const suppressionReviewRequiredLabel = new Label("SuppressionReviewRequired");
-  // By default this label should not be present. We may determine later in this function that it should be present after all.
-  suppressionReviewRequiredLabel.shouldBePresent = false;
+  let suppressionReviewRequired = false;
   const handlers: ChangeHandler[] = [];
 
   const createReadmeFileHandler = () => {
@@ -451,7 +402,7 @@ async function processSuppression(context: PRContext, labelContext: LabelContext
             resolve(context.sourceDirectory, e.filePath),
           ).length)
       ) {
-        suppressionReviewRequiredLabel.shouldBePresent = true;
+        suppressionReviewRequired = true;
       }
     };
   };
@@ -460,10 +411,9 @@ async function processSuppression(context: PRContext, labelContext: LabelContext
   });
   await processPrChanges(context, handlers);
 
-  suppressionReviewRequiredLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processSuppression");
 
-  return suppressionReviewRequiredLabel.shouldBePresent;
+  return suppressionReviewRequired;
 }
 
 function getSuppressions(readmePath: string) {
@@ -546,14 +496,9 @@ export function diffSuppression(readmeBefore: string, readmeAfter: string) {
   return newSuppressions;
 }
 
-async function processRPaaS(
-  context: PRContext,
-  labelContext: LabelContext,
-): Promise<{ rpaasLabelShouldBePresent: boolean }> {
+async function processRPaaS(context: PRContext): Promise<{ rpaasLabelShouldBePresent: boolean }> {
   console.log("ENTER definition processRPaaS");
-  const rpaasLabel = new Label("RPaaS");
-  // By default this label should not be present. We may determine later in this function that it should be present after all.
-  rpaasLabel.shouldBePresent = false;
+  let rpaasLabelShouldBePresent = false;
 
   const handlers: ChangeHandler<Promise<void>>[] = [];
   const createReadmeFileHandler = () => {
@@ -562,7 +507,7 @@ async function processRPaaS(
         e.changeType !== ChangeTypes.Deletion &&
         (await isRPSaaS(join(context.sourceDirectory, e.filePath)))
       ) {
-        rpaasLabel.shouldBePresent = true;
+        rpaasLabelShouldBePresent = true;
       }
     };
   };
@@ -571,9 +516,8 @@ async function processRPaaS(
   });
   await processPRChangesAsync(context, handlers);
 
-  rpaasLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processRPaaS");
-  return { rpaasLabelShouldBePresent: rpaasLabel.shouldBePresent };
+  return { rpaasLabelShouldBePresent };
 }
 
 async function isRPSaaS(readmeFilePath: string) {
@@ -583,13 +527,10 @@ async function isRPSaaS(readmeFilePath: string) {
 
 async function processNewRPNamespace(
   context: PRContext,
-  labelContext: LabelContext,
   resourceManagerLabelShouldBePresent: boolean,
 ): Promise<{ newRPNamespaceLabelShouldBePresent: boolean }> {
   console.log("ENTER definition processNewRPNamespace");
-  const newRPNamespaceLabel = new Label("new-rp-namespace");
-  // By default this label should not be present. We may determine later in this function that it should be present after all.
-  newRPNamespaceLabel.shouldBePresent = false;
+  let newRPNamespaceLabelShouldBePresent = false;
   const handlers: ChangeHandler[] = [];
 
   let skip = false;
@@ -615,7 +556,7 @@ async function processNewRPNamespace(
             const rpFolderFullPath = resolve(context.targetDirectory, rpFolder);
             if (!existsSync(rpFolderFullPath)) {
               console.log(`Adding newRPNameSpace rpFolder: ${rpFolder}`);
-              newRPNamespaceLabel.shouldBePresent = true;
+              newRPNamespaceLabelShouldBePresent = true;
             }
           }
         }
@@ -626,9 +567,8 @@ async function processNewRPNamespace(
     await processPrChanges(context, handlers);
   }
 
-  newRPNamespaceLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processNewRPNamespace");
-  return { newRPNamespaceLabelShouldBePresent: newRPNamespaceLabel.shouldBePresent };
+  return { newRPNamespaceLabelShouldBePresent };
 }
 
 // CODESYNC:
@@ -636,15 +576,12 @@ async function processNewRPNamespace(
 // - requiredLabelsRules.ts / requiredLabelsRules
 async function processNewRpNamespaceWithoutRpaasLabel(
   context: PRContext,
-  labelContext: LabelContext,
   resourceManagerLabelShouldBePresent: boolean,
   newRPNamespaceLabelShouldBePresent: boolean,
   rpaasLabelShouldBePresent: boolean,
 ): Promise<boolean> {
   console.log("ENTER definition processNewRpNamespaceWithoutRpaasLabel");
-  const ciNewRPNamespaceWithoutRpaaSLabel = new Label("CI-NewRPNamespaceWithoutRPaaS");
-  // By default this label should not be present. We may determine later in this function that it should be present after all.
-  ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent = false;
+  let ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent = false;
 
   let skip = false;
 
@@ -667,13 +604,12 @@ async function processNewRpNamespaceWithoutRpaasLabel(
     console.log(
       "Adding new RP namespace, but not RPaaS. Label 'CI-NewRPNamespaceWithoutRPaaS' should be present.",
     );
-    ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent = true;
+    ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent = true;
   }
 
-  ciNewRPNamespaceWithoutRpaaSLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processNewRpNamespaceWithoutRpaasLabel");
 
-  return Promise.resolve(ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent);
+  return Promise.resolve(ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent);
 }
 
 export const getRPaaSFolderList = (targetDirectory: string): string[] => {
@@ -728,15 +664,12 @@ export function getRPRootFolderName(swaggerFile: string): string | undefined {
 
 async function processRpaasRpNotInPrivateRepoLabel(
   context: PRContext,
-  labelContext: LabelContext,
   resourceManagerLabelShouldBePresent: boolean,
   rpaasLabelShouldBePresent: boolean,
   rpFolderNames: string[],
 ): Promise<{ ciRpaasRPNotInPrivateRepoLabelShouldBePresent: boolean }> {
   console.log("ENTER definition processRpaasRpNotInPrivateRepoLabel");
-  const ciRpaasRPNotInPrivateRepoLabel = new Label("CI-RpaaSRPNotInPrivateRepo");
-  // By default this label should not be present. We may determine later in this function that it should be present after all.
-  ciRpaasRPNotInPrivateRepoLabel.shouldBePresent = false;
+  let ciRpaasRPNotInPrivateRepoLabelShouldBePresent = false;
 
   let skip = false;
 
@@ -776,7 +709,7 @@ async function processRpaasRpNotInPrivateRepoLabel(
               `This RP is RPSaaS RP but could not find rpFolderName: ${rpFolderName} in RPFolderNames: ${rpFolderNames.join(",")}. ` +
                 `Label 'CI-RpaaSRPNotInPrivateRepo' should be present.`,
             );
-            ciRpaasRPNotInPrivateRepoLabel.shouldBePresent = true;
+            ciRpaasRPNotInPrivateRepoLabelShouldBePresent = true;
           }
         }
       };
@@ -786,10 +719,9 @@ async function processRpaasRpNotInPrivateRepoLabel(
     await processPrChanges(context, handlers);
   }
 
-  ciRpaasRPNotInPrivateRepoLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processRpaasRpNotInPrivateRepoLabel");
 
   return {
-    ciRpaasRPNotInPrivateRepoLabelShouldBePresent: ciRpaasRPNotInPrivateRepoLabel.shouldBePresent,
+    ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
   };
 }

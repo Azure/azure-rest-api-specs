@@ -100,7 +100,7 @@ interface VoiceAgentWebSocket {
        * session admission. Rejection cannot undo prior URL logging. Use private collection when no trusted,
        * secret-safe initialization path is available.
        */
-      @query structured_input?: string;
+      @query structured_inputs?: string;
 
       /** Selects a specific version of the voice agent for this session. */
       @query("x-agent-version-override") agent_version_override?: string;

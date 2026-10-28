@@ -157,6 +157,7 @@ model VoiceConversationSystemToolItem {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Persisted reads include server-only system-tool intent without widening client-created realtime items."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve the reviewed union of upstream realtime items and server-only system-tool items without changing their inheritance or SDK representation."
 @doc("An existing realtime conversation item or a persisted service-managed system-tool intent. Used only by persisted read responses; client-created item types remain unchanged.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceConversationItem {

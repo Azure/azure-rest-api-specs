@@ -82,6 +82,7 @@ union VoiceAgentTransport {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "A WebSocket message may be sent by either the client or the server."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("A JSON text message exchanged over an established voice-agent WebSocket. Audio bytes are base64-encoded in JSON event fields.")
 @usage(VoiceAgentWebSocketMessageUsage)
 @oneOf
@@ -92,9 +93,11 @@ union VoiceAgentWebSocketMessage {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Client WebSocket messages are selected by their `type` property."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("A stable v1 message sent by a client over a voice-agent WebSocket.")
 @usage(VoiceAgentClientEventUsage)
 @oneOf
+@extension("x-foundry-event-direction", "client")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentClientEvent {
   conversation_item_create: OpenAI.RealtimeClientEventConversationItemCreate,
@@ -113,9 +116,11 @@ union VoiceAgentClientEvent {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Server WebSocket messages are selected by their `type` property."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("A stable v1 message sent by the service over a voice-agent WebSocket.")
 @usage(VoiceAgentServerEventUsage)
 @oneOf
+@extension("x-foundry-event-direction", "server")
 // `conversation.created` is replaced by `session.created.conversation_id`, the canonical persisted-conversation id.
 // `input_audio_buffer.dtmf_event_received` is telephony-only and excluded with the rest of the telephony call-control surface.
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -282,6 +287,7 @@ model VoiceAgentSessionUpdateConfig {
   greeting?: VoiceAgentGreetingConfig;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("The session configuration accepted by a voice-agent session update event.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentSessionUpdate {
@@ -307,6 +313,7 @@ model VoiceAgentSessionResponseConfig {
   expires_at?: FoundryTimestamp | null;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("The effective session configuration returned in voice-agent session lifecycle events.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentSessionResponse {
@@ -398,6 +405,7 @@ union VoiceAgentSystemToolItemStatus {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Voice output adds a server-only system-tool item without widening client-created conversation items."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve the reviewed union of upstream realtime items and server-only system-tool items without changing their inheritance or SDK representation."
 @doc("A standard realtime item or a service-managed system-tool intent. The system-tool variant is output-only.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentResponseOutputItem {
@@ -515,6 +523,7 @@ model VoiceAgentCollectSmsStartArguments {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Model-generated keypad completion selects one typed object, not a new client-ingress union."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve the reviewed closed completion-mode objects and their SDK representation instead of introducing a new base model."
 @doc("One typed keypad completion policy. Each variant owns its parameters; unknown types, mixed-mode fields and legacy string values are rejected before receiver preparation.")
 @oneOf
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
