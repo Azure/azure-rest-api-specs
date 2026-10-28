@@ -1958,6 +1958,94 @@
           }
         }
       },
+      "patch": {
+        "operationId": "Pool_Update",
+        "tags": [
+          "Pool"
+        ],
+        "description": "Updates the properties of an existing pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "A name for the Batch account which must be unique within the region. Batch account names must be between 3 and 24 characters in length and must use only numbers and lowercase letters. This name is used as part of the DNS name that is used to access the Batch service in the region in which the account is created. For example: http://accountname.region.batch.azure.com/.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9]+$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The pool name. This must be unique within the account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The entity state (ETag) version of the pool to update. This value can be omitted or set to \"*\" to apply the operation unconditionally.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Pool properties that should be updated. Properties that are supplied will be updated, any property not supplied will be unchanged.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PoolPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdatePool - Enable Autoscale": {
+            "$ref": "./examples/PoolUpdate_EnableAutoScale.json"
+          },
+          "UpdatePool - Other Properties": {
+            "$ref": "./examples/PoolUpdate_OtherProperties.json"
+          },
+          "UpdatePool - Remove Start Task": {
+            "$ref": "./examples/PoolUpdate_RemoveStartTask.json"
+          },
+          "UpdatePool - Resize Pool": {
+            "$ref": "./examples/PoolUpdate_ResizePool.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "Pool_Delete",
         "tags": [
@@ -2095,106 +2183,6 @@
         "x-ms-examples": {
           "Disable AutoScale": {
             "$ref": "./examples/PoolDisableAutoScale.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/pools/{poolName}/pools/{name}": {
-      "patch": {
-        "operationId": "Pool_Update",
-        "tags": [
-          "Pool"
-        ],
-        "description": "Updates the properties of an existing pool.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "A name for the Batch account which must be unique within the region. Batch account names must be between 3 and 24 characters in length and must use only numbers and lowercase letters. This name is used as part of the DNS name that is used to access the Batch service in the region in which the account is created. For example: http://accountname.region.batch.azure.com/.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9]+$"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "description": "The pool name. This must be unique within the account.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9_-]+$"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The entity state (ETag) version of the pool to update. This value can be omitted or set to \"*\" to apply the operation unconditionally.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The pool name. This must be unique within the account.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9_-]+$"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Pool properties that should be updated. Properties that are supplied will be updated, any property not supplied will be unchanged.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PoolPatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Pool"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdatePool - Enable Autoscale": {
-            "$ref": "./examples/PoolUpdate_EnableAutoScale.json"
-          },
-          "UpdatePool - Other Properties": {
-            "$ref": "./examples/PoolUpdate_OtherProperties.json"
-          },
-          "UpdatePool - Remove Start Task": {
-            "$ref": "./examples/PoolUpdate_RemoveStartTask.json"
-          },
-          "UpdatePool - Resize Pool": {
-            "$ref": "./examples/PoolUpdate_ResizePool.json"
           }
         }
       }
@@ -3083,6 +3071,27 @@
         "formula"
       ]
     },
+    "AutoScaleSettingsPatch": {
+      "type": "object",
+      "description": "Updateable object fields without required properties or create-time defaults.",
+      "properties": {
+        "formula": {
+          "type": "string",
+          "title": "A formula for the desired number of compute nodes in the pool.",
+          "description": "A formula for the desired number of compute nodes in the pool.",
+          "externalDocs": {
+            "description": "Create an automatic scaling formula for scaling compute nodes in a Batch pool",
+            "url": "https://learn.microsoft.com/azure/batch/batch-automatic-scaling"
+          }
+        },
+        "evaluationInterval": {
+          "type": "string",
+          "format": "duration",
+          "title": "The time interval at which to automatically adjust the pool size according to the autoscale formula.",
+          "description": "If omitted, the default value is 15 minutes (PT15M)."
+        }
+      }
+    },
     "AutoStorageBaseProperties": {
       "type": "object",
       "description": "The properties related to the auto-storage account.",
@@ -3777,6 +3786,23 @@
         "type"
       ]
     },
+    "BatchPoolIdentityPatch": {
+      "type": "object",
+      "description": "Updateable object fields without required properties or create-time defaults.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PoolIdentityType",
+          "description": "The type of identity used for the Batch Pool."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the Batch pool.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentities"
+          }
+        }
+      }
+    },
     "CIFSMountConfiguration": {
       "type": "object",
       "title": "Information used to connect to a CIFS file system.",
@@ -3963,6 +3989,30 @@
         ]
       }
     },
+    "ComputeNodeFillType": {
+      "type": "string",
+      "description": "How tasks should be distributed across compute nodes.",
+      "enum": [
+        "Spread",
+        "Pack"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeNodeFillType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Spread",
+            "value": "Spread",
+            "description": "Tasks should be assigned evenly across all nodes in the pool."
+          },
+          {
+            "name": "Pack",
+            "value": "Pack",
+            "description": "As many tasks as possible (taskSlotsPerNode) should be assigned to each node in the pool before any tasks are assigned to the next node in the pool."
+          }
+        ]
+      }
+    },
     "ComputeNodeIdentityReference": {
       "type": "object",
       "description": "The reference to a user assigned identity associated with the Batch pool which a compute node will use.",
@@ -4006,6 +4056,36 @@
       "required": [
         "type"
       ]
+    },
+    "ContainerConfigurationPatch": {
+      "type": "object",
+      "description": "Updateable object fields without required properties or create-time defaults.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ContainerType",
+          "title": "The container technology to be used.",
+          "description": "The container technology to be used."
+        },
+        "containerImageNames": {
+          "type": "array",
+          "title": "The collection of container image names.",
+          "description": "This is the full image reference, as would be specified to \"docker pull\". An image will be sourced from the default Docker registry unless the image is fully qualified with an alternative registry.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "containerRegistries": {
+          "type": "array",
+          "title": "Additional private registries from which containers can be pulled.",
+          "description": "If any images must be downloaded from a private registry which requires credentials, then those credentials must be provided here.",
+          "items": {
+            "$ref": "#/definitions/ContainerRegistry"
+          },
+          "x-ms-identifiers": [
+            "registryServer"
+          ]
+        }
+      }
     },
     "ContainerHostBatchBindMountEntry": {
       "type": "object",
@@ -4346,6 +4426,18 @@
         "id"
       ]
     },
+    "DiskEncryptionSetParametersPatch": {
+      "type": "object",
+      "description": "Updateable object fields without required properties or create-time defaults.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "title": "The resource id of the disk encryption set.",
+          "description": "The ARM resource id of the disk encryption set. The resource should be in the same subscription as the Batch account."
+        }
+      }
+    },
     "DiskEncryptionTarget": {
       "type": "string",
       "description": "If omitted, no disks on the compute nodes in the pool will be encrypted.",
@@ -4366,6 +4458,30 @@
             "name": "TemporaryDisk",
             "value": "TemporaryDisk",
             "description": "The temporary disk on the compute node is encrypted. On Linux this encryption applies to other partitions (such as those on mounted data disks) when encryption occurs at boot time."
+          }
+        ]
+      }
+    },
+    "DynamicVNetAssignmentScope": {
+      "type": "string",
+      "description": "The scope of dynamic vnet assignment.",
+      "enum": [
+        "none",
+        "job"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicVNetAssignmentScope",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "No dynamic VNet assignment is enabled."
+          },
+          {
+            "name": "job",
+            "value": "job",
+            "description": "Dynamic VNet assignment is done per-job. If this value is set, the network configuration subnet ID must also be set. This feature requires approval before use, please contact support"
           }
         ]
       }
@@ -4547,6 +4663,35 @@
             "update",
             "create"
           ]
+        }
+      }
+    },
+    "FixedScaleSettingsPatch": {
+      "type": "object",
+      "description": "Updateable object fields without required properties or create-time defaults.",
+      "properties": {
+        "resizeTimeout": {
+          "type": "string",
+          "format": "duration",
+          "title": "The timeout for allocation of compute nodes to the pool.",
+          "description": "The default value is 15 minutes. Timeout values use ISO 8601 format. For example, use PT10M for 10 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+        },
+        "targetDedicatedNodes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The desired number of dedicated compute nodes in the pool.",
+          "description": "At least one of targetDedicatedNodes, targetLowPriorityNodes must be set."
+        },
+        "targetLowPriorityNodes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The desired number of Spot/low-priority compute nodes in the pool.",
+          "description": "At least one of targetDedicatedNodes, targetLowPriorityNodes must be set."
+        },
+        "nodeDeallocationOption": {
+          "$ref": "#/definitions/RequestedComputeNodeDeallocationOption",
+          "title": "Determines what to do with a node and its running task(s) after it has been selected for deallocation.",
+          "description": "If omitted, the default value is Requeue."
         }
       }
     },
@@ -5107,6 +5252,25 @@
         }
       }
     },
+    "ManagedDiskPatch": {
+      "type": "object",
+      "description": "Managed disk settings supplied in a pool PATCH request.",
+      "properties": {
+        "storageAccountType": {
+          "$ref": "#/definitions/StorageAccountType",
+          "title": "The storage account type for use in creating data disks or OS disk.",
+          "description": "The storage account type for use in creating data disks or OS disk."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/VmDiskSecurityProfilePatch",
+          "description": "The managed disk security settings to update."
+        },
+        "diskEncryptionSet": {
+          "$ref": "#/definitions/DiskEncryptionSetParametersPatch",
+          "description": "The disk encryption set reference to update."
+        }
+      }
+    },
     "MaxInstancePercentPerZonePolicy": {
       "type": "object",
       "description": "The policy that limits the percentage of pool instances that may be allocated in a single availability zone.",
@@ -5299,6 +5463,44 @@
             "description": "Create a VM with Accelerated Networking.",
             "url": "https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview"
           }
+        }
+      }
+    },
+    "NetworkConfigurationPatch": {
+      "type": "object",
+      "description": "Network settings supplied in a pool PATCH request.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "title": "The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.",
+          "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication，including ports 29876 and 29877. Also enable outbound connections to Azure Storage on port 443. For more details see: https://learn.microsoft.com/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration",
+          "externalDocs": {
+            "description": "Create an Azure Batch pool in a virtual network",
+            "url": "https://learn.microsoft.com/azure/batch/batch-virtual-networks"
+          }
+        },
+        "dynamicVnetAssignmentScope": {
+          "$ref": "#/definitions/DynamicVNetAssignmentScope",
+          "title": "The scope of dynamic vnet assignment.",
+          "description": "The scope of dynamic vnet assignment."
+        },
+        "publicIPAddressConfiguration": {
+          "$ref": "#/definitions/PublicIPAddressConfiguration",
+          "title": "The Public IPAddress configuration for Compute Nodes in the Batch Pool.",
+          "description": "The public IP Address configuration of the networking configuration of a Pool."
+        },
+        "enableAcceleratedNetworking": {
+          "type": "boolean",
+          "title": "Whether this pool should enable accelerated networking.",
+          "description": "Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview.",
+          "externalDocs": {
+            "description": "Create a VM with Accelerated Networking.",
+            "url": "https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview"
+          }
+        },
+        "endpointConfiguration": {
+          "$ref": "#/definitions/PoolEndpointConfigurationPatch",
+          "description": "The compute-node endpoint settings to update."
         }
       }
     },
@@ -5549,6 +5751,37 @@
         "value"
       ]
     },
+    "OsDiskPatch": {
+      "type": "object",
+      "description": "Operating system disk settings supplied in a pool PATCH request.",
+      "properties": {
+        "ephemeralOSDiskSettings": {
+          "$ref": "#/definitions/DiffDiskSettings",
+          "title": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.",
+          "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine."
+        },
+        "caching": {
+          "$ref": "#/definitions/CachingType",
+          "title": "The type of caching to enable for the disk.",
+          "description": "The type of caching to enable for the disk."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The initial disk size in GB when creating new OS disk.",
+          "description": "The initial disk size in GB when creating new OS disk."
+        },
+        "writeAcceleratorEnabled": {
+          "type": "boolean",
+          "title": "Specifies whether writeAccelerator should be enabled or disabled on the disk.",
+          "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
+        },
+        "managedDisk": {
+          "$ref": "#/definitions/ManagedDiskPatch",
+          "description": "The managed disk settings to update."
+        }
+      }
+    },
     "OutboundEnvironmentEndpoint": {
       "type": "object",
       "description": "A collection of related endpoints from the same service for which the Batch service requires outbound access.",
@@ -5717,6 +5950,23 @@
         "inboundNatPools"
       ]
     },
+    "PoolEndpointConfigurationPatch": {
+      "type": "object",
+      "description": "Updateable object fields without required properties or create-time defaults.",
+      "properties": {
+        "inboundNatPools": {
+          "type": "array",
+          "title": "A list of inbound NAT pools that can be used to address specific ports on an individual compute node externally.",
+          "description": "The maximum number of inbound NAT pools per Batch pool is 5. If the maximum number of inbound NAT pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.",
+          "items": {
+            "$ref": "#/definitions/InboundNatPool"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "PoolIdentityType": {
       "type": "string",
       "description": "The type of identity used for the Batch Pool.",
@@ -5745,16 +5995,16 @@
       "type": "object",
       "description": "Properties supplied when updating a pool.",
       "properties": {
-        "identity": {
-          "$ref": "#/definitions/BatchPoolIdentity",
-          "description": "The type of identity used for the Batch Pool."
-        },
         "tags": {
           "type": "object",
           "description": "The tags of the resource.",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/BatchPoolIdentityPatch",
+          "description": "The pool identity settings to update."
         },
         "properties": {
           "$ref": "#/definitions/PoolPatchProperties",
@@ -5771,46 +6021,6 @@
           "title": "The display name for the pool.",
           "description": "The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
         },
-        "lastModified": {
-          "type": "string",
-          "format": "date-time",
-          "title": "The last modified time of the pool.",
-          "description": "This is the last time at which the pool level data, such as the targetDedicatedNodes or autoScaleSettings, changed. It does not factor in node-level changes such as a compute node changing state.",
-          "readOnly": true
-        },
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "title": "The creation time of the pool.",
-          "description": "The creation time of the pool.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/PoolProvisioningState",
-          "title": "The current state of the pool.",
-          "description": "The current state of the pool.",
-          "readOnly": true
-        },
-        "provisioningStateTransitionTime": {
-          "type": "string",
-          "format": "date-time",
-          "title": "The time at which the pool entered its current state.",
-          "description": "The time at which the pool entered its current state.",
-          "readOnly": true
-        },
-        "allocationState": {
-          "$ref": "#/definitions/AllocationState",
-          "title": "Whether the pool is resizing.",
-          "description": "Whether the pool is resizing.",
-          "readOnly": true
-        },
-        "allocationStateTransitionTime": {
-          "type": "string",
-          "format": "date-time",
-          "title": "The time at which the pool entered its current allocation state.",
-          "description": "The time at which the pool entered its current allocation state.",
-          "readOnly": true
-        },
         "vmSize": {
           "type": "string",
           "title": "The size of virtual machines in the pool. All VMs in a pool are the same size.",
@@ -5820,52 +6030,16 @@
           "$ref": "#/definitions/VirtualMachineSkuProfile",
           "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate compute nodes for an Instance Mix pool. When specified, vmSize must be \"Mix\". This property can only be changed while the pool has no compute nodes."
         },
-        "currentDedicatedNodes": {
-          "type": "integer",
-          "format": "int32",
-          "title": "The number of dedicated compute nodes currently in the pool.",
-          "description": "The number of dedicated compute nodes currently in the pool.",
-          "readOnly": true
-        },
-        "currentLowPriorityNodes": {
-          "type": "integer",
-          "format": "int32",
-          "title": "The number of Spot/low-priority compute nodes currently in the pool.",
-          "description": "The number of Spot/low-priority compute nodes currently in the pool.",
-          "readOnly": true
-        },
-        "scaleSettings": {
-          "$ref": "#/definitions/ScaleSettings",
-          "title": "Settings which configure the number of nodes in the pool.",
-          "description": "Defines the desired size of the pool. This can either be 'fixedScale' where the requested targetDedicatedNodes is specified, or 'autoScale' which defines a formula which is periodically reevaluated. If this property is not specified, the pool will have a fixed scale with 0 targetDedicatedNodes."
-        },
-        "autoScaleRun": {
-          "$ref": "#/definitions/AutoScaleRun",
-          "title": "The results and errors from the last execution of the autoscale formula.",
-          "description": "This property is set only if the pool automatically scales, i.e. autoScaleSettings are used.",
-          "readOnly": true
-        },
         "interNodeCommunication": {
           "$ref": "#/definitions/InterNodeCommunicationState",
           "title": "Whether the pool permits direct communication between nodes.",
           "description": "This imposes restrictions on which nodes can be assigned to the pool. Enabling this value can reduce the chance of the requested number of nodes to be allocated in the pool. If not specified, this value defaults to 'Disabled'."
         },
-        "networkConfiguration": {
-          "$ref": "#/definitions/NetworkConfiguration",
-          "title": "The network configuration for the pool.",
-          "description": "The network configuration for a pool."
-        },
         "taskSlotsPerNode": {
           "type": "integer",
           "format": "int32",
           "title": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool.",
-          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.",
-          "default": 1
-        },
-        "taskSchedulingPolicy": {
-          "$ref": "#/definitions/TaskSchedulingPolicy",
-          "title": "How tasks are distributed across compute nodes in a pool.",
-          "description": "If not specified, the default is spread."
+          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256."
         },
         "userAccounts": {
           "type": "array",
@@ -5889,11 +6063,6 @@
             "name"
           ]
         },
-        "startTask": {
-          "$ref": "#/definitions/StartTask",
-          "title": "A task specified to run on each compute node as it joins the pool.",
-          "description": "In an PATCH (update) operation, this property can be set to an empty object to remove the start task from the pool."
-        },
         "applicationPackages": {
           "type": "array",
           "title": "The list of application packages to be installed on each compute node in the pool.",
@@ -5901,20 +6070,6 @@
           "items": {
             "$ref": "#/definitions/ApplicationPackageReference"
           }
-        },
-        "applicationLicenses": {
-          "type": "array",
-          "title": "The list of application licenses the Batch service will make available on each compute node in the pool.",
-          "description": "The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, pool creation will fail.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "resizeOperationStatus": {
-          "$ref": "#/definitions/ResizeOperationStatus",
-          "title": "Contains details about the current or last completed resize operation.",
-          "description": "Describes either the current operation (if the pool AllocationState is Resizing) or the previously completed operation (if the AllocationState is Steady).",
-          "readOnly": true
         },
         "mountConfiguration": {
           "type": "array",
@@ -5925,14 +6080,29 @@
           },
           "x-ms-identifiers": []
         },
-        "upgradePolicy": {
-          "$ref": "#/definitions/UpgradePolicy",
-          "title": "The upgrade policy for the pool.",
-          "description": "Describes an upgrade policy - automatic, manual, or rolling."
-        },
         "deploymentConfiguration": {
           "$ref": "#/definitions/DeploymentConfigurationPatch",
           "description": "The deployment settings to update."
+        },
+        "scaleSettings": {
+          "$ref": "#/definitions/ScaleSettingsPatch",
+          "description": "The pool scaling settings to update."
+        },
+        "networkConfiguration": {
+          "$ref": "#/definitions/NetworkConfigurationPatch",
+          "description": "The pool network settings to update."
+        },
+        "taskSchedulingPolicy": {
+          "$ref": "#/definitions/TaskSchedulingPolicyPatch",
+          "description": "The task distribution settings to update."
+        },
+        "startTask": {
+          "$ref": "#/definitions/StartTaskPatch",
+          "description": "The start task settings to update."
+        },
+        "upgradePolicy": {
+          "$ref": "#/definitions/UpgradePolicyPatch",
+          "description": "The virtual machine upgrade settings to update."
         }
       }
     },
@@ -6750,6 +6920,20 @@
         }
       }
     },
+    "ScaleSettingsPatch": {
+      "type": "object",
+      "description": "Scaling settings supplied in a pool PATCH request.",
+      "properties": {
+        "fixedScale": {
+          "$ref": "#/definitions/FixedScaleSettingsPatch",
+          "description": "Fixed-size allocation settings to update."
+        },
+        "autoScale": {
+          "$ref": "#/definitions/AutoScaleSettingsPatch",
+          "description": "Automatic allocation settings to update."
+        }
+      }
+    },
     "SecurityEncryptionTypes": {
       "type": "string",
       "description": "Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.",
@@ -6842,6 +7026,17 @@
         "id"
       ]
     },
+    "ServiceArtifactReferencePatch": {
+      "type": "object",
+      "description": "Updateable object fields without required properties or create-time defaults.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "The service artifact reference id of ServiceArtifactReference",
+          "description": "The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}"
+        }
+      }
+    },
     "SkuCapability": {
       "type": "object",
       "description": "A SKU capability, such as the number of cores.",
@@ -6911,6 +7106,59 @@
           "$ref": "#/definitions/TaskContainerSettings",
           "title": "The settings for the container under which the start task runs.",
           "description": "When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container."
+        }
+      }
+    },
+    "StartTaskPatch": {
+      "type": "object",
+      "description": "Start task settings supplied in a pool PATCH request.",
+      "properties": {
+        "commandLine": {
+          "type": "string",
+          "title": "The command line of the start task.",
+          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. Required if any other properties of the startTask are specified."
+        },
+        "resourceFiles": {
+          "type": "array",
+          "title": "A list of files that the Batch service will download to the compute node before running the command line.",
+          "description": "A list of files that the Batch service will download to the compute node before running the command line.",
+          "items": {
+            "$ref": "#/definitions/ResourceFile"
+          },
+          "x-ms-identifiers": [
+            "httpUrl"
+          ]
+        },
+        "environmentSettings": {
+          "type": "array",
+          "title": "A list of environment variable settings for the start task.",
+          "description": "A list of environment variable settings for the start task.",
+          "items": {
+            "$ref": "#/definitions/EnvironmentSetting"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "userIdentity": {
+          "$ref": "#/definitions/UserIdentity",
+          "title": "The user identity under which the start task runs.",
+          "description": "If omitted, the task runs as a non-administrative user unique to the task."
+        },
+        "maxTaskRetryCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The maximum number of times the task may be retried.",
+          "description": "The Batch service retries a task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task. If the maximum retry count is -1, the Batch service retries the task without limit. Default is 0"
+        },
+        "waitForSuccess": {
+          "type": "boolean",
+          "title": "Whether the Batch service should wait for the start task to complete successfully (that is, to exit with exit code 0) before scheduling any tasks on the compute node.",
+          "description": "If true and the start task fails on a compute node, the Batch service retries the start task up to its maximum retry count (maxTaskRetryCount). If the task has still not completed successfully after all retries, then the Batch service marks the compute node unusable, and will not schedule tasks to it. This condition can be detected via the node state and scheduling error detail. If false, the Batch service will not wait for the start task to complete. In this case, other tasks can start executing on the compute node while the start task is still running; and even if the start task fails, new tasks will continue to be scheduled on the node. The default is true."
+        },
+        "containerSettings": {
+          "$ref": "#/definitions/TaskContainerSettingsPatch",
+          "description": "The start task container settings to update."
         }
       }
     },
@@ -7040,6 +7288,41 @@
         "imageName"
       ]
     },
+    "TaskContainerSettingsPatch": {
+      "type": "object",
+      "description": "Updateable object fields without required properties or create-time defaults.",
+      "properties": {
+        "containerRunOptions": {
+          "type": "string",
+          "title": "Additional options to the container create command.",
+          "description": "These additional options are supplied as arguments to the \"docker create\" command, in addition to those controlled by the Batch Service."
+        },
+        "imageName": {
+          "type": "string",
+          "title": "The image to use to create the container in which the task will run.",
+          "description": "This is the full image reference, as would be specified to \"docker pull\". If no tag is provided as part of the image name, the tag \":latest\" is used as a default."
+        },
+        "registry": {
+          "$ref": "#/definitions/ContainerRegistry",
+          "title": "The private registry which contains the container image.",
+          "description": "This setting can be omitted if was already provided at pool creation."
+        },
+        "workingDirectory": {
+          "$ref": "#/definitions/ContainerWorkingDirectory",
+          "title": "A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'.",
+          "description": "A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'."
+        },
+        "containerHostBatchBindMounts": {
+          "type": "array",
+          "title": "The paths you want to mounted to container task.",
+          "description": "If this array is null or be not present, container task will mount entire temporary disk drive in windows (or AZ_BATCH_NODE_ROOT_DIR in Linux). It won't' mount any data paths into container if this array is set as empty.",
+          "items": {
+            "$ref": "#/definitions/ContainerHostBatchBindMountEntry"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "TaskSchedulingPolicy": {
       "type": "object",
       "title": "Specifies how tasks should be distributed across compute nodes.",
@@ -7080,6 +7363,22 @@
       "required": [
         "nodeFillType"
       ]
+    },
+    "TaskSchedulingPolicyPatch": {
+      "type": "object",
+      "description": "Updateable object fields without required properties or create-time defaults.",
+      "properties": {
+        "jobDefaultOrder": {
+          "$ref": "#/definitions/JobDefaultOrder",
+          "title": "If not specified, the default is none.",
+          "description": "The order for scheduling tasks from different jobs with the same priority."
+        },
+        "nodeFillType": {
+          "$ref": "#/definitions/ComputeNodeFillType",
+          "title": "How tasks should be distributed across compute nodes.",
+          "description": "How tasks should be distributed across compute nodes."
+        }
+      }
     },
     "UefiSettings": {
       "type": "object",
@@ -7148,6 +7447,27 @@
       "required": [
         "mode"
       ]
+    },
+    "UpgradePolicyPatch": {
+      "type": "object",
+      "description": "Updateable object fields without required properties or create-time defaults.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/UpgradeMode",
+          "title": "Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between.",
+          "description": "Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between."
+        },
+        "automaticOSUpgradePolicy": {
+          "$ref": "#/definitions/AutomaticOSUpgradePolicy",
+          "title": "Configuration parameters used for performing automatic OS Upgrade.",
+          "description": "The configuration parameters used for performing automatic OS upgrade."
+        },
+        "rollingUpgradePolicy": {
+          "$ref": "#/definitions/RollingUpgradePolicy",
+          "title": "The configuration parameters used while performing a rolling upgrade.",
+          "description": "The configuration parameters used while performing a rolling upgrade."
+        }
+      }
     },
     "UserAccount": {
       "type": "object",
@@ -7425,11 +7745,6 @@
           "title": "The type of on-premises license to be used when deploying the operating system.",
           "description": "This only applies to images that contain the Windows operating system, and should only be used when you hold valid on-premises licenses for the nodes which will be deployed. If omitted, no on-premises licensing discount is applied. Values are:\n\nWindows_Server - The on-premises license is for Windows Server.\nWindows_Client - The on-premises license is for Windows Client."
         },
-        "containerConfiguration": {
-          "$ref": "#/definitions/ContainerConfiguration",
-          "title": "The container configuration for the pool.",
-          "description": "If specified, setup is performed on each node in the pool to allow tasks to run in containers. All regular tasks and job manager tasks run on this pool must specify the containerSettings property, and all other tasks may specify it."
-        },
         "diskEncryptionConfiguration": {
           "$ref": "#/definitions/DiskEncryptionConfiguration",
           "title": "The disk encryption configuration for the pool.",
@@ -7452,24 +7767,26 @@
             "type"
           ]
         },
-        "osDisk": {
-          "$ref": "#/definitions/OSDisk",
-          "title": "Settings for the operating system disk of the Virtual Machine.",
-          "description": "Contains configuration for ephemeral OSDisk settings."
-        },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
           "title": "Specifies the security profile settings for the virtual machine or virtual machine scale set.",
           "description": "Specifies the security profile settings for the virtual machine or virtual machine scale set."
         },
-        "serviceArtifactReference": {
-          "$ref": "#/definitions/ServiceArtifactReference",
-          "title": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version.",
-          "description": "The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}"
-        },
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the compute nodes."
+        },
+        "containerConfiguration": {
+          "$ref": "#/definitions/ContainerConfigurationPatch",
+          "description": "The pool container settings to update."
+        },
+        "serviceArtifactReference": {
+          "$ref": "#/definitions/ServiceArtifactReferencePatch",
+          "description": "The service artifact reference to update."
+        },
+        "osDisk": {
+          "$ref": "#/definitions/OsDiskPatch",
+          "description": "The operating system disk settings to update."
         },
         "placement": {
           "$ref": "#/definitions/PlacementPatch",
@@ -7567,6 +7884,21 @@
       "required": [
         "name"
       ]
+    },
+    "VmDiskSecurityProfilePatch": {
+      "type": "object",
+      "description": "Managed disk security settings supplied in a pool PATCH request.",
+      "properties": {
+        "securityEncryptionType": {
+          "$ref": "#/definitions/SecurityEncryptionTypes",
+          "title": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.",
+          "description": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs."
+        },
+        "diskEncryptionSet": {
+          "$ref": "#/definitions/DiskEncryptionSetParametersPatch",
+          "description": "The disk encryption set reference to update."
+        }
+      }
     },
     "VmSizeProperties": {
       "type": "object",

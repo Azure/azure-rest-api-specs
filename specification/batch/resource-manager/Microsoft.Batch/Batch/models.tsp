@@ -1334,7 +1334,7 @@ model BatchAccountProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy design that typespec didn't have a direct translation for"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The ARM @identifiers decorator rejects nullable arrays; emit identifiers explicitly to preserve nullability and array-item metadata."
   @added(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
@@ -1672,7 +1672,7 @@ model ApplicationPackageProperties {
   storageUrlLegacy?: string;
 
   /**
-    * The URL for the application package in Azure Storage. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated.
+   * The URL for the application package in Azure Storage. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @added(Versions.v2026_10_01)
@@ -1688,7 +1688,7 @@ model ApplicationPackageProperties {
   storageUrlExpiryLegacy?: utcDateTime;
 
   /**
-    * The UTC time at which the Azure Storage URL will expire. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated.
+   * The UTC time at which the Azure Storage URL will expire. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated.
    */
   @added(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
@@ -2502,9 +2502,21 @@ union ZonePlacementPolicyType {
   Auto: "Auto",
 }
 
+/** Updateable object fields without required properties or create-time defaults. */
+@withoutDefaultValues
+@withOptionalProperties
+@withVisibility(Lifecycle.Update)
+@friendlyName("{name}Patch", Source)
+model PoolPatchFields<Source extends TypeSpec.Reflection.Model> {
+  ...Source;
+}
+
 /** Properties supplied when updating a pool. */
 model PoolPatch {
-  ...OmitProperties<Pool, "properties">;
+  ...PoolPatchFields<OmitProperties<Pool, "properties" | "name" | "identity">>;
+
+  /** The pool identity settings to update. */
+  identity?: PoolPatchFields<BatchPoolIdentity>;
 
   /** The pool properties to update. */
   @typeChangedFrom(Versions.v2026_10_01, PoolProperties)
@@ -2514,17 +2526,71 @@ model PoolPatch {
 /** Pool settings supplied in a PATCH request. */
 @added(Versions.v2026_10_01)
 model PoolPatchProperties {
-  ...OmitProperties<
+  ...PoolPatchFields<OmitProperties<
     PoolProperties,
     | "deploymentConfiguration"
+    | "scaleSettings"
+    | "networkConfiguration"
+    | "taskSchedulingPolicy"
+    | "startTask"
+    | "upgradePolicy"
     | "certificates"
+    | "applicationLicenses"
     | "targetNodeCommunicationMode"
     | "currentNodeCommunicationMode"
     | "resourceTags"
-  >;
+  >>;
 
   /** The deployment settings to update. */
   deploymentConfiguration?: DeploymentConfigurationPatch;
+
+  /** The pool scaling settings to update. */
+  scaleSettings?: ScaleSettingsPatch;
+
+  /** The pool network settings to update. */
+  networkConfiguration?: NetworkConfigurationPatch;
+
+  /** The task distribution settings to update. */
+  taskSchedulingPolicy?: PoolPatchFields<TaskSchedulingPolicy>;
+
+  /** The start task settings to update. */
+  startTask?: StartTaskPatch;
+
+  /** The virtual machine upgrade settings to update. */
+  upgradePolicy?: PoolPatchFields<UpgradePolicy>;
+}
+
+/** Scaling settings supplied in a pool PATCH request. */
+@added(Versions.v2026_10_01)
+model ScaleSettingsPatch {
+  ...PoolPatchFields<OmitProperties<ScaleSettings, "fixedScale" | "autoScale">>;
+
+  /** Fixed-size allocation settings to update. */
+  fixedScale?: PoolPatchFields<FixedScaleSettings>;
+
+  /** Automatic allocation settings to update. */
+  autoScale?: PoolPatchFields<AutoScaleSettings>;
+}
+
+/** Network settings supplied in a pool PATCH request. */
+@added(Versions.v2026_10_01)
+model NetworkConfigurationPatch {
+  ...PoolPatchFields<OmitProperties<
+    NetworkConfiguration,
+    "endpointConfiguration"
+  >>;
+
+  /** The compute-node endpoint settings to update. */
+  endpointConfiguration?: PoolPatchFields<PoolEndpointConfiguration>;
+}
+
+/** Start task settings supplied in a pool PATCH request. */
+@added(Versions.v2026_10_01)
+model StartTaskPatch {
+  ...PoolPatchFields<OmitProperties<StartTask, "containerSettings">>;
+
+  /** The start task container settings to update. */
+  containerSettings?: PoolPatchFields<TaskContainerSettings>;
 }
 
 /** Deployment settings supplied in a PATCH request. */
@@ -2540,16 +2606,65 @@ model DeploymentConfigurationPatch {
 @added(Versions.v2026_10_01)
 @withOptionalProperties
 model VirtualMachineConfigurationPatch {
-  ...OmitProperties<
+  ...PoolPatchFields<OmitProperties<
     VirtualMachineConfiguration,
-    "placement" | "resiliencyPolicy"
-  >;
+    | "placement"
+    | "resiliencyPolicy"
+    | "containerConfiguration"
+    | "serviceArtifactReference"
+    | "osDisk"
+  >>;
+
+  /** The pool container settings to update. */
+  containerConfiguration?: PoolPatchFields<ContainerConfiguration>;
+
+  /** The service artifact reference to update. */
+  serviceArtifactReference?: PoolPatchFields<ServiceArtifactReference>;
+
+  /** The operating system disk settings to update. */
+  osDisk?: OsDiskPatch;
 
   /** The availability zone placement policy to update. */
   placement?: PlacementPatch;
 
   /** The resiliency policy to update. */
   resiliencyPolicy?: ResiliencyPolicyPatch;
+}
+
+/** Operating system disk settings supplied in a pool PATCH request. */
+@added(Versions.v2026_10_01)
+model OsDiskPatch {
+  ...PoolPatchFields<OmitProperties<OSDisk, "managedDisk">>;
+
+  /** The managed disk settings to update. */
+  managedDisk?: ManagedDiskPatch;
+}
+
+/** Managed disk settings supplied in a pool PATCH request. */
+@added(Versions.v2026_10_01)
+model ManagedDiskPatch {
+  ...PoolPatchFields<OmitProperties<
+    ManagedDisk,
+    "securityProfile" | "diskEncryptionSet"
+  >>;
+
+  /** The managed disk security settings to update. */
+  securityProfile?: VmDiskSecurityProfilePatch;
+
+  /** The disk encryption set reference to update. */
+  diskEncryptionSet?: PoolPatchFields<DiskEncryptionSetParameters>;
+}
+
+/** Managed disk security settings supplied in a pool PATCH request. */
+@added(Versions.v2026_10_01)
+model VmDiskSecurityProfilePatch {
+  ...PoolPatchFields<OmitProperties<
+    VMDiskSecurityProfile,
+    "diskEncryptionSet"
+  >>;
+
+  /** The disk encryption set reference to update. */
+  diskEncryptionSet?: PoolPatchFields<DiskEncryptionSetParameters>;
 }
 
 /** Placement settings supplied in a PATCH request. */
@@ -4136,7 +4251,7 @@ model RollingUpgradePolicy {
   enableCrossZoneUpgradeLegacy?: boolean;
 
   /**
-    * Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. If this field is not set, Azure Azure Batch will not set its default value. The value of enableCrossZoneUpgrade on the created VirtualMachineScaleSet will be decided by the default configurations on VirtualMachineScaleSet. This field can be set to true or false only when nodePlacementConfiguration.policy is Zonal or placement.zonePlacementPolicy is Auto.
+   * Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. If this field is not set, Azure Azure Batch will not set its default value. The value of enableCrossZoneUpgrade on the created VirtualMachineScaleSet will be decided by the default configurations on VirtualMachineScaleSet. This field can be set to true or false only when nodePlacementConfiguration.policy is Zonal or placement.zonePlacementPolicy is Auto.
    */
   @added(Versions.v2026_10_01)
   enableCrossZoneUpgrade?: boolean;
