@@ -1026,7 +1026,9 @@ model ServerProperties {
   @added(Versions.v2026_03_01)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   privateOutboundSubnetResourceId?: armResourceIdentifier<[
-    { type: "Microsoft.Network/virtualNetworks/subnets" }
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
   ]>;
 }
 
@@ -1338,7 +1340,9 @@ model ServerPropertiesForUpdate {
    */
   @added(Versions.v2026_03_01)
   privateOutboundSubnetResourceId?: armResourceIdentifier<[
-    { type: "Microsoft.Network/virtualNetworks/subnets" }
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
   ]>;
 }
 
