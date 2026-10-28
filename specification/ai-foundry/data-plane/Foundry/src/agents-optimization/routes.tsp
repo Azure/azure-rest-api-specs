@@ -39,6 +39,26 @@ interface AgentOptimizationJobs {
   get is queryJobStatus<AgentOptimizationJob>;
 
   /**
+   * Downloads a declared file as a binary stream. The path must match a file descriptor returned by the service. When candidate_id is omitted, the request is scoped to the job.
+   */
+  @summary("Download an agent optimization job file")
+  @route("agent_optimization_jobs/{jobId}/files")
+  @get
+  downloadFile is FoundryDataPlaneOperation<
+    {
+      /** The ID of the parent optimization job. */
+      @path jobId: string;
+
+      /** The candidate that owns the file. Omit to request a job-level file. */
+      @query candidate_id?: string;
+
+      /** The file path returned in the file descriptor. */
+      @query path: string;
+    },
+    bytes
+  >;
+
+  /**
    * Lists optimization jobs with cursor pagination and optional status or agent name filters.
    */
   @summary("List agent optimization jobs")

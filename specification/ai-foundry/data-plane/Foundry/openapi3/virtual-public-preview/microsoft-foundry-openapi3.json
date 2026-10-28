@@ -1793,7 +1793,7 @@
             "required": false,
             "description": "Filter to jobs in this lifecycle state.",
             "schema": {
-              "$ref": "#/components/schemas/JobStatus"
+              "$ref": "#/components/schemas/AgentOptimizationJobStatus"
             },
             "explode": false
           },
@@ -2012,7 +2012,7 @@
       "get": {
         "operationId": "AgentOptimizationJobCandidates_listCandidates",
         "summary": "List candidates for an agent optimization job",
-        "description": "Lists candidates for the given optimization job with cursor pagination, including the original baseline and generated candidates. Each `output.mutations` item identifies a changed attribute by `type`; mutation `value` fields are omitted unless the client passes `expand=mutations`.",
+        "description": "Lists candidates for the given optimization job with cursor pagination. Agent optimization can include the original baseline and multiple generated candidates; prompt and skill optimization generate a single candidate. Evaluated skill jobs also expose the original baseline for reporting through the existing evaluation field; the baseline is not a generated alternative. A generated skill candidate contains zero or more skill outcomes, not one candidate per skill. Each `output.mutations` item identifies a changed attribute by `type`; mutation `value` fields are omitted unless the client passes `expand=mutations`.",
         "parameters": [
           {
             "name": "jobId",
@@ -2156,7 +2156,7 @@
       "get": {
         "operationId": "AgentOptimizationJobCandidates_getCandidate",
         "summary": "Get a candidate for an agent optimization job",
-        "description": "Retrieves a single candidate. Mutation values are always included.",
+        "description": "Retrieves a single candidate. Mutation values are always included. Skill optimization detail includes independent skill results, resolved context, and the persisted execution snapshot when available; these detail fields are omitted from candidate lists.",
         "parameters": [
           {
             "name": "jobId",
@@ -2228,7 +2228,7 @@
       "post": {
         "operationId": "AgentOptimizationJobCandidates_promoteCandidate",
         "summary": "Promote a candidate for an agent optimization job",
-        "description": "Promotes a candidate to the Foundry agent stored in the parent job's target configuration. Promotion is unavailable when the job omitted target_configuration. Prompt-agent promotion creates a new agent version. Hosted-agent promotion currently records promotion metadata without deploying a new hosted-agent version.",
+        "description": "Promotes a supported completed candidate to the Foundry agent stored in the parent job's target configuration. A skill-optimization candidate must be the evaluated learned candidate for a supported Prompt or Managed target; baseline, unevaluated, agentless, and unsupported-runtime skill candidates cannot be promoted. Skill promotion releases the exact evaluated candidate configuration without regenerating skills. Prompt-agent promotion creates a new agent version. Hosted-agent promotion currently records promotion metadata without deploying a new hosted-agent version.",
         "parameters": [
           {
             "name": "jobId",
@@ -2266,6 +2266,89 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AgentOptimizationCandidate"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "AgentOptimizationJobs"
+        ]
+      }
+    },
+    "/agent_optimization_jobs/{jobId}/files": {
+      "get": {
+        "operationId": "AgentOptimizationJobs_downloadFile",
+        "summary": "Download an agent optimization job file",
+        "description": "Downloads a declared file as a binary stream. The path must match a file descriptor returned by the service. When candidate_id is omitted, the request is scoped to the job.",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the parent optimization job.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "candidate_id",
+            "in": "query",
+            "required": false,
+            "description": "The candidate that owns the file. Omit to request a job-level file.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The file path returned in the file descriptor.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "contentMediaType": "application/octet-stream"
                 }
               }
             }
@@ -38803,6 +38886,39 @@
         ],
         "description": "Candidate output produced by an agent-optimization job."
       },
+      "AgentOptimizationAppInsightsTraceConnectionConfiguration": {
+        "type": "object",
+        "required": [
+          "type",
+          "resource_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "appinsights"
+            ],
+            "description": "Application Insights provider discriminator."
+          },
+          "resource_id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "ARM component resource ID of an Application Insights connection linked to this project. Invalid or unavailable explicit configuration must fail rather than fall back."
+          },
+          "agent_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "Required without target_configuration and omitted with a target agent. Exact, case-sensitive AppRoleName or cloud_RoleName, including any emitted OpenTelemetry namespace prefix. This is a telemetry service identity, not a Foundry agent reference. No surrounding whitespace, wildcards, or KQL."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationTraceConnectionConfiguration"
+          }
+        ],
+        "description": "Selects a project-linked Application Insights component."
+      },
       "AgentOptimizationBaselineAgentConfiguration": {
         "type": "object",
         "properties": {
@@ -38857,6 +38973,10 @@
             "$ref": "#/components/schemas/AgentOptimizationCandidateStatus",
             "description": "The candidate's current lifecycle state."
           },
+          "error": {
+            "$ref": "#/components/schemas/OpenAI.Error",
+            "description": "Primary failure or skip reason. Omitted for other candidate statuses."
+          },
           "started_at": {
             "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "Timestamp when work on this candidate slot began, represented in Unix time."
@@ -38865,9 +38985,24 @@
             "$ref": "#/components/schemas/AgentOptimizationCandidateOutput",
             "description": "Typed output generated for this candidate. The output type matches the parent job's optimization type. Omitted until output is available."
           },
+          "execution_summary": {
+            "$ref": "#/components/schemas/AgentOptimizationSkillExecutionSummary",
+            "description": "Persisted skill execution snapshot, including partial outcomes. Populated on candidate GET when available and omitted from LIST."
+          },
+          "resolved_context": {
+            "$ref": "#/components/schemas/AgentOptimizationSkillResolvedContext",
+            "description": "Frozen trace cohort and discovered agent skills for skill optimization. Populated on candidate GET when available and omitted from LIST."
+          },
           "rationale": {
             "type": "string",
             "description": "Human-readable explanation of why the optimizer produced this candidate. Populated on candidate GET when available and omitted from LIST."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOptimizationCandidateFile"
+            },
+            "description": "Metadata for files generated for this candidate, such as trace analysis. Populated on candidate GET when available and omitted from LIST. An empty list means no files were generated; omission means the inventory is not available. Metadata does not provide file content or a download URL."
           },
           "agent_version": {
             "type": "string",
@@ -38875,7 +39010,7 @@
           },
           "evaluation": {
             "$ref": "#/components/schemas/AgentOptimizationCandidateEvaluation",
-            "description": "Comparative evaluation summary. Omitted when this candidate was not comparatively evaluated."
+            "description": "Evaluation summary, including reporting-only measurements for skill baseline and generated candidates. Omitted when no measurements are available. Missing scores do not imply success or zero."
           },
           "promotion": {
             "$ref": "#/components/schemas/AgentOptimizationCandidatePromotionInfo",
@@ -38930,6 +39065,33 @@
         ],
         "description": "Vocabulary for the `expand` query parameter on the candidate LIST endpoint. This open union keeps SDKs usable when new expand keys ship server-side. Multiple values are serialized as one comma-separated query parameter."
       },
+      "AgentOptimizationCandidateFile": {
+        "type": "object",
+        "required": [
+          "path",
+          "type",
+          "size_in_bytes"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Candidate-relative artifact path, not a local filesystem path or a download URL."
+          },
+          "type": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Artifact category, for example trace_analysis. Additional categories may be returned."
+          },
+          "size_in_bytes": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "description": "Artifact size in bytes."
+          }
+        },
+        "description": "Metadata for an artifact generated for an optimization candidate."
+      },
       "AgentOptimizationCandidateOutput": {
         "type": "object",
         "required": [
@@ -38945,7 +39107,8 @@
           "propertyName": "type",
           "mapping": {
             "agent_optimization": "#/components/schemas/AgentOptimizationAgentCandidateOutput",
-            "prompt_optimization": "#/components/schemas/AgentOptimizationPromptCandidateOutput"
+            "prompt_optimization": "#/components/schemas/AgentOptimizationPromptCandidateOutput",
+            "skill_optimization": "#/components/schemas/AgentOptimizationSkillCandidateOutput"
           }
         },
         "description": "Base candidate output. Job types define derived output models with their own fields."
@@ -38993,7 +39156,8 @@
               "generating",
               "evaluating",
               "completed",
-              "failed"
+              "failed",
+              "skipped"
             ]
           }
         ],
@@ -39059,7 +39223,8 @@
           "propertyName": "type",
           "mapping": {
             "agent_optimization": "#/components/schemas/AgentOptimizationConfiguration",
-            "prompt_optimization": "#/components/schemas/PromptOptimizationConfiguration"
+            "prompt_optimization": "#/components/schemas/PromptOptimizationConfiguration",
+            "skill_optimization": "#/components/schemas/SkillOptimizationConfiguration"
           }
         },
         "description": "Base model for type-specific optimization configuration."
@@ -39073,7 +39238,8 @@
             "type": "string",
             "enum": [
               "agent_optimization",
-              "prompt_optimization"
+              "prompt_optimization",
+              "skill_optimization"
             ]
           }
         ],
@@ -39191,19 +39357,14 @@
       },
       "AgentOptimizationEvaluationConfiguration": {
         "type": "object",
-        "required": [
-          "training_set",
-          "evaluators",
-          "evaluation_model"
-        ],
         "properties": {
           "training_set": {
             "$ref": "#/components/schemas/AgentOptimizationEvaluationSet",
-            "description": "Evaluation set used to guide the optimization search. Inline data supports up to 2,000 test cases when a separate validation set is supplied; otherwise it is also used for validation and is limited to 500."
+            "description": "Required by the service for agent optimization to guide the search. Not accepted for skill optimization, where evaluation is reporting-only. Inline data supports up to 2,000 test cases when a separate validation set is supplied; otherwise it is also used for validation and is limited to 500."
           },
           "validation_set": {
             "$ref": "#/components/schemas/AgentOptimizationEvaluationSet",
-            "description": "Held-out evaluation set used for full candidate evaluation, limited to 500 inline test cases. The training set is reused and subject to the same 500-test-case validation limit when omitted."
+            "description": "Held-out evaluation set used for full candidate evaluation, limited to 500 inline test cases. Agent optimization reuses training_set when omitted. Skill evaluation requires a caller-supplied validation_set, reused unchanged for the baseline and learned candidate; the service rejects omission rather than generating a dataset from traces."
           },
           "evaluators": {
             "type": "array",
@@ -39212,11 +39373,11 @@
             },
             "minItems": 1,
             "maxItems": 20,
-            "description": "Evaluator references used to score candidate quality."
+            "description": "Existing evaluator references. Required by the service for agent optimization. Skill evaluation requires these references, evaluator_generation_configuration, or both; when both are supplied, use their combined evaluator set. After skill evaluation preparation, contains the resolved exact versions used unchanged for baseline and learned-candidate evaluation."
           },
           "evaluation_model": {
             "$ref": "#/components/schemas/EvaluationModelConfiguration",
-            "description": "Model configuration used by model-based evaluators and conversation simulation."
+            "description": "Model configuration used by model-based evaluators and conversation simulation. Required by the service for agent optimization and when skill evaluation is requested."
           },
           "max_concurrent_agent_runs": {
             "type": "integer",
@@ -39225,9 +39386,13 @@
             "maximum": 10,
             "description": "Maximum number of target-agent runs executed concurrently during each single-turn evaluation. If omitted, the service defaults to 1. Conversation evaluation supports only 1.",
             "default": 1
+          },
+          "evaluator_generation_configuration": {
+            "$ref": "#/components/schemas/AgentOptimizationEvaluatorGenerationConfiguration",
+            "description": "Opt-in creation of evaluators for skill optimization using the job's optimization_model_configuration, not evaluation_model. No separate generation model is accepted. Resolved exact versions are returned in evaluators after preparation. Not accepted for agent optimization; use existing evaluator references there."
           }
         },
-        "description": "Reusable quality-measurement configuration."
+        "description": "Shared evaluation inputs for agent and skill optimization. All fields are optional in the schema; the service validates required combinations for the selected optimization type and rejects invalid requests."
       },
       "AgentOptimizationEvaluationSet": {
         "type": "object",
@@ -39288,6 +39453,70 @@
         },
         "description": "Reference to a named evaluator, optionally pinned to a version."
       },
+      "AgentOptimizationEvaluatorGenerationConfiguration": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Evaluator generation source discriminator."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Additional instructions or context to guide evaluator generation from the selected source."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "agent_traces": "#/components/schemas/AgentOptimizationTraceEvaluatorGenerationConfiguration"
+          }
+        },
+        "description": "Base configuration for service-generated optimization evaluators. Currently supported for skill optimization only. Uses the job's optimization_model_configuration; no separate generation model is accepted."
+      },
+      "AgentOptimizationFixedTraceWindow": {
+        "type": "object",
+        "required": [
+          "type",
+          "start_time",
+          "end_time"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "fixed"
+            ],
+            "description": "Fixed-window discriminator."
+          },
+          "start_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Inclusive ISO 8601 timestamp with an explicit UTC offset. Must precede end_time and be in the past. The service validates the interval at submission."
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Exclusive ISO 8601 timestamp with an explicit UTC offset. Must be at or before job submission time, forming a completed past interval. The service rejects future windows rather than waiting or clamping timestamps."
+          },
+          "max_traces": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Maximum number of trace conversations to select. Defaults to 100. Select the latest matching traces, giving preference to those with human annotations, evaluation results, or both. Traces without feedback remain eligible.",
+            "default": 100
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationTraceWindow"
+          }
+        ],
+        "description": "Selects recent trace conversations in a completed past half-open interval, preferring traces with annotations or evaluation results."
+      },
       "AgentOptimizationFoundryAgentTargetConfiguration": {
         "type": "object",
         "required": [
@@ -39320,6 +39549,61 @@
           }
         ],
         "description": "Identifies the Foundry agent that owns the configuration being optimized."
+      },
+      "AgentOptimizationFoundrySkillOutputReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "foundry_skill"
+            ],
+            "description": "Registered Foundry skill reference discriminator."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Intended skill name, retained for rejected, failed, pending, and unchanged results."
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Exact service-returned version, present only with status created after confirmed publication. Never copy the input version here or infer a version for an uncertain write."
+          }
+        },
+        "description": "Intended output identity, not proof that a skill version was created."
+      },
+      "AgentOptimizationFoundrySkillReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "version"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "foundry_skill"
+            ],
+            "description": "Registered Foundry skill reference discriminator."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Registered skill name."
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Opaque pinned version. The aliases latest and default are not accepted."
+          }
+        },
+        "description": "Exact reference to an existing skill version in the job's project."
       },
       "AgentOptimizationGoal": {
         "anyOf": [
@@ -39382,13 +39666,13 @@
             "readOnly": true
           },
           "status": {
-            "$ref": "#/components/schemas/JobStatus",
+            "$ref": "#/components/schemas/AgentOptimizationJobStatus",
             "description": "Current lifecycle status.",
             "readOnly": true
           },
           "error": {
             "$ref": "#/components/schemas/OpenAI.Error",
-            "description": "Error details — populated only on failure.",
+            "description": "Failure or skip reason; status distinguishes the outcomes. Omitted otherwise.",
             "readOnly": true
           },
           "display_name": {
@@ -39398,7 +39682,7 @@
           },
           "target_configuration": {
             "$ref": "#/components/schemas/AgentOptimizationTargetConfiguration",
-            "description": "Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent."
+            "description": "Foundry agent whose configuration is optimized, or a read-only trace and skill source for skill_optimization. Agentless skill optimization requires explicit agent_traces telemetry configuration with an exact agent_name. Skill optimization does not modify the target agent."
           },
           "optimization_model_configuration": {
             "$ref": "#/components/schemas/AgentOptimizationModelConfiguration",
@@ -39432,7 +39716,7 @@
             "readOnly": true
           }
         },
-        "description": "Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration."
+        "description": "Agent optimization job resource — a long-running job that produces candidate changes or versioned skill packages. For failed or skipped jobs, error explains the outcome; status distinguishes failure from a skip."
       },
       "AgentOptimizationJobLatency": {
         "type": "object",
@@ -39493,6 +39777,20 @@
           }
         },
         "description": "Partial or terminal result produced by an agent optimization job."
+      },
+      "AgentOptimizationJobStatus": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/JobStatus"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "skipped"
+            ]
+          }
+        ],
+        "description": "Optimization job lifecycle, including a terminal skip when required input is unavailable."
       },
       "AgentOptimizationJobTokenUsage": {
         "type": "object",
@@ -39692,6 +39990,313 @@
           }
         },
         "description": "A skill in the manually supplied agent optimization surface."
+      },
+      "AgentOptimizationSkillArtifactValidation": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "status",
+          "details"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "artifact"
+            ],
+            "description": "Artifact validation discriminator."
+          },
+          "id": {
+            "$ref": "#/components/schemas/AgentOptimizationSkillValidationId",
+            "description": "Check identifier. Each (type, id) pair is unique within one skill result."
+          },
+          "status": {
+            "$ref": "#/components/schemas/AgentOptimizationSkillValidationStatus",
+            "description": "Whether the check ran and its outcome. Unimplemented checks are omitted."
+          },
+          "details": {
+            "type": "string",
+            "maxLength": 1024,
+            "description": "Safe explanation of coverage, limitations, or why the check did not run. Limited checks must not imply full-package coverage; no sensitive excerpts."
+          },
+          "error_code": {
+            "type": "string",
+            "description": "Service-authored failure or availability code. Omitted when unavailable."
+          },
+          "score": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Advisory quality or overlap score, not a comparative candidate evaluation score."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationSkillValidation"
+          }
+        ],
+        "description": "Per-skill artifact validation with explicit coverage and limitations."
+      },
+      "AgentOptimizationSkillCandidateOutput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "skill_optimization"
+            ],
+            "description": "Skill optimization output discriminator."
+          },
+          "skill_results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOptimizationSkillResult"
+            },
+            "description": "Independent proposed skill outcomes. A completed empty array means no changes were proposed, for example because there were no new learnings; no new versions are published in that case. Discovered but untouched skills do not require outcomes. Populated on candidate GET when available and omitted from LIST summaries."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationCandidateOutput"
+          }
+        ],
+        "description": "Output of the single generated candidate produced by trace-driven skill optimization. It can contain zero or more independent skill outcomes. Optional reporting-only evaluation reuses a baseline candidate and each candidate's evaluation summary; the baseline is not a generated alternative."
+      },
+      "AgentOptimizationSkillExecutionStep": {
+        "type": "object",
+        "required": [
+          "name",
+          "status"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Service-authored logical step name, unique within the snapshot, for example resolve_inputs, collect_traces, or publish_skills. Consumers must tolerate unfamiliar names."
+          },
+          "status": {
+            "$ref": "#/components/schemas/AgentOptimizationSkillExecutionStepStatus",
+            "description": "Recorded step state."
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 1024,
+            "description": "Safe service-authored explanation, never raw model or trace content."
+          },
+          "step_details": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Step-specific JSON key/value details, with arbitrary JSON values rather than a fixed property schema. Omitted when unavailable. Never include sensitive trace or model content."
+          },
+          "error_code": {
+            "type": "string",
+            "description": "Safe failure or cancellation code, cleared when a retry starts or succeeds."
+          }
+        },
+        "description": "Latest recorded state of one logical step in the persisted execution snapshot."
+      },
+      "AgentOptimizationSkillExecutionStepStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "not_started",
+              "in_progress",
+              "completed",
+              "failed",
+              "skipped",
+              "cancelled"
+            ]
+          }
+        ],
+        "description": "Latest recorded state of a logical execution step."
+      },
+      "AgentOptimizationSkillExecutionSummary": {
+        "type": "object",
+        "required": [
+          "updated_at",
+          "steps"
+        ],
+        "properties": {
+          "updated_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "Time the recorded execution facts last changed, as a UTC Unix timestamp in seconds."
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOptimizationSkillExecutionStep"
+            },
+            "maxItems": 10,
+            "description": "At most ten distinct steps in pipeline order. Older snapshots may omit collect_feedback."
+          }
+        },
+        "description": "Persisted candidate execution snapshot, including partial runs. Not exposed on the job or candidate list response."
+      },
+      "AgentOptimizationSkillResolvedContext": {
+        "type": "object",
+        "properties": {
+          "source_trace_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Complete evidence cohort, including traces that produced no artifact. Omitted before resolution; an empty array means a resolved empty cohort."
+          },
+          "agent_skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOptimizationFoundrySkillReference"
+            },
+            "description": "Deduplicated exact baselines discovered from the agent and its toolboxes. Excludes skills supplied only through skill_references context items and does not imply invocation. Omitted before discovery; empty when none were discovered or the job is agentless."
+          }
+        },
+        "description": "Frozen evidence and discovered baselines, without duplicating requested job configuration."
+      },
+      "AgentOptimizationSkillResult": {
+        "type": "object",
+        "required": [
+          "status",
+          "output_skill"
+        ],
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/AgentOptimizationSkillResultStatus",
+            "description": "Validation or publication outcome."
+          },
+          "input_skill": {
+            "$ref": "#/components/schemas/AgentOptimizationFoundrySkillReference",
+            "description": "Exact input baseline when updating or retaining an existing skill, with the same name as output_skill. Omitted when creating a new skill."
+          },
+          "output_skill": {
+            "$ref": "#/components/schemas/AgentOptimizationFoundrySkillOutputReference",
+            "description": "Intended identity for every result. A confirmed version appears only with status created; no_change retains the baseline version only in input_skill."
+          },
+          "rationale": {
+            "type": "string",
+            "description": "Safe, human-readable explanation of why this skill was proposed or retained, grounded in the selected evidence. Omitted until available. Must not include sensitive trace excerpts or hidden model reasoning."
+          },
+          "validations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOptimizationSkillValidation"
+            },
+            "description": "Artifact checks, including rejections. Absence does not imply success. Candidate evaluation is reported through AgentOptimizationCandidate.evaluation and is not included in per-skill validations."
+          },
+          "error": {
+            "$ref": "#/components/schemas/AgentOptimizationSkillResultError",
+            "description": "Primary failure, rejection, or uncertain-publication reason. Detailed findings remain in validations. Omitted when there is no error."
+          }
+        },
+        "description": "One independent skill outcome with its input baseline and intended or confirmed output."
+      },
+      "AgentOptimizationSkillResultError": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "Stable service-authored error code."
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "description": "Safe explanation, never raw exceptions or sensitive trace or model content."
+          }
+        },
+        "description": "Structured error for an independent skill outcome."
+      },
+      "AgentOptimizationSkillResultStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "created",
+              "no_change",
+              "rejected",
+              "pending",
+              "failed",
+              "publication_unknown"
+            ]
+          }
+        ],
+        "description": "Publication or validation outcome for one skill, independent of whole-job status."
+      },
+      "AgentOptimizationSkillValidation": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Validation category discriminator."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "artifact": "#/components/schemas/AgentOptimizationSkillArtifactValidation"
+          }
+        },
+        "description": "Base validation category; reporting-only performance scores use the baseline and generated candidate evaluation summaries."
+      },
+      "AgentOptimizationSkillValidationId": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "schema",
+              "format",
+              "pii",
+              "lint-scripts",
+              "quality",
+              "security-scan",
+              "overlap",
+              "package_integrity",
+              "target_compatibility",
+              "evidence_provenance"
+            ]
+          }
+        ],
+        "description": "Artifact check identifier. Only implemented checks in the validation plan are reported."
+      },
+      "AgentOptimizationSkillValidationStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "passed",
+              "failed",
+              "warning",
+              "skipped",
+              "unavailable"
+            ]
+          }
+        ],
+        "description": "Status of an artifact validation and its coverage."
       },
       "AgentOptimizationSkillsMutation": {
         "type": "object",
@@ -39982,6 +40587,103 @@
           }
         ],
         "description": "Tool mutations."
+      },
+      "AgentOptimizationTraceConnectionConfiguration": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Trace provider discriminator."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "appinsights": "#/components/schemas/AgentOptimizationAppInsightsTraceConnectionConfiguration"
+          }
+        },
+        "description": "Explicit project-authorized telemetry selection, not an arbitrary endpoint."
+      },
+      "AgentOptimizationTraceEvaluatorGenerationConfiguration": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent_traces"
+            ],
+            "description": "Generate evaluators from the agent_traces context."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationEvaluatorGenerationConfiguration"
+          }
+        ],
+        "description": "Generates evaluators from the job's selected trace evidence."
+      },
+      "AgentOptimizationTraceIdsTraceWindow": {
+        "type": "object",
+        "required": [
+          "type",
+          "trace_ids",
+          "lookback_hours"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "trace_ids"
+            ],
+            "description": "Explicit trace-ID selection discriminator. Service support is TBD."
+          },
+          "trace_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "Explicit trace identifiers to look up within the configured telemetry source. Service support, list-size limits, duplicate handling, and missing-ID behavior are TBD."
+          },
+          "lookback_hours": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Requested telemetry lookup horizon in hours. Service support, the lookback anchor, and maximum supported horizon are TBD."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationTraceWindow"
+          }
+        ],
+        "description": "Proposed explicit trace-ID selection. Service support and detailed lookup behavior are TBD; this contract does not establish runtime availability."
+      },
+      "AgentOptimizationTraceWindow": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Trace window discriminator."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "fixed": "#/components/schemas/AgentOptimizationFixedTraceWindow",
+            "trace_ids": "#/components/schemas/AgentOptimizationTraceIdsTraceWindow"
+          }
+        },
+        "description": "Trace selection window for a one-time skill optimization job."
       },
       "AgentOptimizationUserConversationSimulationDataSource": {
         "type": "object",
@@ -40720,6 +41422,36 @@
             "Evaluations=V1Preview"
           ]
         }
+      },
+      "AgentTracesOptimizationContext": {
+        "type": "object",
+        "required": [
+          "type",
+          "trace_window"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent_traces"
+            ],
+            "description": "Agent trace context discriminator."
+          },
+          "trace_connection_configuration": {
+            "$ref": "#/components/schemas/AgentOptimizationTraceConnectionConfiguration",
+            "description": "Explicit telemetry selection. Required without a target agent. When omitted with a target, use its project-linked telemetry. Not accepted on steering_prompt context."
+          },
+          "trace_window": {
+            "$ref": "#/components/schemas/AgentOptimizationTraceWindow",
+            "description": "Trace selection: a fixed half-open window, or proposed explicit trace_ids selection whose service support is TBD."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OptimizationContext"
+          }
+        ],
+        "description": "Trace evidence for skill optimization, selected independently of feedback availability."
       },
       "AgentVersionObject": {
         "type": "object",
@@ -94103,6 +94835,8 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "skill_references": "#/components/schemas/SkillReferencesOptimizationContext",
+            "agent_traces": "#/components/schemas/AgentTracesOptimizationContext",
             "steering_prompt": "#/components/schemas/SteeringPromptOptimizationContext"
           }
         },
@@ -94116,7 +94850,9 @@
           {
             "type": "string",
             "enum": [
-              "steering_prompt"
+              "steering_prompt",
+              "agent_traces",
+              "skill_references"
             ]
           }
         ],
@@ -94884,10 +95620,10 @@
           "context": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/OptimizationContext"
+              "$ref": "#/components/schemas/SteeringPromptOptimizationContext"
             },
             "minItems": 1,
-            "description": "Context used to steer prompt optimization. Omitted when no context is supplied."
+            "description": "Steering context for prompt optimization. Agent trace and skill reference context are supported only by skill optimization. Omitted when no context is supplied."
           }
         },
         "allOf": [
@@ -98453,6 +99189,40 @@
         "pattern": "^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$",
         "description": "A skill name following the agentskills.io spec: lowercase letters, numbers, and hyphens only. Must not start or end with a hyphen or contain consecutive hyphens."
       },
+      "SkillOptimizationConfiguration": {
+        "type": "object",
+        "required": [
+          "type",
+          "context"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "skill_optimization"
+            ],
+            "description": "Skill optimization discriminator."
+          },
+          "context": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OptimizationContext"
+            },
+            "minItems": 1,
+            "description": "Trace evidence, optional steering guidance, and optional exact baseline references. Supply agent_traces context; use separate steering_prompt and skill_references items for guidance and baselines."
+          },
+          "evaluation_configuration": {
+            "$ref": "#/components/schemas/AgentOptimizationEvaluationConfiguration",
+            "description": "Optional before/after evaluation using the shared evaluation configuration. The service requires target_configuration, validation_set, evaluation_model, and existing evaluators or evaluator_generation_configuration. Training sets are not accepted. Evaluate the same pinned target with baseline skills and proposed skills using the same validation set and resolved evaluator versions. Scores do not guide generation, ranking, selection, or publication. Omitted to skip performance evaluation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentOptimizationConfigurationBase"
+          }
+        ],
+        "description": "Configuration for generating a single skill candidate from trace evidence. The candidate can contain zero or more skill outcomes; no new learnings can produce an empty skill_results array without publishing versions. Optional evaluation reuses a non-generated baseline candidate."
+      },
       "SkillReference": {
         "type": "object",
         "required": [
@@ -98474,6 +99244,35 @@
             "Skills=V1Preview"
           ]
         }
+      },
+      "SkillReferencesOptimizationContext": {
+        "type": "object",
+        "required": [
+          "type",
+          "skill_references"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "skill_references"
+            ],
+            "description": "Skill reference context discriminator."
+          },
+          "skill_references": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentOptimizationFoundrySkillReference"
+            },
+            "description": "Exact skill versions unioned with skills discovered from Prompt or Managed targets, including toolboxes. References across context items and discovered skills are deduplicated. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. An empty list supplies no explicit baselines."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OptimizationContext"
+          }
+        ],
+        "description": "Explicit exact-version baselines for skill optimization."
       },
       "SkillVersion": {
         "type": "object",
@@ -98570,7 +99369,8 @@
           "prompt": {
             "type": "string",
             "minLength": 1,
-            "description": "Developer guidance describing the desired changes."
+            "maxLength": 102400,
+            "description": "Developer guidance describing the desired changes. Maximum UTF-8 encoded size is 100 KiB (102,400 bytes), enforced by the service. The character limit is an additional bound, not a substitute for UTF-8 byte-size validation."
           }
         },
         "allOf": [
@@ -101629,6 +102429,13 @@
           "end_time": {
             "$ref": "#/components/schemas/FoundryTimestamp",
             "description": "End of the time window (Unix timestamp in seconds). Defaults to current time."
+          },
+          "trace_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Optional explicit list of trace IDs to include."
           }
         },
         "allOf": [
