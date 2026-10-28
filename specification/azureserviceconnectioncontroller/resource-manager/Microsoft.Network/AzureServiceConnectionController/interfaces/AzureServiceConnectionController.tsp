@@ -115,6 +115,8 @@ interface AzureServiceConnectionControllers {
       },
       returnType: #{
         statusCode: 200,
+        azureAsyncOperation: "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-02-09-preview",
+        retryAfter: 10,
         body: #{
           name: "pg1",
           id: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureServiceConnectionControllers/pg1",
@@ -144,7 +146,18 @@ interface AzureServiceConnectionControllers {
     #{ title: "AzureServiceConnectionControllers_CreateOrUpdate" }
   )
   @doc("Creates or updates an Azure Service Connection Controller.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<AzureServiceConnectionController>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    AzureServiceConnectionController,
+    Response =
+      | (ArmResourceUpdatedResponse<AzureServiceConnectionController> &
+          ArmAsyncOperationHeader<FinalResult = AzureServiceConnectionController> &
+          Azure.Core.Foundations.RetryAfterHeader)
+      | ArmResourceCreatedResponse<
+          AzureServiceConnectionController,
+          ArmAsyncOperationHeader<FinalResult = AzureServiceConnectionController> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+  >;
 
   @opExample(
     #{
