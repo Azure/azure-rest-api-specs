@@ -160,7 +160,11 @@ interface AzureServiceConnectionControllers {
     #{ title: "AzureServiceConnectionControllers_Delete" }
   )
   @doc("Deletes an Azure Service Connection Controller. Only its owning Probing Gateway may call this operation.")
-  delete is ArmResourceDeleteWithoutOkAsync<AzureServiceConnectionController>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    AzureServiceConnectionController,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Updates the tags of an Azure Service Connection Controller.")
   update is ArmTagsPatchSync<AzureServiceConnectionController>;
