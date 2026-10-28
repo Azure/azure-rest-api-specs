@@ -2504,8 +2504,83 @@ union ZonePlacementPolicyType {
 
 /** Properties supplied when updating a pool. */
 model PoolPatch {
-  ...OmitProperties<Pool, "name">;
+  ...OmitProperties<Pool, "name" | "type" | "properties">;
+
+  /** The pool properties to update. */
+  @typeChangedFrom(Versions.v2026_10_01, PoolProperties)
+  properties?: PoolPatchProperties;
 }
+
+/** Pool settings with partial updates for the new zone policies. */
+@added(Versions.v2026_10_01)
+model PoolPatchProperties {
+  ...OmitProperties<
+    PoolProperties,
+    | "deploymentConfiguration"
+    | "certificates"
+    | "applicationLicenses"
+    | "targetNodeCommunicationMode"
+    | "currentNodeCommunicationMode"
+    | "resourceTags"
+  >;
+
+  /** Deployment configuration properties. */
+  @summary("This property describes the virtual machines that the pool nodes will be deployed on.")
+  deploymentConfiguration?: DeploymentConfigurationPatch;
+}
+
+/** Deployment settings with partial updates for the new zone policies. */
+@added(Versions.v2026_10_01)
+model DeploymentConfigurationPatch {
+  ...OmitProperties<DeploymentConfiguration, "virtualMachineConfiguration">;
+
+  /** The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure. */
+  @summary("The virtual machine configuration for the pool.")
+  virtualMachineConfiguration?: VirtualMachineConfigurationPatch;
+}
+
+/** Virtual machine settings retaining legacy requirements when updating zone policies. */
+@added(Versions.v2026_10_01)
+model VirtualMachineConfigurationPatch {
+  ...OmitProperties<
+    VirtualMachineConfiguration,
+    "placement" | "resiliencyPolicy"
+  >;
+
+  /** The availability zone placement policy to update. Omitted fields retain their existing values. */
+  placement?: PlacementPatch;
+
+  /** The resiliency policy to update. Omitted fields retain their existing values. */
+  resiliencyPolicy?: ResiliencyPolicyPatch;
+}
+
+/** Availability zone placement fields to update, leaving omitted fields unchanged. */
+@added(Versions.v2026_10_01)
+@withOptionalProperties
+model PlacementPatch is Placement;
+
+/** Resiliency policy fields to update, leaving omitted fields unchanged. */
+@added(Versions.v2026_10_01)
+model ResiliencyPolicyPatch {
+  ...OmitProperties<ResiliencyPolicy, "zoneAllocationPolicy">;
+
+  /** The zone allocation policy fields to update. */
+  zoneAllocationPolicy?: ZoneAllocationPolicyPatch;
+}
+
+/** Zone allocation policy fields to update, leaving omitted fields unchanged. */
+@added(Versions.v2026_10_01)
+model ZoneAllocationPolicyPatch {
+  ...OmitProperties<ZoneAllocationPolicy, "maxInstancePercentPerZonePolicy">;
+
+  /** The per-zone instance percentage policy fields to update. */
+  maxInstancePercentPerZonePolicy?: MaxInstancePercentPerZonePolicyPatch;
+}
+
+/** Per-zone instance percentage fields to update, leaving omitted fields unchanged. */
+@added(Versions.v2026_10_01)
+@withOptionalProperties
+model MaxInstancePercentPerZonePolicyPatch is MaxInstancePercentPerZonePolicy;
 
 @@typeChangedFrom(
   Pools.update::parameters.properties,

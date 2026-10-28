@@ -3204,10 +3204,6 @@
         }
       }
     },
-    "Azure.Core.armResourceType": {
-      "type": "string",
-      "description": "Represents an Azure Resource Type."
-    },
     "AzureBlobFileSystemConfiguration": {
       "type": "object",
       "title": "Information used to connect to an Azure Storage Container using Blobfuse.",
@@ -4186,6 +4182,17 @@
         }
       }
     },
+    "DeploymentConfigurationPatch": {
+      "type": "object",
+      "description": "Deployment settings with partial updates for the new zone policies.",
+      "properties": {
+        "virtualMachineConfiguration": {
+          "$ref": "#/definitions/VirtualMachineConfigurationPatch",
+          "title": "The virtual machine configuration for the pool.",
+          "description": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure."
+        }
+      }
+    },
     "DetectorListResult": {
       "type": "object",
       "description": "Paged collection of DetectorResponse items",
@@ -5109,6 +5116,23 @@
         "value"
       ]
     },
+    "MaxInstancePercentPerZonePolicyPatch": {
+      "type": "object",
+      "description": "Per-zone instance percentage fields to update, leaving omitted fields unchanged.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the maximum instance percentage policy is enabled."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum percentage of pool instances that may be allocated in a single availability zone.",
+          "minimum": 1,
+          "maximum": 100
+        }
+      }
+    },
     "MetadataItem": {
       "type": "object",
       "title": "A name-value pair associated with a Batch service resource.",
@@ -5595,6 +5619,16 @@
         "zonePlacementPolicy"
       ]
     },
+    "PlacementPatch": {
+      "type": "object",
+      "description": "Availability zone placement fields to update, leaving omitted fields unchanged.",
+      "properties": {
+        "zonePlacementPolicy": {
+          "$ref": "#/definitions/ZonePlacementPolicyType",
+          "description": "Auto delegates zone selection and balancing to the virtual machine scale set."
+        }
+      }
+    },
     "Pool": {
       "type": "object",
       "description": "Contains information about a pool.",
@@ -5700,11 +5734,6 @@
       "type": "object",
       "description": "Properties supplied when updating a pool.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/PoolProperties",
-          "description": "The properties associated with the pool.",
-          "x-ms-client-flatten": true
-        },
         "identity": {
           "$ref": "#/definitions/BatchPoolIdentity",
           "description": "The type of identity used for the Batch Pool."
@@ -5727,15 +5756,181 @@
           "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
           "readOnly": true
         },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
         "systemData": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PoolPatchProperties",
+          "description": "The pool properties to update."
+        }
+      }
+    },
+    "PoolPatchProperties": {
+      "type": "object",
+      "description": "Pool settings with partial updates for the new zone policies.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "title": "The display name for the pool.",
+          "description": "The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The last modified time of the pool.",
+          "description": "This is the last time at which the pool level data, such as the targetDedicatedNodes or autoScaleSettings, changed. It does not factor in node-level changes such as a compute node changing state.",
+          "readOnly": true
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The creation time of the pool.",
+          "description": "The creation time of the pool.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PoolProvisioningState",
+          "title": "The current state of the pool.",
+          "description": "The current state of the pool.",
+          "readOnly": true
+        },
+        "provisioningStateTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The time at which the pool entered its current state.",
+          "description": "The time at which the pool entered its current state.",
+          "readOnly": true
+        },
+        "allocationState": {
+          "$ref": "#/definitions/AllocationState",
+          "title": "Whether the pool is resizing.",
+          "description": "Whether the pool is resizing.",
+          "readOnly": true
+        },
+        "allocationStateTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The time at which the pool entered its current allocation state.",
+          "description": "The time at which the pool entered its current allocation state.",
+          "readOnly": true
+        },
+        "vmSize": {
+          "type": "string",
+          "title": "The size of virtual machines in the pool. All VMs in a pool are the same size.",
+          "description": "For information about available VM sizes, see Sizes for Virtual Machines in Azure (https://learn.microsoft.com/azure/virtual-machines/sizes/overview). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+        },
+        "vmSkuProfile": {
+          "$ref": "#/definitions/VirtualMachineSkuProfile",
+          "description": "Specifies the profile of VM sizes and the allocation strategy used to allocate compute nodes for an Instance Mix pool. When specified, vmSize must be \"Mix\". This property can only be changed while the pool has no compute nodes."
+        },
+        "currentDedicatedNodes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of dedicated compute nodes currently in the pool.",
+          "description": "The number of dedicated compute nodes currently in the pool.",
+          "readOnly": true
+        },
+        "currentLowPriorityNodes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of Spot/low-priority compute nodes currently in the pool.",
+          "description": "The number of Spot/low-priority compute nodes currently in the pool.",
+          "readOnly": true
+        },
+        "scaleSettings": {
+          "$ref": "#/definitions/ScaleSettings",
+          "title": "Settings which configure the number of nodes in the pool.",
+          "description": "Defines the desired size of the pool. This can either be 'fixedScale' where the requested targetDedicatedNodes is specified, or 'autoScale' which defines a formula which is periodically reevaluated. If this property is not specified, the pool will have a fixed scale with 0 targetDedicatedNodes."
+        },
+        "autoScaleRun": {
+          "$ref": "#/definitions/AutoScaleRun",
+          "title": "The results and errors from the last execution of the autoscale formula.",
+          "description": "This property is set only if the pool automatically scales, i.e. autoScaleSettings are used.",
+          "readOnly": true
+        },
+        "interNodeCommunication": {
+          "$ref": "#/definitions/InterNodeCommunicationState",
+          "title": "Whether the pool permits direct communication between nodes.",
+          "description": "This imposes restrictions on which nodes can be assigned to the pool. Enabling this value can reduce the chance of the requested number of nodes to be allocated in the pool. If not specified, this value defaults to 'Disabled'."
+        },
+        "networkConfiguration": {
+          "$ref": "#/definitions/NetworkConfiguration",
+          "title": "The network configuration for the pool.",
+          "description": "The network configuration for a pool."
+        },
+        "taskSlotsPerNode": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool.",
+          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.",
+          "default": 1
+        },
+        "taskSchedulingPolicy": {
+          "$ref": "#/definitions/TaskSchedulingPolicy",
+          "title": "How tasks are distributed across compute nodes in a pool.",
+          "description": "If not specified, the default is spread."
+        },
+        "userAccounts": {
+          "type": "array",
+          "title": "The list of user accounts to be created on each node in the pool.",
+          "description": "The list of user accounts to be created on each node in the pool.",
+          "items": {
+            "$ref": "#/definitions/UserAccount"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "metadata": {
+          "type": "array",
+          "title": "A list of name-value pairs associated with the pool as metadata.",
+          "description": "The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
+          "items": {
+            "$ref": "#/definitions/MetadataItem"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "startTask": {
+          "$ref": "#/definitions/StartTask",
+          "title": "A task specified to run on each compute node as it joins the pool.",
+          "description": "In an PATCH (update) operation, this property can be set to an empty object to remove the start task from the pool."
+        },
+        "applicationPackages": {
+          "type": "array",
+          "title": "The list of application packages to be installed on each compute node in the pool.",
+          "description": "Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. There is a maximum of 10 application package references on any given pool.",
+          "items": {
+            "$ref": "#/definitions/ApplicationPackageReference"
+          }
+        },
+        "resizeOperationStatus": {
+          "$ref": "#/definitions/ResizeOperationStatus",
+          "title": "Contains details about the current or last completed resize operation.",
+          "description": "Describes either the current operation (if the pool AllocationState is Resizing) or the previously completed operation (if the AllocationState is Steady).",
+          "readOnly": true
+        },
+        "mountConfiguration": {
+          "type": "array",
+          "title": "A list of file systems to mount on each node in the pool.",
+          "description": "This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.",
+          "items": {
+            "$ref": "#/definitions/MountConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "upgradePolicy": {
+          "$ref": "#/definitions/UpgradePolicy",
+          "title": "The upgrade policy for the pool.",
+          "description": "Describes an upgrade policy - automatic, manual, or rolling."
+        },
+        "deploymentConfiguration": {
+          "$ref": "#/definitions/DeploymentConfigurationPatch",
+          "title": "This property describes the virtual machines that the pool nodes will be deployed on.",
+          "description": "Deployment configuration properties."
         }
       }
     },
@@ -6315,6 +6510,16 @@
       "required": [
         "zoneAllocationPolicy"
       ]
+    },
+    "ResiliencyPolicyPatch": {
+      "type": "object",
+      "description": "Resiliency policy fields to update, leaving omitted fields unchanged.",
+      "properties": {
+        "zoneAllocationPolicy": {
+          "$ref": "#/definitions/ZoneAllocationPolicyPatch",
+          "description": "The zone allocation policy fields to update."
+        }
+      }
     },
     "ResizeError": {
       "type": "object",
@@ -7183,6 +7388,101 @@
         "nodeAgentSkuId"
       ]
     },
+    "VirtualMachineConfigurationPatch": {
+      "type": "object",
+      "description": "Virtual machine settings retaining legacy requirements when updating zone policies.",
+      "properties": {
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "title": "A reference to the Azure Virtual Machines Marketplace Image or the custom Virtual Machine Image to use.",
+          "description": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation."
+        },
+        "nodeAgentSkuId": {
+          "type": "string",
+          "title": "The SKU of the Batch node agent to be provisioned on compute nodes in the pool.",
+          "description": "The Batch node agent is a program that runs on each node in the pool, and provides the command-and-control interface between the node and the Batch service. There are different implementations of the node agent, known as SKUs, for different operating systems. You must specify a node agent SKU which matches the selected image reference. To get the list of supported node agent SKUs along with their list of verified image references, see the 'List supported node agent SKUs' operation."
+        },
+        "windowsConfiguration": {
+          "$ref": "#/definitions/WindowsConfiguration",
+          "title": "Windows operating system settings on the virtual machine.",
+          "description": "This property must not be specified if the imageReference specifies a Linux OS image."
+        },
+        "dataDisks": {
+          "type": "array",
+          "title": "The configuration for data disks attached to the compute nodes in the pool.",
+          "description": "This property must be specified if the compute nodes in the pool need to have empty data disks attached to them.",
+          "items": {
+            "$ref": "#/definitions/DataDisk"
+          },
+          "x-ms-identifiers": [
+            "lun"
+          ]
+        },
+        "licenseType": {
+          "type": "string",
+          "title": "The type of on-premises license to be used when deploying the operating system.",
+          "description": "This only applies to images that contain the Windows operating system, and should only be used when you hold valid on-premises licenses for the nodes which will be deployed. If omitted, no on-premises licensing discount is applied. Values are:\n\nWindows_Server - The on-premises license is for Windows Server.\nWindows_Client - The on-premises license is for Windows Client."
+        },
+        "containerConfiguration": {
+          "$ref": "#/definitions/ContainerConfiguration",
+          "title": "The container configuration for the pool.",
+          "description": "If specified, setup is performed on each node in the pool to allow tasks to run in containers. All regular tasks and job manager tasks run on this pool must specify the containerSettings property, and all other tasks may specify it."
+        },
+        "diskEncryptionConfiguration": {
+          "$ref": "#/definitions/DiskEncryptionConfiguration",
+          "title": "The disk encryption configuration for the pool.",
+          "description": "If specified, encryption is performed on each node in the pool during node provisioning."
+        },
+        "nodePlacementConfiguration": {
+          "$ref": "#/definitions/NodePlacementConfiguration",
+          "title": "The node placement configuration for the pool.",
+          "description": "This configuration will specify rules on how nodes in the pool will be physically allocated."
+        },
+        "extensions": {
+          "type": "array",
+          "title": "The virtual machine extension for the pool.",
+          "description": "If specified, the extensions mentioned in this configuration will be installed on each node.",
+          "items": {
+            "$ref": "#/definitions/VMExtension"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ]
+        },
+        "osDisk": {
+          "$ref": "#/definitions/OSDisk",
+          "title": "Settings for the operating system disk of the Virtual Machine.",
+          "description": "Contains configuration for ephemeral OSDisk settings."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "title": "Specifies the security profile settings for the virtual machine or virtual machine scale set.",
+          "description": "Specifies the security profile settings for the virtual machine or virtual machine scale set."
+        },
+        "serviceArtifactReference": {
+          "$ref": "#/definitions/ServiceArtifactReference",
+          "title": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version.",
+          "description": "The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}"
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Specifies the hardware settings for the compute nodes."
+        },
+        "placement": {
+          "$ref": "#/definitions/PlacementPatch",
+          "description": "The availability zone placement policy to update. Omitted fields retain their existing values."
+        },
+        "resiliencyPolicy": {
+          "$ref": "#/definitions/ResiliencyPolicyPatch",
+          "description": "The resiliency policy to update. Omitted fields retain their existing values."
+        }
+      },
+      "required": [
+        "imageReference",
+        "nodeAgentSkuId"
+      ]
+    },
     "VirtualMachineFamilyCoreQuota": {
       "type": "object",
       "description": "A VM Family and its associated core quota for the Batch account.",
@@ -7323,6 +7623,22 @@
         "maxInstancePercentPerZonePolicy": {
           "$ref": "#/definitions/MaxInstancePercentPerZonePolicy",
           "description": "The policy that limits the percentage of pool instances that may be allocated in a single availability zone."
+        }
+      }
+    },
+    "ZoneAllocationPolicyPatch": {
+      "type": "object",
+      "description": "Zone allocation policy fields to update, leaving omitted fields unchanged.",
+      "properties": {
+        "maxZoneCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of availability zones that may be used. The value cannot exceed the number of zones supported by the region.",
+          "minimum": 1
+        },
+        "maxInstancePercentPerZonePolicy": {
+          "$ref": "#/definitions/MaxInstancePercentPerZonePolicyPatch",
+          "description": "The per-zone instance percentage policy fields to update."
         }
       }
     },
