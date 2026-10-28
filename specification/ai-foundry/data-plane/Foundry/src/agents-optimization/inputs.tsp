@@ -227,7 +227,7 @@ model AgentOptimizationFoundryAgentTargetConfiguration
   @maxLength(256)
   name: string;
 
-  @doc("Pinned agent version. Omitted to resolve and pin the latest version.")
+  @doc("Pinned agent version. Omitted to resolve and pin the latest version for agent and prompt optimization. Insights optimization resolves the target version from the selected Insights when omitted; version compatibility is validated by the service.")
   @minLength(1)
   version?: string;
 }
@@ -317,6 +317,9 @@ union AgentOptimizationConfigurationType {
 
   @doc("One-shot prompt optimization.")
   prompt_optimization: "prompt_optimization",
+
+  @doc("Prepares evaluation inputs from selected Insights and comparatively optimizes the registered agent.")
+  insights_optimization: "insights_optimization",
 }
 
 /** Base model for type-specific optimization configuration. */
