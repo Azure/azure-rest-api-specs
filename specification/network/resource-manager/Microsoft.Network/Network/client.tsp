@@ -28,6 +28,11 @@ using Common;
   "Update",
   "csharp"
 );
+@@clientName(
+  Microsoft.Network.LoadBalancers.loadBalancerNetworkInterfacesList,
+  "GetNetworkInterfaces",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# pageable CloudServiceSwap list contract."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
