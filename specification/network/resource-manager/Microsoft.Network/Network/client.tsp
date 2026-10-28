@@ -269,6 +269,11 @@ using Common;
   "csharp"
 );
 
+@@scope(
+  Microsoft.Network.NetworkSecurityPerimeterOperationStatusesOperationGroup.get,
+  "!csharp"
+);
+
 // Cloud Services is deprecated and no longer represented by the current C# Compute SDK.
 @@scope(
   Microsoft.Network.NetworkInterfaces.getCloudServiceNetworkInterface,
