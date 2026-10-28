@@ -101,7 +101,7 @@ stimuli:
         type: "file-matches"
         name: "file-matches-request-model"
         config:
-          pattern: "model.*Notify.*Request|model.*Notification.*Request"
+          pattern: "model.*Notify.*(?:Request|Content)|model.*Notification.*(?:Request|Content)"
           path: "employee.tsp"
       - &file_matches_message_property
         type: "file-matches"
@@ -119,7 +119,7 @@ stimuli:
         type: "file-matches"
         name: "file-matches-response-model"
         config:
-          pattern: "model.*Notify.*Response|model.*Notification.*Response"
+          pattern: "model.*Notify.*(?:Response|Result)|model.*Notification.*(?:Response|Result)"
           path: "employee.tsp"
       - &file_matches_notification_id_property
         type: "file-matches"
