@@ -47,6 +47,14 @@ using Microsoft.IoTFirmwareDefense;
   "csharp"
 );
 @@clientName(CryptoKeySummaryResource, "CryptoKeySummary", "csharp");
+@@clientName(CveSummaryResource, "CveAnalysisSummary", "csharp");
+@@clientName(PasswordHashSummaryResource, "PasswordHashSummary", "csharp");
+@@clientName(SbomSummaryResource, "SbomSummary", "csharp");
+@@clientName(
+  UnsafeFunctionCallsSummaryResource,
+  "UnsafeFunctionCallsSummary",
+  "csharp"
+);
 @@clientName(ProvisioningState, "FirmwareProvisioningState", "csharp");
 @@clientName(Status, "FirmwareAnalysisStatus", "csharp");
 @@clientName(StatusMessage, "FirmwareAnalysisStatusMessage", "csharp");
