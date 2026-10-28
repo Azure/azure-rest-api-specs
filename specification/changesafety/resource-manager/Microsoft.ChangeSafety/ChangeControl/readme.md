@@ -21,9 +21,9 @@ and does not change `2026-01-01-preview`, deploy a backend, or release an SDK.
   to be unique.
 - Uses explicit JSON dictionaries for opaque object values so generated clients
   preserve their contents.
-- Marks heterogeneous parameter arrays as having no item identity through
-  `TypeSpec.OpenAPI.extension`. The ARM `identifiers` decorator accepts only
-  arrays of object models and rejects these existing `unknown[]` value types.
+- Preserves heterogeneous parameter arrays. Their three warning-level identifier
+  diagnostics remain visible because the native ARM decorator rejects `unknown[]`.
+  Raw client-altering OpenAPI extensions are not used to silence them.
 - Uses kind-specific ApiOperations and Targets schemas for change definitions,
   including partial details for PATCH requests. PATCH preserves the stored kind;
   changing kind requires PUT.
@@ -62,15 +62,15 @@ request without resetting the observed status.
 The following work is required before publication. These are implementation and
 owner gates, not guarantees provided by a schema build.
 
-| Area                      | Required task                                                                                                                                                                                                          |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Stored operations         | Reject `changeDefinition.details.operations[].body` on November writes. Persist only method and URI. Keep full bodies transient in verification.                                                                       |
-| Shared records            | Add version-aware reads so November never exposes bodies stored through January. Keep January responses unchanged. The service owner must decide existing-body retention and cross-version status mapping.             |
-| Status ownership          | Persist `requestedStatus` and accepted observed-status changes atomically. Preserve client fields during StageProgression cascades. Implement repeated-request, omission, and transition rules.                        |
-| PATCH                     | Apply merge-patch semantics, replace supplied arrays, reject cross-kind details, and require PUT for kind changes.                                                                                                     |
-| Routing and authorization | Register the November version and read-only `changeRecords/nextStagePlans` point and collection reads at both parent scopes. Confirm permissions and snapshot authorization. Obtain management-group ARM/PAS sign-off. |
-| Resource serialization    | Implement event reads, properties-only snapshots, and typed event payloads. Confirm event-version field coverage, supported parent scopes, and actual asynchronous DELETE headers.                                     |
-| Review and release        | Obtain current ARM exception approval, package-name approvals, Python namespace reservation, and release-owner confirmation of backend availability.                                                                   |
+| Area                      | Required task                                                                                                                                                                                                                                      |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Stored operations         | Reject `changeDefinition.details.operations[].body` on November writes. Persist only method and URI. Keep full bodies transient in verification.                                                                                                   |
+| Shared records            | Add version-aware reads so November never exposes bodies stored through January. Keep January responses unchanged. The service owner must decide existing-body retention and cross-version status mapping.                                         |
+| Status ownership          | Persist `requestedStatus` and accepted observed-status changes atomically. Preserve client fields during StageProgression cascades. Implement repeated-request, omission, and transition rules.                                                    |
+| PATCH                     | Apply merge-patch semantics, replace supplied arrays, reject cross-kind details, and require PUT for kind changes.                                                                                                                                 |
+| Routing and authorization | Register the November version and read-only `changeRecords/nextStagePlans` point and collection reads at both parent scopes. Confirm permissions, snapshot authorization, intentional management-group scope, and applicable manifest/RBAC review. |
+| Resource serialization    | Implement event reads, properties-only snapshots, and typed event payloads. Confirm event-version field coverage, supported parent scopes, and actual asynchronous DELETE headers.                                                                 |
+| Review and release        | Obtain current ARM exception approval, package-name approvals, Python namespace reservation, and release-owner confirmation of backend availability.                                                                                               |
 
 JavaScript uses modular TypeSpec generation for the required SDK validation.
 Other language-emitter migrations remain deferred. Their retained readiness
@@ -135,9 +135,9 @@ directive:
       - $.definitions.ChangeRecordStageProgressionUpdateProperties.properties.additionalData
       - $.definitions.ChangeRecordStageProgressionProperties.properties.parameters
       - $.definitions.ChangeRecordStageProgressionUpdateProperties.properties.parameters
-      - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.stageVariables
-      - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.additionalData
-      - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.parameters
+      - $.definitions.ChangeRecordNextStagePlanItem.properties.stageVariables
+      - $.definitions.ChangeRecordNextStagePlanItem.properties.additionalData
+      - $.definitions.ChangeRecordNextStagePlanItem.properties.parameters
   - suppress: AvoidAdditionalProperties
     reason: |
       PATCH retains customer-defined parameters, metadata, and orchestration JSON. Unspecified fields remain omitted. Each property-scoped exception requires current ARM review.

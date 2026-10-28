@@ -101,12 +101,10 @@ model ArrayParameter extends Parameter {
 
   @doc("Default value for the parameter.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #[])
   defaultValue?: unknown[];
 
   @doc("Allowed list of the values for the parameter.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #[])
   allowedValues?: unknown[];
 }
 
@@ -136,7 +134,6 @@ model ParameterPatch {
   defaultValue?: unknown;
 
   @doc("Allowed values for the parameter. Values must match the supplied or existing parameter type.")
-  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #[])
   allowedValues?: unknown[];
 }
 

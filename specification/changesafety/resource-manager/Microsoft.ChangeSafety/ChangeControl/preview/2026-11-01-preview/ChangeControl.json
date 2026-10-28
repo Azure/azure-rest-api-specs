@@ -2579,7 +2579,6 @@
           "type": "array",
           "description": "Default value for the parameter.",
           "items": {},
-          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "update",
@@ -2590,7 +2589,6 @@
           "type": "array",
           "description": "Allowed list of the values for the parameter.",
           "items": {},
-          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "update",
@@ -2911,6 +2909,69 @@
         }
       ]
     },
+    "ChangeRecordNextStagePlanItem": {
+      "type": "object",
+      "description": "An eligible stage in a ChangeRecord's computed next-stage plan.",
+      "properties": {
+        "stageReference": {
+          "type": "string",
+          "description": "Stage name relevant to the hierarchical StageMap. Identifies the stage uniquely within a ChangeRecord resource.",
+          "readOnly": true
+        },
+        "stageVariables": {
+          "type": "object",
+          "description": "Variables to apply on the change for the stage. Key value pairs supporting any JSON values.",
+          "additionalProperties": {},
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ChangeRecordStageProgressionState",
+          "description": "Current state of the stage progression.",
+          "readOnly": true
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence of the stageProgression resource.",
+          "readOnly": true
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments about the stage progression.",
+          "readOnly": true
+        },
+        "links": {
+          "type": "array",
+          "description": "Collection of related links for the change.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "additionalData": {
+          "type": "object",
+          "description": "Additional metadata related to the StageProgression resource.",
+          "additionalProperties": {},
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "object",
+          "description": "List of Parameters & their schemas for the current Stage that user supposed to provide.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Parameter"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "stageReference"
+      ]
+    },
     "ChangeRecordNextStagePlanListResult": {
       "type": "object",
       "description": "The response of a ChangeRecordNextStagePlan list operation.",
@@ -2956,7 +3017,7 @@
           "type": "array",
           "description": "StageProgression resources that are ready to put in 'InProgress' state.",
           "items": {
-            "$ref": "#/definitions/ChangeRecordRetrieveNextStagesResponseItem"
+            "$ref": "#/definitions/ChangeRecordNextStagePlanItem"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -3195,69 +3256,6 @@
           }
         ]
       }
-    },
-    "ChangeRecordRetrieveNextStagesResponseItem": {
-      "type": "object",
-      "description": "StageProgression data comes from RetrieveNextStages API for ChangeRecord.",
-      "properties": {
-        "stageReference": {
-          "type": "string",
-          "description": "Stage name relevant to the hierarchical StageMap. Identifies the stage uniquely within a ChangeRecord resource.",
-          "readOnly": true
-        },
-        "stageVariables": {
-          "type": "object",
-          "description": "Variables to apply on the change for the stage. Key value pairs supporting any JSON values.",
-          "additionalProperties": {},
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/ChangeRecordStageProgressionState",
-          "description": "Current state of the stage progression.",
-          "readOnly": true
-        },
-        "sequence": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The sequence of the stageProgression resource.",
-          "readOnly": true
-        },
-        "comments": {
-          "type": "string",
-          "description": "Comments about the stage progression.",
-          "readOnly": true
-        },
-        "links": {
-          "type": "array",
-          "description": "Collection of related links for the change.",
-          "items": {
-            "$ref": "#/definitions/Link"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "additionalData": {
-          "type": "object",
-          "description": "Additional metadata related to the StageProgression resource.",
-          "additionalProperties": {},
-          "readOnly": true
-        },
-        "parameters": {
-          "type": "object",
-          "description": "List of Parameters & their schemas for the current Stage that user supposed to provide.",
-          "additionalProperties": {
-            "$ref": "#/definitions/Parameter"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "stageReference"
-      ]
     },
     "ChangeRecordStageProgression": {
       "type": "object",
@@ -4117,8 +4115,7 @@
         "allowedValues": {
           "type": "array",
           "description": "Allowed values for the parameter. Values must match the supplied or existing parameter type.",
-          "items": {},
-          "x-ms-identifiers": []
+          "items": {}
         }
       }
     },

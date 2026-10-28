@@ -133,11 +133,11 @@ model ChangeRecordNextStagePlanProperties {
   @visibility(Lifecycle.Read)
   @doc("StageProgression resources that are ready to put in 'InProgress' state.")
   @Azure.ResourceManager.identifiers(#["stageReference"])
-  nextStages: Array<ChangeRecordRetrieveNextStagesResponseItem>;
+  nextStages: Array<ChangeRecordNextStagePlanItem>;
 }
 
-@doc("StageProgression data comes from RetrieveNextStages API for ChangeRecord.")
-model ChangeRecordRetrieveNextStagesResponseItem {
+@doc("An eligible stage in a ChangeRecord's computed next-stage plan.")
+model ChangeRecordNextStagePlanItem {
   @doc("Stage name relevant to the hierarchical StageMap. Identifies the stage uniquely within a ChangeRecord resource.")
   @visibility(Lifecycle.Read)
   stageReference: string;
