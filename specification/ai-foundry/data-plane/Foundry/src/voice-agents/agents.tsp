@@ -470,7 +470,7 @@ model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
   @doc("The built-in capability. Always `collect_sms`.")
   name: "collect_sms";
 
-  @doc("Default total collection deadline in integer seconds, including receiver preparation. An explicit model-call timeout_seconds overrides this value. Duplicate commands do not restart the deadline.")
+  @doc("Default total collection deadline in integer seconds, from 1 to 300, including receiver preparation. If omitted, the service defaults to 60 seconds. An explicit model-call timeout_seconds overrides this value. Duplicate commands do not restart the deadline.")
   // TypeSpec 1.16 cannot version-project custom scalar values in min/max decorators.
   // Preserve the encoded-second bounds in OpenAPI while reusing the shared duration.
   @extension("minimum", 1)
@@ -486,7 +486,7 @@ model VoiceAgentCollectDtmfSystemTool extends VoiceAgentSystemTool {
   @doc("The built-in capability. Always `collect_dtmf`.")
   name: "collect_dtmf";
 
-  @doc("Default total collection deadline in integer seconds, including receiver preparation. An explicit model-call timeout_seconds overrides this value. First-digit and inter-digit timers cannot extend the effective deadline.")
+  @doc("Default total collection deadline in integer seconds, from 1 to 300, including receiver preparation. If omitted, the service defaults to 60 seconds. An explicit model-call timeout_seconds overrides this value. First-digit and inter-digit timers cannot extend the effective deadline.")
   @extension("minimum", 1)
   @extension("maximum", 300)
   timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
@@ -511,15 +511,16 @@ union VoiceAgentTransferStrategy {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTransferRouting {
   ...Record<never>;
+
   @doc("The routing strategy. Current native Telephony transfer supports ACS sequential and random routing only.")
   strategy: VoiceAgentTransferStrategy;
 
-  @doc("The per-destination ring budget in integer seconds. Provider-specific limits also apply; ACS supports at most 180 seconds.")
+  @doc("The per-destination ring budget in integer seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. Provider-specific limits also apply; ACS supports at most 180 seconds.")
   @minValue(1)
   @maxValue(300)
   ring_timeout_seconds?: int32 = 20;
 
-  @doc("The total routing budget in integer seconds. Must be at least `ring_timeout_seconds`; it does not restart for each destination.")
+  @doc("The total routing budget in integer seconds, from 1 to 300. If omitted, the service defaults to 45 seconds. Must be at least `ring_timeout_seconds`; it does not restart for each destination.")
   @minValue(1)
   @maxValue(300)
   total_timeout_seconds?: int32 = 45;
@@ -603,7 +604,7 @@ model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {
   @doc("The built-in capability. Always `send_dtmf`.")
   name: "send_dtmf";
 
-  @doc("Total send deadline in integer seconds from invocation acceptance, including binding, dispatch and waiting for provider acknowledgement. Not a model-call argument. Expiry before dispatch returns provider_not_executed; after dispatch without a confirmed result it returns provider_result_uncertain, without automatic retry. Acceptance does not confirm IVR recognition.")
+  @doc("Total send deadline, in integer seconds from 1 to 300, measured from invocation acceptance. Includes binding, dispatch and waiting for provider acknowledgement. If omitted, the service defaults to 60 seconds. Not a model-call argument. Expiry before dispatch returns provider_not_executed; after dispatch without a confirmed result it returns provider_result_uncertain, without automatic retry. Acceptance does not confirm IVR recognition.")
   @extension("minimum", 1)
   @extension("maximum", 300)
   timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
@@ -620,7 +621,7 @@ model VoiceAgentSendSmsSystemTool extends VoiceAgentSystemTool {
   @doc("The built-in capability. Always `send_sms`.")
   name: "send_sms";
 
-  @doc("Total send deadline in integer seconds from invocation acceptance, including binding, dispatch and waiting for provider acknowledgement. Not a model-call argument. Expiry before dispatch returns provider_not_executed; after dispatch without a confirmed result it returns provider_result_uncertain, without automatic retry. This is not an SMS delivery deadline.")
+  @doc("Total send deadline, in integer seconds from 1 to 300, measured from invocation acceptance. Includes binding, dispatch and waiting for provider acknowledgement. If omitted, the service defaults to 60 seconds. Not a model-call argument. Expiry before dispatch returns provider_not_executed; after dispatch without a confirmed result it returns provider_result_uncertain, without automatic retry. This is not an SMS delivery deadline.")
   @extension("minimum", 1)
   @extension("maximum", 300)
   timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");

@@ -160,7 +160,10 @@ model VoiceConversationSystemToolItem {
 @doc("An existing realtime conversation item or a persisted service-managed system-tool intent. Used only by persisted read responses; client-created item types remain unchanged.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceConversationItem {
+  @doc("A standard OpenAI Realtime conversation item.")
   standard: OpenAI.RealtimeConversationItem,
+
+  @doc("A persisted service-managed system-tool intent.")
   system_tool: VoiceConversationSystemToolItem,
 }
 

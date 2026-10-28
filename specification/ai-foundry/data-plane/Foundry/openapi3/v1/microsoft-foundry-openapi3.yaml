@@ -86985,7 +86985,7 @@ components:
           description: The built-in capability. Always `collect_dtmf`.
         timeout_seconds:
           $ref: '#/components/schemas/FoundryDurationSeconds'
-          description: Default total collection deadline in integer seconds, including receiver preparation. An explicit model-call timeout_seconds overrides this value. First-digit and inter-digit timers cannot extend the effective deadline.
+          description: Default total collection deadline in integer seconds, from 1 to 300, including receiver preparation. If omitted, the service defaults to 60 seconds. An explicit model-call timeout_seconds overrides this value. First-digit and inter-digit timers cannot extend the effective deadline.
           maximum: 300
           minimum: 1
           default: 60
@@ -87009,7 +87009,7 @@ components:
           description: The built-in capability. Always `collect_sms`.
         timeout_seconds:
           $ref: '#/components/schemas/FoundryDurationSeconds'
-          description: Default total collection deadline in integer seconds, including receiver preparation. An explicit model-call timeout_seconds overrides this value. Duplicate commands do not restart the deadline.
+          description: Default total collection deadline in integer seconds, from 1 to 300, including receiver preparation. If omitted, the service defaults to 60 seconds. An explicit model-call timeout_seconds overrides this value. Duplicate commands do not restart the deadline.
           maximum: 300
           minimum: 1
           default: 60
@@ -87629,7 +87629,7 @@ components:
           description: The built-in capability. Always `send_dtmf`.
         timeout_seconds:
           $ref: '#/components/schemas/FoundryDurationSeconds'
-          description: Total send deadline in integer seconds from invocation acceptance, including binding, dispatch and waiting for provider acknowledgement. Not a model-call argument. Expiry before dispatch returns provider_not_executed; after dispatch without a confirmed result it returns provider_result_uncertain, without automatic retry. Acceptance does not confirm IVR recognition.
+          description: Total send deadline, in integer seconds from 1 to 300, measured from invocation acceptance. Includes binding, dispatch and waiting for provider acknowledgement. If omitted, the service defaults to 60 seconds. Not a model-call argument. Expiry before dispatch returns provider_not_executed; after dispatch without a confirmed result it returns provider_result_uncertain, without automatic retry. Acceptance does not confirm IVR recognition.
           maximum: 300
           minimum: 1
           default: 60
@@ -87655,7 +87655,7 @@ components:
           description: The built-in capability. Always `send_sms`.
         timeout_seconds:
           $ref: '#/components/schemas/FoundryDurationSeconds'
-          description: Total send deadline in integer seconds from invocation acceptance, including binding, dispatch and waiting for provider acknowledgement. Not a model-call argument. Expiry before dispatch returns provider_not_executed; after dispatch without a confirmed result it returns provider_result_uncertain, without automatic retry. This is not an SMS delivery deadline.
+          description: Total send deadline, in integer seconds from 1 to 300, measured from invocation acceptance. Includes binding, dispatch and waiting for provider acknowledgement. If omitted, the service defaults to 60 seconds. Not a model-call argument. Expiry before dispatch returns provider_not_executed; after dispatch without a confirmed result it returns provider_result_uncertain, without automatic retry. This is not an SMS delivery deadline.
           maximum: 300
           minimum: 1
           default: 60
@@ -88048,14 +88048,14 @@ components:
           format: int32
           minimum: 1
           maximum: 300
-          description: The per-destination ring budget in integer seconds. Provider-specific limits also apply; ACS supports at most 180 seconds.
+          description: The per-destination ring budget in integer seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. Provider-specific limits also apply; ACS supports at most 180 seconds.
           default: 20
         total_timeout_seconds:
           type: integer
           format: int32
           minimum: 1
           maximum: 300
-          description: The total routing budget in integer seconds. Must be at least `ring_timeout_seconds`; it does not restart for each destination.
+          description: The total routing budget in integer seconds, from 1 to 300. If omitted, the service defaults to 45 seconds. Must be at least `ring_timeout_seconds`; it does not restart for each destination.
           default: 45
       unevaluatedProperties:
         not: {}
