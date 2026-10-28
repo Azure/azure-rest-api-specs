@@ -7,718 +7,6 @@
   "paths": {},
   "components": {
     "schemas": {
-      "A2APreviewTool": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "a2a_preview"
-            ],
-            "description": "The type of the tool. Always `\"a2a_preview`."
-          },
-          "base_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "Base URL of the agent."
-          },
-          "agent_card_path": {
-            "type": "string",
-            "description": "The path to the agent card relative to the `base_url`.\nIf not provided, defaults to  `/.well-known/agent-card.json`"
-          },
-          "project_connection_id": {
-            "type": "string",
-            "description": "The connection ID in the project for the A2A server.\nThe connection stores authentication and other connection details needed to connect to the A2A server."
-          },
-          "send_credentials_for_agent_card": {
-            "type": "boolean",
-            "description": "When `true`, Foundry sends its credentials when fetching the remote\nagent's Agent Card. The service defaults to `false` if a value is not\nspecified by the caller (anonymous fetch).",
-            "default": false
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "An agent implementing the A2A protocol.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
-      },
-      "A2AProtocolVersion": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "1.0"
-            ]
-          }
-        ],
-        "description": "Supported A2A protocol versions."
-      },
-      "A2ATool": {
-        "type": "object",
-        "required": [
-          "type",
-          "a2a_version"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "a2a"
-            ],
-            "description": "The type of the tool. Always `\"a2a\"`."
-          },
-          "base_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "Base URL of the agent."
-          },
-          "agent_card_path": {
-            "type": "string",
-            "description": "The path to the agent card relative to the `base_url`.\nIf not provided, defaults to  `/.well-known/agent-card.json`"
-          },
-          "project_connection_id": {
-            "type": "string",
-            "description": "The connection ID in the project for the A2A server.\nThe connection stores authentication and other connection details needed to connect to the A2A server."
-          },
-          "send_credentials_for_agent_card": {
-            "type": "boolean",
-            "description": "When `true`, Foundry sends its credentials when fetching the remote\nagent's Agent Card. The service defaults to `false` if a value is not\nspecified by the caller (anonymous fetch).",
-            "default": false
-          },
-          "a2a_version": {
-            "$ref": "#/components/schemas/A2AProtocolVersion",
-            "description": "The A2A protocol version supported by the agent."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "An agent implementing the A2A protocol."
-      },
-      "AISearchIndexResource": {
-        "type": "object",
-        "properties": {
-          "project_connection_id": {
-            "type": "string",
-            "description": "An index connection ID in an IndexResource attached to this agent."
-          },
-          "index_name": {
-            "type": "string",
-            "description": "The name of an index in an IndexResource attached to this agent."
-          },
-          "query_type": {
-            "$ref": "#/components/schemas/AzureAISearchQueryType",
-            "description": "Type of query in an AIIndexResource attached to this agent."
-          },
-          "top_k": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of documents to retrieve from search and present to the model."
-          },
-          "filter": {
-            "type": "string",
-            "description": "filter string for search resource. [Learn more here](https://learn.microsoft.com/azure/search/search-filters)."
-          },
-          "index_asset_id": {
-            "type": "string",
-            "description": "Index asset id for search resource."
-          }
-        },
-        "description": "A AI Search Index resource."
-      },
-      "AzureAISearchQueryType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "simple",
-              "semantic",
-              "vector",
-              "vector_simple_hybrid",
-              "vector_semantic_hybrid"
-            ]
-          }
-        ],
-        "description": "Available query types for Azure AI Search tool."
-      },
-      "AzureAISearchTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "azure_ai_search"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "azure_ai_search"
-            ],
-            "description": "The object type, which is always 'azure_ai_search'."
-          },
-          "name": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "description": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "azure_ai_search": {
-            "$ref": "#/components/schemas/AzureAISearchToolResource",
-            "description": "The azure ai search index resource."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "The input definition information for an Azure AI search tool as used to configure an agent."
-      },
-      "AzureAISearchToolResource": {
-        "type": "object",
-        "required": [
-          "indexes"
-        ],
-        "properties": {
-          "indexes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AISearchIndexResource"
-            },
-            "maxItems": 1,
-            "description": "The indices attached to this agent. There can be a maximum of 1 index\nresource attached to the agent."
-          }
-        },
-        "description": "A set of index resources used by the `azure_ai_search` tool."
-      },
-      "AzureFunctionBinding": {
-        "type": "object",
-        "required": [
-          "type",
-          "storage_queue"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "storage_queue"
-            ],
-            "description": "The type of binding, which is always 'storage_queue'."
-          },
-          "storage_queue": {
-            "$ref": "#/components/schemas/AzureFunctionStorageQueue",
-            "description": "Storage queue."
-          }
-        },
-        "description": "The structure for keeping storage queue name and URI."
-      },
-      "AzureFunctionDefinition": {
-        "type": "object",
-        "required": [
-          "function",
-          "input_binding",
-          "output_binding"
-        ],
-        "properties": {
-          "function": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "The name of the function to be called."
-              },
-              "description": {
-                "type": "string",
-                "description": "A description of what the function does, used by the model to choose when and how to call the function."
-              },
-              "parameters": {
-                "type": "object",
-                "unevaluatedProperties": {},
-                "description": "The parameters the functions accepts, described as a JSON Schema object."
-              }
-            },
-            "required": [
-              "name",
-              "parameters"
-            ],
-            "description": "The definition of azure function and its parameters."
-          },
-          "input_binding": {
-            "$ref": "#/components/schemas/AzureFunctionBinding",
-            "description": "Input storage queue. The queue storage trigger runs a function as messages are added to it."
-          },
-          "output_binding": {
-            "$ref": "#/components/schemas/AzureFunctionBinding",
-            "description": "Output storage queue. The function writes output to this queue when the input items are processed."
-          }
-        },
-        "description": "The definition of Azure function."
-      },
-      "AzureFunctionStorageQueue": {
-        "type": "object",
-        "required": [
-          "queue_service_endpoint",
-          "queue_name"
-        ],
-        "properties": {
-          "queue_service_endpoint": {
-            "type": "string",
-            "description": "URI to the Azure Storage Queue service allowing you to manipulate a queue."
-          },
-          "queue_name": {
-            "type": "string",
-            "description": "The name of an Azure function storage queue."
-          }
-        },
-        "description": "The structure for keeping storage queue name and URI."
-      },
-      "AzureFunctionTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "azure_function"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "azure_function"
-            ],
-            "description": "The object type, which is always 'browser_automation'."
-          },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "azure_function": {
-            "$ref": "#/components/schemas/AzureFunctionDefinition",
-            "description": "The Azure Function Tool definition."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "The input definition information for an Azure Function Tool, as used to configure an Agent."
-      },
-      "BingCustomSearchConfiguration": {
-        "type": "object",
-        "required": [
-          "project_connection_id",
-          "instance_name"
-        ],
-        "properties": {
-          "project_connection_id": {
-            "type": "string",
-            "description": "Project connection id for grounding with bing search"
-          },
-          "instance_name": {
-            "type": "string",
-            "description": "Name of the custom configuration instance given to config."
-          },
-          "market": {
-            "type": "string",
-            "description": "The market where the results come from."
-          },
-          "set_lang": {
-            "type": "string",
-            "description": "The language to use for user interface strings when calling Bing API."
-          },
-          "count": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The number of search results to return in the bing api response"
-          },
-          "freshness": {
-            "type": "string",
-            "description": "Filter search results by a specific time range. See [accepted values here](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters)."
-          }
-        },
-        "description": "A bing custom search configuration.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
-      },
-      "BingCustomSearchPreviewTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "bing_custom_search_preview"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "bing_custom_search_preview"
-            ],
-            "description": "The object type, which is always 'bing_custom_search_preview'."
-          },
-          "bing_custom_search_preview": {
-            "$ref": "#/components/schemas/BingCustomSearchToolParameters",
-            "description": "The bing custom search tool parameters."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "The input definition information for a Bing custom search tool as used to configure an agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
-      },
-      "BingCustomSearchToolParameters": {
-        "type": "object",
-        "required": [
-          "search_configurations"
-        ],
-        "properties": {
-          "search_configurations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BingCustomSearchConfiguration"
-            },
-            "maxItems": 1,
-            "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
-          }
-        },
-        "description": "The bing custom search tool parameters.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
-      },
-      "BingGroundingSearchConfiguration": {
-        "type": "object",
-        "required": [
-          "project_connection_id"
-        ],
-        "properties": {
-          "project_connection_id": {
-            "type": "string",
-            "description": "Project connection id for grounding with bing search"
-          },
-          "market": {
-            "type": "string",
-            "description": "The market where the results come from."
-          },
-          "set_lang": {
-            "type": "string",
-            "description": "The language to use for user interface strings when calling Bing API."
-          },
-          "count": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The number of search results to return in the bing api response"
-          },
-          "freshness": {
-            "type": "string",
-            "description": "Filter search results by a specific time range. See [accepted values here](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters)."
-          }
-        },
-        "description": "Search configuration for Bing Grounding"
-      },
-      "BingGroundingSearchToolParameters": {
-        "type": "object",
-        "required": [
-          "search_configurations"
-        ],
-        "properties": {
-          "search_configurations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BingGroundingSearchConfiguration"
-            },
-            "maxItems": 1,
-            "description": "The search configurations attached to this tool. There can be a maximum of 1\nsearch configuration resource attached to the tool."
-          }
-        },
-        "description": "The bing grounding search tool parameters."
-      },
-      "BingGroundingTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "bing_grounding"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "bing_grounding"
-            ],
-            "description": "The object type, which is always 'bing_grounding'."
-          },
-          "name": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "description": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "bing_grounding": {
-            "$ref": "#/components/schemas/BingGroundingSearchToolParameters",
-            "description": "The bing grounding search tool parameters."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "The input definition information for a bing grounding search tool as used to configure an agent."
-      },
-      "BrowserAutomationPreviewTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "browser_automation_preview"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "browser_automation_preview"
-            ],
-            "description": "The object type, which is always 'browser_automation_preview'."
-          },
-          "browser_automation_preview": {
-            "$ref": "#/components/schemas/BrowserAutomationToolParameters",
-            "description": "The Browser Automation Tool parameters."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "The input definition information for a Browser Automation Tool, as used to configure an Agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
-      },
-      "BrowserAutomationTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "browser_automation"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "browser_automation"
-            ],
-            "description": "The object type, which is always 'browser_automation'."
-          },
-          "browser_automation": {
-            "$ref": "#/components/schemas/BrowserAutomationToolParameters",
-            "description": "The Browser Automation Tool parameters."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "The input definition information for a Browser Automation Tool, as used to configure an Agent."
-      },
-      "BrowserAutomationToolConnectionParameters": {
-        "type": "object",
-        "required": [
-          "project_connection_id"
-        ],
-        "properties": {
-          "project_connection_id": {
-            "type": "string",
-            "description": "The ID of the project connection to your Azure Playwright resource."
-          }
-        },
-        "description": "Definition of input parameters for the connection used by the Browser Automation Tool."
-      },
-      "BrowserAutomationToolParameters": {
-        "type": "object",
-        "required": [
-          "connection"
-        ],
-        "properties": {
-          "connection": {
-            "$ref": "#/components/schemas/BrowserAutomationToolConnectionParameters",
-            "description": "The project connection parameters associated with the Browser Automation Tool."
-          }
-        },
-        "description": "Definition of input parameters for the Browser Automation Tool."
-      },
-      "CaptureStructuredOutputsTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "outputs"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "capture_structured_outputs"
-            ],
-            "description": "The type of the tool. Always `capture_structured_outputs`."
-          },
-          "name": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "description": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "outputs": {
-            "$ref": "#/components/schemas/StructuredOutputDefinition",
-            "description": "The structured outputs to capture from the model."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A tool for capturing structured outputs"
-      },
-      "FabricDataAgentToolParameters": {
-        "type": "object",
-        "properties": {
-          "project_connections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ToolProjectConnection"
-            },
-            "maxItems": 1,
-            "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
-          }
-        },
-        "description": "The fabric data agent tool parameters.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
-      },
-      "FabricIQPreviewTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "project_connection_id"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "fabric_iq_preview"
-            ],
-            "description": "The object type, which is always 'fabric_iq_preview'."
-          },
-          "project_connection_id": {
-            "type": "string",
-            "description": "The ID of the FabricIQ project connection."
-          },
-          "server_label": {
-            "type": "string",
-            "description": "(Optional) The label of the FabricIQ MCP server to connect to."
-          },
-          "server_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "(Optional) The URL of the FabricIQ MCP server. If not provided, the URL from the project connection will be used."
-          },
-          "require_approval": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.MCPToolRequireApproval"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "(Optional) Whether the agent requires approval before executing actions. Default is always.",
-            "default": "always"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A FabricIQ server-side tool.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
-      },
       "FoundryDurationMilliseconds": {
         "type": "integer",
         "format": "int32",
@@ -727,268 +15,6 @@
       "FoundryTimestamp": {
         "type": "integer",
         "format": "unixtime"
-      },
-      "GitHubCopilotBuiltInTool": {
-        "type": "string",
-        "enum": [
-          "filesystem_read",
-          "filesystem_write",
-          "shell",
-          "web",
-          "subagents"
-        ],
-        "description": "A customer-configurable GitHub Copilot built-in tool."
-      },
-      "GitHubCopilotToolsetConfig": {
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "$ref": "#/components/schemas/GitHubCopilotBuiltInTool",
-            "description": "The built-in tool to configure."
-          },
-          "enabled": {
-            "type": "boolean",
-            "description": "Whether the built-in tool is enabled. If omitted, the toolset default applies."
-          }
-        },
-        "description": "An enablement override for a GitHub Copilot built-in tool."
-      },
-      "GitHubCopilotToolsetDefaultConfig": {
-        "type": "object",
-        "properties": {
-          "enabled": {
-            "type": "boolean",
-            "description": "Whether built-in tools are enabled by default. Defaults to true.",
-            "default": true
-          }
-        },
-        "description": "The default enablement setting for GitHub Copilot built-in tools."
-      },
-      "GitHubCopilotToolsetPreview": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "github_copilot_toolset_preview"
-            ],
-            "description": "The type of the toolset. Always `github_copilot_toolset_preview`."
-          },
-          "default_config": {
-            "$ref": "#/components/schemas/GitHubCopilotToolsetDefaultConfig",
-            "description": "The default configuration for built-in tools. If omitted, built-in tools are enabled by default."
-          },
-          "configs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GitHubCopilotToolsetConfig"
-            },
-            "description": "Per-tool configuration overrides. Duplicate built-in tool names are not allowed."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "Configuration overrides for GitHub Copilot built-in tools.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "GitHubCopilot=V1Preview"
-          ]
-        }
-      },
-      "MemorySearchOptions": {
-        "type": "object",
-        "properties": {
-          "max_memories": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum number of memory items to return."
-          }
-        },
-        "description": "Memory search options.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "MemoryStores=V1Preview"
-          ]
-        }
-      },
-      "MemorySearchPreviewTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "memory_store_name",
-          "scope"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "memory_search_preview"
-            ],
-            "description": "The type of the tool. Always `memory_search_preview`."
-          },
-          "memory_store_name": {
-            "type": "string",
-            "description": "The name of the memory store to use."
-          },
-          "scope": {
-            "type": "string",
-            "description": "The namespace used to group and isolate memories, such as a user ID.\nLimits which memories can be retrieved or updated.\nUse special variable `{{$userId}}` to scope memories to the current signed-in user."
-          },
-          "search_options": {
-            "$ref": "#/components/schemas/MemorySearchOptions",
-            "description": "Options for searching the memory store."
-          },
-          "update_delay": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Time to wait before updating memories after inactivity (seconds). Default 300.",
-            "default": 300
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A tool for integrating memories into the agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
-      },
-      "MicrosoftFabricPreviewTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "fabric_dataagent_preview"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "fabric_dataagent_preview"
-            ],
-            "description": "The object type, which is always 'fabric_dataagent_preview'."
-          },
-          "fabric_dataagent_preview": {
-            "$ref": "#/components/schemas/FabricDataAgentToolParameters",
-            "description": "The fabric data agent tool parameters."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
-      },
-      "OpenAI.ApplyPatchToolParam": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "apply_patch"
-            ],
-            "description": "The type of the tool. Always `apply_patch`.",
-            "x-stainless-const": true
-          },
-          "allowed_callers": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/OpenAI.CallableToolAllowedCaller"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "Allows the assistant to create, delete, or update files using unified diffs.",
-        "title": "Apply patch tool"
-      },
-      "OpenAI.ApproximateLocation": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "approximate"
-            ],
-            "description": "The type of location approximation. Always `approximate`.",
-            "x-stainless-const": true,
-            "default": "approximate"
-          },
-          "country": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "region": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "city": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "timezone": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        }
       },
       "OpenAI.AudioTranscription": {
         "type": "object",
@@ -1035,7 +61,7 @@
           },
           "prompt": {
             "type": "string",
-            "description": "An optional text to guide the model's style or continue a previous audio\n  segment.\n  For `whisper-1`, the [prompt is a list of keywords](/docs/guides/speech-to-text#prompting).\n  For `gpt-4o-transcribe` models (excluding `gpt-4o-transcribe-diarize`), the prompt is a free text string, for example \"expect words related to technology\".\n  Prompt is not supported with `gpt-realtime-whisper` in GA Realtime sessions."
+            "description": "An optional text to guide the model's style or continue a previous audio\n  segment.\n  For `whisper-1`, the [prompt is a list of keywords](https://developers.openai.com/api/docs/guides/speech-to-text#prompting).\n  For `gpt-4o-transcribe` models (excluding `gpt-4o-transcribe-diarize`), the prompt is a free text string, for example \"expect words related to technology\".\n  Prompt is not supported with `gpt-realtime-whisper` in GA Realtime sessions."
           },
           "delay": {
             "type": "string",
@@ -1055,457 +81,11 @@
           ]
         }
       },
-      "OpenAI.AutoCodeInterpreterToolParam": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "auto"
-            ],
-            "description": "Always `auto`.",
-            "x-stainless-const": true,
-            "default": "auto"
-          },
-          "file_ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "maxItems": 50,
-            "description": "An optional list of uploaded files to make available to your code."
-          },
-          "memory_limit": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ContainerMemoryLimit"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "network_policy": {
-            "$ref": "#/components/schemas/OpenAI.ContainerNetworkPolicyParam"
-          }
-        },
-        "description": "Configuration for a code interpreter container. Optionally specify the IDs of the files to run the code on.",
-        "title": "Automatic Code Interpreter Tool Parameters"
-      },
       "OpenAI.CallableToolAllowedCaller": {
         "type": "string",
         "enum": [
           "direct",
           "programmatic"
-        ]
-      },
-      "OpenAI.CodeInterpreterTool": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "code_interpreter"
-            ],
-            "description": "The type of the code interpreter tool. Always `code_interpreter`.",
-            "x-stainless-const": true
-          },
-          "allowed_callers": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/OpenAI.CallableToolAllowedCaller"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "name": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "description": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "container": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.AutoCodeInterpreterToolParam"
-              }
-            ],
-            "description": "The code interpreter container. Can be a container ID or an object that\nspecifies uploaded file IDs to make available to your code, along with an\noptional `memory_limit` setting.\nIf not provided, the service assumes auto."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A tool that runs Python code to help generate a response to a prompt.",
-        "title": "Code interpreter"
-      },
-      "OpenAI.ComparisonFilter": {
-        "type": "object",
-        "required": [
-          "type",
-          "key",
-          "value"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "eq",
-              "ne",
-              "gt",
-              "gte",
-              "lt",
-              "lte",
-              "in",
-              "nin"
-            ],
-            "description": "Specifies the comparison operator: `eq`, `ne`, `gt`, `gte`, `lt`, `lte`, `in`, `nin`.\n  - `eq`: equals\n  - `ne`: not equal\n  - `gt`: greater than\n  - `gte`: greater than or equal\n  - `lt`: less than\n  - `lte`: less than or equal\n  - `in`: in\n  - `nin`: not in",
-            "default": "eq"
-          },
-          "key": {
-            "type": "string",
-            "description": "The key to compare against the value."
-          },
-          "value": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.numeric"
-              },
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "anyOf": [
-                    {
-                      "type": "string"
-                    },
-                    {
-                      "$ref": "#/components/schemas/OpenAI.numeric"
-                    }
-                  ]
-                }
-              }
-            ],
-            "description": "The value to compare against the attribute key; supports string, number, or boolean types."
-          }
-        },
-        "description": "A filter used to compare a specified attribute key to a given value using a defined comparison operation.",
-        "title": "Comparison Filter",
-        "x-oaiMeta": {
-          "name": "ComparisonFilter"
-        }
-      },
-      "OpenAI.CompoundFilter": {
-        "type": "object",
-        "required": [
-          "type",
-          "filters"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "and",
-              "or"
-            ],
-            "description": "Type of operation: `and` or `or`."
-          },
-          "filters": {
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/OpenAI.ComparisonFilter"
-                },
-                {}
-              ]
-            },
-            "description": "Array of filters to combine. Items can be `ComparisonFilter` or `CompoundFilter`."
-          }
-        },
-        "description": "Combine multiple filters using `and` or `or`.",
-        "title": "Compound Filter",
-        "x-oaiMeta": {
-          "name": "CompoundFilter"
-        }
-      },
-      "OpenAI.ComputerEnvironment": {
-        "type": "string",
-        "enum": [
-          "windows",
-          "mac",
-          "linux",
-          "ubuntu",
-          "browser"
-        ]
-      },
-      "OpenAI.ComputerTool": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "computer"
-            ],
-            "description": "The type of the computer tool. Always `computer`.",
-            "x-stainless-const": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A tool that controls a virtual computer. Learn more about the [computer tool](https://platform.openai.com/docs/guides/tools-computer-use).",
-        "title": "Computer"
-      },
-      "OpenAI.ComputerUsePreviewTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "environment",
-          "display_width",
-          "display_height"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "computer_use_preview"
-            ],
-            "description": "The type of the computer use tool. Always `computer_use_preview`.",
-            "x-stainless-const": true
-          },
-          "environment": {
-            "$ref": "#/components/schemas/OpenAI.ComputerEnvironment",
-            "description": "The type of computer environment to control."
-          },
-          "display_width": {
-            "$ref": "#/components/schemas/OpenAI.integer",
-            "description": "The width of the computer display."
-          },
-          "display_height": {
-            "$ref": "#/components/schemas/OpenAI.integer",
-            "description": "The height of the computer display."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A tool that controls a virtual computer. Learn more about the [computer tool](https://platform.openai.com/docs/guides/tools-computer-use).",
-        "title": "Computer use preview"
-      },
-      "OpenAI.ContainerAutoParam": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "container_auto"
-            ],
-            "description": "Automatically creates a container for this request",
-            "x-stainless-const": true
-          },
-          "file_ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "maxItems": 50,
-            "description": "An optional list of uploaded files to make available to your code."
-          },
-          "memory_limit": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ContainerMemoryLimit"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "skills": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.ContainerSkill"
-            },
-            "maxItems": 200,
-            "description": "An optional list of skills referenced by id or inline data."
-          },
-          "network_policy": {
-            "$ref": "#/components/schemas/OpenAI.ContainerNetworkPolicyParam"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.FunctionShellToolParamEnvironment"
-          }
-        ]
-      },
-      "OpenAI.ContainerMemoryLimit": {
-        "type": "string",
-        "enum": [
-          "1g",
-          "4g",
-          "16g",
-          "64g"
-        ]
-      },
-      "OpenAI.ContainerNetworkPolicyAllowlistParam": {
-        "type": "object",
-        "required": [
-          "type",
-          "allowed_domains"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "allowlist"
-            ],
-            "description": "Allow outbound network access only to specified domains. Always `allowlist`.",
-            "x-stainless-const": true
-          },
-          "allowed_domains": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "minItems": 1,
-            "description": "A list of allowed domains when type is `allowlist`."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ContainerNetworkPolicyParam"
-          }
-        ]
-      },
-      "OpenAI.ContainerNetworkPolicyDisabledParam": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "disabled"
-            ],
-            "description": "Disable outbound network access. Always `disabled`.",
-            "x-stainless-const": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ContainerNetworkPolicyParam"
-          }
-        ]
-      },
-      "OpenAI.ContainerNetworkPolicyParam": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/OpenAI.ContainerNetworkPolicyParamType"
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "disabled": "#/components/schemas/OpenAI.ContainerNetworkPolicyDisabledParam",
-            "allowlist": "#/components/schemas/OpenAI.ContainerNetworkPolicyAllowlistParam"
-          }
-        },
-        "description": "Network access policy for the container."
-      },
-      "OpenAI.ContainerNetworkPolicyParamType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "disabled",
-              "allowlist"
-            ]
-          }
-        ]
-      },
-      "OpenAI.ContainerSkill": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/OpenAI.ContainerSkillType"
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "skill_reference": "#/components/schemas/OpenAI.SkillReferenceParam",
-            "inline": "#/components/schemas/OpenAI.InlineSkillParam"
-          }
-        }
-      },
-      "OpenAI.ContainerSkillType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "skill_reference",
-              "inline"
-            ]
-          }
         ]
       },
       "OpenAI.CreateTranscriptionResponseJsonUsage": {
@@ -1551,155 +131,6 @@
           ]
         }
       },
-      "OpenAI.CustomGrammarFormatParam": {
-        "type": "object",
-        "required": [
-          "type",
-          "syntax",
-          "definition"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "grammar"
-            ],
-            "description": "Grammar format. Always `grammar`.",
-            "x-stainless-const": true
-          },
-          "syntax": {
-            "$ref": "#/components/schemas/OpenAI.GrammarSyntax1",
-            "description": "The syntax of the grammar definition. One of `lark` or `regex`."
-          },
-          "definition": {
-            "type": "string",
-            "description": "The grammar definition."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.CustomToolParamFormat"
-          }
-        ],
-        "description": "A grammar defined by the user.",
-        "title": "Grammar format"
-      },
-      "OpenAI.CustomTextFormatParam": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "text"
-            ],
-            "description": "Unconstrained text format. Always `text`.",
-            "x-stainless-const": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.CustomToolParamFormat"
-          }
-        ],
-        "description": "Unconstrained free-form text.",
-        "title": "Text format"
-      },
-      "OpenAI.CustomToolParam": {
-        "type": "object",
-        "required": [
-          "type",
-          "name"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "custom"
-            ],
-            "description": "The type of the custom tool. Always `custom`.",
-            "x-stainless-const": true
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the custom tool, used to identify it in tool calls."
-          },
-          "async": {
-            "type": "boolean",
-            "description": "Whether the tool response can be returned asynchronously versus immediately returned on next response creation."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional description of the custom tool, used to provide more context."
-          },
-          "format": {
-            "$ref": "#/components/schemas/OpenAI.CustomToolParamFormat",
-            "description": "The input format for the custom tool. Default is unconstrained text."
-          },
-          "defer_loading": {
-            "type": "boolean",
-            "description": "Whether this tool should be deferred and discovered via tool search."
-          },
-          "allowed_callers": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/OpenAI.CallableToolAllowedCaller"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A custom tool that processes input using a specified format. Learn more about   [custom tools](/docs/guides/function-calling#custom-tools)",
-        "title": "Custom tool"
-      },
-      "OpenAI.CustomToolParamFormat": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/OpenAI.CustomToolParamFormatType"
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "text": "#/components/schemas/OpenAI.CustomTextFormatParam",
-            "grammar": "#/components/schemas/OpenAI.CustomGrammarFormatParam"
-          }
-        },
-        "description": "The input format for the custom tool. Default is unconstrained text."
-      },
-      "OpenAI.CustomToolParamFormatType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "text",
-              "grammar"
-            ]
-          }
-        ]
-      },
-      "OpenAI.EmptyModelParam": {
-        "type": "object"
-      },
       "OpenAI.FileInputDetail": {
         "type": "string",
         "enum": [
@@ -1707,439 +138,6 @@
           "low",
           "high"
         ]
-      },
-      "OpenAI.FileSearchTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "vector_store_ids"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "file_search"
-            ],
-            "description": "The type of the file search tool. Always `file_search`.",
-            "x-stainless-const": true
-          },
-          "vector_store_ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The IDs of the vector stores to search."
-          },
-          "max_num_results": {
-            "$ref": "#/components/schemas/OpenAI.integer",
-            "description": "The maximum number of results to return. This number should be between 1 and 50 inclusive."
-          },
-          "ranking_options": {
-            "$ref": "#/components/schemas/OpenAI.RankingOptions",
-            "description": "Ranking options for search."
-          },
-          "filters": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.Filters"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "name": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "description": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search).",
-        "title": "File search"
-      },
-      "OpenAI.Filters": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ComparisonFilter"
-          },
-          {
-            "$ref": "#/components/schemas/OpenAI.CompoundFilter"
-          }
-        ]
-      },
-      "OpenAI.FunctionShellToolParam": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "shell"
-            ],
-            "description": "The type of the shell tool. Always `shell`.",
-            "x-stainless-const": true
-          },
-          "environment": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.FunctionShellToolParamEnvironment"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "allowed_callers": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/OpenAI.CallableToolAllowedCaller"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "name": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "description": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A tool that allows the model to execute shell commands.",
-        "title": "Shell tool"
-      },
-      "OpenAI.FunctionShellToolParamEnvironment": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/OpenAI.FunctionShellToolParamEnvironmentType"
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "local": "#/components/schemas/OpenAI.FunctionShellToolParamEnvironmentLocalEnvironmentParam",
-            "container_reference": "#/components/schemas/OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam",
-            "container_auto": "#/components/schemas/OpenAI.ContainerAutoParam"
-          }
-        }
-      },
-      "OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam": {
-        "type": "object",
-        "required": [
-          "type",
-          "container_id"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "container_reference"
-            ],
-            "description": "References a container created with the /v1/containers endpoint",
-            "x-stainless-const": true,
-            "default": "container_reference"
-          },
-          "container_id": {
-            "type": "string",
-            "description": "The ID of the referenced container."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.FunctionShellToolParamEnvironment"
-          }
-        ]
-      },
-      "OpenAI.FunctionShellToolParamEnvironmentLocalEnvironmentParam": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "local"
-            ],
-            "description": "Use a local computer environment.",
-            "x-stainless-const": true,
-            "default": "local"
-          },
-          "skills": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.LocalSkillParam"
-            },
-            "maxItems": 200,
-            "description": "An optional list of skills."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.FunctionShellToolParamEnvironment"
-          }
-        ]
-      },
-      "OpenAI.FunctionShellToolParamEnvironmentType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "container_auto",
-              "local",
-              "container_reference"
-            ]
-          }
-        ]
-      },
-      "OpenAI.FunctionTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "name",
-          "parameters",
-          "strict"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "function"
-            ],
-            "description": "The type of the function tool. Always `function`.",
-            "x-stainless-const": true
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the function to call."
-          },
-          "async": {
-            "type": "boolean"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "parameters": {
-            "anyOf": [
-              {
-                "type": "object",
-                "unevaluatedProperties": {}
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "output_schema": {
-            "anyOf": [
-              {
-                "type": "object",
-                "unevaluatedProperties": {}
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "strict": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "defer_loading": {
-            "type": "boolean",
-            "description": "Whether this function is deferred and loaded via tool search."
-          },
-          "allowed_callers": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/OpenAI.CallableToolAllowedCaller"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "Defines a function in your own code the model can choose to call. Learn more about [function calling](https://platform.openai.com/docs/guides/function-calling).",
-        "title": "Function"
-      },
-      "OpenAI.FunctionToolParam": {
-        "type": "object",
-        "required": [
-          "name",
-          "type"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9_-]+$"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "parameters": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.EmptyModelParam"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "strict": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "function"
-            ],
-            "x-stainless-const": true,
-            "default": "function"
-          },
-          "async": {
-            "type": "boolean",
-            "description": "Whether the tool response can be returned asynchronously versus immediately returned on next response creation."
-          },
-          "output_schema": {
-            "anyOf": [
-              {
-                "type": "object",
-                "unevaluatedProperties": {}
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "defer_loading": {
-            "type": "boolean",
-            "description": "Whether this function should be deferred and discovered via tool search."
-          },
-          "allowed_callers": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/OpenAI.CallableToolAllowedCaller"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        }
-      },
-      "OpenAI.GrammarSyntax1": {
-        "type": "string",
-        "enum": [
-          "lark",
-          "regex"
-        ]
-      },
-      "OpenAI.HybridSearchOptions": {
-        "type": "object",
-        "required": [
-          "embedding_weight",
-          "text_weight"
-        ],
-        "properties": {
-          "embedding_weight": {
-            "$ref": "#/components/schemas/OpenAI.numeric",
-            "description": "The weight of the embedding in the reciprocal ranking fusion."
-          },
-          "text_weight": {
-            "$ref": "#/components/schemas/OpenAI.numeric",
-            "description": "The weight of the text in the reciprocal ranking fusion."
-          }
-        }
       },
       "OpenAI.ImageDetail": {
         "type": "string",
@@ -2149,253 +147,6 @@
           "auto",
           "original"
         ]
-      },
-      "OpenAI.ImageGenActionEnum": {
-        "type": "string",
-        "enum": [
-          "generate",
-          "edit",
-          "auto"
-        ]
-      },
-      "OpenAI.ImageGenTool": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "image_generation"
-            ],
-            "description": "The type of the image generation tool. Always `image_generation`.",
-            "x-stainless-const": true
-          },
-          "model": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "string",
-                "enum": [
-                  "gpt-image-1",
-                  "gpt-image-1-mini",
-                  "gpt-image-1.5",
-                  "gpt-image-2",
-                  "gpt-image-2-2026-04-21"
-                ]
-              }
-            ],
-            "default": "gpt-image-1"
-          },
-          "quality": {
-            "type": "string",
-            "enum": [
-              "low",
-              "medium",
-              "high",
-              "auto"
-            ],
-            "description": "The quality of the generated image. One of `low`, `medium`, `high`,\n  or `auto`. Default: `auto`.",
-            "default": "auto"
-          },
-          "size": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "string",
-                "enum": [
-                  "1024x1024",
-                  "1024x1536",
-                  "1536x1024",
-                  "auto"
-                ]
-              }
-            ],
-            "description": "The size of the generated images. For `gpt-image-2` and `gpt-image-2-2026-04-21`, arbitrary resolutions are supported as `WIDTHxHEIGHT` strings, for example `1536x864`. Width and height must both be divisible by 16 and the requested aspect ratio must be between 1:3 and 3:1. Resolutions above `2560x1440` are experimental, and the maximum supported resolution is `3840x2160`. The requested size must also satisfy the model's current pixel and edge limits. The standard sizes `1024x1024`, `1536x1024`, and `1024x1536` are supported by the GPT image models; `auto` is supported for models that allow automatic sizing. For `dall-e-2`, use one of `256x256`, `512x512`, or `1024x1024`. For `dall-e-3`, use one of `1024x1024`, `1792x1024`, or `1024x1792`.",
-            "default": "auto"
-          },
-          "output_format": {
-            "type": "string",
-            "enum": [
-              "png",
-              "webp",
-              "jpeg"
-            ],
-            "description": "The output format of the generated image. One of `png`, `webp`, or\n  `jpeg`. Default: `png`.",
-            "default": "png"
-          },
-          "output_compression": {
-            "$ref": "#/components/schemas/OpenAI.integer",
-            "minimum": 0,
-            "maximum": 100,
-            "description": "Compression level for the output image. Default: 100.",
-            "default": 100
-          },
-          "moderation": {
-            "type": "string",
-            "enum": [
-              "auto",
-              "low"
-            ],
-            "description": "Moderation level for the generated image. Default: `auto`.",
-            "default": "auto"
-          },
-          "background": {
-            "type": "string",
-            "enum": [
-              "transparent",
-              "opaque",
-              "auto"
-            ],
-            "description": "Set the background of the generated image. One of `transparent`,\n  `opaque`, or `auto`. Transparent backgrounds are available for\n  supported GPT Image models. For `gpt-image-2` and\n  `gpt-image-2-2026-04-21`, this support is in preview. When using\n  `transparent`, set the output format to `png` or `webp`. Default: `auto`.",
-            "default": "auto"
-          },
-          "input_fidelity": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.InputFidelity"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "input_image_mask": {
-            "$ref": "#/components/schemas/OpenAI.ImageGenToolInputImageMask",
-            "description": "Optional mask for inpainting. Contains `image_url`\n  (string, optional) and `file_id` (string, optional)."
-          },
-          "partial_images": {
-            "$ref": "#/components/schemas/OpenAI.integer",
-            "minimum": 0,
-            "maximum": 3,
-            "description": "Number of partial images to generate in streaming mode, from 0 (default value) to 3."
-          },
-          "action": {
-            "$ref": "#/components/schemas/OpenAI.ImageGenActionEnum",
-            "description": "Whether to generate a new image or edit an existing image. Default: `auto`."
-          },
-          "name": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "description": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A tool that generates images using the GPT image models.",
-        "title": "Image generation tool"
-      },
-      "OpenAI.ImageGenToolInputImageMask": {
-        "type": "object",
-        "properties": {
-          "image_url": {
-            "type": "string",
-            "format": "uri"
-          },
-          "file_id": {
-            "type": "string"
-          }
-        }
-      },
-      "OpenAI.InlineSkillParam": {
-        "type": "object",
-        "required": [
-          "type",
-          "name",
-          "description",
-          "source"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "inline"
-            ],
-            "description": "Defines an inline skill for this request.",
-            "x-stainless-const": true
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the skill."
-          },
-          "description": {
-            "type": "string",
-            "description": "The description of the skill."
-          },
-          "source": {
-            "$ref": "#/components/schemas/OpenAI.InlineSkillSourceParam",
-            "description": "Inline skill payload"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ContainerSkill"
-          }
-        ]
-      },
-      "OpenAI.InlineSkillSourceParam": {
-        "type": "object",
-        "required": [
-          "type",
-          "media_type",
-          "data"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "base64"
-            ],
-            "description": "The type of the inline skill source. Must be `base64`.",
-            "x-stainless-const": true,
-            "default": "base64"
-          },
-          "media_type": {
-            "type": "string",
-            "enum": [
-              "application/zip"
-            ],
-            "description": "The media type of the inline skill payload. Must be `application/zip`.",
-            "x-stainless-const": true,
-            "default": "application/zip"
-          },
-          "data": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 70254592,
-            "description": "Base64-encoded skill zip bundle."
-          }
-        },
-        "description": "Inline skill payload"
-      },
-      "OpenAI.InputFidelity": {
-        "type": "string",
-        "enum": [
-          "high",
-          "low"
-        ],
-        "description": "Control how much effort the model will exert to match the style and features, especially facial features, of input images. This parameter is only supported for `gpt-image-1` and `gpt-image-1.5` and later models, unsupported for `gpt-image-1-mini`. Supports `high` and `low`. Defaults to `low`."
       },
       "OpenAI.InputFileContent": {
         "type": "object",
@@ -2491,7 +242,7 @@
             "$ref": "#/components/schemas/OpenAI.PromptCacheBreakpointConfig"
           }
         },
-        "description": "An image input to the model. Learn about [image inputs](/docs/guides/vision).",
+        "description": "An image input to the model. Learn about [image inputs](https://developers.openai.com/api/docs/guides/images-vision).",
         "title": "Input image"
       },
       "OpenAI.InputTextContent": {
@@ -2524,69 +275,6 @@
       "OpenAI.integer": {
         "type": "integer",
         "format": "int64"
-      },
-      "OpenAI.LocalShellToolParam": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "local_shell"
-            ],
-            "description": "The type of the local shell tool. Always `local_shell`.",
-            "x-stainless-const": true
-          },
-          "name": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "description": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A tool that allows the model to execute shell commands in a local environment.",
-        "title": "Local shell tool"
-      },
-      "OpenAI.LocalSkillParam": {
-        "type": "object",
-        "required": [
-          "name",
-          "description",
-          "path"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The name of the skill."
-          },
-          "description": {
-            "type": "string",
-            "description": "The description of the skill."
-          },
-          "path": {
-            "type": "string",
-            "description": "The path to the directory containing the skill."
-          }
-        }
       },
       "OpenAI.LogProbProperties": {
         "type": "object",
@@ -2710,7 +398,8 @@
               "connector_outlookemail",
               "connector_sharepoint"
             ],
-            "description": "Identifier for service connectors, like those available in ChatGPT. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more\n  about service connectors [here](/docs/guides/tools-remote-mcp#connectors).\n  Currently supported `connector_id` values are:\n  - Dropbox: `connector_dropbox`\n  - Gmail: `connector_gmail`\n  - Google Calendar: `connector_googlecalendar`\n  - Google Drive: `connector_googledrive`\n  - Microsoft Teams: `connector_microsoftteams`\n  - Outlook Calendar: `connector_outlookcalendar`\n  - Outlook Email: `connector_outlookemail`\n  - SharePoint: `connector_sharepoint`"
+            "description": "Identifier for service connectors, like those available in ChatGPT. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more\n  about service connectors [here](https://developers.openai.com/api/docs/guides/tools-connectors-mcp#connectors).\n  This field is deprecated for models released after September 1, 2026.\n  Use `server_url` to connect to a remote MCP server, or `tunnel_id` to\n  connect through a Secure MCP Tunnel.\n  Currently supported `connector_id` values are:\n  - Dropbox: `connector_dropbox`\n  - Gmail: `connector_gmail`\n  - Google Calendar: `connector_googlecalendar`\n  - Google Drive: `connector_googledrive`\n  - Microsoft Teams: `connector_microsoftteams`\n  - Outlook Calendar: `connector_outlookcalendar`\n  - Outlook Email: `connector_outlookemail`\n  - SharePoint: `connector_sharepoint`",
+            "deprecated": true
           },
           "tunnel_id": {
             "type": "string",
@@ -2729,7 +418,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {
+                "additionalProperties": {
                   "type": "string"
                 }
               },
@@ -2795,19 +484,14 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
             "deprecated": true
           }
         },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "Give the model access to additional tools via remote Model Context Protocol\n(MCP) servers. [Learn more about MCP](/docs/guides/tools-remote-mcp).",
+        "description": "Give the model access to additional tools via remote Model Context Protocol\n(MCP) servers. [Learn more about MCP](https://developers.openai.com/api/docs/guides/tools-connectors-mcp).",
         "title": "MCP tool"
       },
       "OpenAI.MCPToolFilter": {
@@ -2842,61 +526,11 @@
       },
       "OpenAI.Metadata": {
         "type": "object",
-        "unevaluatedProperties": {
+        "additionalProperties": {
           "type": "string"
         },
         "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
         "x-oaiTypeLabel": "map"
-      },
-      "OpenAI.NamespaceToolParam": {
-        "type": "object",
-        "required": [
-          "type",
-          "name",
-          "description",
-          "tools"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "namespace"
-            ],
-            "description": "The type of the tool. Always `namespace`.",
-            "x-stainless-const": true
-          },
-          "name": {
-            "type": "string",
-            "minLength": 1,
-            "description": "The namespace name used in tool calls (for example, `crm`)."
-          },
-          "description": {
-            "type": "string",
-            "description": "A description of the namespace shown to the model."
-          },
-          "tools": {
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/OpenAI.FunctionToolParam"
-                },
-                {
-                  "$ref": "#/components/schemas/OpenAI.CustomToolParam"
-                }
-              ]
-            },
-            "minItems": 1,
-            "description": "The function/custom tools available inside this namespace."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "Groups function/custom tools under a shared namespace.",
-        "title": "Namespace"
       },
       "OpenAI.NoiseReductionType": {
         "type": "string",
@@ -2909,27 +543,6 @@
       "OpenAI.numeric": {
         "type": "number",
         "format": "double"
-      },
-      "OpenAI.ProgrammaticToolCallingParam": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "programmatic_tool_calling"
-            ],
-            "description": "The type of the tool. Always `programmatic_tool_calling`.",
-            "x-stainless-const": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ]
       },
       "OpenAI.Prompt": {
         "type": "object",
@@ -2962,7 +575,7 @@
             ]
           }
         },
-        "description": "Reference to a prompt template and its variables.\n[Learn more](/docs/guides/text?api-mode=responses#reusable-prompts)."
+        "description": "Reference to a prompt template and its variables.\n[Learn more](https://developers.openai.com/api/docs/guides/text?api-mode=responses#version-prompts-in-code)."
       },
       "OpenAI.PromptCacheBreakpointConfig": {
         "type": "object",
@@ -2982,30 +595,6 @@
         },
         "description": "Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.",
         "title": "Prompt cache breakpoint"
-      },
-      "OpenAI.RankerVersionType": {
-        "type": "string",
-        "enum": [
-          "auto",
-          "default-2024-11-15"
-        ]
-      },
-      "OpenAI.RankingOptions": {
-        "type": "object",
-        "properties": {
-          "ranker": {
-            "$ref": "#/components/schemas/OpenAI.RankerVersionType",
-            "description": "The ranker to use for the file search."
-          },
-          "score_threshold": {
-            "$ref": "#/components/schemas/OpenAI.numeric",
-            "description": "The score threshold for the file search, a number between 0 and 1. Numbers closer to 1 will attempt to return only the most relevant results, but may return fewer results."
-          },
-          "hybrid_search": {
-            "$ref": "#/components/schemas/OpenAI.HybridSearchOptions",
-            "description": "Weights that control how reciprocal rank fusion balances semantic embedding matches versus sparse keyword matches when hybrid search is enabled."
-          }
-        }
       },
       "OpenAI.RealtimeAudioFormats": {
         "type": "object",
@@ -3197,7 +786,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
         ],
-        "description": "Add a new Item to the Conversation's context, including messages, function\ncalls, and function call responses. This event can be used both to populate a\n\"history\" of the conversation and to add new items mid-stream, but has the\ncurrent limitation that it cannot populate assistant audio messages.\nIf successful, the server will respond with a `conversation.item.created`\nevent, otherwise an `error` event will be sent.",
+        "description": "Add a new Item to the Conversation's context, including messages, function\ncalls, and function call responses. This event can be used both to populate a\n\"history\" of the conversation and to add new items mid-stream, but has the\ncurrent limitation that it cannot populate assistant audio messages.\nIf successful, the server will emit a `conversation.item.added` event and,\nwhen the item is finalized, a `conversation.item.done` event. Otherwise, an\n`error` event will be sent.",
         "x-oaiMeta": {
           "name": "conversation.item.create",
           "group": "realtime",
@@ -3485,7 +1074,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
         ],
-        "description": "**WebRTC/SIP Only:** Emit to cut off the current audio response. This will trigger the server to\nstop generating audio and emit a `output_audio_buffer.cleared` event. This\nevent should be preceded by a `response.cancel` client event to stop the\ngeneration of the current response.\n[Learn more](/docs/guides/realtime-conversations#client-and-server-events-for-audio-in-webrtc).",
+        "description": "**WebRTC/SIP Only:** Emit to cut off the current audio response. This will trigger the server to\nstop generating audio and emit a `output_audio_buffer.cleared` event. This\nevent should be preceded by a `response.cancel` client event to stop the\ngeneration of the current response.\n[Learn more](https://developers.openai.com/api/docs/guides/realtime-conversations#client-and-server-events-for-audio-in-webrtc).",
         "x-oaiMeta": {
           "name": "output_audio_buffer.clear",
           "group": "realtime",
@@ -3608,7 +1197,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeClientEvent"
           }
         ],
-        "description": "Send this event to update the session’s configuration.\nThe client may send this event at any time to update any field\nexcept for `voice` and `model`. `voice` can be updated only if there have been no other audio outputs yet.\nWhen the server receives a `session.update`, it will respond\nwith a `session.updated` event showing the full, effective configuration.\nOnly the fields that are present in the `session.update` are updated. To clear a field like\n`instructions`, pass an empty string. To clear a field like `tools`, pass an empty array.\nTo clear a field like `turn_detection`, pass `null`.",
+        "description": "Send this event to update the session’s configuration.\nThe client may send this event at any time to update any field\nexcept for `voice` and `model`. `voice` can be updated only if there have been no other audio outputs yet.\nWhen the server receives a `session.update`, it will respond\nwith a `session.updated` event showing the full, effective configuration.\nOnly the fields that are present in the `session.update` are updated. To clear a field like\n`instructions`, pass an empty string. To clear a field like `tools`, pass an empty array.\nTo clear a field like `turn_detection`, pass `null`.\nTo turn off input audio noise reduction, send this Realtime event:\n```json\n{\"type\":\"session.update\",\"session\":{\"type\":\"realtime\",\"audio\":{\"input\":{\"noise_reduction\":null}}}}\n```\nFor a transcription session, use `\"type\":\"transcription\"` inside `session`.\nOmitting `audio.input.noise_reduction` from an update leaves its current setting unchanged.",
         "x-oaiMeta": {
           "name": "session.update",
           "group": "realtime",
@@ -4686,6 +2275,9 @@
             "type": "string"
           },
           "code": {
+            "type": "string"
+          },
+          "message": {
             "type": "string"
           }
         }
@@ -6001,7 +3593,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "**WebRTC/SIP Only:** Emitted when the output audio buffer is cleared. This happens either in VAD\nmode when the user has interrupted (`input_audio_buffer.speech_started`),\nor when the client has emitted the `output_audio_buffer.clear` event to manually\ncut off the current audio response.\n[Learn more](/docs/guides/realtime-conversations#client-and-server-events-for-audio-in-webrtc).",
+        "description": "**WebRTC/SIP Only:** Emitted when the output audio buffer is cleared. This happens either in VAD\nmode when the user has interrupted (`input_audio_buffer.speech_started`),\nor when the client has emitted the `output_audio_buffer.clear` event to manually\ncut off the current audio response.\n[Learn more](https://developers.openai.com/api/docs/guides/realtime-conversations#client-and-server-events-for-audio-in-webrtc).",
         "x-oaiMeta": {
           "name": "output_audio_buffer.cleared",
           "group": "realtime",
@@ -6043,7 +3635,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "**WebRTC/SIP Only:** Emitted when the server begins streaming audio to the client. This event is\nemitted after an audio content part has been added (`response.content_part.added`)\nto the response.\n[Learn more](/docs/guides/realtime-conversations#client-and-server-events-for-audio-in-webrtc).",
+        "description": "**WebRTC/SIP Only:** Emitted when the server begins streaming audio to the client. This event is\nemitted after an audio content part has been added (`response.content_part.added`)\nto the response.\n[Learn more](https://developers.openai.com/api/docs/guides/realtime-conversations#client-and-server-events-for-audio-in-webrtc).",
         "x-oaiMeta": {
           "name": "output_audio_buffer.started",
           "group": "realtime",
@@ -6085,7 +3677,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "**WebRTC/SIP Only:** Emitted when the output audio buffer has been completely drained on the server,\nand no more audio is forthcoming. This event is emitted after the full response\ndata has been sent to the client (`response.done`).\n[Learn more](/docs/guides/realtime-conversations#client-and-server-events-for-audio-in-webrtc).",
+        "description": "**WebRTC/SIP Only:** Emitted when the output audio buffer has been completely drained on the server,\nand no more audio is forthcoming. This event is emitted after the full response\ndata has been sent to the client (`response.done`).\n[Learn more](https://developers.openai.com/api/docs/guides/realtime-conversations#client-and-server-events-for-audio-in-webrtc).",
         "x-oaiMeta": {
           "name": "output_audio_buffer.stopped",
           "group": "realtime",
@@ -7740,7 +5332,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {}
+            "additionalProperties": {}
           }
         },
         "x-ms-foundry-meta": {
@@ -8052,7 +5644,7 @@
       },
       "OpenAI.ResponsePromptVariables": {
         "type": "object",
-        "unevaluatedProperties": {
+        "additionalProperties": {
           "anyOf": [
             {
               "type": "string"
@@ -8072,53 +5664,6 @@
         "title": "Prompt Variables",
         "x-oaiExpandable": true,
         "x-oaiTypeLabel": "map"
-      },
-      "OpenAI.SearchContentType": {
-        "type": "string",
-        "enum": [
-          "text",
-          "image"
-        ]
-      },
-      "OpenAI.SearchContextSize": {
-        "type": "string",
-        "enum": [
-          "low",
-          "medium",
-          "high"
-        ]
-      },
-      "OpenAI.SkillReferenceParam": {
-        "type": "object",
-        "required": [
-          "type",
-          "skill_id"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "skill_reference"
-            ],
-            "description": "References a skill created with the /v1/skills endpoint.",
-            "x-stainless-const": true
-          },
-          "skill_id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "The ID of the referenced skill."
-          },
-          "version": {
-            "type": "string",
-            "description": "Optional skill version. Use a positive integer or 'latest'. Omit for default."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ContainerSkill"
-          }
-        ]
       },
       "OpenAI.SpecificApplyPatchParam": {
         "type": "object",
@@ -8196,56 +5741,6 @@
           }
         }
       },
-      "OpenAI.Tool": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/OpenAI.ToolType"
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "github_copilot_toolset_preview": "#/components/schemas/GitHubCopilotToolsetPreview",
-            "bing_grounding": "#/components/schemas/BingGroundingTool",
-            "fabric_dataagent_preview": "#/components/schemas/MicrosoftFabricPreviewTool",
-            "sharepoint_grounding_preview": "#/components/schemas/SharepointPreviewTool",
-            "azure_ai_search": "#/components/schemas/AzureAISearchTool",
-            "openapi": "#/components/schemas/OpenApiTool",
-            "bing_custom_search_preview": "#/components/schemas/BingCustomSearchPreviewTool",
-            "browser_automation_preview": "#/components/schemas/BrowserAutomationPreviewTool",
-            "browser_automation": "#/components/schemas/BrowserAutomationTool",
-            "azure_function": "#/components/schemas/AzureFunctionTool",
-            "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
-            "a2a_preview": "#/components/schemas/A2APreviewTool",
-            "a2a": "#/components/schemas/A2ATool",
-            "work_iq_preview": "#/components/schemas/WorkIQPreviewTool",
-            "fabric_iq_preview": "#/components/schemas/FabricIQPreviewTool",
-            "web_iq_preview": "#/components/schemas/WebIQPreviewTool",
-            "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
-            "mcp": "#/components/schemas/OpenAI.MCPTool",
-            "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
-            "function": "#/components/schemas/OpenAI.FunctionTool",
-            "file_search": "#/components/schemas/OpenAI.FileSearchTool",
-            "computer_use_preview": "#/components/schemas/OpenAI.ComputerUsePreviewTool",
-            "web_search": "#/components/schemas/OpenAI.WebSearchTool",
-            "programmatic_tool_calling": "#/components/schemas/OpenAI.ProgrammaticToolCallingParam",
-            "image_generation": "#/components/schemas/OpenAI.ImageGenTool",
-            "local_shell": "#/components/schemas/OpenAI.LocalShellToolParam",
-            "shell": "#/components/schemas/OpenAI.FunctionShellToolParam",
-            "custom": "#/components/schemas/OpenAI.CustomToolParam",
-            "web_search_preview": "#/components/schemas/OpenAI.WebSearchPreviewTool",
-            "apply_patch": "#/components/schemas/OpenAI.ApplyPatchToolParam",
-            "computer": "#/components/schemas/OpenAI.ComputerTool",
-            "namespace": "#/components/schemas/OpenAI.NamespaceToolParam",
-            "tool_search": "#/components/schemas/OpenAI.ToolSearchToolParam"
-          }
-        },
-        "description": "A tool that can be used to generate a response."
-      },
       "OpenAI.ToolChoiceAllowed": {
         "type": "object",
         "required": [
@@ -8274,7 +5769,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "unevaluatedProperties": {}
+              "additionalProperties": {}
             },
             "description": "A list of tool definitions that the model should be allowed to call.\n  For the Responses API, the list of tool definitions might look like:\n  ```json\n  [\n    { \"type\": \"function\", \"name\": \"get_weather\" },\n    { \"type\": \"mcp\", \"server_label\": \"deepwiki\" },\n    { \"type\": \"image_generation\" }\n  ]\n  ```"
           }
@@ -8610,106 +6105,6 @@
         ],
         "description": "Indicates that the model should use a built-in tool to generate a response.\n[Learn more about built-in tools](https://platform.openai.com/docs/guides/tools)."
       },
-      "OpenAI.ToolSearchExecutionType": {
-        "type": "string",
-        "enum": [
-          "server",
-          "client"
-        ]
-      },
-      "OpenAI.ToolSearchToolParam": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "tool_search"
-            ],
-            "description": "The type of the tool. Always `tool_search`.",
-            "x-stainless-const": true
-          },
-          "execution": {
-            "$ref": "#/components/schemas/OpenAI.ToolSearchExecutionType",
-            "description": "Whether tool search is executed by the server or by the client."
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "parameters": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.EmptyModelParam"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "Hosted or BYOT tool search configuration for deferred tools.",
-        "title": "Tool search tool"
-      },
-      "OpenAI.ToolType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "function",
-              "file_search",
-              "computer",
-              "computer_use_preview",
-              "web_search",
-              "mcp",
-              "code_interpreter",
-              "programmatic_tool_calling",
-              "image_generation",
-              "local_shell",
-              "shell",
-              "custom",
-              "namespace",
-              "tool_search",
-              "web_search_preview",
-              "apply_patch",
-              "a2a_preview",
-              "bing_custom_search_preview",
-              "browser_automation_preview",
-              "fabric_dataagent_preview",
-              "sharepoint_grounding_preview",
-              "memory_search_preview",
-              "work_iq_preview",
-              "fabric_iq_preview",
-              "toolbox_search_preview",
-              "web_iq_preview",
-              "github_copilot_toolset_preview",
-              "a2a",
-              "azure_ai_search",
-              "azure_function",
-              "bing_grounding",
-              "browser_automation",
-              "capture_structured_outputs",
-              "openapi"
-            ]
-          }
-        ]
-      },
       "OpenAI.TranscriptionLanguage": {
         "type": "object",
         "required": [
@@ -8873,523 +6268,6 @@
           ]
         }
       },
-      "OpenAI.WebSearchApproximateLocation": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "approximate"
-            ],
-            "description": "The type of location approximation. Always `approximate`.",
-            "x-stainless-const": true,
-            "default": "approximate"
-          },
-          "country": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "region": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "city": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "timezone": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "description": "The approximate location of the user.",
-        "title": "Web search approximate location"
-      },
-      "OpenAI.WebSearchPreviewTool": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "web_search_preview"
-            ],
-            "description": "The type of the web search tool. One of `web_search_preview` or `web_search_preview_2025_03_11`.",
-            "x-stainless-const": true
-          },
-          "user_location": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ApproximateLocation"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "search_context_size": {
-            "$ref": "#/components/schemas/OpenAI.SearchContextSize",
-            "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default."
-          },
-          "search_content_types": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.SearchContentType"
-            }
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "This tool searches the web for relevant results to use in a response. Learn more about the [web search tool](https://platform.openai.com/docs/guides/tools-web-search).",
-        "title": "Web search preview"
-      },
-      "OpenAI.WebSearchTool": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "web_search"
-            ],
-            "description": "The type of the web search tool. One of `web_search` or `web_search_2025_08_26`."
-          },
-          "external_web_access": {
-            "type": "boolean",
-            "description": "Allow live internet access for web search. Defaults to true when omitted. When false, the web search tool runs in offline/cache-only mode and will not fetch new external content.",
-            "default": true
-          },
-          "filters": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.WebSearchToolFilters"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "user_location": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.WebSearchApproximateLocation"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "search_context_size": {
-            "type": "string",
-            "enum": [
-              "low",
-              "medium",
-              "high"
-            ],
-            "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.",
-            "default": "medium"
-          },
-          "name": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "description": {
-            "type": "string",
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "custom_search_configuration": {
-            "$ref": "#/components/schemas/WebSearchConfiguration",
-            "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "Search the Internet for sources related to the prompt. Learn more about the\n[web search tool](/docs/guides/tools-web-search).",
-        "title": "Web search"
-      },
-      "OpenAI.WebSearchToolFilters": {
-        "type": "object",
-        "properties": {
-          "allowed_domains": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        }
-      },
-      "OpenApiAnonymousAuthDetails": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "anonymous"
-            ],
-            "description": "The object type, which is always 'anonymous'."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenApiAuthDetails"
-          }
-        ],
-        "description": "Security details for OpenApi anonymous authentication"
-      },
-      "OpenApiAuthDetails": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/OpenApiAuthType",
-            "description": "The type of authentication, must be anonymous/project_connection/managed_identity"
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "anonymous": "#/components/schemas/OpenApiAnonymousAuthDetails",
-            "project_connection": "#/components/schemas/OpenApiProjectConnectionAuthDetails",
-            "managed_identity": "#/components/schemas/OpenApiManagedAuthDetails"
-          }
-        },
-        "description": "authentication details for OpenApiFunctionDefinition"
-      },
-      "OpenApiAuthType": {
-        "anyOf": [
-          {
-            "type": "string",
-            "enum": [
-              "anonymous",
-              "project_connection",
-              "managed_identity"
-            ]
-          },
-          {
-            "type": "string"
-          }
-        ],
-        "description": "Authentication type for OpenApi endpoint. Allowed types are:\n- Anonymous (no authentication required)\n- Project Connection (requires project_connection_id to endpoint, as setup in AI Foundry)\n- Managed_Identity (requires audience for identity based auth)"
-      },
-      "OpenApiFunctionDefinition": {
-        "type": "object",
-        "required": [
-          "name",
-          "spec",
-          "auth"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The name of the function to be called."
-          },
-          "description": {
-            "type": "string",
-            "description": "A description of what the function does, used by the model to choose when and how to call the function."
-          },
-          "spec": {
-            "type": "object",
-            "unevaluatedProperties": {},
-            "description": "The openapi function shape, described as a JSON Schema object."
-          },
-          "auth": {
-            "$ref": "#/components/schemas/OpenApiAuthDetails",
-            "description": "Open API authentication details"
-          },
-          "default_params": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "List of OpenAPI spec parameters that will use user-provided defaults"
-          },
-          "functions": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "The name of the function to be called."
-                },
-                "description": {
-                  "type": "string",
-                  "description": "A description of what the function does, used by the model to choose when and how to call the function."
-                },
-                "parameters": {
-                  "type": "object",
-                  "unevaluatedProperties": {},
-                  "description": "The parameters the functions accepts, described as a JSON Schema object."
-                }
-              },
-              "required": [
-                "name",
-                "parameters"
-              ]
-            },
-            "description": "List of function definitions used by OpenApi tool",
-            "readOnly": true
-          }
-        },
-        "description": "The input definition information for an openapi function."
-      },
-      "OpenApiManagedAuthDetails": {
-        "type": "object",
-        "required": [
-          "type",
-          "security_scheme"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "managed_identity"
-            ],
-            "description": "The object type, which is always 'managed_identity'."
-          },
-          "security_scheme": {
-            "$ref": "#/components/schemas/OpenApiManagedSecurityScheme",
-            "description": "Connection auth security details"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenApiAuthDetails"
-          }
-        ],
-        "description": "Security details for OpenApi managed_identity authentication"
-      },
-      "OpenApiManagedSecurityScheme": {
-        "type": "object",
-        "required": [
-          "audience"
-        ],
-        "properties": {
-          "audience": {
-            "type": "string",
-            "description": "Authentication scope for managed_identity auth type"
-          }
-        },
-        "description": "Security scheme for OpenApi managed_identity authentication"
-      },
-      "OpenApiProjectConnectionAuthDetails": {
-        "type": "object",
-        "required": [
-          "type",
-          "security_scheme"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "project_connection"
-            ],
-            "description": "The object type, which is always 'project_connection'."
-          },
-          "security_scheme": {
-            "$ref": "#/components/schemas/OpenApiProjectConnectionSecurityScheme",
-            "description": "Project connection auth security details"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenApiAuthDetails"
-          }
-        ],
-        "description": "Security details for OpenApi project connection authentication"
-      },
-      "OpenApiProjectConnectionSecurityScheme": {
-        "type": "object",
-        "required": [
-          "project_connection_id"
-        ],
-        "properties": {
-          "project_connection_id": {
-            "type": "string",
-            "description": "Project connection id for Project Connection auth type"
-          }
-        },
-        "description": "Security scheme for OpenApi managed_identity authentication"
-      },
-      "OpenApiTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "openapi"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "openapi"
-            ],
-            "description": "The object type, which is always 'openapi'."
-          },
-          "tool_configs": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/ToolConfig"
-            },
-            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
-            "deprecated": true
-          },
-          "openapi": {
-            "$ref": "#/components/schemas/OpenApiFunctionDefinition",
-            "description": "The openapi function definition."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "The input definition information for an OpenAPI tool as used to configure an agent."
-      },
-      "SharepointGroundingToolParameters": {
-        "type": "object",
-        "properties": {
-          "project_connections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ToolProjectConnection"
-            },
-            "maxItems": 1,
-            "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
-          }
-        },
-        "description": "The sharepoint grounding tool parameters.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
-      },
-      "SharepointPreviewTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "sharepoint_grounding_preview"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "sharepoint_grounding_preview"
-            ],
-            "description": "The object type, which is always 'sharepoint_grounding_preview'."
-          },
-          "sharepoint_grounding_preview": {
-            "$ref": "#/components/schemas/SharepointGroundingToolParameters",
-            "description": "The sharepoint grounding tool parameters."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "The input definition information for a sharepoint tool as used to configure an agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
-      },
-      "StructuredOutputDefinition": {
-        "type": "object",
-        "required": [
-          "name",
-          "description",
-          "schema",
-          "strict"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The name of the structured output."
-          },
-          "description": {
-            "type": "string",
-            "description": "A description of the output to emit. Used by the model to determine when to emit the output."
-          },
-          "schema": {
-            "type": "object",
-            "unevaluatedProperties": {},
-            "description": "The JSON schema for the structured output."
-          },
-          "strict": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Whether to enforce strict validation. Default `true`."
-          }
-        },
-        "description": "A structured output that can be produced by the agent."
-      },
       "ToolConfig": {
         "type": "object",
         "properties": {
@@ -9404,19 +6282,6 @@
           }
         },
         "description": "Per-tool configuration that controls tool visibility and search behavior."
-      },
-      "ToolProjectConnection": {
-        "type": "object",
-        "required": [
-          "project_connection_id"
-        ],
-        "properties": {
-          "project_connection_id": {
-            "type": "string",
-            "description": "A project connection in a ToolProjectConnectionList attached to this tool."
-          }
-        },
-        "description": "A project connection resource."
       },
       "VoiceAgentAnimationConfig": {
         "type": "object",
@@ -10543,7 +7408,7 @@
         "properties": {
           "language": {
             "type": "string",
-            "description": "The language of the input audio. Supplying the input language in\n  [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format\n  will improve accuracy and latency."
+            "description": "The language of the input audio. Supplying the input language in\n[ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format\nwill improve accuracy and latency. Optional for other transcription models; required and must be\nnonempty when `model` is `azure-speech-streaming` (such as `en-US`; comma-separated locales are\nsupported)."
           },
           "languages": {
             "type": "array",
@@ -10562,7 +7427,7 @@
           },
           "prompt": {
             "type": "string",
-            "description": "An optional text to guide the model's style or continue a previous audio\n  segment.\n  For `whisper-1`, the [prompt is a list of keywords](/docs/guides/speech-to-text#prompting).\n  For `gpt-4o-transcribe` models (excluding `gpt-4o-transcribe-diarize`), the prompt is a free text string, for example \"expect words related to technology\".\n  Prompt is not supported with `gpt-realtime-whisper` in GA Realtime sessions."
+            "description": "An optional text to guide the model's style or continue a previous audio\n  segment.\n  For `whisper-1`, the [prompt is a list of keywords](https://developers.openai.com/api/docs/guides/speech-to-text#prompting).\n  For `gpt-4o-transcribe` models (excluding `gpt-4o-transcribe-diarize`), the prompt is a free text string, for example \"expect words related to technology\".\n  Prompt is not supported with `gpt-realtime-whisper` in GA Realtime sessions."
           },
           "delay": {
             "type": "string",
@@ -10577,11 +7442,11 @@
           },
           "model": {
             "$ref": "#/components/schemas/VoiceAgentInputTranscriptionModel",
-            "description": "The transcription model identifier. Configure customer custom speech deployments in `custom_speech`."
+            "description": "The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` is for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`."
           },
           "custom_speech": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Optional customer custom speech deployment configuration, keyed by locale."
@@ -10592,9 +7457,13 @@
               "type": "string"
             },
             "description": "Optional phrase hints that bias recognition toward domain terms."
+          },
+          "profanity_filter": {
+            "$ref": "#/components/schemas/VoiceAgentProfanityFilterMode",
+            "description": "Controls how profanity is handled in input transcripts. Supported only with managed Azure Speech\n(`azure-speech` and `azure-speech-streaming`), including Custom Speech.\nSet this property before the session starts. If omitted, the transcription provider's default applies.\nYou cannot change the mode during a session.\nFiltering affects transcript events and the text sent to cascaded models. It does not change input\naudio, voice activity detection, or assistant speech; audio-native models still receive the original\naudio. Mandatory service masking policies apply even when you select `unfiltered`."
           }
         },
-        "description": "Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription\noptions with the Azure and MAI transcription models, custom speech models, and phrase hints.",
+        "description": "Settings for transcribing input audio, including the transcription model, Custom Speech deployments,\nand phrase hints.\nWhen `model` is `azure-speech-streaming`, transcription is supported for cascaded text-model\nconversations only (not realtime speech-to-speech models), requires a nonempty `language` such as\n`en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and\n`profanity_filter`.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -10617,11 +7486,12 @@
               "gpt-transcribe",
               "gpt-live-transcribe",
               "mai-transcribe",
-              "azure-speech"
+              "azure-speech",
+              "azure-speech-streaming"
             ]
           }
         ],
-        "description": "The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed\nvoice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.\nAdditional values may be added over time.",
+        "description": "The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed\nvoice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.\n`azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.\nAdditional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -10813,7 +7683,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {
+                "additionalProperties": {
                   "type": "string"
                 }
               },
@@ -10879,7 +7749,7 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
@@ -10917,10 +7787,10 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/VoiceAgentNoiseReductionType",
-            "description": "The noise reduction mode."
+            "description": "The noise reduction mode. `azure_deep_noise_suppression_headset` provides\nheadset-optimized noise suppression for local voice activity detection, optimized for\nlow-sample-rate audio including 8 kHz telephony audio without changing recognition audio (not\nrestricted to headset devices). `azure_personal_noise_suppression` starts with headset\nsuppression for local voice activity detection and personalizes detection after automatic speaker\nenrollment while keeping recognition audio unchanged and keeping headset suppression active when\npersonalization is unavailable."
           }
         },
-        "description": "Input audio noise reduction configuration.",
+        "description": "Input audio noise reduction configuration. `azure_deep_noise_suppression_headset` and\n`azure_personal_noise_suppression` are modes for local voice activity detection that\nenhance detection audio without changing the audio used for recognition.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -10937,11 +7807,34 @@
             "enum": [
               "near_field",
               "far_field",
-              "azure_deep_noise_suppression"
+              "azure_deep_noise_suppression",
+              "azure_deep_noise_suppression_headset",
+              "azure_personal_noise_suppression"
             ]
           }
         ],
-        "description": "The input audio noise reduction mode.",
+        "description": "The input audio noise reduction mode.\n- `azure_deep_noise_suppression_headset`: Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.\n- `azure_personal_noise_suppression`: Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentProfanityFilterMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "masked",
+              "unfiltered",
+              "removed"
+            ]
+          }
+        ],
+        "description": "The supported input-transcript profanity filtering modes.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -12376,7 +9269,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Up to 16 string key-value pairs attached to the session."
@@ -12507,7 +9400,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Up to 16 string key-value pairs attached to the session."
@@ -13023,105 +9916,6 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "WebIQPreviewTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "project_connection_id"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "web_iq_preview"
-            ],
-            "description": "The object type, which is always 'web_iq_preview'."
-          },
-          "project_connection_id": {
-            "type": "string",
-            "description": "The ID of the WebIQ project connection."
-          },
-          "server_label": {
-            "type": "string",
-            "description": "The label of the WebIQ MCP server to connect to. When omitted, the service defaults to connection name extracted from project_connection_id."
-          },
-          "require_approval": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.MCPToolRequireApproval"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Whether the agent requires approval before executing actions. When omitted, the service defaults to \"always\".",
-            "default": "always"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A WebIQ server-side tool.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
-          ]
-        }
-      },
-      "WebSearchConfiguration": {
-        "type": "object",
-        "required": [
-          "project_connection_id",
-          "instance_name"
-        ],
-        "properties": {
-          "project_connection_id": {
-            "type": "string",
-            "description": "Project connection id for grounding with bing custom search"
-          },
-          "instance_name": {
-            "type": "string",
-            "description": "Name of the custom configuration instance given to config."
-          }
-        },
-        "description": "A web search configuration for bing custom search"
-      },
-      "WorkIQPreviewTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "project_connection_id"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "work_iq_preview"
-            ],
-            "description": "The object type, which is always 'work_iq_preview'."
-          },
-          "project_connection_id": {
-            "type": "string",
-            "description": "The ID of the WorkIQ project connection."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A WorkIQ server-side tool.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "preview_tool"
           ]
         }
       }
