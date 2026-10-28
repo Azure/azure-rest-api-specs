@@ -200,7 +200,7 @@ model ClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   postgreSqlVersion?: PostgreSqlVersion;
 
-  @doc("The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must be omitted because it is obtained from the backup metadata, and creationSourceClusterLocation is required when the source and target cluster locations differ. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.")
+  @doc("The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must be omitted because it is obtained from the backup metadata, and creationSourceClusterLocation is required when the source and target cluster locations differ. During PointInTimeRestore creation, the service ignores the requested backup.geoRedundancy value and configures the new cluster with the same geo-redundancy setting as the source cluster. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   creationMode?: ClusterCreateMode;
 
@@ -763,7 +763,7 @@ model HorizonDbClusterDataEncryptionForPatchUpdate {
 
 @doc("Backup configuration properties for a HorizonDB cluster.")
 model BackupProperties {
-  @doc("The geo-redundancy state. Geo-redundant backup is not supported when dataEncryption.type is AzureKeyVault.")
+  @doc("The geo-redundancy state. When creationMode is PointInTimeRestore, the service ignores the requested value during cluster creation and configures the new cluster with the same geo-redundancy setting as the source cluster, for both same-location and cross-location restores. The response reports the inherited setting. Geo-redundant backup is not supported when dataEncryption.type is AzureKeyVault.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   geoRedundancy: GeoRedundancyState;
 
