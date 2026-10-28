@@ -1,0 +1,86 @@
+name: azure-typespec-author-eval
+description: client configuration opt out skips naming
+version: "1.0"
+type: capability
+area: naming
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 007007-client-configuration-opt-out-skips-naming-trigger
+    tags:
+      suite: naming
+      mode: trigger
+    prompt: |
+      Project analysis, intake, grounding, and the TypeSpec source plan are complete for
+      adding a new WidgetProperties.enabled boolean. The user explicitly declined client
+      configuration. Stop before applying the source plan and return JSON
+      "clientConfigurationStatus", "clientTspChanged". Do not edit, invoke MCP, compile, or
+      generate.
+    constraints: &a1
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          disallowed:
+            - azsdk-common-typespec-naming
+      - &a2
+        type: tool-calls
+        config:
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - &a3
+        type: output-matches
+        config:
+          pattern: '"clientConfigurationStatus"\s*:\s*"(?:skipped|declined|optedOut|opted-out)"'
+      - &a4
+        type: output-matches
+        config:
+          pattern: '"clientTspChanged"\s*:\s*false'
+  - name: 007007-client-configuration-opt-out-skips-naming-forced
+    tags:
+      suite: naming
+      mode: forced
+    prompt: |
+      @azure-typespec-author Project analysis, intake, grounding, and the TypeSpec source plan are complete for
+      adding a new WidgetProperties.enabled boolean. The user explicitly declined client
+      configuration. Stop before applying the source plan and return JSON
+      "clientConfigurationStatus", "clientTspChanged". Do not edit, invoke MCP, compile, or
+      generate.
+    constraints: *a1
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+          disallowed:
+            - azsdk-common-typespec-naming
+      - *a2
+      - *a3
+      - *a4
+  - name: 007007-client-configuration-opt-out-skips-naming-no-skill
+    tags:
+      suite: naming
+      mode: no-skill
+    prompt: |
+      Project analysis, intake, grounding, and the TypeSpec source plan are complete for
+      adding a new WidgetProperties.enabled boolean. The user explicitly declined client
+      configuration. Stop before applying the source plan and return JSON
+      "clientConfigurationStatus", "clientTspChanged". Do not edit, invoke MCP, compile, or
+      generate.
+    constraints: *a1
+    graders:
+      - type: tool-calls
+        config:
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - *a3
+      - *a4

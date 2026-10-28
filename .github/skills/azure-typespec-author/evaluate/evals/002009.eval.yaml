@@ -1,0 +1,116 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "armtemplate"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 002009-arm-add-patch-operation-to-resource-trigger
+    tags:
+      suite: "armtemplate"
+      mode: "trigger"
+    prompt: |
+      In the Widget project, add an update operation for the existing Employee ARM resource. The operation should complete synchronously and allow clients to update the resource's tags and mutable Employee properties. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/002009-arm-add-patch-operation-to-resource/employee.tsp
+          dest: employee.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+          dest: readme.md
+        - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+          dest: tspconfig.yaml
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 002009-arm-add-patch-operation-to-resource-forced
+    tags:
+      suite: "armtemplate"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author In the Widget project, add an update operation for the existing Employee ARM resource. The operation should complete synchronously and allow clients to update the resource's tags and mutable Employee properties. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
+    environment: *shared_environment
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: 'update\s+is\s+ArmCustomPatchSync\s*<'
+          path: "employee.tsp"
+      - &file_not_matches
+        type: "file-not-matches"
+        config:
+          pattern: 'update\s+is\s+ArmResourcePatch(?:Sync|Async)\s*<'
+          path: "employee.tsp"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 002009-arm-add-patch-operation-to-resource-no-skill
+    tags:
+      suite: "armtemplate"
+      mode: "no-skill"
+    prompt: "In the Widget project, add an update operation for the existing Employee ARM resource. The operation should complete synchronously and allow clients to update the resource's tags and mutable Employee properties. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change."
+    environment: *shared_environment
+    rubric:
+      - Employee has a synchronous PATCH update operation implemented with the ARM custom patch template.
+      - The update request supports tags and mutable Employee properties while preserving ARM update semantics.
+      - Changes follow TypeSpec Azure guidelines and contain no unrelated edits.
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - *file_matches
+      - *file_not_matches
+      - type: "prompt"
+        config:
+          prompt: "Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent."
+          model: "gpt-5.6-sol"
+          scoring: "scale_1_10"
+          threshold: 0.88
+    constraints:
+      max_turns: 6
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.2
+    run-command: 0.3
+    skill-invocation: 0.2
+    file-matches: 0.15
+    file-not-matches: 0.15
+  threshold: 1

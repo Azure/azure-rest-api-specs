@@ -1,0 +1,128 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "armtemplate"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 002001-ARM-change-resource-type-trigger
+    tags:
+      suite: "armtemplate"
+      mode: "trigger"
+    prompt: |
+      Change Employee to an extension resource that can be created under any ARM resource. This intentional breaking change is approved. Follow TypeSpec Azure guidelines and proceed without additional confirmation.
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+          dest: employee.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+          dest: readme.md
+        - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+          dest: tspconfig.yaml
+        - src: ../fixtures/Microsoft.Widget/Widget/preview/2024-10-01-preview/widget.json
+          dest: preview/2024-10-01-preview/widget.json
+        - src: ../fixtures/Microsoft.Widget/Widget/stable/2021-11-01/widget.json
+          dest: stable/2021-11-01/widget.json
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 002001-ARM-change-resource-type-forced
+    tags:
+      suite: "armtemplate"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author Change Employee to an extension resource that can be created under any ARM resource. This intentional breaking change is approved. Follow TypeSpec Azure guidelines and proceed without additional confirmation.
+    environment: *shared_environment
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: "ExtensionResource<"
+          path: "*.tsp"
+      - &file_not_matches
+        type: "file-not-matches"
+        config:
+          pattern: "TrackedResource<"
+          path: "*.tsp"
+      - &file_matches_operations
+        type: "file-matches"
+        name: "file-matches-operations"
+        config:
+          pattern: 'Extension\.Read<|Extension\.CreateOrReplaceAsync<|Extension\.CustomPatch(Sync|Async)<|Extension\.DeleteWithoutOkAsync<|Extension\.ListByTarget<'
+          path: "*.tsp"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 002001-ARM-change-resource-type-no-skill
+    tags:
+      suite: "armtemplate"
+      mode: "no-skill"
+    prompt: "Change Employee to an extension resource that can be created under any ARM resource. This intentional breaking change is approved. Follow TypeSpec Azure guidelines and proceed without additional confirmation."
+    environment: *shared_environment
+    rubric:
+      - Employee is converted from a tracked resource to an extension resource that can be scoped to any ARM resource.
+      - Its operations use the ARM extension templates, including a single list-by-target operation instead of separate resource-group and subscription lists.
+      - The implementation follows TypeSpec Azure guidelines and contains no unrelated edits.
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - *file_matches
+      - *file_not_matches
+      - *file_matches_operations
+      - type: "prompt"
+        config:
+          prompt: "The original separate list-by-resource-group and list-by-subscription operations should be consolidated into a single list operation using the extension list template. A scope-parameterized interface should be defined to allow the extension resource to be scoped to any parent resource."
+          model: "gpt-5.6-sol"
+          scoring: "scale_1_10"
+          threshold: 0.88
+    constraints:
+      max_turns: 6
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.15
+    prompt: 0.15
+    file-not-matches: 0.15
+    run-command: 0.15
+    skill-invocation: 0.15
+    file-matches: 0.25
+  threshold: 0.96

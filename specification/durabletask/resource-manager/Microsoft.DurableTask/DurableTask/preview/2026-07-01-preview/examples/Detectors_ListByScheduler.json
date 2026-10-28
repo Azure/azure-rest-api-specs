@@ -1,0 +1,86 @@
+{
+  "title": "Detectors_ListByScheduler",
+  "operationId": "Detectors_ListByScheduler",
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "subscriptionId": "EE9BD735-67CE-4A90-89C4-439D3F6A4C93",
+    "resourceGroupName": "rgopenapi",
+    "schedulerName": "testscheduler"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/EE9BD735-67CE-4A90-89C4-439D3F6A4C93/resourceGroups/rgopenapi/providers/Microsoft.DurableTask/schedulers/testscheduler/detectors/cpuhealth",
+            "name": "cpuhealth",
+            "type": "Microsoft.DurableTask/schedulers/detectors",
+            "properties": {
+              "metadata": {
+                "id": "cpuhealth",
+                "name": "CPU Health",
+                "description": "Detects sustained high CPU usage across workers.",
+                "author": "DurableTask",
+                "category": "Performance",
+                "supportTopicList": [
+                  "high-cpu"
+                ],
+                "analysisTypes": [
+                  "timeseries"
+                ],
+                "type": "Detector",
+                "score": 0.97
+              },
+              "dataset": [
+                {
+                  "table": {
+                    "tableName": "CpuUsage",
+                    "columns": [
+                      {
+                        "columnName": "Timestamp",
+                        "dataType": "datetime",
+                        "columnType": "Dimension"
+                      },
+                      {
+                        "columnName": "AverageCpu",
+                        "dataType": "double",
+                        "columnType": "Metric"
+                      }
+                    ],
+                    "rows": [
+                      [
+                        "2026-07-20T00:00:00Z",
+                        78.4
+                      ],
+                      [
+                        "2026-07-20T00:05:00Z",
+                        82.1
+                      ]
+                    ]
+                  },
+                  "renderingProperties": {
+                    "type": 2,
+                    "title": "CPU trend",
+                    "description": "Average CPU usage over time."
+                  }
+                }
+              ],
+              "status": {
+                "message": "CPU utilization is elevated.",
+                "statusId": 1
+              }
+            },
+            "systemData": {
+              "createdBy": "serviceadmin",
+              "createdByType": "User",
+              "createdAt": "2026-07-20T10:00:00Z",
+              "lastModifiedBy": "serviceadmin",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-07-20T10:05:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
