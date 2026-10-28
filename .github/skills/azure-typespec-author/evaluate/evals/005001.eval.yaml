@@ -1,0 +1,104 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "warning"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 005001-warning-suppress-warning-trigger
+    tags:
+      suite: "warning"
+      mode: "trigger"
+    prompt: |
+      Add suppressions for the warnings produced by "tsp compile .", and set the justification to "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details".
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/005001-warning-suppress-warning/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/005001-warning-suppress-warning/models.tsp
+          dest: models.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/005001-warning-suppress-warning/stubs.tsp
+          dest: stubs.tsp
+        - src: ../fixtures/005001-warning-suppress-warning/tspconfig.yaml
+          dest: tspconfig.yaml
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 005001-warning-suppress-warning-forced
+    tags:
+      suite: "warning"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author Add suppressions for the warnings produced by "tsp compile .", and set the justification to "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details".
+    environment: *shared_environment
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: "#suppress"
+          path: "models.tsp"
+      - &file_matches_fixme_justification
+        type: "file-matches"
+        name: "file-matches-fixme-justification"
+        config:
+          pattern: 'FIXME: Update justification, follow aka\.ms/tsp/conversion-fix for details'
+          path: "models.tsp"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 005001-warning-suppress-warning-no-skill
+    tags:
+      suite: "warning"
+      mode: "no-skill"
+    prompt: 'Add suppressions for the warnings produced by "tsp compile .", and set the justification to "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details".'
+    environment: *shared_environment
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - *file_matches
+      - *file_matches_fixme_justification
+    constraints:
+      max_turns: 6
+      max_tokens: 1000000
+
+scoring:
+  weights:
+    tool-calls: 0.2
+    run-command: 0.2
+    skill-invocation: 0.2
+    file-matches: 0.4
+  threshold: 1

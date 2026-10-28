@@ -1,0 +1,11 @@
+import "./AIGatewayCommon.tsp";
+import "./AIGateway.tsp";
+import "./AIGatewayWorkspace.tsp";
+import "./AIGatewayModelProvider.tsp";
+import "./AIGatewayModel.tsp";
+import "./AIGatewayAlias.tsp";
+import "./AIGatewayToolServer.tsp";
+import "./AIGatewayTelemetryExporter.tsp";
+import "./AIGatewayApiKey.tsp";
+import "./AIGatewayResponses.tsp";
+import "./AIGatewayOperations.tsp";

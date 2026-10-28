@@ -468,7 +468,7 @@ and Critic verification remain the same.
    version, not to override this classification.
 6. **Skip PR-only mechanics explicitly.** Step 5.5 input is the literal
    `reconciliation skipped`. The Step 6 summary uses `Local target`, `Repository
-HEAD`, `Local snapshot`, and previous-version source instead of PR metadata.
+   HEAD`, `Local snapshot`, and previous-version source instead of PR metadata.
    Approval labels, comment telemetry, posting, thread resolution, and Step 9
    label changes are `N/A`. Omit approval-context paragraphs, posting actions,
    reconciliation tables, and per-comment telemetry markers from the local
@@ -485,8 +485,10 @@ HEAD`, `Local snapshot`, and previous-version source instead of PR metadata.
    ID, and any files skipped or unreadable, then run the read-only local form of
    Step 10.
 
-Apply the Step 1 size guardrail to local directory reviews using supported-file
-count and total source lines. If the target exceeds 500 files or 50,000 lines,
+Apply the Step 1 size guardrail to local directory reviews using non-example
+supported-file count and total source lines, excluding files in any `examples`
+directory from both counts. Examples remain in review scope. If the target
+exceeds 500 non-example files or 50,000 non-example source lines,
 ask the human to select a subset, split into service/RP batches, or explicitly
 accept reduced recall. Record the selected scope in the report.
 
@@ -687,7 +689,17 @@ binds every previous-version fetch.
 3. Fast-path findings still need `[NEW]` / `[EXISTING]` classification. If the classification requires non-trivial previous-version comparison, **escalate to full review** before reporting.
 4. If the fast-path review surfaces any blocking finding that suggests broader risk (e.g., a description change that reveals the schema is wrong, an example that references a property not in the spec), **escalate to full review** before reporting.
 
-**Size guardrail (full-review track only).** If the PR touches > 500 spec files **or** > 50000 added+deleted lines across spec files, stop before Step 2 and ask the human to choose:
+**Size guardrail (full-review track only).** Count spec files and their
+added+deleted lines, excluding any path with an `examples` directory segment
+from both counts. This excludes both TypeSpec source examples
+(`specification/<service>/<project>/examples/**`) and compiled Swagger examples
+(`specification/<service>/resource-manager/**/examples/**`). For a renamed or
+moved file, count it once with its added+deleted lines if either its old or new
+path is a non-example `specification/` path. Examples remain in review scope;
+their file or line counts alone must not trigger this guardrail.
+
+If the PR touches > 500 non-example spec files **or** > 50000 added+deleted lines
+across non-example spec files, stop before Step 2 and ask the human to choose:
 
 - (a) Review a specified subset of files (human provides the list).
 - (b) Split into per-service or per-RP batches reviewed sequentially as separate sessions.
@@ -1347,7 +1359,7 @@ must always be present; missing required fields return
 8. **Considered-and-declined list** -- prior-iteration advisory candidates the Reviewer evaluated and chose not to promote. Defaults to empty.
 9. **Graphs status** -- pass exactly one of: `Graphs: true`;
    `Graphs: false; graph-mode: fast-path`; `Graphs: false; graph-mode:
-size-downgrade`; or `Graphs: false; graph-mode: derivation-failed`. The mode
+   size-downgrade`; or `Graphs: false; graph-mode: derivation-failed`. The mode
    is required whenever graphs are false. `size-downgrade` and
    `derivation-failed` both require the Critic to re-derive the
    sensitive-data-flow view in summary form; only `derivation-failed` requires
@@ -1628,7 +1640,7 @@ Substitution rules:
   failed, use `Critic unavailable; reviewer self-check only`. Never combine
 - `<overflow disclosure>`: when the 20-comment limit excludes candidates, use
   `N additional findings were identified but not individually verified or
-posted. Key themes: [list].` Otherwise omit the line. Never combine
+  posted. Key themes: [list].` Otherwise omit the line. Never combine
   `critic-verified` with an unavailable outcome.
 - `<outcome>`: one of `converged` (Critic returned PASS or WARN with no unresolved corrections), `manual decision` (the report's `Next-step recommendation` was `MANUAL DECISION REQUIRED` and the human approved posting anyway), `override applied` (one or more findings carry a `critic: override` marker), or `unavailable -- reviewer self-check` (all Critic dispatch attempts failed; auto-unavailable fallback fired). Pick the **highest-severity** label that applies; precedence is `unavailable` > `manual decision` > `override applied` > `converged`.
 - `<short-sha>`: the **first 7 characters** of the session SHA pinned in Step 1, used as the link's display text.

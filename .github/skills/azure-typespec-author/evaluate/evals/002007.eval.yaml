@@ -1,0 +1,192 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "armtemplate"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 002007-ARM-define-custom-action-trigger
+    tags:
+      suite: "armtemplate"
+      mode: "trigger"
+    prompt: |
+      In API version `2024-10-01-preview`, add a synchronous POST action called `notify` to the standard operations of Employee. Request body: message content (string) and priority (enum with values Low, Medium, High). Response body: notification identifier (string) and status (string). All required decisions are provided; no separate confirmation is needed. Ensure the definition meets TypeSpec Azure guidelines.
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+          dest: employee.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+          dest: readme.md
+        - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+          dest: tspconfig.yaml
+        - src: ../fixtures/Microsoft.Widget/Widget/preview/2024-10-01-preview/widget.json
+          dest: preview/2024-10-01-preview/widget.json
+        - src: ../fixtures/Microsoft.Widget/Widget/stable/2021-11-01/widget.json
+          dest: stable/2021-11-01/widget.json
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 002007-ARM-define-custom-action-forced
+    tags:
+      suite: "armtemplate"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author In API version `2024-10-01-preview`, add a synchronous POST action called `notify` to the standard operations of Employee. Request body: message content (string) and priority (enum with values Low, Medium, High). Response body: notification identifier (string) and status (string). All required decisions are provided; no separate confirmation is needed. Ensure the definition meets TypeSpec Azure guidelines.
+    environment: *shared_environment
+    rubric: &shared_rubric
+      - Employee has a synchronous POST resource action named notify in API version 2024-10-01-preview.
+      - The request contains string message content and a priority limited to Low, Medium, or High.
+      - The response contains a string notification identifier and status, and changes are limited to the requested action.
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: "union.*Priority|enum.*Priority"
+          path: "employee.tsp"
+      - &file_matches_low_enum_value
+        type: "file-matches"
+        name: "file-matches-low-enum-value"
+        config:
+          pattern: 'Low|"Low"'
+          path: "employee.tsp"
+      - &file_matches_medium_enum_value
+        type: "file-matches"
+        name: "file-matches-medium-enum-value"
+        config:
+          pattern: 'Medium|"Medium"'
+          path: "employee.tsp"
+      - &file_matches_high_enum_value
+        type: "file-matches"
+        name: "file-matches-high-enum-value"
+        config:
+          pattern: 'High|"High"'
+          path: "employee.tsp"
+      - &file_matches_request_model
+        type: "file-matches"
+        name: "file-matches-request-model"
+        config:
+          pattern: "model.*Notify.*(?:Request|Content)|model.*Notification.*(?:Request|Content)"
+          path: "employee.tsp"
+      - &file_matches_message_property
+        type: "file-matches"
+        name: "file-matches-message-property"
+        config:
+          pattern: 'message.*:\s*string|content.*:\s*string'
+          path: "employee.tsp"
+      - &file_matches_priority_property
+        type: "file-matches"
+        name: "file-matches-priority-property"
+        config:
+          pattern: 'priority.*:\s*.*Priority'
+          path: "employee.tsp"
+      - &file_matches_response_model
+        type: "file-matches"
+        name: "file-matches-response-model"
+        config:
+          pattern: "model.*Notify.*(?:Response|Result)|model.*Notification.*(?:Response|Result)"
+          path: "employee.tsp"
+      - &file_matches_notification_id_property
+        type: "file-matches"
+        name: "file-matches-notification-id-property"
+        config:
+          pattern: 'notificationId.*:\s*string|identifier.*:\s*string'
+          path: "employee.tsp"
+      - &file_matches_status_property
+        type: "file-matches"
+        name: "file-matches-status-property"
+        config:
+          pattern: 'status.*:\s*string'
+          path: "employee.tsp"
+      - &file_matches_notify_operation
+        type: "file-matches"
+        name: "file-matches-notify-operation"
+        config:
+          pattern: "notify is ArmResourceActionSync<|notify is ArmResourceActionAsync<|notify is ArmResourceAction<"
+          path: "employee.tsp"
+      - &prompt
+        type: "prompt"
+        config:
+          threshold: 0.88
+          model: "gpt-5.6-sol"
+          scoring: "scale_1_10"
+          prompt: "Verify the operation contract without requiring particular request or response model names: Employee has a synchronous POST action named notify in API version 2024-10-01-preview; its request contains string message content and a Priority enum limited to Low, Medium, and High; its response contains a string notification identifier and status; and there are no unrelated edits."
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 002007-ARM-define-custom-action-no-skill
+    tags:
+      suite: "armtemplate"
+      mode: "no-skill"
+    prompt: |
+      In API version `2024-10-01-preview`, add a synchronous POST action called `notify` to the standard operations of Employee. Request body: message content (string) and priority (enum with values Low, Medium, High). Response body: notification identifier (string) and status (string). All required decisions are provided; no separate confirmation is needed. Ensure the definition meets TypeSpec Azure guidelines.
+    environment: *shared_environment
+    rubric: *shared_rubric
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - *file_matches
+      - *file_matches_low_enum_value
+      - *file_matches_medium_enum_value
+      - *file_matches_high_enum_value
+      - *file_matches_request_model
+      - *file_matches_message_property
+      - *file_matches_priority_property
+      - *file_matches_response_model
+      - *file_matches_notification_id_property
+      - *file_matches_status_property
+      - *file_matches_notify_operation
+      - *prompt
+    constraints:
+      max_turns: 6
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.05
+    prompt: 0.05
+    run-command: 0.05
+    skill-invocation: 0.05
+    file-matches: 0.8
+  threshold: 0.99

@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureStackHCI;
 
 /** Cluster Volume resource representing a storage volume on a Cluster. */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_11_01_preview)
 @parentResource(Cluster)
 model ClusterVolume
   is Azure.ResourceManager.ProxyResource<ClusterVolumeProperties> {
@@ -24,7 +24,7 @@ model ClusterVolume
 }
 
 /** Operations for Cluster Volumes. */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_11_01_preview)
 @armResourceOperations
 interface ClusterVolumes {
   /** Get a specific volume on a Cluster. */
