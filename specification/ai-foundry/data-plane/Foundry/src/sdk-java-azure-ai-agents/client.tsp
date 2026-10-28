@@ -716,17 +716,6 @@ using Azure.AI.Projects;
 );
 @@clientName(VoiceAgentSessionResponseConfig.object, "objectType");
 
-union VoiceResponseObjectType {
-  realtime_response: "realtime.response",
-}
-
-@@alternateType(
-  OpenAI.RealtimeResponse.object,
-  VoiceResponseObjectType,
-  "java"
-);
-@@clientName(OpenAI.RealtimeResponse.object, "objectType", "java");
-
 @@alternateType(
   VoiceAgentDefinition.sub_protocol,
   VoiceAgentSubProtocol,
