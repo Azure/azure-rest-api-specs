@@ -72,6 +72,12 @@ type DownloadAzurePipelineArtifactFileOptions = {
   maxBytes?: number;
 };
 
+type DownloadAzurePipelineArtifactArchiveOptions = {
+  artifact: ResolvedAzurePipelineArtifact;
+  retryOptions?: import("./retries.ts").RetryOptions;
+  maxBytes: number;
+};
+
 type ByteStreamReadResult = { done: true; value?: undefined } | { done: false; value: Uint8Array };
 
 class AzurePipelineArtifactHttpError extends Error {
@@ -84,14 +90,22 @@ class AzurePipelineArtifactHttpError extends Error {
 }
 
 async function readResponseTextWithLimit(response: Response, maxBytes?: number): Promise<string> {
+  return new TextDecoder().decode(await readResponseBytesWithLimit(response, maxBytes));
+}
+
+async function readResponseBytesWithLimit(
+  response: Response,
+  maxBytes?: number,
+): Promise<Uint8Array> {
   const contentLength = response.headers?.get("content-length");
-  if (
-    maxBytes !== undefined &&
-    contentLength &&
-    Number.isFinite(Number(contentLength)) &&
-    Number(contentLength) > maxBytes
-  ) {
-    throw new Error(`Artifact content exceeds ${maxBytes} bytes`);
+  if (contentLength) {
+    const parsedContentLength = Number(contentLength);
+    if (!Number.isSafeInteger(parsedContentLength) || parsedContentLength < 0) {
+      throw new Error(`Artifact response has invalid Content-Length '${contentLength}'`);
+    }
+    if (maxBytes !== undefined && parsedContentLength > maxBytes) {
+      throw new Error(`Artifact content exceeds ${maxBytes} bytes`);
+    }
   }
 
   if (maxBytes !== undefined && response.body) {
@@ -117,14 +131,17 @@ async function readResponseTextWithLimit(response: Response, maxBytes?: number):
       bytes.set(chunk, offset);
       offset += chunk.byteLength;
     }
-    return new TextDecoder().decode(bytes);
+    return bytes;
   }
 
-  const text = await response.text();
-  if (maxBytes !== undefined && Buffer.byteLength(text, "utf8") > maxBytes) {
+  const bytes =
+    typeof response.arrayBuffer === "function"
+      ? new Uint8Array(await response.arrayBuffer())
+      : new TextEncoder().encode(await response.text());
+  if (maxBytes !== undefined && bytes.byteLength > maxBytes) {
     throw new Error(`Artifact content exceeds ${maxBytes} bytes`);
   }
-  return text;
+  return bytes;
 }
 
 function getArtifactHeaders(token?: string): Record<string, string> {
@@ -172,29 +189,24 @@ export async function resolveAzurePipelineArtifact({
   fallbackToFailedArtifact = false,
   token = undefined,
 }: ResolveAzurePipelineArtifactOptions): Promise<AzurePipelineArtifactResolution> {
-  const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
-  core.info(`Calling Azure DevOps API to get the artifact: ${apiUrl}`);
-
   const headers = getArtifactHeaders(token);
-  let response = await fetchWithRetry(
-    apiUrl,
-    {
-      method: "GET",
-      headers,
-    },
-    retryOptions,
-  );
-
-  if (response.status === 404 && fallbackToFailedArtifact) {
-    response = await fetchFailedArtifact({
-      ado_build_id,
-      ado_project_url,
-      artifactName,
-      core,
-      retryOptions,
-      headers,
-    });
-  }
+  const response = fallbackToFailedArtifact
+    ? await fetchFailedArtifact({
+        ado_build_id,
+        ado_project_url,
+        artifactName,
+        core,
+        retryOptions,
+        headers,
+      })
+    : await fetchWithRetry(
+        `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`,
+        {
+          method: "GET",
+          headers,
+        },
+        retryOptions,
+      );
 
   if (response.status === 404) {
     core.info(`Artifact '${artifactName}' not found (404)`);
@@ -247,6 +259,33 @@ export async function downloadAzurePipelineArtifactFile({
   }
 
   return await readResponseTextWithLimit(artifactResponse, maxBytes);
+}
+
+/**
+ * Downloads one bounded ZIP archive from a previously resolved Azure Pipelines artifact.
+ */
+export async function downloadAzurePipelineArtifactArchive({
+  artifact,
+  retryOptions = {},
+  maxBytes,
+}: DownloadAzurePipelineArtifactArchiveOptions): Promise<Uint8Array> {
+  const parsedUrl = new URL(artifact.downloadUrl);
+  parsedUrl.searchParams.set("format", "zip");
+  parsedUrl.searchParams.delete("subPath");
+  const artifactResponse = await fetchWithRetry(
+    parsedUrl.toString(),
+    {
+      method: "GET",
+      headers: artifact.headers,
+    },
+    retryOptions,
+  );
+  if (!artifactResponse.ok) {
+    throw new Error(
+      `Failed to fetch artifact archive: ${artifactResponse.status}, ${artifactResponse.statusText}`,
+    );
+  }
+  return await readResponseBytesWithLimit(artifactResponse, maxBytes);
 }
 
 export function getAzurePipelineArtifact(
@@ -312,6 +351,9 @@ export function getAdoBuildInfoFromUrl(buildUrl: string): { projectUrl: string; 
   return { projectUrl: match[1], buildId: match[2] };
 }
 
+/**
+ * Resolves an exact or latest matching failed artifact from one list-artifacts request.
+ */
 export async function fetchFailedArtifact({
   ado_build_id,
   ado_project_url,
@@ -327,8 +369,7 @@ export async function fetchFailedArtifact({
   retryOptions?: import("./retries.ts").RetryOptions;
   headers?: object;
 }): Promise<Response> {
-  // fallback to fetch the failed artifact
-  let apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?api-version=7.0`;
+  const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?api-version=7.0`;
   core.info(`List the artifacts: ${apiUrl}`);
   const response = await fetchWithRetry(
     apiUrl,
@@ -345,11 +386,12 @@ export async function fetchFailedArtifact({
   const listArtifactResponse: ListArtifactsResponse =
     (await response.json()) as ListArtifactsResponse;
   core.info(`Artifacts found: ${JSON.stringify(listArtifactResponse)}`);
-  // Use filter to get matching artifacts and sort them in descending alphabetical order
-  const artifactsList = listArtifactResponse.value
-    .filter((artifact) => artifact.name.includes(artifactName))
-    .sort((a, b) => b.name.localeCompare(a.name)); // Descending order (Z to A)
-  if (artifactsList.length === 0) {
+  const selectedArtifact =
+    listArtifactResponse.value.find((artifact) => artifact.name === artifactName) ??
+    listArtifactResponse.value
+      .filter((artifact) => artifact.name.includes(artifactName))
+      .sort((a, b) => b.name.localeCompare(a.name))[0];
+  if (!selectedArtifact) {
     const message = `No artifacts found with name containing ${artifactName}`;
     core.warning(message);
     // Return a Response-like object using the global Response constructor
@@ -359,15 +401,8 @@ export async function fetchFailedArtifact({
       headers: { "Content-Type": "text/plain" },
     });
   }
-  artifactName = artifactsList[0].name;
-  apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
-  core.info(`Fetching the failed artifact: ${apiUrl}`);
-  return await fetchWithRetry(
-    apiUrl,
-    {
-      method: "GET",
-      headers,
-    },
-    retryOptions,
-  );
+  return new Response(JSON.stringify(selectedArtifact), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
 }

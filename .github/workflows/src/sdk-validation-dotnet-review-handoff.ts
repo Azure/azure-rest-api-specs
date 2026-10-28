@@ -1,9 +1,10 @@
-import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { Unzip, UnzipInflate } from "fflate";
 import * as z from "zod";
 import {
   isSafeRelativePosixPath,
+  hasSdkReviewBundlePatch,
   SDK_REVIEW_BUNDLE_ARTIFACT_NAME,
   SDK_REVIEW_BUNDLE_MAX_CHANGED_FILES_PER_ENTRY,
   SDK_REVIEW_BUNDLE_MAX_ENTRIES,
@@ -13,8 +14,9 @@ import {
   SdkReviewBundleManifestSchema,
   type SdkReviewBundleEntry,
   type SdkReviewBundleManifest,
+  type NonEmptySdkReviewBundleEntry,
 } from "../../shared/src/sdk-types.ts";
-import { downloadAzurePipelineArtifactFile, resolveAzurePipelineArtifact } from "./artifacts.ts";
+import { downloadAzurePipelineArtifactArchive, resolveAzurePipelineArtifact } from "./artifacts.ts";
 import type { Context, Core, GitHub, GitHubScriptArgs } from "./github.ts";
 import type { RetryOptions } from "./retries.ts";
 
@@ -27,6 +29,9 @@ export const EXPECTED_ADO_DEFINITION_ID = 7516 as const;
 export const MAX_SDK_REVIEW_MANIFEST_BYTES = 1024 * 1024;
 export const MAX_SDK_REVIEW_PATCH_BYTES = 16 * 1024 * 1024;
 export const MAX_SDK_REVIEW_TOTAL_PATCH_BYTES = 16 * 1024 * 1024;
+export const MAX_SDK_REVIEW_ARCHIVE_BYTES = 24 * 1024 * 1024;
+export const MAX_SDK_REVIEW_EXPANDED_BYTES =
+  MAX_SDK_REVIEW_MANIFEST_BYTES + MAX_SDK_REVIEW_TOTAL_PATCH_BYTES;
 export {
   SDK_REVIEW_BUNDLE_MAX_CHANGED_FILES_PER_ENTRY as MAX_SDK_REVIEW_CHANGED_FILES_PER_ENTRY,
   SDK_REVIEW_BUNDLE_MAX_ENTRIES as MAX_SDK_REVIEW_ENTRIES,
@@ -83,21 +88,20 @@ export type ValidatedCheckRunEvent = {
   eventPrNumbers: number[];
 };
 
-export type ResolvedReviewHandoffInvocation = {
-  event: ValidatedCheckRunEvent;
-  prNumber?: number;
-  allowClosedPullRequest: boolean;
-};
-
 export type DownloadedBundleEntry = {
   entry: SdkReviewBundleEntry;
-  localPatchPath: string;
+  localPatchPath?: string;
 };
 
 type CompleteSdkReviewBundleManifest = Extract<
   SdkReviewBundleManifest,
   { captureStatus: "complete" }
 >;
+
+type ValidatedArchiveBundle = {
+  manifest: SdkReviewBundleManifest;
+  files: Map<string, Uint8Array>;
+};
 
 export type SdkReviewHandoffResult = {
   status: "validated" | "skipped";
@@ -260,22 +264,6 @@ export function validateCheckRunEventPayload(payload: unknown): {
   };
 }
 
-const ManualCheckRunSchema = z.object({
-  name: z.string(),
-  head_sha: z.string(),
-  status: z.string(),
-  conclusion: z.string().nullable(),
-  details_url: z.string().nullable(),
-  external_id: z.string().nullable(),
-  completed_at: z.string().nullable(),
-  app: z
-    .object({
-      name: z.string().nullable().optional(),
-      slug: z.string().nullable().optional(),
-    })
-    .nullable(),
-});
-
 function validatePullRequestRepository(
   context: Context,
   prNumber: number,
@@ -288,155 +276,6 @@ function validatePullRequestRepository(
   if (actualRepository && actualRepository.toLowerCase() !== expectedRepository.toLowerCase()) {
     throw new Error(`PR #${prNumber} targets '${actualRepository}', not '${expectedRepository}'`);
   }
-}
-
-/**
- * Resolves a workflow_dispatch request from the trusted PR and check-run APIs.
- * User input supplies only a PR number and optional build ID; URLs and SHAs are
- * always taken from GitHub's current PR/check data.
- */
-export async function resolveManualReviewHandoffInvocation(params: {
-  github: GitHub;
-  context: Context;
-  prNumberInput: unknown;
-  buildIdInput?: unknown;
-}): Promise<ResolvedReviewHandoffInvocation> {
-  const { github, context } = params;
-  const prNumberText = typeof params.prNumberInput === "string" ? params.prNumberInput.trim() : "";
-  if (!/^[1-9]\d*$/.test(prNumberText)) {
-    throw new Error(`Invalid workflow_dispatch pr_number '${prNumberText}'`);
-  }
-  const prNumber = Number.parseInt(prNumberText, 10);
-  if (!Number.isSafeInteger(prNumber)) {
-    throw new Error(`Invalid workflow_dispatch pr_number '${prNumberText}'`);
-  }
-
-  const buildIdText = typeof params.buildIdInput === "string" ? params.buildIdInput.trim() : "";
-  if (buildIdText && !/^[1-9]\d*$/.test(buildIdText)) {
-    throw new Error(`Invalid workflow_dispatch build_id '${buildIdText}'`);
-  }
-
-  const { data: pullRequest } = await github.rest.pulls.get({
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-    pull_number: prNumber,
-  });
-  validatePullRequestRepository(context, prNumber, pullRequest);
-  const prHeadSha = pullRequest.head.sha;
-  if (!/^[0-9a-f]{40}$/i.test(prHeadSha)) {
-    throw new Error(`PR #${prNumber} has an invalid head SHA`);
-  }
-
-  const checkRuns = await github.paginate(github.rest.checks.listForRef, {
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-    ref: prHeadSha,
-    filter: "all",
-    per_page: 100,
-  });
-  const validationErrors: string[] = [];
-  const matchingEvents: Array<{ event: ValidatedCheckRunEvent; completedAt: string }> = [];
-
-  for (const candidate of checkRuns) {
-    const parsedCandidate = ManualCheckRunSchema.safeParse(candidate);
-    if (!parsedCandidate.success) {
-      continue;
-    }
-    const checkRun = parsedCandidate.data;
-    if (
-      checkRun.name !== EXPECTED_DOTNET_CHECK_NAME ||
-      checkRun.status !== "completed" ||
-      checkRun.conclusion === null ||
-      checkRun.app?.name !== EXPECTED_AZURE_PIPELINES_APP_NAME ||
-      checkRun.app?.slug !== EXPECTED_AZURE_PIPELINES_APP_SLUG
-    ) {
-      continue;
-    }
-    if (checkRun.head_sha.toLowerCase() !== prHeadSha.toLowerCase()) {
-      validationErrors.push(
-        `Check '${checkRun.name}' head '${checkRun.head_sha}' does not match PR head '${prHeadSha}'`,
-      );
-      continue;
-    }
-
-    try {
-      const validation = validateCheckRunEventPayload({
-        check_run: {
-          ...checkRun,
-          pull_requests: [{ number: prNumber, head: { sha: prHeadSha } }],
-        },
-      });
-      if (!validation.matched || !validation.event) {
-        validationErrors.push(validation.reason ?? "Check run did not match");
-        continue;
-      }
-      if (buildIdText && validation.event.adoBuild.buildId !== buildIdText) {
-        continue;
-      }
-      matchingEvents.push({
-        event: validation.event,
-        completedAt: checkRun.completed_at ?? "",
-      });
-    } catch (error) {
-      validationErrors.push(error instanceof Error ? error.message : String(error));
-    }
-  }
-
-  matchingEvents.sort((left, right) => right.completedAt.localeCompare(left.completedAt));
-  const selected = matchingEvents[0];
-  if (!selected) {
-    const buildDescription = buildIdText ? ` build ${buildIdText}` : "";
-    const details = validationErrors.length > 0 ? `: ${validationErrors.join("; ")}` : "";
-    throw new Error(
-      `No matching completed '${EXPECTED_DOTNET_CHECK_NAME}' check found for PR #${prNumber}${buildDescription}${details}`,
-    );
-  }
-
-  return {
-    event: selected.event,
-    prNumber,
-    allowClosedPullRequest: true,
-  };
-}
-
-export async function resolveReviewHandoffInvocation(params: {
-  github: GitHub;
-  context: Context;
-}): Promise<
-  | { matched: true; invocation: ResolvedReviewHandoffInvocation }
-  | { matched: false; reason: string }
-> {
-  const { github, context } = params;
-  if (context.eventName === "workflow_dispatch") {
-    const dispatchPayload = z
-      .object({
-        inputs: z.record(z.string(), z.unknown()).optional(),
-      })
-      .safeParse(context.payload);
-    const inputs = dispatchPayload.success ? (dispatchPayload.data.inputs ?? {}) : {};
-    const invocation = await resolveManualReviewHandoffInvocation({
-      github,
-      context,
-      prNumberInput: inputs.pr_number,
-      buildIdInput: inputs.build_id,
-    });
-    return { matched: true, invocation };
-  }
-
-  const eventValidation = validateCheckRunEventPayload(context.payload);
-  if (!eventValidation.matched || !eventValidation.event) {
-    return {
-      matched: false,
-      reason: eventValidation.reason ?? "Check run did not match target filter",
-    };
-  }
-  return {
-    matched: true,
-    invocation: {
-      event: eventValidation.event,
-      allowClosedPullRequest: false,
-    },
-  };
 }
 
 /**
@@ -507,11 +346,6 @@ export function verifyManifestAgainstCheckRun(
     }
     seenEntryIds.add(entry.entryId);
 
-    if (seenPatchFiles.has(entry.patchFile)) {
-      throw new Error(`Duplicate patchFile '${entry.patchFile}' in review bundle manifest`);
-    }
-    seenPatchFiles.add(entry.patchFile);
-
     if (entry.changedFileCount !== entry.changedFiles.length) {
       throw new Error(
         `Entry '${entry.entryId}' changedFileCount (${entry.changedFileCount}) does not match changedFiles length (${entry.changedFiles.length})`,
@@ -531,6 +365,13 @@ export function verifyManifestAgainstCheckRun(
       seenChangedFiles.add(changedFile);
     }
 
+    if (!hasSdkReviewBundlePatch(entry)) {
+      continue;
+    }
+    if (seenPatchFiles.has(entry.patchFile)) {
+      throw new Error(`Duplicate patchFile '${entry.patchFile}' in review bundle manifest`);
+    }
+    seenPatchFiles.add(entry.patchFile);
     if (entry.patchBytes > MAX_SDK_REVIEW_PATCH_BYTES) {
       throw new Error(
         `Entry '${entry.entryId}' patchBytes (${entry.patchBytes}) exceeds ${MAX_SDK_REVIEW_PATCH_BYTES}`,
@@ -557,7 +398,128 @@ export function verifyManifestAgainstCheckRun(
   return prNumber;
 }
 
-export function verifyPatchPaths(entry: SdkReviewBundleEntry, patchText: string): void {
+function validateArchiveEntryName(name: string): void {
+  if (
+    !name ||
+    name === "." ||
+    name === ".." ||
+    name.startsWith("/") ||
+    name.includes("/") ||
+    name.includes("\\") ||
+    /^[A-Za-z]:/.test(name) ||
+    /[\u0000-\u001f\u007f]/.test(name)
+  ) {
+    throw new Error(`Unsafe ZIP entry '${name}'`);
+  }
+}
+
+export function extractAndValidateSdkReviewBundleArchive(
+  archiveBytes: Uint8Array,
+): ValidatedArchiveBundle {
+  const seenEntryNames = new Map<string, string>();
+  const extractedFiles = new Map<string, Uint8Array>();
+  let totalExpandedBytes = 0;
+  let entryCount = 0;
+
+  const unzip = new Unzip((file) => {
+    validateArchiveEntryName(file.name);
+    const normalizedName = file.name.toLowerCase();
+    if (seenEntryNames.has(normalizedName)) {
+      throw new Error(`Duplicate ZIP entry '${file.name}'`);
+    }
+    seenEntryNames.set(normalizedName, file.name);
+    entryCount += 1;
+    if (entryCount > SDK_REVIEW_BUNDLE_MAX_ENTRIES + 1) {
+      throw new Error(`ZIP has more than ${SDK_REVIEW_BUNDLE_MAX_ENTRIES + 1} entries`);
+    }
+
+    const chunks: Uint8Array[] = [];
+    let fileExpandedBytes = 0;
+    const maxFileBytes =
+      file.name === SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME
+        ? MAX_SDK_REVIEW_MANIFEST_BYTES
+        : MAX_SDK_REVIEW_PATCH_BYTES;
+    file.ondata = (error, chunk, final) => {
+      if (error) {
+        throw error;
+      }
+      fileExpandedBytes += chunk.byteLength;
+      totalExpandedBytes += chunk.byteLength;
+      if (fileExpandedBytes > maxFileBytes) {
+        throw new Error(`ZIP entry '${file.name}' exceeds ${maxFileBytes} bytes`);
+      }
+      if (totalExpandedBytes > MAX_SDK_REVIEW_EXPANDED_BYTES) {
+        throw new Error(`ZIP expanded content exceeds ${MAX_SDK_REVIEW_EXPANDED_BYTES} bytes`);
+      }
+      if (chunk.byteLength > 0) {
+        chunks.push(chunk.slice());
+      }
+      if (final) {
+        const fileBytes = new Uint8Array(fileExpandedBytes);
+        let offset = 0;
+        for (const fileChunk of chunks) {
+          fileBytes.set(fileChunk, offset);
+          offset += fileChunk.byteLength;
+        }
+        extractedFiles.set(file.name, fileBytes);
+      }
+    };
+    file.start();
+  });
+  unzip.register(UnzipInflate);
+  unzip.push(archiveBytes, true);
+
+  if (extractedFiles.size !== entryCount) {
+    throw new Error("ZIP archive contains an incomplete entry");
+  }
+
+  const manifestBytes = extractedFiles.get(SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME);
+  if (!manifestBytes) {
+    throw new Error(`Missing '${SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME}' in artifact archive`);
+  }
+
+  let parsedJson: unknown;
+  try {
+    parsedJson = JSON.parse(new TextDecoder().decode(manifestBytes));
+  } catch (error) {
+    throw new Error(`Invalid JSON in '${SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME}'`, { cause: error });
+  }
+  const manifest = SdkReviewBundleManifestSchema.parse(parsedJson);
+  const expectedFiles = new Set([SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME]);
+  for (const entry of manifest.entries) {
+    if (!hasSdkReviewBundlePatch(entry)) {
+      continue;
+    }
+    expectedFiles.add(entry.patchFile);
+    const actualFileName = seenEntryNames.get(entry.patchFile.toLowerCase());
+    const patchBytes = extractedFiles.get(entry.patchFile);
+    if (actualFileName !== entry.patchFile || !patchBytes) {
+      throw new Error(`Missing declared patch '${entry.patchFile}' in artifact archive`);
+    }
+    if (patchBytes.byteLength !== entry.patchBytes) {
+      throw new Error(
+        `Patch size mismatch for '${entry.patchFile}': expected ${entry.patchBytes} bytes, got ${patchBytes.byteLength}`,
+      );
+    }
+  }
+  for (const fileName of extractedFiles.keys()) {
+    if (!expectedFiles.has(fileName)) {
+      throw new Error(`Unexpected ZIP entry '${fileName}'`);
+    }
+  }
+
+  const files = new Map<string, Uint8Array>();
+  for (const fileName of expectedFiles) {
+    const fileBytes = extractedFiles.get(fileName);
+    if (!fileBytes) {
+      throw new Error(`Missing ZIP entry '${fileName}'`);
+    }
+    files.set(fileName, fileBytes);
+  }
+  return { manifest, files };
+}
+
+export function verifyPatchPaths(entry: NonEmptySdkReviewBundleEntry, patchText: string): void {
   const patchFiles = new Set<string>();
   for (const line of patchText.split(/\r?\n/)) {
     if (!line.startsWith("diff --git ")) {
@@ -607,9 +569,8 @@ export async function verifyPullRequestFreshness(params: {
   context: Context;
   prNumber: number;
   expectedHeadSha: string;
-  allowClosedPullRequest?: boolean;
 }): Promise<{ currentHeadSha: string; isFresh: boolean; state: string }> {
-  const { github, context, prNumber, expectedHeadSha, allowClosedPullRequest = false } = params;
+  const { github, context, prNumber, expectedHeadSha } = params;
   const { data: pullRequest } = await github.rest.pulls.get({
     owner: context.repo.owner,
     repo: context.repo.repo,
@@ -620,8 +581,7 @@ export async function verifyPullRequestFreshness(params: {
 
   const currentHeadSha = pullRequest.head.sha;
   const isFresh =
-    (allowClosedPullRequest || pullRequest.state === "open") &&
-    currentHeadSha.toLowerCase() === expectedHeadSha.toLowerCase();
+    pullRequest.state === "open" && currentHeadSha.toLowerCase() === expectedHeadSha.toLowerCase();
 
   return {
     currentHeadSha,
@@ -650,13 +610,14 @@ export function formatReviewHandoffSummary(params: {
     `- **SDK Repository**: \`${manifest.sdkRepoName}\``,
     `- **Captured Package Entries**: ${downloadedEntries.length}`,
     "",
-    "| Entry ID | Package | SDK Base Commit | Result | Changed Files | Patch Bytes | Patch SHA-256 |",
-    "| --- | --- | --- | --- | ---: | ---: | --- |",
+    "| Entry ID | Package | SDK Base Commit | Result | Changed Files | Patch Bytes |",
+    "| --- | --- | --- | --- | ---: | ---: |",
   ];
 
   for (const { entry } of downloadedEntries) {
+    const patchBytes = hasSdkReviewBundlePatch(entry) ? String(entry.patchBytes) : "N/A";
     lines.push(
-      `| \`${entry.entryId}\` | \`${entry.packageName}\` (\`${entry.packageRootPath}\`) | \`${entry.sdkBaseCommitSha.slice(0, 12)}\` | \`${entry.executionResult}\` | ${entry.changedFileCount} | ${entry.patchBytes} | \`${entry.patchSha256.slice(0, 16)}...\` |`,
+      `| \`${entry.entryId}\` | \`${entry.packageName}\` (\`${entry.packageRootPath}\`) | \`${entry.sdkBaseCommitSha.slice(0, 12)}\` | \`${entry.executionResult}\` | ${entry.changedFileCount} | ${patchBytes} |`,
     );
   }
 
@@ -688,9 +649,9 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     retryOptions,
   } = options;
 
-  const resolvedInvocation = await resolveReviewHandoffInvocation({ github, context });
-  if (!resolvedInvocation.matched) {
-    const reason = resolvedInvocation.reason;
+  const eventValidation = validateCheckRunEventPayload(context.payload);
+  if (!eventValidation.matched || !eventValidation.event) {
+    const reason = eventValidation.reason ?? "Check run did not match target filter";
     core.info(reason);
     return {
       status: "skipped",
@@ -699,7 +660,7 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     };
   }
 
-  const { event, prNumber: manualPrNumber, allowClosedPullRequest } = resolvedInvocation.invocation;
+  const event = eventValidation.event;
   core.info(
     `Validated check_run '${event.checkName}' for head '${event.headSha}' and Azure Pipelines build '${event.adoBuild.buildId}'`,
   );
@@ -713,7 +674,6 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
       context,
       prNumber: primaryPrNumber,
       expectedHeadSha: event.headSha,
-      allowClosedPullRequest,
     });
     if (!prStatus.isFresh) {
       const reason = `Skipping stale or closed PR #${primaryPrNumber}: state='${prStatus.state}', currentHeadSha='${prStatus.currentHeadSha}', checkRunHeadSha='${event.headSha}'`;
@@ -751,36 +711,13 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     };
   }
 
-  const manifestArtifactData = await downloadAzurePipelineArtifactFile({
+  const archiveBytes = await downloadAzurePipelineArtifactArchive({
     artifact: artifactResolution.artifact,
-    artifactFileName: SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME,
     retryOptions,
-    maxBytes: MAX_SDK_REVIEW_MANIFEST_BYTES,
+    maxBytes: MAX_SDK_REVIEW_ARCHIVE_BYTES,
   });
-
-  if (Buffer.byteLength(manifestArtifactData, "utf8") > MAX_SDK_REVIEW_MANIFEST_BYTES) {
-    throw new Error(
-      `'${SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME}' exceeds ${MAX_SDK_REVIEW_MANIFEST_BYTES} bytes`,
-    );
-  }
-
-  let parsedJson: unknown;
-  try {
-    parsedJson = JSON.parse(manifestArtifactData);
-  } catch (error) {
-    throw new Error(
-      `Invalid JSON in '${SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME}' from build ${event.adoBuild.buildId}`,
-      { cause: error },
-    );
-  }
-
-  const manifest = SdkReviewBundleManifestSchema.parse(parsedJson);
+  const { manifest, files } = extractAndValidateSdkReviewBundleArchive(archiveBytes);
   const prNumber = verifyManifestAgainstCheckRun(manifest, event);
-  if (manualPrNumber !== undefined && manualPrNumber !== prNumber) {
-    throw new Error(
-      `Manifest specPrNumber #${prNumber} does not match workflow_dispatch PR #${manualPrNumber}`,
-    );
-  }
   if (manifest.captureStatus !== "complete") {
     throw new Error(
       `SDK review bundle capture did not complete for build ${event.adoBuild.buildId}`,
@@ -792,7 +729,6 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     context,
     prNumber,
     expectedHeadSha: event.headSha,
-    allowClosedPullRequest,
   });
   if (!prStatus.isFresh) {
     const reason = `Skipping stale or closed PR #${prNumber}: state='${prStatus.state}', currentHeadSha='${prStatus.currentHeadSha}', checkRunHeadSha='${event.headSha}'`;
@@ -810,38 +746,31 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
   const bundleDirectory = path.resolve(outputRootDir, `build-${event.adoBuild.buildId}`);
   fs.mkdirSync(bundleDirectory, { recursive: true });
 
-  const manifestPath = resolveSafeChildPath(bundleDirectory, SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME);
-  fs.writeFileSync(manifestPath, JSON.stringify(manifest, undefined, 2));
-
   const downloadedEntries: DownloadedBundleEntry[] = [];
-  let remainingPatchBytes = MAX_SDK_REVIEW_TOTAL_PATCH_BYTES;
   for (const entry of manifest.entries) {
+    if (!hasSdkReviewBundlePatch(entry)) {
+      downloadedEntries.push({ entry });
+      continue;
+    }
     const localPatchPath = resolveSafeChildPath(bundleDirectory, entry.patchFile);
-    const patchData = await downloadAzurePipelineArtifactFile({
-      artifact: artifactResolution.artifact,
-      artifactFileName: entry.patchFile,
-      retryOptions,
-      maxBytes: Math.min(MAX_SDK_REVIEW_PATCH_BYTES, remainingPatchBytes),
-    });
-
-    const patchBuffer = Buffer.from(patchData, "utf8");
+    const patchBuffer = Buffer.from(files.get(entry.patchFile)!);
     if (patchBuffer.byteLength !== entry.patchBytes) {
       throw new Error(
         `Patch size mismatch for '${entry.patchFile}': expected ${entry.patchBytes} bytes, got ${patchBuffer.byteLength}`,
       );
     }
 
-    const actualSha256 = createHash("sha256").update(patchBuffer).digest("hex");
-    if (actualSha256.toLowerCase() !== entry.patchSha256.toLowerCase()) {
-      throw new Error(
-        `Patch SHA-256 mismatch for '${entry.patchFile}': expected ${entry.patchSha256}, got ${actualSha256}`,
-      );
-    }
-
+    const patchData = patchBuffer.toString("utf8");
     verifyPatchPaths(entry, patchData);
-    remainingPatchBytes -= patchBuffer.byteLength;
-    fs.writeFileSync(localPatchPath, patchBuffer);
     downloadedEntries.push({ entry, localPatchPath });
+  }
+
+  const manifestPath = resolveSafeChildPath(bundleDirectory, SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME);
+  fs.writeFileSync(manifestPath, files.get(SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME)!);
+  for (const { entry, localPatchPath } of downloadedEntries) {
+    if (localPatchPath && hasSdkReviewBundlePatch(entry)) {
+      fs.writeFileSync(localPatchPath, files.get(entry.patchFile)!);
+    }
   }
 
   const summaryMarkdown = formatReviewHandoffSummary({
@@ -850,7 +779,10 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     prNumber,
     downloadedEntries,
   });
-  const summaryPath = resolveSafeChildPath(bundleDirectory, "review-handoff-summary.md");
+  const summaryPath = resolveSafeChildPath(
+    outputRootDir,
+    `build-${event.adoBuild.buildId}-review-handoff-summary.md`,
+  );
   fs.writeFileSync(summaryPath, summaryMarkdown, "utf8");
 
   await core.summary.addRaw(summaryMarkdown).write();

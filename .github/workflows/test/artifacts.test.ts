@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
+  downloadAzurePipelineArtifactArchive,
   downloadAzurePipelineArtifactFile,
   fetchFailedArtifact,
   getAdoBuildInfoFromUrl,
@@ -137,6 +138,10 @@ describe("getAzurePipelineArtifact function", () => {
         headers: expectedHeaders,
       }),
     );
+    expect(mockFetch).toHaveBeenCalledTimes(2);
+    expect(String(mockFetch.mock.calls[0][0])).toContain("artifacts?api-version=7.0");
+    expect(String(mockFetch.mock.calls[0][0])).not.toContain("artifactName=");
+    expect(String(mockFetch.mock.calls[1][0])).toContain("format=file&subPath=");
   });
 
   it("should include authorization header when token is provided", async () => {
@@ -648,6 +653,50 @@ describe("getAzurePipelineArtifact function", () => {
       }),
     ).rejects.toThrow("exceeds 4 bytes");
   });
+
+  it("downloads one archive with format=zip and accepts the exact byte limit", async () => {
+    const archive = new Uint8Array([1, 2, 3, 4]);
+    mockFetch.mockResolvedValue(
+      new Response(archive, {
+        status: 200,
+        headers: { "Content-Length": String(archive.byteLength) },
+      }),
+    );
+
+    await expect(
+      downloadAzurePipelineArtifactArchive({
+        artifact: {
+          downloadUrl: "https://dev.azure.com/download?format=file&subPath=/old",
+          headers: { "Content-Type": "application/json" },
+        },
+        maxBytes: archive.byteLength,
+      }),
+    ).resolves.toEqual(archive);
+    expect(mockFetch.mock.calls[0][0]).toBe("https://dev.azure.com/download?format=zip");
+  });
+
+  it("rejects archive Content-Length and streamed bytes above the limit", async () => {
+    mockFetch.mockResolvedValueOnce(
+      new Response(new Uint8Array(5), {
+        status: 200,
+        headers: { "Content-Length": "5" },
+      }),
+    );
+    await expect(
+      downloadAzurePipelineArtifactArchive({
+        artifact: { downloadUrl: "https://dev.azure.com/download", headers: {} },
+        maxBytes: 4,
+      }),
+    ).rejects.toThrow("exceeds 4 bytes");
+
+    mockFetch.mockResolvedValueOnce(new Response(new Uint8Array(5), { status: 200 }));
+    await expect(
+      downloadAzurePipelineArtifactArchive({
+        artifact: { downloadUrl: "https://dev.azure.com/download", headers: {} },
+        maxBytes: 4,
+      }),
+    ).rejects.toThrow("exceeds 4 bytes");
+  });
 });
 
 describe("getAdoBuildInfoFromUrl function", () => {
@@ -729,25 +778,11 @@ describe("fetchFailedArtifact function", () => {
       statusText: "OK",
     };
 
-    const mockFetchResponse = {
-      ok: true,
-      json: vi.fn().mockResolvedValue({
-        resource: { downloadUrl: "https://example.com/artifact-download" },
-      }),
-      status: 200,
-      statusText: "OK",
-    };
-
     // Setup fetch with a spy to capture the headers
-    mockFetch.mockImplementation((url, options) => {
+    mockFetch.mockImplementation((_url, options) => {
       // Verify that the custom headers are included in all requests
       expect(options?.headers).toEqual(customHeaders);
-
-      if (url.includes("artifacts?api-version") && !url.includes("artifactName=")) {
-        return Promise.resolve(mockListResponse);
-      } else {
-        return Promise.resolve(mockFetchResponse);
-      }
+      return Promise.resolve(mockListResponse);
     });
 
     // Call the function with custom headers
@@ -756,8 +791,10 @@ describe("fetchFailedArtifact function", () => {
       headers: customHeaders,
     });
 
-    // Verify response is correct
-    expect(response).toBe(mockFetchResponse);
+    await expect(response.json()).resolves.toMatchObject({
+      name: "spec-gen-sdk-artifact-FailedAttempt1",
+      resource: { downloadUrl: "https://example.com/download1" },
+    });
 
     // Verify fetch was called with custom headers
     expect(global.fetch).toHaveBeenCalledWith(
@@ -796,30 +833,43 @@ describe("fetchFailedArtifact function", () => {
       statusText: "OK",
     };
 
-    const mockFetchResponse = {
-      ok: true,
-      json: vi.fn().mockResolvedValue({
-        resource: { downloadUrl: "https://example.com/artifact-download" },
-      }),
-      status: 200,
-      statusText: "OK",
-    };
-
-    // Setup fetch to return different responses for each call
-    mockFetch.mockImplementation((url) => {
-      if (url.includes("artifacts?api-version")) {
-        return Promise.resolve(mockListResponse);
-      } else {
-        expect(url).toContain("artifactName=spec-gen-sdk-artifact-FailedAttempt2");
-        return Promise.resolve(mockFetchResponse);
-      }
-    });
+    mockFetch.mockResolvedValue(mockListResponse);
 
     // Call the function
     const response = await fetchFailedArtifact(defaultParams);
 
-    // Verify response is correct
-    expect(response).toBe(mockFetchResponse);
+    await expect(response.json()).resolves.toMatchObject({
+      name: "spec-gen-sdk-artifact-FailedAttempt2",
+      resource: { downloadUrl: "https://example.com/download1" },
+    });
+    expect(mockFetch).toHaveBeenCalledOnce();
+  });
+
+  it("prefers the exact artifact over matching failed artifacts", async () => {
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: vi.fn().mockResolvedValue({
+        value: [
+          {
+            name: "spec-gen-sdk-artifact-FailedAttempt9",
+            resource: { downloadUrl: "https://example.com/failed" },
+          },
+          {
+            name: "spec-gen-sdk-artifact",
+            resource: { downloadUrl: "https://example.com/exact" },
+          },
+        ],
+      }),
+      status: 200,
+      statusText: "OK",
+    });
+
+    const response = await fetchFailedArtifact(defaultParams);
+    await expect(response.json()).resolves.toMatchObject({
+      name: "spec-gen-sdk-artifact",
+      resource: { downloadUrl: "https://example.com/exact" },
+    });
+    expect(mockFetch).toHaveBeenCalledOnce();
   });
 
   it("should return 404 when no matching artifacts are found", async () => {
@@ -893,30 +943,15 @@ describe("fetchFailedArtifact function", () => {
       statusText: "OK",
     };
 
-    // Mock response for fetching specific artifact
-    const mockFetchResponse = {
-      ok: true,
-      json: vi.fn().mockResolvedValue({
-        resource: { downloadUrl: "https://example.com/artifact-download" },
-      }),
-      status: 200,
-      statusText: "OK",
-    };
-
-    // Setup fetch to return different responses for each call
-    mockFetch.mockImplementation((url) => {
-      if (url.includes("artifacts?api-version")) {
-        return Promise.resolve(mockListResponse);
-      } else {
-        expect(url).toContain("artifactName=spec-gen-sdk-artifact-FailedAttempt3");
-        return Promise.resolve(mockFetchResponse);
-      }
-    });
+    mockFetch.mockResolvedValue(mockListResponse);
 
     // Call the function
     const response = await fetchFailedArtifact(defaultParams);
 
-    // Verify response is correct
-    expect(response).toBe(mockFetchResponse);
+    await expect(response.json()).resolves.toMatchObject({
+      name: "spec-gen-sdk-artifact-FailedAttempt3",
+      resource: { downloadUrl: "https://example.com/download3" },
+    });
+    expect(mockFetch).toHaveBeenCalledOnce();
   });
 });

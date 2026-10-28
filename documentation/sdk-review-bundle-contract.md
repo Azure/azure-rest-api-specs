@@ -1,11 +1,9 @@
 # SDK Review Bundle Contract
 
-The SDK review bundle carries generated SDK changes from spec PR validation to later review and reporting stages. The stages are intentionally separate:
+The SDK review bundle carries generated SDK changes from spec PR validation into a report-only GitHub handoff:
 
 1. Azure Pipelines captures the bundle.
 2. The GitHub validation workflow verifies and republishes a validated artifact.
-3. A future review runner may consume the validated artifact and run the SDK review skill.
-4. A future publisher may replace a managed PR comment.
 
 The current validation workflow is read-only. It does not invoke a review model or write to a pull request.
 
@@ -29,37 +27,28 @@ The bundle binds the following immutable identities:
 - Azure Pipelines build ID
 - SDK repository and exact SDK base commit SHA
 - package root
-- patch file name, byte count, and SHA-256 checksum
+- patch file name and byte count
 
-Neither manual replay nor later stages may accept a user-supplied URL or SHA in place of these identities.
+The event-driven consumer does not accept a user-supplied URL or SHA in place of these identities.
 
 ## Capture completeness
 
-A complete manifest is all-or-nothing. It contains every expected reviewable package entry and every declared patch. A failed capture is explicit and contains no usable entries. Consumers reject failed, partial, over-budget, path-unsafe, checksum-invalid, or identity-mismatched bundles.
+A complete manifest is all-or-nothing. It contains one entry for every generated package. Packages with changed files declare a patch file and byte count. Packages with zero changed files remain as metadata-only entries and do not declare or publish an empty patch. A failed capture is explicit and contains no usable entries. The consumer rejects failed, partial, over-budget, path-unsafe, byte-count-invalid, or identity-mismatched bundles.
 
-The producer owns complete capture before the generated SDK checkout is reset. The shared schema defines the wire contract. The validation workflow owns event and build identity, resource limits, repository and path safety, checksums, and patch applicability.
+The producer owns complete capture before the generated SDK checkout is reset. The shared schema defines the wire contract. The validation workflow owns event and build identity, resource limits, repository and path safety, and byte-count validation.
 
 ## Artifact resolution and retention
 
-The validation workflow resolves the Azure Pipelines artifact once and downloads all files from that resolved target. Only a verified HTTP 404 means the artifact is unavailable. Authentication failures, throttling, server errors, malformed metadata, and bounded-download failures fail validation.
+The Azure Pipelines artifact is one flat ZIP archive containing:
 
-Azure Pipelines retention can remove old artifacts. A replay after retention expiry is expected to report that no artifact is available. Manual replay accepts a PR number and optional build ID, resolves the PR head through GitHub, and selects a trusted completed check for that head. Closed or merged PRs are supported for post-merge canary validation because replay is read-only.
+- `sdk-review-bundle.json`
+- one patch for each non-empty package entry
 
-## Patch applicability
+No directories, nested paths, undeclared files, or empty-package patches are allowed. The validation workflow makes exactly one artifact metadata request and one `format=zip` archive request, regardless of package count. It streams extraction, validates each name before starting that entry, and enforces per-file and total limits from actual emitted bytes rather than declared ZIP sizes. It then schema-validates the manifest and verifies that the archive contains exactly the declared patches and byte counts. Only fully validated files are written to the local bundle directory.
 
-After identity, schema, path, size, and checksum validation, a separate validation step checks the complete patch set. Entries are grouped by SDK base commit. For each base, validation uses a sparse, partial public checkout of the declared SDK repository, limited to declared package roots, and runs:
+Per-package patch semantics remain intentional even though transport uses one archive. Each package keeps its own package root, changed-file list, execution result, patch byte count when non-empty, and SDK baseline commit. Entries in one bundle may use different `sdkBaseCommitSha` values because generation can occur against separately resolved SDK baselines.
 
-```text
-git apply --check --binary
-```
-
-The patch is not applied in the validation workspace. The GitHub artifact is uploaded only after every base group passes.
-
-## Future review and publication
-
-The future review runner owns skill execution and consumes only the uploaded validated artifact. Deterministic checks used by the skill should be `azsdk` commands with versioned, machine-readable results.
-
-The future publisher is the only component that should receive PR write permissions. Reruns should replace one managed comment for the same PR and head rather than append duplicate comments. Review execution and comment publication should remain separate jobs or workflows so each receives only the permissions it needs.
+Only a verified HTTP 404 means the artifact is unavailable. Authentication failures, throttling, server errors, malformed metadata, and bounded-download or extraction failures fail validation. Azure Pipelines retention can remove old artifacts; the event-driven handoff then reports that no artifact is available.
 
 ## Ownership boundaries
 
@@ -67,8 +56,6 @@ The future publisher is the only component that should receive PR write permissi
 | --- | --- |
 | Azure Pipelines producer | Generated SDK capture and complete bundle publication |
 | Shared schema | Versioned bundle contract and structural limits |
-| GitHub validation workflow | Trusted identity, resource, path, checksum, and applicability validation |
-| Future review runner | SDK review skill execution |
-| Future publisher | Managed PR comment replacement and all PR write permissions |
+| GitHub validation workflow | Trusted event/build identity, bounded archive extraction, resource/path/byte-count validation, summary, and validated artifact upload |
 
-Validation, review, and publication must remain independently auditable boundaries.
+The handoff remains report-only and has no pull request write permissions.

@@ -1,11 +1,11 @@
 import {
   SDK_REVIEW_BUNDLE_ARTIFACT_NAME,
+  hasSdkReviewBundlePatch,
   SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME,
   SdkName,
   SdkReviewBundleManifestSchema,
 } from "@azure-tools/specs-shared/sdk-types";
 import { execFileSync } from "node:child_process";
-import { createHash } from "node:crypto";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -269,13 +269,21 @@ describe("review-bundle", () => {
     );
     expect(manifestOnDisk).toEqual(manifest);
 
-    // Verify both patch files exist on disk, match declared SHA-256 and byte length, and contain the diffs
+    // Verify both patch files exist on disk, match declared byte length, and contain the diffs
     for (const entry of manifestOnDisk.entries) {
+      expect(hasSdkReviewBundlePatch(entry)).toBe(true);
+      if (!hasSdkReviewBundlePatch(entry)) {
+        throw new Error(`Expected patch metadata for '${entry.entryId}'`);
+      }
       const patchBytes = fs.readFileSync(path.join(bundleDir, entry.patchFile));
       expect(patchBytes.byteLength).toBe(entry.patchBytes);
-      expect(createHash("sha256").update(patchBytes).digest("hex")).toBe(entry.patchSha256);
     }
 
+    expect(hasSdkReviewBundlePatch(entries1[0])).toBe(true);
+    expect(hasSdkReviewBundlePatch(entries2[0])).toBe(true);
+    if (!hasSdkReviewBundlePatch(entries1[0]) || !hasSdkReviewBundlePatch(entries2[0])) {
+      throw new Error("Expected patch metadata for changed entries");
+    }
     const patch1Text = fs.readFileSync(path.join(bundleDir, entries1[0].patchFile), "utf8");
     expect(patch1Text).toContain("public class WidgetClient { public int Version => 2; }");
     expect(patch1Text).toContain("public partial class WidgetModel {}");
@@ -368,6 +376,50 @@ describe("review-bundle", () => {
     expect(fs.readdirSync(bundleDir)).toContain("01-Azure.Widget.patch");
     discardSdkReviewBundleOutput(workingFolder);
     expect(fs.existsSync(bundleDir)).toBe(false);
+  });
+
+  test("captures a zero-change package as metadata-only without writing a patch", async () => {
+    const { sdkRepoPath, workingFolder, baseCommitSha } = createTempSdkGitRepo();
+    const commandInput = createNetSpecPrInput(sdkRepoPath, workingFolder);
+    const entries = await captureSdkReviewBundleEntriesForSpec({
+      commandInput,
+      executionReport: {
+        executionResult: "succeeded",
+        packages: [
+          {
+            packageName: "Azure.Widget",
+            packageRootPath: "./sdk/widget/Azure.Widget",
+            result: "succeeded",
+          },
+        ],
+      },
+      existingEntriesCount: 0,
+    });
+
+    expect(entries).toEqual([
+      expect.objectContaining({
+        entryId: "01-Azure.Widget",
+        sdkBaseCommitSha: baseCommitSha,
+        changedFileCount: 0,
+        changedFiles: [],
+      }),
+    ]);
+    expect(entries[0]).not.toHaveProperty("patchFile");
+    expect(entries[0]).not.toHaveProperty("patchBytes");
+
+    const manifest = writeSdkReviewBundleManifest(
+      commandInput,
+      {
+        captureStatus: "complete",
+        expectedEntryCount: 1,
+        entries,
+      },
+      "6999663",
+    );
+    expect(manifest?.entries).toHaveLength(1);
+    expect(
+      fs.readdirSync(path.join(workingFolder, "out", SDK_REVIEW_BUNDLE_ARTIFACT_NAME)),
+    ).toEqual([SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME]);
   });
 
   test("writes a failed manifest with no consumable entries", () => {

@@ -103,9 +103,6 @@ export const SDK_REVIEW_BUNDLE_MAX_CAPTURE_ERRORS = 16;
 export const SDK_REVIEW_BUNDLE_MAX_CAPTURE_ERROR_LENGTH = 512;
 
 const sha40Schema = z.string().regex(/^[0-9a-f]{40}$/i, "Expected a 40-char git SHA");
-const sha256HexSchema = z
-  .string()
-  .regex(/^[0-9a-f]{64}$/i, "Expected a 64-char SHA-256 hex digest");
 const numericIdSchema = z.string().regex(/^[1-9]\d*$/, "Expected a positive numeric identifier");
 
 /**
@@ -120,7 +117,7 @@ export function isSafeRelativePosixPath(value: string): boolean {
     value.startsWith("/") ||
     value.endsWith("/") ||
     value.includes("\\") ||
-    value.includes("\0") ||
+    /[\u0000-\u001f\u007f]/.test(value) ||
     /^[A-Za-z]:/.test(value)
   ) {
     return false;
@@ -138,7 +135,7 @@ const SafePatchFileNameSchema = SafeRelativePosixPathSchema.refine(
   "Expected a single-segment .patch file name",
 );
 
-export const SdkReviewBundleEntrySchema = z.object({
+const SdkReviewBundleEntryBaseSchema = z.object({
   entryId: z.string().regex(/^[A-Za-z0-9._-]+$/, "Expected a safe bundle entry identifier"),
   tspConfigPath: SafeRelativePosixPathSchema.optional(),
   readmePath: SafeRelativePosixPathSchema.optional(),
@@ -148,15 +145,48 @@ export const SdkReviewBundleEntrySchema = z.object({
   sdkBaseCommitSha: sha40Schema,
   executionResult: z.string().min(1),
   hasBreakingChange: z.boolean().optional(),
+});
+
+const EmptySdkReviewBundleEntrySchema = SdkReviewBundleEntryBaseSchema.extend({
+  patchFile: z.never().optional(),
+  patchBytes: z.never().optional(),
+  changedFileCount: z.literal(0),
+  changedFiles: z.array(SafeRelativePosixPathSchema).length(0),
+});
+export type EmptySdkReviewBundleEntry = import("zod").infer<typeof EmptySdkReviewBundleEntrySchema>;
+
+const NonEmptySdkReviewBundleEntrySchema = SdkReviewBundleEntryBaseSchema.extend({
   patchFile: SafePatchFileNameSchema,
-  patchSha256: sha256HexSchema,
-  patchBytes: z.number().int().nonnegative(),
-  changedFileCount: z.number().int().nonnegative(),
+  patchBytes: z.number().int().positive(),
+  changedFileCount: z.number().int().positive(),
   changedFiles: z
     .array(SafeRelativePosixPathSchema)
+    .min(1)
     .max(SDK_REVIEW_BUNDLE_MAX_CHANGED_FILES_PER_ENTRY),
+}).superRefine((entry, context) => {
+  if (entry.changedFileCount !== entry.changedFiles.length) {
+    context.addIssue({
+      code: "custom",
+      path: ["changedFileCount"],
+      message: `changedFileCount (${entry.changedFileCount}) must match changedFiles length (${entry.changedFiles.length})`,
+    });
+  }
 });
+export type NonEmptySdkReviewBundleEntry = import("zod").infer<
+  typeof NonEmptySdkReviewBundleEntrySchema
+>;
+
+export const SdkReviewBundleEntrySchema = z.union([
+  EmptySdkReviewBundleEntrySchema,
+  NonEmptySdkReviewBundleEntrySchema,
+]);
 export type SdkReviewBundleEntry = import("zod").infer<typeof SdkReviewBundleEntrySchema>;
+
+export function hasSdkReviewBundlePatch(
+  entry: SdkReviewBundleEntry,
+): entry is NonEmptySdkReviewBundleEntry {
+  return entry.changedFileCount > 0;
+}
 
 const SdkReviewBundleManifestBaseSchema = z.object({
   schemaVersion: z.literal(SDK_REVIEW_BUNDLE_SCHEMA_VERSION),

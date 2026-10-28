@@ -1,21 +1,25 @@
-import { createHash } from "node:crypto";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { strToU8, zipSync } from "fflate";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   SDK_REVIEW_BUNDLE_ARTIFACT_NAME,
+  SDK_REVIEW_BUNDLE_MAX_ENTRIES,
   SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME,
   SDK_REVIEW_BUNDLE_SCHEMA_VERSION,
   SdkName,
+  type NonEmptySdkReviewBundleEntry,
   type SdkReviewBundleManifest,
 } from "../../shared/src/sdk-types.ts";
 import {
   EXPECTED_ADO_DEFINITION_ID,
+  extractAndValidateSdkReviewBundleArchive,
+  MAX_SDK_REVIEW_EXPANDED_BYTES,
   MAX_SDK_REVIEW_MANIFEST_BYTES,
+  MAX_SDK_REVIEW_PATCH_BYTES,
   MAX_SDK_REVIEW_TOTAL_PATCH_BYTES,
   parseAndValidateAdoBuildDetailsUrl,
-  resolveManualReviewHandoffInvocation,
   resolveSafeChildPath,
   runSdkValidationDotnetReviewHandoffImpl,
   validateCheckRunEventPayload,
@@ -81,7 +85,6 @@ function createSampleManifest(
       executionResult: "succeeded",
       hasBreakingChange: false,
       patchFile: "01-Azure.Widget.patch",
-      patchSha256: createHash("sha256").update(patch1Buf).digest("hex"),
       patchBytes: patch1Buf.byteLength,
       changedFileCount: 1,
       changedFiles: ["sdk/widget/Azure.Widget/src/Generated/WidgetClient.cs"],
@@ -99,7 +102,6 @@ function createSampleManifest(
       executionResult: "succeeded",
       hasBreakingChange: true,
       patchFile: "02-Azure.ResourceManager.Gadget.patch",
-      patchSha256: createHash("sha256").update(patch2Buf).digest("hex"),
       patchBytes: patch2Buf.byteLength,
       changedFileCount: 1,
       changedFiles: ["sdk/gadget/Azure.ResourceManager.Gadget/src/Generated/GadgetResource.cs"],
@@ -118,6 +120,50 @@ function createSampleManifest(
     expectedEntryCount: entries.length,
     entries,
     ...overrides,
+  };
+}
+
+function createMetadataOnlyEntry(
+  entryId = "02-Azure.Empty",
+): Extract<SdkReviewBundleManifest, { captureStatus: "complete" }>["entries"][number] {
+  return {
+    entryId,
+    packageName: "Azure.Empty",
+    packageRootPath: "sdk/empty/Azure.Empty",
+    sdkBaseCommitSha: "8".repeat(40),
+    executionResult: "succeeded",
+    changedFileCount: 0,
+    changedFiles: [],
+  };
+}
+
+function createArchive(
+  manifest: SdkReviewBundleManifest,
+  patchContents: Record<string, string | Uint8Array> = {},
+  extraEntries: Record<string, string | Uint8Array> = {},
+): Uint8Array {
+  const files: Record<string, Uint8Array> = {
+    [SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME]: strToU8(JSON.stringify(manifest)),
+  };
+  for (const [name, content] of Object.entries({ ...patchContents, ...extraEntries })) {
+    files[name] = typeof content === "string" ? strToU8(content) : content;
+  }
+  return zipSync(files);
+}
+
+function createArtifactListResponse(downloadUrl: string) {
+  return {
+    ok: true,
+    json: vi.fn().mockResolvedValue({
+      value: [
+        {
+          name: SDK_REVIEW_BUNDLE_ARTIFACT_NAME,
+          resource: { downloadUrl },
+        },
+      ],
+    }),
+    status: 200,
+    statusText: "OK",
   };
 }
 
@@ -240,169 +286,6 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     });
   });
 
-  describe("resolveManualReviewHandoffInvocation", () => {
-    function createManualCheck(overrides: Record<string, unknown> = {}) {
-      return {
-        name: "SDK Validation - .NET",
-        head_sha: SAMPLE_HEAD_SHA,
-        status: "completed",
-        conclusion: "success",
-        details_url: SAMPLE_DETAILS_URL,
-        external_id: SAMPLE_EXTERNAL_ID,
-        completed_at: "2026-10-28T20:00:00Z",
-        app: {
-          slug: "azure-pipelines",
-          name: "Azure Pipelines",
-        },
-        ...overrides,
-      };
-    }
-
-    function setupManualResolution(prState: "open" | "closed", checks: unknown[]) {
-      const github = createMockGithub();
-      const context = createMockContext();
-      github.rest.pulls.get.mockResolvedValue({
-        data: {
-          number: 47607,
-          state: prState,
-          merged: prState === "closed",
-          head: { sha: SAMPLE_HEAD_SHA },
-          base: { repo: { full_name: "owner/repo" } },
-        },
-      });
-      github.rest.checks.listForRef.mockResolvedValue({
-        data: { check_runs: checks },
-      });
-      return { github, context };
-    }
-
-    it.each(["open", "closed"] as const)(
-      "resolves a trusted terminal check for a %s PR",
-      async (prState) => {
-        const { github, context } = setupManualResolution(prState, [createManualCheck()]);
-        const result = await resolveManualReviewHandoffInvocation({
-          github,
-          context,
-          prNumberInput: "47607",
-        });
-
-        expect(result.prNumber).toBe(47607);
-        expect(result.allowClosedPullRequest).toBe(true);
-        expect(result.event.adoBuild.buildId).toBe(SAMPLE_BUILD_ID);
-        expect(result.event.headSha).toBe(SAMPLE_HEAD_SHA);
-      },
-    );
-
-    it("allows the manual path, but not the event path, to validate a closed PR head", async () => {
-      const { github, context } = setupManualResolution("closed", []);
-      const eventResult = await verifyPullRequestFreshness({
-        github,
-        context,
-        prNumber: 47607,
-        expectedHeadSha: SAMPLE_HEAD_SHA,
-      });
-      const manualResult = await verifyPullRequestFreshness({
-        github,
-        context,
-        prNumber: 47607,
-        expectedHeadSha: SAMPLE_HEAD_SHA,
-        allowClosedPullRequest: true,
-      });
-
-      expect(eventResult.isFresh).toBe(false);
-      expect(manualResult.isFresh).toBe(true);
-    });
-
-    it("selects the latest completed matching check by default", async () => {
-      const olderBuildId = "6999000";
-      const { github, context } = setupManualResolution("open", [
-        createManualCheck({
-          details_url: SAMPLE_DETAILS_URL.replace(SAMPLE_BUILD_ID, olderBuildId),
-          external_id: `${EXPECTED_ADO_DEFINITION_ID}|${olderBuildId}|${SAMPLE_PROJECT_ID}`,
-          completed_at: "2026-10-27T20:00:00Z",
-        }),
-        createManualCheck(),
-      ]);
-
-      const result = await resolveManualReviewHandoffInvocation({
-        github,
-        context,
-        prNumberInput: "47607",
-      });
-      expect(result.event.adoBuild.buildId).toBe(SAMPLE_BUILD_ID);
-    });
-
-    it("selects an explicitly requested build", async () => {
-      const olderBuildId = "6999000";
-      const { github, context } = setupManualResolution("open", [
-        createManualCheck({
-          details_url: SAMPLE_DETAILS_URL.replace(SAMPLE_BUILD_ID, olderBuildId),
-          external_id: `${EXPECTED_ADO_DEFINITION_ID}|${olderBuildId}|${SAMPLE_PROJECT_ID}`,
-          completed_at: "2026-10-27T20:00:00Z",
-        }),
-        createManualCheck(),
-      ]);
-
-      const result = await resolveManualReviewHandoffInvocation({
-        github,
-        context,
-        prNumberInput: "47607",
-        buildIdInput: olderBuildId,
-      });
-      expect(result.event.adoBuild.buildId).toBe(olderBuildId);
-      expect(github.rest.checks.listForRef).toHaveBeenCalledWith(
-        expect.objectContaining({ filter: "all", ref: SAMPLE_HEAD_SHA }),
-      );
-    });
-
-    it("rejects when no matching terminal check exists", async () => {
-      const { github, context } = setupManualResolution("open", [
-        createManualCheck({ name: "SDK Validation - Java" }),
-      ]);
-      await expect(
-        resolveManualReviewHandoffInvocation({
-          github,
-          context,
-          prNumberInput: "47607",
-        }),
-      ).rejects.toThrow("No matching completed");
-    });
-
-    it("rejects a matching Azure Pipelines check from the wrong definition", async () => {
-      const { github, context } = setupManualResolution("open", [
-        createManualCheck({
-          external_id: `9999|${SAMPLE_BUILD_ID}|${SAMPLE_PROJECT_ID}`,
-        }),
-      ]);
-      await expect(
-        resolveManualReviewHandoffInvocation({
-          github,
-          context,
-          prNumberInput: "47607",
-        }),
-      ).rejects.toThrow("Unexpected Azure Pipelines definition ID");
-    });
-
-    it.each([
-      ["stale head SHA", { head_sha: "f".repeat(40) }],
-      [
-        "mismatched build identity",
-        {
-          external_id: `${EXPECTED_ADO_DEFINITION_ID}|9999999|${SAMPLE_PROJECT_ID}`,
-        },
-      ],
-    ])("rejects %s", async (_label, overrides) => {
-      const { github, context } = setupManualResolution("open", [createManualCheck(overrides)]);
-      await expect(
-        resolveManualReviewHandoffInvocation({
-          github,
-          context,
-          prNumberInput: "47607",
-        }),
-      ).rejects.toThrow("No matching completed");
-    });
-  });
-
   describe("resolveSafeChildPath & verifyManifestAgainstCheckRun", () => {
     it("rejects path traversal in resolveSafeChildPath", () => {
       const baseDir = createTempOutputDir();
@@ -475,7 +358,7 @@ describe("sdk-validation-dotnet-review-handoff", () => {
       "diff --git a/sdk/widget/Azure.Widget/src/Generated/WidgetClient.cs b/sdk/widget/Azure.Widget/src/Generated/WidgetClient.cs\n+// changed\n" +
       "diff --git a/sdk/widget/Azure.Widget/src/Generated/WidgetModel.cs b/sdk/widget/Azure.Widget/src/Generated/WidgetModel.cs\n+// changed\n";
 
-    function createEntry() {
+    function createEntry(): NonEmptySdkReviewBundleEntry {
       const manifest = createSampleManifest({ entry1: validPatch });
       return {
         ...manifest.entries[0],
@@ -484,7 +367,7 @@ describe("sdk-validation-dotnet-review-handoff", () => {
           "sdk/widget/Azure.Widget/src/Generated/WidgetClient.cs",
           "sdk/widget/Azure.Widget/src/Generated/WidgetModel.cs",
         ],
-      };
+      } as NonEmptySdkReviewBundleEntry;
     }
 
     it("accepts a valid multi-file patch", () => {
@@ -522,7 +405,7 @@ describe("sdk-validation-dotnet-review-handoff", () => {
   });
 
   describe("runSdkValidationDotnetReviewHandoffImpl", () => {
-    it("downloads, validates checksums for multiple packages, writes summary, and performs zero PR mutations", async () => {
+    it("downloads and validates multiple packages, writes summary, and performs zero PR mutations", async () => {
       const mockGithub = createMockGithub();
       const mockContext = createMockContext();
       const mockCore = createMockCore();
@@ -545,35 +428,22 @@ describe("sdk-validation-dotnet-review-handoff", () => {
       const patch2 =
         "diff --git a/sdk/gadget/Azure.ResourceManager.Gadget/src/Generated/GadgetResource.cs b/sdk/gadget/Azure.ResourceManager.Gadget/src/Generated/GadgetResource.cs\n+// pkg2\n";
       const manifest = createSampleManifest({ entry1: patch1, entry2: patch2 });
+      manifest.entries[1].sdkBaseCommitSha = "8".repeat(40);
+      const archive = createArchive(manifest, {
+        "01-Azure.Widget.patch": patch1,
+        "02-Azure.ResourceManager.Gadget.patch": patch2,
+      });
 
       mockFetch.mockImplementation((url) => {
-        if (url.includes(`artifacts?artifactName=${SDK_REVIEW_BUNDLE_ARTIFACT_NAME}`)) {
-          return Promise.resolve({
-            ok: true,
-            json: vi.fn().mockResolvedValue({
-              resource: {
-                downloadUrl: "https://artprodcus3.artifacts.visualstudio.com/download?format=zip",
-              },
-            }),
-          });
+        if (url.includes("artifacts?api-version=7.0")) {
+          return Promise.resolve(
+            createArtifactListResponse(
+              "https://artprodcus3.artifacts.visualstudio.com/download?format=zip",
+            ),
+          );
         }
-        if (url.includes(`subPath=/${SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME}`)) {
-          return Promise.resolve({
-            ok: true,
-            text: vi.fn().mockResolvedValue(JSON.stringify(manifest)),
-          });
-        }
-        if (url.includes("subPath=/01-Azure.Widget.patch")) {
-          return Promise.resolve({
-            ok: true,
-            text: vi.fn().mockResolvedValue(patch1),
-          });
-        }
-        if (url.includes("subPath=/02-Azure.ResourceManager.Gadget.patch")) {
-          return Promise.resolve({
-            ok: true,
-            text: vi.fn().mockResolvedValue(patch2),
-          });
+        if (url.includes("format=zip")) {
+          return Promise.resolve(new Response(archive, { status: 200 }));
         }
         return Promise.resolve({
           ok: false,
@@ -604,16 +474,25 @@ describe("sdk-validation-dotnet-review-handoff", () => {
           "utf8",
         ),
       ).toBe(patch2);
+      expect(fs.readdirSync(result.bundleDirectory!).sort()).toEqual(
+        [
+          "01-Azure.Widget.patch",
+          "02-Azure.ResourceManager.Gadget.patch",
+          SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME,
+        ].sort(),
+      );
       expect(fs.existsSync(result.summaryPath!)).toBe(true);
       expect(mockCore.summary.addRaw).toHaveBeenCalledWith(
         expect.stringContaining("SDK Validation - .NET Review Bundle Handoff (Report-Only)"),
       );
       expect(mockCore.summary.write).toHaveBeenCalledOnce();
       expect(
-        mockFetch.mock.calls.filter(([url]) =>
-          String(url).includes(`artifacts?artifactName=${SDK_REVIEW_BUNDLE_ARTIFACT_NAME}`),
-        ),
+        mockFetch.mock.calls.filter(([url]) => String(url).includes("artifacts?api-version=7.0")),
       ).toHaveLength(1);
+      expect(
+        mockFetch.mock.calls.filter(([url]) => String(url).includes("format=zip")),
+      ).toHaveLength(1);
+      expect(mockFetch).toHaveBeenCalledTimes(2);
 
       // Report-only guarantee: no comments, labels, or status mutations
       expect(mockGithub.rest.issues.createComment).not.toHaveBeenCalled();
@@ -649,106 +528,6 @@ describe("sdk-validation-dotnet-review-handoff", () => {
       expect(mockFetch).not.toHaveBeenCalled();
     });
 
-    it("throws when downloaded patch content fails SHA-256 verification", async () => {
-      const mockGithub = createMockGithub();
-      const mockContext = createMockContext();
-      const mockCore = createMockCore();
-
-      mockContext.payload = createSampleCheckRunPayload();
-      mockGithub.rest.pulls.get.mockResolvedValue({
-        data: {
-          number: 47607,
-          state: "open",
-          head: { sha: SAMPLE_HEAD_SHA },
-          base: { repo: { full_name: "owner/repo" } },
-        },
-      });
-
-      const patch1 = "diff --git a/foo.cs b/foo.cs\n+// expected\n";
-      const tamperedPatch1 = "diff --git a/foo.cs b/foo.cs\n+// tampered!\n";
-      const manifest = createSampleManifest({ entry1: patch1 });
-
-      mockFetch.mockImplementation((url) => {
-        if (url.includes(`artifacts?artifactName=${SDK_REVIEW_BUNDLE_ARTIFACT_NAME}`)) {
-          return Promise.resolve({
-            ok: true,
-            json: vi.fn().mockResolvedValue({
-              resource: {
-                downloadUrl: "https://artprodcus3.artifacts.visualstudio.com/download?format=zip",
-              },
-            }),
-          });
-        }
-        if (url.includes(`subPath=/${SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME}`)) {
-          return Promise.resolve({
-            ok: true,
-            text: vi.fn().mockResolvedValue(JSON.stringify(manifest)),
-          });
-        }
-        return Promise.resolve({
-          ok: true,
-          text: vi.fn().mockResolvedValue(tamperedPatch1),
-        });
-      });
-
-      await expect(
-        runSdkValidationDotnetReviewHandoffImpl({
-          github: mockGithub,
-          context: mockContext,
-          core: mockCore,
-          outputRootDir: createTempOutputDir(),
-          retryOptions: { initialDelayMs: 1 },
-        }),
-      ).rejects.toThrow(/Patch (size|SHA-256) mismatch/);
-    });
-
-    it("rejects an over-limit manifest before any patch download", async () => {
-      const mockGithub = createMockGithub();
-      const mockContext = createMockContext();
-      const mockCore = createMockCore();
-      mockContext.payload = createSampleCheckRunPayload();
-      mockGithub.rest.pulls.get.mockResolvedValue({
-        data: {
-          number: 47607,
-          state: "open",
-          head: { sha: SAMPLE_HEAD_SHA },
-          base: { repo: { full_name: "owner/repo" } },
-        },
-      });
-
-      const manifest = createSampleManifest({ entry1: "" });
-      manifest.entries[0].patchBytes = MAX_SDK_REVIEW_TOTAL_PATCH_BYTES + 1;
-      const manifestJson = JSON.stringify(manifest);
-      mockFetch.mockImplementation((url) => {
-        if (url.includes(`artifacts?artifactName=${SDK_REVIEW_BUNDLE_ARTIFACT_NAME}`)) {
-          return Promise.resolve({
-            ok: true,
-            json: vi.fn().mockResolvedValue({
-              resource: { downloadUrl: "https://example.com/download?format=zip" },
-            }),
-          });
-        }
-        if (url.includes(`subPath=/${SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME}`)) {
-          return Promise.resolve({
-            ok: true,
-            text: vi.fn().mockResolvedValue(manifestJson),
-          });
-        }
-        throw new Error(`Unexpected patch download: ${url}`);
-      });
-
-      await expect(
-        runSdkValidationDotnetReviewHandoffImpl({
-          github: mockGithub,
-          context: mockContext,
-          core: mockCore,
-          outputRootDir: createTempOutputDir(),
-          retryOptions: { initialDelayMs: 1 },
-        }),
-      ).rejects.toThrow(/patchBytes|patch bytes/);
-      expect(mockFetch.mock.calls.filter(([url]) => String(url).includes(".patch")).length).toBe(0);
-    });
-
     it("rejects manifest bytes above the limit before parsing", async () => {
       const mockGithub = createMockGithub();
       const mockContext = createMockContext();
@@ -762,20 +541,18 @@ describe("sdk-validation-dotnet-review-handoff", () => {
           base: { repo: { full_name: "owner/repo" } },
         },
       });
-      const oversizedManifest = "x".repeat(MAX_SDK_REVIEW_MANIFEST_BYTES + 1);
+      const archive = zipSync({
+        [SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME]: strToU8(
+          "x".repeat(MAX_SDK_REVIEW_MANIFEST_BYTES + 1),
+        ),
+      });
       mockFetch.mockImplementation((url) => {
-        if (url.includes(`artifacts?artifactName=${SDK_REVIEW_BUNDLE_ARTIFACT_NAME}`)) {
-          return Promise.resolve({
-            ok: true,
-            json: vi.fn().mockResolvedValue({
-              resource: { downloadUrl: "https://example.com/download?format=zip" },
-            }),
-          });
+        if (url.includes("artifacts?api-version=7.0")) {
+          return Promise.resolve(
+            createArtifactListResponse("https://example.com/download?format=zip"),
+          );
         }
-        return Promise.resolve({
-          ok: true,
-          text: vi.fn().mockResolvedValue(oversizedManifest),
-        });
+        return Promise.resolve(new Response(archive, { status: 200 }));
       });
 
       await expect(
@@ -811,19 +588,14 @@ describe("sdk-validation-dotnet-review-handoff", () => {
         captureErrors: ["Missing packageRootPath"],
         entries: [],
       };
+      const archive = createArchive(failedManifest);
       mockFetch.mockImplementation((url) => {
-        if (url.includes(`artifacts?artifactName=${SDK_REVIEW_BUNDLE_ARTIFACT_NAME}`)) {
-          return Promise.resolve({
-            ok: true,
-            json: vi.fn().mockResolvedValue({
-              resource: { downloadUrl: "https://example.com/download?format=zip" },
-            }),
-          });
+        if (url.includes("artifacts?api-version=7.0")) {
+          return Promise.resolve(
+            createArtifactListResponse("https://example.com/download?format=zip"),
+          );
         }
-        return Promise.resolve({
-          ok: true,
-          text: vi.fn().mockResolvedValue(JSON.stringify(failedManifest)),
-        });
+        return Promise.resolve(new Response(archive, { status: 200 }));
       });
 
       await expect(
@@ -837,7 +609,7 @@ describe("sdk-validation-dotnet-review-handoff", () => {
       expect(mockFetch).toHaveBeenCalledTimes(2);
     });
 
-    it("requires a declared zero-byte patch file to be present", async () => {
+    it("accepts mixed metadata-only and non-empty entries without creating an empty patch", async () => {
       const mockGithub = createMockGithub();
       const mockContext = createMockContext();
       const mockCore = createMockCore();
@@ -850,40 +622,140 @@ describe("sdk-validation-dotnet-review-handoff", () => {
           base: { repo: { full_name: "owner/repo" } },
         },
       });
-      const manifest = createSampleManifest({ entry1: "" });
-      manifest.entries[0].changedFileCount = 0;
-      manifest.entries[0].changedFiles = [];
+      const patch =
+        "diff --git a/sdk/widget/Azure.Widget/src/Generated/WidgetClient.cs b/sdk/widget/Azure.Widget/src/Generated/WidgetClient.cs\n+// changed\n";
+      const manifest = createSampleManifest({ entry1: patch });
+      manifest.entries.push(createMetadataOnlyEntry());
+      manifest.expectedEntryCount = 2;
+      const archive = createArchive(manifest, { "01-Azure.Widget.patch": patch });
       mockFetch.mockImplementation((url) => {
-        if (url.includes(`artifacts?artifactName=${SDK_REVIEW_BUNDLE_ARTIFACT_NAME}`)) {
-          return Promise.resolve({
-            ok: true,
-            json: vi.fn().mockResolvedValue({
-              resource: { downloadUrl: "https://example.com/download?format=zip" },
-            }),
-          });
+        if (url.includes("artifacts?api-version=7.0")) {
+          return Promise.resolve(
+            createArtifactListResponse("https://example.com/download?format=zip"),
+          );
         }
-        if (url.includes(`subPath=/${SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME}`)) {
-          return Promise.resolve({
-            ok: true,
-            text: vi.fn().mockResolvedValue(JSON.stringify(manifest)),
-          });
-        }
-        return Promise.resolve({
-          ok: false,
-          status: 404,
-          statusText: "Not Found",
-          text: vi.fn().mockResolvedValue("Not Found"),
-        });
+        return Promise.resolve(new Response(archive, { status: 200 }));
       });
 
-      await expect(
-        runSdkValidationDotnetReviewHandoffImpl({
-          github: mockGithub,
-          context: mockContext,
-          core: mockCore,
-          outputRootDir: createTempOutputDir(),
-        }),
-      ).rejects.toThrow("Failed to fetch artifact");
+      const result = await runSdkValidationDotnetReviewHandoffImpl({
+        github: mockGithub,
+        context: mockContext,
+        core: mockCore,
+        outputRootDir: createTempOutputDir(),
+      });
+      expect(result.entryCount).toBe(2);
+      expect(fs.existsSync(path.join(result.bundleDirectory!, "02-Azure.Empty.patch"))).toBe(false);
+      expect(mockFetch).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  describe("extractAndValidateSdkReviewBundleArchive", () => {
+    const patch =
+      "diff --git a/sdk/widget/Azure.Widget/src/Generated/WidgetClient.cs b/sdk/widget/Azure.Widget/src/Generated/WidgetClient.cs\n+// changed\n";
+
+    it.each([
+      ["traversal", "../evil.patch"],
+      ["absolute", "/evil.patch"],
+      ["backslash", "nested\\evil.patch"],
+      ["nested", "nested/evil.patch"],
+      ["directory", "directory/"],
+      ["control character", "evil\u0001.patch"],
+    ])("rejects a %s ZIP entry", (_label, entryName) => {
+      const manifest = createSampleManifest({ entry1: patch });
+      const archive = createArchive(
+        manifest,
+        { "01-Azure.Widget.patch": patch },
+        { [entryName]: "bad" },
+      );
+      expect(() => extractAndValidateSdkReviewBundleArchive(archive)).toThrow(
+        /Unsafe ZIP entry|Unexpected ZIP entry/,
+      );
+    });
+
+    it("rejects case-insensitive duplicate entry names", () => {
+      const manifest = createSampleManifest({ entry1: patch });
+      const archive = createArchive(manifest, {
+        "01-Azure.Widget.patch": patch,
+        "01-azure.widget.patch": patch,
+      });
+      expect(() => extractAndValidateSdkReviewBundleArchive(archive)).toThrow(
+        "Duplicate ZIP entry",
+      );
+    });
+
+    it("rejects unexpected files, missing manifest, and missing declared patches", () => {
+      const manifest = createSampleManifest({ entry1: patch });
+      expect(() =>
+        extractAndValidateSdkReviewBundleArchive(
+          createArchive(
+            manifest,
+            { "01-Azure.Widget.patch": patch },
+            { "unexpected.patch": "bad" },
+          ),
+        ),
+      ).toThrow("Unexpected ZIP entry");
+      expect(() =>
+        extractAndValidateSdkReviewBundleArchive(zipSync({ "orphan.patch": strToU8(patch) })),
+      ).toThrow("Missing 'sdk-review-bundle.json'");
+      expect(() => extractAndValidateSdkReviewBundleArchive(createArchive(manifest))).toThrow(
+        "Missing declared patch",
+      );
+    });
+
+    it("rejects patch size mismatches and metadata-only entries with patch files", () => {
+      const manifest = createSampleManifest({ entry1: patch });
+      expect(() =>
+        extractAndValidateSdkReviewBundleArchive(
+          createArchive(manifest, { "01-Azure.Widget.patch": `${patch}extra` }),
+        ),
+      ).toThrow("Patch size mismatch");
+
+      manifest.entries = [createMetadataOnlyEntry()];
+      manifest.expectedEntryCount = 1;
+      expect(() =>
+        extractAndValidateSdkReviewBundleArchive(
+          createArchive(manifest, {}, { "02-Azure.Empty.patch": "" }),
+        ),
+      ).toThrow("Unexpected ZIP entry");
+    });
+
+    it("rejects highly compressible actual expanded data above the per-entry limit", () => {
+      const archive = zipSync(
+        {
+          [SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME]: strToU8("{}"),
+          "oversized.patch": new Uint8Array(MAX_SDK_REVIEW_PATCH_BYTES + 1),
+        },
+        { level: 9 },
+      );
+      expect(archive.byteLength).toBeLessThan(MAX_SDK_REVIEW_MANIFEST_BYTES);
+      expect(() => extractAndValidateSdkReviewBundleArchive(archive)).toThrow(
+        `ZIP entry 'oversized.patch' exceeds ${MAX_SDK_REVIEW_PATCH_BYTES} bytes`,
+      );
+    });
+
+    it("rejects actual total expanded bytes above the limit", () => {
+      const halfBudget = Math.floor(MAX_SDK_REVIEW_EXPANDED_BYTES / 2) + 1;
+      expect(() =>
+        extractAndValidateSdkReviewBundleArchive(
+          zipSync({
+            [SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME]: strToU8("{}"),
+            "one.patch": new Uint8Array(halfBudget),
+            "two.patch": new Uint8Array(halfBudget),
+          }),
+        ),
+      ).toThrow(`ZIP expanded content exceeds ${MAX_SDK_REVIEW_EXPANDED_BYTES} bytes`);
+    });
+
+    it("rejects too many ZIP entries before extraction", () => {
+      const entries: Record<string, Uint8Array> = {
+        [SDK_REVIEW_BUNDLE_MANIFEST_FILE_NAME]: strToU8("{}"),
+      };
+      for (let index = 0; index <= SDK_REVIEW_BUNDLE_MAX_ENTRIES; index += 1) {
+        entries[`entry-${index}.patch`] = new Uint8Array();
+      }
+      expect(() => extractAndValidateSdkReviewBundleArchive(zipSync(entries))).toThrow(
+        `more than ${SDK_REVIEW_BUNDLE_MAX_ENTRIES + 1} entries`,
+      );
     });
   });
 });

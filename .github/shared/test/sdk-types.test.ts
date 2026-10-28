@@ -38,6 +38,7 @@ describe("sdk-types", () => {
     expect(isSafeRelativePosixPath("sdk/./foo")).toBe(false);
     expect(isSafeRelativePosixPath("sdk\\foo")).toBe(false);
     expect(isSafeRelativePosixPath("C:/sdk/foo")).toBe(false);
+    expect(isSafeRelativePosixPath("sdk/foo\nbar")).toBe(false);
   });
 
   it("validates SdkReviewBundleManifestSchema and rejects unsafe patch filenames", () => {
@@ -62,7 +63,6 @@ describe("sdk-types", () => {
           executionResult: "succeeded",
           hasBreakingChange: false,
           patchFile: "01-Azure.ResourceManager.PrivateTrafficManager.patch",
-          patchSha256: "a".repeat(64),
           patchBytes: 128,
           changedFileCount: 1,
           changedFiles: [
@@ -73,6 +73,59 @@ describe("sdk-types", () => {
     };
 
     expect(SdkReviewBundleManifestSchema.parse(validManifest)).toEqual(validManifest);
+
+    const {
+      patchFile: _patchFile,
+      patchBytes: _patchBytes,
+      ...entryWithoutPatch
+    } = validManifest.entries[0];
+    void [_patchFile, _patchBytes];
+    const emptyEntry = {
+      ...entryWithoutPatch,
+      changedFileCount: 0 as const,
+      changedFiles: [],
+    };
+    expect(
+      SdkReviewBundleManifestSchema.parse({
+        ...validManifest,
+        entries: [emptyEntry],
+      }),
+    ).toEqual({ ...validManifest, entries: [emptyEntry] });
+
+    for (const partialPatchMetadata of [
+      { patchFile: "empty.patch" },
+      { patchBytes: 1 },
+      { patchFile: "empty.patch", patchBytes: 1 },
+    ]) {
+      expect(() =>
+        SdkReviewBundleManifestSchema.parse({
+          ...validManifest,
+          entries: [{ ...emptyEntry, ...partialPatchMetadata }],
+        }),
+      ).toThrow();
+    }
+
+    for (const missingPatchMetadata of [{ patchFile: undefined }, { patchBytes: undefined }]) {
+      expect(() =>
+        SdkReviewBundleManifestSchema.parse({
+          ...validManifest,
+          entries: [{ ...validManifest.entries[0], ...missingPatchMetadata }],
+        }),
+      ).toThrow();
+    }
+
+    expect(() =>
+      SdkReviewBundleManifestSchema.parse({
+        ...validManifest,
+        entries: [{ ...validManifest.entries[0], patchBytes: 0 }],
+      }),
+    ).toThrow();
+    expect(() =>
+      SdkReviewBundleManifestSchema.parse({
+        ...validManifest,
+        entries: [{ ...validManifest.entries[0], changedFileCount: 2 }],
+      }),
+    ).toThrow("must match changedFiles length");
 
     expect(() =>
       SdkReviewBundleManifestSchema.parse({

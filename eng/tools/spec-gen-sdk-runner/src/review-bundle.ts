@@ -12,7 +12,6 @@ import {
   type SdkReviewBundleManifest,
 } from "@azure-tools/specs-shared/sdk-types";
 import { execFile } from "node:child_process";
-import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { inspect, promisify } from "node:util";
@@ -268,34 +267,12 @@ export async function captureSdkReviewBundleEntriesForSpec(
         `Cannot capture SDK review bundle package '${packageName}': changed files are duplicated or outside packageRootPath '${packageRootPath}'`,
       );
     }
-    const patchContent =
-      changedFiles.length > 0
-        ? await runGitStdout(commandInput.localSdkRepoPath, [
-            "-c",
-            "core.quotepath=false",
-            "diff",
-            "--no-renames",
-            "--no-ext-diff",
-            "--binary",
-            "--full-index",
-            "HEAD",
-            "--",
-            ...changedFiles,
-          ])
-        : "";
-
     const sequenceNumber = String(existingEntriesCount + capturedEntries.length + 1).padStart(
       2,
       "0",
     );
     const entryId = `${sequenceNumber}-${sanitizeSlugSegment(packageName)}`;
-    const patchFile = `${entryId}.patch`;
-    const patchFilePath = path.join(absoluteFolderPath, patchFile);
-    const patchBuffer = Buffer.from(patchContent, "utf8");
-    fs.writeFileSync(patchFilePath, patchBuffer);
-
-    const patchSha256 = createHash("sha256").update(patchBuffer).digest("hex");
-    const entry: SdkReviewBundleEntry = {
+    const entryBase = {
       entryId,
       ...(normalizedTspConfigPath ? { tspConfigPath: normalizedTspConfigPath } : {}),
       ...(normalizedReadmePath ? { readmePath: normalizedReadmePath } : {}),
@@ -309,17 +286,38 @@ export async function captureSdkReviewBundleEntriesForSpec(
         : typeof pkg.hasBreakingChange === "boolean"
           ? { hasBreakingChange: pkg.hasBreakingChange }
           : {}),
-      patchFile,
-      patchSha256,
-      patchBytes: patchBuffer.byteLength,
       changedFileCount: changedFiles.length,
       changedFiles,
     };
+    let entry: SdkReviewBundleEntry;
+    if (changedFiles.length === 0) {
+      entry = SdkReviewBundleEntrySchema.parse(entryBase);
+    } else {
+      const patchContent = await runGitStdout(commandInput.localSdkRepoPath, [
+        "-c",
+        "core.quotepath=false",
+        "diff",
+        "--no-renames",
+        "--no-ext-diff",
+        "--binary",
+        "--full-index",
+        "HEAD",
+        "--",
+        ...changedFiles,
+      ]);
+      const patchFile = `${entryId}.patch`;
+      const patchBuffer = Buffer.from(patchContent, "utf8");
+      fs.writeFileSync(path.join(absoluteFolderPath, patchFile), patchBuffer);
+      entry = SdkReviewBundleEntrySchema.parse({
+        ...entryBase,
+        patchFile,
+        patchBytes: patchBuffer.byteLength,
+      });
+    }
 
-    SdkReviewBundleEntrySchema.parse(entry);
     capturedEntries.push(entry);
     logMessage(
-      `Captured SDK review bundle entry '${entryId}' (${changedFiles.length} changed files, ${patchBuffer.byteLength} bytes, package #${pkgOffset + 1})`,
+      `Captured SDK review bundle entry '${entryId}' (${changedFiles.length} changed files, ${entry.patchBytes ?? 0} patch bytes, package #${pkgOffset + 1})`,
       LogLevel.Info,
     );
   }
