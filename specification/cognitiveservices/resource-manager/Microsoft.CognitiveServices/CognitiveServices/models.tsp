@@ -7666,9 +7666,15 @@ model ManagedComputeUsage {
   currentValue?: float64;
 
   /**
-   * Offer scope (e.g., 'Global', 'Datazone-US').
+   Offer scope. Supported values are 'Global' and 'DataZone'.
    */
   offerScope?: string;
+
+  /**
+   * Scope identifier for the managed compute usage. Supported values are '' (empty), 'US', and 'EU'.
+   */
+  @added(Versions.v2026_11_15_preview)
+  scopeId?: string;
 
   /**
    * Deployments consuming this managed compute quota.
