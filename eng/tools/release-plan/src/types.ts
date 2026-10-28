@@ -149,7 +149,11 @@ export interface OctokitLike {
         repo: string;
         commit_sha: string;
       }) => Promise<{
-        data: Array<{ number: number }>;
+        data: Array<{
+          number: number;
+          merged_at?: string | null;
+          merge_commit_sha?: string | null;
+        }>;
       }>;
       getCommit: (params: { owner: string; repo: string; ref: string }) => Promise<{
         data: {

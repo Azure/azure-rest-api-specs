@@ -43,6 +43,7 @@ union VoiceAgentSessionIncludeOption {
   file_search_call_results: "file_search_call.results",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("The maximum output-token count or the literal `inf`.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentMaxOutputTokens {
@@ -173,6 +174,9 @@ model VoiceAgentDefinition extends VoiceAgentBaseDefinition {
     """)
   audio?: VoiceAgentAudioConfig;
 
+  @doc("Optional background ambience and event cues, stored with the agent version and separate from the audio configuration. Currently rendered only for telephony calls, not browser WebRTC or direct voice WebSocket sessions. Omit this property to disable all auxiliary audio. Persisted conversation recordings do not include the soundscape mix.")
+  soundscape?: VoiceAgentSoundscapeConfig;
+
   @doc("""
     The output modalities the agent produces. Defaults to `["audio"]`. `animation` and `avatar` are available
     when an avatar is configured.
@@ -267,6 +271,85 @@ model VoiceAgentLiveManagedAgentDelegation {
   @doc("Agent version, pinned per connection. Omit to select the active version.")
   @pattern("^[1-9][0-9]{0,19}$")
   agent_version?: string;
+}
+
+@doc("Agent-owned background ambience and event cues. Each omitted track is disabled. The service rejects unknown fields; custom uploads, URLs, and inline audio are not supported.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSoundscapeConfig {
+  @doc("Continuous background ambience that continues during caller and agent speech.")
+  background?: VoiceAgentSoundscapeTrackConfig;
+
+  @doc("A loop played while a non-call-control tool is pending and the agent is silent, after the configured delay.")
+  working?: VoiceAgentSoundscapeWorkingTrackConfig;
+
+  @doc("An interruptible cue played before the first agent speech.")
+  opening?: VoiceAgentSoundscapeTrackConfig;
+
+  @doc("A one-shot cue played after queued agent speech drains and before a committed call transfer.")
+  transfer?: VoiceAgentSoundscapeTrackConfig;
+
+  @doc("A one-shot cue played after queued agent speech drains and before a committed session end.")
+  closing?: VoiceAgentSoundscapeTrackConfig;
+}
+
+@doc("A soundscape track with its own audio source and playback volume.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSoundscapeTrackConfig {
+  @doc("The required audio source for this track.")
+  source: VoiceAgentSoundscapeSourceConfig;
+
+  @doc("Linear playback gain from 0 to 1, independent of agent speech volume. If omitted, the service defaults to 1. A value of 0 mutes this track.")
+  @minValue(0)
+  @maxValue(1)
+  gain?: float64 = 1;
+}
+
+@doc("A working-loop track with a delay measured from the first pending non-call-control tool.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSoundscapeWorkingTrackConfig {
+  ...VoiceAgentSoundscapeTrackConfig;
+
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "The soundscape wire contract requires an integer-millisecond delay."
+  @doc("The delay in milliseconds before working audio starts, from 0 to 10000. If omitted, the service defaults to 1000 milliseconds. This delays only working audio, not tool execution, and is valid only on the working track.")
+  @encode(DurationKnownEncoding.milliseconds, int32)
+  @minValue(duration.fromISO("PT0S"))
+  @maxValue(duration.fromISO("PT10S"))
+  delay_ms?: duration = duration.fromISO("PT1S");
+}
+
+@doc("A packaged sound selected from the service-managed catalogue. The service rejects unknown source fields and discriminator values.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSoundscapeSourceConfig {
+  @doc("The audio source type. Always `built_in`.")
+  type: "built_in";
+
+  @doc("The name of the packaged sound. Only the listed built-in sounds are accepted.")
+  name: VoiceAgentSoundscapeSound;
+}
+
+@doc("The packaged sounds accepted by a built-in soundscape source.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentSoundscapeSound {
+  @doc("Quiet office ambience.")
+  office: "office",
+
+  @doc("Busy call-center ambience.")
+  call_center: "call_center",
+
+  @doc("Busy street ambience.")
+  busy_street: "busy_street",
+
+  @doc("Crowd conversation ambience.")
+  people_talking: "people_talking",
+
+  @doc("Street and metro-station ambience.")
+  street_and_metro_station: "street_and_metro_station",
+
+  @doc("The first notification tone.")
+  ding1: "ding1",
+
+  @doc("The second notification tone.")
+  ding2: "ding2",
 }
 
 @doc("Configuration for sibling Foundry text agents that a voice agent may consult.")
@@ -384,7 +467,7 @@ model VoiceConversationEngine {
   type: string;
 }
 
-@doc("A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must support the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.")
+@doc("A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must declare `voice_conversation_engine` version `1.0.0`. Voice Live connects through the dedicated voice-conversation-engine endpoint using the existing Bridge Protocol 1.0 wire semantics; the Bridge message version is independent of the container protocol version and the Hosted Agents API version `v1`. Declaring `invocations_ws` is optional and does not substitute for `voice_conversation_engine`.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceHostedAgentConversationEngine extends VoiceConversationEngine {
   ...Record<never>;
@@ -424,6 +507,7 @@ model VoiceAgentFunctionTool extends VoiceAgentTool {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Tool choice may be a mode, a forced function, or an MCP tool."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("Tool-selection behavior for a voice agent.")
 @oneOf
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -635,14 +719,30 @@ union VoiceAgentAudioTimestampType {
   word: "word",
 }
 
-@doc("Input audio noise reduction configuration.")
+@doc("""
+  Input audio noise reduction configuration. `azure_deep_noise_suppression_headset` and
+  `azure_personal_noise_suppression` are modes for local voice activity detection that
+  enhance detection audio without changing the audio used for recognition.
+  """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentNoiseReduction {
-  @doc("The noise reduction mode.")
+  @doc("""
+    The noise reduction mode. `azure_deep_noise_suppression_headset` provides
+    headset-optimized noise suppression for local voice activity detection, optimized for
+    low-sample-rate audio including 8 kHz telephony audio without changing recognition audio (not
+    restricted to headset devices). `azure_personal_noise_suppression` starts with headset
+    suppression for local voice activity detection and personalizes detection after automatic speaker
+    enrollment while keeping recognition audio unchanged and keeping headset suppression active when
+    personalization is unavailable.
+    """)
   type: VoiceAgentNoiseReductionType;
 }
 
-@doc("The input audio noise reduction mode.")
+@doc("""
+  The input audio noise reduction mode.
+  - `azure_deep_noise_suppression_headset`: Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.
+  - `azure_personal_noise_suppression`: Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.
+  """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentNoiseReductionType {
   string,
@@ -651,6 +751,12 @@ union VoiceAgentNoiseReductionType {
 
   @doc("Azure deep noise suppression.")
   azure_deep_noise_suppression: "azure_deep_noise_suppression",
+
+  @doc("Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.")
+  azure_deep_noise_suppression_headset: "azure_deep_noise_suppression_headset",
+
+  @doc("Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.")
+  azure_personal_noise_suppression: "azure_personal_noise_suppression",
 }
 
 @doc("The turn-detection strategy. Additional values may be added over time.")
@@ -841,6 +947,7 @@ model VoiceAgentEchoCancellation {
 @doc("""
   The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed
   voice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.
+  `azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.
   Additional values may be added over time.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -873,17 +980,48 @@ union VoiceAgentInputTranscriptionModel {
 
   @doc("Azure AI Speech to text.")
   azure_speech: "azure-speech",
+
+  @doc("Azure AI Speech streaming transcription for cascaded text-model conversations only. Requires a nonempty `language`, such as `en-US`; comma-separated locales are supported. Supports `custom_speech`, `phrase_list`, and `profanity_filter`. Not supported with realtime speech-to-speech models.")
+  azure_speech_streaming: "azure-speech-streaming",
+}
+
+@doc("The supported input-transcript profanity filtering modes.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentProfanityFilterMode {
+  string,
+
+  @doc("Masks recognized profanity in the transcript.")
+  masked: "masked",
+
+  @doc("Includes recognized profanity in the transcript, subject to mandatory service masking policies.")
+  unfiltered: "unfiltered",
+
+  @doc("Removes recognized profanity from the transcript.")
+  removed: "removed",
 }
 
 @doc("""
-  Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
-  options with the Azure and MAI transcription models, custom speech models, and phrase hints.
+  Settings for transcribing input audio, including the transcription model, Custom Speech deployments,
+  and phrase hints.
+  When `model` is `azure-speech-streaming`, transcription is supported for cascaded text-model
+  conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as
+  `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and
+  `profanity_filter`.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentInputTranscription {
-  ...OmitProperties<OpenAI.AudioTranscription, "model">;
+  @doc("""
+    The language of the input audio. Supplying the input language in
+    [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format
+    will improve accuracy and latency. Optional for other transcription models; required and must be
+    nonempty when `model` is `azure-speech-streaming` (such as `en-US`; comma-separated locales are
+    supported).
+    """)
+  language?: string;
 
-  @doc("The transcription model identifier. Configure customer custom speech deployments in `custom_speech`.")
+  ...OmitProperties<OpenAI.AudioTranscription, "model" | "language">;
+
+  @doc("The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` is for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech`, `phrase_list`, and `profanity_filter`.")
   `model`: VoiceAgentInputTranscriptionModel;
 
   @doc("Optional customer custom speech deployment configuration, keyed by locale.")
@@ -891,6 +1029,17 @@ model VoiceAgentInputTranscription {
 
   @doc("Optional phrase hints that bias recognition toward domain terms.")
   phrase_list?: string[];
+
+  @doc("""
+    Controls how profanity is handled in input transcripts. Supported only with managed Azure Speech
+    (`azure-speech` and `azure-speech-streaming`), including Custom Speech.
+    Set this property before the session starts. If omitted, the transcription provider's default applies.
+    You cannot change the mode during a session.
+    Filtering affects transcript events and the text sent to cascaded models. It does not change input
+    audio, voice activity detection, or assistant speech; audio-native models still receive the original
+    audio. Mandatory service masking policies apply even when you select `unfiltered`.
+    """)
+  profanity_filter?: VoiceAgentProfanityFilterMode;
 }
 
 @doc("The avatar video resolution.")
@@ -1076,6 +1225,7 @@ model GenerateVoiceAgentRequest {
   draft?: boolean = false;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("The kind-specific inputs for generating and creating an agent.")
 @oneOf
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)

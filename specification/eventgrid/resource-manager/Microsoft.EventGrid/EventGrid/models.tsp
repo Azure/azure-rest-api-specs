@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -557,6 +558,30 @@ union TlsVersion {
    * 1.2
    */
   `1.2`: "1.2",
+
+  /**
+   * TLS version 1.3.
+   */
+  @added(Versions.v2026_06_15_preview)
+  `1.3`: "1.3",
+}
+
+/**
+ * IP address type for the namespace resource.
+ */
+@added(Versions.v2026_06_15_preview)
+union IpAddressType {
+  string,
+
+  /**
+   * Only IPv4 addresses are supported.
+   */
+  IPv4: "IPv4",
+
+  /**
+   * Both IPv4 and IPv6 addresses are supported.
+   */
+  DualStack: "DualStack",
 }
 
 /**
@@ -3574,9 +3599,15 @@ model NamespaceProperties {
   inboundIpRules?: InboundIpRule[];
 
   /**
-   * Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported.
+   * Minimum TLS version of the publisher allowed to publish to this namespace. The TlsVersion values are shared with topics and domains; for namespaces, only TLS version 1.2 is currently supported.
    */
   minimumTlsVersionAllowed?: TlsVersion;
+
+  /**
+   * IP address type for the namespace resource.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipAddressType?: IpAddressType;
 
   /**
    * Auto-scale configuration for the namespace resource
@@ -4020,6 +4051,12 @@ model NamespaceUpdateParameterProperties {
   inboundIpRules?: InboundIpRule[];
 
   /**
+   * IP address type for the namespace resource.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipAddressType?: IpAddressType;
+
+  /**
    * Auto-scale configuration for the namespace resource
    */
   autoScaleConfiguration?: UpdateAutoScaleConfiguration;
@@ -4211,7 +4248,7 @@ model Operation {
   /**
    * Properties of the operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Operation properties are an open, service-defined bag; shape is unchanged from previously published API versions."
   properties?: unknown;
 }
 

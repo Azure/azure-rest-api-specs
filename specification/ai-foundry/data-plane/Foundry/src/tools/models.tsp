@@ -14,6 +14,7 @@ namespace Azure.AI.Projects {
   union _PreviewAgentToolType {
     a2a_preview: "a2a_preview",
     bing_custom_search_preview: "bing_custom_search_preview",
+    #deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
     browser_automation_preview: "browser_automation_preview",
     fabric_dataagent_preview: "fabric_dataagent_preview",
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
@@ -506,7 +507,11 @@ namespace Azure.AI.Projects {
 
   /**
    * The input definition information for a Browser Automation Tool, as used to configure an Agent.
+   * BrowserAutomationPreviewTool is deprecated.
+   * Please use BrowserAutomationTool instead.
+   * See https://aka.ms/bat/docs for more information on Browser automation tool.
    */
+  #deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
   @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationPreviewTool extends OpenAI.Tool {
     /**
@@ -1156,6 +1161,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Output can be multiple types"
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
   @doc("The output content from a tool call, which can be a dictionary, string, or array.")
   union ToolCallOutputContent {
     @doc("A dictionary/object output.")

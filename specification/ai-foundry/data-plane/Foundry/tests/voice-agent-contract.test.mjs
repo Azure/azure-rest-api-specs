@@ -81,6 +81,7 @@ const realtimeVoiceFields = [
   "conversation_engine",
   "greeting",
   "audio",
+  "soundscape",
   "output_modalities",
   "max_output_tokens",
   "include",
@@ -2703,7 +2704,7 @@ test("stored delegation reuses native fields and discriminates target-specific r
   const nativeTarget = nativeItem.properties.get("target").type;
   assert.deepEqual(
     [...nativeTarget.variants.values()].map((v) => v.type.value),
-    ["client", "responses"],
+    ["client", "responses", "decisions"],
   );
   assert.ok(
     ![...type("Azure.AI.Projects").models.keys()].some((name) =>

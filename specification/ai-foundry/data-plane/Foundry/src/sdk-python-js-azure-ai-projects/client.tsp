@@ -321,24 +321,29 @@ using Azure.AI.Projects;
 // JavaScript needs a discriminated SDK model to invoke variant serializers.
 // Spread the original fields without changing the native protocol hierarchy.
 namespace Azure.AI.Projects {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "JavaScript-only alternate type; not emitted for C#."
   @doc("JavaScript delegation options selected by type.")
   @discriminator("type")
   model VoiceAgentLiveDelegationOptions {
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Extends the native OpenAI delegation type with the Foundry-managed value for this JavaScript-only discriminator."
     type: OpenAI.DelegationType | "foundry_managed_agent";
   }
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "JavaScript-only alternate type; not emitted for C#."
   @doc("Client delegation options.")
   model VoiceAgentLiveClientDelegationOptions
     extends VoiceAgentLiveDelegationOptions {
     ...OpenAI.LiveClientDelegationParam;
   }
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "JavaScript-only alternate type; not emitted for C#."
   @doc("Responses delegation options.")
   model VoiceAgentLiveResponsesDelegationOptions
     extends VoiceAgentLiveDelegationOptions {
     ...OpenAI.LiveResponsesDelegationParam;
   }
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "JavaScript-only alternate type; not emitted for C#."
   @doc("Foundry managed-agent delegation options.")
   model VoiceAgentLiveManagedAgentDelegationOptions
     extends VoiceAgentLiveDelegationOptions {

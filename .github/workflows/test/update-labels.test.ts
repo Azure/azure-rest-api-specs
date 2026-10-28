@@ -10,6 +10,83 @@ function updateLabels(asyncFunctionArgs: unknown) {
 }
 
 describe("updateLabels", () => {
+  describe("explicit Universal handoff", () => {
+    function fixture() {
+      const github = createMockGithub();
+      const core = createMockCore();
+      github.rest.actions.getWorkflowRun.mockResolvedValue({
+        data: {
+          path: ".github/workflows/arm-universal-auto-signoff.yaml",
+          event: "workflow_dispatch",
+          status: "in_progress",
+          conclusion: null,
+        },
+      });
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: {
+          artifacts: [
+            { name: `head-sha=${fullGitSha}` },
+            { name: "issue-number=123" },
+            { name: "label-foo=true" },
+          ],
+        },
+      });
+      const run = (source = "456") =>
+        updateLabels({
+          github,
+          core,
+          context: {
+            eventName: "workflow_dispatch",
+            repo: { owner: "Azure", repo: "azure-rest-api-specs" },
+            payload: { inputs: { source_run_id: source } },
+          },
+        });
+      return { github, core, run };
+    }
+
+    it("reads already-uploaded artifacts from the trusted running Universal run", async () => {
+      const { github, run } = fixture();
+      await run();
+      expect(github.rest.actions.getWorkflowRun).toHaveBeenCalledWith({
+        owner: "Azure",
+        repo: "azure-rest-api-specs",
+        run_id: 456,
+      });
+      expect(github.rest.issues.addLabels).toHaveBeenCalledWith({
+        owner: "Azure",
+        repo: "azure-rest-api-specs",
+        issue_number: 123,
+        labels: ["foo"],
+      });
+    });
+
+    it.each(["", "0", "123abc"])("rejects invalid source ID %j", async (value) => {
+      const { github, run } = fixture();
+      await expect(run(value)).rejects.toThrow("positive source run ID");
+      expect(github.rest.actions.getWorkflowRun).not.toHaveBeenCalled();
+    });
+
+    it.each([
+      { path: ".github/workflows/untrusted.yaml", event: "workflow_dispatch" },
+      { path: ".github/workflows/arm-universal-auto-signoff.yaml", event: "pull_request" },
+    ])("rejects untrusted source %j", async (source) => {
+      const { github, run } = fixture();
+      github.rest.actions.getWorkflowRun.mockResolvedValue({ data: source });
+      await expect(run()).rejects.toThrow("must be a Universal signoff run");
+      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+      expect(github.rest.actions.listWorkflowRunArtifacts).not.toHaveBeenCalled();
+    });
+
+    it("rejects missing source correlation without applying labels", async () => {
+      const { github, run } = fixture();
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: { artifacts: [{ name: "label-foo=true" }] },
+      });
+      await expect(run()).rejects.toThrow("Invalid value for 'issue_number'");
+      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+    });
+  });
+
   it("loads inputs from context", async () => {
     const core = createMockCore();
 
@@ -61,6 +138,33 @@ describe("updateLabels", () => {
 });
 
 describe("updateLabelsImpl", () => {
+  it("removes ARMSignedOff before its markers so a partial revoke never looks human-owned", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [{ name: "label-ARMAutoSignedOff=false" }, { name: "label-ARMSignedOff=false" }],
+      },
+    });
+    github.rest.issues.removeLabel.mockRejectedValueOnce(new Error("remove failed"));
+
+    await expect(
+      updateLabelsImpl({
+        owner: "owner",
+        repo: "repo",
+        head_sha: fullGitSha,
+        issue_number: 123,
+        run_id: 456,
+        github,
+        core: createMockCore(),
+      }),
+    ).rejects.toThrow("remove failed");
+
+    expect(github.rest.issues.removeLabel).toHaveBeenCalledOnce();
+    expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+      expect.objectContaining({ name: "ARMSignedOff" }),
+    );
+  });
+
   it("throws if no run_id", async () => {
     const github = createMockGithub();
 
