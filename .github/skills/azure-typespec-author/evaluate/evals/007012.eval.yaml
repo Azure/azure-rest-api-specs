@@ -1,0 +1,29 @@
+name: azure-typespec-author-eval
+description: Authoring boundaries with shared naming available
+version: "1.0"
+type: capability
+area: naming
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 120s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 007012-anti-trigger-naming-only-client-tsp-trigger
+    prompt: |
+      Fix naming in client.tsp: add a C# clientName override for WidgetProperties.enabled in
+      specification/widget/resource-manager/Microsoft.Widget/client.tsp. For now, identify and
+      invoke the applicable skill, then stop before edits or tool calls.
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azsdk-common-typespec-naming
+          disallowed:
+            - azure-typespec-author
+    tags:
+      suite: naming
+      mode: trigger

@@ -9,6 +9,7 @@ on:
       - .github/workflows/src/label-catalog.ts
       - .github/workflows/src/label-catalog-loader.ts
       - .github/workflows/src/sync-repo-labels.ts
+      - .github/workflows/src/report-label-sync-failure.ts
       - .github/workflows/cmd/labels.ts
       - .github/workflows/test/*label*.test.ts
       - .github/package.json
@@ -23,6 +24,7 @@ on:
       - .github/workflows/src/label-catalog.ts
       - .github/workflows/src/label-catalog-loader.ts
       - .github/workflows/src/sync-repo-labels.ts
+      - .github/workflows/src/report-label-sync-failure.ts
       - .github/package.json
       - pnpm-lock.yaml
       - pnpm-workspace.yaml
@@ -54,14 +56,15 @@ jobs:
   sync:
     if: >-
       github.event_name != 'pull_request' &&
-      github.repository == 'Azure/azure-rest-api-specs' &&
+      (github.repository == 'Azure/azure-rest-api-specs' ||
+       github.repository == 'Azure/azure-rest-api-specs-pr') &&
       github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:
       contents: read
       issues: write
-      pull-requests: read
+      pull-requests: write
     concurrency:
       group: sync-repo-labels
       cancel-in-progress: false
@@ -94,7 +97,7 @@ jobs:
 
       - name: Persist pre-change audit
         id: audit
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: label-audit-before-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/label-audit/before.json
@@ -120,9 +123,36 @@ jobs:
 
       - name: Persist outcome
         if: ${{ always() && steps.apply.outcome != 'skipped' }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: label-audit-outcome-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/label-audit/outcome.json
           if-no-files-found: error
           retention-days: 90
+
+  report-failure:
+    needs: sync
+    if: ${{ !cancelled() && needs.sync.result == 'failure' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+      issues: write
+    concurrency:
+      group: sync-repo-labels-failure
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.repository.default_branch }}
+          sparse-checkout: .github
+      - name: Create or update failure issue
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { reportLabelSyncFailure } = await import(
+              `${process.env.GITHUB_WORKSPACE}/.github/workflows/src/report-label-sync-failure.ts`
+            );
+            await reportLabelSyncFailure({ github, context, core });
