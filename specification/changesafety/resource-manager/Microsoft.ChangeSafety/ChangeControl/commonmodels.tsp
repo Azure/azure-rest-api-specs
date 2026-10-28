@@ -114,12 +114,12 @@ model ObjectParameter extends Parameter {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   type: ParameterType.Object;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Suppressing no-empty-model: Empty object literal required to generate OpenAPI schema with additionalProperties:true for flexible object parameter values that accept arbitrary JSON structures."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Object parameter defaults are customer-supplied JSON objects with arbitrary keys and nested values. This preview retains the existing open object schema."
   @doc("Default value for the parameter.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   defaultValue?: {};
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Suppressing no-empty-model: Empty object literal required to generate OpenAPI schema with additionalProperties:true for flexible object parameter constraint validation."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Each object-parameter allowed value has customer-defined JSON keys and nested values. This preview retains the existing open object item schema."
   @doc("Allowed list of the values for the parameter.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @Azure.ResourceManager.identifiers(#[])
@@ -154,7 +154,7 @@ model NestedStageMap {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   resourceId?: StageMapResourceId;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Key value pairs of parameter names & their values for the stagemap.Value can be any type, hence using Unknown type."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameter names come from the referenced StageMap, not fixed properties of this API. Their supplied values may be JSON scalars, arrays, or objects."
   @doc("Key value pairs of parameter names & their values for the stageMap referenced by the resourceId field.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   parameters?: Record<unknown>;

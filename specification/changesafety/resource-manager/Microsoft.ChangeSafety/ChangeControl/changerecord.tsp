@@ -54,7 +54,7 @@ model ChangeRecordProperties {
   @doc("Reference to the StageMap, defining progression.")
   stageMap?: NestedStageMap;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Key value pairs of parameter names & their values for the current Stage.Value can be any type, hence using Unknown type."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameter names are customer-defined; ChangeSafety cannot enumerate the keys. Values use the typed Parameter schema."
   @doc("Schema of parameters that will be provided for each stageProgression.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   parameters?: Record<Parameter>;
@@ -87,7 +87,7 @@ model ChangeRecordProperties {
   @doc("Collection of related links for the change.")
   links?: Link[];
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Defines a flexible placeholder for tool-specific metadata for diverse orchestration and change scenarios."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Orchestration tools define the keys and JSON value types of change metadata. This preview retains the existing open metadata object."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Additional metadata for the change required for various orchestration tools.")
   additionalData?: {};
@@ -117,7 +117,7 @@ model ChangeRecordRetrieveNextStagesResponseItem {
   @visibility(Lifecycle.Read)
   stageReference: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Stage specific key value pairs of parameter names & their values."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Stage-variable names come from the StageMap, not fixed properties of this response. Values may be JSON scalars, arrays, or objects."
   @doc("Variables to apply on the change for the stage. Key value pairs supporting any JSON values.")
   @visibility(Lifecycle.Read)
   stageVariables?: Record<unknown>;
@@ -138,12 +138,12 @@ model ChangeRecordRetrieveNextStagesResponseItem {
   @doc("Collection of related links for the change.")
   links?: Link[];
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Provides flexible object schema for stage-specific orchestration metadata and dynamic tool-specific configuration data."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "The response carries stage metadata defined by orchestration tools. This preview retains the existing open object rather than inventing fixed metadata fields."
   @visibility(Lifecycle.Read)
   @doc("Additional metadata related to the StageProgression resource.")
   additionalData?: {};
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameters can be any type and can have an arbitrary name as key, hence using a Record."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameter names are customer-defined; ChangeSafety cannot enumerate the keys. Values use the typed Parameter schema."
   @doc("List of Parameters & their schemas for the current Stage that user supposed to provide.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   parameters?: Record<Parameter>;

@@ -24,7 +24,7 @@ model ChangeActivityEvent is ExtensionResource<ChangeActivityEventProperties> {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ChangeActivityEvent is an immutable audit event resource that is stored in ARG, not provisioned over time."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The event interface exposes only GET and list. Events have no create or update lifecycle, so the properties omit provisioningState."
 @doc("Detailed properties of the ChangeActivityEvent resource.")
 @discriminator("kind")
 model ChangeActivityEventProperties {

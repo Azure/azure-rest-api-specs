@@ -53,7 +53,7 @@ model Stage {
   @minValue(1)
   sequence: int32;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Stage specific key value pairs of parameter names & their values, which can be any type"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Stage-variable names are customer-defined, not fixed properties of this API. Values may be JSON scalars, arrays, or objects."
   @doc("Variables to apply on the change of that stage. Key value pairs supporting any JSON values.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   stageVariables?: Record<unknown>;

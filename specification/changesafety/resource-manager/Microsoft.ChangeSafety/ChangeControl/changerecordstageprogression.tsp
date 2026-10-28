@@ -46,7 +46,7 @@ model ChangeRecordStageProgressionProperties {
   @minValue(1)
   sequence?: int32;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Stage specific key value pairs of parameter names & their values, which can be any type"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Stage-variable names come from the StageMap, not fixed properties of this API. Values may be JSON scalars, arrays, or objects."
   @doc("Variables to apply on the change of that stage. Key value pairs supporting any JSON values.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   stageVariables?: Record<unknown>;
@@ -60,12 +60,12 @@ model ChangeRecordStageProgressionProperties {
   @doc("Collection of related links for the change.")
   links?: Link[];
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Defines a flexible placeholder for stage specific meta data for diverse orchestration and change scenarios."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Orchestration tools define the keys and JSON value types of stage metadata. This preview retains the existing open metadata object."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Additional metadata for the stageProgression resource.")
   additionalData?: {};
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Key value pairs of parameter names & their values for the current Stage.Value can be any type, hence using Unknown type."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameter names come from the StageMap, not fixed properties of this API. Their supplied values may be JSON scalars, arrays, or objects."
   @doc("Stage specific key value pairs of parameter names & their values for the current Stage, If any.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   parameters?: Record<unknown>;

@@ -33,6 +33,11 @@ snapshot/event serialization, version-specific resource/action registration,
 consumer migration, current ARM/suppression approvals, and SDK package onboarding.
 Do not treat passing schema or SDK generation checks as deployed runtime support.
 
+SDK work remains deferred. The retained SDK-readiness exemptions apply only to
+configuration validation. They do not waive the required `SDK Validation Status`
+check. The current blockers are the legacy JavaScript generation path and Python
+package-name onboarding.
+
 ## Getting Started
 
 To build the SDKs for ChangeSafety, install AutoRest via `npm` (`npm install -g autorest`) and then run:
@@ -82,32 +87,25 @@ directive:
 directive:
   - suppress: AvoidAdditionalProperties
     reason: |
-      These property-scoped exceptions preserve customer-defined parameter, metadata, and stage-variable keys, or flexible orchestration/change-definition payloads. They require current ARM review; no historical approval is claimed for this draft.
+      These property-scoped exceptions preserve customer-defined parameter names, metadata keys, and stage-variable names. Values retain the existing typed parameter schemas or JSON values. Current ARM review is required.
     from: ChangeControl.json
     where:
       - $.definitions.Parameter.properties.metadata
       - $.definitions.StageMapProperties.properties.parameters
-      - $.definitions.ChangeDefinition.properties.details
       - $.definitions.Stage.properties.stageVariables
       - $.definitions.NestedStageMap.properties.parameters
       - $.definitions.ChangeRecordProperties.properties.parameters
-      - $.definitions.ChangeRecordProperties.properties.additionalData
       - $.definitions.ChangeRecordStageProgressionProperties.properties.stageVariables
       - $.definitions.ChangeRecordStageProgressionPropertiesUpdate.properties.stageVariables
-      - $.definitions.ChangeRecordStageProgressionProperties.properties.additionalData
-      - $.definitions.ChangeRecordStageProgressionPropertiesUpdate.properties.additionalData
       - $.definitions.ChangeRecordStageProgressionProperties.properties.parameters
       - $.definitions.ChangeRecordStageProgressionPropertiesUpdate.properties.parameters
       - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.stageVariables
-      - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.additionalData
       - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.parameters
   - suppress: AvoidAdditionalProperties
     reason: |
-      PATCH parameter names and metadata keys are customer-defined. Change-definition and orchestration metadata retain their existing flexible JSON shapes. These PATCH-only selectors require current ARM review and are not covered automatically by historical approval labels.
+      PATCH parameter names and metadata keys are customer-defined. Values use the partial ParameterPatch schema or string metadata values. These PATCH-only selectors require current ARM review.
     from: ChangeControl.json
     where:
-      - $.definitions.ChangeDefinitionPatch.properties.details
-      - $.definitions.ChangeRecordUpdateProperties.properties.additionalData
       - $.definitions.ChangeRecordUpdateProperties.properties.parameters
       - $.definitions.ParameterPatch.properties.metadata
       - $.definitions.StageMapUpdateProperties.properties.parameters
