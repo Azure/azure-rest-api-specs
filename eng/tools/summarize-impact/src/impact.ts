@@ -28,11 +28,12 @@ export async function evaluateImpact(
   const versionsByProvider = new Map<string, string[]>();
   const planesByDirectory = new Map<string, Plane>();
   const readmes = await context.getReadmeDiffs();
+  // Discovered README paths use native separators, whereas Git paths use forward slashes.
   const changedReadmes = [
     ...(readmes.additions ?? []),
     ...(readmes.changes ?? []),
     ...(readmes.deletions ?? []),
-  ].map((entry) => entry.readme);
+  ].map((entry) => entry.readme.replaceAll("\\", "/"));
 
   const getService = (file: string): ServiceImpact | undefined => {
     const match = /^specification\/([^/]+)\//.exec(file);
@@ -194,7 +195,7 @@ export function getRPFolderFromSwaggerFile(file: string): string | undefined {
   const provider = getResourceProviderFromFilePath(file);
   return provider === undefined
     ? undefined
-    : file.substring(0, file.lastIndexOf(provider) + provider.length);
+    : file.substring(0, file.indexOf(`/${provider}/`) + provider.length + 1);
 }
 
 export function getResourceProviderFromFilePath(file: string): string | undefined {

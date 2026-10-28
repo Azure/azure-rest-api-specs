@@ -1,6 +1,6 @@
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, win32 } from "node:path";
 import { describe, expect, it } from "vitest";
 import { ImpactAssessmentSchema } from "@azure-tools/specs-shared/impact";
 import { PRContext, type FileListInfo } from "../src/PRContext.ts";
@@ -110,6 +110,30 @@ describe("change impact", () => {
     ]);
   });
 
+  it("preserves review, RPaaS, and suppression facts from Windows-formatted owning README paths", async () => {
+    const prContext = context({
+      modifications: ["specification/contosowidgetmanager/resource-manager/suppressions.yaml"],
+    });
+    const readmes = await prContext.getReadmeDiffs();
+    prContext.getReadmeDiffs = () =>
+      Promise.resolve({
+        ...readmes,
+        changes: readmes.changes?.map((entry) => ({
+          ...entry,
+          readme: win32.normalize(entry.readme),
+        })),
+      });
+
+    const impact = await evaluateImpact(prContext, []);
+    expect(impact.services[0]).toMatchObject({
+      path: "specification/contosowidgetmanager",
+      plane: "resource-manager",
+      hasAffectedReadme: true,
+      suppressionsChanged: true,
+      resourceProvider: { usesRpaas: true },
+    });
+  });
+
   it("uses the baseline configuration to classify a deleted old-layout management project", async () => {
     const folder = await mkdtemp(join(tmpdir(), "impact-plane-"));
     try {
@@ -199,4 +223,46 @@ describe("change impact", () => {
       await rm(folder, { recursive: true, force: true });
     }
   });
+
+  it.each([
+    { version: "2025-01-01", newApiVersions: [] },
+    { version: "2026-01-01", newApiVersions: ["2026-01-01"] },
+  ])(
+    "uses the provider directory when the Swagger filename repeats its namespace: $version",
+    async ({ version, newApiVersions }) => {
+      const folder = await mkdtemp(join(tmpdir(), "impact-provider-path-"));
+      try {
+        const before = join(folder, "before");
+        const after = join(folder, "after");
+        const provider = "specification/example/resource-manager/Microsoft.Example";
+        const oldDirectory = join(before, provider, "stable/2025-01-01");
+        const newDirectory = join(after, provider, "stable", version);
+        await mkdir(oldDirectory, { recursive: true });
+        await mkdir(newDirectory, { recursive: true });
+        await writeFile(
+          join(oldDirectory, "existing.json"),
+          JSON.stringify({ info: { version: "2025-01-01" } }),
+        );
+        await writeFile(
+          join(newDirectory, "Microsoft.Example.json"),
+          JSON.stringify({ info: { version } }),
+        );
+
+        const impact = await evaluateImpact(
+          context(
+            { additions: [`${provider}/stable/${version}/Microsoft.Example.json`] },
+            after,
+            before,
+          ),
+          [],
+        );
+        expect(impact.services[0]).toMatchObject({
+          newApiVersions,
+          resourceProvider: { newNamespaces: [], hasAddedDefinitions: true },
+        });
+      } finally {
+        await rm(folder, { recursive: true, force: true });
+      }
+    },
+  );
 });
