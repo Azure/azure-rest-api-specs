@@ -187,6 +187,10 @@ input-file:
   - preview/2026-11-01-preview/workloadGroups.json
 
 suppressions:
+  - code: DeleteResponseCodes
+    from: ReaderEndpoints.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/readerEndpoints/{readerEndpointName}"].delete
+    reason: "Preserves the SQL RP contract: completed deletion returns 200, pending deletion returns 202, and an absent resource returns 204. ARM exception approval is required."
   - code: ResourceNameRestriction
     from: ReaderEndpoints.json
     where:
