@@ -130,7 +130,7 @@ model ReaderEndpointListResult {
   /** Link to retrieve the next page of results. */
   @visibility(Lifecycle.Read)
   @nextLink
-  nextLink?: string;
+  nextLink?: url;
 }
 
 /** Path parameters without adding constraints absent from the source Swagger. */
