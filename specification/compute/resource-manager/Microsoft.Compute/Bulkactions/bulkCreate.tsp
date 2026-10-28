@@ -241,21 +241,21 @@ interface BulkCreate {
     | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
     | ErrorResponse;
 
-  @renamedFrom(Versions.`2026-10-06`, "createOrUpdate")
+  @renamedFrom(Versions.`2026-10-16`, "createOrUpdate")
   @doc("Creates virtual machines in bulk.")
   create is ArmResourceCreateOrUpdateAsync<
     Resource = LocationBasedBulkCreate,
     Parameters = BulkCreateId
   >;
 
-  @removed(Versions.`2026-10-06`)
+  @removed(Versions.`2026-10-16`)
   @doc("Deletes BulkCreates.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Resource = LocationBasedBulkCreate,
     Parameters = BulkCreateId & BulkCreateDeleteInstancesParameter
   >;
 
-  @removed(Versions.`2026-10-06`)
+  @removed(Versions.`2026-10-16`)
   @doc("Cancels BulkCreate instances that have not yet launched.")
   cancel is ArmResourceActionNoResponseContentAsync<
     Resource = LocationBasedBulkCreate,

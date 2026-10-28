@@ -1,0 +1,314 @@
+{
+  "title": "Create virtual machines with generated names and per-VM zones",
+  "operationId": "BulkCreateCustom_Create",
+  "parameters": {
+    "api-version": "2026-10-16",
+    "subscriptionId": "57018409-63ae-4ec4-91ef-57bafe128d74",
+    "resourceGroupName": "rg-bulk-create",
+    "location": "eastus",
+    "name": "7a647154-67a1-4c1f-9fad-5e8db7f7155c",
+    "resource": {
+      "zones": [
+        "1"
+      ],
+      "tags": {
+        "workload": "batch-processing"
+      },
+      "properties": {
+        "capacity": 2,
+        "capacityType": "VM",
+        "computeProfile": {
+          "computeApiVersion": "2024-11-01",
+          "virtualMachineProfile": {
+            "hardwareProfile": {
+              "vmSize": "Standard_D2s_v5"
+            },
+            "storageProfile": {
+              "imageReference": {
+                "publisher": "Canonical",
+                "offer": "0001-com-ubuntu-server-jammy",
+                "sku": "22_04-lts-gen2",
+                "version": "latest"
+              },
+              "osDisk": {
+                "createOption": "FromImage",
+                "managedDisk": {
+                  "storageAccountType": "Premium_LRS"
+                },
+                "deleteOption": "Delete"
+              }
+            },
+            "osProfile": {
+              "computerName": "batchvm",
+              "adminUsername": "azureuser",
+              "linuxConfiguration": {
+                "disablePasswordAuthentication": true,
+                "ssh": {
+                  "publicKeys": [
+                    {
+                      "path": "/home/azureuser/.ssh/authorized_keys",
+                      "keyData": "ssh-rsa <your-public-key>"
+                    }
+                  ]
+                },
+                "provisionVMAgent": true,
+                "patchSettings": {
+                  "patchMode": "AutomaticByPlatform",
+                  "assessmentMode": "AutomaticByPlatform"
+                }
+              }
+            },
+            "networkProfile": {
+              "networkApiVersion": "2022-11-01",
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "vm-nic",
+                  "properties": {
+                    "primary": true,
+                    "deleteOption": "Delete",
+                    "ipConfigurations": [
+                      {
+                        "name": "ipconfig",
+                        "properties": {
+                          "primary": true,
+                          "subnet": {
+                            "id": "/subscriptions/57018409-63ae-4ec4-91ef-57bafe128d74/resourceGroups/rg-bulk-create/providers/Microsoft.Network/virtualNetworks/batch-vnet/subnets/default"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "overridesProfile": {
+          "virtualMachineNamePrefix": "batch-worker",
+          "overrides": [
+            {
+              "zone": "1",
+              "tags": {
+                "partition": "first"
+              }
+            },
+            {
+              "zone": "2",
+              "tags": {
+                "partition": "second"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/57018409-63ae-4ec4-91ef-57bafe128d74/resourceGroups/rg-bulk-create/providers/Microsoft.Compute/locations/eastus/bulkCreateCustom/7a647154-67a1-4c1f-9fad-5e8db7f7155c",
+        "name": "7a647154-67a1-4c1f-9fad-5e8db7f7155c",
+        "type": "Microsoft.Compute/locations/bulkCreateCustom",
+        "zones": [
+          "1"
+        ],
+        "tags": {
+          "workload": "batch-processing"
+        },
+        "properties": {
+          "capacity": 2,
+          "capacityType": "VM",
+          "computeProfile": {
+            "computeApiVersion": "2024-11-01",
+            "virtualMachineProfile": {
+              "hardwareProfile": {
+                "vmSize": "Standard_D2s_v5"
+              },
+              "storageProfile": {
+                "imageReference": {
+                  "publisher": "Canonical",
+                  "offer": "0001-com-ubuntu-server-jammy",
+                  "sku": "22_04-lts-gen2",
+                  "version": "latest"
+                },
+                "osDisk": {
+                  "createOption": "FromImage",
+                  "managedDisk": {
+                    "storageAccountType": "Premium_LRS"
+                  },
+                  "deleteOption": "Delete"
+                }
+              },
+              "osProfile": {
+                "computerName": "batchvm",
+                "adminUsername": "azureuser",
+                "linuxConfiguration": {
+                  "disablePasswordAuthentication": true,
+                  "ssh": {
+                    "publicKeys": [
+                      {
+                        "path": "/home/azureuser/.ssh/authorized_keys",
+                        "keyData": "ssh-rsa <your-public-key>"
+                      }
+                    ]
+                  },
+                  "provisionVMAgent": true,
+                  "patchSettings": {
+                    "patchMode": "AutomaticByPlatform",
+                    "assessmentMode": "AutomaticByPlatform"
+                  }
+                }
+              },
+              "networkProfile": {
+                "networkApiVersion": "2022-11-01",
+                "networkInterfaceConfigurations": [
+                  {
+                    "name": "vm-nic",
+                    "properties": {
+                      "primary": true,
+                      "deleteOption": "Delete",
+                      "ipConfigurations": [
+                        {
+                          "name": "ipconfig",
+                          "properties": {
+                            "primary": true,
+                            "subnet": {
+                              "id": "/subscriptions/57018409-63ae-4ec4-91ef-57bafe128d74/resourceGroups/rg-bulk-create/providers/Microsoft.Network/virtualNetworks/batch-vnet/subnets/default"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "createdTime": "2026-10-16T10:00:00Z",
+          "provisioningState": "Succeeded",
+          "resources": [
+            {
+              "virtualMachineInfo": {
+                "name": "batch-worker_0",
+                "vmSize": "Standard_D2s_v5",
+                "zone": "1"
+              }
+            },
+            {
+              "virtualMachineInfo": {
+                "name": "batch-worker_1",
+                "vmSize": "Standard_D2s_v5",
+                "zone": "2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/57018409-63ae-4ec4-91ef-57bafe128d74/providers/Microsoft.Compute/locations/eastus/bulkCreateCustom/asyncOperations/a6b4ab3a-6915-443a-b7f8-53f259bb056e?api-version=2026-10-16",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/57018409-63ae-4ec4-91ef-57bafe128d74/resourceGroups/rg-bulk-create/providers/Microsoft.Compute/locations/eastus/bulkCreateCustom/7a647154-67a1-4c1f-9fad-5e8db7f7155c",
+        "name": "7a647154-67a1-4c1f-9fad-5e8db7f7155c",
+        "type": "Microsoft.Compute/locations/bulkCreateCustom",
+        "zones": [
+          "1"
+        ],
+        "tags": {
+          "workload": "batch-processing"
+        },
+        "properties": {
+          "capacity": 2,
+          "capacityType": "VM",
+          "computeProfile": {
+            "computeApiVersion": "2024-11-01",
+            "virtualMachineProfile": {
+              "hardwareProfile": {
+                "vmSize": "Standard_D2s_v5"
+              },
+              "storageProfile": {
+                "imageReference": {
+                  "publisher": "Canonical",
+                  "offer": "0001-com-ubuntu-server-jammy",
+                  "sku": "22_04-lts-gen2",
+                  "version": "latest"
+                },
+                "osDisk": {
+                  "createOption": "FromImage",
+                  "managedDisk": {
+                    "storageAccountType": "Premium_LRS"
+                  },
+                  "deleteOption": "Delete"
+                }
+              },
+              "osProfile": {
+                "computerName": "batchvm",
+                "adminUsername": "azureuser",
+                "linuxConfiguration": {
+                  "disablePasswordAuthentication": true,
+                  "ssh": {
+                    "publicKeys": [
+                      {
+                        "path": "/home/azureuser/.ssh/authorized_keys",
+                        "keyData": "ssh-rsa <your-public-key>"
+                      }
+                    ]
+                  },
+                  "provisionVMAgent": true,
+                  "patchSettings": {
+                    "patchMode": "AutomaticByPlatform",
+                    "assessmentMode": "AutomaticByPlatform"
+                  }
+                }
+              },
+              "networkProfile": {
+                "networkApiVersion": "2022-11-01",
+                "networkInterfaceConfigurations": [
+                  {
+                    "name": "vm-nic",
+                    "properties": {
+                      "primary": true,
+                      "deleteOption": "Delete",
+                      "ipConfigurations": [
+                        {
+                          "name": "ipconfig",
+                          "properties": {
+                            "primary": true,
+                            "subnet": {
+                              "id": "/subscriptions/57018409-63ae-4ec4-91ef-57bafe128d74/resourceGroups/rg-bulk-create/providers/Microsoft.Network/virtualNetworks/batch-vnet/subnets/default"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "createdTime": "2026-10-16T10:00:00Z",
+          "provisioningState": "Creating",
+          "resources": [
+            {
+              "virtualMachineInfo": {
+                "name": "batch-worker_0",
+                "vmSize": "Standard_D2s_v5",
+                "zone": "1"
+              }
+            },
+            {
+              "virtualMachineInfo": {
+                "name": "batch-worker_1",
+                "vmSize": "Standard_D2s_v5",
+                "zone": "2"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

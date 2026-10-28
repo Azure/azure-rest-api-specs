@@ -754,16 +754,16 @@ model ExecuteDeallocateRequest {
 
   @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @removed(Microsoft.Compute.Versions.`2026-10-06`)
-  @renamedFrom(Microsoft.Compute.Versions.`2026-10-06`, "resources")
+  @removed(Microsoft.Compute.Versions.`2026-10-16`)
+  @renamedFrom(Microsoft.Compute.Versions.`2026-10-16`, "resources")
   resourcesLegacy?: Resources;
 
   @doc("The target virtual machines.")
-  @added(Microsoft.Compute.Versions.`2026-10-06`)
+  @added(Microsoft.Compute.Versions.`2026-10-16`)
   resources: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @removed(Microsoft.Compute.Versions.`2026-10-06`)
+  @removed(Microsoft.Compute.Versions.`2026-10-16`)
   @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
   resourcesWithContext?: ResourcesWithContext;
 }
@@ -774,16 +774,16 @@ model ExecuteHibernateRequest {
 
   @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @removed(Microsoft.Compute.Versions.`2026-10-06`)
-  @renamedFrom(Microsoft.Compute.Versions.`2026-10-06`, "resources")
+  @removed(Microsoft.Compute.Versions.`2026-10-16`)
+  @renamedFrom(Microsoft.Compute.Versions.`2026-10-16`, "resources")
   resourcesLegacy?: Resources;
 
   @doc("The target virtual machines.")
-  @added(Microsoft.Compute.Versions.`2026-10-06`)
+  @added(Microsoft.Compute.Versions.`2026-10-16`)
   resources: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @removed(Microsoft.Compute.Versions.`2026-10-06`)
+  @removed(Microsoft.Compute.Versions.`2026-10-16`)
   @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
   resourcesWithContext?: ResourcesWithContext;
 }
@@ -795,16 +795,16 @@ model ExecuteStartRequest {
 
   @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @removed(Microsoft.Compute.Versions.`2026-10-06`)
-  @renamedFrom(Microsoft.Compute.Versions.`2026-10-06`, "resources")
+  @removed(Microsoft.Compute.Versions.`2026-10-16`)
+  @renamedFrom(Microsoft.Compute.Versions.`2026-10-16`, "resources")
   resourcesLegacy?: Resources;
 
   @doc("The target virtual machines.")
-  @added(Microsoft.Compute.Versions.`2026-10-06`)
+  @added(Microsoft.Compute.Versions.`2026-10-16`)
   resources: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @removed(Microsoft.Compute.Versions.`2026-10-06`)
+  @removed(Microsoft.Compute.Versions.`2026-10-16`)
   @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
   resourcesWithContext?: ResourcesWithContext;
 }
@@ -857,16 +857,16 @@ model ExecuteReimageRequest {
 
   @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @removed(Microsoft.Compute.Versions.`2026-10-06`)
-  @renamedFrom(Microsoft.Compute.Versions.`2026-10-06`, "resources")
+  @removed(Microsoft.Compute.Versions.`2026-10-16`)
+  @renamedFrom(Microsoft.Compute.Versions.`2026-10-16`, "resources")
   resourcesLegacy?: Resources;
 
   @doc("The target virtual machines.")
-  @added(Microsoft.Compute.Versions.`2026-10-06`)
+  @added(Microsoft.Compute.Versions.`2026-10-16`)
   resources: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @removed(Microsoft.Compute.Versions.`2026-10-06`)
+  @removed(Microsoft.Compute.Versions.`2026-10-16`)
   @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
   resourcesWithContext?: ResourcesWithContext;
 
@@ -932,16 +932,16 @@ model ExecuteDeleteRequest {
 
   @doc("The target virtual machines.")
   @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @removed(Microsoft.Compute.Versions.`2026-10-06`)
-  @renamedFrom(Microsoft.Compute.Versions.`2026-10-06`, "resources")
+  @removed(Microsoft.Compute.Versions.`2026-10-16`)
+  @renamedFrom(Microsoft.Compute.Versions.`2026-10-16`, "resources")
   resourcesLegacy?: Resources;
 
   @doc("The target virtual machines.")
-  @added(Microsoft.Compute.Versions.`2026-10-06`)
+  @added(Microsoft.Compute.Versions.`2026-10-16`)
   resources: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @removed(Microsoft.Compute.Versions.`2026-10-06`)
+  @removed(Microsoft.Compute.Versions.`2026-10-16`)
   @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
   resourcesWithContext?: ResourcesWithContext;
 
