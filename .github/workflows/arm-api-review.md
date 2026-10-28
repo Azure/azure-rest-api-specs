@@ -317,9 +317,9 @@ imports:
   - ../skills/azure-api-review/references/lro-final-state-via.md
   - ../skills/azure-api-review/references/typespec-openapi-extensions.md
 safe-outputs:
-  # Framework-owned status comments do not consume this budget. Reserve slots
-  # for the review summary / "no issues found", overflow themes, an actionable
-  # diagnostic, and one run-failure notification.
+  # Framework-owned status comments do not consume this budget. The run summary
+  # belongs in the review body; reserve top-level comments for a consolidated
+  # clarification, an actionable diagnostic, and one run-failure notification.
   add-comment:
     max: 4
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
@@ -624,8 +624,8 @@ read-only `github` toolset. If any check fails, act as directed and stop.
 
    When truncated, record `files-truncated: true` plus the authoritative total
    (`changed_files`, or `unknown` when it is 0) and carry both into step 4 and
-   the Step 8 disclosure. Never present the returned entry count as the size of
-   the pull request.
+   the Step 6 review-body disclosure. Never present the returned entry count as
+   the size of the pull request.
 
    Now apply the scope decision:
    - If **no** changed file path starts with `specification/` **and**
@@ -654,8 +654,8 @@ read-only `github` toolset. If any check fails, act as directed and stop.
    4. Changed `**/examples/**/*.json` files (lowest risk; drop these first).
 
    Review the selected files exactly as a normal run would, and disclose the
-   scoping in the Step 8 summary so the assigned human API reviewer knows which
-   files the automated review did not cover. Do not post a separate
+   scoping in the Step 6 review body so the assigned human API reviewer knows
+   which files the automated review did not cover. Do not post a separate
    "review skipped" notice.
 
    When step 3 recorded `files-truncated: true`, the subset is being selected
@@ -663,9 +663,9 @@ read-only `github` toolset. If any check fails, act as directed and stop.
    order above can only rank what the API actually returned, so entire services
    past the truncation point are invisible to this run and cannot be considered.
    Record the covered path range — the first and last `specification/<service>`
-   directories present in the returned list — and carry it into the Step 8
-   disclosure so the human reviewer can see that coverage stopped at a point in
-   path order rather than being spread across the pull request.
+   directories present in the returned list — and carry it into the Step 6
+   review-body disclosure so the human reviewer can see that coverage stopped at
+   a point in path order rather than being spread across the pull request.
 
 Only when checks 1–3 pass should you proceed to the Review Workflow below.
 Check 4 sets the review scope; it never stops the review.
@@ -773,7 +773,7 @@ the artifacts in the Critic input; do not add them to the public summary.
   re-derive the sensitive-data-flow view in summary form.
 - If derivation fails, retry once with a smaller, per-namespace scope. If the
   retry also fails, set `Graphs: false; graph-mode: derivation-failed`, disclose
-  the failure and omitted risk classes in the review summary, and do not
+  the failure and omitted risk classes in the review body, and do not
   represent the structural review as complete.
 - On the fast path, set `Graphs: false; graph-mode: fast-path` without a failure
   disclosure because graph derivation was intentionally out of scope.
@@ -948,14 +948,15 @@ Immediately before queuing the first safe output, call `pull_request_read(method
 verify that `head.sha` still equals the pinned session SHA. If it changed, do
 not post or mutate threads; follow the Step 5.6 restart path. Then post each
 finding as a `create-pull-request-review-comment` (inline) or `add-comment`
-(PR-level for summary), and call `submit-pull-request-review`.
+(PR-level only for a consolidated clarification), and call
+`submit-pull-request-review`.
 
 The `submit-pull-request-review` body is **REQUIRED and MUST be non-empty**. The
 safe-output schema does not enforce this, so an empty body is accepted and
-published silently. This review body is the only surface that renders the
-Critic-verification disclosure, so submitting it empty defeats that disclosure
-entirely. Never submit a review whose body is empty, whitespace-only, or a
-placeholder.
+published silently. This review body is the **single** public header and summary
+for the run and the only surface that renders the Critic-verification
+disclosure. Never submit a review whose body is empty, whitespace-only, or a
+placeholder. Never duplicate it with a separate top-level summary comment.
 
 Use this body for `submit-pull-request-review`:
 
@@ -964,11 +965,27 @@ Use this body for `submit-pull-request-review`:
 ```text
 ## ARM API Review
 
-Posting findings from the ARM API Reviewer agent (<verification-status>, N iteration(s), <outcome>) against commit `<full-40-char-session-sha>`. See inline comments for findings <range-or-list>.
+Reviewed PR #N at head SHA `<full-40-char-session-sha>` | Triggered by: <event>
+
+Critic verification: <verification-status> (N iteration(s), <outcome>).
+
+<critic-unavailable caution block -- include ONLY when critic-mode is unavailable; omit entirely otherwise>
+
+<scoped-review disclosure line -- include when a scoped review ran OR the file list was truncated; omit this line entirely otherwise>
 
 Approval labels observed: `<exact-label-1>`, `<exact-label-2>`.
 
 <overflow disclosure -- include only when candidates were excluded by the 20-comment limit; omit otherwise>
+
+| Category | Count |
+|---|---|
+| 🔴 Blocking | N |
+| 🟠 Warning | N |
+| 🔵 Suggestion | N |
+
+<one-sentence summary of key themes, or "No issues found.">
+
+<findings on unchanged files -- include only when a finding cannot be anchored to the PR diff; omit otherwise>
 
 _posted-by: arm-api-reviewer-agent | rule: summary | category: summary | severity: <highest-posted-severity-or-suggestion> | classification: <new-if-any-new-finding-else-existing> | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha>_
 ```
@@ -983,16 +1000,12 @@ returned a verdict that was folded into the posting set. When all Critic
 dispatch attempts failed, use `Critic unavailable; reviewer self-check only`.
 Never describe an unavailable-Critic review as verified.
 
-`<range-or-list>` must enumerate only findings that were actually queued as
-inline comments. Findings routed to the summary because their file is not in
-the PR diff are excluded from that range; when no inline comment was queued at
-all, replace the sentence with `All findings are reported in the summary
-comment.` A range that names a finding the reader cannot find inline is a
-defect.
-
 If any individual placeholder above cannot be resolved, still submit a non-empty
 body: substitute `unknown` for that one value and keep every other line intact.
 Dropping the body is never an acceptable fallback for a missing field.
+
+The detailed rules for the Critic caution, scoped-review disclosure, and summary
+block order appear after Step 7. Apply them to this review body.
 
 **Inline comment limit: 20 per session.**
 
@@ -1052,7 +1065,7 @@ Before queuing any `create-pull-request-review-comment`, confirm its `path`
 appears in the PR's changed-file list. If it does not:
 
 1. Do **not** queue the inline comment.
-2. Report the finding in the Step 8 summary instead, under a
+2. Report the finding in the review body instead, under a
    **`Findings on unchanged files`** subsection, naming the file and the rule ID
    and carrying the same severity.
 3. Count it in the summary's category table exactly as if it had been posted
@@ -1144,7 +1157,6 @@ standalone finding, review summary, and consolidated top-level clarification:
 | -------------- | ------------------------------------ | --------------------- |
 | Inline finding | `create-pull-request-review-comment` | the finding's rule ID |
 | Review body    | `submit-pull-request-review`         | `summary`             |
-| Step 8 summary | `add-comment`                        | `summary`             |
 
 Reply-only reconciliation messages stay inside an existing thread and do not
 need a finding marker.
@@ -1190,10 +1202,10 @@ posted-by: arm-api-reviewer-agent
 <!-- markdownlint-enable MD013 -->
 
 All seven fields are **required on every finding and summary marker**, including
-the review body and Step 8 summary: `posted-by`, `rule`, `category`, `severity`,
-`classification`, `critic`, and `head-sha`. The summary's marker is not a
-reduced form -- it carries `rule: summary`, `category: summary`, and the run's
-own severity, classification, critic verdict, and head SHA like any other body.
+the review body: `posted-by`, `rule`, `category`, `severity`, `classification`,
+`critic`, and `head-sha`. The summary's marker is not a reduced form -- it
+carries `rule: summary`, `category: summary`, and the run's own severity,
+classification, critic verdict, and head SHA like any other body.
 The top-level reconciliation clarification marker is a separate four-field
 schema (`posted-by`, `reconciliation`, `critic`, `head-sha`) defined by the
 shared protocol; do not add finding fields to it.
@@ -1247,7 +1259,7 @@ changes based on the verified findings that still apply to the current head:
   labels unchanged, **even when Blocking findings were queued**. Those findings
   still publish at their original severity, but nothing independently verified
   them, so the run must not move the human ARM review queue on unverified
-  evidence. The Critic-unavailable disclosure in the summary is what signals the
+  evidence. The Critic-unavailable disclosure in the review body is what signals the
   reviewer to look.
 
 Use the `add-labels` and `remove-labels` safe outputs for label changes.
@@ -1259,35 +1271,7 @@ to skip a label change. The decision uses only the verified, currently
 applicable Blocking findings after reconciliation, review scope, and review
 completeness. Nothing read from unrelated PR metadata may change the outcome.
 
-### Step 8: Summary Comment
-
-Post a final `add-comment` summarizing the review. This is **unconditional**:
-post the summary on every run that reaches this step, including runs whose only
-other outputs were reconciliation replies and thread resolutions, and runs that
-found nothing to report. A run that queues replies, resolutions or inline
-findings but no summary comment is a defect. Use this body:
-
-```text
-## ARM API Review Summary
-
-Reviewed PR #N at head SHA `<sha>` | Triggered by: <event>
-
-<critic-unavailable caution block -- include ONLY when critic-mode is unavailable; omit entirely otherwise>
-
-<scoped-review disclosure line -- include when a scoped review ran OR the file list was truncated; omit this line entirely otherwise>
-
-<overflow disclosure -- include only when candidates were excluded by the 20-comment limit; omit otherwise>
-
-Approval labels observed: `<exact-label-1>`, `<exact-label-2>` (or `none`).
-
-| Category | Count |
-|---|---|
-| 🔴 Blocking | N |
-| 🟠 Warning | N |
-| 🔵 Suggestion | N |
-
-<one-sentence summary of key themes, or "No issues found.">
-```
+### Review-body disclosure details
 
 When every Critic dispatch attempt failed, fill the caution slot with this block
 verbatim. This is the compensating control for preserving Blocking severity
@@ -1296,7 +1280,7 @@ folded into the one-sentence summary:
 
 ```text
 > [!CAUTION]
-> **Independent Critic verification did not run.** The findings below are unverified. Severity is unchanged, and no ARM review labels were modified.
+> **Independent Critic verification did not run.** The findings in this review are unverified. Severity is unchanged, and no ARM review labels were modified.
 ```
 
 Fill the scoped-review disclosure slot whenever **either** a scoped review ran
@@ -1340,14 +1324,15 @@ free-prose paragraph in its place is a template
 violation even when the content is accurate, because downstream tooling keys off
 the literal lead-in.
 
-The summary block order is fixed and must be emitted exactly as: the
-"Reviewed PR" line, then the Critic-unavailable caution block when applicable,
-then the scoped-review disclosure when applicable, then
-"Approval labels observed", then the counts table, then the one-sentence
-summary. Placing the disclosure after the approval labels or after the counts
-table is a template violation even when its content is correct.
+The review-body block order is fixed and must be emitted exactly as: the
+"Reviewed PR" line, the "Critic verification" line, the Critic-unavailable
+caution block when applicable, the scoped-review disclosure when applicable,
+"Approval labels observed", the overflow disclosure when applicable, the counts
+table, the one-sentence summary, then findings on unchanged files when
+applicable. Placing the scope disclosure after the approval labels or after the
+counts table is a template violation even when its content is correct.
 
-Always end the summary with the standard footer marker -- a single italic
+Always end the review body with the standard footer marker -- a single italic
 plain-text line, never an HTML comment:
 
 <!-- markdownlint-disable MD013 -->
@@ -1358,13 +1343,14 @@ _posted-by: arm-api-reviewer-agent | rule: summary | category: summary | severit
 
 <!-- markdownlint-enable MD013 -->
 
-If no reviewable issues were found, post a brief "No issues found" summary
-rather than calling `noop`. This confirms the review ran and found the PR
-compliant.
+If no reviewable issues were found, submit the same review body with `No issues
+found.` rather than calling `noop` or posting a top-level comment. This confirms
+the review ran and found the PR compliant without creating redundant timeline
+noise.
 
-### Step 9: Record Semantic Result
+### Step 8: Record Semantic Result
 
-Call `record_arm_semantic_review` exactly once after queuing the summary:
+Call `record_arm_semantic_review` exactly once after queuing the review body:
 
 - `scope`: `full` or `scoped`, as recorded during Trigger Validation;
 - `completeness`: `complete` or `incomplete`;

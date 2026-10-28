@@ -91,8 +91,9 @@ One cross-cutting reference is scoped by consumer rather than by plane:
   to ARM reviewers in both interactive and autonomous modes. Direct interactive
   posting and deferred gh-aw `safe-outputs` have different post-post
   verification mechanics, but they share the same canonical finding,
-  cross-session deduplication, and contradiction-clarification contract. The
-  data-plane reviewer is advisory and does not use ARM reconciliation.
+  cross-session deduplication, contradiction-clarification, and single-review-body
+  summary contract. The data-plane reviewer is advisory and does not use ARM
+  reconciliation.
 
 ## ARM cross-session reconciliation
 
