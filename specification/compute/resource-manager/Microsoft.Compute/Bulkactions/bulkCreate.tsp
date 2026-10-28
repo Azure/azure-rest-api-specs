@@ -245,7 +245,14 @@ interface BulkCreate {
   @doc("Creates virtual machines in bulk.")
   create is ArmResourceCreateOrUpdateAsync<
     Resource = LocationBasedBulkCreate,
-    Parameters = BulkCreateId
+    Parameters = BulkCreateId,
+    Response =
+      | BulkCreateUpdatedResponse<LocationBasedBulkCreate>
+      | ArmResourceCreatedResponse<
+          LocationBasedBulkCreate,
+          ArmAsyncOperationHeader<FinalResult = LocationBasedBulkCreate> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   @removed(Versions.`2026-10-16`)

@@ -358,7 +358,14 @@ interface BulkCreateCustom {
   @doc("Creates virtual machines in bulk with custom settings.")
   create is ArmResourceCreateOrUpdateAsync<
     Resource = LocationBasedBulkCreateCustom,
-    Parameters = BulkCreateCustomId
+    Parameters = BulkCreateCustomId,
+    Response =
+      | BulkCreateUpdatedResponse<LocationBasedBulkCreateCustom>
+      | ArmResourceCreatedResponse<
+          LocationBasedBulkCreateCustom,
+          ArmAsyncOperationHeader<FinalResult = LocationBasedBulkCreateCustom> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   @removed(Versions.`2026-10-16`)
