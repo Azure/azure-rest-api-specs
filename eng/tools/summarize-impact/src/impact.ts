@@ -195,7 +195,7 @@ export function getRPFolderFromSwaggerFile(file: string): string | undefined {
   const provider = getResourceProviderFromFilePath(file);
   return provider === undefined
     ? undefined
-    : file.substring(0, file.indexOf(`/${provider}/`) + provider.length + 1);
+    : file.substring(0, file.lastIndexOf(`/${provider}/`) + provider.length + 1);
 }
 
 export function getResourceProviderFromFilePath(file: string): string | undefined {
