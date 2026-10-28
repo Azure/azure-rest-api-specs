@@ -11,6 +11,27 @@ using Azure.ResourceManager;
 using Azure.Core;
 using Microsoft.Network;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Generate the IDPS signature override list as a C# pageable resource operation."
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Microsoft.Network.FirewallPolicyIdpsSignaturesOverrides.list,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.FirewallPolicyIdpsSignaturesOverrides.list,
+  "GetIdpsSignatureOverrides",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.FirewallPolicyIdpsSignaturesOverrides.patch,
+  "Update",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.LoadBalancers.loadBalancerNetworkInterfacesList,
+  "GetNetworkInterfaces",
+  "csharp"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# pageable CloudServiceSwap list contract."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   Microsoft.Network.SwapResources.list,
@@ -117,6 +138,11 @@ using Microsoft.Network;
 );
 @@clientName(
   Microsoft.Network.ApplicationGatewayPrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
@@ -253,6 +279,13 @@ using Microsoft.Network;
   #{ minLength: 1, maxLength: 80, pattern: "^[a-zA-Z0-9_.-]+$" },
   "csharp"
 );
+
+@@scope(
+  Microsoft.Network.NetworkSecurityPerimeterOperationStatusesOperationGroup.get,
+  "!csharp"
+);
+@@scope(Microsoft.Network.NspAccessRules.reconcile, "!csharp");
+@@scope(Microsoft.Network.NspAssociations.reconcile, "!csharp");
 
 // Cloud Services is deprecated and no longer represented by the current C# Compute SDK.
 @@scope(
@@ -2294,8 +2327,12 @@ union ProvisioningStateUnion {
   "ExpressRouteLinkFailoverStopContent",
   "csharp"
 );
-@@clientName(ChildResource, "NetworkChildResource", "csharp");
-@@clientName(Microsoft.Network.ProxyResource, "NetworkProxyResource", "csharp");
+@@clientName(ChildResource, "NetworkChildResourceData", "csharp");
+@@clientName(
+  Microsoft.Network.ProxyResource,
+  "NetworkProxyResourceData",
+  "csharp"
+);
 @@clientName(
   Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.requestTimeout,
   "RequestTimeoutInSeconds",
@@ -3329,6 +3366,11 @@ union ProvisioningStateUnion {
 @@clientName(
   Microsoft.Network.IpsecIntegrity.GCMAES128,
   Azure.ClientGenerator.Core.exact("GcmAes128"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.IpsecIntegrity.GCMAES192,
+  Azure.ClientGenerator.Core.exact("GcmAes192"),
   "csharp"
 );
 @@clientName(
@@ -5804,6 +5846,13 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 );
 
 @@clientName(Microsoft.Network.SubResource, "NetworkSubResource", "csharp");
+@@alternateType(
+  Microsoft.Network.TrackedResourceWithSettableIdOptionalLocation,
+  Microsoft.Network.Resource,
+  "csharp"
+);
+
+@@clientName(Microsoft.Network.Resource.type, "ResourceType", "csharp");
 
 @@clientName(Microsoft.Network.SubResourceModel.type, "ResourceType", "csharp");
 
@@ -5877,6 +5926,16 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 );
 
 // These subresources declare their own metadata rather than inheriting Resource.type.
+@@clientName(
+  Microsoft.Network.ApplicationGatewayPrivateLinkResource.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayPrivateLinkResource.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
 @@clientName(
   Microsoft.Network.ApplicationGatewayBackendAddressPool.type,
   "ResourceType",

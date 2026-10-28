@@ -147,6 +147,7 @@ interface NetworkManagers {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listActiveConnectivityConfigurations POST contract uses $top in the query; preserve wire compatibility."
       @maxValue(20)
       @minValue(1)
       @query("$top")
@@ -169,6 +170,7 @@ interface NetworkManagers {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listActiveSecurityAdminRules POST contract uses $top in the query; preserve wire compatibility."
       @maxValue(20)
       @minValue(1)
       @query("$top")
@@ -210,6 +212,7 @@ interface NetworkManagers {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing networkManagerDeploymentStatusList POST contract uses $top in the query; preserve wire compatibility."
       @maxValue(20)
       @minValue(1)
       @query("$top")

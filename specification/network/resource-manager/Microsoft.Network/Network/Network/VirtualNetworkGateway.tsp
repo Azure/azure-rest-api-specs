@@ -124,6 +124,7 @@ interface VirtualNetworkGateways {
       /**
        * Virtual network gateway vip address supplied to the begin reset of the active-active feature enabled gateway.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing reset POST contract uses gatewayVip in the query; preserve wire compatibility."
       @query("gatewayVip")
       gatewayVip?: string;
     },
@@ -205,6 +206,7 @@ interface VirtualNetworkGateways {
       /**
        * The IP address of the peer to retrieve the status of.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getBgpPeerStatus POST contract uses peer in the query; preserve wire compatibility."
       @query("peer")
       peer?: string;
     },
@@ -260,6 +262,7 @@ interface VirtualNetworkGateways {
       /**
        * The IP address of the peer.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getAdvertisedRoutes POST contract uses peer in the query; preserve wire compatibility."
       @query("peer")
       peer: string;
     },
@@ -290,6 +293,7 @@ interface VirtualNetworkGateways {
       /**
        * Attempt to recalculate the Resiliency Information for the gateway
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getResiliencyInformation POST contract uses attemptRefresh in the query; preserve wire compatibility."
       @query("attemptRefresh")
       attemptRefresh?: boolean;
     },
@@ -308,6 +312,7 @@ interface VirtualNetworkGateways {
       /**
        * Attempt to recalculate the Route Sets Information for the gateway
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getRoutesInformation POST contract uses attemptRefresh in the query; preserve wire compatibility."
       @query("attemptRefresh")
       attemptRefresh?: boolean;
     },
@@ -389,12 +394,14 @@ interface VirtualNetworkGateways {
       /**
        * The type of failover test
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getFailoverAllTestDetails POST contract uses type in the query; preserve wire compatibility."
       @query("type")
       type: string;
 
       /**
        * Fetch only the latest tests for each peering location
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getFailoverAllTestDetails POST contract uses fetchLatest in the query; preserve wire compatibility."
       @query("fetchLatest")
       fetchLatest: boolean;
     },
@@ -418,12 +425,14 @@ interface VirtualNetworkGateways {
       /**
        * Peering location of the test
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getFailoverSingleTestDetails POST contract uses peeringLocation in the query; preserve wire compatibility."
       @query("peeringLocation")
       peeringLocation: string;
 
       /**
        * The unique Guid value which identifies the test
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getFailoverSingleTestDetails POST contract uses failoverTestId in the query; preserve wire compatibility."
       @query("failoverTestId")
       failoverTestId: string;
     },
@@ -447,6 +456,7 @@ interface VirtualNetworkGateways {
       /**
        * Peering location of the test
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startExpressRouteSiteFailoverSimulation POST contract uses peeringLocation in the query; preserve wire compatibility."
       @query("peeringLocation")
       peeringLocation: string;
     },
