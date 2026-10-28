@@ -52,10 +52,20 @@ interface ServerFarmSiloResources {
   >;
 
   /**
-   * Creates or updates a silo for an App Service plan.
+   * Creates or updates a silo for an App Service plan. Returns 202 with polling headers when background work is queued, or 200 when no update is needed.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The implemented silo PUT returns 202 with a resource body and polling headers when work is queued, or 200 when no update is needed. It does not return 201; this exception requires ARM approval."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "CsmHelper.CreateAsyncResponse includes the silo resource body in the implemented 202 response."
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdateServerFarmSilo is ArmResourceCreateOrReplaceAsync<
     ServerFarmSilo,
+    Response =
+      | ArmResourceUpdatedResponse<ServerFarmSilo>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServerFarmSilo> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          body: ServerFarmSilo;
+        }),
     Error = DefaultErrorResponse
   >;
 

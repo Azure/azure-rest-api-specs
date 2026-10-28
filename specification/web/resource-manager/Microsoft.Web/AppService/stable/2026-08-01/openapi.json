@@ -6530,7 +6530,7 @@
         "tags": [
           "AppServicePlans"
         ],
-        "description": "Creates or updates a silo for an App Service plan.",
+        "description": "Creates or updates a silo for an App Service plan. Returns 202 with polling headers when background work is queued, or 200 when no update is needed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -6573,15 +6573,20 @@
               "$ref": "#/definitions/ServerFarmSilo"
             }
           },
-          "201": {
-            "description": "Resource 'ServerFarmSilo' create operation succeeded",
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/ServerFarmSilo"
             },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -19575,7 +19580,7 @@
         "tags": [
           "WebApps"
         ],
-        "description": "Creates or updates a silo for a Web App.",
+        "description": "Creates or updates a silo for a Web App. Returns 202 with polling headers when background work is queued, or 200 when no update is needed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -19618,15 +19623,20 @@
               "$ref": "#/definitions/SiteSilo"
             }
           },
-          "201": {
-            "description": "Resource 'SiteSilo' create operation succeeded",
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/SiteSilo"
             },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",

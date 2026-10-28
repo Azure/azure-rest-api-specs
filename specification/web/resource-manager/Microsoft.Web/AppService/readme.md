@@ -100,6 +100,18 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy/log"]
     reason: MSDeploy is the intentional name matching the existing service API.
+  - suppress: PutResponseCodes
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}"].put
+    reason: The implemented silo PUT returns 202 with the silo resource body, Location, Azure-AsyncOperation, and Retry-After when create or update work is queued, or 200 when no update is needed. BuildSiteSiloResponse and BuildServerFarmSiloResponse use CsmHelper.CreateAsyncResponse, which returns 202 rather than 201. This exception is limited to these two PUT operations and requires explicit ARM async-contract approval; it does not assert that 202 is the standard ARM PUT contract.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}"].put
+    reason: The implemented silo PUT has no 201 response. Its 202 response carries the silo resource with provisioningState InProgress and polling headers, while the synchronous no-op 200 response carries provisioningState Succeeded. The rule expects provisioningState on a 201 response. This exception is limited to these two PUT operations and requires explicit ARM async-contract approval.
   - suppress: LroErrorContent
     from: openapi.json
     reason: Every Microsoft.Web operation in this specification returns the App Service error schema (DefaultErrorResponse) rather than the common-types ARM ErrorResponse, including the long-running silo PUT and DELETE operations introduced by API version 2026-08-01. A single consistent error contract across the whole App Service surface is required for compatibility with existing clients that parse the service native error format, and changing the already published legacy operations would be a breaking change. This suppression cannot be narrowed with a where clause because LroErrorContent reports on the schema.$ref node inside each error response rather than on the path or the operation, and autorest suppression selectors must match the reported json path exactly, so a path scoped or operation scoped where clause never matches. The only long-running operations added in 2026-08-01 are the PUT and DELETE on sites/{name}/silos/{siloName} and on serverfarms/{name}/silos/{siloName}.
