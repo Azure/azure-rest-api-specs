@@ -267,6 +267,15 @@ input-file:
   - stable/2026-06-01/deployments.json
 ```
 
+### Tag: package-2026-10-05-preview
+
+These settings apply only when `--tag=package-2026-10-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-10-05-preview'
+input-file:
+  - preview/2026-10-05-preview/deployments.json
+```
+
 ## Suppression
 
 ``` yaml
