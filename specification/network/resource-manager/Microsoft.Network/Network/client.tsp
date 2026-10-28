@@ -13,6 +13,22 @@ using Microsoft.Network;
 using Microsoft.Compute;
 using Common;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Generate the IDPS signature override list as a C# pageable resource operation."
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Microsoft.Network.FirewallPolicyIdpsSignaturesOverrides.list,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.FirewallPolicyIdpsSignaturesOverrides.list,
+  "GetIdpsSignatureOverrides",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.FirewallPolicyIdpsSignaturesOverrides.patch,
+  "Update",
+  "csharp"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# pageable CloudServiceSwap list contract."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   Microsoft.Network.SwapResources.list,
