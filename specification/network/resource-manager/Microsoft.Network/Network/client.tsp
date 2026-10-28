@@ -123,6 +123,11 @@ using Common;
   "csharp"
 );
 @@clientName(
+  Common.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+@@clientName(
   Microsoft.Network.SwapResourceProperties.slotType,
   "CloudServiceSwapSlotType",
   "csharp"
@@ -2259,8 +2264,12 @@ union ProvisioningStateUnion {
   "ExpressRouteLinkFailoverStopContent",
   "csharp"
 );
-@@clientName(ChildResource, "NetworkChildResource", "csharp");
-@@clientName(Microsoft.Network.ProxyResource, "NetworkProxyResource", "csharp");
+@@clientName(ChildResource, "NetworkChildResourceData", "csharp");
+@@clientName(
+  Microsoft.Network.ProxyResource,
+  "NetworkProxyResourceData",
+  "csharp"
+);
 @@clientName(WritableResource, "NetworkWritableResourceData", "csharp");
 @@clientName(
   Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.requestTimeout,
@@ -3291,6 +3300,11 @@ union ProvisioningStateUnion {
 @@clientName(
   Microsoft.Network.IpsecIntegrity.GCMAES128,
   Azure.ClientGenerator.Core.exact("GcmAes128"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.IpsecIntegrity.GCMAES192,
+  Azure.ClientGenerator.Core.exact("GcmAes192"),
   "csharp"
 );
 @@clientName(
@@ -5716,6 +5730,12 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 );
 
 @@clientName(Common.Resource, "NetworkTrackedResourceData", "csharp");
+
+@@alternateType(
+  Microsoft.Network.TrackedResourceWithSettableIdOptionalLocation,
+  Common.Resource,
+  "csharp"
+);
 
 @@clientName(Common.Resource.type, "ResourceType", "csharp");
 
