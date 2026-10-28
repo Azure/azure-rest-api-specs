@@ -31,7 +31,7 @@ title: ComputeBulkActionsResourceProviderClient
 ```yaml
 description: The Compute Bulk Actions Resource Provider Client
 openapi-type: arm
-tag: package-2026-10-06
+tag: package-2026-10-16
 
 suppressions:
   - code: DefinitionsPropertiesNamesCamelCase
@@ -58,9 +58,9 @@ suppressions:
     where: $.definitions.ExecutionParameters.properties.additionalCreateParameters
 ```
 
-### Tag: package-2026-10-06
+### Tag: package-2026-10-16
 
-These settings apply only when `--tag=package-2026-10-06` is specified on the command line.
+These settings apply only when `--tag=package-2026-10-16` is specified on the command line.
 
 This GA version excludes bulk reimage, scheduled actions, occurrences, and their extension resources.
 
@@ -73,9 +73,9 @@ virtual machine names and names generated from a prefix.
 The Linux examples explicitly enable the VM agent, platform-managed guest patching, 
 and periodic patch assessment.
 
-```yaml $(tag) == 'package-2026-10-06'
+```yaml $(tag) == 'package-2026-10-16'
 input-file:
-  - stable/2026-10-06/Bulkactions.json
+  - stable/2026-10-16/Bulkactions.json
 suppressions:
   - code: PathForNestedResource
     reason: >
@@ -106,7 +106,7 @@ input-file:
 
 These settings apply to both October 2026 package tags.
 
-```yaml $(tag) == 'package-2026-10-06' || $(tag) == 'package-2026-10-06-preview'
+```yaml $(tag) == 'package-2026-10-16' || $(tag) == 'package-2026-10-06-preview'
 suppressions:
   - code: PostResponseCodes
     reason: >
