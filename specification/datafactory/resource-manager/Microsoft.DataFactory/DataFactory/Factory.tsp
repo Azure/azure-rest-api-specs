@@ -237,6 +237,7 @@ interface Factories {
       /**
        * If true, cancel all the Child pipelines that are triggered by the current pipeline.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing cancel POST contract uses isRecursive in the query; preserve wire compatibility."
       @query("isRecursive")
       isRecursive?: boolean;
     },

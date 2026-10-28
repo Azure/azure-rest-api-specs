@@ -15,6 +15,7 @@ export const $linter = defineLinter({
       extends: ["@azure-tools/typespec-azure-rulesets-original/resource-manager"],
       enable: {
         "@azure-tools/typespec-azure-resource-manager/use-model-request-body": true,
+        "@azure-tools/typespec-azure-resource-manager/no-query-in-post": true,
       },
     },
     "client-sdk": {
