@@ -4,7 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "../agents/models.tsp";
 import "./agents.tsp";
 import "./openai-preview-models.tsp";
-import "./live-preview-models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
