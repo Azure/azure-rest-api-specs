@@ -4,7 +4,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./Server.tsp";
 import "./Database.tsp";
-import "./RestoreFromDroppedManagedInstanceFeatureRegistration.tsp";
+import "./ReaderEndpointFeatureRegistration.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -18,7 +18,7 @@ namespace Microsoft.Sql;
 @added(Versions.v2026_11_01_preview)
 @parentResource(Server)
 @Azure.ResourceManager.Legacy.feature(
-  Microsoft.SqlFeatureRegistration.RestoreFromDroppedManagedInstanceFeatures.ReaderEndpoints
+  Microsoft.SqlFeatureRegistration.ReaderEndpointFeatures.ReaderEndpoints
 )
 model ReaderEndpoint is ProxyResource<ReaderEndpointProperties> {
   ...ResourceNameParameter<
@@ -157,7 +157,7 @@ model ReaderEndpointPathParameters<Resource extends {}> {
 @added(Versions.v2026_11_01_preview)
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(
-  Microsoft.SqlFeatureRegistration.RestoreFromDroppedManagedInstanceFeatures.ReaderEndpoints
+  Microsoft.SqlFeatureRegistration.ReaderEndpointFeatures.ReaderEndpoints
 )
 interface ReaderEndpoints {
   /** Gets a reader endpoint. */
@@ -250,7 +250,7 @@ interface ReaderEndpoints {
 @added(Versions.v2026_11_01_preview)
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(
-  Microsoft.SqlFeatureRegistration.RestoreFromDroppedManagedInstanceFeatures.ReaderEndpointsList
+  Microsoft.SqlFeatureRegistration.ReaderEndpointFeatures.ReaderEndpointsList
 )
 interface ReaderEndpointsList {
   /** Lists the reader endpoints for a primary server and database. */
