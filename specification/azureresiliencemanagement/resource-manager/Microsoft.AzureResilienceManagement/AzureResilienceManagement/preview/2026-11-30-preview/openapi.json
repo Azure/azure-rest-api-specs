@@ -5828,6 +5828,11 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Azure.ResourceManager.ArmResponse<Azure.ResourceManager.CommonTypes.ErrorResponse>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -6069,16 +6074,15 @@
         },
         "errors": {
           "type": "array",
-          "description": "Conformance error messages.",
+          "description": "Details of errors found while checking target resource conformance.",
           "items": {
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail"
           }
         }
       },
       "required": [
         "state",
-        "checkedAt",
-        "errors"
+        "checkedAt"
       ]
     },
     "ConformanceState": {
@@ -6095,36 +6099,6 @@
             "name": "NotChecked",
             "value": "NotChecked",
             "description": "Target conformance has not been checked."
-          }
-        ]
-      }
-    },
-    "CopyOptions": {
-      "type": "string",
-      "description": "The behavior when a copied file already exists.",
-      "enum": [
-        "Overwrite",
-        "SkipIfExists",
-        "Fail"
-      ],
-      "x-ms-enum": {
-        "name": "CopyOptions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Overwrite",
-            "value": "Overwrite",
-            "description": "Overwrite the existing file."
-          },
-          {
-            "name": "SkipIfExists",
-            "value": "SkipIfExists",
-            "description": "Skip the file when it exists."
-          },
-          {
-            "name": "Fail",
-            "value": "Fail",
-            "description": "Fail recovery when the file exists."
           }
         ]
       }
@@ -6428,30 +6402,9 @@
           "description": "The current backup protection state.",
           "readOnly": true
         },
-        "canBeIncluded": {
-          "type": "string",
-          "description": "Indicates whether the resource can be included for the configured targets.",
-          "default": "CannotBeIncluded",
-          "enum": [
-            "CanBeIncluded",
-            "CannotBeIncluded"
-          ],
-          "x-ms-enum": {
-            "name": "RecoveryResourceInclusionEligibility",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "CanBeIncluded",
-                "value": "CanBeIncluded",
-                "description": "The recovery resource can be included."
-              },
-              {
-                "name": "CannotBeIncluded",
-                "value": "CannotBeIncluded",
-                "description": "The recovery resource cannot be included."
-              }
-            ]
-          },
+        "inclusionEligibility": {
+          "$ref": "#/definitions/RecoveryResourceInclusionEligibility",
+          "description": "The resource's eligibility for inclusion for the configured targets.",
           "readOnly": true
         },
         "supportedTargetLocations": {
@@ -6499,7 +6452,7 @@
           "description": "The default database recovery state."
         },
         "overwriteOption": {
-          "$ref": "#/definitions/OverwriteOptions",
+          "$ref": "#/definitions/ExistingTargetBehavior",
           "description": "The behavior when a database target already exists."
         },
         "targetDirectoryForFileRestore": {
@@ -8122,6 +8075,36 @@
         ]
       }
     },
+    "ExistingTargetBehavior": {
+      "type": "string",
+      "description": "The behavior when a recovery target already exists.",
+      "enum": [
+        "Overwrite",
+        "SkipIfExists",
+        "Fail"
+      ],
+      "x-ms-enum": {
+        "name": "ExistingTargetBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Overwrite",
+            "value": "Overwrite",
+            "description": "Overwrite the existing target."
+          },
+          {
+            "name": "SkipIfExists",
+            "value": "SkipIfExists",
+            "description": "Skip recovery when the target exists."
+          },
+          {
+            "name": "Fail",
+            "value": "Fail",
+            "description": "Fail recovery when the target exists."
+          }
+        ]
+      }
+    },
     "ExtensionObjectState": {
       "type": "string",
       "description": "Enum for AttentionReason - Extension Object State.",
@@ -8425,7 +8408,7 @@
           "description": "The default scope of file restore."
         },
         "copyOptions": {
-          "$ref": "#/definitions/CopyOptions",
+          "$ref": "#/definitions/ExistingTargetBehavior",
           "description": "The behavior when a copied file already exists."
         }
       },
@@ -9644,7 +9627,7 @@
           }
         },
         "linkedSourceRecoveryPlanTenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Microsoft Entra tenant identifier of the linked source plan. Cannot be changed after creation.",
           "x-ms-mutability": [
             "read",
@@ -9720,7 +9703,7 @@
           "type": "array",
           "description": "The Microsoft Entra tenant identifiers mapped to this plan.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.uuid"
           }
         }
       },
@@ -9736,7 +9719,7 @@
           "type": "array",
           "description": "The Microsoft Entra tenant identifiers mapped to this plan.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.uuid"
           }
         }
       }
@@ -9933,36 +9916,6 @@
         }
       ],
       "x-ms-discriminator-value": "OracleInAzureVm"
-    },
-    "OverwriteOptions": {
-      "type": "string",
-      "description": "The behavior when a database target already exists.",
-      "enum": [
-        "Overwrite",
-        "SkipIfExists",
-        "Fail"
-      ],
-      "x-ms-enum": {
-        "name": "OverwriteOptions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Overwrite",
-            "value": "Overwrite",
-            "description": "Overwrite the existing target."
-          },
-          {
-            "name": "SkipIfExists",
-            "value": "SkipIfExists",
-            "description": "Skip recovery when the target exists."
-          },
-          {
-            "name": "Fail",
-            "value": "Fail",
-            "description": "Fail recovery when the target exists."
-          }
-        ]
-      }
     },
     "ProvisioningState": {
       "type": "string",
@@ -10339,7 +10292,7 @@
         },
         "targetScope": {
           "$ref": "#/definitions/TargetScope",
-          "description": "The subscription and region targeted by this profile."
+          "description": "The subscription and location targeted by this profile."
         },
         "workloadConfig": {
           "$ref": "#/definitions/WorkloadConfig",
@@ -11577,7 +11530,7 @@
           "type": "array",
           "description": "The subscription identifiers matched by this rule.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.uuid"
           }
         },
         "resourceGroupIds": {
@@ -13708,17 +13661,17 @@
       "type": "object",
       "description": "The target subscriptions and locations for cyber recovery.",
       "properties": {
-        "targetSubscriptionList": {
+        "targetSubscriptionIds": {
           "type": "array",
           "description": "The subscription identifiers available as recovery targets.",
           "minItems": 1,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.uuid"
           }
         },
-        "targetLocationList": {
+        "targetLocations": {
           "type": "array",
-          "description": "The Azure regions available as recovery targets.",
+          "description": "The Azure locations available as recovery targets.",
           "minItems": 1,
           "items": {
             "type": "string"
@@ -13726,25 +13679,25 @@
         }
       },
       "required": [
-        "targetSubscriptionList",
-        "targetLocationList"
+        "targetSubscriptionIds",
+        "targetLocations"
       ]
     },
     "TargetEnvironmentUpdate": {
       "type": "object",
       "description": "The target subscriptions and locations for cyber recovery.",
       "properties": {
-        "targetSubscriptionList": {
+        "targetSubscriptionIds": {
           "type": "array",
           "description": "The subscription identifiers available as recovery targets.",
           "minItems": 1,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.uuid"
           }
         },
-        "targetLocationList": {
+        "targetLocations": {
           "type": "array",
-          "description": "The Azure regions available as recovery targets.",
+          "description": "The Azure locations available as recovery targets.",
           "minItems": 1,
           "items": {
             "type": "string"
@@ -13899,20 +13852,20 @@
     },
     "TargetScope": {
       "type": "object",
-      "description": "The subscription and region targeted by a recovery configuration profile.",
+      "description": "The subscription and location targeted by a recovery configuration profile.",
       "properties": {
         "subscriptionId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The target Azure subscription identifier."
         },
-        "region": {
+        "location": {
           "type": "string",
-          "description": "The target Azure region."
+          "description": "The target Azure location."
         }
       },
       "required": [
         "subscriptionId",
-        "region"
+        "location"
       ]
     },
     "TestFailoverCleanupRequest": {

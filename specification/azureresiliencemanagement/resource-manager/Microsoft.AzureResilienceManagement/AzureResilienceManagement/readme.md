@@ -31,6 +31,15 @@ openapi-subtype: rpaas
 tag: package-2026-10-01
 ```
 
+### Tag: package-2026-11-30-preview
+
+These settings apply only when `--tag=package-2026-11-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-11-30-preview'
+input-file:
+  - preview/2026-11-30-preview/openapi.json
+```
+
 ### Tag: package-2026-10-31-preview
 
 These settings apply only when `--tag=package-2026-10-31-preview` is specified on the command line.
@@ -124,4 +133,21 @@ suppressions:
     from: openapi.json
     where: $.definitions.ServiceGroupTenantParameters.properties.skipToken
     reason: skipToken is the standard Azure OData paging continuation token ($skipToken), not a secret. The linter flags it due to the Token substring in the name; the property carries opaque pagination state and is not sensitive.
+```
+
+```yaml $(tag) == 'package-2026-11-30-preview'
+suppressions:
+  - code: GuidUsage
+    from: preview/2026-11-30-preview/openapi.json
+    where: $.definitions["Azure.Core.uuid"].format
+    reason: >-
+      Used only for TargetScope.subscriptionId, TargetEnvironment.targetSubscriptionIds,
+      RecoveryResourceInclusionRule.subscriptionIds,
+      LinkedRecoveryPlanDetails.linkedSourceRecoveryPlanTenantId, and
+      MappedRecoveryPlanDetails.mappedSourceTenantIds. These are Azure subscription
+      identifiers and Microsoft Entra tenant identifiers, which are GUIDs.
+      Requested by @umpatel in https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716799,
+      https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716959,
+      https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716968,
+      and https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716988.
 ```

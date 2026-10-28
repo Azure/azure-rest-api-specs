@@ -182,12 +182,12 @@ model TargetEnvironment {
   @added(Versions.v2026_11_30_preview)
   @minItems(1)
   @doc("The subscription identifiers available as recovery targets.")
-  targetSubscriptionList: string[];
+  targetSubscriptionIds: uuid[];
 
   @added(Versions.v2026_11_30_preview)
   @minItems(1)
-  @doc("The Azure regions available as recovery targets.")
-  targetLocationList: string[];
+  @doc("The Azure locations available as recovery targets.")
+  targetLocations: string[];
 }
 
 @added(Versions.v2026_11_30_preview)
@@ -225,7 +225,7 @@ model LinkedRecoveryPlanDetails {
   @added(Versions.v2026_11_30_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The Microsoft Entra tenant identifier of the linked source plan. Cannot be changed after creation.")
-  linkedSourceRecoveryPlanTenantId?: string;
+  linkedSourceRecoveryPlanTenantId?: uuid;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The synchronization mode used for the linked plan. When omitted during creation, the service uses Manual.")
@@ -242,7 +242,7 @@ model MappedRecoveryPlanDetails {
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Microsoft Entra tenant identifiers mapped to this plan.")
-  mappedSourceTenantIds?: string[];
+  mappedSourceTenantIds?: uuid[];
 }
 
 @added(Versions.v2026_11_30_preview)
@@ -271,7 +271,7 @@ model RecoveryResourceInclusionRule {
 
   @added(Versions.v2026_11_30_preview)
   @doc("The subscription identifiers matched by this rule.")
-  subscriptionIds?: string[];
+  subscriptionIds?: uuid[];
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifiers of resource groups matched by this rule.")

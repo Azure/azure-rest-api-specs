@@ -204,9 +204,9 @@ model CyberResiliencyResourceProperties extends RecoveryResourceResiliencyProper
   protectionState?: string;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("Indicates whether the resource can be included for the configured targets.")
+  @doc("The resource's eligibility for inclusion for the configured targets.")
   @visibility(Lifecycle.Read)
-  canBeIncluded?: RecoveryResourceInclusionEligibility = RecoveryResourceInclusionEligibility.CannotBeIncluded;
+  inclusionEligibility?: RecoveryResourceInclusionEligibility;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The target locations that support recovery of this resource.")

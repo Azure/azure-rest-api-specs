@@ -167,8 +167,8 @@ union RecoveryState {
 }
 
 @added(Versions.v2026_11_30_preview)
-@doc("The behavior when a database target already exists.")
-union OverwriteOptions {
+@doc("The behavior when a recovery target already exists.")
+union ExistingTargetBehavior {
   @added(Versions.v2026_11_30_preview)
   @doc("Overwrite the existing target.")
   Overwrite: "Overwrite",
@@ -179,24 +179,6 @@ union OverwriteOptions {
 
   @added(Versions.v2026_11_30_preview)
   @doc("Fail recovery when the target exists.")
-  Fail: "Fail",
-
-  string,
-}
-
-@added(Versions.v2026_11_30_preview)
-@doc("The behavior when a copied file already exists.")
-union CopyOptions {
-  @added(Versions.v2026_11_30_preview)
-  @doc("Overwrite the existing file.")
-  Overwrite: "Overwrite",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Skip the file when it exists.")
-  SkipIfExists: "SkipIfExists",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Fail recovery when the file exists.")
   Fail: "Fail",
 
   string,
@@ -247,15 +229,15 @@ union ConformanceState {
 }
 
 @added(Versions.v2026_11_30_preview)
-@doc("The subscription and region targeted by a recovery configuration profile.")
+@doc("The subscription and location targeted by a recovery configuration profile.")
 model TargetScope {
   @added(Versions.v2026_11_30_preview)
   @doc("The target Azure subscription identifier.")
-  subscriptionId: string;
+  subscriptionId: uuid;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The target Azure region.")
-  region: string;
+  @doc("The target Azure location.")
+  location: string;
 }
 
 @added(Versions.v2026_11_30_preview)
@@ -431,7 +413,7 @@ model DatabaseRecoveryConfig extends WorkloadConfig {
 
   @added(Versions.v2026_11_30_preview)
   @doc("The behavior when a database target already exists.")
-  overwriteOption?: OverwriteOptions;
+  overwriteOption?: ExistingTargetBehavior;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The target directory for file restore.")
@@ -503,7 +485,7 @@ model FileShareRecoveryConfig extends WorkloadConfig {
 
   @added(Versions.v2026_11_30_preview)
   @doc("The behavior when a copied file already exists.")
-  copyOptions?: CopyOptions;
+  copyOptions?: ExistingTargetBehavior;
 }
 
 @added(Versions.v2026_11_30_preview)
@@ -561,8 +543,8 @@ model ConformanceResult {
   checkedAt: utcDateTime;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("Conformance error messages.")
-  errors: string[];
+  @doc("Details of errors found while checking target resource conformance.")
+  errors?: CommonTypes.ErrorDetail[];
 }
 
 @added(Versions.v2026_11_30_preview)
@@ -574,7 +556,7 @@ model RecoveryConfigProfileProperties {
   workloadType: WorkloadType;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The subscription and region targeted by this profile.")
+  @doc("The subscription and location targeted by this profile.")
   targetScope: TargetScope;
 
   @added(Versions.v2026_11_30_preview)
