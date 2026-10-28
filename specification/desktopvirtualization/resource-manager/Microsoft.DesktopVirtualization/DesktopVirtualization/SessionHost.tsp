@@ -98,8 +98,11 @@ interface SessionHosts {
       @query("vmPath")
       @maxLength(1092)
       @minLength(3)
-      @pattern("^[A-Z][a-z][0-9][@./-_ ]*$")
-      vmPath?: string;
+      vmPath?: Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.Compute/virtualMachines";
+        }
+      ]>;
     },
     Response = SessionHostList
   >;

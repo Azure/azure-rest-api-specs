@@ -4618,7 +4618,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  rampUpStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
+  rampUpStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
    * Action to be taken after a user disconnect during the ramp up period.
@@ -4651,7 +4651,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the peak phase.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  peakStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
+  peakStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
    * Action to be taken after a user disconnect during the peak period.
@@ -4684,7 +4684,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  rampDownStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
+  rampDownStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
    * Action to be taken after a user disconnect during the ramp down period.
@@ -4717,7 +4717,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  offPeakStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
+  offPeakStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
    * Action to be taken after a user disconnect during the off-peak period.
