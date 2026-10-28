@@ -4165,10 +4165,8 @@ model RaiPolicyProperties {
   customExternalSafetyProviders?: RaiPolicyCustomExternalSafetyProviderReference[];
 
   /**
-   * Static outbound network policy for hosted-agent sandboxes, independent of the
-   * ContentFilters or ACS representation on the same RAI policy resource. Includes
-   * Allow/Deny/Transform/Rewrite rules; it is not evaluated by the ACS SDK or by
-   * per-request AACS content moderation.
+   * Egress (outbound network) policy controlling which external endpoints sandboxed
+   * agents can reach. Includes rules with Allow/Deny/Transform/Rewrite actions.
    */
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_07_01)

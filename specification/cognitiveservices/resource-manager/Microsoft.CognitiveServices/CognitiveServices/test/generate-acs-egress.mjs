@@ -25,6 +25,7 @@ const result = spawnSync(
     compiler,
     "compile",
     project,
+    "--warn-as-error",
     "--option",
     `${emitter}.version=${version}`,
     "--option",
@@ -59,8 +60,6 @@ const destination = path.join(
 );
 const original = JSON.parse(readFileSync(destination, "utf8"));
 const candidate = structuredClone(original);
-candidate.definitions.RaiPolicyProperties.properties.egressPolicy.description =
-  generated.definitions.RaiPolicyProperties.properties.egressPolicy.description;
 const filenames = [
   "PutRaiPolicyAcsWithEgress.json",
   "GetRaiPolicyAcsWithEgress.json",
@@ -139,10 +138,7 @@ writeFileSync(
       completeGenerationMatchesScopedCandidate: differences.length === 0,
       excludedEmissionDifferences: differences.length,
       nonRelocationDifferences: semanticDifferences.length,
-      copiedPaths: [
-        "definitions.RaiPolicyProperties.properties.egressPolicy.description",
-        ...filenames,
-      ],
+      copiedPaths: filenames,
     },
     null,
     2,
@@ -161,5 +157,5 @@ for (const filename of filenames) {
   );
 }
 console.log(
-  "Generated preview-only egress description and three example references; other Swagger semantics preserved.",
+  "Generated three preview-only egress example references; all Swagger schemas preserved.",
 );

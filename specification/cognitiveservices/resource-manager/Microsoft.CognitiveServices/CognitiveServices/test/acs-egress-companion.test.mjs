@@ -114,9 +114,9 @@ test("generated contract keeps egress optional and literals write-only", () => {
   for (const name of ["format", "acs", "acsRegos", "contentFilters"]) {
     assert(properties.properties[name], name);
   }
-  assert.match(
-    properties.properties.egressPolicy.description,
-    /independent of the\s+ContentFilters or ACS representation/,
+  assert.equal(
+    Object.hasOwn(spec.definitions.RaiAcsManifest.properties, "egressPolicy"),
+    false,
   );
   const literal = spec.definitions.RaiEgressHeaderTransform.properties.value;
   assert.equal(literal["x-ms-secret"], true);
@@ -124,6 +124,51 @@ test("generated contract keeps egress optional and literals write-only", () => {
     "create",
     "update",
   ]);
+});
+
+test("egress composes with optional annotations and all eight intervention points", () => {
+  const annotated = load(
+    `examples/${version}/PutRaiPolicyAcsWithAnnotations.json`,
+  ).parameters.raiPolicy.properties;
+  const combined = {
+    ...structuredClone(annotated),
+    egressPolicy: structuredClone(request.egressPolicy),
+  };
+  assert.deepEqual(combined.acs, annotated.acs);
+  assert.deepEqual(combined.egressPolicy, request.egressPolicy);
+  const points = [
+    "agent_startup",
+    "input",
+    "pre_model_call",
+    "post_model_call",
+    "pre_tool_call",
+    "post_tool_call",
+    "output",
+    "agent_shutdown",
+  ];
+  assert.deepEqual(Object.keys(combined.acs.intervention_points), points);
+  assert.deepEqual(
+    Object.keys(spec.definitions.RaiAcsInterventionPoints.properties),
+    points,
+  );
+  assert.deepEqual(
+    spec.definitions.RaiAcsInterventionPoints.required ?? [],
+    [],
+  );
+  assert(!spec.definitions.RaiAcsManifest.required.includes("annotators"));
+  assert(
+    !spec.definitions.RaiAcsInterventionPoint.required.includes("annotations"),
+  );
+  assert(
+    !spec.definitions.RaiAcsToolInterventionPoint.required.includes(
+      "annotations",
+    ),
+  );
+  assert(
+    !spec.definitions.RaiPolicyProperties.required?.includes("egressPolicy"),
+  );
+  delete combined.egressPolicy;
+  assert.deepEqual(combined, annotated);
 });
 
 test("existing minimal ACS and ContentFilters fixtures remain valid sibling shapes", () => {
@@ -139,7 +184,7 @@ test("existing minimal ACS and ContentFilters fixtures remain valid sibling shap
 });
 
 test(
-  "baseline differs only in the egress description and three example references",
+  "baseline differs only in three egress example references",
   {
     skip: !process.env.ACS_EGRESS_BASE_REF,
   },
@@ -158,8 +203,6 @@ test(
       ),
     );
     const normalized = structuredClone(spec);
-    normalized.definitions.RaiPolicyProperties.properties.egressPolicy.description =
-      baseline.definitions.RaiPolicyProperties.properties.egressPolicy.description;
     for (const filename of filenames) {
       const source = load(`examples/${version}/${filename}`);
       const operation = Object.values(normalized.paths)

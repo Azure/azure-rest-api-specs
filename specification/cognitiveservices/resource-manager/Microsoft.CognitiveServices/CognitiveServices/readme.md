@@ -1619,6 +1619,7 @@ including non-secret ones. Do not echo a redaction placeholder back as a new val
 
 These are authoring semantics to be accepted and enforced by the deployed server;
 the specification and examples alone do not prove current deployment behavior.
+ACS egress admission, persistence, and enforcement require separate backend readiness.
 Static egress enforcement does not require an ACS SDK evaluation on each network
 request. Runtime support and rollout are validated separately.
 
@@ -1633,14 +1634,16 @@ $env:ACS_EGRESS_BASE_REF = 'd062b61820af37577b642c5112f4b689a17cf184'
 node --test "$service/test/acs-egress-companion.test.mjs"
 ```
 
-The generator compiles only `2026-09-15-preview` with `service-yaml=never`, then
-mechanically copies only the compiled egress description and three example
+The generator compiles only `2026-09-15-preview` with `service-yaml=never` and warnings
+treated as errors, then mechanically copies only the three compiled example
 registrations into the parsed checked-in Swagger and copies the source examples.
 `generation-comparison.json` records whether full emission matches the scoped
 candidate; `full-emission-diff.json` lists parsed differences, including relocated
 external references. Generation rejects any difference other than references that
 resolve to the same target. The baseline regression test proves that every other
-Swagger value, including ACS annotations and lifecycle points, is unchanged.
+Swagger value, including the existing egress schema, ACS annotations, and lifecycle
+points, is unchanged. The shared TypeSpec egress description is preserved so earlier
+API versions also regenerate without changes.
 Do not regenerate older versions or edit generated Swagger by hand for this change.
 
 ## Swagger to SDK

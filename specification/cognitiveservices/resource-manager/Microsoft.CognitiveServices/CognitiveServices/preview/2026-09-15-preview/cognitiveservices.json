@@ -11047,14 +11047,14 @@
           }
         },
         "x-ms-examples": {
+          "List ACS policies with hosted sandbox egress companions": {
+            "$ref": "./examples/ListRaiPoliciesAcsWithEgress.json"
+          },
           "List ACS policies with optional Azure OpenAI judge annotations": {
             "$ref": "./examples/ListRaiPoliciesAcsWithAnnotations.json"
           },
           "ListRaiPolicies": {
             "$ref": "./examples/ListRaiPolicies.json"
-          },
-          "List ACS policies with hosted sandbox egress companions": {
-            "$ref": "./examples/ListRaiPoliciesAcsWithEgress.json"
           }
         },
         "x-ms-pageable": {
@@ -11122,14 +11122,14 @@
           "Get an ACS policy": {
             "$ref": "./examples/GetRaiPolicyAcs.json"
           },
+          "Get an ACS policy with a hosted sandbox egress companion": {
+            "$ref": "./examples/GetRaiPolicyAcsWithEgress.json"
+          },
           "Get an ACS policy with an Azure OpenAI judge and eight intervention points": {
             "$ref": "./examples/GetRaiPolicyAcsWithAnnotations.json"
           },
           "GetRaiPolicy": {
             "$ref": "./examples/GetRaiPolicy.json"
-          },
-          "Get an ACS policy with a hosted sandbox egress companion": {
-            "$ref": "./examples/GetRaiPolicyAcsWithEgress.json"
           }
         }
       },
@@ -11216,6 +11216,9 @@
           }
         },
         "x-ms-examples": {
+          "Create an ACS policy with a hosted sandbox egress companion": {
+            "$ref": "./examples/PutRaiPolicyAcsWithEgress.json"
+          },
           "Create an ACS policy with an Azure OpenAI judge and eight intervention points": {
             "$ref": "./examples/PutRaiPolicyAcsWithAnnotations.json"
           },
@@ -11233,9 +11236,6 @@
           },
           "Replace an ACS policy conditionally": {
             "$ref": "./examples/UpdateRaiPolicyAcs.json"
-          },
-          "Create an ACS policy with a hosted sandbox egress companion": {
-            "$ref": "./examples/PutRaiPolicyAcsWithEgress.json"
           }
         }
       },
@@ -22730,7 +22730,7 @@
         },
         "egressPolicy": {
           "$ref": "#/definitions/RaiEgressPolicyConfig",
-          "description": "Static outbound network policy for hosted-agent sandboxes, independent of the\nContentFilters or ACS representation on the same RAI policy resource. Includes\nAllow/Deny/Transform/Rewrite rules; it is not evaluated by the ACS SDK or by\nper-request AACS content moderation."
+          "description": "Egress (outbound network) policy controlling which external endpoints sandboxed\nagents can reach. Includes rules with Allow/Deny/Transform/Rewrite actions."
         }
       }
     },
