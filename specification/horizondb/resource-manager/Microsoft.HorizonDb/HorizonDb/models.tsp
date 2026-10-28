@@ -296,11 +296,10 @@ model PoolCreateAcceptedResponse {
 }
 
 @doc("The response returned when asynchronous HorizonDB firewall rule creation is accepted and is in progress.")
-model FirewallRuleCreateAcceptedResponse
-  is ArmResourceCreatedResponse<
-    FirewallRule,
-    HorizonDbResourceLroHeaders<FirewallRule>
-  >;
+model FirewallRuleCreateAcceptedResponse is ArmResourceCreatedResponse<
+  FirewallRule,
+  HorizonDbResourceLroHeaders<FirewallRule>
+>;
 
 @doc("Properties of a HorizonDB cluster for update operations.")
 model ClusterPropertiesForPatchUpdate {
