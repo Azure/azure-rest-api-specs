@@ -73,7 +73,7 @@ stimuli:
       - &file_matches
         type: "file-matches"
         config:
-          pattern: 'move\s+is\s+ArmResourceActionAsync\s*<\s*Employee\s*,\s*MoveRequest\s*,\s*MoveResponse\s*,\s*LroHeaders\s*='
+          pattern: '(?:move|moveEmployee)\s+is\s+ArmResourceActionAsync\s*<\s*Employee\s*,\s*MoveRequest\s*,\s*MoveResponse(?:\s*>|\s*,\s*LroHeaders\s*=)'
           path: "employee.tsp"
       - type: "file-matches"
         name: "file-matches-lro-response"
@@ -110,7 +110,7 @@ stimuli:
         name: "file-matches-lro-response"
         config:
           path: "employee.tsp"
-          pattern: 'ArmCombinedLroHeaders\s*<\s*FinalResult\s*=\s*MoveResponse\s*>'
+          pattern: 'ArmCombinedLroHeaders\s*<\s*(FinalResult\s*=\s*MoveResponse|ArmOperationStatus\s*,\s*MoveResponse|(Azure\.ResourceManager\.)?ArmOperationStatus\s*,\s*MoveResponse)\s*>'
       - type: "prompt"
         config:
           prompt: "Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent. Do not penalize for pre-existing project configuration issues such as swagger generation failures unrelated to the agent changes."
