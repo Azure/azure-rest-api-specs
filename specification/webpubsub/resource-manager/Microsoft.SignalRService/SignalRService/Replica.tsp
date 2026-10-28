@@ -78,6 +78,7 @@ interface Replicas {
   /**
    * List all available skus of the replica resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listReplicaSkus retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("skus")
   listReplicaSkus is ArmResourceActionSync<Replica, void, ArmResponse<SkuList>>;

@@ -55,6 +55,7 @@ interface ExpressRouteProviderPorts {
   /**
    * Retrieves all the ExpressRouteProviderPorts in a subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is Legacy.ArmListSinglePageByParent<
     ExpressRouteProviderPort,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

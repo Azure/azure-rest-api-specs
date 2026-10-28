@@ -93,6 +93,7 @@ interface Subnets {
   /**
    * Gets a list of resource navigation links for a subnet.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing resourceNavigationLinksList retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("ResourceNavigationLinks")
   resourceNavigationLinksList is ArmResourceActionSync<
@@ -105,6 +106,7 @@ interface Subnets {
   /**
    * Gets a list of service association links for a subnet.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing serviceAssociationLinksList retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("ServiceAssociationLinks")
   serviceAssociationLinksList is ArmResourceActionSync<

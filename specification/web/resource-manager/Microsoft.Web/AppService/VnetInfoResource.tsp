@@ -71,6 +71,7 @@ interface VnetInfoResources {
   /**
    * Description for Get all Virtual Networks associated with an App Service plan.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listVnets retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get all Virtual Networks associated with an App Service plan.")
   listVnets is VnetInfoResourceOps.ListSinglePage<
     VnetInfoResource,
@@ -157,6 +158,7 @@ interface VnetInfoResourceOperationGroup {
   /**
    * Description for Gets the virtual networks the app (or deployment slot) is connected to.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listVnetConnectionsSlot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the virtual networks the app (or deployment slot) is connected to.")
   listVnetConnectionsSlot is VnetInfoResourceOperationGroupOps.ListSinglePage<
     VnetInfoResource,
@@ -237,6 +239,7 @@ interface VnetConnectionOperationGroup {
   /**
    * Description for Gets the virtual networks the app (or deployment slot) is connected to.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listVnetConnections retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the virtual networks the app (or deployment slot) is connected to.")
   @segment("virtualNetworkConnections")
   listVnetConnections is VnetConnectionOperationGroupOps.ListSinglePage<

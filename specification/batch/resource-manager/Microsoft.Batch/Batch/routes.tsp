@@ -17,6 +17,7 @@ interface LocationOperationGroup {
   /**
    * Gets the Batch service quotas for the specified subscription at the given location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getQuotas retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("quotas")

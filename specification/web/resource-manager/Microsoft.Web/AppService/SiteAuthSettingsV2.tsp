@@ -81,6 +81,7 @@ interface SiteAuthSettingsV2s {
   /**
    * Description for Gets site's Authentication / Authorization settings for apps via the V2 format
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getAuthSettingsV2 retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets site's Authentication / Authorization settings for apps via the V2 format")
   @get
   @action("list")
@@ -149,6 +150,7 @@ interface SiteAuthSettingsV2OperationGroup {
   /**
    * Description for Gets site's Authentication / Authorization settings for apps via the V2 format
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getAuthSettingsV2Slot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets site's Authentication / Authorization settings for apps via the V2 format")
   @get
   @action("list")

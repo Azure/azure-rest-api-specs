@@ -98,6 +98,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listPublishers retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImagesEdgeZone_ListPublishers")
   @autoRoute
   @get
@@ -121,6 +122,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listOffers retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImagesEdgeZone_ListOffers")
   @autoRoute
   @get
@@ -151,6 +153,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listSkus retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImagesEdgeZone_ListSkus")
   @autoRoute
   @get
@@ -195,6 +198,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImagesEdgeZone_List")
   @autoRoute
   @get
@@ -313,6 +317,7 @@ interface VirtualMachineImagesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByEdgeZone retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImages_ListByEdgeZone")
   @autoRoute
   @get
@@ -335,6 +340,7 @@ interface VirtualMachineImagesOperationGroup {
    * Gets a list of virtual machine image publishers for the specified Azure location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listPublishers retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImages_ListPublishers")
   @autoRoute
   @get
@@ -349,6 +355,7 @@ interface VirtualMachineImagesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listOffers retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImages_ListOffers")
   @autoRoute
   @get
@@ -372,6 +379,7 @@ interface VirtualMachineImagesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listSkus retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImages_ListSkus")
   @autoRoute
   @get
@@ -409,6 +417,7 @@ interface VirtualMachineImagesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImages_List")
   @autoRoute
   @get
@@ -465,6 +474,7 @@ interface VirtualMachineImagesOperationGroup {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listWithProperties retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("VirtualMachineImages_ListWithProperties")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions?$expand=Properties")
   @get

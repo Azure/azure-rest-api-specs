@@ -225,6 +225,7 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getInstanceView retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("instanceView")
   @operationId("VirtualMachineScaleSetVMs_GetInstanceView")

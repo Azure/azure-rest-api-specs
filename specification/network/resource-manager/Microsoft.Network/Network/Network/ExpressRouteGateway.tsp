@@ -138,6 +138,7 @@ interface ExpressRouteGateways {
   /**
    * Lists ExpressRoute gateways in a given resource group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByResourceGroup retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ExpressRouteGateways")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways")
   @get
@@ -151,6 +152,7 @@ interface ExpressRouteGateways {
   /**
    * Lists ExpressRoute gateways under a given subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listBySubscription retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ExpressRouteGateways")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteGateways")
   @get
@@ -219,6 +221,7 @@ interface ExpressRouteGateways {
   /**
    * Lists ExpressRouteConnections.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @tag("ExpressRouteConnections")
   @get
   @action("expressRouteConnections")

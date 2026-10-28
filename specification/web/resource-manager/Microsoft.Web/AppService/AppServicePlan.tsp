@@ -193,6 +193,7 @@ interface AppServicePlans {
   /**
    * Description for List all capabilities of an App Service plan.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listCapabilities retains its response and SDK paging behavior; preserve published compatibility."
   @summary("List all capabilities of an App Service plan.")
   @get
   @action("capabilities")
@@ -298,6 +299,7 @@ interface AppServicePlans {
   /**
    * Description for Gets all selectable SKUs for a given App Service Plan
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getServerFarmSkus retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets all selectable SKUs for a given App Service Plan")
   @get
   @action("skus")

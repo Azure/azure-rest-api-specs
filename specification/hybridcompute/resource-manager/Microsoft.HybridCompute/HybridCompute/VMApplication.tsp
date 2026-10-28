@@ -43,6 +43,7 @@ interface VmApplications {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "The established ARM instance view pattern is a GET action."
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "The established ARM instance view pattern is a GET action."
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getInstanceView retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("instanceView")
   getInstanceView is ArmResourceActionSync<VmApplication, void, VmApplication>;

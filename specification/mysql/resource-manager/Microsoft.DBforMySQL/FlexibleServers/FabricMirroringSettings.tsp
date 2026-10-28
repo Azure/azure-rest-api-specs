@@ -104,6 +104,7 @@ interface FabricMirroringSettings {
       | ArmAcceptedLroResponse
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByServer retains its response and SDK paging behavior; preserve published compatibility."
   @doc("List Fabric Mirroring settings by server.")
   listByServer is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<FabricMirroringSetting>;
 }

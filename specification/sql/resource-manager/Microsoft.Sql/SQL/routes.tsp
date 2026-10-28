@@ -41,6 +41,7 @@ interface CapabilitiesOperationGroup {
   /**
    * Gets the subscription capabilities available for the specified location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByLocation retains its response and SDK paging behavior; preserve published compatibility."
   @tag("LocationCapabilities")
   @autoRoute
   @get

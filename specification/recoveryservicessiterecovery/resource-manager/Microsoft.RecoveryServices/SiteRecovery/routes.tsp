@@ -422,6 +422,7 @@ interface SupportedOperatingSystemsOperationGroup {
   /**
    * Gets the data of supported operating systems by SRS.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing get retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the data of supported operating systems by SRS.")
   @autoRoute
   @get
@@ -453,6 +454,7 @@ interface ReplicationVaultHealthOperationGroup {
   /**
    * Gets the health details of the vault.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing get retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the health summary for the vault.")
   @autoRoute
   @get

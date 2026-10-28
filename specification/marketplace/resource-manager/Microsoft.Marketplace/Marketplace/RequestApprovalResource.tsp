@@ -50,6 +50,7 @@ interface RequestApprovalResources {
   /**
    * Get all open approval requests of current user
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getApprovalRequestsList retains its response and SDK paging behavior; preserve published compatibility."
   getApprovalRequestsList is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     RequestApprovalResource,
     Response = ArmResponse<RequestApprovalsList>,

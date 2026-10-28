@@ -78,6 +78,7 @@ interface ElasticSans {
   /**
    * Gets the private link resources that need to be created for a elastic San.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByElasticSan retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("privateLinkResources")
   listByElasticSan is ArmResourceActionSync<

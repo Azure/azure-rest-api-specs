@@ -112,6 +112,7 @@ interface ChangeDataCaptureResources {
   /**
    * Gets the current status for the change data capture resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing status retains its response and SDK paging behavior; preserve published compatibility."
   @tag("changeDataCapture")
   @get
   status is ArmResourceActionSync<

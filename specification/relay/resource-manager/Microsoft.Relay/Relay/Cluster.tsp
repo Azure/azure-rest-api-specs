@@ -370,6 +370,7 @@ interface Clusters {
   /**
    * Lists Relay namespace resource IDs assigned to a Relay cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listNamespaces retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("namespaces")
   listNamespaces is ArmResourceActionSync<
@@ -382,6 +383,7 @@ interface Clusters {
   /**
    * Lists SKUs supported by a Relay cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listSkus retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("skus")
   listSkus is ArmResourceActionSync<

@@ -127,6 +127,7 @@ interface ContainerAppsDiagnostics {
   /**
    * Get the properties of a Container App.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getRoot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get the properties of a Container App.")
   getRoot is ContainerAppDetectorPropertyOps.Read<
     ContainerApp,
@@ -233,6 +234,7 @@ interface ManagedEnvironmentsDiagnostics {
   /**
    * Get the properties of a Managed Environment used to host container apps.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getRoot retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get the properties of a Managed Environment.")
   getRoot is ContainerAppManagedEnvironmentDetectorResourcePropertyOps.Read<
     ManagedEnvironment,
@@ -242,6 +244,7 @@ interface ManagedEnvironmentsDiagnostics {
   /**
    * Get the list of diagnostics for a Managed Environment used to host container apps.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listDetectors retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get the list of diagnostics for a given Managed Environment.")
   listDetectors is ManagedEnvironmentDetectorOps.ListSinglePage<
     Diagnostics,

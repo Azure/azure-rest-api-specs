@@ -150,6 +150,7 @@ interface Vaults {
   /**
    * Gets the private link resources supported for the key vault.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByVault retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("privateLinkResources")
   listByVault is ArmResourceActionSync<

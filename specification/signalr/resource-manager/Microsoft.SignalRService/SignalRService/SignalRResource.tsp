@@ -134,6 +134,7 @@ interface SignalRResources {
   /**
    * List all available skus of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listSkus retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("skus")
   listSkus is ArmResourceActionSync<

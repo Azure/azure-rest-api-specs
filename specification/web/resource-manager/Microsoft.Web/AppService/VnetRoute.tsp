@@ -116,6 +116,7 @@ interface VnetRoutes {
   /**
    * Description for Get all routes that are associated with a Virtual Network in an App Service plan.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listRoutesForVnet retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get all routes that are associated with a Virtual Network in an App Service plan.")
   listRoutesForVnet is VnetRoutesOps.ListSinglePage<
     VnetRoute,

@@ -127,6 +127,7 @@ interface ContainerGroups {
   /**
    * Gets all the network dependencies for this container group to allow complete control of network setting and configuration. For container groups, this will always be an empty list.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getOutboundNetworkDependenciesEndpoints retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get all network dependencies for container group.")
   @get
   @action("outboundNetworkDependenciesEndpoints")
@@ -140,6 +141,7 @@ interface ContainerGroups {
   /**
    * Get the logs for a specified container instance in a specified resource group and container group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listLogs retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get the logs for a specified container instance.")
   @get
   @action("logs")

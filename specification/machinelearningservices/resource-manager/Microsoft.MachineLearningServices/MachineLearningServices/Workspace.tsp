@@ -208,6 +208,7 @@ interface Workspaces {
   /**
    * Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listOutboundNetworkDependenciesEndpoints retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("outboundNetworkDependenciesEndpoints")
   @summary("Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.")

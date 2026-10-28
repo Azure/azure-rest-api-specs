@@ -158,6 +158,7 @@ interface TagsOperationGroup {
    * Get all available tag keys for the defined scope
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing get retains its response and SDK paging behavior; preserve published compatibility."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @autoRoute
   @get
@@ -175,6 +176,7 @@ interface ChargesOperationGroup {
    * Lists the charges based for the defined scope.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @autoRoute
   @get
@@ -220,6 +222,7 @@ interface BalancesOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getByBillingAccount retains its response and SDK paging behavior; preserve published compatibility."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @autoRoute
   @get
@@ -249,6 +252,7 @@ interface BalancesOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getForBillingPeriodByBillingAccount retains its response and SDK paging behavior; preserve published compatibility."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @autoRoute
   @get
@@ -587,6 +591,7 @@ interface ReservationRecommendationDetailsOperationGroup {
    * Details of a reservation recommendation for what-if analysis of reserved instances.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing get retains its response and SDK paging behavior; preserve published compatibility."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @autoRoute
   @get
@@ -755,6 +760,7 @@ interface AggregatedCostOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getByManagementGroup retains its response and SDK paging behavior; preserve published compatibility."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @autoRoute
   @get
@@ -790,6 +796,7 @@ interface AggregatedCostOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getForBillingPeriodByManagementGroup retains its response and SDK paging behavior; preserve published compatibility."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
   @autoRoute
   @get

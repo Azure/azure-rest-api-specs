@@ -52,6 +52,7 @@ interface ReplicationEligibilityResultsOperationGroup {
   /**
    * Validates whether a given VM can be protected or not in which case returns list of errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Gets the validation errors in case the VM is unsuitable for protection.")
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     ReplicationEligibilityResults,

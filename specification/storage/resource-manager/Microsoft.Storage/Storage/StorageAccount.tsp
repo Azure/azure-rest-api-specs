@@ -292,6 +292,7 @@ interface StorageAccounts {
   /**
    * Gets the private link resources that need to be created for a storage account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByStorageAccount retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("privateLinkResources")
   listByStorageAccount is ArmResourceActionSync<

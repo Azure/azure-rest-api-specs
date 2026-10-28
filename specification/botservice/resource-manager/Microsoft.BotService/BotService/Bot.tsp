@@ -122,6 +122,7 @@ interface Bots {
    * Gets the private link resources that need to be created for a Bot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByBotResource retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("privateLinkResources")
   listByBotResource is ArmResourceActionSync<

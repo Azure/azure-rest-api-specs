@@ -168,6 +168,7 @@ interface Accounts {
   /**
    * List available SKUs for the requested Cognitive Services account
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listSkus retains its response and SDK paging behavior; preserve published compatibility."
   @tag("CognitiveServicesAccounts")
   @get
   @action("skus")
@@ -180,6 +181,7 @@ interface Accounts {
   /**
    * Get usages for the requested Cognitive Services account
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listUsages retains its response and SDK paging behavior; preserve published compatibility."
   @tag("CognitiveServicesAccounts")
   @get
   @action("usages")
@@ -212,6 +214,7 @@ interface Accounts {
   /**
    * Gets the private link resources that need to be created for a Cognitive Services account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing privateLinkResourcesList retains its response and SDK paging behavior; preserve published compatibility."
   @tag("PrivateLinkResources")
   @get
   @action("privateLinkResources")

@@ -105,6 +105,7 @@ interface Exports {
    * The operation to list all exports at the given scope.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")
   list is ExportsOps.ListSinglePage<
     Export,
@@ -138,6 +139,7 @@ interface Exports {
    * The operation to get the run history of an export for the defined scope and export name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getExecutionHistory retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("runHistory")
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")

@@ -41,6 +41,7 @@ interface IoTSecuritySolutionAnalyticsModels {
   /**
    * Use this method to get IoT security Analytics metrics in an array.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @tag("IoT Security Solution Analytics")
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     IoTSecuritySolutionAnalyticsModel,

@@ -161,6 +161,7 @@ interface ManagementGroups {
    *
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("settings")
   list is Extension.ActionSync<

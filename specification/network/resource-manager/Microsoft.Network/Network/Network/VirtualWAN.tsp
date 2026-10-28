@@ -122,6 +122,7 @@ interface VirtualWans {
    * Gives the supported security providers for the virtual wan.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing supportedSecurityProviders retains its response and SDK paging behavior; preserve published compatibility."
   @operationId("SupportedSecurityProviders")
   @get
   supportedSecurityProviders is VirtualWanOps.ActionSync<

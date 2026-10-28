@@ -16,6 +16,7 @@ interface CapacitiesOperationGroup {
   /**
    * Lists eligible SKUs for PowerBI Dedicated resource provider.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listSkus retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("skus")

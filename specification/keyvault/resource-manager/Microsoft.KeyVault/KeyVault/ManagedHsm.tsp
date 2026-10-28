@@ -137,6 +137,7 @@ interface ManagedHsms {
    * Gets the private link resources supported for the managed hsm pool.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByMHSMResource retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("privateLinkResources")
   listByMHSMResource is ArmResourceActionSync<

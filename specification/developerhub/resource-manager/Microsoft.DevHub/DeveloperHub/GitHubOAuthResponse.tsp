@@ -75,6 +75,7 @@ interface GitHubOAuthResponses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listGitHubOAuth retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Callback URL to hit once authenticated with GitHub App to have the service store the OAuth token.")
   @tag("GitHubOAuth")
   @operationId("ListGitHubOAuth")

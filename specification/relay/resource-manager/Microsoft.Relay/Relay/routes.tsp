@@ -21,6 +21,7 @@ interface ClustersOperationGroup {
   /**
    * Lists regions containing available pre-provisioned Relay clusters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listAvailableClusterRegion retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("availableClusterRegions")

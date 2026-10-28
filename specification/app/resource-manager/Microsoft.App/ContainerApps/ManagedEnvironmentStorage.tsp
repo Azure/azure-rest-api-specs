@@ -57,6 +57,7 @@ interface ManagedEnvironmentsStorages {
   /**
    * Get all storages for a managedEnvironment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get all storages for a managedEnvironment.")
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     ManagedEnvironmentStorage,

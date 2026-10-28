@@ -106,6 +106,7 @@ interface MetricsOperationGroup {
   /**
    * **Lists the metric data for a subscription**. This API used the [default ARM throttling limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/request-limits-and-throttling).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listAtSubscriptionScope retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("metrics")
@@ -295,6 +296,7 @@ interface MetricsOperationGroup {
   /**
    * **Lists the metric values for a resource**. This API used the [default ARM throttling limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/request-limits-and-throttling).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("metrics")

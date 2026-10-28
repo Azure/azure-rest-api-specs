@@ -50,6 +50,7 @@ interface QueueServices {
   /**
    * List all queue services for the storage account
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     QueueServiceProperties,
     Response = ArmResponse<ListQueueServices>,

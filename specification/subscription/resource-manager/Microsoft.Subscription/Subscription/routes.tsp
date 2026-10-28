@@ -69,6 +69,7 @@ interface SubscriptionOperationGroup {
   /**
    * Accept subscription ownership status.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing acceptOwnershipStatus retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   acceptOwnershipStatus is ArmProviderActionSync<

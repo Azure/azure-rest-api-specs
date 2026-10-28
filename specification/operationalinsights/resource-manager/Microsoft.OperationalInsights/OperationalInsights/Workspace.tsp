@@ -235,6 +235,7 @@ interface Workspaces {
   /**
    * Gets the available service tiers for the workspace.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByWorkspace retains its response and SDK paging behavior; preserve published compatibility."
   @tag("AvailableServiceTiers")
   @get
   @action("availableServiceTiers")
@@ -287,6 +288,7 @@ interface Workspaces {
   /**
    * Lists all the intelligence packs possible and whether they are enabled or disabled for a given workspace.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing intelligencePacksList retains its response and SDK paging behavior; preserve published compatibility."
   @tag("Workspaces")
   @tag("IntelligencePacks")
   @get

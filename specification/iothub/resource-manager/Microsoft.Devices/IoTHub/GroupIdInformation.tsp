@@ -65,6 +65,7 @@ interface GroupIdInformations {
   /**
    * List private link resources for the given IotHub
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @summary("List private link resources")
   @tag("GET")
   list is GroupIdInformationOps.ListSinglePage<

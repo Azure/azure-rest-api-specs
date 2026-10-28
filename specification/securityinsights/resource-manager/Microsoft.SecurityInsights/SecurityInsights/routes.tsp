@@ -230,6 +230,7 @@ interface ThreatIntelligenceIndicatorMetricsOperationGroup {
   /**
    * Get threat intelligence indicators metrics (Indicators counts by Type, Threat Type, Source).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @autoRoute
   @get
   @action("metrics")

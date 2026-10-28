@@ -85,6 +85,7 @@ interface VirtualNetworks {
    * Checks whether a private IP address is available for use.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing checkIPAddressAvailability retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("CheckIPAddressAvailability")
   checkIPAddressAvailability is ArmResourceActionSync<

@@ -80,6 +80,7 @@ interface CertificateDescriptions {
   /**
    * Returns the list of certificates.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing listByIotHub retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Get the certificate list.")
   @tag("Certificates")
   listByIotHub is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<

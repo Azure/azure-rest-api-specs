@@ -51,6 +51,7 @@ interface NetAppResourceOperationGroup {
   /**
    * Provides storage to network proximity and logical zone mapping information.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing queryRegionInfo retains its response and SDK paging behavior; preserve published compatibility."
   @summary("Describes region specific information.")
   @autoRoute
   @get

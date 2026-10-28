@@ -213,6 +213,7 @@ interface Machines {
   /**
    * The operation to get network information of hybrid machine
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing networkProfileGet retains its response and SDK paging behavior; preserve published compatibility."
   @tag("MachineNetworkProfile")
   @get
   @action("networkProfile")

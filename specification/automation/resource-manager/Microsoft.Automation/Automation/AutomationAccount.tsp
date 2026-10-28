@@ -138,6 +138,7 @@ interface AutomationAccounts {
    * Get all software update configurations for the account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing softwareUpdateConfigurationsList retains its response and SDK paging behavior; preserve published compatibility."
   @tag("Software Update Configuration")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @get
@@ -178,6 +179,7 @@ interface AutomationAccounts {
    * Retrieve the automation agent registration information.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing agentRegistrationInformationGet retains its response and SDK paging behavior; preserve published compatibility."
   @tag("AgentRegistrationInformation")
   @get
   @action("agentRegistrationInformation")
@@ -292,6 +294,7 @@ interface AutomationAccounts {
    * Retrieve the linked workspace for the account id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing linkedWorkspaceGet retains its response and SDK paging behavior; preserve published compatibility."
   @tag("LinkedWorkspace")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/linkedworkspaceoperations")
   @get
@@ -361,6 +364,7 @@ interface AutomationAccounts {
    * Return list of software update configuration machine runs
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing softwareUpdateConfigurationMachineRunsList retains its response and SDK paging behavior; preserve published compatibility."
   @tag("Software Update Configuration Machine Run")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @get
@@ -420,6 +424,7 @@ interface AutomationAccounts {
    * Return list of software update configuration runs
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing softwareUpdateConfigurationRunsList retains its response and SDK paging behavior; preserve published compatibility."
   @tag("Software Update Configuration Run")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @get

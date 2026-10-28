@@ -56,6 +56,7 @@ interface GetSensitivitySettingsResponses {
   /**
    * Gets a list with a single sensitivity settings resource
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     GetSensitivitySettingsResponse,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,

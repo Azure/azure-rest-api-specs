@@ -156,6 +156,7 @@ interface Profiles {
   /**
    * Get log report for AFD profile
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getLogAnalyticsMetrics retains its response and SDK paging behavior; preserve published compatibility."
   @get
   getLogAnalyticsMetrics is ArmResourceActionSync<
     Profile,
@@ -209,6 +210,7 @@ interface Profiles {
   /**
    * Get log analytics ranking report for AFD profile
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getLogAnalyticsRankings retains its response and SDK paging behavior; preserve published compatibility."
   @get
   getLogAnalyticsRankings is ArmResourceActionSync<
     Profile,
@@ -247,6 +249,7 @@ interface Profiles {
   /**
    * Get all available location names for AFD log analytics report.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getLogAnalyticsLocations retains its response and SDK paging behavior; preserve published compatibility."
   @get
   getLogAnalyticsLocations is ArmResourceActionSync<
     Profile,
@@ -257,6 +260,7 @@ interface Profiles {
   /**
    * Get all endpoints and custom domains available for AFD log report
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getLogAnalyticsResources retains its response and SDK paging behavior; preserve published compatibility."
   @get
   getLogAnalyticsResources is ArmResourceActionSync<
     Profile,
@@ -267,6 +271,7 @@ interface Profiles {
   /**
    * Get Waf related log analytics report for AFD profile.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getWafLogAnalyticsMetrics retains its response and SDK paging behavior; preserve published compatibility."
   @get
   getWafLogAnalyticsMetrics is ArmResourceActionSync<
     Profile,
@@ -310,6 +315,7 @@ interface Profiles {
   /**
    * Get WAF log analytics charts for AFD profile
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getWafLogAnalyticsRankings retains its response and SDK paging behavior; preserve published compatibility."
   @get
   getWafLogAnalyticsRankings is ArmResourceActionSync<
     Profile,

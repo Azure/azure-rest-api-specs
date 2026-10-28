@@ -250,6 +250,7 @@ interface AccessInformationContracts {
   /**
    * Gets the status of the most recent synchronization between the configuration database and the Git repository.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getSyncState retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("syncState")
   getSyncState is AccessInformationContractOps.ActionSync<

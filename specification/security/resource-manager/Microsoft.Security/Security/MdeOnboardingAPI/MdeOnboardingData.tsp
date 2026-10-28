@@ -42,6 +42,7 @@ interface MdeOnboardings {
   /**
    * The configuration or data needed to onboard the machine to MDE
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @tag("MdeOnboarding")
   list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     MdeOnboardingData,

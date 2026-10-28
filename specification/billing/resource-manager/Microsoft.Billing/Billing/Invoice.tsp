@@ -247,6 +247,7 @@ interface Invoices {
    * Gets the transaction summary for an invoice. Transactions include purchases, refunds and Azure usage charges.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getTransactionSummaryByInvoice retains its response and SDK paging behavior; preserve published compatibility."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Transaction")
   @get

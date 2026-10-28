@@ -68,6 +68,7 @@ interface Jobs {
    * Retrieve the job output identified by job name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getOutput retains its response and SDK paging behavior; preserve published compatibility."
   @tag("Job")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   @get
@@ -96,6 +97,7 @@ interface Jobs {
    * Retrieve the runbook content of the job identified by job name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getRunbookContent retains its response and SDK paging behavior; preserve published compatibility."
   @tag("Job")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   @get

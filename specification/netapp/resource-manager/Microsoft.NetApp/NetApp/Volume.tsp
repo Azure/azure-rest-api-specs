@@ -2731,6 +2731,7 @@ interface Volumes {
   /**
    * Get the status of the replication
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing replicationStatus retains its response and SDK paging behavior; preserve published compatibility."
   @get
   replicationStatus is ArmResourceActionSync<
     Volume,

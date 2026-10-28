@@ -126,6 +126,7 @@ interface DeploymentScripts {
   /**
    * Gets deployment script logs for a given deployment script name.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing getLogs retains its response and SDK paging behavior; preserve published compatibility."
   @get
   @action("logs")
   getLogs is ArmResourceActionSync<

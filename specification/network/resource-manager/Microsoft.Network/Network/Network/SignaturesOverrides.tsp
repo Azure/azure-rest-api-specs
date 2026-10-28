@@ -96,6 +96,7 @@ interface FirewallPolicyIdpsSignaturesOverrides {
   /**
    * Returns all signatures overrides objects for a specific policy as a list containing a single value.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/list-operation-missing-pageable" "Back compat: Existing list retains its response and SDK paging behavior; preserve published compatibility."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/signatureOverrides")
   @get
   list is FirewallPolicyIdpsSignaturesOverridesListOps.ActionSync<
