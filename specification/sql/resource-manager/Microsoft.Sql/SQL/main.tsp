@@ -44,6 +44,7 @@ import "./ElasticPool.tsp";
 import "./EncryptionProtector.tsp";
 import "./EndpointCertificate.tsp";
 import "./FailoverGroup.tsp";
+import "./ReaderEndpoint.tsp";
 import "./FirewallRule.tsp";
 import "./GeoBackupPolicy.tsp";
 import "./InstanceFailoverGroup.tsp";
