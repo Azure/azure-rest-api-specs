@@ -365,7 +365,7 @@ describe("Summarize Checks Unit Tests", () => {
       );
 
       const remainingIndex = comment.indexOf(
-        "<details><summary>Other outstanding requirements</summary>",
+        "<details><summary>Other outstanding requirements (4)</summary>",
       );
       expect(remainingIndex).toBeGreaterThan(-1);
       expect(comment).toContain("data-plane-review-signoff");
@@ -380,6 +380,44 @@ describe("Summarize Checks Unit Tests", () => {
       expect(comment.match(/<code>TypeSpec Validation<\/code>/g)).toHaveLength(1);
       expect(status.result).toBe("FAILURE");
     });
+
+    it.each([
+      {
+        kind: "approval",
+        labels: [
+          "PublishToCustomers",
+          "data-plane-review-requested",
+          "package-name-review-required",
+        ],
+        checkNames: [],
+      },
+      {
+        kind: "check",
+        labels: [],
+        checkNames: ["TypeSpec Validation", "Swagger Avocado"],
+      },
+    ])(
+      "counts later-priority $kind requirements without counting immediate steps",
+      ({ labels, checkNames }) => {
+        const [comment] = createNextStepsComment(
+          mockCore,
+          "azure-rest-api-specs",
+          labels,
+          "main",
+          checkNames.map((name) => ({
+            name,
+            status: "completed",
+            conclusion: "failure",
+            checkInfo: getCheckInfo(name),
+          })),
+          [],
+          true,
+          WORKFLOW_URL,
+        );
+
+        expect(comment).toContain("<summary>Other outstanding requirements (1)</summary>");
+      },
+    );
 
     it("removes resolved requirements from the next summary", () => {
       const [comment, status] = createNextStepsComment(
@@ -458,29 +496,37 @@ describe("Summarize Checks Unit Tests", () => {
       expect(status.result).toBe("FAILURE");
     });
 
-    it("shows later-priority FYI failures separately without making them blockers", () => {
-      const [comment, status] = createNextStepsComment(
-        mockCore,
-        "azure-rest-api-specs",
-        [],
-        "main",
-        [],
-        ["license/cla", "Swagger Avocado"].map((name) => ({
-          name,
-          status: "completed",
-          conclusion: "failure",
-          checkInfo: getCheckInfo(name),
-        })),
-        true,
-        WORKFLOW_URL,
-      );
+    it.each([
+      { remainingChecks: ["Swagger Avocado"], count: 1 },
+      { remainingChecks: ["Swagger Avocado", "Swagger BreakingChange"], count: 2 },
+    ])(
+      "counts $count later-priority FYI failures without making them blockers",
+      ({ remainingChecks, count }) => {
+        const [comment, status] = createNextStepsComment(
+          mockCore,
+          "azure-rest-api-specs",
+          [],
+          "main",
+          [],
+          ["license/cla", ...remainingChecks].map((name) => ({
+            name,
+            status: "completed",
+            conclusion: "failure",
+            checkInfo: getCheckInfo(name),
+          })),
+          true,
+          WORKFLOW_URL,
+        );
 
-      expect(comment).toContain("<code>license/cla</code>");
-      expect(comment).toContain("<details><summary>Other failing non-blocking checks</summary>");
-      expect(comment).toContain("<code>Swagger Avocado</code>");
-      expect(comment).not.toContain("Other outstanding requirements");
-      expect(status.result).toBe("SUCCESS");
-    });
+        expect(comment).toContain("<code>license/cla</code>");
+        expect(comment).toContain(
+          `<details><summary>Other failing non-blocking checks (${count})</summary>`,
+        );
+        expect(comment).toContain("<code>Swagger Avocado</code>");
+        expect(comment).not.toContain("Other outstanding requirements");
+        expect(status.result).toBe("SUCCESS");
+      },
+    );
 
     it("renders pending check names as text rather than HTML", () => {
       const [comment, status] = createNextStepsComment(

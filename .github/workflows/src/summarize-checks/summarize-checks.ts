@@ -1053,6 +1053,9 @@ function getBlockerPresentBody(
   const remainingRequirements =
     buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules, "remaining") +
     buildFailingChecksNextStepsText(failingRequiredChecks, "required", "remaining");
+  const remainingRequirementCount =
+    selectByPrecedence(violatedRequiredLabelsRules, "remaining").length +
+    selectByPrecedence(failingRequiredChecks, "remaining").length;
   return (
     "Next steps that must be taken to merge this PR: <br/>" +
     "<ul>" +
@@ -1060,7 +1063,7 @@ function getBlockerPresentBody(
     failingRequiredChecksNextStepsText +
     "</ul>" +
     (remainingRequirements
-      ? "<details><summary>Other outstanding requirements</summary><ul>" +
+      ? `<details><summary>Other outstanding requirements (${remainingRequirementCount})</summary><ul>` +
         remainingRequirements +
         "</ul></details>"
       : "")
@@ -1074,6 +1077,7 @@ function getBlockerPresentBody(
  */
 function getFyiPresentBody(failingFyiChecksInfo: CheckMetadata[]): string {
   const remainingChecks = buildFailingChecksNextStepsText(failingFyiChecksInfo, "FYI", "remaining");
+  const remainingCheckCount = selectByPrecedence(failingFyiChecksInfo, "remaining").length;
   return (
     "Important checks have failed. As of today they are not blocking this PR, but in near future they may.<br/>" +
     "Addressing the following failures is highly recommended:<br/>" +
@@ -1081,7 +1085,7 @@ function getFyiPresentBody(failingFyiChecksInfo: CheckMetadata[]): string {
     buildFailingChecksNextStepsText(failingFyiChecksInfo, "FYI") +
     "</ul>" +
     (remainingChecks
-      ? "<details><summary>Other failing non-blocking checks</summary><ul>" +
+      ? `<details><summary>Other failing non-blocking checks (${remainingCheckCount})</summary><ul>` +
         remainingChecks +
         "</ul></details>"
       : "")
