@@ -67,18 +67,15 @@ jobs:
         fetchDepth: 1
 
       - task: UseNode@1
-        displayName: 'Use Node.js 22.x'
+        displayName: 'Use Node.js 24.x'
         inputs:
-          version: 22.x
+          version: 24.x
 
       # 1ES Official image blocks registry.npmjs.org; restore via the azure-sdk npm mirror.
       - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
         parameters:
           npmrcPath: $(Build.SourcesDirectory)/.npmrc
           registryUrl: https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-tools/npm/registry/
-
-      - script: npm install --global npm@11.11.1 --userconfig $(Build.SourcesDirectory)/.npmrc
-        displayName: 'Use npm 11.11.1'
 
       # Installs vally-cli + its pinned copilot-sdk executor into node_modules.
       - script: npm ci --userconfig $(Build.SourcesDirectory)/.npmrc
@@ -113,6 +110,8 @@ jobs:
         displayName: 'Prime eval git fixtures'
         env:
           EVAL_ARGS: $(evalArgs)
+
+      - template: /eng/common/pipelines/templates/steps/login-to-copilot.yml
 
       # Runs the eval via the invoke template (auth-conditional in the common default).
       - template: ${{ parameters.evalInvokeTemplate }}

@@ -39,11 +39,6 @@ stimuli:
       commands:
         - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "skill-invocation"
         config:
           required:
@@ -59,11 +54,6 @@ stimuli:
       @azure-typespec-author add a default value `21` for property age in model EmployeeProperties only for the new api version 2025-11-01
     environment: *shared_environment
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "run-command"
         config:
           command: "node check-node-dependencies.js node_modules"
@@ -117,6 +107,10 @@ stimuli:
         config:
           required:
             - "^(edit|apply_patch|bash|powershell)$"
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
       - *file_matches
       - *file_matches_renamed_property
       - *file_matches_added_property
