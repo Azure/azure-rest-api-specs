@@ -530,6 +530,7 @@ interface AgentEndpointConversations {
 /** Read or delete stored Live conversations and captured audio; no item writes or native turn resources. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The Live endpoint-scoped read-only conversation, item, and audio projection does not match a standard resource operation template."
 @tag("Agent Live Conversations")
+@extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
 interface AgentEndpointLiveConversations {
   /** Lists stored Live conversations for this agent, including sessions stored via an override. */
   @summary("List Live voice agent conversations")
