@@ -29,6 +29,7 @@ import { execFile } from "../../../shared/src/exec.ts";
 import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
+import { parseSignoffDispatchInputs } from "../arm-auto-signoff/arm-signoff-dispatch.ts";
 import { commentOrUpdate } from "../comment.ts";
 import { extractInputs } from "../context.ts";
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
@@ -39,6 +40,7 @@ import {
   processImpactAssessment,
   verRevApproval,
 } from "./labelling.ts";
+import type { ReviewContext } from "./review-requirements.ts";
 
 import {
   brchTsg,
@@ -49,6 +51,7 @@ import {
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
   typeSpecSuppressionsTsg,
+  specChangePoliciesTsg,
 } from "./tsgs.ts";
 
 import fs from "node:fs/promises";
@@ -118,7 +121,7 @@ const CHECK_METADATA: CheckMetadata[] = [
     precedence: 0,
     name: "Spec Change Policies",
     suppressionLabels: [],
-    troubleshootingGuide: typeSpecRequirementArmTsg,
+    troubleshootingGuide: specChangePoliciesTsg,
   },
   {
     precedence: 0,
@@ -275,7 +278,16 @@ export default async function summarizeChecks({
   context,
   core,
 }: GitHubScriptArgs): Promise<void> {
-  const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
+  const extracted = await extractInputs(github, context, core);
+  const { owner, repo } = extracted;
+  let { issue_number, head_sha } = extracted;
+
+  // Dispatched by Update Labels, which has no PR payload.
+  if (context.eventName === "workflow_dispatch") {
+    ({ issue_number, head_sha } = parseSignoffDispatchInputs(
+      (context.payload as WebhookEvent<"workflow-dispatch">).inputs,
+    ));
+  }
 
   if (!issue_number) {
     core.warning(`No issue number found for this event. Exiting summarize-checks.js early.`);
@@ -291,13 +303,6 @@ export default async function summarizeChecks({
     core.setOutput("head_sha", head_sha);
   }
 
-  const targetBranch =
-    context.eventName === "pull_request_target"
-      ? (context.payload as WebhookEvent<"pull-request">).pull_request.base.ref
-      : undefined;
-
-  core.info(`PR target branch: ${targetBranch}`);
-
   // Default target is this run itself
   const target_url = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
 
@@ -309,7 +314,6 @@ export default async function summarizeChecks({
     issue_number,
     head_sha,
     context.eventName,
-    targetBranch,
     target_url,
   );
 }
@@ -343,7 +347,6 @@ export async function summarizeChecksImpl(
   issue_number: number,
   head_sha: string,
   event_name: string,
-  targetBranch: string | undefined,
   target_url: string,
 ): Promise<void> {
   core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
@@ -354,7 +357,17 @@ export async function summarizeChecksImpl(
   await core.summary.write();
   core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 
-  let labelNames = await getExistingLabels(github, owner, repo, issue_number);
+  const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: issue_number });
+  if (pr.head.sha !== head_sha) {
+    core.info(`Skipping summary for ${head_sha}; PR head is now ${pr.head.sha}.`);
+    return;
+  }
+  const reviewContext: ReviewContext = {
+    isDraft: pr.draft ?? false,
+    targetBranch: pr.base.ref,
+  };
+  const targetBranch = reviewContext.targetBranch;
+  let labelNames = pr.labels.map((label) => (typeof label === "string" ? label : label.name));
 
   const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
     github,
@@ -362,7 +375,7 @@ export async function summarizeChecksImpl(
     owner,
     repo,
     head_sha,
-    issue_number,
+    targetBranch,
     EXCLUDED_CHECK_NAMES,
   );
 
@@ -370,7 +383,6 @@ export async function summarizeChecksImpl(
 
   if (impactAssessment) {
     core.info(`ImpactAssessment: ${JSON.stringify(impactAssessment)}`);
-    targetBranch = impactAssessment.targetBranch;
   } else {
     core.info(
       `No impact assessment found for ${owner}/${repo}#${issue_number}. ` +
@@ -378,7 +390,7 @@ export async function summarizeChecksImpl(
     );
   }
 
-  const labelContext = updateLabels(labelNames, impactAssessment);
+  const labelContext = updateLabels(labelNames, impactAssessment, reviewContext);
 
   core.info(
     `Summarize checks label actions against ${owner}/${repo}#${issue_number}: \n` +
@@ -456,6 +468,14 @@ export async function summarizeChecksImpl(
   core.summary.addHeading("Automated Checks Met", 2);
   core.summary.addCodeBlock(JSON.stringify(automatedChecksMet, null, 2));
   await core.summary.write();
+
+  core.setOutput(
+    "arm_review_ready",
+    impactAssessment !== undefined &&
+      !reviewContext.isDraft &&
+      labelNames.includes("ARMReview") &&
+      labelNames.includes("WaitForARMFeedback"),
+  );
 }
 
 /**
@@ -532,6 +552,7 @@ function warnIfLabelSetsIntersect(labelsToAdd: Set<string>, labelsToRemove: Set<
 export function updateLabels(
   existingLabels: string[],
   impactAssessment: import("./labelling.ts").ImpactAssessment | undefined,
+  context: ReviewContext,
 ): import("./labelling.ts").LabelContext {
   // logic for this function originally present in:
   //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
@@ -546,7 +567,7 @@ export function updateLabels(
 
   if (impactAssessment) {
     // will further update the label context if necessary
-    processImpactAssessment(labelContext, impactAssessment);
+    processImpactAssessment(labelContext, impactAssessment, context);
   }
 
   warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove);
@@ -581,7 +602,7 @@ export function getRequiredChecksFromBranchRuleOutput(
  * @param owner - The repository owner.
  * @param repo - The repository name.
  * @param head_sha - The commit SHA to check.
- * @param prNumber - The pull request number.
+ * @param targetBranch - The current target branch of the pull request.
  */
 export async function getCheckRunTuple(
   github: GitHub,
@@ -589,7 +610,7 @@ export async function getCheckRunTuple(
   owner: string,
   repo: string,
   head_sha: string,
-  prNumber: number,
+  targetBranch: string,
   excludedCheckNames: string[],
 ): Promise<
   [CheckRunData[], CheckRunData[], import("./labelling.ts").ImpactAssessment | undefined]
@@ -767,7 +788,7 @@ export async function getCheckRunTuple(
     const branchRules = await github.rest.repos.getBranchRules({
       owner: owner,
       repo: repo,
-      branch: impactAssessment.targetBranch,
+      branch: targetBranch,
     });
 
     if (branchRules) {

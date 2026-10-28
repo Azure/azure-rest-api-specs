@@ -1,0 +1,85 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability
+area: "dataplane"
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 660s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+stimuli:
+  - name: 006005-dp-version-add-preview-trigger
+    tags:
+      suite: dataplane
+      mode: trigger
+    prompt: Add a new preview version `2023-06-01-preview` to the Versions enum and carry over all features from the latest stable version `2022-12-01` into the new preview.
+    environment: &id001
+      files:
+        - src: ../fixtures/006005-dp-version-add-preview/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/006005-dp-version-add-preview/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../fixtures/006005-dp-version-add-preview/tspconfig.yaml
+          dest: tspconfig.yaml
+      commands:
+        - node -e "const fs=require('fs');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync('node_modules')){fs.symlinkSync(t,'node_modules','junction')}"
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 006005-dp-version-add-preview-forced
+    tags:
+      suite: dataplane
+      mode: forced
+    prompt: "@azure-typespec-author Add a new preview version `2023-06-01-preview` to the Versions enum and carry over all features from the latest stable version `2022-12-01` into the new preview."
+    environment: *id001
+    graders:
+      - type: run-command
+        config:
+          command: tsp compile .
+          expected_exit_code: 0
+      - &id003
+        type: file-matches
+        config:
+          path: main.tsp
+          pattern: v2023_06_01_Preview
+      - &id004
+        type: file-matches
+        name: file-matches-preview-version
+        config:
+          path: main.tsp
+          pattern: 2023-06-01-preview
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 006005-dp-version-add-preview-no-skill
+    tags:
+      suite: dataplane
+      mode: no-skill
+    prompt: Add a new preview version `2023-06-01-preview` to the Versions enum and carry over all features from the latest stable version `2022-12-01` into the new preview.
+    environment: *id001
+    graders:
+      - type: tool-calls
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - *id003
+      - *id004
+    constraints:
+      max_turns: 5
+      max_tokens: 100000
+scoring:
+  weights:
+    tool-calls: 0.2
+    skill-invocation: 0.15
+    run-command: 0.15
+    file-matches: 0.5
+  threshold: 0.95

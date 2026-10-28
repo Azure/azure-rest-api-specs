@@ -1,0 +1,131 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "decorators"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 004002-decorate-length-constrains-on-array-item-trigger
+    tags:
+      suite: "decorators"
+      mode: "trigger"
+    prompt: |
+      I have a property `assets: string[]` in EmployeeProperties. Add @minLength(3) @maxLength(10) constraints for any item of the assets array. Ensure the definition meets TypeSpec Azure guidelines.
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/004002-decorate-length-constrains-on-array-item/employee.tsp
+          dest: employee.tsp
+        - src: ../fixtures/004002-decorate-length-constrains-on-array-item/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/004002-decorate-length-constrains-on-array-item/readme.md
+          dest: readme.md
+        - src: ../fixtures/004002-decorate-length-constrains-on-array-item/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/004002-decorate-length-constrains-on-array-item/tspconfig.yaml
+          dest: tspconfig.yaml
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 004002-decorate-length-constrains-on-array-item-forced
+    tags:
+      suite: "decorators"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author I have a property `assets: string[]` in EmployeeProperties. Add @minLength(3) @maxLength(10) constraints for any item of the assets array. Ensure the definition meets TypeSpec Azure guidelines.
+    environment: *shared_environment
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - &file_matches
+        type: "file-matches"
+        config:
+          pattern: "scalar.*extends string"
+          path: "employee.tsp"
+      - &file_matches_min_length
+        type: "file-matches"
+        name: "file-matches-min-length"
+        config:
+          pattern: '@minLength\(3\)'
+          path: "employee.tsp"
+      - &file_matches_max_length
+        type: "file-matches"
+        name: "file-matches-max-length"
+        config:
+          pattern: '@maxLength\(10\)'
+          path: "employee.tsp"
+      - &file_not_matches
+        type: "file-not-matches"
+        config:
+          pattern: 'assets:\s*string\[\]'
+          path: "employee.tsp"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 004002-decorate-length-constrains-on-array-item-no-skill
+    tags:
+      suite: "decorators"
+      mode: "no-skill"
+    prompt: "I have a property `assets: string[]` in EmployeeProperties. Add @minLength(3) @maxLength(10) constraints for any item of the assets array. Ensure the definition meets TypeSpec Azure guidelines."
+    environment: *shared_environment
+    rubric:
+      - Each item of EmployeeProperties.assets uses a custom string scalar constrained with minLength 3 and maxLength 10.
+      - The constraints apply to individual array items rather than to the assets array itself.
+      - Changes follow TypeSpec Azure guidelines and contain no unrelated edits.
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - *file_matches
+      - *file_matches_min_length
+      - *file_matches_max_length
+      - *file_not_matches
+      - type: "prompt"
+        config:
+          prompt: "Verify asset use the custom scalar type with minLength and maxLength constraints instead of plain string."
+          model: "gpt-5.6-sol"
+          scoring: "scale_1_10"
+          threshold: 0.88
+    constraints:
+      max_turns: 10
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.1
+    prompt: 0.1
+    run-command: 0.1
+    skill-invocation: 0.1
+    file-not-matches: 0.1
+    file-matches: 0.5
+  threshold: 0.98
