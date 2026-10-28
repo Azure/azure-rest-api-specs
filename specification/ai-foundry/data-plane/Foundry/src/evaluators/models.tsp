@@ -236,6 +236,9 @@ model AgentEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
 @doc("Traces source for evaluator generation jobs — conversation traces from Application Insights.")
 model TracesEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...TracesJobSource;
+
+  @doc("Optional explicit list of trace IDs to include.")
+  trace_ids?: string[];
 }
 
 @doc("Dataset source for evaluator generation jobs — reference to a dataset.")
