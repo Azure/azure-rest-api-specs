@@ -28,7 +28,7 @@ These are the global settings for the napster service.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-12-24-preview
+tag: package-2026-08-11
 
 ```
 
@@ -47,6 +47,16 @@ These settings apply only when `--tag=package-2025-12-24-preview` is specified o
 input-file:
   - Napster.CompanionAPI/preview/2025-12-24-preview/openapi.json
 ```
+
+### Tag: package-2026-08-11
+
+These settings apply only when `--tag=package-2026-08-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-08-11'
+input-file:
+  - Napster.CompanionAPI/stable/2026-08-11/openapi.json
+```
+
 ## Suppression
 ``` yaml
 directive:

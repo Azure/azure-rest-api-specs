@@ -1,0 +1,45 @@
+name: "Package Name Approval - Validate Labels"
+
+on:
+  pull_request_target:
+    types:
+      - labeled
+      - unlabeled
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+  statuses: write
+
+jobs:
+  validate-approval:
+    name: Validate Package Name Approval
+    runs-on: ubuntu-24.04
+    steps:
+      # IMPORTANT: This workflow uses pull_request_target, which runs with repo write permissions.
+      # Only base-branch code is checked out below. Do NOT checkout or run code from the PR head.
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github/
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Validate package name approval label
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: validateApproval } =
+              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/validate-approval.js');
+            await validateApproval({ github, context, core });
+
+      - name: Update package name approval status
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: statusCheck } =
+              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/status-check.js');
+            await statusCheck({ github, context, core });

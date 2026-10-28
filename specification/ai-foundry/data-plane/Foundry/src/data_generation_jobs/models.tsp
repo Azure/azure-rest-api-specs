@@ -24,8 +24,12 @@ union DataGenerationJobType {
 
   @doc("Tool calling conversation between user and agent.")
   tool_use: "tool_use",
+
+  @doc("Task generation for evaluation scenarios.")
+  task_generation: "task_generation",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("LLM model options for data generation jobs.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model DataGenerationModelOptions {
@@ -52,6 +56,7 @@ model DataGenerationJobInputs {
   output_options?: DataGenerationJobOutputOptions;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Output options for data generation job.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model DataGenerationJobOutputOptions {
@@ -186,6 +191,7 @@ union DataGenerationJobScenario {
   evaluation: "evaluation",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Options for managing data generation jobs.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
@@ -205,6 +211,7 @@ model DataGenerationJobOptions {
   model_options?: DataGenerationModelOptions;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The options for a data generation job with SimpleQnA type.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
@@ -215,6 +222,7 @@ model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
   question_types?: SimpleQnAFineTuningQuestionType[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The options for a data generation job with Traces type.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
@@ -222,6 +230,14 @@ model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
   type: "traces";
 }
 
+@doc("The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.")
+@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+model TaskGenerationDataGenerationJobOptions extends DataGenerationJobOptions {
+  @doc("The data generation job type, which is TaskGeneration for this model.")
+  type: "task_generation";
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model ToolUseFineTuningDataGenerationJobOptions

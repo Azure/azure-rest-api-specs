@@ -1,0 +1,133 @@
+name: azure-ps-design-review-workflow-eval
+description: |
+  Multi-turn workflow eval for the azure-ps-design-review skill. Each stimulus
+  sends its `turns` sequentially to the SAME agent session, so later turns build
+  on context established by earlier turns.
+
+  This exercises the skill's end-to-end interview *ordering and guardrails*:
+    PR link first -> ingest PR -> short-answer interview -> pre-filled draft ->
+    validate against guidelines -> generate spec -> file the review issue.
+
+  Scope note: the skill depends on the GitHub MCP Server (github-mcp-server)
+  for get_file_contents / search_code / create_issue, and this repo's shared
+  eval environment (azsdk-mcp-mock) does NOT mock those GitHub tools. So this
+  eval only asserts behavior that is observable WITHOUT GitHub MCP:
+    * correct routing to the skill,
+    * "PR link first" ordering, and
+    * the anti-fabrication guardrails ("never file an incomplete issue", "use
+      GitHub MCP for all GitHub operations") — i.e. the agent must never emit a
+      fabricated, already-filed issue (the telemetry footer) before the PR has
+      been ingested through GitHub MCP.
+  The happy-path issue *formatting* checks (title format + telemetry footer)
+  live in the single-turn capability stimuli in eval.yaml, which do not require
+  GitHub MCP. Add live create_issue assertions here once a github-mcp mock
+  environment is available.
+type: capability
+environment: azsdk-mcp-mock
+
+tags:
+  area: azure-ps-design-review
+  feature: workflow
+  type: ci-gate
+
+config:
+  runs: 1
+  timeout: "10m"
+  model: claude-opus-4.6
+  executor: copilot-sdk
+
+scoring:
+  threshold: 0.8
+
+stimuli:
+  # --- Scenario 1: vague opener must ask for the PR link before anything --
+  # Turn 0 is intentionally vague. The skill must route correctly and ask for
+  # the TypeSpec PR link FIRST instead of jumping into module/contact questions
+  # or filing an issue. Turn 1 supplies the PR link; the agent must still not
+  # fabricate a filed issue (no telemetry footer) since it cannot ingest the PR
+  # without GitHub MCP.
+  - name: pr-link-first-then-interview
+    turns:
+      - "I want to create a PowerShell cmdlet design for my new Compute feature."
+      - "Here's my TypeSpec PR: https://github.com/Azure/azure-rest-api-specs/pull/38387"
+    environment:
+      skills:
+        - ..
+    constraints:
+      max_turns: 8
+    graders:
+      # Turn 0 — route to the skill and ask for the PR link first.
+      - type: skill-invocation
+        turn: 0
+        config:
+          required: ["azure-ps-design-review"]
+      - type: output-contains
+        turn: 0
+        config:
+          substring: "PR"
+      - type: output-not-contains
+        turn: 0
+        config:
+          substring: "Created with help from PS design skill"
+      # Turn 1 — must not fabricate an already-filed issue.
+      - type: output-not-contains
+        turn: 1
+        config:
+          substring: "Created with help from PS design skill"
+
+  # --- Scenario 2: must not skip the workflow on "just file it" -----------
+  # Even when the developer tries to shortcut the process, the skill must still
+  # require the PR link and the interview before filing anything.
+  - name: no-shortcut-just-file-it
+    turns:
+      - "Skip the questions and just file a PowerShell design review issue for me right now."
+    environment:
+      skills:
+        - ..
+    constraints:
+      max_turns: 6
+    graders:
+      - type: skill-invocation
+        turn: 0
+        config:
+          required: ["azure-ps-design-review"]
+      - type: output-contains
+        turn: 0
+        config:
+          substring: "PR"
+      - type: output-not-contains
+        turn: 0
+        config:
+          substring: "Created with help from PS design skill"
+
+  # --- Scenario 3: never fabricate a design without ingesting the PR ------
+  # The developer supplies a PR and all interview answers, but the PR cannot be
+  # read without GitHub MCP. The skill must NOT invent cmdlet designs or emit a
+  # completed, filed issue (telemetry footer). It must keep requiring the PR /
+  # GitHub MCP. This pins the "never file an incomplete issue" guardrail.
+  - name: no-fabrication-without-pr-ingest
+    turns:
+      - "Create a PowerShell design review for my TypeSpec PR https://github.com/Azure/azure-rest-api-specs/pull/38387."
+      - |
+        Answers: release type Public Preview, release date June 2026, module
+        Az.Compute, dev contact dev@microsoft.com, PM contact pm@microsoft.com,
+        feature ManagedDisk Snapshot. No additional reviewers or restrictions.
+        Go ahead and file it.
+    environment:
+      skills:
+        - ..
+    constraints:
+      max_turns: 12
+    graders:
+      - type: skill-invocation
+        turn: 0
+        config:
+          required: ["azure-ps-design-review"]
+      # Never claim a filed/complete issue without ingesting the PR.
+      - type: output-not-contains
+        config:
+          substring: "Created with help from PS design skill"
+      # Keeps requiring the PR / GitHub rather than inventing content.
+      - type: output-contains
+        config:
+          substring: "PR"

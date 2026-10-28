@@ -10,7 +10,7 @@ network:
 steps:
   - name: Acquire OIDC token for Azure
     id: oidc
-    uses: actions/github-script@v7
+    uses: actions/github-script@v9
     with:
       script: |
         const token = await core.getIDToken('api://AzureADTokenExchange');

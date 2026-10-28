@@ -1,0 +1,102 @@
+name: data-plane-api-reviewer-eval-naming-and-docs
+description: |
+  Naming-clarity and documentation-quality tests for the data-plane API
+  reviewer.
+
+  These stimuli deliberately contain NO casing violations: casing is
+  linter-owned (`casing-style`), and `documentation-required` enforces that
+  @doc exists, not that it says anything. What is under test is the residue
+  the linter cannot see - correctly cased but opaque names, and present but
+  contentless documentation. See references/data-plane-naming-and-docs.md.
+
+tags:
+  area: data-plane-api-reviewer
+
+defaults:
+  runs: 1
+  timeout: "420s"
+  # Keep equal to the top-level `model:` in .github/workflows/data-plane-api-review.md.
+  model: gpt-5.6-sol
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  - name: opaque-but-correctly-cased-names
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/naming-clarity.tsp"
+          dest: "specification/deviceregistry/data-plane/Contoso.DeviceRegistry/stable/2026-01-01/devices.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines, paying particular attention to naming.
+      This is a new service introducing its first stable API version. Report
+      findings with rule IDs, line numbers, and fix suggestions.
+
+      File: specification/deviceregistry/data-plane/Contoso.DeviceRegistry/stable/2026-01-01/devices.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "reports naming-clarity findings"
+        config:
+          pattern: "\\*\\*\\[DP-NAME-0[0-9]\\]"
+      - type: output-not-matches
+        name: "does not report linter-owned casing"
+        config:
+          pattern: "(?i)\\bshould\\W{1,4}be\\W{1,4}(camelCase|PascalCase)\\b"
+      - type: output-not-matches
+        name: "does not raise casing-style as a finding"
+        config:
+          pattern: "(?i)\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\][^*\\n]*\\bcasing-style\\b"
+      - type: prompt
+    rubric:
+      - The agent identifies opaque, abbreviated, or numbered property names - names that are correctly cased but convey nothing about what the value means - and reports them under DP-NAME-01 or the equivalent clarity rule, with a concrete suggested replacement for each.
+      - The agent identifies numeric properties whose unit is not expressed in the name or the documentation, and points out that a caller cannot tell seconds from milliseconds from minutes.
+      - The agent identifies boolean properties that encode more than two states, or that will need a third state later, and suggests an extensible union instead.
+      - The agent MUST NOT report a casing violation. Casing is enforced mechanically by the azure-core `casing-style` rule and reporting it here is duplicate noise.
+      - The agent groups naming findings rather than emitting one finding per property, and does not raise any of them at Blocking severity.
+
+  - name: tautological-and-missing-substance-docs
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/doc-quality.tsp"
+          dest: "specification/schedulerservice/data-plane/Contoso.Scheduler/stable/2026-01-01/scheduler.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines, paying particular attention to
+      documentation quality. This is a new service introducing its first stable
+      API version. Report findings with rule IDs, line numbers, and fix
+      suggestions.
+
+      File: specification/schedulerservice/data-plane/Contoso.Scheduler/stable/2026-01-01/scheduler.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "reports documentation-quality findings"
+        config:
+          pattern: "\\*\\*\\[DP-DOC-0[0-9]\\]"
+      - type: output-not-matches
+        name: "does not report linter-owned doc presence"
+        config:
+          pattern: "(?i)\\bmissing\\W{1,4}@doc\\b"
+      - type: output-not-matches
+        name: "does not raise documentation-required as a finding"
+        config:
+          pattern: "(?i)\\*\\*\\[[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\\][^*\\n]*\\bdocumentation-required\\b"
+      - type: prompt
+    rubric:
+      - The agent identifies tautological documentation - @doc text that restates the property name and adds no information, such as "The name." on a property called `name` - and reports it under DP-DOC-01 or the equivalent.
+      - The agent identifies union or enum members that are documented in name only, so that a caller cannot tell when the service will return one value rather than another.
+      - The agent identifies parameters or properties whose semantics are undocumented - what happens when omitted, what the default is, what the valid range is, how it interacts with other fields.
+      - For at least some findings the agent supplies replacement documentation text rather than only saying the existing text is inadequate.
+      - The agent MUST NOT report that @doc is missing. Presence is enforced mechanically by the azure-core `documentation-required` rule; only quality is under review here.
+      - Documentation findings are grouped and are not raised at Blocking severity.

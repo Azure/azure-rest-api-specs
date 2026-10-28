@@ -3577,6 +3577,53 @@ model NamespaceProperties {
    * Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported.
    */
   minimumTlsVersionAllowed?: TlsVersion;
+
+  /**
+   * Auto-scale configuration for the namespace resource
+   */
+  autoScaleConfiguration?: AutoScaleConfiguration;
+}
+
+/**
+ * Auto-scale configuration for the namespace resource.
+ */
+model AutoScaleConfiguration {
+  /**
+   * Indicates whether auto-scaling is enabled for the namespace. When enabled, the namespace will automatically scale
+   * between minimumThroughputUnits and maximumThroughputUnits based on usage patterns.
+   */
+  enableAutoScale?: boolean;
+
+  /**
+   * Minimum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.
+   */
+  minimumThroughputUnits?: int32;
+
+  /**
+   * Maximum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.
+   */
+  maximumThroughputUnits?: int32;
+}
+
+/**
+ * UpdateAutoScaleConfiguration definition.
+ */
+model UpdateAutoScaleConfiguration {
+  /**
+   * Indicates whether auto-scaling is enabled for the namespace. When enabled, the namespace will automatically scale
+   * between minimumThroughputUnits and maximumThroughputUnits based on usage patterns.
+   */
+  enableAutoScale?: boolean;
+
+  /**
+   * Minimum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.
+   */
+  minimumThroughputUnits?: int32;
+
+  /**
+   * Maximum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.
+   */
+  maximumThroughputUnits?: int32;
 }
 
 /**
@@ -3971,6 +4018,11 @@ model NamespaceUpdateParameterProperties {
    */
   @identifiers(#[])
   inboundIpRules?: InboundIpRule[];
+
+  /**
+   * Auto-scale configuration for the namespace resource
+   */
+  autoScaleConfiguration?: UpdateAutoScaleConfiguration;
 }
 
 /**

@@ -154,6 +154,18 @@ using Microsoft.IoTOperations;
   "csharp"
 );
 @@clientName(StateStoreResourceKeyTypes, "StateStoreResourceKeyType", "csharp");
+@@clientName(AkriServiceResource, "AkriService", "csharp");
+@@clientName(AkriServiceProperties, "AkriServiceProperties", "csharp");
+@@clientName(
+  ResourceHealthStatus,
+  "IotOperationsResourceHealthStatus",
+  "csharp"
+);
+
+// Surface the RFC3339 timestamp properties as DateTimeOffset in the C# SDK
+// without changing the wire contract (service still emits/accepts strings).
+@@alternateType(ResourceHealthStatus.lastTransitionTime, utcDateTime, "csharp");
+@@alternateType(ResourceHealthStatus.lastUpdateTime, utcDateTime, "csharp");
 
 @@clientName(
   Versions.`2024-11-01`,

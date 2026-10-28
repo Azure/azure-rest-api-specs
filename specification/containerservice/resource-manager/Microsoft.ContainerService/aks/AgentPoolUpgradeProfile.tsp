@@ -75,7 +75,7 @@ model AgentPoolUpgradeProfileProperties {
   /**
    * List of components grouped by kubernetes major.minor version.
    */
-  @added(Versions.v2026_04_02_preview)
+  @added(Versions.v2026_05_02_preview)
   @identifiers(#[])
   componentsByReleases?: ComponentsByRelease[];
 
@@ -108,7 +108,7 @@ model AgentPoolUpgradeProfilePropertiesUpgradesItem {
   /**
    * Whether the Kubernetes version is out of support.
    */
-  @added(Versions.v2026_04_02_preview)
+  @added(Versions.v2026_05_02_preview)
   isOutOfSupport?: boolean;
 }
 

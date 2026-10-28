@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "applicationSecurityGroupName": "test-asg",
+    "addressPrefixSetName": "test-prefix-set",
+    "resource": {
+      "properties": {
+        "addressPrefixes": [
+          "10.0.0.0/16",
+          "192.168.1.0/24",
+          "2001:db8::/32"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationSecurityGroups/test-asg/addressPrefixSets/test-prefix-set",
+        "name": "test-prefix-set",
+        "type": "Microsoft.Network/applicationSecurityGroups/addressPrefixSets",
+        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+        "properties": {
+          "addressPrefixes": [
+            "10.0.0.0/16",
+            "192.168.1.0/24",
+            "2001:db8::/32"
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/applicationSecurityGroups/test-asg/addressPrefixSets/test-prefix-set",
+        "name": "test-prefix-set",
+        "type": "Microsoft.Network/applicationSecurityGroups/addressPrefixSets",
+        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+        "properties": {
+          "addressPrefixes": [
+            "10.0.0.0/16",
+            "192.168.1.0/24",
+            "2001:db8::/32"
+          ],
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  },
+  "operationId": "AddressPrefixSets_CreateOrUpdate",
+  "title": "Create address prefix set"
+}

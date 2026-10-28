@@ -40,23 +40,35 @@ namespace Quantum.Workspace.Services {
   /** Operation to patch a resource. */
   #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
-  @updatesResource(Resource)
-  op PatchOperation<Resource extends Reflection.Model> is AzureCoreOperations.ResourceUpdate<
-    Resource,
+  @updatesResource(Request)
+  op PatchOperation<
+    Request extends Reflection.Model,
+    Response extends Reflection.Model = Request
+  > is Azure.Core.Foundations.ResourceOperation<
+    Request,
     {
       /** This request uses a JSON Merge Patch body. */
       @header("Content-Type")
       contentType: "application/merge-patch+json";
 
+      /** The resource instance. */
       @body
-      update: Resource;
+      resource: Request;
 
       ...Azure.Core.Traits.Private.TraitProperties<
         DefaultServiceTraits,
         TraitLocation.Parameters,
         TraitContext.Update
       >;
-    }
+    },
+    Azure.Core.Foundations.ResourceOkResponse<Response &
+      Azure.Core.Traits.Private.TraitProperties<
+        DefaultServiceTraits,
+        TraitLocation.Response,
+        TraitContext.Update
+      >>,
+    DefaultServiceTraits,
+    Azure.Core.Foundations.ErrorResponse
   >;
 
   /** Operation to patch a resource. */

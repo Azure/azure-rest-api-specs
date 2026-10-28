@@ -27,8 +27,7 @@ export const FOLDER_MIGRATION_LABEL = "FolderMigrationV2";
  * @param params.repo Repository name
  * @param params.workspace Absolute path to workspace root
  * @param params.octokit Octokit instance for GitHub API calls
- * @returns TypeSpec project info with path and API version, or null if no spec changes, no projects found, or multiple projects found
- * @throws Error if no API version detected in project
+ * @returns TypeSpec project info with path and API version, or null if no spec changes, no projects found, multiple projects found, or no API version detected
  */
 export async function getTypeSpecProjectInfoFromPr(params: {
   prNumber: number;
@@ -72,7 +71,10 @@ export async function getTypeSpecProjectInfoFromPr(params: {
   );
 
   if (versionResult.apiVersions.length === 0) {
-    throw new Error("No API version found in modified files or TypeSpec project path/content.");
+    console.log(
+      "No API version detected in modified files or TypeSpec project. Skipping release plan creation.",
+    );
+    return null;
   }
 
   return {
@@ -172,7 +174,10 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
   );
 
   if (versionResult.apiVersions.length === 0) {
-    throw new Error("No API version found in modified files or TypeSpec project path/content.");
+    console.log(
+      "No API version detected in modified files or TypeSpec project. Skipping release plan creation.",
+    );
+    return { projectInfo: null, hasNewApiVersionLabel: false };
   }
 
   return {
@@ -368,7 +373,7 @@ export function findTspConfigDir(relativeFilePath: string, workspace: string): s
  * @param changedFiles Array of changed file paths
  * @param tspProjectPath Relative path to TypeSpec project
  * @param workspace Absolute path to workspace root
- * @returns Object containing sorted API versions (latest first) and preview flag
+ * @returns Object containing sorted API versions (latest first) and a preview flag derived from the final (latest) API version
  */
 export function detectApiVersions(
   changedFiles: string[],
@@ -377,16 +382,12 @@ export function detectApiVersions(
 ): { apiVersions: string[]; isPreview: boolean } {
   const apiVersionPattern = /(\d{4}-\d{2}-\d{2}(?:-preview)?)/g;
   const versions = new Set<string>();
-  let isPreview = false;
 
   for (const file of changedFiles) {
     const matches = file.match(apiVersionPattern);
     if (matches) {
       for (const version of matches) {
         versions.add(version);
-        if (version.endsWith("-preview")) {
-          isPreview = true;
-        }
       }
     }
   }
@@ -394,13 +395,17 @@ export function detectApiVersions(
   if (versions.size === 0) {
     for (const version of collectApiVersionsFromMainTsp(tspProjectPath, workspace)) {
       versions.add(version);
-      if (version.endsWith("-preview")) {
-        isPreview = true;
-      }
     }
   }
 
   const apiVersions = [...versions].sort(compareApiVersionsDesc);
+
+  // The release type (Public Preview vs GA) is decided solely by the final
+  // (latest) API version detected, not by whether any version in the change
+  // set happens to be a preview. apiVersions[0] is the latest version because
+  // the list is sorted in descending order.
+  const isPreview = apiVersions.length > 0 && apiVersions[0].endsWith("-preview");
+
   return { apiVersions, isPreview };
 }
 

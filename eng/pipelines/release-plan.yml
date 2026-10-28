@@ -44,6 +44,7 @@ stages:
             continueOnError: true
             env:
               GH_TOKEN: $(GH_TOKEN)
+              AZSDKTOOLS_NOTIFICATION_SERVICE_URL: $(AzureSDKEmailerSasURL)
               ${{ if eq(parameters['Test-release-Plan'], true) }}:
                 AZSDKTOOLS_AGENT_TESTING: "true"
             inputs:

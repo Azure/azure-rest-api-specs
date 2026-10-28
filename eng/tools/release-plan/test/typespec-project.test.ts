@@ -236,7 +236,11 @@ describe("TypeSpec project detection edge cases", () => {
     expect(result.apiVersions).toContain("2025-05-01");
     expect(result.apiVersions).toContain("2025-06-01-preview");
     expect(result.apiVersions).toContain("2026-01-01");
-    expect(result.isPreview).toBe(true);
+    // Release type is decided by the final (latest) version. The latest here is
+    // the GA version 2026-01-01, so isPreview must be false even though a
+    // preview version is present in the change set.
+    expect(result.apiVersions[0]).toBe("2026-01-01");
+    expect(result.isPreview).toBe(false);
   });
 
   it("returns null for invalid API version format", () => {

@@ -25,6 +25,13 @@ model AIManager is TrackedResource<AIManagerProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
+scalar ClusterResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/managedClusters",
+    }
+  ]>;
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
 @doc("AI Manager properties.")
 model AIManagerProperties {
@@ -38,6 +45,13 @@ model AIManagerProperties {
   @visibility(Lifecycle.Read)
   @doc("The name of the managed resource group created by the AI Manager to hold underlying infrastructure resources.")
   managedResourceGroupName?: string;
+
+  @added(Versions.v2026_08_02_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @doc("""
+    The ARM resource ID of an existing AKS cluster to attach (bring-your-own). When omitted, AI Manager provisions and manages its own underlying cluster. The referenced cluster must be in the same region as this AI Manager, but may reside in a different subscription within the same Microsoft Entra tenant. This property is immutable after creation.
+    """)
+  clusterResourceId?: ClusterResourceId;
 }
 
 @doc("Delete options of the AI Manager.")

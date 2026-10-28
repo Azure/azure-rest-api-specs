@@ -11,6 +11,7 @@ import {
 import * as log from "../src/log.ts";
 import { LogLevel } from "../src/log.ts";
 import * as pythonPypiValidation from "../src/python-pypi-validation.ts";
+import * as sdkValidationConfig from "../src/sdk-validation-config.ts";
 import * as changeFiles from "../src/spec-helpers.ts";
 import type { ExecutionReport } from "../src/types.ts";
 import * as utils from "../src/utils.ts";
@@ -264,9 +265,7 @@ describe("generateSdkForSpecPr", () => {
     });
 
     const { statusCode } = await generateSdkForSpecPr();
-    const serviceFolderPath = commandHelpers.getServiceFolderPath(
-      mockChangedSpecs[0].typespecProject,
-    );
+    const serviceFolderPath = utils.getServiceFolderPath(mockChangedSpecs[0].typespecProject);
     expect(statusCode).toBe(0);
     expect(log.logMessage).toHaveBeenCalledWith(
       `Generating SDK from ${serviceFolderPath}`,
@@ -292,6 +291,67 @@ describe("generateSdkForSpecPr", () => {
       [], // apiViewRequestData
       true, // sdkGenerationExecuted
     );
+  });
+
+  test("uses a pinned SDK branch and restores main for the next unpinned spec", async () => {
+    const mockCommandInput = {
+      localSdkRepoPath: "path/to/local/repo",
+      localSpecRepoPath: "/spec/path",
+      workingFolder: "/working/folder",
+      runMode: "spec-pull-request",
+      sdkRepoName: "azure-sdk-for-js",
+      sdkLanguage: SdkName.Js,
+      specCommitSha: "spec-sha",
+      specRepoHttpsUrl: "https://github.com/Azure/azure-rest-api-specs",
+      prNumber: "123",
+    };
+    const mockChangedSpecs = [
+      {
+        specs: ["specification/service-one/Project/file.tsp"],
+        typespecProject: "specification/service-one/Project/tspconfig.yaml",
+      },
+      {
+        specs: ["specification/service-two/Project/file.tsp"],
+        typespecProject: "specification/service-two/Project/tspconfig.yaml",
+      },
+    ];
+    const mockExecutionReport = {
+      executionResult: "succeeded",
+      packages: [],
+    };
+
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockResolvedValue(mockChangedSpecs);
+    vi.spyOn(sdkValidationConfig, "resolveSdkRepoBranch")
+      .mockReturnValueOnce("feature/custom")
+      .mockReturnValueOnce(undefined);
+    vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
+    const checkoutSdkBranchSpy = vi.spyOn(utils, "checkoutSdkBranch").mockResolvedValue(true);
+    const checkoutMainBranchSpy = vi
+      .spyOn(utils, "checkoutMainBranch")
+      .mockResolvedValue(undefined);
+    const runSpecGenSdkCommandSpy = vi
+      .spyOn(utils, "runSpecGenSdkCommand")
+      .mockResolvedValue(undefined);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
+      mockExecutionReport as ExecutionReport,
+    );
+    vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue(false);
+    vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
+    vi.spyOn(log, "logMessage").mockImplementation(() => {});
+
+    const { statusCode } = await generateSdkForSpecPr();
+
+    expect(statusCode).toBe(0);
+    expect(checkoutSdkBranchSpy).toHaveBeenCalledOnce();
+    expect(checkoutSdkBranchSpy).toHaveBeenCalledWith(
+      mockCommandInput.localSdkRepoPath,
+      "feature/custom",
+    );
+    expect(checkoutMainBranchSpy).toHaveBeenCalledOnce();
+    expect(checkoutMainBranchSpy).toHaveBeenCalledWith(mockCommandInput.localSdkRepoPath);
+    expect(runSpecGenSdkCommandSpy).toHaveBeenCalledTimes(2);
   });
 
   test("should validate Python PR package registration on PyPI", async () => {

@@ -1,0 +1,53 @@
+name: data-plane-api-reviewer-eval-error-design
+description: |
+  Error design tests for the data-plane API reviewer.
+
+  Covers DP-ERR-01 through DP-ERR-06. This is the highest-value purely
+  semantic area: the azure-core linter enforces essentially nothing about
+  error-code craftsmanship. See references/data-plane-error-design.md.
+
+tags:
+  area: data-plane-api-reviewer
+
+defaults:
+  runs: 1
+  timeout: "420s"
+  # Keep equal to the top-level `model:` in .github/workflows/data-plane-api-review.md.
+  model: gpt-5.6-sol
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  - name: unstable-error-codes-and-unactionable-messages
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/error-design.tsp"
+          dest: "specification/documentpipeline/data-plane/Contoso.DocumentPipeline/stable/2026-01-01/pipeline.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines, paying particular attention to error
+      design. This is a new service introducing its first stable API version.
+      Report findings with rule IDs, line numbers, and fix suggestions.
+
+      File: specification/documentpipeline/data-plane/Contoso.DocumentPipeline/stable/2026-01-01/pipeline.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "reports error-design findings"
+        config:
+          pattern: "\\*\\*\\[DP-ERR-0[0-9]\\]"
+      - type: prompt
+    rubric:
+      - The agent identifies that the error model does not follow the standard Azure error envelope, and recommends Azure.Core.Foundations.Error or an equivalent that nests the error object under a top-level `error` property.
+      - The agent identifies that error `code` values are unstable or unusable as programmatic discriminators - free-form, numeric, human-prose, or locale-dependent - and explains that callers branch on `code`, so it is API surface subject to the same compatibility rules as a property name.
+      - The agent identifies that error messages are not actionable - they state that something failed without stating which input was at fault or what the caller should do differently.
+      - The agent identifies missing `target` on errors that concern a specific request field, and explains that without it a client cannot attach the error to a form field or a request property.
+      - The agent proposes concrete replacement code values in the expected casing convention rather than only saying the existing ones are wrong.
+      - Findings are anchored to specific line numbers.
+      - The agent does not report azure-core linter-owned rules such as no-enum, casing-style, or documentation-required.

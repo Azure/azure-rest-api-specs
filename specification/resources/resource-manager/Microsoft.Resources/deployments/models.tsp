@@ -15,6 +15,7 @@ model DeploymentListResult is Azure.Core.Page<DeploymentExtended>;
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse {
   /** The error code. */
   @visibility(Lifecycle.Read)
@@ -816,6 +817,7 @@ model OnErrorDeployment {
 /**
  * Specifies whether template expressions are evaluated within the scope of the parent template or nested template.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExpressionEvaluationOptions {
   /**
    * The scope to be used for evaluation of parameters, variables and functions in a nested template.

@@ -10,8 +10,8 @@ import "../agents-session-files/routes.tsp";
 import "../agents-optimization/routes.tsp";
 // We don't need the operations for these subclients, just the models
 // so we can customize visibility where necessary.
-import "../openai-responses/models.tsp";
-import "../openai-conversations/routes.tsp";
+import "../openai/responses/models.tsp";
+import "../openai/conversations/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
@@ -197,8 +197,10 @@ using Azure.AI.Projects;
 
 @@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
 @@clientName(FabricIQPreviewTool, "FabricIqPreviewTool", "java");
+//@@clientName(WebIQPreviewTool, "WebIqPreviewTool", "java");
 @@clientName(WorkIQPreviewToolboxTool, "WorkIqPreviewToolboxTool", "java");
 @@clientName(FabricIQPreviewToolboxTool, "FabricIqPreviewToolboxTool", "java");
+//@@clientName(WebIQPreviewToolboxTool, "WebIqPreviewToolboxTool", "java");
 
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "java");

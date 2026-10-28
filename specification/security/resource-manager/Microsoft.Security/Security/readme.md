@@ -60,6 +60,15 @@ directive:
     where: $.paths
     from: applications.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  - suppress: OperationsAPIImplementation
+    from: datascanners.json
+    reason: >-
+      The Microsoft.Security operations API (the standard
+      /providers/Microsoft.Security/operations list) is owned by a separate
+      TypeSpec project (OperationsAPI, which emits security-Operations.json) and
+      is shared across the resource provider. This spec defines only the
+      datascanners resource type and intentionally does not redefine that shared
+      operations API.
   - suppress: TopLevelResourcesListBySubscription
     where: $.definitions.Pricing
     from: pricings.json
@@ -182,6 +191,15 @@ suppressions:
     reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
 ```
 
+### Tag: package-2026-08
+
+These settings apply only when `--tag=package-2026-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-08'
+input-file:
+  - stable/2026-08-01/datascanners.json
+```
+
 ### Tag: package-2026-01
 
 These settings apply only when `--tag=package-2026-01` is specified on the command line.
@@ -208,6 +226,15 @@ These settings apply only when `--tag=package-preview-2025-10-01-preview` is spe
 input-file:
   - preview/2025-10-01-preview/security-Operations.json
   - preview/2025-10-01-preview/pricings.json
+```
+
+### Tag: package-preview-2026-01-01-preview
+
+These settings apply only when `--tag=package-preview-2026-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-01-01-preview'
+input-file:
+  - preview/2026-01-01-preview/defenderForStorageSettings.json
 ```
 
 ### Tag: package-preview-2025-09-01-preview
@@ -295,6 +322,15 @@ These settings apply only when `--tag=package-preview-2024-10` is specified on t
 input-file:
   - preview/2024-10-01-preview/defenderForStorageSettings.json
   - preview/2024-10-01-preview/operations.json
+```
+
+### Tag: package-preview-2026-08-01-preview
+
+These settings apply only when `--tag=package-preview-2026-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-08-01-preview'
+input-file:
+  - preview/2026-08-01-preview/securityConnectors.json
 ```
 
 ### Tag: package-preview-2024-08-01-preview
@@ -703,9 +739,9 @@ input-file:
 - preview/2023-02-15-preview/sensitivitySettings.json
 - preview/2023-05-01-preview/healthReports.json
 - preview/2023-12-01-preview/security-Automations.json
-- preview/2024-08-01-preview/securityConnectors.json
+- preview/2026-08-01-preview/securityConnectors.json
 - stable/2025-05-04/security-Assessment.json
-- preview/2025-09-01-preview/defenderForStorageSettings.json
+- preview/2026-01-01-preview/defenderForStorageSettings.json
 - preview/2025-11-01-preview/securityConnectorsDevOps.json
 - preview/2025-10-01-preview/security-Operations.json
 - stable/2017-08-01/complianceResults.json
@@ -720,6 +756,7 @@ input-file:
 - preview/2025-10-01-preview/pricings.json
 - stable/2024-08-01/security-SecurityStandards.json
 - stable/2026-01-01/privateLinks.json
+- stable/2026-08-01/datascanners.json
 
 # Autorest suppressions
 suppressions:

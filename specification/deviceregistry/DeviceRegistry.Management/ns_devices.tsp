@@ -51,6 +51,7 @@ alias NamespaceDevicePropertiesUpdate = {
   enabled?: boolean;
 };
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request payload for revoking device credentials.")
 @added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
@@ -59,6 +60,7 @@ model DeviceCredentialsRevokeRequest {
   disable?: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request payload for revoking device credentials.")
 @added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)

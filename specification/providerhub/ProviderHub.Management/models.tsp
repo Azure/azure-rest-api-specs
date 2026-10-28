@@ -1779,10 +1779,12 @@ model FeaturesRule {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceProviderManifestPropertiesRequestHeaderOptions
   extends RequestHeaderOptions {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RequestHeaderOptions {
   /**
    * The opt in headers.
@@ -1917,6 +1919,7 @@ model ResourceAccessRole {
 /**
  * Options for error response messages.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceProviderManagementErrorResponseMessageOptions {
   /**
    * Type of server failure response message.
@@ -1962,10 +1965,12 @@ model ResourceProviderCapabilities {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceProviderManifestPropertiesTemplateDeploymentOptions
   extends TemplateDeploymentOptions {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TemplateDeploymentOptions {
   /**
    * Whether preflight is supported.
@@ -2206,6 +2211,7 @@ model ResourceProviderManifestPropertiesResourceGroupLockOptionDuringMove {
 /**
  * Response options.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceProviderManifestPropertiesResponseOptions {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   serviceClientOptionsType?: ServiceClientOptionsType;
@@ -2729,10 +2735,12 @@ model ResourceTypeEndpointDstsConfiguration extends DstsConfiguration {}
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceTypeRegistrationPropertiesExtensionOptions
   extends ResourceTypeExtensionOptions {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceTypeExtensionOptions {
   /**
    * Resource creation begin.
@@ -2749,6 +2757,7 @@ model ResourceTypeExtensionOptionsResourceCreationBegin
   extends ExtensionOptions {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExtensionOptions {
   /**
    * The request.
@@ -2985,6 +2994,7 @@ model CheckNameAvailabilitySpecifications {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceTypeRegistrationPropertiesRequestHeaderOptions
   extends RequestHeaderOptions {}
 
@@ -3006,10 +3016,12 @@ model SubscriptionStateRule {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceTypeRegistrationPropertiesTemplateDeploymentOptions
   extends TemplateDeploymentOptions {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExtendedLocationOptions {
   /**
    * The type.
@@ -3304,6 +3316,7 @@ model ResourceTypeRegistrationPropertiesCapacityRule {
 /**
  * Marketplace options.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceTypeRegistrationPropertiesMarketplaceOptions {
   /**
    * Add-on plan conversion allowed.
@@ -3352,6 +3365,7 @@ model ResourceTypeRegistrationPropertiesResourceQueryManagement {
 /**
  * Resource management options.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceTypeRegistrationPropertiesResourceManagementOptions {
   /**
    * Batch provisioning support.
@@ -3920,6 +3934,7 @@ model ResourceProviderManifestFeaturesRule extends FeaturesRule {}
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceProviderManifestRequestHeaderOptions
   extends RequestHeaderOptions {}
 
@@ -4121,6 +4136,7 @@ model ResourceTypeFeaturesRule extends FeaturesRule {}
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceTypeRequestHeaderOptions extends RequestHeaderOptions {}
 
 /**

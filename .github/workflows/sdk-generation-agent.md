@@ -26,8 +26,11 @@ if: >
 permissions:
   contents: read
   actions: read
+  copilot-requests: write
   issues: read
   pull-requests: read
+  # Required by shared-github-aw-imports/global_networks_auth_import.md to mint an
+  # OIDC token for the api://AzureADTokenExchange audience (federated `az login`).
   id-token: write
 strict: false
 imports:
@@ -37,6 +40,10 @@ env:
   AZSDK_CLI_PATH: /tmp/bin
   AZURE_CLIENT_ID: c277c2aa-5326-4d16-90de-98feeca69cbc
   AZURE_TENANT_ID: 72f988bf-86f1-41af-91ab-2d7cd011db47
+  # NOTE: gh-aw warns that this secret is visible to the agent container. It is
+  # intentional (see #40598): the azsdk CLI the agent drives needs a GitHub token,
+  # as does the azsdk-mcp installer step. Do not move it to `engine.env` — the
+  # imported setup steps read it too.
   GITHUB_TOKEN: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
   GITHUB_ACTIONS: "true"
 tools:

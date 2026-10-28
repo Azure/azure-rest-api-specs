@@ -1,0 +1,75 @@
+name: "TypeSpec Suppressions - Set Status"
+
+on:
+  # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
+  # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
+  # trigger "workflow_run" -- they are both privileged and run in the target branch and repo --
+  # which simplifies implementation.
+  pull_request_target:
+    types:
+      # Run workflow on default types, to update status as quickly as possible.
+      - opened
+      - synchronize
+      - reopened
+      # Depends on labels, so must re-evaluate whenever a relevant label is manually added or removed.
+      - labeled
+      - unlabeled
+  workflow_run:
+    # Trigger on both old and new names, to handle the rename more gracefully
+    workflows:
+      [
+        "TypeSpec Suppressions - Analyze Code",
+        "\\[TEST-IGNORE\\] TypeSpec Suppressions - Analyze Code",
+      ]
+    types: [completed]
+
+# Permissions are scoped per job below (this workflow runs two jobs with
+# different privilege needs: setting the check status vs. posting a comment).
+permissions: {}
+
+jobs:
+  typespec-suppressions-status:
+    name: Set TypeSpec Suppressions Status
+    permissions:
+      actions: read
+      contents: read
+      issues: read
+      pull-requests: read
+      statuses: write
+    uses: ./.github/workflows/_reusable-set-check-status.yaml
+    with:
+      monitored_workflow_name: "TypeSpec Suppressions - Analyze Code"
+      required_check_name: "TypeSpec Suppressions"
+      overriding_label: "Approved-TypeSpecSuppression"
+
+  post-comment:
+    name: Post TypeSpec Suppressions Comment
+    # Only refresh the dedicated review comment when the analyzer report
+    # completes or when the Approved-TypeSpecSuppression label is added/removed.
+    # Skip plain opened/synchronize/reopened events, which fire before a report
+    # artifact exists (the status job still runs on those to update the check).
+    if: >-
+      github.event_name == 'workflow_run' ||
+      github.event.action == 'labeled' ||
+      github.event.action == 'unlabeled'
+    runs-on: ubuntu-24.04
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github/
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Post TypeSpec suppressions review comment
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: postSuppressionsResults } =
+              await import('${{ github.workspace }}/.github/workflows/src/typespec-suppressions/post-results.js');
+            await postSuppressionsResults({ github, context, core });

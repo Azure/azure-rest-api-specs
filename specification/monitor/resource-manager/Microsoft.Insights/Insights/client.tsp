@@ -41,7 +41,6 @@ using TenantActionGroups;
 using VmInsightsOnboarding;
 using DiagnosticsSettings;
 
-#suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
 @client({
   name: "CombineClient",
   service: [

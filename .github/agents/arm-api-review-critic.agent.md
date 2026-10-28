@@ -5,10 +5,8 @@ user-invocable: false
 tools:
   - execute/runInTerminal
   - github/get_file_contents
-  - github/get_pull_request
-  - github/get_review_comments
   - github/list_commits
-  - github/list_pull_request_files
+  - github/pull_request_read
   - github/search_code
   - read/problems
   - search
@@ -133,8 +131,7 @@ Do **not** silently fall back to a different repo.
 
 **Tooling prerequisite for private-repo PRs.** `Azure/azure-rest-api-specs-pr`
 is private. Re-fetching files from it normally uses the GitHub MCP server
-(`github/get_file_contents`, `github/get_pull_request`,
-`github/list_pull_request_files`, `github/get_review_comments`) bound in this
+(`github/get_file_contents`, `github/pull_request_read`) bound in this
 session. The deferred `web/githubRepo` tool resolves public refs only and is
 **not** a substitute for `azure-rest-api-specs-pr`.
 
@@ -388,6 +385,31 @@ If validation fails, return `Finding accuracy = FAIL` with reason
 For **every** finding in the reviewer's report (Blocking, Warning, Suggestion;
 New and Existing), perform steps 1-6 below. Then perform step 7 once to
 re-verify the reconciliation plan (Input #6).
+
+### Step 0: Re-verify approval-label awareness
+
+Call `pull_request_read(method: "get")` and independently inventory the exact current PR label
+names matching `BreakingChange-Approved-*`, `Versioning-Approved-*`,
+`Approved-Suppression`, or `Approved-TypeSpecSuppression`. Compare that
+inventory with the report's `Approval labels observed` line.
+
+- A missing inventory line, an omitted matching label, or a listed label that
+  is not on the PR is `FAIL: approval-label-mismatch`.
+- For each breaking-change finding, verify that an `**Approval context:**`
+  paragraph names the observed applicable label or states that no label in the
+  applicable breaking-change/versioning family was observed.
+- For each suppression finding, perform the same check using
+  `Approved-Suppression` or `Approved-TypeSpecSuppression` as applicable.
+- Missing or contradictory finding guidance is
+  `FAIL: approval-context-missing`.
+- A label must not cause a finding to be dropped or downgraded. The context must
+  ask the author to confirm that the PR-level approval covers the specific
+  finding and explain that, when it does, the remaining action is to resolve
+  the conversation.
+
+If labels changed after the Reviewer's Step 1 snapshot, return the mismatch so
+the Reviewer can refresh the inventory and canonical comment bodies before
+posting. Label drift does not invalidate the session SHA.
 
 ### Step 1: Re-fetch the cited file
 

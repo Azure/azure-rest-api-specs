@@ -199,6 +199,7 @@ model ServerlessRuntimeDataDisk {
   @doc("Type of the data disk")
   type?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Server Host or IP Address")
   serverHostOrIpAddress?: string;
 
@@ -447,6 +448,7 @@ model UserDetails {
   phoneNumber?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Serverless Runtime environment Metadata response.")
 model ServerlessMetadataResponse {
   @doc("type of the runtime environment.")

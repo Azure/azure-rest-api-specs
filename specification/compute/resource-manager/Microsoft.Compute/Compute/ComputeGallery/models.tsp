@@ -1356,6 +1356,7 @@ model UefiKeySignatures {
   /**
    * The database of UEFI keys for this image version.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#[])
   db?: UefiKey[];
 

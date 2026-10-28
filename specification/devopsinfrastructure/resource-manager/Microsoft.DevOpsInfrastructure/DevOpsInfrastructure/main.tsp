@@ -35,6 +35,10 @@ enum Versions {
   /** 2026-06-02 version */
   @armCommonTypesVersion(CommonTypes.Versions.v6)
   v2026_06_02: "2026-06-02",
+
+  /** 2026-07-03-preview version */
+  @armCommonTypesVersion(CommonTypes.Versions.v6)
+  v2026_07_03_preview: "2026-07-03-preview",
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -314,6 +318,10 @@ union EphemeralType {
 
   @doc("ResourceDisk ephemeral only, requires only that the SKU supports it.")
   ResourceDisk: "ResourceDisk",
+
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_07_03_preview)
+  @doc("NVMeDisk ephemeral only, requires that the SKU supports the NVMe DiskControllerType.")
+  NVMeDisk: "NVMeDisk",
 }
 
 @doc("The VM image of the machines in the pool.")

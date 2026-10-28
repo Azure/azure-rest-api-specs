@@ -292,6 +292,7 @@ model ClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   regionName: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("MongoDB version running on the cluster.")
   @visibility(Lifecycle.Read)
   mongoDbVersion?: string;

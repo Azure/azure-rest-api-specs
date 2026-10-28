@@ -1,0 +1,83 @@
+name: data-plane-api-reviewer-eval-resource-modeling
+description: |
+  Resource modeling tests for the data-plane API reviewer.
+
+  Covers DP-MODEL-01 (CRUD in disguise), DP-MODEL-02 (addressability),
+  DP-MODEL-03 (collection vs singleton), DP-MODEL-04 (operation symmetry),
+  DP-MODEL-05 (sub-resource pointers). See
+  references/data-plane-resource-modeling.md.
+
+tags:
+  area: data-plane-api-reviewer
+
+defaults:
+  runs: 1
+  timeout: "420s"
+  # Keep equal to the top-level `model:` in .github/workflows/data-plane-api-review.md.
+  model: gpt-5.6-sol
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  - name: crud-in-disguise-post-actions
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/crud-in-disguise.tsp"
+          dest: "specification/widgetstore/data-plane/Contoso.WidgetStore/stable/2026-01-01/widgets.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines. This is a new service introducing its first
+      stable API version. Report findings with rule IDs, line numbers, and fix
+      suggestions.
+
+      File: specification/widgetstore/data-plane/Contoso.WidgetStore/stable/2026-01-01/widgets.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "reports CRUD in disguise"
+        config:
+          pattern: "\\*\\*\\[DP-MODEL-01\\]"
+      - type: prompt
+    rubric:
+      - The agent identifies that POST actions in this specification are CRUD operations wearing an action name, and reports them under DP-MODEL-01.
+      - The agent names the specific offending operations rather than gesturing at the file as a whole, and cites line numbers.
+      - For each finding the agent proposes the correct standard operation to use instead - a PUT or PATCH or DELETE or GET on the addressable resource, ideally via the corresponding Azure.Core StandardResourceOperations template.
+      - The agent explains why it matters, in terms a service author will act on - SDK method naming, idempotency, and cacheability - rather than merely citing the guideline.
+      - The agent does not report azure-core linter-owned rules such as no-enum, casing-style, or documentation-required.
+
+  - name: unaddressable-query-only-model
+    environment:
+      skills:
+        - "../../../azure-api-review"
+      files:
+        - src: "../fixtures/typespec-data-plane/resource-modeling-smell.tsp"
+          dest: "specification/telemetrystore/data-plane/Contoso.TelemetryStore/stable/2026-01-01/telemetry.tsp"
+    prompt: >
+      Review the following data-plane TypeSpec specification for compliance with
+      the Azure REST API Guidelines, paying particular attention to resource
+      modeling, addressability, and operation completeness. This is a new
+      service introducing its first stable API version. Report findings with
+      rule IDs, line numbers, and fix suggestions.
+
+      File: specification/telemetrystore/data-plane/Contoso.TelemetryStore/stable/2026-01-01/telemetry.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "reports addressability or symmetry problems"
+        config:
+          pattern: "\\*\\*\\[DP-MODEL-0[2-9]\\]"
+      - type: prompt
+    rubric:
+      - The agent identifies that entities returned by this API are not individually addressable - there is no GET by identity for things the service clearly models as durable entities - and reports it under DP-MODEL-02.
+      - The agent identifies operation asymmetry, such as an entity that can be created but not read, listed but not deleted, or updated but not fetched, and reports it under DP-MODEL-04.
+      - The agent proposes a concrete resource shape - a @resource with a @key and the corresponding StandardResourceOperations - rather than only describing the problem.
+      - Findings are anchored to specific line numbers and to specific operations or models.
+      - The agent does not report azure-core linter-owned rules.

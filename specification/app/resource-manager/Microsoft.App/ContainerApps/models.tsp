@@ -1974,6 +1974,7 @@ model BuildConfiguration {
   /**
    * Base OS used to build and run the app.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   baseOs?: string;
 
   /**
@@ -6705,6 +6706,7 @@ model EnvironmentVariable {
 /**
  * App Service error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**
@@ -7974,6 +7976,7 @@ model ContainerAppsBuildConfiguration {
   /**
    * Base OS used to build and run the app.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   baseOs?: string;
 
@@ -8253,6 +8256,7 @@ model PatchDetailsNewLayer {
   /**
    * The OS name and its version in the new run image for the target image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osAndVersion?: string;
 }
 
@@ -8273,6 +8277,7 @@ model PatchDetailsOldLayer {
   /**
    * The OS name and its version in the old run image for the target image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osAndVersion?: string;
 }
 

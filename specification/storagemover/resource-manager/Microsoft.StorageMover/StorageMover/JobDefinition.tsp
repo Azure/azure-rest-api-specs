@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.StorageMover;
 /**
@@ -23,7 +24,7 @@ model JobDefinition is Azure.ResourceManager.ProxyResource<
     Resource = JobDefinition,
     KeyName = "jobDefinitionName",
     SegmentName = "jobDefinitions",
-    NamePattern = ""
+    NamePattern = "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
   >;
 }
 
@@ -85,6 +86,16 @@ interface JobDefinitions {
    * Requests the Agent of any active instance of this Job Definition to stop.
    */
   stopJob is ArmResourceActionSync<
+    JobDefinition,
+    void,
+    ArmResponse<JobRunResourceId>
+  >;
+
+  /**
+   * Post action to reconcile the running job.
+   */
+  @added(Versions.v2026_05_01)
+  reconcileJob is ArmResourceActionSync<
     JobDefinition,
     void,
     ArmResponse<JobRunResourceId>

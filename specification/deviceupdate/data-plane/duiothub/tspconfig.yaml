@@ -31,10 +31,16 @@ options:
     package-dir: "azure-iot-deviceupdate"
     namespace: "azure.iot.deviceupdate"
     flavor: azure
+    models-mode: none
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-iot-deviceupdate"
     namespace: com.azure.iot.deviceupdate
     flavor: azure
+    generate-protocol-methods: true
+    generate-convenience-methods: false
+    generate-samples: false
+    generate-tests: false
+    customization-class: customization/src/main/java/DeviceUpdateCustomization.java
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/iot-device-update"
     package-details:
@@ -42,4 +48,6 @@ options:
     flavor: azure
   "@azure-typespec/http-client-csharp":
     namespace: "Azure.IoT.DeviceUpdate"
+    generate-protocol-methods: true
+    generate-convenience-methods: false
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"

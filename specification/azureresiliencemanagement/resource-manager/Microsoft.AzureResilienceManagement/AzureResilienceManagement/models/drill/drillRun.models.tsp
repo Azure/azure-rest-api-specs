@@ -123,6 +123,7 @@ model DrillRunTestFailoverCleanupRequest {
   comments?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body for TestFailoverCleanup API.")
 model DrillRunActionResponse {
   @doc("JobId of the RO job.")
@@ -140,6 +141,7 @@ model MarkAsCompleteRequest {
   drillRunStage: DrillRunSubtasks;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for MarkAsComplete API.")
 model MarkAsCompleteResponse {
   @doc("Matrix of Actions supported on Operations.")

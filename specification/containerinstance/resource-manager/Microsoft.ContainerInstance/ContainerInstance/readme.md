@@ -29,6 +29,60 @@ openapi-type: arm
 tag: package-2026-07-01
 ```
 
+### Tag: package-preview-2026-08
+
+These settings apply only when `--tag=package-preview-2026-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-08'
+input-file:
+  - ./preview/2026-08-01-preview/containerInstance.json
+directive:
+  - suppress: AvoidAdditionalProperties
+    reason: This preview version preserves the existing service contract carried forward from the 2026-07-01 stable API version.
+  - suppress: ArmResourcePropertiesBag
+    reason: This preview version preserves the existing service contract carried forward from the 2026-07-01 stable API version.
+  - suppress: DeleteResponseBodyEmpty
+    reason: This preview version preserves the existing service contract carried forward from the 2026-07-01 stable API version.
+  - suppress: DeleteResponseCodes
+    reason: This preview version preserves the existing service contract carried forward from the 2026-07-01 stable API version.
+  - suppress: DescriptionMustNotBeNodeName
+    reason: These enum value descriptions are carried forward from the existing service contract.
+  - suppress: EnumInsteadOfBoolean
+    reason: The boolean shapes in this generated OpenAPI are carried forward from earlier preview and stable API contracts. Changing them to string enums in this preview version would be a breaking contract change.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    reason: This preview version preserves the existing service contract carried forward from the 2026-07-01 stable API version.
+  - suppress: LatestVersionOfCommonTypesMustBeUsed
+    reason: This TypeSpec project intentionally continues to emit ARM common-types v5 for compatibility with the service's existing API shapes. Moving the entire service to v6 is outside the scope of this preview.
+  - suppress: LocationMustHaveXmsMutability
+    reason: This generated swagger preserves legacy custom and proxy resource shapes for backward compatibility. Changing location mutability here would alter the existing contract.
+  - suppress: LroErrorContent
+    reason: The long-running operations on this provider use the existing CloudError shape, consistent with the prior stable API versions of this service. Switching to the standard ErrorResponse envelope from common-types v2+ would be a breaking change versus the published stable API.
+  - suppress: OperationsApiResponseSchema
+    reason: This preview version preserves the existing service contract carried forward from the 2026-07-01 stable API version.
+  - suppress: OperationsApiSchemaUsesCommonTypes
+    reason: This preview version preserves the existing service contract carried forward from the 2026-07-01 stable API version.
+  - suppress: PatchIdentityProperty
+    reason: This preview version preserves the existing service contract carried forward from the 2026-07-01 stable API version.
+  - suppress: PostResponseCodes
+    reason: This preview version preserves the existing service contract carried forward from the 2026-07-01 stable API version.
+  - suppress: ProvisioningStateMustBeReadOnly
+    reason: provisioningState is read-only by design - the property carries readOnly via the referenced enum schema (use-read-only-status-schema), and the TypeSpec source uses @visibility(Lifecycle.Read). The LintDiff rule does not follow $ref to detect the readOnly flag. Surfacing readOnly on the property reference would be inconsistent with prior API versions of this provider.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: This preview version preserves the existing service contract carried forward from the 2026-07-01 stable API version.
+  - suppress: ResourceNameRestriction
+    reason: These path parameter shapes are carried forward from the existing service contract.
+  - suppress: SchemaDescriptionOrTitle
+    reason: This preview version preserves the existing generated schema shape carried forward from the 2026-07-01 stable API version.
+  - suppress: SummaryAndDescriptionMustNotBeSame
+    reason: This preview version preserves the existing operation text carried forward from the 2026-07-01 stable API version.
+  - suppress: UnSupportedPatchProperties
+    reason: This preview version preserves the existing patch contract carried forward from the 2026-07-01 stable API version.
+  - suppress: XmsIdentifierValidation
+    reason: This preview version preserves the existing generated pageable shape carried forward from the 2026-07-01 stable API version.
+  - suppress: XmsPageableForListCalls
+    reason: This preview version preserves the existing list contract carried forward from the 2026-07-01 stable API version.
+```
+
 ### Tag: package-2026-07-01
 
 These settings apply only when `--tag=package-2026-07-01` is specified on the command line.

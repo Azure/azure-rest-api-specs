@@ -21,6 +21,10 @@ model FabricCapacityProperties {
   @visibility(Lifecycle.Read)
   state?: ResourceState;
 
+  @doc("The capacity overage properties of the Fabric capacity resource.")
+  @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
+  overage?: CapacityOverageProperties;
+
   @doc("The capacity administration")
   administration: CapacityAdministration;
 }
@@ -40,6 +44,29 @@ union RpSkuTier {
 
   @doc("Fabric tier")
   fabric: "Fabric",
+}
+
+@doc("The capacity overage properties of the Fabric capacity resource")
+@added(Microsoft.Fabric.Versions.v2026_08_01_preview)
+model CapacityOverageProperties {
+  @doc("The capacity overage state for the Fabric capacity resource.")
+  state?: CapacityOverageState;
+
+  @doc("24-hour rolling threshold for capacity overage. Reaching this threshold results in capacity throttling.")
+  @minValue(0)
+  thresholdCapacityUnitHours?: int32;
+}
+
+@doc("The capacity overage state for the Fabric capacity resource.")
+@added(Microsoft.Fabric.Versions.v2026_08_01_preview)
+union CapacityOverageState {
+  @doc("Capacity overage is disabled.")
+  Disabled: "Disabled",
+
+  @doc("Capacity overage is enabled.")
+  Enabled: "Enabled",
+
+  string,
 }
 
 @doc("The administration properties of the Fabric capacity resource")

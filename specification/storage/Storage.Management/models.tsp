@@ -1853,6 +1853,7 @@ model LeaseContainerRequest {
 /**
  * Lease Container response schema.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LeaseContainerResponse {
   /**
    * Returned unique lease ID that must be included with any request to delete the container, or to renew, change, or release the lease.
@@ -2534,6 +2535,7 @@ model LeaseShareRequest {
 /**
  * Lease Share response schema.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LeaseShareResponse {
   /**
    * Returned unique lease ID that must be included with any request to delete the share, or to renew, change, or release the lease.
@@ -4504,6 +4506,7 @@ model DeletedAccountProperties {
 /**
  * An error response from the storage resource provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

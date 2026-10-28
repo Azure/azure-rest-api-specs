@@ -9,8 +9,10 @@
 # Enum Best Practices for Azure APIs
 
 Azure APIs should use extensible enums to allow new values to be added
-without breaking existing clients. Booleans should be avoided in favor
-of enums for better versioning.
+without breaking existing clients. **On ARM**, booleans should generally be
+avoided in favor of enums for better versioning; **on the data plane** that
+preference is narrower — see the scope note on "Prefer Enums Over Booleans"
+below, and `DP-NAME-03` for the data-plane rule.
 
 **Authoritative references:**
 
@@ -20,9 +22,35 @@ of enums for better versioning.
 
 ---
 
-## Extensible Enums (Required)
+## Extensible Enums (Strongly Recommended)
 
-Every enum **MUST** be modeled as extensible to avoid breaking changes when new values are added.
+The Azure REST API Guidelines state this as a `SHOULD` with an explicit
+exception, quoted verbatim:
+
+> :ballot_box_with_check: **YOU SHOULD** use extensible enumerations **unless
+> you are positive that the symbol set will NEVER change over time.**
+
+So: model every enum as extensible **unless the specification states a
+rationale for a genuinely fixed value set** — for example, a set the wire
+protocol or an external standard fixes, where adding a value would require a
+new request shape rather than a new member.
+
+**For reviewers:** a closed enum accompanied by a documented rationale is the
+Guideline's own exception being exercised, not a violation — **provided the
+rationale answers the condition the exception states**, which is whether the
+symbol set will _never_ change. A structural reason meets it ("a third value
+would require a different request shape, so the set cannot grow"); an assurance
+does not ("we have no plans to add more"), nor does an argument about a
+different subject. If it is doubtful, ask a question or raise a Suggestion.
+**Never raise this Blocking, and never write that the Guidelines forbid a closed
+enum** — they do not. See "Normative strength and documented rationale" in
+[`SKILL.md`](../SKILL.md).
+
+A closed enum with **no** stated rationale is a normal Warning-level finding.
+
+_(Note: `@azure-tools/typespec-azure-core/no-enum` enforces the TypeSpec
+`enum`-vs-`union` distinction mechanically. For data-plane specs that rule is
+🔒 Linted — CI reports it, the reviewer does not.)_
 
 ### OpenAPI JSON
 
@@ -86,6 +114,27 @@ union ServiceStatus {
 
 ## Prefer Enums Over Booleans
 
+> **Scope: this section is ARM-derived.** It restates ARM Wiki
+> RPC-BestPractice-10/12 and OAPI015 (see the header), where the posture on
+> booleans is materially more aggressive than on the data plane. **ARM reviewers
+> apply it as written.**
+>
+> **Data-plane reviewers must not apply it as a blanket rule.** The data-plane
+> position is
+> [`data-plane-naming-and-docs.md`](data-plane-naming-and-docs.md) `DP-NAME-03`,
+> which flags a boolean only when the property name suggests a **mode** rather
+> than a genuine yes/no, and which explicitly blesses `enabled` and `isDeleted`.
+> Where this section and `DP-NAME-03` disagree on a data-plane spec,
+> **`DP-NAME-03` wins.**
+>
+> This is the same anti-inheritance trap as `guid-and-uuid-on-arm.md`: guidance
+> that is correct for ARM and wrong when inherited unscoped. It was found the
+> expensive way — this file used `enabled` as its worked example of a boolean to
+> replace, while `DP-NAME-03` named `enabled` as the archetype of a boolean to
+> leave alone. A data-plane reviewer reading both raised a false positive on
+> `enabled` in 2 of 3 trials on identical input: not a misreading, but a genuine
+> split between two of our own instructions.
+
 Booleans do not version well -- what starts as a two-state switch often needs additional states, leading to breaking changes.
 
 **Recommendations:**
@@ -98,7 +147,7 @@ Booleans do not version well -- what starts as a two-state switch often needs ad
   `backupsEnabled`, `isEncryptionEnabled` --
   not bare nouns like `backups` or `encryption`.
 - When multiple related two-state properties exist
-  (e.g., `enabled` and `appendMode`), consider combining them into a
+  (e.g., `rewriteEnabled` and `appendMode`), consider combining them into a
   single multi-state enum (e.g., `usageMode: [Disabled, Rewrite, Append]`).
 - Enum values replacing booleans **MUST** carry semantic meaning beyond
   `True`/`False`. Distribute meaning across both the property name and

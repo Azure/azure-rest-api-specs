@@ -38,8 +38,10 @@ import "./ExpressRouteCrossConnection.tsp";
 import "./ExpressRoutePortsLocation.tsp";
 import "./ExpressRoutePort.tsp";
 import "./ExpressRoutePortAuthorization.tsp";
+import "./ExpressRouteLag.tsp";
 import "./FirewallPolicy.tsp";
 import "./FirewallPolicyRuleCollectionGroup.tsp";
+import "./FirewallPolicyKubeSelectorGroup.tsp";
 import "./SignaturesOverrides.tsp";
 import "./FirewallPolicyDraft.tsp";
 import "./FirewallPolicyRuleCollectionGroupDraft.tsp";
@@ -136,6 +138,8 @@ import "./routes.tsp";
 import "./VirtualNetworkAppliance.tsp";
 import "./ServiceGateway.tsp";
 import "./InterconnectGroup.tsp";
+import "./FirstPartyServiceTag.tsp";
+import "./AddressPrefixSet.tsp";
 import "../Common/main.tsp";
 
 using TypeSpec.Rest;
@@ -146,7 +150,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Common;
 /**
- * APIs to manage web application firewall rules.
+ * APIs to manage Microsoft Azure network resources.
  */
 @Azure.ResourceManager.Legacy.features(Features)
 @armProviderNamespace
@@ -170,6 +174,12 @@ enum Versions {
    */
   @useDependency(Common.Versions.v2025_07_01)
   v2025_07_01: "2025-07-01",
+
+  /**
+   * The 2025-09-01 API version.
+   */
+  @useDependency(Common.Versions.v2025_09_01)
+  v2025_09_01: "2025-09-01",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -15,7 +15,7 @@ using TypeSpec.Http;
 
 @@clientName(
   Microsoft.ContainerService,
-  "ContainerServiceAIManagerClient",
+  "ContainerServiceAIManagerMgmtClient",
   "python"
 );
 

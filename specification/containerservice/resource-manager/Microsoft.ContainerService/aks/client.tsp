@@ -6,6 +6,58 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.ContainerService;
 
+// Fix .NET code generation naming conflict: BootstrapAzureConfig has both an internal
+// BootstrapTokenInfo property and a flattened public string property that both resolve
+// to "BootstrapToken". Renaming the backing property avoids the CS0102 duplicate error.
+@@clientName(
+  BootstrapAzureConfig.bootstrapToken,
+  "BootstrapTokenDetail",
+  "csharp"
+);
+
+// .NET SDK naming: "Request" suffix is reserved for HTTP pipeline types; add the
+// AgentPool owner prefix so the request pairs symmetrically with its response
+// (PoolBootstrapData -> AgentPoolBootstrapInfo).
+@@clientName(
+  ListBootstrapDataRequest,
+  "AgentPoolBootstrapDataContent",
+  "csharp"
+);
+
+// .NET SDK naming: "Data" suffix is reserved for ResourceData/TrackedResourceData types.
+@@clientName(PoolBootstrapData, "AgentPoolBootstrapInfo", "csharp");
+
+// .NET SDK naming: add RP/service context prefix for IntelliSense clarity.
+// AllowedSubject belongs to IdentityBinding (referenced only by
+// IdentityBindingProperties.allowedSubjects), so it takes the IdentityBinding
+// client-name prefix to match ManagedClusterIdentityBindingProperties.
+@@clientName(
+  AllowedSubject,
+  "ManagedClusterIdentityBindingAllowedSubject",
+  "csharp"
+);
+@@clientName(
+  AlertConfiguration,
+  "ContainerServiceAlertConfiguration",
+  "csharp"
+);
+@@clientName(
+  AlertConfigurationMode,
+  "ContainerServiceAlertConfigurationMode",
+  "csharp"
+);
+@@clientName(
+  AlertConfigurationProperties,
+  "ContainerServiceAlertConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  AlertConfigurationProvisioningState,
+  "ContainerServiceAlertConfigurationProvisioningState",
+  "csharp"
+);
+@@clientName(AlertNotification, "ContainerServiceAlertNotification", "csharp");
+
 @@clientName(Microsoft.ContainerService.IPFamily, "IpFamily", "javascript");
 
 // Java specific renaming for backward compatibility
