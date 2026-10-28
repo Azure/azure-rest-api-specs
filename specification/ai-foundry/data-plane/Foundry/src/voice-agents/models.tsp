@@ -1355,6 +1355,7 @@ model TelephonyAddress {
 /** Phone-number address used by supported source and destination roles. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model PhoneNumber extends TelephonyAddress {
+  /** The phone-number address type. */
   type: TelephonyAddressType.phone_number;
 
   /** E.164 phone number. */
@@ -1366,6 +1367,7 @@ model PhoneNumber extends TelephonyAddress {
 /** Teams resource-account address supported as a source through an ACS / Teams Phone Extension connection. Destination support is validated independently and is not implied by this address variant. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsResourceAccount extends TelephonyAddress {
+  /** The Teams resource-account address type. */
   type: TelephonyAddressType.teams_resource_account;
 
   /** Non-empty Teams resource-account Entra object ID. */

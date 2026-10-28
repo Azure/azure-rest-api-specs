@@ -717,12 +717,12 @@ interface AgentTelephony {
   /**
    * Lists direct and campaign-created call jobs owned by the route Agent. Deleted and superseded-round
    * jobs are omitted. Status-filtered pages are live views, not a snapshot across requests.
-   * For campaign_name-filtered traversal, after/before CallJob IDs retain their original Campaign
-   * incarnation and internal execution_generation association for the cursor lifetime, including after task
-   * deletion. Validate that association before reading the current round. Replacement or name reuse
-   * returns 400 invalid_cursor, never silently continues in a new round. Discard the traversal and
-   * restart SDK iteration. Cancellation updates Campaign.operation_id without changing round identity
-   * or invalidating the cursor. Unknown/expired/mismatched boundaries also return 400 invalid_cursor.
+   *
+   * When campaign_name is supplied, pagination stays bound to the Campaign instance and validation round
+   * selected by the first page, even if a boundary CallJob is subsequently deleted. Failed-state
+   * replacement or deletion followed by name reuse returns 400 invalid_cursor rather than continuing
+   * into another round. The caller can restart traversal from the first page. Cancellation does not
+   * invalidate these cursors. Unknown, expired or mismatched boundaries also return 400 invalid_cursor.
    * A first page resolves the current round; deleting Campaigns return an empty page.
    */
   @summary("List outbound telephony call jobs")
@@ -772,7 +772,10 @@ interface AgentTelephony {
   getTelephonyCallJob is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
+      /** The name of the voice agent that owns the call job. */
       @path agent_name: string;
+
+      /** The service-generated identifier of the call job to retrieve. */
       @path call_job_id: TelephonyCallJobId;
     },
     TelephonyCallJobResponse
@@ -786,8 +789,12 @@ interface AgentTelephony {
   cancelTelephonyCallJob is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
+      /** The name of the voice agent that owns the call job. */
       @path agent_name: string;
+
+      /** The service-generated identifier of the call job to cancel. */
       @path call_job_id: TelephonyCallJobId;
+
       ...TelephonyIfMatchHeader;
     },
     TelephonyCallJobResponse | TelephonyCallJobAcceptedResponse

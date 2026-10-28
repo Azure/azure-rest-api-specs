@@ -69,12 +69,14 @@ model TelephonyCampaignSchedule {
 /** Dispatch automatically as soon as preparation succeeds and capacity permits. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model ImmediateSchedule extends TelephonyCampaignSchedule {
+  /** Identifies immediate scheduling after successful preparation. */
   type: TelephonyCampaignScheduleType.immediate;
 }
 
 /** Apply the same earliest dispatch time to every recipient. A past time is valid and makes work eligible after preparation succeeds. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model AtTimeSchedule extends TelephonyCampaignSchedule {
+  /** Identifies scheduling with one common earliest dispatch time. */
   type: TelephonyCampaignScheduleType.scheduled;
 
   /** Common earliest dispatch time; successful preparation is required. */
@@ -84,6 +86,7 @@ model AtTimeSchedule extends TelephonyCampaignSchedule {
 /** Read every recipient's earliest dispatch time from the fixed scheduled_at field. Dataset CSV/JSON/JSONL values use RFC 3339 with an explicit offset or Z; inline values use FoundryTimestamp. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model PerRecipientSchedule extends TelephonyCampaignSchedule {
+  /** Identifies scheduling with a separate earliest dispatch time for each recipient. */
   type: TelephonyCampaignScheduleType.recipient;
 }
 
@@ -215,7 +218,7 @@ model TelephonyCampaign {
   /** Time of terminal completion for the current round; cleared when failed preparation is replaced. */
   @visibility(Lifecycle.Read) finished_at?: FoundryTimestamp;
 
-  /** Exact owning Agent version selected once when background processing starts the current validating round. Omitted until resolution succeeds; cleared on failed-state replacement. Persist before recipient validation or task generation. Validation, worker retries, CallJobs and voice sessions use this version for the round. New rounds resolve latest again; later Agent updates do not change an executing round. Resolution failure fails preparation; an unavailable pinned version fails preparation or the affected task without fallback. */
+  /** Exact owning Agent version selected once when background processing starts the current validating round. Omitted until resolution succeeds; cleared on failed-state replacement. The version is fixed before recipient validation or task generation and is shared by validation, worker retries, CallJobs and voice sessions for that round. New rounds resolve latest again; later Agent updates do not change an executing round. Resolution failure fails preparation; an unavailable pinned version fails preparation or the affected task without fallback. */
   @visibility(Lifecycle.Read)
   locked_agent_version?: string;
 
@@ -272,8 +275,9 @@ union TelephonyCampaignOperationKind {
  * Each new action has a distinct ID; transport and worker retries reuse its monitor. A failed cancel/delete
  * is resumed with a fresh operation. Monitors omit result and remain queryable independently of the resource.
  * Create/replace and cancel use a guarded final Campaign GET; delete completes without a final GET.
- * Internal ownership associates every monitor with a resource incarnation and validation round. Accepting
- * cancel/delete changes the public operation pointer, not that round identity or the version pin.
+ * Each monitor remains associated with the Campaign instance and validation round that created it.
+ * Cancellation and deletion can change Campaign.operation_id without changing that association or
+ * the pinned Agent version.
  */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignOperation is JobLike {
@@ -376,22 +380,24 @@ model TelephonyCampaignPage<T> {
 interface TelephonyCampaigns {
   /**
    * Creates a named Campaign or fully replaces a failed Campaign's inputs, authorizing execution after validation.
-   * Perform shape and caller authorization checks before acceptance. New creation returns 201.
+   * Request-shape and caller authorization checks precede acceptance. New creation returns 201.
    * Failed-state replacement requires exact If-Match and a fresh Operation-Id and returns 200;
    * a missing replacement Operation-Id returns 400, stale token returns 412, invalid state returns 409.
-   * Atomically save complete inputs, a new independent internal execution_generation, validating state and durable work.
-   * Create its validation monitor and set Campaign.operation_id to that monitor ID.
-   * Clear previous error, finished_at, progress, Dataset resolution and locked_agent_version.
-   * At the start of background validation, resolve the owning Agent's latest authorized version once.
-   * Persist it before validating recipients or generating tasks. Resolution failure fails this round.
-   * An omitted Dataset version also resolves again for each new round. Worker retries reuse both pins.
-   * Snapshot/validate all recipients, then idempotently generate one CallJob per input position.
-   * Dispatch remains gated until all tasks exist. Failed rounds never dial; workers stop before failed.
-   * Replacement invalidates old error cursors and hides superseded diagnostics and partial tasks.
-   * Old workers, callbacks, task IDs and queued events are fenced by execution_generation, not operation_id; asynchronously
-   * remove superseded artifacts, preserving replay safeguards and all prior operation monitors.
-   * Current-round task IDs include round identity; old tasks can neither dispatch nor enter its counts.
-   * Retried Operation-Id with identical input and original If-Match replays its receipt and monitor
+   *
+   * Acceptance returns the Campaign in validating state with a separate validation monitor
+   * identified by Campaign.operation_id. Replacement starts a new round and resets previous errors,
+   * finished_at, progress, Dataset resolution and locked_agent_version. Superseded diagnostics and
+   * CallJobs are no longer listed, counted or dispatched, and old validation-error cursors become invalid.
+   * Previous operation monitors and replay safeguards remain available.
+   *
+   * Background preparation resolves the owning Agent's latest authorized version and any omitted Dataset
+   * version once per validation round, before recipient validation. Both versions remain fixed across retries.
+   * Resolution failure fails preparation. Each input position produces one CallJob; dispatch starts only
+   * after the complete recipient snapshot is validated and all CallJobs exist. Failed rounds never dial,
+   * and preparation work has stopped before the Campaign reports failed. Immediate calls may start before
+   * the PUT poller returns. Later Agent publication does not change the pinned execution version.
+   *
+   * Retrying Operation-Id with identical input and the original If-Match replays its receipt and monitor
    * before evaluating current ETag/state, without restarting a round or changing pinned versions.
    * Conflicting key reuse returns 409 operation_id_conflict. Retained superseded keys replay old monitors.
    * Without a matching replay, PUT with If-Match requires failed state and a fresh Operation-Id,
@@ -399,12 +405,12 @@ interface TelephonyCampaigns {
    * Without If-Match, equivalent existing input reads the current resource and monitor; different
    * input conflicts. Its response headers still identify the saved validation monitor, even if a later
    * cancel/delete changed Campaign.operation_id. Retried PUT never resets that public pointer.
+   *
    * If-Match on a missing resource returns 412, never recreates a deleted Campaign.
    * Exactly one recipient source is required; omitted optional fields reset to defaults on replacement.
    * Replay compares original inputs including Dataset version omission, excluding resolved versions/defaults.
    * After deletion a retained PUT key returns 409 campaign_deleted; new intent requires a fresh key.
-   * Immediate calls may start before the PUT poller returns. Running/completed/cancelled Campaigns
-   * cannot be replaced; future Agent publication leaves their locked execution version unchanged.
+   * Running/completed/cancelled Campaigns cannot be replaced.
    */
   @summary("Create or replace a failed telephony campaign")
   @extension(
@@ -506,21 +512,25 @@ interface TelephonyCampaigns {
 
   /**
    * Starts a cancellation LRO for validating or running Campaigns. Exact If-Match is required.
-   * Atomically close new dispatch/retries, enter cancelling, create an independent cancel monitor
-   * and update Campaign.operation_id. Keep the internal validation round and pinned Agent unchanged.
-   * Return 202 with the monitor body, Operation-Id, Operation-Location and Retry-After, even if already done.
-   * Drain preparation workers and admitted calls; connected calls finish naturally. On quiescence,
-   * Campaign becomes cancelled and the cancel operation succeeds. If cancellation wins preparation,
-   * its validation operation becomes cancelled after workers stop; an already succeeded validation stays succeeded.
+   * Acceptance stops new dispatch and retries, changes the Campaign to cancelling, and returns 202
+   * with the cancellation monitor, Operation-Id, Operation-Location and Retry-After, even if already done.
+   * Campaign.operation_id identifies the cancellation monitor; the validation round and pinned Agent
+   * version are unchanged. Connected calls finish naturally. The Campaign becomes cancelled and its
+   * cancellation operation succeeds only after preparation and admitted calls have stopped.
+   * If cancellation wins preparation, the validation operation becomes cancelled after preparation
+   * stops; an already succeeded validation operation remains succeeded.
+   *
    * Operation-Id is optional; the service generates one when omitted. After authorization, identical
    * retained Operation-Id and original If-Match replay the same 202 before current-state/token checks,
    * including after deletion/name reuse, and never touch the replacement. Conflicting reuse returns 409.
    * With no replay, absent Campaign returns 404 and stale If-Match returns 412. A current-token
    * repeat in cancelling/cancelled returns the existing cancel monitor; a supplied fresh ID becomes an alias.
-   * Terminal cancel-worker failure leaves cancelling with an error and admission closed, rotates etag,
-   * and fails only its monitor. Resume with a fresh Operation-Id/current If-Match, creating a new monitor;
-   * preserve prior failures. This retry is required to provide Operation-Id. Completed/failed/deleting reject
-   * new cancellation with 409. SDK polls this fixed monitor, then performs a guarded Campaign GET.
+   *
+   * A failed cancellation leaves the Campaign in cancelling with an error and dispatch disabled,
+   * changes its etag, and fails only that cancellation monitor. A retry requires a fresh Operation-Id
+   * and current If-Match; it creates a new monitor without changing previous failures.
+   * Completed/failed/deleting Campaigns reject new cancellation with 409.
+   * The SDK polls the accepted monitor, then performs a guarded Campaign GET.
    */
   @summary("Cancel a telephony campaign")
   @extension(
@@ -563,20 +573,24 @@ interface TelephonyCampaigns {
   >;
 
   /**
-   * Asynchronously deletes a terminal, quiescent Campaign, its copied snapshot, validation diagnostics, internal recipient accounting,
-   * every owned CallJob/attempt record across all rounds and pending dispatch/outbox records. Other active states return
-   * 409: cancel and drain first. Acceptance sets deleting and Campaign.operation_id to the new deletion
-   * monitor, hides owned CallJobs/results from reads and
-   * blocks name reuse until cleanup succeeds. Never deletes the source Dataset, connections, Agent
-   * configuration or independent CallJobs. Actual call records, conversations and recordings are
-   * preserved under independent retention. Cleanup is scoped by immutable incarnation, never name alone.
-   * Failures remain deleting with an error; retry with a fresh Operation-Id and current token to resume
-   * cleanup with a new monitor and update Campaign.operation_id; retain the internal round identity.
+   * Asynchronously deletes a terminal Campaign after preparation and admitted calls have stopped.
+   * Cleanup includes its recipient snapshot, validation diagnostics, recipient accounting, every owned
+   * CallJob/attempt record across all rounds, and pending dispatch work. Other active states return 409;
+   * cancellation must finish before deletion. Acceptance sets deleting and Campaign.operation_id to
+   * the deletion monitor, hides owned CallJobs/results from reads, and blocks name reuse until cleanup succeeds.
+   *
+   * The source Dataset, connections, Agent configuration and independent CallJobs are not deleted.
+   * Actual call records, conversations and recordings retain their independent retention policies.
+   * Cleanup affects only the Campaign instance associated with the accepted request, not a later
+   * Campaign with the same name. Failures leave deleting with an error. A retry requires a fresh
+   * Operation-Id and current If-Match; it resumes cleanup with a new monitor, updates Campaign.operation_id,
+   * and preserves the validation round.
+   *
    * Identical retained Operation-Id retries replay the original 202 before stale-token checks,
    * even after deletion/name reuse, without touching a replacement. Conflicting IDs return 409.
    * With no matching replay, absent names return 204 and stale tokens return 412. A current-token DELETE
    * during active cleanup returns its existing monitor; a fresh ID is bound to the same operation.
-   * No permanent name-reserving tombstone is kept; minimal replay and anti-redial safeguards remain.
+   * Names become reusable after successful cleanup; replay and duplicate-dialing safeguards remain.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Azure DELETE LRO pattern specifies a bodyless 202 with Operation-Location; polling returns the operation body."
   @summary("Delete a telephony campaign")
