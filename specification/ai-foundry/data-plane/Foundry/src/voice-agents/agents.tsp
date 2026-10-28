@@ -280,8 +280,8 @@ union VoiceAgentSubagentType {
 @discriminator("subagent_type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSubagentConfig {
-  @doc("The subagent mode. All entries in `subagents` use the configuration selected by this value.")
-  subagent_type: VoiceAgentSubagentType;
+  @doc("The subagent mode. Defaults to `delegate` when omitted for compatibility with existing subagent configurations. All entries in `subagents` use the configuration selected by this value.")
+  subagent_type: VoiceAgentSubagentType = "delegate";
 }
 
 @doc("Configuration for referenced Foundry agents invoked as delegated background specialists.")

@@ -96289,7 +96289,8 @@
         "properties": {
           "subagent_type": {
             "$ref": "#/components/schemas/VoiceAgentSubagentType",
-            "description": "The subagent mode. All entries in `subagents` use the configuration selected by this value."
+            "description": "The subagent mode. Defaults to `delegate` when omitted for compatibility with existing subagent configurations. All entries in `subagents` use the configuration selected by this value.",
+            "default": "delegate"
           }
         },
         "discriminator": {
