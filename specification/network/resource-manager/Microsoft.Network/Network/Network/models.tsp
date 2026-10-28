@@ -547,6 +547,36 @@ union ApplicationGatewayClientAuthVerificationModes {
 }
 
 /**
+ * Deployment tier of the Application Gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This project uses legacy-feature-files output splitting; this union participates in the Application Gateway feature's emission."
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_05_01)
+union ApplicationGatewayDeploymentTier {
+  string,
+
+  /**
+   * Default deployment type.
+   */
+  Standard: "Standard",
+
+  /**
+   * Management NIC deployment type.
+   */
+  NetworkIsolated: "NetworkIsolated",
+
+  /**
+   * Accelerated deployment type.
+   */
+  Accelerated: "Accelerated",
+
+  /**
+   * Accelerated deployment type with reserved capacity and vertical scaling.
+   */
+  Elastic: "Elastic",
+}
+
+/**
  * Rule type.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -6373,6 +6403,12 @@ model ApplicationGatewayPropertiesFormat {
    * SKU of the application gateway resource.
    */
   sku?: ApplicationGatewaySku;
+
+  /**
+   * Deployment tier of the application gateway resource. Only valid on Standard_v2 and WAF_v2 SKUs.
+   */
+  @added(Versions.v2026_05_01)
+  deploymentTier?: ApplicationGatewayDeploymentTier;
 
   /**
    * SSL policy of the application gateway resource.

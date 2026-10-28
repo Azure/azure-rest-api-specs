@@ -581,6 +581,42 @@
         ]
       }
     },
+    "ApplicationGatewayDeploymentTier": {
+      "type": "string",
+      "description": "Deployment tier of the Application Gateway.",
+      "enum": [
+        "Standard",
+        "NetworkIsolated",
+        "Accelerated",
+        "Elastic"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationGatewayDeploymentTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Default deployment type."
+          },
+          {
+            "name": "NetworkIsolated",
+            "value": "NetworkIsolated",
+            "description": "Management NIC deployment type."
+          },
+          {
+            "name": "Accelerated",
+            "value": "Accelerated",
+            "description": "Accelerated deployment type."
+          },
+          {
+            "name": "Elastic",
+            "value": "Elastic",
+            "description": "Accelerated deployment type with reserved capacity and vertical scaling."
+          }
+        ]
+      }
+    },
     "ApplicationGatewayFirewallMode": {
       "type": "string",
       "description": "Web application firewall mode.",
