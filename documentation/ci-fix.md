@@ -49,18 +49,15 @@ Most guides here require for you to have `npm` installed, which you can get by i
 
 ## Transient fetch failures
 
-As a historical troubleshooting workaround, if a PR pipeline fails with a
-fetch-related error and there is no obvious issue in the PR itself, treat the
-failure as potentially transient or external rather than evidence of a spec
-problem. Retry the failed run once and re-check the CI results before starting
-deeper spec or pipeline investigation.
+If a PR pipeline fails with a fetch-related error and the logs do not identify
+an actionable problem in the submitted changes, retry the failed run once
+before starting a deeper specification or pipeline investigation.
 
-If the retry succeeds, ensure all required CI checks are passing before
-requesting or re-requesting review. If the same fetch-related failure repeats,
-investigate it as a persistent CI or repository issue instead of assuming the PR
-content is the cause. Apply this guidance only to fetch-related errors without
-a specific problem in the submitted changes; it is not a blanket rule for all
-CI failures.
+If the retry succeeds, ensure all required CI checks pass before requesting or
+re-requesting review. If the same fetch-related failure occurs again,
+investigate it as a persistent CI or repository issue. This guidance applies
+only to fetch-related errors without an actionable diagnostic and is not a
+general retry policy for all CI failures.
 
 ## `Format`
 
