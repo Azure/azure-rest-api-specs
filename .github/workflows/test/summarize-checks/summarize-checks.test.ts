@@ -15,6 +15,7 @@ import {
 import summarizeChecks from "../../src/summarize-checks/summarize-checks.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
 import { fullGitSha } from "../../../shared/test/examples.ts";
+import { ImpactAssessmentSchema } from "../../src/summarize-checks/labelling.ts";
 
 export type CheckRunData = import("../../src/summarize-checks/summarize-checks.ts").CheckRunData;
 
@@ -31,6 +32,14 @@ describe("ARM review label handoff", () => {
       core.summary.addCodeBlock = vi.fn().mockReturnValue(core.summary);
       github.rest.issues.listLabelsOnIssue.mockResolvedValue({
         data: existingLabels.map((name) => ({ name })),
+      });
+      github.rest.pulls.get.mockResolvedValue({
+        data: {
+          head: { sha: fullGitSha },
+          base: { ref: "main" },
+          draft: false,
+          labels: existingLabels.map((name) => ({ name })),
+        },
       });
       github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });
       github.rest.checks.listForRef.mockResolvedValue({
@@ -83,7 +92,6 @@ describe("ARM review label handoff", () => {
             123,
             fullGitSha,
             "workflow_run",
-            "main",
             WORKFLOW_URL,
           ),
       };
@@ -133,6 +141,42 @@ describe("ARM review label handoff", () => {
       await expect(run()).rejects.toThrow("Label write failed");
       expect(core.setOutput).not.toHaveBeenCalledWith("arm_review_ready", true);
     });
+
+    it("uses live PR state instead of the draft and branch snapshot in a legacy artifact", async () => {
+      const { github, core, run } = createSummary();
+      github.rest.pulls.get.mockResolvedValue({
+        data: {
+          head: { sha: fullGitSha },
+          base: { ref: "feature/example" },
+          draft: true,
+          labels: [{ name: "ARMReview" }],
+        },
+      });
+
+      await run();
+
+      expect(github.rest.issues.addLabels.mock.calls[0]?.[0]).not.toHaveProperty(
+        "labels",
+        expect.arrayContaining(["WaitForARMFeedback"]),
+      );
+      expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", false);
+      expect(github.rest.repos.getBranchRules).toHaveBeenCalledWith(
+        expect.objectContaining({ branch: "feature/example" }),
+      );
+      expect(github.rest.pulls.get).toHaveBeenCalledTimes(1);
+      expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
+    });
+
+    it("does not apply an old head's impact to the current PR", async () => {
+      const { github, run } = createSummary();
+      github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: "different-head" } } });
+
+      await run();
+
+      expect(github.rest.actions.downloadArtifact).not.toHaveBeenCalled();
+      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+      expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+    });
   });
 
   describe("workflow_dispatch from Update Labels", () => {
@@ -155,6 +199,9 @@ describe("ARM review label handoff", () => {
       core.summary.addHeading = vi.fn().mockReturnValue(core.summary);
       core.summary.addCodeBlock = vi.fn().mockReturnValue(core.summary);
       github.rest.issues.listLabelsOnIssue.mockResolvedValue({ data: [] });
+      github.rest.pulls.get.mockResolvedValue({
+        data: { head: { sha: fullGitSha }, base: { ref: "main" }, draft: false, labels: [] },
+      });
       github.rest.checks.listForRef.mockResolvedValue({ data: { check_runs: [] } });
       github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });
 
@@ -253,12 +300,15 @@ describe("Summarize Checks Integration Tests", () => {
           owner,
           repo,
           head_sha,
-          issue_number,
+          pr.base.ref,
           [],
         );
 
         let adjustedStartLabels = expectedLabels.filter((x) => ignorableLabels.includes(x));
-        const labelContext = updateLabels(adjustedStartLabels, impactAssessment);
+        const labelContext = updateLabels(adjustedStartLabels, impactAssessment, {
+          isDraft: pr.draft ?? false,
+          targetBranch: pr.base.ref,
+        });
 
         adjustedStartLabels = adjustedStartLabels.filter(
           (name) => !labelContext.toRemove.has(name),
@@ -1465,7 +1515,7 @@ describe("Summarize Checks Unit Tests", () => {
     const unzipExists = await execFile("unzip")
       .then(() => true)
       .catch(() => false);
-    const impactAssessment: import("../../src/summarize-checks/labelling.ts").ImpactAssessment = {
+    const legacyImpactAssessment = {
       resourceManagerRequired: false,
       dataPlaneRequired: true,
       suppressionReviewRequired: false,
@@ -1478,6 +1528,7 @@ describe("Summarize Checks Unit Tests", () => {
       isDraft: false,
       targetBranch: "test-\u00e9-\u65e5\u672c",
     };
+    const impactAssessment = ImpactAssessmentSchema.parse(legacyImpactAssessment);
     const summaryJson = JSON.stringify(impactAssessment);
 
     function mockArtifactDownload(
@@ -1515,6 +1566,7 @@ describe("Summarize Checks Unit Tests", () => {
         name: "summary.json",
         per_page: 100,
       });
+
       expect(github.rest.actions.downloadArtifact).toHaveBeenCalledExactlyOnceWith({
         owner: "test-owner",
         repo: "test-repo",
@@ -1522,6 +1574,28 @@ describe("Summarize Checks Unit Tests", () => {
         archive_format: "zip",
         request: { parseSuccessResponseBody: false },
       });
+    });
+
+    it("normalizes artifacts produced before the service-scoped schema", async () => {
+      const github = mockArtifactDownload(JSON.stringify(legacyImpactAssessment));
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
+    });
+
+    it("reads cached service-scoped artifacts without affected-README metadata", async () => {
+      const github = mockArtifactDownload(
+        JSON.stringify({
+          ...impactAssessment,
+          services: impactAssessment.services.map((service) => ({
+            ...service,
+            hasAffectedReadme: undefined,
+          })),
+        }),
+      );
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
     });
 
     it.each(["application/json", "text/plain", "application/octet-stream"])(
