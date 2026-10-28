@@ -9,7 +9,6 @@ import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files
 import type { ImpactAssessment } from "../src/ImpactAssessment.ts";
 import { PRContext } from "../src/PRContext.ts";
 import { evaluateImpact, getRPaaSFolderList } from "../src/impact.ts";
-import { type LabelContext } from "../src/labelling-types.ts";
 
 describe("CLI PR comparison", () => {
   let directory: string;
@@ -129,15 +128,10 @@ describe("Check Changes", () => {
           cwd: sourceDirectory,
           baseCommitish: "origin/main",
         });
-        const labelContext: LabelContext = {
-          present: new Set(),
-          toAdd: new Set(),
-          toRemove: new Set(),
-        };
 
         const rpaaSFolderList = getRPaaSFolderList(targetDirectory);
 
-        const prContext = new PRContext(sourceDirectory, targetDirectory, labelContext, {
+        const prContext = new PRContext(sourceDirectory, targetDirectory, {
           sha: "ad7c74cb27d2cf3ba83996aaea36b07caa4d16c8",
           sourceBranch: "dev/nandiniy/DTLTypeSpec",
           targetBranch: "main",
@@ -148,7 +142,7 @@ describe("Check Changes", () => {
           isDraft: false,
         });
 
-        const result = await evaluateImpact(prContext, labelContext, rpaaSFolderList);
+        const result = await evaluateImpact(prContext, rpaaSFolderList);
 
         expect(result).toBeDefined();
         expect(result.typeSpecChanged).toBeTruthy();
@@ -180,13 +174,8 @@ describe("Check Changes", () => {
           cwd: sourceDirectory,
           baseCommitish: "origin/main",
         });
-        const labelContext: LabelContext = {
-          present: new Set(),
-          toAdd: new Set(),
-          toRemove: new Set(),
-        };
 
-        const prContext = new PRContext(sourceDirectory, targetDirectory, labelContext, {
+        const prContext = new PRContext(sourceDirectory, targetDirectory, {
           sha: "2bd8350d465081401a0f4f03e633eca41f0991de",
           sourceBranch: "features/users/deepika/cosmos-connectors-confluent",
           targetBranch: "main",
@@ -197,7 +186,7 @@ describe("Check Changes", () => {
           isDraft: false,
         });
 
-        const result = await evaluateImpact(prContext, labelContext, []);
+        const result = await evaluateImpact(prContext, []);
         expect(result.isNewApiVersion).toBeTruthy();
         expect(result.typeSpecChanged).toBeTruthy();
         expect(result.resourceManagerRequired).toBeTruthy();

@@ -135,6 +135,7 @@ model VoiceResponse {
 // Live delegation results and persisted conversation items
 // ---------------------------------------------------------------------------
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Anonymous variants require commentary, thinking, or both; there is no shared base model to extend."
 @doc("Persisted guidance accepted by Live, with commentary, thinking, or both. Agent delegation section markers are removed before storage.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentLiveDelegationResultItem {

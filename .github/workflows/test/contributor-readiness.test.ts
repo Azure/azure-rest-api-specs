@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { isMap, isSeq, parseDocument } from "yaml";
 import {
   checkContributorReadiness,
@@ -31,8 +31,10 @@ const pr = {
 };
 const marker = "<!-- contributor-readiness -->";
 const notifierPath = ".github/workflows/contributor-readiness-notify.yaml";
-const authorImpact = "PR author cannot run Azure DevOps pipelines for this PR.";
-const reviewerImpact = "Reviewer approval does not count toward required reviews";
+const authorImpact = "Cannot run Azure DevOps pipelines.";
+const authorLabelImpact = "Cannot add PR labels.";
+const reviewerImpact = "Approval does not count toward required reviews";
+const updatedAt = "2026-10-14T16:24:22.000Z";
 
 function setup() {
   const github = createMockGithub();
@@ -89,6 +91,15 @@ function setup() {
 }
 
 describe("contributor readiness", () => {
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date(updatedAt));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it("routes PR events through an unprivileged notifier and trusted workflow_run publisher", () => {
     const publisher = parseDocument(
       readFileSync(new URL("../contributor-readiness-report.yaml", import.meta.url), "utf8"),
@@ -366,7 +377,6 @@ describe("contributor readiness", () => {
     expect(f.createCheck).toHaveBeenCalledWith(expect.objectContaining({ conclusion: "neutral" }));
     const call = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
     expect(call[0].body).toContain("Internal contributors:");
-    expect(call[0].body).toContain("GitHub review rules still apply");
     expect(call[0].body).toContain("Not determined.");
     expect(call[0].body).not.toContain(authorImpact);
     expect(call[0].body).not.toContain(reviewerImpact);
@@ -401,18 +411,20 @@ describe("contributor readiness", () => {
       .split("\n")
       .find((line) => line.includes(`**[${reviewer.login}]`));
     expect(authorRow).toContain(authorImpact);
+    expect(authorRow).toContain(authorLabelImpact);
     expect(authorRow).not.toContain(reviewerImpact);
     expect(reviewerRow).toContain(reviewerImpact);
-    expect(reviewerRow).toContain("GitHub's green approval check");
-    expect(reviewerRow).toContain("This reviewer must set up or renew their access.");
+    expect(reviewerRow).toContain("GitHub's green check");
     expect(reviewerRow).not.toContain(authorImpact);
+    expect(reviewerRow).not.toContain(authorLabelImpact);
     expect(call.body).toContain(
-      "> [!WARNING]\n> **The access issues below can prevent PR approvals from counting or block Azure DevOps pipeline runs.**",
+      "> [!WARNING]\n> **Access issues can block approvals, Azure DevOps pipelines, or labeling.**",
     );
     expect(call.body).not.toContain("Internal contributors need Azure organization membership");
     expect(call.body).not.toContain("private membership cannot be verified");
-    expect(call.body).toContain("Non-blocking report");
-    expect(call.body).toContain("external fork contributions are allowed");
+    expect(call.body).toContain(
+      "Non-blocking check; fix access issues to unblock affected actions.",
+    );
     const report = call.body.replace(`\n${marker}`, "");
     expect(f.core.summary.addRaw).toHaveBeenCalledWith(report);
     const [check] = f.createCheck.mock.calls[0] as [
@@ -422,7 +434,7 @@ describe("contributor readiness", () => {
     expect(check.output.summary).toBe(report);
   });
 
-  it("shows both impacts for a PR author with an approved review", async () => {
+  it("shows author and reviewer impacts for a PR author with an approved review", async () => {
     const f = setup();
     f.listReviews.mockResolvedValue({
       data: [{ id: 20, state: "APPROVED", user: author }],
@@ -432,7 +444,7 @@ describe("contributor readiness", () => {
     const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
     const rows = comment.body.split("\n").filter((line) => line.startsWith("| 🔴"));
     expect(rows).toHaveLength(1);
-    expect(rows[0]).toContain(`${authorImpact}<br>${reviewerImpact}`);
+    expect(rows[0]).toContain(`${authorImpact}<br>${authorLabelImpact}<br>${reviewerImpact}`);
   });
 
   it("does not assign author or reviewer impacts to commit-only participants", async () => {
@@ -449,6 +461,7 @@ describe("contributor readiness", () => {
     expect(comment.body).toContain("**[committer-example]");
     expect(comment.body).toContain("No repository write access. | Not determined.");
     expect(comment.body).not.toContain(authorImpact);
+    expect(comment.body).not.toContain(authorLabelImpact);
     expect(comment.body).not.toContain(reviewerImpact);
   });
 
@@ -715,7 +728,7 @@ describe("contributor readiness", () => {
     expect(f.github.rest.issues.createComment).not.toHaveBeenCalled();
   });
 
-  it("does not update an unchanged comment", async () => {
+  it("refreshes the timestamp across report surfaces when findings are unchanged", async () => {
     const f = setup();
     f.permission.mockResolvedValue({ data: { permission: "read" } });
     await f.run();
@@ -729,8 +742,18 @@ describe("contributor readiness", () => {
         },
       ],
     });
+    const refreshedAt = "2026-10-14T17:24:22.000Z";
+    vi.setSystemTime(new Date(refreshedAt));
     await f.run();
-    expect(f.github.rest.issues.updateComment).not.toHaveBeenCalled();
+    const refreshedBody = comment.body.replace(updatedAt, refreshedAt);
+    expect(refreshedBody).toContain(`Last updated: ${refreshedAt}`);
+    expect(f.github.rest.issues.updateComment).toHaveBeenCalledWith(
+      expect.objectContaining({ comment_id: 5, body: refreshedBody }),
+    );
+    expect(f.github.rest.issues.createComment).toHaveBeenCalledOnce();
+    const report = refreshedBody.replace(`\n${marker}`, "");
+    expect(f.core.summary.addRaw).toHaveBeenLastCalledWith(report);
+    expect(f.createCheck.mock.lastCall?.[0]).toMatchObject({ output: { summary: report } });
   });
 
   it("allows affected reviewers without write access to refresh", async () => {
@@ -899,14 +922,12 @@ describe("contributor readiness", () => {
           {
             subject: author.login,
             message: "No repository write access.",
-            impacts: [authorImpact],
+            impacts: [authorImpact, authorLabelImpact],
           },
           {
             subject: reviewer.login,
             message: "No repository write access.",
-            impacts: [
-              "Reviewer approval does not count toward required reviews (GitHub's green approval check). This reviewer must set up or renew their access.",
-            ],
+            impacts: ["Approval does not count toward required reviews (GitHub's green check)."],
           },
         ],
         [verified],

@@ -1,0 +1,137 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability # capability | regression
+area: "longrunningoperation"
+# Root-level environment
+environment: azsdk-mcp
+# Execution configuration
+defaults:
+  runs: 1 # Trials per stimulus
+  timeout: "660s" # Seconds per trial
+  model: gpt-5.6-sol # Model for agent execution
+  executor: copilot-sdk # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 003002-arm-modify-response-trigger
+    tags:
+      suite: "lro"
+      mode: "trigger"
+    prompt: |
+      Modify the LRO createOrUpdate PUT operation in interface Employees so that it returns Azure-AsyncOperation header but NOT Retry-After header in the 201 response. The operation currently uses ArmResourceCreateOrReplaceAsync<Employee> template.
+    environment: &shared_environment
+      files:
+        - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+          dest: employee.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+          dest: main.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/package.json
+          dest: package.json
+        - src: ../scripts/check-node-dependencies.js
+          dest: check-node-dependencies.js
+        - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+          dest: readme.md
+        - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+          dest: shared.tsp
+        - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+          dest: tspconfig.yaml
+        - src: ../fixtures/Microsoft.Widget/Widget/preview/2024-10-01-preview/widget.json
+          dest: preview/2024-10-01-preview/widget.json
+        - src: ../fixtures/Microsoft.Widget/Widget/stable/2021-11-01/widget.json
+          dest: stable/2021-11-01/widget.json
+      commands:
+        - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
+    graders:
+      - type: "skill-invocation"
+        config:
+          required:
+            - "azure-typespec-author"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 003002-arm-modify-response-forced
+    tags:
+      suite: "lro"
+      mode: "forced"
+    prompt: |
+      @azure-typespec-author Modify the LRO createOrUpdate PUT operation in interface Employees so that it returns Azure-AsyncOperation header but NOT Retry-After header in the 201 response. The operation currently uses ArmResourceCreateOrReplaceAsync<Employee> template.
+    environment: *shared_environment
+    graders:
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js node_modules"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "node check-node-dependencies.js packages"
+          expected_exit_code: 0
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - type: "file-matches"
+        config:
+          pattern: 'ArmAsyncOperationHeader\s*<\s*(FinalResult\s*=\s*Employee|ArmOperationStatus\s*,\s*string\s*,\s*Employee)\s*>'
+          path: "employee.tsp"
+      - &file_matches_create_operation
+        type: "file-matches"
+        name: "file-matches-create-operation"
+        config:
+          pattern: "createOrUpdate is ArmResourceCreateOrReplaceAsync<"
+          path: "employee.tsp"
+      - &file_matches_update_operation
+        type: "file-matches"
+        name: "file-matches-update-operation"
+        config:
+          pattern: "update is ArmResourcePatchSync<Employee"
+          path: "employee.tsp"
+      - &file_matches_delete_operation
+        type: "file-matches"
+        name: "file-matches-delete-operation"
+        config:
+          pattern: "delete is ArmResourceDeleteWithoutOkAsync<Employee>"
+          path: "employee.tsp"
+    constraints:
+      max_turns: 5
+      max_tokens: 1000000
+  - name: 003002-arm-modify-response-no-skill
+    tags:
+      suite: "lro"
+      mode: "no-skill"
+    prompt: "Modify the LRO createOrUpdate PUT operation in interface Employees so that it returns Azure-AsyncOperation header but NOT Retry-After header in the 201 response. The operation currently uses ArmResourceCreateOrReplaceAsync<Employee> template."
+    environment: *shared_environment
+    rubric:
+      - The Employees createOrUpdate operation still uses ArmResourceCreateOrReplaceAsync<Employee> and returns Azure-AsyncOperation without Retry-After in the 201 response.
+      - Existing update and delete operations remain unchanged.
+      - Changes are limited to the requested response-header customization and contain no unrelated edits.
+    graders:
+      - type: "tool-calls"
+        config:
+          required:
+            - "^(edit|apply_patch|bash|powershell)$"
+      - type: "file-matches"
+        config:
+          path: "employee.tsp"
+          pattern: 'ArmAsyncOperationHeader<FinalResult\s*=\s*Employee>'
+      - *file_matches_create_operation
+      - *file_matches_update_operation
+      - *file_matches_delete_operation
+      - type: "prompt"
+        config:
+          prompt: "Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent."
+          model: "gpt-5.6-sol"
+          scoring: "scale_1_10"
+          threshold: 0.88
+    constraints:
+      max_turns: 10
+      max_tokens: 100000
+
+scoring:
+  weights:
+    tool-calls: 0.1
+    prompt: 0.1
+    run-command: 0.1
+    skill-invocation: 0.1
+    file-matches: 0.6
+  threshold: 0.98
