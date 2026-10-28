@@ -273,6 +273,8 @@ using Common;
   Microsoft.Network.NetworkSecurityPerimeterOperationStatusesOperationGroup.get,
   "!csharp"
 );
+@@scope(Microsoft.Network.NspAccessRules.reconcile, "!csharp");
+@@scope(Microsoft.Network.NspAssociations.reconcile, "!csharp");
 
 // Cloud Services is deprecated and no longer represented by the current C# Compute SDK.
 @@scope(
