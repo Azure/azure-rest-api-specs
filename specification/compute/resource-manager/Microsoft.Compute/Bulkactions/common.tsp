@@ -8,6 +8,12 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Compute;
 
+@doc("Resource '{name}' update operation succeeded", Resource)
+model BulkCreateUpdatedResponse<Resource extends Azure.ResourceManager.Foundations.SimpleResource> {
+  ...ArmResourceUpdatedResponse<Resource>;
+  ...ArmAsyncOperationHeader<FinalResult = Resource>;
+}
+
 @doc("A reference to an Azure resource.")
 model SubResource {
   @doc("The Azure resource ID.")
