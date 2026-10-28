@@ -348,9 +348,9 @@ model PoolProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   highAvailability: PoolHighAvailability;
 
-  @doc("The required parameter group associated with the pool. When creating a new pool in this API version, the caller must supply the corresponding default parameter group; customer-created parameter groups are not accepted during creation. For an existing pool, PUT or PATCH can associate either the corresponding default parameter group or a customer-created parameter group. The create-visible shape intentionally supports both resource ID forms so a future API version can allow customer-created parameter groups during creation without a breaking schema change.")
+  @doc("The parameter group associated with the pool. When omitted during creation, the service applies the default parameter group compatible with the parent cluster's PostgreSQL version. When supplied during creation in this API version, it must reference the corresponding default parameter group; customer-created parameter groups are not accepted during creation. For an existing pool, PUT or PATCH can associate either the corresponding default parameter group or a customer-created parameter group. The create-visible shape intentionally supports both resource ID forms so a future API version can allow customer-created parameter groups during creation without a breaking schema change.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  parameterGroup: PoolParameterGroupReference;
+  parameterGroup?: PoolParameterGroupReference;
 
   @doc("The scheduled maintenance configuration for the pool. The properties available depend on the selected maintenance management type.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
@@ -414,7 +414,7 @@ union PoolHighAvailabilityMode {
 
 @doc("A reference to the parameter group associated with a HorizonDB pool. The schema represents both default and customer-created parameter groups for create and update compatibility. In this API version, initial pool creation accepts only the corresponding default parameter group; PUT updates to an existing pool can associate either group type.")
 model PoolParameterGroupReference {
-  @doc("The Azure resource ID of the associated parameter group. Initial pool creation in this API version requires the corresponding Microsoft.HorizonDb/locations/parameterGroups resource. For an existing pool, PUT can specify either the corresponding default group or a customer-created Microsoft.HorizonDb/parameterGroups resource.")
+  @doc("The Azure resource ID of the associated parameter group. When the parameter group is supplied during initial pool creation in this API version, the ID must identify the corresponding Microsoft.HorizonDb/locations/parameterGroups resource. For an existing pool, PUT can specify either the corresponding default group or a customer-created Microsoft.HorizonDb/parameterGroups resource.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   parameterGroupResourceId: armResourceIdentifier<[
     {
