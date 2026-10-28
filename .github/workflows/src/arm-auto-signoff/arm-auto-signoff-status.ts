@@ -87,7 +87,10 @@ export async function getLabelActionImpl({
   repo: string;
   issue_number: number;
   head_sha: string;
-  github: GitHub;
+  github: import("@octokit/core").Octokit &
+    import("@octokit/plugin-rest-endpoint-methods").Api & {
+      paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
+    };
   core: Core;
 }): Promise<{ headSha: string; issueNumber: number; labelActions: ManagedLabelActions }> {
   const baseResult: { headSha: string; issueNumber: number } = {

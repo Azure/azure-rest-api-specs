@@ -135,73 +135,35 @@ function Install-Standalone-Tool (
     }
 
     $tag = "${Package}_${Version}"
-    $downloadUrlPrefix = "https://github.com/$Repository/releases/download"
 
     if (!$Version -or $Version -eq "*") {
         Write-Host "Attempting to find latest version for package '$Package'"
         $found = $false
 
-        if ($Package -eq "azsdk") {
-            $StorageAccount = "azuresdkartifacts"
-            $Container = "public-azsdk-cli"
-            try {
-                $Version = ( `
-                        [xml]( `
-                            [string]( `
-                                Invoke-RestMethod `
-                                    -Uri "https://${StorageAccount}.blob.core.windows.net/${Container}?restype=container&comp=list&maxresults=100000" `
-                                    -Method Get`
-                            ) -replace "`u{FEFF}", "" `
-                        ) `
-                    ).EnumerationResults.Blobs `
-                    | Select-Object -ExpandProperty Blob `
-                    | Select-Object -ExpandProperty Name `
-                    | Select-String -Pattern "^${Package}_(?<Version>(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*))/$([regex]::Escape($systemDetails.file_name))$" `
-                    | %{ [semver]$_.Matches.Captures.Groups["Version"].Value } `
-                    | Sort-Object -Descending `
-                    | Get-Unique `
-                    | %{ $_.ToString() } `
-                    | Select-Object -First 1
-
-                if ($Version) {
-                    $tag = "${Package}_${Version}"
-                    $downloadUrlPrefix = "https://${StorageAccount}.blob.core.windows.net/${Container}"
-                    $found = $true
-                    Write-Host "Found the latest version of ${Package} ${Version} from ${StorageAccount}/${Container}"
-                }
-            }
-            catch {
-                Write-Host "Failed to get latest version from ${StorageAccount}/${Container}: $_"
-            }
-        }
-
-        if (!$found) {
-            # First attempt: use git ls-remote on repository tags to avoid GitHub REST API rate limits
-            try {
-                $remoteUrl = "https://github.com/$Repository.git"
-                $rawTags = git ls-remote --tags --refs --sort=-version:refname $remoteUrl "${Package}_*"
-                if ($rawTags) {
-                    $matchingTags = @()
-                    foreach ($line in $rawTags) {
-                        if ($line -match "refs/tags/(${Package}_(?!.*dev)(.+))$") {
-                            $matchingTags += [PSCustomObject]@{
-                                Tag     = $matches[1]
-                                Version = $matches[2]
-                            }
+        # First attempt: use git ls-remote on repository tags to avoid GitHub REST API rate limits
+        try {
+            $remoteUrl = "https://github.com/$Repository.git"
+            $rawTags = git ls-remote --tags --refs --sort=-version:refname $remoteUrl "${Package}_*"
+            if ($rawTags) {
+                $matchingTags = @()
+                foreach ($line in $rawTags) {
+                    if ($line -match "refs/tags/(${Package}_(?!.*dev)(.+))$") {
+                        $matchingTags += [PSCustomObject]@{
+                            Tag     = $matches[1]
+                            Version = $matches[2]
                         }
                     }
-                    if ($matchingTags.Count -gt 0) {
-                        $latest = $matchingTags[0]
-                        $tag = $latest.Tag
-                        $Version = $latest.Version
-                        $found = $true
-                        Write-Host "Found the latest version of $Package $Version via git ls-remote"
-                    }
+                }
+                if ($matchingTags.Count -gt 0) {
+                    $latest = $matchingTags[0]
+                    $tag = $latest.Tag
+                    $Version = $latest.Version
+                    $found = $true
                 }
             }
-            catch {
-                Write-Host "git ls-remote failed: $_. Falling back to GitHub REST API."
-            }
+        }
+        catch {
+            Write-Host "git ls-remote failed: $_. Falling back to GitHub REST API."
         }
 
         # Fallback: GitHub REST API
@@ -213,7 +175,6 @@ function Install-Standalone-Tool (
                     $tag = $release.tag_name
                     $Version = $release.tag_name -replace "${Package}_", ""
                     $found = $true
-                    Write-Host "Found the latest version of $Package $Version via GitHub REST API"
                     break
                 }
             }
@@ -225,7 +186,7 @@ function Install-Standalone-Tool (
     }
 
     $downloadFolder = Resolve-Path $Directory
-    $downloadUrl = "$downloadUrlPrefix/$tag/$($systemDetails.file_name)"
+    $downloadUrl = "https://github.com/$Repository/releases/download/$tag/$($systemDetails.file_name)"
     $downloadFile = $downloadUrl.Split('/')[-1]
     $downloadLocation = Join-Path $downloadFolder $downloadFile
     $savedVersionTxt = Join-Path $downloadFolder "downloaded_version.txt"

@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "2167b012-c9f9-4b04-83b2-0ff304e7d51d",
+    "resourceGroupName": "RG01",
+    "vmScaleSetName": "VMSS01",
+    "lifecycleHookEventName": "8b0e2e5b-3b1e-4b52-9d3f-1a2b3c4d5e6f",
+    "api-version": "2026-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "8b0e2e5b-3b1e-4b52-9d3f-1a2b3c4d5e6f",
+        "id": "/subscriptions/2167b012-c9f9-4b04-83b2-0ff304e7d51d/resourceGroups/RG01/providers/Microsoft.Compute/virtualMachineScaleSets/VMSS01/lifecycleHookEvents/8b0e2e5b-3b1e-4b52-9d3f-1a2b3c4d5e6f",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/lifecycleHookEvents",
+        "properties": {
+          "type": "UpgradeAutoOSRollingBatchStarting",
+          "waitUntil": "2025-05-08T09:17:55.6844555+00:00",
+          "maxWaitUntil": "2025-05-08T12:17:55.6844555+00:00",
+          "timeCreated": "2025-05-08T06:17:55.6844555+00:00",
+          "defaultAction": "Approve",
+          "targetResources": [
+            {
+              "resource": {
+                "id": "/subscriptions/2167b012-c9f9-4b04-83b2-0ff304e7d51d/resourceGroups/RG01/providers/Microsoft.Compute/virtualMachineScaleSets/VMSS01/virtualMachines/0"
+              },
+              "actionState": "Abandoned"
+            },
+            {
+              "resource": {
+                "id": "/subscriptions/2167b012-c9f9-4b04-83b2-0ff304e7d51d/resourceGroups/RG01/providers/Microsoft.Compute/virtualMachineScaleSets/VMSS01/virtualMachines/1"
+              },
+              "actionState": "Abandoned"
+            }
+          ],
+          "state": "Abandoned"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetLifeCycleHookEvents_Get",
+  "title": "Get an abandoned virtual machine scale set lifecycle hook event."
+}

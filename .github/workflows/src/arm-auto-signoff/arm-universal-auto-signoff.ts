@@ -2,7 +2,7 @@ import { inspect } from "node:util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { extractInputs } from "../context.ts";
-import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
+import type { Core, GitHubScriptArgs } from "../github.ts";
 import { LabelAction } from "../label.ts";
 import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.ts";
 
@@ -50,7 +50,10 @@ export async function getLabelActionImpl({
   repo: string;
   head_sha: string;
   issue_number: number;
-  github: GitHub;
+  github: import("@octokit/core").Octokit &
+    import("@octokit/plugin-rest-endpoint-methods").Api & {
+      paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
+    };
   core: Core;
 }): Promise<{ headSha: string; issueNumber: number; labelActions: ManagedLabelActions }> {
   const noneResult = {
@@ -117,7 +120,10 @@ async function getDesiredLabelAction({
   head_sha: string;
   labelNames: string[];
   hasAutoSignoff: boolean;
-  github: GitHub;
+  github: import("@octokit/core").Octokit &
+    import("@octokit/plugin-rest-endpoint-methods").Api & {
+      paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
+    };
   core: Core;
 }): Promise<LabelAction> {
   const labelsAllowSignoff =

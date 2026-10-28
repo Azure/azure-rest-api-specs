@@ -2,15 +2,14 @@ parameters:
   - name: Test-release-Plan
     type: boolean
     default: false
+  - name: PrNumber
+    type: number
+    default: 0
   - name: ReleasePlanId
     type: number
     default: 0
 
 trigger:
-  branches:
-    include:
-      - main
-      - RPSaaSMaster
   paths:
     include:
       - specification/**/*.tsp
@@ -58,6 +57,7 @@ stages:
               inlineScript: |
                 $ErrorActionPreference = "Stop"
 
+                $prNumber = ${{ parameters.PrNumber }}
                 $releasePlanId = ${{ parameters.ReleasePlanId }}
                 $outputPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
 
@@ -71,6 +71,9 @@ stages:
                 if ($releasePlanId -gt 0) {
                   Write-Host "Using release plan ID: $releasePlanId"
                   $nodeArgs += @("--release-plan-id", $releasePlanId)
+                } elseif ($prNumber -gt 0) {
+                  Write-Host "Using PR number: $prNumber"
+                  $nodeArgs += @("--pr-number", $prNumber)
                 } else {
                   $commitSha = "$(Build.SourceVersion)"
                   if ([string]::IsNullOrWhiteSpace($commitSha)) {
@@ -106,7 +109,7 @@ stages:
 
           - task: AzureCLI@2
             displayName: "Update SDK details for eligible release plans"
-            condition: and(succeeded(), ne(variables['SkipSDKGeneration'], 'true'), ne(variables['Build.Reason'], 'Manual'), ne(variables['Build.Repository.Name'], 'Azure/azure-rest-api-specs-pr'))
+            condition: and(succeeded(), ne(variables['SkipSDKGeneration'], 'true'))
             env:
               ${{ if eq(parameters['Test-release-Plan'], true) }}:
                 AZSDKTOOLS_AGENT_TESTING: "true"

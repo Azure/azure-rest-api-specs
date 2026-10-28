@@ -24,8 +24,6 @@ import {
 import { removeLabelIfPresent } from "../package-name-approval/labels.ts";
 import {
   buildSuppressionsComment,
-  renderSuppressionsCommentBody,
-  shouldInvalidateSuppressionApproval,
   TYPESPEC_SUPPRESSIONS_COMMENT_IDENTIFIER,
   TYPESPEC_SUPPRESSIONS_SECTION_TITLE,
 } from "./suppressions-comment.ts";
@@ -77,6 +75,9 @@ export default async function postSuppressionsResults({ github, context, core }:
 
   const labelNames: string[] = pr.labels.map((label: { name?: string }) => label.name ?? "");
   const isNewAnalysis = context.eventName === "workflow_run";
+  const effectiveLabelNames = isNewAnalysis
+    ? labelNames.filter((label) => label !== TYPESPEC_SUPPRESSIONS_APPROVED_LABEL)
+    : labelNames;
 
   const result = await buildSuppressionsComment(
     github,
@@ -85,7 +86,7 @@ export default async function postSuppressionsResults({ github, context, core }:
     repo,
     head_sha,
     issue_number,
-    labelNames,
+    effectiveLabelNames,
   );
 
   if (!result) {
@@ -95,42 +96,19 @@ export default async function postSuppressionsResults({ github, context, core }:
     return;
   }
 
-  let { body } = result;
-  const { requiresApproval } = result;
+  const { body, requiresApproval } = result;
 
   if (isNewAnalysis && labelNames.includes(TYPESPEC_SUPPRESSIONS_APPROVED_LABEL)) {
-    const invalidateApproval = await shouldInvalidateSuppressionApproval(
+    core.info(
+      `Removing ${TYPESPEC_SUPPRESSIONS_APPROVED_LABEL} label for new analysis result on ${owner}/${repo}#${issue_number}.`,
+    );
+    await removeLabelIfPresent(
       github,
-      core,
       owner,
       repo,
       issue_number,
-      result.run,
-      result.report,
+      TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
     );
-    if (invalidateApproval) {
-      core.info(
-        `Removing ${TYPESPEC_SUPPRESSIONS_APPROVED_LABEL} label because the approval-relevant analysis changed on ${owner}/${repo}#${issue_number}.`,
-      );
-      await removeLabelIfPresent(
-        github,
-        owner,
-        repo,
-        issue_number,
-        TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
-      );
-      body = renderSuppressionsCommentBody(result.report, {
-        owner,
-        repo,
-        pullNumber: issue_number,
-        isApproved: false,
-        runUrl: result.runUrl,
-      });
-    } else {
-      core.info(
-        `Preserving ${TYPESPEC_SUPPRESSIONS_APPROVED_LABEL} because the approval-relevant analysis did not change on ${owner}/${repo}#${issue_number}.`,
-      );
-    }
   }
 
   await syncReviewRequiredLabel(
