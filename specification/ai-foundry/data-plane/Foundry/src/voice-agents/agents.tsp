@@ -129,7 +129,7 @@ model VoiceAgentBaseDefinition extends AgentDefinition {
   sub_protocol?: VoiceAgentSubProtocol;
 
   @doc("Frontend instructions, templated with structured_inputs. Backend instructions belong in delegation.responses.")
-  instructions?: string | null;
+  instructions?: string;
 
   @doc("Template inputs for session instructions and supported greetings.")
   structured_inputs?: Record<StructuredInputDefinition>;
