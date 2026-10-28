@@ -61,11 +61,7 @@ using Microsoft.Monitor;
   "ProvisioningState",
   "csharp"
 );
-@@clientName(
-  AzureMonitorWorkspaceEndpoints.query,
-  "QueryEndpoint",
-  "csharp"
-);
+@@clientName(AzureMonitorWorkspaceEndpoints.query, "QueryEndpoint", "csharp");
 @@clientName(
   AzureMonitorWorkspaceActions.defaultActionGroups,
   "DefaultActionGroups",
