@@ -6,6 +6,7 @@ using Microsoft.Cdn;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 
+@@clientName(AFDDomainMtlsParameters, "AFDDomainMTLSParameters", "go");
 @@clientName(
   CertificateSourceParameters,
   "CertificateSourceParametersBase",
