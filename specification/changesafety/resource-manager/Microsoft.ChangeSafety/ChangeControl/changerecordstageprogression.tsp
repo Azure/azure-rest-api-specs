@@ -58,12 +58,13 @@ model ChangeRecordStageProgressionProperties {
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Collection of related links for the change.")
+  @Azure.ResourceManager.identifiers(#[])
   links?: Link[];
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Orchestration tools define the keys and JSON value types of stage metadata. This preview retains the existing open metadata object."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Orchestration tools define the keys and JSON value types of stage metadata. A dictionary preserves their values in generated SDK serializers."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Additional metadata for the stageProgression resource.")
-  additionalData?: {};
+  additionalData?: Record<unknown>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameter names come from the StageMap, not fixed properties of this API. Their supplied values may be JSON scalars, arrays, or objects."
   @doc("Stage specific key value pairs of parameter names & their values for the current Stage, If any.")
@@ -139,13 +140,19 @@ interface ChangeRecordStageProgressions {
     }
   >;
 
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     ChangeRecordStageProgression,
-    ChangeRecordStageProgressionProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ChangeRecordStageProgression,
+      ChangeRecordStageProgressionProperties
+    >
   >;
-  updateAtSubscriptionLevel is ArmResourcePatchSync<
+  updateAtSubscriptionLevel is ArmCustomPatchSync<
     ChangeRecordStageProgression,
-    ChangeRecordStageProgressionProperties,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ChangeRecordStageProgression,
+      ChangeRecordStageProgressionProperties
+    >,
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;

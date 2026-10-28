@@ -113,10 +113,10 @@ model ChangeDefinition {
   @doc("Kind of the change definition.")
   kind: ChangeDefinitionType;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "The API accepts kind-specific JSON in details, including ApiOperations and Targets. This preview preserves that open object pending service confirmation of explicit variants."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Change-definition kinds carry JSON objects with payload fields defined by the kind. Preserve existing opaque values while service owners confirm concrete schemas."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Free form object containing additional details for the change definition.")
-  details: {};
+  details: Record<unknown>;
 }
 
 @doc("Defines the type of change definition.")

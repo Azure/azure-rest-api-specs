@@ -114,16 +114,15 @@ model ObjectParameter extends Parameter {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   type: ParameterType.Object;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Object parameter defaults are customer-supplied JSON objects with arbitrary keys and nested values. This preview retains the existing open object schema."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Object parameter defaults have customer-defined JSON keys and nested values. A dictionary preserves these values in generated SDK serializers."
   @doc("Default value for the parameter.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  defaultValue?: {};
+  defaultValue?: Record<unknown>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Each object-parameter allowed value has customer-defined JSON keys and nested values. This preview retains the existing open object item schema."
   @doc("Allowed list of the values for the parameter.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @Azure.ResourceManager.identifiers(#[])
-  allowedValues?: Array<{}>;
+  allowedValues?: Record<unknown>[];
 }
 
 @doc("Partial parameter definition for PATCH requests. Omitted fields are not supplied by the request.")

@@ -17,6 +17,10 @@ and does not change `2026-01-01-preview`, deploy a backend, or release an SDK.
   operations retained before the next-stage design decision.
 - Uses one URL per Link entry, complete optional parameter PATCH fields, canonical
   management-group paths, and native ARM identifiers.
+- Declares no stable identity for Link array items. Link names are not required
+  to be unique.
+- Uses explicit JSON dictionaries for opaque object values so generated clients
+  preserve their contents.
 - Replaces the untyped snapshot union with `StageMapSnapshot` entries containing
   `resourceId` and optional captured `stageMap` contents.
 - Proposes typed AcquirePolicyToken and PolicyEvaluation payloads for their
@@ -33,10 +37,10 @@ snapshot/event serialization, version-specific resource/action registration,
 consumer migration, current ARM/suppression approvals, and SDK package onboarding.
 Do not treat passing schema or SDK generation checks as deployed runtime support.
 
-SDK work remains deferred. The retained SDK-readiness exemptions apply only to
-configuration validation. They do not waive the required `SDK Validation Status`
-check. The current blockers are the legacy JavaScript generation path and Python
-package-name onboarding.
+JavaScript uses modular TypeSpec generation for the required SDK validation.
+Other language-emitter migrations remain deferred. Their retained readiness
+exemptions apply only to configuration validation and do not waive
+`SDK Validation Status`. Python package-name onboarding remains a release gate.
 
 ## Getting Started
 
@@ -87,25 +91,34 @@ directive:
 directive:
   - suppress: AvoidAdditionalProperties
     reason: |
-      These property-scoped exceptions preserve customer-defined parameter names, metadata keys, and stage-variable names. Values retain the existing typed parameter schemas or JSON values. Current ARM review is required.
+      These property-scoped exceptions preserve customer-defined parameters and JSON payloads for change definitions, stage variables, and orchestration metadata. Values are defined by the parameter or change kind, or by the orchestrator. Current ARM review is required.
     from: ChangeControl.json
     where:
       - $.definitions.Parameter.properties.metadata
+      - $.definitions.ObjectParameter.properties.defaultValue
+      - $.definitions.ObjectParameter.properties.allowedValues.items
       - $.definitions.StageMapProperties.properties.parameters
+      - $.definitions.ChangeDefinition.properties.details
       - $.definitions.Stage.properties.stageVariables
       - $.definitions.NestedStageMap.properties.parameters
       - $.definitions.ChangeRecordProperties.properties.parameters
+      - $.definitions.ChangeRecordProperties.properties.additionalData
       - $.definitions.ChangeRecordStageProgressionProperties.properties.stageVariables
-      - $.definitions.ChangeRecordStageProgressionPropertiesUpdate.properties.stageVariables
+      - $.definitions.ChangeRecordStageProgressionUpdateProperties.properties.stageVariables
+      - $.definitions.ChangeRecordStageProgressionProperties.properties.additionalData
+      - $.definitions.ChangeRecordStageProgressionUpdateProperties.properties.additionalData
       - $.definitions.ChangeRecordStageProgressionProperties.properties.parameters
-      - $.definitions.ChangeRecordStageProgressionPropertiesUpdate.properties.parameters
+      - $.definitions.ChangeRecordStageProgressionUpdateProperties.properties.parameters
       - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.stageVariables
+      - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.additionalData
       - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.parameters
   - suppress: AvoidAdditionalProperties
     reason: |
-      PATCH parameter names and metadata keys are customer-defined. Values use the partial ParameterPatch schema or string metadata values. These PATCH-only selectors require current ARM review.
+      PATCH retains customer-defined parameters and metadata, plus change-definition and orchestration JSON. Unspecified fields remain omitted. Each property-scoped exception requires current ARM review.
     from: ChangeControl.json
     where:
+      - $.definitions.ChangeDefinitionPatch.properties.details
+      - $.definitions.ChangeRecordUpdateProperties.properties.additionalData
       - $.definitions.ChangeRecordUpdateProperties.properties.parameters
       - $.definitions.ParameterPatch.properties.metadata
       - $.definitions.StageMapUpdateProperties.properties.parameters
@@ -145,7 +158,8 @@ See configuration in [readme.python.md](./readme.python.md)
 
 ## TypeScript
 
-See configuration in [readme.typescript.md](./readme.typescript.md)
+TypeScript uses the modular `@azure-tools/typespec-ts` emitter configured in
+[tspconfig.yaml](./tspconfig.yaml).
 
 ## CSharp
 

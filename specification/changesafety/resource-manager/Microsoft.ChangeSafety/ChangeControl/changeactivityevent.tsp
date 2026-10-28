@@ -56,6 +56,7 @@ model ChangeActivityEventProperties {
   initiatedBy?: string;
 
   @doc("Collection of references to external systems associated with this change.")
+  @Azure.ResourceManager.identifiers(#[])
   links?: Link[];
 }
 

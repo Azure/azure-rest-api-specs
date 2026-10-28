@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "./commonmodels.tsp";
 import "./changerecordstageprogression.tsp";
 import "./stagemap.tsp";
@@ -85,12 +86,13 @@ model ChangeRecordProperties {
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Collection of related links for the change.")
+  @Azure.ResourceManager.identifiers(#[])
   links?: Link[];
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Orchestration tools define the keys and JSON value types of change metadata. This preview retains the existing open metadata object."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Orchestration tools define the keys and JSON value types of change metadata. A dictionary preserves their values in generated SDK serializers."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Additional metadata for the change required for various orchestration tools.")
-  additionalData?: {};
+  additionalData?: Record<unknown>;
 
   @doc("Captured StageMap references and optional resource contents.")
   @Azure.ResourceManager.identifiers(#["resourceId"])
@@ -99,6 +101,10 @@ model ChangeRecordProperties {
 }
 
 @doc("RetrieveNextStages POST Action response for ChangeRecord.")
+@Azure.ClientGenerator.Core.clientName(
+  "ChangeRecordRetrieveNextStagesResult",
+  "csharp"
+)
 model ChangeRecordRetrieveNextStagesResponse {
   @doc("ChangeRecord resource Id.")
   changeRecordResourceId: ChangeRecordResourceId;
@@ -136,12 +142,13 @@ model ChangeRecordRetrieveNextStagesResponseItem {
 
   @visibility(Lifecycle.Read)
   @doc("Collection of related links for the change.")
+  @Azure.ResourceManager.identifiers(#[])
   links?: Link[];
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "The response carries stage metadata defined by orchestration tools. This preview retains the existing open object rather than inventing fixed metadata fields."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The response carries stage metadata defined by orchestration tools. A dictionary preserves the existing JSON values without inventing fixed metadata fields."
   @visibility(Lifecycle.Read)
   @doc("Additional metadata related to the StageProgression resource.")
-  additionalData?: {};
+  additionalData?: Record<unknown>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameter names are customer-defined; ChangeSafety cannot enumerate the keys. Values use the typed Parameter schema."
   @doc("List of Parameters & their schemas for the current Stage that user supposed to provide.")
@@ -181,6 +188,10 @@ scalar ChangeRecordResourceId
   ]>;
 
 @doc("VerifyChangeValidity POST Action request for ChangeRecord.")
+@Azure.ClientGenerator.Core.clientName(
+  "ChangeRecordVerifyChangeValidityContent",
+  "csharp"
+)
 model ChangeRecordVerifyChangeValidityRequest {
   @doc("The resource operation.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -202,6 +213,10 @@ model ChangeRecordVerifyChangeValidityRequestContext {
 }
 
 @doc("VerifyChangeValidity POST Action response for ChangeRecord.")
+@Azure.ClientGenerator.Core.clientName(
+  "ChangeRecordVerifyChangeValidityResult",
+  "csharp"
+)
 model ChangeRecordVerifyChangeValidityResponse {
   @doc("The outcome of the verification.")
   outcome: ValidationOutcome;
