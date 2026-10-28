@@ -103,10 +103,10 @@ scalar DottedDecimalIpv4Address extends string;
 @parentResource(Pool)
 model FirewallRule
   is Azure.ResourceManager.ProxyResource<FirewallRuleProperties> {
-  @doc("The name of the HorizonDB pool firewall rule.")
-  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
+  @doc("The name of the HorizonDB pool firewall rule. The name must be 1 through 80 characters, contain only ASCII letters, digits, underscores, periods, and hyphens, start with a letter or digit, and end with a letter, digit, or underscore.")
+  @pattern("^[a-zA-Z0-9](?:[a-zA-Z0-9_.-]{0,78}[a-zA-Z0-9_])?$")
   @minLength(1)
-  @maxLength(128)
+  @maxLength(80)
   @key("firewallRuleName")
   @path
   @segment("firewallRules")
@@ -294,6 +294,13 @@ model PoolCreateAcceptedResponse {
   @bodyRoot
   body: Pool;
 }
+
+@doc("The response returned when asynchronous HorizonDB firewall rule creation is accepted and is in progress.")
+model FirewallRuleCreateAcceptedResponse
+  is ArmResourceCreatedResponse<
+    FirewallRule,
+    HorizonDbResourceLroHeaders<FirewallRule>
+  >;
 
 @doc("Properties of a HorizonDB cluster for update operations.")
 model ClusterPropertiesForPatchUpdate {
@@ -1014,6 +1021,9 @@ union ProvisioningState {
 
   /** The HorizonDB resource is still provisioning. */
   Provisioning: "Provisioning",
+
+  /** The resource is being updated. */
+  Updating: "Updating",
 }
 
 @doc("Properties of a HorizonDB parameter group.")

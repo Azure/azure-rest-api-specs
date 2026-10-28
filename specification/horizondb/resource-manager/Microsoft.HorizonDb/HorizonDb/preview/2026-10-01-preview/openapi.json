@@ -4058,12 +4058,12 @@
           {
             "name": "firewallRuleName",
             "in": "path",
-            "description": "The name of the HorizonDB pool firewall rule.",
+            "description": "The name of the HorizonDB pool firewall rule. The name must be 1 through 80 characters, contain only ASCII letters, digits, underscores, periods, and hyphens, start with a letter or digit, and end with a letter, digit, or underscore.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9](?:[a-zA-Z0-9_.-]{0,78}[a-zA-Z0-9_])?$"
           }
         ],
         "responses": {
@@ -4125,12 +4125,12 @@
           {
             "name": "firewallRuleName",
             "in": "path",
-            "description": "The name of the HorizonDB pool firewall rule.",
+            "description": "The name of the HorizonDB pool firewall rule. The name must be 1 through 80 characters, contain only ASCII letters, digits, underscores, periods, and hyphens, start with a letter or digit, and end with a letter, digit, or underscore.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9](?:[a-zA-Z0-9_.-]{0,78}[a-zA-Z0-9_])?$"
           },
           {
             "name": "resource",
@@ -4161,7 +4161,7 @@
             }
           },
           "201": {
-            "description": "Resource 'FirewallRule' create operation succeeded",
+            "description": "The response returned when asynchronous HorizonDB firewall rule creation is accepted and is in progress.",
             "schema": {
               "$ref": "#/definitions/FirewallRule"
             },
@@ -4234,12 +4234,12 @@
           {
             "name": "firewallRuleName",
             "in": "path",
-            "description": "The name of the HorizonDB pool firewall rule.",
+            "description": "The name of the HorizonDB pool firewall rule. The name must be 1 through 80 characters, contain only ASCII letters, digits, underscores, periods, and hyphens, start with a letter or digit, and end with a letter, digit, or underscore.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9](?:[a-zA-Z0-9_.-]{0,78}[a-zA-Z0-9_])?$"
           }
         ],
         "responses": {
@@ -10240,7 +10240,8 @@
         "Failed",
         "Canceled",
         "InProgress",
-        "Provisioning"
+        "Provisioning",
+        "Updating"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -10270,6 +10271,11 @@
             "name": "Provisioning",
             "value": "Provisioning",
             "description": "The HorizonDB resource is still provisioning."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
           }
         ]
       },

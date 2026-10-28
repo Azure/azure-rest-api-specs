@@ -151,10 +151,7 @@ interface FirewallRules {
     LroHeaders = HorizonDbResourceLroHeaders<FirewallRule>,
     Response =
       | HorizonDbResourceUpdatedLroResponse<FirewallRule>
-      | ArmResourceCreatedResponse<
-          FirewallRule,
-          HorizonDbResourceLroHeaders<FirewallRule>
-        >
+      | FirewallRuleCreateAcceptedResponse
   >;
 
   @doc("Deletes a HorizonDB pool firewall rule.")
