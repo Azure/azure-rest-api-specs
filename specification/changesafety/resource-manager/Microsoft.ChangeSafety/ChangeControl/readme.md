@@ -21,16 +21,18 @@ and does not change `2026-01-01-preview`, deploy a backend, or release an SDK.
   to be unique.
 - Uses explicit JSON dictionaries for opaque object values so generated clients
   preserve their contents.
+- Uses kind-specific ApiOperations and Targets schemas for change definitions,
+  including partial details for PATCH requests.
 - Replaces the untyped snapshot union with `StageMapSnapshot` entries containing
-  `resourceId` and optional captured `stageMap` contents.
+  `resourceId` and optional captured StageMap properties.
 - Proposes typed AcquirePolicyToken and PolicyEvaluation payloads for their
   `2026-01-01` event schema version. Service owners must confirm field coverage and
   requiredness; these illustrative examples are not production captures.
 
-The existing synchronous `retrieveNextStages` POST is retained provisionally.
-Its replacement with a computed GET or a justified asynchronous POST remains an
-explicit ARM/backend design decision; this draft does not claim an approved
-POST-retrieval exception.
+Next-stage planning uses GET at both existing `retrieveNextStages` paths.
+It reads the ChangeRecord, snapshots, and progressions without advancing them.
+The November backend and ProviderHub registrations must expose these GET routes
+before publication. No latency-based POST exception is claimed.
 
 **Release gates:** backend support for event reads, PATCH merge behavior, typed
 snapshot/event serialization, version-specific resource/action registration,
@@ -81,24 +83,15 @@ directive:
     where: $.definitions.ArmResourceOperation.properties.body
     reason: |
       VCV carries ARM deployment engine-generated request bodies unchanged. Their fields and value types are defined by the target resource provider and API version, not by ChangeSafety. This scoped exception requires ARM API review approval.
-```
-
----
-
-## Suppression
-
-```yaml
-directive:
   - suppress: AvoidAdditionalProperties
     reason: |
-      These property-scoped exceptions preserve customer-defined parameters and JSON payloads for change definitions, stage variables, and orchestration metadata. Values are defined by the parameter or change kind, or by the orchestrator. Current ARM review is required.
+      These property-scoped exceptions preserve customer-defined parameters, stage variables, and orchestration metadata. Values are defined by the parameter or by the orchestrator. Current ARM review is required.
     from: ChangeControl.json
     where:
       - $.definitions.Parameter.properties.metadata
       - $.definitions.ObjectParameter.properties.defaultValue
       - $.definitions.ObjectParameter.properties.allowedValues.items
       - $.definitions.StageMapProperties.properties.parameters
-      - $.definitions.ChangeDefinition.properties.details
       - $.definitions.Stage.properties.stageVariables
       - $.definitions.NestedStageMap.properties.parameters
       - $.definitions.ChangeRecordProperties.properties.parameters
@@ -114,10 +107,9 @@ directive:
       - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.parameters
   - suppress: AvoidAdditionalProperties
     reason: |
-      PATCH retains customer-defined parameters and metadata, plus change-definition and orchestration JSON. Unspecified fields remain omitted. Each property-scoped exception requires current ARM review.
+      PATCH retains customer-defined parameters, metadata, and orchestration JSON. Unspecified fields remain omitted. Each property-scoped exception requires current ARM review.
     from: ChangeControl.json
     where:
-      - $.definitions.ChangeDefinitionPatch.properties.details
       - $.definitions.ChangeRecordUpdateProperties.properties.additionalData
       - $.definitions.ChangeRecordUpdateProperties.properties.parameters
       - $.definitions.ParameterPatch.properties.metadata

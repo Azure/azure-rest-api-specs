@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
 import "./commonmodels.tsp";
 import "./changerecordstageprogression.tsp";
 import "./stagemap.tsp";
@@ -15,7 +14,7 @@ using TypeSpec.Rest;
 
 namespace Microsoft.ChangeSafety;
 
-@doc("Resource allows the user to define the change that they intended to execute & indicate the progression it will use. ChangeRecord replaces the deprecated ChangeState resource.")
+@doc("Resource allows the user to define the change that they intended to execute and indicate the progression it will use.")
 model ChangeRecord is ProxyResource<ChangeRecordProperties> {
   @pattern("^[a-zA-Z0-9-]{3,100}$")
   @key("changeRecordName")
@@ -94,17 +93,13 @@ model ChangeRecordProperties {
   @doc("Additional metadata for the change required for various orchestration tools.")
   additionalData?: Record<unknown>;
 
-  @doc("Captured StageMap references and optional resource contents.")
+  @doc("Captured StageMap references and optional properties.")
   @Azure.ResourceManager.identifiers(#["resourceId"])
   @visibility(Lifecycle.Read)
-  stageMapSnapshot?: StageMapSnapshot[];
+  stageMapSnapshots?: StageMapSnapshot[];
 }
 
-@doc("RetrieveNextStages POST Action response for ChangeRecord.")
-@Azure.ClientGenerator.Core.clientName(
-  "ChangeRecordRetrieveNextStagesResult",
-  "csharp"
-)
+@doc("Computed next-stage planning response for a ChangeRecord.")
 model ChangeRecordRetrieveNextStagesResponse {
   @doc("ChangeRecord resource Id.")
   changeRecordResourceId: ChangeRecordResourceId;
@@ -166,7 +161,7 @@ union ChangeRecordStatus {
   @doc("Resource is currently In progress.")
   InProgress: "InProgress",
 
-  @doc("Resource is completed the execution.")
+  @doc("The resource has completed execution.")
   Completed: "Completed",
 
   @doc("Resource is Cancelled.")
@@ -188,18 +183,14 @@ scalar ChangeRecordResourceId
   ]>;
 
 @doc("VerifyChangeValidity POST Action request for ChangeRecord.")
-@Azure.ClientGenerator.Core.clientName(
-  "ChangeRecordVerifyChangeValidityContent",
-  "csharp"
-)
 model ChangeRecordVerifyChangeValidityRequest {
   @doc("The resource operation.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   operation: ArmResourceOperation;
 
-  @doc("The change safety resource Id.")
+  @doc("Optional resource ID of the StageProgression used for verification when the ChangeRecord has a StageMap. The ChangeRecord identified by the request path remains the verification target.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  changeSafetyReferenceId?: armResourceIdentifier;
+  changeSafetyReferenceId?: ChangeRecordStageProgressionResourceId;
 
   @doc("The context of the verify change validity request.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -208,15 +199,11 @@ model ChangeRecordVerifyChangeValidityRequest {
 
 @doc("The context object of the verify change validity request for ChangeRecord.")
 model ChangeRecordVerifyChangeValidityRequestContext {
-  @doc("The application Id performing the ARM operation.")
+  @doc("The application ID performing the Azure Resource Manager operation.")
   clientId: string;
 }
 
 @doc("VerifyChangeValidity POST Action response for ChangeRecord.")
-@Azure.ClientGenerator.Core.clientName(
-  "ChangeRecordVerifyChangeValidityResult",
-  "csharp"
-)
 model ChangeRecordVerifyChangeValidityResponse {
   @doc("The outcome of the verification.")
   outcome: ValidationOutcome;
@@ -278,9 +265,12 @@ interface ChangeRecords {
   >;
 
   list is ArmResourceListAtScope<ChangeRecord>;
+
+  @doc("List ChangeRecord resources in the subscription. The list aggregates subscription-scoped and resource-group-scoped resources.")
   listBySubscription is ArmListBySubscription<ChangeRecord>;
 
   @doc("Gets list of next stages that are eligible to put in 'InProgress' state in a ChangeRecord resource.")
+  @get
   @action("retrieveNextStages")
   retrieveNextStages is ArmResourceActionSync<
     ChangeRecord,
@@ -289,6 +279,7 @@ interface ChangeRecords {
   >;
 
   @doc("Gets list of next stages that are eligible to put in 'InProgress' state in a ChangeRecord resource at subscription level.")
+  @get
   @action("retrieveNextStages")
   retrieveNextStagesAtSubscriptionLevel is ArmResourceActionSync<
     ChangeRecord,

@@ -142,7 +142,7 @@ union ActivityType {
   @doc("Policy Governance activity")
   PolicyGovernance: "PolicyGovernance",
 
-  @doc("ARM Control Plane activity")
+  @doc("Azure Resource Manager control plane activity.")
   ArmControlPlane: "ArmControlPlane",
 }
 
@@ -174,6 +174,6 @@ interface ChangeActivityEvents {
   @doc("Get a ChangeActivityEvent by name under its parent resource.")
   get is ArmResourceRead<ChangeActivityEvent>;
 
-  @doc("List ChangeActivityEvents by parent resource ID. The parent resource should be a Microsoft.ChangeSafety resource (e.g., ChangeRecords, StageProgressions).")
+  @doc("List ChangeActivityEvent resources at the supplied parent resource identifier.")
   listByParent is ArmResourceListByParent<ChangeActivityEvent>;
 }

@@ -4,12 +4,12 @@
   "parameters": {
     "api-version": "2026-11-01-preview",
     "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
-    "stageMapName": "testChangeState",
+    "stageMapName": "webAppRolloutStageMap",
     "properties": {
       "properties": {
         "stages": [
           {
-            "name": "testChangeState",
+            "name": "canary",
             "sequence": 23,
             "stageVariables": {
               "environment": "subscription-wide",
@@ -47,11 +47,16 @@
           "provisioningState": "Succeeded",
           "stages": [
             {
-              "name": "testChangeState",
+              "name": "canary",
               "sequence": 23,
-              "stageVariables": {},
+              "stageVariables": {
+                "environment": "subscription-wide",
+                "region": "eastus",
+                "tier": "standard",
+                "enableMonitoring": true
+              },
               "nestedStageMap": {
-                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/testStageMap"
+                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/stageMaps/subscription-infrastructure-stages"
               }
             }
           ],
@@ -71,8 +76,8 @@
             }
           }
         },
-        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/stageMaps/testChangeState",
-        "name": "testChangeState",
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/stageMaps/webAppRolloutStageMap",
+        "name": "webAppRolloutStageMap",
         "type": "Microsoft.ChangeSafety/stageMaps",
         "systemData": {
           "createdBy": "devops@contoso.com",

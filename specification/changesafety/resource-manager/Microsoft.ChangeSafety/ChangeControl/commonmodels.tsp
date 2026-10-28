@@ -14,39 +14,39 @@ union ProvisioningState {
   @doc("The resource is being provisioned.")
   Provisioning: "Provisioning",
 
-  @doc("The resource is being updated")
+  @doc("The resource is being updated.")
   Updating: "Updating",
 
   @doc("The resource is being deleted.")
   Deleting: "Deleting",
 
-  @doc(" The resource create request has been accepted.")
+  @doc("The resource operation request has been accepted.")
   Accepted: "Accepted",
 
-  @doc("Resource has been created.")
+  @doc("The resource operation succeeded.")
   Succeeded: "Succeeded",
 
-  @doc("Resource creation failed.")
+  @doc("The resource operation failed.")
   Failed: "Failed",
 
-  @doc("Resource creation was canceled.")
+  @doc("The resource operation was canceled.")
   Canceled: "Canceled",
 }
 
-@doc("Data type of the parameter.")
+@doc("Data type of the parameter. Values use the existing template parameter tokens string, number, array, and object.")
 union ParameterType {
   string,
 
-  @doc("String data type")
+  @doc("String data type. The wire token is string.")
   String: "string",
 
-  @doc("Integer data type")
+  @doc("32-bit integer data type. The wire token remains number for compatibility with existing template parameter tokens, and the value is int32.")
   Number: "number",
 
-  @doc("Array data type")
+  @doc("Array data type. The wire token is array.")
   Array: "array",
 
-  @doc("Object data type")
+  @doc("Object data type. The wire token is object.")
   Object: "object",
 }
 
@@ -58,7 +58,7 @@ model Parameter {
   type: ParameterType;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Metadata keys are customer-defined; ChangeSafety cannot enumerate them. Each metadata value is a string."
-  @doc("user-specified parameter metadata")
+  @doc("Customer-specified metadata for the parameter.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   metadata?: Record<string>;
 }
@@ -149,7 +149,7 @@ model ParameterPatchProperties<Properties extends TypeSpec.Reflection.Model> {
 
 @doc("Nested stage map reference.")
 model NestedStageMap {
-  @doc("ARM resource ID for the nested stagemap resource.")
+  @doc("Azure Resource Manager resource ID of the nested StageMap.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   resourceId?: StageMapResourceId;
 
@@ -161,7 +161,7 @@ model NestedStageMap {
 
 @doc("Link model for related resources and references.")
 model Link {
-  @doc("name of the link.")
+  @doc("Human-readable label for the link.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   name: string;
 

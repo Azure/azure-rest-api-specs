@@ -62,7 +62,7 @@
         "tags": [
           "ChangeActivityEvents"
         ],
-        "description": "List ChangeActivityEvents by parent resource ID. The parent resource should be a Microsoft.ChangeSafety resource (e.g., ChangeRecords, StageProgressions).",
+        "description": "List ChangeActivityEvent resources at the supplied parent resource identifier.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -186,7 +186,7 @@
         "tags": [
           "StageMaps"
         ],
-        "description": "List StageMap resources by resource group",
+        "description": "List StageMap resources by management group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -427,7 +427,7 @@
         "tags": [
           "ChangeRecords"
         ],
-        "description": "List ChangeRecord resources by subscription ID",
+        "description": "List ChangeRecord resources in the subscription. The list aggregates subscription-scoped and resource-group-scoped resources.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -561,6 +561,9 @@
         "x-ms-examples": {
           "ChangeRecords_CreateOrUpdateAtSubscriptionLevel": {
             "$ref": "./examples/ChangeRecords_CreateOrUpdateAtSubscriptionLevel.json"
+          },
+          "Create a subscription-scoped ChangeRecord with typed resource selectors": {
+            "$ref": "./examples/ChangeRecords_CreateOrUpdateAtSubscriptionLevel_Targets.json"
           }
         }
       },
@@ -678,7 +681,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}/retrieveNextStages": {
-      "post": {
+      "get": {
         "operationId": "ChangeRecords_RetrieveNextStagesAtSubscriptionLevel",
         "tags": [
           "ChangeRecords"
@@ -1078,7 +1081,7 @@
         "tags": [
           "StageMaps"
         ],
-        "description": "List StageMap resources by subscription ID",
+        "description": "List StageMap resources in the subscription. The list aggregates subscription-scoped and resource-group-scoped resources.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1591,7 +1594,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}/retrieveNextStages": {
-      "post": {
+      "get": {
         "operationId": "ChangeRecords_RetrieveNextStages",
         "tags": [
           "ChangeRecords"
@@ -2336,14 +2339,56 @@
           {
             "name": "ArmControlPlane",
             "value": "ArmControlPlane",
-            "description": "ARM Control Plane activity"
+            "description": "Azure Resource Manager control plane activity."
           }
         ]
       }
     },
+    "ApiOperationsChangeDefinition": {
+      "type": "object",
+      "description": "A change defined by explicit Azure Resource Manager operations.",
+      "properties": {
+        "details": {
+          "$ref": "#/definitions/ApiOperationsChangeDetails",
+          "description": "The Azure Resource Manager operations governed by this change.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "details"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "ApiOperations"
+    },
+    "ApiOperationsChangeDetails": {
+      "type": "object",
+      "description": "Explicit Azure Resource Manager operations governed by a change.",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "description": "The operation definitions. Each entry supplies its method and URI.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ArmResourceOperation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "operations"
+      ]
+    },
     "ArmOperation": {
       "type": "string",
-      "description": "Supported ARM Operations.",
+      "description": "Supported Azure Resource Manager operations.",
       "enum": [
         "DELETE",
         "PUT",
@@ -2357,29 +2402,29 @@
           {
             "name": "DELETE",
             "value": "DELETE",
-            "description": "DELETE ARM Operation."
+            "description": "DELETE Azure Resource Manager operation."
           },
           {
             "name": "PUT",
             "value": "PUT",
-            "description": "PUT ARM Operation."
+            "description": "PUT Azure Resource Manager operation."
           },
           {
             "name": "PATCH",
             "value": "PATCH",
-            "description": "PATCH ARM Operation."
+            "description": "PATCH Azure Resource Manager operation."
           },
           {
             "name": "POST",
             "value": "POST",
-            "description": "POST ARM Operation."
+            "description": "POST Azure Resource Manager operation."
           }
         ]
       }
     },
     "ArmResourceOperation": {
       "type": "object",
-      "description": "Artifact content model for Inline ArmOperations.",
+      "description": "Artifact content model for an inline Azure Resource Manager operation.",
       "properties": {
         "uri": {
           "type": "string",
@@ -2600,7 +2645,7 @@
     },
     "ChangeDefinition": {
       "type": "object",
-      "description": "Model that defines the change definition with name, type, and details.",
+      "description": "Named change definition with details selected by kind.",
       "properties": {
         "name": {
           "type": "string",
@@ -2619,22 +2664,12 @@
             "update",
             "create"
           ]
-        },
-        "details": {
-          "type": "object",
-          "description": "Free form object containing additional details for the change definition.",
-          "additionalProperties": {},
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
         }
       },
+      "discriminator": "kind",
       "required": [
         "name",
-        "kind",
-        "details"
+        "kind"
       ]
     },
     "ChangeDefinitionPatch": {
@@ -2660,14 +2695,32 @@
           ]
         },
         "details": {
-          "type": "object",
-          "description": "Free form object containing additional details for the change definition.",
-          "additionalProperties": {},
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "$ref": "#/definitions/ChangeDefinitionPatchDetails",
+          "description": "Partial details for the supplied kind, or the stored kind when kind is omitted. Supplied operations and targets arrays replace the corresponding stored arrays."
+        }
+      }
+    },
+    "ChangeDefinitionPatchDetails": {
+      "type": "object",
+      "description": "Kind-specific fields that may be supplied in a change-definition PATCH. Supply only the fields belonging to the supplied or stored kind.",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "description": "Replacement operation definitions for an ApiOperations change.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ArmResourceOperation"
+          },
+          "x-ms-identifiers": []
+        },
+        "targets": {
+          "type": "array",
+          "description": "Replacement resource selectors for a Targets change.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ChangeTarget"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2697,7 +2750,7 @@
     },
     "ChangeRecord": {
       "type": "object",
-      "description": "Resource allows the user to define the change that they intended to execute & indicate the progression it will use. ChangeRecord replaces the deprecated ChangeState resource.",
+      "description": "Resource allows the user to define the change that they intended to execute and indicate the progression it will use.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ChangeRecordProperties",
@@ -2878,9 +2931,9 @@
             "create"
           ]
         },
-        "stageMapSnapshot": {
+        "stageMapSnapshots": {
           "type": "array",
-          "description": "Captured StageMap references and optional resource contents.",
+          "description": "Captured StageMap references and optional properties.",
           "items": {
             "$ref": "#/definitions/StageMapSnapshot"
           },
@@ -2912,7 +2965,7 @@
     },
     "ChangeRecordRetrieveNextStagesResponse": {
       "type": "object",
-      "description": "RetrieveNextStages POST Action response for ChangeRecord.",
+      "description": "Computed next-stage planning response for a ChangeRecord.",
       "properties": {
         "changeRecordResourceId": {
           "$ref": "#/definitions/ChangeRecordResourceId",
@@ -3134,6 +3187,18 @@
         "status"
       ]
     },
+    "ChangeRecordStageProgressionResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Azure resource Id of a ChangeRecord StageProgression.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ChangeSafety/changeRecords/stageProgressions"
+          }
+        ]
+      }
+    },
     "ChangeRecordStageProgressionState": {
       "type": "string",
       "description": "Indicates the current status of the progression of the change within the stage for ChangeRecord.",
@@ -3311,7 +3376,7 @@
           {
             "name": "Completed",
             "value": "Completed",
-            "description": "Resource is completed the execution."
+            "description": "The resource has completed execution."
           },
           {
             "name": "Cancelled",
@@ -3497,9 +3562,8 @@
           ]
         },
         "changeSafetyReferenceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The change safety resource Id.",
+          "$ref": "#/definitions/ChangeRecordStageProgressionResourceId",
+          "description": "Optional resource ID of the StageProgression used for verification when the ChangeRecord has a StageMap. The ChangeRecord identified by the request path remains the verification target.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -3526,7 +3590,7 @@
       "properties": {
         "clientId": {
           "type": "string",
-          "description": "The application Id performing the ARM operation."
+          "description": "The application ID performing the Azure Resource Manager operation."
         }
       },
       "required": [
@@ -3555,6 +3619,37 @@
         "outcome",
         "message"
       ]
+    },
+    "ChangeTarget": {
+      "type": "object",
+      "description": "A resource selector. Supply resourceId or subscriptionId. When resourceId is supplied, it selects that resource or scope and its descendants; otherwise the subscription and optional resource filters apply.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource or scope identifier to match, including its descendants."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription identifier to match when resourceId is omitted."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "Resource group to match within the subscription."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type to match, such as Microsoft.Storage/storageAccounts."
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "Resource name to match within the selected scope and type."
+        },
+        "httpMethod": {
+          "$ref": "#/definitions/ArmOperation",
+          "description": "HTTP method to match. Omit this field to match any supported method."
+        }
+      }
     },
     "ChangeType": {
       "type": "string",
@@ -3628,7 +3723,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "name of the link.",
+          "description": "Human-readable label for the link.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -3667,7 +3762,7 @@
       "properties": {
         "resourceId": {
           "$ref": "#/definitions/StageMapResourceId",
-          "description": "ARM resource ID for the nested stagemap resource.",
+          "description": "Azure Resource Manager resource ID of the nested StageMap.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -3772,7 +3867,7 @@
         },
         "metadata": {
           "type": "object",
-          "description": "user-specified parameter metadata",
+          "description": "Customer-specified metadata for the parameter.",
           "additionalProperties": {
             "type": "string"
           },
@@ -3803,7 +3898,7 @@
         },
         "metadata": {
           "type": "object",
-          "description": "user-specified parameter metadata",
+          "description": "Customer-specified metadata for the parameter.",
           "additionalProperties": {
             "type": "string"
           },
@@ -3825,7 +3920,7 @@
     },
     "ParameterType": {
       "type": "string",
-      "description": "Data type of the parameter.",
+      "description": "Data type of the parameter. Values use the existing template parameter tokens string, number, array, and object.",
       "enum": [
         "string",
         "number",
@@ -3839,22 +3934,22 @@
           {
             "name": "String",
             "value": "string",
-            "description": "String data type"
+            "description": "String data type. The wire token is string."
           },
           {
             "name": "Number",
             "value": "number",
-            "description": "Integer data type"
+            "description": "32-bit integer data type. The wire token remains number for compatibility with existing template parameter tokens, and the value is int32."
           },
           {
             "name": "Array",
             "value": "array",
-            "description": "Array data type"
+            "description": "Array data type. The wire token is array."
           },
           {
             "name": "Object",
             "value": "object",
-            "description": "Object data type"
+            "description": "Object data type. The wire token is object."
           }
         ]
       }
@@ -3933,7 +4028,7 @@
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "The resource is being updated"
+            "description": "The resource is being updated."
           },
           {
             "name": "Deleting",
@@ -3943,22 +4038,22 @@
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": " The resource create request has been accepted."
+            "description": "The resource operation request has been accepted."
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Resource has been created."
+            "description": "The resource operation succeeded."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Resource creation failed."
+            "description": "The resource operation failed."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Resource creation was canceled."
+            "description": "The resource operation was canceled."
           }
         ]
       },
@@ -4137,16 +4232,16 @@
     },
     "StageMapSnapshot": {
       "type": "object",
-      "description": "A StageMap reference and optional captured resource contents in a ChangeRecord snapshot.",
+      "description": "A StageMap reference and optional captured properties in a ChangeRecord snapshot.",
       "properties": {
         "resourceId": {
           "$ref": "#/definitions/StageMapResourceId",
-          "description": "ARM resource ID of the captured StageMap.",
+          "description": "Azure Resource Manager resource ID of the captured StageMap.",
           "readOnly": true
         },
-        "stageMap": {
-          "$ref": "#/definitions/StageMap",
-          "description": "Captured StageMap resource. Omitted when the snapshot entry contains only a reference.",
+        "properties": {
+          "$ref": "#/definitions/StageMapProperties",
+          "description": "Captured StageMap properties. Omitted when the snapshot entry contains only a reference.",
           "readOnly": true
         }
       },
@@ -4227,6 +4322,48 @@
         }
       ],
       "x-ms-discriminator-value": "string"
+    },
+    "TargetsChangeDefinition": {
+      "type": "object",
+      "description": "A change defined by resource-selection criteria.",
+      "properties": {
+        "details": {
+          "$ref": "#/definitions/TargetsChangeDetails",
+          "description": "The resource-selection criteria governed by this change.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "details"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "Targets"
+    },
+    "TargetsChangeDetails": {
+      "type": "object",
+      "description": "Resource selectors governed by a change.",
+      "properties": {
+        "targets": {
+          "type": "array",
+          "description": "The resource selectors. An operation may match any one selector.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ChangeTarget"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "targets"
+      ]
     },
     "ValidationOutcome": {
       "type": "string",

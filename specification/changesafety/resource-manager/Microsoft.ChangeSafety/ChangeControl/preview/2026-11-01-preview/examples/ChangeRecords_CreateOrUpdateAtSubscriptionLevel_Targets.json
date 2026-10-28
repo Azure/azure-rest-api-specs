@@ -1,0 +1,106 @@
+{
+  "operationId": "ChangeRecords_CreateOrUpdateAtSubscriptionLevel",
+  "title": "Create a subscription-scoped ChangeRecord with typed resource selectors",
+  "parameters": {
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeRecordName": "subscriptionConfigurationChange",
+    "api-version": "2026-11-01-preview",
+    "resource": {
+      "properties": {
+        "changeType": "Config",
+        "rolloutType": "Normal",
+        "changeDefinition": {
+          "name": "selectedResourceConfiguration",
+          "kind": "Targets",
+          "details": {
+            "targets": [
+              {
+                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/exampleResourceGroup/providers/Microsoft.Storage/storageAccounts/configurationstore",
+                "httpMethod": "PUT"
+              },
+              {
+                "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+                "resourceGroupName": "exampleResourceGroup",
+                "resourceType": "Microsoft.Compute/virtualMachines",
+                "resourceName": "webServer",
+                "httpMethod": "PUT"
+              }
+            ]
+          }
+        },
+        "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+        "anticipatedEndTime": "2025-07-09T09:30:17.815Z"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeRecords/subscriptionConfigurationChange",
+        "name": "subscriptionConfigurationChange",
+        "type": "Microsoft.ChangeSafety/changeRecords",
+        "properties": {
+          "changeType": "Config",
+          "rolloutType": "Normal",
+          "changeDefinition": {
+            "name": "selectedResourceConfiguration",
+            "kind": "Targets",
+            "details": {
+              "targets": [
+                {
+                  "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/exampleResourceGroup/providers/Microsoft.Storage/storageAccounts/configurationstore",
+                  "httpMethod": "PUT"
+                },
+                {
+                  "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+                  "resourceGroupName": "exampleResourceGroup",
+                  "resourceType": "Microsoft.Compute/virtualMachines",
+                  "resourceName": "webServer",
+                  "httpMethod": "PUT"
+                }
+              ]
+            }
+          },
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T09:30:17.815Z",
+          "provisioningState": "Succeeded",
+          "status": "NotApplicable"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeRecords/subscriptionConfigurationChange",
+        "name": "subscriptionConfigurationChange",
+        "type": "Microsoft.ChangeSafety/changeRecords",
+        "properties": {
+          "changeType": "Config",
+          "rolloutType": "Normal",
+          "changeDefinition": {
+            "name": "selectedResourceConfiguration",
+            "kind": "Targets",
+            "details": {
+              "targets": [
+                {
+                  "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/exampleResourceGroup/providers/Microsoft.Storage/storageAccounts/configurationstore",
+                  "httpMethod": "PUT"
+                },
+                {
+                  "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+                  "resourceGroupName": "exampleResourceGroup",
+                  "resourceType": "Microsoft.Compute/virtualMachines",
+                  "resourceName": "webServer",
+                  "httpMethod": "PUT"
+                }
+              ]
+            }
+          },
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T09:30:17.815Z",
+          "provisioningState": "Succeeded",
+          "status": "NotApplicable"
+        }
+      }
+    }
+  }
+}

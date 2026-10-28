@@ -71,15 +71,15 @@ scalar StageMapResourceId
     }
   ]>;
 
-@doc("A StageMap reference and optional captured resource contents in a ChangeRecord snapshot.")
+@doc("A StageMap reference and optional captured properties in a ChangeRecord snapshot.")
 model StageMapSnapshot {
-  @doc("ARM resource ID of the captured StageMap.")
+  @doc("Azure Resource Manager resource ID of the captured StageMap.")
   @visibility(Lifecycle.Read)
   resourceId: StageMapResourceId;
 
-  @doc("Captured StageMap resource. Omitted when the snapshot entry contains only a reference.")
+  @doc("Captured StageMap properties. Omitted when the snapshot entry contains only a reference.")
   @visibility(Lifecycle.Read)
-  stageMap?: StageMap;
+  properties?: StageMapProperties;
 }
 
 alias StageMapManagementGroupParameters = {
@@ -166,8 +166,11 @@ interface StageMaps {
   >;
 
   list is ArmResourceListAtScope<StageMap>;
+
+  @doc("List StageMap resources in the subscription. The list aggregates subscription-scoped and resource-group-scoped resources.")
   listBySubscription is ArmListBySubscription<StageMap>;
 
+  @doc("List StageMap resources by management group.")
   listByManagementGroup is ArmResourceListByParent<
     StageMap,
     StageMapManagementGroupParameters

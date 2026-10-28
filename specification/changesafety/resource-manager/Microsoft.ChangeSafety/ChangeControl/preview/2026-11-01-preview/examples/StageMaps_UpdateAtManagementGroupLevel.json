@@ -4,12 +4,12 @@
   "parameters": {
     "api-version": "2026-11-01-preview",
     "managementGroupName": "myManagementGroup",
-    "stageMapName": "testChangeState",
+    "stageMapName": "webAppRolloutStageMap",
     "properties": {
       "properties": {
         "stages": [
           {
-            "name": "testChangeState",
+            "name": "canary",
             "sequence": 23,
             "stageVariables": {
               "environment": "enterprise",
@@ -18,7 +18,7 @@
               "auditRequired": true
             },
             "nestedStageMap": {
-              "resourceId": "/providers/Microsoft.ChangeSafety/stageMaps/enterprise-policy-stages"
+              "resourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/enterprisePolicyStages"
             }
           }
         ],
@@ -47,11 +47,16 @@
           "provisioningState": "Succeeded",
           "stages": [
             {
-              "name": "testChangeState",
+              "name": "canary",
               "sequence": 23,
-              "stageVariables": {},
+              "stageVariables": {
+                "environment": "enterprise",
+                "scope": "organization-wide",
+                "governanceLevel": "standard",
+                "auditRequired": true
+              },
               "nestedStageMap": {
-                "resourceId": "/providers/Microsoft.ChangeSafety/stageMaps/testStageMap"
+                "resourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/enterprisePolicyStages"
               }
             }
           ],
@@ -71,8 +76,8 @@
             }
           }
         },
-        "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/testChangeState",
-        "name": "testChangeState",
+        "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/webAppRolloutStageMap",
+        "name": "webAppRolloutStageMap",
         "type": "Microsoft.ChangeSafety/stageMaps",
         "systemData": {
           "createdBy": "governance@contoso.com",

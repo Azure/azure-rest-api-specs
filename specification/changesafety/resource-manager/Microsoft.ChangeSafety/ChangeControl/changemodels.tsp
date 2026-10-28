@@ -14,6 +14,22 @@ namespace Microsoft.ChangeSafety;
 @doc("Partial change definition supplied by a PATCH request.")
 model ChangeDefinitionPatch {
   ...OptionalProperties<ChangeDefinition>;
+
+  @doc("Partial details for the supplied kind, or the stored kind when kind is omitted. Supplied operations and targets arrays replace the corresponding stored arrays.")
+  details?: ChangeDefinitionPatchDetails;
+}
+
+@doc("Kind-specific fields that may be supplied in a change-definition PATCH. Supply only the fields belonging to the supplied or stored kind.")
+model ChangeDefinitionPatchDetails {
+  @doc("Replacement operation definitions for an ApiOperations change.")
+  @minItems(1)
+  @identifiers(#[])
+  operations?: ArmResourceOperation[];
+
+  @doc("Replacement resource selectors for a Targets change.")
+  @minItems(1)
+  @identifiers(#[])
+  targets?: ChangeTarget[];
 }
 
 @doc("Resource properties for PATCH requests with partial parameter and change definitions.")
@@ -42,7 +58,7 @@ union ChangeType {
   ManualTouch: "ManualTouch",
 }
 
-@doc("Artifact content model for Inline ArmOperations.")
+@doc("Artifact content model for an inline Azure Resource Manager operation.")
 model ArmResourceOperation {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The uri of the operation.")
@@ -58,20 +74,20 @@ model ArmResourceOperation {
   body?: Record<unknown>;
 }
 
-@doc("Supported ARM Operations.")
+@doc("Supported Azure Resource Manager operations.")
 union ArmOperation {
   string,
 
-  @doc("DELETE ARM Operation.")
+  @doc("DELETE Azure Resource Manager operation.")
   DELETE: "DELETE",
 
-  @doc("PUT ARM Operation.")
+  @doc("PUT Azure Resource Manager operation.")
   PUT: "PUT",
 
-  @doc("PATCH ARM Operation.")
+  @doc("PATCH Azure Resource Manager operation.")
   PATCH: "PATCH",
 
-  @doc("POST ARM Operation.")
+  @doc("POST Azure Resource Manager operation.")
   POST: "POST",
 }
 
@@ -103,7 +119,8 @@ union RolloutType {
   Emergency: "Emergency",
 }
 
-@doc("Model that defines the change definition with name, type, and details.")
+@doc("Named change definition with details selected by kind.")
+@discriminator("kind")
 model ChangeDefinition {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Name of the change definition.")
@@ -112,11 +129,63 @@ model ChangeDefinition {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Kind of the change definition.")
   kind: ChangeDefinitionType;
+}
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Change-definition kinds carry JSON objects with payload fields defined by the kind. Preserve existing opaque values while service owners confirm concrete schemas."
+@doc("A change defined by explicit Azure Resource Manager operations.")
+model ApiOperationsChangeDefinition extends ChangeDefinition {
+  @doc("The change-definition kind.")
+  kind: ChangeDefinitionType.ApiOperations;
+
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @doc("Free form object containing additional details for the change definition.")
-  details: Record<unknown>;
+  @doc("The Azure Resource Manager operations governed by this change.")
+  details: ApiOperationsChangeDetails;
+}
+
+@doc("Explicit Azure Resource Manager operations governed by a change.")
+model ApiOperationsChangeDetails {
+  @doc("The operation definitions. Each entry supplies its method and URI.")
+  @minItems(1)
+  @identifiers(#[])
+  operations: ArmResourceOperation[];
+}
+
+@doc("A change defined by resource-selection criteria.")
+model TargetsChangeDefinition extends ChangeDefinition {
+  @doc("The change-definition kind.")
+  kind: ChangeDefinitionType.Targets;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("The resource-selection criteria governed by this change.")
+  details: TargetsChangeDetails;
+}
+
+@doc("Resource selectors governed by a change.")
+model TargetsChangeDetails {
+  @doc("The resource selectors. An operation may match any one selector.")
+  @minItems(1)
+  @identifiers(#[])
+  targets: ChangeTarget[];
+}
+
+@doc("A resource selector. Supply resourceId or subscriptionId. When resourceId is supplied, it selects that resource or scope and its descendants; otherwise the subscription and optional resource filters apply.")
+model ChangeTarget {
+  @doc("Azure resource or scope identifier to match, including its descendants.")
+  resourceId?: Azure.Core.armResourceIdentifier;
+
+  @doc("Subscription identifier to match when resourceId is omitted.")
+  subscriptionId?: string;
+
+  @doc("Resource group to match within the subscription.")
+  resourceGroupName?: string;
+
+  @doc("Resource type to match, such as Microsoft.Storage/storageAccounts.")
+  resourceType?: string;
+
+  @doc("Resource name to match within the selected scope and type.")
+  resourceName?: string;
+
+  @doc("HTTP method to match. Omit this field to match any supported method.")
+  httpMethod?: ArmOperation;
 }
 
 @doc("Defines the type of change definition.")
