@@ -6,6 +6,7 @@ import type { Core } from "../github.ts";
 */
 
 import * as z from "zod";
+import type { ReviewContext } from "./review-requirements.ts";
 import { includesEvery, includesNone } from "../../../shared/src/array.ts";
 import {
   TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
@@ -437,6 +438,7 @@ This function does the following, **among other things**:
 export function processImpactAssessment(
   labelContext: LabelContext,
   impactAssessment: ImpactAssessment,
+  context: ReviewContext,
 ): { armReviewLabelShouldBePresent: boolean } {
   console.log("ENTER definition processARMReview");
 
@@ -499,7 +501,7 @@ export function processImpactAssessment(
   ciRpaasRPNotInPrivateRepoLabel.shouldBePresent =
     impactAssessment.rpaasRpNotInPrivateRepo || false;
 
-  const branch = impactAssessment.targetBranch;
+  const branch = context.targetBranch;
   const isReleaseBranchVal = isReleaseBranch(branch);
 
   // we used to also calculate if the branch name was from ShiftLeft, in which case we would or that
@@ -511,7 +513,7 @@ export function processImpactAssessment(
 
   // 'specReviewApplies' means that either ARM or data-plane review applies. Downstream logic
   // determines which kind of review exactly we need.
-  const specReviewApplies = !impactAssessment.isDraft && isBranchInScopeOfSpecReview;
+  const specReviewApplies = !context.isDraft && isBranchInScopeOfSpecReview;
   if (specReviewApplies) {
     if (impactAssessment.isNewApiVersion) {
       newApiVersionLabel.shouldBePresent = true;
@@ -549,7 +551,12 @@ export function processImpactAssessment(
   // ARMChangesRequested, WaitForArmFeedback, and ARMSignedOff labels. The thing is, we only want to make
   // these changes if the review is actually an ARM review. So we're going to place this after processing an impactAssessment
   // which will tell us if a the ARMReview label should be present or not.
-  processArmReviewLabels(labelContext, [...labelContext.present, ...labelContext.toAdd]);
+  processArmReviewLabels(
+    labelContext,
+    [...new Set([...labelContext.present, ...labelContext.toAdd])].filter(
+      (label) => !labelContext.toRemove.has(label),
+    ),
+  );
 
   console.log(
     `RETURN definition processARMReview. ` +
@@ -557,7 +564,7 @@ export function processImpactAssessment(
       `isArmReview: ${armReviewLabel.shouldBePresent}, ` +
       `isBranchInScopeOfArmReview: ${isBranchInScopeOfSpecReview}, ` +
       `isNewApiVersion: ${impactAssessment.isNewApiVersion}, ` +
-      `isDraft: ${impactAssessment.isDraft}, ` +
+      `isDraft: ${context.isDraft}, ` +
       `newApiVersionLabel.shouldBePresent: ${newApiVersionLabel.shouldBePresent}, ` +
       `armReviewLabel.shouldBePresent: ${armReviewLabel.shouldBePresent}.`,
   );
