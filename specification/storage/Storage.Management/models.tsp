@@ -358,6 +358,39 @@ union AllowedCopyScope {
 }
 
 /**
+ * The scope permitted for copy operations to or from a storage account.
+ */
+@added(Versions.v2026_12_01)
+union CopyScopeValue {
+  string,
+
+  /** Copy operations are permitted only over private links. */
+  PrivateLink: "PrivateLink",
+
+  /** Copy operations are permitted only within the same Microsoft Entra tenant. */
+  IntraTenant: "IntraTenant",
+
+  /** Copy operations are permitted from any source or to any destination. */
+  All: "All",
+}
+
+/**
+ * The copy scope restrictions for a storage account. The legacy allowedCopyScope property remains supported and is synchronized with permittedCopyFrom. When both properties are supplied, their values must agree: PrivateLink maps to PrivateLink, AAD maps to IntraTenant, and All maps to All.
+ */
+@added(Versions.v2026_12_01)
+model CopyScope {
+  /**
+   * Restricts the destinations to which data can be copied from this account. The default value is All.
+   */
+  permittedCopyTo?: CopyScopeValue;
+
+  /**
+   * Restricts the sources from which data can be copied into this account. The default value is All.
+   */
+  permittedCopyFrom?: CopyScopeValue;
+}
+
+/**
  * Allow, disallow, or let Network Security Perimeter configuration to evaluate public network access to Storage Account. Value is optional but if passed in, must be 'Enabled', 'Disabled' or 'SecuredByPerimeter'.
  */
 union PublicNetworkAccess {
@@ -3127,6 +3160,12 @@ model StorageAccountPropertiesCreateParameters {
   allowedCopyScope?: AllowedCopyScope;
 
   /**
+   * Fine-grained copy scope restrictions for the storage account. This property supersedes the legacy allowedCopyScope property while remaining backward-compatible with it.
+   */
+  @added(Versions.v2026_12_01)
+  copyScope?: CopyScope;
+
+  /**
    * Allow, disallow, or let Network Security Perimeter configuration to evaluate public network access to Storage Account. Value is optional but if passed in, must be 'Enabled', 'Disabled' or 'SecuredByPerimeter'.
    */
   publicNetworkAccess?: PublicNetworkAccess;
@@ -3987,6 +4026,12 @@ model StorageAccountProperties {
   allowedCopyScope?: AllowedCopyScope;
 
   /**
+   * Fine-grained copy scope restrictions for the storage account. This property supersedes the legacy allowedCopyScope property while remaining backward-compatible with it.
+   */
+  @added(Versions.v2026_12_01)
+  copyScope?: CopyScope;
+
+  /**
    * This property is readOnly and is set by server during asynchronous storage account sku conversion operations.
    */
   storageAccountSkuConversionStatus?: StorageAccountSkuConversionStatus;
@@ -4567,6 +4612,12 @@ model StorageAccountPropertiesUpdateParameters {
    * Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet.
    */
   allowedCopyScope?: AllowedCopyScope;
+
+  /**
+   * Fine-grained copy scope restrictions for the storage account. This property supersedes the legacy allowedCopyScope property while remaining backward-compatible with it.
+   */
+  @added(Versions.v2026_12_01)
+  copyScope?: CopyScope;
 
   /**
    * Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier.
