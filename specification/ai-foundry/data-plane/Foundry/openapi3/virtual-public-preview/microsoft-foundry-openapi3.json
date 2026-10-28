@@ -2506,7 +2506,6 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "WorkflowAgents=V1Preview",
-            "ExternalAgents=V1Preview",
             "VoiceAgents=V1Preview",
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
@@ -8253,7 +8252,6 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "WorkflowAgents=V1Preview",
-            "ExternalAgents=V1Preview",
             "VoiceAgents=V1Preview",
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
@@ -37185,10 +37183,6 @@
         "properties": {
           "kind": {
             "$ref": "#/components/schemas/AgentKind"
-          },
-          "rai_config": {
-            "$ref": "#/components/schemas/RaiConfig",
-            "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
           }
         },
         "discriminator": {
@@ -37207,12 +37201,12 @@
         "type": "string",
         "enum": [
           "WorkflowAgents=V1Preview",
-          "ExternalAgents=V1Preview",
           "DraftAgents=V1Preview",
           "VoiceAgents=V1Preview",
           "DigitalWorker=V1Preview",
           "GitHubCopilot=V1Preview",
           "Skills=V1Preview",
+          "ExternalAgents=V1Preview",
           "HostedAgents=V1Preview",
           "ContainerAgents=V1Preview",
           "MicrosoftCopilot=V1Preview"
@@ -43293,6 +43287,10 @@
               "container_app"
             ]
           },
+          "rai_config": {
+            "$ref": "#/components/schemas/RaiConfig",
+            "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
+          },
           "container_protocol_versions": {
             "type": "array",
             "items": {
@@ -43677,7 +43675,6 @@
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "WorkflowAgents=V1Preview",
-                "ExternalAgents=V1Preview",
                 "VoiceAgents=V1Preview",
                 "DraftAgents=V1Preview",
                 "DigitalWorker=V1Preview",
@@ -43722,7 +43719,6 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "WorkflowAgents=V1Preview",
-            "ExternalAgents=V1Preview",
             "VoiceAgents=V1Preview",
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
@@ -43851,7 +43847,6 @@
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "WorkflowAgents=V1Preview",
-                "ExternalAgents=V1Preview",
                 "VoiceAgents=V1Preview",
                 "DraftAgents=V1Preview",
                 "DigitalWorker=V1Preview",
@@ -48419,12 +48414,7 @@
             "$ref": "#/components/schemas/AgentDefinition"
           }
         ],
-        "description": "The external agent definition. Represents a third-party agent hosted outside Foundry (for example, on GCP or AWS).\nRegistration is metadata-only: Foundry records the agent definition to light up observability experiences (traces, evaluations)\nover customer-emitted OpenTelemetry data.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "ExternalAgents=V1Preview"
-          ]
-        }
+        "description": "The external agent definition. Represents a third-party agent hosted outside Foundry (for example, on GCP or AWS).\nRegistration is metadata-only: Foundry records the agent definition to light up observability experiences (traces, evaluations)\nover customer-emitted OpenTelemetry data."
       },
       "FabricDataAgentToolCall": {
         "type": "object",
@@ -49385,6 +49375,10 @@
             "enum": [
               "hosted"
             ]
+          },
+          "rai_config": {
+            "$ref": "#/components/schemas/RaiConfig",
+            "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
           },
           "cpu": {
             "type": "string",
@@ -94620,6 +94614,10 @@
               "prompt"
             ]
           },
+          "rai_config": {
+            "$ref": "#/components/schemas/RaiConfig",
+            "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
+          },
           "harness": {
             "$ref": "#/components/schemas/AgentHarness",
             "description": "The managed runtime and agent loop used to execute this prompt agent.",
@@ -101828,7 +101826,6 @@
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "WorkflowAgents=V1Preview",
-                "ExternalAgents=V1Preview",
                 "VoiceAgents=V1Preview",
                 "DraftAgents=V1Preview",
                 "DigitalWorker=V1Preview",
@@ -101846,7 +101843,6 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "WorkflowAgents=V1Preview",
-            "ExternalAgents=V1Preview",
             "VoiceAgents=V1Preview",
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
@@ -103135,6 +103131,10 @@
               "voice"
             ],
             "description": "The kind discriminator for a voice agent definition. Always `voice`."
+          },
+          "rai_config": {
+            "$ref": "#/components/schemas/RaiConfig",
+            "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
           },
           "model_type": {
             "$ref": "#/components/schemas/VoiceModelType",
@@ -105547,6 +105547,10 @@
             "enum": [
               "workflow"
             ]
+          },
+          "rai_config": {
+            "$ref": "#/components/schemas/RaiConfig",
+            "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
           },
           "workflow": {
             "type": "string",

@@ -90,12 +90,14 @@ op FoundryDataPlaneOperation<
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "API review requires this input-only opt-in contract to accept only the declared feature keys; arbitrary string opt-ins are not supported."
 union AgentDefinitionOptInKeys {
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
-  external_agents_v1_preview: "ExternalAgents=V1Preview",
   draft_agents_v1_preview: "DraftAgents=V1Preview",
   voice_agents_v1_preview: "VoiceAgents=V1Preview",
   digital_worker_v1_preview: "DigitalWorker=V1Preview",
   github_copilot_v1_preview: "GitHubCopilot=V1Preview",
   skills_v1_preview: "Skills=V1Preview",
+
+  @removed(Versions.v1)
+  external_agents_v1_preview: "ExternalAgents=V1Preview",
 
   @removed(Versions.v1)
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
