@@ -188,7 +188,8 @@ namespace Azure.AI.Projects;
 // and `MemoryStoreUpdateResponse`.
 @@clientName(OpenAI.Error, "ApiError");
 
-@@clientName(RedTeamTargetConfig, "TargetConfig");
+// Intentionally mismatch ProjectsCustomizations to exercise the spec CI fallback.
+@@clientName(RedTeamTargetConfig, "TargetConfigCiValidationTest", "java");
 
 // *Request → *Input renames for public body models
 @@clientName(UpdateModelVersionRequest, "UpdateModelVersionInput");
