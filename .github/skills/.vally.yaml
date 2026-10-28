@@ -5,10 +5,8 @@
 # environments), pared down to the skill folders that exist in this repo.
 
 paths:
-  # "." so skill auto-discovery finds every `<name>/SKILL.md` directly under this directory --
-  # needed by the ARM API Reviewer suite below, which relies on auto-discovery rather than
-  # declaring `environment.skills` per eval file (see evals/arm-api-reviewer/.vally.yaml, which
-  # points back here via "../../../skills/" for its own standalone/local runs).
+  # "." is the root for skill discovery. The runners do not pass `--skill-dir`, so named
+  # environments below mount each eval file's owning skill through `environment.skills`.
   skills: "."
   evals:
     - azsdk-common-apiview-feedback-resolution/evals/
@@ -34,15 +32,19 @@ environments:
       azure-sdk-mcp:
         type: stdio
         command: dotnet
+        cwd: .
         args: ["../../artifacts/mcp/cli/azsdk.dll", "start"]
         timeout: "60s"
         env:
           AZSDKTOOLS_AGENT_TESTING: "true"
           AZSDKTOOLS_COLLECT_TELEMETRY: "false"
   azsdk-mcp-mock:
+    # Eval paths resolve relative to each eval file, so ".." mounts that file's owning skill.
+    skills: [".."]
     mcpServers:
       azure-sdk-mcp:
         type: stdio
         command: dotnet
+        cwd: .
         args: ["../../artifacts/mcp/mock/azsdk-mock.dll"]
         timeout: "60s"

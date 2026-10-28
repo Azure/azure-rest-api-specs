@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "amlFilesystemName": "fs1",
+    "api-version": "2026-08-01",
+    "rebalanceJobName": "expansionjob1-rebalance",
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "expansionjob1-rebalance",
+        "type": "Microsoft.StorageCache/amlFilesystems/rebalanceJobs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1/rebalanceJobs/expansionjob1-rebalance",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "adminStatus": "Active",
+          "expansionJobId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1/expansionJobs/expansionjob1",
+          "status": {
+            "state": "InProgress",
+            "statusCode": "RebalanceInProgress",
+            "statusMessage": "Rebalance is 45% complete, migrating files.",
+            "percentComplete": 50,
+            "balancePercent": 45.2,
+            "estimatedRemainingSeconds": 3600,
+            "filesMigrated": 150000,
+            "dirsMigrated": 12000,
+            "bytesMoved": 1073741824,
+            "filesMovedPerSecond": 250.5,
+            "throughputMiBps": 1200.0,
+            "totalErrors": 0,
+            "totalSkipped": 42,
+            "startTimeUTC": "2025-09-12T10:00:00Z"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "RebalanceJobs_Get",
+  "title": "RebalanceJobs_Get"
+}

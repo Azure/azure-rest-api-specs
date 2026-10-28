@@ -1,12 +1,12 @@
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 import { loadCheckRulesFile } from "../src/check-rules.ts";
 
 describe("loadCheckRulesFile", () => {
   const tempDirs: string[] = [];
-  let warnSpy: ReturnType<typeof vi.spyOn>;
+  let warnSpy: MockInstance;
 
   beforeEach(() => {
     warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});

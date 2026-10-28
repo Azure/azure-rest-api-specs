@@ -2,6 +2,10 @@
 
 A CLI tool that detects and reports changes to TypeSpec lint suppressions between two git revisions. It's designed to enforce approval workflows when new or modified suppressions are introduced in pull requests.
 
+> **Used by CI:** this tool powers the `TypeSpec Suppressions` check on spec PRs. See the
+> [CI Fix Guide](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md#typespec-suppressions)
+> for how the check behaves and how to respond to it.
+
 ## Location
 
 ```

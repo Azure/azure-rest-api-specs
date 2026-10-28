@@ -60,6 +60,26 @@ alias BulkCreateCustomSubscriptionParams = {
   ...SubscriptionIdParameter;
 };
 
+@added(Versions.`2026-08-06-preview`)
+@doc("Information about a virtual machine resolved for a BulkCreateCustom operation.")
+model BulkCreateCustomVirtualMachineInfo {
+  @doc("The resolved Azure virtual machine name.")
+  name?: string;
+
+  @doc("The virtual machine size selected for the virtual machine.")
+  vmSize?: string;
+
+  @doc("The subscription-relative logical availability zone selected for the virtual machine.")
+  zone?: string;
+}
+
+@added(Versions.`2026-08-06-preview`)
+@doc("A virtual machine resource resolved for a BulkCreateCustom operation.")
+model BulkCreateCustomResource {
+  @doc("Information about the resolved virtual machine.")
+  virtualMachineInfo?: BulkCreateCustomVirtualMachineInfo;
+}
+
 // ============================================================
 // Resource: BulkCreateCustom
 //
@@ -73,8 +93,19 @@ alias BulkCreateCustomSubscriptionParams = {
 @doc("Envelope properties shared by BulkCreateCustom. Used as the @listsResource target to avoid collision with the interface name.")
 model BulkCreateCustomEnvelope {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid envelope property for this resource."
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("Zones in which the BulkCreateCustom is available")
   zones?: Array<string>;
+
+  // Spread the ARM common-types envelope property; versioning and docs are
+  // applied below via augment decorators.
+  ...ExtendedLocationProperty;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Placement matches the established compute contract and is applied uniformly to every virtual machine created by the operation."
+  @added(Versions.`2026-10-06-preview`)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The availability zone placement constraints applied to the virtual machines created by the BulkCreateCustom operation.")
+  placement?: Placement;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags free-form object matches the established compute contract."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Tags is a standard ARM resource property."
@@ -84,6 +115,15 @@ model BulkCreateCustomEnvelope {
   ...ManagedServiceIdentityProperty;
   ...ResourcePlanProperty;
 }
+
+@@added(
+  BulkCreateCustomEnvelope.extendedLocation,
+  Versions.`2026-10-06-preview`
+);
+@@doc(
+  BulkCreateCustomEnvelope.extendedLocation,
+  "The extended location of the virtual machines created by the BulkCreateCustom operation."
+);
 
 @doc("Location based BulkCreateCustom resource. The location is part of the resource path.")
 model LocationBasedBulkCreateCustom
@@ -123,6 +163,18 @@ model BulkCreateCustomOverrideBase {
 model BulkCreateCustomOverride {
   @doc("ARM VM name for this VM. Optional; when omitted the name is generated from the prefix as {prefix}_{index}.")
   virtualMachineName?: string;
+
+  @added(Versions.`2026-10-06-preview`)
+  @doc("The availability zone this VM is created in. Overrides the operation-level zones for this VM only. A null value does not override, so the VM is placed using the operation-level zones; an empty value does override and deploys this VM as a regional (non-zonal) VM.")
+  zone?: string;
+
+  @added(Versions.`2026-10-06-preview`)
+  @doc("The extended location this VM is created in. Overrides the operation-level extendedLocation for this VM only; when omitted the VM inherits the operation-level extendedLocation.")
+  extendedLocation?: ExtendedLocation;
+
+  @added(Versions.`2026-10-06-preview`)
+  @doc("The placement constraints applied to this VM. Overrides the operation-level placement for this VM only; when omitted the VM inherits the operation-level placement.")
+  placement?: Placement;
 
   ...BulkCreateCustomOverrideBase;
 }
@@ -182,6 +234,7 @@ model BulkCreateCustomPriorityProfile {
   @doc("Eviction Policy to follow when evicting Spot VMs.")
   evictionPolicy?: EvictionPolicy;
 
+  @removed(Versions.`2026-10-06-preview`)
   @doc("The allocation strategy for VM size selection")
   allocationStrategy?: BulkCreateCustomAllocationStrategy;
 }
@@ -213,9 +266,28 @@ model BulkCreateCustomProperties {
   @doc("Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs.")
   capacityType?: CapacityType;
 
+  @added(Versions.`2026-08-06-preview`)
+  @removed(Versions.`2026-10-06-preview`)
+  @doc("The minimum capacity, expressed in units specified by capacityType, that Azure must be able to allocate for the request to proceed. If Azure cannot allocate at least this capacity with high confidence, the request is rejected with 409 Conflict (InsufficientCapacity) and no VMs are created. Otherwise, Azure allocates as much capacity as possible, up to the requested capacity. Must be greater than 0, less than capacity, and requires partialFulfillmentPolicy.mode to be Enabled.")
+  @minValue(1)
+  minCapacity?: int32;
+
+  @added(Versions.`2026-08-06-preview`)
+  @removed(Versions.`2026-10-06-preview`)
+  @doc("Controls how partial fulfillment is handled for a BulkCreateCustom request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures.")
+  partialFulfillmentPolicy?: PartialFulfillmentPolicy;
+
+  @added(Versions.`2026-08-06-preview`)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  @doc("The virtual machine resources resolved for the operation.")
+  resources?: Array<BulkCreateCustomResource>;
+
+  @removed(Versions.`2026-10-06-preview`)
   @doc("Configuration Options for Regular or Spot instances in BulkCreateCustom.")
   priorityProfile: BulkCreateCustomPriorityProfile;
 
+  @removed(Versions.`2026-10-06-preview`)
   @identifiers(#[])
   @doc("List of VM sizes supported for BulkCreateCustom")
   vmSizesProfile?: Array<BulkCreateCustomVmSizeProfile>;
@@ -223,6 +295,7 @@ model BulkCreateCustomProperties {
   @doc("Compute Profile to configure the Virtual Machines.")
   computeProfile: ComputeProfile;
 
+  @removed(Versions.`2026-10-06-preview`)
   @doc("Zone Allocation Policy for launching instances.")
   zoneAllocationPolicy?: BulkCreateCustomZoneAllocationPolicy;
 
@@ -297,6 +370,16 @@ interface BulkCreateCustom {
   cancel is ArmResourceActionNoResponseContentAsync<
     Resource = LocationBasedBulkCreateCustom,
     Request = void,
+    Parameters = BulkCreateCustomId
+  >;
+
+  @added(Versions.`2026-08-06-preview`)
+  @doc("Gets the operation status for virtual machines in a BulkCreateCustom operation.")
+  @list
+  virtualMachinesGetOperationStatus is ArmResourceActionSync<
+    Resource = LocationBasedBulkCreateCustom,
+    Request = void,
+    Response = ArmResponse<BulkCreateCustomOperationStatusListResult>,
     Parameters = BulkCreateCustomId
   >;
 

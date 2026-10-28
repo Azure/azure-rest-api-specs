@@ -1,0 +1,55 @@
+{
+  "title": "VolumeGroupSnapshots_ListSnapshots",
+  "operationId": "VolumeGroupSnapshots_ListSnapshots",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "storagepool-01",
+    "volumeGroupName": "volumegroup-01",
+    "properties": {
+      "filter": "substringof('snapshot', name)",
+      "orderby": "name asc",
+      "top": 10,
+      "skip": 0
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "createdAt": "2026-02-10T08:00:00.000Z",
+              "createdByPolicy": false,
+              "softDeletion": {
+                "destroyed": false
+              },
+              "space": {
+                "totalUsed": 524288000,
+                "unique": 262144000,
+                "snapshots": 131072000,
+                "shared": 131072000
+              },
+              "volumeSnapshots": [],
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/PureStorage.Block/storagePools/storagepool-01/volumeGroups/volumegroup-01/snapshots/snapshot-01",
+            "name": "snapshot-01",
+            "type": "PureStorage.Block/storagePools/volumeGroups/snapshots",
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-02-10T08:00:00.000Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-02-10T08:00:00.000Z"
+            }
+          }
+        ],
+        "count": 1,
+        "totalCount": 23
+      }
+    }
+  }
+}

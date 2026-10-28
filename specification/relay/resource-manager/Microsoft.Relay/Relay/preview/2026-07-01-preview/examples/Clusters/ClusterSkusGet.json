@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "clusterName": "testCluster",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "5f750a97-50d9-4e36-8081-c9ee4c0210d4"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceType": "Microsoft.Relay/clusters",
+            "sku": {
+              "name": "Dedicated",
+              "tier": "Dedicated"
+            },
+            "capacity": {
+              "allowedValues": [
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+              ],
+              "default": 3,
+              "maximum": 10,
+              "minimum": 3,
+              "scaleType": "Automatic"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Clusters_ListSkus",
+  "title": "ClusterSkusGet"
+}

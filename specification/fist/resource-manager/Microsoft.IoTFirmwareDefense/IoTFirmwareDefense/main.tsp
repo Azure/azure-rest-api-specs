@@ -9,11 +9,13 @@ import "./CryptoCertificateResource.tsp";
 import "./CryptoKeyResource.tsp";
 import "./LegacyCveResource.tsp";
 import "./CveResource.tsp";
+import "./LatestCveResource.tsp";
 import "./PasswordHashResource.tsp";
 import "./SbomComponentResource.tsp";
 import "./SummaryResource.tsp";
 import "./Workspace.tsp";
 import "./UsageMetric.tsp";
+import "./UnsafeFunctionCallsResource.tsp";
 import "./client.tsp";
 
 using Azure.ResourceManager;
@@ -40,4 +42,11 @@ enum Versions {
 
   @doc("The 2025-12-01-preview API version.")
   v2025_12_01_preview: "2025-12-01-preview",
+
+  @doc("The 2026-06-01-preview API version.")
+  v2026_06_01_preview: "2026-06-01-preview",
+
+  @doc("The 2026-10-01-preview API version.")
+  @Azure.Core.previewVersion
+  v2026_10_01_preview: "2026-10-01-preview",
 }

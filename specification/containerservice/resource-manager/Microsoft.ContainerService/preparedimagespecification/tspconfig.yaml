@@ -17,12 +17,15 @@ options:
     namespace: "Azure.ResourceManager.ContainerServicePreparedImgSpec"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-java":
-    service-dir: "sdk/containerservice"
+    service-dir: "sdk/containerservicepreparedimgspec"
     namespace: "com.azure.resourcemanager.containerservicepreparedimgspec"
     package-dir: "azure-resourcemanager-containerservicepreparedimgspec"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerservicepreparedimgspec"
     service-name: "Container Service Prepared Image Specification"
     flavor: azure
+    rename-model:
+      PreparedImageSpecificationListResult: PreparedImgSpecListResult
+      PreparedImageSpecificationVersionListResult: PreparedImgSpecVersionListResult
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/containerservicepreparedimgspec"
     package-dir: "armcontainerservicepreparedimgspec"
