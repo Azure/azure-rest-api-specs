@@ -143,7 +143,7 @@ union ActivityType {
   PolicyGovernance: "PolicyGovernance",
 
   @doc("Azure Resource Manager control plane activity.")
-  ArmControlPlane: "ArmControlPlane",
+  AzureResourceManagerControlPlane: "AzureResourceManagerControlPlane",
 }
 
 @doc("Identity type that initiated the event.")

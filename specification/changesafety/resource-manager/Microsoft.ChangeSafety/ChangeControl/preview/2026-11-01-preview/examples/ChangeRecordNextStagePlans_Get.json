@@ -1,0 +1,44 @@
+{
+  "title": "ChangeRecordNextStagePlans_Get",
+  "operationId": "ChangeRecordNextStagePlans_Get",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeRecordName": "webApplicationChangeRecord"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord/nextStagePlans/default",
+        "name": "default",
+        "type": "Microsoft.ChangeSafety/changeRecords/nextStagePlans",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "changeRecordResourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord",
+          "lastStageProgressionSequence": 2,
+          "nextStages": [
+            {
+              "stageReference": "production",
+              "sequence": 3,
+              "status": "Uninitialized",
+              "stageVariables": {
+                "environment": "prod",
+                "region": "eastus"
+              }
+            },
+            {
+              "stageReference": "monitoring",
+              "sequence": 4,
+              "status": "Uninitialized",
+              "stageVariables": {
+                "environment": "prod",
+                "region": "eastus"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -5,11 +5,6 @@ using Microsoft.ChangeSafety;
 using Azure.ClientGenerator.Core;
 
 @@clientName(
-  ChangeRecordRetrieveNextStagesResponse,
-  "ChangeRecordRetrieveNextStagesResult",
-  "csharp"
-);
-@@clientName(
   ChangeRecordVerifyChangeValidityRequest,
   "ChangeRecordVerifyChangeValidityContent",
   "csharp"

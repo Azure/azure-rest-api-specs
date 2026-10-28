@@ -13,14 +13,17 @@ and does not change `2026-01-01-preview`, deploy a backend, or release an SDK.
 - Retains StageMaps, ChangeRecords and their StageProgressions, ChangeActivityEvents,
   provider Operations, and change-validity verification.
 - Omits the entire ChangeState resource family, `retrieveAllStages`, and
-  `retrieveAuditTrail`: 34 current-version operations are excluded, with 42
-  operations retained.
+  `retrieveAuditTrail`: 34 current-version operations are excluded. The retained
+  capabilities and two required plan-collection reads use 44 operations.
 - Uses one URL per Link entry, complete optional parameter PATCH fields, canonical
   management-group paths, and native ARM identifiers.
 - Declares no stable identity for Link array items. Link names are not required
   to be unique.
 - Uses explicit JSON dictionaries for opaque object values so generated clients
   preserve their contents.
+- Marks heterogeneous parameter arrays as having no item identity through
+  `TypeSpec.OpenAPI.extension`. The ARM `identifiers` decorator accepts only
+  arrays of object models and rejects these existing `unknown[]` value types.
 - Uses kind-specific ApiOperations and Targets schemas for change definitions,
   including partial details for PATCH requests. PATCH preserves the stored kind;
   changing kind requires PUT.
@@ -33,11 +36,20 @@ and does not change `2026-01-01-preview`, deploy a backend, or release an SDK.
 - Proposes typed AcquirePolicyToken and PolicyEvaluation payloads for their
   `2026-01-01` event schema version. Service owners must confirm field coverage and
   requiredness; these illustrative examples are not production captures.
+- Uses `AzureResourceManagerControlPlane` for the November event envelope's
+  activity type. Version-aware reads must map the older `ArmControlPlane` token.
+  The event-data schema version and older API responses remain unchanged.
 
-Next-stage planning uses GET at both existing `retrieveNextStages` paths.
-It reads the ChangeRecord, snapshots, and progressions without advancing them.
-The November backend and ProviderHub registrations must expose these GET routes
-before publication. No latency-based POST exception is claimed.
+Next-stage planning is a read-only computed proxy resource at
+`changeRecords/{changeRecordName}/nextStagePlans/default`, at both parent scopes.
+Its ARM envelope contains the planning result under `properties`. GET reads the
+ChangeRecord, snapshots, and progressions without advancing them. The old
+`retrieveNextStages` action paths are not part of this version. The November
+backend and ProviderHub registrations must expose the singleton resource before
+publication. No latency-based POST exception is claimed.
+The parent collection GET is also exposed at `changeRecords/{changeRecordName}/nextStagePlans`.
+It returns the standard `value` and optional `nextLink` envelope. Both parent
+scopes support point and collection GET, as required for nested-resource discovery.
 
 `requestedStatus` is persisted and echoed, not an alias for the current status.
 Create accepts `Initialized` or `InProgress`. Updates apply the existing transition
@@ -50,15 +62,15 @@ request without resetting the observed status.
 The following work is required before publication. These are implementation and
 owner gates, not guarantees provided by a schema build.
 
-| Area                      | Required task                                                                                                                                                                                              |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Stored operations         | Reject `changeDefinition.details.operations[].body` on November writes. Persist only method and URI. Keep full bodies transient in verification.                                                           |
-| Shared records            | Add version-aware reads so November never exposes bodies stored through January. Keep January responses unchanged. The service owner must decide existing-body retention and cross-version status mapping. |
-| Status ownership          | Persist `requestedStatus` and accepted observed-status changes atomically. Preserve client fields during StageProgression cascades. Implement repeated-request, omission, and transition rules.            |
-| PATCH                     | Apply merge-patch semantics, replace supplied arrays, reject cross-kind details, and require PUT for kind changes.                                                                                         |
-| Routing and authorization | Register the November version and both next-stage GET routes in ProviderHub. Confirm their permission names and cross-scope snapshot authorization.                                                        |
-| Resource serialization    | Implement event reads, properties-only snapshots, and typed event payloads. Confirm event-version field coverage, supported parent scopes, and actual asynchronous DELETE headers.                         |
-| Review and release        | Obtain current ARM exception approval, package-name approvals, Python namespace reservation, and release-owner confirmation of backend availability.                                                       |
+| Area                      | Required task                                                                                                                                                                                                          |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Stored operations         | Reject `changeDefinition.details.operations[].body` on November writes. Persist only method and URI. Keep full bodies transient in verification.                                                                       |
+| Shared records            | Add version-aware reads so November never exposes bodies stored through January. Keep January responses unchanged. The service owner must decide existing-body retention and cross-version status mapping.             |
+| Status ownership          | Persist `requestedStatus` and accepted observed-status changes atomically. Preserve client fields during StageProgression cascades. Implement repeated-request, omission, and transition rules.                        |
+| PATCH                     | Apply merge-patch semantics, replace supplied arrays, reject cross-kind details, and require PUT for kind changes.                                                                                                     |
+| Routing and authorization | Register the November version and read-only `changeRecords/nextStagePlans` point and collection reads at both parent scopes. Confirm permissions and snapshot authorization. Obtain management-group ARM/PAS sign-off. |
+| Resource serialization    | Implement event reads, properties-only snapshots, and typed event payloads. Confirm event-version field coverage, supported parent scopes, and actual asynchronous DELETE headers.                                     |
+| Review and release        | Obtain current ARM exception approval, package-name approvals, Python namespace reservation, and release-owner confirmation of backend availability.                                                                   |
 
 JavaScript uses modular TypeSpec generation for the required SDK validation.
 Other language-emitter migrations remain deferred. Their retained readiness
@@ -135,6 +147,13 @@ directive:
       - $.definitions.ChangeRecordUpdateProperties.properties.parameters
       - $.definitions.ParameterPatch.properties.metadata
       - $.definitions.StageMapUpdateProperties.properties.parameters
+  - suppress: ConsistentPatchProperties
+    from: ChangeControl.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}"].patch.parameters[3].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}"].patch.parameters[4].schema
+    reason: |
+      ChangeDefinition.details is defined on the discriminator-selected ApiOperations and Targets subtypes, not their common base. PATCH uses an explicit partial details model so kind may be omitted and supplied arrays replace their stored values. This rule compares only the base resource model and misses those subtype fields. The two selectors cover only this polymorphic PATCH limitation; current ARM review is required.
 ```
 
 ---

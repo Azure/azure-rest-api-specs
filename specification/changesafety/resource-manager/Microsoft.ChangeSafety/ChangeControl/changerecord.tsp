@@ -26,6 +26,19 @@ model ChangeRecord is ProxyResource<ChangeRecordProperties> {
   name: string;
 }
 
+@doc("The read-only computed next-stage plan for a ChangeRecord.")
+@parentResource(ChangeRecord)
+@singleton("default")
+model ChangeRecordNextStagePlan
+  is ProxyResource<ChangeRecordNextStagePlanProperties> {
+  @pattern("^default$")
+  @key("nextStagePlanName")
+  @segment("nextStagePlans")
+  @path
+  @doc("The fixed name of the computed next-stage plan.")
+  name: string;
+}
+
 @doc("Detailed properties of the ChangeRecord resource.")
 model ChangeRecordProperties {
   @visibility(Lifecycle.Read)
@@ -103,14 +116,21 @@ model ChangeRecordProperties {
   stageMapSnapshots?: StageMapSnapshot[];
 }
 
-@doc("Computed next-stage planning response for a ChangeRecord.")
-model ChangeRecordRetrieveNextStagesResponse {
+@doc("Properties of the computed next-stage plan for a ChangeRecord.")
+model ChangeRecordNextStagePlanProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The status of the computed plan.")
+  provisioningState?: ProvisioningState;
+
+  @visibility(Lifecycle.Read)
   @doc("ChangeRecord resource Id.")
   changeRecordResourceId: ChangeRecordResourceId;
 
+  @visibility(Lifecycle.Read)
   @doc("Sequence of last StageProgression completed within the ChangeRecord.")
   lastStageProgressionSequence: int32;
 
+  @visibility(Lifecycle.Read)
   @doc("StageProgression resources that are ready to put in 'InProgress' state.")
   @Azure.ResourceManager.identifiers(#["stageReference"])
   nextStages: Array<ChangeRecordRetrieveNextStagesResponseItem>;
@@ -212,7 +232,7 @@ model ChangeRecordVerifyChangeValidityRequest {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   operation: ArmResourceOperation;
 
-  @doc("Optional resource ID of the StageProgression used for verification when the ChangeRecord has a StageMap. The ChangeRecord identified by the request path remains the verification target.")
+  @doc("Resource ID of the StageProgression being verified. Required when the ChangeRecord has a StageMap; omit it otherwise. The ChangeRecord identified by the request path remains the verification target.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   changeSafetyReferenceId?: ChangeRecordStageProgressionResourceId;
 
@@ -293,28 +313,6 @@ interface ChangeRecords {
   @doc("List ChangeRecord resources in the subscription. The list aggregates subscription-scoped and resource-group-scoped resources.")
   listBySubscription is ArmListBySubscription<ChangeRecord>;
 
-  @doc("Gets list of next stages that are eligible to put in 'InProgress' state in a ChangeRecord resource.")
-  @get
-  @action("retrieveNextStages")
-  retrieveNextStages is ArmResourceActionSync<
-    ChangeRecord,
-    void,
-    ChangeRecordRetrieveNextStagesResponse
-  >;
-
-  @doc("Gets list of next stages that are eligible to put in 'InProgress' state in a ChangeRecord resource at subscription level.")
-  @get
-  @action("retrieveNextStages")
-  retrieveNextStagesAtSubscriptionLevel is ArmResourceActionSync<
-    ChangeRecord,
-    void,
-    ChangeRecordRetrieveNextStagesResponse,
-    {
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
-    }
-  >;
-
   @doc("Verify the change validity for a ChangeRecord.")
   @action("verifyChangeValidity")
   verifyChangeValidity is ArmResourceActionSync<
@@ -329,6 +327,28 @@ interface ChangeRecords {
     ChangeRecord,
     ChangeRecordVerifyChangeValidityRequest,
     ChangeRecordVerifyChangeValidityResponse,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+}
+
+@armResourceOperations
+@doc("Read the computed next-stage plan without advancing any progression.")
+interface ChangeRecordNextStagePlans {
+  get is ArmResourceRead<ChangeRecordNextStagePlan>;
+  getAtSubscriptionLevel is ArmResourceRead<
+    ChangeRecordNextStagePlan,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+
+  listByParent is ArmResourceListByParent<ChangeRecordNextStagePlan>;
+  listByParentAtSubscriptionLevel is ArmResourceListByParent<
+    ChangeRecordNextStagePlan,
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
