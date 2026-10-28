@@ -996,6 +996,7 @@ using Azure.AI.Projects;
   "VoiceAgentSoundscapeSourceConfiguration",
   "java"
 );
+@@clientName(VoiceAgentSoundscapeWorkingTrackConfig.delay_ms, "delay", "java");
 @@clientName(
   Azure.AI.Projects.Agents.generateAgent,
   "createAgentFromPrompt",
