@@ -13313,7 +13313,7 @@
         },
         "sharingProfile": {
           "$ref": "#/definitions/ResourceSharingProfile",
-          "description": "Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can generally be shared across subscriptions belonging to a single Azure AAD tenant or across AAD tenants if there is a trust relationship established between the tenants.  Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details."
+          "description": "Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can be shared only across subscriptions belonging to the same Microsoft Entra ID tenant. Sharing across tenants is not supported. Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details."
         },
         "reservationType": {
           "$ref": "#/definitions/ReservationType",
@@ -17252,7 +17252,7 @@
         },
         "statuses": {
           "type": "array",
-          "description": "The resource status information.",
+          "description": "The aggregate status information for the restore point. The list may include separate aggregate entries for replication and, in supported API versions, Instant Access, as applicable. For more information about Instant Access, see [Use virtual machine restore points](https://learn.microsoft.com/azure/virtual-machines/virtual-machines-create-restore-points#instant-access).",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },

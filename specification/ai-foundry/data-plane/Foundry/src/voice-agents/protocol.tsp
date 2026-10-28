@@ -73,6 +73,7 @@ union VoiceAgentTransport {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "A WebSocket message may be sent by either the client or the server."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("A JSON text message exchanged over an established voice-agent WebSocket. Audio bytes are base64-encoded in JSON event fields.")
 @usage(VoiceAgentWebSocketMessageUsage)
 @oneOf
@@ -83,9 +84,11 @@ union VoiceAgentWebSocketMessage {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Client WebSocket messages are selected by their `type` property."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("A stable v1 message sent by a client over a voice-agent WebSocket.")
 @usage(VoiceAgentClientEventUsage)
 @oneOf
+@extension("x-foundry-event-direction", "client")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentClientEvent {
   conversation_item_create: OpenAI.RealtimeClientEventConversationItemCreate,
@@ -104,9 +107,11 @@ union VoiceAgentClientEvent {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Server WebSocket messages are selected by their `type` property."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("A stable v1 message sent by the service over a voice-agent WebSocket.")
 @usage(VoiceAgentServerEventUsage)
 @oneOf
+@extension("x-foundry-event-direction", "server")
 // `conversation.created` is replaced by `session.created.conversation_id`, the canonical persisted-conversation id.
 // `input_audio_buffer.dtmf_event_received` is telephony-only and excluded with the rest of the telephony call-control surface.
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -263,6 +268,7 @@ model VoiceAgentSessionUpdateConfig {
   greeting?: VoiceAgentGreetingConfig;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("The session configuration accepted by a voice-agent session update event.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentSessionUpdate {
@@ -288,6 +294,7 @@ model VoiceAgentSessionResponseConfig {
   expires_at?: FoundryTimestamp | null;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("The effective session configuration returned in voice-agent session lifecycle events.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentSessionResponse {

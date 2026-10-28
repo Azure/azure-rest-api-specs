@@ -19,6 +19,7 @@ namespace Azure.AI.Projects;
  * serialization path. A retry with the same serialized numeric values preserves replay identity.
  * Numeric tokens are limited to 128 characters. Strings are limited to 16 KiB in UTF-8 at runtime.
  */
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve the existing scalar-only Campaign input contract and SDK representation; adopting experimental union constraints would require project configs unsupported by the pinned SDK generation CLI."
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCampaignInputValue {
   string,
