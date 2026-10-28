@@ -1025,7 +1025,9 @@ model ServerProperties {
    */
   @added(Versions.v2026_03_01)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  privateOutboundSubnetResourceId?: string;
+  privateOutboundSubnetResourceId?: armResourceIdentifier<[
+    { type: "Microsoft.Network/virtualNetworks/subnets" }
+  ]>;
 }
 
 /**
@@ -1335,7 +1337,9 @@ model ServerPropertiesForUpdate {
    * The fully qualified Azure resource ID of the subnet used for private outbound connectivity. Specify this property to enable private outbound connectivity on an existing server. Omitting it during an update preserves the existing subnet. Once set, the subnet cannot be changed or removed. Multiple servers can share the subnet. This property cannot be used with network.delegatedSubnetResourceId.
    */
   @added(Versions.v2026_03_01)
-  privateOutboundSubnetResourceId?: string;
+  privateOutboundSubnetResourceId?: armResourceIdentifier<[
+    { type: "Microsoft.Network/virtualNetworks/subnets" }
+  ]>;
 }
 
 /**

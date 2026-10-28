@@ -7122,12 +7122,20 @@
         },
         "privateOutboundSubnetResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The fully qualified Azure resource ID of the subnet used for private outbound connectivity. Specify this property when creating or restoring a server, or to enable private outbound connectivity on an existing server. Once set, the subnet cannot be changed or removed. Multiple servers can share the subnet. This property cannot be used with network.delegatedSubnetResourceId.",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
-          ]
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
         }
       }
     },
@@ -7179,7 +7187,15 @@
         },
         "privateOutboundSubnetResourceId": {
           "type": "string",
-          "description": "The fully qualified Azure resource ID of the subnet used for private outbound connectivity. Specify this property to enable private outbound connectivity on an existing server. Omitting it during an update preserves the existing subnet. Once set, the subnet cannot be changed or removed. Multiple servers can share the subnet. This property cannot be used with network.delegatedSubnetResourceId."
+          "format": "arm-id",
+          "description": "The fully qualified Azure resource ID of the subnet used for private outbound connectivity. Specify this property to enable private outbound connectivity on an existing server. Omitting it during an update preserves the existing subnet. Once set, the subnet cannot be changed or removed. Multiple servers can share the subnet. This property cannot be used with network.delegatedSubnetResourceId.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
         }
       }
     },
