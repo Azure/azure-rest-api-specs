@@ -660,6 +660,7 @@ interface ForecastOperationGroup {
     /**
      * May be used to filter forecasts by properties/usageDate (Utc time), properties/chargeType or properties/grain. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing usage POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     $filter?: string,
 
@@ -693,6 +694,7 @@ interface ForecastOperationGroup {
       /**
        * May be used to filter forecasts by properties/usageDate (Utc time), properties/chargeType or properties/grain. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing externalCloudProviderUsage POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       $filter?: string;
 
@@ -907,12 +909,14 @@ interface GenerateReservationDetailsReportOperationGroup {
     /**
      * Start Date
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing byBillingAccountId POST contract uses startDate in the query; preserve wire compatibility."
     @query("startDate")
     startDate: string,
 
     /**
      * End Date
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing byBillingAccountId POST contract uses endDate in the query; preserve wire compatibility."
     @query("endDate")
     endDate: string,
   ):
@@ -957,12 +961,14 @@ interface GenerateReservationDetailsReportOperationGroup {
     /**
      * Start Date
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing byBillingProfileId POST contract uses startDate in the query; preserve wire compatibility."
     @query("startDate")
     startDate: string,
 
     /**
      * End Date
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing byBillingProfileId POST contract uses endDate in the query; preserve wire compatibility."
     @query("endDate")
     endDate: string,
   ):
