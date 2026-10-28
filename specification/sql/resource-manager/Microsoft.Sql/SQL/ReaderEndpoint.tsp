@@ -218,13 +218,11 @@ interface ReaderEndpoints {
   >;
 
   /** Deletes a reader endpoint. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Preserves source Swagger: completed deletion returns 200, pending deletion returns 202, and an absent resource returns 204. ARM exception approval is required."
   @delete
   @autoRoute
   @armResourceDelete(ReaderEndpoint)
   @Azure.Core.useFinalStateVia("location")
   delete(...ReaderEndpointPathParameters<ReaderEndpoint>):
-    | ArmDeletedResponse
     | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<
         FinalResult = void,
         FinalUrlValue = url
