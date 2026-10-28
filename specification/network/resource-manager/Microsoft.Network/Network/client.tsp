@@ -5826,6 +5826,16 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 
 // These subresources declare their own metadata rather than inheriting Resource.type.
 @@clientName(
+  Microsoft.Network.ApplicationGatewayPrivateLinkResource.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayPrivateLinkResource.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
   Common.ApplicationGatewayBackendAddressPool.type,
   "ResourceType",
   "csharp"
