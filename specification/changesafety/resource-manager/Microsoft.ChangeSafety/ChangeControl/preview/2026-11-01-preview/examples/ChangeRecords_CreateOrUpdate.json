@@ -45,7 +45,6 @@
             }
           }
         },
-        "status": "Initialized",
         "comments": "Initial production deployment for microservices v2.1.0",
         "changeDefinition": {
           "name": "Create a storage account using ARM operation",
@@ -54,16 +53,7 @@
             "operations": [
               {
                 "httpMethod": "PUT",
-                "uri": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount?api-version=2023-01-01",
-                "body": {
-                  "properties": {
-                    "sku": {
-                      "name": "Standard_LRS"
-                    },
-                    "kind": "StorageV2",
-                    "location": "eastus"
-                  }
-                }
+                "uri": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount?api-version=2023-01-01"
               }
             ]
           }
@@ -113,7 +103,8 @@
           "buildNumber": "20250709.2",
           "releaseManager": "devops@contoso.com",
           "rollbackPlan": "https://docs.contoso.com/rollback/microservices-v210"
-        }
+        },
+        "requestedStatus": "Initialized"
       }
     }
   },
@@ -168,16 +159,7 @@
               "operations": [
                 {
                   "httpMethod": "PUT",
-                  "uri": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount?api-version=2023-01-01",
-                  "body": {
-                    "properties": {
-                      "sku": {
-                        "name": "Standard_LRS"
-                      },
-                      "kind": "StorageV2",
-                      "location": "eastus"
-                    }
-                  }
+                  "uri": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount?api-version=2023-01-01"
                 }
               ]
             }
@@ -228,7 +210,8 @@
             "releaseManager": "devops@contoso.com",
             "rollbackPlan": "https://docs.contoso.com/rollback/microservices-v210"
           },
-          "stageMapSnapshots": []
+          "stageMapSnapshots": [],
+          "requestedStatus": "Initialized"
         },
         "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/testChangeRecord",
         "name": "testChangeRecord",
@@ -293,16 +276,7 @@
               "operations": [
                 {
                   "httpMethod": "PUT",
-                  "uri": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount?api-version=2023-01-01",
-                  "body": {
-                    "properties": {
-                      "sku": {
-                        "name": "Standard_LRS"
-                      },
-                      "kind": "StorageV2",
-                      "location": "eastus"
-                    }
-                  }
+                  "uri": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount?api-version=2023-01-01"
                 }
               ]
             }
@@ -353,7 +327,8 @@
             "releaseManager": "devops@contoso.com",
             "rollbackPlan": "https://docs.contoso.com/rollback/microservices-v210"
           },
-          "stageMapSnapshots": []
+          "stageMapSnapshots": [],
+          "requestedStatus": "Initialized"
         },
         "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/testChangeRecord",
         "name": "testChangeRecord",

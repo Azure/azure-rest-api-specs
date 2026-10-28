@@ -14,7 +14,7 @@ and does not change `2026-01-01-preview`, deploy a backend, or release an SDK.
   provider Operations, and change-validity verification.
 - Omits the entire ChangeState resource family, `retrieveAllStages`, and
   `retrieveAuditTrail`: 34 current-version operations are excluded, with 42
-  operations retained before the next-stage design decision.
+  operations retained.
 - Uses one URL per Link entry, complete optional parameter PATCH fields, canonical
   management-group paths, and native ARM identifiers.
 - Declares no stable identity for Link array items. Link names are not required
@@ -22,7 +22,12 @@ and does not change `2026-01-01-preview`, deploy a backend, or release an SDK.
 - Uses explicit JSON dictionaries for opaque object values so generated clients
   preserve their contents.
 - Uses kind-specific ApiOperations and Targets schemas for change definitions,
-  including partial details for PATCH requests.
+  including partial details for PATCH requests. PATCH preserves the stored kind;
+  changing kind requires PUT.
+- Stores only the method and URI of each planned operation. Full target-provider
+  bodies belong only to the transient `verifyChangeValidity` request.
+- Separates read-only observed `status` from client-owned `requestedStatus`.
+  Automatic status updates preserve the client's last request.
 - Replaces the untyped snapshot union with `StageMapSnapshot` entries containing
   `resourceId` and optional captured StageMap properties.
 - Proposes typed AcquirePolicyToken and PolicyEvaluation payloads for their
@@ -34,10 +39,26 @@ It reads the ChangeRecord, snapshots, and progressions without advancing them.
 The November backend and ProviderHub registrations must expose these GET routes
 before publication. No latency-based POST exception is claimed.
 
-**Release gates:** backend support for event reads, PATCH merge behavior, typed
-snapshot/event serialization, version-specific resource/action registration,
-consumer migration, current ARM/suppression approvals, and SDK package onboarding.
-Do not treat passing schema or SDK generation checks as deployed runtime support.
+`requestedStatus` is persisted and echoed, not an alias for the current status.
+Create accepts `Initialized` or `InProgress`. Updates apply the existing transition
+and completion checks. A valid repeated request can reassert a pause after the
+observed status changes. An identical stored request that has been superseded is
+acknowledged without moving the observed status backward. A new invalid request
+is rejected. PATCH omission preserves the request. PUT omission removes the
+request without resetting the observed status.
+
+The following work is required before publication. These are implementation and
+owner gates, not guarantees provided by a schema build.
+
+| Area                      | Required task                                                                                                                                                                                              |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Stored operations         | Reject `changeDefinition.details.operations[].body` on November writes. Persist only method and URI. Keep full bodies transient in verification.                                                           |
+| Shared records            | Add version-aware reads so November never exposes bodies stored through January. Keep January responses unchanged. The service owner must decide existing-body retention and cross-version status mapping. |
+| Status ownership          | Persist `requestedStatus` and accepted observed-status changes atomically. Preserve client fields during StageProgression cascades. Implement repeated-request, omission, and transition rules.            |
+| PATCH                     | Apply merge-patch semantics, replace supplied arrays, reject cross-kind details, and require PUT for kind changes.                                                                                         |
+| Routing and authorization | Register the November version and both next-stage GET routes in ProviderHub. Confirm their permission names and cross-scope snapshot authorization.                                                        |
+| Resource serialization    | Implement event reads, properties-only snapshots, and typed event payloads. Confirm event-version field coverage, supported parent scopes, and actual asynchronous DELETE headers.                         |
+| Review and release        | Obtain current ARM exception approval, package-name approvals, Python namespace reservation, and release-owner confirmation of backend availability.                                                       |
 
 JavaScript uses modular TypeSpec generation for the required SDK validation.
 Other language-emitter migrations remain deferred. Their retained readiness

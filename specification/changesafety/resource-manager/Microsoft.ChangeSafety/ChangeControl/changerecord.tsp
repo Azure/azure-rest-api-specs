@@ -41,9 +41,13 @@ model ChangeRecordProperties {
   @maxLength(2000)
   description?: string;
 
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @doc("Current Status of the ChangeRecord resource.")
+  @visibility(Lifecycle.Read)
+  @doc("Server-observed lifecycle status. The service updates this value from accepted requestedStatus transitions and StageProgression activity.")
   status?: ChangeRecordStatus;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("The last lifecycle transition requested by the client. The service preserves this value during automatic status updates. Create permits Initialized or InProgress. On update, a valid transition is applied even when this value is unchanged. An unchanged request whose transition has been superseded is acknowledged without changing observed status. NotApplicable cannot be requested.")
+  requestedStatus?: ChangeRecordRequestedStatus;
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Comments about the last update to the ChangeRecord resource.")
@@ -64,7 +68,7 @@ model ChangeRecordProperties {
   rolloutType: RolloutType;
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @doc("Change request body and/or resource selection criteria used to identify the targeted resources.")
+  @doc("Planned operation references or resource-selection criteria used to identify the targeted resources.")
   changeDefinition: ChangeDefinition;
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -151,7 +155,7 @@ model ChangeRecordRetrieveNextStagesResponseItem {
   parameters?: Record<Parameter>;
 }
 
-@doc("Internal status of the ChangeRecord resource.")
+@doc("Server-observed lifecycle status of the ChangeRecord resource.")
 union ChangeRecordStatus {
   string,
 
@@ -171,6 +175,26 @@ union ChangeRecordStatus {
   NotApplicable: "NotApplicable",
 
   @doc("Resource is in Paused state.")
+  Paused: "Paused",
+}
+
+@doc("A lifecycle transition requested by the client. NotApplicable is derived by the service and cannot be requested.")
+union ChangeRecordRequestedStatus {
+  string,
+
+  @doc("Initialize the resource. This value is accepted on create.")
+  Initialized: "Initialized",
+
+  @doc("Start or resume execution.")
+  InProgress: "InProgress",
+
+  @doc("Complete execution, subject to the service's completion checks.")
+  Completed: "Completed",
+
+  @doc("Cancel execution.")
+  Cancelled: "Cancelled",
+
+  @doc("Pause execution.")
   Paused: "Paused",
 }
 

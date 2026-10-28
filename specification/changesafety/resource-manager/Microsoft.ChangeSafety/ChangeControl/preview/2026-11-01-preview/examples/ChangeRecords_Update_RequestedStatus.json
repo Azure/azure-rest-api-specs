@@ -1,0 +1,49 @@
+{
+  "title": "ChangeRecords_Update_RequestedStatus",
+  "operationId": "ChangeRecords_Update",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeRecordName": "webApplicationChangeRecord",
+    "properties": {
+      "properties": {
+        "requestedStatus": "Paused"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord",
+        "name": "webApplicationChangeRecord",
+        "type": "Microsoft.ChangeSafety/changeRecords",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "status": "Paused",
+          "requestedStatus": "Paused",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/webApplicationStageMap"
+          },
+          "changeDefinition": {
+            "name": "webApplicationDeployment",
+            "kind": "ApiOperations",
+            "details": {
+              "operations": [
+                {
+                  "httpMethod": "PUT",
+                  "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.Storage/storageAccounts/webappdata?api-version=2023-01-01"
+                }
+              ]
+            }
+          },
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T09:30:17.815Z",
+          "stageMapSnapshots": []
+        }
+      }
+    }
+  }
+}

@@ -1525,8 +1525,14 @@
           "ChangeRecords_Update": {
             "$ref": "./examples/ChangeRecords_Update.json"
           },
+          "ChangeRecords_Update_ChangeDefinition": {
+            "$ref": "./examples/ChangeRecords_Update_ChangeDefinition.json"
+          },
           "ChangeRecords_Update_ParameterMetadata": {
             "$ref": "./examples/ChangeRecords_Update_ParameterMetadata.json"
+          },
+          "ChangeRecords_Update_RequestedStatus": {
+            "$ref": "./examples/ChangeRecords_Update_RequestedStatus.json"
           }
         }
       },
@@ -2377,7 +2383,7 @@
           "description": "The operation definitions. Each entry supplies its method and URI.",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/ArmResourceOperation"
+            "$ref": "#/definitions/PlannedResourceOperation"
           },
           "x-ms-identifiers": []
         }
@@ -2424,12 +2430,12 @@
     },
     "ArmResourceOperation": {
       "type": "object",
-      "description": "Artifact content model for an inline Azure Resource Manager operation.",
+      "description": "An Azure Resource Manager operation submitted to verifyChangeValidity. Its body is used for request-time validation, not stored on the ChangeRecord or returned by verification.",
       "properties": {
         "uri": {
           "type": "string",
           "format": "uri",
-          "description": "The uri of the operation.",
+          "description": "The URI of the operation.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -2438,7 +2444,7 @@
         },
         "httpMethod": {
           "$ref": "#/definitions/ArmOperation",
-          "description": "The http method of the operation.",
+          "description": "The HTTP method of the operation.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -2447,7 +2453,7 @@
         },
         "body": {
           "type": "object",
-          "description": "The resource operation request body.",
+          "description": "The request body of the operation being verified. This value is not part of the stored change definition.",
           "additionalProperties": {},
           "x-ms-mutability": [
             "read",
@@ -2674,7 +2680,7 @@
     },
     "ChangeDefinitionPatch": {
       "type": "object",
-      "description": "Partial change definition supplied by a PATCH request.",
+      "description": "Partial change definition supplied by a PATCH request. If kind is supplied, it must match the stored kind. Use PUT to change kind.",
       "properties": {
         "name": {
           "type": "string",
@@ -2709,7 +2715,7 @@
           "description": "Replacement operation definitions for an ApiOperations change.",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/ArmResourceOperation"
+            "$ref": "#/definitions/PlannedResourceOperation"
           },
           "x-ms-identifiers": []
         },
@@ -2814,7 +2820,12 @@
         },
         "status": {
           "$ref": "#/definitions/ChangeRecordStatus",
-          "description": "Current Status of the ChangeRecord resource.",
+          "description": "Server-observed lifecycle status. The service updates this value from accepted requestedStatus transitions and StageProgression activity.",
+          "readOnly": true
+        },
+        "requestedStatus": {
+          "$ref": "#/definitions/ChangeRecordRequestedStatus",
+          "description": "The last lifecycle transition requested by the client. The service preserves this value during automatic status updates. Create permits Initialized or InProgress. On update, a valid transition is applied even when this value is unchanged. An unchanged request whose transition has been superseded is acknowledged without changing observed status. NotApplicable cannot be requested.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -2863,7 +2874,7 @@
         },
         "changeDefinition": {
           "$ref": "#/definitions/ChangeDefinition",
-          "description": "Change request body and/or resource selection criteria used to identify the targeted resources.",
+          "description": "Planned operation references or resource-selection criteria used to identify the targeted resources.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -2950,6 +2961,48 @@
         "anticipatedStartTime",
         "anticipatedEndTime"
       ]
+    },
+    "ChangeRecordRequestedStatus": {
+      "type": "string",
+      "description": "A lifecycle transition requested by the client. NotApplicable is derived by the service and cannot be requested.",
+      "enum": [
+        "Initialized",
+        "InProgress",
+        "Completed",
+        "Cancelled",
+        "Paused"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeRecordRequestedStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Initialized",
+            "value": "Initialized",
+            "description": "Initialize the resource. This value is accepted on create."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Start or resume execution."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Complete execution, subject to the service's completion checks."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Cancel execution."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "Pause execution."
+          }
+        ]
+      }
     },
     "ChangeRecordResourceId": {
       "type": "string",
@@ -3350,7 +3403,7 @@
     },
     "ChangeRecordStatus": {
       "type": "string",
-      "description": "Internal status of the ChangeRecord resource.",
+      "description": "Server-observed lifecycle status of the ChangeRecord resource.",
       "enum": [
         "Initialized",
         "InProgress",
@@ -3429,9 +3482,9 @@
             "create"
           ]
         },
-        "status": {
-          "$ref": "#/definitions/ChangeRecordStatus",
-          "description": "Current Status of the ChangeRecord resource.",
+        "requestedStatus": {
+          "$ref": "#/definitions/ChangeRecordRequestedStatus",
+          "description": "The last lifecycle transition requested by the client. The service preserves this value during automatic status updates. Create permits Initialized or InProgress. On update, a valid transition is applied even when this value is unchanged. An unchanged request whose transition has been superseded is acknowledged without changing observed status. NotApplicable cannot be requested.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -3539,7 +3592,7 @@
         },
         "changeDefinition": {
           "$ref": "#/definitions/ChangeDefinitionPatch",
-          "description": "Change request body and/or resource selection criteria used to identify the targeted resources.",
+          "description": "Planned operation references or resource-selection criteria used to identify the targeted resources.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -3953,6 +4006,35 @@
           }
         ]
       }
+    },
+    "PlannedResourceOperation": {
+      "type": "object",
+      "description": "The method and URI of a planned Azure Resource Manager operation. Request bodies are not part of the stored change definition.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the operation.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "httpMethod": {
+          "$ref": "#/definitions/ArmOperation",
+          "description": "The HTTP method of the operation.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "uri",
+        "httpMethod"
+      ]
     },
     "PolicyEvaluationEventData": {
       "type": "object",

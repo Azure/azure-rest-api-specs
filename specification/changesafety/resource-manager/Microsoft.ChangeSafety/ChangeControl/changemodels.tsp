@@ -11,7 +11,7 @@ using TypeSpec.Rest;
 
 namespace Microsoft.ChangeSafety;
 
-@doc("Partial change definition supplied by a PATCH request.")
+@doc("Partial change definition supplied by a PATCH request. If kind is supplied, it must match the stored kind. Use PUT to change kind.")
 model ChangeDefinitionPatch {
   ...OptionalProperties<ChangeDefinition>;
 
@@ -24,7 +24,7 @@ model ChangeDefinitionPatchDetails {
   @doc("Replacement operation definitions for an ApiOperations change.")
   @minItems(1)
   @identifiers(#[])
-  operations?: ArmResourceOperation[];
+  operations?: PlannedResourceOperation[];
 
   @doc("Replacement resource selectors for a Targets change.")
   @minItems(1)
@@ -37,7 +37,7 @@ model ChangeDefinitionPatchProperties<Properties extends TypeSpec.Reflection.Mod
   ...OmitProperties<ParameterPatchProperties<Properties>, "changeDefinition">;
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @doc("Change request body and/or resource selection criteria used to identify the targeted resources.")
+  @doc("Planned operation references or resource-selection criteria used to identify the targeted resources.")
   changeDefinition?: ChangeDefinitionPatch;
 }
 
@@ -58,19 +58,24 @@ union ChangeType {
   ManualTouch: "ManualTouch",
 }
 
-@doc("Artifact content model for an inline Azure Resource Manager operation.")
-model ArmResourceOperation {
+@doc("The method and URI of a planned Azure Resource Manager operation. Request bodies are not part of the stored change definition.")
+model PlannedResourceOperation {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @doc("The uri of the operation.")
+  @doc("The URI of the operation.")
   uri: url;
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @doc("The http method of the operation.")
+  @doc("The HTTP method of the operation.")
   httpMethod: ArmOperation;
+}
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The target ARM resource provider and API version define the request body's properties and value types."
+@doc("An Azure Resource Manager operation submitted to verifyChangeValidity. Its body is used for request-time validation, not stored on the ChangeRecord or returned by verification.")
+model ArmResourceOperation {
+  ...PlannedResourceOperation;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The target Azure Resource Manager provider and API version define this transient validation request body's properties and value types."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @doc("The resource operation request body.")
+  @doc("The request body of the operation being verified. This value is not part of the stored change definition.")
   body?: Record<unknown>;
 }
 
@@ -146,7 +151,7 @@ model ApiOperationsChangeDetails {
   @doc("The operation definitions. Each entry supplies its method and URI.")
   @minItems(1)
   @identifiers(#[])
-  operations: ArmResourceOperation[];
+  operations: PlannedResourceOperation[];
 }
 
 @doc("A change defined by resource-selection criteria.")
