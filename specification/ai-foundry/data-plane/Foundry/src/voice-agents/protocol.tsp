@@ -9,6 +9,8 @@ using TypeSpec.OpenAPI;
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 // cspell:ignore kbps viseme

@@ -7,6 +7,8 @@ import "@azure-tools/openai-typespec/models/chat";
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 // ---------------------------------------------------------------------------

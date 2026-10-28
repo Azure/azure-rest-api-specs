@@ -4,6 +4,8 @@ import "../openai/responses/models.tsp";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 const MemoryStoreRequiredPreviews = #{

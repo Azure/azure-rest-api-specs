@@ -1,6 +1,8 @@
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 @doc("A skill name following the agentskills.io spec: lowercase letters, numbers, and hyphens only. Must not start or end with a hyphen or contain consecutive hyphens.")
