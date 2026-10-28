@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f",
+    "resourceGroupName": "rg1",
+    "clusterName": "cache1",
+    "faultName": "maintenance-test",
+    "operationId": "33333333-3333-4333-8333-333333333333"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/nodeMaintenanceFaults/maintenance-test/operationresults/33333333-3333-4333-8333-333333333333?api-version=2026-11-01-preview"
+      }
+    },
+    "204": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "FaultDeleteFailed",
+          "message": "The node maintenance fault could not be deleted."
+        }
+      }
+    }
+  },
+  "operationId": "NodeMaintenanceFaults_GetOperationResult",
+  "title": "Poll node maintenance fault deletion for completion or failure"
+}
