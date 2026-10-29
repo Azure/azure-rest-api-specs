@@ -17,13 +17,15 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
     types: [completed]
 
 permissions:
-  actions: read
   contents: read
-  pull-requests: write
 
 jobs:
   update-labels:
     name: Update Labels
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: write
     if: >-
       github.event.workflow_run.conclusion != 'skipped' &&
       github.event.workflow_run.conclusion != 'cancelled'

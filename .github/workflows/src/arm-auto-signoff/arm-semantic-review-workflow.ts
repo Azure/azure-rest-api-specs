@@ -156,7 +156,7 @@ async function publishStatus(
  * and the details go to the run log.
  *
  * The status is bound to the reviewed SHA, so a result for a commit that is no longer the PR head
- * is harmless: Universal Auto-Signoff reads only the current head's statuses.
+ * is harmless: PR-state reconciliation reads only the current head's statuses.
  *
  * Requires `GH_AW_AGENT_OUTPUT` (the path to `agent_output.json`) in the environment.
  *

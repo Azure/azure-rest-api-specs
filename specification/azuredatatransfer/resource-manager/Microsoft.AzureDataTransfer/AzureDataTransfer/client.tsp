@@ -5,3 +5,4 @@ using Azure.ClientGenerator.Core;
 using Microsoft.AzureDataTransfer;
 
 @@clientName(ActionType, "DateTransferActionType", "!autorest");
+@@clientName(Microsoft.AzureDataTransfer, "DataTransferMgmtClient", "python");

@@ -2,6 +2,7 @@ import { ARM_INITIAL_REVIEW_REQUESTED_LABEL } from "../arm-auto-signoff/arm-auto
 import { evaluateArmSignoff } from "../arm-auto-signoff/arm-signoff-policy.ts";
 import type { CommitStatus } from "../arm-auto-signoff/arm-semantic-review.ts";
 import { processImpactAssessment, type ImpactAssessment, type LabelContext } from "./labelling.ts";
+import type { ReviewContext } from "./review-requirements.ts";
 
 export interface PrStatePlan {
   labels: string[];
@@ -13,13 +14,14 @@ export interface PrStatePlan {
 export function projectImpactLabels(
   existingLabels: string[],
   impactAssessment: ImpactAssessment | undefined,
+  context: ReviewContext,
 ): LabelContext {
   const labels: LabelContext = {
     present: new Set(existingLabels),
     toAdd: new Set(),
     toRemove: new Set(),
   };
-  if (impactAssessment) processImpactAssessment(labels, impactAssessment);
+  if (impactAssessment) processImpactAssessment(labels, impactAssessment, context);
   return labels;
 }
 
@@ -34,18 +36,23 @@ export function evaluatePrState(
   existingLabels: string[],
   impactAssessment: ImpactAssessment | undefined,
   statuses: CommitStatus[],
+  context: ReviewContext,
 ): PrStatePlan {
-  const classified = projectedLabels(projectImpactLabels(existingLabels, impactAssessment));
+  const classified = projectedLabels(
+    projectImpactLabels(existingLabels, impactAssessment, context),
+  );
   const signedOff = evaluateArmSignoff(classified, statuses);
   // Queue labels depend on the approval just calculated, not on the old live labels.
-  const labels = projectedLabels(projectImpactLabels(signedOff, impactAssessment));
+  const labels = projectedLabels(projectImpactLabels(signedOff, impactAssessment, context));
   return {
     labels,
     labelsToAdd: labels.filter((label) => !existingLabels.includes(label)),
-    labelsToRemove: existingLabels.filter((label) => !labels.includes(label)),
+    labelsToRemove: existingLabels
+      .filter((label) => !labels.includes(label))
+      .sort((a, b) => Number(b === "ARMSignedOff") - Number(a === "ARMSignedOff")),
     requestInitialArmReview:
       impactAssessment !== undefined &&
-      !impactAssessment.isDraft &&
+      !context.isDraft &&
       labels.includes("ARMReview") &&
       labels.includes("WaitForARMFeedback") &&
       ![

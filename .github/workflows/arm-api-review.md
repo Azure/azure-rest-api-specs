@@ -3,14 +3,19 @@ description: >
   Automatically review Azure REST API specification pull requests for
   conformance to ARM RPC rules and Azure REST API Guidelines. Triggers
   initially after Summarize Checks establishes WaitForARMFeedback, or when that label is
-  explicitly added; on demand via the /arm-review comment command.
+  explicitly added; re-reviews when ARMChangesRequested is removed;
+  on demand via the /arm-review comment command.
 run-name: "ARM API Review #${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }} (${{ github.event_name }})"
 timeout-minutes: 30
-# Concurrency is evaluated before the job-level `if` gate. Give unrelated
-# comments and non-queue label events run-scoped groups so they cannot cancel
-# an active review for the same PR before being skipped.
+# Concurrency is evaluated before the job-level `if` gate. Real review requests
+# share one group per PR; unrelated comments and label events get run-scoped
+# groups so they cannot replace a queued review for the same PR before being
+# skipped. cancel-in-progress is false so a newer request waits instead of
+# killing an active review, which would waste the AI run and leave partial
+# output and a stale Pending/Error status. A finished older review is harmless
+# because its result is bound to its own head SHA.
 concurrency:
-  group: "gh-aw-${{ github.workflow }}-${{ ((github.event_name == 'issue_comment' && (github.event.comment.body != '/arm-review' || github.event.issue.pull_request == null)) || (github.event_name == 'pull_request_target' && github.event.action == 'labeled' && github.event.label.name != 'WaitForARMFeedback')) && github.run_id || github.event.issue.number || github.event.pull_request.number || github.event.inputs.pr_number || github.run_id }}"
+  group: "gh-aw-${{ github.workflow }}-${{ ((github.event_name == 'issue_comment' && (github.event.comment.body != '/arm-review' || github.event.issue.pull_request == null)) || (github.event_name == 'pull_request_target' && !((github.event.action == 'labeled' && github.event.label.name == 'WaitForARMFeedback') || (github.event.action == 'unlabeled' && github.event.label.name == 'ARMChangesRequested')))) && github.run_id || github.event.issue.number || github.event.pull_request.number || github.event.inputs.pr_number || github.run_id }}"
   cancel-in-progress: false
 on:
   # Fork PRs ARE supported (`forks: ["*"]`), matching every other PR workflow in
@@ -21,7 +26,7 @@ on:
   # triggers to write-access users; trusted repository automation can dispatch
   # a review after adding WaitForARMFeedback.
   pull_request_target:
-    types: [labeled]
+    types: [labeled, unlabeled]
     forks: ["*"]
   issue_comment:
     types: [created]
@@ -40,7 +45,7 @@ on:
         required: false
         type: string
   permissions:
-    pull-requests: write
+    pull-requests: read
     statuses: write
   steps:
     - name: Resolve target pull request
@@ -125,18 +130,6 @@ on:
           core.setOutput("target_pr_number", String(pull.number));
           core.setOutput("target_head_sha", pull.head.sha);
           core.setOutput("run_attempt", runAttempt);
-    - name: Record explicit ARM review request
-      if: steps.check_membership.outputs.is_team_member == 'true' && github.event.inputs.head_sha == ''
-      uses: actions/github-script@v9
-      env:
-        TARGET_PR_NUMBER: ${{ steps.resolve_target_pr.outputs.target_pr_number }}
-      with:
-        script: |
-          await github.rest.issues.addLabels({
-            ...context.repo,
-            issue_number: Number(process.env.TARGET_PR_NUMBER),
-            labels: ["ARMInitialReviewRequested"],
-          });
     - name: Prepare ARM semantic review correlation artifact
       if: steps.check_membership.outputs.is_team_member == 'true'
       shell: bash
@@ -251,9 +244,11 @@ jobs:
 if: >
   github.event_name == 'workflow_dispatch' ||
   (github.event_name == 'pull_request_target' &&
-   github.event.action == 'labeled' &&
    github.event.pull_request.draft == false &&
-   github.event.label.name == 'WaitForARMFeedback') ||
+   ((github.event.action == 'labeled' &&
+     github.event.label.name == 'WaitForARMFeedback') ||
+    (github.event.action == 'unlabeled' &&
+     github.event.label.name == 'ARMChangesRequested'))) ||
   (github.event_name == 'issue_comment' &&
    github.event.action == 'created' &&
    github.event.issue.pull_request != null &&
@@ -580,7 +575,10 @@ already guaranteed, before this agent starts, that:
   This replaces any manual collaborator check. Do **not** re-verify
   permissions.
 - The event is eligible: a `labeled` run only fires when `WaitForARMFeedback`
-  is added to a non-draft PR; an
+  is added to a non-draft PR; an `unlabeled` run only fires when
+  `ARMChangesRequested` is removed from a non-draft PR. This removal is an
+  explicit re-review request and does not require `WaitForARMFeedback`;
+  Summarize Checks reconciles the queue labels independently. An
   `issue_comment` run only fires for a PR comment whose body is exactly
   `/arm-review`;
   `workflow_dispatch` supports explicit runs and the trusted Summarize Checks
@@ -593,7 +591,7 @@ already guaranteed, before this agent starts, that:
   spec files only through the read-only GitHub MCP toolset
   (`min-integrity: approved`), and writes only through gh-aw `safe-outputs`. The
   `roles` gate requires either a write-access user (via the
-  `WaitForARMFeedback` label or `/arm-review`) or the allowlisted repository
+  `WaitForARMFeedback` label, removal of `ARMChangesRequested`, or `/arm-review`) or the allowlisted repository
   automation's dispatch after the queue label is added.
 
 ## Trigger Validation
@@ -648,18 +646,27 @@ read-only `github` toolset. If any check fails, act as directed and stop.
    - Otherwise continue to step 4.
 
 4. **Size cap → scoped review**: count the changed files whose path starts with
-   `specification/`, and their added+deleted lines. If the PR is over the cap
+   `specification/`, excluding any path with an `examples` directory segment,
+   and their added+deleted lines. This excludes both TypeSpec source examples
+   (`specification/<service>/<project>/examples/**`) and compiled Swagger examples
+   (`specification/<service>/resource-manager/**/examples/**`) from both limits.
+   For a renamed or moved file, count it once with its added+deleted lines if
+   either its old or new path is a non-example `specification/` path.
+   If the PR is over the cap
    (more than **50** spec files, or more than **5,000** changed spec lines),
    **default to a scoped review** rather than skipping the PR or taking the
    full-scope `Size-cap override`: review the highest-risk subset that fits
    within the cap, and disclose the scope. This check never stops the run.
 
-   Select the subset in this priority order, stopping once the cap is reached:
+   Select the subset in this priority order, stopping once the non-example cap is reached:
    1. Files in API version directories added by this PR (new `stable/**` or
       `preview/**` folders).
    2. Changed `resource-manager/**/*.json` and `**/*.tsp` files.
    3. Changed `**/readme.md` and `**/tspconfig.yaml` configuration files.
-   4. Changed `**/examples/**/*.json` files (lowest risk; drop these first).
+
+   Examples remain in review scope without consuming either limit. Review them
+   alongside the selected specifications; do not mark a review scoped solely
+   because of example file or line counts.
 
    Review the selected files exactly as a normal run would, and disclose the
    scoping in the Step 8 summary so the assigned human API reviewer knows which
@@ -1390,8 +1397,8 @@ Use `blocking_count: "0"` after a clean re-review. Do not claim `full` or
 Trusted workflow artifacts attach the pull request, head SHA, and run attempt;
 never reproduce those correlation values in this model-generated result. The
 trusted `record_arm_semantic_review` job validates the item and publishes the
-head-bound status inside this reviewer run. Universal Auto-Signoff consumes the
-status after trusted result publication or finalization.
+head-bound status inside this reviewer run. Shared PR-state reconciliation consumes
+the status after trusted result publication or finalization.
 
 The final status is:
 

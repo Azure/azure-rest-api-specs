@@ -1,4 +1,4 @@
-import type { CheckRuns, Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts";
+import type { CheckRuns, Core, GitHub, GitHubScriptArgs } from "../github.ts";
 /*
   This file is a github script. It will be called directly from a github-script action. This code is a simplified
   amalgamation of logic that previously resided in the `PR Summary` check and various events within the `pipelinebot`.
@@ -33,6 +33,7 @@ import {
   verRevApproval,
 } from "./labelling.ts";
 import { evaluatePrState, projectImpactLabels } from "./pr-state.ts";
+import type { ReviewContext } from "./review-requirements.ts";
 
 import {
   brchTsg,
@@ -286,13 +287,6 @@ export default async function summarizeChecks({
     core.setOutput("head_sha", head_sha);
   }
 
-  const targetBranch =
-    context.eventName === "pull_request_target"
-      ? (context.payload as WebhookEvent<"pull-request">).pull_request.base.ref
-      : undefined;
-
-  core.info(`PR target branch: ${targetBranch}`);
-
   // Default target is this run itself
   const target_url = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
 
@@ -304,7 +298,6 @@ export default async function summarizeChecks({
     issue_number,
     head_sha,
     context.eventName,
-    targetBranch,
     target_url,
   );
 }
@@ -338,7 +331,6 @@ export async function summarizeChecksImpl(
   issue_number: number,
   head_sha: string,
   event_name: string,
-  targetBranch: string | undefined,
   target_url: string,
 ): Promise<void> {
   core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
@@ -359,6 +351,11 @@ export async function summarizeChecksImpl(
     return;
   }
   let labelNames = pull.labels.map((label) => label.name);
+  const reviewContext: ReviewContext = {
+    isDraft: pull.draft ?? false,
+    targetBranch: pull.base.ref,
+  };
+  const targetBranch = reviewContext.targetBranch;
 
   const [requiredCheckRuns, fyiCheckRuns, impactAssessment, statuses] = await getCheckRunTuple(
     github,
@@ -366,16 +363,14 @@ export async function summarizeChecksImpl(
     owner,
     repo,
     head_sha,
-    issue_number,
+    targetBranch,
     EXCLUDED_CHECK_NAMES,
   );
 
   outputRunDetails(core, requiredCheckRuns, fyiCheckRuns);
 
   if (impactAssessment) {
-    impactAssessment.isDraft = pull.draft ?? false;
     core.info(`ImpactAssessment: ${JSON.stringify(impactAssessment)}`);
-    targetBranch = impactAssessment.targetBranch;
   } else {
     core.info(
       `No impact assessment found for ${owner}/${repo}#${issue_number}. ` +
@@ -383,7 +378,7 @@ export async function summarizeChecksImpl(
     );
   }
 
-  const plan = evaluatePrState(labelNames, impactAssessment, statuses);
+  const plan = evaluatePrState(labelNames, impactAssessment, statuses, reviewContext);
 
   const { data: currentPull } = await github.rest.pulls.get({
     owner,
@@ -394,6 +389,7 @@ export async function summarizeChecksImpl(
     currentPull.state !== "open" ||
     currentPull.head.sha !== head_sha ||
     currentPull.draft !== pull.draft ||
+    currentPull.base.ref !== targetBranch ||
     JSON.stringify(currentPull.labels.map((label) => label.name).sort()) !==
       JSON.stringify([...labelNames].sort())
   ) {
@@ -535,8 +531,9 @@ export async function getExistingLabels(
 export function updateLabels(
   existingLabels: string[],
   impactAssessment: import("./labelling.ts").ImpactAssessment | undefined,
+  context: ReviewContext,
 ): import("./labelling.ts").LabelContext {
-  return projectImpactLabels(existingLabels, impactAssessment);
+  return projectImpactLabels(existingLabels, impactAssessment, context);
 }
 
 // #endregion
@@ -567,7 +564,7 @@ export function getRequiredChecksFromBranchRuleOutput(
  * @param owner - The repository owner.
  * @param repo - The repository name.
  * @param head_sha - The commit SHA to check.
- * @param prNumber - The pull request number.
+ * @param targetBranch - The current target branch of the pull request.
  */
 export async function getCheckRunTuple(
   github: GitHub,
@@ -575,7 +572,7 @@ export async function getCheckRunTuple(
   owner: string,
   repo: string,
   head_sha: string,
-  prNumber: number,
+  targetBranch: string,
   excludedCheckNames: string[],
 ): Promise<
   [
@@ -632,7 +629,7 @@ export async function getCheckRunTuple(
     const branchRules = await github.rest.repos.getBranchRules({
       owner,
       repo,
-      branch: impactAssessment.targetBranch,
+      branch: targetBranch,
     });
     requiredCheckNames = getRequiredChecksFromBranchRuleOutput(branchRules).filter(
       // The aggregate cannot depend on the status it publishes itself.

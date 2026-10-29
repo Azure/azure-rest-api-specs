@@ -2,6 +2,7 @@ import { isFullGitSha } from "../../shared/src/git.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { extractInputs } from "../src/context.ts";
 import type { Core, GitHub, GitHubScriptArgs } from "./github.ts";
+import { ArmAutoSignoffLabel } from "./arm-auto-signoff/arm-auto-signoff-labels.ts";
 
 export default async function updateLabels({ github, context, core }: GitHubScriptArgs) {
   const { owner, repo, head_sha, issue_number, run_id } = await extractInputs(
@@ -114,6 +115,13 @@ export async function updateLabelsImpl({
   }
 
   if (labelsToRemove.length > 0) {
+    // Remove ARMSignedOff before its auto-signoff markers. If a later removal fails, a lone marker
+    // is harmless, whereas a lone ARMSignedOff would look like a human approval.
+    labelsToRemove.sort(
+      (a, b) =>
+        Number(b === ArmAutoSignoffLabel.ArmSignedOff) -
+        Number(a === ArmAutoSignoffLabel.ArmSignedOff),
+    );
     // Must loop over labelsToRemove ourselves, since GitHub doesn't expose a REST API to remove in bulk.
     for (const name of labelsToRemove) {
       try {

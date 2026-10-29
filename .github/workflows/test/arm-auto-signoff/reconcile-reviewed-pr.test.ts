@@ -35,7 +35,6 @@ describe("reviewer completion", () => {
       123,
       headSha,
       "workflow_dispatch",
-      undefined,
       "https://github.com/owner/repo/actions/runs/456",
     );
     expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();

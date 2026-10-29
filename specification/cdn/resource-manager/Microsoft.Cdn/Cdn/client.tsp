@@ -6,6 +6,7 @@ using Microsoft.Cdn;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 
+@@clientName(AFDDomainMtlsParameters, "AFDDomainMTLSParameters", "go");
 @@clientName(
   CertificateSourceParameters,
   "CertificateSourceParametersBase",
@@ -1508,6 +1509,7 @@ using Azure.ResourceManager;
 );
 @@clientName(Endpoints.listResourceUsage, "GetResourceUsages", "csharp");
 @@clientName(RuleSets.listResourceUsage, "GetResourceUsages", "csharp");
+@@clientName(RuleSetProperties.batchMode, "IsBatchMode", "csharp");
 
 // Python SDK customizations: preserve client name and enum member names from the
 // pre-migration Swagger SDK to avoid breaking changes for existing consumers.

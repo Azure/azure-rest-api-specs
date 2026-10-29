@@ -1,0 +1,89 @@
+name: azure-typespec-author-eval
+description: unrelated authoring has no sdk intake
+version: "1.0"
+type: capability
+area: naming
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 007008-unrelated-authoring-has-no-sdk-intake-trigger
+    tags:
+      suite: naming
+      mode: trigger
+    prompt: |
+      Analysis, intake and grounding are complete for a documentation-only request in
+      specification/widget/resource-manager/Microsoft.Widget: add "Whether the widget is
+      enabled." to the existing WidgetProperties.enabled. Names and types must remain
+      unchanged. The SDK targets are unknown and SDK naming was not requested. Return only
+      JSON "sdkLanguageRequired" and "namingChangesPlanned". Do not edit, fetch docs, invoke
+      MCP, compile or generate.
+    constraints: &a1
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          disallowed:
+            - azsdk-common-typespec-naming
+      - &a2
+        type: tool-calls
+        config:
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - &a3
+        type: output-matches
+        config:
+          pattern: '"sdkLanguageRequired"\s*:\s*false'
+      - &a4
+        type: output-matches
+        config:
+          pattern: '"namingChangesPlanned"\s*:\s*false'
+  - name: 007008-unrelated-authoring-has-no-sdk-intake-forced
+    tags:
+      suite: naming
+      mode: forced
+    prompt: |
+      @azure-typespec-author Analysis, intake and grounding are complete for a documentation-only request in
+      specification/widget/resource-manager/Microsoft.Widget: add "Whether the widget is
+      enabled." to the existing WidgetProperties.enabled. Names and types must remain
+      unchanged. The SDK targets are unknown and SDK naming was not requested. Return only
+      JSON "sdkLanguageRequired" and "namingChangesPlanned". Do not edit, fetch docs, invoke
+      MCP, compile or generate.
+    constraints: *a1
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+          disallowed:
+            - azsdk-common-typespec-naming
+      - *a2
+      - *a3
+      - *a4
+  - name: 007008-unrelated-authoring-has-no-sdk-intake-no-skill
+    tags:
+      suite: naming
+      mode: no-skill
+    prompt: |
+      Analysis, intake and grounding are complete for a documentation-only request in
+      specification/widget/resource-manager/Microsoft.Widget: add "Whether the widget is
+      enabled." to the existing WidgetProperties.enabled. Names and types must remain
+      unchanged. The SDK targets are unknown and SDK naming was not requested. Return only
+      JSON "sdkLanguageRequired" and "namingChangesPlanned". Do not edit, fetch docs, invoke
+      MCP, compile or generate.
+    constraints: *a1
+    graders:
+      - type: tool-calls
+        config:
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - *a3
+      - *a4

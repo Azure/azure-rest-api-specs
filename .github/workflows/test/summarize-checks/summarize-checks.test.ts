@@ -14,6 +14,7 @@ import {
 } from "../../src/summarize-checks/summarize-checks.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
 import { fullGitSha } from "../../../shared/test/examples.ts";
+import { ImpactAssessmentSchema } from "../../src/summarize-checks/labelling.ts";
 
 export type CheckRunData = import("../../src/summarize-checks/summarize-checks.ts").CheckRunData;
 
@@ -36,6 +37,7 @@ describe("ARM review label handoff", () => {
           state: "open",
           draft: false,
           head: { sha: fullGitSha },
+          base: { ref: "main" },
           labels: existingLabels.map((name) => ({ name })),
         },
       });
@@ -90,7 +92,6 @@ describe("ARM review label handoff", () => {
             123,
             fullGitSha,
             "workflow_run",
-            "main",
             WORKFLOW_URL,
           ),
       };
@@ -190,8 +191,8 @@ describe("ARM review label handoff", () => {
     it("revokes automatic approval and updates the merge gate without a label-event round trip", async () => {
       const { github, core, run } = createSummary([
         "ARMReview",
-        "ARMSignedOff",
         "ARMAutoSignedOff",
+        "ARMSignedOff",
         "ARMInitialReviewRequested",
         "PublishToCustomers",
       ]);
@@ -204,6 +205,10 @@ describe("ARM review label handoff", () => {
       expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
         expect.objectContaining({ name: "ARMAutoSignedOff" }),
       );
+      expect(github.rest.issues.removeLabel).toHaveBeenNthCalledWith(
+        1,
+        expect.objectContaining({ name: "ARMSignedOff" }),
+      );
       expect(github.rest.issues.addLabels.mock.calls[0][0]).toHaveProperty(
         "labels",
         expect.arrayContaining(["WaitForARMFeedback"]),
@@ -215,6 +220,23 @@ describe("ARM review label handoff", () => {
         }),
       );
       expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", false);
+    });
+
+    it("keeps ownership markers if removing an automatic approval fails", async () => {
+      const { github, run } = createSummary([
+        "ARMReview",
+        "ARMAutoSignedOff",
+        "ARMSignedOff",
+        "ARMInitialReviewRequested",
+      ]);
+      github.rest.issues.removeLabel.mockRejectedValueOnce(new Error("Remove failed"));
+
+      await expect(run()).rejects.toThrow("Remove failed");
+
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledExactlyOnceWith(
+        expect.objectContaining({ name: "ARMSignedOff" }),
+      );
+      expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
     });
 
     it("withholds all writes when current-head evidence cannot be loaded", async () => {
@@ -248,7 +270,7 @@ describe("ARM review label handoff", () => {
       },
     );
 
-    it("does not dispatch when adding the queue label fails", async () => {
+    it("does not signal readiness when adding the queue label fails", async () => {
       const { github, core, run } = createSummary();
       github.rest.issues.addLabels.mockRejectedValue(new Error("Label write failed"));
 
@@ -261,6 +283,7 @@ describe("ARM review label handoff", () => {
       { state: "closed" },
       { head: { sha: "a".repeat(40) } },
       { draft: true },
+      { base: { ref: "feature/retargeted" } },
       { labels: [{ name: "ARMReview" }, { name: "ARMManualSignoffRequired" }] },
     ])("does not apply labels when the PR changes during evaluation: %j", async (change) => {
       const { github, core, run } = createSummary();
@@ -270,6 +293,7 @@ describe("ARM review label handoff", () => {
             state: "open",
             draft: false,
             head: { sha: fullGitSha },
+            base: { ref: "main" },
             labels: [{ name: "ARMReview" }],
           },
         })
@@ -278,6 +302,7 @@ describe("ARM review label handoff", () => {
             state: "open",
             draft: false,
             head: { sha: fullGitSha },
+            base: { ref: "main" },
             labels: [{ name: "ARMReview" }],
             ...change,
           },
@@ -288,6 +313,32 @@ describe("ARM review label handoff", () => {
       expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
       expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
       expect(core.setOutput).not.toHaveBeenCalledWith("arm_review_ready", true);
+    });
+
+    it("uses live PR state instead of the draft and branch snapshot in a legacy artifact", async () => {
+      const { github, core, run } = createSummary();
+      github.rest.pulls.get.mockResolvedValue({
+        data: {
+          state: "open",
+          head: { sha: fullGitSha },
+          base: { ref: "feature/example" },
+          draft: true,
+          labels: [{ name: "ARMReview" }],
+        },
+      });
+
+      await run();
+
+      expect(github.rest.issues.addLabels.mock.calls[0]?.[0]).not.toHaveProperty(
+        "labels",
+        expect.arrayContaining(["WaitForARMFeedback"]),
+      );
+      expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", false);
+      expect(github.rest.repos.getBranchRules).toHaveBeenCalledWith(
+        expect.objectContaining({ branch: "feature/example" }),
+      );
+      expect(github.rest.pulls.get).toHaveBeenCalledTimes(2);
+      expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
     });
   });
 });
@@ -361,12 +412,15 @@ describe("Summarize Checks Integration Tests", () => {
           owner,
           repo,
           head_sha,
-          issue_number,
+          pr.base.ref,
           [],
         );
 
         let adjustedStartLabels = expectedLabels.filter((x) => ignorableLabels.includes(x));
-        const labelContext = updateLabels(adjustedStartLabels, impactAssessment);
+        const labelContext = updateLabels(adjustedStartLabels, impactAssessment, {
+          isDraft: pr.draft ?? false,
+          targetBranch: pr.base.ref,
+        });
 
         adjustedStartLabels = adjustedStartLabels.filter(
           (name) => !labelContext.toRemove.has(name),
@@ -1231,6 +1285,48 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
+    it("should prioritize ARM modeling review guidance in Next Steps to Merge", () => {
+      const [comment] = createNextStepsComment(
+        mockCore,
+        "azure-rest-api-specs-pr",
+        ["ARMReview", "NotReadyForARMReview", "ARMModelingReviewRequired"],
+        "RPSaaSMaster",
+        [],
+        [],
+        true,
+        WORKFLOW_URL,
+      );
+
+      const modelingReviewIndex = comment.indexOf(
+        "This PR has <code>ARMModelingReviewRequired</code>",
+      );
+      const notReadyReviewIndex = comment.indexOf("This PR is not ready for ARM review");
+      expect(modelingReviewIndex).toBeGreaterThan(-1);
+      expect(modelingReviewIndex).toBeLessThan(notReadyReviewIndex);
+      expect(comment).toContain(
+        `<li><b>Required Doc:</b> Please use the <a href="https://aka.ms/rpagent">RP Agent</a> and run the ` +
+          `<code>/model-rp-contract</code> skill.`,
+      );
+      expect(comment).toContain(
+        "<b>an HTML review package with open questions. For Office Hours:</b> bring the HTML review package, " +
+          "and we'll use the open questions as the basis for discussion so we can focus on design decisions and " +
+          "gaps instead of starting from scratch.",
+      );
+      expect(comment).toContain(
+        "Please join the ARM API Modeling Review Office Hours - a drop-in, first-come, first-served " +
+          "session (no booking required):",
+      );
+      expect(comment).toContain(
+        "<li><b>When:</b> Every Tuesday and Thursday, 9:30\u201310:30 AM PST</li>",
+      );
+      expect(comment).toContain(`<a href="https://aka.ms/apimodelingreview">Join via Teams</a>`);
+      expect(comment).toContain("<code>/rp-agent-feedback</code>");
+      expect(comment).toContain(`<a href="https://aka.ms/rpagent/feedback">RP Agent Feedback</a>`);
+      expect(comment).toContain(
+        `<a href="https://armwiki.azurewebsites.net/rp_onboarding/process/api_review.html#arm-api-modeling-review-office-hours">API Review Workflow | ARM Wiki</a>`,
+      );
+    });
+
     it("Should generate error summary for a PR scenario with labeling issues", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
@@ -1531,7 +1627,7 @@ describe("Summarize Checks Unit Tests", () => {
     const unzipExists = await execFile("unzip")
       .then(() => true)
       .catch(() => false);
-    const impactAssessment: import("../../src/summarize-checks/labelling.ts").ImpactAssessment = {
+    const legacyImpactAssessment = {
       resourceManagerRequired: false,
       dataPlaneRequired: true,
       suppressionReviewRequired: false,
@@ -1544,6 +1640,7 @@ describe("Summarize Checks Unit Tests", () => {
       isDraft: false,
       targetBranch: "test-\u00e9-\u65e5\u672c",
     };
+    const impactAssessment = ImpactAssessmentSchema.parse(legacyImpactAssessment);
     const summaryJson = JSON.stringify(impactAssessment);
 
     function mockArtifactDownload(
@@ -1581,6 +1678,7 @@ describe("Summarize Checks Unit Tests", () => {
         name: "summary.json",
         per_page: 100,
       });
+
       expect(github.rest.actions.downloadArtifact).toHaveBeenCalledExactlyOnceWith({
         owner: "test-owner",
         repo: "test-repo",
@@ -1588,6 +1686,28 @@ describe("Summarize Checks Unit Tests", () => {
         archive_format: "zip",
         request: { parseSuccessResponseBody: false },
       });
+    });
+
+    it("normalizes artifacts produced before the service-scoped schema", async () => {
+      const github = mockArtifactDownload(JSON.stringify(legacyImpactAssessment));
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
+    });
+
+    it("reads cached service-scoped artifacts without affected-README metadata", async () => {
+      const github = mockArtifactDownload(
+        JSON.stringify({
+          ...impactAssessment,
+          services: impactAssessment.services.map((service) => ({
+            ...service,
+            hasAffectedReadme: undefined,
+          })),
+        }),
+      );
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
     });
 
     it.each(["application/json", "text/plain", "application/octet-stream"])(

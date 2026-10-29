@@ -28,7 +28,6 @@ export async function reconcileReviewedPr({ github, context, core }: GitHubScrip
     issueNumber,
     headSha,
     context.eventName,
-    undefined,
     `${context.serverUrl}/${owner}/${repo}/actions/runs/${context.runId}`,
   );
 }

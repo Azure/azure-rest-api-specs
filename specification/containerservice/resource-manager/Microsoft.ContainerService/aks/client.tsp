@@ -60,7 +60,85 @@ using Microsoft.ContainerService;
 
 @@clientName(Microsoft.ContainerService.IPFamily, "IpFamily", "javascript");
 
+// These payload models do not inherit the .NET ARM resource client base class.
+@@clientName(
+  UpgradeInsightImpactedResource,
+  "UpgradeInsightImpactedResourceInfo",
+  "csharp"
+);
+@@clientName(
+  ArmImpactedResource,
+  "UpgradeInsightArmImpactedResourceInfo",
+  "csharp"
+);
+@@clientName(
+  KubernetesImpactedResource,
+  "UpgradeInsightKubernetesImpactedResourceInfo",
+  "csharp"
+);
+
 // .NET SDK acronym casing.
+@@clientName(
+  ClusterAPIConnectivityProfile,
+  "ClusterApiConnectivityProfile",
+  "csharp"
+);
+@@clientName(
+  ContainerServiceNetworkProfile.clusterAPIConnectivityProfile,
+  "clusterApiConnectivityProfile",
+  "csharp"
+);
+@@clientName(ResourceSkuCosts.meterID, "meterId", "csharp");
+@@clientName(
+  ManagedClusterStorageProfileDiskCSIDriverQuickAttachDetach,
+  "ManagedClusterStorageProfileDiskCsiDriverQuickAttachDetach",
+  "csharp"
+);
+@@clientName(BootstrapKubeletConfig.clusterFQDN, "clusterFqdn", "csharp");
+@@clientName(
+  UpgradeIssueType.APIBreakingChange,
+  exact("ApiBreakingChange"),
+  "csharp"
+);
+@@clientName(
+  ManagedClusterAgentSandboxProfile.enabled,
+  "IsAgentSandboxProfileEnabled",
+  "csharp"
+);
+@@clientName(
+  ManagedClusterPodSnapshotProfile.enabled,
+  "IsPodSnapshotProfileEnabled",
+  "csharp"
+);
+@@alternateType(
+  ResourceSkuLocationInfo.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@clientName(UpgradeContext, "ContainerServiceUpgradeContext", "csharp");
+@@clientName(
+  UpgradeIssueSeverity,
+  "ContainerServiceUpgradeIssueSeverity",
+  "csharp"
+);
+@@clientName(UpgradeIssueType, "ContainerServiceUpgradeIssueType", "csharp");
+@@clientName(
+  DetectedUpgradeIssue,
+  "ContainerServiceDetectedUpgradeIssue",
+  "csharp"
+);
+@@clientName(NodeDisruptionPolicy, "AgentPoolNodeDisruptionPolicy", "csharp");
+@@clientName(SeccompDefault, "ContainerServiceSeccompDefault", "csharp");
+@@clientName(PodLinkLocalAccess, "AgentPoolPodLinkLocalAccess", "csharp");
+@@clientName(NvidiaDriverMode, "AgentPoolNvidiaDriverMode", "csharp");
+@@clientName(GuardrailsSupport, "ContainerServiceGuardrailsSupport", "csharp");
+@@clientName(SafeguardsSupport, "ContainerServiceSafeguardsSupport", "csharp");
+@@clientName(
+  ScopeEvaluationResult,
+  "UpgradeInsightScopeEvaluationResult",
+  "csharp"
+);
+@@clientName(NodeImageVersion, "ContainerServiceNodeImageVersion", "csharp");
 @@clientName(
   ManagedClusterNATGatewaySku,
   "ManagedClusterNatGatewaySku",
@@ -87,6 +165,16 @@ using Microsoft.ContainerService;
 @@clientName(
   ManagedClusterHTTPProxyConfig,
   "ManagedClusterHttpProxyConfig",
+  "java"
+);
+@@clientName(
+  ClusterAPIConnectivityProfile,
+  "ClusterApiConnectivityProfile",
+  "java"
+);
+@@clientName(
+  ContainerServiceNetworkProfile.clusterAPIConnectivityProfile,
+  "clusterApiConnectivityProfile",
   "java"
 );
 @@clientName(ManagedClusterIngressProfile.gatewayAPI, "gatewayApi", "java");
@@ -1281,7 +1369,7 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(ManagementMode, "GpuManagementMode", "csharp");
-@@clientName(MigStrategy, "MultiInstanceGpuStrategy", "csharp");
+@@clientName(MigStrategy, "AgentPoolMultiInstanceGpuStrategy", "csharp");
 @@clientName(ResourceSku, "ContainerServiceVmSku", "csharp");
 @@clientName(
   ResourceSkuCapabilities,
@@ -1665,7 +1753,11 @@ namespace Azure.ResourceManager.Models {
 );
 // Resource models: drop redundant "Resource" suffix / add service prefix so the
 // generated {Name}Resource/{Name}Data/{Name}Collection follow ARM conventions.
-@@clientName(MaintenanceWindowResource, "MaintenanceWindow", "csharp");
+@@clientName(
+  MaintenanceWindowResource,
+  "ContainerServiceManagedMaintenanceWindow",
+  "csharp"
+);
 @@clientName(
   GuardrailsAvailableVersion,
   "ContainerServiceGuardrailsAvailableVersion",
