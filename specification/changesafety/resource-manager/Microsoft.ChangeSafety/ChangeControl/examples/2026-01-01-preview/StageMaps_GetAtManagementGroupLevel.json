@@ -1,0 +1,30 @@
+{
+  "title": "StageMaps_GetAtManagementGroupLevel",
+  "operationId": "StageMaps_GetAtManagementGroupLevel",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "managementGroupName": "example-mg",
+    "stageMapName": "exampleStageMap"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/example-mg/providers/Microsoft.ChangeSafety/stageMaps/exampleStageMap",
+        "name": "exampleStageMap",
+        "type": "Microsoft.ChangeSafety/stageMaps",
+        "properties": {
+          "stages": [
+            {
+              "name": "initialStage",
+              "sequence": 1
+            },
+            {
+              "name": "finalStage",
+              "sequence": 2
+            }
+          ]
+        }
+      }
+    }
+  }
+}

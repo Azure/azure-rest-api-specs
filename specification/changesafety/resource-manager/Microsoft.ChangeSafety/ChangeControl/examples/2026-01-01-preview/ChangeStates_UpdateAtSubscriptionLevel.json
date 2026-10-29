@@ -1,0 +1,124 @@
+{
+  "title": "ChangeStates_UpdateAtSubscriptionLevel",
+  "operationId": "ChangeStates_UpdateAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeStateName": "subscriptionMonitoringChangeState",
+    "properties": {
+      "properties": {
+        "comments": "Subscription monitoring platform deployment progressing with telemetry validation and alerting configuration.",
+        "links": [
+          {
+            "name": "workTrackingItem",
+            "uri": "https://dev.azure.com/contoso/DatabaseProject/_workitems/edit/12373",
+            "description": "Work item for database update deployment with schema migration"
+          },
+          {
+            "name": "approvalRequest",
+            "uri": "https://approval.contoso.com/requests/67916",
+            "description": "Database update deployment approval with DBA review"
+          },
+          {
+            "name": "supportIncident",
+            "uri": "https://support.contoso.com/incidents/INC001260",
+            "description": "Support incident for database update coordination"
+          }
+        ],
+        "additionalData": {
+          "telemetryEnabled": true,
+          "alertingConfigured": true,
+          "dashboardsDeployed": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "InProgress",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "description": "Subscription monitoring platform deployment across subscription with telemetry collection and alerting capabilities. This deployment includes monitoring infrastructure, dashboards, alerting rules, and performance analytics for enterprise-scale observability.",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/subscriptionMonitoringStageMap"
+          },
+          "status": "InProgress",
+          "comments": "Subscription monitoring platform deployment progressing with telemetry validation and alerting configuration.",
+          "changeDefinition": {
+            "name": "subscriptionMonitoringDeployment",
+            "kind": "ApiOperation",
+            "details": {
+              "operations": [
+                {
+                  "httpMethod": "PUT",
+                  "uri": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.Insights/components/mycomponent?api-version=2023-01-01",
+                  "body": {
+                    "properties": {
+                      "Application_Type": "web",
+                      "Flow_Type": "Bluefield",
+                      "Request_Source": "rest"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "releaseLabel": "Release-3.1.5-Monitoring",
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T11:30:17.815Z",
+          "orchestrationTool": "Azure Monitor",
+          "links": [
+            {
+              "name": "workTrackingItem",
+              "uri": "https://dev.azure.com/contoso/DatabaseProject/_workitems/edit/12373",
+              "description": "Work item for database update deployment with schema migration"
+            },
+            {
+              "name": "approvalRequest",
+              "uri": "https://approval.contoso.com/requests/67916",
+              "description": "Database update deployment approval with DBA review"
+            },
+            {
+              "name": "supportIncident",
+              "uri": "https://support.contoso.com/incidents/INC001260",
+              "description": "Support incident for database update coordination"
+            }
+          ],
+          "additionalData": {
+            "telemetryEnabled": true,
+            "alertingConfigured": true,
+            "dashboardsDeployed": true,
+            "performanceAnalytics": "enabled"
+          },
+          "stageMapSnapshot": [
+            {
+              "stageName": "telemetrySetup",
+              "status": "completed"
+            },
+            {
+              "stageName": "dashboardDeployment",
+              "status": "in-progress"
+            },
+            {
+              "stageName": "alertingConfiguration",
+              "status": "pending"
+            }
+          ]
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionMonitoringChangeState",
+        "name": "subscriptionMonitoringChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
+        "systemData": {
+          "createdBy": "monitoring@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "monitoring@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}
