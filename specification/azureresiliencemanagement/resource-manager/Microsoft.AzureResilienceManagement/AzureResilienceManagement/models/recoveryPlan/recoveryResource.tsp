@@ -115,7 +115,7 @@ model RecoveryResourceResiliencyProperties {
 model InfrastructureResiliencyResourceProperties extends RecoveryResourceResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
-  resiliencyType: ResiliencyType.InfraResiliency;
+  resiliencyType: ResiliencyType.InfrastructureResiliency;
 }
 
 @added(Versions.v2026_11_30_preview)
@@ -133,6 +133,74 @@ union RecoveryResourceInclusionEligibility {
 }
 
 @added(Versions.v2026_11_30_preview)
+@doc("A state type that indicates the protection status of a resource with an Azure solution for Backup.")
+union ResourceProtectionState {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The protection status of the resource is unknown.")
+  Unknown: "Unknown",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("A state indicating that the resource is protected by the recovery solution.")
+  Protected: "Protected",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("A state indicating that the resource is not protected by any recovery solution.")
+  NotProtected: "NotProtected",
+
+  string,
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Backup protection details for a protected item.")
+model ProtectedItemDetails {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifier of the backup vault protecting the item.")
+  @visibility(Lifecycle.Read)
+  vaultResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults";
+    },
+    {
+      type: "Microsoft.DataProtection/backupVaults";
+    }
+  ]>;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifier of the container for a non-Azure-resource child.")
+  @visibility(Lifecycle.Read)
+  containerResourceId?: armResourceIdentifier;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifier of the protected item in the backup vault.")
+  @visibility(Lifecycle.Read)
+  protectedItemId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems";
+    },
+    {
+      type: "Microsoft.DataProtection/backupVaults/backupInstances";
+    }
+  ]>;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The current backup protection state of the item.")
+  @visibility(Lifecycle.Read)
+  protectionState?: ResourceProtectionState;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The location of the protected resource.")
+  @visibility(Lifecycle.Read)
+  location?: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The locations that support recovery of the protected item.")
+  @visibility(Lifecycle.Read)
+  @minItems(0)
+  @maxItems(1)
+  recoveryLocations?: string[];
+}
+
+@added(Versions.v2026_11_30_preview)
 @doc("Cyber resiliency properties for a recovery resource.")
 model CyberResiliencyResourceProperties extends RecoveryResourceResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
@@ -145,33 +213,12 @@ model CyberResiliencyResourceProperties extends RecoveryResourceResiliencyProper
   workloadType?: WorkloadType;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The Azure resource identifiers of the backup vaults protecting the resource.")
+  @doc("The backup protection details for the protected items associated with this resource.")
   @visibility(Lifecycle.Read)
-  vaultResourceIds?: armResourceIdentifier<[
-    {
-      type: "Microsoft.RecoveryServices/vaults";
-    },
-    {
-      type: "Microsoft.DataProtection/backupVaults";
-    }
-  ]>[];
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The Azure resource identifiers of the target-tenant mapped backup vaults.")
-  @visibility(Lifecycle.Read)
-  mappedVaultResourceIds?: armResourceIdentifier<[
-    {
-      type: "Microsoft.RecoveryServices/vaults";
-    },
-    {
-      type: "Microsoft.DataProtection/backupVaults";
-    }
-  ]>[];
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The Azure resource identifier of the container for a non-Azure-resource child.")
-  @visibility(Lifecycle.Read)
-  containerResourceId?: armResourceIdentifier;
+  @identifiers(#["protectedItemId"])
+  @minItems(0)
+  @maxItems(5)
+  protectedItemDetails?: ProtectedItemDetails[];
 
   @added(Versions.v2026_11_30_preview)
   @doc("The service group member identifiers through which this resource was discovered.")
@@ -187,31 +234,9 @@ model CyberResiliencyResourceProperties extends RecoveryResourceResiliencyProper
   ]>;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The identifiers of the protected items in the backup vaults.")
-  @visibility(Lifecycle.Read)
-  protectedItemIds?: armResourceIdentifier<[
-    {
-      type: "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems";
-    },
-    {
-      type: "Microsoft.DataProtection/backupVaults/backupInstances";
-    }
-  ]>[];
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The current backup protection state.")
-  @visibility(Lifecycle.Read)
-  protectionState?: string;
-
-  @added(Versions.v2026_11_30_preview)
   @doc("The resource's eligibility for inclusion for the configured targets.")
   @visibility(Lifecycle.Read)
   inclusionEligibility?: RecoveryResourceInclusionEligibility;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The target locations that support recovery of this resource.")
-  @visibility(Lifecycle.Read)
-  supportedTargetLocations?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"

@@ -41,13 +41,10 @@
             "provisioningMode": "Existing",
             "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Storage/storageAccounts/cyberrecoverystorage"
           },
-          "restoreWithManagedDisks": true,
           "zones": [
             "1",
             "2"
           ],
-          "diskRestoreDefault": "Premium",
-          "recoveryPointTierPreference": "VaultStandard",
           "rehydrationDefault": {
             "rehydrationPriority": "Standard",
             "rehydrationDurationInHours": 12
@@ -55,9 +52,10 @@
         },
         "targetNamePrefix": "cr-",
         "recoveryType": "AlternateLocation",
-        "recoveryPointDefault": {
-          "type": "LatestRecoveryPoint",
-          "maxAgeHours": 24
+        "recoveryPointPolicy": {
+          "type": "Latest",
+          "startTime": "2026-09-27T04:00:00Z",
+          "endTime": "2026-09-28T04:00:00Z"
         },
         "infrastructurePreparation": [
           {

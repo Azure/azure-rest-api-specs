@@ -24,8 +24,12 @@ union WorkloadType {
   AzureVm: "AzureVm",
 
   @added(Versions.v2026_11_30_preview)
-  @doc("A SQL Server workload hosted in an Azure virtual machine.")
-  SqlInAzureVm: "SqlInAzureVm",
+  @doc("A SQL database workload hosted in an Azure virtual machine.")
+  SqlDatabaseInAzureVm: "SqlDatabaseInAzureVm",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("A SQL Server instance workload hosted in an Azure virtual machine.")
+  SqlServerInAzureVm: "SqlServerInAzureVm",
 
   @added(Versions.v2026_11_30_preview)
   @doc("An SAP HANA workload hosted in an Azure virtual machine.")
@@ -113,55 +117,15 @@ union TargetResourceType {
 union RecoveryPointPolicyType {
   @added(Versions.v2026_11_30_preview)
   @doc("Use the latest available recovery point.")
-  LatestRecoveryPoint: "LatestRecoveryPoint",
+  Latest: "Latest",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Use a random recovery point within the specified time bounds.")
+  Random: "Random",
 
   @added(Versions.v2026_11_30_preview)
   @doc("Use a recovery point for a specific point in time.")
   PointInTime: "PointInTime",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Use the most recent application-consistent recovery point.")
-  MostRecentApplicationConsistentRecoveryPoint: "MostRecentApplicationConsistentRecoveryPoint",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Use the most recent crash-consistent recovery point.")
-  MostRecentCrashConsistentRecoveryPoint: "MostRecentCrashConsistentRecoveryPoint",
-
-  string,
-}
-
-@added(Versions.v2026_11_30_preview)
-@doc("The disk restore performance mode.")
-union DiskRestoreMode {
-  @added(Versions.v2026_11_30_preview)
-  @doc("Use standard disk restore performance.")
-  Standard: "Standard",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Use ultra-high disk restore performance.")
-  UltraHigh: "UltraHigh",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Use premium disk restore performance.")
-  Premium: "Premium",
-
-  string,
-}
-
-@added(Versions.v2026_11_30_preview)
-@doc("The desired database recovery state.")
-union RecoveryState {
-  @added(Versions.v2026_11_30_preview)
-  @doc("Commit the recovered database.")
-  Committed: "Committed",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Leave the recovered database in standby.")
-  Standby: "Standby",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Do not recover the database.")
-  NoRecovery: "NoRecovery",
 
   string,
 }
@@ -182,6 +146,24 @@ union ExistingTargetBehavior {
   Fail: "Fail",
 
   string,
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("The behavior when a database restore target already exists.")
+union OverwriteOptions {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The overwrite option is invalid or unspecified.")
+  Invalid: 0,
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Fail the restore when the target conflicts with an existing resource.")
+  FailOnConflict: 1,
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Overwrite the existing restore target.")
+  Overwrite: 2,
+
+  int32,
 }
 
 @added(Versions.v2026_11_30_preview)
@@ -209,26 +191,6 @@ union RehydrationPriority {
 }
 
 @added(Versions.v2026_11_30_preview)
-@doc("The binding state of a resolved target resource.")
-union BindingState {
-  @added(Versions.v2026_11_30_preview)
-  @doc("The target resource is bound.")
-  Bound: "Bound",
-
-  string,
-}
-
-@added(Versions.v2026_11_30_preview)
-@doc("The conformance state of a resolved target resource.")
-union ConformanceState {
-  @added(Versions.v2026_11_30_preview)
-  @doc("Target conformance has not been checked.")
-  NotChecked: "NotChecked",
-
-  string,
-}
-
-@added(Versions.v2026_11_30_preview)
 @doc("The subscription and location targeted by a recovery configuration profile.")
 model TargetScope {
   @added(Versions.v2026_11_30_preview)
@@ -248,13 +210,16 @@ model RecoveryPointPolicy {
   type: RecoveryPointPolicyType;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The requested recovery point time when the policy is PointInTime.")
-  pointInTime?: utcDateTime;
+  @doc("The inclusive lower time bound. Required when type is Random and optional when type is Latest.")
+  startTime?: utcDateTime;
 
   @added(Versions.v2026_11_30_preview)
-  @minValue(0)
-  @doc("The maximum acceptable recovery point age, in hours.")
-  maxAgeHours?: int32;
+  @doc("The inclusive upper time bound. Required when type is Random and optional when type is Latest.")
+  endTime?: utcDateTime;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The requested recovery point time. Required when type is PointInTime.")
+  pointInTime?: utcDateTime;
 }
 
 @added(Versions.v2026_11_30_preview)
@@ -311,19 +276,6 @@ model RecoveryPointRehydrationInfo {
 }
 
 @added(Versions.v2026_11_30_preview)
-@doc("Default snapshot restore settings.")
-model SnapshotRestoreDefault {
-  @added(Versions.v2026_11_30_preview)
-  @doc("The snapshot restore type.")
-  type?: string;
-
-  @added(Versions.v2026_11_30_preview)
-  @minValue(0)
-  @doc("The snapshot retention period, in days.")
-  retentionDays?: int32;
-}
-
-@added(Versions.v2026_11_30_preview)
 @discriminator("workloadType")
 @doc("Workload-specific recovery configuration.")
 model WorkloadConfig {
@@ -364,20 +316,8 @@ model VmRecoveryConfig extends WorkloadConfig {
   identity?: RestoreIdentity;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("Indicates whether restored disks are managed disks.")
-  restoreWithManagedDisks?: boolean;
-
-  @added(Versions.v2026_11_30_preview)
   @doc("The target availability zones.")
   zones?: string[];
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The default disk restore mode.")
-  diskRestoreDefault?: DiskRestoreMode;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The preferred recovery point tier.")
-  recoveryPointTierPreference?: string;
 
   @added(Versions.v2026_11_30_preview)
   @doc("Default recovery point rehydration settings.")
@@ -387,54 +327,121 @@ model VmRecoveryConfig extends WorkloadConfig {
 @added(Versions.v2026_11_30_preview)
 @doc("Shared recovery configuration fields for database workloads.")
 model DatabaseRecoveryConfig extends WorkloadConfig {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Preserves the Dictionary<string, string> contract of DatabaseRecoveryConfig.targetDirectoryMapping, whose keys identify recovery point types."
   @added(Versions.v2026_11_30_preview)
-  @doc("The target resource group.")
-  resourceGroup: TargetResourceSpec;
+  @doc("The target folder mappings for full, differential, log, and incremental recovery points.")
+  targetDirectoryMapping?: Record<string>;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The target database host virtual machine.")
-  targetHostVm: TargetResourceSpec;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The identity of the target host virtual machine.")
-  hostVmIdentity?: RestoreIdentity;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The database recovery mode.")
-  recoveryMode?: string;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Indicates whether an alternate target location is used.")
-  shouldUseAlternateTargetLocation?: boolean;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The default database recovery state.")
-  recoveryStateDefault?: RecoveryState;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The behavior when a database target already exists.")
-  overwriteOption?: ExistingTargetBehavior;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The target directory for file restore.")
+  @doc("The target directory location for restoring a database as files.")
   targetDirectoryForFileRestore?: string;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("Default snapshot restore settings.")
-  snapshotRestoreDefault?: SnapshotRestoreDefault;
+  @doc("The Azure resource identifier of the target virtual machine.")
+  targetVirtualMachineId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    }
+  ]>;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("Default recovery point rehydration settings.")
-  rehydrationDefault?: RecoveryPointRehydrationInfo;
+  @doc("The Azure resource identifier of the target vault.")
+  targetVaultId?: armResourceIdentifier;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The behavior when the restore target already exists.")
+  overwriteOption?: OverwriteOptions;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The target database instance name.")
+  instanceName?: string;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("A mapping from a SQL restore source directory to a target directory.")
+model SqlDataDirectoryMapping {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The directory mapping type.")
+  mappingType: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The source logical name.")
+  sourceLogicalName?: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The source directory path.")
+  sourcePath?: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The target directory path.")
+  targetPath?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance intentionally emits shared database recovery fields through allOf; WorkloadConfig defines the workloadType discriminator."
 @added(Versions.v2026_11_30_preview)
-@doc("Recovery configuration for a SQL Server workload.")
-model SqlInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
+@doc("Recovery configuration for a SQL database in an Azure virtual machine.")
+model SqlDatabaseInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
   @added(Versions.v2026_11_30_preview)
   @doc("The workload type represented by this configuration.")
-  workloadType: WorkloadType.SqlInAzureVm;
+  workloadType: WorkloadType.SqlDatabaseInAzureVm;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Indicates whether the database is left in the NORECOVERY state after restore.")
+  isNonRecoverable?: boolean;
+
+  @added(Versions.v2026_11_30_preview)
+  @identifiers(#[])
+  @doc("The alternate data directory mappings.")
+  alternateDirectoryPaths?: SqlDataDirectoryMapping[];
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Client and principal identifiers of a user-assigned managed identity.")
+model UserAssignedIdentityProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The client identifier of the identity.")
+  clientId?: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The principal identifier of the identity.")
+  principalId?: string;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Details of a user-assigned managed identity used for restore.")
+model UserAssignedManagedIdentityDetails {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifier of the identity.")
+  identityArmId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The identity name.")
+  identityName?: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The client and principal identifiers of the identity.")
+  userAssignedIdentityProperties?: UserAssignedIdentityProperties;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance intentionally emits shared database recovery fields through allOf; WorkloadConfig defines the workloadType discriminator."
+@added(Versions.v2026_11_30_preview)
+@doc("Recovery configuration for a SQL Server instance in an Azure virtual machine.")
+model SqlServerInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The workload type represented by this configuration.")
+  workloadType: WorkloadType.SqlServerInAzureVm;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The user-assigned managed identity details used for restore.")
+  userAssignedManagedIdentityDetails?: UserAssignedManagedIdentityDetails;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Indicates whether the restored SQL Server databases are left in the NORECOVERY state.")
+  isNonRecoverable?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance intentionally emits shared database recovery fields through allOf; WorkloadConfig defines the workloadType discriminator."
@@ -476,6 +483,10 @@ model FileShareRecoveryConfig extends WorkloadConfig {
   storageAccount: TargetResourceSpec;
 
   @added(Versions.v2026_11_30_preview)
+  @doc("The destination folder path in the target file share.")
+  targetFolderPath?: string;
+
+  @added(Versions.v2026_11_30_preview)
   @doc("The identity used for restore.")
   identity?: RestoreIdentity;
 
@@ -495,56 +506,6 @@ model EffectiveConfiguration {
   @visibility(Lifecycle.Read)
   @doc("The effective workload configuration.")
   workloadConfig: WorkloadConfig;
-
-  @added(Versions.v2026_11_30_preview)
-  @visibility(Lifecycle.Read)
-  @identifiers(#["role"])
-  @doc("The resolved target resources.")
-  resolvedTargets: ResolvedTargetResource[];
-}
-
-@added(Versions.v2026_11_30_preview)
-@doc("A target resource resolved for effective recovery configuration.")
-model ResolvedTargetResource {
-  @added(Versions.v2026_11_30_preview)
-  @doc("The semantic role of the target.")
-  role: string;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The full Azure resource type of the target. The service validates that the resource type is supported for the target role.")
-  armResourceType: TargetResourceType;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("How the target is provisioned.")
-  provisioningMode: TargetProvisioningMode;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The Azure resource identifier resolved for the target.")
-  resolvedResourceId: armResourceIdentifier;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The target binding state.")
-  bindingState: BindingState;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The target conformance result.")
-  conformance: ConformanceResult;
-}
-
-@added(Versions.v2026_11_30_preview)
-@doc("The result of checking target resource conformance.")
-model ConformanceResult {
-  @added(Versions.v2026_11_30_preview)
-  @doc("The target conformance state.")
-  state: ConformanceState;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The UTC time when conformance was checked.")
-  checkedAt: utcDateTime;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Details of errors found while checking target resource conformance.")
-  errors?: CommonTypes.ErrorDetail[];
 }
 
 @added(Versions.v2026_11_30_preview)
@@ -573,7 +534,7 @@ model RecoveryConfigProfileProperties {
 
   @added(Versions.v2026_11_30_preview)
   @doc("Default recovery point selection.")
-  recoveryPointDefault?: RecoveryPointPolicy;
+  recoveryPointPolicy?: RecoveryPointPolicy;
 
   @added(Versions.v2026_11_30_preview)
   @identifiers(#[])
@@ -612,4 +573,42 @@ model RecoveryConfigProfile is ProxyResource<RecoveryConfigProfileProperties> {
   @segment("recoveryConfigProfiles")
   @path
   name: string;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("The writable properties of a recovery configuration profile that can be updated.")
+model RecoveryConfigProfilePatchProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The subscription and location targeted by this profile.")
+  targetScope?: TargetScope;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The workload-specific recovery configuration.")
+  workloadConfig?: WorkloadConfig;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The prefix used when naming recovery targets.")
+  targetNamePrefix?: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The recovery location behavior.")
+  recoveryType?: RecoveryType;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Default recovery point selection.")
+  recoveryPointPolicy?: RecoveryPointPolicy;
+
+  @added(Versions.v2026_11_30_preview)
+  @identifiers(#[])
+  @maxItems(10)
+  @doc("Infrastructure actions run before restoring resources that use this recovery configuration profile.")
+  infrastructurePreparation?: RecoveryGroupBaseAction[];
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("The request body for partially updating a recovery configuration profile.")
+model RecoveryConfigProfilePatch {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The profile properties to update. Omitted properties remain unchanged.")
+  properties?: RecoveryConfigProfilePatchProperties;
 }

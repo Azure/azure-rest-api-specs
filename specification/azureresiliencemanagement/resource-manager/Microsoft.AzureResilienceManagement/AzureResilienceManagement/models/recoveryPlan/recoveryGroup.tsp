@@ -121,7 +121,7 @@ model RecoveryGroupResiliencyProperties {
 model InfrastructureResiliencyGroupProperties extends RecoveryGroupResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
-  resiliencyType: ResiliencyType.InfraResiliency;
+  resiliencyType: ResiliencyType.InfrastructureResiliency;
 }
 
 @added(Versions.v2026_11_30_preview)
@@ -133,6 +133,8 @@ model CyberResiliencyGroupProperties extends RecoveryGroupResiliencyProperties {
 
   @added(Versions.v2026_11_30_preview)
   @identifiers(#["workloadType"])
+  @minItems(0)
+  @maxItems(1)
   @doc("Recovery configuration profiles associated by workload type.")
   recoveryConfigProfileAssociations?: RecoveryConfigProfileAssociation[];
 }

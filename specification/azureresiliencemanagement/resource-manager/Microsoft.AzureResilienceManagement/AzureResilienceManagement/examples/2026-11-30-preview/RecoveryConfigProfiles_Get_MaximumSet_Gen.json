@@ -45,9 +45,10 @@
           },
           "targetNamePrefix": "cr-",
           "recoveryType": "AlternateLocation",
-          "recoveryPointDefault": {
-            "type": "LatestRecoveryPoint",
-            "maxAgeHours": 24
+          "recoveryPointPolicy": {
+            "type": "Latest",
+            "startTime": "2026-09-27T04:00:00Z",
+            "endTime": "2026-09-28T04:00:00Z"
           },
           "infrastructurePreparation": [
             {
@@ -92,21 +93,7 @@
                 "provisioningMode": "Existing",
                 "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Storage/storageAccounts/cyberrecoverystorage"
               }
-            },
-            "resolvedTargets": [
-              {
-                "role": "targetVirtualNetwork",
-                "armResourceType": "Microsoft.Network/virtualNetworks",
-                "provisioningMode": "Existing",
-                "resolvedResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet",
-                "bindingState": "Bound",
-                "conformance": {
-                  "state": "NotChecked",
-                  "checkedAt": "2026-09-28T04:00:00Z",
-                  "errors": []
-                }
-              }
-            ]
+            }
           }
         },
         "id": "/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/recoveryPlans/cyber-plan/recoveryConfigProfiles/azure-vm-default",

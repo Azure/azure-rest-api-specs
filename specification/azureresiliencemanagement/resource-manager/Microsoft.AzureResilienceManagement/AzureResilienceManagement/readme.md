@@ -141,11 +141,8 @@ suppressions:
     from: preview/2026-11-30-preview/openapi.json
     where: $.definitions["Azure.Core.uuid"].format
     reason: >-
-      Used only for TargetScope.subscriptionId, TargetEnvironment.targetSubscriptionIds,
-      RecoveryResourceInclusionRule.subscriptionIds,
-      LinkedRecoveryPlanDetails.linkedSourceRecoveryPlanTenantId, and
-      MappedRecoveryPlanDetails.mappedSourceTenantIds. These are Azure subscription
-      identifiers and Microsoft Entra tenant identifiers, which are GUIDs.
+      Used only for TargetScope.subscriptionId and TargetEnvironment.targetSubscriptionIds.
+      These are Azure subscription identifiers, which are GUIDs.
       Requested by @umpatel in https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716799,
       https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716959,
       https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716968,

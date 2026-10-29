@@ -146,6 +146,15 @@ interface RecoveryConfigProfiles {
 
   @added(Versions.v2026_11_30_preview)
   @route(ServiceGroupRoute)
+  @doc("Updates a recovery configuration profile. Properties omitted from the request remain unchanged.")
+  update is ArmCustomPatchAsync<
+    RecoveryConfigProfile,
+    RecoveryConfigProfilePatch,
+    ServiceGroupParameters
+  >;
+
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
   @doc("Lists recovery configuration profiles under a recovery plan.")
   list is ArmResourceListByParent<
     RecoveryConfigProfile,
@@ -390,52 +399,6 @@ interface RecoveryPlanActionsOld {
 @doc("Actions for managing Recovery Orchestration Plans.")
 @added(Versions.v2026_09_30_preview)
 interface RecoveryPlanActions {
-  @added(Versions.v2026_11_30_preview)
-  @route(ServiceGroupRoute)
-  @post
-  @doc("Synchronizes recovery resources for a cyber recovery plan.")
-  syncRecoveryResources is ArmResourceActionAsync<
-    RecoveryPlan,
-    void,
-    RecoveryPlanActionBaseResponse,
-    ServiceGroupAndRequestHeadersParameters
-  >;
-
-  @added(Versions.v2026_11_30_preview)
-  @route(ServiceGroupRoute)
-  @post
-  @doc("Creates the target infrastructure selected for a cyber recovery plan.")
-  createInfrastructure is ArmResourceActionAsync<
-    RecoveryPlan,
-    ResourceSelectionProperties,
-    RecoveryPlanActionBaseResponse,
-    ServiceGroupAndRequestHeadersParameters
-  >;
-
-  @added(Versions.v2026_11_30_preview)
-  @route(ServiceGroupRoute)
-  @post
-  @doc("Restores selected resources for a cyber recovery plan.")
-  restore is ArmResourceActionAsync<
-    RecoveryPlan,
-    RecoveryPlanRestoreContent,
-    RecoveryPlanActionBaseResponse,
-    ServiceGroupAndRequestHeadersParameters,
-    OptionalRequestBody = true
-  >;
-
-  @added(Versions.v2026_11_30_preview)
-  @route(ServiceGroupRoute)
-  @post
-  @doc("Validates whether selected resources can be restored.")
-  validateForRestore is ArmResourceActionAsync<
-    RecoveryPlan,
-    RecoveryPlanRestoreContent,
-    RecoveryPlanActionBaseResponse,
-    ServiceGroupAndRequestHeadersParameters,
-    OptionalRequestBody = true
-  >;
-
   @route(ServiceGroupRoute)
   @post
   @doc("This action finalizes the recovery orchestration plan, ensuring all necessary configurations are in place.")
