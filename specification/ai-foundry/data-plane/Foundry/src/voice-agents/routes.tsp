@@ -14,6 +14,13 @@ const VoiceAgentConversationRequiredPreviews = #{
   required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
 };
 
+const VoiceAgentBindingPreviews = #{
+  conditional_previews: #[
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    AgentDefinitionOptInKeys.voice_agents_v2_preview
+  ],
+};
+
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for consistency with VoiceAudioItemResponse."
 @doc("""
   Metadata for a conversation item's generated audio. For bring-your-own-storage (BYOS), the response includes
@@ -468,6 +475,136 @@ interface AgentEndpointConversations {
   >;
 }
 
+/**
+ * Status-less binding operations selected explicitly with Foundry-Features: VoiceAgents=V2Preview.
+ * The V1 preview operations remain available on the same routes with their original lifecycle contract.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "These header-versioned binding operations share the existing agent-contained routes."
+@tag("Agent Telephony")
+interface AgentTelephonyV2 {
+  /**
+   * Creates a binding using VoiceAgents=V2Preview and returns a status-less binding.
+   * VoiceAgents=V1Preview retains the original response with required status.
+   */
+  @summary("Create an agent telephony binding")
+  @operationId("AgentTelephony_createTelephonyBinding")
+  @post
+  @sharedRoute
+  @route("/agents/{agent_name}/telephony/bindings")
+  @extension("x-ms-foundry-meta", VoiceAgentBindingPreviews)
+  createTelephonyBinding is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v2_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      ...Azure.Core.RepeatabilityRequestHeaders;
+
+      /** The provider-specific binding to create. */
+      @body telephony_binding: CreateTelephonyBindingV2Request;
+    },
+    TelephonyBindingCreatedResponse<TelephonyBindingV2>
+  >;
+
+  /**
+   * Lists status-less bindings using VoiceAgents=V2Preview. The status query filter is not supported in V2.
+   * VoiceAgents=V1Preview retains required item status and the optional status query filter.
+   */
+  @summary("List agent telephony bindings")
+  @operationId("AgentTelephony_listTelephonyBindings")
+  @get
+  @list
+  @sharedRoute
+  @route("/agents/{agent_name}/telephony/bindings")
+  @extension("x-ms-foundry-meta", VoiceAgentBindingPreviews)
+  listTelephonyBindings is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v2_preview,
+    {
+      /** The name of the voice agent whose bindings are listed. */
+      @path agent_name: string;
+
+      /** Filters bindings by provider. */
+      @query provider?: TelephonyProvider;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<TelephonyBindingV2ListItem>
+  >;
+
+  /**
+   * Retrieves a status-less binding using VoiceAgents=V2Preview.
+   * VoiceAgents=V1Preview retains the original response with required status.
+   */
+  @summary("Get an agent telephony binding")
+  @operationId("AgentTelephony_getTelephonyBinding")
+  @get
+  @sharedRoute
+  @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentBindingPreviews)
+  getTelephonyBinding is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v2_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      /** The service-generated binding identifier. */
+      @path binding_id: TelephonyBindingId;
+    },
+    TelephonyBindingResponse<TelephonyBindingV2>
+  >;
+
+  /**
+   * Updates a binding using VoiceAgents=V2Preview. Status is not a supported PATCH input or response property.
+   * VoiceAgents=V1Preview retains its optional PATCH status and required response status.
+   */
+  @summary("Update an agent telephony binding")
+  @operationId("AgentTelephony_updateTelephonyBinding")
+  @patch
+  @sharedRoute
+  @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentBindingPreviews)
+  updateTelephonyBinding is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v2_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      /** The service-generated binding identifier. */
+      @path binding_id: TelephonyBindingId;
+
+      /** The content type for the JSON Merge Patch body. */
+      @header("Content-Type") contentType: "application/merge-patch+json";
+
+      ...TelephonyIfMatchHeader;
+
+      /** The binding properties to update, excluding lifecycle status. */
+      @body body: UpdateTelephonyBindingV2Request;
+    },
+    TelephonyBindingResponse<TelephonyBindingV2>
+  >;
+
+  /** Deletes a binding using VoiceAgents=V2Preview with the same entity-tag precondition as V1. */
+  @summary("Delete an agent telephony binding")
+  @operationId("AgentTelephony_deleteTelephonyBinding")
+  @delete
+  @sharedRoute
+  @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentBindingPreviews)
+  deleteTelephonyBinding is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v2_preview,
+    {
+      /** The name of the voice agent that owns the binding. */
+      @path agent_name: string;
+
+      /** The service-generated binding identifier. */
+      @path binding_id: TelephonyBindingId;
+
+      ...TelephonyIfMatchHeader;
+    },
+    NoContentResponse
+  >;
+}
+
 /** Time filters for listing durable inbound telephony calls. */
 alias TelephonyCallListTimeQueryParameters = {
   /** Includes calls that started at or after this Unix timestamp in seconds. */
@@ -483,8 +620,9 @@ interface AgentTelephony {
   /** Creates a telephony binding for the voice agent named in the path. */
   @summary("Create an agent telephony binding")
   @post
+  @sharedRoute
   @route("/agents/{agent_name}/telephony/bindings")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentBindingPreviews)
   createTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -503,8 +641,9 @@ interface AgentTelephony {
   @summary("List agent telephony bindings")
   @get
   @list
+  @sharedRoute
   @route("/agents/{agent_name}/telephony/bindings")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentBindingPreviews)
   listTelephonyBindings is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -514,6 +653,11 @@ interface AgentTelephony {
       /** Filters bindings by provider. */
       @query provider?: TelephonyProvider;
 
+      /** Filters bindings by lifecycle status. Supported only with VoiceAgents=V1Preview, not VoiceAgents=V2Preview. */
+      @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+      @query
+      status?: TelephonyBindingStatus;
+
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<TelephonyBindingListItem>
@@ -522,8 +666,9 @@ interface AgentTelephony {
   /** Retrieves a telephony binding owned by the voice agent named in the path. */
   @summary("Get an agent telephony binding")
   @get
+  @sharedRoute
   @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentBindingPreviews)
   getTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -539,8 +684,9 @@ interface AgentTelephony {
   /** Updates a telephony binding owned by the voice agent named in the path. */
   @summary("Update an agent telephony binding")
   @patch
+  @sharedRoute
   @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentBindingPreviews)
   updateTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -564,8 +710,9 @@ interface AgentTelephony {
   /** Deletes a telephony binding owned by the voice agent named in the path. */
   @summary("Delete an agent telephony binding")
   @delete
+  @sharedRoute
   @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @extension("x-ms-foundry-meta", VoiceAgentBindingPreviews)
   deleteTelephonyBinding is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {

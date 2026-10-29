@@ -102,6 +102,9 @@ union AgentDefinitionOptInKeys {
 
   @removed(Versions.v1)
   container_agents_v1_preview: "ContainerAgents=V1Preview",
+
+  /** Selects the status-less telephony binding contract; other voice APIs retain their existing opt-in. */
+  voice_agents_v2_preview: "VoiceAgents=V2Preview",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "API review requires this input-only opt-in contract to accept only the declared feature keys; arbitrary string opt-ins are not supported."

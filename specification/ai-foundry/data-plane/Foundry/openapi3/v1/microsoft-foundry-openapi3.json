@@ -6264,8 +6264,6 @@
     "/agents/{agent_name}/telephony/bindings": {
       "post": {
         "operationId": "AgentTelephony_createTelephonyBinding",
-        "summary": "Create an agent telephony binding",
-        "description": "Creates a telephony binding for the voice agent named in the path.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -6275,6 +6273,7 @@
             "schema": {
               "type": "string",
               "enum": [
+                "VoiceAgents=V2Preview",
                 "VoiceAgents=V1Preview"
               ]
             }
@@ -6305,6 +6304,8 @@
             "explode": false
           }
         ],
+        "description": "Creates a binding using VoiceAgents=V2Preview and returns a status-less binding.\nVoiceAgents=V1Preview retains the original response with required status. Creates a telephony binding for the voice agent named in the path.",
+        "summary": "Create an agent telephony binding Create an agent telephony binding",
         "responses": {
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
@@ -6320,7 +6321,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TelephonyBinding"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/TelephonyBindingV2"
+                    },
+                    {
+                      "$ref": "#/components/schemas/TelephonyBinding"
+                    }
+                  ]
                 }
               }
             }
@@ -6346,6 +6354,12 @@
             }
           }
         },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview",
+            "VoiceAgents=V2Preview"
+          ]
+        },
         "tags": [
           "Agent Telephony"
         ],
@@ -6354,22 +6368,22 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateTelephonyBindingV2Request"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
+                  }
+                ]
               }
             }
           },
-          "description": "The provider-specific binding to create."
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
+          "description": "The provider-specific binding to create. The provider-specific binding to create."
         }
       },
       "get": {
         "operationId": "AgentTelephony_listTelephonyBindings",
-        "summary": "List agent telephony bindings",
-        "description": "Returns the telephony bindings owned by the voice agent named in the path.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -6379,6 +6393,7 @@
             "schema": {
               "type": "string",
               "enum": [
+                "VoiceAgents=V2Preview",
                 "VoiceAgents=V1Preview"
               ]
             }
@@ -6453,41 +6468,96 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "description": "Filters bindings by lifecycle status. Supported only with VoiceAgents=V1Preview, not VoiceAgents=V2Preview.",
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyBindingStatus",
+              "x-ms-foundry-meta": {
+                "required_previews": [
+                  "VoiceAgents=V1Preview"
+                ]
+              }
+            },
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "VoiceAgents=V1Preview"
+              ]
+            },
+            "explode": false
           }
         ],
+        "description": "Lists status-less bindings using VoiceAgents=V2Preview. The status query filter is not supported in V2.\nVoiceAgents=V1Preview retains required item status and the optional status query filter. Returns the telephony bindings owned by the voice agent named in the path.",
+        "summary": "List agent telephony bindings List agent telephony bindings",
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "required": [
-                    "data",
-                    "has_more"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/TelephonyBindingListItem"
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "data",
+                        "has_more"
+                      ],
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/TelephonyBindingV2ListItem"
+                          },
+                          "description": "The requested list of items."
+                        },
+                        "first_id": {
+                          "type": "string",
+                          "description": "The first ID represented in this list."
+                        },
+                        "last_id": {
+                          "type": "string",
+                          "description": "The last ID represented in this list."
+                        },
+                        "has_more": {
+                          "type": "boolean",
+                          "description": "A value indicating whether there are additional values available not captured in this list."
+                        }
                       },
-                      "description": "The requested list of items."
+                      "description": "The response data for a requested list of items."
                     },
-                    "first_id": {
-                      "type": "string",
-                      "description": "The first ID represented in this list."
-                    },
-                    "last_id": {
-                      "type": "string",
-                      "description": "The last ID represented in this list."
-                    },
-                    "has_more": {
-                      "type": "boolean",
-                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    {
+                      "type": "object",
+                      "required": [
+                        "data",
+                        "has_more"
+                      ],
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/TelephonyBindingListItem"
+                          },
+                          "description": "The requested list of items."
+                        },
+                        "first_id": {
+                          "type": "string",
+                          "description": "The first ID represented in this list."
+                        },
+                        "last_id": {
+                          "type": "string",
+                          "description": "The last ID represented in this list."
+                        },
+                        "has_more": {
+                          "type": "boolean",
+                          "description": "A value indicating whether there are additional values available not captured in this list."
+                        }
+                      },
+                      "description": "The response data for a requested list of items."
                     }
-                  },
-                  "description": "The response data for a requested list of items."
+                  ]
                 }
               }
             }
@@ -6513,21 +6583,20 @@
             }
           }
         },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview",
+            "VoiceAgents=V2Preview"
+          ]
+        },
         "tags": [
           "Agent Telephony"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/agents/{agent_name}/telephony/bindings/{binding_id}": {
       "get": {
         "operationId": "AgentTelephony_getTelephonyBinding",
-        "summary": "Get an agent telephony binding",
-        "description": "Retrieves a telephony binding owned by the voice agent named in the path.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -6537,6 +6606,7 @@
             "schema": {
               "type": "string",
               "enum": [
+                "VoiceAgents=V2Preview",
                 "VoiceAgents=V1Preview"
               ]
             }
@@ -6570,6 +6640,8 @@
             "explode": false
           }
         ],
+        "description": "Retrieves a status-less binding using VoiceAgents=V2Preview.\nVoiceAgents=V1Preview retains the original response with required status. Retrieves a telephony binding owned by the voice agent named in the path.",
+        "summary": "Get an agent telephony binding Get an agent telephony binding",
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -6585,7 +6657,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TelephonyBinding"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/TelephonyBindingV2"
+                    },
+                    {
+                      "$ref": "#/components/schemas/TelephonyBinding"
+                    }
+                  ]
                 }
               }
             }
@@ -6611,19 +6690,18 @@
             }
           }
         },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview",
+            "VoiceAgents=V2Preview"
+          ]
+        },
         "tags": [
           "Agent Telephony"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "patch": {
         "operationId": "AgentTelephony_updateTelephonyBinding",
-        "summary": "Update an agent telephony binding",
-        "description": "Updates a telephony binding owned by the voice agent named in the path.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -6633,6 +6711,7 @@
             "schema": {
               "type": "string",
               "enum": [
+                "VoiceAgents=V2Preview",
                 "VoiceAgents=V1Preview"
               ]
             }
@@ -6675,6 +6754,8 @@
             "explode": false
           }
         ],
+        "description": "Updates a binding using VoiceAgents=V2Preview. Status is not a supported PATCH input or response property.\nVoiceAgents=V1Preview retains its optional PATCH status and required response status. Updates a telephony binding owned by the voice agent named in the path.",
+        "summary": "Update an agent telephony binding Update an agent telephony binding",
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -6690,7 +6771,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TelephonyBinding"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/TelephonyBindingV2"
+                    },
+                    {
+                      "$ref": "#/components/schemas/TelephonyBinding"
+                    }
+                  ]
                 }
               }
             }
@@ -6715,6 +6803,12 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview",
+            "VoiceAgents=V2Preview"
+          ]
         },
         "tags": [
           "Agent Telephony"
@@ -6724,22 +6818,22 @@
           "content": {
             "application/merge-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateTelephonyBindingRequest"
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/UpdateTelephonyBindingV2Request"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UpdateTelephonyBindingRequest"
+                  }
+                ]
               }
             }
           },
-          "description": "The binding properties to update."
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
+          "description": "The binding properties to update, excluding lifecycle status. The binding properties to update."
         }
       },
       "delete": {
         "operationId": "AgentTelephony_deleteTelephonyBinding",
-        "summary": "Delete an agent telephony binding",
-        "description": "Deletes a telephony binding owned by the voice agent named in the path.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -6749,6 +6843,7 @@
             "schema": {
               "type": "string",
               "enum": [
+                "VoiceAgents=V2Preview",
                 "VoiceAgents=V1Preview"
               ]
             }
@@ -6791,6 +6886,8 @@
             "explode": false
           }
         ],
+        "description": "Deletes a binding using VoiceAgents=V2Preview with the same entity-tag precondition as V1. Deletes a telephony binding owned by the voice agent named in the path.",
+        "summary": "Delete an agent telephony binding Delete an agent telephony binding",
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
@@ -6816,14 +6913,15 @@
             }
           }
         },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "VoiceAgents=V1Preview",
+            "VoiceAgents=V2Preview"
+          ]
+        },
         "tags": [
           "Agent Telephony"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/agents/{agent_name}/telephony/call_jobs": {
@@ -33473,7 +33571,8 @@
           "VoiceAgents=V1Preview",
           "DigitalWorker=V1Preview",
           "GitHubCopilot=V1Preview",
-          "Skills=V1Preview"
+          "Skills=V1Preview",
+          "VoiceAgents=V2Preview"
         ],
         "description": "Feature opt-in keys for agent definition operations supporting conditional preview features."
       },
@@ -39471,10 +39570,49 @@
             "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
           }
         ],
-        "description": "The request to create an inbound SIP binding. The referenced same-project SipInbound connection uses authType CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl; missing, null, blank, or empty-object values default to digest. Nonempty objects and other non-string values are invalid. Digest requires nonblank credentials.keys.username and credentials.keys.password. IP ACL requires the non-null credentials.keys.source_cidrs string: at most 4096 original characters before trimming or splitting, and at most 64 entries before deduplication. The empty string allows all source IPs; whitespace-only strings and empty entries are invalid. Entries are canonical IPv4 or native IPv6 addresses or CIDRs (prefixes 0-32 or 0-128); scoped addresses and IPv4-mapped IPv6, including hexadecimal forms, are unsupported. Extra credential keys do not select the mode and are not rejected solely because they belong to the other mode. Connection PATCH may omit/null credentials only when the effective mode is unchanged; supplied credentials must contain all mode-required keys. These settings are connection fields, not binding fields; metadata or binding CIDR fallbacks are not public inputs.",
+        "description": "The request to create an inbound SIP binding. New SIP bindings are active. The referenced same-project SipInbound connection uses authType CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl; missing, null, blank, or empty-object values default to digest. Nonempty objects and other non-string values are invalid. Digest requires nonblank credentials.keys.username and credentials.keys.password. IP ACL requires the non-null credentials.keys.source_cidrs string: at most 4096 original characters before trimming or splitting, and at most 64 entries before deduplication. The empty string allows all source IPs; whitespace-only strings and empty entries are invalid. Entries are canonical IPv4 or native IPv6 addresses or CIDRs (prefixes 0-32 or 0-128); scoped addresses and IPv4-mapped IPv6, including hexadecimal forms, are unsupported. Extra credential keys do not select the mode and are not rejected solely because they belong to the other mode. Connection PATCH may omit/null credentials only when the effective mode is unchanged; supplied credentials must contain all mode-required keys. These settings are connection fields, not binding fields; metadata or binding CIDR fallbacks are not public inputs.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "CreateSipTelephonyBindingV2Request": {
+        "type": "object",
+        "required": [
+          "provider"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "sip"
+            ],
+            "description": "The SIP provider."
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "An optional display phone number, up to 64 characters. It is not the binding identifier."
+          },
+          "allowed_calling_numbers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SipAllowedCallingNumber"
+            },
+            "maxItems": 64,
+            "description": "Up to 64 exact canonical E.164 numbers or restricted, fully anchored E.164 patterns, each up to 256 characters. Patterns are matched against the entire normalized E.164 caller number; see SipAllowedCallingNumber for the supported syntax. Omission or an empty array indicates no caller-number restriction."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTelephonyBindingV2Request"
+          }
+        ],
+        "description": "The input to create a V2 preview inbound SIP binding. Connection authentication and validation follow\nCreateSipTelephonyBindingRequest, but V2 does not expose an active/suspended binding lifecycle.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V2Preview"
           ]
         }
       },
@@ -39531,6 +39669,42 @@
           ]
         }
       },
+      "CreateTeamsPhoneExtensibilityTelephonyBindingV2Request": {
+        "type": "object",
+        "required": [
+          "provider",
+          "resource_account_object_id"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "teams_phone_extensibility"
+            ],
+            "description": "The Microsoft Teams Phone extensibility provider."
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "The optional display phone number for the Teams resource account."
+          },
+          "resource_account_object_id": {
+            "$ref": "#/components/schemas/Azure.Core.uuid",
+            "description": "The Microsoft Teams resource-account object identifier as a GUID."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTelephonyBindingV2Request"
+          }
+        ],
+        "description": "The input to create a V2 preview Microsoft Teams Phone extensibility binding.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V2Preview"
+          ]
+        }
+      },
       "CreateTelephonyBindingRequest": {
         "type": "object",
         "required": [
@@ -39566,6 +39740,44 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "CreateTelephonyBindingV2Request": {
+        "type": "object",
+        "required": [
+          "provider",
+          "connection_name"
+        ],
+        "properties": {
+          "provider": {
+            "$ref": "#/components/schemas/TelephonyProvider",
+            "description": "The telephony provider."
+          },
+          "connection_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name for the telephony provider."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "An optional display label for the binding."
+          }
+        },
+        "discriminator": {
+          "propertyName": "provider",
+          "mapping": {
+            "teams_phone_extensibility": "#/components/schemas/CreateTeamsPhoneExtensibilityTelephonyBindingV2Request",
+            "twilio": "#/components/schemas/CreateTwilioTelephonyBindingV2Request",
+            "sip": "#/components/schemas/CreateSipTelephonyBindingV2Request"
+          }
+        },
+        "description": "The provider-specific input to create a status-less V2 preview telephony binding.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V2Preview"
           ]
         }
       },
@@ -39665,6 +39877,38 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "CreateTwilioTelephonyBindingV2Request": {
+        "type": "object",
+        "required": [
+          "provider",
+          "phone_number"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "twilio"
+            ],
+            "description": "The Twilio provider."
+          },
+          "phone_number": {
+            "type": "string",
+            "pattern": "^\\+[1-9]\\d{6,14}$",
+            "description": "The Twilio E.164 phone number."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTelephonyBindingV2Request"
+          }
+        ],
+        "description": "The input to create a V2 preview Twilio binding.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V2Preview"
           ]
         }
       },
@@ -89993,6 +90237,84 @@
           ]
         }
       },
+      "SipTelephonyBindingV2": {
+        "type": "object",
+        "required": [
+          "provider"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "sip"
+            ],
+            "description": "The SIP provider."
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "An optional display phone number, up to 64 characters. It is not the binding identifier."
+          },
+          "allowed_calling_numbers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SipAllowedCallingNumber"
+            },
+            "maxItems": 64,
+            "description": "Up to 64 exact canonical E.164 numbers or restricted, fully anchored E.164 patterns, each up to 256 characters. Patterns are matched against the entire normalized E.164 caller number; see SipAllowedCallingNumber for the supported syntax. Omission or an empty array indicates no caller-number restriction."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBindingV2"
+          }
+        ],
+        "description": "A status-less V2 preview SIP binding.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V2Preview"
+          ]
+        }
+      },
+      "SipTelephonyBindingV2ListItem": {
+        "type": "object",
+        "required": [
+          "provider"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "sip"
+            ],
+            "description": "The SIP provider."
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "An optional display phone number, up to 64 characters. It is not the binding identifier."
+          },
+          "allowed_calling_numbers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SipAllowedCallingNumber"
+            },
+            "maxItems": 64,
+            "description": "Up to 64 exact canonical E.164 numbers or restricted, fully anchored E.164 patterns, each up to 256 characters. Patterns are matched against the entire normalized E.164 caller number; see SipAllowedCallingNumber for the supported syntax. Omission or an empty array indicates no caller-number restriction."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBindingV2ListItem"
+          }
+        ],
+        "description": "A V2 preview SIP list item.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V2Preview"
+          ]
+        }
+      },
       "SipTelephonyTransferDestination": {
         "type": "object",
         "required": [
@@ -90820,6 +91142,78 @@
           ]
         }
       },
+      "TeamsPhoneExtensibilityTelephonyBindingV2": {
+        "type": "object",
+        "required": [
+          "provider",
+          "resource_account_object_id"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "teams_phone_extensibility"
+            ],
+            "description": "The Microsoft Teams Phone extensibility provider."
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "The optional display phone number for the Teams resource account."
+          },
+          "resource_account_object_id": {
+            "$ref": "#/components/schemas/Azure.Core.uuid",
+            "description": "The Microsoft Teams resource-account object identifier as a GUID."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBindingV2"
+          }
+        ],
+        "description": "A status-less V2 preview Microsoft Teams Phone extensibility binding.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V2Preview"
+          ]
+        }
+      },
+      "TeamsPhoneExtensibilityTelephonyBindingV2ListItem": {
+        "type": "object",
+        "required": [
+          "provider",
+          "resource_account_object_id"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "teams_phone_extensibility"
+            ],
+            "description": "The Microsoft Teams Phone extensibility provider."
+          },
+          "phone_number": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "The optional display phone number for the Teams resource account."
+          },
+          "resource_account_object_id": {
+            "$ref": "#/components/schemas/Azure.Core.uuid",
+            "description": "The Microsoft Teams resource-account object identifier as a GUID."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBindingV2ListItem"
+          }
+        ],
+        "description": "A V2 preview Microsoft Teams Phone extensibility list item.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V2Preview"
+          ]
+        }
+      },
       "TeamsTelephonyTransferDestination": {
         "type": "object",
         "required": [
@@ -90993,6 +91387,7 @@
           "id",
           "provider",
           "connection_name",
+          "status",
           "incoming_call_url"
         ],
         "properties": {
@@ -91014,6 +91409,10 @@
             "type": "string",
             "maxLength": 128,
             "description": "The optional display label for the binding."
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyBindingStatus",
+            "description": "The lifecycle status."
           },
           "incoming_call_url": {
             "type": "string",
@@ -91048,6 +91447,135 @@
         }
       },
       "TelephonyBindingListItem": {
+        "type": "object",
+        "required": [
+          "id",
+          "provider",
+          "connection_name",
+          "status",
+          "incoming_call_url",
+          "etag"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/TelephonyBindingId",
+            "description": "The service-generated binding identifier."
+          },
+          "provider": {
+            "$ref": "#/components/schemas/TelephonyProvider",
+            "description": "The telephony provider."
+          },
+          "connection_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name for the telephony provider."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The optional display label for the binding."
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyBindingStatus",
+            "description": "The lifecycle status."
+          },
+          "incoming_call_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP."
+          },
+          "etag": {
+            "$ref": "#/components/schemas/Azure.Core.eTag",
+            "description": "The entity tag to send in the `If-Match` header when updating or deleting this binding.",
+            "readOnly": true
+          }
+        },
+        "discriminator": {
+          "propertyName": "provider",
+          "mapping": {
+            "teams_phone_extensibility": "#/components/schemas/TeamsPhoneExtensibilityTelephonyBindingListItem",
+            "twilio": "#/components/schemas/TwilioTelephonyBindingListItem",
+            "sip": "#/components/schemas/SipTelephonyBindingListItem"
+          }
+        },
+        "description": "A telephony binding returned in a list, including its entity tag.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyBindingStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "active",
+              "suspended"
+            ]
+          }
+        ],
+        "description": "The lifecycle status of a telephony binding.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyBindingV2": {
+        "type": "object",
+        "required": [
+          "id",
+          "provider",
+          "connection_name",
+          "incoming_call_url"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/TelephonyBindingId",
+            "description": "The service-generated binding identifier."
+          },
+          "provider": {
+            "$ref": "#/components/schemas/TelephonyProvider",
+            "description": "The telephony provider."
+          },
+          "connection_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The Foundry connection name for the telephony provider."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The optional display label for the binding."
+          },
+          "incoming_call_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP."
+          }
+        },
+        "discriminator": {
+          "propertyName": "provider",
+          "mapping": {
+            "teams_phone_extensibility": "#/components/schemas/TeamsPhoneExtensibilityTelephonyBindingV2",
+            "twilio": "#/components/schemas/TwilioTelephonyBindingV2",
+            "sip": "#/components/schemas/SipTelephonyBindingV2"
+          }
+        },
+        "description": "A status-less telephony binding selected with VoiceAgents=V2Preview.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V2Preview"
+          ]
+        }
+      },
+      "TelephonyBindingV2ListItem": {
         "type": "object",
         "required": [
           "id",
@@ -91090,15 +91618,15 @@
         "discriminator": {
           "propertyName": "provider",
           "mapping": {
-            "teams_phone_extensibility": "#/components/schemas/TeamsPhoneExtensibilityTelephonyBindingListItem",
-            "twilio": "#/components/schemas/TwilioTelephonyBindingListItem",
-            "sip": "#/components/schemas/SipTelephonyBindingListItem"
+            "teams_phone_extensibility": "#/components/schemas/TeamsPhoneExtensibilityTelephonyBindingV2ListItem",
+            "twilio": "#/components/schemas/TwilioTelephonyBindingV2ListItem",
+            "sip": "#/components/schemas/SipTelephonyBindingV2ListItem"
           }
         },
-        "description": "A telephony binding returned in a list, including its entity tag.",
+        "description": "A status-less V2 preview binding returned in a list, including its body-level entity tag.",
         "x-ms-foundry-meta": {
           "required_previews": [
-            "VoiceAgents=V1Preview"
+            "VoiceAgents=V2Preview"
           ]
         }
       },
@@ -93337,6 +93865,70 @@
           ]
         }
       },
+      "TwilioTelephonyBindingV2": {
+        "type": "object",
+        "required": [
+          "provider",
+          "phone_number"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "twilio"
+            ],
+            "description": "The Twilio provider."
+          },
+          "phone_number": {
+            "type": "string",
+            "pattern": "^\\+[1-9]\\d{6,14}$",
+            "description": "The Twilio E.164 phone number."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBindingV2"
+          }
+        ],
+        "description": "A status-less V2 preview Twilio binding.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V2Preview"
+          ]
+        }
+      },
+      "TwilioTelephonyBindingV2ListItem": {
+        "type": "object",
+        "required": [
+          "provider",
+          "phone_number"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "twilio"
+            ],
+            "description": "The Twilio provider."
+          },
+          "phone_number": {
+            "type": "string",
+            "pattern": "^\\+[1-9]\\d{6,14}$",
+            "description": "The Twilio E.164 phone number."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelephonyBindingV2ListItem"
+          }
+        ],
+        "description": "A V2 preview Twilio list item.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V2Preview"
+          ]
+        }
+      },
       "UpdateAgentFromManifestRequest": {
         "type": "object",
         "required": [
@@ -93469,6 +94061,10 @@
       "UpdateTelephonyBindingRequest": {
         "type": "object",
         "properties": {
+          "status": {
+            "$ref": "#/components/schemas/TelephonyBindingStatus",
+            "description": "The new lifecycle status."
+          },
           "label": {
             "anyOf": [
               {
@@ -93512,6 +94108,55 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "UpdateTelephonyBindingV2Request": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "maxLength": 128,
+            "description": "The replacement display label. Omit to preserve it; null, empty, or whitespace-only clears it. Nonblank values are trimmed before enforcing the 128-character limit."
+          },
+          "connection_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "The replacement Foundry connection name. Omit to preserve it; an explicitly supplied null, empty, or whitespace-only value is invalid. A SIP replacement must reference a same-project SipInbound connection. This property is valid for Teams Phone extensibility and SIP bindings; a Twilio binding's connection is immutable."
+          },
+          "phone_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "maxLength": 64,
+            "description": "The replacement Teams Phone extensibility or SIP display phone number, not a SIP routing key. Omit to preserve it; null, empty, or whitespace-only clears it. Nonblank values are trimmed before enforcing the 64-character limit. Not supported for Twilio."
+          },
+          "allowed_calling_numbers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SipAllowedCallingNumber"
+            },
+            "maxItems": 64,
+            "description": "Replacement exact canonical E.164 numbers or restricted, fully anchored E.164 patterns, up to 64 entries of at most 256 characters each. Patterns are matched against the entire normalized E.164 caller number; see SipAllowedCallingNumber for the supported syntax. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it."
+          }
+        },
+        "description": "Optional updates to a V2 preview binding. The provider is immutable and status is not a supported input.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V2Preview"
           ]
         }
       },
