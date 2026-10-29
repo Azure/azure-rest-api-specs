@@ -584,7 +584,7 @@ alias TwilioTelephonyBindingProperties = {
 model SipTelephonyBindingProperties {
   provider: TelephonyProvider.sip;
 
-  @doc("Display only; not used for routing or identifying the binding.")
+  @doc("For UI display only.")
   @maxLength(64)
   phone_number?: string;
 
