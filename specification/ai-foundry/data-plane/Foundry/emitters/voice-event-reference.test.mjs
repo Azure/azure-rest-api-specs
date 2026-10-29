@@ -1,6 +1,11 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { buildVoiceEventBundle } from "./voice-event-reference.mjs";
+import { parse } from "yaml";
+import {
+  buildCombinedReference,
+  buildVoiceEventBundle,
+  serializeReferenceDocument,
+} from "./voice-event-reference.mjs";
 
 function document() {
   return {
@@ -49,6 +54,101 @@ test("exports only the event roots and their transitive dependencies", () => {
   assert.equal(
     result.components.schemas.Append.properties.audio.contentEncoding,
     "base64",
+  );
+});
+
+test("combines REST metadata and event dependencies without unrelated schemas", () => {
+  const events = document();
+  const rest = {
+    openapi: events.openapi,
+    info: events.info,
+    paths: {
+      "/voice": { get: { responses: { 101: { description: "Upgrade" } } } },
+    },
+    servers: [{ url: "https://example.com" }],
+    tags: [{ name: "Voice" }],
+    security: [{ apiKey: [] }],
+    components: {
+      schemas: {
+        Duration: { format: "int32", type: "integer" },
+        RestOnly: { type: "string" },
+      },
+      securitySchemes: {
+        apiKey: { type: "apiKey", in: "header", name: "api-key" },
+      },
+      parameters: {
+        Agent: { name: "agent", in: "query", schema: { type: "string" } },
+      },
+    },
+  };
+  const original = structuredClone(rest);
+  const result = buildCombinedReference(rest, events);
+  assert.deepEqual(rest, original);
+  assert.equal(
+    result.components.schemas.Duration,
+    rest.components.schemas.Duration,
+  );
+  for (const key of ["paths", "servers", "tags", "security"]) {
+    assert.deepEqual(result[key], rest[key]);
+  }
+  assert.deepEqual(
+    result.components.securitySchemes,
+    rest.components.securitySchemes,
+  );
+  assert.deepEqual(result.components.parameters, rest.components.parameters);
+  assert.deepEqual(Object.keys(result.components.schemas), [
+    "Append",
+    "Client",
+    "Delta",
+    "Duration",
+    "RestOnly",
+    "Server",
+  ]);
+});
+
+test("serializes matching JSON and YAML using standard OpenAPI ordering", () => {
+  const source = {
+    ...document(),
+    paths: { "/z": {}, "/a": {} },
+  };
+  source.components.parameters = { Zebra: { name: "z" }, Alpha: { name: "a" } };
+  const original = structuredClone(source);
+  const json = serializeReferenceDocument(source, "json");
+  const yaml = serializeReferenceDocument(source, "yaml");
+  assert.deepEqual(parse(yaml), JSON.parse(json));
+  assert.deepEqual(Object.keys(JSON.parse(json).paths), ["/a", "/z"]);
+  assert.deepEqual(Object.keys(JSON.parse(json).components.parameters), [
+    "Alpha",
+    "Zebra",
+  ]);
+  assert.ok(json.endsWith("\n"));
+  assert.ok(yaml.endsWith("\n"));
+  assert.deepEqual(source, original);
+  assert.throws(
+    () => serializeReferenceDocument(source, "xml"),
+    /Unsupported reference format/,
+  );
+});
+
+test("rejects conflicting schemas and mismatched API projections", () => {
+  const events = document();
+  const rest = {
+    openapi: events.openapi,
+    info: events.info,
+    paths: {},
+    components: { schemas: { Duration: { type: "string" } } },
+  };
+  assert.throws(
+    () => buildCombinedReference(rest, events),
+    /Conflicting REST and event schema: Duration/,
+  );
+  assert.throws(
+    () =>
+      buildCombinedReference(
+        { ...rest, info: { ...rest.info, version: "other" } },
+        events,
+      ),
+    /same API version/,
   );
 });
 

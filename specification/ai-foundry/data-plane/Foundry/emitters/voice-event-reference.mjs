@@ -1,11 +1,19 @@
-import path from "node:path";
+import { isDeepStrictEqual } from "node:util";
 import {
   NoTarget,
   createTypeSpecLibrary,
   emitFile,
+  getNamespaceFullName,
+  interpolatePath,
   paramMessage,
+  sanitizePathSegment,
 } from "@typespec/compiler";
-import { getOpenAPI3 } from "@typespec/openapi3";
+import {
+  $lib as openAPILibrary,
+  getOpenAPI3,
+  resolveOptions,
+} from "@typespec/openapi3";
+import { stringify } from "yaml";
 
 export const $lib = createTypeSpecLibrary({
   name: "foundry-voice-events",
@@ -13,16 +21,12 @@ export const $lib = createTypeSpecLibrary({
     "invalid-event-bundle": {
       severity: "error",
       messages: {
-        default: paramMessage`Unable to emit voice-agent event schemas: ${"detail"}`,
+        default: paramMessage`Unable to emit Foundry reference: ${"detail"}`,
       },
     },
   },
   emitter: {
-    options: {
-      type: "object",
-      properties: {},
-      additionalProperties: false,
-    },
+    options: openAPILibrary.emitter.options,
   },
 });
 
@@ -114,43 +118,140 @@ export function buildVoiceEventBundle(document) {
   };
 }
 
-/** Keep the wire-aware OpenAPI projection without publishing unrelated types. */
+export function buildCombinedReference(document, eventDocument) {
+  if (
+    document.openapi !== eventDocument.openapi ||
+    !isDeepStrictEqual(document.info, eventDocument.info)
+  ) {
+    throw new Error(
+      "REST and event projections must describe the same API version.",
+    );
+  }
+  const eventSchemas = buildVoiceEventBundle(eventDocument).components.schemas;
+  const schemas = { ...document.components?.schemas };
+  for (const [name, schema] of Object.entries(eventSchemas)) {
+    if (Object.hasOwn(schemas, name)) {
+      if (!isDeepStrictEqual(schemas[name], schema)) {
+        throw new Error(`Conflicting REST and event schema: ${name}`);
+      }
+    } else {
+      schemas[name] = schema;
+    }
+  }
+  return {
+    ...document,
+    components: {
+      ...document.components,
+      schemas: sortObjectByKeys(schemas),
+    },
+  };
+}
+
+function sortObjectByKeys(value) {
+  return Object.fromEntries(
+    Object.keys(value)
+      .sort()
+      .map((key) => [key, value[key]]),
+  );
+}
+
+export function serializeReferenceDocument(document, fileType) {
+  const sorted = {
+    ...document,
+    paths: sortObjectByKeys(document.paths),
+    ...(document.components && {
+      components: {
+        ...document.components,
+        ...(document.components.schemas && {
+          schemas: sortObjectByKeys(document.components.schemas),
+        }),
+        ...(document.components.parameters && {
+          parameters: sortObjectByKeys(document.components.parameters),
+        }),
+      },
+    }),
+  };
+  switch (fileType) {
+    case "json":
+      return `${JSON.stringify(sorted, null, 2)}\n`;
+    case "yaml":
+      return stringify(sorted, {
+        singleQuote: true,
+        aliasDuplicateObjects: false,
+        lineWidth: 0,
+        compat: "yaml-1.1",
+      });
+    default:
+      throw new Error(`Unsupported reference format: ${fileType}`);
+  }
+}
+
 export async function $onEmit(context) {
   try {
-    const configured =
-      context.program.compilerOptions.options?.["@typespec/openapi3"] ?? {};
-    const options = Object.fromEntries(
-      Object.entries(configured).filter(
-        ([key]) =>
-          ![
-            "file-type",
-            "output-file",
-            "new-line",
-            "emitter-output-dir",
-          ].includes(key),
-      ),
-    );
-    const records = await getOpenAPI3(context.program, {
-      ...options,
+    const options = resolveOptions(context);
+    const records = await getOpenAPI3(context.program, context.options);
+    const eventRecords = await getOpenAPI3(context.program, {
+      ...context.options,
       "omit-unreachable-types": false,
     });
-    const documents = records.flatMap((record) =>
+    const eventDocuments = eventRecords.flatMap((record) =>
       record.versioned ? record.versions : [record],
     );
-    const matches = documents.filter(
-      (record) => record.document.info.version === "v1",
+    const matches = eventDocuments.filter(
+      ({ document }) => document.info.version === "v1",
     );
-    if (matches.length !== 1) {
+    if (matches.length !== options.openapiVersions.length) {
       throw new Error(
-        `Expected one v1 Foundry document; found ${matches.length}.`,
+        `Expected one v1 Foundry document per OpenAPI version; found ${matches.length}.`,
       );
     }
-    context.program.reportDiagnostics(matches[0].diagnostics);
-    if (context.program.hasError()) return;
-    await emitFile(context.program, {
-      path: path.join(context.emitterOutputDir, "voice-agent-events.json"),
-      content: `${JSON.stringify(buildVoiceEventBundle(matches[0].document), null, 2)}\n`,
-    });
+    const files = [];
+    for (const serviceRecord of records) {
+      const documents = serviceRecord.versioned
+        ? serviceRecord.versions
+        : [serviceRecord];
+      for (const record of documents) {
+        context.program.reportDiagnostics(record.diagnostics);
+        let document = record.document;
+        if (document.info.version === "v1") {
+          const events = matches.filter(
+            ({ document: candidate }) => candidate.openapi === document.openapi,
+          );
+          if (events.length !== 1) {
+            throw new Error(
+              `Expected one matching event projection for OpenAPI ${document.openapi}.`,
+            );
+          }
+          context.program.reportDiagnostics(events[0].diagnostics);
+          document = buildCombinedReference(document, events[0].document);
+        }
+        for (const fileType of options.fileTypes) {
+          files.push({
+            path: interpolatePath(options.outputFile, {
+              "openapi-version": document.openapi,
+              "service-name-if-multiple":
+                records.length > options.openapiVersions.length
+                  ? sanitizePathSegment(
+                      getNamespaceFullName(serviceRecord.service.type),
+                    )
+                  : undefined,
+              "service-name": sanitizePathSegment(
+                getNamespaceFullName(serviceRecord.service.type),
+              ),
+              "file-type": fileType,
+              version: serviceRecord.versioned
+                ? sanitizePathSegment(record.version)
+                : undefined,
+            }),
+            content: serializeReferenceDocument(document, fileType),
+            newLine: options.newLine,
+          });
+        }
+      }
+    }
+    if (context.program.compilerOptions.dryRun || context.program.hasError())
+      return;
+    for (const file of files) await emitFile(context.program, file);
   } catch (error) {
     $lib.reportDiagnostic(context.program, {
       code: "invalid-event-bundle",
