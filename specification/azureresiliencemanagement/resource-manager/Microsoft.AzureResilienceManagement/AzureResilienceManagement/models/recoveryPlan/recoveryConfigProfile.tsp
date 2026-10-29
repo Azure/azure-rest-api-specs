@@ -123,9 +123,41 @@ union RecoveryPointPolicyType {
   @doc("Use a random recovery point within the specified time bounds.")
   Random: "Random",
 
+  string,
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("The backup mechanism used to select recovery points.")
+union BackupType {
   @added(Versions.v2026_11_30_preview)
-  @doc("Use a recovery point for a specific point in time.")
-  PointInTime: "PointInTime",
+  @doc("Streaming backups, including full, differential, incremental, and other supported backup categories.")
+  Streaming: "Streaming",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Log backups that provide point-in-time recovery candidates.")
+  Log: "Log",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Snapshot backups.")
+  Snapshot: "Snapshot",
+
+  string,
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("The health eligibility filter for discrete recovery points. This filter does not apply to log or point-in-time recovery candidates.")
+union RecoveryPointHealthStatus {
+  @added(Versions.v2026_11_30_preview)
+  @doc("Include only recovery points with a Healthy threat status.")
+  HealthyOnly: "HealthyOnly",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Include recovery points with Healthy, Unknown, unspecified, or NotAvailable threat statuses, excluding Warning and UnHealthy.")
+  HealthyAndUnknown: "HealthyAndUnknown",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Include all threat statuses without health-based ordering.")
+  All: "All",
 
   string,
 }
@@ -210,16 +242,25 @@ model RecoveryPointPolicy {
   type: RecoveryPointPolicyType;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The inclusive lower time bound. Required when type is Random and optional when type is Latest.")
+  @doc("The inclusive lower time bound. Required with endTime for Random selection when lookbackDuration is omitted; optional for Latest selection. Mutually exclusive with lookbackDuration.")
   startTime?: utcDateTime;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The inclusive upper time bound. Required when type is Random and optional when type is Latest.")
+  @doc("The inclusive upper time bound. Required with startTime for Random selection when lookbackDuration is omitted; optional for Latest selection. Mutually exclusive with lookbackDuration.")
   endTime?: utcDateTime;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The requested recovery point time. Required when type is PointInTime.")
-  pointInTime?: utcDateTime;
+  @doc("A positive, fixed ISO 8601 duration for relative Random selection, such as P10D or PT12H. Only days, hours, minutes, and seconds are supported; calendar-dependent months and years are not supported. Mutually exclusive with startTime and endTime. The service resolves the duration to absolute bounds at execution time without modifying the saved profile.")
+  lookbackDuration?: duration;
+
+  @added(Versions.v2026_11_30_preview)
+  @minItems(1)
+  @doc("The explicit, non-empty list of unique backup mechanisms to consider. Random selection cannot include Log, even when other mechanisms are also selected.")
+  backupType: BackupType[];
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The health filter for discrete recovery points. Omission means All. Log and point-in-time recovery candidates are not health-filtered.")
+  recoveryPointHealthStatus?: RecoveryPointHealthStatus;
 }
 
 @added(Versions.v2026_11_30_preview)

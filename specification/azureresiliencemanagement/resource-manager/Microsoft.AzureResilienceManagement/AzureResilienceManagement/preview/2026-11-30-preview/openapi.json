@@ -5654,6 +5654,36 @@
         }
       }
     },
+    "BackupType": {
+      "type": "string",
+      "description": "The backup mechanism used to select recovery points.",
+      "enum": [
+        "Streaming",
+        "Log",
+        "Snapshot"
+      ],
+      "x-ms-enum": {
+        "name": "BackupType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Streaming",
+            "value": "Streaming",
+            "description": "Streaming backups, including full, differential, incremental, and other supported backup categories."
+          },
+          {
+            "name": "Log",
+            "value": "Log",
+            "description": "Log backups that provide point-in-time recovery candidates."
+          },
+          {
+            "name": "Snapshot",
+            "value": "Snapshot",
+            "description": "Snapshot backups."
+          }
+        ]
+      }
+    },
     "BaseJobProperties": {
       "type": "object",
       "description": "Definition of a job, including its type, status, timing, and additional details.",
@@ -10754,6 +10784,36 @@
         }
       ]
     },
+    "RecoveryPointHealthStatus": {
+      "type": "string",
+      "description": "The health eligibility filter for discrete recovery points. This filter does not apply to log or point-in-time recovery candidates.",
+      "enum": [
+        "HealthyOnly",
+        "HealthyAndUnknown",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "RecoveryPointHealthStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HealthyOnly",
+            "value": "HealthyOnly",
+            "description": "Include only recovery points with a Healthy threat status."
+          },
+          {
+            "name": "HealthyAndUnknown",
+            "value": "HealthyAndUnknown",
+            "description": "Include recovery points with Healthy, Unknown, unspecified, or NotAvailable threat statuses, excluding Warning and UnHealthy."
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "Include all threat statuses without health-based ordering."
+          }
+        ]
+      }
+    },
     "RecoveryPointPolicy": {
       "type": "object",
       "description": "Default recovery point selection for a recovery configuration profile.",
@@ -10765,21 +10825,34 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The inclusive lower time bound. Required when type is Random and optional when type is Latest."
+          "description": "The inclusive lower time bound. Required with endTime for Random selection when lookbackDuration is omitted; optional for Latest selection. Mutually exclusive with lookbackDuration."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The inclusive upper time bound. Required when type is Random and optional when type is Latest."
+          "description": "The inclusive upper time bound. Required with startTime for Random selection when lookbackDuration is omitted; optional for Latest selection. Mutually exclusive with lookbackDuration."
         },
-        "pointInTime": {
+        "lookbackDuration": {
           "type": "string",
-          "format": "date-time",
-          "description": "The requested recovery point time. Required when type is PointInTime."
+          "format": "duration",
+          "description": "A positive, fixed ISO 8601 duration for relative Random selection, such as P10D or PT12H. Only days, hours, minutes, and seconds are supported; calendar-dependent months and years are not supported. Mutually exclusive with startTime and endTime. The service resolves the duration to absolute bounds at execution time without modifying the saved profile."
+        },
+        "backupType": {
+          "type": "array",
+          "description": "The explicit, non-empty list of unique backup mechanisms to consider. Random selection cannot include Log, even when other mechanisms are also selected.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/BackupType"
+          }
+        },
+        "recoveryPointHealthStatus": {
+          "$ref": "#/definitions/RecoveryPointHealthStatus",
+          "description": "The health filter for discrete recovery points. Omission means All. Log and point-in-time recovery candidates are not health-filtered."
         }
       },
       "required": [
-        "type"
+        "type",
+        "backupType"
       ]
     },
     "RecoveryPointPolicyType": {
@@ -10787,8 +10860,7 @@
       "description": "A policy for selecting a recovery point.",
       "enum": [
         "Latest",
-        "Random",
-        "PointInTime"
+        "Random"
       ],
       "x-ms-enum": {
         "name": "RecoveryPointPolicyType",
@@ -10803,11 +10875,6 @@
             "name": "Random",
             "value": "Random",
             "description": "Use a random recovery point within the specified time bounds."
-          },
-          {
-            "name": "PointInTime",
-            "value": "PointInTime",
-            "description": "Use a recovery point for a specific point in time."
           }
         ]
       }

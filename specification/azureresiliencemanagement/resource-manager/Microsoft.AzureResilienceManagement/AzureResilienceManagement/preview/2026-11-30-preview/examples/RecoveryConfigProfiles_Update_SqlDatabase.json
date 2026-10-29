@@ -33,8 +33,12 @@
         },
         "recoveryPointPolicy": {
           "type": "Random",
-          "startTime": "2026-10-28T00:00:00Z",
-          "endTime": "2026-10-28T18:00:00Z"
+          "lookbackDuration": "P10D",
+          "backupType": [
+            "Streaming",
+            "Snapshot"
+          ],
+          "recoveryPointHealthStatus": "HealthyOnly"
         }
       }
     }
@@ -76,8 +80,12 @@
           },
           "recoveryPointPolicy": {
             "type": "Random",
-            "startTime": "2026-10-28T00:00:00Z",
-            "endTime": "2026-10-28T18:00:00Z"
+            "lookbackDuration": "P10D",
+            "backupType": [
+              "Streaming",
+              "Snapshot"
+            ],
+            "recoveryPointHealthStatus": "HealthyOnly"
           },
           "provisioningState": "Succeeded"
         }
