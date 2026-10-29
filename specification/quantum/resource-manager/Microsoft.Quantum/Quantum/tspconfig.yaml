@@ -4,6 +4,9 @@ parameters:
 emit:
   - "@azure-tools/typespec-autorest"
 options:
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.Quantum"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: false
     omit-unreachable-types: true
