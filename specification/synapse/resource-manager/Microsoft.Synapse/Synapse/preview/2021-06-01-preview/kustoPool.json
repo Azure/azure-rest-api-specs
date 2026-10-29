@@ -3507,6 +3507,7 @@
           "description": "Kind of the endpoint for the data connection"
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ],
@@ -3637,6 +3638,7 @@
           "description": "Kind of the database"
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ],
@@ -3922,26 +3924,14 @@
           "$ref": "#/definitions/EventGridConnectionProperties",
           "description": "The properties of the Event Grid data connection.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of the endpoint for the data connection",
-          "enum": [
-            "EventGrid"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataConnection"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "EventGrid"
     },
     "EventGridDataFormat": {
       "type": "string",
@@ -4109,26 +4099,14 @@
           "$ref": "#/definitions/EventHubConnectionProperties",
           "description": "The Event Hub data connection properties to validate.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of the endpoint for the data connection",
-          "enum": [
-            "EventHub"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataConnection"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "EventHub"
     },
     "EventHubDataFormat": {
       "type": "string",
@@ -4330,26 +4308,14 @@
           "$ref": "#/definitions/IotHubConnectionProperties",
           "description": "The Iot Hub data connection properties.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of the endpoint for the data connection",
-          "enum": [
-            "IotHub"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataConnection"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "IotHub"
     },
     "IotHubDataFormat": {
       "type": "string",
@@ -4926,26 +4892,14 @@
           "$ref": "#/definitions/ReadOnlyFollowingDatabaseProperties",
           "description": "The database properties.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of the database",
-          "enum": [
-            "ReadOnlyFollowing"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/Database"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ReadOnlyFollowing"
     },
     "ReadOnlyFollowingDatabaseProperties": {
       "type": "object",
@@ -4997,26 +4951,14 @@
           "$ref": "#/definitions/ReadWriteDatabaseProperties",
           "description": "The database properties.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of the database",
-          "enum": [
-            "ReadWrite"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/Database"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ReadWrite"
     },
     "ReadWriteDatabaseProperties": {
       "type": "object",

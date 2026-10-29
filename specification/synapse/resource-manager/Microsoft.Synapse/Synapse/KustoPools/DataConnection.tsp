@@ -15,6 +15,7 @@ namespace KustoPools;
 /**
  * Class representing a data connection.
  */
+@discriminator("kind")
 model DataConnection is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = DataConnection,

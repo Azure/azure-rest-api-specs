@@ -15,6 +15,7 @@ namespace KustoPools;
 /**
  * Class representing a Kusto database.
  */
+@discriminator("kind")
 model Database is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = Database,
