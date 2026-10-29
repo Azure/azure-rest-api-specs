@@ -13,10 +13,8 @@ import {
 } from "@azure-tools/specs-shared/changed-files";
 import { includesSegment } from "@azure-tools/specs-shared/path";
 import { Readme } from "@azure-tools/specs-shared/readme";
-import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 
 import { type DiffResult, type ReadmeTag, type TagConfigDiff, type TagDiff } from "./diff-types.ts";
-import { type LabelContext } from "./labelling-types.ts";
 
 export type FileListInfo = {
   additions: string[];
@@ -28,13 +26,6 @@ export type FileListInfo = {
 
 export type PRContextOptions = {
   fileList?: FileListInfo;
-  sourceBranch: string;
-  targetBranch: string;
-  sha: string;
-  repo: string;
-  owner: string;
-  prNumber: string;
-  isDraft: boolean;
 };
 
 export class PRContext {
@@ -43,37 +34,12 @@ export class PRContext {
   // The "before" state is the git root directory without the changes aka targetDirectory
   sourceDirectory: string;
   targetDirectory: string;
-  sourceSpecModel?: SpecModel;
-  targetSpecModel?: SpecModel;
   fileList?: FileListInfo;
-  sourceBranch: string;
-  targetBranch: string;
-  sha: string;
-  repo: string;
-  owner: string;
-  prNumber: string;
-  isDraft: boolean;
-  labelContext: LabelContext;
 
-  constructor(
-    sourceDirectory: string,
-    targetDirectory: string,
-    labelContext: LabelContext,
-    options: PRContextOptions,
-  ) {
+  constructor(sourceDirectory: string, targetDirectory: string, options: PRContextOptions) {
     this.sourceDirectory = sourceDirectory;
     this.targetDirectory = targetDirectory;
-    this.sourceSpecModel = new SpecModel(sourceDirectory);
-    this.targetSpecModel = new SpecModel(targetDirectory);
-    this.labelContext = labelContext;
-    this.sourceBranch = options.sourceBranch;
-    this.targetBranch = options.targetBranch;
-    this.sha = options.sha;
-    this.repo = options.repo;
-    this.prNumber = options.prNumber;
     this.fileList = options.fileList;
-    this.isDraft = options.isDraft;
-    this.owner = options.owner;
   }
 
   getChangedFiles(): string[] {
@@ -176,7 +142,10 @@ export class PRContext {
           }
           visitedFolder.add(dir);
           const possibleReadme = join(dir, "readme.md");
-          if (fs.existsSync(possibleReadme)) {
+          if (
+            fs.existsSync(join(this.sourceDirectory, possibleReadme)) ||
+            fs.existsSync(join(this.targetDirectory, possibleReadme))
+          ) {
             if (!readmes.includes(possibleReadme)) {
               readmes.push(possibleReadme);
             }
