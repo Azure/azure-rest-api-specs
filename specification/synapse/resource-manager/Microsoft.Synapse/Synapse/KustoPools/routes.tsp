@@ -21,6 +21,7 @@ interface KustoOperationsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("KustoOperations_List")
   @autoRoute
+  @list
   @get
   @action("kustooperations")
   list is ArmProviderActionSync<Response = OperationListResult>;
@@ -34,6 +35,7 @@ interface KustoPoolsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("KustoPools_ListSkus")
   @autoRoute
+  @list
   @get
   @action("skus")
   listSkus is ArmProviderActionSync<

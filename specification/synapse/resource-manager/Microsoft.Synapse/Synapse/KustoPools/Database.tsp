@@ -126,7 +126,6 @@ interface Databases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("KustoPoolDataConnections_dataConnectionValidation")
-  @list
   dataConnectionValidation is DatabaseOps.ActionAsync<
     Database,
     DataConnectionValidation,
