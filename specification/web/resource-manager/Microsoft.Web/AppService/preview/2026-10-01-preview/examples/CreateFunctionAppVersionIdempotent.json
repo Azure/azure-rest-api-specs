@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sample-rg",
+    "name": "sample-func",
+    "versionName": "release-2026-10-01",
+    "api-version": "2026-10-01-preview",
+    "resource": {
+      "properties": {
+        "functionAppVersionConfig": {
+          "deployment": {
+            "appArtifact": {
+              "type": "zipPackage",
+              "reference": "8f3c1d92-4b6a-4f2d-93e7-61c08a4eb2c1",
+              "remoteBuild": false
+            }
+          },
+          "appSettings": {
+            "SampleSetting": "sample-value"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-01",
+        "name": "release-2026-10-01",
+        "type": "Microsoft.Web/sites/functionAppVersions",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "versionState": "Ready",
+          "functionAppVersionConfig": {
+            "deployment": {
+              "appArtifact": {
+                "type": "zipPackage",
+                "reference": "8f3c1d92-4b6a-4f2d-93e7-61c08a4eb2c1",
+                "remoteBuild": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppOperationResults/11111111-1111-1111-1111-111111111111?api-version=2026-10-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-01?api-version=2026-10-01-preview",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "FunctionAppVersions_Create",
+  "title": "Return an equivalent existing Function App version"
+}
