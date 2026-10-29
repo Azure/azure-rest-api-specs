@@ -28,12 +28,17 @@ directly in the v1 OpenAPI files; no separate event-schema file is generated.
 Commit the generated artifacts alongside their TypeSpec changes; do not edit
 them by hand.
 
-Run the emitter's focused extraction, combination, and serialization checks
-from the repository root:
+Run the emitter's extraction, combination, serialization, and compile-level
+regression checks from the repository root:
 
 ```sh
 node --test specification/ai-foundry/data-plane/Foundry/emitters/voice-event-reference.test.mjs
 ```
+
+This suite currently runs manually; dedicated CI wiring is pending. Compile-level
+checks write only to temporary directories, verify both API projections and output
+formats against the standard emitter, and exercise dry-run validation without
+writing output files.
 
 Reference ingestion can consume the combined OpenAPI YAML as a single input.
 The renderer must enumerate the `x-foundry-event-direction` roots and their

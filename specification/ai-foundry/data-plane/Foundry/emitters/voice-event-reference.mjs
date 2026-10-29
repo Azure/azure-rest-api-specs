@@ -17,6 +17,7 @@ import { stringify } from "yaml";
 
 export const $lib = createTypeSpecLibrary({
   name: "foundry-voice-events",
+  capabilities: { dryRun: true },
   diagnostics: {
     "invalid-event-bundle": {
       severity: "error",
