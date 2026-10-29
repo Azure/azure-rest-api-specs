@@ -77,7 +77,6 @@ stimuli:
           pattern: '(?:move|moveEmployee)\s+is\s+ArmResourceActionAsync\s*<\s*Employee\s*,\s*MoveRequest\s*,\s*MoveResponse(?:\s*>|\s*,\s*LroHeaders\s*=)'
           path: "employee.tsp"
       - type: "file-matches"
-        name: "file-matches-lro-response"
         config:
           pattern: 'ArmCombinedLroHeaders\s*<\s*(FinalResult\s*=\s*MoveResponse|ArmOperationStatus\s*,\s*MoveResponse|(Azure\.ResourceManager\.)?ArmOperationStatus\s*,\s*MoveResponse)\s*>'
           path: "employee.tsp"
@@ -108,7 +107,6 @@ stimuli:
           expected_exit_code: 0
       - *file_matches
       - type: "file-matches"
-        name: "file-matches-lro-response"
         config:
           path: "employee.tsp"
           pattern: 'ArmCombinedLroHeaders\s*<\s*(FinalResult\s*=\s*MoveResponse|ArmOperationStatus\s*,\s*MoveResponse|(Azure\.ResourceManager\.)?ArmOperationStatus\s*,\s*MoveResponse)\s*>'

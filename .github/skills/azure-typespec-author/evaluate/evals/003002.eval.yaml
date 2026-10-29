@@ -77,19 +77,16 @@ stimuli:
           path: "employee.tsp"
       - &file_matches_create_operation
         type: "file-matches"
-        name: "file-matches-create-operation"
         config:
           pattern: "createOrUpdate is ArmResourceCreateOrReplaceAsync<"
           path: "employee.tsp"
       - &file_matches_update_operation
         type: "file-matches"
-        name: "file-matches-update-operation"
         config:
           pattern: "update is ArmResourcePatchSync<Employee"
           path: "employee.tsp"
       - &file_matches_delete_operation
         type: "file-matches"
-        name: "file-matches-delete-operation"
         config:
           pattern: "delete is ArmResourceDeleteWithoutOkAsync<Employee>"
           path: "employee.tsp"
