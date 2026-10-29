@@ -8,6 +8,7 @@ comparisons; broad comparisons still require a caller-visible incompatibility.
 | Rule                        | Evidence to compare and decision                                                                                                                                                                      |
 | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `method-removed`            | Confirm the existing public method is absent, not merely paired under another identity.                                                                                                               |
+| `method-identity-changed`   | Require exact cross-language identity or explicit `@renamedFrom` lineage before pairing the baseline and target methods.                                                                              |
 | `method-location-changed`   | Compare client ownership and the existing invocation path. Approve an incompatible move.                                                                                                              |
 | `method-access-changed`     | Approve loss of public method access.                                                                                                                                                                 |
 | `method-parameters-changed` | Compare names, order, types, optionality, and method/client placement. Explain removal, rename, requiredness, or positional impact; an optional addition is not automatically compatible or breaking. |
@@ -25,6 +26,7 @@ HTTP metadata supplies location, not a language-specific method signature.
 | Rule                            | Evidence to compare and decision                                                                                                                                                         |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `model-property-removed`        | Identify the exact missing SDK member and affected caller access; apply the wrapper exception.                                                                                           |
+| `model-identity-changed`        | Require explicit `@renamedFrom` lineage for a changed model identity; never infer a replacement from names, shapes, or coincident add/remove changes.                                    |
 | `model-property-changed`        | Inspect the actual changed property fields: type, optionality, flattening, access, or serialized identity. Not every normalized property difference is breaking.                         |
 | `model-property-added-required` | Approve request/input and bidirectional usage; reject response/output-only addition. Establish direction from supplied evidence, not the model name.                                     |
 | `enum-values-removed`           | Compare SDK member names and wire values separately. A member rename with unchanged wire value can break SDK source use.                                                                 |
@@ -58,5 +60,8 @@ Do not invent method identities to fit presentation.
   cause.
 - Ignore YAML order, aliases, duplicate namespace views, artifact paths, and raw
   serialization noise.
+- Treat missing or ambiguous method/model identity as blocked. HTTP routes,
+  display names, request/response shapes, property overlap, and contextual
+  proximity are not replacement evidence.
 - Do not equate "public type availability" with service/region availability.
   If both facts say public and reachable, do not describe the type as removed.

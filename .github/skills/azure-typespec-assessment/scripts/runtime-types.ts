@@ -942,6 +942,7 @@ export interface PreparationBlocker {
   projectId?: string;
   comparisonRole?: string;
   sourceRevision?: string;
+  evidenceFactIds?: string[];
 }
 
 export interface ArtifactSelection {
@@ -1098,6 +1099,14 @@ export interface DownstreamCandidate {
   evidenceFactIds: string[];
   reviewRequired: true;
   rootCauseIds?: string[];
+  identityEvidence?: DownstreamIdentityEvidence;
+}
+
+export interface DownstreamIdentityEvidence {
+  basis: "typespec-renamed-from";
+  baselineIdentity: string;
+  targetIdentity: string;
+  declarationIds: string[];
 }
 
 export interface DownstreamRootCause {

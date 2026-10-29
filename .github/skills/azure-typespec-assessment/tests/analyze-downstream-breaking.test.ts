@@ -317,7 +317,7 @@ void test("retains actual LRO behavior changes", (context) => {
   assert.ok(!result.candidates.some((item) => item.rule === "method-parameters-changed"));
 });
 
-void test("reports SDK method identity changes when matching by HTTP route", (context) => {
+void test("does not infer SDK method replacement from an unchanged HTTP route", (context) => {
   const base = packageShape(false);
   const current = packageShape(false);
   const method = current.clients[0].methods[0];
@@ -326,8 +326,153 @@ void test("reports SDK method identity changes when matching by HTTP route", (co
 
   const result = analyzeShapes(context, base, current);
 
-  assert.ok(result.candidates.some((item) => item.rule === "method-identity-changed"));
+  assert.ok(result.candidates.some((item) => item.rule === "method-removed"));
+  assert.ok(!result.candidates.some((item) => item.rule === "method-identity-changed"));
+  assert.equal(
+    result.candidates.find((item) => item.rule === "method-removed")?.evidenceFactIds.length,
+    1,
+  );
+});
+
+void test("uses explicit renamedFrom lineage to pair renamed SDK methods", (context) => {
+  const base = packageShape(false);
+  const current = packageShape(false);
+  const method = current.clients[0].methods[0];
+  method.name = "abort";
+  method.crossLanguageDefinitionId = "Microsoft.Chaos.ScenarioRuns.abort";
+
+  const result = analyzeShapes(context, base, current, [
+    {
+      id: "abort-current",
+      kind: "operation",
+      qualifiedName: "ScenarioRuns.abort",
+      decorators: ['@renamedFrom(Versions.v2, "cancel")'],
+      hunkIds: ["rename-hunk"],
+      source: { revision: "current" },
+    },
+  ]);
+  const candidate = result.candidates.find((item) => item.rule === "method-identity-changed");
+
+  assert.ok(candidate);
+  assert.deepEqual(candidate.identityEvidence, {
+    basis: "typespec-renamed-from",
+    baselineIdentity: "Microsoft.Chaos.ScenarioRuns.cancel",
+    targetIdentity: "Microsoft.Chaos.ScenarioRuns.abort",
+    declarationIds: ["abort-current"],
+  });
   assert.ok(!result.candidates.some((item) => item.rule === "method-removed"));
+  assert.equal(result.blockers.length, 0);
+});
+
+void test("uses stable cross-language identity when generated model names change", (context) => {
+  const base = packageShape(false);
+  const current = packageShape(false);
+  current.models[0].name = "ChaosScenarioRun";
+
+  const result = analyzeShapes(context, base, current);
+  const candidate = result.candidates.find((item) => item.rule === "model-identity-changed");
+
+  assert.ok(candidate);
+  assert.equal(candidate.identityEvidence, undefined);
+  assert.equal(candidate.evidenceFactIds.length, 2);
+  assert.equal(result.blockers.length, 0);
+});
+
+void test("uses explicit renamedFrom lineage to pair renamed SDK models", (context) => {
+  const base = packageShape(false);
+  const current = packageShape(false);
+  current.models[0].name = "ChaosScenarioRun";
+  current.models[0].crossLanguageDefinitionId = "Microsoft.Chaos.ChaosScenarioRun";
+
+  const result = analyzeShapes(context, base, current, [
+    {
+      id: "chaos-run-current",
+      kind: "model",
+      qualifiedName: "ChaosScenarioRun",
+      decorators: ['@renamedFrom(Versions.v2, "ScenarioRun")'],
+      hunkIds: ["rename-hunk"],
+      source: { revision: "current" },
+    },
+  ]);
+  const candidate = result.candidates.find((item) => item.rule === "model-identity-changed");
+
+  assert.ok(candidate);
+  assert.equal(candidate.identityEvidence?.basis, "typespec-renamed-from");
+  assert.ok(!result.candidates.some((item) => item.rule === "public-surface-changed"));
+  assert.equal(result.blockers.length, 0);
+});
+
+void test("keeps the PR 44384 Encryption model when a similar additive model is introduced", (context) => {
+  const base = packageShape(false);
+  const current = packageShape(false);
+  for (const shape of [base, current]) {
+    shape.models[0].name = "Encryption";
+    shape.models[0].crossLanguageDefinitionId = "Microsoft.Chaos.Encryption";
+  }
+  current.models.push({
+    ...structuredClone(current.models[0]),
+    name: "StorageAccountEncryption",
+    crossLanguageDefinitionId: "Microsoft.Chaos.StorageAccountEncryption",
+  });
+
+  const result = analyzeShapes(context, base, current);
+
+  assert.equal(result.candidates.length, 0);
+  assert.equal(result.blockers.length, 0);
+});
+
+void test("keeps similar-shaped model additions independent from removals", (context) => {
+  const base = packageShape(false);
+  const current = packageShape(false);
+  base.models[0].name = "Encryption";
+  base.models[0].crossLanguageDefinitionId = "Microsoft.Chaos.Encryption";
+  current.models[0].name = "StorageAccountEncryption";
+  current.models[0].crossLanguageDefinitionId = "Microsoft.Chaos.StorageAccountEncryption";
+
+  const result = analyzeShapes(context, base, current);
+  const removal = result.candidates.find((item) => item.rule === "public-surface-changed");
+
+  assert.ok(removal);
+  assert.equal(removal.evidenceFactIds.length, 1);
+  assert.ok(!result.candidates.some((item) => item.rule === "model-identity-changed"));
+  assert.equal(result.blockers.length, 0);
+});
+
+void test("blocks model comparison when canonical identity evidence is missing", (context) => {
+  const base = packageShape(false);
+  const current = packageShape(false);
+  delete (base.models[0] as { crossLanguageDefinitionId?: string }).crossLanguageDefinitionId;
+  delete (current.models[0] as { crossLanguageDefinitionId?: string }).crossLanguageDefinitionId;
+
+  const result = analyzeShapes(context, base, current);
+  const blocker = result.blockers.find((item) => item.code === "downstream-identity-unresolved");
+
+  assert.ok(blocker);
+  assert.equal(result.candidates.length, 0);
+  assert.deepEqual(blocker.evidenceFactIds?.map((id) => result.facts[id].comparisonRole).sort(), [
+    "baseline",
+    "target",
+  ]);
+  assert.match(blocker.message, /generated names, shapes, or locations is not identity evidence/);
+});
+
+void test("blocks ambiguous target cross-language identities", (context) => {
+  const base = packageShape(false);
+  const current = packageShape(false);
+  current.models.push(structuredClone(current.models[0]));
+
+  const result = analyzeShapes(context, base, current);
+  const blocker = result.blockers.find((item) =>
+    item.message.includes("multiple target symbols have the same crossLanguageDefinitionId"),
+  );
+
+  assert.ok(blocker);
+  assert.equal(result.candidates.length, 0);
+  assert.deepEqual(blocker.evidenceFactIds?.map((id) => result.facts[id].comparisonRole).sort(), [
+    "baseline",
+    "target",
+    "target",
+  ]);
 });
 
 void test("detects model base and discriminator hierarchy changes", (context) => {
@@ -493,7 +638,22 @@ void test("links nested response type changes to unchanged public methods", (con
   );
   assert.ok(root);
   assert.equal(root.kind, "type-contract-propagation");
-  assert.equal(root.methodFactIds.length, 1);
+  assert.equal(root.methodFactIds.length, 2);
+  assert.deepEqual(root.methodFactIds.map((id) => result.facts[id].comparisonRole).sort(), [
+    "baseline",
+    "target",
+  ]);
+  assert.deepEqual(
+    [
+      ...new Set(
+        root.referenceEvidence.map((edge) => {
+          assert.ok(edge.fromFactId);
+          return result.facts[edge.fromFactId].comparisonRole;
+        }),
+      ),
+    ].sort(),
+    ["baseline", "target"],
+  );
   assert.ok(
     root.referenceEvidence.some(
       (edge) => edge.kind === "response" && edge.location === "response-body",
@@ -514,4 +674,34 @@ void test("links nested response type changes to unchanged public methods", (con
         fact.crossLanguageDefinitionId === "Storage.File.Directory.listFilesAndDirectoriesSegment",
     ),
   );
+});
+
+void test("retains the unchanged baseline method and parent types for a target-only reference path", (context) => {
+  const baseline = nestedResponseShape(false);
+  baseline.models[0].properties = [];
+  const result = analyzeShapes(context, baseline, nestedResponseShape(true));
+  const candidate = result.candidates.find((item) => item.rule === "model-property-removed");
+  assert.ok(candidate);
+  const root = result.rootCauses.find((item) => item.directCandidateIds.includes(candidate.id));
+  assert.ok(root);
+  assert.deepEqual(root.methodFactIds.map((id) => result.facts[id].comparisonRole).sort(), [
+    "baseline",
+    "target",
+  ]);
+  assert.ok(
+    root.referenceEvidence.every(
+      (edge) => edge.fromFactId && result.facts[edge.fromFactId].comparisonRole === "target",
+    ),
+  );
+  assert.ok(
+    root.typeFactIds.some((id) => {
+      const fact = result.facts[id];
+      return (
+        fact.comparisonRole === "baseline" &&
+        fact.identity === "Storage.File.ListFilesAndDirectoriesSegmentResponse" &&
+        fact.properties?.length === 0
+      );
+    }),
+  );
+  assert.ok(!result.candidates.some((item) => item.rule.startsWith("method-")));
 });

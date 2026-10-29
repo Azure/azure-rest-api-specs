@@ -30,6 +30,10 @@ template. Its compliance judgments prefill eligible intent-scoped qualified
 `declarationNames`; retain only names supporting each judgment. Never copy its
 intentionally invalid unresolved placeholders into the completed file.
 
+Never reinterpret separate downstream additions and removals as a rename or
+replacement. Use only the candidate's supplied identity evidence; unresolved
+or ambiguous identity remains blocked.
+
 If `inferenceRequests` is empty, omit `inferenceResults`. Otherwise, analyze
 only supplied unknown hunks and write one exact compact result per request to
 `agent-workspace\agent-decisions.json`. Each is `candidates`, `no-impact`, or
