@@ -79,6 +79,19 @@ suppressions:
       - $.definitions.RaiAcsManifest.properties.policies
       - $.definitions.RaiAcsManifest.properties.tools
       - $.definitions.RaiAcsToolDefinition
+  - code: AvoidAdditionalProperties
+    reason: ACS annotator declarations and intervention-point bindings are canonical name-keyed maps with host-defined configuration. Typed entries retain required type/from fields; closed properties or arrays would break manifest portability and round-tripping.
+    from: cognitiveservices.json
+    where:
+      - $.definitions.RaiAcsAnnotatorDefinition
+      - $.definitions.RaiAcsAnnotationBinding
+      - $.definitions.RaiAcsManifest.properties.annotators
+      - $.definitions.RaiAcsInterventionPoint.properties.annotations
+      - $.definitions.RaiAcsToolInterventionPoint.properties.annotations
+      - $.definitions.RaiAcsAgentStartupInterventionPoint.properties.annotations
+      - $.definitions.RaiAcsPreModelCallInterventionPoint.properties.annotations
+      - $.definitions.RaiAcsPostModelCallInterventionPoint.properties.annotations
+      - $.definitions.RaiAcsAgentShutdownInterventionPoint.properties.annotations
   - code: PutResponseCodes
     reason: Compute create is a genuine long-running async operation - the service returns 202 Accepted on success (never 200/201) and 4xx on failure. Modeling 202-only reflects the real backend contract (live-validated). Preview-only bug fix correcting the contract before GA.
     where:
@@ -1851,6 +1864,26 @@ directive:
 ---
 
 # Code Generation
+
+## Optional ACS Annotations (2026-11-15-preview)
+
+November adds optional `acs.annotators` declarations and per-point `annotations`
+bindings. Entries are keyed by annotator name; supplied declarations require `type`
+and bindings require `from`. Other configuration is host-defined JSON. Omitting
+these maps or using empty maps requests no annotations. Earlier API versions retain
+their original empty-only annotation profile.
+
+The `*AcsWithAnnotationsAndEgress.json` PUT, GET, and LIST examples combine optional
+Azure OpenAI judge annotations with the eight existing November intervention points
+and an optional top-level `properties.egressPolicy` sibling of `properties.acs`.
+Egress uses the existing schema, is not evaluated by the ACS SDK, and uses Audit mode
+in these examples. Responses omit write-only header literals. Host admission,
+deployment enrollment, egress persistence, and enforcement require separate backend
+readiness; these examples do not enable them.
+
+After TypeSpec generation, run `node --test test/acs-annotations.test.mjs` from this
+project. Set `ACS_ANNOTATIONS_BASE_REF` to the November integration branch's baseline
+commit to include the historical-version and exact-scope regression checks.
 
 ## Swagger to SDK
 

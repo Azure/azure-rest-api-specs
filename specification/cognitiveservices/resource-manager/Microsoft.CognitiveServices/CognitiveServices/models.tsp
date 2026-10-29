@@ -664,6 +664,41 @@ model RaiAcsModerationBindingExtension {
 @added(Versions.v2026_11_15_preview)
 model RaiAcsEmptyObject {}
 
+/** Extensible kinds of Agent Control Specification annotator dispatchers. */
+@added(Versions.v2026_11_15_preview)
+union RaiAcsAnnotatorType {
+  string,
+
+  /** Obtains annotations from a classifier dispatcher. */
+  Classifier: "classifier",
+
+  /** Obtains annotations from a language-model dispatcher. */
+  Llm: "llm",
+
+  /** Obtains annotations from an external endpoint dispatcher. */
+  Endpoint: "endpoint",
+}
+
+/** A named Agent Control Specification annotator declaration with host-defined configuration. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS annotators permit extensible host-defined configuration"
+@added(Versions.v2026_11_15_preview)
+model RaiAcsAnnotatorDefinition {
+  ...Record<unknown>;
+
+  /** The dispatcher kind. Supported configuration is determined by the evaluation host. */
+  type: RaiAcsAnnotatorType;
+}
+
+/** Binds an annotator to a subject at one intervention point. The map key selects its declaration. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS annotation bindings permit extensible host-defined configuration"
+@added(Versions.v2026_11_15_preview)
+model RaiAcsAnnotationBinding {
+  ...Record<unknown>;
+
+  /** The Agent Control Specification path selecting the subject passed to the annotator. */
+  from: string;
+}
+
 /** Static policy metadata for one Agent Control Specification tool catalog entry. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS tool entries permit extensible policy metadata"
 @added(Versions.v2026_09_15_preview)
@@ -818,7 +853,15 @@ model RaiAcsInterventionPointTemplate<PolicyTarget, PolicyTargetKind> {
   policy: RaiAcsPolicyBinding;
 
   /** Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty. */
-  annotations?: RaiAcsEmptyObject;
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @renamedFrom(Versions.v2026_11_15_preview, "annotations")
+  legacyAnnotations?: RaiAcsEmptyObject;
+
+  /** Optional annotator bindings keyed by declaration name. Results are available to Rego as input.annotations.<name>. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS defines annotations as a name-keyed map"
+  @added(Versions.v2026_11_15_preview)
+  annotations?: Record<RaiAcsAnnotationBinding>;
 }
 
 /**
@@ -952,7 +995,15 @@ model RaiAcsManifest {
   tools?: Record<RaiAcsToolDefinition>;
 
   /** Standard Agent Control Specification annotator dispatch is disabled; when present, this object must be empty. */
-  annotators?: RaiAcsEmptyObject;
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @renamedFrom(Versions.v2026_11_15_preview, "annotators")
+  legacyAnnotators?: RaiAcsEmptyObject;
+
+  /** Optional annotator declarations keyed by name. Omitted or empty maps request no annotator declarations. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS defines annotators as a name-keyed map"
+  @added(Versions.v2026_11_15_preview)
+  annotators?: Record<RaiAcsAnnotatorDefinition>;
 }
 
 /**
