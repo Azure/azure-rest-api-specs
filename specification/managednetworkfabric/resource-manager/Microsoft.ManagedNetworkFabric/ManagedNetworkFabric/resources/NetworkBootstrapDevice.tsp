@@ -1,17 +1,21 @@
 import "../models/common.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance is required here to maintain compatibility with existing API structure"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Bootstrap Device resource definition.")
-model NetworkBootstrapDevice is Azure.ResourceManager.TrackedResource<
-  NetworkBootstrapDeviceProperties,
-  false
-> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  NetworkBootstrapDeviceProperties
+)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkBootstrapDevice
+  extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Network Bootstrap Device.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -21,14 +25,14 @@ model NetworkBootstrapDevice is Azure.ResourceManager.TrackedResource<
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @doc("The NetworkBootstrapDevice properties")
+  properties: NetworkBootstrapDeviceProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
-@@doc(
-  NetworkBootstrapDevice.properties,
-  "The NetworkBootstrapDevice properties"
-);
 @armResourceOperations
 @added(Versions.v2025_07_15)
 interface NetworkBootstrapDevices {
@@ -90,6 +94,24 @@ interface NetworkBootstrapDevices {
     void,
     NetworkBootstrapDeviceResyncPasswordsResponse
   >;
+
+  @doc("Run the RO Command on the Network Bootstrap Device.")
+  @added(Versions.v2026_07_15_preview)
+  @action("runRoCommand")
+  runRoCommand is ArmResourceActionAsync<
+    NetworkBootstrapDevice,
+    DeviceRoCommand,
+    NetworkBootstrapDeviceRunRoCommandResponse
+  >;
+
+  @doc("Run the RW Command on the Network Bootstrap Device.")
+  @added(Versions.v2026_07_15_preview)
+  @action("runRwCommand")
+  runRwCommand is ArmResourceActionAsync<
+    NetworkBootstrapDevice,
+    DeviceRwCommand,
+    NetworkBootstrapDeviceRunRwCommandResponse
+  >;
 }
 
 @@doc(NetworkBootstrapDevices.create::parameters.resource, "Request payload.");
@@ -106,4 +128,12 @@ interface NetworkBootstrapDevices {
 @@doc(
   NetworkBootstrapDevices.resyncPasswords::parameters.body,
   "Request payload."
+);
+@@doc(
+  NetworkBootstrapDevices.runRoCommand::parameters.body,
+  "Request the command."
+);
+@@doc(
+  NetworkBootstrapDevices.runRwCommand::parameters.body,
+  "Request the command."
 );

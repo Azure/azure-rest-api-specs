@@ -2,17 +2,18 @@ import "../models/common.tsp";
 import "./L3IsolationDomain.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the External Network resource.")
 @parentResource(L3IsolationDomain)
-model ExternalNetwork is Azure.ResourceManager.ProxyResource<
-  ExternalNetworkProperties,
-  false
-> {
+@Http.Private.includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ExternalNetworkProperties)
+model ExternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
   @doc("Name of the External Network.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -20,9 +21,11 @@ model ExternalNetwork is Azure.ResourceManager.ProxyResource<
   @segment("externalNetworks")
   @visibility(Lifecycle.Read)
   name: string;
-}
 
-@@doc(ExternalNetwork.properties, "External Network Properties");
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @doc("External Network Properties")
+  properties: ExternalNetworkProperties;
+}
 
 @armResourceOperations
 interface ExternalNetworks {
