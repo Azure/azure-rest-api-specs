@@ -660,7 +660,7 @@ model TelephonyBindingProperties {
   @doc("The lifecycle status.")
   status: TelephonyBindingStatus;
 
-  @doc("SIP URI for SIP bindings; HTTPS webhook URL for other providers.")
+  @doc("The service-generated webhook URL to configure with the telephony provider. For SIP bindings, this is a SIP URI.")
   incoming_call_url: url;
 }
 
