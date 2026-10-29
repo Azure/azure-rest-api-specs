@@ -4871,8 +4871,9 @@ model ProjectProperties {
   /**
    * The project-level tool access policy. Omitting this property in a PUT request clears the policy. In PATCH requests, omission preserves the policy and an explicit null clears it. Responses omit this property when no policy is configured.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service accepts explicit null to clear a project tool policy in PUT and PATCH; omission in PATCH preserves the existing policy."
   @added(Versions.v2026_09_15_preview)
-  toolControls?: ToolControls;
+  toolControls?: ToolControls | null;
 }
 
 /**
@@ -4903,10 +4904,10 @@ model ToolControlEntry {
   type: ToolControlType;
 
   /**
-   * The absolute HTTPS URL of an MCP server. A single wildcard in the leftmost host label, such as https://*.contoso.com/mcp, is supported. The URL must not contain user information. Applies only to type mcp and cannot be specified together with connectorId.
+   * The absolute HTTPS URL or URL pattern of an MCP server, stored as a string to support wildcards. The entire URL may contain at most one literal '*' across its hostname, path, query, and fragment. Supported patterns include https://*.contoso.com/mcp, https://contoso.com/mcp/*, https://contoso.com/mcp?tenant=*, and https://contoso.com/mcp#*. A hostname wildcard must be the leftmost label. The URL must not contain user information. Applies only to type mcp and cannot be specified together with connectorId.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "The serverUrl name matches the service-side JSON contract."
-  serverUrl?: url;
+  serverUrl?: string;
 
   /**
    * The opaque MCP connector catalog identifier, not an Azure resource ID. Applies only to type mcp and cannot be specified together with serverUrl.

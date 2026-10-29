@@ -7556,6 +7556,9 @@
           }
         },
         "x-ms-examples": {
+          "Clear a Foundry project's tool controls with explicit null": {
+            "$ref": "./examples/UpdateProjectClearToolControls.json"
+          },
           "Update Project": {
             "$ref": "./examples/UpdateProjects.json"
           },
@@ -20780,7 +20783,8 @@
         },
         "toolControls": {
           "$ref": "#/definitions/ToolControls",
-          "description": "The project-level tool access policy. Omitting this property in a PUT request clears the policy. In PATCH requests, omission preserves the policy and an explicit null clears it. Responses omit this property when no policy is configured."
+          "description": "The project-level tool access policy. Omitting this property in a PUT request clears the policy. In PATCH requests, omission preserves the policy and an explicit null clears it. Responses omit this property when no policy is configured.",
+          "x-nullable": true
         }
       }
     },
@@ -23883,8 +23887,7 @@
         },
         "serverUrl": {
           "type": "string",
-          "format": "uri",
-          "description": "The absolute HTTPS URL of an MCP server. A single wildcard in the leftmost host label, such as https://*.contoso.com/mcp, is supported. The URL must not contain user information. Applies only to type mcp and cannot be specified together with connectorId."
+          "description": "The absolute HTTPS URL or URL pattern of an MCP server, stored as a string to support wildcards. The entire URL may contain at most one literal '*' across its hostname, path, query, and fragment. Supported patterns include https://*.contoso.com/mcp, https://contoso.com/mcp/*, https://contoso.com/mcp?tenant=*, and https://contoso.com/mcp#*. A hostname wildcard must be the leftmost label. The URL must not contain user information. Applies only to type mcp and cannot be specified together with connectorId."
         },
         "connectorId": {
           "type": "string",
