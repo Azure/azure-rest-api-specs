@@ -68,7 +68,7 @@ model PlaywrightWorkspaceProperties {
 
   @added(Versions.v2026_11_01_preview)
   @doc("Specifies whether the browser proxy is enabled for the workspace.")
-  browserProxy?: EnablementStatus = EnablementStatus.Disabled;
+  browserProxy?: EnablementStatus = EnablementStatus.Enabled;
 
   @added(Versions.v2026_11_01_preview)
   @doc("The Azure Key Vault linked to the workspace and the managed identity used to access it.")
