@@ -35,6 +35,10 @@ only supplied unknown hunks and write one exact compact result per request to
 `agent-workspace\agent-decisions.json`. Each is `candidates`, `no-impact`, or
 `blocked`. Inferred candidates may use only the request's source, hunk,
 operations, facts, and allowed dimensions. Never modify `model-input.json`.
+A new API version does not exempt supplied REST candidates from judgment.
+Describe confirmed impacts as cross-version migration incompatibilities, not
+as regressions to an unchanged version selector. Preserve blockers for missing,
+unresolved, or ambiguous contract evidence.
 
 The compact decision file must contain one concise result per supplied Semantic
 review unit and exact deterministic and inferred REST/downstream candidate

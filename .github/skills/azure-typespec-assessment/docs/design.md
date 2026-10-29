@@ -383,12 +383,20 @@ target   = head source @ 2026-05-01-preview
 Version-aware REST classification:
 
 - In `new-api-version` mode, baseline-to-target wire differences describe
-  version-scoped REST evolution and appear in Semantic operation cards.
-- They do not create REST breaking findings solely because the newly added
-  version differs from the previous version.
-- The baseline projection must be successfully produced from current source;
-  this proves the previous stable/preview version remains representable by the
-  final TypeSpec.
+  cross-version migration compatibility between the selected previous and new
+  API-version projections.
+- Substantive differences remain REST breaking candidates. Do not suppress
+  them merely because the target version is newly published.
+- Exclude only a proven singleton `api-version` selector literal change when
+  its requiredness and serialization are otherwise unchanged.
+- Compare request and response shapes using their emitted visibility:
+  read-only properties do not participate in request compatibility, and
+  create-only properties do not participate in response compatibility.
+- Successful head-source compilation of the previous projection proves only
+  that the projection is representable. It does not prove that the previously
+  published contract was preserved.
+- Preserve unresolved references, ambiguous visibility, and unavailable
+  artifacts as blockers rather than treating missing evidence as compatible.
 - TCGC differences may still be downstream SDK breaking when the generated
   public method/type identity is reused across the version transition.
 - In `existing-api-version` and `unversioned` modes, incompatible
