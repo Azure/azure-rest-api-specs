@@ -37,7 +37,8 @@
                     "endpoint": "https://synthetic-judge.openai.azure.com/",
                     "deployment": "judge",
                     "api_version": "2024-10-21",
-                    "system_prompt": "Classify the complete subject.",
+                    "result_schema": "acs.judge.observation/v2",
+                    "system_prompt": "Classify the complete subject for harmful intent. Score from 0 to 10: 0 is benign, 5 is ambiguous or potentially harmful, and 10 is clear harmful intent. Use label clear for scores below 4, review for scores from 4 to below 7, and high_risk for scores of 7 or higher. Report observations only; Rego decides the action.",
                     "timeout_ms": 10000
                   }
                 },

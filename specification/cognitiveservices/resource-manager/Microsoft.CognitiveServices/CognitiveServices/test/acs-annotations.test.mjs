@@ -137,6 +137,23 @@ test("the combined example uses the existing optional egress sibling without cha
   );
 });
 
+test("the judge example selects v2 with a custom-label rubric without changing the open schema", () => {
+  const judge = request.acs.annotators.risk;
+  assert.equal(judge.result_schema, "acs.judge.observation/v2");
+  for (const phrase of [
+    "0 to 10",
+    "clear",
+    "review",
+    "high_risk",
+    "Rego decides the action",
+  ])
+    assert(judge.system_prompt.includes(phrase), phrase);
+  const definition = spec.definitions.RaiAcsAnnotatorDefinition;
+  assert.deepEqual(definition.required, ["type"]);
+  assert(!Object.hasOwn(definition.properties, "result_schema"));
+  assert.deepEqual(definition.additionalProperties, {});
+});
+
 test("PUT GET and LIST preserve the authored manifest and redact write-only egress literals", () => {
   const expected = structuredClone(request);
   expected.type = "UserManaged";

@@ -1881,6 +1881,13 @@ in these examples. Responses omit write-only header literals. Host admission,
 deployment enrollment, egress persistence, and enforcement require separate backend
 readiness; these examples do not enable them.
 
+The illustrative Azure OpenAI judge configuration explicitly selects
+`result_schema: acs.judge.observation/v2` for custom labels and a 0-to-10 rubric.
+In that host profile, omitting `result_schema` retains the v1 default with fixed
+labels and a 0-to-1 score. The selector remains optional host-defined configuration,
+not a required public property. Judge observations are inputs to Rego; Rego decides
+the action.
+
 After TypeSpec generation, run `node --test test/acs-annotations.test.mjs` from this
 project. Set `ACS_ANNOTATIONS_BASE_REF` to the November integration branch's baseline
 commit to include the historical-version and exact-scope regression checks.
