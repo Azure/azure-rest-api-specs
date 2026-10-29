@@ -343,7 +343,7 @@ model CostControlProviderPropertiesPatch {
 /** Blocks requests when consumption reaches the explicitly configured threshold. No implicit blocking action is created. */
 @added(Versions.v2026_11_15_preview)
 model CostControlAction {
-  /** The enforcement action. Only `Block` is supported; input is case-insensitive and responses use this canonical spelling. */
+  /** The enforcement action. Only `Block` is supported. */
   type: "Block";
 
   /** Whether threshold is a percentage of amount or an absolute value in the budget's unit. */
