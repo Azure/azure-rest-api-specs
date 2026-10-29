@@ -1,0 +1,30 @@
+{
+  "title": "Clear SIP binding caller restrictions (VoiceAgents V2 preview)",
+  "operationId": "AgentTelephony_updateTelephonyBinding",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V2Preview",
+    "agent_name": "support-agent",
+    "binding_id": "binding_support_sip",
+    "If-Match": "\"binding-etag-sip-1\"",
+    "body": {
+      "allowed_calling_numbers": []
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"binding-etag-sip-2\""
+      },
+      "body": {
+        "id": "binding_support_sip",
+        "provider": "sip",
+        "connection_name": "sip-support-connection",
+        "phone_number": "+14255550100",
+        "label": "Customer support SIP",
+        "incoming_call_url": "sip:support-agent@voice.contoso.com",
+        "allowed_calling_numbers": []
+      }
+    }
+  }
+}
