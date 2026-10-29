@@ -30,10 +30,36 @@ model Connection {
   @visibility(Lifecycle.Read)
   credentials: BaseCredentials;
 
-  @doc("Metadata of the connection")
+  @doc("Metadata of the connection. SIP custom_headers is returned as an object of string header values, not a JSON-encoded string.")
   @visibility(Lifecycle.Read)
-  metadata: Record<string>;
+  metadata: ConnectionMetadata;
 }
+
+/** Connection metadata, including structured SIP custom headers. */
+model ConnectionMetadata {
+  /**
+   * SIP custom headers as an object of string values. Null, a blank string, or an empty object means no headers.
+   * A nonblank string, including a JSON-encoded object, is not a valid SIP custom_headers value.
+   */
+  custom_headers?: SipConnectionCustomHeaders;
+
+  ...Record<string>;
+}
+
+/** Structured SIP headers, or an unset value indicating no headers. */
+union SipConnectionCustomHeaders {
+  /** Header names mapped to their string values. */
+  headers: Record<string>,
+
+  /** Only a blank string is valid; JSON-encoded header objects are not supported. */
+  unset: SipConnectionEmptyCustomHeaders,
+
+  null,
+}
+
+/** An empty or whitespace-only SIP custom_headers value indicating no headers. */
+@pattern("^\\s*$")
+scalar SipConnectionEmptyCustomHeaders extends string;
 
 @doc("A base class for connection credentials")
 @discriminator("type")

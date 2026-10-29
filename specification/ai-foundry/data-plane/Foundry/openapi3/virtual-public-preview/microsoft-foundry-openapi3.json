@@ -43118,15 +43118,25 @@
             "readOnly": true
           },
           "metadata": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "type": "string"
-            },
-            "description": "Metadata of the connection",
+            "$ref": "#/components/schemas/ConnectionMetadata",
+            "description": "Metadata of the connection. SIP custom_headers is returned as an object of string header values, not a JSON-encoded string.",
             "readOnly": true
           }
         },
         "description": "Response from the list and get connections operations"
+      },
+      "ConnectionMetadata": {
+        "type": "object",
+        "properties": {
+          "custom_headers": {
+            "$ref": "#/components/schemas/SipConnectionCustomHeaders",
+            "description": "SIP custom headers as an object of string values. Null, a blank string, or an empty object means no headers.\nA nonblank string, including a JSON-encoded object, is not a valid SIP custom_headers value."
+          }
+        },
+        "unevaluatedProperties": {
+          "type": "string"
+        },
+        "description": "Connection metadata, including structured SIP custom headers."
       },
       "ConnectionType": {
         "anyOf": [
@@ -44051,7 +44061,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
-            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SipOutbound. SipOutbound uses authType CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl; missing, null, blank, or empty-object values default to digest. Other non-string values are invalid. Digest requires nonblank credentials.keys.username and credentials.keys.password. IP ACL requires non-null credentials.keys.source_cidrs: a comma-separated string of at most 4096 original characters before trimming/splitting and 64 entries before deduplication. Empty string allows all source IPs; whitespace-only strings and empty entries are invalid. Use canonical IPv4 or native IPv6 addresses or CIDRs (prefixes 0-32 or 0-128); scoped and IPv4-mapped IPv6, including hexadecimal forms, are unsupported. No public metadata or binding CIDR fallback is supported. Extra credential keys from the other mode are allowed. Connection PATCH may omit/null credentials when the effective mode is unchanged; supplied credentials must contain all mode-required keys and persist by key-wise merge. Optional metadata.enabled_codecs is an ordered, case-insensitive comma-separated list of g722, pcmu, pcma, opus, or amr-wb, without duplicates or empty entries. Missing, null, blank, or empty-object values use g722,pcmu,pcma without writing the default. Other non-string values are invalid. Public metadata.custom_headers is an object of string values, not a JSON-encoded string. Missing, null, blank-string, or empty-object values mean no headers. At most 32 headers are allowed; names use token characters, start with X-, and are at most 256 characters. Under X-MS- only X-MS-Custom- is allowed. Names must be unique case-insensitively. Values are at most 4096 characters, contain no control characters, and are preserved exactly, including empty strings. Metadata PATCH merges top-level keys; null removes a key and a supplied header object replaces the whole object. AccountRP retains broad target storage validation; saving a connection is not an execution guarantee. At use time Agents requires target <dns-host>[:<port>], with port 1-65535 and no schemes, IP literals, whitespace, user info, paths, queries, fragments, or SIP parameters. An invalid target fails the Job/Attempt with actionable target-redacted diagnostics before MG origination, not ambiguous-provider reconciliation. DNS, TLS, network, and carrier failures remain execution failures with existing provider diagnostics. CustomKeys PATCH should explicitly include the current target to avoid the existing client-default overwrite. The call job does not carry connection settings. No inbound telephony binding is required."
+            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio,\nAzure Communication Services / Teams Phone extensibility, or SipOutbound. SipOutbound uses authType CustomKeys.\n\nTrimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl; missing, null, blank, or empty-object\nvalues default to digest. Other non-string values are invalid. Digest requires nonblank credentials.keys.username\nand credentials.keys.password. IP ACL requires non-null credentials.keys.source_cidrs: a comma-separated string of\nat most 4096 original characters before trimming/splitting and 64 entries before deduplication. Empty string allows\nall source IPs; whitespace-only strings and empty entries are invalid. Use canonical IPv4 or native IPv6 addresses\nor CIDRs (prefixes 0-32 or 0-128); scoped and IPv4-mapped IPv6, including hexadecimal forms, are unsupported.\nNo public metadata or binding CIDR fallback is supported. Extra credential keys from the other mode are allowed.\nConnection PATCH may omit/null credentials when the effective mode is unchanged; supplied credentials must contain\nall mode-required keys and persist by key-wise merge.\n\nOptional metadata.enabled_codecs is an ordered, case-insensitive comma-separated list of g722, pcmu, pcma, opus,\nor amr-wb, without duplicates or empty entries. Missing, null, blank, or empty-object values use g722,pcmu,pcma\nwithout writing the default. Other non-string values are invalid.\n\nPublic metadata.custom_headers is an object of string values, not a JSON-encoded string. Missing, null, blank-string,\nor empty-object values mean no headers. At most 32 headers are allowed; names use token characters, start with X-,\nand are at most 256 characters. Under X-MS- only X-MS-Custom- is allowed. Names must be unique case-insensitively.\nValues are at most 4096 characters, contain no control characters, and are preserved exactly, including empty strings.\nMetadata PATCH merges top-level keys; null removes a key and a supplied header object replaces the whole object.\n\nAccountRP retains broad target storage validation; saving a connection is not an execution guarantee. At use time\nAgents requires target <dns-host>[:<port>], with port 1-65535 and no schemes, IP literals, whitespace, user info, paths,\nqueries, fragments, or SIP parameters. An invalid target fails the Job/Attempt with actionable target-redacted\ndiagnostics before MG origination, not ambiguous-provider reconciliation. DNS, TLS, network, and carrier failures\nremain execution failures with existing provider diagnostics. CustomKeys PATCH should explicitly include the current\ntarget to avoid the existing client-default overwrite. The call job does not carry connection settings.\nNo inbound telephony binding is required."
           },
           "source": {
             "$ref": "#/components/schemas/TelephonyOutboundSource",
@@ -95491,6 +95501,28 @@
           ]
         }
       },
+      "SipConnectionCustomHeaders": {
+        "anyOf": [
+          {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/schemas/SipConnectionEmptyCustomHeaders"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Structured SIP headers, or an unset value indicating no headers."
+      },
+      "SipConnectionEmptyCustomHeaders": {
+        "type": "string",
+        "pattern": "^\\s*$",
+        "description": "An empty or whitespace-only SIP custom_headers value indicating no headers."
+      },
       "SipTelephonyBinding": {
         "type": "object",
         "required": [
@@ -96838,7 +96870,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
-            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SipOutbound. SipOutbound uses authType CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl; missing, null, blank, or empty-object values default to digest. Other non-string values are invalid. Digest requires nonblank credentials.keys.username and credentials.keys.password. IP ACL requires non-null credentials.keys.source_cidrs: a comma-separated string of at most 4096 original characters before trimming/splitting and 64 entries before deduplication. Empty string allows all source IPs; whitespace-only strings and empty entries are invalid. Use canonical IPv4 or native IPv6 addresses or CIDRs (prefixes 0-32 or 0-128); scoped and IPv4-mapped IPv6, including hexadecimal forms, are unsupported. No public metadata or binding CIDR fallback is supported. Extra credential keys from the other mode are allowed. Connection PATCH may omit/null credentials when the effective mode is unchanged; supplied credentials must contain all mode-required keys and persist by key-wise merge. Optional metadata.enabled_codecs is an ordered, case-insensitive comma-separated list of g722, pcmu, pcma, opus, or amr-wb, without duplicates or empty entries. Missing, null, blank, or empty-object values use g722,pcmu,pcma without writing the default. Other non-string values are invalid. Public metadata.custom_headers is an object of string values, not a JSON-encoded string. Missing, null, blank-string, or empty-object values mean no headers. At most 32 headers are allowed; names use token characters, start with X-, and are at most 256 characters. Under X-MS- only X-MS-Custom- is allowed. Names must be unique case-insensitively. Values are at most 4096 characters, contain no control characters, and are preserved exactly, including empty strings. Metadata PATCH merges top-level keys; null removes a key and a supplied header object replaces the whole object. AccountRP retains broad target storage validation; saving a connection is not an execution guarantee. At use time Agents requires target <dns-host>[:<port>], with port 1-65535 and no schemes, IP literals, whitespace, user info, paths, queries, fragments, or SIP parameters. An invalid target fails the Job/Attempt with actionable target-redacted diagnostics before MG origination, not ambiguous-provider reconciliation. DNS, TLS, network, and carrier failures remain execution failures with existing provider diagnostics. CustomKeys PATCH should explicitly include the current target to avoid the existing client-default overwrite. The call job does not carry connection settings. No inbound telephony binding is required."
+            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio,\nAzure Communication Services / Teams Phone extensibility, or SipOutbound. SipOutbound uses authType CustomKeys.\n\nTrimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl; missing, null, blank, or empty-object\nvalues default to digest. Other non-string values are invalid. Digest requires nonblank credentials.keys.username\nand credentials.keys.password. IP ACL requires non-null credentials.keys.source_cidrs: a comma-separated string of\nat most 4096 original characters before trimming/splitting and 64 entries before deduplication. Empty string allows\nall source IPs; whitespace-only strings and empty entries are invalid. Use canonical IPv4 or native IPv6 addresses\nor CIDRs (prefixes 0-32 or 0-128); scoped and IPv4-mapped IPv6, including hexadecimal forms, are unsupported.\nNo public metadata or binding CIDR fallback is supported. Extra credential keys from the other mode are allowed.\nConnection PATCH may omit/null credentials when the effective mode is unchanged; supplied credentials must contain\nall mode-required keys and persist by key-wise merge.\n\nOptional metadata.enabled_codecs is an ordered, case-insensitive comma-separated list of g722, pcmu, pcma, opus,\nor amr-wb, without duplicates or empty entries. Missing, null, blank, or empty-object values use g722,pcmu,pcma\nwithout writing the default. Other non-string values are invalid.\n\nPublic metadata.custom_headers is an object of string values, not a JSON-encoded string. Missing, null, blank-string,\nor empty-object values mean no headers. At most 32 headers are allowed; names use token characters, start with X-,\nand are at most 256 characters. Under X-MS- only X-MS-Custom- is allowed. Names must be unique case-insensitively.\nValues are at most 4096 characters, contain no control characters, and are preserved exactly, including empty strings.\nMetadata PATCH merges top-level keys; null removes a key and a supplied header object replaces the whole object.\n\nAccountRP retains broad target storage validation; saving a connection is not an execution guarantee. At use time\nAgents requires target <dns-host>[:<port>], with port 1-65535 and no schemes, IP literals, whitespace, user info, paths,\nqueries, fragments, or SIP parameters. An invalid target fails the Job/Attempt with actionable target-redacted\ndiagnostics before MG origination, not ambiguous-provider reconciliation. DNS, TLS, network, and carrier failures\nremain execution failures with existing provider diagnostics. CustomKeys PATCH should explicitly include the current\ntarget to avoid the existing client-default overwrite. The call job does not carry connection settings.\nNo inbound telephony binding is required."
           },
           "source": {
             "$ref": "#/components/schemas/TelephonyOutboundSource",
