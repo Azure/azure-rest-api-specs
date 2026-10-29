@@ -1,0 +1,71 @@
+name: azure-typespec-author-eval
+description: follow existing uppercase acronym patterns for new go names
+version: "1.0"
+type: capability
+environment: naming-planning
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 008004-follow-existing-uppercase-go-patterns-forced
+    tags:
+      suite: naming
+      mode: forced
+      language: go
+    prompt: |
+      @azure-typespec-author Continue TypeSpec authoring with default SDK client
+      configuration planning only. Analysis, intake, grounding, and the source plan are
+      complete, and the user has not opted out. The Go ARM SDK's pre-change API exposes
+      IdentityKeyStoreTPM. The approved addition is the new union variant
+      IdentityKeyStore.TpmTransition. Its current proposed Go constant name is
+      IdentityKeyStoreTpmTransition, which has never shipped. TPM has the same documented
+      meaning, trusted platform module, in both identifiers. There are no other related
+      casing patterns, existing overrides, or collisions. Installed TCGC supports scoped
+      clientName on this union variant. Use the supplied facts and installed naming
+      guidance only; no network, MCP, edits, compilation, or generation.
+      Return JSON with a top-level "names" object mapping "existing" and "added" directly
+      to planned Go constant name strings. Also return "override" as an object with the
+      real TypeSpec "target", member-only "name", and language "scope", plus top-level
+      "applied" and "generatedNamesVerified".
+    constraints:
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+            - azsdk-common-typespec-naming
+      - type: tool-calls
+        config:
+          required:
+            - name: ^(view|powershell|bash|rg)$
+              pattern: go-naming\.md
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - type: output-matches
+        config:
+          pattern: '"existing"\s*:\s*"IdentityKeyStoreTPM"'
+      - type: output-matches
+        config:
+          pattern: '"added"\s*:\s*"IdentityKeyStoreTPMTransition"'
+      - type: output-matches
+        config:
+          pattern: '"target"\s*:\s*"IdentityKeyStore\.TpmTransition"'
+      - type: output-matches
+        config:
+          pattern: '"name"\s*:\s*"TPMTransition"'
+      - type: output-matches
+        config:
+          pattern: '"scope"\s*:\s*"go"'
+      - type: output-matches
+        config:
+          pattern: '"applied"\s*:\s*false'
+      - type: output-matches
+        config:
+          pattern: '"generatedNamesVerified"\s*:\s*false'

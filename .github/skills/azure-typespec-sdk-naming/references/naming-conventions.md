@@ -4,7 +4,7 @@ Use this single rule source for proactive authoring and read-only review. No lin
 
 ## Select
 
-Use the user's confirmed targets, `tspconfig.yaml` emitter/options configuration, and SDK project configuration to identify SDK languages and ARM versus data-plane. Normalize `C#`, `.NET`, and `csharp` to `csharp`. An OpenAPI-only configuration does not establish an SDK target. Ask before language-specific edits when the target or service type is unknown.
+Use the user's confirmed targets, `tspconfig.yaml` emitter/options configuration, and SDK project configuration to identify SDK languages and ARM versus data-plane. Normalize `C#`, `.NET`, and `csharp` to `csharp`, and `Go`, `golang`, and `go` to `go`. An OpenAPI-only configuration does not establish an SDK target. Ask before language-specific edits when the target or service type is unknown.
 
 An unknown SDK target is missing information, not an unsupported profile. Ask which languages are targeted when needed for a naming decision; in read-only review, report missing context without blocking unrelated review work. Do not require SDK-language intake for unrelated REST authoring.
 
@@ -12,7 +12,8 @@ An unknown SDK target is missing information, not an unsupported profile. Ask wh
 | --------------- | ---------------- | ---------------------------------------------------------------------------------- |
 | `csharp`        | ARM / management | [C# member naming](csharp-naming.md) and [C# model naming](csharp-model-naming.md) |
 | `csharp`        | Data-plane       | Not covered by this initial profile; do not apply ARM naming rules                 |
-| Other languages | Any              | Not yet covered; retain applicable shared API guidance, without borrowing C# rules |
+| `go`            | ARM / data-plane | [Go acronym naming](go-naming.md)                                                   |
+| Other languages | Any              | Not yet covered; retain applicable shared API guidance, without borrowing C# or Go rules |
 
 For multiple targets, load only matching profiles and record coverage per target. Missing coverage is not approval of a name. If the requested naming change needs an unsupported profile, obtain authoritative language guidance or ask for clarification; do not invent rules.
 
