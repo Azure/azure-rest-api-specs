@@ -1046,16 +1046,8 @@ paths:
     post:
       operationId: AgentOptimizationJobs_create
       summary: Create an agent optimization job
-      description: Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry. Clients poll the URL in `Operation-Location` by using the get operation. Agent and prompt optimization remain GA without preview opt-in; `Skills=V1Preview` applies only when creating a skill-optimization job.
+      description: Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry. Clients poll the URL in `Operation-Location` by using the get operation.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Skills=V1Preview
         - name: Operation-Id
           in: header
           required: false
@@ -1108,9 +1100,6 @@ paths:
             schema:
               $ref: '#/components/schemas/AgentOptimizationJob'
         description: The job to create.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Skills=V1Preview
     get:
       operationId: AgentOptimizationJobs_list
       summary: List agent optimization jobs
@@ -46597,9 +46586,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationTraceConnectionConfiguration'
       description: Selects a project-linked Application Insights component.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationBaselineAgentConfiguration:
       type: object
       properties:
@@ -46653,15 +46639,9 @@ components:
         execution_summary:
           $ref: '#/components/schemas/AgentOptimizationSkillExecutionSummary'
           description: Persisted skill execution snapshot, including partial outcomes. Populated on candidate GET when available and omitted from LIST.
-          x-ms-foundry-meta:
-            required_previews:
-              - Skills=V1Preview
         resolved_context:
           $ref: '#/components/schemas/AgentOptimizationSkillResolvedContext'
           description: Frozen trace cohort and discovered agent skills for skill optimization. Populated on candidate GET when available and omitted from LIST.
-          x-ms-foundry-meta:
-            required_previews:
-              - Skills=V1Preview
         rationale:
           type: string
           description: Human-readable explanation of why the optimizer produced this candidate. Populated on candidate GET when available and omitted from LIST.
@@ -46945,9 +46925,6 @@ components:
         evaluator_generation_configuration:
           $ref: '#/components/schemas/AgentOptimizationEvaluatorGenerationConfiguration'
           description: Opt-in creation of evaluators for skill optimization using the job's optimization_model_configuration, not evaluation_model. No separate generation model is accepted. Resolved exact versions are returned in evaluators after preparation. Not accepted for agent optimization; use existing evaluator references there.
-          x-ms-foundry-meta:
-            required_previews:
-              - Skills=V1Preview
       description: Shared evaluation inputs for agent and skill optimization. All fields are optional in the schema; the service validates required combinations for the selected optimization type and rejects invalid requests.
     AgentOptimizationEvaluationSet:
       type: object
@@ -47005,9 +46982,6 @@ components:
         mapping:
           agent_traces: '#/components/schemas/AgentOptimizationTraceEvaluatorGenerationConfiguration'
       description: Base configuration for service-generated optimization evaluators. Currently supported for skill optimization only. Uses the job's optimization_model_configuration; no separate generation model is accepted.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationEvaluatorGenerationSourceType:
       anyOf:
         - type: string
@@ -47015,9 +46989,6 @@ components:
           enum:
             - agent_traces
       description: Evidence sources for generating skill-optimization evaluators.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationFixedTraceWindow:
       type: object
       required:
@@ -47046,9 +47017,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationTraceWindow'
       description: Selects recent trace conversations in a completed past half-open interval, preferring traces with annotations or evaluation results.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationFoundryAgentTargetConfiguration:
       type: object
       required:
@@ -47092,9 +47060,6 @@ components:
           minLength: 1
           description: Non-empty exact service-returned version, present only with status created after confirmed publication. Never copy the input version here or infer a version for an uncertain write.
       description: Intended output identity, not proof that a skill version was created.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationFoundrySkillReference:
       type: object
       required:
@@ -47116,9 +47081,6 @@ components:
           minLength: 1
           description: Non-empty opaque pinned version. The aliases latest and default are not accepted.
       description: Exact reference to an existing skill version in the job's project.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationGoal:
       anyOf:
         - type: string
@@ -47430,9 +47392,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationSkillValidation'
       description: Per-skill artifact validation with explicit coverage and limitations.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationSkillCandidateOutput:
       type: object
       required:
@@ -47451,9 +47410,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationCandidateOutput'
       description: Output of the single generated candidate produced by trace-driven skill optimization. It can contain zero or more independent skill outcomes. Optional reporting-only evaluation reuses a baseline candidate and each candidate's evaluation summary; the baseline is not a generated alternative.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationSkillExecutionStep:
       type: object
       required:
@@ -47478,9 +47434,6 @@ components:
           type: string
           description: Safe failure or cancellation code, cleared when a retry starts or succeeds.
       description: Latest recorded state of one logical step in the persisted execution snapshot.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationSkillExecutionStepStatus:
       anyOf:
         - type: string
@@ -47493,9 +47446,6 @@ components:
             - skipped
             - cancelled
       description: Latest recorded state of a logical execution step.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationSkillExecutionSummary:
       type: object
       required:
@@ -47512,9 +47462,6 @@ components:
           maxItems: 10
           description: At most ten distinct steps in pipeline order. Older snapshots may omit collect_feedback.
       description: Persisted candidate execution snapshot, including partial runs. Not exposed on the job or candidate list response.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationSkillResolvedContext:
       type: object
       properties:
@@ -47529,9 +47476,6 @@ components:
             $ref: '#/components/schemas/AgentOptimizationFoundrySkillReference'
           description: Deduplicated exact baselines discovered from the agent and its toolboxes. Excludes skills supplied only through skill_references context items and does not imply invocation. Omitted before discovery; empty when none were discovered or the job is agentless.
       description: Frozen evidence and discovered baselines, without duplicating requested job configuration.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationSkillResult:
       type: object
       required:
@@ -47559,9 +47503,6 @@ components:
           $ref: '#/components/schemas/AgentOptimizationSkillResultError'
           description: Primary failure, rejection, or uncertain-publication reason. Detailed findings remain in validations. Omitted when there is no error.
       description: One independent skill outcome with its input baseline and intended or confirmed output.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationSkillResultError:
       type: object
       required:
@@ -47579,9 +47520,6 @@ components:
           maxLength: 1024
           description: Safe explanation, from 1 to 1,024 characters, never raw exceptions or sensitive trace or model content.
       description: Structured error for an independent skill outcome.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationSkillResultStatus:
       anyOf:
         - type: string
@@ -47594,9 +47532,6 @@ components:
             - failed
             - publication_unknown
       description: Publication or validation outcome for one skill, independent of whole-job status.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationSkillValidation:
       type: object
       required:
@@ -47610,9 +47545,6 @@ components:
         mapping:
           artifact: '#/components/schemas/AgentOptimizationSkillArtifactValidation'
       description: Base validation category; reporting-only performance scores use the baseline and generated candidate evaluation summaries.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationSkillValidationId:
       anyOf:
         - type: string
@@ -47629,9 +47561,6 @@ components:
             - target_compatibility
             - evidence_provenance
       description: Artifact check identifier. Only implemented checks in the validation plan are reported.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationSkillValidationStatus:
       anyOf:
         - type: string
@@ -47643,9 +47572,6 @@ components:
             - skipped
             - unavailable
       description: Status of an artifact validation and its coverage.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationSkillValidationType:
       anyOf:
         - type: string
@@ -47653,9 +47579,6 @@ components:
           enum:
             - artifact
       description: Categories of per-skill validation.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationSkillsMutation:
       type: object
       required:
@@ -47860,9 +47783,6 @@ components:
         mapping:
           appinsights: '#/components/schemas/AgentOptimizationAppInsightsTraceConnectionConfiguration'
       description: Explicit project-authorized telemetry selection, not an arbitrary endpoint.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationTraceConnectionType:
       anyOf:
         - type: string
@@ -47870,9 +47790,6 @@ components:
           enum:
             - appinsights
       description: Project-authorized trace providers for skill optimization.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationTraceEvaluatorGenerationConfiguration:
       type: object
       required:
@@ -47886,9 +47803,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationEvaluatorGenerationConfiguration'
       description: Generates evaluators from the job's selected trace evidence.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationTraceIdsTraceWindow:
       type: object
       required:
@@ -47915,9 +47829,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationTraceWindow'
       description: Proposed explicit trace-ID selection. Service support and detailed lookup behavior are TBD; this contract does not establish runtime availability.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationTraceWindow:
       type: object
       required:
@@ -47932,9 +47843,6 @@ components:
           fixed: '#/components/schemas/AgentOptimizationFixedTraceWindow'
           trace_ids: '#/components/schemas/AgentOptimizationTraceIdsTraceWindow'
       description: Trace selection window for a one-time skill optimization job.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationTraceWindowType:
       anyOf:
         - type: string
@@ -47943,9 +47851,6 @@ components:
             - fixed
             - trace_ids
       description: Trace selection strategies for skill optimization.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentOptimizationUserConversationSimulationDataSource:
       type: object
       required:
@@ -48471,9 +48376,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OptimizationContext'
       description: Trace evidence for skill optimization, selected independently of feedback availability.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     AgentVersionObject:
       type: object
       required:
@@ -90108,9 +90010,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationConfigurationBase'
       description: Configuration for generating a single skill candidate from trace evidence. The candidate can contain zero or more skill outcomes; no new learnings can produce an empty skill_results array without publishing versions. Optional evaluation reuses a non-generated baseline candidate.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     SkillReference:
       type: object
       required:
@@ -90145,9 +90044,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OptimizationContext'
       description: Explicit exact-version baselines for skill optimization.
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     SkillVersion:
       type: object
       required:

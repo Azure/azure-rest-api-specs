@@ -2,12 +2,9 @@
 
 import "./inputs.tsp";
 
-using TypeSpec.OpenAPI;
-
 namespace Azure.AI.Projects;
 
 /** Intended output identity, not proof that a skill version was created. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationFoundrySkillOutputReference {
   @doc("Registered Foundry skill reference discriminator.")
   type: "foundry_skill";
@@ -22,7 +19,6 @@ model AgentOptimizationFoundrySkillOutputReference {
 }
 
 /** Publication or validation outcome for one skill, independent of whole-job status. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 union AgentOptimizationSkillResultStatus {
   string,
 
@@ -46,7 +42,6 @@ union AgentOptimizationSkillResultStatus {
 }
 
 /** Structured error for an independent skill outcome. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationSkillResultError {
   @doc("Stable service-authored error code, from 1 to 128 characters.")
   @minLength(1)
@@ -60,7 +55,6 @@ model AgentOptimizationSkillResultError {
 }
 
 /** Status of an artifact validation and its coverage. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 union AgentOptimizationSkillValidationStatus {
   string,
 
@@ -81,7 +75,6 @@ union AgentOptimizationSkillValidationStatus {
 }
 
 /** Artifact check identifier. Only implemented checks in the validation plan are reported. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 union AgentOptimizationSkillValidationId {
   string,
   schema: "schema",
@@ -97,7 +90,6 @@ union AgentOptimizationSkillValidationId {
 }
 
 /** Categories of per-skill validation. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 union AgentOptimizationSkillValidationType {
   string,
 
@@ -106,7 +98,6 @@ union AgentOptimizationSkillValidationType {
 }
 
 /** Base validation category; reporting-only performance scores use the baseline and generated candidate evaluation summaries. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 @discriminator("type")
 model AgentOptimizationSkillValidation {
   @doc("Validation category discriminator.")
@@ -114,7 +105,6 @@ model AgentOptimizationSkillValidation {
 }
 
 /** Per-skill artifact validation with explicit coverage and limitations. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationSkillArtifactValidation
   extends AgentOptimizationSkillValidation {
   @doc("Artifact validation discriminator.")
@@ -140,7 +130,6 @@ model AgentOptimizationSkillArtifactValidation
 }
 
 /** One independent skill outcome with its input baseline and intended or confirmed output. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationSkillResult {
   @doc("Validation or publication outcome.")
   status: AgentOptimizationSkillResultStatus;
@@ -162,7 +151,6 @@ model AgentOptimizationSkillResult {
 }
 
 /** Frozen evidence and discovered baselines, without duplicating requested job configuration. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationSkillResolvedContext {
   @doc("Complete evidence cohort, including traces that produced no artifact. Omitted before resolution; an empty array means a resolved empty cohort.")
   source_trace_ids?: string[];
@@ -172,7 +160,6 @@ model AgentOptimizationSkillResolvedContext {
 }
 
 /** Latest recorded state of a logical execution step. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 union AgentOptimizationSkillExecutionStepStatus {
   string,
   not_started: "not_started",
@@ -184,7 +171,6 @@ union AgentOptimizationSkillExecutionStepStatus {
 }
 
 /** Latest recorded state of one logical step in the persisted execution snapshot. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationSkillExecutionStep {
   @doc("Service-authored logical step name, unique within the snapshot, for example resolve_inputs, collect_traces, or publish_skills. Consumers must tolerate unfamiliar names.")
   name: string;
@@ -204,7 +190,6 @@ model AgentOptimizationSkillExecutionStep {
 }
 
 /** Persisted candidate execution snapshot, including partial runs. Not exposed on the job or candidate list response. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationSkillExecutionSummary {
   @doc("Time the recorded execution facts last changed, as a UTC Unix timestamp in seconds.")
   updated_at: FoundryTimestamp;

@@ -18,7 +18,6 @@ in order to enable preview features on these GA routes.
 | Agents | Create | POST | `/agents` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview` |
 | Agents | Update | POST | `/agents/{agent_name}` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview` |
 | Agents | Create Version | POST | `/agents/{agent_name}/versions` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview` |
-| Agent Optimization Jobs | Create | POST | `/agent_optimization_jobs` | Optional: `Skills=V1Preview` for `skill_optimization` jobs only |
 | Evaluation Rules | CreateOrUpdate | PUT | `/evaluationrules/{id}` | Optional: `Evaluations=V1Preview` |
 
 Note that only v1 operations are included in the above table. If an operation (or interface) is decorated with `@removed(Versions.v1)` the are not included here.

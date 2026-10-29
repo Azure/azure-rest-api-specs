@@ -1,31 +1,21 @@
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 using Azure.Core;
 
 namespace Azure.AI.Projects;
 
-/** Skill optimization is conditionally in preview when creating an otherwise GA job. */
-const AgentOptimizationConditionalPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.skills_v1_preview],
-};
-
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobs {
   /**
-   * Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry. Clients poll the URL in `Operation-Location` by using the get operation. Agent and prompt optimization remain GA without preview opt-in; `Skills=V1Preview` applies only when creating a skill-optimization job.
+   * Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry. Clients poll the URL in `Operation-Location` by using the get operation.
    */
   @summary("Create an agent optimization job")
   @route("agent_optimization_jobs")
   @pollingOperation(AgentOptimizationJobs.get)
-  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
-  create is postJobPreview<
-    FoundryFeaturesOptInKeys.skills_v1_preview,
-    AgentOptimizationJob
-  >;
+  create is postJob<AgentOptimizationJob>;
 
   /**
    * Estimates validation-set rows, per-stage model call volumes, and cost bands without submitting the job.

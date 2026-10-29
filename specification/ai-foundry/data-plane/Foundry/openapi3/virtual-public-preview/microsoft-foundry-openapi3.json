@@ -1655,20 +1655,8 @@
       "post": {
         "operationId": "AgentOptimizationJobs_create",
         "summary": "Create an agent optimization job",
-        "description": "Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry. Clients poll the URL in `Operation-Location` by using the get operation. Agent and prompt optimization remain GA without preview opt-in; `Skills=V1Preview` applies only when creating a skill-optimization job.",
+        "description": "Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry. Clients poll the URL in `Operation-Location` by using the get operation.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Skills=V1Preview"
-              ]
-            }
-          },
           {
             "name": "Operation-Id",
             "in": "header",
@@ -1750,11 +1738,6 @@
             }
           },
           "description": "The job to create."
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Skills=V1Preview"
-          ]
         }
       },
       "get": {
@@ -38934,12 +38917,7 @@
             "$ref": "#/components/schemas/AgentOptimizationTraceConnectionConfiguration"
           }
         ],
-        "description": "Selects a project-linked Application Insights component.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Selects a project-linked Application Insights component."
       },
       "AgentOptimizationBaselineAgentConfiguration": {
         "type": "object",
@@ -39009,21 +38987,11 @@
           },
           "execution_summary": {
             "$ref": "#/components/schemas/AgentOptimizationSkillExecutionSummary",
-            "description": "Persisted skill execution snapshot, including partial outcomes. Populated on candidate GET when available and omitted from LIST.",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "Skills=V1Preview"
-              ]
-            }
+            "description": "Persisted skill execution snapshot, including partial outcomes. Populated on candidate GET when available and omitted from LIST."
           },
           "resolved_context": {
             "$ref": "#/components/schemas/AgentOptimizationSkillResolvedContext",
-            "description": "Frozen trace cohort and discovered agent skills for skill optimization. Populated on candidate GET when available and omitted from LIST.",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "Skills=V1Preview"
-              ]
-            }
+            "description": "Frozen trace cohort and discovered agent skills for skill optimization. Populated on candidate GET when available and omitted from LIST."
           },
           "rationale": {
             "type": "string",
@@ -39421,12 +39389,7 @@
           },
           "evaluator_generation_configuration": {
             "$ref": "#/components/schemas/AgentOptimizationEvaluatorGenerationConfiguration",
-            "description": "Opt-in creation of evaluators for skill optimization using the job's optimization_model_configuration, not evaluation_model. No separate generation model is accepted. Resolved exact versions are returned in evaluators after preparation. Not accepted for agent optimization; use existing evaluator references there.",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "Skills=V1Preview"
-              ]
-            }
+            "description": "Opt-in creation of evaluators for skill optimization using the job's optimization_model_configuration, not evaluation_model. No separate generation model is accepted. Resolved exact versions are returned in evaluators after preparation. Not accepted for agent optimization; use existing evaluator references there."
           }
         },
         "description": "Shared evaluation inputs for agent and skill optimization. All fields are optional in the schema; the service validates required combinations for the selected optimization type and rejects invalid requests."
@@ -39511,12 +39474,7 @@
             "agent_traces": "#/components/schemas/AgentOptimizationTraceEvaluatorGenerationConfiguration"
           }
         },
-        "description": "Base configuration for service-generated optimization evaluators. Currently supported for skill optimization only. Uses the job's optimization_model_configuration; no separate generation model is accepted.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Base configuration for service-generated optimization evaluators. Currently supported for skill optimization only. Uses the job's optimization_model_configuration; no separate generation model is accepted."
       },
       "AgentOptimizationEvaluatorGenerationSourceType": {
         "anyOf": [
@@ -39530,12 +39488,7 @@
             ]
           }
         ],
-        "description": "Evidence sources for generating skill-optimization evaluators.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Evidence sources for generating skill-optimization evaluators."
       },
       "AgentOptimizationFixedTraceWindow": {
         "type": "object",
@@ -39574,12 +39527,7 @@
             "$ref": "#/components/schemas/AgentOptimizationTraceWindow"
           }
         ],
-        "description": "Selects recent trace conversations in a completed past half-open interval, preferring traces with annotations or evaluation results.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Selects recent trace conversations in a completed past half-open interval, preferring traces with annotations or evaluation results."
       },
       "AgentOptimizationFoundryAgentTargetConfiguration": {
         "type": "object",
@@ -39639,12 +39587,7 @@
             "description": "Non-empty exact service-returned version, present only with status created after confirmed publication. Never copy the input version here or infer a version for an uncertain write."
           }
         },
-        "description": "Intended output identity, not proof that a skill version was created.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Intended output identity, not proof that a skill version was created."
       },
       "AgentOptimizationFoundrySkillReference": {
         "type": "object",
@@ -39672,12 +39615,7 @@
             "description": "Non-empty opaque pinned version. The aliases latest and default are not accepted."
           }
         },
-        "description": "Exact reference to an existing skill version in the job's project.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Exact reference to an existing skill version in the job's project."
       },
       "AgentOptimizationGoal": {
         "anyOf": [
@@ -40111,12 +40049,7 @@
             "$ref": "#/components/schemas/AgentOptimizationSkillValidation"
           }
         ],
-        "description": "Per-skill artifact validation with explicit coverage and limitations.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Per-skill artifact validation with explicit coverage and limitations."
       },
       "AgentOptimizationSkillCandidateOutput": {
         "type": "object",
@@ -40144,12 +40077,7 @@
             "$ref": "#/components/schemas/AgentOptimizationCandidateOutput"
           }
         ],
-        "description": "Output of the single generated candidate produced by trace-driven skill optimization. It can contain zero or more independent skill outcomes. Optional reporting-only evaluation reuses a baseline candidate and each candidate's evaluation summary; the baseline is not a generated alternative.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Output of the single generated candidate produced by trace-driven skill optimization. It can contain zero or more independent skill outcomes. Optional reporting-only evaluation reuses a baseline candidate and each candidate's evaluation summary; the baseline is not a generated alternative."
       },
       "AgentOptimizationSkillExecutionStep": {
         "type": "object",
@@ -40181,12 +40109,7 @@
             "description": "Safe failure or cancellation code, cleared when a retry starts or succeeds."
           }
         },
-        "description": "Latest recorded state of one logical step in the persisted execution snapshot.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Latest recorded state of one logical step in the persisted execution snapshot."
       },
       "AgentOptimizationSkillExecutionStepStatus": {
         "anyOf": [
@@ -40205,12 +40128,7 @@
             ]
           }
         ],
-        "description": "Latest recorded state of a logical execution step.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Latest recorded state of a logical execution step."
       },
       "AgentOptimizationSkillExecutionSummary": {
         "type": "object",
@@ -40232,12 +40150,7 @@
             "description": "At most ten distinct steps in pipeline order. Older snapshots may omit collect_feedback."
           }
         },
-        "description": "Persisted candidate execution snapshot, including partial runs. Not exposed on the job or candidate list response.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Persisted candidate execution snapshot, including partial runs. Not exposed on the job or candidate list response."
       },
       "AgentOptimizationSkillResolvedContext": {
         "type": "object",
@@ -40257,12 +40170,7 @@
             "description": "Deduplicated exact baselines discovered from the agent and its toolboxes. Excludes skills supplied only through skill_references context items and does not imply invocation. Omitted before discovery; empty when none were discovered or the job is agentless."
           }
         },
-        "description": "Frozen evidence and discovered baselines, without duplicating requested job configuration.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Frozen evidence and discovered baselines, without duplicating requested job configuration."
       },
       "AgentOptimizationSkillResult": {
         "type": "object",
@@ -40299,12 +40207,7 @@
             "description": "Primary failure, rejection, or uncertain-publication reason. Detailed findings remain in validations. Omitted when there is no error."
           }
         },
-        "description": "One independent skill outcome with its input baseline and intended or confirmed output.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "One independent skill outcome with its input baseline and intended or confirmed output."
       },
       "AgentOptimizationSkillResultError": {
         "type": "object",
@@ -40326,12 +40229,7 @@
             "description": "Safe explanation, from 1 to 1,024 characters, never raw exceptions or sensitive trace or model content."
           }
         },
-        "description": "Structured error for an independent skill outcome.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Structured error for an independent skill outcome."
       },
       "AgentOptimizationSkillResultStatus": {
         "anyOf": [
@@ -40350,12 +40248,7 @@
             ]
           }
         ],
-        "description": "Publication or validation outcome for one skill, independent of whole-job status.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Publication or validation outcome for one skill, independent of whole-job status."
       },
       "AgentOptimizationSkillValidation": {
         "type": "object",
@@ -40374,12 +40267,7 @@
             "artifact": "#/components/schemas/AgentOptimizationSkillArtifactValidation"
           }
         },
-        "description": "Base validation category; reporting-only performance scores use the baseline and generated candidate evaluation summaries.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Base validation category; reporting-only performance scores use the baseline and generated candidate evaluation summaries."
       },
       "AgentOptimizationSkillValidationId": {
         "anyOf": [
@@ -40402,12 +40290,7 @@
             ]
           }
         ],
-        "description": "Artifact check identifier. Only implemented checks in the validation plan are reported.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Artifact check identifier. Only implemented checks in the validation plan are reported."
       },
       "AgentOptimizationSkillValidationStatus": {
         "anyOf": [
@@ -40425,12 +40308,7 @@
             ]
           }
         ],
-        "description": "Status of an artifact validation and its coverage.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Status of an artifact validation and its coverage."
       },
       "AgentOptimizationSkillValidationType": {
         "anyOf": [
@@ -40444,12 +40322,7 @@
             ]
           }
         ],
-        "description": "Categories of per-skill validation.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Categories of per-skill validation."
       },
       "AgentOptimizationSkillsMutation": {
         "type": "object",
@@ -40758,12 +40631,7 @@
             "appinsights": "#/components/schemas/AgentOptimizationAppInsightsTraceConnectionConfiguration"
           }
         },
-        "description": "Explicit project-authorized telemetry selection, not an arbitrary endpoint.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Explicit project-authorized telemetry selection, not an arbitrary endpoint."
       },
       "AgentOptimizationTraceConnectionType": {
         "anyOf": [
@@ -40777,12 +40645,7 @@
             ]
           }
         ],
-        "description": "Project-authorized trace providers for skill optimization.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Project-authorized trace providers for skill optimization."
       },
       "AgentOptimizationTraceEvaluatorGenerationConfiguration": {
         "type": "object",
@@ -40803,12 +40666,7 @@
             "$ref": "#/components/schemas/AgentOptimizationEvaluatorGenerationConfiguration"
           }
         ],
-        "description": "Generates evaluators from the job's selected trace evidence.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Generates evaluators from the job's selected trace evidence."
       },
       "AgentOptimizationTraceIdsTraceWindow": {
         "type": "object",
@@ -40845,12 +40703,7 @@
             "$ref": "#/components/schemas/AgentOptimizationTraceWindow"
           }
         ],
-        "description": "Proposed explicit trace-ID selection. Service support and detailed lookup behavior are TBD; this contract does not establish runtime availability.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Proposed explicit trace-ID selection. Service support and detailed lookup behavior are TBD; this contract does not establish runtime availability."
       },
       "AgentOptimizationTraceWindow": {
         "type": "object",
@@ -40870,12 +40723,7 @@
             "trace_ids": "#/components/schemas/AgentOptimizationTraceIdsTraceWindow"
           }
         },
-        "description": "Trace selection window for a one-time skill optimization job.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Trace selection window for a one-time skill optimization job."
       },
       "AgentOptimizationTraceWindowType": {
         "anyOf": [
@@ -40890,12 +40738,7 @@
             ]
           }
         ],
-        "description": "Trace selection strategies for skill optimization.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Trace selection strategies for skill optimization."
       },
       "AgentOptimizationUserConversationSimulationDataSource": {
         "type": "object",
@@ -41663,12 +41506,7 @@
             "$ref": "#/components/schemas/OptimizationContext"
           }
         ],
-        "description": "Trace evidence for skill optimization, selected independently of feedback availability.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Trace evidence for skill optimization, selected independently of feedback availability."
       },
       "AgentVersionObject": {
         "type": "object",
@@ -99438,12 +99276,7 @@
             "$ref": "#/components/schemas/AgentOptimizationConfigurationBase"
           }
         ],
-        "description": "Configuration for generating a single skill candidate from trace evidence. The candidate can contain zero or more skill outcomes; no new learnings can produce an empty skill_results array without publishing versions. Optional evaluation reuses a non-generated baseline candidate.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Configuration for generating a single skill candidate from trace evidence. The candidate can contain zero or more skill outcomes; no new learnings can produce an empty skill_results array without publishing versions. Optional evaluation reuses a non-generated baseline candidate."
       },
       "SkillReference": {
         "type": "object",
@@ -99494,12 +99327,7 @@
             "$ref": "#/components/schemas/OptimizationContext"
           }
         ],
-        "description": "Explicit exact-version baselines for skill optimization.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Skills=V1Preview"
-          ]
-        }
+        "description": "Explicit exact-version baselines for skill optimization."
       },
       "SkillVersion": {
         "type": "object",

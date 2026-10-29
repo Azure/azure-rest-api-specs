@@ -9,7 +9,6 @@ import "../openai/evaluations/user_conversation_simulation.tsp";
 import "@azure-tools/openai-typespec/models/chat";
 
 using TypeSpec.Rest;
-using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
@@ -309,7 +308,6 @@ model AgentOptimizationEvaluationConfiguration {
   max_concurrent_agent_runs?: int32 = 1;
 
   @doc("Opt-in creation of evaluators for skill optimization using the job's optimization_model_configuration, not evaluation_model. No separate generation model is accepted. Resolved exact versions are returned in evaluators after preparation. Not accepted for agent optimization; use existing evaluator references there.")
-  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   evaluator_generation_configuration?: AgentOptimizationEvaluatorGenerationConfiguration;
 }
 
@@ -324,7 +322,6 @@ union AgentOptimizationConfigurationType {
   prompt_optimization: "prompt_optimization",
 
   @doc("Generates a single candidate containing zero or more skill outcomes from trace evidence, with optional reporting-only evaluation recorded on baseline and learned candidates.")
-  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   skill_optimization: "skill_optimization",
 }
 
@@ -365,11 +362,9 @@ union OptimizationContextType {
   steering_prompt: "steering_prompt",
 
   @doc("Agent trace evidence selected from project-authorized telemetry.")
-  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   agent_traces: "agent_traces",
 
   @doc("Exact baseline skill references for skill optimization.")
-  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   skill_references: "skill_references",
 }
 
@@ -403,7 +398,6 @@ model PromptOptimizationConfiguration
 }
 
 /** Exact reference to an existing skill version in the job's project. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationFoundrySkillReference {
   @doc("Registered Foundry skill reference discriminator.")
   type: "foundry_skill";
@@ -418,7 +412,6 @@ model AgentOptimizationFoundrySkillReference {
 }
 
 /** Explicit exact-version baselines for skill optimization. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model SkillReferencesOptimizationContext extends OptimizationContext {
   @doc("Skill reference context discriminator.")
   type: OptimizationContextType.skill_references;
@@ -428,7 +421,6 @@ model SkillReferencesOptimizationContext extends OptimizationContext {
 }
 
 /** Project-authorized trace providers for skill optimization. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 union AgentOptimizationTraceConnectionType {
   string,
 
@@ -437,7 +429,6 @@ union AgentOptimizationTraceConnectionType {
 }
 
 /** Explicit project-authorized telemetry selection, not an arbitrary endpoint. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 @discriminator("type")
 model AgentOptimizationTraceConnectionConfiguration {
   @doc("Trace provider discriminator.")
@@ -445,7 +436,6 @@ model AgentOptimizationTraceConnectionConfiguration {
 }
 
 /** Selects a project-linked Application Insights component. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationAppInsightsTraceConnectionConfiguration
   extends AgentOptimizationTraceConnectionConfiguration {
   @doc("Application Insights provider discriminator.")
@@ -462,7 +452,6 @@ model AgentOptimizationAppInsightsTraceConnectionConfiguration
 }
 
 /** Trace selection strategies for skill optimization. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 union AgentOptimizationTraceWindowType {
   string,
 
@@ -474,7 +463,6 @@ union AgentOptimizationTraceWindowType {
 }
 
 /** Trace selection window for a one-time skill optimization job. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 @discriminator("type")
 model AgentOptimizationTraceWindow {
   @doc("Trace window discriminator.")
@@ -482,7 +470,6 @@ model AgentOptimizationTraceWindow {
 }
 
 /** Selects recent trace conversations in a completed past half-open interval, preferring traces with annotations or evaluation results. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
   @doc("Fixed-window discriminator.")
   type: AgentOptimizationTraceWindowType.fixed;
@@ -500,7 +487,6 @@ model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
 }
 
 /** Proposed explicit trace-ID selection. Service support and detailed lookup behavior are TBD; this contract does not establish runtime availability. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationTraceIdsTraceWindow
   extends AgentOptimizationTraceWindow {
   @doc("Explicit trace-ID selection discriminator. Service support is TBD.")
@@ -516,7 +502,6 @@ model AgentOptimizationTraceIdsTraceWindow
 }
 
 /** Trace evidence for skill optimization, selected independently of feedback availability. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentTracesOptimizationContext extends OptimizationContext {
   @doc("Agent trace context discriminator.")
   type: OptimizationContextType.agent_traces;
@@ -529,7 +514,6 @@ model AgentTracesOptimizationContext extends OptimizationContext {
 }
 
 /** Evidence sources for generating skill-optimization evaluators. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 union AgentOptimizationEvaluatorGenerationSourceType {
   string,
 
@@ -538,7 +522,6 @@ union AgentOptimizationEvaluatorGenerationSourceType {
 }
 
 /** Base configuration for service-generated optimization evaluators. Currently supported for skill optimization only. Uses the job's optimization_model_configuration; no separate generation model is accepted. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 @discriminator("type")
 model AgentOptimizationEvaluatorGenerationConfiguration {
   @doc("Evaluator generation source discriminator.")
@@ -549,7 +532,6 @@ model AgentOptimizationEvaluatorGenerationConfiguration {
 }
 
 /** Generates evaluators from the job's selected trace evidence. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationTraceEvaluatorGenerationConfiguration
   extends AgentOptimizationEvaluatorGenerationConfiguration {
   @doc("Generate evaluators from the agent_traces context.")
@@ -557,7 +539,6 @@ model AgentOptimizationTraceEvaluatorGenerationConfiguration
 }
 
 /** Configuration for generating a single skill candidate from trace evidence. The candidate can contain zero or more skill outcomes; no new learnings can produce an empty skill_results array without publishing versions. Optional evaluation reuses a non-generated baseline candidate. */
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model SkillOptimizationConfiguration
   extends AgentOptimizationConfigurationBase {
   @doc("Skill optimization discriminator.")

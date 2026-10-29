@@ -6,7 +6,6 @@ import "../common/servicepatterns.tsp";
 import "@azure-tools/openai-typespec/models/chat";
 
 using TypeSpec.Rest;
-using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
@@ -60,7 +59,6 @@ model AgentOptimizationPromptCandidateOutput
 }
 
 @doc("Output of the single generated candidate produced by trace-driven skill optimization. It can contain zero or more independent skill outcomes. Optional reporting-only evaluation reuses a baseline candidate and each candidate's evaluation summary; the baseline is not a generated alternative.")
-@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationSkillCandidateOutput
   extends AgentOptimizationCandidateOutput {
   @doc("Skill optimization output discriminator.")
@@ -169,11 +167,9 @@ model AgentOptimizationCandidate {
   output?: AgentOptimizationCandidateOutput;
 
   @doc("Persisted skill execution snapshot, including partial outcomes. Populated on candidate GET when available and omitted from LIST.")
-  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   execution_summary?: AgentOptimizationSkillExecutionSummary;
 
   @doc("Frozen trace cohort and discovered agent skills for skill optimization. Populated on candidate GET when available and omitted from LIST.")
-  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   resolved_context?: AgentOptimizationSkillResolvedContext;
 
   @doc("Human-readable explanation of why the optimizer produced this candidate. Populated on candidate GET when available and omitted from LIST.")
