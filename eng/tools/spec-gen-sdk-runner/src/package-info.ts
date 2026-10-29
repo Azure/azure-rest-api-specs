@@ -71,7 +71,9 @@ export async function getGeneratedSdkApiVersions(
         "--out-dir",
         outputDir,
       ]);
-      const files = fs.readdirSync(outputDir).filter((file) => file.endsWith(".json"));
+      const files = fs
+        .readdirSync(outputDir, { recursive: true, encoding: "utf8" })
+        .filter((file) => file.endsWith(".json"));
       if (files.length === 0) {
         throw new Error("azsdk eng package-info did not produce any package info JSON files");
       }

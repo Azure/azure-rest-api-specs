@@ -34,9 +34,15 @@ function report(...packagePaths: string[]): ExecutionReport {
   };
 }
 
-function writePackageInfo(args: string[], packageInfo: unknown): void {
+function writePackageInfo(
+  args: string[],
+  packageInfo: unknown,
+  relativePath = "package.json",
+): void {
   const outputDir = args[args.indexOf("--out-dir") + 1];
-  fs.writeFileSync(path.join(outputDir, "package.json"), JSON.stringify(packageInfo));
+  const filePath = path.join(outputDir, relativePath);
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  fs.writeFileSync(filePath, JSON.stringify(packageInfo));
 }
 
 describe("getGeneratedSdkApiVersions", () => {
@@ -69,6 +75,28 @@ describe("getGeneratedSdkApiVersions", () => {
       "--out-dir",
       outputDir,
     ]);
+    expect(fs.existsSync(outputDir)).toBe(false);
+    expect(vsoLogIssue).not.toHaveBeenCalled();
+  });
+
+  test("reads package info exported into nested directories", async () => {
+    let outputDir = "";
+    vi.mocked(runCommandWithOutput).mockImplementation((_exe, args) => {
+      outputDir = args[args.indexOf("--out-dir") + 1];
+      writePackageInfo(
+        args,
+        { ApiVersions: [{ Version: "2025-01-01", Namespace: "Microsoft.Sovereign" }] },
+        path.join("sdk", "resourcemanager", "sovereign", "armsovereign.json"),
+      );
+      return Promise.resolve("");
+    });
+
+    expect(
+      await getGeneratedSdkApiVersions(
+        report("sdk/resourcemanager/sovereign/armsovereign"),
+        commandInput,
+      ),
+    ).toBe("API Versions: '2025-01-01' (Namespace: 'Microsoft.Sovereign')");
     expect(fs.existsSync(outputDir)).toBe(false);
     expect(vsoLogIssue).not.toHaveBeenCalled();
   });
