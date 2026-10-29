@@ -451,28 +451,6 @@ union TelephonyProvider {
   sip: "sip",
 }
 
-@doc("A Microsoft Teams destination for a telephony transfer target.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TeamsTelephonyTransferDestination extends TelephonyAddress {
-  @doc("The Microsoft Teams destination type.")
-  type: TelephonyAddressType.teams;
-
-  @doc("The Microsoft Teams user or resource-account identifier.")
-  @minLength(1)
-  @maxLength(256)
-  value: string;
-}
-
-@doc("A SIP destination for a telephony transfer target.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model SipTelephonyTransferDestination extends TelephonyAddress {
-  @doc("The SIP destination type.")
-  type: TelephonyAddressType.sip;
-
-  @doc("The SIP or SIPS URI to call.")
-  value: url;
-}
-
 @doc("A named destination to which the voice agent may transfer a call.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyTransferTarget {
@@ -486,7 +464,7 @@ model TelephonyTransferTarget {
   @maxLength(1024)
   description: string;
 
-  @doc("The provider-specific transfer destination.")
+  @doc("The shared typed address to transfer to. The selected provider validates supported destination types.")
   destination: TelephonyAddress;
 }
 
@@ -596,7 +574,7 @@ model TelephonyBindingListItem {
   @maxLength(128)
   label?: string;
 
-  @doc("The service-generated webhook URL to configure with the telephony provider.")
+  @doc("The service-generated HTTPS webhook or SIP/SIPS ingress URI to configure with the telephony provider.")
   incoming_call_url: url;
 
   @doc("The entity tag to send in the `If-Match` header when updating or deleting this binding.")
@@ -1308,7 +1286,7 @@ model FixedIntervalRetryPolicy extends TelephonyOutboundRetryPolicy {
   @doc("The fixed-interval retry strategy.")
   type: TelephonyOutboundRetryPolicyType.fixed_interval;
 
-  @doc("The fixed delay in seconds between attempts.")
+  @doc("The nonnegative delay between attempts, from 0 to 2147483647 seconds. Zero permits an immediate retry, subject to scheduling and capacity.")
   interval: FoundryDurationSeconds;
 }
 
@@ -1322,57 +1300,66 @@ model TelephonyCallJobSchedule {
   expires_at?: FoundryTimestamp;
 }
 
-/** Extensible endpoint address kinds. Address type describes the endpoint independently of the provider. */
+@doc("Extensible endpoint address kinds. Address type describes the endpoint independently of the provider.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyAddressType {
   string,
 
-  /** An E.164 phone number. */
+  @doc("An E.164 phone number.")
   phone_number: "phone_number",
 
-  /** Caller/source identity for ACS / Teams Phone extensibility origination: a nonempty Entra resource-account object GUID. Not a transfer destination. */
-  teams_resource_account: "teams_resource_account",
-
-  /** Transfer destination for ACS / Teams Phone extensibility: a Teams user or resource account, represented by an object GUID or 28:orgid:{guid}. Not an outbound caller/source identity. */
+  @doc("A Microsoft Teams identity. Source addresses require a nonempty resource-account object GUID; transfer destinations also support 28:orgid:{guid}.")
   teams: "teams",
 
-  /** A SIP or SIPS destination for transfer. */
+  @doc("A SIP or SIPS destination for transfer.")
   sip: "sip",
 }
 
-/** Shared typed address for an outbound source, recipient destination or transfer target. Connections validate supported variants separately for each role. Unknown or unsupported variants are rejected before dialing. Additional non-phone variants may be introduced as provider support becomes available. */
+@doc("Shared typed address for an outbound source, recipient destination or transfer target. Connections validate supported variants separately for each role. Unknown or unsupported variants are rejected before dialing. Additional non-phone variants may be introduced as provider support becomes available.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyAddress {
-  /** Endpoint address type. */
+  @doc("Endpoint address type.")
   type: TelephonyAddressType;
 
-  /** Concrete address value. Known variants apply their format constraints; unknown variants are rejected before dialing. */
+  @doc("Concrete address value. Known variants apply their format constraints; unknown variants are rejected before dialing.")
   @minLength(1)
   value: string;
 }
 
-/** Phone-number address used by supported source and destination roles. */
+@doc("Phone-number address used by supported source and destination roles.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model PhoneNumber extends TelephonyAddress {
-  /** The phone-number address type. */
+  @doc("The phone-number address type.")
   type: TelephonyAddressType.phone_number;
 
-  /** E.164 phone number. */
+  @doc("E.164 phone number.")
   // ASCII digits and an absolute end assertion: $ alone also matches before a final newline.
   @pattern("^\\+[1-9][0-9]{1,14}(?![\\s\\S])")
   value: string;
 }
 
-/** Teams resource-account address supported as a source through an ACS / Teams Phone Extension connection. Destination support is validated independently and is not implied by this address variant. */
+@doc("A shared Microsoft Teams address. Outbound sources require a nonempty resource-account object GUID. Transfer destinations accept a Teams user or resource-account GUID, including the 28:orgid:{guid} form. Connections validate support for each role; this type does not enable Teams outbound recipients.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TeamsResourceAccount extends TelephonyAddress {
-  /** The Teams resource-account address type. */
-  type: TelephonyAddressType.teams_resource_account;
+model TeamsAddress extends TelephonyAddress {
+  @doc("The Microsoft Teams address type.")
+  type: TelephonyAddressType.teams;
 
-  /** Non-empty Teams resource-account Entra object ID. */
-  @pattern("^(?!00000000-0000-0000-0000-000000000000$)[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-  value: Azure.Core.uuid;
+  @doc("The Microsoft Teams identifier. A source must be a nonempty resource-account GUID; a transfer destination may also use 28:orgid:{guid}. The service validates the format for the selected role.")
+  @minLength(1)
+  @maxLength(256)
+  value: string;
+}
+
+@doc("A shared SIP address. Transfer destinations support SIP or SIPS URIs subject to provider validation. SIP outbound origination uses a phone_number source, not a SIP URI, and outbound recipients remain phone numbers.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model SipAddress extends TelephonyAddress {
+  @doc("The SIP address type.")
+  type: TelephonyAddressType.sip;
+
+  @doc("The SIP or SIPS URI to call.")
+  @maxLength(2048)
+  value: url;
 }
 
 @doc("Customer-controlled configuration shared by direct and campaign-created call jobs.")
@@ -1384,22 +1371,30 @@ model TeamsResourceAccount extends TelephonyAddress {
 })
 @example(#{
   connection_name: "telephony-acs",
-  source: #{
-    type: "teams_resource_account",
-    value: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-  },
+  source: #{ type: "teams", value: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa" },
   destination: #{ type: "phone_number", value: "+14255550123" },
 })
 model TelephonyCallJobConfiguration {
   @doc("The phone destination to call.")
   destination: TelephonyAddress;
 
-  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SipOutbound. SIP authentication and source networks are connection settings: authType is CustomKeys; trimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl. Missing, null, blank or empty-object mode values default to digest; other non-string values are invalid. Digest requires nonblank username/password; IP ACL requires credentials.keys.source_cidrs as a non-null comma-separated string (4096 raw characters and 64 entries before deduplication). The empty string allows all source IPs; whitespace-only strings and empty entries are invalid. Metadata and binding CIDR fallbacks are unsupported. Native IPv4/IPv6 addresses or CIDRs are accepted; scoped and IPv4-mapped IPv6 addresses are rejected. SipOutbound target is a DNS hostname with optional port 1-65535, not an IP literal, URI, path or SIP parameter. Execution revalidates target before origination; saving a connection does not prove connectivity. No inbound telephony binding is required.")
+  /**
+   * Connection name in the current project. Its category selects Twilio, Azure Communication Services /
+   * Teams Phone extensibility, or SipOutbound; no inbound telephony binding is required.
+   * SIP connection settings use authType=CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type selects
+   * digest or ip_acl; missing, null, blank or empty-object values default to digest, and other non-string values are invalid.
+   * Digest requires nonblank username/password. IP ACL requires non-null comma-separated credentials.keys.source_cidrs,
+   * limited to 4096 raw characters and 64 entries before deduplication. Empty string allows all source IPs;
+   * whitespace-only strings and empty entries are invalid. Native IPv4/IPv6 addresses or CIDRs are accepted;
+   * scoped and IPv4-mapped IPv6 addresses and metadata/binding CIDR fallbacks are unsupported.
+   * SipOutbound targets require a DNS hostname with optional port 1-65535, not an IP literal, URI, path or SIP parameter.
+   * Execution revalidates the target before origination; saving a connection does not prove connectivity.
+   */
   @minLength(1)
   @maxLength(256)
   connection_name: string;
 
-  @doc("The typed caller address. Use phone_number for Twilio or SipOutbound, or teams_resource_account for ACS/Teams Phone extensibility. The connection validates the supported source role; outbound origination is independent of inbound bindings.")
+  @doc("The shared typed caller address. Use phone_number for Twilio or SipOutbound, or teams with a nonempty resource-account GUID for ACS/Teams Phone extensibility. Transfer-only identity formats and sip source addresses are rejected. Outbound origination is independent of inbound bindings.")
   source: TelephonyAddress;
 
   @doc("An optional customer-declared purpose for placing the call.")
@@ -1517,7 +1512,7 @@ model TelephonyCallJobCancellation {
   revision: int64;
 }
 
-/** Immutable customer-chosen Campaign name within a project and Agent. */
+@doc("Immutable customer-chosen Campaign name within a project and Agent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @minLength(1)
 @maxLength(64)
@@ -1583,12 +1578,22 @@ model TelephonyCallJob {
 }
 
 alias TelephonyCallJobResponse = {
-  @bodyRoot body: TelephonyCallJob;
-  @header("ETag") etag: Azure.Core.eTag;
+  @doc("The current durable call-job resource.")
+  @bodyRoot
+  body: TelephonyCallJob;
+
+  @doc("The current call-job entity tag. Send it in If-Match when requesting cancellation.")
+  @header("ETag")
+  etag: Azure.Core.eTag;
 };
 
 alias TelephonyCallJobAcceptedResponse = TypeSpec.Http.Response<202> &
   TelephonyCallJobResponse & {
-    @header("Location") location: string;
-    @header("Retry-After") retry_after: FoundryDurationSeconds;
+    @doc("The URI for reading the accepted call-job resource and its execution status.")
+    @header("Location")
+    location: string;
+
+    @doc("Suggested delay in seconds before reading the call-job resource again.")
+    @header("Retry-After")
+    retry_after: FoundryDurationSeconds;
   };

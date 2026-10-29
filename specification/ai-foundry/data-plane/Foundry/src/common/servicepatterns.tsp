@@ -464,8 +464,8 @@ alias JobCreateParameters<TJob extends TypeSpec.Reflection.Model> = {
 
 // ---- Operation templates ----
 
-/** Create a job. Defaults to 201 and Operation-Id; explicit parameter/response models preserve specialized contracts. */
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
+@doc("Create a job. Defaults to 201 and Operation-Id; explicit parameter/response models preserve specialized contracts.")
 @post
 op postJob<
   TJob extends TypeSpec.Reflection.Model,
@@ -473,9 +473,10 @@ op postJob<
   TResponse = JobCreatedResponse<TJob>
 > is FoundryDataPlaneOperation<TParams, TResponse>;
 
-/** Create or replace a named job resource, with an explicit request and response contract. */
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Concrete operations supply their operation-specific @pollingOperation links."
-@put op putJob<
+@doc("Create or replace a named job resource, with an explicit request and response contract.")
+@put
+op putJob<
   TJob extends TypeSpec.Reflection.Model,
   TParams extends TypeSpec.Reflection.Model,
   TResponse
@@ -532,9 +533,10 @@ op deleteJob<
 
 // ---- Preview operation templates ----
 
-/** Create a preview job. Override parameters, response and preview header only for an explicitly reviewed specialized contract. */
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
-@post op postJobPreview<
+@doc("Create a preview job. Override parameters, response and preview header only for an explicitly reviewed specialized contract.")
+@post
+op postJobPreview<
   AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
   TJob extends TypeSpec.Reflection.Model,
   TParams extends TypeSpec.Reflection.Model = JobCreateParameters<TJob>,
@@ -549,9 +551,10 @@ op deleteJob<
   TResponse
 >;
 
-/** Create or replace a named preview job resource; supports a required preview header without weakening it. */
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Concrete operations supply their operation-specific @pollingOperation links."
-@put op putJobPreview<
+@doc("Create or replace a named preview job resource; supports a required preview header without weakening it.")
+@put
+op putJobPreview<
   AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
   TJob extends TypeSpec.Reflection.Model,
   TParams extends TypeSpec.Reflection.Model,

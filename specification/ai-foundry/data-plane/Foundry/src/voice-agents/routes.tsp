@@ -690,7 +690,7 @@ interface AgentTelephony {
     TelephonyTransferTargetsResponse
   >;
 
-  /** Creates one durable direct outbound call job. Each attempt resolves the owning Agent's endpoint execution version before validation and uses that concrete version for its voice session. */
+  @doc("Creates one durable direct outbound call job. Each attempt resolves the owning Agent's endpoint execution version before validation and uses that concrete version for its voice session.")
   @summary("Create an outbound telephony call job")
   @parameterVisibility(Lifecycle.Create)
   @post
@@ -716,15 +716,11 @@ interface AgentTelephony {
   >;
 
   /**
-   * Lists direct and campaign-created call jobs owned by the route Agent. Deleted and superseded-round
-   * jobs are omitted. Status-filtered pages are live views, not a snapshot across requests.
-   *
-   * When campaign_name is supplied, pagination stays bound to the Campaign instance and validation round
-   * selected by the first page, even if a boundary CallJob is subsequently deleted. Failed-state
-   * replacement or deletion followed by name reuse returns 400 invalid_cursor rather than continuing
-   * into another round. The caller can restart traversal from the first page. Cancellation does not
-   * invalidate these cursors. Unknown, expired or mismatched boundaries also return 400 invalid_cursor.
-   * A first page resolves the current round; deleting Campaigns return an empty page.
+   * Lists the route Agent's direct and campaign-created call jobs, excluding deleted or superseded-round jobs.
+   * Status-filtered pages are live views, not snapshots. With campaign_name, the first page selects the current
+   * Campaign instance and validation round; that cursor binding survives boundary-CallJob deletion and cancellation.
+   * Failed-state replacement, deletion/name reuse, or unknown, expired or mismatched boundaries return 400 invalid_cursor;
+   * restart from the first page. Deleting Campaigns return an empty page.
    */
   @summary("List outbound telephony call jobs")
   @get
@@ -734,21 +730,24 @@ interface AgentTelephony {
   listTelephonyCallJobs is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
-      /** The owning voice agent. Authorization is applied before pagination. */
-      @path agent_name: string;
+      @doc("The owning voice agent. Authorization is applied before pagination.")
+      @path
+      agent_name: string;
 
       ...CommonPageQueryParameters;
 
-      /** Optional lifecycle filter. */
-      @query status?: TelephonyCallJobStatus;
+      @doc("Optional lifecycle filter.")
+      @query
+      status?: TelephonyCallJobStatus;
 
-      /** Restrict results to the current incarnation and validation round of the named Campaign. A missing Campaign returns 404; a deleting Campaign returns an empty page. Continuation across round replacement or name reuse returns 400 invalid_cursor. Omit to include direct and retained current-round Campaign jobs. Deleting/deleted instances and superseded rounds are excluded. */
-      @query campaign_name?: TelephonyCampaignName;
+      @doc("Restrict results to the current incarnation and validation round of the named Campaign. A missing Campaign returns 404; a deleting Campaign returns an empty page. Continuation across round replacement or name reuse returns 400 invalid_cursor. Omit to include direct and retained current-round Campaign jobs. Deleting/deleted instances and superseded rounds are excluded.")
+      @query
+      campaign_name?: TelephonyCampaignName;
     },
     AgentsPagedResult<TelephonyCallJob>
   >;
 
-  /** Deletes a terminal, fully reconciled call-job record. Nonterminal jobs or unresolved provider attempts return 409. Does not cancel a call or remove Campaign outcomes, conversations, recordings, or deduplication safeguards. A deleted job returns 404 on subsequent reads; repeated deletion returns 204. A retained creation replay key returns 409 call_job_deleted rather than originating a replacement call. */
+  @doc("Deletes a terminal, fully reconciled call-job record. Nonterminal jobs or unresolved provider attempts return 409. Does not cancel a call or remove Campaign outcomes, conversations, recordings, or deduplication safeguards. A deleted job returns 404 on subsequent reads; repeated deletion returns 204. A retained creation replay key returns 409 call_job_deleted rather than originating a replacement call.")
   @summary("Delete an outbound telephony call job")
   @delete
   @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}")
@@ -756,11 +755,13 @@ interface AgentTelephony {
   deleteTelephonyCallJob is deleteJobPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
-      /** The owning voice agent. */
-      @path agent_name: string;
+      @doc("The owning voice agent.")
+      @path
+      agent_name: string;
 
-      /** The call-job identifier. */
-      @path call_job_id: TelephonyCallJobId;
+      @doc("The call-job identifier.")
+      @path
+      call_job_id: TelephonyCallJobId;
     },
     NoContentResponse,
     WithRequiredFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
@@ -775,16 +776,18 @@ interface AgentTelephony {
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     TelephonyCallJob,
     {
-      /** The name of the voice agent that owns the call job. */
-      @path agent_name: string;
+      @doc("The name of the voice agent that owns the call job.")
+      @path
+      agent_name: string;
 
-      /** The service-generated identifier of the call job to retrieve. */
-      @path call_job_id: TelephonyCallJobId;
+      @doc("The service-generated identifier of the call job to retrieve.")
+      @path
+      call_job_id: TelephonyCallJobId;
     },
     TelephonyCallJobResponse
   >;
 
-  /** Requests cancellation of a durable outbound call job using If-Match. Prevents future attempts and may complete asynchronously. A new cancellation request after the call has connected returns 409; the connected call is allowed to finish naturally. */
+  @doc("Requests cancellation of a durable outbound call job using If-Match. Prevents future attempts and may complete asynchronously. A new cancellation request after the call has connected returns 409; the connected call is allowed to finish naturally.")
   @summary("Cancel an outbound telephony call job")
   @post
   @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}:cancel")
@@ -793,11 +796,13 @@ interface AgentTelephony {
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     TelephonyCallJob,
     {
-      /** The name of the voice agent that owns the call job. */
-      @path agent_name: string;
+      @doc("The name of the voice agent that owns the call job.")
+      @path
+      agent_name: string;
 
-      /** The service-generated identifier of the call job to cancel. */
-      @path call_job_id: TelephonyCallJobId;
+      @doc("The service-generated identifier of the call job to cancel.")
+      @path
+      call_job_id: TelephonyCallJobId;
 
       ...TelephonyIfMatchHeader;
     },
