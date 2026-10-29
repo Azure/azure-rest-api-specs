@@ -30,21 +30,10 @@ model Connection {
   @visibility(Lifecycle.Read)
   credentials: BaseCredentials;
 
+  @doc("Metadata of the connection")
   @visibility(Lifecycle.Read)
-  metadata: ConnectionMetadata;
+  metadata: Record<string>;
 }
-
-model ConnectionMetadata {
-  /** Null, blank or {} means no headers. JSON-encoded objects are not accepted. */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Metadata combines a header map, a blank string and null, not a nominal model hierarchy."
-  custom_headers?: Record<string> | SipConnectionEmptyCustomHeaders | null;
-
-  ...Record<string>;
-}
-
-/** Indicates no custom headers. */
-@pattern("^\\s*$")
-scalar SipConnectionEmptyCustomHeaders extends string;
 
 @doc("A base class for connection credentials")
 @discriminator("type")

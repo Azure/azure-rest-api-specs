@@ -49689,22 +49689,12 @@ components:
           description: The credentials used by the connection
           readOnly: true
         metadata:
-          $ref: '#/components/schemas/ConnectionMetadata'
+          type: object
+          additionalProperties:
+            type: string
+          description: Metadata of the connection
           readOnly: true
       description: Response from the list and get connections operations
-    ConnectionMetadata:
-      type: object
-      properties:
-        custom_headers:
-          anyOf:
-            - type: object
-              additionalProperties:
-                type: string
-            - $ref: '#/components/schemas/SipConnectionEmptyCustomHeaders'
-            - type: 'null'
-          description: Null, blank or {} means no headers. JSON-encoded objects are not accepted.
-      additionalProperties:
-        type: string
     ConnectionType:
       anyOf:
         - type: string
@@ -50501,6 +50491,7 @@ components:
           maxLength: 256
           description: |-
             Same-project connection; its category selects the provider. No inbound binding is required.
+            Configure SIP settings through the connection management API, separately from data-plane connection reads.
             SipOutbound uses CustomKeys. metadata.sip_auth_type is trimmed and case-insensitive: digest requires
             username/password; ip_acl requires credentials.keys.source_cidrs. Missing, null, blank or {} defaults to digest.
             CIDRs allow 4096 characters and 64 entries before deduplication. Empty string allows all sources;
@@ -89550,10 +89541,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    SipConnectionEmptyCustomHeaders:
-      type: string
-      pattern: ^\s*$
-      description: Indicates no custom headers.
     SipTelephonyBinding:
       type: object
       required:
@@ -90669,6 +90656,7 @@ components:
           maxLength: 256
           description: |-
             Same-project connection; its category selects the provider. No inbound binding is required.
+            Configure SIP settings through the connection management API, separately from data-plane connection reads.
             SipOutbound uses CustomKeys. metadata.sip_auth_type is trimmed and case-insensitive: digest requires
             username/password; ip_acl requires credentials.keys.source_cidrs. Missing, null, blank or {} defaults to digest.
             CIDRs allow 4096 characters and 64 entries before deduplication. Empty string allows all sources;

@@ -1531,6 +1531,7 @@ model TelephonyCallJobConfiguration {
 
   /**
    * Same-project connection; its category selects the provider. No inbound binding is required.
+   * Configure SIP settings through the connection management API, separately from data-plane connection reads.
    * SipOutbound uses CustomKeys. metadata.sip_auth_type is trimmed and case-insensitive: digest requires
    * username/password; ip_acl requires credentials.keys.source_cidrs. Missing, null, blank or {} defaults to digest.
    * CIDRs allow 4096 characters and 64 entries before deduplication. Empty string allows all sources;
