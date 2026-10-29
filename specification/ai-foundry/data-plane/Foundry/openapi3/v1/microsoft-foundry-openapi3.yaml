@@ -1044,7 +1044,7 @@ paths:
     post:
       operationId: AgentOptimizationJobs_create
       summary: Create an agent optimization job
-      description: Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry. Clients poll the URL in `Operation-Location` by using the get operation.
+      description: Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry. Clients poll the URL in `Operation-Location` by using the get operation. Agent and prompt optimization remain GA without preview opt-in; `Skills=V1Preview` applies only when creating a skill-optimization job.
       parameters:
         - name: Foundry-Features
           in: header
@@ -1114,14 +1114,6 @@ paths:
       summary: List agent optimization jobs
       description: Lists optimization jobs with cursor pagination and optional status or agent name filters.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Skills=V1Preview
         - name: limit
           in: query
           required: false
@@ -1223,23 +1215,12 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - AgentOptimizationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Skills=V1Preview
   /agent_optimization_jobs/{jobId}:
     get:
       operationId: AgentOptimizationJobs_get
       summary: Get an agent optimization job
       description: Retrieves an optimization job by its identifier.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Skills=V1Preview
         - name: jobId
           in: path
           required: true
@@ -1281,22 +1262,11 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - AgentOptimizationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Skills=V1Preview
     delete:
       operationId: AgentOptimizationJobs_delete
       summary: Delete an agent optimization job
       description: Cancels active work, then deletes the job and its candidate artifacts.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Skills=V1Preview
         - name: jobId
           in: path
           required: true
@@ -1327,23 +1297,12 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - AgentOptimizationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Skills=V1Preview
   /agent_optimization_jobs/{jobId}/candidates:
     get:
       operationId: AgentOptimizationJobCandidates_listCandidates
       summary: List candidates for an agent optimization job
       description: Lists candidates for the given optimization job with cursor pagination. Agent optimization can include the original baseline and multiple generated candidates; prompt and skill optimization generate a single candidate. Evaluated skill jobs also expose the original baseline for reporting through the existing evaluation field; the baseline is not a generated alternative. A generated skill candidate contains zero or more skill outcomes, not one candidate per skill. Each `output.mutations` item identifies a changed attribute by `type`; mutation `value` fields are omitted unless the client passes `expand=mutations`.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Skills=V1Preview
         - name: jobId
           in: path
           required: true
@@ -1438,23 +1397,12 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - AgentOptimizationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Skills=V1Preview
   /agent_optimization_jobs/{jobId}/candidates/{candidateId}:
     get:
       operationId: AgentOptimizationJobCandidates_getCandidate
       summary: Get a candidate for an agent optimization job
       description: Retrieves a single candidate. Mutation values are always included. Skill optimization detail includes independent skill results, resolved context, and the persisted execution snapshot when available; these detail fields are omitted from candidate lists.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Skills=V1Preview
         - name: jobId
           in: path
           required: true
@@ -1495,23 +1443,12 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - AgentOptimizationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Skills=V1Preview
   /agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote:
     post:
       operationId: AgentOptimizationJobCandidates_promoteCandidate
       summary: Promote a candidate for an agent optimization job
       description: Promotes a supported completed candidate to the Foundry agent stored in the parent job's target configuration. A skill-optimization candidate must be the evaluated learned candidate for a supported Prompt or Managed target; baseline, unevaluated, agentless, and unsupported-runtime skill candidates cannot be promoted. Skill promotion releases the exact evaluated candidate configuration without regenerating skills. Prompt-agent promotion creates a new agent version. Hosted-agent promotion currently records promotion metadata without deploying a new hosted-agent version.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Skills=V1Preview
         - name: jobId
           in: path
           required: true
@@ -1552,23 +1489,12 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - AgentOptimizationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Skills=V1Preview
   /agent_optimization_jobs/{jobId}/files:
     get:
       operationId: AgentOptimizationJobs_downloadFile
       summary: Download an agent optimization job file
       description: Downloads a declared file as a binary stream. The path must match a file descriptor returned by the service. When candidate_id is omitted, the request is scoped to the job.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Skills=V1Preview
         - name: jobId
           in: path
           required: true
@@ -1617,23 +1543,12 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - AgentOptimizationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Skills=V1Preview
   /agent_optimization_jobs/{jobId}:cancel:
     post:
       operationId: AgentOptimizationJobs_cancel
       summary: Cancel an agent optimization job
       description: Requests cancellation of a running or queued job. Returns 409 Conflict if the job is already in a terminal state.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Skills=V1Preview
         - name: jobId
           in: path
           required: true
@@ -1668,23 +1583,12 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - AgentOptimizationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Skills=V1Preview
   /agent_optimization_jobs:estimate:
     post:
       operationId: AgentOptimizationJobs_estimate
       summary: Estimate an agent optimization job
       description: Estimates validation-set rows, per-stage model call volumes, and cost bands without submitting the job.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Skills=V1Preview
         - name: api-version
           in: query
           required: true
@@ -1720,9 +1624,6 @@ paths:
             schema:
               $ref: '#/components/schemas/AgentOptimizationEstimateInputs'
         description: The inputs to estimate against.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Skills=V1Preview
   /agents:
     post:
       operationId: Agents_createAgent_Agents_createAgentFromCode

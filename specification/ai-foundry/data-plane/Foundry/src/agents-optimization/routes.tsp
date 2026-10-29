@@ -7,7 +7,7 @@ using Azure.Core;
 
 namespace Azure.AI.Projects;
 
-/** Skill optimization is conditionally in preview on otherwise GA job operations. */
+/** Skill optimization is conditionally in preview when creating an otherwise GA job. */
 const AgentOptimizationConditionalPreviews = #{
   conditional_previews: #[FoundryFeaturesOptInKeys.skills_v1_preview],
 };
@@ -16,7 +16,7 @@ const AgentOptimizationConditionalPreviews = #{
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobs {
   /**
-   * Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry. Clients poll the URL in `Operation-Location` by using the get operation.
+   * Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry. Clients poll the URL in `Operation-Location` by using the get operation. Agent and prompt optimization remain GA without preview opt-in; `Skills=V1Preview` applies only when creating a skill-optimization job.
    */
   @summary("Create an agent optimization job")
   @route("agent_optimization_jobs")
@@ -32,9 +32,7 @@ interface AgentOptimizationJobs {
    */
   @summary("Estimate an agent optimization job")
   @route("agent_optimization_jobs:estimate")
-  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
-  estimate is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.skills_v1_preview,
+  estimate is FoundryDataPlaneOperation<
     {
       /** The inputs to estimate against. */
       @body inputs: AgentOptimizationEstimateInputs;
@@ -47,11 +45,7 @@ interface AgentOptimizationJobs {
    */
   @summary("Get an agent optimization job")
   @route("agent_optimization_jobs/{jobId}")
-  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
-  get is queryJobStatusPreview<
-    FoundryFeaturesOptInKeys.skills_v1_preview,
-    AgentOptimizationJob
-  >;
+  get is queryJobStatus<AgentOptimizationJob>;
 
   /**
    * Downloads a declared file as a binary stream. The path must match a file descriptor returned by the service. When candidate_id is omitted, the request is scoped to the job.
@@ -59,9 +53,7 @@ interface AgentOptimizationJobs {
   @summary("Download an agent optimization job file")
   @route("agent_optimization_jobs/{jobId}/files")
   @get
-  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
-  downloadFile is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.skills_v1_preview,
+  downloadFile is FoundryDataPlaneOperation<
     {
       /** The ID of the parent optimization job. */
       @path jobId: string;
@@ -80,9 +72,7 @@ interface AgentOptimizationJobs {
    */
   @summary("List agent optimization jobs")
   @route("agent_optimization_jobs")
-  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
-  list is listJobsPreview<
-    FoundryFeaturesOptInKeys.skills_v1_preview,
+  list is listJobs<
     AgentOptimizationJob,
     {
       @doc("Filter to jobs in this lifecycle state.")
@@ -100,19 +90,14 @@ interface AgentOptimizationJobs {
    */
   @summary("Cancel an agent optimization job")
   @route("agent_optimization_jobs/{jobId}:cancel")
-  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
-  cancel is cancelJobPreview<
-    FoundryFeaturesOptInKeys.skills_v1_preview,
-    AgentOptimizationJob
-  >;
+  cancel is cancelJob<AgentOptimizationJob>;
 
   /**
    * Cancels active work, then deletes the job and its candidate artifacts.
    */
   @summary("Delete an agent optimization job")
   @route("agent_optimization_jobs/{jobId}")
-  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
-  delete is deleteJobPreview<FoundryFeaturesOptInKeys.skills_v1_preview>;
+  delete is deleteJob<AgentOptimizationJob>;
 }
 
 // ---------------------------------------------------------------------------
@@ -128,9 +113,7 @@ interface AgentOptimizationJobCandidates {
   @summary("List candidates for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates")
   @list
-  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
-  listCandidates is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.skills_v1_preview,
+  listCandidates is FoundryDataPlaneOperation<
     {
       /** The ID of the parent optimization job. */
       @path jobId: string;
@@ -149,9 +132,7 @@ interface AgentOptimizationJobCandidates {
    */
   @summary("Get a candidate for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}")
-  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
-  getCandidate is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.skills_v1_preview,
+  getCandidate is FoundryDataPlaneOperation<
     {
       /** The ID of the parent optimization job. */
       @path jobId: string;
@@ -168,9 +149,7 @@ interface AgentOptimizationJobCandidates {
   @summary("Promote a candidate for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote")
   @post
-  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
-  promoteCandidate is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.skills_v1_preview,
+  promoteCandidate is FoundryDataPlaneOperation<
     {
       /** The ID of the parent optimization job. */
       @path jobId: string;
