@@ -167,6 +167,24 @@ model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
 
   @doc("Version of the contract between the service and the evaluator endpoint. Defaults to `0.0.1` when omitted.")
   schema_version?: EndpointEvaluatorSchemaVersion = EndpointEvaluatorSchemaVersion.v0_0_1;
+
+  @doc("Optional inputs to send to the evaluator endpoint in addition to the default request fields. Requires `schema_version` `0.0.2`.")
+  inputs?: EndpointEvaluatorInputs;
+}
+
+@doc("Optional inputs for an endpoint-based evaluator.")
+model EndpointEvaluatorInputs {
+  @doc("When set, the service sends the OpenTelemetry spans for each evaluated item if the evaluation data source is traces.")
+  trace?: EndpointEvaluatorTraceInput;
+}
+
+@doc("Settings for sending OpenTelemetry spans to an endpoint-based evaluator.")
+model EndpointEvaluatorTraceInput {
+  @doc("Span attribute name prefixes to include. When omitted, all attributes are included.")
+  attribute_allowlist?: string[];
+
+  @doc("Whether to include annotations attached to the spans, such as human feedback. Defaults to `false`.")
+  include_annotations?: boolean = false;
 }
 
 @doc("Contract version for an endpoint-based evaluator.")
