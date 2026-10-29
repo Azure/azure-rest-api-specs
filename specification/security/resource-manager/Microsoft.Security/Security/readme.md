@@ -287,6 +287,15 @@ input-file:
   - preview/2025-10-01-preview/pricings.json
 ```
 
+### Tag: package-preview-2026-06-01-preview
+
+These settings apply only when `--tag=package-preview-2026-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-06-01-preview'
+input-file:
+  - preview/2026-06-01-preview/defenderForStorageSettings.json
+```
+
 ### Tag: package-preview-2026-03-01-preview
 
 These settings apply only when `--tag=package-preview-2026-03-01-preview` is specified on the command line.
@@ -823,7 +832,6 @@ input-file:
 - preview/2026-08-01-preview/securityConnectors.json
 - stable/2025-05-04/security-Assessment.json
 - preview/2026-06-01-preview/defenderForStorageSettings.json
-- preview/2026-03-01-preview/defenderForStorageSettings.json
 - preview/2025-11-01-preview/securityConnectorsDevOps.json
 - preview/2025-10-01-preview/security-Operations.json
 - stable/2017-08-01/complianceResults.json

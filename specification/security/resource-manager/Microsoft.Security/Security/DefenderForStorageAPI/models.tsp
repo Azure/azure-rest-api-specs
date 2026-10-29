@@ -92,6 +92,7 @@ model DefenderForStorageSettingList {
 /**
  * List of Defender for Storage malware scans.
  */
+@added(Versions.v2026_06_01_preview)
 model MalwareScanList {
   /**
    * List of Defender for Storage malware scans.
@@ -110,6 +111,7 @@ model MalwareScanList {
 /**
  * The provisioning state of the Defender for Storage settings resource.
  */
+@added(Versions.v2026_06_01_preview)
 @Azure.Core.lroStatus
 union DefenderForStorageProvisioningState {
   string,
@@ -128,6 +130,7 @@ model DefenderForStorageSettingProperties {
   /**
    * The provisioning state of the resource.
    */
+  @added(Versions.v2026_06_01_preview)
   @visibility(Lifecycle.Read)
   provisioningState?: DefenderForStorageProvisioningState;
 
@@ -229,6 +232,7 @@ model OnUploadProperties {
    * The number of gigabytes scanned by On Upload malware scanning during the current month. Reflects the current month's usage.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "'GB' matches the casing of the existing capGBPerMonth, scannedBlobsInGB and scannedFilesInGB properties in this spec."
+  @added(Versions.v2026_06_01_preview)
   @visibility(Lifecycle.Read)
   scannedGBThisMonth?: float64;
 
@@ -449,6 +453,7 @@ model FilesScanSummary {
 /**
  * The matching strategy for the filter.
  */
+@added(Versions.v2026_01_01_preview)
 union MatchType {
   string,
 
@@ -466,6 +471,7 @@ union MatchType {
 /**
  * Filter with value and matching strategy.
  */
+@added(Versions.v2026_01_01_preview)
 model MatchFilter {
   /**
    * The value to match against.
@@ -481,6 +487,7 @@ model MatchFilter {
 /**
  * Filter for blob scanning. At least one of 'container' or 'blob' must be specified; a request with neither is rejected by the service. If only container is provided, all blobs in that container are scanned. If only blob is provided, blobs matching the filter across all containers are scanned.
  */
+@added(Versions.v2026_01_01_preview)
 model BlobScanFilter {
   /**
    * Optional filter for the blob container to scan. If not provided, the blob filter will apply across all containers.
@@ -496,6 +503,7 @@ model BlobScanFilter {
 /**
  * Filter for file scanning. At least one of 'share' or 'file' must be specified; a request with neither is rejected by the service. If only share is provided, all files in that share are scanned. If only file is provided, files matching the filter across all shares are scanned.
  */
+@added(Versions.v2026_01_01_preview)
 model FileScanFilter {
   /**
    * Optional filter for the file share to scan. If not provided, the file filter will apply across all shares.
@@ -511,6 +519,7 @@ model FileScanFilter {
 /**
  * Filters to scope the malware scan.
  */
+@added(Versions.v2026_01_01_preview)
 model MalwareScanFilters {
   /**
    * Optional filter for blob scanning. Specifies which blobs to scan.
@@ -526,6 +535,7 @@ model MalwareScanFilters {
 /**
  * Properties for the malware scan request.
  */
+@added(Versions.v2026_01_01_preview)
 model StartMalwareScanRequestProperties {
   /**
    * Optional filters to scope the malware scan to specific blobs or files.
@@ -537,6 +547,7 @@ model StartMalwareScanRequestProperties {
  * Request body for starting a malware scan with optional filters.
  */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@added(Versions.v2026_01_01_preview)
 model StartMalwareScanRequest {
   /**
    * Properties for the malware scan request.

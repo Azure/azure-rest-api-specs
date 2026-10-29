@@ -2,6 +2,7 @@
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "../Common/main.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace DefenderForStorageAPI;
@@ -117,12 +119,27 @@ interface DefenderForStorageSettings {
    */
   @tag("DefenderForStorage")
   get is DefenderForStorageSettingsOps.Read<DefenderForStorageSetting>;
+
+  /**
+   * Creates or updates the Defender for Storage settings on a specified storage account.
+   */
+  @removed(Versions.v2026_06_01_preview)
+  @renamedFrom(Versions.v2026_06_01_preview, "create")
+  @sharedRoute
+  @tag("DefenderForStorage")
+  createSync is DefenderForStorageSettingsOps.CreateOrUpdateSync<
+    DefenderForStorageSetting,
+    ErrorType = CloudError
+  >;
+
   /**
    * Creates or updates the Defender for Storage settings on a specified storage account.
    * This is an asynchronous operation. The response includes the `Azure-AsyncOperation`
    * header pointing to the operation status endpoint, which can be polled until the
    * operation completes.
    */
+  @added(Versions.v2026_06_01_preview)
+  @sharedRoute
   @tag("DefenderForStorage")
   create is DefenderForStorageSettingsOps.CreateOrUpdateAsync<DefenderForStorageSetting>;
 
@@ -158,6 +175,10 @@ interface DefenderForStorageSettings {
   @tag("Antimalware")
   @tag("Scan")
   @armResourceAction(DefenderForStorageSetting)
+  @returnTypeChangedFrom(
+    Versions.v2026_06_01_preview,
+    ArmResponse<MalwareScan> | CloudError
+  )
   @post
   startMalwareScan(
     ...ApiVersionParameter,
@@ -184,6 +205,7 @@ interface DefenderForStorageSettings {
      * Optional request body to filter which blobs and files to scan.
      * Supported since API version 2026-01-01-preview.
      */
+    @added(Versions.v2026_01_01_preview)
     @bodyRoot
     body?: StartMalwareScanRequest,
   ): ArmResponse<MalwareScan> | ErrorResponse;
@@ -199,6 +221,7 @@ interface DefenderForStorageSettings {
   /**
    * Lists the Defender for Storage malware scans for the specified storage resource.
    */
+  @added(Versions.v2026_06_01_preview)
   @tag("DefenderForStorage")
   @tag("Antimalware")
   @tag("Scan")
@@ -224,8 +247,13 @@ interface DefenderForStorageSettings {
   DefenderForStorageSettings.create::parameters.resource,
   "Defender for Storage Settings"
 );
+@@doc(
+  DefenderForStorageSettings.createSync::parameters.resource,
+  "Defender for Storage Settings"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This is the polling endpoint for asynchronous Defender for Storage operations and is not itself an Azure resource interface."
+@added(Versions.v2026_06_01_preview)
 interface DefenderForStorageOperationStatus {
   /**
    * Gets the status of an asynchronous Defender for Storage settings operation. This is

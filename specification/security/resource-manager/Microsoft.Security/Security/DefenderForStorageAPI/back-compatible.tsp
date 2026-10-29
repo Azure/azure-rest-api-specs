@@ -9,6 +9,11 @@ using Common;
 @@Legacy.flattenProperty(CloudError.error);
 
 @@clientLocation(DefenderForStorageSettings.get, "DefenderForStorage");
+@@clientLocation(DefenderForStorageSettings.createSync, "DefenderForStorage");
+@@clientName(
+  DefenderForStorageSettings.createSync::parameters.resource,
+  "defenderForStorageSetting"
+);
 @@clientLocation(DefenderForStorageSettings.create, "DefenderForStorage");
 @@clientName(
   DefenderForStorageSettings.create::parameters.resource,
