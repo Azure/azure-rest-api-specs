@@ -190,6 +190,7 @@ union DeviceAdministrativeState {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a ResyncPasswords request on a Network Device.")
 @added(Versions.v2025_07_15)
 model NetworkDeviceResyncPasswordsResponse {
@@ -203,18 +204,21 @@ model NetworkDeviceResyncCertificatesResponse {
   ...OperationStatusResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The current status of an refresh configuration async operation.")
 @added(Versions.v2025_07_15)
 model NetworkDeviceRefreshConfigurationResponse {
   ...OperationStatusResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Network Device Administrative State Update Response.")
 @added(Versions.v2025_07_15)
 model NetworkDeviceUpdateAdministrativeStateResponse {
   ...OperationStatusResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("NetworkDevice Upgrade Request Properties.")
 @added(Versions.v2025_07_15)
 model NetworkDeviceUpgradeRequest {
@@ -227,12 +231,14 @@ model NetworkDeviceUpgradeRequest {
   rwDeviceConfigUrl?: url;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Network Device Upgrade Response.")
 @added(Versions.v2025_07_15)
 model NetworkDeviceUpgradeResponse {
   ...OperationStatusResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a RunRwCommand request on a Network Device.")
 @added(Versions.v2025_07_15)
 model NetworkDeviceRunRwCommandResponse {
@@ -252,4 +258,56 @@ model NetworkDeviceRwCommandResponseProperties {
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Predefined link containing Device Rw Command output.")
   outputUrl?: url;
+}
+
+@doc("Type of diagnostics operation to be performed on the Network Device.")
+@added(Versions.v2026_07_15_preview)
+union NetworkDeviceDiagnosticsOperationType {
+  @doc("Collect a support bundle from the Network Device.")
+  CollectSupportBundle: "CollectSupportBundle",
+
+  @doc("Collect Runtime configuration from the Network Device.")
+  CollectRuntimeConfiguration: "CollectRuntimeConfiguration",
+
+  string,
+}
+
+@doc("Support bundle collection request for the Network Device.")
+@added(Versions.v2026_07_15_preview)
+model NetworkDeviceSupportBundleProperties {
+  @doc("Support case number associated with the support bundle request.")
+  supportCaseNumber?: string;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Network Device RunDiagnostics Request Properties.")
+@added(Versions.v2026_07_15_preview)
+model NetworkDeviceRunDiagnosticsRequest {
+  @doc("Type of diagnostics operation to be performed on the Network Device.")
+  operationType: NetworkDeviceDiagnosticsOperationType;
+
+  @doc("Support bundle collection request for the Network Device. Required when operationType is CollectSupportBundle.")
+  supportBundle?: NetworkDeviceSupportBundleProperties;
+
+  @doc("Runtime configuration request for the Network Device. Required when operationType is CollectRuntimeConfiguration.")
+  runtimeConfiguration?: RuntimeConfigurationProperties;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Network Device RunDiagnostics API response.")
+@added(Versions.v2026_07_15_preview)
+model NetworkDeviceRunDiagnosticsResponse {
+  ...OperationStatusResult;
+
+  @doc("Network Device RunDiagnostics Response properties.")
+  properties?: NetworkDeviceRunDiagnosticsResponseProperties;
+}
+
+@doc("Network Device RunDiagnostics Response properties.")
+@added(Versions.v2026_07_15_preview)
+model NetworkDeviceRunDiagnosticsResponseProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  @doc("File location of the output of the RunDiagnostics operation (for example, the collected support bundle).")
+  @visibility(Lifecycle.Read)
+  diagnosticsUrl?: url;
 }

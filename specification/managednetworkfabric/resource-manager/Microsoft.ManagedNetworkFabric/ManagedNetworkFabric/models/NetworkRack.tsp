@@ -37,6 +37,11 @@ model NetworkRackProperties extends AnnotationResource {
   @doc("Configuration state of the resource.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
+
+  @added(Versions.v2026_07_15_preview)
+  @doc("Administrative state of the resource.")
+  @visibility(Lifecycle.Read)
+  administrativeState?: AdministrativeState;
 }
 
 @doc("Network Rack patch resource definition.")
