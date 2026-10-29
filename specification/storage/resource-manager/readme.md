@@ -47,6 +47,11 @@ directive:
     approved-by: "@ramoka178"
 
   - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/objectReplicationPolicies/{objectReplicationPolicyId}"].get.parameters
+    suppress: ParametersInPointGet
+    reason: The optional $expand=policyStatus parameter returns policy status only when explicitly requested.
+
+  - where:
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/usages"]
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/usages/{fileServiceUsagesName}"]
     suppress: PathResourceTypeNameCamelCase
