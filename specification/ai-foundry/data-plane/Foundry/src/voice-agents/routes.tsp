@@ -715,13 +715,7 @@ interface AgentTelephony {
     TelephonyCallJobAcceptedResponse
   >;
 
-  /**
-   * Lists the route Agent's direct and campaign-created call jobs, excluding deleted or superseded-round jobs.
-   * Status-filtered pages are live views, not snapshots. With campaign_name, the first page selects the current
-   * Campaign instance and validation round; that cursor binding survives boundary-CallJob deletion and cancellation.
-   * Failed-state replacement, deletion/name reuse, or unknown, expired or mismatched boundaries return 400 invalid_cursor;
-   * restart from the first page. Deleting Campaigns return an empty page.
-   */
+  @doc("Lists the Agent's direct and Campaign call jobs, excluding deleted or superseded-round jobs. Status-filtered pages are live, not snapshots. A campaign_name cursor binds the first page's Campaign instance/round; boundary-job deletion and cancellation preserve it. Replacement, deletion/name reuse, or unknown/expired/mismatched boundaries return 400 invalid_cursor; restart from page one. Deleting Campaigns return an empty page.")
   @summary("List outbound telephony call jobs")
   @get
   @list
@@ -740,14 +734,14 @@ interface AgentTelephony {
       @query
       status?: TelephonyCallJobStatus;
 
-      @doc("Restrict results to the current incarnation and validation round of the named Campaign. A missing Campaign returns 404; a deleting Campaign returns an empty page. Continuation across round replacement or name reuse returns 400 invalid_cursor. Omit to include direct and retained current-round Campaign jobs. Deleting/deleted instances and superseded rounds are excluded.")
+      @doc("Filters to the named Campaign's current instance and validation round (404 if absent; empty page if deleting). Cursors cannot cross replacement or name reuse: 400 invalid_cursor. Omit for direct and retained current-round Campaign jobs; deleting/deleted Campaigns and superseded rounds are excluded.")
       @query
       campaign_name?: TelephonyCampaignName;
     },
     AgentsPagedResult<TelephonyCallJob>
   >;
 
-  @doc("Deletes a terminal, fully reconciled call-job record. Nonterminal jobs or unresolved provider attempts return 409. Does not cancel a call or remove Campaign outcomes, conversations, recordings, or deduplication safeguards. A deleted job returns 404 on subsequent reads; repeated deletion returns 204. A retained creation replay key returns 409 call_job_deleted rather than originating a replacement call.")
+  @doc("Deletes a terminal, fully reconciled CallJob; otherwise returns 409. It does not cancel calls or remove Campaign outcomes, conversations, recordings or replay safeguards. Subsequent GET returns 404 and repeated DELETE returns 204. A retained creation key returns 409 call_job_deleted, never a new call.")
   @summary("Delete an outbound telephony call job")
   @delete
   @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}")

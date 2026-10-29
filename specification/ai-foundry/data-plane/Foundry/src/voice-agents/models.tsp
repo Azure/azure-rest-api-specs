@@ -417,7 +417,7 @@ model VoiceRecording {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyBindingId extends string;
 
-@doc("An exact canonical E.164 number or a restricted pattern for E.164 caller numbers, up to 256 characters after trimming. Patterns must start with ^ followed by an escaped plus sign, a nonzero first digit or [1-9], then ASCII digit literals or single-digit classes/ranges with optional bounded {n} or {n,m} quantifiers, and a final $. Each bound is 1 to 15. Other regex constructs, including Unicode digit shortcuts, groups, alternation, lookahead or lookbehind assertions, backreferences, and unbounded repetition, are not supported. The schema pattern is a lexical filter; the service additionally rejects descending digit ranges and reversed quantifier bounds and verifies that every possible match has 2 to 15 ASCII digits after the plus sign. Matching covers the entire normalized canonical E.164 caller number. Supply trimmed values. Previously accepted arbitrary regexes must be replaced; they are not silently rewritten.")
+@doc("An exact E.164 number or a full-match pattern for normalized caller numbers, starting `^\\+` and ending `$`. After '+', use a nonzero ASCII digit or `[1-9]`, then only ASCII digits, single-digit classes/ranges and `{n}`/`{n,m}` repeats (bounds 1-15). Every match must contain 2-15 digits. Supply trimmed values (max 256 characters). Beyond the schema's lexical check, the service rejects reversed ranges/bounds and other regex syntax; unsupported patterns are not rewritten.")
 @maxLength(256)
 @pattern("^(?:\\+[1-9][0-9]{1,14}|\\^\\\\\\+(?:[1-9]|\\[1-9\\])(?:(?:[0-9]|\\[[0-9](?:-[0-9])?\\])(?:\\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\\})?)+\\$)$")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -1315,7 +1315,7 @@ union TelephonyAddressType {
   sip: "sip",
 }
 
-@doc("Shared typed address for an outbound source, recipient destination or transfer target. Connections validate supported variants separately for each role. Unknown or unsupported variants are rejected before dialing. Additional non-phone variants may be introduced as provider support becomes available.")
+@doc("Address shared by sources, recipients and transfer targets. Connections validate supported types for each role; unknown or unsupported types fail before dialing. New provider-supported types may be added.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyAddress {
@@ -1339,7 +1339,7 @@ model PhoneNumber extends TelephonyAddress {
   value: string;
 }
 
-@doc("A shared Microsoft Teams address. Outbound sources require a nonempty resource-account object GUID. Transfer destinations accept a Teams user or resource-account GUID, including the 28:orgid:{guid} form. Connections validate support for each role; this type does not enable Teams outbound recipients.")
+@doc("Teams source or transfer address. Sources require a nonempty resource-account GUID; transfers also accept user GUIDs and 28:orgid:{guid}. Provider/role checks still apply; Teams outbound recipients are unsupported.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsAddress extends TelephonyAddress {
   @doc("The Microsoft Teams address type.")
@@ -1379,16 +1379,15 @@ model TelephonyCallJobConfiguration {
   destination: TelephonyAddress;
 
   /**
-   * Connection name in the current project. Its category selects Twilio, Azure Communication Services /
-   * Teams Phone extensibility, or SipOutbound; no inbound telephony binding is required.
-   * SIP connection settings use authType=CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type selects
-   * digest or ip_acl; missing, null, blank or empty-object values default to digest, and other non-string values are invalid.
-   * Digest requires nonblank username/password. IP ACL requires non-null comma-separated credentials.keys.source_cidrs,
-   * limited to 4096 raw characters and 64 entries before deduplication. Empty string allows all source IPs;
-   * whitespace-only strings and empty entries are invalid. Native IPv4/IPv6 addresses or CIDRs are accepted;
-   * scoped and IPv4-mapped IPv6 addresses and metadata/binding CIDR fallbacks are unsupported.
-   * SipOutbound targets require a DNS hostname with optional port 1-65535, not an IP literal, URI, path or SIP parameter.
-   * Execution revalidates the target before origination; saving a connection does not prove connectivity.
+   * Same-project connection; its category selects Twilio, ACS/Teams Phone extensibility or SipOutbound.
+   * No inbound binding is needed. SIP uses authType=CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type
+   * selects digest or ip_acl; absent/null/blank/{} defaults to digest, and other non-string values are invalid.
+   * Digest requires nonblank username/password. IP ACL requires non-null comma-separated credentials.keys.source_cidrs:
+   * at most 4096 raw characters and 64 entries before deduplication. Empty string allows all source IPs;
+   * whitespace-only values and empty entries fail. Native IPv4/IPv6 addresses and CIDRs are accepted;
+   * scoped/IPv4-mapped IPv6 and metadata/binding CIDR fallbacks are not.
+   * SipOutbound requires a DNS target with optional port 1-65535, not an IP literal, URI, path or SIP parameter.
+   * The target is revalidated before origination; saving does not prove connectivity.
    */
   @minLength(1)
   @maxLength(256)
@@ -1401,7 +1400,7 @@ model TelephonyCallJobConfiguration {
   @minLength(1)
   purpose?: string;
 
-  @doc("Structured input values available to the agent and greeting for this call, including nested JSON objects, arrays and null. Input names and values must satisfy the Agent's input definitions and schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Accepting a JSON value does not bypass Agent input validation.")
+  @doc("Inputs for the Agent and greeting, including nested JSON objects, arrays and null. Input names and values must satisfy the Agent's input definitions and schemas. Missing required inputs fail validation; omitted optional inputs may use defaults.")
   structured_inputs?: Record<unknown>;
 
   @doc("The optional execution window.")
@@ -1572,7 +1571,7 @@ model TelephonyCallJob {
   // Preserve the existing SDK response order when appending Campaign fields.
   ...PickProperties<TelephonyCallJobConfiguration, "source">;
 
-  @doc("The owning Campaign name under this Agent. Absent for direct calls. Campaign deletion also deletes its CallJobs; owned jobs are hidden once cascade deletion is accepted. Association and cleanup use the immutable internal Campaign instance, so name reuse cannot associate old work with a replacement.")
+  @doc("Owning Campaign name under this Agent; absent for direct calls. Cascade deletion hides owned CallJobs on acceptance and deletes them during cleanup. Ownership follows the immutable Campaign instance, so name reuse cannot attach old jobs.")
   @visibility(Lifecycle.Read)
   campaign_name?: TelephonyCampaignName;
 }
