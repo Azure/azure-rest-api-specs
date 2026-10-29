@@ -25,6 +25,21 @@ const rulesets = "@azure-tools/typespec-azure-rulesets";
 const originalRulesets = `${rulesets}-original`;
 const aliasVersion = `npm:${rulesets}@0.73.0`;
 
+function hasStringDevDependencies(
+  value: unknown,
+): value is { devDependencies: Record<string, string> } {
+  if (
+    typeof value !== "object" ||
+    value === null ||
+    !("devDependencies" in value) ||
+    typeof value.devDependencies !== "object" ||
+    value.devDependencies === null
+  ) {
+    return false;
+  }
+  return Object.values(value.devDependencies).every((version) => typeof version === "string");
+}
+
 function fixture(t: TestContext, workspaceRulesets = false) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "setup-fixture-files-"));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
@@ -89,7 +104,8 @@ await test("preserves the workspace ruleset and its upstream npm alias", (t) => 
   const setup = fixture(t, true);
   const result = setup.run();
   assert.equal(result.status, 0, result.stdout + result.stderr);
-  const generated = JSON.parse(fs.readFileSync(setup.packageFile, "utf8"));
+  const generated: unknown = JSON.parse(fs.readFileSync(setup.packageFile, "utf8"));
+  assert.ok(hasStringDevDependencies(generated));
   assert.deepEqual(generated.devDependencies, { ...setup.catalog, [rulesets]: "workspace:*" });
   assert.equal(fs.readFileSync(setup.instructionsFile, "utf8"), "# Test instructions\n");
 });

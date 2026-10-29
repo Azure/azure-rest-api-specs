@@ -33,15 +33,31 @@ const fixtureDependencies = [
   "@typespec/versioning",
 ];
 
+function hasStringDevDependencies(
+  value: unknown,
+): value is { devDependencies: Record<string, string> } {
+  if (
+    typeof value !== "object" ||
+    value === null ||
+    !("devDependencies" in value) ||
+    typeof value.devDependencies !== "object" ||
+    value.devDependencies === null
+  ) {
+    return false;
+  }
+  return Object.values(value.devDependencies).every((version) => typeof version === "string");
+}
+
 for (const requiredFile of [instructionsSource, workspaceFile, rootPackageFile]) {
   if (!fs.existsSync(requiredFile)) {
     throw new Error(`Required fixture input does not exist: ${requiredFile}`);
   }
 }
 
-const rootPackage: { devDependencies: Record<string, string> } = JSON.parse(
-  fs.readFileSync(rootPackageFile, "utf8"),
-);
+const rootPackage: unknown = JSON.parse(fs.readFileSync(rootPackageFile, "utf8"));
+if (!hasStringDevDependencies(rootPackage)) {
+  throw new Error(`Root package has invalid devDependencies: ${rootPackageFile}`);
+}
 if (rootPackage.devDependencies["@azure-tools/typespec-azure-rulesets"]?.startsWith("workspace:")) {
   fixtureDependencies.push("@azure-tools/typespec-azure-rulesets-original");
 }
