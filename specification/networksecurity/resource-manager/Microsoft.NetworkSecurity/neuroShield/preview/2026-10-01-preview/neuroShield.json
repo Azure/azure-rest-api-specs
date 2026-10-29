@@ -2548,15 +2548,16 @@
   },
   "parameters": {
     "NeuroShieldPaginationParameters.skipToken": {
-      "name": "skipToken",
+      "name": "$skipToken",
       "in": "query",
       "description": "The continuation token used to retrieve the next page.",
       "required": false,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "skipToken"
     },
     "NeuroShieldPaginationParameters.top": {
-      "name": "top",
+      "name": "$top",
       "in": "query",
       "description": "The maximum number of items to return.",
       "required": false,
@@ -2564,10 +2565,11 @@
       "format": "int32",
       "minimum": 1,
       "maximum": 50,
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "top"
     },
     "NeuroShieldSummaryListParameters": {
-      "name": "top",
+      "name": "$top",
       "in": "query",
       "description": "The maximum number of items to return.",
       "required": false,
@@ -2575,7 +2577,8 @@
       "format": "int32",
       "minimum": 1,
       "maximum": 50,
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "top"
     }
   }
 }

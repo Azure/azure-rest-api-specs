@@ -670,7 +670,7 @@ model NeuroShieldPaginationParameters {
    * The maximum number of items to return.
    */
   @added(Versions.v2026_10_01_preview)
-  @query("top")
+  @query("$top")
   @minValue(1)
   @maxValue(50)
   top?: int32;
@@ -678,7 +678,7 @@ model NeuroShieldPaginationParameters {
   /**
    * The continuation token used to retrieve the next page.
    */
-  @query("skipToken")
+  @query("$skipToken")
   skipToken?: string;
 }
 
@@ -690,7 +690,7 @@ model NeuroShieldSummaryListParameters {
   /**
    * The maximum number of items to return.
    */
-  @query("top")
+  @query("$top")
   @minValue(1)
   @maxValue(50)
   top?: int32;
