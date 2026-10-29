@@ -129,13 +129,26 @@ model AgentOptimizationJobResult {
 // Job resource — extends JobLike per Foundry job guidelines
 // ---------------------------------------------------------------------------
 
-@doc("Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration.")
-model AgentOptimizationJob is JobLike<AgentOptimizationJobResult, never> {
+/** Optimization job lifecycle, including a terminal skip when required input is unavailable. */
+union AgentOptimizationJobStatus {
+  JobStatus,
+
+  @doc("Required input was unavailable and optimization was skipped. Terminal, but not evidence that skills were created; error explains the skip.")
+  @Azure.Core.lroSucceeded
+  skipped: "skipped",
+}
+
+@doc("Agent optimization job resource — a long-running job that produces candidate changes or versioned skill packages. For failed or skipped jobs, error explains the outcome; status distinguishes failure from a skip.")
+model AgentOptimizationJob is JobLike<
+  AgentOptimizationJobResult,
+  never,
+  AgentOptimizationJobStatus
+> {
   @doc("Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.")
   @maxLength(256)
   display_name?: string;
 
-  @doc("Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent.")
+  @doc("Foundry agent whose configuration is optimized, or a read-only trace and skill source for skill_optimization. Agentless skill optimization requires explicit agent_traces telemetry configuration with an exact agent_name. Skill optimization does not modify the target agent.")
   target_configuration?: AgentOptimizationTargetConfiguration;
 
   @doc("Model used to generate candidate changes. An existing deployment name is also accepted.")
@@ -160,3 +173,8 @@ model AgentOptimizationJob is JobLike<AgentOptimizationJobResult, never> {
   @visibility(Lifecycle.Read)
   warnings?: string[];
 }
+
+@@doc(
+  AgentOptimizationJob.error,
+  "Failure or skip reason; status distinguishes the outcomes. Omitted otherwise."
+);
