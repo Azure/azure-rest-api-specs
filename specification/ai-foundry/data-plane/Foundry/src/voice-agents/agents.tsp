@@ -174,6 +174,10 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.")
   subagent_config?: VoiceAgentSubagentConfig;
 
+  @doc("Optional post-call delivery configuration. After each session ends, the service notifies the configured destinations.")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  post_call?: VoiceAgentPostCallConfig;
+
   @doc("""
     Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
     `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
@@ -262,6 +266,72 @@ union VoiceAgentSoundscapeSound {
 
   @doc("The second notification tone.")
   ding2: "ding2",
+}
+
+@doc("Post-call delivery configuration.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentPostCallConfig {
+  @doc("The destinations to notify.")
+  @minItems(1)
+  @maxItems(10)
+  destinations: VoiceAgentPostCallDestination[];
+
+  @doc("Additional content to include in each delivery. The transcript is always delivered.")
+  include?: VoiceAgentPostCallIncludeOption[];
+}
+
+@doc("The type of a post-call destination.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentPostCallDestinationType {
+  string,
+
+  @doc("An Event Grid connection.")
+  event_grid: "event_grid",
+
+  @doc("A routine.")
+  routine: "routine",
+}
+
+@doc("A post-call destination.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentPostCallDestination {
+  @doc("The destination type.")
+  type: VoiceAgentPostCallDestinationType;
+}
+
+@doc("An Event Grid connection that receives post-call events.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentEventGridPostCallDestination
+  extends VoiceAgentPostCallDestination {
+  type: VoiceAgentPostCallDestinationType.event_grid;
+
+  @doc("The name of the Event Grid connection.")
+  @minLength(1)
+  @example("post-call-events")
+  connection_name: string;
+}
+
+@doc("A routine that is dispatched with the post-call event.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentRoutinePostCallDestination
+  extends VoiceAgentPostCallDestination {
+  type: VoiceAgentPostCallDestinationType.routine;
+
+  @doc("The name of the routine.")
+  @minLength(1)
+  @maxLength(128)
+  @example("archive")
+  name: string;
+}
+
+@doc("Content that can be included in a post-call delivery.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentPostCallIncludeOption {
+  string,
+
+  @doc("A URL to the merged call recording.")
+  audio: "audio",
 }
 
 @doc("Configuration for sibling Foundry text agents that a voice agent may consult.")
