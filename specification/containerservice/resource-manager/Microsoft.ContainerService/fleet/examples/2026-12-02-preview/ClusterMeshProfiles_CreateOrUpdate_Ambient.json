@@ -1,0 +1,80 @@
+{
+  "title": "Create an ambient cluster mesh profile before applying membership.",
+  "operationId": "ClusterMeshProfiles_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-12-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgfleets",
+    "fleetName": "fleet1",
+    "clusterMeshProfileName": "ambient1",
+    "resource": {
+      "properties": {
+        "memberSelector": {
+          "byLabel": "env=production"
+        },
+        "kind": "ambient"
+      }
+    },
+    "If-None-Match": "*"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "memberSelector": {
+            "byLabel": "env=production"
+          },
+          "status": {
+            "state": "NotConnected"
+          },
+          "kind": "ambient",
+          "ambientProperties": {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_fleet1_ambient1/providers/Microsoft.AppLink/appLinks/ambient1"
+          }
+        },
+        "eTag": "\"EtagValue\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgfleets/providers/Microsoft.ContainerService/fleets/fleet1/clusterMeshProfiles/ambient1",
+        "name": "ambient1",
+        "type": "Microsoft.ContainerService/fleets/clusterMeshProfiles",
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2022-03-23T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-03-23T05:40:40.657Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "memberSelector": {
+            "byLabel": "env=production"
+          },
+          "status": {
+            "state": "NotConnected"
+          },
+          "kind": "ambient",
+          "ambientProperties": {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_fleet1_ambient1/providers/Microsoft.AppLink/appLinks/ambient1"
+          }
+        },
+        "eTag": "\"EtagValue\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgfleets/providers/Microsoft.ContainerService/fleets/fleet1/clusterMeshProfiles/ambient1",
+        "name": "ambient1",
+        "type": "Microsoft.ContainerService/fleets/clusterMeshProfiles",
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2022-03-23T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-03-23T05:40:40.657Z"
+        }
+      }
+    }
+  }
+}
