@@ -176,7 +176,7 @@ model VoiceAgentDefinition extends AgentDefinition {
 
   @doc("Optional post-call delivery configuration. After each session ends, the service notifies the configured destinations.")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  post_call?: VoiceAgentPostCallConfig;
+  post_call?: VoiceAgentPostCall;
 
   @doc("""
     Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
@@ -270,7 +270,7 @@ union VoiceAgentSoundscapeSound {
 
 @doc("Post-call delivery configuration.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentPostCallConfig {
+model VoiceAgentPostCall {
   @doc("The destinations to notify.")
   @minItems(1)
   @maxItems(10)
