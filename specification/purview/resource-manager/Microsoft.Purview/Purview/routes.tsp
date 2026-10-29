@@ -33,6 +33,7 @@ alias ScopeTenantIdParameters = {
    * The tenant ID.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing POST contracts using ScopeTenantIdParameters.scopeTenantId retain the scopeTenantId query parameter for wire compatibility."
   @format("uuid")
   @query("scopeTenantId")
   scopeTenantId: string;
@@ -84,12 +85,14 @@ interface DefaultAccountsOperationGroup {
       /**
        * The scope for the default account.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing remove POST contract uses scopeType in the query; preserve wire compatibility."
       @query("scopeType")
       scopeType: ScopeType;
 
       /**
        * The Id of the scope object, for example if the scope is "Subscription" then it is the ID of that subscription.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing remove POST contract uses scope in the query; preserve wire compatibility."
       @query("scope")
       scope?: string;
     },

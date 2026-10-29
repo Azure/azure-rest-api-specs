@@ -1,0 +1,188 @@
+{
+  "operationId": "Recommendations_RecommendVmSku",
+  "title": "Recommend virtual machine sizes for an AI inference workload",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "eastus2",
+    "body": {
+      "model": {
+        "huggingFaceModelId": "meta-llama/Llama-3.1-70B-Instruct",
+        "parameterCount": 70000000000,
+        "weightPrecision": "FP16",
+        "numLayers": 80,
+        "numKeyValueHeads": 8,
+        "headDim": 128,
+        "maxContextLength": 131072
+      },
+      "workload": {
+        "maxConcurrentRequestsPerReplica": 1,
+        "tokenBudget": {
+          "promptTokens": 8000,
+          "maxOutputTokens": 1024
+        }
+      },
+      "deployment": {
+        "replicaCount": 1,
+        "procurementOption": "OnDemand"
+      },
+      "optimization": {
+        "rankingPreference": "Cost",
+        "maxDeploymentCostPerHour": {
+          "amount": 50,
+          "currencyCode": "USD"
+        }
+      },
+      "targetVmSizes": [
+        "Standard_NC48ads_A100_v4",
+        "Standard_ND96asr_v4"
+      ],
+      "subscriptionOptions": {
+        "includeQuota": true,
+        "includePlacement": true,
+        "includePricing": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "options": [
+          {
+            "vmSize": "Standard_NC48ads_A100_v4",
+            "recommendationRank": 1,
+            "readiness": {
+              "status": "ReadyToAttempt",
+              "reason": "Quota is available for the requested replica count in eastus2."
+            },
+            "topology": {
+              "estimatedNodeCountPerReplica": 1,
+              "estimatedTotalNodeCount": 1,
+              "accelerator": {
+                "model": "A100",
+                "countPerVm": 2,
+                "memoryGiBPerAccelerator": 80
+              }
+            },
+            "cost": {
+              "currencyCode": "USD",
+              "vmHourly": 7.35,
+              "deploymentHourly": 7.35,
+              "source": "AzureSubscription",
+              "priceAsOf": "2026-08-27T00:00:00Z"
+            },
+            "quota": {
+              "status": "Available",
+              "reason": "The subscription has sufficient quota for 1 replica.",
+              "maxAvailableReplicaCount": 4
+            },
+            "placement": {
+              "status": "Evaluated",
+              "recommendedAvailabilityZones": [
+                "1",
+                "3"
+              ]
+            },
+            "azureMlRecommended": true,
+            "benchmark": {
+              "level": "TopologyMatched",
+              "modelClass": "70b",
+              "scenario": "Server",
+              "submitterCount": 3,
+              "submissionId": "3.1-0093",
+              "benchmarkModel": "llama2-70b",
+              "submitter": "Contoso",
+              "system": "2xA100-SXM-80GB",
+              "throughput": 2140.5,
+              "throughputUnit": "Tokens/s",
+              "software": "vLLM 0.6.2",
+              "operatingSystem": "Ubuntu 22.04",
+              "weightDataTypes": "float16",
+              "p99TtftMs": 385.2,
+              "p99TpotMs": 42.7
+            },
+            "documentationUrl": "https://learn.microsoft.com/azure/virtual-machines/nc-a100-v4-series"
+          },
+          {
+            "vmSize": "Standard_ND96asr_v4",
+            "recommendationRank": 2,
+            "readiness": {
+              "status": "QuotaIncreaseRequired",
+              "reason": "The subscription must raise its quota before this size can be deployed."
+            },
+            "topology": {
+              "estimatedNodeCountPerReplica": 1,
+              "estimatedTotalNodeCount": 1,
+              "accelerator": {
+                "model": "A100",
+                "countPerVm": 8,
+                "memoryGiBPerAccelerator": 40
+              }
+            },
+            "cost": {
+              "currencyCode": "USD",
+              "vmHourly": 27.2,
+              "deploymentHourly": 27.2,
+              "source": "AzureRetail",
+              "priceAsOf": "2026-08-26T00:00:00Z",
+              "error": {
+                "code": "DataUnavailable",
+                "message": "Subscription-scoped pricing was unavailable, so retail pricing was used."
+              }
+            },
+            "quota": {
+              "status": "Unavailable",
+              "reason": "The subscription has 0 of the 96 cores required in eastus2.",
+              "maxAvailableReplicaCount": 0,
+              "increase": {
+                "limits": [
+                  {
+                    "name": "standardNDASv4_A100Family",
+                    "currentUsage": 0,
+                    "currentLimit": 0,
+                    "requiredLimit": 96
+                  }
+                ],
+                "portalUrl": "https://portal.azure.com/#view/Microsoft_Azure_Support/NewSupportRequestV3Blade"
+              }
+            },
+            "placement": {
+              "status": "NotEvaluated",
+              "reason": "Placement is queried only for sizes with available quota."
+            },
+            "azureMlRecommended": false,
+            "benchmark": {
+              "level": "Benchmarked",
+              "modelClass": "70b",
+              "scenario": "Server",
+              "submitterCount": 1
+            },
+            "documentationUrl": "https://learn.microsoft.com/azure/virtual-machines/nda100-v4-series"
+          }
+        ],
+        "sizing": {
+          "model": {
+            "parameterCount": 70000000000,
+            "weightPrecision": "FP16",
+            "huggingFaceModelId": "meta-llama/Llama-3.1-70B-Instruct"
+          },
+          "workload": {
+            "maxConcurrentRequestsPerReplica": 1,
+            "contextLength": 9024
+          },
+          "memory": {
+            "modelWeightsGiB": 130.39,
+            "kvCacheGiBPerRequest": 2.75,
+            "kvCacheGiBTotal": 2.75,
+            "modelAndKvCacheGiB": 133.14
+          },
+          "basis": {
+            "parameterCountSource": "Request",
+            "modelWeightsCalculation": "EstimatedFromParameterCount",
+            "contextLengthSource": "Request"
+          }
+        }
+      }
+    }
+  }
+}
