@@ -274,7 +274,7 @@ namespace Microsoft.AzureArcData {
 @@clientName(DataControllerResource, "DataController", "csharp");
 @@clientName(
   ActiveDirectoryConnectorResource,
-  "ActiveDirectoryConnector",
+  "ArcDataActiveDirectoryConnector",
   "csharp"
 );
 @@clientName(FailoverGroupResource, "FailoverGroup", "csharp");
@@ -347,5 +347,187 @@ namespace Microsoft.AzureArcData {
 @@clientName(
   SqlServerInstanceUpdateProperties.clientConnection,
   "IsClientConnection",
+  "csharp"
+);
+
+// Review feedback: make public API names contextual and preserve the wire names.
+@@clientName(AvailabilityGroupInfo.dtcSupport, "IsDtcSupportEnabled", "csharp");
+@@clientName(
+  AvailabilityGroupConfigure.sessionTimeout,
+  "SessionTimeoutInSeconds",
+  "csharp"
+);
+@@clientName(
+  AvailabilityGroupCreateUpdateReplicaConfiguration.sessionTimeout,
+  "SessionTimeoutInSeconds",
+  "csharp"
+);
+@@clientName(
+  AvailabilityGroupInfo.healthCheckTimeout,
+  "HealthCheckTimeoutInMilliseconds",
+  "csharp"
+);
+@@clientName(
+  AvailabilityGroupCreateUpdateConfiguration.healthCheckTimeout,
+  "HealthCheckTimeoutInMilliseconds",
+  "csharp"
+);
+@@clientName(K8sNetworkSettings.forceencryption, "ForceEncryption", "csharp");
+@@clientName(K8sNetworkSettings.tlsciphers, "TlsCiphers", "csharp");
+@@clientName(K8sNetworkSettings.tlsprotocols, "TlsProtocols", "csharp");
+
+@@clientName(HostType, "ArcSqlServerHostType", "csharp");
+@@clientName(
+  HostType.AzureVMWareVirtualMachine,
+  "AzureVmwareVirtualMachine",
+  "csharp"
+);
+@@clientName(
+  HostType.AWSVMWareVirtualMachine,
+  "AwsVmwareVirtualMachine",
+  "csharp"
+);
+@@clientName(HostType.AWSKubernetesService, "AwsKubernetesService", "csharp");
+@@clientName(
+  HostType.GCPVMWareVirtualMachine,
+  "GcpVmwareVirtualMachine",
+  "csharp"
+);
+@@clientName(HostType.GCPKubernetesService, "GcpKubernetesService", "csharp");
+@@clientName(HostType.AWSVirtualMachine, "AwsVirtualMachine", "csharp");
+@@clientName(HostType.GCPVirtualMachine, "GcpVirtualMachine", "csharp");
+@@clientName(DiscoverySource.ADS, "Ads", "csharp");
+@@clientName(DiscoverySource.DMSPortal, "DmsPortal", "csharp");
+@@clientName(DiscoverySource.DMSPS, "DmsPs", "csharp");
+@@clientName(DiscoverySource.DMSCLI, "DmsCli", "csharp");
+@@clientName(DiscoverySource.DMSSDK, "DmsSdk", "csharp");
+@@clientName(initiatedFrom.ADS, "Ads", "csharp");
+@@clientName(initiatedFrom.DMSPortal, "DmsPortal", "csharp");
+@@clientName(initiatedFrom.DMSPS, "DmsPs", "csharp");
+@@clientName(initiatedFrom.DMSCLI, "DmsCli", "csharp");
+@@clientName(initiatedFrom.DMSSDK, "DmsSdk", "csharp");
+@@clientName(ArcSqlServerLicenseType.ServerCAL, "ServerCal", "csharp");
+@@clientName(MigrationMode.MILink, "MiLink", "csharp");
+@@clientName(
+  SqlServerInstanceTargetRecommendationReportSectionType.SqlDbTargetRecommendationPerDatabase,
+  Azure.ClientGenerator.Core.exact("SqlDbTargetRecommendationPerDatabase"),
+  "csharp"
+);
+@@clientName(
+  SkuRecommendationResultsAzureSqlVirtualMachineTargetSku.tempDbDiskSizes,
+  Azure.ClientGenerator.Core.exact("TempDbDiskSizes"),
+  "csharp"
+);
+@@clientName(PrimaryAllowConnections.ALL, "All", "csharp");
+
+@@clientName(ScopeType, "SqlServerLicenseScopeType", "csharp");
+@@clientName(ActivationState, "SqlServerLicenseActivationState", "csharp");
+@@clientName(BillingPlan, "SqlServerLicenseBillingPlan", "csharp");
+@@clientName(LicenseCategory, "SqlServerLicenseCategory", "csharp");
+@@clientName(EditionType, "SqlServerEditionType", "csharp");
+@@clientName(ConnectionStatus, "SqlServerConnectionStatus", "csharp");
+@@clientName(ServiceType, "SqlServerServiceType", "csharp");
+@@clientName(IdentityType, "SqlServerEntraIdentityType", "csharp");
+@@clientName(ClusterType, "SqlAvailabilityGroupClusterType", "csharp");
+@@clientName(
+  ConnectionAuth,
+  "SqlMirroringEndpointAuthenticationType",
+  "csharp"
+);
+@@clientName(
+  EncryptionAlgorithm,
+  "SqlMirroringEndpointEncryptionAlgorithm",
+  "csharp"
+);
+@@clientName(ProvisioningState, "ArcDataProvisioningState", "csharp");
+
+@@clientName(BackgroundJob, "SqlServerBackgroundJob", "csharp");
+@@clientName(BackgroundJobState, "SqlServerBackgroundJobState", "csharp");
+@@clientName(ExecutionState, "SqlServerBackgroundJobExecutionState", "csharp");
+@@clientName(
+  LastExecutionStatus,
+  "SqlServerBackgroundJobLastExecutionStatus",
+  "csharp"
+);
+@@clientName(JobStatus, "SqlServerJobStatus", "csharp");
+@@clientName(
+  AssessmentStatus,
+  "SqlManagedInstanceLinkAssessmentStatus",
+  "csharp"
+);
+@@clientName(
+  CostOptionSelectedValues,
+  "SqlSkuRecommendationCostOptions",
+  "csharp"
+);
+@@clientName(CostTypeValues, "SqlSkuRecommendationCostBreakdown", "csharp");
+@@clientName(initiatedFrom, "SqlMigrationInitiationSource", "csharp");
+@@clientName(RecommendationStatus, "SqlSkuRecommendationStatus", "csharp");
+@@clientName(
+  ResourceUpdateMode,
+  "SqlServerRecommendationResourceUpdateMode",
+  "csharp"
+);
+@@clientName(TargetReadiness, "SqlMigrationTargetReadiness", "csharp");
+@@clientName(TargetType, "SqlMigrationTargetType", "csharp");
+@@clientName(ImpactedObjectsInfo, "SqlMigrationImpactedObjectInfo", "csharp");
+@@clientName(
+  ImpactedObjectsSuitabilitySummary,
+  "SqlMigrationImpactedObjectsSuitabilitySummary",
+  "csharp"
+);
+@@clientName(BackupPolicy, "SqlServerBackupPolicy", "csharp");
+@@clientName(CommonSku, "ArcDataSku", "csharp");
+@@clientName(BasicLoginInformation, "ArcDataBasicLoginInformation", "csharp");
+@@clientName(
+  AccountProvisioningMode,
+  "ActiveDirectoryServiceAccountProvisioningMode",
+  "csharp"
+);
+@@clientName(OnPremiseProperty, "DataControllerOnPremisesConfig", "csharp");
+@@clientName(UploadWatermark, "DataControllerUploadWatermark", "csharp");
+
+@@clientName(
+  FailoverMiLinkResourceId,
+  "SqlManagedInstanceLinkFailoverContent",
+  "csharp"
+);
+@@clientName(databases, "SqlAvailabilityGroupDatabasesContent", "csharp");
+@@clientName(
+  AvailabilityGroupCreateUpdateConfiguration,
+  "SqlAvailabilityGroupContent",
+  "csharp"
+);
+@@clientName(
+  DistributedAvailabilityGroupCreateUpdateConfiguration,
+  "SqlDistributedAvailabilityGroupContent",
+  "csharp"
+);
+@@clientName(
+  ManagedInstanceLinkCreateUpdateConfiguration,
+  "SqlManagedInstanceLinkContent",
+  "csharp"
+);
+
+@@alternateType(
+  FailoverGroupProperties.partnerManagedInstanceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Reuse the shared ARM C# model rather than emitting a duplicate local pair.
+@@alternateType(
+  DataControllerResource.extendedLocation,
+  Azure.ResourceManager.CommonTypes.ExtendedLocation,
+  "csharp"
+);
+@@alternateType(
+  PostgresInstance.extendedLocation,
+  Azure.ResourceManager.CommonTypes.ExtendedLocation,
+  "csharp"
+);
+@@alternateType(
+  SqlManagedInstance.extendedLocation,
+  Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
