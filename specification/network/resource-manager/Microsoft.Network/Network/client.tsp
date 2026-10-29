@@ -2298,9 +2298,9 @@ union ProvisioningStateUnion {
   "NetworkProxyResourceData",
   "csharp"
 );
-@@clientName(
+@@alternateType(
   Microsoft.Network.ProxyResourceWithReadOnlyID,
-  "NetworkReadOnlyResourceData",
+  Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
 );
 @@clientName(WritableResource, "NetworkWritableResourceData", "csharp");
