@@ -1,17 +1,17 @@
 import "../models/common.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The IP Extended Community resource definition.")
-model IpExtendedCommunity is Azure.ResourceManager.TrackedResource<
-  IpExtendedCommunityProperties,
-  false
-> {
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model IpExtendedCommunity
+  extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the IP Extended Community.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -19,9 +19,10 @@ model IpExtendedCommunity is Azure.ResourceManager.TrackedResource<
   @segment("ipExtendedCommunities")
   @visibility(Lifecycle.Read)
   name: string;
-}
 
-@@doc(IpExtendedCommunity.properties, "The IpExtendedCommunity properties");
+  @doc("The IpExtendedCommunity properties")
+  properties: IpExtendedCommunityProperties;
+}
 
 @armResourceOperations
 interface IpExtendedCommunities {

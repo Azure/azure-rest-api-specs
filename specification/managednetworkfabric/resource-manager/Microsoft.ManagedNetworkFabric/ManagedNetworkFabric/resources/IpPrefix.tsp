@@ -1,17 +1,16 @@
 import "../models/common.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The IP Prefix resource definition.")
-model IpPrefix is Azure.ResourceManager.TrackedResource<
-  IpPrefixProperties,
-  false
-> {
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model IpPrefix extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the IP Prefix.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -19,9 +18,10 @@ model IpPrefix is Azure.ResourceManager.TrackedResource<
   @segment("ipPrefixes")
   @visibility(Lifecycle.Read)
   name: string;
-}
 
-@@doc(IpPrefix.properties, "The IP Prefix properties");
+  @doc("The IP Prefix properties")
+  properties: IpPrefixProperties;
+}
 
 @armResourceOperations
 interface IpPrefixes {

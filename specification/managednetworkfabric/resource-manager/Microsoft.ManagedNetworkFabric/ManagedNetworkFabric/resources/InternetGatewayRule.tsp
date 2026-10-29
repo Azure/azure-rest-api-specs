@@ -2,16 +2,17 @@ import "../models/common.tsp";
 import "../models/InternetGatewayRule.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Internet Gateway Rule resource definition.")
-model InternetGatewayRule is Azure.ResourceManager.TrackedResource<
-  InternetGatewayRuleProperties,
-  false
-> {
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model InternetGatewayRule
+  extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Internet Gateway rule.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -19,9 +20,10 @@ model InternetGatewayRule is Azure.ResourceManager.TrackedResource<
   @segment("internetGatewayRules")
   @visibility(Lifecycle.Read)
   name: string;
-}
 
-@@doc(InternetGatewayRule.properties, "The Internet Gateway Rule properties");
+  @doc("The Internet Gateway Rule properties")
+  properties: InternetGatewayRuleProperties;
+}
 
 @armResourceOperations
 interface InternetGatewayRules {

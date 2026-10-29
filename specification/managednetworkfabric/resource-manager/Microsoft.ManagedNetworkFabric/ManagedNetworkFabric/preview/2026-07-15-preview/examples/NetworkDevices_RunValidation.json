@@ -1,0 +1,153 @@
+{
+  "title": "NetworkDevices_RunValidation_MaximumSet_Gen",
+  "operationId": "NetworkDevices_RunValidation",
+  "parameters": {
+    "api-version": "2026-07-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "networkDeviceName": "example-device",
+    "body": {
+      "validationType": "UpgradePrecheck",
+      "targetVersion": "8.0.0",
+      "deviceCommandConfiguration": {
+        "configurationType": "Inline",
+        "commands": [
+          {
+            "checkName": "custom-bgp-peer-check",
+            "description": "Verify all expected BGP peers are established with correct prefixes",
+            "command": "show ip bgp summary",
+            "validationRules": {
+              "rules": [
+                {
+                  "jsonPath": "$.bgpPeers[*].state",
+                  "expectedValue": "Established",
+                  "operator": "Equals"
+                }
+              ]
+            }
+          },
+          {
+            "checkName": "custom-ntp-check",
+            "description": "Verify NTP synchronization before upgrade. No validationRules provided, so the complete raw command output is returned.",
+            "command": "show ntp status"
+          }
+        ]
+      },
+      "metricsConfiguration": [
+        {
+          "checkName": "cpu-utilization-check",
+          "description": "Verify CPU utilization is reporting data and within acceptable range",
+          "metricName": "CpuUtilizationMax",
+          "namespace": "NfaDeviceMetrics",
+          "dimensionFilters": [
+            {
+              "dimensionName": "FabricId",
+              "value": "FabricId"
+            }
+          ],
+          "timeWindowMinutes": 15,
+          "samplingIntervalMinutes": 15,
+          "bucketAggregation": "Average",
+          "samplingType": "Max",
+          "perResultDimensionName": "DeviceId",
+          "operator": "GreaterThan",
+          "expectedValue": 0,
+          "maxAllowedFailures": 0
+        },
+        {
+          "checkName": "device-reachability-check",
+          "description": "Verify device connectivity is reporting data",
+          "metricName": "DeviceReachability",
+          "namespace": "NfaDeviceMetrics",
+          "dimensionFilters": [
+            {
+              "dimensionName": "FabricId",
+              "value": "FabricId"
+            }
+          ],
+          "timeWindowMinutes": 60,
+          "samplingIntervalMinutes": 15,
+          "bucketAggregation": "Average",
+          "samplingType": "Max",
+          "perResultDimensionName": "DeviceId",
+          "operator": "Equals",
+          "expectedValue": 1,
+          "maxAllowedFailures": 1
+        }
+      ],
+      "overrideChecks": [
+        {
+          "checkName": "custom-ntp-check",
+          "justification": "NTP drift on this device is known and being remediated separately; waived for this validation."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/0000ABCD-0A0B-0000-0000-000000ABCDEF/providers/Microsoft.ManagedNetworkFabric/locations/eastus/operationStatuses/op-20260417-170000-def456",
+        "name": "op-20260417-170000-def456",
+        "status": "Succeeded",
+        "startTime": "2026-04-17T17:00:00Z",
+        "endTime": "2026-04-17T17:03:00Z",
+        "properties": {
+          "validationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "validationTime": "2026-04-17T17:03:00Z",
+          "validationResult": "Passed",
+          "resultUrl": "https://customerstorageaccount.blob.core.windows.net/validation-reports/example-device-UpgradePrecheck-2026-04-17T17-00-00Z.json",
+          "currentVersion": "7.0.0",
+          "targetVersion": "8.0.0",
+          "checkResults": [
+            {
+              "checkName": "ResourceHealthCheck",
+              "category": "ImplicitBaseline",
+              "result": "Passed",
+              "message": "The device is in a healthy state.",
+              "impactedResources": []
+            },
+            {
+              "checkName": "BgpStateValidation",
+              "category": "ImplicitBaseline",
+              "result": "Passed",
+              "message": "All BGP sessions are established.",
+              "impactedResources": []
+            },
+            {
+              "checkName": "custom-bgp-peer-check",
+              "category": "CustomCommandSet",
+              "result": "Passed",
+              "message": "All BGP peers established with correct prefixes.",
+              "impactedResources": []
+            },
+            {
+              "checkName": "custom-ntp-check",
+              "category": "CustomCommandSet",
+              "commandOutput": "abc-leaf-1#show ntp status\nsynchronised to NTP server (10.0.0.1) at stratum 2\n   time correct to within 12 ms\n   polling server every 64 s\nabc-leaf-2#show ntp status\nsynchronised to NTP server (10.0.0.1) at stratum 2\n   time correct to within 9 ms\n   polling server every 64 s",
+              "impactedResources": []
+            },
+            {
+              "checkName": "cpu-utilization-check",
+              "category": "CustomMetric",
+              "result": "Passed",
+              "message": "CPU utilization data present and within thresholds.",
+              "impactedResources": []
+            },
+            {
+              "checkName": "device-reachability-check",
+              "category": "CustomMetric",
+              "result": "Passed",
+              "message": "All devices reachable within allowed failure tolerance.",
+              "impactedResources": []
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/0000ABCD-0A0B-0000-0000-000000ABCDEF/providers/Microsoft.ManagedNetworkFabric/locations/eastus/operationStatuses/op-20260417-170000-def456?api-version=2026-07-15-preview"
+      }
+    }
+  }
+}
