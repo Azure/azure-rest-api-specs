@@ -50387,12 +50387,14 @@ components:
           type: string
           enum:
             - teams_phone_extensibility
+          description: The Microsoft Teams Phone extensibility provider.
         phone_number:
           type: string
           maxLength: 64
-          description: Display number for the Teams resource account.
+          description: The optional display phone number for the Teams resource account.
         resource_account_object_id:
           $ref: '#/components/schemas/Azure.Core.uuid'
+          description: The Microsoft Teams resource-account object identifier as a GUID.
       allOf:
         - $ref: '#/components/schemas/CreateTelephonyBindingRequest'
       description: The request to create a Microsoft Teams Phone extensibility binding.
@@ -50550,10 +50552,11 @@ components:
           type: string
           enum:
             - twilio
+          description: The Twilio provider.
         phone_number:
           type: string
           pattern: ^\+[1-9]\d{6,14}$
-          description: The E.164 number configured in Twilio.
+          description: The Twilio E.164 phone number.
       allOf:
         - $ref: '#/components/schemas/CreateTelephonyBindingRequest'
       description: The request to create a Twilio binding.
@@ -90209,12 +90212,14 @@ components:
           type: string
           enum:
             - teams_phone_extensibility
+          description: The Microsoft Teams Phone extensibility provider.
         phone_number:
           type: string
           maxLength: 64
-          description: Display number for the Teams resource account.
+          description: The optional display phone number for the Teams resource account.
         resource_account_object_id:
           $ref: '#/components/schemas/Azure.Core.uuid'
+          description: The Microsoft Teams resource-account object identifier as a GUID.
       allOf:
         - $ref: '#/components/schemas/TelephonyBinding'
       description: A Microsoft Teams Phone extensibility binding owned by a voice agent.
@@ -90231,12 +90236,14 @@ components:
           type: string
           enum:
             - teams_phone_extensibility
+          description: The Microsoft Teams Phone extensibility provider.
         phone_number:
           type: string
           maxLength: 64
-          description: Display number for the Teams resource account.
+          description: The optional display phone number for the Teams resource account.
         resource_account_object_id:
           $ref: '#/components/schemas/Azure.Core.uuid'
+          description: The Microsoft Teams resource-account object identifier as a GUID.
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingListItem'
       description: A Microsoft Teams Phone extensibility binding returned in a list, including its entity tag.
@@ -92208,10 +92215,11 @@ components:
           type: string
           enum:
             - twilio
+          description: The Twilio provider.
         phone_number:
           type: string
           pattern: ^\+[1-9]\d{6,14}$
-          description: The E.164 number configured in Twilio.
+          description: The Twilio E.164 phone number.
       allOf:
         - $ref: '#/components/schemas/TelephonyBinding'
       description: A Twilio binding owned by a voice agent.
@@ -92228,10 +92236,11 @@ components:
           type: string
           enum:
             - twilio
+          description: The Twilio provider.
         phone_number:
           type: string
           pattern: ^\+[1-9]\d{6,14}$
-          description: The E.164 number configured in Twilio.
+          description: The Twilio E.164 phone number.
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingListItem'
       description: A Twilio binding returned in a list, including its entity tag.
@@ -92394,25 +92403,25 @@ components:
             - type: string
             - type: 'null'
           maxLength: 128
-          description: Omit to preserve; null or blank clears it. Values are trimmed before validation.
+          description: The replacement display label. Omit it to preserve the current value; use null to clear it.
         connection_name:
           type: string
           minLength: 1
           maxLength: 256
-          description: Omit to preserve; null or blank is invalid. SIP requires a same-project SipInbound connection. Twilio connections cannot be changed.
+          description: The replacement Foundry connection name. This property is valid for Teams Phone extensibility and SIP bindings; a Twilio binding's connection is immutable. SIP requires a same-project SipInbound connection.
         phone_number:
           anyOf:
             - type: string
             - type: 'null'
           maxLength: 64
-          description: Display only. Omit to preserve; null or blank clears it. Values are trimmed before validation. Not supported for Twilio.
+          description: The replacement Teams Phone extensibility or SIP display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for Teams Phone extensibility and SIP bindings.
         allowed_calling_numbers:
           type: array
           items:
             $ref: '#/components/schemas/SipAllowedCallingNumber'
           maxItems: 64
           description: SIP only. Omit to preserve the restriction; send [] to allow any caller.
-      description: The provider cannot be changed.
+      description: The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

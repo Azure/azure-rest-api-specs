@@ -564,19 +564,22 @@ model CreateTelephonyBindingRequest {
 }
 
 alias TeamsPhoneExtensibilityTelephonyBindingProperties = {
+  @doc("The Microsoft Teams Phone extensibility provider.")
   provider: TelephonyProvider.teams_phone_extensibility;
 
-  @doc("Display number for the Teams resource account.")
+  @doc("The optional display phone number for the Teams resource account.")
   @maxLength(64)
   phone_number?: string;
 
+  @doc("The Microsoft Teams resource-account object identifier as a GUID.")
   resource_account_object_id: Azure.Core.uuid;
 };
 
 alias TwilioTelephonyBindingProperties = {
+  @doc("The Twilio provider.")
   provider: TelephonyProvider.twilio;
 
-  @doc("The E.164 number configured in Twilio.")
+  @doc("The Twilio E.164 phone number.")
   @pattern("^\\+[1-9]\\d{6,14}$")
   phone_number: string;
 };
@@ -624,23 +627,23 @@ model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
   ...SipTelephonyBindingProperties;
 }
 
-@doc("The provider cannot be changed.")
+@doc("The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("UpdateTelephonyBindingContent", "csharp")
 model UpdateTelephonyBindingRequest {
   @doc("The new lifecycle status.")
   status?: TelephonyBindingStatus;
 
-  @doc("Omit to preserve; null or blank clears it. Values are trimmed before validation.")
+  @doc("The replacement display label. Omit it to preserve the current value; use null to clear it.")
   @maxLength(128)
   label?: string | null;
 
-  @doc("Omit to preserve; null or blank is invalid. SIP requires a same-project SipInbound connection. Twilio connections cannot be changed.")
+  @doc("The replacement Foundry connection name. This property is valid for Teams Phone extensibility and SIP bindings; a Twilio binding's connection is immutable. SIP requires a same-project SipInbound connection.")
   @minLength(1)
   @maxLength(256)
   connection_name?: string;
 
-  @doc("Display only. Omit to preserve; null or blank clears it. Values are trimmed before validation. Not supported for Twilio.")
+  @doc("The replacement Teams Phone extensibility or SIP display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for Teams Phone extensibility and SIP bindings.")
   @maxLength(64)
   phone_number?: string | null;
 
