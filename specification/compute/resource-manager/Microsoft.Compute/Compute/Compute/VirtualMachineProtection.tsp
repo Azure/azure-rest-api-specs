@@ -55,8 +55,7 @@ interface VirtualMachineProtections {
     VirtualMachineProtection,
     Response =
       | ArmResourceUpdatedResponse<VirtualMachineProtection>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = VirtualMachineProtection> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = VirtualMachineProtection>> & {
           @bodyRoot _: VirtualMachineProtection;
         })
   >;

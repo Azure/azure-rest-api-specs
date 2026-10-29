@@ -5704,10 +5704,16 @@ union VirtualMachineProtectionType {
  * The provisioning state of a virtual machine protection resource.
  */
 // Instantiate the union to inline its schema so readOnly is not ignored beside a $ref.
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "CRP never returns Canceled for the VirtualMachineProtection singleton, so only the states the service returns are listed."
 @added(Versions.v2026_09_01)
-union VirtualMachineProtectionProvisioningState<TerminalStates = ResourceProvisioningState> {
-  string,
-  TerminalStates,
+union VirtualMachineProtectionProvisioningState<Extensible = string> {
+  Extensible,
+
+  /** Resource has been created. */
+  Succeeded: "Succeeded",
+
+  /** Resource creation failed. */
+  Failed: "Failed",
 
   /** The protection configuration is being created. */
   Creating: "Creating",
@@ -5733,7 +5739,7 @@ model VirtualMachineProtectionProperties {
    * The provisioning state, which only appears in the response.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: VirtualMachineProtectionProvisioningState<ResourceProvisioningState>;
+  provisioningState?: VirtualMachineProtectionProvisioningState<string>;
 
   /**
    * The resource ID of the restore point collection associated with the virtual machine. This collection holds the periodic restore points created by the platform. Please refer to https://aka.ms/BasicVMProtection/PeriodicRestorePoints for more details.
