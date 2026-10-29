@@ -3,13 +3,12 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest"; //vi
 import { execFileSync } from "node:child_process";
 import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import path from "path";
+import path from "node:path";
 
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import type { ImpactAssessment } from "../src/ImpactAssessment.ts";
 import { PRContext } from "../src/PRContext.ts";
 import { evaluateImpact, getRPaaSFolderList } from "../src/impact.ts";
-import { type LabelContext } from "../src/labelling-types.ts";
 
 describe("CLI PR comparison", () => {
   let directory: string;
@@ -63,7 +62,8 @@ describe("CLI PR comparison", () => {
   ])("assesses only PR changes: %o", ({ mergeMain, plane }) => {
     addSwagger(plane, "2026-01-01");
     git("checkout", "main");
-    addSwagger("data-plane", "2026-02-01");
+    // Including main's unrelated change must alter the machine-readable plane assessment.
+    addSwagger(plane === "data-plane" ? "resource-manager" : "data-plane", "2026-02-01");
     const baseSha = git("rev-parse", "HEAD");
     git("checkout", "pr");
     if (mergeMain) {
@@ -79,7 +79,7 @@ describe("CLI PR comparison", () => {
     const mergeBase = git("merge-base", baseSha, headSha);
     git("worktree", "add", "--detach", targetDirectory, mergeBase);
 
-    const output = execFileSync(
+    execFileSync(
       process.execPath,
       [
         path.resolve(__dirname, "../cmd/summarize-impact.js"),
@@ -103,9 +103,6 @@ describe("CLI PR comparison", () => {
       { cwd: sourceDirectory, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },
     );
 
-    const changedFilesOutput = output.split("Total:")[0];
-    expect(changedFilesOutput).toContain("2026-01-01");
-    expect(changedFilesOutput).not.toContain("2026-02-01");
     const impact = JSON.parse(
       readFileSync(path.join(sourceDirectory, "summary.json"), "utf8"),
     ) as ImpactAssessment;
@@ -131,15 +128,10 @@ describe("Check Changes", () => {
           cwd: sourceDirectory,
           baseCommitish: "origin/main",
         });
-        const labelContext: LabelContext = {
-          present: new Set(),
-          toAdd: new Set(),
-          toRemove: new Set(),
-        };
 
         const rpaaSFolderList = getRPaaSFolderList(targetDirectory);
 
-        const prContext = new PRContext(sourceDirectory, targetDirectory, labelContext, {
+        const prContext = new PRContext(sourceDirectory, targetDirectory, {
           sha: "ad7c74cb27d2cf3ba83996aaea36b07caa4d16c8",
           sourceBranch: "dev/nandiniy/DTLTypeSpec",
           targetBranch: "main",
@@ -150,7 +142,7 @@ describe("Check Changes", () => {
           isDraft: false,
         });
 
-        const result = await evaluateImpact(prContext, labelContext, rpaaSFolderList);
+        const result = await evaluateImpact(prContext, rpaaSFolderList);
 
         expect(result).toBeDefined();
         expect(result.typeSpecChanged).toBeTruthy();
@@ -182,13 +174,8 @@ describe("Check Changes", () => {
           cwd: sourceDirectory,
           baseCommitish: "origin/main",
         });
-        const labelContext: LabelContext = {
-          present: new Set(),
-          toAdd: new Set(),
-          toRemove: new Set(),
-        };
 
-        const prContext = new PRContext(sourceDirectory, targetDirectory, labelContext, {
+        const prContext = new PRContext(sourceDirectory, targetDirectory, {
           sha: "2bd8350d465081401a0f4f03e633eca41f0991de",
           sourceBranch: "features/users/deepika/cosmos-connectors-confluent",
           targetBranch: "main",
@@ -199,7 +186,7 @@ describe("Check Changes", () => {
           isDraft: false,
         });
 
-        const result = await evaluateImpact(prContext, labelContext, []);
+        const result = await evaluateImpact(prContext, []);
         expect(result.isNewApiVersion).toBeTruthy();
         expect(result.typeSpecChanged).toBeTruthy();
         expect(result.resourceManagerRequired).toBeTruthy();

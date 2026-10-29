@@ -41,20 +41,10 @@ model ConnectionMetadata {
    * SIP custom headers as an object of string values. Null, a blank string, or an empty object means no headers.
    * A nonblank string, including a JSON-encoded object, is not a valid SIP custom_headers value.
    */
-  custom_headers?: SipConnectionCustomHeaders;
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Metadata combines a header map, a blank string and null, not a nominal model hierarchy."
+  custom_headers?: Record<string> | SipConnectionEmptyCustomHeaders | null;
 
   ...Record<string>;
-}
-
-/** Structured SIP headers, or an unset value indicating no headers. */
-union SipConnectionCustomHeaders {
-  /** Header names mapped to their string values. */
-  headers: Record<string>,
-
-  /** Only a blank string is valid; JSON-encoded header objects are not supported. */
-  unset: SipConnectionEmptyCustomHeaders,
-
-  null,
 }
 
 /** An empty or whitespace-only SIP custom_headers value indicating no headers. */

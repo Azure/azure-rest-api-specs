@@ -1,6 +1,7 @@
-import { existsSync } from "fs";
-import { writeFile } from "fs/promises";
-import { dirname, join, resolve } from "path";
+import type { GitHubScriptArgs } from "../../src/github.ts";
+import { existsSync } from "node:fs";
+import { writeFile } from "node:fs/promises";
+import { dirname, join, resolve } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { getChangedFilesStatuses } from "../../../shared/src/changed-files.ts";
 import {
@@ -14,12 +15,12 @@ import {
 } from "../../src/package-name-approval/validate-format.ts";
 import { createMockContext, createMockCore } from "../mocks.ts";
 
-vi.mock("fs/promises", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("fs/promises")>()),
+vi.mock("node:fs/promises", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("node:fs/promises")>()),
   writeFile: vi.fn(),
 }));
-vi.mock("fs", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("fs")>()),
+vi.mock("node:fs", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("node:fs")>()),
   existsSync: vi.fn(),
 }));
 vi.mock("../../../shared/src/typespec-metadata.ts", () => ({
@@ -41,9 +42,9 @@ const runnerTemp = resolve("runner-temp");
 let core: ReturnType<typeof createMockCore>;
 let context: ReturnType<typeof createMockContext>;
 
-function args(): import("@actions/github-script").AsyncFunctionArguments {
-  const input: Partial<import("@actions/github-script").AsyncFunctionArguments> = { context, core };
-  return input as import("@actions/github-script").AsyncFunctionArguments;
+function args(): GitHubScriptArgs {
+  const input: Partial<GitHubScriptArgs> = { context, core };
+  return input as GitHubScriptArgs;
 }
 
 function mockFileStatuses(
@@ -135,6 +136,8 @@ describe("detect-namespaces", () => {
       java: "com.azure.resourcemanager.compute",
     };
     expect(writtenResults()).toEqual({
+      typespecPath: "specification/compute/Compute.Management",
+      typespecPaths: ["specification/compute/Compute.Management"],
       namespacesFound: packageNames,
       namespaces,
       allConfiguredPackageNames: packageNames,
@@ -234,6 +237,61 @@ describe("detect-namespaces", () => {
     expect(core.setOutput).toHaveBeenCalledWith("results", "true");
   });
 
+  it("does not associate aggregated results with a single project", async () => {
+    const otherFile = "specification/storage/Storage.Management/tspconfig.yaml";
+    mockFileStatuses([], { additions: [file, otherFile] });
+    vi.mocked(generateTypeSpecMetadata)
+      .mockResolvedValueOnce(metadata())
+      .mockResolvedValueOnce(metadata({ python: [{ packageName: "azure-mgmt-storage" }] }));
+    await detectNamespaces(args());
+    expect(writtenResults()).toMatchObject({
+      typespecPath: null,
+      typespecPaths: [
+        "specification/compute/Compute.Management",
+        "specification/storage/Storage.Management",
+      ],
+      namespacesFound: {
+        dotnet: "Azure.ResourceManager.Compute",
+        python: "azure-mgmt-storage",
+      },
+    });
+    expect(core.setOutput).toHaveBeenCalledWith("results", "true");
+  });
+
+  it("excludes unchanged projects from paths while retaining all configured names", async () => {
+    const otherFile = "specification/storage/Storage.Management/tspconfig.yaml";
+    mockFileStatuses([otherFile], { additions: [file] });
+    const unchanged = metadata({ python: [{ packageName: "azure-mgmt-storage" }] });
+    vi.mocked(generateTypeSpecMetadata)
+      .mockResolvedValueOnce(metadata())
+      .mockResolvedValueOnce(unchanged)
+      .mockResolvedValueOnce(unchanged);
+    await detectNamespaces(args());
+    expect(writtenResults()).toMatchObject({
+      typespecPath: "specification/compute/Compute.Management",
+      typespecPaths: ["specification/compute/Compute.Management"],
+      namespacesFound: { dotnet: "Azure.ResourceManager.Compute" },
+      allConfiguredPackageNames: {
+        dotnet: "Azure.ResourceManager.Compute",
+        python: "azure-mgmt-storage",
+      },
+    });
+  });
+
+  it("excludes skipped projects from the artifact paths", async () => {
+    const skippedFile = "specification/storage/Storage.Management/tspconfig.yaml";
+    mockFileStatuses([], { additions: [file, skippedFile] });
+    vi.mocked(existsSync).mockImplementation(
+      (path) => !String(path).includes("Storage.Management"),
+    );
+    await detectNamespaces(args());
+    expect(writtenResults()).toMatchObject({
+      typespecPath: "specification/compute/Compute.Management",
+      typespecPaths: ["specification/compute/Compute.Management"],
+    });
+    expect(generateTypeSpecMetadata).toHaveBeenCalledTimes(1);
+  });
+
   it.each(["missing config", "compile failure"])("treats base %s as new", async (reason) => {
     mockFileStatuses([file]);
     vi.mocked(existsSync).mockImplementation((path) => {
@@ -283,5 +341,18 @@ describe("detect-namespaces", () => {
       logger: core,
     });
     expect(core.setOutput).not.toHaveBeenCalled();
+  });
+
+  it("records the current project path for renamed configurations", async () => {
+    const oldPath = "specification/compute/old/tspconfig.yaml";
+    mockFileStatuses([], { renames: [{ from: oldPath, to: file }] });
+    vi.mocked(generateTypeSpecMetadata)
+      .mockResolvedValueOnce(metadata())
+      .mockResolvedValueOnce(metadata({ csharp: [{ packageName: "Azure.Compute" }] }));
+    await detectNamespaces(args());
+    expect(writtenResults()).toMatchObject({
+      typespecPath: "specification/compute/Compute.Management",
+      typespecPaths: ["specification/compute/Compute.Management"],
+    });
   });
 });
