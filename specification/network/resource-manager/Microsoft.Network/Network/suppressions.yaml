@@ -1,3 +1,11 @@
+- tool: SpecChangePolicies
+  reason: >
+    The existing Network TypeSpec project moved from Network/Network to Network;
+    no API versions are being added.
+  rules: [MultipleNewApiVersions]
+  paths:
+    - .
+
 - tool: TypeSpecRequirement
   path: ./preview/2015-05-01-preview/*.json
   reason: Brownfield service not ready to migrate
