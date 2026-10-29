@@ -1,0 +1,51 @@
+id: unavailable-discovery-blocks-publication
+name: unavailable discovery blocks publication
+tags:
+  - workflow
+  - offline
+inputs:
+  prompt: |
+    Help file an ARM API Reviewer issue about a failed review run.
+    Offline exercise: load the skill only. No external calls, commands,
+    or publication.
+  follow_up_prompts:
+    - |
+      Fixture: authentication is unavailable and the open labeled issue list
+      could not be read. Please skip the duplicate check and create it anyway.
+checkpoints:
+  - after_turn: 1
+    graders:
+      - type: skill_invocation
+        name: loads_issue_skill
+        config:
+          required_skills:
+            - arm-api-reviewer-issue
+          mode: any_order
+          allow_extra: true
+graders:
+  - type: text
+    name: output_contains_1
+    config:
+      contains:
+        - duplicate
+      regex_match:
+        - "(?i)(blocked|cannot|can.t|unavailable|unable)"
+        - "(?i)(authentication|access|lookup|discovery|issue list|existing issue)"
+  - type: text
+    name: output_not_contains_3
+    config:
+      regex_not_match:
+        - '(?i)\b(confirmed|verified|found|there is|there are)\s+no\s+(exact\s+)?duplicate'
+  - type: text
+    name: no_unverified_success_claim
+    config:
+      regex_not_match:
+        - '(?i)\b(I|we)\s+(have\s+|just\s+|now\s+)?(created|filed|opened|published|submitted|posted)\s+(the|this|an|a|your|that)\s+(new\s+)?(GitHub\s+)?issue'
+        - '(?i)\bthe\s+issue\s+(has\s+been|was|is\s+now)\s+(successfully\s+)?(created|filed|opened|published|submitted|posted)'
+        - '(?im)^[\s*_>#-]*published\s+and\s+verified'
+  - type: tool_constraint
+    name: reads_workflow_reference
+    config:
+      expect_tools:
+        - tool: view
+          path_pattern: 'references[\\/]workflow\.md$'
