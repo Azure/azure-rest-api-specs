@@ -751,7 +751,6 @@ const VoiceAgentBindingV2RequiredPreview = #{
   required_previews: #[AgentDefinitionOptInKeys.voice_agents_v2_preview],
 };
 
-/** The provider-specific input to create a status-less V2 preview telephony binding. */
 @discriminator("provider")
 @extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
 @clientName("CreateTelephonyBindingV2Content", "csharp")
@@ -759,7 +758,6 @@ model CreateTelephonyBindingV2Request {
   ...CreateTelephonyBindingProperties;
 }
 
-/** The input to create a V2 preview Microsoft Teams Phone extensibility binding. */
 @extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
 @clientName("CreateTeamsPhoneExtensibilityTelephonyBindingV2Content", "csharp")
 model CreateTeamsPhoneExtensibilityTelephonyBindingV2Request
@@ -767,7 +765,6 @@ model CreateTeamsPhoneExtensibilityTelephonyBindingV2Request
   ...TeamsPhoneExtensibilityTelephonyBindingProperties;
 }
 
-/** The input to create a V2 preview Twilio binding. */
 @extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
 @clientName("CreateTwilioTelephonyBindingV2Content", "csharp")
 model CreateTwilioTelephonyBindingV2Request
@@ -776,8 +773,7 @@ model CreateTwilioTelephonyBindingV2Request
 }
 
 /**
- * The input to create a V2 preview inbound SIP binding. Connection authentication and validation follow
- * CreateSipTelephonyBindingRequest, but V2 does not expose an active/suspended binding lifecycle.
+ * Uses the same connection authentication as CreateSipTelephonyBindingRequest, without lifecycle status.
  */
 @extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
 @clientName("CreateSipTelephonyBindingV2Content", "csharp")
@@ -786,59 +782,51 @@ model CreateSipTelephonyBindingV2Request
   ...SipTelephonyBindingProperties;
 }
 
-/** Optional updates to a V2 preview binding. The provider is immutable and status is not a supported input. */
+/** The provider cannot be changed. */
 @extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
 @clientName("UpdateTelephonyBindingV2Content", "csharp")
 model UpdateTelephonyBindingV2Request {
   ...OmitProperties<UpdateTelephonyBindingRequest, "status">;
 }
 
-/** A status-less telephony binding selected with VoiceAgents=V2Preview. */
 @discriminator("provider")
 @extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
 model TelephonyBindingV2 {
   ...OmitProperties<TelephonyBindingProperties, "status">;
 }
 
-/** A status-less V2 preview Microsoft Teams Phone extensibility binding. */
 @extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
 model TeamsPhoneExtensibilityTelephonyBindingV2 extends TelephonyBindingV2 {
   ...TeamsPhoneExtensibilityTelephonyBindingProperties;
 }
 
-/** A status-less V2 preview Twilio binding. */
 @extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
 model TwilioTelephonyBindingV2 extends TelephonyBindingV2 {
   ...TwilioTelephonyBindingProperties;
 }
 
-/** A status-less V2 preview SIP binding. */
 @extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
 model SipTelephonyBindingV2 extends TelephonyBindingV2 {
   ...SipTelephonyBindingProperties;
 }
 
-/** A status-less V2 preview binding returned in a list, including its body-level entity tag. */
 @discriminator("provider")
 @extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
 model TelephonyBindingV2ListItem {
   ...OmitProperties<TelephonyBindingListItem, "status">;
 }
 
-/** A V2 preview Microsoft Teams Phone extensibility list item. */
 @extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
 model TeamsPhoneExtensibilityTelephonyBindingV2ListItem
   extends TelephonyBindingV2ListItem {
   ...TeamsPhoneExtensibilityTelephonyBindingProperties;
 }
 
-/** A V2 preview Twilio list item. */
 @extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
 model TwilioTelephonyBindingV2ListItem extends TelephonyBindingV2ListItem {
   ...TwilioTelephonyBindingProperties;
 }
 
-/** A V2 preview SIP list item. */
 @extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
 model SipTelephonyBindingV2ListItem extends TelephonyBindingV2ListItem {
   ...SipTelephonyBindingProperties;

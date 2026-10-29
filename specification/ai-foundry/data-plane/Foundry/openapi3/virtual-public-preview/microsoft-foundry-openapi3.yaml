@@ -4570,7 +4570,6 @@ paths:
         - name: agent_name
           in: path
           required: true
-          description: The name of the voice agent that owns the binding.
           schema:
             type: string
         - $ref: '#/components/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId'
@@ -4582,9 +4581,7 @@ paths:
           schema:
             type: string
           explode: false
-      description: |-
-        Creates a binding using VoiceAgents=V2Preview and returns a status-less binding.
-        VoiceAgents=V1Preview retains the original response with required status. Creates a telephony binding for the voice agent named in the path.
+      description: Requires VoiceAgents=V2Preview; responses omit lifecycle status. Creates a telephony binding for the voice agent named in the path.
       summary: Create an agent telephony binding Create an agent telephony binding
       responses:
         '201':
@@ -4627,7 +4624,7 @@ paths:
               anyOf:
                 - $ref: '#/components/schemas/CreateTelephonyBindingV2Request'
                 - $ref: '#/components/schemas/CreateTelephonyBindingRequest'
-        description: The provider-specific binding to create. The provider-specific binding to create.
+        description: The provider-specific binding to create.
     get:
       operationId: AgentTelephony_listTelephonyBindings
       parameters:
@@ -4643,13 +4640,11 @@ paths:
         - name: agent_name
           in: path
           required: true
-          description: The name of the voice agent whose bindings are listed.
           schema:
             type: string
         - name: provider
           in: query
           required: false
-          description: Filters bindings by provider.
           schema:
             $ref: '#/components/schemas/TelephonyProvider'
           explode: false
@@ -4703,7 +4698,7 @@ paths:
         - name: status
           in: query
           required: false
-          description: Filters bindings by lifecycle status. Supported only with VoiceAgents=V1Preview, not VoiceAgents=V2Preview.
+          description: Only supported with VoiceAgents=V1Preview.
           schema:
             $ref: '#/components/schemas/TelephonyBindingStatus'
             x-ms-foundry-meta:
@@ -4713,9 +4708,7 @@ paths:
             required_previews:
               - VoiceAgents=V1Preview
           explode: false
-      description: |-
-        Lists status-less bindings using VoiceAgents=V2Preview. The status query filter is not supported in V2.
-        VoiceAgents=V1Preview retains required item status and the optional status query filter. Returns the telephony bindings owned by the voice agent named in the path.
+      description: Requires VoiceAgents=V2Preview. The status filter is only supported in V1Preview. Returns the telephony bindings owned by the voice agent named in the path.
       summary: List agent telephony bindings List agent telephony bindings
       responses:
         '200':
@@ -4798,13 +4791,11 @@ paths:
         - name: agent_name
           in: path
           required: true
-          description: The name of the voice agent that owns the binding.
           schema:
             type: string
         - name: binding_id
           in: path
           required: true
-          description: The service-generated binding identifier.
           schema:
             $ref: '#/components/schemas/TelephonyBindingId'
         - name: api-version
@@ -4814,9 +4805,7 @@ paths:
           schema:
             type: string
           explode: false
-      description: |-
-        Retrieves a status-less binding using VoiceAgents=V2Preview.
-        VoiceAgents=V1Preview retains the original response with required status. Retrieves a telephony binding owned by the voice agent named in the path.
+      description: Requires VoiceAgents=V2Preview; responses omit lifecycle status. Retrieves a telephony binding owned by the voice agent named in the path.
       summary: Get an agent telephony binding Get an agent telephony binding
       responses:
         '200':
@@ -4866,13 +4855,11 @@ paths:
         - name: agent_name
           in: path
           required: true
-          description: The name of the voice agent that owns the binding.
           schema:
             type: string
         - name: binding_id
           in: path
           required: true
-          description: The service-generated binding identifier.
           schema:
             $ref: '#/components/schemas/TelephonyBindingId'
         - name: If-Match
@@ -4888,9 +4875,7 @@ paths:
           schema:
             type: string
           explode: false
-      description: |-
-        Updates a binding using VoiceAgents=V2Preview. Status is not a supported PATCH input or response property.
-        VoiceAgents=V1Preview retains its optional PATCH status and required response status. Updates a telephony binding owned by the voice agent named in the path.
+      description: Requires VoiceAgents=V2Preview. Status updates are only supported in V1Preview. Updates a telephony binding owned by the voice agent named in the path.
       summary: Update an agent telephony binding Update an agent telephony binding
       responses:
         '200':
@@ -4933,7 +4918,7 @@ paths:
               anyOf:
                 - $ref: '#/components/schemas/UpdateTelephonyBindingV2Request'
                 - $ref: '#/components/schemas/UpdateTelephonyBindingRequest'
-        description: The binding properties to update, excluding lifecycle status. The binding properties to update.
+        description: The binding properties to update.
     delete:
       operationId: AgentTelephony_deleteTelephonyBinding
       parameters:
@@ -4949,13 +4934,11 @@ paths:
         - name: agent_name
           in: path
           required: true
-          description: The name of the voice agent that owns the binding.
           schema:
             type: string
         - name: binding_id
           in: path
           required: true
-          description: The service-generated binding identifier.
           schema:
             $ref: '#/components/schemas/TelephonyBindingId'
         - name: If-Match
@@ -4971,7 +4954,7 @@ paths:
           schema:
             type: string
           explode: false
-      description: Deletes a binding using VoiceAgents=V2Preview with the same entity-tag precondition as V1. Deletes a telephony binding owned by the voice agent named in the path.
+      description: Requires VoiceAgents=V2Preview. Deletes a telephony binding owned by the voice agent named in the path.
       summary: Delete an agent telephony binding Delete an agent telephony binding
       responses:
         '204':
@@ -50376,22 +50359,19 @@ components:
           type: string
           enum:
             - sip
-          description: The SIP provider.
         phone_number:
           type: string
           maxLength: 64
-          description: An optional display phone number, up to 64 characters. It is not the binding identifier.
+          description: Display only; not used for routing or identifying the binding.
         allowed_calling_numbers:
           type: array
           items:
             $ref: '#/components/schemas/SipAllowedCallingNumber'
           maxItems: 64
-          description: Up to 64 exact canonical E.164 numbers or restricted, fully anchored E.164 patterns, each up to 256 characters. Patterns are matched against the entire normalized E.164 caller number; see SipAllowedCallingNumber for the supported syntax. Omission or an empty array indicates no caller-number restriction.
+          description: Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number.
       allOf:
         - $ref: '#/components/schemas/CreateTelephonyBindingV2Request'
-      description: |-
-        The input to create a V2 preview inbound SIP binding. Connection authentication and validation follow
-        CreateSipTelephonyBindingRequest, but V2 does not expose an active/suspended binding lifecycle.
+      description: Uses the same connection authentication as CreateSipTelephonyBindingRequest, without lifecycle status.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V2Preview
@@ -50439,17 +50419,14 @@ components:
           type: string
           enum:
             - teams_phone_extensibility
-          description: The Microsoft Teams Phone extensibility provider.
         phone_number:
           type: string
           maxLength: 64
-          description: The optional display phone number for the Teams resource account.
+          description: Display number for the Teams resource account.
         resource_account_object_id:
           $ref: '#/components/schemas/Azure.Core.uuid'
-          description: The Microsoft Teams resource-account object identifier as a GUID.
       allOf:
         - $ref: '#/components/schemas/CreateTelephonyBindingV2Request'
-      description: The input to create a V2 preview Microsoft Teams Phone extensibility binding.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V2Preview
@@ -50505,7 +50482,6 @@ components:
           teams_phone_extensibility: '#/components/schemas/CreateTeamsPhoneExtensibilityTelephonyBindingV2Request'
           twilio: '#/components/schemas/CreateTwilioTelephonyBindingV2Request'
           sip: '#/components/schemas/CreateSipTelephonyBindingV2Request'
-      description: The provider-specific input to create a status-less V2 preview telephony binding.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V2Preview
@@ -50603,14 +50579,12 @@ components:
           type: string
           enum:
             - twilio
-          description: The Twilio provider.
         phone_number:
           type: string
           pattern: ^\+[1-9]\d{6,14}$
-          description: The Twilio E.164 phone number.
+          description: The E.164 number configured in Twilio.
       allOf:
         - $ref: '#/components/schemas/CreateTelephonyBindingV2Request'
-      description: The input to create a V2 preview Twilio binding.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V2Preview
@@ -89639,20 +89613,18 @@ components:
           type: string
           enum:
             - sip
-          description: The SIP provider.
         phone_number:
           type: string
           maxLength: 64
-          description: An optional display phone number, up to 64 characters. It is not the binding identifier.
+          description: Display only; not used for routing or identifying the binding.
         allowed_calling_numbers:
           type: array
           items:
             $ref: '#/components/schemas/SipAllowedCallingNumber'
           maxItems: 64
-          description: Up to 64 exact canonical E.164 numbers or restricted, fully anchored E.164 patterns, each up to 256 characters. Patterns are matched against the entire normalized E.164 caller number; see SipAllowedCallingNumber for the supported syntax. Omission or an empty array indicates no caller-number restriction.
+          description: Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number.
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingV2'
-      description: A status-less V2 preview SIP binding.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V2Preview
@@ -89665,20 +89637,18 @@ components:
           type: string
           enum:
             - sip
-          description: The SIP provider.
         phone_number:
           type: string
           maxLength: 64
-          description: An optional display phone number, up to 64 characters. It is not the binding identifier.
+          description: Display only; not used for routing or identifying the binding.
         allowed_calling_numbers:
           type: array
           items:
             $ref: '#/components/schemas/SipAllowedCallingNumber'
           maxItems: 64
-          description: Up to 64 exact canonical E.164 numbers or restricted, fully anchored E.164 patterns, each up to 256 characters. Patterns are matched against the entire normalized E.164 caller number; see SipAllowedCallingNumber for the supported syntax. Omission or an empty array indicates no caller-number restriction.
+          description: Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number.
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingV2ListItem'
-      description: A V2 preview SIP list item.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V2Preview
@@ -90296,17 +90266,14 @@ components:
           type: string
           enum:
             - teams_phone_extensibility
-          description: The Microsoft Teams Phone extensibility provider.
         phone_number:
           type: string
           maxLength: 64
-          description: The optional display phone number for the Teams resource account.
+          description: Display number for the Teams resource account.
         resource_account_object_id:
           $ref: '#/components/schemas/Azure.Core.uuid'
-          description: The Microsoft Teams resource-account object identifier as a GUID.
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingV2'
-      description: A status-less V2 preview Microsoft Teams Phone extensibility binding.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V2Preview
@@ -90320,17 +90287,14 @@ components:
           type: string
           enum:
             - teams_phone_extensibility
-          description: The Microsoft Teams Phone extensibility provider.
         phone_number:
           type: string
           maxLength: 64
-          description: The optional display phone number for the Teams resource account.
+          description: Display number for the Teams resource account.
         resource_account_object_id:
           $ref: '#/components/schemas/Azure.Core.uuid'
-          description: The Microsoft Teams resource-account object identifier as a GUID.
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingV2ListItem'
-      description: A V2 preview Microsoft Teams Phone extensibility list item.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V2Preview
@@ -90571,14 +90535,13 @@ components:
         incoming_call_url:
           type: string
           format: uri
-          description: The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP.
+          description: SIP URI for SIP bindings; HTTPS webhook URL for other providers.
       discriminator:
         propertyName: provider
         mapping:
           teams_phone_extensibility: '#/components/schemas/TeamsPhoneExtensibilityTelephonyBindingV2'
           twilio: '#/components/schemas/TwilioTelephonyBindingV2'
           sip: '#/components/schemas/SipTelephonyBindingV2'
-      description: A status-less telephony binding selected with VoiceAgents=V2Preview.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V2Preview
@@ -90609,7 +90572,7 @@ components:
         incoming_call_url:
           type: string
           format: uri
-          description: The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP.
+          description: SIP URI for SIP bindings; HTTPS webhook URL for other providers.
         etag:
           $ref: '#/components/schemas/Azure.Core.eTag'
           description: The entity tag to send in the `If-Match` header when updating or deleting this binding.
@@ -90620,7 +90583,6 @@ components:
           teams_phone_extensibility: '#/components/schemas/TeamsPhoneExtensibilityTelephonyBindingV2ListItem'
           twilio: '#/components/schemas/TwilioTelephonyBindingV2ListItem'
           sip: '#/components/schemas/SipTelephonyBindingV2ListItem'
-      description: A status-less V2 preview binding returned in a list, including its body-level entity tag.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V2Preview
@@ -92298,14 +92260,12 @@ components:
           type: string
           enum:
             - twilio
-          description: The Twilio provider.
         phone_number:
           type: string
           pattern: ^\+[1-9]\d{6,14}$
-          description: The Twilio E.164 phone number.
+          description: The E.164 number configured in Twilio.
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingV2'
-      description: A status-less V2 preview Twilio binding.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V2Preview
@@ -92319,14 +92279,12 @@ components:
           type: string
           enum:
             - twilio
-          description: The Twilio provider.
         phone_number:
           type: string
           pattern: ^\+[1-9]\d{6,14}$
-          description: The Twilio E.164 phone number.
+          description: The E.164 number configured in Twilio.
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingV2ListItem'
-      description: A V2 preview Twilio list item.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V2Preview
@@ -92478,25 +92436,25 @@ components:
             - type: string
             - type: 'null'
           maxLength: 128
-          description: The replacement display label. Omit to preserve it; null, empty, or whitespace-only clears it. Nonblank values are trimmed before enforcing the 128-character limit.
+          description: Omit to preserve; null or blank clears it. Values are trimmed before validation.
         connection_name:
           type: string
           minLength: 1
           maxLength: 256
-          description: The replacement Foundry connection name. Omit to preserve it; an explicitly supplied null, empty, or whitespace-only value is invalid. A SIP replacement must reference a same-project SipInbound connection. This property is valid for Teams Phone extensibility and SIP bindings; a Twilio binding's connection is immutable.
+          description: Omit to preserve; null or blank is invalid. SIP requires a same-project SipInbound connection. Twilio connections cannot be changed.
         phone_number:
           anyOf:
             - type: string
             - type: 'null'
           maxLength: 64
-          description: The replacement Teams Phone extensibility or SIP display phone number, not a SIP routing key. Omit to preserve it; null, empty, or whitespace-only clears it. Nonblank values are trimmed before enforcing the 64-character limit. Not supported for Twilio.
+          description: Display only. Omit to preserve; null or blank clears it. Values are trimmed before validation. Not supported for Twilio.
         allowed_calling_numbers:
           type: array
           items:
             $ref: '#/components/schemas/SipAllowedCallingNumber'
           maxItems: 64
-          description: Replacement exact canonical E.164 numbers or restricted, fully anchored E.164 patterns, up to 64 entries of at most 256 characters each. Patterns are matched against the entire normalized E.164 caller number; see SipAllowedCallingNumber for the supported syntax. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.
-      description: Optional updates to a V2 preview binding. The provider is immutable and status is not a supported input.
+          description: SIP only. Omit to preserve the restriction; send [] to allow any caller.
+      description: The provider cannot be changed.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V2Preview

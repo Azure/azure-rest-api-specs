@@ -476,16 +476,12 @@ interface AgentEndpointConversations {
 }
 
 /**
- * Status-less binding operations selected explicitly with Foundry-Features: VoiceAgents=V2Preview.
- * The V1 preview operations remain available on the same routes with their original lifecycle contract.
+ * Select VoiceAgents=V2Preview for status-less bindings; V1Preview retains lifecycle status.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "These header-versioned binding operations share the existing agent-contained routes."
 @tag("Agent Telephony")
 interface AgentTelephonyV2 {
-  /**
-   * Creates a binding using VoiceAgents=V2Preview and returns a status-less binding.
-   * VoiceAgents=V1Preview retains the original response with required status.
-   */
+  /** Requires VoiceAgents=V2Preview; responses omit lifecycle status. */
   @summary("Create an agent telephony binding")
   @operationId("AgentTelephony_createTelephonyBinding")
   @post
@@ -495,21 +491,14 @@ interface AgentTelephonyV2 {
   createTelephonyBinding is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v2_preview,
     {
-      /** The name of the voice agent that owns the binding. */
       @path agent_name: string;
-
       ...Azure.Core.RepeatabilityRequestHeaders;
-
-      /** The provider-specific binding to create. */
       @body telephony_binding: CreateTelephonyBindingV2Request;
     },
     TelephonyBindingCreatedResponse<TelephonyBindingV2>
   >;
 
-  /**
-   * Lists status-less bindings using VoiceAgents=V2Preview. The status query filter is not supported in V2.
-   * VoiceAgents=V1Preview retains required item status and the optional status query filter.
-   */
+  /** Requires VoiceAgents=V2Preview. The status filter is only supported in V1Preview. */
   @summary("List agent telephony bindings")
   @operationId("AgentTelephony_listTelephonyBindings")
   @get
@@ -520,21 +509,14 @@ interface AgentTelephonyV2 {
   listTelephonyBindings is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v2_preview,
     {
-      /** The name of the voice agent whose bindings are listed. */
       @path agent_name: string;
-
-      /** Filters bindings by provider. */
       @query provider?: TelephonyProvider;
-
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<TelephonyBindingV2ListItem>
   >;
 
-  /**
-   * Retrieves a status-less binding using VoiceAgents=V2Preview.
-   * VoiceAgents=V1Preview retains the original response with required status.
-   */
+  /** Requires VoiceAgents=V2Preview; responses omit lifecycle status. */
   @summary("Get an agent telephony binding")
   @operationId("AgentTelephony_getTelephonyBinding")
   @get
@@ -544,19 +526,13 @@ interface AgentTelephonyV2 {
   getTelephonyBinding is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v2_preview,
     {
-      /** The name of the voice agent that owns the binding. */
       @path agent_name: string;
-
-      /** The service-generated binding identifier. */
       @path binding_id: TelephonyBindingId;
     },
     TelephonyBindingResponse<TelephonyBindingV2>
   >;
 
-  /**
-   * Updates a binding using VoiceAgents=V2Preview. Status is not a supported PATCH input or response property.
-   * VoiceAgents=V1Preview retains its optional PATCH status and required response status.
-   */
+  /** Requires VoiceAgents=V2Preview. Status updates are only supported in V1Preview. */
   @summary("Update an agent telephony binding")
   @operationId("AgentTelephony_updateTelephonyBinding")
   @patch
@@ -566,24 +542,16 @@ interface AgentTelephonyV2 {
   updateTelephonyBinding is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v2_preview,
     {
-      /** The name of the voice agent that owns the binding. */
       @path agent_name: string;
-
-      /** The service-generated binding identifier. */
       @path binding_id: TelephonyBindingId;
-
-      /** The content type for the JSON Merge Patch body. */
       @header("Content-Type") contentType: "application/merge-patch+json";
-
       ...TelephonyIfMatchHeader;
-
-      /** The binding properties to update, excluding lifecycle status. */
       @body body: UpdateTelephonyBindingV2Request;
     },
     TelephonyBindingResponse<TelephonyBindingV2>
   >;
 
-  /** Deletes a binding using VoiceAgents=V2Preview with the same entity-tag precondition as V1. */
+  /** Requires VoiceAgents=V2Preview. */
   @summary("Delete an agent telephony binding")
   @operationId("AgentTelephony_deleteTelephonyBinding")
   @delete
@@ -593,12 +561,8 @@ interface AgentTelephonyV2 {
   deleteTelephonyBinding is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v2_preview,
     {
-      /** The name of the voice agent that owns the binding. */
       @path agent_name: string;
-
-      /** The service-generated binding identifier. */
       @path binding_id: TelephonyBindingId;
-
       ...TelephonyIfMatchHeader;
     },
     NoContentResponse
@@ -653,7 +617,7 @@ interface AgentTelephony {
       /** Filters bindings by provider. */
       @query provider?: TelephonyProvider;
 
-      /** Filters bindings by lifecycle status. Supported only with VoiceAgents=V1Preview, not VoiceAgents=V2Preview. */
+      /** Only supported with VoiceAgents=V1Preview. */
       @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
       @query
       status?: TelephonyBindingStatus;
