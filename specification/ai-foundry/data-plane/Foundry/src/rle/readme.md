@@ -2,7 +2,7 @@
 
 RLE registers immutable environment versions and executes scored rollouts using
 Gym/OpenEnv, a same-project Foundry Hosted Agent, or an external HTTPS harness.
-The [developer experience spec](https://github.com/coreai-microsoft/foundrysdk_specs/pull/394)
+The [developer experience spec](https://github.com/coreai-microsoft/foundrysdk_specs/pull/235)
 covers publication, training, evaluation and inspection.
 
 ## Contract scope
@@ -10,8 +10,6 @@ covers publication, training, evaluation and inspection.
 - Environment registration, latest/exact-version reads, version/task listing and deletion.
 - Harbor task archive upload-target issuance and finalization, with
   project-scoped content-hash reuse and per-task image readiness.
-- Instance group and instance lifecycle through both pinned-version and
-  environment-name paths.
 - Job metadata/metric/rollout reads and rollout metadata/result/event reads.
 
 The service inherits the Foundry project endpoint and Microsoft Entra
@@ -27,10 +25,16 @@ OpenEnv reset/step/state/MCP proxying and binary rollout WebSockets are runtime
 protocols, not JSON resource operations. They are not represented as ordinary
 HTTP model methods here.
 Signed archive bytes are uploaded directly to project storage, not to an RLE
-JSON endpoint. Sandbox-pool management, rollout-to-sandbox bindings and
-producer-side job/metric writes are outside this draft's scope.
+JSON endpoint. Execution capacity and cleanup are service-managed; customer-managed
+instance group/instance lifecycle, sandbox-pool management, rollout-to-sandbox
+bindings and producer-side job/metric writes are outside this draft's scope.
 High-level training submission/cancellation remains on the existing fine-tuning
-API, not an RLE job-create action.
+API, not an RLE job-create action. The CLI submits
+`POST /openai/v1/fine_tuning/jobs` with `method.type="rl_environment"` and cancels
+through `POST /openai/v1/fine_tuning/jobs/{jobId}/cancel`, where enabled.
+These paths are relative to the fine-tuning resource endpoint, not the Foundry
+project endpoint. The managed Loom recipe owns the training loop; custom recipes
+use the same rollout SDK and own their Loom session/checkpoint lifecycle.
 
 ## Compatibility decisions
 
