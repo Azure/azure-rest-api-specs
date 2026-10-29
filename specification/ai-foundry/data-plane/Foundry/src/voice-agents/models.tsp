@@ -148,24 +148,118 @@ alias VoiceConversationItemPersistence = {
   response_id?: string;
 };
 
-@doc("A read-only persisted system-tool intent with private references unexpanded, not a client-created item or provider result.")
+/**
+ * An output conversation item, including service-managed system-tool intent.
+ * Persistence metadata is optional and is populated only for stored items.
+ * This hierarchy is separate from client-created OpenAI Realtime items.
+ */
+@discriminator("type")
 @usage(Usage.output | Usage.json)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationSystemToolItem {
-  ...VoiceAgentSystemToolItem;
+model VoiceConversationItem {
+  /** The output-item kind. Additional kinds may be added over time. */
+  type: VoiceConversationItemType;
+
   ...VoiceConversationItemPersistence;
 }
 
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "Persisted reads include server-only system-tool intent without widening client-created realtime items."
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve the reviewed union of upstream realtime items and server-only system-tool items without changing their inheritance or SDK representation."
-@doc("An existing realtime conversation item or a persisted service-managed system-tool intent. Used only by persisted read responses; client-created item types remain unchanged.")
+/** The extensible kinds of output conversation items. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceConversationItem {
-  @doc("A standard OpenAI Realtime conversation item.")
-  standard: OpenAI.RealtimeConversationItem,
+union VoiceConversationItemType {
+  /** An existing OpenAI Realtime item kind. */
+  standard: OpenAI.RealtimeConversationItemType,
 
-  @doc("A persisted service-managed system-tool intent.")
-  system_tool: VoiceConversationSystemToolItem,
+  /** A service-managed system-tool intent, not a provider result. */
+  system_tool: "system_tool",
+}
+
+/** An output message, discriminated by the speaker's role. */
+@discriminator("role")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceConversationMessageItem extends VoiceConversationItem {
+  /** The output-item kind. Always `message`. */
+  type: OpenAI.RealtimeConversationItemType.message;
+
+  /** The role of the message's speaker. */
+  role: OpenAI.RealtimeConversationItemMessageType;
+}
+
+// Copy concrete payloads, not the input discriminator hierarchy. Directly
+// extending the OpenAI root would also register system_tool for client writes.
+/** An output system message. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceConversationSystemMessageItem extends VoiceConversationMessageItem {
+  ...OmitProperties<
+    OpenAI.RealtimeConversationItemMessageSystem,
+    "created_at" | "response_id"
+  >;
+}
+
+/** An output user message. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceConversationUserMessageItem extends VoiceConversationMessageItem {
+  ...OmitProperties<
+    OpenAI.RealtimeConversationItemMessageUser,
+    "created_at" | "response_id"
+  >;
+}
+
+/** An output assistant message. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceConversationAssistantMessageItem
+  extends VoiceConversationMessageItem {
+  ...OmitProperties<
+    OpenAI.RealtimeConversationItemMessageAssistant,
+    "created_at" | "response_id"
+  >;
+}
+
+/** An output function-call intent. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceConversationFunctionCallItem extends VoiceConversationItem {
+  ...OmitProperties<
+    OpenAI.RealtimeConversationItemFunctionCall,
+    "created_at" | "response_id"
+  >;
+}
+
+/** An output function-call result. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceConversationFunctionCallOutputItem extends VoiceConversationItem {
+  ...OmitProperties<
+    OpenAI.RealtimeConversationItemFunctionCallOutput,
+    "created_at" | "response_id"
+  >;
+}
+
+/** An output MCP tool listing. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceConversationMcpListToolsItem extends VoiceConversationItem {
+  ...OmitProperties<OpenAI.RealtimeMCPListTools, "created_at" | "response_id">;
+}
+
+/** An output MCP tool call. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceConversationMcpCallItem extends VoiceConversationItem {
+  ...OmitProperties<OpenAI.RealtimeMCPToolCall, "created_at" | "response_id">;
+}
+
+/** An output request for MCP tool-call approval. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceConversationMcpApprovalRequestItem extends VoiceConversationItem {
+  ...OmitProperties<
+    OpenAI.RealtimeMCPApprovalRequest,
+    "created_at" | "response_id"
+  >;
+}
+
+/** An output response to an MCP tool-call approval request. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceConversationMcpApprovalResponseItem extends VoiceConversationItem {
+  ...OmitProperties<
+    OpenAI.RealtimeMCPApprovalResponse,
+    "created_at" | "response_id"
+  >;
 }
 
 @@extension(
