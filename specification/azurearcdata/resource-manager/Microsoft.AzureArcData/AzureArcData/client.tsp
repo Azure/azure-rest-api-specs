@@ -457,7 +457,7 @@ namespace Microsoft.AzureArcData {
 );
 @@clientName(
   CostOptionSelectedValues,
-  "SqlSkuRecommendationCostOptions",
+  "SqlSkuRecommendationCostConfig",
   "csharp"
 );
 @@clientName(CostTypeValues, "SqlSkuRecommendationCostBreakdown", "csharp");
