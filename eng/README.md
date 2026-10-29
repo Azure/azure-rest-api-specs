@@ -4,6 +4,21 @@ The `eng` directory contains source code for automated tooling running on this r
 
 For context on this directory, see [Design guidelines for spec repos validation tooling] (Microsoft-internal).
 
+## Generated SDK pull requests
+
+The single-spec SDK release flow in `tools/spec-gen-sdk-runner` runs
+`azsdk eng package-info --package-path "<generated-package-path>" --out-dir "<temporary-directory>"`
+for each generated package. The spec-gen-sdk pipeline includes the resulting
+`ApiVersions` inline in the SDK PR description, before `and CommitSHA:`, for example
+`API Versions: '2025-01-01' (Namespace: 'Example'), '2026-01-01' (Namespace: 'Other'),`.
+A single entry also uses `API Versions: '2024-01-01',`. Entries without a `Namespace`
+show only the quoted version, including when mixed with namespaced entries.
+The existing configuration, pipeline-run, and release-plan text is preserved.
+Duplicate version/namespace pairs are listed once; the requested `ApiVersion` still controls generation,
+but is not used as a substitute for generated package metadata.
+Missing versions omit this text. Metadata collection failures emit pipeline
+warnings without preventing PR creation, including PRs for failed SDK builds.
+
 ## Spec Change Policies
 
 [Spec Change Policies](tools/spec-change-policies/README.md) checks TypeSpec usage and

@@ -230,7 +230,7 @@ stages:
           - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
             parameters:
               SourceRootPath: $(SpecRepoDirectory)
-              Condition: and(succeeded(), contains(variables['SdkRepoName'], 'rust'))
+              Condition: and(succeeded(), or(contains(variables['SdkRepoName'], 'rust'), ne(variables['Build.Reason'], 'PullRequest')))
 
           - script: |
               set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
@@ -260,7 +260,6 @@ stages:
 
               if [ "${{ parameters.ApiVersion }}" != "" ] && [ "${{ parameters.ApiVersion }}" != "none" ]; then
                 optional_params="$optional_params --api-version ${{ parameters.ApiVersion }}"
-                sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }},"
               fi
               if [ "${{ parameters.SdkReleaseType }}" != "" ] && [ "${{ parameters.SdkReleaseType }}" != "none" ]; then
                 optional_params="$optional_params --sdk-release-type ${{ parameters.SdkReleaseType }}"
@@ -373,19 +372,33 @@ stages:
                 inputs:
                   pwsh: true
                   workingDirectory: $(SdkRepoDirectory)
-                  filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1
-                  arguments: >
-                    -RepoOwner "azure"
-                    -RepoName "$(SdkRepoName)"
-                    -BaseBranch "main"
-                    -PROwner "$(SdkRepoOwner)"
-                    -PRBranch "$(SdkPullRequestSourceBranch)"
-                    -AuthToken "$(GH_TOKEN)"
-                    -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
-                    -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
-                    -PRLabels "$(BuildFailedLabel)"
-                    -OpenAsDraft $$(OpenSdkPullRequestAsDraft)
-                    -UpdateExistingPullRequest $true
+                  targetType: inline
+                  script: |
+                    $prBody = $env:GENERATED_SDK_INFORMATION
+                    if (-not [string]::IsNullOrWhiteSpace($env:GENERATED_SDK_API_VERSIONS)) {
+                      $prBody = $prBody.Replace(" and CommitSHA:", " $env:GENERATED_SDK_API_VERSIONS, and CommitSHA:")
+                    }
+                    $prBody = "$prBody  $env:RELEASE_PLAN_INFO"
+
+                    $prParameters = @{
+                      RepoOwner = "azure"
+                      RepoName = "$(SdkRepoName)"
+                      BaseBranch = "main"
+                      PROwner = "$(SdkRepoOwner)"
+                      PRBranch = "$(SdkPullRequestSourceBranch)"
+                      AuthToken = "$(GH_TOKEN)"
+                      PRTitle = "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
+                      PRBody = $prBody
+                      PRLabels = "$(BuildFailedLabel)"
+                      OpenAsDraft = $$(OpenSdkPullRequestAsDraft)
+                      UpdateExistingPullRequest = $true
+                    }
+
+                    & "$(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1" @prParameters
+                env:
+                  GENERATED_SDK_INFORMATION: $(GeneratedSDKInformation)
+                  GENERATED_SDK_API_VERSIONS: $(GeneratedSDKApiVersions)
+                  RELEASE_PLAN_INFO: $(ReleasePlanInfo)
 
               - ${{ if endsWith(parameters.TriggerSource, '-release') }}:
                   - task: PowerShell@2
