@@ -4689,6 +4689,15 @@ model AppServicePlanProperties {
   elasticScaleEnabled?: boolean;
 
   /**
+   * If true, this App Service plan can scale across a wider range of available, identical worker pools.
+   * Once set to true, this property cannot be set back to false, and apps in this plan no longer have pinned outbound IP addresses.
+   * Defaults to false on creation. Omitting this property on update preserves its current value.
+   */
+  @added(Versions.v2026_07_15)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  crossPoolScaling?: boolean = false;
+
+  /**
    * Maximum number of total workers allowed for this ElasticScaleEnabled App Service Plan
    */
   maximumElasticWorkerCount?: int32;
@@ -4958,6 +4967,15 @@ model AppServicePlanPatchResourceProperties {
    * ServerFarm supports ElasticScale. Apps in this plan will scale as if the ServerFarm was ElasticPremium sku
    */
   elasticScaleEnabled?: boolean;
+
+  /**
+   * If true, this App Service plan can scale across a wider range of available, identical worker pools.
+   * Once set to true, this property cannot be set back to false, and apps in this plan no longer have pinned outbound IP addresses.
+   * Defaults to false on creation. Omitting this property on update preserves its current value.
+   */
+  @added(Versions.v2026_07_15)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  crossPoolScaling?: boolean;
 
   /**
    * Maximum number of total workers allowed for this ElasticScaleEnabled App Service Plan
