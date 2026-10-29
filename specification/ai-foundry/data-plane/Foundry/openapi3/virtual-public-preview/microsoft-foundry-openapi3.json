@@ -98588,7 +98588,7 @@
         "type": "string",
         "maxLength": 256,
         "pattern": "^(?:\\+[1-9][0-9]{1,14}|\\^\\\\\\+(?:[1-9]|\\[1-9\\])(?:(?:[0-9]|\\[[0-9](?:-[0-9])?\\])(?:\\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\\})?)+\\$)$",
-        "description": "An exact E.164 number or an anchored pattern matched against the entire normalized caller number.\nOnly ASCII digits, digit classes/ranges and bounded repetition are supported. The service also rejects\ndescending ranges, reversed bounds and patterns that can match outside E.164's 2-15 digit length.\nSupply trimmed values; arbitrary regexes are not supported or rewritten.",
+        "description": "An exact E.164 caller number or a restricted pattern matched against the entire normalized number.\n`+14255550123` allows only that number; `^\\+1425[0-9]{7}$` allows numbers starting with `+1425`\nfollowed by exactly seven digits.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
