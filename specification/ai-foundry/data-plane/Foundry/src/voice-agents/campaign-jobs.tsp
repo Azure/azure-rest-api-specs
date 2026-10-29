@@ -447,8 +447,9 @@ interface TelephonyCampaigns {
       operation_id: ResponseProperty<"operationId">,
     }
   )
-  create is FoundryDataPlaneRequiredPreviewOperation<
+  create is putJobPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    TelephonyCampaign,
     {
       /** Owning Agent; never overridden in recipient inputs. */
       @path agent_name: string;
@@ -467,7 +468,8 @@ interface TelephonyCampaigns {
       @body campaign: TelephonyCampaign;
     },
     | TelephonyCampaignCreatedResponse<201>
-    | TelephonyCampaignCreatedResponse<200>
+    | TelephonyCampaignCreatedResponse<200>,
+    WithRequiredFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
   >;
 
   /** Gets the current Campaign with source provenance but no inline array. Optional operation_id checks the saved operation's owning Campaign incarnation and internal validation round, NOT equality with Campaign.operation_id. A later cancellation on the same round is allowed; replacement/name reuse returns 409 campaign_operation_mismatch, missing/expired/wrong-scope operation or absent Campaign returns 404. Authorization precedes the lookup. */
@@ -555,8 +557,9 @@ interface TelephonyCampaigns {
       operation_id: ResponseProperty<"operationId">,
     }
   )
-  cancel is FoundryDataPlaneRequiredPreviewOperation<
+  cancel is cancelJobPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    TelephonyCampaign,
     {
       /** Owning Agent; never overridden in recipient inputs. */
       @path agent_name: string;
@@ -570,7 +573,8 @@ interface TelephonyCampaigns {
       /** Optional idempotency identifier; distinct from validation/delete operations. Required and fresh to resume terminal cancellation failure. */
       @header("Operation-Id") operationId?: string;
     },
-    TelephonyCampaignCancelAcceptedResponse
+    TelephonyCampaignCancelAcceptedResponse,
+    WithRequiredFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
   >;
 
   /**
@@ -612,7 +616,7 @@ interface TelephonyCampaigns {
       operation_id: ResponseProperty<"operationId">,
     }
   )
-  delete is FoundryDataPlaneRequiredPreviewOperation<
+  delete is deleteJobPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** Owning Agent; never overridden in recipient inputs. */
@@ -627,7 +631,8 @@ interface TelephonyCampaigns {
       /** Optional retry identifier, distinct from creation and previous failed deletion operations. Reuse with the identical original If-Match for transport retries; a changed precondition conflicts. */
       @header("Operation-Id") operationId?: string;
     },
-    TelephonyCampaignDeleteAcceptedResponse | NoContentResponse
+    TelephonyCampaignDeleteAcceptedResponse | NoContentResponse,
+    WithRequiredFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
   >;
 
   /**
@@ -733,8 +738,9 @@ interface TelephonyCampaigns {
   @get
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}/operations/{operation_id}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  getOperation is FoundryDataPlaneRequiredPreviewOperation<
+  getOperation is queryJobStatusPreview<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    TelephonyCampaignOperation,
     {
       /** Owning Agent. */
       @path agent_name: string;
@@ -745,6 +751,7 @@ interface TelephonyCampaigns {
       /** Stable validation-, cancellation- or deletion-operation ID returned in Operation-Id. Authorization is checked against its saved project and Agent scope even after resource deletion. */
       @path operation_id: string;
     },
-    JobStatusResponse<TelephonyCampaignOperation>
+    JobStatusResponse<TelephonyCampaignOperation>,
+    WithRequiredFoundryPreviewHeader<AgentDefinitionOptInKeys.voice_agents_v1_preview>
   >;
 }
