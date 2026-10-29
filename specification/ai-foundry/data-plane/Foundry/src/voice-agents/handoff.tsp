@@ -125,8 +125,8 @@ model InlineVoiceSubagent {
   @doc("Customer tools available to this subagent. Omission or null selects an empty customer tool set.")
   tools?: VoiceAgentTool[] | null;
 
-  @doc("Tool-selection behavior for this subagent. Omission or null defaults to `auto`.")
-  tool_choice?: VoiceAgentToolChoice | null;
+  @doc("Tool-selection behavior for this subagent. If omitted, the service defaults to auto. Null also selects auto.")
+  tool_choice?: VoiceAgentToolChoice | null = VoiceAgentToolChoice.auto;
 
   @doc("The output voice configuration activated for this subagent, using the same flat voice fields as the top-level audio output. Omission inherits the entrypoint configuration; a supplied object replaces the voice-specific settings.")
   audio_output?: VoiceAgentVoiceConfig;
@@ -285,25 +285,29 @@ model VoiceAgentServerEventSessionHandoffLifecycle {
   node_generation: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Add the named Voice-only discriminator while preserving the imported OpenAI event hierarchy."
 @doc("The `session.handoff.started` server event.")
 @usage(VoiceAgentHandoffServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
+@Azure.Core.Experimental.copyProperties({
+  @doc("The event type. Always `session.handoff.started`.")
+  type: VoiceAgentServerEventTypeExtension.session_handoff_started,
+})
 model VoiceAgentServerEventSessionHandoffStarted
   extends OpenAI.RealtimeServerEvent {
-  @doc("The event type. Always `session.handoff.started`.")
-  type: "session.handoff.started";
-
   ...VoiceAgentServerEventSessionHandoffLifecycle;
 }
 
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Add the named Voice-only discriminator while preserving the imported OpenAI event hierarchy."
 @doc("The `session.handoff.completed` server event.")
 @usage(VoiceAgentHandoffServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
+@Azure.Core.Experimental.copyProperties({
+  @doc("The event type. Always `session.handoff.completed`.")
+  type: VoiceAgentServerEventTypeExtension.session_handoff_completed,
+})
 model VoiceAgentServerEventSessionHandoffCompleted
   extends OpenAI.RealtimeServerEvent {
-  @doc("The event type. Always `session.handoff.completed`.")
-  type: "session.handoff.completed";
-
   ...VoiceAgentServerEventSessionHandoffLifecycle;
 
   @doc("The target-preparation duration.")
@@ -320,14 +324,16 @@ union VoiceAgentHandoffAbortReason {
   error: "error",
 }
 
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Add the named Voice-only discriminator while preserving the imported OpenAI event hierarchy."
 @doc("The `session.handoff.aborted` server event.")
 @usage(VoiceAgentHandoffServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
+@Azure.Core.Experimental.copyProperties({
+  @doc("The event type. Always `session.handoff.aborted`.")
+  type: VoiceAgentServerEventTypeExtension.session_handoff_aborted,
+})
 model VoiceAgentServerEventSessionHandoffAborted
   extends OpenAI.RealtimeServerEvent {
-  @doc("The event type. Always `session.handoff.aborted`.")
-  type: "session.handoff.aborted";
-
   ...VoiceAgentServerEventSessionHandoffLifecycle;
 
   @doc("Why the handoff ended before target commit.")

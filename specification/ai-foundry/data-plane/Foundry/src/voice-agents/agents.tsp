@@ -171,7 +171,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
-  @doc("Optional subagent configuration. `subagent_type` selects delegated background specialists or inline voice subagents.")
+  @doc("Optional subagent configuration. Omit `subagent_type` or set it to `delegate` for delegated background specialists; inline voice subagents require `subagent_type: inline`.")
   subagent_config?: VoiceAgentSubagentConfig;
 
   @doc("""
@@ -276,18 +276,30 @@ union VoiceAgentSubagentType {
   inline: "inline",
 }
 
-@doc("Base configuration for one mutually exclusive subagent mode.")
-@discriminator("subagent_type")
+@doc("Configuration for delegated background specialists or inline voice subagents. Existing delegate configurations may omit `subagent_type`; inline configurations must explicitly select `inline`.")
+@oneOf
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentSubagentConfig {
-  @doc("The subagent mode. Defaults to `delegate` when omitted for compatibility with existing subagent configurations. All entries in `subagents` use the configuration selected by this value.")
-  subagent_type: VoiceAgentSubagentType = "delegate";
+union VoiceAgentSubagentConfig {
+  delegate: VoiceAgentDelegateSubagentConfig,
+  inline: VoiceAgentInlineSubagentConfig,
 }
 
 @doc("Configuration for referenced Foundry agents invoked as delegated background specialists.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentDelegateSubagentConfig extends VoiceAgentSubagentConfig {
-  subagent_type: VoiceAgentSubagentType.delegate;
+@example(
+  #{
+    subagents: #[
+      #{
+        agent_name: "order-agent",
+        agent_capabilities: "Look up customer orders.",
+      }
+    ],
+  },
+  #{ title: "Legacy delegate without subagent_type" }
+)
+model VoiceAgentDelegateSubagentConfig {
+  @doc("The subagent mode. May be omitted for compatibility with existing delegate configurations.")
+  subagent_type?: VoiceAgentSubagentType.delegate;
 
   @doc("The sibling Foundry text agents, in the same project, that this Voice Agent may consult.")
   @minItems(1)
@@ -296,7 +308,8 @@ model VoiceAgentDelegateSubagentConfig extends VoiceAgentSubagentConfig {
 
 @doc("Configuration for inline voice subagents that may become active through Handoff.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentInlineSubagentConfig extends VoiceAgentSubagentConfig {
+model VoiceAgentInlineSubagentConfig {
+  @doc("The subagent mode. Inline voice subagents require the explicit value `inline`.")
   subagent_type: VoiceAgentSubagentType.inline;
 
   @doc("""

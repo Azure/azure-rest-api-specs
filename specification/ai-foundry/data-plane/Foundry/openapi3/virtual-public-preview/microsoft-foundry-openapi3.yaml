@@ -54501,7 +54501,8 @@ components:
           anyOf:
             - $ref: '#/components/schemas/VoiceAgentToolChoice'
             - type: 'null'
-          description: Tool-selection behavior for this subagent. Omission or null defaults to `auto`.
+          description: Tool-selection behavior for this subagent. If omitted, the service defaults to auto. Null also selects auto.
+          default: auto
         audio_output:
           $ref: '#/components/schemas/VoiceAgentVoiceConfig'
           description: The output voice configuration activated for this subagent, using the same flat voice fields as the top-level audio output. Omission inherits the entrypoint configuration; a supplied object replaces the voice-specific settings.
@@ -91256,7 +91257,7 @@ components:
           description: Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.
         subagent_config:
           $ref: '#/components/schemas/VoiceAgentSubagentConfig'
-          description: Optional subagent configuration. `subagent_type` selects delegated background specialists or inline voice subagents.
+          description: 'Optional subagent configuration. Omit `subagent_type` or set it to `delegate` for delegated background specialists; inline voice subagents require `subagent_type: inline`.'
         store:
           type: boolean
           description: |-
@@ -91279,22 +91280,24 @@ components:
     VoiceAgentDelegateSubagentConfig:
       type: object
       required:
-        - subagent_type
         - subagents
       properties:
         subagent_type:
           type: string
           enum:
             - delegate
+          description: The subagent mode. May be omitted for compatibility with existing delegate configurations.
         subagents:
           type: array
           items:
             $ref: '#/components/schemas/VoiceAgentSubagent'
           minItems: 1
           description: The sibling Foundry text agents, in the same project, that this Voice Agent may consult.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentSubagentConfig'
       description: Configuration for referenced Foundry agents invoked as delegated background specialists.
+      examples:
+        - subagents:
+            - agent_name: order-agent
+              agent_capabilities: Look up customer orders.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -91573,6 +91576,7 @@ components:
           type: string
           enum:
             - inline
+          description: The subagent mode. Inline voice subagents require the explicit value `inline`.
         subagents:
           type: array
           items:
@@ -91586,8 +91590,6 @@ components:
         handoff_policy:
           $ref: '#/components/schemas/VoiceAgentHandoffPolicy'
           description: Session-wide Handoff limits. Requires `$entrypoint` with at least one outgoing condition. When omitted, the service permits up to 16 completed and 16 attempted handoffs.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentSubagentConfig'
       description: Configuration for inline voice subagents that may become active through Handoff.
       x-ms-foundry-meta:
         required_previews:
@@ -92164,20 +92166,10 @@ components:
         required_previews:
           - VoiceAgents=V1Preview
     VoiceAgentSubagentConfig:
-      type: object
-      required:
-        - subagent_type
-      properties:
-        subagent_type:
-          $ref: '#/components/schemas/VoiceAgentSubagentType'
-          description: The subagent mode. Defaults to `delegate` when omitted for compatibility with existing subagent configurations. All entries in `subagents` use the configuration selected by this value.
-          default: delegate
-      discriminator:
-        propertyName: subagent_type
-        mapping:
-          delegate: '#/components/schemas/VoiceAgentDelegateSubagentConfig'
-          inline: '#/components/schemas/VoiceAgentInlineSubagentConfig'
-      description: Base configuration for one mutually exclusive subagent mode.
+      oneOf:
+        - $ref: '#/components/schemas/VoiceAgentDelegateSubagentConfig'
+        - $ref: '#/components/schemas/VoiceAgentInlineSubagentConfig'
+      description: Configuration for delegated background specialists or inline voice subagents. Existing delegate configurations may omit `subagent_type`; inline configurations must explicitly select `inline`.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -92213,17 +92205,6 @@ components:
           maximum: 300
           description: The minimum number of seconds between spoken progress updates.
       description: Policy for delivering responses while a voice agent waits for a subagent.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    VoiceAgentSubagentType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - delegate
-            - inline
-      description: The subagent configuration mode. Additional modes may be added over time.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
