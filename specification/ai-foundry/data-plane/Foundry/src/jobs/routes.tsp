@@ -15,7 +15,7 @@ alias JobsFilterQueryParams = {
   @query
   jobType?: JobType;
 
-  @doc("Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').")
+  @doc("Filter jobs by the presence of a tag key, regardless of its value (e.g., 'framework').")
   @query
   tag?: string;
 
@@ -23,7 +23,7 @@ alias JobsFilterQueryParams = {
   @query
   listViewType?: ListViewType;
 
-  @doc("Comma-separated user property names and optionally values. Example: prop1,prop2=value2.")
+  @doc("Comma-separated exact user-property filters in 'key=value' format (e.g., 'prop1=value1,prop2=value2'). All valid filters must match. Entries without both a key and a value are ignored.")
   @query
   properties?: string;
 };
