@@ -166,7 +166,7 @@ model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
   connection_name: string;
 
   @doc("Version of the contract between the service and the evaluator endpoint. Defaults to `0.0.1` when omitted.")
-  schema_version?: EndpointEvaluatorSchemaVersion;
+  schema_version?: EndpointEvaluatorSchemaVersion = EndpointEvaluatorSchemaVersion.v0_0_1;
 }
 
 @doc("Contract version for an endpoint-based evaluator.")
