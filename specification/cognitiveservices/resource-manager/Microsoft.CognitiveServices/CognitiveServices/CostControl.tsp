@@ -21,7 +21,7 @@ model CostControl is ProxyResource<CostControlProperties> {
     Resource = CostControl,
     KeyName = "costControlName",
     SegmentName = "costControls",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+    NamePattern = "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
   >;
 
   /** The opaque entity tag used for optimistic concurrency. */
@@ -38,7 +38,7 @@ model ProjectCostControl is ProxyResource<CostControlProperties> {
     Resource = ProjectCostControl,
     KeyName = "costControlName",
     SegmentName = "costControls",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+    NamePattern = "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
   >;
 
   /** The opaque entity tag used for optimistic concurrency. */
@@ -59,7 +59,7 @@ model CostControlProperties {
 
   /**
    * Optional additional partitioning of consumption. Omission or an empty array uses one counter for the owning account or Foundry project.
-   * Responses omit owner-default grouping. A project-owned control cannot explicitly group by projectId.
+   * Responses omit owner-default grouping. A project-owned control cannot explicitly group by project.
    */
   @maxItems(1)
   @identifiers(#["name"])
@@ -135,7 +135,10 @@ model CostControlPatchProperties {
   providerProperties?: CostControlProviderPropertiesPatch | null;
 }
 
-/** A partial budget update. An empty properties object is a no-op and retains the entity tag. */
+/**
+ * A partial budget update. An empty properties object is a no-op and retains the entity tag for a valid existing selection.
+ * A historical agent selection spanning multiple projects requires an explicit valid filter replacement or filter: null; unrelated or no-op edits return a compatibility conflict.
+ */
 @added(Versions.v2026_11_15_preview)
 model CostControlPatch {
   /** The budget properties to merge into the existing control. */
@@ -145,7 +148,7 @@ model CostControlPatch {
 /** An additional built-in request attribute used to partition a budget into independent counters. */
 @added(Versions.v2026_11_15_preview)
 model CostControlGrouping {
-  /** The built-in attribute to group by. projectId is available only for account-owned controls. */
+  /** The built-in attribute to group by. project is available only for account-owned controls. */
   @key
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   name: CostControlGroupingName;
@@ -160,10 +163,10 @@ union CostControlGroupingName {
   string,
 
   /** Creates an independent counter for each Foundry project in the owning account. */
-  ProjectId: "projectId",
+  Project: "project",
 
-  /** Creates an independent counter for each Foundry agent resource ID. */
-  AgentResourceId: "agentResourceId",
+  /** Creates an independent counter for each Foundry agent, qualified by its Foundry project so identical agent names in different projects do not share counters. */
+  Agent: "agent",
 
   /** Creates an independent counter for each authenticated principal object ID. */
   IdentityObjectId: "identityObjectId",
@@ -216,6 +219,7 @@ model CostControlTimePeriodPatch is OptionalProperties<CostControlTimePeriod>;
 /**
  * Traffic selection using exactly one of tags or and. Tag names must be unique across the complete expression.
  * Filters narrow the owner's scope and cannot extend a project-owned control to another project.
+ * Values within one tag are alternatives; conditions are combined with AND. An agent selection requires an explicit project filter selecting exactly one project, including for project-owned controls.
  */
 @added(Versions.v2026_11_15_preview)
 model CostControlFilter {
@@ -232,9 +236,9 @@ model CostControlFilter {
 @added(Versions.v2026_11_15_preview)
 model CostControlTagFilter {
   /**
-   * The built-in attribute: agentResourceId, identityObjectId, sessionId, projectId, deploymentId, or tokenType.
-   * Agent resource IDs use /subscriptions/{subscriptionId}/accounts/{accountName}/project/{projectName}/agent/{agentName}.
-   * projectId values are Foundry project resource IDs. deploymentId values must be deployment resource IDs in the owning account.
+   * The built-in attribute: agent, identityObjectId, sessionId, project, deployment, or tokenType.
+   * Resource selectors use owner-scoped short names, not Azure resource IDs. Agent selections require an explicit project filter selecting exactly one project; multiple agents in that project are supported.
+   * A project-owned control can select only its owning project. Project, agent, and deployment values must be plain names of 1-64 characters without leading or trailing whitespace, control characters, path/query/fragment separators, percent signs, or . and .. path segments.
    * tokenType accepts input, output, or both for a Tokens budget; omission measures overall tokens.
    */
   name: CostControlFilterName;
@@ -242,9 +246,8 @@ model CostControlTagFilter {
   /** The comparison operator.`In` is supported. */
   operator: "In";
 
-  /** Between one and twenty nonempty, non-whitespace strings to match. */
+  /** One or more nonempty, non-whitespace strings to match. There is no per-tag value-count limit; the serialized cost-control definition must not exceed 32 KiB. */
   @minItems(1)
-  @maxItems(20)
   values: CostControlFilterValue[];
 }
 
@@ -253,8 +256,8 @@ model CostControlTagFilter {
 union CostControlFilterName {
   string,
 
-  /** The Foundry agent resource ID. */
-  AgentResourceId: "agentResourceId",
+  /** The Foundry agent name within the single explicitly selected Foundry project. */
+  Agent: "agent",
 
   /** The authenticated principal object ID. */
   IdentityObjectId: "identityObjectId",
@@ -262,11 +265,11 @@ union CostControlFilterName {
   /** The Foundry session ID. */
   SessionId: "sessionId",
 
-  /** The Foundry project resource ID. */
-  ProjectId: "projectId",
+  /** The Foundry project name within the owning account. */
+  Project: "project",
 
-  /** The deployment resource ID within the owning account. */
-  DeploymentId: "deploymentId",
+  /** The deployment name within the owning account. */
+  Deployment: "deployment",
 
   /** The input or output token category. */
   TokenType: "tokenType",
@@ -340,8 +343,8 @@ model CostControlProviderPropertiesPatch {
 /** Blocks requests when consumption reaches the explicitly configured threshold. No implicit blocking action is created. */
 @added(Versions.v2026_11_15_preview)
 model CostControlAction {
-  /** The enforcement action.`block` is supported. */
-  type: "block";
+  /** The enforcement action. Only `Block` is supported; input is case-insensitive and responses use this canonical spelling. */
+  type: "Block";
 
   /** Whether threshold is a percentage of amount or an absolute value in the budget's unit. */
   thresholdType: CostControlThresholdType;
@@ -360,23 +363,13 @@ model CostControlActionPatch is OptionalProperties<CostControlAction>;
 
 /**
  * Account-level telemetry connections. Application Insights is optional and may be removed while controls exist.
- * Budget notifications specify their own Event Grid destinations; the account Event Grid connection remains a fallback for existing legacy alerts.
+ * Budget notifications specify their own Event Grid destinations; account-level Event Grid configuration is not exposed or accepted by this API version.
  */
 @added(Versions.v2026_11_15_preview)
 model CostControlConnections {
   /** The full resource ID of the optional Application Insights connection. Set to null in an account update to remove it. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Account PATCH uses explicit null to remove the Application Insights connection; omission preserves it."
   appInsightsConnectionId?:
-    | Azure.Core.armResourceIdentifier<[
-        {
-          type: "Microsoft.CognitiveServices/accounts/connections";
-        }
-      ]>
-    | null;
-
-  /** The full resource ID of the fallback Event Grid connection for legacy alerts. It cannot be removed while legacy alerts depend on it. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Account PATCH uses explicit null to remove the fallback Event Grid connection when no legacy alert depends on it."
-  eventGridConnectionId?:
     | Azure.Core.armResourceIdentifier<[
         {
           type: "Microsoft.CognitiveServices/accounts/connections";
@@ -466,7 +459,8 @@ alias CostControlHeadResponse = {
 
 /**
  * Operations for account-owned cost controls. This API version accepts and returns only the budget contract.
- * A legacy definition that cannot be represented losslessly returns a compatibility conflict rather than a partial or mixed representation.
+ * Legacy resource-ID filters are projected to owner-scoped names without rewriting storage. Historical agent selections become independent project and agent lists, which can match additional project/agent combinations.
+ * Legacy Audit thresholds and alerts without an explicit or fallback Event Grid destination are omitted. Unsupported legacy definitions return a compatibility conflict rather than a partial or mixed representation.
  */
 @added(Versions.v2026_11_15_preview)
 @armResourceOperations
@@ -487,7 +481,7 @@ interface CostControls {
     Response = CostControlHeadResponse | CostControlNotModifiedResponse
   >;
 
-  /** Creates or replaces an account-owned budget synchronously. An omitted grouping selects the account's default counter. */
+  /** Creates or replaces an account-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. An omitted grouping selects the account's default counter. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CostControl,
     Parameters = CostControlCreateOrUpdateHeaders,
@@ -496,7 +490,7 @@ interface CostControls {
       | (ArmResourceCreatedSyncResponse<CostControl> & CostControlEtagHeader)
   >;
 
-  /** Updates selected budget properties synchronously. Omitted properties are preserved; an unchanged budget retains its entity tag. */
+  /** Updates selected budget properties synchronously. Omitted properties are preserved; an unchanged budget retains its entity tag. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. */
   update is ArmCustomPatchSync<
     CostControl,
     CostControlPatch,
@@ -540,7 +534,7 @@ interface ProjectCostControls {
     Response = CostControlHeadResponse | CostControlNotModifiedResponse
   >;
 
-  /** Creates or replaces a project-owned budget synchronously. Omitted grouping selects the Foundry project's default counter; explicit projectId grouping is rejected. */
+  /** Creates or replaces a project-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. Omitted grouping selects the Foundry project's default counter; explicit project grouping is rejected. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ProjectCostControl,
     Parameters = CostControlCreateOrUpdateHeaders,
@@ -550,7 +544,7 @@ interface ProjectCostControls {
           CostControlEtagHeader)
   >;
 
-  /** Updates selected Foundry project budget properties synchronously, merging named notifications, actions, and supplied validity dates. */
+  /** Updates selected Foundry project budget properties synchronously, merging named notifications, actions, and supplied validity dates. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. */
   update is ArmCustomPatchSync<
     ProjectCostControl,
     CostControlPatch,
@@ -576,5 +570,13 @@ interface ProjectCostControls {
 
 @@minLength(CostControl.name, 1);
 @@maxLength(CostControl.name, 64);
+@@doc(
+  CostControl.name,
+  "The cost-control name. New names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen. Existing dotted or 64-character names remain addressable but cannot be recreated."
+);
 @@minLength(ProjectCostControl.name, 1);
 @@maxLength(ProjectCostControl.name, 64);
+@@doc(
+  ProjectCostControl.name,
+  "The cost-control name. New names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen. Existing dotted or 64-character names remain addressable but cannot be recreated."
+);

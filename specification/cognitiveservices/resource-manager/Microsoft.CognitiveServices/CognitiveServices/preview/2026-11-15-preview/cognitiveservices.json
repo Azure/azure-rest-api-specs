@@ -4147,12 +4147,12 @@
           {
             "name": "costControlName",
             "in": "path",
-            "description": "The name of the CostControl",
+            "description": "The cost-control name. New names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen. Existing dotted or 64-character names remain addressable but cannot be recreated.",
             "required": true,
             "type": "string",
             "minLength": 1,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
           },
           {
             "$ref": "#/parameters/CostControlReadHeaders"
@@ -4198,7 +4198,7 @@
         "tags": [
           "CostControls"
         ],
-        "description": "Creates or replaces an account-owned budget synchronously. An omitted grouping selects the account's default counter.",
+        "description": "Creates or replaces an account-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. An omitted grouping selects the account's default counter.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4222,12 +4222,12 @@
           {
             "name": "costControlName",
             "in": "path",
-            "description": "The name of the CostControl",
+            "description": "The cost-control name. New names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen. Existing dotted or 64-character names remain addressable but cannot be recreated.",
             "required": true,
             "type": "string",
             "minLength": 1,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
           },
           {
             "$ref": "#/parameters/CostControlCreateOrUpdateHeaders.ifMatch"
@@ -4288,7 +4288,7 @@
         "tags": [
           "CostControls"
         ],
-        "description": "Updates selected budget properties synchronously. Omitted properties are preserved; an unchanged budget retains its entity tag.",
+        "description": "Updates selected budget properties synchronously. Omitted properties are preserved; an unchanged budget retains its entity tag. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4312,12 +4312,12 @@
           {
             "name": "costControlName",
             "in": "path",
-            "description": "The name of the CostControl",
+            "description": "The cost-control name. New names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen. Existing dotted or 64-character names remain addressable but cannot be recreated.",
             "required": true,
             "type": "string",
             "minLength": 1,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
           },
           {
             "$ref": "#/parameters/CostControlIfMatchHeader"
@@ -4390,12 +4390,12 @@
           {
             "name": "costControlName",
             "in": "path",
-            "description": "The name of the CostControl",
+            "description": "The cost-control name. New names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen. Existing dotted or 64-character names remain addressable but cannot be recreated.",
             "required": true,
             "type": "string",
             "minLength": 1,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
           },
           {
             "$ref": "#/parameters/CostControlIfMatchHeader"
@@ -4450,12 +4450,12 @@
           {
             "name": "costControlName",
             "in": "path",
-            "description": "The name of the CostControl",
+            "description": "The cost-control name. New names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen. Existing dotted or 64-character names remain addressable but cannot be recreated.",
             "required": true,
             "type": "string",
             "minLength": 1,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
           },
           {
             "$ref": "#/parameters/CostControlReadHeaders"
@@ -9638,12 +9638,12 @@
           {
             "name": "costControlName",
             "in": "path",
-            "description": "The name of the ProjectCostControl",
+            "description": "The cost-control name. New names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen. Existing dotted or 64-character names remain addressable but cannot be recreated.",
             "required": true,
             "type": "string",
             "minLength": 1,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
           },
           {
             "$ref": "#/parameters/CostControlReadHeaders"
@@ -9689,7 +9689,7 @@
         "tags": [
           "ProjectCostControls"
         ],
-        "description": "Creates or replaces a project-owned budget synchronously. Omitted grouping selects the Foundry project's default counter; explicit projectId grouping is rejected.",
+        "description": "Creates or replaces a project-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. Omitted grouping selects the Foundry project's default counter; explicit project grouping is rejected.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9723,12 +9723,12 @@
           {
             "name": "costControlName",
             "in": "path",
-            "description": "The name of the ProjectCostControl",
+            "description": "The cost-control name. New names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen. Existing dotted or 64-character names remain addressable but cannot be recreated.",
             "required": true,
             "type": "string",
             "minLength": 1,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
           },
           {
             "$ref": "#/parameters/CostControlCreateOrUpdateHeaders.ifMatch"
@@ -9789,7 +9789,7 @@
         "tags": [
           "ProjectCostControls"
         ],
-        "description": "Updates selected Foundry project budget properties synchronously, merging named notifications, actions, and supplied validity dates.",
+        "description": "Updates selected Foundry project budget properties synchronously, merging named notifications, actions, and supplied validity dates. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9823,12 +9823,12 @@
           {
             "name": "costControlName",
             "in": "path",
-            "description": "The name of the ProjectCostControl",
+            "description": "The cost-control name. New names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen. Existing dotted or 64-character names remain addressable but cannot be recreated.",
             "required": true,
             "type": "string",
             "minLength": 1,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
           },
           {
             "$ref": "#/parameters/CostControlIfMatchHeader"
@@ -9911,12 +9911,12 @@
           {
             "name": "costControlName",
             "in": "path",
-            "description": "The name of the ProjectCostControl",
+            "description": "The cost-control name. New names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen. Existing dotted or 64-character names remain addressable but cannot be recreated.",
             "required": true,
             "type": "string",
             "minLength": 1,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
           },
           {
             "$ref": "#/parameters/CostControlIfMatchHeader"
@@ -9981,12 +9981,12 @@
           {
             "name": "costControlName",
             "in": "path",
-            "description": "The name of the ProjectCostControl",
+            "description": "The cost-control name. New names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen. Existing dotted or 64-character names remain addressable but cannot be recreated.",
             "required": true,
             "type": "string",
             "minLength": 1,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
           },
           {
             "$ref": "#/parameters/CostControlReadHeaders"
@@ -13959,7 +13959,7 @@
         },
         "costControlConnections": {
           "$ref": "#/definitions/CostControlConnections",
-          "description": "Account-level cost-control telemetry connections. Application Insights is optional.\nBudget notifications use their own Event Grid connection IDs; the account Event Grid connection remains a fallback for existing legacy alerts.\nSet this object to null in an account update to clear the connections, provided no legacy alert depends on the Event Grid connection.",
+          "description": "Account-level cost-control telemetry connections. Application Insights is optional.\nBudget notifications use their own Event Grid connection IDs; account-level Event Grid configuration is not exposed or accepted by this API version.\nSet this object to null in an account update to clear the Application Insights connection. Existing legacy Event Grid configuration is preserved.",
           "x-nullable": true,
           "x-ms-mutability": [
             "read",
@@ -17593,9 +17593,9 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The enforcement action.`block` is supported.",
+          "description": "The enforcement action. Only `Block` is supported; input is case-insensitive and responses use this canonical spelling.",
           "enum": [
-            "block"
+            "Block"
           ],
           "x-ms-enum": {
             "modelAsString": false
@@ -17634,9 +17634,9 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The enforcement action.`block` is supported.",
+          "description": "The enforcement action. Only `Block` is supported; input is case-insensitive and responses use this canonical spelling.",
           "enum": [
-            "block"
+            "Block"
           ],
           "x-ms-enum": {
             "modelAsString": false
@@ -17689,7 +17689,7 @@
     },
     "CostControlConnections": {
       "type": "object",
-      "description": "Account-level telemetry connections. Application Insights is optional and may be removed while controls exist.\nBudget notifications specify their own Event Grid destinations; the account Event Grid connection remains a fallback for existing legacy alerts.",
+      "description": "Account-level telemetry connections. Application Insights is optional and may be removed while controls exist.\nBudget notifications specify their own Event Grid destinations; account-level Event Grid configuration is not exposed or accepted by this API version.",
       "properties": {
         "appInsightsConnectionId": {
           "type": "string",
@@ -17703,25 +17703,12 @@
               }
             ]
           }
-        },
-        "eventGridConnectionId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The full resource ID of the fallback Event Grid connection for legacy alerts. It cannot be removed while legacy alerts depend on it.",
-          "x-nullable": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.CognitiveServices/accounts/connections"
-              }
-            ]
-          }
         }
       }
     },
     "CostControlFilter": {
       "type": "object",
-      "description": "Traffic selection using exactly one of tags or and. Tag names must be unique across the complete expression.\nFilters narrow the owner's scope and cannot extend a project-owned control to another project.",
+      "description": "Traffic selection using exactly one of tags or and. Tag names must be unique across the complete expression.\nFilters narrow the owner's scope and cannot extend a project-owned control to another project.\nValues within one tag are alternatives; conditions are combined with AND. An agent selection requires an explicit project filter selecting exactly one project, including for project-owned controls.",
       "properties": {
         "tags": {
           "$ref": "#/definitions/CostControlTagFilter",
@@ -17742,11 +17729,11 @@
       "type": "string",
       "description": "Built-in request attributes supported for traffic filtering.",
       "enum": [
-        "agentResourceId",
+        "agent",
         "identityObjectId",
         "sessionId",
-        "projectId",
-        "deploymentId",
+        "project",
+        "deployment",
         "tokenType"
       ],
       "x-ms-enum": {
@@ -17754,9 +17741,9 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "AgentResourceId",
-            "value": "agentResourceId",
-            "description": "The Foundry agent resource ID."
+            "name": "Agent",
+            "value": "agent",
+            "description": "The Foundry agent name within the single explicitly selected Foundry project."
           },
           {
             "name": "IdentityObjectId",
@@ -17769,14 +17756,14 @@
             "description": "The Foundry session ID."
           },
           {
-            "name": "ProjectId",
-            "value": "projectId",
-            "description": "The Foundry project resource ID."
+            "name": "Project",
+            "value": "project",
+            "description": "The Foundry project name within the owning account."
           },
           {
-            "name": "DeploymentId",
-            "value": "deploymentId",
-            "description": "The deployment resource ID within the owning account."
+            "name": "Deployment",
+            "value": "deployment",
+            "description": "The deployment name within the owning account."
           },
           {
             "name": "TokenType",
@@ -17797,7 +17784,7 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/CostControlGroupingName",
-          "description": "The built-in attribute to group by. projectId is available only for account-owned controls.",
+          "description": "The built-in attribute to group by. project is available only for account-owned controls.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -17824,8 +17811,8 @@
       "type": "string",
       "description": "Built-in attributes supported for additional budget partitioning.",
       "enum": [
-        "projectId",
-        "agentResourceId",
+        "project",
+        "agent",
         "identityObjectId",
         "sessionId"
       ],
@@ -17834,14 +17821,14 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "ProjectId",
-            "value": "projectId",
+            "name": "Project",
+            "value": "project",
             "description": "Creates an independent counter for each Foundry project in the owning account."
           },
           {
-            "name": "AgentResourceId",
-            "value": "agentResourceId",
-            "description": "Creates an independent counter for each Foundry agent resource ID."
+            "name": "Agent",
+            "value": "agent",
+            "description": "Creates an independent counter for each Foundry agent, qualified by its Foundry project so identical agent names in different projects do not share counters."
           },
           {
             "name": "IdentityObjectId",
@@ -17971,7 +17958,7 @@
     },
     "CostControlPatch": {
       "type": "object",
-      "description": "A partial budget update. An empty properties object is a no-op and retains the entity tag.",
+      "description": "A partial budget update. An empty properties object is a no-op and retains the entity tag for a valid existing selection.\nA historical agent selection spanning multiple projects requires an explicit valid filter replacement or filter: null; unrelated or no-op edits return a compatibility conflict.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CostControlPatchProperties",
@@ -18058,7 +18045,7 @@
         },
         "grouping": {
           "type": "array",
-          "description": "Optional additional partitioning of consumption. Omission or an empty array uses one counter for the owning account or Foundry project.\nResponses omit owner-default grouping. A project-owned control cannot explicitly group by projectId.",
+          "description": "Optional additional partitioning of consumption. Omission or an empty array uses one counter for the owning account or Foundry project.\nResponses omit owner-default grouping. A project-owned control cannot explicitly group by project.",
           "maxItems": 1,
           "items": {
             "$ref": "#/definitions/CostControlGrouping"
@@ -18141,7 +18128,7 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/CostControlFilterName",
-          "description": "The built-in attribute: agentResourceId, identityObjectId, sessionId, projectId, deploymentId, or tokenType.\nAgent resource IDs use /subscriptions/{subscriptionId}/accounts/{accountName}/project/{projectName}/agent/{agentName}.\nprojectId values are Foundry project resource IDs. deploymentId values must be deployment resource IDs in the owning account.\ntokenType accepts input, output, or both for a Tokens budget; omission measures overall tokens."
+          "description": "The built-in attribute: agent, identityObjectId, sessionId, project, deployment, or tokenType.\nResource selectors use owner-scoped short names, not Azure resource IDs. Agent selections require an explicit project filter selecting exactly one project; multiple agents in that project are supported.\nA project-owned control can select only its owning project. Project, agent, and deployment values must be plain names of 1-64 characters without leading or trailing whitespace, control characters, path/query/fragment separators, percent signs, or . and .. path segments.\ntokenType accepts input, output, or both for a Tokens budget; omission measures overall tokens."
         },
         "operator": {
           "type": "string",
@@ -18155,9 +18142,8 @@
         },
         "values": {
           "type": "array",
-          "description": "Between one and twenty nonempty, non-whitespace strings to match.",
+          "description": "One or more nonempty, non-whitespace strings to match. There is no per-tag value-count limit; the serialized cost-control definition must not exceed 32 KiB.",
           "minItems": 1,
-          "maxItems": 20,
           "items": {
             "$ref": "#/definitions/CostControlFilterValue"
           }

@@ -53,19 +53,29 @@
             "and": [
               {
                 "tags": {
-                  "name": "projectId",
+                  "name": "project",
                   "operator": "In",
                   "values": [
-                    "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/foundry-resource-group/providers/Microsoft.CognitiveServices/accounts/foundry-account/projects/production"
+                    "production"
                   ]
                 }
               },
               {
                 "tags": {
-                  "name": "deploymentId",
+                  "name": "agent",
                   "operator": "In",
                   "values": [
-                    "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/foundry-resource-group/providers/Microsoft.CognitiveServices/accounts/foundry-account/deployments/customer-support-model"
+                    "customer-support",
+                    "order-assistant"
+                  ]
+                }
+              },
+              {
+                "tags": {
+                  "name": "deployment",
+                  "operator": "In",
+                  "values": [
+                    "customer-support-model"
                   ]
                 }
               }
@@ -83,7 +93,7 @@
           "providerProperties": {
             "actions": {
               "stopRequests": {
-                "type": "block",
+                "type": "Block",
                 "thresholdType": "Percentage",
                 "threshold": 90,
                 "operator": "GreaterThanOrEqualTo"
