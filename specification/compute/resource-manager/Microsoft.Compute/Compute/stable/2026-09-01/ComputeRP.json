@@ -6049,6 +6049,9 @@
           "Create a scale set with DiskEncryptionSet resource in os disk and data disk.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithDiskEncryptionSetResource.json"
           },
+          "Create a scale set with Extended Scheduled Events enabled.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithExtendedScheduledEvents.json"
+          },
           "Create a scale set with Fpga Network Interfaces.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_FromWithFpgaNetworkInterface.json"
           },
@@ -11280,6 +11283,9 @@
           "Create a vm with DiskEncryptionSet resource id in the os disk and data disk.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithDiskEncryptionSetResource.json"
           },
+          "Create a vm with Extended Scheduled Events enabled.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithExtendedScheduledEvents.json"
+          },
           "Create a vm with Host Encryption using encryptionAtHost property.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithEncryptionAtHost.json"
           },
@@ -16053,6 +16059,16 @@
         ]
       }
     },
+    "ExtendedScheduledEvents": {
+      "type": "object",
+      "description": "Specifies Extended Scheduled Events related configurations. Extended Scheduled Events give longer deadlines to respond to platform-initiated maintenance.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Specifies whether to opt in to Extended Scheduled Events. Opting in makes the resource eligible for Extended Scheduled Events; they take effect only while the resource runs on supported hardware. Otherwise the setting is stored and has no effect, and the request still succeeds."
+        }
+      }
+    },
     "ExtensionFeatureMetadata": {
       "type": "object",
       "description": "Additional metadata about extension features, including compliance and capability tags.",
@@ -19881,6 +19897,10 @@
         "allInstancesDown": {
           "$ref": "#/definitions/AllInstancesDown",
           "description": "The configuration parameters used while creating AllInstancesDown scheduled event setting creation."
+        },
+        "extendedScheduledEvents": {
+          "$ref": "#/definitions/ExtendedScheduledEvents",
+          "description": "The configuration parameters used to opt in to Extended Scheduled Events."
         }
       }
     },
