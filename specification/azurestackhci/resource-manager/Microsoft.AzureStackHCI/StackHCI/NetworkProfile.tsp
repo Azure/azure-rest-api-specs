@@ -14,7 +14,7 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Network Profile details - child resource of Cluster.
  */
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2027_01_15_preview)
 @parentResource(Cluster)
 model NetworkProfile
   is Azure.ResourceManager.ProxyResource<NetworkProfileProperties> {
@@ -29,7 +29,7 @@ model NetworkProfile
 /**
  * CRUD operations for Network Profiles.
  */
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2027_01_15_preview)
 @armResourceOperations
 interface NetworkProfiles {
   /**

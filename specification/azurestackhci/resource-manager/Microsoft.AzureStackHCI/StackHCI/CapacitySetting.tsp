@@ -20,7 +20,7 @@ namespace Microsoft.AzureStackHCI;
  * conventional singleton name `default`. The v1 API supports GET (single), LIST,
  * PUT (createOrUpdate), PATCH (for Day N policy edits), and DELETE.
  */
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2027_01_15_preview)
 @parentResource(Cluster)
 model CapacitySetting
   is Azure.ResourceManager.ProxyResource<CapacitySettingProperties> {
@@ -36,7 +36,7 @@ model CapacitySetting
  * Operations for Capacity Settings. v1 exposes GET (single), LIST by cluster,
  * PUT (createOrUpdate), PATCH for Day N capacity policy edits, and DELETE.
  */
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2027_01_15_preview)
 @armResourceOperations
 interface CapacitySettings {
   /**
