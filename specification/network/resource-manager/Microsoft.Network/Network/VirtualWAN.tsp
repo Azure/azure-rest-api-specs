@@ -18,7 +18,7 @@ namespace Microsoft.Network;
 @featureFile(Features.virtualWAN)
 model VirtualWAN
   is TrackedResourceWithSettableIdOptionalLocationInstance<VirtualWanProperties> {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Preserve the released virtualWANName path parameter casing."
   @visibility(Lifecycle.Read)
   @path
   @key("VirtualWANName")
