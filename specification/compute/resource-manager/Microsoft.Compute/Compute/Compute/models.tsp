@@ -5701,10 +5701,40 @@ union VirtualMachineProtectionType {
 }
 
 /**
- * Specifies platform-managed protection configuration for a virtual machine.
+ * The provisioning state of a virtual machine protection resource.
+ */
+// Instantiate the union to inline its schema so readOnly is not ignored beside a $ref.
+@added(Versions.v2026_09_01)
+union VirtualMachineProtectionProvisioningState<TerminalStates = ResourceProvisioningState> {
+  string,
+  TerminalStates,
+
+  /** The protection configuration is being created. */
+  Creating: "Creating",
+
+  /** The protection configuration is being updated. */
+  Updating: "Updating",
+
+  /** The virtual machine is being deleted. */
+  Deleting: "Deleting",
+}
+
+/**
+ * Specifies the properties of a virtual machine protection resource.
  */
 @added(Versions.v2026_09_01)
-model VirtualMachineProtectionConfiguration {
+model VirtualMachineProtectionProperties {
+  /**
+   * The protection type. Customers can set this property to None or Basic. AzureBackup is set only by the Azure Backup service.
+   */
+  protectionType: VirtualMachineProtectionType;
+
+  /**
+   * The provisioning state, which only appears in the response.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: VirtualMachineProtectionProvisioningState<ResourceProvisioningState>;
+
   /**
    * The resource ID of the restore point collection associated with the virtual machine. This collection holds the periodic restore points created by the platform. Please refer to https://aka.ms/BasicVMProtection/PeriodicRestorePoints for more details.
    */
@@ -5724,30 +5754,6 @@ model VirtualMachineProtectionConfiguration {
       type: "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems";
     }
   ]>;
-}
-
-/**
- * Specifies the properties of a virtual machine protection resource.
- */
-@added(Versions.v2026_09_01)
-model VirtualMachineProtectionProperties {
-  /**
-   * The protection type. Customers can set this property to None or Basic. AzureBackup is set only by the Azure Backup service.
-   */
-  protectionType: VirtualMachineProtectionType;
-
-  /**
-   * The provisioning state, which only appears in the response.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency."
-  @visibility(Lifecycle.Read)
-  provisioningState?: string;
-
-  /**
-   * The platform-managed protection configuration.
-   */
-  @visibility(Lifecycle.Read)
-  configuration?: VirtualMachineProtectionConfiguration;
 }
 
 /**

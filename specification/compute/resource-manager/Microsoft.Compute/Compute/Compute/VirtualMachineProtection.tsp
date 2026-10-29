@@ -48,11 +48,17 @@ interface VirtualMachineProtections {
   /**
    * Creates or updates the protection configuration of a virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "CRP returns 200 for synchronous updates and 202 for asynchronous updates to the always-addressable protection singleton."
   @added(Versions.v2026_09_01)
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     VirtualMachineProtection,
-    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineProtection> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response =
+      | ArmResourceUpdatedResponse<VirtualMachineProtection>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = VirtualMachineProtection> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: VirtualMachineProtection;
+        })
   >;
 }
 
