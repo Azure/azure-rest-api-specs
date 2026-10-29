@@ -70,6 +70,16 @@ interface ServerFarmSiloResources {
   >;
 
   /**
+   * Updates only the tags of an App Service plan silo. Silo configuration and provisioning state are not modified.
+   */
+  @patch(#{ implicitOptionality: false })
+  updateServerFarmSilo is ArmCustomPatchSync<
+    ServerFarmSilo,
+    PatchModel = Azure.ResourceManager.Foundations.TagsUpdateModel<ServerFarmSilo>,
+    Error = DefaultErrorResponse
+  >;
+
+  /**
    * Deletes a silo for an App Service plan.
    */
   deleteServerFarmSilo is ArmResourceDeleteWithoutOkAsync<

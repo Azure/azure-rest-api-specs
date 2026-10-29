@@ -66,6 +66,16 @@ interface SiteSiloResources {
   >;
 
   /**
+   * Updates only the tags of a Web App silo. Silo configuration and provisioning state are not modified.
+   */
+  @patch(#{ implicitOptionality: false })
+  updateSiteSilo is ArmCustomPatchSync<
+    SiteSilo,
+    PatchModel = Azure.ResourceManager.Foundations.TagsUpdateModel<SiteSilo>,
+    Error = DefaultErrorResponse
+  >;
+
+  /**
    * Deletes a silo for a Web App.
    */
   deleteSiteSilo is ArmResourceDeleteWithoutOkAsync<

@@ -6613,6 +6613,67 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "ServerFarmSiloResources_UpdateServerFarmSilo",
+        "tags": [
+          "AppServicePlans"
+        ],
+        "description": "Updates only the tags of an App Service plan silo. Silo configuration and provisioning state are not modified.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siloName",
+            "in": "path",
+            "description": "The name of the ServerFarmSilo",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-]{1,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerFarmSiloTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerFarmSilo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update tags on an App Service plan silo": {
+            "$ref": "./examples/ServerFarmSiloResources_UpdateServerFarmSilo.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "ServerFarmSiloResources_DeleteServerFarmSilo",
         "tags": [
@@ -19662,6 +19723,67 @@
           "final-state-schema": "#/definitions/SiteSilo"
         },
         "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SiteSiloResources_UpdateSiteSilo",
+        "tags": [
+          "WebApps"
+        ],
+        "description": "Updates only the tags of a Web App silo. Silo configuration and provisioning state are not modified.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siloName",
+            "in": "path",
+            "description": "The name of the SiteSilo",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-]{1,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteSiloTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteSilo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update tags on a web app silo": {
+            "$ref": "./examples/SiteSiloResources_UpdateSiteSilo.json"
+          }
+        }
       },
       "delete": {
         "operationId": "SiteSiloResources_DeleteSiteSilo",
@@ -51630,6 +51752,19 @@
         }
       }
     },
+    "ServerFarmSiloTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ServerFarmSilo resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ServerFarmSiloVnetIntegration": {
       "type": "object",
       "description": "Subnet integration and allocation information for an App Service plan silo.",
@@ -53894,6 +54029,19 @@
       "required": [
         "primaryLocation"
       ]
+    },
+    "SiteSiloTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in SiteSilo resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "SiteSourceControl": {
       "type": "object",

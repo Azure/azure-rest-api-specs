@@ -131,12 +131,6 @@ directive:
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}/virtualNetworkIntegrations"].get.responses["200"].schema.properties
     reason: This GET returns a nonpaged inspection result, not a collection of addressable resources. GetSiloVnetIntegrationsAsync delegates to GetVnetIntegrationsFromServerFarm, which returns ResponseMessageEnvelope<List<SwiftVirtualNetwork>> with subnet entries under properties. Replacing the deployed envelope with value and nextLink would change the service contract. This suppression is limited to this operation's response properties.
-  - suppress: TrackedResourcePatchOperation
-    from: openapi.json
-    where:
-      - $.definitions.ServerFarmSilo
-      - $.definitions.SiteSilo
-    reason: These silo resources use the tracked-resource envelope, but their currently implemented update operation is PUT. The silo surface does not currently register PATCH, unlike ordinary sites and App Service plans. This temporary, resource-scoped exception requires ARM review approval; it avoids advertising an unsupported PATCH operation. Tag-update behavior and future PATCH support require separate service alignment.
   - suppress: LocationMustHaveXmsMutability
     from: openapi.json
     where: $.definitions.ServerFarmSiloVnetIntegrationsResult.properties.location
