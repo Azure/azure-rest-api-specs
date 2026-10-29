@@ -16,6 +16,9 @@ parameters:
   - name: Use1ESOfficial
     type: boolean
     default: true
+  - name: AllowAzureStorage
+    type: boolean
+    default: false
 
 extends:
   ${{ if and(parameters.Use1ESOfficial, eq(variables['System.TeamProject'], 'internal')) }}:
@@ -25,6 +28,8 @@ extends:
   parameters:
     settings:
       skipBuildTagsForGitHubPullRequests: true
+      ${{ if and(parameters.AllowAzureStorage, parameters.Use1ESOfficial, eq(variables['System.TeamProject'], 'internal'), ne(variables['Build.Reason'], 'PullRequest'), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/'))) }}:
+        networkIsolationPolicy: DefaultDeny, CFSClean, CFSClean2, CFSClean3, AzureStorage
     sdl:
       # Every azure-sdk-for-* repo's 1es-redirect.yml points sourceAnalysisPool at Windows
       # regardless of the main build's OS - it's a separate job, and Windows-only SDL tools

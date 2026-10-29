@@ -16,6 +16,12 @@ schedules:
         - main
     always: true
 
+parameters:
+  - name: publishDashboardResults
+    displayName: Publish trusted main results to the eval dashboard
+    type: boolean
+    default: true
+
 variables:
   # Managed-pool image selection (LINUXPOOL/LINUXVMIMAGE). Repo-local.
   - template: /eng/pipelines/templates/variables/image.yml
@@ -26,6 +32,8 @@ variables:
 extends:
   template: /eng/common/pipelines/templates/stages/archetype-eval.yml
   parameters:
+    createDashboardBundle: true
+    publishDashboardResults: ${{ parameters.publishDashboardResults }}
     mcpSetupTemplate: /eng/pipelines/templates/steps/eval-mcp-setup.yml
     TestType: mock
     vallyRoot: .github/skills
