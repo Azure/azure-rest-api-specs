@@ -82,8 +82,7 @@ interface AgentInsightMonitors {
   @route("/agent_insight_monitors")
   create is FoundryDataPlaneOperation<
     {
-      /** The monitor to create. */
-      @body monitor: AgentInsightMonitorCreate;
+      ...AgentInsightMonitorCreate;
     },
     AgentInsightMonitorCreatedResponse
   >;
@@ -122,8 +121,7 @@ interface AgentInsightMonitors {
       @header("Content-Type")
       content_type: "application/merge-patch+json";
 
-      /** The monitor fields to update. */
-      @body monitor: AgentInsightMonitorUpdate;
+      ...AgentInsightMonitorUpdate;
     },
     OkResponse & AgentInsightMonitor
   >;
@@ -245,8 +243,7 @@ interface AgentInsightMonitors {
       @header("Content-Type")
       content_type: "application/merge-patch+json";
 
-      /** The insight fields to update. */
-      @body update: AgentInsightUpdate;
+      ...AgentInsightUpdate;
     },
     OkResponse & AgentInsight
   >;

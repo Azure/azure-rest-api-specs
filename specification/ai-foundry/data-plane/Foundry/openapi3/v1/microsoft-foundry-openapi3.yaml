@@ -262,7 +262,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AgentInsightMonitorCreate'
-        description: The monitor to create.
   /agent_insight_monitors/{monitor_id}:
     get:
       operationId: AgentInsightMonitors_get
@@ -380,7 +379,6 @@ paths:
           application/merge-patch+json:
             schema:
               $ref: '#/components/schemas/AgentInsightMonitorUpdate'
-        description: The monitor fields to update.
   /agent_insight_monitors/{monitor_id}/insights:
     get:
       operationId: AgentInsightMonitors_listInsights
@@ -610,7 +608,6 @@ paths:
           application/merge-patch+json:
             schema:
               $ref: '#/components/schemas/AgentInsightUpdate'
-        description: The insight fields to update.
   /agent_insight_monitors/{monitor_id}/runs:
     post:
       operationId: AgentInsightMonitors_createRun
