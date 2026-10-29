@@ -29,19 +29,12 @@ steps:
 
       echo "Overlaying azure-typespec-assessment skill from: $BRANCH_REF"
       git fetch origin "$BRANCH_REF"
-      rm -rf .github/skills/azure-typespec-assessment/SKILL.md \
-             .github/skills/azure-typespec-assessment/references
-      git checkout FETCH_HEAD -- \
+      git restore --source FETCH_HEAD --worktree -- \
         .github/skills/azure-typespec-assessment/SKILL.md \
-        .github/skills/azure-typespec-assessment/references
+        .github/skills/azure-typespec-assessment/references \
+        .github/skills/azure-typespec-assessment/scripts \
+        .github/skills/azure-typespec-assessment/package.json
       echo "Skill source overlaid from $BRANCH_REF"
     displayName: "Overlay skill source from SkillBranch (if set)"
     env:
       SKILL_BRANCH: $(SkillBranch)
-
-  - script: |
-      CACHE="$(Build.SourcesDirectory)/artifacts/specs-cache/azure-rest-api-specs"
-      git clone --depth 1 --filter=blob:none --sparse \
-        https://github.com/Azure/azure-rest-api-specs.git "$CACHE"
-      git -C "$CACHE" sparse-checkout set specification/chaos
-    displayName: "Prepare sparse specification repository"
