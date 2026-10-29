@@ -42,10 +42,6 @@ model ProxyConfig {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   proxyPool: Record<ProxyEndpoint>;
 
-  @doc("The proxy selection mode, fixed for each session. Enabled selects proxy endpoint randomly per hostname pattern; Disabled selects the lowest numeric priority.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  rotation?: EnablementStatus = EnablementStatus.Disabled;
-
   @doc("The hostname patterns that bypass the proxy and goes through internet directly. Set this to null to delete the existing value.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @maxItems(50)

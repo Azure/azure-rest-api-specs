@@ -2397,36 +2397,6 @@
             "create"
           ]
         },
-        "rotation": {
-          "type": "string",
-          "description": "The proxy selection mode, fixed for each session. Enabled selects proxy endpoint randomly per hostname pattern; Disabled selects the lowest numeric priority.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnablementStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "The feature is Enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "The feature is Disabled."
-              }
-            ]
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
         "bypass": {
           "type": "array",
           "description": "The hostname patterns that bypass the proxy and goes through internet directly. Set this to null to delete the existing value.",
@@ -2544,36 +2514,6 @@
           "description": "The named proxy endpoints. At most 5 distinct proxy endpoints are allowed excluding the required 'default-proxy'. Set a 'proxy-endpoint-name':null to delete the existing record.",
           "additionalProperties": {
             "$ref": "#/definitions/ProxyEndpointUpdate"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "rotation": {
-          "type": "string",
-          "description": "The proxy selection mode, fixed for each session. Enabled selects proxy endpoint randomly per hostname pattern; Disabled selects the lowest numeric priority.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnablementStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "The feature is Enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "The feature is Disabled."
-              }
-            ]
           },
           "x-ms-mutability": [
             "read",
@@ -3221,7 +3161,7 @@
         "browserProxy": {
           "type": "string",
           "description": "The browser proxy enablement status for the workspace.",
-          "default": "Disabled",
+          "default": "Enabled",
           "enum": [
             "Enabled",
             "Disabled"

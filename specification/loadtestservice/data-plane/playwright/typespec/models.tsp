@@ -67,7 +67,7 @@ model Workspace {
   @doc("The browser proxy enablement status for the workspace.")
   @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read)
-  browserProxy?: EnablementStatus = EnablementStatus.Disabled;
+  browserProxy?: EnablementStatus = EnablementStatus.Enabled;
 }
 
 @doc("The linked Azure Key Vault and managed identity for the playwright workspace.")
