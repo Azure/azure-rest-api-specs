@@ -1,5 +1,6 @@
 import { minimatch } from "minimatch";
 import { getChangedFiles } from "../../shared/src/changed-files.ts";
+import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { inlineCode } from "../../shared/src/markdown.ts";
 import { CoreLogger } from "./core-logger.ts";
 import type { GitHubScriptArgs, WebhookEvent } from "./github.ts";
@@ -34,6 +35,7 @@ const ALLOWED_AUTHORS = new Set(
     "xirzec",
   ].map((author) => author.toLowerCase()),
 );
+const APPROVAL_LABEL = "protected-files-approved";
 const PROTECTED_PATHS = [
   ".gitignore",
   "cspell.json",
@@ -66,10 +68,42 @@ function matchesAny(file: string, patterns: string[]): boolean {
   );
 }
 
+async function getProtectedFilesApprover(
+  { github, context, core }: GitHubScriptArgs,
+  issueNumber: number,
+): Promise<string | undefined> {
+  const params = { ...context.repo, issue_number: issueNumber, per_page: PER_PAGE_MAX };
+  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, params);
+  if (!labels.some((label) => label.name.toLowerCase() === APPROVAL_LABEL)) {
+    return undefined;
+  }
+
+  const events = await github.paginate(github.rest.issues.listEvents, params);
+  const application = events.findLast(
+    (event) =>
+      (event.event === "labeled" || event.event === "unlabeled") &&
+      "label" in event &&
+      event.label?.name.toLowerCase() === APPROVAL_LABEL,
+  );
+  const approver = application?.actor?.login;
+  if (application?.event !== "labeled" || !approver) {
+    core.warning(`Cannot verify who applied '${APPROVAL_LABEL}'; ignoring the label.`);
+    return undefined;
+  }
+  if (!ALLOWED_AUTHORS.has(approver.toLowerCase())) {
+    core.warning(
+      `Account '${approver}' is not allowed to approve protected files; ignoring '${APPROVAL_LABEL}'.`,
+    );
+    return undefined;
+  }
+  return approver;
+}
+
 export async function checkProtectedFiles({
+  github,
   context,
   core,
-}: Pick<GitHubScriptArgs, "context" | "core">): Promise<ProtectedFilesResult> {
+}: GitHubScriptArgs): Promise<ProtectedFilesResult> {
   if (context.eventName !== "pull_request") {
     throw new Error(`Unsupported event for Protected Files: '${context.eventName}'`);
   }
@@ -88,7 +122,14 @@ export async function checkProtectedFiles({
     };
   }
 
+  const baseSha = payload.pull_request.base?.sha;
+  const mergeSha = context.sha;
+  if (!baseSha || !mergeSha) {
+    throw new Error("Protected Files requires pull request base and merge SHAs");
+  }
   const changedFiles = await getChangedFiles({
+    baseCommitish: baseSha,
+    headCommitish: mergeSha,
     // Include both sides of renames so moving a protected file still fails.
     gitOptions: ["--no-renames"],
     logger: new CoreLogger(core),
@@ -108,21 +149,34 @@ export async function checkProtectedFiles({
     };
   }
 
+  const approver = await getProtectedFilesApprover(
+    { github, context, core },
+    payload.pull_request.number,
+  );
+  if (approver) {
+    core.info(`Protected file changes approved by '${approver}' via '${APPROVAL_LABEL}'`);
+    return {
+      conclusion: "success",
+      title: "Protected file changes approved",
+      summary: `Account ${inlineCode(approver)} applied ${inlineCode(APPROVAL_LABEL)} to approve changes to protected files.`,
+    };
+  }
+
   const messages: string[] = [];
   for (const file of protectedFiles) {
     const message = matchesAny(file, SYNCED_PATHS)
       ? `File '${file}' is synced from Azure/azure-sdk-tools. Remove this change from your PR and make the change in Azure/azure-sdk-tools instead.`
-      : `File '${file}' is repository-managed and can only be changed by allowed repository maintainers. Remove this change from your PR. If a tooling change is needed, open an issue for the repository maintainers.`;
+      : `File '${file}' is repository-managed and can only be changed by allowed repository maintainers. Remove this change from your PR or ask an allowed maintainer to apply '${APPROVAL_LABEL}'.`;
     core.error(message, { file });
     const summary = `- ${inlineCode(file)}: ${
       matchesAny(file, SYNCED_PATHS)
         ? "Synced from Azure/azure-sdk-tools; make the change in that repository."
-        : "Repository-managed file; only allowed repository maintainers may change it."
+        : `Repository-managed file; an allowed maintainer must author the PR or apply ${inlineCode(APPROVAL_LABEL)}.`
     }`;
     messages.push(summary);
   }
   core.setFailed(
-    "Only allowed repository maintainers may change protected files. See https://aka.ms/ci-fix#protected-files.",
+    `Protected file changes require an allowed PR author or '${APPROVAL_LABEL}' applied by an allowed maintainer. See https://aka.ms/ci-fix#protected-files.`,
   );
   return {
     conclusion: "failure",
@@ -130,6 +184,7 @@ export async function checkProtectedFiles({
     summary:
       `${messages.join("\n")}\n\n` +
       "See the [Protected Files guide](https://aka.ms/ci-fix#protected-files). " +
-      "Only allowlisted PR authors may change protected files, even in maintenance-only PRs.",
+      `An allowlisted maintainer may authorize this PR by applying ${inlineCode(APPROVAL_LABEL)}. ` +
+      "The check verifies who most recently applied the label; a review approval or rerun alone does not bypass it.",
   };
 }
