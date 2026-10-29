@@ -3307,12 +3307,12 @@ model SecurityProfile {
  */
 model UefiSettings {
   /**
-   * Specifies whether secure boot should be enabled on the virtual machine. Minimum api-version: 2020-12-01.
+   * Specifies whether secure boot should be enabled on the virtual machine. Minimum api-version: 2020-12-01. Secure boot will be enabled by default for Trusted Launch virtual machines starting api-version 2026-09-01. You can disable secure boot by explicitly setting this property to false.
    */
   secureBootEnabled?: boolean;
 
   /**
-   * Specifies whether vTPM should be enabled on the virtual machine. Minimum api-version: 2020-12-01.
+   * Specifies whether vTPM should be enabled on the virtual machine. Minimum api-version: 2020-12-01. vTPM will be enabled by default for Trusted Launch virtual machines starting api-version 2026-09-01. You can disable vTPM by explicitly setting this property to false.
    */
   vTpmEnabled?: boolean;
 }
