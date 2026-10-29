@@ -9448,14 +9448,6 @@ paths:
         Returns recorded changes from completed evaluator version writes.
         Historical backfill and diagnostic calculation jobs are not included.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -9568,9 +9560,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Evaluators
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
   /evaluators/{name}/versions:
     get:
       operationId: Evaluators_listVersions
@@ -49643,9 +49632,6 @@ components:
           type: boolean
           description: Whether more diagnostic entries are available.
       description: A flat page of recorded evaluator changes and computed health snapshots.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     CompletionMessageToolCallChunk:
       type: object
       required:
@@ -51035,9 +51021,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: A diagnostic change recording functional evaluator changes outside individual dimensions.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DeleteAgentResponse:
       type: object
       required:
@@ -51327,9 +51310,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: A diagnostic change recording the addition of a rubric dimension.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DimensionRemovedDiagnosticChange:
       type: object
       required:
@@ -51363,9 +51343,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: A diagnostic change recording the removal of a rubric dimension.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DimensionUpdatedDiagnosticChange:
       type: object
       required:
@@ -51403,9 +51380,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: A diagnostic change recording an update to a rubric dimension.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DispatchRoutineRequest:
       type: object
       properties:
@@ -53471,9 +53445,6 @@ components:
           dimension_removed: '#/components/schemas/DimensionRemovedDiagnosticChange'
           definition_updated: '#/components/schemas/DefinitionUpdatedDiagnosticChange'
       description: The shared fields for recorded evaluator changes and health snapshots.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDiagnosticActor:
       type: object
       required:
@@ -53486,9 +53457,6 @@ components:
           type: string
           description: A stable opaque principal or service identifier, when available.
       description: The actor responsible for an evaluator lineage diagnostic.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDiagnosticActorType:
       anyOf:
         - type: string
@@ -53497,9 +53465,6 @@ components:
             - user
             - service
       description: The type of actor responsible for an evaluator lineage diagnostic.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDiagnosticChangeType:
       anyOf:
         - type: string
@@ -53514,9 +53479,6 @@ components:
             - not_present_in_generated_rubric
             - generation_completed
       description: Known machine-readable classifications for evaluator diagnostic changes.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDiagnosticType:
       anyOf:
         - type: string
@@ -53529,9 +53491,6 @@ components:
             - definition_updated
             - health_computed
       description: The supported evaluator diagnostic change shapes.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorFieldChange:
       type: object
       required:
@@ -53552,9 +53511,6 @@ components:
           unevaluatedProperties: {}
           description: The resulting snapshot, mapping the exact `field` path to its JSON value. The mapped value may be a scalar, array, object, or null.
       description: A change to one functional evaluator field.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationArtifacts:
       type: object
       required:
@@ -53774,9 +53730,6 @@ components:
             $ref: '#/components/schemas/EvaluatorHealthRedundantPair'
           description: Pairs of dimension indices flagged as redundant by the existing computation.
       description: A snapshot of existing rubric-health computations. Missing components remain null and are not replaced with zeros.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorHealthRedundantPair:
       type: array
       items:
@@ -53785,18 +53738,12 @@ components:
       minItems: 2
       maxItems: 2
       description: Two zero-based indices into the health snapshot's dimension_ids array.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorHealthScore:
       type: number
       format: double
       minimum: 0
       maximum: 1
       description: A normalized rubric-health score produced by the existing computation.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorMetric:
       type: object
       properties:
@@ -53973,9 +53920,6 @@ components:
       maxLength: 10
       pattern: ^[1-9][0-9]*$
       description: A published evaluator version number represented as a decimal integer string.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorVersionUpdate:
       type: object
       properties:
@@ -54681,9 +54625,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: Health computed during evaluator generation and retained as a historical snapshot. GET does not recompute these values after later edits.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     HostedAgentDefinition:
       type: object
       required:
@@ -90893,9 +90834,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: A diagnostic change recording the creation of an evaluator version.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     VersionIndicator:
       type: object
       required:

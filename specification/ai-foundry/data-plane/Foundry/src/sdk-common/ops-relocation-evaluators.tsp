@@ -31,8 +31,7 @@ namespace Azure.AI.Projects {
 namespace Azure.AI.Projects.Beta {
   interface Evaluators {}
 
-  // Preview diagnostics and custom code-based blob-upload operations remain in the .beta sub-client.
-  @@clientLocation(Azure.AI.Projects.Evaluators.listDiagnostics, Evaluators);
+  // Custom code-based blob-upload operations remain in the .beta sub-client.
   @@clientLocation(Azure.AI.Projects.Evaluators.startPendingUpload, Evaluators);
   @@clientLocation(Azure.AI.Projects.Evaluators.getCredentials, Evaluators);
 }

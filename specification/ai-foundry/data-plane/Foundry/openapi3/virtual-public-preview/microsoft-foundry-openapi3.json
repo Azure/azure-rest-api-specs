@@ -14036,18 +14036,6 @@
         "description": "Returns immutable publication lineage for the specified evaluator.\n\nTime, evaluator-version, dimension, and type filters are intersected.\nReturns recorded changes from completed evaluator version writes.\nHistorical backfill and diagnostic calculation jobs are not included.",
         "parameters": [
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
             "name": "name",
             "in": "path",
             "required": true,
@@ -14201,12 +14189,7 @@
         },
         "tags": [
           "Evaluators"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/evaluators/{name}/versions": {
@@ -43274,12 +43257,7 @@
             "description": "Whether more diagnostic entries are available."
           }
         },
-        "description": "A flat page of recorded evaluator changes and computed health snapshots.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A flat page of recorded evaluator changes and computed health snapshots."
       },
       "CompletionMessageToolCallChunk": {
         "type": "object",
@@ -45161,12 +45139,7 @@
             "$ref": "#/components/schemas/EvaluatorDiagnostic"
           }
         ],
-        "description": "A diagnostic change recording functional evaluator changes outside individual dimensions.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A diagnostic change recording functional evaluator changes outside individual dimensions."
       },
       "DeleteAgentResponse": {
         "type": "object",
@@ -45576,12 +45549,7 @@
             "$ref": "#/components/schemas/EvaluatorDiagnostic"
           }
         ],
-        "description": "A diagnostic change recording the addition of a rubric dimension.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A diagnostic change recording the addition of a rubric dimension."
       },
       "DimensionRemovedDiagnosticChange": {
         "type": "object",
@@ -45627,12 +45595,7 @@
             "$ref": "#/components/schemas/EvaluatorDiagnostic"
           }
         ],
-        "description": "A diagnostic change recording the removal of a rubric dimension.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A diagnostic change recording the removal of a rubric dimension."
       },
       "DimensionUpdatedDiagnosticChange": {
         "type": "object",
@@ -45683,12 +45646,7 @@
             "$ref": "#/components/schemas/EvaluatorDiagnostic"
           }
         ],
-        "description": "A diagnostic change recording an update to a rubric dimension.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A diagnostic change recording an update to a rubric dimension."
       },
       "DispatchRoutineRequest": {
         "type": "object",
@@ -48220,12 +48178,7 @@
             "definition_updated": "#/components/schemas/DefinitionUpdatedDiagnosticChange"
           }
         },
-        "description": "The shared fields for recorded evaluator changes and health snapshots.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The shared fields for recorded evaluator changes and health snapshots."
       },
       "EvaluatorDiagnosticActor": {
         "type": "object",
@@ -48242,12 +48195,7 @@
             "description": "A stable opaque principal or service identifier, when available."
           }
         },
-        "description": "The actor responsible for an evaluator lineage diagnostic.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The actor responsible for an evaluator lineage diagnostic."
       },
       "EvaluatorDiagnosticActorType": {
         "anyOf": [
@@ -48262,12 +48210,7 @@
             ]
           }
         ],
-        "description": "The type of actor responsible for an evaluator lineage diagnostic.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The type of actor responsible for an evaluator lineage diagnostic."
       },
       "EvaluatorDiagnosticChangeType": {
         "anyOf": [
@@ -48288,12 +48231,7 @@
             ]
           }
         ],
-        "description": "Known machine-readable classifications for evaluator diagnostic changes.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Known machine-readable classifications for evaluator diagnostic changes."
       },
       "EvaluatorDiagnosticType": {
         "anyOf": [
@@ -48312,12 +48250,7 @@
             ]
           }
         ],
-        "description": "The supported evaluator diagnostic change shapes.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The supported evaluator diagnostic change shapes."
       },
       "EvaluatorFieldChange": {
         "type": "object",
@@ -48343,12 +48276,7 @@
             "description": "The resulting snapshot, mapping the exact `field` path to its JSON value. The mapped value may be a scalar, array, object, or null."
           }
         },
-        "description": "A change to one functional evaluator field.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A change to one functional evaluator field."
       },
       "EvaluatorGenerationArtifacts": {
         "type": "object",
@@ -48651,12 +48579,7 @@
             "description": "Pairs of dimension indices flagged as redundant by the existing computation."
           }
         },
-        "description": "A snapshot of existing rubric-health computations. Missing components remain null and are not replaced with zeros.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A snapshot of existing rubric-health computations. Missing components remain null and are not replaced with zeros."
       },
       "EvaluatorHealthRedundantPair": {
         "type": "array",
@@ -48666,24 +48589,14 @@
         },
         "minItems": 2,
         "maxItems": 2,
-        "description": "Two zero-based indices into the health snapshot's dimension_ids array.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Two zero-based indices into the health snapshot's dimension_ids array."
       },
       "EvaluatorHealthScore": {
         "type": "number",
         "format": "double",
         "minimum": 0,
         "maximum": 1,
-        "description": "A normalized rubric-health score produced by the existing computation.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A normalized rubric-health score produced by the existing computation."
       },
       "EvaluatorMetric": {
         "type": "object",
@@ -48928,12 +48841,7 @@
         "minLength": 1,
         "maxLength": 10,
         "pattern": "^[1-9][0-9]*$",
-        "description": "A published evaluator version number represented as a decimal integer string.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A published evaluator version number represented as a decimal integer string."
       },
       "EvaluatorVersionUpdate": {
         "type": "object",
@@ -49989,12 +49897,7 @@
             "$ref": "#/components/schemas/EvaluatorDiagnostic"
           }
         ],
-        "description": "Health computed during evaluator generation and retained as a historical snapshot. GET does not recompute these values after later edits.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Health computed during evaluator generation and retained as a historical snapshot. GET does not recompute these values after later edits."
       },
       "HostedAgentDefinition": {
         "type": "object",
@@ -100222,12 +100125,7 @@
             "$ref": "#/components/schemas/EvaluatorDiagnostic"
           }
         ],
-        "description": "A diagnostic change recording the creation of an evaluator version.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A diagnostic change recording the creation of an evaluator version."
       },
       "VersionIndicator": {
         "type": "object",

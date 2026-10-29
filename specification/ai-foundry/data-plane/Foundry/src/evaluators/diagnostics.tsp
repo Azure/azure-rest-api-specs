@@ -1,23 +1,15 @@
 import "./models.tsp";
 import "../common/servicepatterns.tsp";
 
-using TypeSpec.OpenAPI;
-
 namespace Azure.AI.Projects;
-
-const EvaluatorDiagnosticsRequiredPreviews = #{
-  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
-};
 
 @doc("A published evaluator version number represented as a decimal integer string.")
 @minLength(1)
 @maxLength(10)
 @pattern("^[1-9][0-9]*$")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 scalar EvaluatorVersionNumber extends string;
 
 @doc("The type of actor responsible for an evaluator lineage diagnostic.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 union EvaluatorDiagnosticActorType {
   string,
 
@@ -29,7 +21,6 @@ union EvaluatorDiagnosticActorType {
 }
 
 @doc("The actor responsible for an evaluator lineage diagnostic.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model EvaluatorDiagnosticActor {
   @doc("The type of actor.")
   type: EvaluatorDiagnosticActorType;
@@ -39,7 +30,6 @@ model EvaluatorDiagnosticActor {
 }
 
 @doc("Known machine-readable classifications for evaluator diagnostic changes.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 union EvaluatorDiagnosticChangeType {
   string,
 
@@ -69,7 +59,6 @@ union EvaluatorDiagnosticChangeType {
 }
 
 @doc("The supported evaluator diagnostic change shapes.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 union EvaluatorDiagnosticType {
   string,
 
@@ -94,7 +83,6 @@ union EvaluatorDiagnosticType {
 
 @doc("The shared fields for recorded evaluator changes and health snapshots.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model EvaluatorDiagnostic {
   @doc("The stable server-assigned diagnostic identifier.")
   @minLength(1)
@@ -117,14 +105,12 @@ model EvaluatorDiagnostic {
 }
 
 @doc("Actor properties shared by recorded evaluator diagnostics without introducing another discriminator level.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model EvaluatorDiagnosticActorProperties {
   @doc("The authenticated user or service responsible for the lineage event.")
   actor: EvaluatorDiagnosticActor;
 }
 
 @doc("A flat page of recorded evaluator changes and computed health snapshots.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model CompletedEvaluatorDiagnosticsPage {
   @doc("The recorded evaluator diagnostics.")
   @maxItems(100)
@@ -147,17 +133,14 @@ model CompletedEvaluatorDiagnosticsPage {
 @doc("A normalized rubric-health score produced by the existing computation.")
 @minValue(0)
 @maxValue(1)
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 scalar EvaluatorHealthScore extends float64;
 
 @doc("Two zero-based indices into the health snapshot's dimension_ids array.")
 @minItems(2)
 @maxItems(2)
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model EvaluatorHealthRedundantPair is Array<int32>;
 
 @doc("A snapshot of existing rubric-health computations. Missing components remain null and are not replaced with zeros.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model EvaluatorHealthMetrics {
   @doc("The number of rubric dimensions used by the computation.")
   @minValue(0)
@@ -198,7 +181,6 @@ model EvaluatorHealthMetrics {
 }
 
 @doc("Health computed during evaluator generation and retained as a historical snapshot. GET does not recompute these values after later edits.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model HealthComputedDiagnosticChange extends EvaluatorDiagnostic {
   ...EvaluatorDiagnosticActorProperties;
   type: EvaluatorDiagnosticType.health_computed;
@@ -212,7 +194,6 @@ model HealthComputedDiagnosticChange extends EvaluatorDiagnostic {
 }
 
 @doc("A change to one functional evaluator field.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model EvaluatorFieldChange {
   @doc("A stable path identifying the changed field.")
   @minLength(1)
@@ -226,7 +207,6 @@ model EvaluatorFieldChange {
 }
 
 @doc("A diagnostic change recording the creation of an evaluator version.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model VersionCreatedDiagnosticChange extends EvaluatorDiagnostic {
   ...EvaluatorDiagnosticActorProperties;
   type: EvaluatorDiagnosticType.version_created;
@@ -240,7 +220,6 @@ model VersionCreatedDiagnosticChange extends EvaluatorDiagnostic {
 }
 
 @doc("A diagnostic change recording the addition of a rubric dimension.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model DimensionAddedDiagnosticChange extends EvaluatorDiagnostic {
   ...EvaluatorDiagnosticActorProperties;
   type: EvaluatorDiagnosticType.dimension_added;
@@ -260,7 +239,6 @@ model DimensionAddedDiagnosticChange extends EvaluatorDiagnostic {
 }
 
 @doc("A diagnostic change recording an update to a rubric dimension.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model DimensionUpdatedDiagnosticChange extends EvaluatorDiagnostic {
   ...EvaluatorDiagnosticActorProperties;
   type: EvaluatorDiagnosticType.dimension_updated;
@@ -283,7 +261,6 @@ model DimensionUpdatedDiagnosticChange extends EvaluatorDiagnostic {
 }
 
 @doc("A diagnostic change recording the removal of a rubric dimension.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model DimensionRemovedDiagnosticChange extends EvaluatorDiagnostic {
   ...EvaluatorDiagnosticActorProperties;
   type: EvaluatorDiagnosticType.dimension_removed;
@@ -303,7 +280,6 @@ model DimensionRemovedDiagnosticChange extends EvaluatorDiagnostic {
 }
 
 @doc("A diagnostic change recording functional evaluator changes outside individual dimensions.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model DefinitionUpdatedDiagnosticChange extends EvaluatorDiagnostic {
   ...EvaluatorDiagnosticActorProperties;
   type: EvaluatorDiagnosticType.definition_updated;

@@ -70,9 +70,7 @@ interface Evaluators {
   @route("/evaluators/{name}/diagnostics")
   @get
   @list
-  @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-  listDiagnostics is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  listDiagnostics is FoundryDataPlaneOperation<
     {
       @doc("The evaluator name.")
       @path
