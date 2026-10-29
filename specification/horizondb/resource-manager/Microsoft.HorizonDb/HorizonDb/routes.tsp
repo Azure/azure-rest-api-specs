@@ -179,13 +179,23 @@ interface PrivateEndpointConnections {
     PrivateEndpointConnectionResource
   >;
 
-  @doc("Approves or rejects an existing private endpoint connection. Approval requires the parent Cluster to contain at least one Pool. An approval attempt when the Cluster has no Pools fails with 409 Conflict and the stable error code PrivateEndpointRequiresPool. Rejection remains allowed when the Cluster has no Pools so that existing connections can be cleaned up.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The service supports HTTP 202 for asynchronous private endpoint connection approval or rejection in addition to the existing HTTP 200 and 201 responses. This response is retained to match the service contract."
+  @doc("Approves or rejects an existing private endpoint connection. Approval requires the parent Cluster to contain at least one Pool. An approval attempt when the Cluster has no Pools fails with 409 Conflict and the stable error code PrivateEndpointRequiresPool. Rejection remains allowed when the Cluster has no Pools so that existing connections can be cleaned up. An HTTP 202 response indicates that the operation was accepted and is still in progress; poll to completion using the returned polling headers.")
   @sharedRoute
   approveOrReject is PrivateEndpointOperations.CreateOrReplaceAsync<
     Cluster,
     PrivateEndpointConnectionResource,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnectionResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response =
+      | ArmResourceUpdatedResponse<PrivateEndpointConnectionResource>
+      | ArmResourceCreatedResponse<
+          PrivateEndpointConnectionResource,
+          ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnectionResource> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnectionResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   @doc("Deletes a private endpoint connection.")
