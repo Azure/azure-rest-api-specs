@@ -1693,11 +1693,17 @@
           "Create a vault with cross-tenant access protection enabled": {
             "$ref": "./examples/createVaultWithCrossTenantAccessProtection.json"
           },
+          "Create or update a vault by fully replacing the user-assigned identity set": {
+            "$ref": "./examples/createVaultWithIdentity.json"
+          },
           "Create or update a vault with network acls": {
             "$ref": "./examples/createVaultWithNetworkAcls.json"
           },
           "Create or update a vault with protection key wrapping": {
             "$ref": "./examples/createVaultWithProtectionKeyWrapping.json"
+          },
+          "Remove all user-assigned identities and their certificates from a vault using PUT": {
+            "$ref": "./examples/createVaultWithoutIdentity.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1760,11 +1766,23 @@
           }
         },
         "x-ms-examples": {
+          "Add or retain a user-assigned identity on a vault": {
+            "$ref": "./examples/updateVaultWithIdentity.json"
+          },
           "Configure protection key wrapping on an existing vault": {
             "$ref": "./examples/updateVaultWithProtectionKeyWrapping.json"
           },
           "Enable cross-tenant access protection on an existing vault": {
             "$ref": "./examples/updateVaultWithCrossTenantAccessProtection.json"
+          },
+          "Preserve existing user-assigned identities by omitting identity from PATCH": {
+            "$ref": "./examples/updateVaultPreservingIdentity.json"
+          },
+          "Remove all user-assigned identities and their certificates from a vault using PATCH": {
+            "$ref": "./examples/removeVaultWithIdentity.json"
+          },
+          "Remove only the specified user-assigned identity using a null PATCH entry": {
+            "$ref": "./examples/updateVaultRemoveIdentity.json"
           },
           "Update an existing vault": {
             "$ref": "./examples/updateVault.json"
@@ -6010,6 +6028,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity"
         }
       },
       "required": [
@@ -6103,6 +6125,10 @@
       "type": "object",
       "description": "Parameters for creating or updating a vault",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity assigned to the vault."
+        },
         "location": {
           "type": "string",
           "description": "The supported Azure location where the key vault should be created."
@@ -6149,6 +6175,10 @@
       "type": "object",
       "description": "Parameters for creating or updating a vault",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity assigned to the vault."
+        },
         "tags": {
           "type": "object",
           "description": "The tags that will be assigned to the key vault.",
