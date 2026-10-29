@@ -140,6 +140,17 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/costControls/{costControlName}"].patch.parameters[6].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/costControls/{costControlName}"].patch.parameters[7].schema.properties.properties
+  - code: AvoidAdditionalProperties
+    reason: >-
+      Cost-control notifications and provider actions are dictionaries keyed by customer-defined names, following the Azure Budget notifications pattern.
+      Each value has an explicit notification or action schema; PATCH also accepts null entries to delete named items.
+      Replacing these dictionaries with fixed properties or arrays would change the public REST contract.
+    from: cognitiveservices.json
+    where:
+      - $.definitions.CostControlProperties.properties.notifications
+      - $.definitions.CostControlPatchProperties.properties.notifications
+      - $.definitions.CostControlProviderProperties.properties.actions
+      - $.definitions.CostControlProviderPropertiesPatch.properties.actions
   - code: DeleteResponseCodes
     reason: Behavior is align with other existing API for this RP
     where:
