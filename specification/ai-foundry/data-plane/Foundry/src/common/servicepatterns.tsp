@@ -124,6 +124,7 @@ union FoundryFeaturesOptInKeys {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "API review requires this input-only opt-in contract to accept only the declared feature keys; arbitrary string opt-ins are not supported."
+@doc("Opt-in keys scoped to telephony binding operations.")
 union TelephonyBindingOptInKeys {
   @doc("Selects the status-less telephony binding contract.")
   voice_agents_v2_preview: "VoiceAgents=V2Preview",
