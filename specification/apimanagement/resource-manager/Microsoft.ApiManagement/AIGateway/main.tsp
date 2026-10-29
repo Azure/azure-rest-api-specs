@@ -1,0 +1,42 @@
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "./AIGatewayResource.tsp";
+import "./client.tsp";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using Azure.ResourceManager;
+using TypeSpec.Versioning;
+
+@armProviderNamespace
+@service(#{ title: "AIGatewayClient" })
+@versioned(Versions)
+namespace Microsoft.ApiManagement;
+
+/** The available API versions. */
+enum Versions {
+  /** The 2026-09-01-preview API version. */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_09_01_preview: "2026-09-01-preview",
+
+  /** The 2026-11-01 API version. */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_11_01: "2026-11-01",
+}
+
+@armResourceOperations(#{ omitTags: true })
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      ErrorResponse
+    > {}
+
+@@doc(
+  Operations.list,
+  "Lists all of the available REST API operations of the Microsoft.ApiManagement provider."
+);
+@@tag(Operations.list, "AIGatewayOperations");

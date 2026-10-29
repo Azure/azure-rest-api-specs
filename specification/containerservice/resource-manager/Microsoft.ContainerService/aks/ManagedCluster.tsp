@@ -323,7 +323,7 @@ interface ManagedClusters {
        * ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-      @added(Versions.v2026_07_02_preview)
+      @added(Versions.v2026_08_02_preview)
       @query("ignore-pod-disruption-budget")
       `ignore-pod-disruption-budget`?: boolean;
     }
@@ -376,6 +376,7 @@ interface ManagedClusters {
        * server fqdn type for credentials to be returned
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listClusterAdminCredentials POST contract uses server-fqdn in the query; preserve wire compatibility."
       @query("server-fqdn")
       `server-fqdn`?: string;
     }
@@ -395,12 +396,14 @@ interface ManagedClusters {
        * server fqdn type for credentials to be returned
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listClusterUserCredentials POST contract uses server-fqdn in the query; preserve wire compatibility."
       @query("server-fqdn")
       `server-fqdn`?: string;
 
       /**
        * Only apply to AAD clusters, specifies the format of returned kubeconfig. Format 'azure' will return azure auth-provider kubeconfig; format 'exec' will return exec format kubeconfig, which requires kubelogin binary in the path.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listClusterUserCredentials POST contract uses format in the query; preserve wire compatibility."
       @query("format")
       format?: Format;
     }
@@ -420,6 +423,7 @@ interface ManagedClusters {
        * server fqdn type for credentials to be returned
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listClusterMonitoringUserCredentials POST contract uses server-fqdn in the query; preserve wire compatibility."
       @query("server-fqdn")
       `server-fqdn`?: string;
     }
@@ -572,7 +576,7 @@ interface ManagedClusters {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Keeping both 202 and 204 responses for passing the lintdiff validator. See https://github.com/Azure/azure-openapi-validator/issues/809"
   @tag("ManagedClusters")
-  @added(Versions.v2026_07_02_preview)
+  @added(Versions.v2026_08_02_preview)
   rebalanceLoadBalancers is ArmResourceActionAsync<
     ManagedCluster,
     RebalanceLoadBalancersRequestBody,
@@ -625,7 +629,7 @@ interface ManagedClusters {
   @list
   @get
   @action("operations")
-  @added(Versions.v2026_07_02_preview)
+  @added(Versions.v2026_08_02_preview)
   operationStatusResultList is ArmResourceActionSync<
     ManagedCluster,
     void,
@@ -638,7 +642,7 @@ interface ManagedClusters {
   @tag("ManagedClusters")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/operations/{operationId}")
-  @added(Versions.v2026_07_02_preview)
+  @added(Versions.v2026_08_02_preview)
   operationStatusResultGet is ManagedClusterOps.ActionSync<
     ManagedCluster,
     void,

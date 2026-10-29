@@ -2,13 +2,17 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Account.tsp";
+import "./ConnectionName.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
+using Microsoft.CognitiveServicesConstraints;
 
 namespace Microsoft.CognitiveServices;
 
@@ -40,12 +44,12 @@ model ConnectionPropertiesV2BasicResource is Azure.ResourceManager.ProxyResource
   ConnectionPropertiesV2,
   false
 > {
-  ...ResourceNameParameter<
-    Resource = ConnectionPropertiesV2BasicResource,
-    KeyName = "connectionName",
-    SegmentName = "connections",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-  >;
+  /** Friendly name of the connection */
+  @key("connectionName")
+  @segment("connections")
+  @path
+  @typeChangedFrom(Versions.v2026_09_15_preview, LegacyConnectionName)
+  name: ConnectionName;
 }
 
 @armResourceOperations
@@ -71,8 +75,8 @@ interface ConnectionPropertiesV2BasicResourceOps
         @path
         @segment("connections")
         @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-        connectionName: string,
+        @typeChangedFrom(Versions.v2026_09_15_preview, LegacyConnectionName)
+        connectionName: ConnectionName,
       },
       ResourceName = "CognitiveServicesConnection"
     > {}
@@ -155,8 +159,8 @@ interface ProjectConnectionOps
         @path
         @segment("connections")
         @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-        connectionName: string,
+        @typeChangedFrom(Versions.v2026_09_15_preview, LegacyConnectionName)
+        connectionName: ConnectionName,
       },
       ResourceName = "CognitiveServicesProjectConnection"
     > {}
