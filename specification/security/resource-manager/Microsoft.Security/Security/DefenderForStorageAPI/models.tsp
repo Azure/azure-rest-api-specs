@@ -49,6 +49,29 @@ union AutomatedResponseType {
 }
 
 /**
+ * Indicates whether this resource's Defender for Storage settings are managed by a higher MDC enforcement scope and which component is managing them.
+ */
+@added(Versions.v2026_03_01_preview)
+union ManagedByType {
+  string,
+
+  /**
+   * The resource's Defender for Storage settings are not managed by a higher enforcement scope.
+   */
+  None: "None",
+
+  /**
+   * The resource's Defender for Storage settings are managed by Microsoft Defender XDR.
+   */
+  MicrosoftDefenderXDR: "MicrosoftDefenderXDR",
+
+  /**
+   * The resource's Defender for Storage settings are managed by the subscription-level settings enforcer.
+   */
+  SubscriptionSettingsEnforcer: "SubscriptionSettingsEnforcer",
+}
+
+/**
  * List of Defender for Storage settings.
  */
 model DefenderForStorageSettingList {
@@ -127,6 +150,13 @@ model DefenderForStorageSettingProperties {
    * Indicates whether the settings defined for this storage account should override the settings defined for the subscription.
    */
   overrideSubscriptionLevelSettings?: boolean;
+
+  /**
+   * Indicates whether this resource's Defender for Storage settings are managed by a higher MDC enforcement scope and which component is managing them. When set to a value other than 'None', the resource-level settings become read-only and can only be modified by the managing component. Possible values: 'None' (not managed), 'MicrosoftDefenderXDR' (managed by Microsoft Defender XDR), 'SubscriptionSettingsEnforcer' (managed by subscription-level settings enforcer).
+   */
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  managedBy?: ManagedByType;
 }
 
 /**
@@ -158,6 +188,22 @@ model MalwareScanningProperties {
   automatedResponse?: AutomatedResponseType = AutomatedResponseType.None;
 
   /**
+   * Optional. Resource id of the scanner resource (e.g., securityOperator or dataScanner) whose identity will be used for malware scanning.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The scanner resource id is nullable in the API contract to allow explicitly clearing a previously configured scanner."
+  @added(Versions.v2026_03_01_preview)
+  scannerResourceId?:
+    | Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.Security/securityOperators";
+        },
+        {
+          type: "Microsoft.Security/dataScanners";
+        }
+      ]>
+    | null;
+
+  /**
    * Upon failure or partial success. Additional data describing Malware Scanning enable/disable operation.
    */
   @visibility(Lifecycle.Read)
@@ -176,7 +222,7 @@ model OnUploadProperties {
   /**
    * Defines the max GB to be scanned per Month. Set to -1 if no capping is needed. If not specified, the default value is -1.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the JSON property name 'capGBPerMonth' published in 2025-09-01-preview; changing its casing would break compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The existing wire property is named capGBPerMonth; changing the capitalization of GB would break clients."
   capGBPerMonth?: int32;
 
   /**
@@ -189,7 +235,7 @@ model OnUploadProperties {
   /**
    * Optional. Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no filters are configured, not just omits the field."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no filters are configured, rather than only omitting the field."
   filters?: OnUploadFilters | null;
 }
 
@@ -203,19 +249,19 @@ model OnUploadFilters {
    * Exclude entire containers: Use prefix of container names you want to exclude without a trailing `/`.
    * Exclude a single container: Add a trailing slash `/` after the container name to avoid excluding other containers with similar prefixes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no prefixes are configured, not just omits the field."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no prefixes are configured, rather than only omitting the field."
   excludeBlobsWithPrefix?: string[] | null;
 
   /**
    * Optional. A list of suffixes to exclude from on-upload malware scanning. Suffixes match only the end of blob names, and should be used for file extensions or blob name endings only.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no suffixes are configured, not just omits the field."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no suffixes are configured, rather than only omitting the field."
   excludeBlobsWithSuffix?: string[] | null;
 
   /**
    * Optional. Specifies the maximum size in bytes for blobs to be scanned. This parameter accepts a single positive integer value. Blobs larger than this value will be excluded from scanning.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no size limit is configured, not just omits the field."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no size limit is configured, rather than only omitting the field."
   excludeBlobsLargerThan?: int64 | null;
 }
 
@@ -227,6 +273,22 @@ model SensitiveDataDiscoveryProperties {
    * Indicates whether Sensitive Data Discovery should be enabled.
    */
   isEnabled?: boolean;
+
+  /**
+   * Optional. Resource id of the scanner resource (e.g., securityOperator or dataScanner) whose identity will be used for sensitive data discovery.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The scanner resource id is nullable in the API contract to allow explicitly clearing a previously configured scanner."
+  @added(Versions.v2026_03_01_preview)
+  scannerResourceId?:
+    | Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.Security/securityOperators";
+        },
+        {
+          type: "Microsoft.Security/dataScanners";
+        }
+      ]>
+    | null;
 
   /**
    * Upon failure or partial success. Additional data describing Sensitive Data Discovery enable/disable operation.
@@ -266,7 +328,7 @@ union MalwareScanStatus {
 /**
  * Properties of a malware scan operation.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "MalwareScan is a read-only resource created via the startMalwareScan action (no PUT/PATCH). Its lifecycle is modeled by scanStatus; an ARM provisioningState is not applicable."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "MalwareScan is created by the startMalwareScan action and has no PUT or PATCH operation. Its lifecycle is reported by scanStatus rather than provisioningState."
 model MalwareScanProperties {
   /**
    * The identifier of the scan.
@@ -317,7 +379,7 @@ model ScanSummary {
    * The estimated cost of the scan. Only available for a scan which has terminated.
    * This property is deprecated and retained for backward compatibility.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the JSON response property name 'estimatedScanCostUSD' published in 2026-01-01-preview; changing its casing would break compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The existing wire property is named estimatedScanCostUSD; changing the capitalization of USD would break clients."
   #deprecated "This property is deprecated and retained for backward compatibility."
   estimatedScanCostUSD?: float64;
 }
@@ -349,7 +411,7 @@ model BlobsScanSummary {
   /**
    * The number of gigabytes of data that were scanned.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the JSON response property name 'scannedBlobsInGB' published in 2025-09-01-preview; changing its casing would break compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The existing wire property is named scannedBlobsInGB; changing the capitalization of GB would break clients."
   scannedBlobsInGB?: float64;
 }
 
@@ -380,7 +442,7 @@ model FilesScanSummary {
   /**
    * The number of gigabytes of data that were scanned.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the JSON response property name 'scannedFilesInGB' published in 2025-09-01-preview; changing its casing would break compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The existing wire property is named scannedFilesInGB; changing the capitalization of GB would break clients."
   scannedFilesInGB?: float64;
 }
 

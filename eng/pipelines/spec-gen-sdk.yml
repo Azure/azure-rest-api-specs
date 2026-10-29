@@ -1,35 +1,35 @@
 parameters:
   - name: SdkRepoBranch
     type: string
-    default: 'main'
-    displayName: 'SDK repository branch'
+    default: "main"
+    displayName: "SDK repository branch"
   - name: ConfigType
     type: string
     values:
-      - 'TypeSpec'
-      - 'OpenAPI'
-    default: 'TypeSpec'
-    displayName: 'API specification type'
+      - "TypeSpec"
+      - "OpenAPI"
+    default: "TypeSpec"
+    displayName: "API specification type"
   - name: ConfigPath
     type: string
-    default: 'specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml'
-    displayName: 'Path to API specification file (TypeSpec/OpenAPI)'
+    default: "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml"
+    displayName: "Path to API specification file (TypeSpec/OpenAPI)"
   - name: ApiVersion
     type: string
-    default: 'none'
-    displayName: 'API version'
+    default: "none"
+    displayName: "API version"
   - name: SdkReleaseType
     type: string
     values:
-      - 'none'
-      - 'beta'
-      - 'stable'
-    default: 'none'
-    displayName: 'SDK release type'
+      - "none"
+      - "beta"
+      - "stable"
+    default: "none"
+    displayName: "SDK release type"
   - name: CreatePullRequest
     type: boolean
     default: false
-    displayName: 'Create SDK pull request'
+    displayName: "Create SDK pull request"
   - name: ForceCreateEvenWithFailures
     type: boolean
     default: false
@@ -37,18 +37,18 @@ parameters:
   - name: ReleasePlanWorkItemId
     type: number
     default: 0
-    displayName: 'Release plan work item id'
+    displayName: "Release plan work item id"
   - name: TriggerSource
     type: string
-    default: 'unspecified'
-    displayName: 'Trigger source'
+    default: "unspecified"
+    displayName: "Trigger source"
 
 trigger: none
 
 extends:
   template: /eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml
   parameters:
-    SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
+    SpecRepoUrl: "https://github.com/$(Build.Repository.Name)"
     SdkRepoUrl: $(SdkRepoUrl)
     SdkRepoBranch: ${{ parameters.SdkRepoBranch }}
     ConfigType: ${{ parameters.ConfigType }}

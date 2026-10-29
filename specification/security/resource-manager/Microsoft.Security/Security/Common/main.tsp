@@ -128,8 +128,10 @@ model OperationStatus {
   message?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The name of a Microsoft.Security integration or Defender for Storage setting.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The member names preserve the existing SDK names for Microsoft.Security settings, including uppercase integration identifiers and the lowercase 'current' setting."
 union SettingName {
   string,
 

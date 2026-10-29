@@ -314,7 +314,7 @@ export async function getCommitChangedFiles(params: {
 }
 
 /**
- * Resolve PR number associated with a commit SHA.
+ * Resolve the PR merged at this commit, not another PR that merely contains it.
  */
 export async function getAssociatedPrNumber(params: {
   octokit: OctokitLike;
@@ -333,7 +333,11 @@ export async function getAssociatedPrNumber(params: {
     commit_sha: commitSha,
   });
 
-  return response.data[0]?.number;
+  return response.data.find(
+    (pullRequest) =>
+      pullRequest.merged_at &&
+      pullRequest.merge_commit_sha?.toLowerCase() === commitSha.toLowerCase(),
+  )?.number;
 }
 
 /**
@@ -364,13 +368,13 @@ export function findTspConfigDir(relativeFilePath: string, workspace: string): s
 }
 
 /**
- * Extracts and validates apiVersion and sdkType from TypeSpec metadata.
+ * Extracts the API version from TypeSpec metadata.
  */
 export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
   apiVersion: string;
-  sdkType: "stable" | "preview";
 } {
-  const versionAndTypeMap = new Map<string, Set<string>>();
+  const apiVersions = new Set<string>();
+  let hasPackage = false;
 
   for (const [, langConfigs] of Object.entries(metadata.languages)) {
     if (!Array.isArray(langConfigs)) {
@@ -379,50 +383,31 @@ export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
 
     for (const config of langConfigs) {
       const apiVersion = config.apiVersion;
-      const sdkType = config.sdkType;
       const packageName = config.packageName;
+      hasPackage ||= Boolean(packageName);
 
-      if (!apiVersion || !sdkType || !packageName) {
+      if (!apiVersion || !packageName) {
         console.warn(
-          `Skipping language config with missing apiVersion, sdkType, or packageName: ${JSON.stringify(config)}`,
+          `Skipping language config with missing apiVersion or packageName: ${JSON.stringify(config)}`,
         );
         continue;
       }
 
       console.log(`language config: ${JSON.stringify(config)}`);
-      if (!versionAndTypeMap.has(apiVersion)) {
-        versionAndTypeMap.set(apiVersion, new Set());
-      }
-      versionAndTypeMap.get(apiVersion)!.add(sdkType);
+      apiVersions.add(apiVersion);
     }
   }
 
-  if (versionAndTypeMap.size === 0) {
+  if (apiVersions.size === 0 && !hasPackage) {
     throw new Error("No valid language configurations found in TypeSpec metadata");
   }
 
-  const apiVersion = Array.from(versionAndTypeMap.keys())[0];
-  const sdkTypes = versionAndTypeMap.get(apiVersion)!;
-
-  // Validate that all language configurations have consistent sdkType
-  if (sdkTypes.size > 1) {
-    const types = Array.from(sdkTypes).join(", ");
-    const message = `TypeSpec code generator output suggests that this project contains conflicting SDK release type based on TypeSpec configuration (found: ${types}) hence a release plan cannot be created automatically. Create a release plan using azsdk agent.`;
-    console.error(message);
-    throw new Error(message);
-  }
-
-  if (sdkTypes.size === 0) {
-    throw new Error("No sdkType information found in TypeSpec metadata");
-  }
-
-  const sdkType = Array.from(sdkTypes)[0] as "stable" | "preview";
-  return { apiVersion, sdkType };
+  return { apiVersion: Array.from(apiVersions)[0] ?? "" };
 }
 
 /**
  * Gets TypeSpec project version info using TypeSpec metadata emitter.
- * Runs the metadata emitter on the given project and extracts version/sdkType info.
+ * Runs the metadata emitter and derives preview status from the API version suffix.
  * @param tspProjectAbsPath Absolute path to TypeSpec project
  * @param tspProjectRelPath Relative path to TypeSpec project (for logging)
  * @returns TypeSpecProjectInfo with apiVersion and isPreview, or throws error
@@ -433,11 +418,11 @@ export async function getTypeSpecProjectVersionFromMetadata(
 ): Promise<TypeSpecProjectInfo> {
   try {
     const metadata = await generateTypeSpecMetadata(tspProjectAbsPath);
-    const { apiVersion, sdkType } = resolveTypeSpecMetadata(metadata);
-    const isPreview = sdkType === "preview";
+    const { apiVersion } = resolveTypeSpecMetadata(metadata);
+    const isPreview = apiVersion.endsWith("-preview");
 
     console.log(
-      `Found TypeSpec project at ${tspProjectRelPath} with API version ${apiVersion} (${sdkType})`,
+      `Found TypeSpec project at ${tspProjectRelPath} with API version ${apiVersion} (${isPreview ? "preview" : "stable"})`,
     );
 
     return {

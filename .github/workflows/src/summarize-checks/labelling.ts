@@ -8,6 +8,10 @@ import type { Core } from "../github.ts";
 import * as z from "zod";
 import { includesEvery, includesNone } from "../../../shared/src/array.ts";
 import {
+  TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
+  TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL,
+} from "../label.ts";
+import {
   brchTsg,
   diagramTsg,
   href,
@@ -471,7 +475,8 @@ export function processImpactAssessment(
     labelContext.present,
   );
   suppressionReviewRequiredLabel.shouldBePresent =
-    impactAssessment.suppressionReviewRequired || false;
+    (impactAssessment.resourceManagerRequired && impactAssessment.suppressionReviewRequired) ||
+    false;
 
   const rpassReviewRequiredLabel = new Label("RPaaS", labelContext.present);
   rpassReviewRequiredLabel.shouldBePresent = impactAssessment.rpaasChange || false;
@@ -561,7 +566,7 @@ export function processImpactAssessment(
 }
 
 function isReleaseBranch(branchName: string): boolean {
-  const branchRegex = [/main/, /RPSaaSMaster/, /release*/, /ARMCoreRPDev/];
+  const branchRegex = [/^main$/, /^RPSaaSMaster$/, /^release.*$/, /^ARMCoreRPDev$/];
   return branchRegex.some((b) => b.test(branchName));
 }
 
@@ -791,6 +796,35 @@ const rulesPri0dataPlane: RequiredLabelRule[] = [
 ];
 
 const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
+  {
+    precedence: 0,
+    anyPrerequisiteLabels: ["ARMModelingReviewRequired"],
+    anyRequiredLabels: [],
+    troubleshootingGuide: wrapInArmReviewMessage(
+      "This PR has <code>ARMModelingReviewRequired</code> label. " +
+        "This means it is introducing a new Resource Provider namespace or a new resource type. " +
+        "New RPs and new resource types require a discussion with the ARM Modeling Review team before merging.<br/><br/>" +
+        "<b>If you haven't discussed yet:</b><br/>" +
+        "Please join the ARM API Modeling Review Office Hours - a drop-in, first-come, first-served session (no booking required):<br/>" +
+        "<ul>" +
+        "<li><b>When:</b> Every Tuesday and Thursday, 9:30–10:30 AM PST</li>" +
+        `<li><b>How to join:</b> ${href("Join via Teams", "https://aka.ms/apimodelingreview")}</li>` +
+        `<li><b>Required Doc:</b> Please use the ${href("RP Agent", "https://aka.ms/rpagent")} and run the <code>/model-rp-contract</code> skill. ` +
+        "The agent can interview you or review your design docs, then generate a resource contract, design rationale, " +
+        "deployment prerequisites, and <b>an HTML review package with open questions. For Office Hours:</b> bring the HTML " +
+        "review package, and we'll use the open questions as the basis for discussion so we can focus on design decisions " +
+        "and gaps instead of starting from scratch. You can provide feedback using: <code>/rp-agent-feedback</code> or " +
+        `${href("RP Agent Feedback", "https://aka.ms/rpagent/feedback")}.</li>` +
+        `<li>For more details refer: ${href("API Review Workflow | ARM Wiki", "https://armwiki.azurewebsites.net/rp_onboarding/process/api_review.html#arm-api-modeling-review-office-hours")}</li>` +
+        "</ul>" +
+        "<b>If <code>ARMModelingSignedOff</code> label was removed by automation:</b><br/>" +
+        "This happens when the lease file is not found. Please check with the PM you discussed your design with " +
+        "to confirm if the lease file PR has been merged. " +
+        "In the public repo, lease files reflect immediately after merge. " +
+        "In the private repo (<code>azure-rest-api-specs-pr</code>), lease files typically sync within a few hours, but it can take up to 1-2 business days depending on sync pipeline timing and queue load. " +
+        "Please wait for the sync to complete.",
+    ),
+  },
   // Note this rule can be circumvented e.g. by adding approval mismatching the actual problem.
   // E.g. PR may not be ready for ARM review due to pending breaking changes review, but this rule
   // can be fulfilled by adding RPaaSException instead of breaking change approval.
@@ -837,30 +871,6 @@ const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
     allPrerequisiteLabels: ["NotReadyForARMReview", brChRev],
     anyRequiredLabels: [brChRevApproval],
     troubleshootingGuide: notReadyForArmReviewReason(brChRev),
-  },
-  {
-    precedence: 0,
-    anyPrerequisiteLabels: ["ARMModelingReviewRequired"],
-    anyRequiredLabels: [],
-    troubleshootingGuide: wrapInArmReviewMessage(
-      "This PR has <code>ARMModelingReviewRequired</code> label. " +
-        "This means it is introducing a new Resource Provider namespace or a new resource type. " +
-        "New RPs and new resource types require a discussion with the ARM Modeling Review team before merging.<br/><br/>" +
-        "<b>If you haven't discussed yet:</b><br/>" +
-        "Please join the ARM API Modeling Review Office Hours - a drop-in, first-come, first-served session (no booking required):<br/>" +
-        "<ul>" +
-        "<li><b>When:</b> Every Tuesday and Thursday, 9:30-10:30 AM PST</li>" +
-        `<li><b>How to join:</b> ${href("Join via Teams", "https://aka.ms/apimodelingreview")}</li>` +
-        "<li>Come prepared with your questions and a design document (Word/PowerPoint is fine; TypeSpec/Swagger not required).</li>" +
-        `<li>For more details refer: ${href("API Review Workflow | ARM Wiki", "https://armwiki.azurewebsites.net/rp_onboarding/process/api_review.html#arm-api-modeling-review-office-hours")}</li>` +
-        "</ul>" +
-        "<b>If <code>ARMModelingSignedOff</code> label was removed by automation:</b><br/>" +
-        "This happens when the lease file is not found. Please check with the PM you discussed your design with " +
-        "to confirm if the lease file PR has been merged. " +
-        "In the public repo, lease files reflect immediately after merge. " +
-        "In the private repo (<code>azure-rest-api-specs-pr</code>), lease files typically sync within a few hours, but it can take up to 1-2 business days depending on sync pipeline timing and queue load. " +
-        "Please wait for the sync to complete.",
-    ),
   },
 ];
 
@@ -1119,6 +1129,27 @@ const rulesPri1Namespace: RequiredLabelRule[] = [
   },
 ];
 
+/** @type {RequiredLabelRule[]} */
+const rulesPri1TypeSpecSuppressions = [
+  // When typespec-suppressions-review-required is present, require typespec-suppressions-approved before
+  // merge. Mirrors the package-name-review-required/package-name-approved pattern in
+  // rulesPri1Namespace above: the "TypeSpec Suppressions - Set Status" workflow applies the
+  // typespec-suppressions-review-required prerequisite label whenever the analyzer (in checked-only
+  // mode, via check-rules.json) reports a new or changed suppression requiring review, and removes
+  // it once no checked suppressions remain. See .github/workflows/src/typespec-suppressions/.
+  {
+    precedence: 1,
+    anyPrerequisiteLabels: [TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL],
+    anyRequiredLabels: [TYPESPEC_SUPPRESSIONS_APPROVED_LABEL],
+    troubleshootingGuide:
+      "This PR introduced or changed TypeSpec suppressions that require review.<br/>" +
+      "Check the <b>TypeSpec suppressions requiring review</b> comment on this PR for the list of " +
+      "suppressions, their justifications, and source locations.<br/>" +
+      `Reviewers: apply the <code>${TYPESPEC_SUPPRESSIONS_APPROVED_LABEL}</code> label after confirming every ` +
+      "justification is acceptable.",
+  },
+];
+
 export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri0NotReadyForArmReview)
   .concat(rulesPri0ArmRpaas)
@@ -1127,6 +1158,7 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri1ArmRev)
   .concat(rulesPri1Suppressions)
   .concat(rulesPri1Namespace)
+  .concat(rulesPri1TypeSpecSuppressions)
   .concat(rulesPri2Sdk)
   .concat(rulesPri2LegacySdk)
   .concat(rulesPri3Blockers);

@@ -287,13 +287,13 @@ input-file:
   - preview/2025-10-01-preview/pricings.json
 ```
 
-### Tag: package-preview-2026-06-01-preview
+### Tag: package-preview-2026-03-01-preview
 
-These settings apply only when `--tag=package-preview-2026-06-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2026-03-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2026-06-01-preview'
+```yaml $(tag) == 'package-preview-2026-03-01-preview'
 input-file:
-  - preview/2026-06-01-preview/defenderForStorageSettings.json
+  - preview/2026-03-01-preview/defenderForStorageSettings.json
 ```
 
 ### Tag: package-preview-2026-01-01-preview
@@ -790,6 +790,19 @@ override-info:
 
 These settings apply only when `--tag=package-composite-v3` is specified on the command line.
 
+Service entitlement settings uses synchronous PUT, PATCH, and DELETE operations.
+The service completes the requested change before returning success: PUT returns
+200/201 with the completed resource, PATCH returns 200 with the completed resource,
+and DELETE returns 200/204 without a body. No settings-specific operation status or
+result polling endpoints are exposed. The provider-wide polling APIs used by other
+resource types and the shared Operations discovery API remain unchanged.
+
+GET for an individual setting and PATCH return HTTP 404 with the standard ARM error
+response when the setting does not exist. PATCH does not create a missing setting.
+These errors are represented by the OpenAPI `default` response, which references
+the shared ARM `ErrorResponse` schema. DELETE of an already-missing setting returns
+HTTP 204 without a body.
+
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
 - preview/2015-06-01-preview/locations.json
@@ -810,6 +823,7 @@ input-file:
 - preview/2026-08-01-preview/securityConnectors.json
 - stable/2025-05-04/security-Assessment.json
 - preview/2026-06-01-preview/defenderForStorageSettings.json
+- preview/2026-03-01-preview/defenderForStorageSettings.json
 - preview/2025-11-01-preview/securityConnectorsDevOps.json
 - preview/2025-10-01-preview/security-Operations.json
 - stable/2017-08-01/complianceResults.json
@@ -827,6 +841,7 @@ input-file:
 - stable/2026-01-01/privateLinks.json
 - stable/2026-08-01/datascanners.json
 - preview/2026-09-01-preview/serviceEntitlements.json
+- preview/2026-09-16-preview/serviceEntitlementSettings.json
 
 # Autorest suppressions
 suppressions:

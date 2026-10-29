@@ -15,7 +15,7 @@ namespace DefenderForStorageAPI;
 /**
  * The Defender for Storage resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "DefenderForStorageSetting is an extension resource scoped to an arbitrary storage resource via the custom `resourceId` path parameter on the operation templates. The linter mistakes the extension scope plus the explicit `settingName` parameter for multiple base-parameter decorators, but only one scope is defined."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "The legacy extension operation templates supply the resourceId scope explicitly. Retain that scope parameter instead of the inherited resourceUri parameter to preserve existing URLs and SDK parameter names."
 @extensionResource
 model DefenderForStorageSetting
   is Azure.ResourceManager.ExtensionResource<DefenderForStorageSettingProperties> {
@@ -23,15 +23,14 @@ model DefenderForStorageSetting
     Resource = DefenderForStorageSetting,
     KeyName = "settingName",
     SegmentName = "defenderForStorageSettings",
-    NamePattern = "",
-    Type = SettingName
+    NamePattern = "^current$"
   >;
 }
 
 /**
  * Describes the state of a malware scan operation.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "MalwareScan is an extension resource nested under defenderForStorageSettings whose scope is supplied via the custom `resourceId` path parameter on the operation templates. The linter mistakes the extension scope plus the explicit name parameter for multiple base-parameter decorators, but only one scope is defined."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "The legacy malware scan operation templates supply the resourceId scope and settingName parent explicitly. Retain those parameters instead of the inherited resourceUri parameter to preserve existing URLs and SDK parameter names."
 @extensionResource
 model MalwareScan
   is Azure.ResourceManager.ExtensionResource<MalwareScanProperties> {
@@ -43,6 +42,9 @@ model MalwareScan
   >;
 }
 
+/**
+ * Operations scoped to the Defender for Storage settings of an Azure resource.
+ */
 alias DefenderForStorageSettingsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
@@ -60,15 +62,18 @@ alias DefenderForStorageSettingsOps = Azure.ResourceManager.Legacy.ExtensionOper
   },
   {},
   {
-    /** The defender for storage setting name. */
+    /** The Defender for Storage setting name. Only 'current' is supported. */
     @path
     @segment("defenderForStorageSettings")
     @key
-    @pattern("^[a-z][a-z0-9]*$")
-    settingName: SettingName;
+    @pattern("^current$")
+    settingName: string;
   }
 >;
 
+/**
+ * Operations scoped to a malware scan under a Defender for Storage setting.
+ */
 alias DefenderForStorageMalwareScansOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
@@ -84,12 +89,12 @@ alias DefenderForStorageMalwareScansOps = Azure.ResourceManager.Legacy.Extension
     @key
     providerNamespace: "Microsoft.Security";
 
-    /** The defender for storage setting name. */
+    /** The Defender for Storage setting name. Only 'current' is supported. */
     @path
     @segment("defenderForStorageSettings")
     @key
-    @pattern("^[a-z][a-z0-9]*$")
-    settingName: SettingName;
+    @pattern("^current$")
+    settingName: string;
   },
   {},
   {
@@ -102,6 +107,9 @@ alias DefenderForStorageMalwareScansOps = Azure.ResourceManager.Legacy.Extension
   }
 >;
 
+/**
+ * Manages Defender for Storage settings and malware scans.
+ */
 @armResourceOperations(#{ omitTags: true })
 interface DefenderForStorageSettings {
   /**
@@ -130,7 +138,7 @@ interface DefenderForStorageSettings {
   /**
    * Cancels a Defender for Storage malware scan for the specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "This action returns the MalwareScan resource it cancels, not the parent DefenderForStorageSetting; this differs from the resource's CRUD operations by design."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "The legacy ExtensionOperations.ActionSync template registers actions in the list-operation collection, so the CRUD/list response rule also checks this POST action. Cancellation intentionally returns MalwareScan rather than the parent DefenderForStorageSetting."
   @tag("DefenderForStorage")
   @tag("Antimalware")
   @tag("Scan")
@@ -144,7 +152,8 @@ interface DefenderForStorageSettings {
   /**
    * Initiate a Defender for Storage malware scan for the specified storage account. Blobs and Files will be scanned for malware.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "This action returns a MalwareScan resource (the scan it initiated), not the parent DefenderForStorageSetting; this differs from the resource's CRUD operations by design."
+  // Declare the action inline so only its optional body is added in 2026-01-01-preview.
+  // Keep the legacy path parameters to preserve resourceId scope naming and route assembly.
   @tag("DefenderForStorage")
   @tag("Antimalware")
   @tag("Scan")
@@ -164,12 +173,12 @@ interface DefenderForStorageSettings {
     @key
     providerNamespace: "Microsoft.Security",
 
-    /** The defender for storage setting name. */
+    /** The Defender for Storage setting name. Only 'current' is supported. */
     @path
     @segment("defenderForStorageSettings")
     @key
-    @pattern("^[a-z][a-z0-9]*$")
-    settingName: SettingName,
+    @pattern("^current$")
+    settingName: string,
 
     /**
      * Optional request body to filter which blobs and files to scan.
@@ -199,7 +208,14 @@ interface DefenderForStorageSettings {
   >;
 }
 
-@@doc(DefenderForStorageSetting.name, "Defender for Storage setting name.");
+@@doc(
+  DefenderForStorageSetting.name,
+  "The Defender for Storage setting name. Only 'current' is supported."
+);
+@@doc(
+  MalwareScan.name,
+  "The identifier of the scan. Use 'latest' to retrieve the most recent scan, or a GUID to identify a specific scan."
+);
 @@doc(
   DefenderForStorageSetting.properties,
   "Defender for Storage resource properties."

@@ -60,4 +60,10 @@ enum Versions {
 
   @doc("Preview version 2026-04-01-preview with experimental features.")
   v2026_04_01_preview: "2026-04-01-preview",
+
+  @doc("Preview version 2026-06-01-preview with experimental features.")
+  v2026_06_01_preview: "2026-06-01-preview",
+
+  @doc("Preview version 2026-10-01-preview with experimental features.")
+  v2026_10_01_preview: "2026-10-01-preview",
 }

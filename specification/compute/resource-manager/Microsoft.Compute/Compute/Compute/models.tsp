@@ -3087,6 +3087,14 @@ model VirtualMachineScaleSetIPConfigurationProperties {
   privateIPAddressVersion?: IPVersion;
 
   /**
+   * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
+   */
+  @added(Versions.v2026_04_01)
+  @minValue(1)
+  @maxValue(128)
+  privateIPAddressPrefixLength?: int32;
+
+  /**
    * Specifies an array of references to backend address pools of application gateways. A scale set can reference backend address pools of multiple application gateways. Multiple scale sets cannot use the same application gateway.
    */
   applicationGatewayBackendAddressPools?: SubResource[];
@@ -4414,6 +4422,15 @@ model VirtualMachineScaleSetUpdateIPConfigurationProperties {
   privateIPAddressVersion?: IPVersion;
 
   /**
+   * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable only on the update (PATCH) model so callers can explicitly clear an allocated prefix; the create/read models use a plain optional int32."
+  @added(Versions.v2026_04_01)
+  @minValue(1)
+  @maxValue(128)
+  privateIPAddressPrefixLength?: int32 | null;
+
+  /**
    * The application gateway backend address pools.
    */
   applicationGatewayBackendAddressPools?: SubResource[];
@@ -5565,6 +5582,17 @@ model BootDiagnosticsInstanceView {
 }
 
 /**
+ * Specifies the FlexProfile for a virtual machine. When set, Azure may deploy a compatible alternative VM size based on capacity and placement considerations, and the deployed size is returned in hardwareProfile.vmSize. See the properties.flexProfile description for the full usage rules, including how it interacts with hardwareProfile.vmSize.
+ */
+@added(Versions.v2026_04_01)
+model FlexProfile {
+  /**
+   * Specifies the preferred VM size, for example Standard_D4s_v5. Azure may deploy a compatible alternative size based on capacity and placement considerations. Supported VM families for FlexProfile may vary by region. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes).
+   */
+  preferredVMSize: string;
+}
+
+/**
  * Specifies the hardware settings for the virtual machine.
  */
 model HardwareProfile {
@@ -6218,6 +6246,14 @@ model VirtualMachineNetworkInterfaceIPConfigurationProperties {
   privateIPAddressVersion?: IPVersions;
 
   /**
+   * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
+   */
+  @added(Versions.v2026_04_01)
+  @minValue(1)
+  @maxValue(128)
+  privateIPAddressPrefixLength?: int32;
+
+  /**
    * Specifies an array of references to application security group.
    */
   applicationSecurityGroups?: SubResource[];
@@ -6677,6 +6713,12 @@ model VirtualMachineProperties {
    * Specifies the hardware settings for the virtual machine.
    */
   hardwareProfile?: HardwareProfile;
+
+  /**
+   * [Preview Feature] Specifies a FlexProfile for VM size. Azure may deploy a compatible alternative VM size based on capacity and placement considerations, and returns the deployed size in hardwareProfile.vmSize. A request that adds flexProfile must omit hardwareProfile.vmSize. For a virtual machine that uses FlexProfile, a hardwareProfile.vmSize equal to the deployed size is ignored, so a GET response can be sent back unchanged. A PATCH request that omits flexProfile keeps it. A PUT request that omits flexProfile and sets hardwareProfile.vmSize clears it. This property cannot exist along with a non-null properties.availabilitySet, properties.capacityReservation, properties.host, properties.hostGroup, properties.proximityPlacementGroup or properties.virtualMachineScaleSet.
+   */
+  @added(Versions.v2026_04_01)
+  flexProfile?: FlexProfile;
 
   /**
    * Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the virtual machine.
@@ -9104,7 +9146,7 @@ model RestorePointInstanceView {
   diskRestorePoints?: DiskRestorePointInstanceView[];
 
   /**
-   * The resource status information.
+   * The aggregate status information for the restore point. The list may include separate aggregate entries for replication and, in supported API versions, Instant Access, as applicable. For more information about Instant Access, see [Use virtual machine restore points](https://learn.microsoft.com/azure/virtual-machines/virtual-machines-create-restore-points#instant-access).
    */
   @identifiers(#[])
   statuses?: InstanceViewStatus[];
@@ -9197,7 +9239,7 @@ model CapacityReservationGroupProperties {
   instanceView?: CapacityReservationGroupInstanceView;
 
   /**
-   * Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can generally be shared across subscriptions belonging to a single Azure AAD tenant or across AAD tenants if there is a trust relationship established between the tenants.  Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
+   * Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can be shared only across subscriptions belonging to the same Microsoft Entra ID tenant. Sharing across tenants is not supported. Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
    */
   sharingProfile?: ResourceSharingProfile;
 
