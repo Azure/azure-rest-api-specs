@@ -106,7 +106,7 @@ union AgentDefinitionOptInKeys {
   /** The Microsoft Copilot V1 preview feature opt-in. */
   microsoft_copilot_v1_preview: "MicrosoftCopilot=V1Preview",
 
-  /** Selects the status-less telephony binding contract; other voice APIs retain their existing opt-in. */
+  @doc("Selects the status-less telephony binding contract; other voice APIs retain their existing opt-in.")
   voice_agents_v2_preview: "VoiceAgents=V2Preview",
 }
 

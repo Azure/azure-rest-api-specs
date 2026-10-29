@@ -481,7 +481,7 @@ interface AgentEndpointConversations {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "These header-versioned binding operations share the existing agent-contained routes."
 @tag("Agent Telephony")
 interface AgentTelephonyV2 {
-  /** Requires VoiceAgents=V2Preview; responses omit lifecycle status. */
+  @doc("Requires VoiceAgents=V2Preview; responses omit lifecycle status.")
   @summary("Create an agent telephony binding")
   @operationId("AgentTelephony_createTelephonyBinding")
   @post
@@ -498,7 +498,7 @@ interface AgentTelephonyV2 {
     TelephonyBindingCreatedResponse<TelephonyBindingV2>
   >;
 
-  /** Requires VoiceAgents=V2Preview. The status filter is only supported in V1Preview. */
+  @doc("Requires VoiceAgents=V2Preview. The status filter is only supported in V1Preview.")
   @summary("List agent telephony bindings")
   @operationId("AgentTelephony_listTelephonyBindings")
   @get
@@ -516,7 +516,7 @@ interface AgentTelephonyV2 {
     AgentsPagedResult<TelephonyBindingV2ListItem>
   >;
 
-  /** Requires VoiceAgents=V2Preview; responses omit lifecycle status. */
+  @doc("Requires VoiceAgents=V2Preview; responses omit lifecycle status.")
   @summary("Get an agent telephony binding")
   @operationId("AgentTelephony_getTelephonyBinding")
   @get
@@ -532,7 +532,7 @@ interface AgentTelephonyV2 {
     TelephonyBindingResponse<TelephonyBindingV2>
   >;
 
-  /** Requires VoiceAgents=V2Preview. Status updates are only supported in V1Preview. */
+  @doc("Requires VoiceAgents=V2Preview. Status updates are only supported in V1Preview.")
   @summary("Update an agent telephony binding")
   @operationId("AgentTelephony_updateTelephonyBinding")
   @patch
@@ -551,7 +551,7 @@ interface AgentTelephonyV2 {
     TelephonyBindingResponse<TelephonyBindingV2>
   >;
 
-  /** Requires VoiceAgents=V2Preview. */
+  @doc("Requires VoiceAgents=V2Preview.")
   @summary("Delete an agent telephony binding")
   @operationId("AgentTelephony_deleteTelephonyBinding")
   @delete
@@ -617,7 +617,7 @@ interface AgentTelephony {
       /** Filters bindings by provider. */
       @query provider?: TelephonyProvider;
 
-      /** Only supported with VoiceAgents=V1Preview. */
+      @doc("Only supported with VoiceAgents=V1Preview.")
       @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
       @query
       status?: TelephonyBindingStatus;

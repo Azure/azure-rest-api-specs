@@ -541,7 +541,6 @@ model TelephonyTransferTarget {
   destination: TelephonyTransferDestination;
 }
 
-/** Binding creation properties shared by the V1 and V2 preview contracts. */
 alias CreateTelephonyBindingProperties = {
   @doc("The telephony provider.")
   provider: TelephonyProvider;
@@ -780,7 +779,7 @@ model CreateSipTelephonyBindingV2Request
   ...SipTelephonyBindingProperties;
 }
 
-/** The provider cannot be changed. */
+@doc("The provider cannot be changed.")
 @extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
 @clientName("UpdateTelephonyBindingV2Content", "csharp")
 model UpdateTelephonyBindingV2Request {
