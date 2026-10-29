@@ -34627,7 +34627,7 @@
             "name": "tag",
             "in": "query",
             "required": false,
-            "description": "Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').",
+            "description": "Filter jobs by the presence of a tag key, regardless of its value (e.g., 'framework').",
             "schema": {
               "type": "string"
             },
@@ -34647,7 +34647,7 @@
             "name": "properties",
             "in": "query",
             "required": false,
-            "description": "Comma-separated user property names and optionally values. Example: prop1,prop2=value2.",
+            "description": "Comma-separated exact user-property filters in 'key=value' format (e.g., 'prop1=value1,prop2=value2'). All valid filters must match. Entries without both a key and a value are ignored.",
             "schema": {
               "type": "string"
             },
