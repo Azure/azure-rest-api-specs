@@ -14,6 +14,7 @@ import {
   getMinLength,
   getMinValue,
   getPattern,
+  getSourceLocation,
   getTypeName,
   NodeHost,
   resolveCompilerOptions,
@@ -154,6 +155,58 @@ function wireShape(model, context) {
       maxItems: getMaxItems(context, p),
     })),
   };
+}
+
+function nativeLiveTypesUsedByFoundry() {
+  const nativeNamespace = type("OpenAI", native);
+  const nativeNames = new Set(
+    [
+      ...nativeNamespace.models.values(),
+      ...nativeNamespace.unions.values(),
+      ...nativeNamespace.enums.values(),
+    ]
+      .filter(
+        (value) =>
+          value.name &&
+          value.node &&
+          value.node.id?.sv === value.name &&
+          getSourceLocation(value)
+            .file.path.replaceAll("\\", "/")
+            .endsWith("/live/models.tsp"),
+      )
+      .map((value) => value.name),
+  );
+  const foundry = type("Azure.AI.Projects");
+  const openai = type("OpenAI");
+  const pending = [
+    type("OpenAI.LiveClientEvent"),
+    type("OpenAI.LiveServerEvent"),
+    ...[...foundry.models.values(), ...foundry.unions.values()].filter(
+      (value) => value.name.startsWith("VoiceAgentLive"),
+    ),
+  ];
+  const visited = new Set();
+  const result = new Map();
+  while (pending.length) {
+    const value = pending.pop();
+    if (!value || visited.has(value)) continue;
+    visited.add(value);
+    if (value.namespace === openai && nativeNames.has(value.name))
+      result.set(value.name, value);
+    if (value.kind === "Model") {
+      pending.push(value.baseModel, ...value.derivedModels);
+      for (const property of value.properties.values())
+        pending.push(property.type);
+      if (value.indexer) pending.push(value.indexer.value);
+    } else if (value.kind === "Union") {
+      for (const variant of value.variants.values()) pending.push(variant.type);
+    } else if (value.kind === "Tuple") {
+      pending.push(...value.values);
+    } else if (value.kind === "Scalar") {
+      pending.push(value.baseScalar);
+    }
+  }
+  return [...result.values()];
 }
 
 function checkNativeSdkEvents(context) {
@@ -535,6 +588,48 @@ test("voice protocol unions carry the VoiceAgents preview annotation", () => {
         `${doc.info.version}/${name}: OpenAPI preview metadata`,
       );
     }
+  }
+});
+
+test("native Live types used by Foundry carry the VoiceAgents preview annotation", () => {
+  const expected = { required_previews: ["VoiceAgents=V1Preview"] };
+  const models = nativeLiveTypesUsedByFoundry();
+  assert.ok(models.length > 0);
+  for (const value of models) {
+    assert.deepEqual(
+      getExtensions(program, value).get("x-ms-foundry-meta"),
+      expected,
+      `${getTypeName(value)}: TypeSpec preview metadata`,
+    );
+  }
+});
+
+test("Live history interface and operations carry the VoiceAgents preview annotation", () => {
+  const expected = { required_previews: ["VoiceAgents=V1Preview"] };
+  const client = type("Azure.AI.Projects.AgentEndpointLiveConversations");
+  assert.equal(client.operations.size, 9);
+  for (const value of [client, ...client.operations.values()]) {
+    assert.deepEqual(
+      getExtensions(program, value).get("x-ms-foundry-meta"),
+      expected,
+      `${getTypeName(value)}: TypeSpec preview metadata`,
+    );
+  }
+});
+
+test("VoiceAgents preview metadata does not tag unused native Live transports", () => {
+  for (const name of [
+    "LiveCallAcceptRequest",
+    "LiveCreateRequest",
+    "LiveForkClientEvent",
+    "LiveSidebandClientEvent",
+    "LiveSidebandServerEvent",
+  ]) {
+    assert.equal(
+      getExtensions(program, type(`OpenAI.${name}`)).has("x-ms-foundry-meta"),
+      false,
+      name,
+    );
   }
 });
 

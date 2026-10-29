@@ -61168,6 +61168,9 @@ components:
           enum:
             - client
             - responses
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.DeleteAssistantResponse:
       type: object
       required:
@@ -69962,6 +69965,9 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.LiveToolChoiceValueEnum'
             - type: 'null'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveApplyPatchToolInputParam:
       type: object
       required:
@@ -69973,6 +69979,9 @@ components:
             - apply_patch
           x-stainless-const: true
           default: apply_patch
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveAudioFormat:
       type: object
       required:
@@ -69987,6 +69996,9 @@ components:
           audio/pcmu: '#/components/schemas/OpenAI.LiveSessionAudioFormatPCMUParam'
           audio/pcma: '#/components/schemas/OpenAI.LiveSessionAudioFormatPCMAParam'
       description: Audio encoding and sample rate for audio sent and received over a Live WebSocket connection. WebRTC and SIP negotiate their media format separately.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveAudioFormatType:
       anyOf:
         - type: string
@@ -69995,6 +70007,9 @@ components:
             - audio/pcm
             - audio/pcmu
             - audio/pcma
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveClientDelegationParam:
       type: object
       required:
@@ -70009,6 +70024,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.delegation'
       description: Delegate tasks to your application. The Live session emits delegation events that your backend handles.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveCodeInterpreterToolInputParam:
       type: object
       required:
@@ -70020,6 +70038,9 @@ components:
             - code_interpreter
           x-stainless-const: true
           default: code_interpreter
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveComputerToolInputParam:
       type: object
       required:
@@ -70031,6 +70052,9 @@ components:
             - computer
           x-stainless-const: true
           default: computer
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveContainerMemoryLimit:
       type: string
       enum:
@@ -70038,6 +70062,9 @@ components:
         - 4g
         - 16g
         - 64g
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveContainerNetworkPolicyDisabledParam:
       type: object
       required:
@@ -70050,6 +70077,9 @@ components:
           description: Disable outbound network access. Always `disabled`.
           x-stainless-const: true
           default: disabled
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveContainerReferenceParam:
       type: object
       required:
@@ -70066,6 +70096,9 @@ components:
         container_id:
           type: string
           description: The ID of the referenced container.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveCustomToolInputParam:
       type: object
       required:
@@ -70077,6 +70110,9 @@ components:
             - custom
           x-stainless-const: true
           default: custom
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveCustomVoiceParam:
       type: object
       required:
@@ -70086,6 +70122,9 @@ components:
           type: string
           minLength: 1
           maxLength: 128
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveDelegationReasoningInputParam:
       type: object
       properties:
@@ -70098,6 +70137,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.LiveReasoningSummary'
             - type: 'null'
       description: Reasoning options for Responses requests made on behalf of the Live session.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveDelegationTextInputParam:
       type: object
       properties:
@@ -70106,6 +70148,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.LiveTextVerbosity'
             - type: 'null'
       description: Text generation options for the Live session’s Responses backend.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveFileSearchToolInputParam:
       type: object
       required:
@@ -70117,6 +70162,9 @@ components:
             - file_search
           x-stainless-const: true
           default: file_search
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveFunctionToolChoiceParam:
       type: object
       required:
@@ -70133,6 +70181,9 @@ components:
         name:
           type: string
           description: The name of the function tool to call.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveFunctionToolInputParam:
       type: object
       required:
@@ -70163,6 +70214,9 @@ components:
             - type: boolean
             - type: 'null'
       description: A function tool available to the Responses backend when the Live model delegates a task.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveHostedShellContainerAutoParam:
       type: object
       required:
@@ -70198,6 +70252,9 @@ components:
                   - $ref: '#/components/schemas/OpenAI.LiveSkillReferenceParam'
                   - $ref: '#/components/schemas/OpenAI.LiveInlineSkillParam'
             - type: 'null'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveHostedShellNetworkPolicyAllowlistParam:
       type: object
       required:
@@ -70217,6 +70274,9 @@ components:
             type: string
           minItems: 1
           description: A list of allowed domains when type is `allowlist`.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveHostedShellToolInputParam:
       type: object
       required:
@@ -70235,6 +70295,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.LiveLocalEnvironmentParam'
             - type: 'null'
       description: A Responses shell tool. Use a hosted container or return local shell results with response.item.create. Domain secrets are not supported.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveImageGenerationToolInputParam:
       type: object
       required:
@@ -70246,6 +70309,9 @@ components:
             - image_generation
           x-stainless-const: true
           default: image_generation
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveInitialSessionAudioOutputParam:
       type: object
       properties:
@@ -70288,6 +70354,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.LiveCustomVoiceParam'
           description: The voice used for Live speech, as a built-in voice name or a custom voice object containing its ID. Defaults to `marin` and cannot change after startup.
       description: Settings for speech generated by the Live model. Choose the voice before starting the session.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveInitialSessionAudioParam:
       type: object
       properties:
@@ -70298,6 +70367,9 @@ components:
           $ref: '#/components/schemas/OpenAI.LiveInitialSessionAudioOutputParam'
           description: The voice used for speech generated by the Live model.
       description: Startup audio configuration. Only primary WebSockets accept audio.format; WebRTC and SIP negotiate their media format. Voice and format are immutable after startup.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveInlineSkillParam:
       type: object
       required:
@@ -70322,6 +70394,9 @@ components:
         source:
           $ref: '#/components/schemas/OpenAI.LiveInlineSkillSourceParam'
           description: Inline skill payload
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveInlineSkillSourceParam:
       type: object
       required:
@@ -70349,6 +70424,9 @@ components:
           maxLength: 70254592
           description: Base64-encoded skill zip bundle.
       description: Inline skill payload
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveLocalEnvironmentParam:
       type: object
       required:
@@ -70367,6 +70445,9 @@ components:
               items:
                 $ref: '#/components/schemas/OpenAI.LiveLocalSkillParam'
             - type: 'null'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveLocalSkillParam:
       type: object
       required:
@@ -70383,6 +70464,9 @@ components:
         path:
           type: string
           description: The path to the directory containing the skill.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveMCPToolChoiceParam:
       type: object
       required:
@@ -70403,6 +70487,9 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveMCPToolInputParam:
       type: object
       required:
@@ -70414,6 +70501,9 @@ components:
             - mcp
           x-stainless-const: true
           default: mcp
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveNamespaceToolInputParam:
       type: object
       required:
@@ -70425,6 +70515,9 @@ components:
             - namespace
           x-stainless-const: true
           default: namespace
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveProgrammaticToolInputParam:
       type: object
       required:
@@ -70436,6 +70529,9 @@ components:
             - programmatic_tool_calling
           x-stainless-const: true
           default: programmatic_tool_calling
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveReasoningEffort:
       type: string
       enum:
@@ -70445,12 +70541,18 @@ components:
         - medium
         - high
         - xhigh
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveReasoningSummary:
       type: string
       enum:
         - concise
         - detailed
         - auto
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveResponsesDelegationParam:
       type: object
       required:
@@ -70469,6 +70571,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.delegation'
       description: Delegate tasks to a Responses model managed by the Live session.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveResponsesDelegationSettingsInputParam:
       type: object
       required:
@@ -70537,6 +70642,9 @@ components:
             - type: boolean
             - type: 'null'
       description: Model, prompt, and tool settings for tasks delegated by the Live session to a Responses backend.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveResponsesServiceTier:
       type: string
       enum:
@@ -70546,6 +70654,9 @@ components:
         - flex
         - priority
         - ultrafast
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveSessionAudioFormatPCMAParam:
       type: object
       required:
@@ -70566,6 +70677,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.LiveAudioFormat'
       description: Raw, mono G.711 A-law audio for a Live WebSocket connection.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveSessionAudioFormatPCMParam:
       type: object
       required:
@@ -70587,6 +70701,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.LiveAudioFormat'
       description: Raw, mono 16-bit little-endian PCM audio for a Live WebSocket connection.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveSessionAudioFormatPCMUParam:
       type: object
       required:
@@ -70607,6 +70724,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.LiveAudioFormat'
       description: Raw, mono G.711 μ-law audio for a Live WebSocket connection.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveSessionUsage:
       type: object
       required:
@@ -70616,6 +70736,9 @@ components:
           $ref: '#/components/schemas/OpenAI.numeric'
           description: The cumulative Live audio duration in seconds. Do not sum this value across usage events.
       description: Cumulative audio duration for a Live session. Values are totals for the session, not increments to sum across usage events.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveSkillReferenceParam:
       type: object
       required:
@@ -70638,6 +70761,9 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveSpecificApplyPatchParam:
       type: object
       required:
@@ -70652,6 +70778,9 @@ components:
           default: apply_patch
       description: Forces the model to call the apply_patch tool when executing a tool call.
       title: Specific apply patch tool choice
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveSpecificCodeInterpreterParam:
       type: object
       required:
@@ -70664,6 +70793,9 @@ components:
           description: The tool to call. Always `code_interpreter`.
           x-stainless-const: true
           default: code_interpreter
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveSpecificComputerParam:
       type: object
       required:
@@ -70676,6 +70808,9 @@ components:
           description: The tool to call. Always `computer`.
           x-stainless-const: true
           default: computer
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveSpecificCustomToolParam:
       type: object
       required:
@@ -70692,6 +70827,9 @@ components:
         name:
           type: string
           description: The name of the custom tool to call.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveSpecificFileSearchParam:
       type: object
       required:
@@ -70704,6 +70842,9 @@ components:
           description: The tool to call. Always `file_search`.
           x-stainless-const: true
           default: file_search
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveSpecificFunctionShellParam:
       type: object
       required:
@@ -70718,6 +70859,9 @@ components:
           default: shell
       description: Forces the model to call the shell tool when a tool call is required.
       title: Specific shell tool choice
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveSpecificImageGenParam:
       type: object
       required:
@@ -70730,6 +70874,9 @@ components:
           description: The tool to call. Always `image_generation`.
           x-stainless-const: true
           default: image_generation
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveSpecificProgrammaticToolCallingParam:
       type: object
       required:
@@ -70742,6 +70889,9 @@ components:
           description: The tool to call. Always `programmatic_tool_calling`.
           x-stainless-const: true
           default: programmatic_tool_calling
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveSpecificWebSearchParam:
       type: object
       required:
@@ -70754,6 +70904,9 @@ components:
           description: The tool to call. Always `web_search`.
           x-stainless-const: true
           default: web_search
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveSpecificWebSearchPreviewParam:
       type: object
       required:
@@ -70766,24 +70919,36 @@ components:
           description: The tool to call. Always `web_search_preview`.
           x-stainless-const: true
           default: web_search_preview
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveTextVerbosity:
       type: string
       enum:
         - low
         - medium
         - high
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveToolChoiceEnum:
       type: string
       enum:
         - auto
         - none
         - required
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveToolChoiceValueEnum:
       type: string
       enum:
         - none
         - auto
         - required
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveToolSearchToolInputParam:
       type: object
       required:
@@ -70795,6 +70960,9 @@ components:
             - tool_search
           x-stainless-const: true
           default: tool_search
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LiveWebSearchToolInputParam:
       type: object
       required:
@@ -70808,6 +70976,9 @@ components:
           x-stainless-const: true
           default: web_search
       description: A web search tool available to the Live session’s Responses backend.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.LocalEnvironmentResource:
       type: object
       required:
@@ -84002,6 +84173,9 @@ components:
           responses: '#/components/schemas/OpenAI.LiveResponsesDelegationParam'
           client: '#/components/schemas/OpenAI.LiveClientDelegationParam'
       description: Who handles tasks delegated by the Live model. Omitted or null selects your application; use `responses` to let the API manage a Responses backend.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.integer:
       type: integer
       format: int64
