@@ -47,7 +47,8 @@ interface Connections {
     PatchModel = ConnectionsPatch,
     Response =
       | ArmResponse<Connection>
-      | (ArmAcceptedLroResponse & {
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Connection> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
           @bodyRoot
           _: Connection;
         })
