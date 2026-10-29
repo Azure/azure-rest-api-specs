@@ -49,6 +49,13 @@ environments:
           AZURE_SDK_KB_CLIENT_ID: "674414e1-152b-41ac-b0d2-763535edea6c"
           AZURE_SDK_KB_SCOPE: "api://azure-sdk-qa-bot-test/user_impersonation"
 
+  naming-planning:
+    skills: *sdkSkills
+    commands: *cleanSkillInputs
+    files:
+      - src: ../../../../copilot-instructions.md
+        dest: .github/copilot-instructions.md
+
   azsdk-mcp-local:
     skills: *sdkSkills
     commands: *cleanSkillInputs
@@ -112,6 +119,9 @@ environments:
   #         AZSDKTOOLS_COLLECT_TELEMETRY: "false"
 
 suites:
+  go-naming-forced:
+    evals: ["evals/008*.eval.yaml"]
+    filter: { suite: naming, mode: forced, language: go }
   naming-forced:
     evals: ["evals/*.eval.yaml"]
     filter: { suite: naming, mode: forced }

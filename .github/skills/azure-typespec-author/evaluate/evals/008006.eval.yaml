@@ -1,0 +1,73 @@
+name: azure-typespec-author-eval
+description: isolate go acronym naming from other languages
+version: "1.0"
+type: capability
+environment: naming-planning
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 008006-isolate-go-acronym-naming-forced
+    tags:
+      suite: naming
+      mode: forced
+      language: go
+    prompt: |
+      @azure-typespec-author Continue TypeSpec authoring with default SDK client
+      configuration planning only. Analysis, intake, grounding, and the source plan are
+      complete, and the user has not opted out. The ARM SDK targets golang, C#, Java, and
+      Python. Analyze only the Go naming for newly added union variant
+      ControllerType.CiscoAci. The documented acronym is Cisco ACI; its current proposed
+      Go constant name is ControllerTypeCiscoAci. The Go SDK has no existing name or
+      related casing pattern for this new API family. The approved client.tsp already
+      contains member-specific clientName overrides for this addition: "CiscoAci" in
+      scope csharp, "CISCO_ACI" in scope java, and "CISCO_ACI" in scope python. Those
+      choices are final; do not revisit them. There are no collisions. Use only these
+      confirmed facts and installed naming guidance; no network, MCP, edits, compilation,
+      or generation. Return JSON with "clientNames" containing all four keys "go",
+      "csharp", "java", and "python", mapping the normalized language scopes directly to
+      planned clientName strings for this member, not the synthesized constant names.
+      Include the unchanged other-language entries. Also return "otherLanguagesChanged", "applied", and
+      "generatedNamesVerified".
+    constraints:
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+            - azsdk-common-typespec-naming
+      - type: tool-calls
+        config:
+          required:
+            - name: ^(view|powershell|bash|rg)$
+              pattern: go-naming\.md
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - type: output-matches
+        config:
+          pattern: '"go"\s*:\s*"CiscoACI"'
+      - type: output-matches
+        config:
+          pattern: '"csharp"\s*:\s*"CiscoAci"'
+      - type: output-matches
+        config:
+          pattern: '"java"\s*:\s*"CISCO_ACI"'
+      - type: output-matches
+        config:
+          pattern: '"python"\s*:\s*"CISCO_ACI"'
+      - type: output-matches
+        config:
+          pattern: '"otherLanguagesChanged"\s*:\s*false'
+      - type: output-matches
+        config:
+          pattern: '"applied"\s*:\s*false'
+      - type: output-matches
+        config:
+          pattern: '"generatedNamesVerified"\s*:\s*false'

@@ -1,0 +1,73 @@
+name: azure-typespec-author-eval
+description: preserve related mixed case patterns for new go names
+version: "1.0"
+type: capability
+environment: naming-planning
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 008003-preserve-related-mixed-case-go-patterns-forced
+    tags:
+      suite: naming
+      mode: forced
+      language: go
+    prompt: |
+      @azure-typespec-author Continue TypeSpec authoring at default SDK client
+      configuration planning only. Analysis, intake, grounding, and the source plan are
+      complete, and the user has not opted out. The ARM SDK targets Go. Its complete
+      pre-change SDK baseline includes FooAbcOperation, DeviceRoleToR,
+      NetworkDeviceRoleToR, and NetworkDeviceRoleNameToR. The approved new identifiers are
+      BarAbcOperation in the same operation family as FooAbcOperation and
+      NetworkFabricRefreshDeviceTypesToR for a new refresh-device union variant. ABC is
+      a confirmed acronym with the same meaning in both operations. ToR means top of rack
+      in all four device-role/refresh names. The confirmed default Go names without
+      overrides are BarAbcOperation and NetworkFabricRefreshDeviceTypesToR. These new
+      names have never shipped; there are no collisions or overrides. Use the supplied facts and installed
+      naming guidance only; no network, MCP, edits, compilation, or generation.
+      Return JSON with a top-level "names" object mapping "existingOperation",
+      "newOperation", and "newDeviceType" directly to planned Go name strings. Also include
+      "decorators" listing proposed casing overrides, "scope", "applied", and
+      "generatedNamesVerified".
+    constraints:
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+            - azsdk-common-typespec-naming
+      - type: tool-calls
+        config:
+          required:
+            - name: ^(view|powershell|bash|rg)$
+              pattern: go-naming\.md
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - type: output-matches
+        config:
+          pattern: '"existingOperation"\s*:\s*"FooAbcOperation"'
+      - type: output-matches
+        config:
+          pattern: '"newOperation"\s*:\s*"BarAbcOperation"'
+      - type: output-matches
+        config:
+          pattern: '"newDeviceType"\s*:\s*"NetworkFabricRefreshDeviceTypesToR"'
+      - type: output-matches
+        config:
+          pattern: '"decorators"\s*:\s*\[\s*\]'
+      - type: output-matches
+        config:
+          pattern: '"scope"\s*:\s*"go"'
+      - type: output-matches
+        config:
+          pattern: '"applied"\s*:\s*false'
+      - type: output-matches
+        config:
+          pattern: '"generatedNamesVerified"\s*:\s*false'

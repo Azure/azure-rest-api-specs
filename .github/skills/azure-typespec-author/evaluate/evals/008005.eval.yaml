@@ -1,0 +1,63 @@
+name: azure-typespec-author-eval
+description: plan new go parameter acronym names
+version: "1.0"
+type: capability
+environment: naming-planning
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 008005-plan-new-go-parameter-acronym-names-forced
+    tags:
+      suite: naming
+      mode: forced
+      language: go
+    prompt: |
+      @azure-typespec-author Continue TypeSpec authoring with default SDK client
+      configuration planning only. Analysis, intake, grounding, and the source plan are
+      complete, and the user has not opted out. This is a new, never-shipped Go data-plane
+      SDK at specification/widget/data-plane/Widget. The approved new operations have
+      TypeSpec parameters userId and recordAcsId, with the same current proposed Go
+      parameter names. ID means identifier; ACS means Azure Communication Services.
+      These are customer-visible function/method parameter names. There are no existing
+      SDK names, related signature patterns, overrides, or collisions. Use these confirmed
+      facts and installed naming guidance only; no network, MCP, edits, compilation, or
+      generation. Return JSON with a top-level "names" object mapping "userId" and
+      "recordAcsId" directly to planned Go parameter name strings, plus top-level "scope",
+      "applied", and "generatedNamesVerified".
+    constraints:
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+            - azsdk-common-typespec-naming
+      - type: tool-calls
+        config:
+          required:
+            - name: ^(view|powershell|bash|rg)$
+              pattern: go-naming\.md
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - type: output-matches
+        config:
+          pattern: '"userId"\s*:\s*"userID"'
+      - type: output-matches
+        config:
+          pattern: '"recordAcsId"\s*:\s*"recordACSID"'
+      - type: output-matches
+        config:
+          pattern: '"scope"\s*:\s*"go"'
+      - type: output-matches
+        config:
+          pattern: '"applied"\s*:\s*false'
+      - type: output-matches
+        config:
+          pattern: '"generatedNamesVerified"\s*:\s*false'
