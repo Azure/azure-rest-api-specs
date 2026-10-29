@@ -938,12 +938,12 @@ model KustoPoolProperties {
   /**
    * A boolean value that indicates if the streaming ingest is enabled.
    */
-  enableStreamingIngest?: boolean;
+  enableStreamingIngest?: boolean = false;
 
   /**
    * A boolean value that indicates if the purge operations are enabled.
    */
-  enablePurge?: boolean;
+  enablePurge?: boolean = false;
 
   /**
    * List of the Kusto Pool's language extensions.
