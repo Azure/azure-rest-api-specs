@@ -36735,7 +36735,7 @@
             "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
           }
         ],
-        "description": "Authorizes inbound Activity Protocol messages using the published Autopilot's instance read policy.\nSupported only for agents published as Autopilots with a native Activity Protocol endpoint.\nConfigure this scheme after publication, as the sole authorization scheme, without legacy activity access_boundaries.\nChannel authentication and the project tenant check still apply. This policy does not restrict outbound messages or chat recipients."
+        "description": "Authorizes inbound Activity Protocol messages using the Autopilot's instance read policy.\nSupported only for M365 digital workers or agents published as Autopilots, with a native Activity Protocol endpoint.\nConfigure this scheme at creation with digital_worker_type set to m365, or after Autopilot publication.\nIt must be the sole authorization scheme, without legacy activity access_boundaries.\nChannel authentication and the project tenant check still apply. This policy does not restrict outbound messages or chat recipients."
       },
       "ActivityProtocolAccessBoundary": {
         "anyOf": [
