@@ -203,6 +203,10 @@ model NetworkFabricProperties extends AnnotationResource {
   ])
   @added(Versions.v2026_01_15_preview)
   upgradeProfile?: UpgradeProfileProperties[];
+
+  @doc("Public connectivity configuration for the Network Fabric, including peering details and read-only IPsec VPN tunnel information for infrastructure and tenant traffic.")
+  @added(Versions.v2026_07_15_preview)
+  publicConnectivity?: NetworkFabricPublicConnectivity;
 }
 
 @doc("Network and credentials configuration currently applied to terminal server.")
@@ -398,15 +402,7 @@ model NetworkFabricPatchProperties {
 @doc("Network Fabric updatable properties.")
 model NetworkFabricPatchableProperties {
   @doc("Number of compute racks associated to Network Fabric.")
-  @removed(Versions.v2026_01_15_preview)
-  @renamedFrom(Versions.v2026_01_15_preview, "rackCount")
   @maxValue(8)
-  @minValue(1)
-  rackCountDeprecated?: int32;
-
-  @doc("Number of compute racks associated to Network Fabric.")
-  @added(Versions.v2026_01_15_preview)
-  @maxValue(16)
   @minValue(1)
   rackCount?: int32;
 
@@ -585,6 +581,7 @@ union NetworkFabricUpgradeAction {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Network Fabric Lock Request.")
 @added(Versions.v2024_06_15_preview)
 model NetworkFabricLockRequest {
@@ -677,6 +674,10 @@ model FeatureFlagProperties {
 
   @doc("Feature flag value.")
   featureFlagValue?: string;
+
+  @added(Versions.v2026_07_15_preview)
+  @doc("Feature flag state.")
+  featureFlagState?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
@@ -689,6 +690,7 @@ model ArmConfigurationDiffResponse extends CommonErrorResponse {
   configurationDiffUrl?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Arm Configuration Diff Response V2.")
 @added(Versions.v2025_07_15)
 model ArmConfigurationDiffOperationResponse {
@@ -715,6 +717,7 @@ model ViewDeviceConfigurationResponse extends CommonErrorResponse {
   deviceConfigurationUrl?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("View Device Configuration Response V2.")
 @added(Versions.v2025_07_15)
 model ViewDeviceConfigurationOperationResponse {
@@ -760,6 +763,7 @@ model UniqueRouteDistinguisherPatchProperties {
   nniDerivedUniqueRdConfigurationState?: NNIDerivedUniqueRouteDistinguisherConfigurationState;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Commit Batch Status Request.")
 @added(Versions.v2024_06_15_preview)
 model CommitBatchStatusRequest {
@@ -782,6 +786,7 @@ model CommitBatchStatusResponse extends CommonErrorResponse {
   commitBatchDetails?: CommitBatchDetails;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Commit Batch Status Response.")
 @added(Versions.v2025_07_15)
 model CommitBatchStatusOperationResponse {
@@ -804,6 +809,7 @@ model CommitBatchStatusResponseProperties {
   commitBatchDetails?: CommitBatchDetails;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Discard Commit Batch Request.")
 @added(Versions.v2024_06_15_preview)
 model DiscardCommitBatchRequest {
@@ -820,6 +826,7 @@ model DiscardCommitBatchResponse extends CommonErrorResponse {
   commitBatchId?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Discard Commit Batch Response.")
 @added(Versions.v2025_07_15)
 model DiscardCommitBatchOperationResponse {
@@ -936,24 +943,28 @@ model UpgradeProfilePropertiesPatchProperties {
   postUpgradeProfile?: PostUpgradeProfilePatchProperties;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a RotatePasswords request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricRotatePasswordsResponse {
   ...OperationStatusResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a ResyncPasswords request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricResyncPasswordsResponse {
   ...OperationStatusResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a RotateCertificates request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricRotateCertificatesResponse {
   ...OperationStatusResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response body for a ResyncCertificates request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricResyncCertificatesResponse {
@@ -1011,6 +1022,7 @@ union CommitConfigurationPolicy {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Commit Configuration Request.")
 @added(Versions.v2025_07_15)
 model CommitConfigurationRequest {
@@ -1024,12 +1036,14 @@ model CommitConfigurationRequest {
   devices?: string[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Commit Configuration Response.")
 @added(Versions.v2025_07_15)
 model CommitConfigurationResponse {
   ...OperationStatusResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("GetTopology Response.")
 @added(Versions.v2025_07_15)
 model GetTopologyResponse {
@@ -1081,4 +1095,175 @@ model RefreshConfigurationRequestProperties {
   @doc("The types of devices for which the configuration needs to be refreshed. If not provided, configuration will be refreshed for all device types.")
   @added(Versions.v2026_01_15_preview)
   deviceTypes?: NetworkFabricRefreshDeviceTypes[];
+}
+
+@doc("Public connectivity configuration for the Network Fabric, including peering details and read-only IPsec VPN tunnel information for infrastructure and tenant traffic.")
+@added(Versions.v2026_07_15_preview)
+model NetworkFabricPublicConnectivity {
+  @doc("Peering configuration applied between the Network Fabric CE devices and the Azure VPN Gateways.")
+  peering: NetworkFabricPublicConnectivityPeering;
+
+  @doc("Infrastructure IPsec VPN tunnel information. Populated by the platform once the tunnels are established.")
+  @Azure.ResourceManager.identifiers(#["ipSecTunnelName"])
+  @visibility(Lifecycle.Read)
+  infraVpnTunnels?: VpnTunnel[];
+
+  @doc("Tenant IPsec VPN tunnel information. Populated by the platform once the tunnels are established.")
+  @Azure.ResourceManager.identifiers(#["ipSecTunnelName"])
+  @visibility(Lifecycle.Read)
+  tenantVpnTunnels?: VpnTunnel[];
+}
+
+@doc("Peering configuration for the Network Fabric public connectivity.")
+@added(Versions.v2026_07_15_preview)
+model NetworkFabricPublicConnectivityPeering {
+  @doc("Type of peering between the Network Fabric and the Azure VPN Gateways.")
+  peeringType?: PeeringType;
+
+  @doc("Public peering configuration. Required when peeringType is PublicPeering.")
+  publicPeeringConfiguration?: PublicPeeringConfiguration;
+}
+
+@doc("Public peering configuration containing the Local Network Gateways used for the infrastructure and tenant tunnels.")
+@added(Versions.v2026_07_15_preview)
+model PublicPeeringConfiguration {
+  @doc("Local Network Gateways used as the on-premises endpoints for the infrastructure VPN tunnels.")
+  infrastructureLocalNetworkGateways: PublicPeeringLocalNetworkGateways;
+
+  @doc("Local Network Gateways used as the on-premises endpoints for the tenant VPN tunnels.")
+  tenantLocalNetworkGateways: PublicPeeringLocalNetworkGateways;
+}
+
+@doc("Public Peering Local Network Gateway")
+@added(Versions.v2026_07_15_preview)
+model PublicPeeringLocalNetworkGateways {
+  @doc("Primary Local Network Gateway IPv4 address used as the on-premises endpoint for the infrastructure VPN tunnel.")
+  primaryLocalNetworkGatewayIpV4Address: Azure.Core.ipV4Address;
+
+  @doc("Secondary Local Network Gateway IPv4 address used as the on-premises endpoint for the infrastructure VPN tunnel.")
+  secondaryLocalNetworkGatewayIpV4Address: Azure.Core.ipV4Address;
+}
+
+@doc("Information about an IPsec VPN tunnel established between the Network Fabric and an Azure VPN Gateway instance.")
+@added(Versions.v2026_07_15_preview)
+model VpnTunnel {
+  @doc("Name of the IPsec tunnel.")
+  @visibility(Lifecycle.Read)
+  ipSecTunnelName?: string;
+
+  @doc("VPN Gateway Resource ID of the Azure VPN Gateway instance that the tunnel is established with.")
+  @visibility(Lifecycle.Read)
+  vpnGatewayId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworkGateways";
+    }
+  ]>;
+
+  @doc("VPN Gateway connection ID of the Azure VPN Gateway instance that the tunnel is established with.")
+  @visibility(Lifecycle.Read)
+  vpnGatewayConnectionId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/connections";
+    }
+  ]>;
+
+  @doc("Local Network Gateway Resource ID of the Local Network Gateway instance that the tunnel is established with.")
+  @visibility(Lifecycle.Read)
+  localNetworkGatewayId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/localNetworkGateways";
+    }
+  ]>;
+}
+
+@doc("Type of peering between the Network Fabric and the Azure VPN Gateways.")
+@added(Versions.v2026_07_15_preview)
+union PeeringType {
+  @doc("Public peering over the Internet using Local Network Gateways.")
+  PublicPeering: "PublicPeering",
+
+  @doc("Private peering over an ExpressRoute circuit.")
+  ExpressRouteCircuitPrivatePeering: "ExpressRouteCircuitPrivatePeering",
+
+  string,
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Configuration Category for the Network Fabric.")
+@added(Versions.v2026_07_15_preview)
+union RuntimeConfigurationType {
+  @doc("Infrastructure configuration type.")
+  InfrastructureNetwork: "InfrastructureNetwork",
+
+  @doc("Tenant configuration type.")
+  TenantNetwork: "TenantNetwork",
+
+  @doc("Network Packet Broker configuration type.")
+  NetworkPacketBroker: "NetworkPacketBroker",
+
+  string,
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Filters to apply when collecting configuration for the Network Fabric.")
+@added(Versions.v2026_07_15_preview)
+model RuntimeConfigurationFilter {
+  @doc("The types of devices for which the configuration needs to be collected. If not provided, configuration will be collected for all device types.")
+  deviceRole?: NetworkDeviceRole;
+
+  @doc("Resource Identifier of which the configuration needs to be collected. If not provided, configuration will be collected for all devices.")
+  resourceIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/*";
+    }
+  ]>[];
+}
+
+@doc("RuntimeConfigurationRequest for the Network Fabric.")
+@added(Versions.v2026_07_15_preview)
+model RuntimeConfigurationProperties {
+  @doc("Configuration Category for the Network Fabric.")
+  category?: RuntimeConfigurationType;
+
+  @Azure.ResourceManager.identifiers(#[])
+  @doc("Filter to apply when collecting configuration for the Network Fabric. If not provided, configuration will be collected for all devices.")
+  filters?: RuntimeConfigurationFilter[];
+}
+
+@doc("Type of diagnostics to run on the Network Fabric.")
+@added(Versions.v2026_07_15_preview)
+union DiagnosticsOperationType {
+  @doc("Run diagnostics for the Network Fabric's runtime configuration.")
+  runtimeConfiguration: "RuntimeConfiguration",
+
+  string,
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Run Diagnostics Request.")
+@added(Versions.v2026_07_15_preview)
+model RunDiagnosticsRequest {
+  @doc("The types of diagnostics to run on the Network Fabric.")
+  operationType: DiagnosticsOperationType;
+
+  @doc("RuntimeConfigurationRequest for the Network Fabric. Required when operationType is RuntimeConfiguration.")
+  runtimeConfiguration?: RuntimeConfigurationProperties;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Run Diagnostics Response.")
+@added(Versions.v2026_07_15_preview)
+model RunDiagnosticsResponse {
+  ...OperationStatusResult;
+
+  @doc("Run Diagnostics Response Properties.")
+  properties?: RunDiagnosticsResponseProperties;
+}
+
+@doc("Run Diagnostics Response Properties.")
+@added(Versions.v2026_07_15_preview)
+model RunDiagnosticsResponseProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  @doc("Storage URL to the diagnostics information collected.")
+  diagnosticsUrl?: url;
 }

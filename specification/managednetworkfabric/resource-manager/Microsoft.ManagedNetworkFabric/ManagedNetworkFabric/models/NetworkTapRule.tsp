@@ -20,6 +20,10 @@ model NetworkTapRuleProperties {
   @added(Versions.v2025_07_15)
   identitySelector?: IdentitySelector;
 
+  @doc("Match configuration update types. If the configuration type is not provided, then both static and dynamic match configurations will be updated.")
+  @added(Versions.v2026_07_15_preview)
+  isMatchConfigurationUpdated?: BooleanEnumProperty;
+
   @doc("List of match configurations.")
   @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
@@ -212,6 +216,10 @@ model NetworkTapRulePatchableProperties {
   @doc("Network Tap Rules file URL.")
   tapRulesUrl?: url;
 
+  @doc("Match configuration update types. If the configuration type is not provided, then both static and dynamic match configurations will be updated.")
+  @added(Versions.v2026_07_15_preview)
+  isMatchConfigurationUpdated?: BooleanEnumProperty;
+
   @doc("List of match configurations.")
   @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
@@ -244,7 +252,7 @@ model NetworkTapRulePatchProperties {
   globalNetworkTapRuleActions?: GlobalNetworkTapRuleActionPatchProperties;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing extensible integer polling interval union."
 @doc("Polling interval in seconds.")
 union PollingIntervalInSeconds {
   int32,
@@ -321,6 +329,7 @@ model GlobalNetworkTapRuleActionPatchProperties {
   truncate?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response for Network Tap Rule resync operation.")
 model NetworkTapRuleResyncResponse {
   ...OperationStatusResult;

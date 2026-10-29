@@ -177,6 +177,7 @@ union Encapsulation {
   string,
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response for NetworkTap Resync operation.")
 @added(Versions.v2025_07_15)
 model NetworkTapResyncResponse {

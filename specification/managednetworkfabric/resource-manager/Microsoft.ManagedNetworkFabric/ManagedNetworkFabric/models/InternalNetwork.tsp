@@ -473,6 +473,7 @@ model InternalNetworkBgpAdministrativeStateRequest {
   administrativeState?: BgpAdministrativeState;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Internal Network Administrative State Request")
 @added(Versions.v2025_07_15)
 model InternalNetworkUpdateBgpAdministrativeStateRequest {
@@ -497,6 +498,7 @@ model InternalNetworkBgpAdministrativeStateResponse
   neighborAddressAdministrativeStatus?: NeighborAddressBgpAdministrativeStatus[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Internal Network Administrative State Response")
 @added(Versions.v2025_07_15)
 model InternalNetworkUpdateBgpAdministrativeStateResponse {
@@ -528,6 +530,7 @@ model InternalNetworkBfdAdministrativeStateRequest {
   administrativeState?: BfdAdministrativeState;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Internal Network BFD Administrative State request")
 @added(Versions.v2025_07_15)
 model InternalNetworkUpdateBfdAdministrativeStateRequest {
@@ -541,6 +544,7 @@ model InternalNetworkUpdateBfdAdministrativeStateRequest {
   administrativeState?: BfdAdministrativeState;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Internal Network BFD Administrative State response")
 @added(Versions.v2025_07_15)
 model InternalNetworkUpdateBfdAdministrativeStateResponse {
@@ -604,7 +608,6 @@ model InternalNetworkBmpProperties {
 @doc("Internal Network BMP Configuration")
 @added(Versions.v2024_06_15_preview)
 model InternalNetworkBmpPatchProperties {
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("BMP Collector Address.")
   @added(Versions.v2024_06_15_preview)
   @minItems(1)
