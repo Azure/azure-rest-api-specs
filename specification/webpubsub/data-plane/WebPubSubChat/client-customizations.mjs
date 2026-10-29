@@ -21,11 +21,12 @@ function requestModel(context, operation, input, scope) {
  * @param {import("@typespec/compiler").DecoratorContext} context
  * @param {import("@typespec/compiler").Operation} operation
  * @param {string} name
+ * @param {string} scope
  */
-function requestParameterName(context, operation, name) {
+function requestParameterName(context, operation, name, scope) {
   const resource = getResourceParameter(context, operation);
   if (resource) {
-    context.call($clientName, resource, name);
+    context.call($clientName, resource, name, scope);
   }
 }
 

@@ -10,7 +10,8 @@ namespace ClientCustomizations {
   /** Give a template-expanded request body a resource-specific SDK parameter name. */
   extern dec requestParameterName(
     target: TypeSpec.Reflection.Operation,
-    name: valueof string
+    name: valueof string,
+    scope: valueof string
   );
 
   /** Substitute the resource request model for selected SDKs without changing the REST operation. */
@@ -204,35 +205,46 @@ namespace Customizations {
     "python"
   );
 
-  @@clientName(WebPubSubChat.ChatConversation.parentRoom, "roomId");
+  @@clientName(
+    WebPubSubChat.ChatConversation.parentRoom,
+    "roomId",
+    "csharp,java,python,javascript,go,rust"
+  );
 
   @@ClientCustomizations.requestParameterName(
     WebPubSubChatServiceClient.createOrReplaceRole,
-    "role"
+    "role",
+    "csharp,java,python,javascript,go,rust"
   );
   @@ClientCustomizations.requestParameterName(
     WebPubSubChatServiceClient.createOrReplaceRoom,
-    "room"
+    "room",
+    "csharp,java,python,javascript,go,rust"
   );
   @@ClientCustomizations.requestParameterName(
     WebPubSubChatServiceClient.createOrReplaceRoomMember,
-    "member"
+    "member",
+    "csharp,java,python,javascript,go,rust"
   );
   @@ClientCustomizations.requestParameterName(
     WebPubSubChatServiceClient.createOrReplaceUser,
-    "user"
+    "user",
+    "csharp,java,python,javascript,go,rust"
   );
   @@ClientCustomizations.requestParameterName(
     WebPubSubChatServiceClient.createOrReplaceTopic,
-    "topic"
+    "topic",
+    "csharp,java,python,javascript,go,rust"
   );
   @@ClientCustomizations.requestParameterName(
     WebPubSubChatServiceClient.updateTopic,
-    "topic"
+    "topic",
+    "csharp,java,python,javascript,go,rust"
   );
   @@ClientCustomizations.requestParameterName(
     WebPubSubChatServiceClient.updateMessage,
-    "message"
+    "message",
+    "csharp,java,python,javascript,go,rust"
   );
 
   @@clientInitialization(

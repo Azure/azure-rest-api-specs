@@ -32,6 +32,10 @@ enabled. This avoids changing the
 standard resource operations, REST contract, and other language SDKs. Keep this
 module alongside `client.tsp` when generating from local inputs.
 
+`requestParameterName` also takes an explicit SDK language scope from `client.tsp`.
+It gives SDK request bodies resource-specific parameter names while leaving the
+Swagger body parameter named `resource`, as required by the existing examples.
+
 For Python listing operations, `omitContinuationToken` resolves the instantiated
 `continuationToken` parameter and applies the standard client generator core
 `scope` decorator with `"!python"` supplied by `client.tsp`.
