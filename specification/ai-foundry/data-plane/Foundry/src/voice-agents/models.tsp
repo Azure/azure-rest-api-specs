@@ -1518,25 +1518,7 @@ model TelephonyCallJobConfiguration {
   @doc("The phone destination to call.")
   destination: TelephonyOutboundDestination;
 
-  /**
-   * Same-project connection; its category selects the provider. No inbound binding is required.
-   * Configure SIP settings through the connection management API, separately from data-plane connection reads.
-   * SipOutbound uses CustomKeys. metadata.sip_auth_type is trimmed and case-insensitive: digest requires
-   * username/password; ip_acl requires credentials.keys.source_cidrs. Missing, null, blank or {} defaults to digest.
-   * CIDRs allow 4096 characters and 64 entries before deduplication. Empty string allows all sources;
-   * whitespace-only or empty entries, scoped IPv6 and IPv4-mapped IPv6 are invalid.
-   *
-   * metadata.enabled_codecs is an ordered comma-separated list of g722, pcmu, pcma, opus or amr-wb,
-   * defaulting to g722,pcmu,pcma when unset or blank. Duplicates and empty entries are invalid.
-   * metadata.custom_headers accepts up to 32 case-insensitively unique X- headers (under X-MS-, only X-MS-Custom-).
-   * Names use token characters (256 max); values have no controls (4096 max) and are preserved, including empty strings.
-   *
-   * Connection PATCH merges credential/metadata keys; null removes a metadata key and a header object replaces all
-   * headers. Omitted credentials are allowed only without a mode change; supplied credentials must include required keys.
-   * Include the current target in CustomKeys PATCH to avoid overwriting it with a client default.
-   * Outbound target must be <dns-host>[:<port>], port 1-65535, without a scheme, IP literal or URI components.
-   * Validation occurs at execution, so saving the connection does not guarantee a successful call.
-   */
+  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SIP. No inbound telephony binding is required.")
   @minLength(1)
   @maxLength(256)
   connection_name: string;
