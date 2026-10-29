@@ -18,7 +18,7 @@ op RleOperation<
   RleErrorResult
 >;
 
-/** Environment publication, execution, manual runtime capacity and monitoring. */
+/** Environment publication, manual runtime capacity and rollout monitoring. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "RLE's implemented immutable-version POST and continuation-token protocol do not implement the standard resource-operation templates."
 #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The implemented error body can be structured JSON or a validation string; both are errors, never success responses."
 @tag("Reinforcement Learning Environments")
@@ -186,52 +186,6 @@ interface RLE {
       @body body: RleHarborFinalizeUploadContent;
     },
     RleHarborUploadTarget | RleHarborFeatureUnavailable
-  >;
-
-  /** Execute a scored rollout with an exact release. Returns 400 for invalid
-   * policy/task/harness, 403 when disabled, 404 for a missing release, and 409
-   * for an already-reserved rollout ID. A submitted timeout has an unknown
-   * outcome; never automatically replay. Dependency failures return 500 with
-   * attribution and retryability, not an instruction to reuse the rollout ID.
-   */
-  @post
-  @route("/{name}/versions/{version}:executeRollout")
-  @summary("Execute one rollout")
-  @extension(
-    "x-ms-examples",
-    #{
-      `Evaluate one task using a project model deployment`: #{
-        $ref: "../../examples/v1/rle/ExecuteRollout.json",
-      },
-      `Evaluate a published Harbor task`: #{
-        $ref: "../../examples/v1/rle/ExecuteHarborRollout.json",
-      },
-    }
-  )
-  executeRollout is RleOperation<
-    {
-      ...RleVersionPath;
-
-      /** Task, model policy and correlation identity. */
-      @body body: RleExecuteRolloutContent;
-    },
-    RleRolloutResult
-  >;
-
-  /** Backend-native rollout route with the same execution and one-shot identity
-   * semantics as executeRollout. Project gateway publication must be qualified.
-   */
-  @post
-  @route("/{name}/versions/{version}/rollout")
-  @summary("Execute one rollout through the native route")
-  executeRolloutNative is RleOperation<
-    {
-      ...RleVersionPath;
-
-      /** Task, model policy and correlation identity. */
-      @body body: RleExecuteRolloutContent;
-    },
-    RleRolloutResult
   >;
 
   /** Reserve manual execution capacity for an exact release. Returns 400 when

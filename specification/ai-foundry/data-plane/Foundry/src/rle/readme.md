@@ -10,8 +10,6 @@ covers publication, training, evaluation and inspection.
 - Environment registration, latest/exact-version reads, version/task listing and deletion.
 - Harbor task archive upload-target issuance and finalization, with
   project-scoped content-hash reuse and per-task image readiness.
-- Execute Rollout through the client-facing `:executeRollout` action and the
-  backend-native `/rollout` route.
 - Instance group and instance lifecycle through both pinned-version and
   environment-name paths.
 - Job metadata/metric/rollout reads and rollout metadata/result/event reads.
@@ -21,10 +19,13 @@ authentication. Operations require the RLE read, write or delete data action
 appropriate to the operation, plus project/model/feature enablement.
 Runtime credentials and workspace infrastructure routes are not public API inputs.
 
+Rollout submission and execution use WebSocket through the asynchronous
+`get_rollout_client` helper, for both training and evaluation.
+HTTP rollout metadata/result/event reads remain available for inspection and
+disconnect recovery; they do not submit execution.
 OpenEnv reset/step/state/MCP proxying and binary rollout WebSockets are runtime
 protocols, not JSON resource operations. They are not represented as ordinary
-HTTP model methods here. The asynchronous rollout client uses that separate
-transport; HTTP execution uses the same task/policy/result contract.
+HTTP model methods here.
 Signed archive bytes are uploaded directly to project storage, not to an RLE
 JSON endpoint. Sandbox-pool management, rollout-to-sandbox bindings and
 producer-side job/metric writes are outside this draft's scope.
@@ -33,8 +34,7 @@ API, not an RLE job-create action.
 
 ## Compatibility decisions
 
-The draft describes implemented wire behavior rather than asserting a service
-migration:
+The management and monitoring draft preserves implemented wire behavior:
 
 - Management fields use camelCase; rollout/defaults fields use snake_case.
 - Registration presents top-level model/train/rollout defaults. The service's
@@ -75,5 +75,4 @@ Formal API review follows experience-spec sign-off. Public package distribution
 does not establish regional endpoint availability or SDK release readiness.
 
 The request/response examples are illustrative, not live service captures.
-The opaque capture graph is abbreviated; its internal transport schema is not
-defined by this API.
+The rollout WebSocket framing and capture schema are not defined by this HTTP API.

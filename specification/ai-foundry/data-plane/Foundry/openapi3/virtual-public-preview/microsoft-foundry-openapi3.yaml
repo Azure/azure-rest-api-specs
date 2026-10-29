@@ -43504,48 +43504,6 @@ paths:
                 $ref: '#/components/schemas/RleErrorBody'
       tags:
         - Reinforcement Learning Environments
-  /rl_environments/{name}/versions/{version}/rollout:
-    post:
-      operationId: RLE_executeRolloutNative
-      summary: Execute one rollout through the native route
-      description: |-
-        Backend-native rollout route with the same execution and one-shot identity
-        semantics as executeRollout. Project gateway publication must be qualified.
-      parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - $ref: '#/components/parameters/RleVersionPath.name'
-        - $ref: '#/components/parameters/RleVersionPath.version'
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RleRolloutResult'
-        default:
-          description: Error response, including validation strings emitted by management endpoints.
-          headers:
-            Retry-After:
-              required: false
-              description: Retry delay in seconds, when returned for capacity exhaustion.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RleErrorBody'
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/RleErrorBody'
-      tags:
-        - Reinforcement Learning Environments
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RleExecuteRolloutContent'
-        description: Task, model policy and correlation identity.
   /rl_environments/{name}/versions/{version}/tasks:
     get:
       operationId: RLE_listEnvironmentTasks
@@ -43598,56 +43556,6 @@ paths:
                 $ref: '#/components/schemas/RleErrorBody'
       tags:
         - Reinforcement Learning Environments
-  /rl_environments/{name}/versions/{version}:executeRollout:
-    post:
-      operationId: RLE_executeRollout
-      summary: Execute one rollout
-      description: |-
-        Execute a scored rollout with an exact release. Returns 400 for invalid
-        policy/task/harness, 403 when disabled, 404 for a missing release, and 409
-        for an already-reserved rollout ID. A submitted timeout has an unknown
-        outcome; never automatically replay. Dependency failures return 500 with
-        attribution and retryability, not an instruction to reuse the rollout ID.
-      parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - $ref: '#/components/parameters/RleVersionPath.name'
-        - $ref: '#/components/parameters/RleVersionPath.version'
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RleRolloutResult'
-        default:
-          description: Error response, including validation strings emitted by management endpoints.
-          headers:
-            Retry-After:
-              required: false
-              description: Retry delay in seconds, when returned for capacity exhaustion.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RleErrorBody'
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/RleErrorBody'
-      tags:
-        - Reinforcement Learning Environments
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RleExecuteRolloutContent'
-        description: Task, model policy and correlation identity.
-      x-ms-examples:
-        Evaluate one task using a project model deployment:
-          $ref: ../../examples/v1/rle/ExecuteRollout.json
-        Evaluate a published Harbor task:
-          $ref: ../../examples/v1/rle/ExecuteHarborRollout.json
   /routines:
     get:
       operationId: listRoutines
@@ -87394,53 +87302,6 @@ components:
         - $ref: '#/components/schemas/RleError'
         - type: string
       description: Failure payloads returned by the existing environment input validators.
-    RleExecuteRolloutContent:
-      type: object
-      required:
-        - rollout_id
-        - task
-        - policy
-      properties:
-        rollout_id:
-          type: string
-          description: Caller-generated canonical rollout identifier, reserved once per project.
-        task:
-          description: |-
-            Environment-defined task JSON. For Harbor, use {"name":"published-task"};
-            image, bundle and disk_image_id overrides are rejected.
-        policy:
-          $ref: '#/components/schemas/RleRolloutPolicy'
-          description: Required model binding for capture and sampling.
-        job_id:
-          type: string
-          description: Optional enclosing training job identifier.
-        harness:
-          $ref: '#/components/schemas/RleHarnessConfiguration'
-          description: Per-execution callable override; does not mutate the registered release.
-        sampling:
-          $ref: '#/components/schemas/RleSamplingConfig'
-          description: Optional sampling renderer.
-        include_upstream_diagnostics:
-          type: boolean
-          description: Opt into bounded, redacted upstream and exception diagnostics for this call.
-      description: One service-owned, scored execution; this call does not update weights.
-    RleFoundryPolicy:
-      type: object
-      required:
-        - type
-        - deployment_name
-      properties:
-        type:
-          type: string
-          enum:
-            - foundry
-          description: Foundry deployment policy discriminator.
-        deployment_name:
-          type: string
-          description: Evaluation deployment name in the project.
-      allOf:
-        - $ref: '#/components/schemas/RleRolloutPolicy'
-      description: Text-level evaluation capture using a project model deployment.
     RleGrpoDefaults:
       type: object
       properties:
@@ -87758,36 +87619,6 @@ components:
         metadata:
           description: Caller-defined metadata envelope.
       description: An RLE job's durable status and caller-defined metadata.
-    RleLoomPolicy:
-      type: object
-      required:
-        - type
-        - model_name
-        - session_id
-        - checkpoint_id
-      properties:
-        type:
-          type: string
-          enum:
-            - loom
-          description: Loom policy discriminator.
-        model_name:
-          type: string
-          description: Enabled training model name.
-        session_id:
-          type: string
-          description: Training session identifier, supplied with checkpoint_id.
-        checkpoint_id:
-          type: string
-          description: Immutable sampler checkpoint identifier.
-        sequence_id:
-          type: integer
-          format: int64
-          minimum: 0
-          description: Optional sampler sequence identifier.
-      allOf:
-        - $ref: '#/components/schemas/RleRolloutPolicy'
-      description: Checkpoint-bound training capture using Loom.
     RleModelDefaults:
       type: object
       properties:
@@ -87898,93 +87729,6 @@ components:
           format: date-time
           description: UTC terminal timestamp.
       description: Rollout detail includes a terminal timestamp when execution has ended.
-    RleRolloutEpisode:
-      type: object
-      required:
-        - kind
-        - termination_reason
-        - steps
-      properties:
-        kind:
-          type: string
-          description: Episode-shape discriminator.
-        termination_reason:
-          type: string
-          description: Why the episode ended.
-        steps:
-          type: array
-          items:
-            $ref: '#/components/schemas/RleRolloutStep'
-          description: Ordered steps associated with model turns.
-        ungraded:
-          type: boolean
-          description: True when no terminal environment grade was observed.
-      description: Bounded Gym episode evidence.
-    RleRolloutPolicy:
-      type: object
-      required:
-        - type
-        - project_endpoint
-      properties:
-        type:
-          type: string
-          description: Policy backend.
-        project_endpoint:
-          type: string
-          format: uri
-          description: Project endpoint authorizing model access.
-      discriminator:
-        propertyName: type
-        mapping:
-          loom: '#/components/schemas/RleLoomPolicy'
-          foundry: '#/components/schemas/RleFoundryPolicy'
-      description: Model binding used for rollout capture.
-    RleRolloutResult:
-      type: object
-      required:
-        - rollout_id
-        - rollout_graph
-        - reward
-      properties:
-        rollout_id:
-          type: string
-          description: Caller-supplied rollout identifier, returned unchanged.
-        rollout_graph:
-          description: Model conversation and token capture; runtime credentials are removed.
-        final_response:
-          type: string
-          description: Final user-facing text, when produced.
-        reward:
-          type: number
-          format: double
-          description: Finite reward; Gym sums per-step rewards without discounting.
-        success:
-          type: boolean
-          description: Grader verdict; absent for Gym rather than inferred from reward.
-        result:
-          description: Optional structured, sanitized target result.
-        episode:
-          $ref: '#/components/schemas/RleRolloutEpisode'
-          description: Gym episode annotations; absent for existing-agent targets.
-      description: Completed execution with sanitized graph and grading evidence.
-    RleRolloutStep:
-      type: object
-      required:
-        - capture_node_id
-        - reward
-        - episode_done
-      properties:
-        capture_node_id:
-          type: string
-          description: Model-turn identifier in the capture graph.
-        reward:
-          type: number
-          format: double
-          description: Finite reward for this step.
-        episode_done:
-          type: boolean
-          description: Whether this step terminated the episode.
-      description: One environment action correlated with a model turn.
     RleRolloutSummary:
       type: object
       required:
@@ -88047,13 +87791,6 @@ components:
           type: boolean
           description: Whether the retained result is currently available.
       description: Durable rollout metadata returned by monitoring.
-    RleSamplingConfig:
-      type: object
-      properties:
-        renderer_name:
-          type: string
-          description: Capture renderer name; the capture service chooses a compatible default if omitted.
-      description: Rendering controls for model conversation capture.
     RleTaskBundle:
       type: object
       required:
