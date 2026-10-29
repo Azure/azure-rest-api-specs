@@ -156,10 +156,10 @@ interface ProbingGateways {
         },
       },
     },
-    #{ title: "ProbingGateways_Patch" }
+    #{ title: "ProbingGateways_Update" }
   )
   @doc("Updates a Probing Gateway.")
-  patch is ArmCustomPatchAsync<
+  update is ArmCustomPatchAsync<
     ProbingGateway,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       ProbingGateway,

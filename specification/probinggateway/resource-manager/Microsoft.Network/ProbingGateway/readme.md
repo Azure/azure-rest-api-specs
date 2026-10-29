@@ -34,5 +34,5 @@ input-file:
   - examples/2026-02-09-preview/ProbingGateways_Get.json
   - examples/2026-02-09-preview/ProbingGateways_ListByResourceGroup.json
   - examples/2026-02-09-preview/ProbingGateways_ListBySubscription.json
-  - examples/2026-02-09-preview/ProbingGateways_Patch.json
+  - examples/2026-02-09-preview/ProbingGateways_Update.json
 ```
