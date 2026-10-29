@@ -148,6 +148,7 @@ import "./InterconnectGroup.tsp";
 import "./FirstPartyServiceTag.tsp";
 import "./AddressPrefixSet.tsp";
 import "./shared-models.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
