@@ -105,6 +105,9 @@ union AgentDefinitionOptInKeys {
 
   /** The Microsoft Copilot V1 preview feature opt-in. */
   microsoft_copilot_v1_preview: "MicrosoftCopilot=V1Preview",
+
+  @doc("The Voice Agents V2 preview feature opt-in.")
+  voice_agents_v2_preview: "VoiceAgents=V2Preview",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "API review requires this input-only opt-in contract to accept only the declared feature keys; arbitrary string opt-ins are not supported."

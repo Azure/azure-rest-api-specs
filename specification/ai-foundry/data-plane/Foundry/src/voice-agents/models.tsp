@@ -540,11 +540,7 @@ model TelephonyTransferTarget {
   destination: TelephonyTransferDestination;
 }
 
-@doc("The request to create a telephony binding.")
-@discriminator("provider")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("CreateTelephonyBindingContent", "csharp")
-model CreateTelephonyBindingRequest {
+alias CreateTelephonyBindingProperties = {
   @doc("The telephony provider.")
   provider: TelephonyProvider;
 
@@ -556,6 +552,14 @@ model CreateTelephonyBindingRequest {
   @doc("An optional display label for the binding.")
   @maxLength(128)
   label?: string;
+};
+
+@doc("The request to create a telephony binding.")
+@discriminator("provider")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateTelephonyBindingContent", "csharp")
+model CreateTelephonyBindingRequest {
+  ...CreateTelephonyBindingProperties;
 }
 
 alias TeamsPhoneExtensibilityTelephonyBindingProperties = {
@@ -718,10 +722,10 @@ model SipTelephonyBindingListItem extends TelephonyBindingListItem {
 }
 
 /** A telephony binding response with its entity tag. */
-alias TelephonyBindingResponse = {
+alias TelephonyBindingResponse<Binding extends TypeSpec.Reflection.Model = TelephonyBinding> = {
   @doc("The telephony binding.")
   @bodyRoot
-  body: TelephonyBinding;
+  body: Binding;
 
   @doc("The entity tag to send in the `If-Match` header when updating or deleting the binding.")
   @header("ETag")
@@ -729,8 +733,91 @@ alias TelephonyBindingResponse = {
 };
 
 /** A newly created telephony binding response. */
-alias TelephonyBindingCreatedResponse = TypeSpec.Http.Response<201> &
-  TelephonyBindingResponse;
+alias TelephonyBindingCreatedResponse<Binding extends TypeSpec.Reflection.Model = TelephonyBinding> = TypeSpec.Http.Response<201> &
+  TelephonyBindingResponse<Binding>;
+
+const VoiceAgentBindingV2RequiredPreview = #{
+  required_previews: #[AgentDefinitionOptInKeys.voice_agents_v2_preview],
+};
+
+@discriminator("provider")
+@extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
+@clientName("CreateTelephonyBindingV2Content", "csharp")
+model CreateTelephonyBindingV2Request {
+  ...CreateTelephonyBindingProperties;
+}
+
+@extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
+@clientName("CreateTeamsPhoneExtensibilityTelephonyBindingV2Content", "csharp")
+model CreateTeamsPhoneExtensibilityTelephonyBindingV2Request
+  extends CreateTelephonyBindingV2Request {
+  ...TeamsPhoneExtensibilityTelephonyBindingProperties;
+}
+
+@extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
+@clientName("CreateTwilioTelephonyBindingV2Content", "csharp")
+model CreateTwilioTelephonyBindingV2Request
+  extends CreateTelephonyBindingV2Request {
+  ...TwilioTelephonyBindingProperties;
+}
+
+@doc("The request to create an inbound SIP binding.")
+@extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
+@clientName("CreateSipTelephonyBindingV2Content", "csharp")
+model CreateSipTelephonyBindingV2Request
+  extends CreateTelephonyBindingV2Request {
+  ...SipTelephonyBindingProperties;
+}
+
+@doc("The provider cannot be changed.")
+@extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
+@clientName("UpdateTelephonyBindingV2Content", "csharp")
+model UpdateTelephonyBindingV2Request {
+  ...OmitProperties<UpdateTelephonyBindingRequest, "status">;
+}
+
+@discriminator("provider")
+@extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
+model TelephonyBindingV2 {
+  ...OmitProperties<TelephonyBindingProperties, "status">;
+}
+
+@extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
+model TeamsPhoneExtensibilityTelephonyBindingV2 extends TelephonyBindingV2 {
+  ...TeamsPhoneExtensibilityTelephonyBindingProperties;
+}
+
+@extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
+model TwilioTelephonyBindingV2 extends TelephonyBindingV2 {
+  ...TwilioTelephonyBindingProperties;
+}
+
+@extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
+model SipTelephonyBindingV2 extends TelephonyBindingV2 {
+  ...SipTelephonyBindingProperties;
+}
+
+@discriminator("provider")
+@extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
+model TelephonyBindingV2ListItem {
+  ...OmitProperties<TelephonyBindingListItem, "status">;
+}
+
+@extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
+model TeamsPhoneExtensibilityTelephonyBindingV2ListItem
+  extends TelephonyBindingV2ListItem {
+  ...TeamsPhoneExtensibilityTelephonyBindingProperties;
+}
+
+@extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
+model TwilioTelephonyBindingV2ListItem extends TelephonyBindingV2ListItem {
+  ...TwilioTelephonyBindingProperties;
+}
+
+@extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
+model SipTelephonyBindingV2ListItem extends TelephonyBindingV2ListItem {
+  ...SipTelephonyBindingProperties;
+}
 
 /** The optimistic-concurrency precondition for mutating a telephony resource. */
 alias TelephonyIfMatchHeader = {

@@ -218,6 +218,19 @@ using Azure.AI.Projects;
   "CreateTeamsPhoneExtensibilityTelephonyBindingInput"
 );
 @@clientName(CreateTelephonyBindingRequest, "CreateTelephonyBindingInput");
+@@clientName(CreateTelephonyBindingV2Request, "CreateTelephonyBindingV2Input");
+@@clientName(
+  CreateTeamsPhoneExtensibilityTelephonyBindingV2Request,
+  "CreateTeamsPhoneExtensibilityTelephonyBindingV2Input"
+);
+@@clientName(
+  CreateTwilioTelephonyBindingV2Request,
+  "CreateTwilioTelephonyBindingV2Input"
+);
+@@clientName(
+  CreateSipTelephonyBindingV2Request,
+  "CreateSipTelephonyBindingV2Input"
+);
 @@clientName(CreateTelephonyCallJobRequest, "CreateTelephonyCallJobInput");
 @@clientName(
   CreateSipTelephonyBindingRequest,
@@ -535,6 +548,7 @@ using Azure.AI.Projects;
   "TranscriptTextInputTokenDetails"
 );
 @@clientName(UpdateTelephonyBindingRequest, "UpdateTelephonyBindingInput");
+@@clientName(UpdateTelephonyBindingV2Request, "UpdateTelephonyBindingV2Input");
 
 // Use Configuration rather than Config in voice-agent model names and properties.
 @@clientName(VoiceAgentAnimationConfig, "VoiceAgentAnimationConfiguration");

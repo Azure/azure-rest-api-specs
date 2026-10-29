@@ -8,6 +8,29 @@ Guidelines on when an opt-in HTTP request header is needed:
 1. If a preview instead conditionally impacts behavior in an otherwise GA API, only require the header when creating or updating a persisted preview-enabled "thing," and apply "preview" infixes wherever possible to component names and discriminator values.
 1. GA APIs referencing an already-created preview "thing" don't expressly require a header, nor do get/list/delete operations.
 
+### Telephony binding contract revisions
+
+The `/agents/{agent_name}/telephony/bindings` collection and its `/{binding_id}` resource support two
+feature-header contracts on the same routes:
+
+| Opt-in | Binding responses and list items | PATCH input | List query |
+|--------|---------------------------------|-------------|------------|
+| `VoiceAgents=V1Preview` | Required `status` (`active` or `suspended`) | Optional `status` | Optional `status` filter |
+| `VoiceAgents=V2Preview` | No binding `status` | No `status` input | No `status` filter |
+
+Use `Foundry-Features: VoiceAgents=V2Preview` explicitly for every V2 binding operation, including
+create, get, list, update, and delete. Send only one voice binding revision per request. V1 callers
+retain their original lifecycle contract; V2 does not silently replace V1. OpenAPI combines the
+header-selected operations on each shared route, so the response alternatives and the V1-only
+`status` query parameter must be interpreted together with the selected feature header.
+
+Both revisions support Teams Phone extensibility, Twilio, and SIP bindings with the same connection,
+access-control, pagination, repeatability, and entity-tag rules. Existing V1 examples are unchanged;
+examples named `AgentTelephony_V2*` demonstrate the status-less revision with `api-version=v1`.
+This is a feature-header revision, not a new `Versions` API-version entry or examples directory.
+Calls, call jobs, conversations, traces, and their diagnostic reason codes are unchanged and continue
+using their existing `VoiceAgents=V1Preview` opt-in.
+
 ## v1 GA routes with optional "Foundry-Features" HTTP request header to enable preview features
 
 You will need to include this HTTP request header, with a value specified below,
