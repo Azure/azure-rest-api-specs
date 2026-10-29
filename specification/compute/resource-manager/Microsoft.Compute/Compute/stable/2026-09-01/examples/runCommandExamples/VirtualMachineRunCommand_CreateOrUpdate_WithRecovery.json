@@ -1,0 +1,52 @@
+{
+  "title": "Create or update a managed Run Command in Windows Recovery Environment on a VM",
+  "operationId": "VirtualMachineRunCommands_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "runCommandName": "myRecoveryRunCommand",
+    "api-version": "2026-09-01",
+    "runCommand": {
+      "location": "westus",
+      "properties": {
+        "source": {
+          "script": "Write-Output 'Running in Windows Recovery Environment'"
+        },
+        "isRecoveryRunCommand": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/runCommands/myRecoveryRunCommand",
+        "name": "myRecoveryRunCommand",
+        "type": "Microsoft.Compute/virtualMachines/runCommands",
+        "location": "westus",
+        "properties": {
+          "source": {
+            "script": "Write-Output 'Running in Windows Recovery Environment'"
+          },
+          "isRecoveryRunCommand": true,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/runCommands/myRecoveryRunCommand",
+        "name": "myRecoveryRunCommand",
+        "type": "Microsoft.Compute/virtualMachines/runCommands",
+        "location": "westus",
+        "properties": {
+          "source": {
+            "script": "Write-Output 'Running in Windows Recovery Environment'"
+          },
+          "isRecoveryRunCommand": true,
+          "provisioningState": "Creating"
+        }
+      }
+    }
+  }
+}

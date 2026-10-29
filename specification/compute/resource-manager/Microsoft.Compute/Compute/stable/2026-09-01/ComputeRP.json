@@ -6019,6 +6019,9 @@
           "Create a VMSS with an extension with protectedSettingsFromKeyVault": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithProtectedSettingsFromKeyVault.json"
           },
+          "Create a Windows VM scale set with recovery enabled and versioned gallery-script remediations": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithRecoveryProfile.json"
+          },
           "Create a custom-image scale set from an unmanaged generalized os image.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_CustomImageFromAnUnmanagedGeneralizedOsImage.json"
           },
@@ -6263,6 +6266,12 @@
           }
         },
         "x-ms-examples": {
+          "Clear a Windows VM scale set's recovery remediation set while keeping Windows recovery enabled": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Update_ClearRecoveryRemediations.json"
+          },
+          "Replace a Windows VM scale set's recovery remediation set with an explicit gallery-script version": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Update_WithRecoveryProfile.json"
+          },
           "VirtualMachineScaleSet_Update_MaximumSet_Gen": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Update_MaximumSet_Gen.json"
           },
@@ -10642,6 +10651,12 @@
         "x-ms-examples": {
           "Create VirtualMachineScaleSet VM run command.": {
             "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_CreateOrUpdate.json"
+          },
+          "Create or update a managed Run Command in Windows Recovery Environment on a VM scale set VM": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_CreateOrUpdate_WithRecovery.json"
+          },
+          "Create or update a managed Run Command in Windows Recovery Environment on a VM scale set VM using a gallery script": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_CreateOrUpdate_WithRecoveryGalleryScript.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -11229,6 +11244,9 @@
           "Create a VM with securityType ConfidentialVM with Platform Managed Keys": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSecurityTypeConfidentialVM.json"
           },
+          "Create a Windows VM with recovery enabled and versioned gallery-script remediations": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithRecoveryProfile.json"
+          },
           "Create a Windows vm with a patch setting assessmentMode of ImageDefault.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WindowsVmWithPatchSettingAssessmentModeOfImageDefault.json"
           },
@@ -11410,6 +11428,12 @@
           }
         },
         "x-ms-examples": {
+          "Clear a Windows VM's recovery remediation set while keeping Windows recovery enabled": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_ClearRecoveryRemediations.json"
+          },
+          "Replace a Windows VM's recovery remediation set with an explicit gallery-script version": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_WithRecoveryProfile.json"
+          },
           "Update a VM by detaching data disk": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_DetachDataDiskUsingToBeDetachedProperty.json"
           },
@@ -13492,6 +13516,12 @@
           }
         },
         "x-ms-examples": {
+          "Create or update a managed Run Command in Windows Recovery Environment on a VM": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_CreateOrUpdate_WithRecovery.json"
+          },
+          "Create or update a managed Run Command in Windows Recovery Environment on a VM using a gallery script": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_CreateOrUpdate_WithRecoveryGalleryScript.json"
+          },
           "Create or update a run command.": {
             "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_CreateOrUpdate.json"
           }
@@ -18591,6 +18621,23 @@
         ]
       }
     },
+    "RecoveryProfile": {
+      "type": "object",
+      "description": "Specifies the Windows recovery settings.",
+      "properties": {
+        "enableWindowsRecovery": {
+          "type": "boolean",
+          "description": "Specifies whether Windows recovery is enabled. When enabled, the platform\ninstalls the recovery components required to support recovery through\nWindows Recovery Environment (WinRE)."
+        },
+        "wellKnownGalleryScriptRemediations": {
+          "type": "array",
+          "description": "ARM resource IDs of explicitly versioned gallery scripts that are\npre-staged for execution from Windows Recovery Environment (WinRE).\nThis property may only be specified when Windows recovery is enabled.\nEach entry must identify an explicit gallery-script version, and the list\ncannot contain multiple versions of the same gallery script.\nOmitting this property on update preserves the existing remediation set;\nspecifying an empty array clears it.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "RecoveryWalkResponse": {
       "type": "object",
       "description": "Response after calling a manual recovery walk",
@@ -22439,6 +22486,10 @@
           "$ref": "#/definitions/DiagnosticsProfile",
           "description": "Specifies the boot diagnostic settings state. Minimum api-version: 2015-06-15."
         },
+        "recoveryProfile": {
+          "$ref": "#/definitions/RecoveryProfile",
+          "description": "Specifies the Windows recovery settings. Minimum API version: 2026-09-01."
+        },
         "availabilitySet": {
           "$ref": "../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates). Currently, a VM can only be added to availability set at creation time. The availability set to which the VM is being added should be under the same resource group as the availability set resource. An existing VM cannot be added to an availability set. This property cannot exist along with a non-null properties.virtualMachineScaleSet reference."
@@ -22726,6 +22777,10 @@
         "asyncExecution": {
           "type": "boolean",
           "description": "Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete."
+        },
+        "isRecoveryRunCommand": {
+          "type": "boolean",
+          "description": "Specifies whether the Run Command is executed in Windows Recovery\nEnvironment (WinRE). Recovery Run Commands use the recovery execution\npath instead of the standard VM Run Command execution path."
         },
         "runAsUser": {
           "type": "string",
@@ -24444,6 +24499,10 @@
           "$ref": "#/definitions/DiagnosticsProfile",
           "description": "The virtual machine scale set diagnostics profile."
         },
+        "recoveryProfile": {
+          "$ref": "#/definitions/RecoveryProfile",
+          "description": "Specifies the Windows recovery settings. Minimum API version: 2026-09-01."
+        },
         "extensionProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetExtensionProfile",
           "description": "The virtual machine scale set extension profile."
@@ -24820,6 +24879,10 @@
         "diagnosticsProfile": {
           "$ref": "#/definitions/DiagnosticsProfile",
           "description": "Specifies the boot diagnostic settings state. Minimum api-version: 2015-06-15."
+        },
+        "recoveryProfile": {
+          "$ref": "#/definitions/RecoveryProfile",
+          "description": "Specifies the Windows recovery settings. Minimum API version: 2026-09-01."
         },
         "extensionProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetExtensionProfile",

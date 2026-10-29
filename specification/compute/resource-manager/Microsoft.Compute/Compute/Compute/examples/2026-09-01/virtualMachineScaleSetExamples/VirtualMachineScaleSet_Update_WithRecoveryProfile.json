@@ -1,0 +1,43 @@
+{
+  "title": "Replace a Windows VM scale set's recovery remediation set with an explicit gallery-script version",
+  "operationId": "VirtualMachineScaleSets_Update",
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myVMSS",
+    "api-version": "2026-09-01",
+    "parameters": {
+      "properties": {
+        "virtualMachineProfile": {
+          "recoveryProfile": {
+            "enableWindowsRecovery": true,
+            "wellKnownGalleryScriptRemediations": [
+              "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myRecoveryGallery/scripts/repairBoot/versions/1.0.1"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVMSS",
+        "name": "myVMSS",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "virtualMachineProfile": {
+            "recoveryProfile": {
+              "enableWindowsRecovery": true,
+              "wellKnownGalleryScriptRemediations": [
+                "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myRecoveryGallery/scripts/repairBoot/versions/1.0.1"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
