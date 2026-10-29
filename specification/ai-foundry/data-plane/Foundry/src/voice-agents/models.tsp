@@ -628,7 +628,31 @@ model CreateTwilioTelephonyBindingRequest
   ...TwilioTelephonyBindingProperties;
 }
 
-@doc("The request to create an inbound SIP binding. New SIP bindings are active. The referenced same-project SipInbound connection uses authType CustomKeys. Trimmed, case-insensitive metadata.sip_auth_type selects digest or ip_acl; missing, null, blank, or empty-object values default to digest. Nonempty objects and other non-string values are invalid. Digest requires nonblank credentials.keys.username and credentials.keys.password. IP ACL requires the non-null credentials.keys.source_cidrs string: at most 4096 original characters before trimming or splitting, and at most 64 entries before deduplication. The empty string allows all source IPs; whitespace-only strings and empty entries are invalid. Entries are canonical IPv4 or native IPv6 addresses or CIDRs (prefixes 0-32 or 0-128); scoped addresses and IPv4-mapped IPv6, including hexadecimal forms, are unsupported. Extra credential keys do not select the mode and are not rejected solely because they belong to the other mode. Connection PATCH may omit/null credentials only when the effective mode is unchanged; supplied credentials must contain all mode-required keys. These settings are connection fields, not binding fields; metadata or binding CIDR fallbacks are not public inputs.")
+/**
+ * Creates an inbound SIP binding. New SIP bindings are active.
+ *
+ * Set connection_name to the name of a SipInbound connection in the same Foundry project. Configure SIP
+ * authentication on that connection, not in this binding request. The connection must use authType CustomKeys.
+ * Its metadata.sip_auth_type selects one of two authentication modes:
+ *
+ * - digest: credentials.keys.username and credentials.keys.password must both be nonblank.
+ * - ip_acl: credentials.keys.source_cidrs must be a non-null, comma-separated string of source IP addresses
+ *   or CIDRs. For example, "198.51.100.10/32,2001:db8::/32" permits those source networks.
+ *
+ * The mode is trimmed and case-insensitive. Missing, null, blank, or empty-object sip_auth_type values default
+ * to digest; nonempty objects and other non-string values are invalid. Credential key names do not select the
+ * authentication mode. Extra keys for the other mode are allowed.
+ *
+ * For ip_acl, source_cidrs allows at most 4096 characters before trimming or splitting, and at most 64 entries
+ * before deduplication. The empty string explicitly allows all source IPs; a whitespace-only string or an empty
+ * entry is invalid. Entries must be canonical IPv4 or native IPv6 addresses or CIDRs with prefixes 0-32 or 0-128,
+ * respectively. Scoped addresses and IPv4-mapped IPv6 addresses, including hexadecimal forms, are unsupported.
+ *
+ * Source-IP restrictions belong only in the connection's credentials.keys.source_cidrs, not in metadata or
+ * an allowed_source_cidrs binding property. The binding's allowed_calling_numbers independently restricts caller
+ * phone numbers. When patching the connection, credentials may be omitted or null only if the authentication mode
+ * remains unchanged; supplied credentials must include every key required by that mode.
+ */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("CreateSipTelephonyBindingContent", "csharp")
 model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
