@@ -4,7 +4,12 @@ import { getLatestCommitStatuses } from "../commit-statuses.ts";
 import { extractInputs } from "../context.ts";
 import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import { LabelAction } from "../label.ts";
-import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.ts";
+import { parseSignoffDispatchInputs } from "./arm-signoff-dispatch.ts";
+import {
+  ArmAutoSignoffLabel,
+  autoSignoffMarkers,
+  legacyAutoSignoffMarkers,
+} from "./arm-auto-signoff-labels.ts";
 import {
   getLatestSemanticReviewStatus,
   getSemanticReviewOutcome,
@@ -14,21 +19,17 @@ import {
 /** Deterministic commit statuses that must be `success`, in addition to the semantic review. */
 const requiredStatusNames = ["Swagger LintDiff", "Swagger Avocado"];
 
-/**
- * The labels this workflow manages, each with the action to take. `ARMAutoSignedOff-Test` records
- * the pilot decision. `ARMManualSignoffRequired` is added (and never removed here) when a human
- * must review. `ARMSignedOff` is deliberately not managed: the pilot never changes it.
- */
-export type ManagedLabelActions = {
-  "ARMAutoSignedOff-Test": LabelAction;
-  ARMManualSignoffRequired: LabelAction;
-};
+/** The action to take for each auto-signoff label. */
+export type ManagedLabelActions = Record<ArmAutoSignoffLabel, LabelAction>;
 
 /** Returns a label-action set that changes nothing. */
 function createNoneLabelActions(): ManagedLabelActions {
   return {
-    [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.None,
+    [ArmAutoSignoffLabel.ArmSignedOff]: LabelAction.None,
     [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
+    [ArmAutoSignoffLabel.ArmAutoSignedOff]: LabelAction.None,
+    [ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP]: LabelAction.None,
+    [ArmAutoSignoffLabel.ArmAutoSignedOffTrivial]: LabelAction.None,
   };
 }
 
@@ -36,10 +37,11 @@ function createNoneLabelActions(): ManagedLabelActions {
 
 /**
  * Workflow entry point. Resolves the PR and head SHA from the triggering event (see
- * `extractInputs`), logs the correlation for diagnosis, and returns the label actions to apply.
+ * `extractInputs`) and decides the label actions, which the workflow uploads as label artifacts
+ * for Update Labels to apply.
  *
  * @returns The correlated head SHA and PR number, which the workflow uploads as artifacts on
- *   `workflow_run` triggers so `Update Labels` can find the PR, and the label actions to apply.
+ *   `workflow_run` triggers so Update Labels can find the PR, and the label actions.
  */
 export default async function getLabelAction({ github, context, core }: GitHubScriptArgs): Promise<{
   headSha: string;
@@ -65,7 +67,15 @@ export default async function getLabelAction({ github, context, core }: GitHubSc
         : undefined,
     })}`,
   );
-  const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
+  const { owner, repo, head_sha, issue_number } =
+    context.eventName === "workflow_dispatch"
+      ? {
+          ...context.repo,
+          ...parseSignoffDispatchInputs(
+            (context.payload as WebhookEvent<"workflow-dispatch">).inputs,
+          ),
+        }
+      : await extractInputs(github, context, core);
   core.info(
     `Universal auto-signoff correlation: ${JSON.stringify({
       owner,
@@ -91,8 +101,16 @@ export default async function getLabelAction({ github, context, core }: GitHubSc
 /**
  * Decides label actions for a PR head. It first re-reads the PR and takes no action when it is
  * closed or its head is no longer `head_sha`, so a stale event cannot change current labels.
- * Otherwise it reads the PR's labels and the head SHA's commit statuses and defers to
- * `getDesiredLabelActions`.
+ * Otherwise it reads the PR's labels and, unless a human owns `ARMSignedOff`, the head SHA's
+ * commit statuses.
+ *
+ * Ownership:
+ *
+ * - `ARMSignedOff` with `ARMAutoSignedOff` is automation-owned: it is added, self-healed, and
+ *   revoked by this workflow.
+ * - `ARMSignedOff` without a marker is a human approval: it is never changed.
+ * - Legacy markers (`ARMAutoSignedOff-IncrementalTSP`, `-Trivial`) also mark automation ownership.
+ *   They are always removed; an eligible PR gets `ARMAutoSignedOff` instead.
  *
  * @returns The correlation passed in and the label actions; no action when correlation is missing
  *   or stale.
@@ -112,11 +130,8 @@ export async function getLabelActionImpl({
   github: GitHub;
   core: Core;
 }): Promise<{ headSha: string; issueNumber: number; labelActions: ManagedLabelActions }> {
-  const noneResult = {
-    headSha: head_sha,
-    issueNumber: issue_number,
-    labelActions: createNoneLabelActions(),
-  };
+  const labelActions = createNoneLabelActions();
+  const result = { headSha: head_sha, issueNumber: issue_number, labelActions };
 
   if (!Number.isInteger(issue_number) || issue_number <= 0 || !head_sha) {
     core.info(
@@ -124,7 +139,7 @@ export async function getLabelActionImpl({
         `(issueNumber=${Number.isSafeInteger(issue_number) ? issue_number : "missing"}, ` +
         `headSha=${head_sha || "missing"})`,
     );
-    return noneResult;
+    return result;
   }
 
   // Re-read the PR to prevent a completed check for an older commit from changing current labels.
@@ -138,7 +153,7 @@ export async function getLabelActionImpl({
       `Universal auto-signoff no-op: pull request state/head mismatch ` +
         `(state=${pullRequest.state}, expectedHead=${head_sha}, currentHead=${pullRequest.head.sha})`,
     );
-    return noneResult;
+    return result;
   }
 
   const labelNames: string[] = (
@@ -149,46 +164,72 @@ export async function getLabelActionImpl({
       per_page: PER_PAGE_MAX,
     })
   ).map((label) => label.name);
-  const hasAutoSignoff = labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOffTest);
   core.info(`Current pull request labels: ${JSON.stringify([...labelNames].sort())}`);
+  const has = (label: string) => labelNames.includes(label);
 
-  const labelActions = await getDesiredLabelActions({
-    owner,
-    repo,
-    head_sha,
-    labelNames,
-    hasAutoSignoff,
-    github,
-    core,
-  });
+  const hasSignedOff = has(ArmAutoSignoffLabel.ArmSignedOff);
+  const isAutomationOwned = autoSignoffMarkers.some(has);
+  if (hasSignedOff && !isAutomationOwned) {
+    core.info(
+      `${ArmAutoSignoffLabel.ArmSignedOff} is a human approval (no auto-signoff marker); ` +
+        `leaving it unchanged`,
+    );
+  } else {
+    const { eligible, requireManualSignoff } = await evaluateEligibility({
+      owner,
+      repo,
+      head_sha,
+      labelNames,
+      github,
+      core,
+    });
+
+    if (requireManualSignoff && !has(ArmAutoSignoffLabel.ArmManualSignoffRequired)) {
+      labelActions[ArmAutoSignoffLabel.ArmManualSignoffRequired] = LabelAction.Add;
+    }
+
+    if (eligible) {
+      // Adding `ARMSignedOff` back when only the marker remains self-heals a partial removal.
+      for (const label of [
+        ArmAutoSignoffLabel.ArmSignedOff,
+        ArmAutoSignoffLabel.ArmAutoSignedOff,
+      ]) {
+        if (!has(label)) labelActions[label] = LabelAction.Add;
+      }
+    } else {
+      for (const label of [
+        ArmAutoSignoffLabel.ArmSignedOff,
+        ArmAutoSignoffLabel.ArmAutoSignedOff,
+      ]) {
+        if (has(label)) labelActions[label] = LabelAction.Remove;
+      }
+    }
+    for (const label of legacyAutoSignoffMarkers) {
+      if (has(label)) labelActions[label] = LabelAction.Remove;
+    }
+  }
+
   core.info(`Universal auto-signoff label actions: ${JSON.stringify(labelActions)}`);
-
-  return {
-    ...noneResult,
-    labelActions,
-  };
+  return result;
 }
 
 /**
  * Applies the auto-signoff policy for one head SHA. In order:
  *
- * 1. Not ready for ARM review (`ARMReview` missing or `NotReadyForARMReview` present): no signoff.
- * 2. `ARM Semantic Review` is not `Passed`: no signoff. Only a manual-review hold
- *    (`Manual review required`) also adds `ARMManualSignoffRequired`; a pending, failed, or
- *    incomplete review adds nothing, because a re-run can still pass.
+ * 1. Not ready for ARM review (`ARMReview` missing or `NotReadyForARMReview` present): not eligible.
+ * 2. `ARM Semantic Review` is not `Passed`: not eligible. Only a manual-review hold
+ *    (`Manual review required`) also requires `ARMManualSignoffRequired`; a pending, failed, or
+ *    incomplete review does not, because a re-run can still pass.
  * 3. Labels block signoff (`ARMChangesRequested`, `ARMManualSignoffRequired`, or an unapproved
- *    `SuppressionReviewRequired`): no signoff.
- * 4. Any required status (`Swagger LintDiff`, `Swagger Avocado`) is not `success`: no signoff.
- * 5. Otherwise add `ARMAutoSignedOff-Test`.
- *
- * Whenever signoff is withheld, an existing `ARMAutoSignedOff-Test` is removed.
+ *    `SuppressionReviewRequired`): not eligible.
+ * 4. Any required status (`Swagger LintDiff`, `Swagger Avocado`) is not `success`: not eligible.
+ * 5. Otherwise eligible.
  */
-async function getDesiredLabelActions({
+async function evaluateEligibility({
   owner,
   repo,
   head_sha,
   labelNames,
-  hasAutoSignoff,
   github,
   core,
 }: {
@@ -196,11 +237,10 @@ async function getDesiredLabelActions({
   repo: string;
   head_sha: string;
   labelNames: string[];
-  hasAutoSignoff: boolean;
   github: GitHub;
   core: Core;
-}): Promise<ManagedLabelActions> {
-  const labelActions = createNoneLabelActions();
+}): Promise<{ eligible: boolean; requireManualSignoff: boolean }> {
+  const notEligible = { eligible: false, requireManualSignoff: false };
   const hasArmReview = labelNames.includes("ARMReview");
   const hasNotReadyForArmReview = labelNames.includes("NotReadyForARMReview");
   const isReadyForArmReview = hasArmReview && !hasNotReadyForArmReview;
@@ -214,10 +254,7 @@ async function getDesiredLabelActions({
 
   if (!isReadyForArmReview) {
     core.info("Pull request is not ready for ARM review");
-    labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest] = hasAutoSignoff
-      ? LabelAction.Remove
-      : LabelAction.None;
-    return labelActions;
+    return notEligible;
   }
 
   const statuses = await getLatestCommitStatuses(github, owner, repo, head_sha);
@@ -244,21 +281,15 @@ async function getDesiredLabelActions({
           `${ArmAutoSignoffLabel.ArmManualSignoffRequired} ` +
           `${hasManualSignoffRequired ? "is already present" : "will be added"}`,
       );
-      if (!hasManualSignoffRequired) {
-        labelActions[ArmAutoSignoffLabel.ArmManualSignoffRequired] = LabelAction.Add;
-      }
-    } else {
-      core.info(
-        `ARM semantic review has not passed: ${semanticReviewOutcome ?? "missing"}` +
-          (latestSemanticReviewStatus?.description
-            ? ` (${latestSemanticReviewStatus.description})`
-            : ""),
-      );
+      return { eligible: false, requireManualSignoff: true };
     }
-    labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest] = hasAutoSignoff
-      ? LabelAction.Remove
-      : LabelAction.None;
-    return labelActions;
+    core.info(
+      `ARM semantic review has not passed: ${semanticReviewOutcome ?? "missing"}` +
+        (latestSemanticReviewStatus?.description
+          ? ` (${latestSemanticReviewStatus.description})`
+          : ""),
+    );
+    return notEligible;
   }
 
   const hasArmChangesRequested = labelNames.includes("ARMChangesRequested");
@@ -282,10 +313,7 @@ async function getDesiredLabelActions({
   );
   if (!labelsAllowSignoff) {
     core.info("Labels do not meet requirements for universal auto-signoff");
-    labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest] = hasAutoSignoff
-      ? LabelAction.Remove
-      : LabelAction.None;
-    return labelActions;
+    return notEligible;
   }
 
   for (const statusName of requiredStatusNames) {
@@ -296,16 +324,10 @@ async function getDesiredLabelActions({
     core.info(`${statusName}: ${latestStatus?.state ?? "missing"}`);
     if (latestStatus?.state !== CommitStatusState.SUCCESS) {
       core.info(`Required status '${statusName}' did not succeed`);
-      labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest] = hasAutoSignoff
-        ? LabelAction.Remove
-        : LabelAction.None;
-      return labelActions;
+      return notEligible;
     }
   }
 
-  core.info(`Universal auto-signoff pilot requirements met: ${inspect(requiredStatusNames)}`);
-  labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest] = hasAutoSignoff
-    ? LabelAction.None
-    : LabelAction.Add;
-  return labelActions;
+  core.info(`Universal auto-signoff requirements met: ${inspect(requiredStatusNames)}`);
+  return { eligible: true, requireManualSignoff: false };
 }

@@ -112,6 +112,7 @@ interface LocalRulestackResources {
       /**
        * email address on behalf of which this API called
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getSupportInfo POST contract uses email in the query; preserve wire compatibility."
       @query("email")
       email?: string;
     }
@@ -128,14 +129,17 @@ interface LocalRulestackResources {
     ArmResponse<AdvSecurityObjectListResponse>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listAdvancedSecurityObjects POST contract uses skip in the query; preserve wire compatibility."
       @query("skip")
       skip?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listAdvancedSecurityObjects POST contract uses top in the query; preserve wire compatibility."
       @query("top")
       top?: int32;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listAdvancedSecurityObjects POST contract uses type in the query; preserve wire compatibility."
       @query("type")
       type: AdvSecurityObjectTypeEnum;
     }
@@ -153,18 +157,22 @@ interface LocalRulestackResources {
     ArmResponse<ListAppIdResponse>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listAppIds POST contract uses appIdVersion in the query; preserve wire compatibility."
       @query("appIdVersion")
       appIdVersion?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listAppIds POST contract uses appPrefix in the query; preserve wire compatibility."
       @query("appPrefix")
       appPrefix?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listAppIds POST contract uses skip in the query; preserve wire compatibility."
       @query("skip")
       skip?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listAppIds POST contract uses top in the query; preserve wire compatibility."
       @query("top")
       top?: int32;
     }
@@ -182,10 +190,12 @@ interface LocalRulestackResources {
     ArmResponse<CountriesResponse>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listCountries POST contract uses skip in the query; preserve wire compatibility."
       @query("skip")
       skip?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listCountries POST contract uses top in the query; preserve wire compatibility."
       @query("top")
       top?: int32;
     }
@@ -214,10 +224,12 @@ interface LocalRulestackResources {
     ArmResponse<PredefinedUrlCategoriesResponse>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listPredefinedUrlCategories POST contract uses skip in the query; preserve wire compatibility."
       @query("skip")
       skip?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listPredefinedUrlCategories POST contract uses top in the query; preserve wire compatibility."
       @query("top")
       top?: int32;
     }
@@ -234,14 +246,17 @@ interface LocalRulestackResources {
     ArmResponse<SecurityServicesResponse>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listSecurityServices POST contract uses skip in the query; preserve wire compatibility."
       @query("skip")
       skip?: string;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listSecurityServices POST contract uses top in the query; preserve wire compatibility."
       @query("top")
       top?: int32;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listSecurityServices POST contract uses type in the query; preserve wire compatibility."
       @query("type")
       type: SecurityServicesTypeEnum;
     }

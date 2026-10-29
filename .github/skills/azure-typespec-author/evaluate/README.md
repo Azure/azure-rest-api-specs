@@ -27,13 +27,13 @@ and prints the environment variables needed by local Vally runs:
 
 ```powershell
 # PowerShell
-node scripts/setup-environment.js --mcp-kind live `
+node scripts/setup-environment.ts --mcp-kind live `
   --mcp-root C:\path\to\pinned-mcp-artifact | Invoke-Expression
 ```
 
 ```bash
 # Bash / Zsh
-eval "$(node scripts/setup-environment.js --mcp-kind live --mcp-root /path/to/pinned-mcp-artifact)"
+eval "$(node scripts/setup-environment.ts --mcp-kind live --mcp-root /path/to/pinned-mcp-artifact)"
 ```
 
 Vally 0.14 isolates the Copilot config home by default. For local runs that authenticate through
@@ -55,7 +55,7 @@ Setup rewrites scalar eval specs to the selected local environment. Choose `mock
 only when an approved mock artifact is available:
 
 ```powershell
-node scripts/setup-environment.js --mcp-kind mock `
+node scripts/setup-environment.ts --mcp-kind mock `
   --mcp-root C:\path\to\pinned-mcp-artifact | Invoke-Expression
 ```
 
@@ -79,14 +79,15 @@ For a single-case run, change only that eval file. For a suite run, replace the 
 participating files under `evals/`. Local environment overrides should not be committed; restore
 `environment: azsdk-mcp` before committing.
 
-`setup-environment.js` does the following:
+`setup-environment.ts` does the following:
 
 1. Restore and select the repository-pinned Vally 0.14.0 toolchain, then verify the selected
    prebuilt MCP artifact.
 2. Set scalar eval specs to the selected local prebuilt environment.
 3. Install the pnpm version pinned by the current spec checkout and run
    `pnpm install --frozen-lockfile` at the repository root.
-4. Generate the fixture `package.json` from the current checkout's pnpm catalog and copy
+4. Generate the fixture `package.json` from the current checkout's pnpm catalog and root workspace
+   dependencies, including the workspace ruleset's upstream npm alias, and copy
    `.github/copilot-instructions.md` into `fixtures/instructions-test/copilot-instructions.md`.
 5. Verify fixture dependencies and print shell commands that export `AZSDK_EVAL_REPO_ROOT`,
    `AZSDK_EVAL_MCP_ROOT`, and `FIXTURE_NODE_MODULES`.
@@ -96,8 +97,8 @@ Why each piece matters:
 - **`FIXTURE_NODE_MODULES`** lets the agent symlink the spec repository's pnpm-installed root
   `node_modules` instead of installing dependencies in every case.
 - **Generated fixture package metadata** keeps every dependency version aligned with the spec
-  repository's pnpm catalog. Dependency graders read this package directly, so newly added fixture
-  dependencies are checked automatically.
+  repository's pnpm catalog and root workspace dependencies. Dependency graders read this package
+  directly, so newly added fixture dependencies are checked automatically.
 - **`copilot-instructions.md`** is copied into each run's `.github/` by the `azsdk-mcp` environments
   in `.vally.yaml`, so evals exercise the _real_ spec-repo authoring guidance. It is generated
   locally, should remain untracked, and is refreshed from the current checkout.
@@ -107,13 +108,21 @@ Why each piece matters:
 Run local evaluations from this directory (`.github/skills/azure-typespec-author/evaluate`) using
 the local/default `evaluate/.vally.yaml`.
 
+The configuration mounts the authoring and shared naming skills, plus the assessment and
+SDK-generation skills used by routing-boundary cases. Only `SKILL.md` and references remain
+in the mounted copies before the agent starts; evaluator content is removed.
+
+Naming cases `007001` through `007008` compare trigger, forced, and no-skill behavior for
+client configuration planning, direct-edit handoffs, opt-outs, and documentation-only changes.
+Cases `007009` through `007014` check routing boundaries in trigger mode only.
+
 ### Local forced smoke test
 
 Use these commands for the usual local check. Use forced mode only for this remediation work:
 
 ```powershell
 # Ensure the eval spec uses: environment: azsdk-mcp-local
-vally eval --suite forced --skill-dir .. --workers 1 --runs 1 `
+vally eval --suite forced --workers 1 --runs 1 `
   --output-dir ./results/forced --workspace ./results/forced-workspaces --verbose
 ```
 
@@ -123,10 +132,10 @@ Do not run trigger or no-skill modes for the remediation validation.
 
 Use different entry files depending on your goal:
 
-| File                     | When to use                            | Example command                                                                                                                                    |
-| ------------------------ | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `evaluate/.vally.yaml`   | Default local entry; run by suite name | `vally eval --suite forced --skill-dir .. --output-dir ./result --workspace ./debug --verbose`                                                     |
-| `evals/00xxxx.eval.yaml` | Debug one specific case file           | `vally eval --eval-spec evals/003001.eval.yaml --tag mode=forced --skill-dir .. --output-dir ./result-003001 --workspace ./debug-003001 --verbose` |
+| File                     | When to use                            | Example command                                                                                                                     |
+| ------------------------ | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `evaluate/.vally.yaml`   | Default local entry; run by suite name | `vally eval --suite forced --output-dir ./result --workspace ./debug --verbose`                                                     |
+| `evals/00xxxx.eval.yaml` | Debug one specific case file           | `vally eval --eval-spec evals/003001.eval.yaml --tag mode=forced --output-dir ./result-003001 --workspace ./debug-003001 --verbose` |
 
 Notes:
 
@@ -147,12 +156,15 @@ local entry point.
 | `decorators-forced`           | Decorator cases (004xxx) — forced mode         |
 | `warning-forced`              | Warning cases (005xxx) — forced mode           |
 | `dataplane-forced`            | Data-plane cases (006xxx) — forced mode        |
+| `naming-forced`               | Client configuration and naming handoffs       |
+| `naming-trigger`              | Naming handoffs and skill routing boundaries   |
+| `naming-no-skill`             | Naming task quality without installed skills   |
 | `forced`                      | All cases — forced mode                        |
 
-Run a suite by name and point it at the local skill directory:
+Run a suite by name using the configured skill mounts:
 
 ```powershell
-vally eval --suite forced --skill-dir .. --output-dir ./result --workspace ./debug --verbose
+vally eval --suite forced --output-dir ./result --workspace ./debug --verbose
 ```
 
 ### Run a single forced evaluation file
@@ -160,15 +172,19 @@ vally eval --suite forced --skill-dir .. --output-dir ./result --workspace ./deb
 Use `--eval-spec` + `--tag mode=forced` only when debugging one specific case file.
 
 ```powershell
-vally eval --eval-spec evals/001001.eval.yaml --tag mode=forced --skill-dir .. --output-dir ./result-forced --workspace ./debug-forced --verbose
+vally eval --eval-spec evals/001001.eval.yaml --tag mode=forced --output-dir ./result-forced --workspace ./debug-forced --verbose
 ```
 
 ### Vally local runs
 
-For local forced runs, pass `--skill-dir ..` from the `evaluate/` directory so Vally
-discovers the `azure-typespec-author` skill directory that contains `SKILL.md`. The prompts still
+For local forced runs, use the skills mounted by `evaluate/.vally.yaml`. The prompts still
 include the `@azure-typespec-author` prefix, and the evals still use `skill-invocation` graders to
 verify that the skill was invoked.
+
+For a no-skill baseline, use a temporary configuration without `environments.*.skills`
+and pass `--skill-dir` pointing to an empty directory. Explicit environment skill mounts
+take precedence over `--skill-dir`; an empty directory alone does not disable them.
+Do not commit local baseline configuration changes.
 
 Result output includes run metadata such as `Turns`, `Tool Calls`, `Executor: copilot-sdk`, and JSONL
 fields (`type`, `itemId`, `stimulus`, `durationMs`, `workspacePath`). Because tool-call tracking is
@@ -182,7 +198,7 @@ Domain-specific suites are useful for ad-hoc local runs on one scenario family:
 
 ```powershell
 # Run forced mode for versioning cases only
-vally eval --suite versioning-forced --skill-dir ..
+vally eval --suite versioning-forced
 ```
 
 ### Useful flags
@@ -201,11 +217,26 @@ remain attributable to a single trial.
 Results are written to the `results/` directory after each run. You can rerun graders with:
 
 ```bash
-vally eval --eval-spec evals/001001.eval.yaml --tag mode=forced --skill-dir .. --skip-grade --output jsonl | vally grade --eval-spec evals/001001.eval.yaml
+vally eval --eval-spec evals/001001.eval.yaml --tag mode=forced --skip-grade --output jsonl | vally grade --eval-spec evals/001001.eval.yaml
 ```
 
 ```bash
 vally grade --eval-spec evals/001001.eval.yaml < results/results.jsonl
+```
+
+The compiled-service grader accepts inline or imported Employee definitions and rejects
+unreachable resources or missing standard operations. With fixture dependencies prepared,
+run its unit tests from this directory:
+
+```powershell
+node --test scripts/check-employee-service.test.ts
+```
+
+Fixture setup tests cover both catalog-only and workspace-ruleset dependencies without installing
+packages. Run them from this directory:
+
+```powershell
+node --test scripts/setup-fixture-files.test.ts
 ```
 
 ## File Structure

@@ -57,6 +57,19 @@ const smallPullRequest = { number: issueNumber, changed_files: 1, additions: 10,
 
 function createPublisherGithub() {
   const github = createMockGithub();
+  github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+    data: {
+      statuses: [
+        {
+          context: ARM_SEMANTIC_REVIEW_STATUS,
+          state: "pending",
+          target_url: `${runUrl}/attempts/${runAttempt}`,
+          updated_at: "2026-01-01",
+        },
+      ],
+      total_count: 1,
+    },
+  });
   github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
     data: {
       artifacts: [{ name: `head-sha=${headSha}` }, { name: `issue-number=${issueNumber}` }],
@@ -341,6 +354,42 @@ describe("addSpecificationChanges", () => {
     expect(totals).toEqual({ files: 1, lines: 1 });
   });
 
+  it.each([
+    "specification/foo/Foo.Management/examples/2026-01-01",
+    "specification/foo/resource-manager/Microsoft.Foo/stable/2026-01-01/examples",
+    "specification/foo/resource-manager/Microsoft.Foo/preview/2026-01-01-preview/examples/nested",
+  ])("excludes files and lines in %s", (directory) => {
+    const examples = times(60, (i) => ({
+      filename: `${directory}/f${i}.json`,
+      additions: 3_000,
+      deletions: 3_000,
+    }));
+
+    expect(add([spec("a", 5_000), ...examples])).toEqual({
+      over: false,
+      totals: { files: 1, lines: 5_000 },
+    });
+  });
+
+  it.each(["examples.json", "examples-models/main.tsp", "my-examples/model.json"])(
+    "counts %s because examples must be a directory segment",
+    (name) => {
+      expect(add([{ filename: `specification/foo/${name}`, additions: 3, deletions: 2 }])).toEqual({
+        over: false,
+        totals: { files: 1, lines: 5 },
+      });
+    },
+  );
+
+  it("counts 50 non-example files even when examples are present", () => {
+    expect(
+      add([
+        ...times(50, (i) => spec(`f${i}`)),
+        { filename: "specification/foo/examples/request.json", additions: 6_000, deletions: 0 },
+      ]),
+    ).toEqual({ over: false, totals: { files: 50, lines: 50 } });
+  });
+
   it("accumulates across pages", () => {
     const totals: SpecificationTotals = { files: 0, lines: 0 };
 
@@ -378,8 +427,48 @@ describe("addSpecificationChanges", () => {
     expect(over).toBe(false);
     expect(totals.files).toBe(0);
   });
+
+  it.each([
+    { from: "specification/foo/model.json", to: "specification/foo/examples/model.json" },
+    { from: "specification/foo/examples/model.json", to: "specification/foo/model.json" },
+  ])("counts a rename from $from to $to including its changed lines", ({ from, to }) => {
+    expect(add([{ ...renamed(from, to), additions: 3_000, deletions: 2_001 }])).toEqual({
+      over: true,
+      totals: { files: 1, lines: 5_001 },
+    });
+  });
+
+  it.each([
+    { from: "specification/foo/examples/a.json", to: "specification/bar/examples/b.json" },
+    { from: "specification/foo/examples/a.json", to: "archive/a.json" },
+    { from: "archive/a.json", to: "specification/foo/examples/a.json" },
+  ])("ignores an example rename from $from to $to", ({ from, to }) => {
+    expect(add([{ ...renamed(from, to), additions: 6_000, deletions: 6_000 }])).toEqual({
+      over: false,
+      totals: { files: 0, lines: 0 },
+    });
+  });
 });
 describe("publishArmSemanticReviewStatus", () => {
+  it.each([
+    { state: "pending", target_url: `${runUrl}/attempts/2` },
+    { state: "pending", target_url: `${runUrl}-newer/attempts/1` },
+    { state: "success", target_url: `${runUrl}/attempts/1` },
+  ])("does not overwrite a superseding result or attempt: %j", async (status) => {
+    const github = createPublisherGithub();
+    github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+      data: {
+        statuses: [{ context: ARM_SEMANTIC_REVIEW_STATUS, updated_at: "2026-01-01", ...status }],
+        total_count: 1,
+      },
+    });
+
+    const { result } = await runPublisher({ github });
+
+    expect(result.statusPublished).toBe(false);
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+  });
+
   it("publishes Passed for a clean reviewer result", async () => {
     const { github, result } = await runPublisher();
 
@@ -512,6 +601,27 @@ describe("publishArmSemanticReviewStatus", () => {
       const files = [spec("a"), ...times(60, (i) => doc(`d${i}`))];
       const github = await publish({ changed_files: 61, additions: 61, deletions: 0 }, files);
 
+      expect(publishedState(github)).toBe(CommitStatusState.SUCCESS);
+    });
+
+    it("passes when TypeSpec and Swagger examples push both totals over the limits", async () => {
+      const files = [
+        spec("model", 5_000),
+        ...times(60, (i) => ({
+          filename:
+            i % 2 === 0
+              ? `specification/foo/Foo.Management/examples/2026-01-01/f${i}.json`
+              : `specification/foo/resource-manager/Microsoft.Foo/stable/2026-01-01/examples/f${i}.json`,
+          additions: 100,
+          deletions: 100,
+        })),
+      ];
+      const github = await publish(
+        { changed_files: 61, additions: 11_000, deletions: 6_000 },
+        files,
+      );
+
+      expect(github.rest.pulls.listFiles).toHaveBeenCalledOnce();
       expect(publishedState(github)).toBe(CommitStatusState.SUCCESS);
     });
 
@@ -660,6 +770,20 @@ describe("publishArmSemanticReviewStatus", () => {
         const { github: g } = await runPublisher({ github });
         expect(requested).toEqual([0, 1, 2]);
         expect(publishedState(g)).toBe(CommitStatusState.SUCCESS);
+      });
+
+      it("continues past example-only pages to detect oversized specifications", async () => {
+        const { github, requested } = withPages(
+          [
+            page(0, PAGE_SIZE, "specification/foo/Foo.Management/examples"),
+            page(0, 51, "specification/foo/resource-manager/Microsoft.Foo/stable/2026-01-01"),
+          ],
+          151,
+        );
+
+        const { github: g } = await runPublisher({ github });
+        expect(requested).toEqual([0, 1]);
+        expect(publishedDescription(g)).toBe(OVER_LIMITS);
       });
     });
   });
