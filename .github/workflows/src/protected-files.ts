@@ -4,6 +4,7 @@ import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { inlineCode } from "../../shared/src/markdown.ts";
 import { CoreLogger } from "./core-logger.ts";
 import type { GitHubScriptArgs, WebhookEvent } from "./github.ts";
+import { evaluateLabelAuthorization } from "./label-authorization.ts";
 
 // Maintainer entries are based on Azure/azure-rest-api-specs-maintainers; keep access up to date.
 const ALLOWED_AUTHORS = new Set(
@@ -90,7 +91,11 @@ async function getProtectedFilesApprover(
     core.warning(`Cannot verify who applied '${APPROVAL_LABEL}'; ignoring the label.`);
     return undefined;
   }
-  if (!ALLOWED_AUTHORS.has(approver.toLowerCase())) {
+  const authorization = evaluateLabelAuthorization({
+    actor: approver,
+    approvers: [...ALLOWED_AUTHORS],
+  });
+  if (authorization.status !== "authorized") {
     core.warning(
       `Account '${approver}' is not allowed to approve protected files; ignoring '${APPROVAL_LABEL}'.`,
     );
