@@ -579,9 +579,7 @@ alias TwilioTelephonyBindingProperties = {
   phone_number: string;
 };
 
-@doc("Properties of an inbound SIP binding.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model SipTelephonyBindingProperties {
+alias SipTelephonyBindingProperties = {
   provider: TelephonyProvider.sip;
 
   @doc("For UI display only.")
@@ -591,7 +589,7 @@ model SipTelephonyBindingProperties {
   @doc("Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number.")
   @maxItems(64)
   allowed_calling_numbers?: SipAllowedCallingNumber[];
-}
+};
 
 @doc("The request to create a Microsoft Teams Phone extensibility binding.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
