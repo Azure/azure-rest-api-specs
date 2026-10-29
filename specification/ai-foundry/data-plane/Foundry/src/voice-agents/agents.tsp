@@ -168,16 +168,8 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Whether the model may call multiple tools in parallel.")
   parallel_tool_calls?: boolean;
 
-  @doc("Structured inputs rendered into session prompts. Resolved ordinary strings may also be referenced in tool arguments with `{{name}}`.")
+  @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
-
-  /**
-   * Optional mappings for trusted private-input initialization, keyed by ASCII identifiers, never
-   * actual values. Not required for collection outputs: binding creates those variables
-   * automatically. Tool arguments can reference available private strings with `{{name}}`; prompts
-   * cannot. There is no secret-read API.
-   */
-  secrets?: Record<VoiceAgentSessionSecret>;
 
   @doc("Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.")
   subagent_config?: VoiceAgentSubagentConfig;
@@ -457,15 +449,7 @@ union VoiceAgentToolResponseScheduling {
   skip_if_busy: "skip_if_busy",
 }
 
-/**
- * An MCP tool available to a voice agent. Server endpoints use `server_url`; connector and tunnel
- * identifiers are not supported. In the proposed parameter-binding contract, `{{name}}` references
- * in string arguments are resolved in a separate execution copy before MCP argument validation and
- * tools/call. Missing, ambiguous, malformed or non-string references fail without invoking the
- * server. The model/history retain the original references. The configured MCP receives concrete
- * values and must not echo private inputs in its result; binding does not scrub arbitrary MCP
- * responses or control the recipient's storage.
- */
+@doc("An MCP tool available to a voice agent. Server endpoints use `server_url`; connector and tunnel identifiers are not supported.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentMcpTool extends VoiceAgentTool {
   ...OmitProperties<OpenAI.MCPTool, "type" | "connector_id" | "tunnel_id">;
@@ -475,57 +459,45 @@ model VoiceAgentMcpTool extends VoiceAgentTool {
   response_scheduling?: VoiceAgentToolResponseScheduling = VoiceAgentToolResponseScheduling.when_idle;
 }
 
-@doc("A built-in session capability explicitly enabled in Agent tools. The service handles execution; a phone binding alone does not enable tools.")
+@doc("A service-managed control that acts on the active voice session without customer code or external authentication.")
 @discriminator("name")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSystemTool extends VoiceAgentTool {
   @doc("The type of the tool. Always `system`.")
   type: "system";
 
-  @doc("The built-in capability name. Known values are stable; additional values may be added over time.")
+  @doc("The service-managed control action. Known values are stable; additional values may be added over time.")
   name: VoiceAgentSystemToolName;
 
-  /**
-   * Optional model-facing guidance about when to use this capability. When omitted, the service
-   * uses that capability's built-in description. An override does not change the parameter schema,
-   * supported capabilities, or mandatory lifecycle and private-data handling rules.
-   */
+  @doc("Optional model-facing guidance. If omitted, the service uses the tool's built-in description; overriding it does not change the tool's parameter schema.")
   description?: string;
 }
 
-@doc("A service-managed control that ends the active conversation.")
+@doc("Ends the active conversation.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentEndConversationSystemTool extends VoiceAgentSystemTool {
-  // Close each concrete configuration, not the extensible capability-name union.
-  // This excludes invocation arguments and unsupported settings such as response_scheduling.
+  // Reject undeclared configuration fields; inherited fields remain allowed.
   ...Record<never>;
 
   @doc("The service-managed control action. Always `end_conversation`.")
   name: VoiceAgentSystemToolName.end_conversation;
 }
 
-/**
- * Switches supported conversation language settings when the model identifies a user language
- * preference. The model supplies language (ISO 639-1) and reason.
- */
+@doc("Switches supported conversation language settings.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLanguageDetectionSystemTool extends VoiceAgentSystemTool {
   ...Record<never>;
 
-  @doc("The built-in capability. Always `language_detection`.")
+  @doc("The service-managed control action. Always `language_detection`.")
   name: VoiceAgentSystemToolName.language_detection;
 }
 
-/**
- * Retrieves the last user audio turn's unchanged recognition transcript with no model-call
- * arguments. Requires a speech-to-speech model, input transcription, Azure Semantic VAD and mono
- * audio. The transcript is model-visible, not extracted digits or a private collection result.
- */
+@doc("Retrieves the unchanged transcript of the last user audio turn.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDigitRecognitionSystemTool extends VoiceAgentSystemTool {
   ...Record<never>;
 
-  @doc("The built-in capability. Always `digit_recognition`.")
+  @doc("The service-managed control action. Always `digit_recognition`.")
   name: VoiceAgentSystemToolName.digit_recognition;
 }
 
@@ -559,57 +531,20 @@ union VoiceAgentSystemToolName {
   send_sms: "send_sms",
 }
 
-/**
- * Configures optional trusted private-input initialization without including the value in Agent
- * configuration. Collection outputs do not need this declaration.
- */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentSessionSecret {
-  /**
-   * Optional reference to one top-level structured input for trusted private initialization; the
-   * source must be a JSON string. The format is `structured_inputs.<identifier>`, where
-   * `<identifier>` matches `[A-Za-z_][A-Za-z0-9_]*`. This is a restricted reference, not JSONPath
-   * or JSON Pointer; nested paths, array indexes, wildcards and escaping are not supported.
-   *
-   * Public WebSocket URL inputs and Call Job inputs cannot initialize private slots: mapped values
-   * are rejected with 400 before session admission or job persistence. Do not send private values
-   * through URLs. Omit when private-input initialization is not needed; collection outputs are
-   * created separately.
-   */
-  @pattern("^structured_inputs\\.[A-Za-z_][A-Za-z0-9_]*$")
-  initial_value_from?: string;
-}
-
-/**
- * A session-local output variable name, such as `verification_code`, without a namespace prefix or
- * template syntax. The model supplies a preferred name in `output_variable_name`; collection
- * feedback returns the actual allocated name in `output_ref`. Tool inputs use `{{name}}` to read
- * it.
- */
+@doc("Bare session variable name, such as `verification_code`, without a namespace or braces. Tool arguments reference it with `{{name}}`.")
 @pattern("^[A-Za-z_][A-Za-z0-9_]*$")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar VoiceAgentOutputReference extends string;
 
-/**
- * Enables collection of one complete numeric SMS on the Agent's SMS-capable number. Agent
- * configuration may set a description and default timeout. Each invocation starts collection with
- * an explicit E.164 sender, Boolean secret and optional output_variable_name; an invocation
- * timeout overrides the configured default. Non-empty ASCII digit strings are accepted within
- * service input limits. Prompts follow listening; this does not create an SMS chat. Initially
- * supported on Twilio.
- */
+@doc("Collects one complete SMS from an explicitly selected sender.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
   ...Record<never>;
 
-  @doc("The built-in capability. Always `collect_sms`.")
+  @doc("The service-managed control action. Always `collect_sms`.")
   name: VoiceAgentSystemToolName.collect_sms;
 
-  /**
-   * Default total collection deadline in integer seconds, from 1 to 300, including receiver
-   * preparation. If omitted, the service defaults to 60 seconds. An explicit model-call
-   * timeout_seconds overrides this value. Duplicate commands do not restart the deadline.
-   */
+  @doc("Collection timeout, from 1 to 300 seconds, including receiver setup. If omitted, the service defaults to 60 seconds. Invocation timeout overrides it.")
   // TypeSpec 1.16 cannot version-project custom scalar values in min/max decorators.
   // Preserve the encoded-second bounds in OpenAPI while reusing the shared duration.
   @extension("minimum", 1)
@@ -617,37 +552,21 @@ model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
   timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
 }
 
-/**
- * Enables ASCII decimal keypad collection on the active call, preserving repeats and leading
- * zeros. Agent configuration may set a description and default timeout. Each invocation starts
- * collection with required Boolean secret and a typed completion_mode object, plus optional
- * output_variable_name and timeouts. An invocation timeout overrides the configured default.
- * completion_mode.type selects fixed_length, terminator or inter_digit_silence; mode settings
- * remain model-call arguments. The service validates and locks the policy before preparing a
- * receiver. The model never submits input digits; voice collection is unsupported.
- */
+@doc("Collects keypad digits on the current call.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectDtmfSystemTool extends VoiceAgentSystemTool {
   ...Record<never>;
 
-  @doc("The built-in capability. Always `collect_dtmf`.")
+  @doc("The service-managed control action. Always `collect_dtmf`.")
   name: VoiceAgentSystemToolName.collect_dtmf;
 
-  /**
-   * Default total collection deadline in integer seconds, from 1 to 300, including receiver
-   * preparation. If omitted, the service defaults to 60 seconds. An explicit model-call
-   * timeout_seconds overrides this value. First-digit and inter-digit timers cannot extend the
-   * effective deadline.
-   */
+  @doc("Collection timeout, from 1 to 300 seconds, including receiver setup. If omitted, the service defaults to 60 seconds. Invocation timeout overrides it.")
   @extension("minimum", 1)
   @extension("maximum", 300)
   timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
 }
 
-/**
- * Per-invocation transfer routing. Unsupported strategies are rejected before provider execution;
- * schema membership does not imply support by every provider.
- */
+@doc("Per-invocation transfer routing. Unsupported strategies are rejected before provider execution; schema membership does not imply support by every provider.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentTransferStrategy {
   string,
@@ -655,13 +574,10 @@ union VoiceAgentTransferStrategy {
   @doc("Try destinations in configured order while the total budget remains.")
   sequential: "sequential",
 
-  @doc("Randomize destination order for this invocation, then try each within the total budget. There is no shared round-robin state.")
+  @doc("Randomize destination order for this invocation, then try each within the total budget.")
   random: "random",
 
-  /**
-   * Ring destinations concurrently and select the first answer when the executor supports this
-   * strategy. The initial ACS native executor does not support it.
-   */
+  @doc("Ring destinations concurrently and select the first answer when the executor supports this strategy.")
   parallel: "parallel",
 }
 
@@ -673,19 +589,12 @@ model VoiceAgentTransferRouting {
   @doc("The routing strategy. Current native Telephony transfer supports ACS sequential and random routing only.")
   strategy: VoiceAgentTransferStrategy;
 
-  /**
-   * The per-destination ring budget in integer seconds, from 1 to 300. If omitted, the service
-   * defaults to 20 seconds. Provider-specific limits also apply; ACS supports at most 180 seconds.
-   */
+  @doc("Per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. ACS allows at most 180 seconds.")
   @minValue(1)
   @maxValue(300)
   ring_timeout_seconds?: int32 = 20;
 
-  /**
-   * The total routing budget in integer seconds, from 1 to 300. If omitted, the service defaults
-   * to 45 seconds. Must be at least `ring_timeout_seconds`; it does not restart for each
-   * destination.
-   */
+  @doc("Total routing timeout across destinations, from 1 to 300 seconds. If omitted, the service defaults to 45 seconds. Must be at least `ring_timeout_seconds`.")
   @minValue(1)
   @maxValue(300)
   total_timeout_seconds?: int32 = 45;
@@ -707,45 +616,26 @@ union VoiceAgentTransferDestinationType {
   sip: "sip",
 }
 
-/**
- * The canonical system-tool transfer destination. The service also accepts legacy kind and pstn
- * input aliases, normalizing them to type and phone_number before execution. If type and kind are
- * both supplied, they must identify the same address format. These values are never model-call
- * arguments.
- */
+@doc("The canonical system-tool transfer destination.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @extension("anyOf", #[#{ required: #["type"] }, #{ required: #["kind"] }])
 model VoiceAgentTransferDestination {
   ...Record<never>;
 
-  /**
-   * The destination format: phone_number for an E.164 number, teams for a Teams identifier, or sip
-   * for a SIP URI. Required unless the legacy kind field is supplied. The pstn alias is normalized
-   * to phone_number.
-   */
+  @doc("The destination format: phone_number for an E.164 number, teams for a Teams identifier, or sip for a SIP URI.")
   type?: VoiceAgentTransferDestinationType;
-
-  /**
-   * Legacy input alias for type. Supply at least one of type or kind; when both are supplied their
-   * normalized formats must agree. Execution uses only the canonical type field.
-   */
-  kind?: VoiceAgentTransferDestinationType;
 
   @doc("The concrete address. Phone numbers use E.164; Teams and SIP identifiers are validated against the selected provider's capabilities.")
   @minLength(1)
   value: string;
 }
 
-/**
- * One logical transfer target configured in the immutable Agent definition. Only name and
- * description are exposed to the model; destinations and routing are executor settings. This is
- * separate from the existing management transfer-target resource.
- */
+@doc("A configured logical transfer target. Only its name and description are model-visible; destinations and routing are executor settings.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTransferTarget {
   ...Record<never>;
 
-  @doc("The non-blank logical target name. Surrounding whitespace is trimmed; names must be unique after trimming within the transfer tool.")
+  @doc("The non-blank logical target name. Names must be unique after trimming within the transfer tool.")
   @minLength(1)
   @pattern("\\S")
   name: string;
@@ -753,11 +643,7 @@ model VoiceAgentTransferTarget {
   @doc("A description that helps the model select this target.")
   description?: string;
 
-  /**
-   * The ordered concrete destinations. Current ACS execution permits at most 16 PSTN or Teams
-   * destinations. PSTN requires an admitted Agent-side E.164 caller ID; Teams requires a valid
-   * user/resource-account GUID. SIP remains subject to executor capability.
-   */
+  @doc("The concrete destinations for this transfer target.")
   @minItems(1)
   destinations: VoiceAgentTransferDestination[];
 
@@ -765,18 +651,12 @@ model VoiceAgentTransferTarget {
   routing: VoiceAgentTransferRouting;
 }
 
-/**
- * Requests transfer to a configured logical target. The model supplies only target and reason; the
- * service resolves destinations from this definition. An explicit declaration is required. On
- * confirmed no-answer, the original conversation continues with failure feedback. An uncertain
- * provider result is not automatically redialed. Current native Telephony transfer is ACS-only;
- * existing Twilio management transfer is a separate capability.
- */
+@doc("Requests a transfer to an explicitly configured logical target.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTransferSystemTool extends VoiceAgentSystemTool {
   ...Record<never>;
 
-  @doc("The built-in capability. Always `transfer`.")
+  @doc("The service-managed control action. Always `transfer`.")
   name: VoiceAgentSystemToolName.transfer;
 
   @doc("The non-empty set of logical targets that the model may select.")
@@ -784,66 +664,29 @@ model VoiceAgentTransferSystemTool extends VoiceAgentSystemTool {
   targets: VoiceAgentTransferTarget[];
 }
 
-/**
- * Enables tone sending with one required model-call string, `digits`: keypad characters,
- * `{{name}}` references, or a mixture such as `{{verification_code}}#`. Names are case-sensitive
- * ASCII identifiers (`[A-Za-z_][A-Za-z0-9_]*`) referencing ordinary session strings or available
- * private variables. The service binds values at execution, keeping private values out of
- * model/history/output/diagnostics. Literal digits are model-visible. Missing, conflicting,
- * malformed or non-string references fail before sending. No actions list, nested paths,
- * expressions or recursive expansion are supported.
- *
- * Resolved digits must match `[0-9*#]+`, with limits of 18 tones for ACS and 64 for SIP/Twilio.
- * ACS uses its native API; SIP requires advertised RFC 4733 support; Twilio uses in-band audio
- * on the existing Media Stream. There is no call-direction restriction. In-band tones are
- * audible and require a compatible receiver. Provider acceptance is not IVR recognition or
- * authentication; uncertain or interrupted sending is never automatically retried.
- */
+@doc("Sends literal or templated keypad digits.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {
   ...Record<never>;
 
-  @doc("The built-in capability. Always `send_dtmf`.")
+  @doc("The service-managed control action. Always `send_dtmf`.")
   name: VoiceAgentSystemToolName.send_dtmf;
 
-  /**
-   * Total send deadline, in integer seconds from 1 to 300, measured from invocation acceptance.
-   * Includes binding, dispatch and waiting for provider acknowledgement. If omitted, the service
-   * defaults to 60 seconds. Not a model-call argument. Expiry before dispatch returns
-   * provider_not_executed; after dispatch without a confirmed result it returns
-   * provider_result_uncertain, without automatic retry. Acceptance does not confirm IVR
-   * recognition.
-   */
+  @doc("Send timeout, from 1 to 300 seconds, covering invocation acceptance to provider acknowledgement. If omitted, the service defaults to 60 seconds.")
   @extension("minimum", 1)
   @extension("maximum", 300)
   timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
 }
 
-/**
- * Enables SMS sending with two required model-call strings, `to_phone_number` and `message`.
- * Both support `{{name}}` references. Resolved values must be an E.164 recipient and non-empty
- * text within provider limits. The sender is the session's Agent-bound SMS-capable number;
- * missing, ambiguous or unsupported sender bindings fail before dispatch. Sending does not
- * start collection or an SMS conversation.
- *
- * Provider acceptance confirms submission, not delivery; uncertain sends are not automatically
- * retried. A private reference sends its contents to the selected recipient/provider without
- * expanding it into model/history/output/diagnostics. Requires outbound SMS executor support.
- */
+@doc("Sends a text message from the Agent's SMS-capable number.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSendSmsSystemTool extends VoiceAgentSystemTool {
   ...Record<never>;
 
-  @doc("The built-in capability. Always `send_sms`.")
+  @doc("The service-managed control action. Always `send_sms`.")
   name: VoiceAgentSystemToolName.send_sms;
 
-  /**
-   * Total send deadline, in integer seconds from 1 to 300, measured from invocation acceptance.
-   * Includes binding, dispatch and waiting for provider acknowledgement. If omitted, the service
-   * defaults to 60 seconds. Not a model-call argument. Expiry before dispatch returns
-   * provider_not_executed; after dispatch without a confirmed result it returns
-   * provider_result_uncertain, without automatic retry. This is not an SMS delivery deadline.
-   */
+  @doc("Send timeout, from 1 to 300 seconds, covering invocation acceptance to provider acknowledgement. If omitted, the service defaults to 60 seconds.")
   @extension("minimum", 1)
   @extension("maximum", 300)
   timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");

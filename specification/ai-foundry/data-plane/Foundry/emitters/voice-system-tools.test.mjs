@@ -101,8 +101,8 @@ for (const version of ["v1", "virtual-public-preview"]) {
   );
   const schemas = document.components.schemas;
 
-  test(`${version}: output items use a discriminator hierarchy, not a wrapper union`, () => {
-    const item = schemas.VoiceConversationItem;
+  test(`${version}: system tools extend the existing Realtime item hierarchy`, () => {
+    const item = schemas["OpenAI.RealtimeConversationItem"];
     assert.equal(item.type, "object");
     assert.equal(item.anyOf, undefined);
     assert.equal(item.oneOf, undefined);
@@ -116,26 +116,30 @@ for (const version of ["v1", "virtual-public-preview"]) {
       `${prefix}VoiceAgentSystemToolItem`,
     );
     assert.deepEqual(schemas.VoiceAgentSystemToolItem.allOf, [
-      { $ref: `${prefix}VoiceConversationItem` },
+      { $ref: `${prefix}OpenAI.RealtimeConversationItem` },
     ]);
-    const message = schemas.VoiceConversationMessageItem;
+    const message = schemas["OpenAI.RealtimeConversationItemMessage"];
     assert.equal(message.discriminator.propertyName, "role");
     assert.deepEqual(Object.keys(message.discriminator.mapping).sort(), [
       "assistant",
       "system",
       "user",
     ]);
+    assert.equal(schemas.VoiceConversationItem, undefined);
+    assert.equal(schemas.VoiceConversationItemType, undefined);
     assert.equal(schemas.VoiceAgentResponseOutputItem, undefined);
   });
 
-  test(`${version}: output projections preserve every standard item field and requirement`, () => {
-    for (const [outputName, originalName] of Object.entries(standardItems)) {
-      // The REST emitter omits upstream item types no longer reachable from a
-      // route; the event bundle still contains them for client-created items.
+  test(`${version}: REST and events reuse standard items without duplicate projections`, () => {
+    for (const [projectionName, originalName] of Object.entries(
+      standardItems,
+    )) {
+      assert.equal(schemas[projectionName], undefined, projectionName);
+      assert.equal(eventSchemas[projectionName], undefined, projectionName);
       assert.deepEqual(
-        flatten(schemas, schemas[outputName]),
+        flatten(schemas, schemas[originalName]),
         flatten(eventSchemas, eventSchemas[originalName]),
-        outputName,
+        originalName,
       );
     }
   });
@@ -168,7 +172,7 @@ for (const version of ["v1", "virtual-public-preview"]) {
     }
     assert.equal(
       schemas.VoiceResponse.properties.output.items.$ref,
-      `${prefix}VoiceConversationItem`,
+      `${prefix}OpenAI.RealtimeConversationItem`,
     );
   });
 
@@ -197,40 +201,45 @@ for (const version of ["v1", "virtual-public-preview"]) {
         assert.equal(properties.timeout_seconds.default, 60);
         assert.equal(properties.timeout_seconds.minimum, 1);
         assert.equal(properties.timeout_seconds.maximum, 300);
+        assert.match(properties.timeout_seconds.description, /from 1 to 300/);
+        assert.match(
+          properties.timeout_seconds.description,
+          /If omitted, the service defaults to 60 seconds\./,
+        );
       } else {
         assert.equal(properties.timeout_seconds, undefined);
       }
     }
+    for (const [name, defaultSeconds] of Object.entries({
+      ring_timeout_seconds: 20,
+      total_timeout_seconds: 45,
+    })) {
+      const property = schemas.VoiceAgentTransferRouting.properties[name];
+      assert.equal(property.default, defaultSeconds);
+      assert.equal(property.minimum, 1);
+      assert.equal(property.maximum, 300);
+      assert.match(property.description, /from 1 to 300/);
+      assert.ok(
+        property.description.includes(
+          `If omitted, the service defaults to ${defaultSeconds} seconds.`,
+        ),
+      );
+    }
   });
 
-  test(`${version}: private initialization accepts only the documented top-level reference grammar`, () => {
-    const property =
-      schemas.VoiceAgentSessionSecret.properties.initial_value_from;
-    const pattern = new RegExp(property.pattern);
-    for (const value of ["structured_inputs.code", "structured_inputs._code2"])
-      assert.ok(pattern.test(value));
-    for (const value of [
-      "$.structured_inputs.code",
-      "/structured_inputs/code",
-      "structured_inputs.a.b",
-      "structured_inputs[0]",
-      "structured_inputs.*",
-      "structured_inputs.0",
-      "code",
-    ]) {
-      assert.ok(!pattern.test(value), value);
-    }
-    assert.match(property.description, /not JSONPath/);
-    assert.match(property.description, /JSON Pointer/);
-    assert.match(property.description, /rejected with 400/);
+  test(`${version}: Agent configuration does not expose private initialization declarations`, () => {
+    const { properties } = flatten(schemas, schemas.VoiceAgentDefinition);
+    assert.equal(properties.secrets, undefined);
+    assert.equal(schemas.VoiceAgentSessionSecret, undefined);
+    assert.ok(!JSON.stringify(document).includes("initial_value_from"));
   });
 }
 
-test("client-created items do not acquire the service-owned output hierarchy", () => {
+test("client item schema shares the Realtime hierarchy without a separate projection", () => {
   const clientSchemas = references(eventSchemas, "VoiceAgentClientEvent");
   assert.ok(clientSchemas.has("OpenAI.RealtimeConversationItem"));
-  for (const name of ["VoiceConversationItem", "VoiceAgentSystemToolItem"])
-    assert.ok(!clientSchemas.has(name), name);
+  assert.ok(clientSchemas.has("VoiceAgentSystemToolItem"));
+  assert.ok(!clientSchemas.has("VoiceConversationItem"));
   const clientItem =
     eventSchemas["OpenAI.RealtimeClientEventConversationItemCreate"];
   assert.equal(
@@ -239,16 +248,15 @@ test("client-created items do not acquire the service-owned output hierarchy", (
   );
   const mapping =
     eventSchemas["OpenAI.RealtimeConversationItem"].discriminator.mapping;
-  assert.deepEqual(
-    Object.keys(mapping).sort(),
-    outputTypes.filter((name) => name !== "system_tool"),
-  );
+  // As with the existing MCP items, schema membership is not service admission.
+  // Runtime rejection of client-authored system_tool items needs its own tests.
+  assert.deepEqual(Object.keys(mapping).sort(), outputTypes);
 });
 
-test("live response outputs share the typed output hierarchy", () => {
+test("live response outputs use the original Realtime item hierarchy", () => {
   assert.equal(
     eventSchemas.VoiceAgentRealtimeResponse.properties.output.items.$ref,
-    `${prefix}VoiceConversationItem`,
+    `${prefix}OpenAI.RealtimeConversationItem`,
   );
   for (const eventName of [
     "OpenAI.RealtimeServerEventResponseOutputItemAdded",
@@ -256,13 +264,26 @@ test("live response outputs share the typed output hierarchy", () => {
   ]) {
     assert.equal(
       eventSchemas[eventName].properties.item.$ref,
-      `${prefix}VoiceConversationItem`,
+      `${prefix}OpenAI.RealtimeConversationItem`,
     );
   }
   assert.equal(
-    eventSchemas.VoiceConversationItem.discriminator.mapping.system_tool,
+    eventSchemas["OpenAI.RealtimeConversationItem"].discriminator.mapping
+      .system_tool,
     `${prefix}VoiceAgentSystemToolItem`,
   );
+});
+
+test("collection feedback retains private output references without Agent declarations", () => {
+  const reference = eventSchemas.VoiceAgentOutputReference;
+  assert.equal(reference.type, "string");
+  assert.equal(reference.pattern, "^[A-Za-z_][A-Za-z0-9_]*$");
+  assert.equal(
+    eventSchemas.VoiceAgentServerEventInputCollectionStatus.properties
+      .output_ref.$ref,
+    `${prefix}VoiceAgentOutputReference`,
+  );
+  assert.equal(eventSchemas.VoiceAgentSessionSecret, undefined);
 });
 
 test("new server events retain their exact wire discriminators", () => {

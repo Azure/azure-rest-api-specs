@@ -116,10 +116,7 @@ model VoiceResponseAudio {
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponse {
-  ...OmitProperties<OpenAI.RealtimeResponse, "audio" | "output">;
-
-  @doc("Persisted output items, retaining unexpanded system-tool intent without private values.")
-  output?: VoiceConversationItem[];
+  ...OmitProperties<OpenAI.RealtimeResponse, "audio">;
 
   @doc("The audio configuration used for the response, including the voice and audio format used for output.")
   audio?: VoiceResponseAudio;
@@ -147,120 +144,6 @@ alias VoiceConversationItemPersistence = {
   @visibility(Lifecycle.Read)
   response_id?: string;
 };
-
-/**
- * An output conversation item, including service-managed system-tool intent.
- * Persistence metadata is optional and is populated only for stored items.
- * This hierarchy is separate from client-created OpenAI Realtime items.
- */
-@discriminator("type")
-@usage(Usage.output | Usage.json)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationItem {
-  /** The output-item kind. Additional kinds may be added over time. */
-  type: VoiceConversationItemType;
-
-  ...VoiceConversationItemPersistence;
-}
-
-/** The extensible kinds of output conversation items. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceConversationItemType {
-  /** An existing OpenAI Realtime item kind. */
-  standard: OpenAI.RealtimeConversationItemType,
-
-  /** A service-managed system-tool intent, not a provider result. */
-  system_tool: "system_tool",
-}
-
-/** An output message, discriminated by the speaker's role. */
-@discriminator("role")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationMessageItem extends VoiceConversationItem {
-  /** The output-item kind. Always `message`. */
-  type: OpenAI.RealtimeConversationItemType.message;
-
-  /** The role of the message's speaker. */
-  role: OpenAI.RealtimeConversationItemMessageType;
-}
-
-// Copy concrete payloads, not the input discriminator hierarchy. Directly
-// extending the OpenAI root would also register system_tool for client writes.
-/** An output system message. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationSystemMessageItem extends VoiceConversationMessageItem {
-  ...OmitProperties<
-    OpenAI.RealtimeConversationItemMessageSystem,
-    "created_at" | "response_id"
-  >;
-}
-
-/** An output user message. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationUserMessageItem extends VoiceConversationMessageItem {
-  ...OmitProperties<
-    OpenAI.RealtimeConversationItemMessageUser,
-    "created_at" | "response_id"
-  >;
-}
-
-/** An output assistant message. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationAssistantMessageItem
-  extends VoiceConversationMessageItem {
-  ...OmitProperties<
-    OpenAI.RealtimeConversationItemMessageAssistant,
-    "created_at" | "response_id"
-  >;
-}
-
-/** An output function-call intent. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationFunctionCallItem extends VoiceConversationItem {
-  ...OmitProperties<
-    OpenAI.RealtimeConversationItemFunctionCall,
-    "created_at" | "response_id"
-  >;
-}
-
-/** An output function-call result. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationFunctionCallOutputItem extends VoiceConversationItem {
-  ...OmitProperties<
-    OpenAI.RealtimeConversationItemFunctionCallOutput,
-    "created_at" | "response_id"
-  >;
-}
-
-/** An output MCP tool listing. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationMcpListToolsItem extends VoiceConversationItem {
-  ...OmitProperties<OpenAI.RealtimeMCPListTools, "created_at" | "response_id">;
-}
-
-/** An output MCP tool call. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationMcpCallItem extends VoiceConversationItem {
-  ...OmitProperties<OpenAI.RealtimeMCPToolCall, "created_at" | "response_id">;
-}
-
-/** An output request for MCP tool-call approval. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationMcpApprovalRequestItem extends VoiceConversationItem {
-  ...OmitProperties<
-    OpenAI.RealtimeMCPApprovalRequest,
-    "created_at" | "response_id"
-  >;
-}
-
-/** An output response to an MCP tool-call approval request. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceConversationMcpApprovalResponseItem extends VoiceConversationItem {
-  ...OmitProperties<
-    OpenAI.RealtimeMCPApprovalResponse,
-    "created_at" | "response_id"
-  >;
-}
 
 @@extension(
   OpenAI.RealtimeConversationItem,
@@ -1545,7 +1428,12 @@ model TelephonyCallJobConfiguration {
   @minLength(1)
   purpose?: string;
 
-  @doc("Ordinary structured input values available to the agent and greeting for this call. These values are persisted with the call job and returned by its read APIs, so clients must not put private values here. Inputs mapped by a private slot's `initial_value_from` are rejected with 400 before durable job creation; use private collection when no trusted, secret-safe initialization path is available. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional ordinary inputs remain available as dynamic template variables.")
+  /**
+   * Ordinary inputs for the agent and greeting, persisted with the call job and returned on reads.
+   * Never include private values; private initialization is unsupported. Use private collection.
+   * Declared inputs are schema-validated: optional defaults apply and missing required inputs are
+   * rejected. Extra ordinary inputs remain available to templates.
+   */
   structured_inputs?: Record<unknown>;
 
   @doc("The optional execution window.")

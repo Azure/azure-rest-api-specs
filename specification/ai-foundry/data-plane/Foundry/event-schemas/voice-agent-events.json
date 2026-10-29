@@ -1263,7 +1263,8 @@
             "mcp_approval_response": "#/components/schemas/OpenAI.RealtimeMCPApprovalResponse",
             "mcp_list_tools": "#/components/schemas/OpenAI.RealtimeMCPListTools",
             "mcp_call": "#/components/schemas/OpenAI.RealtimeMCPToolCall",
-            "mcp_approval_request": "#/components/schemas/OpenAI.RealtimeMCPApprovalRequest"
+            "mcp_approval_request": "#/components/schemas/OpenAI.RealtimeMCPApprovalRequest",
+            "system_tool": "#/components/schemas/VoiceAgentSystemToolItem"
           }
         },
         "description": "A single item within a Realtime conversation.",
@@ -1788,7 +1789,8 @@
               "mcp_list_tools",
               "mcp_call",
               "mcp_approval_request",
-              "message"
+              "message",
+              "system_tool"
             ]
           }
         ],
@@ -4731,7 +4733,7 @@
             "description": "The index of the output item in the Response."
           },
           "item": {
-            "$ref": "#/components/schemas/VoiceConversationItem"
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
           }
         },
         "allOf": [
@@ -4782,7 +4784,7 @@
             "description": "The index of the output item in the Response."
           },
           "item": {
-            "$ref": "#/components/schemas/VoiceConversationItem"
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
           }
         },
         "allOf": [
@@ -7199,11 +7201,11 @@
             "enum": [
               "collect_dtmf"
             ],
-            "description": "The built-in capability. Always `collect_dtmf`."
+            "description": "The service-managed control action. Always `collect_dtmf`."
           },
           "timeout_seconds": {
             "$ref": "#/components/schemas/FoundryDurationSeconds",
-            "description": "Default total collection deadline in integer seconds, from 1 to 300, including receiver\npreparation. If omitted, the service defaults to 60 seconds. An explicit model-call\ntimeout_seconds overrides this value. First-digit and inter-digit timers cannot extend the\neffective deadline.",
+            "description": "Collection timeout, from 1 to 300 seconds, including receiver setup. If omitted, the service defaults to 60 seconds. Invocation timeout overrides it.",
             "maximum": 300,
             "minimum": 1,
             "default": 60
@@ -7217,7 +7219,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Enables ASCII decimal keypad collection on the active call, preserving repeats and leading\nzeros. Agent configuration may set a description and default timeout. Each invocation starts\ncollection with required Boolean secret and a typed completion_mode object, plus optional\noutput_variable_name and timeouts. An invocation timeout overrides the configured default.\ncompletion_mode.type selects fixed_length, terminator or inter_digit_silence; mode settings\nremain model-call arguments. The service validates and locks the policy before preparing a\nreceiver. The model never submits input digits; voice collection is unsupported.",
+        "description": "Collects keypad digits on the current call.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -7235,11 +7237,11 @@
             "enum": [
               "collect_sms"
             ],
-            "description": "The built-in capability. Always `collect_sms`."
+            "description": "The service-managed control action. Always `collect_sms`."
           },
           "timeout_seconds": {
             "$ref": "#/components/schemas/FoundryDurationSeconds",
-            "description": "Default total collection deadline in integer seconds, from 1 to 300, including receiver\npreparation. If omitted, the service defaults to 60 seconds. An explicit model-call\ntimeout_seconds overrides this value. Duplicate commands do not restart the deadline.",
+            "description": "Collection timeout, from 1 to 300 seconds, including receiver setup. If omitted, the service defaults to 60 seconds. Invocation timeout overrides it.",
             "maximum": 300,
             "minimum": 1,
             "default": 60
@@ -7253,7 +7255,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Enables collection of one complete numeric SMS on the Agent's SMS-capable number. Agent\nconfiguration may set a description and default timeout. Each invocation starts collection with\nan explicit E.164 sender, Boolean secret and optional output_variable_name; an invocation\ntimeout overrides the configured default. Non-empty ASCII digit strings are accepted within\nservice input limits. Prompts follow listening; this does not create an SMS chat. Initially\nsupported on Twilio.",
+        "description": "Collects one complete SMS from an explicitly selected sender.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -7271,7 +7273,7 @@
             "enum": [
               "digit_recognition"
             ],
-            "description": "The built-in capability. Always `digit_recognition`."
+            "description": "The service-managed control action. Always `digit_recognition`."
           }
         },
         "unevaluatedProperties": {
@@ -7282,7 +7284,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Retrieves the last user audio turn's unchanged recognition transcript with no model-call\narguments. Requires a speech-to-speech model, input transcription, Azure Semantic VAD and mono\naudio. The transcript is model-visible, not extracted digits or a private collection result.",
+        "description": "Retrieves the unchanged transcript of the last user audio turn.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -7358,7 +7360,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "A service-managed control that ends the active conversation.",
+        "description": "Ends the active conversation.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -7717,7 +7719,7 @@
             "enum": [
               "language_detection"
             ],
-            "description": "The built-in capability. Always `language_detection`."
+            "description": "The service-managed control action. Always `language_detection`."
           }
         },
         "unevaluatedProperties": {
@@ -7728,7 +7730,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Switches supported conversation language settings when the model identifies a user language\npreference. The model supplies language (ISO 639-1) and reason.",
+        "description": "Switches supported conversation language settings.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -7948,7 +7950,7 @@
             "$ref": "#/components/schemas/VoiceAgentTool"
           }
         ],
-        "description": "An MCP tool available to a voice agent. Server endpoints use `server_url`; connector and tunnel\nidentifiers are not supported. In the proposed parameter-binding contract, `{{name}}` references\nin string arguments are resolved in a separate execution copy before MCP argument validation and\ntools/call. Missing, ambiguous, malformed or non-string references fail without invoking the\nserver. The model/history retain the original references. The configured MCP receives concrete\nvalues and must not echo private inputs in its result; binding does not scrub arbitrary MCP\nresponses or control the recipient's storage.",
+        "description": "An MCP tool available to a voice agent. Server endpoints use `server_url`; connector and tunnel identifiers are not supported.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -7999,7 +8001,7 @@
       "VoiceAgentOutputReference": {
         "type": "string",
         "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
-        "description": "A session-local output variable name, such as `verification_code`, without a namespace prefix or\ntemplate syntax. The model supplies a preferred name in `output_variable_name`; collection\nfeedback returns the actual allocated name in `output_ref`. Tool inputs use `{{name}}` to read\nit.",
+        "description": "Bare session variable name, such as `verification_code`, without a namespace or braces. Tool arguments reference it with `{{name}}`.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -8057,6 +8059,13 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeResponseStatusDetails",
             "description": "Additional details about the status."
           },
+          "output": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+            },
+            "description": "The list of output items generated by the response."
+          },
           "metadata": {
             "anyOf": [
               {
@@ -8099,13 +8108,6 @@
               }
             ],
             "description": "Maximum number of output tokens for a single assistant response,\n  inclusive of tool calls, that was used in this response."
-          },
-          "output": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceConversationItem"
-            },
-            "description": "Generated output items, including service-managed system-tool intent."
           },
           "audio": {
             "$ref": "#/components/schemas/VoiceResponseAudio",
@@ -8337,11 +8339,11 @@
             "enum": [
               "send_dtmf"
             ],
-            "description": "The built-in capability. Always `send_dtmf`."
+            "description": "The service-managed control action. Always `send_dtmf`."
           },
           "timeout_seconds": {
             "$ref": "#/components/schemas/FoundryDurationSeconds",
-            "description": "Total send deadline, in integer seconds from 1 to 300, measured from invocation acceptance.\nIncludes binding, dispatch and waiting for provider acknowledgement. If omitted, the service\ndefaults to 60 seconds. Not a model-call argument. Expiry before dispatch returns\nprovider_not_executed; after dispatch without a confirmed result it returns\nprovider_result_uncertain, without automatic retry. Acceptance does not confirm IVR\nrecognition.",
+            "description": "Send timeout, from 1 to 300 seconds, covering invocation acceptance to provider acknowledgement. If omitted, the service defaults to 60 seconds.",
             "maximum": 300,
             "minimum": 1,
             "default": 60
@@ -8355,7 +8357,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Enables tone sending with one required model-call string, `digits`: keypad characters,\n`{{name}}` references, or a mixture such as `{{verification_code}}#`. Names are case-sensitive\nASCII identifiers (`[A-Za-z_][A-Za-z0-9_]*`) referencing ordinary session strings or available\nprivate variables. The service binds values at execution, keeping private values out of\nmodel/history/output/diagnostics. Literal digits are model-visible. Missing, conflicting,\nmalformed or non-string references fail before sending. No actions list, nested paths,\nexpressions or recursive expansion are supported.\n\nResolved digits must match `[0-9*#]+`, with limits of 18 tones for ACS and 64 for SIP/Twilio.\nACS uses its native API; SIP requires advertised RFC 4733 support; Twilio uses in-band audio\non the existing Media Stream. There is no call-direction restriction. In-band tones are\naudible and require a compatible receiver. Provider acceptance is not IVR recognition or\nauthentication; uncertain or interrupted sending is never automatically retried.",
+        "description": "Sends literal or templated keypad digits.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -8373,11 +8375,11 @@
             "enum": [
               "send_sms"
             ],
-            "description": "The built-in capability. Always `send_sms`."
+            "description": "The service-managed control action. Always `send_sms`."
           },
           "timeout_seconds": {
             "$ref": "#/components/schemas/FoundryDurationSeconds",
-            "description": "Total send deadline, in integer seconds from 1 to 300, measured from invocation acceptance.\nIncludes binding, dispatch and waiting for provider acknowledgement. If omitted, the service\ndefaults to 60 seconds. Not a model-call argument. Expiry before dispatch returns\nprovider_not_executed; after dispatch without a confirmed result it returns\nprovider_result_uncertain, without automatic retry. This is not an SMS delivery deadline.",
+            "description": "Send timeout, from 1 to 300 seconds, covering invocation acceptance to provider acknowledgement. If omitted, the service defaults to 60 seconds.",
             "maximum": 300,
             "minimum": 1,
             "default": 60
@@ -8391,7 +8393,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Enables SMS sending with two required model-call strings, `to_phone_number` and `message`.\nBoth support `{{name}}` references. Resolved values must be an E.164 recipient and non-empty\ntext within provider limits. The sender is the session's Agent-bound SMS-capable number;\nmissing, ambiguous or unsupported sender bindings fail before dispatch. Sending does not\nstart collection or an SMS conversation.\n\nProvider acceptance confirms submission, not delivery; uncertain sends are not automatically\nretried. A private reference sends its contents to the selected recipient/provider without\nexpanding it into model/history/output/diagnostics. Requires outbound SMS executor support.",
+        "description": "Sends a text message from the Agent's SMS-capable number.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -8633,11 +8635,11 @@
           },
           "value": {
             "type": "string",
-            "description": "The exact completed ASCII digit string, preserving leading zeros, only when collection started\nwith `secret: false`. Never present for private collection or telephony-operation feedback."
+            "description": "Completed ASCII digits, including leading zeros, only for `secret: false`; absent for private collection and telephony-operation feedback."
           },
           "output_ref": {
             "$ref": "#/components/schemas/VoiceAgentOutputReference",
-            "description": "The actual variable name allocated for a completed private collection instead of its value. It\nmay differ from the preferred name after a collision. The model uses this bare name in later\n`{{name}}` tool arguments."
+            "description": "Actual bare variable name from successful private collection, not its value. May be suffixed on collision; reference it with `{{name}}`."
           }
         },
         "allOf": [
@@ -8645,7 +8647,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "An asynchronous collection or telephony-operation outcome, separate from argument-generation\ncompletion. A collection invocation immediately returns accepted, which neither arms a receiver\nnor resumes a success turn. Listening permits the service to schedule the input prompt.\nCompleted/expired/cancelled/failed results, or a rejected busy invocation, provide safe feedback\nand schedule one follow-up when the conversation is idle, without a client function_call_output\nor response.create. Cancellation is service lifecycle cleanup on transfer, native ending or\ndisconnect, not an action on the collection tool. Stale/duplicate events do not resume another\nturn; closing/disconnected sessions do not resume. Expiry/cancellation/failure/busy allocate no\nvariable. A completed private result commits before its name is reported. Provider acceptance is\nnot SMS delivery, IVR recognition or authentication.",
+        "description": "Reports collection or telephony outcomes, not argument-generation completion. Prompt only after\n`listening`, not `accepted`. Completed, expired, cancelled, failed and busy outcomes schedule one\nidle follow-up without client `function_call_output` or `response.create`. Stale/duplicate results\nand closing/disconnected sessions do not resume. Transfer, session end or disconnect cancels\ncollection. Private values are stored before `output_ref` is emitted.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -9972,11 +9974,11 @@
           },
           "name": {
             "$ref": "#/components/schemas/VoiceAgentSystemToolName",
-            "description": "The built-in capability name. Known values are stable; additional values may be added over time."
+            "description": "The service-managed control action. Known values are stable; additional values may be added over time."
           },
           "description": {
             "type": "string",
-            "description": "Optional model-facing guidance about when to use this capability. When omitted, the service\nuses that capability's built-in description. An override does not change the parameter schema,\nsupported capabilities, or mandatory lifecycle and private-data handling rules."
+            "description": "Optional model-facing guidance. If omitted, the service uses the tool's built-in description; overriding it does not change the tool's parameter schema."
           }
         },
         "discriminator": {
@@ -9997,7 +9999,7 @@
             "$ref": "#/components/schemas/VoiceAgentTool"
           }
         ],
-        "description": "A built-in session capability explicitly enabled in Agent tools. The service handles execution; a phone binding alone does not enable tools.",
+        "description": "A service-managed control that acts on the active voice session without customer code or external authentication.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -10046,15 +10048,25 @@
           },
           "arguments": {
             "type": "string",
-            "description": "The model's original JSON-encoded arguments. Literals, including values from non-private collection, remain visible; references stay unexpanded. Privately collected values and binding-expanded execution values are never copied back into these arguments."
+            "description": "Original JSON-encoded intent: literals remain visible and references stay unexpanded. Excludes private values, resolved arguments and executor-only settings."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
+            "readOnly": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable.",
+            "readOnly": true
           }
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/VoiceConversationItem"
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
           }
         ],
-        "description": "A generated system-tool intent, not a provider outcome. Original literal\narguments remain visible and references stay unexpanded. Privately collected\nvalues, binding-expanded execution copies and executor-only settings are\nexcluded. Clients do not complete it with `function_call_output`.",
+        "description": "Service-generated system-tool intent, not a provider result. Clients cannot create it or complete it with `function_call_output`.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -10354,11 +10366,7 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/VoiceAgentTransferDestinationType",
-            "description": "The destination format: phone_number for an E.164 number, teams for a Teams identifier, or sip\nfor a SIP URI. Required unless the legacy kind field is supplied. The pstn alias is normalized\nto phone_number."
-          },
-          "kind": {
-            "$ref": "#/components/schemas/VoiceAgentTransferDestinationType",
-            "description": "Legacy input alias for type. Supply at least one of type or kind; when both are supplied their\nnormalized formats must agree. Execution uses only the canonical type field."
+            "description": "The destination format: phone_number for an E.164 number, teams for a Teams identifier, or sip for a SIP URI."
           },
           "value": {
             "type": "string",
@@ -10369,7 +10377,7 @@
         "unevaluatedProperties": {
           "not": {}
         },
-        "description": "The canonical system-tool transfer destination. The service also accepts legacy kind and pstn\ninput aliases, normalizing them to type and phone_number before execution. If type and kind are\nboth supplied, they must identify the same address format. These values are never model-call\narguments.",
+        "description": "The canonical system-tool transfer destination.",
         "anyOf": [
           {
             "required": [
@@ -10418,7 +10426,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 300,
-            "description": "The per-destination ring budget in integer seconds, from 1 to 300. If omitted, the service\ndefaults to 20 seconds. Provider-specific limits also apply; ACS supports at most 180 seconds.",
+            "description": "Per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. ACS allows at most 180 seconds.",
             "default": 20
           },
           "total_timeout_seconds": {
@@ -10426,7 +10434,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 300,
-            "description": "The total routing budget in integer seconds, from 1 to 300. If omitted, the service defaults\nto 45 seconds. Must be at least `ring_timeout_seconds`; it does not restart for each\ndestination.",
+            "description": "Total routing timeout across destinations, from 1 to 300 seconds. If omitted, the service defaults to 45 seconds. Must be at least `ring_timeout_seconds`.",
             "default": 45
           }
         },
@@ -10454,7 +10462,7 @@
             ]
           }
         ],
-        "description": "Per-invocation transfer routing. Unsupported strategies are rejected before provider execution;\nschema membership does not imply support by every provider.",
+        "description": "Per-invocation transfer routing. Unsupported strategies are rejected before provider execution; schema membership does not imply support by every provider.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -10473,7 +10481,7 @@
             "enum": [
               "transfer"
             ],
-            "description": "The built-in capability. Always `transfer`."
+            "description": "The service-managed control action. Always `transfer`."
           },
           "targets": {
             "type": "array",
@@ -10492,7 +10500,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Requests transfer to a configured logical target. The model supplies only target and reason; the\nservice resolves destinations from this definition. An explicit declaration is required. On\nconfirmed no-answer, the original conversation continues with failure feedback. An uncertain\nprovider result is not automatically redialed. Current native Telephony transfer is ACS-only;\nexisting Twilio management transfer is a separate capability.",
+        "description": "Requests a transfer to an explicitly configured logical target.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -10511,7 +10519,7 @@
             "type": "string",
             "minLength": 1,
             "pattern": "\\S",
-            "description": "The non-blank logical target name. Surrounding whitespace is trimmed; names must be unique after trimming within the transfer tool."
+            "description": "The non-blank logical target name. Names must be unique after trimming within the transfer tool."
           },
           "description": {
             "type": "string",
@@ -10523,7 +10531,7 @@
               "$ref": "#/components/schemas/VoiceAgentTransferDestination"
             },
             "minItems": 1,
-            "description": "The ordered concrete destinations. Current ACS execution permits at most 16 PSTN or Teams\ndestinations. PSTN requires an admitted Agent-side E.164 caller ID; Teams requires a valid\nuser/resource-account GUID. SIP remains subject to executor capability."
+            "description": "The concrete destinations for this transfer target."
           },
           "routing": {
             "$ref": "#/components/schemas/VoiceAgentTransferRouting",
@@ -10533,7 +10541,7 @@
         "unevaluatedProperties": {
           "not": {}
         },
-        "description": "One logical transfer target configured in the immutable Agent definition. Only name and\ndescription are exposed to the model; destinations and routing are executor settings. This is\nseparate from the existing management transfer-target resource.",
+        "description": "A configured logical transfer target. Only its name and description are model-visible; destinations and routing are executor settings.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -10590,637 +10598,6 @@
           }
         ],
         "description": "The turn-detection strategy. Additional values may be added over time.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceConversationAssistantMessageItem": {
-        "type": "object",
-        "required": [
-          "type",
-          "role",
-          "content"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the item. This may be provided by the client or generated by the server."
-          },
-          "object": {
-            "type": "string",
-            "enum": [
-              "realtime.item"
-            ],
-            "description": "Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.",
-            "x-stainless-const": true
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "message"
-            ],
-            "description": "The type of the item. Always `message`.",
-            "x-stainless-const": true
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "completed",
-              "incomplete",
-              "in_progress"
-            ],
-            "description": "The status of the item. Has no effect on the conversation."
-          },
-          "role": {
-            "type": "string",
-            "enum": [
-              "assistant"
-            ],
-            "description": "The role of the message sender. Always `assistant`.",
-            "x-stainless-const": true
-          },
-          "content": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistantContent"
-            },
-            "description": "The content of the message."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceConversationMessageItem"
-          }
-        ],
-        "description": "An output assistant message.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceConversationFunctionCallItem": {
-        "type": "object",
-        "required": [
-          "type",
-          "name",
-          "arguments"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the item. This may be provided by the client or generated by the server."
-          },
-          "object": {
-            "type": "string",
-            "enum": [
-              "realtime.item"
-            ],
-            "description": "Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.",
-            "x-stainless-const": true
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "function_call"
-            ],
-            "description": "The type of the item. Always `function_call`.",
-            "x-stainless-const": true
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "completed",
-              "incomplete",
-              "in_progress"
-            ],
-            "description": "The status of the item. Has no effect on the conversation."
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The ID of the function call."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the function being called."
-          },
-          "arguments": {
-            "type": "string",
-            "description": "The arguments of the function call. This is a JSON-encoded string representing the arguments passed to the function, for example `{\"arg1\": \"value1\", \"arg2\": 42}`."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceConversationItem"
-          }
-        ],
-        "description": "An output function-call intent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceConversationFunctionCallOutputItem": {
-        "type": "object",
-        "required": [
-          "type",
-          "call_id",
-          "output"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the item. This may be provided by the client or generated by the server."
-          },
-          "object": {
-            "type": "string",
-            "enum": [
-              "realtime.item"
-            ],
-            "description": "Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.",
-            "x-stainless-const": true
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "function_call_output"
-            ],
-            "description": "The type of the item. Always `function_call_output`.",
-            "x-stainless-const": true
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "completed",
-              "incomplete",
-              "in_progress"
-            ],
-            "description": "The status of the item. Has no effect on the conversation."
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The ID of the function call this output is for."
-          },
-          "output": {
-            "type": "string",
-            "description": "The output of the function call, this is free text and can contain any information or simply be empty."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the function that was called. A Foundry extension: OpenAI's function_call_output does not carry the function name, only `call_id`."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceConversationItem"
-          }
-        ],
-        "description": "An output function-call result.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceConversationItem": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/VoiceConversationItemType",
-            "description": "The output-item kind. Additional kinds may be added over time."
-          },
-          "created_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
-            "readOnly": true
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The id of the response that produced this item, when applicable.",
-            "readOnly": true
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "message": "#/components/schemas/VoiceConversationMessageItem",
-            "function_call": "#/components/schemas/VoiceConversationFunctionCallItem",
-            "function_call_output": "#/components/schemas/VoiceConversationFunctionCallOutputItem",
-            "mcp_list_tools": "#/components/schemas/VoiceConversationMcpListToolsItem",
-            "mcp_call": "#/components/schemas/VoiceConversationMcpCallItem",
-            "mcp_approval_request": "#/components/schemas/VoiceConversationMcpApprovalRequestItem",
-            "mcp_approval_response": "#/components/schemas/VoiceConversationMcpApprovalResponseItem",
-            "system_tool": "#/components/schemas/VoiceAgentSystemToolItem"
-          }
-        },
-        "description": "An output conversation item, including service-managed system-tool intent.\nPersistence metadata is optional and is populated only for stored items.\nThis hierarchy is separate from client-created OpenAI Realtime items.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceConversationItemType": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemType"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "system_tool"
-            ]
-          }
-        ],
-        "description": "The extensible kinds of output conversation items.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceConversationMcpApprovalRequestItem": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "server_label",
-          "name",
-          "arguments"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "mcp_approval_request"
-            ],
-            "description": "The type of the item. Always `mcp_approval_request`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the approval request."
-          },
-          "server_label": {
-            "type": "string",
-            "description": "The label of the MCP server making the request."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the tool to run."
-          },
-          "arguments": {
-            "type": "string",
-            "description": "A JSON string of arguments for the tool."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceConversationItem"
-          }
-        ],
-        "description": "An output request for MCP tool-call approval.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceConversationMcpApprovalResponseItem": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "approval_request_id",
-          "approve"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "mcp_approval_response"
-            ],
-            "description": "The type of the item. Always `mcp_approval_response`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the approval response."
-          },
-          "approval_request_id": {
-            "type": "string",
-            "description": "The ID of the approval request being answered."
-          },
-          "approve": {
-            "type": "boolean",
-            "description": "Whether the request was approved."
-          },
-          "reason": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceConversationItem"
-          }
-        ],
-        "description": "An output response to an MCP tool-call approval request.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceConversationMcpCallItem": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "server_label",
-          "name",
-          "arguments"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "mcp_call"
-            ],
-            "description": "The type of the item. Always `mcp_call`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the tool call."
-          },
-          "server_label": {
-            "type": "string",
-            "description": "The label of the MCP server running the tool."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the tool that was run."
-          },
-          "arguments": {
-            "type": "string",
-            "description": "A JSON string of the arguments passed to the tool."
-          },
-          "approval_request_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "output": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "error": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeMCPError"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceConversationItem"
-          }
-        ],
-        "description": "An output MCP tool call.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceConversationMcpListToolsItem": {
-        "type": "object",
-        "required": [
-          "type",
-          "server_label",
-          "tools"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "mcp_list_tools"
-            ],
-            "description": "The type of the item. Always `mcp_list_tools`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the list."
-          },
-          "server_label": {
-            "type": "string",
-            "description": "The label of the MCP server."
-          },
-          "tools": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.MCPListToolsTool"
-            },
-            "description": "The tools available on the server."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceConversationItem"
-          }
-        ],
-        "description": "An output MCP tool listing.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceConversationMessageItem": {
-        "type": "object",
-        "required": [
-          "type",
-          "role"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "message"
-            ],
-            "description": "The output-item kind. Always `message`."
-          },
-          "role": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageType",
-            "description": "The role of the message's speaker."
-          }
-        },
-        "discriminator": {
-          "propertyName": "role",
-          "mapping": {
-            "system": "#/components/schemas/VoiceConversationSystemMessageItem",
-            "user": "#/components/schemas/VoiceConversationUserMessageItem",
-            "assistant": "#/components/schemas/VoiceConversationAssistantMessageItem"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceConversationItem"
-          }
-        ],
-        "description": "An output message, discriminated by the speaker's role.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceConversationSystemMessageItem": {
-        "type": "object",
-        "required": [
-          "type",
-          "role",
-          "content"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the item. This may be provided by the client or generated by the server."
-          },
-          "object": {
-            "type": "string",
-            "enum": [
-              "realtime.item"
-            ],
-            "description": "Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.",
-            "x-stainless-const": true
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "message"
-            ],
-            "description": "The type of the item. Always `message`.",
-            "x-stainless-const": true
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "completed",
-              "incomplete",
-              "in_progress"
-            ],
-            "description": "The status of the item. Has no effect on the conversation."
-          },
-          "role": {
-            "type": "string",
-            "enum": [
-              "system"
-            ],
-            "description": "The role of the message sender. Always `system`.",
-            "x-stainless-const": true
-          },
-          "content": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageSystemContent"
-            },
-            "description": "The content of the message."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceConversationMessageItem"
-          }
-        ],
-        "description": "An output system message.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceConversationUserMessageItem": {
-        "type": "object",
-        "required": [
-          "type",
-          "role",
-          "content"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the item. This may be provided by the client or generated by the server."
-          },
-          "object": {
-            "type": "string",
-            "enum": [
-              "realtime.item"
-            ],
-            "description": "Identifier for the API object being returned - always `realtime.item`. Optional when creating a new item.",
-            "x-stainless-const": true
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "message"
-            ],
-            "description": "The type of the item. Always `message`.",
-            "x-stainless-const": true
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "completed",
-              "incomplete",
-              "in_progress"
-            ],
-            "description": "The status of the item. Has no effect on the conversation."
-          },
-          "role": {
-            "type": "string",
-            "enum": [
-              "user"
-            ],
-            "description": "The role of the message sender. Always `user`.",
-            "x-stainless-const": true
-          },
-          "content": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageUserContent"
-            },
-            "description": "The content of the message."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceConversationMessageItem"
-          }
-        ],
-        "description": "An output user message.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

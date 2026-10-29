@@ -91,14 +91,9 @@ interface VoiceAgentWebSocket {
       @query store?: boolean;
 
       /**
-       * Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and
-       * URL-encoded as this query parameter. Supplied values override definition defaults when rendering the
-       * agent's instructions and session-start greeting for this session only. The decoded value must be a JSON
-       * object no larger than 32 KiB with a maximum nesting depth of 16.
-       * This URL query accepts ordinary inputs only, not inputs mapped by a private slot's `initial_value_from`.
-       * Clients must not transmit private values in URLs; mapped private inputs are rejected with 400 before
-       * session admission. Rejection cannot undo prior URL logging. Use private collection when no trusted,
-       * secret-safe initialization path is available.
+       * URL-encoded JSON object of ordinary session inputs, overriding definition defaults for
+       * prompts and greeting. Maximum decoded size: 32 KiB; nesting depth: 16. Never send private
+       * values in URLs: private initialization is unsupported. Use private collection instead.
        */
       @query structured_inputs?: string;
 
@@ -258,7 +253,7 @@ interface AgentEndpointConversations {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<VoiceConversationItem>
+    AgentsPagedResult<OpenAI.RealtimeConversationItem>
   >;
 
   /**
@@ -282,7 +277,7 @@ interface AgentEndpointConversations {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<VoiceConversationItem>
+    AgentsPagedResult<OpenAI.RealtimeConversationItem>
   >;
 
   /**
@@ -308,7 +303,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item to retrieve. */
       @path item_id: string;
     },
-    VoiceConversationItem
+    OpenAI.RealtimeConversationItem
   >;
 
   /**
