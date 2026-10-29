@@ -32,7 +32,7 @@ model ManagedClusterAgentPoolProfile
   /**
    * Unique name of the agent pool profile in the context of the subscription and resource group. Windows agent pool names must be 6 characters or less.
    */
-  @pattern("^[a-z][a-z0-9]{0,11}$")
+  @pattern("^[a-z][a-z0-9]{0,38}$")
   name: string;
 }
 
