@@ -266,7 +266,8 @@ interface MicrosoftEntraAdministrators {
   @doc("Gets information about a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
   get is ArmResourceRead<MicrosoftEntraAdministrator>;
 
-  @doc("Creates or replaces a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The service supports HTTP 202 for asynchronous Microsoft Entra administrator creation or replacement in addition to the existing HTTP 200 and 201 responses. This response is retained to match the service contract."
+  @doc("Creates or replaces a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal. An HTTP 202 response indicates that the operation was accepted and is still in progress; poll Azure-AsyncOperation to completion.")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrReplace is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     MicrosoftEntraAdministrator,
@@ -278,6 +279,8 @@ interface MicrosoftEntraAdministrators {
           MicrosoftEntraAdministrator,
           HorizonDbResourceLroHeaders<MicrosoftEntraAdministrator>
         >
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MicrosoftEntraAdministrator> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   @doc("Deletes a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
