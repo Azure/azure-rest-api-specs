@@ -50292,12 +50292,7 @@ components:
           description: Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number.
       allOf:
         - $ref: '#/components/schemas/CreateTelephonyBindingRequest'
-      description: |-
-        References a same-project SipInbound connection using CustomKeys authentication. New bindings are active.
-        Configure authentication and source-IP restrictions on the connection; caller-number restrictions belong here.
-        metadata.sip_auth_type selects digest (the default) or ip_acl. Digest requires username/password;
-        ip_acl requires credentials.keys.source_cidrs, a comma-separated IP/CIDR list. An empty string allows all
-        source IPs; allowed_calling_numbers independently restricts caller phone numbers.
+      description: The request to create an inbound SIP binding.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

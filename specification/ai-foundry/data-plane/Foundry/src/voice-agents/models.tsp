@@ -609,13 +609,7 @@ model CreateTwilioTelephonyBindingRequest
   ...TwilioTelephonyBindingProperties;
 }
 
-/**
- * References a same-project SipInbound connection using CustomKeys authentication. New bindings are active.
- * Configure authentication and source-IP restrictions on the connection; caller-number restrictions belong here.
- * metadata.sip_auth_type selects digest (the default) or ip_acl. Digest requires username/password;
- * ip_acl requires credentials.keys.source_cidrs, a comma-separated IP/CIDR list. An empty string allows all
- * source IPs; allowed_calling_numbers independently restricts caller phone numbers.
- */
+@doc("The request to create an inbound SIP binding.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("CreateSipTelephonyBindingContent", "csharp")
 model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
