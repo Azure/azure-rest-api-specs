@@ -2298,6 +2298,11 @@ union ProvisioningStateUnion {
   "NetworkProxyResourceData",
   "csharp"
 );
+@@clientName(
+  Microsoft.Network.ProxyResourceWithReadOnlyID,
+  "NetworkReadOnlyResourceData",
+  "csharp"
+);
 @@clientName(WritableResource, "NetworkWritableResourceData", "csharp");
 @@clientName(
   Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.requestTimeout,
