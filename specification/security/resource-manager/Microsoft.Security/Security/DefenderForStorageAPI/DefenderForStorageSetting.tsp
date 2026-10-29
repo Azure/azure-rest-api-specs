@@ -117,6 +117,10 @@ interface DefenderForStorageSettings {
   /**
    * Gets the Defender for Storage settings for the specified storage account.
    */
+  @returnTypeChangedFrom(
+    Versions.v2026_06_01_preview,
+    ArmResponse<DefenderForStorageSetting> | CloudError
+  )
   @tag("DefenderForStorage")
   get is DefenderForStorageSettingsOps.Read<DefenderForStorageSetting>;
 
@@ -146,6 +150,10 @@ interface DefenderForStorageSettings {
   /**
    * Lists the Defender for Storage settings for the specified storage account.
    */
+  @returnTypeChangedFrom(
+    Versions.v2026_06_01_preview,
+    ArmResponse<DefenderForStorageSettingList> | CloudError
+  )
   @tag("DefenderForStorage")
   list is DefenderForStorageSettingsOps.List<
     DefenderForStorageSetting,
@@ -156,6 +164,10 @@ interface DefenderForStorageSettings {
    * Cancels a Defender for Storage malware scan for the specified storage account.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "The legacy ExtensionOperations.ActionSync template registers actions in the list-operation collection, so the CRUD/list response rule also checks this POST action. Cancellation intentionally returns MalwareScan rather than the parent DefenderForStorageSetting."
+  @returnTypeChangedFrom(
+    Versions.v2026_06_01_preview,
+    ArmResponse<MalwareScan> | CloudError
+  )
   @tag("DefenderForStorage")
   @tag("Antimalware")
   @tag("Scan")
@@ -213,6 +225,10 @@ interface DefenderForStorageSettings {
   /**
    * Gets the Defender for Storage malware scan for the specified storage resource.
    */
+  @returnTypeChangedFrom(
+    Versions.v2026_06_01_preview,
+    ArmResponse<MalwareScan> | CloudError
+  )
   @tag("DefenderForStorage")
   @tag("Antimalware")
   @tag("Scan")
