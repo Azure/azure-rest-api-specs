@@ -418,10 +418,9 @@ model VoiceRecording {
 scalar TelephonyBindingId extends string;
 
 /**
- * An exact E.164 number or an anchored pattern matched against the entire normalized caller number.
- * Only ASCII digits, digit classes/ranges and bounded repetition are supported. The service also rejects
- * descending ranges, reversed bounds and patterns that can match outside E.164's 2-15 digit length.
- * Supply trimmed values; arbitrary regexes are not supported or rewritten.
+ * An exact E.164 caller number or a restricted pattern matched against the entire normalized number.
+ * `+14255550123` allows only that number; `^\+1425[0-9]{7}$` allows numbers starting with `+1425`
+ * followed by exactly seven digits.
  */
 @maxLength(256)
 @pattern("^(?:\\+[1-9][0-9]{1,14}|\\^\\\\\\+(?:[1-9]|\\[1-9\\])(?:(?:[0-9]|\\[[0-9](?:-[0-9])?\\])(?:\\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\\})?)+\\$)$")
