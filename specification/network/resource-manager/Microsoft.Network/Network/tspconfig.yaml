@@ -1,9 +1,23 @@
+emit:
+  - "@azure-tools/typespec-autorest"
 parameters:
   "service-dir":
     default: "sdk/network"
 options:
+  "@azure-tools/typespec-autorest":
+    type-name-strategy: "name-only"
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/{version-status}/{version}/examples"
+    skip-example-copying: true
+    output-file: "{version-status}/{version}/{feature}.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    output-splitting: "legacy-feature-files"
   "@azure-tools/typespec-python":
     service-dir: "sdk/network"
+    examples-dir: "{project-root}/{version-status}/{version}/examples"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-network"
     namespace: "azure.mgmt.network"
     generate-test: true
@@ -12,6 +26,7 @@ options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-network"
     service-dir: "sdk/network"
+    examples-dir: "{project-root}/{version-status}/{version}/examples"
     namespace: "com.azure.resourcemanager.network"
     service-name: "Network"
     flavor: azure
@@ -47,6 +62,7 @@ options:
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-network"
     service-dir: "sdk/network"
+    examples-dir: "{project-root}/{version-status}/{version}/examples"
     flavor: "azure"
     compatibility-lro: true
     treat-unknown-as-record: true
@@ -55,6 +71,7 @@ options:
       name: "@azure/arm-network"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/network"
+    examples-dir: "{project-root}/{version-status}/{version}/examples"
     emitter-output-dir: "{output-dir}/{service-dir}/armnetwork"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnetwork"
     fix-const-stuttering: false
@@ -66,6 +83,7 @@ options:
   "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.ResourceManager.Network"
+    examples-dir: "{project-root}/{version-status}/{version}/examples"
     api-version:
       Microsoft:
         Network: "2026-01-01"
@@ -73,6 +91,7 @@ options:
   "@azure-typespec/http-client-csharp-provisioning":
     namespace: "Azure.Provisioning.Network"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    examples-dir: "{project-root}/{version-status}/{version}/examples"
     api-version:
       Microsoft:
         Network: "2026-01-01"
