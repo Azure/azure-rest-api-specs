@@ -80,13 +80,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Common.CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Lists the Defender for Storage settings for the specified storage account.": {
-            "$ref": "./examples/DefenderForStorage/ListDefenderForStorageSettings_example.json"
           }
         },
         "x-ms-pageable": {
@@ -132,13 +127,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Common.CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the Defender for Storage settings for the specified resource.": {
-            "$ref": "./examples/DefenderForStorage/GetDefenderForStorageSettings_example.json"
           }
         }
       },
@@ -197,11 +187,6 @@
               "$ref": "#/definitions/Common.CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Creates or updates the Defender for Storage settings on a specified resource.": {
-            "$ref": "./examples/DefenderForStorage/PutDefenderForStorageSettings_example.json"
-          }
         }
       }
     },
@@ -253,13 +238,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Common.CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the Defender for Storage malware scan for the specified storage resource.": {
-            "$ref": "./examples/DefenderForStorage/GetMalwareScan_example.json"
           }
         }
       }
@@ -312,13 +292,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Common.CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Cancel a Defender for Storage malware scan for the specified storage resource.": {
-            "$ref": "./examples/DefenderForStorage/CancelMalwareScan_example.json"
           }
         }
       }
@@ -355,7 +330,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Optional request body to filter which blobs and files to scan.",
+            "description": "Optional request body to filter which blobs and files to scan.\nSupported since API version 2026-01-01-preview.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/StartMalwareScanRequest"
@@ -374,11 +349,6 @@
             "schema": {
               "$ref": "#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Initiate a Defender for Storage malware scan for the specified storage account.": {
-            "$ref": "./examples/DefenderForStorage/StartMalwareScan_example.json"
           }
         }
       }
@@ -894,7 +864,7 @@
         "estimatedScanCostUSD": {
           "type": "number",
           "format": "double",
-          "description": "The estimated cost of the scan. Only available for a scan which has terminated."
+          "description": "The estimated cost of the scan. Only available for a scan which has terminated.\nThis property is deprecated and retained for backward compatibility."
         }
       }
     },

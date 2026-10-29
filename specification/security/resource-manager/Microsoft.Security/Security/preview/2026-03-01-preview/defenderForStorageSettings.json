@@ -80,7 +80,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Common.CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -132,7 +132,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Common.CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -253,7 +253,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Common.CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -312,7 +312,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Common.CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -355,7 +355,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Optional request body to filter which blobs and files to scan.",
+            "description": "Optional request body to filter which blobs and files to scan.\nSupported since API version 2026-01-01-preview.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/StartMalwareScanRequest"
@@ -945,7 +945,7 @@
         "estimatedScanCostUSD": {
           "type": "number",
           "format": "double",
-          "description": "The estimated cost of the scan. Only available for a scan which has terminated."
+          "description": "The estimated cost of the scan. Only available for a scan which has terminated.\nThis property is deprecated and retained for backward compatibility."
         }
       }
     },
