@@ -212,6 +212,7 @@ interface VirtualMachineScaleSets {
       /**
        * Optional parameter to hibernate a virtual machine from the VM scale set. (This feature is available for VMSS with Flexible OrchestrationMode only)
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing deallocate POST contract uses hibernate in the query; preserve wire compatibility."
       @query("hibernate")
       hibernate?: boolean;
     },
@@ -233,6 +234,7 @@ interface VirtualMachineScaleSets {
       /**
        * Optional parameter to force delete virtual machines from the VM scale set. (Feature in Preview)
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing deleteInstances POST contract uses forceDeletion in the query; preserve wire compatibility."
       @query("forceDeletion")
       forceDeletion?: boolean;
     },
@@ -251,18 +253,21 @@ interface VirtualMachineScaleSets {
       /**
        * The platform update domain for which a manual recovery walk is requested
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing forceRecoveryServiceFabricPlatformUpdateDomainWalk POST contract uses platformUpdateDomain in the query; preserve wire compatibility."
       @query("platformUpdateDomain")
       platformUpdateDomain: int32;
 
       /**
        * The zone in which the manual recovery walk is requested for cross zone virtual machine scale set
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing forceRecoveryServiceFabricPlatformUpdateDomainWalk POST contract uses zone in the query; preserve wire compatibility."
       @query("zone")
       zone?: string;
 
       /**
        * The placement group id for which the manual recovery walk is requested.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing forceRecoveryServiceFabricPlatformUpdateDomainWalk POST contract uses placementGroupId in the query; preserve wire compatibility."
       @query("placementGroupId")
       placementGroupId?: string;
     }
@@ -335,6 +340,7 @@ interface VirtualMachineScaleSets {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing powerOff POST contract uses skipShutdown in the query; preserve wire compatibility."
       @query("skipShutdown")
       skipShutdown?: boolean;
     },
