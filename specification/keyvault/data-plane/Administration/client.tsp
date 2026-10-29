@@ -5,7 +5,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(KeyVault.Versions.v2026_01_01_preview)
+@TypeSpec.Versioning.useDependency(KeyVault.Versions.v2026_04_01)
 namespace ClientCustomizations;
 
 //Java customizations
