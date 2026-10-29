@@ -341,6 +341,8 @@ model SimulationSeedDataGenerationJobConfiguration
   type: DataGenerationJobType.simulation_seed;
 
   @doc("Maximum number of samples to generate, up to service-defined limits.")
+  @minValue(1)
+  @maxValue(1000)
   max_samples: int32;
 }
 
