@@ -737,7 +737,7 @@ alias TelephonyBindingCreatedResponse<Binding extends TypeSpec.Reflection.Model 
   TelephonyBindingResponse<Binding>;
 
 const VoiceAgentBindingV2RequiredPreview = #{
-  required_previews: #[AgentDefinitionOptInKeys.voice_agents_v2_preview],
+  required_previews: #[TelephonyBindingOptInKeys.voice_agents_v2_preview],
 };
 
 @discriminator("provider")
@@ -761,9 +761,7 @@ model CreateTwilioTelephonyBindingV2Request
   ...TwilioTelephonyBindingProperties;
 }
 
-/**
- * Uses the same connection authentication as CreateSipTelephonyBindingRequest, without lifecycle status.
- */
+@doc("The request to create an inbound SIP binding.")
 @extension("x-ms-foundry-meta", VoiceAgentBindingV2RequiredPreview)
 @clientName("CreateSipTelephonyBindingV2Content", "csharp")
 model CreateSipTelephonyBindingV2Request

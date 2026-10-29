@@ -45422,7 +45422,6 @@ components:
         - HostedAgents=V1Preview
         - ContainerAgents=V1Preview
         - MicrosoftCopilot=V1Preview
-        - VoiceAgents=V2Preview
       description: Feature opt-in keys for agent definition operations supporting conditional preview features.
     AgentEndpointAuthorizationScheme:
       type: object
@@ -50356,7 +50355,7 @@ components:
           description: Omit or send [] to allow any caller. Entries match the entire normalized E.164 caller number.
       allOf:
         - $ref: '#/components/schemas/CreateTelephonyBindingV2Request'
-      description: Uses the same connection authentication as CreateSipTelephonyBindingRequest, without lifecycle status.
+      description: The request to create an inbound SIP binding.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V2Preview
