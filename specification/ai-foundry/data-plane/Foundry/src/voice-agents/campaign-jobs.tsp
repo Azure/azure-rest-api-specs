@@ -7,35 +7,30 @@ using Azure.Core;
 
 namespace Azure.AI.Projects;
 
-/**
- * Scalar template values. Objects, arrays, null and non-finite numbers are not accepted.
- * Numbers use JSON-number semantics, not separate int64/double wire tags: 1, 1.0 and 1e0 are
- * equivalent for replay; -0 equals 0. Replay uses the exact decimal coefficient/exponent of
- * the received JSON token, so distinct int64 values remain distinct even if binary64 rounding
- * would make them equal. Strings such as "1" remain distinct from numbers. Int64 values retain
- * exact precision; other numeric values must be finite binary64 without nonzero underflow to zero.
- * Replay comparison applies to the JSON actually received by the service. SDK serialization can round
- * caller-side numeric values before transmission; clients needing exact values must use a lossless
- * serialization path. A retry with the same serialized numeric values preserves replay identity.
- * Numeric tokens are limited to 128 characters. Strings are limited to 16 KiB in UTF-8 at runtime.
- */
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve the existing scalar-only Campaign input contract and SDK representation; adopting experimental union constraints would require project configs unsupported by the pinned SDK generation CLI."
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyCampaignInputValue {
-  string,
-  float64,
-  int64,
-  boolean,
-}
-
 /** One recipient in an inline campaign input. Each input position is a separate intended call, including repeated destinations. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyRecipient {
   /** Recipient destination address. Initial provider support accepts phone_number; non-phone variants can be introduced without replacing this field. Unsupported destination types fail preparation. */
   destination: TelephonyAddress;
 
-  /** Agent-declared inputs follow required/default/schema semantics. Extra scalars are dynamic variables. At most 128 keys, each 1-256 characters; values must obey the documented byte limits. */
-  structured_inputs?: Record<TelephonyCampaignInputValue>;
+  /**
+   * Per-recipient inputs use the same JSON value types as direct CallJobs: strings, numbers, booleans,
+   * null, objects and arrays. Nested JSON values are preserved rather than converted to strings.
+   * Input names and values follow the same Agent-defined required/default/schema validation as direct CallJobs.
+   * Accepting a JSON value here does not bypass the Agent's input definitions.
+   * The top-level value must be an object with at most 128 keys, each 1-256 characters. The structured-input
+   * object is limited to 16 JSON nesting levels; duplicate keys at any level are rejected. Campaign request
+   * and row byte limits still apply. Each string value is limited to 16 KiB UTF-8, including nested values.
+   * Numeric tokens are limited to 128 characters. Int64 values retain exact precision; other numeric values
+   * must be finite binary64 without nonzero underflow to zero. These Campaign resource bounds also apply
+   * to nested values and do not imply that Direct CallJob has identical payload quotas.
+   * Replay compares the received JSON recursively: object-property order is ignored, array order is significant,
+   * and null remains distinct from an omitted property. Numbers use exact decimal coefficient/exponent
+   * identity, so 1, 1.0 and 1e0 are equivalent, -0 equals 0, and distinct int64 values remain distinct.
+   * Strings such as "1" remain distinct from numbers. SDK serialization may round caller-side numbers
+   * before transmission; callers needing exact values must use a lossless serialization path.
+   */
+  structured_inputs?: Record<unknown>;
 
   /** Earliest dispatch time for recipient scheduling. Required only when schedule.type is recipient; forbidden for other modes. */
   scheduled_at?: FoundryTimestamp;
@@ -121,8 +116,12 @@ alias TelephonyCampaignConfiguration = {
    * Fixed destination_type and destination_value fields construct each recipient's TelephonyAddress.
    * Initially destination_type is phone_number and destination_value is E.164; unsupported types fail validation.
    * These fields and fixed scheduled_at are reserved and excluded from dynamic variables. scheduled_at is
-   * required for recipient scheduling and forbidden in other modes. Other flat fields become structured inputs;
-   * undeclared CSV cells remain strings. Duplicate headers or JSON keys fail validation.
+   * required for recipient scheduling and forbidden in other modes. Other top-level properties become
+   * structured inputs, using the same JSON value types as inline recipients and direct CallJobs.
+   * JSON and JSONL preserve nested objects, arrays and null. CSV cells remain strings without implicit
+   * JSON decoding. Agent-declared inputs follow their schema, required and default-value semantics.
+   * Recipient variables obey the same Campaign structured-input bounds as inline recipients.
+   * Duplicate headers or JSON keys at any nesting level fail validation.
    * Every input position is a separate intended call, including duplicate destinations.
    * Files contain 1-1,000,000 recipients, at most 256 MiB decoded bytes and 1 MiB per logical row.
    */

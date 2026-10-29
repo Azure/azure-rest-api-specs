@@ -1406,7 +1406,7 @@ model TelephonyCallJobConfiguration {
   @minLength(1)
   purpose?: string;
 
-  @doc("Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.")
+  @doc("Structured input values available to the agent and greeting for this call, including nested JSON objects, arrays and null. Input names and values must satisfy the Agent's input definitions and schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Accepting a JSON value does not bypass Agent input validation.")
   structured_inputs?: Record<unknown>;
 
   @doc("The optional execution window.")
