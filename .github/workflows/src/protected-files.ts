@@ -1,9 +1,39 @@
 import { minimatch } from "minimatch";
 import { getChangedFiles } from "../../shared/src/changed-files.ts";
+import { inlineCode } from "../../shared/src/markdown.ts";
 import { CoreLogger } from "./core-logger.ts";
 import type { GitHubScriptArgs, WebhookEvent } from "./github.ts";
 
-const ALLOWED_AUTHORS = new Set(["azure-sdk", "azure-sdk-automation[bot]"]);
+// Maintainer entries are based on Azure/azure-rest-api-specs-maintainers; keep access up to date.
+const ALLOWED_AUTHORS = new Set(
+  [
+    "azure-sdk",
+    "azure-sdk-automation[bot]",
+    "dependabot[bot]",
+
+    "AkhilaIlla",
+    "Bubbles4096",
+    "MaryGao",
+    "MSEvanhi",
+    "catalinaperalta",
+    "gary-x-li",
+    "iscai-msft",
+    "lmazuel",
+    "markcowl",
+    "nikhgup",
+    "pshao25",
+    "qiaozha",
+    "raosuhas",
+    "ravimeda",
+    "samvaity",
+    "tejaswiMinnu",
+    "timotheeguerin",
+    "tjprescott",
+    "vidapour",
+    "vikeshi26",
+    "xirzec",
+  ].map((author) => author.toLowerCase()),
+);
 const PROTECTED_PATHS = [
   ".gitignore",
   "cspell.json",
@@ -23,6 +53,12 @@ const SYNCED_PATHS = [
   "eng/common/**",
 ];
 
+interface ProtectedFilesResult {
+  conclusion: "success" | "failure";
+  title: string;
+  summary: string;
+}
+
 function matchesAny(file: string, patterns: string[]): boolean {
   // Match hidden files and preserve PowerShell's case-insensitive behavior.
   return patterns.some((pattern) =>
@@ -33,7 +69,7 @@ function matchesAny(file: string, patterns: string[]): boolean {
 export async function checkProtectedFiles({
   context,
   core,
-}: Pick<GitHubScriptArgs, "context" | "core">): Promise<void> {
+}: Pick<GitHubScriptArgs, "context" | "core">): Promise<ProtectedFilesResult> {
   if (context.eventName !== "pull_request") {
     throw new Error(`Unsupported event for Protected Files: '${context.eventName}'`);
   }
@@ -45,7 +81,11 @@ export async function checkProtectedFiles({
 
   if (ALLOWED_AUTHORS.has(author.toLowerCase())) {
     core.info(`Account '${author}' is allowed to update protected files`);
-    return;
+    return {
+      conclusion: "success",
+      title: "Allowed maintainer or automation author",
+      summary: `Account ${inlineCode(author)} is allowed to update protected files.`,
+    };
   }
 
   const changedFiles = await getChangedFiles({
@@ -61,16 +101,35 @@ export async function checkProtectedFiles({
 
   if (protectedFiles.length === 0) {
     core.info("No changes to protected files.");
-    return;
+    return {
+      conclusion: "success",
+      title: "No changes to protected files",
+      summary: "This PR does not change protected files.",
+    };
   }
 
+  const messages: string[] = [];
   for (const file of protectedFiles) {
     const message = matchesAny(file, SYNCED_PATHS)
       ? `File '${file}' is synced from Azure/azure-sdk-tools. Remove this change from your PR and make the change in Azure/azure-sdk-tools instead.`
-      : `File '${file}' is repository-managed and outside the scope of a specification contribution. Remove this change from your PR. If a tooling change is needed, open an issue for the repository maintainers.`;
+      : `File '${file}' is repository-managed and can only be changed by allowed repository maintainers. Remove this change from your PR. If a tooling change is needed, open an issue for the repository maintainers.`;
     core.error(message, { file });
+    const summary = `- ${inlineCode(file)}: ${
+      matchesAny(file, SYNCED_PATHS)
+        ? "Synced from Azure/azure-sdk-tools; make the change in that repository."
+        : "Repository-managed file; only allowed repository maintainers may change it."
+    }`;
+    messages.push(summary);
   }
   core.setFailed(
-    "Remove changes to protected files from your specification PR. See https://aka.ms/ci-fix#protected-files.",
+    "Only allowed repository maintainers may change protected files. See https://aka.ms/ci-fix#protected-files.",
   );
+  return {
+    conclusion: "failure",
+    title: "Remove changes to protected files",
+    summary:
+      `${messages.join("\n")}\n\n` +
+      "See the [Protected Files guide](https://aka.ms/ci-fix#protected-files). " +
+      "Only allowlisted PR authors may change protected files, even in maintenance-only PRs.",
+  };
 }

@@ -1,9 +1,13 @@
-import yaml from "js-yaml";
+import { stringify } from "yaml";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { diffSuppression, getAllApiVersionFromRPFolder } from "../src/impact.ts";
+import {
+  diffSuppression,
+  getAllApiVersionFromRPFolder,
+  getRPFolderFromSwaggerFile,
+} from "../src/impact.ts";
 
 describe("native impact utilities", () => {
   let folder: string;
@@ -38,6 +42,14 @@ describe("native impact utilities", () => {
     }
   });
 
+  it("distinguishes an undotted data-plane provider from an identically named service and file", () => {
+    expect(
+      getRPFolderFromSwaggerFile(
+        "specification/example/data-plane/example/stable/2026-01-01/example.json",
+      ),
+    ).toBe("specification/example/data-plane/example");
+  });
+
   it("compares nested suppression values independently of object key order", async () => {
     const before = join(folder, "before.md");
     const after = join(folder, "after.md");
@@ -49,13 +61,13 @@ describe("native impact utilities", () => {
       where: { options: { count: 2, enabled: true }, paths: ["a", "b"] },
       suppress: "Rule",
     };
-    await writeFile(before, "```yaml\n" + yaml.dump({ suppressions: [original] }) + "```\n");
-    await writeFile(after, "```yaml\n" + yaml.dump({ suppressions: [reordered] }) + "```\n");
+    await writeFile(before, "```yaml\n" + stringify({ suppressions: [original] }) + "```\n");
+    await writeFile(after, "```yaml\n" + stringify({ suppressions: [reordered] }) + "```\n");
 
     expect(diffSuppression(before, after)).toEqual([]);
 
     const changed = { ...reordered, where: { ...reordered.where, paths: ["b", "a"] } };
-    await writeFile(after, "```yaml\n" + yaml.dump({ suppressions: [changed] }) + "```\n");
+    await writeFile(after, "```yaml\n" + stringify({ suppressions: [changed] }) + "```\n");
 
     expect(diffSuppression(before, after)).toEqual([changed]);
   });

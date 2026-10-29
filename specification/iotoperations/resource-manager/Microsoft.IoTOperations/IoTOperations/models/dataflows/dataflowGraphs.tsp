@@ -37,6 +37,11 @@ model DataflowGraphProperties {
   /** Disk persistence mode. */
   requestDiskPersistence?: OperationalMode;
 
+  /** List of persistent volume claim-backed file stores exposed to graph nodes. */
+  @identifiers(#["id"])
+  @added(Versions.`2026-11-01-preview`)
+  fileStores?: DataflowGraphFileStore[];
+
   /** List of nodes in the dataflow graph. */
   @identifiers(#["name"])
   nodes: DataflowGraphNode[];
@@ -56,6 +61,27 @@ model DataflowGraphProperties {
 
   #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
+}
+
+/** File store exposed to dataflow graph nodes. */
+@added(Versions.`2026-11-01-preview`)
+model DataflowGraphFileStore {
+  /** Reference to the persistent volume claim that backs the file store. */
+  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
+  @minLength(1)
+  @maxLength(63)
+  persistentVolumeClaimRef: string;
+
+  /** Relative path in the persistent volume claim to expose. The persistent volume claim root is exposed when the subpath is omitted or empty. Absolute paths and parent directory segments are not allowed. */
+  @pattern("^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).*$")
+  subPath?: string;
+
+  /** Identifier used by graph nodes to address the file store. The identifier must be unique within the dataflow graph. */
+  @minLength(1)
+  id: string;
+
+  /** Indicates whether the file store is mounted as read-only. Defaults to true. Set to false to allow writes. */
+  readOnly?: boolean = true;
 }
 
 /** DataflowGraph node properties. */

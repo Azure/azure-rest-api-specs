@@ -6,6 +6,15 @@ import type { Core } from "../github.ts";
 */
 
 import * as z from "zod";
+import {
+  ImpactAssessmentSchema as ChangeImpactSchema,
+  type ImpactAssessment,
+} from "../../../shared/src/impact.ts";
+import {
+  evaluateReviewRequirements,
+  specReviewApplies,
+  type ReviewContext,
+} from "./review-requirements.ts";
 import { includesEvery, includesNone } from "../../../shared/src/array.ts";
 import {
   TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
@@ -51,7 +60,7 @@ export type LabelContext = {
   toRemove: Set<string>;
 };
 
-export const ImpactAssessmentSchema = z.object({
+const LegacyImpactAssessmentSchema = z.object({
   resourceManagerRequired: z.boolean().describe("Whether a resource manager review is required."),
   dataPlaneRequired: z.boolean().describe("Whether a data plane review is required."),
   suppressionReviewRequired: z.boolean().describe("Whether a suppression review is required."),
@@ -67,7 +76,35 @@ export const ImpactAssessmentSchema = z.object({
   targetBranch: z.string().describe("The name of the target branch for the PR."),
 });
 
-export type ImpactAssessment = import("zod").infer<typeof ImpactAssessmentSchema>;
+// Runs already in flight can still produce the old, PR-wide artifact.
+export const ImpactAssessmentSchema = z.union([
+  ChangeImpactSchema,
+  LegacyImpactAssessmentSchema.transform((legacy): ImpactAssessment => ({
+    schemaVersion: 2,
+    services: [
+      ...(legacy.resourceManagerRequired ? ["resource-manager" as const] : []),
+      ...(legacy.dataPlaneRequired ? ["data-plane" as const] : []),
+      ...(!legacy.resourceManagerRequired && !legacy.dataPlaneRequired ? ["unknown" as const] : []),
+    ].map((plane) => ({
+      path: "specification/legacy",
+      plane,
+      changes: ["api"],
+      hasAffectedReadme: false,
+      typeSpec: legacy.typeSpecChanged,
+      // Legacy artifacts know only whether a version was added, not its name or owning service.
+      newApiVersions: legacy.isNewApiVersion ? ["unknown"] : [],
+      suppressionsChanged: legacy.suppressionReviewRequired,
+      resourceProvider: {
+        newNamespaces: legacy.newRP ? ["unknown"] : [],
+        usesRpaas: legacy.rpaasChange,
+        hasAddedDefinitions: legacy.rpaasRpNotInPrivateRepo,
+        registered: !legacy.rpaasRpNotInPrivateRepo,
+      },
+    })),
+  })),
+]);
+
+export type { ImpactAssessment };
 
 /**
  * This file is the single source of truth for the labels used by the SDK generation tooling
@@ -415,46 +452,32 @@ export function processArmReviewLabels(context: LabelContext, existingLabels: st
   }
 }
 
-/**
-This function determines which labels of the ARM review should
-be applied to given PR. It adds and removes the labels as appropriate. It used to be called
-ProcessARMReview, but was renamed to processImpactAssessment to better reflect its purpose given that is
-merely evaluating the impact assessment of the PR and returning a final set of labels to be applied/removed
-from the PR.
-
-This function does the following, **among other things**:
-
-- Adds the "ARMReview" label if all of the following conditions hold:
-  - The processed PR "isReleaseBranch" or "isShiftLeftPRWithRPSaaSDev"
-  - The PR is not a draft, as determined by "isDraftPR"
-  - The PR is labelled with "resource-manager" label, meaning it pertains
-    to ARM, as previously determined by the "isManagementPR" function,
-    called from the "getPRType" function.
-
-- Calls the "processARMReviewWorkflowLabels" function if "ARMReview" label applies.
-*/
-
 export function processImpactAssessment(
   labelContext: LabelContext,
   impactAssessment: ImpactAssessment,
+  context: ReviewContext,
 ): { armReviewLabelShouldBePresent: boolean } {
-  console.log("ENTER definition processARMReview");
+  const reviews = evaluateReviewRequirements(impactAssessment, context);
+  const services = impactAssessment.services;
+  const managementServices = services.filter((service) => service.plane === "resource-manager");
+  const newResourceProvider =
+    (context.targetBranch === "main" || context.targetBranch === "ARMCoreRPDev") &&
+    managementServices.some((service) => service.resourceProvider.newNamespaces.length > 0);
 
-  // By default these two should not be present. We may determine later in this function that they should be present after all.
   const armReviewLabel = new Label("ARMReview", labelContext.present);
-  armReviewLabel.shouldBePresent = false;
+  armReviewLabel.shouldBePresent = reviews.arm;
   const newApiVersionLabel = new Label("new-api-version", labelContext.present);
-  newApiVersionLabel.shouldBePresent = false;
+  newApiVersionLabel.shouldBePresent =
+    specReviewApplies(context) && services.some((service) => service.newApiVersions.length > 0);
 
   const resourceManagerLabel = new Label("resource-manager", labelContext.present);
-  resourceManagerLabel.shouldBePresent = impactAssessment.resourceManagerRequired || false;
+  resourceManagerLabel.shouldBePresent = managementServices.length > 0;
 
   const dataplaneLabel = new Label("data-plane", labelContext.present);
-  dataplaneLabel.shouldBePresent = impactAssessment.dataPlaneRequired || false;
+  dataplaneLabel.shouldBePresent = services.some((service) => service.plane === "data-plane");
 
   // Auto-applied intake signal for data-plane stewardship review. Present exactly when a
-  // data-plane PR introduces a new API version (i.e. when both `data-plane` and
-  // `new-api-version` would be present). This single label is what the merge gate, reviewer
+  // data-plane service introduces a new API version. This single label is what the merge gate, reviewer
   // assignment, and the review queue all key off. Reviewer assignment is owned by the
   // azure-sdk-automation GitHub App (it requests the reviewer team with its own identity,
   // which the default Actions token cannot do). See rulesPri0dataPlane below.
@@ -466,29 +489,35 @@ export function processImpactAssessment(
   // PR adds it below; otherwise it's left as-is. Preserves manual requests and avoids a
   // remove/re-add flip that would re-queue an approved PR.
   dataPlaneReviewRequestedLabel.shouldBePresent = dataPlaneReviewRequestedLabel.present ?? false;
+  if (reviews.dataPlane) dataPlaneReviewRequestedLabel.shouldBePresent = true;
 
   const typeSpecLabel = new Label("TypeSpec", labelContext.present);
-  typeSpecLabel.shouldBePresent = impactAssessment.typeSpecChanged || false;
+  typeSpecLabel.shouldBePresent = services.some((service) => service.typeSpec);
 
   const suppressionReviewRequiredLabel = new Label(
     "SuppressionReviewRequired",
     labelContext.present,
   );
-  suppressionReviewRequiredLabel.shouldBePresent =
-    (impactAssessment.resourceManagerRequired && impactAssessment.suppressionReviewRequired) ||
-    false;
+  suppressionReviewRequiredLabel.shouldBePresent = reviews.suppressions;
 
   const rpassReviewRequiredLabel = new Label("RPaaS", labelContext.present);
-  rpassReviewRequiredLabel.shouldBePresent = impactAssessment.rpaasChange || false;
+  rpassReviewRequiredLabel.shouldBePresent = services.some(
+    (service) => service.resourceProvider.usesRpaas,
+  );
 
   const newRPNamespaceLabel = new Label("new-rp-namespace", labelContext.present);
-  newRPNamespaceLabel.shouldBePresent = impactAssessment.newRP || false;
+  newRPNamespaceLabel.shouldBePresent = newResourceProvider;
 
   const ciNewRPNamespaceWithoutRpaaSLabel = new Label(
     "CI-NewRPNamespaceWithoutRPaaS",
     labelContext.present,
   );
-  ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent = impactAssessment.rpaasRPMissing || false;
+  ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent =
+    newResourceProvider &&
+    managementServices.some(
+      (service) =>
+        service.resourceProvider.newNamespaces.length > 0 && !service.resourceProvider.usesRpaas,
+    );
 
   const rpaasExceptionLabelPresent = labelContext.present.has("RPaaSException");
 
@@ -497,39 +526,21 @@ export function processImpactAssessment(
     labelContext.present,
   );
   ciRpaasRPNotInPrivateRepoLabel.shouldBePresent =
-    impactAssessment.rpaasRpNotInPrivateRepo || false;
+    context.targetBranch === "main" &&
+    managementServices.some(
+      (service) =>
+        service.resourceProvider.usesRpaas &&
+        service.resourceProvider.hasAddedDefinitions &&
+        !service.resourceProvider.registered,
+    );
 
-  const branch = impactAssessment.targetBranch;
-  const isReleaseBranchVal = isReleaseBranch(branch);
-
-  // we used to also calculate if the branch name was from ShiftLeft, in which case we would or that
-  // with isReleaseBranchVal to see if it's in scope of ARM review. ShiftLeft is not supported anymore,
-  // so we only check if the branch is a release branch.
-  // const prTitle = await getPrTitle(owner, repo, prNumber)
-  // const isShiftLeftPRWithRPSaaSDevVal = isShiftLeftPRWithRPSaaSDev(prTitle, branch)
-  const isBranchInScopeOfSpecReview = isReleaseBranchVal;
-
-  // 'specReviewApplies' means that either ARM or data-plane review applies. Downstream logic
-  // determines which kind of review exactly we need.
-  const specReviewApplies = !impactAssessment.isDraft && isBranchInScopeOfSpecReview;
-  if (specReviewApplies) {
-    if (impactAssessment.isNewApiVersion) {
-      newApiVersionLabel.shouldBePresent = true;
-
-      // Classify from PR content only; never read the protected signoff label here (racy,
-      // not proof of sign-off). The label is add-only, so an approved PR is never re-queued.
-      if (impactAssessment.dataPlaneRequired) {
-        dataPlaneReviewRequestedLabel.shouldBePresent = true;
-      }
-    }
-
-    armReviewLabel.shouldBePresent = impactAssessment.resourceManagerRequired;
+  if (specReviewApplies(context)) {
     processARMReviewWorkflowLabels(
       labelContext,
-      armReviewLabel.shouldBePresent,
-      impactAssessment.rpaasRPMissing,
+      reviews.arm,
+      ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent,
       rpaasExceptionLabelPresent,
-      impactAssessment.rpaasRpNotInPrivateRepo,
+      ciRpaasRPNotInPrivateRepoLabel.shouldBePresent,
     );
   }
 
@@ -549,25 +560,14 @@ export function processImpactAssessment(
   // ARMChangesRequested, WaitForArmFeedback, and ARMSignedOff labels. The thing is, we only want to make
   // these changes if the review is actually an ARM review. So we're going to place this after processing an impactAssessment
   // which will tell us if a the ARMReview label should be present or not.
-  processArmReviewLabels(labelContext, [...labelContext.present, ...labelContext.toAdd]);
-
-  console.log(
-    `RETURN definition processARMReview. ` +
-      `isReleaseBranch: ${isReleaseBranchVal}, ` +
-      `isArmReview: ${armReviewLabel.shouldBePresent}, ` +
-      `isBranchInScopeOfArmReview: ${isBranchInScopeOfSpecReview}, ` +
-      `isNewApiVersion: ${impactAssessment.isNewApiVersion}, ` +
-      `isDraft: ${impactAssessment.isDraft}, ` +
-      `newApiVersionLabel.shouldBePresent: ${newApiVersionLabel.shouldBePresent}, ` +
-      `armReviewLabel.shouldBePresent: ${armReviewLabel.shouldBePresent}.`,
+  processArmReviewLabels(
+    labelContext,
+    [...new Set([...labelContext.present, ...labelContext.toAdd])].filter(
+      (label) => !labelContext.toRemove.has(label),
+    ),
   );
 
   return { armReviewLabelShouldBePresent: armReviewLabel.shouldBePresent };
-}
-
-function isReleaseBranch(branchName: string): boolean {
-  const branchRegex = [/main/, /RPSaaSMaster/, /release*/, /ARMCoreRPDev/];
-  return branchRegex.some((b) => b.test(branchName));
 }
 
 /**
@@ -796,6 +796,35 @@ const rulesPri0dataPlane: RequiredLabelRule[] = [
 ];
 
 const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
+  {
+    precedence: 0,
+    anyPrerequisiteLabels: ["ARMModelingReviewRequired"],
+    anyRequiredLabels: [],
+    troubleshootingGuide: wrapInArmReviewMessage(
+      "This PR has <code>ARMModelingReviewRequired</code> label. " +
+        "This means it is introducing a new Resource Provider namespace or a new resource type. " +
+        "New RPs and new resource types require a discussion with the ARM Modeling Review team before merging.<br/><br/>" +
+        "<b>If you haven't discussed yet:</b><br/>" +
+        "Please join the ARM API Modeling Review Office Hours - a drop-in, first-come, first-served session (no booking required):<br/>" +
+        "<ul>" +
+        "<li><b>When:</b> Every Tuesday and Thursday, 9:30–10:30 AM PST</li>" +
+        `<li><b>How to join:</b> ${href("Join via Teams", "https://aka.ms/apimodelingreview")}</li>` +
+        `<li><b>Required Doc:</b> Please use the ${href("RP Agent", "https://aka.ms/rpagent")} and run the <code>/model-rp-contract</code> skill. ` +
+        "The agent can interview you or review your design docs, then generate a resource contract, design rationale, " +
+        "deployment prerequisites, and <b>an HTML review package with open questions. For Office Hours:</b> bring the HTML " +
+        "review package, and we'll use the open questions as the basis for discussion so we can focus on design decisions " +
+        "and gaps instead of starting from scratch. You can provide feedback using: <code>/rp-agent-feedback</code> or " +
+        `${href("RP Agent Feedback", "https://aka.ms/rpagent/feedback")}.</li>` +
+        `<li>For more details refer: ${href("API Review Workflow | ARM Wiki", "https://armwiki.azurewebsites.net/rp_onboarding/process/api_review.html#arm-api-modeling-review-office-hours")}</li>` +
+        "</ul>" +
+        "<b>If <code>ARMModelingSignedOff</code> label was removed by automation:</b><br/>" +
+        "This happens when the lease file is not found. Please check with the PM you discussed your design with " +
+        "to confirm if the lease file PR has been merged. " +
+        "In the public repo, lease files reflect immediately after merge. " +
+        "In the private repo (<code>azure-rest-api-specs-pr</code>), lease files typically sync within a few hours, but it can take up to 1-2 business days depending on sync pipeline timing and queue load. " +
+        "Please wait for the sync to complete.",
+    ),
+  },
   // Note this rule can be circumvented e.g. by adding approval mismatching the actual problem.
   // E.g. PR may not be ready for ARM review due to pending breaking changes review, but this rule
   // can be fulfilled by adding RPaaSException instead of breaking change approval.
@@ -842,30 +871,6 @@ const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
     allPrerequisiteLabels: ["NotReadyForARMReview", brChRev],
     anyRequiredLabels: [brChRevApproval],
     troubleshootingGuide: notReadyForArmReviewReason(brChRev),
-  },
-  {
-    precedence: 0,
-    anyPrerequisiteLabels: ["ARMModelingReviewRequired"],
-    anyRequiredLabels: [],
-    troubleshootingGuide: wrapInArmReviewMessage(
-      "This PR has <code>ARMModelingReviewRequired</code> label. " +
-        "This means it is introducing a new Resource Provider namespace or a new resource type. " +
-        "New RPs and new resource types require a discussion with the ARM Modeling Review team before merging.<br/><br/>" +
-        "<b>If you haven't discussed yet:</b><br/>" +
-        "Please join the ARM API Modeling Review Office Hours - a drop-in, first-come, first-served session (no booking required):<br/>" +
-        "<ul>" +
-        "<li><b>When:</b> Every Tuesday and Thursday, 9:30-10:30 AM PST</li>" +
-        `<li><b>How to join:</b> ${href("Join via Teams", "https://aka.ms/apimodelingreview")}</li>` +
-        "<li>Come prepared with your questions and a design document (Word/PowerPoint is fine; TypeSpec/Swagger not required).</li>" +
-        `<li>For more details refer: ${href("API Review Workflow | ARM Wiki", "https://armwiki.azurewebsites.net/rp_onboarding/process/api_review.html#arm-api-modeling-review-office-hours")}</li>` +
-        "</ul>" +
-        "<b>If <code>ARMModelingSignedOff</code> label was removed by automation:</b><br/>" +
-        "This happens when the lease file is not found. Please check with the PM you discussed your design with " +
-        "to confirm if the lease file PR has been merged. " +
-        "In the public repo, lease files reflect immediately after merge. " +
-        "In the private repo (<code>azure-rest-api-specs-pr</code>), lease files typically sync within a few hours, but it can take up to 1-2 business days depending on sync pipeline timing and queue load. " +
-        "Please wait for the sync to complete.",
-    ),
   },
 ];
 
