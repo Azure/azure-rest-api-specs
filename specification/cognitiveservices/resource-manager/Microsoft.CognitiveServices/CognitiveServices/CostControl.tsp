@@ -13,7 +13,11 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.CognitiveServices;
 
-/** A budget that measures consumption and optionally alerts or blocks requests within an account. */
+/**
+ * A budget that measures consumption and optionally alerts or blocks requests within an account.
+ * This API version does not require Microsoft.CognitiveServices/CostControls subscription registration.
+ * Reading, deleting, and enforcing stored identity selections do not require Microsoft.CognitiveServices/CostControlsByIdentity registration.
+ */
 @added(Versions.v2026_11_15_preview)
 @parentResource(Account)
 model CostControl is ProxyResource<CostControlProperties> {
@@ -30,7 +34,11 @@ model CostControl is ProxyResource<CostControlProperties> {
   etag?: string;
 }
 
-/** A budget that measures consumption and optionally alerts or blocks requests within its owning Foundry project. */
+/**
+ * A budget that measures consumption and optionally alerts or blocks requests within its owning Foundry project.
+ * This API version does not require Microsoft.CognitiveServices/CostControls subscription registration.
+ * Reading, deleting, and enforcing stored identity selections do not require Microsoft.CognitiveServices/CostControlsByIdentity registration.
+ */
 @added(Versions.v2026_11_15_preview)
 @parentResource(Project)
 model ProjectCostControl is ProxyResource<CostControlProperties> {
@@ -50,6 +58,7 @@ model ProjectCostControl is ProxyResource<CostControlProperties> {
 /**
  * The consumption budget and its traffic selection, notifications, and enforcement actions.
  * A newly created control applies within its owner's scope without attaching resource IDs.
+ * Explicitly authoring identityObjectId grouping or filter selections requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity; otherwise the request returns 403 FeatureNotRegistered.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Cost controls are synchronously persisted proxy resources; the service does not expose provisioningState."
 @added(Versions.v2026_11_15_preview)
@@ -95,7 +104,12 @@ model CostControlProperties {
   providerProperties?: CostControlProviderProperties;
 }
 
-/** Optional edits to a budget. Omitted properties retain their existing values; no defaults are applied. */
+/**
+ * Optional edits to a budget. Omitted properties retain their existing values; no defaults are applied.
+ * Explicit identityObjectId grouping or filter selections, including unchanged selections and conditions nested under filter.and, require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity.
+ * Missing registration returns 403 FeatureNotRegistered before merging or no-op detection.
+ * Omitting or removing identity selections does not require this registration; omitted stored selections are preserved, subject to existing validation rules.
+ */
 @added(Versions.v2026_11_15_preview)
 model CostControlPatchProperties {
   /** The resource provider. If supplied, it must be Microsoft.CognitiveServices and cannot be null. */
@@ -168,7 +182,7 @@ union CostControlGroupingName {
   /** Creates an independent counter for each Foundry agent, qualified by its Foundry project so identical agent names in different projects do not share counters. */
   Agent: "agent",
 
-  /** Creates an independent counter for each authenticated principal object ID. */
+  /** Creates an independent counter for each authenticated principal object ID. Authoring this grouping requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity. */
   IdentityObjectId: "identityObjectId",
 
   /** Creates an independent counter for each Foundry session ID. */
@@ -220,6 +234,7 @@ model CostControlTimePeriodPatch is OptionalProperties<CostControlTimePeriod>;
  * Traffic selection using exactly one of tags or and. Tag names must be unique across the complete expression.
  * Filters narrow the owner's scope and cannot extend a project-owned control to another project.
  * Values within one tag are alternatives; conditions are combined with AND. An agent selection requires an explicit project filter selecting exactly one project, including for project-owned controls.
+ * Authoring identityObjectId conditions, including conditions nested under and, requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity.
  */
 @added(Versions.v2026_11_15_preview)
 model CostControlFilter {
@@ -259,7 +274,7 @@ union CostControlFilterName {
   /** The Foundry agent name within the single explicitly selected Foundry project. */
   Agent: "agent",
 
-  /** The authenticated principal object ID. */
+  /** The authenticated principal object ID. Authoring this filter requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity. */
   IdentityObjectId: "identityObjectId",
 
   /** The Foundry session ID. */
@@ -481,7 +496,7 @@ interface CostControls {
     Response = CostControlHeadResponse | CostControlNotModifiedResponse
   >;
 
-  /** Creates or replaces an account-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. An omitted grouping selects the account's default counter. */
+  /** Creates or replaces an account-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. An omitted grouping selects the account's default counter. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity; otherwise the request returns 403 FeatureNotRegistered. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CostControl,
     Parameters = CostControlCreateOrUpdateHeaders,
@@ -490,7 +505,7 @@ interface CostControls {
       | (ArmResourceCreatedSyncResponse<CostControl> & CostControlEtagHeader)
   >;
 
-  /** Updates selected budget properties synchronously. Omitted properties are preserved; an unchanged budget retains its entity tag. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. */
+  /** Updates selected budget properties synchronously. Omitted properties are preserved; an unchanged budget retains its entity tag. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity, even when unchanged; otherwise the request returns 403 FeatureNotRegistered before merging or no-op detection. */
   update is ArmCustomPatchSync<
     CostControl,
     CostControlPatch,
@@ -534,7 +549,7 @@ interface ProjectCostControls {
     Response = CostControlHeadResponse | CostControlNotModifiedResponse
   >;
 
-  /** Creates or replaces a project-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. Omitted grouping selects the Foundry project's default counter; explicit project grouping is rejected. */
+  /** Creates or replaces a project-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. Omitted grouping selects the Foundry project's default counter; explicit project grouping is rejected. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity; otherwise the request returns 403 FeatureNotRegistered. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ProjectCostControl,
     Parameters = CostControlCreateOrUpdateHeaders,
@@ -544,7 +559,7 @@ interface ProjectCostControls {
           CostControlEtagHeader)
   >;
 
-  /** Updates selected Foundry project budget properties synchronously, merging named notifications, actions, and supplied validity dates. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. */
+  /** Updates selected Foundry project budget properties synchronously, merging named notifications, actions, and supplied validity dates. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity, even when unchanged; otherwise the request returns 403 FeatureNotRegistered before merging or no-op detection. */
   update is ArmCustomPatchSync<
     ProjectCostControl,
     CostControlPatch,

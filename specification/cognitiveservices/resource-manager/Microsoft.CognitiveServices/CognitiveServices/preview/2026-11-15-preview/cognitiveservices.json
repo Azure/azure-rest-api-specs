@@ -4198,7 +4198,7 @@
         "tags": [
           "CostControls"
         ],
-        "description": "Creates or replaces an account-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. An omitted grouping selects the account's default counter.",
+        "description": "Creates or replaces an account-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. An omitted grouping selects the account's default counter. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity; otherwise the request returns 403 FeatureNotRegistered.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4288,7 +4288,7 @@
         "tags": [
           "CostControls"
         ],
-        "description": "Updates selected budget properties synchronously. Omitted properties are preserved; an unchanged budget retains its entity tag. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed.",
+        "description": "Updates selected budget properties synchronously. Omitted properties are preserved; an unchanged budget retains its entity tag. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity, even when unchanged; otherwise the request returns 403 FeatureNotRegistered before merging or no-op detection.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9689,7 +9689,7 @@
         "tags": [
           "ProjectCostControls"
         ],
-        "description": "Creates or replaces a project-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. Omitted grouping selects the Foundry project's default counter; explicit project grouping is rejected.",
+        "description": "Creates or replaces a project-owned budget synchronously. New names must contain 1-63 ASCII letters, numbers, underscores, or hyphens; leading underscores and hyphens are allowed. Existing dotted or 64-character names remain supported for reads and updates, but cannot be recreated. Omitted grouping selects the Foundry project's default counter; explicit project grouping is rejected. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity; otherwise the request returns 403 FeatureNotRegistered.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9789,7 +9789,7 @@
         "tags": [
           "ProjectCostControls"
         ],
-        "description": "Updates selected Foundry project budget properties synchronously, merging named notifications, actions, and supplied validity dates. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed.",
+        "description": "Updates selected Foundry project budget properties synchronously, merging named notifications, actions, and supplied validity dates. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity, even when unchanged; otherwise the request returns 403 FeatureNotRegistered before merging or no-op detection.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -13959,7 +13959,7 @@
         },
         "costControlConnections": {
           "$ref": "#/definitions/CostControlConnections",
-          "description": "Account-level cost-control telemetry connections. Application Insights is optional.\nBudget notifications use their own Event Grid connection IDs; account-level Event Grid configuration is not exposed or accepted by this API version.\nSet this object to null in an account update to clear the Application Insights connection. Existing legacy Event Grid configuration is preserved.",
+          "description": "Account-level cost-control telemetry connections. Application Insights is optional.\nBudget notifications use their own Event Grid connection IDs; account-level Event Grid configuration is not exposed or accepted by this API version.\nSet this object to null in an account update to clear the Application Insights connection. Existing legacy Event Grid configuration is preserved.\nThis property is available independently of Microsoft.CognitiveServices/CostControls subscription registration.",
           "x-nullable": true,
           "x-ms-mutability": [
             "read",
@@ -17569,7 +17569,7 @@
     },
     "CostControl": {
       "type": "object",
-      "description": "A budget that measures consumption and optionally alerts or blocks requests within an account.",
+      "description": "A budget that measures consumption and optionally alerts or blocks requests within an account.\nThis API version does not require Microsoft.CognitiveServices/CostControls subscription registration.\nReading, deleting, and enforcing stored identity selections do not require Microsoft.CognitiveServices/CostControlsByIdentity registration.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CostControlProperties",
@@ -17708,7 +17708,7 @@
     },
     "CostControlFilter": {
       "type": "object",
-      "description": "Traffic selection using exactly one of tags or and. Tag names must be unique across the complete expression.\nFilters narrow the owner's scope and cannot extend a project-owned control to another project.\nValues within one tag are alternatives; conditions are combined with AND. An agent selection requires an explicit project filter selecting exactly one project, including for project-owned controls.",
+      "description": "Traffic selection using exactly one of tags or and. Tag names must be unique across the complete expression.\nFilters narrow the owner's scope and cannot extend a project-owned control to another project.\nValues within one tag are alternatives; conditions are combined with AND. An agent selection requires an explicit project filter selecting exactly one project, including for project-owned controls.\nAuthoring identityObjectId conditions, including conditions nested under and, requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity.",
       "properties": {
         "tags": {
           "$ref": "#/definitions/CostControlTagFilter",
@@ -17748,7 +17748,7 @@
           {
             "name": "IdentityObjectId",
             "value": "identityObjectId",
-            "description": "The authenticated principal object ID."
+            "description": "The authenticated principal object ID. Authoring this filter requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity."
           },
           {
             "name": "SessionId",
@@ -17833,7 +17833,7 @@
           {
             "name": "IdentityObjectId",
             "value": "identityObjectId",
-            "description": "Creates an independent counter for each authenticated principal object ID."
+            "description": "Creates an independent counter for each authenticated principal object ID. Authoring this grouping requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity."
           },
           {
             "name": "SessionId",
@@ -17968,7 +17968,7 @@
     },
     "CostControlPatchProperties": {
       "type": "object",
-      "description": "Optional edits to a budget. Omitted properties retain their existing values; no defaults are applied.",
+      "description": "Optional edits to a budget. Omitted properties retain their existing values; no defaults are applied.\nExplicit identityObjectId grouping or filter selections, including unchanged selections and conditions nested under filter.and, require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity.\nMissing registration returns 403 FeatureNotRegistered before merging or no-op detection.\nOmitting or removing identity selections does not require this registration; omitted stored selections are preserved, subject to existing validation rules.",
       "properties": {
         "provider": {
           "type": "string",
@@ -18031,7 +18031,7 @@
     },
     "CostControlProperties": {
       "type": "object",
-      "description": "The consumption budget and its traffic selection, notifications, and enforcement actions.\nA newly created control applies within its owner's scope without attaching resource IDs.",
+      "description": "The consumption budget and its traffic selection, notifications, and enforcement actions.\nA newly created control applies within its owner's scope without attaching resource IDs.\nExplicitly authoring identityObjectId grouping or filter selections requires the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity; otherwise the request returns 403 FeatureNotRegistered.",
       "properties": {
         "provider": {
           "type": "string",
@@ -21486,7 +21486,7 @@
     },
     "ProjectCostControl": {
       "type": "object",
-      "description": "A budget that measures consumption and optionally alerts or blocks requests within its owning Foundry project.",
+      "description": "A budget that measures consumption and optionally alerts or blocks requests within its owning Foundry project.\nThis API version does not require Microsoft.CognitiveServices/CostControls subscription registration.\nReading, deleting, and enforcing stored identity selections do not require Microsoft.CognitiveServices/CostControlsByIdentity registration.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CostControlProperties",
