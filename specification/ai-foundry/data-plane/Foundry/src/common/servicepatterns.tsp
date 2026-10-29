@@ -105,6 +105,9 @@ union AgentDefinitionOptInKeys {
 
   /** The Microsoft Copilot V1 preview feature opt-in. */
   microsoft_copilot_v1_preview: "MicrosoftCopilot=V1Preview",
+
+  @doc("The Voice Agents V2 preview feature opt-in.")
+  voice_agents_v2_preview: "VoiceAgents=V2Preview",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "API review requires this input-only opt-in contract to accept only the declared feature keys; arbitrary string opt-ins are not supported."
@@ -123,18 +126,10 @@ union FoundryFeaturesOptInKeys {
   finetuning_sessions_v1_preview: "FineTuningSessions=V1Preview",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "API review requires this input-only opt-in contract to accept only the declared feature keys; arbitrary string opt-ins are not supported."
-@doc("Opt-in keys scoped to telephony binding operations.")
-union TelephonyBindingOptInKeys {
-  @doc("Selects the status-less telephony binding contract.")
-  voice_agents_v2_preview: "VoiceAgents=V2Preview",
-}
-
 alias WithRequiredFoundryPreviewHeader<
   RequiredPreviewOptInHeader extends
     | FoundryFeaturesOptInKeys
     | AgentDefinitionOptInKeys
-    | TelephonyBindingOptInKeys
 > = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
@@ -174,10 +169,7 @@ op FoundryDataPlanePreviewOperation<
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 op FoundryDataPlaneRequiredPreviewOperation<
-  AreaPreviewLabel extends
-    | FoundryFeaturesOptInKeys
-    | AgentDefinitionOptInKeys
-    | TelephonyBindingOptInKeys,
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse

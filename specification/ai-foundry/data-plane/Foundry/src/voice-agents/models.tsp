@@ -737,7 +737,7 @@ alias TelephonyBindingCreatedResponse<Binding extends TypeSpec.Reflection.Model 
   TelephonyBindingResponse<Binding>;
 
 const VoiceAgentBindingV2RequiredPreview = #{
-  required_previews: #[TelephonyBindingOptInKeys.voice_agents_v2_preview],
+  required_previews: #[AgentDefinitionOptInKeys.voice_agents_v2_preview],
 };
 
 @discriminator("provider")

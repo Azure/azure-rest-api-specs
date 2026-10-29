@@ -17,7 +17,7 @@ const VoiceAgentConversationRequiredPreviews = #{
 const VoiceAgentBindingPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    TelephonyBindingOptInKeys.voice_agents_v2_preview
+    AgentDefinitionOptInKeys.voice_agents_v2_preview
   ],
 };
 
@@ -489,7 +489,7 @@ interface AgentTelephonyV2 {
   @route("/agents/{agent_name}/telephony/bindings")
   @extension("x-ms-foundry-meta", VoiceAgentBindingPreviews)
   createTelephonyBinding is FoundryDataPlaneRequiredPreviewOperation<
-    TelephonyBindingOptInKeys.voice_agents_v2_preview,
+    AgentDefinitionOptInKeys.voice_agents_v2_preview,
     {
       @path agent_name: string;
       ...Azure.Core.RepeatabilityRequestHeaders;
@@ -507,7 +507,7 @@ interface AgentTelephonyV2 {
   @route("/agents/{agent_name}/telephony/bindings")
   @extension("x-ms-foundry-meta", VoiceAgentBindingPreviews)
   listTelephonyBindings is FoundryDataPlaneRequiredPreviewOperation<
-    TelephonyBindingOptInKeys.voice_agents_v2_preview,
+    AgentDefinitionOptInKeys.voice_agents_v2_preview,
     {
       @path agent_name: string;
       @query provider?: TelephonyProvider;
@@ -524,7 +524,7 @@ interface AgentTelephonyV2 {
   @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
   @extension("x-ms-foundry-meta", VoiceAgentBindingPreviews)
   getTelephonyBinding is FoundryDataPlaneRequiredPreviewOperation<
-    TelephonyBindingOptInKeys.voice_agents_v2_preview,
+    AgentDefinitionOptInKeys.voice_agents_v2_preview,
     {
       @path agent_name: string;
       @path binding_id: TelephonyBindingId;
@@ -540,7 +540,7 @@ interface AgentTelephonyV2 {
   @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
   @extension("x-ms-foundry-meta", VoiceAgentBindingPreviews)
   updateTelephonyBinding is FoundryDataPlaneRequiredPreviewOperation<
-    TelephonyBindingOptInKeys.voice_agents_v2_preview,
+    AgentDefinitionOptInKeys.voice_agents_v2_preview,
     {
       @path agent_name: string;
       @path binding_id: TelephonyBindingId;
@@ -559,7 +559,7 @@ interface AgentTelephonyV2 {
   @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
   @extension("x-ms-foundry-meta", VoiceAgentBindingPreviews)
   deleteTelephonyBinding is FoundryDataPlaneRequiredPreviewOperation<
-    TelephonyBindingOptInKeys.voice_agents_v2_preview,
+    AgentDefinitionOptInKeys.voice_agents_v2_preview,
     {
       @path agent_name: string;
       @path binding_id: TelephonyBindingId;
