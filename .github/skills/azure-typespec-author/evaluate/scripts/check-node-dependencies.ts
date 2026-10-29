@@ -4,9 +4,9 @@ import * as path from "node:path";
 const mode = process.argv[2];
 const nodeModulesRoot = process.env.FIXTURE_NODE_MODULES || "node_modules";
 
-if (!mode || !["node_modules", "packages"].includes(mode)) {
+if (mode !== "node_modules" && mode !== "packages") {
   console.error(
-    "[dependency-check] usage: node check-node-dependencies.js <node_modules|packages>",
+    "[dependency-check] usage: node check-node-dependencies.ts <node_modules|packages>",
   );
   process.exit(2);
 }
@@ -21,8 +21,7 @@ if (mode === "node_modules") {
   process.exit(0);
 }
 
-/** @type {unknown} */
-const fixturePackage = JSON.parse(fs.readFileSync("package.json", "utf8"));
+const fixturePackage: unknown = JSON.parse(fs.readFileSync("package.json", "utf8"));
 if (
   typeof fixturePackage !== "object" ||
   fixturePackage === null ||

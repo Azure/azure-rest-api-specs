@@ -9,6 +9,7 @@ const repoRoot = path.resolve(scriptDir, "../../../../..");
 const fixtureRoot = path.resolve(scriptDir, "../fixtures");
 const instructionsSource = path.join(repoRoot, ".github", "copilot-instructions.md");
 const workspaceFile = path.join(repoRoot, "pnpm-workspace.yaml");
+const rootPackageFile = path.join(repoRoot, "package.json");
 const instructionsDestination = path.join(
   fixtureRoot,
   "instructions-test",
@@ -32,14 +33,36 @@ const fixtureDependencies = [
   "@typespec/versioning",
 ];
 
-for (const requiredFile of [instructionsSource, workspaceFile]) {
+function hasStringDevDependencies(
+  value: unknown,
+): value is { devDependencies: Record<string, string> } {
+  if (
+    typeof value !== "object" ||
+    value === null ||
+    !("devDependencies" in value) ||
+    typeof value.devDependencies !== "object" ||
+    value.devDependencies === null
+  ) {
+    return false;
+  }
+  return Object.values(value.devDependencies).every((version) => typeof version === "string");
+}
+
+for (const requiredFile of [instructionsSource, workspaceFile, rootPackageFile]) {
   if (!fs.existsSync(requiredFile)) {
     throw new Error(`Required fixture input does not exist: ${requiredFile}`);
   }
 }
 
-/** @type {Map<string, string>} */
-const catalog = new Map();
+const rootPackage: unknown = JSON.parse(fs.readFileSync(rootPackageFile, "utf8"));
+if (!hasStringDevDependencies(rootPackage)) {
+  throw new Error(`Root package has invalid devDependencies: ${rootPackageFile}`);
+}
+if (rootPackage.devDependencies["@azure-tools/typespec-azure-rulesets"]?.startsWith("workspace:")) {
+  fixtureDependencies.push("@azure-tools/typespec-azure-rulesets-original");
+}
+
+const catalog = new Map<string, string>();
 let inCatalog = false;
 for (const line of fs.readFileSync(workspaceFile, "utf8").split(/\r?\n/)) {
   if (line === "catalog:") {
@@ -58,10 +81,10 @@ for (const line of fs.readFileSync(workspaceFile, "utf8").split(/\r?\n/)) {
   }
 }
 
-/** @type {Record<string, string>} */
-const devDependencies = {};
+const devDependencies: Record<string, string> = {};
 for (const dependency of fixtureDependencies) {
-  const version = catalog.get(dependency);
+  const rootVersion = rootPackage.devDependencies[dependency];
+  const version = rootVersion?.startsWith("workspace:") ? rootVersion : catalog.get(dependency);
   if (!version) {
     throw new Error(`Required dependency is missing from the pnpm catalog: ${dependency}`);
   }
