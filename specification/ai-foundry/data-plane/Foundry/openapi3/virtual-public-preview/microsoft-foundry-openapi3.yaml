@@ -51261,12 +51261,47 @@ components:
           type: string
           minLength: 1
           description: "Name of the Project Connection that stores the endpoint URL and credentials. The connection must exist on the project and have a non-empty target URL. Supported auth types: ApiKey (sends `api-key` header) and AAD/Entra ID (acquires a bearer token via the project's Managed Identity)."
+        schema_version:
+          $ref: '#/components/schemas/EndpointEvaluatorSchemaVersion'
+          description: Version of the contract between the service and the evaluator endpoint. Defaults to `0.0.1` when omitted.
+          default: 0.0.1
+        inputs:
+          $ref: '#/components/schemas/EndpointEvaluatorInputs'
+          description: Optional inputs to send to the evaluator endpoint in addition to the default request fields. Requires `schema_version` `0.0.2`.
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
+    EndpointEvaluatorInputs:
+      type: object
+      properties:
+        trace:
+          $ref: '#/components/schemas/EndpointEvaluatorTraceInput'
+          description: When set, the service sends the OpenTelemetry spans for each evaluated item if the evaluation data source is traces.
+      description: Optional inputs for an endpoint-based evaluator.
+    EndpointEvaluatorSchemaVersion:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - 0.0.1
+            - 0.0.2
+      description: Contract version for an endpoint-based evaluator.
+    EndpointEvaluatorTraceInput:
+      type: object
+      properties:
+        attribute_allowlist:
+          type: array
+          items:
+            type: string
+          description: Span attribute name prefixes to include. When omitted, all attributes are included.
+        include_annotations:
+          type: boolean
+          description: Whether to include annotations attached to the spans, such as human feedback. Defaults to `false`.
+          default: false
+      description: Settings for sending OpenTelemetry spans to an endpoint-based evaluator.
     EntraAuthorizationScheme:
       type: object
       required:

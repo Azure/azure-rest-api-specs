@@ -164,6 +164,38 @@ model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
   @doc("Name of the Project Connection that stores the endpoint URL and credentials. The connection must exist on the project and have a non-empty target URL. Supported auth types: ApiKey (sends `api-key` header) and AAD/Entra ID (acquires a bearer token via the project's Managed Identity).")
   @minLength(1)
   connection_name: string;
+
+  @doc("Version of the contract between the service and the evaluator endpoint. Defaults to `0.0.1` when omitted.")
+  schema_version?: EndpointEvaluatorSchemaVersion = EndpointEvaluatorSchemaVersion.v0_0_1;
+
+  @doc("Optional inputs to send to the evaluator endpoint in addition to the default request fields. Requires `schema_version` `0.0.2`.")
+  inputs?: EndpointEvaluatorInputs;
+}
+
+@doc("Optional inputs for an endpoint-based evaluator.")
+model EndpointEvaluatorInputs {
+  @doc("When set, the service sends the OpenTelemetry spans for each evaluated item if the evaluation data source is traces.")
+  trace?: EndpointEvaluatorTraceInput;
+}
+
+@doc("Settings for sending OpenTelemetry spans to an endpoint-based evaluator.")
+model EndpointEvaluatorTraceInput {
+  @doc("Span attribute name prefixes to include. When omitted, all attributes are included.")
+  attribute_allowlist?: string[];
+
+  @doc("Whether to include annotations attached to the spans, such as human feedback. Defaults to `false`.")
+  include_annotations?: boolean = false;
+}
+
+@doc("Contract version for an endpoint-based evaluator.")
+union EndpointEvaluatorSchemaVersion {
+  string,
+
+  @doc("Contract version 0.0.1.")
+  v0_0_1: "0.0.1",
+
+  @doc("Contract version 0.0.2.")
+  v0_0_2: "0.0.2",
 }
 
 // ============================================================================
