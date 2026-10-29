@@ -91,9 +91,10 @@ interface VoiceAgentWebSocket {
       @query store?: boolean;
 
       /**
-       * URL-encoded JSON object of ordinary session inputs, overriding definition defaults for
-       * prompts and greeting. Maximum decoded size: 32 KiB; nesting depth: 16. Never send private
-       * values in URLs: private initialization is unsupported. Use private collection instead.
+       * Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and
+       * URL-encoded as this query parameter. Supplied values override definition defaults when rendering the
+       * agent's instructions and session-start greeting for this session only. The decoded value must be a JSON
+       * object no larger than 32 KiB with a maximum nesting depth of 16.
        */
       @query structured_inputs?: string;
 

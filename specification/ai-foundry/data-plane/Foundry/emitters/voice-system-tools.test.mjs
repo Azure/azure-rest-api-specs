@@ -176,10 +176,11 @@ for (const version of ["v1", "virtual-public-preview"]) {
     );
   });
 
-  test(`${version}: system configurations remain closed with unchanged duration defaults`, () => {
+  test(`${version}: system configurations retain typed fields and unchanged duration defaults`, () => {
     for (const [name, schemaName] of Object.entries(toolNames)) {
       const schema = schemas[schemaName];
-      assert.deepEqual(schema.unevaluatedProperties, { not: {} }, schemaName);
+      assert.equal(schema.unevaluatedProperties, undefined, schemaName);
+      assert.equal(schema.additionalProperties, undefined, schemaName);
       const { properties } = flatten(schemas, schema);
       assert.deepEqual(properties.name.enum, [name]);
       assert.equal(properties.description.type, "string");
@@ -225,6 +226,30 @@ for (const version of ["v1", "virtual-public-preview"]) {
         ),
       );
     }
+  });
+
+  test(`${version}: transfer destinations require canonical type without legacy aliases`, () => {
+    for (const name of [
+      "VoiceAgentTransferRouting",
+      "VoiceAgentTransferDestination",
+      "VoiceAgentTransferTarget",
+    ]) {
+      assert.equal(schemas[name].unevaluatedProperties, undefined, name);
+      assert.equal(schemas[name].additionalProperties, undefined, name);
+    }
+    assert.deepEqual(schemas.VoiceAgentTransferDestinationType.enum, [
+      "phone_number",
+      "teams",
+      "sip",
+    ]);
+    const destination = schemas.VoiceAgentTransferDestination;
+    assert.deepEqual([...destination.required].sort(), ["type", "value"]);
+    assert.equal(destination.properties.kind, undefined);
+    assert.equal(destination.anyOf, undefined);
+    assert.equal(
+      destination.properties.type.$ref,
+      `${prefix}VoiceAgentTransferDestinationType`,
+    );
   });
 
   test(`${version}: Agent configuration does not expose private initialization declarations`, () => {

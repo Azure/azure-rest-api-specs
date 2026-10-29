@@ -488,8 +488,6 @@ model VoiceAgentServerEventSystemToolArgumentsDone
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLanguageDetectionArguments {
-  ...Record<never>;
-
   @doc("Target language in lowercase ISO 639-1 format, such as es or fr.")
   @minLength(2)
   @maxLength(2)
@@ -532,7 +530,6 @@ model VoiceAgentCollectionStartArguments {
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectSmsStartArguments {
-  ...Record<never>;
   ...VoiceAgentCollectionStartArguments;
 
   @doc("The expected SMS sender in canonical E.164 form, explicitly selected at start without Caller ID fallback. This is routing, not authenticated identity.")
@@ -541,7 +538,7 @@ model VoiceAgentCollectSmsStartArguments {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Model-generated keypad completion selects one typed object, not a new client-ingress union."
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve the reviewed closed completion-mode objects and their SDK representation instead of introducing a new base model."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve the reviewed completion-mode objects and their SDK representation instead of introducing a new base model."
 @doc("One typed keypad completion policy. Unknown types, mixed-mode fields and legacy strings are rejected before receiver setup.")
 @oneOf
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -571,7 +568,6 @@ model VoiceAgentDtmfCompletionTiming {
 @doc("Complete immediately after exactly length digits. Other modes' fields are not accepted.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDtmfFixedLengthCompletionMode {
-  ...Record<never>;
   ...VoiceAgentDtmfCompletionTiming;
 
   @doc("Select fixed-length completion.")
@@ -586,7 +582,6 @@ model VoiceAgentDtmfFixedLengthCompletionMode {
 @doc("Completes when the configured end key follows nonempty digits within service limits. No digit count or length bounds are configured.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDtmfTerminatorCompletionMode {
-  ...Record<never>;
   ...VoiceAgentDtmfCompletionTiming;
 
   @doc("Select confirmation-key completion.")
@@ -599,7 +594,6 @@ model VoiceAgentDtmfTerminatorCompletionMode {
 @doc("Completes after nonempty input and an inter-digit pause, within service limits. No key or count is configured; total deadline expiry takes precedence.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDtmfInterDigitSilenceCompletionMode {
-  ...Record<never>;
   ...VoiceAgentDtmfCompletionTiming;
 
   @doc("Select silence completion.")
@@ -624,7 +618,6 @@ union VoiceAgentDtmfTerminator {
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectDtmfStartArguments {
-  ...Record<never>;
   ...VoiceAgentCollectionStartArguments;
 
   @doc("Required typed object selecting one completion policy and its parameters, not an array of simultaneous rules.")

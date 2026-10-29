@@ -469,16 +469,13 @@ model VoiceAgentSystemTool extends VoiceAgentTool {
   @doc("The service-managed control action. Known values are stable; additional values may be added over time.")
   name: VoiceAgentSystemToolName;
 
-  @doc("Optional model-facing guidance. If omitted, the service uses the tool's built-in description; overriding it does not change the tool's parameter schema.")
+  @doc("An optional description of the system tool.")
   description?: string;
 }
 
-@doc("Ends the active conversation.")
+@doc("A service-managed control that ends the active conversation.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentEndConversationSystemTool extends VoiceAgentSystemTool {
-  // Reject undeclared configuration fields; inherited fields remain allowed.
-  ...Record<never>;
-
   @doc("The service-managed control action. Always `end_conversation`.")
   name: VoiceAgentSystemToolName.end_conversation;
 }
@@ -486,8 +483,6 @@ model VoiceAgentEndConversationSystemTool extends VoiceAgentSystemTool {
 @doc("Switches supported conversation language settings.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLanguageDetectionSystemTool extends VoiceAgentSystemTool {
-  ...Record<never>;
-
   @doc("The service-managed control action. Always `language_detection`.")
   name: VoiceAgentSystemToolName.language_detection;
 }
@@ -495,13 +490,11 @@ model VoiceAgentLanguageDetectionSystemTool extends VoiceAgentSystemTool {
 @doc("Retrieves the unchanged transcript of the last user audio turn.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDigitRecognitionSystemTool extends VoiceAgentSystemTool {
-  ...Record<never>;
-
   @doc("The service-managed control action. Always `digit_recognition`.")
   name: VoiceAgentSystemToolName.digit_recognition;
 }
 
-@doc("A built-in voice-session capability name. Known values are stable; additional values may be added over time.")
+@doc("A service-managed voice-session control action. Known values are stable; additional values may be added over time.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentSystemToolName {
   string,
@@ -539,14 +532,10 @@ scalar VoiceAgentOutputReference extends string;
 @doc("Collects one complete SMS from an explicitly selected sender.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
-  ...Record<never>;
-
   @doc("The service-managed control action. Always `collect_sms`.")
   name: VoiceAgentSystemToolName.collect_sms;
 
   @doc("Collection timeout, from 1 to 300 seconds, including receiver setup. If omitted, the service defaults to 60 seconds. Invocation timeout overrides it.")
-  // TypeSpec 1.16 cannot version-project custom scalar values in min/max decorators.
-  // Preserve the encoded-second bounds in OpenAPI while reusing the shared duration.
   @extension("minimum", 1)
   @extension("maximum", 300)
   timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
@@ -555,8 +544,6 @@ model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
 @doc("Collects keypad digits on the current call.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectDtmfSystemTool extends VoiceAgentSystemTool {
-  ...Record<never>;
-
   @doc("The service-managed control action. Always `collect_dtmf`.")
   name: VoiceAgentSystemToolName.collect_dtmf;
 
@@ -584,8 +571,6 @@ union VoiceAgentTransferStrategy {
 @doc("The configured transfer routing policy. The model selects a target name, not destinations or routing settings.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTransferRouting {
-  ...Record<never>;
-
   @doc("The routing strategy. Current native Telephony transfer supports ACS sequential and random routing only.")
   strategy: VoiceAgentTransferStrategy;
 
@@ -606,9 +591,6 @@ union VoiceAgentTransferDestinationType {
   @doc("An E.164 telephone number.")
   phone_number: "phone_number",
 
-  @doc("Legacy input alias for phone_number. New configurations should use phone_number.")
-  pstn: "pstn",
-
   @doc("A Microsoft Teams user or resource-account identifier.")
   teams: "teams",
 
@@ -618,12 +600,9 @@ union VoiceAgentTransferDestinationType {
 
 @doc("The canonical system-tool transfer destination.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@extension("anyOf", #[#{ required: #["type"] }, #{ required: #["kind"] }])
 model VoiceAgentTransferDestination {
-  ...Record<never>;
-
   @doc("The destination format: phone_number for an E.164 number, teams for a Teams identifier, or sip for a SIP URI.")
-  type?: VoiceAgentTransferDestinationType;
+  type: VoiceAgentTransferDestinationType;
 
   @doc("The concrete address. Phone numbers use E.164; Teams and SIP identifiers are validated against the selected provider's capabilities.")
   @minLength(1)
@@ -633,8 +612,6 @@ model VoiceAgentTransferDestination {
 @doc("A configured logical transfer target. Only its name and description are model-visible; destinations and routing are executor settings.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTransferTarget {
-  ...Record<never>;
-
   @doc("The non-blank logical target name. Names must be unique after trimming within the transfer tool.")
   @minLength(1)
   @pattern("\\S")
@@ -654,8 +631,6 @@ model VoiceAgentTransferTarget {
 @doc("Requests a transfer to an explicitly configured logical target.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTransferSystemTool extends VoiceAgentSystemTool {
-  ...Record<never>;
-
   @doc("The service-managed control action. Always `transfer`.")
   name: VoiceAgentSystemToolName.transfer;
 
@@ -667,8 +642,6 @@ model VoiceAgentTransferSystemTool extends VoiceAgentSystemTool {
 @doc("Sends literal or templated keypad digits.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {
-  ...Record<never>;
-
   @doc("The service-managed control action. Always `send_dtmf`.")
   name: VoiceAgentSystemToolName.send_dtmf;
 
@@ -681,8 +654,6 @@ model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {
 @doc("Sends a text message from the Agent's SMS-capable number.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSendSmsSystemTool extends VoiceAgentSystemTool {
-  ...Record<never>;
-
   @doc("The service-managed control action. Always `send_sms`.")
   name: VoiceAgentSystemToolName.send_sms;
 

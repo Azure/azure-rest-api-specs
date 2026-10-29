@@ -1428,12 +1428,7 @@ model TelephonyCallJobConfiguration {
   @minLength(1)
   purpose?: string;
 
-  /**
-   * Ordinary inputs for the agent and greeting, persisted with the call job and returned on reads.
-   * Never include private values; private initialization is unsupported. Use private collection.
-   * Declared inputs are schema-validated: optional defaults apply and missing required inputs are
-   * rejected. Extra ordinary inputs remain available to templates.
-   */
+  @doc("Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.")
   structured_inputs?: Record<unknown>;
 
   @doc("The optional execution window.")

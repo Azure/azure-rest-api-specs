@@ -3554,7 +3554,7 @@
             "name": "structured_inputs",
             "in": "query",
             "required": false,
-            "description": "URL-encoded JSON object of ordinary session inputs, overriding definition defaults for\nprompts and greeting. Maximum decoded size: 32 KiB; nesting depth: 16. Never send private\nvalues in URLs: private initialization is unsupported. Use private collection instead.",
+            "description": "Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and\nURL-encoded as this query parameter. Supplied values override definition defaults when rendering the\nagent's instructions and session-start greeting for this session only. The decoded value must be a JSON\nobject no larger than 32 KiB with a maximum nesting depth of 16.",
             "schema": {
               "type": "string"
             },
@@ -39688,7 +39688,7 @@
           "structured_inputs": {
             "type": "object",
             "additionalProperties": {},
-            "description": "Ordinary inputs for the agent and greeting, persisted with the call job and returned on reads.\nNever include private values; private initialization is unsupported. Use private collection.\nDeclared inputs are schema-validated: optional defaults apply and missing required inputs are\nrejected. Extra ordinary inputs remain available to templates."
+            "description": "Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables."
           },
           "schedule": {
             "$ref": "#/components/schemas/TelephonyCallJobSchedule",
@@ -93984,7 +93984,7 @@
           "structured_inputs": {
             "type": "object",
             "additionalProperties": {},
-            "description": "Ordinary inputs for the agent and greeting, persisted with the call job and returned on reads.\nNever include private values; private initialization is unsupported. Use private collection.\nDeclared inputs are schema-validated: optional defaults apply and missing required inputs are\nrejected. Extra ordinary inputs remain available to templates."
+            "description": "Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables."
           },
           "schedule": {
             "$ref": "#/components/schemas/TelephonyCallJobSchedule",
@@ -97445,9 +97445,6 @@
             "default": 60
           }
         },
-        "unevaluatedProperties": {
-          "not": {}
-        },
         "allOf": [
           {
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
@@ -97480,9 +97477,6 @@
             "minimum": 1,
             "default": 60
           }
-        },
-        "unevaluatedProperties": {
-          "not": {}
         },
         "allOf": [
           {
@@ -97625,9 +97619,6 @@
             "description": "The service-managed control action. Always `digit_recognition`."
           }
         },
-        "unevaluatedProperties": {
-          "not": {}
-        },
         "allOf": [
           {
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
@@ -97701,15 +97692,12 @@
             "description": "The service-managed control action. Always `end_conversation`."
           }
         },
-        "unevaluatedProperties": {
-          "not": {}
-        },
         "allOf": [
           {
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Ends the active conversation.",
+        "description": "A service-managed control that ends the active conversation.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -98022,9 +98010,6 @@
             ],
             "description": "The service-managed control action. Always `language_detection`."
           }
-        },
-        "unevaluatedProperties": {
-          "not": {}
         },
         "allOf": [
           {
@@ -98384,9 +98369,6 @@
             "default": 60
           }
         },
-        "unevaluatedProperties": {
-          "not": {}
-        },
         "allOf": [
           {
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
@@ -98419,9 +98401,6 @@
             "minimum": 1,
             "default": 60
           }
-        },
-        "unevaluatedProperties": {
-          "not": {}
         },
         "allOf": [
           {
@@ -98838,7 +98817,7 @@
           },
           "description": {
             "type": "string",
-            "description": "Optional model-facing guidance. If omitted, the service uses the tool's built-in description; overriding it does not change the tool's parameter schema."
+            "description": "An optional description of the system tool."
           }
         },
         "discriminator": {
@@ -98973,7 +98952,7 @@
             ]
           }
         ],
-        "description": "A built-in voice-session capability name. Known values are stable; additional values may be added over time.",
+        "description": "A service-managed voice-session control action. Known values are stable; additional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -99128,6 +99107,7 @@
       "VoiceAgentTransferDestination": {
         "type": "object",
         "required": [
+          "type",
           "value"
         ],
         "properties": {
@@ -99141,22 +99121,7 @@
             "description": "The concrete address. Phone numbers use E.164; Teams and SIP identifiers are validated against the selected provider's capabilities."
           }
         },
-        "unevaluatedProperties": {
-          "not": {}
-        },
         "description": "The canonical system-tool transfer destination.",
-        "anyOf": [
-          {
-            "required": [
-              "type"
-            ]
-          },
-          {
-            "required": [
-              "kind"
-            ]
-          }
-        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -99167,7 +99132,6 @@
         "type": "string",
         "enum": [
           "phone_number",
-          "pstn",
           "teams",
           "sip"
         ],
@@ -99204,9 +99168,6 @@
             "description": "Total routing timeout across destinations, from 1 to 300 seconds. If omitted, the service defaults to 45 seconds. Must be at least `ring_timeout_seconds`.",
             "default": 45
           }
-        },
-        "unevaluatedProperties": {
-          "not": {}
         },
         "description": "The configured transfer routing policy. The model selects a target name, not destinations or routing settings.",
         "x-ms-foundry-meta": {
@@ -99259,9 +99220,6 @@
             "description": "The non-empty set of logical targets that the model may select."
           }
         },
-        "unevaluatedProperties": {
-          "not": {}
-        },
         "allOf": [
           {
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
@@ -99304,9 +99262,6 @@
             "$ref": "#/components/schemas/VoiceAgentTransferRouting",
             "description": "The trusted routing policy for this target."
           }
-        },
-        "unevaluatedProperties": {
-          "not": {}
         },
         "description": "A configured logical transfer target. Only its name and description are model-visible; destinations and routing are executor settings.",
         "x-ms-foundry-meta": {
