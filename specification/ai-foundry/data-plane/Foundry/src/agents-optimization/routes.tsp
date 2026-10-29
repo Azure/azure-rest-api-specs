@@ -7,6 +7,11 @@ using Azure.Core;
 
 namespace Azure.AI.Projects;
 
+/** Skill optimization is conditionally in preview on otherwise GA job operations. */
+const AgentOptimizationConditionalPreviews = #{
+  conditional_previews: #[FoundryFeaturesOptInKeys.skills_v1_preview],
+};
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobs {
@@ -16,14 +21,20 @@ interface AgentOptimizationJobs {
   @summary("Create an agent optimization job")
   @route("agent_optimization_jobs")
   @pollingOperation(AgentOptimizationJobs.get)
-  create is postJob<AgentOptimizationJob>;
+  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
+  create is postJobPreview<
+    FoundryFeaturesOptInKeys.skills_v1_preview,
+    AgentOptimizationJob
+  >;
 
   /**
    * Estimates validation-set rows, per-stage model call volumes, and cost bands without submitting the job.
    */
   @summary("Estimate an agent optimization job")
   @route("agent_optimization_jobs:estimate")
-  estimate is FoundryDataPlaneOperation<
+  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
+  estimate is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.skills_v1_preview,
     {
       /** The inputs to estimate against. */
       @body inputs: AgentOptimizationEstimateInputs;
@@ -36,7 +47,11 @@ interface AgentOptimizationJobs {
    */
   @summary("Get an agent optimization job")
   @route("agent_optimization_jobs/{jobId}")
-  get is queryJobStatus<AgentOptimizationJob>;
+  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
+  get is queryJobStatusPreview<
+    FoundryFeaturesOptInKeys.skills_v1_preview,
+    AgentOptimizationJob
+  >;
 
   /**
    * Downloads a declared file as a binary stream. The path must match a file descriptor returned by the service. When candidate_id is omitted, the request is scoped to the job.
@@ -44,7 +59,9 @@ interface AgentOptimizationJobs {
   @summary("Download an agent optimization job file")
   @route("agent_optimization_jobs/{jobId}/files")
   @get
-  downloadFile is FoundryDataPlaneOperation<
+  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
+  downloadFile is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.skills_v1_preview,
     {
       /** The ID of the parent optimization job. */
       @path jobId: string;
@@ -63,7 +80,9 @@ interface AgentOptimizationJobs {
    */
   @summary("List agent optimization jobs")
   @route("agent_optimization_jobs")
-  list is listJobs<
+  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
+  list is listJobsPreview<
+    FoundryFeaturesOptInKeys.skills_v1_preview,
     AgentOptimizationJob,
     {
       @doc("Filter to jobs in this lifecycle state.")
@@ -81,14 +100,19 @@ interface AgentOptimizationJobs {
    */
   @summary("Cancel an agent optimization job")
   @route("agent_optimization_jobs/{jobId}:cancel")
-  cancel is cancelJob<AgentOptimizationJob>;
+  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
+  cancel is cancelJobPreview<
+    FoundryFeaturesOptInKeys.skills_v1_preview,
+    AgentOptimizationJob
+  >;
 
   /**
    * Cancels active work, then deletes the job and its candidate artifacts.
    */
   @summary("Delete an agent optimization job")
   @route("agent_optimization_jobs/{jobId}")
-  delete is deleteJob<AgentOptimizationJob>;
+  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
+  delete is deleteJobPreview<FoundryFeaturesOptInKeys.skills_v1_preview>;
 }
 
 // ---------------------------------------------------------------------------
@@ -104,7 +128,9 @@ interface AgentOptimizationJobCandidates {
   @summary("List candidates for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates")
   @list
-  listCandidates is FoundryDataPlaneOperation<
+  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
+  listCandidates is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.skills_v1_preview,
     {
       /** The ID of the parent optimization job. */
       @path jobId: string;
@@ -123,7 +149,9 @@ interface AgentOptimizationJobCandidates {
    */
   @summary("Get a candidate for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}")
-  getCandidate is FoundryDataPlaneOperation<
+  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
+  getCandidate is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.skills_v1_preview,
     {
       /** The ID of the parent optimization job. */
       @path jobId: string;
@@ -140,7 +168,9 @@ interface AgentOptimizationJobCandidates {
   @summary("Promote a candidate for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote")
   @post
-  promoteCandidate is FoundryDataPlaneOperation<
+  @extension("x-ms-foundry-meta", AgentOptimizationConditionalPreviews)
+  promoteCandidate is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.skills_v1_preview,
     {
       /** The ID of the parent optimization job. */
       @path jobId: string;

@@ -60,6 +60,7 @@ model AgentOptimizationPromptCandidateOutput
 }
 
 @doc("Output of the single generated candidate produced by trace-driven skill optimization. It can contain zero or more independent skill outcomes. Optional reporting-only evaluation reuses a baseline candidate and each candidate's evaluation summary; the baseline is not a generated alternative.")
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationSkillCandidateOutput
   extends AgentOptimizationCandidateOutput {
   @doc("Skill optimization output discriminator.")
@@ -131,15 +132,15 @@ model AgentOptimizationCandidateEvaluation {
 
 /** Metadata for an artifact generated for an optimization candidate. */
 model AgentOptimizationCandidateFile {
-  @doc("Candidate-relative artifact path, not a local filesystem path or a download URL.")
+  @doc("Non-empty candidate-relative artifact path, not a local filesystem path or a download URL.")
   @minLength(1)
   path: string;
 
-  @doc("Artifact category, for example trace_analysis. Additional categories may be returned.")
+  @doc("Non-empty artifact category, for example trace_analysis. Additional categories may be returned.")
   @minLength(1)
   type: string;
 
-  @doc("Artifact size in bytes.")
+  @doc("Artifact size in bytes, greater than or equal to 0.")
   @minValue(0)
   size_in_bytes: int64;
 }
@@ -168,9 +169,11 @@ model AgentOptimizationCandidate {
   output?: AgentOptimizationCandidateOutput;
 
   @doc("Persisted skill execution snapshot, including partial outcomes. Populated on candidate GET when available and omitted from LIST.")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   execution_summary?: AgentOptimizationSkillExecutionSummary;
 
   @doc("Frozen trace cohort and discovered agent skills for skill optimization. Populated on candidate GET when available and omitted from LIST.")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   resolved_context?: AgentOptimizationSkillResolvedContext;
 
   @doc("Human-readable explanation of why the optimizer produced this candidate. Populated on candidate GET when available and omitted from LIST.")

@@ -2,6 +2,7 @@
 
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
+import "../skills/models.tsp";
 // Only shared evaluation types are needed; the full models import also pulls in Data Generation Jobs.
 import "../openai/evaluations/common.tsp";
 import "../openai/evaluations/user_conversation_simulation.tsp";
@@ -308,6 +309,7 @@ model AgentOptimizationEvaluationConfiguration {
   max_concurrent_agent_runs?: int32 = 1;
 
   @doc("Opt-in creation of evaluators for skill optimization using the job's optimization_model_configuration, not evaluation_model. No separate generation model is accepted. Resolved exact versions are returned in evaluators after preparation. Not accepted for agent optimization; use existing evaluator references there.")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   evaluator_generation_configuration?: AgentOptimizationEvaluatorGenerationConfiguration;
 }
 
@@ -322,6 +324,7 @@ union AgentOptimizationConfigurationType {
   prompt_optimization: "prompt_optimization",
 
   @doc("Generates a single candidate containing zero or more skill outcomes from trace evidence, with optional reporting-only evaluation recorded on baseline and learned candidates.")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   skill_optimization: "skill_optimization",
 }
 
@@ -362,9 +365,11 @@ union OptimizationContextType {
   steering_prompt: "steering_prompt",
 
   @doc("Agent trace evidence selected from project-authorized telemetry.")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   agent_traces: "agent_traces",
 
   @doc("Exact baseline skill references for skill optimization.")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   skill_references: "skill_references",
 }
 
@@ -380,7 +385,7 @@ model SteeringPromptOptimizationContext extends OptimizationContext {
   @doc("Optimization context type discriminator.")
   type: OptimizationContextType.steering_prompt;
 
-  @doc("Developer guidance describing the desired changes. Maximum UTF-8 encoded size is 100 KiB (102,400 bytes), enforced by the service. The character limit is an additional bound, not a substitute for UTF-8 byte-size validation.")
+  @doc("Developer guidance describing the desired changes, from 1 to 102,400 characters. Maximum UTF-8 encoded size is 100 KiB (102,400 bytes), enforced by the service. The character limit is an additional bound, not a substitute for UTF-8 byte-size validation.")
   @minLength(1)
   @maxLength(102400)
   prompt: string;
@@ -398,93 +403,120 @@ model PromptOptimizationConfiguration
 }
 
 /** Exact reference to an existing skill version in the job's project. */
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationFoundrySkillReference {
   @doc("Registered Foundry skill reference discriminator.")
   type: "foundry_skill";
 
-  @doc("Registered skill name.")
+  @doc("Registered skill name, from 1 to 64 characters, following the shared skill naming rules.")
   @minLength(1)
-  name: string;
+  name: SkillName;
 
-  @doc("Opaque pinned version. The aliases latest and default are not accepted.")
+  @doc("Non-empty opaque pinned version. The aliases latest and default are not accepted.")
   @minLength(1)
   version: string;
 }
 
 /** Explicit exact-version baselines for skill optimization. */
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model SkillReferencesOptimizationContext extends OptimizationContext {
   @doc("Skill reference context discriminator.")
   type: OptimizationContextType.skill_references;
 
-  @doc("Exact skill versions unioned with skills discovered from Prompt or Managed targets, including toolboxes. References across context items and discovered skills are deduplicated. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. An empty list supplies no explicit baselines.")
+  @doc("Exact skill versions combined with skills discovered from Prompt or Managed targets, including toolboxes. References across context items and discovered skills are deduplicated. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. An empty list supplies no explicit baselines.")
   skill_references: AgentOptimizationFoundrySkillReference[];
 }
 
+/** Project-authorized trace providers for skill optimization. */
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
+union AgentOptimizationTraceConnectionType {
+  string,
+
+  /** A project-linked Application Insights component. */
+  appinsights: "appinsights",
+}
+
 /** Explicit project-authorized telemetry selection, not an arbitrary endpoint. */
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 @discriminator("type")
 model AgentOptimizationTraceConnectionConfiguration {
   @doc("Trace provider discriminator.")
-  type: string;
+  type: AgentOptimizationTraceConnectionType;
 }
 
 /** Selects a project-linked Application Insights component. */
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationAppInsightsTraceConnectionConfiguration
   extends AgentOptimizationTraceConnectionConfiguration {
   @doc("Application Insights provider discriminator.")
-  type: "appinsights";
+  type: AgentOptimizationTraceConnectionType.appinsights;
 
-  @doc("ARM component resource ID of an Application Insights connection linked to this project. Invalid or unavailable explicit configuration must fail rather than fall back.")
+  @doc("Non-empty ARM component resource ID of an Application Insights connection linked to this project. Invalid or unavailable explicit configuration must fail rather than fall back.")
   @minLength(1)
   resource_id: string;
 
-  @doc("Required without target_configuration and omitted with a target agent. Exact, case-sensitive AppRoleName or cloud_RoleName, including any emitted OpenTelemetry namespace prefix. This is a telemetry service identity, not a Foundry agent reference. No surrounding whitespace, wildcards, or KQL.")
+  @doc("Required without target_configuration and omitted with a target agent. From 1 to 256 characters. Exact, case-sensitive AppRoleName or cloud_RoleName, including any emitted OpenTelemetry namespace prefix. This is a telemetry service identity, not a Foundry agent reference. No surrounding whitespace, wildcards, or KQL.")
   @minLength(1)
   @maxLength(256)
   agent_name?: string;
 }
 
+/** Trace selection strategies for skill optimization. */
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
+union AgentOptimizationTraceWindowType {
+  string,
+
+  /** A completed, half-open time interval. */
+  fixed: "fixed",
+
+  /** Proposed explicit trace-ID selection; service support is TBD. */
+  trace_ids: "trace_ids",
+}
+
 /** Trace selection window for a one-time skill optimization job. */
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 @discriminator("type")
 model AgentOptimizationTraceWindow {
   @doc("Trace window discriminator.")
-  type: string;
+  type: AgentOptimizationTraceWindowType;
 }
 
 /** Selects recent trace conversations in a completed past half-open interval, preferring traces with annotations or evaluation results. */
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
   @doc("Fixed-window discriminator.")
-  type: "fixed";
+  type: AgentOptimizationTraceWindowType.fixed;
 
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Trace selection preserves the caller's explicit UTC offset."
-  @doc("Inclusive ISO 8601 timestamp with an explicit UTC offset. Must precede end_time and be in the past. The service validates the interval at submission.")
-  start_time: offsetDateTime;
+  @doc("Inclusive UTC Unix timestamp in seconds. Must precede end_time and be in the past. The service validates the interval at submission.")
+  start_time: FoundryTimestamp;
 
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Trace selection preserves the caller's explicit UTC offset."
-  @doc("Exclusive ISO 8601 timestamp with an explicit UTC offset. Must be at or before job submission time, forming a completed past interval. The service rejects future windows rather than waiting or clamping timestamps.")
-  end_time: offsetDateTime;
+  @doc("Exclusive UTC Unix timestamp in seconds. Must be at or before job submission time, forming a completed past interval. The service rejects future windows rather than waiting or clamping timestamps.")
+  end_time: FoundryTimestamp;
 
-  @doc("Maximum number of trace conversations to select. Defaults to 100. Select the latest matching traces, giving preference to those with human annotations, evaluation results, or both. Traces without feedback remain eligible.")
+  @doc("Maximum number of trace conversations to select, from 1 to 100 inclusive. If omitted, the service defaults to 100. Select the latest matching traces, giving preference to those with human annotations, evaluation results, or both. Traces without feedback remain eligible.")
   @minValue(1)
   @maxValue(100)
   max_traces?: int32 = 100;
 }
 
 /** Proposed explicit trace-ID selection. Service support and detailed lookup behavior are TBD; this contract does not establish runtime availability. */
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationTraceIdsTraceWindow
   extends AgentOptimizationTraceWindow {
   @doc("Explicit trace-ID selection discriminator. Service support is TBD.")
-  type: "trace_ids";
+  type: AgentOptimizationTraceWindowType.trace_ids;
 
-  @doc("Explicit trace identifiers to look up within the configured telemetry source. Service support, list-size limits, duplicate handling, and missing-ID behavior are TBD.")
+  @doc("At least one explicit trace identifier to look up within the configured telemetry source. Service support, maximum list size, duplicate handling, and missing-ID behavior are TBD.")
   @minItems(1)
   trace_ids: string[];
 
-  @doc("Requested telemetry lookup horizon in hours. Service support, the lookback anchor, and maximum supported horizon are TBD.")
+  @doc("Requested telemetry lookup horizon, at least 1 hour. Service support, the lookback anchor, and maximum supported horizon are TBD.")
   @minValue(1)
   lookback_hours: int32;
 }
 
 /** Trace evidence for skill optimization, selected independently of feedback availability. */
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentTracesOptimizationContext extends OptimizationContext {
   @doc("Agent trace context discriminator.")
   type: OptimizationContextType.agent_traces;
@@ -496,30 +528,42 @@ model AgentTracesOptimizationContext extends OptimizationContext {
   trace_window: AgentOptimizationTraceWindow;
 }
 
+/** Evidence sources for generating skill-optimization evaluators. */
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
+union AgentOptimizationEvaluatorGenerationSourceType {
+  string,
+
+  /** The job's selected agent trace evidence. */
+  agent_traces: "agent_traces",
+}
+
 /** Base configuration for service-generated optimization evaluators. Currently supported for skill optimization only. Uses the job's optimization_model_configuration; no separate generation model is accepted. */
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 @discriminator("type")
 model AgentOptimizationEvaluatorGenerationConfiguration {
   @doc("Evaluator generation source discriminator.")
-  type: string;
+  type: AgentOptimizationEvaluatorGenerationSourceType;
 
   @doc("Additional instructions or context to guide evaluator generation from the selected source.")
   prompt?: string;
 }
 
 /** Generates evaluators from the job's selected trace evidence. */
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model AgentOptimizationTraceEvaluatorGenerationConfiguration
   extends AgentOptimizationEvaluatorGenerationConfiguration {
   @doc("Generate evaluators from the agent_traces context.")
-  type: "agent_traces";
+  type: AgentOptimizationEvaluatorGenerationSourceType.agent_traces;
 }
 
 /** Configuration for generating a single skill candidate from trace evidence. The candidate can contain zero or more skill outcomes; no new learnings can produce an empty skill_results array without publishing versions. Optional evaluation reuses a non-generated baseline candidate. */
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
 model SkillOptimizationConfiguration
   extends AgentOptimizationConfigurationBase {
   @doc("Skill optimization discriminator.")
   type: AgentOptimizationConfigurationType.skill_optimization;
 
-  @doc("Trace evidence, optional steering guidance, and optional exact baseline references. Supply agent_traces context; use separate steering_prompt and skill_references items for guidance and baselines.")
+  @doc("At least one context item containing trace evidence, optional steering guidance, and optional exact baseline references. Supply agent_traces context; use separate steering_prompt and skill_references items for guidance and baselines.")
   @minItems(1)
   context: OptimizationContext[];
 
