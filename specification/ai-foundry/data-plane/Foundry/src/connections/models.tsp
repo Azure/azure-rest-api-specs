@@ -30,24 +30,19 @@ model Connection {
   @visibility(Lifecycle.Read)
   credentials: BaseCredentials;
 
-  @doc("Metadata of the connection. SIP custom_headers is returned as an object of string header values, not a JSON-encoded string.")
   @visibility(Lifecycle.Read)
   metadata: ConnectionMetadata;
 }
 
-/** Connection metadata, including structured SIP custom headers. */
 model ConnectionMetadata {
-  /**
-   * SIP custom headers as an object of string values. Null, a blank string, or an empty object means no headers.
-   * A nonblank string, including a JSON-encoded object, is not a valid SIP custom_headers value.
-   */
+  /** Null, blank or {} means no headers. JSON-encoded objects are not accepted. */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Metadata combines a header map, a blank string and null, not a nominal model hierarchy."
   custom_headers?: Record<string> | SipConnectionEmptyCustomHeaders | null;
 
   ...Record<string>;
 }
 
-/** An empty or whitespace-only SIP custom_headers value indicating no headers. */
+/** Indicates no custom headers. */
 @pattern("^\\s*$")
 scalar SipConnectionEmptyCustomHeaders extends string;
 
