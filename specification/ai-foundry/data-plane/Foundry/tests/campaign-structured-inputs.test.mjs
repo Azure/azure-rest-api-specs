@@ -60,5 +60,27 @@ for (const version of ["v1", "virtual-public-preview"]) {
     assert.equal(schemas.TelephonyCampaignInputValue, undefined);
     assert.match(campaign.description, /null, objects and arrays/);
     assert.match(campaign.description, /required\/default\/schema/);
+    assert.match(
+      campaign.description,
+      /Parsing follows the same rules as direct CallJobs/,
+    );
+    assert.doesNotMatch(
+      campaign.description,
+      /128 keys|1-256 characters|16 KiB|finite binary64|128 characters/,
+    );
+    assert.match(
+      campaign.description,
+      /Campaign request\s+and row byte limits still apply/,
+    );
+    const dataset =
+      schemas.TelephonyCampaignCreate.properties.recipient_dataset;
+    assert.match(
+      dataset.description,
+      /same structured-input parsing and Agent processing/,
+    );
+    assert.match(
+      dataset.description,
+      /Duplicate CSV headers or top-level JSON row fields/,
+    );
   });
 }
