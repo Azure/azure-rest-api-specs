@@ -97436,13 +97436,6 @@
               "collect_dtmf"
             ],
             "description": "The service-managed control action. Always `collect_dtmf`."
-          },
-          "timeout_seconds": {
-            "$ref": "#/components/schemas/FoundryDurationSeconds",
-            "description": "Collection timeout, from 1 to 300 seconds, including receiver setup. If omitted, the service defaults to 60 seconds. Invocation timeout overrides it.",
-            "maximum": 300,
-            "minimum": 1,
-            "default": 60
           }
         },
         "allOf": [
@@ -97469,13 +97462,6 @@
               "collect_sms"
             ],
             "description": "The service-managed control action. Always `collect_sms`."
-          },
-          "timeout_seconds": {
-            "$ref": "#/components/schemas/FoundryDurationSeconds",
-            "description": "Collection timeout, from 1 to 300 seconds, including receiver setup. If omitted, the service defaults to 60 seconds. Invocation timeout overrides it.",
-            "maximum": 300,
-            "minimum": 1,
-            "default": 60
           }
         },
         "allOf": [
@@ -98360,13 +98346,6 @@
               "send_dtmf"
             ],
             "description": "The service-managed control action. Always `send_dtmf`."
-          },
-          "timeout_seconds": {
-            "$ref": "#/components/schemas/FoundryDurationSeconds",
-            "description": "Send timeout, from 1 to 300 seconds, covering invocation acceptance to provider acknowledgement. If omitted, the service defaults to 60 seconds.",
-            "maximum": 300,
-            "minimum": 1,
-            "default": 60
           }
         },
         "allOf": [
@@ -98393,13 +98372,6 @@
               "send_sms"
             ],
             "description": "The service-managed control action. Always `send_sms`."
-          },
-          "timeout_seconds": {
-            "$ref": "#/components/schemas/FoundryDurationSeconds",
-            "description": "Send timeout, from 1 to 300 seconds, covering invocation acceptance to provider acknowledgement. If omitted, the service defaults to 60 seconds.",
-            "maximum": 300,
-            "minimum": 1,
-            "default": 60
           }
         },
         "allOf": [
@@ -98818,6 +98790,13 @@
           "description": {
             "type": "string",
             "description": "An optional description of the system tool."
+          },
+          "timeout_seconds": {
+            "$ref": "#/components/schemas/FoundryDurationSeconds",
+            "description": "Execution timeout, from 1 to 300 seconds. If omitted, the service defaults to 60 seconds.\nIncludes collection setup; collection invocations may override it. Transfer uses it as the total routing budget.",
+            "maximum": 300,
+            "minimum": 1,
+            "default": 60
           }
         },
         "discriminator": {
@@ -99157,16 +99136,8 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 300,
-            "description": "Per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. ACS allows at most 180 seconds.",
+            "description": "Per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. Must not exceed the tool's timeout_seconds. ACS allows at most 180 seconds.",
             "default": 20
-          },
-          "total_timeout_seconds": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 300,
-            "description": "Total routing timeout across destinations, from 1 to 300 seconds. If omitted, the service defaults to 45 seconds. Must be at least `ring_timeout_seconds`.",
-            "default": 45
           }
         },
         "description": "The configured transfer routing policy. The model selects a target name, not destinations or routing settings.",

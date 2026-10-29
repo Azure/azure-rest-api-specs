@@ -471,6 +471,14 @@ model VoiceAgentSystemTool extends VoiceAgentTool {
 
   @doc("An optional description of the system tool.")
   description?: string;
+
+  /**
+   * Execution timeout, from 1 to 300 seconds. If omitted, the service defaults to 60 seconds.
+   * Includes collection setup; collection invocations may override it. Transfer uses it as the total routing budget.
+   */
+  @extension("minimum", 1)
+  @extension("maximum", 300)
+  timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
 }
 
 @doc("A service-managed control that ends the active conversation.")
@@ -534,11 +542,6 @@ scalar VoiceAgentOutputReference extends string;
 model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
   @doc("The service-managed control action. Always `collect_sms`.")
   name: VoiceAgentSystemToolName.collect_sms;
-
-  @doc("Collection timeout, from 1 to 300 seconds, including receiver setup. If omitted, the service defaults to 60 seconds. Invocation timeout overrides it.")
-  @extension("minimum", 1)
-  @extension("maximum", 300)
-  timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
 }
 
 @doc("Collects keypad digits on the current call.")
@@ -546,11 +549,6 @@ model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
 model VoiceAgentCollectDtmfSystemTool extends VoiceAgentSystemTool {
   @doc("The service-managed control action. Always `collect_dtmf`.")
   name: VoiceAgentSystemToolName.collect_dtmf;
-
-  @doc("Collection timeout, from 1 to 300 seconds, including receiver setup. If omitted, the service defaults to 60 seconds. Invocation timeout overrides it.")
-  @extension("minimum", 1)
-  @extension("maximum", 300)
-  timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
 }
 
 @doc("Per-invocation transfer routing. Unsupported strategies are rejected before provider execution; schema membership does not imply support by every provider.")
@@ -574,15 +572,10 @@ model VoiceAgentTransferRouting {
   @doc("The routing strategy. Current native Telephony transfer supports ACS sequential and random routing only.")
   strategy: VoiceAgentTransferStrategy;
 
-  @doc("Per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. ACS allows at most 180 seconds.")
+  @doc("Per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. Must not exceed the tool's timeout_seconds. ACS allows at most 180 seconds.")
   @minValue(1)
   @maxValue(300)
   ring_timeout_seconds?: int32 = 20;
-
-  @doc("Total routing timeout across destinations, from 1 to 300 seconds. If omitted, the service defaults to 45 seconds. Must be at least `ring_timeout_seconds`.")
-  @minValue(1)
-  @maxValue(300)
-  total_timeout_seconds?: int32 = 45;
 }
 
 @doc("The supported address formats for a system-tool transfer destination.")
@@ -644,11 +637,6 @@ model VoiceAgentTransferSystemTool extends VoiceAgentSystemTool {
 model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {
   @doc("The service-managed control action. Always `send_dtmf`.")
   name: VoiceAgentSystemToolName.send_dtmf;
-
-  @doc("Send timeout, from 1 to 300 seconds, covering invocation acceptance to provider acknowledgement. If omitted, the service defaults to 60 seconds.")
-  @extension("minimum", 1)
-  @extension("maximum", 300)
-  timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
 }
 
 @doc("Sends a text message from the Agent's SMS-capable number.")
@@ -656,11 +644,6 @@ model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {
 model VoiceAgentSendSmsSystemTool extends VoiceAgentSystemTool {
   @doc("The service-managed control action. Always `send_sms`.")
   name: VoiceAgentSystemToolName.send_sms;
-
-  @doc("Send timeout, from 1 to 300 seconds, covering invocation acceptance to provider acknowledgement. If omitted, the service defaults to 60 seconds.")
-  @extension("minimum", 1)
-  @extension("maximum", 300)
-  timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
 }
 
 @doc("A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.")

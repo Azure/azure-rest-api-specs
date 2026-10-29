@@ -198,22 +198,18 @@ for (const version of ["v1", "virtual-public-preview"]) {
           `${schemaName}.${invocationOnly}`,
         );
       }
-      if (name.startsWith("collect_") || name.startsWith("send_")) {
-        assert.equal(properties.timeout_seconds.default, 60);
-        assert.equal(properties.timeout_seconds.minimum, 1);
-        assert.equal(properties.timeout_seconds.maximum, 300);
-        assert.match(properties.timeout_seconds.description, /from 1 to 300/);
-        assert.match(
-          properties.timeout_seconds.description,
-          /If omitted, the service defaults to 60 seconds\./,
-        );
-      } else {
-        assert.equal(properties.timeout_seconds, undefined);
-      }
+      assert.equal(schema.properties.timeout_seconds, undefined, schemaName);
+      assert.equal(properties.timeout_seconds.default, 60);
+      assert.equal(properties.timeout_seconds.minimum, 1);
+      assert.equal(properties.timeout_seconds.maximum, 300);
+      assert.match(properties.timeout_seconds.description, /from 1 to 300/);
+      assert.match(
+        properties.timeout_seconds.description,
+        /If omitted, the service defaults to 60 seconds\./,
+      );
     }
     for (const [name, defaultSeconds] of Object.entries({
       ring_timeout_seconds: 20,
-      total_timeout_seconds: 45,
     })) {
       const property = schemas.VoiceAgentTransferRouting.properties[name];
       assert.equal(property.default, defaultSeconds);
@@ -226,6 +222,10 @@ for (const version of ["v1", "virtual-public-preview"]) {
         ),
       );
     }
+    assert.equal(
+      schemas.VoiceAgentTransferRouting.properties.total_timeout_seconds,
+      undefined,
+    );
   });
 
   test(`${version}: transfer destinations require canonical type without legacy aliases`, () => {
