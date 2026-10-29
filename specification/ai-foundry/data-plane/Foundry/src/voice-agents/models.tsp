@@ -564,7 +564,6 @@ model CreateTelephonyBindingRequest {
   ...CreateTelephonyBindingProperties;
 }
 
-/** Properties of a Microsoft Teams Phone extensibility binding. */
 alias TeamsPhoneExtensibilityTelephonyBindingProperties = {
   provider: TelephonyProvider.teams_phone_extensibility;
 
@@ -575,7 +574,6 @@ alias TeamsPhoneExtensibilityTelephonyBindingProperties = {
   resource_account_object_id: Azure.Core.uuid;
 };
 
-/** Properties of a Twilio binding. */
 alias TwilioTelephonyBindingProperties = {
   provider: TelephonyProvider.twilio;
 
