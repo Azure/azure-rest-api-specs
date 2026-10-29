@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../../main.tsp";
+import "../common/common.tsp";
 import "./recoveryPlan.tsp";
 import "./recoveryResource.tsp";
 
@@ -17,42 +18,12 @@ using TypeSpec.Versioning;
 namespace Microsoft.AzureResilienceManagement;
 
 @added(Versions.v2026_11_30_preview)
-@doc("The workload protected by a recovery configuration profile.")
-union WorkloadType {
-  @added(Versions.v2026_11_30_preview)
-  @doc("An Azure virtual machine workload.")
-  AzureVm: "AzureVm",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("A SQL database workload hosted in an Azure virtual machine.")
-  SqlDatabaseInAzureVm: "SqlDatabaseInAzureVm",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("A SQL Server instance workload hosted in an Azure virtual machine.")
-  SqlServerInAzureVm: "SqlServerInAzureVm",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("An SAP HANA workload hosted in an Azure virtual machine.")
-  SapHanaInAzureVm: "SapHanaInAzureVm",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("An SAP ASE workload hosted in an Azure virtual machine.")
-  SapAseInAzureVm: "SapAseInAzureVm",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("An Oracle workload hosted in an Azure virtual machine.")
-  OracleInAzureVm: "OracleInAzureVm",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("An Azure Files workload.")
-  AzureFileShare: "AzureFileShare",
-
-  string,
-}
-
-@added(Versions.v2026_11_30_preview)
-@doc("The supported recovery location behavior.")
+@doc("The supported workload recovery behavior.")
 union RecoveryType {
+  @added(Versions.v2026_11_30_preview)
+  @doc("Recovery creates a new virtual machine.")
+  CreateNewVM: "CreateNewVM",
+
   @added(Versions.v2026_11_30_preview)
   @doc("Recovery targets an alternate location.")
   AlternateLocation: "AlternateLocation",
@@ -74,40 +45,6 @@ union TargetProvisioningMode {
   @added(Versions.v2026_11_30_preview)
   @doc("A target resource is provisioned outside the recovery orchestration service.")
   ExternallyProvisioned: "ExternallyProvisioned",
-
-  string,
-}
-
-@added(Versions.v2026_11_30_preview)
-@doc("A full Azure resource type used as a recovery target.")
-union TargetResourceType {
-  @added(Versions.v2026_11_30_preview)
-  @doc("An Azure virtual machine.")
-  VirtualMachine: "Microsoft.Compute/virtualMachines",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("An Azure virtual network.")
-  VirtualNetwork: "Microsoft.Network/virtualNetworks",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("An Azure virtual network subnet.")
-  Subnet: "Microsoft.Network/virtualNetworks/subnets",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("An Azure storage account.")
-  StorageAccount: "Microsoft.Storage/storageAccounts",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("An Azure disk encryption set.")
-  DiskEncryptionSet: "Microsoft.Compute/diskEncryptionSets",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("An Azure Key Vault vault.")
-  KeyVault: "Microsoft.KeyVault/vaults",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("An Azure network security group.")
-  NetworkSecurityGroup: "Microsoft.Network/networkSecurityGroups",
 
   string,
 }
@@ -163,19 +100,15 @@ union RecoveryPointHealthStatus {
 }
 
 @added(Versions.v2026_11_30_preview)
-@doc("The behavior when a recovery target already exists.")
-union ExistingTargetBehavior {
+@doc("The behavior when a copied file already exists.")
+union CopyOptions {
   @added(Versions.v2026_11_30_preview)
-  @doc("Overwrite the existing target.")
+  @doc("Overwrite the existing file.")
   Overwrite: "Overwrite",
 
   @added(Versions.v2026_11_30_preview)
-  @doc("Skip recovery when the target exists.")
-  SkipIfExists: "SkipIfExists",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Fail recovery when the target exists.")
-  Fail: "Fail",
+  @doc("Skip the existing file.")
+  Skip: "Skip",
 
   string,
 }
@@ -196,30 +129,6 @@ union OverwriteOptions {
   Overwrite: 2,
 
   int32,
-}
-
-@added(Versions.v2026_11_30_preview)
-@doc("The scope of an Azure Files restore.")
-union FileRestoreType {
-  @added(Versions.v2026_11_30_preview)
-  @doc("Restore the complete file share.")
-  FullShare: "FullShare",
-
-  string,
-}
-
-@added(Versions.v2026_11_30_preview)
-@doc("The recovery point rehydration priority.")
-union RehydrationPriority {
-  @added(Versions.v2026_11_30_preview)
-  @doc("Use standard rehydration priority.")
-  Standard: "Standard",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Use high rehydration priority.")
-  High: "High",
-
-  string,
 }
 
 @added(Versions.v2026_11_30_preview)
@@ -267,12 +176,8 @@ model RecoveryPointPolicy {
 @doc("A target resource required by a recovery workload.")
 model TargetResourceSpec {
   @added(Versions.v2026_11_30_preview)
-  @doc("The semantic role of this target resource.")
-  role: string;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The full Azure resource type of the target. The service validates that the resource type is supported for the target role.")
-  armResourceType: TargetResourceType;
+  @doc("The full Azure resource type of the target. Supported types include Microsoft.Resources/resourceGroups, Microsoft.Compute/virtualMachines, Microsoft.Network/virtualNetworks, Microsoft.Network/virtualNetworks/subnets, Microsoft.Storage/storageAccounts, Microsoft.Compute/diskEncryptionSets, Microsoft.KeyVault/vaults, and Microsoft.Network/networkSecurityGroups. The service validates supported target resource types.")
+  armResourceType: Azure.Core.armResourceType;
 
   @added(Versions.v2026_11_30_preview)
   @doc("How the target resource is provisioned.")
@@ -283,37 +188,8 @@ model TargetResourceSpec {
   resourceId?: armResourceIdentifier;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The semantic roles of target resources that this target depends on.")
+  @doc("The target resources that this target depends on.")
   dependsOn?: string[];
-}
-
-@added(Versions.v2026_11_30_preview)
-@doc("A managed identity used for a restore.")
-model RestoreIdentity {
-  @added(Versions.v2026_11_30_preview)
-  @doc("The managed identity type.")
-  identityType: Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The Azure resource identifier of the user-assigned identity.")
-  userAssignedIdentityId?: armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
-}
-
-@added(Versions.v2026_11_30_preview)
-@doc("Recovery point rehydration settings.")
-model RecoveryPointRehydrationInfo {
-  @added(Versions.v2026_11_30_preview)
-  @doc("The requested rehydration priority.")
-  rehydrationPriority: RehydrationPriority;
-
-  @added(Versions.v2026_11_30_preview)
-  @minValue(0)
-  @doc("The requested rehydration duration, in hours.")
-  rehydrationDurationInHours?: int32;
 }
 
 @added(Versions.v2026_11_30_preview)
@@ -328,6 +204,14 @@ model WorkloadConfig {
 @added(Versions.v2026_11_30_preview)
 @doc("Recovery configuration for an Azure virtual machine.")
 model VmRecoveryConfig extends WorkloadConfig {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The virtual machine recovery behavior. Defaults to creating a new virtual machine.")
+  recoveryType?: RecoveryType = RecoveryType.CreateNewVM;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The prefix used when naming recovered virtual machines.")
+  targetNamePrefix?: string;
+
   @added(Versions.v2026_11_30_preview)
   @doc("The target resource group.")
   resourceGroup: TargetResourceSpec;
@@ -353,25 +237,24 @@ model VmRecoveryConfig extends WorkloadConfig {
   diskEncryptionSet?: TargetResourceSpec;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The identity used for restore.")
-  identity?: RestoreIdentity;
+  @doc("The system-assigned and/or user-assigned managed identities used for restore.")
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The target availability zones.")
   zones?: string[];
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Default recovery point rehydration settings.")
-  rehydrationDefault?: RecoveryPointRehydrationInfo;
 }
 
 @added(Versions.v2026_11_30_preview)
 @doc("Shared recovery configuration fields for database workloads.")
 model DatabaseRecoveryConfig extends WorkloadConfig {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Preserves the Dictionary<string, string> contract of DatabaseRecoveryConfig.targetDirectoryMapping, whose keys identify recovery point types."
   @added(Versions.v2026_11_30_preview)
-  @doc("The target folder mappings for full, differential, log, and incremental recovery points.")
-  targetDirectoryMapping?: Record<string>;
+  @doc("The database recovery behavior. Defaults to recovery at an alternate location.")
+  recoveryType?: RecoveryType = RecoveryType.AlternateLocation;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The prefix used when naming recovered databases.")
+  targetNamePrefix?: string;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The target directory location for restoring a database as files.")
@@ -436,38 +319,6 @@ model SqlDatabaseInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
   alternateDirectoryPaths?: SqlDataDirectoryMapping[];
 }
 
-@added(Versions.v2026_11_30_preview)
-@doc("Client and principal identifiers of a user-assigned managed identity.")
-model UserAssignedIdentityProperties {
-  @added(Versions.v2026_11_30_preview)
-  @doc("The client identifier of the identity.")
-  clientId?: string;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The principal identifier of the identity.")
-  principalId?: string;
-}
-
-@added(Versions.v2026_11_30_preview)
-@doc("Details of a user-assigned managed identity used for restore.")
-model UserAssignedManagedIdentityDetails {
-  @added(Versions.v2026_11_30_preview)
-  @doc("The Azure resource identifier of the identity.")
-  identityArmId?: armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The identity name.")
-  identityName?: string;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The client and principal identifiers of the identity.")
-  userAssignedIdentityProperties?: UserAssignedIdentityProperties;
-}
-
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance intentionally emits shared database recovery fields through allOf; WorkloadConfig defines the workloadType discriminator."
 @added(Versions.v2026_11_30_preview)
 @doc("Recovery configuration for a SQL Server instance in an Azure virtual machine.")
@@ -477,8 +328,8 @@ model SqlServerInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
   workloadType: WorkloadType.SqlServerInAzureVm;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The user-assigned managed identity details used for restore.")
-  userAssignedManagedIdentityDetails?: UserAssignedManagedIdentityDetails;
+  @doc("The managed identities used for restore. User-assigned identities are keyed by their Azure resource identifiers, which include the identity names.")
+  userAssignedManagedIdentityDetails?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   @added(Versions.v2026_11_30_preview)
   @doc("Indicates whether the restored SQL Server databases are left in the NORECOVERY state.")
@@ -520,6 +371,10 @@ model FileShareRecoveryConfig extends WorkloadConfig {
   workloadType: WorkloadType.AzureFileShare;
 
   @added(Versions.v2026_11_30_preview)
+  @doc("The prefix used when naming recovered file shares.")
+  targetNamePrefix?: string;
+
+  @added(Versions.v2026_11_30_preview)
   @doc("The target storage account.")
   storageAccount: TargetResourceSpec;
 
@@ -528,16 +383,12 @@ model FileShareRecoveryConfig extends WorkloadConfig {
   targetFolderPath?: string;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The identity used for restore.")
-  identity?: RestoreIdentity;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The default scope of file restore.")
-  restoreTypeDefault?: FileRestoreType;
+  @doc("The system-assigned and/or user-assigned managed identities used for restore.")
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The behavior when a copied file already exists.")
-  copyOptions?: ExistingTargetBehavior;
+  copyOptions?: CopyOptions;
 }
 
 @added(Versions.v2026_11_30_preview)
@@ -566,22 +417,8 @@ model RecoveryConfigProfileProperties {
   workloadConfig: WorkloadConfig;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The prefix used when naming recovery targets.")
-  targetNamePrefix?: string;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The recovery location behavior.")
-  recoveryType?: RecoveryType = RecoveryType.AlternateLocation;
-
-  @added(Versions.v2026_11_30_preview)
   @doc("Default recovery point selection.")
   recoveryPointPolicy?: RecoveryPointPolicy;
-
-  @added(Versions.v2026_11_30_preview)
-  @identifiers(#[])
-  @maxItems(10)
-  @doc("Infrastructure actions run before restoring resources that use this recovery configuration profile.")
-  infrastructurePreparation?: RecoveryGroupBaseAction[];
 
   @added(Versions.v2026_11_30_preview)
   @visibility(Lifecycle.Read)
@@ -628,22 +465,8 @@ model RecoveryConfigProfilePatchProperties {
   workloadConfig?: WorkloadConfig;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The prefix used when naming recovery targets.")
-  targetNamePrefix?: string;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The recovery location behavior.")
-  recoveryType?: RecoveryType;
-
-  @added(Versions.v2026_11_30_preview)
   @doc("Default recovery point selection.")
   recoveryPointPolicy?: RecoveryPointPolicy;
-
-  @added(Versions.v2026_11_30_preview)
-  @identifiers(#[])
-  @maxItems(10)
-  @doc("Infrastructure actions run before restoring resources that use this recovery configuration profile.")
-  infrastructurePreparation?: RecoveryGroupBaseAction[];
 }
 
 @added(Versions.v2026_11_30_preview)

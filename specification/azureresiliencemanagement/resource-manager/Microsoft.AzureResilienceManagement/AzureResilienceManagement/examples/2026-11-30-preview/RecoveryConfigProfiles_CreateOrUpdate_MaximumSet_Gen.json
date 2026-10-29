@@ -15,19 +15,16 @@
         "workloadConfig": {
           "workloadType": "AzureVm",
           "resourceGroup": {
-            "role": "targetResourceGroup",
             "armResourceType": "Microsoft.Resources/resourceGroups",
             "provisioningMode": "Existing",
             "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg"
           },
           "virtualNetwork": {
-            "role": "targetVirtualNetwork",
             "armResourceType": "Microsoft.Network/virtualNetworks",
             "provisioningMode": "Existing",
             "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet"
           },
           "subnet": {
-            "role": "targetSubnet",
             "armResourceType": "Microsoft.Network/virtualNetworks/subnets",
             "provisioningMode": "Existing",
             "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet/subnets/default",
@@ -36,7 +33,6 @@
             ]
           },
           "storageAccount": {
-            "role": "stagingStorageAccount",
             "armResourceType": "Microsoft.Storage/storageAccounts",
             "provisioningMode": "Existing",
             "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Storage/storageAccounts/cyberrecoverystorage"
@@ -45,13 +41,9 @@
             "1",
             "2"
           ],
-          "rehydrationDefault": {
-            "rehydrationPriority": "Standard",
-            "rehydrationDurationInHours": 12
-          }
+          "targetNamePrefix": "cr-",
+          "recoveryType": "CreateNewVM"
         },
-        "targetNamePrefix": "cr-",
-        "recoveryType": "AlternateLocation",
         "recoveryPointPolicy": {
           "type": "Latest",
           "startTime": "2026-09-27T04:00:00Z",
@@ -60,20 +52,7 @@
             "Snapshot"
           ],
           "recoveryPointHealthStatus": "HealthyAndUnknown"
-        },
-        "infrastructurePreparation": [
-          {
-            "name": "prepare-network",
-            "description": "Prepare the clean-room network",
-            "type": "CustomRunbook",
-            "timeoutInMinutes": 30,
-            "actionResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Automation/automationAccounts/cyber-automation/runbooks/prepare-network",
-            "associatedIdentity": {
-              "type": "UserAssigned",
-              "userAssignedIdentity": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/cyber-recovery-identity"
-            }
-          }
-        ]
+        }
       }
     }
   },
@@ -89,47 +68,30 @@
           "workloadConfig": {
             "workloadType": "AzureVm",
             "resourceGroup": {
-              "role": "targetResourceGroup",
               "armResourceType": "Microsoft.Resources/resourceGroups",
               "provisioningMode": "Existing",
               "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg"
             },
             "virtualNetwork": {
-              "role": "targetVirtualNetwork",
               "armResourceType": "Microsoft.Network/virtualNetworks",
               "provisioningMode": "Existing",
               "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet"
             },
             "subnet": {
-              "role": "targetSubnet",
               "armResourceType": "Microsoft.Network/virtualNetworks/subnets",
               "provisioningMode": "Existing",
               "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet/subnets/default"
             },
             "storageAccount": {
-              "role": "stagingStorageAccount",
               "armResourceType": "Microsoft.Storage/storageAccounts",
               "provisioningMode": "Existing",
               "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Storage/storageAccounts/cyberrecoverystorage"
-            }
+            },
+            "recoveryType": "CreateNewVM"
           },
-          "recoveryType": "AlternateLocation",
           "provisioningState": "Succeeded",
           "needsAttention": false,
-          "attentionReasons": [],
-          "infrastructurePreparation": [
-            {
-              "name": "prepare-network",
-              "description": "Prepare the clean-room network",
-              "type": "CustomRunbook",
-              "timeoutInMinutes": 30,
-              "actionResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Automation/automationAccounts/cyber-automation/runbooks/prepare-network",
-              "associatedIdentity": {
-                "type": "UserAssigned",
-                "userAssignedIdentity": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/cyber-recovery-identity"
-              }
-            }
-          ]
+          "attentionReasons": []
         },
         "id": "/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/recoveryPlans/cyber-plan/recoveryConfigProfiles/azure-vm-default",
         "name": "azure-vm-default",
@@ -151,40 +113,23 @@
           "workloadConfig": {
             "workloadType": "AzureVm",
             "resourceGroup": {
-              "role": "targetResourceGroup",
               "armResourceType": "Microsoft.Resources/resourceGroups",
               "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg"
             },
             "virtualNetwork": {
-              "role": "targetVirtualNetwork",
               "armResourceType": "Microsoft.Network/virtualNetworks",
               "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet"
             },
             "subnet": {
-              "role": "targetSubnet",
               "armResourceType": "Microsoft.Network/virtualNetworks/subnets",
               "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet/subnets/default"
             },
             "storageAccount": {
-              "role": "stagingStorageAccount",
               "armResourceType": "Microsoft.Storage/storageAccounts",
               "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Storage/storageAccounts/cyberrecoverystorage"
             }
           },
-          "provisioningState": "Provisioning",
-          "infrastructurePreparation": [
-            {
-              "name": "prepare-network",
-              "description": "Prepare the clean-room network",
-              "type": "CustomRunbook",
-              "timeoutInMinutes": 30,
-              "actionResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Automation/automationAccounts/cyber-automation/runbooks/prepare-network",
-              "associatedIdentity": {
-                "type": "UserAssigned",
-                "userAssignedIdentity": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/cyber-recovery-identity"
-              }
-            }
-          ]
+          "provisioningState": "Provisioning"
         },
         "id": "/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/recoveryPlans/cyber-plan/recoveryConfigProfiles/azure-vm-default",
         "name": "azure-vm-default",

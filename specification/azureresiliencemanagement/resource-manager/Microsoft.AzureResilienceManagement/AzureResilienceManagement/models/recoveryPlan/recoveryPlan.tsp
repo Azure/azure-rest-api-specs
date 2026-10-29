@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 import "../../main.tsp";
+import "../common/common.tsp";
 import "./recoveryGroup.tsp";
 
 using Azure.Core;
@@ -26,20 +27,6 @@ union RecoveryPlanType {
   @added(Versions.v2026_11_30_preview)
   @doc("A recovery orchestration plan for cyber recovery into a clean-room environment.")
   CyberRecovery: "CyberRecovery",
-
-  string,
-}
-
-@added(Versions.v2026_11_30_preview)
-@doc("Specifies the resiliency type for recovery plan properties.")
-union ResiliencyType {
-  @added(Versions.v2026_11_30_preview)
-  @doc("Infrastructure resiliency properties.")
-  InfrastructureResiliency: "InfrastructureResiliency",
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("Cyber resiliency properties.")
-  CyberResiliency: "CyberResiliency",
 
   string,
 }

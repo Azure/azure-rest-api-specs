@@ -5614,6 +5614,10 @@
         ]
       }
     },
+    "Azure.Core.armResourceType": {
+      "type": "string",
+      "description": "Represents an Azure Resource Type."
+    },
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
@@ -5861,6 +5865,30 @@
         ]
       }
     },
+    "CopyOptions": {
+      "type": "string",
+      "description": "The behavior when a copied file already exists.",
+      "enum": [
+        "Overwrite",
+        "Skip"
+      ],
+      "x-ms-enum": {
+        "name": "CopyOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Overwrite",
+            "value": "Overwrite",
+            "description": "Overwrite the existing file."
+          },
+          {
+            "name": "Skip",
+            "value": "Skip",
+            "description": "Skip the existing file."
+          }
+        ]
+      }
+    },
     "CustomFaultDetails": {
       "type": "object",
       "description": "Custom fault details",
@@ -6033,12 +6061,34 @@
       "type": "object",
       "description": "Shared recovery configuration fields for database workloads.",
       "properties": {
-        "targetDirectoryMapping": {
-          "type": "object",
-          "description": "The target folder mappings for full, differential, log, and incremental recovery points.",
-          "additionalProperties": {
-            "type": "string"
+        "recoveryType": {
+          "type": "string",
+          "description": "The database recovery behavior. Defaults to recovery at an alternate location.",
+          "default": "AlternateLocation",
+          "enum": [
+            "CreateNewVM",
+            "AlternateLocation"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "CreateNewVM",
+                "value": "CreateNewVM",
+                "description": "Recovery creates a new virtual machine."
+              },
+              {
+                "name": "AlternateLocation",
+                "value": "AlternateLocation",
+                "description": "Recovery targets an alternate location."
+              }
+            ]
           }
+        },
+        "targetNamePrefix": {
+          "type": "string",
+          "description": "The prefix used when naming recovered databases."
         },
         "targetDirectoryForFileRestore": {
           "type": "string",
@@ -7620,36 +7670,6 @@
         ]
       }
     },
-    "ExistingTargetBehavior": {
-      "type": "string",
-      "description": "The behavior when a recovery target already exists.",
-      "enum": [
-        "Overwrite",
-        "SkipIfExists",
-        "Fail"
-      ],
-      "x-ms-enum": {
-        "name": "ExistingTargetBehavior",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Overwrite",
-            "value": "Overwrite",
-            "description": "Overwrite the existing target."
-          },
-          {
-            "name": "SkipIfExists",
-            "value": "SkipIfExists",
-            "description": "Skip recovery when the target exists."
-          },
-          {
-            "name": "Fail",
-            "value": "Fail",
-            "description": "Fail recovery when the target exists."
-          }
-        ]
-      }
-    },
     "ExtensionObjectState": {
       "type": "string",
       "description": "Enum for AttentionReason - Extension Object State.",
@@ -7918,28 +7938,14 @@
         }
       }
     },
-    "FileRestoreType": {
-      "type": "string",
-      "description": "The scope of an Azure Files restore.",
-      "enum": [
-        "FullShare"
-      ],
-      "x-ms-enum": {
-        "name": "FileRestoreType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "FullShare",
-            "value": "FullShare",
-            "description": "Restore the complete file share."
-          }
-        ]
-      }
-    },
     "FileShareRecoveryConfig": {
       "type": "object",
       "description": "Recovery configuration for an Azure Files workload.",
       "properties": {
+        "targetNamePrefix": {
+          "type": "string",
+          "description": "The prefix used when naming recovered file shares."
+        },
         "storageAccount": {
           "$ref": "#/definitions/TargetResourceSpec",
           "description": "The target storage account."
@@ -7949,15 +7955,11 @@
           "description": "The destination folder path in the target file share."
         },
         "identity": {
-          "$ref": "#/definitions/RestoreIdentity",
-          "description": "The identity used for restore."
-        },
-        "restoreTypeDefault": {
-          "$ref": "#/definitions/FileRestoreType",
-          "description": "The default scope of file restore."
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The system-assigned and/or user-assigned managed identities used for restore."
         },
         "copyOptions": {
-          "$ref": "#/definitions/ExistingTargetBehavior",
+          "$ref": "#/definitions/CopyOptions",
           "description": "The behavior when a copied file already exists."
         }
       },
@@ -9773,26 +9775,9 @@
           "$ref": "#/definitions/WorkloadConfig",
           "description": "The workload-specific recovery configuration."
         },
-        "targetNamePrefix": {
-          "type": "string",
-          "description": "The prefix used when naming recovery targets."
-        },
-        "recoveryType": {
-          "$ref": "#/definitions/RecoveryType",
-          "description": "The recovery location behavior."
-        },
         "recoveryPointPolicy": {
           "$ref": "#/definitions/RecoveryPointPolicy",
           "description": "Default recovery point selection."
-        },
-        "infrastructurePreparation": {
-          "type": "array",
-          "description": "Infrastructure actions run before restoring resources that use this recovery configuration profile.",
-          "maxItems": 10,
-          "items": {
-            "$ref": "#/definitions/RecoveryGroupBaseAction"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -9813,41 +9798,9 @@
           "$ref": "#/definitions/WorkloadConfig",
           "description": "The workload-specific recovery configuration."
         },
-        "targetNamePrefix": {
-          "type": "string",
-          "description": "The prefix used when naming recovery targets."
-        },
-        "recoveryType": {
-          "type": "string",
-          "description": "The recovery location behavior.",
-          "default": "AlternateLocation",
-          "enum": [
-            "AlternateLocation"
-          ],
-          "x-ms-enum": {
-            "name": "RecoveryType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "AlternateLocation",
-                "value": "AlternateLocation",
-                "description": "Recovery targets an alternate location."
-              }
-            ]
-          }
-        },
         "recoveryPointPolicy": {
           "$ref": "#/definitions/RecoveryPointPolicy",
           "description": "Default recovery point selection."
-        },
-        "infrastructurePreparation": {
-          "type": "array",
-          "description": "Infrastructure actions run before restoring resources that use this recovery configuration profile.",
-          "maxItems": 10,
-          "items": {
-            "$ref": "#/definitions/RecoveryGroupBaseAction"
-          },
-          "x-ms-identifiers": []
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -10879,25 +10832,6 @@
         ]
       }
     },
-    "RecoveryPointRehydrationInfo": {
-      "type": "object",
-      "description": "Recovery point rehydration settings.",
-      "properties": {
-        "rehydrationPriority": {
-          "$ref": "#/definitions/RehydrationPriority",
-          "description": "The requested rehydration priority."
-        },
-        "rehydrationDurationInHours": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The requested rehydration duration, in hours.",
-          "minimum": 0
-        }
-      },
-      "required": [
-        "rehydrationPriority"
-      ]
-    },
     "RecoveryResource": {
       "type": "object",
       "description": "RecoveryPlan Resource a AzureResilienceProviderHub resource",
@@ -11096,14 +11030,20 @@
     },
     "RecoveryType": {
       "type": "string",
-      "description": "The supported recovery location behavior.",
+      "description": "The supported workload recovery behavior.",
       "enum": [
+        "CreateNewVM",
         "AlternateLocation"
       ],
       "x-ms-enum": {
         "name": "RecoveryType",
         "modelAsString": true,
         "values": [
+          {
+            "name": "CreateNewVM",
+            "value": "CreateNewVM",
+            "description": "Recovery creates a new virtual machine."
+          },
           {
             "name": "AlternateLocation",
             "value": "AlternateLocation",
@@ -11244,30 +11184,6 @@
             "name": "NotResilient",
             "value": "NotResilient",
             "description": "The available protection-solution posture reports the resource as not regionally resilient."
-          }
-        ]
-      }
-    },
-    "RehydrationPriority": {
-      "type": "string",
-      "description": "The recovery point rehydration priority.",
-      "enum": [
-        "Standard",
-        "High"
-      ],
-      "x-ms-enum": {
-        "name": "RehydrationPriority",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "Use standard rehydration priority."
-          },
-          {
-            "name": "High",
-            "value": "High",
-            "description": "Use high rehydration priority."
           }
         ]
       }
@@ -12231,31 +12147,6 @@
         ]
       }
     },
-    "RestoreIdentity": {
-      "type": "object",
-      "description": "A managed identity used for a restore.",
-      "properties": {
-        "identityType": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "The managed identity type."
-        },
-        "userAssignedIdentityId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure resource identifier of the user-assigned identity.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "identityType"
-      ]
-    },
     "SapAseInAzureVmRecoveryConfig": {
       "type": "object",
       "description": "Recovery configuration for an SAP ASE workload.",
@@ -12695,8 +12586,8 @@
           }
         },
         "userAssignedManagedIdentityDetails": {
-          "$ref": "#/definitions/UserAssignedManagedIdentityDetails",
-          "description": "The user-assigned managed identity details used for restore."
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed identities used for restore. User-assigned identities are keyed by their Azure resource identifiers, which include the identity names."
         },
         "isNonRecoverable": {
           "type": "boolean",
@@ -12841,13 +12732,9 @@
       "type": "object",
       "description": "A target resource required by a recovery workload.",
       "properties": {
-        "role": {
-          "type": "string",
-          "description": "The semantic role of this target resource."
-        },
         "armResourceType": {
-          "$ref": "#/definitions/TargetResourceType",
-          "description": "The full Azure resource type of the target. The service validates that the resource type is supported for the target role."
+          "$ref": "#/definitions/Azure.Core.armResourceType",
+          "description": "The full Azure resource type of the target. Supported types include Microsoft.Resources/resourceGroups, Microsoft.Compute/virtualMachines, Microsoft.Network/virtualNetworks, Microsoft.Network/virtualNetworks/subnets, Microsoft.Storage/storageAccounts, Microsoft.Compute/diskEncryptionSets, Microsoft.KeyVault/vaults, and Microsoft.Network/networkSecurityGroups. The service validates supported target resource types."
         },
         "provisioningMode": {
           "type": "string",
@@ -12887,70 +12774,15 @@
         },
         "dependsOn": {
           "type": "array",
-          "description": "The semantic roles of target resources that this target depends on.",
+          "description": "The target resources that this target depends on.",
           "items": {
             "type": "string"
           }
         }
       },
       "required": [
-        "role",
         "armResourceType"
       ]
-    },
-    "TargetResourceType": {
-      "type": "string",
-      "description": "A full Azure resource type used as a recovery target.",
-      "enum": [
-        "Microsoft.Compute/virtualMachines",
-        "Microsoft.Network/virtualNetworks",
-        "Microsoft.Network/virtualNetworks/subnets",
-        "Microsoft.Storage/storageAccounts",
-        "Microsoft.Compute/diskEncryptionSets",
-        "Microsoft.KeyVault/vaults",
-        "Microsoft.Network/networkSecurityGroups"
-      ],
-      "x-ms-enum": {
-        "name": "TargetResourceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "VirtualMachine",
-            "value": "Microsoft.Compute/virtualMachines",
-            "description": "An Azure virtual machine."
-          },
-          {
-            "name": "VirtualNetwork",
-            "value": "Microsoft.Network/virtualNetworks",
-            "description": "An Azure virtual network."
-          },
-          {
-            "name": "Subnet",
-            "value": "Microsoft.Network/virtualNetworks/subnets",
-            "description": "An Azure virtual network subnet."
-          },
-          {
-            "name": "StorageAccount",
-            "value": "Microsoft.Storage/storageAccounts",
-            "description": "An Azure storage account."
-          },
-          {
-            "name": "DiskEncryptionSet",
-            "value": "Microsoft.Compute/diskEncryptionSets",
-            "description": "An Azure disk encryption set."
-          },
-          {
-            "name": "KeyVault",
-            "value": "Microsoft.KeyVault/vaults",
-            "description": "An Azure Key Vault vault."
-          },
-          {
-            "name": "NetworkSecurityGroup",
-            "value": "Microsoft.Network/networkSecurityGroups",
-            "description": "An Azure network security group."
-          }
-        ]
-      }
     },
     "TargetScope": {
       "type": "object",
@@ -13364,46 +13196,6 @@
         ]
       }
     },
-    "UserAssignedIdentityProperties": {
-      "type": "object",
-      "description": "Client and principal identifiers of a user-assigned managed identity.",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "The client identifier of the identity."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The principal identifier of the identity."
-        }
-      }
-    },
-    "UserAssignedManagedIdentityDetails": {
-      "type": "object",
-      "description": "Details of a user-assigned managed identity used for restore.",
-      "properties": {
-        "identityArmId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure resource identifier of the identity.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
-        },
-        "identityName": {
-          "type": "string",
-          "description": "The identity name."
-        },
-        "userAssignedIdentityProperties": {
-          "$ref": "#/definitions/UserAssignedIdentityProperties",
-          "description": "The client and principal identifiers of the identity."
-        }
-      }
-    },
     "UserConfirmationItem": {
       "type": "object",
       "description": "Represents a user confirmation for a high availability solution.",
@@ -13553,6 +13345,35 @@
       "type": "object",
       "description": "Recovery configuration for an Azure virtual machine.",
       "properties": {
+        "recoveryType": {
+          "type": "string",
+          "description": "The virtual machine recovery behavior. Defaults to creating a new virtual machine.",
+          "default": "CreateNewVM",
+          "enum": [
+            "CreateNewVM",
+            "AlternateLocation"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "CreateNewVM",
+                "value": "CreateNewVM",
+                "description": "Recovery creates a new virtual machine."
+              },
+              {
+                "name": "AlternateLocation",
+                "value": "AlternateLocation",
+                "description": "Recovery targets an alternate location."
+              }
+            ]
+          }
+        },
+        "targetNamePrefix": {
+          "type": "string",
+          "description": "The prefix used when naming recovered virtual machines."
+        },
         "resourceGroup": {
           "$ref": "#/definitions/TargetResourceSpec",
           "description": "The target resource group."
@@ -13574,8 +13395,8 @@
           "description": "The target disk encryption set."
         },
         "identity": {
-          "$ref": "#/definitions/RestoreIdentity",
-          "description": "The identity used for restore."
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The system-assigned and/or user-assigned managed identities used for restore."
         },
         "zones": {
           "type": "array",
@@ -13583,10 +13404,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "rehydrationDefault": {
-          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
-          "description": "Default recovery point rehydration settings."
         }
       },
       "required": [
