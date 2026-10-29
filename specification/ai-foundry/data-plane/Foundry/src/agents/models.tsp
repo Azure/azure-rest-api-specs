@@ -16,7 +16,8 @@ const AllConditionalAgentDefinitionPreviews = #{
     AgentDefinitionOptInKeys.draft_agents_v1_preview,
     AgentDefinitionOptInKeys.digital_worker_v1_preview,
     AgentDefinitionOptInKeys.github_copilot_v1_preview,
-    AgentDefinitionOptInKeys.skills_v1_preview
+    AgentDefinitionOptInKeys.skills_v1_preview,
+    AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
   ],
 };
 
@@ -304,6 +305,9 @@ union AgentEndpointProtocol {
 
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
   invocations_ws: "invocations_ws",
+
+  @doc("Text conversation protocol for a hosted agent used by Voice Live Bridge. Declare version `1.0.0`; audio transport remains outside this protocol.")
+  voice_conversation_engine: "voice_conversation_engine",
 }
 
 union AgentKind {
@@ -411,7 +415,10 @@ model PromptAgentDefinition extends AgentDefinition {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview],
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.github_copilot_v1_preview,
+        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+      ],
     }
   )
   harness?: AgentHarness;
@@ -475,7 +482,12 @@ model PromptAgentDefinition extends AgentDefinition {
 @doc("A managed runtime and agent loop used to execute a prompt agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
+  #{
+    conditional_previews: #[
+      AgentDefinitionOptInKeys.github_copilot_v1_preview,
+      AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+    ],
+  }
 )
 @discriminator("type")
 model AgentHarness {
@@ -483,13 +495,25 @@ model AgentHarness {
   type: string;
 }
 
-@doc("The GitHub Copilot managed harness for prompt agents.")
+@doc("The Microsoft Copilot managed harness for prompt agents.")
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.microsoft_copilot_v1_preview],
+  }
+)
+model MicrosoftCopilotHarness extends AgentHarness {
+  @doc("The type of managed harness. Always `microsoft_copilot_preview`.")
+  type: "microsoft_copilot_preview";
+}
+
+@doc("The legacy GitHub Copilot managed harness retained for compatibility. Use `MicrosoftCopilotHarness` for new prompt agents.")
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
 )
 model GitHubCopilotHarness extends AgentHarness {
-  @doc("The type of managed harness. Always `github_copilot_preview`.")
+  @doc("The legacy type of managed harness. Always `github_copilot_preview`; use `microsoft_copilot_preview` for new prompt agents.")
   type: "github_copilot_preview";
 }
 
@@ -651,6 +675,9 @@ model HostedAgentDefinition extends AgentDefinition {
   @doc("Optional session defaults (for example, the idle timeout) applied to sessions created for this agent version.")
   @example(#{ idle_timeout_seconds: duration.fromISO("PT300S") })
   session_configuration?: SessionConfiguration;
+
+  @doc("Whether this agent version uses memory snapshots. Sessions for a snapshot-enabled version start from a snapshot of the agent's initialized process rather than starting the process from its image. Defaults to false.")
+  enable_memory_snapshot?: boolean = false;
 }
 
 @doc("The container app agent definition.")
@@ -1356,7 +1383,7 @@ model OtlpTelemetryEndpoint extends TelemetryEndpoint {
 
   @doc("The OTLP collector endpoint URL.")
   @example("https://my-collector.example.com/otlp")
-  endpoint: string;
+  endpoint: url;
 
   @doc("The transport protocol for the OTLP endpoint.")
   @example("Http")

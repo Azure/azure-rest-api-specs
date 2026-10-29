@@ -324,6 +324,7 @@ interface Queue {
        */
       @minValue(1)
       @query("numofmessages")
+      @alternateType(int64, "cpp")
       numberOfMessages?: int32;
 
       ...VisibilityTimeoutParameter;
@@ -405,6 +406,7 @@ interface Queue {
        */
       @minValue(1)
       @query("numofmessages")
+      @alternateType(int64, "cpp")
       numberOfMessages?: int32;
 
       ...TimeoutParameter;

@@ -1,16 +1,21 @@
-import * as fs from "fs";
-import { dirname, join } from "path";
+import * as fs from "node:fs";
+import { dirname, join } from "node:path";
 
 import { parseMarkdown } from "@azure-tools/openapi-tools-common";
 import * as amd from "@azure/openapi-markdown";
 
-import { example, readme, swagger, typespec } from "@azure-tools/specs-shared/changed-files";
+import {
+  example,
+  readme,
+  swagger,
+  tspconfig,
+  typespec,
+} from "@azure-tools/specs-shared/changed-files";
 import { includesSegment } from "@azure-tools/specs-shared/path";
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 
 import { type DiffResult, type ReadmeTag, type TagConfigDiff, type TagDiff } from "./diff-types.ts";
-import { type LabelContext } from "./labelling-types.ts";
 
 export type FileListInfo = {
   additions: string[];
@@ -47,19 +52,12 @@ export class PRContext {
   owner: string;
   prNumber: string;
   isDraft: boolean;
-  labelContext: LabelContext;
 
-  constructor(
-    sourceDirectory: string,
-    targetDirectory: string,
-    labelContext: LabelContext,
-    options: PRContextOptions,
-  ) {
+  constructor(sourceDirectory: string, targetDirectory: string, options: PRContextOptions) {
     this.sourceDirectory = sourceDirectory;
     this.targetDirectory = targetDirectory;
     this.sourceSpecModel = new SpecModel(sourceDirectory);
     this.targetSpecModel = new SpecModel(targetDirectory);
-    this.labelContext = labelContext;
     this.sourceBranch = options.sourceBranch;
     this.targetBranch = options.targetBranch;
     this.sha = options.sha;
@@ -157,6 +155,7 @@ export class PRContext {
 
     const visitedFolder = new Set<string>();
     changedFiles
+      .filter((f) => !tspconfig(f))
       .filter((f) => [".md", ".json", ".yaml", ".yml"].some((p) => f.endsWith(p)))
       .forEach((f) => {
         let dir = dirname(f);

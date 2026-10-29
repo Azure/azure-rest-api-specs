@@ -1,0 +1,124 @@
+name: azure-typespec-author-eval
+description: plan csharp names before authoring
+version: "1.0"
+type: capability
+area: naming
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 007001-plan-csharp-names-before-authoring-trigger
+    tags:
+      suite: naming
+      mode: trigger
+    prompt: |
+      Project analysis, intake, and general TypeSpec grounding are already complete. Continue
+      TypeSpec source authoring by building only the separate default SDK client configuration
+      plan for these approved additions. The user kept the recommended default. This is a
+      never-shipped C# ARM Widget SDK at
+      specification/widget/resource-manager/Microsoft.Widget, version 2026-01-01-preview. Add
+      WidgetProperties.enabled: boolean and retryInterval: int32, documented in seconds. No
+      collisions or existing overrides. Use these confirmed facts and available naming
+      guidance; no network, MCP, edits, compilation or SDK generation. Return JSON with a
+      top-level "names" object mapping property names directly to C# name strings, not nested
+      objects. Also include top-level "scope" (the TCGC language identifier), "applied", and
+      "generatedNamesVerified".
+    constraints: &a1
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azsdk-common-typespec-naming
+      - &a2
+        type: tool-calls
+        config:
+          required:
+            - name: ^(view|powershell|bash|rg)$
+              pattern: csharp-naming\.md
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - &a3
+        type: output-matches
+        config:
+          pattern: '"(?:WidgetProperties\.)?enabled"\s*:\s*"IsEnabled"'
+      - &a4
+        type: output-matches
+        config:
+          pattern: '"(?:WidgetProperties\.)?retryInterval"\s*:\s*"RetryIntervalInSeconds"'
+      - &a5
+        type: output-matches
+        config:
+          pattern: '"scope"\s*:\s*"csharp"'
+      - &a6
+        type: output-matches
+        config:
+          pattern: '"applied"\s*:\s*false'
+      - &a7
+        type: output-matches
+        config:
+          pattern: '"generatedNamesVerified"\s*:\s*false'
+  - name: 007001-plan-csharp-names-before-authoring-forced
+    tags:
+      suite: naming
+      mode: forced
+    prompt: |
+      @azure-typespec-author Project analysis, intake, and general TypeSpec grounding are already complete. Continue
+      TypeSpec source authoring by building only the separate default SDK client configuration
+      plan for these approved additions. The user kept the recommended default. This is a
+      never-shipped C# ARM Widget SDK at
+      specification/widget/resource-manager/Microsoft.Widget, version 2026-01-01-preview. Add
+      WidgetProperties.enabled: boolean and retryInterval: int32, documented in seconds. No
+      collisions or existing overrides. Use these confirmed facts and available naming
+      guidance; no network, MCP, edits, compilation or SDK generation. Return JSON with a
+      top-level "names" object mapping property names directly to C# name strings, not nested
+      objects. Also include top-level "scope" (the TCGC language identifier), "applied", and
+      "generatedNamesVerified".
+    constraints: *a1
+    graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-typespec-author
+            - azsdk-common-typespec-naming
+      - *a2
+      - *a3
+      - *a4
+      - *a5
+      - *a6
+      - *a7
+  - name: 007001-plan-csharp-names-before-authoring-no-skill
+    tags:
+      suite: naming
+      mode: no-skill
+    prompt: |
+      Project analysis, intake, and general TypeSpec grounding are already complete. Continue
+      TypeSpec source authoring by building only the separate default SDK client configuration
+      plan for these approved additions. The user kept the recommended default. This is a
+      never-shipped C# ARM Widget SDK at
+      specification/widget/resource-manager/Microsoft.Widget, version 2026-01-01-preview. Add
+      WidgetProperties.enabled: boolean and retryInterval: int32, documented in seconds. No
+      collisions or existing overrides. Use these confirmed facts and available naming
+      guidance; no network, MCP, edits, compilation or SDK generation. Return JSON with a
+      top-level "names" object mapping property names directly to C# name strings, not nested
+      objects. Also include top-level "scope" (the TCGC language identifier), "applied", and
+      "generatedNamesVerified".
+    constraints: *a1
+    graders:
+      - type: tool-calls
+        config:
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search)$
+      - *a3
+      - *a4
+      - *a5
+      - *a6
+      - *a7
