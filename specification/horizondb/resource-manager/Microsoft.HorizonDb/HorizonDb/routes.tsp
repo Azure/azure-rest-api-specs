@@ -179,23 +179,13 @@ interface PrivateEndpointConnections {
     PrivateEndpointConnectionResource
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The service supports HTTP 202 for asynchronous private endpoint connection approval or rejection in addition to the existing HTTP 200 and 201 responses. This response is retained to match the service contract."
-  @doc("Approves or rejects an existing private endpoint connection. Approval requires the parent Cluster to contain at least one Pool. An approval attempt when the Cluster has no Pools fails with 409 Conflict and the stable error code PrivateEndpointRequiresPool. Rejection remains allowed when the Cluster has no Pools so that existing connections can be cleaned up. An HTTP 202 response indicates that the operation was accepted and is still in progress; poll to completion using the returned polling headers.")
+  @doc("Approves or rejects an existing private endpoint connection. Approval requires the parent Cluster to contain at least one Pool. An approval attempt when the Cluster has no Pools fails with 409 Conflict and the stable error code PrivateEndpointRequiresPool. Rejection remains allowed when the Cluster has no Pools so that existing connections can be cleaned up.")
   @sharedRoute
   approveOrReject is PrivateEndpointOperations.CreateOrReplaceAsync<
     Cluster,
     PrivateEndpointConnectionResource,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnectionResource> &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Response =
-      | ArmResourceUpdatedResponse<PrivateEndpointConnectionResource>
-      | ArmResourceCreatedResponse<
-          PrivateEndpointConnectionResource,
-          ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnectionResource> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnectionResource> &
-          Azure.Core.Foundations.RetryAfterHeader>
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @doc("Deletes a private endpoint connection.")
@@ -276,8 +266,7 @@ interface MicrosoftEntraAdministrators {
   @doc("Gets information about a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
   get is ArmResourceRead<MicrosoftEntraAdministrator>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The service supports HTTP 202 for asynchronous Microsoft Entra administrator creation or replacement in addition to the existing HTTP 200 and 201 responses. This response is retained to match the service contract."
-  @doc("Creates or replaces a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal. An HTTP 202 response indicates that the operation was accepted and is still in progress; poll Azure-AsyncOperation to completion.")
+  @doc("Creates or replaces a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrReplace is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     MicrosoftEntraAdministrator,
@@ -289,8 +278,6 @@ interface MicrosoftEntraAdministrators {
           MicrosoftEntraAdministrator,
           HorizonDbResourceLroHeaders<MicrosoftEntraAdministrator>
         >
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MicrosoftEntraAdministrator> &
-          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   @doc("Deletes a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
