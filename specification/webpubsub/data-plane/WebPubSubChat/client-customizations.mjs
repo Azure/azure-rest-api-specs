@@ -1,4 +1,8 @@
-import { $alternateType, $scope } from "@azure-tools/typespec-client-generator-core";
+import {
+  $alternateType,
+  $clientName,
+  $scope,
+} from "@azure-tools/typespec-client-generator-core";
 
 /**
  * @param {import("@typespec/compiler").DecoratorContext} context
@@ -7,6 +11,29 @@ import { $alternateType, $scope } from "@azure-tools/typespec-client-generator-c
  * @param {string} scope
  */
 function requestModel(context, operation, input, scope) {
+  const resource = getResourceParameter(context, operation);
+  if (resource) {
+    context.call($alternateType, resource, input, scope);
+  }
+}
+
+/**
+ * @param {import("@typespec/compiler").DecoratorContext} context
+ * @param {import("@typespec/compiler").Operation} operation
+ * @param {string} name
+ */
+function requestParameterName(context, operation, name) {
+  const resource = getResourceParameter(context, operation);
+  if (resource) {
+    context.call($clientName, resource, name);
+  }
+}
+
+/**
+ * @param {import("@typespec/compiler").DecoratorContext} context
+ * @param {import("@typespec/compiler").Operation} operation
+ */
+function getResourceParameter(context, operation) {
   // Resolve the instantiated body; template-expanded parameters cannot be referenced with ::parameters.resource.
   const resource = operation.parameters.properties.get("resource");
   if (!resource) {
@@ -18,7 +45,7 @@ function requestModel(context, operation, input, scope) {
     });
     return;
   }
-  context.call($alternateType, resource, input, scope);
+  return resource;
 }
 
 /**
@@ -42,5 +69,9 @@ function omitContinuationToken(context, operation, scope) {
 }
 
 export const $decorators = {
-  ClientCustomizations: { requestModel, omitContinuationToken },
+  ClientCustomizations: {
+    requestModel,
+    requestParameterName,
+    omitContinuationToken,
+  },
 };

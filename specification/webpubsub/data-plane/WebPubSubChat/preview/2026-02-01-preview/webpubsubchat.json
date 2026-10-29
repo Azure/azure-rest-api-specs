@@ -124,7 +124,7 @@
           "chat"
         ],
         "summary": "Query messages in a conversation from latest to earliest.",
-        "description": "Query messages in a conversation from latest to earliest.",
+        "description": "Query messages in a conversation from latest to earliest.\nMessage IDs are used as pagination cursors. Follow the response nextLink,\nwhich contains the message ID cursor, to retrieve the next page.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -255,7 +255,7 @@
             "$ref": "#/parameters/EtagConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "resource",
+            "name": "message",
             "in": "body",
             "description": "The resource instance.",
             "required": true,
@@ -529,7 +529,7 @@
             "$ref": "#/parameters/EtagConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "resource",
+            "name": "role",
             "in": "body",
             "description": "The resource instance.",
             "required": true,
@@ -741,7 +741,7 @@
             "$ref": "#/parameters/EtagConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "resource",
+            "name": "room",
             "in": "body",
             "description": "The resource instance.",
             "required": true,
@@ -979,7 +979,7 @@
             "$ref": "#/parameters/EtagConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "resource",
+            "name": "member",
             "in": "body",
             "description": "The resource instance.",
             "required": true,
@@ -1201,7 +1201,7 @@
             "$ref": "#/parameters/EtagConditionalRequestHeaders.ifNoneMatch"
           },
           {
-            "name": "resource",
+            "name": "user",
             "in": "body",
             "description": "The resource instance.",
             "required": true,
@@ -1400,7 +1400,8 @@
         },
         "parentRoom": {
           "type": "string",
-          "description": "Parent room identifier."
+          "description": "Parent room identifier.",
+          "x-ms-client-name": "roomId"
         },
         "etag": {
           "$ref": "#/definitions/Azure.Core.eTag",

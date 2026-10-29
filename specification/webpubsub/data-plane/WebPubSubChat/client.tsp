@@ -7,6 +7,12 @@ using TypeSpec.Http;
 
 @TypeSpec.Versioning.versioned(WebPubSubChat.Versions)
 namespace ClientCustomizations {
+  /** Give a template-expanded request body a resource-specific SDK parameter name. */
+  extern dec requestParameterName(
+    target: TypeSpec.Reflection.Operation,
+    name: valueof string
+  );
+
   /** Substitute the resource request model for selected SDKs without changing the REST operation. */
   extern dec requestModel(
     target: TypeSpec.Reflection.Operation,
@@ -196,6 +202,37 @@ namespace Customizations {
     Azure.Core.MaxPageSizeQueryParameter.maxpagesize,
     "max_page_size",
     "python"
+  );
+
+  @@clientName(WebPubSubChat.ChatConversation.parentRoom, "roomId");
+
+  @@ClientCustomizations.requestParameterName(
+    WebPubSubChatServiceClient.createOrReplaceRole,
+    "role"
+  );
+  @@ClientCustomizations.requestParameterName(
+    WebPubSubChatServiceClient.createOrReplaceRoom,
+    "room"
+  );
+  @@ClientCustomizations.requestParameterName(
+    WebPubSubChatServiceClient.createOrReplaceRoomMember,
+    "member"
+  );
+  @@ClientCustomizations.requestParameterName(
+    WebPubSubChatServiceClient.createOrReplaceUser,
+    "user"
+  );
+  @@ClientCustomizations.requestParameterName(
+    WebPubSubChatServiceClient.createOrReplaceTopic,
+    "topic"
+  );
+  @@ClientCustomizations.requestParameterName(
+    WebPubSubChatServiceClient.updateTopic,
+    "topic"
+  );
+  @@ClientCustomizations.requestParameterName(
+    WebPubSubChatServiceClient.updateMessage,
+    "message"
   );
 
   @@clientInitialization(
