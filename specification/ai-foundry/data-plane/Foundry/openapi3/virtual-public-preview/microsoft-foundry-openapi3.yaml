@@ -87736,6 +87736,19 @@ components:
           x-ms-foundry-meta:
             conditional_previews:
               - ModelRouterControls=V1Preview
+        require_parameters:
+          type: boolean
+          description: |-
+            When true, restricts routing to qualified model and serving API combinations that support
+            all applicable request parameters. Returns 400 (Bad Request) when none qualify.
+            Defaults to false when omitted. Explicit null and non-boolean values return 400.
+            Requires the Foundry-Features: ModelRouterControls=V1Preview header.
+            Applies only to qualified model, API, and adapter mappings, not every provider-native option.
+            This setting is request-scoped; it does not introduce stored deployment defaults.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - ModelRouterControls=V1Preview
+          default: false
       description: |-
         Per-request configuration for Model Router inference calls.
         Supported on Model Router endpoints (deployed or instant if supported).

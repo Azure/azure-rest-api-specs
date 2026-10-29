@@ -92,6 +92,18 @@ namespace Azure.AI.Projects {
      */
     @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
     session_affinity?: SessionAffinityConfiguration;
+
+    /**
+     * When true, restricts routing to qualified model and serving API combinations that support
+     * all applicable request parameters. Returns 400 (Bad Request) when none qualify.
+     * Defaults to false when omitted. Explicit null and non-boolean values return 400.
+     * Requires the Foundry-Features: ModelRouterControls=V1Preview header.
+     * Applies only to qualified model, API, and adapter mappings, not every provider-native option.
+     * This setting is request-scoped; it does not introduce stored deployment defaults.
+     */
+    // Naming aligns with OpenRouter's require_parameters; LiteLLM exposes the inverse as drop_params.
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    require_parameters?: boolean = false;
   }
 
   /** Request settings that control Model Router session affinity. */
