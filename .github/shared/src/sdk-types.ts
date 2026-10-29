@@ -92,3 +92,11 @@ export const sdkLabels: SdkLabels = {
     buildFailed: undefined,
   },
 };
+
+export function getSdkLanguage(repo: SdkName): string {
+  const language = Object.entries(SdkName).find(([, repository]) => repository === repo)?.[0];
+  if (!language) {
+    throw new Error(`Unsupported SDK repository: ${repo}`);
+  }
+  return language === "Js" ? "JavaScript" : language === "Net" ? "DotNet" : language;
+}
