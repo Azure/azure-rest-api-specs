@@ -1,0 +1,28 @@
+{
+  "title": "Enable Basic VM Protection",
+  "operationId": "VirtualMachineProtections_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "api-version": "2026-09-01",
+    "resource": {
+      "properties": {
+        "protectionType": "Basic"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.Compute/locations/westus/operations/{operation-id}?api-version=2026-09-01",
+        "Location": "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.Compute/locations/westus/operations/{operation-id}?api-version=2026-09-01&monitor=true"
+      },
+      "body": {
+        "properties": {
+          "protectionType": "Basic"
+        }
+      }
+    }
+  }
+}

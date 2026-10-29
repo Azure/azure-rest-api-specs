@@ -64,6 +64,9 @@
       "name": "VirtualMachines"
     },
     {
+      "name": "VirtualMachineProtections"
+    },
+    {
       "name": "VirtualMachineExtensions"
     },
     {
@@ -13177,6 +13180,73 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/restore": {
+      "post": {
+        "operationId": "VirtualMachines_Restore",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "Restores all operating system and data disks of a deallocated virtual machine from a virtual machine restore point. The restore point must contain restore point data for every disk currently attached to the virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Parameters supplied to restore the virtual machine disks from a restore point.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRestoreParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restore all disks of a virtual machine": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Restore.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/retrieveBootDiagnosticsData": {
       "post": {
         "operationId": "VirtualMachines_RetrieveBootDiagnosticsData",
@@ -13751,6 +13821,136 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtection/default": {
+      "get": {
+        "operationId": "VirtualMachineProtections_Get",
+        "tags": [
+          "VirtualMachineProtections"
+        ],
+        "description": "Gets the protection configuration of a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineProtection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure Backup VM Protection": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineProtection_Get_AzureBackup.json"
+          },
+          "Get Basic VM Protection": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineProtection_Get_Basic.json"
+          },
+          "Get VM Protection when protection is not enabled": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineProtection_Get_None.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualMachineProtections_CreateOrUpdate",
+        "tags": [
+          "VirtualMachineProtections"
+        ],
+        "description": "Creates or updates the protection configuration of a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters supplied to create or update the virtual machine protection configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineProtection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VirtualMachineProtection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineProtection"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineProtection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Disable VM Protection": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineProtection_CreateOrUpdate_None.json"
+          },
+          "Enable Basic VM Protection": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineProtection_CreateOrUpdate_Basic.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri",
+          "final-state-schema": "#/definitions/VirtualMachineProtection"
         },
         "x-ms-long-running-operation": true
       }
@@ -18822,6 +19022,11 @@
         "zoneMovement": {
           "$ref": "#/definitions/ZoneMovement",
           "description": "Zone movement configuration."
+        },
+        "vmProtection": {
+          "$ref": "#/definitions/VirtualMachineProtectionProfile",
+          "description": "The read-only protection information for the virtual machine.",
+          "readOnly": true
         }
       }
     },
@@ -22531,6 +22736,157 @@
         }
       }
     },
+    "VirtualMachineProtection": {
+      "type": "object",
+      "description": "Describes the protection configuration of a virtual machine.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineProtectionProperties",
+          "description": "The properties of the virtual machine protection configuration."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VirtualMachineProtectionProfile": {
+      "type": "object",
+      "description": "Specifies the protection information projected in the virtual machine response.",
+      "properties": {
+        "protectionType": {
+          "$ref": "#/definitions/VirtualMachineProtectionType",
+          "description": "The protection type configured for the virtual machine.",
+          "readOnly": true
+        },
+        "restorePointCollectionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the restore point collection associated with the virtual machine. This collection holds the periodic restore points created by the platform. Please refer to https://aka.ms/BasicVMProtection/PeriodicRestorePoints for more details.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/restorePointCollections"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "VirtualMachineProtectionProperties": {
+      "type": "object",
+      "description": "Specifies the properties of a virtual machine protection resource.",
+      "properties": {
+        "protectionType": {
+          "$ref": "#/definitions/VirtualMachineProtectionType",
+          "description": "The protection type. Customers can set this property to None or Basic. AzureBackup is set only by the Azure Backup service."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Creating",
+            "Updating",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineProtectionProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "Resource has been created."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "Resource creation failed."
+              },
+              {
+                "name": "Creating",
+                "value": "Creating",
+                "description": "The protection configuration is being created."
+              },
+              {
+                "name": "Updating",
+                "value": "Updating",
+                "description": "The protection configuration is being updated."
+              },
+              {
+                "name": "Deleting",
+                "value": "Deleting",
+                "description": "The virtual machine is being deleted."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "restorePointCollectionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the restore point collection associated with the virtual machine. This collection holds the periodic restore points created by the platform. Please refer to https://aka.ms/BasicVMProtection/PeriodicRestorePoints for more details.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/restorePointCollections"
+              }
+            ]
+          }
+        },
+        "backupResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the Azure Backup protected item associated with the virtual machine.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "protectionType"
+      ]
+    },
+    "VirtualMachineProtectionType": {
+      "type": "string",
+      "description": "Specifies the protection type configured for a virtual machine.",
+      "enum": [
+        "None",
+        "Basic",
+        "AzureBackup"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachineProtectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The virtual machine is not protected."
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "The virtual machine uses Basic VM Protection. The platform creates periodic restore points for the virtual machine. Please refer to https://aka.ms/BasicVMProtection/PeriodicRestorePoints for more details."
+          },
+          {
+            "name": "AzureBackup",
+            "value": "AzureBackup",
+            "description": "The virtual machine is protected by Azure Backup."
+          }
+        ]
+      }
+    },
     "VirtualMachinePublicIPAddressConfiguration": {
       "type": "object",
       "description": "Describes a virtual machines IP Configuration's PublicIPAddress configuration",
@@ -22633,6 +22989,27 @@
           "description": "Specifies information required for reimaging the non-ephemeral OS disk."
         }
       }
+    },
+    "VirtualMachineRestoreParameters": {
+      "type": "object",
+      "description": "Specifies the restore point used to restore a virtual machine.",
+      "properties": {
+        "restorePointId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the restore point whose disks are used to restore the virtual machine.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/restorePointCollections/restorePoints"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "restorePointId"
+      ]
     },
     "VirtualMachineRunCommand": {
       "type": "object",

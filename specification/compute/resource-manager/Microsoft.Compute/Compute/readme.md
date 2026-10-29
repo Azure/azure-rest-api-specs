@@ -213,6 +213,11 @@ directive:
       - NestedResourcesMustHaveListOperation
     reason: CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=RestorePoints
   - where:
+      - $.definitions.VirtualMachineProtection
+    suppress:
+      - NestedResourcesMustHaveListOperation
+    reason: VirtualMachineProtection is a singleton child resource of a virtual machine, addressable only as vmProtection/default, so a list operation is not applicable.
+  - where:
       - $.definitions.SubResourceWithColocationStatus.properties
     suppress:
       - BodyTopLevelProperties
@@ -692,6 +697,10 @@ suppressions:
     reason: Existing PUT response codes maintained for backward compatibility.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}"].put
+  - code: PutResponseCodes
+    reason: VirtualMachineProtection is a singleton that always exists on the virtual machine, so the service never returns 201. It returns 200 for synchronous updates and 202 for asynchronous updates, the same response shape as VirtualMachineScaleSetVMs_Update.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtection/default"].put
 
   - code: PostResponseCodes
     reason: Existing POST response codes maintained for backward compatibility.
@@ -850,6 +859,10 @@ suppressions:
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/restart"].post
   - code: PostResponseCodes
+    reason: Restore is a long-running POST with no response body. The service returns 202 with a Location header and the operation completes with an empty 200, so neither the 200-with-schema nor the 204 final response applies. This is the same response shape as migrateToVirtualMachineScaleSet.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/restore"].post
+  - code: PostResponseCodes
     reason: Existing POST response codes maintained for backward compatibility.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/start"].post
@@ -864,6 +877,14 @@ suppressions:
     reason: Existing LRO PUT operation maintained for backward compatibility.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}"].put
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: The service never returns 201 for the VirtualMachineProtection singleton, so there is no 201 response schema. The 200 response schema includes provisioningState, the same as VirtualMachineScaleSetVMs_Update.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtection/default"].put
+  - code: ProvisioningStateValidation
+    reason: The service never returns Canceled for the VirtualMachineProtection singleton, so the enum lists only the provisioning states the service returns.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineProtectionProperties.properties.provisioningState
   - code: RequestSchemaForTrackedResourcesMustHaveTags
     reason: Existing tracked resource request schema for backward compatibility.
     from: ComputeRP.json
