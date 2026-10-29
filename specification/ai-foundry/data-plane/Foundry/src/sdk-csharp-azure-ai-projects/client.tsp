@@ -1345,7 +1345,3 @@ namespace Azure.AI.Projects;
   },
   "csharp"
 );
-// Jobs (Foundry training jobs) sub-client
-// --------------------------------------------------------------------------------
-// C# model-suffix renames are declared inline in ../jobs/models.tsp via
-// @clientName(..., "csharp") so that the root main.tsp compile is also clean.
