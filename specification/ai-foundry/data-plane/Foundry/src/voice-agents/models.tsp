@@ -639,9 +639,7 @@ model UpdateTelephonyBindingRequest {
   allowed_calling_numbers?: SipAllowedCallingNumber[];
 }
 
-@doc("Properties shared by telephony binding response models.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyBindingProperties {
+alias TelephonyBindingProperties = {
   @doc("The service-generated binding identifier.")
   id: TelephonyBindingId;
 
@@ -662,7 +660,7 @@ model TelephonyBindingProperties {
 
   @doc("The service-generated webhook URL to configure with the telephony provider. For SIP bindings, this is a SIP URI.")
   incoming_call_url: url;
-}
+};
 
 @doc("A telephony binding owned by a voice agent.")
 @discriminator("provider")
