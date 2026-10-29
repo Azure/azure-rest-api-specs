@@ -15,6 +15,7 @@ import {
 import summarizeChecks from "../../src/summarize-checks/summarize-checks.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
 import { fullGitSha } from "../../../shared/test/examples.ts";
+import { ImpactAssessmentSchema } from "../../src/summarize-checks/labelling.ts";
 
 export type CheckRunData = import("../../src/summarize-checks/summarize-checks.ts").CheckRunData;
 
@@ -141,7 +142,7 @@ describe("ARM review label handoff", () => {
       expect(core.setOutput).not.toHaveBeenCalledWith("arm_review_ready", true);
     });
 
-    it("uses live PR state instead of the draft and branch snapshot in the artifact", async () => {
+    it("uses live PR state instead of the draft and branch snapshot in a legacy artifact", async () => {
       const { github, core, run } = createSummary();
       github.rest.pulls.get.mockResolvedValue({
         data: {
@@ -1514,7 +1515,7 @@ describe("Summarize Checks Unit Tests", () => {
     const unzipExists = await execFile("unzip")
       .then(() => true)
       .catch(() => false);
-    const impactAssessment: import("../../src/summarize-checks/labelling.ts").ImpactAssessment = {
+    const legacyImpactAssessment = {
       resourceManagerRequired: false,
       dataPlaneRequired: true,
       suppressionReviewRequired: false,
@@ -1527,6 +1528,7 @@ describe("Summarize Checks Unit Tests", () => {
       isDraft: false,
       targetBranch: "test-\u00e9-\u65e5\u672c",
     };
+    const impactAssessment = ImpactAssessmentSchema.parse(legacyImpactAssessment);
     const summaryJson = JSON.stringify(impactAssessment);
 
     function mockArtifactDownload(
@@ -1564,6 +1566,7 @@ describe("Summarize Checks Unit Tests", () => {
         name: "summary.json",
         per_page: 100,
       });
+
       expect(github.rest.actions.downloadArtifact).toHaveBeenCalledExactlyOnceWith({
         owner: "test-owner",
         repo: "test-repo",
@@ -1571,6 +1574,28 @@ describe("Summarize Checks Unit Tests", () => {
         archive_format: "zip",
         request: { parseSuccessResponseBody: false },
       });
+    });
+
+    it("normalizes artifacts produced before the service-scoped schema", async () => {
+      const github = mockArtifactDownload(JSON.stringify(legacyImpactAssessment));
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
+    });
+
+    it("reads cached service-scoped artifacts without affected-README metadata", async () => {
+      const github = mockArtifactDownload(
+        JSON.stringify({
+          ...impactAssessment,
+          services: impactAssessment.services.map((service) => ({
+            ...service,
+            hasAffectedReadme: undefined,
+          })),
+        }),
+      );
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
     });
 
     it.each(["application/json", "text/plain", "application/octet-stream"])(
