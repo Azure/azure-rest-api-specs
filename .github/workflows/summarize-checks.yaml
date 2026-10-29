@@ -1,19 +1,6 @@
 name: "Summarize Checks"
 
 on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
-  # ARM signoff only: Universal dispatches Update Labels, and a run started by a GITHUB_TOKEN
-  # dispatch does not fire the "Update Labels" workflow_run trigger below when it completes. That
-  # Update Labels run dispatches this one instead. All other routes are unchanged.
-  workflow_dispatch:
-    inputs:
-      pr_number:
-        description: "PR number to summarize"
-        required: true
-        type: string
-      head_sha:
-        description: "PR head SHA evaluated by the dispatching Update Labels run"
-        required: true
-        type: string
   workflow_run:
     workflows:
       - "Breaking Change(Cross-Version) - Set Status"
@@ -61,7 +48,6 @@ jobs:
       head_sha: ${{ steps.summarize-checks.outputs.head_sha }}
       arm_review_ready: ${{ steps.summarize-checks.outputs.arm_review_ready }}
     if: >-
-      github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'pull_request_target' && github.event.pull_request.state == 'open') ||
       (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'skipped')
     name: "Summarize Checks"

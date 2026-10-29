@@ -12,7 +12,6 @@ import {
   summarizeChecksImpl,
   updateLabels,
 } from "../../src/summarize-checks/summarize-checks.ts";
-import summarizeChecks from "../../src/summarize-checks/summarize-checks.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
 import { fullGitSha } from "../../../shared/test/examples.ts";
 import { ImpactAssessmentSchema } from "../../src/summarize-checks/labelling.ts";
@@ -35,9 +34,10 @@ describe("ARM review label handoff", () => {
       });
       github.rest.pulls.get.mockResolvedValue({
         data: {
+          state: "open",
+          draft: false,
           head: { sha: fullGitSha },
           base: { ref: "main" },
-          draft: false,
           labels: existingLabels.map((name) => ({ name })),
         },
       });
@@ -107,21 +107,23 @@ describe("ARM review label handoff", () => {
         expect.arrayContaining(["WaitForARMFeedback"]),
       );
       expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", true);
+      expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
       expect(github.rest.repos.createCommitStatus.mock.invocationCallOrder[0]).toBeLessThan(
         core.setOutput.mock.invocationCallOrder.at(-1) ?? 0,
       );
     });
 
     it("allows the dispatch job to recover an already-present queue label", async () => {
-      const { core, run } = createSummary(["ARMReview", "WaitForARMFeedback"]);
+      const { github, core, run } = createSummary(["ARMReview", "WaitForARMFeedback"]);
 
       await run();
 
+      expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
       expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", true);
     });
 
-    it("preserves the initial-request marker during label reconciliation", async () => {
-      const { github, run } = createSummary([
+    it("preserves the initial-request marker without scheduling another dispatch runner", async () => {
+      const { github, core, run } = createSummary([
         "ARMReview",
         "WaitForARMFeedback",
         "ARMInitialReviewRequested",
@@ -132,13 +134,184 @@ describe("ARM review label handoff", () => {
       expect(github.rest.issues.removeLabel).not.toHaveBeenCalledWith(
         expect.objectContaining({ name: "ARMInitialReviewRequested" }),
       );
+      expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", false);
     });
+
+    it("publishes approval, queue removal, comment, and merge success without another workflow", async () => {
+      const { github, core, run } = createSummary([
+        "ARMReview",
+        "WaitForARMFeedback",
+        "ARMInitialReviewRequested",
+        "PublishToCustomers",
+      ]);
+      const statuses = [
+        {
+          context: "ARM Semantic Review",
+          state: "success",
+          description: "Passed: full review completed with no Blocking findings",
+          updated_at: "2026-01-01",
+        },
+        ...["Swagger LintDiff", "Swagger Avocado"].map((context) => ({
+          context,
+          state: "success",
+          updated_at: "2026-01-01",
+        })),
+      ];
+      github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+        data: { statuses, total_count: statuses.length },
+      });
+
+      await run();
+
+      expect(github.rest.issues.addLabels.mock.calls[0][0]).toHaveProperty(
+        "labels",
+        expect.arrayContaining(["ARMSignedOff", "ARMAutoSignedOff"]),
+      );
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "WaitForARMFeedback" }),
+      );
+      expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+        expect.objectContaining({
+          state: "success",
+          context: "Automated merging requirements met",
+        }),
+      );
+      expect(github.rest.issues.createComment).toHaveBeenCalledOnce();
+      expect(github.rest.repos.getCombinedStatusForRef).toHaveBeenCalledOnce();
+      expect(github.rest.actions.downloadArtifact.mock.invocationCallOrder[0]).toBeLessThan(
+        github.rest.repos.getCombinedStatusForRef.mock.invocationCallOrder[0],
+      );
+      expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
+      expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
+      expect(github.rest.pulls.get).toHaveBeenCalledTimes(2);
+      expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
+      expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", false);
+    });
+
+    it("revokes automatic approval and updates the merge gate without a label-event round trip", async () => {
+      const { github, core, run } = createSummary([
+        "ARMReview",
+        "ARMAutoSignedOff",
+        "ARMSignedOff",
+        "ARMInitialReviewRequested",
+        "PublishToCustomers",
+      ]);
+
+      await run();
+
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "ARMSignedOff" }),
+      );
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "ARMAutoSignedOff" }),
+      );
+      expect(github.rest.issues.removeLabel).toHaveBeenNthCalledWith(
+        1,
+        expect.objectContaining({ name: "ARMSignedOff" }),
+      );
+      expect(github.rest.issues.addLabels.mock.calls[0][0]).toHaveProperty(
+        "labels",
+        expect.arrayContaining(["WaitForARMFeedback"]),
+      );
+      expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+        expect.objectContaining({
+          context: "Automated merging requirements met",
+          state: "failure",
+        }),
+      );
+      expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", false);
+    });
+
+    it("keeps ownership markers if removing an automatic approval fails", async () => {
+      const { github, run } = createSummary([
+        "ARMReview",
+        "ARMAutoSignedOff",
+        "ARMSignedOff",
+        "ARMInitialReviewRequested",
+      ]);
+      github.rest.issues.removeLabel.mockRejectedValueOnce(new Error("Remove failed"));
+
+      await expect(run()).rejects.toThrow("Remove failed");
+
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledExactlyOnceWith(
+        expect.objectContaining({ name: "ARMSignedOff" }),
+      );
+      expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+    });
+
+    it("withholds all writes when current-head evidence cannot be loaded", async () => {
+      const { github, run } = createSummary(["ARMReview", "ARMSignedOff", "ARMAutoSignedOff"]);
+      github.rest.repos.getCombinedStatusForRef.mockRejectedValue(
+        new Error("Status API unavailable"),
+      );
+      await expect(run()).rejects.toThrow("Status API unavailable");
+      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+      expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+    });
+
+    it.each([{ state: "closed" }, { head: { sha: "a".repeat(40) } }])(
+      "ignores an obsolete reviewer completion before loading evidence: %j",
+      async (change) => {
+        const { github, run } = createSummary(["ARMReview", "ARMSignedOff", "ARMAutoSignedOff"]);
+        github.rest.pulls.get.mockResolvedValue({
+          data: {
+            state: "open",
+            head: { sha: fullGitSha },
+            labels: [],
+            ...change,
+          },
+        });
+        await run();
+        expect(github.rest.repos.getCombinedStatusForRef).not.toHaveBeenCalled();
+        expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+        expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+        expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+      },
+    );
 
     it("does not signal readiness when adding the queue label fails", async () => {
       const { github, core, run } = createSummary();
       github.rest.issues.addLabels.mockRejectedValue(new Error("Label write failed"));
 
       await expect(run()).rejects.toThrow("Label write failed");
+      expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
+      expect(core.setOutput).not.toHaveBeenCalledWith("arm_review_ready", true);
+    });
+
+    it.each([
+      { state: "closed" },
+      { head: { sha: "a".repeat(40) } },
+      { draft: true },
+      { base: { ref: "feature/retargeted" } },
+      { labels: [{ name: "ARMReview" }, { name: "ARMManualSignoffRequired" }] },
+    ])("does not apply labels when the PR changes during evaluation: %j", async (change) => {
+      const { github, core, run } = createSummary();
+      github.rest.pulls.get
+        .mockResolvedValueOnce({
+          data: {
+            state: "open",
+            draft: false,
+            head: { sha: fullGitSha },
+            base: { ref: "main" },
+            labels: [{ name: "ARMReview" }],
+          },
+        })
+        .mockResolvedValue({
+          data: {
+            state: "open",
+            draft: false,
+            head: { sha: fullGitSha },
+            base: { ref: "main" },
+            labels: [{ name: "ARMReview" }],
+            ...change,
+          },
+        });
+
+      await run();
+
+      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
       expect(core.setOutput).not.toHaveBeenCalledWith("arm_review_ready", true);
     });
 
@@ -146,6 +319,7 @@ describe("ARM review label handoff", () => {
       const { github, core, run } = createSummary();
       github.rest.pulls.get.mockResolvedValue({
         data: {
+          state: "open",
           head: { sha: fullGitSha },
           base: { ref: "feature/example" },
           draft: true,
@@ -163,70 +337,8 @@ describe("ARM review label handoff", () => {
       expect(github.rest.repos.getBranchRules).toHaveBeenCalledWith(
         expect.objectContaining({ branch: "feature/example" }),
       );
-      expect(github.rest.pulls.get).toHaveBeenCalledTimes(1);
+      expect(github.rest.pulls.get).toHaveBeenCalledTimes(2);
       expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
-    });
-
-    it("does not apply an old head's impact to the current PR", async () => {
-      const { github, run } = createSummary();
-      github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: "different-head" } } });
-
-      await run();
-
-      expect(github.rest.actions.downloadArtifact).not.toHaveBeenCalled();
-      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
-      expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
-    });
-  });
-
-  describe("workflow_dispatch from Update Labels", () => {
-    function dispatchContext(inputs: Record<string, string>) {
-      return {
-        eventName: "workflow_dispatch",
-        runId: 1,
-        repo: { owner: "Azure", repo: "azure-rest-api-specs" },
-        payload: {
-          inputs,
-          repository: { owner: { login: "Azure" }, name: "azure-rest-api-specs" },
-        },
-      } as unknown as Parameters<typeof summarizeChecks>[0]["context"];
-    }
-
-    it("evaluates the PR and head identified by the inputs", async () => {
-      const github = createMockGithub();
-      const core = createMockCore();
-      core.summary.addLink = vi.fn().mockReturnValue(core.summary);
-      core.summary.addHeading = vi.fn().mockReturnValue(core.summary);
-      core.summary.addCodeBlock = vi.fn().mockReturnValue(core.summary);
-      github.rest.issues.listLabelsOnIssue.mockResolvedValue({ data: [] });
-      github.rest.pulls.get.mockResolvedValue({
-        data: { head: { sha: fullGitSha }, base: { ref: "main" }, draft: false, labels: [] },
-      });
-      github.rest.checks.listForRef.mockResolvedValue({ data: { check_runs: [] } });
-      github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });
-
-      await summarizeChecks({
-        github,
-        core,
-        context: dispatchContext({ pr_number: "123", head_sha: fullGitSha }),
-      });
-
-      expect(core.setOutput).toHaveBeenCalledWith("issue_number", 123);
-      expect(core.setOutput).toHaveBeenCalledWith("head_sha", fullGitSha);
-    });
-
-    it("rejects malformed inputs", async () => {
-      const github = createMockGithub();
-      const core = createMockCore();
-
-      await expect(
-        summarizeChecks({
-          github,
-          core,
-          context: dispatchContext({ pr_number: "abc", head_sha: "short" }),
-        }),
-      ).rejects.toThrow("positive PR number and full head SHA");
-      expect(github.rest.pulls.get).not.toHaveBeenCalled();
     });
   });
 });
