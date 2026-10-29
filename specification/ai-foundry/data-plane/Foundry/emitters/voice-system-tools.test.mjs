@@ -222,9 +222,9 @@ for (const version of ["v1", "virtual-public-preview"]) {
         ),
       );
     }
-    assert.equal(
-      schemas.VoiceAgentTransferRouting.properties.total_timeout_seconds,
-      undefined,
+    assert.deepEqual(
+      Object.keys(schemas.VoiceAgentTransferRouting.properties).sort(),
+      ["ring_timeout_seconds", "strategy"],
     );
   });
 

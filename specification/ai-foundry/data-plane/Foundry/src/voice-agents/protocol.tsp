@@ -500,24 +500,14 @@ model VoiceAgentLanguageDetectionArguments {
   reason: string;
 }
 
-/**
- * Collection invocation arguments, not Agent settings or client events. Each call starts
- * collection; no action parameter is supported. Settings are validated and locked before
- * receiver setup. Duplicate calls cannot change settings or restart deadlines. Collection is not
- * authentication.
- */
+@doc("Arguments for starting a collection on a model call.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectionStartArguments {
   @doc("Required; no default. True returns a private reference, false returns the value. Privacy cannot be downgraded after collection starts.")
   secret: boolean;
 
-  /**
-   * Preferred bare name, required for `secret: true` and forbidden otherwise. Successful private
-   * collection creates the variable without predeclaration; collisions with existing inputs or
-   * variables get a unique suffix without overwriting values. `output_ref` reports the actual name.
-   * Other outcomes create no variable.
-   */
+  @doc("Preferred bare name for the output variable, required for `secret: true` and forbidden otherwise.")
   output_variable_name?: VoiceAgentOutputReference;
 
   @doc("Total deadline in seconds (1-300), including receiver setup. Overrides the Agent timeout; if both are omitted, defaults to 60. Duplicate calls do not reset it.")
@@ -556,10 +546,7 @@ union VoiceAgentDtmfCompletionMode {
 @doc("The wait after each received digit, scoped to the selected completion policy.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentDtmfCompletionTiming {
-  /**
-   * Seconds between digits, reset after each digit; defaults to 5. Expiry fails fixed-length and
-   * terminator modes, or completes valid nonempty input in silence mode. Repeated digits are preserved.
-   */
+  @doc("Seconds between digits, reset after each digit; defaults to 5.")
   @minValue(1)
   @maxValue(300)
   inter_digit_timeout_seconds?: int32 = 5;
@@ -610,11 +597,7 @@ union VoiceAgentDtmfTerminator {
   asterisk: "*",
 }
 
-/**
- * Model-call DTMF collection arguments. `completion_mode` selects a typed length, terminator or
- * silence policy, locked before receiver setup. Legacy flat mode fields and model-supplied digits
- * are rejected.
- */
+@doc("Arguments for starting DTMF collection on a model call.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectDtmfStartArguments {
@@ -629,13 +612,7 @@ model VoiceAgentCollectDtmfStartArguments {
   first_digit_timeout_seconds?: int32 = 15;
 }
 
-/**
- * Reports collection or telephony outcomes, not argument-generation completion. Prompt only after
- * `listening`, not `accepted`. Completed, expired, cancelled, failed and busy outcomes schedule one
- * idle follow-up without client `function_call_output` or `response.create`. Stale/duplicate results
- * and closing/disconnected sessions do not resume. Transfer, session end or disconnect cancels
- * collection. Private values are stored before `output_ref` is emitted.
- */
+@doc("Reports collection or telephony outcomes for a model call.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventInputCollectionStatus
@@ -731,10 +708,7 @@ union VoiceAgentInputCollectionStatus {
   @doc("The provider outcome could not be confirmed after possible dispatch; the service does not automatically retry.")
   provider_result_uncertain: "provider_result_uncertain",
 
-  /**
-   * Rejected before any provider side effect; nothing was sent or dialed. Includes unavailable
-   * executors and unavailable-sender tool-resolution failures before model exposure.
-   */
+  @doc("Rejected before any provider side effect; nothing was sent or dialed. Includes unavailable executors and unavailable-sender tool-resolution failures before model exposure.")
   provider_not_executed: "provider_not_executed",
 }
 

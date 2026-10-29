@@ -472,10 +472,7 @@ model VoiceAgentSystemTool extends VoiceAgentTool {
   @doc("An optional description of the system tool.")
   description?: string;
 
-  /**
-   * Execution timeout, from 1 to 300 seconds. If omitted, the service defaults to 60 seconds.
-   * Includes collection setup; collection invocations may override it. Transfer uses it as the total routing budget.
-   */
+  @doc("Execution timeout, from 1 to 300 seconds. If omitted, the service defaults to 60 seconds.")
   @extension("minimum", 1)
   @extension("maximum", 300)
   timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
