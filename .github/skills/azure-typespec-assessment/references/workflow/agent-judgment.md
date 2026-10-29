@@ -54,6 +54,12 @@ answers, or use catalog descriptions as guidance. Candidate and review-unit
 evidence omitted from the bounded input is available only through declared
 canonical artifact references; do not scan unrelated artifact entries.
 
+Treat every supplied Semantic review-unit ID and boundary as authoritative.
+Never merge, split, reorder ownership, or move source hunks, declarations,
+change facts, or operations between units. Mixed version-publication and
+feature evidence has already been separated by the coordinator; ambiguous
+facts remain explicit rather than being assigned by similarity.
+
 Documentation Completeness is assembled deterministically from
 `dimensions/document-quality-input.json`. The Agent neither reads that artifact
 nor authors documentation decisions.
