@@ -8598,7 +8598,7 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEvent"
           }
         ],
-        "description": "Reports collection or telephony outcomes, not argument-generation completion. Prompt only after\n`listening`, not `accepted`. Completed, expired, cancelled, failed and busy outcomes schedule one\nidle follow-up without client `function_call_output` or `response.create`. Stale/duplicate results\nand closing/disconnected sessions do not resume. Transfer, session end or disconnect cancels\ncollection. Private values are stored before `output_ref` is emitted.",
+        "description": "Reports collection or telephony outcomes for a model call.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -9933,7 +9933,7 @@
           },
           "timeout_seconds": {
             "$ref": "#/components/schemas/FoundryDurationSeconds",
-            "description": "Execution timeout, from 1 to 300 seconds. If omitted, the service defaults to 60 seconds.\nIncludes collection setup; collection invocations may override it. Transfer uses it as the total routing budget.",
+            "description": "Execution timeout, from 1 to 300 seconds. If omitted, the service defaults to 60 seconds.",
             "maximum": 300,
             "minimum": 1,
             "default": 60
