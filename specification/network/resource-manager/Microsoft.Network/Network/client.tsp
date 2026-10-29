@@ -5767,6 +5767,19 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 
 @@clientName(Common.Resource.type, "ResourceType", "csharp");
 
+@@clientName(Microsoft.Network.ChildResource.type, "ResourceType", "csharp");
+@@alternateType(
+  Microsoft.Network.ChildResource.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(Microsoft.Network.ProxyResource.type, "ResourceType", "csharp");
+@@alternateType(
+  Microsoft.Network.ProxyResource.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+
 @@clientName(Common.SubResource, "NetworkSubResource", "csharp");
 
 @@clientName(Common.SubResourceModel, "NetworkResourceData", "csharp");
