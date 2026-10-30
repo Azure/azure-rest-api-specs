@@ -255,17 +255,7 @@ namespace IntegrationRuntimes;
 */"NotEncrypted": "NotEncrypted"
     }
 
-/**
-* An alternative option to ensure interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay.
-*/#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 
-    enum SelfContainedInteractiveAuthoringState {
-        /**
-* true
-*/"true": true, /**
-* false
-*/"false": false
-    }
 
 
 
@@ -1213,7 +1203,7 @@ model SelfHostedIntegrationRuntimeTypeProperties {
 /**
 * An alternative option to ensure interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay.
 */
-"selfContainedInteractiveAuthoringEnabled"?: SelfContainedInteractiveAuthoringState;
+"selfContainedInteractiveAuthoringEnabled"?: boolean;
 }
 
 /**
@@ -1511,7 +1501,7 @@ model SelfHostedIntegrationRuntimeStatusTypeProperties {
 * An alternative option to ensure interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay.
 */
 @visibility(Lifecycle.Read)
-"selfContainedInteractiveAuthoringEnabled"?: SelfContainedInteractiveAuthoringState;
+"selfContainedInteractiveAuthoringEnabled"?: boolean;
 }
 
 /**
