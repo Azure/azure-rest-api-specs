@@ -72,6 +72,14 @@ interface VirtualMachineScaleSetLifeCycleHookEvents {
    */
   list is ComputeResourceListByParent<
     VMScaleSetLifecycleHookEvent,
+    Parameters = {
+      /**
+       * The filter to apply to the operation. Allowed value is 'properties/state eq 'Active''.
+       */
+      @added(Versions.v2026_09_01)
+      @query("$filter")
+      $filter?: string;
+    },
     Response = VMScaleSetLifecycleHookEventListResult
   >;
 }
