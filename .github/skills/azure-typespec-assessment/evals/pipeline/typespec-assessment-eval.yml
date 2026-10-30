@@ -1,5 +1,5 @@
 # Fan-out shard job: one leg per shard publishes raw results, JUnit and completeness
-# (always) + transcripts (on failure). Pass/fail is the eval VERDICT, not the
+# (always) + transcripts (on failure or cancellation). Pass/fail is the eval VERDICT, not the
 # `vally` exit code (vally can exit 1 on a teardown flake after a pass).
 
 parameters:
@@ -21,7 +21,7 @@ parameters:
   - name: shardTimeoutInMinutes
     # Per-shard job timeout. Must be a parameter (not a runtime variable) so 1ES resolves it at compile time.
     type: number
-    default: 50
+    default: 75
 
 jobs:
   - job: RunShard
@@ -33,6 +33,7 @@ jobs:
     # A red shard shouldn't abort its siblings; the rollup gates in Summary.
     continueOnError: true
     timeoutInMinutes: ${{ parameters.shardTimeoutInMinutes }}
+    cancelTimeoutInMinutes: 10
     workspace:
       clean: all
     strategy:
@@ -49,10 +50,10 @@ jobs:
           targetPath: $(Build.ArtifactStagingDirectory)/eval-result
           condition: always()
         - output: pipelineArtifact
-          displayName: "Publish $(shardName) transcripts (on failure)"
+          displayName: "Publish $(shardName) transcripts (on failure or cancellation)"
           artifactName: "eval-debug-$(shardName)-$(System.JobAttempt)"
           targetPath: $(Build.ArtifactStagingDirectory)/debug
-          condition: failed()
+          condition: or(failed(), canceled())
     steps:
       - checkout: self
         clean: true
@@ -66,11 +67,10 @@ jobs:
       # 1ES Official image blocks registry.npmjs.org; restore via the azure-sdk npm mirror.
       - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
         parameters:
-          npmrcPath: $(Build.SourcesDirectory)/.npmrc
           registryUrl: https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-tools/npm/registry/
 
       # Installs vally-cli + its pinned copilot-sdk executor into node_modules.
-      - script: npm ci --userconfig $(Build.SourcesDirectory)/.npmrc
+      - script: npm ci --userconfig "$(resolvedNpmrcPath)"
         displayName: "Install Vally CLI + copilot-sdk (pinned)"
         workingDirectory: eng/common/scripts/eval
 
@@ -113,7 +113,7 @@ jobs:
         displayName: "Collect $(shardName) result data and completeness"
         condition: always()
 
-      # On a real failure keep transcripts; strip JUnit so Summary can't double-count it.
+      # Keep transcripts on failure or cancellation; strip JUnit so Summary can't double-count it.
       - script: |
           src="$(Build.SourcesDirectory)/artifacts/vally-results/$(shardName)"
           dest="$(Build.ArtifactStagingDirectory)/debug"
@@ -122,5 +122,5 @@ jobs:
             cp -r "$src/." "$dest/"
             find "$dest" -name '*.junit.xml' -delete
           fi
-        displayName: "Collect $(shardName) transcripts (on failure)"
-        condition: failed()
+        displayName: "Collect $(shardName) transcripts (on failure or cancellation)"
+        condition: or(failed(), canceled())

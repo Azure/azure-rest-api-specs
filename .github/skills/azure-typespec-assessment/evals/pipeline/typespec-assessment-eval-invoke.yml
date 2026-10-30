@@ -13,3 +13,4 @@ steps:
     workingDirectory: $(Build.SourcesDirectory)/${{ parameters.vallyRoot }}
     env:
       GITHUB_TOKEN: $(azuresdk-copilot-github-pat)
+      npm_config_userconfig: $(resolvedNpmrcPath)
