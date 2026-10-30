@@ -1,0 +1,104 @@
+{
+  "title": "NetworkFabrics_RunValidation_MaximumSet_Gen",
+  "operationId": "NetworkFabrics_RunValidation",
+  "parameters": {
+    "api-version": "2026-07-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "networkFabricName": "example-fabric",
+    "body": {
+      "validationType": "UpgradePrecheck",
+      "targetVersion": "8.0.0",
+      "deviceCommandConfiguration": {
+        "configurationType": "File",
+        "commandsUrl": "https://customerstorageaccount.blob.core.windows.net/commands/upgrade-precheck-commands.json"
+      },
+      "metricsConfiguration": [
+        {
+          "checkName": "cpu-utilization-check",
+          "description": "Verify CPU utilization is reporting data and within acceptable range",
+          "metricName": "CpuUtilizationMax",
+          "namespace": "NfaDeviceMetrics",
+          "dimensionFilters": [
+            {
+              "dimensionName": "FabricId",
+              "value": "FabricId"
+            }
+          ],
+          "timeWindowMinutes": 15,
+          "samplingIntervalMinutes": 15,
+          "bucketAggregation": "Average",
+          "samplingType": "Max",
+          "perResultDimensionName": "DeviceId",
+          "operator": "GreaterThan",
+          "expectedValue": 0,
+          "maxAllowedFailures": 0
+        }
+      ],
+      "deviceFilter": [
+        "/subscriptions/0000ABCD-0A0B-0000-0000-000000ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-device"
+      ],
+      "overrideChecks": [
+        {
+          "checkName": "BgpStateValidation",
+          "justification": "BGP idle on CE1 is expected during the maintenance window; waived for this validation."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/0000ABCD-0A0B-0000-0000-000000ABCDEF/providers/Microsoft.ManagedNetworkFabric/locations/eastus/operationStatuses/op-20260417-160000-abc123",
+        "name": "op-20260417-160000-abc123",
+        "status": "Succeeded",
+        "startTime": "2026-04-17T16:00:00Z",
+        "endTime": "2026-04-17T16:05:00Z",
+        "properties": {
+          "validationId": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+          "validationTime": "2026-04-17T16:05:00Z",
+          "validationResult": "Warning",
+          "resultUrl": "https://customerstorageaccount.blob.core.windows.net/validation-reports/example-fabric-UpgradePrecheck-2026-04-17T16-00-00Z.json",
+          "currentVersion": "7.0.0",
+          "targetVersion": "8.0.0",
+          "successfulDevices": [
+            "/subscriptions/0000ABCD-0A0B-0000-0000-000000ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-fabric-TOR1"
+          ],
+          "failedDevices": [
+            "/subscriptions/0000ABCD-0A0B-0000-0000-000000ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-fabric-CE1"
+          ],
+          "checkResults": [
+            {
+              "checkName": "ResourceHealthCheck",
+              "category": "ImplicitBaseline",
+              "result": "Passed",
+              "message": "All fabric resources are in healthy state.",
+              "impactedResources": []
+            },
+            {
+              "checkName": "BgpStateValidation",
+              "category": "ImplicitBaseline",
+              "result": "Warning",
+              "message": "BGP session on CE1 is in idle state.",
+              "impactedResources": [
+                "/subscriptions/0000ABCD-0A0B-0000-0000-000000ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-fabric-CE1"
+              ]
+            },
+            {
+              "checkName": "ExampleMetricReachability",
+              "category": "ImplicitBaseline",
+              "result": "Passed",
+              "message": "All devices reachable via example metric.",
+              "impactedResources": []
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/0000ABCD-0A0B-0000-0000-000000ABCDEF/providers/Microsoft.ManagedNetworkFabric/locations/eastus/operationStatuses/op-20260417-170000-abc123?api-version=2026-07-15-preview"
+      }
+    }
+  }
+}

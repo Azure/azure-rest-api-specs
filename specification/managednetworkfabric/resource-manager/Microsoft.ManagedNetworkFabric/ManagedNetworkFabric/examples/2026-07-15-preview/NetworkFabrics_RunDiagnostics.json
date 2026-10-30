@@ -1,0 +1,44 @@
+{
+  "title": "NetworkFabrics_RunDiagnostics_MaximumSet_Gen",
+  "operationId": "NetworkFabrics_RunDiagnostics",
+  "parameters": {
+    "api-version": "2026-07-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "networkFabricName": "example-fabric",
+    "body": {
+      "operationType": "RuntimeConfiguration",
+      "runtimeConfiguration": {
+        "category": "InfrastructureNetwork",
+        "filters": [
+          {
+            "deviceRole": "CE",
+            "resourceIds": [
+              "/subscriptions/0000ABCD-0A0B-0000-0000-000000ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/l2isolationdomains/example-l2domain"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/0000ABCD-0A0B-0000-0000-000000ABCDEF/providers/Microsoft.ManagedNetworkFabric/locations/eastus/operationStatuses/op-20260715-170000-abc123",
+        "name": "op-20260715-170000-abc123",
+        "status": "Succeeded",
+        "startTime": "2026-07-15T17:00:00Z",
+        "endTime": "2026-07-15T17:05:00Z",
+        "resourceId": "/subscriptions/0000ABCD-0A0B-0000-0000-000000ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabrics/example-fabric",
+        "properties": {
+          "diagnosticsUrl": "https://customerstorageaccount.blob.core.windows.net/diagnostics/example-fabric-RuntimeConfiguration-2026-07-15T17-00-00Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/0000ABCD-0A0B-0000-0000-000000ABCDEF/providers/Microsoft.ManagedNetworkFabric/locations/eastus/operationStatuses/op-20260715-170000-abc123?api-version=2026-07-15-preview"
+      }
+    }
+  }
+}

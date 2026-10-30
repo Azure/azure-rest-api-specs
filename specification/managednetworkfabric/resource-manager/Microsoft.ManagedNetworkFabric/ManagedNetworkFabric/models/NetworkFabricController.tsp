@@ -84,6 +84,10 @@ model NetworkFabricControllerPatchableProperties {
   @doc("As part of an update, the workload ExpressRoute CircuitID should be provided to create and Provision a NFC. This Express route is dedicated for Workload services. (This is a Mandatory attribute).")
   @Azure.ResourceManager.identifiers(#["expressRouteCircuitId"])
   workloadExpressRouteConnections?: ExpressRouteConnectionInformation[];
+
+  @doc("Public connectivity configuration. including VPN Gateway SKU input and the read-only VPN Gateway information provisioned by the platform.")
+  @added(Versions.v2026_07_15_preview)
+  publicConnectivity?: PublicConnectivity;
 }
 
 @doc("Network Fabric Controller services.")
@@ -171,4 +175,90 @@ union NfcSku {
 model VmProfile {
   @doc("The SKU that will be used for creating the VMS for AKS cluster.")
   vmSkuName: string;
+}
+
+@doc("Public connectivity configuration for the Network Fabric Controller.")
+@added(Versions.v2026_07_15_preview)
+model PublicConnectivity {
+  @doc("Infrastructure VPN Gateway SKU. Specified by the user at Create and Update time.")
+  infrastructureVpnGatewaySku: VpnGatewaySku;
+
+  @doc("Tenant VPN Gateway SKU. Specified by the user at Create and Update time.")
+  tenantVpnGatewaySku: VpnGatewaySku;
+
+  @doc("Infrastructure VPN Gateway information provisioned for public connectivity. This is read-only and populated by the platform.")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["vpnGatewayId"])
+  infrastructureVpnGateways?: VpnGateway[];
+
+  @doc("Tenant VPN Gateway information provisioned for public connectivity. This is read-only and populated by the platform.")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["vpnGatewayId"])
+  tenantVpnGateways?: VpnGateway[];
+}
+
+@doc("VPN Gateway SKU for the Network Fabric Controller public connectivity.")
+@added(Versions.v2026_07_15_preview)
+union VpnGatewaySku {
+  @doc("VpnGatewaySku-VpnGw2AZ")
+  VpnGw2AZ: "VpnGw2AZ",
+
+  @doc("VpnGatewaySku-VpnGw3AZ")
+  VpnGw3AZ: "VpnGw3AZ",
+
+  @doc("VpnGatewaySku-VpnGw4AZ")
+  VpnGw4AZ: "VpnGw4AZ",
+
+  @doc("VpnGatewaySku-VpnGw5AZ")
+  VpnGw5AZ: "VpnGw5AZ",
+
+  string,
+}
+
+@doc("The type of VPN gateway.")
+@added(Versions.v2026_07_15_preview)
+union VpnGatewayType {
+  string,
+
+  @doc("Site-to-site VPN gateway.")
+  vpn: "Vpn",
+
+  @doc("ExpressRoute gateway.")
+  expressRoute: "ExpressRoute",
+
+  @doc("Local network gateway.")
+  localGateway: "LocalGateway",
+}
+
+@doc("VPN Gateway instance information including ASN and IP addresses.")
+@added(Versions.v2026_07_15_preview)
+model VpnGateway {
+  @doc("VPN Gateway instance resource ID.")
+  @visibility(Lifecycle.Read)
+  vpnGatewayId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworkGateways";
+    }
+  ]>;
+
+  @doc("VPN Gateway Type.")
+  @visibility(Lifecycle.Read)
+  vpnGatewayType?: VpnGatewayType;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("VPN Gateway ASN. Example: 65000.")
+  @maxValue(4294967295)
+  @minValue(1)
+  vpnGatewayAsn?: int64;
+
+  @doc("VPN Gateway IP address. Example: 10.248.224.8.")
+  vpnGatewayIpV4Address?: Azure.Core.ipV4Address;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("VPN Gateway eBGP primary IP address. Example: 169.254.21.1.")
+  vpnGatewayBgpPrimaryIpV4Address?: Azure.Core.ipV4Address;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("VPN Gateway eBGP secondary IP address. Example: 169.254.21.5.")
+  vpnGatewayBgpSecondaryIpV4Address?: Azure.Core.ipV4Address;
 }

@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "resourceGroupName": "example-rg",
+    "fabricName": "example-fabric",
+    "vrfName": "example-vrf",
+    "servicePeerName": "example-servicepeer",
+    "api-version": "2026-07-15-preview",
+    "body": {
+      "consumerResourceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/example-vm",
+      "requestGeneration": 2,
+      "force": "False"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "requestId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/providers/Microsoft.ManagedNetworkFabric/locations/eastus/operationStatuses/3fa85f64-5717-4562-b3fc-2c963f66afa6?api-version=2026-07-15-preview",
+        "Retry-After": 10
+      }
+    }
+  },
+  "title": "ServicePeers_Revoke",
+  "operationId": "ServicePeers_Revoke"
+}

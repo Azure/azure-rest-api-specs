@@ -1,17 +1,18 @@
 import "../models/common.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Device resource definition.")
-model NetworkDevice is Azure.ResourceManager.TrackedResource<
-  NetworkDeviceProperties,
-  false
-> {
+@Azure.ResourceManager.Private.armResourceInternal(NetworkDeviceProperties)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkDevice extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Network Device.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -21,12 +22,15 @@ model NetworkDevice is Azure.ResourceManager.TrackedResource<
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @doc("The NetworkDevice properties")
+  properties: NetworkDeviceProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
-@@doc(NetworkDevice.properties, "The NetworkDevice properties");
 @armResourceOperations
 interface NetworkDevices {
   @doc("Gets the Network Device resource details.")
@@ -197,6 +201,24 @@ interface NetworkDevices {
     void,
     NetworkFabricResyncCertificatesResponse
   >;
+
+  @doc("Runs validation on the Network Device for the specified operation.")
+  @action("runValidation")
+  @added(Versions.v2026_07_15_preview)
+  runValidation is ArmResourceActionAsync<
+    NetworkDevice,
+    NetworkDeviceRunValidationRequest,
+    NetworkDeviceRunValidationResponse
+  >;
+
+  @doc("Runs a diagnostics operation on the Network Device.")
+  @action("runDiagnostics")
+  @added(Versions.v2026_07_15_preview)
+  runDiagnostics is ArmResourceActionAsync<
+    NetworkDevice,
+    NetworkDeviceRunDiagnosticsRequest,
+    NetworkDeviceRunDiagnosticsResponse
+  >;
 }
 
 @@doc(NetworkDevices.create::parameters.resource, "Request payload.");
@@ -226,3 +248,5 @@ interface NetworkDevices {
   "Request the command."
 );
 @@doc(NetworkDevices.runRwCommand::parameters.body, "Request the command.");
+@@doc(NetworkDevices.runValidation::parameters.body, "Request payload.");
+@@doc(NetworkDevices.runDiagnostics::parameters.body, "Request payload.");

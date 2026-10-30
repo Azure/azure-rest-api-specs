@@ -31,6 +31,13 @@ import "./models/NetworkBootstrapDevice.tsp";
 import "./models/NetworkBootstrapInterface.tsp";
 import "./models/EdgeConnector.tsp";
 import "./models/Fabric.tsp";
+import "./models/Vlan.tsp";
+import "./models/Vrf.tsp";
+import "./models/FabricDelegation.tsp";
+import "./models/VrfDelegation.tsp";
+import "./models/ServicePeer.tsp";
+import "./models/Network.tsp";
+import "./models/Peering.tsp";
 import "./resources/AccessControlList.tsp";
 import "./resources/InternetGatewayRule.tsp";
 import "./resources/InternetGateway.tsp";
@@ -59,6 +66,13 @@ import "./resources/NetworkBootstrapDevice.tsp";
 import "./resources/NetworkBootstrapInterface.tsp";
 import "./resources/EdgeConnector.tsp";
 import "./resources/Fabric.tsp";
+import "./resources/Vlan.tsp";
+import "./resources/Vrf.tsp";
+import "./resources/FabricDelegation.tsp";
+import "./resources/VrfDelegation.tsp";
+import "./resources/ServicePeer.tsp";
+import "./resources/Network.tsp";
+import "./resources/Peering.tsp";
 import "./back-compatible.tsp";
 import "./client.tsp";
 
@@ -90,4 +104,7 @@ enum Versions {
 
   @doc("2026-01-15-preview")
   v2026_01_15_preview: "2026-01-15-preview",
+
+  @doc("2026-07-15-preview")
+  v2026_07_15_preview: "2026-07-15-preview",
 }

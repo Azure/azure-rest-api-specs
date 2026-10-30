@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "resourceGroupName": "example-rg",
+    "api-version": "2026-07-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/fabrics/example-fabric",
+            "name": "example-fabric",
+            "type": "Microsoft.ManagedNetworkFabric/fabrics",
+            "location": "eastus",
+            "kind": "UserManaged",
+            "systemData": {
+              "createdBy": "example@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-04-15T00:00:00Z",
+              "lastModifiedBy": "example@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-04-15T00:00:00Z"
+            },
+            "properties": {
+              "description": "BYOF user-managed fabric in East US — all infrastructure networks (management, pxe, bmc, pdu, storage, ovn, vmLiveMigration), platform proxy, and tenant networking.",
+              "fabricSku": "M8-A100-A25-C16-ac",
+              "infrastructure": {
+                "networks": [
+                  {
+                    "purpose": "management",
+                    "name": "oam",
+                    "vlanId": 42,
+                    "ipv4Subnet": "10.49.6.0/24",
+                    "ipv4Gateway": "10.49.6.1",
+                    "ipv4StartAddr": "10.49.6.20",
+                    "ipv4EndAddr": "10.49.6.179",
+                    "ipv4Mtu": 1500
+                  },
+                  {
+                    "purpose": "pxe",
+                    "name": "pxe-boot",
+                    "vlanId": 41,
+                    "ipv4Subnet": "10.49.4.0/23",
+                    "ipv4Gateway": "10.49.4.1",
+                    "ipv4StartAddr": "10.49.4.20",
+                    "ipv4EndAddr": "10.49.4.179",
+                    "ipv4Mtu": 1500
+                  },
+                  {
+                    "purpose": "bmc",
+                    "name": "bmc-mgmt",
+                    "vlanId": 40,
+                    "ipv4Subnet": "10.49.3.0/24",
+                    "ipv4Gateway": "10.49.3.1",
+                    "ipv4StartAddr": "10.49.3.11",
+                    "ipv4EndAddr": "10.49.3.179",
+                    "ipv4Mtu": 1500
+                  },
+                  {
+                    "purpose": "pdu",
+                    "name": "pdu-mgmt",
+                    "vlanId": 38,
+                    "ipv4Subnet": "10.49.1.0/24",
+                    "ipv4Gateway": "10.49.1.1",
+                    "ipv4StartAddr": "10.49.1.20",
+                    "ipv4EndAddr": "10.49.1.179",
+                    "ipv4Mtu": 1500
+                  },
+                  {
+                    "purpose": "storage",
+                    "name": "storage-data",
+                    "vlanId": 43,
+                    "ipv4Subnet": "10.49.8.0/24",
+                    "ipv4Gateway": "10.49.8.1",
+                    "ipv4StartAddr": "10.49.8.20",
+                    "ipv4EndAddr": "10.49.8.179",
+                    "ipv4Mtu": 9000
+                  },
+                  {
+                    "purpose": "ovn",
+                    "name": "ovn-net",
+                    "vlanId": 44,
+                    "ipv4Subnet": "10.49.11.0/24",
+                    "ipv4Gateway": "10.49.11.1",
+                    "ipv4StartAddr": "10.49.11.8",
+                    "ipv4EndAddr": "10.49.11.254",
+                    "ipv4Mtu": 9000
+                  },
+                  {
+                    "purpose": "vmLiveMigration",
+                    "name": "livemig-net",
+                    "vlanId": 45,
+                    "ipv4Subnet": "10.49.7.0/24",
+                    "ipv4Gateway": "10.49.7.1",
+                    "ipv4StartAddr": "10.49.7.8",
+                    "ipv4EndAddr": "10.49.7.254",
+                    "ipv4Mtu": 9000
+                  }
+                ],
+                "proxyConfigs": [
+                  {
+                    "purpose": "platformProxy",
+                    "httpProxy": "http://10.252.34.5:3128",
+                    "httpsProxy": "http://10.252.34.5:3128",
+                    "noProxy": [
+                      ".svc",
+                      ".cluster.local",
+                      ".aods.local",
+                      ".networkcloud.local",
+                      "172.29.0.0/16",
+                      "172.28.0.0/16",
+                      "10.49.0.0/16",
+                      "fda0:d59c:da0a:3100::/56",
+                      "127.0.0.1",
+                      "::1",
+                      "localhost"
+                    ]
+                  }
+                ],
+                "ntpServers": [
+                  "10.252.34.5"
+                ],
+                "dnsServers": [
+                  "10.252.228.152"
+                ]
+              },
+              "tenant": {
+                "network": {
+                  "name": "tenant-proxy-net",
+                  "vlanId": 50,
+                  "ipv4Subnet": "10.49.10.0/24",
+                  "ipv4Gateway": "10.49.10.1",
+                  "ipv4StartAddr": "10.49.10.8",
+                  "ipv4EndAddr": "10.49.10.254",
+                  "ipv4Mtu": 1500
+                },
+                "proxyConfig": {
+                  "httpProxy": "http://10.252.254.93:3128",
+                  "httpsProxy": "http://10.252.254.93:3128"
+                }
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "title": "Fabrics_ListByResourceGroup_MaximumSet_Gen",
+  "operationId": "Fabrics_ListByResourceGroup"
+}
