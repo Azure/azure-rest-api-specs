@@ -34,7 +34,7 @@ These are the global settings for the AppService API.
 title: AppServiceManagementClient
 description: AppService Management Client
 openapi-type: arm
-tag: package-2026-11
+tag: package-2026-07
 ```
 
 ### Suppression
@@ -105,15 +105,6 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy/log"]
     reason: MSDeploy is the intentional name matching the existing service API.
-```
-
-### Tag: package-2026-11
-
-These settings apply only when `--tag=package-2026-11` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-11'
-input-file:
-    - stable/2026-11-01/openapi.json
 ```
 
 ### Tag: package-2026-07

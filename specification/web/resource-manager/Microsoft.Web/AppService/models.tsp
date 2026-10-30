@@ -5275,9 +5275,8 @@ model CertificateProperties {
   hostNames?: string[];
 
   /**
-   * Base64-encoded PFX certificate. For API version 2026-11-01 and later, this property
-   * must not be used together with `keyVaultId` or `keyVaultSecretName`, or to update
-   * an existing Key Vault-linked certificate.
+   * Base64-encoded PFX certificate. This property should not be used together with
+   * `keyVaultId` or `keyVaultSecretName`, or to update an existing Key Vault-linked certificate.
    */
   pfxBlob?: bytes;
 
@@ -5346,7 +5345,7 @@ model CertificateProperties {
   /**
    * Resource ID of the Azure Key Vault containing the certificate. Specify this property
    * together with `keyVaultSecretName` to import a certificate from Key Vault.
-   * For API version 2026-11-01 and later, this property must not be used together with `pfxBlob`.
+   * This property should not be used together with `pfxBlob`.
    */
   keyVaultId?: Azure.Core.armResourceIdentifier<[
     {
@@ -5357,7 +5356,7 @@ model CertificateProperties {
   /**
    * Name of the Azure Key Vault secret containing the certificate. Specify this property
    * together with `keyVaultId` to import a certificate from Key Vault.
-   * For API version 2026-11-01 and later, this property must not be used together with `pfxBlob`.
+   * This property should not be used together with `pfxBlob`.
    */
   keyVaultSecretName?: string;
 
