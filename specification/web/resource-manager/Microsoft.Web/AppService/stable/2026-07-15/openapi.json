@@ -2592,7 +2592,7 @@
             "headers": {
               "Location": {
                 "type": "string",
-                "description": "URL to poll for the managed certificate creation result."
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -2615,10 +2615,15 @@
           "Create Or Update PFX Certificate": {
             "$ref": "./examples/CreateOrUpdateCertificate.json"
           },
-          "Import a Key Vault certificate or App Service Certificate": {
+          "Import or sync a Key Vault certificate or App Service Certificate": {
             "$ref": "./examples/CreateOrUpdateKeyVaultCertificate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Certificate"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Certificates_Update",
