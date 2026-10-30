@@ -1452,10 +1452,20 @@
         "properties": {
           "$ref": "#/definitions/CapabilityProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/CapabilityKind",
+          "description": "The capability to enable, fixed when the capability is created.",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "allOf": [
         {
@@ -1537,14 +1547,6 @@
       "type": "object",
       "description": "Properties of a capability enabled for a workload space.",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/CapabilityKind",
-          "description": "The capability to enable, fixed when the capability is created.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "versionPolicy": {
           "type": "string",
           "description": "The version selection policy for the capability.",
@@ -1589,10 +1591,7 @@
           "description": "Actionable detail when the capability is not ready.",
           "readOnly": true
         }
-      },
-      "required": [
-        "kind"
-      ]
+      }
     },
     "CapabilitySetting": {
       "type": "object",
@@ -2029,10 +2028,20 @@
         "properties": {
           "$ref": "#/definitions/RuntimeBindingProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/RuntimeBindingKind",
+          "description": "The runtime technology, fixed when the binding is created.",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "allOf": [
         {
@@ -2115,14 +2124,6 @@
           "description": "Actionable detail when the binding is not ready.",
           "readOnly": true
         },
-        "kind": {
-          "$ref": "#/definitions/RuntimeBindingKind",
-          "description": "The runtime technology, fixed when the binding is created.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "provisioningMode": {
           "$ref": "#/definitions/RuntimeBindingProvisioningMode",
           "description": "Indicates whether Workload Manager owns or references the runtime.",
@@ -2142,7 +2143,6 @@
       },
       "discriminator": "provisioningMode",
       "required": [
-        "kind",
         "provisioningMode"
       ]
     },

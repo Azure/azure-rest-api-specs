@@ -345,10 +345,6 @@ model RuntimeBindingReadOnlyProperties {
 model RuntimeBindingProperties {
   ...RuntimeBindingReadOnlyProperties;
 
-  /** The runtime technology, fixed when the binding is created. */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  kind: RuntimeBindingKind;
-
   /** Indicates whether Workload Manager owns or references the runtime. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
   provisioningMode: RuntimeBindingProvisioningMode;
@@ -388,6 +384,12 @@ model RuntimeBinding is ProxyResource<RuntimeBindingProperties, false> {
     SegmentName = "runtimeBindings",
     NamePattern = "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
   >;
+
+  /** The runtime technology, fixed when the binding is created. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Standard ARM kind is intentionally required for runtime selection; the shared ResourceKindProperty mix-in declares it optional."
+  @pattern("^[-\\w\\._,\\(\\\\\\)]+$")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  kind: RuntimeBindingKind;
 }
 
 /** Identity configuration used to integrate runtime bindings. */
@@ -484,10 +486,6 @@ model CapabilitySetting {
 
 /** Properties of a capability enabled for a workload space. */
 model CapabilityProperties {
-  /** The capability to enable, fixed when the capability is created. */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  kind: CapabilityKind;
-
   /** The version selection policy for the capability. */
   versionPolicy?: VersionPolicy = VersionPolicy.ServiceManaged;
 
@@ -517,6 +515,12 @@ model Capability is ProxyResource<CapabilityProperties, false> {
     SegmentName = "capabilities",
     NamePattern = "^(?![.-])[A-Za-z0-9_.-]{1,64}$"
   >;
+
+  /** The capability to enable, fixed when the capability is created. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Standard ARM kind is intentionally required for capability selection; the shared ResourceKindProperty mix-in declares it optional."
+  @pattern("^[-\\w\\._,\\(\\\\\\)]+$")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  kind: CapabilityKind;
 }
 
 /** Mutable properties of a workload space. */
