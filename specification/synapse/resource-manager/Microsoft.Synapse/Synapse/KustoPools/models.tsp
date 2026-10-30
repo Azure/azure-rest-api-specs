@@ -729,6 +729,7 @@ model Operation {
   /**
    * Properties of the operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The published operations list declares properties as an untyped object with no schema."
   properties?: unknown;
 }
 
