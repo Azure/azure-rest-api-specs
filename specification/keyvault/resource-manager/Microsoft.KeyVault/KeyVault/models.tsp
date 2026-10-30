@@ -1036,6 +1036,10 @@ model ManagedHsmKeyReleasePolicy {
  * Parameters for creating or updating a vault
  */
 model VaultCreateOrUpdateParameters {
+  /** Managed service identity assigned to the vault. */
+  @Versioning.added(Versions.v2026_10_01_preview)
+  identity?: CommonTypes.ManagedServiceIdentity;
+
   /**
    * The supported Azure location where the key vault should be created.
    */
@@ -1470,6 +1474,10 @@ model CloudErrorBody {
  * Parameters for creating or updating a vault
  */
 model VaultPatchParameters {
+  /** Managed service identity assigned to the vault. */
+  @Versioning.added(Versions.v2026_10_01_preview)
+  identity?: CommonTypes.ManagedServiceIdentity;
+
   /**
    * The tags that will be assigned to the key vault.
    */
