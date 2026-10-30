@@ -1528,6 +1528,7 @@ model ContainerRegistryReference {
   password?: string;
 
   @doc("The registry URL. If omitted, the default is \"docker.io\".")
+  @typeChangedFrom(Versions.v2026_10_01, url)
   registryServer?: string;
 
   @doc("The reference to the user assigned identity to use to access an Azure Container Registry instead of username and password.")
@@ -4196,6 +4197,7 @@ model InboundEndpoint {
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The public IP address of the Compute Node.")
   @clientName("publicIpAddress")
+  @typeChangedFrom(Versions.v2026_10_01, ipV4Address)
   publicIPAddress: string;
 
   @doc("The public fully qualified domain name for the Compute Node.")

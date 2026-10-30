@@ -14959,6 +14959,7 @@
         },
         "registryServer": {
           "type": "string",
+          "format": "uri",
           "description": "The registry URL. If omitted, the default is \"docker.io\"."
         },
         "identityReference": {
@@ -15489,7 +15490,7 @@
           "description": "The protocol of the endpoint."
         },
         "publicIPAddress": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.ipV4Address",
           "description": "The public IP address of the Compute Node.",
           "x-ms-client-name": "publicIpAddress"
         },
