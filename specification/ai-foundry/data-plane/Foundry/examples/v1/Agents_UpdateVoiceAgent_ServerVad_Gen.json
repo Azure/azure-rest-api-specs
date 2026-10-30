@@ -10,6 +10,18 @@
       "kind": "voice",
       "model_type": "managed",
       "model": "gpt-4.1",
+      "post_call": {
+        "destinations": [
+          {
+            "type": "routine",
+            "name": "archive"
+          },
+          {
+            "type": "routine",
+            "name": "analysis"
+          }
+        ]
+      },
       "audio": {
         "input": {
           "noise_reduction": {
@@ -54,6 +66,18 @@
               "kind": "voice",
               "model_type": "managed",
               "model": "gpt-4.1",
+              "post_call": {
+                "destinations": [
+                  {
+                    "type": "routine",
+                    "name": "archive"
+                  },
+                  {
+                    "type": "routine",
+                    "name": "analysis"
+                  }
+                ]
+              },
               "audio": {
                 "input": {
                   "noise_reduction": {
