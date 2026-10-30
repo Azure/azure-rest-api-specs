@@ -1,0 +1,67 @@
+{
+  "operationId": "RaiPolicies_CreateOrUpdate",
+  "parameters": {
+    "accountName": "safety-account",
+    "api-version": "2026-11-01",
+    "If-None-Match": "*",
+    "raiPolicyName": "agent-guard",
+    "raiPolicy": {
+      "properties": {
+        "customBlocklists": [
+          {
+            "blocklistName": "blocked-terms",
+            "source": "Prompt",
+            "blocking": true
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Create an ACS policy with optional policy dependencies",
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000003\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiPolicies/agent-guard",
+        "name": "agent-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiPolicies",
+        "etag": "\"00000000-0000-0000-0000-000000000003\"",
+        "properties": {
+          "type": "UserManaged",
+          "customBlocklists": [
+            {
+              "blocklistName": "blocked-terms",
+              "source": "Prompt",
+              "blocking": true
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000003\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiPolicies/agent-guard",
+        "name": "agent-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiPolicies",
+        "etag": "\"00000000-0000-0000-0000-000000000003\"",
+        "properties": {
+          "type": "UserManaged",
+          "customBlocklists": [
+            {
+              "blocklistName": "blocked-terms",
+              "source": "Prompt",
+              "blocking": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}
