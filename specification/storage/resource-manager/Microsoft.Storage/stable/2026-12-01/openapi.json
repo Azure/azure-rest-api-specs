@@ -1222,11 +1222,27 @@
             "type": "string",
             "enum": [
               "geoReplicationStats",
-              "blobRestoreStatus"
+              "blobRestoreStatus",
+              "availableFeatures"
             ],
             "x-ms-enum": {
               "name": "StorageAccountExpand",
-              "modelAsString": false
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "geoReplicationStats",
+                  "value": "geoReplicationStats"
+                },
+                {
+                  "name": "blobRestoreStatus",
+                  "value": "blobRestoreStatus"
+                },
+                {
+                  "name": "availableFeatures",
+                  "value": "availableFeatures",
+                  "description": "Includes the list of features available for the storage account in the response."
+                }
+              ]
             }
           }
         ],
@@ -1250,6 +1266,9 @@
           },
           "StorageAccountGetProperties": {
             "$ref": "./examples/StorageAccountGetProperties.json"
+          },
+          "StorageAccountGetPropertiesAvailableFeatures": {
+            "$ref": "./examples/StorageAccountGetPropertiesAvailableFeatures.json"
           },
           "StorageAccountGetPropertiesCMKEnabled": {
             "$ref": "./examples/StorageAccountGetPropertiesCMKEnabled.json"
@@ -17712,6 +17731,14 @@
         "allowCrossTenantDelegationSas": {
           "type": "boolean",
           "description": "Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property."
+        },
+        "availableFeatures": {
+          "type": "array",
+          "description": "The list of features available for the storage account. This property is only returned when $expand=availableFeatures is specified.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     },
