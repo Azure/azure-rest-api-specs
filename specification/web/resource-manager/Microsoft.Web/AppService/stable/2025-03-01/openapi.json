@@ -2173,6 +2173,20 @@
               "$ref": "#/definitions/Certificate"
             }
           },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2181,10 +2195,21 @@
           }
         },
         "x-ms-examples": {
-          "Create Or Update Certificate": {
+          "Create App Service Managed Certificate": {
+            "$ref": "./examples/CreateOrUpdateManagedCertificate.json"
+          },
+          "Create Or Update PFX Certificate": {
             "$ref": "./examples/CreateOrUpdateCertificate.json"
+          },
+          "Import or sync a Key Vault certificate or App Service Certificate": {
+            "$ref": "./examples/CreateOrUpdateKeyVaultCertificate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Certificate"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Certificates_Update",
@@ -41553,7 +41578,7 @@
         },
         "domainValidationMethod": {
           "type": "string",
-          "description": "Method of domain validation for free cert"
+          "description": "Domain validation method for an App Service Managed Certificate. Supported values are\n`http-token` (HTTP token validation) and `cname-delegation` (CNAME delegation).\nHTTP token validation is used for apex domains and when CNAME validation is disabled."
         }
       }
     },
@@ -41585,7 +41610,7 @@
         "pfxBlob": {
           "type": "string",
           "format": "byte",
-          "description": "Pfx blob."
+          "description": "Base64-encoded PFX certificate. This property should not be used together with\n`keyVaultId` or `keyVaultSecretName`, or to update an existing Key Vault-linked certificate."
         },
         "siteName": {
           "type": "string",
@@ -41643,7 +41668,7 @@
         "keyVaultId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Azure Key Vault Csm resource Id.",
+          "description": "Resource ID of the Azure Key Vault containing the certificate. Specify this property\ntogether with `keyVaultSecretName` to import a certificate from Key Vault.\nThis property should not be used together with `pfxBlob`.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -41654,7 +41679,7 @@
         },
         "keyVaultSecretName": {
           "type": "string",
-          "description": "Azure Key Vault secret name."
+          "description": "Name of the Azure Key Vault secret containing the certificate. Specify this property\ntogether with `keyVaultId` to import a certificate from Key Vault.\nThis property should not be used together with `pfxBlob`."
         },
         "keyVaultSecretStatus": {
           "$ref": "#/definitions/KeyVaultSecretStatus",
@@ -41679,7 +41704,7 @@
         },
         "domainValidationMethod": {
           "type": "string",
-          "description": "Method of domain validation for free cert"
+          "description": "Domain validation method for an App Service Managed Certificate. Supported values are\n`http-token` (HTTP token validation) and `cname-delegation` (CNAME delegation).\nHTTP token validation is used for apex domains and when CNAME validation is disabled."
         }
       }
     },

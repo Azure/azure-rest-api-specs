@@ -88,6 +88,11 @@ directive:
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     from: openapi.json
     reason: Retroactive addition of missing examples out of scope at this time.
+  - suppress: RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/certificates/{name}"].put
+    text-matches: "Following response status codes (200|202) for operation Certificates_CreateOrUpdate "
+    reason: PFX and Key Vault imports return 200, while managed certificate creation returns 202. The separate examples collectively cover both responses without showing responses that do not apply to a scenario.
   - suppress: PathResourceTypeNameCamelCase
     from: openapi.json
     where:
