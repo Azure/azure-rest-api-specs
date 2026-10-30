@@ -123,56 +123,39 @@ using Microsoft.NetApp;
 @@clientName(QuotaItemList, "SubscriptionQuotaItemList", "go");
 @@clientName(QuotaItemProperties, "SubscriptionQuotaItemProperties", "go");
 
+@@clientName(ExternalSvm, "ExternalSVM", "go");
+@@clientName(ExternalSvmProperties, "ExternalSVMProperties", "go");
+@@clientName(ExternalSvmList, "ExternalSVMList", "go");
 @@clientName(ExternalSvms, "ExternalSVMs", "go");
-@@clientName(SvmPeers, "SVMPeers", "go");
-
-// ARM synthesizes these path parameters, so rename them through Go-only overrides.
-/** Microsoft NetApp Files Azure Resource Provider specification */
-namespace Microsoft.NetApp {
-  namespace GoCustomizations {
-    /** Shared path and API version parameters for the Go ExternalCaches overrides. */
-    model ExternalCacheParentParameters {
-      ...Azure.ResourceManager.Foundations.ResourceGroupBaseParameters;
-      ...Azure.ResourceManager.ProviderNamespace<Microsoft.NetApp.ExternalCache>;
-
-      /** The name of the ExternalCluster */
-      @TypeSpec.Http.path
-      externalClusterName: string;
-
-      /** The name of the ExternalSvm */
-      @TypeSpec.Http.path
-      @clientName("externalSVMName", "go")
-      externalSvmName: string;
-    }
-
-    /** Template signatures customize Go methods without declaring additional REST operations. */
-    interface ExternalCaches<
-      Parameters extends {} = ExternalCacheParentParameters
-    > {
-      /** Get the External Cache */
-      get(
-        ...Parameters,
-
-        /** The externalCacheName with unique identifier added and leading underscores (if any) removed. */
-        @TypeSpec.Http.path
-        externalCacheResourceName: string,
-      ): Microsoft.NetApp.ExternalCache;
-
-      /** List all External Caches under an External SVM */
-      @list
-      listByParent(...Parameters): Microsoft.NetApp.ExternalCacheList;
-    }
-  }
-}
-
-@@override(
-  ExternalCaches.get,
-  Microsoft.NetApp.GoCustomizations.ExternalCaches.get,
+@@clientName(ExternalSvmProperties.ontapSvmName, "ontapSVMName", "go");
+@@clientName(
+  ExternalSvmProperties.svmPeerResourceIds,
+  "SVMPeerResourceIDs",
   "go"
 );
-@@override(
-  ExternalCaches.listByParent,
-  Microsoft.NetApp.GoCustomizations.ExternalCaches.listByParent,
+
+@@clientName(SvmPeer, "SVMPeer", "go");
+@@clientName(SvmPeerProperties, "SVMPeerProperties", "go");
+@@clientName(SvmPeerList, "SVMPeerList", "go");
+@@clientName(SvmPeers, "SVMPeers", "go");
+@@clientName(SvmPeerStatus, "SVMPeerStatus", "go");
+@@clientName(SvmPeerType, "SVMPeerType", "go");
+@@clientName(SvmPeerProperties.anfSvmName, "anfSVMName", "go");
+@@clientName(
+  SvmPeerProperties.externalSvmResourceId,
+  "externalSVMResourceID",
+  "go"
+);
+
+@@clientName(ExternalCacheProperties.originSvmName, "originSVMName", "go");
+@@clientName(
+  ExternalCacheConnectionProperties.externalSvmResourceId,
+  "externalSVMResourceID",
+  "go"
+);
+@@clientName(
+  ExternalCacheConnectionProperties.svmPeerResourceId,
+  "SVMPeerResourceID",
   "go"
 );
 
