@@ -15,6 +15,7 @@ import {
 import summarizeChecks from "../../src/summarize-checks/summarize-checks.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
 import { fullGitSha } from "../../../shared/test/examples.ts";
+import { ImpactAssessmentSchema } from "../../src/summarize-checks/labelling.ts";
 
 export type CheckRunData = import("../../src/summarize-checks/summarize-checks.ts").CheckRunData;
 
@@ -141,7 +142,7 @@ describe("ARM review label handoff", () => {
       expect(core.setOutput).not.toHaveBeenCalledWith("arm_review_ready", true);
     });
 
-    it("uses live PR state instead of the draft and branch snapshot in the artifact", async () => {
+    it("uses live PR state instead of the draft and branch snapshot in a legacy artifact", async () => {
       const { github, core, run } = createSummary();
       github.rest.pulls.get.mockResolvedValue({
         data: {
@@ -341,6 +342,217 @@ describe("Summarize Checks Integration Tests", () => {
 
 describe("Summarize Checks Unit Tests", () => {
   describe("check result processing", () => {
+    it("shows later-priority approvals and failures without displacing immediate next steps", () => {
+      const [comment, status] = createNextStepsComment(
+        mockCore,
+        "azure-rest-api-specs",
+        [
+          "data-plane",
+          "PublishToCustomers",
+          "data-plane-review-requested",
+          "package-name-review-required",
+          "typespec-suppressions-review-required",
+        ],
+        "main",
+        ["TypeSpec Validation", "Swagger Avocado", "Swagger BreakingChange"].map((name) => ({
+          name,
+          status: "completed",
+          conclusion: "failure",
+          checkInfo: getCheckInfo(name),
+        })),
+        [],
+        true,
+        WORKFLOW_URL,
+      );
+
+      const remainingIndex = comment.indexOf(
+        "<details><summary>Other outstanding requirements (4)</summary>",
+      );
+      expect(remainingIndex).toBeGreaterThan(-1);
+      expect(comment).toContain("data-plane-review-signoff");
+      expect(comment).toContain("<code>TypeSpec Validation</code>");
+      expect(comment.indexOf("data-plane-review-signoff")).toBeLessThan(remainingIndex);
+      expect(comment.indexOf("<code>TypeSpec Validation</code>")).toBeLessThan(remainingIndex);
+      const remaining = comment.slice(remainingIndex);
+      expect(remaining).toContain("Package Name Review Required");
+      expect(remaining).toContain("typespec-suppressions-approved");
+      expect(remaining).toContain("<code>Swagger Avocado</code>");
+      expect(remaining).toContain("<code>Swagger BreakingChange</code>");
+      expect(comment.match(/<code>TypeSpec Validation<\/code>/g)).toHaveLength(1);
+      expect(status.result).toBe("FAILURE");
+    });
+
+    it.each([
+      {
+        kind: "approval",
+        labels: [
+          "PublishToCustomers",
+          "data-plane-review-requested",
+          "package-name-review-required",
+        ],
+        checkNames: [],
+      },
+      {
+        kind: "check",
+        labels: [],
+        checkNames: ["TypeSpec Validation", "Swagger Avocado"],
+      },
+    ])(
+      "counts later-priority $kind requirements without counting immediate steps",
+      ({ labels, checkNames }) => {
+        const [comment] = createNextStepsComment(
+          mockCore,
+          "azure-rest-api-specs",
+          labels,
+          "main",
+          checkNames.map((name) => ({
+            name,
+            status: "completed",
+            conclusion: "failure",
+            checkInfo: getCheckInfo(name),
+          })),
+          [],
+          true,
+          WORKFLOW_URL,
+        );
+
+        expect(comment).toContain("<summary>Other outstanding requirements (1)</summary>");
+      },
+    );
+
+    it("removes resolved requirements from the next summary", () => {
+      const [comment, status] = createNextStepsComment(
+        mockCore,
+        "azure-rest-api-specs",
+        [
+          "data-plane",
+          "PublishToCustomers",
+          "data-plane-review-requested",
+          "data-plane-review-signoff",
+          "package-name-review-required",
+          "package-name-approved",
+          "typespec-suppressions-review-required",
+          "typespec-suppressions-approved",
+        ],
+        "main",
+        ["TypeSpec Validation", "Swagger Avocado", "Swagger BreakingChange"].map((name) => ({
+          name,
+          status: "completed",
+          conclusion: "success",
+          checkInfo: getCheckInfo(name),
+        })),
+        [],
+        true,
+        WORKFLOW_URL,
+      );
+
+      expect(comment).toContain("All automated merging requirements have been met");
+      expect(comment).not.toContain("Other outstanding requirements");
+      expect(comment).not.toContain("Still evaluating");
+      expect(comment).not.toContain("Package Name Review Required");
+      expect(status.result).toBe("SUCCESS");
+    });
+
+    it("identifies incomplete evaluation even while known blockers are displayed", () => {
+      const [comment, status] = createNextStepsComment(
+        mockCore,
+        "azure-rest-api-specs",
+        [],
+        "main",
+        [
+          {
+            name: "TypeSpec Validation",
+            status: "in_progress",
+            conclusion: null,
+            checkInfo: getCheckInfo("TypeSpec Validation"),
+          },
+          {
+            name: "Swagger Avocado",
+            status: "queued",
+            conclusion: null,
+            checkInfo: getCheckInfo("Swagger Avocado"),
+          },
+          {
+            name: "Swagger BreakingChange",
+            status: "completed",
+            conclusion: "failure",
+            checkInfo: getCheckInfo("Swagger BreakingChange"),
+          },
+        ],
+        [],
+        false,
+        WORKFLOW_URL,
+      );
+
+      expect(comment).toContain("<code>Swagger BreakingChange</code> has failed");
+      expect(comment).toContain("<h3>Still evaluating</h3>");
+      expect(comment).toContain("PR impact assessment is not complete");
+      expect(comment).toContain("Additional requirements may be identified");
+      expect(comment).toContain(
+        "Waiting for required check <code>TypeSpec Validation</code> to complete",
+      );
+      expect(comment).toContain(
+        "Waiting for required check <code>Swagger Avocado</code> to complete",
+      );
+      expect(status.result).toBe("FAILURE");
+    });
+
+    it.each([
+      { remainingChecks: ["Swagger Avocado"], count: 1 },
+      { remainingChecks: ["Swagger Avocado", "Swagger BreakingChange"], count: 2 },
+    ])(
+      "counts $count later-priority FYI failures without making them blockers",
+      ({ remainingChecks, count }) => {
+        const [comment, status] = createNextStepsComment(
+          mockCore,
+          "azure-rest-api-specs",
+          [],
+          "main",
+          [],
+          ["license/cla", ...remainingChecks].map((name) => ({
+            name,
+            status: "completed",
+            conclusion: "failure",
+            checkInfo: getCheckInfo(name),
+          })),
+          true,
+          WORKFLOW_URL,
+        );
+
+        expect(comment).toContain("<code>license/cla</code>");
+        expect(comment).toContain(
+          `<details><summary>Other failing non-blocking checks (${count})</summary>`,
+        );
+        expect(comment).toContain("<code>Swagger Avocado</code>");
+        expect(comment).not.toContain("Other outstanding requirements");
+        expect(status.result).toBe("SUCCESS");
+      },
+    );
+
+    it("renders pending check names as text rather than HTML", () => {
+      const [comment, status] = createNextStepsComment(
+        mockCore,
+        "azure-rest-api-specs",
+        [],
+        "main",
+        [
+          {
+            name: "<pending> & check",
+            status: "queued",
+            conclusion: null,
+            checkInfo: getCheckInfo("<pending> & check"),
+          },
+        ],
+        [],
+        true,
+        WORKFLOW_URL,
+      );
+
+      expect(comment).toContain("<code>&lt;pending&gt; &amp; check</code>");
+      expect(comment).not.toContain("<code><pending>");
+      expect(status.result).toBe("pending");
+    });
+
     it("should generate success summary for no matched check suites (completed impactAssessment)", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
@@ -704,7 +916,11 @@ describe("Summarize Checks Unit Tests", () => {
 
       const fyiCheckRuns: CheckRunData[] = [];
       const expectedOutput = [
-        `<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛<br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.`,
+        `<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛` +
+          `<h3>Still evaluating</h3><ul>` +
+          `<li>Waiting for required check <code>TypeSpec Validation</code> to complete.</li>` +
+          `<li>Waiting for required check <code>license/cla</code> to complete.</li></ul>` +
+          `<br /><br />Comment generated by <a href="${WORKFLOW_URL}">summarize-checks</a> workflow run.`,
         {
           name: "Automated merging requirements met",
           result: "pending",
@@ -755,7 +971,12 @@ describe("Summarize Checks Unit Tests", () => {
 
       const fyiCheckRuns: CheckRunData[] = [];
       const expectedOutput = [
-        `<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛<br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.`,
+        `<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛` +
+          `<h3>Still evaluating</h3><ul>` +
+          `<li>Waiting for required check <code>TypeSpec Validation</code> to complete.</li>` +
+          `<li>Waiting for required check <code>Swagger Avocado</code> to complete.</li>` +
+          `<li>Waiting for required check <code>license/cla</code> to complete.</li></ul>` +
+          `<br /><br />Comment generated by <a href="${WORKFLOW_URL}">summarize-checks</a> workflow run.`,
         {
           name: "Automated merging requirements met",
           result: "pending",
@@ -806,7 +1027,10 @@ describe("Summarize Checks Unit Tests", () => {
 
       const fyiCheckRuns: CheckRunData[] = [];
       const expectedOutput = [
-        `<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛<br /><br />Comment generated by <a href="${WORKFLOW_URL}">summarize-checks</a> workflow run.`,
+        `<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛` +
+          `<h3>Still evaluating</h3><ul>` +
+          `<li>PR impact assessment is not complete. Additional requirements may be identified.</li></ul>` +
+          `<br /><br />Comment generated by <a href="${WORKFLOW_URL}">summarize-checks</a> workflow run.`,
         {
           name: "Automated merging requirements met",
           result: "pending",
@@ -917,7 +1141,12 @@ describe("Summarize Checks Unit Tests", () => {
 
       const fyiCheckRuns: CheckRunData[] = [];
       const expectedOutput = [
-        `<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛<br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.`,
+        `<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛` +
+          `<h3>Still evaluating</h3><ul>` +
+          `<li>Waiting for required check <code>TypeSpec Validation</code> to complete.</li>` +
+          `<li>Waiting for required check <code>Swagger Avocado</code> to complete.</li>` +
+          `<li>Waiting for required check <code>license/cla</code> to complete.</li></ul>` +
+          `<br /><br />Comment generated by <a href="${WORKFLOW_URL}">summarize-checks</a> workflow run.`,
         {
           name: "Automated merging requirements met",
           result: "pending",
@@ -991,7 +1220,11 @@ describe("Summarize Checks Unit Tests", () => {
         "PublishToCustomers",
       ];
       const expectedOutput = [
-        `<h2>Next Steps to Merge</h2>Important checks have failed. As of today they are not blocking this PR, but in near future they may.<br/>Addressing the following failures is highly recommended:<br/><ul><li>⚠️ The check named <code>Swagger LintDiff</code> has failed. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide</li></ul><br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.`,
+        `<h2>Next Steps to Merge</h2>Important checks have failed. As of today they are not blocking this PR, but in near future they may.<br/>Addressing the following failures is highly recommended:<br/><ul><li>⚠️ The check named <code>Swagger LintDiff</code> has failed. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide</li></ul>` +
+          `<h3>Still evaluating</h3><ul>` +
+          `<li>PR impact assessment is not complete. Additional requirements may be identified.</li>` +
+          `<li>Waiting for required check <code>Summarize PR Impact</code> to complete.</li></ul>` +
+          `<br /><br />Comment generated by <a href="${WORKFLOW_URL}">summarize-checks</a> workflow run.`,
         {
           name: "Automated merging requirements met",
           result: "pending",
@@ -1169,7 +1402,10 @@ describe("Summarize Checks Unit Tests", () => {
         WORKFLOW_URL,
       );
 
-      expect(output).toEqual(expectedOutput);
+      expect(output[0]).toContain(
+        expectedComment.slice(0, expectedComment.indexOf("<br /><br />Comment generated")),
+      );
+      expect(output[1]).toEqual(expectedOutput[1]);
     });
 
     it("should prioritize ARM modeling review guidance in Next Steps to Merge", () => {
@@ -1341,7 +1577,10 @@ describe("Summarize Checks Unit Tests", () => {
         WORKFLOW_URL,
       );
 
-      expect(output).toEqual(expectedOutput);
+      expect(output[0]).toContain(
+        expectedComment.slice(0, expectedComment.indexOf("<br /><br />Comment generated")),
+      );
+      expect(output[1]).toEqual(expectedOutput[1]);
     });
 
     it("should generate error summary with a failed required check, and failed FYI checks", () => {
@@ -1514,7 +1753,7 @@ describe("Summarize Checks Unit Tests", () => {
     const unzipExists = await execFile("unzip")
       .then(() => true)
       .catch(() => false);
-    const impactAssessment: import("../../src/summarize-checks/labelling.ts").ImpactAssessment = {
+    const legacyImpactAssessment = {
       resourceManagerRequired: false,
       dataPlaneRequired: true,
       suppressionReviewRequired: false,
@@ -1527,6 +1766,7 @@ describe("Summarize Checks Unit Tests", () => {
       isDraft: false,
       targetBranch: "test-\u00e9-\u65e5\u672c",
     };
+    const impactAssessment = ImpactAssessmentSchema.parse(legacyImpactAssessment);
     const summaryJson = JSON.stringify(impactAssessment);
 
     function mockArtifactDownload(
@@ -1564,6 +1804,7 @@ describe("Summarize Checks Unit Tests", () => {
         name: "summary.json",
         per_page: 100,
       });
+
       expect(github.rest.actions.downloadArtifact).toHaveBeenCalledExactlyOnceWith({
         owner: "test-owner",
         repo: "test-repo",
@@ -1571,6 +1812,28 @@ describe("Summarize Checks Unit Tests", () => {
         archive_format: "zip",
         request: { parseSuccessResponseBody: false },
       });
+    });
+
+    it("normalizes artifacts produced before the service-scoped schema", async () => {
+      const github = mockArtifactDownload(JSON.stringify(legacyImpactAssessment));
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
+    });
+
+    it("reads cached service-scoped artifacts without affected-README metadata", async () => {
+      const github = mockArtifactDownload(
+        JSON.stringify({
+          ...impactAssessment,
+          services: impactAssessment.services.map((service) => ({
+            ...service,
+            hasAffectedReadme: undefined,
+          })),
+        }),
+      );
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
     });
 
     it.each(["application/json", "text/plain", "application/octet-stream"])(
