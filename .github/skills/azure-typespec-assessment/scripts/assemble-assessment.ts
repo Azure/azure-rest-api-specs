@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { deriveSafety, dimensionStatus } from "./assessment-display.ts";
+import { deriveSafety, dimensionCompatibility } from "./assessment-display.ts";
 import { sameAutorestContract } from "./autorest-contract.ts";
 import { isMain, parseArgs, readJsonObject, runMain, writeJson } from "./cli.ts";
 import { assembleCompliance } from "./compliance-assessment.ts";
@@ -1223,32 +1223,40 @@ export function assembleAssessment({
     ...downstream.facts,
   });
   addReciprocalRelations(semanticItems, restFindings, downstreamAggregation);
+  const rejectedRestCandidateCount = answer.restDecisions.filter(
+    (item) => item.decision === "reject",
+  ).length;
   const restDimension = {
-    status: dimensionStatus(
+    ...dimensionCompatibility(
       rest.status === "blocked" ||
+        rest.blockers.length > 0 ||
         inferenceBlockers.some((blocker) => blocker.allowedDimensions.includes("rest")),
       restFindings,
+      restFindings.length + rejectedRestCandidateCount,
     ),
     findings: restFindings,
-    rejectedCandidateCount: answer.restDecisions.filter((item) => item.decision === "reject")
-      .length,
+    rejectedCandidateCount: rejectedRestCandidateCount,
     blockers: [
       ...rest.blockers,
       ...inferenceBlockers.filter((blocker) => blocker.allowedDimensions.includes("rest")),
     ],
   };
+  const rejectedDownstreamCandidateCount = answer.downstreamDecisions.filter(
+    (item) => item.decision === "reject",
+  ).length;
   const downstreamDimension = {
-    status: dimensionStatus(
+    ...dimensionCompatibility(
       downstream.status === "blocked" ||
+        downstream.blockers.length > 0 ||
         inferenceBlockers.some((blocker) => blocker.allowedDimensions.includes("downstream")),
       downstreamFindings,
+      downstreamFindings.length + rejectedDownstreamCandidateCount,
     ),
     findings: downstreamFindings,
     methodGroups: downstreamAggregation.methodGroups,
     typeImpacts: downstreamAggregation.typeImpacts,
     rootCauses: downstream.rootCauses ?? [],
-    rejectedCandidateCount: answer.downstreamDecisions.filter((item) => item.decision === "reject")
-      .length,
+    rejectedCandidateCount: rejectedDownstreamCandidateCount,
     blockers: [
       ...downstream.blockers,
       ...inferenceBlockers.filter((blocker) => blocker.allowedDimensions.includes("downstream")),

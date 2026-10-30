@@ -3,6 +3,7 @@ parameters:
     default: "sdk/ai"
 emit:
   - "@typespec/openapi3"
+  - "./emitters/voice-event-reference.mjs"
 options:
   "@typespec/openapi3":
     emitter-output-dir: "{project-root}/"
@@ -18,6 +19,8 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/json-schema"
     file-type: json
     bundleId: azure-ai-agents-v2.json
+  "foundry-voice-events":
+    emitter-output-dir: "{project-root}/event-schemas"
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"
