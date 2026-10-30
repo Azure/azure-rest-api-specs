@@ -25,6 +25,7 @@ using TypeSpec.Versioning;
 /**
  * Azure Synapse Analytics management API for integration runtimes, their nodes, and their status, metadata, authentication key, and monitoring operations.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "The shared Microsoft.Synapse operations endpoint is defined once, in the Synapse Workspaces project."
 @armProviderNamespace("Microsoft.Synapse")
 @service(#{ title: "SynapseManagementClient" })
 @versioned(Versions)

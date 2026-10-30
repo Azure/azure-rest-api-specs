@@ -23,6 +23,7 @@ model IntegrationRuntimeResource is Azure.ResourceManager.ProxyResource<
     SegmentName = "integrationRuntimes",
     NamePattern = ""
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "EntityTagProperty models the read-only etag that the published integration runtime resource already returns."
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
