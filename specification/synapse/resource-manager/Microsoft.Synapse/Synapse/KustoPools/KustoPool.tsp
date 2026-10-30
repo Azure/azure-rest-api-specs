@@ -57,14 +57,14 @@ interface KustoPools {
       /**
        * The ETag of the Kusto Pool. Omit this value to always overwrite the current Kusto Pool. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
-      IfMatch?: string;
+      @header("If-Match")
+      ifMatch?: string;
 
       /**
        * Set to '*' to allow a new Kusto Pool to be created, but to prevent updating an existing Kusto Pool. Other values will result in a 412 Pre-condition Failed response.
        */
-      @header
-      IfNoneMatch?: string;
+      @header("If-None-Match")
+      ifNoneMatch?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = KustoPool> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -82,8 +82,8 @@ interface KustoPools {
       /**
        * The ETag of the Kusto Pool. Omit this value to always overwrite the current Kusto Pool. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
-      IfMatch?: string;
+      @header("If-Match")
+      ifMatch?: string;
     },
     Response =
       | ArmResponse<KustoPool>
