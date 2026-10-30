@@ -1497,6 +1497,7 @@ model PrivateLinkResourcesProperties {
 /**
  * Class representing a read write database.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Polymorphic subtype of the brownfield Database base; inherits its custom resource marking to keep the published OpenAPI shape."
 model ReadWriteDatabase extends Database {
   /**
    * The database properties.
@@ -1555,6 +1556,7 @@ model DatabaseStatistics {
 /**
  * Class representing a read only following database.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Polymorphic subtype of the brownfield Database base; inherits its custom resource marking to keep the published OpenAPI shape."
 model ReadOnlyFollowingDatabase extends Database {
   /**
    * The database properties.
@@ -1616,6 +1618,7 @@ model ReadOnlyFollowingDatabaseProperties {
 /**
  * Class representing an event hub data connection.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Polymorphic subtype of the brownfield DataConnection base; inherits its custom resource marking to keep the published OpenAPI shape."
 model EventHubDataConnection extends DataConnection {
   /**
    * The Event Hub data connection properties to validate.
@@ -1682,6 +1685,7 @@ model EventHubConnectionProperties {
 /**
  * Class representing an iot hub data connection.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Polymorphic subtype of the brownfield DataConnection base; inherits its custom resource marking to keep the published OpenAPI shape."
 model IotHubDataConnection extends DataConnection {
   /**
    * The Iot Hub data connection properties.
@@ -1743,6 +1747,7 @@ model IotHubConnectionProperties {
 /**
  * Class representing an Event Grid data connection.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Polymorphic subtype of the brownfield DataConnection base; inherits its custom resource marking to keep the published OpenAPI shape."
 model EventGridDataConnection extends DataConnection {
   /**
    * The properties of the Event Grid data connection.

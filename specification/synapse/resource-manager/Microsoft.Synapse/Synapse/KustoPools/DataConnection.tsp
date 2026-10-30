@@ -11,18 +11,22 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace KustoPools;
-// FIXME: DataConnection has no properties property
 /**
  * Class representing a data connection.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield conversion: the published API defines DataConnection as a polymorphic base with no properties bag, which the standard ProxyResource<T> template cannot express."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "customAzureResource marks this hand-shaped polymorphic base as an Azure resource so it keeps the published OpenAPI shape."
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Applies the same payload metadata handling that ProxyResource<T> applies, so the read-only name key stays out of request bodies and routes."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance from the common ProxyResource is required so the published allOf reference to common-types ProxyResource is preserved."
 @discriminator("kind")
-model DataConnection is Azure.ResourceManager.ProxyResource<{}> {
-  ...ResourceNameParameter<
-    Resource = DataConnection,
-    KeyName = "dataConnectionName",
-    SegmentName = "dataConnections",
-    NamePattern = ""
-  >;
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model DataConnection extends Azure.ResourceManager.Foundations.ProxyResource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key("dataConnectionName")
+  @segment("dataConnections")
+  name: string;
 
   /**
    * Resource location.
