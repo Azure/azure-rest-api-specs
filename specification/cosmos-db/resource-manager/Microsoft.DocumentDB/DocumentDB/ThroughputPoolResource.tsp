@@ -15,6 +15,7 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB Throughputpool.
  */
+@removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
 model ThroughputPoolResource
   is Azure.ResourceManager.TrackedResource<ThroughputPoolProperties> {
@@ -26,6 +27,7 @@ model ThroughputPoolResource
   >;
 }
 
+@removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })
 interface ThroughputPoolResources {
