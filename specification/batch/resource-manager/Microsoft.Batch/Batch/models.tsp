@@ -13,6 +13,15 @@ using Versioning;
 
 namespace Microsoft.Batch;
 
+/** Response ETag header. */
+model EtagResponseHeaders {
+  /**
+   * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+   */
+  @header("ETag")
+  etag?: string;
+}
+
 /**
  * The container technology to be used.
  */
@@ -2520,11 +2529,18 @@ model PoolPatchProperties {
     | "targetNodeCommunicationMode"
     | "currentNodeCommunicationMode"
     | "resourceTags"
+    | "taskSlotsPerNode"
   >;
 
   /** Deployment configuration properties. */
   @summary("This property describes the virtual machines that the pool nodes will be deployed on.")
   deploymentConfiguration?: DeploymentConfigurationPatch;
+
+  /**
+   * When omitted, the existing value is preserved. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.
+   */
+  @summary("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool.")
+  taskSlotsPerNode?: int32;
 }
 
 /** Deployment settings with partial updates for the new zone policies. */
@@ -3620,6 +3636,13 @@ model StartTask {
 }
 
 /**
+ * A resource file URL that may contain credentials or other sensitive information.
+ */
+@added(Versions.v2026_10_01)
+@secret
+scalar ResourceFileUrl extends string;
+
+/**
  * A single file or multiple files to be downloaded to a compute node.
  */
 @summary("A single file or multiple files to be downloaded to a compute node.")
@@ -3635,14 +3658,16 @@ model ResourceFile {
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @summary("The URL of the blob container within Azure Blob Storage.")
-  storageContainerUrl?: string;
+  @typeChangedFrom(Versions.v2026_10_01, string)
+  storageContainerUrl?: ResourceFileUrl;
 
   /**
    * The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from compute nodes. There are three ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, use a managed identity with read permission, or set the ACL for the blob or its container to allow public access.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @summary("The URL of the file to download.")
-  httpUrl?: string;
+  @typeChangedFrom(Versions.v2026_10_01, string)
+  httpUrl?: ResourceFileUrl;
 
   /**
    * The property is valid only when autoStorageContainerName or storageContainerUrl is used. This prefix can be a partial filename or a subdirectory. If a prefix is not specified, all the files in the container will be downloaded.

@@ -44,6 +44,8 @@ using Microsoft.Batch;
 @@clientName(Microsoft.Batch.ContainerRegistry.username, "username", "java");
 @@clientName(Microsoft.Batch.UserIdentity.userName, "username", "java");
 
+@@clientName(EtagResponseHeaders.etag, "ETag", "go");
+
 @@clientName(
   Microsoft.Batch.PrivateLinkServiceConnectionState.actionsRequired,
   "ActionRequired",

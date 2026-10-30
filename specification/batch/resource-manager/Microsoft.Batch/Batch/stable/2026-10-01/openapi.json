@@ -5857,13 +5857,6 @@
           "title": "The network configuration for the pool.",
           "description": "The network configuration for a pool."
         },
-        "taskSlotsPerNode": {
-          "type": "integer",
-          "format": "int32",
-          "title": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool.",
-          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.",
-          "default": 1
-        },
         "taskSchedulingPolicy": {
           "$ref": "#/definitions/TaskSchedulingPolicy",
           "title": "How tasks are distributed across compute nodes in a pool.",
@@ -5928,6 +5921,12 @@
           "$ref": "#/definitions/DeploymentConfigurationPatch",
           "title": "This property describes the virtual machines that the pool nodes will be deployed on.",
           "description": "Deployment configuration properties."
+        },
+        "taskSlotsPerNode": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool.",
+          "description": "When omitted, the existing value is preserved. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256."
         }
       }
     },
@@ -6606,12 +6605,12 @@
           "description": "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified."
         },
         "storageContainerUrl": {
-          "type": "string",
+          "$ref": "#/definitions/ResourceFileUrl",
           "title": "The URL of the blob container within Azure Blob Storage.",
           "description": "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable from compute nodes. There are three ways to get such a URL for a container in Azure storage: include a Shared Access Signature (SAS) granting read and list permissions on the container, use a managed identity with read and list permissions, or set the ACL for the container to allow public access."
         },
         "httpUrl": {
-          "type": "string",
+          "$ref": "#/definitions/ResourceFileUrl",
           "title": "The URL of the file to download.",
           "description": "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from compute nodes. There are three ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, use a managed identity with read permission, or set the ACL for the blob or its container to allow public access."
         },
@@ -6636,6 +6635,12 @@
           "description": "The reference to a user assigned identity associated with the Batch pool which a compute node will use."
         }
       }
+    },
+    "ResourceFileUrl": {
+      "type": "string",
+      "format": "password",
+      "description": "A resource file URL that may contain credentials or other sensitive information.",
+      "x-ms-secret": true
     },
     "ResourceIdentityType": {
       "type": "string",

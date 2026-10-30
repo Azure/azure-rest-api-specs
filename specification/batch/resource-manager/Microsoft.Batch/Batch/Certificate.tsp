@@ -4,14 +4,12 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./BatchAccount.tsp";
-import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Versioning;
-using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Batch;
 /**
@@ -52,14 +50,7 @@ interface Certificates {
   @removed(Versions.v2025_06_01)
   get is ArmResourceRead<
     Certificate,
-    Response = ArmResponse<Certificate> & {
-      /**
-       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
-       */
-      @header("ETag")
-      @clientName("ETag", "go")
-      etag?: string;
-    },
+    Response = ArmResponse<Certificate> & EtagResponseHeaders,
     Error = CloudError
   >;
 
@@ -87,14 +78,7 @@ interface Certificates {
       @header("If-None-Match")
       `If-None-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<Certificate> & {
-      /**
-       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
-       */
-      @header("ETag")
-      @clientName("ETag", "go")
-      etag?: string;
-    },
+    Response = ArmResourceUpdatedResponse<Certificate> & EtagResponseHeaders,
     Error = CloudError
   >;
 
@@ -115,14 +99,7 @@ interface Certificates {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = ArmResponse<Certificate> & {
-      /**
-       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
-       */
-      @header("ETag")
-      @clientName("ETag", "go")
-      etag?: string;
-    },
+    Response = ArmResponse<Certificate> & EtagResponseHeaders,
     Error = CloudError
   >;
 
@@ -182,14 +159,7 @@ interface Certificates {
   cancelDeletion is ArmResourceActionSync<
     Certificate,
     void,
-    Response = ArmResponse<Certificate> & {
-      /**
-       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
-       */
-      @header("ETag")
-      @clientName("ETag", "go")
-      etag?: string;
-    },
+    Response = ArmResponse<Certificate> & EtagResponseHeaders,
     Error = CloudError
   >;
 }
