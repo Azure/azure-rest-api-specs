@@ -1,4 +1,5 @@
 import "../common/models.tsp";
+import "../common/debug-latency-headers.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -21,13 +22,15 @@ interface AgentWebsocket {
   @summary("Establish a WebSocket connection to a hosted agent")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/invocations_ws")
-  connectEndpointWebsocket is FoundryDataPlaneOperation<
+  connectEndpointWebsocket is AgentDataPlaneOperation<
     {
       /** The name of the hosted agent. */
       @path agent_name: string;
 
       /** Optional session/conversation ID. Pass the same value on a subsequent connection to reattach to an existing session. If not provided, the service auto-generates one. */
       @query agent_session_id?: string;
+
+      ...DebugLatencyRequestHeader;
     },
     {
       /** Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request. */

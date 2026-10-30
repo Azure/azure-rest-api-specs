@@ -30,7 +30,7 @@ interface AgentContainers {
       ],
     }
   )
-  startAgentContainer is FoundryDataPlanePreviewOperation<
+  startAgentContainer is AgentDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -64,7 +64,7 @@ interface AgentContainers {
       ],
     }
   )
-  updateAgentContainer is FoundryDataPlanePreviewOperation<
+  updateAgentContainer is AgentDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -98,7 +98,7 @@ interface AgentContainers {
       ],
     }
   )
-  stopAgentContainer is FoundryDataPlanePreviewOperation<
+  stopAgentContainer is AgentDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -126,7 +126,7 @@ interface AgentContainers {
       ],
     }
   )
-  deleteAgentContainer is FoundryDataPlanePreviewOperation<
+  deleteAgentContainer is AgentDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -153,7 +153,7 @@ interface AgentContainers {
       ],
     }
   )
-  getAgentContainer is FoundryDataPlanePreviewOperation<
+  getAgentContainer is AgentDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -181,7 +181,7 @@ interface AgentContainers {
       ],
     }
   )
-  streamAgentContainerLogs is FoundryDataPlanePreviewOperation<
+  streamAgentContainerLogs is AgentDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -231,7 +231,7 @@ interface AgentContainers {
       ],
     }
   )
-  getAgentContainerOperation is FoundryDataPlanePreviewOperation<
+  getAgentContainerOperation is AgentDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -258,7 +258,7 @@ interface AgentContainers {
       ],
     }
   )
-  listAgentContainerOperations is FoundryDataPlanePreviewOperation<
+  listAgentContainerOperations is AgentDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -284,7 +284,7 @@ interface AgentContainers {
       ],
     }
   )
-  listAgentVersionContainerOperations is FoundryDataPlanePreviewOperation<
+  listAgentVersionContainerOperations is AgentDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */

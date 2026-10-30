@@ -1,6 +1,7 @@
 import "@typespec/http";
 
 import "@azure-tools/typespec-azure-core";
+import "./error-source-headers.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
@@ -171,6 +172,53 @@ op FoundryDataPlaneRequiredPreviewOperation<
   },
   Response,
   ErrorResponse
+>;
+
+/** An Agents service error response with optional request error attribution. */
+@error
+model AgentErrorResult {
+  ...ApiErrorResponse;
+  ...ErrorSourceResponseHeader;
+}
+
+/** Adds error attribution while sharing one response type across overloaded operations. */
+alias AgentResponse<Response extends Reflection.Model> = Response &
+  ErrorSourceResponseHeader;
+
+/** An Agents service operation exposing optional error attribution on every response. */
+op AgentDataPlaneOperation<
+  Params extends Reflection.Model,
+  Response extends Reflection.Model
+> is FoundryDataPlaneOperation<
+  Params,
+  AgentResponse<Response>,
+  AgentErrorResult
+>;
+
+/** An Agents service operation retaining conditional preview opt-in and response attribution. */
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Retains the underlying Foundry preview operation exemption for existing container actions with operation-location headers."
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Retains the underlying Foundry preview operation exemption for header-only acknowledgements and streamed container logs."
+op AgentDataPlanePreviewOperation<
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
+  Params extends Reflection.Model,
+  Response extends Reflection.Model
+> is FoundryDataPlanePreviewOperation<
+  AreaPreviewLabel,
+  Params,
+  AgentResponse<Response>,
+  AgentErrorResult
+>;
+
+/** An Agents service operation retaining required preview opt-in and response attribution. */
+op AgentDataPlaneRequiredPreviewOperation<
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
+  Params extends Reflection.Model,
+  Response extends Reflection.Model
+> is FoundryDataPlaneRequiredPreviewOperation<
+  AreaPreviewLabel,
+  Params,
+  AgentResponse<Response>,
+  AgentErrorResult
 >;
 
 // ============================================================================

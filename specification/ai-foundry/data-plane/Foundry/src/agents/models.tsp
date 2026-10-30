@@ -1092,6 +1092,8 @@ model CreateAgentFromCodeContent {
  */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DownloadAgentCodeResponse {
+  ...ErrorSourceResponseHeader;
+
   @doc("The media type of the returned package content.")
   @header("Content-Type")
   content_type: "application/zip";
