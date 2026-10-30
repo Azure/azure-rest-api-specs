@@ -5445,6 +5445,184 @@
         ]
       }
     },
+    "ReaderEndpointListResult": {
+      "type": "object",
+      "description": "A list of reader endpoints.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of results.",
+          "items": {
+            "$ref": "./ReaderEndpoints.json#/definitions/ReaderEndpoint"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to retrieve the next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "ReaderEndpointPrimaryInfo": {
+      "type": "object",
+      "description": "Primary server and database of the reader endpoint.",
+      "properties": {
+        "primaryDatabaseId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the reader endpoint's primary database.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sql/servers/databases"
+              }
+            ]
+          }
+        },
+        "primaryServerId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the reader endpoint's primary server.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sql/servers"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "primaryDatabaseId",
+        "primaryServerId"
+      ]
+    },
+    "ReaderEndpointProperties": {
+      "type": "object",
+      "description": "Properties of a reader endpoint.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the reader endpoint.",
+          "enum": [
+            "Created",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ReaderEndpointProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Created",
+                "value": "Created",
+                "description": "The reader endpoint has been created."
+              },
+              {
+                "name": "InProgress",
+                "value": "InProgress",
+                "description": "An operation is in progress."
+              },
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "The last operation succeeded."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "The last operation failed."
+              },
+              {
+                "name": "Canceled",
+                "value": "Canceled",
+                "description": "The last operation was canceled."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "readerEndpointPrimaryInfo": {
+          "$ref": "#/definitions/ReaderEndpointPrimaryInfo",
+          "description": "Primary database and server of the reader endpoint.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "databases": {
+          "type": "array",
+          "description": "List of databases in the reader endpoint.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Sql/servers/databases"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "readerEndpointPrimaryInfo"
+      ]
+    },
+    "ReaderEndpointUpdate": {
+      "type": "object",
+      "description": "A reader endpoint update request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReaderEndpointUpdateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ReaderEndpointUpdateProperties": {
+      "type": "object",
+      "description": "Properties of a reader endpoint patch.",
+      "properties": {
+        "databases": {
+          "type": "array",
+          "description": "List of databases in the reader endpoint.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Sql/servers/databases"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
     "RecommendedAction": {
       "type": "object",
       "description": "Database, Server or Elastic Pool Recommended Action.",

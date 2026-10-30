@@ -136,6 +136,8 @@ input-file:
   - preview/2026-11-01-preview/privateEndpointConnections.json
   - preview/2026-11-01-preview/privateLinkResources.json
   - preview/2026-11-01-preview/recoverableDatabases.json
+  - preview/2026-11-01-preview/ReaderEndpoints.json
+  - preview/2026-11-01-preview/ReaderEndpointsList.json
   - preview/2026-11-01-preview/recoverableManagedDatabases.json
   - preview/2026-11-01-preview/replicationLinks.json
   - preview/2026-11-01-preview/restorableDroppedDatabases.json
@@ -185,6 +187,20 @@ input-file:
   - preview/2026-11-01-preview/workloadGroups.json
 
 suppressions:
+  - code: DeleteResponseCodes
+    from: ReaderEndpoints.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/readerEndpoints/{readerEndpointName}"].delete
+    reason: "Preserves the SQL RP contract: completed deletion returns 200, pending deletion returns 202, and an absent resource returns 204. ARM exception approval is required."
+  - code: ResourceNameRestriction
+    from: ReaderEndpoints.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/readerEndpoints"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/readerEndpoints/{readerEndpointName}"]
+    reason: "Preserves the generated source contract for the existing server identifier without adding a client-side naming restriction during conversion. readerEndpointName retains its source pattern and length limits. ARM exception approval is required."
+  - code: ResourceNameRestriction
+    from: ReaderEndpointsList.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/readerEndpoints"]
+    reason: "Preserves the generated source contract for existing primary-server and database identifiers without adding new client-side naming restrictions during conversion. ARM exception approval is required."
   - code: ResourceNameRestriction
     from: restorableDroppedManagedInstancesByLocation.json
     where:
