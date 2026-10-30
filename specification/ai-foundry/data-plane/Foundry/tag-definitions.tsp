@@ -31,6 +31,7 @@ using OpenAPI;
   #{ name: "Agent Containers", parent: "Agents Root" },
   #{ name: "Agent Microsoft 365 Publishing", parent: "Agents Root" },
   #{ name: "Platform APIs" },
+  #{ name: "Reinforcement Learning Environments", parent: "Platform APIs" },
   #{ name: "Datasets", parent: "Platform APIs" },
   #{ name: "Indexes", parent: "Platform APIs" },
   #{ name: "Connections", parent: "Platform APIs" },
