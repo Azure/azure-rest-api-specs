@@ -30,6 +30,7 @@ export async function main() {
         multiple: false,
         default: undefined,
       },
+      // Accepted for existing workflow invocations; PR metadata is not part of change impact.
       number: {
         type: "string",
         short: "n",
@@ -79,33 +80,16 @@ export async function main() {
   const fileList = await getChangedFilesStatuses({
     cwd: sourceGitRoot,
     baseCommitish,
-    // code in diff-types.ts and impact.ts assumes the file list only contains add/modify/delete, not renames
+    // Analyze moves as deletion/addition so both the old and new service are represented.
     gitOptions: ["--no-renames"],
     logger: defaultLogger,
     paths: ["specification"],
   });
-  const sha = opts.sha as string;
-  const sourceBranch = opts.sourceBranch as string;
-  const targetBranch = opts.targetBranch as string;
-  const repo = opts.repo as string;
-  const owner = opts.owner as string;
-  const prNumber = opts.number as string;
-  const isDraft = opts.isDraft as boolean;
 
   // Get the list of RPaaS folders from the target branch's arm-leases directory (read from disk)
   const mainSpecFolders = getRPaaSFolderList(targetGitRoot);
 
-  const prContext = new PRContext(sourceGitRoot, targetGitRoot, {
-    sha,
-    sourceBranch,
-    targetBranch,
-    repo,
-    prNumber,
-    owner,
-    fileList,
-    isDraft,
-  });
-
+  const prContext = new PRContext(sourceGitRoot, targetGitRoot, { fileList });
   const impact = await evaluateImpact(prContext, mainSpecFolders);
 
   console.log("Evaluated impact: ", JSON.stringify(impact, null, 2));
