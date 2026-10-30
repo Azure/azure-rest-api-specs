@@ -1,5 +1,6 @@
 import { isDeepStrictEqual } from "node:util";
 import { DOCUMENT_QUALITY_CRITERION } from "./document-quality-input.ts";
+import { semanticGroupingPresentation } from "./semantic-assessment-scope.ts";
 
 type AssessmentFact = import("./runtime-types.ts").AssessmentFact;
 
@@ -1704,7 +1705,20 @@ export function renderReportSections(
         })
         .join("");
       const remainder = all.slice(10);
-      return `<details class="report-card intent" id="intent-${anchor(item.id)}">${summary(escape(item.title), escape(item.summary), `<span class="report-badge ${escape(item.action)}">${escape(item.action)}</span>`, relations)}<div class="report-card-body">${item.sources?.length ? `<details class="report-source" open><summary>Changed TypeSpec source (${item.sources.length})</summary>${renderSourceHunks(item.sources)}<p class="sources">${sourceLinks(item.sources)}</p></details>` : '<p class="sources">Changed TypeSpec source unavailable.</p>'}<details class="report-subdetails" id="intent-${anchor(item.id)}-operations"><summary>Affected operations (${all.length})</summary>${remainder.length ? `<p class="report-small">Showing 10 operation cards; the remaining ${remainder.length} are listed below.</p>` : ""}${operations || '<p class="report-empty">No directly affected REST operation.</p>'}${remainder.length ? `<div class="report-operation-remainder"><p><strong>Other affected operations (${remainder.length})</strong></p><p>${remainder.map((operation) => `<span title="${escape(operation.path)}">${escape(operation.operationId)} (${escape((operation.method ?? "").toUpperCase())}${operation.apiVersion ? `, ${escape(operation.apiVersion)}` : ""})</span>`).join("; ")}.</p></div>` : ""}</details></div></details>`;
+      const grouping = semanticGroupingPresentation(item);
+      const facts = item.changeFacts ?? [];
+      const factRows = facts
+        .map(
+          (fact) =>
+            `<tr><td><code>${escape(fact.qualifiedName ?? "(source/configuration)")}</code></td><td>${escape(fact.changeType)}</td><td>${escape(fact.action)}</td><td>${escape(fact.facets.join(", "))}</td><td><code>${escape(fact.sourceChangeId)}</code><br><span class="report-small">hunks: ${escape(fact.hunkIds.join(", ") || "none")}<br>declarations: ${escape(fact.declarationIds.join(", ") || "none")}</span></td></tr>`,
+        )
+        .join("");
+      const changeBadges = (item.changeTypes ?? [])
+        .map((changeType) => `<span class="report-badge">${escape(changeType)}</span>`)
+        .join("");
+      const groupingDetails = `<p class="report-small"><strong>Stable group:</strong> <code>${escape(item.id)}</code></p><p class="report-small"><strong>${escape(grouping.basis)}:</strong> deterministic coordinator grouping; later judgment and rendering preserve this identity and boundary. ${facts.length} normalized facts; ${item.hunkIds?.length ?? 0} source hunks; ${all.length} supporting operation mappings.</p>${grouping.notice ? `<p class="report-empty">${escape(grouping.notice)}</p>` : ""}${item.groupingEvidence?.reasons?.length ? `<p class="report-small"><strong>Grouping diagnostics:</strong> ${item.groupingEvidence.reasons.map((reason) => `<code>${escape(reason)}</code>`).join("; ")}</p>` : ""}${facts.length ? `<details class="report-subdetails"><summary>Change facts and provenance (${facts.length})</summary><table><thead><tr><th>Subject</th><th>Change type</th><th>Action</th><th>Facets</th><th>Evidence provenance</th></tr></thead><tbody>${factRows}</tbody></table></details>` : ""}`;
+      const badges = `<span class="report-badge">${escape(grouping.label)}</span><span class="report-badge ${escape(item.action)}">${escape(item.action)}</span>${changeBadges}`;
+      return `<details class="report-card intent" id="intent-${anchor(item.id)}">${summary(escape(item.title), escape(item.summary), badges, relations)}<div class="report-card-body">${groupingDetails}${item.sources?.length ? `<details class="report-source" open><summary>Changed TypeSpec source (${item.sources.length})</summary>${renderSourceHunks(item.sources)}<p class="sources">${sourceLinks(item.sources)}</p></details>` : '<p class="sources">Changed TypeSpec source unavailable.</p>'}<details class="report-subdetails" id="intent-${anchor(item.id)}-operations"><summary>Affected operations (${all.length})</summary>${remainder.length ? `<p class="report-small">Showing 10 operation cards; the remaining ${remainder.length} are listed below.</p>` : ""}${operations || '<p class="report-empty">No directly affected REST operation.</p>'}${remainder.length ? `<div class="report-operation-remainder"><p><strong>Other affected operations (${remainder.length})</strong></p><p>${remainder.map((operation) => `<span title="${escape(operation.path)}">${escape(operation.operationId)} (${escape((operation.method ?? "").toUpperCase())}${operation.apiVersion ? `, ${escape(operation.apiVersion)}` : ""})</span>`).join("; ")}.</p></div>` : ""}</details></div></details>`;
     })
     .join("");
   const restStatus =

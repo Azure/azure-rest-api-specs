@@ -690,10 +690,17 @@ no directly affected REST operation or the REST contract is unchanged.
 
 ### Semantic intent grouping
 
-Semantic intents are grouped by **coherent TypeSpec change**, not mechanically
-by file, declaration, REST operation, or Git hunk. A coherent change is one
-user-reviewable API behavior goal implemented by one or more related TypeSpec
-hunks.
+The coordinator derives normalized change facts before grouping. Each fact
+records its change type, declaration identity when available, action, facets,
+and exact source-change, hunk, and declaration provenance. Group membership,
+the stable `semantic-<hash>` identity, and the final group boundary are
+coordinator-owned data. Later Agent judgment and report rendering preserve
+them exactly.
+
+Semantic intents are grouped by deterministic evidence, not by Agent
+similarity judgment. A group may represent one coherent TypeSpec behavior
+change, one supporting customization/configuration change, or an explicit
+source-scoped group when stronger evidence is unavailable.
 
 Cross-file grouping is allowed. For example, an LRO helper change, a polling
 response model, and the operations that consume them may form one intent when
@@ -718,10 +725,13 @@ at least one of these relationships:
    directly supports another changed declaration in the same behavior change,
    and symbol/import resolution proves that dependency.
 
-Do not group hunks merely because they are in the same file, project, resource
+Do not group hunks merely because they are in the same project, resource
 family, or pull request. Keep independent changes separate, including SDK
 naming customizations, scalar/type corrections, documentation-only changes,
-and unrelated operations that happen to use the same shared helper.
+and unrelated operations that happen to use the same shared helper. When the
+coordinator cannot establish a stronger relationship, retain an explicit
+source-scoped or standalone group rather than using heuristic similarity to
+force business coherence.
 
 Identical transforms form their own coherent group; they do not merge with
 other behavior groups. For example, all ARM identifier corrections may form
@@ -731,6 +741,14 @@ into the Location-based LRO intent.
 Grouping is deterministic and happens before Agent judgment. The Agent writes
 the title and summary for each supplied group but cannot merge, split, or move
 hunks between groups.
+
+An API-version publication group is pure: all normalized facts must be
+`versioning` facts whose declaration identity is `Versions` or ends in
+`.Versions`. A feature, contract, SDK customization, documentation, or
+configuration fact remains in its normal group even when it shares a file or
+Git hunk with a version declaration. Shared-hunk ownership is resolved
+deterministically while preserving the original file, hunk, declaration,
+operation, and project provenance on the surviving group.
 
 ### Bounded Semantic judgment
 
@@ -756,10 +774,10 @@ not enumerate all operations, declarations, or hunks. Operation count and
 representative examples provide scale and traceability without expanding the
 Agent workload with the size of the affected operation set.
 
-Each non-standalone group records structured `groupingEvidence`. Every evidence
-entry identifies the allowed relationship kind and the exact hunk,
-declaration, and compiled fact IDs supporting that relationship. A group
-containing one standalone hunk uses an empty `groupingEvidence` array.
+Each group records `groupingEvidence` diagnostics and normalized `changeFacts`.
+The report presents the same stable group ID, boundaries, reasons, change
+types, and evidence provenance; it does not reconstruct or regroup the
+coordinator output.
 
 Each meaningful hunk belongs to exactly one semantic intent. Declarations may
 appear in more than one hunk, but each declaration-hunk occurrence belongs to

@@ -56,6 +56,13 @@ operation or source IDs; deterministic assembly restores the complete
 inventory. Describe version propagation explicitly when that is the unit's
 change kind.
 
+The coordinator-provided review-unit ID, normalized change facts, grouping
+diagnostics, and evidence provenance are immutable. Do not infer a new group
+from similar names, files, operations, or descriptions. Publication groups
+contain only `Versions` declaration facts; feature and contract facts remain
+normal review units even when they share a source file or hunk with publication
+evidence.
+
 For resource-oriented REST APIs, identify the affected resource and lifecycle
 role, not just the HTTP verb and route. Use supplied TypeSpec declarations,
 template applications, and decorator evidence: `TypeSpec.Rest` associates

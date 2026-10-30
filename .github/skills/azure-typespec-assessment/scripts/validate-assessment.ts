@@ -5,6 +5,7 @@ import {
   dimensionCompatibility,
   legacyDimensionStatus,
 } from "./assessment-display.ts";
+import { hasOnlyApiVersionDeclarations } from "./semantic-change-facts.ts";
 import { isMain, readJsonObject, runMain } from "./cli.ts";
 import { readComplianceCatalog } from "./compliance-assessment.ts";
 import {
@@ -543,6 +544,16 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
         !["normal", "api-version-publication", "api-version-wide-change"].includes(item.intentType)
       ) {
         errors.push(`Semantic item ${item.id} has invalid intentType.`);
+      }
+      if (
+        item.classificationVersion !== undefined &&
+        item.classificationVersion >= 3 &&
+        item.intentType === "api-version-publication" &&
+        (!hasOnlyApiVersionDeclarations(item) ||
+          !item.changeFacts?.length ||
+          item.changeFacts.some((fact) => fact.changeType !== "versioning"))
+      ) {
+        errors.push(`Semantic item ${item.id} publication contains non-version declaration facts.`);
       }
       if (!item.sources?.length) errors.push(`Semantic item ${item.id} has no changed source.`);
       for (const source of item.sources ?? []) {
