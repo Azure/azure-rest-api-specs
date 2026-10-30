@@ -36711,6 +36711,32 @@
         },
         "description": "A AI Search Index resource."
       },
+      "AccessBoundaryAuthorizationScheme": {
+        "type": "object",
+        "required": [
+          "type",
+          "read"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "AccessBoundary"
+            ],
+            "description": "The authorization scheme type. Always `AccessBoundary`."
+          },
+          "read": {
+            "$ref": "#/components/schemas/ReadAccessPolicy",
+            "description": "The policy for delivering inbound messages to the Autopilot. No write policy is supported."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+          }
+        ],
+        "description": "Authorizes inbound Activity Protocol messages using the Autopilot's instance read policy.\nSupported only for M365 digital workers or agents published as Autopilots, with a native Activity Protocol endpoint.\nConfigure this scheme at creation with digital_worker_type set to m365, or after Autopilot publication.\nIt must be the sole authorization scheme, without legacy activity access_boundaries.\nChannel authentication and the project tenant check still apply. This policy does not restrict outbound messages or chat recipients."
+      },
       "ActivityProtocolAccessBoundary": {
         "anyOf": [
           {
@@ -37235,7 +37261,8 @@
             "Entra": "#/components/schemas/EntraAuthorizationScheme",
             "BotService": "#/components/schemas/BotServiceAuthorizationScheme",
             "BotServiceRbac": "#/components/schemas/BotServiceRbacAuthorizationScheme",
-            "BotServiceTenant": "#/components/schemas/BotServiceTenantAuthorizationScheme"
+            "BotServiceTenant": "#/components/schemas/BotServiceTenantAuthorizationScheme",
+            "AccessBoundary": "#/components/schemas/AccessBoundaryAuthorizationScheme"
           }
         }
       },
@@ -37250,7 +37277,8 @@
               "Entra",
               "BotService",
               "BotServiceRbac",
-              "BotServiceTenant"
+              "BotServiceTenant",
+              "AccessBoundary"
             ]
           }
         ]
@@ -95072,6 +95100,25 @@
           }
         },
         "description": "An SSE event-type to text-field selector for streaming invocation output."
+      },
+      "ReadAccessPolicy": {
+        "type": "object",
+        "required": [
+          "audiences"
+        ],
+        "properties": {
+          "audiences": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "allowlisted"
+              ]
+            },
+            "description": "The allowed sender audiences. Only `allowlisted` is supported: it uses the instance's existing interaction allowlist,\nwhich implicitly includes the instance manager. An empty array denies user messages.\nTrusted lifecycle events are not governed by the sender audience policy."
+          }
+        },
+        "description": "A conversation-independent policy for delivering inbound messages to an Autopilot."
       },
       "RecurrenceSchedule": {
         "type": "object",

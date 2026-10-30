@@ -841,12 +841,41 @@ model BotServiceTenantAuthorizationScheme
   type: AgentEndpointAuthorizationSchemeType.BotServiceTenant;
 }
 
+@doc("""
+  Authorizes inbound Activity Protocol messages using the Autopilot's instance read policy.
+  Supported only for M365 digital workers or agents published as Autopilots, with a native Activity Protocol endpoint.
+  Configure this scheme at creation with digital_worker_type set to m365, or after Autopilot publication.
+  It must be the sole authorization scheme, without legacy activity access_boundaries.
+  Channel authentication and the project tenant check still apply. This policy does not restrict outbound messages or chat recipients.
+  """)
+model AccessBoundaryAuthorizationScheme
+  extends AgentEndpointAuthorizationScheme {
+  @doc("The authorization scheme type. Always `AccessBoundary`.")
+  type: AgentEndpointAuthorizationSchemeType.AccessBoundary;
+
+  @doc("The policy for delivering inbound messages to the Autopilot. No write policy is supported.")
+  read: ReadAccessPolicy;
+}
+
+@doc("A conversation-independent policy for delivering inbound messages to an Autopilot.")
+model ReadAccessPolicy {
+  @doc("""
+    The allowed sender audiences. Only `allowlisted` is supported: it uses the instance's existing interaction allowlist,
+    which implicitly includes the instance manager. An empty array denies user messages.
+    Trusted lifecycle events are not governed by the sender audience policy.
+    """)
+  audiences: "allowlisted"[];
+}
+
 union AgentEndpointAuthorizationSchemeType {
   string,
   Entra: "Entra",
   BotService: "BotService",
   BotServiceRbac: "BotServiceRbac",
   BotServiceTenant: "BotServiceTenant",
+
+  @doc("Use the Autopilot's instance read policy to authorize inbound Activity Protocol messages.")
+  AccessBoundary: "AccessBoundary",
 }
 
 @doc("Per-protocol configuration for the agent endpoint.")
