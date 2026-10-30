@@ -911,6 +911,7 @@ model IntegrationRuntimeOperationStatus {
   /**
    * The operation properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The published schema declares this value as an untyped object."
   properties?: unknown;
 
   /**
@@ -936,6 +937,7 @@ model IntegrationRuntimeStopOperationStatus {
   /**
    * The operation properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The published schema declares this value as an untyped object."
   properties?: unknown;
 
   /**
@@ -961,6 +963,7 @@ model IntegrationRuntimeEnableinteractivequery {
   /**
    * The operation properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The published schema declares this value as an untyped object."
   properties?: unknown;
 
   /**
@@ -1354,11 +1357,13 @@ model CmdkeySetupTypeProperties {
   /**
    * The server name of data source access.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The published schema declares this value as an untyped object."
   targetName: unknown;
 
   /**
    * The user name of data source access.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The published schema declares this value as an untyped object."
   userName: unknown;
 
   /**
