@@ -88,7 +88,8 @@ interface IntegrationRuntimeResources {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Parameter is named after the published header so the emitted OpenAPI keeps the exact If-None-Match parameter without a client-name override."
       @header("If-None-Match")
       `If-None-Match`?: string;
-    }
+    },
+    Response = ArmResponse<IntegrationRuntimeResource> | NotModifiedResponse
   >;
 
   /**
