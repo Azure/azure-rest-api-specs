@@ -1,5 +1,19 @@
-# Suppressions for AppConfiguration data-plane service
-# These suppressions are for swagger versions that don't exist in TypeSpec
+# Suppressions for the AppConfiguration resource-manager service.
+
+- tool: ResourceNameRestriction
+  paths:
+    - preview/2026-09-01-preview/appconfiguration.json
+  reason: The feature flag name combines a data-plane key and optional label and intentionally accepts the data-plane contract's broad character set; TypeSpec constrains it to 1 through 10000 characters.
+
+- tool: EnumInsteadOfBoolean
+  paths:
+    - preview/2026-09-01-preview/appconfiguration.json
+  reason: Feature flag and telemetry enabled states are intrinsically binary and match the data-plane contract.
+
+- tool: LatestVersionOfCommonTypesMustBeUsed
+  paths:
+    - preview/2026-09-01-preview/appconfiguration.json
+  reason: This brownfield TypeSpec project emits all existing API versions with common types v5; upgrading globally would modify established contracts outside this change.
 
 - tool: TypeSpecRequirement
   path: ./preview/2019-02-01-preview/*.json
