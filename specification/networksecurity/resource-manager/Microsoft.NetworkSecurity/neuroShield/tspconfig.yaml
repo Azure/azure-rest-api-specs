@@ -2,7 +2,7 @@ emit:
   - "@azure-tools/typespec-autorest"
 parameters:
   "service-dir":
-    default: "sdk/neuroshield"
+    default: "sdk/networksecurity"
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
@@ -12,29 +12,29 @@ options:
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.NetworkSecurity.NeuroShield"
+    namespace: "Azure.ResourceManager.NetworkSecurity"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-networksecurity-neuroshield"
-    namespace: "azure.mgmt.networksecurity.neuroshield"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-networksecurity"
+    namespace: "azure.mgmt.networksecurity"
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-networksecurity-neuroshield"
-    namespace: "com.azure.resourcemanager.networksecurity.neuroshield"
-    service-name: "neuroshield"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-networksecurity"
+    namespace: "com.azure.resourcemanager.networksecurity"
+    service-name: "networksecurity"
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-networksecurity-neuroshield"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-networksecurity"
     experimental-extensible-enums: true
     flavor: azure
     package-details:
-      name: "@azure/arm-networksecurity-neuroshield"
+      name: "@azure/arm-networksecurity"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/neuroshield"
-    emitter-output-dir: "{output-dir}/{service-dir}/armneuroshield"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armneuroshield"
+    service-dir: "sdk/resourcemanager/networksecurity"
+    emitter-output-dir: "{output-dir}/{service-dir}/armnetworksecurity"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnetworksecurity"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
