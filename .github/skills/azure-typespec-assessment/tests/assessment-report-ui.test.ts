@@ -722,8 +722,8 @@ void test("five dimension headers and empty not-assessed states use the shared l
   input.safety.status = "not-assessed";
   const html = renderAssessmentHtml(input);
   assert.equal((html.match(/class="report-section-head"/g) ?? []).length, 5);
-  assert.match(html, /REST breaking changes were not fully assessed/);
-  assert.match(html, /Downstream breaking changes were not fully assessed/);
+  assert.match(html, /No REST compatibility verdict is available for the covered scope/);
+  assert.match(html, /No downstream compatibility verdict is available for the covered scope/);
   assert.match(html, /Azure Guidelines could not be fully assessed/);
   const quality = reportSection(html, "document-quality");
   assert.match(quality, /not assessed/);
@@ -732,6 +732,26 @@ void test("five dimension headers and empty not-assessed states use the shared l
   assert.match(html, /@media\s*\(max-width:\s*760px\)/);
   assert.match(html, /@media\s*\(prefers-color-scheme:\s*dark\)/);
   assert.match(html, /grid-template-columns:\s*minmax\(0,\s*1fr\)\s+max-content/);
+});
+
+void test("compatibility findings remain failed when evidence coverage is partial", () => {
+  const { dimension } = fixture();
+  dimension.status = "failed";
+  dimension.verdict = "failed";
+  dimension.coverage = "partial";
+  dimension.blockers = ["Generated language-specific evidence is unavailable."];
+  const input = assessment(dimension);
+  input.safety = {
+    scope: "rest-and-downstream-only",
+    status: "failed",
+    verdict: "failed",
+    coverage: "partial",
+  };
+  const html = renderAssessmentHtml(input);
+  const downstream = reportSection(html, "downstream-breaking");
+  assert.match(downstream, /report-badge remove">failed/);
+  assert.match(downstream, /report-badge unknown coverage">partial coverage/);
+  assert.match(html, /Partial coverage/);
 });
 
 void test("legacy type findings remain visible when method mappings are unavailable", () => {

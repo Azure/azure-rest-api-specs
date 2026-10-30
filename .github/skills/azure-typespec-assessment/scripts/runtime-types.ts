@@ -1688,6 +1688,8 @@ export interface AssessmentOutput {
   safety: {
     scope: "rest-and-downstream-only";
     status: "passed" | "failed" | "not-assessed";
+    verdict?: "passed" | "failed" | "unknown";
+    coverage?: "complete" | "partial" | "blocked";
     [key: string]: unknown;
   };
   dimensions: {
@@ -1699,14 +1701,20 @@ export interface AssessmentOutput {
     };
     rest: {
       status: string;
+      verdict?: "passed" | "failed" | "unknown";
+      coverage?: "complete" | "partial" | "blocked";
       findings: AssessmentFinding[];
       blockers?: unknown[];
+      rejectedCandidateCount?: number;
       legacyFindings?: LegacyAssessmentFinding[];
     };
     downstream: {
       status: string;
+      verdict?: "passed" | "failed" | "unknown";
+      coverage?: "complete" | "partial" | "blocked";
       findings: AssessmentFinding[];
       blockers?: unknown[];
+      rejectedCandidateCount?: number;
       methodGroups?: AssessmentMethodGroup[];
       operationGroups?: AssessmentMethodGroup[];
       typeImpacts?: AssessmentTypeImpact[];

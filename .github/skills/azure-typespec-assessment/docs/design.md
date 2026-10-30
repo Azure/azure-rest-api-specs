@@ -27,6 +27,12 @@ Included:
 All five dimensions are active. Documentation Completeness checks compiler
 documentation presence without judging prose. Overall safety
 continues to cover REST and downstream SDK compatibility only.
+REST and downstream compatibility verdicts are independent from evidence
+coverage. Confirmed findings produce a failed verdict even when unresolved
+evidence leaves coverage partial. A dimension with blockers and no confirmed
+finding has an unknown verdict rather than a compatibility pass. Coverage is
+complete, partial, or blocked according to how much candidate evidence was
+assessed.
 Changed declaration scope uses actual added and removed lines, including an
 immediately attached documentation/decorator prefix. Declarations present only
 as unified-diff context are excluded.
@@ -1879,7 +1885,9 @@ File: `assessment.json`
   "confidence": "high|medium|low",
   "safety": {
     "scope": "rest-and-downstream-only",
-    "status": "passed|failed|not-assessed"
+    "status": "passed|failed|not-assessed",
+    "verdict": "passed|failed|unknown",
+    "coverage": "complete|partial|blocked"
   },
   "dimensions": {
     "semantic": {
@@ -1939,12 +1947,16 @@ File: `assessment.json`
     },
     "rest": {
       "status": "passed|failed|not-assessed",
+      "verdict": "passed|failed|unknown",
+      "coverage": "complete|partial|blocked",
       "findings": [],
       "rejectedCandidateCount": 0,
       "blockers": []
     },
     "downstream": {
       "status": "passed|failed|not-assessed",
+      "verdict": "passed|failed|unknown",
+      "coverage": "complete|partial|blocked",
       "findings": [],
       "methodGroups": [
         {
