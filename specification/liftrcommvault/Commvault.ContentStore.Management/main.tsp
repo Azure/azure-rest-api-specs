@@ -401,8 +401,19 @@ union Vendor {
 
 @doc("Class of Commvault Storage")
 union StorageClassType {
+  // COLD has two members so its description can differ from v10_preview on; ColdLegacy is named Cool before then.
   @doc("Cold storage class")
-  Cool: "COLD",
+  @removed(Versions.v10_preview)
+  @renamedFrom(Versions.v10_preview, "Cool")
+  ColdLegacy: "COLD",
+
+  @doc("Cold storage class. Requests that use COLD are rejected during validation; use COOL for the infrequent-access tier.")
+  @added(Versions.v10_preview)
+  Cold: "COLD",
+
+  @doc("Cool (infrequent-access) storage class")
+  @added(Versions.v10_preview)
+  Cool: "COOL",
 
   @doc("Hot storage class")
   Hot: "HOT",
