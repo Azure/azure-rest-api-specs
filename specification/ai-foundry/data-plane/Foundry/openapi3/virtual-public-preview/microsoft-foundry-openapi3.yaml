@@ -45678,10 +45678,6 @@ components:
           description: Additional insight details. Omitted unless details are requested.
           readOnly: true
       description: A persisted issue discovered from an agent's traces.
-    AgentInsightCategoryInput:
-      type: string
-      pattern: ^[^,]*$
-      description: A category identifier accepted when configuring a monitor. Commas are reserved for CSV filter separators.
     AgentInsightDetails:
       type: object
       required:
@@ -45944,9 +45940,9 @@ components:
         categories:
           type: array
           items:
-            $ref: '#/components/schemas/AgentInsightCategoryInput'
+            type: string
           minItems: 0
-          description: Up to 20 distinct normalized category identifiers (128 UTF-8 bytes each), without commas. Empty uses defaults.
+          description: Up to 20 distinct normalized category identifiers (128 UTF-8 bytes each). Empty uses defaults.
         instructions:
           anyOf:
             - type: string

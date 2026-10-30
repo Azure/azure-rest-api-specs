@@ -233,19 +233,15 @@ model AgentInsightSummary {
   markdown: string;
 }
 
-/** A category identifier accepted when configuring a monitor. Commas are reserved for CSV filter separators. */
-@pattern("^[^,]*$")
-scalar AgentInsightCategoryInput extends string;
-
 /** Monitor analysis priorities. */
 @example(#{
   categories: #["cost_tokens", "latency"],
   instructions: "Focus on latency and token waste.",
 })
 model AgentInsightPriorities {
-  /** Up to 20 distinct normalized category identifiers (128 UTF-8 bytes each), without commas. Empty uses defaults. */
+  /** Up to 20 distinct normalized category identifiers (128 UTF-8 bytes each). Empty uses defaults. */
   @minItems(0)
-  categories: AgentInsightCategoryInput[];
+  categories: string[];
 
   /** Analysis guidance, up to 2,000 UTF-8 bytes after trimming. Null or blank removes guidance. */
   instructions?: string | null;
