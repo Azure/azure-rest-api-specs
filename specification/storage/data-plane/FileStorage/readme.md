@@ -238,6 +238,7 @@ input-file:
   - stable/2026-12-06/generated_file.json
 ```
 
+<<<<<<< HEAD
 ### Tag: package-2027-03-tsp
 
 These settings apply only when `--tag=package-2027-03-tsp` is specified on the command line.
@@ -245,6 +246,15 @@ These settings apply only when `--tag=package-2027-03-tsp` is specified on the c
 ```yaml $(tag) == 'package-2027-03-tsp'
 input-file:
   - stable/2027-03-07/generated_file.json
+=======
+### Tag: package-2027-03
+
+These settings apply only when `--tag=package-2027-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2027-03'
+input-file:
+- stable/2027-03-07/file.json
+>>>>>>> main
 ```
 
 ### Suppression
