@@ -51,6 +51,33 @@ model AIManagerProperties {
     The Azure resource ID of an existing AKS cluster to attach (bring-your-own). When omitted, AI Manager provisions and manages its own underlying cluster. The referenced cluster must be in the same region as this AI Manager, but may reside in a different subscription within the same Microsoft Entra tenant. This property is immutable after creation.
     """)
   clusterResourceId?: ClusterResourceId;
+
+  @doc("Configures the AI inference stack. If omitted when creating the AI Manager, no inference stack is installed.")
+  inference?: InferenceConfig;
+
+  @doc("Configures the AI training stack. If omitted when creating the AI Manager, no training stack is installed.")
+  training?: TrainingConfig;
+
+  @doc("Configures the AI agent runtime and sandbox stack. If omitted when creating the AI Manager, no agent runtime stack is installed.")
+  agentRuntime?: AgentRuntimeConfig;
+}
+
+@doc("Configuration of the AI inference stack. The stack implementation and its versions are managed by AI Manager.")
+model InferenceConfig {
+  @doc("Whether the Kaito-based inference stack is enabled. Set to true to install and configure the stack, or false to disable it.")
+  enabled: boolean;
+}
+
+@doc("Configuration of the AI training stack. The stack implementation and its versions are managed by AI Manager.")
+model TrainingConfig {
+  @doc("Whether the KubeRay-based training stack is enabled. Set to true to install and configure the stack, or false to disable it.")
+  enabled: boolean;
+}
+
+@doc("Configuration of the AI agent runtime and sandbox stack. The stack implementation and its versions are managed by AI Manager.")
+model AgentRuntimeConfig {
+  @doc("Whether the OpenSandbox-based agent runtime stack is enabled. Set to true to install and configure the stack, or false to disable it.")
+  enabled: boolean;
 }
 
 @doc("Delete options of the AI Manager.")
