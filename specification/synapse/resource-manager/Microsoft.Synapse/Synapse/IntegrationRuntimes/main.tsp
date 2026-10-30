@@ -22,14 +22,14 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Synapse Analytics APIs
+ * Azure Synapse Analytics management API for integration runtimes, their nodes, and their status, metadata, authentication key, and monitoring operations.
  */
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Synapse")
 @service(#{ title: "SynapseManagementClient" })
 @versioned(Versions)
 // FIXME: Common type version v2 is not supported for now. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.Synapse;
+namespace IntegrationRuntimes;
 
 /**
  * The available API versions.

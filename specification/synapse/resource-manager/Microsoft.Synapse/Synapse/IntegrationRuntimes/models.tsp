@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager.Foundations;
 
 
-namespace Microsoft.Synapse;
+namespace IntegrationRuntimes;
 
 
 /**
