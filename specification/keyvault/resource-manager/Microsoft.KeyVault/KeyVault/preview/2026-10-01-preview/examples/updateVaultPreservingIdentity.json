@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2026-10-01-preview",
+    "parameters": {
+      "tags": {
+        "environment": "production"
+      }
+    },
+    "resourceGroupName": "sample-resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "sample-vault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sample-vault",
+        "type": "Microsoft.KeyVault/vaults",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
+        "location": "westus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sample-identity": {
+              "principalId": "11111111-1111-1111-1111-111111111111",
+              "clientId": "22222222-2222-2222-2222-222222222222"
+            }
+          }
+        },
+        "properties": {
+          "accessPolicies": [],
+          "enableRbacAuthorization": true,
+          "provisioningState": "Succeeded",
+          "sku": {
+            "name": "standard",
+            "family": "A"
+          },
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "vaultUri": "https://sample-vault.vault.azure.net"
+        },
+        "tags": {
+          "environment": "production"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "sample-vault",
+        "type": "Microsoft.KeyVault/vaults",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
+        "location": "westus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sample-identity": {
+              "principalId": "11111111-1111-1111-1111-111111111111",
+              "clientId": "22222222-2222-2222-2222-222222222222"
+            }
+          }
+        },
+        "properties": {
+          "accessPolicies": [],
+          "enableRbacAuthorization": true,
+          "provisioningState": "Succeeded",
+          "sku": {
+            "name": "standard",
+            "family": "A"
+          },
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "vaultUri": "https://sample-vault.vault.azure.net"
+        },
+        "tags": {
+          "environment": "production"
+        }
+      }
+    }
+  },
+  "operationId": "Vaults_Update",
+  "title": "Preserve existing user-assigned identities by omitting identity from PATCH"
+}
