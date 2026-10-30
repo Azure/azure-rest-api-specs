@@ -378,7 +378,6 @@ model CostControlActionPatch is OptionalProperties<CostControlAction>;
 
 /**
  * Account-level telemetry connections. Application Insights is optional and may be removed while controls exist.
- * Budget notifications specify their own Event Grid destinations; account-level Event Grid configuration is not exposed or accepted by this API version.
  */
 @added(Versions.v2026_11_15_preview)
 model CostControlConnections {
@@ -479,7 +478,8 @@ interface AccountCostControls {
     Parameters = CostControlCreateOrUpdateHeaders,
     Response =
       | (ArmResourceUpdatedResponse<AccountCostControl> & CostControlEtagHeader)
-      | (ArmResourceCreatedSyncResponse<AccountCostControl> & CostControlEtagHeader)
+      | (ArmResourceCreatedSyncResponse<AccountCostControl> &
+          CostControlEtagHeader)
   >;
 
   /** Updates selected budget properties synchronously. Omitted properties are preserved; an unchanged budget retains its entity tag. A historical nonconforming agent selection requires an explicit valid filter replacement or filter: null before other edits can succeed. Explicit identityObjectId selections require the registered subscription feature Microsoft.CognitiveServices/CostControlsByIdentity, even when unchanged; otherwise the request returns 403 FeatureNotRegistered before merging or no-op detection. */

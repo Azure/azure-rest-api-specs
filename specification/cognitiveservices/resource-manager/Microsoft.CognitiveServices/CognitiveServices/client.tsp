@@ -1295,7 +1295,11 @@ op regenerateKeyCustom(
   "CognitiveServicesComputeProvisioningState",
   "csharp"
 );
-@@clientName(AccountCostControl, "CognitiveServicesAccountCostControl", "csharp");
+@@clientName(
+  AccountCostControl,
+  "CognitiveServicesAccountCostControl",
+  "csharp"
+);
 @@alternateType(AccountCostControl.etag, eTag, "csharp");
 @@clientName(
   ProjectCostControl,

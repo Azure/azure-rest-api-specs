@@ -4107,6 +4107,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List budgets owned by an account": {
+            "$ref": "./examples/AccountCostControl/list.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -4168,6 +4173,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get an account-owned budget": {
+            "$ref": "./examples/AccountCostControl/get.json"
           }
         }
       },
@@ -4254,6 +4264,11 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or replace an account cost budget": {
+            "$ref": "./examples/AccountCostControl/createOrUpdate.json"
+          }
         }
       },
       "patch": {
@@ -4324,6 +4339,14 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Clear filters and remove named notifications and blocking actions": {
+            "$ref": "./examples/AccountCostControl/clearOptionalSettings.json"
+          },
+          "Merge named budget settings and restore owner-default grouping": {
+            "$ref": "./examples/AccountCostControl/update.json"
+          }
         }
       },
       "delete": {
@@ -4379,6 +4402,11 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete a budget conditionally": {
+            "$ref": "./examples/AccountCostControl/delete.json"
+          }
         }
       },
       "head": {
@@ -4433,6 +4461,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Check for a budget without returning its body": {
+            "$ref": "./examples/AccountCostControl/checkExistence.json"
           }
         }
       }
@@ -17596,7 +17629,7 @@
     },
     "CostControlConnections": {
       "type": "object",
-      "description": "Account-level telemetry connections. Application Insights is optional and may be removed while controls exist.\nBudget notifications specify their own Event Grid destinations; account-level Event Grid configuration is not exposed or accepted by this API version.",
+      "description": "Account-level telemetry connections. Application Insights is optional and may be removed while controls exist.",
       "properties": {
         "appInsightsConnectionId": {
           "type": "string",
