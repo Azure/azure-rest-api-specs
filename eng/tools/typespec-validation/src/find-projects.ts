@@ -29,7 +29,8 @@ function isCoreFile(file: string): boolean {
     coreFiles.has(file) ||
     (file.startsWith(".github/") &&
       file !== ".github/CODEOWNERS" &&
-      !file.startsWith(".github/arm-leases/")) ||
+      !file.startsWith(".github/arm-leases/") &&
+      !file.startsWith(".github/skills/")) ||
     (file.startsWith("eng/") && !file.startsWith("eng/common/")) ||
     file.startsWith("specification/common-types/")
   );
@@ -44,6 +45,8 @@ export async function findChangedProjects(
       cwd: root,
       baseCommitish: options.baseCommitish,
       headCommitish: options.headCommitish,
+      // Keep both paths when validation inputs move into an excluded directory.
+      gitOptions: ["--no-renames"],
       logger: options.logger,
     })
   ).filter((file) => !file.includes("ChangedFiles-Functions"));

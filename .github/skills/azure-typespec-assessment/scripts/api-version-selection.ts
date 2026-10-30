@@ -27,8 +27,11 @@ export function extractApiVersions(contents: string[]): ApiVersionSet {
   for (const content of contents) {
     if (/@versioned\s*\(/.test(content)) versioned = true;
     for (const match of content.matchAll(/\benum\s+Versions\s*\{([\s\S]*?)\}/g)) {
-      for (const member of match[1].matchAll(/\b[A-Za-z_]\w*\s*:\s*"([^"]+)"/g)) {
-        versions.add(member[1]);
+      const members = match[1].replace(/\/\*[\s\S]*?\*\/|\/\/[^\r\n]*/g, "");
+      for (const member of members.matchAll(
+        /\b[A-Za-z_]\w*\s*:\s*"([^"]+)"|`([^`]+)`(?:\s*:\s*"([^"]+)")?(?=\s*(?:,|$))/g,
+      )) {
+        versions.add(member[1] ?? member[3] ?? member[2]);
       }
     }
   }
