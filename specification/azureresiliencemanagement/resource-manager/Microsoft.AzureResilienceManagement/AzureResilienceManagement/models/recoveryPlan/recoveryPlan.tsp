@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 import "../../main.tsp";
+import "../common/common.tsp";
 import "./recoveryGroup.tsp";
 
 using Azure.Core;
@@ -22,6 +23,10 @@ union RecoveryPlanType {
 
   @doc("A recovery orchestration plan for zonal resiliency.")
   Zonal: "Zonal",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("A recovery orchestration plan for cyber recovery into a clean-room environment.")
+  CyberRecovery: "CyberRecovery",
 
   string,
 }
@@ -99,6 +104,10 @@ model RecoveryPlanProperties {
   @doc("Settings for the recovery orchestration groups associated with the recovery orchestration plan.")
   recoveryGroupsSetting: RecoveryGroupsSetting;
 
+  @added(Versions.v2026_11_30_preview)
+  @doc("Resiliency-specific properties for the recovery plan.")
+  resiliencyPlanProperties?: RecoveryPlanResiliencyProperties;
+
   @doc("The status of the most recent failover operation executed.")
   @visibility(Lifecycle.Read)
   latestFailoverStatus?: RecoveryPlanFailoverOperationStatus;
@@ -111,6 +120,51 @@ model RecoveryPlanProperties {
   @doc("Error details associated with the resource.")
   @visibility(Lifecycle.Read)
   errorDetails?: CommonTypes.ErrorDetail;
+}
+
+@added(Versions.v2026_11_30_preview)
+@discriminator("resiliencyType")
+@doc("Resiliency-specific properties for a recovery plan.")
+model RecoveryPlanResiliencyProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Infrastructure resiliency properties for a recovery plan.")
+model InfrastructureResiliencyPlanProperties extends RecoveryPlanResiliencyProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType.InfrastructureResiliency;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Cyber resiliency properties for a recovery plan.")
+model CyberResiliencyPlanProperties extends RecoveryPlanResiliencyProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType.CyberResiliency;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The required subscriptions and locations where recovery is targeted.")
+  targetEnvironment: TargetEnvironment;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("The target subscriptions and locations for cyber recovery.")
+model TargetEnvironment {
+  @added(Versions.v2026_11_30_preview)
+  @minItems(1)
+  @maxItems(1)
+  @doc("The subscription identifiers available as recovery targets.")
+  targetSubscriptionIds: uuid[];
+
+  @added(Versions.v2026_11_30_preview)
+  @minItems(1)
+  @maxItems(1)
+  @doc("The Azure locations available as recovery targets.")
+  targetLocations: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"

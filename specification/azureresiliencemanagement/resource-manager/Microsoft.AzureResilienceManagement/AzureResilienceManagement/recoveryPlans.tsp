@@ -9,6 +9,7 @@ import "./models/common/Job.tsp";
 import "./models/common/JobResource.tsp";
 import "./models/common/ChildJob.tsp";
 import "./models/recoveryPlan/recoveryPlan.tsp";
+import "./models/recoveryPlan/recoveryConfigProfile.tsp";
 import "./models/recoveryPlan/recoveryGroup.tsp";
 import "./models/recoveryPlan/recoveryResource.tsp";
 import "./models/recoveryPlan/recoveryActions.tsp";
@@ -125,6 +126,49 @@ interface RecoveryPlans {
 
 model RecoveryPlanListResult is ResourceListResult<RecoveryPlan>;
 @@identifiers(RecoveryPlanListResult.value, #["id"]);
+
+@armResourceOperations
+@added(Versions.v2026_11_30_preview)
+@doc("Operations for managing recovery configuration profiles.")
+interface RecoveryConfigProfiles {
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @doc("Gets a recovery configuration profile.")
+  get is ArmResourceRead<RecoveryConfigProfile, ServiceGroupParameters>;
+
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @doc("Creates or replaces a recovery configuration profile.")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    RecoveryConfigProfile,
+    ServiceGroupParameters
+  >;
+
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @doc("Updates a recovery configuration profile. Properties omitted from the request remain unchanged.")
+  update is ArmCustomPatchAsync<
+    RecoveryConfigProfile,
+    RecoveryConfigProfilePatch,
+    ServiceGroupParameters
+  >;
+
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @doc("Lists recovery configuration profiles under a recovery plan.")
+  list is ArmResourceListByParent<
+    RecoveryConfigProfile,
+    ServiceGroupParameters
+  >;
+
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @doc("Deletes a recovery configuration profile.")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    RecoveryConfigProfile,
+    ServiceGroupParameters
+  >;
+}
 
 @armResourceOperations
 @doc("Actions for managing Recovery Orchestration Plans.")

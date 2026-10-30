@@ -232,6 +232,7 @@ using Azure.ResourceManager;
 @@clientName(SupportedVerbsForStage, "DrillRunStageSupportedVerbs", "csharp");
 @@clientName(UserConfirmationItem, "GoalResourceUserConfirmation", "csharp");
 @@clientName(UserConsent, "RecoveryActionUserConsent", "csharp");
+@@clientName(BackupType, "RecoveryPointBackupType", "csharp");
 @@clientName(DrillRunOperationVerbs, "DrillRunOperationVerb", "csharp");
 @@clientName(DrillRunSubtasks, "DrillRunStage", "csharp");
 @@clientName(DrillRunTasks, "DrillRunTask", "csharp");
