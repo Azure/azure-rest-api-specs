@@ -1000,6 +1000,7 @@ export interface CompilerArtifactSet {
 export interface PreparationProject {
   id: string;
   path: string;
+  classification?: "existing" | "new";
   sourceChangeIds: string[];
   artifacts: Record<string, CompilerArtifactSet>;
   blockers: PreparationBlocker[];
