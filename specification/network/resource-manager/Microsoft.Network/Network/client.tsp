@@ -6371,6 +6371,31 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 @@alternateType(
+  Microsoft.Network.DdosDetectionRule.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.DdosMitigationRule.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteLagLink.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteLagMember.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Common.ResourceNavigationLink.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
   Microsoft.Network.VpnServerConfigRadiusServerRootCertificate.publicCertData,
   unknown,
   "csharp"
@@ -8001,6 +8026,31 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 );
 @@alternateType(
   Microsoft.Network.DdosMitigationRule.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteLink.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteProviderPort.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkVirtualApplianceSku.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PeerExpressRouteCircuitConnection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VpnSiteLinkConnection.etag,
   Azure.Core.eTag,
   "csharp"
 );
