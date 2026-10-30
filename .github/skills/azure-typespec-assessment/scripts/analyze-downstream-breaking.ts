@@ -8,6 +8,7 @@ import type {
   AssessmentFact,
   DownstreamAnalysis,
   DownstreamCandidate,
+  DownstreamIdentityEvidence,
   DownstreamRootCause,
   NormalizedTcgcContract,
   NormalizedTcgcMethod,
@@ -43,6 +44,11 @@ type CandidateDetail = {
   after?: unknown;
   values?: unknown[];
 };
+
+type IdentityResolution<T> =
+  | { status: "matched"; target: T; evidence?: DownstreamIdentityEvidence }
+  | { status: "removed" }
+  | { status: "blocked" };
 
 type ReferenceGraph = {
   projectId: string;
@@ -311,6 +317,157 @@ function unique(values: (string | undefined)[]): string[] {
   return [...new Set(values.filter((value) => value !== undefined))].sort();
 }
 
+function decoratorText(value: SourceDeclaration["decorators"][number]) {
+  return typeof value === "string" ? value : (value.definition ?? value.name ?? "");
+}
+
+function qualifiedNameWithRenamedMember(qualifiedName: string, previousName: string) {
+  const segments = qualifiedName.split(".");
+  segments[segments.length - 1] = previousName;
+  return segments.join(".");
+}
+
+function explicitRenames(source: DownstreamEvidence, declarationKind: "model" | "operation") {
+  return source.declarations.flatMap((declaration) => {
+    if (declaration.kind !== declarationKind || declaration.source?.revision !== "current") {
+      return [];
+    }
+    const previousNames = declaration.decorators
+      .map(decoratorText)
+      .map((decorator) => /@renamedFrom\s*\(\s*[^,]+,\s*["']([^"']+)["']\s*\)/.exec(decorator)?.[1])
+      .filter((name) => name !== undefined);
+    return previousNames.map((previousName) => ({
+      declarationId: declaration.id,
+      baselineQualifiedName: qualifiedNameWithRenamedMember(
+        declaration.qualifiedName,
+        previousName,
+      ),
+      targetQualifiedName: declaration.qualifiedName,
+    }));
+  });
+}
+
+function identityMatchesQualifiedName(identity: string, qualifiedName: string) {
+  return identity === qualifiedName || identity.endsWith(`.${qualifiedName}`);
+}
+
+function addIdentityBlocker<T extends NormalizedTcgcMethod | NormalizedTcgcNamedType>(
+  blockers: PreparationBlocker[],
+  facts: Record<string, AssessmentFact>,
+  source: DownstreamEvidence,
+  projectId: string,
+  factKind: "method" | "model",
+  before: T,
+  targets: T[],
+  reason: string,
+) {
+  const evidenceFactIds = [
+    addFact(facts, projectId, "baseline", factKind, before, source.artifactComparison),
+    ...targets.map((target) =>
+      addFact(facts, projectId, "target", factKind, target, source.artifactComparison),
+    ),
+  ];
+  blockers.push({
+    code: "downstream-identity-unresolved",
+    projectId,
+    message: `Cannot deterministically resolve ${factKind} identity for ${
+      before.crossLanguageDefinitionId ?? before.identity
+    }: ${reason}`,
+    evidenceFactIds: unique(evidenceFactIds),
+  });
+}
+
+function resolveIdentity<T extends NormalizedTcgcMethod | NormalizedTcgcNamedType>(
+  before: T,
+  targets: T[],
+  source: DownstreamEvidence,
+  projectId: string,
+  factKind: "method" | "model",
+  blockers: PreparationBlocker[],
+  facts: Record<string, AssessmentFact>,
+): IdentityResolution<T> {
+  const baselineIdentity = before.crossLanguageDefinitionId;
+  if (!baselineIdentity) {
+    const sameGeneratedName = targets.filter((target) => target.identity === before.identity);
+    addIdentityBlocker(
+      blockers,
+      facts,
+      source,
+      projectId,
+      factKind,
+      before,
+      sameGeneratedName,
+      "the baseline artifact has no crossLanguageDefinitionId; matching generated names, shapes, or locations is not identity evidence.",
+    );
+    return { status: "blocked" };
+  }
+
+  const exact = targets.filter((target) => target.crossLanguageDefinitionId === baselineIdentity);
+  if (exact.length === 1) return { status: "matched", target: exact[0] };
+  if (exact.length > 1) {
+    addIdentityBlocker(
+      blockers,
+      facts,
+      source,
+      projectId,
+      factKind,
+      before,
+      exact,
+      "multiple target symbols have the same crossLanguageDefinitionId.",
+    );
+    return { status: "blocked" };
+  }
+
+  const declarationKind = factKind === "method" ? "operation" : "model";
+  const relevantRenames = explicitRenames(source, declarationKind).filter((rename) =>
+    identityMatchesQualifiedName(baselineIdentity, rename.baselineQualifiedName),
+  );
+  if (!relevantRenames.length) return { status: "removed" };
+
+  const renamedTargets = new Map<string, { target: T; declarationIds: string[] }>();
+  for (const rename of relevantRenames) {
+    for (const target of targets) {
+      const targetIdentity = target.crossLanguageDefinitionId;
+      if (
+        !targetIdentity ||
+        !identityMatchesQualifiedName(targetIdentity, rename.targetQualifiedName)
+      ) {
+        continue;
+      }
+      const match = renamedTargets.get(targetIdentity) ?? { target, declarationIds: [] };
+      match.declarationIds.push(rename.declarationId);
+      renamedTargets.set(targetIdentity, match);
+    }
+  }
+  if (renamedTargets.size === 1) {
+    const [{ target, declarationIds }] = [...renamedTargets.values()];
+    return {
+      status: "matched",
+      target,
+      evidence: {
+        basis: "typespec-renamed-from",
+        baselineIdentity,
+        targetIdentity: target.crossLanguageDefinitionId as string,
+        declarationIds: unique(declarationIds),
+      },
+    };
+  }
+
+  addIdentityBlocker(
+    blockers,
+    facts,
+    source,
+    projectId,
+    factKind,
+    before,
+    [...renamedTargets.values()].map((item) => item.target),
+    renamedTargets.size
+      ? "explicit @renamedFrom metadata maps to multiple target symbols."
+      : "explicit @renamedFrom metadata has no uniquely matching target crossLanguageDefinitionId.",
+  );
+  return { status: "blocked" };
+}
+
 function normalizedParameterTypeContract(type: NormalizedTcgcType | undefined): unknown {
   if (!type) return typeIdentity(type);
   switch (type.kind) {
@@ -425,6 +582,9 @@ function candidateText(rule: string, symbol: string, detail: CandidateDetail | u
     case "model-property-removed":
       actual = `${symbol} no longer exposes property ${detail?.name}.`;
       break;
+    case "model-identity-changed":
+      actual = `${symbol} changed its generated SDK model name or identity.`;
+      break;
     case "model-property-changed":
       actual = `${symbol}.${detail?.name} changed type, optionality, flattening, or access.`;
       break;
@@ -469,6 +629,7 @@ function pushCandidate(
   after: DownstreamValue | undefined,
   kind: string,
   detail?: CandidateDetail,
+  identityEvidence?: DownstreamIdentityEvidence,
 ) {
   const beforeFactId = before
     ? addFact(facts, projectId, "baseline", kind, before, source.artifactComparison)
@@ -490,6 +651,7 @@ function pushCandidate(
     hunkIds: ownership.hunkIds,
     evidenceFactIds: [beforeFactId, afterFactId].filter((id) => id !== undefined),
     reviewRequired: true,
+    ...(identityEvidence ? { identityEvidence } : {}),
   };
   candidates.push({ id: stableId("downstream", candidate), ...candidate });
 }
@@ -501,27 +663,21 @@ function compareMethods(
   source: DownstreamEvidence,
   facts: Record<string, AssessmentFact>,
   candidates: DownstreamCandidate[],
+  blockers: PreparationBlocker[],
 ) {
-  const currentMethods = new Map(current.methods.map((item) => [item.identity, item]));
-
-  const currentByHttp: Map<string, NormalizedTcgcMethod[]> = new Map();
-  for (const method of current.methods) {
-    const protocol = method.operation;
-    if (!protocol?.verb || !protocol?.path) continue;
-    const key = `${protocol.verb}\u0000${protocol.path}`;
-    const values = currentByHttp.get(key) ?? [];
-    values.push(method);
-    currentByHttp.set(key, values);
-  }
   for (const before of base.methods) {
-    let after = currentMethods.get(before.identity);
-    if (!after && before.operation?.verb && before.operation?.path) {
-      const matches =
-        currentByHttp.get(`${before.operation.verb}\u0000${before.operation.path}`) ?? [];
-      if (matches.length === 1) after = matches[0];
-    }
+    const resolution = resolveIdentity(
+      before,
+      current.methods,
+      source,
+      projectId,
+      "method",
+      blockers,
+      facts,
+    );
     const symbol = before.crossLanguageDefinitionId ?? before.identity;
-    if (!after) {
+    if (resolution.status === "blocked") continue;
+    if (resolution.status === "removed") {
       pushCandidate(
         candidates,
         facts,
@@ -535,6 +691,8 @@ function compareMethods(
       );
       continue;
     }
+    const after = resolution.target;
+    const identityEvidence = resolution.evidence;
     if (before.identity !== after.identity || before.name !== after.name) {
       pushCandidate(
         candidates,
@@ -546,6 +704,8 @@ function compareMethods(
         before,
         after,
         "method",
+        undefined,
+        identityEvidence,
       );
     }
     if (before.client !== after.client) {
@@ -559,6 +719,8 @@ function compareMethods(
         before,
         after,
         "method",
+        undefined,
+        identityEvidence,
       );
     }
     if (before.kind !== after.kind) {
@@ -573,6 +735,7 @@ function compareMethods(
         after,
         "method",
         { before: before.kind, after: after.kind },
+        identityEvidence,
       );
     }
     if (
@@ -591,6 +754,8 @@ function compareMethods(
         before,
         after,
         "method",
+        undefined,
+        identityEvidence,
       );
     }
     if (!same(before.responseType, after.responseType)) {
@@ -604,6 +769,8 @@ function compareMethods(
         before,
         after,
         "method",
+        undefined,
+        identityEvidence,
       );
     }
     if (before.access === "public" && after.access !== "public") {
@@ -617,6 +784,8 @@ function compareMethods(
         before,
         after,
         "method",
+        undefined,
+        identityEvidence,
       );
     }
     if (!same(before.paging, after.paging)) {
@@ -630,6 +799,8 @@ function compareMethods(
         before,
         after,
         "method",
+        undefined,
+        identityEvidence,
       );
     }
     if (
@@ -645,6 +816,8 @@ function compareMethods(
         before,
         after,
         "method",
+        undefined,
+        identityEvidence,
       );
     }
   }
@@ -657,12 +830,21 @@ function compareModels(
   source: DownstreamEvidence,
   facts: Record<string, AssessmentFact>,
   candidates: DownstreamCandidate[],
+  blockers: PreparationBlocker[],
 ) {
-  const currentModels = new Map(current.models.map((item) => [item.identity, item]));
   for (const before of base.models.filter((item) => item.reachable)) {
-    const after = currentModels.get(before.identity);
+    const resolution = resolveIdentity(
+      before,
+      current.models,
+      source,
+      projectId,
+      "model",
+      blockers,
+      facts,
+    );
     const symbol = before.crossLanguageDefinitionId ?? before.identity;
-    if (!after) {
+    if (resolution.status === "blocked") continue;
+    if (resolution.status === "removed") {
       pushCandidate(
         candidates,
         facts,
@@ -675,6 +857,23 @@ function compareModels(
         "model",
       );
       continue;
+    }
+    const after = resolution.target;
+    const identityEvidence = resolution.evidence;
+    if (before.identity !== after.identity || before.name !== after.name) {
+      pushCandidate(
+        candidates,
+        facts,
+        source,
+        projectId,
+        "model-identity-changed",
+        symbol,
+        before,
+        after,
+        "model",
+        undefined,
+        identityEvidence,
+      );
     }
     if (
       before.access !== after.access ||
@@ -691,6 +890,8 @@ function compareModels(
         before,
         after,
         "model",
+        undefined,
+        identityEvidence,
       );
     }
     if (
@@ -709,6 +910,8 @@ function compareModels(
         before,
         after,
         "model",
+        undefined,
+        identityEvidence,
       );
     }
     const afterProperties = new Map((after.properties ?? []).map((item) => [item.name, item]));
@@ -727,6 +930,7 @@ function compareModels(
           after,
           "model",
           { name: property.name },
+          identityEvidence,
         );
       } else if (canonicalJson(property) !== canonicalJson(currentProperty)) {
         pushCandidate(
@@ -740,6 +944,7 @@ function compareModels(
           after,
           "model",
           { name: property.name },
+          identityEvidence,
         );
       }
     }
@@ -756,6 +961,7 @@ function compareModels(
           after,
           "model",
           { name: property.name },
+          identityEvidence,
         );
       }
     }
@@ -1243,7 +1449,7 @@ function buildRootCauses(
         const method = graph.nodes.get(result.methodKey)?.value;
         const methodIdentity =
           stringField(method, "crossLanguageDefinitionId") ?? stringField(method, "identity");
-        const key = `${methodIdentity ?? result.methodKey}:${result.location ?? ""}`;
+        const key = `${graph.comparisonRole}:${methodIdentity ?? result.methodKey}:${result.location ?? ""}`;
         if (!pathsByMethod.has(key)) pathsByMethod.set(key, { graph, result, methodIdentity });
       }
     }
@@ -1253,13 +1459,17 @@ function buildRootCauses(
 
     const referenceEvidence: DownstreamRootCause["referenceEvidence"] = [];
     for (const { graph, result } of pathsByMethod.values()) {
-      const methodFactId = graph.ensureFact(result.methodKey);
-      methodFactIds.push(methodFactId);
+      for (const counterpart of projectGraphs) {
+        methodFactIds.push(counterpart.ensureFact(result.methodKey));
+      }
       for (const edge of result.path) {
         const fromFactId = graph.ensureFact(edge.from);
         const toFactId = graph.ensureFact(edge.to);
         if (edge.to.startsWith("type:") && toFactId !== undefined) {
-          typeFactIds.push(toFactId);
+          for (const counterpart of projectGraphs) {
+            const counterpartId = counterpart.ensureFact(edge.to);
+            if (counterpartId !== undefined) typeFactIds.push(counterpartId);
+          }
         }
         referenceEvidence.push({
           fromFactId,
@@ -1333,8 +1543,8 @@ export function analyzeDownstreamBreaking(options: {
       const source = evidence(project, sourceIndex);
       source.artifactComparison = project.artifactComparison;
       const candidateStart = candidates.length;
-      compareMethods(project.id, base, current, source, facts, candidates);
-      compareModels(project.id, base, current, source, facts, candidates);
+      compareMethods(project.id, base, current, source, facts, candidates, blockers);
+      compareModels(project.id, base, current, source, facts, candidates, blockers);
       compareEnums(project.id, base, current, source, facts, candidates);
       compareUnions(project.id, base, current, source, facts, candidates);
       compareClients(project.id, base, current, source, facts, candidates);

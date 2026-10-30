@@ -12,6 +12,12 @@ The deterministic scripts identify review units, facts, and candidates. The Agen
 
 REST and downstream decisions are independent. A REST-compatible change can still break generated SDK users. Never use TCGC to classify REST compatibility or AutoRest to infer SDK surface.
 
+Downstream method/model candidates are supplied only after deterministic
+identity resolution. Exact cross-language definition identity and explicit
+`@renamedFrom` lineage are admissible; names, routes, shapes, property overlap,
+and contextual proximity are not. Preserve identity blockers rather than
+describing an unsupported rename or replacement.
+
 For a `new-api-version` comparison, assess substantive REST candidates as
 cross-version migration compatibility. Do not reject them merely because a
 version was added. Use the supplied previous-version and target-version
@@ -49,6 +55,13 @@ Produce exactly one title and summary per semantic review unit. Do not return
 operation or source IDs; deterministic assembly restores the complete
 inventory. Describe version propagation explicitly when that is the unit's
 change kind.
+
+The coordinator-provided review-unit ID, normalized change facts, grouping
+diagnostics, and evidence provenance are immutable. Do not infer a new group
+from similar names, files, operations, or descriptions. Publication groups
+contain only `Versions` declaration facts; feature and contract facts remain
+normal review units even when they share a source file or hunk with publication
+evidence.
 
 For resource-oriented REST APIs, identify the affected resource and lifecycle
 role, not just the HTTP verb and route. Use supplied TypeSpec declarations,

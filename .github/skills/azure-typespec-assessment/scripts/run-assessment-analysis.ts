@@ -1425,6 +1425,7 @@ export function buildModelInput({
     ...retainedInferenceFactIds,
     ...retainedRestCandidates.flatMap((candidate) => candidate.evidenceFactIds ?? []),
     ...downstreamReferencedFactIds(retainedDownstream),
+    ...downstream.blockers.flatMap((blocker) => blocker.evidenceFactIds ?? []),
   ]);
 
   const compactCandidate = (candidate: AssessmentCandidate, artifact: string) => {
