@@ -98,6 +98,7 @@ union ToolboxToolType {
   azure_ai_search: ToolboxAzureAISearchToolType,
   openapi: ToolboxOpenApiToolType,
   a2a_preview: ToolboxA2APreviewToolType,
+  #deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
   browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
   reminder_preview: ToolboxReminderPreviewToolType,
   work_iq_preview: ToolboxWorkIQPreviewToolType,
@@ -273,10 +274,15 @@ model A2APreviewToolboxTool extends ToolboxTool {
 
 /**
  * A browser automation tool stored in a toolbox.
+ * BrowserAutomationPreviewToolboxTool is deprecated.
+ * Please use BrowserAutomationToolboxTool instead.
+ * See https://aka.ms/bat/docs for more information on Browser automation tool.
  */
+#deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
 @extension("x-ms-foundry-meta", PreviewTool)
 model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
   type: ToolboxBrowserAutomationPreviewToolType;
+  #suppress "deprecated" "Intentional reuse of the legacy model for backward compatibility."
   ...ToolFields<BrowserAutomationPreviewTool>;
 }
 
