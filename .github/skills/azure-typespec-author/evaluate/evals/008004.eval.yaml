@@ -17,16 +17,19 @@ stimuli:
       mode: forced
       language: go
     prompt: |
-      @azure-typespec-author Continue TypeSpec authoring with default SDK client
+      @azure-typespec-author Continue TypeSpec authoring with default client
       configuration planning only. Analysis, intake, grounding, and the source plan are
-      complete, and the user has not opted out. The Go ARM SDK's pre-change API exposes
-      IdentityKeyStoreTPM. The approved addition is the new union variant
-      IdentityKeyStore.TpmTransition. Its current proposed Go constant name is
-      IdentityKeyStoreTpmTransition, which has never shipped. TPM has the same documented
-      meaning, trusted platform module, in both identifiers. There are no other related
-      casing patterns, existing overrides, or collisions. Installed TCGC supports scoped
-      clientName on this union variant. Use the supplied facts and installed naming
-      guidance only; no network, MCP, edits, compilation, or generation.
+      complete, and the user has not opted out. The ARM TypeSpec project targets Go.
+      Before this change, union IdentityKeyStore declares member Tpm, and the loaded
+      client.tsp contains the existing override:
+      @@clientName(IdentityKeyStore.Tpm, "TPM", "go");
+      The approved addition is union member IdentityKeyStore.TpmTransition. Its starting
+      Go constant name candidate is IdentityKeyStoreTpmTransition. TypeSpec documentation
+      confirms TPM means trusted platform module for both members. Go constants in this
+      plan combine the union name with the member's Go name. There are no other related
+      patterns, overrides, or collisions. Installed TCGC supports scoped clientName on
+      this union member. Use only these TypeSpec facts and installed naming guidance;
+      no network, MCP, edits, compilation, or generation.
       Return JSON with a top-level "names" object mapping "existing" and "added" directly
       to planned Go constant name strings. Also return "override" as an object with the
       real TypeSpec "target", member-only "name", and language "scope", plus top-level

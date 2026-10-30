@@ -17,22 +17,22 @@ stimuli:
       mode: forced
       language: go
     prompt: |
-      @azure-typespec-author Continue TypeSpec authoring with default SDK client
+      @azure-typespec-author Continue TypeSpec authoring with default client
       configuration planning only. Analysis, intake, grounding, and the source plan are
-      complete, and the user has not opted out. The ARM SDK targets golang, C#, Java, and
-      Python. Analyze only the Go naming for newly added union variant
-      ControllerType.CiscoAci. The documented acronym is Cisco ACI; its current proposed
-      Go constant name is ControllerTypeCiscoAci. The Go SDK has no existing name or
-      related casing pattern for this new API family. The approved client.tsp already
-      contains member-specific clientName overrides for this addition: "CiscoAci" in
+      complete, and the user has not opted out. The ARM TypeSpec project targets golang,
+      C#, Java, and Python. Analyze only the Go naming for newly added union variant
+      ControllerType.CiscoAci. TypeSpec documentation confirms Cisco ACI; the starting
+      Go constant name candidate is ControllerTypeCiscoAci. The pre-change TypeSpec has
+      no related declarations or Go overrides for this new API family. The approved
+      client.tsp already contains member-specific clientName overrides for this addition: "CiscoAci" in
       scope csharp, "CISCO_ACI" in scope java, and "CISCO_ACI" in scope python. Those
       choices are final; do not revisit them. There are no collisions. Use only these
-      confirmed facts and installed naming guidance; no network, MCP, edits, compilation,
+      TypeSpec facts and installed naming guidance; no network, MCP, edits, compilation,
       or generation. Return JSON with "clientNames" containing all four keys "go",
       "csharp", "java", and "python", mapping the normalized language scopes directly to
       planned clientName strings for this member, not the synthesized constant names.
-      Include the unchanged other-language entries. Also return "otherLanguagesChanged", "applied", and
-      "generatedNamesVerified".
+      Include the unchanged other-language entries. Also return "otherLanguagesChanged",
+      "applied", and "generatedNamesVerified".
     constraints:
       max_turns: 14
       max_tokens: 20000

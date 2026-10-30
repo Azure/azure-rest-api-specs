@@ -115,7 +115,7 @@ Naming cases `007001` through `007008` compare trigger, forced, and no-skill beh
 client configuration planning, direct-edit handoffs, opt-outs, and documentation-only changes.
 Cases `007009` through `007014` check routing boundaries in trigger mode only.
 
-Go naming cases `008001` through `008006` run in forced mode through `azure-typespec-author` and the shared naming skill. They cover new acronym names, preservation of existing names and related casing patterns, parameter names, and language isolation. Their `naming-planning` environment mounts the same skills and copies repository instructions directly, without starting MCP. Each prompt supplies fixed TypeSpec and SDK-baseline evidence, so these planning-only cases need neither MCP artifacts nor fixture dependency setup, live SDK PRs, compilation, or generation.
+Go naming cases `008001` through `008006` run in forced mode through `azure-typespec-author` and the shared naming skill. They cover new acronym names, preservation of existing names and related casing patterns, parameter names, and language isolation. Their `naming-planning` environment mounts the same skills and copies repository instructions directly, without starting MCP. Each prompt supplies fixed TypeSpec declarations, documentation, and customization evidence, so these planning-only cases need neither MCP artifacts nor fixture dependency setup, compilation, or generation.
 
 Run only the Go cases from this directory, without loading legacy naming cases:
 

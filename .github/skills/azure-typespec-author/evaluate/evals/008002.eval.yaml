@@ -17,16 +17,18 @@ stimuli:
       mode: forced
       language: go
     prompt: |
-      @azure-typespec-author Continue TypeSpec authoring with default SDK client
+      @azure-typespec-author Continue TypeSpec authoring with default client
       configuration planning only. Analysis, intake, grounding, and the source plan are
-      complete, and the user has not opted out. The Widget ARM SDK targets Go. Its
-      pre-change API contains FooAbcOperation in stable 1.0.0, ExistingTpmDetails in
-      1.1.0-beta.1, and ExistingAciSettings in existing unreleased SDK code. ABC, TPM,
-      and ACI are confirmed acronyms in those names. None of these identifiers is newly
-      introduced by the authoring change. The only approved addition is
+      complete, and the user has not opted out. The Widget ARM TypeSpec project targets
+      Go. The pre-change TypeSpec declares operation FooAbcOperation in a stable API
+      version, model ExistingTpmDetails in a preview API version, and model
+      ExistingAciSettings in an unreleased API version. Their current planned Go names
+      match their TypeSpec names, and there are no clientName overrides. Their TypeSpec
+      documentation confirms ABC, TPM, and ACI as acronyms. None of these identifiers is
+      newly introduced by this change. The only approved addition is
       WidgetProperties.count: int32, whose current proposed Go field name is Count.
-      There are no collisions or other naming changes. Use this complete baseline and
-      installed naming guidance only; no network, MCP, edits, compilation, or generation.
+      There are no collisions or other naming changes. Use only these TypeSpec facts
+      and installed naming guidance; no network, MCP, edits, compilation, or generation.
       Return JSON with a top-level "names" object mapping "stable", "preview",
       "unreleased", and "count" directly to planned Go name strings, plus "decorators"
       listing any proposed casing overrides, "scope", "applied", and

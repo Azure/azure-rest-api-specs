@@ -17,18 +17,19 @@ stimuli:
       mode: forced
       language: go
     prompt: |
-      @azure-typespec-author Continue TypeSpec authoring at the separate default SDK client
+      @azure-typespec-author Continue TypeSpec authoring at the separate default client
       configuration planning step. Analysis, intake, grounding, and the source plan are
-      complete, and the user has not opted out. This is a new, never-shipped Go ARM SDK at
-      specification/widget/resource-manager/Microsoft.Widget. There are no existing SDK
-      names, related casing patterns, overrides, or collisions. The approved additions
+      complete, and the user has not opted out. This is a new ARM TypeSpec project at
+      specification/widget/resource-manager/Microsoft.Widget, with a Go emitter in
+      tspconfig.yaml. There are no pre-existing declarations, related casing patterns,
+      overrides, or collisions. The approved additions
       include union variant ControllerType.CiscoAci and model AFDDomainMtlsParameters.
-      Cisco ACI is the documented acronym; AFD means Azure Front Door and MTLS means mutual
-      TLS. The current proposed Go names are ControllerTypeCiscoAci,
+      TypeSpec documentation confirms Cisco ACI, AFD (Azure Front Door), and MTLS (mutual
+      TLS). The starting Go name candidates are ControllerTypeCiscoAci,
       AFDDomainMtlsParameters, AFDDomainMtlsParametersClassification, and
       GetAFDDomainMtlsParameters. The classification interface and getter are synthesized
-      from the model, not separate TypeSpec declarations. Use these confirmed facts and
-      installed naming guidance only. No network, MCP, edits, compilation, or SDK generation.
+      from the model, not separate TypeSpec declarations. Use only these TypeSpec facts
+      and installed naming guidance. No network, MCP, edits, compilation, or generation.
       Return JSON with a top-level "names" object mapping "controller", "model",
       "classification", and "getter" directly to planned Go name strings. Also include
       top-level "scope", "applied", and "generatedNamesVerified".
