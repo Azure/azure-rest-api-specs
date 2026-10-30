@@ -130,6 +130,10 @@ stages:
               Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
               $buildFailedLabel = ""
               Write-Host "##vso[task.setvariable variable=BuildFailedLabel]$buildFailedLabel"
+              $managementLabel = ""
+              Write-Host "##vso[task.setvariable variable=ManagementLabel]$managementLabel"
+              $pullRequestLabels = ""
+              Write-Host "##vso[task.setvariable variable=PullRequestLabels]$pullRequestLabels"
             displayName: "Create Run Time Variables"
 
           - ${{ if and(eq(variables['System.TeamProject'], 'internal'), ne(variables['Build.Reason'], 'PullRequest')) }}:
@@ -367,6 +371,15 @@ stages:
                     displayName: "Set PR title prefix on failures"
                     condition: or(eq(variables['Agent.JobStatus'], 'Failed'), eq(variables['Agent.JobStatus'], 'SucceededWithIssues'))
 
+              - pwsh: |
+                  $pullRequestLabels = @(
+                    "$(BuildFailedLabel)"
+                    "$(ManagementLabel)"
+                  ) | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+                  $pullRequestLabels = $pullRequestLabels -join ","
+                  Write-Host "##vso[task.setvariable variable=PullRequestLabels]$pullRequestLabels"
+                displayName: "Combine pull request labels"
+
               - task: PowerShell@2
                 displayName: Create pull request
                 condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
@@ -383,7 +396,7 @@ stages:
                     -AuthToken "$(GH_TOKEN)"
                     -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
                     -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
-                    -PRLabels "$(BuildFailedLabel)"
+                    -PRLabels "$(PullRequestLabels)"
                     -OpenAsDraft $$(OpenSdkPullRequestAsDraft)
                     -UpdateExistingPullRequest $true
 
