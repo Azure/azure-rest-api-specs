@@ -1,0 +1,113 @@
+{
+  "operationId": "Projects_Create",
+  "parameters": {
+    "accountName": "myAccount",
+    "api-version": "2026-09-15-preview",
+    "project": {
+      "location": "westus",
+      "properties": {
+        "displayName": "My project",
+        "toolControls": {
+          "defaultAction": "Deny",
+          "allowedTools": [
+            {
+              "type": "code_interpreter"
+            },
+            {
+              "type": "mcp",
+              "serverUrl": "https://*.contoso.com/mcp"
+            }
+          ]
+        }
+      }
+    },
+    "projectName": "myProject",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "title": "Create a Foundry project with tool controls",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myProject",
+        "type": "Microsoft.CognitiveServices/accounts/projects",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount/projects/myProject",
+        "location": "westus",
+        "properties": {
+          "displayName": "My project",
+          "provisioningState": "Succeeded",
+          "toolControls": {
+            "defaultAction": "Deny",
+            "allowedTools": [
+              {
+                "type": "code_interpreter"
+              },
+              {
+                "type": "mcp",
+                "serverUrl": "https://*.contoso.com/mcp"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myProject",
+        "type": "Microsoft.CognitiveServices/accounts/projects",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount/projects/myProject",
+        "location": "westus",
+        "properties": {
+          "displayName": "My project",
+          "provisioningState": "Creating",
+          "toolControls": {
+            "defaultAction": "Deny",
+            "allowedTools": [
+              {
+                "type": "code_interpreter"
+              },
+              {
+                "type": "mcp",
+                "serverUrl": "https://*.contoso.com/mcp"
+              }
+            ]
+          }
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/westus/operationResults/00000000-1111-2222-3333-555555555555?api-version=2026-09-15-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/westus/operationResults/00000000-1111-2222-3333-555555555555?operationResultResponseType=Location&api-version=2026-09-15-preview",
+        "Retry-After": "10"
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myProject",
+        "type": "Microsoft.CognitiveServices/accounts/projects",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount/projects/myProject",
+        "location": "westus",
+        "properties": {
+          "displayName": "My project",
+          "provisioningState": "Accepted",
+          "toolControls": {
+            "defaultAction": "Deny",
+            "allowedTools": [
+              {
+                "type": "code_interpreter"
+              },
+              {
+                "type": "mcp",
+                "serverUrl": "https://*.contoso.com/mcp"
+              }
+            ]
+          }
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/westus/operationResults/00000000-1111-2222-3333-555555555555?api-version=2026-09-15-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/westus/operationResults/00000000-1111-2222-3333-555555555555?operationResultResponseType=Location&api-version=2026-09-15-preview",
+        "Retry-After": "10"
+      }
+    }
+  }
+}
