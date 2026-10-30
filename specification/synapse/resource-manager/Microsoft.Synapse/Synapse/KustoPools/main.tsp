@@ -31,6 +31,7 @@ using TypeSpec.Versioning;
 /**
  * Azure Synapse Analytics management API for Kusto pools and their databases, data connections, principal assignments and attached database configurations.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "The shared Microsoft.Synapse operations endpoint is defined once, in the Synapse Workspaces project; this project exposes the Kusto-specific /kustooperations list."
 @armProviderNamespace("Microsoft.Synapse")
 @service(#{ title: "SynapseManagementClient" })
 @versioned(Versions)
