@@ -4,6 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
+import "./BuilderAppActions.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -13,329 +14,456 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Web;
 
-/**
- * A builder app resource. A builder app binds a source repository and branch to a managed
- * build-and-host pipeline; one resource represents one app.
- */
+/** A managed application built from a connected repository or uploaded source. */
 @added(Versions.v2026_09_01_preview)
-model BuilderApp
-  is Azure.ResourceManager.TrackedResource<BuilderAppProperties> {
+model BuilderApp is TrackedResource<BuilderAppProperties> {
   ...ResourceNameParameter<
     Resource = BuilderApp,
     KeyName = "name",
     SegmentName = "builderApps",
     NamePattern = "^[A-Za-z0-9][A-Za-z0-9-]{1,58}[A-Za-z0-9]$"
   >;
+  ...ManagedServiceIdentityProperty;
 }
 
-/**
- * The properties of a builder app.
- */
+/** Desired configuration and read-only serving state of a builder app. */
 @added(Versions.v2026_09_01_preview)
 model BuilderAppProperties {
-  /**
-   * The source repository and branch the app is built from. This is the identity of the app and
-   * cannot be changed after the resource is created.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  source: BuilderAppSource;
+  /** Optional repository connection. Once attached, the provider and repository ID cannot change. */
+  source?: BuilderAppSource;
 
-  /**
-   * The status of the last operation performed on the resource. This describes the resource
-   * operation only and does not reflect the health of the running app.
-   */
+  /** Current repository authorization state. */
+  @visibility(Lifecycle.Read)
+  sourceIntegrationState?: BuilderAppSourceIntegrationState;
+
+  /** Resource operation state, independent of application runtime health. */
   @visibility(Lifecycle.Read)
   provisioningState?: BuilderAppProvisioningState;
 
-  /**
-   * A read-only reflection of the deployment the app is currently serving. The platform
-   * re-materializes this on every deployment; it is never supplied by the caller.
-   */
+  /** Desired external configuration captured by the next application version. */
+  versionConfiguration?: BuilderAppVersionConfiguration;
+
+  /** Telemetry applied independently of version activation. Omit to preserve; use {} to clear. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  telemetry?: BuilderAppTelemetry;
+
+  /** Per-component scaling applied independently of version activation. Not accepted by PATCH. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  scaling?: BuilderAppScaling;
+
+  /** The deployment currently serving traffic. */
   @visibility(Lifecycle.Read)
   runtime?: BuilderAppRuntime;
 
-  /**
-   * Configuration variables injected into the app as environment variables. Values are write-only
-   * and are never returned. The array is authoritative on write: a variable omitted from the array
-   * is removed, and a variable supplied without a value keeps its existing value.
-   */
-  @identifiers(#["name"])
-  variables?: BuilderAppVariable[];
+  /** Progress of the latest managed identity update. */
+  @visibility(Lifecycle.Read)
+  identityUpdate?: BuilderAppIdentityUpdate;
 }
 
-/**
- * The source repository and branch a builder app is built from.
- */
+/** Repository connection and authorization supplied for a builder app. */
 @added(Versions.v2026_09_01_preview)
 model BuilderAppSource {
-  /**
-   * The source provider the app gets its code from.
-   */
-  type: BuilderAppSourceType;
+  /** Source provider; existing connections cannot change provider. */
+  provider: BuilderAppSourceType;
 
-  /**
-   * The numeric identifier of the source repository. This is a durable key that survives a
-   * repository rename.
-   */
-  repositoryId: int64;
+  /** Provider-stable repository identifier, represented as a string. Cannot replace an attached repository. */
+  id: string;
 
-  /**
-   * The fully qualified name of the source repository, in the form 'owner/repository'.
-   */
-  repositoryFullName: string;
+  /** Provider-canonical repository name, such as owner/repository. */
+  displayName: string;
 
-  /**
-   * The branch the app is built from.
-   */
-  branch: string;
+  /** Moving reference, such as a branch or tag, resolved when deploying. */
+  reference: string;
+
+  /** Repository-relative root for the app manifest and component paths. */
+  rootDirectory?: string;
+
+  /** Whether pushes to the selected reference automatically create deployments. */
+  autoDeploy?: boolean;
+
+  /** Short-lived source authorization assertion. Mutually exclusive with repositoryToken; never returned. */
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  authorizationToken?: string;
+
+  /** GitHub user credential used only during this write. Mutually exclusive with authorizationToken; never returned. */
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  repositoryToken?: string;
 }
 
-/**
- * The source provider a builder app gets its code from.
- */
+/** Supported source providers. */
 @added(Versions.v2026_09_01_preview)
 union BuilderAppSourceType {
-  /**
-   * The app is built from a GitHub repository.
-   */
+  /** A GitHub repository. */
   GitHub: "github",
 
   string,
 }
 
-/**
- * The provisioning state of a builder app.
- */
+/** State of the repository connection. */
+@added(Versions.v2026_09_01_preview)
+union BuilderAppSourceIntegrationState {
+  /** No repository has been connected. */
+  NotConfigured: "NotConfigured",
+
+  /** The repository requires authorization. */
+  AuthorizationRequired: "AuthorizationRequired",
+
+  /** The repository is connected and authorized. */
+  Configured: "Configured",
+
+  string,
+}
+
+/** Resource lifecycle state. */
 @added(Versions.v2026_09_01_preview)
 @Azure.Core.lroStatus
 union BuilderAppProvisioningState {
   ResourceProvisioningState,
 
-  /**
-   * The resource is being created.
-   */
+  /** The resource is being created. */
   Creating: "Creating",
 
-  /**
-   * The resource is being updated.
-   */
+  /** The resource is being updated. */
   Updating: "Updating",
 
-  /**
-   * The resource is being deleted.
-   */
+  /** The resource is being deleted. */
   Deleting: "Deleting",
 
   string,
 }
 
-/**
- * A read-only reflection of the deployment a builder app is currently serving.
- */
+/** External configuration captured by an application version. */
 @added(Versions.v2026_09_01_preview)
-model BuilderAppRuntime {
+model BuilderAppVersionConfiguration {
   /**
-   * The public URL the app is served from.
+   * Omit to preserve variables; [] clears. An explicit list replaces the set.
+   * Names are unique ignoring case; PORT and the EMBR_ prefix are reserved.
+   * Values are limited to 32 KiB UTF-8 each; all names and values together to 64 KiB.
    */
-  @visibility(Lifecycle.Read)
-  url?: url;
-
-  /**
-   * The identifier of the run the app currently points at. Runs are managed by the platform and
-   * are not Azure Resource Manager resources.
-   */
-  @visibility(Lifecycle.Read)
-  activeRunId?: string;
-
-  /**
-   * The identifier of the deployment the active run was created from. Deployments are managed by
-   * the platform and are not Azure Resource Manager resources.
-   */
-  @visibility(Lifecycle.Read)
-  activeDeploymentId?: string;
-
-  /**
-   * The components the active deployment produced. The order of the array determines route
-   * precedence, with the longest matching path winning.
-   */
-  @visibility(Lifecycle.Read)
+  @maxItems(100)
   @identifiers(#["name"])
-  components?: BuilderAppRuntimeComponent[];
+  variables?: BuilderAppVariable[];
+
+  /** Named components in the version configuration. Not accepted by PATCH. */
+  @identifiers(#["name"])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  components?: BuilderAppVersionComponent[];
 }
 
-/**
- * A component of the deployment a builder app is currently serving.
- */
+/** Version configuration for a named component. */
 @added(Versions.v2026_09_01_preview)
-model BuilderAppRuntimeComponent {
-  /**
-   * The name of the component.
-   */
-  @visibility(Lifecycle.Read)
+model BuilderAppVersionComponent {
+  /** Component name. */
   name: string;
-
-  /**
-   * The role the component performs at runtime.
-   */
-  @visibility(Lifecycle.Read)
-  role?: BuilderAppComponentRole;
-
-  /**
-   * How the component was built.
-   */
-  @visibility(Lifecycle.Read)
-  source?: BuilderAppComponentSource;
-
-  /**
-   * The public path the component is mounted at. This is not set when the component is not
-   * publicly served.
-   */
-  @visibility(Lifecycle.Read)
-  path?: string;
-
-  /**
-   * Whether the component is reachable only from other components of the same app and is not
-   * publicly served.
-   */
-  @visibility(Lifecycle.Read)
-  internal?: boolean;
-
-  /**
-   * The build outputs the component produced.
-   */
-  @visibility(Lifecycle.Read)
-  artifacts?: BuilderAppComponentArtifact[];
-
-  /**
-   * The commit the component was built from.
-   */
-  @visibility(Lifecycle.Read)
-  commitSha?: string;
 }
 
-/**
- * The role a builder app component performs at runtime.
- */
-@added(Versions.v2026_09_01_preview)
-union BuilderAppComponentRole {
-  /**
-   * The component is a set of static assets served by the platform and has no process.
-   */
-  Static: "static",
-
-  /**
-   * The component is an HTTP server process.
-   */
-  Web: "web",
-
-  /**
-   * The component is a background process that does not serve HTTP traffic.
-   */
-  Worker: "worker",
-
-  string,
-}
-
-/**
- * How a builder app component was built.
- */
-@added(Versions.v2026_09_01_preview)
-union BuilderAppComponentSource {
-  /**
-   * The component was built by a framework the platform detected.
-   */
-  Framework: "framework",
-
-  string,
-}
-
-/**
- * A build output a builder app component produced.
- */
-@added(Versions.v2026_09_01_preview)
-union BuilderAppComponentArtifact {
-  /**
-   * Static assets served from managed storage.
-   */
-  Static: "static",
-
-  /**
-   * A compute image that runs as a process.
-   */
-  Compute: "compute",
-
-  string,
-}
-
-/**
- * A configuration variable injected into a builder app as an environment variable.
- */
+/** A version variable whose value is accepted on write but omitted from ordinary resource responses. */
 @added(Versions.v2026_09_01_preview)
 model BuilderAppVariable {
-  /**
-   * The name of the environment variable.
-   */
+  /** Environment variable name, unique ignoring case. PORT and EMBR_ names are reserved. */
   name: string;
 
-  /**
-   * The value of the variable. This property is write-only and is never returned. Omitting it on
-   * an update keeps the existing value.
-   */
+  /** Omit or send null to preserve an existing value. A new name requires a value; an empty string is valid. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null preserves an existing variable value in the service contract."
   @secret
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  value?: string;
-
-  /**
-   * Where the value of the variable comes from. When not specified the value is supplied inline.
-   */
-  source?: BuilderAppVariableSource;
-
-  /**
-   * The URI of the key vault secret holding the value. This is only set when the source is
-   * 'keyVault'.
-   */
-  keyVaultRef?: url;
-
-  /**
-   * The role the variable plays for the app, for example 'connectionString' or 'apiKey'.
-   */
-  role?: string;
+  value?: string | null;
 }
 
-/**
- * Where the value of a builder app variable comes from.
- */
+/** Identity assignment modes. */
 @added(Versions.v2026_09_01_preview)
-union BuilderAppVariableSource {
-  /**
-   * The value is supplied inline and is stored encrypted by the platform.
-   */
-  Inline: "inline",
+union BuilderAppIdentityType {
+  /** No identities assigned. */
+  None: "None",
 
-  /**
-   * The value is read from a key vault secret referenced by the variable.
-   */
-  KeyVault: "keyVault",
+  /** System-assigned identity. */
+  SystemAssigned: "SystemAssigned",
+
+  /** User-assigned identities. */
+  UserAssigned: "UserAssigned",
+
+  /** System-assigned and user-assigned identities. */
+  SystemAndUserAssigned: "SystemAssigned,UserAssigned",
 
   string,
 }
 
-/**
- * The operations of builder apps.
- */
+/** Managed identity desired state and generated metadata. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppIdentity {
+  /** Assignment mode. */
+  type: BuilderAppIdentityType;
+
+  /** Generated system-assigned principal ID. */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /** Generated system-assigned tenant ID. */
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
+
+  /** User-assigned identities keyed by their fully qualified ARM resource IDs. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Managed identity assignments are keyed by user-selected ARM resource IDs."
+  userAssignedIdentities?: Record<BuilderAppUserAssignedIdentity>;
+}
+
+/** Generated metadata for a user-assigned identity. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppUserAssignedIdentity {
+  /** Generated identity client ID. */
+  @visibility(Lifecycle.Read)
+  clientId?: string;
+
+  /** Generated identity principal ID. */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+}
+
+/** Presence-aware identity changes; null map entries remove individual user-assigned identities. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppPatchIdentity {
+  /** Assignment mode to apply. Omission preserves the current mode. */
+  type?: BuilderAppIdentityType;
+
+  /** Assignments to add or remove. A null value removes the assignment at that resource ID. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "PATCH managed identity assignments use resource-ID keys and null entries to remove assignments."
+  userAssignedIdentities?: Record<BuilderAppUserAssignedIdentity | null>;
+}
+
+/** Progress of an identity update and its deployment handoff. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppIdentityUpdate {
+  /** Opaque identity operation identifier. */
+  id: string;
+
+  /** Time the operation was admitted. */
+  createdAt: utcDateTime;
+
+  /** Current phase of the operation. */
+  phase: BuilderAppIdentityUpdatePhase;
+
+  /** Requested identity assignment state. */
+  requestedIdentity: BuilderAppIdentity;
+
+  /** User-assigned identity selected for AZURE_CLIENT_ID. */
+  azureClientIdIdentityResourceId?: Azure.Core.armResourceIdentifier;
+
+  /** Deployment that owns runtime completion after handoff. */
+  deploymentId?: string;
+
+  /** Failure details when the update fails. */
+  failure?: BuilderAppFailure;
+}
+
+/** Identity update phases. */
+@added(Versions.v2026_09_01_preview)
+union BuilderAppIdentityUpdatePhase {
+  /** Updating source identity. */
+  SourcePending: "sourcePending",
+
+  /** Preparing the redeployment. */
+  RedeployPending: "redeployPending",
+
+  /** Deployment submitted; deployment polling owns completion. */
+  DeploymentSubmitted: "deploymentSubmitted",
+
+  /** Identity update failed. */
+  Failed: "failed",
+
+  string,
+}
+
+/** Customer-safe operation failure. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppFailure {
+  /** Machine-readable error code. */
+  code: string;
+
+  /** Explanation of the failure. */
+  message: string;
+}
+
+/** Serving-state projection, not an embedded deployment history. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppRuntime {
+  /** Public application URL. */
+  url?: url;
+
+  /** Opaque identifier of the active deployment. */
+  activeDeploymentId?: string;
+
+  /** Opaque identifier of the active application version. */
+  activeAppVersionId?: string;
+
+  /** Configuration captured by the active version, excluding variable values. */
+  versionConfiguration?: BuilderAppVersionConfiguration;
+}
+
+/** Runtime telemetry destinations. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppTelemetry {
+  /** Azure Monitor Logs destination. An empty telemetry object disables export. */
+  azureMonitorLogs?: BuilderAppAzureMonitorLogs;
+}
+
+/** Customer-owned Azure Monitor Logs ingestion destination. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppAzureMonitorLogs {
+  /** HTTPS data collection endpoint under ingest.monitor.azure.com. */
+  dceEndpoint: url;
+
+  /** Immutable data collection rule identifier. */
+  dcrImmutableId: string;
+
+  /** Custom stream declared by the rule. */
+  streamName: string;
+
+  /** User-assigned ingestion identity. Omit to use the app's system-assigned identity. */
+  identityResourceId?: Azure.Core.armResourceIdentifier;
+}
+
+/** Desired scaling policies for named components. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppScaling {
+  /** Scaling policies joined to the active manifest by component name. */
+  @identifiers(#["name"])
+  components?: BuilderAppScalingComponent[];
+}
+
+/** Autoscaling policy for one component. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppScalingComponent {
+  /** Component name. */
+  name: string;
+
+  /** Minimum replicas; zero enables scale-to-zero. */
+  @minValue(0)
+  minReplicas: int32;
+
+  /** Maximum replicas, greater than minReplicas and at most 20. */
+  @minValue(1)
+  @maxValue(20)
+  maxReplicas: int32;
+
+  /** Target average CPU utilization percentage. */
+  cpuUtilizationPercent?: int32;
+
+  /** Target average memory utilization percentage. */
+  memoryUtilizationPercent?: int32;
+
+  /** Enable HTTP request-based scaling; a zero minimum always enables it. */
+  httpEnabled?: boolean;
+}
+
+/** PATCH input. Only supplied members change; read-only and PUT-only configuration is excluded. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppPatch {
+  /** Omit to preserve; a map replaces all tags; {} or null clears all tags. Values must be strings. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null clears tags; omission preserves them. These are distinct supported PATCH inputs."
+  tags?: Record<string> | null;
+
+  /** Identity changes. Identity selection cannot be combined with source or version configuration changes. */
+  identity?: BuilderAppPatchIdentity;
+
+  /** Supported desired configuration changes. */
+  properties?: BuilderAppPatchProperties;
+}
+
+/** Mutable builder app properties accepted by PATCH. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppPatchProperties {
+  /** Attach or update the same repository connection. Changing an attached repository identity is unsupported. */
+  source?: BuilderAppSource;
+
+  /** Variables to capture in the next application version. */
+  versionConfiguration?: BuilderAppPatchVersionConfiguration;
+
+  /** Identity-only update selecting the user-assigned identity used for AZURE_CLIENT_ID. */
+  azureClientIdIdentityResourceId?: Azure.Core.armResourceIdentifier;
+}
+
+/** PATCH accepts variables but not component configuration. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppPatchVersionConfiguration {
+  /** Omit to preserve; [] clears; a supplied list replaces the set and preserves omitted existing values. */
+  @maxItems(100)
+  @identifiers(#["name"])
+  variables?: BuilderAppVariable[];
+}
+
+/** Pending identity update with the current builder app and operation polling links. */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppPatchAccepted {
+  ...ArmAcceptedLroResponse<
+    "Identity update accepted.",
+    ArmCombinedLroHeaders<BuilderAppOperationStatus, BuilderApp> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /** Current resource, including pending identity update state when available. */
+  @bodyRoot
+  body: BuilderApp;
+}
+
+/** Builder app resource operations. */
 @added(Versions.v2026_09_01_preview)
 @armResourceOperations
 interface BuilderApps {
   get is ArmResourceRead<BuilderApp>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<BuilderApp>;
-  update is ArmCustomPatchSync<
+  createOrUpdate is ArmResourceCreateOrReplaceSync<BuilderApp>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Pending identity PATCH responses include the current BuilderApp in the existing service contract; the completed result is also a BuilderApp."
+  update is ArmCustomPatchAsync<
     BuilderApp,
-    PatchModel = Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      BuilderApp,
-      BuilderAppProperties
-    >
+    BuilderAppPatch,
+    Response = ArmResponse<BuilderApp> | BuilderAppPatchAccepted
   >;
-  delete is ArmResourceDeleteWithoutOkAsync<BuilderApp>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    BuilderApp,
+    LroHeaders = ArmCombinedLroHeaders<BuilderAppOperationStatus, void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
   listByResourceGroup is ArmResourceListByParent<BuilderApp>;
   listBySubscription is ArmListBySubscription<BuilderApp>;
+
+  /** Get sensitive current variable values. The response is private and must not be cached. */
+  listVariables is ArmResourceActionSync<
+    BuilderApp,
+    void,
+    ArmResponse<BuilderAppVariableValues> & {
+      /** Prevent storage of sensitive variable values. */
+      @header("Cache-Control")
+      cacheControl: "private, no-store";
+    }
+  >;
+
+  /** Begin or replay a source archive upload session. */
+  beginSourceUpload is ArmResourceActionSync<
+    BuilderApp,
+    BuilderAppBeginSourceUploadRequest,
+    ArmResponse<BuilderAppSourceUpload>
+  >;
+
+  /** Build and deploy repository source, a retained version, or an uploaded artifact. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The existing deployment 202 admission body is retained for client compatibility; Location returns the completed BuilderApp, not this admission payload."
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The 202 deployment admission details intentionally differ from the final 200 BuilderApp; both are successful responses."
+  deploy is ArmResourceActionAsyncBase<
+    BuilderApp,
+    BuilderAppDeployRequest,
+    BuilderAppDeploymentAccepted | ArmResponse<BuilderApp>,
+    Foundations.DefaultBaseParameters<BuilderApp>,
+    Parameters = BuilderAppDeploymentParameters
+  >;
+
+  /** Redeploy retained ready artifacts without resolving or rebuilding repository source. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The existing redeployment 202 admission body is retained for client compatibility; Location returns the completed BuilderApp, not this admission payload."
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The 202 redeployment admission details intentionally differ from the final 200 BuilderApp; both are successful responses."
+  redeploy is ArmResourceActionAsyncBase<
+    BuilderApp,
+    BuilderAppRedeployRequest,
+    BuilderAppDeploymentAccepted | ArmResponse<BuilderApp>,
+    Foundations.DefaultBaseParameters<BuilderApp>,
+    Parameters = BuilderAppDeploymentParameters
+  >;
 }

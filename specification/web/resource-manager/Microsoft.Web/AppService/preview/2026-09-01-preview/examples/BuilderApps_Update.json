@@ -12,18 +12,18 @@
         "costCenter": "8675309"
       },
       "properties": {
-        "variables": [
-          {
-            "name": "LOG_LEVEL",
-            "value": "debug"
-          },
-          {
-            "name": "STRIPE_KEY",
-            "source": "keyVault",
-            "keyVaultRef": "https://contoso-kv.vault.azure.net/secrets/stripe",
-            "role": "apiKey"
-          }
-        ]
+        "versionConfiguration": {
+          "variables": [
+            {
+              "name": "LOG_LEVEL",
+              "value": "debug"
+            },
+            {
+              "name": "STRIPE_KEY",
+              "value": "example-value"
+            }
+          ]
+        }
       }
     }
   },
@@ -33,49 +33,47 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/builderApps/contoso-storefront",
         "name": "contoso-storefront",
         "type": "Microsoft.Web/builderApps",
-        "location": "westus3",
+        "location": "westus2",
         "tags": {
           "team": "storefront",
           "costCenter": "8675309"
         },
         "properties": {
           "source": {
-            "type": "github",
-            "repositoryId": 123456789,
-            "repositoryFullName": "contoso/storefront",
-            "branch": "main"
+            "provider": "github",
+            "id": "123456789",
+            "displayName": "contoso/storefront",
+            "reference": "main",
+            "rootDirectory": "apps/storefront",
+            "autoDeploy": true
           },
           "provisioningState": "Succeeded",
           "runtime": {
-            "url": "https://contoso-storefront.westus3.builderapps.azure.com",
-            "activeRunId": "r_3f9a2c",
+            "url": "https://contoso-storefront.example.com",
             "activeDeploymentId": "dep_8b41d7",
-            "components": [
+            "activeAppVersionId": "ver_example",
+            "versionConfiguration": {
+              "variables": [
+                {
+                  "name": "LOG_LEVEL"
+                },
+                {
+                  "name": "STRIPE_KEY"
+                }
+              ]
+            }
+          },
+          "versionConfiguration": {
+            "variables": [
               {
-                "name": "web",
-                "role": "web",
-                "source": "framework",
-                "path": "/",
-                "artifacts": [
-                  "static",
-                  "compute"
-                ],
-                "commitSha": "b17e9c4a6d2f8e1b0c5a7d3f9e2b4c6a8d0f1e37"
+                "name": "LOG_LEVEL"
+              },
+              {
+                "name": "STRIPE_KEY"
               }
             ]
           },
-          "variables": [
-            {
-              "name": "LOG_LEVEL",
-              "source": "inline"
-            },
-            {
-              "name": "STRIPE_KEY",
-              "source": "keyVault",
-              "keyVaultRef": "https://contoso-kv.vault.azure.net/secrets/stripe",
-              "role": "apiKey"
-            }
-          ]
+          "sourceIntegrationState": "Configured"
         },
         "systemData": {
           "createdBy": "user@contoso.com",
@@ -84,6 +82,74 @@
           "lastModifiedBy": "user@contoso.com",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2026-09-02T09:14:22.789Z"
+        },
+        "identity": {
+          "type": "None"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Web/locations/westus2/builderAppsOperationStatuses/op_example?api-version=2026-09-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Web/locations/westus2/builderAppsOperationResults/op_example?api-version=2026-09-01-preview",
+        "Retry-After": "5"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/builderApps/contoso-storefront",
+        "name": "contoso-storefront",
+        "type": "Microsoft.Web/builderApps",
+        "location": "westus2",
+        "tags": {
+          "team": "storefront",
+          "costCenter": "8675309"
+        },
+        "properties": {
+          "source": {
+            "provider": "github",
+            "id": "123456789",
+            "displayName": "contoso/storefront",
+            "reference": "main",
+            "rootDirectory": "apps/storefront",
+            "autoDeploy": true
+          },
+          "provisioningState": "Updating",
+          "runtime": {
+            "url": "https://contoso-storefront.example.com",
+            "activeDeploymentId": "dep_8b41d7",
+            "activeAppVersionId": "ver_example",
+            "versionConfiguration": {
+              "variables": [
+                {
+                  "name": "LOG_LEVEL"
+                },
+                {
+                  "name": "STRIPE_KEY"
+                }
+              ]
+            }
+          },
+          "versionConfiguration": {
+            "variables": [
+              {
+                "name": "LOG_LEVEL"
+              },
+              {
+                "name": "STRIPE_KEY"
+              }
+            ]
+          },
+          "sourceIntegrationState": "Configured"
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-09-01T17:32:04.123Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-09-02T09:14:22.789Z"
+        },
+        "identity": {
+          "type": "None"
         }
       }
     }

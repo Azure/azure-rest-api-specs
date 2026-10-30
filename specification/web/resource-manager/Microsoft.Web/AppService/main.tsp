@@ -47,6 +47,8 @@ import "./StaticSitesAsyncOperations.tsp";
 import "./Site.tsp";
 import "./AIGateway.tsp";
 import "./BuilderApp.tsp";
+import "./BuilderAppAuthConfig.tsp";
+import "./BuilderAppsAsyncOperations.tsp";
 import "./BackupItem.tsp";
 import "./CsmPublishingCredentialsPoliciesEntity.tsp";
 import "./SiteAuthSettingsV2.tsp";

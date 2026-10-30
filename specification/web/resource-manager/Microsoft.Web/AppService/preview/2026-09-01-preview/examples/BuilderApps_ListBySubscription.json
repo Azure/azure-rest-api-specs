@@ -13,42 +13,43 @@
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/builderApps/contoso-storefront",
             "name": "contoso-storefront",
             "type": "Microsoft.Web/builderApps",
-            "location": "westus3",
+            "location": "westus2",
             "tags": {
               "team": "storefront"
             },
             "properties": {
               "source": {
-                "type": "github",
-                "repositoryId": 123456789,
-                "repositoryFullName": "contoso/storefront",
-                "branch": "main"
+                "provider": "github",
+                "id": "123456789",
+                "displayName": "contoso/storefront",
+                "reference": "main",
+                "rootDirectory": "apps/storefront",
+                "autoDeploy": true
               },
               "provisioningState": "Succeeded",
               "runtime": {
-                "url": "https://contoso-storefront.westus3.builderapps.azure.com",
-                "activeRunId": "r_3f9a2c",
+                "url": "https://contoso-storefront.example.com",
                 "activeDeploymentId": "dep_8b41d7",
-                "components": [
+                "activeAppVersionId": "ver_example",
+                "versionConfiguration": {
+                  "variables": [
+                    {
+                      "name": "LOG_LEVEL"
+                    },
+                    {
+                      "name": "STRIPE_KEY"
+                    }
+                  ]
+                }
+              },
+              "versionConfiguration": {
+                "variables": [
                   {
-                    "name": "web",
-                    "role": "web",
-                    "source": "framework",
-                    "path": "/",
-                    "artifacts": [
-                      "static",
-                      "compute"
-                    ],
-                    "commitSha": "b17e9c4a6d2f8e1b0c5a7d3f9e2b4c6a8d0f1e37"
+                    "name": "LOG_LEVEL"
                   }
                 ]
               },
-              "variables": [
-                {
-                  "name": "LOG_LEVEL",
-                  "source": "inline"
-                }
-              ]
+              "sourceIntegrationState": "Configured"
             },
             "systemData": {
               "createdBy": "user@contoso.com",
@@ -57,21 +58,27 @@
               "lastModifiedBy": "user@contoso.com",
               "lastModifiedByType": "User",
               "lastModifiedAt": "2026-09-01T18:10:55.456Z"
+            },
+            "identity": {
+              "type": "None"
             }
           },
           {
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/marketing-rg/providers/Microsoft.Web/builderApps/contoso-campaign",
             "name": "contoso-campaign",
             "type": "Microsoft.Web/builderApps",
-            "location": "eastus2",
+            "location": "westus2",
             "properties": {
               "source": {
-                "type": "github",
-                "repositoryId": 246813579,
-                "repositoryFullName": "contoso/campaign",
-                "branch": "main"
+                "provider": "github",
+                "id": "246813579",
+                "displayName": "contoso/campaign",
+                "reference": "main",
+                "rootDirectory": "apps/storefront",
+                "autoDeploy": true
               },
-              "provisioningState": "Creating"
+              "provisioningState": "Succeeded",
+              "sourceIntegrationState": "Configured"
             },
             "systemData": {
               "createdBy": "user@contoso.com",
@@ -80,6 +87,9 @@
               "lastModifiedBy": "user@contoso.com",
               "lastModifiedByType": "User",
               "lastModifiedAt": "2026-09-02T08:00:00.000Z"
+            },
+            "identity": {
+              "type": "None"
             }
           }
         ],

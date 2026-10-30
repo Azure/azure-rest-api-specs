@@ -1,0 +1,33 @@
+{
+  "operationId": "BuilderAppAuthConfigs_Get",
+  "title": "GetBuilderAppAuthConfig",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-09-01-preview",
+    "name": "contoso-storefront"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"revision-1\"",
+        "Cache-Control": "private, no-store"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/builderApps/contoso-storefront/authConfigs/current",
+        "name": "current",
+        "type": "Microsoft.Web/builderApps/authConfigs",
+        "etag": "revision-1",
+        "properties": {
+          "mode": "disabled",
+          "primaryBrowserProvider": "github",
+          "githubCallbackUrl": "https://contoso-storefront.example.com/.auth/login/github/callback",
+          "revision": 1,
+          "appliedRevision": 1,
+          "warnings": [],
+          "propagationPending": false
+        }
+      }
+    }
+  }
+}
