@@ -445,7 +445,17 @@ model GetSsisObjectMetadataRequest {
 /**
  * A list of SSIS object metadata.
  */
-model SsisObjectMetadataListResponse is Azure.Core.Page<SsisObjectMetadata>;
+model SsisObjectMetadataListResponse {
+  /**
+   * List of SSIS object metadata.
+   */
+  value?: SsisObjectMetadata[];
+
+  /**
+   * The link to the next page of results, if any remaining results exist.
+   */
+  nextLink?: string;
+}
 
 /**
  * SSIS object metadata.
@@ -610,8 +620,19 @@ model UpdateIntegrationRuntimeNodeRequest {
 /**
  * A list of integration runtime resources.
  */
-model IntegrationRuntimeListResponse
-  is Azure.Core.Page<IntegrationRuntimeResource>;
+model IntegrationRuntimeListResponse {
+  /**
+   * List of integration runtimes.
+   */
+  @pageItems
+  value: IntegrationRuntimeResource[];
+
+  /**
+   * The link to the next page of results, if any remaining results exist.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Connection information for encrypting the on-premises data source credentials.

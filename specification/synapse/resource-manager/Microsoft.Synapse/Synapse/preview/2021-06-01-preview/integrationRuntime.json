@@ -678,9 +678,6 @@
           "Get integration runtime object metadata": {
             "$ref": "./examples/IntegrationRuntimeObjectMetadata_List.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3538,20 +3535,16 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SsisObjectMetadata items on this page",
+          "description": "List of SSIS object metadata.",
           "items": {
             "$ref": "#/definitions/SsisObjectMetadata"
           }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of results, if any remaining results exist."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "SsisObjectMetadataStatusResponse": {
       "type": "object",

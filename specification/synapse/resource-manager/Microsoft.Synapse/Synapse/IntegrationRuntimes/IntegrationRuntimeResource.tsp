@@ -241,7 +241,6 @@ interface IntegrationRuntimeResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntegrationRuntimeObjectMetadata_List")
-  @list
   @action("getObjectMetadata")
   list is IntegrationRuntimeOps.ActionSync<
     IntegrationRuntimeResource,
