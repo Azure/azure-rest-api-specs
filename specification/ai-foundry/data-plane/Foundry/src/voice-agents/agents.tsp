@@ -471,13 +471,32 @@ model VoiceAgentSystemTool extends VoiceAgentTool {
 
   @doc("An optional description of the system tool.")
   description?: string;
+
+  @doc("Execution timeout, from 1 to 300 seconds. If omitted, the service defaults to 60 seconds.")
+  @extension("minimum", 1)
+  @extension("maximum", 300)
+  timeout_seconds?: FoundryDurationSeconds = FoundryDurationSeconds.fromISO("PT60S");
 }
 
 @doc("A service-managed control that ends the active conversation.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentEndConversationSystemTool extends VoiceAgentSystemTool {
   @doc("The service-managed control action. Always `end_conversation`.")
-  name: "end_conversation";
+  name: VoiceAgentSystemToolName.end_conversation;
+}
+
+@doc("Switches supported conversation language settings.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLanguageDetectionSystemTool extends VoiceAgentSystemTool {
+  @doc("The service-managed control action. Always `language_detection`.")
+  name: VoiceAgentSystemToolName.language_detection;
+}
+
+@doc("Retrieves the unchanged transcript of the last user audio turn.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentDigitRecognitionSystemTool extends VoiceAgentSystemTool {
+  @doc("The service-managed control action. Always `digit_recognition`.")
+  name: VoiceAgentSystemToolName.digit_recognition;
 }
 
 @doc("A service-managed voice-session control action. Known values are stable; additional values may be added over time.")
@@ -487,6 +506,141 @@ union VoiceAgentSystemToolName {
 
   @doc("Ends the active conversation.")
   end_conversation: "end_conversation",
+
+  @doc("Switches supported conversation language settings.")
+  language_detection: "language_detection",
+
+  @doc("Retrieves the unchanged transcript of the last user audio turn.")
+  digit_recognition: "digit_recognition",
+
+  @doc("Requests a transfer to an explicitly configured logical target.")
+  transfer: "transfer",
+
+  @doc("Collects one complete SMS from an explicitly selected sender.")
+  collect_sms: "collect_sms",
+
+  @doc("Collects keypad digits on the current call.")
+  collect_dtmf: "collect_dtmf",
+
+  @doc("Sends literal or templated keypad digits.")
+  send_dtmf: "send_dtmf",
+
+  @doc("Sends a text message from the Agent's SMS-capable number.")
+  send_sms: "send_sms",
+}
+
+@doc("Bare session variable name, such as `verification_code`, without a namespace or braces. Tool arguments reference it with `{{name}}`.")
+@pattern("^[A-Za-z_][A-Za-z0-9_]*$")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+scalar VoiceAgentOutputReference extends string;
+
+@doc("Collects one complete SMS from an explicitly selected sender.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
+  @doc("The service-managed control action. Always `collect_sms`.")
+  name: VoiceAgentSystemToolName.collect_sms;
+}
+
+@doc("Collects keypad digits on the current call.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentCollectDtmfSystemTool extends VoiceAgentSystemTool {
+  @doc("The service-managed control action. Always `collect_dtmf`.")
+  name: VoiceAgentSystemToolName.collect_dtmf;
+}
+
+@doc("Per-invocation transfer routing. Unsupported strategies are rejected before provider execution; schema membership does not imply support by every provider.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentTransferStrategy {
+  string,
+
+  @doc("Try destinations in configured order while the total budget remains.")
+  sequential: "sequential",
+
+  @doc("Randomize destination order for this invocation, then try each within the total budget.")
+  random: "random",
+
+  @doc("Ring destinations concurrently and select the first answer when the executor supports this strategy.")
+  parallel: "parallel",
+}
+
+@doc("The configured transfer routing policy. The model selects a target name, not destinations or routing settings.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentTransferRouting {
+  @doc("The routing strategy. Current native Telephony transfer supports ACS sequential and random routing only.")
+  strategy: VoiceAgentTransferStrategy;
+
+  @doc("Per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. Must not exceed the tool's timeout_seconds. ACS allows at most 180 seconds.")
+  @minValue(1)
+  @maxValue(300)
+  ring_timeout_seconds?: int32 = 20;
+}
+
+@doc("The supported address formats for a system-tool transfer destination.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentTransferDestinationType {
+  @doc("An E.164 telephone number.")
+  phone_number: "phone_number",
+
+  @doc("A Microsoft Teams user or resource-account identifier.")
+  teams: "teams",
+
+  @doc("A SIP or SIPS URI.")
+  sip: "sip",
+}
+
+@doc("The canonical system-tool transfer destination.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentTransferDestination {
+  @doc("The destination format: phone_number for an E.164 number, teams for a Teams identifier, or sip for a SIP URI.")
+  type: VoiceAgentTransferDestinationType;
+
+  @doc("The concrete address. Phone numbers use E.164; Teams and SIP identifiers are validated against the selected provider's capabilities.")
+  @minLength(1)
+  value: string;
+}
+
+@doc("A configured logical transfer target. Only its name and description are model-visible; destinations and routing are executor settings.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentTransferTarget {
+  @doc("The non-blank logical target name. Names must be unique after trimming within the transfer tool.")
+  @minLength(1)
+  @pattern("\\S")
+  name: string;
+
+  @doc("A description that helps the model select this target.")
+  description?: string;
+
+  @doc("The concrete destinations for this transfer target.")
+  @minItems(1)
+  destinations: VoiceAgentTransferDestination[];
+
+  @doc("The trusted routing policy for this target.")
+  routing: VoiceAgentTransferRouting;
+}
+
+@doc("Requests a transfer to an explicitly configured logical target.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentTransferSystemTool extends VoiceAgentSystemTool {
+  @doc("The service-managed control action. Always `transfer`.")
+  name: VoiceAgentSystemToolName.transfer;
+
+  @doc("The non-empty set of logical targets that the model may select.")
+  @minItems(1)
+  targets: VoiceAgentTransferTarget[];
+}
+
+@doc("Sends literal or templated keypad digits.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {
+  @doc("The service-managed control action. Always `send_dtmf`.")
+  name: VoiceAgentSystemToolName.send_dtmf;
+}
+
+@doc("Sends a text message from the Agent's SMS-capable number.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSendSmsSystemTool extends VoiceAgentSystemTool {
+  @doc("The service-managed control action. Always `send_sms`.")
+  name: VoiceAgentSystemToolName.send_sms;
 }
 
 @doc("A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.")

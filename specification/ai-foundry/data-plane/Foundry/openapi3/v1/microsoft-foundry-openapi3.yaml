@@ -72415,6 +72415,7 @@ components:
           mcp_list_tools: '#/components/schemas/OpenAI.RealtimeMCPListTools'
           mcp_call: '#/components/schemas/OpenAI.RealtimeMCPToolCall'
           mcp_approval_request: '#/components/schemas/OpenAI.RealtimeMCPApprovalRequest'
+          system_tool: '#/components/schemas/VoiceAgentSystemToolItem'
       description: A single item within a Realtime conversation.
       x-ms-foundry-meta:
         required_previews:
@@ -72785,6 +72786,7 @@ components:
             - mcp_call
             - mcp_approval_request
             - message
+            - system_tool
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -88847,6 +88849,38 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    VoiceAgentCollectDtmfSystemTool:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          enum:
+            - collect_dtmf
+          description: The service-managed control action. Always `collect_dtmf`.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentSystemTool'
+      description: Collects keypad digits on the current call.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentCollectSmsSystemTool:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          enum:
+            - collect_sms
+          description: The service-managed control action. Always `collect_sms`.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentSystemTool'
+      description: Collects one complete SMS from an explicitly selected sender.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentDefinition:
       type: object
       required:
@@ -88945,6 +88979,22 @@ components:
         The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a
         managed speech-to-speech experience. Establish realtime voice sessions through
         `GET /agents/{agent_name}/endpoint/protocols/voice`. Every create or update produces a new immutable version.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentDigitRecognitionSystemTool:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          enum:
+            - digit_recognition
+          description: The service-managed control action. Always `digit_recognition`.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentSystemTool'
+      description: Retrieves the unchanged transcript of the last user audio turn.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89228,6 +89278,22 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    VoiceAgentLanguageDetectionSystemTool:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          enum:
+            - language_detection
+          description: The service-managed control action. Always `language_detection`.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentSystemTool'
+      description: Switches supported conversation language settings.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentLlmGeneratedGreetingConfig:
       type: object
       required:
@@ -89445,6 +89511,38 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
       description: OpenAI semantic VAD turn-detection settings.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentSendDtmfSystemTool:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          enum:
+            - send_dtmf
+          description: The service-managed control action. Always `send_dtmf`.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentSystemTool'
+      description: Sends literal or templated keypad digits.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentSendSmsSystemTool:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          enum:
+            - send_sms
+          description: The service-managed control action. Always `send_sms`.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentSystemTool'
+      description: Sends a text message from the Agent's SMS-capable number.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89726,13 +89824,86 @@ components:
         description:
           type: string
           description: An optional description of the system tool.
+        timeout_seconds:
+          $ref: '#/components/schemas/FoundryDurationSeconds'
+          description: Execution timeout, from 1 to 300 seconds. If omitted, the service defaults to 60 seconds.
+          maximum: 300
+          minimum: 1
+          default: 60
       discriminator:
         propertyName: name
         mapping:
           end_conversation: '#/components/schemas/VoiceAgentEndConversationSystemTool'
+          language_detection: '#/components/schemas/VoiceAgentLanguageDetectionSystemTool'
+          digit_recognition: '#/components/schemas/VoiceAgentDigitRecognitionSystemTool'
+          collect_sms: '#/components/schemas/VoiceAgentCollectSmsSystemTool'
+          collect_dtmf: '#/components/schemas/VoiceAgentCollectDtmfSystemTool'
+          transfer: '#/components/schemas/VoiceAgentTransferSystemTool'
+          send_dtmf: '#/components/schemas/VoiceAgentSendDtmfSystemTool'
+          send_sms: '#/components/schemas/VoiceAgentSendSmsSystemTool'
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTool'
       description: A service-managed control that acts on the active voice session without customer code or external authentication.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentSystemToolItem:
+      type: object
+      required:
+        - type
+        - status
+        - name
+        - call_id
+        - arguments
+      properties:
+        type:
+          type: string
+          enum:
+            - system_tool
+          description: The output-item kind. Always `system_tool`.
+        id:
+          type: string
+          description: The identifier of the generated item.
+        object:
+          type: string
+          enum:
+            - realtime.item
+          description: The realtime item marker.
+        status:
+          $ref: '#/components/schemas/VoiceAgentSystemToolItemStatus'
+          description: The generation status of the item, not the provider execution outcome.
+        name:
+          $ref: '#/components/schemas/VoiceAgentSystemToolName'
+          description: The built-in capability invoked by the model.
+        call_id:
+          type: string
+          description: The invocation identifier used for correlation and duplicate suppression.
+        arguments:
+          type: string
+          description: 'Original JSON-encoded intent: literals remain visible and references stay unexpanded. Excludes private values, resolved arguments and executor-only settings.'
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (in seconds) for when the item was persisted.
+          readOnly: true
+        response_id:
+          type: string
+          description: The id of the response that produced this item, when applicable.
+          readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.RealtimeConversationItem'
+      description: Service-generated system-tool intent, not a provider result. Clients cannot create it or complete it with `function_call_output`.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentSystemToolItemStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+      description: The generation status of a system-tool item. It does not indicate provider success.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89742,6 +89913,13 @@ components:
         - type: string
           enum:
             - end_conversation
+            - language_detection
+            - digit_recognition
+            - transfer
+            - collect_sms
+            - collect_dtmf
+            - send_dtmf
+            - send_sms
       description: A service-managed voice-session control action. Known values are stable; additional values may be added over time.
       x-ms-foundry-meta:
         required_previews:
@@ -89836,6 +90014,115 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTool'
       description: A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentTransferDestination:
+      type: object
+      required:
+        - type
+        - value
+      properties:
+        type:
+          $ref: '#/components/schemas/VoiceAgentTransferDestinationType'
+          description: 'The destination format: phone_number for an E.164 number, teams for a Teams identifier, or sip for a SIP URI.'
+        value:
+          type: string
+          minLength: 1
+          description: The concrete address. Phone numbers use E.164; Teams and SIP identifiers are validated against the selected provider's capabilities.
+      description: The canonical system-tool transfer destination.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentTransferDestinationType:
+      type: string
+      enum:
+        - phone_number
+        - teams
+        - sip
+      description: The supported address formats for a system-tool transfer destination.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentTransferRouting:
+      type: object
+      required:
+        - strategy
+      properties:
+        strategy:
+          $ref: '#/components/schemas/VoiceAgentTransferStrategy'
+          description: The routing strategy. Current native Telephony transfer supports ACS sequential and random routing only.
+        ring_timeout_seconds:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 300
+          description: Per-destination ring timeout in seconds, from 1 to 300. If omitted, the service defaults to 20 seconds. Must not exceed the tool's timeout_seconds. ACS allows at most 180 seconds.
+          default: 20
+      description: The configured transfer routing policy. The model selects a target name, not destinations or routing settings.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentTransferStrategy:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - sequential
+            - random
+            - parallel
+      description: Per-invocation transfer routing. Unsupported strategies are rejected before provider execution; schema membership does not imply support by every provider.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentTransferSystemTool:
+      type: object
+      required:
+        - name
+        - targets
+      properties:
+        name:
+          type: string
+          enum:
+            - transfer
+          description: The service-managed control action. Always `transfer`.
+        targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentTransferTarget'
+          minItems: 1
+          description: The non-empty set of logical targets that the model may select.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentSystemTool'
+      description: Requests a transfer to an explicitly configured logical target.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentTransferTarget:
+      type: object
+      required:
+        - name
+        - destinations
+        - routing
+      properties:
+        name:
+          type: string
+          minLength: 1
+          pattern: \S
+          description: The non-blank logical target name. Names must be unique after trimming within the transfer tool.
+        description:
+          type: string
+          description: A description that helps the model select this target.
+        destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentTransferDestination'
+          minItems: 1
+          description: The concrete destinations for this transfer target.
+        routing:
+          $ref: '#/components/schemas/VoiceAgentTransferRouting'
+          description: The trusted routing policy for this target.
+      description: A configured logical transfer target. Only its name and description are model-visible; destinations and routing are executor settings.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
