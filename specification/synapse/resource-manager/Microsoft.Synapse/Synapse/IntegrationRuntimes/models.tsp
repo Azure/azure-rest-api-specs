@@ -1077,6 +1077,7 @@ model IntegrationRuntimeDataFlowProperties {
   /**
    * Time to live (in minutes) setting of the cluster which will execute data flow job.
    */
+  @minValue(0)
   timeToLive?: int32;
 
   /**
