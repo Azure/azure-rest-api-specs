@@ -1,0 +1,33 @@
+{
+  "operationId": "BuilderApps_BeginSourceUpload",
+  "title": "BuilderApps_BeginSourceUpload",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-09-01-preview",
+    "name": "contoso-storefront",
+    "body": {
+      "idempotencyKey": "upload-example",
+      "manifestYaml": "version: 1\ncomponents:\n  web:\n    source: .\n",
+      "contentLength": 1024,
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "origin": {
+        "repository": "contoso/storefront",
+        "workflow": "deploy",
+        "runId": "42",
+        "runAttempt": "1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "artifactId": "artifact_example",
+        "state": "waitingForUpload",
+        "uploadUrl": "https://data.example.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/builderApps/contoso-storefront/sourceUploads/artifact_example/content",
+        "uploadDeadline": "2026-09-01T18:00:00Z",
+        "uncommittedDeadline": "2026-09-02T18:00:00Z"
+      }
+    }
+  }
+}

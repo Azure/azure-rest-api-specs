@@ -10,6 +10,26 @@ using Azure.Core;
 
 namespace Customizations;
 
+@@clientName(
+  BuilderAppBeginSourceUploadRequest,
+  "BuilderAppBeginSourceUploadContent",
+  "csharp"
+);
+@@clientName(BuilderAppDeployRequest, "BuilderAppDeployContent", "csharp");
+@@clientName(BuilderAppRedeployRequest, "BuilderAppRedeployContent", "csharp");
+@@clientName(BuilderAppAuthResponse, "BuilderAppAuthResult", "csharp");
+@@clientName(BuilderAppSourceUpload.uploadUrl, "uploadUri", "csharp");
+@@clientName(
+  BuilderAppAuthConfigProperties.githubCallbackUrl,
+  "githubCallbackUri",
+  "csharp"
+);
+@@clientName(
+  BuilderAppAuthConfigProperties.entraCallbackUrl,
+  "entraCallbackUri",
+  "csharp"
+);
+
 // python
 @@clientName(Microsoft.Web, "WebSiteManagementClient", "python, javascript");
 @@clientName(WebApps.swapSlotSlot, "swapSlot", "python,go,javascript");
