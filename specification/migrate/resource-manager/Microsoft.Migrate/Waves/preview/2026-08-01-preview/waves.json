@@ -1439,6 +1439,9 @@
           "Runbooks_AddStep_Script": {
             "$ref": "./examples/Runbooks_AddStep_Script_Gen.json"
           },
+          "Runbooks_AddStep_ScriptAzureVM": {
+            "$ref": "./examples/Runbooks_AddStep_ScriptAzureVM_Gen.json"
+          },
           "Runbooks_AddStep_ScriptHost": {
             "$ref": "./examples/Runbooks_AddStep_ScriptHost_Gen.json"
           }
@@ -4950,6 +4953,7 @@
       "description": "Location where a runbook script step runs.",
       "enum": [
         "Host",
+        "AzureVM",
         "SourceVM"
       ],
       "x-ms-enum": {
@@ -4960,6 +4964,11 @@
             "name": "Host",
             "value": "Host",
             "description": "Runs on the host."
+          },
+          {
+            "name": "AzureVM",
+            "value": "AzureVM",
+            "description": "Runs on the Azure VM."
           },
           {
             "name": "SourceVM",
