@@ -61,7 +61,7 @@ model DeploymentModuleProperties {
    * The duration of the module deployment.
    */
   @visibility(Lifecycle.Read)
-  duration?: string;
+  duration?: duration;
 
   /**
    * Key/value pairs that represent module deployment output.
@@ -153,7 +153,7 @@ model DeploymentModuleTemplateLink {
 @added(Versions.v2026_10_05_preview)
 model DeploymentModuleResourceScope {
   /**
-   * The fully qualified Azure Resource Manager ID of the target scope. For example, `/subscriptions/{subscriptionId}` for a subscription, `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}` for a resource group, or `/providers/Microsoft.Management/managementGroups/{groupId}` for a management group.
+   * The fully qualified ID of the target scope. For example, `/subscriptions/{subscriptionId}` for a subscription, `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}` for a resource group, or `/providers/Microsoft.Management/managementGroups/{groupId}` for a management group.
    */
   id: string;
 }
