@@ -1363,6 +1363,9 @@
           "StorageAccountCreateUserAssignedIdentityWithFederatedIdentityClientId.": {
             "$ref": "./examples/StorageAccountCreateUserAssignedIdentityWithFederatedIdentityClientId.json"
           },
+          "StorageAccountCreateWithCopyScope": {
+            "$ref": "./examples/StorageAccountCreateWithCopyScope.json"
+          },
           "StorageAccountCreateWithDataCollaborationPolicy": {
             "$ref": "./examples/StorageAccountCreateWithDataCollaborationPolicy.json"
           },
@@ -1471,6 +1474,9 @@
           },
           "StorageAccountUpdateUserAssignedIdentityWithFederatedIdentityClientId": {
             "$ref": "./examples/StorageAccountUpdateUserAssignedIdentityWithFederatedIdentityClientId.json"
+          },
+          "StorageAccountUpdateWithCopyScope": {
+            "$ref": "./examples/StorageAccountUpdateWithCopyScope.json"
           },
           "StorageAccountUpdateWithDataCollaborationPolicy": {
             "$ref": "./examples/StorageAccountUpdateWithDataCollaborationPolicy.json"
@@ -12015,6 +12021,50 @@
         }
       }
     },
+    "CopyScope": {
+      "type": "object",
+      "description": "The copy scope restrictions for a storage account. The legacy allowedCopyScope property remains supported and is synchronized with permittedCopyFrom. When both properties are supplied, their values must agree: PrivateLink maps to PrivateLink, AAD maps to IntraTenant, and All maps to All.",
+      "properties": {
+        "permittedCopyTo": {
+          "$ref": "#/definitions/CopyScopeValue",
+          "description": "Restricts the destinations to which data can be copied from this account. The default value is All."
+        },
+        "permittedCopyFrom": {
+          "$ref": "#/definitions/CopyScopeValue",
+          "description": "Restricts the sources from which data can be copied into this account. The default value is All."
+        }
+      }
+    },
+    "CopyScopeValue": {
+      "type": "string",
+      "description": "The scope permitted for copy operations to or from a storage account.",
+      "enum": [
+        "PrivateLink",
+        "IntraTenant",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "CopyScopeValue",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PrivateLink",
+            "value": "PrivateLink",
+            "description": "Copy operations are permitted only over private links."
+          },
+          {
+            "name": "IntraTenant",
+            "value": "IntraTenant",
+            "description": "Copy operations are permitted only within the same Microsoft Entra tenant."
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "Copy operations are permitted from any source or to any destination."
+          }
+        ]
+      }
+    },
     "CorsRule": {
       "type": "object",
       "description": "Specifies a CORS rule for the Blob service.",
@@ -17676,6 +17726,10 @@
           "$ref": "#/definitions/AllowedCopyScope",
           "description": "Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet."
         },
+        "copyScope": {
+          "$ref": "#/definitions/CopyScope",
+          "description": "Fine-grained copy scope restrictions for the storage account. This property supersedes the legacy allowedCopyScope property while remaining backward-compatible with it."
+        },
         "storageAccountSkuConversionStatus": {
           "$ref": "#/definitions/StorageAccountSkuConversionStatus",
           "description": "This property is readOnly and is set by server during asynchronous storage account sku conversion operations.",
@@ -17722,6 +17776,10 @@
         "allowedCopyScope": {
           "$ref": "#/definitions/AllowedCopyScope",
           "description": "Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet."
+        },
+        "copyScope": {
+          "$ref": "#/definitions/CopyScope",
+          "description": "Fine-grained copy scope restrictions for the storage account. This property supersedes the legacy allowedCopyScope property while remaining backward-compatible with it."
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess",
@@ -17954,6 +18012,10 @@
         "allowedCopyScope": {
           "$ref": "#/definitions/AllowedCopyScope",
           "description": "Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet."
+        },
+        "copyScope": {
+          "$ref": "#/definitions/CopyScope",
+          "description": "Fine-grained copy scope restrictions for the storage account. This property supersedes the legacy allowedCopyScope property while remaining backward-compatible with it."
         },
         "dnsEndpointType": {
           "$ref": "#/definitions/DnsEndpointType",
