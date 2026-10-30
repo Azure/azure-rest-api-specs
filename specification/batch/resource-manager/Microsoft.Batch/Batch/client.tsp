@@ -44,6 +44,8 @@ using Microsoft.Batch;
 @@clientName(Microsoft.Batch.ContainerRegistry.username, "username", "java");
 @@clientName(Microsoft.Batch.UserIdentity.userName, "username", "java");
 
+@@clientName(EtagResponseHeaders.etag, "ETag", "go");
+
 @@clientName(
   Microsoft.Batch.PrivateLinkServiceConnectionState.actionsRequired,
   "ActionRequired",
@@ -71,6 +73,7 @@ using Microsoft.Batch;
   "csharp"
 );
 @@alternateType(ApplicationPackageProperties.storageUrl, url, "csharp");
+@@alternateType(ApplicationPackageProperties.storageUrlLegacy, url, "csharp");
 @@clientName(PublicNetworkAccessType, "BatchPublicNetworkAccess", "csharp");
 @@clientName(
   BatchAccountProperties.dedicatedCoreQuotaPerVMFamilyEnforced,
@@ -79,6 +82,11 @@ using Microsoft.Batch;
 );
 @@clientName(
   BatchAccountProperties.dedicatedCoreQuotaPerVMFamily,
+  "dedicatedCoreQuotaPerVmFamily",
+  "csharp"
+);
+@@clientName(
+  BatchAccountProperties.dedicatedCoreQuotaPerVMFamilyLegacy,
   "DedicatedCoreQuotaPerVmFamily",
   "csharp"
 );
@@ -288,6 +296,11 @@ using Microsoft.Batch;
 @@clientName(LoginMode, "BatchWindowsLoginMode", "csharp");
 @@clientName(
   ApplicationPackageProperties.storageUrlExpiry,
+  "storageUriExpireOn",
+  "csharp"
+);
+@@clientName(
+  ApplicationPackageProperties.storageUrlExpiryLegacy,
   "StorageUriExpireOn",
   "csharp"
 );
