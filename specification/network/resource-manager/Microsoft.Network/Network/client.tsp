@@ -7995,6 +7995,16 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 @@alternateType(
+  Microsoft.Network.ExpressRouteLagAuthorization.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.DdosMitigationRule.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
   Microsoft.Network.FirewallPolicy.etag,
   Azure.Core.eTag,
   "csharp"
