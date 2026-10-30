@@ -64,7 +64,14 @@ interface Certificates {
   @summary("Create or update a certificate.")
   createOrUpdate is CertificateOps.CreateOrUpdateSync<
     Certificate,
-    Response = ArmResourceUpdatedResponse<Certificate>,
+    Response =
+      | ArmResourceUpdatedResponse<Certificate>
+      | (AcceptedResponse &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /** URL to poll for the managed certificate creation result. */
+            @header("Location")
+            location?: string;
+          }),
     OverrideErrorType = DefaultErrorResponse
   >;
 

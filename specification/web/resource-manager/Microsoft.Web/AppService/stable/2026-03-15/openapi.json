@@ -2587,6 +2587,20 @@
               "$ref": "#/definitions/Certificate"
             }
           },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to poll for the managed certificate creation result."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2595,8 +2609,14 @@
           }
         },
         "x-ms-examples": {
-          "Create Or Update Certificate": {
+          "Create App Service Managed Certificate": {
+            "$ref": "./examples/CreateOrUpdateManagedCertificate.json"
+          },
+          "Create Or Update PFX Certificate": {
             "$ref": "./examples/CreateOrUpdateCertificate.json"
+          },
+          "Import a Key Vault certificate or App Service Certificate": {
+            "$ref": "./examples/CreateOrUpdateKeyVaultCertificate.json"
           }
         }
       },
@@ -42171,7 +42191,7 @@
         "pfxBlob": {
           "type": "string",
           "format": "byte",
-          "description": "Pfx blob."
+          "description": "Base64-encoded PFX certificate. For API version 2026-11-01 and later, this property\nmust not be used together with `keyVaultId` or `keyVaultSecretName`, or to update\nan existing Key Vault-linked certificate."
         },
         "siteName": {
           "type": "string",
@@ -42229,7 +42249,7 @@
         "keyVaultId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Azure Key Vault Csm resource Id.",
+          "description": "Resource ID of the Azure Key Vault containing the certificate. Specify this property\ntogether with `keyVaultSecretName` to import a certificate from Key Vault.\nFor API version 2026-11-01 and later, this property must not be used together with `pfxBlob`.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -42240,7 +42260,7 @@
         },
         "keyVaultSecretName": {
           "type": "string",
-          "description": "Azure Key Vault secret name."
+          "description": "Name of the Azure Key Vault secret containing the certificate. Specify this property\ntogether with `keyVaultId` to import a certificate from Key Vault.\nFor API version 2026-11-01 and later, this property must not be used together with `pfxBlob`."
         },
         "keyVaultSecretStatus": {
           "$ref": "#/definitions/KeyVaultSecretStatus",
