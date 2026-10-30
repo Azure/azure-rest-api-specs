@@ -27,10 +27,10 @@ overrides and trailing content. Missing project evidence remains a blocker.
 From `.github/skills`, using Vally 0.14:
 
 ```powershell
-node --test azsdk-common-typespec-naming\evals\fixtures\customization-mcp.test.mjs
-vally lint azsdk-common-typespec-naming --strict
-vally lint -e azsdk-common-typespec-naming\evals\eval.yaml --strict
-vally eval -e azsdk-common-typespec-naming\evals\eval.yaml --workers 1 --output jsonl --output-dir ..\..\artifacts\naming-evals
+node --test azure-typespec-sdk-naming\evals\fixtures\customization-mcp.test.mjs
+vally lint azure-typespec-sdk-naming --strict
+vally lint -e azure-typespec-sdk-naming\evals\eval.yaml --strict
+vally eval -e azure-typespec-sdk-naming\evals\eval.yaml --workers 1 --output jsonl --output-dir ..\..\artifacts\naming-evals
 ```
 
 Use `--tag case=apply,apply-delegated,apply-existing,missing-tool,review` for the tool-boundary subset.
