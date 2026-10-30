@@ -253,6 +253,12 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 #suppress "@azure-tools/typespec-client-generator-core/client-option" ""
 @@clientOption(Storage.Blob.Blob.getLayout, "forcePageIterator", true, "rust");
 @@clientName(Storage.Blob.Blob.getLayout, "getLayout", "rust");
+@@access(Storage.Blob.Blob.getLayout, Access.internal, "rust");
+@@access(Storage.Blob.BlobLayout, Access.internal, "rust");
+@@access(Storage.Blob.BlobLayoutEndpoint, Access.internal, "rust");
+@@access(Storage.Blob.BlobLayoutEndpoints, Access.internal, "rust");
+@@access(Storage.Blob.BlobLayoutRange, Access.internal, "rust");
+@@access(Storage.Blob.BlobLayoutRanges, Access.internal, "rust");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Storage.Blob.Blob.getLayout,
