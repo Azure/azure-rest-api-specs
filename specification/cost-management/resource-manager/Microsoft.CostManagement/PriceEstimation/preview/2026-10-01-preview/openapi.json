@@ -1,0 +1,716 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cost Management Price Estimation",
+    "version": "2026-10-01-preview",
+    "description": "Estimates prices for proposed configurations using subscription-applicable prices.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "PriceEstimation"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.CostManagement/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List price estimation provider operation metadata": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/estimatePrices": {
+      "post": {
+        "operationId": "PriceEstimation_EstimatePrices",
+        "tags": [
+          "PriceEstimation"
+        ],
+        "description": "Estimates recurring monthly prices and separate upfront charges using prices\napplicable to the authorized subscription and its billing currency. Nothing\nis deployed or purchased. Upfront amounts are never amortized into monthly\namounts. Commitment periods and payment options are validated against the\nselected profile, independently of supplied running hours.\n\nThis is a long-running operation. The request is validated synchronously:\ninvalid input fails the POST itself with HTTP 400 and is never priced. A valid\nrequest returns HTTP 202 with Location and Retry-After headers; polling the\nLocation returns 202 while pricing runs, then the estimate (HTTP 200) or an\nARM error. Only the caller that started the operation can read its result,\nwhich is retained for 30 minutes.\n\nSupported resource types and typed input metadata are discovered separately\nthrough anonymous pricing-metadata GETs outside ARM. Discovery metadata is\nsubscription-independent and contains no customer prices or entitlements.\nIt must correspond to this estimation API version. Cached metadata is\nguidance, never authorization or a substitute for server validation.\nResource types are matched case-insensitively; resource API versions and\ninput names must match supported values.\n\nEach entry supplies two named object inputs: resource, an allowlisted subset of\nthe native ARM resource with exact ARM property names, and usage, consumption\nand purchase assumptions such as hours, GB, operations and purchaseOption.\nTemplates, expressions, references, scripts, customer resource names, deployed\nresource IDs, tags, credentials and secrets are prohibited. Omitted inputs with\nan applicable advertised default are completed by the server; explicit values,\nincluding zero and false, always win.\n\nEach billable configuration must be represented once. Identical entries are\nindependently charged, not deduplicated.\n\nEvery invalid entry is reported in one error response (MultipleInputErrors\nwith details when there is more than one). Error targets identify a request\nposition without echoing its value; an additionalInfo entry of type InputField\nnames the affected input and, where applicable, its allowed values or a choice\nlookup path. Each request is limited to 512 KiB, 100 resource entries, 10000\ntyped values and eight nested object/array levels.\n\nA completed estimate can contain incomplete prices when individual components\ncannot be priced; every missing or ambiguous price is reported as an issue,\nnot a zero. Result order matches input order. Each result reports the effective\nconfiguration, the configuration defaults applied and any usage quantities the\nserver assumed because they were omitted.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EstimateContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EstimateResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Estimate a Linux VM and a separately counted premium disk": {
+            "$ref": "./examples/EstimatePricesVmAndDisk.json"
+          },
+          "Report a component whose price is unavailable without treating it as zero": {
+            "$ref": "./examples/EstimatePricesPartialPrice.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "EstimateArrayValue": {
+      "type": "object",
+      "description": "A complete ordered array; individual elements cannot be supplied through separate paths.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Explicit items, recursively validated. Empty items is distinct from an omitted array.",
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/definitions/EstimateValue"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EstimateValue"
+        }
+      ],
+      "x-ms-discriminator-value": "array"
+    },
+    "EstimateBooleanValue": {
+      "type": "object",
+      "description": "A native JSON true or false pricing value.",
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "description": "Explicit boolean; omission is distinct from false."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EstimateValue"
+        }
+      ],
+      "x-ms-discriminator-value": "boolean"
+    },
+    "EstimateComponentResult": {
+      "type": "object",
+      "description": "A server-defined billable component, such as compute, licensing, disk capacity or bandwidth.",
+      "properties": {
+        "component": {
+          "type": "string",
+          "description": "Stable business component name, unique within the entry.",
+          "readOnly": true
+        },
+        "meterIds": {
+          "type": "array",
+          "description": "Resolved internal pricing meter identifiers, distinct from customer resource IDs. Absent when unresolved or not needed.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "monthly": {
+          "$ref": "#/definitions/EstimateCostSummary",
+          "description": "Component's recurring monthly cost.",
+          "readOnly": true
+        },
+        "upfront": {
+          "$ref": "#/definitions/EstimateCostSummary",
+          "description": "Component's upfront charge. A known non-applicable charge is Complete with amount zero.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "component",
+        "monthly",
+        "upfront"
+      ]
+    },
+    "EstimateContent": {
+      "type": "object",
+      "description": "Resolved pricing configurations and explicitly supplied usage for a normalized month.",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "description": "Charge-once entries. Position correlates results; no customer identifiers are accepted.",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/EstimateResourceInput"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "resources"
+      ]
+    },
+    "EstimateCostStatus": {
+      "type": "string",
+      "description": "Completeness of one charge period. Clients must not treat unknown statuses as Complete.",
+      "enum": [
+        "Complete",
+        "Partial",
+        "Unavailable"
+      ],
+      "x-ms-enum": {
+        "name": "EstimateCostStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Complete",
+            "value": "Complete",
+            "description": "All applicable charges are known, including explicit free or non-applicable charges."
+          },
+          {
+            "name": "Partial",
+            "value": "Partial",
+            "description": "Some applicable charges are known and others are not."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "No applicable cost could be determined."
+          }
+        ]
+      }
+    },
+    "EstimateCostSummary": {
+      "type": "object",
+      "description": "A summary for exactly one charge period. Complete requires amount and forbids\nknownAmount. Partial requires knownAmount and forbids amount. Unavailable omits\nboth. A known zero is Complete with amount zero; it is never an unknown cost.\nPartial knownAmount may be zero only when at least one underlying cost is known.\nAmounts are JSON numbers, not strings. Decimal calculations retain intermediate\nprecision. Component amounts are rounded once to six fractional decimal places,\nmidpoint away from zero; entry and request summaries sum reported components.\nA rounded-zero amount is not a declaration that the underlying meter is free.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/EstimateCostStatus",
+          "description": "Independent completeness of this monthly or upfront summary.",
+          "readOnly": true
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Complete amount only.",
+          "minimum": 0,
+          "maximum": 1000000000000,
+          "readOnly": true
+        },
+        "knownAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Sum of known costs only, not a total or an upper bound. Present only for Partial.",
+          "minimum": 0,
+          "maximum": 1000000000000,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "EstimateDiagnostic": {
+      "type": "object",
+      "description": "A safe explanation of a pricing gap or an applied assumption.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Machine-readable code, such as RateUnavailable, AllowanceContextRequired or InputCanonicalized.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Explanation without input values, customer information or tokens.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "Optional RFC 6901 request location, using entry positions and business field names only.",
+          "readOnly": true
+        },
+        "component": {
+          "type": "string",
+          "description": "Affected business component name when the issue is component-specific.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "EstimateEffectiveConfiguration": {
+      "type": "object",
+      "description": "The configuration actually priced for one entry, for display and revision.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The supported resource type, in its canonical spelling.",
+          "readOnly": true
+        },
+        "resourceApiVersion": {
+          "type": "string",
+          "description": "The supported source resource API version.",
+          "readOnly": true
+        },
+        "inputs": {
+          "type": "object",
+          "description": "Decoded resource and usage objects after canonicalization and default completion. Resubmit changes in the typed input encoding.",
+          "additionalProperties": {},
+          "readOnly": true
+        },
+        "defaultedFields": {
+          "type": "array",
+          "description": "JSON Pointers of configuration defaults the server applied to omitted inputs.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "assumedUsageFields": {
+          "type": "array",
+          "description": "JSON Pointers of usage quantities the caller omitted and the server assumed, such as /usage/storedGB. A non-empty list means the price rests on quantities the caller did not state.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceType",
+        "resourceApiVersion",
+        "inputs",
+        "defaultedFields",
+        "assumedUsageFields"
+      ]
+    },
+    "EstimateNamedValue": {
+      "type": "object",
+      "description": "A case-sensitive allowlisted business name and an explicitly typed value.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique sibling business name, not a customer resource name or a path expression.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "value": {
+          "$ref": "#/definitions/EstimateValue",
+          "description": "Typed value. Null and coercion from another JSON kind are not accepted."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "EstimateNumberValue": {
+      "type": "object",
+      "description": "A finite JSON number with at most six fractional decimal places; never string-encoded.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Parsed using decimal arithmetic. Excess precision and out-of-range values are rejected, not rounded or coerced.",
+          "minimum": -1000000000000,
+          "maximum": 1000000000000
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EstimateValue"
+        }
+      ],
+      "x-ms-discriminator-value": "number"
+    },
+    "EstimateObjectValue": {
+      "type": "object",
+      "description": "A complete object represented by allowlisted named typed members.",
+      "properties": {
+        "members": {
+          "type": "array",
+          "description": "Unique, case-sensitive member names. Empty members is an explicit empty object, not an omitted input.",
+          "maxItems": 128,
+          "items": {
+            "$ref": "#/definitions/EstimateNamedValue"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "members"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EstimateValue"
+        }
+      ],
+      "x-ms-discriminator-value": "object"
+    },
+    "EstimateResourceInput": {
+      "type": "object",
+      "description": "One proposed charge entry validated against server-owned metadata.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Supported resource type, matched case-insensitively.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "resourceApiVersion": {
+          "type": "string",
+          "description": "Supported source resource API version; the service never evaluates that resource or deploys it.",
+          "minLength": 1,
+          "maxLength": 32
+        },
+        "inputs": {
+          "type": "array",
+          "description": "Two named object inputs: resource (an allowlisted subset of the native ARM resource) and usage (consumption and purchase assumptions). Omitted values are completed only by applicable advertised defaults.",
+          "maxItems": 128,
+          "items": {
+            "$ref": "#/definitions/EstimateNamedValue"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "resourceType",
+        "resourceApiVersion",
+        "inputs"
+      ]
+    },
+    "EstimateResourceResult": {
+      "type": "object",
+      "description": "Cost breakdown and explicit gaps for one input entry.",
+      "properties": {
+        "inputIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Zero-based input position; not a customer resource identifier.",
+          "minimum": 0,
+          "maximum": 99,
+          "readOnly": true
+        },
+        "configuration": {
+          "$ref": "#/definitions/EstimateEffectiveConfiguration",
+          "description": "The validated, default-completed configuration that was priced. Absent only when a catalog failure prevented complete validation.",
+          "readOnly": true
+        },
+        "monthly": {
+          "$ref": "#/definitions/EstimateCostSummary",
+          "description": "Known and unknown recurring costs for this entry.",
+          "readOnly": true
+        },
+        "upfront": {
+          "$ref": "#/definitions/EstimateCostSummary",
+          "description": "Known and unknown upfront charges, never included in monthly.",
+          "readOnly": true
+        },
+        "components": {
+          "type": "array",
+          "description": "Component breakdown, including components whose cost could not be determined.",
+          "items": {
+            "$ref": "#/definitions/EstimateComponentResult"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "component"
+          ]
+        },
+        "issues": {
+          "type": "array",
+          "description": "Reasons for incomplete coverage or costs. Nonempty whenever either summary is incomplete.",
+          "items": {
+            "$ref": "#/definitions/EstimateDiagnostic"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "assumptions": {
+          "type": "array",
+          "description": "Defaults and other assumptions actually applied to this entry.",
+          "items": {
+            "$ref": "#/definitions/EstimateDiagnostic"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "inputIndex",
+        "monthly",
+        "upfront",
+        "components",
+        "issues",
+        "assumptions"
+      ]
+    },
+    "EstimateResult": {
+      "type": "object",
+      "description": "Computed costs for submitted pricing inputs, not an ARM resource or invoice.",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "Subscription billing currency for every amount; never a caller-selected currency or silent fallback.",
+          "minLength": 3,
+          "maxLength": 3,
+          "readOnly": true
+        },
+        "pricingAsOf": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC instant used to select applicable prices. This is not a future price guarantee.",
+          "readOnly": true
+        },
+        "coverage": {
+          "type": "string",
+          "description": "Completeness applies only to submitted inputs; callers separately report template preparation and coverage gaps.",
+          "enum": [
+            "SubmittedPricingInputs"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        },
+        "results": {
+          "type": "array",
+          "description": "Exactly one result per input, in the same order.",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/EstimateResourceResult"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "inputIndex"
+          ]
+        },
+        "totals": {
+          "$ref": "#/definitions/EstimateTotals",
+          "description": "Independent recurring and upfront totals.",
+          "readOnly": true
+        },
+        "assumptions": {
+          "type": "array",
+          "description": "Request-wide assumptions; never raw input values or customer identifiers.",
+          "items": {
+            "$ref": "#/definitions/EstimateDiagnostic"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "currency",
+        "pricingAsOf",
+        "coverage",
+        "results",
+        "totals",
+        "assumptions"
+      ]
+    },
+    "EstimateStringValue": {
+      "type": "object",
+      "description": "A resolved string pricing value; not a template, expression, script or secret.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Text accepted only when permitted by the selected input definition.",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EstimateValue"
+        }
+      ],
+      "x-ms-discriminator-value": "string"
+    },
+    "EstimateTotals": {
+      "type": "object",
+      "description": "Separately aggregated monthly and upfront costs across submitted entries.",
+      "properties": {
+        "monthly": {
+          "$ref": "#/definitions/EstimateCostSummary",
+          "description": "Recurring monthly aggregate; an upfront payment is never included.",
+          "readOnly": true
+        },
+        "upfront": {
+          "$ref": "#/definitions/EstimateCostSummary",
+          "description": "Upfront aggregate, without amortization.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "monthly",
+        "upfront"
+      ]
+    },
+    "EstimateValue": {
+      "type": "object",
+      "description": "Base for the five typed variants. The service rejects unknown kinds, unexpected\nproperties, duplicate JSON members and malformed variants. A missing value is\nrepresented by omission of its named entry, not by null or a sentinel.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EstimateValueKind",
+          "description": "Exact discriminator selecting a supported typed variant."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "EstimateValueKind": {
+      "type": "string",
+      "description": "Supported decoded kinds. Clients must not submit unrecognized kinds.",
+      "enum": [
+        "string",
+        "number",
+        "boolean",
+        "object",
+        "array"
+      ],
+      "x-ms-enum": {
+        "name": "EstimateValueKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "String",
+            "value": "string",
+            "description": "A JSON string."
+          },
+          {
+            "name": "Number",
+            "value": "number",
+            "description": "A finite JSON number, not a numeric string."
+          },
+          {
+            "name": "Boolean",
+            "value": "boolean",
+            "description": "A native JSON boolean."
+          },
+          {
+            "name": "Object",
+            "value": "object",
+            "description": "Named typed members."
+          },
+          {
+            "name": "Array",
+            "value": "array",
+            "description": "Ordered typed items."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
